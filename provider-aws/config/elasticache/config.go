@@ -7,7 +7,7 @@ package elasticache
 import (
 	"github.com/crossplane/terrajet/pkg/config"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure adds configurations for elasticache group.
@@ -62,12 +62,12 @@ func Configure(p *config.Provider) {
 				Type: "SubnetGroup",
 			},
 			"security_group_ids": config.Reference{
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
 				RefFieldName:      "SecurityGroupIdRefs",
 				SelectorFieldName: "SecurityGroupIdSelector",
 			},
 			"kms_key_id": {
-				Type: "github.com/upbound/provider-aws/apis/kms/v1alpha2.Key",
+				Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
 			},
 		}
 		r.LateInitializer = config.LateInitializer{

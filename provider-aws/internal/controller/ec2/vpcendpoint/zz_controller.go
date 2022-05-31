@@ -18,7 +18,7 @@ import (
 	"github.com/crossplane/terrajet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha2 "github.com/upbound/provider-aws/apis/ec2/v1alpha2"
+	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2"
 )
 
 // Setup adds a controller that reconciles VPCEndpoint managed resources.

@@ -51,8 +51,8 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1alpha2.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ServiceAccountRoleArn *string `json:"serviceAccountRoleArn,omitempty" tf:"service_account_role_arn,omitempty"`
 

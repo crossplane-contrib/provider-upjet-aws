@@ -7,7 +7,7 @@ package mq
 import (
 	"github.com/crossplane/terrajet/pkg/config"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure adds configurations for rds group.

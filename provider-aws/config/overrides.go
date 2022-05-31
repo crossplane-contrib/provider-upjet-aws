@@ -7,7 +7,7 @@ package config
 import (
 	"strings"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/official-providers/provider-aws/config/common"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
@@ -365,12 +365,12 @@ func KnownReferencers() tjconfig.ResourceOption { //nolint:gocyclo
 			switch {
 			case strings.HasSuffix(k, "role_arn"):
 				r.References[k] = tjconfig.Reference{
-					Type:      "github.com/upbound/provider-aws/apis/iam/v1alpha2.Role",
+					Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role",
 					Extractor: common.PathARNExtractor,
 				}
 			case strings.HasSuffix(k, "security_group_ids"):
 				r.References[k] = tjconfig.Reference{
-					Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+					Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
 					RefFieldName:      strings.TrimSuffix(name.NewFromSnake(k).Camel, "s") + "Refs",
 					SelectorFieldName: strings.TrimSuffix(name.NewFromSnake(k).Camel, "s") + "Selector",
 				}
@@ -378,35 +378,35 @@ func KnownReferencers() tjconfig.ResourceOption { //nolint:gocyclo
 			switch k {
 			case "vpc_id":
 				r.References["vpc_id"] = tjconfig.Reference{
-					Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.VPC",
+					Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.VPC",
 					RefFieldName:      "VpcIdRef",
 					SelectorFieldName: "VpcIdSelector",
 				}
 			case "subnet_ids":
 				r.References["subnet_ids"] = tjconfig.Reference{
-					Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.Subnet",
+					Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
 					RefFieldName:      "SubnetIdRefs",
 					SelectorFieldName: "SubnetIdSelector",
 				}
 			case "subnet_id":
 				r.References["subnet_id"] = tjconfig.Reference{
-					Type: "github.com/upbound/provider-aws/apis/ec2/v1alpha2.Subnet",
+					Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
 				}
 			case "security_group_id":
 				r.References["security_group_id"] = tjconfig.Reference{
-					Type: "github.com/upbound/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+					Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
 				}
 			case "kms_key_id":
 				r.References["kms_key_id"] = tjconfig.Reference{
-					Type: "github.com/upbound/provider-aws/apis/kms/v1alpha2.Key",
+					Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
 				}
 			case "kms_key_arn":
 				r.References["kms_key_arn"] = tjconfig.Reference{
-					Type: "github.com/upbound/provider-aws/apis/kms/v1alpha2.Key",
+					Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
 				}
 			case "kms_key":
 				r.References["kms_key"] = tjconfig.Reference{
-					Type: "github.com/upbound/provider-aws/apis/kms/v1alpha2.Key",
+					Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
 				}
 			}
 		}

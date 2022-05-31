@@ -8,28 +8,28 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
-	"github.com/upbound/provider-aws/config/mq"
+	"github.com/upbound/official-providers/provider-aws/config/mq"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 
-	"github.com/upbound/provider-aws/config/autoscaling"
-	"github.com/upbound/provider-aws/config/ebs"
-	"github.com/upbound/provider-aws/config/ec2"
-	"github.com/upbound/provider-aws/config/ecr"
-	"github.com/upbound/provider-aws/config/ecrpublic"
-	"github.com/upbound/provider-aws/config/ecs"
-	"github.com/upbound/provider-aws/config/eks"
-	"github.com/upbound/provider-aws/config/elasticache"
-	"github.com/upbound/provider-aws/config/elasticloadbalancing"
-	"github.com/upbound/provider-aws/config/globalaccelerator"
-	"github.com/upbound/provider-aws/config/iam"
-	"github.com/upbound/provider-aws/config/kms"
-	"github.com/upbound/provider-aws/config/neptune"
-	"github.com/upbound/provider-aws/config/rds"
-	"github.com/upbound/provider-aws/config/route53"
-	"github.com/upbound/provider-aws/config/s3"
+	"github.com/upbound/official-providers/provider-aws/config/autoscaling"
+	"github.com/upbound/official-providers/provider-aws/config/ebs"
+	"github.com/upbound/official-providers/provider-aws/config/ec2"
+	"github.com/upbound/official-providers/provider-aws/config/ecr"
+	"github.com/upbound/official-providers/provider-aws/config/ecrpublic"
+	"github.com/upbound/official-providers/provider-aws/config/ecs"
+	"github.com/upbound/official-providers/provider-aws/config/eks"
+	"github.com/upbound/official-providers/provider-aws/config/elasticache"
+	"github.com/upbound/official-providers/provider-aws/config/elasticloadbalancing"
+	"github.com/upbound/official-providers/provider-aws/config/globalaccelerator"
+	"github.com/upbound/official-providers/provider-aws/config/iam"
+	"github.com/upbound/official-providers/provider-aws/config/kms"
+	"github.com/upbound/official-providers/provider-aws/config/neptune"
+	"github.com/upbound/official-providers/provider-aws/config/rds"
+	"github.com/upbound/official-providers/provider-aws/config/route53"
+	"github.com/upbound/official-providers/provider-aws/config/s3"
 )
 
 //go:embed schema.json
@@ -168,7 +168,7 @@ var skipList = []string{
 
 // GetProvider returns provider configuration
 func GetProvider() *tjconfig.Provider {
-	pc := tjconfig.NewProviderWithSchema([]byte(providerSchema), "aws", "github.com/upbound/provider-aws",
+	pc := tjconfig.NewProviderWithSchema([]byte(providerSchema), "aws", "github.com/upbound/official-providers/provider-aws",
 		tjconfig.WithShortName("aws"),
 		tjconfig.WithRootGroup("aws.upbound.io"),
 		tjconfig.WithIncludeList(IncludedResources),

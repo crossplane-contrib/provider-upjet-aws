@@ -2,7 +2,7 @@
 # Setup Project
 
 PROJECT_NAME := provider-aws
-PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
+PROJECT_REPO := github.com/upbound/official-providers/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.2.1
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws

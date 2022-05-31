@@ -12,7 +12,7 @@ import (
 	"github.com/crossplane/terrajet/pkg/config"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure adds configurations for ecs group.
@@ -33,10 +33,10 @@ func Configure(p *config.Provider) {
 				Type: "CapacityProvider",
 			},
 			"execute_command_configuration.kms_key_id": config.Reference{
-				Type: "github.com/upbound/provider-aws/apis/kms/v1alpha2.Key",
+				Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
 			},
 			"log_configuration.s3_bucket_name": config.Reference{
-				Type: "github.com/upbound/provider-aws/apis/s3/v1alpha2.Bucket",
+				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1alpha2.Bucket",
 			},
 		}
 		r.UseAsync = true
@@ -66,16 +66,16 @@ func Configure(p *config.Provider) {
 				Extractor: common.PathARNExtractor,
 			},
 			"iam_role": config.Reference{
-				Type:      "github.com/upbound/provider-aws/apis/iam/v1alpha2.Role",
+				Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role",
 				Extractor: common.PathARNExtractor,
 			},
 			"network_configuration.subnets": config.Reference{
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.Subnet",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
 				RefFieldName:      "SubnetRefs",
 				SelectorFieldName: "SubnetSelector",
 			},
 			"network_configuration.security_groups": config.Reference{
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
 				RefFieldName:      "SecurityGroupRefs",
 				SelectorFieldName: "SecurityGroupSelector",
 			},
@@ -88,7 +88,7 @@ func Configure(p *config.Provider) {
 		r.ExternalName = config.NameAsIdentifier
 		r.References = config.References{
 			"auto_scaling_group_provider.auto_scaling_group_arn": config.Reference{
-				Type:      "github.com/upbound/provider-aws/apis/autoscaling/v1alpha2.AutoscalingGroup",
+				Type:      "github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1alpha2.AutoscalingGroup",
 				Extractor: common.PathARNExtractor,
 			},
 		}
@@ -99,7 +99,7 @@ func Configure(p *config.Provider) {
 		r.ExternalName = config.IdentifierFromProvider
 		r.References = config.References{
 			"execution_role_arn": config.Reference{
-				Type:      "github.com/upbound/provider-aws/apis/iam/v1alpha2.Role",
+				Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role",
 				Extractor: common.PathARNExtractor,
 			},
 		}

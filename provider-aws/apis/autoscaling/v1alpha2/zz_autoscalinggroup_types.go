@@ -93,8 +93,8 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1alpha2.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ServiceLinkedRoleArn *string `json:"serviceLinkedRoleArn,omitempty" tf:"service_linked_role_arn,omitempty"`
 
@@ -116,7 +116,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1alpha2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet
 	// +kubebuilder:validation:Optional
 	VPCZoneIdentifier []*string `json:"vpcZoneIdentifier,omitempty" tf:"vpc_zone_identifier,omitempty"`
 

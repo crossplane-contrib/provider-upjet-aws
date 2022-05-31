@@ -104,7 +104,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalReplicationGroupID *string `json:"globalReplicationGroupId,omitempty" tf:"global_replication_group_id,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1alpha2.Key
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -164,7 +164,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1alpha2.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIdRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIdSelector
 	// +kubebuilder:validation:Optional

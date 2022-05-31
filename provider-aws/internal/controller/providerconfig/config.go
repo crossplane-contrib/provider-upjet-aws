@@ -13,7 +13,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/terrajet/pkg/controller"
 
-	"github.com/upbound/provider-aws/apis/v1alpha1"
+	"github.com/upbound/official-providers/provider-aws/apis/v1alpha1"
 )
 
 // Setup adds a controller that reconciles ProviderConfigs by accounting for

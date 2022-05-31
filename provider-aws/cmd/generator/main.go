@@ -11,7 +11,7 @@ import (
 
 	"github.com/crossplane/terrajet/pkg/pipeline"
 
-	"github.com/upbound/provider-aws/config"
+	"github.com/upbound/official-providers/provider-aws/config"
 )
 
 func main() {

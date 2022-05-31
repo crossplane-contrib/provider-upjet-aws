@@ -12,7 +12,7 @@ import (
 	"github.com/crossplane/terrajet/pkg/config"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure adds configurations for eks group.
@@ -22,16 +22,16 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 		r.ExternalName = config.NameAsIdentifier
 		r.References = config.References{
 			"role_arn": {
-				Type:      "github.com/upbound/provider-aws/apis/iam/v1alpha2.Role",
+				Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role",
 				Extractor: common.PathARNExtractor,
 			},
 			"vpc_config.subnet_ids": {
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.Subnet",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
 				RefFieldName:      "SubnetIdRefs",
 				SelectorFieldName: "SubnetIdSelector",
 			},
 			"vpc_config.security_group_ids": {
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
 				RefFieldName:      "SecurityGroupIdRefs",
 				SelectorFieldName: "SecurityGroupIdSelector",
 			},
@@ -73,16 +73,16 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 				Type: "Cluster",
 			},
 			"node_role_arn": {
-				Type:      "github.com/upbound/provider-aws/apis/iam/v1alpha2.Role",
+				Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role",
 				Extractor: common.PathARNExtractor,
 			},
 			"remote_access.source_security_group_ids": {
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
 				RefFieldName:      "SourceSecurityGroupIdRefs",
 				SelectorFieldName: "SourceSecurityGroupIdSelector",
 			},
 			"subnet_ids": {
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.Subnet",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
 				RefFieldName:      "SubnetIdRefs",
 				SelectorFieldName: "SubnetIdSelector",
 			},
@@ -134,11 +134,11 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 				Type: "Cluster",
 			},
 			"pod_execution_role_arn": {
-				Type:      "github.com/upbound/provider-aws/apis/iam/v1alpha2.Role",
+				Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role",
 				Extractor: common.PathARNExtractor,
 			},
 			"subnet_ids": {
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.Subnet",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
 				RefFieldName:      "SubnetIdRefs",
 				SelectorFieldName: "SubnetIdSelector",
 			},
@@ -178,7 +178,7 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 				Type: "Cluster",
 			},
 			"service_account_role_arn": {
-				Type:      "github.com/upbound/provider-aws/apis/iam/v1alpha2.Role",
+				Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role",
 				Extractor: common.PathARNExtractor,
 			},
 		}

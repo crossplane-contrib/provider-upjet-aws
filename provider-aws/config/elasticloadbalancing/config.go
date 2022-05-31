@@ -7,7 +7,7 @@ package elasticloadbalancing
 import (
 	"github.com/crossplane/terrajet/pkg/config"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure adds configurations for elasticloadbalancing group.
@@ -18,20 +18,20 @@ func Configure(p *config.Provider) {
 		r.ExternalName.OmittedFields = append(r.ExternalName.OmittedFields, "name_prefix")
 		r.References = config.References{
 			"security_groups": {
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
 				RefFieldName:      "SecurityGroupRefs",
 				SelectorFieldName: "SecurityGroupSelector",
 			},
 			"subnets": {
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.Subnet",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
 				RefFieldName:      "SubnetRefs",
 				SelectorFieldName: "SubnetSelector",
 			},
 			"access_logs.bucket": {
-				Type: "github.com/upbound/provider-aws/apis/s3/v1alpha2.Bucket",
+				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1alpha2.Bucket",
 			},
 			"subnet_mapping.subnet_id": {
-				Type: "github.com/upbound/provider-aws/apis/ec2/v1alpha2.Subnet",
+				Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
 			},
 		}
 		r.UseAsync = true

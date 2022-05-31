@@ -105,7 +105,7 @@ type EBSParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1alpha2.Key
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -160,8 +160,8 @@ type IAMInstanceProfileObservation struct {
 
 type IAMInstanceProfileParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1alpha2.InstanceProfile
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.InstanceProfile
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -171,7 +171,7 @@ type IAMInstanceProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1alpha2.InstanceProfile
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.InstanceProfile
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

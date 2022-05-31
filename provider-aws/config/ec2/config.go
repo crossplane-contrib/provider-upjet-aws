@@ -7,7 +7,7 @@ package ec2
 import (
 	"github.com/crossplane/terrajet/pkg/config"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure adds configurations for ec2 group.
@@ -30,13 +30,13 @@ func Configure(p *config.Provider) {
 			SelectorFieldName: "SecurityGroupSelector",
 		}
 		r.References["root_block_device.kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/kms/v1alpha2.Key",
+			Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
 		}
 		r.References["network_interface.network_interface_id"] = config.Reference{
 			Type: "NetworkInterface",
 		}
 		r.References["ebs_block_device.kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/kms/v1alpha2.Key",
+			Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
 		}
 		r.LateInitializer = config.LateInitializer{
 			// NOTE(muvaf): These are ignored because they conflict with each other.
@@ -132,14 +132,14 @@ func Configure(p *config.Provider) {
 			SelectorFieldName: "VpcSecurityGroupIdSelector",
 		}
 		r.References["block_device_mappings.ebs.kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/kms/v1alpha2.Key",
+			Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
 		}
 		r.References["iam_instance_profile.arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/iam/v1alpha2.InstanceProfile",
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.InstanceProfile",
 			Extractor: common.PathARNExtractor,
 		}
 		r.References["iam_instance_profile.name"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/iam/v1alpha2.InstanceProfile",
+			Type: "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.InstanceProfile",
 		}
 		r.References["network_interfaces.network_interface_id"] = config.Reference{
 			Type: "NetworkInterface",

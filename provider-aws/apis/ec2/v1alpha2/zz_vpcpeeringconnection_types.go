@@ -86,7 +86,7 @@ type VPCPeeringConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1alpha2.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.VPC
 	// +crossplane:generate:reference:refFieldName=VpcIdRef
 	// +crossplane:generate:reference:selectorFieldName=VpcIdSelector
 	// +kubebuilder:validation:Optional

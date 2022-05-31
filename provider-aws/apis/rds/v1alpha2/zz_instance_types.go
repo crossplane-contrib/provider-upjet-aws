@@ -118,7 +118,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1alpha2.Key
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -171,7 +171,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1alpha2.Key
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
@@ -213,7 +213,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupNameSelector *v1.Selector `json:"securityGroupNameSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1alpha2.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupNameRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupNameSelector
 	// +kubebuilder:validation:Optional
@@ -240,7 +240,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1alpha2.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VpcSecurityGroupIdRefs
 	// +crossplane:generate:reference:selectorFieldName=VpcSecurityGroupIdSelector
 	// +kubebuilder:validation:Optional
@@ -286,7 +286,7 @@ type S3ImportObservation struct {
 
 type S3ImportParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1alpha2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1alpha2.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 

@@ -68,7 +68,7 @@ type TransitGatewayVPCAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1alpha2.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.VPC
 	// +crossplane:generate:reference:refFieldName=VpcIdRef
 	// +crossplane:generate:reference:selectorFieldName=VpcIdSelector
 	// +kubebuilder:validation:Optional

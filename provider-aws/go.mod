@@ -1,4 +1,4 @@
-module github.com/upbound/provider-aws
+module github.com/upbound/official-providers/provider-aws
 
 go 1.17
 

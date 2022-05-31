@@ -18,7 +18,7 @@ import (
 	"github.com/crossplane/terrajet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha1 "github.com/upbound/provider-aws/apis/route53resolver/v1alpha1"
+	v1alpha1 "github.com/upbound/official-providers/provider-aws/apis/route53resolver/v1alpha1"
 )
 
 // Setup adds a controller that reconciles Rule managed resources.

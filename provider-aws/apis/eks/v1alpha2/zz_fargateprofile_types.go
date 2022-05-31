@@ -35,8 +35,8 @@ type FargateProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1alpha2.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	PodExecutionRoleArn *string `json:"podExecutionRoleArn,omitempty" tf:"pod_execution_role_arn,omitempty"`
 
@@ -60,7 +60,7 @@ type FargateProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIdSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1alpha2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIdRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIdSelector
 	// +kubebuilder:validation:Optional

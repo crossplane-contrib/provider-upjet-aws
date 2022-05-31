@@ -69,13 +69,13 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleIdSelector *v1.Selector `json:"iamRoleIdSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1alpha2.Role
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role
 	// +crossplane:generate:reference:refFieldName=IAMRoleIdRefs
 	// +crossplane:generate:reference:selectorFieldName=IAMRoleIdSelector
 	// +kubebuilder:validation:Optional
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1alpha2.Key
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -154,7 +154,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIdSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1alpha2.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIdRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIdSelector
 	// +kubebuilder:validation:Optional

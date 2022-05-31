@@ -105,7 +105,7 @@ type VPCEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCEndpointType *string `json:"vpcEndpointType,omitempty" tf:"vpc_endpoint_type,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1alpha2.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.VPC
 	// +crossplane:generate:reference:refFieldName=VpcIdRef
 	// +crossplane:generate:reference:selectorFieldName=VpcIdSelector
 	// +kubebuilder:validation:Optional

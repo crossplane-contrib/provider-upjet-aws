@@ -171,7 +171,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1alpha2.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VpcSecurityGroupIdRefs
 	// +crossplane:generate:reference:selectorFieldName=VpcSecurityGroupIdSelector
 	// +kubebuilder:validation:Optional
@@ -214,7 +214,7 @@ type ClusterS3ImportObservation struct {
 
 type ClusterS3ImportParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1alpha2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1alpha2.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 

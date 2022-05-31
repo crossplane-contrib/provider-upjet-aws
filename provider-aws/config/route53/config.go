@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/terrajet/pkg/config"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure route53 resources.
@@ -36,8 +36,8 @@ func Configure(p *config.Provider) {
 			Type: "Zone",
 		}
 		r.References["key_management_service_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/kms/v1alpha2.Key",
-			Extractor: "github.com/upbound/provider-aws/apis/kms/v1alpha2.KMSKeyARN()",
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
+			Extractor: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.KMSKeyARN()",
 		}
 	})
 	p.AddResourceConfigurator("aws_route53_query_log", func(r *config.Resource) {
@@ -80,7 +80,7 @@ func Configure(p *config.Provider) {
 				Type: "DelegationSet",
 			},
 			"vpc.vpc_id": config.Reference{
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1alpha2.VPC",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.VPC",
 				RefFieldName:      "VpcIdRef",
 				SelectorFieldName: "VpcIdSelector",
 			},
