@@ -1,0 +1,13 @@
+apiVersion: iam.aws.upbound.io/v1alpha2
+kind: OpenIDConnectProvider
+metadata:
+  name: example
+spec:
+  forProvider:
+    clientIdList:
+    - <clientID>
+    thumbprintList:
+    - <thumbprint>
+    url: https://accounts.google.com
+  providerConfigRef:
+    name: example

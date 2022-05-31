@@ -1,0 +1,18 @@
+apiVersion: ecs.aws.upbound.io/v1alpha2
+kind: TaskDefinition
+metadata:
+  name: sample-task
+spec:
+  forProvider:
+    region: us-west-1
+    family: service
+    containerDefinitions: |-
+      [
+        {
+          "name": "first",
+          "image": "service-first",
+          "cpu": 10,
+          "memory": 512,
+          "essential":true
+        }
+      ]

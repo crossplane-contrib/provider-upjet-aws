@@ -1,0 +1,10 @@
+apiVersion: ecs.aws.upbound.io/v1alpha2
+kind: Service
+metadata:
+  name: sample-service
+spec:
+  forProvider:
+    taskDefinition: sample-task:1
+    cluster: sample-cluster
+    region: us-east-2
+    propagateTags: TASK_DEFINITION

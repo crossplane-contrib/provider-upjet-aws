@@ -1,0 +1,12 @@
+apiVersion: neptune.aws.upbound.io/v1alpha2
+kind: ClusterInstance
+metadata:
+  name: sample-instance
+spec:
+  forProvider:
+    region: eu-central-1
+    applyImmediately: true
+    clusterIdentifierRef:
+      name: sample-cluster
+    engine: neptune
+    instanceClass: db.r4.large

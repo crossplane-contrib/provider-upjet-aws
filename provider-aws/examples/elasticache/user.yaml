@@ -1,0 +1,20 @@
+apiVersion: elasticache.aws.upbound.io/v1alpha2
+kind: User
+metadata:
+  name: sample-user
+spec:
+  forProvider:
+    userName: "testUserName"
+    accessString: "on ~app::* -@all +@read +@hash +@bitmap +@geo -setbit -bitfield -hset -hsetnx -hmset -hincrby -hincrbyfloat -hdel -bitop -geoadd -georadius -georadiusbymember"
+    engine: "REDIS"
+    region: us-west-1
+    passwordsSecretRef:
+      - name: user-passwords
+        namespace: crossplane-system
+        key: pwd-1
+      - name: user-passwords
+        namespace: crossplane-system
+        key: pwd-2
+  writeConnectionSecretToRef:
+    name: user-conn
+    namespace: default

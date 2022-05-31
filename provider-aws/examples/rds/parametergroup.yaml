@@ -1,0 +1,13 @@
+apiVersion: rds.aws.upbound.io/v1alpha2
+kind: ParameterGroup
+metadata:
+  name: example-parametergroup
+spec:
+  forProvider:
+    region: us-east-1
+    family: postgres12
+    description: example
+    parameter:
+      - name: application_name
+        value: "example"
+        applyMethod: immediate

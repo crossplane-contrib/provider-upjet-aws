@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-aws-creds
+  namespace: crossplane-system
+type: Opaque
+data:
+  credentials: <REPLACEME>
+---
+apiVersion: aws.upbound.io/v1alpha1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: example-aws-creds
+      namespace: crossplane-system
+      key: credentials

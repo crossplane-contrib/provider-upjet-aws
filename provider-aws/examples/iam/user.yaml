@@ -1,0 +1,6 @@
+apiVersion: iam.aws.upbound.io/v1alpha2
+kind: User
+metadata:
+  name: sample-user
+spec:
+  forProvider: {}

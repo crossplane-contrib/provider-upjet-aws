@@ -1,0 +1,10 @@
+apiVersion: neptune.aws.upbound.io/v1alpha2
+kind: EventSubscription
+metadata:
+  name: sample-event-sub
+spec:
+  forProvider:
+    region: eu-central-1
+    snsTopicArn: arn:aws:sns:eu-central-1:609897127049:sample-sns
+    tags:
+      env: test

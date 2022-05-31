@@ -1,0 +1,11 @@
+apiVersion: iam.aws.upbound.io/v1alpha2
+kind: AccessKey
+metadata:
+  name: sample-access-key
+spec:
+  forProvider:
+    userRef:
+      name: sample-user
+  writeConnectionSecretToRef:
+    name: sample-access-key-secret
+    namespace: crossplane-system

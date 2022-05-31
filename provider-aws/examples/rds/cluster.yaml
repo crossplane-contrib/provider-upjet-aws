@@ -1,0 +1,17 @@
+apiVersion: rds.aws.upbound.io/v1alpha2
+kind: Cluster
+metadata:
+  name: sample-cluster
+spec:
+  forProvider:
+    region: us-west-1
+    engine: aurora-postgresql
+    masterUsername: cpadmin
+    masterPasswordSecretRef:
+      name: sample-cluster-password
+      namespace: crossplane-system
+      key: password
+    skipFinalSnapshot: true
+  writeConnectionSecretToRef:
+    name: sample-rds-cluster-secret
+    namespace: crossplane-system

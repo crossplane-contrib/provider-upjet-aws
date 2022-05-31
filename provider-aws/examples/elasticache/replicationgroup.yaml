@@ -1,0 +1,24 @@
+---
+apiVersion: elasticache.aws.upbound.io/v1alpha2
+kind: ReplicationGroup
+metadata:
+  name: example-replicationgroup
+spec:
+  forProvider:
+    region: us-west-1
+    replicationGroupDescription: "test redis instance"
+    applyImmediately: true
+    atRestEncryptionEnabled: true
+    automaticFailoverEnabled: true
+    nodeType: cache.t3.medium
+    parameterGroupName: default.redis5.0
+    engine: redis
+    engineVersion: "5.0.6"
+    multiAzEnabled: true
+    numberCacheClusters: 2
+    port: 6379
+    transitEncryptionEnabled: true
+    subnetGroupNameRef:
+      name: example-subnetgroup
+    securityGroupIdRefs:
+      - name: sample-sg

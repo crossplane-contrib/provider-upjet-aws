@@ -1,0 +1,12 @@
+apiVersion: ecrpublic.aws.upbound.io/v1alpha2
+kind: Repository
+metadata:
+  name: sample-repository
+spec:
+  forProvider:
+    region: us-east-1
+    catalogData:
+      - aboutText: Created with Crossplane
+        description: A sample public repository
+        operatingSystems:
+          - Linux

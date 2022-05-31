@@ -1,0 +1,12 @@
+apiVersion: rds.aws.upbound.io/v1alpha2
+kind: SubnetGroup
+metadata:
+  name: example-subnetgroup
+spec:
+  forProvider:
+    region: us-west-1
+    subnetIdRefs:
+      - name: example-subnet1
+      - name: example-subnet2
+    tags:
+      Name: My DB subnet group

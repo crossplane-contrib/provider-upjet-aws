@@ -1,0 +1,15 @@
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: Instance
+metadata:
+  name: sample-instance
+spec:
+  forProvider:
+    region: us-west-1
+    ami: ami-07b068f843ec78e72
+    instanceType: t2.micro
+    networkInterface:
+    - deviceIndex: 0
+      networkInterfaceIdRef:
+        name: sample-ni
+    creditSpecification:
+    - cpuCredits: unlimited

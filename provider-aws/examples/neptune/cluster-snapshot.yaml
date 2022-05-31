@@ -1,0 +1,9 @@
+apiVersion: neptune.aws.upbound.io/v1alpha2
+kind: ClusterSnapshot
+metadata:
+  name: sample-snapshot
+spec:
+  forProvider:
+    region: eu-central-1
+    dbClusterIdentifierRef:
+      name: sample-cluster

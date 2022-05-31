@@ -1,0 +1,49 @@
+apiVersion: iam.aws.upbound.io/v1alpha2
+kind: RolePolicyAttachment
+metadata:
+  name: sample-cluster-policy
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+    roleRef:
+      name: sample-eks-cluster
+---
+apiVersion: iam.aws.upbound.io/v1alpha2
+kind: RolePolicyAttachment
+metadata:
+  name: sample-vpc-resource-controller
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonEKSVPCResourceController
+    roleRef:
+      name: sample-eks-cluster
+---
+apiVersion: iam.aws.upbound.io/v1alpha2
+kind: RolePolicyAttachment
+metadata:
+  name: sample-node-group-eks-policy
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+    roleRef:
+      name: sample-node-role
+---
+apiVersion: iam.aws.upbound.io/v1alpha2
+kind: RolePolicyAttachment
+metadata:
+  name: sample-node-group-ecr-policy
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+    roleRef:
+      name: sample-node-role
+---
+apiVersion: iam.aws.upbound.io/v1alpha2
+kind: RolePolicyAttachment
+metadata:
+  name: sample-node-group-cni-policy
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+    roleRef:
+      name: sample-node-role

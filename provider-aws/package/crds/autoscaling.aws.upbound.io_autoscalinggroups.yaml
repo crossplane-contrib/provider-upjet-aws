@@ -1,0 +1,503 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+  creationTimestamp: null
+  name: autoscalinggroups.autoscaling.aws.upbound.io
+spec:
+  group: autoscaling.aws.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - aws
+    kind: AutoscalingGroup
+    listKind: AutoscalingGroupList
+    plural: autoscalinggroups
+    singular: autoscalinggroup
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha2
+    schema:
+      openAPIV3Schema:
+        description: AutoscalingGroup is the Schema for the AutoscalingGroups API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: AutoscalingGroupSpec defines the desired state of AutoscalingGroup
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource.
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  availabilityZones:
+                    items:
+                      type: string
+                    type: array
+                  capacityRebalance:
+                    type: boolean
+                  defaultCooldown:
+                    type: number
+                  desiredCapacity:
+                    type: number
+                  enabledMetrics:
+                    items:
+                      type: string
+                    type: array
+                  forceDelete:
+                    type: boolean
+                  forceDeleteWarmPool:
+                    type: boolean
+                  healthCheckGracePeriod:
+                    type: number
+                  healthCheckType:
+                    type: string
+                  initialLifecycleHook:
+                    items:
+                      properties:
+                        defaultResult:
+                          type: string
+                        heartbeatTimeout:
+                          type: number
+                        lifecycleTransition:
+                          type: string
+                        name:
+                          type: string
+                        notificationMetadata:
+                          type: string
+                        notificationTargetArn:
+                          type: string
+                        roleArn:
+                          type: string
+                      required:
+                      - lifecycleTransition
+                      - name
+                      type: object
+                    type: array
+                  instanceRefresh:
+                    items:
+                      properties:
+                        preferences:
+                          items:
+                            properties:
+                              checkpointDelay:
+                                type: string
+                              checkpointPercentages:
+                                items:
+                                  type: number
+                                type: array
+                              instanceWarmup:
+                                type: string
+                              minHealthyPercentage:
+                                type: number
+                              skipMatching:
+                                type: boolean
+                            type: object
+                          type: array
+                        strategy:
+                          type: string
+                        triggers:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - strategy
+                      type: object
+                    type: array
+                  launchConfiguration:
+                    type: string
+                  launchTemplate:
+                    items:
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        version:
+                          type: string
+                      type: object
+                    type: array
+                  maxInstanceLifetime:
+                    type: number
+                  maxSize:
+                    type: number
+                  metricsGranularity:
+                    type: string
+                  minElbCapacity:
+                    type: number
+                  minSize:
+                    type: number
+                  mixedInstancesPolicy:
+                    items:
+                      properties:
+                        instancesDistribution:
+                          items:
+                            properties:
+                              onDemandAllocationStrategy:
+                                type: string
+                              onDemandBaseCapacity:
+                                type: number
+                              onDemandPercentageAboveBaseCapacity:
+                                type: number
+                              spotAllocationStrategy:
+                                type: string
+                              spotInstancePools:
+                                type: number
+                              spotMaxPrice:
+                                type: string
+                            type: object
+                          type: array
+                        launchTemplate:
+                          items:
+                            properties:
+                              launchTemplateSpecification:
+                                items:
+                                  properties:
+                                    launchTemplateId:
+                                      type: string
+                                    launchTemplateName:
+                                      type: string
+                                    version:
+                                      type: string
+                                  type: object
+                                type: array
+                              override:
+                                items:
+                                  properties:
+                                    instanceType:
+                                      type: string
+                                    launchTemplateSpecification:
+                                      items:
+                                        properties:
+                                          launchTemplateId:
+                                            type: string
+                                          launchTemplateName:
+                                            type: string
+                                          version:
+                                            type: string
+                                        type: object
+                                      type: array
+                                    weightedCapacity:
+                                      type: string
+                                  type: object
+                                type: array
+                            required:
+                            - launchTemplateSpecification
+                            type: object
+                          type: array
+                      required:
+                      - launchTemplate
+                      type: object
+                    type: array
+                  placementGroup:
+                    type: string
+                  protectFromScaleIn:
+                    type: boolean
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  serviceLinkedRoleArn:
+                    type: string
+                  serviceLinkedRoleArnRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  serviceLinkedRoleArnSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
+                  suspendedProcesses:
+                    items:
+                      type: string
+                    type: array
+                  tag:
+                    items:
+                      properties:
+                        key:
+                          type: string
+                        propagateAtLaunch:
+                          type: boolean
+                        value:
+                          type: string
+                      required:
+                      - key
+                      - propagateAtLaunch
+                      - value
+                      type: object
+                    type: array
+                  tags:
+                    items:
+                      additionalProperties:
+                        type: string
+                      type: object
+                    type: array
+                  terminationPolicies:
+                    items:
+                      type: string
+                    type: array
+                  vpcZoneIdentifier:
+                    items:
+                      type: string
+                    type: array
+                  vpcZoneIdentifierRefs:
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  vpcZoneIdentifierSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
+                  waitForCapacityTimeout:
+                    type: string
+                  waitForElbCapacity:
+                    type: number
+                  warmPool:
+                    items:
+                      properties:
+                        instanceReusePolicy:
+                          items:
+                            properties:
+                              reuseOnScaleIn:
+                                type: boolean
+                            type: object
+                          type: array
+                        maxGroupPreparedCapacity:
+                          type: number
+                        minSize:
+                          type: number
+                        poolState:
+                          type: string
+                      type: object
+                    type: array
+                required:
+                - maxSize
+                - minSize
+                - region
+                type: object
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              providerRef:
+                description: 'ProviderReference specifies the provider that will be
+                  used to create, observe, update, and delete this managed resource.
+                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: AutoscalingGroupStatus defines the observed state of AutoscalingGroup.
+            properties:
+              atProvider:
+                properties:
+                  arn:
+                    type: string
+                  id:
+                    type: string
+                  loadBalancers:
+                    items:
+                      type: string
+                    type: array
+                  targetGroupArns:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

@@ -1,0 +1,12 @@
+---
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: RouteTable
+metadata:
+  name: sample-rtb
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdRef:
+      name: sample-vpc
+  providerConfigRef:
+    name: default

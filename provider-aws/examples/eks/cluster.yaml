@@ -1,0 +1,18 @@
+apiVersion: eks.aws.upbound.io/v1alpha2
+kind: Cluster
+metadata:
+  name: sample-eks-cluster
+  labels:
+    example: "true"
+spec:
+  forProvider:
+    region: us-west-1
+    roleArnRef:
+      name: sample-eks-cluster
+    vpcConfig:
+      - subnetIdRefs:
+          - name: sample-subnet1
+          - name: sample-subnet2
+  writeConnectionSecretToRef:
+    name: cluster-conn
+    namespace: default

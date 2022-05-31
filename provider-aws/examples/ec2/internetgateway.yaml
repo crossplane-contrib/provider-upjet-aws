@@ -1,0 +1,13 @@
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: InternetGateway
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: main
+    vpcIdRef:
+      name: sample-vpc
+  providerConfigRef:
+    name: default

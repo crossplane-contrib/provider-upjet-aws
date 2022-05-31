@@ -1,0 +1,7 @@
+apiVersion: ecs.aws.upbound.io/v1alpha2
+kind: Cluster
+metadata:
+  name: sample-cluster
+spec:
+  forProvider:
+    region: us-west-1

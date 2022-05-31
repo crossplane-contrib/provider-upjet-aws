@@ -1,0 +1,13 @@
+apiVersion: neptune.aws.upbound.io/v1alpha2
+kind: SubnetGroup
+metadata:
+  name: sample-subnet-group
+spec:
+  forProvider:
+    description: "Managed by Crossplane"
+    region: eu-central-1
+    subnetIdRefs:
+      - name: sample-subnet1 
+      - name: sample-subnet2
+    tags:
+      Name: My neptune subnet group
