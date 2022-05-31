@@ -171,7 +171,7 @@ func GetProvider() *tjconfig.Provider {
 	pc := tjconfig.NewProviderWithSchema([]byte(providerSchema), "aws", "github.com/upbound/provider-aws",
 		tjconfig.WithShortName("aws"),
 		tjconfig.WithRootGroup("aws.upbound.io"),
-		// tjconfig.WithIncludeList(IncludedResources),
+		tjconfig.WithIncludeList(IncludedResources),
 		tjconfig.WithSkipList(skipList),
 		tjconfig.WithDefaultResourceFn(DefaultResource(
 			GroupKindOverrides(),
@@ -182,8 +182,6 @@ func GetProvider() *tjconfig.Provider {
 			NamePrefixRemoval(),
 			KnownReferencers(),
 			AddExternalTagsField(),
-			VersionSetting("v1beta1"),
-			ExternalNameConfig(),
 		)),
 	)
 

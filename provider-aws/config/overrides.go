@@ -17,36 +17,6 @@ import (
 	"github.com/crossplane/terrajet/pkg/types/name"
 )
 
-var ColonPattern = tjconfig.ExternalName{}
-
-type ConfigureExternalNameFn func(tjconfig.ExternalName)
-
-var ExternalNameMap = map[string]ConfigureExternalNameFn{
-	"aws_eks_fargate_profile": func(e tjconfig.ExternalName) {
-		e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
-			base["cluster_name"] = externalName
-		}
-		// my_cluster:my_fargate_profile
-		e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
-			if id, ok := tfstate["id"]; ok {
-				if i, ok := id.(string); ok {
-					return i[strings.LastIndex(i, ":")+1], nil
-				}
-
-			}
-			return "", errors.New("id not found")
-		}
-	},
-}
-
-func ExternalNameConfig() tjconfig.ResourceOption {
-	return func(r *tjconfig.Resource) {
-		if c, ok := ExternalNameMap[r.Name]; ok {
-			r.ExternalName = c
-		}
-	}
-}
-
 // GroupKindCalculator returns the correct group and kind name for given TF
 // resource.
 type GroupKindCalculator func(resource string) (string, string)
@@ -345,14 +315,6 @@ func RegionAddition() tjconfig.ResourceOption {
 			Required:    true,
 			Description: comment.String(),
 		}
-	}
-}
-
-// RegionAddition adds region to the spec of all resources except iam group which
-// does not have a region notion.
-func VersionSetting(version string) tjconfig.ResourceOption {
-	return func(r *tjconfig.Resource) {
-		r.Version = version
 	}
 }
 
