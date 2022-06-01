@@ -17,7 +17,7 @@ limitations under the License.
 package globalaccelerator
 
 import (
-	"github.com/crossplane/terrajet/pkg/config"
+	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-aws/config/common"
 )

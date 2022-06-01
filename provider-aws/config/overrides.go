@@ -12,9 +12,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
 
-	tjconfig "github.com/crossplane/terrajet/pkg/config"
-	"github.com/crossplane/terrajet/pkg/types/comments"
-	"github.com/crossplane/terrajet/pkg/types/name"
+	tjconfig "github.com/upbound/upjet/pkg/config"
+	"github.com/upbound/upjet/pkg/types/comments"
+	"github.com/upbound/upjet/pkg/types/name"
 )
 
 // GroupKindCalculator returns the correct group and kind name for given TF

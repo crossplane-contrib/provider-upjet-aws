@@ -9,7 +9,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/crossplane/terrajet/pkg/pipeline"
+	"github.com/upbound/upjet/pkg/pipeline"
 
 	"github.com/upbound/official-providers/provider-aws/config"
 )

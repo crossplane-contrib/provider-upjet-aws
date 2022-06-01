@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 package mq
 
 import (
-	"github.com/crossplane/terrajet/pkg/config"
+	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-aws/config/common"
 )
@@ -16,7 +16,7 @@ func Configure(p *config.Provider) {
 		r.Version = common.VersionV1Alpha2
 		// Due to a terrajet limitation, we cannot use "metedata.name" field as the name of the resource
 		// Therefore, "spec.forProvider.brokerName" field is not omitted
-		// Details can be found in https://github.com/crossplane/terrajet/issues/280
+		// Details can be found in https://github.com/upbound/upjet/issues/280
 		r.ExternalName = config.IdentifierFromProvider
 		r.UseAsync = true
 	})
@@ -24,7 +24,7 @@ func Configure(p *config.Provider) {
 		r.Version = common.VersionV1Alpha2
 		// Due to a terrajet limitation, we cannot use "metedata.name" field as the name of the resource
 		// Therefore, "spec.forProvider.name" field is not omitted
-		// Details can be found in https://github.com/crossplane/terrajet/issues/280
+		// Details can be found in https://github.com/upbound/upjet/issues/280
 		r.ExternalName = config.IdentifierFromProvider
 	})
 

@@ -8,17 +8,17 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	xpabeta1 "github.com/crossplane/provider-aws/apis/v1beta1"
 	xpawsclient "github.com/crossplane/provider-aws/pkg/clients"
-	"github.com/crossplane/terrajet/pkg/terraform"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+
+	"github.com/upbound/upjet/pkg/terraform"
 
 	"github.com/upbound/official-providers/provider-aws/apis/v1alpha1"
 )

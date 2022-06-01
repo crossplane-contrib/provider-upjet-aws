@@ -5,7 +5,7 @@ Copyright 2021 Upbound Inc.
 package ec2
 
 import (
-	"github.com/crossplane/terrajet/pkg/config"
+	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-aws/config/common"
 )
@@ -40,7 +40,7 @@ func Configure(p *config.Provider) {
 		}
 		r.LateInitializer = config.LateInitializer{
 			// NOTE(muvaf): These are ignored because they conflict with each other.
-			// See the following for more details: https://github.com/crossplane/terrajet/issues/107
+			// See the following for more details: https://github.com/upbound/upjet/issues/107
 			IgnoredFields: []string{
 				"subnet_id",
 				"network_interface",
@@ -184,7 +184,7 @@ func Configure(p *config.Provider) {
 		r.ExternalName = config.IdentifierFromProvider
 		r.LateInitializer = config.LateInitializer{
 			// NOTE(muvaf): Conflicts with AvailabilityZone. See the following
-			// for more details: https://github.com/crossplane/terrajet/issues/107
+			// for more details: https://github.com/upbound/upjet/issues/107
 			IgnoredFields: []string{
 				"availability_zone_id",
 			},

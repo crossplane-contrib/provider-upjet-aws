@@ -5,7 +5,7 @@ Copyright 2021 Upbound Inc.
 package s3
 
 import (
-	"github.com/crossplane/terrajet/pkg/config"
+	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-aws/config/common"
 )
