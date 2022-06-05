@@ -1,0 +1,10 @@
+apiVersion: fsx.aws.upbound.io/v1alpha1
+kind: OpenzfsSnapshot
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    volumeId: ${aws_fsx_openzfs_file_system.example.root_volume_id}
+  providerConfigRef:
+    name: example

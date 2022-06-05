@@ -1,0 +1,11 @@
+apiVersion: neptune.aws.upbound.io/v1alpha2
+kind: ClusterEndpoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterIdentifierRef:
+      name: example
+    endpointType: READER
+  providerConfigRef:
+    name: example

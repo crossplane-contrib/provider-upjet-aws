@@ -1,0 +1,14 @@
+apiVersion: ssm.aws.upbound.io/v1alpha1
+kind: Parameter
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: foo
+    type: String
+    valueSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+  providerConfigRef:
+    name: example

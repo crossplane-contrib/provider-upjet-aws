@@ -1,0 +1,12 @@
+apiVersion: ssm.aws.upbound.io/v1alpha1
+kind: Activation
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: Test
+    iamRole: ${aws_iam_role.test_role.id}
+    name: test_ssm_activation
+    registrationLimit: "5"
+  providerConfigRef:
+    name: example

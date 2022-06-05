@@ -1,0 +1,12 @@
+apiVersion: s3.aws.upbound.io/v1alpha1
+kind: Object
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: your_bucket_name
+    etag: ${filemd5("path/to/file")}
+    key: new_object_key
+    source: path/to/file
+  providerConfigRef:
+    name: example

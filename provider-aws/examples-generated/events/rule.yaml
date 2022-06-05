@@ -1,0 +1,16 @@
+apiVersion: events.aws.upbound.io/v1alpha1
+kind: Rule
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: Capture each AWS Console Sign In
+    eventPattern: |
+      {
+        "detail-type": [
+          "AWS Console Sign In via CloudTrail"
+        ]
+      }
+    name: capture-aws-sign-in
+  providerConfigRef:
+    name: example

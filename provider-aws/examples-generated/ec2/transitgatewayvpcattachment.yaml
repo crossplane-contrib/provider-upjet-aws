@@ -1,0 +1,14 @@
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: TransitGatewayVPCAttachment
+metadata:
+  name: example
+spec:
+  forProvider:
+    subnetIdRefs:
+    - name: example
+    transitGatewayIdRef:
+      name: example
+    vpcIdRef:
+      name: example
+  providerConfigRef:
+    name: example

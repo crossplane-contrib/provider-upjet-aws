@@ -1,0 +1,13 @@
+apiVersion: glue.aws.upbound.io/v1alpha1
+kind: Crawler
+metadata:
+  name: example
+spec:
+  forProvider:
+    databaseName: MyCatalogDatabase
+    dynamodbTarget:
+    - path: table-name
+    name: example
+    role: ${aws_iam_role.example.arn}
+  providerConfigRef:
+    name: example

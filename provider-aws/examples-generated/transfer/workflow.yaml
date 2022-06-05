@@ -1,0 +1,13 @@
+apiVersion: transfer.aws.upbound.io/v1alpha1
+kind: Workflow
+metadata:
+  name: example
+spec:
+  forProvider:
+    steps:
+    - deleteStepDetails:
+      - name: example
+        sourceFileLocation: ${original.file}
+      type: DELETE
+  providerConfigRef:
+    name: example

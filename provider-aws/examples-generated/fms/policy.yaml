@@ -1,0 +1,31 @@
+apiVersion: fms.aws.upbound.io/v1alpha1
+kind: Policy
+metadata:
+  name: example
+spec:
+  forProvider:
+    excludeResourceTags: false
+    name: FMS-Policy-Example
+    remediationEnabled: false
+    resourceTypeList:
+    - AWS::ElasticLoadBalancingV2::LoadBalancer
+    securityServicePolicyData:
+    - managedServiceData: |-
+        ${jsonencode({
+              type = "WAF",
+              ruleGroups = [{
+                id = aws_wafregional_rule_group.example.id
+                overrideAction = {
+                  type = "COUNT"
+                }
+              }]
+              defaultAction = {
+                type = "BLOCK"
+              }
+              overrideCustomerWebACLAssociation = false
+            })}
+      type: WAF
+    tags:
+      Name: example-fms-policy
+  providerConfigRef:
+    name: example

@@ -1,0 +1,9 @@
+apiVersion: glue.aws.upbound.io/v1alpha1
+kind: Registry
+metadata:
+  name: example
+spec:
+  forProvider:
+    registryName: example
+  providerConfigRef:
+    name: example

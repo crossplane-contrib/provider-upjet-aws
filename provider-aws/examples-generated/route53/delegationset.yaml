@@ -1,0 +1,9 @@
+apiVersion: route53.aws.upbound.io/v1alpha2
+kind: DelegationSet
+metadata:
+  name: example
+spec:
+  forProvider:
+    referenceName: DynDNS
+  providerConfigRef:
+    name: example

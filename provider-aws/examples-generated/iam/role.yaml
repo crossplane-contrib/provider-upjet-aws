@@ -1,0 +1,24 @@
+apiVersion: iam.aws.upbound.io/v1alpha2
+kind: Role
+metadata:
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Action = "sts:AssumeRole"
+              Effect = "Allow"
+              Sid    = ""
+              Principal = {
+                Service = "ec2.amazonaws.com"
+              }
+            },
+          ]
+        })}
+    tags:
+      tag-key: tag-value
+  providerConfigRef:
+    name: example

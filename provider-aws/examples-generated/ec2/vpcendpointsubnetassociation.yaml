@@ -1,0 +1,11 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: VPCEndpointSubnetAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    subnetIdRef:
+      name: example
+    vpcEndpointId: ${aws_vpc_endpoint.ec2.id}
+  providerConfigRef:
+    name: example

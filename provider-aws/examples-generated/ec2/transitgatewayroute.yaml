@@ -1,0 +1,13 @@
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: TransitGatewayRoute
+metadata:
+  name: example
+spec:
+  forProvider:
+    destinationCidrBlock: 0.0.0.0/0
+    transitGatewayAttachmentIdRef:
+      name: example
+    transitGatewayRouteTableIdRef:
+      name: example
+  providerConfigRef:
+    name: example

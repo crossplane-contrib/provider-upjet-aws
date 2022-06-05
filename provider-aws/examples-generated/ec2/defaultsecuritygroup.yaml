@@ -1,0 +1,21 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: DefaultSecurityGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    egress:
+    - cidrBlocks:
+      - 0.0.0.0/0
+      fromPort: 0
+      protocol: "-1"
+      toPort: 0
+    ingress:
+    - fromPort: 0
+      protocol: -1
+      self: true
+      toPort: 0
+    vpcIdRef:
+      name: example
+  providerConfigRef:
+    name: example

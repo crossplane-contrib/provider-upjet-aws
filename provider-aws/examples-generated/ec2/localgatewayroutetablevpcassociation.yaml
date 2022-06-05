@@ -1,0 +1,11 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: LocalGatewayRouteTableVPCAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    localGatewayRouteTableId: ${data.aws_ec2_local_gateway_route_table.example.id}
+    vpcIdRef:
+      name: example
+  providerConfigRef:
+    name: example

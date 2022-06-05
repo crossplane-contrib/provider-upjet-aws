@@ -1,0 +1,13 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: NATGateway
+metadata:
+  name: example
+spec:
+  forProvider:
+    allocationId: ${aws_eip.example.id}
+    subnetIdRef:
+      name: example
+    tags:
+      Name: gw NAT
+  providerConfigRef:
+    name: example

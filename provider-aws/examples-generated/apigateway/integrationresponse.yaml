@@ -1,0 +1,19 @@
+apiVersion: apigateway.aws.upbound.io/v1alpha1
+kind: IntegrationResponse
+metadata:
+  name: example
+spec:
+  forProvider:
+    httpMethod: ${aws_api_gateway_method.MyDemoMethod.http_method}
+    resourceId: ${aws_api_gateway_resource.MyDemoResource.id}
+    responseTemplates:
+      application/xml: |
+        #set($inputRoot = $input.path('$'))
+        <?xml version="1.0" encoding="UTF-8"?>
+        <message>
+            $inputRoot.body
+        </message>
+    restApiId: ${aws_api_gateway_rest_api.MyDemoAPI.id}
+    statusCode: ${aws_api_gateway_method_response.response_200.status_code}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: inspector.aws.upbound.io/v1alpha1
+kind: AssessmentTarget
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: assessment target
+    resourceGroupArn: ${aws_inspector_resource_group.bar.arn}
+  providerConfigRef:
+    name: example

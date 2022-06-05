@@ -1,0 +1,10 @@
+apiVersion: cloudtrail.aws.upbound.io/v1alpha1
+kind: EventDataStore
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example-event-data-store
+    retentionPeriod: 7
+  providerConfigRef:
+    name: example

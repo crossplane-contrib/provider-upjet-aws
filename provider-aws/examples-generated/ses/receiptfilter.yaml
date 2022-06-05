@@ -1,0 +1,11 @@
+apiVersion: ses.aws.upbound.io/v1alpha1
+kind: ReceiptFilter
+metadata:
+  name: example
+spec:
+  forProvider:
+    cidr: 10.10.10.10
+    name: block-spammer
+    policy: Block
+  providerConfigRef:
+    name: example

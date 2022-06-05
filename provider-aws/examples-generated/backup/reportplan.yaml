@@ -1,0 +1,19 @@
+apiVersion: backup.aws.upbound.io/v1alpha1
+kind: ReportPlan
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: example description
+    name: example_name
+    reportDeliveryChannel:
+    - formats:
+      - CSV
+      - JSON
+      s3BucketName: example-bucket-name
+    reportSetting:
+    - reportTemplate: RESTORE_JOB_REPORT
+    tags:
+      Name: Example Report Plan
+  providerConfigRef:
+    name: example

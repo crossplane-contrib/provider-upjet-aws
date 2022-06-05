@@ -1,0 +1,14 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: TransitGatewayPeeringAttachment
+metadata:
+  name: example
+spec:
+  forProvider:
+    peerAccountId: ${aws_ec2_transit_gateway.peer.owner_id}
+    peerRegion: ${data.aws_region.peer.name}
+    peerTransitGatewayId: ${aws_ec2_transit_gateway.peer.id}
+    tags:
+      Name: TGW Peering Requestor
+    transitGatewayId: ${aws_ec2_transit_gateway.local.id}
+  providerConfigRef:
+    name: example

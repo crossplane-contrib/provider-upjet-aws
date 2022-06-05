@@ -1,0 +1,11 @@
+apiVersion: rds.aws.upbound.io/v1alpha1
+kind: ProxyTarget
+metadata:
+  name: example
+spec:
+  forProvider:
+    dbInstanceIdentifier: ${aws_db_instance.example.id}
+    dbProxyName: example
+    targetGroupName: ${aws_db_proxy_default_target_group.example.name}
+  providerConfigRef:
+    name: example

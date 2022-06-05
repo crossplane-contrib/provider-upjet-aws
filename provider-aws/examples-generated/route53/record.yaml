@@ -1,0 +1,15 @@
+apiVersion: route53.aws.upbound.io/v1alpha2
+kind: Record
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: www.example.com
+    records:
+    - ${aws_eip.lb.public_ip}
+    ttl: "300"
+    type: A
+    zoneIdRef:
+      name: example
+  providerConfigRef:
+    name: example

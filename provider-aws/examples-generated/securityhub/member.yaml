@@ -1,0 +1,11 @@
+apiVersion: securityhub.aws.upbound.io/v1alpha1
+kind: Member
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountId: "123456789012"
+    email: example@example.com
+    invite: true
+  providerConfigRef:
+    name: example

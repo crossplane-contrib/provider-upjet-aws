@@ -1,0 +1,10 @@
+apiVersion: wafregional.aws.upbound.io/v1alpha1
+kind: WebACLAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    resourceArn: ${aws_alb.foo.arn}
+    webAclId: ${aws_wafregional_web_acl.foo.id}
+  providerConfigRef:
+    name: example

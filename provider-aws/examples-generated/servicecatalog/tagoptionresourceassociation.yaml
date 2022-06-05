@@ -1,0 +1,10 @@
+apiVersion: servicecatalog.aws.upbound.io/v1alpha1
+kind: TagOptionResourceAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    resourceId: prod-dnigbtea24ste
+    tagOptionId: tag-pjtvyakdlyo3m
+  providerConfigRef:
+    name: example

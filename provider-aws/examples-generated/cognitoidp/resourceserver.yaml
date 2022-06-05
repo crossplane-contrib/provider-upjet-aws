@@ -1,0 +1,11 @@
+apiVersion: cognitoidp.aws.upbound.io/v1alpha1
+kind: ResourceServer
+metadata:
+  name: example
+spec:
+  forProvider:
+    identifier: https://example.com
+    name: example
+    userPoolId: ${aws_cognito_user_pool.pool.id}
+  providerConfigRef:
+    name: example

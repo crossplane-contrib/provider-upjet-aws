@@ -1,0 +1,10 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: EIPAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    allocationId: ${aws_eip.example.id}
+    instanceId: ${aws_instance.web.id}
+  providerConfigRef:
+    name: example

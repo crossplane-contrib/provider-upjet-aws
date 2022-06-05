@@ -1,0 +1,18 @@
+apiVersion: gamelift.aws.upbound.io/v1alpha1
+kind: GameServerGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    gameServerGroupName: example
+    instanceDefinition:
+    - instanceType: c5.large
+    - instanceType: c5a.large
+    launchTemplate:
+    - id: ${aws_launch_template.example.id}
+    maxSize: 1
+    minSize: 1
+    roleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

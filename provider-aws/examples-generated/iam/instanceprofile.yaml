@@ -1,0 +1,10 @@
+apiVersion: iam.aws.upbound.io/v1alpha2
+kind: InstanceProfile
+metadata:
+  name: example
+spec:
+  forProvider:
+    roleRef:
+      name: example
+  providerConfigRef:
+    name: example

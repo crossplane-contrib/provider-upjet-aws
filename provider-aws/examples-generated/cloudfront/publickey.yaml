@@ -1,0 +1,11 @@
+apiVersion: cloudfront.aws.upbound.io/v1alpha1
+kind: PublicKey
+metadata:
+  name: example
+spec:
+  forProvider:
+    comment: test public key
+    encodedKey: ${file("public_key.pem")}
+    name: test_key
+  providerConfigRef:
+    name: example

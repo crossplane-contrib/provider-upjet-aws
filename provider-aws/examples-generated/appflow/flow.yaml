@@ -1,0 +1,32 @@
+apiVersion: appflow.aws.upbound.io/v1alpha1
+kind: Flow
+metadata:
+  name: example
+spec:
+  forProvider:
+    destinationFlowConfig:
+    - connectorType: S3
+      destinationConnectorProperties:
+      - s3:
+        - bucketName: ${aws_s3_bucket.example.id}
+          s3OutputFormatConfig:
+          - prefixConfig:
+            - prefixType: PATH
+    name: example
+    sourceFlowConfig:
+    - connectorType: S3
+      sourceConnectorProperties:
+      - s3:
+        - bucketName: ${aws_s3_bucket.example.id}
+          bucketPrefix: example
+    task:
+    - connectorOperator:
+      - s3: NO_OP
+      destinationField: exampleField
+      sourceFields:
+      - exampleField
+      taskType: Map
+    triggerConfig:
+    - triggerType: OnDemand
+  providerConfigRef:
+    name: example

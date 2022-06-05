@@ -1,0 +1,17 @@
+apiVersion: glue.aws.upbound.io/v1alpha1
+kind: UserDefinedFunction
+metadata:
+  name: example
+spec:
+  forProvider:
+    catalogId: ${aws_glue_catalog_database.example.catalog_id}
+    className: class
+    databaseName: MyCatalogDatabase
+    name: my_func
+    ownerName: owner
+    ownerType: GROUP
+    resourceUris:
+    - resourceType: ARCHIVE
+      uri: uri
+  providerConfigRef:
+    name: example

@@ -1,0 +1,11 @@
+apiVersion: redshift.aws.upbound.io/v1alpha1
+kind: SecurityGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    ingress:
+    - cidr: 10.0.0.0/24
+    name: redshift-sg
+  providerConfigRef:
+    name: example

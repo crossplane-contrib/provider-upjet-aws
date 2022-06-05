@@ -1,0 +1,21 @@
+apiVersion: s3control.aws.upbound.io/v1alpha1
+kind: AccessPointPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    accessPointArn: ${aws_s3_access_point.example.arn}
+    policy: |-
+      ${jsonencode({
+          Version = "2008-10-17"
+          Statement = [{
+            Effect = "Allow"
+            Action = "s3:GetObjectTagging"
+            Principal = {
+              AWS = "*"
+            }
+            Resource = "${aws_s3_access_point.example.arn}/object/*"
+          }]
+        })}
+  providerConfigRef:
+    name: example

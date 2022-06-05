@@ -1,0 +1,11 @@
+apiVersion: sagemaker.aws.upbound.io/v1alpha1
+kind: CodeRepository
+metadata:
+  name: example
+spec:
+  forProvider:
+    codeRepositoryName: example
+    gitConfig:
+    - repositoryUrl: https://github.com/hashicorp/terraform-provider-aws.git
+  providerConfigRef:
+    name: example

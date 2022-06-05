@@ -1,0 +1,15 @@
+apiVersion: datasync.aws.upbound.io/v1alpha1
+kind: LocationFSXOpenzfsFileSystem
+metadata:
+  name: example
+spec:
+  forProvider:
+    fsxFilesystemArn: ${aws_fsx_openzfs_file_system.example.arn}
+    protocol:
+    - nfs:
+      - mountOptions:
+        - version: AUTOMATIC
+    securityGroupArns:
+    - ${aws_security_group.example.arn}
+  providerConfigRef:
+    name: example

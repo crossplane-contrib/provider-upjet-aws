@@ -1,0 +1,32 @@
+apiVersion: appsync.aws.upbound.io/v1alpha1
+kind: Resolver
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiId: ${aws_appsync_graphql_api.test.id}
+    cachingConfig:
+    - cachingKeys:
+      - $context.identity.sub
+      - $context.arguments.id
+      ttl: 60
+    dataSource: tf_appsync_example
+    field: singlePost
+    requestTemplate: |
+      {
+          "version": "2018-05-29",
+          "method": "GET",
+          "resourcePath": "/",
+          "params":{
+              "headers": $utils.http.copyheaders($ctx.request.headers)
+          }
+      }
+    responseTemplate: |
+      #if($ctx.result.statusCode == 200)
+          $ctx.result.body
+      #else
+          $utils.appendError($ctx.result.body, $ctx.result.statusCode)
+      #end
+    type: Query
+  providerConfigRef:
+    name: example

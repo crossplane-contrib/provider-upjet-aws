@@ -1,0 +1,16 @@
+apiVersion: serverlessrepo.aws.upbound.io/v1alpha1
+kind: CloudFormationStack
+metadata:
+  name: example
+spec:
+  forProvider:
+    applicationId: arn:aws:serverlessrepo:us-east-1:297356227824:applications/SecretsManagerRDSPostgreSQLRotationSingleUser
+    capabilities:
+    - CAPABILITY_IAM
+    - CAPABILITY_RESOURCE_POLICY
+    name: postgres-rotator
+    parameters:
+      endpoint: secretsmanager.${data.aws_region.current.name}.${data.aws_partition.current.dns_suffix}
+      functionName: func-postgres-rotator
+  providerConfigRef:
+    name: example

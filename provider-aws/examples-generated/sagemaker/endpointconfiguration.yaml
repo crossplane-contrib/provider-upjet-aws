@@ -1,0 +1,16 @@
+apiVersion: sagemaker.aws.upbound.io/v1alpha1
+kind: EndpointConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: my-endpoint-config
+    productionVariants:
+    - initialInstanceCount: 1
+      instanceType: ml.t2.medium
+      modelName: my-model
+      variantName: variant-1
+    tags:
+      Name: foo
+  providerConfigRef:
+    name: example

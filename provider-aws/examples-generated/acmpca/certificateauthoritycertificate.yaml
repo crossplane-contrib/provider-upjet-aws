@@ -1,0 +1,11 @@
+apiVersion: acmpca.aws.upbound.io/v1alpha1
+kind: CertificateAuthorityCertificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    certificate: ${aws_acmpca_certificate.example.certificate}
+    certificateAuthorityArn: ${aws_acmpca_certificate_authority.example.arn}
+    certificateChain: ${aws_acmpca_certificate.example.certificate_chain}
+  providerConfigRef:
+    name: example

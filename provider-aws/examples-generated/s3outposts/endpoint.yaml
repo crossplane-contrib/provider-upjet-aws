@@ -1,0 +1,13 @@
+apiVersion: s3outposts.aws.upbound.io/v1alpha1
+kind: Endpoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    outpostId: ${data.aws_outposts_outpost.example.id}
+    securityGroupIdRef:
+      name: example
+    subnetIdRef:
+      name: example
+  providerConfigRef:
+    name: example

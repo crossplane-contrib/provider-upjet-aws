@@ -1,0 +1,12 @@
+apiVersion: cognitoidp.aws.upbound.io/v1alpha1
+kind: UserPoolUICustomization
+metadata:
+  name: example
+spec:
+  forProvider:
+    clientId: ${aws_cognito_user_pool_client.example.id}
+    css: '.label-customizable {font-weight: 400;}'
+    imageFile: ${filebase64("logo.png")}
+    userPoolId: ${aws_cognito_user_pool_domain.example.user_pool_id}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: organizations.aws.upbound.io/v1alpha1
+kind: PolicyAttachment
+metadata:
+  name: example
+spec:
+  forProvider:
+    policyId: ${aws_organizations_policy.example.id}
+    targetId: "123456789012"
+  providerConfigRef:
+    name: example

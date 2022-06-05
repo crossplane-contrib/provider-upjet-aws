@@ -1,0 +1,17 @@
+apiVersion: elasticache.aws.upbound.io/v1alpha2
+kind: ReplicationGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    automaticFailoverEnabled: true
+    description: example description
+    nodeType: cache.m4.large
+    numberCacheClusters: 2
+    parameterGroupName: default.redis3.2
+    port: 6379
+    preferredCacheClusterAzs:
+    - us-west-2a
+    - us-west-2b
+  providerConfigRef:
+    name: example

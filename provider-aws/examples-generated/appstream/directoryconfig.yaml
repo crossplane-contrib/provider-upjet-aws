@@ -1,0 +1,17 @@
+apiVersion: appstream.aws.upbound.io/v1alpha1
+kind: DirectoryConfig
+metadata:
+  name: example
+spec:
+  forProvider:
+    directoryName: NAME OF DIRECTORY
+    organizationalUnitDistinguishedNames:
+    - DISTINGUISHED NAME
+    serviceAccountCredentials:
+    - accountName: NAME OF ACCOUNT
+      accountPasswordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: crossplane-system
+  providerConfigRef:
+    name: example

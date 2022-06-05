@@ -1,0 +1,14 @@
+apiVersion: dax.aws.upbound.io/v1alpha1
+kind: ParameterGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    parameters:
+    - name: query-ttl-millis
+      value: "100000"
+    - name: record-ttl-millis
+      value: "100000"
+  providerConfigRef:
+    name: example

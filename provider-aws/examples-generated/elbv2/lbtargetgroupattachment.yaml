@@ -1,0 +1,12 @@
+apiVersion: elbv2.aws.upbound.io/v1alpha2
+kind: LBTargetGroupAttachment
+metadata:
+  name: example
+spec:
+  forProvider:
+    port: 80
+    targetGroupArnRef:
+      name: example
+    targetId: ${aws_instance.test.id}
+  providerConfigRef:
+    name: example

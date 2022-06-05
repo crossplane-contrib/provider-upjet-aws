@@ -1,0 +1,13 @@
+apiVersion: lightsail.aws.upbound.io/v1alpha1
+kind: InstancePublicPorts
+metadata:
+  name: example
+spec:
+  forProvider:
+    instanceName: custom_gitlab
+    portInfo:
+    - fromPort: 80
+      protocol: tcp
+      toPort: 80
+  providerConfigRef:
+    name: example

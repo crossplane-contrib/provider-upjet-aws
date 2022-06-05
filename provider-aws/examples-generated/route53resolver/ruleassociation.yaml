@@ -1,0 +1,11 @@
+apiVersion: route53resolver.aws.upbound.io/v1alpha1
+kind: RuleAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    resolverRuleId: ${aws_route53_resolver_rule.sys.id}
+    vpcIdRef:
+      name: example
+  providerConfigRef:
+    name: example

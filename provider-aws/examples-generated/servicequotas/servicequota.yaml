@@ -1,0 +1,11 @@
+apiVersion: servicequotas.aws.upbound.io/v1alpha1
+kind: ServiceQuota
+metadata:
+  name: example
+spec:
+  forProvider:
+    quotaCode: L-F678F1CE
+    serviceCode: vpc
+    value: 75
+  providerConfigRef:
+    name: example

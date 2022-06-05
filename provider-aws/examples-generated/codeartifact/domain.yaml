@@ -1,0 +1,9 @@
+apiVersion: codeartifact.aws.upbound.io/v1alpha1
+kind: Domain
+metadata:
+  name: example
+spec:
+  forProvider:
+    domain: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: eks.aws.upbound.io/v1alpha2
+kind: Addon
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterNameRef:
+      name: example
+  providerConfigRef:
+    name: example

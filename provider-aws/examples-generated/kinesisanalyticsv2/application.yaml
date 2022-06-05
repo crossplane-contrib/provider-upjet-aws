@@ -1,0 +1,41 @@
+apiVersion: kinesisanalyticsv2.aws.upbound.io/v1alpha1
+kind: Application
+metadata:
+  name: example
+spec:
+  forProvider:
+    applicationConfiguration:
+    - applicationCodeConfiguration:
+      - codeContent:
+        - s3ContentLocation:
+          - bucketArn: ${aws_s3_bucket.example.arn}
+            fileKey: new_object_key
+        codeContentType: ZIPFILE
+      environmentProperties:
+      - propertyGroup:
+        - propertyGroupId: PROPERTY-GROUP-1
+          propertyMap:
+            Key1: Value1
+        - propertyGroupId: PROPERTY-GROUP-2
+          propertyMap:
+            KeyA: ValueA
+            KeyB: ValueB
+      flinkApplicationConfiguration:
+      - checkpointConfiguration:
+        - configurationType: DEFAULT
+        monitoringConfiguration:
+        - configurationType: CUSTOM
+          logLevel: DEBUG
+          metricsLevel: TASK
+        parallelismConfiguration:
+        - autoScalingEnabled: true
+          configurationType: CUSTOM
+          parallelism: 10
+          parallelismPerKpu: 4
+    name: example-flink-application
+    runtimeEnvironment: FLINK-1_8
+    serviceExecutionRole: ${aws_iam_role.example.arn}
+    tags:
+      Environment: test
+  providerConfigRef:
+    name: example

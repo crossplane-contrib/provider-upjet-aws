@@ -1,0 +1,17 @@
+apiVersion: s3control.aws.upbound.io/v1alpha1
+kind: ObjectLambdaAccessPoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    configuration:
+    - supportingAccessPoint: ${aws_s3_access_point.example.arn}
+      transformationConfiguration:
+      - actions:
+        - GetObject
+        contentTransformation:
+        - awsLambda:
+          - functionArn: ${aws_lambda_function.example.arn}
+    name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,14 @@
+apiVersion: route53domains.aws.upbound.io/v1alpha1
+kind: RegisteredDomain
+metadata:
+  name: example
+spec:
+  forProvider:
+    domainName: example.com
+    nameServer:
+    - name: ns-195.awsdns-24.com
+    - name: ns-874.awsdns-45.net
+    tags:
+      Environment: test
+  providerConfigRef:
+    name: example

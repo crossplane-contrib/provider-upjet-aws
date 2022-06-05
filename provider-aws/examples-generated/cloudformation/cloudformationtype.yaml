@@ -1,0 +1,16 @@
+apiVersion: cloudformation.aws.upbound.io/v1alpha1
+kind: CloudFormationType
+metadata:
+  name: example
+spec:
+  forProvider:
+    lifecycle:
+    - create_before_destroy: true
+    loggingConfig:
+    - logGroupName: Yada
+      logRoleArn: ${aws_iam_role.example.arn}
+    schemaHandlerPackage: s3://${aws_s3_object.example.bucket}/${aws_s3_object.example.key}
+    type: RESOURCE
+    typeName: ExampleCompany::ExampleService::ExampleResource
+  providerConfigRef:
+    name: example

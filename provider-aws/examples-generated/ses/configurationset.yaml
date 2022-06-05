@@ -1,0 +1,9 @@
+apiVersion: ses.aws.upbound.io/v1alpha1
+kind: ConfigurationSet
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: some-configuration-set-test
+  providerConfigRef:
+    name: example

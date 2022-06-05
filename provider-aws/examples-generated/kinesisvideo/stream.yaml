@@ -1,0 +1,14 @@
+apiVersion: kinesisvideo.aws.upbound.io/v1alpha1
+kind: Stream
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataRetentionInHours: 1
+    deviceName: kinesis-video-device-name
+    mediaType: video/h264
+    name: terraform-kinesis-video-stream
+    tags:
+      Name: terraform-kinesis-video-stream
+  providerConfigRef:
+    name: example

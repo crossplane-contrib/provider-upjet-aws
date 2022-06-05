@@ -1,0 +1,24 @@
+apiVersion: iam.aws.upbound.io/v1alpha2
+kind: Policy
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: My test policy
+    name: test_policy
+    path: /
+    policy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Action = [
+                "ec2:Describe*",
+              ]
+              Effect   = "Allow"
+              Resource = "*"
+            },
+          ]
+        })}
+  providerConfigRef:
+    name: example

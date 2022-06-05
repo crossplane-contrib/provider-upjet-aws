@@ -1,0 +1,15 @@
+apiVersion: macie2.aws.upbound.io/v1alpha1
+kind: ClassificationJob
+metadata:
+  name: example
+spec:
+  forProvider:
+    jobType: ONE_TIME
+    name: NAME OF THE CLASSIFICATION JOB
+    s3JobDefinition:
+    - bucketDefinitions:
+      - accountId: ACCOUNT ID
+        buckets:
+        - S3 BUCKET NAME
+  providerConfigRef:
+    name: example

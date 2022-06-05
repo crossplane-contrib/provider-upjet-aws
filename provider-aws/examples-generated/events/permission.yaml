@@ -1,0 +1,10 @@
+apiVersion: events.aws.upbound.io/v1alpha1
+kind: Permission
+metadata:
+  name: example
+spec:
+  forProvider:
+    principal: "123456789012"
+    statementId: DevAccountAccess
+  providerConfigRef:
+    name: example

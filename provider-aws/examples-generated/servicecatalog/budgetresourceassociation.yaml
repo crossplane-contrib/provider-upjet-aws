@@ -1,0 +1,10 @@
+apiVersion: servicecatalog.aws.upbound.io/v1alpha1
+kind: BudgetResourceAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    budgetName: budget-pjtvyakdlyo3m
+    resourceId: prod-dnigbtea24ste
+  providerConfigRef:
+    name: example

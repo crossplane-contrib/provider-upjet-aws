@@ -1,0 +1,11 @@
+apiVersion: shield.aws.upbound.io/v1alpha1
+kind: ProtectionGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    aggregation: MAX
+    pattern: ALL
+    protectionGroupId: example
+  providerConfigRef:
+    name: example

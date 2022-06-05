@@ -1,0 +1,26 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: NetworkACL
+metadata:
+  name: example
+spec:
+  forProvider:
+    egress:
+    - action: allow
+      cidrBlock: 10.3.0.0/18
+      fromPort: 443
+      protocol: tcp
+      ruleNo: 200
+      toPort: 443
+    ingress:
+    - action: allow
+      cidrBlock: 10.3.0.0/18
+      fromPort: 80
+      protocol: tcp
+      ruleNo: 100
+      toPort: 80
+    tags:
+      Name: main
+    vpcIdRef:
+      name: example
+  providerConfigRef:
+    name: example

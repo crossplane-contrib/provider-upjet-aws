@@ -1,0 +1,10 @@
+apiVersion: ssm.aws.upbound.io/v1alpha1
+kind: PatchGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    baselineId: ${aws_ssm_patch_baseline.production.id}
+    patchGroup: patch-group-name
+  providerConfigRef:
+    name: example

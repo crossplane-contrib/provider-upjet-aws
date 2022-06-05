@@ -1,0 +1,11 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: VPCIpamPool
+metadata:
+  name: example
+spec:
+  forProvider:
+    addressFamily: ipv4
+    ipamScopeId: ${aws_vpc_ipam.example.private_default_scope_id}
+    locale: ${data.aws_region.current.name}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,12 @@
+apiVersion: guardduty.aws.upbound.io/v1alpha1
+kind: Detector
+metadata:
+  name: example
+spec:
+  forProvider:
+    datasources:
+    - s3Logs:
+      - enable: true
+    enable: true
+  providerConfigRef:
+    name: example

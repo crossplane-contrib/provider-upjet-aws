@@ -1,0 +1,22 @@
+apiVersion: resourcegroups.aws.upbound.io/v1alpha1
+kind: Group
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: test-group
+    resourceQuery:
+    - query: |
+        {
+          "ResourceTypeFilters": [
+            "AWS::EC2::Instance"
+          ],
+          "TagFilters": [
+            {
+              "Key": "Stage",
+              "Values": ["Test"]
+            }
+          ]
+        }
+  providerConfigRef:
+    name: example

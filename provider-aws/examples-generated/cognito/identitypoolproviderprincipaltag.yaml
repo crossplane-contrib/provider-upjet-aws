@@ -1,0 +1,13 @@
+apiVersion: cognito.aws.upbound.io/v1alpha1
+kind: IdentityPoolProviderPrincipalTag
+metadata:
+  name: example
+spec:
+  forProvider:
+    identityPoolId: ${aws_cognito_identity_pool.example.id}
+    identityProviderName: ${aws_cognito_user_pool.example.endpoint}
+    principalTags:
+      test: value
+    useDefaults: false
+  providerConfigRef:
+    name: example

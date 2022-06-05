@@ -1,0 +1,11 @@
+apiVersion: apigateway.aws.upbound.io/v1alpha1
+kind: BasePathMapping
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiId: ${aws_api_gateway_rest_api.example.id}
+    domainName: ${aws_api_gateway_domain_name.example.domain_name}
+    stageName: ${aws_api_gateway_stage.example.stage_name}
+  providerConfigRef:
+    name: example

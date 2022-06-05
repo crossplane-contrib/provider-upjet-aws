@@ -1,0 +1,12 @@
+apiVersion: servicecatalog.aws.upbound.io/v1alpha1
+kind: ProvisioningArtifact
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    productId: ${aws_servicecatalog_product.example.id}
+    templateUrl: https://${aws_s3_bucket.example.bucket_regional_domain_name}/${aws_s3_object.example.key}
+    type: CLOUD_FORMATION_TEMPLATE
+  providerConfigRef:
+    name: example

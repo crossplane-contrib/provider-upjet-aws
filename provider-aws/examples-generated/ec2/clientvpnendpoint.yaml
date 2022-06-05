@@ -1,0 +1,18 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: ClientVPNEndpoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    authenticationOptions:
+    - rootCertificateChainArn: ${aws_acm_certificate.root_cert.arn}
+      type: certificate-authentication
+    clientCidrBlock: 10.0.0.0/16
+    connectionLogOptions:
+    - cloudwatchLogGroup: Yada
+      cloudwatchLogStream: SampleLogStream1234
+      enabled: true
+    description: terraform-clientvpn-example
+    serverCertificateArn: ${aws_acm_certificate.cert.arn}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: storagegateway.aws.upbound.io/v1alpha1
+kind: StoredISCSIVolume
+metadata:
+  name: example
+spec:
+  forProvider:
+    diskId: ${data.aws_storagegateway_local_disk.test.id}
+    gatewayArn: ${aws_storagegateway_cache.example.gateway_arn}
+    networkInterfaceId: ${aws_instance.example.private_ip}
+    preserveExistingData: false
+    targetName: example
+  providerConfigRef:
+    name: example

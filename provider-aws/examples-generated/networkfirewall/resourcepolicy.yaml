@@ -1,0 +1,26 @@
+apiVersion: networkfirewall.aws.upbound.io/v1alpha1
+kind: ResourcePolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    policy: |-
+      ${jsonencode({
+          Statement = [{
+            Action = [
+              "network-firewall:ListFirewallPolicies",
+              "network-firewall:CreateFirewall",
+              "network-firewall:UpdateFirewall",
+              "network-firewall:AssociateFirewallPolicy"
+            ]
+            Effect   = "Allow"
+            Resource = aws_networkfirewall_firewall_policy.example.arn
+            Principal = {
+              AWS = "arn:aws:iam::123456789012:root"
+            }
+          }]
+          Version = "2012-10-17"
+        })}
+    resourceArn: ${aws_networkfirewall_firewall_policy.example.arn}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,23 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: DefaultNetworkACL
+metadata:
+  name: example
+spec:
+  forProvider:
+    defaultNetworkAclId: ${aws_vpc.mainvpc.default_network_acl_id}
+    egress:
+    - action: allow
+      cidrBlock: 0.0.0.0/0
+      fromPort: 0
+      protocol: -1
+      ruleNo: 100
+      toPort: 0
+    ingress:
+    - action: allow
+      cidrBlock: 0.0.0.0/0
+      fromPort: 0
+      protocol: -1
+      ruleNo: 100
+      toPort: 0
+  providerConfigRef:
+    name: example

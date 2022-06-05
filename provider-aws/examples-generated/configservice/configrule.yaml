@@ -1,0 +1,12 @@
+apiVersion: configservice.aws.upbound.io/v1alpha1
+kind: ConfigRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    source:
+    - owner: AWS
+      sourceIdentifier: S3_BUCKET_VERSIONING_ENABLED
+  providerConfigRef:
+    name: example

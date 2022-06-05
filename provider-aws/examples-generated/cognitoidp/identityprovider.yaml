@@ -1,0 +1,18 @@
+apiVersion: cognitoidp.aws.upbound.io/v1alpha1
+kind: IdentityProvider
+metadata:
+  name: example
+spec:
+  forProvider:
+    attributeMapping:
+      email: email
+      username: sub
+    providerDetails:
+      authorize_scopes: email
+      client_id: your client_id
+      client_secret: your client_secret
+    providerName: Google
+    providerType: Google
+    userPoolId: ${aws_cognito_user_pool.example.id}
+  providerConfigRef:
+    name: example

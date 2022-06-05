@@ -1,0 +1,15 @@
+apiVersion: appsync.aws.upbound.io/v1alpha1
+kind: Datasource
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiId: ${aws_appsync_graphql_api.example.id}
+    dynamodbConfig:
+    - tableName: GameScores
+    name: tf_appsync_example
+    serviceRoleArnRef:
+      name: example
+    type: AMAZON_DYNAMODB
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: iot.aws.upbound.io/v1alpha1
+kind: PolicyAttachment
+metadata:
+  name: example
+spec:
+  forProvider:
+    policy: PubSubToAnyTopic
+    target: ${aws_iot_certificate.cert.arn}
+  providerConfigRef:
+    name: example

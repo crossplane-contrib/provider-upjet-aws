@@ -1,0 +1,17 @@
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: RouteTable
+metadata:
+  name: example
+spec:
+  forProvider:
+    route:
+    - cidrBlock: 10.0.1.0/24
+      gatewayId: ${aws_internet_gateway.example.id}
+    - egressOnlyGatewayId: ${aws_egress_only_internet_gateway.example.id}
+      ipv6CidrBlock: ::/0
+    tags:
+      Name: example
+    vpcIdRef:
+      name: example
+  providerConfigRef:
+    name: example

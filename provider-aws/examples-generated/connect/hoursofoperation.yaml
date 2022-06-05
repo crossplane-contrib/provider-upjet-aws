@@ -1,0 +1,29 @@
+apiVersion: connect.aws.upbound.io/v1alpha1
+kind: HoursOfOperation
+metadata:
+  name: example
+spec:
+  forProvider:
+    config:
+    - day: MONDAY
+      endTime:
+      - hours: 23
+        minutes: 8
+      startTime:
+      - hours: 8
+        minutes: 0
+    - day: TUESDAY
+      endTime:
+      - hours: 21
+        minutes: 0
+      startTime:
+      - hours: 9
+        minutes: 0
+    description: Monday office hours
+    instanceId: aaaaaaaa-bbbb-cccc-dddd-111111111111
+    name: Office Hours
+    tags:
+      Name: Example Hours of Operation
+    timeZone: EST
+  providerConfigRef:
+    name: example

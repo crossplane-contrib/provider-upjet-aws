@@ -1,0 +1,9 @@
+apiVersion: securityhub.aws.upbound.io/v1alpha1
+kind: OrganizationAdminAccount
+metadata:
+  name: example
+spec:
+  forProvider:
+    adminAccountId: "123456789012"
+  providerConfigRef:
+    name: example

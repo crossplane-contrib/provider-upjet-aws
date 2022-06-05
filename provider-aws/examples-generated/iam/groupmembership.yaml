@@ -1,0 +1,13 @@
+apiVersion: iam.aws.upbound.io/v1alpha1
+kind: GroupMembership
+metadata:
+  name: example
+spec:
+  forProvider:
+    group: ${aws_iam_group.group.name}
+    name: tf-testing-group-membership
+    users:
+    - ${aws_iam_user.user_one.name}
+    - ${aws_iam_user.user_two.name}
+  providerConfigRef:
+    name: example

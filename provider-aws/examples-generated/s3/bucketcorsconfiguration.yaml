@@ -1,0 +1,24 @@
+apiVersion: s3.aws.upbound.io/v1alpha1
+kind: BucketCorsConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.example.bucket}
+    corsRule:
+    - allowedHeaders:
+      - '*'
+      allowedMethods:
+      - PUT
+      - POST
+      allowedOrigins:
+      - https://s3-website-test.hashicorp.com
+      exposeHeaders:
+      - ETag
+      maxAgeSeconds: 3000
+    - allowedMethods:
+      - GET
+      allowedOrigins:
+      - '*'
+  providerConfigRef:
+    name: example

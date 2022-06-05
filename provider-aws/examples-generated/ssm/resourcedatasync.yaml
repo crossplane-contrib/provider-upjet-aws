@@ -1,0 +1,12 @@
+apiVersion: ssm.aws.upbound.io/v1alpha1
+kind: ResourceDataSync
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: foo
+    s3Destination:
+    - bucketName: ${aws_s3_bucket.hoge.bucket}
+      region: ${aws_s3_bucket.hoge.region}
+  providerConfigRef:
+    name: example

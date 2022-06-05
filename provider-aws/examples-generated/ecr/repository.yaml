@@ -1,0 +1,11 @@
+apiVersion: ecr.aws.upbound.io/v1alpha2
+kind: Repository
+metadata:
+  name: example
+spec:
+  forProvider:
+    imageScanningConfiguration:
+    - scanOnPush: true
+    imageTagMutability: MUTABLE
+  providerConfigRef:
+    name: example

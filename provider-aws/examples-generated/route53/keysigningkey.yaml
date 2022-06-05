@@ -1,0 +1,13 @@
+apiVersion: route53.aws.upbound.io/v1alpha2
+kind: KeySigningKey
+metadata:
+  name: example
+spec:
+  forProvider:
+    hostedZoneIdRef:
+      name: example
+    keyManagementServiceArnRef:
+      name: example
+    name: example
+  providerConfigRef:
+    name: example

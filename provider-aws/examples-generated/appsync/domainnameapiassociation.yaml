@@ -1,0 +1,10 @@
+apiVersion: appsync.aws.upbound.io/v1alpha1
+kind: DomainNameAPIAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiId: ${aws_appsync_graphql_api.example.id}
+    domainName: ${aws_appsync_domain_name.example.domain_name}
+  providerConfigRef:
+    name: example

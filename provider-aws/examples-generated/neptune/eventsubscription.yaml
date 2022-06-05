@@ -1,0 +1,27 @@
+apiVersion: neptune.aws.upbound.io/v1alpha2
+kind: EventSubscription
+metadata:
+  name: example
+spec:
+  forProvider:
+    eventCategories:
+    - maintenance
+    - availability
+    - creation
+    - backup
+    - restoration
+    - recovery
+    - deletion
+    - failover
+    - failure
+    - notification
+    - configuration change
+    - read replica
+    snsTopicArn: ${aws_sns_topic.default.arn}
+    sourceIds:
+    - ${aws_neptune_cluster_instance.example.id}
+    sourceType: db-instance
+    tags:
+      env: test
+  providerConfigRef:
+    name: example

@@ -1,0 +1,12 @@
+apiVersion: s3.aws.upbound.io/v1alpha1
+kind: BucketLifecycleConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.bucket.id}
+    rule:
+    - id: rule-1
+      status: Enabled
+  providerConfigRef:
+    name: example

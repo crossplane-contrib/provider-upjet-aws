@@ -1,0 +1,14 @@
+apiVersion: dms.aws.upbound.io/v1alpha1
+kind: ReplicationSubnetGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    replicationSubnetGroupDescription: Test replication subnet group
+    replicationSubnetGroupId: test-dms-replication-subnet-group-tf
+    subnetIdRefs:
+    - name: example
+    tags:
+      Name: test
+  providerConfigRef:
+    name: example

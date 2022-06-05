@@ -1,0 +1,12 @@
+apiVersion: connect.aws.upbound.io/v1alpha1
+kind: UserHierarchyStructure
+metadata:
+  name: example
+spec:
+  forProvider:
+    hierarchyStructure:
+    - levelOne:
+      - name: levelone
+    instanceId: aaaaaaaa-bbbb-cccc-dddd-111111111111
+  providerConfigRef:
+    name: example

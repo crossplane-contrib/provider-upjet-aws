@@ -1,0 +1,11 @@
+apiVersion: cloud9.aws.upbound.io/v1alpha1
+kind: EnvironmentMembership
+metadata:
+  name: example
+spec:
+  forProvider:
+    environmentId: ${aws_cloud9_environment_ec2.test.id}
+    permissions: read-only
+    userArn: ${aws_iam_user.test.arn}
+  providerConfigRef:
+    name: example

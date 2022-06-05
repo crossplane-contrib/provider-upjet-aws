@@ -1,0 +1,12 @@
+apiVersion: pinpoint.aws.upbound.io/v1alpha1
+kind: EmailChannel
+metadata:
+  name: example
+spec:
+  forProvider:
+    applicationId: ${aws_pinpoint_app.app.application_id}
+    fromAddress: user@example.com
+    roleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

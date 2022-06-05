@@ -1,0 +1,10 @@
+apiVersion: backup.aws.upbound.io/v1alpha1
+kind: Selection
+metadata:
+  name: example
+spec:
+  forProvider:
+    iamRoleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

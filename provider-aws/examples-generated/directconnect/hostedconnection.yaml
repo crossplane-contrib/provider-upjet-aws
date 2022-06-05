@@ -1,0 +1,13 @@
+apiVersion: directconnect.aws.upbound.io/v1alpha1
+kind: HostedConnection
+metadata:
+  name: example
+spec:
+  forProvider:
+    bandwidth: 100Mbps
+    connectionId: dxcon-ffabc123
+    name: tf-dx-hosted-connection
+    ownerAccountId: "123456789012"
+    vlan: 1
+  providerConfigRef:
+    name: example

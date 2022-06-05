@@ -1,0 +1,9 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: SerialConsoleAccess
+metadata:
+  name: example
+spec:
+  forProvider:
+    enabled: true
+  providerConfigRef:
+    name: example

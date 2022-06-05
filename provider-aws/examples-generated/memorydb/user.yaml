@@ -1,0 +1,16 @@
+apiVersion: memorydb.aws.upbound.io/v1alpha1
+kind: User
+metadata:
+  name: example
+spec:
+  forProvider:
+    accessString: on ~* &* +@all
+    authenticationMode:
+    - passwordsSecretRef:
+      - key: example-key
+        name: example-secret
+        namespace: crossplane-system
+      type: password
+    userName: my-user
+  providerConfigRef:
+    name: example

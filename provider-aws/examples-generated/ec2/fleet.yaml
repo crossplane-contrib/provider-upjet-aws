@@ -1,0 +1,15 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: Fleet
+metadata:
+  name: example
+spec:
+  forProvider:
+    launchTemplateConfig:
+    - launchTemplateSpecification:
+      - launchTemplateId: ${aws_launch_template.example.id}
+        version: ${aws_launch_template.example.latest_version}
+    targetCapacitySpecification:
+    - defaultTargetCapacityType: spot
+      totalTargetCapacity: 5
+  providerConfigRef:
+    name: example

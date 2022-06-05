@@ -1,0 +1,12 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: TransitGatewayConnect
+metadata:
+  name: example
+spec:
+  forProvider:
+    subnet_ids:
+    - ${aws_subnet.example.id}
+    transitGatewayId: ${aws_ec2_transit_gateway.example.id}
+    vpc_id: ${aws_vpc.example.id}
+  providerConfigRef:
+    name: example

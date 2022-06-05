@@ -1,0 +1,13 @@
+apiVersion: imagebuilder.aws.upbound.io/v1alpha1
+kind: ImagePipeline
+metadata:
+  name: example
+spec:
+  forProvider:
+    imageRecipeArn: ${aws_imagebuilder_image_recipe.example.arn}
+    infrastructureConfigurationArn: ${aws_imagebuilder_infrastructure_configuration.example.arn}
+    name: example
+    schedule:
+    - scheduleExpression: cron(0 0 * * ? *)
+  providerConfigRef:
+    name: example

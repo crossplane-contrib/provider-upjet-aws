@@ -1,0 +1,26 @@
+apiVersion: budgets.aws.upbound.io/v1alpha1
+kind: Budget
+metadata:
+  name: example
+spec:
+  forProvider:
+    budgetType: COST
+    costFilter:
+    - name: Service
+      values:
+      - Amazon Elastic Compute Cloud - Compute
+    limitAmount: "1200"
+    limitUnit: USD
+    name: budget-ec2-monthly
+    notification:
+    - comparisonOperator: GREATER_THAN
+      notificationType: FORECASTED
+      subscriberEmailAddresses:
+      - test@example.com
+      threshold: 100
+      thresholdType: PERCENTAGE
+    timePeriodEnd: 2087-06-15_00:00
+    timePeriodStart: 2017-07-01_00:00
+    timeUnit: MONTHLY
+  providerConfigRef:
+    name: example

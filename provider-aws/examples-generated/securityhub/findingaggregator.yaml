@@ -1,0 +1,9 @@
+apiVersion: securityhub.aws.upbound.io/v1alpha1
+kind: FindingAggregator
+metadata:
+  name: example
+spec:
+  forProvider:
+    linkingMode: ALL_REGIONS
+  providerConfigRef:
+    name: example

@@ -1,0 +1,15 @@
+apiVersion: appmesh.aws.upbound.io/v1alpha1
+kind: VirtualRouter
+metadata:
+  name: example
+spec:
+  forProvider:
+    meshName: ${aws_appmesh_mesh.simple.id}
+    name: serviceB
+    spec:
+    - listener:
+      - portMapping:
+        - port: 8080
+          protocol: http
+  providerConfigRef:
+    name: example

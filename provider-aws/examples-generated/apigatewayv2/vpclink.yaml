@@ -1,0 +1,15 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1alpha1
+kind: VPCLink
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    securityGroupIdRefs:
+    - name: example
+    subnetIdRefs:
+      name: example
+    tags:
+      Usage: example
+  providerConfigRef:
+    name: example

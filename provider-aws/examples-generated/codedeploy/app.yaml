@@ -1,0 +1,10 @@
+apiVersion: codedeploy.aws.upbound.io/v1alpha1
+kind: App
+metadata:
+  name: example
+spec:
+  forProvider:
+    computePlatform: ECS
+    name: example
+  providerConfigRef:
+    name: example

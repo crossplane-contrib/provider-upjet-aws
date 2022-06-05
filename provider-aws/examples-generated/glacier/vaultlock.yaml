@@ -1,0 +1,11 @@
+apiVersion: glacier.aws.upbound.io/v1alpha1
+kind: VaultLock
+metadata:
+  name: example
+spec:
+  forProvider:
+    completeLock: false
+    policy: ${data.aws_iam_policy_document.example.json}
+    vaultName: MyArchive
+  providerConfigRef:
+    name: example

@@ -1,0 +1,9 @@
+apiVersion: ses.aws.upbound.io/v1alpha1
+kind: DomainIdentity
+metadata:
+  name: example
+spec:
+  forProvider:
+    domain: example.com
+  providerConfigRef:
+    name: example

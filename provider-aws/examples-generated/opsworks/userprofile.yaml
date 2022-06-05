@@ -1,0 +1,10 @@
+apiVersion: opsworks.aws.upbound.io/v1alpha1
+kind: UserProfile
+metadata:
+  name: example
+spec:
+  forProvider:
+    sshUsername: my_user
+    userArn: ${aws_iam_user.user.arn}
+  providerConfigRef:
+    name: example

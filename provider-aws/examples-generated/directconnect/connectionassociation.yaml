@@ -1,0 +1,10 @@
+apiVersion: directconnect.aws.upbound.io/v1alpha1
+kind: ConnectionAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    connectionId: ${aws_dx_connection.example.id}
+    lagId: ${aws_dx_lag.example.id}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,12 @@
+apiVersion: cloudfront.aws.upbound.io/v1alpha1
+kind: MonitoringSubscription
+metadata:
+  name: example
+spec:
+  forProvider:
+    distributionId: ${aws_cloudfront_distribution.example.id}
+    monitoringSubscription:
+    - realtimeMetricsSubscriptionConfig:
+      - realtimeMetricsSubscriptionStatus: Enabled
+  providerConfigRef:
+    name: example

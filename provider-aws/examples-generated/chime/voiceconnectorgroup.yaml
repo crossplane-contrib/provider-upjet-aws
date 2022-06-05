@@ -1,0 +1,14 @@
+apiVersion: chime.aws.upbound.io/v1alpha1
+kind: VoiceConnectorGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    connector:
+    - priority: 1
+      voiceConnectorId: ${aws_chime_voice_connector.vc1.id}
+    - priority: 3
+      voiceConnectorId: ${aws_chime_voice_connector.vc2.id}
+    name: test-group
+  providerConfigRef:
+    name: example

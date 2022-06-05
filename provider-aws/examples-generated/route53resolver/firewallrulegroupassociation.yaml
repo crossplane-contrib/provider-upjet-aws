@@ -1,0 +1,13 @@
+apiVersion: route53resolver.aws.upbound.io/v1alpha1
+kind: FirewallRuleGroupAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    firewallRuleGroupId: ${aws_route53_resolver_firewall_rule_group.example.id}
+    name: example
+    priority: 100
+    vpcIdRef:
+      name: example
+  providerConfigRef:
+    name: example

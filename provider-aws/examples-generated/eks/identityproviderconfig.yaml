@@ -1,0 +1,14 @@
+apiVersion: eks.aws.upbound.io/v1alpha2
+kind: IdentityProviderConfig
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterNameRef:
+      name: example
+    oidc:
+    - clientId: your client_id
+      identityProviderConfigName: example
+      issuerUrl: your issuer_url
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: datasync.aws.upbound.io/v1alpha1
+kind: Task
+metadata:
+  name: example
+spec:
+  forProvider:
+    destinationLocationArn: ${aws_datasync_location_s3.destination.arn}
+    name: example
+    options:
+    - bytesPerSecond: -1
+    sourceLocationArn: ${aws_datasync_location_nfs.source.arn}
+  providerConfigRef:
+    name: example

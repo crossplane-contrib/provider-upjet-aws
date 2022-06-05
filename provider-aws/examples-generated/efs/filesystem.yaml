@@ -1,0 +1,11 @@
+apiVersion: efs.aws.upbound.io/v1alpha1
+kind: FileSystem
+metadata:
+  name: example
+spec:
+  forProvider:
+    creationToken: my-product
+    tags:
+      Name: MyProduct
+  providerConfigRef:
+    name: example

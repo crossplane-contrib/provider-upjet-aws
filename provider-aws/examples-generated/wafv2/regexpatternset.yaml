@@ -1,0 +1,17 @@
+apiVersion: wafv2.aws.upbound.io/v1alpha1
+kind: RegexPatternSet
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: Example regex pattern set
+    name: example
+    regularExpression:
+    - regexString: one
+    - regexString: two
+    scope: REGIONAL
+    tags:
+      Tag1: Value1
+      Tag2: Value2
+  providerConfigRef:
+    name: example

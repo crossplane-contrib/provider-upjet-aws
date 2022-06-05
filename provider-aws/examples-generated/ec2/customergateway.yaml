@@ -1,0 +1,13 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: CustomerGateway
+metadata:
+  name: example
+spec:
+  forProvider:
+    bgpAsn: 65000
+    ipAddress: 172.83.124.10
+    tags:
+      Name: main-customer-gateway
+    type: ipsec.1
+  providerConfigRef:
+    name: example

@@ -1,0 +1,11 @@
+apiVersion: s3.aws.upbound.io/v1alpha1
+kind: BucketVersioning
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.example.id}
+    versioningConfiguration:
+    - status: Enabled
+  providerConfigRef:
+    name: example

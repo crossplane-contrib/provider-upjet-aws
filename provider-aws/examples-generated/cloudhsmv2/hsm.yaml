@@ -1,0 +1,11 @@
+apiVersion: cloudhsmv2.aws.upbound.io/v1alpha1
+kind: HSM
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterId: ${data.aws_cloudhsm_v2_cluster.cluster.cluster_id}
+    subnetIdRef:
+      name: example
+  providerConfigRef:
+    name: example

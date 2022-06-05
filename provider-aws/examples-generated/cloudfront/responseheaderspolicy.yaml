@@ -1,0 +1,22 @@
+apiVersion: cloudfront.aws.upbound.io/v1alpha1
+kind: ResponseHeadersPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    comment: test comment
+    corsConfig:
+    - accessControlAllowCredentials: true
+      accessControlAllowHeaders:
+      - items:
+        - test
+      accessControlAllowMethods:
+      - items:
+        - GET
+      accessControlAllowOrigins:
+      - items:
+        - test.example.comtest
+      originOverride: true
+    name: example-policy
+  providerConfigRef:
+    name: example

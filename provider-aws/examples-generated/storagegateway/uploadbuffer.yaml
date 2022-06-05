@@ -1,0 +1,10 @@
+apiVersion: storagegateway.aws.upbound.io/v1alpha1
+kind: UploadBuffer
+metadata:
+  name: example
+spec:
+  forProvider:
+    diskPath: ${data.aws_storagegateway_local_disk.test.disk_path}
+    gatewayArn: ${aws_storagegateway_gateway.test.arn}
+  providerConfigRef:
+    name: example

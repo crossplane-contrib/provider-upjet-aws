@@ -1,0 +1,12 @@
+apiVersion: elb.aws.upbound.io/v1alpha1
+kind: LBCookieStickinessPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    cookieExpirationPeriod: 600
+    lbPort: 80
+    loadBalancer: ${aws_elb.lb.id}
+    name: foo-policy
+  providerConfigRef:
+    name: example

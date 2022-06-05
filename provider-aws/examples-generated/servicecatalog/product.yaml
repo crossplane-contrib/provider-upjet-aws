@@ -1,0 +1,16 @@
+apiVersion: servicecatalog.aws.upbound.io/v1alpha1
+kind: Product
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    owner:
+    - ${aws_security_group.example.id}
+    provisioningArtifactParameters:
+    - templateUrl: https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/temp1.json
+    tags:
+      foo: bar
+    type: ${aws_subnet.main.id}
+  providerConfigRef:
+    name: example

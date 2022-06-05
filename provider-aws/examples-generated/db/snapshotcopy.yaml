@@ -1,0 +1,10 @@
+apiVersion: db.aws.upbound.io/v1alpha1
+kind: SnapshotCopy
+metadata:
+  name: example
+spec:
+  forProvider:
+    sourceDbSnapshotIdentifier: ${aws_db_snapshot.example.db_snapshot_arn}
+    targetDbSnapshotIdentifier: testsnapshot1234-copy
+  providerConfigRef:
+    name: example

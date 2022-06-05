@@ -1,0 +1,25 @@
+apiVersion: dms.aws.upbound.io/v1alpha1
+kind: ReplicationInstance
+metadata:
+  name: example
+spec:
+  forProvider:
+    allocatedStorage: 20
+    applyImmediately: true
+    autoMinorVersionUpgrade: true
+    availabilityZone: us-west-2c
+    engineVersion: 3.1.4
+    kmsKeyArnRef:
+      name: example
+    multiAz: false
+    preferredMaintenanceWindow: sun:10:30-sun:14:30
+    publiclyAccessible: true
+    replicationInstanceClass: dms.t2.micro
+    replicationInstanceId: test-dms-replication-instance-tf
+    replicationSubnetGroupId: ${aws_dms_replication_subnet_group.test-dms-replication-subnet-group-tf.id}
+    tags:
+      Name: test
+    vpcSecurityGroupIdRefs:
+    - name: example
+  providerConfigRef:
+    name: example

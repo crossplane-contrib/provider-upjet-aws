@@ -1,0 +1,10 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: TrafficMirrorTarget
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: NLB target
+    networkLoadBalancerArn: ${aws_lb.lb.arn}
+  providerConfigRef:
+    name: example

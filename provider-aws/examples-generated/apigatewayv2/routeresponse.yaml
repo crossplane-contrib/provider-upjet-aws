@@ -1,0 +1,11 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1alpha1
+kind: RouteResponse
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiId: ${aws_apigatewayv2_api.example.id}
+    routeId: ${aws_apigatewayv2_route.example.id}
+    routeResponseKey: $default
+  providerConfigRef:
+    name: example

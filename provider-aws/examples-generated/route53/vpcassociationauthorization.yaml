@@ -1,0 +1,12 @@
+apiVersion: route53.aws.upbound.io/v1alpha2
+kind: VPCAssociationAuthorization
+metadata:
+  name: example
+spec:
+  forProvider:
+    vpcIdRef:
+      name: example
+    zoneIdRef:
+      name: example
+  providerConfigRef:
+    name: example

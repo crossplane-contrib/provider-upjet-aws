@@ -1,0 +1,18 @@
+apiVersion: glue.aws.upbound.io/v1alpha1
+kind: Classifier
+metadata:
+  name: example
+spec:
+  forProvider:
+    csvClassifier:
+    - allowSingleColumn: false
+      containsHeader: PRESENT
+      delimiter: ','
+      disableValueTrimming: false
+      header:
+      - example1
+      - example2
+      quoteSymbol: ''''
+    name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,12 @@
+apiVersion: apigateway.aws.upbound.io/v1alpha1
+kind: RequestValidator
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    restApiId: ${aws_api_gateway_rest_api.example.id}
+    validateRequestBody: true
+    validateRequestParameters: true
+  providerConfigRef:
+    name: example

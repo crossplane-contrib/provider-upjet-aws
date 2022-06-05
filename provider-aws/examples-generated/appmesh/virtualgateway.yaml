@@ -1,0 +1,17 @@
+apiVersion: appmesh.aws.upbound.io/v1alpha1
+kind: VirtualGateway
+metadata:
+  name: example
+spec:
+  forProvider:
+    meshName: example-service-mesh
+    name: example-virtual-gateway
+    spec:
+    - listener:
+      - portMapping:
+        - port: 8080
+          protocol: http
+    tags:
+      Environment: test
+  providerConfigRef:
+    name: example

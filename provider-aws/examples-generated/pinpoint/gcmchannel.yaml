@@ -1,0 +1,13 @@
+apiVersion: pinpoint.aws.upbound.io/v1alpha1
+kind: GCMChannel
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiKeySecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    applicationId: ${aws_pinpoint_app.app.application_id}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: macie2.aws.upbound.io/v1alpha1
+kind: Account
+metadata:
+  name: example
+spec:
+  forProvider:
+    findingPublishingFrequency: FIFTEEN_MINUTES
+    status: ENABLED
+  providerConfigRef:
+    name: example

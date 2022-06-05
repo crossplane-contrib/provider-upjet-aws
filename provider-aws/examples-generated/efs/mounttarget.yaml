@@ -1,0 +1,11 @@
+apiVersion: efs.aws.upbound.io/v1alpha1
+kind: MountTarget
+metadata:
+  name: example
+spec:
+  forProvider:
+    fileSystemId: ${aws_efs_file_system.foo.id}
+    subnetIdRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,9 @@
+apiVersion: iam.aws.upbound.io/v1alpha1
+kind: AccountAlias
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountAlias: my-account-alias
+  providerConfigRef:
+    name: example

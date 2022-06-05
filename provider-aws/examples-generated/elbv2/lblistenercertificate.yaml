@@ -1,0 +1,10 @@
+apiVersion: elbv2.aws.upbound.io/v1alpha1
+kind: LBListenerCertificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    certificateArn: ${aws_acm_certificate.example.arn}
+    listenerArn: ${aws_lb_listener.front_end.arn}
+  providerConfigRef:
+    name: example

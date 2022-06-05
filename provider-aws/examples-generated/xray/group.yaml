@@ -1,0 +1,13 @@
+apiVersion: xray.aws.upbound.io/v1alpha1
+kind: Group
+metadata:
+  name: example
+spec:
+  forProvider:
+    filterExpression: responsetime > 5
+    groupName: example
+    insightsConfiguration:
+    - insightsEnabled: true
+      notificationsEnabled: true
+  providerConfigRef:
+    name: example

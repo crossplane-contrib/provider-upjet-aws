@@ -1,0 +1,15 @@
+apiVersion: appintegrations.aws.upbound.io/v1alpha1
+kind: EventIntegration
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: Example Description
+    eventFilter:
+    - source: aws.partner/examplepartner.com
+    eventbridgeBus: default
+    name: example-name
+    tags:
+      Name: Example Event Integration
+  providerConfigRef:
+    name: example

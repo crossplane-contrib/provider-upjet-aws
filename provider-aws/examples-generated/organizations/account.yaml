@@ -1,0 +1,10 @@
+apiVersion: organizations.aws.upbound.io/v1alpha1
+kind: Account
+metadata:
+  name: example
+spec:
+  forProvider:
+    email: john@doe.org
+    name: my_new_account
+  providerConfigRef:
+    name: example

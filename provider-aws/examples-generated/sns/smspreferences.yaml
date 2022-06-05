@@ -1,0 +1,8 @@
+apiVersion: sns.aws.upbound.io/v1alpha1
+kind: SMSPreferences
+metadata:
+  name: example
+spec:
+  forProvider: {}
+  providerConfigRef:
+    name: example

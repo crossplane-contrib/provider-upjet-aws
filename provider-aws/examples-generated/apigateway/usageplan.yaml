@@ -1,0 +1,23 @@
+apiVersion: apigateway.aws.upbound.io/v1alpha1
+kind: UsagePlan
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiStages:
+    - apiId: ${aws_api_gateway_rest_api.example.id}
+      stage: ${aws_api_gateway_stage.development.stage_name}
+    - apiId: ${aws_api_gateway_rest_api.example.id}
+      stage: ${aws_api_gateway_stage.production.stage_name}
+    description: my description
+    name: my-usage-plan
+    productCode: MYCODE
+    quotaSettings:
+    - limit: 20
+      offset: 2
+      period: WEEK
+    throttleSettings:
+    - burstLimit: 5
+      rateLimit: 10
+  providerConfigRef:
+    name: example

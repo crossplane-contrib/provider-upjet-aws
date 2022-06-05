@@ -1,0 +1,11 @@
+apiVersion: appstream.aws.upbound.io/v1alpha1
+kind: UserStackAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    authenticationType: ${aws_appstream_user.test.authentication_type}
+    stackName: stack name
+    userName: ${aws_appstream_user.test.user_name}
+  providerConfigRef:
+    name: example

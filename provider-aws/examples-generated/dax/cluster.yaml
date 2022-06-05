@@ -1,0 +1,13 @@
+apiVersion: dax.aws.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterName: cluster-example
+    iamRoleArnRef:
+      name: example
+    nodeType: dax.r4.large
+    replicationFactor: 1
+  providerConfigRef:
+    name: example

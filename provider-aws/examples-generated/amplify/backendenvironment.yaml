@@ -1,0 +1,12 @@
+apiVersion: amplify.aws.upbound.io/v1alpha1
+kind: BackendEnvironment
+metadata:
+  name: example
+spec:
+  forProvider:
+    appId: ${aws_amplify_app.example.id}
+    deploymentArtifacts: app-example-deployment
+    environmentName: example
+    stackName: amplify-app-example
+  providerConfigRef:
+    name: example

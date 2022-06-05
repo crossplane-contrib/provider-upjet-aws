@@ -1,0 +1,10 @@
+apiVersion: schemas.aws.upbound.io/v1alpha1
+kind: Discoverer
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: Auto discover event schemas
+    sourceArn: ${aws_cloudwatch_event_bus.messenger.arn}
+  providerConfigRef:
+    name: example

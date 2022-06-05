@@ -1,0 +1,11 @@
+apiVersion: networkmanager.aws.upbound.io/v1alpha1
+kind: TransitGatewayConnectPeerAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    deviceId: ${aws_networkmanager_device.example.id}
+    globalNetworkId: ${aws_networkmanager_global_network.example.id}
+    transitGatewayConnectPeerArn: ${aws_ec2_transit_gateway_connect_peer.example.arn}
+  providerConfigRef:
+    name: example

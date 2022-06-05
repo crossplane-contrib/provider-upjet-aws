@@ -1,0 +1,20 @@
+apiVersion: autoscaling.aws.upbound.io/v1alpha1
+kind: LifecycleHook
+metadata:
+  name: example
+spec:
+  forProvider:
+    autoscalingGroupName: ${aws_autoscaling_group.foobar.name}
+    defaultResult: CONTINUE
+    heartbeatTimeout: 2000
+    lifecycleTransition: autoscaling:EC2_INSTANCE_LAUNCHING
+    name: foobar
+    notificationMetadata: |
+      {
+        "foo": "bar"
+      }
+    notificationTargetArn: arn:aws:sqs:us-east-1:444455556666:queue1*
+    roleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

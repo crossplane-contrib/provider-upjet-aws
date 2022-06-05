@@ -1,0 +1,10 @@
+apiVersion: neptune.aws.upbound.io/v1alpha2
+kind: ClusterSnapshot
+metadata:
+  name: example
+spec:
+  forProvider:
+    dbClusterIdentifierRef:
+      name: example
+  providerConfigRef:
+    name: example

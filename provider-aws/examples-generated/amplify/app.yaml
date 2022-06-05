@@ -1,0 +1,33 @@
+apiVersion: amplify.aws.upbound.io/v1alpha1
+kind: App
+metadata:
+  name: example
+spec:
+  forProvider:
+    buildSpec: |
+      version: 0.1
+      frontend:
+        phases:
+          preBuild:
+            commands:
+              - yarn install
+          build:
+            commands:
+              - yarn run build
+        artifacts:
+          baseDirectory: build
+          files:
+            - '**/*'
+        cache:
+          paths:
+            - node_modules/**/*
+    customRule:
+    - source: /<*>
+      status: "404"
+      target: /index.html
+    environmentVariables:
+      ENV: test
+    name: example
+    repository: https://github.com/example/app
+  providerConfigRef:
+    name: example

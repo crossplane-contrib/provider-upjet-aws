@@ -1,0 +1,14 @@
+apiVersion: elasticbeanstalk.aws.upbound.io/v1alpha1
+kind: Application
+metadata:
+  name: example
+spec:
+  forProvider:
+    appversionLifecycle:
+    - deleteSourceFromS3: true
+      maxCount: 128
+      serviceRole: ${aws_iam_role.beanstalk_service.arn}
+    description: tf-test-desc
+    name: tf-test-name
+  providerConfigRef:
+    name: example

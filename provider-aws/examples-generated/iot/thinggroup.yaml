@@ -1,0 +1,9 @@
+apiVersion: iot.aws.upbound.io/v1alpha1
+kind: ThingGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: parent
+  providerConfigRef:
+    name: example

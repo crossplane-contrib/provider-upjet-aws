@@ -1,0 +1,9 @@
+apiVersion: mediastore.aws.upbound.io/v1alpha1
+kind: Container
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+  providerConfigRef:
+    name: example

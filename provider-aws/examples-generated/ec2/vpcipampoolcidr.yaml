@@ -1,0 +1,10 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: VPCIpamPoolCidr
+metadata:
+  name: example
+spec:
+  forProvider:
+    cidr: 172.2.0.0/16
+    ipamPoolId: ${aws_vpc_ipam_pool.example.id}
+  providerConfigRef:
+    name: example

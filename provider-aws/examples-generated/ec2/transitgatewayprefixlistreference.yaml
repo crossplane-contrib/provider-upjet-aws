@@ -1,0 +1,11 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: TransitGatewayPrefixListReference
+metadata:
+  name: example
+spec:
+  forProvider:
+    prefixListId: ${aws_ec2_managed_prefix_list.example.id}
+    transitGatewayAttachmentId: ${aws_ec2_transit_gateway_vpc_attachment.example.id}
+    transitGatewayRouteTableId: ${aws_ec2_transit_gateway.example.association_default_route_table_id}
+  providerConfigRef:
+    name: example

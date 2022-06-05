@@ -1,0 +1,9 @@
+apiVersion: appmesh.aws.upbound.io/v1alpha1
+kind: Mesh
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: simpleapp
+  providerConfigRef:
+    name: example

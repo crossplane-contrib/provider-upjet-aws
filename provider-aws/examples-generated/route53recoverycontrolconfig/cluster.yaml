@@ -1,0 +1,9 @@
+apiVersion: route53recoverycontrolconfig.aws.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: georgefitzgerald
+  providerConfigRef:
+    name: example

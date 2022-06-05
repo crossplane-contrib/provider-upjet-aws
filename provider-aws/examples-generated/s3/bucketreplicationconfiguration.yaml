@@ -1,0 +1,19 @@
+apiVersion: s3.aws.upbound.io/v1alpha1
+kind: BucketReplicationConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.source.id}
+    provider: ${aws.central}
+    role: ${aws_iam_role.replication.arn}
+    rule:
+    - destination:
+      - bucket: ${aws_s3_bucket.destination.arn}
+        storageClass: STANDARD
+      filter:
+      - prefix: foo
+      id: foobar
+      status: Enabled
+  providerConfigRef:
+    name: example

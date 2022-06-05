@@ -1,0 +1,12 @@
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: Instance
+metadata:
+  name: example
+spec:
+  forProvider:
+    ami: ${data.aws_ami.ubuntu.id}
+    instanceType: t3.micro
+    tags:
+      Name: HelloWorld
+  providerConfigRef:
+    name: example

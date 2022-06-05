@@ -1,0 +1,18 @@
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: SecurityGroupRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    cidrBlocks:
+    - ${aws_vpc.example.cidr_block}
+    fromPort: 0
+    ipv6CidrBlocks:
+    - ${aws_vpc.example.ipv6_cidr_block}
+    protocol: tcp
+    securityGroupIdRef:
+      name: example
+    toPort: 65535
+    type: ingress
+  providerConfigRef:
+    name: example

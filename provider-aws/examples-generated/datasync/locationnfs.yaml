@@ -1,0 +1,13 @@
+apiVersion: datasync.aws.upbound.io/v1alpha1
+kind: LocationNFS
+metadata:
+  name: example
+spec:
+  forProvider:
+    onPremConfig:
+    - agentArns:
+      - ${aws_datasync_agent.example.arn}
+    serverHostname: nfs.example.com
+    subdirectory: /exported/path
+  providerConfigRef:
+    name: example

@@ -1,0 +1,12 @@
+apiVersion: ses.aws.upbound.io/v1alpha1
+kind: IdentityNotificationTopic
+metadata:
+  name: example
+spec:
+  forProvider:
+    identity: example.com
+    includeOriginalHeaders: true
+    notificationType: Bounce
+    topicArn: ${aws_sns_topic.example.arn}
+  providerConfigRef:
+    name: example

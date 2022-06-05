@@ -1,0 +1,13 @@
+apiVersion: grafana.aws.upbound.io/v1alpha1
+kind: RoleAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    role: ADMIN
+    userIds:
+    - USER_ID_1
+    - USER_ID_2
+    workspaceId: ${aws_grafana_workspace.example.id}
+  providerConfigRef:
+    name: example

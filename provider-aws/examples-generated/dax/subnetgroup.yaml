@@ -1,0 +1,11 @@
+apiVersion: dax.aws.upbound.io/v1alpha1
+kind: SubnetGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    subnetIdRefs:
+    - name: example
+  providerConfigRef:
+    name: example

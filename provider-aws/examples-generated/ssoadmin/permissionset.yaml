@@ -1,0 +1,13 @@
+apiVersion: ssoadmin.aws.upbound.io/v1alpha1
+kind: PermissionSet
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: An example
+    instanceArn: ${tolist(data.aws_ssoadmin_instances.example.arns)[0]}
+    name: Example
+    relayState: https://s3.console.aws.amazon.com/s3/home?region=us-east-1#
+    sessionDuration: PT2H
+  providerConfigRef:
+    name: example

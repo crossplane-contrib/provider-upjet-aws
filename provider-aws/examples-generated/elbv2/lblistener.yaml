@@ -1,0 +1,18 @@
+apiVersion: elbv2.aws.upbound.io/v1alpha2
+kind: LBListener
+metadata:
+  name: example
+spec:
+  forProvider:
+    certificateArn: arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4
+    defaultAction:
+    - targetGroupArnRef:
+        name: example
+      type: forward
+    loadBalancerArnRef:
+      name: example
+    port: "443"
+    protocol: HTTPS
+    sslPolicy: ELBSecurityPolicy-2016-08
+  providerConfigRef:
+    name: example

@@ -1,0 +1,12 @@
+apiVersion: lambda.aws.upbound.io/v1alpha1
+kind: LayerVersion
+metadata:
+  name: example
+spec:
+  forProvider:
+    compatibleRuntimes:
+    - nodejs12.x
+    filename: lambda_layer_payload.zip
+    layerName: lambda_layer_name
+  providerConfigRef:
+    name: example

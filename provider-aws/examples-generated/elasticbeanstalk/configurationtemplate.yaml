@@ -1,0 +1,11 @@
+apiVersion: elasticbeanstalk.aws.upbound.io/v1alpha1
+kind: ConfigurationTemplate
+metadata:
+  name: example
+spec:
+  forProvider:
+    application: tf-test-name
+    name: tf-test-template-config
+    solutionStackName: 64bit Amazon Linux 2015.09 v2.0.8 running Go 1.4
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: VPCPeeringConnection
+metadata:
+  name: example
+spec:
+  forProvider:
+    peerOwnerId: ${var.peer_owner_id}
+    peerVpcidRef:
+      name: example
+    vpcIdRef:
+      name: example
+  providerConfigRef:
+    name: example

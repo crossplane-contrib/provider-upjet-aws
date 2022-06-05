@@ -1,0 +1,12 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: CarrierGateway
+metadata:
+  name: example
+spec:
+  forProvider:
+    tags:
+      Name: example-carrier-gateway
+    vpcIdRef:
+      name: example
+  providerConfigRef:
+    name: example

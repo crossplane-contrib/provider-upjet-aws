@@ -1,0 +1,11 @@
+apiVersion: networkmanager.aws.upbound.io/v1alpha1
+kind: CustomerGatewayAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    customerGatewayArn: ${aws_customer_gateway.example.arn}
+    deviceId: ${aws_networkmanager_device.example.id}
+    globalNetworkId: ${aws_networkmanager_global_network.example.id}
+  providerConfigRef:
+    name: example

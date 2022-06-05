@@ -1,0 +1,10 @@
+apiVersion: schemas.aws.upbound.io/v1alpha1
+kind: Registry
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: A custom schema registry
+    name: my_own_registry
+  providerConfigRef:
+    name: example

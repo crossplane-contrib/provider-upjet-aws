@@ -1,0 +1,16 @@
+apiVersion: sagemaker.aws.upbound.io/v1alpha1
+kind: Domain
+metadata:
+  name: example
+spec:
+  forProvider:
+    authMode: IAM
+    defaultUserSettings:
+    - executionRole: ${aws_iam_role.test.arn}
+    domainName: example
+    subnetIdRefs:
+    - name: example
+    vpcIdRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: shield.aws.upbound.io/v1alpha1
+kind: ProtectionHealthCheckAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    healthCheckArn: ${aws_route53_health_check.example.arn}
+    shieldProtectionId: ${aws_shield_protection.example.id}
+  providerConfigRef:
+    name: example

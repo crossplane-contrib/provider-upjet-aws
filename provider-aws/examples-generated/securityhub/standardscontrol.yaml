@@ -1,0 +1,11 @@
+apiVersion: securityhub.aws.upbound.io/v1alpha1
+kind: StandardsControl
+metadata:
+  name: example
+spec:
+  forProvider:
+    controlStatus: DISABLED
+    disabledReason: We handle password policies within Okta
+    standardsControlArn: arn:aws:securityhub:us-east-1:111111111111:control/cis-aws-foundations-benchmark/v/1.2.0/1.10
+  providerConfigRef:
+    name: example

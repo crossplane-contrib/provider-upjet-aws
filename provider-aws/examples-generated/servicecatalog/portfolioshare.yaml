@@ -1,0 +1,11 @@
+apiVersion: servicecatalog.aws.upbound.io/v1alpha1
+kind: PortfolioShare
+metadata:
+  name: example
+spec:
+  forProvider:
+    portfolioId: ${aws_servicecatalog_portfolio.example.id}
+    principalId: "012128675309"
+    type: ACCOUNT
+  providerConfigRef:
+    name: example

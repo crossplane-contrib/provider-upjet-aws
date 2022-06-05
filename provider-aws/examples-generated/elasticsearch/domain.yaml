@@ -1,0 +1,10 @@
+apiVersion: elasticsearch.aws.upbound.io/v1alpha1
+kind: Domain
+metadata:
+  name: example
+spec:
+  forProvider:
+    domainName: tf-test
+    elasticsearchVersion: "2.3"
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: kms.aws.upbound.io/v1alpha1
+kind: Ciphertext
+metadata:
+  name: example
+spec:
+  forProvider:
+    keyId: ${aws_kms_key.oauth_config.key_id}
+    plaintextSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+  providerConfigRef:
+    name: example

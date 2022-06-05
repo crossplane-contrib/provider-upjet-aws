@@ -1,0 +1,22 @@
+apiVersion: workspaces.aws.upbound.io/v1alpha1
+kind: Workspace
+metadata:
+  name: example
+spec:
+  forProvider:
+    bundleId: ${data.aws_workspaces_bundle.value_windows_10.id}
+    directoryId: ${aws_workspaces_directory.example.id}
+    rootVolumeEncryptionEnabled: true
+    tags:
+      Department: IT
+    userName: john.doe
+    userVolumeEncryptionEnabled: true
+    volumeEncryptionKey: alias/aws/workspaces
+    workspaceProperties:
+    - computeTypeName: VALUE
+      rootVolumeSizeGib: 80
+      runningMode: AUTO_STOP
+      runningModeAutoStopTimeoutInMinutes: 60
+      userVolumeSizeGib: 10
+  providerConfigRef:
+    name: example

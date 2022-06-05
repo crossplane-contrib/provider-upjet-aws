@@ -1,0 +1,10 @@
+apiVersion: events.aws.upbound.io/v1alpha1
+kind: BusPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    eventBusName: chat-messages
+    policy: ${data.aws_iam_policy_document.test.json}
+  providerConfigRef:
+    name: example

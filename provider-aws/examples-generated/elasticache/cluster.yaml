@@ -1,0 +1,14 @@
+apiVersion: elasticache.aws.upbound.io/v1alpha2
+kind: Cluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    engine: memcached
+    nodeType: cache.m4.large
+    numCacheNodes: 2
+    parameterGroupNameRef:
+      name: example
+    port: 11211
+  providerConfigRef:
+    name: example

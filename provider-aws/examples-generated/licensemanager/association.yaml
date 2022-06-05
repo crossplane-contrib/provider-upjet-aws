@@ -1,0 +1,10 @@
+apiVersion: licensemanager.aws.upbound.io/v1alpha1
+kind: Association
+metadata:
+  name: example
+spec:
+  forProvider:
+    licenseConfigurationArn: ${aws_licensemanager_license_configuration.example.arn}
+    resourceArn: ${aws_instance.example.arn}
+  providerConfigRef:
+    name: example

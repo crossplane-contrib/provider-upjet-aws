@@ -1,0 +1,11 @@
+apiVersion: apigateway.aws.upbound.io/v1alpha1
+kind: DocumentationVersion
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: Example description
+    restApiId: ${aws_api_gateway_rest_api.example.id}
+    version: example_version
+  providerConfigRef:
+    name: example

@@ -1,0 +1,20 @@
+apiVersion: eks.aws.upbound.io/v1alpha2
+kind: NodeGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterNameRef:
+      name: example
+    nodeRoleArnRef:
+      name: example
+    scalingConfig:
+    - desiredSize: 1
+      maxSize: 1
+      minSize: 1
+    subnetIdRefs:
+      name: example
+    updateConfig:
+    - maxUnavailable: 2
+  providerConfigRef:
+    name: example

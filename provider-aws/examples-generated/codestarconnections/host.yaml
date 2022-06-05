@@ -1,0 +1,11 @@
+apiVersion: codestarconnections.aws.upbound.io/v1alpha1
+kind: Host
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example-host
+    providerEndpoint: https://example.com
+    providerType: GitHubEnterpriseServer
+  providerConfigRef:
+    name: example

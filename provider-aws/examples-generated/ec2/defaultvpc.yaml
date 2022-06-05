@@ -1,0 +1,10 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: DefaultVPC
+metadata:
+  name: example
+spec:
+  forProvider:
+    tags:
+      Name: Default VPC
+  providerConfigRef:
+    name: example

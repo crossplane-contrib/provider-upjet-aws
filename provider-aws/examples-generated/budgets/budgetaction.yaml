@@ -1,0 +1,25 @@
+apiVersion: budgets.aws.upbound.io/v1alpha1
+kind: BudgetAction
+metadata:
+  name: example
+spec:
+  forProvider:
+    actionThreshold:
+    - actionThresholdType: ABSOLUTE_VALUE
+      actionThresholdValue: 100
+    actionType: APPLY_IAM_POLICY
+    approvalModel: AUTOMATIC
+    budgetName: budget-ec2-monthly
+    definition:
+    - iamActionDefinition:
+      - policyArn: ${aws_iam_policy.example.arn}
+        roles:
+        - ${aws_iam_role.example.name}
+    executionRoleArnRef:
+      name: example
+    notificationType: ACTUAL
+    subscriber:
+    - address: example@example.example
+      subscriptionType: EMAIL
+  providerConfigRef:
+    name: example

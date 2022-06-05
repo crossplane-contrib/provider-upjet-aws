@@ -1,0 +1,15 @@
+apiVersion: amplify.aws.upbound.io/v1alpha1
+kind: DomainAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    appId: ${aws_amplify_app.example.id}
+    domainName: example.com
+    subDomain:
+    - branchName: ${aws_amplify_branch.master.branch_name}
+      prefix: ""
+    - branchName: ${aws_amplify_branch.master.branch_name}
+      prefix: www
+  providerConfigRef:
+    name: example

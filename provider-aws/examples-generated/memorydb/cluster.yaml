@@ -1,0 +1,16 @@
+apiVersion: memorydb.aws.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    aclName: open-access
+    name: my-cluster
+    nodeType: db.t4g.small
+    numShards: 2
+    securityGroupIdRefs:
+    - name: example
+    snapshotRetentionLimit: 7
+    subnetGroupName: ${aws_memorydb_subnet_group.example.id}
+  providerConfigRef:
+    name: example

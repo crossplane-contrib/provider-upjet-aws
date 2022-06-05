@@ -1,0 +1,16 @@
+apiVersion: amp.aws.upbound.io/v1alpha1
+kind: RuleGroupNamespace
+metadata:
+  name: example
+spec:
+  forProvider:
+    data: |
+      groups:
+        - name: test
+          rules:
+          - record: metric:recording_rule
+            expr: avg(rate(container_cpu_usage_seconds_total[5m]))
+    name: rules
+    workspaceId: ${aws_prometheus_workspace.demo.id}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: Subnet
+metadata:
+  name: example
+spec:
+  forProvider:
+    cidrBlock: 10.0.1.0/24
+    tags:
+      Name: Main
+    vpcIdRef:
+      name: example
+  providerConfigRef:
+    name: example

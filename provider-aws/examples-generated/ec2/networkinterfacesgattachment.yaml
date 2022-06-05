@@ -1,0 +1,11 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: NetworkInterfaceSgAttachment
+metadata:
+  name: example
+spec:
+  forProvider:
+    networkInterfaceId: ${aws_instance.instance.primary_network_interface_id}
+    securityGroupIdRef:
+      name: example
+  providerConfigRef:
+    name: example

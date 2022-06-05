@@ -1,0 +1,18 @@
+apiVersion: ses.aws.upbound.io/v1alpha1
+kind: EventDestination
+metadata:
+  name: example
+spec:
+  forProvider:
+    cloudwatchDestination:
+    - defaultValue: default
+      dimensionName: dimension
+      valueSource: emailHeader
+    configurationSetName: some-configuration-set-test
+    enabled: true
+    matchingTypes:
+    - bounce
+    - send
+    name: event-destination-cloudwatch
+  providerConfigRef:
+    name: example

@@ -1,0 +1,12 @@
+apiVersion: rds.aws.upbound.io/v1alpha1
+kind: ClusterRoleAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    dbClusterIdentifier: ${aws_rds_cluster.example.id}
+    featureName: S3_INTEGRATION
+    roleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: configservice.aws.upbound.io/v1alpha1
+kind: AWSConfigurationRecorderStatus
+metadata:
+  name: example
+spec:
+  forProvider:
+    isEnabled: true
+    name: example
+  providerConfigRef:
+    name: example

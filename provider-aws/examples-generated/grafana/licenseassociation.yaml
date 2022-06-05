@@ -1,0 +1,10 @@
+apiVersion: grafana.aws.upbound.io/v1alpha1
+kind: LicenseAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    licenseType: ENTERPRISE_FREE_TRIAL
+    workspaceId: ${aws_grafana_workspace.example.id}
+  providerConfigRef:
+    name: example

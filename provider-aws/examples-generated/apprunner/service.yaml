@@ -1,0 +1,30 @@
+apiVersion: apprunner.aws.upbound.io/v1alpha1
+kind: Service
+metadata:
+  name: example
+spec:
+  forProvider:
+    networkConfiguration:
+    - egressConfiguration:
+      - egressType: VPC
+        vpcConnectorArn: ${aws_apprunner_vpc_connector.connector.arn}
+    serviceName: example
+    sourceConfiguration:
+    - authenticationConfiguration:
+      - connectionArn: ${aws_apprunner_connection.example.arn}
+      codeRepository:
+      - codeConfiguration:
+        - codeConfigurationValues:
+          - buildCommand: python setup.py develop
+            port: "8000"
+            runtime: PYTHON_3
+            startCommand: python runapp.py
+          configurationSource: API
+        repositoryUrl: https://github.com/example/my-example-python-app
+        sourceCodeVersion:
+        - type: BRANCH
+          value: main
+    tags:
+      Name: example-apprunner-service
+  providerConfigRef:
+    name: example

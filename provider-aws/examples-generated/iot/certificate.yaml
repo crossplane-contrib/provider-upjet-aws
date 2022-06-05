@@ -1,0 +1,10 @@
+apiVersion: iot.aws.upbound.io/v1alpha1
+kind: Certificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    active: true
+    csr: ${file("/my/csr.pem")}
+  providerConfigRef:
+    name: example

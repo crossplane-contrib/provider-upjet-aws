@@ -1,0 +1,11 @@
+apiVersion: ses.aws.upbound.io/v1alpha1
+kind: IdentityPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    identity: ${aws_ses_domain_identity.example.arn}
+    name: example
+    policy: ${data.aws_iam_policy_document.example.json}
+  providerConfigRef:
+    name: example

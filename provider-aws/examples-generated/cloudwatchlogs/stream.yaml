@@ -1,0 +1,10 @@
+apiVersion: cloudwatchlogs.aws.upbound.io/v1alpha1
+kind: Stream
+metadata:
+  name: example
+spec:
+  forProvider:
+    logGroupName: Yada
+    name: SampleLogStream1234
+  providerConfigRef:
+    name: example

@@ -1,0 +1,17 @@
+apiVersion: cloudfront.aws.upbound.io/v1alpha1
+kind: FieldLevelEncryptionProfile
+metadata:
+  name: example
+spec:
+  forProvider:
+    comment: test comment
+    encryptionEntities:
+    - items:
+      - fieldPatterns:
+        - items:
+          - DateOfBirth
+        providerId: test provider
+        publicKeyId: ${aws_cloudfront_public_key.example.id}
+    name: test profile
+  providerConfigRef:
+    name: example

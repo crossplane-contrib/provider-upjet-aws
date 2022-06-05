@@ -1,0 +1,12 @@
+apiVersion: connect.aws.upbound.io/v1alpha1
+kind: Instance
+metadata:
+  name: example
+spec:
+  forProvider:
+    identityManagementType: CONNECT_MANAGED
+    inboundCallsEnabled: true
+    instanceAlias: friendly-name-connect
+    outboundCallsEnabled: true
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: elasticache.aws.upbound.io/v1alpha2
+kind: SubnetGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    subnetIdRefs:
+    - name: example
+  providerConfigRef:
+    name: example

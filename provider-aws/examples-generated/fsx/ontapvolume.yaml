@@ -1,0 +1,13 @@
+apiVersion: fsx.aws.upbound.io/v1alpha1
+kind: OntapVolume
+metadata:
+  name: example
+spec:
+  forProvider:
+    junctionPath: /test
+    name: test
+    sizeInMegabytes: 1024
+    storageEfficiencyEnabled: true
+    storageVirtualMachineId: ${aws_fsx_ontap_storage_virtual_machine.test.id}
+  providerConfigRef:
+    name: example

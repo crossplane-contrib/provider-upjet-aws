@@ -1,0 +1,17 @@
+apiVersion: pinpoint.aws.upbound.io/v1alpha1
+kind: APNSSandboxChannel
+metadata:
+  name: example
+spec:
+  forProvider:
+    applicationId: ${aws_pinpoint_app.app.application_id}
+    certificateSecretRef:
+      key: attribute.certificate.pem
+      name: example-secret
+      namespace: crossplane-system
+    privateKeySecretRef:
+      key: attribute.private_key.key
+      name: example-secret
+      namespace: crossplane-system
+  providerConfigRef:
+    name: example

@@ -1,0 +1,14 @@
+apiVersion: apigateway.aws.upbound.io/v1alpha1
+kind: MethodSettings
+metadata:
+  name: example
+spec:
+  forProvider:
+    methodPath: '*/*'
+    restApiId: ${aws_api_gateway_rest_api.example.id}
+    settings:
+    - loggingLevel: ERROR
+      metricsEnabled: true
+    stageName: ${aws_api_gateway_stage.example.stage_name}
+  providerConfigRef:
+    name: example

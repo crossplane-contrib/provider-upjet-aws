@@ -1,0 +1,28 @@
+apiVersion: sqs.aws.upbound.io/v1alpha1
+kind: QueuePolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Id": "sqspolicy",
+        "Statement": [
+          {
+            "Sid": "First",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "sqs:SendMessage",
+            "Resource": "${aws_sqs_queue.q.arn}",
+            "Condition": {
+              "ArnEquals": {
+                "aws:SourceArn": "${aws_sns_topic.example.arn}"
+              }
+            }
+          }
+        ]
+      }
+    queueUrl: ${aws_sqs_queue.q.id}
+  providerConfigRef:
+    name: example

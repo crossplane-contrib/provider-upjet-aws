@@ -1,0 +1,12 @@
+apiVersion: emr.aws.upbound.io/v1alpha1
+kind: StudioSessionMapping
+metadata:
+  name: example
+spec:
+  forProvider:
+    identityId: example
+    identityType: USER
+    sessionPolicyArn: ${aws_iam_policy.example.arn}
+    studioId: ${aws_emr_studio.example.id}
+  providerConfigRef:
+    name: example

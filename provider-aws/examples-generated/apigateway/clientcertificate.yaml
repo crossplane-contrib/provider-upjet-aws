@@ -1,0 +1,9 @@
+apiVersion: apigateway.aws.upbound.io/v1alpha1
+kind: ClientCertificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: My client certificate
+  providerConfigRef:
+    name: example

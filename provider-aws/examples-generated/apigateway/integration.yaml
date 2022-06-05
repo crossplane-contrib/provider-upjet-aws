@@ -1,0 +1,23 @@
+apiVersion: apigateway.aws.upbound.io/v1alpha1
+kind: Integration
+metadata:
+  name: example
+spec:
+  forProvider:
+    cacheKeyParameters:
+    - method.request.path.param
+    cacheNamespace: foobar
+    httpMethod: ${aws_api_gateway_method.MyDemoMethod.http_method}
+    requestParameters:
+      integration.request.header.X-Authorization: '''static'''
+    requestTemplates:
+      application/xml: |
+        {
+           "body" : $input.json('$')
+        }
+    resourceId: ${aws_api_gateway_resource.MyDemoResource.id}
+    restApiId: ${aws_api_gateway_rest_api.MyDemoAPI.id}
+    timeoutMilliseconds: 29000
+    type: MOCK
+  providerConfigRef:
+    name: example

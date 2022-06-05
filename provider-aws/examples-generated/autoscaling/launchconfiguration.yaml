@@ -1,0 +1,11 @@
+apiVersion: autoscaling.aws.upbound.io/v1alpha1
+kind: LaunchConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    imageId: ${data.aws_ami.ubuntu.id}
+    instanceType: t2.micro
+    name: web_config
+  providerConfigRef:
+    name: example

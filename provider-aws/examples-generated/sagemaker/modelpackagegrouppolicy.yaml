@@ -1,0 +1,10 @@
+apiVersion: sagemaker.aws.upbound.io/v1alpha1
+kind: ModelPackageGroupPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    modelPackageGroupName: ${aws_sagemaker_model_package_group.example.model_package_group_name}
+    resourcePolicy: ${jsonencode(jsondecode(data.aws_iam_policy_document.example.json))}
+  providerConfigRef:
+    name: example

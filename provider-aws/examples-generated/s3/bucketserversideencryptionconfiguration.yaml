@@ -1,0 +1,13 @@
+apiVersion: s3.aws.upbound.io/v1alpha1
+kind: BucketServerSideEncryptionConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.mybucket.bucket}
+    rule:
+    - applyServerSideEncryptionByDefault:
+      - kmsMasterKeyId: ${aws_kms_key.mykey.arn}
+        sseAlgorithm: aws:kms
+  providerConfigRef:
+    name: example

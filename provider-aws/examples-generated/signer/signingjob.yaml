@@ -1,0 +1,19 @@
+apiVersion: signer.aws.upbound.io/v1alpha1
+kind: SigningJob
+metadata:
+  name: example
+spec:
+  forProvider:
+    destination:
+    - s3:
+      - bucket: s3-bucket-name
+        prefix: signed/
+    ignoreSigningJobFailure: true
+    profileName: ${aws_signer_signing_profile.test_sp.name}
+    source:
+    - s3:
+      - bucket: s3-bucket-name
+        key: object-to-be-signed.zip
+        version: jADjFYYYEXAMPLETszPjOmCMFDzd9dN1
+  providerConfigRef:
+    name: example

@@ -1,0 +1,21 @@
+apiVersion: rds.aws.upbound.io/v1alpha2
+kind: Instance
+metadata:
+  name: example
+spec:
+  forProvider:
+    allocatedStorage: 10
+    engine: mysql
+    engineVersion: "5.7"
+    instanceClass: db.t3.micro
+    name: mydb
+    parameterGroupNameRef:
+      name: example
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    skipFinalSnapshot: true
+    username: foo
+  providerConfigRef:
+    name: example

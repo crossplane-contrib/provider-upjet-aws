@@ -1,0 +1,15 @@
+apiVersion: amp.aws.upbound.io/v1alpha1
+kind: AlertManagerDefinition
+metadata:
+  name: example
+spec:
+  forProvider:
+    definition: |
+      alertmanager_config: |
+        route:
+          receiver: 'default'
+        receivers:
+          - name: 'default'
+    workspaceId: ${aws_prometheus_workspace.demo.id}
+  providerConfigRef:
+    name: example

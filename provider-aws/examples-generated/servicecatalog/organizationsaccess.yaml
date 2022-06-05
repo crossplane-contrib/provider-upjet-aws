@@ -1,0 +1,9 @@
+apiVersion: servicecatalog.aws.upbound.io/v1alpha1
+kind: OrganizationsAccess
+metadata:
+  name: example
+spec:
+  forProvider:
+    enabled: "true"
+  providerConfigRef:
+    name: example

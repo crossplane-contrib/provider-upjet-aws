@@ -1,0 +1,10 @@
+apiVersion: appstream.aws.upbound.io/v1alpha1
+kind: FleetStackAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    fleetName: test-fleet
+    stackName: stack name
+  providerConfigRef:
+    name: example

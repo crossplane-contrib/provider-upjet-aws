@@ -1,0 +1,12 @@
+apiVersion: mskconnect.aws.upbound.io/v1alpha1
+kind: WorkerConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    propertiesFileContent: |
+      key.converter=org.apache.kafka.connect.storage.StringConverter
+      value.converter=org.apache.kafka.connect.storage.StringConverter
+  providerConfigRef:
+    name: example

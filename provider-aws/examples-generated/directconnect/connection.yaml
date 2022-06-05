@@ -1,0 +1,11 @@
+apiVersion: directconnect.aws.upbound.io/v1alpha1
+kind: Connection
+metadata:
+  name: example
+spec:
+  forProvider:
+    bandwidth: 1Gbps
+    location: EqDC2
+    name: tf-dx-connection
+  providerConfigRef:
+    name: example

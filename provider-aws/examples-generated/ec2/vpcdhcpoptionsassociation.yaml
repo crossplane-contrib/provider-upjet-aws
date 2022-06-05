@@ -1,0 +1,11 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: VPCDHCPOptionsAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    dhcpOptionsId: ${aws_vpc_dhcp_options.foo.id}
+    vpcIdRef:
+      name: example
+  providerConfigRef:
+    name: example

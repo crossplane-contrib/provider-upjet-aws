@@ -1,0 +1,10 @@
+apiVersion: quicksight.aws.upbound.io/v1alpha1
+kind: GroupMembership
+metadata:
+  name: example
+spec:
+  forProvider:
+    groupName: all-access-users
+    memberName: john_smith
+  providerConfigRef:
+    name: example

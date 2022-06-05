@@ -1,0 +1,17 @@
+apiVersion: docdb.aws.upbound.io/v1alpha1
+kind: EventSubscription
+metadata:
+  name: example
+spec:
+  forProvider:
+    enabled: true
+    eventCategories:
+    - creation
+    - failure
+    name: example
+    snsTopicArn: ${aws_sns_topic.example.arn}
+    sourceIds:
+    - ${aws_docdb_cluster.example.id}
+    sourceType: db-cluster
+  providerConfigRef:
+    name: example

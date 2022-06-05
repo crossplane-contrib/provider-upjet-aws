@@ -1,0 +1,16 @@
+apiVersion: cloudwatch.aws.upbound.io/v1alpha1
+kind: MetricStream
+metadata:
+  name: example
+spec:
+  forProvider:
+    firehoseArn: ${aws_kinesis_firehose_delivery_stream.s3_stream.arn}
+    includeFilter:
+    - namespace: AWS/EC2
+    - namespace: AWS/EBS
+    name: my-metric-stream
+    outputFormat: json
+    roleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

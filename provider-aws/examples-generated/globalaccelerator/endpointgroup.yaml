@@ -1,0 +1,13 @@
+apiVersion: globalaccelerator.aws.upbound.io/v1alpha2
+kind: EndpointGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    endpointConfiguration:
+    - endpointId: ${aws_lb.example.arn}
+      weight: 100
+    listenerArnRef:
+      name: example
+  providerConfigRef:
+    name: example

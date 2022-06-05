@@ -1,0 +1,9 @@
+apiVersion: apigateway.aws.upbound.io/v1alpha1
+kind: APIKey
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: demo
+  providerConfigRef:
+    name: example

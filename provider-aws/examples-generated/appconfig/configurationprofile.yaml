@@ -1,0 +1,20 @@
+apiVersion: appconfig.aws.upbound.io/v1alpha1
+kind: ConfigurationProfile
+metadata:
+  name: example
+spec:
+  forProvider:
+    applicationId: ${aws_appconfig_application.example.id}
+    description: Example Configuration Profile
+    locationUri: hosted
+    name: example-configuration-profile-tf
+    tags:
+      Type: AppConfig Configuration Profile
+    validator:
+    - contentSecretRef:
+        key: attribute.arn
+        name: example-lambda-function
+        namespace: crossplane-system
+      type: LAMBDA
+  providerConfigRef:
+    name: example

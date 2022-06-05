@@ -1,0 +1,11 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: EBSSnapshot
+metadata:
+  name: example
+spec:
+  forProvider:
+    tags:
+      Name: HelloWorld_snap
+    volumeId: ${aws_ebs_volume.example.id}
+  providerConfigRef:
+    name: example

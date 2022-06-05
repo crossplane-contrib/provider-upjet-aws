@@ -1,0 +1,18 @@
+apiVersion: sagemaker.aws.upbound.io/v1alpha1
+kind: FeatureGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    eventTimeFeatureName: example
+    featureDefinition:
+    - featureName: example
+      featureType: String
+    featureGroupName: example
+    onlineStoreConfig:
+    - enableOnlineStore: true
+    recordIdentifierFeatureName: example
+    roleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

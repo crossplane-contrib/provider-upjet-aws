@@ -1,0 +1,11 @@
+apiVersion: iot.aws.upbound.io/v1alpha1
+kind: ThingGroupMembership
+metadata:
+  name: example
+spec:
+  forProvider:
+    overrideDynamicGroup: true
+    thingGroupName: example-group
+    thingName: example-thing
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: devicefarm.aws.upbound.io/v1alpha1
+kind: NetworkProfile
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    projectArn: ${aws_devicefarm_project.example.arn}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,11 @@
+apiVersion: location.aws.upbound.io/v1alpha1
+kind: Map
+metadata:
+  name: example
+spec:
+  forProvider:
+    configuration:
+    - style: VectorHereBerlin
+    mapName: example
+  providerConfigRef:
+    name: example

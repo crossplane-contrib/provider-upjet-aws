@@ -1,0 +1,10 @@
+apiVersion: route53.aws.upbound.io/v1alpha2
+kind: HostedZoneDNSSEC
+metadata:
+  name: example
+spec:
+  forProvider:
+    hostedZoneIdRef:
+      name: example
+  providerConfigRef:
+    name: example

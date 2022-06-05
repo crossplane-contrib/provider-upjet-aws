@@ -1,0 +1,9 @@
+apiVersion: quicksight.aws.upbound.io/v1alpha1
+kind: Group
+metadata:
+  name: example
+spec:
+  forProvider:
+    groupName: tf-example
+  providerConfigRef:
+    name: example

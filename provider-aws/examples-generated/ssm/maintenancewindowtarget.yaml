@@ -1,0 +1,16 @@
+apiVersion: ssm.aws.upbound.io/v1alpha1
+kind: MaintenanceWindowTarget
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: This is a maintenance window target
+    name: maintenance-window-target
+    resourceType: INSTANCE
+    targets:
+    - key: tag:Name
+      values:
+      - acceptance_test
+    windowId: ${aws_ssm_maintenance_window.window.id}
+  providerConfigRef:
+    name: example

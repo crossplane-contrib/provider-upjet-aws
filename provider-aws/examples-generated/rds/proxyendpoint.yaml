@@ -1,0 +1,12 @@
+apiVersion: rds.aws.upbound.io/v1alpha1
+kind: ProxyEndpoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    dbProxyEndpointName: example
+    dbProxyName: example
+    targetRole: READ_ONLY
+    vpcSubnetIds: ${aws_subnet.test.*.id}
+  providerConfigRef:
+    name: example

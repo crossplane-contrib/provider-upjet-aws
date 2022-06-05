@@ -1,0 +1,10 @@
+apiVersion: sagemaker.aws.upbound.io/v1alpha1
+kind: ImageVersion
+metadata:
+  name: example
+spec:
+  forProvider:
+    baseImage: 012345678912.dkr.ecr.us-west-2.amazonaws.com/image:latest
+    imageName: ${aws_sagemaker_image.test.id}
+  providerConfigRef:
+    name: example

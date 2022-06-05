@@ -1,0 +1,16 @@
+apiVersion: gamelift.aws.upbound.io/v1alpha1
+kind: Fleet
+metadata:
+  name: example
+spec:
+  forProvider:
+    buildId: ${aws_gamelift_build.example.id}
+    ec2InstanceType: t2.micro
+    fleetType: ON_DEMAND
+    name: example-fleet-name
+    runtimeConfiguration:
+    - serverProcess:
+      - concurrentExecutions: 1
+        launchPath: C:\game\GomokuServer.exe
+  providerConfigRef:
+    name: example

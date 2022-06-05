@@ -1,0 +1,10 @@
+apiVersion: iam.aws.upbound.io/v1alpha1
+kind: SAMLProvider
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: myprovider
+    samlMetadataDocument: ${file("saml-metadata.xml")}
+  providerConfigRef:
+    name: example

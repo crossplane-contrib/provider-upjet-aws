@@ -1,0 +1,12 @@
+apiVersion: docdb.aws.upbound.io/v1alpha1
+kind: ClusterInstance
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterIdentifier: ${aws_docdb_cluster.default.id}
+    count: 2
+    identifier: docdb-cluster-demo-${count.index}
+    instanceClass: db.r5.large
+  providerConfigRef:
+    name: example

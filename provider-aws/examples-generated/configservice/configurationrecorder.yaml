@@ -1,0 +1,11 @@
+apiVersion: configservice.aws.upbound.io/v1alpha1
+kind: ConfigurationRecorder
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    roleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,17 @@
+apiVersion: macie2.aws.upbound.io/v1alpha1
+kind: FindingsFilter
+metadata:
+  name: example
+spec:
+  forProvider:
+    action: ARCHIVE
+    description: DESCRIPTION
+    findingCriteria:
+    - criterion:
+      - eq:
+        - ${data.aws_region.current.name}
+        field: region
+    name: NAME OF THE FINDINGS FILTER
+    position: 1
+  providerConfigRef:
+    name: example

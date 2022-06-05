@@ -1,0 +1,16 @@
+apiVersion: quicksight.aws.upbound.io/v1alpha1
+kind: DataSource
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataSourceId: example-id
+    name: My Cool Data in S3
+    parameters:
+    - s3:
+      - manifestFileLocation:
+        - bucket: my-bucket
+          key: path/to/manifest.json
+    type: S3
+  providerConfigRef:
+    name: example

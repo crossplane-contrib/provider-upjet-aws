@@ -1,0 +1,12 @@
+apiVersion: route53recoveryreadiness.aws.upbound.io/v1alpha1
+kind: ResourceSet
+metadata:
+  name: example
+spec:
+  forProvider:
+    resourceSetName: ${my-cw-alarm-set}
+    resourceSetType: AWS::CloudWatch::Alarm
+    resources:
+    - resourceArn: ${aws_cloudwatch_metric_alarm.example.arn}
+  providerConfigRef:
+    name: example

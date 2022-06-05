@@ -1,0 +1,9 @@
+apiVersion: securityhub.aws.upbound.io/v1alpha1
+kind: StandardsSubscription
+metadata:
+  name: example
+spec:
+  forProvider:
+    standardsArn: arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0
+  providerConfigRef:
+    name: example

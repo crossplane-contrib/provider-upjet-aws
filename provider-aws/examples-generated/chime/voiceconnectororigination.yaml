@@ -1,0 +1,21 @@
+apiVersion: chime.aws.upbound.io/v1alpha1
+kind: VoiceConnectorOrigination
+metadata:
+  name: example
+spec:
+  forProvider:
+    disabled: false
+    route:
+    - host: 127.0.0.1
+      port: 8081
+      priority: 1
+      protocol: TCP
+      weight: 1
+    - host: 127.0.0.2
+      port: 8082
+      priority: 2
+      protocol: TCP
+      weight: 10
+    voiceConnectorId: ${aws_chime_voice_connector.default.id}
+  providerConfigRef:
+    name: example

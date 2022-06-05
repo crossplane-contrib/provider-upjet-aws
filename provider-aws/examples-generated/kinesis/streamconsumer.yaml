@@ -1,0 +1,10 @@
+apiVersion: kinesis.aws.upbound.io/v1alpha1
+kind: StreamConsumer
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example-consumer
+    streamArn: ${aws_kinesis_stream.example.arn}
+  providerConfigRef:
+    name: example

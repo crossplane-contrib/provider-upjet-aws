@@ -1,0 +1,9 @@
+apiVersion: pinpoint.aws.upbound.io/v1alpha1
+kind: SMSChannel
+metadata:
+  name: example
+spec:
+  forProvider:
+    applicationId: ${aws_pinpoint_app.app.application_id}
+  providerConfigRef:
+    name: example

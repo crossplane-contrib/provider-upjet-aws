@@ -1,0 +1,33 @@
+apiVersion: codedeploy.aws.upbound.io/v1alpha1
+kind: DeploymentGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    alarmConfiguration:
+    - alarms:
+      - my-alarm-name
+      enabled: true
+    appName: example
+    autoRollbackConfiguration:
+    - enabled: true
+      events:
+      - DEPLOYMENT_FAILURE
+    deploymentGroupName: example-group
+    ec2TagSet:
+    - ec2TagFilter:
+      - key: filterkey1
+        type: KEY_AND_VALUE
+        value: filtervalue
+      - key: filterkey2
+        type: KEY_AND_VALUE
+        value: filtervalue
+    serviceRoleArnRef:
+      name: example
+    triggerConfiguration:
+    - triggerEvents:
+      - DeploymentFailure
+      triggerName: example-trigger
+      triggerTargetArn: ${aws_sns_topic.example.arn}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,20 @@
+apiVersion: elbv2.aws.upbound.io/v1alpha1
+kind: LBListenerRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    action:
+    - targetGroupArn: ${aws_lb_target_group.static.arn}
+      type: forward
+    condition:
+    - pathPattern:
+      - values:
+        - /static/*
+    - hostHeader:
+      - values:
+        - example.com
+    listenerArn: ${aws_lb_listener.front_end.arn}
+    priority: 100
+  providerConfigRef:
+    name: example

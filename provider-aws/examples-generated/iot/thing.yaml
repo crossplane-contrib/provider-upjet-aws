@@ -1,0 +1,11 @@
+apiVersion: iot.aws.upbound.io/v1alpha1
+kind: Thing
+metadata:
+  name: example
+spec:
+  forProvider:
+    attributes:
+      First: examplevalue
+    name: example
+  providerConfigRef:
+    name: example

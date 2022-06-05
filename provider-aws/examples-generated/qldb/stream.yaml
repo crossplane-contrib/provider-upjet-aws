@@ -1,0 +1,18 @@
+apiVersion: qldb.aws.upbound.io/v1alpha1
+kind: Stream
+metadata:
+  name: example
+spec:
+  forProvider:
+    inclusiveStartTime: "2021-01-01T00:00:00Z"
+    kinesisConfiguration:
+    - aggegation_enabled: false
+      streamArn: arn:aws:kinesis:us-east-1:xxxxxxxxxxxx:stream/example-kinesis-stream
+    ledgerName: existing-ledger-name
+    roleArnRef:
+      name: example
+    streamName: sample-ledger-stream
+    tags:
+      example: tag
+  providerConfigRef:
+    name: example

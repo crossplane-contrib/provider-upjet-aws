@@ -1,0 +1,15 @@
+apiVersion: emr.aws.upbound.io/v1alpha1
+kind: ManagedScalingPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterId: ${aws_emr_cluster.sample.id}
+    computeLimits:
+    - maximumCapacityUnits: 10
+      maximumCoreCapacityUnits: 10
+      maximumOndemandCapacityUnits: 2
+      minimumCapacityUnits: 2
+      unitType: Instances
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: neptune.aws.upbound.io/v1alpha2
+kind: ClusterParameterGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: neptune cluster parameter group
+    family: neptune1
+    parameter:
+    - name: neptune_enable_audit_log
+      value: 1
+  providerConfigRef:
+    name: example

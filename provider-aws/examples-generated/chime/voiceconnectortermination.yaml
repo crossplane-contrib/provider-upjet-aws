@@ -1,0 +1,16 @@
+apiVersion: chime.aws.upbound.io/v1alpha1
+kind: VoiceConnectorTermination
+metadata:
+  name: example
+spec:
+  forProvider:
+    callingRegions:
+    - US
+    - CA
+    cidrAllowList:
+    - 50.35.78.96/31
+    cpsLimit: 1
+    disabled: false
+    voiceConnectorId: ${aws_chime_voice_connector.default.id}
+  providerConfigRef:
+    name: example

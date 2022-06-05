@@ -1,0 +1,11 @@
+apiVersion: network.aws.upbound.io/v1alpha1
+kind: ACLAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    networkAclId: ${aws_network_acl.main.id}
+    subnetIdRef:
+      name: example
+  providerConfigRef:
+    name: example

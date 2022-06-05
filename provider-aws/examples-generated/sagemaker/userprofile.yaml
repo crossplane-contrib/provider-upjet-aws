@@ -1,0 +1,10 @@
+apiVersion: sagemaker.aws.upbound.io/v1alpha1
+kind: UserProfile
+metadata:
+  name: example
+spec:
+  forProvider:
+    domainId: ${aws_sagemaker_domain.test.id}
+    userProfileName: example
+  providerConfigRef:
+    name: example

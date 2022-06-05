@@ -1,0 +1,14 @@
+apiVersion: acmpca.aws.upbound.io/v1alpha1
+kind: Certificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    certificateAuthorityArn: ${aws_acmpca_certificate_authority.example.arn}
+    certificateSigningRequest: ${tls_cert_request.csr.cert_request_pem}
+    signingAlgorithm: SHA256WITHRSA
+    validity:
+    - type: YEARS
+      value: 1
+  providerConfigRef:
+    name: example

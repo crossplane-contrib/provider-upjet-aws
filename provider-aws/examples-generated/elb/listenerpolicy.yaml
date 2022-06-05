@@ -1,0 +1,12 @@
+apiVersion: elb.aws.upbound.io/v1alpha1
+kind: ListenerPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    loadBalancerName: foobar-terraform-elb
+    loadBalancerPort: 443
+    policyNames:
+    - ${aws_load_balancer_policy.wu-tang-ssl.policy_name}
+  providerConfigRef:
+    name: example

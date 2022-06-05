@@ -1,0 +1,14 @@
+apiVersion: elasticache.aws.upbound.io/v1alpha2
+kind: ParameterGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    family: redis2.8
+    parameter:
+    - name: activerehashing
+      value: "yes"
+    - name: min-slaves-to-write
+      value: "2"
+  providerConfigRef:
+    name: example

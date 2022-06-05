@@ -1,0 +1,16 @@
+apiVersion: cloudwatchlogs.aws.upbound.io/v1alpha1
+kind: Definition
+metadata:
+  name: example
+spec:
+  forProvider:
+    logGroupNames:
+    - /aws/logGroup1
+    - /aws/logGroup2
+    name: custom_query
+    queryString: |
+      fields @timestamp, @message
+      | sort @timestamp desc
+      | limit 25
+  providerConfigRef:
+    name: example

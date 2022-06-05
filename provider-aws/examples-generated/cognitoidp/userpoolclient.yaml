@@ -1,0 +1,10 @@
+apiVersion: cognitoidp.aws.upbound.io/v1alpha1
+kind: UserPoolClient
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: client
+    userPoolId: ${aws_cognito_user_pool.pool.id}
+  providerConfigRef:
+    name: example

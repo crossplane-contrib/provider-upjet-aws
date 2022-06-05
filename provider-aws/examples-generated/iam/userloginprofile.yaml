@@ -1,0 +1,10 @@
+apiVersion: iam.aws.upbound.io/v1alpha1
+kind: UserLoginProfile
+metadata:
+  name: example
+spec:
+  forProvider:
+    pgpKey: keybase:some_person_that_exists
+    user: ${aws_iam_user.example.name}
+  providerConfigRef:
+    name: example

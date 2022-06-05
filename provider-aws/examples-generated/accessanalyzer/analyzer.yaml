@@ -1,0 +1,9 @@
+apiVersion: accessanalyzer.aws.upbound.io/v1alpha1
+kind: Analyzer
+metadata:
+  name: example
+spec:
+  forProvider:
+    analyzerName: example
+  providerConfigRef:
+    name: example

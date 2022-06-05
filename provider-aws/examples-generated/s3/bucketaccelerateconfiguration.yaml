@@ -1,0 +1,10 @@
+apiVersion: s3.aws.upbound.io/v1alpha1
+kind: BucketAccelerateConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.mybucket.bucket}
+    status: Enabled
+  providerConfigRef:
+    name: example

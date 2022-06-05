@@ -1,0 +1,21 @@
+apiVersion: ds.aws.upbound.io/v1alpha1
+kind: Directory
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: corp.notexample.com
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    size: Small
+    tags:
+      Project: foo
+    vpcSettings:
+    - subnetIds:
+      - ${aws_subnet.foo.id}
+      - ${aws_subnet.bar.id}
+      vpcId: ${aws_vpc.main.id}
+  providerConfigRef:
+    name: example

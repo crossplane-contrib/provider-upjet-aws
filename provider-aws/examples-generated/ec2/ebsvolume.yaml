@@ -1,0 +1,12 @@
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: EBSVolume
+metadata:
+  name: example
+spec:
+  forProvider:
+    availabilityZone: us-west-2a
+    size: 40
+    tags:
+      Name: HelloWorld
+  providerConfigRef:
+    name: example

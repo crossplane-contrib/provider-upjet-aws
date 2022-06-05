@@ -1,0 +1,11 @@
+apiVersion: lakeformation.aws.upbound.io/v1alpha1
+kind: DataLakeSettings
+metadata:
+  name: example
+spec:
+  forProvider:
+    admins:
+    - ${aws_iam_user.test.arn}
+    - ${aws_iam_role.test.arn}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: fsx.aws.upbound.io/v1alpha1
+kind: OpenzfsFileSystem
+metadata:
+  name: example
+spec:
+  forProvider:
+    deploymentType: SINGLE_AZ_1
+    storageCapacity: 64
+    subnetIdRefs:
+    - name: example
+    throughputCapacity: 64
+  providerConfigRef:
+    name: example

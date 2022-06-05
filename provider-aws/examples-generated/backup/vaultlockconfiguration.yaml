@@ -1,0 +1,12 @@
+apiVersion: backup.aws.upbound.io/v1alpha1
+kind: VaultLockConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    backupVaultName: example_backup_vault
+    changeableForDays: 3
+    maxRetentionDays: 1200
+    minRetentionDays: 7
+  providerConfigRef:
+    name: example

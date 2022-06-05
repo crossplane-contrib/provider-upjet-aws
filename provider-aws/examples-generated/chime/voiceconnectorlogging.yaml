@@ -1,0 +1,10 @@
+apiVersion: chime.aws.upbound.io/v1alpha1
+kind: VoiceConnectorLogging
+metadata:
+  name: example
+spec:
+  forProvider:
+    enableSipLogs: true
+    voiceConnectorId: ${aws_chime_voice_connector.default.id}
+  providerConfigRef:
+    name: example

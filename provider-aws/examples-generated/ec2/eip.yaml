@@ -1,0 +1,11 @@
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: EIP
+metadata:
+  name: example
+spec:
+  forProvider:
+    instanceRef:
+      name: example
+    vpc: true
+  providerConfigRef:
+    name: example

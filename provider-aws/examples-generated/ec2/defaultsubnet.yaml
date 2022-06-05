@@ -1,0 +1,11 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: DefaultSubnet
+metadata:
+  name: example
+spec:
+  forProvider:
+    availabilityZone: us-west-2a
+    tags:
+      Name: Default subnet for us-west-2a
+  providerConfigRef:
+    name: example

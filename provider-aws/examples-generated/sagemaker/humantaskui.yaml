@@ -1,0 +1,11 @@
+apiVersion: sagemaker.aws.upbound.io/v1alpha1
+kind: HumanTaskUI
+metadata:
+  name: example
+spec:
+  forProvider:
+    humanTaskUiName: example
+    uiTemplate:
+    - content: ${file("sagemaker-human-task-ui-template.html")}
+  providerConfigRef:
+    name: example

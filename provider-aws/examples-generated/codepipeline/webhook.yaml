@@ -1,0 +1,20 @@
+apiVersion: codepipeline.aws.upbound.io/v1alpha1
+kind: Webhook
+metadata:
+  name: example
+spec:
+  forProvider:
+    authentication: GITHUB_HMAC
+    authenticationConfiguration:
+    - secretTokenSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: crossplane-system
+    filter:
+    - jsonPath: $.ref
+      matchEquals: refs/heads/{Branch}
+    name: test-webhook-github-bar
+    targetAction: Source
+    targetPipeline: tf-test-pipeline
+  providerConfigRef:
+    name: example

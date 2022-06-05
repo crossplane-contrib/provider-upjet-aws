@@ -1,0 +1,12 @@
+apiVersion: athena.aws.upbound.io/v1alpha1
+kind: NamedQuery
+metadata:
+  name: example
+spec:
+  forProvider:
+    database: database_name
+    name: bar
+    query: database_name
+    workgroup: ${aws_athena_workgroup.test.id}
+  providerConfigRef:
+    name: example

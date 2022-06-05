@@ -1,0 +1,10 @@
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: TransitGatewayRouteTable
+metadata:
+  name: example
+spec:
+  forProvider:
+    transitGatewayIdRef:
+      name: example
+  providerConfigRef:
+    name: example

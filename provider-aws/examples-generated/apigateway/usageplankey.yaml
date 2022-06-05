@@ -1,0 +1,11 @@
+apiVersion: apigateway.aws.upbound.io/v1alpha1
+kind: UsagePlanKey
+metadata:
+  name: example
+spec:
+  forProvider:
+    keyId: ${aws_api_gateway_api_key.mykey.id}
+    keyType: API_KEY
+    usagePlanId: ${aws_api_gateway_usage_plan.myusageplan.id}
+  providerConfigRef:
+    name: example

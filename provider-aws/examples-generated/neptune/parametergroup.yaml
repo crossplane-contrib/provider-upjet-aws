@@ -1,0 +1,12 @@
+apiVersion: neptune.aws.upbound.io/v1alpha2
+kind: ParameterGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    family: neptune1
+    parameter:
+    - name: neptune_query_timeout
+      value: "25"
+  providerConfigRef:
+    name: example

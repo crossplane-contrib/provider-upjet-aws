@@ -1,0 +1,9 @@
+apiVersion: devicefarm.aws.upbound.io/v1alpha1
+kind: Project
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: my-device-farm
+  providerConfigRef:
+    name: example

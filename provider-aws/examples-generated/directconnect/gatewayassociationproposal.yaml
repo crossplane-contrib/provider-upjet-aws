@@ -1,0 +1,11 @@
+apiVersion: directconnect.aws.upbound.io/v1alpha1
+kind: GatewayAssociationProposal
+metadata:
+  name: example
+spec:
+  forProvider:
+    associatedGatewayId: ${aws_vpn_gateway.example.id}
+    dxGatewayId: ${aws_dx_gateway.example.id}
+    dxGatewayOwnerAccountId: ${aws_dx_gateway.example.owner_account_id}
+  providerConfigRef:
+    name: example

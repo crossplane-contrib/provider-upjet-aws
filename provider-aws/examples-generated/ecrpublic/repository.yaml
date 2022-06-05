@@ -1,0 +1,18 @@
+apiVersion: ecrpublic.aws.upbound.io/v1alpha2
+kind: Repository
+metadata:
+  name: example
+spec:
+  forProvider:
+    catalogData:
+    - aboutText: About Text
+      architectures:
+      - ARM
+      description: Description
+      logoImageBlob: ${filebase64(image.png)}
+      operatingSystems:
+      - Linux
+      usageText: Usage Text
+    provider: ${aws.us_east_1}
+  providerConfigRef:
+    name: example

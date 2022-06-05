@@ -1,0 +1,12 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: SubnetCidrReservation
+metadata:
+  name: example
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.16/28
+    reservationType: prefix
+    subnetIdRef:
+      name: example
+  providerConfigRef:
+    name: example

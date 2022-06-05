@@ -1,0 +1,16 @@
+apiVersion: route53.aws.upbound.io/v1alpha2
+kind: HealthCheck
+metadata:
+  name: example
+spec:
+  forProvider:
+    failureThreshold: "5"
+    fqdn: example.com
+    port: 80
+    requestInterval: "30"
+    resourcePath: /
+    tags:
+      Name: tf-test-health-check
+    type: HTTP
+  providerConfigRef:
+    name: example

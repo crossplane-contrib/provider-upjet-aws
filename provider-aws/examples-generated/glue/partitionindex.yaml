@@ -1,0 +1,15 @@
+apiVersion: glue.aws.upbound.io/v1alpha1
+kind: PartitionIndex
+metadata:
+  name: example
+spec:
+  forProvider:
+    databaseName: MyCatalogDatabase
+    partitionIndex:
+    - indexName: example
+      keys:
+      - my_column_1
+      - my_column_2
+    tableName: MyCatalogTable
+  providerConfigRef:
+    name: example

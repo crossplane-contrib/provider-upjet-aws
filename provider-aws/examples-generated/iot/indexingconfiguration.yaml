@@ -1,0 +1,22 @@
+apiVersion: iot.aws.upbound.io/v1alpha1
+kind: IndexingConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    thingIndexingConfiguration:
+    - customField:
+      - name: shadow.desired.power
+        type: Boolean
+      - name: attributes.version
+        type: Number
+      - name: shadow.name.thing1shadow.desired.DefaultDesired
+        type: String
+      - name: deviceDefender.securityProfile1.NUMBER_VALUE_BEHAVIOR.lastViolationValue.number
+        type: Number
+      deviceDefenderIndexingMode: VIOLATIONS
+      namedShadowIndexingMode: "ON"
+      thingConnectivityIndexingMode: STATUS
+      thingIndexingMode: REGISTRY_AND_SHADOW
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: SpotDatafeedSubscription
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.default.bucket}
+    prefix: my_subdirectory
+  providerConfigRef:
+    name: example

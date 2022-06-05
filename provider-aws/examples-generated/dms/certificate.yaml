@@ -1,0 +1,15 @@
+apiVersion: dms.aws.upbound.io/v1alpha1
+kind: Certificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    certificateId: test-dms-certificate-tf
+    certificatePemSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    tags:
+      Name: test
+  providerConfigRef:
+    name: example

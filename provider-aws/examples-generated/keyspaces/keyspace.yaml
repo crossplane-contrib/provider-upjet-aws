@@ -1,0 +1,9 @@
+apiVersion: keyspaces.aws.upbound.io/v1alpha1
+kind: Keyspace
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: my_keyspace
+  providerConfigRef:
+    name: example

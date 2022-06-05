@@ -1,0 +1,15 @@
+apiVersion: lambda.aws.upbound.io/v1alpha1
+kind: CodeSigningConfig
+metadata:
+  name: example
+spec:
+  forProvider:
+    allowedPublishers:
+    - signingProfileVersionArns:
+      - ${aws_signer_signing_profile.example1.arn}
+      - ${aws_signer_signing_profile.example2.arn}
+    description: My awesome code signing config.
+    policies:
+    - untrustedArtifactOnDeployment: Warn
+  providerConfigRef:
+    name: example

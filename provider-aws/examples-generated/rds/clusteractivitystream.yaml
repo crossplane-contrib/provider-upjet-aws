@@ -1,0 +1,12 @@
+apiVersion: rds.aws.upbound.io/v1alpha1
+kind: ClusterActivityStream
+metadata:
+  name: example
+spec:
+  forProvider:
+    kmsKeyIdRef:
+      name: example
+    mode: async
+    resourceArn: ${aws_rds_cluster.default.arn}
+  providerConfigRef:
+    name: example

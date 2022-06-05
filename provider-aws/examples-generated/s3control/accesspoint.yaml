@@ -1,0 +1,10 @@
+apiVersion: s3control.aws.upbound.io/v1alpha1
+kind: AccessPoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.example.id}
+    name: example
+  providerConfigRef:
+    name: example

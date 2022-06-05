@@ -1,0 +1,14 @@
+apiVersion: apigateway.aws.upbound.io/v1alpha1
+kind: DocumentationPart
+metadata:
+  name: example
+spec:
+  forProvider:
+    location:
+    - method: GET
+      path: /example
+      type: METHOD
+    properties: '{"description":"Example description"}'
+    restApiId: ${aws_api_gateway_rest_api.example.id}
+  providerConfigRef:
+    name: example

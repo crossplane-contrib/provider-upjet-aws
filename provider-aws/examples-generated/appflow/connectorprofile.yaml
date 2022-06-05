@@ -1,0 +1,21 @@
+apiVersion: appflow.aws.upbound.io/v1alpha1
+kind: ConnectorProfile
+metadata:
+  name: example
+spec:
+  forProvider:
+    connectionMode: Public
+    connectorProfileConfig:
+    - connectorProfileCredentials:
+      - redshift:
+        - password: ${aws_redshift_cluster.example.master_password}
+          username: ${aws_redshift_cluster.example.master_username}
+      connectorProfileProperties:
+      - redshift:
+        - bucketName: ${aws_s3_bucket.example.name}
+          databaseUrl: jdbc:redshift://${aws_redshift_cluster.example.endpoint}/${aws_redshift_cluster.example.database_name}
+          roleArn: ${aws_iam_role.example.arn}
+    connectorType: Redshift
+    name: example_profile
+  providerConfigRef:
+    name: example

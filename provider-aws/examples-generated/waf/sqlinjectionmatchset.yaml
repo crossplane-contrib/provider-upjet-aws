@@ -1,0 +1,13 @@
+apiVersion: waf.aws.upbound.io/v1alpha1
+kind: SQLInjectionMatchSet
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: tf-sql_injection_match_set
+    sqlInjectionMatchTuples:
+    - fieldToMatch:
+      - type: QUERY_STRING
+      textTransformation: URL_DECODE
+  providerConfigRef:
+    name: example

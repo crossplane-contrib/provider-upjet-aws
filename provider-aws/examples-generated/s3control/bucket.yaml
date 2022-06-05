@@ -1,0 +1,10 @@
+apiVersion: s3control.aws.upbound.io/v1alpha1
+kind: Bucket
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: example
+    outpostId: ${data.aws_outposts_outpost.example.id}
+  providerConfigRef:
+    name: example

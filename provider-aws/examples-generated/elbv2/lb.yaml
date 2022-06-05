@@ -1,0 +1,23 @@
+apiVersion: elbv2.aws.upbound.io/v1alpha2
+kind: LB
+metadata:
+  name: example
+spec:
+  forProvider:
+    accessLogs:
+    - bucketRef:
+        name: example
+      enabled: true
+      prefix: test-lb
+    enableDeletionProtection: true
+    internal: false
+    loadBalancerType: application
+    name: test-lb-tf
+    securityGroupRefs:
+    - name: example
+    subnetRefs:
+      name: example
+    tags:
+      Environment: production
+  providerConfigRef:
+    name: example

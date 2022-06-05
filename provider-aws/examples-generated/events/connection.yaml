@@ -1,0 +1,18 @@
+apiVersion: events.aws.upbound.io/v1alpha1
+kind: Connection
+metadata:
+  name: example
+spec:
+  forProvider:
+    authParameters:
+    - apiKey:
+      - key: x-signature
+        valueSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: crossplane-system
+    authorizationType: API_KEY
+    description: A connection description
+    name: ngrok-connection
+  providerConfigRef:
+    name: example

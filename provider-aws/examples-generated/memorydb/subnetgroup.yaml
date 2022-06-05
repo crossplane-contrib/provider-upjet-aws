@@ -1,0 +1,11 @@
+apiVersion: memorydb.aws.upbound.io/v1alpha1
+kind: SubnetGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: my-subnet-group
+    subnetIdRefs:
+    - name: example
+  providerConfigRef:
+    name: example

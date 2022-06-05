@@ -1,0 +1,10 @@
+apiVersion: rds.aws.upbound.io/v1alpha1
+kind: Snapshot
+metadata:
+  name: example
+spec:
+  forProvider:
+    dbInstanceIdentifier: ${aws_db_instance.bar.id}
+    dbSnapshotIdentifier: testsnapshot1234
+  providerConfigRef:
+    name: example

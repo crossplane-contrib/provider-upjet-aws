@@ -1,0 +1,11 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: VPNConnection
+metadata:
+  name: example
+spec:
+  forProvider:
+    customerGatewayId: ${aws_customer_gateway.example.id}
+    transitGatewayId: ${aws_ec2_transit_gateway.example.id}
+    type: ipsec.1
+  providerConfigRef:
+    name: example

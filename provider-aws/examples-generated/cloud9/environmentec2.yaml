@@ -1,0 +1,10 @@
+apiVersion: cloud9.aws.upbound.io/v1alpha1
+kind: EnvironmentEC2
+metadata:
+  name: example
+spec:
+  forProvider:
+    instanceType: t2.micro
+    name: example-env
+  providerConfigRef:
+    name: example

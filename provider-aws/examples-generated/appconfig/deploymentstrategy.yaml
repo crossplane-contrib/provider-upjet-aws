@@ -1,0 +1,17 @@
+apiVersion: appconfig.aws.upbound.io/v1alpha1
+kind: DeploymentStrategy
+metadata:
+  name: example
+spec:
+  forProvider:
+    deploymentDurationInMinutes: 3
+    description: Example Deployment Strategy
+    finalBakeTimeInMinutes: 4
+    growthFactor: 10
+    growthType: LINEAR
+    name: example-deployment-strategy-tf
+    replicateTo: NONE
+    tags:
+      Type: AppConfig Deployment Strategy
+  providerConfigRef:
+    name: example

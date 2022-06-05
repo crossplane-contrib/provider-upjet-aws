@@ -1,0 +1,11 @@
+apiVersion: ec2.aws.upbound.io/v1alpha2
+kind: VPCIPv4CidrBlockAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    cidrBlock: 172.2.0.0/16
+    vpcIdRef:
+      name: example
+  providerConfigRef:
+    name: example

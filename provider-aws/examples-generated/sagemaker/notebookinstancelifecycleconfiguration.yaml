@@ -1,0 +1,11 @@
+apiVersion: sagemaker.aws.upbound.io/v1alpha1
+kind: NotebookInstanceLifecycleConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: foo
+    onCreate: ${base64encode("echo foo")}
+    onStart: ${base64encode("echo bar")}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: timestreamwrite.aws.upbound.io/v1alpha1
+kind: Table
+metadata:
+  name: example
+spec:
+  forProvider:
+    databaseName: ${aws_timestreamwrite_database.example.database_name}
+    tableName: example
+  providerConfigRef:
+    name: example

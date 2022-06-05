@@ -1,0 +1,24 @@
+apiVersion: ecs.aws.upbound.io/v1alpha2
+kind: Service
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterRef:
+      name: example
+    desiredCount: 3
+    iamRoleRef:
+      name: example
+    loadBalancer:
+    - containerName: mongo
+      containerPort: 8080
+      targetGroupArn: ${aws_lb_target_group.foo.arn}
+    orderedPlacementStrategy:
+    - field: cpu
+      type: binpack
+    placementConstraints:
+    - expression: attribute:ecs.availability-zone in [us-west-2a, us-west-2b]
+      type: memberOf
+    taskDefinition: ${aws_ecs_task_definition.mongo.arn}
+  providerConfigRef:
+    name: example

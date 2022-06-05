@@ -1,0 +1,9 @@
+apiVersion: sagemaker.aws.upbound.io/v1alpha1
+kind: ModelPackageGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    modelPackageGroupName: example
+  providerConfigRef:
+    name: example

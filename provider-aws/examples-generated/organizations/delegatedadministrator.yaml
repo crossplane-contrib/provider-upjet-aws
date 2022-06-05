@@ -1,0 +1,10 @@
+apiVersion: organizations.aws.upbound.io/v1alpha1
+kind: DelegatedAdministrator
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountId: "123456789012"
+    servicePrincipal: principal
+  providerConfigRef:
+    name: example

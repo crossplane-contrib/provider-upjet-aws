@@ -1,0 +1,12 @@
+apiVersion: route53.aws.upbound.io/v1alpha2
+kind: ZoneAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    vpcIdRef:
+      name: example
+    zoneIdRef:
+      name: example
+  providerConfigRef:
+    name: example

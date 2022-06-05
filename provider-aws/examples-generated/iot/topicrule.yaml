@@ -1,0 +1,22 @@
+apiVersion: iot.aws.upbound.io/v1alpha1
+kind: TopicRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: Example rule
+    enabled: true
+    errorAction:
+    - sns:
+      - messageFormat: RAW
+        roleArn: ${aws_iam_role.role.arn}
+        targetArn: ${aws_sns_topic.myerrortopic.arn}
+    name: MyRule
+    sns:
+    - messageFormat: RAW
+      roleArn: ${aws_iam_role.role.arn}
+      targetArn: ${aws_sns_topic.mytopic.arn}
+    sql: SELECT * FROM 'topic/test'
+    sqlVersion: "2016-03-23"
+  providerConfigRef:
+    name: example

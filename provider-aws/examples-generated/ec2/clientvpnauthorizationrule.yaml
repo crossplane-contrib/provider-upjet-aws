@@ -1,0 +1,11 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: ClientVPNAuthorizationRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    authorizeAllGroups: true
+    clientVpnEndpointId: ${aws_ec2_client_vpn_endpoint.example.id}
+    targetNetworkCidr: ${aws_subnet.example.cidr_block}
+  providerConfigRef:
+    name: example

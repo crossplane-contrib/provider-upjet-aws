@@ -1,0 +1,13 @@
+apiVersion: autoscaling.aws.upbound.io/v1alpha1
+kind: Policy
+metadata:
+  name: example
+spec:
+  forProvider:
+    adjustmentType: ChangeInCapacity
+    autoscalingGroupName: ${aws_autoscaling_group.bar.name}
+    cooldown: 300
+    name: foobar3-terraform-test
+    scalingAdjustment: 4
+  providerConfigRef:
+    name: example

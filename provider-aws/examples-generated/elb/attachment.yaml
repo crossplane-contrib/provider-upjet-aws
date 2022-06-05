@@ -1,0 +1,10 @@
+apiVersion: elb.aws.upbound.io/v1alpha1
+kind: Attachment
+metadata:
+  name: example
+spec:
+  forProvider:
+    elb: ${aws_elb.bar.id}
+    instance: ${aws_instance.foo.id}
+  providerConfigRef:
+    name: example

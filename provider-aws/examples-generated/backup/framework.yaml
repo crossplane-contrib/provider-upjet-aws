@@ -1,0 +1,31 @@
+apiVersion: backup.aws.upbound.io/v1alpha1
+kind: Framework
+metadata:
+  name: example
+spec:
+  forProvider:
+    control:
+    - inputParameter:
+      - name: requiredRetentionDays
+        value: "35"
+      name: BACKUP_RECOVERY_POINT_MINIMUM_RETENTION_CHECK
+    - inputParameter:
+      - name: requiredFrequencyUnit
+        value: hours
+      - name: requiredRetentionDays
+        value: "35"
+      - name: requiredFrequencyValue
+        value: "1"
+      name: BACKUP_PLAN_MIN_FREQUENCY_AND_MIN_RETENTION_CHECK
+    - name: BACKUP_RECOVERY_POINT_ENCRYPTED
+    - name: BACKUP_RESOURCES_PROTECTED_BY_BACKUP_PLAN
+      scope:
+      - complianceResourceTypes:
+        - EBS
+    - name: BACKUP_RECOVERY_POINT_MANUAL_DELETION_DISABLED
+    description: this is an example framework
+    name: exampleFramework
+    tags:
+      Name: Example Framework
+  providerConfigRef:
+    name: example

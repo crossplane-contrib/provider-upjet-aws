@@ -1,0 +1,14 @@
+apiVersion: waf.aws.upbound.io/v1alpha1
+kind: IPSet
+metadata:
+  name: example
+spec:
+  forProvider:
+    ipSetDescriptors:
+    - type: IPV4
+      value: 192.0.7.0/24
+    - type: IPV4
+      value: 10.16.16.0/16
+    name: tfIPSet
+  providerConfigRef:
+    name: example

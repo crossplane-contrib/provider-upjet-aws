@@ -1,0 +1,12 @@
+apiVersion: directconnect.aws.upbound.io/v1alpha1
+kind: HostedPublicVirtualInterfaceAccepter
+metadata:
+  name: example
+spec:
+  forProvider:
+    provider: ${aws.accepter}
+    tags:
+      Side: Accepter
+    virtualInterfaceId: ${aws_dx_hosted_public_virtual_interface.creator.id}
+  providerConfigRef:
+    name: example

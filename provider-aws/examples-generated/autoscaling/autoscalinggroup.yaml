@@ -1,0 +1,38 @@
+apiVersion: autoscaling.aws.upbound.io/v1alpha2
+kind: AutoscalingGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    desiredCapacity: 4
+    forceDelete: true
+    healthCheckGracePeriod: 300
+    healthCheckType: ELB
+    initialLifecycleHook:
+    - defaultResult: CONTINUE
+      heartbeatTimeout: 2000
+      lifecycleTransition: autoscaling:EC2_INSTANCE_LAUNCHING
+      name: foobar
+      notificationMetadata: |
+        {
+          "foo": "bar"
+        }
+      notificationTargetArn: arn:aws:sqs:us-east-1:444455556666:queue1*
+      roleArn: arn:aws:iam::123456789012:role/S3Access
+    launchConfiguration: web_config
+    maxSize: 5
+    minSize: 2
+    placementGroup: ${aws_placement_group.test.id}
+    tag:
+    - key: foo
+      propagateAtLaunch: true
+      value: bar
+    - key: lorem
+      propagateAtLaunch: false
+      value: ipsum
+    timeouts:
+    - delete: 15m
+    vpcZoneIdentifierRefs:
+    - name: example
+  providerConfigRef:
+    name: example

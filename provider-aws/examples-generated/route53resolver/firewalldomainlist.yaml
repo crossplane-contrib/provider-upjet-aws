@@ -1,0 +1,9 @@
+apiVersion: route53resolver.aws.upbound.io/v1alpha1
+kind: FirewallDomainList
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+  providerConfigRef:
+    name: example

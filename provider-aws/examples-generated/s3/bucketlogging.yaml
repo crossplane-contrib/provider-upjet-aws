@@ -1,0 +1,11 @@
+apiVersion: s3.aws.upbound.io/v1alpha1
+kind: BucketLogging
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.example.id}
+    targetBucket: ${aws_s3_bucket.log_bucket.id}
+    targetPrefix: log/
+  providerConfigRef:
+    name: example

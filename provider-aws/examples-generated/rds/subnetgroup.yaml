@@ -1,0 +1,12 @@
+apiVersion: rds.aws.upbound.io/v1alpha2
+kind: SubnetGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    subnetIdRefs:
+    - name: example
+    tags:
+      Name: My DB subnet group
+  providerConfigRef:
+    name: example

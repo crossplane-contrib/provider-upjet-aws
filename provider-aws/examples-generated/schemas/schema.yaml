@@ -1,0 +1,33 @@
+apiVersion: schemas.aws.upbound.io/v1alpha1
+kind: Schema
+metadata:
+  name: example
+spec:
+  forProvider:
+    content: |-
+      ${jsonencode({
+          "openapi" : "3.0.0",
+          "info" : {
+            "version" : "1.0.0",
+            "title" : "Event"
+          },
+          "paths" : {},
+          "components" : {
+            "schemas" : {
+              "Event" : {
+                "type" : "object",
+                "properties" : {
+                  "name" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        })}
+    description: The schema definition for my event
+    name: my_schema
+    registryName: my_own_registry
+    type: OpenApi3
+  providerConfigRef:
+    name: example

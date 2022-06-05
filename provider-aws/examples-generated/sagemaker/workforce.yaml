@@ -1,0 +1,12 @@
+apiVersion: sagemaker.aws.upbound.io/v1alpha1
+kind: Workforce
+metadata:
+  name: example
+spec:
+  forProvider:
+    cognitoConfig:
+    - clientId: ${aws_cognito_user_pool_client.example.id}
+      userPool: ${aws_cognito_user_pool_domain.example.user_pool_id}
+    workforceName: example
+  providerConfigRef:
+    name: example

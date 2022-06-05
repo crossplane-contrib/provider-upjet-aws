@@ -1,0 +1,18 @@
+apiVersion: dms.aws.upbound.io/v1alpha1
+kind: ReplicationTask
+metadata:
+  name: example
+spec:
+  forProvider:
+    cdcStartTime: 1484346880
+    migrationType: full-load
+    replicationInstanceArn: ${aws_dms_replication_instance.test-dms-replication-instance-tf.replication_instance_arn}
+    replicationTaskId: test-dms-replication-task-tf
+    replicationTaskSettings: '...'
+    sourceEndpointArn: ${aws_dms_endpoint.test-dms-source-endpoint-tf.endpoint_arn}
+    tableMappings: '{"rules":[{"rule-type":"selection","rule-id":"1","rule-name":"1","object-locator":{"schema-name":"%","table-name":"%"},"rule-action":"include"}]}'
+    tags:
+      Name: test
+    targetEndpointArn: ${aws_dms_endpoint.test-dms-target-endpoint-tf.endpoint_arn}
+  providerConfigRef:
+    name: example

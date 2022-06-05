@@ -1,0 +1,20 @@
+apiVersion: s3control.aws.upbound.io/v1alpha1
+kind: BucketLifecycleConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: ${aws_s3control_bucket.example.arn}
+    rule:
+    - expiration:
+      - days: 365
+      filter:
+      - prefix: logs/
+      id: logs
+    - expiration:
+      - days: 7
+      filter:
+      - prefix: temp/
+      id: temp
+  providerConfigRef:
+    name: example

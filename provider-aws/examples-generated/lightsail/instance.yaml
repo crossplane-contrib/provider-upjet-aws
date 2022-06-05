@@ -1,0 +1,15 @@
+apiVersion: lightsail.aws.upbound.io/v1alpha1
+kind: Instance
+metadata:
+  name: example
+spec:
+  forProvider:
+    availabilityZone: us-east-1b
+    blueprintId: string
+    bundleId: string
+    keyPairName: some_key_name
+    name: custom_gitlab
+    tags:
+      foo: bar
+  providerConfigRef:
+    name: example

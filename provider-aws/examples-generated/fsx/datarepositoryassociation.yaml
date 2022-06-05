@@ -1,0 +1,22 @@
+apiVersion: fsx.aws.upbound.io/v1alpha1
+kind: DataRepositoryAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataRepositoryPath: s3://${aws_s3_bucket.example.id}
+    fileSystemId: ${aws_fsx_lustre_file_system.example.id}
+    fileSystemPath: /my-bucket
+    s3:
+    - autoExportPolicy:
+      - events:
+        - NEW
+        - CHANGED
+        - DELETED
+      autoImportPolicy:
+      - events:
+        - NEW
+        - CHANGED
+        - DELETED
+  providerConfigRef:
+    name: example

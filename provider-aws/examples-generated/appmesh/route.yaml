@@ -1,0 +1,21 @@
+apiVersion: appmesh.aws.upbound.io/v1alpha1
+kind: Route
+metadata:
+  name: example
+spec:
+  forProvider:
+    meshName: ${aws_appmesh_mesh.simple.id}
+    name: serviceB-route
+    spec:
+    - httpRoute:
+      - action:
+        - weightedTarget:
+          - virtualNode: serviceBv1
+            weight: 90
+          - virtualNode: serviceBv1
+            weight: 10
+        match:
+        - prefix: /
+    virtualRouterName: serviceB
+  providerConfigRef:
+    name: example

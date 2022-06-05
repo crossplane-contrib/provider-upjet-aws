@@ -1,0 +1,11 @@
+apiVersion: servicecatalog.aws.upbound.io/v1alpha1
+kind: Portfolio
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: List of my organizations apps
+    name: My App Portfolio
+    providerName: Brett
+  providerConfigRef:
+    name: example

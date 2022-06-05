@@ -1,0 +1,10 @@
+apiVersion: dynamodb.aws.upbound.io/v1alpha1
+kind: KinesisStreamingDestination
+metadata:
+  name: example
+spec:
+  forProvider:
+    streamArn: ${aws_kinesis_stream.example.arn}
+    tableName: GameScores
+  providerConfigRef:
+    name: example

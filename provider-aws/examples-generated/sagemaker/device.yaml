@@ -1,0 +1,11 @@
+apiVersion: sagemaker.aws.upbound.io/v1alpha1
+kind: Device
+metadata:
+  name: example
+spec:
+  forProvider:
+    device:
+    - deviceName: example
+    deviceFleetName: ${aws_sagemaker_device_fleet.example.device_fleet_name}
+  providerConfigRef:
+    name: example

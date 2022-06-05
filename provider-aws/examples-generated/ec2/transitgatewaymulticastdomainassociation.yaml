@@ -1,0 +1,12 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: TransitGatewayMulticastDomainAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    subnetIdRef:
+      name: example
+    transitGatewayAttachmentId: ${aws_ec2_transit_gateway_vpc_attachment.example.id}
+    transitGatewayMulticastDomainId: ${aws_ec2_transit_gateway_multicast_domain.example.id}
+  providerConfigRef:
+    name: example

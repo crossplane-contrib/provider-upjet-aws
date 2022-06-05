@@ -1,0 +1,14 @@
+apiVersion: lambda.aws.upbound.io/v1alpha1
+kind: Invocation
+metadata:
+  name: example
+spec:
+  forProvider:
+    functionName: ${aws_lambda_function.lambda_function_test.function_name}
+    input: |-
+      ${jsonencode({
+          key1 = "value1"
+          key2 = "value2"
+        })}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,14 @@
+apiVersion: batch.aws.upbound.io/v1alpha1
+kind: JobQueue
+metadata:
+  name: example
+spec:
+  forProvider:
+    computeEnvironments:
+    - ${aws_batch_compute_environment.test_environment_1.arn}
+    - ${aws_batch_compute_environment.test_environment_2.arn}
+    name: tf-test-batch-job-queue
+    priority: 1
+    state: ENABLED
+  providerConfigRef:
+    name: example

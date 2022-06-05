@@ -1,0 +1,20 @@
+apiVersion: codecommit.aws.upbound.io/v1alpha1
+kind: ApprovalRuleTemplate
+metadata:
+  name: example
+spec:
+  forProvider:
+    content: |
+      {
+          "Version": "2018-11-08",
+          "DestinationReferences": ["refs/heads/master"],
+          "Statements": [{
+              "Type": "Approvers",
+              "NumberOfApprovalsNeeded": 2,
+              "ApprovalPoolMembers": ["arn:aws:sts::123456789012:assumed-role/CodeCommitReview/*"]
+          }]
+      }
+    description: This is an example approval rule template
+    name: MyExampleApprovalRuleTemplate
+  providerConfigRef:
+    name: example

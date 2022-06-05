@@ -1,0 +1,52 @@
+apiVersion: codebuild.aws.upbound.io/v1alpha1
+kind: Project
+metadata:
+  name: example
+spec:
+  forProvider:
+    artifacts:
+    - type: NO_ARTIFACTS
+    buildTimeout: "5"
+    cache:
+    - location: ${aws_s3_bucket.example.bucket}
+      type: S3
+    description: test_codebuild_project
+    environment:
+    - computeType: BUILD_GENERAL1_SMALL
+      environmentVariable:
+      - name: SOME_KEY1
+        value: SOME_VALUE1
+      - name: SOME_KEY2
+        type: PARAMETER_STORE
+        value: SOME_VALUE2
+      image: aws/codebuild/standard:1.0
+      imagePullCredentialsType: CODEBUILD
+      type: LINUX_CONTAINER
+    logsConfig:
+    - cloudwatchLogs:
+      - groupName: log-group
+        streamName: log-stream
+      s3Logs:
+      - location: ${aws_s3_bucket.example.id}/build-log
+        status: ENABLED
+    name: test-project
+    serviceRole: ${aws_iam_role.example.arn}
+    source:
+    - gitCloneDepth: 1
+      gitSubmodulesConfig:
+      - fetchSubmodules: true
+      location: https://github.com/mitchellh/packer.git
+      type: GITHUB
+    sourceVersion: master
+    tags:
+      Environment: Test
+    vpcConfig:
+    - securityGroupIds:
+      - ${aws_security_group.example1.id}
+      - ${aws_security_group.example2.id}
+      subnets:
+      - ${aws_subnet.example1.id}
+      - ${aws_subnet.example2.id}
+      vpcId: ${aws_vpc.example.id}
+  providerConfigRef:
+    name: example

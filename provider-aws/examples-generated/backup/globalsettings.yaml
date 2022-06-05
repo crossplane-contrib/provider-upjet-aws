@@ -1,0 +1,10 @@
+apiVersion: backup.aws.upbound.io/v1alpha1
+kind: GlobalSettings
+metadata:
+  name: example
+spec:
+  forProvider:
+    globalSettings:
+      isCrossAccountBackupEnabled: "true"
+  providerConfigRef:
+    name: example

@@ -1,0 +1,18 @@
+apiVersion: kinesis.aws.upbound.io/v1alpha1
+kind: Stream
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: terraform-kinesis-test
+    retentionPeriod: 48
+    shardCount: 1
+    shardLevelMetrics:
+    - IncomingBytes
+    - OutgoingBytes
+    streamModeDetails:
+    - streamMode: PROVISIONED
+    tags:
+      Environment: test
+  providerConfigRef:
+    name: example

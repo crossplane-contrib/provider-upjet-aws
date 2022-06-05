@@ -1,0 +1,24 @@
+apiVersion: configservice.aws.upbound.io/v1alpha1
+kind: OrganizationConformancePack
+metadata:
+  name: example
+spec:
+  forProvider:
+    inputParameter:
+    - parameterName: AccessKeysRotatedParameterMaxAccessKeyAge
+      parameterValue: "90"
+    name: example
+    templateBody: |
+      Parameters:
+        AccessKeysRotatedParameterMaxAccessKeyAge:
+          Type: String
+      Resources:
+        IAMPasswordPolicy:
+          Properties:
+            ConfigRuleName: IAMPasswordPolicy
+            Source:
+              Owner: AWS
+              SourceIdentifier: IAM_PASSWORD_POLICY
+          Type: AWS::Config::ConfigRule
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: apigateway.aws.upbound.io/v1alpha1
+kind: Account
+metadata:
+  name: example
+spec:
+  forProvider:
+    cloudwatchRoleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

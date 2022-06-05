@@ -1,0 +1,10 @@
+apiVersion: vpc.aws.upbound.io/v1alpha1
+kind: EndpointConnectionAccepter
+metadata:
+  name: example
+spec:
+  forProvider:
+    vpcEndpointId: ${aws_vpc_endpoint.example.id}
+    vpcEndpointServiceId: ${aws_vpc_endpoint_service.example.id}
+  providerConfigRef:
+    name: example

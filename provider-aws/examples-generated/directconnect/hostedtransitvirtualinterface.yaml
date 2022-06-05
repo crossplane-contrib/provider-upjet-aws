@@ -1,0 +1,13 @@
+apiVersion: directconnect.aws.upbound.io/v1alpha1
+kind: HostedTransitVirtualInterface
+metadata:
+  name: example
+spec:
+  forProvider:
+    addressFamily: ipv4
+    bgpAsn: 65352
+    connectionId: ${aws_dx_connection.example.id}
+    name: tf-transit-vif-example
+    vlan: 4094
+  providerConfigRef:
+    name: example

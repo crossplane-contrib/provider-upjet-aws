@@ -1,0 +1,27 @@
+apiVersion: rds.aws.upbound.io/v1alpha1
+kind: Proxy
+metadata:
+  name: example
+spec:
+  forProvider:
+    auth:
+    - authScheme: SECRETS
+      description: example
+      iamAuth: DISABLED
+      secretArn: ${aws_secretsmanager_secret.example.arn}
+    debugLogging: false
+    engineFamily: MYSQL
+    idleClientTimeout: 1800
+    name: example
+    requireTls: true
+    roleArnRef:
+      name: example
+    tags:
+      Key: value
+      Name: example
+    vpcSecurityGroupIdRefs:
+    - name: example
+    vpcSubnetIds:
+    - ${aws_subnet.example.id}
+  providerConfigRef:
+    name: example

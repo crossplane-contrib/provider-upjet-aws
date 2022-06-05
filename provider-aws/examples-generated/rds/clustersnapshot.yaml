@@ -1,0 +1,10 @@
+apiVersion: rds.aws.upbound.io/v1alpha1
+kind: ClusterSnapshot
+metadata:
+  name: example
+spec:
+  forProvider:
+    dbClusterIdentifier: ${aws_rds_cluster.example.id}
+    dbClusterSnapshotIdentifier: resourcetestsnapshot1234
+  providerConfigRef:
+    name: example

@@ -1,0 +1,14 @@
+apiVersion: mskconnect.aws.upbound.io/v1alpha1
+kind: CustomPlugin
+metadata:
+  name: example
+spec:
+  forProvider:
+    contentType: ZIP
+    location:
+    - s3:
+      - bucketArn: ${aws_s3_bucket.example.arn}
+        fileKey: new_object_key
+    name: debezium-example
+  providerConfigRef:
+    name: example

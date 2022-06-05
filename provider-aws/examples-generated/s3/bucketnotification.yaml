@@ -1,0 +1,14 @@
+apiVersion: s3.aws.upbound.io/v1alpha1
+kind: BucketNotification
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.bucket.id}
+    topic:
+    - events:
+      - s3:ObjectCreated:*
+      filterSuffix: .log
+      topicArn: ${aws_sns_topic.topic.arn}
+  providerConfigRef:
+    name: example

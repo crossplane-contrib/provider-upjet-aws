@@ -1,0 +1,9 @@
+apiVersion: route53.aws.upbound.io/v1alpha2
+kind: Zone
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example.com
+  providerConfigRef:
+    name: example

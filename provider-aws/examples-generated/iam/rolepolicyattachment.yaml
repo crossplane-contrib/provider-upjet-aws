@@ -1,0 +1,12 @@
+apiVersion: iam.aws.upbound.io/v1alpha2
+kind: RolePolicyAttachment
+metadata:
+  name: example
+spec:
+  forProvider:
+    policyArnRef:
+      name: example
+    roleRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,16 @@
+apiVersion: wafregional.aws.upbound.io/v1alpha1
+kind: RateBasedRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    metricName: tfWAFRule
+    name: tfWAFRule
+    predicate:
+    - dataId: ${aws_wafregional_ipset.ipset.id}
+      negated: false
+      type: IPMatch
+    rateKey: IP
+    rateLimit: 100
+  providerConfigRef:
+    name: example

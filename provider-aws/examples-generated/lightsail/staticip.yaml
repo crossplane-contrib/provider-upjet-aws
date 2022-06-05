@@ -1,0 +1,9 @@
+apiVersion: lightsail.aws.upbound.io/v1alpha1
+kind: StaticIP
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+  providerConfigRef:
+    name: example

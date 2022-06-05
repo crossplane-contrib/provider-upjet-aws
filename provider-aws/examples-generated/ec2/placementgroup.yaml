@@ -1,0 +1,10 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: PlacementGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: hunky-dory-pg
+    strategy: cluster
+  providerConfigRef:
+    name: example

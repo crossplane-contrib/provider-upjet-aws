@@ -1,0 +1,17 @@
+apiVersion: redshift.aws.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterIdentifier: tf-redshift-cluster
+    clusterType: single-node
+    databaseName: mydb
+    masterPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    masterUsername: exampleuser
+    nodeType: dc1.large
+  providerConfigRef:
+    name: example

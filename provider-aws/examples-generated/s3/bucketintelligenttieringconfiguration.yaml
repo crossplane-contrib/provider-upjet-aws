@@ -1,0 +1,15 @@
+apiVersion: s3.aws.upbound.io/v1alpha1
+kind: BucketIntelligentTieringConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.example.bucket}
+    name: EntireBucket
+    tiering:
+    - accessTier: DEEP_ARCHIVE_ACCESS
+      days: 180
+    - accessTier: ARCHIVE_ACCESS
+      days: 125
+  providerConfigRef:
+    name: example

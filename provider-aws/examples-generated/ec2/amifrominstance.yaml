@@ -1,0 +1,10 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: AMIFromInstance
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: terraform-example
+    sourceInstanceId: i-xxxxxxxx
+  providerConfigRef:
+    name: example

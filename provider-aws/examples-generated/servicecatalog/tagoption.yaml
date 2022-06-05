@@ -1,0 +1,10 @@
+apiVersion: servicecatalog.aws.upbound.io/v1alpha1
+kind: TagOption
+metadata:
+  name: example
+spec:
+  forProvider:
+    key: nyckel
+    value: värde
+  providerConfigRef:
+    name: example

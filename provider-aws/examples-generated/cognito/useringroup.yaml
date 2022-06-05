@@ -1,0 +1,11 @@
+apiVersion: cognito.aws.upbound.io/v1alpha1
+kind: UserInGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    groupName: user-group
+    userPoolId: ${aws_cognito_user_pool.example.id}
+    username: example
+  providerConfigRef:
+    name: example

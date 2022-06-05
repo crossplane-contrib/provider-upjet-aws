@@ -1,0 +1,13 @@
+apiVersion: devicefarm.aws.upbound.io/v1alpha1
+kind: TestGridProject
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    vpcConfig:
+    - securityGroupIds: ${aws_security_group.example.*.id}
+      subnetIds: ${aws_subnet.example.*.id}
+      vpcId: ${aws_vpc.example.id}
+  providerConfigRef:
+    name: example

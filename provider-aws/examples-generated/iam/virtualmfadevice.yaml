@@ -1,0 +1,9 @@
+apiVersion: iam.aws.upbound.io/v1alpha1
+kind: VirtualMfaDevice
+metadata:
+  name: example
+spec:
+  forProvider:
+    virtualMfaDeviceName: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,28 @@
+apiVersion: apigateway.aws.upbound.io/v1alpha1
+kind: RestAPIPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "*"
+            },
+            "Action": "execute-api:Invoke",
+            "Resource": "${aws_api_gateway_rest_api.test.execution_arn}",
+            "Condition": {
+              "IpAddress": {
+                "aws:SourceIp": "123.123.123.123/32"
+              }
+            }
+          }
+        ]
+      }
+    restApiId: ${aws_api_gateway_rest_api.test.id}
+  providerConfigRef:
+    name: example

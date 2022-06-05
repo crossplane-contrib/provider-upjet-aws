@@ -1,0 +1,13 @@
+apiVersion: directconnect.aws.upbound.io/v1alpha1
+kind: HostedTransitVirtualInterfaceAccepter
+metadata:
+  name: example
+spec:
+  forProvider:
+    dxGatewayId: ${aws_dx_gateway.example.id}
+    provider: ${aws.accepter}
+    tags:
+      Side: Accepter
+    virtualInterfaceId: ${aws_dx_hosted_transit_virtual_interface.creator.id}
+  providerConfigRef:
+    name: example

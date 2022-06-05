@@ -1,0 +1,11 @@
+apiVersion: iot.aws.upbound.io/v1alpha1
+kind: LoggingOptions
+metadata:
+  name: example
+spec:
+  forProvider:
+    defaultLogLevel: WARN
+    roleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

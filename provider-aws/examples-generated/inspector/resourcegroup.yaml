@@ -1,0 +1,11 @@
+apiVersion: inspector.aws.upbound.io/v1alpha1
+kind: ResourceGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    tags:
+      Env: bar
+      Name: foo
+  providerConfigRef:
+    name: example

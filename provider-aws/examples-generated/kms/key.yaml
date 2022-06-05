@@ -1,0 +1,10 @@
+apiVersion: kms.aws.upbound.io/v1alpha2
+kind: Key
+metadata:
+  name: example
+spec:
+  forProvider:
+    deletionWindowInDays: 10
+    description: KMS key 1
+  providerConfigRef:
+    name: example

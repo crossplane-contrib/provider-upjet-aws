@@ -1,0 +1,36 @@
+apiVersion: dynamodb.aws.upbound.io/v1alpha1
+kind: Table
+metadata:
+  name: example
+spec:
+  forProvider:
+    attribute:
+    - name: UserId
+      type: S
+    - name: GameTitle
+      type: S
+    - name: TopScore
+      type: "N"
+    billingMode: PROVISIONED
+    globalSecondaryIndex:
+    - hashKey: GameTitle
+      name: GameTitleIndex
+      nonKeyAttributes:
+      - UserId
+      projectionType: INCLUDE
+      rangeKey: TopScore
+      readCapacity: 10
+      writeCapacity: 10
+    hashKey: UserId
+    name: GameScores
+    rangeKey: GameTitle
+    readCapacity: 20
+    tags:
+      Environment: production
+      Name: dynamodb-table-1
+    ttl:
+    - attributeName: TimeToExist
+      enabled: false
+    writeCapacity: 20
+  providerConfigRef:
+    name: example

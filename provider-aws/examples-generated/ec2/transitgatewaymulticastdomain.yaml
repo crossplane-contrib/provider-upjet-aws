@@ -1,0 +1,12 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: TransitGatewayMulticastDomain
+metadata:
+  name: example
+spec:
+  forProvider:
+    staticSourcesSupport: enable
+    tags:
+      Name: Transit_Gateway_Multicast_Domain_Example
+    transitGatewayId: ${aws_ec2_transit_gateway.tgw.id}
+  providerConfigRef:
+    name: example

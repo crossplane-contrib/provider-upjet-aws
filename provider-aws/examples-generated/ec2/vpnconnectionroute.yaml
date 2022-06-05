@@ -1,0 +1,10 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: VPNConnectionRoute
+metadata:
+  name: example
+spec:
+  forProvider:
+    destinationCidrBlock: 192.168.10.0/24
+    vpnConnectionId: ${aws_vpn_connection.main.id}
+  providerConfigRef:
+    name: example

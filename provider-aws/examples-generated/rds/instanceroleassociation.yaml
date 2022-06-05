@@ -1,0 +1,12 @@
+apiVersion: rds.aws.upbound.io/v1alpha1
+kind: InstanceRoleAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    dbInstanceIdentifier: ${aws_db_instance.example.id}
+    featureName: S3_INTEGRATION
+    roleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: configservice.aws.upbound.io/v1alpha1
+kind: OrganizationManagedRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    ruleIdentifier: IAM_PASSWORD_POLICY
+  providerConfigRef:
+    name: example

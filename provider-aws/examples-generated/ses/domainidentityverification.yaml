@@ -1,0 +1,9 @@
+apiVersion: ses.aws.upbound.io/v1alpha1
+kind: DomainIdentityVerification
+metadata:
+  name: example
+spec:
+  forProvider:
+    domain: ${aws_ses_domain_identity.example.id}
+  providerConfigRef:
+    name: example

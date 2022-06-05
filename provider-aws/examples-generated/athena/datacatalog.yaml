@@ -1,0 +1,15 @@
+apiVersion: athena.aws.upbound.io/v1alpha1
+kind: DataCatalog
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: Example Athena data catalog
+    name: athena-data-catalog
+    parameters:
+      function: arn:aws:lambda:eu-central-1:123456789012:function:not-important-lambda-function
+    tags:
+      Name: example-athena-data-catalog
+    type: LAMBDA
+  providerConfigRef:
+    name: example

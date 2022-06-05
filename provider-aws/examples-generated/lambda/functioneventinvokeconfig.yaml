@@ -1,0 +1,14 @@
+apiVersion: lambda.aws.upbound.io/v1alpha1
+kind: FunctionEventInvokeConfig
+metadata:
+  name: example
+spec:
+  forProvider:
+    destinationConfig:
+    - onFailure:
+      - destination: ${aws_sqs_queue.example.arn}
+      onSuccess:
+      - destination: ${aws_sns_topic.example.arn}
+    functionName: ${aws_lambda_alias.example.function_name}
+  providerConfigRef:
+    name: example

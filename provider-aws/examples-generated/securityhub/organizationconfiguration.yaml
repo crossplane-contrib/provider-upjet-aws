@@ -1,0 +1,9 @@
+apiVersion: securityhub.aws.upbound.io/v1alpha1
+kind: OrganizationConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    autoEnable: true
+  providerConfigRef:
+    name: example

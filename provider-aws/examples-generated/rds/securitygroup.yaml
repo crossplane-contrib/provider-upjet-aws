@@ -1,0 +1,11 @@
+apiVersion: rds.aws.upbound.io/v1alpha1
+kind: SecurityGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    ingress:
+    - cidr: 10.0.0.0/24
+    name: rds_sg
+  providerConfigRef:
+    name: example

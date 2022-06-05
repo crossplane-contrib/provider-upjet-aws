@@ -1,0 +1,13 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: VPCEndpointConnectionNotification
+metadata:
+  name: example
+spec:
+  forProvider:
+    connectionEvents:
+    - Accept
+    - Reject
+    connectionNotificationArn: ${aws_sns_topic.topic.arn}
+    vpcEndpointServiceId: ${aws_vpc_endpoint_service.foo.id}
+  providerConfigRef:
+    name: example

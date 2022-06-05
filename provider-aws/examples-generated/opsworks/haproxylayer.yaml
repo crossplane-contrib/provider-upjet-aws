@@ -1,0 +1,10 @@
+apiVersion: opsworks.aws.upbound.io/v1alpha1
+kind: HAProxyLayer
+metadata:
+  name: example
+spec:
+  forProvider:
+    stackId: ${aws_opsworks_stack.main.id}
+    statsPassword: foobarbaz
+  providerConfigRef:
+    name: example

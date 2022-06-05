@@ -1,0 +1,12 @@
+apiVersion: codedeploy.aws.upbound.io/v1alpha1
+kind: DeploymentConfig
+metadata:
+  name: example
+spec:
+  forProvider:
+    deploymentConfigName: test-deployment-config
+    minimumHealthyHosts:
+    - type: HOST_COUNT
+      value: 2
+  providerConfigRef:
+    name: example

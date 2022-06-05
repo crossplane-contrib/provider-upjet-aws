@@ -1,0 +1,11 @@
+apiVersion: iot.aws.upbound.io/v1alpha1
+kind: RoleAlias
+metadata:
+  name: example
+spec:
+  forProvider:
+    alias: Thermostat-dynamodb-access-role-alias
+    roleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

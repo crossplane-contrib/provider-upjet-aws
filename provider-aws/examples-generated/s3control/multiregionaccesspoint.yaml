@@ -1,0 +1,13 @@
+apiVersion: s3control.aws.upbound.io/v1alpha1
+kind: MultiRegionAccessPoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    details:
+    - name: example
+      region:
+      - bucket: ${aws_s3_bucket.foo_bucket.id}
+      - bucket: ${aws_s3_bucket.bar_bucket.id}
+  providerConfigRef:
+    name: example

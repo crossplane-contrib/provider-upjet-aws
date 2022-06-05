@@ -1,0 +1,9 @@
+apiVersion: sns.aws.upbound.io/v1alpha1
+kind: Topic
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: user-updates-topic
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: qldb.aws.upbound.io/v1alpha1
+kind: Ledger
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: sample-ledger
+    permissionsMode: STANDARD
+  providerConfigRef:
+    name: example

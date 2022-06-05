@@ -1,0 +1,13 @@
+apiVersion: ec2.aws.upbound.io/v1alpha1
+kind: SpotInstanceRequest
+metadata:
+  name: example
+spec:
+  forProvider:
+    ami: ami-1234
+    instanceType: c4.xlarge
+    spotPrice: "0.03"
+    tags:
+      Name: CheapWorker
+  providerConfigRef:
+    name: example

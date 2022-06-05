@@ -1,0 +1,26 @@
+apiVersion: imagebuilder.aws.upbound.io/v1alpha1
+kind: ContainerRecipe
+metadata:
+  name: example
+spec:
+  forProvider:
+    component:
+    - componentArn: ${aws_imagebuilder_component.example.arn}
+      parameter:
+      - name: Parameter1
+        value: Value1
+      - name: Parameter2
+        value: Value2
+    containerType: DOCKER
+    dockerfileTemplateData: |
+      FROM {{{ imagebuilder:parentImage }}}
+      {{{ imagebuilder:environments }}}
+      {{{ imagebuilder:components }}}
+    name: example
+    parentImage: arn:aws:imagebuilder:eu-central-1:aws:image/amazon-linux-x86-latest/x.x.x
+    targetRepository:
+    - repositoryName: ${aws_ecr_repository.example.name}
+      service: ECR
+    version: 1.0.0
+  providerConfigRef:
+    name: example

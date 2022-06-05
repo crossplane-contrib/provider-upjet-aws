@@ -1,0 +1,10 @@
+apiVersion: s3control.aws.upbound.io/v1alpha1
+kind: AccountPublicAccessBlock
+metadata:
+  name: example
+spec:
+  forProvider:
+    blockPublicAcls: true
+    blockPublicPolicy: true
+  providerConfigRef:
+    name: example
