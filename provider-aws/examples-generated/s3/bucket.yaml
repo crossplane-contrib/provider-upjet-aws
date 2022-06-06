@@ -1,9 +1,15 @@
 apiVersion: s3.aws.upbound.io/v1alpha2
 kind: Bucket
 metadata:
-  name: example
+  name: official-providers-test-bucket
+  annotations:
+    # This will be the actual bucket name. It must be globally unique, so you
+    # probably want to change it before trying to apply this example.
+    crossplane.io/external-name: official-providers-test-bucket
 spec:
   forProvider:
+    region: us-west-1
+    acl: private
     tags:
       Environment: Dev
       Name: My bucket

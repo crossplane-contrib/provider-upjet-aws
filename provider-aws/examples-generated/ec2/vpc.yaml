@@ -1,9 +1,10 @@
-apiVersion: ec2.aws.upbound.io/v1alpha2
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
-  name: example
+  name: official-providers-vpc
 spec:
   forProvider:
+    region: us-west-1
     cidrBlock: 10.0.0.0/16
   providerConfigRef:
     name: example
