@@ -6,8 +6,8 @@ Copyright 2022 Upbound Inc.
 
 // +kubebuilder:object:generate=true
 // +groupName=route53resolver.aws.upbound.io
-// +versionName=v1alpha1
-package v1alpha1
+// +versionName=v1beta1
+package v1beta1
 
 import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -17,7 +17,7 @@ import (
 // Package type metadata.
 const (
 	CRDGroup   = "route53resolver.aws.upbound.io"
-	CRDVersion = "v1alpha1"
+	CRDVersion = "v1beta1"
 )
 
 var (

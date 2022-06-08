@@ -457,6 +457,80 @@ func (tr *Record) GetTerraformSchemaVersion() int {
 	return 2
 }
 
+// GetTerraformResourceType returns Terraform resource type for this TrafficPolicy
+func (mg *TrafficPolicy) GetTerraformResourceType() string {
+	return "aws_route53_traffic_policy"
+}
+
+// GetConnectionDetailsMapping for this TrafficPolicy
+func (tr *TrafficPolicy) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this TrafficPolicy
+func (tr *TrafficPolicy) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this TrafficPolicy
+func (tr *TrafficPolicy) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this TrafficPolicy
+func (tr *TrafficPolicy) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this TrafficPolicy
+func (tr *TrafficPolicy) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this TrafficPolicy
+func (tr *TrafficPolicy) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this TrafficPolicy using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *TrafficPolicy) LateInitialize(attrs []byte) (bool, error) {
+	params := &TrafficPolicyParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *TrafficPolicy) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this VPCAssociationAuthorization
 func (mg *VPCAssociationAuthorization) GetTerraformResourceType() string {
 	return "aws_route53_vpc_association_authorization"
