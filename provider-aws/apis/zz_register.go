@@ -12,22 +12,22 @@ import (
 
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1beta1"
 	v1beta1ec2 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
-	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/ecr/v1alpha2"
-	v1alpha2ecrpublic "github.com/upbound/official-providers/provider-aws/apis/ecrpublic/v1alpha2"
-	v1alpha2ecs "github.com/upbound/official-providers/provider-aws/apis/ecs/v1alpha2"
-	v1alpha2eks "github.com/upbound/official-providers/provider-aws/apis/eks/v1alpha2"
-	v1alpha2elasticache "github.com/upbound/official-providers/provider-aws/apis/elasticache/v1alpha2"
-	v1alpha2elbv2 "github.com/upbound/official-providers/provider-aws/apis/elbv2/v1alpha2"
-	v1alpha2globalaccelerator "github.com/upbound/official-providers/provider-aws/apis/globalaccelerator/v1alpha2"
-	v1alpha2iam "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2"
-	v1alpha2kms "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2"
-	v1alpha2mq "github.com/upbound/official-providers/provider-aws/apis/mq/v1alpha2"
-	v1alpha2neptune "github.com/upbound/official-providers/provider-aws/apis/neptune/v1alpha2"
-	v1alpha2rds "github.com/upbound/official-providers/provider-aws/apis/rds/v1alpha2"
+	v1beta1ecr "github.com/upbound/official-providers/provider-aws/apis/ecr/v1beta1"
+	v1beta1ecrpublic "github.com/upbound/official-providers/provider-aws/apis/ecrpublic/v1beta1"
+	v1beta1ecs "github.com/upbound/official-providers/provider-aws/apis/ecs/v1beta1"
+	v1beta1eks "github.com/upbound/official-providers/provider-aws/apis/eks/v1beta1"
+	v1beta1elasticache "github.com/upbound/official-providers/provider-aws/apis/elasticache/v1beta1"
+	v1beta1elbv2 "github.com/upbound/official-providers/provider-aws/apis/elbv2/v1beta1"
+	v1beta1globalaccelerator "github.com/upbound/official-providers/provider-aws/apis/globalaccelerator/v1beta1"
+	v1beta1iam "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
+	v1beta1kms "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
+	v1beta1mq "github.com/upbound/official-providers/provider-aws/apis/mq/v1beta1"
+	v1beta1neptune "github.com/upbound/official-providers/provider-aws/apis/neptune/v1beta1"
+	v1beta1rds "github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1"
 	v1alpha1 "github.com/upbound/official-providers/provider-aws/apis/route53/v1alpha1"
-	v1alpha2route53 "github.com/upbound/official-providers/provider-aws/apis/route53/v1alpha2"
+	v1beta1route53 "github.com/upbound/official-providers/provider-aws/apis/route53/v1beta1"
 	v1alpha1route53resolver "github.com/upbound/official-providers/provider-aws/apis/route53resolver/v1alpha1"
-	v1alpha2s3 "github.com/upbound/official-providers/provider-aws/apis/s3/v1alpha2"
+	v1beta1s3 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
 	v1alpha1apis "github.com/upbound/official-providers/provider-aws/apis/v1alpha1"
 )
 
@@ -36,22 +36,22 @@ func init() {
 	AddToSchemes = append(AddToSchemes,
 		v1beta1.SchemeBuilder.AddToScheme,
 		v1beta1ec2.SchemeBuilder.AddToScheme,
-		v1alpha2.SchemeBuilder.AddToScheme,
-		v1alpha2ecrpublic.SchemeBuilder.AddToScheme,
-		v1alpha2ecs.SchemeBuilder.AddToScheme,
-		v1alpha2eks.SchemeBuilder.AddToScheme,
-		v1alpha2elasticache.SchemeBuilder.AddToScheme,
-		v1alpha2elbv2.SchemeBuilder.AddToScheme,
-		v1alpha2globalaccelerator.SchemeBuilder.AddToScheme,
-		v1alpha2iam.SchemeBuilder.AddToScheme,
-		v1alpha2kms.SchemeBuilder.AddToScheme,
-		v1alpha2mq.SchemeBuilder.AddToScheme,
-		v1alpha2neptune.SchemeBuilder.AddToScheme,
-		v1alpha2rds.SchemeBuilder.AddToScheme,
+		v1beta1ecr.SchemeBuilder.AddToScheme,
+		v1beta1ecrpublic.SchemeBuilder.AddToScheme,
+		v1beta1ecs.SchemeBuilder.AddToScheme,
+		v1beta1eks.SchemeBuilder.AddToScheme,
+		v1beta1elasticache.SchemeBuilder.AddToScheme,
+		v1beta1elbv2.SchemeBuilder.AddToScheme,
+		v1beta1globalaccelerator.SchemeBuilder.AddToScheme,
+		v1beta1iam.SchemeBuilder.AddToScheme,
+		v1beta1kms.SchemeBuilder.AddToScheme,
+		v1beta1mq.SchemeBuilder.AddToScheme,
+		v1beta1neptune.SchemeBuilder.AddToScheme,
+		v1beta1rds.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
-		v1alpha2route53.SchemeBuilder.AddToScheme,
+		v1beta1route53.SchemeBuilder.AddToScheme,
 		v1alpha1route53resolver.SchemeBuilder.AddToScheme,
-		v1alpha2s3.SchemeBuilder.AddToScheme,
+		v1beta1s3.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 	)
 }

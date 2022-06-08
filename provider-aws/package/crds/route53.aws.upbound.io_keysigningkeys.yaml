@@ -32,7 +32,7 @@ spec:
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
-    name: v1alpha2
+    name: v1beta1
     schema:
       openAPIV3Schema:
         description: KeySigningKey is the Schema for the KeySigningKeys API
@@ -113,8 +113,6 @@ spec:
                           is selected.
                         type: object
                     type: object
-                  name:
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -122,7 +120,6 @@ spec:
                   status:
                     type: string
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

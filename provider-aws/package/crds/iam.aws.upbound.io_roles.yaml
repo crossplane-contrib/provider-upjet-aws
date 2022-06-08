@@ -32,7 +32,7 @@ spec:
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
-    name: v1alpha2
+    name: v1beta1
     schema:
       openAPIV3Schema:
         description: Role is the Schema for the Roles API
@@ -78,10 +78,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  managedPolicyArns:
-                    items:
-                      type: string
-                    type: array
                   maxSessionDuration:
                     type: number
                   path:
@@ -94,6 +90,7 @@ spec:
                     type: object
                 required:
                 - assumeRolePolicy
+                - inlinePolicy
                 type: object
               providerConfigRef:
                 default:
@@ -202,6 +199,14 @@ spec:
                     type: string
                   id:
                     type: string
+                  inlinePolicy:
+                    items:
+                      type: object
+                    type: array
+                  managedPolicyArns:
+                    items:
+                      type: string
+                    type: array
                   tagsAll:
                     additionalProperties:
                       type: string

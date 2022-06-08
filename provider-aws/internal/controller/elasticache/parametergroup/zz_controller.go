@@ -18,12 +18,12 @@ import (
 	"github.com/upbound/upjet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/elasticache/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/elasticache/v1beta1"
 )
 
 // Setup adds a controller that reconciles ParameterGroup managed resources.
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
-	name := managed.ControllerName(v1alpha2.ParameterGroup_GroupVersionKind.String())
+	name := managed.ControllerName(v1beta1.ParameterGroup_GroupVersionKind.String())
 	var initializers managed.InitializerChain
 	for _, i := range o.Provider.Resources["aws_elasticache_parameter_group"].InitializerFns {
 		initializers = append(initializers, i(mgr.GetClient()))
@@ -34,7 +34,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		cps = append(cps, connection.NewDetailsManager(mgr.GetClient(), *o.SecretStoreConfigGVK))
 	}
 	r := managed.NewReconciler(mgr,
-		xpresource.ManagedKind(v1alpha2.ParameterGroup_GroupVersionKind),
+		xpresource.ManagedKind(v1beta1.ParameterGroup_GroupVersionKind),
 		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_elasticache_parameter_group"])),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
@@ -47,6 +47,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		Named(name).
 		WithOptions(o.ForControllerRuntime()).
-		For(&v1alpha2.ParameterGroup{}).
+		For(&v1beta1.ParameterGroup{}).
 		Complete(ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter))
 }

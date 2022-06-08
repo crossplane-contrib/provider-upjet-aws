@@ -18,12 +18,12 @@ import (
 	"github.com/upbound/upjet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/mq/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/mq/v1beta1"
 )
 
 // Setup adds a controller that reconciles Broker managed resources.
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
-	name := managed.ControllerName(v1alpha2.Broker_GroupVersionKind.String())
+	name := managed.ControllerName(v1beta1.Broker_GroupVersionKind.String())
 	var initializers managed.InitializerChain
 	for _, i := range o.Provider.Resources["aws_mq_broker"].InitializerFns {
 		initializers = append(initializers, i(mgr.GetClient()))
@@ -33,9 +33,9 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		cps = append(cps, connection.NewDetailsManager(mgr.GetClient(), *o.SecretStoreConfigGVK))
 	}
 	r := managed.NewReconciler(mgr,
-		xpresource.ManagedKind(v1alpha2.Broker_GroupVersionKind),
+		xpresource.ManagedKind(v1beta1.Broker_GroupVersionKind),
 		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_mq_broker"],
-			tjcontroller.WithCallbackProvider(tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1alpha2.Broker_GroupVersionKind))),
+			tjcontroller.WithCallbackProvider(tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.Broker_GroupVersionKind))),
 		)),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
@@ -48,6 +48,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		Named(name).
 		WithOptions(o.ForControllerRuntime()).
-		For(&v1alpha2.Broker{}).
+		For(&v1beta1.Broker{}).
 		Complete(ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter))
 }

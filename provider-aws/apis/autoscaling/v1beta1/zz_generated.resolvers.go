@@ -9,9 +9,9 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
-	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/elbv2/v1alpha2"
-	v1alpha21 "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2"
+	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/elbv2/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -29,8 +29,8 @@ func (mg *Attachment) ResolveReferences(ctx context.Context, c client.Reader) er
 		Reference:    mg.Spec.ForProvider.ALBTargetGroupArnRef,
 		Selector:     mg.Spec.ForProvider.ALBTargetGroupArnSelector,
 		To: reference.To{
-			List:    &v1alpha2.LBTargetGroupList{},
-			Managed: &v1alpha2.LBTargetGroup{},
+			List:    &v1beta1.LBTargetGroupList{},
+			Managed: &v1beta1.LBTargetGroup{},
 		},
 	})
 	if err != nil {
@@ -72,8 +72,8 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		Reference:    mg.Spec.ForProvider.ServiceLinkedRoleArnRef,
 		Selector:     mg.Spec.ForProvider.ServiceLinkedRoleArnSelector,
 		To: reference.To{
-			List:    &v1alpha21.RoleList{},
-			Managed: &v1alpha21.Role{},
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
 		},
 	})
 	if err != nil {
@@ -88,8 +88,8 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		References:    mg.Spec.ForProvider.VPCZoneIdentifierRefs,
 		Selector:      mg.Spec.ForProvider.VPCZoneIdentifierSelector,
 		To: reference.To{
-			List:    &v1beta1.SubnetList{},
-			Managed: &v1beta1.Subnet{},
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
 		},
 	})
 	if err != nil {

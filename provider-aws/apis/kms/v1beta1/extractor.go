@@ -2,7 +2,7 @@
 Copyright 2021 Upbound Inc.
 */
 
-package v1alpha2
+package v1beta1
 
 import (
 	"github.com/crossplane/crossplane-runtime/pkg/reference"

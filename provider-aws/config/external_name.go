@@ -273,8 +273,10 @@ func routeTableAssociation() config.ExternalName {
 	return e
 }
 
-// FormattedIdentifierFromProvider is a helper function to construct Terraform IDs that use elements
-// from the parameters in a certain string format.
+// FormattedIdentifierFromProvider is a helper function to construct Terraform
+// IDs that use elements from the parameters in a certain string format.
+// It should be used in cases where all information in the ID is gathered from
+// the spec and not user defined like name. For example, zone_id:vpc_id.
 func FormattedIdentifierFromProvider(format string, keys ...string) config.ExternalName {
 	if strings.Count(format, "%s") != len(keys) {
 		panic("count of keys is not equal to number of variables in format")
@@ -298,6 +300,10 @@ func FormattedIdentifierFromProvider(format string, keys ...string) config.Exter
 	return e
 }
 
+// FormattedIdentifierUserDefined is used in cases where the ID is constructed
+// using some of the spec fields as well as a field that users use to name the
+// resource. For example, vpc_id:cluster_name where vpc_id comes from spec
+// but cluster_name is a naming field we can use external name for.
 func FormattedIdentifierUserDefined(param, separator string, keys ...string) config.ExternalName {
 	e := ParameterAsExternalName(param)
 	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
@@ -331,6 +337,8 @@ func FormattedIdentifierUserDefined(param, separator string, keys ...string) con
 	return e
 }
 
+// ParameterAsExternalName is a different version of NameAsIdentifier where you
+// can define a field name other than "name", such as "cluster_name".
 func ParameterAsExternalName(paramName string) config.ExternalName {
 	e := config.NameAsIdentifier
 	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {

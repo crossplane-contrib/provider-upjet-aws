@@ -5,8 +5,9 @@ Copyright 2021 Upbound Inc.
 package route53
 
 import (
-	"github.com/upbound/official-providers/provider-aws/config/common"
 	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure route53 resources.
