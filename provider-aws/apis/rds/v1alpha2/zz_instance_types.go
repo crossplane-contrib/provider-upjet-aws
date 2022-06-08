@@ -213,7 +213,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupNameSelector *v1.Selector `json:"securityGroupNameSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupNameRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupNameSelector
 	// +kubebuilder:validation:Optional
@@ -240,7 +240,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VpcSecurityGroupIdRefs
 	// +crossplane:generate:reference:selectorFieldName=VpcSecurityGroupIdSelector
 	// +kubebuilder:validation:Optional

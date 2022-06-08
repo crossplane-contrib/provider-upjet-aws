@@ -10,9 +10,9 @@ package apis
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1alpha2"
-	v1alpha2ec2 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2"
-	v1alpha2ecr "github.com/upbound/official-providers/provider-aws/apis/ecr/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1beta1"
+	v1beta1ec2 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
+	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/ecr/v1alpha2"
 	v1alpha2ecrpublic "github.com/upbound/official-providers/provider-aws/apis/ecrpublic/v1alpha2"
 	v1alpha2ecs "github.com/upbound/official-providers/provider-aws/apis/ecs/v1alpha2"
 	v1alpha2eks "github.com/upbound/official-providers/provider-aws/apis/eks/v1alpha2"
@@ -34,9 +34,9 @@ import (
 func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
+		v1beta1.SchemeBuilder.AddToScheme,
+		v1beta1ec2.SchemeBuilder.AddToScheme,
 		v1alpha2.SchemeBuilder.AddToScheme,
-		v1alpha2ec2.SchemeBuilder.AddToScheme,
-		v1alpha2ecr.SchemeBuilder.AddToScheme,
 		v1alpha2ecrpublic.SchemeBuilder.AddToScheme,
 		v1alpha2ecs.SchemeBuilder.AddToScheme,
 		v1alpha2eks.SchemeBuilder.AddToScheme,

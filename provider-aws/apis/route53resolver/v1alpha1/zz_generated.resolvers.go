@@ -9,7 +9,7 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -26,8 +26,8 @@ func (mg *Endpoint) ResolveReferences(ctx context.Context, c client.Reader) erro
 		References:    mg.Spec.ForProvider.SecurityGroupIdRefs,
 		Selector:      mg.Spec.ForProvider.SecurityGroupIdSelector,
 		To: reference.To{
-			List:    &v1alpha2.SecurityGroupList{},
-			Managed: &v1alpha2.SecurityGroup{},
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -52,8 +52,8 @@ func (mg *FirewallRuleGroupAssociation) ResolveReferences(ctx context.Context, c
 		Reference:    mg.Spec.ForProvider.VpcIdRef,
 		Selector:     mg.Spec.ForProvider.VpcIdSelector,
 		To: reference.To{
-			List:    &v1alpha2.VPCList{},
-			Managed: &v1alpha2.VPC{},
+			List:    &v1beta1.VPCList{},
+			Managed: &v1beta1.VPC{},
 		},
 	})
 	if err != nil {
@@ -78,8 +78,8 @@ func (mg *RuleAssociation) ResolveReferences(ctx context.Context, c client.Reade
 		Reference:    mg.Spec.ForProvider.VpcIdRef,
 		Selector:     mg.Spec.ForProvider.VpcIdSelector,
 		To: reference.To{
-			List:    &v1alpha2.VPCList{},
-			Managed: &v1alpha2.VPC{},
+			List:    &v1beta1.VPCList{},
+			Managed: &v1beta1.VPC{},
 		},
 	})
 	if err != nil {

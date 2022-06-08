@@ -154,7 +154,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIdSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIdRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIdSelector
 	// +kubebuilder:validation:Optional

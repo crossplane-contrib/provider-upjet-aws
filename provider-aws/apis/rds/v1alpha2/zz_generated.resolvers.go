@@ -9,8 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha21 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2"
-	v1alpha22 "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
+	v1alpha21 "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2"
 	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/s3/v1alpha2"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -81,8 +81,8 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		References:    mg.Spec.ForProvider.VpcSecurityGroupIdRefs,
 		Selector:      mg.Spec.ForProvider.VpcSecurityGroupIdSelector,
 		To: reference.To{
-			List:    &v1alpha21.SecurityGroupList{},
-			Managed: &v1alpha21.SecurityGroup{},
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -124,8 +124,8 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 		To: reference.To{
-			List:    &v1alpha22.KeyList{},
-			Managed: &v1alpha22.Key{},
+			List:    &v1alpha21.KeyList{},
+			Managed: &v1alpha21.Key{},
 		},
 	})
 	if err != nil {
@@ -156,8 +156,8 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		Reference:    mg.Spec.ForProvider.PerformanceInsightsKMSKeyIDRef,
 		Selector:     mg.Spec.ForProvider.PerformanceInsightsKMSKeyIDSelector,
 		To: reference.To{
-			List:    &v1alpha22.KeyList{},
-			Managed: &v1alpha22.Key{},
+			List:    &v1alpha21.KeyList{},
+			Managed: &v1alpha21.Key{},
 		},
 	})
 	if err != nil {
@@ -208,8 +208,8 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		References:    mg.Spec.ForProvider.SecurityGroupNameRefs,
 		Selector:      mg.Spec.ForProvider.SecurityGroupNameSelector,
 		To: reference.To{
-			List:    &v1alpha21.SecurityGroupList{},
-			Managed: &v1alpha21.SecurityGroup{},
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -224,8 +224,8 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		References:    mg.Spec.ForProvider.VpcSecurityGroupIdRefs,
 		Selector:      mg.Spec.ForProvider.VpcSecurityGroupIdSelector,
 		To: reference.To{
-			List:    &v1alpha21.SecurityGroupList{},
-			Managed: &v1alpha21.SecurityGroup{},
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -250,8 +250,8 @@ func (mg *SubnetGroup) ResolveReferences(ctx context.Context, c client.Reader) e
 		References:    mg.Spec.ForProvider.SubnetIdRefs,
 		Selector:      mg.Spec.ForProvider.SubnetIdSelector,
 		To: reference.To{
-			List:    &v1alpha21.SubnetList{},
-			Managed: &v1alpha21.Subnet{},
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
 		},
 	})
 	if err != nil {

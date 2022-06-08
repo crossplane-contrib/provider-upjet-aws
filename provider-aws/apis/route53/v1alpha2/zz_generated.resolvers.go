@@ -9,7 +9,7 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha21 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
 	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -137,8 +137,8 @@ func (mg *VPCAssociationAuthorization) ResolveReferences(ctx context.Context, c 
 		Reference:    mg.Spec.ForProvider.VpcIdRef,
 		Selector:     mg.Spec.ForProvider.VpcIdSelector,
 		To: reference.To{
-			List:    &v1alpha21.VPCList{},
-			Managed: &v1alpha21.VPC{},
+			List:    &v1beta1.VPCList{},
+			Managed: &v1beta1.VPC{},
 		},
 	})
 	if err != nil {
@@ -196,8 +196,8 @@ func (mg *Zone) ResolveReferences(ctx context.Context, c client.Reader) error {
 			Reference:    mg.Spec.ForProvider.VPC[i3].VpcIdRef,
 			Selector:     mg.Spec.ForProvider.VPC[i3].VpcIdSelector,
 			To: reference.To{
-				List:    &v1alpha21.VPCList{},
-				Managed: &v1alpha21.VPC{},
+				List:    &v1beta1.VPCList{},
+				Managed: &v1beta1.VPC{},
 			},
 		})
 		if err != nil {
@@ -224,8 +224,8 @@ func (mg *ZoneAssociation) ResolveReferences(ctx context.Context, c client.Reade
 		Reference:    mg.Spec.ForProvider.VpcIdRef,
 		Selector:     mg.Spec.ForProvider.VpcIdSelector,
 		To: reference.To{
-			List:    &v1alpha21.VPCList{},
-			Managed: &v1alpha21.VPC{},
+			List:    &v1beta1.VPCList{},
+			Managed: &v1beta1.VPC{},
 		},
 	})
 	if err != nil {

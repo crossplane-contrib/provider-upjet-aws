@@ -111,7 +111,7 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIdSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIdRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIdSelector
 	// +kubebuilder:validation:Optional
@@ -144,7 +144,7 @@ type RemoteAccessParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupIdSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SourceSecurityGroupIdRefs
 	// +crossplane:generate:reference:selectorFieldName=SourceSecurityGroupIdSelector
 	// +kubebuilder:validation:Optional

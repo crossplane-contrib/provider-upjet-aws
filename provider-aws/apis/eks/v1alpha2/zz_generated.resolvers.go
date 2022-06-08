@@ -9,7 +9,7 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha21 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
 	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -88,8 +88,8 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			References:    mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIdRefs,
 			Selector:      mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIdSelector,
 			To: reference.To{
-				List:    &v1alpha21.SecurityGroupList{},
-				Managed: &v1alpha21.SecurityGroup{},
+				List:    &v1beta1.SecurityGroupList{},
+				Managed: &v1beta1.SecurityGroup{},
 			},
 		})
 		if err != nil {
@@ -106,8 +106,8 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			References:    mg.Spec.ForProvider.VPCConfig[i3].SubnetIdRefs,
 			Selector:      mg.Spec.ForProvider.VPCConfig[i3].SubnetIdSelector,
 			To: reference.To{
-				List:    &v1alpha21.SubnetList{},
-				Managed: &v1alpha21.Subnet{},
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
 			},
 		})
 		if err != nil {
@@ -167,8 +167,8 @@ func (mg *FargateProfile) ResolveReferences(ctx context.Context, c client.Reader
 		References:    mg.Spec.ForProvider.SubnetIdRefs,
 		Selector:      mg.Spec.ForProvider.SubnetIdSelector,
 		To: reference.To{
-			List:    &v1alpha21.SubnetList{},
-			Managed: &v1alpha21.Subnet{},
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
 		},
 	})
 	if err != nil {
@@ -253,8 +253,8 @@ func (mg *NodeGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 			References:    mg.Spec.ForProvider.RemoteAccess[i3].SourceSecurityGroupIdRefs,
 			Selector:      mg.Spec.ForProvider.RemoteAccess[i3].SourceSecurityGroupIdSelector,
 			To: reference.To{
-				List:    &v1alpha21.SecurityGroupList{},
-				Managed: &v1alpha21.SecurityGroup{},
+				List:    &v1beta1.SecurityGroupList{},
+				Managed: &v1beta1.SecurityGroup{},
 			},
 		})
 		if err != nil {
@@ -270,8 +270,8 @@ func (mg *NodeGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 		References:    mg.Spec.ForProvider.SubnetIdRefs,
 		Selector:      mg.Spec.ForProvider.SubnetIdSelector,
 		To: reference.To{
-			List:    &v1alpha21.SubnetList{},
-			Managed: &v1alpha21.Subnet{},
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
 		},
 	})
 	if err != nil {

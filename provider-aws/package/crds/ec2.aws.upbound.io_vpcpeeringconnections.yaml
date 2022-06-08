@@ -32,7 +32,7 @@ spec:
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
-    name: v1alpha2
+    name: v1beta1
     schema:
       openAPIV3Schema:
         description: VPCPeeringConnection is the Schema for the VPCPeeringConnections
@@ -151,7 +151,9 @@ spec:
                         type: object
                     type: object
                 required:
+                - accepter
                 - region
+                - requester
                 type: object
               providerConfigRef:
                 default:
@@ -257,8 +259,16 @@ spec:
                 properties:
                   acceptStatus:
                     type: string
+                  accepter:
+                    items:
+                      type: object
+                    type: array
                   id:
                     type: string
+                  requester:
+                    items:
+                      type: object
+                    type: array
                   tagsAll:
                     additionalProperties:
                       type: string

@@ -9,7 +9,7 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha21 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
 	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -86,8 +86,8 @@ func (mg *ReplicationGroup) ResolveReferences(ctx context.Context, c client.Read
 		References:    mg.Spec.ForProvider.SecurityGroupIdRefs,
 		Selector:      mg.Spec.ForProvider.SecurityGroupIdSelector,
 		To: reference.To{
-			List:    &v1alpha21.SecurityGroupList{},
-			Managed: &v1alpha21.SecurityGroup{},
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -128,8 +128,8 @@ func (mg *SubnetGroup) ResolveReferences(ctx context.Context, c client.Reader) e
 		References:    mg.Spec.ForProvider.SubnetIdRefs,
 		Selector:      mg.Spec.ForProvider.SubnetIdSelector,
 		To: reference.To{
-			List:    &v1alpha21.SubnetList{},
-			Managed: &v1alpha21.Subnet{},
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
 		},
 	})
 	if err != nil {

@@ -24,7 +24,7 @@ type VPCAssociationAuthorizationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:refFieldName=VpcIdRef
 	// +crossplane:generate:reference:selectorFieldName=VpcIdSelector
 	// +kubebuilder:validation:Optional

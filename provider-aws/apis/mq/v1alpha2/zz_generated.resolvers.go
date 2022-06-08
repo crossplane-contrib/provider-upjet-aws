@@ -9,7 +9,7 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -26,8 +26,8 @@ func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error 
 		References:    mg.Spec.ForProvider.SubnetIdRefs,
 		Selector:      mg.Spec.ForProvider.SubnetIdSelector,
 		To: reference.To{
-			List:    &v1alpha2.SubnetList{},
-			Managed: &v1alpha2.Subnet{},
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
 		},
 	})
 	if err != nil {

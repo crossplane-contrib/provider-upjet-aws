@@ -9,9 +9,9 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1alpha2"
-	v1alpha22 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2"
-	v1alpha21 "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
+	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -30,8 +30,8 @@ func (mg *CapacityProvider) ResolveReferences(ctx context.Context, c client.Read
 			Reference:    mg.Spec.ForProvider.AutoScalingGroupProvider[i3].AutoScalingGroupArnRef,
 			Selector:     mg.Spec.ForProvider.AutoScalingGroupProvider[i3].AutoScalingGroupArnSelector,
 			To: reference.To{
-				List:    &v1alpha2.AutoscalingGroupList{},
-				Managed: &v1alpha2.AutoscalingGroup{},
+				List:    &v1beta1.AutoscalingGroupList{},
+				Managed: &v1beta1.AutoscalingGroup{},
 			},
 		})
 		if err != nil {
@@ -101,8 +101,8 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		Reference:    mg.Spec.ForProvider.IAMRoleRef,
 		Selector:     mg.Spec.ForProvider.IAMRoleSelector,
 		To: reference.To{
-			List:    &v1alpha21.RoleList{},
-			Managed: &v1alpha21.Role{},
+			List:    &v1alpha2.RoleList{},
+			Managed: &v1alpha2.Role{},
 		},
 	})
 	if err != nil {
@@ -118,8 +118,8 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			References:    mg.Spec.ForProvider.NetworkConfiguration[i3].SecurityGroupRefs,
 			Selector:      mg.Spec.ForProvider.NetworkConfiguration[i3].SecurityGroupSelector,
 			To: reference.To{
-				List:    &v1alpha22.SecurityGroupList{},
-				Managed: &v1alpha22.SecurityGroup{},
+				List:    &v1beta11.SecurityGroupList{},
+				Managed: &v1beta11.SecurityGroup{},
 			},
 		})
 		if err != nil {
@@ -136,8 +136,8 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			References:    mg.Spec.ForProvider.NetworkConfiguration[i3].SubnetRefs,
 			Selector:      mg.Spec.ForProvider.NetworkConfiguration[i3].SubnetSelector,
 			To: reference.To{
-				List:    &v1alpha22.SubnetList{},
-				Managed: &v1alpha22.Subnet{},
+				List:    &v1beta11.SubnetList{},
+				Managed: &v1beta11.Subnet{},
 			},
 		})
 		if err != nil {
@@ -164,8 +164,8 @@ func (mg *TaskDefinition) ResolveReferences(ctx context.Context, c client.Reader
 		Reference:    mg.Spec.ForProvider.ExecutionRoleArnRef,
 		Selector:     mg.Spec.ForProvider.ExecutionRoleArnSelector,
 		To: reference.To{
-			List:    &v1alpha21.RoleList{},
-			Managed: &v1alpha21.Role{},
+			List:    &v1alpha2.RoleList{},
+			Managed: &v1alpha2.Role{},
 		},
 	})
 	if err != nil {

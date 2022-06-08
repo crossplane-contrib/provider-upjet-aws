@@ -9,7 +9,7 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha21 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
 	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/s3/v1alpha2"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -46,8 +46,8 @@ func (mg *LB) ResolveReferences(ctx context.Context, c client.Reader) error {
 		References:    mg.Spec.ForProvider.SecurityGroupRefs,
 		Selector:      mg.Spec.ForProvider.SecurityGroupSelector,
 		To: reference.To{
-			List:    &v1alpha21.SecurityGroupList{},
-			Managed: &v1alpha21.SecurityGroup{},
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -63,8 +63,8 @@ func (mg *LB) ResolveReferences(ctx context.Context, c client.Reader) error {
 			Reference:    mg.Spec.ForProvider.SubnetMapping[i3].SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetMapping[i3].SubnetIDSelector,
 			To: reference.To{
-				List:    &v1alpha21.SubnetList{},
-				Managed: &v1alpha21.Subnet{},
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
 			},
 		})
 		if err != nil {
@@ -80,8 +80,8 @@ func (mg *LB) ResolveReferences(ctx context.Context, c client.Reader) error {
 		References:    mg.Spec.ForProvider.SubnetRefs,
 		Selector:      mg.Spec.ForProvider.SubnetSelector,
 		To: reference.To{
-			List:    &v1alpha21.SubnetList{},
-			Managed: &v1alpha21.Subnet{},
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
 		},
 	})
 	if err != nil {
@@ -172,8 +172,8 @@ func (mg *LBTargetGroup) ResolveReferences(ctx context.Context, c client.Reader)
 		Reference:    mg.Spec.ForProvider.VpcIdRef,
 		Selector:     mg.Spec.ForProvider.VpcIdSelector,
 		To: reference.To{
-			List:    &v1alpha21.VPCList{},
-			Managed: &v1alpha21.VPC{},
+			List:    &v1beta1.VPCList{},
+			Managed: &v1beta1.VPC{},
 		},
 	})
 	if err != nil {
