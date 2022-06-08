@@ -178,7 +178,7 @@ func Configure(p *config.Provider) {
 		r.ExternalName = config.NameAsIdentifier
 
 		r.References["subnet_ids"] = config.Reference{
-			Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
+			Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
 			RefFieldName:      "SubnetIdRefs",
 			SelectorFieldName: "SubnetIdSelector",
 		}

@@ -71,12 +71,12 @@ func Configure(p *config.Provider) {
 				Extractor: common.PathARNExtractor,
 			},
 			"network_configuration.subnets": config.Reference{
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
 				RefFieldName:      "SubnetRefs",
 				SelectorFieldName: "SubnetSelector",
 			},
 			"network_configuration.security_groups": config.Reference{
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				RefFieldName:      "SecurityGroupRefs",
 				SelectorFieldName: "SecurityGroupSelector",
 			},
@@ -89,7 +89,7 @@ func Configure(p *config.Provider) {
 		r.ExternalName = config.NameAsIdentifier
 		r.References = config.References{
 			"auto_scaling_group_provider.auto_scaling_group_arn": config.Reference{
-				Type:      "github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1alpha2.AutoscalingGroup",
+				Type:      "github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup",
 				Extractor: common.PathARNExtractor,
 			},
 		}

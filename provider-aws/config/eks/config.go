@@ -27,12 +27,12 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 				Extractor: common.PathARNExtractor,
 			},
 			"vpc_config.subnet_ids": {
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
 				RefFieldName:      "SubnetIdRefs",
 				SelectorFieldName: "SubnetIdSelector",
 			},
 			"vpc_config.security_group_ids": {
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				RefFieldName:      "SecurityGroupIdRefs",
 				SelectorFieldName: "SecurityGroupIdSelector",
 			},
@@ -78,12 +78,12 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 				Extractor: common.PathARNExtractor,
 			},
 			"remote_access.source_security_group_ids": {
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				RefFieldName:      "SourceSecurityGroupIdRefs",
 				SelectorFieldName: "SourceSecurityGroupIdSelector",
 			},
 			"subnet_ids": {
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
 				RefFieldName:      "SubnetIdRefs",
 				SelectorFieldName: "SubnetIdSelector",
 			},
@@ -139,7 +139,7 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 				Extractor: common.PathARNExtractor,
 			},
 			"subnet_ids": {
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
 				RefFieldName:      "SubnetIdRefs",
 				SelectorFieldName: "SubnetIdSelector",
 			},

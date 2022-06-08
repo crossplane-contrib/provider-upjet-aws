@@ -80,7 +80,7 @@ func Configure(p *config.Provider) {
 				Type: "DelegationSet",
 			},
 			"vpc.vpc_id": config.Reference{
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.VPC",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC",
 				RefFieldName:      "VpcIdRef",
 				SelectorFieldName: "VpcIdSelector",
 			},

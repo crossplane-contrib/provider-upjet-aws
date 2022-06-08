@@ -370,7 +370,7 @@ func KnownReferencers() tjconfig.ResourceOption { //nolint:gocyclo
 				}
 			case strings.HasSuffix(k, "security_group_ids"):
 				r.References[k] = tjconfig.Reference{
-					Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+					Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 					RefFieldName:      strings.TrimSuffix(name.NewFromSnake(k).Camel, "s") + "Refs",
 					SelectorFieldName: strings.TrimSuffix(name.NewFromSnake(k).Camel, "s") + "Selector",
 				}
@@ -378,23 +378,23 @@ func KnownReferencers() tjconfig.ResourceOption { //nolint:gocyclo
 			switch k {
 			case "vpc_id":
 				r.References["vpc_id"] = tjconfig.Reference{
-					Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.VPC",
+					Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC",
 					RefFieldName:      "VpcIdRef",
 					SelectorFieldName: "VpcIdSelector",
 				}
 			case "subnet_ids":
 				r.References["subnet_ids"] = tjconfig.Reference{
-					Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
+					Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
 					RefFieldName:      "SubnetIdRefs",
 					SelectorFieldName: "SubnetIdSelector",
 				}
 			case "subnet_id":
 				r.References["subnet_id"] = tjconfig.Reference{
-					Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
+					Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
 				}
 			case "security_group_id":
 				r.References["security_group_id"] = tjconfig.Reference{
-					Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+					Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				}
 			case "kms_key_id":
 				r.References["kms_key_id"] = tjconfig.Reference{

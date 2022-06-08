@@ -13,8 +13,6 @@ import (
 // Configure adds configurations for ec2 group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_instance", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["subnet_id"] = config.Reference{
 			Type: "Subnet",
 		}
@@ -50,8 +48,6 @@ func Configure(p *config.Provider) {
 		}
 	})
 	p.AddResourceConfigurator("aws_eip", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["instance"] = config.Reference{
 			Type: "Instance",
 		}
@@ -61,14 +57,7 @@ func Configure(p *config.Provider) {
 		r.UseAsync = true
 	})
 
-	p.AddResourceConfigurator("aws_ec2_transit_gateway", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
-	})
-
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_route", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["transit_gateway_attachment_id"] = config.Reference{
 			Type: "TransitGatewayVPCAttachment",
 		}
@@ -78,16 +67,12 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_route_table", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["transit_gateway_id"] = config.Reference{
 			Type: "TransitGateway",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_route_table_association", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["transit_gateway_attachment_id"] = config.Reference{
 			Type: "TransitGatewayVPCAttachment",
 		}
@@ -97,8 +82,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_vpc_attachment", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["subnet_ids"] = config.Reference{
 			Type:              "Subnet",
 			RefFieldName:      "SubnetIdRefs",
@@ -110,24 +93,19 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_vpc_attachment_accepter", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["transit_gateway_attachment_id"] = config.Reference{
 			Type: "TransitGatewayVPCAttachment",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_launch_template", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["security_group_names"] = config.Reference{
 			Type:              "SecurityGroup",
 			RefFieldName:      "SecurityGroupNameRefs",
 			SelectorFieldName: "SecurityGroupNameSelector",
 		}
 		r.References["vpc_security_group_ids"] = config.Reference{
-			Type: "SecurityGroup",
-
+			Type:              "SecurityGroup",
 			RefFieldName:      "VpcSecurityGroupIdRefs",
 			SelectorFieldName: "VpcSecurityGroupIdSelector",
 		}
@@ -154,14 +132,13 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	p.AddResourceConfigurator("aws_vpc", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
-	})
-
 	p.AddResourceConfigurator("aws_vpc_endpoint", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
+		// Mutually exclusive with:
+		// aws_vpc_endpoint_subnet_association
+		// aws_vpc_endpoint_route_table_association
+		// aws_vpc_endpoint_security_group_association
+		common.MutuallyExclusiveFields(r.TerraformResource, "subnet_ids", "security_group_ids", "route_table_ids")
+
 		r.References["subnet_ids"] = config.Reference{
 			Type:              "Subnet",
 			RefFieldName:      "SubnetIdRefs",
@@ -180,8 +157,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_subnet", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.LateInitializer = config.LateInitializer{
 			// NOTE(muvaf): Conflicts with AvailabilityZone. See the following
 			// for more details: https://github.com/upbound/upjet/issues/107
@@ -192,8 +167,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_network_interface", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["subnet_id"] = config.Reference{
 			Type: "Subnet",
 		}
@@ -213,8 +186,8 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_security_group", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
+		// Mutually exclusive with aws_security_group_rule
+		common.MutuallyExclusiveFields(r.TerraformResource, "ingress", "egress")
 		r.References["egress.security_groups"] = config.Reference{
 			Type:              "SecurityGroup",
 			RefFieldName:      "SecurityGroupRefs",
@@ -228,8 +201,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_security_group_rule", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["security_group_id"] = config.Reference{
 			Type: "SecurityGroup",
 		}
@@ -238,22 +209,15 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	p.AddResourceConfigurator("aws_vpc_ipv4_cidr_block_association", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
-	})
-
 	p.AddResourceConfigurator("aws_vpc_peering_connection", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
+		// Mutually exclusive with aws_vpc_peering_connection_options
+		common.MutuallyExclusiveFields(r.TerraformResource, "accepter", "requester")
 		r.References["peer_vpc_id"] = config.Reference{
 			Type: "VPC",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_route", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["route_table_id"] = config.Reference{
 			Type: "RouteTable",
 		}
@@ -279,8 +243,8 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_route_table", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
+		// These are mutually exclusive with aws_route and aws_vpn_gateway_route_propagation.
+		common.MutuallyExclusiveFields(r.TerraformResource, "route", "propagating_vgws")
 		r.References["route.vpc_peering_connection_id"] = config.Reference{
 			Type: "VPCPeeringConnection",
 		}
@@ -296,8 +260,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_route_table_association", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["subnet_id"] = config.Reference{
 			Type: "Subnet",
 		}
@@ -307,26 +269,17 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_main_route_table_association", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["route_table_id"] = config.Reference{
 			Type: "RouteTable",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_route_table_propagation", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["transit_gateway_attachment_id"] = config.Reference{
 			Type: "TransitGatewayVPCAttachment",
 		}
 		r.References["transit_gateway_route_table_id"] = config.Reference{
 			Type: "TransitGatewayRouteTable",
 		}
-	})
-
-	p.AddResourceConfigurator("aws_internet_gateway", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 	})
 }

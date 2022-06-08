@@ -20,7 +20,12 @@ const (
 
 	// VersionV1Alpha2 is used as minimum version for all manually configured
 	// resources.
+	// Deprecated: Please use VersionV1Beta1 as minimum.
 	VersionV1Alpha2 = "v1alpha2"
+
+	// VersionV1Beta1 is used for resources that meet the v1beta1 criteria
+	// here: https://github.com/upbound/arch/pull/33
+	VersionV1Beta1 = "v1beta1"
 
 	// ExternalTagsFieldName is used as field name to set external resource tags.
 	ExternalTagsFieldName = "Tags"

@@ -62,7 +62,7 @@ func Configure(p *config.Provider) {
 				Type: "SubnetGroup",
 			},
 			"security_group_ids": config.Reference{
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				RefFieldName:      "SecurityGroupIdRefs",
 				SelectorFieldName: "SecurityGroupIdSelector",
 			},

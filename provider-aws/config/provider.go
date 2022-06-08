@@ -182,6 +182,7 @@ func GetProvider() *tjconfig.Provider {
 			NamePrefixRemoval(),
 			KnownReferencers(),
 			AddExternalTagsField(),
+			ExternalNameConfigurations(),
 		)),
 	)
 

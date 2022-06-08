@@ -30,7 +30,7 @@ func Configure(p *config.Provider) {
 				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1alpha2.Bucket",
 			},
 			"vpc_security_group_ids": {
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				RefFieldName:      "VpcSecurityGroupIdRefs",
 				SelectorFieldName: "VpcSecurityGroupIdSelector",
 			},
@@ -74,12 +74,12 @@ func Configure(p *config.Provider) {
 				Type: "Cluster",
 			},
 			"security_group_names": {
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				RefFieldName:      "SecurityGroupNameRefs",
 				SelectorFieldName: "SecurityGroupNameSelector",
 			},
 			"vpc_security_group_ids": {
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.SecurityGroup",
+				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				RefFieldName:      "VpcSecurityGroupIdRefs",
 				SelectorFieldName: "VpcSecurityGroupIdSelector",
 			},

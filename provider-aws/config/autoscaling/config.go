@@ -13,26 +13,15 @@ import (
 // Configure adds configurations for autoscaling group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_autoscaling_group", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.NameAsIdentifier
+		// These are mutually exclusive with aws_autoscaling_attachment.
+		common.MutuallyExclusiveFields(r.TerraformResource, "load_balancers", "target_group_arns")
+
 		r.References["vpc_zone_identifier"] = config.Reference{
-			Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1alpha2.Subnet",
+			Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
 		}
 		r.UseAsync = true
-
-		// Managed by Attachment resource.
-		if s, ok := r.TerraformResource.Schema["load_balancers"]; ok {
-			s.Optional = false
-			s.Computed = true
-		}
-		if s, ok := r.TerraformResource.Schema["target_group_arns"]; ok {
-			s.Optional = false
-			s.Computed = true
-		}
 	})
 	p.AddResourceConfigurator("aws_autoscaling_attachment", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References["autoscaling_group_name"] = config.Reference{
 			Type: "AutoscalingGroup",
 		}
