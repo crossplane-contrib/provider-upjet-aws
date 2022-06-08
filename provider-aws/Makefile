@@ -56,7 +56,7 @@ UP_CHANNEL = main
 # Setup Images
 
 DOCKER_REGISTRY ?= crossplane
-IMAGES = provider-aws provider-aws-controller
+IMAGES = provider-aws-controller
 -include build/makelib/image.mk
 
 # ====================================================================================
