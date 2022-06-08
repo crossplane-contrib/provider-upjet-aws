@@ -365,7 +365,7 @@ func KnownReferencers() tjconfig.ResourceOption { //nolint:gocyclo
 			switch {
 			case strings.HasSuffix(k, "role_arn"):
 				r.References[k] = tjconfig.Reference{
-					Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role",
+					Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
 					Extractor: common.PathARNExtractor,
 				}
 			case strings.HasSuffix(k, "security_group_ids"):
@@ -392,21 +392,27 @@ func KnownReferencers() tjconfig.ResourceOption { //nolint:gocyclo
 				r.References["subnet_id"] = tjconfig.Reference{
 					Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
 				}
+			case "iam_roles":
+				r.References["iam_roles"] = tjconfig.Reference{
+					Type:              "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
+					RefFieldName:      "IAMRoleRefs",
+					SelectorFieldName: "IAMRoleSelector",
+				}
 			case "security_group_id":
 				r.References["security_group_id"] = tjconfig.Reference{
 					Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				}
 			case "kms_key_id":
 				r.References["kms_key_id"] = tjconfig.Reference{
-					Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
+					Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
 				}
 			case "kms_key_arn":
 				r.References["kms_key_arn"] = tjconfig.Reference{
-					Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
+					Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
 				}
 			case "kms_key":
 				r.References["kms_key"] = tjconfig.Reference{
-					Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
+					Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
 				}
 			}
 		}

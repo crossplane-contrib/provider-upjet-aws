@@ -19,8 +19,6 @@ import (
 // Configure adds configurations for ecs group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ecs_cluster", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
 			// expected id format: arn:aws:ecs:us-west-2:123456789123:cluster/example-cluster
 			w := strings.Split(tfstate["id"].(string), "/")
@@ -34,18 +32,16 @@ func Configure(p *config.Provider) {
 				Type: "CapacityProvider",
 			},
 			"execute_command_configuration.kms_key_id": config.Reference{
-				Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
+				Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
 			},
 			"log_configuration.s3_bucket_name": config.Reference{
-				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1alpha2.Bucket",
+				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
 			},
 		}
 		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("aws_ecs_service", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
 			// expected id format: arn:aws:ecs:us-east-2:123456789123:service/sample-cluster/sample-service
 			w := strings.Split(tfstate["id"].(string), "/")
@@ -67,7 +63,7 @@ func Configure(p *config.Provider) {
 				Extractor: common.PathARNExtractor,
 			},
 			"iam_role": config.Reference{
-				Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role",
+				Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
 				Extractor: common.PathARNExtractor,
 			},
 			"network_configuration.subnets": config.Reference{
@@ -85,8 +81,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_ecs_capacity_provider", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.NameAsIdentifier
 		r.References = config.References{
 			"auto_scaling_group_provider.auto_scaling_group_arn": config.Reference{
 				Type:      "github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup",
@@ -96,11 +90,9 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_ecs_task_definition", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References = config.References{
 			"execution_role_arn": config.Reference{
-				Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2.Role",
+				Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
 				Extractor: common.PathARNExtractor,
 			},
 		}

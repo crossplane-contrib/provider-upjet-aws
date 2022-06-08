@@ -6,15 +6,11 @@ package elasticloadbalancing
 
 import (
 	"github.com/upbound/upjet/pkg/config"
-
-	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure adds configurations for elasticloadbalancing group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_lb", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.ExternalName.OmittedFields = append(r.ExternalName.OmittedFields, "name_prefix")
 		r.References = config.References{
 			"security_groups": {
@@ -28,7 +24,7 @@ func Configure(p *config.Provider) {
 				SelectorFieldName: "SubnetSelector",
 			},
 			"access_logs.bucket": {
-				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1alpha2.Bucket",
+				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
 			},
 			"subnet_mapping.subnet_id": {
 				Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
@@ -38,8 +34,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_lb_listener", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References = config.References{
 			"load_balancer_arn": {
 				Type: "LB",
@@ -54,8 +48,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_lb_target_group", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.ExternalName.OmittedFields = append(r.ExternalName.OmittedFields, "name_prefix")
 		if s, ok := r.TerraformResource.Schema["name"]; ok {
 			s.Optional = false
@@ -64,8 +56,6 @@ func Configure(p *config.Provider) {
 		}
 	})
 	p.AddResourceConfigurator("aws_lb_target_group_attachment", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References = config.References{
 			"target_group_arn": {
 				Type: "LBTargetGroup",

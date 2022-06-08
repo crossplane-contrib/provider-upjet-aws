@@ -32,19 +32,19 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ec2_transit_gateway": config.IdentifierFromProvider,
 	// Imported by using the EC2 Transit Gateway Route Table, an underscore,
 	// and the destination CIDR: tgw-rtb-12345678_0.0.0.0/0
-	"aws_ec2_transit_gateway_route": FormattedID("%s_%s", "transit_gateway_route_table_id", "destination_cidr_block"),
+	"aws_ec2_transit_gateway_route": FormattedIdentifierFromProvider("%s_%s", "transit_gateway_route_table_id", "destination_cidr_block"),
 	// Imported by using the EC2 Transit Gateway Route Table identifier:
 	// tgw-rtb-12345678
 	"aws_ec2_transit_gateway_route_table": config.IdentifierFromProvider,
 	// Imported by using the EC2 Transit Gateway Route Table identifier, an
 	// underscore, and the EC2 Transit Gateway Attachment identifier, e.g.,
 	// tgw-rtb-12345678_tgw-attach-87654321
-	"aws_ec2_transit_gateway_route_table_association": FormattedID("%s_%s", "transit_gateway_route_table_id", "transit_gateway_attachment_id"),
+	"aws_ec2_transit_gateway_route_table_association": FormattedIdentifierFromProvider("%s_%s", "transit_gateway_route_table_id", "transit_gateway_attachment_id"),
 	// Imported by using the EC2 Transit Gateway Attachment identifier:
 	// tgw-attach-12345678
 	"aws_ec2_transit_gateway_vpc_attachment": config.IdentifierFromProvider,
 	// Imported by using the EC2 Transit Gateway Attachment identifier: tgw-attach-12345678
-	"aws_ec2_transit_gateway_vpc_attachment_accepter": FormattedID("%s", "transit_gateway_attachment_id"),
+	"aws_ec2_transit_gateway_vpc_attachment_accepter": FormattedIdentifierFromProvider("%s", "transit_gateway_attachment_id"),
 	// Imported using the id: lt-12345678
 	"aws_launch_template": config.IdentifierFromProvider,
 	// Imported using the id: vpc-23123
@@ -76,10 +76,163 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Imported by using the EC2 Transit Gateway Route Table identifier, an
 	// underscore, and the EC2 Transit Gateway Attachment identifier:
 	// tgw-rtb-12345678_tgw-attach-87654321
-	"aws_ec2_transit_gateway_route_table_propagation": FormattedID("%s_%s", "transit_gateway_attachment_id", "transit_gateway_route_table_id"),
+	"aws_ec2_transit_gateway_route_table_propagation": FormattedIdentifierFromProvider("%s_%s", "transit_gateway_attachment_id", "transit_gateway_route_table_id"),
 	// Imported using the id: igw-c0a643a9
-	"aws_internet_gateway": config.IdentifierFromProvider,
-	// NOTE: autoscaling, ebs and ec2 are completed at this point.
+	"aws_internet_gateway":     config.IdentifierFromProvider,
+	"aws_ecr_repository":       config.NameAsIdentifier,
+	"aws_ecrpublic_repository": ParameterAsExternalName("repository_name"),
+
+	// ecs
+	//
+	"aws_ecs_cluster":           config.NameAsIdentifier,
+	"aws_ecs_service":           config.NameAsIdentifier,
+	"aws_ecs_capacity_provider": config.NameAsIdentifier,
+	// Imported using ARN: arn:aws:ecs:us-east-1:012345678910:task-definition/mytaskfamily:123
+	"aws_ecs_task_definition": config.IdentifierFromProvider,
+
+	// eks
+	//
+	"aws_eks_cluster": config.NameAsIdentifier,
+	// Imported using the cluster_name and node_group_name separated by a
+	// colon (:): my_cluster:my_node_group
+	"aws_eks_node_group": FormattedIdentifierUserDefined("node_group_name", ":", "cluster_name"),
+	// my_cluster:my_eks_addon
+	"aws_eks_addon": FormattedIdentifierUserDefined("addon_name", ":", "cluster_name"),
+	// my_cluster:my_fargate_profile
+	"aws_eks_fargate_profile": FormattedIdentifierUserDefined("fargate_profile_name", ":", "cluster_name"),
+
+	// elasticache
+	//
+	"aws_elasticache_parameter_group":   config.NameAsIdentifier,
+	"aws_elasticache_subnet_group":      config.NameAsIdentifier,
+	"aws_elasticache_cluster":           ParameterAsExternalName("cluster_id"),
+	"aws_elasticache_replication_group": ParameterAsExternalName("replication_group_id"),
+	"aws_elasticache_user":              ParameterAsExternalName("user_id"),
+	"aws_elasticache_user_group":        ParameterAsExternalName("user_group_id"),
+
+	// elasticloadbalancing
+	//
+	// arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188
+	"aws_lb": config.IdentifierFromProvider,
+	// arn:aws:elasticloadbalancing:us-west-2:187416307283:listener/app/front-end-alb/8e4497da625e2d8a/9ab28ade35828f96
+	"aws_lb_listener": config.IdentifierFromProvider,
+	// arn:aws:elasticloadbalancing:us-west-2:187416307283:targetgroup/app-front-end/20cfe21448b66314
+	"aws_lb_target_group": config.IdentifierFromProvider,
+	// No import.
+	"aws_lb_target_group_attachment": config.IdentifierFromProvider,
+
+	// globalaccelerator
+	//
+	// arn:aws:globalaccelerator::111111111111:accelerator/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+	"aws_globalaccelerator_accelerator": config.IdentifierFromProvider,
+	// arn:aws:globalaccelerator::111111111111:accelerator/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/listener/xxxxxxx/endpoint-group/xxxxxxxx
+	"aws_globalaccelerator_endpoint_group": config.IdentifierFromProvider,
+	// arn:aws:globalaccelerator::111111111111:accelerator/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/listener/xxxxxxxx
+	"aws_globalaccelerator_listener": config.IdentifierFromProvider,
+
+	// iam
+	//
+	// AKIA1234567890
+	"aws_iam_access_key":       config.IdentifierFromProvider,
+	"aws_iam_instance_profile": config.NameAsIdentifier,
+	// arn:aws:iam::123456789012:policy/UsersManageOwnCredentials
+	"aws_iam_policy": config.IdentifierFromProvider,
+	"aws_iam_user":   config.NameAsIdentifier,
+	"aws_iam_group":  config.NameAsIdentifier,
+	"aws_iam_role":   config.NameAsIdentifier,
+	// Imported using the role name and policy arn separated by /
+	// test-role/arn:aws:iam::xxxxxxxxxxxx:policy/test-policy
+	"aws_iam_role_policy_attachment": config.IdentifierFromProvider,
+	// Imported using the user name and policy arn separated by /
+	// test-user/arn:aws:iam::xxxxxxxxxxxx:policy/test-policy
+	"aws_iam_user_policy_attachment": config.IdentifierFromProvider,
+	// Imported using the group name and policy arn separated by /
+	// test-group/arn:aws:iam::xxxxxxxxxxxx:policy/test-policy
+	"aws_iam_group_policy_attachment": config.IdentifierFromProvider,
+	// Imported using the user name and group names separated by /
+	// user1/group1/group2
+	"aws_iam_user_group_membership": iamUserGroupMembership(),
+	// arn:aws:iam::123456789012:oidc-provider/accounts.google.com
+	"aws_iam_openid_connect_provider": config.IdentifierFromProvider,
+
+	// kms
+	//
+	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	"aws_kms_key": config.IdentifierFromProvider,
+
+	// mq
+	//
+	// a1b2c3d4-d5f6-7777-8888-9999aaaabbbbcccc
+	"aws_mq_broker": config.IdentifierFromProvider,
+	// c-0187d1eb-88c8-475a-9b79-16ef5a10c94f
+	"aws_mq_configuration": config.IdentifierFromProvider,
+
+	// neptune
+	//
+	"aws_neptune_cluster": ParameterAsExternalName("cluster_identifier"),
+	// my_cluster:my_cluster_endpoint
+	"aws_neptune_cluster_endpoint":        FormattedIdentifierUserDefined("cluster_endpoint_identifier", ":", "cluster_identifier"),
+	"aws_neptune_cluster_instance":        ParameterAsExternalName("identifier"),
+	"aws_neptune_cluster_parameter_group": config.NameAsIdentifier,
+	"aws_neptune_cluster_snapshot":        ParameterAsExternalName("db_cluster_snapshot_identifier"),
+	"aws_neptune_event_subscription":      config.NameAsIdentifier,
+	"aws_neptune_parameter_group":         config.NameAsIdentifier,
+	"aws_neptune_subnet_group":            config.NameAsIdentifier,
+
+	// rds
+	//
+	"aws_rds_cluster":        ParameterAsExternalName("cluster_identifier"),
+	"aws_db_instance":        ParameterAsExternalName("identifier"),
+	"aws_db_parameter_group": config.NameAsIdentifier,
+	"aws_db_subnet_group":    config.NameAsIdentifier,
+
+	// route53
+	//
+	// N1PA6795SAMPLE
+	"aws_route53_delegation_set": config.IdentifierFromProvider,
+	// abcdef11-2222-3333-4444-555555fedcba
+	"aws_route53_health_check": config.IdentifierFromProvider,
+	// Z1D633PJN98FT9
+	"aws_route53_hosted_zone_dnssec": config.IdentifierFromProvider,
+	// Imported by using the Route 53 Hosted Zone identifier and KMS Key
+	// identifier, separated by a comma (,), e.g., Z1D633PJN98FT9,example
+	"aws_route53_key_signing_key": FormattedIdentifierUserDefined("name", ",", "hosted_zone_id"),
+	// xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+	"aws_route53_query_log": config.IdentifierFromProvider,
+	// Imported using ID of the record, which is the zone identifier, record
+	// name, and record type, separated by underscores (_)
+	// Z4KAPRWWNC7JR_dev.example.com_NS
+	"aws_route53_record": config.IdentifierFromProvider,
+	// Z123456ABCDEFG:vpc-12345678
+	"aws_route53_vpc_association_authorization": FormattedIdentifierFromProvider("%s:%s", "zone_id", "vpc_id"),
+	// Z1D633PJN98FT9
+	"aws_route53_zone": config.IdentifierFromProvider,
+	// Z123456ABCDEFG:vpc-12345678
+	"aws_route53_zone_association": FormattedIdentifierFromProvider("%s:%s", "zone_id", "vpc_id"),
+
+	// s3
+	//
+	"aws_s3_bucket": ParameterAsExternalName("bucket"),
+}
+
+func iamUserGroupMembership() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		u, ok := parameters["user"]
+		if !ok {
+			return "", errors.New("user cannot be empty")
+		}
+		gs, ok := parameters["groups"]
+		if !ok {
+			return "", errors.New("groups cannot be empty")
+		}
+		groups, ok := gs.([]string)
+		if !ok {
+			return "", errors.New("groups field needs to be an array of strings")
+		}
+		return strings.Join(append([]string{u.(string)}, groups...), "/"), nil
+	}
+	return e
 }
 
 func route() config.ExternalName {
@@ -120,9 +273,9 @@ func routeTableAssociation() config.ExternalName {
 	return e
 }
 
-// FormattedID is a helper function to construct Terraform IDs that use elements
+// FormattedIdentifierFromProvider is a helper function to construct Terraform IDs that use elements
 // from the parameters in a certain string format.
-func FormattedID(format string, keys ...string) config.ExternalName {
+func FormattedIdentifierFromProvider(format string, keys ...string) config.ExternalName {
 	if strings.Count(format, "%s") != len(keys) {
 		panic("count of keys is not equal to number of variables in format")
 	}
@@ -141,6 +294,51 @@ func FormattedID(format string, keys ...string) config.ExternalName {
 			vals[i] = s
 		}
 		return fmt.Sprintf(format, vals), nil
+	}
+	return e
+}
+
+func FormattedIdentifierUserDefined(param, separator string, keys ...string) config.ExternalName {
+	e := ParameterAsExternalName(param)
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		vals := make([]string, len(keys)+1)
+		for i, k := range keys {
+			v, ok := parameters[k]
+			if !ok {
+				return "", errors.Errorf("%s cannot be empty", k)
+			}
+			s, ok := v.(string)
+			if !ok {
+				return "", errors.Errorf("%s needs to be a string", k)
+			}
+			vals[i] = s
+		}
+		vals[len(vals)-1] = externalName
+		return strings.Join(vals, separator), nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("id in tfstate cannot be empty")
+		}
+		s, ok := id.(string)
+		if !ok {
+			return "", errors.New("value of id needs to be string")
+		}
+		w := strings.Split(s, separator)
+		return w[len(w)-1], nil
+	}
+	return e
+}
+
+func ParameterAsExternalName(paramName string) config.ExternalName {
+	e := config.NameAsIdentifier
+	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
+		base[paramName] = externalName
+	}
+	e.OmittedFields = []string{
+		paramName,
+		paramName + "_prefix",
 	}
 	return e
 }

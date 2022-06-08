@@ -13,21 +13,11 @@ import (
 // Configure adds configurations for rds group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_rds_cluster", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.ExternalName{
-			SetIdentifierArgumentFn: func(base map[string]interface{}, name string) {
-				base["cluster_identifier"] = name
-			},
-			OmittedFields: []string{
-				"cluster_identifier",
-				"cluster_identifier_prefix",
-			},
-			GetExternalNameFn: config.IDAsExternalName,
-			GetIDFn:           config.ExternalNameAsID,
-		}
+		// Mutually exclusive with aws_rds_cluster_role_association
+		common.MutuallyExclusiveFields(r.TerraformResource, "iam_roles")
 		r.References = config.References{
 			"s3_import.bucket_name": {
-				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1alpha2.Bucket",
+				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
 			},
 			"vpc_security_group_ids": {
 				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
@@ -45,30 +35,18 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_db_instance", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.ExternalName{
-			SetIdentifierArgumentFn: func(base map[string]interface{}, name string) {
-				base["identifier"] = name
-			},
-			OmittedFields: []string{
-				"identifier",
-				"identifier_prefix",
-			},
-			GetExternalNameFn: config.IDAsExternalName,
-			GetIDFn:           config.ExternalNameAsID,
-		}
 		r.References = config.References{
 			"restore_to_point_in_time.source_db_instance_identifier": {
 				Type: "Instance",
 			},
 			"s3_import.bucket_name": {
-				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1alpha2.Bucket",
+				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
 			},
 			"kms_key_id": {
-				Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
+				Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
 			},
 			"performance_insights_kms_key_id": {
-				Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2.Key",
+				Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
 			},
 			"restore_to_point_in_time.source_cluster_identifier": {
 				Type: "Cluster",
