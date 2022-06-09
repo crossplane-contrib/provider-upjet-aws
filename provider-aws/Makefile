@@ -55,7 +55,7 @@ UP_CHANNEL = main
 # ====================================================================================
 # Setup Images
 
-DOCKER_REGISTRY ?= crossplane
+DOCKER_REGISTRY ?= upbound
 IMAGES = provider-aws-controller
 -include build/makelib/image.mk
 
