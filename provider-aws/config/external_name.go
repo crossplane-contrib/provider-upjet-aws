@@ -19,11 +19,19 @@ import (
 // ExternalNameConfigs contains all external name configurations for this
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
+	// autoscaling
+	//
 	"aws_autoscaling_group": config.NameAsIdentifier,
 	// No terraform import.
 	"aws_autoscaling_attachment": config.IdentifierFromProvider,
+
+	// ebs
+	//
 	// EBS Volumes can be imported using the id: vol-049df61146c4d7901
 	"aws_ebs_volume": config.IdentifierFromProvider,
+
+	// ec2
+	//
 	// Instances can be imported using the id: i-12345678
 	"aws_instance": config.IdentifierFromProvider,
 	// No terraform import.
@@ -32,19 +40,19 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ec2_transit_gateway": config.IdentifierFromProvider,
 	// Imported by using the EC2 Transit Gateway Route Table, an underscore,
 	// and the destination CIDR: tgw-rtb-12345678_0.0.0.0/0
-	"aws_ec2_transit_gateway_route": FormattedIdentifierFromProvider("%s_%s", "transit_gateway_route_table_id", "destination_cidr_block"),
+	"aws_ec2_transit_gateway_route": FormattedIdentifierFromProvider("_", "transit_gateway_route_table_id", "destination_cidr_block"),
 	// Imported by using the EC2 Transit Gateway Route Table identifier:
 	// tgw-rtb-12345678
 	"aws_ec2_transit_gateway_route_table": config.IdentifierFromProvider,
 	// Imported by using the EC2 Transit Gateway Route Table identifier, an
 	// underscore, and the EC2 Transit Gateway Attachment identifier, e.g.,
 	// tgw-rtb-12345678_tgw-attach-87654321
-	"aws_ec2_transit_gateway_route_table_association": FormattedIdentifierFromProvider("%s_%s", "transit_gateway_route_table_id", "transit_gateway_attachment_id"),
+	"aws_ec2_transit_gateway_route_table_association": FormattedIdentifierFromProvider("_", "transit_gateway_route_table_id", "transit_gateway_attachment_id"),
 	// Imported by using the EC2 Transit Gateway Attachment identifier:
 	// tgw-attach-12345678
 	"aws_ec2_transit_gateway_vpc_attachment": config.IdentifierFromProvider,
 	// Imported by using the EC2 Transit Gateway Attachment identifier: tgw-attach-12345678
-	"aws_ec2_transit_gateway_vpc_attachment_accepter": FormattedIdentifierFromProvider("%s", "transit_gateway_attachment_id"),
+	"aws_ec2_transit_gateway_vpc_attachment_accepter": FormattedIdentifierFromProvider("", "transit_gateway_attachment_id"),
 	// Imported using the id: lt-12345678
 	"aws_launch_template": config.IdentifierFromProvider,
 	// Imported using the id: vpc-23123
@@ -76,10 +84,16 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Imported by using the EC2 Transit Gateway Route Table identifier, an
 	// underscore, and the EC2 Transit Gateway Attachment identifier:
 	// tgw-rtb-12345678_tgw-attach-87654321
-	"aws_ec2_transit_gateway_route_table_propagation": FormattedIdentifierFromProvider("%s_%s", "transit_gateway_attachment_id", "transit_gateway_route_table_id"),
+	"aws_ec2_transit_gateway_route_table_propagation": FormattedIdentifierFromProvider("_", "transit_gateway_attachment_id", "transit_gateway_route_table_id"),
 	// Imported using the id: igw-c0a643a9
-	"aws_internet_gateway":     config.IdentifierFromProvider,
-	"aws_ecr_repository":       config.NameAsIdentifier,
+	"aws_internet_gateway": config.IdentifierFromProvider,
+
+	// ecr
+	//
+	"aws_ecr_repository": config.NameAsIdentifier,
+
+	// ecrpublic
+	//
 	"aws_ecrpublic_repository": ParameterAsExternalName("repository_name"),
 
 	// ecs
@@ -204,11 +218,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Z4KAPRWWNC7JR_dev.example.com_NS
 	"aws_route53_record": config.IdentifierFromProvider,
 	// Z123456ABCDEFG:vpc-12345678
-	"aws_route53_vpc_association_authorization": FormattedIdentifierFromProvider("%s:%s", "zone_id", "vpc_id"),
+	"aws_route53_vpc_association_authorization": FormattedIdentifierFromProvider(":", "zone_id", "vpc_id"),
 	// Z1D633PJN98FT9
 	"aws_route53_zone": config.IdentifierFromProvider,
 	// Z123456ABCDEFG:vpc-12345678
-	"aws_route53_zone_association": FormattedIdentifierFromProvider("%s:%s", "zone_id", "vpc_id"),
+	"aws_route53_zone_association": FormattedIdentifierFromProvider(":", "zone_id", "vpc_id"),
 	// Imported using the id and version, e.g.,
 	// 01a52019-d16f-422a-ae72-c306d2b6df7e/1
 	"aws_route53_traffic_policy": config.IdentifierFromProvider,
@@ -307,10 +321,7 @@ func routeTableAssociation() config.ExternalName {
 // IDs that use elements from the parameters in a certain string format.
 // It should be used in cases where all information in the ID is gathered from
 // the spec and not user defined like name. For example, zone_id:vpc_id.
-func FormattedIdentifierFromProvider(format string, keys ...string) config.ExternalName {
-	if strings.Count(format, "%s") != len(keys) {
-		panic("count of keys is not equal to number of variables in format")
-	}
+func FormattedIdentifierFromProvider(separator string, keys ...string) config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
 		vals := make([]string, len(keys))
@@ -325,7 +336,7 @@ func FormattedIdentifierFromProvider(format string, keys ...string) config.Exter
 			}
 			vals[i] = s
 		}
-		return fmt.Sprintf(format, vals), nil
+		return strings.Join(vals, separator), nil
 	}
 	return e
 }
