@@ -18,20 +18,11 @@ package globalaccelerator
 
 import (
 	"github.com/upbound/upjet/pkg/config"
-
-	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure adds configurations for ebs group.
 func Configure(p *config.Provider) {
-	p.AddResourceConfigurator("aws_globalaccelerator_accelerator", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
-	})
-
 	p.AddResourceConfigurator("aws_globalaccelerator_endpoint_group", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References = config.References{
 			"listener_arn": {
 				Type: "Listener",
@@ -40,8 +31,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_globalaccelerator_listener", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References = config.References{
 			"accelerator_arn": {
 				Type: "Accelerator",

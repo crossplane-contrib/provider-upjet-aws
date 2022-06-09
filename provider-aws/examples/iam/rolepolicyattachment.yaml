@@ -1,4 +1,4 @@
-apiVersion: iam.aws.upbound.io/v1alpha2
+apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   name: sample-cluster-policy
@@ -8,7 +8,7 @@ spec:
     roleRef:
       name: sample-eks-cluster
 ---
-apiVersion: iam.aws.upbound.io/v1alpha2
+apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   name: sample-vpc-resource-controller
@@ -18,7 +18,7 @@ spec:
     roleRef:
       name: sample-eks-cluster
 ---
-apiVersion: iam.aws.upbound.io/v1alpha2
+apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   name: sample-node-group-eks-policy
@@ -28,7 +28,7 @@ spec:
     roleRef:
       name: sample-node-role
 ---
-apiVersion: iam.aws.upbound.io/v1alpha2
+apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   name: sample-node-group-ecr-policy
@@ -38,7 +38,7 @@ spec:
     roleRef:
       name: sample-node-role
 ---
-apiVersion: iam.aws.upbound.io/v1alpha2
+apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   name: sample-node-group-cni-policy

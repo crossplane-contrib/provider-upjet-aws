@@ -1,4 +1,4 @@
-apiVersion: mq.aws.upbound.io/v1alpha2
+apiVersion: mq.aws.upbound.io/v1beta1
 kind: Broker
 metadata:
   name: example

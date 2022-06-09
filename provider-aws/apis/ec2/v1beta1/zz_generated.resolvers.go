@@ -9,8 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha21 "github.com/upbound/official-providers/provider-aws/apis/iam/v1alpha2"
-	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/kms/v1alpha2"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -28,8 +28,8 @@ func (mg *EBSVolume) ResolveReferences(ctx context.Context, c client.Reader) err
 		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 		To: reference.To{
-			List:    &v1alpha2.KeyList{},
-			Managed: &v1alpha2.Key{},
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
 		},
 	})
 	if err != nil {
@@ -98,8 +98,8 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.EBSBlockDevice[i3].KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.EBSBlockDevice[i3].KMSKeyIDSelector,
 			To: reference.To{
-				List:    &v1alpha2.KeyList{},
-				Managed: &v1alpha2.Key{},
+				List:    &v1beta1.KeyList{},
+				Managed: &v1beta1.Key{},
 			},
 		})
 		if err != nil {
@@ -134,8 +134,8 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.RootBlockDevice[i3].KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.RootBlockDevice[i3].KMSKeyIDSelector,
 			To: reference.To{
-				List:    &v1alpha2.KeyList{},
-				Managed: &v1alpha2.Key{},
+				List:    &v1beta1.KeyList{},
+				Managed: &v1beta1.Key{},
 			},
 		})
 		if err != nil {
@@ -238,8 +238,8 @@ func (mg *LaunchTemplate) ResolveReferences(ctx context.Context, c client.Reader
 				Reference:    mg.Spec.ForProvider.BlockDeviceMappings[i3].EBS[i4].KMSKeyIDRef,
 				Selector:     mg.Spec.ForProvider.BlockDeviceMappings[i3].EBS[i4].KMSKeyIDSelector,
 				To: reference.To{
-					List:    &v1alpha2.KeyList{},
-					Managed: &v1alpha2.Key{},
+					List:    &v1beta1.KeyList{},
+					Managed: &v1beta1.Key{},
 				},
 			})
 			if err != nil {
@@ -257,8 +257,8 @@ func (mg *LaunchTemplate) ResolveReferences(ctx context.Context, c client.Reader
 			Reference:    mg.Spec.ForProvider.IAMInstanceProfile[i3].ArnRef,
 			Selector:     mg.Spec.ForProvider.IAMInstanceProfile[i3].ArnSelector,
 			To: reference.To{
-				List:    &v1alpha21.InstanceProfileList{},
-				Managed: &v1alpha21.InstanceProfile{},
+				List:    &v1beta11.InstanceProfileList{},
+				Managed: &v1beta11.InstanceProfile{},
 			},
 		})
 		if err != nil {
@@ -275,8 +275,8 @@ func (mg *LaunchTemplate) ResolveReferences(ctx context.Context, c client.Reader
 			Reference:    mg.Spec.ForProvider.IAMInstanceProfile[i3].NameRef,
 			Selector:     mg.Spec.ForProvider.IAMInstanceProfile[i3].NameSelector,
 			To: reference.To{
-				List:    &v1alpha21.InstanceProfileList{},
-				Managed: &v1alpha21.InstanceProfile{},
+				List:    &v1beta11.InstanceProfileList{},
+				Managed: &v1beta11.InstanceProfile{},
 			},
 		})
 		if err != nil {

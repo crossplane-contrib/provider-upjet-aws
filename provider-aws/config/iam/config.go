@@ -13,8 +13,6 @@ import (
 // Configure adds configurations for iam group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_iam_access_key", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References = config.References{
 			"user": config.Reference{
 				Type: "User",
@@ -22,9 +20,15 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("aws_iam_role", func(r *config.Resource) {
+		// Mutually exclusive with:
+		// aws_iam_policy_attachment
+		// aws_iam_role_policy_attachment
+		// aws_iam_role_policy
+		common.MutuallyExclusiveFields(r.TerraformResource, "inline_policy", "managed_policy_arns")
+	})
+
 	p.AddResourceConfigurator("aws_iam_instance_profile", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.NameAsIdentifier
 		r.References = config.References{
 			"role": config.Reference{
 				Type: "Role",
@@ -32,30 +36,7 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	p.AddResourceConfigurator("aws_iam_policy", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		// TODO(muvaf): We can reconstruct ARN of this resource in GetIDFn.
-		r.ExternalName = config.IdentifierFromProvider
-	})
-
-	p.AddResourceConfigurator("aws_iam_user", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.NameAsIdentifier
-	})
-
-	p.AddResourceConfigurator("aws_iam_group", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.NameAsIdentifier
-	})
-
-	p.AddResourceConfigurator("aws_iam_role", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.NameAsIdentifier
-	})
-
 	p.AddResourceConfigurator("aws_iam_role_policy_attachment", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References = config.References{
 			"role": config.Reference{
 				Type: "Role",
@@ -68,8 +49,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_iam_user_policy_attachment", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References = config.References{
 			"user": config.Reference{
 				Type: "User",
@@ -82,8 +61,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_iam_group_policy_attachment", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References = config.References{
 			"group": config.Reference{
 				Type: "Group",
@@ -96,8 +73,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_iam_user_group_membership", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
 		r.References = config.References{
 			"user": config.Reference{
 				Type: "User",
@@ -109,10 +84,4 @@ func Configure(p *config.Provider) {
 			},
 		}
 	})
-
-	p.AddResourceConfigurator("aws_iam_openid_connect_provider", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-		r.ExternalName = config.IdentifierFromProvider
-	})
-
 }

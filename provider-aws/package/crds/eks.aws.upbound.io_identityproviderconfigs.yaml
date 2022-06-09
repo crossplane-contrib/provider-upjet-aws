@@ -32,7 +32,7 @@ spec:
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
-    name: v1alpha2
+    name: v1beta1
     schema:
       openAPIV3Schema:
         description: IdentityProviderConfig is the Schema for the IdentityProviderConfigs
@@ -98,8 +98,6 @@ spec:
                           type: string
                         groupsPrefix:
                           type: string
-                        identityProviderConfigName:
-                          type: string
                         issuerUrl:
                           type: string
                         requiredClaims:
@@ -112,7 +110,6 @@ spec:
                           type: string
                       required:
                       - clientId
-                      - identityProviderConfigName
                       - issuerUrl
                       type: object
                     type: array

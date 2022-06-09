@@ -25,7 +25,6 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/elasticloadbalancing"
 	"github.com/upbound/official-providers/provider-aws/config/globalaccelerator"
 	"github.com/upbound/official-providers/provider-aws/config/iam"
-	"github.com/upbound/official-providers/provider-aws/config/kms"
 	"github.com/upbound/official-providers/provider-aws/config/neptune"
 	"github.com/upbound/official-providers/provider-aws/config/rds"
 	"github.com/upbound/official-providers/provider-aws/config/route53"
@@ -164,6 +163,10 @@ var skipList = []string{
 	"aws_iam_group_policy$",            // identical with aws_iam_*_policy_attachment resources.
 	"aws_iam_role_policy$",             // identical with aws_iam_*_policy_attachment resources.
 	"aws_iam_user_policy$",             // identical with aws_iam_*_policy_attachment resources.
+	"aws_alb$",                         // identical with aws_lb.
+	"aws_alb_listener$",                // identical with aws_lb_listener.
+	"aws_alb_target_group$",            // identical with aws_lb_target_group.
+	"aws_alb_target_group_attachment$", // identical with aws_lb_target_group_attachment.
 }
 
 // GetProvider returns provider configuration
@@ -198,7 +201,6 @@ func GetProvider() *tjconfig.Provider {
 		elasticloadbalancing.Configure,
 		globalaccelerator.Configure,
 		iam.Configure,
-		kms.Configure,
 		rds.Configure,
 		s3.Configure,
 		route53.Configure,

@@ -18,22 +18,23 @@ import (
 	"github.com/upbound/upjet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/eks/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/eks/v1beta1"
 )
 
 // Setup adds a controller that reconciles IdentityProviderConfig managed resources.
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
-	name := managed.ControllerName(v1alpha2.IdentityProviderConfig_GroupVersionKind.String())
+	name := managed.ControllerName(v1beta1.IdentityProviderConfig_GroupVersionKind.String())
 	var initializers managed.InitializerChain
 	for _, i := range o.Provider.Resources["aws_eks_identity_provider_config"].InitializerFns {
 		initializers = append(initializers, i(mgr.GetClient()))
 	}
+	initializers = append(initializers, managed.NewNameAsExternalName(mgr.GetClient()))
 	cps := []managed.ConnectionPublisher{managed.NewAPISecretPublisher(mgr.GetClient(), mgr.GetScheme())}
 	if o.SecretStoreConfigGVK != nil {
 		cps = append(cps, connection.NewDetailsManager(mgr.GetClient(), *o.SecretStoreConfigGVK))
 	}
 	r := managed.NewReconciler(mgr,
-		xpresource.ManagedKind(v1alpha2.IdentityProviderConfig_GroupVersionKind),
+		xpresource.ManagedKind(v1beta1.IdentityProviderConfig_GroupVersionKind),
 		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_eks_identity_provider_config"])),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
@@ -46,6 +47,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		Named(name).
 		WithOptions(o.ForControllerRuntime()).
-		For(&v1alpha2.IdentityProviderConfig{}).
+		For(&v1beta1.IdentityProviderConfig{}).
 		Complete(ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter))
 }

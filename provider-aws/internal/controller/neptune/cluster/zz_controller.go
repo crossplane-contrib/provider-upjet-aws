@@ -18,12 +18,12 @@ import (
 	"github.com/upbound/upjet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha2 "github.com/upbound/official-providers/provider-aws/apis/neptune/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/neptune/v1beta1"
 )
 
 // Setup adds a controller that reconciles Cluster managed resources.
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
-	name := managed.ControllerName(v1alpha2.Cluster_GroupVersionKind.String())
+	name := managed.ControllerName(v1beta1.Cluster_GroupVersionKind.String())
 	var initializers managed.InitializerChain
 	for _, i := range o.Provider.Resources["aws_neptune_cluster"].InitializerFns {
 		initializers = append(initializers, i(mgr.GetClient()))
@@ -34,9 +34,9 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		cps = append(cps, connection.NewDetailsManager(mgr.GetClient(), *o.SecretStoreConfigGVK))
 	}
 	r := managed.NewReconciler(mgr,
-		xpresource.ManagedKind(v1alpha2.Cluster_GroupVersionKind),
+		xpresource.ManagedKind(v1beta1.Cluster_GroupVersionKind),
 		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_neptune_cluster"],
-			tjcontroller.WithCallbackProvider(tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1alpha2.Cluster_GroupVersionKind))),
+			tjcontroller.WithCallbackProvider(tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.Cluster_GroupVersionKind))),
 		)),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
@@ -49,6 +49,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		Named(name).
 		WithOptions(o.ForControllerRuntime()).
-		For(&v1alpha2.Cluster{}).
+		For(&v1beta1.Cluster{}).
 		Complete(ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter))
 }

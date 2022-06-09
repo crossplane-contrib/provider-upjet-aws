@@ -1,4 +1,4 @@
-apiVersion: neptune.aws.upbound.io/v1alpha2
+apiVersion: neptune.aws.upbound.io/v1beta1
 kind: EventSubscription
 metadata:
   name: sample-event-sub
