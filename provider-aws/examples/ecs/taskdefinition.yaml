@@ -1,4 +1,4 @@
-apiVersion: ecs.aws.upbound.io/v1alpha2
+apiVersion: ecs.aws.upbound.io/v1beta1
 kind: TaskDefinition
 metadata:
   name: sample-task

@@ -1,4 +1,4 @@
-apiVersion: kms.aws.upbound.io/v1alpha2
+apiVersion: kms.aws.upbound.io/v1beta1
 kind: Key
 metadata:
   name: sample-key

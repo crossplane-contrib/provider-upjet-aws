@@ -1,4 +1,4 @@
-apiVersion: ecrpublic.aws.upbound.io/v1alpha2
+apiVersion: ecrpublic.aws.upbound.io/v1beta1
 kind: Repository
 metadata:
   name: sample-repository

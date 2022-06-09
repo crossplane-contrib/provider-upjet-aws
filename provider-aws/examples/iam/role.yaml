@@ -1,4 +1,4 @@
-apiVersion: iam.aws.upbound.io/v1alpha2
+apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   name: sample-eks-cluster
@@ -18,7 +18,7 @@ spec:
         ]
       }
 ---
-apiVersion: iam.aws.upbound.io/v1alpha2
+apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   name: sample-node-role
