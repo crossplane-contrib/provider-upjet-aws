@@ -105,7 +105,7 @@ run: go.build
 xpkg.build: $(UP)
 	@$(INFO) Building package provider-aws-$(VERSION).xpkg
 	@mkdir -p $(OUTPUT_DIR)/xpkg
-	@$(UP) xpkg build --controller $(BUILD_REGISTRY)/provider-aws-controller-$(SAFEHOSTARCH) -f ./package --name ../_output/xpkg/provider-aws-$(VERSION).xpkg || $(FAIL)
+	@$(UP) xpkg build --controller $(BUILD_REGISTRY)/provider-aws-controller-$(SAFEHOSTARCH) -f ./package -e ./examples --name ../_output/xpkg/provider-aws-$(VERSION).xpkg || $(FAIL)
 	@$(OK) Built package provider-aws-$(VERSION).xpkg
 
 xpkg.push: $(UP)
