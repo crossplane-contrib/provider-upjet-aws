@@ -48,13 +48,15 @@ GO111MODULE = on
 # ====================================================================================
 # Setup Kubernetes tools
 
+UP_VERSION = v0.12.0-rc.0.30.g591e132
+UP_CHANNEL = main
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================
 # Setup Images
 
-DOCKER_REGISTRY ?= crossplane
-IMAGES = provider-aws provider-aws-controller
+DOCKER_REGISTRY ?= upbound
+IMAGES = provider-aws
 -include build/makelib/image.mk
 
 # ====================================================================================
@@ -99,6 +101,22 @@ run: go.build
 	@$(INFO) Running Crossplane locally out-of-cluster . . .
 	@# To see other arguments that can be provided, run the command with --help instead
 	$(GO_OUT_DIR)/provider --debug
+
+xpkg.build: $(UP)
+	@$(INFO) Building package provider-aws-$(VERSION).xpkg
+	@mkdir -p $(OUTPUT_DIR)/xpkg
+	@$(UP) xpkg build --controller $(BUILD_REGISTRY)/provider-aws-$(SAFEHOSTARCH) -f ./package -e ./examples --name ../_output/xpkg/provider-aws-$(VERSION).xpkg || $(FAIL)
+	@$(OK) Built package provider-aws-$(VERSION).xpkg
+
+xpkg.push: $(UP)
+	@$(INFO) Pushing package provider-aws-$(VERSION).xpkg
+	@$(UP) xpkg push -f $(OUTPUT_DIR)/xpkg/provider-aws-$(VERSION).xpkg upbound/provider-aws-staging:$(VERSION) || $(FAIL)
+	@$(OK) Pushed package provider-aws-$(VERSION).xpkg
+
+xpkg.load: $(UP)
+	@$(INFO) Loading package provider-aws-$(VERSION).xpkg into Docker daemon
+	@docker load -i $(OUTPUT_DIR)/xpkg/provider-aws-$(VERSION).xpkg
+	@$(OK) Loaded package provider-aws-$(VERSION).xpkg into Docker daemon
 
 .PHONY: cobertura submodules fallthrough run crds.clean
 

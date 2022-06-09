@@ -2,6 +2,3 @@ apiVersion: meta.pkg.crossplane.io/v1alpha1
 kind: Provider
 metadata:
   name: provider-aws
-spec:
-  controller:
-    image: DOCKER_REGISTRY/provider-aws-controller:VERSION
