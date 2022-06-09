@@ -226,6 +226,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Imported using the id and version, e.g.,
 	// 01a52019-d16f-422a-ae72-c306d2b6df7e/1
 	"aws_route53_traffic_policy": config.IdentifierFromProvider,
+	// df579d9a-6396-410e-ac22-e7ad60cf9e7e
+	"aws_route53_traffic_policy_instance": config.IdentifierFromProvider,
 
 	// route53resolver
 	//
