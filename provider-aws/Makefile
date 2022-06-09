@@ -114,9 +114,9 @@ xpkg.push: $(UP)
 	@$(OK) Pushed package provider-aws-$(VERSION).xpkg
 
 xpkg.load: $(UP)
-	@$(INFO) Loading package provider-aws-$(VERSION).xpkg into Docker Daemon
+	@$(INFO) Loading package provider-aws-$(VERSION).xpkg into Docker daemon
 	@docker load -i $(OUTPUT_DIR)/xpkg/provider-aws-$(VERSION).xpkg
-	@$(OK) Loaded package provider-aws-$(VERSION).xpkg into Docker Daemon
+	@$(OK) Loaded package provider-aws-$(VERSION).xpkg into Docker daemon
 
 .PHONY: cobertura submodules fallthrough run crds.clean
 
