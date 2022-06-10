@@ -8,12 +8,11 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
-	"github.com/upbound/official-providers/provider-aws/config/mq"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	tjconfig "github.com/upbound/upjet/pkg/config"
 
+	"github.com/upbound/official-providers/provider-aws/config/acm"
 	"github.com/upbound/official-providers/provider-aws/config/autoscaling"
 	"github.com/upbound/official-providers/provider-aws/config/ebs"
 	"github.com/upbound/official-providers/provider-aws/config/ec2"
@@ -25,6 +24,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/elasticloadbalancing"
 	"github.com/upbound/official-providers/provider-aws/config/globalaccelerator"
 	"github.com/upbound/official-providers/provider-aws/config/iam"
+	"github.com/upbound/official-providers/provider-aws/config/mq"
 	"github.com/upbound/official-providers/provider-aws/config/neptune"
 	"github.com/upbound/official-providers/provider-aws/config/rds"
 	"github.com/upbound/official-providers/provider-aws/config/route53"
@@ -149,6 +149,9 @@ var IncludedResources = []string{
 	"aws_globalaccelerator_accelerator",
 	"aws_globalaccelerator_endpoint_group",
 	"aws_globalaccelerator_listener",
+
+	// ACM(Certificate Manager)
+	"aws_acm_.+",
 }
 
 var skipList = []string{
@@ -190,6 +193,7 @@ func GetProvider() *tjconfig.Provider {
 	)
 
 	for _, configure := range []func(provider *tjconfig.Provider){
+		acm.Configure,
 		autoscaling.Configure,
 		ebs.Configure,
 		ec2.Configure,

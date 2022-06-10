@@ -9,6 +9,8 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
+	certificate "github.com/upbound/official-providers/provider-aws/internal/controller/acm/certificate"
+	certificatevalidation "github.com/upbound/official-providers/provider-aws/internal/controller/acm/certificatevalidation"
 	attachment "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/attachment"
 	autoscalinggroup "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/autoscalinggroup"
 	ebsvolume "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/ebsvolume"
@@ -114,6 +116,8 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		certificate.Setup,
+		certificatevalidation.Setup,
 		attachment.Setup,
 		autoscalinggroup.Setup,
 		ebsvolume.Setup,

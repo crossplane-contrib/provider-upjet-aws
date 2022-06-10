@@ -19,6 +19,13 @@ import (
 // ExternalNameConfigs contains all external name configurations for this
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
+
+	// ACM
+	// Imported using ARN: arn:aws:acm:eu-central-1:123456789012:certificate/7e7a28d2-163f-4b8f-b9cd-822f96c08d6a
+	"aws_acm_certificate": config.IdentifierFromProvider,
+	// No import documented, but https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate_validation#id
+	"aws_acm_certificate_validation": config.IdentifierFromProvider,
+
 	// autoscaling
 	//
 	"aws_autoscaling_group": config.NameAsIdentifier,

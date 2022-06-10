@@ -1,0 +1,17 @@
+# Please see
+# https://github.com/upbound/official-providers/pull/43 and
+# https://github.com/upbound/platform-core/issues/301
+# for a full validation test
+apiVersion: acm.aws.upbound.io/v1beta1
+kind: CertificateValidation
+metadata:
+  name: example-dns
+spec:
+  forProvider:
+    region: eu-central-1
+    certificateArnRef:
+      name: example-dns
+    validationRecordFqdns:
+      - _6a48817259ef461524224d64f7a209f4.example-dns.upbound-providers.io
+  providerConfigRef:
+    name: default
