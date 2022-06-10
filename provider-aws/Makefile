@@ -110,7 +110,7 @@ xpkg.build: $(UP)
 
 xpkg.push: $(UP)
 	@$(INFO) Pushing package provider-aws-$(VERSION).xpkg
-	@$(UP) xpkg push -f $(OUTPUT_DIR)/xpkg/provider-aws-$(VERSION).xpkg upbound/provider-aws-staging:$(VERSION) || $(FAIL)
+	@$(UP) xpkg push -f $(OUTPUT_DIR)/xpkg/provider-aws-$(VERSION).xpkg xpkg.upbound.io/upbound/provider-aws-staging:$(VERSION) || $(FAIL)
 	@$(OK) Pushed package provider-aws-$(VERSION).xpkg
 
 xpkg.load: $(UP)
