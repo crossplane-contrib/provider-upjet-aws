@@ -4,6 +4,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    region: us-east-1
     rule:
     - repositoryFilter:
       - filter: example

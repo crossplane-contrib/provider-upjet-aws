@@ -4,15 +4,14 @@ metadata:
   name: example
 spec:
   forProvider:
+    region: us-east-1
     catalogData:
     - aboutText: About Text
       architectures:
       - ARM
       description: Description
-      logoImageBlob: ${filebase64(image.png)}
       operatingSystems:
       - Linux
       usageText: Usage Text
-    provider: us-east-1
   providerConfigRef:
     name: example

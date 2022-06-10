@@ -4,6 +4,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    region: us-east-1
     policy: |
       {
           "rules": [
@@ -22,6 +23,6 @@ spec:
               }
           ]
       }
-    repository: ${aws_ecr_repository.foo.name}
+    repository: sample-repository
   providerConfigRef:
     name: example

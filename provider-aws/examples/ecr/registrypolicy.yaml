@@ -4,24 +4,26 @@ metadata:
   name: example
 spec:
   forProvider:
+    region: us-east-1
     policy: |-
-      ${jsonencode({
-          Version = "2012-10-17",
-          Statement = [
-            {
-              Sid    = "testpolicy",
-              Effect = "Allow",
-              Principal = {
-                "AWS" : "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root"
-              },
-              Action = [
-                "ecr:ReplicateImage"
-              ],
-              Resource = [
-                "arn:${data.aws_partition.current.partition}:ecr:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:repository/*"
-              ]
-            }
+      {
+          "Version":"2012-10-17",
+          "Statement":[
+              {
+                  "Sid":"ReplicationAccessCrossAccount",
+                  "Effect":"Allow",
+                  "Principal":{
+                      "AWS":"arn:aws:iam::${ACCOUNT_ID}:root"
+                  },
+                  "Action":[
+                      "ecr:CreateRepository",
+                      "ecr:ReplicateImage"
+                  ],
+                  "Resource": [
+                      "arn:aws:ecr:us-west-2:${ACCOUNT_ID}:repository/*"
+                  ]
+              }
           ]
-        })}
+      }
   providerConfigRef:
     name: example

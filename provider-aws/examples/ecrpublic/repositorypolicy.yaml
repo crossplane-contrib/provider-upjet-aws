@@ -4,6 +4,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    region: us-east-1
     policy: |
       {
           "Version": "2008-10-17",
