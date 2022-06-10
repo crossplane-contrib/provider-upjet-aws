@@ -42,9 +42,11 @@ var IncludedResources = []string{
 	"aws_lb_target_group$",
 	"aws_lb_target_group_attachment$",
 
-	// ECR
-	"aws_ecr_repository$",
-	"aws_ecrpublic_repository$",
+	// ecr
+	"aws_ecr_*.",
+
+	// ecrpublic
+	"aws_ecrpublic_*.$",
 
 	// RDS
 	"aws_rds_cluster$",

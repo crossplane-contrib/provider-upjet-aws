@@ -98,10 +98,25 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// ecr
 	//
 	"aws_ecr_repository": config.NameAsIdentifier,
+	// Imported using the name of the repository.
+	"aws_ecr_lifecycle_policy": config.IdentifierFromProvider,
+	// Use the ecr_repository_prefix to import a Pull Through Cache Rule.
+	"aws_ecr_pull_through_cache_rule": config.IdentifierFromProvider,
+	// Imported using the registry id, which is not a parameter at all.
+	"aws_ecr_registry_policy": config.IdentifierFromProvider,
+	// Imported using the registry id, which is not a parameter at all.
+	"aws_ecr_registry_scanning_configuration": config.IdentifierFromProvider,
+	// Imported using the registry id, which is not a parameter at all.
+	"aws_ecr_replication_configuration": config.IdentifierFromProvider,
+	// Imported using the parameter called repository but this is not the name
+	// of the resource, only a configuration/reference.
+	"aws_ecr_repository_policy": config.IdentifierFromProvider,
 
 	// ecrpublic
 	//
 	"aws_ecrpublic_repository": ParameterAsExternalName("repository_name"),
+	// Imported using the repository name.
+	"aws_ecrpublic_repository_policy": config.IdentifierFromProvider,
 
 	// ecs
 	//
