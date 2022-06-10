@@ -36,8 +36,15 @@ import (
 	vpcendpoint "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcendpoint"
 	vpcipv4cidrblockassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcipv4cidrblockassociation"
 	vpcpeeringconnection "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcpeeringconnection"
+	lifecyclepolicy "github.com/upbound/official-providers/provider-aws/internal/controller/ecr/lifecyclepolicy"
+	pullthroughcacherule "github.com/upbound/official-providers/provider-aws/internal/controller/ecr/pullthroughcacherule"
+	registrypolicy "github.com/upbound/official-providers/provider-aws/internal/controller/ecr/registrypolicy"
+	registryscanningconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/ecr/registryscanningconfiguration"
+	replicationconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/ecr/replicationconfiguration"
 	repository "github.com/upbound/official-providers/provider-aws/internal/controller/ecr/repository"
+	repositorypolicy "github.com/upbound/official-providers/provider-aws/internal/controller/ecr/repositorypolicy"
 	repositoryecrpublic "github.com/upbound/official-providers/provider-aws/internal/controller/ecrpublic/repository"
+	repositorypolicyecrpublic "github.com/upbound/official-providers/provider-aws/internal/controller/ecrpublic/repositorypolicy"
 	capacityprovider "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/capacityprovider"
 	cluster "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/cluster"
 	service "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/service"
@@ -143,8 +150,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcendpoint.Setup,
 		vpcipv4cidrblockassociation.Setup,
 		vpcpeeringconnection.Setup,
+		lifecyclepolicy.Setup,
+		pullthroughcacherule.Setup,
+		registrypolicy.Setup,
+		registryscanningconfiguration.Setup,
+		replicationconfiguration.Setup,
 		repository.Setup,
+		repositorypolicy.Setup,
 		repositoryecrpublic.Setup,
+		repositorypolicyecrpublic.Setup,
 		capacityprovider.Setup,
 		cluster.Setup,
 		service.Setup,

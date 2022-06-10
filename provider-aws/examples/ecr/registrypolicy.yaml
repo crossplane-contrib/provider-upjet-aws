@@ -1,0 +1,29 @@
+apiVersion: ecr.aws.upbound.io/v1beta1
+kind: RegistryPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-east-1
+    policy: |-
+      {
+          "Version":"2012-10-17",
+          "Statement":[
+              {
+                  "Sid":"ReplicationAccessCrossAccount",
+                  "Effect":"Allow",
+                  "Principal":{
+                      "AWS":"arn:aws:iam::${ACCOUNT_ID}:root"
+                  },
+                  "Action":[
+                      "ecr:CreateRepository",
+                      "ecr:ReplicateImage"
+                  ],
+                  "Resource": [
+                      "arn:aws:ecr:us-west-2:${ACCOUNT_ID}:repository/*"
+                  ]
+              }
+          ]
+      }
+  providerConfigRef:
+    name: example
