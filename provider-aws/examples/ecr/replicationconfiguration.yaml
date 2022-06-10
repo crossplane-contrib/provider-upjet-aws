@@ -1,0 +1,13 @@
+apiVersion: ecr.aws.upbound.io/v1beta1
+kind: ReplicationConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    replicationConfiguration:
+    - rule:
+      - destination:
+        - region: us-east-1
+          registryId: ${ACCOUNT_ID}
+  providerConfigRef:
+    name: example

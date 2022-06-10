@@ -1,0 +1,14 @@
+apiVersion: ecr.aws.upbound.io/v1beta1
+kind: RegistryScanningConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    rule:
+    - repositoryFilter:
+      - filter: example
+        filterType: WILDCARD
+      scanFrequency: CONTINUOUS_SCAN
+    scanType: ENHANCED
+  providerConfigRef:
+    name: example
