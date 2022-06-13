@@ -3,6 +3,7 @@
 
 PROJECT_NAME := provider-aws
 PROJECT_REPO := github.com/upbound/official-providers/$(PROJECT_NAME)
+PROJECT_VERSION_TAG_GROUP := aws
 
 export TERRAFORM_VERSION := 1.2.1
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
