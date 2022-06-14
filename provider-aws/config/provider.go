@@ -14,6 +14,7 @@ import (
 
 	"github.com/upbound/official-providers/provider-aws/config/acm"
 	"github.com/upbound/official-providers/provider-aws/config/autoscaling"
+	"github.com/upbound/official-providers/provider-aws/config/cloudfront"
 	"github.com/upbound/official-providers/provider-aws/config/ebs"
 	"github.com/upbound/official-providers/provider-aws/config/ec2"
 	"github.com/upbound/official-providers/provider-aws/config/ecr"
@@ -154,6 +155,9 @@ var IncludedResources = []string{
 
 	// ACM(Certificate Manager)
 	"aws_acm_.+",
+
+	// Cloudfront
+	"aws_cloudfront.*",
 }
 
 var skipList = []string{
@@ -212,6 +216,7 @@ func GetProvider() *tjconfig.Provider {
 		route53.Configure,
 		neptune.Configure,
 		mq.Configure,
+		cloudfront.Configure,
 	} {
 		configure(pc)
 	}

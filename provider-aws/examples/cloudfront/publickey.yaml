@@ -1,0 +1,13 @@
+apiVersion: cloudfront.aws.upbound.io/v1beta1
+kind: PublicKey
+metadata:
+  name: example-public-key
+spec:
+  forProvider:
+    region: us-west-1
+    comment: test public key
+    encodedKeySecretRef:
+      name: publickeysecret
+      namespace: crossplane-system
+      key: publickey
+    name: test_key

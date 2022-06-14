@@ -281,6 +281,34 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// s3
 	//
 	"aws_s3_bucket": ParameterAsExternalName("bucket"),
+
+	// cloudfront
+	//
+	// Cloudfront Cache Policies can be imported using the id
+	"aws_cloudfront_cache_policy": config.IdentifierFromProvider,
+	// Cloudfront Distributions can be imported using the id
+	"aws_cloudfront_distribution": config.IdentifierFromProvider,
+	// Cloudfront Field Level Encryption Config can be imported using the id
+	"aws_cloudfront_field_level_encryption_config": config.IdentifierFromProvider,
+	// Cloudfront Field Level Encryption Profile can be imported using the id
+	"aws_cloudfront_field_level_encryption_profile": config.IdentifierFromProvider,
+	// CloudFront Functions can be imported using the name
+	"aws_cloudfront_function": config.NameAsIdentifier,
+	// CloudFront Key Group can be imported using the id
+	"aws_cloudfront_key_group": config.IdentifierFromProvider,
+	// CloudFront monitoring subscription can be imported using the id
+	"aws_cloudfront_monitoring_subscription": config.IdentifierFromProvider,
+	// Cloudfront Origin Access Identities can be imported using the id
+	"aws_cloudfront_origin_access_identity": config.IdentifierFromProvider,
+	// No import documented, but https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_request_policy#name
+	"aws_cloudfront_origin_request_policy": config.NameAsIdentifier,
+	// CloudFront Public Key can be imported using the id
+	"aws_cloudfront_public_key": config.IdentifierFromProvider,
+	// CloudFront real-time log configurations can be imported using the ARN,
+	// $ terraform import aws_cloudfront_realtime_log_config.example arn:aws:cloudfront::111122223333:realtime-log-config/ExampleNameForRealtimeLogConfig
+	"aws_cloudfront_realtime_log_config": config.IdentifierFromProvider,
+	// Cloudfront Response Headers Policies can be imported using the id
+	"aws_cloudfront_response_headers_policy": config.IdentifierFromProvider,
 }
 
 func iamUserGroupMembership() config.ExternalName {

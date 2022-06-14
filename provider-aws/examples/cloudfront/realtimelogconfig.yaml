@@ -1,0 +1,19 @@
+apiVersion: cloudfront.aws.upbound.io/v1beta1
+kind: RealtimeLogConfig
+metadata:
+  name: example-realtime-log-config
+spec:
+  forProvider:
+    region: us-west-1
+    endpoint:
+    - kinesisStreamConfig:
+      - roleArn: ${aws_iam_role.example.arn}
+        streamArn: ${aws_kinesis_stream.example.arn}
+      streamType: Kinesis
+    fields:
+    - timestamp
+    - c-ip
+    name: example
+    samplingRate: 75
+
+

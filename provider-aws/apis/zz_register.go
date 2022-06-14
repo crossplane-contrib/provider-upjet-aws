@@ -12,6 +12,7 @@ import (
 
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/acm/v1beta1"
 	v1beta1autoscaling "github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1beta1"
+	v1beta1cloudfront "github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1"
 	v1beta1ec2 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
 	v1beta1ecr "github.com/upbound/official-providers/provider-aws/apis/ecr/v1beta1"
 	v1beta1ecrpublic "github.com/upbound/official-providers/provider-aws/apis/ecrpublic/v1beta1"
@@ -36,6 +37,7 @@ func init() {
 	AddToSchemes = append(AddToSchemes,
 		v1beta1.SchemeBuilder.AddToScheme,
 		v1beta1autoscaling.SchemeBuilder.AddToScheme,
+		v1beta1cloudfront.SchemeBuilder.AddToScheme,
 		v1beta1ec2.SchemeBuilder.AddToScheme,
 		v1beta1ecr.SchemeBuilder.AddToScheme,
 		v1beta1ecrpublic.SchemeBuilder.AddToScheme,

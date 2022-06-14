@@ -1,0 +1,15 @@
+apiVersion: cloudfront.aws.upbound.io/v1beta1
+kind: Function
+metadata:
+  name: example-function
+spec:
+  forProvider:
+    region: us-west-1
+    codeSecretRef:
+      name: codesecret
+      namespace: crossplane-system
+      key: code
+    comment: my function
+    publish: true
+    runtime: cloudfront-js-1.0
+
