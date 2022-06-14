@@ -1,0 +1,20 @@
+apiVersion: cloudfront.aws.upbound.io/v1beta1
+kind: FieldLevelEncryptionConfig
+metadata:
+  name: example-field-level-encryption-config
+spec:
+  forProvider:
+    region: us-west-1
+    comment: test comment
+    contentTypeProfileConfig:
+    - contentTypeProfiles:
+      - items:
+        - contentType: application/x-www-form-urlencoded
+          format: URLEncoded
+      forwardWhenContentTypeIsUnknown: true
+    queryArgProfileConfig:
+    - forwardWhenQueryArgProfileIsUnknown: true
+      queryArgProfiles:
+      - items:
+        - profileId: ${aws_cloudfront_field_level_encryption_profile.test.id}
+          queryArg: Arg1

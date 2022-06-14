@@ -13,6 +13,18 @@ import (
 	certificatevalidation "github.com/upbound/official-providers/provider-aws/internal/controller/acm/certificatevalidation"
 	attachment "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/attachment"
 	autoscalinggroup "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/autoscalinggroup"
+	cachepolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/cachepolicy"
+	distribution "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/distribution"
+	fieldlevelencryptionconfig "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/fieldlevelencryptionconfig"
+	fieldlevelencryptionprofile "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/fieldlevelencryptionprofile"
+	function "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/function"
+	keygroup "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/keygroup"
+	monitoringsubscription "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/monitoringsubscription"
+	originaccessidentity "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/originaccessidentity"
+	originrequestpolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/originrequestpolicy"
+	publickey "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/publickey"
+	realtimelogconfig "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/realtimelogconfig"
+	responseheaderspolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/responseheaderspolicy"
 	ebsvolume "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/ebsvolume"
 	eip "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/eip"
 	instance "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/instance"
@@ -127,6 +139,18 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		certificatevalidation.Setup,
 		attachment.Setup,
 		autoscalinggroup.Setup,
+		cachepolicy.Setup,
+		distribution.Setup,
+		fieldlevelencryptionconfig.Setup,
+		fieldlevelencryptionprofile.Setup,
+		function.Setup,
+		keygroup.Setup,
+		monitoringsubscription.Setup,
+		originaccessidentity.Setup,
+		originrequestpolicy.Setup,
+		publickey.Setup,
+		realtimelogconfig.Setup,
+		responseheaderspolicy.Setup,
 		ebsvolume.Setup,
 		eip.Setup,
 		instance.Setup,
