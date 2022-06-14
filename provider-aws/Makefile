@@ -49,7 +49,7 @@ GO111MODULE = on
 # ====================================================================================
 # Setup Kubernetes tools
 
-UP_VERSION = v0.12.0-rc.0.30.g591e132
+UP_VERSION = v0.12.0-rc.0.32.g17c0ade
 UP_CHANNEL = main
 -include build/makelib/k8s_tools.mk
 
@@ -106,7 +106,7 @@ run: go.build
 xpkg.build: $(UP)
 	@$(INFO) Building package provider-aws-$(VERSION).xpkg
 	@mkdir -p $(OUTPUT_DIR)/xpkg
-	@$(UP) xpkg build --controller $(BUILD_REGISTRY)/provider-aws-$(SAFEHOSTARCH) -f ./package -e ./examples --name ../_output/xpkg/provider-aws-$(VERSION).xpkg || $(FAIL)
+	@$(UP) xpkg build --controller $(BUILD_REGISTRY)/provider-aws-$(SAFEHOSTARCH) -f ./package -e ./examples -o ./_output/xpkg/provider-aws-$(VERSION).xpkg || $(FAIL)
 	@$(OK) Built package provider-aws-$(VERSION).xpkg
 
 xpkg.push: $(UP)
