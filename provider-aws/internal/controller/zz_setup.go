@@ -11,6 +11,9 @@ import (
 
 	certificate "github.com/upbound/official-providers/provider-aws/internal/controller/acm/certificate"
 	certificatevalidation "github.com/upbound/official-providers/provider-aws/internal/controller/acm/certificatevalidation"
+	certificateacmpca "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificate"
+	certificateauthority "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthority"
+	certificateauthoritycertificate "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthoritycertificate"
 	attachment "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/attachment"
 	autoscalinggroup "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/autoscalinggroup"
 	cachepolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/cachepolicy"
@@ -137,6 +140,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		certificate.Setup,
 		certificatevalidation.Setup,
+		certificateacmpca.Setup,
+		certificateauthority.Setup,
+		certificateauthoritycertificate.Setup,
 		attachment.Setup,
 		autoscalinggroup.Setup,
 		cachepolicy.Setup,

@@ -13,6 +13,7 @@ import (
 	tjconfig "github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-aws/config/acm"
+	"github.com/upbound/official-providers/provider-aws/config/acmpca"
 	"github.com/upbound/official-providers/provider-aws/config/autoscaling"
 	"github.com/upbound/official-providers/provider-aws/config/cloudfront"
 	"github.com/upbound/official-providers/provider-aws/config/ebs"
@@ -153,8 +154,11 @@ var IncludedResources = []string{
 	"aws_globalaccelerator_endpoint_group",
 	"aws_globalaccelerator_listener",
 
-	// ACM(Certificate Manager)
+	// ACM (Certificate Manager)
 	"aws_acm_.+",
+
+	// ACM PCA (Certificate Manager Private Certificate Authority )
+	"aws_acmpca_.+",
 
 	// Cloudfront
 	"aws_cloudfront.*",
@@ -200,6 +204,7 @@ func GetProvider() *tjconfig.Provider {
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		acm.Configure,
+		acmpca.Configure,
 		autoscaling.Configure,
 		ebs.Configure,
 		ec2.Configure,

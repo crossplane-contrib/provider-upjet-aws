@@ -1,0 +1,23 @@
+apiVersion: acmpca.aws.upbound.io/v1beta1
+kind: Certificate
+metadata:
+  name: example
+spec:
+  writeConnectionSecretToRef:
+    name: acmpca-certificate
+    namespace: upbound-system
+  forProvider:
+    region: eu-central-1
+    certificateAuthorityArnRef:
+      name: example
+    certificateSigningRequestSecretRef:
+      key: certificate_signing_request
+      name: acmpca-ca
+      namespace: upbound-system
+    signingAlgorithm: SHA256WITHRSA
+    validity:
+    - type: YEARS
+      value: "1"
+    templateArn: arn:aws:acm-pca:::template/RootCACertificate/V1
+  providerConfigRef:
+    name: default

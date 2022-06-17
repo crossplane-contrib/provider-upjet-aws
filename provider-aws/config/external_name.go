@@ -26,6 +26,14 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// No import documented, but https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate_validation#id
 	"aws_acm_certificate_validation": config.IdentifierFromProvider,
 
+	// ACM PCA
+	// aws_acmpca_certificate can not be imported at this time.
+	"aws_acmpca_certificate": config.IdentifierFromProvider,
+	// Imported using ARN: arn:aws:acm-pca:us-east-1:123456789012:certificate-authority/12345678-1234-1234-1234-123456789012
+	"aws_acmpca_certificate_authority": config.IdentifierFromProvider,
+	// No doc on import, but resource is getting CA ARN: arn:aws:acm-pca:eu-central-1:609897127049:certificate-authority/ba0c7989-9641-4f36-a033-dee60121d595
+	"aws_acmpca_certificate_authority_certificate": config.IdentifierFromProvider,
+
 	// autoscaling
 	//
 	"aws_autoscaling_group": config.NameAsIdentifier,

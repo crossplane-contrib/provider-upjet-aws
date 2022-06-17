@@ -1,0 +1,15 @@
+apiVersion: acmpca.aws.upbound.io/v1beta1
+kind: CertificateAuthorityCertificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: eu-central-1
+    certificateAuthorityArnRef:
+      name: example
+    certificateSecretRef:
+      key: certificate
+      name: acmpca-certificate
+      namespace: upbound-system
+  providerConfigRef:
+    name: default
