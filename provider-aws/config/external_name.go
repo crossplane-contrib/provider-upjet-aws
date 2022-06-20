@@ -144,6 +144,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_eks_addon": FormattedIdentifierUserDefined("addon_name", ":", "cluster_name"),
 	// my_cluster:my_fargate_profile
 	"aws_eks_fargate_profile": FormattedIdentifierUserDefined("fargate_profile_name", ":", "cluster_name"),
+	// It has a complex config, adding empty entry here just to enable it.
+	"aws_eks_identity_provider_config": {},
 
 	// elasticache
 	//
