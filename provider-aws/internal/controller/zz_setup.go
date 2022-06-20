@@ -33,6 +33,7 @@ import (
 	instance "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/instance"
 	internetgateway "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/internetgateway"
 	launchtemplate "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/launchtemplate"
+	mainroutetableassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/mainroutetableassociation"
 	networkinterface "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkinterface"
 	route "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/route"
 	routetable "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/routetable"
@@ -184,6 +185,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		instance.Setup,
 		internetgateway.Setup,
 		launchtemplate.Setup,
+		mainroutetableassociation.Setup,
 		networkinterface.Setup,
 		route.Setup,
 		routetable.Setup,
