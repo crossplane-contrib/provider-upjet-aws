@@ -5,13 +5,7 @@ Copyright 2021 Upbound Inc.
 package eks
 
 import (
-	"context"
-	"fmt"
-	"strings"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
-	"github.com/pkg/errors"
 
 	"github.com/upbound/upjet/pkg/config"
 
@@ -63,32 +57,8 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 	})
 	p.AddResourceConfigurator("aws_eks_identity_provider_config", func(r *config.Resource) {
 		r.Version = common.VersionV1Beta1
-		// OmittedFields works only for the top-level fields.
+		// OmittedFields in config.ExternalName works only for the top-level fields.
 		delete(r.TerraformResource.Schema["oidc"].Elem.(*schema.Resource).Schema, "identity_provider_config_name")
-		r.ExternalName = config.ExternalName{
-			SetIdentifierArgumentFn: func(base map[string]interface{}, externalName string) {
-				if _, ok := base["oidc"]; !ok {
-					base["oidc"] = map[string]interface{}{}
-				}
-				if m, ok := base["oidc"].(map[string]interface{}); ok {
-					m["identity_provider_config_name"] = externalName
-				}
-			},
-			GetExternalNameFn: func(tfstate map[string]interface{}) (string, error) {
-				if id, ok := tfstate["id"]; ok {
-					return strings.Split(id.(string), ":")[1], nil
-				}
-				return "", errors.New("there is no id in tfstate")
-			},
-			GetIDFn: func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
-				cl, ok := parameters["cluster_name"]
-				if !ok {
-					return "", errors.New("cluster_name cannot be empty")
-				}
-				return fmt.Sprintf("%s:%s", cl.(string), externalName), nil
-			},
-		}
-
 		r.References = config.References{
 			"cluster_name": {
 				Type: "Cluster",
