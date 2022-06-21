@@ -8,8 +8,6 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	tjconfig "github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-aws/config/acm"
@@ -184,12 +182,13 @@ var skipList = []string{
 
 // GetProvider returns provider configuration
 func GetProvider() *tjconfig.Provider {
-	pc := tjconfig.NewProviderWithSchema([]byte(providerSchema), "aws", "github.com/upbound/official-providers/provider-aws",
+	pc := tjconfig.NewProvider([]byte(providerSchema), "aws",
+		"github.com/upbound/official-providers/provider-aws", "",
 		tjconfig.WithShortName("aws"),
 		tjconfig.WithRootGroup("aws.upbound.io"),
 		tjconfig.WithIncludeList(IncludedResources),
 		tjconfig.WithSkipList(skipList),
-		tjconfig.WithDefaultResourceFn(DefaultResource(
+		tjconfig.WithDefaultResourceOptions(
 			GroupKindOverrides(),
 			KindOverrides(),
 			RegionAddition(),
@@ -199,7 +198,7 @@ func GetProvider() *tjconfig.Provider {
 			KnownReferencers(),
 			AddExternalTagsField(),
 			ExternalNameConfigurations(),
-		)),
+		),
 	)
 
 	for _, configure := range []func(provider *tjconfig.Provider){
@@ -228,12 +227,4 @@ func GetProvider() *tjconfig.Provider {
 
 	pc.ConfigureResources()
 	return pc
-}
-
-// DefaultResource returns a DefaultResoruceFn that makes sure the original
-// DefaultResource call is made with given options here.
-func DefaultResource(opts ...tjconfig.ResourceOption) tjconfig.DefaultResourceFn {
-	return func(name string, terraformResource *schema.Resource, orgOpts ...tjconfig.ResourceOption) *tjconfig.Resource {
-		return tjconfig.DefaultResource(name, terraformResource, append(orgOpts, opts...)...)
-	}
 }
