@@ -314,8 +314,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_s3_bucket_notification": config.IdentifierFromProvider,
 	// Objects can be imported using the id. The id is the bucket name and the key together
 	"aws_s3_bucket_object": config.IdentifierFromProvider,
-	// The S3 bucket Object Lock configuration resource should be imported using the bucket
-	"aws_s3_bucket_object_lock_configuration": config.IdentifierFromProvider,
 	// S3 Bucket Ownership Controls can be imported using S3 Bucket name
 	"aws_s3_bucket_ownership_controls": config.IdentifierFromProvider,
 	// S3 bucket policies can be imported using the bucket name

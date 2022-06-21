@@ -29,8 +29,9 @@ import (
 	v1beta1rds "github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1"
 	v1beta1route53 "github.com/upbound/official-providers/provider-aws/apis/route53/v1beta1"
 	v1beta1route53resolver "github.com/upbound/official-providers/provider-aws/apis/route53resolver/v1beta1"
+	v1alpha1 "github.com/upbound/official-providers/provider-aws/apis/s3/v1alpha1"
 	v1beta1s3 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
-	v1alpha1 "github.com/upbound/official-providers/provider-aws/apis/v1alpha1"
+	v1alpha1apis "github.com/upbound/official-providers/provider-aws/apis/v1alpha1"
 )
 
 func init() {
@@ -55,8 +56,9 @@ func init() {
 		v1beta1rds.SchemeBuilder.AddToScheme,
 		v1beta1route53.SchemeBuilder.AddToScheme,
 		v1beta1route53resolver.SchemeBuilder.AddToScheme,
-		v1beta1s3.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1beta1s3.SchemeBuilder.AddToScheme,
+		v1alpha1apis.SchemeBuilder.AddToScheme,
 	)
 }
 
