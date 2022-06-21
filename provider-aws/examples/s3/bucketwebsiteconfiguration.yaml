@@ -1,0 +1,19 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketWebsiteConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    bucket: example
+    errorDocument:
+    - key: error.html
+    indexDocument:
+    - suffix: index.html
+    routingRule:
+    - condition:
+      - keyPrefixEquals: docs/
+      redirect:
+      - replaceKeyPrefixWith: documents/
+  providerConfigRef:
+    name: default

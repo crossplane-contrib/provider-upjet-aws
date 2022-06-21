@@ -1,0 +1,19 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketInventory
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    bucket: example
+    destination:
+    - bucket:
+      - bucketArn: arn:aws:s3:::sample-bucket-2
+        format: ORC
+    includedObjectVersions: All
+    name: EntireBucketDaily
+    schedule:
+    - frequency: Daily
+  providerConfigRef:
+    name: default
+

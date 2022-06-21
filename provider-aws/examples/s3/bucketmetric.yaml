@@ -1,0 +1,11 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketMetric
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    bucket: example
+    name: EntireBucket
+  providerConfigRef:
+    name: default

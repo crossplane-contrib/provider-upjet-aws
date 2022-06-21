@@ -10,39 +10,57 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
-	common "github.com/upbound/official-providers/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-// ResolveReferences of this Bucket.
-func (mg *Bucket) ResolveReferences(ctx context.Context, c client.Reader) error {
+// ResolveReferences of this BucketObject.
+func (mg *BucketObject) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.ServerSideEncryptionConfiguration); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule); i4++ {
-			for i5 := 0; i5 < len(mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault); i5++ {
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyID),
-					Extract:      common.ARNExtractor(),
-					Reference:    mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyIDRef,
-					Selector:     mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyIDSelector,
-					To: reference.To{
-						List:    &v1beta1.KeyList{},
-						Managed: &v1beta1.Key{},
-					},
-				})
-				if err != nil {
-					return errors.Wrap(err, "mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyID")
-				}
-				mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyID = reference.ToPtrValue(rsp.ResolvedValue)
-				mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyIDRef = rsp.ResolvedReference
-
-			}
-		}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
+		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyID")
 	}
+	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Object.
+func (mg *Object) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
+		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyID")
+	}
+	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
 
 	return nil
 }

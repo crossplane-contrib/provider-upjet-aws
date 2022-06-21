@@ -55,7 +55,8 @@ var IncludedResources = []string{
 	"aws_db_subnet_group$",
 
 	// S3
-	"aws_s3_bucket$",
+	"aws_s3_bucket.*",
+	"aws_s3_object.*",
 
 	// Elasticache
 	"aws_elasticache_cluster$",

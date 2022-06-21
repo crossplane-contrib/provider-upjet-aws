@@ -63,341 +63,22 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  accelerationStatus:
-                    type: string
-                  acl:
-                    type: string
                   arn:
                     type: string
-                  corsRule:
-                    items:
-                      properties:
-                        allowedHeaders:
-                          items:
-                            type: string
-                          type: array
-                        allowedMethods:
-                          items:
-                            type: string
-                          type: array
-                        allowedOrigins:
-                          items:
-                            type: string
-                          type: array
-                        exposeHeaders:
-                          items:
-                            type: string
-                          type: array
-                        maxAgeSeconds:
-                          type: number
-                      required:
-                      - allowedMethods
-                      - allowedOrigins
-                      type: object
-                    type: array
                   forceDestroy:
                     type: boolean
-                  grant:
-                    items:
-                      properties:
-                        id:
-                          type: string
-                        permissions:
-                          items:
-                            type: string
-                          type: array
-                        type:
-                          type: string
-                        uri:
-                          type: string
-                      required:
-                      - permissions
-                      - type
-                      type: object
-                    type: array
                   hostedZoneId:
                     type: string
-                  lifecycleRule:
-                    items:
-                      properties:
-                        abortIncompleteMultipartUploadDays:
-                          type: number
-                        enabled:
-                          type: boolean
-                        expiration:
-                          items:
-                            properties:
-                              date:
-                                type: string
-                              days:
-                                type: number
-                              expiredObjectDeleteMarker:
-                                type: boolean
-                            type: object
-                          type: array
-                        id:
-                          type: string
-                        noncurrentVersionExpiration:
-                          items:
-                            properties:
-                              days:
-                                type: number
-                            type: object
-                          type: array
-                        noncurrentVersionTransition:
-                          items:
-                            properties:
-                              days:
-                                type: number
-                              storageClass:
-                                type: string
-                            required:
-                            - storageClass
-                            type: object
-                          type: array
-                        prefix:
-                          type: string
-                        tags:
-                          additionalProperties:
-                            type: string
-                          type: object
-                        transition:
-                          items:
-                            properties:
-                              date:
-                                type: string
-                              days:
-                                type: number
-                              storageClass:
-                                type: string
-                            required:
-                            - storageClass
-                            type: object
-                          type: array
-                      required:
-                      - enabled
-                      type: object
-                    type: array
-                  logging:
-                    items:
-                      properties:
-                        targetBucket:
-                          type: string
-                        targetPrefix:
-                          type: string
-                      required:
-                      - targetBucket
-                      type: object
-                    type: array
-                  objectLockConfiguration:
-                    items:
-                      properties:
-                        objectLockEnabled:
-                          type: string
-                        rule:
-                          items:
-                            properties:
-                              defaultRetention:
-                                items:
-                                  properties:
-                                    days:
-                                      type: number
-                                    mode:
-                                      type: string
-                                    years:
-                                      type: number
-                                  required:
-                                  - mode
-                                  type: object
-                                type: array
-                            required:
-                            - defaultRetention
-                            type: object
-                          type: array
-                      type: object
-                    type: array
                   objectLockEnabled:
                     type: boolean
-                  policy:
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  replicationConfiguration:
-                    items:
-                      properties:
-                        role:
-                          type: string
-                        rules:
-                          items:
-                            properties:
-                              deleteMarkerReplicationStatus:
-                                type: string
-                              destination:
-                                items:
-                                  properties:
-                                    accessControlTranslation:
-                                      items:
-                                        properties:
-                                          owner:
-                                            type: string
-                                        required:
-                                        - owner
-                                        type: object
-                                      type: array
-                                    accountId:
-                                      type: string
-                                    bucket:
-                                      type: string
-                                    metrics:
-                                      items:
-                                        properties:
-                                          minutes:
-                                            type: number
-                                          status:
-                                            type: string
-                                        type: object
-                                      type: array
-                                    replicaKmsKeyId:
-                                      type: string
-                                    replicationTime:
-                                      items:
-                                        properties:
-                                          minutes:
-                                            type: number
-                                          status:
-                                            type: string
-                                        type: object
-                                      type: array
-                                    storageClass:
-                                      type: string
-                                  required:
-                                  - bucket
-                                  type: object
-                                type: array
-                              filter:
-                                items:
-                                  properties:
-                                    prefix:
-                                      type: string
-                                    tags:
-                                      additionalProperties:
-                                        type: string
-                                      type: object
-                                  type: object
-                                type: array
-                              id:
-                                type: string
-                              prefix:
-                                type: string
-                              priority:
-                                type: number
-                              sourceSelectionCriteria:
-                                items:
-                                  properties:
-                                    sseKmsEncryptedObjects:
-                                      items:
-                                        properties:
-                                          enabled:
-                                            type: boolean
-                                        required:
-                                        - enabled
-                                        type: object
-                                      type: array
-                                  type: object
-                                type: array
-                              status:
-                                type: string
-                            required:
-                            - destination
-                            - status
-                            type: object
-                          type: array
-                      required:
-                      - role
-                      - rules
-                      type: object
-                    type: array
-                  requestPayer:
-                    type: string
-                  serverSideEncryptionConfiguration:
-                    items:
-                      properties:
-                        rule:
-                          items:
-                            properties:
-                              applyServerSideEncryptionByDefault:
-                                items:
-                                  properties:
-                                    kmsMasterKeyId:
-                                      type: string
-                                    kmsMasterKeyIdRef:
-                                      description: A Reference to a named object.
-                                      properties:
-                                        name:
-                                          description: Name of the referenced object.
-                                          type: string
-                                      required:
-                                      - name
-                                      type: object
-                                    kmsMasterKeyIdSelector:
-                                      description: A Selector selects an object.
-                                      properties:
-                                        matchControllerRef:
-                                          description: MatchControllerRef ensures
-                                            an object with the same controller reference
-                                            as the selecting object is selected.
-                                          type: boolean
-                                        matchLabels:
-                                          additionalProperties:
-                                            type: string
-                                          description: MatchLabels ensures an object
-                                            with matching labels is selected.
-                                          type: object
-                                      type: object
-                                    sseAlgorithm:
-                                      type: string
-                                  required:
-                                  - sseAlgorithm
-                                  type: object
-                                type: array
-                              bucketKeyEnabled:
-                                type: boolean
-                            required:
-                            - applyServerSideEncryptionByDefault
-                            type: object
-                          type: array
-                      required:
-                      - rule
-                      type: object
-                    type: array
                   tags:
                     additionalProperties:
                       type: string
                     type: object
-                  versioning:
-                    items:
-                      properties:
-                        enabled:
-                          type: boolean
-                        mfaDelete:
-                          type: boolean
-                      type: object
-                    type: array
-                  website:
-                    items:
-                      properties:
-                        errorDocument:
-                          type: string
-                        indexDocument:
-                          type: string
-                        redirectAllRequestsTo:
-                          type: string
-                        routingRules:
-                          type: string
-                      type: object
-                    type: array
                 required:
                 - region
                 type: object
@@ -502,16 +183,275 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accelerationStatus:
+                    type: string
+                  acl:
+                    type: string
                   bucketDomainName:
                     type: string
                   bucketRegionalDomainName:
                     type: string
+                  corsRule:
+                    items:
+                      properties:
+                        allowedHeaders:
+                          items:
+                            type: string
+                          type: array
+                        allowedMethods:
+                          items:
+                            type: string
+                          type: array
+                        allowedOrigins:
+                          items:
+                            type: string
+                          type: array
+                        exposeHeaders:
+                          items:
+                            type: string
+                          type: array
+                        maxAgeSeconds:
+                          type: number
+                      type: object
+                    type: array
+                  grant:
+                    items:
+                      properties:
+                        id:
+                          type: string
+                        permissions:
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          type: string
+                        uri:
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
+                  lifecycleRule:
+                    items:
+                      properties:
+                        abortIncompleteMultipartUploadDays:
+                          type: number
+                        enabled:
+                          type: boolean
+                        expiration:
+                          items:
+                            properties:
+                              date:
+                                type: string
+                              days:
+                                type: number
+                              expiredObjectDeleteMarker:
+                                type: boolean
+                            type: object
+                          type: array
+                        id:
+                          type: string
+                        noncurrentVersionExpiration:
+                          items:
+                            properties:
+                              days:
+                                type: number
+                            type: object
+                          type: array
+                        noncurrentVersionTransition:
+                          items:
+                            properties:
+                              days:
+                                type: number
+                              storageClass:
+                                type: string
+                            type: object
+                          type: array
+                        prefix:
+                          type: string
+                        tags:
+                          additionalProperties:
+                            type: string
+                          type: object
+                        transition:
+                          items:
+                            properties:
+                              date:
+                                type: string
+                              days:
+                                type: number
+                              storageClass:
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  logging:
+                    items:
+                      properties:
+                        targetBucket:
+                          type: string
+                        targetPrefix:
+                          type: string
+                      type: object
+                    type: array
+                  objectLockConfiguration:
+                    items:
+                      properties:
+                        objectLockEnabled:
+                          type: string
+                        rule:
+                          items:
+                            properties:
+                              defaultRetention:
+                                items:
+                                  properties:
+                                    days:
+                                      type: number
+                                    mode:
+                                      type: string
+                                    years:
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  policy:
+                    type: string
+                  replicationConfiguration:
+                    items:
+                      properties:
+                        role:
+                          type: string
+                        rules:
+                          items:
+                            properties:
+                              deleteMarkerReplicationStatus:
+                                type: string
+                              destination:
+                                items:
+                                  properties:
+                                    accessControlTranslation:
+                                      items:
+                                        properties:
+                                          owner:
+                                            type: string
+                                        type: object
+                                      type: array
+                                    accountId:
+                                      type: string
+                                    bucket:
+                                      type: string
+                                    metrics:
+                                      items:
+                                        properties:
+                                          minutes:
+                                            type: number
+                                          status:
+                                            type: string
+                                        type: object
+                                      type: array
+                                    replicaKmsKeyId:
+                                      type: string
+                                    replicationTime:
+                                      items:
+                                        properties:
+                                          minutes:
+                                            type: number
+                                          status:
+                                            type: string
+                                        type: object
+                                      type: array
+                                    storageClass:
+                                      type: string
+                                  type: object
+                                type: array
+                              filter:
+                                items:
+                                  properties:
+                                    prefix:
+                                      type: string
+                                    tags:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                  type: object
+                                type: array
+                              id:
+                                type: string
+                              prefix:
+                                type: string
+                              priority:
+                                type: number
+                              sourceSelectionCriteria:
+                                items:
+                                  properties:
+                                    sseKmsEncryptedObjects:
+                                      items:
+                                        properties:
+                                          enabled:
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              status:
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  requestPayer:
+                    type: string
+                  serverSideEncryptionConfiguration:
+                    items:
+                      properties:
+                        rule:
+                          items:
+                            properties:
+                              applyServerSideEncryptionByDefault:
+                                items:
+                                  properties:
+                                    kmsMasterKeyId:
+                                      type: string
+                                    sseAlgorithm:
+                                      type: string
+                                  type: object
+                                type: array
+                              bucketKeyEnabled:
+                                type: boolean
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                  versioning:
+                    items:
+                      properties:
+                        enabled:
+                          type: boolean
+                        mfaDelete:
+                          type: boolean
+                      type: object
+                    type: array
+                  website:
+                    items:
+                      properties:
+                        errorDocument:
+                          type: string
+                        indexDocument:
+                          type: string
+                        redirectAllRequestsTo:
+                          type: string
+                        routingRules:
+                          type: string
+                      type: object
+                    type: array
                   websiteDomain:
                     type: string
                   websiteEndpoint:

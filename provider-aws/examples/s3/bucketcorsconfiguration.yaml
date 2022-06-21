@@ -1,0 +1,26 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketCorsConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    bucket: example
+    corsRule:
+    - allowedHeaders:
+      - '*'
+      allowedMethods:
+      - PUT
+      - POST
+      allowedOrigins:
+      - https://s3-website-test.upbound.com
+      exposeHeaders:
+      - ETag
+      maxAgeSeconds: 3000
+    - allowedMethods:
+      - GET
+      allowedOrigins:
+      - '*'
+  providerConfigRef:
+    name: default
+
