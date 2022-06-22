@@ -83,6 +83,23 @@ import (
 	accelerator "github.com/upbound/official-providers/provider-aws/internal/controller/globalaccelerator/accelerator"
 	endpointgroup "github.com/upbound/official-providers/provider-aws/internal/controller/globalaccelerator/endpointgroup"
 	listener "github.com/upbound/official-providers/provider-aws/internal/controller/globalaccelerator/listener"
+	catalogdatabase "github.com/upbound/official-providers/provider-aws/internal/controller/glue/catalogdatabase"
+	catalogtable "github.com/upbound/official-providers/provider-aws/internal/controller/glue/catalogtable"
+	classifier "github.com/upbound/official-providers/provider-aws/internal/controller/glue/classifier"
+	crawler "github.com/upbound/official-providers/provider-aws/internal/controller/glue/crawler"
+	datacatalogencryptionsettings "github.com/upbound/official-providers/provider-aws/internal/controller/glue/datacatalogencryptionsettings"
+	devendpoint "github.com/upbound/official-providers/provider-aws/internal/controller/glue/devendpoint"
+	job "github.com/upbound/official-providers/provider-aws/internal/controller/glue/job"
+	mltransform "github.com/upbound/official-providers/provider-aws/internal/controller/glue/mltransform"
+	partition "github.com/upbound/official-providers/provider-aws/internal/controller/glue/partition"
+	partitionindex "github.com/upbound/official-providers/provider-aws/internal/controller/glue/partitionindex"
+	registry "github.com/upbound/official-providers/provider-aws/internal/controller/glue/registry"
+	resourcepolicy "github.com/upbound/official-providers/provider-aws/internal/controller/glue/resourcepolicy"
+	schema "github.com/upbound/official-providers/provider-aws/internal/controller/glue/schema"
+	securityconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/glue/securityconfiguration"
+	trigger "github.com/upbound/official-providers/provider-aws/internal/controller/glue/trigger"
+	userdefinedfunction "github.com/upbound/official-providers/provider-aws/internal/controller/glue/userdefinedfunction"
+	workflow "github.com/upbound/official-providers/provider-aws/internal/controller/glue/workflow"
 	accesskey "github.com/upbound/official-providers/provider-aws/internal/controller/iam/accesskey"
 	group "github.com/upbound/official-providers/provider-aws/internal/controller/iam/group"
 	grouppolicyattachment "github.com/upbound/official-providers/provider-aws/internal/controller/iam/grouppolicyattachment"
@@ -235,6 +252,23 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		accelerator.Setup,
 		endpointgroup.Setup,
 		listener.Setup,
+		catalogdatabase.Setup,
+		catalogtable.Setup,
+		classifier.Setup,
+		crawler.Setup,
+		datacatalogencryptionsettings.Setup,
+		devendpoint.Setup,
+		job.Setup,
+		mltransform.Setup,
+		partition.Setup,
+		partitionindex.Setup,
+		registry.Setup,
+		resourcepolicy.Setup,
+		schema.Setup,
+		securityconfiguration.Setup,
+		trigger.Setup,
+		userdefinedfunction.Setup,
+		workflow.Setup,
 		accesskey.Setup,
 		group.Setup,
 		grouppolicyattachment.Setup,
