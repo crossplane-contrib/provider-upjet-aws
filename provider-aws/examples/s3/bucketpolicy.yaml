@@ -1,0 +1,29 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    bucket: example
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          { 
+              "Sid": "VisualEditor0",
+              "Effect": "Allow",
+              "Principal": "*",
+              "Action": {
+                 "s3:GetObject",
+                 "s3:ListBucket"
+               },
+              "Resource": {
+                "arn:aws:s3:::example",
+                "arn:aws:s3:::example/*"
+               }
+          }
+        ]
+      }
+  providerConfigRef:
+    name: default

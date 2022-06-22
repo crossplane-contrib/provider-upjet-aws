@@ -288,7 +288,53 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// s3
 	//
+	// S3 bucket can be imported using the bucket
 	"aws_s3_bucket": ParameterAsExternalName("bucket"),
+	// the S3 bucket accelerate configuration resource should be imported using the bucket
+	"aws_s3_bucket_accelerate_configuration": config.IdentifierFromProvider,
+	// the S3 bucket ACL resource should be imported using the bucket
+	"aws_s3_bucket_acl": config.IdentifierFromProvider,
+	// S3 bucket analytics configurations can be imported using bucket:analytics
+	"aws_s3_bucket_analytics_configuration": FormattedIdentifierFromProvider(":", "bucket", "name"),
+	// The S3 bucket CORS configuration resource should be imported using the bucket
+	"aws_s3_bucket_cors_configuration": config.IdentifierFromProvider,
+	// S3 bucket intelligent tiering configurations can be imported using bucket:name
+	// $ terraform import aws_s3_bucket_intelligent_tiering_configuration.my-bucket-entire-bucket my-bucket:EntireBucket
+	"aws_s3_bucket_intelligent_tiering_configuration": FormattedIdentifierFromProvider(":", "bucket", "name"),
+	// S3 bucket inventory configurations can be imported using bucket:inventory
+	// $ terraform import aws_s3_bucket_inventory.my-bucket-entire-bucket my-bucket:EntireBucket
+	"aws_s3_bucket_inventory": FormattedIdentifierFromProvider(":", "bucket", "name"),
+	// The S3 bucket lifecycle configuration resource should be imported using the bucket
+	"aws_s3_bucket_lifecycle_configuration": config.IdentifierFromProvider,
+	// The S3 bucket logging resource should be imported using the bucket
+	"aws_s3_bucket_logging": config.IdentifierFromProvider,
+	// S3 bucket metric configurations can be imported using bucket:metric
+	"aws_s3_bucket_metric": FormattedIdentifierFromProvider(":", "bucket", "name"),
+	// S3 bucket notification can be imported using the bucket
+	"aws_s3_bucket_notification": config.IdentifierFromProvider,
+	// Objects can be imported using the id. The id is the bucket name and the key together
+	"aws_s3_bucket_object": config.IdentifierFromProvider,
+	// S3 Bucket Ownership Controls can be imported using S3 Bucket name
+	"aws_s3_bucket_ownership_controls": config.IdentifierFromProvider,
+	// S3 bucket policies can be imported using the bucket name
+	"aws_s3_bucket_policy": config.IdentifierFromProvider,
+	// aws_s3_bucket_public_access_block can be imported by using the bucket name
+	"aws_s3_bucket_public_access_block": config.IdentifierFromProvider,
+	// S3 bucket replication configuration can be imported using the bucket
+	"aws_s3_bucket_replication_configuration": config.IdentifierFromProvider,
+	// The S3 bucket request payment configuration resource should be imported using the bucket
+	"aws_s3_bucket_request_payment_configuration": config.IdentifierFromProvider,
+	// The S3 server-side encryption configuration resource should be imported using the bucket
+	"aws_s3_bucket_server_side_encryption_configuration": config.IdentifierFromProvider,
+	// The S3 bucket versioning resource should be imported using the bucket
+	"aws_s3_bucket_versioning": config.IdentifierFromProvider,
+	// The S3 bucket website configuration resource should be imported using the bucket
+	"aws_s3_bucket_website_configuration": config.IdentifierFromProvider,
+	// Objects can be imported using the id. The id is the bucket name and the key together
+	// $ terraform import aws_s3_object.object some-bucket-name/some/key.txt
+	"aws_s3_object": FormattedIdentifierFromProvider("/", "bucket", "key"),
+	// No import documented
+	"aws_s3_object_copy": config.IdentifierFromProvider,
 
 	// cloudfront
 	//

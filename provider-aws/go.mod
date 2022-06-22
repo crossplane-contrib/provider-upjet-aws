@@ -9,7 +9,7 @@ require (
 	github.com/crossplane/provider-aws v0.23.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.17.0
 	github.com/pkg/errors v0.9.1
-	github.com/upbound/upjet v0.5.0
+	github.com/upbound/upjet v0.5.1-0.20220620152341-da724527185e
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.24.0
 	k8s.io/client-go v0.24.0

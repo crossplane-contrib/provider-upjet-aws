@@ -1,0 +1,12 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketPublicAccessBlock
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    blockPublicAcls: true
+    blockPublicPolicy: true
+    bucket: example
+  providerConfigRef:
+    name: default

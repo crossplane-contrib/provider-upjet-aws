@@ -132,6 +132,28 @@ import (
 	rule "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/rule"
 	ruleassociation "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/ruleassociation"
 	bucket "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucket"
+	bucketaccelerateconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketaccelerateconfiguration"
+	bucketacl "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketacl"
+	bucketanalyticsconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketanalyticsconfiguration"
+	bucketcorsconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketcorsconfiguration"
+	bucketintelligenttieringconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketintelligenttieringconfiguration"
+	bucketinventory "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketinventory"
+	bucketlifecycleconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketlifecycleconfiguration"
+	bucketlogging "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketlogging"
+	bucketmetric "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketmetric"
+	bucketnotification "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketnotification"
+	bucketobject "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketobject"
+	bucketobjectlockconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketobjectlockconfiguration"
+	bucketownershipcontrols "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketownershipcontrols"
+	bucketpolicy "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketpolicy"
+	bucketpublicaccessblock "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketpublicaccessblock"
+	bucketreplicationconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketreplicationconfiguration"
+	bucketrequestpaymentconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketrequestpaymentconfiguration"
+	bucketserversideencryptionconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketserversideencryptionconfiguration"
+	bucketversioning "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketversioning"
+	bucketwebsiteconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketwebsiteconfiguration"
+	object "github.com/upbound/official-providers/provider-aws/internal/controller/s3/object"
+	objectcopy "github.com/upbound/official-providers/provider-aws/internal/controller/s3/objectcopy"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -261,6 +283,28 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		rule.Setup,
 		ruleassociation.Setup,
 		bucket.Setup,
+		bucketaccelerateconfiguration.Setup,
+		bucketacl.Setup,
+		bucketanalyticsconfiguration.Setup,
+		bucketcorsconfiguration.Setup,
+		bucketintelligenttieringconfiguration.Setup,
+		bucketinventory.Setup,
+		bucketlifecycleconfiguration.Setup,
+		bucketlogging.Setup,
+		bucketmetric.Setup,
+		bucketnotification.Setup,
+		bucketobject.Setup,
+		bucketobjectlockconfiguration.Setup,
+		bucketownershipcontrols.Setup,
+		bucketpolicy.Setup,
+		bucketpublicaccessblock.Setup,
+		bucketreplicationconfiguration.Setup,
+		bucketrequestpaymentconfiguration.Setup,
+		bucketserversideencryptionconfiguration.Setup,
+		bucketversioning.Setup,
+		bucketwebsiteconfiguration.Setup,
+		object.Setup,
+		objectcopy.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

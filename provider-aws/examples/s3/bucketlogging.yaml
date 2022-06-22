@@ -1,0 +1,12 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketLogging
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    bucket: example
+    targetBucket: sample-bucket-2
+    targetPrefix: log/
+  providerConfigRef:
+    name: default

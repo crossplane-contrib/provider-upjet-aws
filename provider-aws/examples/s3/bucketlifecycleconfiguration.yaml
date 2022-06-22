@@ -1,0 +1,17 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketLifecycleConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    bucket: example
+    rule:
+      - id: rule-1
+        status: Enabled
+        filter:
+          - prefix: "tmp/"
+        expiration:
+          - days: 90
+  providerConfigRef:
+    name: default

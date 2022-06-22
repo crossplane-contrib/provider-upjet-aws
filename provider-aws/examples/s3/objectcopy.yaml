@@ -1,0 +1,17 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: ObjectCopy
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    bucket: destination_bucket
+    grant:
+    - permissions:
+      - READ
+      type: Group
+      uri: http://acs.amazonaws.com/groups/global/AllUsers
+    key: destination_key
+    source: source_bucket/source_key
+  providerConfigRef:
+    name: default

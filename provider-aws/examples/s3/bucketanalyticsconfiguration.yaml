@@ -1,0 +1,16 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketAnalyticsConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    bucket: example
+    name: EntireBucket
+    storageClassAnalysis:
+    - dataExport:
+      - destination:
+        - s3BucketDestination:
+          - bucketArn: arn:aws:s3:::example
+  providerConfigRef:
+    name: default
