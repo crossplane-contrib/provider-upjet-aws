@@ -1,0 +1,15 @@
+apiVersion: glue.aws.upbound.io/v1alpha1
+kind: Trigger
+metadata:
+  name: example
+spec:
+  forProvider:
+    actions:
+    - jobName: example
+    predicate:
+    - conditions:
+      - jobName: example
+        state: SUCCEEDED
+    type: CONDITIONAL
+  providerConfigRef:
+    name: example

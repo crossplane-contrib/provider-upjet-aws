@@ -1,0 +1,10 @@
+apiVersion: glue.aws.upbound.io/v1alpha1
+kind: DevEndpoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    roleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

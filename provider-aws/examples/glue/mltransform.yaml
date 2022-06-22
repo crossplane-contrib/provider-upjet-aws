@@ -1,0 +1,18 @@
+apiVersion: glue.aws.upbound.io/v1alpha1
+kind: MLTransform
+metadata:
+  name: example
+spec:
+  forProvider:
+    inputRecordTables:
+    - databaseName: ${aws_glue_catalog_table.test.database_name}
+      tableName: MyCatalogTable
+    name: example
+    parameters:
+    - findMatchesParameters:
+      - primaryKeyColumnName: my_column_1
+      transformType: FIND_MATCHES
+    roleArnRef:
+      name: example
+  providerConfigRef:
+    name: example

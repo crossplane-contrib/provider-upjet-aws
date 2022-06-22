@@ -1,0 +1,12 @@
+apiVersion: glue.aws.upbound.io/v1alpha1
+kind: Partition
+metadata:
+  name: example
+spec:
+  forProvider:
+    databaseName: some-database
+    tableName: some-table
+    values:
+    - some-value
+  providerConfigRef:
+    name: example
