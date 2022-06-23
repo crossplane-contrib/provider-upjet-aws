@@ -7,7 +7,7 @@ type: Opaque
 data:
   credentials: <REPLACEME>
 ---
-apiVersion: aws.upbound.io/v1alpha1
+apiVersion: aws.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
   name: default
