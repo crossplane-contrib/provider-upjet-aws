@@ -293,6 +293,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// S3 bucket can be imported using the bucket
 	"aws_s3_bucket": ParameterAsExternalName("bucket"),
 	// the S3 bucket accelerate configuration resource should be imported using the bucket
+	"aws_s3_bucket_object_lock_configuration": config.IdentifierFromProvider,
+	// the S3 bucket accelerate configuration resource should be imported using the bucket
 	"aws_s3_bucket_accelerate_configuration": config.IdentifierFromProvider,
 	// the S3 bucket ACL resource should be imported using the bucket
 	"aws_s3_bucket_acl": config.IdentifierFromProvider,
