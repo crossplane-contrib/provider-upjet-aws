@@ -4,6 +4,6 @@ metadata:
   name: sample-key
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-1
     description: Created with Crossplane
     deletionWindowInDays: 7

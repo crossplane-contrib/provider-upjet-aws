@@ -1,8 +1,7 @@
-apiVersion: glue.aws.upbound.io/v1alpha1
+apiVersion: glue.aws.upbound.io/v1beta1
 kind: Workflow
 metadata:
   name: example
 spec:
-  forProvider: {}
-  providerConfigRef:
-    name: example
+  forProvider:
+    region: us-east-1

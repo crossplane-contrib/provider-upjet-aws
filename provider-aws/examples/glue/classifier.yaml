@@ -1,9 +1,10 @@
-apiVersion: glue.aws.upbound.io/v1alpha1
+apiVersion: glue.aws.upbound.io/v1beta1
 kind: Classifier
 metadata:
   name: example
 spec:
   forProvider:
+    region: us-east-1
     csvClassifier:
     - allowSingleColumn: false
       containsHeader: PRESENT
@@ -12,6 +13,4 @@ spec:
       header:
       - example1
       - example2
-      quoteSymbol: "''"
-  providerConfigRef:
-    name: example
+      quoteSymbol: "'"

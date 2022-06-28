@@ -201,8 +201,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// It has no naming argument, imported with their catalog ID (usually
 	// AWS account ID), database name, table name and partition values e.g.,
 	// 123456789012:MyDatabase:MyTable:val1#val2
-	"aws_glue_partition":       config.IdentifierFromProvider,
-	"aws_glue_partition_index": config.TemplatedStringAsIdentifier("partition_index.index_name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .parameters.table_name }}:{{ .externalName }}"),
+	"aws_glue_partition": config.IdentifierFromProvider,
+	// Documentation does not match schema where there are multiple indexes
+	// each with their own name.
+	"aws_glue_partition_index": config.IdentifierFromProvider,
 	// Imported using ARN: arn:aws:glue:us-west-2:123456789012:registry/example
 	"aws_glue_registry": config.IdentifierFromProvider,
 

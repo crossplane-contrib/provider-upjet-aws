@@ -1,14 +1,13 @@
-apiVersion: glue.aws.upbound.io/v1alpha1
+apiVersion: glue.aws.upbound.io/v1beta1
 kind: Schema
 metadata:
   name: example
 spec:
   forProvider:
+    region: us-east-1
     compatibility: NONE
     dataFormat: AVRO
     registryArn: ${aws_glue_registry.test.arn}
     schemaDefinition: '{"type": "record", "name": "r1", "fields": [ {"name": "f1",
       "type": "int"}, {"name": "f2", "type": "string"} ]}'
     schemaName: example
-  providerConfigRef:
-    name: example

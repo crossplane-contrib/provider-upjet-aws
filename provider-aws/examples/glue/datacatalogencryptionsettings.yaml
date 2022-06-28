@@ -1,9 +1,10 @@
-apiVersion: glue.aws.upbound.io/v1alpha1
+apiVersion: glue.aws.upbound.io/v1beta1
 kind: DataCatalogEncryptionSettings
 metadata:
   name: example
 spec:
   forProvider:
+    region: us-east-1
     dataCatalogEncryptionSettings:
     - connectionPasswordEncryption:
       - awsKmsKeyIdRef:
@@ -13,5 +14,13 @@ spec:
       - catalogEncryptionMode: SSE-KMS
         sseAwsKmsKeyIdRef:
           name: sample-key
-  providerConfigRef:
-    name: example
+---
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  name: sample-key
+spec:
+  forProvider:
+    region: us-east-1
+    description: Created with Crossplane
+    deletionWindowInDays: 7

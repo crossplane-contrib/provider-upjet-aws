@@ -1,9 +1,18 @@
-apiVersion: glue.aws.upbound.io/v1alpha1
+apiVersion: glue.aws.upbound.io/v1beta1
 kind: CatalogTable
 metadata:
   name: example
 spec:
   forProvider:
-    databaseName: MyCatalogDatabase
-  providerConfigRef:
-    name: example
+    region: us-east-1
+    databaseName: example
+    catalogId: "609897127049"
+    tableType: EXTERNAL
+    storageDescriptor:
+      - columns:
+        - name: my_column_1
+          type: string
+        - name: my_column_2
+          type: string
+        - name: my_column_3
+          type: string

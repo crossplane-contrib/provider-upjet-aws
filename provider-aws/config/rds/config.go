@@ -6,15 +6,13 @@ package rds
 
 import (
 	"github.com/upbound/upjet/pkg/config"
-
-	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure adds configurations for rds group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_rds_cluster", func(r *config.Resource) {
 		// Mutually exclusive with aws_rds_cluster_role_association
-		common.MutuallyExclusiveFields(r.TerraformResource, "iam_roles")
+		config.MoveToStatus(r.TerraformResource, "iam_roles")
 		r.References = config.References{
 			"s3_import.bucket_name": {
 				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",

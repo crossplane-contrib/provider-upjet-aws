@@ -1,14 +1,14 @@
-apiVersion: glue.aws.upbound.io/v1alpha1
+apiVersion: glue.aws.upbound.io/v1beta1
 kind: PartitionIndex
 metadata:
   name: example
 spec:
   forProvider:
+    region: us-east-1
+    catalogId: "609897127049"
     databaseName: MyCatalogDatabase
     partitionIndex:
     - keys:
       - my_column_1
       - my_column_2
     tableName: MyCatalogTable
-  providerConfigRef:
-    name: example

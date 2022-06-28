@@ -14,7 +14,7 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_autoscaling_group", func(r *config.Resource) {
 		// These are mutually exclusive with aws_autoscaling_attachment.
-		common.MutuallyExclusiveFields(r.TerraformResource, "load_balancers", "target_group_arns")
+		config.MoveToStatus(r.TerraformResource, "load_balancers", "target_group_arns")
 
 		r.References["vpc_zone_identifier"] = config.Reference{
 			Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
