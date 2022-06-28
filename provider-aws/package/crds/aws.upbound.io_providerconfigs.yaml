@@ -11,8 +11,8 @@ spec:
   names:
     categories:
     - crossplane
-    - provider
-    - awsjet
+    - providerconfig
+    - aws
     kind: ProviderConfig
     listKind: ProviderConfigList
     plural: providerconfigs
@@ -158,14 +158,14 @@ spec:
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
-    - jsonPath: .spec.credentials.secretRef.name
-      name: SECRET-NAME
+    - jsonPath: .spec.source
+      name: SOURCE
       priority: 1
       type: string
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: A ProviderConfig configures a Jet AWS provider.
+        description: A ProviderConfig configures the AWS provider.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

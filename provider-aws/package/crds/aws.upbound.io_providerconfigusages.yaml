@@ -11,8 +11,8 @@ spec:
   names:
     categories:
     - crossplane
-    - provider
-    - awsjet
+    - providerconfig
+    - aws
     kind: ProviderConfigUsage
     listKind: ProviderConfigUsageList
     plural: providerconfigusages
