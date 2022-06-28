@@ -10,11 +10,37 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
-	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
-	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this Crawler.
+func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Role),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.ForProvider.RoleRef,
+		Selector:     mg.Spec.ForProvider.RoleSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Role")
+	}
+	mg.Spec.ForProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RoleRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this DataCatalogEncryptionSettings.
 func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -27,12 +53,12 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyID),
-				Extract:      reference.ExternalName(),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDRef,
 				Selector:     mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDSelector,
 				To: reference.To{
-					List:    &v1beta1.KeyList{},
-					Managed: &v1beta1.Key{},
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
 				},
 			})
 			if err != nil {
@@ -47,12 +73,12 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyID),
-				Extract:      reference.ExternalName(),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyIDRef,
 				Selector:     mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyIDSelector,
 				To: reference.To{
-					List:    &v1beta1.KeyList{},
-					Managed: &v1beta1.Key{},
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
 				},
 			})
 			if err != nil {
@@ -81,8 +107,8 @@ func (mg *DevEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
 		},
 	})
 	if err != nil {
@@ -139,8 +165,8 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
 		},
 	})
 	if err != nil {
@@ -165,8 +191,8 @@ func (mg *MLTransform) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
 		},
 	})
 	if err != nil {

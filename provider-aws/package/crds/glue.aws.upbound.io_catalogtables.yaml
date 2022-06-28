@@ -236,6 +236,7 @@ spec:
                   viewOriginalText:
                     type: string
                 required:
+                - catalogId
                 - databaseName
                 - region
                 type: object

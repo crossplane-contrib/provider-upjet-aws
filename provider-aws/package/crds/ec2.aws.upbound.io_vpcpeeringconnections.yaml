@@ -64,17 +64,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  accepter:
-                    items:
-                      properties:
-                        allowClassicLinkToRemoteVpc:
-                          type: boolean
-                        allowRemoteVpcDnsResolution:
-                          type: boolean
-                        allowVpcToRemoteClassicLink:
-                          type: boolean
-                      type: object
-                    type: array
                   autoAccept:
                     type: boolean
                   peerOwnerId:
@@ -110,17 +99,6 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  requester:
-                    items:
-                      properties:
-                        allowClassicLinkToRemoteVpc:
-                          type: boolean
-                        allowRemoteVpcDnsResolution:
-                          type: boolean
-                        allowVpcToRemoteClassicLink:
-                          type: boolean
-                      type: object
-                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -151,9 +129,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - accepter
                 - region
-                - requester
                 type: object
               providerConfigRef:
                 default:
@@ -261,12 +237,26 @@ spec:
                     type: string
                   accepter:
                     items:
+                      properties:
+                        allowClassicLinkToRemoteVpc:
+                          type: boolean
+                        allowRemoteVpcDnsResolution:
+                          type: boolean
+                        allowVpcToRemoteClassicLink:
+                          type: boolean
                       type: object
                     type: array
                   id:
                     type: string
                   requester:
                     items:
+                      properties:
+                        allowClassicLinkToRemoteVpc:
+                          type: boolean
+                        allowRemoteVpcDnsResolution:
+                          type: boolean
+                        allowVpcToRemoteClassicLink:
+                          type: boolean
                       type: object
                     type: array
                   tagsAll:

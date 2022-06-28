@@ -54,30 +54,28 @@ type RouteTableParameters struct {
 }
 
 type RouteTableRouteObservation struct {
+	CarrierGatewayID *string `json:"carrierGatewayId,omitempty" tf:"carrier_gateway_id,omitempty"`
+
+	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
+
+	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
+
+	DestinationPrefixListID *string `json:"destinationPrefixListId,omitempty" tf:"destination_prefix_list_id,omitempty"`
+
+	EgressOnlyGatewayID *string `json:"egressOnlyGatewayId,omitempty" tf:"egress_only_gateway_id,omitempty"`
+
+	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
+
+	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
+
+	LocalGatewayID *string `json:"localGatewayId,omitempty" tf:"local_gateway_id,omitempty"`
+
+	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
+
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 }
 
 type RouteTableRouteParameters struct {
-
-	// +kubebuilder:validation:Optional
-	CarrierGatewayID *string `json:"carrierGatewayId,omitempty" tf:"carrier_gateway_id"`
-
-	// +kubebuilder:validation:Optional
-	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block"`
-
-	// +kubebuilder:validation:Optional
-	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn"`
-
-	// +kubebuilder:validation:Optional
-	DestinationPrefixListID *string `json:"destinationPrefixListId,omitempty" tf:"destination_prefix_list_id"`
-
-	// +kubebuilder:validation:Optional
-	EgressOnlyGatewayID *string `json:"egressOnlyGatewayId,omitempty" tf:"egress_only_gateway_id"`
-
-	// +kubebuilder:validation:Optional
-	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id"`
-
-	// +kubebuilder:validation:Optional
-	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block"`
 
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
@@ -89,12 +87,6 @@ type RouteTableRouteParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
-	// +kubebuilder:validation:Optional
-	LocalGatewayID *string `json:"localGatewayId,omitempty" tf:"local_gateway_id"`
-
-	// +kubebuilder:validation:Optional
-	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id"`
-
 	// +crossplane:generate:reference:type=NetworkInterface
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id"`
@@ -104,9 +96,6 @@ type RouteTableRouteParameters struct {
 
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id"`
 
 	// +crossplane:generate:reference:type=VPCEndpoint
 	// +kubebuilder:validation:Optional

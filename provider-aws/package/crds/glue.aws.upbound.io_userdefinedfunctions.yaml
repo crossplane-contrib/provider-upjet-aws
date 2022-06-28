@@ -91,6 +91,7 @@ spec:
                       type: object
                     type: array
                 required:
+                - catalogId
                 - className
                 - databaseName
                 - ownerName

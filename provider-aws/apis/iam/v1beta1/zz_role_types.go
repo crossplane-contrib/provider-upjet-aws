@@ -14,15 +14,12 @@ import (
 )
 
 type InlinePolicyObservation struct {
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type InlinePolicyParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type RoleObservation struct {
@@ -51,9 +48,6 @@ type RoleParameters struct {
 
 	// +kubebuilder:validation:Optional
 	ForceDetachPolicies *bool `json:"forceDetachPolicies,omitempty" tf:"force_detach_policies,omitempty"`
-
-	// +kubebuilder:validation:Required
-	InlinePolicy []InlinePolicyParameters `json:"inlinePolicy" tf:"inline_policy,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	MaxSessionDuration *float64 `json:"maxSessionDuration,omitempty" tf:"max_session_duration,omitempty"`

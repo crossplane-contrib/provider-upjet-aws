@@ -21,8 +21,8 @@ type CatalogDatabaseObservation struct {
 
 type CatalogDatabaseParameters struct {
 
-	// +kubebuilder:validation:Optional
-	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+	// +kubebuilder:validation:Required
+	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CreateTableDefaultPermission []CreateTableDefaultPermissionParameters `json:"createTableDefaultPermission,omitempty" tf:"create_table_default_permission,omitempty"`

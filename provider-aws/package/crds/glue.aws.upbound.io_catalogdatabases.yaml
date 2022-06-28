@@ -106,6 +106,7 @@ spec:
                       type: object
                     type: array
                 required:
+                - catalogId
                 - region
                 type: object
               providerConfigRef:

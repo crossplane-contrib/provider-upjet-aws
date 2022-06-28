@@ -102,21 +102,9 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
-                  vpc:
-                    items:
-                      properties:
-                        vpcId:
-                          type: string
-                        vpcRegion:
-                          type: string
-                      required:
-                      - vpcId
-                      type: object
-                    type: array
                 required:
                 - name
                 - region
-                - vpc
                 type: object
               providerConfigRef:
                 default:
@@ -233,6 +221,11 @@ spec:
                     type: object
                   vpc:
                     items:
+                      properties:
+                        vpcId:
+                          type: string
+                        vpcRegion:
+                          type: string
                       type: object
                     type: array
                   zoneId:

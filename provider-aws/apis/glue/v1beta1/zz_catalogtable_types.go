@@ -23,8 +23,8 @@ type CatalogTableObservation struct {
 
 type CatalogTableParameters struct {
 
-	// +kubebuilder:validation:Optional
-	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+	// +kubebuilder:validation:Required
+	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
 	// +kubebuilder:validation:Required
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`

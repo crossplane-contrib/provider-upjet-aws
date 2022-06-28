@@ -35,8 +35,8 @@ type UserDefinedFunctionObservation struct {
 
 type UserDefinedFunctionParameters struct {
 
-	// +kubebuilder:validation:Optional
-	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+	// +kubebuilder:validation:Required
+	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
 	// +kubebuilder:validation:Required
 	ClassName *string `json:"className" tf:"class_name,omitempty"`

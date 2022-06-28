@@ -46,6 +46,9 @@ type PartitionIndexPartitionIndexObservation struct {
 type PartitionIndexPartitionIndexParameters struct {
 
 	// +kubebuilder:validation:Optional
+	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
 	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
 }
 

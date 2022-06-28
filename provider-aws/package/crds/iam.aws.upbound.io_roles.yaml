@@ -69,15 +69,6 @@ spec:
                     type: string
                   forceDetachPolicies:
                     type: boolean
-                  inlinePolicy:
-                    items:
-                      properties:
-                        name:
-                          type: string
-                        policy:
-                          type: string
-                      type: object
-                    type: array
                   maxSessionDuration:
                     type: number
                   path:
@@ -90,7 +81,6 @@ spec:
                     type: object
                 required:
                 - assumeRolePolicy
-                - inlinePolicy
                 type: object
               providerConfigRef:
                 default:
@@ -201,6 +191,11 @@ spec:
                     type: string
                   inlinePolicy:
                     items:
+                      properties:
+                        name:
+                          type: string
+                        policy:
+                          type: string
                       type: object
                     type: array
                   managedPolicyArns:
