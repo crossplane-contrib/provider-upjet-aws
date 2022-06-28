@@ -23,7 +23,6 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/elasticache"
 	"github.com/upbound/official-providers/provider-aws/config/elasticloadbalancing"
 	"github.com/upbound/official-providers/provider-aws/config/globalaccelerator"
-	"github.com/upbound/official-providers/provider-aws/config/glue"
 	"github.com/upbound/official-providers/provider-aws/config/iam"
 	"github.com/upbound/official-providers/provider-aws/config/mq"
 	"github.com/upbound/official-providers/provider-aws/config/neptune"
@@ -87,7 +86,6 @@ func GetProvider() *tjconfig.Provider {
 		elasticache.Configure,
 		elasticloadbalancing.Configure,
 		globalaccelerator.Configure,
-		glue.Configure,
 		iam.Configure,
 		rds.Configure,
 		s3.Configure,

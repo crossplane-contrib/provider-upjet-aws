@@ -176,45 +176,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// arn:aws:globalaccelerator::111111111111:accelerator/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/listener/xxxxxxxx
 	"aws_globalaccelerator_listener": config.IdentifierFromProvider,
 
-	// glue
-	//
-	// Imported using "name".
-	"aws_glue_workflow": config.NameAsIdentifier,
-	// Imported using arn: arn:aws:glue:us-west-2:123456789012:schema/example/example
-	"aws_glue_schema": config.IdentifierFromProvider,
-	// Imported using "name".
-	"aws_glue_trigger": config.NameAsIdentifier,
-	// Imported using the catalog_id:database_name:function_name
-	// 123456789012:my_database:my_func
-	"aws_glue_user_defined_function":  FormattedIdentifierUserDefined("name", ":", "catalog_id", "database_name"),
-	"aws_glue_security_configuration": config.NameAsIdentifier,
-	// Imported using the account ID: 12356789012
-	"aws_glue_resource_policy": config.IdentifierFromProvider,
-	// Imported using the catalog_id:name. If you have not set a Catalog ID
-	// specify the AWS Account ID that the database is in.
-	"aws_glue_catalog_database": FormattedIdentifierUserDefined("name", ":", "catalog_id"),
-	// Imported with their catalog ID (usually AWS account ID), database name,
-	// and table name, e.g., 123456789012:MyDatabase:MyTable
-	"aws_glue_catalog_table": FormattedIdentifierUserDefined("name", ":", "catalog_id", "database_name"),
-	"aws_glue_classifier":    config.NameAsIdentifier,
-	"aws_glue_crawler":       config.NameAsIdentifier,
-	// Imported using CATALOG-ID (AWS account ID if not custom), e.g., 123456789012
-	"aws_glue_data_catalog_encryption_settings": config.IdentifierFromProvider,
-	"aws_glue_dev_endpoint":                     config.NameAsIdentifier,
-	"aws_glue_job":                              config.NameAsIdentifier,
-	// Imported using id, e.g., tfm-c2cafbe83b1c575f49eaca9939220e2fcd58e2d5
-	"aws_glue_ml_transform": config.IdentifierFromProvider,
-	// It has no naming argument, imported with their catalog ID (usually
-	// AWS account ID), database name, table name and partition values e.g.,
-	// 123456789012:MyDatabase:MyTable:val1#val2
-	"aws_glue_partition": config.IdentifierFromProvider,
-	// Imported with their catalog ID (usually AWS account ID), database name,
-	// table name, and index name, e.g.,
-	// 123456789012:MyDatabase:MyTable:index-name
-	"aws_glue_partition_index": gluePartitionIndex(),
-	// Imported using ARN: arn:aws:glue:us-west-2:123456789012:registry/example
-	"aws_glue_registry": config.IdentifierFromProvider,
-
 	// iam
 	//
 	// AKIA1234567890
