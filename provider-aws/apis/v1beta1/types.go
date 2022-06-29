@@ -14,15 +14,51 @@ type ProviderConfigSpec struct {
 	// Credentials required to authenticate to this provider.
 	Credentials ProviderCredentials `json:"credentials"`
 
-	// AssumeRoleARN to assume with provider credentials
+	// AssumeRole to assume with provider credentials
 	// +optional
-	AssumeRoleARN *string `json:"assumeRoleARN,omitempty"`
+	AssumeRole *AssumeRoleOptions `json:"assumeRole,omitempty"`
+}
+
+// AssumeRoleOptions define the options for assuming an IAM Role
+// Fields are similar to the STS AssumeRoleOptions in the AWS SDK
+type AssumeRoleOptions struct {
+	// AssumeRoleARN to assume with provider credentials
+	RoleARN *string `json:"roleARN,omitempty"`
+
+	// ExternalID is the external ID used when assuming role.
+	// +optional
+	ExternalID *string `json:"externalID,omitempty"`
+
+	// Tags is list of session tags that you want to pass. Each session tag consists of a key
+	// name and an associated value. For more information about session tags, see
+	// Tagging STS Sessions
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html).
+	// +optional
+	Tags []Tag `json:"tags,omitempty"`
+
+	// TransitiveTagKeys is a list of keys for session tags that you want to set as transitive. If you set a
+	// tag key as transitive, the corresponding key and value passes to subsequent
+	// sessions in a role chain. For more information, see Chaining Roles with Session Tags
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining).
+	// +optional
+	TransitiveTagKeys []string `json:"transitiveTagKeys,omitempty"`
+}
+
+// Tag is session tag that can be used to assume an IAM Role
+type Tag struct {
+	// Name of the tag.
+	// Key is a required field
+	Key *string `json:"key"`
+
+	// Value of the tag.
+	// Value is a required field
+	Value *string `json:"value"`
 }
 
 // ProviderCredentials required to authenticate.
 type ProviderCredentials struct {
 	// Source of the provider credentials.
-	// +kubebuilder:validation:Enum=None;Secret;InjectedIdentity;Environment;Filesystem
+	// +kubebuilder:validation:Enum=None;Secret;AssumeRole;AssumeRoleWithWebIdentity
 	Source xpv1.CredentialsSource `json:"source"`
 
 	xpv1.CommonCredentialSelectors `json:",inline"`
