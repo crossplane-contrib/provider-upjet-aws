@@ -16,12 +16,54 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this CatalogTable.
+func (mg *CatalogTable) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DatabaseNameRef,
+		Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
+		To: reference.To{
+			List:    &CatalogDatabaseList{},
+			Managed: &CatalogDatabase{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
+	}
+	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Crawler.
 func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DatabaseNameRef,
+		Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
+		To: reference.To{
+			List:    &CatalogDatabaseList{},
+			Managed: &CatalogDatabase{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
+	}
+	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Role),
@@ -200,6 +242,84 @@ func (mg *MLTransform) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Partition.
+func (mg *Partition) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DatabaseNameRef,
+		Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
+		To: reference.To{
+			List:    &CatalogDatabaseList{},
+			Managed: &CatalogDatabase{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
+	}
+	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this PartitionIndex.
+func (mg *PartitionIndex) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DatabaseNameRef,
+		Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
+		To: reference.To{
+			List:    &CatalogDatabaseList{},
+			Managed: &CatalogDatabase{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
+	}
+	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this UserDefinedFunction.
+func (mg *UserDefinedFunction) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DatabaseNameRef,
+		Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
+		To: reference.To{
+			List:    &CatalogDatabaseList{},
+			Managed: &CatalogDatabase{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
+	}
+	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 
 	return nil
 }

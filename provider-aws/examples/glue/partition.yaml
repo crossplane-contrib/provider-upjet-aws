@@ -5,7 +5,8 @@ metadata:
 spec:
   forProvider:
     region: us-east-1
-    databaseName: some-database
+    databaseNameRef:
+      name: example
     tableName: some-table
     partitionValues:
     - some-value

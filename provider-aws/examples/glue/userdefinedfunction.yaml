@@ -7,7 +7,8 @@ spec:
     region: us-east-1
     catalogId: "609897127049"
     className: class
-    databaseName: example
+    databaseNameRef:
+      name: example
     ownerName: owner
     ownerType: GROUP
     resourceUris:

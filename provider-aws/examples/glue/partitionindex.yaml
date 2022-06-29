@@ -6,7 +6,8 @@ spec:
   forProvider:
     region: us-east-1
     catalogId: "609897127049"
-    databaseName: MyCatalogDatabase
+    databaseNameRef:
+      name: example
     partitionIndex:
     - keys:
       - my_column_1

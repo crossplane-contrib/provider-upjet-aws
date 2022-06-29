@@ -44,8 +44,15 @@ type CrawlerParameters struct {
 	// +kubebuilder:validation:Optional
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// +kubebuilder:validation:Required
-	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+	// +crossplane:generate:reference:type=CatalogDatabase
+	// +kubebuilder:validation:Optional
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	DeltaTarget []DeltaTargetParameters `json:"deltaTarget,omitempty" tf:"delta_target,omitempty"`

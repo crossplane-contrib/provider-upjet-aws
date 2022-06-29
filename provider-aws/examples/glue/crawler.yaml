@@ -5,7 +5,8 @@ metadata:
 spec:
   forProvider:
     region: us-east-1
-    databaseName: MyCatalogDatabase
+    databaseNameRef:
+      name: example
     dynamodbTarget:
     - path: table-name
     roleRef:

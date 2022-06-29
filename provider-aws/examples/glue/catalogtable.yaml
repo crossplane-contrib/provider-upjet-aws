@@ -5,7 +5,8 @@ metadata:
 spec:
   forProvider:
     region: us-east-1
-    databaseName: example
+    databaseNameRef:
+      name: example
     catalogId: "609897127049"
     tableType: EXTERNAL
     storageDescriptor:

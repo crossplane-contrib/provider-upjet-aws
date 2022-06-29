@@ -407,6 +407,16 @@ func (in *CatalogTableParameters) DeepCopyInto(out *CatalogTableParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DatabaseNameRef != nil {
+		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.DatabaseNameSelector != nil {
+		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -1117,6 +1127,16 @@ func (in *CrawlerParameters) DeepCopyInto(out *CrawlerParameters) {
 		in, out := &in.DatabaseName, &out.DatabaseName
 		*out = new(string)
 		**out = **in
+	}
+	if in.DatabaseNameRef != nil {
+		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.DatabaseNameSelector != nil {
+		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DeltaTarget != nil {
 		in, out := &in.DeltaTarget, &out.DeltaTarget
@@ -3314,6 +3334,16 @@ func (in *PartitionIndexParameters_2) DeepCopyInto(out *PartitionIndexParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.DatabaseNameRef != nil {
+		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.DatabaseNameSelector != nil {
+		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PartitionIndex != nil {
 		in, out := &in.PartitionIndex, &out.PartitionIndex
 		*out = make([]PartitionIndexPartitionIndexParameters, len(*in))
@@ -3552,6 +3582,16 @@ func (in *PartitionParameters) DeepCopyInto(out *PartitionParameters) {
 		in, out := &in.DatabaseName, &out.DatabaseName
 		*out = new(string)
 		**out = **in
+	}
+	if in.DatabaseNameRef != nil {
+		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.DatabaseNameSelector != nil {
+		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Parameters != nil {
 		in, out := &in.Parameters, &out.Parameters
@@ -5770,6 +5810,16 @@ func (in *UserDefinedFunctionParameters) DeepCopyInto(out *UserDefinedFunctionPa
 		in, out := &in.DatabaseName, &out.DatabaseName
 		*out = new(string)
 		**out = **in
+	}
+	if in.DatabaseNameRef != nil {
+		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.DatabaseNameSelector != nil {
+		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.OwnerName != nil {
 		in, out := &in.OwnerName, &out.OwnerName
