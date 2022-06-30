@@ -34,15 +34,6 @@ func (l *ClassifierList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this CrawlerList.
-func (l *CrawlerList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this DataCatalogEncryptionSettingsList.
 func (l *DataCatalogEncryptionSettingsList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -52,44 +43,8 @@ func (l *DataCatalogEncryptionSettingsList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this DevEndpointList.
-func (l *DevEndpointList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this JobList.
 func (l *JobList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this MLTransformList.
-func (l *MLTransformList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this PartitionIndexList.
-func (l *PartitionIndexList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this PartitionList.
-func (l *PartitionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -108,24 +63,6 @@ func (l *RegistryList) GetItems() []resource.Managed {
 
 // GetItems of this ResourcePolicyList.
 func (l *ResourcePolicyList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this SchemaList.
-func (l *SchemaList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this SecurityConfigurationList.
-func (l *SecurityConfigurationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

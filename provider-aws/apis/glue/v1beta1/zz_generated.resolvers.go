@@ -9,9 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
-	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
-	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -42,48 +41,6 @@ func (mg *CatalogTable) ResolveReferences(ctx context.Context, c client.Reader) 
 	return nil
 }
 
-// ResolveReferences of this Crawler.
-func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error {
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.DatabaseNameRef,
-		Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
-		To: reference.To{
-			List:    &CatalogDatabaseList{},
-			Managed: &CatalogDatabase{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
-	}
-	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Role),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.ForProvider.RoleRef,
-		Selector:     mg.Spec.ForProvider.RoleSelector,
-		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.Role")
-	}
-	mg.Spec.ForProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.RoleRef = rsp.ResolvedReference
-
-	return nil
-}
-
 // ResolveReferences of this DataCatalogEncryptionSettings.
 func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -99,8 +56,8 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 				Reference:    mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDRef,
 				Selector:     mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDSelector,
 				To: reference.To{
-					List:    &v1beta11.KeyList{},
-					Managed: &v1beta11.Key{},
+					List:    &v1beta1.KeyList{},
+					Managed: &v1beta1.Key{},
 				},
 			})
 			if err != nil {
@@ -119,8 +76,8 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 				Reference:    mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyIDRef,
 				Selector:     mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyIDSelector,
 				To: reference.To{
-					List:    &v1beta11.KeyList{},
-					Managed: &v1beta11.Key{},
+					List:    &v1beta1.KeyList{},
+					Managed: &v1beta1.Key{},
 				},
 			})
 			if err != nil {
@@ -131,65 +88,6 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 
 		}
 	}
-
-	return nil
-}
-
-// ResolveReferences of this DevEndpoint.
-func (mg *DevEndpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var mrsp reference.MultiResolutionResponse
-	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.ForProvider.RoleArnRef,
-		Selector:     mg.Spec.ForProvider.RoleArnSelector,
-		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.RoleArn")
-	}
-	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
-
-	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
-		Extract:       reference.ExternalName(),
-		References:    mg.Spec.ForProvider.SecurityGroupIdRefs,
-		Selector:      mg.Spec.ForProvider.SecurityGroupIdSelector,
-		To: reference.To{
-			List:    &v1beta12.SecurityGroupList{},
-			Managed: &v1beta12.SecurityGroup{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityGroupIds")
-	}
-	mg.Spec.ForProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
-	mg.Spec.ForProvider.SecurityGroupIdRefs = mrsp.ResolvedReferences
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.SubnetIDRef,
-		Selector:     mg.Spec.ForProvider.SubnetIDSelector,
-		To: reference.To{
-			List:    &v1beta12.SubnetList{},
-			Managed: &v1beta12.Subnet{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetID")
-	}
-	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -207,8 +105,8 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
 		},
 	})
 	if err != nil {
@@ -216,84 +114,6 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
-
-	return nil
-}
-
-// ResolveReferences of this MLTransform.
-func (mg *MLTransform) ResolveReferences(ctx context.Context, c client.Reader) error {
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.ForProvider.RoleArnRef,
-		Selector:     mg.Spec.ForProvider.RoleArnSelector,
-		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.RoleArn")
-	}
-	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
-
-	return nil
-}
-
-// ResolveReferences of this Partition.
-func (mg *Partition) ResolveReferences(ctx context.Context, c client.Reader) error {
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.DatabaseNameRef,
-		Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
-		To: reference.To{
-			List:    &CatalogDatabaseList{},
-			Managed: &CatalogDatabase{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
-	}
-	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
-
-	return nil
-}
-
-// ResolveReferences of this PartitionIndex.
-func (mg *PartitionIndex) ResolveReferences(ctx context.Context, c client.Reader) error {
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.DatabaseNameRef,
-		Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
-		To: reference.To{
-			List:    &CatalogDatabaseList{},
-			Managed: &CatalogDatabase{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
-	}
-	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 
 	return nil
 }
