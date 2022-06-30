@@ -144,6 +144,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_eks_addon": FormattedIdentifierUserDefined("addon_name", ":", "cluster_name"),
 	// my_cluster:my_fargate_profile
 	"aws_eks_fargate_profile": FormattedIdentifierUserDefined("fargate_profile_name", ":", "cluster_name"),
+	// It has a complex config, adding empty entry here just to enable it.
+	"aws_eks_identity_provider_config": eksOIDCIdentityProvider(),
 
 	// elasticache
 	//
@@ -291,6 +293,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// S3 bucket can be imported using the bucket
 	"aws_s3_bucket": ParameterAsExternalName("bucket"),
 	// the S3 bucket accelerate configuration resource should be imported using the bucket
+	"aws_s3_bucket_object_lock_configuration": config.IdentifierFromProvider,
+	// the S3 bucket accelerate configuration resource should be imported using the bucket
 	"aws_s3_bucket_accelerate_configuration": config.IdentifierFromProvider,
 	// the S3 bucket ACL resource should be imported using the bucket
 	"aws_s3_bucket_acl": config.IdentifierFromProvider,
@@ -421,6 +425,34 @@ func routeTableAssociation() config.ExternalName {
 		return "", errors.New("gateway_id or subnet_id has to be given")
 	}
 	return e
+}
+
+func eksOIDCIdentityProvider() config.ExternalName {
+	// OmittedFields in config.ExternalName works only for the top-level fields.
+	// Hence, omitting is done in individual config override in `eks/config.go`
+	return config.ExternalName{
+		SetIdentifierArgumentFn: func(base map[string]interface{}, externalName string) {
+			if _, ok := base["oidc"]; !ok {
+				base["oidc"] = map[string]interface{}{}
+			}
+			if m, ok := base["oidc"].(map[string]interface{}); ok {
+				m["identity_provider_config_name"] = externalName
+			}
+		},
+		GetExternalNameFn: func(tfstate map[string]interface{}) (string, error) {
+			if id, ok := tfstate["id"]; ok {
+				return strings.Split(id.(string), ":")[1], nil
+			}
+			return "", errors.New("there is no id in tfstate")
+		},
+		GetIDFn: func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+			cl, ok := parameters["cluster_name"]
+			if !ok {
+				return "", errors.New("cluster_name cannot be empty")
+			}
+			return fmt.Sprintf("%s:%s", cl.(string), externalName), nil
+		},
+	}
 }
 
 // FormattedIdentifierFromProvider is a helper function to construct Terraform

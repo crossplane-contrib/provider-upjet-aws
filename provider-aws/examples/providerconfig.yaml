@@ -1,4 +1,4 @@
-apiVersion: aws.upbound.io/v1alpha1
+apiVersion: aws.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
   name: default
@@ -7,5 +7,5 @@ spec:
     source: Secret
     secretRef:
       name: provider-creds
-      namespace: crossplane-system
+      namespace: upbound-system
       key: creds

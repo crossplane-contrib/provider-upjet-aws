@@ -62,15 +62,19 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		}
 
 		var cfg *aws.Config
+		var roleARN *string
+		if pc.Spec.AssumeRole != nil {
+			roleARN = pc.Spec.AssumeRole.RoleARN
+		}
 		xpapc := &xpabeta1.ProviderConfig{
 			Spec: xpabeta1.ProviderConfigSpec{
 				Credentials:   xpabeta1.ProviderCredentials(pc.Spec.Credentials),
-				AssumeRoleARN: pc.Spec.AssumeRole.RoleARN,
+				AssumeRoleARN: roleARN,
 			},
 		}
 		switch s := pc.Spec.Credentials.Source; s { //nolint:exhaustive
 		case xpv1.CredentialsSourceInjectedIdentity:
-			if pc.Spec.AssumeRole.RoleARN != nil {
+			if roleARN != nil {
 				if cfg, err = xpawsclient.UsePodServiceAccountAssumeRole(ctx, []byte{}, xpawsclient.DefaultSection, region, xpapc); err != nil {
 					return ps, errors.Wrap(err, "failed to use pod service account assumeRoleARN")
 				}
@@ -84,9 +88,9 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			if err != nil {
 				return ps, errors.Wrap(err, "cannot get credentials")
 			}
-			if pc.Spec.AssumeRole.RoleARN != nil {
+			if roleARN != nil {
 				if cfg, err = xpawsclient.UseProviderSecretAssumeRole(ctx, data, xpawsclient.DefaultSection, region, xpapc); err != nil {
-					return ps, errors.Wrap(err, "failed to use provider secret assumeRoleARN")
+					return ps, errors.Wrap(err, "failed to use provider secret with assumeRoleARN")
 				}
 			} else {
 				if cfg, err = xpawsclient.UseProviderSecret(ctx, data, xpawsclient.DefaultSection, region); err != nil {

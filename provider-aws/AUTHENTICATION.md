@@ -17,7 +17,8 @@ kind: ProviderConfig
 metadata:
   name: account-b
 spec:
-  assumeRoleARN: "arn:aws:iam::999999999999:role/account-b"
+  assumeRole:
+    roleARN: "arn:aws:iam::999999999999:role/account-b"
   credentials:
     source: InjectedIdentity
 EOF

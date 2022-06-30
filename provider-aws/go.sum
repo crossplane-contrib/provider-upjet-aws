@@ -830,8 +830,8 @@ github.com/tmc/grpc-websocket-proxy v0.0.0-20201229170055-e5319fda7802/go.mod h1
 github.com/tv42/httpunix v0.0.0-20150427012821-b75d8614f926/go.mod h1:9ESjWnEqriFuLhtthL60Sar/7RFoluCcXsuvEwTV5KM=
 github.com/ulikunitz/xz v0.5.5/go.mod h1:2bypXElzHzzJZwzH67Y6wb67pO62Rzfn7BSiF4ABRW8=
 github.com/ulikunitz/xz v0.5.8/go.mod h1:nbz6k7qbPmH4IRqmfOplQw/tblSgqTqBwxkY0oWt/14=
-github.com/upbound/upjet v0.5.1-0.20220623132324-87875631cb18 h1:4+acch8zpqPmJq8VWQq2YzEDE9msJCKY6K2xKHccv/I=
-github.com/upbound/upjet v0.5.1-0.20220623132324-87875631cb18/go.mod h1:Un5UPFf56YMjXtHfQ6DGr6c9YDXkv6aWIU3Cx9XeQH0=
+github.com/upbound/upjet v0.5.1-0.20220627135947-ea91b1b471bd h1:+1XrIP7Z0d/Nw/ccYNLZ5WZQJZgc9iCrUD7anFTTa9U=
+github.com/upbound/upjet v0.5.1-0.20220627135947-ea91b1b471bd/go.mod h1:Un5UPFf56YMjXtHfQ6DGr6c9YDXkv6aWIU3Cx9XeQH0=
 github.com/urfave/cli v1.20.0/go.mod h1:70zkFmudgCuE/ngEzBv17Jvp/497gISqfk5gWijbERA=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.4+incompatible h1:dSLoQfGFAo3F6OoNhwUmLwVgaUXK79GlxNBwueZn0xI=

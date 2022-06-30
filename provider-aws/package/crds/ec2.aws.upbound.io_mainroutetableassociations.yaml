@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: bucketobjectlockconfigurations.s3.aws.upbound.io
+  name: mainroutetableassociations.ec2.aws.upbound.io
 spec:
-  group: s3.aws.upbound.io
+  group: ec2.aws.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - aws
-    kind: BucketObjectLockConfiguration
-    listKind: BucketObjectLockConfigurationList
-    plural: bucketobjectlockconfigurations
-    singular: bucketobjectlockconfiguration
+    kind: MainRouteTableAssociation
+    listKind: MainRouteTableAssociationList
+    plural: mainroutetableassociations
+    singular: mainroutetableassociation
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: BucketObjectLockConfiguration is the Schema for the BucketObjectLockConfigurations
+        description: MainRouteTableAssociation is the Schema for the MainRouteTableAssociations
           API
         properties:
           apiVersion:
@@ -51,8 +51,8 @@ spec:
           metadata:
             type: object
           spec:
-            description: BucketObjectLockConfigurationSpec defines the desired state
-              of BucketObjectLockConfiguration
+            description: MainRouteTableAssociationSpec defines the desired state of
+              MainRouteTableAssociation
             properties:
               deletionPolicy:
                 default: Delete
@@ -65,56 +65,62 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  bucket:
-                    type: string
-                  expectedBucketOwner:
-                    type: string
-                  objectLockEnabled:
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  rule:
-                    items:
-                      properties:
-                        defaultRetention:
-                          items:
-                            properties:
-                              days:
-                                type: number
-                              mode:
-                                type: string
-                              years:
-                                type: number
-                            type: object
-                          type: array
-                      required:
-                      - defaultRetention
-                      type: object
-                    type: array
-                  tokenSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                  routeTableId:
+                    type: string
+                  routeTableIdRef:
+                    description: A Reference to a named object.
                     properties:
-                      key:
-                        description: The key to select.
-                        type: string
                       name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
+                        description: Name of the referenced object.
                         type: string
                     required:
-                    - key
                     - name
-                    - namespace
+                    type: object
+                  routeTableIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
+                  vpcId:
+                    type: string
+                  vpcIdRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  vpcIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
                     type: object
                 required:
-                - bucket
                 - region
-                - rule
                 type: object
               providerConfigRef:
                 default:
@@ -213,12 +219,14 @@ spec:
             - forProvider
             type: object
           status:
-            description: BucketObjectLockConfigurationStatus defines the observed
-              state of BucketObjectLockConfiguration.
+            description: MainRouteTableAssociationStatus defines the observed state
+              of MainRouteTableAssociation.
             properties:
               atProvider:
                 properties:
                   id:
+                    type: string
+                  originalRouteTableId:
                     type: string
                 type: object
               conditions:
