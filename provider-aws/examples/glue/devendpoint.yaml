@@ -1,9 +1,0 @@
-apiVersion: glue.aws.upbound.io/v1beta1
-kind: DevEndpoint
-metadata:
-  name: example
-spec:
-  forProvider:
-    region: us-east-1
-    roleArnRef:
-      name: example

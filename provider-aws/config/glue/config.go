@@ -1,8 +1,9 @@
 package glue
 
 import (
-	"github.com/upbound/official-providers/provider-aws/config/common"
 	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure glue resources.
