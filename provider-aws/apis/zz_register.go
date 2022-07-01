@@ -32,6 +32,7 @@ import (
 	v1beta1route53resolver "github.com/upbound/official-providers/provider-aws/apis/route53resolver/v1beta1"
 	v1beta1s3 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
 	v1alpha1 "github.com/upbound/official-providers/provider-aws/apis/v1alpha1"
+	v1beta1apis "github.com/upbound/official-providers/provider-aws/apis/v1beta1"
 )
 
 func init() {
@@ -59,6 +60,7 @@ func init() {
 		v1beta1route53resolver.SchemeBuilder.AddToScheme,
 		v1beta1s3.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1beta1apis.SchemeBuilder.AddToScheme,
 	)
 }
 

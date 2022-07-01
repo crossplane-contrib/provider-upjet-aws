@@ -11,8 +11,8 @@ spec:
   names:
     categories:
     - crossplane
-    - provider
-    - awsjet
+    - providerconfig
+    - aws
     kind: ProviderConfigUsage
     listKind: ProviderConfigUsageList
     plural: providerconfigusages
@@ -32,7 +32,7 @@ spec:
     - jsonPath: .resourceRef.name
       name: RESOURCE-NAME
       type: string
-    name: v1alpha1
+    name: v1beta1
     schema:
       openAPIV3Schema:
         description: A ProviderConfigUsage indicates that a resource is using a ProviderConfig.

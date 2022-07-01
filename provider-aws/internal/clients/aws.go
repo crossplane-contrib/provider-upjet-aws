@@ -20,7 +20,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/terraform"
 
-	"github.com/upbound/official-providers/provider-aws/apis/v1alpha1"
+	"github.com/upbound/official-providers/provider-aws/apis/v1beta1"
 )
 
 const (
@@ -46,7 +46,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if mg.GetProviderConfigReference() == nil {
 			return ps, errors.New("no providerConfigRef provided")
 		}
-		pc := &v1alpha1.ProviderConfig{}
+		pc := &v1beta1.ProviderConfig{}
 		if err := client.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
 			return ps, errors.Wrap(err, "cannot get referenced Provider")
 		}
@@ -56,21 +56,25 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			return ps, errors.Wrap(err, "cannot get region")
 		}
 
-		t := resource.NewProviderConfigUsageTracker(client, &v1alpha1.ProviderConfigUsage{})
+		t := resource.NewProviderConfigUsageTracker(client, &v1beta1.ProviderConfigUsage{})
 		if err := t.Track(ctx, mg); err != nil {
 			return ps, errors.Wrap(err, "cannot track ProviderConfig usage")
 		}
 
 		var cfg *aws.Config
+		var roleARN *string
+		if pc.Spec.AssumeRole != nil {
+			roleARN = pc.Spec.AssumeRole.RoleARN
+		}
 		xpapc := &xpabeta1.ProviderConfig{
 			Spec: xpabeta1.ProviderConfigSpec{
 				Credentials:   xpabeta1.ProviderCredentials(pc.Spec.Credentials),
-				AssumeRoleARN: pc.Spec.AssumeRoleARN,
+				AssumeRoleARN: roleARN,
 			},
 		}
 		switch s := pc.Spec.Credentials.Source; s { //nolint:exhaustive
 		case xpv1.CredentialsSourceInjectedIdentity:
-			if pc.Spec.AssumeRoleARN != nil {
+			if roleARN != nil {
 				if cfg, err = xpawsclient.UsePodServiceAccountAssumeRole(ctx, []byte{}, xpawsclient.DefaultSection, region, xpapc); err != nil {
 					return ps, errors.Wrap(err, "failed to use pod service account assumeRoleARN")
 				}
@@ -84,9 +88,9 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			if err != nil {
 				return ps, errors.Wrap(err, "cannot get credentials")
 			}
-			if pc.Spec.AssumeRoleARN != nil {
+			if roleARN != nil {
 				if cfg, err = xpawsclient.UseProviderSecretAssumeRole(ctx, data, xpawsclient.DefaultSection, region, xpapc); err != nil {
-					return ps, errors.Wrap(err, "failed to use provider secret assumeRoleARN")
+					return ps, errors.Wrap(err, "failed to use provider secret with assumeRoleARN")
 				}
 			} else {
 				if cfg, err = xpawsclient.UseProviderSecret(ctx, data, xpawsclient.DefaultSection, region); err != nil {
