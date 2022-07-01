@@ -1,4 +1,4 @@
-apiVersion: rds.aws.upbound.io/v1alpha1
+apiVersion: rds.aws.upbound.io/v1beta1
 kind: OptionGroup
 metadata:
   name: example
@@ -6,7 +6,6 @@ spec:
   forProvider:
     engineName: sqlserver-ee
     majorEngineVersion: "11.00"
-    name: option-group-test-terraform
     option:
     - optionName: Timezone
       optionSettings:
@@ -18,5 +17,3 @@ spec:
         value: ${aws_iam_role.example.arn}
     - optionName: TDE
     optionGroupDescription: Terraform Option Group
-  providerConfigRef:
-    name: example

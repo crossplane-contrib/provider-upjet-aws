@@ -1,4 +1,4 @@
-apiVersion: backup.aws.upbound.io/v1alpha1
+apiVersion: backup.aws.upbound.io/v1beta1
 kind: VaultNotifications
 metadata:
   name: example
@@ -8,6 +8,5 @@ spec:
     - BACKUP_JOB_STARTED
     - RESTORE_JOB_COMPLETED
     backupVaultName: example_backup_vault
-    snsTopicArn: ${aws_sns_topic.test.arn}
-  providerConfigRef:
-    name: example
+    snsTopicArnRef:
+      name: example

@@ -1,4 +1,4 @@
-apiVersion: ec2.aws.upbound.io/v1alpha2
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: LaunchTemplate
 metadata:
   name: example
@@ -53,5 +53,3 @@ spec:
     userData: ${filebase64("${path.module}/example.sh")}
     vpcSecurityGroupIdRefs:
     - name: example
-  providerConfigRef:
-    name: example

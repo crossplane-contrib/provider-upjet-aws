@@ -1,9 +1,0 @@
-apiVersion: dataexchange.aws.upbound.io/v1alpha1
-kind: Revision
-metadata:
-  name: example
-spec:
-  forProvider:
-    dataSetId: ${aws_dataexchange_data_set.example.id}
-  providerConfigRef:
-    name: example

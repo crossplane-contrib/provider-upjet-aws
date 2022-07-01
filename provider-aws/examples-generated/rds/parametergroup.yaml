@@ -1,4 +1,4 @@
-apiVersion: rds.aws.upbound.io/v1alpha2
+apiVersion: rds.aws.upbound.io/v1beta1
 kind: ParameterGroup
 metadata:
   name: example
@@ -10,5 +10,3 @@ spec:
       value: utf8
     - name: character_set_client
       value: utf8
-  providerConfigRef:
-    name: example

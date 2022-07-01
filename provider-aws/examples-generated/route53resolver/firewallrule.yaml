@@ -1,4 +1,4 @@
-apiVersion: route53resolver.aws.upbound.io/v1alpha1
+apiVersion: route53resolver.aws.upbound.io/v1beta1
 kind: FirewallRule
 metadata:
   name: example
@@ -13,5 +13,3 @@ spec:
     firewallRuleGroupId: ${aws_route53_resolver_firewall_rule_group.example.id}
     name: example
     priority: 100
-  providerConfigRef:
-    name: example

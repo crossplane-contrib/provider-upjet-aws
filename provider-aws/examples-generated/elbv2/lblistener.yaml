@@ -1,4 +1,4 @@
-apiVersion: elbv2.aws.upbound.io/v1alpha2
+apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBListener
 metadata:
   name: example
@@ -14,5 +14,3 @@ spec:
     port: "443"
     protocol: HTTPS
     sslPolicy: ELBSecurityPolicy-2016-08
-  providerConfigRef:
-    name: example

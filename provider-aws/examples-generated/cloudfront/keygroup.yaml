@@ -1,4 +1,4 @@
-apiVersion: cloudfront.aws.upbound.io/v1alpha1
+apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: KeyGroup
 metadata:
   name: example
@@ -8,5 +8,3 @@ spec:
     items:
     - ${aws_cloudfront_public_key.example.id}
     name: example-key-group
-  providerConfigRef:
-    name: example

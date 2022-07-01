@@ -1,10 +1,9 @@
-apiVersion: acm.aws.upbound.io/v1alpha1
+apiVersion: acm.aws.upbound.io/v1beta1
 kind: CertificateValidation
 metadata:
   name: example
 spec:
   forProvider:
-    certificateArn: ${aws_acm_certificate.example.arn}
+    certificateArnRef:
+      name: example
     validationRecordFqdns: '${[for record in aws_route53_record.example : record.fqdn]}'
-  providerConfigRef:
-    name: example

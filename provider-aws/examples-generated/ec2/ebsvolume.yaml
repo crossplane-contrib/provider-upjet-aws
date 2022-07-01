@@ -1,4 +1,4 @@
-apiVersion: ec2.aws.upbound.io/v1alpha2
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: EBSVolume
 metadata:
   name: example
@@ -8,5 +8,3 @@ spec:
     size: 40
     tags:
       Name: HelloWorld
-  providerConfigRef:
-    name: example

@@ -1,4 +1,4 @@
-apiVersion: s3.aws.upbound.io/v1alpha2
+apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
   name: example
@@ -7,5 +7,3 @@ spec:
     tags:
       Environment: Dev
       Name: My bucket
-  providerConfigRef:
-    name: example

@@ -1,9 +1,7 @@
-apiVersion: cloudfront.aws.upbound.io/v1alpha1
+apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: OriginAccessIdentity
 metadata:
   name: example
 spec:
   forProvider:
     comment: Some comment
-  providerConfigRef:
-    name: example

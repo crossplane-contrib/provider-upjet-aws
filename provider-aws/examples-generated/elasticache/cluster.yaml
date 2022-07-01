@@ -1,4 +1,4 @@
-apiVersion: elasticache.aws.upbound.io/v1alpha2
+apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
   name: example
@@ -10,5 +10,3 @@ spec:
     parameterGroupNameRef:
       name: example
     port: 11211
-  providerConfigRef:
-    name: example

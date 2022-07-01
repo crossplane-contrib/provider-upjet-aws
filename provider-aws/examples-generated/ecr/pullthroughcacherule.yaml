@@ -1,4 +1,4 @@
-apiVersion: ecr.aws.upbound.io/v1alpha1
+apiVersion: ecr.aws.upbound.io/v1beta1
 kind: PullThroughCacheRule
 metadata:
   name: example
@@ -6,5 +6,3 @@ spec:
   forProvider:
     ecrRepositoryPrefix: ecr-public
     upstreamRegistryUrl: public.ecr.aws
-  providerConfigRef:
-    name: example

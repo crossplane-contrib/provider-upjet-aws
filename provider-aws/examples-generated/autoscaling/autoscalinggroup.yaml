@@ -1,4 +1,4 @@
-apiVersion: autoscaling.aws.upbound.io/v1alpha2
+apiVersion: autoscaling.aws.upbound.io/v1beta1
 kind: AutoscalingGroup
 metadata:
   name: example
@@ -19,7 +19,7 @@ spec:
         }
       notificationTargetArn: arn:aws:sqs:us-east-1:444455556666:queue1*
       roleArn: arn:aws:iam::123456789012:role/S3Access
-    launchConfiguration: web_config
+    launchConfiguration: ${aws_launch_configuration.foobar.name}
     maxSize: 5
     minSize: 2
     placementGroup: ${aws_placement_group.test.id}
@@ -34,5 +34,3 @@ spec:
     - delete: 15m
     vpcZoneIdentifierRefs:
     - name: example
-  providerConfigRef:
-    name: example

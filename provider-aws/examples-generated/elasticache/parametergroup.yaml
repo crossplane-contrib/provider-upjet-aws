@@ -1,4 +1,4 @@
-apiVersion: elasticache.aws.upbound.io/v1alpha2
+apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: ParameterGroup
 metadata:
   name: example
@@ -10,5 +10,3 @@ spec:
       value: "yes"
     - name: min-slaves-to-write
       value: "2"
-  providerConfigRef:
-    name: example

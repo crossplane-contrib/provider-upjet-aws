@@ -1,4 +1,4 @@
-apiVersion: backup.aws.upbound.io/v1alpha1
+apiVersion: backup.aws.upbound.io/v1beta1
 kind: Framework
 metadata:
   name: example
@@ -27,5 +27,3 @@ spec:
     name: exampleFramework
     tags:
       Name: Example Framework
-  providerConfigRef:
-    name: example

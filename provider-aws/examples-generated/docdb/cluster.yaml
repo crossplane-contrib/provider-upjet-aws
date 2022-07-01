@@ -1,11 +1,10 @@
-apiVersion: docdb.aws.upbound.io/v1alpha1
+apiVersion: docdb.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
   name: example
 spec:
   forProvider:
     backupRetentionPeriod: 5
-    clusterIdentifier: my-docdb-cluster
     engine: docdb
     masterPasswordSecretRef:
       key: example-key
@@ -14,5 +13,3 @@ spec:
     masterUsername: foo
     preferredBackupWindow: 07:00-09:00
     skipFinalSnapshot: true
-  providerConfigRef:
-    name: example

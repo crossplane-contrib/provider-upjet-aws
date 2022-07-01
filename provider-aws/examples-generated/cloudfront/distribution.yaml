@@ -1,4 +1,4 @@
-apiVersion: cloudfront.aws.upbound.io/v1alpha1
+apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: Distribution
 metadata:
   name: example
@@ -94,5 +94,3 @@ spec:
       Environment: production
     viewerCertificate:
     - cloudfrontDefaultCertificate: true
-  providerConfigRef:
-    name: example

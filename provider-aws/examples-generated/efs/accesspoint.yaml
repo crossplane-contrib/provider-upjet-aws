@@ -1,9 +1,0 @@
-apiVersion: efs.aws.upbound.io/v1alpha1
-kind: AccessPoint
-metadata:
-  name: example
-spec:
-  forProvider:
-    fileSystemId: ${aws_efs_file_system.foo.id}
-  providerConfigRef:
-    name: example

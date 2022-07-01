@@ -1,9 +1,0 @@
-apiVersion: ses.aws.upbound.io/v1alpha1
-kind: ReceiptRuleSet
-metadata:
-  name: example
-spec:
-  forProvider:
-    ruleSetName: primary-rules
-  providerConfigRef:
-    name: example

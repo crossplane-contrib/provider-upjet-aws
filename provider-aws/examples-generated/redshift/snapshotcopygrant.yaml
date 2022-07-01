@@ -1,9 +1,0 @@
-apiVersion: redshift.aws.upbound.io/v1alpha1
-kind: SnapshotCopyGrant
-metadata:
-  name: example
-spec:
-  forProvider:
-    snapshotCopyGrantName: my-grant
-  providerConfigRef:
-    name: example

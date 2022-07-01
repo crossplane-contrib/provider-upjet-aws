@@ -1,4 +1,4 @@
-apiVersion: route53.aws.upbound.io/v1alpha2
+apiVersion: route53.aws.upbound.io/v1beta1
 kind: Record
 metadata:
   name: example
@@ -11,5 +11,3 @@ spec:
     type: A
     zoneIdRef:
       name: example
-  providerConfigRef:
-    name: example

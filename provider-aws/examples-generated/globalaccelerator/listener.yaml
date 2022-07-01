@@ -1,4 +1,4 @@
-apiVersion: globalaccelerator.aws.upbound.io/v1alpha2
+apiVersion: globalaccelerator.aws.upbound.io/v1beta1
 kind: Listener
 metadata:
   name: example
@@ -11,5 +11,3 @@ spec:
     - fromPort: 80
       toPort: 80
     protocol: TCP
-  providerConfigRef:
-    name: example

@@ -1,4 +1,4 @@
-apiVersion: ec2.aws.upbound.io/v1alpha2
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: EIP
 metadata:
   name: example
@@ -7,5 +7,3 @@ spec:
     instanceRef:
       name: example
     vpc: true
-  providerConfigRef:
-    name: example

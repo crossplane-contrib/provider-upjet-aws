@@ -1,4 +1,4 @@
-apiVersion: rds.aws.upbound.io/v1alpha2
+apiVersion: rds.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
   name: example
@@ -18,5 +18,3 @@ spec:
       namespace: crossplane-system
     masterUsername: foo
     preferredBackupWindow: 07:00-09:00
-  providerConfigRef:
-    name: example

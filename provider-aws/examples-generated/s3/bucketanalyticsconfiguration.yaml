@@ -1,4 +1,4 @@
-apiVersion: s3.aws.upbound.io/v1alpha1
+apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketAnalyticsConfiguration
 metadata:
   name: example
@@ -11,5 +11,3 @@ spec:
       - destination:
         - s3BucketDestination:
           - bucketArn: ${aws_s3_bucket.analytics.arn}
-  providerConfigRef:
-    name: example

@@ -1,9 +1,0 @@
-apiVersion: kms.aws.upbound.io/v1alpha1
-kind: ExternalKey
-metadata:
-  name: example
-spec:
-  forProvider:
-    description: KMS EXTERNAL for AMI encryption
-  providerConfigRef:
-    name: example

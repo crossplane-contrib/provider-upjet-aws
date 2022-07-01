@@ -1,4 +1,4 @@
-apiVersion: s3.aws.upbound.io/v1alpha1
+apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketVersioning
 metadata:
   name: example
@@ -7,5 +7,3 @@ spec:
     bucket: ${aws_s3_bucket.example.id}
     versioningConfiguration:
     - status: Enabled
-  providerConfigRef:
-    name: example

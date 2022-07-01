@@ -1,4 +1,4 @@
-apiVersion: rds.aws.upbound.io/v1alpha1
+apiVersion: rds.aws.upbound.io/v1beta1
 kind: Proxy
 metadata:
   name: example
@@ -12,7 +12,6 @@ spec:
     debugLogging: false
     engineFamily: MYSQL
     idleClientTimeout: 1800
-    name: example
     requireTls: true
     roleArnRef:
       name: example
@@ -23,5 +22,3 @@ spec:
     - name: example
     vpcSubnetIds:
     - ${aws_subnet.example.id}
-  providerConfigRef:
-    name: example

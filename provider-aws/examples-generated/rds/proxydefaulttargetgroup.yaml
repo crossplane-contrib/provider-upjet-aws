@@ -1,4 +1,4 @@
-apiVersion: rds.aws.upbound.io/v1alpha1
+apiVersion: rds.aws.upbound.io/v1beta1
 kind: ProxyDefaultTargetGroup
 metadata:
   name: example
@@ -11,6 +11,4 @@ spec:
       maxIdleConnectionsPercent: 50
       sessionPinningFilters:
       - EXCLUDE_VARIABLE_SETS
-    dbProxyName: example
-  providerConfigRef:
-    name: example
+    dbProxyName: ${aws_db_proxy.example.name}

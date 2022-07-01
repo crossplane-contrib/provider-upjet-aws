@@ -1,4 +1,4 @@
-apiVersion: glue.aws.upbound.io/v1alpha1
+apiVersion: glue.aws.upbound.io/v1beta1
 kind: DataCatalogEncryptionSettings
 metadata:
   name: example
@@ -6,10 +6,10 @@ spec:
   forProvider:
     dataCatalogEncryptionSettings:
     - connectionPasswordEncryption:
-      - awsKmsKeyId: ${aws_kms_key.test.arn}
+      - awsKmsKeyIdRef:
+          name: example
         returnConnectionPasswordEncrypted: true
       encryptionAtRest:
       - catalogEncryptionMode: SSE-KMS
-        sseAwsKmsKeyId: ${aws_kms_key.test.arn}
-  providerConfigRef:
-    name: example
+        sseAwsKmsKeyIdRef:
+          name: example

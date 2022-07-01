@@ -1,4 +1,4 @@
-apiVersion: dynamodb.aws.upbound.io/v1alpha1
+apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: Table
 metadata:
   name: example
@@ -22,7 +22,6 @@ spec:
       readCapacity: 10
       writeCapacity: 10
     hashKey: UserId
-    name: GameScores
     rangeKey: GameTitle
     readCapacity: 20
     tags:
@@ -32,5 +31,3 @@ spec:
     - attributeName: TimeToExist
       enabled: false
     writeCapacity: 20
-  providerConfigRef:
-    name: example

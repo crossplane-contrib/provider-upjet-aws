@@ -1,4 +1,4 @@
-apiVersion: rds.aws.upbound.io/v1alpha1
+apiVersion: rds.aws.upbound.io/v1beta1
 kind: InstanceRoleAssociation
 metadata:
   name: example
@@ -8,5 +8,3 @@ spec:
     featureName: S3_INTEGRATION
     roleArnRef:
       name: example
-  providerConfigRef:
-    name: example

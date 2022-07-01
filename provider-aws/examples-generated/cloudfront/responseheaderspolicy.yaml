@@ -1,4 +1,4 @@
-apiVersion: cloudfront.aws.upbound.io/v1alpha1
+apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: ResponseHeadersPolicy
 metadata:
   name: example
@@ -18,5 +18,3 @@ spec:
         - test.example.comtest
       originOverride: true
     name: example-policy
-  providerConfigRef:
-    name: example

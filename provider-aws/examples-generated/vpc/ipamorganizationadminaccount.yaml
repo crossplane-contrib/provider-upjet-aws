@@ -1,9 +1,0 @@
-apiVersion: vpc.aws.upbound.io/v1alpha1
-kind: IpamOrganizationAdminAccount
-metadata:
-  name: example
-spec:
-  forProvider:
-    delegatedAdminAccountId: ${data.aws_caller_identity.delegated.account_id}
-  providerConfigRef:
-    name: example

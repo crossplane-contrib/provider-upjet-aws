@@ -1,4 +1,4 @@
-apiVersion: ec2.aws.upbound.io/v1alpha2
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCEndpoint
 metadata:
   name: example
@@ -7,5 +7,3 @@ spec:
     serviceName: com.amazonaws.us-west-2.s3
     vpcIdRef:
       name: example
-  providerConfigRef:
-    name: example

@@ -1,9 +1,7 @@
-apiVersion: ec2.aws.upbound.io/v1alpha2
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGateway
 metadata:
   name: example
 spec:
   forProvider:
     description: example
-  providerConfigRef:
-    name: example

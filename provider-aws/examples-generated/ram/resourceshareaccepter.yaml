@@ -1,9 +1,0 @@
-apiVersion: ram.aws.upbound.io/v1alpha1
-kind: ResourceShareAccepter
-metadata:
-  name: example
-spec:
-  forProvider:
-    shareArn: ${aws_ram_principal_association.sender_invite.resource_share_arn}
-  providerConfigRef:
-    name: example

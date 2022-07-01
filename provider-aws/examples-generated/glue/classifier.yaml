@@ -1,4 +1,4 @@
-apiVersion: glue.aws.upbound.io/v1alpha1
+apiVersion: glue.aws.upbound.io/v1beta1
 kind: Classifier
 metadata:
   name: example
@@ -13,6 +13,3 @@ spec:
       - example1
       - example2
       quoteSymbol: ''''
-    name: example
-  providerConfigRef:
-    name: example

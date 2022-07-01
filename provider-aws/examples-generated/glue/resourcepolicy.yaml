@@ -1,9 +1,7 @@
-apiVersion: glue.aws.upbound.io/v1alpha1
+apiVersion: glue.aws.upbound.io/v1beta1
 kind: ResourcePolicy
 metadata:
   name: example
 spec:
   forProvider:
     policy: ${data.aws_iam_policy_document.glue-example-policy.json}
-  providerConfigRef:
-    name: example

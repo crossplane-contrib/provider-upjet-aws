@@ -1,4 +1,4 @@
-apiVersion: rds.aws.upbound.io/v1alpha2
+apiVersion: rds.aws.upbound.io/v1beta1
 kind: Instance
 metadata:
   name: example
@@ -9,13 +9,10 @@ spec:
     engineVersion: "5.7"
     instanceClass: db.t3.micro
     name: mydb
-    parameterGroupNameRef:
-      name: example
+    parameterGroupName: default.mysql5.7
     passwordSecretRef:
       key: example-key
       name: example-secret
       namespace: crossplane-system
     skipFinalSnapshot: true
     username: foo
-  providerConfigRef:
-    name: example

@@ -1,4 +1,4 @@
-apiVersion: s3.aws.upbound.io/v1alpha1
+apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketObjectLockConfiguration
 metadata:
   name: example
@@ -9,5 +9,3 @@ spec:
     - defaultRetention:
       - days: 5
         mode: COMPLIANCE
-  providerConfigRef:
-    name: example

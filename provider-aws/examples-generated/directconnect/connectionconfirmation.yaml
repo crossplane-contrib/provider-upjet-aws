@@ -1,9 +1,0 @@
-apiVersion: directconnect.aws.upbound.io/v1alpha1
-kind: ConnectionConfirmation
-metadata:
-  name: example
-spec:
-  forProvider:
-    connectionId: dxcon-ffabc123
-  providerConfigRef:
-    name: example

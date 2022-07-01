@@ -1,13 +1,13 @@
-apiVersion: cloudfront.aws.upbound.io/v1alpha1
+apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: Function
 metadata:
   name: example
 spec:
   forProvider:
-    code: ${file("${path.module}/function.js")}
+    codeSecretRef:
+      key: attribute.function.js
+      name: example-secret
+      namespace: crossplane-system
     comment: my function
-    name: test
     publish: true
     runtime: cloudfront-js-1.0
-  providerConfigRef:
-    name: example

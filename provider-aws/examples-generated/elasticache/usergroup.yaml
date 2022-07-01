@@ -1,4 +1,4 @@
-apiVersion: elasticache.aws.upbound.io/v1alpha2
+apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: UserGroup
 metadata:
   name: example
@@ -7,5 +7,3 @@ spec:
     engine: REDIS
     userIdRefs:
     - name: example
-  providerConfigRef:
-    name: example

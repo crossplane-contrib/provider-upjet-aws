@@ -1,4 +1,4 @@
-apiVersion: rds.aws.upbound.io/v1alpha2
+apiVersion: rds.aws.upbound.io/v1beta1
 kind: SubnetGroup
 metadata:
   name: example
@@ -8,5 +8,3 @@ spec:
     - name: example
     tags:
       Name: My DB subnet group
-  providerConfigRef:
-    name: example

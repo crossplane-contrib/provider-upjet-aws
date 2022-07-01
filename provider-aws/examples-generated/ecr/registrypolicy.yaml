@@ -1,4 +1,4 @@
-apiVersion: ecr.aws.upbound.io/v1alpha1
+apiVersion: ecr.aws.upbound.io/v1beta1
 kind: RegistryPolicy
 metadata:
   name: example
@@ -23,5 +23,3 @@ spec:
             }
           ]
         })}
-  providerConfigRef:
-    name: example

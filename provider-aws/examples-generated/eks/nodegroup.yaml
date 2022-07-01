@@ -1,4 +1,4 @@
-apiVersion: eks.aws.upbound.io/v1alpha2
+apiVersion: eks.aws.upbound.io/v1beta1
 kind: NodeGroup
 metadata:
   name: example
@@ -16,5 +16,3 @@ spec:
       name: example
     updateConfig:
     - maxUnavailable: 2
-  providerConfigRef:
-    name: example

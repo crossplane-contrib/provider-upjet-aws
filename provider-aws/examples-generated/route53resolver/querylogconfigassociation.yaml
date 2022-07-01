@@ -1,4 +1,4 @@
-apiVersion: route53resolver.aws.upbound.io/v1alpha1
+apiVersion: route53resolver.aws.upbound.io/v1beta1
 kind: QueryLogConfigAssociation
 metadata:
   name: example
@@ -6,5 +6,3 @@ spec:
   forProvider:
     resolverQueryLogConfigId: ${aws_route53_resolver_query_log_config.example.id}
     resourceId: ${aws_vpc.example.id}
-  providerConfigRef:
-    name: example

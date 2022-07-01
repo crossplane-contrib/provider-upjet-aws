@@ -1,4 +1,4 @@
-apiVersion: ec2.aws.upbound.io/v1alpha2
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
   name: example
@@ -27,5 +27,3 @@ spec:
       Name: allow_tls
     vpcIdRef:
       name: example
-  providerConfigRef:
-    name: example

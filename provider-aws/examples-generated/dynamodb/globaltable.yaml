@@ -1,13 +1,10 @@
-apiVersion: dynamodb.aws.upbound.io/v1alpha1
+apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: GlobalTable
 metadata:
   name: example
 spec:
   forProvider:
-    name: myTable
     provider: ${aws.us-east-1}
     replica:
     - regionName: us-east-1
     - regionName: us-west-2
-  providerConfigRef:
-    name: example

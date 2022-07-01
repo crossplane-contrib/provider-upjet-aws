@@ -1,4 +1,4 @@
-apiVersion: apigatewayv2.aws.upbound.io/v1alpha1
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: VPCLink
 metadata:
   name: example
@@ -11,5 +11,3 @@ spec:
       name: example
     tags:
       Usage: example
-  providerConfigRef:
-    name: example

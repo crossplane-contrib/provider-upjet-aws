@@ -1,9 +1,0 @@
-apiVersion: datapipeline.aws.upbound.io/v1alpha1
-kind: Pipeline
-metadata:
-  name: example
-spec:
-  forProvider:
-    name: tf-pipeline-default
-  providerConfigRef:
-    name: example

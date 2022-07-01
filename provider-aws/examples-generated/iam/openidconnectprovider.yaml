@@ -1,4 +1,4 @@
-apiVersion: iam.aws.upbound.io/v1alpha2
+apiVersion: iam.aws.upbound.io/v1beta1
 kind: OpenIDConnectProvider
 metadata:
   name: example
@@ -8,5 +8,3 @@ spec:
     - 266362248691-342342xasdasdasda-apps.googleusercontent.com
     thumbprintList: []
     url: https://accounts.google.com
-  providerConfigRef:
-    name: example
