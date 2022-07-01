@@ -68,24 +68,6 @@ spec:
                   egress:
                     items:
                       properties:
-                        cidrBlocks:
-                          items:
-                            type: string
-                          type: array
-                        description:
-                          type: string
-                        fromPort:
-                          type: number
-                        ipv6CidrBlocks:
-                          items:
-                            type: string
-                          type: array
-                        prefixListIds:
-                          items:
-                            type: string
-                          type: array
-                        protocol:
-                          type: string
                         securityGroupRefs:
                           items:
                             description: A Reference to a named object.
@@ -116,33 +98,11 @@ spec:
                           items:
                             type: string
                           type: array
-                        self:
-                          type: boolean
-                        toPort:
-                          type: number
                       type: object
                     type: array
                   ingress:
                     items:
                       properties:
-                        cidrBlocks:
-                          items:
-                            type: string
-                          type: array
-                        description:
-                          type: string
-                        fromPort:
-                          type: number
-                        ipv6CidrBlocks:
-                          items:
-                            type: string
-                          type: array
-                        prefixListIds:
-                          items:
-                            type: string
-                          type: array
-                        protocol:
-                          type: string
                         securityGroupRefs:
                           items:
                             description: A Reference to a named object.
@@ -173,10 +133,6 @@ spec:
                           items:
                             type: string
                           type: array
-                        self:
-                          type: boolean
-                        toPort:
-                          type: number
                       type: object
                     type: array
                   name:
@@ -328,12 +284,58 @@ spec:
                     type: string
                   egress:
                     items:
+                      properties:
+                        cidrBlocks:
+                          items:
+                            type: string
+                          type: array
+                        description:
+                          type: string
+                        fromPort:
+                          type: number
+                        ipv6CidrBlocks:
+                          items:
+                            type: string
+                          type: array
+                        prefixListIds:
+                          items:
+                            type: string
+                          type: array
+                        protocol:
+                          type: string
+                        self:
+                          type: boolean
+                        toPort:
+                          type: number
                       type: object
                     type: array
                   id:
                     type: string
                   ingress:
                     items:
+                      properties:
+                        cidrBlocks:
+                          items:
+                            type: string
+                          type: array
+                        description:
+                          type: string
+                        fromPort:
+                          type: number
+                        ipv6CidrBlocks:
+                          items:
+                            type: string
+                          type: array
+                        prefixListIds:
+                          items:
+                            type: string
+                          type: array
+                        protocol:
+                          type: string
+                        self:
+                          type: boolean
+                        toPort:
+                          type: number
                       type: object
                     type: array
                   ownerId:

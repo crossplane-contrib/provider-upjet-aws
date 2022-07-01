@@ -1,0 +1,8 @@
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: Registry
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-east-1
+    registryName: example

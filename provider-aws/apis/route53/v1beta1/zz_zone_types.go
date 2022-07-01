@@ -14,15 +14,12 @@ import (
 )
 
 type VPCObservation struct {
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
 }
 
 type VPCParameters struct {
-
-	// +kubebuilder:validation:Required
-	VPCID *string `json:"vpcId" tf:"vpc_id,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
 }
 
 type ZoneObservation struct {
@@ -67,9 +64,6 @@ type ZoneParameters struct {
 
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// +kubebuilder:validation:Required
-	VPC []VPCParameters `json:"vpc" tf:"vpc,omitempty"`
 }
 
 // ZoneSpec defines the desired state of Zone
