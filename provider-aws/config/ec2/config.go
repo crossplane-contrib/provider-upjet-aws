@@ -137,7 +137,7 @@ func Configure(p *config.Provider) {
 		// aws_vpc_endpoint_subnet_association
 		// aws_vpc_endpoint_route_table_association
 		// aws_vpc_endpoint_security_group_association
-		common.MutuallyExclusiveFields(r.TerraformResource, "subnet_ids", "security_group_ids", "route_table_ids")
+		config.MoveToStatus(r.TerraformResource, "subnet_ids", "security_group_ids", "route_table_ids")
 
 		r.References["subnet_ids"] = config.Reference{
 			Type:              "Subnet",
@@ -187,7 +187,7 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_security_group", func(r *config.Resource) {
 		// Mutually exclusive with aws_security_group_rule
-		common.MutuallyExclusiveFields(r.TerraformResource, "ingress", "egress")
+		config.MoveToStatus(r.TerraformResource, "ingress", "egress")
 		r.References["egress.security_groups"] = config.Reference{
 			Type:              "SecurityGroup",
 			RefFieldName:      "SecurityGroupRefs",
@@ -211,7 +211,7 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_vpc_peering_connection", func(r *config.Resource) {
 		// Mutually exclusive with aws_vpc_peering_connection_options
-		common.MutuallyExclusiveFields(r.TerraformResource, "accepter", "requester")
+		config.MoveToStatus(r.TerraformResource, "accepter", "requester")
 		r.References["peer_vpc_id"] = config.Reference{
 			Type: "VPC",
 		}
@@ -244,7 +244,7 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_route_table", func(r *config.Resource) {
 		// These are mutually exclusive with aws_route and aws_vpn_gateway_route_propagation.
-		common.MutuallyExclusiveFields(r.TerraformResource, "route", "propagating_vgws")
+		config.MoveToStatus(r.TerraformResource, "route", "propagating_vgws")
 		r.References["route.vpc_peering_connection_id"] = config.Reference{
 			Type: "VPCPeeringConnection",
 		}

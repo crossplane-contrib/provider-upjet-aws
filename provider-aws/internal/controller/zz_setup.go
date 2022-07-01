@@ -83,6 +83,16 @@ import (
 	accelerator "github.com/upbound/official-providers/provider-aws/internal/controller/globalaccelerator/accelerator"
 	endpointgroup "github.com/upbound/official-providers/provider-aws/internal/controller/globalaccelerator/endpointgroup"
 	listener "github.com/upbound/official-providers/provider-aws/internal/controller/globalaccelerator/listener"
+	catalogdatabase "github.com/upbound/official-providers/provider-aws/internal/controller/glue/catalogdatabase"
+	catalogtable "github.com/upbound/official-providers/provider-aws/internal/controller/glue/catalogtable"
+	classifier "github.com/upbound/official-providers/provider-aws/internal/controller/glue/classifier"
+	datacatalogencryptionsettings "github.com/upbound/official-providers/provider-aws/internal/controller/glue/datacatalogencryptionsettings"
+	job "github.com/upbound/official-providers/provider-aws/internal/controller/glue/job"
+	registry "github.com/upbound/official-providers/provider-aws/internal/controller/glue/registry"
+	resourcepolicy "github.com/upbound/official-providers/provider-aws/internal/controller/glue/resourcepolicy"
+	trigger "github.com/upbound/official-providers/provider-aws/internal/controller/glue/trigger"
+	userdefinedfunction "github.com/upbound/official-providers/provider-aws/internal/controller/glue/userdefinedfunction"
+	workflow "github.com/upbound/official-providers/provider-aws/internal/controller/glue/workflow"
 	accesskey "github.com/upbound/official-providers/provider-aws/internal/controller/iam/accesskey"
 	group "github.com/upbound/official-providers/provider-aws/internal/controller/iam/group"
 	grouppolicyattachment "github.com/upbound/official-providers/provider-aws/internal/controller/iam/grouppolicyattachment"
@@ -235,6 +245,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		accelerator.Setup,
 		endpointgroup.Setup,
 		listener.Setup,
+		catalogdatabase.Setup,
+		catalogtable.Setup,
+		classifier.Setup,
+		datacatalogencryptionsettings.Setup,
+		job.Setup,
+		registry.Setup,
+		resourcepolicy.Setup,
+		trigger.Setup,
+		userdefinedfunction.Setup,
+		workflow.Setup,
 		accesskey.Setup,
 		group.Setup,
 		grouppolicyattachment.Setup,

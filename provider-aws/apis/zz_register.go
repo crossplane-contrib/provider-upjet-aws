@@ -22,6 +22,7 @@ import (
 	v1beta1elasticache "github.com/upbound/official-providers/provider-aws/apis/elasticache/v1beta1"
 	v1beta1elbv2 "github.com/upbound/official-providers/provider-aws/apis/elbv2/v1beta1"
 	v1beta1globalaccelerator "github.com/upbound/official-providers/provider-aws/apis/globalaccelerator/v1beta1"
+	v1beta1glue "github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1"
 	v1beta1iam "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	v1beta1kms "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
 	v1beta1mq "github.com/upbound/official-providers/provider-aws/apis/mq/v1beta1"
@@ -49,6 +50,7 @@ func init() {
 		v1beta1elasticache.SchemeBuilder.AddToScheme,
 		v1beta1elbv2.SchemeBuilder.AddToScheme,
 		v1beta1globalaccelerator.SchemeBuilder.AddToScheme,
+		v1beta1glue.SchemeBuilder.AddToScheme,
 		v1beta1iam.SchemeBuilder.AddToScheme,
 		v1beta1kms.SchemeBuilder.AddToScheme,
 		v1beta1mq.SchemeBuilder.AddToScheme,

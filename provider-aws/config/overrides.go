@@ -374,6 +374,10 @@ func KnownReferencers() tjconfig.ResourceOption { //nolint:gocyclo
 					RefFieldName:      strings.TrimSuffix(name.NewFromSnake(k).Camel, "s") + "Refs",
 					SelectorFieldName: strings.TrimSuffix(name.NewFromSnake(k).Camel, "s") + "Selector",
 				}
+			case r.ShortGroup == "glue" && k == "database_name":
+				r.References["database_name"] = tjconfig.Reference{
+					Type: "CatalogDatabase",
+				}
 			}
 			switch k {
 			case "vpc_id":

@@ -1,0 +1,11 @@
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: Job
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-east-1
+    command:
+    - scriptLocation: s3://somebucket/example.py
+    roleArnRef:
+      name: example

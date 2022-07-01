@@ -176,6 +176,38 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// arn:aws:globalaccelerator::111111111111:accelerator/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/listener/xxxxxxxx
 	"aws_globalaccelerator_listener": config.IdentifierFromProvider,
 
+	// glue
+	//
+	// Imported using "name".
+	"aws_glue_workflow": config.NameAsIdentifier,
+	// Imported using arn: arn:aws:glue:us-west-2:123456789012:schema/example/example
+	// "aws_glue_schema": config.IdentifierFromProvider,
+	// Imported using "name".
+	"aws_glue_trigger":               config.NameAsIdentifier,
+	"aws_glue_user_defined_function": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .externalName }}"),
+	// "aws_glue_security_configuration": config.NameAsIdentifier,
+	// Imported using the account ID: 12356789012
+	"aws_glue_resource_policy":  config.IdentifierFromProvider,
+	"aws_glue_catalog_database": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .externalName }}"),
+	"aws_glue_catalog_table":    config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .externalName }}"),
+	"aws_glue_classifier":       config.NameAsIdentifier,
+	// "aws_glue_crawler":          config.NameAsIdentifier,
+	// Imported using CATALOG-ID (AWS account ID if not custom), e.g., 123456789012
+	"aws_glue_data_catalog_encryption_settings": config.IdentifierFromProvider,
+	// "aws_glue_dev_endpoint":                     config.NameAsIdentifier,
+	"aws_glue_job": config.NameAsIdentifier,
+	// Imported using id, e.g., tfm-c2cafbe83b1c575f49eaca9939220e2fcd58e2d5
+	// "aws_glue_ml_transform": config.IdentifierFromProvider,
+	// It has no naming argument, imported with their catalog ID (usually
+	// AWS account ID), database name, table name and partition values e.g.,
+	// 123456789012:MyDatabase:MyTable:val1#val2
+	// "aws_glue_partition": config.IdentifierFromProvider,
+	// Documentation does not match schema where there are multiple indexes
+	// each with their own name.
+	// "aws_glue_partition_index": config.IdentifierFromProvider,
+	// Imported using ARN: arn:aws:glue:us-west-2:123456789012:registry/example
+	"aws_glue_registry": config.IdentifierFromProvider,
+
 	// iam
 	//
 	// AKIA1234567890

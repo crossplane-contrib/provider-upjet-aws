@@ -6,8 +6,6 @@ package route53
 
 import (
 	"github.com/upbound/upjet/pkg/config"
-
-	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure route53 resources.
@@ -46,14 +44,14 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_route53_zone", func(r *config.Resource) {
 		// Mutually exclusive with aws_route53_zone_association
-		common.MutuallyExclusiveFields(r.TerraformResource, "vpc")
+		config.MoveToStatus(r.TerraformResource, "vpc")
 		r.References["delegation_set_id"] = config.Reference{
 			Type: "DelegationSet",
 		}
 	})
 	p.AddResourceConfigurator("aws_route53_zone_association", func(r *config.Resource) {
 		// Mutually exclusive with existing region field.
-		common.MutuallyExclusiveFields(r.TerraformResource, "vpc_region")
+		config.MoveToStatus(r.TerraformResource, "vpc_region")
 		r.References["zone_id"] = config.Reference{
 			Type: "Zone",
 		}

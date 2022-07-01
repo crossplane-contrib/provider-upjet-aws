@@ -23,6 +23,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/elasticache"
 	"github.com/upbound/official-providers/provider-aws/config/elasticloadbalancing"
 	"github.com/upbound/official-providers/provider-aws/config/globalaccelerator"
+	"github.com/upbound/official-providers/provider-aws/config/glue"
 	"github.com/upbound/official-providers/provider-aws/config/iam"
 	"github.com/upbound/official-providers/provider-aws/config/mq"
 	"github.com/upbound/official-providers/provider-aws/config/neptune"
@@ -31,8 +32,10 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/s3"
 )
 
-//go:embed schema.json
-var providerSchema string
+var (
+	//go:embed schema.json
+	providerSchema string
+)
 
 var skipList = []string{
 	"aws_waf_rule_group$",              // Too big CRD schema
@@ -86,6 +89,7 @@ func GetProvider() *tjconfig.Provider {
 		elasticache.Configure,
 		elasticloadbalancing.Configure,
 		globalaccelerator.Configure,
+		glue.Configure,
 		iam.Configure,
 		rds.Configure,
 		s3.Configure,

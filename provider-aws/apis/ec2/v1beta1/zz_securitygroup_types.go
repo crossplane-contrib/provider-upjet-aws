@@ -14,29 +14,26 @@ import (
 )
 
 type EgressObservation struct {
+	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
+
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
+
+	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
+
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
+
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type EgressParameters struct {
 
 	// +kubebuilder:validation:Optional
-	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks"`
-
-	// +kubebuilder:validation:Optional
-	Description *string `json:"description,omitempty" tf:"description"`
-
-	// +kubebuilder:validation:Optional
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port"`
-
-	// +kubebuilder:validation:Optional
-	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks"`
-
-	// +kubebuilder:validation:Optional
-	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids"`
-
-	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol"`
-
-	// +kubebuilder:validation:Optional
 	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
@@ -47,38 +44,29 @@ type EgressParameters struct {
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups"`
-
-	// +kubebuilder:validation:Optional
-	Self *bool `json:"self,omitempty" tf:"self"`
-
-	// +kubebuilder:validation:Optional
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port"`
 }
 
 type IngressObservation struct {
+	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
+
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
+
+	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
+
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
+
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type IngressParameters struct {
 
 	// +kubebuilder:validation:Optional
-	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks"`
-
-	// +kubebuilder:validation:Optional
-	Description *string `json:"description,omitempty" tf:"description"`
-
-	// +kubebuilder:validation:Optional
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port"`
-
-	// +kubebuilder:validation:Optional
-	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks"`
-
-	// +kubebuilder:validation:Optional
-	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids"`
-
-	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol"`
-
-	// +kubebuilder:validation:Optional
 	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
@@ -89,12 +77,6 @@ type IngressParameters struct {
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups"`
-
-	// +kubebuilder:validation:Optional
-	Self *bool `json:"self,omitempty" tf:"self"`
-
-	// +kubebuilder:validation:Optional
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port"`
 }
 
 type SecurityGroupObservation struct {

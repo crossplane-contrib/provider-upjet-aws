@@ -70,18 +70,6 @@ spec:
                   route:
                     items:
                       properties:
-                        carrierGatewayId:
-                          type: string
-                        cidrBlock:
-                          type: string
-                        coreNetworkArn:
-                          type: string
-                        destinationPrefixListId:
-                          type: string
-                        egressOnlyGatewayId:
-                          type: string
-                        gatewayId:
-                          type: string
                         instanceId:
                           type: string
                         instanceIdRef:
@@ -108,12 +96,6 @@ spec:
                                 labels is selected.
                               type: object
                           type: object
-                        ipv6CidrBlock:
-                          type: string
-                        localGatewayId:
-                          type: string
-                        natGatewayId:
-                          type: string
                         networkInterfaceId:
                           type: string
                         networkInterfaceIdRef:
@@ -140,8 +122,6 @@ spec:
                                 labels is selected.
                               type: object
                           type: object
-                        transitGatewayId:
-                          type: string
                         vpcEndpointId:
                           type: string
                         vpcEndpointIdRef:
@@ -342,6 +322,27 @@ spec:
                     type: array
                   route:
                     items:
+                      properties:
+                        carrierGatewayId:
+                          type: string
+                        cidrBlock:
+                          type: string
+                        coreNetworkArn:
+                          type: string
+                        destinationPrefixListId:
+                          type: string
+                        egressOnlyGatewayId:
+                          type: string
+                        gatewayId:
+                          type: string
+                        ipv6CidrBlock:
+                          type: string
+                        localGatewayId:
+                          type: string
+                        natGatewayId:
+                          type: string
+                        transitGatewayId:
+                          type: string
                       type: object
                     type: array
                   tagsAll:
