@@ -1,0 +1,10 @@
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: GroupPolicyAttachment
+metadata:
+  name: example
+spec:
+  forProvider:
+    groupRef:
+      name: example
+    policyArnRef:
+      name: example

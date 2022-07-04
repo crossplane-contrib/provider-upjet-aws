@@ -1,0 +1,15 @@
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: FargateProfile
+metadata:
+  name: sample-fargate-profile
+spec:
+  forProvider:
+    region: us-west-1
+    clusterNameRef:
+      name: example
+    podExecutionRoleArnRef:
+      name: sample-fargate-role
+    selector:
+    - namespace: example
+    subnetIdRefs:
+    - name: sample-subnet1

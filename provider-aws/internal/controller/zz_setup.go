@@ -14,8 +14,19 @@ import (
 	certificateacmpca "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificate"
 	certificateauthority "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthority"
 	certificateauthoritycertificate "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthoritycertificate"
+	vpclink "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/vpclink"
 	attachment "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/attachment"
 	autoscalinggroup "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/autoscalinggroup"
+	framework "github.com/upbound/official-providers/provider-aws/internal/controller/backup/framework"
+	globalsettings "github.com/upbound/official-providers/provider-aws/internal/controller/backup/globalsettings"
+	plan "github.com/upbound/official-providers/provider-aws/internal/controller/backup/plan"
+	regionsettings "github.com/upbound/official-providers/provider-aws/internal/controller/backup/regionsettings"
+	reportplan "github.com/upbound/official-providers/provider-aws/internal/controller/backup/reportplan"
+	selection "github.com/upbound/official-providers/provider-aws/internal/controller/backup/selection"
+	vault "github.com/upbound/official-providers/provider-aws/internal/controller/backup/vault"
+	vaultlockconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/backup/vaultlockconfiguration"
+	vaultnotifications "github.com/upbound/official-providers/provider-aws/internal/controller/backup/vaultnotifications"
+	vaultpolicy "github.com/upbound/official-providers/provider-aws/internal/controller/backup/vaultpolicy"
 	cachepolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/cachepolicy"
 	distribution "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/distribution"
 	fieldlevelencryptionconfig "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/fieldlevelencryptionconfig"
@@ -28,12 +39,17 @@ import (
 	publickey "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/publickey"
 	realtimelogconfig "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/realtimelogconfig"
 	responseheaderspolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/responseheaderspolicy"
+	cluster "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/cluster"
+	globalcluster "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/globalcluster"
+	globaltable "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/globaltable"
+	table "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/table"
 	ebsvolume "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/ebsvolume"
 	eip "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/eip"
 	instance "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/instance"
 	internetgateway "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/internetgateway"
 	launchtemplate "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/launchtemplate"
 	mainroutetableassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/mainroutetableassociation"
+	natgateway "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/natgateway"
 	networkinterface "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkinterface"
 	route "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/route"
 	routetable "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/routetable"
@@ -62,9 +78,11 @@ import (
 	repositoryecrpublic "github.com/upbound/official-providers/provider-aws/internal/controller/ecrpublic/repository"
 	repositorypolicyecrpublic "github.com/upbound/official-providers/provider-aws/internal/controller/ecrpublic/repositorypolicy"
 	capacityprovider "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/capacityprovider"
-	cluster "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/cluster"
+	clusterecs "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/cluster"
 	service "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/service"
 	taskdefinition "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/taskdefinition"
+	filesystem "github.com/upbound/official-providers/provider-aws/internal/controller/efs/filesystem"
+	mounttarget "github.com/upbound/official-providers/provider-aws/internal/controller/efs/mounttarget"
 	addon "github.com/upbound/official-providers/provider-aws/internal/controller/eks/addon"
 	clustereks "github.com/upbound/official-providers/provider-aws/internal/controller/eks/cluster"
 	fargateprofile "github.com/upbound/official-providers/provider-aws/internal/controller/eks/fargateprofile"
@@ -180,6 +198,12 @@ import (
 	bucketwebsiteconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketwebsiteconfiguration"
 	object "github.com/upbound/official-providers/provider-aws/internal/controller/s3/object"
 	objectcopy "github.com/upbound/official-providers/provider-aws/internal/controller/s3/objectcopy"
+	secret "github.com/upbound/official-providers/provider-aws/internal/controller/secretsmanager/secret"
+	privatednsnamespace "github.com/upbound/official-providers/provider-aws/internal/controller/servicediscovery/privatednsnamespace"
+	topic "github.com/upbound/official-providers/provider-aws/internal/controller/sns/topic"
+	topicsubscription "github.com/upbound/official-providers/provider-aws/internal/controller/sns/topicsubscription"
+	queue "github.com/upbound/official-providers/provider-aws/internal/controller/sqs/queue"
+	server "github.com/upbound/official-providers/provider-aws/internal/controller/transfer/server"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -191,8 +215,19 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		certificateacmpca.Setup,
 		certificateauthority.Setup,
 		certificateauthoritycertificate.Setup,
+		vpclink.Setup,
 		attachment.Setup,
 		autoscalinggroup.Setup,
+		framework.Setup,
+		globalsettings.Setup,
+		plan.Setup,
+		regionsettings.Setup,
+		reportplan.Setup,
+		selection.Setup,
+		vault.Setup,
+		vaultlockconfiguration.Setup,
+		vaultnotifications.Setup,
+		vaultpolicy.Setup,
 		cachepolicy.Setup,
 		distribution.Setup,
 		fieldlevelencryptionconfig.Setup,
@@ -205,12 +240,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		publickey.Setup,
 		realtimelogconfig.Setup,
 		responseheaderspolicy.Setup,
+		cluster.Setup,
+		globalcluster.Setup,
+		globaltable.Setup,
+		table.Setup,
 		ebsvolume.Setup,
 		eip.Setup,
 		instance.Setup,
 		internetgateway.Setup,
 		launchtemplate.Setup,
 		mainroutetableassociation.Setup,
+		natgateway.Setup,
 		networkinterface.Setup,
 		route.Setup,
 		routetable.Setup,
@@ -239,9 +279,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		repositoryecrpublic.Setup,
 		repositorypolicyecrpublic.Setup,
 		capacityprovider.Setup,
-		cluster.Setup,
+		clusterecs.Setup,
 		service.Setup,
 		taskdefinition.Setup,
+		filesystem.Setup,
+		mounttarget.Setup,
 		addon.Setup,
 		clustereks.Setup,
 		fargateprofile.Setup,
@@ -357,6 +399,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		bucketwebsiteconfiguration.Setup,
 		object.Setup,
 		objectcopy.Setup,
+		secret.Setup,
+		privatednsnamespace.Setup,
+		topic.Setup,
+		topicsubscription.Setup,
+		queue.Setup,
+		server.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

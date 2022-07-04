@@ -1,0 +1,10 @@
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: UserPolicyAttachment
+metadata:
+  name: example
+spec:
+  forProvider:
+    policyArnRef:
+      name: example
+    userRef:
+      name: sample-user

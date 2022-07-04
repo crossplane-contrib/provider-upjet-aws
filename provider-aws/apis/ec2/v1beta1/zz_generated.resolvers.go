@@ -417,6 +417,32 @@ func (mg *MainRouteTableAssociation) ResolveReferences(ctx context.Context, c cl
 	return nil
 }
 
+// ResolveReferences of this NATGateway.
+func (mg *NATGateway) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.SubnetIDRef,
+		Selector:     mg.Spec.ForProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &SubnetList{},
+			Managed: &Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetID")
+	}
+	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this NetworkInterface.
 func (mg *NetworkInterface) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

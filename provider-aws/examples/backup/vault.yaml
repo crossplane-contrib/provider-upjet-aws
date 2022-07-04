@@ -1,0 +1,9 @@
+apiVersion: backup.aws.upbound.io/v1beta1
+kind: Vault
+metadata:
+  name: example-bucket-vault
+spec:
+  forProvider:
+    region: us-west-1
+    kmsKeyArnRef:
+      name: sample-key

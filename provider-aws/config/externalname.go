@@ -102,6 +102,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ec2_transit_gateway_route_table_propagation": FormattedIdentifierFromProvider("_", "transit_gateway_attachment_id", "transit_gateway_route_table_id"),
 	// Imported using the id: igw-c0a643a9
 	"aws_internet_gateway": config.IdentifierFromProvider,
+	// NAT Gateways can be imported using the id
+	"aws_nat_gateway": config.IdentifierFromProvider,
 
 	// ecr
 	//
@@ -434,6 +436,82 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// Resource groups can be imported using the name
 	"aws_resourcegroups_group": config.NameAsIdentifier,
+
+	// docdb
+	//
+	// DocDB Clusters can be imported using the cluster_identifier
+	"aws_docdb_cluster": ParameterAsExternalName("cluster_identifier"),
+	// aws_docdb_global_cluster can be imported by using the Global Cluster id
+	"aws_docdb_global_cluster": config.IdentifierFromProvider,
+
+	// efs
+	//
+	// The EFS file systems can be imported using the id
+	"aws_efs_file_system": config.IdentifierFromProvider,
+	// The EFS mount targets can be imported using the id
+	"aws_efs_mount_target": config.IdentifierFromProvider,
+
+	// servicediscovery
+	//
+	// Service Discovery Private DNS Namespace can be imported using the namespace ID and VPC ID: 0123456789:vpc-123345
+	"aws_service_discovery_private_dns_namespace": config.IdentifierFromProvider,
+
+	// sqs
+	//
+	// SQS Queues can be imported using the queue url / id
+	"aws_sqs_queue": config.IdentifierFromProvider,
+
+	// secretsmanager
+	//
+	// aws_secretsmanager_secret can be imported by using the secret Amazon Resource Name (ARN)
+	"aws_secretsmanager_secret": config.IdentifierFromProvider,
+
+	// transfer
+	//
+	// Transfer Servers can be imported using the id
+	"aws_transfer_server": config.IdentifierFromProvider,
+
+	// dynamodb
+	//
+	// DynamoDB tables can be imported using the name
+	"aws_dynamodb_table": config.NameAsIdentifier,
+	// DynamoDB Global Tables can be imported using the global table name
+	"aws_dynamodb_global_table": config.NameAsIdentifier,
+
+	// apigateway2
+	//
+	// aws_apigatewayv2_vpc_link can be imported by using the VPC Link id
+	"aws_apigatewayv2_vpc_link": config.IdentifierFromProvider,
+
+	// sns
+	//
+	// SNS Topics can be imported using the topic arn
+	"aws_sns_topic": config.IdentifierFromProvider,
+	// SNS Topic Subscriptions can be imported using the subscription arn
+	"aws_sns_topic_subscription": config.IdentifierFromProvider,
+
+	// backup
+	//
+	// Backup Framework can be imported using the id which corresponds to the name of the Backup Framework
+	"aws_backup_framework": config.IdentifierFromProvider,
+	// Backup Global Settings can be imported using the id
+	"aws_backup_global_settings": config.IdentifierFromProvider,
+	// Backup Plan can be imported using the id
+	"aws_backup_plan": config.IdentifierFromProvider,
+	// Backup vault can be imported using the name
+	"aws_backup_vault": config.NameAsIdentifier,
+	// Backup Region Settings can be imported using the region
+	"aws_backup_region_settings": config.IdentifierFromProvider,
+	// Backup Report Plan can be imported using the id which corresponds to the name of the Backup Report Plan
+	"aws_backup_report_plan": config.IdentifierFromProvider,
+	// Backup selection can be imported using the role plan_id and id separated by | plan-id|selection-id
+	"aws_backup_selection": config.IdentifierFromProvider,
+	// Backup vault lock configuration can be imported using the name of the backup vault
+	"aws_backup_vault_lock_configuration": config.IdentifierFromProvider,
+	// Backup vault notifications can be imported using the name of the backup vault
+	"aws_backup_vault_notifications": config.IdentifierFromProvider,
+	// Backup vault policy can be imported using the name of the backup vault
+	"aws_backup_vault_policy": config.IdentifierFromProvider,
 }
 
 func iamUserGroupMembership() config.ExternalName {
@@ -447,9 +525,9 @@ func iamUserGroupMembership() config.ExternalName {
 		if !ok {
 			return "", errors.New("groups cannot be empty")
 		}
-		groups, ok := gs.([]string)
-		if !ok {
-			return "", errors.New("groups field needs to be an array of strings")
+		var groups []string
+		for _, g := range gs.([]interface{}) {
+			groups = append(groups, g.(string))
 		}
 		return strings.Join(append([]string{u.(string)}, groups...), "/"), nil
 	}

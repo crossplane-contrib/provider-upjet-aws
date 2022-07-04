@@ -1,0 +1,13 @@
+apiVersion: backup.aws.upbound.io/v1beta1
+kind: RegionSettings
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    resourceTypeManagementPreference:
+      EFS: true
+    resourceTypeOptInPreference:
+      EC2: true
+      EFS: true
+      RDS: true

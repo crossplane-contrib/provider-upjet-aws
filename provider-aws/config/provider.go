@@ -13,12 +13,14 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/acm"
 	"github.com/upbound/official-providers/provider-aws/config/acmpca"
 	"github.com/upbound/official-providers/provider-aws/config/autoscaling"
+	"github.com/upbound/official-providers/provider-aws/config/backup"
 	"github.com/upbound/official-providers/provider-aws/config/cloudfront"
 	"github.com/upbound/official-providers/provider-aws/config/ebs"
 	"github.com/upbound/official-providers/provider-aws/config/ec2"
 	"github.com/upbound/official-providers/provider-aws/config/ecr"
 	"github.com/upbound/official-providers/provider-aws/config/ecrpublic"
 	"github.com/upbound/official-providers/provider-aws/config/ecs"
+	"github.com/upbound/official-providers/provider-aws/config/efs"
 	"github.com/upbound/official-providers/provider-aws/config/eks"
 	"github.com/upbound/official-providers/provider-aws/config/elasticache"
 	"github.com/upbound/official-providers/provider-aws/config/elasticloadbalancing"
@@ -30,6 +32,8 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/rds"
 	"github.com/upbound/official-providers/provider-aws/config/route53"
 	"github.com/upbound/official-providers/provider-aws/config/s3"
+	"github.com/upbound/official-providers/provider-aws/config/servicediscovery"
+	"github.com/upbound/official-providers/provider-aws/config/sns"
 )
 
 var (
@@ -100,6 +104,10 @@ func GetProvider() *config.Provider {
 		neptune.Configure,
 		mq.Configure,
 		cloudfront.Configure,
+		servicediscovery.Configure,
+		efs.Configure,
+		sns.Configure,
+		backup.Configure,
 	} {
 		configure(pc)
 	}
