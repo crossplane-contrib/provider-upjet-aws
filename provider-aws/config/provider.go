@@ -8,7 +8,7 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
-	tjconfig "github.com/upbound/upjet/pkg/config"
+	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-aws/config/acm"
 	"github.com/upbound/official-providers/provider-aws/config/acmpca"
@@ -56,14 +56,14 @@ var skipList = []string{
 }
 
 // GetProvider returns provider configuration
-func GetProvider() *tjconfig.Provider {
-	pc := tjconfig.NewProvider([]byte(providerSchema), "aws",
+func GetProvider() *config.Provider {
+	pc := config.NewProvider([]byte(providerSchema), "aws",
 		"github.com/upbound/official-providers/provider-aws", "",
-		tjconfig.WithShortName("aws"),
-		tjconfig.WithRootGroup("aws.upbound.io"),
-		tjconfig.WithIncludeList(ResourcesWithExternalNameConfig()),
-		tjconfig.WithSkipList(skipList),
-		tjconfig.WithDefaultResourceOptions(
+		config.WithShortName("aws"),
+		config.WithRootGroup("aws.upbound.io"),
+		config.WithIncludeList(ResourcesWithExternalNameConfig()),
+		config.WithSkipList(skipList),
+		config.WithDefaultResourceOptions(
 			GroupKindOverrides(),
 			KindOverrides(),
 			RegionAddition(),
@@ -76,7 +76,7 @@ func GetProvider() *tjconfig.Provider {
 		),
 	)
 
-	for _, configure := range []func(provider *tjconfig.Provider){
+	for _, configure := range []func(provider *config.Provider){
 		acm.Configure,
 		acmpca.Configure,
 		autoscaling.Configure,
