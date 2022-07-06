@@ -106,7 +106,7 @@ run: go.build
 xpkg.build: $(UP)
 	@$(INFO) Building package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM)
 	@mkdir -p $(OUTPUT_DIR)/xpkg/$(PLATFORM)
-	@up xpkg build \
+	@$(UP) xpkg build \
 		--controller $(BUILD_REGISTRY)/$(PROJECT_NAME)-$(ARCH) \
 		--package-root ./package \
 		--examples-root ./examples \
