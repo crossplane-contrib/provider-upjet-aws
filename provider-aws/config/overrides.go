@@ -95,7 +95,7 @@ func KnownReferencers() config.ResourceOption { //nolint:gocyclo
 				}
 			case r.ShortGroup == "glue" && k == "database_name":
 				r.References["database_name"] = config.Reference{
-					Type: "CatalogDatabase",
+					Type: "github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogDatabase",
 				}
 			}
 			switch k {

@@ -53,6 +53,9 @@ var skipList = []string{
 	"aws_alb_listener$",                // identical with aws_lb_listener.
 	"aws_alb_target_group$",            // identical with aws_lb_target_group.
 	"aws_alb_target_group_attachment$", // identical with aws_lb_target_group_attachment.
+	"aws_iot_authorizer$",              // failure with unknown reason.
+	"aws_appflow_connector_profile$",   // failure with unknown reason.
+	"aws_location_map$",                // failure with unknown reason.
 }
 
 // GetProvider returns provider configuration
