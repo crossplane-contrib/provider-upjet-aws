@@ -106,7 +106,11 @@ run: go.build
 xpkg.build: $(UP)
 	@$(INFO) Building package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM)
 	@mkdir -p $(OUTPUT_DIR)/xpkg/$(PLATFORM)
-	@up xpkg build --controller $(BUILD_REGISTRY)/$(PROJECT_NAME)-$(ARCH) -f ./package -e ./examples -o ./_output/xpkg/$(PLATFORM)/$(PROJECT_NAME)-$(VERSION).xpkg || $(FAIL)
+	@up xpkg build \
+		--controller $(BUILD_REGISTRY)/$(PROJECT_NAME)-$(ARCH) \
+		--package-root ./package \
+		--examples-root ./examples \
+		--output ./_output/xpkg/$(PLATFORM)/$(PROJECT_NAME)-$(VERSION).xpkg || $(FAIL)
 	@$(OK) Built package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM)
 
 build.artifacts.platform: xpkg.build
@@ -114,8 +118,8 @@ build.artifacts.platform: xpkg.build
 xpkg.push: $(UP)
 	@$(INFO) Pushing package $(PROJECT_NAME)-$(VERSION).xpkg
 	@$(UP) xpkg push \
-		-f $(OUTPUT_DIR)/xpkg/linux_amd64/$(PROJECT_NAME)-$(VERSION).xpkg \
-		-f $(OUTPUT_DIR)/xpkg/linux_arm64/$(PROJECT_NAME)-$(VERSION).xpkg \
+		--package $(OUTPUT_DIR)/xpkg/linux_amd64/$(PROJECT_NAME)-$(VERSION).xpkg \
+		--package $(OUTPUT_DIR)/xpkg/linux_arm64/$(PROJECT_NAME)-$(VERSION).xpkg \
 		xpkg.upbound.io/dan/$(PROJECT_NAME)-staging:$(VERSION) || $(FAIL)
 	@$(OK) Pushed package $(PROJECT_NAME)-$(VERSION).xpkg
 
