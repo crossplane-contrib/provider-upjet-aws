@@ -26,7 +26,7 @@ type CatalogTableParameters struct {
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
-	// +crossplane:generate:reference:type=CatalogDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
