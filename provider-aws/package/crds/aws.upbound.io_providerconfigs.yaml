@@ -47,18 +47,6 @@ spec:
           spec:
             description: A ProviderConfigSpec defines the desired state of a ProviderConfig.
             properties:
-              assumeRoleWithWebIdentity:
-                description: AssumeRoleWithWebIdentity defines the options for assuming
-                  an IAM role with a Web Identity
-                properties:
-                  roleARN:
-                    description: AssumeRoleARN to assume with provider credentials
-                    type: string
-                  roleSessionName:
-                    description: RoleSessionName is the session name, if you wish
-                      to uniquely identify this session.
-                    type: string
-                type: object
               assumeRoles:
                 description: AssumeRoles defines the options for assuming an IAM role
                 items:
@@ -107,6 +95,18 @@ spec:
               credentials:
                 description: Credentials required to authenticate to this provider.
                 properties:
+                  assumeRoleWithWebIdentity:
+                    description: AssumeRoleWithWebIdentity defines the options for
+                      assuming an IAM role with a Web Identity
+                    properties:
+                      roleARN:
+                        description: AssumeRoleARN to assume with provider credentials
+                        type: string
+                      roleSessionName:
+                        description: RoleSessionName is the session name, if you wish
+                          to uniquely identify this session.
+                        type: string
+                    type: object
                   env:
                     description: Env is a reference to an environment variable that
                       contains credentials that must be used to connect to the provider.
@@ -150,7 +150,8 @@ spec:
                     enum:
                     - None
                     - Secret
-                    - InjectedIdentity
+                    - IRSA
+                    - WebIdentity
                     type: string
                 required:
                 - source
