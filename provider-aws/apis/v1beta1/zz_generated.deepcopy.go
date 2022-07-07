@@ -194,10 +194,12 @@ func (in *ProviderConfigList) DeepCopyObject() runtime.Object {
 func (in *ProviderConfigSpec) DeepCopyInto(out *ProviderConfigSpec) {
 	*out = *in
 	in.Credentials.DeepCopyInto(&out.Credentials)
-	if in.AssumeRole != nil {
-		in, out := &in.AssumeRole, &out.AssumeRole
-		*out = new(AssumeRoleOptions)
-		(*in).DeepCopyInto(*out)
+	if in.AssumeRoles != nil {
+		in, out := &in.AssumeRoles, &out.AssumeRoles
+		*out = make([]AssumeRoleOptions, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.AssumeRoleWithWebIdentity != nil {
 		in, out := &in.AssumeRoleWithWebIdentity, &out.AssumeRoleWithWebIdentity

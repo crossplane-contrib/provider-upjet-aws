@@ -14,8 +14,8 @@ type ProviderConfigSpec struct {
 	// Credentials required to authenticate to this provider.
 	Credentials ProviderCredentials `json:"credentials"`
 
-	// AssumeRole defines the options for assuming an IAM role
-	AssumeRole *AssumeRoleOptions `json:"assumeRole,omitempty"`
+	// AssumeRoles defines the options for assuming an IAM role
+	AssumeRoles []AssumeRoleOptions `json:"assumeRoles,omitempty"`
 
 	// AssumeRoleWithWebIdentity defines the options for assuming an IAM role with a Web Identity
 	AssumeRoleWithWebIdentity *AssumeRoleWithWebIdentityOptions `json:"assumeRoleWithWebIdentity,omitempty"`
