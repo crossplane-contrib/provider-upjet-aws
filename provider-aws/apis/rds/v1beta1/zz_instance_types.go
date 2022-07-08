@@ -75,15 +75,8 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
-	// +crossplane:generate:reference:type=SubnetGroup
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameRef *v1.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	DeleteAutomatedBackups *bool `json:"deleteAutomatedBackups,omitempty" tf:"delete_automated_backups,omitempty"`
@@ -140,8 +133,16 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	MonitoringRoleArn *string `json:"monitoringRoleArn,omitempty" tf:"monitoring_role_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MonitoringRoleArnRef *v1.Reference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	MonitoringRoleArnSelector *v1.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
@@ -155,15 +156,8 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	OptionGroupName *string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
 
-	// +crossplane:generate:reference:type=ParameterGroup
 	// +kubebuilder:validation:Optional
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	ParameterGroupNameRef *v1.Reference `json:"parameterGroupNameRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
@@ -171,15 +165,8 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDRef *v1.Reference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDSelector *v1.Selector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
@@ -208,15 +195,6 @@ type InstanceParameters struct {
 	S3Import []S3ImportParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SecurityGroupNameRefs []v1.Reference `json:"securityGroupNameRefs,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	SecurityGroupNameSelector *v1.Selector `json:"securityGroupNameSelector,omitempty" tf:"-"`
-
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:refFieldName=SecurityGroupNameRefs
-	// +crossplane:generate:reference:selectorFieldName=SecurityGroupNameSelector
-	// +kubebuilder:validation:Optional
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -240,17 +218,17 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	VPCSecurityGroupIdRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	VPCSecurityGroupIdSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:refFieldName=VpcSecurityGroupIdRefs
-	// +crossplane:generate:reference:selectorFieldName=VpcSecurityGroupIdSelector
+	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIdRefs
+	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIdSelector
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	VpcSecurityGroupIdRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	VpcSecurityGroupIdSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 }
 
 type RestoreToPointInTimeObservation struct {
@@ -264,15 +242,8 @@ type RestoreToPointInTimeParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceDBInstanceAutomatedBackupsArn *string `json:"sourceDbInstanceAutomatedBackupsArn,omitempty" tf:"source_db_instance_automated_backups_arn,omitempty"`
 
-	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
 	SourceDBInstanceIdentifier *string `json:"sourceDbInstanceIdentifier,omitempty" tf:"source_db_instance_identifier,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	SourceDBInstanceIdentifierRef *v1.Reference `json:"sourceDbInstanceIdentifierRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	SourceDBInstanceIdentifierSelector *v1.Selector `json:"sourceDbInstanceIdentifierSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	SourceDbiResourceID *string `json:"sourceDbiResourceId,omitempty" tf:"source_dbi_resource_id,omitempty"`
@@ -286,15 +257,8 @@ type S3ImportObservation struct {
 
 type S3ImportParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
-	// +kubebuilder:validation:Optional
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`

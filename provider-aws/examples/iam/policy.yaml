@@ -1,11 +1,10 @@
 apiVersion: iam.aws.upbound.io/v1beta1
-kind: UserPolicy
+kind: Policy
 metadata:
   name: sample-user-policy
 spec:
   forProvider:
-    userRef:
-      name: sample-user
+    name: my-policy-name
     policy: |
       {
         "Version": "2012-10-17",

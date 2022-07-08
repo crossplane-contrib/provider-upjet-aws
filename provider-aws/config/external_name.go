@@ -263,6 +263,36 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_db_instance":        ParameterAsExternalName("identifier"),
 	"aws_db_parameter_group": config.NameAsIdentifier,
 	"aws_db_subnet_group":    config.NameAsIdentifier,
+	// aws_db_instance_role_association can be imported using the DB Instance Identifier and IAM Role ARN separated by a comma
+	// $ terraform import aws_db_instance_role_association.example my-db-instance,arn:aws:iam::123456789012:role/my-role
+	"aws_db_instance_role_association": config.IdentifierFromProvider,
+	// DB Option groups can be imported using the name
+	"aws_db_option_group": config.NameAsIdentifier,
+	// DB proxies can be imported using the name
+	"aws_db_proxy": config.NameAsIdentifier,
+	// DB proxy default target groups can be imported using the db_proxy_name
+	"aws_db_proxy_default_target_group": config.IdentifierFromProvider,
+	// DB proxy endpoints can be imported using the DB-PROXY-NAME/DB-PROXY-ENDPOINT-NAME
+	"aws_db_proxy_endpoint": FormattedIdentifierFromProvider("/", "db_proxy_endpoint_name", "db_proxy_name"),
+	// RDS DB Proxy Targets can be imported using the db_proxy_name, target_group_name, target type (e.g., RDS_INSTANCE or TRACKED_CLUSTER), and resource identifier separated by forward slashes (/)
+	"aws_db_proxy_target": config.IdentifierFromProvider,
+	// DB Security groups can be imported using the name
+	"aws_db_security_group": config.NameAsIdentifier,
+	// aws_db_snapshot can be imported by using the snapshot identifier
+	"aws_db_snapshot": ParameterAsExternalName("db_snapshot_identifier"),
+	// RDS Aurora Cluster Database Activity Streams can be imported using the resource_arn
+	"aws_rds_cluster_activity_stream": config.IdentifierFromProvider,
+	// RDS Clusters Endpoint can be imported using the cluster_endpoint_identifier
+	"aws_rds_cluster_endpoint": ParameterAsExternalName("cluster_endpoint_identifier"),
+	// RDS Cluster Instances can be imported using the identifier
+	"aws_rds_cluster_instance": ParameterAsExternalName("identifier"),
+	// RDS Cluster Parameter Groups can be imported using the name
+	"aws_rds_cluster_parameter_group": config.NameAsIdentifier,
+	// aws_rds_cluster_role_association can be imported using the DB Cluster Identifier and IAM Role ARN separated by a comma (,)
+	// $ terraform import aws_rds_cluster_role_association.example my-db-cluster,arn:aws:iam::123456789012:role/my-role
+	"aws_rds_cluster_role_association": FormattedIdentifierFromProvider(",", "db_cluster_identifier", "role_arn"),
+	// aws_rds_global_cluster can be imported by using the RDS Global Cluster identifie
+	"aws_rds_global_cluster": ParameterAsExternalName("global_cluster_identifier"),
 
 	// route53
 	//
@@ -399,6 +429,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudfront_realtime_log_config": config.IdentifierFromProvider,
 	// Cloudfront Response Headers Policies can be imported using the id
 	"aws_cloudfront_response_headers_policy": config.IdentifierFromProvider,
+
+	// resource groups
+
+	// Resource groups can be imported using the name
+	"aws_resourcegroups_group": config.NameAsIdentifier,
 }
 
 func iamUserGroupMembership() config.ExternalName {

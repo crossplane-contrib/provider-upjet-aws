@@ -1,0 +1,10 @@
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: Snapshot
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    dbInstanceIdentifier: example
+  providerConfigRef:
+    name: default

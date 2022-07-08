@@ -1,0 +1,12 @@
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ProxyTarget
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    dbProxyName: example
+    dbClusterIdentifier: example
+    targetGroupName: default
+  providerConfigRef:
+    name: default

@@ -28,6 +28,7 @@ import (
 	v1beta1mq "github.com/upbound/official-providers/provider-aws/apis/mq/v1beta1"
 	v1beta1neptune "github.com/upbound/official-providers/provider-aws/apis/neptune/v1beta1"
 	v1beta1rds "github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1"
+	v1beta1resourcegroups "github.com/upbound/official-providers/provider-aws/apis/resourcegroups/v1beta1"
 	v1beta1route53 "github.com/upbound/official-providers/provider-aws/apis/route53/v1beta1"
 	v1beta1route53resolver "github.com/upbound/official-providers/provider-aws/apis/route53resolver/v1beta1"
 	v1beta1s3 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
@@ -56,6 +57,7 @@ func init() {
 		v1beta1mq.SchemeBuilder.AddToScheme,
 		v1beta1neptune.SchemeBuilder.AddToScheme,
 		v1beta1rds.SchemeBuilder.AddToScheme,
+		v1beta1resourcegroups.SchemeBuilder.AddToScheme,
 		v1beta1route53.SchemeBuilder.AddToScheme,
 		v1beta1route53resolver.SchemeBuilder.AddToScheme,
 		v1beta1s3.SchemeBuilder.AddToScheme,

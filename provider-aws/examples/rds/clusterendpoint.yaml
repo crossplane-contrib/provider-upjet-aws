@@ -1,0 +1,11 @@
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ClusterEndpoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    clusterIdentifier: example
+    customEndpointType: READER
+  providerConfigRef:
+    name: default
