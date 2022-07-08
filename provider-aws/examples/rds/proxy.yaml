@@ -9,7 +9,7 @@ spec:
       - authScheme: SECRETS
         description: example
         iamAuth: DISABLED
-        secretArn: arn:aws:secretsmanager:us-west-1:609897127049:secret:ezgi-rds-secret-20SXoi
+        secretArn: arn:aws:secretsmanager:us-west-1:123456789012:secret:example
     debugLogging: false
     engineFamily: POSTGRESQL
     idleClientTimeout: 1800
