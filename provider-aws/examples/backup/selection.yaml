@@ -1,0 +1,16 @@
+apiVersion: backup.aws.upbound.io/v1beta1
+kind: Selection
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    selectionTag:
+    - type: "STRINGEQUALS"
+      key: "foo"
+      value: "bar"
+    planIdRef:
+      name: example
+    name: example
+    iamRoleArnRef:
+      name: sample-iam-role

@@ -1,0 +1,10 @@
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: UserGroupMembership
+metadata:
+  name: example
+spec:
+  forProvider:
+    groupRefs:
+    - name: example
+    userRef:
+      name: sample-user

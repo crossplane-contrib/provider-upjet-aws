@@ -1,0 +1,14 @@
+apiVersion: route53.aws.upbound.io/v1beta1
+kind: Record
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    name: www
+    records:
+    - "dev.example.com"
+    ttl: 5
+    type: CNAME
+    zoneIdRef:
+      name: example

@@ -1,0 +1,16 @@
+apiVersion: docdb.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  name: my-docdb-cluster
+spec:
+  forProvider:
+    region: us-west-2
+    engine: "docdb"
+    backupRetentionPeriod: 5
+    masterPasswordSecretRef:
+      key: password
+      name: docdb-creds
+      namespace: crossplane-system
+    masterUsername: foo
+    preferredBackupWindow: 07:00-09:00
+    skipFinalSnapshot: true

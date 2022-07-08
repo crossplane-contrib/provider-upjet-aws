@@ -1,0 +1,11 @@
+apiVersion: efs.aws.upbound.io/v1beta1
+kind: MountTarget
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    fileSystemIdRef:
+      name: example
+    subnetIdRef:
+      name: sample-subnet1

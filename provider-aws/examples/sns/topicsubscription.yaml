@@ -1,0 +1,12 @@
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: TopicSubscription
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    endpointRef:
+      name: example
+    protocol: sqs
+    topicArnRef:
+      name: example

@@ -1,0 +1,18 @@
+apiVersion: backup.aws.upbound.io/v1beta1
+kind: Plan
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    advancedBackupSetting:
+    - backupOptions:
+        WindowsVSS: enabled
+      resourceType: EC2
+    name: up_example_backup_plan
+    rule:
+    - lifecycle:
+      - deleteAfter: 14
+      ruleName: up_example_backup_rule
+      schedule: cron(0 12 * * ? *)
+      targetVaultName: example-bucket-vault

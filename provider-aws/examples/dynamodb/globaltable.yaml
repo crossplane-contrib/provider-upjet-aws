@@ -1,0 +1,10 @@
+apiVersion: dynamodb.aws.upbound.io/v1beta1
+kind: GlobalTable
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    replica:
+    - regionName: us-west-1
+    - regionName: us-west-2

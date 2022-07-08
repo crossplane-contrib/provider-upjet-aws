@@ -1,0 +1,11 @@
+apiVersion: servicediscovery.aws.upbound.io/v1beta1
+kind: PrivateDNSNamespace
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+    description: example
+    vpcIdRef:
+      name: sample-vpc

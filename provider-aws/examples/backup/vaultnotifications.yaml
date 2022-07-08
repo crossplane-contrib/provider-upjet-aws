@@ -1,0 +1,13 @@
+apiVersion: backup.aws.upbound.io/v1beta1
+kind: VaultNotifications
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    backupVaultEvents:
+    - BACKUP_JOB_STARTED
+    - RESTORE_JOB_COMPLETED
+    backupVaultName: example-bucket-vault
+    snsTopicArnRef:
+      name: example

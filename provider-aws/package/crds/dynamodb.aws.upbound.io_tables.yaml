@@ -1,0 +1,357 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+  creationTimestamp: null
+  name: tables.dynamodb.aws.upbound.io
+spec:
+  group: dynamodb.aws.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - aws
+    kind: Table
+    listKind: TableList
+    plural: tables
+    singular: table
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: Table is the Schema for the Tables API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: TableSpec defines the desired state of Table
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource.
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  attribute:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        type:
+                          type: string
+                      required:
+                      - name
+                      - type
+                      type: object
+                    type: array
+                  billingMode:
+                    type: string
+                  globalSecondaryIndex:
+                    items:
+                      properties:
+                        hashKey:
+                          type: string
+                        name:
+                          type: string
+                        nonKeyAttributes:
+                          items:
+                            type: string
+                          type: array
+                        projectionType:
+                          type: string
+                        rangeKey:
+                          type: string
+                        readCapacity:
+                          type: number
+                        writeCapacity:
+                          type: number
+                      required:
+                      - hashKey
+                      - name
+                      - projectionType
+                      type: object
+                    type: array
+                  hashKey:
+                    type: string
+                  localSecondaryIndex:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        nonKeyAttributes:
+                          items:
+                            type: string
+                          type: array
+                        projectionType:
+                          type: string
+                        rangeKey:
+                          type: string
+                      required:
+                      - name
+                      - projectionType
+                      - rangeKey
+                      type: object
+                    type: array
+                  pointInTimeRecovery:
+                    items:
+                      properties:
+                        enabled:
+                          type: boolean
+                      required:
+                      - enabled
+                      type: object
+                    type: array
+                  rangeKey:
+                    type: string
+                  readCapacity:
+                    type: number
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  replica:
+                    items:
+                      properties:
+                        kmsKeyArn:
+                          type: string
+                        regionName:
+                          type: string
+                      required:
+                      - regionName
+                      type: object
+                    type: array
+                  restoreDateTime:
+                    type: string
+                  restoreSourceName:
+                    type: string
+                  restoreToLatestTime:
+                    type: boolean
+                  serverSideEncryption:
+                    items:
+                      properties:
+                        enabled:
+                          type: boolean
+                        kmsKeyArn:
+                          type: string
+                      required:
+                      - enabled
+                      type: object
+                    type: array
+                  streamEnabled:
+                    type: boolean
+                  streamViewType:
+                    type: string
+                  tableClass:
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  ttl:
+                    items:
+                      properties:
+                        attributeName:
+                          type: string
+                        enabled:
+                          type: boolean
+                      required:
+                      - attributeName
+                      type: object
+                    type: array
+                  writeCapacity:
+                    type: number
+                required:
+                - region
+                type: object
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              providerRef:
+                description: 'ProviderReference specifies the provider that will be
+                  used to create, observe, update, and delete this managed resource.
+                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: TableStatus defines the observed state of Table.
+            properties:
+              atProvider:
+                properties:
+                  arn:
+                    type: string
+                  id:
+                    type: string
+                  streamArn:
+                    type: string
+                  streamLabel:
+                    type: string
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    type: object
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

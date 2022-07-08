@@ -282,4 +282,11 @@ func Configure(p *config.Provider) {
 			Type: "TransitGatewayRouteTable",
 		}
 	})
+
+	p.AddResourceConfigurator("aws_nat_gateway", func(r *config.Resource) {
+		r.References["subnet_id"] = config.Reference{
+			Type: "Subnet",
+		}
+	})
+
 }
