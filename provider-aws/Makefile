@@ -120,7 +120,7 @@ xpkg.push: $(UP)
 	@$(UP) xpkg push \
 		--package $(OUTPUT_DIR)/xpkg/linux_amd64/$(PROJECT_NAME)-$(VERSION).xpkg \
 		--package $(OUTPUT_DIR)/xpkg/linux_arm64/$(PROJECT_NAME)-$(VERSION).xpkg \
-		xpkg.upbound.io/dan/$(PROJECT_NAME)-staging:$(VERSION) || $(FAIL)
+		xpkg.upbound.io/upbound/$(PROJECT_NAME)-staging:$(VERSION) || $(FAIL)
 	@$(OK) Pushed package $(PROJECT_NAME)-$(VERSION).xpkg
 
 xpkg.load: $(UP)
