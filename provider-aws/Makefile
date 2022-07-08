@@ -49,7 +49,7 @@ GO111MODULE = on
 # ====================================================================================
 # Setup Kubernetes tools
 
-UP_VERSION = v0.12.0-rc.0.36.gc986ff0
+UP_VERSION = v0.12.0-rc.0.39.g7d1e248
 UP_CHANNEL = main
 -include build/makelib/k8s_tools.mk
 
@@ -104,20 +104,29 @@ run: go.build
 	$(GO_OUT_DIR)/provider --debug
 
 xpkg.build: $(UP)
-	@$(INFO) Building package provider-aws-$(VERSION).xpkg
-	@mkdir -p $(OUTPUT_DIR)/xpkg
-	@$(UP) xpkg build --controller $(BUILD_REGISTRY)/provider-aws-$(SAFEHOSTARCH) -f ./package -e ./examples -o ./_output/xpkg/provider-aws-$(VERSION).xpkg || $(FAIL)
-	@$(OK) Built package provider-aws-$(VERSION).xpkg
+	@$(INFO) Building package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM)
+	@mkdir -p $(OUTPUT_DIR)/xpkg/$(PLATFORM)
+	@$(UP) xpkg build \
+		--controller $(BUILD_REGISTRY)/$(PROJECT_NAME)-$(ARCH) \
+		--package-root ./package \
+		--examples-root ./examples \
+		--output ./_output/xpkg/$(PLATFORM)/$(PROJECT_NAME)-$(VERSION).xpkg || $(FAIL)
+	@$(OK) Built package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM)
+
+build.artifacts.platform: xpkg.build
 
 xpkg.push: $(UP)
-	@$(INFO) Pushing package provider-aws-$(VERSION).xpkg
-	@$(UP) xpkg push -f $(OUTPUT_DIR)/xpkg/provider-aws-$(VERSION).xpkg xpkg.upbound.io/upbound/provider-aws-staging:$(VERSION) || $(FAIL)
-	@$(OK) Pushed package provider-aws-$(VERSION).xpkg
+	@$(INFO) Pushing package $(PROJECT_NAME)-$(VERSION).xpkg
+	@$(UP) xpkg push \
+		--package $(OUTPUT_DIR)/xpkg/linux_amd64/$(PROJECT_NAME)-$(VERSION).xpkg \
+		--package $(OUTPUT_DIR)/xpkg/linux_arm64/$(PROJECT_NAME)-$(VERSION).xpkg \
+		xpkg.upbound.io/dan/$(PROJECT_NAME)-staging:$(VERSION) || $(FAIL)
+	@$(OK) Pushed package $(PROJECT_NAME)-$(VERSION).xpkg
 
 xpkg.load: $(UP)
-	@$(INFO) Loading package provider-aws-$(VERSION).xpkg into Docker daemon
-	@docker load -i $(OUTPUT_DIR)/xpkg/provider-aws-$(VERSION).xpkg
-	@$(OK) Loaded package provider-aws-$(VERSION).xpkg into Docker daemon
+	@$(INFO) Loading package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM) into Docker daemon
+	@docker load -i $(OUTPUT_DIR)/xpkg/$(PLATFORM)/$(PROJECT_NAME)-$(VERSION).xpkg
+	@$(OK) Loaded package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM) into Docker daemon
 
 .PHONY: cobertura submodules fallthrough run crds.clean
 

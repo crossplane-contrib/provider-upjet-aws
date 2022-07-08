@@ -273,7 +273,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// DB proxy default target groups can be imported using the db_proxy_name
 	"aws_db_proxy_default_target_group": config.IdentifierFromProvider,
 	// DB proxy endpoints can be imported using the DB-PROXY-NAME/DB-PROXY-ENDPOINT-NAME
-	"aws_db_proxy_endpoint": FormattedIdentifierFromProvider("/", "db_proxy_endpoint_name", "db_proxy_name"),
+	"aws_db_proxy_endpoint": config.TemplatedStringAsIdentifier("db_proxy_endpoint_name", "{{ .externalName }}/{{ .parameters.db_proxy_name }}"),
 	// RDS DB Proxy Targets can be imported using the db_proxy_name, target_group_name, target type (e.g., RDS_INSTANCE or TRACKED_CLUSTER), and resource identifier separated by forward slashes (/)
 	"aws_db_proxy_target": config.IdentifierFromProvider,
 	// DB Security groups can be imported using the name

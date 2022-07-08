@@ -63,8 +63,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  dbProxyEndpointName:
-                    type: string
                   dbProxyName:
                     type: string
                   region:
@@ -111,7 +109,6 @@ spec:
                       type: string
                     type: array
                 required:
-                - dbProxyEndpointName
                 - dbProxyName
                 - region
                 - vpcSubnetIds

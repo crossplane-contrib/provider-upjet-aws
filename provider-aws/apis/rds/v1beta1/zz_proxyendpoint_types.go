@@ -30,9 +30,6 @@ type ProxyEndpointObservation struct {
 type ProxyEndpointParameters struct {
 
 	// +kubebuilder:validation:Required
-	DBProxyEndpointName *string `json:"dbProxyEndpointName" tf:"db_proxy_endpoint_name,omitempty"`
-
-	// +kubebuilder:validation:Required
 	DBProxyName *string `json:"dbProxyName" tf:"db_proxy_name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

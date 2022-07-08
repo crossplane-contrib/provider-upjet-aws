@@ -41,7 +41,7 @@ type UserDefinedFunctionParameters struct {
 	// +kubebuilder:validation:Required
 	ClassName *string `json:"className" tf:"class_name,omitempty"`
 
-	// +crossplane:generate:reference:type=CatalogDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
