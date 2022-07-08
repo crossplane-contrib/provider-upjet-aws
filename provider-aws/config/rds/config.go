@@ -32,7 +32,7 @@ func Configure(p *config.Provider) {
 		r.UseAsync = true
 	})
 
-	p.AddResourceConfigurator("aws_db_instance", func(r *config.Resource) {
+	p.AddResourceConfigurator("aws_rds_cluster_instance", func(r *config.Resource) {
 		r.References = config.References{
 			"restore_to_point_in_time.source_db_instance_identifier": {
 				Type: "Instance",
@@ -66,6 +66,28 @@ func Configure(p *config.Provider) {
 				Type: "SubnetGroup",
 			},
 		}
+		r.UseAsync = true
+	})
+	p.AddResourceConfigurator("aws_db_instance", func(r *config.Resource) {
+		r.UseAsync = true
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"name", "db_name"},
+		}
+	})
+
+	p.AddResourceConfigurator("aws_db_proxy", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("aws_db_proxy_endpoint", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("aws_rds_cluster_activity_stream", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("aws_db_snapshot", func(r *config.Resource) {
 		r.UseAsync = true
 	})
 }

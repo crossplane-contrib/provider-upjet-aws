@@ -117,9 +117,24 @@ import (
 	subnetgroupneptune "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/subnetgroup"
 	providerconfig "github.com/upbound/official-providers/provider-aws/internal/controller/providerconfig"
 	clusterrds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/cluster"
+	clusteractivitystream "github.com/upbound/official-providers/provider-aws/internal/controller/rds/clusteractivitystream"
+	clusterendpointrds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/clusterendpoint"
+	clusterinstancerds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/clusterinstance"
+	clusterparametergrouprds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/clusterparametergroup"
+	clusterroleassociation "github.com/upbound/official-providers/provider-aws/internal/controller/rds/clusterroleassociation"
+	globalcluster "github.com/upbound/official-providers/provider-aws/internal/controller/rds/globalcluster"
 	instancerds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/instance"
+	instanceroleassociation "github.com/upbound/official-providers/provider-aws/internal/controller/rds/instanceroleassociation"
+	optiongroup "github.com/upbound/official-providers/provider-aws/internal/controller/rds/optiongroup"
 	parametergrouprds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/parametergroup"
+	proxy "github.com/upbound/official-providers/provider-aws/internal/controller/rds/proxy"
+	proxydefaulttargetgroup "github.com/upbound/official-providers/provider-aws/internal/controller/rds/proxydefaulttargetgroup"
+	proxyendpoint "github.com/upbound/official-providers/provider-aws/internal/controller/rds/proxyendpoint"
+	proxytarget "github.com/upbound/official-providers/provider-aws/internal/controller/rds/proxytarget"
+	securitygrouprds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/securitygroup"
+	snapshot "github.com/upbound/official-providers/provider-aws/internal/controller/rds/snapshot"
 	subnetgrouprds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/subnetgroup"
+	groupresourcegroups "github.com/upbound/official-providers/provider-aws/internal/controller/resourcegroups/group"
 	delegationset "github.com/upbound/official-providers/provider-aws/internal/controller/route53/delegationset"
 	healthcheck "github.com/upbound/official-providers/provider-aws/internal/controller/route53/healthcheck"
 	hostedzonednssec "github.com/upbound/official-providers/provider-aws/internal/controller/route53/hostedzonednssec"
@@ -279,9 +294,24 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subnetgroupneptune.Setup,
 		providerconfig.Setup,
 		clusterrds.Setup,
+		clusteractivitystream.Setup,
+		clusterendpointrds.Setup,
+		clusterinstancerds.Setup,
+		clusterparametergrouprds.Setup,
+		clusterroleassociation.Setup,
+		globalcluster.Setup,
 		instancerds.Setup,
+		instanceroleassociation.Setup,
+		optiongroup.Setup,
 		parametergrouprds.Setup,
+		proxy.Setup,
+		proxydefaulttargetgroup.Setup,
+		proxyendpoint.Setup,
+		proxytarget.Setup,
+		securitygrouprds.Setup,
+		snapshot.Setup,
 		subnetgrouprds.Setup,
+		groupresourcegroups.Setup,
 		delegationset.Setup,
 		healthcheck.Setup,
 		hostedzonednssec.Setup,

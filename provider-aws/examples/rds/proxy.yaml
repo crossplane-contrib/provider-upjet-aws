@@ -1,0 +1,25 @@
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: Proxy
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    auth:
+      - authScheme: SECRETS
+        description: example
+        iamAuth: DISABLED
+        secretArn: arn:aws:secretsmanager:us-west-1:609897127049:secret:ezgi-rds-secret-20SXoi
+    debugLogging: false
+    engineFamily: POSTGRESQL
+    idleClientTimeout: 1800
+    requireTls: true
+    roleArn: arn:aws:iam::123456789012:role/example
+    tags:
+      Key: value
+      Name: example
+    vpcSubnetIds:
+      - example1
+      - example2
+  providerConfigRef:
+    name: default

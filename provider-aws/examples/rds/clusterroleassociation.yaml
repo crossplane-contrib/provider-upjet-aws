@@ -1,0 +1,12 @@
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ClusterRoleAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    dbClusterIdentifier: example
+    featureName: s3Import
+    roleArn: arn:aws:iam::123456789012:role/example
+  providerConfigRef:
+    name: default

@@ -1,0 +1,12 @@
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ClusterInstance
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    clusterIdentifier: example
+    engine: aurora-postgresql
+    instanceClass: db.r5.large
+  providerConfigRef:
+    name: default

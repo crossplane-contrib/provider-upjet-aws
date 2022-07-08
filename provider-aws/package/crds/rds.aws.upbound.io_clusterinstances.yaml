@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: instances.rds.aws.upbound.io
+  name: clusterinstances.rds.aws.upbound.io
 spec:
   group: rds.aws.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - aws
-    kind: Instance
-    listKind: InstanceList
-    plural: instances
-    singular: instance
+    kind: ClusterInstance
+    listKind: ClusterInstanceList
+    plural: clusterinstances
+    singular: clusterinstance
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Instance is the Schema for the Instances API
+        description: ClusterInstance is the Schema for the ClusterInstances API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: InstanceSpec defines the desired state of Instance
+            description: ClusterInstanceSpec defines the desired state of ClusterInstance
             properties:
               deletionPolicy:
                 default: Delete
@@ -63,56 +63,51 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  allocatedStorage:
-                    type: number
-                  allowMajorVersionUpgrade:
-                    type: boolean
                   applyImmediately:
                     type: boolean
                   autoMinorVersionUpgrade:
                     type: boolean
                   availabilityZone:
                     type: string
-                  backupRetentionPeriod:
-                    type: number
-                  backupWindow:
-                    type: string
                   caCertIdentifier:
                     type: string
-                  characterSetName:
+                  clusterIdentifier:
                     type: string
                   copyTagsToSnapshot:
                     type: boolean
-                  customerOwnedIpEnabled:
-                    type: boolean
-                  dbName:
+                  dbParameterGroupName:
                     type: string
                   dbSubnetGroupName:
                     type: string
-                  deleteAutomatedBackups:
-                    type: boolean
-                  deletionProtection:
-                    type: boolean
-                  domain:
-                    type: string
-                  domainIamRoleName:
-                    type: string
-                  enabledCloudwatchLogsExports:
-                    items:
-                      type: string
-                    type: array
+                  dbSubnetGroupNameRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  dbSubnetGroupNameSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
                   engine:
                     type: string
                   engineVersion:
                     type: string
-                  finalSnapshotIdentifier:
-                    type: string
-                  iamDatabaseAuthenticationEnabled:
-                    type: boolean
                   instanceClass:
                     type: string
-                  iops:
-                    type: number
                   kmsKeyId:
                     type: string
                   kmsKeyIdRef:
@@ -138,17 +133,15 @@ spec:
                           is selected.
                         type: object
                     type: object
-                  licenseModel:
-                    type: string
-                  maintenanceWindow:
-                    type: string
-                  maxAllocatedStorage:
-                    type: number
                   monitoringInterval:
                     type: number
                   monitoringRoleArn:
                     type: string
-                  monitoringRoleArnRef:
+                  performanceInsightsEnabled:
+                    type: boolean
+                  performanceInsightsKmsKeyId:
+                    type: string
+                  performanceInsightsKmsKeyIdRef:
                     description: A Reference to a named object.
                     properties:
                       name:
@@ -157,7 +150,7 @@ spec:
                     required:
                     - name
                     type: object
-                  monitoringRoleArnSelector:
+                  performanceInsightsKmsKeyIdSelector:
                     description: A Selector selects an object.
                     properties:
                       matchControllerRef:
@@ -171,41 +164,13 @@ spec:
                           is selected.
                         type: object
                     type: object
-                  multiAz:
-                    type: boolean
-                  name:
-                    type: string
-                  ncharCharacterSetName:
-                    type: string
-                  optionGroupName:
-                    type: string
-                  parameterGroupName:
-                    type: string
-                  passwordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  performanceInsightsEnabled:
-                    type: boolean
-                  performanceInsightsKmsKeyId:
-                    type: string
                   performanceInsightsRetentionPeriod:
                     type: number
-                  port:
+                  preferredBackupWindow:
+                    type: string
+                  preferredMaintenanceWindow:
+                    type: string
+                  promotionTier:
                     type: number
                   publiclyAccessible:
                     type: boolean
@@ -213,95 +178,12 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  replicaMode:
-                    type: string
-                  replicateSourceDb:
-                    type: string
-                  restoreToPointInTime:
-                    items:
-                      properties:
-                        restoreTime:
-                          type: string
-                        sourceDbInstanceAutomatedBackupsArn:
-                          type: string
-                        sourceDbInstanceIdentifier:
-                          type: string
-                        sourceDbiResourceId:
-                          type: string
-                        useLatestRestorableTime:
-                          type: boolean
-                      type: object
-                    type: array
-                  s3Import:
-                    items:
-                      properties:
-                        bucketName:
-                          type: string
-                        bucketPrefix:
-                          type: string
-                        ingestionRole:
-                          type: string
-                        sourceEngine:
-                          type: string
-                        sourceEngineVersion:
-                          type: string
-                      required:
-                      - bucketName
-                      - ingestionRole
-                      - sourceEngine
-                      - sourceEngineVersion
-                      type: object
-                    type: array
-                  securityGroupNames:
-                    items:
-                      type: string
-                    type: array
-                  skipFinalSnapshot:
-                    type: boolean
-                  snapshotIdentifier:
-                    type: string
-                  storageEncrypted:
-                    type: boolean
-                  storageType:
-                    type: string
                   tags:
                     additionalProperties:
                       type: string
                     type: object
-                  timezone:
-                    type: string
-                  username:
-                    type: string
-                  vpcSecurityGroupIdRefs:
-                    items:
-                      description: A Reference to a named object.
-                      properties:
-                        name:
-                          description: Name of the referenced object.
-                          type: string
-                      required:
-                      - name
-                      type: object
-                    type: array
-                  vpcSecurityGroupIdSelector:
-                    description: A Selector selects an object.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                    type: object
-                  vpcSecurityGroupIds:
-                    items:
-                      type: string
-                    type: array
                 required:
+                - clusterIdentifier
                 - instanceClass
                 - region
                 type: object
@@ -402,36 +284,30 @@ spec:
             - forProvider
             type: object
           status:
-            description: InstanceStatus defines the observed state of Instance.
+            description: ClusterInstanceStatus defines the observed state of ClusterInstance.
             properties:
               atProvider:
                 properties:
-                  address:
-                    type: string
                   arn:
+                    type: string
+                  dbiResourceId:
                     type: string
                   endpoint:
                     type: string
                   engineVersionActual:
                     type: string
-                  hostedZoneId:
-                    type: string
                   id:
                     type: string
-                  latestRestorableTime:
-                    type: string
-                  replicas:
-                    items:
-                      type: string
-                    type: array
-                  resourceId:
-                    type: string
-                  status:
-                    type: string
+                  port:
+                    type: number
+                  storageEncrypted:
+                    type: boolean
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                  writer:
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

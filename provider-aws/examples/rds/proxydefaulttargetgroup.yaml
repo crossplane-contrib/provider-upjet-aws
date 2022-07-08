@@ -1,0 +1,17 @@
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ProxyDefaultTargetGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    dbProxyName: example
+    region: us-west-1
+    connectionPoolConfig:
+      - connectionBorrowTimeout: 120
+        initQuery: SET x=1, y=2
+        maxConnectionsPercent: 100
+        maxIdleConnectionsPercent: 50
+        sessionPinningFilters:
+          - EXCLUDE_VARIABLE_SETS
+  providerConfigRef:
+    name: default
