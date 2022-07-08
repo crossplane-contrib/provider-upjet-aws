@@ -61,6 +61,13 @@ IMAGES = provider-aws
 -include build/makelib/image.mk
 
 # ====================================================================================
+# Setup XPKG
+
+XPKG_REGISTRY ?= xpkg.upbound.io
+XPKG_ORG ?= upbound
+XPKG_REPO ?= $(PROJECT_NAME)-staging
+
+# ====================================================================================
 # Targets
 
 # run `make help` to see the targets and options
@@ -103,6 +110,10 @@ run: go.build
 	@# To see other arguments that can be provided, run the command with --help instead
 	$(GO_OUT_DIR)/provider --debug
 
+# NOTE(hasheddan): we ensure up is installed prior to running platform-specific
+# build steps in parallel to avoid encountering an installation race condition.
+build.init: $(UP)
+
 xpkg.build: $(UP)
 	@$(INFO) Building package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM)
 	@mkdir -p $(OUTPUT_DIR)/xpkg/$(PLATFORM)
@@ -120,7 +131,7 @@ xpkg.push: $(UP)
 	@$(UP) xpkg push \
 		--package $(OUTPUT_DIR)/xpkg/linux_amd64/$(PROJECT_NAME)-$(VERSION).xpkg \
 		--package $(OUTPUT_DIR)/xpkg/linux_arm64/$(PROJECT_NAME)-$(VERSION).xpkg \
-		xpkg.upbound.io/dan/$(PROJECT_NAME)-staging:$(VERSION) || $(FAIL)
+		$(XPKG_REGISTRY)/$(XPKG_ORG)/$(XPKG_REPO):$(VERSION) || $(FAIL)
 	@$(OK) Pushed package $(PROJECT_NAME)-$(VERSION).xpkg
 
 xpkg.load: $(UP)
