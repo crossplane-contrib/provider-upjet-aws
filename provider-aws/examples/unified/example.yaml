@@ -60,12 +60,12 @@ spec:
 apiVersion: servicediscovery.aws.upbound.io/v1beta1
 kind: PrivateDNSNamespace
 metadata:
-  name: example
+  name: exampleup
 spec:
   forProvider:
-    name: example
+    name: exampleup
     region: us-west-1
-    description: example
+    description: exampleup
     vpcIdRef:
       name: sample-vpc
 ---
@@ -87,10 +87,10 @@ spec:
 apiVersion: secretsmanager.aws.upbound.io/v1beta1
 kind: Secret
 metadata:
-  name: secretuptest
+  name: secretupp
 spec:
   forProvider:
-    name: secretuptest
+    name: secretupp
     region: us-west-1
 ---
 apiVersion: transfer.aws.upbound.io/v1beta1
@@ -247,53 +247,6 @@ spec:
       - reportTemplate: RESTORE_JOB_REPORT
     tags:
       Name: Example Report Plan
----
-apiVersion: backup.aws.upbound.io/v1beta1
-kind: Selection
-metadata:
-  name: example
-spec:
-  forProvider:
-    region: us-west-1
-    selectionTag:
-      - type: "STRINGEQUALS"
-        key: "foo"
-        value: "bar"
-    planIdRef:
-      name: example
-    name: example
-    iamRoleArnRef:
-      name: sample-iam-role
----
-apiVersion: iam.aws.upbound.io/v1beta1
-kind: Role
-metadata:
-  name: sample-iam-role
-spec:
-  forProvider:
-    assumeRolePolicy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Effect": "Allow",
-            "Principal": {
-              "Service": "backup.amazonaws.com"
-            },
-            "Action": "sts:AssumeRole"
-          }
-        ]
-      }
----
-apiVersion: iam.aws.upbound.io/v1beta1
-kind: RolePolicyAttachment
-metadata:
-  name: sample-backup-policy
-spec:
-  forProvider:
-    policyArn: arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup
-    roleRef:
-      name: sample-iam-role
 ---
 apiVersion: backup.aws.upbound.io/v1beta1
 kind: VaultLockConfiguration
