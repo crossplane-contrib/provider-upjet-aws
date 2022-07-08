@@ -564,6 +564,16 @@ func (in *TopicSubscriptionParameters) DeepCopyInto(out *TopicSubscriptionParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.SubscriptionRoleArnRef != nil {
+		in, out := &in.SubscriptionRoleArnRef, &out.SubscriptionRoleArnRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.SubscriptionRoleArnSelector != nil {
+		in, out := &in.SubscriptionRoleArnSelector, &out.SubscriptionRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TopicArn != nil {
 		in, out := &in.TopicArn, &out.TopicArn
 		*out = new(string)

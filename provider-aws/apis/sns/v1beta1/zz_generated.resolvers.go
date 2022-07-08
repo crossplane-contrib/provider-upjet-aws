@@ -209,6 +209,22 @@ func (mg *TopicSubscription) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.EndpointRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubscriptionRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.ForProvider.SubscriptionRoleArnRef,
+		Selector:     mg.Spec.ForProvider.SubscriptionRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubscriptionRoleArn")
+	}
+	mg.Spec.ForProvider.SubscriptionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubscriptionRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TopicArn),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.TopicArnRef,

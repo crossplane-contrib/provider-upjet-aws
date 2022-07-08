@@ -87,10 +87,10 @@ spec:
 apiVersion: secretsmanager.aws.upbound.io/v1beta1
 kind: Secret
 metadata:
-  name: secrettest
+  name: secretuptest
 spec:
   forProvider:
-    name: secrettest
+    name: secretuptest
     region: us-west-1
 ---
 apiVersion: transfer.aws.upbound.io/v1beta1
