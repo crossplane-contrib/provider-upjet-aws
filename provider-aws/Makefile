@@ -61,6 +61,12 @@ IMAGES = provider-aws
 -include build/makelib/image.mk
 
 # ====================================================================================
+# Setup Marketplace
+
+MARKETPLACE_ORG ?= upbound
+MARKETPLACE_REPO ?= $(PROJECT_NAME)-staging
+
+# ====================================================================================
 # Targets
 
 # run `make help` to see the targets and options
@@ -120,7 +126,7 @@ xpkg.push: $(UP)
 	@$(UP) xpkg push \
 		--package $(OUTPUT_DIR)/xpkg/linux_amd64/$(PROJECT_NAME)-$(VERSION).xpkg \
 		--package $(OUTPUT_DIR)/xpkg/linux_arm64/$(PROJECT_NAME)-$(VERSION).xpkg \
-		xpkg.upbound.io/upbound/$(PROJECT_NAME)-staging:$(VERSION) || $(FAIL)
+		xpkg.upbound.io/$(MARKETPLACE_ORG)/$(MARKETPLACE_REPO):$(VERSION) || $(FAIL)
 	@$(OK) Pushed package $(PROJECT_NAME)-$(VERSION).xpkg
 
 xpkg.load: $(UP)
