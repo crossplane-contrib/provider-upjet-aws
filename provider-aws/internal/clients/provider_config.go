@@ -244,7 +244,7 @@ func UseProviderSecret(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, dat
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot load default AWS config")
 	}
-	return GetRoleChainConfig(ctx, pcs, &awsConfig)
+	return &awsConfig, nil
 }
 
 // GetRoleChainConfig returns an aws.Config capable of doing role chaining with
