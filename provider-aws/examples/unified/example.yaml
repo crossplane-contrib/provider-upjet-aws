@@ -60,12 +60,12 @@ spec:
 apiVersion: servicediscovery.aws.upbound.io/v1beta1
 kind: PrivateDNSNamespace
 metadata:
-  name: exampleup
+  name: exampleupb
 spec:
   forProvider:
-    name: exampleup
+    name: exampleupb
     region: us-west-1
-    description: exampleup
+    description: exampleupb
     vpcIdRef:
       name: sample-vpc
 ---
@@ -87,10 +87,10 @@ spec:
 apiVersion: secretsmanager.aws.upbound.io/v1beta1
 kind: Secret
 metadata:
-  name: secretupp
+  name: secretupb
 spec:
   forProvider:
-    name: secretupp
+    name: secretupb
     region: us-west-1
 ---
 apiVersion: transfer.aws.upbound.io/v1beta1

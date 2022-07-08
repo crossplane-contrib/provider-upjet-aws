@@ -140,7 +140,7 @@ import (
 	clusterinstancerds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/clusterinstance"
 	clusterparametergrouprds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/clusterparametergroup"
 	clusterroleassociation "github.com/upbound/official-providers/provider-aws/internal/controller/rds/clusterroleassociation"
-	globalcluster "github.com/upbound/official-providers/provider-aws/internal/controller/rds/globalcluster"
+	globalclusterrds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/globalcluster"
 	instancerds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/instance"
 	instanceroleassociation "github.com/upbound/official-providers/provider-aws/internal/controller/rds/instanceroleassociation"
 	optiongroup "github.com/upbound/official-providers/provider-aws/internal/controller/rds/optiongroup"
@@ -341,7 +341,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		clusterinstancerds.Setup,
 		clusterparametergrouprds.Setup,
 		clusterroleassociation.Setup,
-		globalcluster.Setup,
+		globalclusterrds.Setup,
 		instancerds.Setup,
 		instanceroleassociation.Setup,
 		optiongroup.Setup,
