@@ -1,4 +1,4 @@
-apiVersion: route53.aws.upbound.io/v1alpha1
+apiVersion: route53.aws.upbound.io/v1beta1
 kind: TrafficPolicy
 metadata:
   name: example
@@ -17,6 +17,4 @@ spec:
         },
         "StartEndpoint": "endpoint-start-NkPh"
       }
-    name: example
-  providerConfigRef:
     name: example

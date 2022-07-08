@@ -1,4 +1,4 @@
-apiVersion: elasticache.aws.upbound.io/v1alpha2
+apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: User
 metadata:
   name: example
@@ -13,5 +13,3 @@ spec:
       name: example-secret
       namespace: crossplane-system
     userName: testUserName
-  providerConfigRef:
-    name: example

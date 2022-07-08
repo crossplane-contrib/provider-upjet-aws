@@ -1,4 +1,4 @@
-apiVersion: iam.aws.upbound.io/v1alpha2
+apiVersion: iam.aws.upbound.io/v1beta1
 kind: UserPolicyAttachment
 metadata:
   name: example
@@ -8,5 +8,3 @@ spec:
       name: example
     userRef:
       name: example
-  providerConfigRef:
-    name: example

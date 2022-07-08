@@ -1,4 +1,4 @@
-apiVersion: docdb.aws.upbound.io/v1alpha1
+apiVersion: docdb.aws.upbound.io/v1beta1
 kind: GlobalCluster
 metadata:
   name: example
@@ -7,5 +7,3 @@ spec:
     engine: docdb
     engineVersion: 4.0.0
     globalClusterIdentifier: global-test
-  providerConfigRef:
-    name: example

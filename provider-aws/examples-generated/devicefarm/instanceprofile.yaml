@@ -1,9 +1,0 @@
-apiVersion: devicefarm.aws.upbound.io/v1alpha1
-kind: InstanceProfile
-metadata:
-  name: example
-spec:
-  forProvider:
-    name: example
-  providerConfigRef:
-    name: example

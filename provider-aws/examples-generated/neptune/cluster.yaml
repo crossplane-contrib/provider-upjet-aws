@@ -1,4 +1,4 @@
-apiVersion: neptune.aws.upbound.io/v1alpha2
+apiVersion: neptune.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
   name: example
@@ -10,5 +10,3 @@ spec:
     iamDatabaseAuthenticationEnabled: true
     preferredBackupWindow: 07:00-09:00
     skipFinalSnapshot: true
-  providerConfigRef:
-    name: example

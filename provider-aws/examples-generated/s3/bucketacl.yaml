@@ -1,4 +1,4 @@
-apiVersion: s3.aws.upbound.io/v1alpha1
+apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketACL
 metadata:
   name: example
@@ -6,5 +6,3 @@ spec:
   forProvider:
     acl: private
     bucket: ${aws_s3_bucket.example.id}
-  providerConfigRef:
-    name: example

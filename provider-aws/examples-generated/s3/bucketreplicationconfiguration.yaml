@@ -1,4 +1,4 @@
-apiVersion: s3.aws.upbound.io/v1alpha1
+apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketReplicationConfiguration
 metadata:
   name: example
@@ -15,5 +15,3 @@ spec:
       - prefix: foo
       id: foobar
       status: Enabled
-  providerConfigRef:
-    name: example

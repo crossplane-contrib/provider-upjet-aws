@@ -1,4 +1,4 @@
-apiVersion: backup.aws.upbound.io/v1alpha1
+apiVersion: backup.aws.upbound.io/v1beta1
 kind: ReportPlan
 metadata:
   name: example
@@ -15,5 +15,3 @@ spec:
     - reportTemplate: RESTORE_JOB_REPORT
     tags:
       Name: Example Report Plan
-  providerConfigRef:
-    name: example

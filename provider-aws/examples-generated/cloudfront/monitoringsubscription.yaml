@@ -1,4 +1,4 @@
-apiVersion: cloudfront.aws.upbound.io/v1alpha1
+apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: MonitoringSubscription
 metadata:
   name: example
@@ -8,5 +8,3 @@ spec:
     monitoringSubscription:
     - realtimeMetricsSubscriptionConfig:
       - realtimeMetricsSubscriptionStatus: Enabled
-  providerConfigRef:
-    name: example

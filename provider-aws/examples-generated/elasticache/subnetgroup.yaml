@@ -1,4 +1,4 @@
-apiVersion: elasticache.aws.upbound.io/v1alpha2
+apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: SubnetGroup
 metadata:
   name: example
@@ -6,5 +6,3 @@ spec:
   forProvider:
     subnetIdRefs:
     - name: example
-  providerConfigRef:
-    name: example

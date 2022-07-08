@@ -1,9 +1,0 @@
-apiVersion: opsworks.aws.upbound.io/v1alpha1
-kind: JavaAppLayer
-metadata:
-  name: example
-spec:
-  forProvider:
-    stackId: ${aws_opsworks_stack.main.id}
-  providerConfigRef:
-    name: example

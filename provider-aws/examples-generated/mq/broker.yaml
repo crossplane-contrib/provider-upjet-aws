@@ -1,4 +1,4 @@
-apiVersion: mq.aws.upbound.io/v1alpha2
+apiVersion: mq.aws.upbound.io/v1beta1
 kind: Broker
 metadata:
   name: example
@@ -19,5 +19,3 @@ spec:
         name: example-secret
         namespace: crossplane-system
       username: ExampleUser
-  providerConfigRef:
-    name: example

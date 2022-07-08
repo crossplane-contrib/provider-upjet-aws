@@ -1,9 +1,0 @@
-apiVersion: ses.aws.upbound.io/v1alpha1
-kind: DomainDKIM
-metadata:
-  name: example
-spec:
-  forProvider:
-    domain: example.com
-  providerConfigRef:
-    name: example

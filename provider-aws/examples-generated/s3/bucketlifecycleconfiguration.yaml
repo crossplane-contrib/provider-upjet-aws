@@ -1,4 +1,4 @@
-apiVersion: s3.aws.upbound.io/v1alpha1
+apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketLifecycleConfiguration
 metadata:
   name: example
@@ -8,5 +8,3 @@ spec:
     rule:
     - id: rule-1
       status: Enabled
-  providerConfigRef:
-    name: example

@@ -15,6 +15,10 @@ Copyright 2021 Upbound Inc.
 //go:generate bash -c "find . -type d -empty -delete"
 //go:generate bash -c "find ../internal/controller -iname 'zz_*' -delete"
 //go:generate bash -c "find ../internal/controller -type d -empty -delete"
+//go:generate rm -rf ../examples-generated
+
+// Scrape metadata from Terraform registry
+//go:generate go run github.com/upbound/upjet/cmd/scraper -n hashicorp/terraform-provider-aws -r ../.work/terraform-provider-aws -o ../config/provider-metadata.yaml
 
 // NOTE(muvaf): Some of Terraform AWS provider files have "!generate" build tag
 // that prevent us from using it for generator program.
@@ -34,4 +38,6 @@ import (
 	_ "sigs.k8s.io/controller-tools/cmd/controller-gen" //nolint:typecheck
 
 	_ "github.com/crossplane/crossplane-tools/cmd/angryjet" //nolint:typecheck
+
+	_ "github.com/upbound/upjet/cmd/scraper"
 )

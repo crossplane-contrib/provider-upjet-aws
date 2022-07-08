@@ -1,4 +1,4 @@
-apiVersion: cloudfront.aws.upbound.io/v1alpha1
+apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: RealtimeLogConfig
 metadata:
   name: example
@@ -14,5 +14,3 @@ spec:
     - c-ip
     name: example
     samplingRate: 75
-  providerConfigRef:
-    name: example

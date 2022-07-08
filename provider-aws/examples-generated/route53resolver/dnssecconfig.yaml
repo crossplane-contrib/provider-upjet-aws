@@ -1,9 +1,7 @@
-apiVersion: route53resolver.aws.upbound.io/v1alpha1
+apiVersion: route53resolver.aws.upbound.io/v1beta1
 kind: DNSSECConfig
 metadata:
   name: example
 spec:
   forProvider:
     resourceId: ${aws_vpc.example.id}
-  providerConfigRef:
-    name: example

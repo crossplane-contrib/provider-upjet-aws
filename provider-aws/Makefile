@@ -10,6 +10,8 @@ export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
 export TERRAFORM_PROVIDER_VERSION := 4.15.1
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-aws
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/hashicorp/terraform-provider-aws/releases/download/v4.15.1
+export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-aws
+export TERRAFORM_DOCS_PATH ?= website/docs/r
 
 PLATFORMS ?= linux_amd64 linux_arm64
 
@@ -167,6 +169,15 @@ $(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM)
 generate.init: $(TERRAFORM_PROVIDER_SCHEMA)
 
 .PHONY: $(TERRAFORM_PROVIDER_SCHEMA)
+
+# ====================================================================================
+# Extract Terraform registry metadata
+metadata:
+	@WORK_DIR=.work ../scripts/scrape_metadata.sh
+
+generate.init: metadata
+
+.PHONY: metadata
 
 # ====================================================================================
 # Special Targets

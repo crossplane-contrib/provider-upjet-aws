@@ -1,4 +1,4 @@
-apiVersion: ecr.aws.upbound.io/v1alpha1
+apiVersion: ecr.aws.upbound.io/v1beta1
 kind: ReplicationConfiguration
 metadata:
   name: example
@@ -9,5 +9,3 @@ spec:
       - destination:
         - region: ${data.aws_regions.example.names[0]}
           registryId: ${data.aws_caller_identity.current.account_id}
-  providerConfigRef:
-    name: example

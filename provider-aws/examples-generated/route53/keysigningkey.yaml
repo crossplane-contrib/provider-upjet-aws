@@ -1,4 +1,4 @@
-apiVersion: route53.aws.upbound.io/v1alpha2
+apiVersion: route53.aws.upbound.io/v1beta1
 kind: KeySigningKey
 metadata:
   name: example
@@ -8,6 +8,3 @@ spec:
       name: example
     keyManagementServiceArnRef:
       name: example
-    name: example
-  providerConfigRef:
-    name: example

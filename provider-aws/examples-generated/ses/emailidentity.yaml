@@ -1,9 +1,0 @@
-apiVersion: ses.aws.upbound.io/v1alpha1
-kind: EmailIdentity
-metadata:
-  name: example
-spec:
-  forProvider:
-    email: email@example.com
-  providerConfigRef:
-    name: example

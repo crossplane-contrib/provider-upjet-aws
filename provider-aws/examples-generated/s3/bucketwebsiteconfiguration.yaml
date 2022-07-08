@@ -1,4 +1,4 @@
-apiVersion: s3.aws.upbound.io/v1alpha1
+apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketWebsiteConfiguration
 metadata:
   name: example
@@ -14,5 +14,3 @@ spec:
       - keyPrefixEquals: docs/
       redirect:
       - replaceKeyPrefixWith: documents/
-  providerConfigRef:
-    name: example

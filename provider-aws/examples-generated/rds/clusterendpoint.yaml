@@ -1,14 +1,11 @@
-apiVersion: rds.aws.upbound.io/v1alpha1
+apiVersion: rds.aws.upbound.io/v1beta1
 kind: ClusterEndpoint
 metadata:
   name: example
 spec:
   forProvider:
-    clusterEndpointIdentifier: reader
     clusterIdentifier: ${aws_rds_cluster.default.id}
     customEndpointType: READER
     excludedMembers:
     - ${aws_rds_cluster_instance.test1.id}
     - ${aws_rds_cluster_instance.test2.id}
-  providerConfigRef:
-    name: example

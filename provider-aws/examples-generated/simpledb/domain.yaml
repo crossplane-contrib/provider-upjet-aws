@@ -1,9 +1,0 @@
-apiVersion: simpledb.aws.upbound.io/v1alpha1
-kind: Domain
-metadata:
-  name: example
-spec:
-  forProvider:
-    name: users
-  providerConfigRef:
-    name: example

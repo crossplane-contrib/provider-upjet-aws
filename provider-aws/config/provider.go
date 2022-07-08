@@ -39,6 +39,9 @@ import (
 var (
 	//go:embed schema.json
 	providerSchema string
+
+	//go:embed provider-metadata.yaml
+	providerMetadata []byte
 )
 
 var skipList = []string{
@@ -65,7 +68,7 @@ var skipList = []string{
 // GetProvider returns provider configuration
 func GetProvider() *config.Provider {
 	pc := config.NewProvider([]byte(providerSchema), "aws",
-		"github.com/upbound/official-providers/provider-aws", "",
+		"github.com/upbound/official-providers/provider-aws", providerMetadata,
 		config.WithShortName("aws"),
 		config.WithRootGroup("aws.upbound.io"),
 		config.WithIncludeList(ResourcesWithExternalNameConfig()),

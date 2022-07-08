@@ -1,4 +1,4 @@
-apiVersion: ecs.aws.upbound.io/v1alpha2
+apiVersion: ecs.aws.upbound.io/v1beta1
 kind: Service
 metadata:
   name: example
@@ -20,5 +20,3 @@ spec:
     - expression: attribute:ecs.availability-zone in [us-west-2a, us-west-2b]
       type: memberOf
     taskDefinition: ${aws_ecs_task_definition.mongo.arn}
-  providerConfigRef:
-    name: example

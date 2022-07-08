@@ -1,9 +1,0 @@
-apiVersion: worklink.aws.upbound.io/v1alpha1
-kind: Fleet
-metadata:
-  name: example
-spec:
-  forProvider:
-    name: terraform-example
-  providerConfigRef:
-    name: example

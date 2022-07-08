@@ -1,9 +1,0 @@
-apiVersion: dynamodb.aws.upbound.io/v1alpha1
-kind: ContributorInsights
-metadata:
-  name: example
-spec:
-  forProvider:
-    tableName: ExampleTableName
-  providerConfigRef:
-    name: example

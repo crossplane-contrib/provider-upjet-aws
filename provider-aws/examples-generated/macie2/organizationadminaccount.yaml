@@ -1,9 +1,0 @@
-apiVersion: macie2.aws.upbound.io/v1alpha1
-kind: OrganizationAdminAccount
-metadata:
-  name: example
-spec:
-  forProvider:
-    adminAccountId: ID OF THE ADMIN ACCOUNT
-  providerConfigRef:
-    name: example

@@ -1,4 +1,4 @@
-apiVersion: ec2.aws.upbound.io/v1alpha2
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayVPCAttachmentAccepter
 metadata:
   name: example
@@ -8,5 +8,3 @@ spec:
       Name: Example cross-account attachment
     transitGatewayAttachmentIdRef:
       name: example
-  providerConfigRef:
-    name: example

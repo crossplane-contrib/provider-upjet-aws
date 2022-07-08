@@ -1,4 +1,4 @@
-apiVersion: backup.aws.upbound.io/v1alpha1
+apiVersion: backup.aws.upbound.io/v1beta1
 kind: Vault
 metadata:
   name: example
@@ -6,6 +6,3 @@ spec:
   forProvider:
     kmsKeyArnRef:
       name: example
-    name: example_backup_vault
-  providerConfigRef:
-    name: example

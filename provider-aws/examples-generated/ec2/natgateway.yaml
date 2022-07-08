@@ -1,4 +1,4 @@
-apiVersion: ec2.aws.upbound.io/v1alpha1
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: NATGateway
 metadata:
   name: example
@@ -9,5 +9,3 @@ spec:
       name: example
     tags:
       Name: gw NAT
-  providerConfigRef:
-    name: example

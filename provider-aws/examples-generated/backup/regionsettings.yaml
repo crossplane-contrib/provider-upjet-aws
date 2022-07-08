@@ -1,4 +1,4 @@
-apiVersion: backup.aws.upbound.io/v1alpha1
+apiVersion: backup.aws.upbound.io/v1beta1
 kind: RegionSettings
 metadata:
   name: example
@@ -19,5 +19,3 @@ spec:
       RDS: true
       Storage Gateway: true
       VirtualMachine: true
-  providerConfigRef:
-    name: example

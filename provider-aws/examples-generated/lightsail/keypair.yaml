@@ -1,9 +1,0 @@
-apiVersion: lightsail.aws.upbound.io/v1alpha1
-kind: KeyPair
-metadata:
-  name: example
-spec:
-  forProvider:
-    name: lg_key_pair
-  providerConfigRef:
-    name: example

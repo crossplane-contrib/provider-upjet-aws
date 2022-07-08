@@ -1,9 +1,0 @@
-apiVersion: events.aws.upbound.io/v1alpha1
-kind: Bus
-metadata:
-  name: example
-spec:
-  forProvider:
-    name: chat-messages
-  providerConfigRef:
-    name: example

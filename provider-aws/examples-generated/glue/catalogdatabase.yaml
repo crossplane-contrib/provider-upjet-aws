@@ -1,9 +1,6 @@
-apiVersion: glue.aws.upbound.io/v1alpha1
+apiVersion: glue.aws.upbound.io/v1beta1
 kind: CatalogDatabase
 metadata:
   name: example
 spec:
-  forProvider:
-    name: MyCatalogDatabase
-  providerConfigRef:
-    name: example
+  forProvider: {}

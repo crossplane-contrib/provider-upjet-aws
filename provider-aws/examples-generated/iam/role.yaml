@@ -1,4 +1,4 @@
-apiVersion: iam.aws.upbound.io/v1alpha2
+apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   name: example
@@ -20,5 +20,3 @@ spec:
         })}
     tags:
       tag-key: tag-value
-  providerConfigRef:
-    name: example

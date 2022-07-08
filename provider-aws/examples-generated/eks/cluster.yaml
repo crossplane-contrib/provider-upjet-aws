@@ -1,4 +1,4 @@
-apiVersion: eks.aws.upbound.io/v1alpha2
+apiVersion: eks.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
   name: example
@@ -9,5 +9,3 @@ spec:
     vpcConfig:
     - subnetIdRefs:
       - name: example
-  providerConfigRef:
-    name: example

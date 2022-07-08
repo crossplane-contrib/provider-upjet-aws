@@ -1,4 +1,4 @@
-apiVersion: neptune.aws.upbound.io/v1alpha2
+apiVersion: neptune.aws.upbound.io/v1beta1
 kind: ClusterInstance
 metadata:
   name: example
@@ -10,5 +10,3 @@ spec:
     count: 2
     engine: neptune
     instanceClass: db.r4.large
-  providerConfigRef:
-    name: example

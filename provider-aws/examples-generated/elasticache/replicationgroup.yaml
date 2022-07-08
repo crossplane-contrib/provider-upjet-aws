@@ -1,4 +1,4 @@
-apiVersion: elasticache.aws.upbound.io/v1alpha2
+apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: ReplicationGroup
 metadata:
   name: example
@@ -13,5 +13,3 @@ spec:
     preferredCacheClusterAzs:
     - us-west-2a
     - us-west-2b
-  providerConfigRef:
-    name: example

@@ -1,4 +1,4 @@
-apiVersion: cloudfront.aws.upbound.io/v1alpha1
+apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: CachePolicy
 metadata:
   name: example
@@ -25,5 +25,3 @@ spec:
         queryStrings:
         - items:
           - example
-  providerConfigRef:
-    name: example

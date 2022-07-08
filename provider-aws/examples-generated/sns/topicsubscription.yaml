@@ -1,11 +1,11 @@
-apiVersion: sns.aws.upbound.io/v1alpha1
+apiVersion: sns.aws.upbound.io/v1beta1
 kind: TopicSubscription
 metadata:
   name: example
 spec:
   forProvider:
-    endpoint: arn:aws:sqs:us-west-2:432981146916:terraform-queue-too
+    endpointRef:
+      name: example
     protocol: sqs
-    topicArn: arn:aws:sns:us-west-2:432981146916:user-updates-topic
-  providerConfigRef:
-    name: example
+    topicArnRef:
+      name: example

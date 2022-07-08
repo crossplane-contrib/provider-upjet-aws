@@ -1,4 +1,4 @@
-apiVersion: autoscaling.aws.upbound.io/v1alpha2
+apiVersion: autoscaling.aws.upbound.io/v1beta1
 kind: Attachment
 metadata:
   name: example
@@ -7,5 +7,3 @@ spec:
     autoscalingGroupNameRef:
       name: example
     elb: ${aws_elb.bar.id}
-  providerConfigRef:
-    name: example

@@ -1,4 +1,4 @@
-apiVersion: route53resolver.aws.upbound.io/v1alpha1
+apiVersion: route53resolver.aws.upbound.io/v1beta1
 kind: Endpoint
 metadata:
   name: example
@@ -14,5 +14,3 @@ spec:
     - name: example
     tags:
       Environment: Prod
-  providerConfigRef:
-    name: example

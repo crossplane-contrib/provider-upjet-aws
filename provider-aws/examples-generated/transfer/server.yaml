@@ -1,4 +1,4 @@
-apiVersion: transfer.aws.upbound.io/v1alpha1
+apiVersion: transfer.aws.upbound.io/v1beta1
 kind: Server
 metadata:
   name: example
@@ -6,5 +6,3 @@ spec:
   forProvider:
     tags:
       Name: Example
-  providerConfigRef:
-    name: example

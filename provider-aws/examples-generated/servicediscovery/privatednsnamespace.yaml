@@ -1,4 +1,4 @@
-apiVersion: servicediscovery.aws.upbound.io/v1alpha1
+apiVersion: servicediscovery.aws.upbound.io/v1beta1
 kind: PrivateDNSNamespace
 metadata:
   name: example
@@ -6,6 +6,5 @@ spec:
   forProvider:
     description: example
     name: hoge.example.local
-    vpc: ${aws_vpc.example.id}
-  providerConfigRef:
-    name: example
+    vpcIdRef:
+      name: example

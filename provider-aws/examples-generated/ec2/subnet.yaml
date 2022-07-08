@@ -1,4 +1,4 @@
-apiVersion: ec2.aws.upbound.io/v1alpha2
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   name: example
@@ -9,5 +9,3 @@ spec:
       Name: Main
     vpcIdRef:
       name: example
-  providerConfigRef:
-    name: example

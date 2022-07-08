@@ -1,8 +1,0 @@
-apiVersion: fms.aws.upbound.io/v1alpha1
-kind: AdminAccount
-metadata:
-  name: example
-spec:
-  forProvider: {}
-  providerConfigRef:
-    name: example

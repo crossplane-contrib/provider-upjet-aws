@@ -1,10 +1,9 @@
-apiVersion: resourcegroups.aws.upbound.io/v1alpha1
+apiVersion: resourcegroups.aws.upbound.io/v1beta1
 kind: Group
 metadata:
   name: example
 spec:
   forProvider:
-    name: test-group
     resourceQuery:
     - query: |
         {
@@ -18,5 +17,3 @@ spec:
             }
           ]
         }
-  providerConfigRef:
-    name: example

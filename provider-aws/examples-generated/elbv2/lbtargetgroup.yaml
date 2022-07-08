@@ -1,4 +1,4 @@
-apiVersion: elbv2.aws.upbound.io/v1alpha2
+apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBTargetGroup
 metadata:
   name: example
@@ -9,5 +9,3 @@ spec:
     protocol: HTTP
     vpcIdRef:
       name: example
-  providerConfigRef:
-    name: example

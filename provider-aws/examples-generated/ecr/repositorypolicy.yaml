@@ -1,4 +1,4 @@
-apiVersion: ecr.aws.upbound.io/v1alpha1
+apiVersion: ecr.aws.upbound.io/v1beta1
 kind: RepositoryPolicy
 metadata:
   name: example
@@ -32,5 +32,3 @@ spec:
           ]
       }
     repository: ${aws_ecr_repository.foo.name}
-  providerConfigRef:
-    name: example

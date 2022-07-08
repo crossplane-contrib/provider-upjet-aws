@@ -1,4 +1,4 @@
-apiVersion: s3.aws.upbound.io/v1alpha1
+apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketIntelligentTieringConfiguration
 metadata:
   name: example
@@ -11,5 +11,3 @@ spec:
       days: 180
     - accessTier: ARCHIVE_ACCESS
       days: 125
-  providerConfigRef:
-    name: example

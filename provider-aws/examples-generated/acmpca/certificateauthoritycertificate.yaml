@@ -1,11 +1,16 @@
-apiVersion: acmpca.aws.upbound.io/v1alpha1
+apiVersion: acmpca.aws.upbound.io/v1beta1
 kind: CertificateAuthorityCertificate
 metadata:
   name: example
 spec:
   forProvider:
-    certificate: ${aws_acmpca_certificate.example.certificate}
-    certificateAuthorityArn: ${aws_acmpca_certificate_authority.example.arn}
-    certificateChain: ${aws_acmpca_certificate.example.certificate_chain}
-  providerConfigRef:
-    name: example
+    certificateAuthorityArnRef:
+      name: example
+    certificateChainSecretRef:
+      key: attribute.certificate_chain
+      name: example-acmpca-certificate
+      namespace: crossplane-system
+    certificateSecretRef:
+      key: attribute.certificate
+      name: example-acmpca-certificate
+      namespace: crossplane-system

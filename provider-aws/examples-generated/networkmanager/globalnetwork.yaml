@@ -1,9 +1,0 @@
-apiVersion: networkmanager.aws.upbound.io/v1alpha1
-kind: GlobalNetwork
-metadata:
-  name: example
-spec:
-  forProvider:
-    description: example
-  providerConfigRef:
-    name: example

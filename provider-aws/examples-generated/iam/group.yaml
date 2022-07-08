@@ -1,9 +1,7 @@
-apiVersion: iam.aws.upbound.io/v1alpha2
+apiVersion: iam.aws.upbound.io/v1beta1
 kind: Group
 metadata:
   name: example
 spec:
   forProvider:
     path: /users/
-  providerConfigRef:
-    name: example

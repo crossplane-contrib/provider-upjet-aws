@@ -1,4 +1,4 @@
-apiVersion: route53.aws.upbound.io/v1alpha2
+apiVersion: route53.aws.upbound.io/v1beta1
 kind: HealthCheck
 metadata:
   name: example
@@ -12,5 +12,3 @@ spec:
     tags:
       Name: tf-test-health-check
     type: HTTP
-  providerConfigRef:
-    name: example

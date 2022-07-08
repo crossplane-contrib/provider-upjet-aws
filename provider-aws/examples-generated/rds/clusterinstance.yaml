@@ -1,4 +1,4 @@
-apiVersion: rds.aws.upbound.io/v1alpha1
+apiVersion: rds.aws.upbound.io/v1beta1
 kind: ClusterInstance
 metadata:
   name: example
@@ -8,7 +8,4 @@ spec:
     count: 2
     engine: aurora-mysql
     engineVersion: ${aws_rds_cluster.default.engine_version}
-    identifier: aurora-cluster-demo-${count.index}
     instanceClass: db.r4.large
-  providerConfigRef:
-    name: example

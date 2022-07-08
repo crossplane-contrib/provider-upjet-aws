@@ -1,4 +1,4 @@
-apiVersion: cloudfront.aws.upbound.io/v1alpha1
+apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: FieldLevelEncryptionConfig
 metadata:
   name: example
@@ -17,5 +17,3 @@ spec:
       - items:
         - profileId: ${aws_cloudfront_field_level_encryption_profile.test.id}
           queryArg: Arg1
-  providerConfigRef:
-    name: example

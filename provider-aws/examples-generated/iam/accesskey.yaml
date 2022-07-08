@@ -1,4 +1,4 @@
-apiVersion: iam.aws.upbound.io/v1alpha2
+apiVersion: iam.aws.upbound.io/v1beta1
 kind: AccessKey
 metadata:
   name: example
@@ -7,5 +7,3 @@ spec:
     pgpKey: keybase:some_person_that_exists
     userRef:
       name: example
-  providerConfigRef:
-    name: example

@@ -1,4 +1,4 @@
-apiVersion: s3.aws.upbound.io/v1alpha1
+apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketMetric
 metadata:
   name: example
@@ -6,5 +6,3 @@ spec:
   forProvider:
     bucket: ${aws_s3_bucket.example.bucket}
     name: EntireBucket
-  providerConfigRef:
-    name: example

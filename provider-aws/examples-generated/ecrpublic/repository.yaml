@@ -1,4 +1,4 @@
-apiVersion: ecrpublic.aws.upbound.io/v1alpha2
+apiVersion: ecrpublic.aws.upbound.io/v1beta1
 kind: Repository
 metadata:
   name: example
@@ -14,5 +14,3 @@ spec:
       - Linux
       usageText: Usage Text
     provider: ${aws.us_east_1}
-  providerConfigRef:
-    name: example
