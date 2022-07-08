@@ -5,8 +5,8 @@ metadata:
 spec:
   credentials:
     source: WebIdentity
-    assumeRoleWithWebIdentity:
+    webIdentity:
       roleARN: <roleARN-for-web-identity>
-  assumeRoles:
+  assumeRoleChain:
     - roleARN: <roleARN-1>
     - roleARN: <roleARN-2>

@@ -110,7 +110,7 @@ func GetAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*a
 		if err != nil {
 			return nil, errors.Wrap(err, "cannot get credentials")
 		}
-		cfg, err = UseProviderSecret(ctx, &pc.Spec, data, DefaultSection, region)
+		cfg, err = UseProviderSecret(ctx, data, DefaultSection, region)
 		if err != nil {
 			return nil, errors.Wrap(err, errAWSConfig)
 		}
@@ -227,7 +227,7 @@ func CredentialsIDSecret(data []byte, profile string) (aws.Credentials, error) {
 type AuthMethod func(context.Context, []byte, string, string) (*aws.Config, error)
 
 // UseProviderSecret - AWS configuration which can be used to issue requests against AWS API
-func UseProviderSecret(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, data []byte, profile, region string) (*aws.Config, error) {
+func UseProviderSecret(ctx context.Context, data []byte, profile, region string) (*aws.Config, error) {
 	creds, err := CredentialsIDSecret(data, profile)
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot parse credentials secret")
@@ -251,7 +251,7 @@ func UseProviderSecret(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, dat
 // AssumeRoleWithWebIdentity & AssumeRoles.
 func GetRoleChainConfig(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, cfg *aws.Config) (*aws.Config, error) {
 	pCfg := cfg
-	for _, aro := range pcs.AssumeRoles {
+	for _, aro := range pcs.AssumeRoleChain {
 		stsAssume := stscreds.NewAssumeRoleProvider(
 			sts.NewFromConfig(*pCfg),
 			aws.ToString(aro.RoleARN),
@@ -274,8 +274,8 @@ func GetRoleChainConfig(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, cf
 // GetAssumeRoleWithWebIdentityConfig returns an aws.Config capable of doing
 // AssumeRoleWithWebIdentity.
 func GetAssumeRoleWithWebIdentityConfig(ctx context.Context, cfg *aws.Config, pcs *v1beta1.ProviderConfigSpec) (*aws.Config, error) {
-	if pcs.Credentials.AssumeRoleWithWebIdentity == nil {
-		return cfg, nil
+	if pcs.Credentials.WebIdentity == nil {
+		return nil, errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
 	}
 	stsclient := sts.NewFromConfig(*cfg)
 	awsConfig, err := config.LoadDefaultConfig(
@@ -285,9 +285,9 @@ func GetAssumeRoleWithWebIdentityConfig(ctx context.Context, cfg *aws.Config, pc
 		config.WithCredentialsProvider(aws.NewCredentialsCache(
 			stscreds.NewWebIdentityRoleProvider(
 				stsclient,
-				aws.ToString(pcs.Credentials.AssumeRoleWithWebIdentity.RoleARN),
+				aws.ToString(pcs.Credentials.WebIdentity.RoleARN),
 				stscreds.IdentityTokenFile(os.Getenv(envWebIdentityTokenFile)),
-				SetWebIdentityRoleOptions(*pcs.Credentials.AssumeRoleWithWebIdentity),
+				SetWebIdentityRoleOptions(*pcs.Credentials.WebIdentity),
 			)),
 		),
 	)

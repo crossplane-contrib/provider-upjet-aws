@@ -3,7 +3,7 @@ kind: ProviderConfig
 metadata:
   name: user-creds-with-assume-role
 spec:
-  assumeRoles:
+  assumeRoleChain:
     - roleARN: <roleARN>
   credentials:
     source: Secret

@@ -14,8 +14,8 @@ type ProviderConfigSpec struct {
 	// Credentials required to authenticate to this provider.
 	Credentials ProviderCredentials `json:"credentials"`
 
-	// AssumeRoles defines the options for assuming an IAM role
-	AssumeRoles []AssumeRoleOptions `json:"assumeRoles,omitempty"`
+	// AssumeRoleChain defines the options for assuming an IAM role
+	AssumeRoleChain []AssumeRoleOptions `json:"assumeRoleChain,omitempty"`
 
 	// Endpoint is where you can override the default endpoint configuration
 	// of AWS calls made by the provider.
@@ -175,8 +175,8 @@ type ProviderCredentials struct {
 	// +kubebuilder:validation:Enum=None;Secret;IRSA;WebIdentity
 	Source xpv1.CredentialsSource `json:"source"`
 
-	// AssumeRoleWithWebIdentity defines the options for assuming an IAM role with a Web Identity
-	AssumeRoleWithWebIdentity *AssumeRoleWithWebIdentityOptions `json:"assumeRoleWithWebIdentity,omitempty"`
+	// WebIdentity defines the options for assuming an IAM role with a Web Identity
+	WebIdentity *AssumeRoleWithWebIdentityOptions `json:"webIdentity,omitempty"`
 
 	xpv1.CommonCredentialSelectors `json:",inline"`
 }
