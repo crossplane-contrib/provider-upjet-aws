@@ -7,20 +7,11 @@ package clients
 import (
 	"context"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
-	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
-	xpabeta1 "github.com/crossplane/provider-aws/apis/v1beta1"
-	xpawsclient "github.com/crossplane/provider-aws/pkg/clients"
 	"github.com/pkg/errors"
-	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/upbound/upjet/pkg/terraform"
-
-	"github.com/upbound/official-providers/provider-aws/apis/v1beta1"
 )
 
 const (
@@ -43,62 +34,10 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			},
 		}
 
-		if mg.GetProviderConfigReference() == nil {
-			return ps, errors.New("no providerConfigRef provided")
-		}
-		pc := &v1beta1.ProviderConfig{}
-		if err := client.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
-			return ps, errors.Wrap(err, "cannot get referenced Provider")
-		}
-
-		region, err := getRegion(mg)
+		awsConf, err := GetAWSConfig(ctx, client, mg)
 		if err != nil {
-			return ps, errors.Wrap(err, "cannot get region")
+			return ps, errors.Wrap(err, "cannot get AWS config")
 		}
-
-		t := resource.NewProviderConfigUsageTracker(client, &v1beta1.ProviderConfigUsage{})
-		if err := t.Track(ctx, mg); err != nil {
-			return ps, errors.Wrap(err, "cannot track ProviderConfig usage")
-		}
-
-		var cfg *aws.Config
-		var roleARN *string
-		if pc.Spec.AssumeRole != nil {
-			roleARN = pc.Spec.AssumeRole.RoleARN
-		}
-		xpapc := &xpabeta1.ProviderConfig{
-			Spec: xpabeta1.ProviderConfigSpec{
-				Credentials:   xpabeta1.ProviderCredentials(pc.Spec.Credentials),
-				AssumeRoleARN: roleARN,
-			},
-		}
-		switch s := pc.Spec.Credentials.Source; s { //nolint:exhaustive
-		case xpv1.CredentialsSourceInjectedIdentity:
-			if roleARN != nil {
-				if cfg, err = xpawsclient.UsePodServiceAccountAssumeRole(ctx, []byte{}, xpawsclient.DefaultSection, region, xpapc); err != nil {
-					return ps, errors.Wrap(err, "failed to use pod service account assumeRoleARN")
-				}
-			} else {
-				if cfg, err = xpawsclient.UsePodServiceAccount(ctx, []byte{}, xpawsclient.DefaultSection, region); err != nil {
-					return ps, errors.Wrap(err, "failed to use pod service account")
-				}
-			}
-		default:
-			data, err := resource.CommonCredentialExtractor(ctx, s, client, pc.Spec.Credentials.CommonCredentialSelectors)
-			if err != nil {
-				return ps, errors.Wrap(err, "cannot get credentials")
-			}
-			if roleARN != nil {
-				if cfg, err = xpawsclient.UseProviderSecretAssumeRole(ctx, data, xpawsclient.DefaultSection, region, xpapc); err != nil {
-					return ps, errors.Wrap(err, "failed to use provider secret with assumeRoleARN")
-				}
-			} else {
-				if cfg, err = xpawsclient.UseProviderSecret(ctx, data, xpawsclient.DefaultSection, region); err != nil {
-					return ps, errors.Wrap(err, "failed to use provider secret")
-				}
-			}
-		}
-		awsConf := xpawsclient.SetResolver(xpapc, cfg)
 		creds, err := awsConf.Credentials.Retrieve(ctx)
 
 		if err != nil {
@@ -125,18 +64,4 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		ps.Configuration = tfCfg
 		return ps, err
 	}
-}
-
-func getRegion(obj runtime.Object) (string, error) {
-	fromMap, err := runtime.DefaultUnstructuredConverter.ToUnstructured(obj)
-	if err != nil {
-		return "", errors.Wrap(err, "cannot convert to unstructured")
-	}
-	r, err := fieldpath.Pave(fromMap).GetString("spec.forProvider.region")
-	if fieldpath.IsNotFound(err) {
-		// Region is not required for all resources, e.g. resource in "iam"
-		// group.
-		return "", nil
-	}
-	return r, err
 }

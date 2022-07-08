@@ -1,11 +1,10 @@
----
 apiVersion: aws.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
-  name: aws-provider-account-b
+  name: user-creds-with-assume-role
 spec:
-  assumeRole:
-    roleARN: "arn:aws:iam::999999999999:role/account_b"
+  assumeRoleChain:
+    - roleARN: <roleARN>
   credentials:
     source: Secret
     secretRef:
