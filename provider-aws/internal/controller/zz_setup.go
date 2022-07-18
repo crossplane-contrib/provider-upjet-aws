@@ -148,7 +148,13 @@ import (
 	applicationkinesisanalyticsv2 "github.com/upbound/official-providers/provider-aws/internal/controller/kinesisanalyticsv2/application"
 	applicationsnapshot "github.com/upbound/official-providers/provider-aws/internal/controller/kinesisanalyticsv2/applicationsnapshot"
 	streamkinesisvideo "github.com/upbound/official-providers/provider-aws/internal/controller/kinesisvideo/stream"
+	aliaskms "github.com/upbound/official-providers/provider-aws/internal/controller/kms/alias"
+	ciphertext "github.com/upbound/official-providers/provider-aws/internal/controller/kms/ciphertext"
+	externalkey "github.com/upbound/official-providers/provider-aws/internal/controller/kms/externalkey"
+	grant "github.com/upbound/official-providers/provider-aws/internal/controller/kms/grant"
 	key "github.com/upbound/official-providers/provider-aws/internal/controller/kms/key"
+	replicaexternalkey "github.com/upbound/official-providers/provider-aws/internal/controller/kms/replicaexternalkey"
+	replicakey "github.com/upbound/official-providers/provider-aws/internal/controller/kms/replicakey"
 	datalakesettings "github.com/upbound/official-providers/provider-aws/internal/controller/lakeformation/datalakesettings"
 	permissions "github.com/upbound/official-providers/provider-aws/internal/controller/lakeformation/permissions"
 	resource "github.com/upbound/official-providers/provider-aws/internal/controller/lakeformation/resource"
@@ -384,7 +390,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		applicationkinesisanalyticsv2.Setup,
 		applicationsnapshot.Setup,
 		streamkinesisvideo.Setup,
+		aliaskms.Setup,
+		ciphertext.Setup,
+		externalkey.Setup,
+		grant.Setup,
 		key.Setup,
+		replicaexternalkey.Setup,
+		replicakey.Setup,
 		datalakesettings.Setup,
 		permissions.Setup,
 		resource.Setup,

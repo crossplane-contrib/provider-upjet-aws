@@ -261,6 +261,18 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
 	"aws_kms_key": config.IdentifierFromProvider,
+	// KMS aliases can be imported using the name
+	"aws_kms_alias": config.NameAsIdentifier,
+	// No import
+	"aws_kms_ciphertext": config.IdentifierFromProvider,
+	// KMS External Keys can be imported using the id
+	"aws_kms_external_key": config.IdentifierFromProvider,
+	// KMS Grants can be imported using the Key ID and Grant ID separated by a colon (:)
+	"aws_kms_grant": config.IdentifierFromProvider,
+	// KMS multi-Region replica keys can be imported using the id
+	"aws_kms_replica_external_key": config.IdentifierFromProvider,
+	// KMS multi-Region replica keys can be imported using the id
+	"aws_kms_replica_key": config.IdentifierFromProvider,
 
 	// mq
 	//
