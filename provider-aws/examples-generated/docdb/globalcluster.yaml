@@ -7,3 +7,4 @@ spec:
     engine: docdb
     engineVersion: 4.0.0
     globalClusterIdentifier: global-test
+    region: us-west-1

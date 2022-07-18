@@ -13,6 +13,7 @@ spec:
     internal: false
     loadBalancerType: application
     name: test-lb-tf
+    region: us-west-1
     securityGroupRefs:
     - name: example
     subnetRefs:

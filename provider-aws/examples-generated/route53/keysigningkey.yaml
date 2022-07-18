@@ -8,3 +8,4 @@ spec:
       name: example
     keyManagementServiceArnRef:
       name: example
+    region: us-west-1

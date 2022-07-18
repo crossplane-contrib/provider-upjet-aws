@@ -8,6 +8,7 @@ spec:
       name: example
     podExecutionRoleArnRef:
       name: example
+    region: us-west-1
     selector:
     - namespace: example
     subnetIdRefs:

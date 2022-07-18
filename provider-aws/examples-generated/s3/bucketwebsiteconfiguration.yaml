@@ -1,14 +1,17 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketWebsiteConfiguration
 metadata:
+  annotations:
+    upjet.upbound.io/test: "true"
   name: example
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.example.bucket}
+    bucket: ezgi-bucket-2
     errorDocument:
     - key: error.html
     indexDocument:
     - suffix: index.html
+    region: us-west-1
     routingRule:
     - condition:
       - keyPrefixEquals: docs/

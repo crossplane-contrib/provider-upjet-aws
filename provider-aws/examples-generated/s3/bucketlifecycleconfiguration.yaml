@@ -5,6 +5,7 @@ metadata:
 spec:
   forProvider:
     bucket: ${aws_s3_bucket.bucket.id}
+    region: us-west-1
     rule:
     - id: rule-1
       status: Enabled

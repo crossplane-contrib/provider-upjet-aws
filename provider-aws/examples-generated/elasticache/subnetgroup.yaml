@@ -4,5 +4,6 @@ metadata:
   name: example
 spec:
   forProvider:
+    region: us-west-1
     subnetIdRefs:
     - name: example

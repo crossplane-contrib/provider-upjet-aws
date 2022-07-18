@@ -6,3 +6,4 @@ spec:
   forProvider:
     databaseNameRef:
       name: example
+    region: us-west-1

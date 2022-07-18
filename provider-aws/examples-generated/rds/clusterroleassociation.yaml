@@ -6,5 +6,6 @@ spec:
   forProvider:
     dbClusterIdentifier: ${aws_rds_cluster.example.id}
     featureName: S3_INTEGRATION
+    region: us-west-1
     roleArnRef:
       name: example

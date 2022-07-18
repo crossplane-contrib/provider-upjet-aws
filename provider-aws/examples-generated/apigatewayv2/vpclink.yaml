@@ -5,6 +5,7 @@ metadata:
 spec:
   forProvider:
     name: example
+    region: us-west-1
     securityGroupIdRefs:
     - name: example
     subnetIdRefs:

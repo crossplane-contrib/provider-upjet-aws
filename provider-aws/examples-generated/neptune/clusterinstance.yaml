@@ -10,3 +10,4 @@ spec:
     count: 2
     engine: neptune
     instanceClass: db.r4.large
+    region: us-west-1

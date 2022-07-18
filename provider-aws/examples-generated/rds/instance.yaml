@@ -14,5 +14,6 @@ spec:
       key: example-key
       name: example-secret
       namespace: crossplane-system
+    region: us-west-1
     skipFinalSnapshot: true
     username: foo

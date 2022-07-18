@@ -19,5 +19,6 @@ spec:
           deadLetterTargetArn = aws_sqs_queue.terraform_queue_deadletter.arn
           maxReceiveCount     = 4
         })}
+    region: us-west-1
     tags:
       Environment: production

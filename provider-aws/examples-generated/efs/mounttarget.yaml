@@ -6,5 +6,6 @@ spec:
   forProvider:
     fileSystemIdRef:
       name: example
+    region: us-west-1
     subnetIdRef:
       name: example

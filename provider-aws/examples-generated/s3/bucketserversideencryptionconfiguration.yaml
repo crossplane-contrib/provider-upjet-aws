@@ -5,6 +5,7 @@ metadata:
 spec:
   forProvider:
     bucket: ${aws_s3_bucket.mybucket.bucket}
+    region: us-west-1
     rule:
     - applyServerSideEncryptionByDefault:
       - kmsMasterKeyId: ${aws_kms_key.mykey.arn}

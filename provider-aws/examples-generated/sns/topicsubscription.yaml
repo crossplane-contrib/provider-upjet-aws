@@ -7,5 +7,6 @@ spec:
     endpointRef:
       name: example
     protocol: sqs
+    region: us-west-1
     topicArnRef:
       name: example

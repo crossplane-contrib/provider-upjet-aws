@@ -7,5 +7,6 @@ spec:
     peerOwnerId: ${var.peer_owner_id}
     peerVpcidRef:
       name: example
+    region: us-west-1
     vpcIdRef:
       name: example

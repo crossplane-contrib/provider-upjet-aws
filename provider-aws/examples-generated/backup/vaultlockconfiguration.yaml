@@ -8,3 +8,4 @@ spec:
     changeableForDays: 3
     maxRetentionDays: 1200
     minRetentionDays: 7
+    region: us-west-1

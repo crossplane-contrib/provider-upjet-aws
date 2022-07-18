@@ -3,4 +3,5 @@ kind: CatalogDatabase
 metadata:
   name: example
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1

@@ -5,3 +5,4 @@ metadata:
 spec:
   forProvider:
     referenceName: DynDNS
+    region: us-west-1

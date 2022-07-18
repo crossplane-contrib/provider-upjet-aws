@@ -17,6 +17,7 @@ spec:
     - notification
     - configuration change
     - read replica
+    region: us-west-1
     snsTopicArn: ${aws_sns_topic.default.arn}
     sourceIds:
     - ${aws_neptune_cluster_instance.example.id}

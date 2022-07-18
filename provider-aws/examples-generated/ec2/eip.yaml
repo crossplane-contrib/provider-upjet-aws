@@ -6,4 +6,5 @@ spec:
   forProvider:
     instanceRef:
       name: example
+    region: us-west-1
     vpc: true

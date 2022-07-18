@@ -9,3 +9,4 @@ spec:
     engine: aurora-mysql
     engineVersion: ${aws_rds_cluster.default.engine_version}
     instanceClass: db.r4.large
+    region: us-west-1

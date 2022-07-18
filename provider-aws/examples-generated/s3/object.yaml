@@ -7,4 +7,5 @@ spec:
     bucket: your_bucket_name
     etag: ${filemd5("path/to/file")}
     key: new_object_key
+    region: us-west-1
     source: path/to/file

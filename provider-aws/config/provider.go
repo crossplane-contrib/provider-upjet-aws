@@ -85,7 +85,7 @@ func GetProvider() *config.Provider {
 			ExternalNameConfigurations(),
 		),
 	)
-
+	setDefaultRegion(pc)
 	for _, configure := range []func(provider *config.Provider){
 		acm.Configure,
 		acmpca.Configure,
@@ -117,6 +117,16 @@ func GetProvider() *config.Provider {
 
 	pc.ConfigureResources()
 	return pc
+}
+
+func setDefaultRegion(provider *config.Provider) {
+	for _, r := range provider.Resources {
+		if r.ShortGroup != "iam" && r.MetaResource != nil {
+			if err := r.MetaResource.Examples[0].SetPathValue("region", "us-west-1"); err != nil {
+				panic(err)
+			}
+		}
+	}
 }
 
 // ResourcesWithExternalNameConfig returns the list of resources that have external

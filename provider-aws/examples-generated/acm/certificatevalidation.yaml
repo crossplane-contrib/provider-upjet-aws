@@ -6,4 +6,5 @@ spec:
   forProvider:
     certificateArnRef:
       name: example
+    region: us-west-1
     validationRecordFqdns: '${[for record in aws_route53_record.example : record.fqdn]}'

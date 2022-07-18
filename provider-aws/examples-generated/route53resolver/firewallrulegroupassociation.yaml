@@ -7,5 +7,6 @@ spec:
     firewallRuleGroupId: ${aws_route53_resolver_firewall_rule_group.example.id}
     name: example
     priority: 100
+    region: us-west-1
     vpcIdRef:
       name: example

@@ -8,5 +8,6 @@ spec:
     - BACKUP_JOB_STARTED
     - RESTORE_JOB_COMPLETED
     backupVaultName: example_backup_vault
+    region: us-west-1
     snsTopicArnRef:
       name: example

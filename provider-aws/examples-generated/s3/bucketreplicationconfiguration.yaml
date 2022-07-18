@@ -6,6 +6,7 @@ spec:
   forProvider:
     bucket: ${aws_s3_bucket.source.id}
     provider: ${aws.central}
+    region: us-west-1
     role: ${aws_iam_role.replication.arn}
     rule:
     - destination:

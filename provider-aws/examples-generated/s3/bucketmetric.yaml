@@ -6,3 +6,4 @@ spec:
   forProvider:
     bucket: ${aws_s3_bucket.example.bucket}
     name: EntireBucket
+    region: us-west-1

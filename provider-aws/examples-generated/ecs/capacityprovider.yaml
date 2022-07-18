@@ -13,3 +13,4 @@ spec:
         status: ENABLED
         targetCapacity: 10
       managedTerminationProtection: ENABLED
+    region: us-west-1

@@ -5,6 +5,7 @@ metadata:
 spec:
   forProvider:
     destinationCidrBlock: 0.0.0.0/0
+    region: us-west-1
     transitGatewayAttachmentIdRef:
       name: example
     transitGatewayRouteTableIdRef:

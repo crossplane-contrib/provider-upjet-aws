@@ -46,6 +46,7 @@ spec:
     placement:
     - availabilityZone: us-west-2a
     ramDiskId: test
+    region: us-west-1
     tagSpecifications:
     - resourceType: instance
       tags:

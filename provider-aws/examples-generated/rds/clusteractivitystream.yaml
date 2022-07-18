@@ -7,4 +7,5 @@ spec:
     kmsKeyIdRef:
       name: example
     mode: async
+    region: us-west-1
     resourceArn: ${aws_rds_cluster.default.arn}

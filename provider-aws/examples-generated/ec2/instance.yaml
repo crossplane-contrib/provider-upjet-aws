@@ -6,5 +6,6 @@ spec:
   forProvider:
     ami: ${data.aws_ami.ubuntu.id}
     instanceType: t3.micro
+    region: us-west-1
     tags:
       Name: HelloWorld

@@ -8,3 +8,4 @@ spec:
     items:
     - ${aws_cloudfront_public_key.example.id}
     name: example-key-group
+    region: us-west-1

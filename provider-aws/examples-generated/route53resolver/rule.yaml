@@ -5,4 +5,5 @@ metadata:
 spec:
   forProvider:
     domainName: subdomain.example.com
+    region: us-west-1
     ruleType: SYSTEM

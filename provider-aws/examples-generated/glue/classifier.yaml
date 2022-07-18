@@ -13,3 +13,4 @@ spec:
       - example1
       - example2
       quoteSymbol: ''''
+    region: us-west-1

@@ -5,5 +5,6 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 172.2.0.0/16
+    region: us-west-1
     vpcIdRef:
       name: example

@@ -11,6 +11,7 @@ spec:
     engineType: ActiveMQ
     engineVersion: 5.15.9
     hostInstanceType: mq.t2.micro
+    region: us-west-1
     securityGroups:
     - ${aws_security_group.test.id}
     user:

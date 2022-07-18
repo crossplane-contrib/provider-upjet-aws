@@ -6,3 +6,4 @@ spec:
   forProvider:
     hostedZoneIdRef:
       name: example
+    region: us-west-1

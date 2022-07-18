@@ -4,6 +4,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    region: us-west-1
     resourceTypeManagementPreference:
       DynamoDB: true
       EFS: true

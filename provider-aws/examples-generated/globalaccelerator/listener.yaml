@@ -11,3 +11,4 @@ spec:
     - fromPort: 80
       toPort: 80
     protocol: TCP
+    region: us-west-1

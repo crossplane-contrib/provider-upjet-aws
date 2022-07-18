@@ -5,3 +5,4 @@ metadata:
 spec:
   forProvider:
     dbInstanceIdentifier: ${aws_db_instance.bar.id}
+    region: us-west-1
