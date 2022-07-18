@@ -625,6 +625,37 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_licensemanager_association": FormattedIdentifierFromProvider(",", "resource_arn", "license_configuration_arn"),
 	// License configurations can be imported using the id
 	"aws_licensemanager_license_configuration": config.IdentifierFromProvider,
+
+	// lambda
+	//
+	// Lambda Function Aliases can be imported using the function_name/alias
+	"aws_lambda_alias": config.IdentifierFromProvider,
+	// Code Signing Configs can be imported using their ARN
+	"aws_lambda_code_signing_config": config.IdentifierFromProvider,
+	// Lambda event source mappings can be imported using the UUID (event source mapping identifier)
+	"aws_lambda_event_source_mapping": config.IdentifierFromProvider,
+	// Lambda Functions can be imported using the function_name
+	"aws_lambda_function": ParameterAsExternalName("function_name"),
+	// Lambda Function Event Invoke Configs can be imported using the
+	// fully qualified Function name or Amazon Resource Name (ARN)
+	"aws_lambda_function_event_invoke_config": config.IdentifierFromProvider,
+	// Lambda function URLs can be imported using the function_name or function_name/qualifier
+	"aws_lambda_function_url": FormattedIdentifierFromProvider("", "function_name"),
+	// No import
+	"aws_lambda_invocation": config.IdentifierFromProvider,
+	// Lambda Layers can be imported using arn
+	"aws_lambda_layer_version": config.IdentifierFromProvider,
+	// Lambda Layer Permissions can be imported using layer_name and version_number, separated by a comma (,)
+	"aws_lambda_layer_version_permission": config.IdentifierFromProvider,
+	// Lambda permission statements can be imported using function_name/statement_id, with an optional qualifier
+	"aws_lambda_permission": config.IdentifierFromProvider,
+	// Lambda Provisioned Concurrency Configs can be imported using the function_name and qualifier separated by a colon (:)
+	"aws_lambda_provisioned_concurrency_config": config.IdentifierFromProvider,
+
+	// signer
+	//
+	// Signer signing profiles can be imported using the name
+	"aws_signer_signing_profile": config.NameAsIdentifier,
 }
 
 func iamUserGroupMembership() config.ExternalName {

@@ -1,0 +1,15 @@
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: FunctionEventInvokeConfig
+metadata:
+  name: example
+spec:
+  forProvider:
+    destinationConfig:
+    - onFailure:
+      - destinationRef:
+          name: example
+      onSuccess:
+      - destinationRef:
+          name: example
+    functionName: ${aws_lambda_alias.example.function_name}
+    region: us-west-1

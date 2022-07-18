@@ -1,0 +1,15 @@
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Permission
+metadata:
+  name: example
+spec:
+  forProvider:
+    action: lambda:InvokeFunction
+    functionNameRef:
+      name: example
+    principal: events.amazonaws.com
+    qualifierRef:
+      name: example
+    region: us-west-1
+    sourceArn: arn:aws:events:eu-west-1:111122223333:rule/RunDaily
+    statementId: AllowExecutionFromCloudWatch

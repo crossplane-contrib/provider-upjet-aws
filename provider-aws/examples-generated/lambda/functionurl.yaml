@@ -1,0 +1,10 @@
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: FunctionURL
+metadata:
+  name: example
+spec:
+  forProvider:
+    authorizationType: NONE
+    functionNameRef:
+      name: example
+    region: us-west-1

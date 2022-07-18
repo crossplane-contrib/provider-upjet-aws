@@ -1,0 +1,14 @@
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Invocation
+metadata:
+  name: example
+spec:
+  forProvider:
+    functionNameRef:
+      name: example
+    input: |-
+      ${jsonencode({
+          key1 = "value1"
+          key2 = "value2"
+        })}
+    region: us-west-1

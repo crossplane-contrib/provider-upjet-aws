@@ -1,0 +1,15 @@
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Function
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    environment:
+    - variables:
+        foo: bar
+    filename: example.zip
+    handler: index.test
+    roleRef:
+      name: iam-for-lambda
+    runtime: nodejs12.x
