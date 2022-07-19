@@ -1,0 +1,15 @@
+apiVersion: lakeformation.aws.upbound.io/v1beta1
+kind: Permissions
+metadata:
+  name: example
+spec:
+  forProvider:
+    permissions:
+    - SELECT
+    principal: arn:aws:iam:us-east-1:123456789012:user/SanHolo
+    region: us-west-1
+    tableWithColumns:
+    - columnNames:
+      - event
+      databaseName: ${aws_glue_catalog_table.example.database_name}
+      name: ${aws_glue_catalog_table.example.name}

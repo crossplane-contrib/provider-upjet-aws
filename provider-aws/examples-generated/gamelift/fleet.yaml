@@ -9,6 +9,7 @@ spec:
     ec2InstanceType: t2.micro
     fleetType: ON_DEMAND
     name: example-fleet-name
+    region: us-west-1
     runtimeConfiguration:
     - serverProcess:
       - concurrentExecutions: 1

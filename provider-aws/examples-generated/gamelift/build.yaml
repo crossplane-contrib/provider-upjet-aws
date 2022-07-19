@@ -6,6 +6,7 @@ spec:
   forProvider:
     name: example-build
     operatingSystem: WINDOWS_2012
+    region: us-west-1
     storageLocation:
     - bucketRef:
         name: example

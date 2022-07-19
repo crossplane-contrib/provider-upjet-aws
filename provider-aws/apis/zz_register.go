@@ -26,12 +26,20 @@ import (
 	v1beta1eks "github.com/upbound/official-providers/provider-aws/apis/eks/v1beta1"
 	v1beta1elasticache "github.com/upbound/official-providers/provider-aws/apis/elasticache/v1beta1"
 	v1beta1elbv2 "github.com/upbound/official-providers/provider-aws/apis/elbv2/v1beta1"
+	v1beta1firehose "github.com/upbound/official-providers/provider-aws/apis/firehose/v1beta1"
 	v1beta1gamelift "github.com/upbound/official-providers/provider-aws/apis/gamelift/v1beta1"
 	v1beta1globalaccelerator "github.com/upbound/official-providers/provider-aws/apis/globalaccelerator/v1beta1"
 	v1beta1glue "github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1"
 	v1beta1grafana "github.com/upbound/official-providers/provider-aws/apis/grafana/v1beta1"
 	v1beta1iam "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
+	v1beta1kinesis "github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1"
+	v1beta1kinesisanalytics "github.com/upbound/official-providers/provider-aws/apis/kinesisanalytics/v1beta1"
+	v1beta1kinesisanalyticsv2 "github.com/upbound/official-providers/provider-aws/apis/kinesisanalyticsv2/v1beta1"
+	v1beta1kinesisvideo "github.com/upbound/official-providers/provider-aws/apis/kinesisvideo/v1beta1"
 	v1beta1kms "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
+	v1beta1lakeformation "github.com/upbound/official-providers/provider-aws/apis/lakeformation/v1beta1"
+	v1beta1lexmodels "github.com/upbound/official-providers/provider-aws/apis/lexmodels/v1beta1"
+	v1beta1licensemanager "github.com/upbound/official-providers/provider-aws/apis/licensemanager/v1beta1"
 	v1beta1mq "github.com/upbound/official-providers/provider-aws/apis/mq/v1beta1"
 	v1beta1neptune "github.com/upbound/official-providers/provider-aws/apis/neptune/v1beta1"
 	v1beta1rds "github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1"
@@ -67,12 +75,20 @@ func init() {
 		v1beta1eks.SchemeBuilder.AddToScheme,
 		v1beta1elasticache.SchemeBuilder.AddToScheme,
 		v1beta1elbv2.SchemeBuilder.AddToScheme,
+		v1beta1firehose.SchemeBuilder.AddToScheme,
 		v1beta1gamelift.SchemeBuilder.AddToScheme,
 		v1beta1globalaccelerator.SchemeBuilder.AddToScheme,
 		v1beta1glue.SchemeBuilder.AddToScheme,
 		v1beta1grafana.SchemeBuilder.AddToScheme,
 		v1beta1iam.SchemeBuilder.AddToScheme,
+		v1beta1kinesis.SchemeBuilder.AddToScheme,
+		v1beta1kinesisanalytics.SchemeBuilder.AddToScheme,
+		v1beta1kinesisanalyticsv2.SchemeBuilder.AddToScheme,
+		v1beta1kinesisvideo.SchemeBuilder.AddToScheme,
 		v1beta1kms.SchemeBuilder.AddToScheme,
+		v1beta1lakeformation.SchemeBuilder.AddToScheme,
+		v1beta1lexmodels.SchemeBuilder.AddToScheme,
+		v1beta1licensemanager.SchemeBuilder.AddToScheme,
 		v1beta1mq.SchemeBuilder.AddToScheme,
 		v1beta1neptune.SchemeBuilder.AddToScheme,
 		v1beta1rds.SchemeBuilder.AddToScheme,

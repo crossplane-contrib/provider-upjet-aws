@@ -8,5 +8,6 @@ spec:
     authenticationProviders:
     - SAML
     permissionType: SERVICE_MANAGED
+    region: us-west-1
     roleArnRef:
       name: example

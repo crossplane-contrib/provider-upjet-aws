@@ -5,6 +5,7 @@ metadata:
 spec:
   forProvider:
     name: example-script
+    region: us-west-1
     storageLocation:
     - bucketRef:
         name: example

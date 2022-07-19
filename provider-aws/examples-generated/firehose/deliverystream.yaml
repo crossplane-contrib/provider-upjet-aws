@@ -1,0 +1,21 @@
+apiVersion: firehose.aws.upbound.io/v1beta1
+kind: DeliveryStream
+metadata:
+  name: example
+spec:
+  forProvider:
+    destination: extended_s3
+    extendedS3Configuration:
+    - bucketArnRef:
+        name: example
+      processingConfiguration:
+      - enabled: "true"
+        processors:
+        - parameters:
+          - parameterName: LambdaArn
+            parameterValue: ${aws_lambda_function.lambda_processor.arn}:$LATEST
+          type: Lambda
+      roleArnRef:
+        name: example
+    name: terraform-kinesis-firehose-extended-s3-test-stream
+    region: us-west-1

@@ -4,6 +4,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    region: us-west-1
     role: ADMIN
     userIds:
     - USER_ID_1

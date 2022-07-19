@@ -1,0 +1,10 @@
+apiVersion: kinesis.aws.upbound.io/v1beta1
+kind: StreamConsumer
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example-consumer
+    region: us-west-1
+    streamArnRef:
+      name: example

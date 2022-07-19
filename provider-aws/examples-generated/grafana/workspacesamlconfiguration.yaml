@@ -7,5 +7,6 @@ spec:
     editorRoleValues:
     - editor
     idpMetadataUrl: https://my_idp_metadata.url
+    region: us-west-1
     workspaceIdRef:
       name: example

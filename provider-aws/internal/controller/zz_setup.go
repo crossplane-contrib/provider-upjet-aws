@@ -98,6 +98,7 @@ import (
 	lblistener "github.com/upbound/official-providers/provider-aws/internal/controller/elbv2/lblistener"
 	lbtargetgroup "github.com/upbound/official-providers/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/official-providers/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
+	deliverystream "github.com/upbound/official-providers/provider-aws/internal/controller/firehose/deliverystream"
 	alias "github.com/upbound/official-providers/provider-aws/internal/controller/gamelift/alias"
 	build "github.com/upbound/official-providers/provider-aws/internal/controller/gamelift/build"
 	fleet "github.com/upbound/official-providers/provider-aws/internal/controller/gamelift/fleet"
@@ -141,7 +142,22 @@ import (
 	userpolicyattachment "github.com/upbound/official-providers/provider-aws/internal/controller/iam/userpolicyattachment"
 	usersshkey "github.com/upbound/official-providers/provider-aws/internal/controller/iam/usersshkey"
 	virtualmfadevice "github.com/upbound/official-providers/provider-aws/internal/controller/iam/virtualmfadevice"
+	stream "github.com/upbound/official-providers/provider-aws/internal/controller/kinesis/stream"
+	streamconsumer "github.com/upbound/official-providers/provider-aws/internal/controller/kinesis/streamconsumer"
+	application "github.com/upbound/official-providers/provider-aws/internal/controller/kinesisanalytics/application"
+	applicationkinesisanalyticsv2 "github.com/upbound/official-providers/provider-aws/internal/controller/kinesisanalyticsv2/application"
+	applicationsnapshot "github.com/upbound/official-providers/provider-aws/internal/controller/kinesisanalyticsv2/applicationsnapshot"
+	streamkinesisvideo "github.com/upbound/official-providers/provider-aws/internal/controller/kinesisvideo/stream"
 	key "github.com/upbound/official-providers/provider-aws/internal/controller/kms/key"
+	datalakesettings "github.com/upbound/official-providers/provider-aws/internal/controller/lakeformation/datalakesettings"
+	permissions "github.com/upbound/official-providers/provider-aws/internal/controller/lakeformation/permissions"
+	resource "github.com/upbound/official-providers/provider-aws/internal/controller/lakeformation/resource"
+	bot "github.com/upbound/official-providers/provider-aws/internal/controller/lexmodels/bot"
+	botalias "github.com/upbound/official-providers/provider-aws/internal/controller/lexmodels/botalias"
+	intent "github.com/upbound/official-providers/provider-aws/internal/controller/lexmodels/intent"
+	slottype "github.com/upbound/official-providers/provider-aws/internal/controller/lexmodels/slottype"
+	association "github.com/upbound/official-providers/provider-aws/internal/controller/licensemanager/association"
+	licenseconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/licensemanager/licenseconfiguration"
 	broker "github.com/upbound/official-providers/provider-aws/internal/controller/mq/broker"
 	configuration "github.com/upbound/official-providers/provider-aws/internal/controller/mq/configuration"
 	clusterneptune "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/cluster"
@@ -318,6 +334,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lblistener.Setup,
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
+		deliverystream.Setup,
 		alias.Setup,
 		build.Setup,
 		fleet.Setup,
@@ -361,7 +378,22 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userpolicyattachment.Setup,
 		usersshkey.Setup,
 		virtualmfadevice.Setup,
+		stream.Setup,
+		streamconsumer.Setup,
+		application.Setup,
+		applicationkinesisanalyticsv2.Setup,
+		applicationsnapshot.Setup,
+		streamkinesisvideo.Setup,
 		key.Setup,
+		datalakesettings.Setup,
+		permissions.Setup,
+		resource.Setup,
+		bot.Setup,
+		botalias.Setup,
+		intent.Setup,
+		slottype.Setup,
+		association.Setup,
+		licenseconfiguration.Setup,
 		broker.Setup,
 		configuration.Setup,
 		clusterneptune.Setup,

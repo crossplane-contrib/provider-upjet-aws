@@ -11,4 +11,5 @@ spec:
     - maximumIndividualPlayerLatencyMilliseconds: 100
       policyDurationSeconds: 5
     - maximumIndividualPlayerLatencyMilliseconds: 200
+    region: us-west-1
     timeoutInSeconds: 60
