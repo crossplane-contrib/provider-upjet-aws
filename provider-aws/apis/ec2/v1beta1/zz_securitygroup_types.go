@@ -26,24 +26,14 @@ type EgressObservation struct {
 
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
 
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type EgressParameters struct {
-
-	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
-
-	// +crossplane:generate:reference:type=SecurityGroup
-	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
-	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
-	// +kubebuilder:validation:Optional
-	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups"`
 }
 
 type IngressObservation struct {
@@ -59,24 +49,14 @@ type IngressObservation struct {
 
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
 
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type IngressParameters struct {
-
-	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
-
-	// +crossplane:generate:reference:type=SecurityGroup
-	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
-	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
-	// +kubebuilder:validation:Optional
-	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups"`
 }
 
 type SecurityGroupObservation struct {
@@ -97,12 +77,6 @@ type SecurityGroupParameters struct {
 
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Egress []EgressParameters `json:"egress" tf:"egress,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Ingress []IngressParameters `json:"ingress" tf:"ingress,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
