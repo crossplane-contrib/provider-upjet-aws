@@ -37,6 +37,12 @@ func Configure(p *config.Provider) {
 		r.UseAsync = true
 	})
 
+	p.AddResourceConfigurator("aws_s3_bucket_website_configuration", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"routing_rules", "routing_rule"},
+		}
+	})
+
 	p.AddResourceConfigurator("aws_s3_object", func(r *config.Resource) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"etag", "kms_key_id"},
