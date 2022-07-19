@@ -1,0 +1,11 @@
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: SigningCertificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    certificateBody: |
+      -----BEGIN CERTIFICATE-----
+      [......] # cert contents
+      -----END CERTIFICATE-----
+    username: some_test_cert

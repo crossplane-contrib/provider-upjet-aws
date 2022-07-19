@@ -1,0 +1,11 @@
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: UserLoginProfile
+metadata:
+  name: example
+spec:
+  forProvider:
+    pgpKey: keybase:username
+    userRef:
+      name: sample-user
+    passwordResetRequired: false
+    passwordLength: 20

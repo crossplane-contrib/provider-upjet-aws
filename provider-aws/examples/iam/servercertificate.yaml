@@ -1,0 +1,14 @@
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: ServerCertificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    certificateBody: |
+      -----BEGIN CERTIFICATE-----
+      [......] # cert contents
+      -----END CERTIFICATE-----
+    privateKeySecretRef:
+      key: pem
+      name: example-secret
+      namespace: crossplane-system

@@ -16,8 +16,35 @@ func (l *AccessKeyList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this AccountAliasList.
+func (l *AccountAliasList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AccountPasswordPolicyList.
+func (l *AccountPasswordPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this GroupList.
 func (l *GroupList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this GroupMembershipList.
+func (l *GroupMembershipList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -79,6 +106,51 @@ func (l *RolePolicyAttachmentList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this SAMLProviderList.
+func (l *SAMLProviderList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ServerCertificateList.
+func (l *ServerCertificateList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ServiceLinkedRoleList.
+func (l *ServiceLinkedRoleList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ServiceSpecificCredentialList.
+func (l *ServiceSpecificCredentialList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SigningCertificateList.
+func (l *SigningCertificateList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this UserGroupMembershipList.
 func (l *UserGroupMembershipList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -97,8 +169,35 @@ func (l *UserList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this UserLoginProfileList.
+func (l *UserLoginProfileList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this UserPolicyAttachmentList.
 func (l *UserPolicyAttachmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this UserSSHKeyList.
+func (l *UserSSHKeyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VirtualMfaDeviceList.
+func (l *VirtualMfaDeviceList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
