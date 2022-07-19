@@ -65,76 +65,6 @@ spec:
                 properties:
                   description:
                     type: string
-                  egress:
-                    items:
-                      properties:
-                        securityGroupRefs:
-                          items:
-                            description: A Reference to a named object.
-                            properties:
-                              name:
-                                description: Name of the referenced object.
-                                type: string
-                            required:
-                            - name
-                            type: object
-                          type: array
-                        securityGroupSelector:
-                          description: A Selector selects an object.
-                          properties:
-                            matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                          type: object
-                        securityGroups:
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  ingress:
-                    items:
-                      properties:
-                        securityGroupRefs:
-                          items:
-                            description: A Reference to a named object.
-                            properties:
-                              name:
-                                description: Name of the referenced object.
-                                type: string
-                            required:
-                            - name
-                            type: object
-                          type: array
-                        securityGroupSelector:
-                          description: A Selector selects an object.
-                          properties:
-                            matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                          type: object
-                        securityGroups:
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
                   name:
                     type: string
                   namePrefix:
@@ -175,8 +105,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - egress
-                - ingress
                 - region
                 type: object
               providerConfigRef:
@@ -303,6 +231,10 @@ spec:
                           type: array
                         protocol:
                           type: string
+                        securityGroups:
+                          items:
+                            type: string
+                          type: array
                         self:
                           type: boolean
                         toPort:
@@ -332,6 +264,10 @@ spec:
                           type: array
                         protocol:
                           type: string
+                        securityGroups:
+                          items:
+                            type: string
+                          type: array
                         self:
                           type: boolean
                         toPort:
