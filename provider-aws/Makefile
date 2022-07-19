@@ -116,7 +116,7 @@ run: go.build
 # build steps in parallel to avoid encountering an installation race condition.
 build.init: $(UP)
 
-xpkg.build: $(UP)
+xpkg.build: $(UP) do.build.images
 	@$(INFO) Building package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM)
 	@mkdir -p $(OUTPUT_DIR)/xpkg/$(PLATFORM)
 	@$(UP) xpkg build \
