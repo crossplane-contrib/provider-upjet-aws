@@ -188,16 +188,6 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_security_group", func(r *config.Resource) {
 		// Mutually exclusive with aws_security_group_rule
 		config.MoveToStatus(r.TerraformResource, "ingress", "egress")
-		r.References["egress.security_groups"] = config.Reference{
-			Type:              "SecurityGroup",
-			RefFieldName:      "SecurityGroupRefs",
-			SelectorFieldName: "SecurityGroupSelector",
-		}
-		r.References["ingress.security_groups"] = config.Reference{
-			Type:              "SecurityGroup",
-			RefFieldName:      "SecurityGroupRefs",
-			SelectorFieldName: "SecurityGroupSelector",
-		}
 	})
 
 	p.AddResourceConfigurator("aws_security_group_rule", func(r *config.Resource) {

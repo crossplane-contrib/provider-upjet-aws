@@ -771,45 +771,8 @@ func (mg *SecurityGroup) ResolveReferences(ctx context.Context, c client.Reader)
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
-	var mrsp reference.MultiResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Egress); i3++ {
-		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Egress[i3].SecurityGroups),
-			Extract:       reference.ExternalName(),
-			References:    mg.Spec.ForProvider.Egress[i3].SecurityGroupRefs,
-			Selector:      mg.Spec.ForProvider.Egress[i3].SecurityGroupSelector,
-			To: reference.To{
-				List:    &SecurityGroupList{},
-				Managed: &SecurityGroup{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Egress[i3].SecurityGroups")
-		}
-		mg.Spec.ForProvider.Egress[i3].SecurityGroups = reference.ToPtrValues(mrsp.ResolvedValues)
-		mg.Spec.ForProvider.Egress[i3].SecurityGroupRefs = mrsp.ResolvedReferences
-
-	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Ingress); i3++ {
-		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Ingress[i3].SecurityGroups),
-			Extract:       reference.ExternalName(),
-			References:    mg.Spec.ForProvider.Ingress[i3].SecurityGroupRefs,
-			Selector:      mg.Spec.ForProvider.Ingress[i3].SecurityGroupSelector,
-			To: reference.To{
-				List:    &SecurityGroupList{},
-				Managed: &SecurityGroup{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Ingress[i3].SecurityGroups")
-		}
-		mg.Spec.ForProvider.Ingress[i3].SecurityGroups = reference.ToPtrValues(mrsp.ResolvedValues)
-		mg.Spec.ForProvider.Ingress[i3].SecurityGroupRefs = mrsp.ResolvedReferences
-
-	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCID),
 		Extract:      reference.ExternalName(),

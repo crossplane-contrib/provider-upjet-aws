@@ -18,7 +18,7 @@ Copyright 2021 Upbound Inc.
 //go:generate rm -rf ../examples-generated
 
 // Scrape metadata from Terraform registry
-//go:generate go run github.com/upbound/upjet/cmd/scraper -n hashicorp/terraform-provider-aws -r ../.work/terraform-provider-aws -o ../config/provider-metadata.yaml
+//go:generate go run github.com/upbound/upjet/cmd/scraper -n hashicorp/terraform-provider-aws -r ../.work/terraform-provider-aws/website/docs/r -o ../config/provider-metadata.yaml
 
 // NOTE(muvaf): Some of Terraform AWS provider files have "!generate" build tag
 // that prevent us from using it for generator program.
