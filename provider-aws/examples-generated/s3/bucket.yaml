@@ -2,8 +2,8 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
-    upjet.upbound.io/test: "true"
-  name: ezgi-bucket-2
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+  name: example
 spec:
   forProvider:
     region: us-west-1
