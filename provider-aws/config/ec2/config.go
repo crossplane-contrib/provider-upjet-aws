@@ -235,18 +235,6 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_route_table", func(r *config.Resource) {
 		// These are mutually exclusive with aws_route and aws_vpn_gateway_route_propagation.
 		config.MoveToStatus(r.TerraformResource, "route", "propagating_vgws")
-		r.References["route.vpc_peering_connection_id"] = config.Reference{
-			Type: "VPCPeeringConnection",
-		}
-		r.References["route.vpc_endpoint_id"] = config.Reference{
-			Type: "VPCEndpoint",
-		}
-		r.References["route.network_interface_id"] = config.Reference{
-			Type: "NetworkInterface",
-		}
-		r.References["route.instance_id"] = config.Reference{
-			Type: "Instance",
-		}
 	})
 
 	p.AddResourceConfigurator("aws_route_table_association", func(r *config.Resource) {
