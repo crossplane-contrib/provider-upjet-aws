@@ -1,0 +1,14 @@
+apiVersion: gamelift.aws.upbound.io/v1beta1
+kind: GameSessionQueue
+metadata:
+  name: example
+spec:
+  forProvider:
+    destinations:
+    - ${aws_gamelift_fleet.us_west_2_fleet.arn}
+    - ${aws_gamelift_fleet.eu_central_1_fleet.arn}
+    playerLatencyPolicy:
+    - maximumIndividualPlayerLatencyMilliseconds: 100
+      policyDurationSeconds: 5
+    - maximumIndividualPlayerLatencyMilliseconds: 200
+    timeoutInSeconds: 60

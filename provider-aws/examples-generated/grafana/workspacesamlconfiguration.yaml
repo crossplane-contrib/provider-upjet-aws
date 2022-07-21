@@ -1,0 +1,11 @@
+apiVersion: grafana.aws.upbound.io/v1beta1
+kind: WorkspaceSAMLConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    editorRoleValues:
+    - editor
+    idpMetadataUrl: https://my_idp_metadata.url
+    workspaceIdRef:
+      name: example

@@ -1,0 +1,14 @@
+apiVersion: gamelift.aws.upbound.io/v1beta1
+kind: Build
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example-build
+    operatingSystem: WINDOWS_2012
+    storageLocation:
+    - bucketRef:
+        name: example
+      key: new_object_key
+      roleArnRef:
+        name: example
