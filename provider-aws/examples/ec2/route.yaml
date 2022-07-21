@@ -1,8 +1,7 @@
----
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Route
 metadata:
-  name: sample-route
+  name: example
 spec:
   forProvider:
     region: us-west-1
@@ -10,6 +9,6 @@ spec:
     gatewayIdRef:
       name: example
     routeTableIdRef:
-      name: sample-rtb
+      name: example
   providerConfigRef:
     name: default

@@ -67,115 +67,6 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  route:
-                    items:
-                      properties:
-                        instanceId:
-                          type: string
-                        instanceIdRef:
-                          description: A Reference to a named object.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                          required:
-                          - name
-                          type: object
-                        instanceIdSelector:
-                          description: A Selector selects an object.
-                          properties:
-                            matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                          type: object
-                        networkInterfaceId:
-                          type: string
-                        networkInterfaceIdRef:
-                          description: A Reference to a named object.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                          required:
-                          - name
-                          type: object
-                        networkInterfaceIdSelector:
-                          description: A Selector selects an object.
-                          properties:
-                            matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                          type: object
-                        vpcEndpointId:
-                          type: string
-                        vpcEndpointIdRef:
-                          description: A Reference to a named object.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                          required:
-                          - name
-                          type: object
-                        vpcEndpointIdSelector:
-                          description: A Selector selects an object.
-                          properties:
-                            matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                          type: object
-                        vpcPeeringConnectionId:
-                          type: string
-                        vpcPeeringConnectionIdRef:
-                          description: A Reference to a named object.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                          required:
-                          - name
-                          type: object
-                        vpcPeeringConnectionIdSelector:
-                          description: A Selector selects an object.
-                          properties:
-                            matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                          type: object
-                      type: object
-                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -207,7 +98,6 @@ spec:
                     type: object
                 required:
                 - region
-                - route
                 type: object
               providerConfigRef:
                 default:
@@ -335,13 +225,21 @@ spec:
                           type: string
                         gatewayId:
                           type: string
+                        instanceId:
+                          type: string
                         ipv6CidrBlock:
                           type: string
                         localGatewayId:
                           type: string
                         natGatewayId:
                           type: string
+                        networkInterfaceId:
+                          type: string
                         transitGatewayId:
+                          type: string
+                        vpcEndpointId:
+                          type: string
+                        vpcPeeringConnectionId:
                           type: string
                       type: object
                     type: array
