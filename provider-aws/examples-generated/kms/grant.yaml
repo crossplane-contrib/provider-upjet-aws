@@ -1,0 +1,18 @@
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Grant
+metadata:
+  name: example
+spec:
+  forProvider:
+    constraints:
+    - encryptionContextEquals:
+        Department: Finance
+    granteePrincipal: ${aws_iam_role.a.arn}
+    keyIdRef:
+      name: example
+    name: my-grant
+    operations:
+    - Encrypt
+    - Decrypt
+    - GenerateDataKey
+    region: us-west-1

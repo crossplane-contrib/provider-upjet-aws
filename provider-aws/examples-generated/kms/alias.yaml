@@ -1,0 +1,9 @@
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Alias
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    targetKeyIdRef:
+      name: example

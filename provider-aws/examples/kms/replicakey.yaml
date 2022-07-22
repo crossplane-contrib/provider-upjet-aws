@@ -1,0 +1,11 @@
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: ReplicaKey
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-east-1
+    description: "Multi-Region replica key"
+    deletionWindowInDays: 7
+    primaryKeyArnRef:
+      name: example
