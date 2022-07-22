@@ -1,0 +1,17 @@
+apiVersion: kinesis.aws.upbound.io/v1beta1
+kind: Stream
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+    retentionPeriod: 48
+    shardCount: 1
+    shardLevelMetrics:
+    - IncomingBytes
+    - OutgoingBytes
+    streamModeDetails:
+    - streamMode: PROVISIONED
+    tags:
+      Environment: test

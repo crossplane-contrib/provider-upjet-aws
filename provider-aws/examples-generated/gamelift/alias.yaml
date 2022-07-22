@@ -6,6 +6,7 @@ spec:
   forProvider:
     description: Example Description
     name: example-alias
+    region: us-west-1
     routingStrategy:
     - message: Example Message
       type: TERMINAL

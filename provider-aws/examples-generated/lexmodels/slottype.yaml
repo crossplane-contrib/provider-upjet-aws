@@ -1,0 +1,19 @@
+apiVersion: lexmodels.aws.upbound.io/v1beta1
+kind: SlotType
+metadata:
+  name: example
+spec:
+  forProvider:
+    createVersion: true
+    description: Types of flowers to order
+    enumerationValue:
+    - synonyms:
+      - Lirium
+      - Martagon
+      value: lilies
+    - synonyms:
+      - Eduardoregelia
+      - Podonix
+      value: tulips
+    region: us-west-1
+    valueSelectionStrategy: ORIGINAL_VALUE

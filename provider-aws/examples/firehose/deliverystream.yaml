@@ -1,0 +1,14 @@
+apiVersion: firehose.aws.upbound.io/v1beta1
+kind: DeliveryStream
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    destination: extended_s3
+    extendedS3Configuration:
+    - bucketArnRef:
+        name: example
+      roleArnRef:
+        name: example
+    name: up-kinesis-firehose-extended-s3-test-stream

@@ -556,6 +556,63 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_gamelift_game_session_queue": config.NameAsIdentifier,
 	// GameLift Scripts can be imported using the ID
 	"aws_gamelift_script": config.IdentifierFromProvider,
+
+	// kinesis
+	//
+	// Kinesis Streams can be imported using the name
+	"aws_kinesis_stream": config.IdentifierFromProvider,
+	// Kinesis Stream Consumers can be imported using the Amazon Resource Name (ARN)
+	"aws_kinesis_stream_consumer": config.IdentifierFromProvider,
+
+	// kinesisanalytics
+	//
+	// Kinesis Analytics Application can be imported by using ARN
+	"aws_kinesis_analytics_application": config.IdentifierFromProvider,
+
+	// kinesisanalyticsv2
+	//
+	// aws_kinesisanalyticsv2_application can be imported by using the application ARN
+	"aws_kinesisanalyticsv2_application": config.IdentifierFromProvider,
+	// aws_kinesisanalyticsv2_application can be imported by using application_name together with snapshot_name
+	// e.g. example-application/example-snapshot
+	"aws_kinesisanalyticsv2_application_snapshot": FormattedIdentifierUserDefined("snapshot_name", "/", "application_name"),
+
+	// kinesisvideo
+	//
+	// Kinesis Streams can be imported using the arn
+	"aws_kinesis_video_stream": config.IdentifierFromProvider,
+
+	// firehose
+	//
+	// Kinesis Firehose Delivery streams can be imported using the stream ARN
+	"aws_kinesis_firehose_delivery_stream": config.IdentifierFromProvider,
+
+	// lakeformation
+	//
+	// No import
+	"aws_lakeformation_data_lake_settings": config.IdentifierFromProvider,
+	// No import
+	"aws_lakeformation_permissions": config.IdentifierFromProvider,
+	// No import
+	"aws_lakeformation_resource": config.IdentifierFromProvider,
+
+	// lexmodels
+	//
+	// Bots can be imported using their name.
+	"aws_lex_bot": config.NameAsIdentifier,
+	// Bot aliases can be imported using an ID with the format bot_name:bot_alias_name
+	"aws_lex_bot_alias": FormattedIdentifierUserDefined("name", ":", "bot_name"),
+	// Intents can be imported using their name.
+	"aws_lex_intent": config.NameAsIdentifier,
+	// Slot types can be imported using their name.
+	"aws_lex_slot_type": config.NameAsIdentifier,
+
+	// licensemanager
+	//
+	// License configurations can be imported in the form resource_arn,license_configuration_arn
+	"aws_licensemanager_association": FormattedIdentifierFromProvider(",", "resource_arn", "license_configuration_arn"),
+	// License configurations can be imported using the id
+	"aws_licensemanager_license_configuration": config.IdentifierFromProvider,
 }
 
 func iamUserGroupMembership() config.ExternalName {

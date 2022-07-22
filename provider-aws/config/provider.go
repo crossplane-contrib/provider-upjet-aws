@@ -24,11 +24,16 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/eks"
 	"github.com/upbound/official-providers/provider-aws/config/elasticache"
 	"github.com/upbound/official-providers/provider-aws/config/elasticloadbalancing"
+	"github.com/upbound/official-providers/provider-aws/config/firehose"
 	"github.com/upbound/official-providers/provider-aws/config/gamelift"
 	"github.com/upbound/official-providers/provider-aws/config/globalaccelerator"
 	"github.com/upbound/official-providers/provider-aws/config/glue"
 	"github.com/upbound/official-providers/provider-aws/config/grafana"
 	"github.com/upbound/official-providers/provider-aws/config/iam"
+	"github.com/upbound/official-providers/provider-aws/config/kinesis"
+	"github.com/upbound/official-providers/provider-aws/config/kinesisanalytics"
+	kinesisanalytics2 "github.com/upbound/official-providers/provider-aws/config/kinesisanalyticsv2"
+	"github.com/upbound/official-providers/provider-aws/config/licensemanager"
 	"github.com/upbound/official-providers/provider-aws/config/mq"
 	"github.com/upbound/official-providers/provider-aws/config/neptune"
 	"github.com/upbound/official-providers/provider-aws/config/rds"
@@ -115,6 +120,11 @@ func GetProvider() *config.Provider {
 		backup.Configure,
 		grafana.Configure,
 		gamelift.Configure,
+		kinesis.Configure,
+		kinesisanalytics.Configure,
+		kinesisanalytics2.Configure,
+		firehose.Configure,
+		licensemanager.Configure,
 	} {
 		configure(pc)
 	}

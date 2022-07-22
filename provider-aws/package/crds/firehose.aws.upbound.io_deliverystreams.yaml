@@ -1,0 +1,950 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+  creationTimestamp: null
+  name: deliverystreams.firehose.aws.upbound.io
+spec:
+  group: firehose.aws.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - aws
+    kind: DeliveryStream
+    listKind: DeliveryStreamList
+    plural: deliverystreams
+    singular: deliverystream
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: DeliveryStream is the Schema for the DeliveryStreams API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: DeliveryStreamSpec defines the desired state of DeliveryStream
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource.
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  arn:
+                    type: string
+                  destination:
+                    type: string
+                  destinationId:
+                    type: string
+                  elasticsearchConfiguration:
+                    items:
+                      properties:
+                        bufferingInterval:
+                          type: number
+                        bufferingSize:
+                          type: number
+                        cloudwatchLoggingOptions:
+                          items:
+                            properties:
+                              enabled:
+                                type: boolean
+                              logGroupName:
+                                type: string
+                              logStreamName:
+                                type: string
+                            type: object
+                          type: array
+                        clusterEndpoint:
+                          type: string
+                        domainArn:
+                          type: string
+                        indexName:
+                          type: string
+                        indexRotationPeriod:
+                          type: string
+                        processingConfiguration:
+                          items:
+                            properties:
+                              enabled:
+                                type: boolean
+                              processors:
+                                items:
+                                  properties:
+                                    parameters:
+                                      items:
+                                        properties:
+                                          parameterName:
+                                            type: string
+                                          parameterValue:
+                                            type: string
+                                        required:
+                                        - parameterName
+                                        - parameterValue
+                                        type: object
+                                      type: array
+                                    type:
+                                      type: string
+                                  required:
+                                  - type
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        retryDuration:
+                          type: number
+                        roleArn:
+                          type: string
+                        s3BackupMode:
+                          type: string
+                        typeName:
+                          type: string
+                        vpcConfig:
+                          items:
+                            properties:
+                              roleArn:
+                                type: string
+                              securityGroupIds:
+                                items:
+                                  type: string
+                                type: array
+                              subnetIds:
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - roleArn
+                            - securityGroupIds
+                            - subnetIds
+                            type: object
+                          type: array
+                      required:
+                      - indexName
+                      - roleArn
+                      type: object
+                    type: array
+                  extendedS3Configuration:
+                    items:
+                      properties:
+                        bucketArn:
+                          type: string
+                        bucketArnRef:
+                          description: A Reference to a named object.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        bucketArnSelector:
+                          description: A Selector selects an object.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                          type: object
+                        bufferInterval:
+                          type: number
+                        bufferSize:
+                          type: number
+                        cloudwatchLoggingOptions:
+                          items:
+                            properties:
+                              enabled:
+                                type: boolean
+                              logGroupName:
+                                type: string
+                              logStreamName:
+                                type: string
+                            type: object
+                          type: array
+                        compressionFormat:
+                          type: string
+                        dataFormatConversionConfiguration:
+                          items:
+                            properties:
+                              enabled:
+                                type: boolean
+                              inputFormatConfiguration:
+                                items:
+                                  properties:
+                                    deserializer:
+                                      items:
+                                        properties:
+                                          hiveJsonSerDe:
+                                            items:
+                                              properties:
+                                                timestampFormats:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          openXJsonSerDe:
+                                            items:
+                                              properties:
+                                                caseInsensitive:
+                                                  type: boolean
+                                                columnToJsonKeyMappings:
+                                                  additionalProperties:
+                                                    type: string
+                                                  type: object
+                                                convertDotsInJsonKeysToUnderscores:
+                                                  type: boolean
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  required:
+                                  - deserializer
+                                  type: object
+                                type: array
+                              outputFormatConfiguration:
+                                items:
+                                  properties:
+                                    serializer:
+                                      items:
+                                        properties:
+                                          orcSerDe:
+                                            items:
+                                              properties:
+                                                blockSizeBytes:
+                                                  type: number
+                                                bloomFilterColumns:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                                bloomFilterFalsePositiveProbability:
+                                                  type: number
+                                                compression:
+                                                  type: string
+                                                dictionaryKeyThreshold:
+                                                  type: number
+                                                enablePadding:
+                                                  type: boolean
+                                                formatVersion:
+                                                  type: string
+                                                paddingTolerance:
+                                                  type: number
+                                                rowIndexStride:
+                                                  type: number
+                                                stripeSizeBytes:
+                                                  type: number
+                                              type: object
+                                            type: array
+                                          parquetSerDe:
+                                            items:
+                                              properties:
+                                                blockSizeBytes:
+                                                  type: number
+                                                compression:
+                                                  type: string
+                                                enableDictionaryCompression:
+                                                  type: boolean
+                                                maxPaddingBytes:
+                                                  type: number
+                                                pageSizeBytes:
+                                                  type: number
+                                                writerVersion:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  required:
+                                  - serializer
+                                  type: object
+                                type: array
+                              schemaConfiguration:
+                                items:
+                                  properties:
+                                    catalogId:
+                                      type: string
+                                    databaseName:
+                                      type: string
+                                    region:
+                                      type: string
+                                    roleArn:
+                                      type: string
+                                    tableName:
+                                      type: string
+                                    versionId:
+                                      type: string
+                                  required:
+                                  - databaseName
+                                  - roleArn
+                                  - tableName
+                                  type: object
+                                type: array
+                            required:
+                            - inputFormatConfiguration
+                            - outputFormatConfiguration
+                            - schemaConfiguration
+                            type: object
+                          type: array
+                        dynamicPartitioningConfiguration:
+                          items:
+                            properties:
+                              enabled:
+                                type: boolean
+                              retryDuration:
+                                type: number
+                            type: object
+                          type: array
+                        errorOutputPrefix:
+                          type: string
+                        kmsKeyArn:
+                          type: string
+                        prefix:
+                          type: string
+                        processingConfiguration:
+                          items:
+                            properties:
+                              enabled:
+                                type: boolean
+                              processors:
+                                items:
+                                  properties:
+                                    parameters:
+                                      items:
+                                        properties:
+                                          parameterName:
+                                            type: string
+                                          parameterValue:
+                                            type: string
+                                        required:
+                                        - parameterName
+                                        - parameterValue
+                                        type: object
+                                      type: array
+                                    type:
+                                      type: string
+                                  required:
+                                  - type
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        roleArn:
+                          type: string
+                        roleArnRef:
+                          description: A Reference to a named object.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        roleArnSelector:
+                          description: A Selector selects an object.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                          type: object
+                        s3BackupConfiguration:
+                          items:
+                            properties:
+                              bucketArn:
+                                type: string
+                              bufferInterval:
+                                type: number
+                              bufferSize:
+                                type: number
+                              cloudwatchLoggingOptions:
+                                items:
+                                  properties:
+                                    enabled:
+                                      type: boolean
+                                    logGroupName:
+                                      type: string
+                                    logStreamName:
+                                      type: string
+                                  type: object
+                                type: array
+                              compressionFormat:
+                                type: string
+                              errorOutputPrefix:
+                                type: string
+                              kmsKeyArn:
+                                type: string
+                              prefix:
+                                type: string
+                              roleArn:
+                                type: string
+                            required:
+                            - bucketArn
+                            - roleArn
+                            type: object
+                          type: array
+                        s3BackupMode:
+                          type: string
+                      type: object
+                    type: array
+                  httpEndpointConfiguration:
+                    items:
+                      properties:
+                        accessKeySecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        bufferingInterval:
+                          type: number
+                        bufferingSize:
+                          type: number
+                        cloudwatchLoggingOptions:
+                          items:
+                            properties:
+                              enabled:
+                                type: boolean
+                              logGroupName:
+                                type: string
+                              logStreamName:
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          type: string
+                        processingConfiguration:
+                          items:
+                            properties:
+                              enabled:
+                                type: boolean
+                              processors:
+                                items:
+                                  properties:
+                                    parameters:
+                                      items:
+                                        properties:
+                                          parameterName:
+                                            type: string
+                                          parameterValue:
+                                            type: string
+                                        required:
+                                        - parameterName
+                                        - parameterValue
+                                        type: object
+                                      type: array
+                                    type:
+                                      type: string
+                                  required:
+                                  - type
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        requestConfiguration:
+                          items:
+                            properties:
+                              commonAttributes:
+                                items:
+                                  properties:
+                                    name:
+                                      type: string
+                                    value:
+                                      type: string
+                                  required:
+                                  - name
+                                  - value
+                                  type: object
+                                type: array
+                              contentEncoding:
+                                type: string
+                            type: object
+                          type: array
+                        retryDuration:
+                          type: number
+                        roleArn:
+                          type: string
+                        s3BackupMode:
+                          type: string
+                        url:
+                          type: string
+                      required:
+                      - url
+                      type: object
+                    type: array
+                  kinesisSourceConfiguration:
+                    items:
+                      properties:
+                        kinesisStreamArn:
+                          type: string
+                        roleArn:
+                          type: string
+                      required:
+                      - kinesisStreamArn
+                      - roleArn
+                      type: object
+                    type: array
+                  name:
+                    type: string
+                  redshiftConfiguration:
+                    items:
+                      properties:
+                        cloudwatchLoggingOptions:
+                          items:
+                            properties:
+                              enabled:
+                                type: boolean
+                              logGroupName:
+                                type: string
+                              logStreamName:
+                                type: string
+                            type: object
+                          type: array
+                        clusterJdbcurl:
+                          type: string
+                        copyOptions:
+                          type: string
+                        dataTableColumns:
+                          type: string
+                        dataTableName:
+                          type: string
+                        passwordSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        processingConfiguration:
+                          items:
+                            properties:
+                              enabled:
+                                type: boolean
+                              processors:
+                                items:
+                                  properties:
+                                    parameters:
+                                      items:
+                                        properties:
+                                          parameterName:
+                                            type: string
+                                          parameterValue:
+                                            type: string
+                                        required:
+                                        - parameterName
+                                        - parameterValue
+                                        type: object
+                                      type: array
+                                    type:
+                                      type: string
+                                  required:
+                                  - type
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        retryDuration:
+                          type: number
+                        roleArn:
+                          type: string
+                        s3BackupConfiguration:
+                          items:
+                            properties:
+                              bucketArn:
+                                type: string
+                              bufferInterval:
+                                type: number
+                              bufferSize:
+                                type: number
+                              cloudwatchLoggingOptions:
+                                items:
+                                  properties:
+                                    enabled:
+                                      type: boolean
+                                    logGroupName:
+                                      type: string
+                                    logStreamName:
+                                      type: string
+                                  type: object
+                                type: array
+                              compressionFormat:
+                                type: string
+                              errorOutputPrefix:
+                                type: string
+                              kmsKeyArn:
+                                type: string
+                              prefix:
+                                type: string
+                              roleArn:
+                                type: string
+                            required:
+                            - bucketArn
+                            - roleArn
+                            type: object
+                          type: array
+                        s3BackupMode:
+                          type: string
+                        username:
+                          type: string
+                      required:
+                      - clusterJdbcurl
+                      - dataTableName
+                      - passwordSecretRef
+                      - roleArn
+                      - username
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  s3Configuration:
+                    items:
+                      properties:
+                        bucketArn:
+                          type: string
+                        bufferInterval:
+                          type: number
+                        bufferSize:
+                          type: number
+                        cloudwatchLoggingOptions:
+                          items:
+                            properties:
+                              enabled:
+                                type: boolean
+                              logGroupName:
+                                type: string
+                              logStreamName:
+                                type: string
+                            type: object
+                          type: array
+                        compressionFormat:
+                          type: string
+                        errorOutputPrefix:
+                          type: string
+                        kmsKeyArn:
+                          type: string
+                        prefix:
+                          type: string
+                        roleArn:
+                          type: string
+                      required:
+                      - bucketArn
+                      - roleArn
+                      type: object
+                    type: array
+                  serverSideEncryption:
+                    items:
+                      properties:
+                        enabled:
+                          type: boolean
+                        keyArn:
+                          type: string
+                        keyType:
+                          type: string
+                      type: object
+                    type: array
+                  splunkConfiguration:
+                    items:
+                      properties:
+                        cloudwatchLoggingOptions:
+                          items:
+                            properties:
+                              enabled:
+                                type: boolean
+                              logGroupName:
+                                type: string
+                              logStreamName:
+                                type: string
+                            type: object
+                          type: array
+                        hecAcknowledgmentTimeout:
+                          type: number
+                        hecEndpoint:
+                          type: string
+                        hecEndpointType:
+                          type: string
+                        hecToken:
+                          type: string
+                        processingConfiguration:
+                          items:
+                            properties:
+                              enabled:
+                                type: boolean
+                              processors:
+                                items:
+                                  properties:
+                                    parameters:
+                                      items:
+                                        properties:
+                                          parameterName:
+                                            type: string
+                                          parameterValue:
+                                            type: string
+                                        required:
+                                        - parameterName
+                                        - parameterValue
+                                        type: object
+                                      type: array
+                                    type:
+                                      type: string
+                                  required:
+                                  - type
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        retryDuration:
+                          type: number
+                        s3BackupMode:
+                          type: string
+                      required:
+                      - hecEndpoint
+                      - hecToken
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  versionId:
+                    type: string
+                required:
+                - destination
+                - name
+                - region
+                type: object
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              providerRef:
+                description: 'ProviderReference specifies the provider that will be
+                  used to create, observe, update, and delete this managed resource.
+                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: DeliveryStreamStatus defines the observed state of DeliveryStream.
+            properties:
+              atProvider:
+                properties:
+                  elasticsearchConfiguration:
+                    items:
+                      properties:
+                        vpcConfig:
+                          items:
+                            properties:
+                              vpcId:
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  id:
+                    type: string
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    type: object
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

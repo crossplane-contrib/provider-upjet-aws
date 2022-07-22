@@ -1,0 +1,25 @@
+apiVersion: kinesisanalyticsv2.aws.upbound.io/v1beta1
+kind: Application
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    applicationConfiguration:
+    - applicationCodeConfiguration:
+      - codeContentType: ZIPFILE
+      environmentProperties:
+      - propertyGroup:
+        - propertyGroupId: PROPERTY-GROUP-1
+          propertyMap:
+            Key1: Value1
+        - propertyGroupId: PROPERTY-GROUP-2
+          propertyMap:
+            KeyA: ValueA
+            KeyB: ValueB
+    name: example-application
+    runtimeEnvironment: FLINK-1_8
+    serviceExecutionRoleRef:
+      name: example
+    tags:
+      Environment: test

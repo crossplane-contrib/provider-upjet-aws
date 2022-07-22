@@ -1,0 +1,27 @@
+apiVersion: kinesisanalytics.aws.upbound.io/v1beta1
+kind: Application
+metadata:
+  name: example
+spec:
+  forProvider:
+    inputs:
+    - kinesisStream:
+      - resourceArnRef:
+          name: example
+        roleArnRef:
+          name: example
+      namePrefix: test_prefix
+      parallelism:
+      - count: 1
+      schema:
+      - recordColumns:
+        - mapping: $.test
+          name: test
+          sqlType: VARCHAR(8)
+        recordEncoding: UTF-8
+        recordFormat:
+        - mappingParameters:
+          - json:
+            - recordRowPath: $
+    name: kinesis-analytics-application-test
+    region: us-west-1

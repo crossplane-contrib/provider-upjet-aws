@@ -1,0 +1,10 @@
+apiVersion: lexmodels.aws.upbound.io/v1beta1
+kind: BotAlias
+metadata:
+  name: example
+spec:
+  forProvider:
+    botName: OrderFlowers
+    botVersion: "1"
+    description: Production Version of the OrderFlowers Bot.
+    region: us-west-1
