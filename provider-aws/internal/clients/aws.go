@@ -13,7 +13,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/terraform"
 
-	"github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
+	iamv1beta1 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 )
 
 const (
@@ -58,7 +58,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			// region validation in this case.
 			tfCfg["skip_region_validation"] = true
 
-			if mg.GetObjectKind().GroupVersionKind().Group == v1beta1.CRDGroup {
+			if mg.GetObjectKind().GroupVersionKind().Group == iamv1beta1.CRDGroup {
 				tfCfg["region"] = "us-east-1"
 			}
 		}
