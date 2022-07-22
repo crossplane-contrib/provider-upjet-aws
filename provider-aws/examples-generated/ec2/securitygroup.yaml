@@ -23,6 +23,7 @@ spec:
       protocol: tcp
       toPort: 443
     name: allow_tls
+    region: us-west-1
     tags:
       Name: allow_tls
     vpcIdRef:

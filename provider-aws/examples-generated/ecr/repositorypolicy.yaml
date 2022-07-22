@@ -31,4 +31,5 @@ spec:
               }
           ]
       }
+    region: us-west-1
     repository: ${aws_ecr_repository.foo.name}

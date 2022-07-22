@@ -10,3 +10,4 @@ spec:
     parameterGroupNameRef:
       name: example
     port: 11211
+    region: us-west-1

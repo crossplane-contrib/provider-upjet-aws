@@ -7,3 +7,4 @@ spec:
     imageScanningConfiguration:
     - scanOnPush: true
     imageTagMutability: MUTABLE
+    region: us-west-1

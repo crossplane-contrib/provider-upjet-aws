@@ -7,5 +7,6 @@ spec:
     name: tf-example-lb-tg
     port: 80
     protocol: HTTP
+    region: us-west-1
     vpcIdRef:
       name: example

@@ -10,6 +10,7 @@ spec:
     - ip: 10.0.64.4
       subnetId: ${aws_subnet.sn2.id}
     name: foo
+    region: us-west-1
     securityGroupIdRefs:
     - name: example
     tags:

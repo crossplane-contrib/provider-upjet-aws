@@ -14,3 +14,4 @@ spec:
       key: attribute.certificate
       name: example-acmpca-certificate
       namespace: crossplane-system
+    region: us-west-1

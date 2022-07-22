@@ -9,3 +9,4 @@ spec:
     excludedMembers:
     - ${aws_rds_cluster_instance.test1.id}
     - ${aws_rds_cluster_instance.test2.id}
+    region: us-west-1

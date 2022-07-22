@@ -9,3 +9,4 @@ spec:
     parameter:
     - name: neptune_enable_audit_log
       value: 1
+    region: us-west-1

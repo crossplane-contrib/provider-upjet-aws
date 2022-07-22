@@ -5,6 +5,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.0.1.0/24
+    region: us-west-1
     tags:
       Name: Main
     vpcIdRef:

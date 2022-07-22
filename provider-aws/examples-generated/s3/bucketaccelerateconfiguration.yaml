@@ -5,4 +5,5 @@ metadata:
 spec:
   forProvider:
     bucket: ${aws_s3_bucket.mybucket.bucket}
+    region: us-west-1
     status: Enabled

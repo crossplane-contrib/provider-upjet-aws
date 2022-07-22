@@ -12,3 +12,4 @@ spec:
       sessionPinningFilters:
       - EXCLUDE_VARIABLE_SETS
     dbProxyName: ${aws_db_proxy.example.name}
+    region: us-west-1

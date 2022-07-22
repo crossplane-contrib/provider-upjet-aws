@@ -7,3 +7,4 @@ spec:
     autoscalingGroupNameRef:
       name: example
     elb: ${aws_elb.bar.id}
+    region: us-west-1

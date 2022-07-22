@@ -7,3 +7,4 @@ spec:
     blockPublicAcls: true
     blockPublicPolicy: true
     bucket: ${aws_s3_bucket.example.id}
+    region: us-west-1

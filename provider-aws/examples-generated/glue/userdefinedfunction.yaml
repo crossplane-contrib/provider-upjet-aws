@@ -10,6 +10,7 @@ spec:
       name: example
     ownerName: owner
     ownerType: GROUP
+    region: us-west-1
     resourceUris:
     - resourceType: ARCHIVE
       uri: uri

@@ -10,3 +10,4 @@ spec:
     - clientId: your client_id
       identity_provider_config_name: example
       issuerUrl: your issuer_url
+    region: us-west-1

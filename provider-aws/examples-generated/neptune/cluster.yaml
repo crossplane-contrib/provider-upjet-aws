@@ -9,4 +9,5 @@ spec:
     engine: neptune
     iamDatabaseAuthenticationEnabled: true
     preferredBackupWindow: 07:00-09:00
+    region: us-west-1
     skipFinalSnapshot: true

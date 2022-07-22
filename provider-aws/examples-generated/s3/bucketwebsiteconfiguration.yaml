@@ -9,6 +9,7 @@ spec:
     - key: error.html
     indexDocument:
     - suffix: index.html
+    region: us-west-1
     routingRule:
     - condition:
       - keyPrefixEquals: docs/

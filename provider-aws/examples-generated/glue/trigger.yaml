@@ -10,4 +10,5 @@ spec:
     - conditions:
       - jobName: ${aws_glue_job.example2.name}
         state: SUCCEEDED
+    region: us-west-1
     type: CONDITIONAL

@@ -11,5 +11,6 @@ spec:
         format: ORC
     includedObjectVersions: All
     name: EntireBucketDaily
+    region: us-west-1
     schedule:
     - frequency: Daily

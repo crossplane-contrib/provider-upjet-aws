@@ -10,3 +10,4 @@ spec:
       name: example-secret
       namespace: crossplane-system
     name: test_key
+    region: us-west-1

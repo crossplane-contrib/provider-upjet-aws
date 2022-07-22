@@ -1,9 +1,12 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
   name: example
 spec:
   forProvider:
+    region: us-west-1
     tags:
       Environment: Dev
       Name: My bucket

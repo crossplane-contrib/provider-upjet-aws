@@ -7,3 +7,4 @@ spec:
     clusterIdentifierRef:
       name: example
     endpointType: READER
+    region: us-west-1

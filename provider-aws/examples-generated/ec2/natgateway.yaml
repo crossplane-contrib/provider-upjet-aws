@@ -5,6 +5,7 @@ metadata:
 spec:
   forProvider:
     allocationId: ${aws_eip.example.id}
+    region: us-west-1
     subnetIdRef:
       name: example
     tags:

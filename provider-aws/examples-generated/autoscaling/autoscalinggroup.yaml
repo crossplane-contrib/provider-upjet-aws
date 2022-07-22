@@ -23,6 +23,7 @@ spec:
     maxSize: 5
     minSize: 2
     placementGroup: ${aws_placement_group.test.id}
+    region: us-west-1
     tag:
     - key: foo
       propagateAtLaunch: true

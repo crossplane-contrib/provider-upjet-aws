@@ -5,5 +5,6 @@ metadata:
 spec:
   forProvider:
     dbProxyName: ${aws_db_proxy.test.name}
+    region: us-west-1
     targetRole: READ_ONLY
     vpcSubnetIds: ${aws_subnet.test.*.id}

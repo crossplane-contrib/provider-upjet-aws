@@ -4,6 +4,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    region: us-west-1
     route:
     - cidrBlock: 10.0.1.0/24
       gatewayId: ${aws_internet_gateway.example.id}

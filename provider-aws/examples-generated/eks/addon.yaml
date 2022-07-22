@@ -6,3 +6,4 @@ spec:
   forProvider:
     clusterNameRef:
       name: example
+    region: us-west-1

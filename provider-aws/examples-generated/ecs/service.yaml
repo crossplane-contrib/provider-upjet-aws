@@ -19,4 +19,5 @@ spec:
     placementConstraints:
     - expression: attribute:ecs.availability-zone in [us-west-2a, us-west-2b]
       type: memberOf
+    region: us-west-1
     taskDefinition: ${aws_ecs_task_definition.mongo.arn}

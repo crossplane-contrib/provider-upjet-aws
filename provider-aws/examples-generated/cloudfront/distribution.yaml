@@ -82,6 +82,7 @@ spec:
       s3OriginConfig:
       - originAccessIdentity: origin-access-identity/cloudfront/ABCDEFG1234567
     priceClass: PriceClass_200
+    region: us-west-1
     restrictions:
     - geoRestriction:
       - locations:

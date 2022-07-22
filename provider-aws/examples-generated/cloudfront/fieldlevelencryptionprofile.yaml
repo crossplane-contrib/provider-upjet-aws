@@ -13,3 +13,4 @@ spec:
         providerId: test provider
         publicKeyId: ${aws_cloudfront_public_key.example.id}
     name: test profile
+    region: us-west-1

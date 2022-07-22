@@ -20,3 +20,4 @@ spec:
       - GET
       allowedOrigins:
       - '*'
+    region: us-west-1

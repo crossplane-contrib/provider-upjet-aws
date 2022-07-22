@@ -5,6 +5,7 @@ metadata:
 spec:
   forProvider:
     destinationCidrBlock: 10.0.1.0/22
+    region: us-west-1
     routeTableIdRef:
       name: example
     vpcPeeringConnectionIdRef:

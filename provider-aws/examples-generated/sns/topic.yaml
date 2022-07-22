@@ -5,3 +5,4 @@ metadata:
 spec:
   forProvider:
     name: user-updates-topic
+    region: us-west-1

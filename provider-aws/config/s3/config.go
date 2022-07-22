@@ -6,6 +6,7 @@ package s3
 
 import (
 	"github.com/upbound/upjet/pkg/config"
+	"github.com/upbound/upjet/pkg/registry"
 )
 
 // Configure adds configurations for s3 group.
@@ -27,6 +28,7 @@ func Configure(p *config.Provider) {
 		config.MoveToStatus(r.TerraformResource, "acceleration_status", "acl", "grant", "cors_rule", "lifecycle_rule",
 			"logging", "object_lock_configuration", "policy", "replication_configuration", "request_payer",
 			"server_side_encryption_configuration", "versioning", "website")
+		r.MetaResource.ExternalName = registry.RandRFC1123Subdomain
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_acl", func(r *config.Resource) {

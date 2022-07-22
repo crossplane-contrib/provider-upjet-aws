@@ -11,3 +11,4 @@ spec:
       value: utf8
     - name: character_set_client
       value: utf8
+    region: us-west-1

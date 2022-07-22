@@ -8,6 +8,7 @@ spec:
       name: example
     nodeRoleArnRef:
       name: example
+    region: us-west-1
     scalingConfig:
     - desiredSize: 1
       maxSize: 1

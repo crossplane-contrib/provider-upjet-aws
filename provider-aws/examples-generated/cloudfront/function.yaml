@@ -10,4 +10,5 @@ spec:
       namespace: crossplane-system
     comment: my function
     publish: true
+    region: us-west-1
     runtime: cloudfront-js-1.0

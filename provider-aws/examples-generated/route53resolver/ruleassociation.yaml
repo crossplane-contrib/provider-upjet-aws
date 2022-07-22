@@ -4,6 +4,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    region: us-west-1
     resolverRuleId: ${aws_route53_resolver_rule.sys.id}
     vpcIdRef:
       name: example

@@ -25,5 +25,6 @@ spec:
     - name: BACKUP_RECOVERY_POINT_MANUAL_DELETION_DISABLED
     description: this is an example framework
     name: exampleFramework
+    region: us-west-1
     tags:
       Name: Example Framework

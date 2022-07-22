@@ -5,6 +5,7 @@ metadata:
 spec:
   forProvider:
     port: 80
+    region: us-west-1
     targetGroupArnRef:
       name: example
     targetId: ${aws_instance.test.id}

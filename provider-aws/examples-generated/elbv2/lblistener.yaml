@@ -13,4 +13,5 @@ spec:
       name: example
     port: "443"
     protocol: HTTPS
+    region: us-west-1
     sslPolicy: ELBSecurityPolicy-2016-08

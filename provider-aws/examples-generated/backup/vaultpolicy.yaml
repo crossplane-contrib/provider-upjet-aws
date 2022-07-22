@@ -9,3 +9,4 @@ spec:
       [\n    {\n      \"Sid\": \"default\",\n      \"Effect\": \"Allow\",\n      \"Principal\":
       {\n        \"AWS\": \"*\"\n      },\n      \"Action\": [\n\t\t\"backup:DescribeBackupVault\",\n\t\t\"backup:DeleteBackupVault\",\n\t\t\"backup:PutBackupVaultAccessPolicy\",\n\t\t\"backup:DeleteBackupVaultAccessPolicy\",\n\t\t\"backup:GetBackupVaultAccessPolicy\",\n\t\t\"backup:StartBackupJob\",\n\t\t\"backup:GetBackupVaultNotifications\",\n\t\t\"backup:PutBackupVaultNotifications\"\n
       \     ],\n      \"Resource\": \"${aws_backup_vault.example.arn}\"\n    }\n  ]\n}\n"
+    region: us-west-1

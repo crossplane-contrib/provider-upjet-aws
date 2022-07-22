@@ -6,4 +6,5 @@ spec:
   forProvider:
     dbInstanceIdentifier: ${aws_db_instance.example.id}
     dbProxyName: ${aws_db_proxy.example.name}
+    region: us-west-1
     targetGroupName: ${aws_db_proxy_default_target_group.example.name}

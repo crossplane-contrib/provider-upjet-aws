@@ -17,3 +17,4 @@ spec:
     engineType: ActiveMQ
     engineVersion: 5.15.0
     name: example
+    region: us-west-1

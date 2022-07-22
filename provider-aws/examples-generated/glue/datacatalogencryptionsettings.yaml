@@ -13,3 +13,4 @@ spec:
       - catalogEncryptionMode: SSE-KMS
         sseAwsKmsKeyIdRef:
           name: example
+    region: us-west-1

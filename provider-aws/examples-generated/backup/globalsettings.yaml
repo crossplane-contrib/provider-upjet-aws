@@ -6,3 +6,4 @@ spec:
   forProvider:
     globalSettings:
       isCrossAccountBackupEnabled: "true"
+    region: us-west-1

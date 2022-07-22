@@ -10,3 +10,4 @@ spec:
       subject:
       - commonName: example.com
     permanentDeletionTimeInDays: 7
+    region: us-west-1

@@ -17,3 +17,4 @@ spec:
       - items:
         - profileId: ${aws_cloudfront_field_level_encryption_profile.test.id}
           queryArg: Arg1
+    region: us-west-1
