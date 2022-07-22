@@ -7,8 +7,7 @@ spec:
     constraints:
     - encryptionContextEquals:
         Department: Finance
-    granteePrincipalRef:
-      name: example
+    granteePrincipal: ${aws_iam_role.a.arn}
     keyIdRef:
       name: example
     name: my-grant

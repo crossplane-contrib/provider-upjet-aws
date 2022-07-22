@@ -41,16 +41,8 @@ type GrantParameters struct {
 	// +kubebuilder:validation:Optional
 	GrantCreationTokens []*string `json:"grantCreationTokens,omitempty" tf:"grant_creation_tokens,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
-	// +kubebuilder:validation:Optional
-	GranteePrincipal *string `json:"granteePrincipal,omitempty" tf:"grantee_principal,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	GranteePrincipalRef *v1.Reference `json:"granteePrincipalRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	GranteePrincipalSelector *v1.Selector `json:"granteePrincipalSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	GranteePrincipal *string `json:"granteePrincipal" tf:"grantee_principal,omitempty"`
 
 	// +crossplane:generate:reference:type=Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()

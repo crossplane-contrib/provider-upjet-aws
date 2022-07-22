@@ -8,8 +8,7 @@ spec:
     constraints:
     - encryptionContextEquals:
         Department: Finance
-    granteePrincipalRef:
-      name: iam-role-for-grant
+    granteePrincipal: <principal>
     keyIdRef:
       name: sample-key
     name: my-grant

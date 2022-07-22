@@ -739,16 +739,6 @@ func (in *GrantParameters) DeepCopyInto(out *GrantParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.GranteePrincipalRef != nil {
-		in, out := &in.GranteePrincipalRef, &out.GranteePrincipalRef
-		*out = new(v1.Reference)
-		**out = **in
-	}
-	if in.GranteePrincipalSelector != nil {
-		in, out := &in.GranteePrincipalSelector, &out.GranteePrincipalSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.KeyID != nil {
 		in, out := &in.KeyID, &out.KeyID
 		*out = new(string)

@@ -27,10 +27,6 @@ func Configure(p *config.Provider) {
 			Type:      "Key",
 			Extractor: common.PathARNExtractor,
 		}
-		r.References["grantee_principal"] = config.Reference{
-			Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
-			Extractor: common.PathARNExtractor,
-		}
 	})
 
 	p.AddResourceConfigurator("aws_kms_replica_key", func(r *config.Resource) {
