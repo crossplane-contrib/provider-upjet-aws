@@ -39,6 +39,49 @@ func (mg *AccessKey) ResolveReferences(ctx context.Context, c client.Reader) err
 	return nil
 }
 
+// ResolveReferences of this GroupMembership.
+func (mg *GroupMembership) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Group),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.GroupRef,
+		Selector:     mg.Spec.ForProvider.GroupSelector,
+		To: reference.To{
+			List:    &GroupList{},
+			Managed: &Group{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Group")
+	}
+	mg.Spec.ForProvider.Group = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.GroupRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Users),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.UsersRefs,
+		Selector:      mg.Spec.ForProvider.UsersSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Users")
+	}
+	mg.Spec.ForProvider.Users = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.UsersRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
 // ResolveReferences of this GroupPolicyAttachment.
 func (mg *GroupPolicyAttachment) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -149,6 +192,32 @@ func (mg *RolePolicyAttachment) ResolveReferences(ctx context.Context, c client.
 	return nil
 }
 
+// ResolveReferences of this ServiceSpecificCredential.
+func (mg *ServiceSpecificCredential) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.UserNameRef,
+		Selector:     mg.Spec.ForProvider.UserNameSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.UserName")
+	}
+	mg.Spec.ForProvider.UserName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UserNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this UserGroupMembership.
 func (mg *UserGroupMembership) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -172,6 +241,32 @@ func (mg *UserGroupMembership) ResolveReferences(ctx context.Context, c client.R
 	}
 	mg.Spec.ForProvider.Groups = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.GroupRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.User),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.UserRef,
+		Selector:     mg.Spec.ForProvider.UserSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.User")
+	}
+	mg.Spec.ForProvider.User = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UserRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this UserLoginProfile.
+func (mg *UserLoginProfile) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.User),
@@ -230,6 +325,32 @@ func (mg *UserPolicyAttachment) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.User = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this UserSSHKey.
+func (mg *UserSSHKey) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Username),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.UsernameRef,
+		Selector:     mg.Spec.ForProvider.UsernameSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Username")
+	}
+	mg.Spec.ForProvider.Username = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UsernameRef = rsp.ResolvedReference
 
 	return nil
 }

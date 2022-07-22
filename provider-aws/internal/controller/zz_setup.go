@@ -112,16 +112,27 @@ import (
 	userdefinedfunction "github.com/upbound/official-providers/provider-aws/internal/controller/glue/userdefinedfunction"
 	workflow "github.com/upbound/official-providers/provider-aws/internal/controller/glue/workflow"
 	accesskey "github.com/upbound/official-providers/provider-aws/internal/controller/iam/accesskey"
+	accountalias "github.com/upbound/official-providers/provider-aws/internal/controller/iam/accountalias"
+	accountpasswordpolicy "github.com/upbound/official-providers/provider-aws/internal/controller/iam/accountpasswordpolicy"
 	group "github.com/upbound/official-providers/provider-aws/internal/controller/iam/group"
+	groupmembership "github.com/upbound/official-providers/provider-aws/internal/controller/iam/groupmembership"
 	grouppolicyattachment "github.com/upbound/official-providers/provider-aws/internal/controller/iam/grouppolicyattachment"
 	instanceprofile "github.com/upbound/official-providers/provider-aws/internal/controller/iam/instanceprofile"
 	openidconnectprovider "github.com/upbound/official-providers/provider-aws/internal/controller/iam/openidconnectprovider"
 	policy "github.com/upbound/official-providers/provider-aws/internal/controller/iam/policy"
 	role "github.com/upbound/official-providers/provider-aws/internal/controller/iam/role"
 	rolepolicyattachment "github.com/upbound/official-providers/provider-aws/internal/controller/iam/rolepolicyattachment"
+	samlprovider "github.com/upbound/official-providers/provider-aws/internal/controller/iam/samlprovider"
+	servercertificate "github.com/upbound/official-providers/provider-aws/internal/controller/iam/servercertificate"
+	servicelinkedrole "github.com/upbound/official-providers/provider-aws/internal/controller/iam/servicelinkedrole"
+	servicespecificcredential "github.com/upbound/official-providers/provider-aws/internal/controller/iam/servicespecificcredential"
+	signingcertificate "github.com/upbound/official-providers/provider-aws/internal/controller/iam/signingcertificate"
 	useriam "github.com/upbound/official-providers/provider-aws/internal/controller/iam/user"
 	usergroupmembership "github.com/upbound/official-providers/provider-aws/internal/controller/iam/usergroupmembership"
+	userloginprofile "github.com/upbound/official-providers/provider-aws/internal/controller/iam/userloginprofile"
 	userpolicyattachment "github.com/upbound/official-providers/provider-aws/internal/controller/iam/userpolicyattachment"
+	usersshkey "github.com/upbound/official-providers/provider-aws/internal/controller/iam/usersshkey"
+	virtualmfadevice "github.com/upbound/official-providers/provider-aws/internal/controller/iam/virtualmfadevice"
 	key "github.com/upbound/official-providers/provider-aws/internal/controller/kms/key"
 	broker "github.com/upbound/official-providers/provider-aws/internal/controller/mq/broker"
 	configuration "github.com/upbound/official-providers/provider-aws/internal/controller/mq/configuration"
@@ -313,16 +324,27 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userdefinedfunction.Setup,
 		workflow.Setup,
 		accesskey.Setup,
+		accountalias.Setup,
+		accountpasswordpolicy.Setup,
 		group.Setup,
+		groupmembership.Setup,
 		grouppolicyattachment.Setup,
 		instanceprofile.Setup,
 		openidconnectprovider.Setup,
 		policy.Setup,
 		role.Setup,
 		rolepolicyattachment.Setup,
+		samlprovider.Setup,
+		servercertificate.Setup,
+		servicelinkedrole.Setup,
+		servicespecificcredential.Setup,
+		signingcertificate.Setup,
 		useriam.Setup,
 		usergroupmembership.Setup,
+		userloginprofile.Setup,
 		userpolicyattachment.Setup,
+		usersshkey.Setup,
+		virtualmfadevice.Setup,
 		key.Setup,
 		broker.Setup,
 		configuration.Setup,

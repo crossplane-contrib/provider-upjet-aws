@@ -1,0 +1,11 @@
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: GroupMembership
+metadata:
+  name: example
+spec:
+  forProvider:
+    groupRef:
+      name: example
+    name: tf-testing-group-membership
+    usersRefs:
+    - name: example

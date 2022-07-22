@@ -234,6 +234,28 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_iam_user_group_membership": iamUserGroupMembership(),
 	// arn:aws:iam::123456789012:oidc-provider/accounts.google.com
 	"aws_iam_openid_connect_provider": config.IdentifierFromProvider,
+	// The current Account Alias can be imported using the account_alias
+	"aws_iam_account_alias": ParameterAsExternalName("account_alias"),
+	// IAM Account Password Policy can be imported using the word iam-account-password-policy
+	"aws_iam_account_password_policy": config.IdentifierFromProvider,
+	// No import
+	"aws_iam_group_membership": config.IdentifierFromProvider,
+	// IAM SAML Providers can be imported using the arn
+	"aws_iam_saml_provider": config.IdentifierFromProvider,
+	// IAM Server Certificates can be imported using the name
+	"aws_iam_server_certificate": config.NameAsIdentifier,
+	// IAM service-linked roles can be imported using role ARN
+	"aws_iam_service_linked_role": config.IdentifierFromProvider,
+	// IAM Service Specific Credentials can be imported using the service_name:user_name:service_specific_credential_id
+	"aws_iam_service_specific_credential": config.IdentifierFromProvider,
+	// IAM Signing Certificates can be imported using the id
+	"aws_iam_signing_certificate": config.IdentifierFromProvider,
+	// IAM User Login Profiles can be imported without password information support via the IAM User name
+	"aws_iam_user_login_profile": config.IdentifierFromProvider,
+	// SSH public keys can be imported using the username, ssh_public_key_id, and encoding
+	"aws_iam_user_ssh_key": config.IdentifierFromProvider,
+	// IAM Virtual MFA Devices can be imported using the arn
+	"aws_iam_virtual_mfa_device": config.IdentifierFromProvider,
 
 	// kms
 	//
