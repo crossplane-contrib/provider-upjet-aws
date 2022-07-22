@@ -8,8 +8,6 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
-	"github.com/upbound/official-providers/provider-aws/config/kms"
-
 	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-aws/config/acm"
@@ -35,6 +33,8 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/kinesis"
 	"github.com/upbound/official-providers/provider-aws/config/kinesisanalytics"
 	kinesisanalytics2 "github.com/upbound/official-providers/provider-aws/config/kinesisanalyticsv2"
+	"github.com/upbound/official-providers/provider-aws/config/kms"
+	"github.com/upbound/official-providers/provider-aws/config/lambda"
 	"github.com/upbound/official-providers/provider-aws/config/licensemanager"
 	"github.com/upbound/official-providers/provider-aws/config/mq"
 	"github.com/upbound/official-providers/provider-aws/config/neptune"
@@ -128,6 +128,7 @@ func GetProvider() *config.Provider {
 		firehose.Configure,
 		licensemanager.Configure,
 		kms.Configure,
+		lambda.Configure,
 	} {
 		configure(pc)
 	}

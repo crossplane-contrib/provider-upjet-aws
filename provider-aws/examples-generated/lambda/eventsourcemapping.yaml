@@ -1,0 +1,11 @@
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: EventSourceMapping
+metadata:
+  name: example
+spec:
+  forProvider:
+    eventSourceArn: ${aws_dynamodb_table.example.stream_arn}
+    functionNameRef:
+      name: example
+    region: us-west-1
+    startingPosition: LATEST

@@ -1,0 +1,84 @@
+package lambda
+
+import (
+	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/official-providers/provider-aws/config/common"
+)
+
+// Configure adds configurations for lambda group.
+func Configure(p *config.Provider) {
+	p.AddResourceConfigurator("aws_lambda_alias", func(r *config.Resource) {
+		r.References["function_name"] = config.Reference{
+			Type: "Function",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_lambda_code_signing_config", func(r *config.Resource) {
+		r.References["allowed_publishers.signing_profile_version_arns"] = config.Reference{
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/signer/v1beta1.SigningProfile",
+			Extractor: common.PathARNExtractor,
+		}
+	})
+
+	p.AddResourceConfigurator("aws_lambda_event_source_mapping", func(r *config.Resource) {
+		r.References["function_name"] = config.Reference{
+			Type:      "Function",
+			Extractor: common.PathARNExtractor,
+		}
+		r.UseAsync = true
+	})
+
+	// TODO: Automated test pipeline cannot be run for the lambda group resources.
+	// Because many resources of this group need `lambda_function` resource and it
+	// has a `filename` field for creation. This field reads a file from local
+	// storage and uses this file during provisioning.
+	// We may consider adding metadata configuration for the `lambda_function` in
+	// a future PR.
+	p.AddResourceConfigurator("aws_lambda_function", func(r *config.Resource) {
+		r.References["role"] = config.Reference{
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
+			Extractor: common.PathARNExtractor,
+		}
+		delete(r.TerraformResource.Schema, "filename")
+	})
+
+	p.AddResourceConfigurator("aws_lambda_function_event_invoke_config", func(r *config.Resource) {
+		r.References["destination_config.on_failure.destination"] = config.Reference{
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/sqs/v1beta1.Queue",
+			Extractor: common.PathARNExtractor,
+		}
+		r.References["destination_config.on_success.destination"] = config.Reference{
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1.Topic",
+			Extractor: common.PathARNExtractor,
+		}
+	})
+
+	p.AddResourceConfigurator("aws_lambda_function_url", func(r *config.Resource) {
+		r.References["function_name"] = config.Reference{
+			Type: "Function",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_lambda_invocation", func(r *config.Resource) {
+		r.References["function_name"] = config.Reference{
+			Type: "Function",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_lambda_permission", func(r *config.Resource) {
+		r.References["function_name"] = config.Reference{
+			Type: "Function",
+		}
+		r.References["qualifier"] = config.Reference{
+			Type: "Alias",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_lambda_provisioned_concurrency_config", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"provisioned_concurrent_executions"},
+		}
+		r.UseAsync = true
+	})
+}

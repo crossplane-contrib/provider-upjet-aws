@@ -1,0 +1,12 @@
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: LayerVersionPermission
+metadata:
+  name: example
+spec:
+  forProvider:
+    action: lambda:GetLayerVersion
+    layerName: arn:aws:lambda:us-west-2:123456654321:layer:test_layer1
+    principal: "111111111111"
+    region: us-west-1
+    statementId: dev-account
+    versionNumber: 1

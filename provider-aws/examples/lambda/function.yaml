@@ -1,0 +1,16 @@
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Function
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    environment:
+    - variables:
+        foo: bar
+    s3Bucket: <bucket-name>
+    s3Key: <zip-object-key>
+    handler: index.test
+    roleRef:
+      name: iam-for-lambda
+    runtime: nodejs12.x

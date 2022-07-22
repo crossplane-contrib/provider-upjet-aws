@@ -1,0 +1,8 @@
+apiVersion: signer.aws.upbound.io/v1beta1
+kind: SigningProfile
+metadata:
+  name: example
+spec:
+  forProvider:
+    platformId: AWSLambda-SHA384-ECDSA
+    region: us-west-1

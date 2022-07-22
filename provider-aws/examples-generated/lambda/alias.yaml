@@ -1,0 +1,15 @@
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Alias
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: a sample description
+    functionNameRef:
+      name: example
+    functionVersion: "1"
+    name: my_alias
+    region: us-west-1
+    routingConfig:
+    - additionalVersionWeights:
+        "2": 0.5

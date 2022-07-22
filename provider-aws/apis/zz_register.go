@@ -38,6 +38,7 @@ import (
 	v1beta1kinesisvideo "github.com/upbound/official-providers/provider-aws/apis/kinesisvideo/v1beta1"
 	v1beta1kms "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
 	v1beta1lakeformation "github.com/upbound/official-providers/provider-aws/apis/lakeformation/v1beta1"
+	v1beta1lambda "github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1"
 	v1beta1lexmodels "github.com/upbound/official-providers/provider-aws/apis/lexmodels/v1beta1"
 	v1beta1licensemanager "github.com/upbound/official-providers/provider-aws/apis/licensemanager/v1beta1"
 	v1beta1mq "github.com/upbound/official-providers/provider-aws/apis/mq/v1beta1"
@@ -49,6 +50,7 @@ import (
 	v1beta1s3 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
 	v1beta1secretsmanager "github.com/upbound/official-providers/provider-aws/apis/secretsmanager/v1beta1"
 	v1beta1servicediscovery "github.com/upbound/official-providers/provider-aws/apis/servicediscovery/v1beta1"
+	v1beta1signer "github.com/upbound/official-providers/provider-aws/apis/signer/v1beta1"
 	v1beta1sns "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1"
 	v1beta1sqs "github.com/upbound/official-providers/provider-aws/apis/sqs/v1beta1"
 	v1beta1transfer "github.com/upbound/official-providers/provider-aws/apis/transfer/v1beta1"
@@ -87,6 +89,7 @@ func init() {
 		v1beta1kinesisvideo.SchemeBuilder.AddToScheme,
 		v1beta1kms.SchemeBuilder.AddToScheme,
 		v1beta1lakeformation.SchemeBuilder.AddToScheme,
+		v1beta1lambda.SchemeBuilder.AddToScheme,
 		v1beta1lexmodels.SchemeBuilder.AddToScheme,
 		v1beta1licensemanager.SchemeBuilder.AddToScheme,
 		v1beta1mq.SchemeBuilder.AddToScheme,
@@ -98,6 +101,7 @@ func init() {
 		v1beta1s3.SchemeBuilder.AddToScheme,
 		v1beta1secretsmanager.SchemeBuilder.AddToScheme,
 		v1beta1servicediscovery.SchemeBuilder.AddToScheme,
+		v1beta1signer.SchemeBuilder.AddToScheme,
 		v1beta1sns.SchemeBuilder.AddToScheme,
 		v1beta1sqs.SchemeBuilder.AddToScheme,
 		v1beta1transfer.SchemeBuilder.AddToScheme,

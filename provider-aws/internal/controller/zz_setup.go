@@ -158,6 +158,17 @@ import (
 	datalakesettings "github.com/upbound/official-providers/provider-aws/internal/controller/lakeformation/datalakesettings"
 	permissions "github.com/upbound/official-providers/provider-aws/internal/controller/lakeformation/permissions"
 	resource "github.com/upbound/official-providers/provider-aws/internal/controller/lakeformation/resource"
+	aliaslambda "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/alias"
+	codesigningconfig "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/codesigningconfig"
+	eventsourcemapping "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/eventsourcemapping"
+	functionlambda "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/function"
+	functioneventinvokeconfig "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/functioneventinvokeconfig"
+	functionurl "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/functionurl"
+	invocation "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/invocation"
+	layerversion "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/layerversion"
+	layerversionpermission "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/layerversionpermission"
+	permission "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/permission"
+	provisionedconcurrencyconfig "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/provisionedconcurrencyconfig"
 	bot "github.com/upbound/official-providers/provider-aws/internal/controller/lexmodels/bot"
 	botalias "github.com/upbound/official-providers/provider-aws/internal/controller/lexmodels/botalias"
 	intent "github.com/upbound/official-providers/provider-aws/internal/controller/lexmodels/intent"
@@ -241,6 +252,7 @@ import (
 	objectcopy "github.com/upbound/official-providers/provider-aws/internal/controller/s3/objectcopy"
 	secret "github.com/upbound/official-providers/provider-aws/internal/controller/secretsmanager/secret"
 	privatednsnamespace "github.com/upbound/official-providers/provider-aws/internal/controller/servicediscovery/privatednsnamespace"
+	signingprofile "github.com/upbound/official-providers/provider-aws/internal/controller/signer/signingprofile"
 	topic "github.com/upbound/official-providers/provider-aws/internal/controller/sns/topic"
 	topicsubscription "github.com/upbound/official-providers/provider-aws/internal/controller/sns/topicsubscription"
 	queue "github.com/upbound/official-providers/provider-aws/internal/controller/sqs/queue"
@@ -400,6 +412,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		datalakesettings.Setup,
 		permissions.Setup,
 		resource.Setup,
+		aliaslambda.Setup,
+		codesigningconfig.Setup,
+		eventsourcemapping.Setup,
+		functionlambda.Setup,
+		functioneventinvokeconfig.Setup,
+		functionurl.Setup,
+		invocation.Setup,
+		layerversion.Setup,
+		layerversionpermission.Setup,
+		permission.Setup,
+		provisionedconcurrencyconfig.Setup,
 		bot.Setup,
 		botalias.Setup,
 		intent.Setup,
@@ -483,6 +506,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		objectcopy.Setup,
 		secret.Setup,
 		privatednsnamespace.Setup,
+		signingprofile.Setup,
 		topic.Setup,
 		topicsubscription.Setup,
 		queue.Setup,

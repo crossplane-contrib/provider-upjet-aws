@@ -1,0 +1,16 @@
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Function
+metadata:
+  name: example
+spec:
+  forProvider:
+    environment:
+    - variables:
+        foo: bar
+    filename: lambda_function_payload.zip
+    handler: index.test
+    region: us-west-1
+    roleRef:
+      name: example
+    runtime: nodejs12.x
+    sourceCodeHash: ${filebase64sha256("lambda_function_payload.zip")}
