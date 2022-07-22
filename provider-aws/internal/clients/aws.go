@@ -12,6 +12,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/upbound/upjet/pkg/terraform"
+
+	iamv1beta1 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 )
 
 const (
@@ -55,6 +57,10 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			// both empty string or not setting it at all. We need to skip
 			// region validation in this case.
 			tfCfg["skip_region_validation"] = true
+
+			if mg.GetObjectKind().GroupVersionKind().Group == iamv1beta1.CRDGroup {
+				tfCfg["region"] = "us-east-1"
+			}
 		}
 
 		// provider configuration for credentials
