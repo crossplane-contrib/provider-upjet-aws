@@ -1,0 +1,13 @@
+apiVersion: gamelift.aws.upbound.io/v1beta1
+kind: Script
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example-script
+    storageLocation:
+    - bucketRef:
+        name: example
+      key: new_object_key
+      roleArnRef:
+        name: example

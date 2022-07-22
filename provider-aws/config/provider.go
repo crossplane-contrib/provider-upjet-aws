@@ -24,8 +24,10 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/eks"
 	"github.com/upbound/official-providers/provider-aws/config/elasticache"
 	"github.com/upbound/official-providers/provider-aws/config/elasticloadbalancing"
+	"github.com/upbound/official-providers/provider-aws/config/gamelift"
 	"github.com/upbound/official-providers/provider-aws/config/globalaccelerator"
 	"github.com/upbound/official-providers/provider-aws/config/glue"
+	"github.com/upbound/official-providers/provider-aws/config/grafana"
 	"github.com/upbound/official-providers/provider-aws/config/iam"
 	"github.com/upbound/official-providers/provider-aws/config/mq"
 	"github.com/upbound/official-providers/provider-aws/config/neptune"
@@ -111,6 +113,8 @@ func GetProvider() *config.Provider {
 		efs.Configure,
 		sns.Configure,
 		backup.Configure,
+		grafana.Configure,
+		gamelift.Configure,
 	} {
 		configure(pc)
 	}

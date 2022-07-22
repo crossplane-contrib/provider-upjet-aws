@@ -98,6 +98,11 @@ import (
 	lblistener "github.com/upbound/official-providers/provider-aws/internal/controller/elbv2/lblistener"
 	lbtargetgroup "github.com/upbound/official-providers/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/official-providers/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
+	alias "github.com/upbound/official-providers/provider-aws/internal/controller/gamelift/alias"
+	build "github.com/upbound/official-providers/provider-aws/internal/controller/gamelift/build"
+	fleet "github.com/upbound/official-providers/provider-aws/internal/controller/gamelift/fleet"
+	gamesessionqueue "github.com/upbound/official-providers/provider-aws/internal/controller/gamelift/gamesessionqueue"
+	script "github.com/upbound/official-providers/provider-aws/internal/controller/gamelift/script"
 	accelerator "github.com/upbound/official-providers/provider-aws/internal/controller/globalaccelerator/accelerator"
 	endpointgroup "github.com/upbound/official-providers/provider-aws/internal/controller/globalaccelerator/endpointgroup"
 	listener "github.com/upbound/official-providers/provider-aws/internal/controller/globalaccelerator/listener"
@@ -111,6 +116,9 @@ import (
 	trigger "github.com/upbound/official-providers/provider-aws/internal/controller/glue/trigger"
 	userdefinedfunction "github.com/upbound/official-providers/provider-aws/internal/controller/glue/userdefinedfunction"
 	workflow "github.com/upbound/official-providers/provider-aws/internal/controller/glue/workflow"
+	roleassociation "github.com/upbound/official-providers/provider-aws/internal/controller/grafana/roleassociation"
+	workspace "github.com/upbound/official-providers/provider-aws/internal/controller/grafana/workspace"
+	workspacesamlconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/grafana/workspacesamlconfiguration"
 	accesskey "github.com/upbound/official-providers/provider-aws/internal/controller/iam/accesskey"
 	accountalias "github.com/upbound/official-providers/provider-aws/internal/controller/iam/accountalias"
 	accountpasswordpolicy "github.com/upbound/official-providers/provider-aws/internal/controller/iam/accountpasswordpolicy"
@@ -310,6 +318,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lblistener.Setup,
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
+		alias.Setup,
+		build.Setup,
+		fleet.Setup,
+		gamesessionqueue.Setup,
+		script.Setup,
 		accelerator.Setup,
 		endpointgroup.Setup,
 		listener.Setup,
@@ -323,6 +336,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		trigger.Setup,
 		userdefinedfunction.Setup,
 		workflow.Setup,
+		roleassociation.Setup,
+		workspace.Setup,
+		workspacesamlconfiguration.Setup,
 		accesskey.Setup,
 		accountalias.Setup,
 		accountpasswordpolicy.Setup,

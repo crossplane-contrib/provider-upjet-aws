@@ -1,0 +1,12 @@
+apiVersion: grafana.aws.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountAccessType: CURRENT_ACCOUNT
+    authenticationProviders:
+    - SAML
+    permissionType: SERVICE_MANAGED
+    roleArnRef:
+      name: example

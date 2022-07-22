@@ -534,6 +534,28 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_backup_vault_notifications": config.IdentifierFromProvider,
 	// Backup vault policy can be imported using the name of the backup vault
 	"aws_backup_vault_policy": config.IdentifierFromProvider,
+
+	// grafana
+	//
+	// Grafana Workspace can be imported using the workspace's id
+	"aws_grafana_workspace": config.IdentifierFromProvider,
+	// No import
+	"aws_grafana_role_association": config.IdentifierFromProvider,
+	// Grafana Workspace SAML configuration can be imported using the workspace's id
+	"aws_grafana_workspace_saml_configuration": FormattedIdentifierFromProvider("", "workspace_id"),
+
+	// gamelift
+	//
+	// GameLift Aliases can be imported using the ID
+	"aws_gamelift_alias": config.IdentifierFromProvider,
+	// GameLift Builds can be imported using the ID
+	"aws_gamelift_build": config.IdentifierFromProvider,
+	// GameLift Fleets can be imported using the ID
+	"aws_gamelift_fleet": config.IdentifierFromProvider,
+	// GameLift Game Session Queues can be imported by their name
+	"aws_gamelift_game_session_queue": config.NameAsIdentifier,
+	// GameLift Scripts can be imported using the ID
+	"aws_gamelift_script": config.IdentifierFromProvider,
 }
 
 func iamUserGroupMembership() config.ExternalName {
