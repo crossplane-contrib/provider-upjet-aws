@@ -1496,11 +1496,6 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.Filename != nil {
-		in, out := &in.Filename, &out.Filename
-		*out = new(string)
-		**out = **in
-	}
 	if in.Handler != nil {
 		in, out := &in.Handler, &out.Handler
 		*out = new(string)

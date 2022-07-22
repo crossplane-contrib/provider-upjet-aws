@@ -100,9 +100,6 @@ type FunctionParameters struct {
 	FileSystemConfig []FileSystemConfigParameters `json:"fileSystemConfig,omitempty" tf:"file_system_config,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
-
-	// +kubebuilder:validation:Optional
 	Handler *string `json:"handler,omitempty" tf:"handler,omitempty"`
 
 	// +kubebuilder:validation:Optional

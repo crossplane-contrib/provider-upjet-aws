@@ -640,8 +640,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// fully qualified Function name or Amazon Resource Name (ARN)
 	"aws_lambda_function_event_invoke_config": config.IdentifierFromProvider,
 	// Lambda function URLs can be imported using the function_name or function_name/qualifier
-	"aws_lambda_function_url": FormattedIdentifierFromProvider("", "function_name"),
-	// No import
+	"aws_lambda_function_url": lambdaFunctionURL(),
+	// No import"
 	"aws_lambda_invocation": config.IdentifierFromProvider,
 	// Lambda Layers can be imported using arn
 	"aws_lambda_layer_version": config.IdentifierFromProvider,
@@ -656,6 +656,23 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Signer signing profiles can be imported using the name
 	"aws_signer_signing_profile": config.NameAsIdentifier,
+}
+
+func lambdaFunctionURL() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
+		functionName, ok := parameters["function_name"]
+		if !ok {
+			return "", errors.New("function_name cannot be empty")
+		}
+
+		qualifier := parameters["qualifier"]
+		if qualifier == nil || qualifier == "" {
+			return functionName.(string), nil
+		}
+		return fmt.Sprintf("%s/%s", functionName.(string), qualifier.(string)), nil
+	}
+	return e
 }
 
 func iamUserGroupMembership() config.ExternalName {

@@ -29,11 +29,18 @@ func Configure(p *config.Provider) {
 		r.UseAsync = true
 	})
 
+	// TODO: Automated test pipeline cannot be run for the lambda group resources.
+	// Because many resources of this group need `lambda_function` resource and it
+	// has a `filename` field for creation. This field reads a file from local
+	// storage and uses this file during provisioning.
+	// We may consider adding metadata configuration for the `lambda_function` in
+	// a future PR.
 	p.AddResourceConfigurator("aws_lambda_function", func(r *config.Resource) {
 		r.References["role"] = config.Reference{
 			Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
 			Extractor: common.PathARNExtractor,
 		}
+		delete(r.TerraformResource.Schema, "filename")
 	})
 
 	p.AddResourceConfigurator("aws_lambda_function_event_invoke_config", func(r *config.Resource) {
