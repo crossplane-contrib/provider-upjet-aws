@@ -34,6 +34,14 @@ func RegionAddition() config.ResourceOption {
 			Required:    true,
 			Description: comment.String(),
 		}
+		if r.MetaResource == nil {
+			return
+		}
+		for _, ex := range r.MetaResource.Examples {
+			if err := ex.SetPathValue("region", "us-west-1"); err != nil {
+				panic(err)
+			}
+		}
 	}
 }
 
