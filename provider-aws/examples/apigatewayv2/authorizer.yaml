@@ -1,0 +1,53 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: Authorizer
+metadata:
+  generateName: example-
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2
+    authorizerType: REQUEST
+    authorizerUriSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2
+    identitySources:
+    - route.request.header.Auth
+    name: example-authorizer
+    region: us-west-1
+---
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Function
+metadata:
+  generateName: example-
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2
+    upjet.upbound.io/manual-intervention: "The JS file needs to be uploaded and its name needs to be given in s3Key"
+spec:
+  forProvider:
+    region: us-west-1
+    environment:
+    - variables:
+        foo: bar
+    s3BucketSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2
+    s3Key: <zip-object-key>
+    handler: index.test
+    roleRef:
+      name: iam-for-lambda
+    runtime: nodejs12.x
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  generateName: example-
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: SampleBucket

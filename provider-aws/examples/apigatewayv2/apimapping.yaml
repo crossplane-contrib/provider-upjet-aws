@@ -1,0 +1,18 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: APIMapping
+metadata:
+  generateName: example-
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2
+    domainNameSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2
+    region: us-west-1
+    stageSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2

@@ -13,6 +13,7 @@ import (
 
 	"github.com/upbound/official-providers/provider-aws/config/acm"
 	"github.com/upbound/official-providers/provider-aws/config/acmpca"
+	"github.com/upbound/official-providers/provider-aws/config/apigatewayv2"
 	"github.com/upbound/official-providers/provider-aws/config/athena"
 	"github.com/upbound/official-providers/provider-aws/config/autoscaling"
 	"github.com/upbound/official-providers/provider-aws/config/backup"
@@ -154,6 +155,7 @@ func GetProvider() *config.Provider {
 		lakeformation.Configure,
 		route53resolver.Configure,
 		dax.Configure,
+		apigatewayv2.Configure,
 	} {
 		configure(pc)
 	}

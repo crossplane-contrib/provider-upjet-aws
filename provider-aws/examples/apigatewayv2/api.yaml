@@ -1,0 +1,12 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: API
+metadata:
+  generateName: example-
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2
+spec:
+  forProvider:
+    name: example-websocket-api
+    protocolType: WEBSOCKET
+    region: us-west-1
+    routeSelectionExpression: $request.body.action

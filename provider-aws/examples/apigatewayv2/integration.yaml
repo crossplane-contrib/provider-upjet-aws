@@ -1,0 +1,13 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: Integration
+metadata:
+  generateName: example-
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2
+spec:
+  forProvider:
+    apiSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2
+    integrationType: MOCK
+    region: us-west-1

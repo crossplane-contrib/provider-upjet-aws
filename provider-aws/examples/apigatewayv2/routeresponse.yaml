@@ -1,0 +1,16 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: RouteResponse
+metadata:
+  generateName: example-
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2
+spec:
+  forProvider:
+    apiSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2
+    region: us-west-1
+    routeSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2
+    routeResponseKey: $default

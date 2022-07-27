@@ -1,10 +1,24 @@
 package lambda
 
 import (
+	"github.com/crossplane/crossplane-runtime/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	"github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1"
 	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-aws/config/common"
 )
+
+// LambdaFunctionInvokeARN returns the invoke ARN value of the lambda function.
+func LambdaFunctionInvokeARN() reference.ExtractValueFn {
+	return func(mg xpresource.Managed) string {
+		f, ok := mg.(*v1beta1.Function)
+		if !ok || f.Status.AtProvider.InvokeArn == nil {
+			return ""
+		}
+		return *f.Status.AtProvider.InvokeArn
+	}
+}
 
 // Configure adds configurations for lambda group.
 func Configure(p *config.Provider) {

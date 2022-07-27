@@ -1,0 +1,23 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: Model
+metadata:
+  generateName: example-
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2
+spec:
+  forProvider:
+    apiSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2
+    contentType: application/json
+    name: example
+    region: us-west-1
+    schema: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "ExampleModel",
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" }
+        }
+      }
