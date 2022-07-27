@@ -5,8 +5,9 @@ Copyright 2022 Upbound Inc.
 package dynamodb
 
 import (
-	"github.com/upbound/official-providers/provider-aws/config/common"
 	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/official-providers/provider-aws/config/common"
 )
 
 // Configure adds configurations for the dynamodb group.
