@@ -27,6 +27,10 @@ func Configure(p *config.Provider) {
 			}
 			return w[len(w)-1], nil
 		}
+
+		// Mutually exclusive with aws_ecs_cluster_capacity_providers
+		config.MoveToStatus(r.TerraformResource, "capacity_providers")
+
 		r.References = config.References{
 			"capacity_providers": config.Reference{
 				Type: "CapacityProvider",
@@ -38,6 +42,7 @@ func Configure(p *config.Provider) {
 				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
 			},
 		}
+
 		r.UseAsync = true
 	})
 

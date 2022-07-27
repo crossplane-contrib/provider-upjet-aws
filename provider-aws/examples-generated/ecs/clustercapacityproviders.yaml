@@ -1,0 +1,14 @@
+apiVersion: ecs.aws.upbound.io/v1beta1
+kind: ClusterCapacityProviders
+metadata:
+  name: example
+spec:
+  forProvider:
+    capacityProviders:
+    - FARGATE
+    clusterName: ${aws_ecs_cluster.example.name}
+    defaultCapacityProviderStrategy:
+    - base: 1
+      capacityProvider: FARGATE
+      weight: 100
+    region: us-west-1

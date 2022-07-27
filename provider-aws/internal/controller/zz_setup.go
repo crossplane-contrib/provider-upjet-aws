@@ -77,8 +77,10 @@ import (
 	repositorypolicy "github.com/upbound/official-providers/provider-aws/internal/controller/ecr/repositorypolicy"
 	repositoryecrpublic "github.com/upbound/official-providers/provider-aws/internal/controller/ecrpublic/repository"
 	repositorypolicyecrpublic "github.com/upbound/official-providers/provider-aws/internal/controller/ecrpublic/repositorypolicy"
+	accountsettingdefault "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/accountsettingdefault"
 	capacityprovider "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/capacityprovider"
 	clusterecs "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/cluster"
+	clustercapacityproviders "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/clustercapacityproviders"
 	service "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/service"
 	taskdefinition "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/taskdefinition"
 	filesystem "github.com/upbound/official-providers/provider-aws/internal/controller/efs/filesystem"
@@ -331,8 +333,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		repositorypolicy.Setup,
 		repositoryecrpublic.Setup,
 		repositorypolicyecrpublic.Setup,
+		accountsettingdefault.Setup,
 		capacityprovider.Setup,
 		clusterecs.Setup,
+		clustercapacityproviders.Setup,
 		service.Setup,
 		taskdefinition.Setup,
 		filesystem.Setup,
