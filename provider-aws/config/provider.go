@@ -15,6 +15,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/autoscaling"
 	"github.com/upbound/official-providers/provider-aws/config/backup"
 	"github.com/upbound/official-providers/provider-aws/config/cloudfront"
+	"github.com/upbound/official-providers/provider-aws/config/dynamodb"
 	"github.com/upbound/official-providers/provider-aws/config/ebs"
 	"github.com/upbound/official-providers/provider-aws/config/ec2"
 	"github.com/upbound/official-providers/provider-aws/config/ecr"
@@ -99,6 +100,7 @@ func GetProvider() *config.Provider {
 		acm.Configure,
 		acmpca.Configure,
 		autoscaling.Configure,
+		dynamodb.Configure,
 		ebs.Configure,
 		ec2.Configure,
 		ecr.Configure,

@@ -40,6 +40,15 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// No terraform import.
 	"aws_autoscaling_attachment": config.IdentifierFromProvider,
 
+	// DynamoDB Table Items can be imported using the name
+	"aws_dynamodb_table_item": config.IdentifierFromProvider,
+	// DynamoDB Tags can be imported using the id
+	"aws_dynamodb_tag": config.IdentifierFromProvider,
+	// DynamoDB contributor insights
+	"aws_dynamodb_contributor_insights": config.IdentifierFromProvider,
+	// Dynamodb Kinesis streaming destinations are imported using "table_name,stream_arn"
+	"aws_dynamodb_kinesis_streaming_destination": config.IdentifierFromProvider,
+
 	// ebs
 	//
 	// EBS Volumes can be imported using the id: vol-049df61146c4d7901

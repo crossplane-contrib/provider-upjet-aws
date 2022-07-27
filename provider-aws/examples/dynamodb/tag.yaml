@@ -1,0 +1,11 @@
+apiVersion: dynamodb.aws.upbound.io/v1beta1
+kind: Tag
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    resourceArnRef:
+      name: example
+    key: testkey
+    value: testvalue
