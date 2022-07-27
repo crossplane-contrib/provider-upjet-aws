@@ -19,8 +19,17 @@ type AuthorizerObservation struct {
 
 type AuthorizerParameters struct {
 
-	// +kubebuilder:validation:Required
-	APIID *string `json:"apiId" tf:"api_id,omitempty"`
+	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:refFieldName=ApiIdRef
+	// +crossplane:generate:reference:selectorFieldName=ApiIdSelector
+	// +kubebuilder:validation:Optional
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ApiIdRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ApiIdSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	AuthorizerCredentialsArn *string `json:"authorizerCredentialsArn,omitempty" tf:"authorizer_credentials_arn,omitempty"`
@@ -34,8 +43,16 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Required
 	AuthorizerType *string `json:"authorizerType" tf:"authorizer_type,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.LambdaFunctionInvokeARN()
 	// +kubebuilder:validation:Optional
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	AuthorizerURIRef *v1.Reference `json:"authorizerUriRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	AuthorizerURISelector *v1.Selector `json:"authorizerUriSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	EnableSimpleResponses *bool `json:"enableSimpleResponses,omitempty" tf:"enable_simple_responses,omitempty"`

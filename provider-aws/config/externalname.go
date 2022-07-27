@@ -147,7 +147,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// EIP Assocations can be imported using their association ID.
 	"aws_eip_association": config.IdentifierFromProvider,
 	// Key Pairs can be imported using the key_name
-	"aws_key_pair": ParameterAsExternalName("key_name"),
+	"aws_key_pair": config.ParameterAsIdentifier("key_name"),
 	// Network ACLs can be imported using the id
 	"aws_network_acl": config.IdentifierFromProvider,
 	// Individual rules can be imported using NETWORK_ACL_ID:RULE_NUMBER:PROTOCOL:EGRESS

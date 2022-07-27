@@ -1,7 +1,7 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Authorizer
 metadata:
-  generateName: example-
+  name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2
 spec:
@@ -21,9 +21,10 @@ spec:
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: Function
 metadata:
-  generateName: example-
+  name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2
+  annotations:
     upjet.upbound.io/manual-intervention: "The JS file needs to be uploaded and its name needs to be given in s3Key"
 spec:
   forProvider:
@@ -43,7 +44,7 @@ spec:
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
-  generateName: example-
+  name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2
 spec:

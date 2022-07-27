@@ -4,6 +4,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    apiId: ${aws_apigatewayv2_api.example.id}
+    apiIdRef:
+      name: example
     integrationType: MOCK
     region: us-west-1

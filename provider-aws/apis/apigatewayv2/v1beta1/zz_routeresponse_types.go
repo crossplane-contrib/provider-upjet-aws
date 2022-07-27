@@ -19,8 +19,17 @@ type RouteResponseObservation struct {
 
 type RouteResponseParameters struct {
 
-	// +kubebuilder:validation:Required
-	APIID *string `json:"apiId" tf:"api_id,omitempty"`
+	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:refFieldName=ApiIdRef
+	// +crossplane:generate:reference:selectorFieldName=ApiIdSelector
+	// +kubebuilder:validation:Optional
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ApiIdRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ApiIdSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
@@ -33,8 +42,15 @@ type RouteResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
-	// +kubebuilder:validation:Required
-	RouteID *string `json:"routeId" tf:"route_id,omitempty"`
+	// +crossplane:generate:reference:type=Route
+	// +kubebuilder:validation:Optional
+	RouteID *string `json:"routeId,omitempty" tf:"route_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	RouteIDRef *v1.Reference `json:"routeIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	RouteIDSelector *v1.Selector `json:"routeIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	RouteResponseKey *string `json:"routeResponseKey" tf:"route_response_key,omitempty"`

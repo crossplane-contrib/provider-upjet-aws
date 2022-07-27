@@ -4,7 +4,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    apiId: ${aws_apigatewayv2_api.example.id}
-    integrationId: ${aws_apigatewayv2_integration.example.id}
+    apiIdRef:
+      name: example
+    integrationIdRef:
+      name: example
     integrationResponseKey: /200/
     region: us-west-1

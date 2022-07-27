@@ -5,7 +5,8 @@ metadata:
 spec:
   forProvider:
     domainNameConfiguration:
-    - certificateArn: ${aws_acm_certificate.example.arn}
+    - certificateArnRef:
+        name: example
       endpointType: REGIONAL
       securityPolicy: TLS_1_2
     region: us-west-1

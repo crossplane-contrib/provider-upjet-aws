@@ -165,10 +165,30 @@ func (in *APIMappingParameters) DeepCopyInto(out *APIMappingParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ApiIdRef != nil {
+		in, out := &in.ApiIdRef, &out.ApiIdRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.ApiIdSelector != nil {
+		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DomainName != nil {
 		in, out := &in.DomainName, &out.DomainName
 		*out = new(string)
 		**out = **in
+	}
+	if in.DomainNameRef != nil {
+		in, out := &in.DomainNameRef, &out.DomainNameRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.DomainNameSelector != nil {
+		in, out := &in.DomainNameSelector, &out.DomainNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -179,6 +199,16 @@ func (in *APIMappingParameters) DeepCopyInto(out *APIMappingParameters) {
 		in, out := &in.Stage, &out.Stage
 		*out = new(string)
 		**out = **in
+	}
+	if in.StageRef != nil {
+		in, out := &in.StageRef, &out.StageRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.StageSelector != nil {
+		in, out := &in.StageSelector, &out.StageSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -539,6 +569,16 @@ func (in *AuthorizerParameters) DeepCopyInto(out *AuthorizerParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ApiIdRef != nil {
+		in, out := &in.ApiIdRef, &out.ApiIdRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.ApiIdSelector != nil {
+		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AuthorizerCredentialsArn != nil {
 		in, out := &in.AuthorizerCredentialsArn, &out.AuthorizerCredentialsArn
 		*out = new(string)
@@ -563,6 +603,16 @@ func (in *AuthorizerParameters) DeepCopyInto(out *AuthorizerParameters) {
 		in, out := &in.AuthorizerURI, &out.AuthorizerURI
 		*out = new(string)
 		**out = **in
+	}
+	if in.AuthorizerURIRef != nil {
+		in, out := &in.AuthorizerURIRef, &out.AuthorizerURIRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.AuthorizerURISelector != nil {
+		in, out := &in.AuthorizerURISelector, &out.AuthorizerURISelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.EnableSimpleResponses != nil {
 		in, out := &in.EnableSimpleResponses, &out.EnableSimpleResponses
@@ -1005,6 +1055,16 @@ func (in *DomainNameConfigurationParameters) DeepCopyInto(out *DomainNameConfigu
 		*out = new(string)
 		**out = **in
 	}
+	if in.CertificateArnRef != nil {
+		in, out := &in.CertificateArnRef, &out.CertificateArnRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.CertificateArnSelector != nil {
+		in, out := &in.CertificateArnSelector, &out.CertificateArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.EndpointType != nil {
 		in, out := &in.EndpointType, &out.EndpointType
 		*out = new(string)
@@ -1291,6 +1351,16 @@ func (in *IntegrationParameters) DeepCopyInto(out *IntegrationParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ApiIdRef != nil {
+		in, out := &in.ApiIdRef, &out.ApiIdRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.ApiIdSelector != nil {
+		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ConnectionID != nil {
 		in, out := &in.ConnectionID, &out.ConnectionID
 		*out = new(string)
@@ -1504,6 +1574,16 @@ func (in *IntegrationResponseParameters) DeepCopyInto(out *IntegrationResponsePa
 		*out = new(string)
 		**out = **in
 	}
+	if in.ApiIdRef != nil {
+		in, out := &in.ApiIdRef, &out.ApiIdRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.ApiIdSelector != nil {
+		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ContentHandlingStrategy != nil {
 		in, out := &in.ContentHandlingStrategy, &out.ContentHandlingStrategy
 		*out = new(string)
@@ -1513,6 +1593,16 @@ func (in *IntegrationResponseParameters) DeepCopyInto(out *IntegrationResponsePa
 		in, out := &in.IntegrationID, &out.IntegrationID
 		*out = new(string)
 		**out = **in
+	}
+	if in.IntegrationIDRef != nil {
+		in, out := &in.IntegrationIDRef, &out.IntegrationIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.IntegrationIDSelector != nil {
+		in, out := &in.IntegrationIDSelector, &out.IntegrationIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IntegrationResponseKey != nil {
 		in, out := &in.IntegrationResponseKey, &out.IntegrationResponseKey
@@ -1756,6 +1846,16 @@ func (in *ModelParameters) DeepCopyInto(out *ModelParameters) {
 		in, out := &in.APIID, &out.APIID
 		*out = new(string)
 		**out = **in
+	}
+	if in.ApiIdRef != nil {
+		in, out := &in.ApiIdRef, &out.ApiIdRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.ApiIdSelector != nil {
+		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ContentType != nil {
 		in, out := &in.ContentType, &out.ContentType
@@ -2050,6 +2150,16 @@ func (in *RouteParameters) DeepCopyInto(out *RouteParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ApiIdRef != nil {
+		in, out := &in.ApiIdRef, &out.ApiIdRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.ApiIdSelector != nil {
+		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AuthorizationScopes != nil {
 		in, out := &in.AuthorizationScopes, &out.AuthorizationScopes
 		*out = make([]*string, len(*in))
@@ -2222,6 +2332,16 @@ func (in *RouteResponseParameters) DeepCopyInto(out *RouteResponseParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ApiIdRef != nil {
+		in, out := &in.ApiIdRef, &out.ApiIdRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.ApiIdSelector != nil {
+		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ModelSelectionExpression != nil {
 		in, out := &in.ModelSelectionExpression, &out.ModelSelectionExpression
 		*out = new(string)
@@ -2251,6 +2371,16 @@ func (in *RouteResponseParameters) DeepCopyInto(out *RouteResponseParameters) {
 		in, out := &in.RouteID, &out.RouteID
 		*out = new(string)
 		**out = **in
+	}
+	if in.RouteIDRef != nil {
+		in, out := &in.RouteIDRef, &out.RouteIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.RouteIDSelector != nil {
+		in, out := &in.RouteIDSelector, &out.RouteIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RouteResponseKey != nil {
 		in, out := &in.RouteResponseKey, &out.RouteResponseKey
@@ -2520,6 +2650,16 @@ func (in *StageParameters) DeepCopyInto(out *StageParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ApiIdRef != nil {
+		in, out := &in.ApiIdRef, &out.ApiIdRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.ApiIdSelector != nil {
+		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AutoDeploy != nil {
 		in, out := &in.AutoDeploy, &out.AutoDeploy

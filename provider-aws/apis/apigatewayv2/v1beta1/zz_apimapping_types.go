@@ -19,22 +19,46 @@ type APIMappingObservation struct {
 
 type APIMappingParameters struct {
 
-	// +kubebuilder:validation:Required
-	APIID *string `json:"apiId" tf:"api_id,omitempty"`
+	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:refFieldName=ApiIdRef
+	// +crossplane:generate:reference:selectorFieldName=ApiIdSelector
+	// +kubebuilder:validation:Optional
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	APIMappingKey *string `json:"apiMappingKey,omitempty" tf:"api_mapping_key,omitempty"`
 
-	// +kubebuilder:validation:Required
-	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ApiIdRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ApiIdSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+
+	// +crossplane:generate:reference:type=DomainName
+	// +kubebuilder:validation:Optional
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DomainNameRef *v1.Reference `json:"domainNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	Stage *string `json:"stage" tf:"stage,omitempty"`
+	// +crossplane:generate:reference:type=Stage
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.TerraformID()
+	// +kubebuilder:validation:Optional
+	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	StageRef *v1.Reference `json:"stageRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	StageSelector *v1.Selector `json:"stageSelector,omitempty" tf:"-"`
 }
 
 // APIMappingSpec defines the desired state of APIMapping

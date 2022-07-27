@@ -19,14 +19,30 @@ type IntegrationResponseObservation struct {
 
 type IntegrationResponseParameters struct {
 
-	// +kubebuilder:validation:Required
-	APIID *string `json:"apiId" tf:"api_id,omitempty"`
+	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:refFieldName=ApiIdRef
+	// +crossplane:generate:reference:selectorFieldName=ApiIdSelector
+	// +kubebuilder:validation:Optional
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ApiIdRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ApiIdSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
 
-	// +kubebuilder:validation:Required
-	IntegrationID *string `json:"integrationId" tf:"integration_id,omitempty"`
+	// +crossplane:generate:reference:type=Integration
+	// +kubebuilder:validation:Optional
+	IntegrationID *string `json:"integrationId,omitempty" tf:"integration_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IntegrationIDRef *v1.Reference `json:"integrationIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	IntegrationIDSelector *v1.Selector `json:"integrationIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	IntegrationResponseKey *string `json:"integrationResponseKey" tf:"integration_response_key,omitempty"`

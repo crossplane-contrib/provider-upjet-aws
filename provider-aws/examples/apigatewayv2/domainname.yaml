@@ -1,7 +1,7 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: DomainName
 metadata:
-  generateName: example-
+  name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2
 spec:
@@ -17,9 +17,10 @@ spec:
 apiVersion: acm.aws.upbound.io/v1beta1
 kind: Certificate
 metadata:
-  generateName: example-
+  name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2
+  annotations:
     upjet.upbound.io/manual-intervention: "The domain given as spec.forProvider.domainName needs to be created beforehand."
 spec:
   forProvider:

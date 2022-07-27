@@ -1,12 +1,12 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Model
 metadata:
-  generateName: example-
+  name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2
 spec:
   forProvider:
-    apiSelector:
+    apiIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2
     contentType: application/json

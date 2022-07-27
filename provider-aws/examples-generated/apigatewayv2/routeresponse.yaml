@@ -4,7 +4,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    apiId: ${aws_apigatewayv2_api.example.id}
+    apiIdRef:
+      name: example
     region: us-west-1
-    routeId: ${aws_apigatewayv2_route.example.id}
+    routeIdRef:
+      name: example
     routeResponseKey: $default

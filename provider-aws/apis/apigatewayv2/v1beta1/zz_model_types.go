@@ -19,8 +19,17 @@ type ModelObservation struct {
 
 type ModelParameters struct {
 
-	// +kubebuilder:validation:Required
-	APIID *string `json:"apiId" tf:"api_id,omitempty"`
+	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:refFieldName=ApiIdRef
+	// +crossplane:generate:reference:selectorFieldName=ApiIdSelector
+	// +kubebuilder:validation:Optional
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ApiIdRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ApiIdSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`

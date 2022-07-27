@@ -9,9 +9,329 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/acm/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1"
+	common "github.com/upbound/official-providers/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this APIMapping.
+func (mg *APIMapping) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ApiIdRef,
+		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		To: reference.To{
+			List:    &APIList{},
+			Managed: &API{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
+	}
+	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DomainNameRef,
+		Selector:     mg.Spec.ForProvider.DomainNameSelector,
+		To: reference.To{
+			List:    &DomainNameList{},
+			Managed: &DomainName{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DomainName")
+	}
+	mg.Spec.ForProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DomainNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Stage),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.ForProvider.StageRef,
+		Selector:     mg.Spec.ForProvider.StageSelector,
+		To: reference.To{
+			List:    &StageList{},
+			Managed: &Stage{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Stage")
+	}
+	mg.Spec.ForProvider.Stage = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StageRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Authorizer.
+func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ApiIdRef,
+		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		To: reference.To{
+			List:    &APIList{},
+			Managed: &API{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
+	}
+	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthorizerURI),
+		Extract:      v1beta1.LambdaFunctionInvokeARN(),
+		Reference:    mg.Spec.ForProvider.AuthorizerURIRef,
+		Selector:     mg.Spec.ForProvider.AuthorizerURISelector,
+		To: reference.To{
+			List:    &v1beta1.FunctionList{},
+			Managed: &v1beta1.Function{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AuthorizerURI")
+	}
+	mg.Spec.ForProvider.AuthorizerURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AuthorizerURIRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DomainName.
+func (mg *DomainName) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DomainNameConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainNameConfiguration[i3].CertificateArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.DomainNameConfiguration[i3].CertificateArnRef,
+			Selector:     mg.Spec.ForProvider.DomainNameConfiguration[i3].CertificateArnSelector,
+			To: reference.To{
+				List:    &v1beta11.CertificateList{},
+				Managed: &v1beta11.Certificate{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.DomainNameConfiguration[i3].CertificateArn")
+		}
+		mg.Spec.ForProvider.DomainNameConfiguration[i3].CertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DomainNameConfiguration[i3].CertificateArnRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
+// ResolveReferences of this Integration.
+func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ApiIdRef,
+		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		To: reference.To{
+			List:    &APIList{},
+			Managed: &API{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
+	}
+	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this IntegrationResponse.
+func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ApiIdRef,
+		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		To: reference.To{
+			List:    &APIList{},
+			Managed: &API{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
+	}
+	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IntegrationID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.IntegrationIDRef,
+		Selector:     mg.Spec.ForProvider.IntegrationIDSelector,
+		To: reference.To{
+			List:    &IntegrationList{},
+			Managed: &Integration{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IntegrationID")
+	}
+	mg.Spec.ForProvider.IntegrationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IntegrationIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Model.
+func (mg *Model) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ApiIdRef,
+		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		To: reference.To{
+			List:    &APIList{},
+			Managed: &API{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
+	}
+	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Route.
+func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ApiIdRef,
+		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		To: reference.To{
+			List:    &APIList{},
+			Managed: &API{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
+	}
+	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this RouteResponse.
+func (mg *RouteResponse) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ApiIdRef,
+		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		To: reference.To{
+			List:    &APIList{},
+			Managed: &API{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
+	}
+	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RouteID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.RouteIDRef,
+		Selector:     mg.Spec.ForProvider.RouteIDSelector,
+		To: reference.To{
+			List:    &RouteList{},
+			Managed: &Route{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RouteID")
+	}
+	mg.Spec.ForProvider.RouteID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RouteIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Stage.
+func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ApiIdRef,
+		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		To: reference.To{
+			List:    &APIList{},
+			Managed: &API{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
+	}
+	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this VPCLink.
 func (mg *VPCLink) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -26,8 +346,8 @@ func (mg *VPCLink) ResolveReferences(ctx context.Context, c client.Reader) error
 		References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta12.SecurityGroupList{},
+			Managed: &v1beta12.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -42,8 +362,8 @@ func (mg *VPCLink) ResolveReferences(ctx context.Context, c client.Reader) error
 		References:    mg.Spec.ForProvider.SubnetIDRefs,
 		Selector:      mg.Spec.ForProvider.SubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SubnetList{},
-			Managed: &v1beta1.Subnet{},
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
 		},
 	})
 	if err != nil {
