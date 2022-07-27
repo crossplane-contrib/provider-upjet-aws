@@ -156,7 +156,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// ecrpublic
 	//
-	"aws_ecrpublic_repository": ParameterAsExternalName("repository_name"),
+	"aws_ecrpublic_repository": config.ParameterAsIdentifier("repository_name"),
 	// Imported using the repository name.
 	"aws_ecrpublic_repository_policy": config.IdentifierFromProvider,
 
@@ -189,10 +189,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	"aws_elasticache_parameter_group":   config.NameAsIdentifier,
 	"aws_elasticache_subnet_group":      config.NameAsIdentifier,
-	"aws_elasticache_cluster":           ParameterAsExternalName("cluster_id"),
-	"aws_elasticache_replication_group": ParameterAsExternalName("replication_group_id"),
-	"aws_elasticache_user":              ParameterAsExternalName("user_id"),
-	"aws_elasticache_user_group":        ParameterAsExternalName("user_group_id"),
+	"aws_elasticache_cluster":           config.ParameterAsIdentifier("cluster_id"),
+	"aws_elasticache_replication_group": config.ParameterAsIdentifier("replication_group_id"),
+	"aws_elasticache_user":              config.ParameterAsIdentifier("user_id"),
+	"aws_elasticache_user_group":        config.ParameterAsIdentifier("user_group_id"),
 
 	// elasticloadbalancing
 	//
@@ -271,7 +271,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// arn:aws:iam::123456789012:oidc-provider/accounts.google.com
 	"aws_iam_openid_connect_provider": config.IdentifierFromProvider,
 	// The current Account Alias can be imported using the account_alias
-	"aws_iam_account_alias": ParameterAsExternalName("account_alias"),
+	"aws_iam_account_alias": config.ParameterAsIdentifier("account_alias"),
 	// IAM Account Password Policy can be imported using the word iam-account-password-policy
 	"aws_iam_account_password_policy": config.IdentifierFromProvider,
 	// No import
@@ -319,20 +319,20 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// neptune
 	//
-	"aws_neptune_cluster": ParameterAsExternalName("cluster_identifier"),
+	"aws_neptune_cluster": config.ParameterAsIdentifier("cluster_identifier"),
 	// my_cluster:my_cluster_endpoint
 	"aws_neptune_cluster_endpoint":        FormattedIdentifierUserDefined("cluster_endpoint_identifier", ":", "cluster_identifier"),
-	"aws_neptune_cluster_instance":        ParameterAsExternalName("identifier"),
+	"aws_neptune_cluster_instance":        config.ParameterAsIdentifier("identifier"),
 	"aws_neptune_cluster_parameter_group": config.NameAsIdentifier,
-	"aws_neptune_cluster_snapshot":        ParameterAsExternalName("db_cluster_snapshot_identifier"),
+	"aws_neptune_cluster_snapshot":        config.ParameterAsIdentifier("db_cluster_snapshot_identifier"),
 	"aws_neptune_event_subscription":      config.NameAsIdentifier,
 	"aws_neptune_parameter_group":         config.NameAsIdentifier,
 	"aws_neptune_subnet_group":            config.NameAsIdentifier,
 
 	// rds
 	//
-	"aws_rds_cluster":        ParameterAsExternalName("cluster_identifier"),
-	"aws_db_instance":        ParameterAsExternalName("identifier"),
+	"aws_rds_cluster":        config.ParameterAsIdentifier("cluster_identifier"),
+	"aws_db_instance":        config.ParameterAsIdentifier("identifier"),
 	"aws_db_parameter_group": config.NameAsIdentifier,
 	"aws_db_subnet_group":    config.NameAsIdentifier,
 	// aws_db_instance_role_association can be imported using the DB Instance Identifier and IAM Role ARN separated by a comma
@@ -351,20 +351,20 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// DB Security groups can be imported using the name
 	"aws_db_security_group": config.NameAsIdentifier,
 	// aws_db_snapshot can be imported by using the snapshot identifier
-	"aws_db_snapshot": ParameterAsExternalName("db_snapshot_identifier"),
+	"aws_db_snapshot": config.ParameterAsIdentifier("db_snapshot_identifier"),
 	// RDS Aurora Cluster Database Activity Streams can be imported using the resource_arn
 	"aws_rds_cluster_activity_stream": config.IdentifierFromProvider,
 	// RDS Clusters Endpoint can be imported using the cluster_endpoint_identifier
-	"aws_rds_cluster_endpoint": ParameterAsExternalName("cluster_endpoint_identifier"),
+	"aws_rds_cluster_endpoint": config.ParameterAsIdentifier("cluster_endpoint_identifier"),
 	// RDS Cluster Instances can be imported using the identifier
-	"aws_rds_cluster_instance": ParameterAsExternalName("identifier"),
+	"aws_rds_cluster_instance": config.ParameterAsIdentifier("identifier"),
 	// RDS Cluster Parameter Groups can be imported using the name
 	"aws_rds_cluster_parameter_group": config.NameAsIdentifier,
 	// aws_rds_cluster_role_association can be imported using the DB Cluster Identifier and IAM Role ARN separated by a comma (,)
 	// $ terraform import aws_rds_cluster_role_association.example my-db-cluster,arn:aws:iam::123456789012:role/my-role
 	"aws_rds_cluster_role_association": FormattedIdentifierFromProvider(",", "db_cluster_identifier", "role_arn"),
 	// aws_rds_global_cluster can be imported by using the RDS Global Cluster identifie
-	"aws_rds_global_cluster": ParameterAsExternalName("global_cluster_identifier"),
+	"aws_rds_global_cluster": config.ParameterAsIdentifier("global_cluster_identifier"),
 
 	// route53
 	//
@@ -425,7 +425,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// s3
 	//
 	// S3 bucket can be imported using the bucket
-	"aws_s3_bucket": ParameterAsExternalName("bucket"),
+	"aws_s3_bucket": config.ParameterAsIdentifier("bucket"),
 	// the S3 bucket accelerate configuration resource should be imported using the bucket
 	"aws_s3_bucket_object_lock_configuration": config.IdentifierFromProvider,
 	// the S3 bucket accelerate configuration resource should be imported using the bucket
@@ -510,7 +510,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// docdb
 	//
 	// DocDB Clusters can be imported using the cluster_identifier
-	"aws_docdb_cluster": ParameterAsExternalName("cluster_identifier"),
+	"aws_docdb_cluster": config.ParameterAsIdentifier("cluster_identifier"),
 	// aws_docdb_global_cluster can be imported by using the Global Cluster id
 	"aws_docdb_global_cluster": config.IdentifierFromProvider,
 	// DocDB Cluster Instances can be imported using the identifier
@@ -563,11 +563,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_dynamodb_table": config.NameAsIdentifier,
 	// DynamoDB Global Tables can be imported using the global table name
 	"aws_dynamodb_global_table": config.NameAsIdentifier,
-
-	// apigateway2
-	//
-	// aws_apigatewayv2_vpc_link can be imported by using the VPC Link id
-	"aws_apigatewayv2_vpc_link": config.IdentifierFromProvider,
 
 	// sns
 	//
@@ -687,7 +682,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Lambda event source mappings can be imported using the UUID (event source mapping identifier)
 	"aws_lambda_event_source_mapping": config.IdentifierFromProvider,
 	// Lambda Functions can be imported using the function_name
-	"aws_lambda_function": ParameterAsExternalName("function_name"),
+	"aws_lambda_function": config.ParameterAsIdentifier("function_name"),
 	// Lambda Function Event Invoke Configs can be imported using the
 	// fully qualified Function name or Amazon Resource Name (ARN)
 	"aws_lambda_function_event_invoke_config": config.IdentifierFromProvider,
@@ -899,7 +894,7 @@ func FormattedIdentifierFromProvider(separator string, keys ...string) config.Ex
 // resource. For example, vpc_id:cluster_name where vpc_id comes from spec
 // but cluster_name is a naming field we can use external name for.
 func FormattedIdentifierUserDefined(param, separator string, keys ...string) config.ExternalName {
-	e := ParameterAsExternalName(param)
+	e := config.ParameterAsIdentifier(param)
 	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
 		vals := make([]string, len(keys)+1)
 		for i, k := range keys {
@@ -931,17 +926,14 @@ func FormattedIdentifierUserDefined(param, separator string, keys ...string) con
 	return e
 }
 
-// ParameterAsExternalName is a different version of NameAsIdentifier where you
-// can define a field name other than "name", such as "cluster_name".
-func ParameterAsExternalName(paramName string) config.ExternalName {
-	e := config.NameAsIdentifier
-	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
-		base[paramName] = externalName
-	}
-	e.OmittedFields = []string{
-		paramName,
-		paramName + "_prefix",
-	}
+// TemplatedStringAsIdentifierWithNoName uses TemplatedStringAsIdentifier but
+// without the name initializer. This allows it to be used in cases where the ID
+// is constructed with parameters and a provider-defined value, meaning no
+// user-defined input. Since the external name is not user-defined, the name
+// initializer has to be disabled
+func TemplatedStringAsIdentifierWithNoName(tmpl string) config.ExternalName {
+	e := config.TemplatedStringAsIdentifier("", tmpl)
+	e.DisableNameInitializer = true
 	return e
 }
 
