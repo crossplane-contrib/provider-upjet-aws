@@ -1,0 +1,9 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: Route
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiId: ${aws_apigatewayv2_api.example.id}
+    region: us-west-1
+    routeKey: $default

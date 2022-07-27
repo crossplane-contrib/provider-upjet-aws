@@ -1,0 +1,11 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: DomainName
+metadata:
+  name: example
+spec:
+  forProvider:
+    domainNameConfiguration:
+    - certificateArn: ${aws_acm_certificate.example.arn}
+      endpointType: REGIONAL
+      securityPolicy: TLS_1_2
+    region: us-west-1

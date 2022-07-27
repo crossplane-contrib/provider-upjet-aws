@@ -1,0 +1,10 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: APIMapping
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiId: ${aws_apigatewayv2_api.example.id}
+    domainName: ${aws_apigatewayv2_domain_name.example.id}
+    region: us-west-1
+    stage: ${aws_apigatewayv2_stage.example.id}

@@ -1,0 +1,11 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: Deployment
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiId: ${aws_apigatewayv2_route.example.api_id}
+    description: Example deployment
+    lifecycle:
+    - create_before_destroy: true
+    region: us-west-1

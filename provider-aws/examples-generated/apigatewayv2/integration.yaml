@@ -1,0 +1,9 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: Integration
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiId: ${aws_apigatewayv2_api.example.id}
+    integrationType: MOCK
+    region: us-west-1

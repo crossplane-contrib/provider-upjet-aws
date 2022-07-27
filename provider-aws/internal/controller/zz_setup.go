@@ -14,6 +14,17 @@ import (
 	certificateacmpca "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificate"
 	certificateauthority "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthority"
 	certificateauthoritycertificate "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthoritycertificate"
+	api "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/api"
+	apimapping "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/apimapping"
+	authorizer "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/authorizer"
+	deployment "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/deployment"
+	domainname "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/domainname"
+	integration "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/integration"
+	integrationresponse "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/integrationresponse"
+	model "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/model"
+	route "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/route"
+	routeresponse "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/routeresponse"
+	stage "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/stage"
 	vpclink "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/vpclink"
 	workgroup "github.com/upbound/official-providers/provider-aws/internal/controller/athena/workgroup"
 	attachment "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/attachment"
@@ -65,7 +76,7 @@ import (
 	networkacl "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkacl"
 	networkaclrule "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkaclrule"
 	networkinterface "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkinterface"
-	route "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/route"
+	routeec2 "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/route"
 	routetable "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/routetable"
 	routetableassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/routetableassociation"
 	securitygroup "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/securitygroup"
@@ -308,6 +319,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		certificateacmpca.Setup,
 		certificateauthority.Setup,
 		certificateauthoritycertificate.Setup,
+		api.Setup,
+		apimapping.Setup,
+		authorizer.Setup,
+		deployment.Setup,
+		domainname.Setup,
+		integration.Setup,
+		integrationresponse.Setup,
+		model.Setup,
+		route.Setup,
+		routeresponse.Setup,
+		stage.Setup,
 		vpclink.Setup,
 		workgroup.Setup,
 		attachment.Setup,
@@ -359,7 +381,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		networkacl.Setup,
 		networkaclrule.Setup,
 		networkinterface.Setup,
-		route.Setup,
+		routeec2.Setup,
 		routetable.Setup,
 		routetableassociation.Setup,
 		securitygroup.Setup,

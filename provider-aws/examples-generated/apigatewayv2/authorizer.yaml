@@ -1,0 +1,13 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: Authorizer
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiId: ${aws_apigatewayv2_api.example.id}
+    authorizerType: REQUEST
+    authorizerUri: ${aws_lambda_function.example.invoke_arn}
+    identitySources:
+    - route.request.header.Auth
+    name: example-authorizer
+    region: us-west-1
