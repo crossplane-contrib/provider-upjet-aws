@@ -34,6 +34,33 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// No doc on import, but resource is getting CA ARN: arn:aws:acm-pca:eu-central-1:609897127049:certificate-authority/ba0c7989-9641-4f36-a033-dee60121d595
 	"aws_acmpca_certificate_authority_certificate": config.IdentifierFromProvider,
 
+	// apigatewayv2
+	//
+	"aws_apigatewayv2_api": config.IdentifierFromProvider,
+	// Case4: Imported by using the API mapping identifier and domain name.
+	"aws_apigatewayv2_api_mapping": TemplatedStringAsIdentifierWithNoName("{{ .externalName }}/{{ .parameters.domain_name }}"),
+	// Case4: Imported by using the API identifier and authorizer identifier.
+	"aws_apigatewayv2_authorizer": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	// Case4: Imported by using the API identifier and deployment identifier.
+	"aws_apigatewayv2_deployment":  TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_domain_name": config.ParameterAsIdentifier("domain_name"),
+	// Case4: Imported by using the API identifier and integration identifier.
+	"aws_apigatewayv2_integration": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	// Case4: Imported by using the API identifier, integration identifier and
+	// integration response identifier.
+	"aws_apigatewayv2_integration_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.integration_id }}/{{ .externalName }}"),
+	// Case4: Imported by using the API identifier and model identifier.
+	"aws_apigatewayv2_model": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	// Case4: Imported by using the API identifier and route identifier.
+	"aws_apigatewayv2_route": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	// Case4: Imported by using the API identifier, route identifier and route
+	// response identifier.
+	"aws_apigatewayv2_route_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.route_id }}/{{ .externalName }}"),
+	// Imported by using the API identifier and stage name.
+	"aws_apigatewayv2_stage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_id }}/{{ .externalName }}"),
+	// aws_apigatewayv2_vpc_link can be imported by using the VPC Link id
+	"aws_apigatewayv2_vpc_link": config.IdentifierFromProvider,
+
 	// autoscaling
 	//
 	"aws_autoscaling_group": config.NameAsIdentifier,
