@@ -1,0 +1,11 @@
+apiVersion: dynamodb.aws.upbound.io/v1beta1
+kind: KinesisStreamingDestination
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    streamArnRef:
+      name: example
+    tableNameRef:
+      name: example
