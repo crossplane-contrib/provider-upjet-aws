@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type EgressObservation struct {
+type SecurityGroupEgressObservation struct {
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
 
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -33,10 +33,10 @@ type EgressObservation struct {
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
-type EgressParameters struct {
+type SecurityGroupEgressParameters struct {
 }
 
-type IngressObservation struct {
+type SecurityGroupIngressObservation struct {
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
 
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -56,17 +56,17 @@ type IngressObservation struct {
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
-type IngressParameters struct {
+type SecurityGroupIngressParameters struct {
 }
 
 type SecurityGroupObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	Egress []EgressObservation `json:"egress,omitempty" tf:"egress,omitempty"`
+	Egress []SecurityGroupEgressObservation `json:"egress,omitempty" tf:"egress,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	Ingress []IngressObservation `json:"ingress,omitempty" tf:"ingress,omitempty"`
+	Ingress []SecurityGroupIngressObservation `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 

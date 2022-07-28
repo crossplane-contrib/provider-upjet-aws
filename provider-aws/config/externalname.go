@@ -104,6 +104,31 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_internet_gateway": config.IdentifierFromProvider,
 	// NAT Gateways can be imported using the id
 	"aws_nat_gateway": config.IdentifierFromProvider,
+	// aws_ec2_transit_gateway_multicast_domain can be imported by using the EC2 Transit Gateway Multicast Domain identifier
+	"aws_ec2_transit_gateway_multicast_domain": config.IdentifierFromProvider,
+	// No import
+	"aws_ec2_transit_gateway_multicast_domain_association": config.IdentifierFromProvider,
+	// aws_ec2_transit_gateway_peering_attachment can be imported by using the EC2 Transit Gateway Attachment identifier
+	"aws_ec2_transit_gateway_peering_attachment": config.IdentifierFromProvider,
+	// EIP Assocations can be imported using their association ID.
+	"aws_eip_association": config.IdentifierFromProvider,
+	// Key Pairs can be imported using the key_name
+	"aws_key_pair": ParameterAsExternalName("key_name"),
+	// Network ACLs can be imported using the id
+	"aws_network_acl": config.IdentifierFromProvider,
+	// Individual rules can be imported using NETWORK_ACL_ID:RULE_NUMBER:PROTOCOL:EGRESS
+	"aws_network_acl_rule": config.IdentifierFromProvider,
+	// No import
+	"aws_spot_instance_request": config.IdentifierFromProvider,
+	// EBS Volume Attachments can be imported using DEVICE_NAME:VOLUME_ID:INSTANCE_ID
+	"aws_volume_attachment": config.IdentifierFromProvider,
+	// VPC DHCP Options can be imported using the dhcp options id
+	"aws_vpc_dhcp_options": config.IdentifierFromProvider,
+	// DHCP associations can be imported by providing the VPC ID associated with the options
+	// terraform import aws_vpc_dhcp_options_association.imported vpc-0f001273ec18911b1
+	"aws_vpc_dhcp_options_association": config.IdentifierFromProvider,
+	// VPC Endpoint Services can be imported using the VPC endpoint service id
+	"aws_vpc_endpoint_service": config.IdentifierFromProvider,
 
 	// ecr
 	//

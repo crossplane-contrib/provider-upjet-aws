@@ -1,0 +1,15 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: NetworkACLRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    cidrBlock: ${aws_vpc.foo.cidr_block}
+    egress: false
+    fromPort: 22
+    networkAclId: ${aws_network_acl.bar.id}
+    protocol: tcp
+    region: us-west-1
+    ruleAction: allow
+    ruleNumber: 200
+    toPort: 22
