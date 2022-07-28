@@ -1,0 +1,16 @@
+apiVersion: redshift.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterType: single-node
+    databaseName: mydb
+    masterPasswordSecretRef:
+      key: password
+      name: example-secret
+      namespace: crossplane-system
+    masterUsername: exampleuser
+    nodeType: ra3.xlplus
+    region: us-west-1
+    skipFinalSnapshot: true

@@ -1,0 +1,29 @@
+apiVersion: elb.aws.upbound.io/v1beta1
+kind: ELB
+metadata:
+  name: example
+spec:
+  forProvider:
+    availabilityZones:
+    - us-west-1b
+    - us-west-1c
+    connectionDraining: true
+    connectionDrainingTimeout: 400
+    crossZoneLoadBalancing: true
+    healthCheck:
+    - healthyThreshold: 2
+      interval: 30
+      target: HTTP:8000/
+      timeout: 3
+      unhealthyThreshold: 2
+    idleTimeout: 400
+    instancesRefs:
+    - name: example
+    listener:
+    - instancePort: 8000
+      instanceProtocol: http
+      lbPort: 80
+      lbProtocol: http
+    region: us-west-1
+    tags:
+      Name: foobar-terraform-elb

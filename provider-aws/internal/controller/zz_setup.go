@@ -15,6 +15,7 @@ import (
 	certificateauthority "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthority"
 	certificateauthoritycertificate "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthoritycertificate"
 	vpclink "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/vpclink"
+	workgroup "github.com/upbound/official-providers/provider-aws/internal/controller/athena/workgroup"
 	attachment "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/attachment"
 	autoscalinggroup "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/autoscalinggroup"
 	framework "github.com/upbound/official-providers/provider-aws/internal/controller/backup/framework"
@@ -39,8 +40,11 @@ import (
 	publickey "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/publickey"
 	realtimelogconfig "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/realtimelogconfig"
 	responseheaderspolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/responseheaderspolicy"
+	group "github.com/upbound/official-providers/provider-aws/internal/controller/cloudwatchlogs/group"
 	cluster "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/cluster"
+	clusterinstance "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/clusterinstance"
 	globalcluster "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/globalcluster"
+	subnetgroup "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/subnetgroup"
 	contributorinsights "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/contributorinsights"
 	globaltable "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/globaltable"
 	kinesisstreamingdestination "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
@@ -108,9 +112,11 @@ import (
 	clusterelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/cluster"
 	parametergroup "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/parametergroup"
 	replicationgroup "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/replicationgroup"
-	subnetgroup "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/subnetgroup"
+	subnetgroupelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/subnetgroup"
 	user "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/user"
 	usergroup "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/usergroup"
+	attachmentelb "github.com/upbound/official-providers/provider-aws/internal/controller/elb/attachment"
+	elb "github.com/upbound/official-providers/provider-aws/internal/controller/elb/elb"
 	lb "github.com/upbound/official-providers/provider-aws/internal/controller/elbv2/lb"
 	lblistener "github.com/upbound/official-providers/provider-aws/internal/controller/elbv2/lblistener"
 	lbtargetgroup "github.com/upbound/official-providers/provider-aws/internal/controller/elbv2/lbtargetgroup"
@@ -140,7 +146,7 @@ import (
 	accesskey "github.com/upbound/official-providers/provider-aws/internal/controller/iam/accesskey"
 	accountalias "github.com/upbound/official-providers/provider-aws/internal/controller/iam/accountalias"
 	accountpasswordpolicy "github.com/upbound/official-providers/provider-aws/internal/controller/iam/accountpasswordpolicy"
-	group "github.com/upbound/official-providers/provider-aws/internal/controller/iam/group"
+	groupiam "github.com/upbound/official-providers/provider-aws/internal/controller/iam/group"
 	groupmembership "github.com/upbound/official-providers/provider-aws/internal/controller/iam/groupmembership"
 	grouppolicyattachment "github.com/upbound/official-providers/provider-aws/internal/controller/iam/grouppolicyattachment"
 	instanceprofile "github.com/upbound/official-providers/provider-aws/internal/controller/iam/instanceprofile"
@@ -159,6 +165,9 @@ import (
 	userpolicyattachment "github.com/upbound/official-providers/provider-aws/internal/controller/iam/userpolicyattachment"
 	usersshkey "github.com/upbound/official-providers/provider-aws/internal/controller/iam/usersshkey"
 	virtualmfadevice "github.com/upbound/official-providers/provider-aws/internal/controller/iam/virtualmfadevice"
+	policyiot "github.com/upbound/official-providers/provider-aws/internal/controller/iot/policy"
+	thing "github.com/upbound/official-providers/provider-aws/internal/controller/iot/thing"
+	configuration "github.com/upbound/official-providers/provider-aws/internal/controller/kafka/configuration"
 	stream "github.com/upbound/official-providers/provider-aws/internal/controller/kinesis/stream"
 	streamconsumer "github.com/upbound/official-providers/provider-aws/internal/controller/kinesis/streamconsumer"
 	application "github.com/upbound/official-providers/provider-aws/internal/controller/kinesisanalytics/application"
@@ -193,16 +202,17 @@ import (
 	association "github.com/upbound/official-providers/provider-aws/internal/controller/licensemanager/association"
 	licenseconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/licensemanager/licenseconfiguration"
 	broker "github.com/upbound/official-providers/provider-aws/internal/controller/mq/broker"
-	configuration "github.com/upbound/official-providers/provider-aws/internal/controller/mq/configuration"
+	configurationmq "github.com/upbound/official-providers/provider-aws/internal/controller/mq/configuration"
 	clusterneptune "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/cluster"
 	clusterendpoint "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/clusterendpoint"
-	clusterinstance "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/clusterinstance"
+	clusterinstanceneptune "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/clusterinstance"
 	clusterparametergroup "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/clusterparametergroup"
 	clustersnapshot "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/clustersnapshot"
 	eventsubscription "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/eventsubscription"
 	parametergroupneptune "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/parametergroup"
 	subnetgroupneptune "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/subnetgroup"
 	providerconfig "github.com/upbound/official-providers/provider-aws/internal/controller/providerconfig"
+	resourceshare "github.com/upbound/official-providers/provider-aws/internal/controller/ram/resourceshare"
 	clusterrds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/cluster"
 	clusteractivitystream "github.com/upbound/official-providers/provider-aws/internal/controller/rds/clusteractivitystream"
 	clusterendpointrds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/clusterendpoint"
@@ -221,6 +231,7 @@ import (
 	securitygrouprds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/securitygroup"
 	snapshot "github.com/upbound/official-providers/provider-aws/internal/controller/rds/snapshot"
 	subnetgrouprds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/subnetgroup"
+	clusterredshift "github.com/upbound/official-providers/provider-aws/internal/controller/redshift/cluster"
 	groupresourcegroups "github.com/upbound/official-providers/provider-aws/internal/controller/resourcegroups/group"
 	delegationset "github.com/upbound/official-providers/provider-aws/internal/controller/route53/delegationset"
 	healthcheck "github.com/upbound/official-providers/provider-aws/internal/controller/route53/healthcheck"
@@ -268,12 +279,17 @@ import (
 	object "github.com/upbound/official-providers/provider-aws/internal/controller/s3/object"
 	objectcopy "github.com/upbound/official-providers/provider-aws/internal/controller/s3/objectcopy"
 	secret "github.com/upbound/official-providers/provider-aws/internal/controller/secretsmanager/secret"
+	httpnamespace "github.com/upbound/official-providers/provider-aws/internal/controller/servicediscovery/httpnamespace"
 	privatednsnamespace "github.com/upbound/official-providers/provider-aws/internal/controller/servicediscovery/privatednsnamespace"
+	publicdnsnamespace "github.com/upbound/official-providers/provider-aws/internal/controller/servicediscovery/publicdnsnamespace"
+	activity "github.com/upbound/official-providers/provider-aws/internal/controller/sfn/activity"
+	statemachine "github.com/upbound/official-providers/provider-aws/internal/controller/sfn/statemachine"
 	signingprofile "github.com/upbound/official-providers/provider-aws/internal/controller/signer/signingprofile"
 	topic "github.com/upbound/official-providers/provider-aws/internal/controller/sns/topic"
 	topicsubscription "github.com/upbound/official-providers/provider-aws/internal/controller/sns/topicsubscription"
 	queue "github.com/upbound/official-providers/provider-aws/internal/controller/sqs/queue"
 	server "github.com/upbound/official-providers/provider-aws/internal/controller/transfer/server"
+	usertransfer "github.com/upbound/official-providers/provider-aws/internal/controller/transfer/user"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -286,6 +302,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		certificateauthority.Setup,
 		certificateauthoritycertificate.Setup,
 		vpclink.Setup,
+		workgroup.Setup,
 		attachment.Setup,
 		autoscalinggroup.Setup,
 		framework.Setup,
@@ -310,8 +327,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		publickey.Setup,
 		realtimelogconfig.Setup,
 		responseheaderspolicy.Setup,
+		group.Setup,
 		cluster.Setup,
+		clusterinstance.Setup,
 		globalcluster.Setup,
+		subnetgroup.Setup,
 		contributorinsights.Setup,
 		globaltable.Setup,
 		kinesisstreamingdestination.Setup,
@@ -379,9 +399,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		clusterelasticache.Setup,
 		parametergroup.Setup,
 		replicationgroup.Setup,
-		subnetgroup.Setup,
+		subnetgroupelasticache.Setup,
 		user.Setup,
 		usergroup.Setup,
+		attachmentelb.Setup,
+		elb.Setup,
 		lb.Setup,
 		lblistener.Setup,
 		lbtargetgroup.Setup,
@@ -411,7 +433,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		accesskey.Setup,
 		accountalias.Setup,
 		accountpasswordpolicy.Setup,
-		group.Setup,
+		groupiam.Setup,
 		groupmembership.Setup,
 		grouppolicyattachment.Setup,
 		instanceprofile.Setup,
@@ -430,6 +452,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userpolicyattachment.Setup,
 		usersshkey.Setup,
 		virtualmfadevice.Setup,
+		policyiot.Setup,
+		thing.Setup,
+		configuration.Setup,
 		stream.Setup,
 		streamconsumer.Setup,
 		application.Setup,
@@ -464,16 +489,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		association.Setup,
 		licenseconfiguration.Setup,
 		broker.Setup,
-		configuration.Setup,
+		configurationmq.Setup,
 		clusterneptune.Setup,
 		clusterendpoint.Setup,
-		clusterinstance.Setup,
+		clusterinstanceneptune.Setup,
 		clusterparametergroup.Setup,
 		clustersnapshot.Setup,
 		eventsubscription.Setup,
 		parametergroupneptune.Setup,
 		subnetgroupneptune.Setup,
 		providerconfig.Setup,
+		resourceshare.Setup,
 		clusterrds.Setup,
 		clusteractivitystream.Setup,
 		clusterendpointrds.Setup,
@@ -492,6 +518,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		securitygrouprds.Setup,
 		snapshot.Setup,
 		subnetgrouprds.Setup,
+		clusterredshift.Setup,
 		groupresourcegroups.Setup,
 		delegationset.Setup,
 		healthcheck.Setup,
@@ -539,12 +566,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		object.Setup,
 		objectcopy.Setup,
 		secret.Setup,
+		httpnamespace.Setup,
 		privatednsnamespace.Setup,
+		publicdnsnamespace.Setup,
+		activity.Setup,
+		statemachine.Setup,
 		signingprofile.Setup,
 		topic.Setup,
 		topicsubscription.Setup,
 		queue.Setup,
 		server.Setup,
+		usertransfer.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

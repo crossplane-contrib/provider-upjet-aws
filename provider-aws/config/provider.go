@@ -8,6 +8,18 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
+	"github.com/upbound/official-providers/provider-aws/config/transfer"
+
+	"github.com/upbound/official-providers/provider-aws/config/sfn"
+
+	"github.com/upbound/official-providers/provider-aws/config/redshift"
+
+	"github.com/upbound/official-providers/provider-aws/config/elb"
+
+	"github.com/upbound/official-providers/provider-aws/config/docdb"
+
+	"github.com/upbound/official-providers/provider-aws/config/athena"
+
 	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-aws/config/acm"
@@ -131,6 +143,12 @@ func GetProvider() *config.Provider {
 		licensemanager.Configure,
 		kms.Configure,
 		lambda.Configure,
+		athena.Configure,
+		docdb.Configure,
+		elb.Configure,
+		redshift.Configure,
+		sfn.Configure,
+		transfer.Configure,
 	} {
 		configure(pc)
 	}

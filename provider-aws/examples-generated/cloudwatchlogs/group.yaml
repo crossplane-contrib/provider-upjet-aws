@@ -1,0 +1,10 @@
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Application: serviceA
+      Environment: production

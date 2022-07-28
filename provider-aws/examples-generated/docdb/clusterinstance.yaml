@@ -1,0 +1,11 @@
+apiVersion: docdb.aws.upbound.io/v1beta1
+kind: ClusterInstance
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterIdentifierRef:
+      name: example
+    count: 2
+    instanceClass: db.r5.large
+    region: us-west-1
