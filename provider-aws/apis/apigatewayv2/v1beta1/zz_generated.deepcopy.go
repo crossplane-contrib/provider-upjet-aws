@@ -924,6 +924,16 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ApiIdRef != nil {
+		in, out := &in.ApiIdRef, &out.ApiIdRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.ApiIdSelector != nil {
+		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)

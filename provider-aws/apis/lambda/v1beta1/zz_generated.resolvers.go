@@ -7,11 +7,13 @@ package v1beta1
 
 import (
 	"context"
+
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/efs/v1beta1"
 	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
+	v1beta16 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/signer/v1beta1"
 	v1beta15 "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1"
 	v1beta14 "github.com/upbound/official-providers/provider-aws/apis/sqs/v1beta1"
@@ -157,6 +159,22 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Bucket),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.S3BucketRef,
+		Selector:     mg.Spec.ForProvider.S3BucketSelector,
+		To: reference.To{
+			List:    &v1beta16.BucketList{},
+			Managed: &v1beta16.Bucket{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.S3Bucket")
+	}
+	mg.Spec.ForProvider.S3Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.S3BucketRef = rsp.ResolvedReference
 
 	return nil
 }

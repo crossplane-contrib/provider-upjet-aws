@@ -9,8 +9,8 @@ spec:
     apiIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2
-    integrationSelector:
+    integrationIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2
-    integrationResponseKey: /200/
+    integrationResponseKey: "$default"
     region: us-west-1

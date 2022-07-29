@@ -10,7 +10,7 @@ spec:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2
     region: us-west-1
-    routeSelector:
+    routeIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2
     routeResponseKey: $default

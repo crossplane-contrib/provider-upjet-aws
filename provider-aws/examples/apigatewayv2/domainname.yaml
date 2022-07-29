@@ -2,17 +2,19 @@ apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: DomainName
 metadata:
   name: example
+  annotations:
+    crossplane.io/external-name: example-email.upbound-providers.io
   labels:
     upjet.upbound.io/test-group: apigatewayv2
 spec:
   forProvider:
+    region: us-west-1
     domainNameConfiguration:
     - certificateArnSelector:
         matchLabels:
           upjet.upbound.io/test-group: apigatewayv2
       endpointType: REGIONAL
       securityPolicy: TLS_1_2
-    region: us-west-1
 ---
 apiVersion: acm.aws.upbound.io/v1beta1
 kind: Certificate
@@ -24,7 +26,7 @@ metadata:
     upjet.upbound.io/manual-intervention: "The domain given as spec.forProvider.domainName needs to be created beforehand."
 spec:
   forProvider:
-    region: eu-central-1
+    region: us-west-1
     domainName: example-email.upbound-providers.io
     tags:
       Environment: test

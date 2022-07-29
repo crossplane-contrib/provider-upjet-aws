@@ -1601,6 +1601,16 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.S3BucketRef != nil {
+		in, out := &in.S3BucketRef, &out.S3BucketRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.S3BucketSelector != nil {
+		in, out := &in.S3BucketSelector, &out.S3BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.S3Key != nil {
 		in, out := &in.S3Key, &out.S3Key
 		*out = new(string)

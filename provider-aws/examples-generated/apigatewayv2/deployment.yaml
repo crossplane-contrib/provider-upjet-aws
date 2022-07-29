@@ -4,8 +4,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    apiId: ${aws_apigatewayv2_route.example.api_id}
+    apiIdRef:
+      name: example
     description: Example deployment
-    lifecycle:
-    - create_before_destroy: true
+    lifecycle: null
     region: us-west-1

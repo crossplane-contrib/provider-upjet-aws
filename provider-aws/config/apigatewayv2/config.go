@@ -43,6 +43,16 @@ func Configure(p *config.Provider) {
 			Extractor: common.PathARNExtractor,
 		}
 	})
+	p.AddResourceConfigurator("aws_apigatewayv2_deployment", func(r *config.Resource) {
+		r.References["api_id"] = config.Reference{
+			Type:              "API",
+			RefFieldName:      "ApiIdRef",
+			SelectorFieldName: "ApiIdSelector",
+		}
+		if err := r.MetaResource.Examples[0].SetPathValue("lifecycle", nil); err != nil {
+			panic(err)
+		}
+	})
 	p.AddResourceConfigurator("aws_apigatewayv2_integration", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
 			Type:              "API",

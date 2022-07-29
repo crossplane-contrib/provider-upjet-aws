@@ -116,6 +116,32 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 	return nil
 }
 
+// ResolveReferences of this Deployment.
+func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ApiIdRef,
+		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		To: reference.To{
+			List:    &APIList{},
+			Managed: &API{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
+	}
+	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this DomainName.
 func (mg *DomainName) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

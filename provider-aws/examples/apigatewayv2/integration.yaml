@@ -9,5 +9,7 @@ spec:
     apiIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2
-    integrationType: MOCK
+    integrationType: HTTP_PROXY
+    integrationMethod: ANY
+    integrationUri: "https://api.example.com"
     region: us-west-1

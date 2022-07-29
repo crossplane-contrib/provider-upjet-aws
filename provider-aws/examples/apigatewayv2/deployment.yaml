@@ -10,6 +10,4 @@ spec:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2
     description: Example deployment
-    lifecycle:
-    - create_before_destroy: true
     region: us-west-1
