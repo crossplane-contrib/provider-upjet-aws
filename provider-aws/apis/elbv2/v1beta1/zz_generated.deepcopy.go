@@ -1389,13 +1389,13 @@ func (in *LBTargetGroupParameters) DeepCopyInto(out *LBTargetGroupParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.VpcIdRef != nil {
-		in, out := &in.VpcIdRef, &out.VpcIdRef
+	if in.VPCIDRef != nil {
+		in, out := &in.VPCIDRef, &out.VPCIDRef
 		*out = new(v1.Reference)
 		**out = **in
 	}
-	if in.VpcIdSelector != nil {
-		in, out := &in.VpcIdSelector, &out.VpcIdSelector
+	if in.VPCIDSelector != nil {
+		in, out := &in.VPCIDSelector, &out.VPCIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}

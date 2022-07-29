@@ -72,7 +72,7 @@ spec:
                     type: string
                   peerVpcId:
                     type: string
-                  peerVpcidRef:
+                  peerVpcIdRef:
                     description: A Reference to a named object.
                     properties:
                       name:
@@ -81,7 +81,7 @@ spec:
                     required:
                     - name
                     type: object
-                  peerVpcidSelector:
+                  peerVpcIdSelector:
                     description: A Selector selects an object.
                     properties:
                       matchControllerRef:

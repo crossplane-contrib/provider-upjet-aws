@@ -303,13 +303,13 @@ func (in *EndpointParameters) DeepCopyInto(out *EndpointParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.SecurityGroupIdRefs != nil {
-		in, out := &in.SecurityGroupIdRefs, &out.SecurityGroupIdRefs
+	if in.SecurityGroupIDRefs != nil {
+		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
 		*out = make([]v1.Reference, len(*in))
 		copy(*out, *in)
 	}
-	if in.SecurityGroupIdSelector != nil {
-		in, out := &in.SecurityGroupIdSelector, &out.SecurityGroupIdSelector
+	if in.SecurityGroupIDSelector != nil {
+		in, out := &in.SecurityGroupIDSelector, &out.SecurityGroupIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
@@ -918,13 +918,13 @@ func (in *FirewallRuleGroupAssociationParameters) DeepCopyInto(out *FirewallRule
 		*out = new(string)
 		**out = **in
 	}
-	if in.VpcIdRef != nil {
-		in, out := &in.VpcIdRef, &out.VpcIdRef
+	if in.VPCIDRef != nil {
+		in, out := &in.VPCIDRef, &out.VPCIDRef
 		*out = new(v1.Reference)
 		**out = **in
 	}
-	if in.VpcIdSelector != nil {
-		in, out := &in.VpcIdSelector, &out.VpcIdSelector
+	if in.VPCIDSelector != nil {
+		in, out := &in.VPCIDSelector, &out.VPCIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
@@ -1786,13 +1786,13 @@ func (in *RuleAssociationParameters) DeepCopyInto(out *RuleAssociationParameters
 		*out = new(string)
 		**out = **in
 	}
-	if in.VpcIdRef != nil {
-		in, out := &in.VpcIdRef, &out.VpcIdRef
+	if in.VPCIDRef != nil {
+		in, out := &in.VPCIDRef, &out.VPCIDRef
 		*out = new(v1.Reference)
 		**out = **in
 	}
-	if in.VpcIdSelector != nil {
-		in, out := &in.VpcIdSelector, &out.VpcIdSelector
+	if in.VPCIDSelector != nil {
+		in, out := &in.VPCIDSelector, &out.VPCIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}

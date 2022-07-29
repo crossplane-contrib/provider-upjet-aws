@@ -138,10 +138,62 @@ spec:
                     type: string
                   iamDatabaseAuthenticationEnabled:
                     type: boolean
+                  iamRoleRefs:
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  iamRoleSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
+                  iamRoles:
+                    items:
+                      type: string
+                    type: array
                   iops:
                     type: number
                   kmsKeyId:
                     type: string
+                  kmsKeyIdRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  kmsKeyIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
                   masterPasswordSecretRef:
                     description: A SecretKeySelector is a reference to a secret key
                       in an arbitrary namespace.
@@ -438,10 +490,6 @@ spec:
                     type: string
                   hostedZoneId:
                     type: string
-                  iamRoles:
-                    items:
-                      type: string
-                    type: array
                   id:
                     type: string
                   readerEndpoint:

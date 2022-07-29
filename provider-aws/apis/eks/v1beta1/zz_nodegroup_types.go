@@ -106,14 +106,14 @@ type NodeGroupParameters struct {
 	ScalingConfig []ScalingConfigParameters `json:"scalingConfig" tf:"scaling_config,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SubnetIdRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	SubnetIdSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:refFieldName=SubnetIdRefs
-	// +crossplane:generate:reference:selectorFieldName=SubnetIdSelector
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
@@ -139,14 +139,14 @@ type RemoteAccessParameters struct {
 	EC2SSHKey *string `json:"ec2SshKey,omitempty" tf:"ec2_ssh_key,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SourceSecurityGroupIdRefs []v1.Reference `json:"sourceSecurityGroupIdRefs,omitempty" tf:"-"`
+	SourceSecurityGroupIDRefs []v1.Reference `json:"sourceSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	SourceSecurityGroupIdSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
+	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:refFieldName=SourceSecurityGroupIdRefs
-	// +crossplane:generate:reference:selectorFieldName=SourceSecurityGroupIdSelector
+	// +crossplane:generate:reference:refFieldName=SourceSecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SourceSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupIds []*string `json:"sourceSecurityGroupIds,omitempty" tf:"source_security_group_ids,omitempty"`
 }

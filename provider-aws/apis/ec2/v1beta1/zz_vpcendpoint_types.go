@@ -61,26 +61,26 @@ type VPCEndpointParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	RouteTableIdRefs []v1.Reference `json:"routeTableIdRefs,omitempty" tf:"-"`
+	RouteTableIDRefs []v1.Reference `json:"routeTableIdRefs,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	RouteTableIdSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
+	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=RouteTable
-	// +crossplane:generate:reference:refFieldName=RouteTableIdRefs
-	// +crossplane:generate:reference:selectorFieldName=RouteTableIdSelector
+	// +crossplane:generate:reference:refFieldName=RouteTableIDRefs
+	// +crossplane:generate:reference:selectorFieldName=RouteTableIDSelector
 	// +kubebuilder:validation:Optional
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=SecurityGroup
-	// +crossplane:generate:reference:refFieldName=SecurityGroupIdRefs
-	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIdSelector
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
@@ -88,14 +88,14 @@ type VPCEndpointParameters struct {
 	ServiceName *string `json:"serviceName" tf:"service_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SubnetIdRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	SubnetIdSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=Subnet
-	// +crossplane:generate:reference:refFieldName=SubnetIdRefs
-	// +crossplane:generate:reference:selectorFieldName=SubnetIdSelector
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
@@ -106,16 +106,14 @@ type VPCEndpointParameters struct {
 	VPCEndpointType *string `json:"vpcEndpointType,omitempty" tf:"vpc_endpoint_type,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:refFieldName=VpcIdRef
-	// +crossplane:generate:reference:selectorFieldName=VpcIdSelector
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	VpcIdRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	VpcIdSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 // VPCEndpointSpec defines the desired state of VPCEndpoint

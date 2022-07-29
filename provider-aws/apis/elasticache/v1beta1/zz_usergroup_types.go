@@ -36,14 +36,14 @@ type UserGroupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	UserIdRefs []v1.Reference `json:"userIdRefs,omitempty" tf:"-"`
+	UserIDRefs []v1.Reference `json:"userIdRefs,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	UserIdSelector *v1.Selector `json:"userIdSelector,omitempty" tf:"-"`
+	UserIDSelector *v1.Selector `json:"userIdSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=User
-	// +crossplane:generate:reference:refFieldName=UserIdRefs
-	// +crossplane:generate:reference:selectorFieldName=UserIdSelector
+	// +crossplane:generate:reference:refFieldName=UserIDRefs
+	// +crossplane:generate:reference:selectorFieldName=UserIDSelector
 	// +kubebuilder:validation:Optional
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }

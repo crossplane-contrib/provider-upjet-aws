@@ -78,7 +78,7 @@ spec:
                     type: object
                   vpc:
                     type: string
-                  vpcIdRef:
+                  vpcRef:
                     description: A Reference to a named object.
                     properties:
                       name:
@@ -87,7 +87,7 @@ spec:
                     required:
                     - name
                     type: object
-                  vpcIdSelector:
+                  vpcSelector:
                     description: A Selector selects an object.
                     properties:
                       matchControllerRef:
