@@ -1,0 +1,8 @@
+apiVersion: ecs.aws.upbound.io/v1beta1
+kind: AccountSettingDefault
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    value: enabled
