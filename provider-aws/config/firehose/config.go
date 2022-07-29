@@ -18,6 +18,15 @@ func Configure(p *config.Provider) {
 			Extractor: common.PathARNExtractor,
 		}
 
+		r.References["s3_configuration.role_arn"] = config.Reference{
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
+			Extractor: common.PathARNExtractor,
+		}
+		r.References["s3_configuration.bucket_arn"] = config.Reference{
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
+			Extractor: common.PathARNExtractor,
+		}
+
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"server_side_encryption"},
 		}

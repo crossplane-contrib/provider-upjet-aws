@@ -1,0 +1,44 @@
+apiVersion: kafka.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    brokerNodeGroupInfo:
+    - clientSubnetsRefs:
+      - name: example
+      instanceType: kafka.m5.large
+      securityGroupsRefs:
+      - name: example
+      storageInfo:
+      - ebsStorageInfo:
+        - volumeSize: 1000
+    clusterName: example
+    encryptionInfo:
+    - encryptionAtRestKmsKeyArnRef:
+        name: example
+    kafkaVersion: 2.4.1
+    loggingInfo:
+    - brokerLogs:
+      - cloudwatchLogs:
+        - enabled: true
+          logGroupRef:
+            name: example
+        firehose:
+        - deliveryStream: terraform-kinesis-firehose-extended-s3-test-stream
+          enabled: true
+        s3:
+        - bucketRef:
+            name: example
+          enabled: true
+          prefix: logs/msk-
+    numberOfBrokerNodes: 3
+    openMonitoring:
+    - prometheus:
+      - jmxExporter:
+        - enabledInBroker: true
+        nodeExporter:
+        - enabledInBroker: true
+    region: us-west-1
+    tags:
+      foo: bar

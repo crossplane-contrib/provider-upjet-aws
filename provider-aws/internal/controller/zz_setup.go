@@ -167,6 +167,7 @@ import (
 	virtualmfadevice "github.com/upbound/official-providers/provider-aws/internal/controller/iam/virtualmfadevice"
 	policyiot "github.com/upbound/official-providers/provider-aws/internal/controller/iot/policy"
 	thing "github.com/upbound/official-providers/provider-aws/internal/controller/iot/thing"
+	clusterkafka "github.com/upbound/official-providers/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/official-providers/provider-aws/internal/controller/kafka/configuration"
 	stream "github.com/upbound/official-providers/provider-aws/internal/controller/kinesis/stream"
 	streamconsumer "github.com/upbound/official-providers/provider-aws/internal/controller/kinesis/streamconsumer"
@@ -454,6 +455,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		virtualmfadevice.Setup,
 		policyiot.Setup,
 		thing.Setup,
+		clusterkafka.Setup,
 		configuration.Setup,
 		stream.Setup,
 		streamconsumer.Setup,

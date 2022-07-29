@@ -2252,6 +2252,16 @@ func (in *S3ConfigurationParameters) DeepCopyInto(out *S3ConfigurationParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketArnRef != nil {
+		in, out := &in.BucketArnRef, &out.BucketArnRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.BucketArnSelector != nil {
+		in, out := &in.BucketArnSelector, &out.BucketArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.BufferInterval != nil {
 		in, out := &in.BufferInterval, &out.BufferInterval
 		*out = new(float64)
@@ -2293,6 +2303,16 @@ func (in *S3ConfigurationParameters) DeepCopyInto(out *S3ConfigurationParameters
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

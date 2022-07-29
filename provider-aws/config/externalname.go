@@ -731,6 +731,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// MSK configurations can be imported using the configuration ARN
 	"aws_msk_configuration": config.IdentifierFromProvider,
+	// MSK clusters can be imported using the cluster arn
+	"aws_msk_cluster": config.IdentifierFromProvider,
 
 	// ram
 	//
