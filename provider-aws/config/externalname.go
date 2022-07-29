@@ -42,8 +42,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// DynamoDB Table Items can be imported using the name
 	"aws_dynamodb_table_item": config.IdentifierFromProvider,
-	// DynamoDB Tags can be imported using the id
-	"aws_dynamodb_tag": config.IdentifierFromProvider,
 	// DynamoDB contributor insights
 	"aws_dynamodb_contributor_insights": config.IdentifierFromProvider,
 	// Dynamodb Kinesis streaming destinations are imported using "table_name,stream_arn"
