@@ -1,0 +1,10 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VolumeAttachment
+metadata:
+  name: example
+spec:
+  forProvider:
+    deviceName: /dev/sdh
+    instanceId: ${aws_instance.web.id}
+    region: us-west-1
+    volumeId: ${aws_ebs_volume.example.id}

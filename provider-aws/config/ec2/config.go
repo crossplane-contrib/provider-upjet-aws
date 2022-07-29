@@ -267,4 +267,16 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("aws_network_acl", func(r *config.Resource) {
+		// Mutually exclusive with:
+		// aws_network_acl_rule
+		config.MoveToStatus(r.TerraformResource, "ingress", "egress")
+	})
+
+	p.AddResourceConfigurator("aws_vpc_endpoint_service", func(r *config.Resource) {
+		// Mutually exclusive with:
+		// vpc_endpoint_service_allowed_principal
+		config.MoveToStatus(r.TerraformResource, "allowed_principals")
+	})
+
 }

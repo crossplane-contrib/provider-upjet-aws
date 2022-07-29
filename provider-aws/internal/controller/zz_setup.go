@@ -45,27 +45,39 @@ import (
 	table "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/table"
 	ebsvolume "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/ebsvolume"
 	eip "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/eip"
+	eipassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/eipassociation"
 	instance "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/instance"
 	internetgateway "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/internetgateway"
+	keypair "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/keypair"
 	launchtemplate "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/launchtemplate"
 	mainroutetableassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/mainroutetableassociation"
 	natgateway "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/natgateway"
+	networkacl "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkacl"
+	networkaclrule "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkaclrule"
 	networkinterface "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkinterface"
 	route "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/route"
 	routetable "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/routetable"
 	routetableassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/routetableassociation"
 	securitygroup "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/securitygroup"
 	securitygrouprule "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/securitygrouprule"
+	spotinstancerequest "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/spotinstancerequest"
 	subnet "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/subnet"
 	transitgateway "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgateway"
+	transitgatewaymulticastdomain "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewaymulticastdomain"
+	transitgatewaymulticastdomainassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewaymulticastdomainassociation"
+	transitgatewaypeeringattachment "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewaypeeringattachment"
 	transitgatewayroute "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewayroute"
 	transitgatewayroutetable "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewayroutetable"
 	transitgatewayroutetableassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewayroutetableassociation"
 	transitgatewayroutetablepropagation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewayroutetablepropagation"
 	transitgatewayvpcattachment "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewayvpcattachment"
 	transitgatewayvpcattachmentaccepter "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewayvpcattachmentaccepter"
+	volumeattachment "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/volumeattachment"
 	vpc "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpc"
+	vpcdhcpoptions "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcdhcpoptions"
+	vpcdhcpoptionsassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcdhcpoptionsassociation"
 	vpcendpoint "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcendpoint"
+	vpcendpointservice "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcendpointservice"
 	vpcipv4cidrblockassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcipv4cidrblockassociation"
 	vpcpeeringconnection "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcpeeringconnection"
 	lifecyclepolicy "github.com/upbound/official-providers/provider-aws/internal/controller/ecr/lifecyclepolicy"
@@ -301,27 +313,39 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		table.Setup,
 		ebsvolume.Setup,
 		eip.Setup,
+		eipassociation.Setup,
 		instance.Setup,
 		internetgateway.Setup,
+		keypair.Setup,
 		launchtemplate.Setup,
 		mainroutetableassociation.Setup,
 		natgateway.Setup,
+		networkacl.Setup,
+		networkaclrule.Setup,
 		networkinterface.Setup,
 		route.Setup,
 		routetable.Setup,
 		routetableassociation.Setup,
 		securitygroup.Setup,
 		securitygrouprule.Setup,
+		spotinstancerequest.Setup,
 		subnet.Setup,
 		transitgateway.Setup,
+		transitgatewaymulticastdomain.Setup,
+		transitgatewaymulticastdomainassociation.Setup,
+		transitgatewaypeeringattachment.Setup,
 		transitgatewayroute.Setup,
 		transitgatewayroutetable.Setup,
 		transitgatewayroutetableassociation.Setup,
 		transitgatewayroutetablepropagation.Setup,
 		transitgatewayvpcattachment.Setup,
 		transitgatewayvpcattachmentaccepter.Setup,
+		volumeattachment.Setup,
 		vpc.Setup,
+		vpcdhcpoptions.Setup,
+		vpcdhcpoptionsassociation.Setup,
 		vpcendpoint.Setup,
+		vpcendpointservice.Setup,
 		vpcipv4cidrblockassociation.Setup,
 		vpcpeeringconnection.Setup,
 		lifecyclepolicy.Setup,
