@@ -41,8 +41,11 @@ import (
 	responseheaderspolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/responseheaderspolicy"
 	cluster "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/cluster"
 	globalcluster "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/globalcluster"
+	contributorinsights "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/contributorinsights"
 	globaltable "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/globaltable"
+	kinesisstreamingdestination "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
 	table "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/table"
+	tableitem "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/tableitem"
 	ebsvolume "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/ebsvolume"
 	eip "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/eip"
 	eipassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/eipassociation"
@@ -309,8 +312,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		responseheaderspolicy.Setup,
 		cluster.Setup,
 		globalcluster.Setup,
+		contributorinsights.Setup,
 		globaltable.Setup,
+		kinesisstreamingdestination.Setup,
 		table.Setup,
+		tableitem.Setup,
 		ebsvolume.Setup,
 		eip.Setup,
 		eipassociation.Setup,
