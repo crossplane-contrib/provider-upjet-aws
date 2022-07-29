@@ -23,18 +23,11 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_elasticache_replication_group", func(r *config.Resource) {
-		r.References = config.References{
-			"subnet_group_name": config.Reference{
-				Type: "SubnetGroup",
-			},
-			"security_group_ids": config.Reference{
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
-				RefFieldName:      "SecurityGroupIdRefs",
-				SelectorFieldName: "SecurityGroupIdSelector",
-			},
-			"kms_key_id": {
-				Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
-			},
+		r.References["subnet_group_name"] = config.Reference{
+			Type: "SubnetGroup",
+		}
+		r.References["kms_key_id"] = config.Reference{
+			Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
 		}
 		r.LateInitializer = config.LateInitializer{
 			// Conflicting configuration arguments: "number_cache_clusters": conflicts with cluster_mode.0.num_node_groups
@@ -46,12 +39,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_elasticache_user_group", func(r *config.Resource) {
-		r.References = config.References{
-			"user_ids": config.Reference{
-				Type:              "User",
-				RefFieldName:      "UserIdRefs",
-				SelectorFieldName: "UserIdSelector",
-			},
+		r.References["user_ids"] = config.Reference{
+			Type:              "User",
+			RefFieldName:      "UserIDRefs",
+			SelectorFieldName: "UserIDSelector",
 		}
 	})
 }

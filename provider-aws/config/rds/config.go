@@ -13,58 +13,44 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_rds_cluster", func(r *config.Resource) {
 		// Mutually exclusive with aws_rds_cluster_role_association
 		config.MoveToStatus(r.TerraformResource, "iam_roles")
-		r.References = config.References{
-			"s3_import.bucket_name": {
-				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
-			},
-			"vpc_security_group_ids": {
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
-				RefFieldName:      "VpcSecurityGroupIdRefs",
-				SelectorFieldName: "VpcSecurityGroupIdSelector",
-			},
-			"restore_to_point_in_time.source_cluster_identifier": {
-				Type: "Cluster",
-			},
-			"db_subnet_group_name": {
-				Type: "SubnetGroup",
-			},
+		r.References["s3_import.bucket_name"] = config.Reference{
+			Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
+		}
+		r.References["restore_to_point_in_time.source_cluster_identifier"] = config.Reference{
+			Type: "Cluster",
+		}
+		r.References["db_subnet_group_name"] = config.Reference{
+			Type: "SubnetGroup",
 		}
 		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("aws_rds_cluster_instance", func(r *config.Resource) {
-		r.References = config.References{
-			"restore_to_point_in_time.source_db_instance_identifier": {
-				Type: "Instance",
-			},
-			"s3_import.bucket_name": {
-				Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
-			},
-			"kms_key_id": {
-				Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
-			},
-			"performance_insights_kms_key_id": {
-				Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
-			},
-			"restore_to_point_in_time.source_cluster_identifier": {
-				Type: "Cluster",
-			},
-			"security_group_names": {
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
-				RefFieldName:      "SecurityGroupNameRefs",
-				SelectorFieldName: "SecurityGroupNameSelector",
-			},
-			"vpc_security_group_ids": {
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
-				RefFieldName:      "VpcSecurityGroupIdRefs",
-				SelectorFieldName: "VpcSecurityGroupIdSelector",
-			},
-			"parameter_group_name": {
-				Type: "ParameterGroup",
-			},
-			"db_subnet_group_name": {
-				Type: "SubnetGroup",
-			},
+		r.References["restore_to_point_in_time.source_db_instance_identifier"] = config.Reference{
+			Type: "Instance",
+		}
+		r.References["s3_import.bucket_name"] = config.Reference{
+			Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
+		}
+		r.References["kms_key_id"] = config.Reference{
+			Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
+		}
+		r.References["performance_insights_kms_key_id"] = config.Reference{
+			Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
+		}
+		r.References["restore_to_point_in_time.source_cluster_identifier"] = config.Reference{
+			Type: "Cluster",
+		}
+		r.References["security_group_names"] = config.Reference{
+			Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			RefFieldName:      "SecurityGroupNameRefs",
+			SelectorFieldName: "SecurityGroupNameSelector",
+		}
+		r.References["parameter_group_name"] = config.Reference{
+			Type: "ParameterGroup",
+		}
+		r.References["db_subnet_group_name"] = config.Reference{
+			Type: "SubnetGroup",
 		}
 		r.UseAsync = true
 	})

@@ -13,7 +13,7 @@ require (
 	github.com/go-ini/ini v1.46.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.17.0
 	github.com/pkg/errors v0.9.1
-	github.com/upbound/upjet v0.5.1-0.20220727083418-1ef28c748b06
+	github.com/upbound/upjet v0.5.1-0.20220729070727-037f1fc3823c
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.24.0
 	k8s.io/client-go v0.24.0

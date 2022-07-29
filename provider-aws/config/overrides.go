@@ -98,8 +98,8 @@ func KnownReferencers() config.ResourceOption { //nolint:gocyclo
 			case strings.HasSuffix(k, "security_group_ids"):
 				r.References[k] = config.Reference{
 					Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
-					RefFieldName:      strings.TrimSuffix(name.NewFromSnake(k).Camel, "s") + "Refs",
-					SelectorFieldName: strings.TrimSuffix(name.NewFromSnake(k).Camel, "s") + "Selector",
+					RefFieldName:      name.NewFromSnake(strings.TrimSuffix(k, "s")).Camel + "Refs",
+					SelectorFieldName: name.NewFromSnake(strings.TrimSuffix(k, "s")).Camel + "Selector",
 				}
 			case r.ShortGroup == "glue" && k == "database_name":
 				r.References["database_name"] = config.Reference{
@@ -109,15 +109,13 @@ func KnownReferencers() config.ResourceOption { //nolint:gocyclo
 			switch k {
 			case "vpc_id":
 				r.References["vpc_id"] = config.Reference{
-					Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC",
-					RefFieldName:      "VpcIdRef",
-					SelectorFieldName: "VpcIdSelector",
+					Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC",
 				}
 			case "subnet_ids":
 				r.References["subnet_ids"] = config.Reference{
 					Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
-					RefFieldName:      "SubnetIdRefs",
-					SelectorFieldName: "SubnetIdSelector",
+					RefFieldName:      "SubnetIDRefs",
+					SelectorFieldName: "SubnetIDSelector",
 				}
 			case "subnet_id":
 				r.References["subnet_id"] = config.Reference{
