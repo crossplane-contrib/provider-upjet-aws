@@ -16,9 +16,13 @@ func Configure(p *config.Provider) {
 		r.References["subnet_id"] = config.Reference{
 			Type: "Subnet",
 		}
+		r.References["vpc_security_group_ids"] = config.Reference{
+			Type:              "SecurityGroup",
+			RefFieldName:      "SecurityGroupIDRefs",
+			SelectorFieldName: "SecurityGroupIDSelector",
+		}
 		r.References["security_groups"] = config.Reference{
-			Type: "SecurityGroup",
-
+			Type:              "SecurityGroup",
 			RefFieldName:      "SecurityGroupRefs",
 			SelectorFieldName: "SecurityGroupSelector",
 		}
