@@ -16,6 +16,8 @@ import (
 type ClusterObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
+
 	ClusterResourceID *string `json:"clusterResourceId,omitempty" tf:"cluster_resource_id,omitempty"`
 
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
@@ -39,9 +41,6 @@ type ClusterParameters struct {
 
 	// +kubebuilder:validation:Optional
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`

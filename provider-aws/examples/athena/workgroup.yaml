@@ -1,0 +1,16 @@
+apiVersion: athena.aws.upbound.io/v1beta1
+kind: Workgroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    configuration:
+    - enforceWorkgroupConfiguration: true
+      publishCloudwatchMetricsEnabled: true
+      resultConfiguration:
+      - encryptionConfiguration:
+        - encryptionOption: SSE_KMS
+          kmsKeyArnRef:
+            name: example
+        outputLocation: s3://<bucket-name>/output/
+    region: us-east-1

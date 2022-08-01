@@ -513,6 +513,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_docdb_cluster": ParameterAsExternalName("cluster_identifier"),
 	// aws_docdb_global_cluster can be imported by using the Global Cluster id
 	"aws_docdb_global_cluster": config.IdentifierFromProvider,
+	// DocDB Cluster Instances can be imported using the identifier
+	"aws_docdb_cluster_instance": ParameterAsExternalName("identifier"),
+	// DocumentDB Subnet groups can be imported using the name
+	"aws_docdb_subnet_group": config.NameAsIdentifier,
 
 	// efs
 	//
@@ -525,6 +529,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Service Discovery Private DNS Namespace can be imported using the namespace ID and VPC ID: 0123456789:vpc-123345
 	"aws_service_discovery_private_dns_namespace": config.IdentifierFromProvider,
+	// Service Discovery Public DNS Namespace can be imported using the namespace ID
+	"aws_service_discovery_public_dns_namespace": config.IdentifierFromProvider,
+	// Service Discovery HTTP Namespace can be imported using the namespace ID,
+	"aws_service_discovery_http_namespace": config.IdentifierFromProvider,
 
 	// sqs
 	//
@@ -540,6 +548,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Transfer Servers can be imported using the id
 	"aws_transfer_server": config.IdentifierFromProvider,
+	// Transfer Users can be imported using the server_id and user_name separated by /
+	"aws_transfer_user": FormattedIdentifierUserDefined("user_name", "/", "server_id"),
 
 	// dynamodb
 	//
@@ -692,6 +702,54 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Signer signing profiles can be imported using the name
 	"aws_signer_signing_profile": config.NameAsIdentifier,
+
+	// athena
+	//
+	// Athena Workgroups can be imported using their name
+	"aws_athena_workgroup": config.NameAsIdentifier,
+
+	// cloudwatchlogs
+	//
+	// Cloudwatch Log Groups can be imported using the name
+	"aws_cloudwatch_log_group": config.NameAsIdentifier,
+
+	// elb
+	//
+	// ELBs can be imported using the name
+	"aws_elb": config.NameAsIdentifier,
+	// No import
+	"aws_elb_attachment": config.IdentifierFromProvider,
+
+	// iot
+	//
+	// IoT policies can be imported using the name
+	"aws_iot_policy": config.NameAsIdentifier,
+	// IOT Things can be imported using the name
+	"aws_iot_thing": config.NameAsIdentifier,
+
+	// kafka
+	//
+	// MSK configurations can be imported using the configuration ARN
+	"aws_msk_configuration": config.IdentifierFromProvider,
+	// MSK clusters can be imported using the cluster arn
+	"aws_msk_cluster": config.IdentifierFromProvider,
+
+	// ram
+	//
+	// Resource shares can be imported using the id
+	"aws_ram_resource_share": config.IdentifierFromProvider,
+
+	// redshift
+	//
+	// Redshift Clusters can be imported using the cluster_identifier
+	"aws_redshift_cluster": ParameterAsExternalName("cluster_identifier"),
+
+	// sfn
+	//
+	// Activities can be imported using the arn
+	"aws_sfn_activity": config.IdentifierFromProvider,
+	// State Machines can be imported using the arn
+	"aws_sfn_state_machine": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

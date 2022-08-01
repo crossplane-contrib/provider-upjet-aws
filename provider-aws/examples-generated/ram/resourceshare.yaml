@@ -1,0 +1,11 @@
+apiVersion: ram.aws.upbound.io/v1beta1
+kind: ResourceShare
+metadata:
+  name: example
+spec:
+  forProvider:
+    allowExternalPrincipals: true
+    name: example
+    region: us-west-1
+    tags:
+      Environment: Production

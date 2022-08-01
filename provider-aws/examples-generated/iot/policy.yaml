@@ -1,0 +1,20 @@
+apiVersion: iot.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  name: example
+spec:
+  forProvider:
+    policy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Action = [
+                "iot:*",
+              ]
+              Effect   = "Allow"
+              Resource = "*"
+            },
+          ]
+        })}
+    region: us-west-1

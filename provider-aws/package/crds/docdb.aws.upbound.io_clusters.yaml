@@ -71,10 +71,6 @@ spec:
                     type: array
                   backupRetentionPeriod:
                     type: number
-                  clusterMembers:
-                    items:
-                      type: string
-                    type: array
                   dbClusterParameterGroupName:
                     type: string
                   dbSubnetGroupName:
@@ -293,6 +289,10 @@ spec:
                 properties:
                   arn:
                     type: string
+                  clusterMembers:
+                    items:
+                      type: string
+                    type: array
                   clusterResourceId:
                     type: string
                   endpoint:

@@ -12,9 +12,11 @@ import (
 
 	"github.com/upbound/official-providers/provider-aws/config/acm"
 	"github.com/upbound/official-providers/provider-aws/config/acmpca"
+	"github.com/upbound/official-providers/provider-aws/config/athena"
 	"github.com/upbound/official-providers/provider-aws/config/autoscaling"
 	"github.com/upbound/official-providers/provider-aws/config/backup"
 	"github.com/upbound/official-providers/provider-aws/config/cloudfront"
+	"github.com/upbound/official-providers/provider-aws/config/docdb"
 	"github.com/upbound/official-providers/provider-aws/config/dynamodb"
 	"github.com/upbound/official-providers/provider-aws/config/ebs"
 	"github.com/upbound/official-providers/provider-aws/config/ec2"
@@ -25,12 +27,14 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/eks"
 	"github.com/upbound/official-providers/provider-aws/config/elasticache"
 	"github.com/upbound/official-providers/provider-aws/config/elasticloadbalancing"
+	"github.com/upbound/official-providers/provider-aws/config/elb"
 	"github.com/upbound/official-providers/provider-aws/config/firehose"
 	"github.com/upbound/official-providers/provider-aws/config/gamelift"
 	"github.com/upbound/official-providers/provider-aws/config/globalaccelerator"
 	"github.com/upbound/official-providers/provider-aws/config/glue"
 	"github.com/upbound/official-providers/provider-aws/config/grafana"
 	"github.com/upbound/official-providers/provider-aws/config/iam"
+	"github.com/upbound/official-providers/provider-aws/config/kafka"
 	"github.com/upbound/official-providers/provider-aws/config/kinesis"
 	"github.com/upbound/official-providers/provider-aws/config/kinesisanalytics"
 	kinesisanalytics2 "github.com/upbound/official-providers/provider-aws/config/kinesisanalyticsv2"
@@ -40,10 +44,13 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/mq"
 	"github.com/upbound/official-providers/provider-aws/config/neptune"
 	"github.com/upbound/official-providers/provider-aws/config/rds"
+	"github.com/upbound/official-providers/provider-aws/config/redshift"
 	"github.com/upbound/official-providers/provider-aws/config/route53"
 	"github.com/upbound/official-providers/provider-aws/config/s3"
 	"github.com/upbound/official-providers/provider-aws/config/servicediscovery"
+	"github.com/upbound/official-providers/provider-aws/config/sfn"
 	"github.com/upbound/official-providers/provider-aws/config/sns"
+	"github.com/upbound/official-providers/provider-aws/config/transfer"
 )
 
 var (
@@ -131,6 +138,13 @@ func GetProvider() *config.Provider {
 		licensemanager.Configure,
 		kms.Configure,
 		lambda.Configure,
+		athena.Configure,
+		docdb.Configure,
+		elb.Configure,
+		redshift.Configure,
+		sfn.Configure,
+		transfer.Configure,
+		kafka.Configure,
 	} {
 		configure(pc)
 	}

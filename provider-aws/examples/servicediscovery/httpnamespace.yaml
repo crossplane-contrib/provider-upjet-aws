@@ -1,0 +1,9 @@
+apiVersion: servicediscovery.aws.upbound.io/v1beta1
+kind: HTTPNamespace
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: example
+    name: development
+    region: us-west-1

@@ -58,6 +58,42 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		mg.Spec.ForProvider.ExtendedS3Configuration[i3].RoleArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Configuration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Configuration[i3].BucketArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.S3Configuration[i3].BucketArnRef,
+			Selector:     mg.Spec.ForProvider.S3Configuration[i3].BucketArnSelector,
+			To: reference.To{
+				List:    &v1beta1.BucketList{},
+				Managed: &v1beta1.Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.S3Configuration[i3].BucketArn")
+		}
+		mg.Spec.ForProvider.S3Configuration[i3].BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.S3Configuration[i3].BucketArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Configuration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Configuration[i3].RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.S3Configuration[i3].RoleArnRef,
+			Selector:     mg.Spec.ForProvider.S3Configuration[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta11.RoleList{},
+				Managed: &v1beta11.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.S3Configuration[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.S3Configuration[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.S3Configuration[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

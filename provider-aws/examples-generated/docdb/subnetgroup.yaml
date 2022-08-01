@@ -1,0 +1,11 @@
+apiVersion: docdb.aws.upbound.io/v1beta1
+kind: SubnetGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    subnetIdsRefs:
+    - name: example
+    tags:
+      Name: My docdb subnet group

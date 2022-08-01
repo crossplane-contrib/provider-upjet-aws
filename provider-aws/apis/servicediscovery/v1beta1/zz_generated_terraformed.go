@@ -13,6 +13,80 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this HTTPNamespace
+func (mg *HTTPNamespace) GetTerraformResourceType() string {
+	return "aws_service_discovery_http_namespace"
+}
+
+// GetConnectionDetailsMapping for this HTTPNamespace
+func (tr *HTTPNamespace) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this HTTPNamespace
+func (tr *HTTPNamespace) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this HTTPNamespace
+func (tr *HTTPNamespace) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this HTTPNamespace
+func (tr *HTTPNamespace) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this HTTPNamespace
+func (tr *HTTPNamespace) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this HTTPNamespace
+func (tr *HTTPNamespace) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this HTTPNamespace using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *HTTPNamespace) LateInitialize(attrs []byte) (bool, error) {
+	params := &HTTPNamespaceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *HTTPNamespace) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this PrivateDNSNamespace
 func (mg *PrivateDNSNamespace) GetTerraformResourceType() string {
 	return "aws_service_discovery_private_dns_namespace"
@@ -84,5 +158,79 @@ func (tr *PrivateDNSNamespace) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *PrivateDNSNamespace) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this PublicDNSNamespace
+func (mg *PublicDNSNamespace) GetTerraformResourceType() string {
+	return "aws_service_discovery_public_dns_namespace"
+}
+
+// GetConnectionDetailsMapping for this PublicDNSNamespace
+func (tr *PublicDNSNamespace) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PublicDNSNamespace
+func (tr *PublicDNSNamespace) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PublicDNSNamespace
+func (tr *PublicDNSNamespace) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PublicDNSNamespace
+func (tr *PublicDNSNamespace) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PublicDNSNamespace
+func (tr *PublicDNSNamespace) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PublicDNSNamespace
+func (tr *PublicDNSNamespace) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PublicDNSNamespace using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PublicDNSNamespace) LateInitialize(attrs []byte) (bool, error) {
+	params := &PublicDNSNamespaceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PublicDNSNamespace) GetTerraformSchemaVersion() int {
 	return 0
 }
