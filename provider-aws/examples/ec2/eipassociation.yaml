@@ -2,6 +2,8 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: EIPAssociation
 metadata:
   name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
 spec:
   forProvider:
     allocationId: ${aws_eip.example.id}
