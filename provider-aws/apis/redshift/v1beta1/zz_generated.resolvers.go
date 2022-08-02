@@ -58,8 +58,8 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCSecurityGroupIds),
 		Extract:       reference.ExternalName(),
-		References:    mg.Spec.ForProvider.VPCSecurityGroupIdRefs,
-		Selector:      mg.Spec.ForProvider.VPCSecurityGroupIdSelector,
+		References:    mg.Spec.ForProvider.VPCSecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.VPCSecurityGroupIDSelector,
 		To: reference.To{
 			List:    &v1beta12.SecurityGroupList{},
 			Managed: &v1beta12.SecurityGroup{},
@@ -69,7 +69,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		return errors.Wrap(err, "mg.Spec.ForProvider.VPCSecurityGroupIds")
 	}
 	mg.Spec.ForProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
-	mg.Spec.ForProvider.VPCSecurityGroupIdRefs = mrsp.ResolvedReferences
+	mg.Spec.ForProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
 
 	return nil
 }

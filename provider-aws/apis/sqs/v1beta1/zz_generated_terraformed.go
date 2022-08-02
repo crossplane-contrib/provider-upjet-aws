@@ -24,17 +24,17 @@ func (tr *Queue) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Queue
-func (tr *Queue) GetObservation() (map[string]interface{}, error) {
+func (tr *Queue) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Queue
-func (tr *Queue) SetObservation(obs map[string]interface{}) error {
+func (tr *Queue) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *Queue) GetID() string {
 }
 
 // GetParameters of this Queue
-func (tr *Queue) GetParameters() (map[string]interface{}, error) {
+func (tr *Queue) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Queue
-func (tr *Queue) SetParameters(params map[string]interface{}) error {
+func (tr *Queue) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

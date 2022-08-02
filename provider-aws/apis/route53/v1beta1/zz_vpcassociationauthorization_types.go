@@ -25,19 +25,17 @@ type VPCAssociationAuthorizationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:refFieldName=VpcIdRef
-	// +crossplane:generate:reference:selectorFieldName=VpcIdSelector
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
 	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	VpcIdRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	VpcIdSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=Zone
 	// +kubebuilder:validation:Optional

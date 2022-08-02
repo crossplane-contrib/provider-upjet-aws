@@ -32,9 +32,6 @@ func Configure(p *config.Provider) {
 		config.MoveToStatus(r.TerraformResource, "capacity_providers")
 
 		r.References = config.References{
-			"capacity_providers": config.Reference{
-				Type: "CapacityProvider",
-			},
 			"execute_command_configuration.kms_key_id": config.Reference{
 				Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
 			},

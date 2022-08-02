@@ -7,5 +7,5 @@ spec:
     name: example
     region: us-west-1
     description: example
-    vpcIdRef:
+    vpcRef:
       name: sample-vpc

@@ -410,7 +410,7 @@ func (in *CatalogTableParameters) DeepCopyInto(out *CatalogTableParameters) {
 	if in.DatabaseNameRef != nil {
 		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DatabaseNameSelector != nil {
 		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
@@ -888,7 +888,7 @@ func (in *ConnectionPasswordEncryptionParameters) DeepCopyInto(out *ConnectionPa
 	if in.AwsKMSKeyIDRef != nil {
 		in, out := &in.AwsKMSKeyIDRef, &out.AwsKMSKeyIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AwsKMSKeyIDSelector != nil {
 		in, out := &in.AwsKMSKeyIDSelector, &out.AwsKMSKeyIDSelector
@@ -1246,7 +1246,7 @@ func (in *EncryptionAtRestParameters) DeepCopyInto(out *EncryptionAtRestParamete
 	if in.SseAwsKMSKeyIDRef != nil {
 		in, out := &in.SseAwsKMSKeyIDRef, &out.SseAwsKMSKeyIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SseAwsKMSKeyIDSelector != nil {
 		in, out := &in.SseAwsKMSKeyIDSelector, &out.SseAwsKMSKeyIDSelector
@@ -1622,7 +1622,7 @@ func (in *JobParameters) DeepCopyInto(out *JobParameters) {
 	if in.RoleArnRef != nil {
 		in, out := &in.RoleArnRef, &out.RoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RoleArnSelector != nil {
 		in, out := &in.RoleArnSelector, &out.RoleArnSelector
@@ -3068,7 +3068,7 @@ func (in *UserDefinedFunctionParameters) DeepCopyInto(out *UserDefinedFunctionPa
 	if in.DatabaseNameRef != nil {
 		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DatabaseNameSelector != nil {
 		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector

@@ -39,7 +39,13 @@ type VPCEndpointObservation struct {
 
 	RequesterManaged *bool `json:"requesterManaged,omitempty" tf:"requester_managed,omitempty"`
 
+	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
+
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -60,44 +66,8 @@ type VPCEndpointParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +kubebuilder:validation:Optional
-	RouteTableIdRefs []v1.Reference `json:"routeTableIdRefs,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	RouteTableIdSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
-
-	// +crossplane:generate:reference:type=RouteTable
-	// +crossplane:generate:reference:refFieldName=RouteTableIdRefs
-	// +crossplane:generate:reference:selectorFieldName=RouteTableIdSelector
-	// +kubebuilder:validation:Optional
-	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	SecurityGroupIdRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	SecurityGroupIdSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
-
-	// +crossplane:generate:reference:type=SecurityGroup
-	// +crossplane:generate:reference:refFieldName=SecurityGroupIdRefs
-	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIdSelector
-	// +kubebuilder:validation:Optional
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
 	// +kubebuilder:validation:Required
 	ServiceName *string `json:"serviceName" tf:"service_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	SubnetIdRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	SubnetIdSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
-
-	// +crossplane:generate:reference:type=Subnet
-	// +crossplane:generate:reference:refFieldName=SubnetIdRefs
-	// +crossplane:generate:reference:selectorFieldName=SubnetIdSelector
-	// +kubebuilder:validation:Optional
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -106,16 +76,14 @@ type VPCEndpointParameters struct {
 	VPCEndpointType *string `json:"vpcEndpointType,omitempty" tf:"vpc_endpoint_type,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:refFieldName=VpcIdRef
-	// +crossplane:generate:reference:selectorFieldName=VpcIdSelector
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	VpcIdRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	VpcIdSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 // VPCEndpointSpec defines the desired state of VPCEndpoint

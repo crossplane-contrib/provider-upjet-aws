@@ -23,8 +23,8 @@ func (mg *PrivateDNSNamespace) ResolveReferences(ctx context.Context, c client.R
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPC),
 		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.VpcIdRef,
-		Selector:     mg.Spec.ForProvider.VpcIdSelector,
+		Reference:    mg.Spec.ForProvider.VPCRef,
+		Selector:     mg.Spec.ForProvider.VPCSelector,
 		To: reference.To{
 			List:    &v1beta1.VPCList{},
 			Managed: &v1beta1.VPC{},
@@ -34,7 +34,7 @@ func (mg *PrivateDNSNamespace) ResolveReferences(ctx context.Context, c client.R
 		return errors.Wrap(err, "mg.Spec.ForProvider.VPC")
 	}
 	mg.Spec.ForProvider.VPC = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.VpcIdRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.VPCRef = rsp.ResolvedReference
 
 	return nil
 }

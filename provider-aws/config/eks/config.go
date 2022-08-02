@@ -22,13 +22,13 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 			},
 			"vpc_config.subnet_ids": {
 				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
-				RefFieldName:      "SubnetIdRefs",
-				SelectorFieldName: "SubnetIdSelector",
+				RefFieldName:      "SubnetIDRefs",
+				SelectorFieldName: "SubnetIDSelector",
 			},
 			"vpc_config.security_group_ids": {
 				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
-				RefFieldName:      "SecurityGroupIdRefs",
-				SelectorFieldName: "SecurityGroupIdSelector",
+				RefFieldName:      "SecurityGroupIDRefs",
+				SelectorFieldName: "SecurityGroupIDSelector",
 			},
 		}
 		r.UseAsync = true
@@ -44,13 +44,13 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 			},
 			"remote_access.source_security_group_ids": {
 				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
-				RefFieldName:      "SourceSecurityGroupIdRefs",
-				SelectorFieldName: "SourceSecurityGroupIdSelector",
+				RefFieldName:      "SourceSecurityGroupIDRefs",
+				SelectorFieldName: "SourceSecurityGroupIDSelector",
 			},
 			"subnet_ids": {
 				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
-				RefFieldName:      "SubnetIdRefs",
-				SelectorFieldName: "SubnetIdSelector",
+				RefFieldName:      "SubnetIDRefs",
+				SelectorFieldName: "SubnetIDSelector",
 			},
 		}
 		r.UseAsync = true
@@ -77,8 +77,8 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 			},
 			"subnet_ids": {
 				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
-				RefFieldName:      "SubnetIdRefs",
-				SelectorFieldName: "SubnetIdSelector",
+				RefFieldName:      "SubnetIDRefs",
+				SelectorFieldName: "SubnetIDSelector",
 			},
 		}
 	})

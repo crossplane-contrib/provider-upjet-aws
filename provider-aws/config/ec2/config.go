@@ -18,12 +18,11 @@ func Configure(p *config.Provider) {
 		}
 		r.References["vpc_security_group_ids"] = config.Reference{
 			Type:              "SecurityGroup",
-			RefFieldName:      "SecurityGroupIdRefs",
-			SelectorFieldName: "SecurityGroupIdSelector",
+			RefFieldName:      "VPCSecurityGroupIDRefs",
+			SelectorFieldName: "VPCSecurityGroupIDSelector",
 		}
 		r.References["security_groups"] = config.Reference{
-			Type: "SecurityGroup",
-
+			Type:              "SecurityGroup",
 			RefFieldName:      "SecurityGroupRefs",
 			SelectorFieldName: "SecurityGroupSelector",
 		}
@@ -82,11 +81,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_vpc_attachment", func(r *config.Resource) {
-		r.References["subnet_ids"] = config.Reference{
-			Type:              "Subnet",
-			RefFieldName:      "SubnetIdRefs",
-			SelectorFieldName: "SubnetIdSelector",
-		}
 		r.References["transit_gateway_id"] = config.Reference{
 			Type: "TransitGateway",
 		}
@@ -103,11 +97,6 @@ func Configure(p *config.Provider) {
 			Type:              "SecurityGroup",
 			RefFieldName:      "SecurityGroupNameRefs",
 			SelectorFieldName: "SecurityGroupNameSelector",
-		}
-		r.References["vpc_security_group_ids"] = config.Reference{
-			Type:              "SecurityGroup",
-			RefFieldName:      "VpcSecurityGroupIdRefs",
-			SelectorFieldName: "VpcSecurityGroupIdSelector",
 		}
 		r.References["block_device_mappings.ebs.kms_key_id"] = config.Reference{
 			Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
@@ -138,22 +127,6 @@ func Configure(p *config.Provider) {
 		// aws_vpc_endpoint_route_table_association
 		// aws_vpc_endpoint_security_group_association
 		config.MoveToStatus(r.TerraformResource, "subnet_ids", "security_group_ids", "route_table_ids")
-
-		r.References["subnet_ids"] = config.Reference{
-			Type:              "Subnet",
-			RefFieldName:      "SubnetIdRefs",
-			SelectorFieldName: "SubnetIdSelector",
-		}
-		r.References["security_group_ids"] = config.Reference{
-			Type:              "SecurityGroup",
-			RefFieldName:      "SecurityGroupIdRefs",
-			SelectorFieldName: "SecurityGroupIdSelector",
-		}
-		r.References["route_table_ids"] = config.Reference{
-			Type:              "RouteTable",
-			RefFieldName:      "RouteTableIdRefs",
-			SelectorFieldName: "RouteTableIdSelector",
-		}
 	})
 
 	p.AddResourceConfigurator("aws_subnet", func(r *config.Resource) {

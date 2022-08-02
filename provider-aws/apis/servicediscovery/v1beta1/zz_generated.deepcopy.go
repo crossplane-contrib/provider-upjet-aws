@@ -334,13 +334,13 @@ func (in *PrivateDNSNamespaceParameters) DeepCopyInto(out *PrivateDNSNamespacePa
 		*out = new(string)
 		**out = **in
 	}
-	if in.VpcIdRef != nil {
-		in, out := &in.VpcIdRef, &out.VpcIdRef
+	if in.VPCRef != nil {
+		in, out := &in.VPCRef, &out.VPCRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
-	if in.VpcIdSelector != nil {
-		in, out := &in.VpcIdSelector, &out.VpcIdSelector
+	if in.VPCSelector != nil {
+		in, out := &in.VPCSelector, &out.VPCSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}

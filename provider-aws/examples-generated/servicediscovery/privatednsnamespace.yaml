@@ -7,5 +7,5 @@ spec:
     description: example
     name: hoge.example.local
     region: us-west-1
-    vpcIdRef:
+    vpcRef:
       name: example

@@ -24,17 +24,17 @@ func (tr *HTTPNamespace) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this HTTPNamespace
-func (tr *HTTPNamespace) GetObservation() (map[string]interface{}, error) {
+func (tr *HTTPNamespace) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this HTTPNamespace
-func (tr *HTTPNamespace) SetObservation(obs map[string]interface{}) error {
+func (tr *HTTPNamespace) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *HTTPNamespace) GetID() string {
 }
 
 // GetParameters of this HTTPNamespace
-func (tr *HTTPNamespace) GetParameters() (map[string]interface{}, error) {
+func (tr *HTTPNamespace) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this HTTPNamespace
-func (tr *HTTPNamespace) SetParameters(params map[string]interface{}) error {
+func (tr *HTTPNamespace) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *PrivateDNSNamespace) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this PrivateDNSNamespace
-func (tr *PrivateDNSNamespace) GetObservation() (map[string]interface{}, error) {
+func (tr *PrivateDNSNamespace) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this PrivateDNSNamespace
-func (tr *PrivateDNSNamespace) SetObservation(obs map[string]interface{}) error {
+func (tr *PrivateDNSNamespace) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *PrivateDNSNamespace) GetID() string {
 }
 
 // GetParameters of this PrivateDNSNamespace
-func (tr *PrivateDNSNamespace) GetParameters() (map[string]interface{}, error) {
+func (tr *PrivateDNSNamespace) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this PrivateDNSNamespace
-func (tr *PrivateDNSNamespace) SetParameters(params map[string]interface{}) error {
+func (tr *PrivateDNSNamespace) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -172,17 +172,17 @@ func (tr *PublicDNSNamespace) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this PublicDNSNamespace
-func (tr *PublicDNSNamespace) GetObservation() (map[string]interface{}, error) {
+func (tr *PublicDNSNamespace) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this PublicDNSNamespace
-func (tr *PublicDNSNamespace) SetObservation(obs map[string]interface{}) error {
+func (tr *PublicDNSNamespace) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -199,17 +199,17 @@ func (tr *PublicDNSNamespace) GetID() string {
 }
 
 // GetParameters of this PublicDNSNamespace
-func (tr *PublicDNSNamespace) GetParameters() (map[string]interface{}, error) {
+func (tr *PublicDNSNamespace) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this PublicDNSNamespace
-func (tr *PublicDNSNamespace) SetParameters(params map[string]interface{}) error {
+func (tr *PublicDNSNamespace) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

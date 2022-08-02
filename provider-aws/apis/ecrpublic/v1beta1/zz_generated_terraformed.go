@@ -24,17 +24,17 @@ func (tr *Repository) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Repository
-func (tr *Repository) GetObservation() (map[string]interface{}, error) {
+func (tr *Repository) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Repository
-func (tr *Repository) SetObservation(obs map[string]interface{}) error {
+func (tr *Repository) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *Repository) GetID() string {
 }
 
 // GetParameters of this Repository
-func (tr *Repository) GetParameters() (map[string]interface{}, error) {
+func (tr *Repository) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Repository
-func (tr *Repository) SetParameters(params map[string]interface{}) error {
+func (tr *Repository) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *RepositoryPolicy) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this RepositoryPolicy
-func (tr *RepositoryPolicy) GetObservation() (map[string]interface{}, error) {
+func (tr *RepositoryPolicy) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this RepositoryPolicy
-func (tr *RepositoryPolicy) SetObservation(obs map[string]interface{}) error {
+func (tr *RepositoryPolicy) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *RepositoryPolicy) GetID() string {
 }
 
 // GetParameters of this RepositoryPolicy
-func (tr *RepositoryPolicy) GetParameters() (map[string]interface{}, error) {
+func (tr *RepositoryPolicy) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this RepositoryPolicy
-func (tr *RepositoryPolicy) SetParameters(params map[string]interface{}) error {
+func (tr *RepositoryPolicy) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

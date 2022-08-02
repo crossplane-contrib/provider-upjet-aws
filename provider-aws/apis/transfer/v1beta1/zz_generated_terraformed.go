@@ -24,17 +24,17 @@ func (tr *Server) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Server
-func (tr *Server) GetObservation() (map[string]interface{}, error) {
+func (tr *Server) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Server
-func (tr *Server) SetObservation(obs map[string]interface{}) error {
+func (tr *Server) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *Server) GetID() string {
 }
 
 // GetParameters of this Server
-func (tr *Server) GetParameters() (map[string]interface{}, error) {
+func (tr *Server) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Server
-func (tr *Server) SetParameters(params map[string]interface{}) error {
+func (tr *Server) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *User) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this User
-func (tr *User) GetObservation() (map[string]interface{}, error) {
+func (tr *User) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this User
-func (tr *User) SetObservation(obs map[string]interface{}) error {
+func (tr *User) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *User) GetID() string {
 }
 
 // GetParameters of this User
-func (tr *User) GetParameters() (map[string]interface{}, error) {
+func (tr *User) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this User
-func (tr *User) SetParameters(params map[string]interface{}) error {
+func (tr *User) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

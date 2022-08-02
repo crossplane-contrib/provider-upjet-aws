@@ -129,7 +129,7 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	if in.ApplicationFailureFeedbackRoleArnRef != nil {
 		in, out := &in.ApplicationFailureFeedbackRoleArnRef, &out.ApplicationFailureFeedbackRoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ApplicationFailureFeedbackRoleArnSelector != nil {
 		in, out := &in.ApplicationFailureFeedbackRoleArnSelector, &out.ApplicationFailureFeedbackRoleArnSelector
@@ -144,7 +144,7 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	if in.ApplicationSuccessFeedbackRoleArnRef != nil {
 		in, out := &in.ApplicationSuccessFeedbackRoleArnRef, &out.ApplicationSuccessFeedbackRoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ApplicationSuccessFeedbackRoleArnSelector != nil {
 		in, out := &in.ApplicationSuccessFeedbackRoleArnSelector, &out.ApplicationSuccessFeedbackRoleArnSelector
@@ -184,7 +184,7 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	if in.FirehoseFailureFeedbackRoleArnRef != nil {
 		in, out := &in.FirehoseFailureFeedbackRoleArnRef, &out.FirehoseFailureFeedbackRoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.FirehoseFailureFeedbackRoleArnSelector != nil {
 		in, out := &in.FirehoseFailureFeedbackRoleArnSelector, &out.FirehoseFailureFeedbackRoleArnSelector
@@ -199,7 +199,7 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	if in.FirehoseSuccessFeedbackRoleArnRef != nil {
 		in, out := &in.FirehoseSuccessFeedbackRoleArnRef, &out.FirehoseSuccessFeedbackRoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.FirehoseSuccessFeedbackRoleArnSelector != nil {
 		in, out := &in.FirehoseSuccessFeedbackRoleArnSelector, &out.FirehoseSuccessFeedbackRoleArnSelector
@@ -219,7 +219,7 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	if in.HTTPFailureFeedbackRoleArnRef != nil {
 		in, out := &in.HTTPFailureFeedbackRoleArnRef, &out.HTTPFailureFeedbackRoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.HTTPFailureFeedbackRoleArnSelector != nil {
 		in, out := &in.HTTPFailureFeedbackRoleArnSelector, &out.HTTPFailureFeedbackRoleArnSelector
@@ -234,7 +234,7 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	if in.HTTPSuccessFeedbackRoleArnRef != nil {
 		in, out := &in.HTTPSuccessFeedbackRoleArnRef, &out.HTTPSuccessFeedbackRoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.HTTPSuccessFeedbackRoleArnSelector != nil {
 		in, out := &in.HTTPSuccessFeedbackRoleArnSelector, &out.HTTPSuccessFeedbackRoleArnSelector
@@ -259,7 +259,7 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	if in.LambdaFailureFeedbackRoleArnRef != nil {
 		in, out := &in.LambdaFailureFeedbackRoleArnRef, &out.LambdaFailureFeedbackRoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LambdaFailureFeedbackRoleArnSelector != nil {
 		in, out := &in.LambdaFailureFeedbackRoleArnSelector, &out.LambdaFailureFeedbackRoleArnSelector
@@ -274,7 +274,7 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	if in.LambdaSuccessFeedbackRoleArnRef != nil {
 		in, out := &in.LambdaSuccessFeedbackRoleArnRef, &out.LambdaSuccessFeedbackRoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LambdaSuccessFeedbackRoleArnSelector != nil {
 		in, out := &in.LambdaSuccessFeedbackRoleArnSelector, &out.LambdaSuccessFeedbackRoleArnSelector
@@ -314,7 +314,7 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	if in.SqsFailureFeedbackRoleArnRef != nil {
 		in, out := &in.SqsFailureFeedbackRoleArnRef, &out.SqsFailureFeedbackRoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SqsFailureFeedbackRoleArnSelector != nil {
 		in, out := &in.SqsFailureFeedbackRoleArnSelector, &out.SqsFailureFeedbackRoleArnSelector
@@ -329,7 +329,7 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	if in.SqsSuccessFeedbackRoleArnRef != nil {
 		in, out := &in.SqsSuccessFeedbackRoleArnRef, &out.SqsSuccessFeedbackRoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SqsSuccessFeedbackRoleArnSelector != nil {
 		in, out := &in.SqsSuccessFeedbackRoleArnSelector, &out.SqsSuccessFeedbackRoleArnSelector
@@ -527,7 +527,7 @@ func (in *TopicSubscriptionParameters) DeepCopyInto(out *TopicSubscriptionParame
 	if in.EndpointRef != nil {
 		in, out := &in.EndpointRef, &out.EndpointRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.EndpointSelector != nil {
 		in, out := &in.EndpointSelector, &out.EndpointSelector
@@ -567,7 +567,7 @@ func (in *TopicSubscriptionParameters) DeepCopyInto(out *TopicSubscriptionParame
 	if in.SubscriptionRoleArnRef != nil {
 		in, out := &in.SubscriptionRoleArnRef, &out.SubscriptionRoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubscriptionRoleArnSelector != nil {
 		in, out := &in.SubscriptionRoleArnSelector, &out.SubscriptionRoleArnSelector
@@ -582,7 +582,7 @@ func (in *TopicSubscriptionParameters) DeepCopyInto(out *TopicSubscriptionParame
 	if in.TopicArnRef != nil {
 		in, out := &in.TopicArnRef, &out.TopicArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TopicArnSelector != nil {
 		in, out := &in.TopicArnSelector, &out.TopicArnSelector

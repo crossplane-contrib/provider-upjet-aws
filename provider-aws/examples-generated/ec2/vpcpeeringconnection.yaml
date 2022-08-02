@@ -5,7 +5,7 @@ metadata:
 spec:
   forProvider:
     peerOwnerId: ${var.peer_owner_id}
-    peerVpcidRef:
+    peerVpcIdRef:
       name: example
     region: us-west-1
     vpcIdRef:

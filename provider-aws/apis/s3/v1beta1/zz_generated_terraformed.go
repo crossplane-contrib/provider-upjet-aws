@@ -24,17 +24,17 @@ func (tr *Bucket) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Bucket
-func (tr *Bucket) GetObservation() (map[string]interface{}, error) {
+func (tr *Bucket) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Bucket
-func (tr *Bucket) SetObservation(obs map[string]interface{}) error {
+func (tr *Bucket) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *Bucket) GetID() string {
 }
 
 // GetParameters of this Bucket
-func (tr *Bucket) GetParameters() (map[string]interface{}, error) {
+func (tr *Bucket) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Bucket
-func (tr *Bucket) SetParameters(params map[string]interface{}) error {
+func (tr *Bucket) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *BucketAccelerateConfiguration) GetConnectionDetailsMapping() map[strin
 }
 
 // GetObservation of this BucketAccelerateConfiguration
-func (tr *BucketAccelerateConfiguration) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketAccelerateConfiguration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketAccelerateConfiguration
-func (tr *BucketAccelerateConfiguration) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketAccelerateConfiguration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *BucketAccelerateConfiguration) GetID() string {
 }
 
 // GetParameters of this BucketAccelerateConfiguration
-func (tr *BucketAccelerateConfiguration) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketAccelerateConfiguration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketAccelerateConfiguration
-func (tr *BucketAccelerateConfiguration) SetParameters(params map[string]interface{}) error {
+func (tr *BucketAccelerateConfiguration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -172,17 +172,17 @@ func (tr *BucketACL) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this BucketACL
-func (tr *BucketACL) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketACL) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketACL
-func (tr *BucketACL) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketACL) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -199,17 +199,17 @@ func (tr *BucketACL) GetID() string {
 }
 
 // GetParameters of this BucketACL
-func (tr *BucketACL) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketACL) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketACL
-func (tr *BucketACL) SetParameters(params map[string]interface{}) error {
+func (tr *BucketACL) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -246,17 +246,17 @@ func (tr *BucketAnalyticsConfiguration) GetConnectionDetailsMapping() map[string
 }
 
 // GetObservation of this BucketAnalyticsConfiguration
-func (tr *BucketAnalyticsConfiguration) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketAnalyticsConfiguration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketAnalyticsConfiguration
-func (tr *BucketAnalyticsConfiguration) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketAnalyticsConfiguration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -273,17 +273,17 @@ func (tr *BucketAnalyticsConfiguration) GetID() string {
 }
 
 // GetParameters of this BucketAnalyticsConfiguration
-func (tr *BucketAnalyticsConfiguration) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketAnalyticsConfiguration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketAnalyticsConfiguration
-func (tr *BucketAnalyticsConfiguration) SetParameters(params map[string]interface{}) error {
+func (tr *BucketAnalyticsConfiguration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -320,17 +320,17 @@ func (tr *BucketCorsConfiguration) GetConnectionDetailsMapping() map[string]stri
 }
 
 // GetObservation of this BucketCorsConfiguration
-func (tr *BucketCorsConfiguration) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketCorsConfiguration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketCorsConfiguration
-func (tr *BucketCorsConfiguration) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketCorsConfiguration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -347,17 +347,17 @@ func (tr *BucketCorsConfiguration) GetID() string {
 }
 
 // GetParameters of this BucketCorsConfiguration
-func (tr *BucketCorsConfiguration) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketCorsConfiguration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketCorsConfiguration
-func (tr *BucketCorsConfiguration) SetParameters(params map[string]interface{}) error {
+func (tr *BucketCorsConfiguration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -394,17 +394,17 @@ func (tr *BucketIntelligentTieringConfiguration) GetConnectionDetailsMapping() m
 }
 
 // GetObservation of this BucketIntelligentTieringConfiguration
-func (tr *BucketIntelligentTieringConfiguration) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketIntelligentTieringConfiguration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketIntelligentTieringConfiguration
-func (tr *BucketIntelligentTieringConfiguration) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketIntelligentTieringConfiguration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -421,17 +421,17 @@ func (tr *BucketIntelligentTieringConfiguration) GetID() string {
 }
 
 // GetParameters of this BucketIntelligentTieringConfiguration
-func (tr *BucketIntelligentTieringConfiguration) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketIntelligentTieringConfiguration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketIntelligentTieringConfiguration
-func (tr *BucketIntelligentTieringConfiguration) SetParameters(params map[string]interface{}) error {
+func (tr *BucketIntelligentTieringConfiguration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -468,17 +468,17 @@ func (tr *BucketInventory) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this BucketInventory
-func (tr *BucketInventory) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketInventory) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketInventory
-func (tr *BucketInventory) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketInventory) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -495,17 +495,17 @@ func (tr *BucketInventory) GetID() string {
 }
 
 // GetParameters of this BucketInventory
-func (tr *BucketInventory) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketInventory) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketInventory
-func (tr *BucketInventory) SetParameters(params map[string]interface{}) error {
+func (tr *BucketInventory) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -542,17 +542,17 @@ func (tr *BucketLifecycleConfiguration) GetConnectionDetailsMapping() map[string
 }
 
 // GetObservation of this BucketLifecycleConfiguration
-func (tr *BucketLifecycleConfiguration) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketLifecycleConfiguration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketLifecycleConfiguration
-func (tr *BucketLifecycleConfiguration) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketLifecycleConfiguration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -569,17 +569,17 @@ func (tr *BucketLifecycleConfiguration) GetID() string {
 }
 
 // GetParameters of this BucketLifecycleConfiguration
-func (tr *BucketLifecycleConfiguration) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketLifecycleConfiguration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketLifecycleConfiguration
-func (tr *BucketLifecycleConfiguration) SetParameters(params map[string]interface{}) error {
+func (tr *BucketLifecycleConfiguration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -616,17 +616,17 @@ func (tr *BucketLogging) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this BucketLogging
-func (tr *BucketLogging) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketLogging) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketLogging
-func (tr *BucketLogging) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketLogging) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -643,17 +643,17 @@ func (tr *BucketLogging) GetID() string {
 }
 
 // GetParameters of this BucketLogging
-func (tr *BucketLogging) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketLogging) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketLogging
-func (tr *BucketLogging) SetParameters(params map[string]interface{}) error {
+func (tr *BucketLogging) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -690,17 +690,17 @@ func (tr *BucketMetric) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this BucketMetric
-func (tr *BucketMetric) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketMetric) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketMetric
-func (tr *BucketMetric) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketMetric) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -717,17 +717,17 @@ func (tr *BucketMetric) GetID() string {
 }
 
 // GetParameters of this BucketMetric
-func (tr *BucketMetric) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketMetric) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketMetric
-func (tr *BucketMetric) SetParameters(params map[string]interface{}) error {
+func (tr *BucketMetric) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -764,17 +764,17 @@ func (tr *BucketNotification) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this BucketNotification
-func (tr *BucketNotification) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketNotification) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketNotification
-func (tr *BucketNotification) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketNotification) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -791,17 +791,17 @@ func (tr *BucketNotification) GetID() string {
 }
 
 // GetParameters of this BucketNotification
-func (tr *BucketNotification) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketNotification) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketNotification
-func (tr *BucketNotification) SetParameters(params map[string]interface{}) error {
+func (tr *BucketNotification) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -838,17 +838,17 @@ func (tr *BucketObject) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this BucketObject
-func (tr *BucketObject) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketObject) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketObject
-func (tr *BucketObject) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketObject) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -865,17 +865,17 @@ func (tr *BucketObject) GetID() string {
 }
 
 // GetParameters of this BucketObject
-func (tr *BucketObject) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketObject) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketObject
-func (tr *BucketObject) SetParameters(params map[string]interface{}) error {
+func (tr *BucketObject) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -912,17 +912,17 @@ func (tr *BucketObjectLockConfiguration) GetConnectionDetailsMapping() map[strin
 }
 
 // GetObservation of this BucketObjectLockConfiguration
-func (tr *BucketObjectLockConfiguration) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketObjectLockConfiguration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketObjectLockConfiguration
-func (tr *BucketObjectLockConfiguration) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketObjectLockConfiguration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -939,17 +939,17 @@ func (tr *BucketObjectLockConfiguration) GetID() string {
 }
 
 // GetParameters of this BucketObjectLockConfiguration
-func (tr *BucketObjectLockConfiguration) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketObjectLockConfiguration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketObjectLockConfiguration
-func (tr *BucketObjectLockConfiguration) SetParameters(params map[string]interface{}) error {
+func (tr *BucketObjectLockConfiguration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -986,17 +986,17 @@ func (tr *BucketOwnershipControls) GetConnectionDetailsMapping() map[string]stri
 }
 
 // GetObservation of this BucketOwnershipControls
-func (tr *BucketOwnershipControls) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketOwnershipControls) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketOwnershipControls
-func (tr *BucketOwnershipControls) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketOwnershipControls) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -1013,17 +1013,17 @@ func (tr *BucketOwnershipControls) GetID() string {
 }
 
 // GetParameters of this BucketOwnershipControls
-func (tr *BucketOwnershipControls) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketOwnershipControls) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketOwnershipControls
-func (tr *BucketOwnershipControls) SetParameters(params map[string]interface{}) error {
+func (tr *BucketOwnershipControls) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -1060,17 +1060,17 @@ func (tr *BucketPolicy) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this BucketPolicy
-func (tr *BucketPolicy) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketPolicy) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketPolicy
-func (tr *BucketPolicy) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketPolicy) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -1087,17 +1087,17 @@ func (tr *BucketPolicy) GetID() string {
 }
 
 // GetParameters of this BucketPolicy
-func (tr *BucketPolicy) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketPolicy) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketPolicy
-func (tr *BucketPolicy) SetParameters(params map[string]interface{}) error {
+func (tr *BucketPolicy) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -1134,17 +1134,17 @@ func (tr *BucketPublicAccessBlock) GetConnectionDetailsMapping() map[string]stri
 }
 
 // GetObservation of this BucketPublicAccessBlock
-func (tr *BucketPublicAccessBlock) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketPublicAccessBlock) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketPublicAccessBlock
-func (tr *BucketPublicAccessBlock) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketPublicAccessBlock) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -1161,17 +1161,17 @@ func (tr *BucketPublicAccessBlock) GetID() string {
 }
 
 // GetParameters of this BucketPublicAccessBlock
-func (tr *BucketPublicAccessBlock) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketPublicAccessBlock) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketPublicAccessBlock
-func (tr *BucketPublicAccessBlock) SetParameters(params map[string]interface{}) error {
+func (tr *BucketPublicAccessBlock) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -1208,17 +1208,17 @@ func (tr *BucketReplicationConfiguration) GetConnectionDetailsMapping() map[stri
 }
 
 // GetObservation of this BucketReplicationConfiguration
-func (tr *BucketReplicationConfiguration) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketReplicationConfiguration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketReplicationConfiguration
-func (tr *BucketReplicationConfiguration) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketReplicationConfiguration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -1235,17 +1235,17 @@ func (tr *BucketReplicationConfiguration) GetID() string {
 }
 
 // GetParameters of this BucketReplicationConfiguration
-func (tr *BucketReplicationConfiguration) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketReplicationConfiguration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketReplicationConfiguration
-func (tr *BucketReplicationConfiguration) SetParameters(params map[string]interface{}) error {
+func (tr *BucketReplicationConfiguration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -1282,17 +1282,17 @@ func (tr *BucketRequestPaymentConfiguration) GetConnectionDetailsMapping() map[s
 }
 
 // GetObservation of this BucketRequestPaymentConfiguration
-func (tr *BucketRequestPaymentConfiguration) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketRequestPaymentConfiguration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketRequestPaymentConfiguration
-func (tr *BucketRequestPaymentConfiguration) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketRequestPaymentConfiguration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -1309,17 +1309,17 @@ func (tr *BucketRequestPaymentConfiguration) GetID() string {
 }
 
 // GetParameters of this BucketRequestPaymentConfiguration
-func (tr *BucketRequestPaymentConfiguration) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketRequestPaymentConfiguration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketRequestPaymentConfiguration
-func (tr *BucketRequestPaymentConfiguration) SetParameters(params map[string]interface{}) error {
+func (tr *BucketRequestPaymentConfiguration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -1356,17 +1356,17 @@ func (tr *BucketServerSideEncryptionConfiguration) GetConnectionDetailsMapping()
 }
 
 // GetObservation of this BucketServerSideEncryptionConfiguration
-func (tr *BucketServerSideEncryptionConfiguration) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketServerSideEncryptionConfiguration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketServerSideEncryptionConfiguration
-func (tr *BucketServerSideEncryptionConfiguration) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketServerSideEncryptionConfiguration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -1383,17 +1383,17 @@ func (tr *BucketServerSideEncryptionConfiguration) GetID() string {
 }
 
 // GetParameters of this BucketServerSideEncryptionConfiguration
-func (tr *BucketServerSideEncryptionConfiguration) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketServerSideEncryptionConfiguration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketServerSideEncryptionConfiguration
-func (tr *BucketServerSideEncryptionConfiguration) SetParameters(params map[string]interface{}) error {
+func (tr *BucketServerSideEncryptionConfiguration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -1430,17 +1430,17 @@ func (tr *BucketVersioning) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this BucketVersioning
-func (tr *BucketVersioning) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketVersioning) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketVersioning
-func (tr *BucketVersioning) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketVersioning) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -1457,17 +1457,17 @@ func (tr *BucketVersioning) GetID() string {
 }
 
 // GetParameters of this BucketVersioning
-func (tr *BucketVersioning) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketVersioning) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketVersioning
-func (tr *BucketVersioning) SetParameters(params map[string]interface{}) error {
+func (tr *BucketVersioning) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -1504,17 +1504,17 @@ func (tr *BucketWebsiteConfiguration) GetConnectionDetailsMapping() map[string]s
 }
 
 // GetObservation of this BucketWebsiteConfiguration
-func (tr *BucketWebsiteConfiguration) GetObservation() (map[string]interface{}, error) {
+func (tr *BucketWebsiteConfiguration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BucketWebsiteConfiguration
-func (tr *BucketWebsiteConfiguration) SetObservation(obs map[string]interface{}) error {
+func (tr *BucketWebsiteConfiguration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -1531,17 +1531,17 @@ func (tr *BucketWebsiteConfiguration) GetID() string {
 }
 
 // GetParameters of this BucketWebsiteConfiguration
-func (tr *BucketWebsiteConfiguration) GetParameters() (map[string]interface{}, error) {
+func (tr *BucketWebsiteConfiguration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BucketWebsiteConfiguration
-func (tr *BucketWebsiteConfiguration) SetParameters(params map[string]interface{}) error {
+func (tr *BucketWebsiteConfiguration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -1580,17 +1580,17 @@ func (tr *Object) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Object
-func (tr *Object) GetObservation() (map[string]interface{}, error) {
+func (tr *Object) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Object
-func (tr *Object) SetObservation(obs map[string]interface{}) error {
+func (tr *Object) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -1607,17 +1607,17 @@ func (tr *Object) GetID() string {
 }
 
 // GetParameters of this Object
-func (tr *Object) GetParameters() (map[string]interface{}, error) {
+func (tr *Object) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Object
-func (tr *Object) SetParameters(params map[string]interface{}) error {
+func (tr *Object) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -1656,17 +1656,17 @@ func (tr *ObjectCopy) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this ObjectCopy
-func (tr *ObjectCopy) GetObservation() (map[string]interface{}, error) {
+func (tr *ObjectCopy) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this ObjectCopy
-func (tr *ObjectCopy) SetObservation(obs map[string]interface{}) error {
+func (tr *ObjectCopy) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -1683,17 +1683,17 @@ func (tr *ObjectCopy) GetID() string {
 }
 
 // GetParameters of this ObjectCopy
-func (tr *ObjectCopy) GetParameters() (map[string]interface{}, error) {
+func (tr *ObjectCopy) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this ObjectCopy
-func (tr *ObjectCopy) SetParameters(params map[string]interface{}) error {
+func (tr *ObjectCopy) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
