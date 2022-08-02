@@ -2147,16 +2147,6 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 			}
 		}
 	}
-	if in.SecurityGroupIDRefs != nil {
-		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
-		*out = make([]v1.Reference, len(*in))
-		copy(*out, *in)
-	}
-	if in.SecurityGroupIDSelector != nil {
-		in, out := &in.SecurityGroupIDSelector, &out.SecurityGroupIDSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.SecurityGroupRefs != nil {
 		in, out := &in.SecurityGroupRefs, &out.SecurityGroupRefs
 		*out = make([]v1.Reference, len(*in))
@@ -2232,6 +2222,16 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		in, out := &in.UserDataReplaceOnChange, &out.UserDataReplaceOnChange
 		*out = new(bool)
 		**out = **in
+	}
+	if in.VPCSecurityGroupIDRefs != nil {
+		in, out := &in.VPCSecurityGroupIDRefs, &out.VPCSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		copy(*out, *in)
+	}
+	if in.VPCSecurityGroupIDSelector != nil {
+		in, out := &in.VPCSecurityGroupIDSelector, &out.VPCSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.VPCSecurityGroupIds != nil {
 		in, out := &in.VPCSecurityGroupIds, &out.VPCSecurityGroupIds
