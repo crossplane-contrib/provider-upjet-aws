@@ -104,7 +104,7 @@ func (in *AssociationParameters) DeepCopyInto(out *AssociationParameters) {
 	if in.LicenseConfigurationArnRef != nil {
 		in, out := &in.LicenseConfigurationArnRef, &out.LicenseConfigurationArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LicenseConfigurationArnSelector != nil {
 		in, out := &in.LicenseConfigurationArnSelector, &out.LicenseConfigurationArnSelector

@@ -1168,56 +1168,7 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
-	var mrsp reference.MultiResolutionResponse
 	var err error
-
-	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.RouteTableIds),
-		Extract:       reference.ExternalName(),
-		References:    mg.Spec.ForProvider.RouteTableIDRefs,
-		Selector:      mg.Spec.ForProvider.RouteTableIDSelector,
-		To: reference.To{
-			List:    &RouteTableList{},
-			Managed: &RouteTable{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.RouteTableIds")
-	}
-	mg.Spec.ForProvider.RouteTableIds = reference.ToPtrValues(mrsp.ResolvedValues)
-	mg.Spec.ForProvider.RouteTableIDRefs = mrsp.ResolvedReferences
-
-	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
-		Extract:       reference.ExternalName(),
-		References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
-		Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
-		To: reference.To{
-			List:    &SecurityGroupList{},
-			Managed: &SecurityGroup{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityGroupIds")
-	}
-	mg.Spec.ForProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
-	mg.Spec.ForProvider.SecurityGroupIDRefs = mrsp.ResolvedReferences
-
-	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
-		Extract:       reference.ExternalName(),
-		References:    mg.Spec.ForProvider.SubnetIDRefs,
-		Selector:      mg.Spec.ForProvider.SubnetIDSelector,
-		To: reference.To{
-			List:    &SubnetList{},
-			Managed: &Subnet{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetIds")
-	}
-	mg.Spec.ForProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
-	mg.Spec.ForProvider.SubnetIDRefs = mrsp.ResolvedReferences
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCID),

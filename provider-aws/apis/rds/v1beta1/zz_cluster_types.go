@@ -24,6 +24,8 @@ type ClusterObservation struct {
 
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
+	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	ReaderEndpoint *string `json:"readerEndpoint,omitempty" tf:"reader_endpoint,omitempty"`
@@ -108,18 +110,6 @@ type ClusterParameters struct {
 
 	// +kubebuilder:validation:Optional
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	IAMRoleRefs []v1.Reference `json:"iamRoleRefs,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
-
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
-	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
-	// +kubebuilder:validation:Optional
-	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`

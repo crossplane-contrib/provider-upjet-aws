@@ -136,7 +136,7 @@ func (in *RoleAssociationParameters) DeepCopyInto(out *RoleAssociationParameters
 	if in.WorkspaceIDRef != nil {
 		in, out := &in.WorkspaceIDRef, &out.WorkspaceIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.WorkspaceIDSelector != nil {
 		in, out := &in.WorkspaceIDSelector, &out.WorkspaceIDSelector
@@ -388,7 +388,7 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 	if in.RoleArnRef != nil {
 		in, out := &in.RoleArnRef, &out.RoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RoleArnSelector != nil {
 		in, out := &in.RoleArnSelector, &out.RoleArnSelector
@@ -605,7 +605,7 @@ func (in *WorkspaceSAMLConfigurationParameters) DeepCopyInto(out *WorkspaceSAMLC
 	if in.WorkspaceIDRef != nil {
 		in, out := &in.WorkspaceIDRef, &out.WorkspaceIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.WorkspaceIDSelector != nil {
 		in, out := &in.WorkspaceIDSelector, &out.WorkspaceIDSelector

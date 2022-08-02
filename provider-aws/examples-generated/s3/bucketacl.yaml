@@ -4,6 +4,5 @@ metadata:
   name: example
 spec:
   forProvider:
-    acl: private
     bucket: ${aws_s3_bucket.example.id}
     region: us-west-1

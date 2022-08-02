@@ -24,17 +24,17 @@ func (tr *Secret) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Secret
-func (tr *Secret) GetObservation() (map[string]interface{}, error) {
+func (tr *Secret) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Secret
-func (tr *Secret) SetObservation(obs map[string]interface{}) error {
+func (tr *Secret) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *Secret) GetID() string {
 }
 
 // GetParameters of this Secret
-func (tr *Secret) GetParameters() (map[string]interface{}, error) {
+func (tr *Secret) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Secret
-func (tr *Secret) SetParameters(params map[string]interface{}) error {
+func (tr *Secret) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

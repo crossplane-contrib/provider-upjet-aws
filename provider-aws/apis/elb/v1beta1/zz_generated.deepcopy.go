@@ -154,7 +154,7 @@ func (in *AttachmentParameters) DeepCopyInto(out *AttachmentParameters) {
 	if in.ELBRef != nil {
 		in, out := &in.ELBRef, &out.ELBRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ELBSelector != nil {
 		in, out := &in.ELBSelector, &out.ELBSelector
@@ -169,7 +169,7 @@ func (in *AttachmentParameters) DeepCopyInto(out *AttachmentParameters) {
 	if in.InstanceRef != nil {
 		in, out := &in.InstanceRef, &out.InstanceRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.InstanceSelector != nil {
 		in, out := &in.InstanceSelector, &out.InstanceSelector
@@ -408,7 +408,9 @@ func (in *ELBParameters) DeepCopyInto(out *ELBParameters) {
 	if in.InstancesRefs != nil {
 		in, out := &in.InstancesRefs, &out.InstancesRefs
 		*out = make([]v1.Reference, len(*in))
-		copy(*out, *in)
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.InstancesSelector != nil {
 		in, out := &in.InstancesSelector, &out.InstancesSelector

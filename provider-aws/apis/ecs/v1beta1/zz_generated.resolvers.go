@@ -45,32 +45,6 @@ func (mg *CapacityProvider) ResolveReferences(ctx context.Context, c client.Read
 	return nil
 }
 
-// ResolveReferences of this Cluster.
-func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error {
-	r := reference.NewAPIResolver(c, mg)
-
-	var mrsp reference.MultiResolutionResponse
-	var err error
-
-	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CapacityProviders),
-		Extract:       reference.ExternalName(),
-		References:    mg.Spec.ForProvider.CapacityProvidersRefs,
-		Selector:      mg.Spec.ForProvider.CapacityProvidersSelector,
-		To: reference.To{
-			List:    &CapacityProviderList{},
-			Managed: &CapacityProvider{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.CapacityProviders")
-	}
-	mg.Spec.ForProvider.CapacityProviders = reference.ToPtrValues(mrsp.ResolvedValues)
-	mg.Spec.ForProvider.CapacityProvidersRefs = mrsp.ResolvedReferences
-
-	return nil
-}
-
 // ResolveReferences of this Service.
 func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

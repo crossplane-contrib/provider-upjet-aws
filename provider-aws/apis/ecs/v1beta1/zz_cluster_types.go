@@ -16,22 +16,14 @@ import (
 type ClusterObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ClusterParameters struct {
-
-	// +crossplane:generate:reference:type=CapacityProvider
-	// +kubebuilder:validation:Optional
-	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	CapacityProvidersRefs []v1.Reference `json:"capacityProvidersRefs,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	CapacityProvidersSelector *v1.Selector `json:"capacityProvidersSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`

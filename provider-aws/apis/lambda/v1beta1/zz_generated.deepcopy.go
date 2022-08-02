@@ -119,7 +119,7 @@ func (in *AliasParameters) DeepCopyInto(out *AliasParameters) {
 	if in.FunctionNameRef != nil {
 		in, out := &in.FunctionNameRef, &out.FunctionNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.FunctionNameSelector != nil {
 		in, out := &in.FunctionNameSelector, &out.FunctionNameSelector
@@ -226,7 +226,9 @@ func (in *AllowedPublishersParameters) DeepCopyInto(out *AllowedPublishersParame
 	if in.SigningProfileVersionArnsRefs != nil {
 		in, out := &in.SigningProfileVersionArnsRefs, &out.SigningProfileVersionArnsRefs
 		*out = make([]v1.Reference, len(*in))
-		copy(*out, *in)
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.SigningProfileVersionArnsSelector != nil {
 		in, out := &in.SigningProfileVersionArnsSelector, &out.SigningProfileVersionArnsSelector
@@ -572,7 +574,7 @@ func (in *DestinationConfigOnFailureParameters) DeepCopyInto(out *DestinationCon
 	if in.DestinationRef != nil {
 		in, out := &in.DestinationRef, &out.DestinationRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DestinationSelector != nil {
 		in, out := &in.DestinationSelector, &out.DestinationSelector
@@ -847,7 +849,7 @@ func (in *EventSourceMappingParameters) DeepCopyInto(out *EventSourceMappingPara
 	if in.FunctionNameRef != nil {
 		in, out := &in.FunctionNameRef, &out.FunctionNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.FunctionNameSelector != nil {
 		in, out := &in.FunctionNameSelector, &out.FunctionNameSelector
@@ -1521,7 +1523,7 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 	if in.KMSKeyArnRef != nil {
 		in, out := &in.KMSKeyArnRef, &out.KMSKeyArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyArnSelector != nil {
 		in, out := &in.KMSKeyArnSelector, &out.KMSKeyArnSelector
@@ -1572,7 +1574,7 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 	if in.RoleRef != nil {
 		in, out := &in.RoleRef, &out.RoleRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RoleSelector != nil {
 		in, out := &in.RoleSelector, &out.RoleSelector
@@ -1801,7 +1803,7 @@ func (in *FunctionURLParameters) DeepCopyInto(out *FunctionURLParameters) {
 	if in.FunctionNameRef != nil {
 		in, out := &in.FunctionNameRef, &out.FunctionNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.FunctionNameSelector != nil {
 		in, out := &in.FunctionNameSelector, &out.FunctionNameSelector
@@ -2016,7 +2018,7 @@ func (in *InvocationParameters) DeepCopyInto(out *InvocationParameters) {
 	if in.FunctionNameRef != nil {
 		in, out := &in.FunctionNameRef, &out.FunctionNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.FunctionNameSelector != nil {
 		in, out := &in.FunctionNameSelector, &out.FunctionNameSelector
@@ -2568,7 +2570,7 @@ func (in *OnSuccessParameters) DeepCopyInto(out *OnSuccessParameters) {
 	if in.DestinationRef != nil {
 		in, out := &in.DestinationRef, &out.DestinationRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DestinationSelector != nil {
 		in, out := &in.DestinationSelector, &out.DestinationSelector
@@ -2687,7 +2689,7 @@ func (in *PermissionParameters) DeepCopyInto(out *PermissionParameters) {
 	if in.FunctionNameRef != nil {
 		in, out := &in.FunctionNameRef, &out.FunctionNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.FunctionNameSelector != nil {
 		in, out := &in.FunctionNameSelector, &out.FunctionNameSelector
@@ -2717,7 +2719,7 @@ func (in *PermissionParameters) DeepCopyInto(out *PermissionParameters) {
 	if in.QualifierRef != nil {
 		in, out := &in.QualifierRef, &out.QualifierRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.QualifierSelector != nil {
 		in, out := &in.QualifierSelector, &out.QualifierSelector

@@ -154,7 +154,7 @@ func (in *ContributorInsightsParameters) DeepCopyInto(out *ContributorInsightsPa
 	if in.TableNameRef != nil {
 		in, out := &in.TableNameRef, &out.TableNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TableNameSelector != nil {
 		in, out := &in.TableNameSelector, &out.TableNameSelector
@@ -518,7 +518,7 @@ func (in *KinesisStreamingDestinationParameters) DeepCopyInto(out *KinesisStream
 	if in.StreamArnRef != nil {
 		in, out := &in.StreamArnRef, &out.StreamArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StreamArnSelector != nil {
 		in, out := &in.StreamArnSelector, &out.StreamArnSelector
@@ -533,7 +533,7 @@ func (in *KinesisStreamingDestinationParameters) DeepCopyInto(out *KinesisStream
 	if in.TableNameRef != nil {
 		in, out := &in.TableNameRef, &out.TableNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TableNameSelector != nil {
 		in, out := &in.TableNameSelector, &out.TableNameSelector
@@ -929,7 +929,7 @@ func (in *TableItemParameters) DeepCopyInto(out *TableItemParameters) {
 	if in.TableNameRef != nil {
 		in, out := &in.TableNameRef, &out.TableNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TableNameSelector != nil {
 		in, out := &in.TableNameSelector, &out.TableNameSelector

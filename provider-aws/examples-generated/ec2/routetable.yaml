@@ -5,11 +5,6 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    route:
-    - cidrBlock: 10.0.1.0/24
-      gatewayId: ${aws_internet_gateway.example.id}
-    - egressOnlyGatewayId: ${aws_egress_only_internet_gateway.example.id}
-      ipv6CidrBlock: ::/0
     tags:
       Name: example
     vpcIdRef:

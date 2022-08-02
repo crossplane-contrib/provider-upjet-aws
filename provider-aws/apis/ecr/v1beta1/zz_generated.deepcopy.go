@@ -85,7 +85,7 @@ func (in *EncryptionConfigurationParameters) DeepCopyInto(out *EncryptionConfigu
 	if in.KMSKeyRef != nil {
 		in, out := &in.KMSKeyRef, &out.KMSKeyRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeySelector != nil {
 		in, out := &in.KMSKeySelector, &out.KMSKeySelector

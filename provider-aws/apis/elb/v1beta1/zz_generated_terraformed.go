@@ -24,17 +24,17 @@ func (tr *ELB) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this ELB
-func (tr *ELB) GetObservation() (map[string]interface{}, error) {
+func (tr *ELB) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this ELB
-func (tr *ELB) SetObservation(obs map[string]interface{}) error {
+func (tr *ELB) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *ELB) GetID() string {
 }
 
 // GetParameters of this ELB
-func (tr *ELB) GetParameters() (map[string]interface{}, error) {
+func (tr *ELB) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this ELB
-func (tr *ELB) SetParameters(params map[string]interface{}) error {
+func (tr *ELB) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -99,17 +99,17 @@ func (tr *Attachment) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Attachment
-func (tr *Attachment) GetObservation() (map[string]interface{}, error) {
+func (tr *Attachment) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Attachment
-func (tr *Attachment) SetObservation(obs map[string]interface{}) error {
+func (tr *Attachment) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -126,17 +126,17 @@ func (tr *Attachment) GetID() string {
 }
 
 // GetParameters of this Attachment
-func (tr *Attachment) GetParameters() (map[string]interface{}, error) {
+func (tr *Attachment) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Attachment
-func (tr *Attachment) SetParameters(params map[string]interface{}) error {
+func (tr *Attachment) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

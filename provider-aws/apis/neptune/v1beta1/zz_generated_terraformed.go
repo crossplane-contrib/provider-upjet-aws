@@ -24,17 +24,17 @@ func (tr *Cluster) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Cluster
-func (tr *Cluster) GetObservation() (map[string]interface{}, error) {
+func (tr *Cluster) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Cluster
-func (tr *Cluster) SetObservation(obs map[string]interface{}) error {
+func (tr *Cluster) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *Cluster) GetID() string {
 }
 
 // GetParameters of this Cluster
-func (tr *Cluster) GetParameters() (map[string]interface{}, error) {
+func (tr *Cluster) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Cluster
-func (tr *Cluster) SetParameters(params map[string]interface{}) error {
+func (tr *Cluster) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *ClusterEndpoint) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this ClusterEndpoint
-func (tr *ClusterEndpoint) GetObservation() (map[string]interface{}, error) {
+func (tr *ClusterEndpoint) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this ClusterEndpoint
-func (tr *ClusterEndpoint) SetObservation(obs map[string]interface{}) error {
+func (tr *ClusterEndpoint) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *ClusterEndpoint) GetID() string {
 }
 
 // GetParameters of this ClusterEndpoint
-func (tr *ClusterEndpoint) GetParameters() (map[string]interface{}, error) {
+func (tr *ClusterEndpoint) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this ClusterEndpoint
-func (tr *ClusterEndpoint) SetParameters(params map[string]interface{}) error {
+func (tr *ClusterEndpoint) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -172,17 +172,17 @@ func (tr *ClusterInstance) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this ClusterInstance
-func (tr *ClusterInstance) GetObservation() (map[string]interface{}, error) {
+func (tr *ClusterInstance) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this ClusterInstance
-func (tr *ClusterInstance) SetObservation(obs map[string]interface{}) error {
+func (tr *ClusterInstance) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -199,17 +199,17 @@ func (tr *ClusterInstance) GetID() string {
 }
 
 // GetParameters of this ClusterInstance
-func (tr *ClusterInstance) GetParameters() (map[string]interface{}, error) {
+func (tr *ClusterInstance) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this ClusterInstance
-func (tr *ClusterInstance) SetParameters(params map[string]interface{}) error {
+func (tr *ClusterInstance) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -246,17 +246,17 @@ func (tr *ClusterParameterGroup) GetConnectionDetailsMapping() map[string]string
 }
 
 // GetObservation of this ClusterParameterGroup
-func (tr *ClusterParameterGroup) GetObservation() (map[string]interface{}, error) {
+func (tr *ClusterParameterGroup) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this ClusterParameterGroup
-func (tr *ClusterParameterGroup) SetObservation(obs map[string]interface{}) error {
+func (tr *ClusterParameterGroup) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -273,17 +273,17 @@ func (tr *ClusterParameterGroup) GetID() string {
 }
 
 // GetParameters of this ClusterParameterGroup
-func (tr *ClusterParameterGroup) GetParameters() (map[string]interface{}, error) {
+func (tr *ClusterParameterGroup) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this ClusterParameterGroup
-func (tr *ClusterParameterGroup) SetParameters(params map[string]interface{}) error {
+func (tr *ClusterParameterGroup) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -320,17 +320,17 @@ func (tr *ClusterSnapshot) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this ClusterSnapshot
-func (tr *ClusterSnapshot) GetObservation() (map[string]interface{}, error) {
+func (tr *ClusterSnapshot) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this ClusterSnapshot
-func (tr *ClusterSnapshot) SetObservation(obs map[string]interface{}) error {
+func (tr *ClusterSnapshot) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -347,17 +347,17 @@ func (tr *ClusterSnapshot) GetID() string {
 }
 
 // GetParameters of this ClusterSnapshot
-func (tr *ClusterSnapshot) GetParameters() (map[string]interface{}, error) {
+func (tr *ClusterSnapshot) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this ClusterSnapshot
-func (tr *ClusterSnapshot) SetParameters(params map[string]interface{}) error {
+func (tr *ClusterSnapshot) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -394,17 +394,17 @@ func (tr *EventSubscription) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this EventSubscription
-func (tr *EventSubscription) GetObservation() (map[string]interface{}, error) {
+func (tr *EventSubscription) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this EventSubscription
-func (tr *EventSubscription) SetObservation(obs map[string]interface{}) error {
+func (tr *EventSubscription) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -421,17 +421,17 @@ func (tr *EventSubscription) GetID() string {
 }
 
 // GetParameters of this EventSubscription
-func (tr *EventSubscription) GetParameters() (map[string]interface{}, error) {
+func (tr *EventSubscription) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this EventSubscription
-func (tr *EventSubscription) SetParameters(params map[string]interface{}) error {
+func (tr *EventSubscription) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -468,17 +468,17 @@ func (tr *ParameterGroup) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this ParameterGroup
-func (tr *ParameterGroup) GetObservation() (map[string]interface{}, error) {
+func (tr *ParameterGroup) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this ParameterGroup
-func (tr *ParameterGroup) SetObservation(obs map[string]interface{}) error {
+func (tr *ParameterGroup) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -495,17 +495,17 @@ func (tr *ParameterGroup) GetID() string {
 }
 
 // GetParameters of this ParameterGroup
-func (tr *ParameterGroup) GetParameters() (map[string]interface{}, error) {
+func (tr *ParameterGroup) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this ParameterGroup
-func (tr *ParameterGroup) SetParameters(params map[string]interface{}) error {
+func (tr *ParameterGroup) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -542,17 +542,17 @@ func (tr *SubnetGroup) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this SubnetGroup
-func (tr *SubnetGroup) GetObservation() (map[string]interface{}, error) {
+func (tr *SubnetGroup) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this SubnetGroup
-func (tr *SubnetGroup) SetObservation(obs map[string]interface{}) error {
+func (tr *SubnetGroup) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -569,17 +569,17 @@ func (tr *SubnetGroup) GetID() string {
 }
 
 // GetParameters of this SubnetGroup
-func (tr *SubnetGroup) GetParameters() (map[string]interface{}, error) {
+func (tr *SubnetGroup) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this SubnetGroup
-func (tr *SubnetGroup) SetParameters(params map[string]interface{}) error {
+func (tr *SubnetGroup) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
