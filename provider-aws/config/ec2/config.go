@@ -127,11 +127,6 @@ func Configure(p *config.Provider) {
 		// aws_vpc_endpoint_route_table_association
 		// aws_vpc_endpoint_security_group_association
 		config.MoveToStatus(r.TerraformResource, "subnet_ids", "security_group_ids", "route_table_ids")
-		r.References["route_table_ids"] = config.Reference{
-			Type:              "RouteTable",
-			RefFieldName:      "RouteTableIDRefs",
-			SelectorFieldName: "RouteTableIDSelector",
-		}
 	})
 
 	p.AddResourceConfigurator("aws_subnet", func(r *config.Resource) {
