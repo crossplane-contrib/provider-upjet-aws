@@ -635,7 +635,7 @@ func (in *UserParameters) DeepCopyInto(out *UserParameters) {
 	if in.RoleRef != nil {
 		in, out := &in.RoleRef, &out.RoleRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RoleSelector != nil {
 		in, out := &in.RoleSelector, &out.RoleSelector
@@ -650,7 +650,7 @@ func (in *UserParameters) DeepCopyInto(out *UserParameters) {
 	if in.ServerIDRef != nil {
 		in, out := &in.ServerIDRef, &out.ServerIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerIDSelector != nil {
 		in, out := &in.ServerIDSelector, &out.ServerIDSelector

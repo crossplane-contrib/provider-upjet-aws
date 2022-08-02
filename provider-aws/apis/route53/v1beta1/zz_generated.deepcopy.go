@@ -663,7 +663,7 @@ func (in *HostedZoneDNSSECParameters) DeepCopyInto(out *HostedZoneDNSSECParamete
 	if in.HostedZoneIDRef != nil {
 		in, out := &in.HostedZoneIDRef, &out.HostedZoneIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.HostedZoneIDSelector != nil {
 		in, out := &in.HostedZoneIDSelector, &out.HostedZoneIDSelector
@@ -866,7 +866,7 @@ func (in *KeySigningKeyParameters) DeepCopyInto(out *KeySigningKeyParameters) {
 	if in.HostedZoneIDRef != nil {
 		in, out := &in.HostedZoneIDRef, &out.HostedZoneIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.HostedZoneIDSelector != nil {
 		in, out := &in.HostedZoneIDSelector, &out.HostedZoneIDSelector
@@ -881,7 +881,7 @@ func (in *KeySigningKeyParameters) DeepCopyInto(out *KeySigningKeyParameters) {
 	if in.KeyManagementServiceArnRef != nil {
 		in, out := &in.KeyManagementServiceArnRef, &out.KeyManagementServiceArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyManagementServiceArnSelector != nil {
 		in, out := &in.KeyManagementServiceArnSelector, &out.KeyManagementServiceArnSelector
@@ -1248,7 +1248,7 @@ func (in *RecordParameters) DeepCopyInto(out *RecordParameters) {
 	if in.HealthCheckIDRef != nil {
 		in, out := &in.HealthCheckIDRef, &out.HealthCheckIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.HealthCheckIDSelector != nil {
 		in, out := &in.HealthCheckIDSelector, &out.HealthCheckIDSelector
@@ -1318,7 +1318,7 @@ func (in *RecordParameters) DeepCopyInto(out *RecordParameters) {
 	if in.ZoneIDRef != nil {
 		in, out := &in.ZoneIDRef, &out.ZoneIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ZoneIDSelector != nil {
 		in, out := &in.ZoneIDSelector, &out.ZoneIDSelector
@@ -1782,7 +1782,7 @@ func (in *VPCAssociationAuthorizationParameters) DeepCopyInto(out *VPCAssociatio
 	if in.VPCIDRef != nil {
 		in, out := &in.VPCIDRef, &out.VPCIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.VPCIDSelector != nil {
 		in, out := &in.VPCIDSelector, &out.VPCIDSelector
@@ -1802,7 +1802,7 @@ func (in *VPCAssociationAuthorizationParameters) DeepCopyInto(out *VPCAssociatio
 	if in.ZoneIDRef != nil {
 		in, out := &in.ZoneIDRef, &out.ZoneIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ZoneIDSelector != nil {
 		in, out := &in.ZoneIDSelector, &out.ZoneIDSelector
@@ -2062,7 +2062,7 @@ func (in *ZoneAssociationParameters) DeepCopyInto(out *ZoneAssociationParameters
 	if in.VPCIDRef != nil {
 		in, out := &in.VPCIDRef, &out.VPCIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.VPCIDSelector != nil {
 		in, out := &in.VPCIDSelector, &out.VPCIDSelector
@@ -2077,7 +2077,7 @@ func (in *ZoneAssociationParameters) DeepCopyInto(out *ZoneAssociationParameters
 	if in.ZoneIDRef != nil {
 		in, out := &in.ZoneIDRef, &out.ZoneIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ZoneIDSelector != nil {
 		in, out := &in.ZoneIDSelector, &out.ZoneIDSelector
@@ -2241,7 +2241,7 @@ func (in *ZoneParameters) DeepCopyInto(out *ZoneParameters) {
 	if in.DelegationSetIDRef != nil {
 		in, out := &in.DelegationSetIDRef, &out.DelegationSetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DelegationSetIDSelector != nil {
 		in, out := &in.DelegationSetIDSelector, &out.DelegationSetIDSelector

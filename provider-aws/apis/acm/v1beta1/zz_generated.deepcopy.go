@@ -350,7 +350,7 @@ func (in *CertificateValidationParameters) DeepCopyInto(out *CertificateValidati
 	if in.CertificateArnRef != nil {
 		in, out := &in.CertificateArnRef, &out.CertificateArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CertificateArnSelector != nil {
 		in, out := &in.CertificateArnSelector, &out.CertificateArnSelector

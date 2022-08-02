@@ -151,7 +151,7 @@ func (in *StreamConsumerParameters) DeepCopyInto(out *StreamConsumerParameters) 
 	if in.StreamArnRef != nil {
 		in, out := &in.StreamArnRef, &out.StreamArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StreamArnSelector != nil {
 		in, out := &in.StreamArnSelector, &out.StreamArnSelector
@@ -332,7 +332,7 @@ func (in *StreamParameters) DeepCopyInto(out *StreamParameters) {
 	if in.KMSKeyIDRef != nil {
 		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyIDSelector != nil {
 		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector

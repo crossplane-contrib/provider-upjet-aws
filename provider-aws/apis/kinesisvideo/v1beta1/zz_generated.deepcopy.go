@@ -144,7 +144,7 @@ func (in *StreamParameters) DeepCopyInto(out *StreamParameters) {
 	if in.KMSKeyIDRef != nil {
 		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyIDSelector != nil {
 		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector

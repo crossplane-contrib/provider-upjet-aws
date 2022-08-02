@@ -24,17 +24,17 @@ func (tr *RoleAssociation) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this RoleAssociation
-func (tr *RoleAssociation) GetObservation() (map[string]interface{}, error) {
+func (tr *RoleAssociation) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this RoleAssociation
-func (tr *RoleAssociation) SetObservation(obs map[string]interface{}) error {
+func (tr *RoleAssociation) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *RoleAssociation) GetID() string {
 }
 
 // GetParameters of this RoleAssociation
-func (tr *RoleAssociation) GetParameters() (map[string]interface{}, error) {
+func (tr *RoleAssociation) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this RoleAssociation
-func (tr *RoleAssociation) SetParameters(params map[string]interface{}) error {
+func (tr *RoleAssociation) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *Workspace) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Workspace
-func (tr *Workspace) GetObservation() (map[string]interface{}, error) {
+func (tr *Workspace) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Workspace
-func (tr *Workspace) SetObservation(obs map[string]interface{}) error {
+func (tr *Workspace) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *Workspace) GetID() string {
 }
 
 // GetParameters of this Workspace
-func (tr *Workspace) GetParameters() (map[string]interface{}, error) {
+func (tr *Workspace) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Workspace
-func (tr *Workspace) SetParameters(params map[string]interface{}) error {
+func (tr *Workspace) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -172,17 +172,17 @@ func (tr *WorkspaceSAMLConfiguration) GetConnectionDetailsMapping() map[string]s
 }
 
 // GetObservation of this WorkspaceSAMLConfiguration
-func (tr *WorkspaceSAMLConfiguration) GetObservation() (map[string]interface{}, error) {
+func (tr *WorkspaceSAMLConfiguration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this WorkspaceSAMLConfiguration
-func (tr *WorkspaceSAMLConfiguration) SetObservation(obs map[string]interface{}) error {
+func (tr *WorkspaceSAMLConfiguration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -199,17 +199,17 @@ func (tr *WorkspaceSAMLConfiguration) GetID() string {
 }
 
 // GetParameters of this WorkspaceSAMLConfiguration
-func (tr *WorkspaceSAMLConfiguration) GetParameters() (map[string]interface{}, error) {
+func (tr *WorkspaceSAMLConfiguration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this WorkspaceSAMLConfiguration
-func (tr *WorkspaceSAMLConfiguration) SetParameters(params map[string]interface{}) error {
+func (tr *WorkspaceSAMLConfiguration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

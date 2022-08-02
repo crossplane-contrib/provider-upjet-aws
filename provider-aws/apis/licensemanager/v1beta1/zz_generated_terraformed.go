@@ -24,17 +24,17 @@ func (tr *Association) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Association
-func (tr *Association) GetObservation() (map[string]interface{}, error) {
+func (tr *Association) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Association
-func (tr *Association) SetObservation(obs map[string]interface{}) error {
+func (tr *Association) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *Association) GetID() string {
 }
 
 // GetParameters of this Association
-func (tr *Association) GetParameters() (map[string]interface{}, error) {
+func (tr *Association) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Association
-func (tr *Association) SetParameters(params map[string]interface{}) error {
+func (tr *Association) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *LicenseConfiguration) GetConnectionDetailsMapping() map[string]string 
 }
 
 // GetObservation of this LicenseConfiguration
-func (tr *LicenseConfiguration) GetObservation() (map[string]interface{}, error) {
+func (tr *LicenseConfiguration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this LicenseConfiguration
-func (tr *LicenseConfiguration) SetObservation(obs map[string]interface{}) error {
+func (tr *LicenseConfiguration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *LicenseConfiguration) GetID() string {
 }
 
 // GetParameters of this LicenseConfiguration
-func (tr *LicenseConfiguration) GetParameters() (map[string]interface{}, error) {
+func (tr *LicenseConfiguration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this LicenseConfiguration
-func (tr *LicenseConfiguration) SetParameters(params map[string]interface{}) error {
+func (tr *LicenseConfiguration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

@@ -166,7 +166,7 @@ func (in *FileSystemParameters) DeepCopyInto(out *FileSystemParameters) {
 	if in.KMSKeyIDRef != nil {
 		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyIDSelector != nil {
 		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
@@ -426,7 +426,7 @@ func (in *MountTargetParameters) DeepCopyInto(out *MountTargetParameters) {
 	if in.FileSystemIDRef != nil {
 		in, out := &in.FileSystemIDRef, &out.FileSystemIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.FileSystemIDSelector != nil {
 		in, out := &in.FileSystemIDSelector, &out.FileSystemIDSelector
@@ -462,7 +462,7 @@ func (in *MountTargetParameters) DeepCopyInto(out *MountTargetParameters) {
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector

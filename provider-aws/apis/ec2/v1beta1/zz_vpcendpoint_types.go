@@ -39,7 +39,13 @@ type VPCEndpointObservation struct {
 
 	RequesterManaged *bool `json:"requesterManaged,omitempty" tf:"requester_managed,omitempty"`
 
+	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
+
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -60,44 +66,8 @@ type VPCEndpointParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +kubebuilder:validation:Optional
-	RouteTableIDRefs []v1.Reference `json:"routeTableIdRefs,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
-
-	// +crossplane:generate:reference:type=RouteTable
-	// +crossplane:generate:reference:refFieldName=RouteTableIDRefs
-	// +crossplane:generate:reference:selectorFieldName=RouteTableIDSelector
-	// +kubebuilder:validation:Optional
-	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
-
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
-	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
-	// +kubebuilder:validation:Optional
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
 	// +kubebuilder:validation:Required
 	ServiceName *string `json:"serviceName" tf:"service_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
-
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
-	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
-	// +kubebuilder:validation:Optional
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

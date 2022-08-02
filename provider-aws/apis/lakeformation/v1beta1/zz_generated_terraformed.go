@@ -24,17 +24,17 @@ func (tr *DataLakeSettings) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this DataLakeSettings
-func (tr *DataLakeSettings) GetObservation() (map[string]interface{}, error) {
+func (tr *DataLakeSettings) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this DataLakeSettings
-func (tr *DataLakeSettings) SetObservation(obs map[string]interface{}) error {
+func (tr *DataLakeSettings) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *DataLakeSettings) GetID() string {
 }
 
 // GetParameters of this DataLakeSettings
-func (tr *DataLakeSettings) GetParameters() (map[string]interface{}, error) {
+func (tr *DataLakeSettings) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this DataLakeSettings
-func (tr *DataLakeSettings) SetParameters(params map[string]interface{}) error {
+func (tr *DataLakeSettings) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *Permissions) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Permissions
-func (tr *Permissions) GetObservation() (map[string]interface{}, error) {
+func (tr *Permissions) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Permissions
-func (tr *Permissions) SetObservation(obs map[string]interface{}) error {
+func (tr *Permissions) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *Permissions) GetID() string {
 }
 
 // GetParameters of this Permissions
-func (tr *Permissions) GetParameters() (map[string]interface{}, error) {
+func (tr *Permissions) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Permissions
-func (tr *Permissions) SetParameters(params map[string]interface{}) error {
+func (tr *Permissions) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -172,17 +172,17 @@ func (tr *Resource) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Resource
-func (tr *Resource) GetObservation() (map[string]interface{}, error) {
+func (tr *Resource) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Resource
-func (tr *Resource) SetObservation(obs map[string]interface{}) error {
+func (tr *Resource) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -199,17 +199,17 @@ func (tr *Resource) GetID() string {
 }
 
 // GetParameters of this Resource
-func (tr *Resource) GetParameters() (map[string]interface{}, error) {
+func (tr *Resource) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Resource
-func (tr *Resource) SetParameters(params map[string]interface{}) error {
+func (tr *Resource) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

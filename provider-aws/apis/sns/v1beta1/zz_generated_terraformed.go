@@ -24,17 +24,17 @@ func (tr *Topic) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Topic
-func (tr *Topic) GetObservation() (map[string]interface{}, error) {
+func (tr *Topic) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Topic
-func (tr *Topic) SetObservation(obs map[string]interface{}) error {
+func (tr *Topic) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *Topic) GetID() string {
 }
 
 // GetParameters of this Topic
-func (tr *Topic) GetParameters() (map[string]interface{}, error) {
+func (tr *Topic) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Topic
-func (tr *Topic) SetParameters(params map[string]interface{}) error {
+func (tr *Topic) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *TopicSubscription) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this TopicSubscription
-func (tr *TopicSubscription) GetObservation() (map[string]interface{}, error) {
+func (tr *TopicSubscription) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this TopicSubscription
-func (tr *TopicSubscription) SetObservation(obs map[string]interface{}) error {
+func (tr *TopicSubscription) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *TopicSubscription) GetID() string {
 }
 
 // GetParameters of this TopicSubscription
-func (tr *TopicSubscription) GetParameters() (map[string]interface{}, error) {
+func (tr *TopicSubscription) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this TopicSubscription
-func (tr *TopicSubscription) SetParameters(params map[string]interface{}) error {
+func (tr *TopicSubscription) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

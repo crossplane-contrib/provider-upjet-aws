@@ -119,7 +119,7 @@ func (in *AliasParameters) DeepCopyInto(out *AliasParameters) {
 	if in.TargetKeyIDRef != nil {
 		in, out := &in.TargetKeyIDRef, &out.TargetKeyIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TargetKeyIDSelector != nil {
 		in, out := &in.TargetKeyIDSelector, &out.TargetKeyIDSelector
@@ -282,7 +282,7 @@ func (in *CiphertextParameters) DeepCopyInto(out *CiphertextParameters) {
 	if in.KeyIDRef != nil {
 		in, out := &in.KeyIDRef, &out.KeyIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyIDSelector != nil {
 		in, out := &in.KeyIDSelector, &out.KeyIDSelector
@@ -747,7 +747,7 @@ func (in *GrantParameters) DeepCopyInto(out *GrantParameters) {
 	if in.KeyIDRef != nil {
 		in, out := &in.KeyIDRef, &out.KeyIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyIDSelector != nil {
 		in, out := &in.KeyIDSelector, &out.KeyIDSelector
@@ -1209,7 +1209,7 @@ func (in *ReplicaExternalKeyParameters) DeepCopyInto(out *ReplicaExternalKeyPara
 	if in.PrimaryKeyArnRef != nil {
 		in, out := &in.PrimaryKeyArnRef, &out.PrimaryKeyArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrimaryKeyArnSelector != nil {
 		in, out := &in.PrimaryKeyArnSelector, &out.PrimaryKeyArnSelector
@@ -1442,7 +1442,7 @@ func (in *ReplicaKeyParameters) DeepCopyInto(out *ReplicaKeyParameters) {
 	if in.PrimaryKeyArnRef != nil {
 		in, out := &in.PrimaryKeyArnRef, &out.PrimaryKeyArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrimaryKeyArnSelector != nil {
 		in, out := &in.PrimaryKeyArnSelector, &out.PrimaryKeyArnSelector

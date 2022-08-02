@@ -564,7 +564,7 @@ func (in *KinesisStreamParameters) DeepCopyInto(out *KinesisStreamParameters) {
 	if in.ResourceArnRef != nil {
 		in, out := &in.ResourceArnRef, &out.ResourceArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceArnSelector != nil {
 		in, out := &in.ResourceArnSelector, &out.ResourceArnSelector
@@ -579,7 +579,7 @@ func (in *KinesisStreamParameters) DeepCopyInto(out *KinesisStreamParameters) {
 	if in.RoleArnRef != nil {
 		in, out := &in.RoleArnRef, &out.RoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RoleArnSelector != nil {
 		in, out := &in.RoleArnSelector, &out.RoleArnSelector

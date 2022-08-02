@@ -102,7 +102,9 @@ func (in *BrokerNodeGroupInfoParameters) DeepCopyInto(out *BrokerNodeGroupInfoPa
 	if in.ClientSubnetsRefs != nil {
 		in, out := &in.ClientSubnetsRefs, &out.ClientSubnetsRefs
 		*out = make([]v1.Reference, len(*in))
-		copy(*out, *in)
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.ClientSubnetsSelector != nil {
 		in, out := &in.ClientSubnetsSelector, &out.ClientSubnetsSelector
@@ -140,7 +142,9 @@ func (in *BrokerNodeGroupInfoParameters) DeepCopyInto(out *BrokerNodeGroupInfoPa
 	if in.SecurityGroupsRefs != nil {
 		in, out := &in.SecurityGroupsRefs, &out.SecurityGroupsRefs
 		*out = make([]v1.Reference, len(*in))
-		copy(*out, *in)
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.SecurityGroupsSelector != nil {
 		in, out := &in.SecurityGroupsSelector, &out.SecurityGroupsSelector
@@ -246,7 +250,7 @@ func (in *CloudwatchLogsParameters) DeepCopyInto(out *CloudwatchLogsParameters) 
 	if in.LogGroupRef != nil {
 		in, out := &in.LogGroupRef, &out.LogGroupRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LogGroupSelector != nil {
 		in, out := &in.LogGroupSelector, &out.LogGroupSelector
@@ -899,7 +903,7 @@ func (in *EncryptionInfoParameters) DeepCopyInto(out *EncryptionInfoParameters) 
 	if in.EncryptionAtRestKMSKeyArnRef != nil {
 		in, out := &in.EncryptionAtRestKMSKeyArnRef, &out.EncryptionAtRestKMSKeyArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.EncryptionAtRestKMSKeyArnSelector != nil {
 		in, out := &in.EncryptionAtRestKMSKeyArnSelector, &out.EncryptionAtRestKMSKeyArnSelector
@@ -1254,7 +1258,7 @@ func (in *S3Parameters) DeepCopyInto(out *S3Parameters) {
 	if in.BucketRef != nil {
 		in, out := &in.BucketRef, &out.BucketRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.BucketSelector != nil {
 		in, out := &in.BucketSelector, &out.BucketSelector

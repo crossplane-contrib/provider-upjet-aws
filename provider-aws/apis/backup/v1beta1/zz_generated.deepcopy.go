@@ -1593,7 +1593,7 @@ func (in *SelectionParameters) DeepCopyInto(out *SelectionParameters) {
 	if in.IAMRoleArnRef != nil {
 		in, out := &in.IAMRoleArnRef, &out.IAMRoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IAMRoleArnSelector != nil {
 		in, out := &in.IAMRoleArnSelector, &out.IAMRoleArnSelector
@@ -1624,7 +1624,7 @@ func (in *SelectionParameters) DeepCopyInto(out *SelectionParameters) {
 	if in.PlanIDRef != nil {
 		in, out := &in.PlanIDRef, &out.PlanIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PlanIDSelector != nil {
 		in, out := &in.PlanIDSelector, &out.PlanIDSelector
@@ -2238,7 +2238,7 @@ func (in *VaultNotificationsParameters) DeepCopyInto(out *VaultNotificationsPara
 	if in.SnsTopicArnRef != nil {
 		in, out := &in.SnsTopicArnRef, &out.SnsTopicArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SnsTopicArnSelector != nil {
 		in, out := &in.SnsTopicArnSelector, &out.SnsTopicArnSelector
@@ -2347,7 +2347,7 @@ func (in *VaultParameters) DeepCopyInto(out *VaultParameters) {
 	if in.KMSKeyArnRef != nil {
 		in, out := &in.KMSKeyArnRef, &out.KMSKeyArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyArnSelector != nil {
 		in, out := &in.KMSKeyArnSelector, &out.KMSKeyArnSelector

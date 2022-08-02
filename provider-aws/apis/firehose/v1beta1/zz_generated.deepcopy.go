@@ -669,7 +669,7 @@ func (in *ExtendedS3ConfigurationParameters) DeepCopyInto(out *ExtendedS3Configu
 	if in.BucketArnRef != nil {
 		in, out := &in.BucketArnRef, &out.BucketArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.BucketArnSelector != nil {
 		in, out := &in.BucketArnSelector, &out.BucketArnSelector
@@ -742,7 +742,7 @@ func (in *ExtendedS3ConfigurationParameters) DeepCopyInto(out *ExtendedS3Configu
 	if in.RoleArnRef != nil {
 		in, out := &in.RoleArnRef, &out.RoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RoleArnSelector != nil {
 		in, out := &in.RoleArnSelector, &out.RoleArnSelector
@@ -2255,7 +2255,7 @@ func (in *S3ConfigurationParameters) DeepCopyInto(out *S3ConfigurationParameters
 	if in.BucketArnRef != nil {
 		in, out := &in.BucketArnRef, &out.BucketArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.BucketArnSelector != nil {
 		in, out := &in.BucketArnSelector, &out.BucketArnSelector
@@ -2307,7 +2307,7 @@ func (in *S3ConfigurationParameters) DeepCopyInto(out *S3ConfigurationParameters
 	if in.RoleArnRef != nil {
 		in, out := &in.RoleArnRef, &out.RoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RoleArnSelector != nil {
 		in, out := &in.RoleArnSelector, &out.RoleArnSelector

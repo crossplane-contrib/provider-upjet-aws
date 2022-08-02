@@ -610,7 +610,7 @@ func (in *FleetParameters) DeepCopyInto(out *FleetParameters) {
 	if in.BuildIDRef != nil {
 		in, out := &in.BuildIDRef, &out.BuildIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.BuildIDSelector != nil {
 		in, out := &in.BuildIDSelector, &out.BuildIDSelector
@@ -654,7 +654,7 @@ func (in *FleetParameters) DeepCopyInto(out *FleetParameters) {
 	if in.InstanceRoleArnRef != nil {
 		in, out := &in.InstanceRoleArnRef, &out.InstanceRoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.InstanceRoleArnSelector != nil {
 		in, out := &in.InstanceRoleArnSelector, &out.InstanceRoleArnSelector
@@ -1346,7 +1346,7 @@ func (in *ScriptStorageLocationParameters) DeepCopyInto(out *ScriptStorageLocati
 	if in.BucketRef != nil {
 		in, out := &in.BucketRef, &out.BucketRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.BucketSelector != nil {
 		in, out := &in.BucketSelector, &out.BucketSelector
@@ -1371,7 +1371,7 @@ func (in *ScriptStorageLocationParameters) DeepCopyInto(out *ScriptStorageLocati
 	if in.RoleArnRef != nil {
 		in, out := &in.RoleArnRef, &out.RoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RoleArnSelector != nil {
 		in, out := &in.RoleArnSelector, &out.RoleArnSelector
@@ -1461,7 +1461,7 @@ func (in *StorageLocationParameters) DeepCopyInto(out *StorageLocationParameters
 	if in.BucketRef != nil {
 		in, out := &in.BucketRef, &out.BucketRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.BucketSelector != nil {
 		in, out := &in.BucketSelector, &out.BucketSelector
@@ -1486,7 +1486,7 @@ func (in *StorageLocationParameters) DeepCopyInto(out *StorageLocationParameters
 	if in.RoleArnRef != nil {
 		in, out := &in.RoleArnRef, &out.RoleArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RoleArnSelector != nil {
 		in, out := &in.RoleArnSelector, &out.RoleArnSelector

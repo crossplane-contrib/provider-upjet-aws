@@ -24,17 +24,17 @@ func (tr *Activity) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Activity
-func (tr *Activity) GetObservation() (map[string]interface{}, error) {
+func (tr *Activity) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Activity
-func (tr *Activity) SetObservation(obs map[string]interface{}) error {
+func (tr *Activity) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *Activity) GetID() string {
 }
 
 // GetParameters of this Activity
-func (tr *Activity) GetParameters() (map[string]interface{}, error) {
+func (tr *Activity) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Activity
-func (tr *Activity) SetParameters(params map[string]interface{}) error {
+func (tr *Activity) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *StateMachine) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this StateMachine
-func (tr *StateMachine) GetObservation() (map[string]interface{}, error) {
+func (tr *StateMachine) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this StateMachine
-func (tr *StateMachine) SetObservation(obs map[string]interface{}) error {
+func (tr *StateMachine) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *StateMachine) GetID() string {
 }
 
 // GetParameters of this StateMachine
-func (tr *StateMachine) GetParameters() (map[string]interface{}, error) {
+func (tr *StateMachine) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this StateMachine
-func (tr *StateMachine) SetParameters(params map[string]interface{}) error {
+func (tr *StateMachine) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

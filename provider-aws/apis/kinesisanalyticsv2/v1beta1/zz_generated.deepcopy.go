@@ -332,7 +332,7 @@ func (in *ApplicationParameters) DeepCopyInto(out *ApplicationParameters) {
 	if in.ServiceExecutionRoleRef != nil {
 		in, out := &in.ServiceExecutionRoleRef, &out.ServiceExecutionRoleRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ServiceExecutionRoleSelector != nil {
 		in, out := &in.ServiceExecutionRoleSelector, &out.ServiceExecutionRoleSelector
@@ -2175,7 +2175,7 @@ func (in *S3ContentLocationParameters) DeepCopyInto(out *S3ContentLocationParame
 	if in.BucketArnRef != nil {
 		in, out := &in.BucketArnRef, &out.BucketArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.BucketArnSelector != nil {
 		in, out := &in.BucketArnSelector, &out.BucketArnSelector

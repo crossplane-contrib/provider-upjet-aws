@@ -24,17 +24,17 @@ func (tr *Certificate) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Certificate
-func (tr *Certificate) GetObservation() (map[string]interface{}, error) {
+func (tr *Certificate) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Certificate
-func (tr *Certificate) SetObservation(obs map[string]interface{}) error {
+func (tr *Certificate) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *Certificate) GetID() string {
 }
 
 // GetParameters of this Certificate
-func (tr *Certificate) GetParameters() (map[string]interface{}, error) {
+func (tr *Certificate) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Certificate
-func (tr *Certificate) SetParameters(params map[string]interface{}) error {
+func (tr *Certificate) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *CertificateValidation) GetConnectionDetailsMapping() map[string]string
 }
 
 // GetObservation of this CertificateValidation
-func (tr *CertificateValidation) GetObservation() (map[string]interface{}, error) {
+func (tr *CertificateValidation) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this CertificateValidation
-func (tr *CertificateValidation) SetObservation(obs map[string]interface{}) error {
+func (tr *CertificateValidation) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *CertificateValidation) GetID() string {
 }
 
 // GetParameters of this CertificateValidation
-func (tr *CertificateValidation) GetParameters() (map[string]interface{}, error) {
+func (tr *CertificateValidation) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this CertificateValidation
-func (tr *CertificateValidation) SetParameters(params map[string]interface{}) error {
+func (tr *CertificateValidation) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

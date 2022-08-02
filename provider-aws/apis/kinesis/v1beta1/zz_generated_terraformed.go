@@ -24,17 +24,17 @@ func (tr *Stream) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Stream
-func (tr *Stream) GetObservation() (map[string]interface{}, error) {
+func (tr *Stream) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Stream
-func (tr *Stream) SetObservation(obs map[string]interface{}) error {
+func (tr *Stream) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *Stream) GetID() string {
 }
 
 // GetParameters of this Stream
-func (tr *Stream) GetParameters() (map[string]interface{}, error) {
+func (tr *Stream) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Stream
-func (tr *Stream) SetParameters(params map[string]interface{}) error {
+func (tr *Stream) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -99,17 +99,17 @@ func (tr *StreamConsumer) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this StreamConsumer
-func (tr *StreamConsumer) GetObservation() (map[string]interface{}, error) {
+func (tr *StreamConsumer) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this StreamConsumer
-func (tr *StreamConsumer) SetObservation(obs map[string]interface{}) error {
+func (tr *StreamConsumer) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -126,17 +126,17 @@ func (tr *StreamConsumer) GetID() string {
 }
 
 // GetParameters of this StreamConsumer
-func (tr *StreamConsumer) GetParameters() (map[string]interface{}, error) {
+func (tr *StreamConsumer) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this StreamConsumer
-func (tr *StreamConsumer) SetParameters(params map[string]interface{}) error {
+func (tr *StreamConsumer) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

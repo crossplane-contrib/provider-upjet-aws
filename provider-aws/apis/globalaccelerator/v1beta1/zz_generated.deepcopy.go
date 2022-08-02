@@ -433,7 +433,7 @@ func (in *EndpointGroupParameters) DeepCopyInto(out *EndpointGroupParameters) {
 	if in.ListenerArnRef != nil {
 		in, out := &in.ListenerArnRef, &out.ListenerArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ListenerArnSelector != nil {
 		in, out := &in.ListenerArnSelector, &out.ListenerArnSelector
@@ -644,7 +644,7 @@ func (in *ListenerParameters) DeepCopyInto(out *ListenerParameters) {
 	if in.AcceleratorArnRef != nil {
 		in, out := &in.AcceleratorArnRef, &out.AcceleratorArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AcceleratorArnSelector != nil {
 		in, out := &in.AcceleratorArnSelector, &out.AcceleratorArnSelector

@@ -24,17 +24,17 @@ func (tr *FileSystem) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this FileSystem
-func (tr *FileSystem) GetObservation() (map[string]interface{}, error) {
+func (tr *FileSystem) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this FileSystem
-func (tr *FileSystem) SetObservation(obs map[string]interface{}) error {
+func (tr *FileSystem) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *FileSystem) GetID() string {
 }
 
 // GetParameters of this FileSystem
-func (tr *FileSystem) GetParameters() (map[string]interface{}, error) {
+func (tr *FileSystem) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this FileSystem
-func (tr *FileSystem) SetParameters(params map[string]interface{}) error {
+func (tr *FileSystem) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *MountTarget) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this MountTarget
-func (tr *MountTarget) GetObservation() (map[string]interface{}, error) {
+func (tr *MountTarget) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this MountTarget
-func (tr *MountTarget) SetObservation(obs map[string]interface{}) error {
+func (tr *MountTarget) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *MountTarget) GetID() string {
 }
 
 // GetParameters of this MountTarget
-func (tr *MountTarget) GetParameters() (map[string]interface{}, error) {
+func (tr *MountTarget) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this MountTarget
-func (tr *MountTarget) SetParameters(params map[string]interface{}) error {
+func (tr *MountTarget) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

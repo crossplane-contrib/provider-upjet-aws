@@ -24,17 +24,17 @@ func (tr *Attachment) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Attachment
-func (tr *Attachment) GetObservation() (map[string]interface{}, error) {
+func (tr *Attachment) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Attachment
-func (tr *Attachment) SetObservation(obs map[string]interface{}) error {
+func (tr *Attachment) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *Attachment) GetID() string {
 }
 
 // GetParameters of this Attachment
-func (tr *Attachment) GetParameters() (map[string]interface{}, error) {
+func (tr *Attachment) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Attachment
-func (tr *Attachment) SetParameters(params map[string]interface{}) error {
+func (tr *Attachment) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *AutoscalingGroup) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this AutoscalingGroup
-func (tr *AutoscalingGroup) GetObservation() (map[string]interface{}, error) {
+func (tr *AutoscalingGroup) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this AutoscalingGroup
-func (tr *AutoscalingGroup) SetObservation(obs map[string]interface{}) error {
+func (tr *AutoscalingGroup) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *AutoscalingGroup) GetID() string {
 }
 
 // GetParameters of this AutoscalingGroup
-func (tr *AutoscalingGroup) GetParameters() (map[string]interface{}, error) {
+func (tr *AutoscalingGroup) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this AutoscalingGroup
-func (tr *AutoscalingGroup) SetParameters(params map[string]interface{}) error {
+func (tr *AutoscalingGroup) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
