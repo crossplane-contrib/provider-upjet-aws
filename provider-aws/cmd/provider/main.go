@@ -53,7 +53,7 @@ func main() {
 
 	// If UPBOUND_CONTEXT is not set, we refuse to run.
 	if _, set := os.LookupEnv(upboundCTXEnv); !set {
-		kingpin.Fatalf("Running this provider outside of an Upbound distribution is prohibited by license. Please contact support for more information.")
+		kingpin.Fatalf("Running this provider outside of an Upbound distribution is prohibited by license. Please contact support@upbound.io for more information.")
 	}
 
 	kingpin.MustParse(app.Parse(os.Args[1:]))
