@@ -14,9 +14,7 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_apigatewayv2_api_mapping", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type:              "API",
-			RefFieldName:      "ApiIdRef",
-			SelectorFieldName: "ApiIdSelector",
+			Type: "API",
 		}
 		r.References["domain_name"] = config.Reference{
 			Type: "DomainName",
@@ -28,9 +26,7 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_authorizer", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type:              "API",
-			RefFieldName:      "ApiIdRef",
-			SelectorFieldName: "ApiIdSelector",
+			Type: "API",
 		}
 		r.References["authorizer_uri"] = config.Reference{
 			Type:      "github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function",
@@ -45,9 +41,7 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_deployment", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type:              "API",
-			RefFieldName:      "ApiIdRef",
-			SelectorFieldName: "ApiIdSelector",
+			Type: "API",
 		}
 		if err := r.MetaResource.Examples[0].SetPathValue("lifecycle", nil); err != nil {
 			panic(err)
@@ -55,16 +49,12 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_integration", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type:              "API",
-			RefFieldName:      "ApiIdRef",
-			SelectorFieldName: "ApiIdSelector",
+			Type: "API",
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_integration_response", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type:              "API",
-			RefFieldName:      "ApiIdRef",
-			SelectorFieldName: "ApiIdSelector",
+			Type: "API",
 		}
 		r.References["integration_id"] = config.Reference{
 			Type: "Integration",
@@ -72,23 +62,17 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_model", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type:              "API",
-			RefFieldName:      "ApiIdRef",
-			SelectorFieldName: "ApiIdSelector",
+			Type: "API",
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_route", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type:              "API",
-			RefFieldName:      "ApiIdRef",
-			SelectorFieldName: "ApiIdSelector",
+			Type: "API",
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_route_response", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type:              "API",
-			RefFieldName:      "ApiIdRef",
-			SelectorFieldName: "ApiIdSelector",
+			Type: "API",
 		}
 		r.References["route_id"] = config.Reference{
 			Type: "Route",
@@ -96,9 +80,7 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_stage", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type:              "API",
-			RefFieldName:      "ApiIdRef",
-			SelectorFieldName: "ApiIdSelector",
+			Type: "API",
 		}
 	})
 }

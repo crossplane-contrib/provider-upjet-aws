@@ -160,20 +160,20 @@ func (in *APIMappingParameters) DeepCopyInto(out *APIMappingParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.APIIDRef != nil {
+		in, out := &in.APIIDRef, &out.APIIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.APIIDSelector != nil {
+		in, out := &in.APIIDSelector, &out.APIIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.APIMappingKey != nil {
 		in, out := &in.APIMappingKey, &out.APIMappingKey
 		*out = new(string)
 		**out = **in
-	}
-	if in.ApiIdRef != nil {
-		in, out := &in.ApiIdRef, &out.ApiIdRef
-		*out = new(v1.Reference)
-		**out = **in
-	}
-	if in.ApiIdSelector != nil {
-		in, out := &in.ApiIdSelector, &out.ApiIdSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.DomainName != nil {
 		in, out := &in.DomainName, &out.DomainName
@@ -183,7 +183,7 @@ func (in *APIMappingParameters) DeepCopyInto(out *APIMappingParameters) {
 	if in.DomainNameRef != nil {
 		in, out := &in.DomainNameRef, &out.DomainNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DomainNameSelector != nil {
 		in, out := &in.DomainNameSelector, &out.DomainNameSelector
@@ -203,7 +203,7 @@ func (in *APIMappingParameters) DeepCopyInto(out *APIMappingParameters) {
 	if in.StageRef != nil {
 		in, out := &in.StageRef, &out.StageRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StageSelector != nil {
 		in, out := &in.StageSelector, &out.StageSelector
@@ -569,13 +569,13 @@ func (in *AuthorizerParameters) DeepCopyInto(out *AuthorizerParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ApiIdRef != nil {
-		in, out := &in.ApiIdRef, &out.ApiIdRef
+	if in.APIIDRef != nil {
+		in, out := &in.APIIDRef, &out.APIIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
-	if in.ApiIdSelector != nil {
-		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+	if in.APIIDSelector != nil {
+		in, out := &in.APIIDSelector, &out.APIIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
@@ -607,7 +607,7 @@ func (in *AuthorizerParameters) DeepCopyInto(out *AuthorizerParameters) {
 	if in.AuthorizerURIRef != nil {
 		in, out := &in.AuthorizerURIRef, &out.AuthorizerURIRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AuthorizerURISelector != nil {
 		in, out := &in.AuthorizerURISelector, &out.AuthorizerURISelector
@@ -924,13 +924,13 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ApiIdRef != nil {
-		in, out := &in.ApiIdRef, &out.ApiIdRef
+	if in.APIIDRef != nil {
+		in, out := &in.APIIDRef, &out.APIIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
-	if in.ApiIdSelector != nil {
-		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+	if in.APIIDSelector != nil {
+		in, out := &in.APIIDSelector, &out.APIIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
@@ -1068,7 +1068,7 @@ func (in *DomainNameConfigurationParameters) DeepCopyInto(out *DomainNameConfigu
 	if in.CertificateArnRef != nil {
 		in, out := &in.CertificateArnRef, &out.CertificateArnRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CertificateArnSelector != nil {
 		in, out := &in.CertificateArnSelector, &out.CertificateArnSelector
@@ -1361,13 +1361,13 @@ func (in *IntegrationParameters) DeepCopyInto(out *IntegrationParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ApiIdRef != nil {
-		in, out := &in.ApiIdRef, &out.ApiIdRef
+	if in.APIIDRef != nil {
+		in, out := &in.APIIDRef, &out.APIIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
-	if in.ApiIdSelector != nil {
-		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+	if in.APIIDSelector != nil {
+		in, out := &in.APIIDSelector, &out.APIIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
@@ -1584,13 +1584,13 @@ func (in *IntegrationResponseParameters) DeepCopyInto(out *IntegrationResponsePa
 		*out = new(string)
 		**out = **in
 	}
-	if in.ApiIdRef != nil {
-		in, out := &in.ApiIdRef, &out.ApiIdRef
+	if in.APIIDRef != nil {
+		in, out := &in.APIIDRef, &out.APIIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
-	if in.ApiIdSelector != nil {
-		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+	if in.APIIDSelector != nil {
+		in, out := &in.APIIDSelector, &out.APIIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
@@ -1607,7 +1607,7 @@ func (in *IntegrationResponseParameters) DeepCopyInto(out *IntegrationResponsePa
 	if in.IntegrationIDRef != nil {
 		in, out := &in.IntegrationIDRef, &out.IntegrationIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IntegrationIDSelector != nil {
 		in, out := &in.IntegrationIDSelector, &out.IntegrationIDSelector
@@ -1857,13 +1857,13 @@ func (in *ModelParameters) DeepCopyInto(out *ModelParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ApiIdRef != nil {
-		in, out := &in.ApiIdRef, &out.ApiIdRef
+	if in.APIIDRef != nil {
+		in, out := &in.APIIDRef, &out.APIIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
-	if in.ApiIdSelector != nil {
-		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+	if in.APIIDSelector != nil {
+		in, out := &in.APIIDSelector, &out.APIIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
@@ -2155,20 +2155,20 @@ func (in *RouteParameters) DeepCopyInto(out *RouteParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.APIIDRef != nil {
+		in, out := &in.APIIDRef, &out.APIIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.APIIDSelector != nil {
+		in, out := &in.APIIDSelector, &out.APIIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.APIKeyRequired != nil {
 		in, out := &in.APIKeyRequired, &out.APIKeyRequired
 		*out = new(bool)
 		**out = **in
-	}
-	if in.ApiIdRef != nil {
-		in, out := &in.ApiIdRef, &out.ApiIdRef
-		*out = new(v1.Reference)
-		**out = **in
-	}
-	if in.ApiIdSelector != nil {
-		in, out := &in.ApiIdSelector, &out.ApiIdSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.AuthorizationScopes != nil {
 		in, out := &in.AuthorizationScopes, &out.AuthorizationScopes
@@ -2342,13 +2342,13 @@ func (in *RouteResponseParameters) DeepCopyInto(out *RouteResponseParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ApiIdRef != nil {
-		in, out := &in.ApiIdRef, &out.ApiIdRef
+	if in.APIIDRef != nil {
+		in, out := &in.APIIDRef, &out.APIIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
-	if in.ApiIdSelector != nil {
-		in, out := &in.ApiIdSelector, &out.ApiIdSelector
+	if in.APIIDSelector != nil {
+		in, out := &in.APIIDSelector, &out.APIIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
@@ -2385,7 +2385,7 @@ func (in *RouteResponseParameters) DeepCopyInto(out *RouteResponseParameters) {
 	if in.RouteIDRef != nil {
 		in, out := &in.RouteIDRef, &out.RouteIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RouteIDSelector != nil {
 		in, out := &in.RouteIDSelector, &out.RouteIDSelector
@@ -2654,22 +2654,22 @@ func (in *StageParameters) DeepCopyInto(out *StageParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.APIIDRef != nil {
+		in, out := &in.APIIDRef, &out.APIIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.APIIDSelector != nil {
+		in, out := &in.APIIDSelector, &out.APIIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AccessLogSettings != nil {
 		in, out := &in.AccessLogSettings, &out.AccessLogSettings
 		*out = make([]AccessLogSettingsParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
-	}
-	if in.ApiIdRef != nil {
-		in, out := &in.ApiIdRef, &out.ApiIdRef
-		*out = new(v1.Reference)
-		**out = **in
-	}
-	if in.ApiIdSelector != nil {
-		in, out := &in.ApiIdSelector, &out.ApiIdSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.AutoDeploy != nil {
 		in, out := &in.AutoDeploy, &out.AutoDeploy

@@ -22,16 +22,14 @@ type DeploymentObservation struct {
 type DeploymentParameters struct {
 
 	// +crossplane:generate:reference:type=API
-	// +crossplane:generate:reference:refFieldName=ApiIdRef
-	// +crossplane:generate:reference:selectorFieldName=ApiIdSelector
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ApiIdRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	ApiIdSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`

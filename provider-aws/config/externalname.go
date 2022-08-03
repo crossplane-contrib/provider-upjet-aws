@@ -541,7 +541,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// aws_docdb_global_cluster can be imported by using the Global Cluster id
 	"aws_docdb_global_cluster": config.IdentifierFromProvider,
 	// DocDB Cluster Instances can be imported using the identifier
-	"aws_docdb_cluster_instance": ParameterAsExternalName("identifier"),
+	"aws_docdb_cluster_instance": config.ParameterAsIdentifier("identifier"),
 	// DocumentDB Subnet groups can be imported using the name
 	"aws_docdb_subnet_group": config.NameAsIdentifier,
 
@@ -770,7 +770,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// redshift
 	//
 	// Redshift Clusters can be imported using the cluster_identifier
-	"aws_redshift_cluster": ParameterAsExternalName("cluster_identifier"),
+	"aws_redshift_cluster": config.ParameterAsIdentifier("cluster_identifier"),
 
 	// sfn
 	//

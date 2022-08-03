@@ -26,8 +26,8 @@ func (mg *APIMapping) ResolveReferences(ctx context.Context, c client.Reader) er
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.ApiIdRef,
-		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		Reference:    mg.Spec.ForProvider.APIIDRef,
+		Selector:     mg.Spec.ForProvider.APIIDSelector,
 		To: reference.To{
 			List:    &APIList{},
 			Managed: &API{},
@@ -37,7 +37,7 @@ func (mg *APIMapping) ResolveReferences(ctx context.Context, c client.Reader) er
 		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
 	}
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
@@ -84,8 +84,8 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.ApiIdRef,
-		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		Reference:    mg.Spec.ForProvider.APIIDRef,
+		Selector:     mg.Spec.ForProvider.APIIDSelector,
 		To: reference.To{
 			List:    &APIList{},
 			Managed: &API{},
@@ -95,7 +95,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
 	}
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthorizerURI),
@@ -126,8 +126,8 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.ApiIdRef,
-		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		Reference:    mg.Spec.ForProvider.APIIDRef,
+		Selector:     mg.Spec.ForProvider.APIIDSelector,
 		To: reference.To{
 			List:    &APIList{},
 			Managed: &API{},
@@ -137,7 +137,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
 	}
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -181,8 +181,8 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.ApiIdRef,
-		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		Reference:    mg.Spec.ForProvider.APIIDRef,
+		Selector:     mg.Spec.ForProvider.APIIDSelector,
 		To: reference.To{
 			List:    &APIList{},
 			Managed: &API{},
@@ -192,7 +192,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
 	}
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -207,8 +207,8 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.ApiIdRef,
-		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		Reference:    mg.Spec.ForProvider.APIIDRef,
+		Selector:     mg.Spec.ForProvider.APIIDSelector,
 		To: reference.To{
 			List:    &APIList{},
 			Managed: &API{},
@@ -218,7 +218,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
 	}
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IntegrationID),
@@ -249,8 +249,8 @@ func (mg *Model) ResolveReferences(ctx context.Context, c client.Reader) error {
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.ApiIdRef,
-		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		Reference:    mg.Spec.ForProvider.APIIDRef,
+		Selector:     mg.Spec.ForProvider.APIIDSelector,
 		To: reference.To{
 			List:    &APIList{},
 			Managed: &API{},
@@ -260,7 +260,7 @@ func (mg *Model) ResolveReferences(ctx context.Context, c client.Reader) error {
 		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
 	}
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -275,8 +275,8 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.ApiIdRef,
-		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		Reference:    mg.Spec.ForProvider.APIIDRef,
+		Selector:     mg.Spec.ForProvider.APIIDSelector,
 		To: reference.To{
 			List:    &APIList{},
 			Managed: &API{},
@@ -286,7 +286,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
 	}
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -301,8 +301,8 @@ func (mg *RouteResponse) ResolveReferences(ctx context.Context, c client.Reader)
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.ApiIdRef,
-		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		Reference:    mg.Spec.ForProvider.APIIDRef,
+		Selector:     mg.Spec.ForProvider.APIIDSelector,
 		To: reference.To{
 			List:    &APIList{},
 			Managed: &API{},
@@ -312,7 +312,7 @@ func (mg *RouteResponse) ResolveReferences(ctx context.Context, c client.Reader)
 		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
 	}
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RouteID),
@@ -343,8 +343,8 @@ func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.ApiIdRef,
-		Selector:     mg.Spec.ForProvider.ApiIdSelector,
+		Reference:    mg.Spec.ForProvider.APIIDRef,
+		Selector:     mg.Spec.ForProvider.APIIDSelector,
 		To: reference.To{
 			List:    &APIList{},
 			Managed: &API{},
@@ -354,7 +354,7 @@ func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
 	}
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ApiIdRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 
 	return nil
 }

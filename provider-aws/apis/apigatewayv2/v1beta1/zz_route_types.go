@@ -32,19 +32,17 @@ type RouteObservation struct {
 type RouteParameters struct {
 
 	// +crossplane:generate:reference:type=API
-	// +crossplane:generate:reference:refFieldName=ApiIdRef
-	// +crossplane:generate:reference:selectorFieldName=ApiIdSelector
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
 	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	ApiIdRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	ApiIdSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`

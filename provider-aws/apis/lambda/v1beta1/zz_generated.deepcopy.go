@@ -1604,7 +1604,7 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 	if in.S3BucketRef != nil {
 		in, out := &in.S3BucketRef, &out.S3BucketRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.S3BucketSelector != nil {
 		in, out := &in.S3BucketSelector, &out.S3BucketSelector
