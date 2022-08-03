@@ -1,6 +1,6 @@
 The Upbound AWS Provider is the officially supported provider for Amazon Web Services (AWS).
 
-View the [AWS Provider Documentation](provider) for details and configuration options. 
+View the [AWS Provider Documentation](configuration) for details and configuration options. 
 
 ## Quickstart
 This guide walks through the process to create an Upbound managed control plane and install the AWS official provider.
@@ -34,7 +34,7 @@ Authentication to an Upbound managed control plane requires a unique user authen
 
 Generate a user token through the [Upbound Universal Console](https://cloud.upbound.io/).
 
-![Create an API Token](/images/upbound/create-api-token.gif)
+![Create an API Token](images/create-api-token.gif)
 
 To generate a user token in the Upbound Universal Console:
 *<!-- vale Microsoft.FirstPerson = NO -->*

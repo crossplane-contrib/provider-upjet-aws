@@ -3,7 +3,7 @@ Install official providers either as hosted control planes in Upbound Cloud or a
 ## Install the provider
 Official providers require a Kubernetes `imagePullSecret` to install. 
 <!-- vale gitlab.Substitutions = NO --> 
-Details on creating an `imagePullSecret` are available in the [generic provider documentation](/providers/#create-a-kubernetes-imagepullsecret)
+<!-- Details on creating an `imagePullSecret` are available in the [generic provider documentation](/providers/#create-a-kubernetes-imagepullsecret) -->
 <!-- vale gitlab.Substitutions = YES --> 
 
 _Note:_ if you already installed an official provider using an `imagePullSecret` a new secret isn't required.
@@ -74,4 +74,4 @@ spec:
 
 **Note:** the `spec.credentials.secretRef.name` must match the `name` in the `kubectl create secret generic <name>` command.
 
-View the [ProviderConfig CRD definition](https://marketplace.upbound.io/providers/upbound/provider-aws/v0.5.0/resources/aws.upbound.io/ProviderConfig/v1beta1) to view all available `ProviderConfig` options.
+View the [ProviderConfig CRD definition](resources/aws.upbound.io/ProviderConfig/v1beta1) to view all available `ProviderConfig` options.
