@@ -1,6 +1,8 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: GlobalCluster
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,3 +10,98 @@ spec:
     engine: aurora
     engineVersion: 5.6.mysql_aurora.1.22.2
     region: us-west-1
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+spec:
+  forProvider:
+    databaseName: example_db
+    dbSubnetGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    engine: aurora
+    engineVersion: 5.6.mysql_aurora.1.22.2
+    globalClusterIdentifier: ${aws_rds_global_cluster.example.id}
+    masterPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    masterUsername: username
+    provider: ${aws.primary}
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+spec:
+  forProvider:
+    dbSubnetGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    engine: aurora
+    engineVersion: 5.6.mysql_aurora.1.22.2
+    globalClusterIdentifier: ${aws_rds_global_cluster.example.id}
+    provider: ${aws.secondary}
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ClusterInstance
+metadata:
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+spec:
+  forProvider:
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    dbSubnetGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    engineSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    engineVersionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    instanceClass: db.r4.large
+    provider: ${aws.primary}
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ClusterInstance
+metadata:
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+spec:
+  forProvider:
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+    dbSubnetGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    engineSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    engineVersionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    instanceClass: db.r4.large
+    provider: ${aws.secondary}
+
+---
+

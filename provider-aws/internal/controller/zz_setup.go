@@ -50,29 +50,41 @@ import (
 	kinesisstreamingdestination "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
 	table "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/table"
 	tableitem "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/tableitem"
+	ebssnapshot "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/ebssnapshot"
 	ebsvolume "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/ebsvolume"
+	egressonlyinternetgateway "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/egressonlyinternetgateway"
 	eip "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/eip"
 	eipassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/eipassociation"
+	flowlog "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/flowlog"
 	instance "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/instance"
 	internetgateway "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/internetgateway"
 	keypair "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/keypair"
 	launchtemplate "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/launchtemplate"
 	mainroutetableassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/mainroutetableassociation"
+	managedprefixlist "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/managedprefixlist"
+	managedprefixlistentry "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/managedprefixlistentry"
 	natgateway "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/natgateway"
 	networkacl "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkacl"
 	networkaclrule "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkaclrule"
 	networkinterface "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkinterface"
+	networkinterfaceattachment "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkinterfaceattachment"
+	networkinterfacesgattachment "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkinterfacesgattachment"
+	placementgroup "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/placementgroup"
 	route "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/route"
 	routetable "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/routetable"
 	routetableassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/routetableassociation"
 	securitygroup "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/securitygroup"
 	securitygrouprule "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/securitygrouprule"
+	spotdatafeedsubscription "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/spotdatafeedsubscription"
 	spotinstancerequest "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/spotinstancerequest"
 	subnet "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/subnet"
 	transitgateway "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgateway"
 	transitgatewaymulticastdomain "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewaymulticastdomain"
 	transitgatewaymulticastdomainassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewaymulticastdomainassociation"
+	transitgatewaymulticastgroupmember "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewaymulticastgroupmember"
+	transitgatewaymulticastgroupsource "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewaymulticastgroupsource"
 	transitgatewaypeeringattachment "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewaypeeringattachment"
+	transitgatewayprefixlistreference "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewayprefixlistreference"
 	transitgatewayroute "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewayroute"
 	transitgatewayroutetable "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewayroutetable"
 	transitgatewayroutetableassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/transitgatewayroutetableassociation"
@@ -84,7 +96,11 @@ import (
 	vpcdhcpoptions "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcdhcpoptions"
 	vpcdhcpoptionsassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcdhcpoptionsassociation"
 	vpcendpoint "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcendpoint"
+	vpcendpointconnectionnotification "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcendpointconnectionnotification"
+	vpcendpointroutetableassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcendpointroutetableassociation"
 	vpcendpointservice "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcendpointservice"
+	vpcendpointserviceallowedprincipal "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcendpointserviceallowedprincipal"
+	vpcendpointsubnetassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcendpointsubnetassociation"
 	vpcipv4cidrblockassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcipv4cidrblockassociation"
 	vpcpeeringconnection "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/vpcpeeringconnection"
 	lifecyclepolicy "github.com/upbound/official-providers/provider-aws/internal/controller/ecr/lifecyclepolicy"
@@ -338,29 +354,41 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		kinesisstreamingdestination.Setup,
 		table.Setup,
 		tableitem.Setup,
+		ebssnapshot.Setup,
 		ebsvolume.Setup,
+		egressonlyinternetgateway.Setup,
 		eip.Setup,
 		eipassociation.Setup,
+		flowlog.Setup,
 		instance.Setup,
 		internetgateway.Setup,
 		keypair.Setup,
 		launchtemplate.Setup,
 		mainroutetableassociation.Setup,
+		managedprefixlist.Setup,
+		managedprefixlistentry.Setup,
 		natgateway.Setup,
 		networkacl.Setup,
 		networkaclrule.Setup,
 		networkinterface.Setup,
+		networkinterfaceattachment.Setup,
+		networkinterfacesgattachment.Setup,
+		placementgroup.Setup,
 		route.Setup,
 		routetable.Setup,
 		routetableassociation.Setup,
 		securitygroup.Setup,
 		securitygrouprule.Setup,
+		spotdatafeedsubscription.Setup,
 		spotinstancerequest.Setup,
 		subnet.Setup,
 		transitgateway.Setup,
 		transitgatewaymulticastdomain.Setup,
 		transitgatewaymulticastdomainassociation.Setup,
+		transitgatewaymulticastgroupmember.Setup,
+		transitgatewaymulticastgroupsource.Setup,
 		transitgatewaypeeringattachment.Setup,
+		transitgatewayprefixlistreference.Setup,
 		transitgatewayroute.Setup,
 		transitgatewayroutetable.Setup,
 		transitgatewayroutetableassociation.Setup,
@@ -372,7 +400,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcdhcpoptions.Setup,
 		vpcdhcpoptionsassociation.Setup,
 		vpcendpoint.Setup,
+		vpcendpointconnectionnotification.Setup,
+		vpcendpointroutetableassociation.Setup,
 		vpcendpointservice.Setup,
+		vpcendpointserviceallowedprincipal.Setup,
+		vpcendpointsubnetassociation.Setup,
 		vpcipv4cidrblockassociation.Setup,
 		vpcpeeringconnection.Setup,
 		lifecyclepolicy.Setup,

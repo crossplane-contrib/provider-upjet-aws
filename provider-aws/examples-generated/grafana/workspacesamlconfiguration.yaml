@@ -1,6 +1,8 @@
 apiVersion: grafana.aws.upbound.io/v1beta1
 kind: WorkspaceSAMLConfiguration
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,5 +10,52 @@ spec:
     - editor
     idpMetadataUrl: https://my_idp_metadata.url
     region: us-west-1
-    workspaceIdRef:
-      name: example
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: grafana.aws.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountAccessType: CURRENT_ACCOUNT
+    authenticationProviders:
+    - SAML
+    permissionType: SERVICE_MANAGED
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: assume
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  labels:
+    testing.upbound.io/example-name: assume
+  name: assume
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Action = "sts:AssumeRole"
+              Effect = "Allow"
+              Sid    = ""
+              Principal = {
+                Service = "grafana.amazonaws.com"
+              }
+            },
+          ]
+        })}
+
+---
+

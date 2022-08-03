@@ -1,7 +1,9 @@
 apiVersion: elb.aws.upbound.io/v1beta1
 kind: ELB
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: bar
+  name: bar
 spec:
   forProvider:
     accessLogs:
@@ -23,7 +25,7 @@ spec:
       unhealthyThreshold: 2
     idleTimeout: 400
     instancesRefs:
-    - name: example
+    - name: foo
     listener:
     - instancePort: 8000
       instanceProtocol: http
@@ -37,3 +39,6 @@ spec:
     region: us-west-1
     tags:
       Name: foobar-terraform-elb
+
+---
+

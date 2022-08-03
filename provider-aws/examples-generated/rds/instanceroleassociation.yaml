@@ -1,11 +1,19 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: InstanceRoleAssociation
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    dbInstanceIdentifier: ${aws_db_instance.example.id}
+    dbInstanceIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     featureName: S3_INTEGRATION
     region: us-west-1
-    roleArnRef:
-      name: example
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

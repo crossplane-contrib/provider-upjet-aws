@@ -30,11 +30,27 @@ type KinesisStreamConfigObservation struct {
 
 type KinesisStreamConfigParameters struct {
 
-	// +kubebuilder:validation:Required
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// +kubebuilder:validation:Required
-	StreamArn *string `json:"streamArn" tf:"stream_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +kubebuilder:validation:Optional
+	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
 type RealtimeLogConfigObservation struct {

@@ -1,7 +1,9 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
 spec:
   forProvider:
     availabilityZones:
@@ -15,7 +17,10 @@ spec:
     masterPasswordSecretRef:
       key: example-key
       name: example-secret
-      namespace: crossplane-system
+      namespace: upbound-system
     masterUsername: foo
     preferredBackupWindow: 07:00-09:00
     region: us-west-1
+
+---
+

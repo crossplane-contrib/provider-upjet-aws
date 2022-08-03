@@ -1,6 +1,8 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: KeyGroup
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -9,3 +11,23 @@ spec:
     - ${aws_cloudfront_public_key.example.id}
     name: example-key-group
     region: us-west-1
+
+---
+
+apiVersion: cloudfront.aws.upbound.io/v1beta1
+kind: PublicKey
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    comment: example public key
+    encodedKeySecretRef:
+      key: attribute.public_key.pem
+      name: example-secret
+      namespace: upbound-system
+    name: example-key
+
+---
+

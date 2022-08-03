@@ -1,6 +1,8 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: PublicKey
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,6 +10,9 @@ spec:
     encodedKeySecretRef:
       key: attribute.public_key.pem
       name: example-secret
-      namespace: crossplane-system
+      namespace: upbound-system
     name: test_key
     region: us-west-1
+
+---
+

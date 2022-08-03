@@ -1,7 +1,9 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy
 spec:
   forProvider:
     description: My test policy
@@ -20,3 +22,6 @@ spec:
             },
           ]
         })}
+
+---
+

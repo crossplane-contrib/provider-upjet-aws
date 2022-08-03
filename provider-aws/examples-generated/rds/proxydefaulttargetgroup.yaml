@@ -1,6 +1,8 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: ProxyDefaultTargetGroup
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -11,5 +13,42 @@ spec:
       maxIdleConnectionsPercent: 50
       sessionPinningFilters:
       - EXCLUDE_VARIABLE_SETS
-    dbProxyName: ${aws_db_proxy.example.name}
+    dbProxyNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: Proxy
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    auth:
+    - authScheme: SECRETS
+      description: example
+      iamAuth: DISABLED
+      secretArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    debugLogging: false
+    engineFamily: MYSQL
+    idleClientTimeout: 1800
+    requireTls: true
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Key: value
+      Name: example
+    vpcSecurityGroupIdRefs:
+    - name: example
+    vpcSubnetIds:
+    - ${aws_subnet.example.id}
+
+---
+

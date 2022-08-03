@@ -19,8 +19,16 @@ type BucketNotificationObservation struct {
 
 type BucketNotificationParameters struct {
 
-	// +kubebuilder:validation:Required
-	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
@@ -57,8 +65,16 @@ type LambdaFunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	LambdaFunctionArn *string `json:"lambdaFunctionArn,omitempty" tf:"lambda_function_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	LambdaFunctionArnRef *v1.Reference `json:"lambdaFunctionArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	LambdaFunctionArnSelector *v1.Selector `json:"lambdaFunctionArnSelector,omitempty" tf:"-"`
 }
 
 type QueueObservation struct {
@@ -78,8 +94,16 @@ type QueueParameters struct {
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// +kubebuilder:validation:Required
-	QueueArn *string `json:"queueArn" tf:"queue_arn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	QueueArn *string `json:"queueArn,omitempty" tf:"queue_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	QueueArnRef *v1.Reference `json:"queueArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	QueueArnSelector *v1.Selector `json:"queueArnSelector,omitempty" tf:"-"`
 }
 
 type TopicObservation struct {
@@ -99,8 +123,16 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// +kubebuilder:validation:Required
-	TopicArn *string `json:"topicArn" tf:"topic_arn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 // BucketNotificationSpec defines the desired state of BucketNotification

@@ -1,15 +1,19 @@
 apiVersion: kinesisanalytics.aws.upbound.io/v1beta1
 kind: Application
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test_application
+  name: test-application
 spec:
   forProvider:
     inputs:
     - kinesisStream:
-      - resourceArnRef:
-          name: example
-        roleArnRef:
-          name: example
+      - resourceArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: test_stream
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: test
       namePrefix: test_prefix
       parallelism:
       - count: 1
@@ -25,3 +29,19 @@ spec:
             - recordRowPath: $
     name: kinesis-analytics-application-test
     region: us-west-1
+
+---
+
+apiVersion: kinesis.aws.upbound.io/v1beta1
+kind: Stream
+metadata:
+  labels:
+    testing.upbound.io/example-name: test_stream
+  name: test-stream
+spec:
+  forProvider:
+    name: terraform-kinesis-test
+    shardCount: 1
+
+---
+

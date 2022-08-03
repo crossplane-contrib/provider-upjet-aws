@@ -906,6 +906,16 @@ func (in *TableItemParameters) DeepCopyInto(out *TableItemParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.HashKeyRef != nil {
+		in, out := &in.HashKeyRef, &out.HashKeyRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.HashKeySelector != nil {
+		in, out := &in.HashKeySelector, &out.HashKeySelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Item != nil {
 		in, out := &in.Item, &out.Item
 		*out = new(string)

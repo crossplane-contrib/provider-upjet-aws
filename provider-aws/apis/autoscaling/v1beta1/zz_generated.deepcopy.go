@@ -131,10 +131,30 @@ func (in *AttachmentParameters) DeepCopyInto(out *AttachmentParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ELBRef != nil {
+		in, out := &in.ELBRef, &out.ELBRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ELBSelector != nil {
+		in, out := &in.ELBSelector, &out.ELBSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.LBTargetGroupArn != nil {
 		in, out := &in.LBTargetGroupArn, &out.LBTargetGroupArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.LBTargetGroupArnRef != nil {
+		in, out := &in.LBTargetGroupArnRef, &out.LBTargetGroupArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LBTargetGroupArnSelector != nil {
+		in, out := &in.LBTargetGroupArnSelector, &out.LBTargetGroupArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -415,6 +435,16 @@ func (in *AutoscalingGroupParameters) DeepCopyInto(out *AutoscalingGroupParamete
 		in, out := &in.PlacementGroup, &out.PlacementGroup
 		*out = new(string)
 		**out = **in
+	}
+	if in.PlacementGroupRef != nil {
+		in, out := &in.PlacementGroupRef, &out.PlacementGroupRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PlacementGroupSelector != nil {
+		in, out := &in.PlacementGroupSelector, &out.PlacementGroupSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ProtectFromScaleIn != nil {
 		in, out := &in.ProtectFromScaleIn, &out.ProtectFromScaleIn
@@ -813,6 +843,16 @@ func (in *LaunchTemplateParameters) DeepCopyInto(out *LaunchTemplateParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.IDRef != nil {
+		in, out := &in.IDRef, &out.IDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.IDSelector != nil {
+		in, out := &in.IDSelector, &out.IDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -822,6 +862,16 @@ func (in *LaunchTemplateParameters) DeepCopyInto(out *LaunchTemplateParameters) 
 		in, out := &in.Version, &out.Version
 		*out = new(string)
 		**out = **in
+	}
+	if in.VersionRef != nil {
+		in, out := &in.VersionRef, &out.VersionRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.VersionSelector != nil {
+		in, out := &in.VersionSelector, &out.VersionSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -857,6 +907,16 @@ func (in *LaunchTemplateSpecificationParameters) DeepCopyInto(out *LaunchTemplat
 		in, out := &in.LaunchTemplateID, &out.LaunchTemplateID
 		*out = new(string)
 		**out = **in
+	}
+	if in.LaunchTemplateIDRef != nil {
+		in, out := &in.LaunchTemplateIDRef, &out.LaunchTemplateIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LaunchTemplateIDSelector != nil {
+		in, out := &in.LaunchTemplateIDSelector, &out.LaunchTemplateIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LaunchTemplateName != nil {
 		in, out := &in.LaunchTemplateName, &out.LaunchTemplateName
@@ -990,6 +1050,16 @@ func (in *OverrideLaunchTemplateSpecificationParameters) DeepCopyInto(out *Overr
 		in, out := &in.LaunchTemplateID, &out.LaunchTemplateID
 		*out = new(string)
 		**out = **in
+	}
+	if in.LaunchTemplateIDRef != nil {
+		in, out := &in.LaunchTemplateIDRef, &out.LaunchTemplateIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LaunchTemplateIDSelector != nil {
+		in, out := &in.LaunchTemplateIDSelector, &out.LaunchTemplateIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LaunchTemplateName != nil {
 		in, out := &in.LaunchTemplateName, &out.LaunchTemplateName

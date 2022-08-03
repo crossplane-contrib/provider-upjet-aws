@@ -7,6 +7,15 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
+// GetItems of this EBSSnapshotList.
+func (l *EBSSnapshotList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this EBSVolumeList.
 func (l *EBSVolumeList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -27,6 +36,24 @@ func (l *EIPAssociationList) GetItems() []resource.Managed {
 
 // GetItems of this EIPList.
 func (l *EIPList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this EgressOnlyInternetGatewayList.
+func (l *EgressOnlyInternetGatewayList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this FlowLogList.
+func (l *FlowLogList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -79,6 +106,24 @@ func (l *MainRouteTableAssociationList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ManagedPrefixListEntryList.
+func (l *ManagedPrefixListEntryList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ManagedPrefixListList.
+func (l *ManagedPrefixListList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this NATGatewayList.
 func (l *NATGatewayList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -106,8 +151,35 @@ func (l *NetworkACLRuleList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this NetworkInterfaceAttachmentList.
+func (l *NetworkInterfaceAttachmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this NetworkInterfaceList.
 func (l *NetworkInterfaceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this NetworkInterfaceSgAttachmentList.
+func (l *NetworkInterfaceSgAttachmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PlacementGroupList.
+func (l *PlacementGroupList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -160,6 +232,15 @@ func (l *SecurityGroupRuleList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this SpotDatafeedSubscriptionList.
+func (l *SpotDatafeedSubscriptionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SpotInstanceRequestList.
 func (l *SpotInstanceRequestList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -205,8 +286,35 @@ func (l *TransitGatewayMulticastDomainList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this TransitGatewayMulticastGroupMemberList.
+func (l *TransitGatewayMulticastGroupMemberList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this TransitGatewayMulticastGroupSourceList.
+func (l *TransitGatewayMulticastGroupSourceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this TransitGatewayPeeringAttachmentList.
 func (l *TransitGatewayPeeringAttachmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this TransitGatewayPrefixListReferenceList.
+func (l *TransitGatewayPrefixListReferenceList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -286,6 +394,15 @@ func (l *VPCDHCPOptionsList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this VPCEndpointConnectionNotificationList.
+func (l *VPCEndpointConnectionNotificationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this VPCEndpointList.
 func (l *VPCEndpointList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -295,8 +412,35 @@ func (l *VPCEndpointList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this VPCEndpointRouteTableAssociationList.
+func (l *VPCEndpointRouteTableAssociationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPCEndpointServiceAllowedPrincipalList.
+func (l *VPCEndpointServiceAllowedPrincipalList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this VPCEndpointServiceList.
 func (l *VPCEndpointServiceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPCEndpointSubnetAssociationList.
+func (l *VPCEndpointSubnetAssociationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

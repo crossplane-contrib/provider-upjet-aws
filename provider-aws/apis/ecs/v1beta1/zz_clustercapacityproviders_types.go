@@ -37,8 +37,15 @@ type ClusterCapacityProvidersParameters struct {
 	// +kubebuilder:validation:Optional
 	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
 
-	// +kubebuilder:validation:Required
-	ClusterName *string `json:"clusterName" tf:"cluster_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ecs/v1beta1.Cluster
+	// +kubebuilder:validation:Optional
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	DefaultCapacityProviderStrategy []ClusterCapacityProvidersDefaultCapacityProviderStrategyParameters `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`

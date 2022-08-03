@@ -649,6 +649,16 @@ func (in *ClusterCapacityProvidersParameters) DeepCopyInto(out *ClusterCapacityP
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClusterNameRef != nil {
+		in, out := &in.ClusterNameRef, &out.ClusterNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ClusterNameSelector != nil {
+		in, out := &in.ClusterNameSelector, &out.ClusterNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DefaultCapacityProviderStrategy != nil {
 		in, out := &in.DefaultCapacityProviderStrategy, &out.DefaultCapacityProviderStrategy
 		*out = make([]ClusterCapacityProvidersDefaultCapacityProviderStrategyParameters, len(*in))

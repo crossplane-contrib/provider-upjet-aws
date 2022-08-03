@@ -1,7 +1,9 @@
 apiVersion: lexmodels.aws.upbound.io/v1beta1
 kind: Intent
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: order_flowers_intent
+  name: order-flowers-intent
 spec:
   forProvider:
     confirmationPrompt:
@@ -62,3 +64,6 @@ spec:
         message:
         - content: Pick up the {FlowerType} at what time on {PickupDate}?
           contentType: PlainText
+
+---
+

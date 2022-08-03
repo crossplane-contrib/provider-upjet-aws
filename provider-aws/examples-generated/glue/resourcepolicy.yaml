@@ -1,8 +1,13 @@
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: ResourcePolicy
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     policy: ${data.aws_iam_policy_document.glue-example-policy.json}
     region: us-west-1
+
+---
+

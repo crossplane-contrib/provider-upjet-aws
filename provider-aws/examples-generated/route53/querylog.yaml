@@ -1,9 +1,43 @@
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: QueryLog
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: example_com
+  name: example-com
 spec:
   forProvider:
-    cloudwatchLogGroupArn: ${aws_cloudwatch_log_group.aws_route53_example_com.arn}
+    cloudwatchLogGroupArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_route53_example_com
     region: us-west-1
-    zoneId: ${aws_route53_zone.example_com.zone_id}
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_com
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  labels:
+    testing.upbound.io/example-name: aws_route53_example_com
+  name: aws-route53-example-com
+spec:
+  forProvider:
+    provider: ${aws.us-east-1}
+    retentionInDays: 30
+
+---
+
+apiVersion: route53.aws.upbound.io/v1beta1
+kind: Zone
+metadata:
+  labels:
+    testing.upbound.io/example-name: example_com
+  name: example-com
+spec:
+  forProvider:
+    name: example.com
+
+---
+

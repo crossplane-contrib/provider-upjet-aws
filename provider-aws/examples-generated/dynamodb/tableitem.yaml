@@ -1,10 +1,14 @@
 apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: TableItem
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    hashKey: ${aws_dynamodb_table.example.hash_key}
+    hashKeySelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     item: |
       {
         "exampleHashKey": {"S": "something"},
@@ -14,5 +18,26 @@ spec:
         "four": {"N": "44444"}
       }
     region: us-west-1
-    tableNameRef:
-      name: example
+    tableNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dynamodb.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    attribute:
+    - name: exampleHashKey
+      type: S
+    hashKey: exampleHashKey
+    readCapacity: 10
+    writeCapacity: 10
+
+---
+

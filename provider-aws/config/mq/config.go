@@ -12,5 +12,6 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_mq_broker", func(r *config.Resource) {
 		r.UseAsync = true
+		delete(r.References, "configuration.revision")
 	})
 }

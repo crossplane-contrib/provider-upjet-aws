@@ -1,7 +1,9 @@
 apiVersion: autoscaling.aws.upbound.io/v1beta1
 kind: AutoscalingGroup
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: bar
+  name: bar
 spec:
   forProvider:
     desiredCapacity: 4
@@ -22,7 +24,9 @@ spec:
     launchConfiguration: ${aws_launch_configuration.foobar.name}
     maxSize: 5
     minSize: 2
-    placementGroup: ${aws_placement_group.test.id}
+    placementGroupSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
     region: us-west-1
     tag:
     - key: foo
@@ -34,4 +38,20 @@ spec:
     timeouts:
     - delete: 15m
     vpcZoneIdentifierRefs:
-    - name: example
+    - name: example1
+    - name: example2
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: PlacementGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    strategy: cluster
+
+---
+

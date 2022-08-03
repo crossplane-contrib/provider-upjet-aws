@@ -1,16 +1,35 @@
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: UserDefinedFunction
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    catalogId: ${aws_glue_catalog_database.example.catalog_id}
+    catalogIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     className: class
-    databaseNameRef:
-      name: example
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     ownerName: owner
     ownerType: GROUP
     region: us-west-1
     resourceUris:
     - resourceType: ARCHIVE
       uri: uri
+
+---
+
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: CatalogDatabase
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider: {}
+
+---
+

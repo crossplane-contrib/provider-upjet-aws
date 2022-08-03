@@ -1,8 +1,13 @@
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: ExternalKey
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     description: KMS EXTERNAL for AMI encryption
     region: us-west-1
+
+---
+

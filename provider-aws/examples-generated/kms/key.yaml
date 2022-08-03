@@ -1,9 +1,14 @@
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Key
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: a
+  name: a
 spec:
   forProvider:
     deletionWindowInDays: 10
     description: KMS key 1
     region: us-west-1
+
+---
+

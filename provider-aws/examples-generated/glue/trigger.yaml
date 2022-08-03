@@ -1,14 +1,23 @@
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: Trigger
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     actions:
-    - jobName: ${aws_glue_job.example1.name}
+    - jobNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example1
     predicate:
     - conditions:
-      - jobName: ${aws_glue_job.example2.name}
+      - jobNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example2
         state: SUCCEEDED
     region: us-west-1
     type: CONDITIONAL
+
+---
+

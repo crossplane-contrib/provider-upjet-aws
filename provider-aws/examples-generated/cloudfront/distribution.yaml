@@ -1,7 +1,9 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: Distribution
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: s3_distribution
+  name: s3-distribution
 spec:
   forProvider:
     aliases:
@@ -77,10 +79,14 @@ spec:
       targetOriginId: ${local.s3_origin_id}
       viewerProtocolPolicy: redirect-to-https
     origin:
-    - domainName: ${aws_s3_bucket.b.bucket_regional_domain_name}
+    - domainNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: b
       originId: ${local.s3_origin_id}
       s3OriginConfig:
-      - originAccessIdentity: origin-access-identity/cloudfront/ABCDEFG1234567
+      - originAccessIdentitySelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
     priceClass: PriceClass_200
     region: us-west-1
     restrictions:
@@ -95,3 +101,33 @@ spec:
       Environment: production
     viewerCertificate:
     - cloudfrontDefaultCertificate: true
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: b
+  name: b
+spec:
+  forProvider:
+    tags:
+      Name: My bucket
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketACL
+metadata:
+  labels:
+    testing.upbound.io/example-name: b_acl
+  name: b-acl
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: b
+
+---
+

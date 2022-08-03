@@ -1,11 +1,48 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: EIPAssociation
 metadata:
-  name: example
-  annotations:
-    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+  labels:
+    testing.upbound.io/example-name: eip_assoc
+  name: eip-assoc
 spec:
   forProvider:
-    allocationId: ${aws_eip.example.id}
-    instanceId: ${aws_instance.web.id}
+    allocationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: web
     region: us-west-1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: EIP
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    vpc: true
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  labels:
+    testing.upbound.io/example-name: web
+  name: web
+spec:
+  forProvider:
+    ami: ami-0d9858aa3c6322f73
+    availabilityZone: us-west-1c
+    instanceType: t2.micro
+    region: us-west-1
+    tags:
+      Name: HelloWorld
+
+---
+

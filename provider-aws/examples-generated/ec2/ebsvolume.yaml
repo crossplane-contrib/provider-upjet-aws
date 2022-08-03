@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: EBSVolume
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -9,3 +11,6 @@ spec:
     size: 40
     tags:
       Name: HelloWorld
+
+---
+

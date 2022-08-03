@@ -1,6 +1,8 @@
 apiVersion: docdb.aws.upbound.io/v1beta1
 kind: GlobalCluster
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,3 +10,77 @@ spec:
     engineVersion: 4.0.0
     globalClusterIdentifier: global-test
     region: us-west-1
+
+---
+
+apiVersion: docdb.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+spec:
+  forProvider:
+    dbSubnetGroupName: default
+    engine: docdb
+    engineVersion: 4.0.0
+    globalClusterIdentifier: ${aws_docdb_global_cluster.example.id}
+    masterPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    masterUsername: username
+    provider: ${aws.primary}
+
+---
+
+apiVersion: docdb.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+spec:
+  forProvider:
+    dbSubnetGroupName: default
+    engine: docdb
+    engineVersion: 4.0.0
+    globalClusterIdentifier: ${aws_docdb_global_cluster.example.id}
+    provider: ${aws.secondary}
+
+---
+
+apiVersion: docdb.aws.upbound.io/v1beta1
+kind: ClusterInstance
+metadata:
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+spec:
+  forProvider:
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    engine: docdb
+    instanceClass: db.r5.large
+    provider: ${aws.primary}
+
+---
+
+apiVersion: docdb.aws.upbound.io/v1beta1
+kind: ClusterInstance
+metadata:
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+spec:
+  forProvider:
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+    engine: docdb
+    instanceClass: db.r5.large
+    provider: ${aws.secondary}
+
+---
+

@@ -1,7 +1,9 @@
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: LayerVersion
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: lambda_layer
+  name: lambda-layer
 spec:
   forProvider:
     compatibleRuntimes:
@@ -9,3 +11,6 @@ spec:
     filename: lambda_layer_payload.zip
     layerName: lambda_layer_name
     region: us-west-1
+
+---
+

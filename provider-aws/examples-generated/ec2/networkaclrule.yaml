@@ -1,15 +1,38 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: NetworkACLRule
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: bar
+  name: bar
 spec:
   forProvider:
-    cidrBlock: ${aws_vpc.foo.cidr_block}
+    cidrBlockSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
     egress: false
     fromPort: 22
-    networkAclId: ${aws_network_acl.bar.id}
+    networkAclIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bar
     protocol: tcp
     region: us-west-1
     ruleAction: allow
     ruleNumber: 200
     toPort: 22
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: NetworkACL
+metadata:
+  labels:
+    testing.upbound.io/example-name: bar
+  name: bar
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+

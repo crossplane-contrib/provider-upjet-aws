@@ -92,6 +92,16 @@ func (in *ActionsParameters) DeepCopyInto(out *ActionsParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.JobNameRef != nil {
+		in, out := &in.JobNameRef, &out.JobNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.JobNameSelector != nil {
+		in, out := &in.JobNameSelector, &out.JobNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.NotificationProperty != nil {
 		in, out := &in.NotificationProperty, &out.NotificationProperty
 		*out = make([]ActionsNotificationPropertyParameters, len(*in))
@@ -839,6 +849,16 @@ func (in *ConditionsParameters) DeepCopyInto(out *ConditionsParameters) {
 		in, out := &in.JobName, &out.JobName
 		*out = new(string)
 		**out = **in
+	}
+	if in.JobNameRef != nil {
+		in, out := &in.JobNameRef, &out.JobNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.JobNameSelector != nil {
+		in, out := &in.JobNameSelector, &out.JobNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LogicalOperator != nil {
 		in, out := &in.LogicalOperator, &out.LogicalOperator
@@ -3054,6 +3074,16 @@ func (in *UserDefinedFunctionParameters) DeepCopyInto(out *UserDefinedFunctionPa
 		in, out := &in.CatalogID, &out.CatalogID
 		*out = new(string)
 		**out = **in
+	}
+	if in.CatalogIDRef != nil {
+		in, out := &in.CatalogIDRef, &out.CatalogIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CatalogIDSelector != nil {
+		in, out := &in.CatalogIDSelector, &out.CatalogIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ClassName != nil {
 		in, out := &in.ClassName, &out.ClassName

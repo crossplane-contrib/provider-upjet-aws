@@ -1,10 +1,15 @@
 apiVersion: efs.aws.upbound.io/v1beta1
 kind: FileSystem
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
 spec:
   forProvider:
     creationToken: my-product
     region: us-west-1
     tags:
       Name: MyProduct
+
+---
+

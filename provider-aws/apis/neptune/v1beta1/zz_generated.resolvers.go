@@ -12,6 +12,8 @@ import (
 	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
+	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -244,6 +246,32 @@ func (mg *ClusterSnapshot) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.DBClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DBClusterIdentifierRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this EventSubscription.
+func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnsTopicArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.SnsTopicArnRef,
+		Selector:     mg.Spec.ForProvider.SnsTopicArnSelector,
+		To: reference.To{
+			List:    &v1beta13.TopicList{},
+			Managed: &v1beta13.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SnsTopicArn")
+	}
+	mg.Spec.ForProvider.SnsTopicArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SnsTopicArnRef = rsp.ResolvedReference
 
 	return nil
 }

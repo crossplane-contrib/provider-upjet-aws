@@ -1,11 +1,29 @@
 apiVersion: servicediscovery.aws.upbound.io/v1beta1
 kind: PrivateDNSNamespace
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     description: example
     name: hoge.example.local
     region: us-west-1
-    vpcRef:
-      name: example
+    vpcSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+
+---
+

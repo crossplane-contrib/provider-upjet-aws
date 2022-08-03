@@ -49,8 +49,16 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
-	// +kubebuilder:validation:Required
-	ClusterIdentifier *string `json:"clusterIdentifier" tf:"cluster_identifier,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
@@ -68,11 +76,27 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("engine",false)
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	EngineRef *v1.Reference `json:"engineRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	EngineSelector *v1.Selector `json:"engineSelector,omitempty" tf:"-"`
+
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("engineVersion",false)
+	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	EngineVersionRef *v1.Reference `json:"engineVersionRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	EngineVersionSelector *v1.Selector `json:"engineVersionSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	InstanceClass *string `json:"instanceClass" tf:"instance_class,omitempty"`

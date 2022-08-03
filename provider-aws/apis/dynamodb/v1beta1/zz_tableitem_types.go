@@ -19,8 +19,16 @@ type TableItemObservation struct {
 
 type TableItemParameters struct {
 
-	// +kubebuilder:validation:Required
-	HashKey *string `json:"hashKey" tf:"hash_key,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/dynamodb/v1beta1.Table
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("hashKey",false)
+	// +kubebuilder:validation:Optional
+	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	HashKeyRef *v1.Reference `json:"hashKeyRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	HashKeySelector *v1.Selector `json:"hashKeySelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Item *string `json:"item" tf:"item,omitempty"`

@@ -1,12 +1,30 @@
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBTargetGroup
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
 spec:
   forProvider:
     name: tf-example-lb-tg
     port: 80
     protocol: HTTP
     region: us-west-1
-    vpcIdRef:
-      name: example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+
+---
+

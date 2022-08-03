@@ -1,7 +1,9 @@
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: Record
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: www
+  name: www
 spec:
   forProvider:
     name: www.example.com
@@ -10,5 +12,9 @@ spec:
     region: us-west-1
     ttl: "300"
     type: A
-    zoneIdRef:
-      name: example
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+
+---
+

@@ -1,7 +1,52 @@
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: Workflow
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     region: us-west-1
+
+---
+
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: Trigger
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-inner
+  name: example-inner
+spec:
+  forProvider:
+    actions:
+    - jobNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    predicate:
+    - conditions:
+      - jobNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        state: SUCCEEDED
+    type: CONDITIONAL
+    workflowName: example
+
+---
+
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: Trigger
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-start
+  name: example-start
+spec:
+  forProvider:
+    actions:
+    - jobNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    type: ON_DEMAND
+    workflowName: example
+
+---
+

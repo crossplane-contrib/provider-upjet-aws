@@ -1,15 +1,24 @@
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: FunctionEventInvokeConfig
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     destinationConfig:
     - onFailure:
-      - destinationRef:
-          name: example
+      - destinationSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
       onSuccess:
-      - destinationRef:
-          name: example
-    functionName: ${aws_lambda_alias.example.function_name}
+      - destinationSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+    functionNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
+
+---
+

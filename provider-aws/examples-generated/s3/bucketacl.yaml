@@ -1,8 +1,26 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketACL
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: example_bucket_acl
+  name: example-bucket-acl
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.example.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider: {}
+
+---
+

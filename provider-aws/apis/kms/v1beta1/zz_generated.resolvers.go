@@ -9,7 +9,9 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -71,6 +73,22 @@ func (mg *Grant) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GranteePrincipal),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.GranteePrincipalRef,
+		Selector:     mg.Spec.ForProvider.GranteePrincipalSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.GranteePrincipal")
+	}
+	mg.Spec.ForProvider.GranteePrincipal = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.GranteePrincipalRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyID),

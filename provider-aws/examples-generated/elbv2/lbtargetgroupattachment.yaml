@@ -1,11 +1,39 @@
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBTargetGroupAttachment
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
 spec:
   forProvider:
     port: 80
     region: us-west-1
-    targetGroupArnRef:
-      name: example
+    targetGroupArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
     targetId: ${aws_instance.test.id}
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: elbv2.aws.upbound.io/v1beta1
+kind: LBTargetGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider: {}
+
+---
+

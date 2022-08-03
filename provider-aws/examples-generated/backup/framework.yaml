@@ -1,6 +1,8 @@
 apiVersion: backup.aws.upbound.io/v1beta1
 kind: Framework
 metadata:
+  labels:
+    testing.upbound.io/example-name: Example
   name: example
 spec:
   forProvider:
@@ -28,3 +30,6 @@ spec:
     region: us-west-1
     tags:
       Name: Example Framework
+
+---
+

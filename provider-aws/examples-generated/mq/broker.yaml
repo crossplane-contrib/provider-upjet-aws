@@ -1,12 +1,16 @@
 apiVersion: mq.aws.upbound.io/v1beta1
 kind: Broker
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     brokerName: example
     configuration:
-    - id: ${aws_mq_configuration.test.id}
+    - idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test
       revision: ${aws_mq_configuration.test.latest_revision}
     engineType: ActiveMQ
     engineVersion: 5.15.9
@@ -18,5 +22,8 @@ spec:
     - passwordSecretRef:
         key: example-key
         name: example-secret
-        namespace: crossplane-system
+        namespace: upbound-system
       username: ExampleUser
+
+---
+

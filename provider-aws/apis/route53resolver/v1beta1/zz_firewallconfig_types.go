@@ -29,8 +29,16 @@ type FirewallConfigParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 // FirewallConfigSpec defines the desired state of FirewallConfig

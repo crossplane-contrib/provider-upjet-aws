@@ -9,6 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -34,6 +36,37 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.CertificateAuthorityArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CertificateAuthorityArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this CertificateAuthority.
+func (mg *CertificateAuthority) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.RevocationConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.RevocationConfiguration[i3].CrlConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RevocationConfiguration[i3].CrlConfiguration[i4].S3BucketName),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.RevocationConfiguration[i3].CrlConfiguration[i4].S3BucketNameRef,
+				Selector:     mg.Spec.ForProvider.RevocationConfiguration[i3].CrlConfiguration[i4].S3BucketNameSelector,
+				To: reference.To{
+					List:    &v1beta1.BucketList{},
+					Managed: &v1beta1.Bucket{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.RevocationConfiguration[i3].CrlConfiguration[i4].S3BucketName")
+			}
+			mg.Spec.ForProvider.RevocationConfiguration[i3].CrlConfiguration[i4].S3BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.RevocationConfiguration[i3].CrlConfiguration[i4].S3BucketNameRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }

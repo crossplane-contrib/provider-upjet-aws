@@ -1,8 +1,13 @@
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: Zone
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
 spec:
   forProvider:
     name: example.com
     region: us-west-1
+
+---
+

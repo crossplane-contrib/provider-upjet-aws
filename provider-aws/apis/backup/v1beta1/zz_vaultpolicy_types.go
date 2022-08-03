@@ -21,8 +21,15 @@ type VaultPolicyObservation struct {
 
 type VaultPolicyParameters struct {
 
-	// +kubebuilder:validation:Required
-	BackupVaultName *string `json:"backupVaultName" tf:"backup_vault_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/backup/v1beta1.Vault
+	// +kubebuilder:validation:Optional
+	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	BackupVaultNameRef *v1.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Policy *string `json:"policy" tf:"policy,omitempty"`

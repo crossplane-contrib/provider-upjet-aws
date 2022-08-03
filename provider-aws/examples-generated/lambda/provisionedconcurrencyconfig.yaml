@@ -1,10 +1,19 @@
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: ProvisionedConcurrencyConfig
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    functionName: ${aws_lambda_alias.example.function_name}
+    functionNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     provisionedConcurrentExecutions: 1
-    qualifier: my_alias
+    qualifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
+
+---
+

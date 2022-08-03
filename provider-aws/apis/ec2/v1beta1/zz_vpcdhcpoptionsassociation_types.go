@@ -19,8 +19,16 @@ type VPCDHCPOptionsAssociationObservation struct {
 
 type VPCDHCPOptionsAssociationParameters struct {
 
-	// +kubebuilder:validation:Required
-	DHCPOptionsID *string `json:"dhcpOptionsId" tf:"dhcp_options_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPCDHCPOptions
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	DHCPOptionsID *string `json:"dhcpOptionsId,omitempty" tf:"dhcp_options_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DHCPOptionsIDRef *v1.Reference `json:"dhcpOptionsIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DHCPOptionsIDSelector *v1.Selector `json:"dhcpOptionsIdSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-

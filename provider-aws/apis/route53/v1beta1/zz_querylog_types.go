@@ -21,16 +21,32 @@ type QueryLogObservation struct {
 
 type QueryLogParameters struct {
 
-	// +kubebuilder:validation:Required
-	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn" tf:"cloudwatch_log_group_arn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CloudwatchLogGroupArnRef *v1.Reference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	CloudwatchLogGroupArnSelector *v1.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	ZoneID *string `json:"zoneId" tf:"zone_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/route53/v1beta1.Zone
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("zoneId",true)
+	// +kubebuilder:validation:Optional
+	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ZoneIDRef *v1.Reference `json:"zoneIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ZoneIDSelector *v1.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
 }
 
 // QueryLogSpec defines the desired state of QueryLog

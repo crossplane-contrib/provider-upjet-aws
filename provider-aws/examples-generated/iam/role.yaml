@@ -1,7 +1,9 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test_role
+  name: test-role
 spec:
   forProvider:
     assumeRolePolicy: |-
@@ -20,3 +22,6 @@ spec:
         })}
     tags:
       tag-key: tag-value
+
+---
+

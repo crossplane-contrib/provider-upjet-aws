@@ -45,6 +45,32 @@ func (mg *CapacityProvider) ResolveReferences(ctx context.Context, c client.Read
 	return nil
 }
 
+// ResolveReferences of this ClusterCapacityProviders.
+func (mg *ClusterCapacityProviders) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ClusterNameRef,
+		Selector:     mg.Spec.ForProvider.ClusterNameSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterName")
+	}
+	mg.Spec.ForProvider.ClusterName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Service.
 func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

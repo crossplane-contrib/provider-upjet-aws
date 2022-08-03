@@ -91,8 +91,16 @@ type QueryArgProfilesItemsObservation struct {
 
 type QueryArgProfilesItemsParameters struct {
 
-	// +kubebuilder:validation:Required
-	ProfileID *string `json:"profileId" tf:"profile_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1.FieldLevelEncryptionProfile
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	ProfileID *string `json:"profileId,omitempty" tf:"profile_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ProfileIDRef *v1.Reference `json:"profileIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ProfileIDSelector *v1.Selector `json:"profileIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	QueryArg *string `json:"queryArg" tf:"query_arg,omitempty"`

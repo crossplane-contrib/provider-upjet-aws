@@ -13,7 +13,9 @@ import (
 	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
 	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
+	v1beta14 "github.com/upbound/official-providers/provider-aws/apis/secretsmanager/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -135,6 +137,48 @@ func (mg *ClusterActivityStream) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.ResourceArnRef,
+		Selector:     mg.Spec.ForProvider.ResourceArnSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceArn")
+	}
+	mg.Spec.ForProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ClusterEndpoint.
+func (mg *ClusterEndpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterIdentifier),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ClusterIdentifierRef,
+		Selector:     mg.Spec.ForProvider.ClusterIdentifierSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterIdentifier")
+	}
+	mg.Spec.ForProvider.ClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterIdentifierRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -144,6 +188,22 @@ func (mg *ClusterInstance) ResolveReferences(ctx context.Context, c client.Reade
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterIdentifier),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ClusterIdentifierRef,
+		Selector:     mg.Spec.ForProvider.ClusterIdentifierSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterIdentifier")
+	}
+	mg.Spec.ForProvider.ClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterIdentifierRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBSubnetGroupName),
@@ -160,6 +220,38 @@ func (mg *ClusterInstance) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.DBSubnetGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DBSubnetGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Engine),
+		Extract:      resource.ExtractParamPath("engine", false),
+		Reference:    mg.Spec.ForProvider.EngineRef,
+		Selector:     mg.Spec.ForProvider.EngineSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Engine")
+	}
+	mg.Spec.ForProvider.Engine = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EngineRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EngineVersion),
+		Extract:      resource.ExtractParamPath("engineVersion", false),
+		Reference:    mg.Spec.ForProvider.EngineVersionRef,
+		Selector:     mg.Spec.ForProvider.EngineVersionSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EngineVersion")
+	}
+	mg.Spec.ForProvider.EngineVersion = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EngineVersionRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MonitoringRoleArn),
@@ -204,6 +296,22 @@ func (mg *ClusterRoleAssociation) ResolveReferences(ctx context.Context, c clien
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBClusterIdentifier),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DBClusterIdentifierRef,
+		Selector:     mg.Spec.ForProvider.DBClusterIdentifierSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBClusterIdentifier")
+	}
+	mg.Spec.ForProvider.DBClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBClusterIdentifierRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
@@ -218,6 +326,32 @@ func (mg *ClusterRoleAssociation) ResolveReferences(ctx context.Context, c clien
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this GlobalCluster.
+func (mg *GlobalCluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceDBClusterIdentifier),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.SourceDBClusterIdentifierRef,
+		Selector:     mg.Spec.ForProvider.SourceDBClusterIdentifierSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceDBClusterIdentifier")
+	}
+	mg.Spec.ForProvider.SourceDBClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceDBClusterIdentifierRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -289,6 +423,22 @@ func (mg *InstanceRoleAssociation) ResolveReferences(ctx context.Context, c clie
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBInstanceIdentifier),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DBInstanceIdentifierRef,
+		Selector:     mg.Spec.ForProvider.DBInstanceIdentifierSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBInstanceIdentifier")
+	}
+	mg.Spec.ForProvider.DBInstanceIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBInstanceIdentifierRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
@@ -307,6 +457,37 @@ func (mg *InstanceRoleAssociation) ResolveReferences(ctx context.Context, c clie
 	return nil
 }
 
+// ResolveReferences of this OptionGroup.
+func (mg *OptionGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Option); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Option[i3].OptionSettings); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Option[i3].OptionSettings[i4].Value),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.Option[i3].OptionSettings[i4].ValueRef,
+				Selector:     mg.Spec.ForProvider.Option[i3].OptionSettings[i4].ValueSelector,
+				To: reference.To{
+					List:    &v1beta13.RoleList{},
+					Managed: &v1beta13.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Option[i3].OptionSettings[i4].Value")
+			}
+			mg.Spec.ForProvider.Option[i3].OptionSettings[i4].Value = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Option[i3].OptionSettings[i4].ValueRef = rsp.ResolvedReference
+
+		}
+	}
+
+	return nil
+}
+
 // ResolveReferences of this Proxy.
 func (mg *Proxy) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -315,6 +496,24 @@ func (mg *Proxy) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Auth); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Auth[i3].SecretArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.Auth[i3].SecretArnRef,
+			Selector:     mg.Spec.ForProvider.Auth[i3].SecretArnSelector,
+			To: reference.To{
+				List:    &v1beta14.SecretList{},
+				Managed: &v1beta14.Secret{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Auth[i3].SecretArn")
+		}
+		mg.Spec.ForProvider.Auth[i3].SecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Auth[i3].SecretArnRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 		Extract:      common.ARNExtractor(),
@@ -350,12 +549,55 @@ func (mg *Proxy) ResolveReferences(ctx context.Context, c client.Reader) error {
 	return nil
 }
 
+// ResolveReferences of this ProxyDefaultTargetGroup.
+func (mg *ProxyDefaultTargetGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBProxyName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DBProxyNameRef,
+		Selector:     mg.Spec.ForProvider.DBProxyNameSelector,
+		To: reference.To{
+			List:    &ProxyList{},
+			Managed: &Proxy{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBProxyName")
+	}
+	mg.Spec.ForProvider.DBProxyName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBProxyNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this ProxyEndpoint.
 func (mg *ProxyEndpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
+	var rsp reference.ResolutionResponse
 	var mrsp reference.MultiResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBProxyName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DBProxyNameRef,
+		Selector:     mg.Spec.ForProvider.DBProxyNameSelector,
+		To: reference.To{
+			List:    &ProxyList{},
+			Managed: &Proxy{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBProxyName")
+	}
+	mg.Spec.ForProvider.DBProxyName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBProxyNameRef = rsp.ResolvedReference
 
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCSecurityGroupIds),
@@ -372,6 +614,90 @@ func (mg *ProxyEndpoint) ResolveReferences(ctx context.Context, c client.Reader)
 	}
 	mg.Spec.ForProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this ProxyTarget.
+func (mg *ProxyTarget) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBInstanceIdentifier),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DBInstanceIdentifierRef,
+		Selector:     mg.Spec.ForProvider.DBInstanceIdentifierSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBInstanceIdentifier")
+	}
+	mg.Spec.ForProvider.DBInstanceIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBInstanceIdentifierRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBProxyName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DBProxyNameRef,
+		Selector:     mg.Spec.ForProvider.DBProxyNameSelector,
+		To: reference.To{
+			List:    &ProxyList{},
+			Managed: &Proxy{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBProxyName")
+	}
+	mg.Spec.ForProvider.DBProxyName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBProxyNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetGroupName),
+		Extract:      resource.ExtractParamPath("name", true),
+		Reference:    mg.Spec.ForProvider.TargetGroupNameRef,
+		Selector:     mg.Spec.ForProvider.TargetGroupNameSelector,
+		To: reference.To{
+			List:    &ProxyDefaultTargetGroupList{},
+			Managed: &ProxyDefaultTargetGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TargetGroupName")
+	}
+	mg.Spec.ForProvider.TargetGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Snapshot.
+func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBInstanceIdentifier),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DBInstanceIdentifierRef,
+		Selector:     mg.Spec.ForProvider.DBInstanceIdentifierSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBInstanceIdentifier")
+	}
+	mg.Spec.ForProvider.DBInstanceIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBInstanceIdentifierRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -1,6 +1,8 @@
 apiVersion: licensemanager.aws.upbound.io/v1beta1
 kind: LicenseConfiguration
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -14,3 +16,6 @@ spec:
     region: us-west-1
     tags:
       foo: barr
+
+---
+

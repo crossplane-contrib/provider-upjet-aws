@@ -1,7 +1,9 @@
 apiVersion: ecr.aws.upbound.io/v1beta1
 kind: LifecyclePolicy
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: foopolicy
+  name: foopolicy
 spec:
   forProvider:
     policy: |
@@ -23,4 +25,20 @@ spec:
           ]
       }
     region: us-west-1
-    repository: ${aws_ecr_repository.foo.name}
+    repositorySelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+
+apiVersion: ecr.aws.upbound.io/v1beta1
+kind: Repository
+metadata:
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider: {}
+
+---
+

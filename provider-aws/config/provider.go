@@ -7,6 +7,9 @@ package config
 import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
+	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
+	"github.com/pkg/errors"
+	"github.com/upbound/upjet/pkg/registry/reference"
 
 	"github.com/upbound/upjet/pkg/config"
 
@@ -82,12 +85,21 @@ var skipList = []string{
 	"aws_location_map$",                // failure with unknown reason.
 }
 
+func setDefaultRegion(object *fieldpath.Paved, r *config.Resource) error {
+	if r.ShortGroup == "iam" {
+		return nil
+	}
+	return errors.Wrap(object.SetValue("spec.forProvider.region", "us-west-1"), "cannot set default region")
+}
+
 // GetProvider returns provider configuration
 func GetProvider() *config.Provider {
 	pc := config.NewProvider([]byte(providerSchema), "aws",
 		"github.com/upbound/official-providers/provider-aws", providerMetadata,
 		config.WithShortName("aws"),
 		config.WithRootGroup("aws.upbound.io"),
+		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector("github.com/upbound/official-providers/provider-aws")}),
+		//config.WithExampleManifestModifier(setDefaultRegion),
 		config.WithIncludeList(ResourcesWithExternalNameConfig()),
 		config.WithSkipList(skipList),
 		config.WithDefaultResourceOptions(

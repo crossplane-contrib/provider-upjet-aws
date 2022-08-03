@@ -1,7 +1,9 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SpotInstanceRequest
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: cheap_worker
+  name: cheap-worker
 spec:
   forProvider:
     ami: ami-1234
@@ -10,3 +12,6 @@ spec:
     spotPrice: "0.03"
     tags:
       Name: CheapWorker
+
+---
+

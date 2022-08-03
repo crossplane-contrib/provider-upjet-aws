@@ -1,7 +1,9 @@
 apiVersion: gamelift.aws.upbound.io/v1beta1
 kind: GameSessionQueue
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
 spec:
   forProvider:
     destinations:
@@ -13,3 +15,6 @@ spec:
     - maximumIndividualPlayerLatencyMilliseconds: 200
     region: us-west-1
     timeoutInSeconds: 60
+
+---
+

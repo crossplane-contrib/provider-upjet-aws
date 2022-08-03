@@ -1,7 +1,9 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: Instance
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
 spec:
   forProvider:
     allocatedStorage: 10
@@ -13,7 +15,10 @@ spec:
     passwordSecretRef:
       key: example-key
       name: example-secret
-      namespace: crossplane-system
+      namespace: upbound-system
     region: us-west-1
     skipFinalSnapshot: true
     username: foo
+
+---
+

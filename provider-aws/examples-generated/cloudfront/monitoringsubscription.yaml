@@ -1,11 +1,18 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: MonitoringSubscription
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    distributionId: ${aws_cloudfront_distribution.example.id}
+    distributionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     monitoringSubscription:
     - realtimeMetricsSubscriptionConfig:
       - realtimeMetricsSubscriptionStatus: Enabled
     region: us-west-1
+
+---
+

@@ -569,6 +569,16 @@ func (in *ElasticsearchConfigurationParameters) DeepCopyInto(out *ElasticsearchC
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.S3BackupMode != nil {
 		in, out := &in.S3BackupMode, &out.S3BackupMode
 		*out = new(string)
@@ -928,6 +938,16 @@ func (in *HTTPEndpointConfigurationParameters) DeepCopyInto(out *HTTPEndpointCon
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.S3BackupMode != nil {
 		in, out := &in.S3BackupMode, &out.S3BackupMode
@@ -1745,6 +1765,16 @@ func (in *RedshiftConfigurationParameters) DeepCopyInto(out *RedshiftConfigurati
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.S3BackupConfiguration != nil {
 		in, out := &in.S3BackupConfiguration, &out.S3BackupConfiguration
 		*out = make([]RedshiftConfigurationS3BackupConfigurationParameters, len(*in))
@@ -1966,6 +1996,16 @@ func (in *RedshiftConfigurationS3BackupConfigurationParameters) DeepCopyInto(out
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketArnRef != nil {
+		in, out := &in.BucketArnRef, &out.BucketArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketArnSelector != nil {
+		in, out := &in.BucketArnSelector, &out.BucketArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.BufferInterval != nil {
 		in, out := &in.BufferInterval, &out.BufferInterval
 		*out = new(float64)
@@ -2007,6 +2047,16 @@ func (in *RedshiftConfigurationS3BackupConfigurationParameters) DeepCopyInto(out
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -2354,6 +2404,16 @@ func (in *SchemaConfigurationParameters) DeepCopyInto(out *SchemaConfigurationPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.DatabaseNameRef != nil {
+		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DatabaseNameSelector != nil {
+		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -2364,10 +2424,30 @@ func (in *SchemaConfigurationParameters) DeepCopyInto(out *SchemaConfigurationPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
 		**out = **in
+	}
+	if in.TableNameRef != nil {
+		in, out := &in.TableNameRef, &out.TableNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TableNameSelector != nil {
+		in, out := &in.TableNameSelector, &out.TableNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.VersionID != nil {
 		in, out := &in.VersionID, &out.VersionID
@@ -2745,6 +2825,16 @@ func (in *VPCConfigParameters) DeepCopyInto(out *VPCConfigParameters) {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SecurityGroupIds != nil {
 		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds

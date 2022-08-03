@@ -34,11 +34,27 @@ type TransitGatewayMulticastDomainAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId" tf:"transit_gateway_attachment_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGatewayVPCAttachment
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
-	// +kubebuilder:validation:Required
-	TransitGatewayMulticastDomainID *string `json:"transitGatewayMulticastDomainId" tf:"transit_gateway_multicast_domain_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
+
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGatewayMulticastDomain
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	TransitGatewayMulticastDomainID *string `json:"transitGatewayMulticastDomainId,omitempty" tf:"transit_gateway_multicast_domain_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TransitGatewayMulticastDomainIDRef *v1.Reference `json:"transitGatewayMulticastDomainIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	TransitGatewayMulticastDomainIDSelector *v1.Selector `json:"transitGatewayMulticastDomainIdSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayMulticastDomainAssociationSpec defines the desired state of TransitGatewayMulticastDomainAssociation

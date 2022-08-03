@@ -1,10 +1,69 @@
 apiVersion: acm.aws.upbound.io/v1beta1
 kind: CertificateValidation
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    certificateArnRef:
-      name: example
+    certificateArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
     validationRecordFqdns: '${[for record in aws_route53_record.example : record.fqdn]}'
+
+---
+
+apiVersion: acm.aws.upbound.io/v1beta1
+kind: Certificate
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domainName: example.com
+    validationMethod: DNS
+
+---
+
+apiVersion: elbv2.aws.upbound.io/v1beta1
+kind: LBListener
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    certificateArn: ${aws_acm_certificate.example.arn}
+
+---
+
+apiVersion: route53.aws.upbound.io/v1beta1
+kind: Record
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allowOverwrite: true
+    for_each: |-
+      ${{
+          for dvo in aws_acm_certificate.example.domain_validation_options : dvo.domain_name => {
+            name   = dvo.resource_record_name
+            record = dvo.resource_record_value
+            type   = dvo.resource_record_type
+          }
+        }}
+    name: ${each.value.name}
+    records:
+    - ${each.value.record}
+    ttl: 60
+    type: ${each.value.type}
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_route53_zone
+
+---
+
