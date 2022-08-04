@@ -35,7 +35,7 @@ NAME           INSTALLED   HEALTHY   PACKAGE                                    
 provider-aws   True        True      xpkg.upbound.io/upbound/provider-aws:v0.5.0   62s
 ```
 
-View the Crossplane [Provider CRD definition](https://doc.crds.dev/github.com/crossplane/crossplane/pkg.crossplane.io/Provider/v1@v1.8.1) to view all available `Provider` options.
+View the Crossplane [Provider CRD definition](https://doc.crds.dev/github.com/crossplane/crossplane/pkg.crossplane.io/Provider/v1) to view all available `Provider` options.
 
 ## Configure the provider
 The AWS provider requires credentials for authentication to AWS. The AWS provider consumes the credentials from a Kubernetes secret object.
