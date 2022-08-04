@@ -14,6 +14,58 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this AccessPoint.
+func (mg *AccessPoint) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.FileSystemIDRef,
+		Selector:     mg.Spec.ForProvider.FileSystemIDSelector,
+		To: reference.To{
+			List:    &FileSystemList{},
+			Managed: &FileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FileSystemID")
+	}
+	mg.Spec.ForProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FileSystemIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this BackupPolicy.
+func (mg *BackupPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.FileSystemIDRef,
+		Selector:     mg.Spec.ForProvider.FileSystemIDSelector,
+		To: reference.To{
+			List:    &FileSystemList{},
+			Managed: &FileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FileSystemID")
+	}
+	mg.Spec.ForProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FileSystemIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this FileSystem.
 func (mg *FileSystem) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -36,6 +88,32 @@ func (mg *FileSystem) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this FileSystemPolicy.
+func (mg *FileSystemPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.FileSystemIDRef,
+		Selector:     mg.Spec.ForProvider.FileSystemIDSelector,
+		To: reference.To{
+			List:    &FileSystemList{},
+			Managed: &FileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FileSystemID")
+	}
+	mg.Spec.ForProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FileSystemIDRef = rsp.ResolvedReference
 
 	return nil
 }

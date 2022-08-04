@@ -102,7 +102,10 @@ import (
 	clustercapacityproviders "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/clustercapacityproviders"
 	service "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/service"
 	taskdefinition "github.com/upbound/official-providers/provider-aws/internal/controller/ecs/taskdefinition"
+	accesspoint "github.com/upbound/official-providers/provider-aws/internal/controller/efs/accesspoint"
+	backuppolicy "github.com/upbound/official-providers/provider-aws/internal/controller/efs/backuppolicy"
 	filesystem "github.com/upbound/official-providers/provider-aws/internal/controller/efs/filesystem"
+	filesystempolicy "github.com/upbound/official-providers/provider-aws/internal/controller/efs/filesystempolicy"
 	mounttarget "github.com/upbound/official-providers/provider-aws/internal/controller/efs/mounttarget"
 	addon "github.com/upbound/official-providers/provider-aws/internal/controller/eks/addon"
 	clustereks "github.com/upbound/official-providers/provider-aws/internal/controller/eks/cluster"
@@ -390,7 +393,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		clustercapacityproviders.Setup,
 		service.Setup,
 		taskdefinition.Setup,
+		accesspoint.Setup,
+		backuppolicy.Setup,
 		filesystem.Setup,
+		filesystempolicy.Setup,
 		mounttarget.Setup,
 		addon.Setup,
 		clustereks.Setup,

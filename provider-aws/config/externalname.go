@@ -524,6 +524,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_efs_file_system": config.IdentifierFromProvider,
 	// The EFS mount targets can be imported using the id
 	"aws_efs_mount_target": config.IdentifierFromProvider,
+	// The EFS access points can be imported using the id
+	"aws_efs_access_point": config.IdentifierFromProvider,
+	// The EFS backup policies can be imported using the id
+	"aws_efs_backup_policy": config.IdentifierFromProvider,
+	// The EFS file system policies can be imported using the id
+	"aws_efs_file_system_policy": config.IdentifierFromProvider,
 
 	// servicediscovery
 	//

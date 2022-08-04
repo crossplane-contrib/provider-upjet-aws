@@ -1,0 +1,9 @@
+apiVersion: efs.aws.upbound.io/v1beta1
+kind: AccessPoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    fileSystemIdRef:
+      name: example
+    region: us-west-1

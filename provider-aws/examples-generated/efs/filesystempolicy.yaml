@@ -1,0 +1,34 @@
+apiVersion: efs.aws.upbound.io/v1beta1
+kind: FileSystemPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    bypassPolicyLockoutSafetyCheck: true
+    fileSystemIdRef:
+      name: example
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Id": "ExamplePolicy01",
+          "Statement": [
+              {
+                  "Sid": "ExampleStatement01",
+                  "Effect": "Allow",
+                  "Principal": {
+                      "AWS": "*"
+                  },
+                  "Resource": "${aws_efs_file_system.test.arn}",
+                  "Action": [
+                      "elasticfilesystem:ClientMount",
+                      "elasticfilesystem:ClientWrite"
+                  ],
+                  "Condition": {
+                      "Bool": {
+                          "aws:SecureTransport": "true"
+                      }
+                  }
+              }
+          ]
+      }
+    region: us-west-1
