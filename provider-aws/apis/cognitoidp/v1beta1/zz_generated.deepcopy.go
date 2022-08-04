@@ -1689,6 +1689,16 @@ func (in *UserPoolClientParameters) DeepCopyInto(out *UserPoolClientParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.UserPoolIDRef != nil {
+		in, out := &in.UserPoolIDRef, &out.UserPoolIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.UserPoolIDSelector != nil {
+		in, out := &in.UserPoolIDSelector, &out.UserPoolIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.WriteAttributes != nil {
 		in, out := &in.WriteAttributes, &out.WriteAttributes
 		*out = make([]*string, len(*in))
@@ -1867,6 +1877,16 @@ func (in *UserPoolDomainParameters) DeepCopyInto(out *UserPoolDomainParameters) 
 		in, out := &in.UserPoolID, &out.UserPoolID
 		*out = new(string)
 		**out = **in
+	}
+	if in.UserPoolIDRef != nil {
+		in, out := &in.UserPoolIDRef, &out.UserPoolIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.UserPoolIDSelector != nil {
+		in, out := &in.UserPoolIDSelector, &out.UserPoolIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

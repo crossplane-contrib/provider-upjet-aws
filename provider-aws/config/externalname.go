@@ -54,7 +54,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// cognitoidp
 	//
-	// us-west-2_abc123:CorpAD
+	// us-west-2_abc123
 	"aws_cognito_user_pool": config.IdentifierFromProvider,
 	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
 	"aws_cognito_user_pool_client": config.IdentifierFromProvider,

@@ -114,8 +114,15 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Optional
 	TokenValidityUnits []TokenValidityUnitsParameters `json:"tokenValidityUnits,omitempty" tf:"token_validity_units,omitempty"`
 
-	// +kubebuilder:validation:Required
-	UserPoolID *string `json:"userPoolId" tf:"user_pool_id,omitempty"`
+	// +crossplane:generate:reference:type=UserPool
+	// +kubebuilder:validation:Optional
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	WriteAttributes []*string `json:"writeAttributes,omitempty" tf:"write_attributes,omitempty"`

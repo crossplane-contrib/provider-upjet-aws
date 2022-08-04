@@ -18,6 +18,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/backup"
 	"github.com/upbound/official-providers/provider-aws/config/cloudfront"
 	"github.com/upbound/official-providers/provider-aws/config/cognitoidentity"
+	"github.com/upbound/official-providers/provider-aws/config/cognitoidp"
 	"github.com/upbound/official-providers/provider-aws/config/dax"
 	"github.com/upbound/official-providers/provider-aws/config/docdb"
 	"github.com/upbound/official-providers/provider-aws/config/dynamodb"
@@ -115,6 +116,7 @@ func GetProvider() *config.Provider {
 		acmpca.Configure,
 		autoscaling.Configure,
 		cognitoidentity.Configure,
+		cognitoidp.Configure,
 		dynamodb.Configure,
 		ebs.Configure,
 		ec2.Configure,

@@ -1,10 +1,8 @@
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
-kind: UserPoolClient
+kind: UserPool
 metadata:
   name: example
 spec:
   forProvider:
-    name: client
+    name: mypool
     region: us-west-1
-    userPoolIdRef:
-      name: example
