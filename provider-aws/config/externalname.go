@@ -47,6 +47,26 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Dynamodb Kinesis streaming destinations are imported using "table_name,stream_arn"
 	"aws_dynamodb_kinesis_streaming_destination": config.IdentifierFromProvider,
 
+	// cognitoidentity
+	//
+	// us-west-2_abc123
+	"aws_cognito_identity_pool": config.IdentifierFromProvider,
+
+	// cognitoidp
+	//
+	// us-west-2_abc123:CorpAD
+	"aws_cognito_user_pool": config.IdentifierFromProvider,
+	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
+	"aws_cognito_user_pool_client": config.IdentifierFromProvider,
+	// auth.example.org
+	"aws_cognito_user_pool_domain": config.IdentifierFromProvider,
+	// aws_cognito_user_group.group us-east-1_vG78M4goG/user-group
+	"aws_cognito_user_group": config.IdentifierFromProvider,
+	// us-west-2_abc123:https://example.com
+	"aws_cognito_resource_server": config.IdentifierFromProvider,
+	// us-west-2_abc123:CorpAD
+	"aws_cognito_identity_provider": config.IdentifierFromProvider,
+
 	// ebs
 	//
 	// EBS Volumes can be imported using the id: vol-049df61146c4d7901

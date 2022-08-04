@@ -1,0 +1,9 @@
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPoolDomain
+metadata:
+  name: example
+spec:
+  forProvider:
+    domain: example-domain
+    region: us-west-1
+    userPoolId: ${aws_cognito_user_pool.example.id}

@@ -1,0 +1,13 @@
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: Managed by Terraform
+    name: user-group
+    precedence: 42
+    region: us-west-1
+    roleArnRef:
+      name: example
+    userPoolId: ${aws_cognito_user_pool.main.id}
