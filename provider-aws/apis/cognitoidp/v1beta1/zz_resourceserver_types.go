@@ -35,8 +35,15 @@ type ResourceServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Scope []ScopeParameters `json:"scope,omitempty" tf:"scope,omitempty"`
 
-	// +kubebuilder:validation:Required
-	UserPoolID *string `json:"userPoolId" tf:"user_pool_id,omitempty"`
+	// +crossplane:generate:reference:type=UserPool
+	// +kubebuilder:validation:Optional
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type ScopeObservation struct {

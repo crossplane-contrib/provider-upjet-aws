@@ -25,4 +25,14 @@ func Configure(p *config.Provider) {
 			Type: "UserPool",
 		}
 	})
+	p.AddResourceConfigurator("aws_cognito_resource_server", func(r *config.Resource) {
+		r.References["user_pool_id"] = config.Reference{
+			Type: "UserPool",
+		}
+	})
+	p.AddResourceConfigurator("aws_cognito_identity_provider", func(r *config.Resource) {
+		r.References["user_pool_id"] = config.Reference{
+			Type: "UserPool",
+		}
+	})
 }

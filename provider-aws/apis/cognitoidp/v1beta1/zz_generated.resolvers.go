@@ -14,6 +14,58 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this IdentityProvider.
+func (mg *IdentityProvider) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserPoolID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.UserPoolIDRef,
+		Selector:     mg.Spec.ForProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.UserPoolID")
+	}
+	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ResourceServer.
+func (mg *ResourceServer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserPoolID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.UserPoolIDRef,
+		Selector:     mg.Spec.ForProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.UserPoolID")
+	}
+	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this UserGroup.
 func (mg *UserGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
