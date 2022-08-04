@@ -10,4 +10,5 @@ spec:
     region: us-west-1
     roleArnRef:
       name: example
-    userPoolId: ${aws_cognito_user_pool.main.id}
+    userPoolIdRef:
+      name: example

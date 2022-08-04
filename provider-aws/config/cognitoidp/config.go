@@ -11,17 +11,18 @@ import (
 // Configure adds configurations for acm group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_cognito_user_pool_client", func(r *config.Resource) {
-		r.References = map[string]config.Reference{
-			"user_pool_id": {
-				Type: "UserPool",
-			},
+		r.References["user_pool_id"] = config.Reference{
+			Type: "UserPool",
 		}
 	})
 	p.AddResourceConfigurator("aws_cognito_user_pool_domain", func(r *config.Resource) {
-		r.References = map[string]config.Reference{
-			"user_pool_id": {
-				Type: "UserPool",
-			},
+		r.References["user_pool_id"] = config.Reference{
+			Type: "UserPool",
+		}
+	})
+	p.AddResourceConfigurator("aws_cognito_user_group", func(r *config.Resource) {
+		r.References["user_pool_id"] = config.Reference{
+			Type: "UserPool",
 		}
 	})
 }

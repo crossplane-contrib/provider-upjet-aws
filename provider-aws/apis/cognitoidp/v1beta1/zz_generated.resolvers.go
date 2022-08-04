@@ -37,6 +37,22 @@ func (mg *UserGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserPoolID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.UserPoolIDRef,
+		Selector:     mg.Spec.ForProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.UserPoolID")
+	}
+	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
+
 	return nil
 }
 

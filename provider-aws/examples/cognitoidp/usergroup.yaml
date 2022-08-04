@@ -1,0 +1,43 @@
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: Managed by Terraform
+    name: user-group
+    precedence: 42
+    region: us-west-1
+    roleArnRef:
+      name: user-group-role
+    userPoolIdRef:
+      name: example
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: user-group-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "",
+            "Effect": "Allow",
+            "Principal": {
+              "Federated": "cognito-identity.amazonaws.com"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+              "StringEquals": {
+                "cognito-identity.amazonaws.com:aud": "us-east-1:12345678-dead-beef-cafe-123456790ab"
+              },
+              "ForAnyValue:StringLike": {
+                "cognito-identity.amazonaws.com:amr": "authenticated"
+              }
+            }
+          }
+        ]
+      }
