@@ -10,12 +10,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: default
     count: 2
-    engineSelector:
-      matchLabels:
-        testing.upbound.io/example-name: default
-    engineVersionSelector:
-      matchLabels:
-        testing.upbound.io/example-name: default
+    engine: aurora-mysql
+    engineVersion: ${aws_rds_cluster.default.engine_version}
     instanceClass: db.r4.large
     region: us-west-1
 

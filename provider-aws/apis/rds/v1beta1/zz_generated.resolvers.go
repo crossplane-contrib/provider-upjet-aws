@@ -222,38 +222,6 @@ func (mg *ClusterInstance) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.DBSubnetGroupNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Engine),
-		Extract:      resource.ExtractParamPath("engine", false),
-		Reference:    mg.Spec.ForProvider.EngineRef,
-		Selector:     mg.Spec.ForProvider.EngineSelector,
-		To: reference.To{
-			List:    &ClusterList{},
-			Managed: &Cluster{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.Engine")
-	}
-	mg.Spec.ForProvider.Engine = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.EngineRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EngineVersion),
-		Extract:      resource.ExtractParamPath("engine_version", false),
-		Reference:    mg.Spec.ForProvider.EngineVersionRef,
-		Selector:     mg.Spec.ForProvider.EngineVersionSelector,
-		To: reference.To{
-			List:    &ClusterList{},
-			Managed: &Cluster{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.EngineVersion")
-	}
-	mg.Spec.ForProvider.EngineVersion = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.EngineVersionRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MonitoringRoleArn),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.MonitoringRoleArnRef,
@@ -625,22 +593,6 @@ func (mg *ProxyTarget) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.DBProxyName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DBProxyNameRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetGroupName),
-		Extract:      resource.ExtractParamPath("name", true),
-		Reference:    mg.Spec.ForProvider.TargetGroupNameRef,
-		Selector:     mg.Spec.ForProvider.TargetGroupNameSelector,
-		To: reference.To{
-			List:    &ProxyDefaultTargetGroupList{},
-			Managed: &ProxyDefaultTargetGroup{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.TargetGroupName")
-	}
-	mg.Spec.ForProvider.TargetGroupName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.TargetGroupNameRef = rsp.ResolvedReference
 
 	return nil
 }

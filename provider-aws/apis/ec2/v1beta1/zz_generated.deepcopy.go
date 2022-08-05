@@ -4456,16 +4456,6 @@ func (in *NetworkACLRuleParameters) DeepCopyInto(out *NetworkACLRuleParameters) 
 		*out = new(string)
 		**out = **in
 	}
-	if in.CidrBlockRef != nil {
-		in, out := &in.CidrBlockRef, &out.CidrBlockRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.CidrBlockSelector != nil {
-		in, out := &in.CidrBlockSelector, &out.CidrBlockSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.Egress != nil {
 		in, out := &in.Egress, &out.Egress
 		*out = new(bool)
@@ -9188,16 +9178,6 @@ func (in *TransitGatewayPeeringAttachmentParameters) DeepCopyInto(out *TransitGa
 		*out = new(string)
 		**out = **in
 	}
-	if in.PeerAccountIDRef != nil {
-		in, out := &in.PeerAccountIDRef, &out.PeerAccountIDRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.PeerAccountIDSelector != nil {
-		in, out := &in.PeerAccountIDSelector, &out.PeerAccountIDSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.PeerRegion != nil {
 		in, out := &in.PeerRegion, &out.PeerRegion
 		*out = new(string)
@@ -11164,16 +11144,6 @@ func (in *VPCEndpointParameters) DeepCopyInto(out *VPCEndpointParameters) {
 		in, out := &in.VPCEndpointType, &out.VPCEndpointType
 		*out = new(string)
 		**out = **in
-	}
-	if in.VPCEndpointTypeRef != nil {
-		in, out := &in.VPCEndpointTypeRef, &out.VPCEndpointTypeRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.VPCEndpointTypeSelector != nil {
-		in, out := &in.VPCEndpointTypeSelector, &out.VPCEndpointTypeSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.VPCID != nil {
 		in, out := &in.VPCID, &out.VPCID

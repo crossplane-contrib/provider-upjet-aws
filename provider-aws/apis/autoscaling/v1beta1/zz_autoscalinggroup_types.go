@@ -230,16 +230,8 @@ type LaunchTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.LaunchTemplate
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("latest_version",true)
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	VersionRef *v1.Reference `json:"versionRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
 }
 
 type LaunchTemplateSpecificationObservation struct {

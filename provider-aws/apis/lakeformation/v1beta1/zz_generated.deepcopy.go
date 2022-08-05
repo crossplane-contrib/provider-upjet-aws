@@ -825,16 +825,6 @@ func (in *TableWithColumnsParameters) DeepCopyInto(out *TableWithColumnsParamete
 		*out = new(string)
 		**out = **in
 	}
-	if in.DatabaseNameRef != nil {
-		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.DatabaseNameSelector != nil {
-		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.ExcludedColumnNames != nil {
 		in, out := &in.ExcludedColumnNames, &out.ExcludedColumnNames
 		*out = make([]*string, len(*in))

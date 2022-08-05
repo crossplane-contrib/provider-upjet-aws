@@ -118,24 +118,6 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		mg.Spec.ForProvider.LaunchTemplate[i3].IDRef = rsp.ResolvedReference
 
 	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchTemplate); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchTemplate[i3].Version),
-			Extract:      resource.ExtractParamPath("latest_version", true),
-			Reference:    mg.Spec.ForProvider.LaunchTemplate[i3].VersionRef,
-			Selector:     mg.Spec.ForProvider.LaunchTemplate[i3].VersionSelector,
-			To: reference.To{
-				List:    &v1beta12.LaunchTemplateList{},
-				Managed: &v1beta12.LaunchTemplate{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.LaunchTemplate[i3].Version")
-		}
-		mg.Spec.ForProvider.LaunchTemplate[i3].Version = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.LaunchTemplate[i3].VersionRef = rsp.ResolvedReference
-
-	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.MixedInstancesPolicy); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.MixedInstancesPolicy[i3].LaunchTemplate); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].LaunchTemplateSpecification); i5++ {

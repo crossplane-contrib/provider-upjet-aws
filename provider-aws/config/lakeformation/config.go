@@ -13,5 +13,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_lakeformation_permissions", func(r *config.Resource) {
 		delete(r.References, "principal")
+		delete(r.References, "table_with_columns.database_name")
 	})
 }

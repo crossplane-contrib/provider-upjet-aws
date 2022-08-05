@@ -1,0 +1,17 @@
+apiVersion: dax.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  labels:
+    testing.upbound.io/example-name: bar
+  name: bar
+spec:
+  forProvider:
+    iamRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_iam_role
+    nodeType: dax.r4.large
+    region: us-west-1
+    replicationFactor: 1
+
+---
+

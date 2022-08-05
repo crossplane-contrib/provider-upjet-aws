@@ -6,9 +6,7 @@ metadata:
   name: bar
 spec:
   forProvider:
-    cidrBlockSelector:
-      matchLabels:
-        testing.upbound.io/example-name: foo
+    cidrBlock: ${aws_vpc.foo.cidr_block}
     egress: false
     fromPort: 22
     networkAclIdSelector:

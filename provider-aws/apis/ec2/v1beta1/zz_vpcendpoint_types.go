@@ -80,16 +80,8 @@ type VPCEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPCEndpointService
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("service_type",true)
 	// +kubebuilder:validation:Optional
 	VPCEndpointType *string `json:"vpcEndpointType,omitempty" tf:"vpc_endpoint_type,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	VPCEndpointTypeRef *v1.Reference `json:"vpcEndpointTypeRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	VPCEndpointTypeSelector *v1.Selector `json:"vpcEndpointTypeSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional

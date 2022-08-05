@@ -53,12 +53,8 @@ spec:
     clusterIdentifierSelector:
       matchLabels:
         testing.upbound.io/example-name: default
-    engineSelector:
-      matchLabels:
-        testing.upbound.io/example-name: default
-    engineVersionSelector:
-      matchLabels:
-        testing.upbound.io/example-name: default
+    engine: ${aws_rds_cluster.default.engine}
+    engineVersion: ${aws_rds_cluster.default.engine_version}
     instanceClass: db.t2.small
     region: us-west-1
 
@@ -76,12 +72,8 @@ spec:
     clusterIdentifierSelector:
       matchLabels:
         testing.upbound.io/example-name: default
-    engineSelector:
-      matchLabels:
-        testing.upbound.io/example-name: default
-    engineVersionSelector:
-      matchLabels:
-        testing.upbound.io/example-name: default
+    engine: ${aws_rds_cluster.default.engine}
+    engineVersion: ${aws_rds_cluster.default.engine_version}
     instanceClass: db.t2.small
     region: us-west-1
 
@@ -99,12 +91,8 @@ spec:
     clusterIdentifierSelector:
       matchLabels:
         testing.upbound.io/example-name: default
-    engineSelector:
-      matchLabels:
-        testing.upbound.io/example-name: default
-    engineVersionSelector:
-      matchLabels:
-        testing.upbound.io/example-name: default
+    engine: ${aws_rds_cluster.default.engine}
+    engineVersion: ${aws_rds_cluster.default.engine_version}
     instanceClass: db.t2.small
     region: us-west-1
 

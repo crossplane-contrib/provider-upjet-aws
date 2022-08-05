@@ -3075,16 +3075,6 @@ func (in *UserDefinedFunctionParameters) DeepCopyInto(out *UserDefinedFunctionPa
 		*out = new(string)
 		**out = **in
 	}
-	if in.CatalogIDRef != nil {
-		in, out := &in.CatalogIDRef, &out.CatalogIDRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.CatalogIDSelector != nil {
-		in, out := &in.CatalogIDSelector, &out.CatalogIDSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.ClassName != nil {
 		in, out := &in.ClassName, &out.ClassName
 		*out = new(string)

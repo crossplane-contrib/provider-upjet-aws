@@ -6,9 +6,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    peerAccountIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: peer
+    peerAccountId: ${aws_ec2_transit_gateway.peer.owner_id}
     peerRegion: ${data.aws_region.peer.name}
     peerTransitGatewayIdSelector:
       matchLabels:

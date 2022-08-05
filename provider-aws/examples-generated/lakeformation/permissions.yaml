@@ -13,9 +13,7 @@ spec:
     tableWithColumns:
     - columnNames:
       - event
-      databaseNameSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
+      databaseName: ${aws_glue_catalog_table.example.database_name}
       nameSelector:
         matchLabels:
           testing.upbound.io/example-name: example

@@ -61,24 +61,6 @@ func (mg *Permissions) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.TableWithColumns); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableWithColumns[i3].DatabaseName),
-			Extract:      resource.ExtractParamPath("database_name", false),
-			Reference:    mg.Spec.ForProvider.TableWithColumns[i3].DatabaseNameRef,
-			Selector:     mg.Spec.ForProvider.TableWithColumns[i3].DatabaseNameSelector,
-			To: reference.To{
-				List:    &v1beta1.CatalogTableList{},
-				Managed: &v1beta1.CatalogTable{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.TableWithColumns[i3].DatabaseName")
-		}
-		mg.Spec.ForProvider.TableWithColumns[i3].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.TableWithColumns[i3].DatabaseNameRef = rsp.ResolvedReference
-
-	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.TableWithColumns); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableWithColumns[i3].Name),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.TableWithColumns[i3].NameRef,

@@ -65,9 +65,7 @@ spec:
     clusterIdentifierSelector:
       matchLabels:
         testing.upbound.io/example-name: default
-    engineSelector:
-      matchLabels:
-        testing.upbound.io/example-name: default
+    engine: aurora-postgresql
     instanceClass: db.r6g.large
     region: us-west-1
 

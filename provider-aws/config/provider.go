@@ -7,9 +7,9 @@ package config
 import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
-	"github.com/upbound/upjet/pkg/registry/reference"
 
 	"github.com/upbound/upjet/pkg/config"
+	"github.com/upbound/upjet/pkg/registry/reference"
 
 	"github.com/upbound/official-providers/provider-aws/config/acm"
 	"github.com/upbound/official-providers/provider-aws/config/acmpca"
@@ -17,6 +17,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/autoscaling"
 	"github.com/upbound/official-providers/provider-aws/config/backup"
 	"github.com/upbound/official-providers/provider-aws/config/cloudfront"
+	"github.com/upbound/official-providers/provider-aws/config/dax"
 	"github.com/upbound/official-providers/provider-aws/config/docdb"
 	"github.com/upbound/official-providers/provider-aws/config/dynamodb"
 	"github.com/upbound/official-providers/provider-aws/config/ebs"
@@ -152,6 +153,7 @@ func GetProvider() *config.Provider {
 		kafka.Configure,
 		lakeformation.Configure,
 		route53resolver.Configure,
+		dax.Configure,
 	} {
 		configure(pc)
 	}

@@ -21,16 +21,8 @@ type TransitGatewayPeeringAttachmentObservation struct {
 
 type TransitGatewayPeeringAttachmentParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGateway
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("owner_id",true)
 	// +kubebuilder:validation:Optional
 	PeerAccountID *string `json:"peerAccountId,omitempty" tf:"peer_account_id,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PeerAccountIDRef *v1.Reference `json:"peerAccountIdRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	PeerAccountIDSelector *v1.Selector `json:"peerAccountIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	PeerRegion *string `json:"peerRegion" tf:"peer_region,omitempty"`

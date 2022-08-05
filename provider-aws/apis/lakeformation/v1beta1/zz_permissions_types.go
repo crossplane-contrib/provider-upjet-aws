@@ -120,16 +120,8 @@ type TableWithColumnsParameters struct {
 	// +kubebuilder:validation:Optional
 	ColumnNames []*string `json:"columnNames,omitempty" tf:"column_names,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogTable
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("database_name",false)
-	// +kubebuilder:validation:Optional
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`

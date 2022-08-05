@@ -1,0 +1,30 @@
+apiVersion: efs.aws.upbound.io/v1beta1
+kind: BackupPolicy
+metadata:
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy
+spec:
+  forProvider:
+    backupPolicy:
+    - status: ENABLED
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: fs
+    region: us-west-1
+
+---
+
+apiVersion: efs.aws.upbound.io/v1beta1
+kind: FileSystem
+metadata:
+  labels:
+    testing.upbound.io/example-name: fs
+  name: fs
+spec:
+  forProvider:
+    creationToken: my-product
+    region: us-west-1
+
+---
+

@@ -127,6 +127,7 @@ func Configure(p *config.Provider) {
 		// aws_vpc_endpoint_route_table_association
 		// aws_vpc_endpoint_security_group_association
 		config.MoveToStatus(r.TerraformResource, "subnet_ids", "security_group_ids", "route_table_ids")
+		delete(r.References, "vpc_endpoint_type")
 	})
 
 	p.AddResourceConfigurator("aws_subnet", func(r *config.Resource) {
@@ -252,4 +253,11 @@ func Configure(p *config.Provider) {
 		config.MoveToStatus(r.TerraformResource, "allowed_principals")
 	})
 
+	p.AddResourceConfigurator("aws_network_acl_rule", func(r *config.Resource) {
+		delete(r.References, "cidr_block")
+	})
+
+	p.AddResourceConfigurator("aws_ec2_transit_gateway_peering_attachment", func(r *config.Resource) {
+		delete(r.References, "peer_account_id")
+	})
 }

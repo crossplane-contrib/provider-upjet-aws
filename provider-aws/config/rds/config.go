@@ -52,6 +52,8 @@ func Configure(p *config.Provider) {
 		r.References["db_subnet_group_name"] = config.Reference{
 			Type: "SubnetGroup",
 		}
+		delete(r.References, "engine")
+		delete(r.References, "engine_version")
 		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_db_instance", func(r *config.Resource) {
@@ -79,5 +81,9 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_db_option_group", func(r *config.Resource) {
 		delete(r.References, "option.option_settings.value")
+	})
+
+	p.AddResourceConfigurator("aws_db_proxy_target", func(r *config.Resource) {
+		delete(r.References, "target_group_name")
 	})
 }

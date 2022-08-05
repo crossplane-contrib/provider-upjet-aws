@@ -84,28 +84,6 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration); i5++ {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration[i5].DatabaseName),
-					Extract:      resource.ExtractParamPath("database_name", false),
-					Reference:    mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration[i5].DatabaseNameRef,
-					Selector:     mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration[i5].DatabaseNameSelector,
-					To: reference.To{
-						List:    &v1beta12.CatalogTableList{},
-						Managed: &v1beta12.CatalogTable{},
-					},
-				})
-				if err != nil {
-					return errors.Wrap(err, "mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration[i5].DatabaseName")
-				}
-				mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration[i5].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
-				mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration[i5].DatabaseNameRef = rsp.ResolvedReference
-
-			}
-		}
-	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.ExtendedS3Configuration); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration); i4++ {
-			for i5 := 0; i5 < len(mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration); i5++ {
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration[i5].RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
 					Reference:    mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration[i5].RoleArnRef,

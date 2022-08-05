@@ -19,16 +19,8 @@ type NetworkACLRuleObservation struct {
 
 type NetworkACLRuleParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("cidr_block",false)
 	// +kubebuilder:validation:Optional
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	CidrBlockRef *v1.Reference `json:"cidrBlockRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	CidrBlockSelector *v1.Selector `json:"cidrBlockSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Egress *bool `json:"egress,omitempty" tf:"egress,omitempty"`
