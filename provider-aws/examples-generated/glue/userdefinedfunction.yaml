@@ -6,9 +6,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    catalogIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    catalogId: ${aws_glue_catalog_database.example.catalog_id}
     className: class
     databaseNameSelector:
       matchLabels:
@@ -29,7 +27,8 @@ metadata:
     testing.upbound.io/example-name: example
   name: example
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 

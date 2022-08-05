@@ -9,10 +9,9 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
-	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1"
-	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -48,7 +47,7 @@ func (mg *Distribution) ResolveReferences(ctx context.Context, c client.Reader) 
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn),
-				Extract:      resource.ExtractParamPath("qualifiedArn", true),
+				Extract:      resource.ExtractParamPath("qualified_arn", true),
 				Reference:    mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnRef,
 				Selector:     mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnSelector,
 				To: reference.To{
@@ -65,28 +64,10 @@ func (mg *Distribution) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Origin); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Origin[i3].DomainName),
-			Extract:      resource.ExtractParamPath("bucketRegionalDomainName", true),
-			Reference:    mg.Spec.ForProvider.Origin[i3].DomainNameRef,
-			Selector:     mg.Spec.ForProvider.Origin[i3].DomainNameSelector,
-			To: reference.To{
-				List:    &v1beta11.BucketList{},
-				Managed: &v1beta11.Bucket{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Origin[i3].DomainName")
-		}
-		mg.Spec.ForProvider.Origin[i3].DomainName = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.Origin[i3].DomainNameRef = rsp.ResolvedReference
-
-	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Origin); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Origin[i3].S3OriginConfig); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Origin[i3].S3OriginConfig[i4].OriginAccessIdentity),
-				Extract:      resource.ExtractParamPath("cloudfrontAccessIdentityPath", true),
+				Extract:      resource.ExtractParamPath("cloudfront_access_identity_path", true),
 				Reference:    mg.Spec.ForProvider.Origin[i3].S3OriginConfig[i4].OriginAccessIdentityRef,
 				Selector:     mg.Spec.ForProvider.Origin[i3].S3OriginConfig[i4].OriginAccessIdentitySelector,
 				To: reference.To{
@@ -211,8 +192,8 @@ func (mg *RealtimeLogConfig) ResolveReferences(ctx context.Context, c client.Rea
 				Reference:    mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig[i4].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig[i4].RoleArnSelector,
 				To: reference.To{
-					List:    &v1beta12.RoleList{},
-					Managed: &v1beta12.Role{},
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
 				},
 			})
 			if err != nil {
@@ -231,8 +212,8 @@ func (mg *RealtimeLogConfig) ResolveReferences(ctx context.Context, c client.Rea
 				Reference:    mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig[i4].StreamArnRef,
 				Selector:     mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig[i4].StreamArnSelector,
 				To: reference.To{
-					List:    &v1beta13.StreamList{},
-					Managed: &v1beta13.Stream{},
+					List:    &v1beta12.StreamList{},
+					Managed: &v1beta12.Stream{},
 				},
 			})
 			if err != nil {

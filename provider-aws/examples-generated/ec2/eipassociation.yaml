@@ -24,6 +24,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    region: us-west-1
     vpc: true
 
 ---
@@ -39,6 +40,7 @@ spec:
     ami: ami-21f78e11
     availabilityZone: us-west-2a
     instanceType: t2.micro
+    region: us-west-1
     tags:
       Name: HelloWorld
 

@@ -61,7 +61,8 @@ metadata:
     testing.upbound.io/example-name: test
   name: test
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -103,6 +104,7 @@ spec:
     - ignore_changes:
       - ${tags["LogDeliveryEnabled"]}
     name: terraform-kinesis-firehose-msk-broker-logs-stream
+    region: us-west-1
     s3Configuration:
     - bucketArnSelector:
         matchLabels:
@@ -124,6 +126,7 @@ metadata:
 spec:
   forProvider:
     description: example
+    region: us-west-1
 
 ---
 
@@ -134,7 +137,8 @@ metadata:
     testing.upbound.io/example-name: bucket
   name: bucket
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -149,6 +153,7 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: bucket
+    region: us-west-1
 
 ---
 
@@ -160,6 +165,7 @@ metadata:
   name: sg
 spec:
   forProvider:
+    region: us-west-1
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc
@@ -176,6 +182,7 @@ spec:
   forProvider:
     availabilityZone: ${data.aws_availability_zones.azs.names[0]}
     cidrBlock: 192.168.0.0/24
+    region: us-west-1
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc
@@ -192,6 +199,7 @@ spec:
   forProvider:
     availabilityZone: ${data.aws_availability_zones.azs.names[1]}
     cidrBlock: 192.168.1.0/24
+    region: us-west-1
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc
@@ -208,6 +216,7 @@ spec:
   forProvider:
     availabilityZone: ${data.aws_availability_zones.azs.names[2]}
     cidrBlock: 192.168.2.0/24
+    region: us-west-1
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc
@@ -223,6 +232,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 192.168.0.0/22
+    region: us-west-1
 
 ---
 

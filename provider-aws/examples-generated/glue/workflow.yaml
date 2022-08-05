@@ -28,6 +28,7 @@ spec:
           matchLabels:
             testing.upbound.io/example-name: example
         state: SUCCEEDED
+    region: us-west-1
     type: CONDITIONAL
     workflowName: example
 
@@ -45,6 +46,7 @@ spec:
     - jobNameSelector:
         matchLabels:
           testing.upbound.io/example-name: example
+    region: us-west-1
     type: ON_DEMAND
     workflowName: example
 

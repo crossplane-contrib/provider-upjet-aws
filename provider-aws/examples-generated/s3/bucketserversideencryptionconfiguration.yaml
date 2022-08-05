@@ -29,6 +29,7 @@ spec:
   forProvider:
     deletionWindowInDays: 10
     description: This key is used to encrypt bucket objects
+    region: us-west-1
 
 ---
 
@@ -39,7 +40,8 @@ metadata:
     testing.upbound.io/example-name: mybucket
   name: mybucket
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 

@@ -28,6 +28,7 @@ spec:
     addressFamily: IPv4
     maxEntries: 5
     name: All VPC CIDR-s
+    region: us-west-1
     tags:
       Env: live
 

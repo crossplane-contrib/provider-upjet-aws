@@ -37,16 +37,8 @@ type QueryLogParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/route53/v1beta1.Zone
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("zoneId",true)
-	// +kubebuilder:validation:Optional
-	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	ZoneIDRef *v1.Reference `json:"zoneIdRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	ZoneIDSelector *v1.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	ZoneID *string `json:"zoneId" tf:"zone_id,omitempty"`
 }
 
 // QueryLogSpec defines the desired state of QueryLog

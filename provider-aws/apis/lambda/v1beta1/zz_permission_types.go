@@ -62,16 +62,8 @@ type PermissionParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceAccount *string `json:"sourceAccount,omitempty" tf:"source_account,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	SourceArnRef *v1.Reference `json:"sourceArnRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	SourceArnSelector *v1.Selector `json:"sourceArnSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`

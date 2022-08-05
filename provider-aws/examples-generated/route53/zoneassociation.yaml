@@ -28,6 +28,7 @@ spec:
     - ignore_changes:
       - ${vpc}
     name: example.com
+    region: us-west-1
 
 ---
 
@@ -42,6 +43,7 @@ spec:
     cidrBlock: 10.6.0.0/16
     enableDnsHostnames: true
     enableDnsSupport: true
+    region: us-west-1
 
 ---
 
@@ -56,6 +58,7 @@ spec:
     cidrBlock: 10.7.0.0/16
     enableDnsHostnames: true
     enableDnsSupport: true
+    region: us-west-1
 
 ---
 

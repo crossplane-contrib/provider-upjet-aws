@@ -24,7 +24,8 @@ metadata:
     testing.upbound.io/example-name: example
   name: example
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -35,7 +36,8 @@ metadata:
     testing.upbound.io/example-name: log_bucket
   name: log-bucket
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -50,6 +52,7 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    region: us-west-1
 
 ---
 
@@ -64,6 +67,7 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: log_bucket
+    region: us-west-1
 
 ---
 

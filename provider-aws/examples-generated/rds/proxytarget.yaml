@@ -13,9 +13,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     region: us-west-1
-    targetGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    targetGroupName: ${aws_db_proxy_default_target_group.example.name}
 
 ---
 
@@ -37,6 +35,7 @@ spec:
     debugLogging: false
     engineFamily: MYSQL
     idleClientTimeout: 1800
+    region: us-west-1
     requireTls: true
     roleArnSelector:
       matchLabels:
@@ -69,6 +68,7 @@ spec:
     dbProxyNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    region: us-west-1
 
 ---
 

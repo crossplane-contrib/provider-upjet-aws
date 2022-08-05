@@ -10,9 +10,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: aws_route53_example_com
     region: us-west-1
-    zoneIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example_com
+    zoneId: ${aws_route53_zone.example_com.zone_id}
 
 ---
 
@@ -25,6 +23,7 @@ metadata:
 spec:
   forProvider:
     provider: ${aws.us-east-1}
+    region: us-west-1
     retentionInDays: 30
 
 ---
@@ -38,6 +37,7 @@ metadata:
 spec:
   forProvider:
     name: example.com
+    region: us-west-1
 
 ---
 

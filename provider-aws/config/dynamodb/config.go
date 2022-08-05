@@ -31,5 +31,6 @@ func Configure(p *config.Provider) {
 		r.References["table_name"] = config.Reference{
 			Type: "Table",
 		}
+		delete(r.References, "hash_key")
 	})
 }

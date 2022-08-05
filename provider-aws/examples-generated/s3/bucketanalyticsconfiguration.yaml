@@ -28,7 +28,8 @@ metadata:
     testing.upbound.io/example-name: analytics
   name: analytics
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -39,7 +40,8 @@ metadata:
     testing.upbound.io/example-name: example
   name: example
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 

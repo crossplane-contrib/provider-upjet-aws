@@ -43,6 +43,7 @@ metadata:
 spec:
   forProvider:
     identityProviderType: SERVICE_MANAGED
+    region: us-west-1
     tags:
       NAME: tf-acc-test-transfer-server
 

@@ -556,6 +556,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_efs_file_system": config.IdentifierFromProvider,
 	// The EFS mount targets can be imported using the id
 	"aws_efs_mount_target": config.IdentifierFromProvider,
+	// The EFS access points can be imported using the id
+	"aws_efs_access_point": config.IdentifierFromProvider,
+	// The EFS backup policies can be imported using the id
+	"aws_efs_backup_policy": config.IdentifierFromProvider,
+	// The EFS file system policies can be imported using the id
+	"aws_efs_file_system_policy": config.IdentifierFromProvider,
 
 	// servicediscovery
 	//
@@ -782,6 +788,15 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_sfn_activity": config.IdentifierFromProvider,
 	// State Machines can be imported using the arn
 	"aws_sfn_state_machine": config.IdentifierFromProvider,
+
+	// dax
+	//
+	// DAX Clusters can be imported using the cluster_name
+	"aws_dax_cluster": ParameterAsExternalName("cluster_name"),
+	// DAX Parameter Group can be imported using the name
+	"aws_dax_parameter_group": config.NameAsIdentifier,
+	// DAX Subnet Group can be imported using the name
+	"aws_dax_subnet_group": config.NameAsIdentifier,
 }
 
 func lambdaFunctionURL() config.ExternalName {

@@ -34,6 +34,7 @@ spec:
     domains:
     - example.com
     name: example
+    region: us-west-1
     tags: {}
 
 ---
@@ -47,6 +48,7 @@ metadata:
 spec:
   forProvider:
     name: example
+    region: us-west-1
     tags: {}
 
 ---

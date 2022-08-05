@@ -25,6 +25,7 @@ metadata:
 spec:
   forProvider:
     multicastSupport: enable
+    region: us-west-1
 
 ---
 
@@ -36,6 +37,7 @@ metadata:
   name: association1
 spec:
   forProvider:
+    region: us-west-1
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: subnet1
@@ -56,6 +58,7 @@ metadata:
   name: association2
 spec:
   forProvider:
+    region: us-west-1
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: subnet2
@@ -76,6 +79,7 @@ metadata:
   name: association3
 spec:
   forProvider:
+    region: us-west-1
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: subnet3
@@ -100,6 +104,7 @@ spec:
     networkInterfaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: instance1
+    region: us-west-1
     transitGatewayMulticastDomainIdSelector:
       matchLabels:
         testing.upbound.io/example-name: association1
@@ -118,6 +123,7 @@ spec:
     networkInterfaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: instance2
+    region: us-west-1
     transitGatewayMulticastDomainIdSelector:
       matchLabels:
         testing.upbound.io/example-name: association1
@@ -136,6 +142,7 @@ spec:
     networkInterfaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: instance3
+    region: us-west-1
     transitGatewayMulticastDomainIdSelector:
       matchLabels:
         testing.upbound.io/example-name: association3
@@ -150,6 +157,7 @@ metadata:
   name: attachment1
 spec:
   forProvider:
+    region: us-west-1
     subnetIdRefs:
     - name: subnet1
     - name: subnet2
@@ -170,6 +178,7 @@ metadata:
   name: attachment2
 spec:
   forProvider:
+    region: us-west-1
     subnetIdRefs:
     - name: subnet3
     transitGatewayIdSelector:
@@ -191,6 +200,7 @@ spec:
   forProvider:
     ami: ${data.aws_ami.amazon_linux.id}
     instanceType: t2.micro
+    region: us-west-1
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: subnet1
@@ -207,6 +217,7 @@ spec:
   forProvider:
     ami: ${data.aws_ami.amazon_linux.id}
     instanceType: t2.micro
+    region: us-west-1
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: subnet2
@@ -223,6 +234,7 @@ spec:
   forProvider:
     ami: ${data.aws_ami.amazon_linux.id}
     instanceType: t2.micro
+    region: us-west-1
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: subnet3
@@ -239,6 +251,7 @@ spec:
   forProvider:
     availabilityZone: ${data.aws_availability_zones.available.names[0]}
     cidrBlock: 10.0.1.0/24
+    region: us-west-1
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc1
@@ -255,6 +268,7 @@ spec:
   forProvider:
     availabilityZone: ${data.aws_availability_zones.available.names[1]}
     cidrBlock: 10.0.2.0/24
+    region: us-west-1
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc1
@@ -271,6 +285,7 @@ spec:
   forProvider:
     availabilityZone: ${data.aws_availability_zones.available.names[0]}
     cidrBlock: 10.1.1.0/24
+    region: us-west-1
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc2
@@ -286,6 +301,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
+    region: us-west-1
 
 ---
 
@@ -298,6 +314,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.1.0.0/16
+    region: us-west-1
 
 ---
 

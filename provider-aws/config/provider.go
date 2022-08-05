@@ -9,9 +9,9 @@ import (
 	_ "embed"
 	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
 	"github.com/pkg/errors"
-	"github.com/upbound/upjet/pkg/registry/reference"
 
 	"github.com/upbound/upjet/pkg/config"
+	"github.com/upbound/upjet/pkg/registry/reference"
 
 	"github.com/upbound/official-providers/provider-aws/config/acm"
 	"github.com/upbound/official-providers/provider-aws/config/acmpca"
@@ -19,6 +19,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/autoscaling"
 	"github.com/upbound/official-providers/provider-aws/config/backup"
 	"github.com/upbound/official-providers/provider-aws/config/cloudfront"
+	"github.com/upbound/official-providers/provider-aws/config/dax"
 	"github.com/upbound/official-providers/provider-aws/config/docdb"
 	"github.com/upbound/official-providers/provider-aws/config/dynamodb"
 	"github.com/upbound/official-providers/provider-aws/config/ebs"
@@ -42,6 +43,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/kinesisanalytics"
 	kinesisanalytics2 "github.com/upbound/official-providers/provider-aws/config/kinesisanalyticsv2"
 	"github.com/upbound/official-providers/provider-aws/config/kms"
+	"github.com/upbound/official-providers/provider-aws/config/lakeformation"
 	"github.com/upbound/official-providers/provider-aws/config/lambda"
 	"github.com/upbound/official-providers/provider-aws/config/licensemanager"
 	"github.com/upbound/official-providers/provider-aws/config/mq"
@@ -49,6 +51,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/rds"
 	"github.com/upbound/official-providers/provider-aws/config/redshift"
 	"github.com/upbound/official-providers/provider-aws/config/route53"
+	"github.com/upbound/official-providers/provider-aws/config/route53resolver"
 	"github.com/upbound/official-providers/provider-aws/config/s3"
 	"github.com/upbound/official-providers/provider-aws/config/servicediscovery"
 	"github.com/upbound/official-providers/provider-aws/config/sfn"
@@ -94,13 +97,15 @@ func setDefaultRegion(object *fieldpath.Paved, r *config.Resource) error {
 
 // GetProvider returns provider configuration
 func GetProvider() *config.Provider {
+	modulePath := "github.com/upbound/official-providers/provider-aws"
 	pc := config.NewProvider([]byte(providerSchema), "aws",
-		"github.com/upbound/official-providers/provider-aws", providerMetadata,
+		modulePath, providerMetadata,
 		config.WithShortName("aws"),
 		config.WithRootGroup("aws.upbound.io"),
 		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector("github.com/upbound/official-providers/provider-aws")}),
 		//config.WithExampleManifestModifier(setDefaultRegion),
 		config.WithIncludeList(ResourcesWithExternalNameConfig()),
+		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
 		config.WithSkipList(skipList),
 		config.WithDefaultResourceOptions(
 			GroupKindOverrides(),
@@ -157,6 +162,9 @@ func GetProvider() *config.Provider {
 		sfn.Configure,
 		transfer.Configure,
 		kafka.Configure,
+		lakeformation.Configure,
+		route53resolver.Configure,
+		dax.Configure,
 	} {
 		configure(pc)
 	}

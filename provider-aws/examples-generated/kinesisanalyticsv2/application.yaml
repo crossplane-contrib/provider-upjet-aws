@@ -56,7 +56,8 @@ metadata:
     testing.upbound.io/example-name: example
   name: example
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -72,6 +73,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     key: example-flink-application
+    region: us-west-1
     source: flink-app.jar
 
 ---

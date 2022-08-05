@@ -8,16 +8,12 @@ spec:
   forProvider:
     permissions:
     - SELECT
-    principalSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    principal: arn:aws:iam:us-east-1:123456789012:user/SanHolo
     region: us-west-1
     tableWithColumns:
     - columnNames:
       - event
-      databaseNameSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
+      databaseName: ${aws_glue_catalog_table.example.database_name}
       nameSelector:
         matchLabels:
           testing.upbound.io/example-name: example
@@ -31,7 +27,8 @@ metadata:
     testing.upbound.io/example-name: example
   name: example
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -46,6 +43,7 @@ spec:
     databaseNameSelector:
       matchLabels:
         testing.upbound.io/example-name: test
+    region: us-west-1
     storageDescriptor:
     - columns:
       - name: event

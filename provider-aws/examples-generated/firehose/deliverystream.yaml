@@ -86,6 +86,7 @@ spec:
   forProvider:
     filename: lambda.zip
     handler: exports.handler
+    region: us-west-1
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: lambda_iam
@@ -100,7 +101,8 @@ metadata:
     testing.upbound.io/example-name: bucket
   name: bucket
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -115,6 +117,7 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: bucket
+    region: us-west-1
 
 ---
 

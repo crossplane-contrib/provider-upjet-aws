@@ -6,9 +6,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    destinationArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    destinationArn: ${aws_s3_bucket.example.arn}
     name: example
     region: us-west-1
     tags:

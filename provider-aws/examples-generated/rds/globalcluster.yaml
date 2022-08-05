@@ -34,6 +34,7 @@ spec:
       namespace: upbound-system
     masterUsername: username
     provider: ${aws.primary}
+    region: us-west-1
 
 ---
 
@@ -52,6 +53,7 @@ spec:
     engineVersion: 5.6.mysql_aurora.1.22.2
     globalClusterIdentifier: ${aws_rds_global_cluster.example.id}
     provider: ${aws.secondary}
+    region: us-west-1
 
 ---
 
@@ -69,14 +71,11 @@ spec:
     dbSubnetGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    engineSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    engineVersionSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    engine: aurora
+    engineVersion: 5.6.mysql_aurora.1.22.2
     instanceClass: db.r4.large
     provider: ${aws.primary}
+    region: us-west-1
 
 ---
 
@@ -94,14 +93,11 @@ spec:
     dbSubnetGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    engineSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    engineVersionSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    engine: aurora
+    engineVersion: 5.6.mysql_aurora.1.22.2
     instanceClass: db.r4.large
     provider: ${aws.secondary}
+    region: us-west-1
 
 ---
 

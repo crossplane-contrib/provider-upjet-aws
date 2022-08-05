@@ -35,6 +35,7 @@ spec:
       signing_algorithm: SHA512WITHRSA
       subject:
       - common_name: example.com
+    region: us-west-1
 
 ---
 

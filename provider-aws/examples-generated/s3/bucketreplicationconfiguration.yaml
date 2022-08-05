@@ -124,7 +124,8 @@ metadata:
     testing.upbound.io/example-name: destination
   name: destination
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -137,6 +138,7 @@ metadata:
 spec:
   forProvider:
     provider: ${aws.central}
+    region: us-west-1
 
 ---
 
@@ -152,6 +154,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: source
     provider: ${aws.central}
+    region: us-west-1
 
 ---
 
@@ -166,6 +169,7 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: destination
+    region: us-west-1
     versioningConfiguration:
     - status: Enabled
 
@@ -183,6 +187,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: source
     provider: ${aws.central}
+    region: us-west-1
     versioningConfiguration:
     - status: Enabled
 

@@ -35,6 +35,7 @@ func Configure(p *config.Provider) {
 				"cluster_mode",
 			},
 		}
+		delete(r.References, "log_delivery_configuration.destination")
 		r.UseAsync = true
 	})
 

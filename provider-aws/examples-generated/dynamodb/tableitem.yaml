@@ -6,9 +6,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    hashKeySelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    hashKey: ${aws_dynamodb_table.example.hash_key}
     item: |
       {
         "exampleHashKey": {"S": "something"},
@@ -37,6 +35,7 @@ spec:
       type: S
     hashKey: exampleHashKey
     readCapacity: 10
+    region: us-west-1
     writeCapacity: 10
 
 ---

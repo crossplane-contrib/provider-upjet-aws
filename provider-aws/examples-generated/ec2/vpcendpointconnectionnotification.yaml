@@ -40,6 +40,7 @@ spec:
               "Resource": "arn:aws:sns:*:*:vpce-notification-topic"
           }]
       }
+    region: us-west-1
 
 ---
 
@@ -54,6 +55,7 @@ spec:
     acceptanceRequired: false
     networkLoadBalancerArns:
     - ${aws_lb.test.arn}
+    region: us-west-1
 
 ---
 

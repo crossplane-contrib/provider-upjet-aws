@@ -2404,16 +2404,6 @@ func (in *SchemaConfigurationParameters) DeepCopyInto(out *SchemaConfigurationPa
 		*out = new(string)
 		**out = **in
 	}
-	if in.DatabaseNameRef != nil {
-		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.DatabaseNameSelector != nil {
-		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)

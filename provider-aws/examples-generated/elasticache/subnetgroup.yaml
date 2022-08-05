@@ -22,6 +22,7 @@ spec:
   forProvider:
     availabilityZone: us-west-2a
     cidrBlock: 10.0.0.0/24
+    region: us-west-1
     tags:
       Name: tf-test
     vpcIdSelector:
@@ -39,6 +40,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
+    region: us-west-1
     tags:
       Name: tf-test
 

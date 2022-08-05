@@ -599,7 +599,7 @@ func (mg *ManagedPrefixList) ResolveReferences(ctx context.Context, c client.Rea
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Entry); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Entry[i3].Cidr),
-			Extract:      resource.ExtractParamPath("cidrBlock", false),
+			Extract:      resource.ExtractParamPath("cidr_block", false),
 			Reference:    mg.Spec.ForProvider.Entry[i3].CidrRef,
 			Selector:     mg.Spec.ForProvider.Entry[i3].CidrSelector,
 			To: reference.To{
@@ -627,7 +627,7 @@ func (mg *ManagedPrefixListEntry) ResolveReferences(ctx context.Context, c clien
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Cidr),
-		Extract:      resource.ExtractParamPath("cidrBlock", false),
+		Extract:      resource.ExtractParamPath("cidr_block", false),
 		Reference:    mg.Spec.ForProvider.CidrRef,
 		Selector:     mg.Spec.ForProvider.CidrSelector,
 		To: reference.To{
@@ -753,22 +753,6 @@ func (mg *NetworkACLRule) ResolveReferences(ctx context.Context, c client.Reader
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CidrBlock),
-		Extract:      resource.ExtractParamPath("cidrBlock", false),
-		Reference:    mg.Spec.ForProvider.CidrBlockRef,
-		Selector:     mg.Spec.ForProvider.CidrBlockSelector,
-		To: reference.To{
-			List:    &VPCList{},
-			Managed: &VPC{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.CidrBlock")
-	}
-	mg.Spec.ForProvider.CidrBlock = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.CidrBlockRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkACLID),
 		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.NetworkACLIDRef,
@@ -881,7 +865,7 @@ func (mg *NetworkInterfaceSgAttachment) ResolveReferences(ctx context.Context, c
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkInterfaceID),
-		Extract:      resource.ExtractParamPath("primaryNetworkInterfaceId", true),
+		Extract:      resource.ExtractParamPath("primary_network_interface_id", true),
 		Reference:    mg.Spec.ForProvider.NetworkInterfaceIDRef,
 		Selector:     mg.Spec.ForProvider.NetworkInterfaceIDSelector,
 		To: reference.To{
@@ -1475,22 +1459,6 @@ func (mg *TransitGatewayPeeringAttachment) ResolveReferences(ctx context.Context
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerAccountID),
-		Extract:      resource.ExtractParamPath("ownerId", true),
-		Reference:    mg.Spec.ForProvider.PeerAccountIDRef,
-		Selector:     mg.Spec.ForProvider.PeerAccountIDSelector,
-		To: reference.To{
-			List:    &TransitGatewayList{},
-			Managed: &TransitGateway{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.PeerAccountID")
-	}
-	mg.Spec.ForProvider.PeerAccountID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.PeerAccountIDRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerTransitGatewayID),
 		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.PeerTransitGatewayIDRef,
@@ -1566,7 +1534,7 @@ func (mg *TransitGatewayPrefixListReference) ResolveReferences(ctx context.Conte
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransitGatewayRouteTableID),
-		Extract:      resource.ExtractParamPath("associationDefaultRouteTableId", true),
+		Extract:      resource.ExtractParamPath("association_default_route_table_id", true),
 		Reference:    mg.Spec.ForProvider.TransitGatewayRouteTableIDRef,
 		Selector:     mg.Spec.ForProvider.TransitGatewayRouteTableIDSelector,
 		To: reference.To{
@@ -1871,7 +1839,7 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceName),
-		Extract:      resource.ExtractParamPath("serviceName", true),
+		Extract:      resource.ExtractParamPath("service_name", true),
 		Reference:    mg.Spec.ForProvider.ServiceNameRef,
 		Selector:     mg.Spec.ForProvider.ServiceNameSelector,
 		To: reference.To{
@@ -1884,22 +1852,6 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.ServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceNameRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCEndpointType),
-		Extract:      resource.ExtractParamPath("serviceType", true),
-		Reference:    mg.Spec.ForProvider.VPCEndpointTypeRef,
-		Selector:     mg.Spec.ForProvider.VPCEndpointTypeSelector,
-		To: reference.To{
-			List:    &VPCEndpointServiceList{},
-			Managed: &VPCEndpointService{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.VPCEndpointType")
-	}
-	mg.Spec.ForProvider.VPCEndpointType = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.VPCEndpointTypeRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCID),

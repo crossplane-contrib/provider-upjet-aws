@@ -10,7 +10,6 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1"
-	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -88,22 +87,6 @@ func (mg *TableItem) ResolveReferences(ctx context.Context, c client.Reader) err
 
 	var rsp reference.ResolutionResponse
 	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HashKey),
-		Extract:      resource.ExtractParamPath("hashKey", false),
-		Reference:    mg.Spec.ForProvider.HashKeyRef,
-		Selector:     mg.Spec.ForProvider.HashKeySelector,
-		To: reference.To{
-			List:    &TableList{},
-			Managed: &Table{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.HashKey")
-	}
-	mg.Spec.ForProvider.HashKey = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.HashKeyRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableName),

@@ -6,9 +6,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    eventSourceArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    eventSourceArn: ${aws_dynamodb_table.example.stream_arn}
     functionNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

@@ -6,13 +6,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    functionNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    functionName: ${aws_lambda_alias.example.function_name}
     provisionedConcurrentExecutions: 1
-    qualifierSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    qualifier: my_alias
     region: us-west-1
 
 ---

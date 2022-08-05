@@ -834,16 +834,6 @@ func (in *EventSourceMappingParameters) DeepCopyInto(out *EventSourceMappingPara
 		*out = new(string)
 		**out = **in
 	}
-	if in.EventSourceArnRef != nil {
-		in, out := &in.EventSourceArnRef, &out.EventSourceArnRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.EventSourceArnSelector != nil {
-		in, out := &in.EventSourceArnSelector, &out.EventSourceArnSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.FilterCriteria != nil {
 		in, out := &in.FilterCriteria, &out.FilterCriteria
 		*out = make([]FilterCriteriaParameters, len(*in))
@@ -1021,6 +1011,16 @@ func (in *FileSystemConfigParameters) DeepCopyInto(out *FileSystemConfigParamete
 		in, out := &in.Arn, &out.Arn
 		*out = new(string)
 		**out = **in
+	}
+	if in.ArnRef != nil {
+		in, out := &in.ArnRef, &out.ArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ArnSelector != nil {
+		in, out := &in.ArnSelector, &out.ArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LocalMountPath != nil {
 		in, out := &in.LocalMountPath, &out.LocalMountPath
@@ -1276,16 +1276,6 @@ func (in *FunctionEventInvokeConfigParameters) DeepCopyInto(out *FunctionEventIn
 		*out = new(string)
 		**out = **in
 	}
-	if in.FunctionNameRef != nil {
-		in, out := &in.FunctionNameRef, &out.FunctionNameRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.FunctionNameSelector != nil {
-		in, out := &in.FunctionNameSelector, &out.FunctionNameSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.MaximumEventAgeInSeconds != nil {
 		in, out := &in.MaximumEventAgeInSeconds, &out.MaximumEventAgeInSeconds
 		*out = new(float64)
@@ -1300,16 +1290,6 @@ func (in *FunctionEventInvokeConfigParameters) DeepCopyInto(out *FunctionEventIn
 		in, out := &in.Qualifier, &out.Qualifier
 		*out = new(string)
 		**out = **in
-	}
-	if in.QualifierRef != nil {
-		in, out := &in.QualifierRef, &out.QualifierRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.QualifierSelector != nil {
-		in, out := &in.QualifierSelector, &out.QualifierSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -2771,16 +2751,6 @@ func (in *PermissionParameters) DeepCopyInto(out *PermissionParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.SourceArnRef != nil {
-		in, out := &in.SourceArnRef, &out.SourceArnRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.SourceArnSelector != nil {
-		in, out := &in.SourceArnSelector, &out.SourceArnSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.StatementID != nil {
 		in, out := &in.StatementID, &out.StatementID
 		*out = new(string)
@@ -2959,16 +2929,6 @@ func (in *ProvisionedConcurrencyConfigParameters) DeepCopyInto(out *ProvisionedC
 		*out = new(string)
 		**out = **in
 	}
-	if in.FunctionNameRef != nil {
-		in, out := &in.FunctionNameRef, &out.FunctionNameRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.FunctionNameSelector != nil {
-		in, out := &in.FunctionNameSelector, &out.FunctionNameSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.ProvisionedConcurrentExecutions != nil {
 		in, out := &in.ProvisionedConcurrentExecutions, &out.ProvisionedConcurrentExecutions
 		*out = new(float64)
@@ -2978,16 +2938,6 @@ func (in *ProvisionedConcurrencyConfigParameters) DeepCopyInto(out *ProvisionedC
 		in, out := &in.Qualifier, &out.Qualifier
 		*out = new(string)
 		**out = **in
-	}
-	if in.QualifierRef != nil {
-		in, out := &in.QualifierRef, &out.QualifierRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.QualifierSelector != nil {
-		in, out := &in.QualifierSelector, &out.QualifierSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

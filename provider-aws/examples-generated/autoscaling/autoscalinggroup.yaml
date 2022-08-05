@@ -51,6 +51,7 @@ metadata:
   name: test
 spec:
   forProvider:
+    region: us-west-1
     strategy: cluster
 
 ---

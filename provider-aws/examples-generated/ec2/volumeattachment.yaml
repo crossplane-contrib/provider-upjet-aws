@@ -26,6 +26,7 @@ metadata:
 spec:
   forProvider:
     availabilityZone: us-west-2a
+    region: us-west-1
     size: 1
 
 ---
@@ -41,6 +42,7 @@ spec:
     ami: ami-21f78e11
     availabilityZone: us-west-2a
     instanceType: t2.micro
+    region: us-west-1
     tags:
       Name: HelloWorld
 

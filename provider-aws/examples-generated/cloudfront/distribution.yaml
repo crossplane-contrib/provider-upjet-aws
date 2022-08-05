@@ -79,9 +79,7 @@ spec:
       targetOriginId: ${local.s3_origin_id}
       viewerProtocolPolicy: redirect-to-https
     origin:
-    - domainNameSelector:
-        matchLabels:
-          testing.upbound.io/example-name: b
+    - domainName: ${aws_s3_bucket.b.bucket_regional_domain_name}
       originId: ${local.s3_origin_id}
       s3OriginConfig:
       - originAccessIdentitySelector:
@@ -112,6 +110,7 @@ metadata:
   name: b
 spec:
   forProvider:
+    region: us-west-1
     tags:
       Name: My bucket
 
@@ -128,6 +127,7 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: b
+    region: us-west-1
 
 ---
 

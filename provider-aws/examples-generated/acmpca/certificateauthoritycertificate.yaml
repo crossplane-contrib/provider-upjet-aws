@@ -36,6 +36,7 @@ spec:
       key: attribute.certificate_signing_request
       name: example-acmpca-certificate-authority
       namespace: upbound-system
+    region: us-west-1
     signingAlgorithm: SHA512WITHRSA
     templateArn: arn:${data.aws_partition.current.partition}:acm-pca:::template/RootCACertificate/V1
     validity:
@@ -57,6 +58,7 @@ spec:
       signingAlgorithm: SHA512WITHRSA
       subject:
       - commonName: example.com
+    region: us-west-1
     type: ROOT
 
 ---

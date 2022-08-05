@@ -27,7 +27,8 @@ metadata:
     testing.upbound.io/example-name: bucket
   name: bucket
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -53,6 +54,7 @@ spec:
               }
           }]
       }
+    region: us-west-1
 
 ---
 

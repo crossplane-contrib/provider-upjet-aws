@@ -10,8 +10,7 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/cloudwatchlogs/v1beta1"
-	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
-	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/elb/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -108,22 +107,6 @@ func (mg *QueryLog) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.CloudwatchLogGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CloudwatchLogGroupArnRef = rsp.ResolvedReference
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneID),
-		Extract:      resource.ExtractParamPath("zoneId", true),
-		Reference:    mg.Spec.ForProvider.ZoneIDRef,
-		Selector:     mg.Spec.ForProvider.ZoneIDSelector,
-		To: reference.To{
-			List:    &ZoneList{},
-			Managed: &Zone{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneID")
-	}
-	mg.Spec.ForProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ZoneIDRef = rsp.ResolvedReference
-
 	return nil
 }
 
@@ -134,42 +117,6 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Alias); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Alias[i3].Name),
-			Extract:      resource.ExtractParamPath("dnsName", true),
-			Reference:    mg.Spec.ForProvider.Alias[i3].NameRef,
-			Selector:     mg.Spec.ForProvider.Alias[i3].NameSelector,
-			To: reference.To{
-				List:    &v1beta12.ELBList{},
-				Managed: &v1beta12.ELB{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Alias[i3].Name")
-		}
-		mg.Spec.ForProvider.Alias[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.Alias[i3].NameRef = rsp.ResolvedReference
-
-	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Alias); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Alias[i3].ZoneID),
-			Extract:      resource.ExtractParamPath("zoneId", true),
-			Reference:    mg.Spec.ForProvider.Alias[i3].ZoneIDRef,
-			Selector:     mg.Spec.ForProvider.Alias[i3].ZoneIDSelector,
-			To: reference.To{
-				List:    &v1beta12.ELBList{},
-				Managed: &v1beta12.ELB{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Alias[i3].ZoneID")
-		}
-		mg.Spec.ForProvider.Alias[i3].ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.Alias[i3].ZoneIDRef = rsp.ResolvedReference
-
-	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HealthCheckID),
 		Extract:      reference.ExternalName(),
@@ -218,8 +165,8 @@ func (mg *VPCAssociationAuthorization) ResolveReferences(ctx context.Context, c 
 		Reference:    mg.Spec.ForProvider.VPCIDRef,
 		Selector:     mg.Spec.ForProvider.VPCIDSelector,
 		To: reference.To{
-			List:    &v1beta13.VPCList{},
-			Managed: &v1beta13.VPC{},
+			List:    &v1beta12.VPCList{},
+			Managed: &v1beta12.VPC{},
 		},
 	})
 	if err != nil {
@@ -286,8 +233,8 @@ func (mg *ZoneAssociation) ResolveReferences(ctx context.Context, c client.Reade
 		Reference:    mg.Spec.ForProvider.VPCIDRef,
 		Selector:     mg.Spec.ForProvider.VPCIDSelector,
 		To: reference.To{
-			List:    &v1beta13.VPCList{},
-			Managed: &v1beta13.VPC{},
+			List:    &v1beta12.VPCList{},
+			Managed: &v1beta12.VPC{},
 		},
 	})
 	if err != nil {

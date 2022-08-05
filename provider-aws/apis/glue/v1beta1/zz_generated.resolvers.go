@@ -12,7 +12,6 @@ import (
 	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
-	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -174,22 +173,6 @@ func (mg *UserDefinedFunction) ResolveReferences(ctx context.Context, c client.R
 
 	var rsp reference.ResolutionResponse
 	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CatalogID),
-		Extract:      resource.ExtractParamPath("catalogId", false),
-		Reference:    mg.Spec.ForProvider.CatalogIDRef,
-		Selector:     mg.Spec.ForProvider.CatalogIDSelector,
-		To: reference.To{
-			List:    &CatalogDatabaseList{},
-			Managed: &CatalogDatabase{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.CatalogID")
-	}
-	mg.Spec.ForProvider.CatalogID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.CatalogIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),

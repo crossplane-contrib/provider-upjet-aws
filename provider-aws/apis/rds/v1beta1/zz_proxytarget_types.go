@@ -60,16 +60,8 @@ type ProxyTargetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.ProxyDefaultTargetGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",true)
-	// +kubebuilder:validation:Optional
-	TargetGroupName *string `json:"targetGroupName,omitempty" tf:"target_group_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	TargetGroupNameRef *v1.Reference `json:"targetGroupNameRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	TargetGroupNameSelector *v1.Selector `json:"targetGroupNameSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	TargetGroupName *string `json:"targetGroupName" tf:"target_group_name,omitempty"`
 }
 
 // ProxyTargetSpec defines the desired state of ProxyTarget
