@@ -402,3 +402,69 @@ func (mg *UserPoolDomain) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectio
 func (mg *UserPoolDomain) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this UserPoolUICustomization.
+func (mg *UserPoolUICustomization) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this UserPoolUICustomization.
+func (mg *UserPoolUICustomization) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this UserPoolUICustomization.
+func (mg *UserPoolUICustomization) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this UserPoolUICustomization.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *UserPoolUICustomization) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this UserPoolUICustomization.
+func (mg *UserPoolUICustomization) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this UserPoolUICustomization.
+func (mg *UserPoolUICustomization) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this UserPoolUICustomization.
+func (mg *UserPoolUICustomization) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this UserPoolUICustomization.
+func (mg *UserPoolUICustomization) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this UserPoolUICustomization.
+func (mg *UserPoolUICustomization) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this UserPoolUICustomization.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *UserPoolUICustomization) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this UserPoolUICustomization.
+func (mg *UserPoolUICustomization) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this UserPoolUICustomization.
+func (mg *UserPoolUICustomization) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

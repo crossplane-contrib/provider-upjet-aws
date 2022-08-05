@@ -48,6 +48,7 @@ import (
 	userpool "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpool"
 	userpoolclient "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpoolclient"
 	userpooldomain "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpooldomain"
+	userpooluicustomization "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpooluicustomization"
 	cluster "github.com/upbound/official-providers/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/official-providers/provider-aws/internal/controller/dax/parametergroup"
 	subnetgroup "github.com/upbound/official-providers/provider-aws/internal/controller/dax/subnetgroup"
@@ -349,6 +350,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userpool.Setup,
 		userpoolclient.Setup,
 		userpooldomain.Setup,
+		userpooluicustomization.Setup,
 		cluster.Setup,
 		parametergroup.Setup,
 		subnetgroup.Setup,

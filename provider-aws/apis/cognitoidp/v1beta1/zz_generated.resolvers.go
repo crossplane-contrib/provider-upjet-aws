@@ -159,3 +159,45 @@ func (mg *UserPoolDomain) ResolveReferences(ctx context.Context, c client.Reader
 
 	return nil
 }
+
+// ResolveReferences of this UserPoolUICustomization.
+func (mg *UserPoolUICustomization) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClientID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ClientIDRef,
+		Selector:     mg.Spec.ForProvider.ClientIDSelector,
+		To: reference.To{
+			List:    &UserPoolClientList{},
+			Managed: &UserPoolClient{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClientID")
+	}
+	mg.Spec.ForProvider.ClientID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClientIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserPoolID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.UserPoolIDRef,
+		Selector:     mg.Spec.ForProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.UserPoolID")
+	}
+	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
+
+	return nil
+}

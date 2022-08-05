@@ -60,9 +60,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cognito_user_pool_client": config.IdentifierFromProvider,
 	// auth.example.org
 	"aws_cognito_user_pool_domain": config.IdentifierFromProvider,
+	// us-west-2_ZCTarbt5C,12bu4fuk3mlgqa2rtrujgp6egq
+	"aws_cognito_user_pool_ui_customization": config.IdentifierFromProvider,
 	// aws_cognito_user_group.group us-east-1_vG78M4goG/user-group
 	"aws_cognito_user_group": config.IdentifierFromProvider,
-	// us-west-2_abc123:https://example.com
+	// us-west-2_abc123|https://example.com
 	"aws_cognito_resource_server": config.IdentifierFromProvider,
 	// us-west-2_abc123:CorpAD
 	"aws_cognito_identity_provider": config.IdentifierFromProvider,
