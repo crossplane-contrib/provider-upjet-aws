@@ -21,7 +21,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.b.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: b
     region: us-west-1
 
 ---

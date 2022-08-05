@@ -370,8 +370,16 @@ type OrderedCacheBehaviorFunctionAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	EventType *string `json:"eventType" tf:"event_type,omitempty"`
 
-	// +kubebuilder:validation:Required
-	FunctionArn *string `json:"functionArn" tf:"function_arn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorLambdaFunctionAssociationObservation struct {
@@ -385,8 +393,16 @@ type OrderedCacheBehaviorLambdaFunctionAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	IncludeBody *bool `json:"includeBody,omitempty" tf:"include_body,omitempty"`
 
-	// +kubebuilder:validation:Required
-	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("qualified_arn",true)
+	// +kubebuilder:validation:Optional
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	LambdaArnRef *v1.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	LambdaArnSelector *v1.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorObservation struct {
@@ -487,8 +503,16 @@ type OriginParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomOriginConfig []CustomOriginConfigParameters `json:"customOriginConfig,omitempty" tf:"custom_origin_config,omitempty"`
 
-	// +kubebuilder:validation:Required
-	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("bucket_regional_domain_name",true)
+	// +kubebuilder:validation:Optional
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DomainNameRef *v1.Reference `json:"domainNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	OriginID *string `json:"originId" tf:"origin_id,omitempty"`
@@ -529,8 +553,16 @@ type S3OriginConfigObservation struct {
 
 type S3OriginConfigParameters struct {
 
-	// +kubebuilder:validation:Required
-	OriginAccessIdentity *string `json:"originAccessIdentity" tf:"origin_access_identity,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1.OriginAccessIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("cloudfront_access_identity_path",true)
+	// +kubebuilder:validation:Optional
+	OriginAccessIdentity *string `json:"originAccessIdentity,omitempty" tf:"origin_access_identity,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	OriginAccessIdentityRef *v1.Reference `json:"originAccessIdentityRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	OriginAccessIdentitySelector *v1.Selector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
 }
 
 type TrustedKeyGroupsObservation struct {

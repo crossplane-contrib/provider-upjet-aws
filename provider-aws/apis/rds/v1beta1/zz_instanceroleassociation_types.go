@@ -19,8 +19,16 @@ type InstanceRoleAssociationObservation struct {
 
 type InstanceRoleAssociationParameters struct {
 
-	// +kubebuilder:validation:Required
-	DBInstanceIdentifier *string `json:"dbInstanceIdentifier" tf:"db_instance_identifier,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DBInstanceIdentifierRef *v1.Reference `json:"dbInstanceIdentifierRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DBInstanceIdentifierSelector *v1.Selector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	FeatureName *string `json:"featureName" tf:"feature_name,omitempty"`

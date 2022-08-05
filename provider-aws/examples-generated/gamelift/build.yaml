@@ -13,7 +13,9 @@ spec:
     - bucketSelector:
         matchLabels:
           testing.upbound.io/example-name: test
-      key: new_object_key
+      keySelector:
+        matchLabels:
+          testing.upbound.io/example-name: test
       roleArnSelector:
         matchLabels:
           testing.upbound.io/example-name: test

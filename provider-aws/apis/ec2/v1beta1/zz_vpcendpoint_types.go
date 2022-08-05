@@ -66,14 +66,30 @@ type VPCEndpointParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	ServiceName *string `json:"serviceName" tf:"service_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPCEndpointService
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("service_name",true)
+	// +kubebuilder:validation:Optional
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ServiceNameRef *v1.Reference `json:"serviceNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPCEndpointService
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("service_type",true)
 	// +kubebuilder:validation:Optional
 	VPCEndpointType *string `json:"vpcEndpointType,omitempty" tf:"vpc_endpoint_type,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VPCEndpointTypeRef *v1.Reference `json:"vpcEndpointTypeRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	VPCEndpointTypeSelector *v1.Selector `json:"vpcEndpointTypeSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional

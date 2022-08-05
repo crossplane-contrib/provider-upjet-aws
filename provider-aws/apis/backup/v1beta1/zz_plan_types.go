@@ -120,8 +120,15 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
 
-	// +kubebuilder:validation:Required
-	TargetVaultName *string `json:"targetVaultName" tf:"target_vault_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/backup/v1beta1.Vault
+	// +kubebuilder:validation:Optional
+	TargetVaultName *string `json:"targetVaultName,omitempty" tf:"target_vault_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TargetVaultNameRef *v1.Reference `json:"targetVaultNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	TargetVaultNameSelector *v1.Selector `json:"targetVaultNameSelector,omitempty" tf:"-"`
 }
 
 // PlanSpec defines the desired state of Plan

@@ -27,8 +27,16 @@ type NATGatewayObservation struct {
 
 type NATGatewayParameters struct {
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	AllocationIDRef *v1.Reference `json:"allocationIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	AllocationIDSelector *v1.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`

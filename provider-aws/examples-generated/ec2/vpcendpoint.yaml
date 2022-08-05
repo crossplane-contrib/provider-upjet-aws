@@ -7,7 +7,9 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    serviceName: com.amazonaws.us-west-2.s3
+    serviceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main

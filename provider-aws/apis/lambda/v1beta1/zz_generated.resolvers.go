@@ -9,12 +9,14 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
-	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/dynamodb/v1beta1"
+	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/signer/v1beta1"
-	v1beta14 "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1"
-	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/sqs/v1beta1"
+	v1beta15 "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1"
+	v1beta14 "github.com/upbound/official-providers/provider-aws/apis/sqs/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -81,6 +83,22 @@ func (mg *EventSourceMapping) ResolveReferences(ctx context.Context, c client.Re
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventSourceArn),
+		Extract:      resource.ExtractParamPath("stream_arn", true),
+		Reference:    mg.Spec.ForProvider.EventSourceArnRef,
+		Selector:     mg.Spec.ForProvider.EventSourceArnSelector,
+		To: reference.To{
+			List:    &v1beta11.TableList{},
+			Managed: &v1beta11.Table{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EventSourceArn")
+	}
+	mg.Spec.ForProvider.EventSourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventSourceArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionName),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.FunctionNameRef,
@@ -112,8 +130,8 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 		Reference:    mg.Spec.ForProvider.KMSKeyArnRef,
 		Selector:     mg.Spec.ForProvider.KMSKeyArnSelector,
 		To: reference.To{
-			List:    &v1beta11.KeyList{},
-			Managed: &v1beta11.Key{},
+			List:    &v1beta12.KeyList{},
+			Managed: &v1beta12.Key{},
 		},
 	})
 	if err != nil {
@@ -128,8 +146,8 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 		Reference:    mg.Spec.ForProvider.RoleRef,
 		Selector:     mg.Spec.ForProvider.RoleSelector,
 		To: reference.To{
-			List:    &v1beta12.RoleList{},
-			Managed: &v1beta12.Role{},
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
 		},
 	})
 	if err != nil {
@@ -156,8 +174,8 @@ func (mg *FunctionEventInvokeConfig) ResolveReferences(ctx context.Context, c cl
 				Reference:    mg.Spec.ForProvider.DestinationConfig[i3].OnFailure[i4].DestinationRef,
 				Selector:     mg.Spec.ForProvider.DestinationConfig[i3].OnFailure[i4].DestinationSelector,
 				To: reference.To{
-					List:    &v1beta13.QueueList{},
-					Managed: &v1beta13.Queue{},
+					List:    &v1beta14.QueueList{},
+					Managed: &v1beta14.Queue{},
 				},
 			})
 			if err != nil {
@@ -176,8 +194,8 @@ func (mg *FunctionEventInvokeConfig) ResolveReferences(ctx context.Context, c cl
 				Reference:    mg.Spec.ForProvider.DestinationConfig[i3].OnSuccess[i4].DestinationRef,
 				Selector:     mg.Spec.ForProvider.DestinationConfig[i3].OnSuccess[i4].DestinationSelector,
 				To: reference.To{
-					List:    &v1beta14.TopicList{},
-					Managed: &v1beta14.Topic{},
+					List:    &v1beta15.TopicList{},
+					Managed: &v1beta15.Topic{},
 				},
 			})
 			if err != nil {
@@ -188,6 +206,37 @@ func (mg *FunctionEventInvokeConfig) ResolveReferences(ctx context.Context, c cl
 
 		}
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionName),
+		Extract:      resource.ExtractParamPath("function_name", false),
+		Reference:    mg.Spec.ForProvider.FunctionNameRef,
+		Selector:     mg.Spec.ForProvider.FunctionNameSelector,
+		To: reference.To{
+			List:    &AliasList{},
+			Managed: &Alias{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FunctionName")
+	}
+	mg.Spec.ForProvider.FunctionName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FunctionNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Qualifier),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.ForProvider.QualifierRef,
+		Selector:     mg.Spec.ForProvider.QualifierSelector,
+		To: reference.To{
+			List:    &AliasList{},
+			Managed: &Alias{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Qualifier")
+	}
+	mg.Spec.ForProvider.Qualifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.QualifierRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -270,6 +319,64 @@ func (mg *Permission) ResolveReferences(ctx context.Context, c client.Reader) er
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Qualifier),
 		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.QualifierRef,
+		Selector:     mg.Spec.ForProvider.QualifierSelector,
+		To: reference.To{
+			List:    &AliasList{},
+			Managed: &Alias{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Qualifier")
+	}
+	mg.Spec.ForProvider.Qualifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.QualifierRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.SourceArnRef,
+		Selector:     mg.Spec.ForProvider.SourceArnSelector,
+		To: reference.To{
+			List:    &v1beta15.TopicList{},
+			Managed: &v1beta15.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceArn")
+	}
+	mg.Spec.ForProvider.SourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ProvisionedConcurrencyConfig.
+func (mg *ProvisionedConcurrencyConfig) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionName),
+		Extract:      resource.ExtractParamPath("function_name", false),
+		Reference:    mg.Spec.ForProvider.FunctionNameRef,
+		Selector:     mg.Spec.ForProvider.FunctionNameSelector,
+		To: reference.To{
+			List:    &AliasList{},
+			Managed: &Alias{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FunctionName")
+	}
+	mg.Spec.ForProvider.FunctionName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FunctionNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Qualifier),
+		Extract:      resource.ExtractParamPath("name", false),
 		Reference:    mg.Spec.ForProvider.QualifierRef,
 		Selector:     mg.Spec.ForProvider.QualifierSelector,
 		To: reference.To{

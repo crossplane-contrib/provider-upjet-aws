@@ -114,7 +114,9 @@ metadata:
   name: bucket-acl
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.bucket.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bucket
     region: us-west-1
 
 ---

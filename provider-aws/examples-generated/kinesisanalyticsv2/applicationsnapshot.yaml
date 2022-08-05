@@ -6,7 +6,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    applicationName: example-flink-application
+    applicationNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
 
 ---

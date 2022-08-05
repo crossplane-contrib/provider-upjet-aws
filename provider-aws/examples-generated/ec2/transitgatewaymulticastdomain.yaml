@@ -10,7 +10,9 @@ spec:
     staticSourcesSupport: enable
     tags:
       Name: Transit_Gateway_Multicast_Domain_Example
-    transitGatewayId: ${aws_ec2_transit_gateway.tgw.id}
+    transitGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: tgw
 
 ---
 
@@ -39,8 +41,12 @@ spec:
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: subnet1
-    transitGatewayAttachmentId: ${aws_ec2_transit_gateway_vpc_attachment.attachment1.id}
-    transitGatewayMulticastDomainId: ${aws_ec2_transit_gateway_multicast_domain.domain.id}
+    transitGatewayAttachmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: attachment1
+    transitGatewayMulticastDomainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: domain
 
 ---
 
@@ -56,8 +62,12 @@ spec:
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: subnet2
-    transitGatewayAttachmentId: ${aws_ec2_transit_gateway_vpc_attachment.attachment2.id}
-    transitGatewayMulticastDomainId: ${aws_ec2_transit_gateway_multicast_domain.domain.id}
+    transitGatewayAttachmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: attachment2
+    transitGatewayMulticastDomainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: domain
 
 ---
 
@@ -73,8 +83,12 @@ spec:
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: subnet3
-    transitGatewayAttachmentId: ${aws_ec2_transit_gateway_vpc_attachment.attachment2.id}
-    transitGatewayMulticastDomainId: ${aws_ec2_transit_gateway_multicast_domain.domain.id}
+    transitGatewayAttachmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: attachment2
+    transitGatewayMulticastDomainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: domain
 
 ---
 

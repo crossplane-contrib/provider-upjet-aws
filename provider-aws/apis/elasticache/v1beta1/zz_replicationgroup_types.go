@@ -30,8 +30,16 @@ type ReplicationGroupLogDeliveryConfigurationObservation struct {
 
 type ReplicationGroupLogDeliveryConfigurationParameters struct {
 
-	// +kubebuilder:validation:Required
-	Destination *string `json:"destination" tf:"destination,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +kubebuilder:validation:Optional
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	DestinationType *string `json:"destinationType" tf:"destination_type,omitempty"`

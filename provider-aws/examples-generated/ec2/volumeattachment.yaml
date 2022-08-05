@@ -7,9 +7,13 @@ metadata:
 spec:
   forProvider:
     deviceName: /dev/sdh
-    instanceId: ${aws_instance.web.id}
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: web
     region: us-west-1
-    volumeId: ${aws_ebs_volume.example.id}
+    volumeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

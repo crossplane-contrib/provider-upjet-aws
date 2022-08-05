@@ -6,13 +6,17 @@ metadata:
   name: bucket-notification
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.bucket.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bucket
     region: us-west-1
     topic:
     - events:
       - s3:ObjectCreated:*
       filterSuffix: .log
-      topicArn: ${aws_sns_topic.topic.arn}
+      topicArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: topic
 
 ---
 

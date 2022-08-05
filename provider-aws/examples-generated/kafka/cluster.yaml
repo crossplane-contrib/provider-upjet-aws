@@ -31,7 +31,9 @@ spec:
             matchLabels:
               testing.upbound.io/example-name: test
         firehose:
-        - deliveryStream: terraform-kinesis-firehose-extended-s3-test-stream
+        - deliveryStreamSelector:
+            matchLabels:
+              testing.upbound.io/example-name: test_stream
           enabled: true
         s3:
         - bucketSelector:
@@ -148,7 +150,9 @@ metadata:
   name: bucket-acl
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.bucket.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bucket
     region: us-west-1
 
 ---

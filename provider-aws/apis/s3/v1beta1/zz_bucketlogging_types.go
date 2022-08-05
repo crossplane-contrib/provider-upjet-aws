@@ -21,8 +21,16 @@ type BucketLoggingObservation struct {
 
 type BucketLoggingParameters struct {
 
-	// +kubebuilder:validation:Required
-	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
@@ -32,8 +40,16 @@ type BucketLoggingParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	TargetBucket *string `json:"targetBucket" tf:"target_bucket,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	TargetBucket *string `json:"targetBucket,omitempty" tf:"target_bucket,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TargetBucketRef *v1.Reference `json:"targetBucketRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	TargetBucketSelector *v1.Selector `json:"targetBucketSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	TargetGrant []TargetGrantParameters `json:"targetGrant,omitempty" tf:"target_grant,omitempty"`

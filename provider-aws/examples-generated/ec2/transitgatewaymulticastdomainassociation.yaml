@@ -10,8 +10,12 @@ spec:
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    transitGatewayAttachmentId: ${aws_ec2_transit_gateway_vpc_attachment.example.id}
-    transitGatewayMulticastDomainId: ${aws_ec2_transit_gateway_multicast_domain.example.id}
+    transitGatewayAttachmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    transitGatewayMulticastDomainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -37,7 +41,9 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    transitGatewayId: ${aws_ec2_transit_gateway.example.id}
+    transitGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

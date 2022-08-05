@@ -11,7 +11,9 @@ spec:
         testing.upbound.io/example-name: default
     mode: async
     region: us-west-1
-    resourceArn: ${aws_rds_cluster.default.arn}
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
 
 ---
 
@@ -60,8 +62,12 @@ metadata:
   name: default
 spec:
   forProvider:
-    clusterIdentifier: aurora-cluster-demo
-    engine: aurora-postgresql
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    engineSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
     instanceClass: db.r6g.large
     region: us-west-1
 

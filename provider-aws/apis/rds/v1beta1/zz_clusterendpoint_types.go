@@ -25,8 +25,16 @@ type ClusterEndpointObservation struct {
 
 type ClusterEndpointParameters struct {
 
-	// +kubebuilder:validation:Required
-	ClusterIdentifier *string `json:"clusterIdentifier" tf:"cluster_identifier,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	CustomEndpointType *string `json:"customEndpointType" tf:"custom_endpoint_type,omitempty"`

@@ -31,8 +31,15 @@ type BucketAnalyticsConfigurationObservation struct {
 
 type BucketAnalyticsConfigurationParameters struct {
 
-	// +kubebuilder:validation:Required
-	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Filter []BucketAnalyticsConfigurationFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
@@ -78,8 +85,16 @@ type S3BucketDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
 
-	// +kubebuilder:validation:Required
-	BucketArn *string `json:"bucketArn" tf:"bucket_arn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +kubebuilder:validation:Optional
+	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`

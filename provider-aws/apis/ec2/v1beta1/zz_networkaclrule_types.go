@@ -19,8 +19,16 @@ type NetworkACLRuleObservation struct {
 
 type NetworkACLRuleParameters struct {
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("cidr_block",false)
 	// +kubebuilder:validation:Optional
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CidrBlockRef *v1.Reference `json:"cidrBlockRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	CidrBlockSelector *v1.Selector `json:"cidrBlockSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Egress *bool `json:"egress,omitempty" tf:"egress,omitempty"`
@@ -37,8 +45,16 @@ type NetworkACLRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
-	// +kubebuilder:validation:Required
-	NetworkACLID *string `json:"networkAclId" tf:"network_acl_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.NetworkACL
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	NetworkACLID *string `json:"networkAclId,omitempty" tf:"network_acl_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	NetworkACLIDRef *v1.Reference `json:"networkAclIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	NetworkACLIDSelector *v1.Selector `json:"networkAclIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`

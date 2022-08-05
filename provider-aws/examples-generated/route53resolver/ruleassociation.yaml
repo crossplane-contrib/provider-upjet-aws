@@ -7,7 +7,9 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    resolverRuleId: ${aws_route53_resolver_rule.sys.id}
+    resolverRuleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sys
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: foo

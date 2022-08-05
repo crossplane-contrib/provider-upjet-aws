@@ -19,10 +19,14 @@ metadata:
 spec:
   forProvider:
     actions:
-    - jobName: another-example-job
+    - jobNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
     predicate:
     - conditions:
-      - jobName: example-job
+      - jobNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
         state: SUCCEEDED
     region: us-west-1
     type: CONDITIONAL
@@ -39,7 +43,9 @@ metadata:
 spec:
   forProvider:
     actions:
-    - jobName: example-job
+    - jobNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
     region: us-west-1
     type: ON_DEMAND
     workflowName: example

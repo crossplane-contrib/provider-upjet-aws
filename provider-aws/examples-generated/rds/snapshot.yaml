@@ -6,7 +6,9 @@ metadata:
   name: test
 spec:
   forProvider:
-    dbInstanceIdentifier: ${aws_db_instance.bar.id}
+    dbInstanceIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bar
     region: us-west-1
 
 ---

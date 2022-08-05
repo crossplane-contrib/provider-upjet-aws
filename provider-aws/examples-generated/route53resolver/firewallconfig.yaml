@@ -8,7 +8,9 @@ spec:
   forProvider:
     firewallFailOpen: ENABLED
     region: us-west-1
-    resourceId: ${aws_vpc.example.id}
+    resourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

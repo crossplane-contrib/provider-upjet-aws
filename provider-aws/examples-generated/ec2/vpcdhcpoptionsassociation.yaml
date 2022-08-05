@@ -6,7 +6,9 @@ metadata:
   name: dns-resolver
 spec:
   forProvider:
-    dhcpOptionsId: ${aws_vpc_dhcp_options.foo.id}
+    dhcpOptionsIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
     region: us-west-1
     vpcIdSelector:
       matchLabels:

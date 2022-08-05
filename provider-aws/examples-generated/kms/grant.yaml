@@ -9,7 +9,9 @@ spec:
     constraints:
     - encryptionContextEquals:
         Department: Finance
-    granteePrincipal: ${aws_iam_role.a.arn}
+    granteePrincipalSelector:
+      matchLabels:
+        testing.upbound.io/example-name: a
     keyIdSelector:
       matchLabels:
         testing.upbound.io/example-name: a

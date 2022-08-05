@@ -6,7 +6,9 @@ metadata:
   name: allow-access-from-another-account
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.example.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     policy: ${data.aws_iam_policy_document.allow_access_from_another_account.json}
     region: us-west-1
 

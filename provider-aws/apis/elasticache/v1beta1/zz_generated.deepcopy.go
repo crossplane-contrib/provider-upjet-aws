@@ -812,6 +812,16 @@ func (in *ReplicationGroupLogDeliveryConfigurationParameters) DeepCopyInto(out *
 		*out = new(string)
 		**out = **in
 	}
+	if in.DestinationRef != nil {
+		in, out := &in.DestinationRef, &out.DestinationRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DestinationSelector != nil {
+		in, out := &in.DestinationSelector, &out.DestinationSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DestinationType != nil {
 		in, out := &in.DestinationType, &out.DestinationType
 		*out = new(string)

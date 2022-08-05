@@ -12,6 +12,7 @@ import (
 	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -118,12 +119,77 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 	return nil
 }
 
+// ResolveReferences of this Trigger.
+func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Actions); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Actions[i3].JobName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.Actions[i3].JobNameRef,
+			Selector:     mg.Spec.ForProvider.Actions[i3].JobNameSelector,
+			To: reference.To{
+				List:    &JobList{},
+				Managed: &Job{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Actions[i3].JobName")
+		}
+		mg.Spec.ForProvider.Actions[i3].JobName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Actions[i3].JobNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Predicate); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Predicate[i3].Conditions); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Predicate[i3].Conditions[i4].JobName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.Predicate[i3].Conditions[i4].JobNameRef,
+				Selector:     mg.Spec.ForProvider.Predicate[i3].Conditions[i4].JobNameSelector,
+				To: reference.To{
+					List:    &JobList{},
+					Managed: &Job{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Predicate[i3].Conditions[i4].JobName")
+			}
+			mg.Spec.ForProvider.Predicate[i3].Conditions[i4].JobName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Predicate[i3].Conditions[i4].JobNameRef = rsp.ResolvedReference
+
+		}
+	}
+
+	return nil
+}
+
 // ResolveReferences of this UserDefinedFunction.
 func (mg *UserDefinedFunction) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CatalogID),
+		Extract:      resource.ExtractParamPath("catalog_id", false),
+		Reference:    mg.Spec.ForProvider.CatalogIDRef,
+		Selector:     mg.Spec.ForProvider.CatalogIDSelector,
+		To: reference.To{
+			List:    &CatalogDatabaseList{},
+			Managed: &CatalogDatabase{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CatalogID")
+	}
+	mg.Spec.ForProvider.CatalogID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CatalogIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),

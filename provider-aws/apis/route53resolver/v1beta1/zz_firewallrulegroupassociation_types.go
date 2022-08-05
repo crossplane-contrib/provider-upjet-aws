@@ -23,8 +23,16 @@ type FirewallRuleGroupAssociationObservation struct {
 
 type FirewallRuleGroupAssociationParameters struct {
 
-	// +kubebuilder:validation:Required
-	FirewallRuleGroupID *string `json:"firewallRuleGroupId" tf:"firewall_rule_group_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/route53resolver/v1beta1.FirewallRuleGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	FirewallRuleGroupID *string `json:"firewallRuleGroupId,omitempty" tf:"firewall_rule_group_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	FirewallRuleGroupIDRef *v1.Reference `json:"firewallRuleGroupIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	FirewallRuleGroupIDSelector *v1.Selector `json:"firewallRuleGroupIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	MutationProtection *string `json:"mutationProtection,omitempty" tf:"mutation_protection,omitempty"`

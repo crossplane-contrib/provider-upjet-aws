@@ -21,14 +21,30 @@ type TransitGatewayPeeringAttachmentObservation struct {
 
 type TransitGatewayPeeringAttachmentParameters struct {
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGateway
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("owner_id",true)
 	// +kubebuilder:validation:Optional
 	PeerAccountID *string `json:"peerAccountId,omitempty" tf:"peer_account_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PeerAccountIDRef *v1.Reference `json:"peerAccountIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	PeerAccountIDSelector *v1.Selector `json:"peerAccountIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	PeerRegion *string `json:"peerRegion" tf:"peer_region,omitempty"`
 
-	// +kubebuilder:validation:Required
-	PeerTransitGatewayID *string `json:"peerTransitGatewayId" tf:"peer_transit_gateway_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGateway
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	PeerTransitGatewayID *string `json:"peerTransitGatewayId,omitempty" tf:"peer_transit_gateway_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PeerTransitGatewayIDRef *v1.Reference `json:"peerTransitGatewayIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	PeerTransitGatewayIDSelector *v1.Selector `json:"peerTransitGatewayIdSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-
@@ -38,8 +54,16 @@ type TransitGatewayPeeringAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// +kubebuilder:validation:Required
-	TransitGatewayID *string `json:"transitGatewayId" tf:"transit_gateway_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGateway
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayPeeringAttachmentSpec defines the desired state of TransitGatewayPeeringAttachment

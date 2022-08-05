@@ -10,7 +10,9 @@ spec:
     - authScheme: SECRETS
       description: example
       iamAuth: DISABLED
-      secretArn: ${aws_secretsmanager_secret.example.arn}
+      secretArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
     debugLogging: false
     engineFamily: MYSQL
     idleClientTimeout: 1800

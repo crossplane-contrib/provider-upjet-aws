@@ -81,8 +81,16 @@ type CloudwatchLoggingOptionsParameters struct {
 	// +kubebuilder:validation:Required
 	LogStreamArn *string `json:"logStreamArn" tf:"log_stream_arn,omitempty"`
 
-	// +kubebuilder:validation:Required
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type CsvObservation struct {
@@ -227,11 +235,27 @@ type OutputsKinesisFirehoseObservation struct {
 
 type OutputsKinesisFirehoseParameters struct {
 
-	// +kubebuilder:validation:Required
-	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +kubebuilder:validation:Optional
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// +kubebuilder:validation:Required
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
+
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type OutputsKinesisStreamObservation struct {

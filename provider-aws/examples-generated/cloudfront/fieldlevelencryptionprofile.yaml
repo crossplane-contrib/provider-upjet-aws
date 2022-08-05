@@ -13,7 +13,9 @@ spec:
         - items:
           - DateOfBirth
         providerId: test provider
-        publicKeyId: ${aws_cloudfront_public_key.example.id}
+        publicKeyIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
     name: test profile
     region: us-west-1
 

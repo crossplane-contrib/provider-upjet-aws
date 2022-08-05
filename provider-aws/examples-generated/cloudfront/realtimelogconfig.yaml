@@ -8,8 +8,12 @@ spec:
   forProvider:
     endpoint:
     - kinesisStreamConfig:
-      - roleArn: ${aws_iam_role.example.arn}
-        streamArn: ${aws_kinesis_stream.example.arn}
+      - roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        streamArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
       streamType: Kinesis
     fields:
     - timestamp

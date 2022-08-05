@@ -11,8 +11,12 @@ spec:
     blockOverrideDomain: example.com
     blockOverrideTtl: 1
     blockResponse: OVERRIDE
-    firewallDomainListId: ${aws_route53_resolver_firewall_domain_list.example.id}
-    firewallRuleGroupId: ${aws_route53_resolver_firewall_rule_group.example.id}
+    firewallDomainListIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    firewallRuleGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     name: example
     priority: 100
     region: us-west-1

@@ -8,13 +8,19 @@ spec:
   forProvider:
     permissions:
     - SELECT
-    principal: arn:aws:iam:us-east-1:123456789012:user/SanHolo
+    principalSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
     tableWithColumns:
     - columnNames:
       - event
-      databaseName: ${aws_glue_catalog_table.example.database_name}
-      name: ${aws_glue_catalog_table.example.name}
+      databaseNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
 
 ---
 

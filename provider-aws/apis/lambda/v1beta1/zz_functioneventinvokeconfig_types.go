@@ -51,8 +51,16 @@ type FunctionEventInvokeConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationConfig []FunctionEventInvokeConfigDestinationConfigParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
-	// +kubebuilder:validation:Required
-	FunctionName *string `json:"functionName" tf:"function_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Alias
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("function_name",false)
+	// +kubebuilder:validation:Optional
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
@@ -60,8 +68,16 @@ type FunctionEventInvokeConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Alias
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	QualifierRef *v1.Reference `json:"qualifierRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	QualifierSelector *v1.Selector `json:"qualifierSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-

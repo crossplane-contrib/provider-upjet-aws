@@ -66,8 +66,16 @@ type IPAddressParameters struct {
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
-	// +kubebuilder:validation:Required
-	SubnetID *string `json:"subnetId" tf:"subnet_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // EndpointSpec defines the desired state of Endpoint

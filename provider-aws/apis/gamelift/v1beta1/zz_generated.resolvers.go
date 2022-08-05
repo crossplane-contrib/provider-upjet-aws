@@ -12,6 +12,7 @@ import (
 	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -38,6 +39,24 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 		mg.Spec.ForProvider.StorageLocation[i3].Bucket = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageLocation[i3].BucketRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageLocation); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].Key),
+			Extract:      resource.ExtractParamPath("key", false),
+			Reference:    mg.Spec.ForProvider.StorageLocation[i3].KeyRef,
+			Selector:     mg.Spec.ForProvider.StorageLocation[i3].KeySelector,
+			To: reference.To{
+				List:    &v1beta1.ObjectList{},
+				Managed: &v1beta1.Object{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.StorageLocation[i3].Key")
+		}
+		mg.Spec.ForProvider.StorageLocation[i3].Key = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageLocation[i3].KeyRef = rsp.ResolvedReference
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageLocation); i3++ {
@@ -127,6 +146,24 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 		}
 		mg.Spec.ForProvider.StorageLocation[i3].Bucket = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageLocation[i3].BucketRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageLocation); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].Key),
+			Extract:      resource.ExtractParamPath("key", false),
+			Reference:    mg.Spec.ForProvider.StorageLocation[i3].KeyRef,
+			Selector:     mg.Spec.ForProvider.StorageLocation[i3].KeySelector,
+			To: reference.To{
+				List:    &v1beta1.ObjectList{},
+				Managed: &v1beta1.Object{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.StorageLocation[i3].Key")
+		}
+		mg.Spec.ForProvider.StorageLocation[i3].Key = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageLocation[i3].KeyRef = rsp.ResolvedReference
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageLocation); i3++ {

@@ -15,7 +15,9 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: test_alias
     region: us-west-1
-    sourceArn: arn:aws:events:eu-west-1:111122223333:rule/RunDaily
+    sourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     statementId: AllowExecutionFromCloudWatch
 
 ---
@@ -56,7 +58,7 @@ spec:
     description: a sample description
     functionNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test_lambda
+        testing.upbound.io/example-name: example
     functionVersion: $LATEST
     name: testalias
     region: us-west-1

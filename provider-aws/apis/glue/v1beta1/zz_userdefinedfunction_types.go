@@ -35,8 +35,16 @@ type UserDefinedFunctionObservation struct {
 
 type UserDefinedFunctionParameters struct {
 
-	// +kubebuilder:validation:Required
-	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogDatabase
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("catalog_id",false)
+	// +kubebuilder:validation:Optional
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CatalogIDRef *v1.Reference `json:"catalogIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	CatalogIDSelector *v1.Selector `json:"catalogIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	ClassName *string `json:"className" tf:"class_name,omitempty"`

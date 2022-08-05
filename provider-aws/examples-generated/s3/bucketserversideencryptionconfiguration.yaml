@@ -6,11 +6,15 @@ metadata:
   name: example
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.mybucket.bucket}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mybucket
     region: us-west-1
     rule:
     - applyServerSideEncryptionByDefault:
-      - kmsMasterKeyId: ${aws_kms_key.mykey.arn}
+      - kmsMasterKeyIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: mykey
         sseAlgorithm: aws:kms
 
 ---

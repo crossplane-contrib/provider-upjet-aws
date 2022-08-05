@@ -8,7 +8,9 @@ spec:
   forProvider:
     brokerName: example
     configuration:
-    - id: ${aws_mq_configuration.test.id}
+    - idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test
       revision: ${aws_mq_configuration.test.latest_revision}
     engineType: ActiveMQ
     engineVersion: 5.15.9

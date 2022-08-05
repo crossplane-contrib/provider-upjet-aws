@@ -6,9 +6,13 @@ metadata:
   name: example
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.example.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
-    targetBucket: ${aws_s3_bucket.log_bucket.id}
+    targetBucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: log_bucket
     targetPrefix: log/
 
 ---
@@ -45,7 +49,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.example.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
 
 ---
@@ -58,7 +64,9 @@ metadata:
   name: log-bucket-acl
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.log_bucket.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: log_bucket
     region: us-west-1
 
 ---

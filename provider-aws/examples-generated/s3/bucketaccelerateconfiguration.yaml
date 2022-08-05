@@ -6,7 +6,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.mybucket.bucket}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mybucket
     region: us-west-1
     status: Enabled
 

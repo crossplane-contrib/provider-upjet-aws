@@ -6,10 +6,16 @@ metadata:
   name: cluster-instances
 spec:
   forProvider:
-    clusterIdentifier: ${aws_rds_cluster.default.id}
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
     count: 2
-    engine: aurora-mysql
-    engineVersion: ${aws_rds_cluster.default.engine_version}
+    engineSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    engineVersionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
     instanceClass: db.r4.large
     region: us-west-1
 

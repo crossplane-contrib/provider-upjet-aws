@@ -6,7 +6,9 @@ metadata:
   name: eligible
 spec:
   forProvider:
-    clusterIdentifier: ${aws_rds_cluster.default.id}
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
     customEndpointType: READER
     excludedMembers:
     - ${aws_rds_cluster_instance.test1.id}
@@ -48,9 +50,15 @@ metadata:
 spec:
   forProvider:
     applyImmediately: true
-    clusterIdentifier: ${aws_rds_cluster.default.id}
-    engine: ${aws_rds_cluster.default.engine}
-    engineVersion: ${aws_rds_cluster.default.engine_version}
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    engineSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    engineVersionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
     instanceClass: db.t2.small
     region: us-west-1
 
@@ -65,9 +73,15 @@ metadata:
 spec:
   forProvider:
     applyImmediately: true
-    clusterIdentifier: ${aws_rds_cluster.default.id}
-    engine: ${aws_rds_cluster.default.engine}
-    engineVersion: ${aws_rds_cluster.default.engine_version}
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    engineSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    engineVersionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
     instanceClass: db.t2.small
     region: us-west-1
 
@@ -82,9 +96,15 @@ metadata:
 spec:
   forProvider:
     applyImmediately: true
-    clusterIdentifier: ${aws_rds_cluster.default.id}
-    engine: ${aws_rds_cluster.default.engine}
-    engineVersion: ${aws_rds_cluster.default.engine_version}
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    engineSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    engineVersionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
     instanceClass: db.t2.small
     region: us-west-1
 

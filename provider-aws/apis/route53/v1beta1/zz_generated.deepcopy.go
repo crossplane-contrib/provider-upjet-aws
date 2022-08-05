@@ -42,10 +42,30 @@ func (in *AliasParameters) DeepCopyInto(out *AliasParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.NameRef != nil {
+		in, out := &in.NameRef, &out.NameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NameSelector != nil {
+		in, out := &in.NameSelector, &out.NameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ZoneID != nil {
 		in, out := &in.ZoneID, &out.ZoneID
 		*out = new(string)
 		**out = **in
+	}
+	if in.ZoneIDRef != nil {
+		in, out := &in.ZoneIDRef, &out.ZoneIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ZoneIDSelector != nil {
+		in, out := &in.ZoneIDSelector, &out.ZoneIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1071,6 +1091,16 @@ func (in *QueryLogParameters) DeepCopyInto(out *QueryLogParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CloudwatchLogGroupArnRef != nil {
+		in, out := &in.CloudwatchLogGroupArnRef, &out.CloudwatchLogGroupArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CloudwatchLogGroupArnSelector != nil {
+		in, out := &in.CloudwatchLogGroupArnSelector, &out.CloudwatchLogGroupArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -1080,6 +1110,16 @@ func (in *QueryLogParameters) DeepCopyInto(out *QueryLogParameters) {
 		in, out := &in.ZoneID, &out.ZoneID
 		*out = new(string)
 		**out = **in
+	}
+	if in.ZoneIDRef != nil {
+		in, out := &in.ZoneIDRef, &out.ZoneIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ZoneIDSelector != nil {
+		in, out := &in.ZoneIDSelector, &out.ZoneIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

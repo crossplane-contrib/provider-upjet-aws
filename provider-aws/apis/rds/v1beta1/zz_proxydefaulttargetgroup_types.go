@@ -47,8 +47,15 @@ type ProxyDefaultTargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionPoolConfig []ConnectionPoolConfigParameters `json:"connectionPoolConfig,omitempty" tf:"connection_pool_config,omitempty"`
 
-	// +kubebuilder:validation:Required
-	DBProxyName *string `json:"dbProxyName" tf:"db_proxy_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Proxy
+	// +kubebuilder:validation:Optional
+	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DBProxyNameRef *v1.Reference `json:"dbProxyNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DBProxyNameSelector *v1.Selector `json:"dbProxyNameSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-

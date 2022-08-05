@@ -8,7 +8,9 @@ spec:
   forProvider:
     capacityProviders:
     - FARGATE
-    clusterName: ${aws_ecs_cluster.example.name}
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     defaultCapacityProviderStrategy:
     - base: 1
       capacityProvider: FARGATE

@@ -6,7 +6,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    dbProxyName: ${aws_db_proxy.test.name}
+    dbProxyNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
     region: us-west-1
     targetRole: READ_ONLY
     vpcSubnetIds: ${aws_subnet.test.*.id}

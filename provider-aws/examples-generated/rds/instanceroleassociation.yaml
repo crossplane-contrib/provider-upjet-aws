@@ -6,7 +6,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    dbInstanceIdentifier: ${aws_db_instance.example.id}
+    dbInstanceIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     featureName: S3_INTEGRATION
     region: us-west-1
     roleArnSelector:

@@ -216,14 +216,30 @@ type LaunchTemplateObservation struct {
 
 type LaunchTemplateParameters struct {
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.LaunchTemplate
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.LaunchTemplate
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("latest_version",true)
+	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VersionRef *v1.Reference `json:"versionRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
 }
 
 type LaunchTemplateSpecificationObservation struct {
@@ -231,8 +247,16 @@ type LaunchTemplateSpecificationObservation struct {
 
 type LaunchTemplateSpecificationParameters struct {
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.LaunchTemplate
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	LaunchTemplateIDRef *v1.Reference `json:"launchTemplateIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	LaunchTemplateIDSelector *v1.Selector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
@@ -270,8 +294,16 @@ type OverrideLaunchTemplateSpecificationObservation struct {
 
 type OverrideLaunchTemplateSpecificationParameters struct {
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.LaunchTemplate
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	LaunchTemplateIDRef *v1.Reference `json:"launchTemplateIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	LaunchTemplateIDSelector *v1.Selector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`

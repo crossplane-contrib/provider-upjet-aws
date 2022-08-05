@@ -7,6 +7,7 @@ package config
 import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
+	"github.com/upbound/upjet/pkg/registry/reference"
 
 	"github.com/upbound/upjet/pkg/config"
 
@@ -84,11 +85,13 @@ var skipList = []string{
 
 // GetProvider returns provider configuration
 func GetProvider() *config.Provider {
+	modulePath := "github.com/upbound/official-providers/provider-aws"
 	pc := config.NewProvider([]byte(providerSchema), "aws",
-		"github.com/upbound/official-providers/provider-aws", providerMetadata,
+		modulePath, providerMetadata,
 		config.WithShortName("aws"),
 		config.WithRootGroup("aws.upbound.io"),
 		config.WithIncludeList(ResourcesWithExternalNameConfig()),
+		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
 		config.WithSkipList(skipList),
 		config.WithDefaultResourceOptions(
 			GroupKindOverrides(),

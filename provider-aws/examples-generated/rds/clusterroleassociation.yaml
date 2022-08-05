@@ -6,7 +6,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    dbClusterIdentifier: ${aws_rds_cluster.example.id}
+    dbClusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     featureName: S3_INTEGRATION
     region: us-west-1
     roleArnSelector:

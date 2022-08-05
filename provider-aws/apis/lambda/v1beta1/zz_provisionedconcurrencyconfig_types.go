@@ -19,14 +19,30 @@ type ProvisionedConcurrencyConfigObservation struct {
 
 type ProvisionedConcurrencyConfigParameters struct {
 
-	// +kubebuilder:validation:Required
-	FunctionName *string `json:"functionName" tf:"function_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Alias
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("function_name",false)
+	// +kubebuilder:validation:Optional
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	ProvisionedConcurrentExecutions *float64 `json:"provisionedConcurrentExecutions" tf:"provisioned_concurrent_executions,omitempty"`
 
-	// +kubebuilder:validation:Required
-	Qualifier *string `json:"qualifier" tf:"qualifier,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Alias
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +kubebuilder:validation:Optional
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	QualifierRef *v1.Reference `json:"qualifierRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	QualifierSelector *v1.Selector `json:"qualifierSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-

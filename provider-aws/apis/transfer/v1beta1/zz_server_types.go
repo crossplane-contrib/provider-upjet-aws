@@ -30,8 +30,16 @@ type EndpointDetailsParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type OnUploadObservation struct {
@@ -60,8 +68,16 @@ type ServerObservation struct {
 
 type ServerParameters struct {
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/acm/v1beta1.Certificate
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CertificateRef *v1.Reference `json:"certificateRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	CertificateSelector *v1.Selector `json:"certificateSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`

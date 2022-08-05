@@ -65,12 +65,18 @@ metadata:
   name: primary
 spec:
   forProvider:
-    clusterIdentifier: ${aws_rds_cluster.primary.id}
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
     dbSubnetGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    engine: aurora
-    engineVersion: 5.6.mysql_aurora.1.22.2
+    engineSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    engineVersionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     instanceClass: db.r4.large
     provider: ${aws.primary}
     region: us-west-1
@@ -85,12 +91,18 @@ metadata:
   name: secondary
 spec:
   forProvider:
-    clusterIdentifier: ${aws_rds_cluster.secondary.id}
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
     dbSubnetGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    engine: aurora
-    engineVersion: 5.6.mysql_aurora.1.22.2
+    engineSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    engineVersionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     instanceClass: db.r4.large
     provider: ${aws.secondary}
     region: us-west-1

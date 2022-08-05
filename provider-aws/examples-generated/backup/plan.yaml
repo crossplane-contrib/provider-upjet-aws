@@ -17,7 +17,9 @@ spec:
       - deleteAfter: 14
       ruleName: tf_example_backup_rule
       schedule: cron(0 12 * * ? *)
-      targetVaultName: ${aws_backup_vault.test.name}
+      targetVaultNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test
 
 ---
 

@@ -8,7 +8,9 @@ spec:
   forProvider:
     blockPublicAcls: true
     blockPublicPolicy: true
-    bucket: ${aws_s3_bucket.example.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
 
 ---

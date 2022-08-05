@@ -34,7 +34,9 @@ spec:
           ]
       }
     region: us-west-1
-    repositoryName: ${aws_ecrpublic_repository.example.repository_name}
+    repositoryNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

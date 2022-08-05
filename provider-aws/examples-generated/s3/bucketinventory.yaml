@@ -6,10 +6,14 @@ metadata:
   name: test
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.test.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
     destination:
     - bucket:
-      - bucketArn: ${aws_s3_bucket.inventory.arn}
+      - bucketArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: inventory
         format: ORC
     includedObjectVersions: All
     name: EntireBucketDaily

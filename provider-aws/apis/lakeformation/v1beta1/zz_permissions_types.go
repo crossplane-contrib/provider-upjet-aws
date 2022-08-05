@@ -18,8 +18,16 @@ type DataLocationObservation struct {
 
 type DataLocationParameters struct {
 
-	// +kubebuilder:validation:Required
-	Arn *string `json:"arn" tf:"arn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lakeformation/v1beta1.Resource
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +kubebuilder:validation:Optional
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
@@ -33,8 +41,15 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogDatabase
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type PermissionsObservation struct {
@@ -61,8 +76,16 @@ type PermissionsParameters struct {
 	// +kubebuilder:validation:Optional
 	PermissionsWithGrantOption []*string `json:"permissionsWithGrantOption,omitempty" tf:"permissions_with_grant_option,omitempty"`
 
-	// +kubebuilder:validation:Required
-	Principal *string `json:"principal" tf:"principal,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrincipalRef *v1.Reference `json:"principalRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	PrincipalSelector *v1.Selector `json:"principalSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-
@@ -105,14 +128,29 @@ type TableWithColumnsParameters struct {
 	// +kubebuilder:validation:Optional
 	ColumnNames []*string `json:"columnNames,omitempty" tf:"column_names,omitempty"`
 
-	// +kubebuilder:validation:Required
-	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogTable
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("database_name",false)
+	// +kubebuilder:validation:Optional
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`
 
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogTable
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Wildcard *bool `json:"wildcard,omitempty" tf:"wildcard,omitempty"`

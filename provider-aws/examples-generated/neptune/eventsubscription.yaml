@@ -20,7 +20,9 @@ spec:
     - configuration change
     - read replica
     region: us-west-1
-    snsTopicArn: ${aws_sns_topic.default.arn}
+    snsTopicArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
     sourceIds:
     - ${aws_neptune_cluster_instance.example.id}
     sourceType: db-instance

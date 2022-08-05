@@ -6,7 +6,9 @@ metadata:
   name: versioning-example
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.example.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
     versioningConfiguration:
     - status: Enabled
@@ -33,7 +35,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.example.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
 
 ---

@@ -79,10 +79,14 @@ spec:
       targetOriginId: ${local.s3_origin_id}
       viewerProtocolPolicy: redirect-to-https
     origin:
-    - domainName: ${aws_s3_bucket.b.bucket_regional_domain_name}
+    - domainNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: b
       originId: ${local.s3_origin_id}
       s3OriginConfig:
-      - originAccessIdentity: origin-access-identity/cloudfront/ABCDEFG1234567
+      - originAccessIdentitySelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
     priceClass: PriceClass_200
     region: us-west-1
     restrictions:
@@ -122,7 +126,9 @@ metadata:
   name: b-acl
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.b.id}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: b
     region: us-west-1
 
 ---

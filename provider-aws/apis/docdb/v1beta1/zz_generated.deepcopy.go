@@ -810,6 +810,16 @@ func (in *GlobalClusterParameters) DeepCopyInto(out *GlobalClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SourceDBClusterIdentifierRef != nil {
+		in, out := &in.SourceDBClusterIdentifierRef, &out.SourceDBClusterIdentifierRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceDBClusterIdentifierSelector != nil {
+		in, out := &in.SourceDBClusterIdentifierSelector, &out.SourceDBClusterIdentifierSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StorageEncrypted != nil {
 		in, out := &in.StorageEncrypted, &out.StorageEncrypted
 		*out = new(bool)

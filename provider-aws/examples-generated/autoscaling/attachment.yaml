@@ -9,7 +9,9 @@ spec:
     autoscalingGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: asg
-    elb: ${aws_elb.bar.id}
+    elbSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bar
     region: us-west-1
 
 ---

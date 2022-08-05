@@ -7,10 +7,14 @@ metadata:
 spec:
   forProvider:
     actions:
-    - jobName: ${aws_glue_job.example1.name}
+    - jobNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example1
     predicate:
     - conditions:
-      - jobName: ${aws_glue_job.example2.name}
+      - jobNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example2
         state: SUCCEEDED
     region: us-west-1
     type: CONDITIONAL

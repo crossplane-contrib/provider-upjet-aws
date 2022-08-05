@@ -6,7 +6,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    allocationId: ${aws_eip.example.id}
+    allocationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
     subnetIdSelector:
       matchLabels:

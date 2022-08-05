@@ -15,7 +15,9 @@ spec:
       - destinationSelector:
           matchLabels:
             testing.upbound.io/example-name: example
-    functionName: ${aws_lambda_alias.example.function_name}
+    functionNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
 
 ---
