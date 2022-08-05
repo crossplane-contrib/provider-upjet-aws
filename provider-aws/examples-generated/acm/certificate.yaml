@@ -1,7 +1,9 @@
 apiVersion: acm.aws.upbound.io/v1beta1
 kind: Certificate
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: cert
+  name: cert
 spec:
   forProvider:
     domainName: example.com
@@ -11,3 +13,6 @@ spec:
     tags:
       Environment: test
     validationMethod: DNS
+
+---
+

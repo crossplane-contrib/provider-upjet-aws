@@ -19,6 +19,7 @@ func Configure(p *config.Provider) {
 		r.References["vpc_zone_identifier"] = config.Reference{
 			Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
 		}
+		delete(r.References, "launch_template.version")
 		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_autoscaling_attachment", func(r *config.Resource) {

@@ -1,8 +1,13 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: SAMLProvider
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
 spec:
   forProvider:
     name: myprovider
     samlMetadataDocument: ${file("saml-metadata.xml")}
+
+---
+

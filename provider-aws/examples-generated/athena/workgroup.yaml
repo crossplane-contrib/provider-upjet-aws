@@ -1,6 +1,8 @@
 apiVersion: athena.aws.upbound.io/v1beta1
 kind: Workgroup
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -10,7 +12,11 @@ spec:
       resultConfiguration:
       - encryptionConfiguration:
         - encryptionOption: SSE_KMS
-          kmsKeyArnRef:
-            name: example
+          kmsKeyArnSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example
         outputLocation: s3://${aws_s3_bucket.example.bucket}/output/
     region: us-west-1
+
+---
+

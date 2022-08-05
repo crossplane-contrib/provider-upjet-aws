@@ -1,12 +1,19 @@
 apiVersion: sns.aws.upbound.io/v1beta1
 kind: TopicSubscription
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: user_updates_sqs_target
+  name: user-updates-sqs-target
 spec:
   forProvider:
-    endpointRef:
-      name: example
+    endpointSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     protocol: sqs
     region: us-west-1
-    topicArnRef:
-      name: example
+    topicArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

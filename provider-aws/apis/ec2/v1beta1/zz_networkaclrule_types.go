@@ -37,8 +37,16 @@ type NetworkACLRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
-	// +kubebuilder:validation:Required
-	NetworkACLID *string `json:"networkAclId" tf:"network_acl_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.NetworkACL
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	NetworkACLID *string `json:"networkAclId,omitempty" tf:"network_acl_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	NetworkACLIDRef *v1.Reference `json:"networkAclIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	NetworkACLIDSelector *v1.Selector `json:"networkAclIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`

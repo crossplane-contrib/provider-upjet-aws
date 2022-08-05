@@ -10,6 +10,8 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -35,6 +37,22 @@ func (mg *Secret) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RotationLambdaArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.RotationLambdaArnRef,
+		Selector:     mg.Spec.ForProvider.RotationLambdaArnSelector,
+		To: reference.To{
+			List:    &v1beta11.FunctionList{},
+			Managed: &v1beta11.Function{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RotationLambdaArn")
+	}
+	mg.Spec.ForProvider.RotationLambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RotationLambdaArnRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -1,7 +1,9 @@
 apiVersion: ecrpublic.aws.upbound.io/v1beta1
 kind: Repository
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
 spec:
   forProvider:
     catalogData:
@@ -15,3 +17,6 @@ spec:
       usageText: Usage Text
     provider: ${aws.us_east_1}
     region: us-west-1
+
+---
+

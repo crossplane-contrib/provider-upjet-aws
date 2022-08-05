@@ -1,10 +1,16 @@
 apiVersion: neptune.aws.upbound.io/v1beta1
 kind: ClusterEndpoint
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    clusterIdentifierRef:
-      name: example
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
     endpointType: READER
     region: us-west-1
+
+---
+

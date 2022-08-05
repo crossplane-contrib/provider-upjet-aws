@@ -1,9 +1,14 @@
 apiVersion: iot.aws.upbound.io/v1beta1
 kind: Thing
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     attributes:
       First: examplevalue
     region: us-west-1
+
+---
+

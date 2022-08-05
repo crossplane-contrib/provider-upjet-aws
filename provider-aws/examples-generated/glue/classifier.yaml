@@ -1,6 +1,8 @@
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: Classifier
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -14,3 +16,6 @@ spec:
       - example2
       quoteSymbol: ''''
     region: us-west-1
+
+---
+

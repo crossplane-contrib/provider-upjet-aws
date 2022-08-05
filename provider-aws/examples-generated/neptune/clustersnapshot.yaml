@@ -1,9 +1,15 @@
 apiVersion: neptune.aws.upbound.io/v1beta1
 kind: ClusterSnapshot
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    dbClusterIdentifierRef:
-      name: example
+    dbClusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
+
+---
+

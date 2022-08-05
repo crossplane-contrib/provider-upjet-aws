@@ -1,14 +1,18 @@
 apiVersion: ecs.aws.upbound.io/v1beta1
 kind: Service
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: mongo
+  name: mongo
 spec:
   forProvider:
-    clusterRef:
-      name: example
+    clusterSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
     desiredCount: 3
-    iamRoleRef:
-      name: example
+    iamRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
     loadBalancer:
     - containerName: mongo
       containerPort: 8080
@@ -21,3 +25,6 @@ spec:
       type: memberOf
     region: us-west-1
     taskDefinition: ${aws_ecs_task_definition.mongo.arn}
+
+---
+

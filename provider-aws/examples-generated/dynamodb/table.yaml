@@ -1,7 +1,9 @@
 apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: Table
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: basic-dynamodb-table
+  name: basic-dynamodb-table
 spec:
   forProvider:
     attribute:
@@ -32,3 +34,6 @@ spec:
     - attributeName: TimeToExist
       enabled: false
     writeCapacity: 20
+
+---
+

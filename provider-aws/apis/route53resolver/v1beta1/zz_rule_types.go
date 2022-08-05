@@ -38,8 +38,16 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/route53resolver/v1beta1.Endpoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResolverEndpointID *string `json:"resolverEndpointId,omitempty" tf:"resolver_endpoint_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ResolverEndpointIDRef *v1.Reference `json:"resolverEndpointIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ResolverEndpointIDSelector *v1.Selector `json:"resolverEndpointIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	RuleType *string `json:"ruleType" tf:"rule_type,omitempty"`

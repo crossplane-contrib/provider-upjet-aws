@@ -1,11 +1,16 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: ServerCertificate
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test_cert
+  name: test-cert
 spec:
   forProvider:
     certificateBody: ${file("self-ca-cert.pem")}
     privateKeySecretRef:
       key: attribute.test-key.pem
       name: example-secret
-      namespace: crossplane-system
+      namespace: upbound-system
+
+---
+

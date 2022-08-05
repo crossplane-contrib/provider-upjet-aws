@@ -28,8 +28,16 @@ type MonitoringSubscriptionObservation struct {
 
 type MonitoringSubscriptionParameters struct {
 
-	// +kubebuilder:validation:Required
-	DistributionID *string `json:"distributionId" tf:"distribution_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1.Distribution
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	DistributionID *string `json:"distributionId,omitempty" tf:"distribution_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DistributionIDRef *v1.Reference `json:"distributionIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DistributionIDSelector *v1.Selector `json:"distributionIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	MonitoringSubscription []MonitoringSubscriptionMonitoringSubscriptionParameters `json:"monitoringSubscription" tf:"monitoring_subscription,omitempty"`

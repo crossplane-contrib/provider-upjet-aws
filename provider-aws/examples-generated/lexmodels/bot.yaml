@@ -1,7 +1,9 @@
 apiVersion: lexmodels.aws.upbound.io/v1beta1
 kind: Bot
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: order_flowers_bot
+  name: order-flowers-bot
 spec:
   forProvider:
     abortStatement:
@@ -24,3 +26,6 @@ spec:
     processBehavior: BUILD
     region: us-west-1
     voiceId: Salli
+
+---
+

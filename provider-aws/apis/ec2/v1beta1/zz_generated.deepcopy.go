@@ -1050,6 +1050,16 @@ func (in *EIPAssociationParameters) DeepCopyInto(out *EIPAssociationParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.AllocationIDRef != nil {
+		in, out := &in.AllocationIDRef, &out.AllocationIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AllocationIDSelector != nil {
+		in, out := &in.AllocationIDSelector, &out.AllocationIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AllowReassociation != nil {
 		in, out := &in.AllowReassociation, &out.AllowReassociation
 		*out = new(bool)
@@ -1059,6 +1069,16 @@ func (in *EIPAssociationParameters) DeepCopyInto(out *EIPAssociationParameters) 
 		in, out := &in.InstanceID, &out.InstanceID
 		*out = new(string)
 		**out = **in
+	}
+	if in.InstanceIDRef != nil {
+		in, out := &in.InstanceIDRef, &out.InstanceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.InstanceIDSelector != nil {
+		in, out := &in.InstanceIDSelector, &out.InstanceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NetworkInterfaceID != nil {
 		in, out := &in.NetworkInterfaceID, &out.NetworkInterfaceID
@@ -4062,6 +4082,16 @@ func (in *NATGatewayParameters) DeepCopyInto(out *NATGatewayParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AllocationIDRef != nil {
+		in, out := &in.AllocationIDRef, &out.AllocationIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AllocationIDSelector != nil {
+		in, out := &in.AllocationIDSelector, &out.AllocationIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ConnectivityType != nil {
 		in, out := &in.ConnectivityType, &out.ConnectivityType
 		*out = new(string)
@@ -4455,6 +4485,16 @@ func (in *NetworkACLRuleParameters) DeepCopyInto(out *NetworkACLRuleParameters) 
 		in, out := &in.NetworkACLID, &out.NetworkACLID
 		*out = new(string)
 		**out = **in
+	}
+	if in.NetworkACLIDRef != nil {
+		in, out := &in.NetworkACLIDRef, &out.NetworkACLIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkACLIDSelector != nil {
+		in, out := &in.NetworkACLIDSelector, &out.NetworkACLIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Protocol != nil {
 		in, out := &in.Protocol, &out.Protocol
@@ -5920,6 +5960,16 @@ func (in *RouteTableAssociationParameters) DeepCopyInto(out *RouteTableAssociati
 		in, out := &in.GatewayID, &out.GatewayID
 		*out = new(string)
 		**out = **in
+	}
+	if in.GatewayIDRef != nil {
+		in, out := &in.GatewayIDRef, &out.GatewayIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.GatewayIDSelector != nil {
+		in, out := &in.GatewayIDSelector, &out.GatewayIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -8638,10 +8688,30 @@ func (in *TransitGatewayMulticastDomainAssociationParameters) DeepCopyInto(out *
 		*out = new(string)
 		**out = **in
 	}
+	if in.TransitGatewayAttachmentIDRef != nil {
+		in, out := &in.TransitGatewayAttachmentIDRef, &out.TransitGatewayAttachmentIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TransitGatewayAttachmentIDSelector != nil {
+		in, out := &in.TransitGatewayAttachmentIDSelector, &out.TransitGatewayAttachmentIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TransitGatewayMulticastDomainID != nil {
 		in, out := &in.TransitGatewayMulticastDomainID, &out.TransitGatewayMulticastDomainID
 		*out = new(string)
 		**out = **in
+	}
+	if in.TransitGatewayMulticastDomainIDRef != nil {
+		in, out := &in.TransitGatewayMulticastDomainIDRef, &out.TransitGatewayMulticastDomainIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TransitGatewayMulticastDomainIDSelector != nil {
+		in, out := &in.TransitGatewayMulticastDomainIDSelector, &out.TransitGatewayMulticastDomainIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -8808,6 +8878,16 @@ func (in *TransitGatewayMulticastDomainParameters) DeepCopyInto(out *TransitGate
 		in, out := &in.TransitGatewayID, &out.TransitGatewayID
 		*out = new(string)
 		**out = **in
+	}
+	if in.TransitGatewayIDRef != nil {
+		in, out := &in.TransitGatewayIDRef, &out.TransitGatewayIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TransitGatewayIDSelector != nil {
+		in, out := &in.TransitGatewayIDSelector, &out.TransitGatewayIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -9108,6 +9188,16 @@ func (in *TransitGatewayPeeringAttachmentParameters) DeepCopyInto(out *TransitGa
 		*out = new(string)
 		**out = **in
 	}
+	if in.PeerTransitGatewayIDRef != nil {
+		in, out := &in.PeerTransitGatewayIDRef, &out.PeerTransitGatewayIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PeerTransitGatewayIDSelector != nil {
+		in, out := &in.PeerTransitGatewayIDSelector, &out.PeerTransitGatewayIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -9132,6 +9222,16 @@ func (in *TransitGatewayPeeringAttachmentParameters) DeepCopyInto(out *TransitGa
 		in, out := &in.TransitGatewayID, &out.TransitGatewayID
 		*out = new(string)
 		**out = **in
+	}
+	if in.TransitGatewayIDRef != nil {
+		in, out := &in.TransitGatewayIDRef, &out.TransitGatewayIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TransitGatewayIDSelector != nil {
+		in, out := &in.TransitGatewayIDSelector, &out.TransitGatewayIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -10541,6 +10641,16 @@ func (in *VPCDHCPOptionsAssociationParameters) DeepCopyInto(out *VPCDHCPOptionsA
 		*out = new(string)
 		**out = **in
 	}
+	if in.DHCPOptionsIDRef != nil {
+		in, out := &in.DHCPOptionsIDRef, &out.DHCPOptionsIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DHCPOptionsIDSelector != nil {
+		in, out := &in.DHCPOptionsIDSelector, &out.DHCPOptionsIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -11004,6 +11114,16 @@ func (in *VPCEndpointParameters) DeepCopyInto(out *VPCEndpointParameters) {
 		in, out := &in.ServiceName, &out.ServiceName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ServiceNameRef != nil {
+		in, out := &in.ServiceNameRef, &out.ServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceNameSelector != nil {
+		in, out := &in.ServiceNameSelector, &out.ServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -12114,6 +12234,16 @@ func (in *VolumeAttachmentParameters) DeepCopyInto(out *VolumeAttachmentParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.InstanceIDRef != nil {
+		in, out := &in.InstanceIDRef, &out.InstanceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.InstanceIDSelector != nil {
+		in, out := &in.InstanceIDSelector, &out.InstanceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -12133,6 +12263,16 @@ func (in *VolumeAttachmentParameters) DeepCopyInto(out *VolumeAttachmentParamete
 		in, out := &in.VolumeID, &out.VolumeID
 		*out = new(string)
 		**out = **in
+	}
+	if in.VolumeIDRef != nil {
+		in, out := &in.VolumeIDRef, &out.VolumeIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.VolumeIDSelector != nil {
+		in, out := &in.VolumeIDSelector, &out.VolumeIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

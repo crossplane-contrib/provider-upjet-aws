@@ -1,19 +1,27 @@
 apiVersion: eks.aws.upbound.io/v1beta1
 kind: NodeGroup
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    clusterNameRef:
-      name: example
-    nodeRoleArnRef:
-      name: example
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    nodeRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
     scalingConfig:
     - desiredSize: 1
       maxSize: 1
       minSize: 1
-    subnetIdRefs:
-      name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example[*]
     updateConfig:
     - maxUnavailable: 2
+
+---
+

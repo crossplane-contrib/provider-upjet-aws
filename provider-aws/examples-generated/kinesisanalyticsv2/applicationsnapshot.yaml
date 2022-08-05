@@ -1,8 +1,15 @@
 apiVersion: kinesisanalyticsv2.aws.upbound.io/v1beta1
 kind: ApplicationSnapshot
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    applicationName: example-flink-application
+    applicationNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
+
+---
+

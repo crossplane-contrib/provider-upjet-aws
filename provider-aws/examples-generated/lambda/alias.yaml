@@ -1,15 +1,21 @@
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: Alias
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test_lambda_alias
+  name: test-lambda-alias
 spec:
   forProvider:
     description: a sample description
-    functionNameRef:
-      name: example
+    functionNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lambda_function_test
     functionVersion: "1"
     name: my_alias
     region: us-west-1
     routingConfig:
     - additionalVersionWeights:
         "2": 0.5
+
+---
+

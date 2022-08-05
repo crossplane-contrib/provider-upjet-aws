@@ -1,10 +1,18 @@
 apiVersion: autoscaling.aws.upbound.io/v1beta1
 kind: Attachment
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: asg_attachment_bar
+  name: asg-attachment-bar
 spec:
   forProvider:
-    autoscalingGroupNameRef:
-      name: example
-    elb: ${aws_elb.bar.id}
+    autoscalingGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: asg
+    elbSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bar
     region: us-west-1
+
+---
+

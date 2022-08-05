@@ -1,12 +1,32 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketObjectLockConfiguration
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.example.bucket}
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
     rule:
     - defaultRetention:
       - days: 5
         mode: COMPLIANCE
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    objectLockEnabled: true
+    region: us-west-1
+
+---
+

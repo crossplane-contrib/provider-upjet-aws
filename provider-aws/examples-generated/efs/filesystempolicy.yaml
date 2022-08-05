@@ -1,12 +1,15 @@
 apiVersion: efs.aws.upbound.io/v1beta1
 kind: FileSystemPolicy
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy
 spec:
   forProvider:
     bypassPolicyLockoutSafetyCheck: true
-    fileSystemIdRef:
-      name: example
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: fs
     policy: |
       {
           "Version": "2012-10-17",
@@ -32,3 +35,19 @@ spec:
           ]
       }
     region: us-west-1
+
+---
+
+apiVersion: efs.aws.upbound.io/v1beta1
+kind: FileSystem
+metadata:
+  labels:
+    testing.upbound.io/example-name: fs
+  name: fs
+spec:
+  forProvider:
+    creationToken: my-product
+    region: us-west-1
+
+---
+

@@ -1,6 +1,8 @@
 apiVersion: redshift.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -9,7 +11,10 @@ spec:
     masterPasswordSecretRef:
       key: example-key
       name: example-secret
-      namespace: crossplane-system
+      namespace: upbound-system
     masterUsername: exampleuser
     nodeType: dc1.large
     region: us-west-1
+
+---
+

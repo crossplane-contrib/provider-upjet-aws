@@ -1,11 +1,64 @@
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: ZoneAssociation
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
 spec:
   forProvider:
     region: us-west-1
-    vpcIdRef:
-      name: example
-    zoneIdRef:
-      name: example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: route53.aws.upbound.io/v1beta1
+kind: Zone
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    lifecycle:
+    - ignore_changes:
+      - ${vpc}
+    name: example.com
+    region: us-west-1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+spec:
+  forProvider:
+    cidrBlock: 10.6.0.0/16
+    enableDnsHostnames: true
+    enableDnsSupport: true
+    region: us-west-1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+spec:
+  forProvider:
+    cidrBlock: 10.7.0.0/16
+    enableDnsHostnames: true
+    enableDnsSupport: true
+    region: us-west-1
+
+---
+

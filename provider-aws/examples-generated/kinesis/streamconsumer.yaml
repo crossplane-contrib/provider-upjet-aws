@@ -1,10 +1,30 @@
 apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: StreamConsumer
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     name: example-consumer
     region: us-west-1
-    streamArnRef:
-      name: example
+    streamArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: kinesis.aws.upbound.io/v1beta1
+kind: Stream
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example-stream
+    region: us-west-1
+    shardCount: 1
+
+---
+

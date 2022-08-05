@@ -9,10 +9,58 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/acm/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this Server.
+func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Certificate),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.CertificateRef,
+		Selector:     mg.Spec.ForProvider.CertificateSelector,
+		To: reference.To{
+			List:    &v1beta1.CertificateList{},
+			Managed: &v1beta1.Certificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Certificate")
+	}
+	mg.Spec.ForProvider.Certificate = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CertificateRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.EndpointDetails); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EndpointDetails[i3].VPCID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.EndpointDetails[i3].VPCIDRef,
+			Selector:     mg.Spec.ForProvider.EndpointDetails[i3].VPCIDSelector,
+			To: reference.To{
+				List:    &v1beta11.VPCList{},
+				Managed: &v1beta11.VPC{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.EndpointDetails[i3].VPCID")
+		}
+		mg.Spec.ForProvider.EndpointDetails[i3].VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.EndpointDetails[i3].VPCIDRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
 
 // ResolveReferences of this User.
 func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -27,8 +75,8 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.RoleRef,
 		Selector:     mg.Spec.ForProvider.RoleSelector,
 		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
 		},
 	})
 	if err != nil {

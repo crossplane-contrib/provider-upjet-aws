@@ -1,6 +1,8 @@
 apiVersion: ecrpublic.aws.upbound.io/v1beta1
 kind: RepositoryPolicy
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -32,4 +34,21 @@ spec:
           ]
       }
     region: us-west-1
-    repositoryName: ${aws_ecrpublic_repository.example.repository_name}
+    repositoryNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ecrpublic.aws.upbound.io/v1beta1
+kind: Repository
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+

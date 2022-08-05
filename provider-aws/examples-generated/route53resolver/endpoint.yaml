@@ -1,17 +1,27 @@
 apiVersion: route53resolver.aws.upbound.io/v1beta1
 kind: Endpoint
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
 spec:
   forProvider:
     direction: INBOUND
     ipAddress:
-    - subnetId: ${aws_subnet.sn1.id}
+    - subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sn1
     - ip: 10.0.64.4
-      subnetId: ${aws_subnet.sn2.id}
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sn2
     name: foo
     region: us-west-1
     securityGroupIdRefs:
-    - name: example
+    - name: sg1
+    - name: sg2
     tags:
       Environment: Prod
+
+---
+

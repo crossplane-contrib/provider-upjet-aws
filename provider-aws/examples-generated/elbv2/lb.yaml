@@ -1,12 +1,15 @@
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LB
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
 spec:
   forProvider:
     accessLogs:
-    - bucketRef:
-        name: example
+    - bucketSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lb_logs
       enabled: true
       prefix: test-lb
     enableDeletionProtection: true
@@ -15,8 +18,12 @@ spec:
     name: test-lb-tf
     region: us-west-1
     securityGroupRefs:
-    - name: example
-    subnetRefs:
-      name: example
+    - name: lb_sg
+    subnetSelector:
+      matchLabels:
+        testing.upbound.io/example-name: 'public : subnet'
     tags:
       Environment: production
+
+---
+

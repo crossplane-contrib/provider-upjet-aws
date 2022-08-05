@@ -1,9 +1,48 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: EIPAssociation
 metadata:
+  labels:
+    testing.upbound.io/example-name: eip_assoc
+  name: eip-assoc
+spec:
+  forProvider:
+    allocationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: web
+    region: us-west-1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: EIP
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    allocationId: ${aws_eip.example.id}
-    instanceId: ${aws_instance.web.id}
     region: us-west-1
+    vpc: true
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  labels:
+    testing.upbound.io/example-name: web
+  name: web
+spec:
+  forProvider:
+    ami: ami-21f78e11
+    availabilityZone: us-west-2a
+    instanceType: t2.micro
+    region: us-west-1
+    tags:
+      Name: HelloWorld
+
+---
+
