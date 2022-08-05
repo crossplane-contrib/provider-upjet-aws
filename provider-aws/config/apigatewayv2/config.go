@@ -43,6 +43,10 @@ func Configure(p *config.Provider) {
 		r.References["api_id"] = config.Reference{
 			Type: "API",
 		}
+		// Triggers is a meta-argument that has comma-separated list of other resources in the same HCL block that tells
+		// terraform to re-create the resource if those in the list changed. Upjet workspaces contain only a single
+		// resource, so this is irrelevant.
+		delete(r.TerraformResource.Schema, "triggers")
 		if err := r.MetaResource.Examples[0].SetPathValue("lifecycle", nil); err != nil {
 			panic(err)
 		}
@@ -69,6 +73,13 @@ func Configure(p *config.Provider) {
 		r.References["api_id"] = config.Reference{
 			Type: "API",
 		}
+		r.References["target"] = config.Reference{
+			Type:      "Integration",
+			Extractor: "github.com/upbound/official-providers/provider-aws/apis/apigatewayv2/v1beta1.IntegrationIDPrefixed()",
+		}
+		r.References["authorizer_id"] = config.Reference{
+			Type: "Authorizer",
+		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_route_response", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
@@ -82,5 +93,11 @@ func Configure(p *config.Provider) {
 		r.References["api_id"] = config.Reference{
 			Type: "API",
 		}
+		r.References["deployment_id"] = config.Reference{
+			Type: "Deployment",
+		}
+	})
+	p.AddResourceConfigurator("aws_apigatewayv2_vpclink", func(r *config.Resource) {
+		r.UseAsync = true
 	})
 }

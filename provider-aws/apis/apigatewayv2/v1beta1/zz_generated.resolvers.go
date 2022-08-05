@@ -288,6 +288,38 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthorizerID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AuthorizerIDRef,
+		Selector:     mg.Spec.ForProvider.AuthorizerIDSelector,
+		To: reference.To{
+			List:    &AuthorizerList{},
+			Managed: &Authorizer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AuthorizerID")
+	}
+	mg.Spec.ForProvider.AuthorizerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AuthorizerIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Target),
+		Extract:      IntegrationIDPrefixed(),
+		Reference:    mg.Spec.ForProvider.TargetRef,
+		Selector:     mg.Spec.ForProvider.TargetSelector,
+		To: reference.To{
+			List:    &IntegrationList{},
+			Managed: &Integration{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Target")
+	}
+	mg.Spec.ForProvider.Target = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -355,6 +387,22 @@ func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeploymentID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DeploymentIDRef,
+		Selector:     mg.Spec.ForProvider.DeploymentIDSelector,
+		To: reference.To{
+			List:    &DeploymentList{},
+			Managed: &Deployment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DeploymentID")
+	}
+	mg.Spec.ForProvider.DeploymentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DeploymentIDRef = rsp.ResolvedReference
 
 	return nil
 }

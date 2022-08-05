@@ -50,8 +50,15 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
+	// +crossplane:generate:reference:type=Authorizer
 	// +kubebuilder:validation:Optional
 	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	AuthorizerIDRef *v1.Reference `json:"authorizerIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	AuthorizerIDSelector *v1.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
@@ -76,8 +83,16 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	RouteResponseSelectionExpression *string `json:"routeResponseSelectionExpression,omitempty" tf:"route_response_selection_expression,omitempty"`
 
+	// +crossplane:generate:reference:type=Integration
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/apis/apigatewayv2/v1beta1.IntegrationIDPrefixed()
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
 }
 
 // RouteSpec defines the desired state of Route

@@ -957,7 +957,7 @@ func FormattedIdentifierUserDefined(param, separator string, keys ...string) con
 // without the name initializer. This allows it to be used in cases where the ID
 // is constructed with parameters and a provider-defined value, meaning no
 // user-defined input. Since the external name is not user-defined, the name
-// initializer has to be disabled
+// initializer has to be disabled.
 func TemplatedStringAsIdentifierWithNoName(tmpl string) config.ExternalName {
 	e := config.TemplatedStringAsIdentifier("", tmpl)
 	e.DisableNameInitializer = true

@@ -106,8 +106,15 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultRouteSettings []DefaultRouteSettingsParameters `json:"defaultRouteSettings,omitempty" tf:"default_route_settings,omitempty"`
 
+	// +crossplane:generate:reference:type=Deployment
 	// +kubebuilder:validation:Optional
 	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DeploymentIDRef *v1.Reference `json:"deploymentIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DeploymentIDSelector *v1.Selector `json:"deploymentIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`

@@ -38,9 +38,6 @@ type DeploymentParameters struct {
 	// +terrajet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
 // DeploymentSpec defines the desired state of Deployment
