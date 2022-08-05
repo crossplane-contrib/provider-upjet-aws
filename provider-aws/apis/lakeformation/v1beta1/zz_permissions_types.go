@@ -76,16 +76,8 @@ type PermissionsParameters struct {
 	// +kubebuilder:validation:Optional
 	PermissionsWithGrantOption []*string `json:"permissionsWithGrantOption,omitempty" tf:"permissions_with_grant_option,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
-	// +kubebuilder:validation:Optional
-	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PrincipalRef *v1.Reference `json:"principalRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	PrincipalSelector *v1.Selector `json:"principalSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	Principal *string `json:"principal" tf:"principal,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-

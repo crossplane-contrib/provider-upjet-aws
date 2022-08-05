@@ -457,37 +457,6 @@ func (mg *InstanceRoleAssociation) ResolveReferences(ctx context.Context, c clie
 	return nil
 }
 
-// ResolveReferences of this OptionGroup.
-func (mg *OptionGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Option); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.Option[i3].OptionSettings); i4++ {
-			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Option[i3].OptionSettings[i4].Value),
-				Extract:      resource.ExtractParamPath("arn", true),
-				Reference:    mg.Spec.ForProvider.Option[i3].OptionSettings[i4].ValueRef,
-				Selector:     mg.Spec.ForProvider.Option[i3].OptionSettings[i4].ValueSelector,
-				To: reference.To{
-					List:    &v1beta13.RoleList{},
-					Managed: &v1beta13.Role{},
-				},
-			})
-			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.Option[i3].OptionSettings[i4].Value")
-			}
-			mg.Spec.ForProvider.Option[i3].OptionSettings[i4].Value = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.Option[i3].OptionSettings[i4].ValueRef = rsp.ResolvedReference
-
-		}
-	}
-
-	return nil
-}
-
 // ResolveReferences of this Proxy.
 func (mg *Proxy) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

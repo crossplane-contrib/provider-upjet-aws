@@ -1668,16 +1668,6 @@ func (in *QueryLogConfigParameters) DeepCopyInto(out *QueryLogConfigParameters) 
 		*out = new(string)
 		**out = **in
 	}
-	if in.DestinationArnRef != nil {
-		in, out := &in.DestinationArnRef, &out.DestinationArnRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.DestinationArnSelector != nil {
-		in, out := &in.DestinationArnSelector, &out.DestinationArnSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)

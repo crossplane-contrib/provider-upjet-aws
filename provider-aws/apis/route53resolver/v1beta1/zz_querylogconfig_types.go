@@ -27,16 +27,8 @@ type QueryLogConfigObservation struct {
 
 type QueryLogConfigParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
-	// +kubebuilder:validation:Optional
-	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DestinationArnRef *v1.Reference `json:"destinationArnRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`

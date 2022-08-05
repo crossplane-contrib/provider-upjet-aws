@@ -76,16 +76,8 @@ type OptionSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
-	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	ValueRef *v1.Reference `json:"valueRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	ValueSelector *v1.Selector `json:"valueSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // OptionGroupSpec defines the desired state of OptionGroup

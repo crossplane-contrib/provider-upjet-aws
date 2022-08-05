@@ -76,4 +76,8 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_db_snapshot", func(r *config.Resource) {
 		r.UseAsync = true
 	})
+
+	p.AddResourceConfigurator("aws_db_option_group", func(r *config.Resource) {
+		delete(r.References, "option.option_settings.value")
+	})
 }

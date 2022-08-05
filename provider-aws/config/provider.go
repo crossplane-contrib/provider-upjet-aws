@@ -40,6 +40,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/kinesisanalytics"
 	kinesisanalytics2 "github.com/upbound/official-providers/provider-aws/config/kinesisanalyticsv2"
 	"github.com/upbound/official-providers/provider-aws/config/kms"
+	"github.com/upbound/official-providers/provider-aws/config/lakeformation"
 	"github.com/upbound/official-providers/provider-aws/config/lambda"
 	"github.com/upbound/official-providers/provider-aws/config/licensemanager"
 	"github.com/upbound/official-providers/provider-aws/config/mq"
@@ -47,6 +48,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/rds"
 	"github.com/upbound/official-providers/provider-aws/config/redshift"
 	"github.com/upbound/official-providers/provider-aws/config/route53"
+	"github.com/upbound/official-providers/provider-aws/config/route53resolver"
 	"github.com/upbound/official-providers/provider-aws/config/s3"
 	"github.com/upbound/official-providers/provider-aws/config/servicediscovery"
 	"github.com/upbound/official-providers/provider-aws/config/sfn"
@@ -148,6 +150,8 @@ func GetProvider() *config.Provider {
 		sfn.Configure,
 		transfer.Configure,
 		kafka.Configure,
+		lakeformation.Configure,
+		route53resolver.Configure,
 	} {
 		configure(pc)
 	}

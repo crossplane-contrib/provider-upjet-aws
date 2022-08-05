@@ -3751,16 +3751,6 @@ func (in *OriginParameters) DeepCopyInto(out *OriginParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.DomainNameRef != nil {
-		in, out := &in.DomainNameRef, &out.DomainNameRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.DomainNameSelector != nil {
-		in, out := &in.DomainNameSelector, &out.DomainNameSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.OriginID != nil {
 		in, out := &in.OriginID, &out.OriginID
 		*out = new(string)

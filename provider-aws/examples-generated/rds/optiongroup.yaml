@@ -12,15 +12,11 @@ spec:
     - optionName: Timezone
       optionSettings:
       - name: TIME_ZONE
-        valueSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
+        value: UTC
     - optionName: SQLSERVER_BACKUP_RESTORE
       optionSettings:
       - name: IAM_ROLE_ARN
-        valueSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
+        value: ${aws_iam_role.example.arn}
     - optionName: TDE
     optionGroupDescription: Terraform Option Group
     region: us-west-1

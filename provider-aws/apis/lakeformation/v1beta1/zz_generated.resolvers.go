@@ -9,59 +9,12 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1"
-	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
-
-// ResolveReferences of this DataLakeSettings.
-func (mg *DataLakeSettings) ResolveReferences(ctx context.Context, c client.Reader) error {
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.CreateDatabaseDefaultPermissions); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CreateDatabaseDefaultPermissions[i3].Principal),
-			Extract:      resource.ExtractParamPath("arn", true),
-			Reference:    mg.Spec.ForProvider.CreateDatabaseDefaultPermissions[i3].PrincipalRef,
-			Selector:     mg.Spec.ForProvider.CreateDatabaseDefaultPermissions[i3].PrincipalSelector,
-			To: reference.To{
-				List:    &v1beta1.UserList{},
-				Managed: &v1beta1.User{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.CreateDatabaseDefaultPermissions[i3].Principal")
-		}
-		mg.Spec.ForProvider.CreateDatabaseDefaultPermissions[i3].Principal = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.CreateDatabaseDefaultPermissions[i3].PrincipalRef = rsp.ResolvedReference
-
-	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.CreateTableDefaultPermissions); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CreateTableDefaultPermissions[i3].Principal),
-			Extract:      resource.ExtractParamPath("arn", true),
-			Reference:    mg.Spec.ForProvider.CreateTableDefaultPermissions[i3].PrincipalRef,
-			Selector:     mg.Spec.ForProvider.CreateTableDefaultPermissions[i3].PrincipalSelector,
-			To: reference.To{
-				List:    &v1beta1.RoleList{},
-				Managed: &v1beta1.Role{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.CreateTableDefaultPermissions[i3].Principal")
-		}
-		mg.Spec.ForProvider.CreateTableDefaultPermissions[i3].Principal = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.CreateTableDefaultPermissions[i3].PrincipalRef = rsp.ResolvedReference
-
-	}
-
-	return nil
-}
 
 // ResolveReferences of this Permissions.
 func (mg *Permissions) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -95,8 +48,8 @@ func (mg *Permissions) ResolveReferences(ctx context.Context, c client.Reader) e
 			Reference:    mg.Spec.ForProvider.Database[i3].NameRef,
 			Selector:     mg.Spec.ForProvider.Database[i3].NameSelector,
 			To: reference.To{
-				List:    &v1beta11.CatalogDatabaseList{},
-				Managed: &v1beta11.CatalogDatabase{},
+				List:    &v1beta1.CatalogDatabaseList{},
+				Managed: &v1beta1.CatalogDatabase{},
 			},
 		})
 		if err != nil {
@@ -106,22 +59,6 @@ func (mg *Permissions) ResolveReferences(ctx context.Context, c client.Reader) e
 		mg.Spec.ForProvider.Database[i3].NameRef = rsp.ResolvedReference
 
 	}
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Principal),
-		Extract:      resource.ExtractParamPath("arn", true),
-		Reference:    mg.Spec.ForProvider.PrincipalRef,
-		Selector:     mg.Spec.ForProvider.PrincipalSelector,
-		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.Principal")
-	}
-	mg.Spec.ForProvider.Principal = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.PrincipalRef = rsp.ResolvedReference
-
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.TableWithColumns); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableWithColumns[i3].DatabaseName),
@@ -129,8 +66,8 @@ func (mg *Permissions) ResolveReferences(ctx context.Context, c client.Reader) e
 			Reference:    mg.Spec.ForProvider.TableWithColumns[i3].DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.TableWithColumns[i3].DatabaseNameSelector,
 			To: reference.To{
-				List:    &v1beta11.CatalogTableList{},
-				Managed: &v1beta11.CatalogTable{},
+				List:    &v1beta1.CatalogTableList{},
+				Managed: &v1beta1.CatalogTable{},
 			},
 		})
 		if err != nil {
@@ -147,8 +84,8 @@ func (mg *Permissions) ResolveReferences(ctx context.Context, c client.Reader) e
 			Reference:    mg.Spec.ForProvider.TableWithColumns[i3].NameRef,
 			Selector:     mg.Spec.ForProvider.TableWithColumns[i3].NameSelector,
 			To: reference.To{
-				List:    &v1beta11.CatalogTableList{},
-				Managed: &v1beta11.CatalogTable{},
+				List:    &v1beta1.CatalogTableList{},
+				Managed: &v1beta1.CatalogTable{},
 			},
 		})
 		if err != nil {
@@ -175,8 +112,8 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
 		},
 	})
 	if err != nil {

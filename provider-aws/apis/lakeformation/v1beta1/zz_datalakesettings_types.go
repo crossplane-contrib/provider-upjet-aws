@@ -21,16 +21,8 @@ type CreateDatabaseDefaultPermissionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.User
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PrincipalRef *v1.Reference `json:"principalRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	PrincipalSelector *v1.Selector `json:"principalSelector,omitempty" tf:"-"`
 }
 
 type CreateTableDefaultPermissionsObservation struct {
@@ -41,16 +33,8 @@ type CreateTableDefaultPermissionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PrincipalRef *v1.Reference `json:"principalRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	PrincipalSelector *v1.Selector `json:"principalSelector,omitempty" tf:"-"`
 }
 
 type DataLakeSettingsObservation struct {

@@ -10,7 +10,6 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
-	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -192,32 +191,6 @@ func (mg *FirewallRuleGroupAssociation) ResolveReferences(ctx context.Context, c
 	}
 	mg.Spec.ForProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPCIDRef = rsp.ResolvedReference
-
-	return nil
-}
-
-// ResolveReferences of this QueryLogConfig.
-func (mg *QueryLogConfig) ResolveReferences(ctx context.Context, c client.Reader) error {
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationArn),
-		Extract:      resource.ExtractParamPath("arn", false),
-		Reference:    mg.Spec.ForProvider.DestinationArnRef,
-		Selector:     mg.Spec.ForProvider.DestinationArnSelector,
-		To: reference.To{
-			List:    &v1beta11.BucketList{},
-			Managed: &v1beta11.Bucket{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.DestinationArn")
-	}
-	mg.Spec.ForProvider.DestinationArn = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.DestinationArnRef = rsp.ResolvedReference
 
 	return nil
 }

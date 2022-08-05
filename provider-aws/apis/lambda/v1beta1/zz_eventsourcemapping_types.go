@@ -52,16 +52,8 @@ type EventSourceMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/dynamodb/v1beta1.Table
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("stream_arn",true)
 	// +kubebuilder:validation:Optional
 	EventSourceArn *string `json:"eventSourceArn,omitempty" tf:"event_source_arn,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	EventSourceArnRef *v1.Reference `json:"eventSourceArnRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	EventSourceArnSelector *v1.Selector `json:"eventSourceArnSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	FilterCriteria []FilterCriteriaParameters `json:"filterCriteria,omitempty" tf:"filter_criteria,omitempty"`
