@@ -41,10 +41,13 @@ import (
 	realtimelogconfig "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/realtimelogconfig"
 	responseheaderspolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/responseheaderspolicy"
 	group "github.com/upbound/official-providers/provider-aws/internal/controller/cloudwatchlogs/group"
-	cluster "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/cluster"
+	cluster "github.com/upbound/official-providers/provider-aws/internal/controller/dax/cluster"
+	parametergroup "github.com/upbound/official-providers/provider-aws/internal/controller/dax/parametergroup"
+	subnetgroup "github.com/upbound/official-providers/provider-aws/internal/controller/dax/subnetgroup"
+	clusterdocdb "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/clusterinstance"
 	globalcluster "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/globalcluster"
-	subnetgroup "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/subnetgroup"
+	subnetgroupdocdb "github.com/upbound/official-providers/provider-aws/internal/controller/docdb/subnetgroup"
 	contributorinsights "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/contributorinsights"
 	globaltable "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/globaltable"
 	kinesisstreamingdestination "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
@@ -113,7 +116,7 @@ import (
 	identityproviderconfig "github.com/upbound/official-providers/provider-aws/internal/controller/eks/identityproviderconfig"
 	nodegroup "github.com/upbound/official-providers/provider-aws/internal/controller/eks/nodegroup"
 	clusterelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/cluster"
-	parametergroup "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/parametergroup"
+	parametergroupelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/parametergroup"
 	replicationgroup "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/replicationgroup"
 	subnetgroupelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/subnetgroup"
 	user "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/user"
@@ -333,9 +336,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		responseheaderspolicy.Setup,
 		group.Setup,
 		cluster.Setup,
+		parametergroup.Setup,
+		subnetgroup.Setup,
+		clusterdocdb.Setup,
 		clusterinstance.Setup,
 		globalcluster.Setup,
-		subnetgroup.Setup,
+		subnetgroupdocdb.Setup,
 		contributorinsights.Setup,
 		globaltable.Setup,
 		kinesisstreamingdestination.Setup,
@@ -404,7 +410,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		identityproviderconfig.Setup,
 		nodegroup.Setup,
 		clusterelasticache.Setup,
-		parametergroup.Setup,
+		parametergroupelasticache.Setup,
 		replicationgroup.Setup,
 		subnetgroupelasticache.Setup,
 		user.Setup,

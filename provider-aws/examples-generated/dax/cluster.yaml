@@ -1,0 +1,11 @@
+apiVersion: dax.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    iamRoleArnRef:
+      name: example
+    nodeType: dax.r4.large
+    region: us-west-1
+    replicationFactor: 1
