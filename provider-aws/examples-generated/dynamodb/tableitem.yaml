@@ -35,6 +35,7 @@ spec:
       type: S
     hashKey: exampleHashKey
     readCapacity: 10
+    region: us-west-1
     writeCapacity: 10
 
 ---

@@ -25,7 +25,8 @@ metadata:
     testing.upbound.io/example-name: example
   name: example
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -40,6 +41,7 @@ spec:
     databaseNameSelector:
       matchLabels:
         testing.upbound.io/example-name: test
+    region: us-west-1
     storageDescriptor:
     - columns:
       - name: event

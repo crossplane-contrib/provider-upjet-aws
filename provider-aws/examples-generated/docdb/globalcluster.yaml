@@ -31,6 +31,7 @@ spec:
       namespace: upbound-system
     masterUsername: username
     provider: ${aws.primary}
+    region: us-west-1
 
 ---
 
@@ -47,6 +48,7 @@ spec:
     engineVersion: 4.0.0
     globalClusterIdentifier: ${aws_docdb_global_cluster.example.id}
     provider: ${aws.secondary}
+    region: us-west-1
 
 ---
 
@@ -64,6 +66,7 @@ spec:
     engine: docdb
     instanceClass: db.r5.large
     provider: ${aws.primary}
+    region: us-west-1
 
 ---
 
@@ -81,6 +84,7 @@ spec:
     engine: docdb
     instanceClass: db.r5.large
     provider: ${aws.secondary}
+    region: us-west-1
 
 ---
 

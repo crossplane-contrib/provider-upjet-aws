@@ -25,6 +25,7 @@ metadata:
 spec:
   forProvider:
     provider: ${aws.local}
+    region: us-west-1
     tags:
       Name: Local TGW
 
@@ -39,6 +40,7 @@ metadata:
 spec:
   forProvider:
     provider: ${aws.peer}
+    region: us-west-1
     tags:
       Name: Peer TGW
 

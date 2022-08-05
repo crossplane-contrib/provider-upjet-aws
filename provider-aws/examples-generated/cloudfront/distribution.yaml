@@ -108,6 +108,7 @@ metadata:
   name: b
 spec:
   forProvider:
+    region: us-west-1
     tags:
       Name: My bucket
 
@@ -122,6 +123,7 @@ metadata:
 spec:
   forProvider:
     bucket: ${aws_s3_bucket.b.id}
+    region: us-west-1
 
 ---
 

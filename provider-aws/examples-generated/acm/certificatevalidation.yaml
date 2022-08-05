@@ -23,6 +23,7 @@ metadata:
 spec:
   forProvider:
     domainName: example.com
+    region: us-west-1
     validationMethod: DNS
 
 ---
@@ -36,6 +37,7 @@ metadata:
 spec:
   forProvider:
     certificateArn: ${aws_acm_certificate.example.arn}
+    region: us-west-1
 
 ---
 
@@ -59,6 +61,7 @@ spec:
     name: ${each.value.name}
     records:
     - ${each.value.record}
+    region: us-west-1
     ttl: 60
     type: ${each.value.type}
     zoneIdSelector:

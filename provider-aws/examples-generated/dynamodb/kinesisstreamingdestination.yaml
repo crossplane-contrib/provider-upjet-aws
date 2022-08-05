@@ -28,6 +28,7 @@ spec:
     - name: id
       type: S
     hashKey: id
+    region: us-west-1
 
 ---
 
@@ -40,6 +41,7 @@ metadata:
 spec:
   forProvider:
     name: order_item_changes
+    region: us-west-1
     shardCount: 1
 
 ---

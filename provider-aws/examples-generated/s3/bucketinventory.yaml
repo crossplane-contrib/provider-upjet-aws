@@ -26,7 +26,8 @@ metadata:
     testing.upbound.io/example-name: inventory
   name: inventory
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -37,7 +38,8 @@ metadata:
     testing.upbound.io/example-name: test
   name: test
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 

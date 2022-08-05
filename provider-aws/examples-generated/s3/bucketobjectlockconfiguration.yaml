@@ -24,6 +24,7 @@ metadata:
 spec:
   forProvider:
     objectLockEnabled: true
+    region: us-west-1
 
 ---
 

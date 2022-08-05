@@ -28,6 +28,7 @@ spec:
     authenticationProviders:
     - SAML
     permissionType: SERVICE_MANAGED
+    region: us-west-1
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: assume

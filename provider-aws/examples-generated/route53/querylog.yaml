@@ -21,6 +21,7 @@ metadata:
 spec:
   forProvider:
     provider: ${aws.us-east-1}
+    region: us-west-1
     retentionInDays: 30
 
 ---
@@ -34,6 +35,7 @@ metadata:
 spec:
   forProvider:
     name: example.com
+    region: us-west-1
 
 ---
 

@@ -59,6 +59,7 @@ spec:
         testing.upbound.io/example-name: test_lambda
     functionVersion: $LATEST
     name: testalias
+    region: us-west-1
 
 ---
 
@@ -72,6 +73,7 @@ spec:
   forProvider:
     filename: lambdatest.zip
     handler: exports.handler
+    region: us-west-1
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: iam_for_lambda

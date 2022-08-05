@@ -28,6 +28,7 @@ metadata:
   name: test
 spec:
   forProvider:
+    region: us-west-1
     tag:
     - key: AmazonECSManaged
       propagateAtLaunch: true

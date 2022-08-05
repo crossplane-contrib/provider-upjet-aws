@@ -41,6 +41,7 @@ metadata:
 spec:
   forProvider:
     name: terraform-kinesis-test
+    region: us-west-1
     shardCount: 1
 
 ---

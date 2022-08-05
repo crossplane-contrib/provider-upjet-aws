@@ -24,6 +24,7 @@ metadata:
 spec:
   forProvider:
     description: AWS KMS Key to encrypt Database Activity Stream
+    region: us-west-1
 
 ---
 
@@ -47,6 +48,7 @@ spec:
       name: example-secret
       namespace: upbound-system
     masterUsername: foo
+    region: us-west-1
 
 ---
 
@@ -61,6 +63,7 @@ spec:
     clusterIdentifier: aurora-cluster-demo
     engine: aurora-postgresql
     instanceClass: db.r6g.large
+    region: us-west-1
 
 ---
 

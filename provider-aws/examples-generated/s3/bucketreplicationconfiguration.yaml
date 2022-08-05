@@ -118,7 +118,8 @@ metadata:
     testing.upbound.io/example-name: destination
   name: destination
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -131,6 +132,7 @@ metadata:
 spec:
   forProvider:
     provider: ${aws.central}
+    region: us-west-1
 
 ---
 
@@ -144,6 +146,7 @@ spec:
   forProvider:
     bucket: ${aws_s3_bucket.source.id}
     provider: ${aws.central}
+    region: us-west-1
 
 ---
 
@@ -156,6 +159,7 @@ metadata:
 spec:
   forProvider:
     bucket: ${aws_s3_bucket.destination.id}
+    region: us-west-1
     versioningConfiguration:
     - status: Enabled
 
@@ -171,6 +175,7 @@ spec:
   forProvider:
     bucket: ${aws_s3_bucket.source.id}
     provider: ${aws.central}
+    region: us-west-1
     versioningConfiguration:
     - status: Enabled
 

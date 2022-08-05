@@ -26,6 +26,7 @@ metadata:
   name: bar
 spec:
   forProvider:
+    region: us-west-1
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: foo

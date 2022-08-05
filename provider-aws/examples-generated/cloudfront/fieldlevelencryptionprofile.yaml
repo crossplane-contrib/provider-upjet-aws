@@ -33,6 +33,7 @@ spec:
       name: example-secret
       namespace: upbound-system
     name: test_key
+    region: us-west-1
 
 ---
 

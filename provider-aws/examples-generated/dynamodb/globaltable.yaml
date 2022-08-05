@@ -28,6 +28,7 @@ spec:
     hashKey: myAttribute
     provider: ${aws.us-east-1}
     readCapacity: 1
+    region: us-west-1
     streamEnabled: true
     streamViewType: NEW_AND_OLD_IMAGES
     writeCapacity: 1
@@ -48,6 +49,7 @@ spec:
     hashKey: myAttribute
     provider: ${aws.us-west-2}
     readCapacity: 1
+    region: us-west-1
     streamEnabled: true
     streamViewType: NEW_AND_OLD_IMAGES
     writeCapacity: 1

@@ -29,6 +29,7 @@ spec:
     debugLogging: false
     engineFamily: MYSQL
     idleClientTimeout: 1800
+    region: us-west-1
     requireTls: true
     roleArnSelector:
       matchLabels:
@@ -59,6 +60,7 @@ spec:
       sessionPinningFilters:
       - EXCLUDE_VARIABLE_SETS
     dbProxyName: example
+    region: us-west-1
 
 ---
 

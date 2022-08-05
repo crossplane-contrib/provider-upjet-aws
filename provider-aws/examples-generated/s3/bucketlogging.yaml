@@ -20,7 +20,8 @@ metadata:
     testing.upbound.io/example-name: example
   name: example
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -31,7 +32,8 @@ metadata:
     testing.upbound.io/example-name: log_bucket
   name: log-bucket
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1
 
 ---
 
@@ -44,6 +46,7 @@ metadata:
 spec:
   forProvider:
     bucket: ${aws_s3_bucket.example.id}
+    region: us-west-1
 
 ---
 
@@ -56,6 +59,7 @@ metadata:
 spec:
   forProvider:
     bucket: ${aws_s3_bucket.log_bucket.id}
+    region: us-west-1
 
 ---
 
