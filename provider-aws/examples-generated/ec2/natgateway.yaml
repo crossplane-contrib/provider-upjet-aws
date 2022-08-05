@@ -1,12 +1,18 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: NATGateway
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     allocationId: ${aws_eip.example.id}
     region: us-west-1
-    subnetIdRef:
-      name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     tags:
       Name: gw NAT
+
+---
+

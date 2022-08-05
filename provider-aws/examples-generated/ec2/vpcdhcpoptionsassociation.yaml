@@ -1,10 +1,16 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCDHCPOptionsAssociation
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: dns_resolver
+  name: dns-resolver
 spec:
   forProvider:
     dhcpOptionsId: ${aws_vpc_dhcp_options.foo.id}
     region: us-west-1
-    vpcIdRef:
-      name: example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+

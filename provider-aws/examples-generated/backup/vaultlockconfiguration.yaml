@@ -1,7 +1,9 @@
 apiVersion: backup.aws.upbound.io/v1beta1
 kind: VaultLockConfiguration
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
 spec:
   forProvider:
     backupVaultName: example_backup_vault
@@ -9,3 +11,6 @@ spec:
     maxRetentionDays: 1200
     minRetentionDays: 7
     region: us-west-1
+
+---
+

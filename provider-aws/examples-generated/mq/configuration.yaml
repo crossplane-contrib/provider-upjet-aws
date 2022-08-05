@@ -1,6 +1,8 @@
 apiVersion: mq.aws.upbound.io/v1beta1
 kind: Configuration
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -18,3 +20,6 @@ spec:
     engineVersion: 5.15.0
     name: example
     region: us-west-1
+
+---
+

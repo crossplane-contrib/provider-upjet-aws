@@ -1,10 +1,16 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCEndpoint
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: s3
+  name: s3
 spec:
   forProvider:
     region: us-west-1
     serviceName: com.amazonaws.us-west-2.s3
-    vpcIdRef:
-      name: example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+
+---
+

@@ -1,6 +1,8 @@
 apiVersion: route53resolver.aws.upbound.io/v1beta1
 kind: FirewallRule
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -14,3 +16,34 @@ spec:
     name: example
     priority: 100
     region: us-west-1
+
+---
+
+apiVersion: route53resolver.aws.upbound.io/v1beta1
+kind: FirewallDomainList
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domains:
+    - example.com
+    name: example
+    tags: {}
+
+---
+
+apiVersion: route53resolver.aws.upbound.io/v1beta1
+kind: FirewallRuleGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    tags: {}
+
+---
+

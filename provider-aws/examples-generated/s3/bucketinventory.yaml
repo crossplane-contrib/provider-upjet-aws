@@ -1,7 +1,9 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketInventory
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
 spec:
   forProvider:
     bucket: ${aws_s3_bucket.test.id}
@@ -14,3 +16,28 @@ spec:
     region: us-west-1
     schedule:
     - frequency: Daily
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: inventory
+  name: inventory
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider: {}
+
+---
+

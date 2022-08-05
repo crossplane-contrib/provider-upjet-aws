@@ -1,6 +1,8 @@
 apiVersion: kinesisanalyticsv2.aws.upbound.io/v1beta1
 kind: Application
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,8 +10,9 @@ spec:
     - applicationCodeConfiguration:
       - codeContent:
         - s3ContentLocation:
-          - bucketArnRef:
-              name: example
+          - bucketArnSelector:
+              matchLabels:
+                testing.upbound.io/example-name: example
             fileKey: new_object_key
         codeContentType: ZIPFILE
       environmentProperties:
@@ -36,7 +39,36 @@ spec:
     name: example-flink-application
     region: us-west-1
     runtimeEnvironment: FLINK-1_8
-    serviceExecutionRoleRef:
-      name: example
+    serviceExecutionRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     tags:
       Environment: test
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Object
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucket: example-flink-application
+    key: example-flink-application
+    source: flink-app.jar
+
+---
+

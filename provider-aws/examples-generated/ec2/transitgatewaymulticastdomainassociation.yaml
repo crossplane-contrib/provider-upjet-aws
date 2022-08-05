@@ -1,11 +1,60 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayMulticastDomainAssociation
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     region: us-west-1
-    subnetIdRef:
-      name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     transitGatewayAttachmentId: ${aws_ec2_transit_gateway_vpc_attachment.example.id}
     transitGatewayMulticastDomainId: ${aws_ec2_transit_gateway_multicast_domain.example.id}
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGateway
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    multicastSupport: enable
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayMulticastDomain
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    transitGatewayId: ${aws_ec2_transit_gateway.example.id}
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayVPCAttachment
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    subnetIdRefs:
+    - name: example
+    transitGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

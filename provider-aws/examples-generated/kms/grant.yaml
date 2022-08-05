@@ -1,18 +1,60 @@
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Grant
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: a
+  name: a
 spec:
   forProvider:
     constraints:
     - encryptionContextEquals:
         Department: Finance
     granteePrincipal: ${aws_iam_role.a.arn}
-    keyIdRef:
-      name: example
+    keyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: a
     name: my-grant
     operations:
     - Encrypt
     - Decrypt
     - GenerateDataKey
     region: us-west-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  labels:
+    testing.upbound.io/example-name: a
+  name: a
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "lambda.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }
+
+---
+
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  labels:
+    testing.upbound.io/example-name: a
+  name: a
+spec:
+  forProvider: {}
+
+---
+

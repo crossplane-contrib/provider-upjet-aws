@@ -1,6 +1,8 @@
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: Trigger
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -12,3 +14,6 @@ spec:
         state: SUCCEEDED
     region: us-west-1
     type: CONDITIONAL
+
+---
+

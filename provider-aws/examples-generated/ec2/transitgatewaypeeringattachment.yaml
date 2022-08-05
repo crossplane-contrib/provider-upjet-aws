@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayPeeringAttachment
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -11,3 +13,34 @@ spec:
     tags:
       Name: TGW Peering Requestor
     transitGatewayId: ${aws_ec2_transit_gateway.local.id}
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGateway
+metadata:
+  labels:
+    testing.upbound.io/example-name: local
+  name: local
+spec:
+  forProvider:
+    provider: ${aws.local}
+    tags:
+      Name: Local TGW
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGateway
+metadata:
+  labels:
+    testing.upbound.io/example-name: peer
+  name: peer
+spec:
+  forProvider:
+    provider: ${aws.peer}
+    tags:
+      Name: Peer TGW
+
+---
+

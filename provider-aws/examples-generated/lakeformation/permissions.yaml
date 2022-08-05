@@ -1,6 +1,8 @@
 apiVersion: lakeformation.aws.upbound.io/v1beta1
 kind: Permissions
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -13,3 +15,35 @@ spec:
       - event
       databaseName: ${aws_glue_catalog_table.example.database_name}
       name: ${aws_glue_catalog_table.example.name}
+
+---
+
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: CatalogDatabase
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: CatalogTable
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    storageDescriptor:
+    - columns:
+      - name: event
+        type: string
+
+---
+

@@ -1,6 +1,8 @@
 apiVersion: ecr.aws.upbound.io/v1beta1
 kind: ReplicationConfiguration
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -10,3 +12,6 @@ spec:
       - destination:
         - region: ${data.aws_regions.example.names[0]}
           registryId: ${data.aws_caller_identity.current.account_id}
+
+---
+

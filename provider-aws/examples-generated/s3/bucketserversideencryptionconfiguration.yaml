@@ -1,6 +1,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketServerSideEncryptionConfiguration
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -10,3 +12,30 @@ spec:
     - applyServerSideEncryptionByDefault:
       - kmsMasterKeyId: ${aws_kms_key.mykey.arn}
         sseAlgorithm: aws:kms
+
+---
+
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  labels:
+    testing.upbound.io/example-name: mykey
+  name: mykey
+spec:
+  forProvider:
+    deletionWindowInDays: 10
+    description: This key is used to encrypt bucket objects
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: mybucket
+  name: mybucket
+spec:
+  forProvider: {}
+
+---
+

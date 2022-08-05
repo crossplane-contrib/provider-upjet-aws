@@ -1,10 +1,16 @@
 apiVersion: route53resolver.aws.upbound.io/v1beta1
 kind: RuleAssociation
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     region: us-west-1
     resolverRuleId: ${aws_route53_resolver_rule.sys.id}
-    vpcIdRef:
-      name: example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+

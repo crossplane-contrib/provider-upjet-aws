@@ -1,10 +1,44 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VolumeAttachment
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: ebs_att
+  name: ebs-att
 spec:
   forProvider:
     deviceName: /dev/sdh
     instanceId: ${aws_instance.web.id}
     region: us-west-1
     volumeId: ${aws_ebs_volume.example.id}
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: EBSVolume
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    availabilityZone: us-west-2a
+    size: 1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  labels:
+    testing.upbound.io/example-name: web
+  name: web
+spec:
+  forProvider:
+    ami: ami-21f78e11
+    availabilityZone: us-west-2a
+    instanceType: t2.micro
+    tags:
+      Name: HelloWorld
+
+---
+

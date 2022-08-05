@@ -1,7 +1,9 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: ObjectCopy
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
 spec:
   forProvider:
     bucket: destination_bucket
@@ -13,3 +15,6 @@ spec:
     key: destination_key
     region: us-west-1
     source: source_bucket/source_key
+
+---
+

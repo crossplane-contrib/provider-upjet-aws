@@ -1,7 +1,9 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketObject
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: object
+  name: object
 spec:
   forProvider:
     bucket: your_bucket_name
@@ -9,3 +11,6 @@ spec:
     key: new_object_key
     region: us-west-1
     source: path/to/file
+
+---
+

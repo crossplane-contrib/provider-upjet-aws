@@ -1,7 +1,9 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayMulticastDomain
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: domain
+  name: domain
 spec:
   forProvider:
     region: us-west-1
@@ -9,3 +11,225 @@ spec:
     tags:
       Name: Transit_Gateway_Multicast_Domain_Example
     transitGatewayId: ${aws_ec2_transit_gateway.tgw.id}
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGateway
+metadata:
+  labels:
+    testing.upbound.io/example-name: tgw
+  name: tgw
+spec:
+  forProvider:
+    multicastSupport: enable
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayMulticastDomainAssociation
+metadata:
+  labels:
+    testing.upbound.io/example-name: association1
+  name: association1
+spec:
+  forProvider:
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: subnet1
+    transitGatewayAttachmentId: ${aws_ec2_transit_gateway_vpc_attachment.attachment1.id}
+    transitGatewayMulticastDomainId: ${aws_ec2_transit_gateway_multicast_domain.domain.id}
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayMulticastDomainAssociation
+metadata:
+  labels:
+    testing.upbound.io/example-name: association2
+  name: association2
+spec:
+  forProvider:
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: subnet2
+    transitGatewayAttachmentId: ${aws_ec2_transit_gateway_vpc_attachment.attachment2.id}
+    transitGatewayMulticastDomainId: ${aws_ec2_transit_gateway_multicast_domain.domain.id}
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayMulticastDomainAssociation
+metadata:
+  labels:
+    testing.upbound.io/example-name: association3
+  name: association3
+spec:
+  forProvider:
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: subnet3
+    transitGatewayAttachmentId: ${aws_ec2_transit_gateway_vpc_attachment.attachment2.id}
+    transitGatewayMulticastDomainId: ${aws_ec2_transit_gateway_multicast_domain.domain.id}
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayVPCAttachment
+metadata:
+  labels:
+    testing.upbound.io/example-name: attachment1
+  name: attachment1
+spec:
+  forProvider:
+    subnetIdRefs:
+    - name: subnet1
+    - name: subnet2
+    transitGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: tgw
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayVPCAttachment
+metadata:
+  labels:
+    testing.upbound.io/example-name: attachment2
+  name: attachment2
+spec:
+  forProvider:
+    subnetIdRefs:
+    - name: subnet3
+    transitGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: tgw
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc2
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  labels:
+    testing.upbound.io/example-name: instance1
+  name: instance1
+spec:
+  forProvider:
+    ami: ${data.aws_ami.amazon_linux.id}
+    instanceType: t2.micro
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: subnet1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  labels:
+    testing.upbound.io/example-name: instance2
+  name: instance2
+spec:
+  forProvider:
+    ami: ${data.aws_ami.amazon_linux.id}
+    instanceType: t2.micro
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: subnet2
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  labels:
+    testing.upbound.io/example-name: instance3
+  name: instance3
+spec:
+  forProvider:
+    ami: ${data.aws_ami.amazon_linux.id}
+    instanceType: t2.micro
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: subnet3
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: subnet1
+  name: subnet1
+spec:
+  forProvider:
+    availabilityZone: ${data.aws_availability_zones.available.names[0]}
+    cidrBlock: 10.0.1.0/24
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: subnet2
+  name: subnet2
+spec:
+  forProvider:
+    availabilityZone: ${data.aws_availability_zones.available.names[1]}
+    cidrBlock: 10.0.2.0/24
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: subnet3
+  name: subnet3
+spec:
+  forProvider:
+    availabilityZone: ${data.aws_availability_zones.available.names[0]}
+    cidrBlock: 10.1.1.0/24
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc2
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: vpc1
+  name: vpc1
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: vpc2
+  name: vpc2
+spec:
+  forProvider:
+    cidrBlock: 10.1.0.0/16
+
+---
+

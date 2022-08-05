@@ -1,7 +1,9 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: LaunchTemplate
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
 spec:
   forProvider:
     blockDeviceMappings:
@@ -22,8 +24,9 @@ spec:
     elasticInferenceAccelerator:
     - type: eia1.medium
     iamInstanceProfile:
-    - nameRef:
-        name: example
+    - nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
     imageId: ami-test
     instanceInitiatedShutdownBehavior: terminate
     instanceMarketOptions:
@@ -54,3 +57,6 @@ spec:
     userData: ${filebase64("${path.module}/example.sh")}
     vpcSecurityGroupIdRefs:
     - name: example
+
+---
+

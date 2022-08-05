@@ -1,7 +1,9 @@
 apiVersion: autoscaling.aws.upbound.io/v1beta1
 kind: AutoscalingGroup
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: bar
+  name: bar
 spec:
   forProvider:
     desiredCapacity: 4
@@ -34,4 +36,8 @@ spec:
     timeouts:
     - delete: 15m
     vpcZoneIdentifierRefs:
-    - name: example
+    - name: example1
+    - name: example2
+
+---
+

@@ -1,6 +1,8 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: Proxy
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -14,8 +16,9 @@ spec:
     idleClientTimeout: 1800
     region: us-west-1
     requireTls: true
-    roleArnRef:
-      name: example
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     tags:
       Key: value
       Name: example
@@ -23,3 +26,6 @@ spec:
     - name: example
     vpcSubnetIds:
     - ${aws_subnet.example.id}
+
+---
+

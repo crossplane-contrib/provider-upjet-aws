@@ -1,35 +1,42 @@
 apiVersion: kafka.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     brokerNodeGroupInfo:
     - clientSubnetsRefs:
-      - name: example
+      - name: subnet_az1
+      - name: subnet_az2
+      - name: subnet_az3
       instanceType: kafka.m5.large
       securityGroupsRefs:
-      - name: example
+      - name: sg
       storageInfo:
       - ebsStorageInfo:
         - volumeSize: 1000
     clusterName: example
     encryptionInfo:
-    - encryptionAtRestKmsKeyArnRef:
-        name: example
+    - encryptionAtRestKmsKeyArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: kms
     kafkaVersion: 2.4.1
     loggingInfo:
     - brokerLogs:
       - cloudwatchLogs:
         - enabled: true
-          logGroupRef:
-            name: example
+          logGroupSelector:
+            matchLabels:
+              testing.upbound.io/example-name: test
         firehose:
         - deliveryStream: terraform-kinesis-firehose-extended-s3-test-stream
           enabled: true
         s3:
-        - bucketRef:
-            name: example
+        - bucketSelector:
+            matchLabels:
+              testing.upbound.io/example-name: bucket
           enabled: true
           prefix: logs/msk-
     numberOfBrokerNodes: 3
@@ -42,3 +49,176 @@ spec:
     region: us-west-1
     tags:
       foo: bar
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  labels:
+    testing.upbound.io/example-name: firehose_role
+  name: firehose-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": "sts:AssumeRole",
+          "Principal": {
+            "Service": "firehose.amazonaws.com"
+          },
+          "Effect": "Allow",
+          "Sid": ""
+        }
+        ]
+      }
+
+---
+
+apiVersion: firehose.aws.upbound.io/v1beta1
+kind: DeliveryStream
+metadata:
+  labels:
+    testing.upbound.io/example-name: test_stream
+  name: test-stream
+spec:
+  forProvider:
+    destination: s3
+    lifecycle:
+    - ignore_changes:
+      - ${tags["LogDeliveryEnabled"]}
+    name: terraform-kinesis-firehose-msk-broker-logs-stream
+    s3Configuration:
+    - bucketArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: bucket
+      roleArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: firehose_role
+    tags:
+      LogDeliveryEnabled: placeholder
+
+---
+
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  labels:
+    testing.upbound.io/example-name: kms
+  name: kms
+spec:
+  forProvider:
+    description: example
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: bucket
+  name: bucket
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketACL
+metadata:
+  labels:
+    testing.upbound.io/example-name: bucket_acl
+  name: bucket-acl
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.bucket.id}
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: sg
+  name: sg
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: subnet_az1
+  name: subnet-az1
+spec:
+  forProvider:
+    availabilityZone: ${data.aws_availability_zones.azs.names[0]}
+    cidrBlock: 192.168.0.0/24
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: subnet_az2
+  name: subnet-az2
+spec:
+  forProvider:
+    availabilityZone: ${data.aws_availability_zones.azs.names[1]}
+    cidrBlock: 192.168.1.0/24
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: subnet_az3
+  name: subnet-az3
+spec:
+  forProvider:
+    availabilityZone: ${data.aws_availability_zones.azs.names[2]}
+    cidrBlock: 192.168.2.0/24
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: vpc
+  name: vpc
+spec:
+  forProvider:
+    cidrBlock: 192.168.0.0/22
+
+---
+

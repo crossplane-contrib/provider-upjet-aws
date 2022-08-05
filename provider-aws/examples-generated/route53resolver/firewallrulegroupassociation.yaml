@@ -1,6 +1,8 @@
 apiVersion: route53resolver.aws.upbound.io/v1beta1
 kind: FirewallRuleGroupAssociation
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,5 +10,21 @@ spec:
     name: example
     priority: 100
     region: us-west-1
-    vpcIdRef:
-      name: example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: route53resolver.aws.upbound.io/v1beta1
+kind: FirewallRuleGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+
+---
+

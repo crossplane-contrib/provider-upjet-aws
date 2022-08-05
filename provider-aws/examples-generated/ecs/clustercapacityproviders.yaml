@@ -1,6 +1,8 @@
 apiVersion: ecs.aws.upbound.io/v1beta1
 kind: ClusterCapacityProviders
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -12,3 +14,17 @@ spec:
       capacityProvider: FARGATE
       weight: 100
     region: us-west-1
+
+---
+
+apiVersion: ecs.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider: {}
+
+---
+

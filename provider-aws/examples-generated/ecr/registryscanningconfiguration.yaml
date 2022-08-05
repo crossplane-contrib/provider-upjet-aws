@@ -1,7 +1,9 @@
 apiVersion: ecr.aws.upbound.io/v1beta1
 kind: RegistryScanningConfiguration
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: configuration
+  name: configuration
 spec:
   forProvider:
     region: us-west-1
@@ -11,3 +13,6 @@ spec:
         filterType: WILDCARD
       scanFrequency: CONTINUOUS_SCAN
     scanType: ENHANCED
+
+---
+

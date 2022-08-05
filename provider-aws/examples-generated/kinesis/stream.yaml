@@ -1,7 +1,9 @@
 apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test_stream
+  name: test-stream
 spec:
   forProvider:
     name: terraform-kinesis-test
@@ -15,3 +17,6 @@ spec:
     - streamMode: PROVISIONED
     tags:
       Environment: test
+
+---
+

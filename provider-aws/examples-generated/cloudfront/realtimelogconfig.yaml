@@ -1,6 +1,8 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: RealtimeLogConfig
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -15,3 +17,30 @@ spec:
     name: example
     region: us-west-1
     samplingRate: 75
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "cloudfront.amazonaws.com"
+            },
+            "Effect": "Allow"
+          }
+        ]
+      }
+
+---
+

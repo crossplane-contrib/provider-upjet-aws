@@ -1,8 +1,13 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
     region: us-west-1
+
+---
+

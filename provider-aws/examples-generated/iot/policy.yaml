@@ -1,7 +1,9 @@
 apiVersion: iot.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: pubsub
+  name: pubsub
 spec:
   forProvider:
     policy: |-
@@ -18,3 +20,6 @@ spec:
           ]
         })}
     region: us-west-1
+
+---
+

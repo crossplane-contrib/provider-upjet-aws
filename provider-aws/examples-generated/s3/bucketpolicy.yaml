@@ -1,9 +1,25 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketPolicy
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: allow_access_from_another_account
+  name: allow-access-from-another-account
 spec:
   forProvider:
     bucket: ${aws_s3_bucket.example.id}
     policy: ${data.aws_iam_policy_document.allow_access_from_another_account.json}
     region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider: {}
+
+---
+

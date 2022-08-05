@@ -1,9 +1,14 @@
 apiVersion: transfer.aws.upbound.io/v1beta1
 kind: Server
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     region: us-west-1
     tags:
       Name: Example
+
+---
+

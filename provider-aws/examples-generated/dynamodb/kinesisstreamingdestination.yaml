@@ -1,11 +1,46 @@
 apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: KinesisStreamingDestination
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     region: us-west-1
-    streamArnRef:
-      name: example
-    tableNameRef:
-      name: example
+    streamArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tableNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dynamodb.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    attribute:
+    - name: id
+      type: S
+    hashKey: id
+
+---
+
+apiVersion: kinesis.aws.upbound.io/v1beta1
+kind: Stream
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: order_item_changes
+    shardCount: 1
+
+---
+

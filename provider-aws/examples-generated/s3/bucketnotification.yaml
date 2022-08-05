@@ -1,7 +1,9 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketNotification
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: bucket_notification
+  name: bucket-notification
 spec:
   forProvider:
     bucket: ${aws_s3_bucket.bucket.id}
@@ -11,3 +13,42 @@ spec:
       - s3:ObjectCreated:*
       filterSuffix: .log
       topicArn: ${aws_sns_topic.topic.arn}
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: bucket
+  name: bucket
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  labels:
+    testing.upbound.io/example-name: topic
+  name: topic
+spec:
+  forProvider:
+    name: s3-event-notification-topic
+    policy: |
+      {
+          "Version":"2012-10-17",
+          "Statement":[{
+              "Effect": "Allow",
+              "Principal": { "Service": "s3.amazonaws.com" },
+              "Action": "SNS:Publish",
+              "Resource": "arn:aws:sns:*:*:s3-event-notification-topic",
+              "Condition":{
+                  "ArnLike":{"aws:SourceArn":"${aws_s3_bucket.bucket.arn}"}
+              }
+          }]
+      }
+
+---
+

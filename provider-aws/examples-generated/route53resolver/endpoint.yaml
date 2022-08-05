@@ -1,7 +1,9 @@
 apiVersion: route53resolver.aws.upbound.io/v1beta1
 kind: Endpoint
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
 spec:
   forProvider:
     direction: INBOUND
@@ -12,6 +14,10 @@ spec:
     name: foo
     region: us-west-1
     securityGroupIdRefs:
-    - name: example
+    - name: sg1
+    - name: sg2
     tags:
       Environment: Prod
+
+---
+

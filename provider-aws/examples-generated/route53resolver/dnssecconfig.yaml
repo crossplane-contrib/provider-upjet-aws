@@ -1,8 +1,27 @@
 apiVersion: route53resolver.aws.upbound.io/v1beta1
 kind: DNSSECConfig
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     region: us-west-1
     resourceId: ${aws_vpc.example.id}
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    enableDnsHostnames: true
+    enableDnsSupport: true
+
+---
+

@@ -1,7 +1,9 @@
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: Function
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test_lambda
+  name: test-lambda
 spec:
   forProvider:
     environment:
@@ -10,7 +12,36 @@ spec:
     filename: lambda_function_payload.zip
     handler: index.test
     region: us-west-1
-    roleRef:
-      name: example
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: iam_for_lambda
     runtime: nodejs12.x
     sourceCodeHash: ${filebase64sha256("lambda_function_payload.zip")}
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  labels:
+    testing.upbound.io/example-name: iam_for_lambda
+  name: iam-for-lambda
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "lambda.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }
+
+---
+

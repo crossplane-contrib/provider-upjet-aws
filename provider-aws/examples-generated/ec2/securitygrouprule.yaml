@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroupRule
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -11,7 +13,11 @@ spec:
     - ${aws_vpc.example.ipv6_cidr_block}
     protocol: tcp
     region: us-west-1
-    securityGroupIdRef:
-      name: example
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     toPort: 65535
     type: ingress
+
+---
+

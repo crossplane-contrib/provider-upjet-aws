@@ -1,6 +1,8 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: ProxyEndpoint
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,3 +10,6 @@ spec:
     region: us-west-1
     targetRole: READ_ONLY
     vpcSubnetIds: ${aws_subnet.test.*.id}
+
+---
+

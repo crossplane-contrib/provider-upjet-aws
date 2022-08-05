@@ -1,7 +1,9 @@
 apiVersion: sfn.aws.upbound.io/v1beta1
 kind: StateMachine
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: sfn_state_machine
+  name: sfn-state-machine
 spec:
   forProvider:
     definition: |
@@ -18,5 +20,9 @@ spec:
       }
     name: my-state-machine
     region: us-west-1
-    roleArnRef:
-      name: example
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: iam_for_sfn
+
+---
+

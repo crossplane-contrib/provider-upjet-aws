@@ -1,9 +1,14 @@
 apiVersion: route53resolver.aws.upbound.io/v1beta1
 kind: Rule
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: sys
+  name: sys
 spec:
   forProvider:
     domainName: subdomain.example.com
     region: us-west-1
     ruleType: SYSTEM
+
+---
+

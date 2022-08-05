@@ -1,7 +1,9 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketReplicationConfiguration
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: replication
+  name: replication
 spec:
   forProvider:
     bucket: ${aws_s3_bucket.source.id}
@@ -16,3 +18,161 @@ spec:
       - prefix: foo
       id: foobar
       status: Enabled
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  labels:
+    testing.upbound.io/example-name: replication
+  name: replication
+spec:
+  forProvider:
+    name: tf-iam-role-policy-replication-12345
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": [
+              "s3:GetReplicationConfiguration",
+              "s3:ListBucket"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+              "${aws_s3_bucket.source.arn}"
+            ]
+          },
+          {
+            "Action": [
+              "s3:GetObjectVersionForReplication",
+              "s3:GetObjectVersionAcl",
+               "s3:GetObjectVersionTagging"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+              "${aws_s3_bucket.source.arn}/*"
+            ]
+          },
+          {
+            "Action": [
+              "s3:ReplicateObject",
+              "s3:ReplicateDelete",
+              "s3:ReplicateTags"
+            ],
+            "Effect": "Allow",
+            "Resource": "${aws_s3_bucket.destination.arn}/*"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  labels:
+    testing.upbound.io/example-name: replication
+  name: replication
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "s3.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  labels:
+    testing.upbound.io/example-name: replication
+  name: replication
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: replication
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: replication
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: destination
+  name: destination
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: source
+  name: source
+spec:
+  forProvider:
+    provider: ${aws.central}
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketACL
+metadata:
+  labels:
+    testing.upbound.io/example-name: source_bucket_acl
+  name: source-bucket-acl
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.source.id}
+    provider: ${aws.central}
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketVersioning
+metadata:
+  labels:
+    testing.upbound.io/example-name: destination
+  name: destination
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.destination.id}
+    versioningConfiguration:
+    - status: Enabled
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketVersioning
+metadata:
+  labels:
+    testing.upbound.io/example-name: source
+  name: source
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.source.id}
+    provider: ${aws.central}
+    versioningConfiguration:
+    - status: Enabled
+
+---
+

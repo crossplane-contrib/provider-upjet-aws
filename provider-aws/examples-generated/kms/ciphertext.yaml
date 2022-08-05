@@ -1,13 +1,32 @@
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Ciphertext
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: oauth
+  name: oauth
 spec:
   forProvider:
-    keyIdRef:
-      name: example
+    keyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: oauth_config
     plaintextSecretRef:
       key: example-key
       name: example-secret
-      namespace: crossplane-system
+      namespace: upbound-system
     region: us-west-1
+
+---
+
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  labels:
+    testing.upbound.io/example-name: oauth_config
+  name: oauth-config
+spec:
+  forProvider:
+    description: oauth config
+    isEnabled: true
+
+---
+

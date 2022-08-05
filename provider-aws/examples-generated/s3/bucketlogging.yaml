@@ -1,6 +1,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketLogging
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,3 +10,52 @@ spec:
     region: us-west-1
     targetBucket: ${aws_s3_bucket.log_bucket.id}
     targetPrefix: log/
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: log_bucket
+  name: log-bucket
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketACL
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.example.id}
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketACL
+metadata:
+  labels:
+    testing.upbound.io/example-name: log_bucket_acl
+  name: log-bucket-acl
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.log_bucket.id}
+
+---
+

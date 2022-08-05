@@ -1,7 +1,9 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: allow_tls
+  name: allow-tls
 spec:
   forProvider:
     description: Allow TLS inbound traffic
@@ -9,5 +11,9 @@ spec:
     region: us-west-1
     tags:
       Name: allow_tls
-    vpcIdRef:
-      name: example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+
+---
+

@@ -1,7 +1,9 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: ClusterParameterGroup
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
 spec:
   forProvider:
     description: RDS default cluster parameter group
@@ -12,3 +14,6 @@ spec:
     - name: character_set_client
       value: utf8
     region: us-west-1
+
+---
+

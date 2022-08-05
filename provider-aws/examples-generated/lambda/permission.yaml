@@ -1,15 +1,81 @@
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: Permission
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: allow_cloudwatch
+  name: allow-cloudwatch
 spec:
   forProvider:
     action: lambda:InvokeFunction
-    functionNameRef:
-      name: example
+    functionNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_lambda
     principal: events.amazonaws.com
-    qualifierRef:
-      name: example
+    qualifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_alias
     region: us-west-1
     sourceArn: arn:aws:events:eu-west-1:111122223333:rule/RunDaily
     statementId: AllowExecutionFromCloudWatch
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  labels:
+    testing.upbound.io/example-name: iam_for_lambda
+  name: iam-for-lambda
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Action = "sts:AssumeRole"
+              Effect = "Allow"
+              Sid    = ""
+              Principal = {
+                Service = "lambda.amazonaws.com"
+              }
+            },
+          ]
+        })}
+
+---
+
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Alias
+metadata:
+  labels:
+    testing.upbound.io/example-name: test_alias
+  name: test-alias
+spec:
+  forProvider:
+    description: a sample description
+    functionNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_lambda
+    functionVersion: $LATEST
+    name: testalias
+
+---
+
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Function
+metadata:
+  labels:
+    testing.upbound.io/example-name: test_lambda
+  name: test-lambda
+spec:
+  forProvider:
+    filename: lambdatest.zip
+    handler: exports.handler
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: iam_for_lambda
+    runtime: nodejs12.x
+
+---
+
