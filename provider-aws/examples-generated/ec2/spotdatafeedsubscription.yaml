@@ -6,9 +6,7 @@ metadata:
   name: default
 spec:
   forProvider:
-    bucketSelector:
-      matchLabels:
-        testing.upbound.io/example-name: default
+    bucket: ${aws_s3_bucket.default.bucket}
     prefix: my_subdirectory
     region: us-west-1
 

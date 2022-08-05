@@ -12,8 +12,7 @@ import (
 	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/cloudwatchlogs/v1beta1"
 	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
-	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
-	v1beta14 "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1"
+	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -1188,32 +1187,6 @@ func (mg *SecurityGroupRule) ResolveReferences(ctx context.Context, c client.Rea
 	return nil
 }
 
-// ResolveReferences of this SpotDatafeedSubscription.
-func (mg *SpotDatafeedSubscription) ResolveReferences(ctx context.Context, c client.Reader) error {
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.BucketRef,
-		Selector:     mg.Spec.ForProvider.BucketSelector,
-		To: reference.To{
-			List:    &v1beta13.BucketList{},
-			Managed: &v1beta13.Bucket{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.Bucket")
-	}
-	mg.Spec.ForProvider.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.BucketRef = rsp.ResolvedReference
-
-	return nil
-}
-
 // ResolveReferences of this SpotInstanceRequest.
 func (mg *SpotInstanceRequest) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -1885,8 +1858,8 @@ func (mg *VPCEndpointConnectionNotification) ResolveReferences(ctx context.Conte
 		Reference:    mg.Spec.ForProvider.ConnectionNotificationArnRef,
 		Selector:     mg.Spec.ForProvider.ConnectionNotificationArnSelector,
 		To: reference.To{
-			List:    &v1beta14.TopicList{},
-			Managed: &v1beta14.Topic{},
+			List:    &v1beta13.TopicList{},
+			Managed: &v1beta13.Topic{},
 		},
 	})
 	if err != nil {

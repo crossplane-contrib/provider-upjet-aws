@@ -8725,16 +8725,6 @@ func (in *SpotDatafeedSubscriptionParameters) DeepCopyInto(out *SpotDatafeedSubs
 		*out = new(string)
 		**out = **in
 	}
-	if in.BucketRef != nil {
-		in, out := &in.BucketRef, &out.BucketRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.BucketSelector != nil {
-		in, out := &in.BucketSelector, &out.BucketSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.Prefix != nil {
 		in, out := &in.Prefix, &out.Prefix
 		*out = new(string)

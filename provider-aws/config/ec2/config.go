@@ -273,4 +273,8 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_peering_attachment", func(r *config.Resource) {
 		delete(r.References, "peer_account_id")
 	})
+
+	p.AddResourceConfigurator("aws_spot_datafeed_subscription", func(r *config.Resource) {
+		delete(r.References, "bucket")
+	})
 }

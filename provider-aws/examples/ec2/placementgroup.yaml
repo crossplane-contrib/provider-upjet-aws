@@ -9,5 +9,4 @@ spec:
     region: us-west-1
     strategy: cluster
 
----
 
