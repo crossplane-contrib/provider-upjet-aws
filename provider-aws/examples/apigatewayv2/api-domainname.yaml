@@ -9,7 +9,6 @@ spec:
     region: us-west-1
     name: test-http-api
     protocolType: HTTP
-    routeKey: "$default"
 ---
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: DomainName
