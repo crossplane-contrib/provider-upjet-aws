@@ -782,7 +782,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// dax
 	//
 	// DAX Clusters can be imported using the cluster_name
-	"aws_dax_cluster": ParameterAsExternalName("cluster_name"),
+	"aws_dax_cluster": config.ParameterAsIdentifier("cluster_name"),
 	// DAX Parameter Group can be imported using the name
 	"aws_dax_parameter_group": config.NameAsIdentifier,
 	// DAX Subnet Group can be imported using the name

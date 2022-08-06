@@ -1,11 +1,14 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Model
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    apiIdRef:
-      name: example
+    apiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     contentType: application/json
     name: example
     region: us-west-1
@@ -18,3 +21,6 @@ spec:
           "id": { "type": "string" }
         }
       }
+
+---
+

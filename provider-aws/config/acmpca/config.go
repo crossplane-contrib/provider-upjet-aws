@@ -11,6 +11,8 @@ import (
 // Configure adds configurations for acm group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_acmpca_certificate_authority", func(r *config.Resource) {
+		// NOTE(muvaf): It causes circular dependency. See https://github.com/crossplane/crossplane-runtime/issues/313
+		delete(r.References, "revocation_configuration.crl_configuration.s3_bucket_name")
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"revocation_configuration"},
 		}

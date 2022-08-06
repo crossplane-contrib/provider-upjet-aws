@@ -10,9 +10,11 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/acm/v1beta1"
-	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
+	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -193,6 +195,54 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectionID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ConnectionIDRef,
+		Selector:     mg.Spec.ForProvider.ConnectionIDSelector,
+		To: reference.To{
+			List:    &VPCLinkList{},
+			Managed: &VPCLink{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ConnectionID")
+	}
+	mg.Spec.ForProvider.ConnectionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ConnectionIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CredentialsArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.CredentialsArnRef,
+		Selector:     mg.Spec.ForProvider.CredentialsArnSelector,
+		To: reference.To{
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CredentialsArn")
+	}
+	mg.Spec.ForProvider.CredentialsArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CredentialsArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IntegrationURI),
+		Extract:      resource.ExtractParamPath("invoke_arn", true),
+		Reference:    mg.Spec.ForProvider.IntegrationURIRef,
+		Selector:     mg.Spec.ForProvider.IntegrationURISelector,
+		To: reference.To{
+			List:    &v1beta1.FunctionList{},
+			Managed: &v1beta1.Function{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IntegrationURI")
+	}
+	mg.Spec.ForProvider.IntegrationURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IntegrationURIRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -420,8 +470,8 @@ func (mg *VPCLink) ResolveReferences(ctx context.Context, c client.Reader) error
 		References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta12.SecurityGroupList{},
-			Managed: &v1beta12.SecurityGroup{},
+			List:    &v1beta13.SecurityGroupList{},
+			Managed: &v1beta13.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -436,8 +486,8 @@ func (mg *VPCLink) ResolveReferences(ctx context.Context, c client.Reader) error
 		References:    mg.Spec.ForProvider.SubnetIDRefs,
 		Selector:      mg.Spec.ForProvider.SubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta12.SubnetList{},
-			Managed: &v1beta12.Subnet{},
+			List:    &v1beta13.SubnetList{},
+			Managed: &v1beta13.Subnet{},
 		},
 	})
 	if err != nil {

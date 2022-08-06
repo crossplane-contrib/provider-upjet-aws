@@ -1,10 +1,31 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Route
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    apiIdRef:
-      name: example
+    apiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
     routeKey: $default
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: API
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example-websocket-api
+    protocolType: WEBSOCKET
+    region: us-west-1
+    routeSelectionExpression: $request.body.action
+
+---
+

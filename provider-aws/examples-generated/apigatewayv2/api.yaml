@@ -1,6 +1,8 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: API
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,3 +10,6 @@ spec:
     protocolType: WEBSOCKET
     region: us-west-1
     routeSelectionExpression: $request.body.action
+
+---
+

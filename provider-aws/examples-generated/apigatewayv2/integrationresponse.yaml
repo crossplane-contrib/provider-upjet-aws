@@ -1,12 +1,19 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: IntegrationResponse
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    apiIdRef:
-      name: example
-    integrationIdRef:
-      name: example
+    apiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    integrationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     integrationResponseKey: /200/
     region: us-west-1
+
+---
+

@@ -31,8 +31,16 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigatewayv2/v1beta1.VPCLink
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
@@ -40,8 +48,16 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	CredentialsArn *string `json:"credentialsArn,omitempty" tf:"credentials_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CredentialsArnRef *v1.Reference `json:"credentialsArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	CredentialsArnSelector *v1.Selector `json:"credentialsArnSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -55,8 +71,16 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Required
 	IntegrationType *string `json:"integrationType" tf:"integration_type,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("invoke_arn",true)
 	// +kubebuilder:validation:Optional
 	IntegrationURI *string `json:"integrationUri,omitempty" tf:"integration_uri,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IntegrationURIRef *v1.Reference `json:"integrationUriRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	IntegrationURISelector *v1.Selector `json:"integrationUriSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`

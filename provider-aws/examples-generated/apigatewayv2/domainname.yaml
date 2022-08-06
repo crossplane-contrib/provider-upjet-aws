@@ -1,12 +1,18 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: DomainName
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     domainNameConfiguration:
-    - certificateArnRef:
-        name: example
+    - certificateArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
       endpointType: REGIONAL
       securityPolicy: TLS_1_2
     region: us-west-1
+
+---
+

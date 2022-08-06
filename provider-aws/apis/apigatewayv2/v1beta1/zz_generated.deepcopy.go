@@ -1361,6 +1361,16 @@ func (in *IntegrationParameters) DeepCopyInto(out *IntegrationParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ConnectionIDRef != nil {
+		in, out := &in.ConnectionIDRef, &out.ConnectionIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ConnectionIDSelector != nil {
+		in, out := &in.ConnectionIDSelector, &out.ConnectionIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ConnectionType != nil {
 		in, out := &in.ConnectionType, &out.ConnectionType
 		*out = new(string)
@@ -1375,6 +1385,16 @@ func (in *IntegrationParameters) DeepCopyInto(out *IntegrationParameters) {
 		in, out := &in.CredentialsArn, &out.CredentialsArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.CredentialsArnRef != nil {
+		in, out := &in.CredentialsArnRef, &out.CredentialsArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CredentialsArnSelector != nil {
+		in, out := &in.CredentialsArnSelector, &out.CredentialsArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
@@ -1400,6 +1420,16 @@ func (in *IntegrationParameters) DeepCopyInto(out *IntegrationParameters) {
 		in, out := &in.IntegrationURI, &out.IntegrationURI
 		*out = new(string)
 		**out = **in
+	}
+	if in.IntegrationURIRef != nil {
+		in, out := &in.IntegrationURIRef, &out.IntegrationURIRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.IntegrationURISelector != nil {
+		in, out := &in.IntegrationURISelector, &out.IntegrationURISelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PassthroughBehavior != nil {
 		in, out := &in.PassthroughBehavior, &out.PassthroughBehavior

@@ -90,16 +90,8 @@ type CrlConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	ExpirationInDays *float64 `json:"expirationInDays" tf:"expiration_in_days,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	S3BucketNameRef *v1.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	S3BucketNameSelector *v1.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	S3ObjectACL *string `json:"s3ObjectAcl,omitempty" tf:"s3_object_acl,omitempty"`
