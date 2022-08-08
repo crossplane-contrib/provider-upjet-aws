@@ -93,6 +93,8 @@ apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: RouteResponse
 metadata:
   name: example-websocket
+  annotations:
+    upjet.upbound.io/manual-intervention: "Route resource this depends on requires manual intervention."
   labels:
     upjet.upbound.io/test-group: apigatewayv2-websocket
 spec:

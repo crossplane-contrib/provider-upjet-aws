@@ -58,23 +58,6 @@ spec:
     region: us-west-1
 ---
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
-kind: Route
-metadata:
-  name: example-auth
-  labels:
-    upjet.upbound.io/test-group: apigatewayv2-http
-spec:
-  forProvider:
-    apiIdSelector:
-      matchLabels:
-        upjet.upbound.io/test-group: apigatewayv2-http
-    region: us-west-1
-    routeKey: "POST /signup"
-    authorizerIdSelector:
-      matchLabels:
-        upjet.upbound.io/test-group: apigatewayv2-http
----
-apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Authorizer
 metadata:
   name: test-authorizer
