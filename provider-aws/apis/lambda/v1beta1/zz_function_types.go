@@ -160,8 +160,15 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	S3BucketRef *v1.Reference `json:"s3BucketRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
