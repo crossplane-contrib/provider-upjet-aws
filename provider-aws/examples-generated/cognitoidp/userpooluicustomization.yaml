@@ -1,0 +1,65 @@
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPoolUICustomization
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clientIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    css: '.label-customizable {font-weight: 400;}'
+    imageFile: ${filebase64("logo.png")}
+    region: us-west-1
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPool
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+
+---
+
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPoolClient
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPoolDomain
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domain: example
+    region: us-west-1
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

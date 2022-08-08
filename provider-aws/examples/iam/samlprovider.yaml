@@ -2,6 +2,8 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: SAMLProvider
 metadata:
   name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "required samlMetadaDocument"
 spec:
   forProvider:
     name: myprovider
