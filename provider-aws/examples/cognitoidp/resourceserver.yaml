@@ -1,11 +1,30 @@
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: ResourceServer
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: resource
+  name: resource
 spec:
   forProvider:
     identifier: https://example.com
     name: example
     region: us-west-1
-    userPoolIdRef:
-      name: example
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pool
+
+---
+
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPool
+metadata:
+  labels:
+    testing.upbound.io/example-name: pool
+  name: pool
+spec:
+  forProvider:
+    name: pool
+    region: us-west-1
+
+---
+

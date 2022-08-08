@@ -9,8 +9,10 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/acm/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -108,6 +110,35 @@ func (mg *UserGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 	return nil
 }
 
+// ResolveReferences of this UserPool.
+func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.SMSConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SMSConfiguration[i3].SnsCallerArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.SMSConfiguration[i3].SnsCallerArnRef,
+			Selector:     mg.Spec.ForProvider.SMSConfiguration[i3].SnsCallerArnSelector,
+			To: reference.To{
+				List:    &v1beta1.RoleList{},
+				Managed: &v1beta1.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.SMSConfiguration[i3].SnsCallerArn")
+		}
+		mg.Spec.ForProvider.SMSConfiguration[i3].SnsCallerArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.SMSConfiguration[i3].SnsCallerArnRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this UserPoolClient.
 func (mg *UserPoolClient) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -115,6 +146,24 @@ func (mg *UserPoolClient) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.AnalyticsConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArnRef,
+			Selector:     mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta1.RoleList{},
+				Managed: &v1beta1.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserPoolID),
 		Extract:      reference.ExternalName(),
@@ -140,6 +189,22 @@ func (mg *UserPoolDomain) ResolveReferences(ctx context.Context, c client.Reader
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.CertificateArnRef,
+		Selector:     mg.Spec.ForProvider.CertificateArnSelector,
+		To: reference.To{
+			List:    &v1beta11.CertificateList{},
+			Managed: &v1beta11.Certificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CertificateArn")
+	}
+	mg.Spec.ForProvider.CertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CertificateArnRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserPoolID),

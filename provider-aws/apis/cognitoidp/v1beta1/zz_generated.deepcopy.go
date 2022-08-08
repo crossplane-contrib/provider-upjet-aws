@@ -131,6 +131,16 @@ func (in *AnalyticsConfigurationParameters) DeepCopyInto(out *AnalyticsConfigura
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.UserDataShared != nil {
 		in, out := &in.UserDataShared, &out.UserDataShared
 		*out = new(bool)
@@ -1009,6 +1019,16 @@ func (in *SMSConfigurationParameters) DeepCopyInto(out *SMSConfigurationParamete
 		in, out := &in.SnsCallerArn, &out.SnsCallerArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.SnsCallerArnRef != nil {
+		in, out := &in.SnsCallerArnRef, &out.SnsCallerArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SnsCallerArnSelector != nil {
+		in, out := &in.SnsCallerArnSelector, &out.SnsCallerArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1892,6 +1912,16 @@ func (in *UserPoolDomainParameters) DeepCopyInto(out *UserPoolDomainParameters) 
 		in, out := &in.CertificateArn, &out.CertificateArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.CertificateArnRef != nil {
+		in, out := &in.CertificateArnRef, &out.CertificateArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CertificateArnSelector != nil {
+		in, out := &in.CertificateArnSelector, &out.CertificateArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Domain != nil {
 		in, out := &in.Domain, &out.Domain

@@ -1,7 +1,9 @@
 apiVersion: cognitoidentity.aws.upbound.io/v1beta1
 kind: Pool
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
 spec:
   forProvider:
     allowClassicFlow: false
@@ -18,7 +20,23 @@ spec:
     - arn:aws:iam::123456789012:oidc-provider/id.example.com
     region: us-west-1
     samlProviderArnsRefs:
-    - name: example
+    - name: default
     supportedLoginProviders:
       accounts.google.com: 123456789012.apps.googleusercontent.com
       graph.facebook.com: "7346241598935552"
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: SAMLProvider
+metadata:
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    name: my-saml-provider
+    samlMetadataDocument: ${file("saml-metadata.xml")}
+
+---
+

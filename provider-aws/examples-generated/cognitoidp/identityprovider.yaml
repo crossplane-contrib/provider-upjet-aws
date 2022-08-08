@@ -1,7 +1,9 @@
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: IdentityProvider
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: example_provider
+  name: example-provider
 spec:
   forProvider:
     attributeMapping:
@@ -14,5 +16,24 @@ spec:
     providerName: Google
     providerType: Google
     region: us-west-1
-    userPoolIdRef:
-      name: example
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPool
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    autoVerifiedAttributes:
+    - email
+    name: example-pool
+    region: us-west-1
+
+---
+

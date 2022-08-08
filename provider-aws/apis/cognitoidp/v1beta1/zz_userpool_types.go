@@ -207,8 +207,16 @@ type SMSConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	ExternalID *string `json:"externalId" tf:"external_id,omitempty"`
 
-	// +kubebuilder:validation:Required
-	SnsCallerArn *string `json:"snsCallerArn" tf:"sns_caller_arn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	SnsCallerArn *string `json:"snsCallerArn,omitempty" tf:"sns_caller_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SnsCallerArnRef *v1.Reference `json:"snsCallerArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	SnsCallerArnSelector *v1.Selector `json:"snsCallerArnSelector,omitempty" tf:"-"`
 }
 
 type SchemaObservation struct {
