@@ -24,6 +24,3 @@ spec:
   forProvider:
     name: pool
     region: us-west-1
-
----
-

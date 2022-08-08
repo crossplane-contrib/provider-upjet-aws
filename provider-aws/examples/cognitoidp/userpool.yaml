@@ -8,6 +8,3 @@ spec:
   forProvider:
     name: mypool
     region: us-west-1
-
----
-
