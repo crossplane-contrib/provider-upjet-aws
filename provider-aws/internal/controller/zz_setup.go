@@ -14,6 +14,17 @@ import (
 	certificateacmpca "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificate"
 	certificateauthority "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthority"
 	certificateauthoritycertificate "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthoritycertificate"
+	api "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/api"
+	apimapping "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/apimapping"
+	authorizer "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/authorizer"
+	deployment "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/deployment"
+	domainname "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/domainname"
+	integration "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/integration"
+	integrationresponse "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/integrationresponse"
+	model "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/model"
+	route "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/route"
+	routeresponse "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/routeresponse"
+	stage "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/stage"
 	vpclink "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/vpclink"
 	workgroup "github.com/upbound/official-providers/provider-aws/internal/controller/athena/workgroup"
 	attachment "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/attachment"
@@ -41,6 +52,14 @@ import (
 	realtimelogconfig "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/realtimelogconfig"
 	responseheaderspolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/responseheaderspolicy"
 	group "github.com/upbound/official-providers/provider-aws/internal/controller/cloudwatchlogs/group"
+	pool "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidentity/pool"
+	identityprovider "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/identityprovider"
+	resourceserver "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/resourceserver"
+	usergroup "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/usergroup"
+	userpool "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpool"
+	userpoolclient "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpoolclient"
+	userpooldomain "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpooldomain"
+	userpooluicustomization "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpooluicustomization"
 	cluster "github.com/upbound/official-providers/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/official-providers/provider-aws/internal/controller/dax/parametergroup"
 	subnetgroup "github.com/upbound/official-providers/provider-aws/internal/controller/dax/subnetgroup"
@@ -73,7 +92,7 @@ import (
 	networkinterfaceattachment "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkinterfaceattachment"
 	networkinterfacesgattachment "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/networkinterfacesgattachment"
 	placementgroup "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/placementgroup"
-	route "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/route"
+	routeec2 "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/route"
 	routetable "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/routetable"
 	routetableassociation "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/routetableassociation"
 	securitygroup "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/securitygroup"
@@ -136,7 +155,7 @@ import (
 	replicationgroup "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/replicationgroup"
 	subnetgroupelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/subnetgroup"
 	user "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/user"
-	usergroup "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/usergroup"
+	usergroupelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/usergroup"
 	attachmentelb "github.com/upbound/official-providers/provider-aws/internal/controller/elb/attachment"
 	elb "github.com/upbound/official-providers/provider-aws/internal/controller/elb/elb"
 	lb "github.com/upbound/official-providers/provider-aws/internal/controller/elbv2/lb"
@@ -324,6 +343,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		certificateacmpca.Setup,
 		certificateauthority.Setup,
 		certificateauthoritycertificate.Setup,
+		api.Setup,
+		apimapping.Setup,
+		authorizer.Setup,
+		deployment.Setup,
+		domainname.Setup,
+		integration.Setup,
+		integrationresponse.Setup,
+		model.Setup,
+		route.Setup,
+		routeresponse.Setup,
+		stage.Setup,
 		vpclink.Setup,
 		workgroup.Setup,
 		attachment.Setup,
@@ -351,6 +381,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		realtimelogconfig.Setup,
 		responseheaderspolicy.Setup,
 		group.Setup,
+		pool.Setup,
+		identityprovider.Setup,
+		resourceserver.Setup,
+		usergroup.Setup,
+		userpool.Setup,
+		userpoolclient.Setup,
+		userpooldomain.Setup,
+		userpooluicustomization.Setup,
 		cluster.Setup,
 		parametergroup.Setup,
 		subnetgroup.Setup,
@@ -383,7 +421,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		networkinterfaceattachment.Setup,
 		networkinterfacesgattachment.Setup,
 		placementgroup.Setup,
-		route.Setup,
+		routeec2.Setup,
 		routetable.Setup,
 		routetableassociation.Setup,
 		securitygroup.Setup,
@@ -446,7 +484,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		replicationgroup.Setup,
 		subnetgroupelasticache.Setup,
 		user.Setup,
-		usergroup.Setup,
+		usergroupelasticache.Setup,
 		attachmentelb.Setup,
 		elb.Setup,
 		lb.Setup,

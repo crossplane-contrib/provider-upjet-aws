@@ -666,16 +666,6 @@ func (in *CrlConfigurationParameters) DeepCopyInto(out *CrlConfigurationParamete
 		*out = new(string)
 		**out = **in
 	}
-	if in.S3BucketNameRef != nil {
-		in, out := &in.S3BucketNameRef, &out.S3BucketNameRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.S3BucketNameSelector != nil {
-		in, out := &in.S3BucketNameSelector, &out.S3BucketNameSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.S3ObjectACL != nil {
 		in, out := &in.S3ObjectACL, &out.S3ObjectACL
 		*out = new(string)
