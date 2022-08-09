@@ -53,6 +53,7 @@ import (
 	responseheaderspolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/responseheaderspolicy"
 	group "github.com/upbound/official-providers/provider-aws/internal/controller/cloudwatchlogs/group"
 	pool "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidentity/pool"
+	poolrolesattachment "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidentity/poolrolesattachment"
 	identityprovider "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/identityprovider"
 	resourceserver "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/resourceserver"
 	usergroup "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/usergroup"
@@ -366,6 +367,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		responseheaderspolicy.Setup,
 		group.Setup,
 		pool.Setup,
+		poolrolesattachment.Setup,
 		identityprovider.Setup,
 		resourceserver.Setup,
 		usergroup.Setup,
