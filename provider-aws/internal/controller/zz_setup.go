@@ -52,11 +52,14 @@ import (
 	realtimelogconfig "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/realtimelogconfig"
 	responseheaderspolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/responseheaderspolicy"
 	group "github.com/upbound/official-providers/provider-aws/internal/controller/cloudwatchlogs/group"
+	cognitoidentitypoolproviderprincipaltag "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
 	pool "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidentity/pool"
 	poolrolesattachment "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidentity/poolrolesattachment"
 	identityprovider "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/identityprovider"
 	resourceserver "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/resourceserver"
+	user "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/user"
 	usergroup "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/usergroup"
+	useringroup "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/useringroup"
 	userpool "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpool"
 	userpoolclient "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpoolclient"
 	userpooldomain "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpooldomain"
@@ -139,7 +142,7 @@ import (
 	parametergroupelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/parametergroup"
 	replicationgroup "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/replicationgroup"
 	subnetgroupelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/subnetgroup"
-	user "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/user"
+	userelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/user"
 	usergroupelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/usergroup"
 	attachmentelb "github.com/upbound/official-providers/provider-aws/internal/controller/elb/attachment"
 	elb "github.com/upbound/official-providers/provider-aws/internal/controller/elb/elb"
@@ -366,11 +369,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		realtimelogconfig.Setup,
 		responseheaderspolicy.Setup,
 		group.Setup,
+		cognitoidentitypoolproviderprincipaltag.Setup,
 		pool.Setup,
 		poolrolesattachment.Setup,
 		identityprovider.Setup,
 		resourceserver.Setup,
+		user.Setup,
 		usergroup.Setup,
+		useringroup.Setup,
 		userpool.Setup,
 		userpoolclient.Setup,
 		userpooldomain.Setup,
@@ -453,7 +459,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		parametergroupelasticache.Setup,
 		replicationgroup.Setup,
 		subnetgroupelasticache.Setup,
-		user.Setup,
+		userelasticache.Setup,
 		usergroupelasticache.Setup,
 		attachmentelb.Setup,
 		elb.Setup,
