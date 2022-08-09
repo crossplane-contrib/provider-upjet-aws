@@ -177,7 +177,7 @@ func (mg *UserInGroup) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Username),
-		Extract:      resource.ExtractParamPath("username", false),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.UsernameRef,
 		Selector:     mg.Spec.ForProvider.UsernameSelector,
 		To: reference.To{

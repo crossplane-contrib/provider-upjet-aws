@@ -100,7 +100,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// us-west-2_abc123:CorpAD
 	"aws_cognito_identity_provider": config.IdentifierFromProvider,
 	// user_pool_id/name: us-east-1_vG78M4goG/user
-	"aws_cognito_user": config.TemplatedStringAsIdentifier("name", "{{ .parameters.user_pool_id }}/{{ .externalName }}"),
+	"aws_cognito_user": config.TemplatedStringAsIdentifier("username", "{{ .parameters.user_pool_id }}/{{ .externalName }}"),
 	// no doc
 	"aws_cognito_user_in_group": config.IdentifierFromProvider,
 

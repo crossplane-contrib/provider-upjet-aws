@@ -71,9 +71,6 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	Username *string `json:"username" tf:"username,omitempty"`
-
 	// +kubebuilder:validation:Optional
 	ValidationData map[string]*string `json:"validationData,omitempty" tf:"validation_data,omitempty"`
 }

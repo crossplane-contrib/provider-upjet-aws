@@ -1831,11 +1831,6 @@ func (in *UserParameters) DeepCopyInto(out *UserParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.Username != nil {
-		in, out := &in.Username, &out.Username
-		*out = new(string)
-		**out = **in
-	}
 	if in.ValidationData != nil {
 		in, out := &in.ValidationData, &out.ValidationData
 		*out = make(map[string]*string, len(*in))

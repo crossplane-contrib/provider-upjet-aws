@@ -196,15 +196,12 @@ spec:
                             type: string
                         type: object
                     type: object
-                  username:
-                    type: string
                   validationData:
                     additionalProperties:
                       type: string
                     type: object
                 required:
                 - region
-                - username
                 type: object
               providerConfigRef:
                 default:
