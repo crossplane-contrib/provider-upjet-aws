@@ -93,6 +93,63 @@ spec:
 ---
 
 apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayMulticastGroupMember
+metadata:
+  labels:
+    testing.upbound.io/example-name: member1
+  name: member1
+spec:
+  forProvider:
+    groupIpAddress: 224.0.0.1
+    networkInterfaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: instance1
+    region: us-west-1
+    transitGatewayMulticastDomainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: association1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayMulticastGroupMember
+metadata:
+  labels:
+    testing.upbound.io/example-name: member2
+  name: member2
+spec:
+  forProvider:
+    groupIpAddress: 224.0.0.1
+    networkInterfaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: instance2
+    region: us-west-1
+    transitGatewayMulticastDomainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: association1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayMulticastGroupSource
+metadata:
+  labels:
+    testing.upbound.io/example-name: source
+  name: source
+spec:
+  forProvider:
+    groupIpAddress: 224.0.0.1
+    networkInterfaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: instance3
+    region: us-west-1
+    transitGatewayMulticastDomainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: association3
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayVPCAttachment
 metadata:
   labels:

@@ -154,14 +154,21 @@ func Configure(p *config.Provider) {
 		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
-				"interface_type",
+				"interface_type", "private_ip_list", "private_ips",
 			},
 		}
+		// Mutually exclusive with aws_network_interface_attachment
+		config.MoveToStatus(r.TerraformResource, "attachment")
 	})
 
 	p.AddResourceConfigurator("aws_security_group", func(r *config.Resource) {
 		// Mutually exclusive with aws_security_group_rule
 		config.MoveToStatus(r.TerraformResource, "ingress", "egress")
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{
+				"name", "name_prefix",
+			},
+		}
 	})
 
 	p.AddResourceConfigurator("aws_security_group_rule", func(r *config.Resource) {
@@ -253,11 +260,21 @@ func Configure(p *config.Provider) {
 		config.MoveToStatus(r.TerraformResource, "allowed_principals")
 	})
 
+	p.AddResourceConfigurator("aws_flow_log", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"log_format", "log_destination", "log_group_name"},
+		}
+	})
+
 	p.AddResourceConfigurator("aws_network_acl_rule", func(r *config.Resource) {
 		delete(r.References, "cidr_block")
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_peering_attachment", func(r *config.Resource) {
 		delete(r.References, "peer_account_id")
+	})
+
+	p.AddResourceConfigurator("aws_spot_datafeed_subscription", func(r *config.Resource) {
+		delete(r.References, "bucket")
 	})
 }
