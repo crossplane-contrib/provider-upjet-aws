@@ -847,7 +847,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// CloudSearch Domains can be imported using the name
 	"aws_cloudsearch_domain": config.NameAsIdentifier,
 	// CloudSearch domain service access policies can be imported using the domain name
-	"aws_cloudsearch_domain_service_access_policy": config.ParameterAsIdentifier("domain_name"),
+	"aws_cloudsearch_domain_service_access_policy": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

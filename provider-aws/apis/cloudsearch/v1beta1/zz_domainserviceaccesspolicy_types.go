@@ -22,6 +22,17 @@ type DomainServiceAccessPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	AccessPolicy *string `json:"accessPolicy" tf:"access_policy,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudsearch/v1beta1.Domain
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DomainNameRef *v1.Reference `json:"domainNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
+
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

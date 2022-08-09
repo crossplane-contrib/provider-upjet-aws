@@ -10,6 +10,7 @@ Copyright 2022 Upbound Inc.
 package v1beta1
 
 import (
+	"github.com/crossplane/crossplane-runtime/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -244,6 +245,21 @@ func (in *DomainServiceAccessPolicyParameters) DeepCopyInto(out *DomainServiceAc
 		in, out := &in.AccessPolicy, &out.AccessPolicy
 		*out = new(string)
 		**out = **in
+	}
+	if in.DomainName != nil {
+		in, out := &in.DomainName, &out.DomainName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainNameRef != nil {
+		in, out := &in.DomainNameRef, &out.DomainNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DomainNameSelector != nil {
+		in, out := &in.DomainNameSelector, &out.DomainNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
