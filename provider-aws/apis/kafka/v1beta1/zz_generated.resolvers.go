@@ -11,9 +11,11 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/cloudwatchlogs/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
+	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/firehose/v1beta1"
 	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
-	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
+	v1beta14 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -103,6 +105,28 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.LoggingInfo); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStream),
+					Extract:      resource.ExtractParamPath("name", false),
+					Reference:    mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamRef,
+					Selector:     mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamSelector,
+					To: reference.To{
+						List:    &v1beta13.DeliveryStreamList{},
+						Managed: &v1beta13.DeliveryStream{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStream")
+				}
+				mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStream = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LoggingInfo); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].S3); i5++ {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].Bucket),
@@ -110,8 +134,8 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 					Reference:    mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].BucketRef,
 					Selector:     mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].BucketSelector,
 					To: reference.To{
-						List:    &v1beta13.BucketList{},
-						Managed: &v1beta13.Bucket{},
+						List:    &v1beta14.BucketList{},
+						Managed: &v1beta14.Bucket{},
 					},
 				})
 				if err != nil {

@@ -38,8 +38,17 @@ func RegionAddition() config.ResourceOption {
 			return
 		}
 		for _, ex := range r.MetaResource.Examples {
-			if err := ex.SetPathValue("region", "us-west-1"); err != nil {
+			defaultRegion := "us-west-1"
+			if err := ex.SetPathValue("region", defaultRegion); err != nil {
 				panic(err)
+			}
+			for k := range ex.Dependencies {
+				if strings.HasPrefix(k, "aws_iam") {
+					continue
+				}
+				if err := ex.Dependencies.SetPathValue(k, "region", defaultRegion); err != nil {
+					panic(err)
+				}
 			}
 		}
 	}

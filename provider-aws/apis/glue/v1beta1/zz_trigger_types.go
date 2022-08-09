@@ -33,8 +33,15 @@ type ActionsParameters struct {
 	// +kubebuilder:validation:Optional
 	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.Job
 	// +kubebuilder:validation:Optional
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	JobNameRef *v1.Reference `json:"jobNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	JobNameSelector *v1.Selector `json:"jobNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	NotificationProperty []ActionsNotificationPropertyParameters `json:"notificationProperty,omitempty" tf:"notification_property,omitempty"`
@@ -57,8 +64,15 @@ type ConditionsParameters struct {
 	// +kubebuilder:validation:Optional
 	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.Job
 	// +kubebuilder:validation:Optional
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	JobNameRef *v1.Reference `json:"jobNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	JobNameSelector *v1.Selector `json:"jobNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	LogicalOperator *string `json:"logicalOperator,omitempty" tf:"logical_operator,omitempty"`

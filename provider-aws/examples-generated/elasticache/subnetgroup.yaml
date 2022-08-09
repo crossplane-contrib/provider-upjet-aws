@@ -1,9 +1,48 @@
 apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: SubnetGroup
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: bar
+  name: bar
 spec:
   forProvider:
     region: us-west-1
     subnetIdRefs:
-    - name: example
+    - name: foo
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    availabilityZone: us-west-2a
+    cidrBlock: 10.0.0.0/24
+    region: us-west-1
+    tags:
+      Name: tf-test
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-west-1
+    tags:
+      Name: tf-test
+
+---
+

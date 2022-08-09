@@ -29,8 +29,15 @@ type RepositoryPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	RepositoryName *string `json:"repositoryName" tf:"repository_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ecrpublic/v1beta1.Repository
+	// +kubebuilder:validation:Optional
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	RepositoryNameRef *v1.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 }
 
 // RepositoryPolicySpec defines the desired state of RepositoryPolicy

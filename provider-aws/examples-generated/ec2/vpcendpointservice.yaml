@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCEndpointService
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,3 +10,6 @@ spec:
     networkLoadBalancerArns:
     - ${aws_lb.example.arn}
     region: us-west-1
+
+---
+

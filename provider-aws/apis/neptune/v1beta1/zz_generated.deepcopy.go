@@ -1471,6 +1471,16 @@ func (in *EventSubscriptionParameters) DeepCopyInto(out *EventSubscriptionParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.SnsTopicArnRef != nil {
+		in, out := &in.SnsTopicArnRef, &out.SnsTopicArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SnsTopicArnSelector != nil {
+		in, out := &in.SnsTopicArnSelector, &out.SnsTopicArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SourceIds != nil {
 		in, out := &in.SourceIds, &out.SourceIds
 		*out = make([]*string, len(*in))

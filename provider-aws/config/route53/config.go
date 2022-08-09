@@ -28,6 +28,7 @@ func Configure(p *config.Provider) {
 		r.References["hosted_zone_id"] = config.Reference{
 			Type: "Zone",
 		}
+		delete(r.References, "zone_id")
 	})
 	p.AddResourceConfigurator("aws_route53_record", func(r *config.Resource) {
 		r.References["zone_id"] = config.Reference{
@@ -36,6 +37,8 @@ func Configure(p *config.Provider) {
 		r.References["health_check_id"] = config.Reference{
 			Type: "HealthCheck",
 		}
+		delete(r.References, "alias.name")
+		delete(r.References, "alias.zone_id")
 	})
 	p.AddResourceConfigurator("aws_route53_vpc_association_authorization", func(r *config.Resource) {
 		r.References["zone_id"] = config.Reference{

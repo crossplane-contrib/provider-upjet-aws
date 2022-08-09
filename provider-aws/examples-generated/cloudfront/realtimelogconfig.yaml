@@ -1,13 +1,19 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: RealtimeLogConfig
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     endpoint:
     - kinesisStreamConfig:
-      - roleArn: ${aws_iam_role.example.arn}
-        streamArn: ${aws_kinesis_stream.example.arn}
+      - roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        streamArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
       streamType: Kinesis
     fields:
     - timestamp
@@ -15,3 +21,30 @@ spec:
     name: example
     region: us-west-1
     samplingRate: 75
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "cloudfront.amazonaws.com"
+            },
+            "Effect": "Allow"
+          }
+        ]
+      }
+
+---
+

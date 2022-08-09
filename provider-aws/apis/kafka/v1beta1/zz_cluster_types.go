@@ -242,8 +242,16 @@ type FirehoseObservation struct {
 
 type FirehoseParameters struct {
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DeliveryStreamRef *v1.Reference `json:"deliveryStreamRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DeliveryStreamSelector *v1.Selector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`

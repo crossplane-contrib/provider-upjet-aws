@@ -1,11 +1,17 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: RouteTable
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     region: us-west-1
     tags:
       Name: example
-    vpcIdRef:
-      name: example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

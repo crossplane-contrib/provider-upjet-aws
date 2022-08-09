@@ -9,8 +9,10 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/cloudwatchlogs/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -82,6 +84,32 @@ func (mg *KeySigningKey) ResolveReferences(ctx context.Context, c client.Reader)
 	return nil
 }
 
+// ResolveReferences of this QueryLog.
+func (mg *QueryLog) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLogGroupArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.CloudwatchLogGroupArnRef,
+		Selector:     mg.Spec.ForProvider.CloudwatchLogGroupArnSelector,
+		To: reference.To{
+			List:    &v1beta11.GroupList{},
+			Managed: &v1beta11.Group{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchLogGroupArn")
+	}
+	mg.Spec.ForProvider.CloudwatchLogGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CloudwatchLogGroupArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Record.
 func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -137,8 +165,8 @@ func (mg *VPCAssociationAuthorization) ResolveReferences(ctx context.Context, c 
 		Reference:    mg.Spec.ForProvider.VPCIDRef,
 		Selector:     mg.Spec.ForProvider.VPCIDSelector,
 		To: reference.To{
-			List:    &v1beta11.VPCList{},
-			Managed: &v1beta11.VPC{},
+			List:    &v1beta12.VPCList{},
+			Managed: &v1beta12.VPC{},
 		},
 	})
 	if err != nil {
@@ -205,8 +233,8 @@ func (mg *ZoneAssociation) ResolveReferences(ctx context.Context, c client.Reade
 		Reference:    mg.Spec.ForProvider.VPCIDRef,
 		Selector:     mg.Spec.ForProvider.VPCIDSelector,
 		To: reference.To{
-			List:    &v1beta11.VPCList{},
-			Managed: &v1beta11.VPC{},
+			List:    &v1beta12.VPCList{},
+			Managed: &v1beta12.VPC{},
 		},
 	})
 	if err != nil {

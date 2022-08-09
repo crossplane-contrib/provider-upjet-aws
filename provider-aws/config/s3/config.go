@@ -56,4 +56,9 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{"acl", "grant"},
 		}
 	})
+
+	p.AddResourceConfigurator("aws_s3_bucket_notification", func(r *config.Resource) {
+		// NOTE(muvaf): It causes circular dependency. See https://github.com/crossplane/crossplane-runtime/issues/313
+		delete(r.References, "lambda_function.lambda_function_arn")
+	})
 }

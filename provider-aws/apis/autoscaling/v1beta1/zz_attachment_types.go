@@ -40,11 +40,27 @@ type AttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupNameSelector *v1.Selector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/elb/v1beta1.ELB
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	ELBRef *v1.Reference `json:"elbRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
+
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
 	LBTargetGroupArn *string `json:"lbTargetGroupArn,omitempty" tf:"lb_target_group_arn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	LBTargetGroupArnRef *v1.Reference `json:"lbTargetGroupArnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	LBTargetGroupArnSelector *v1.Selector `json:"lbTargetGroupArnSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-

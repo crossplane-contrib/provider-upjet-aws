@@ -1,6 +1,11 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: AccountAlias
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: alias
+  name: alias
 spec:
   forProvider: {}
+
+---
+

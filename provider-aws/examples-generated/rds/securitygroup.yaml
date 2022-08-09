@@ -1,9 +1,14 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
 spec:
   forProvider:
     ingress:
     - cidr: 10.0.0.0/24
     region: us-west-1
+
+---
+

@@ -23,8 +23,16 @@ type ApplicationSnapshotObservation struct {
 
 type ApplicationSnapshotParameters struct {
 
-	// +kubebuilder:validation:Required
-	ApplicationName *string `json:"applicationName" tf:"application_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kinesisanalyticsv2/v1beta1.Application
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +kubebuilder:validation:Optional
+	ApplicationName *string `json:"applicationName,omitempty" tf:"application_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ApplicationNameRef *v1.Reference `json:"applicationNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ApplicationNameSelector *v1.Selector `json:"applicationNameSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-

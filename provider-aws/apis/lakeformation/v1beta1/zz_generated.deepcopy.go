@@ -303,6 +303,16 @@ func (in *DataLocationParameters) DeepCopyInto(out *DataLocationParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ArnRef != nil {
+		in, out := &in.ArnRef, &out.ArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ArnSelector != nil {
+		in, out := &in.ArnSelector, &out.ArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CatalogID != nil {
 		in, out := &in.CatalogID, &out.CatalogID
 		*out = new(string)
@@ -347,6 +357,16 @@ func (in *DatabaseParameters) DeepCopyInto(out *DatabaseParameters) {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.NameRef != nil {
+		in, out := &in.NameRef, &out.NameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NameSelector != nil {
+		in, out := &in.NameSelector, &out.NameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -820,6 +840,16 @@ func (in *TableWithColumnsParameters) DeepCopyInto(out *TableWithColumnsParamete
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.NameRef != nil {
+		in, out := &in.NameRef, &out.NameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NameSelector != nil {
+		in, out := &in.NameSelector, &out.NameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Wildcard != nil {
 		in, out := &in.Wildcard, &out.Wildcard

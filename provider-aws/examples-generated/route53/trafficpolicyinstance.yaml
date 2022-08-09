@@ -1,7 +1,9 @@
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: TrafficPolicyInstance
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
 spec:
   forProvider:
     hostedZoneId: Z033120931TAQO548OGJC
@@ -10,3 +12,6 @@ spec:
     trafficPolicyId: b3gb108f-ea6f-45a5-baab-9d112d8b4037
     trafficPolicyVersion: 1
     ttl: 360
+
+---
+

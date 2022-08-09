@@ -1,6 +1,8 @@
 apiVersion: route53resolver.aws.upbound.io/v1beta1
 kind: FirewallRule
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -9,8 +11,45 @@ spec:
     blockOverrideDomain: example.com
     blockOverrideTtl: 1
     blockResponse: OVERRIDE
-    firewallDomainListId: ${aws_route53_resolver_firewall_domain_list.example.id}
-    firewallRuleGroupId: ${aws_route53_resolver_firewall_rule_group.example.id}
+    firewallDomainListIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    firewallRuleGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     name: example
     priority: 100
     region: us-west-1
+
+---
+
+apiVersion: route53resolver.aws.upbound.io/v1beta1
+kind: FirewallDomainList
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domains:
+    - example.com
+    name: example
+    region: us-west-1
+    tags: {}
+
+---
+
+apiVersion: route53resolver.aws.upbound.io/v1beta1
+kind: FirewallRuleGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+    tags: {}
+
+---
+

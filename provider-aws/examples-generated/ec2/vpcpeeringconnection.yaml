@@ -1,12 +1,19 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCPeeringConnection
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
 spec:
   forProvider:
     peerOwnerId: ${var.peer_owner_id}
-    peerVpcIdRef:
-      name: example
+    peerVpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bar
     region: us-west-1
-    vpcIdRef:
-      name: example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+

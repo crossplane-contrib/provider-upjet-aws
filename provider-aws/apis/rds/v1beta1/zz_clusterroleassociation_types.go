@@ -19,8 +19,16 @@ type ClusterRoleAssociationObservation struct {
 
 type ClusterRoleAssociationParameters struct {
 
-	// +kubebuilder:validation:Required
-	DBClusterIdentifier *string `json:"dbClusterIdentifier" tf:"db_cluster_identifier,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DBClusterIdentifierRef *v1.Reference `json:"dbClusterIdentifierRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DBClusterIdentifierSelector *v1.Selector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	FeatureName *string `json:"featureName" tf:"feature_name,omitempty"`

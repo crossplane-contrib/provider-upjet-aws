@@ -27,6 +27,7 @@ func Configure(p *config.Provider) {
 		// This causes refresh to fail in the first reconcile.
 		r.TerraformResource.Schema["catalog_id"].Computed = false
 		r.TerraformResource.Schema["catalog_id"].Optional = false
+		delete(r.References, "catalog_id")
 	})
 
 	p.AddResourceConfigurator("aws_glue_crawler", func(r *config.Resource) {

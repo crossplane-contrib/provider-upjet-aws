@@ -952,6 +952,16 @@ func (in *FirehoseParameters) DeepCopyInto(out *FirehoseParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DeliveryStreamRef != nil {
+		in, out := &in.DeliveryStreamRef, &out.DeliveryStreamRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DeliveryStreamSelector != nil {
+		in, out := &in.DeliveryStreamSelector, &out.DeliveryStreamSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
 		*out = new(bool)

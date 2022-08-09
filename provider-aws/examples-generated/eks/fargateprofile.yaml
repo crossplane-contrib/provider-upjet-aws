@@ -1,15 +1,23 @@
 apiVersion: eks.aws.upbound.io/v1beta1
 kind: FargateProfile
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    clusterNameRef:
-      name: example
-    podExecutionRoleArnRef:
-      name: example
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    podExecutionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
     selector:
     - namespace: example
-    subnetIdRefs:
-      name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example[*]
+
+---
+

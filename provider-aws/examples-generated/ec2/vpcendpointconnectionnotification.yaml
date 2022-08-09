@@ -1,0 +1,61 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCEndpointConnectionNotification
+metadata:
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    connectionEvents:
+    - Accept
+    - Reject
+    connectionNotificationArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topic
+    region: us-west-1
+    vpcEndpointServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  labels:
+    testing.upbound.io/example-name: topic
+  name: topic
+spec:
+  forProvider:
+    name: vpce-notification-topic
+    policy: |
+      {
+          "Version":"2012-10-17",
+          "Statement":[{
+              "Effect": "Allow",
+              "Principal": {
+                  "Service": "vpce.amazonaws.com"
+              },
+              "Action": "SNS:Publish",
+              "Resource": "arn:aws:sns:*:*:vpce-notification-topic"
+          }]
+      }
+    region: us-west-1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCEndpointService
+metadata:
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    acceptanceRequired: false
+    networkLoadBalancerArns:
+    - ${aws_lb.test.arn}
+    region: us-west-1
+
+---
+

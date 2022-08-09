@@ -1,12 +1,18 @@
 apiVersion: globalaccelerator.aws.upbound.io/v1beta1
 kind: EndpointGroup
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     endpointConfiguration:
     - endpointId: ${aws_lb.example.arn}
       weight: 100
-    listenerArnRef:
-      name: example
+    listenerArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
+
+---
+

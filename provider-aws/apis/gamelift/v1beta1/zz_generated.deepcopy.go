@@ -1358,6 +1358,16 @@ func (in *ScriptStorageLocationParameters) DeepCopyInto(out *ScriptStorageLocati
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyRef != nil {
+		in, out := &in.KeyRef, &out.KeyRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KeySelector != nil {
+		in, out := &in.KeySelector, &out.KeySelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ObjectVersion != nil {
 		in, out := &in.ObjectVersion, &out.ObjectVersion
 		*out = new(string)
@@ -1472,6 +1482,16 @@ func (in *StorageLocationParameters) DeepCopyInto(out *StorageLocationParameters
 		in, out := &in.Key, &out.Key
 		*out = new(string)
 		**out = **in
+	}
+	if in.KeyRef != nil {
+		in, out := &in.KeyRef, &out.KeyRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KeySelector != nil {
+		in, out := &in.KeySelector, &out.KeySelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ObjectVersion != nil {
 		in, out := &in.ObjectVersion, &out.ObjectVersion

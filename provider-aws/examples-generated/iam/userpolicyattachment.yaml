@@ -1,10 +1,42 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: UserPolicyAttachment
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test-attach
+  name: test-attach
 spec:
   forProvider:
-    policyArnRef:
-      name: example
-    userRef:
-      name: example
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: policy
+    userSelector:
+      matchLabels:
+        testing.upbound.io/example-name: user
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy
+spec:
+  forProvider:
+    description: A test policy
+    name: test-policy
+    policy: '{ ... policy JSON ... }'
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: User
+metadata:
+  labels:
+    testing.upbound.io/example-name: user
+  name: user
+spec:
+  forProvider: {}
+
+---
+

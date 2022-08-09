@@ -1,8 +1,13 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGateway
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     description: example
     region: us-west-1
+
+---
+

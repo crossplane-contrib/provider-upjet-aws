@@ -1,10 +1,29 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCIPv4CidrBlockAssociation
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: secondary_cidr
+  name: secondary-cidr
 spec:
   forProvider:
     cidrBlock: 172.2.0.0/16
     region: us-west-1
-    vpcIdRef:
-      name: example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-west-1
+
+---
+

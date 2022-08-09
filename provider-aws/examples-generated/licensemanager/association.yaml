@@ -1,10 +1,46 @@
 apiVersion: licensemanager.aws.upbound.io/v1beta1
 kind: Association
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    licenseConfigurationArnRef:
-      name: example
+    licenseConfigurationArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
-    resourceArn: ${aws_instance.example.arn}
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    ami: ${data.aws_ami.example.id}
+    instanceType: t2.micro
+    region: us-west-1
+
+---
+
+apiVersion: licensemanager.aws.upbound.io/v1beta1
+kind: LicenseConfiguration
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    licenseCountingType: Instance
+    name: Example
+    region: us-west-1
+
+---
+

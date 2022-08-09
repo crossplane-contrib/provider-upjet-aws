@@ -1,9 +1,15 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayRouteTable
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     region: us-west-1
-    transitGatewayIdRef:
-      name: example
+    transitGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

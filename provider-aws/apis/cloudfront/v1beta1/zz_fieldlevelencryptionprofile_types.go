@@ -24,8 +24,16 @@ type EncryptionEntitiesItemsParameters struct {
 	// +kubebuilder:validation:Required
 	ProviderID *string `json:"providerId" tf:"provider_id,omitempty"`
 
-	// +kubebuilder:validation:Required
-	PublicKeyID *string `json:"publicKeyId" tf:"public_key_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1.PublicKey
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	PublicKeyID *string `json:"publicKeyId,omitempty" tf:"public_key_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PublicKeyIDRef *v1.Reference `json:"publicKeyIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	PublicKeyIDSelector *v1.Selector `json:"publicKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionEntitiesObservation struct {

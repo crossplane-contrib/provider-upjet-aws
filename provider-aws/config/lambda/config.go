@@ -26,6 +26,7 @@ func Configure(p *config.Provider) {
 			Type:      "Function",
 			Extractor: common.PathARNExtractor,
 		}
+		delete(r.References, "event_source_arn")
 		r.UseAsync = true
 	})
 
@@ -36,6 +37,9 @@ func Configure(p *config.Provider) {
 	// We may consider adding metadata configuration for the `lambda_function` in
 	// a future PR.
 	p.AddResourceConfigurator("aws_lambda_function", func(r *config.Resource) {
+		r.References["s3_bucket"] = config.Reference{
+			Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
+		}
 		r.References["role"] = config.Reference{
 			Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
 			Extractor: common.PathARNExtractor,
@@ -52,6 +56,8 @@ func Configure(p *config.Provider) {
 			Type:      "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1.Topic",
 			Extractor: common.PathARNExtractor,
 		}
+		delete(r.References, "function_name")
+		delete(r.References, "qualifier")
 	})
 
 	p.AddResourceConfigurator("aws_lambda_function_url", func(r *config.Resource) {
@@ -73,6 +79,7 @@ func Configure(p *config.Provider) {
 		r.References["qualifier"] = config.Reference{
 			Type: "Alias",
 		}
+		delete(r.References, "source_arn")
 	})
 
 	p.AddResourceConfigurator("aws_lambda_provisioned_concurrency_config", func(r *config.Resource) {
@@ -80,5 +87,7 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{"provisioned_concurrent_executions"},
 		}
 		r.UseAsync = true
+		delete(r.References, "function_name")
+		delete(r.References, "qualifier")
 	})
 }

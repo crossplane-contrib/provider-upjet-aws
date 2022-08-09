@@ -1,8 +1,13 @@
 apiVersion: lakeformation.aws.upbound.io/v1beta1
 kind: Resource
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     arn: ${data.aws_s3_bucket.example.arn}
     region: us-west-1
+
+---
+

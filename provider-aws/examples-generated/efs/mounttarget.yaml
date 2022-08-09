@@ -1,11 +1,48 @@
 apiVersion: efs.aws.upbound.io/v1beta1
 kind: MountTarget
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: alpha
+  name: alpha
 spec:
   forProvider:
-    fileSystemIdRef:
-      name: example
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
     region: us-west-1
-    subnetIdRef:
-      name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: alpha
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: alpha
+  name: alpha
+spec:
+  forProvider:
+    availabilityZone: us-west-2a
+    cidrBlock: 10.0.1.0/24
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-west-1
+
+---
+

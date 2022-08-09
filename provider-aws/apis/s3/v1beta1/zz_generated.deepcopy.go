@@ -417,6 +417,16 @@ func (in *BucketACLParameters) DeepCopyInto(out *BucketACLParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ExpectedBucketOwner != nil {
 		in, out := &in.ExpectedBucketOwner, &out.ExpectedBucketOwner
 		*out = new(string)
@@ -559,6 +569,16 @@ func (in *BucketAccelerateConfigurationParameters) DeepCopyInto(out *BucketAccel
 		in, out := &in.Bucket, &out.Bucket
 		*out = new(string)
 		**out = **in
+	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ExpectedBucketOwner != nil {
 		in, out := &in.ExpectedBucketOwner, &out.ExpectedBucketOwner
@@ -757,6 +777,16 @@ func (in *BucketAnalyticsConfigurationParameters) DeepCopyInto(out *BucketAnalyt
 		in, out := &in.Bucket, &out.Bucket
 		*out = new(string)
 		**out = **in
+	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Filter != nil {
 		in, out := &in.Filter, &out.Filter
@@ -999,6 +1029,16 @@ func (in *BucketCorsConfigurationParameters) DeepCopyInto(out *BucketCorsConfigu
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CorsRule != nil {
 		in, out := &in.CorsRule, &out.CorsRule
 		*out = make([]BucketCorsConfigurationCorsRuleParameters, len(*in))
@@ -1198,6 +1238,16 @@ func (in *BucketIntelligentTieringConfigurationParameters) DeepCopyInto(out *Buc
 		in, out := &in.Bucket, &out.Bucket
 		*out = new(string)
 		**out = **in
+	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Filter != nil {
 		in, out := &in.Filter, &out.Filter
@@ -1433,6 +1483,16 @@ func (in *BucketInventoryParameters) DeepCopyInto(out *BucketInventoryParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Destination != nil {
 		in, out := &in.Destination, &out.Destination
 		*out = make([]BucketInventoryDestinationParameters, len(*in))
@@ -1617,6 +1677,16 @@ func (in *BucketLifecycleConfigurationParameters) DeepCopyInto(out *BucketLifecy
 		in, out := &in.Bucket, &out.Bucket
 		*out = new(string)
 		**out = **in
+	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ExpectedBucketOwner != nil {
 		in, out := &in.ExpectedBucketOwner, &out.ExpectedBucketOwner
@@ -1894,6 +1964,16 @@ func (in *BucketLoggingParameters) DeepCopyInto(out *BucketLoggingParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ExpectedBucketOwner != nil {
 		in, out := &in.ExpectedBucketOwner, &out.ExpectedBucketOwner
 		*out = new(string)
@@ -1908,6 +1988,16 @@ func (in *BucketLoggingParameters) DeepCopyInto(out *BucketLoggingParameters) {
 		in, out := &in.TargetBucket, &out.TargetBucket
 		*out = new(string)
 		**out = **in
+	}
+	if in.TargetBucketRef != nil {
+		in, out := &in.TargetBucketRef, &out.TargetBucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TargetBucketSelector != nil {
+		in, out := &in.TargetBucketSelector, &out.TargetBucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TargetGrant != nil {
 		in, out := &in.TargetGrant, &out.TargetGrant
@@ -2104,6 +2194,16 @@ func (in *BucketMetricParameters) DeepCopyInto(out *BucketMetricParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Filter != nil {
 		in, out := &in.Filter, &out.Filter
 		*out = make([]BucketMetricFilterParameters, len(*in))
@@ -2253,6 +2353,16 @@ func (in *BucketNotificationParameters) DeepCopyInto(out *BucketNotificationPara
 		in, out := &in.Bucket, &out.Bucket
 		*out = new(string)
 		**out = **in
+	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Eventbridge != nil {
 		in, out := &in.Eventbridge, &out.Eventbridge
@@ -2477,6 +2587,16 @@ func (in *BucketObjectLockConfigurationParameters) DeepCopyInto(out *BucketObjec
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ExpectedBucketOwner != nil {
 		in, out := &in.ExpectedBucketOwner, &out.ExpectedBucketOwner
 		*out = new(string)
@@ -2644,6 +2764,16 @@ func (in *BucketObjectParameters) DeepCopyInto(out *BucketObjectParameters) {
 		in, out := &in.BucketKeyEnabled, &out.BucketKeyEnabled
 		*out = new(bool)
 		**out = **in
+	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CacheControl != nil {
 		in, out := &in.CacheControl, &out.CacheControl
@@ -3056,6 +3186,16 @@ func (in *BucketOwnershipControlsParameters) DeepCopyInto(out *BucketOwnershipCo
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -3291,6 +3431,16 @@ func (in *BucketPolicyParameters) DeepCopyInto(out *BucketPolicyParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
 		*out = new(string)
@@ -3444,6 +3594,16 @@ func (in *BucketPublicAccessBlockParameters) DeepCopyInto(out *BucketPublicAcces
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.IgnorePublicAcls != nil {
 		in, out := &in.IgnorePublicAcls, &out.IgnorePublicAcls
 		*out = new(bool)
@@ -3592,6 +3752,16 @@ func (in *BucketReplicationConfigurationParameters) DeepCopyInto(out *BucketRepl
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -3601,6 +3771,16 @@ func (in *BucketReplicationConfigurationParameters) DeepCopyInto(out *BucketRepl
 		in, out := &in.Role, &out.Role
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleRef != nil {
+		in, out := &in.RoleRef, &out.RoleRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleSelector != nil {
+		in, out := &in.RoleSelector, &out.RoleSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Rule != nil {
 		in, out := &in.Rule, &out.Rule
@@ -3881,6 +4061,16 @@ func (in *BucketRequestPaymentConfigurationParameters) DeepCopyInto(out *BucketR
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ExpectedBucketOwner != nil {
 		in, out := &in.ExpectedBucketOwner, &out.ExpectedBucketOwner
 		*out = new(string)
@@ -4028,6 +4218,16 @@ func (in *BucketServerSideEncryptionConfigurationParameters) DeepCopyInto(out *B
 		in, out := &in.Bucket, &out.Bucket
 		*out = new(string)
 		**out = **in
+	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ExpectedBucketOwner != nil {
 		in, out := &in.ExpectedBucketOwner, &out.ExpectedBucketOwner
@@ -4255,6 +4455,16 @@ func (in *BucketVersioningParameters) DeepCopyInto(out *BucketVersioningParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ExpectedBucketOwner != nil {
 		in, out := &in.ExpectedBucketOwner, &out.ExpectedBucketOwner
 		*out = new(string)
@@ -4419,6 +4629,16 @@ func (in *BucketWebsiteConfigurationParameters) DeepCopyInto(out *BucketWebsiteC
 		in, out := &in.Bucket, &out.Bucket
 		*out = new(string)
 		**out = **in
+	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ErrorDocument != nil {
 		in, out := &in.ErrorDocument, &out.ErrorDocument
@@ -4849,6 +5069,16 @@ func (in *DestinationBucketParameters) DeepCopyInto(out *DestinationBucketParame
 		in, out := &in.BucketArn, &out.BucketArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.BucketArnRef != nil {
+		in, out := &in.BucketArnRef, &out.BucketArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketArnSelector != nil {
+		in, out := &in.BucketArnSelector, &out.BucketArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Encryption != nil {
 		in, out := &in.Encryption, &out.Encryption
@@ -6466,6 +6696,16 @@ func (in *ObjectParameters) DeepCopyInto(out *ObjectParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CacheControl != nil {
 		in, out := &in.CacheControl, &out.CacheControl
 		*out = new(string)
@@ -6740,6 +6980,16 @@ func (in *QueueParameters) DeepCopyInto(out *QueueParameters) {
 		in, out := &in.QueueArn, &out.QueueArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.QueueArnRef != nil {
+		in, out := &in.QueueArnRef, &out.QueueArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.QueueArnSelector != nil {
+		in, out := &in.QueueArnSelector, &out.QueueArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -7032,6 +7282,16 @@ func (in *RuleApplyServerSideEncryptionByDefaultParameters) DeepCopyInto(out *Ru
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSMasterKeyIDRef != nil {
+		in, out := &in.KMSMasterKeyIDRef, &out.KMSMasterKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSMasterKeyIDSelector != nil {
+		in, out := &in.KMSMasterKeyIDSelector, &out.KMSMasterKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SseAlgorithm != nil {
 		in, out := &in.SseAlgorithm, &out.SseAlgorithm
 		*out = new(string)
@@ -7128,6 +7388,16 @@ func (in *RuleDestinationParameters) DeepCopyInto(out *RuleDestinationParameters
 		in, out := &in.Bucket, &out.Bucket
 		*out = new(string)
 		**out = **in
+	}
+	if in.BucketRef != nil {
+		in, out := &in.BucketRef, &out.BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketSelector != nil {
+		in, out := &in.BucketSelector, &out.BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.EncryptionConfiguration != nil {
 		in, out := &in.EncryptionConfiguration, &out.EncryptionConfiguration
@@ -7585,6 +7855,16 @@ func (in *S3BucketDestinationParameters) DeepCopyInto(out *S3BucketDestinationPa
 		in, out := &in.BucketArn, &out.BucketArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.BucketArnRef != nil {
+		in, out := &in.BucketArnRef, &out.BucketArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketArnSelector != nil {
+		in, out := &in.BucketArnSelector, &out.BucketArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Format != nil {
 		in, out := &in.Format, &out.Format
@@ -8198,6 +8478,16 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 		in, out := &in.TopicArn, &out.TopicArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.TopicArnRef != nil {
+		in, out := &in.TopicArnRef, &out.TopicArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TopicArnSelector != nil {
+		in, out := &in.TopicArnSelector, &out.TopicArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

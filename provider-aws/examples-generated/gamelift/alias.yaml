@@ -1,6 +1,8 @@
 apiVersion: gamelift.aws.upbound.io/v1beta1
 kind: Alias
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -10,3 +12,6 @@ spec:
     routingStrategy:
     - message: Example Message
       type: TERMINAL
+
+---
+

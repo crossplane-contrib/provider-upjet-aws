@@ -1,7 +1,9 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: FieldLevelEncryptionProfile
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
 spec:
   forProvider:
     comment: test comment
@@ -11,6 +13,29 @@ spec:
         - items:
           - DateOfBirth
         providerId: test provider
-        publicKeyId: ${aws_cloudfront_public_key.example.id}
+        publicKeyIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
     name: test profile
     region: us-west-1
+
+---
+
+apiVersion: cloudfront.aws.upbound.io/v1beta1
+kind: PublicKey
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    comment: test public key
+    encodedKeySecretRef:
+      key: attribute.public_key.pem
+      name: example-secret
+      namespace: upbound-system
+    name: test_key
+    region: us-west-1
+
+---
+

@@ -1,8 +1,40 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: InstanceProfile
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test_profile
+  name: test-profile
 spec:
   forProvider:
-    roleRef:
-      name: example
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  labels:
+    testing.upbound.io/example-name: role
+  name: role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Action": "sts:AssumeRole",
+                  "Principal": {
+                     "Service": "ec2.amazonaws.com"
+                  },
+                  "Effect": "Allow",
+                  "Sid": ""
+              }
+          ]
+      }
+    path: /
+
+---
+

@@ -1,7 +1,9 @@
 apiVersion: sqs.aws.upbound.io/v1beta1
 kind: Queue
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: terraform_queue
+  name: terraform-queue
 spec:
   forProvider:
     delaySeconds: 90
@@ -22,3 +24,6 @@ spec:
     region: us-west-1
     tags:
       Environment: production
+
+---
+

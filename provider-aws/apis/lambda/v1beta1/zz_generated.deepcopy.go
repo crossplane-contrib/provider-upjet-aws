@@ -1012,6 +1012,16 @@ func (in *FileSystemConfigParameters) DeepCopyInto(out *FileSystemConfigParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.ArnRef != nil {
+		in, out := &in.ArnRef, &out.ArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ArnSelector != nil {
+		in, out := &in.ArnSelector, &out.ArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.LocalMountPath != nil {
 		in, out := &in.LocalMountPath, &out.LocalMountPath
 		*out = new(string)
@@ -1590,6 +1600,16 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 		in, out := &in.S3Bucket, &out.S3Bucket
 		*out = new(string)
 		**out = **in
+	}
+	if in.S3BucketRef != nil {
+		in, out := &in.S3BucketRef, &out.S3BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.S3BucketSelector != nil {
+		in, out := &in.S3BucketSelector, &out.S3BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.S3Key != nil {
 		in, out := &in.S3Key, &out.S3Key

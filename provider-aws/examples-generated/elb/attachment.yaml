@@ -1,11 +1,18 @@
 apiVersion: elb.aws.upbound.io/v1beta1
 kind: Attachment
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: baz
+  name: baz
 spec:
   forProvider:
-    elbRef:
-      name: example
-    instanceRef:
-      name: example
+    elbSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bar
+    instanceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
     region: us-west-1
+
+---
+

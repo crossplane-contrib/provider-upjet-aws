@@ -1,7 +1,9 @@
 apiVersion: neptune.aws.upbound.io/v1beta1
 kind: EventSubscription
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
 spec:
   forProvider:
     eventCategories:
@@ -18,9 +20,63 @@ spec:
     - configuration change
     - read replica
     region: us-west-1
-    snsTopicArn: ${aws_sns_topic.default.arn}
+    snsTopicArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
     sourceIds:
     - ${aws_neptune_cluster_instance.example.id}
     sourceType: db-instance
     tags:
       env: test
+
+---
+
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    applyImmediately: "true"
+    backupRetentionPeriod: 5
+    engine: neptune
+    iamDatabaseAuthenticationEnabled: "true"
+    preferredBackupWindow: 07:00-09:00
+    region: us-west-1
+    skipFinalSnapshot: true
+
+---
+
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: ClusterInstance
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applyImmediately: "true"
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    engine: neptune
+    instanceClass: db.r4.large
+    region: us-west-1
+
+---
+
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    name: neptune-events
+    region: us-west-1
+
+---
+

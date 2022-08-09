@@ -1,6 +1,8 @@
 apiVersion: kafka.aws.upbound.io/v1beta1
 kind: Configuration
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -11,3 +13,6 @@ spec:
     serverProperties: |
       auto.create.topics.enable = true
       delete.topic.enable = true
+
+---
+

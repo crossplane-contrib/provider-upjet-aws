@@ -1,8 +1,13 @@
 apiVersion: sns.aws.upbound.io/v1beta1
 kind: Topic
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: user_updates
+  name: user-updates
 spec:
   forProvider:
     name: user-updates-topic
     region: us-west-1
+
+---
+

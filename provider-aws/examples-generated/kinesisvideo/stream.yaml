@@ -1,7 +1,9 @@
 apiVersion: kinesisvideo.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
 spec:
   forProvider:
     dataRetentionInHours: 1
@@ -11,3 +13,6 @@ spec:
     region: us-west-1
     tags:
       Name: terraform-kinesis-video-stream
+
+---
+

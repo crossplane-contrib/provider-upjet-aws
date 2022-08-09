@@ -24,11 +24,27 @@ type QueryLogConfigAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	ResolverQueryLogConfigID *string `json:"resolverQueryLogConfigId" tf:"resolver_query_log_config_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/route53resolver/v1beta1.QueryLogConfig
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	ResolverQueryLogConfigID *string `json:"resolverQueryLogConfigId,omitempty" tf:"resolver_query_log_config_id,omitempty"`
 
-	// +kubebuilder:validation:Required
-	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResolverQueryLogConfigIDRef *v1.Reference `json:"resolverQueryLogConfigIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ResolverQueryLogConfigIDSelector *v1.Selector `json:"resolverQueryLogConfigIdSelector,omitempty" tf:"-"`
+
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 // QueryLogConfigAssociationSpec defines the desired state of QueryLogConfigAssociation

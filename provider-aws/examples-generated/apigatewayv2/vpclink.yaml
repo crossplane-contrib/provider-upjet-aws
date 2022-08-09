@@ -1,14 +1,20 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: VPCLink
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     name: example
     region: us-west-1
     securityGroupIdRefs:
-    - name: example
-    subnetIdRefs:
-      name: example
+    - name: aws_security_group
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_subnet_ids
     tags:
       Usage: example
+
+---
+

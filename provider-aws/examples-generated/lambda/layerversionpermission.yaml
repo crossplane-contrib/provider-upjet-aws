@@ -1,7 +1,9 @@
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: LayerVersionPermission
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: lambda_layer_permission
+  name: lambda-layer-permission
 spec:
   forProvider:
     action: lambda:GetLayerVersion
@@ -10,3 +12,6 @@ spec:
     region: us-west-1
     statementId: dev-account
     versionNumber: 1
+
+---
+

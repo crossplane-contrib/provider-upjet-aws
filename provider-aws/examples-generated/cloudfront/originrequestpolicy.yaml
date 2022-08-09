@@ -1,6 +1,8 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: OriginRequestPolicy
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -21,3 +23,6 @@ spec:
       - items:
         - example
     region: us-west-1
+
+---
+
