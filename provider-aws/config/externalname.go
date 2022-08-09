@@ -100,6 +100,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// EBS Volumes can be imported using the id: vol-049df61146c4d7901
 	"aws_ebs_volume": config.IdentifierFromProvider,
+	// EBS Snapshot can be imported using the id
+	"aws_ebs_snapshot": config.IdentifierFromProvider,
 
 	// ec2
 	//
@@ -152,6 +154,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_route_table_association": routeTableAssociation(),
 	// No import.
 	"aws_main_route_table_association": config.IdentifierFromProvider,
+	// No import
+	"aws_ec2_transit_gateway_multicast_group_member": config.IdentifierFromProvider,
+	// No import
+	"aws_ec2_transit_gateway_multicast_group_source": config.IdentifierFromProvider,
 	// Imported by using the EC2 Transit Gateway Route Table identifier, an
 	// underscore, and the EC2 Transit Gateway Attachment identifier:
 	// tgw-rtb-12345678_tgw-attach-87654321
@@ -166,12 +172,26 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ec2_transit_gateway_multicast_domain_association": config.IdentifierFromProvider,
 	// aws_ec2_transit_gateway_peering_attachment can be imported by using the EC2 Transit Gateway Attachment identifier
 	"aws_ec2_transit_gateway_peering_attachment": config.IdentifierFromProvider,
+	// Prefix List Entries can be imported using the prefix_list_id and cidr separated by a ,
+	"aws_ec2_managed_prefix_list_entry": FormattedIdentifierFromProvider(",", "prefix_list_id", "cidr"),
+	// Prefix Lists can be imported using the id
+	"aws_ec2_managed_prefix_list": config.IdentifierFromProvider,
+	// aws_ec2_transit_gateway_prefix_list_reference can be imported by using the EC2 Transit Gateway Route Table identifier and EC2 Prefix List identifier, separated by an underscore (_
+	"aws_ec2_transit_gateway_prefix_list_reference": FormattedIdentifierFromProvider("_", "transit_gateway_route_table_id", "prefix_list_id"),
+	// Egress-only Internet gateways can be imported using the id
+	"aws_egress_only_internet_gateway": config.IdentifierFromProvider,
 	// EIP Assocations can be imported using their association ID.
 	"aws_eip_association": config.IdentifierFromProvider,
+	// Flow Logs can be imported using the id
+	"aws_flow_log": config.IdentifierFromProvider,
 	// Key Pairs can be imported using the key_name
 	"aws_key_pair": config.ParameterAsIdentifier("key_name"),
 	// Network ACLs can be imported using the id
 	"aws_network_acl": config.IdentifierFromProvider,
+	// No import
+	"aws_network_interface_attachment": config.IdentifierFromProvider,
+	// No import
+	"aws_network_interface_sg_attachment": config.IdentifierFromProvider,
 	// Individual rules can be imported using NETWORK_ACL_ID:RULE_NUMBER:PROTOCOL:EGRESS
 	"aws_network_acl_rule": config.IdentifierFromProvider,
 	// No import
@@ -185,6 +205,18 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_dhcp_options_association": config.IdentifierFromProvider,
 	// VPC Endpoint Services can be imported using the VPC endpoint service id
 	"aws_vpc_endpoint_service": config.IdentifierFromProvider,
+	// VPC Endpoint connection notifications can be imported using the VPC endpoint connection notification id
+	"aws_vpc_endpoint_connection_notification": config.IdentifierFromProvider,
+	// VPC Endpoint Route Table Associations can be imported using vpc_endpoint_id together with route_table_id
+	"aws_vpc_endpoint_route_table_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "route_table_id"),
+	// Placement groups can be imported using the name
+	"aws_placement_group": config.NameAsIdentifier,
+	// A Spot Datafeed Subscription can be imported using the word spot-datafeed-subscription
+	"aws_spot_datafeed_subscription": config.IdentifierFromProvider,
+	// No import
+	"aws_vpc_endpoint_service_allowed_principal": config.IdentifierFromProvider,
+	// VPC Endpoint Subnet Associations can be imported using vpc_endpoint_id together with subnet_id
+	"aws_vpc_endpoint_subnet_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "subnet_id"),
 
 	// ecr
 	//

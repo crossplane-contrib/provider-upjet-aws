@@ -96,6 +96,7 @@ func GetProvider() *config.Provider {
 		modulePath, providerMetadata,
 		config.WithShortName("aws"),
 		config.WithRootGroup("aws.upbound.io"),
+		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector("github.com/upbound/official-providers/provider-aws")}),
 		config.WithIncludeList(ResourcesWithExternalNameConfig()),
 		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
 		config.WithSkipList(skipList),

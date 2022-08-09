@@ -1,0 +1,89 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayMulticastGroupMember
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    groupIpAddress: 224.0.0.1
+    networkInterfaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    region: us-west-1
+    transitGatewayMulticastDomainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayMulticastDomain
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    staticSourcesSupport: enable
+    region: us-west-1
+    transitGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGateway
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    multicastSupport: enable
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: NetworkInterface
+metadata:
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    region: us-west-1
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: subnet1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: subnet1
+  name: subnet1
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 10.0.1.0/24
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: vpc1
+  name: vpc1
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 10.0.0.0/16

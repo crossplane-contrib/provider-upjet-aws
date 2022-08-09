@@ -165,6 +165,22 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		}
 	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PlacementGroup),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.PlacementGroupRef,
+		Selector:     mg.Spec.ForProvider.PlacementGroupSelector,
+		To: reference.To{
+			List:    &v1beta12.PlacementGroupList{},
+			Managed: &v1beta12.PlacementGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PlacementGroup")
+	}
+	mg.Spec.ForProvider.PlacementGroup = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PlacementGroupRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceLinkedRoleArn),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.ServiceLinkedRoleArnRef,
