@@ -34,7 +34,7 @@ Copyright 2021 Upbound Inc.
 //go:generate go run -tags generate github.com/crossplane/crossplane-tools/cmd/angryjet generate-methodsets --header-file=../hack/boilerplate.go.txt ./...
 
 // Run UpDoc generator
-//go:generate go run ../../updoc/cmd/main.go generate --docs-dir=../../docs
+//go:generate go run github.com/upbound/official-providers/updoc/cmd generate --docs-dir=../../docs
 
 package apis
 
@@ -45,7 +45,5 @@ import (
 
 	_ "github.com/upbound/upjet/cmd/scraper"
 
-	_ "github.com/alecthomas/kong"
-
-	_ "github.com/upbound/official-providers/updoc/internal"
+	_ "github.com/upbound/official-providers/updoc/cmd"
 )
