@@ -5,13 +5,13 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    bucket: destination_bucket
+    bucket: upbound-example-2
     grant:
     - permissions:
       - READ
       type: Group
       uri: http://acs.amazonaws.com/groups/global/AllUsers
     key: destination_key
-    source: source_bucket/source_key
+    source: upbound-example/object_key
   providerConfigRef:
     name: default

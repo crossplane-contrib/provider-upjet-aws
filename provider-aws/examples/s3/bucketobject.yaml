@@ -5,7 +5,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    bucket: example
+    bucket: upbound-example
     key: new_object_key
   providerConfigRef:
     name: default

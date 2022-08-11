@@ -5,8 +5,8 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    bucket: example
-    key: new_object_key
+    bucket: upbound-example
+    key: object_key
     contentBase64: dGhpcyBpcyBhIHRleHQg
   providerConfigRef:
     name: default
