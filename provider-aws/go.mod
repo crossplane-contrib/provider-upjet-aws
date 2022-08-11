@@ -3,6 +3,7 @@ module github.com/upbound/official-providers/provider-aws
 go 1.18
 
 require (
+	github.com/alecthomas/kong v0.2.16
 	github.com/aws/aws-sdk-go-v2 v1.11.0
 	github.com/aws/aws-sdk-go-v2/config v1.10.0
 	github.com/aws/aws-sdk-go-v2/credentials v1.6.0
