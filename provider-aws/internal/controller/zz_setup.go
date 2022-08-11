@@ -58,8 +58,6 @@ import (
 	identityprovider "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/identityprovider"
 	resourceserver "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/resourceserver"
 	user "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/user"
-	usergroup "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/usergroup"
-	useringroup "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/useringroup"
 	userpool "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpool"
 	userpoolclient "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpoolclient"
 	userpooldomain "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/userpooldomain"
@@ -143,7 +141,7 @@ import (
 	replicationgroup "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/replicationgroup"
 	subnetgroupelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/subnetgroup"
 	userelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/user"
-	usergroupelasticache "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/usergroup"
+	usergroup "github.com/upbound/official-providers/provider-aws/internal/controller/elasticache/usergroup"
 	attachmentelb "github.com/upbound/official-providers/provider-aws/internal/controller/elb/attachment"
 	elb "github.com/upbound/official-providers/provider-aws/internal/controller/elb/elb"
 	lb "github.com/upbound/official-providers/provider-aws/internal/controller/elbv2/lb"
@@ -375,8 +373,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		identityprovider.Setup,
 		resourceserver.Setup,
 		user.Setup,
-		usergroup.Setup,
-		useringroup.Setup,
 		userpool.Setup,
 		userpoolclient.Setup,
 		userpooldomain.Setup,
@@ -460,7 +456,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		replicationgroup.Setup,
 		subnetgroupelasticache.Setup,
 		userelasticache.Setup,
-		usergroupelasticache.Setup,
+		usergroup.Setup,
 		attachmentelb.Setup,
 		elb.Setup,
 		lb.Setup,
