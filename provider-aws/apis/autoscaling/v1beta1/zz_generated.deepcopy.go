@@ -436,6 +436,16 @@ func (in *AutoscalingGroupParameters) DeepCopyInto(out *AutoscalingGroupParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.PlacementGroupRef != nil {
+		in, out := &in.PlacementGroupRef, &out.PlacementGroupRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PlacementGroupSelector != nil {
+		in, out := &in.PlacementGroupSelector, &out.PlacementGroupSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ProtectFromScaleIn != nil {
 		in, out := &in.ProtectFromScaleIn, &out.ProtectFromScaleIn
 		*out = new(bool)

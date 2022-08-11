@@ -37,6 +37,9 @@ func Configure(p *config.Provider) {
 	// We may consider adding metadata configuration for the `lambda_function` in
 	// a future PR.
 	p.AddResourceConfigurator("aws_lambda_function", func(r *config.Resource) {
+		r.References["s3_bucket"] = config.Reference{
+			Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
+		}
 		r.References["role"] = config.Reference{
 			Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
 			Extractor: common.PathARNExtractor,

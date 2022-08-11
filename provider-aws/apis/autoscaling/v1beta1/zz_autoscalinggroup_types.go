@@ -82,8 +82,16 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	MixedInstancesPolicy []MixedInstancesPolicyParameters `json:"mixedInstancesPolicy,omitempty" tf:"mixed_instances_policy,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.PlacementGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PlacementGroupRef *v1.Reference `json:"placementGroupRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	PlacementGroupSelector *v1.Selector `json:"placementGroupSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	ProtectFromScaleIn *bool `json:"protectFromScaleIn,omitempty" tf:"protect_from_scale_in,omitempty"`

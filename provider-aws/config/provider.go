@@ -13,10 +13,14 @@ import (
 
 	"github.com/upbound/official-providers/provider-aws/config/acm"
 	"github.com/upbound/official-providers/provider-aws/config/acmpca"
+	"github.com/upbound/official-providers/provider-aws/config/apigatewayv2"
 	"github.com/upbound/official-providers/provider-aws/config/athena"
 	"github.com/upbound/official-providers/provider-aws/config/autoscaling"
 	"github.com/upbound/official-providers/provider-aws/config/backup"
 	"github.com/upbound/official-providers/provider-aws/config/cloudfront"
+	"github.com/upbound/official-providers/provider-aws/config/cloudsearch"
+	"github.com/upbound/official-providers/provider-aws/config/cognitoidentity"
+	"github.com/upbound/official-providers/provider-aws/config/cognitoidp"
 	"github.com/upbound/official-providers/provider-aws/config/dax"
 	"github.com/upbound/official-providers/provider-aws/config/docdb"
 	"github.com/upbound/official-providers/provider-aws/config/dynamodb"
@@ -93,6 +97,7 @@ func GetProvider() *config.Provider {
 		modulePath, providerMetadata,
 		config.WithShortName("aws"),
 		config.WithRootGroup("aws.upbound.io"),
+		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector("github.com/upbound/official-providers/provider-aws")}),
 		config.WithIncludeList(ResourcesWithExternalNameConfig()),
 		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
 		config.WithSkipList(skipList),
@@ -113,6 +118,8 @@ func GetProvider() *config.Provider {
 		acm.Configure,
 		acmpca.Configure,
 		autoscaling.Configure,
+		cognitoidentity.Configure,
+		cognitoidp.Configure,
 		dynamodb.Configure,
 		ebs.Configure,
 		ec2.Configure,
@@ -154,6 +161,8 @@ func GetProvider() *config.Provider {
 		lakeformation.Configure,
 		route53resolver.Configure,
 		dax.Configure,
+		apigatewayv2.Configure,
+		cloudsearch.Configure,
 	} {
 		configure(pc)
 	}

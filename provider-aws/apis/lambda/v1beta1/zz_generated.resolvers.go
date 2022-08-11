@@ -12,9 +12,10 @@ import (
 	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/efs/v1beta1"
 	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
+	v1beta14 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/signer/v1beta1"
-	v1beta15 "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1"
-	v1beta14 "github.com/upbound/official-providers/provider-aws/apis/sqs/v1beta1"
+	v1beta16 "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1"
+	v1beta15 "github.com/upbound/official-providers/provider-aws/apis/sqs/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -158,6 +159,22 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Bucket),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.S3BucketRef,
+		Selector:     mg.Spec.ForProvider.S3BucketSelector,
+		To: reference.To{
+			List:    &v1beta14.BucketList{},
+			Managed: &v1beta14.Bucket{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.S3Bucket")
+	}
+	mg.Spec.ForProvider.S3Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.S3BucketRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -176,8 +193,8 @@ func (mg *FunctionEventInvokeConfig) ResolveReferences(ctx context.Context, c cl
 				Reference:    mg.Spec.ForProvider.DestinationConfig[i3].OnFailure[i4].DestinationRef,
 				Selector:     mg.Spec.ForProvider.DestinationConfig[i3].OnFailure[i4].DestinationSelector,
 				To: reference.To{
-					List:    &v1beta14.QueueList{},
-					Managed: &v1beta14.Queue{},
+					List:    &v1beta15.QueueList{},
+					Managed: &v1beta15.Queue{},
 				},
 			})
 			if err != nil {
@@ -196,8 +213,8 @@ func (mg *FunctionEventInvokeConfig) ResolveReferences(ctx context.Context, c cl
 				Reference:    mg.Spec.ForProvider.DestinationConfig[i3].OnSuccess[i4].DestinationRef,
 				Selector:     mg.Spec.ForProvider.DestinationConfig[i3].OnSuccess[i4].DestinationSelector,
 				To: reference.To{
-					List:    &v1beta15.TopicList{},
-					Managed: &v1beta15.Topic{},
+					List:    &v1beta16.TopicList{},
+					Managed: &v1beta16.Topic{},
 				},
 			})
 			if err != nil {

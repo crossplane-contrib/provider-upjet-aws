@@ -1,0 +1,13 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: EIP
+metadata:
+  labels:
+    testing.upbound.io/example-name: lb
+  name: lb
+spec:
+  forProvider:
+    instanceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: web
+    vpc: true
+    region: us-west-1

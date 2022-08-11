@@ -7,7 +7,8 @@ package common
 import (
 	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
 	"github.com/crossplane/crossplane-runtime/pkg/reference"
-	"github.com/crossplane/crossplane-runtime/pkg/resource"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	"github.com/upbound/upjet/pkg/resource"
 )
 
 const (
@@ -18,23 +19,19 @@ const (
 	// in this package.
 	PathARNExtractor = SelfPackagePath + ".ARNExtractor()"
 
-	// VersionV1Alpha2 is used as minimum version for all manually configured
-	// resources.
-	// Deprecated: Please use VersionV1Beta1 as minimum.
-	VersionV1Alpha2 = "v1alpha2"
+	// PathTerraformIDExtractor is the golang path to TerraformID extractor
+	// function in this package.
+	PathTerraformIDExtractor = SelfPackagePath + ".TerraformID()"
 
 	// VersionV1Beta1 is used for resources that meet the v1beta1 criteria
 	// here: https://github.com/upbound/arch/pull/33
 	VersionV1Beta1 = "v1beta1"
-
-	// ExternalTagsFieldName is used as field name to set external resource tags.
-	ExternalTagsFieldName = "Tags"
 )
 
 // ARNExtractor extracts ARN of the resources from "status.atProvider.arn" which
 // is quite common among all AWS resources.
 func ARNExtractor() reference.ExtractValueFn {
-	return func(mg resource.Managed) string {
+	return func(mg xpresource.Managed) string {
 		paved, err := fieldpath.PaveObject(mg)
 		if err != nil {
 			// todo(hasan): should we log this error?
@@ -46,5 +43,17 @@ func ARNExtractor() reference.ExtractValueFn {
 			return ""
 		}
 		return r
+	}
+}
+
+// TerraformID returns the Terraform ID string of the resource without any
+// manipulation.
+func TerraformID() reference.ExtractValueFn {
+	return func(mr xpresource.Managed) string {
+		tr, ok := mr.(resource.Terraformed)
+		if !ok {
+			return ""
+		}
+		return tr.GetID()
 	}
 }

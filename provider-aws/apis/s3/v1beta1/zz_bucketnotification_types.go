@@ -65,16 +65,8 @@ type LambdaFunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	LambdaFunctionArn *string `json:"lambdaFunctionArn,omitempty" tf:"lambda_function_arn,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	LambdaFunctionArnRef *v1.Reference `json:"lambdaFunctionArnRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	LambdaFunctionArnSelector *v1.Selector `json:"lambdaFunctionArnSelector,omitempty" tf:"-"`
 }
 
 type QueueObservation struct {
