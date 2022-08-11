@@ -5,7 +5,7 @@ metadata:
 spec:
   forProvider:
     region: us-east-1
-    ecrRepositoryPrefix: sample-repository
+    ecrRepositoryPrefix: upbound-sample-repository
     upstreamRegistryUrl: public.ecr.aws
   providerConfigRef:
-    name: example
+    name: default

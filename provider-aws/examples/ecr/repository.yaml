@@ -1,7 +1,7 @@
 apiVersion: ecr.aws.upbound.io/v1beta1
 kind: Repository
 metadata:
-  name: sample-repository
+  name: upbound-sample-repository
 spec:
   forProvider:
     region: us-east-1

@@ -9,6 +9,6 @@ spec:
     - rule:
       - destination:
         - region: us-east-1
-          registryId: "${ACCOUNT_ID}"
+          registryId: ${data.aws_account_id}
   providerConfigRef:
-    name: example
+    name: default

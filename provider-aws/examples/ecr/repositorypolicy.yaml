@@ -32,6 +32,6 @@ spec:
               }
           ]
       }
-    repository: sample-repository
+    repository: upbound-sample-repository
   providerConfigRef:
-    name: example
+    name: default
