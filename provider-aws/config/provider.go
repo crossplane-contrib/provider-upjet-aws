@@ -18,6 +18,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/autoscaling"
 	"github.com/upbound/official-providers/provider-aws/config/backup"
 	"github.com/upbound/official-providers/provider-aws/config/cloudfront"
+	"github.com/upbound/official-providers/provider-aws/config/cloudsearch"
 	"github.com/upbound/official-providers/provider-aws/config/cognitoidentity"
 	"github.com/upbound/official-providers/provider-aws/config/cognitoidp"
 	"github.com/upbound/official-providers/provider-aws/config/dax"
@@ -161,6 +162,7 @@ func GetProvider() *config.Provider {
 		route53resolver.Configure,
 		dax.Configure,
 		apigatewayv2.Configure,
+		cloudsearch.Configure,
 	} {
 		configure(pc)
 	}

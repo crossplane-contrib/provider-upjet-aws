@@ -841,6 +841,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_dax_parameter_group": config.NameAsIdentifier,
 	// DAX Subnet Group can be imported using the name
 	"aws_dax_subnet_group": config.NameAsIdentifier,
+
+	// cloudsearch
+	//
+	// CloudSearch Domains can be imported using the name
+	"aws_cloudsearch_domain": config.NameAsIdentifier,
+	// CloudSearch domain service access policies can be imported using the domain name
+	"aws_cloudsearch_domain_service_access_policy": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

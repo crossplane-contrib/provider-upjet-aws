@@ -51,6 +51,8 @@ import (
 	publickey "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/publickey"
 	realtimelogconfig "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/realtimelogconfig"
 	responseheaderspolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/responseheaderspolicy"
+	domain "github.com/upbound/official-providers/provider-aws/internal/controller/cloudsearch/domain"
+	domainserviceaccesspolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudsearch/domainserviceaccesspolicy"
 	group "github.com/upbound/official-providers/provider-aws/internal/controller/cloudwatchlogs/group"
 	pool "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidentity/pool"
 	identityprovider "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidp/identityprovider"
@@ -380,6 +382,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		publickey.Setup,
 		realtimelogconfig.Setup,
 		responseheaderspolicy.Setup,
+		domain.Setup,
+		domainserviceaccesspolicy.Setup,
 		group.Setup,
 		pool.Setup,
 		identityprovider.Setup,
