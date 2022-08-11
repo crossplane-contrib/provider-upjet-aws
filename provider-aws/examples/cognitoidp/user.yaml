@@ -1,16 +1,16 @@
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
-kind: UserPoolDomain
+kind: User
 metadata:
   labels:
-    testing.upbound.io/example-name: main
-  name: main
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    domain: example-domain
     region: us-west-1
     userPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+        #    username: example
 
 ---
 
@@ -22,5 +22,11 @@ metadata:
   name: example
 spec:
   forProvider:
-    name: example-pool
+    name: example
+    passwordPolicy:
+    - minimumLength: 6
+      requireNumbers: false
+      requireSymbols: false
+      requireUppercase: false
+      temporaryPasswordValidityDays: 7
     region: us-west-1

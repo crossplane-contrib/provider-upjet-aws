@@ -1,34 +1,44 @@
-apiVersion: cognitoidp.aws.upbound.io/v1beta1
-kind: UserGroup
+apiVersion: cognitoidentity.aws.upbound.io/v1beta1
+kind: PoolRolesAttachment
 metadata:
   labels:
     testing.upbound.io/example-name: main
   name: main
 spec:
   forProvider:
-    description: Managed by Terraform
-    name: user-group
-    precedence: 42
-    region: us-west-1
-    roleArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: group_role
-    userPoolIdSelector:
+    identityPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main
+    region: us-west-1
+    roleMapping:
+    - ambiguousRoleResolution: AuthenticatedRole
+      identityProvider: graph.facebook.com
+      mappingRule:
+      - claim: isAdmin
+        matchType: Equals
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: authenticated
+        value: paid
+      type: Rules
+    roles:
+      authenticated: ${aws_iam_role.authenticated.arn}
 
 ---
 
-apiVersion: cognitoidp.aws.upbound.io/v1beta1
-kind: UserPool
+apiVersion: cognitoidentity.aws.upbound.io/v1beta1
+kind: Pool
 metadata:
   labels:
     testing.upbound.io/example-name: main
   name: main
 spec:
   forProvider:
-    name: identity pool
+    allowUnauthenticatedIdentities: false
+    identityPoolName: identity pool
     region: us-west-1
+    supportedLoginProviders:
+      graph.facebook.com: "7346241598935555"
 
 ---
 
@@ -36,8 +46,8 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   labels:
-    testing.upbound.io/example-name: group_role
-  name: group-role
+    testing.upbound.io/example-name: authenticated
+  name: authenticated
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -45,7 +55,6 @@ spec:
         "Version": "2012-10-17",
         "Statement": [
           {
-            "Sid": "",
             "Effect": "Allow",
             "Principal": {
               "Federated": "cognito-identity.amazonaws.com"
@@ -53,7 +62,7 @@ spec:
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
               "StringEquals": {
-                "cognito-identity.amazonaws.com:aud": "us-east-1:12345678-dead-beef-cafe-123456790ab"
+                "cognito-identity.amazonaws.com:aud": "${aws_cognito_identity_pool.main.id}"
               },
               "ForAnyValue:StringLike": {
                 "cognito-identity.amazonaws.com:amr": "authenticated"

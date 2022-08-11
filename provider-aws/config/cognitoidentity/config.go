@@ -17,5 +17,8 @@ func Configure(p *config.Provider) {
 			Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.SAMLProvider",
 			Extractor: common.PathARNExtractor,
 		}
+		r.References["cognito_identity_providers.client_id"] = config.Reference{
+			Type: "github.com/upbound/official-providers/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient",
+		}
 	})
 }

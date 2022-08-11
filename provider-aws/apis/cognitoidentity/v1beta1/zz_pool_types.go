@@ -18,8 +18,15 @@ type CognitoIdentityProvidersObservation struct {
 
 type CognitoIdentityProvidersParameters struct {
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
