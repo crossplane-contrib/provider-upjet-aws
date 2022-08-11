@@ -7,6 +7,72 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
+// GetCondition of this CognitoIdentityPoolProviderPrincipalTag.
+func (mg *CognitoIdentityPoolProviderPrincipalTag) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this CognitoIdentityPoolProviderPrincipalTag.
+func (mg *CognitoIdentityPoolProviderPrincipalTag) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this CognitoIdentityPoolProviderPrincipalTag.
+func (mg *CognitoIdentityPoolProviderPrincipalTag) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this CognitoIdentityPoolProviderPrincipalTag.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *CognitoIdentityPoolProviderPrincipalTag) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this CognitoIdentityPoolProviderPrincipalTag.
+func (mg *CognitoIdentityPoolProviderPrincipalTag) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this CognitoIdentityPoolProviderPrincipalTag.
+func (mg *CognitoIdentityPoolProviderPrincipalTag) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this CognitoIdentityPoolProviderPrincipalTag.
+func (mg *CognitoIdentityPoolProviderPrincipalTag) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this CognitoIdentityPoolProviderPrincipalTag.
+func (mg *CognitoIdentityPoolProviderPrincipalTag) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this CognitoIdentityPoolProviderPrincipalTag.
+func (mg *CognitoIdentityPoolProviderPrincipalTag) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this CognitoIdentityPoolProviderPrincipalTag.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *CognitoIdentityPoolProviderPrincipalTag) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this CognitoIdentityPoolProviderPrincipalTag.
+func (mg *CognitoIdentityPoolProviderPrincipalTag) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this CognitoIdentityPoolProviderPrincipalTag.
+func (mg *CognitoIdentityPoolProviderPrincipalTag) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Pool.
 func (mg *Pool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -70,5 +136,71 @@ func (mg *Pool) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo
 
 // SetWriteConnectionSecretToReference of this Pool.
 func (mg *Pool) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this PoolRolesAttachment.
+func (mg *PoolRolesAttachment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PoolRolesAttachment.
+func (mg *PoolRolesAttachment) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this PoolRolesAttachment.
+func (mg *PoolRolesAttachment) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this PoolRolesAttachment.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *PoolRolesAttachment) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this PoolRolesAttachment.
+func (mg *PoolRolesAttachment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PoolRolesAttachment.
+func (mg *PoolRolesAttachment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PoolRolesAttachment.
+func (mg *PoolRolesAttachment) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PoolRolesAttachment.
+func (mg *PoolRolesAttachment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this PoolRolesAttachment.
+func (mg *PoolRolesAttachment) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this PoolRolesAttachment.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *PoolRolesAttachment) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PoolRolesAttachment.
+func (mg *PoolRolesAttachment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PoolRolesAttachment.
+func (mg *PoolRolesAttachment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

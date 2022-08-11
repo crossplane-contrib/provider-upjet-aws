@@ -9,11 +9,10 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta14 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
-	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
-	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1"
-	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1"
-	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/sqs/v1beta1"
+	v1beta13 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1"
+	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/sqs/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -337,24 +336,6 @@ func (mg *BucketNotification) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BucketRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.LambdaFunction); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaFunction[i3].LambdaFunctionArn),
-			Extract:      resource.ExtractParamPath("arn", true),
-			Reference:    mg.Spec.ForProvider.LambdaFunction[i3].LambdaFunctionArnRef,
-			Selector:     mg.Spec.ForProvider.LambdaFunction[i3].LambdaFunctionArnSelector,
-			To: reference.To{
-				List:    &v1beta1.FunctionList{},
-				Managed: &v1beta1.Function{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.LambdaFunction[i3].LambdaFunctionArn")
-		}
-		mg.Spec.ForProvider.LambdaFunction[i3].LambdaFunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.LambdaFunction[i3].LambdaFunctionArnRef = rsp.ResolvedReference
-
-	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Queue); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Queue[i3].QueueArn),
@@ -362,8 +343,8 @@ func (mg *BucketNotification) ResolveReferences(ctx context.Context, c client.Re
 			Reference:    mg.Spec.ForProvider.Queue[i3].QueueArnRef,
 			Selector:     mg.Spec.ForProvider.Queue[i3].QueueArnSelector,
 			To: reference.To{
-				List:    &v1beta11.QueueList{},
-				Managed: &v1beta11.Queue{},
+				List:    &v1beta1.QueueList{},
+				Managed: &v1beta1.Queue{},
 			},
 		})
 		if err != nil {
@@ -380,8 +361,8 @@ func (mg *BucketNotification) ResolveReferences(ctx context.Context, c client.Re
 			Reference:    mg.Spec.ForProvider.Topic[i3].TopicArnRef,
 			Selector:     mg.Spec.ForProvider.Topic[i3].TopicArnSelector,
 			To: reference.To{
-				List:    &v1beta12.TopicList{},
-				Managed: &v1beta12.Topic{},
+				List:    &v1beta11.TopicList{},
+				Managed: &v1beta11.Topic{},
 			},
 		})
 		if err != nil {
@@ -424,8 +405,8 @@ func (mg *BucketObject) ResolveReferences(ctx context.Context, c client.Reader) 
 		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 		To: reference.To{
-			List:    &v1beta13.KeyList{},
-			Managed: &v1beta13.Key{},
+			List:    &v1beta12.KeyList{},
+			Managed: &v1beta12.Key{},
 		},
 	})
 	if err != nil {
@@ -570,8 +551,8 @@ func (mg *BucketReplicationConfiguration) ResolveReferences(ctx context.Context,
 		Reference:    mg.Spec.ForProvider.RoleRef,
 		Selector:     mg.Spec.ForProvider.RoleSelector,
 		To: reference.To{
-			List:    &v1beta14.RoleList{},
-			Managed: &v1beta14.Role{},
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
 		},
 	})
 	if err != nil {
@@ -661,8 +642,8 @@ func (mg *BucketServerSideEncryptionConfiguration) ResolveReferences(ctx context
 				Reference:    mg.Spec.ForProvider.Rule[i3].ApplyServerSideEncryptionByDefault[i4].KMSMasterKeyIDRef,
 				Selector:     mg.Spec.ForProvider.Rule[i3].ApplyServerSideEncryptionByDefault[i4].KMSMasterKeyIDSelector,
 				To: reference.To{
-					List:    &v1beta13.KeyList{},
-					Managed: &v1beta13.Key{},
+					List:    &v1beta12.KeyList{},
+					Managed: &v1beta12.Key{},
 				},
 			})
 			if err != nil {
@@ -758,8 +739,8 @@ func (mg *Object) ResolveReferences(ctx context.Context, c client.Reader) error 
 		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 		To: reference.To{
-			List:    &v1beta13.KeyList{},
-			Managed: &v1beta13.Key{},
+			List:    &v1beta12.KeyList{},
+			Managed: &v1beta12.Key{},
 		},
 	})
 	if err != nil {

@@ -15,22 +15,13 @@ import (
 
 type AttachmentObservation struct {
 	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
+
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
 }
 
 type AttachmentParameters struct {
-
-	// +kubebuilder:validation:Required
-	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
-
-	// +crossplane:generate:reference:type=Instance
-	// +kubebuilder:validation:Optional
-	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	InstanceRef *v1.Reference `json:"instanceRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	InstanceSelector *v1.Selector `json:"instanceSelector,omitempty" tf:"-"`
 }
 
 type NetworkInterfaceObservation_2 struct {
@@ -52,9 +43,6 @@ type NetworkInterfaceObservation_2 struct {
 }
 
 type NetworkInterfaceParameters_2 struct {
-
-	// +kubebuilder:validation:Optional
-	Attachment []AttachmentParameters `json:"attachment,omitempty" tf:"attachment,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`

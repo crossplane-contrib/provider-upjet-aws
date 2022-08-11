@@ -1,0 +1,26 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SpotDatafeedSubscription
+metadata:
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    bucket: ${aws_s3_bucket.default.bucket}
+    prefix: my_subdirectory
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
