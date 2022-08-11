@@ -2,6 +2,8 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketServerSideEncryptionConfiguration
 metadata:
   name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
 spec:
   forProvider:
     region: us-west-1

@@ -1,5 +1,5 @@
 apiVersion: s3.aws.upbound.io/v1beta1
-kind: BucketObject
+kind: Object
 metadata:
   name: example
 spec:

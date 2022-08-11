@@ -3,7 +3,7 @@ kind: BucketNotification
 metadata:
   name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource depends on requires manual intervention."
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
 spec:
   forProvider:
     region: us-west-1
