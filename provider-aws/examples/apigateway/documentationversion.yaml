@@ -1,0 +1,45 @@
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: DocumentationVersion
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Example description
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    version: example_version
+
+---
+
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: DocumentationPart
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location:
+    - type: API
+    properties: '{"description":"Example"}'
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: RestAPI
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example_api
+    region: us-west-1

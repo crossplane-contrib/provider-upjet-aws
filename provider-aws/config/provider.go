@@ -8,6 +8,8 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
+	"github.com/upbound/official-providers/provider-aws/config/apigateway"
+
 	"github.com/upbound/upjet/pkg/config"
 	"github.com/upbound/upjet/pkg/registry/reference"
 
@@ -163,6 +165,7 @@ func GetProvider() *config.Provider {
 		dax.Configure,
 		apigatewayv2.Configure,
 		cloudsearch.Configure,
+		apigateway.Configure,
 	} {
 		configure(pc)
 	}

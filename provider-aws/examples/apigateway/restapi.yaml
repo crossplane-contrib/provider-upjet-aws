@@ -1,0 +1,43 @@
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: RestAPI
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    body: |-
+      {
+        "info": [
+          {
+            "title": "example",
+            "version": "1.0"
+          }
+        ],
+        "openapi": "3.0.1",
+        "paths": [
+          {
+            "/path1": [
+              {
+                "get": [
+                  {
+                    "x-amazon-apigateway-integration": [
+                      {
+                        "httpMethod": "GET",
+                        "payloadFormatVersion": "1.0",
+                        "type": "HTTP_PROXY",
+                        "uri": "https://ip-ranges.amazonaws.com/ip-ranges.json"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    endpointConfiguration:
+    - types:
+      - REGIONAL
+    name: example
+    region: us-west-1
