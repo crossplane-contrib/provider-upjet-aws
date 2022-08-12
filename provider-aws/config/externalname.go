@@ -552,8 +552,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Objects can be imported using the id. The id is the bucket name and the key together
 	// $ terraform import aws_s3_object.object some-bucket-name/some/key.txt
 	"aws_s3_object": FormattedIdentifierFromProvider("/", "bucket", "key"),
-	// No import documented
-	"aws_s3_object_copy": config.IdentifierFromProvider,
 
 	// cloudfront
 	//
