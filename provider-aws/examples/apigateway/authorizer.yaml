@@ -92,8 +92,8 @@ metadata:
   name: authorizer
 spec:
   forProvider:
-    s3Bucket: sergen
-    s3Key: index-js.zip
+    s3Bucket: <example-bucket>
+    s3Key: <example-key>
     handler: exports.example
     region: us-west-1
     runtime: nodejs12.x
