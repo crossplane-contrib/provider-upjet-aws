@@ -57,6 +57,9 @@ func Configure(p *config.Provider) {
 		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_db_instance", func(r *config.Resource) {
+		r.References["db_subnet_group_name"] = config.Reference{
+			Type: "SubnetGroup",
+		}
 		r.UseAsync = true
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"name", "db_name"},
