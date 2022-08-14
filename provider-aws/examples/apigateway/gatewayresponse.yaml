@@ -14,7 +14,7 @@ spec:
     responseType: UNAUTHORIZED
     restApiIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: main
+        testing.upbound.io/example-name: gateway
     statusCode: "401"
 
 ---
@@ -23,9 +23,9 @@ apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: RestAPI
 metadata:
   labels:
-    testing.upbound.io/example-name: main
-  name: main
+    testing.upbound.io/example-name: gateway
+  name: gateway
 spec:
   forProvider:
-    name: MyDemoAPI
+    name: gateway
     region: us-west-1

@@ -14,13 +14,17 @@ import (
 )
 
 type ResourceObservation struct {
+
+	// The resource's identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The complete path for this API resource, including all parent paths.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type ResourceParameters struct {
 
+	// The ID of the parent API resource
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("root_resource_id",true)
 	// +kubebuilder:validation:Optional
@@ -32,6 +36,7 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Optional
 	ParentIDSelector *v1.Selector `json:"parentIdSelector,omitempty" tf:"-"`
 
+	// The last path segment of this API resource.
 	// +kubebuilder:validation:Required
 	PathPart *string `json:"pathPart" tf:"path_part,omitempty"`
 
@@ -40,6 +45,7 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the associated REST API
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -66,7 +72,7 @@ type ResourceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Resource is the Schema for the Resources API
+// Resource is the Schema for the Resources API. Provides an API Gateway Resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

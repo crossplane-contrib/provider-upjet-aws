@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: DocumentationVersion is the Schema for the DocumentationVersions
-          API
+          API. Provides a resource to manage an API Gateway Documentation Version.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,12 +65,14 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: The description of the API documentation version.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   restApiId:
+                    description: The ID of the associated Rest API
                     type: string
                   restApiIdRef:
                     description: A Reference to a named object.
@@ -146,6 +148,7 @@ spec:
                         type: object
                     type: object
                   version:
+                    description: The version identifier of the API documentation snapshot.
                     type: string
                 required:
                 - region

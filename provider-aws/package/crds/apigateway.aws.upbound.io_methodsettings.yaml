@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: MethodSettings is the Schema for the MethodSettingss API
+        description: MethodSettings is the Schema for the MethodSettingss API. Manages
+          API Gateway Stage Method Settings
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,17 @@ spec:
               forProvider:
                 properties:
                   methodPath:
+                    description: Method path defined as {resource_path}/{http_method}
+                      for an individual method override, or */* for overriding all
+                      methods in the stage. Ensure to trim any leading forward slashes
+                      in the path ).
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   restApiId:
+                    description: The ID of the REST API
                     type: string
                   restApiIdRef:
                     description: A Reference to a named object.
@@ -145,31 +151,58 @@ spec:
                         type: object
                     type: object
                   settings:
+                    description: The settings block, see below.
                     items:
                       properties:
                         cacheDataEncrypted:
+                          description: Specifies whether the cached responses are
+                            encrypted.
                           type: boolean
                         cacheTtlInSeconds:
+                          description: Specifies the time to live , in seconds, for
+                            cached responses. The higher the TTL, the longer the response
+                            will be cached.
                           type: number
                         cachingEnabled:
+                          description: Specifies whether responses should be cached
+                            and returned for requests. A cache cluster must be enabled
+                            on the stage for responses to be cached.
                           type: boolean
                         dataTraceEnabled:
+                          description: Specifies whether data trace logging is enabled
+                            for this method, which effects the log entries pushed
+                            to Amazon CloudWatch Logs.
                           type: boolean
                         loggingLevel:
+                          description: Specifies the logging level for this method,
+                            which effects the log entries pushed to Amazon CloudWatch
+                            Logs. The available levels are OFF, ERROR, and INFO.
                           type: string
                         metricsEnabled:
+                          description: Specifies whether Amazon CloudWatch metrics
+                            are enabled for this method.
                           type: boolean
                         requireAuthorizationForCacheControl:
+                          description: Specifies whether authorization is required
+                            for a cache invalidation request.
                           type: boolean
                         throttlingBurstLimit:
+                          description: 'Specifies the throttling burst limit. Default:
+                            -1 .'
                           type: number
                         throttlingRateLimit:
+                          description: 'Specifies the throttling rate limit. Default:
+                            -1 .'
                           type: number
                         unauthorizedCacheControlHeaderStrategy:
+                          description: Specifies how to handle unauthorized requests
+                            for cache invalidation. The available values are FAIL_WITH_403,
+                            SUCCEED_WITH_RESPONSE_HEADER, SUCCEED_WITHOUT_RESPONSE_HEADER.
                           type: string
                       type: object
                     type: array
                   stageName:
+                    description: The name of the stage
                     type: string
                   stageNameRef:
                     description: A Reference to a named object.

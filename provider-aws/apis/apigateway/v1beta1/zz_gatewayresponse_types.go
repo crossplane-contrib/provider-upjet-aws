@@ -24,15 +24,19 @@ type GatewayResponseParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map specifying the parameters  of the Gateway Response.
 	// +kubebuilder:validation:Optional
 	ResponseParameters map[string]*string `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
+	// A map specifying the templates used to transform the response body.
 	// +kubebuilder:validation:Optional
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
+	// The response type of the associated GatewayResponse.
 	// +kubebuilder:validation:Required
 	ResponseType *string `json:"responseType" tf:"response_type,omitempty"`
 
+	// The string identifier of the associated REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -44,6 +48,7 @@ type GatewayResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
+	// The HTTP status code of the Gateway Response.
 	// +kubebuilder:validation:Optional
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
@@ -62,7 +67,7 @@ type GatewayResponseStatus struct {
 
 // +kubebuilder:object:root=true
 
-// GatewayResponse is the Schema for the GatewayResponses API
+// GatewayResponse is the Schema for the GatewayResponses API. Provides an API Gateway Gateway Response for a REST API Gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

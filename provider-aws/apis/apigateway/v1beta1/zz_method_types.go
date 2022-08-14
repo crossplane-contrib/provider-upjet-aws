@@ -19,15 +19,19 @@ type MethodObservation struct {
 
 type MethodParameters struct {
 
+	// Specify if the method requires an API key
 	// +kubebuilder:validation:Optional
 	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
 
+	// The type of authorization used for the method
 	// +kubebuilder:validation:Required
 	Authorization *string `json:"authorization" tf:"authorization,omitempty"`
 
+	// The authorization scopes used when the authorization is COGNITO_USER_POOLS
 	// +kubebuilder:validation:Optional
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
 
+	// The authorizer id to be used when the authorization is CUSTOM or COGNITO_USER_POOLS
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.Authorizer
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -39,9 +43,11 @@ type MethodParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizerIDSelector *v1.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
 
+	// The HTTP Method
 	// +kubebuilder:validation:Required
 	HTTPMethod *string `json:"httpMethod" tf:"http_method,omitempty"`
 
+	// The function name that will be given to the method when generating an SDK through API Gateway. If omitted, API Gateway will generate a function name based on the resource path and HTTP verb.
 	// +kubebuilder:validation:Optional
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
@@ -50,15 +56,22 @@ type MethodParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of the API models used for the request's content type
+	// where key is the content type
+	// and value is either Error, Empty  or aws_api_gateway_model's name.
 	// +kubebuilder:validation:Optional
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
+	// A map of request parameters  that should be passed to the integration. The boolean value indicates whether the parameter is required  or optional .
+	// For example: request_parameters = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param" = true} would define that the header X-Some-Header and the query string some-query-param must be provided in the request.
 	// +kubebuilder:validation:Optional
 	RequestParameters map[string]*bool `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
+	// The ID of a aws_api_gateway_request_validator
 	// +kubebuilder:validation:Optional
 	RequestValidatorID *string `json:"requestValidatorId,omitempty" tf:"request_validator_id,omitempty"`
 
+	// The API resource ID
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -70,6 +83,7 @@ type MethodParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
+	// The ID of the associated REST API
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -96,7 +110,7 @@ type MethodStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Method is the Schema for the Methods API
+// Method is the Schema for the Methods API. Provides a HTTP Method for an API Gateway Resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -19,6 +19,7 @@ type MethodSettingsObservation struct {
 
 type MethodSettingsParameters struct {
 
+	// Method path defined as {resource_path}/{http_method} for an individual method override, or */* for overriding all methods in the stage. Ensure to trim any leading forward slashes in the path ).
 	// +kubebuilder:validation:Required
 	MethodPath *string `json:"methodPath" tf:"method_path,omitempty"`
 
@@ -27,6 +28,7 @@ type MethodSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the REST API
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -38,9 +40,11 @@ type MethodSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
+	// The settings block, see below.
 	// +kubebuilder:validation:Required
 	Settings []SettingsParameters `json:"settings" tf:"settings,omitempty"`
 
+	// The name of the stage
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.Stage
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("stage_name",false)
 	// +kubebuilder:validation:Optional
@@ -58,33 +62,43 @@ type SettingsObservation struct {
 
 type SettingsParameters struct {
 
+	// Specifies whether the cached responses are encrypted.
 	// +kubebuilder:validation:Optional
 	CacheDataEncrypted *bool `json:"cacheDataEncrypted,omitempty" tf:"cache_data_encrypted,omitempty"`
 
+	// Specifies the time to live , in seconds, for cached responses. The higher the TTL, the longer the response will be cached.
 	// +kubebuilder:validation:Optional
 	CacheTTLInSeconds *float64 `json:"cacheTtlInSeconds,omitempty" tf:"cache_ttl_in_seconds,omitempty"`
 
+	// Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.
 	// +kubebuilder:validation:Optional
 	CachingEnabled *bool `json:"cachingEnabled,omitempty" tf:"caching_enabled,omitempty"`
 
+	// Specifies whether data trace logging is enabled for this method, which effects the log entries pushed to Amazon CloudWatch Logs.
 	// +kubebuilder:validation:Optional
 	DataTraceEnabled *bool `json:"dataTraceEnabled,omitempty" tf:"data_trace_enabled,omitempty"`
 
+	// Specifies the logging level for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The available levels are OFF, ERROR, and INFO.
 	// +kubebuilder:validation:Optional
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
 
+	// Specifies whether Amazon CloudWatch metrics are enabled for this method.
 	// +kubebuilder:validation:Optional
 	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
 
+	// Specifies whether authorization is required for a cache invalidation request.
 	// +kubebuilder:validation:Optional
 	RequireAuthorizationForCacheControl *bool `json:"requireAuthorizationForCacheControl,omitempty" tf:"require_authorization_for_cache_control,omitempty"`
 
+	// Specifies the throttling burst limit. Default: -1 .
 	// +kubebuilder:validation:Optional
 	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
+	// Specifies the throttling rate limit. Default: -1 .
 	// +kubebuilder:validation:Optional
 	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
 
+	// Specifies how to handle unauthorized requests for cache invalidation. The available values are FAIL_WITH_403, SUCCEED_WITH_RESPONSE_HEADER, SUCCEED_WITHOUT_RESPONSE_HEADER.
 	// +kubebuilder:validation:Optional
 	UnauthorizedCacheControlHeaderStrategy *string `json:"unauthorizedCacheControlHeaderStrategy,omitempty" tf:"unauthorized_cache_control_header_strategy,omitempty"`
 }
@@ -103,7 +117,7 @@ type MethodSettingsStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MethodSettings is the Schema for the MethodSettingss API
+// MethodSettings is the Schema for the MethodSettingss API. Manages API Gateway Stage Method Settings
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

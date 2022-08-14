@@ -195,3 +195,30 @@ func (l *StageList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this UsagePlanKeyList.
+func (l *UsagePlanKeyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this UsagePlanList.
+func (l *UsagePlanList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPCLinkList.
+func (l *VPCLinkList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}

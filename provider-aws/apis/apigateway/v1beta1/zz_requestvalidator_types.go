@@ -14,11 +14,14 @@ import (
 )
 
 type RequestValidatorObservation struct {
+
+	// The unique ID of the request validator
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type RequestValidatorParameters struct {
 
+	// The name of the request validator
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -27,6 +30,7 @@ type RequestValidatorParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the associated Rest API
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -38,9 +42,11 @@ type RequestValidatorParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
+	// Boolean whether to validate request body. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ValidateRequestBody *bool `json:"validateRequestBody,omitempty" tf:"validate_request_body,omitempty"`
 
+	// Boolean whether to validate request parameters. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ValidateRequestParameters *bool `json:"validateRequestParameters,omitempty" tf:"validate_request_parameters,omitempty"`
 }
@@ -59,7 +65,7 @@ type RequestValidatorStatus struct {
 
 // +kubebuilder:object:root=true
 
-// RequestValidator is the Schema for the RequestValidators API
+// RequestValidator is the Schema for the RequestValidators API. Manages an API Gateway Request Validator.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

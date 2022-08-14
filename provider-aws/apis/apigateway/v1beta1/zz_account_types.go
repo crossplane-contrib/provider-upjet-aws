@@ -16,11 +16,13 @@ import (
 type AccountObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Account-Level throttle settings. See exported fields below.
 	ThrottleSettings []ThrottleSettingsObservation `json:"throttleSettings,omitempty" tf:"throttle_settings,omitempty"`
 }
 
 type AccountParameters struct {
 
+	// The ARN of an IAM role for CloudWatch . See more in AWS Docs. Logging & monitoring can be enabled/disabled and otherwise tuned on the API Gateway Stage level.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -39,8 +41,11 @@ type AccountParameters struct {
 }
 
 type ThrottleSettingsObservation struct {
+
+	// The absolute maximum number of times API Gateway allows the API to be called per second .
 	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
 
+	// The number of times API Gateway allows the API to be called per second on average .
 	RateLimit *float64 `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
 }
 
@@ -61,7 +66,7 @@ type AccountStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Account is the Schema for the Accounts API
+// Account is the Schema for the Accounts API. Provides a settings of an API Gateway Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ClientCertificate is the Schema for the ClientCertificates API
+        description: ClientCertificate is the Schema for the ClientCertificates API.
+          Provides an API Gateway Client Certificate.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: The description of the client certificate.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -72,6 +74,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -253,18 +258,26 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name
                     type: string
                   createdDate:
+                    description: The date when the client certificate was created.
                     type: string
                   expirationDate:
+                    description: The date when the client certificate will expire.
                     type: string
                   id:
+                    description: The identifier of the client certificate.
                     type: string
                   pemEncodedCertificate:
+                    description: The PEM-encoded public key of the client certificate.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: RestAPI is the Schema for the RestAPIs API
+        description: RestAPI is the Schema for the RestAPIs API. Manages an API Gateway
+          REST API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,25 +65,76 @@ spec:
               forProvider:
                 properties:
                   apiKeySource:
+                    description: Source of the API key for requests. Valid values
+                      are HEADER  and AUTHORIZER. If importing an OpenAPI specification
+                      via the body argument, this corresponds to the x-amazon-apigateway-api-key-source
+                      extension. If the argument value is provided and is different
+                      than the OpenAPI value, the argument value will override the
+                      OpenAPI value.
                     type: string
                   binaryMediaTypes:
+                    description: List of binary media types supported by the REST
+                      API. By default, the REST API supports only UTF-8-encoded text
+                      payloads. If importing an OpenAPI specification via the body
+                      argument, this corresponds to the x-amazon-apigateway-binary-media-types
+                      extension. If the argument value is provided and is different
+                      than the OpenAPI value, the argument value will override the
+                      OpenAPI value.
                     items:
                       type: string
                     type: array
                   body:
+                    description: OpenAPI specification that defines the set of routes
+                      and integrations to create as part of the REST API. This configuration,
+                      and any updates to it, will replace all REST API configuration
+                      except values overridden in this resource configuration and
+                      other resource updates applied after this resource but before
+                      any aws_api_gateway_deployment creation. More information about
+                      REST API OpenAPI support can be found in the API Gateway Developer
+                      Guide.
                     type: string
                   description:
+                    description: Description of the REST API. If importing an OpenAPI
+                      specification via the body argument, this corresponds to the
+                      info.description field. If the argument value is provided and
+                      is different than the OpenAPI value, the argument value will
+                      override the OpenAPI value.
                     type: string
                   disableExecuteApiEndpoint:
+                    description: Specifies whether clients can invoke your API by
+                      using the default execute-api endpoint. By default, clients
+                      can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com
+                      endpoint. To require that clients use a custom domain name to
+                      invoke your API, disable the default endpoint. Defaults to false.
+                      If importing an OpenAPI specification via the body argument,
+                      this corresponds to the x-amazon-apigateway-endpoint-configuration
+                      extension disableExecuteApiEndpoint property. If the argument
+                      value is true and is different than the OpenAPI value, the argument
+                      value will override the OpenAPI value.
                     type: boolean
                   endpointConfiguration:
+                    description: Configuration block defining API endpoint configuration
+                      including endpoint type. Defined below.
                     items:
                       properties:
                         types:
+                          description: 'A list of endpoint types. This resource currently
+                            only supports managing a single value. Valid values: EDGE,
+                            REGIONAL or PRIVATE. If unspecified, defaults to EDGE.
+                            Must be declared as REGIONAL in non-Commercial partitions.
+                            Refer to the documentation for more information on the
+                            difference between edge-optimized and regional APIs.'
                           items:
                             type: string
                           type: array
                         vpcEndpointIds:
+                          description: Set of VPC Endpoint identifiers. It is only
+                            supported for PRIVATE endpoint type. If importing an OpenAPI
+                            specification via the body argument, this corresponds
+                            to the x-amazon-apigateway-endpoint-configuration extension
+                            vpcEndpointIds property. If the argument value is provided
+                            and is different than the OpenAPI value, the argument
+                            value will override the OpenAPI value.
                           items:
                             type: string
                           type: array
@@ -91,12 +143,29 @@ spec:
                       type: object
                     type: array
                   minimumCompressionSize:
+                    description: Minimum response size to compress for the REST API.
+                      Integer between -1 and 10485760 . Setting a value greater than
+                      -1 will enable compression, -1 disables compression . If importing
+                      an OpenAPI specification via the body argument, this corresponds
+                      to the x-amazon-apigateway-minimum-compression-size extension.
+                      If the argument value  is provided and is different than the
+                      OpenAPI value, the argument value will override the OpenAPI
+                      value.
                     type: number
                   name:
+                    description: Name of the REST API. If importing an OpenAPI specification
+                      via the body argument, this corresponds to the info.title field.
+                      If the argument value is different than the OpenAPI value, the
+                      argument value will override the OpenAPI value.
                     type: string
                   parameters:
                     additionalProperties:
                       type: string
+                    description: Map of customizations for importing the specification
+                      in the body argument. For example, to exclude DocumentationParts
+                      from an imported API, set ignore equal to documentation. Additional
+                      documentation, including other parameters such as basepath,
+                      can be found in the API Gateway Developer Guide.
                     type: object
                   region:
                     description: Region is the region you'd like your resource to
@@ -105,6 +174,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - name
@@ -287,18 +359,43 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name
                     type: string
                   createdDate:
+                    description: The creation date of the REST API
                     type: string
                   executionArn:
+                    description: The execution ARN part to be used in lambda_permission's
+                      source_arn when allowing API Gateway to invoke a Lambda function,
+                      e.g., arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j,
+                      which can be concatenated with allowed stage, method and resource
+                      path.
                     type: string
                   id:
+                    description: The ID of the REST API
+                    type: string
+                  policy:
+                    description: JSON formatted policy document that controls access
+                      to the API Gateway. For more information about building AWS
+                      IAM policy documents with Terraform, see the AWS IAM Policy
+                      Document Guide. Terraform will only perform drift detection
+                      of its value when present in a configuration. It is recommended
+                      to use the aws_api_gateway_rest_api_policy resource instead.
+                      If importing an OpenAPI specification via the body argument,
+                      this corresponds to the x-amazon-apigateway-policy extension.
+                      If the argument value is provided and is different than the
+                      OpenAPI value, the argument value will override the OpenAPI
+                      value.
                     type: string
                   rootResourceId:
+                    description: The resource ID of the REST API's root
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

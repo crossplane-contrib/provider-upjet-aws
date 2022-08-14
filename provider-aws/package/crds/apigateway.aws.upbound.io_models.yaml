@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Model is the Schema for the Models API
+        description: Model is the Schema for the Models API. Provides a Model for
+          a REST API Gateway.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,16 +65,20 @@ spec:
               forProvider:
                 properties:
                   contentType:
+                    description: The content type of the model
                     type: string
                   description:
+                    description: The description of the model
                     type: string
                   name:
+                    description: The name of the model
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   restApiId:
+                    description: The ID of the associated REST API
                     type: string
                   restApiIdRef:
                     description: A Reference to a named object.
@@ -149,6 +154,7 @@ spec:
                         type: object
                     type: object
                   schema:
+                    description: The schema of the model in a JSON form
                     type: string
                 required:
                 - contentType
@@ -332,6 +338,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the model
                     type: string
                 type: object
               conditions:

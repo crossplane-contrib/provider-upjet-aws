@@ -35,6 +35,9 @@ import (
 	restapi "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/restapi"
 	restapipolicy "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/restapipolicy"
 	stage "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/stage"
+	usageplan "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/usageplan"
+	usageplankey "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/usageplankey"
+	vpclink "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/vpclink"
 	api "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/api"
 	apimapping "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/apimapping"
 	authorizerapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/authorizer"
@@ -46,7 +49,7 @@ import (
 	route "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/route"
 	routeresponse "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/routeresponse"
 	stageapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/stage"
-	vpclink "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/vpclink"
+	vpclinkapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/vpclink"
 	workgroup "github.com/upbound/official-providers/provider-aws/internal/controller/athena/workgroup"
 	attachment "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/attachment"
 	autoscalinggroup "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/autoscalinggroup"
@@ -389,6 +392,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		restapi.Setup,
 		restapipolicy.Setup,
 		stage.Setup,
+		usageplan.Setup,
+		usageplankey.Setup,
+		vpclink.Setup,
 		api.Setup,
 		apimapping.Setup,
 		authorizerapigatewayv2.Setup,
@@ -400,7 +406,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		route.Setup,
 		routeresponse.Setup,
 		stageapigatewayv2.Setup,
-		vpclink.Setup,
+		vpclinkapigatewayv2.Setup,
 		workgroup.Setup,
 		attachment.Setup,
 		autoscalinggroup.Setup,

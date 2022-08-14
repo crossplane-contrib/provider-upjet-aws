@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DocumentationPart is the Schema for the DocumentationParts API
+        description: DocumentationPart is the Schema for the DocumentationParts API.
+          Provides a settings of an API Gateway Documentation Part.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,29 +65,45 @@ spec:
               forProvider:
                 properties:
                   location:
+                    description: The location of the targeted API entity of the to-be-created
+                      documentation part. See below.
                     items:
                       properties:
                         method:
+                          description: The HTTP verb of a method. The default value
+                            is * for any method.
                           type: string
                         name:
+                          description: The name of the targeted API entity.
                           type: string
                         path:
+                          description: The URL path of the target. The default value
+                            is / for the root resource.
                           type: string
                         statusCode:
+                          description: The HTTP status code of a response. The default
+                            value is * for any status code.
                           type: string
                         type:
+                          description: The type of API entity to which the documentation
+                            content appliesE.g., API, METHOD or REQUEST_BODY
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   properties:
+                    description: 'A content map of API-specific key-value pairs describing
+                      the targeted API entity. The map must be encoded as a JSON string,
+                      e.g., "{ "description": "The API does ..." }". Only Swagger-compliant
+                      key-value pairs can be exported and, hence, published.'
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   restApiId:
+                    description: The ID of the associated Rest API
                     type: string
                   restApiIdRef:
                     description: A Reference to a named object.
@@ -343,6 +360,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The unique ID of the Documentation Part
                     type: string
                 type: object
               conditions:

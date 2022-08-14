@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: GatewayResponse is the Schema for the GatewayResponses API
+        description: GatewayResponse is the Schema for the GatewayResponses API. Provides
+          an API Gateway Gateway Response for a REST API Gateway.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -70,14 +71,19 @@ spec:
                   responseParameters:
                     additionalProperties:
                       type: string
+                    description: A map specifying the parameters  of the Gateway Response.
                     type: object
                   responseTemplates:
                     additionalProperties:
                       type: string
+                    description: A map specifying the templates used to transform
+                      the response body.
                     type: object
                   responseType:
+                    description: The response type of the associated GatewayResponse.
                     type: string
                   restApiId:
+                    description: The string identifier of the associated REST API.
                     type: string
                   restApiIdRef:
                     description: A Reference to a named object.
@@ -153,6 +159,7 @@ spec:
                         type: object
                     type: object
                   statusCode:
+                    description: The HTTP status code of the Gateway Response.
                     type: string
                 required:
                 - region

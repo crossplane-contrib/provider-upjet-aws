@@ -14,21 +14,29 @@ import (
 )
 
 type ClientCertificateObservation struct {
+
+	// Amazon Resource Name
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The date when the client certificate was created.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
+	// The date when the client certificate will expire.
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
+	// The identifier of the client certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The PEM-encoded public key of the client certificate.
 	PemEncodedCertificate *string `json:"pemEncodedCertificate,omitempty" tf:"pem_encoded_certificate,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ClientCertificateParameters struct {
 
+	// The description of the client certificate.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -37,6 +45,7 @@ type ClientCertificateParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -55,7 +64,7 @@ type ClientCertificateStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ClientCertificate is the Schema for the ClientCertificates API
+// ClientCertificate is the Schema for the ClientCertificates API. Provides an API Gateway Client Certificate.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

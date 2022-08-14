@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: APIKey is the Schema for the APIKeys API
+        description: APIKey is the Schema for the APIKeys API. Provides an API Gateway
+          API Key.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,15 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: The API key description. Defaults to "Managed by
+                      Terraform".
                     type: string
                   enabled:
+                    description: Specifies whether the API key can be used by callers.
+                      Defaults to true.
                     type: boolean
                   name:
+                    description: The name of the API key
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -76,6 +82,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                   valueSecretRef:
                     description: A SecretKeySelector is a reference to a secret key
@@ -276,16 +285,23 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name
                     type: string
                   createdDate:
+                    description: The creation date of the API key
                     type: string
                   id:
+                    description: The ID of the API key
                     type: string
                   lastUpdatedDate:
+                    description: The last update date of the API key
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

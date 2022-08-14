@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Method is the Schema for the Methods API
+        description: Method is the Schema for the Methods API. Provides a HTTP Method
+          for an API Gateway Resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,14 +65,20 @@ spec:
               forProvider:
                 properties:
                   apiKeyRequired:
+                    description: Specify if the method requires an API key
                     type: boolean
                   authorization:
+                    description: The type of authorization used for the method
                     type: string
                   authorizationScopes:
+                    description: The authorization scopes used when the authorization
+                      is COGNITO_USER_POOLS
                     items:
                       type: string
                     type: array
                   authorizerId:
+                    description: The authorizer id to be used when the authorization
+                      is CUSTOM or COGNITO_USER_POOLS
                     type: string
                   authorizerIdRef:
                     description: A Reference to a named object.
@@ -147,8 +154,13 @@ spec:
                         type: object
                     type: object
                   httpMethod:
+                    description: The HTTP Method
                     type: string
                   operationName:
+                    description: The function name that will be given to the method
+                      when generating an SDK through API Gateway. If omitted, API
+                      Gateway will generate a function name based on the resource
+                      path and HTTP verb.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -157,14 +169,25 @@ spec:
                   requestModels:
                     additionalProperties:
                       type: string
+                    description: A map of the API models used for the request's content
+                      type where key is the content type and value is either Error,
+                      Empty  or aws_api_gateway_model's name.
                     type: object
                   requestParameters:
                     additionalProperties:
                       type: boolean
+                    description: 'A map of request parameters  that should be passed
+                      to the integration. The boolean value indicates whether the
+                      parameter is required  or optional . For example: request_parameters
+                      = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param"
+                      = true} would define that the header X-Some-Header and the query
+                      string some-query-param must be provided in the request.'
                     type: object
                   requestValidatorId:
+                    description: The ID of a aws_api_gateway_request_validator
                     type: string
                   resourceId:
+                    description: The API resource ID
                     type: string
                   resourceIdRef:
                     description: A Reference to a named object.
@@ -240,6 +263,7 @@ spec:
                         type: object
                     type: object
                   restApiId:
+                    description: The ID of the associated REST API
                     type: string
                   restApiIdRef:
                     description: A Reference to a named object.

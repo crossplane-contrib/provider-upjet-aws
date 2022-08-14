@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Authorizer is the Schema for the Authorizers API
+        description: Authorizer is the Schema for the Authorizers API. Provides an
+          API Gateway Authorizer.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   authorizerCredentials:
+                    description: The credentials required for the authorizer. To specify
+                      an IAM Role for API Gateway to assume, use the IAM Role ARN.
                     type: string
                   authorizerCredentialsRef:
                     description: A Reference to a named object.
@@ -139,8 +142,13 @@ spec:
                         type: object
                     type: object
                   authorizerResultTtlInSeconds:
+                    description: The TTL of cached authorizer results in seconds.
+                      Defaults to 300.
                     type: number
                   authorizerUri:
+                    description: The authorizer's Uniform Resource Identifier . This
+                      must be a well-formed Lambda function URI in the form of arn:aws:apigateway:{region}:lambda:path/{service_api},
+                      e.g., arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:012345678912:function:my-function/invocations
                     type: string
                   authorizerUriRef:
                     description: A Reference to a named object.
@@ -216,12 +224,25 @@ spec:
                         type: object
                     type: object
                   identitySource:
+                    description: The source of the identity in an incoming request.
+                      Defaults to method.request.header.Authorization. For REQUEST
+                      type, this may be a comma-separated list of values, including
+                      headers, query string parameters and stage variables - e.g.,
+                      "method.request.header.SomeHeaderName,method.request.querystring.SomeQueryStringName,stageVariables.SomeStageVariableName"
                     type: string
                   identityValidationExpression:
+                    description: A validation expression for the incoming identity.
+                      For TOKEN type, this value should be a regular expression. The
+                      incoming token from the client is matched against this expression,
+                      and will proceed if the token matches. If the token doesn't
+                      match, the client receives a 401 Unauthorized response.
                     type: string
                   name:
+                    description: The name of the authorizer
                     type: string
                   providerArns:
+                    description: 'A list of the Amazon Cognito user pool ARNs. Each
+                      element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}.'
                     items:
                       type: string
                     type: array
@@ -230,6 +251,7 @@ spec:
                       be created in.
                     type: string
                   restApiId:
+                    description: The ID of the associated REST API
                     type: string
                   restApiIdRef:
                     description: A Reference to a named object.
@@ -305,6 +327,11 @@ spec:
                         type: object
                     type: object
                   type:
+                    description: The type of the authorizer. Possible values are TOKEN
+                      for a Lambda function using a single authorization token submitted
+                      in a custom header, REQUEST for a Lambda function using incoming
+                      request parameters, or COGNITO_USER_POOLS for using an Amazon
+                      Cognito user pool. Defaults to TOKEN.
                     type: string
                 required:
                 - name
@@ -487,8 +514,10 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of the API Gateway Authorizer
                     type: string
                   id:
+                    description: The Authorizer identifier.
                     type: string
                 type: object
               conditions:

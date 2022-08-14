@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: RequestValidator is the Schema for the RequestValidators API
+        description: RequestValidator is the Schema for the RequestValidators API.
+          Manages an API Gateway Request Validator.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,14 @@ spec:
               forProvider:
                 properties:
                   name:
+                    description: The name of the request validator
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   restApiId:
+                    description: The ID of the associated Rest API
                     type: string
                   restApiIdRef:
                     description: A Reference to a named object.
@@ -145,8 +148,12 @@ spec:
                         type: object
                     type: object
                   validateRequestBody:
+                    description: Boolean whether to validate request body. Defaults
+                      to false.
                     type: boolean
                   validateRequestParameters:
+                    description: Boolean whether to validate request parameters. Defaults
+                      to false.
                     type: boolean
                 required:
                 - name
@@ -329,6 +336,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The unique ID of the request validator
                     type: string
                 type: object
               conditions:

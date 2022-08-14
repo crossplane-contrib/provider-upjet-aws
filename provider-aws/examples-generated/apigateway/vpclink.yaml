@@ -1,0 +1,35 @@
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: VPCLink
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: example description
+    name: example
+    region: us-west-1
+    targetArnsRefs:
+    - name: example
+
+---
+
+apiVersion: elbv2.aws.upbound.io/v1beta1
+kind: LB
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    internal: true
+    loadBalancerType: network
+    name: example
+    region: us-west-1
+    subnetMapping:
+    - subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+
+---
+

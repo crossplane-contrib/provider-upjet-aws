@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Integration is the Schema for the Integrations API
+        description: Integration is the Schema for the Integrations API. Provides
+          an HTTP Method Integration for an API Gateway Integration.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,20 +65,111 @@ spec:
               forProvider:
                 properties:
                   cacheKeyParameters:
+                    description: A list of cache key parameters for the integration.
                     items:
                       type: string
                     type: array
                   cacheNamespace:
+                    description: The integration's cache namespace.
                     type: string
                   connectionId:
+                    description: The id of the VpcLink used for the integration. Required
+                      if connection_type is VPC_LINK
                     type: string
+                  connectionIdRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  connectionIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   connectionType:
+                    description: The integration input's connectionType. Valid values
+                      are INTERNET , and VPC_LINK .
                     type: string
                   contentHandling:
+                    description: Specifies how to handle request payload content type
+                      conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT.
+                      If this property is not defined, the request payload will be
+                      passed through from the method request to integration request
+                      without modification, provided that the passthroughBehaviors
+                      is configured to support payload pass-through.
                     type: string
                   credentials:
+                    description: The credentials required for the integration. For
+                      AWS integrations, 2 options are available. To specify an IAM
+                      Role for Amazon API Gateway to assume, use the role's ARN. To
+                      require that the caller's identity be passed through from the
+                      request, specify the string arn:aws:iam::\*:user/\*.
                     type: string
                   httpMethod:
+                    description: The HTTP method when calling the associated resource.
                     type: string
                   httpMethodRef:
                     description: A Reference to a named object.
@@ -153,8 +245,15 @@ spec:
                         type: object
                     type: object
                   integrationHttpMethod:
+                    description: The integration HTTP method specifying how API Gateway
+                      will interact with the back end. Required if type is AWS, AWS_PROXY,
+                      HTTP or HTTP_PROXY. Not all methods are compatible with all
+                      AWS integrations. e.g., Lambda function can only be invoked
+                      via POST.
                     type: string
                   passthroughBehavior:
+                    description: The integration passthrough behavior .  Required
+                      if request_templates is used.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -163,12 +262,18 @@ spec:
                   requestParameters:
                     additionalProperties:
                       type: string
+                    description: 'A map of request query string parameters and headers
+                      that should be passed to the backend responder. For example:
+                      request_parameters = { "integration.request.header.X-Some-Other-Header"
+                      = "method.request.header.X-Some-Header" }'
                     type: object
                   requestTemplates:
                     additionalProperties:
                       type: string
+                    description: A map of the integration's request templates.
                     type: object
                   resourceId:
+                    description: The API resource ID.
                     type: string
                   resourceIdRef:
                     description: A Reference to a named object.
@@ -244,6 +349,7 @@ spec:
                         type: object
                     type: object
                   restApiId:
+                    description: The ID of the associated REST API.
                     type: string
                   restApiIdRef:
                     description: A Reference to a named object.
@@ -319,17 +425,45 @@ spec:
                         type: object
                     type: object
                   timeoutMilliseconds:
+                    description: Custom timeout between 50 and 29,000 milliseconds.
+                      The default value is 29,000 milliseconds.
                     type: number
                   tlsConfig:
+                    description: Configuration block specifying the TLS configuration
+                      for an integration. Defined below.
                     items:
                       properties:
                         insecureSkipVerification:
+                          description: Specifies whether or not API Gateway skips
+                            verification that the certificate for an integration endpoint
+                            is issued by a supported certificate authority. This isn’t
+                            recommended, but it enables you to use certificates that
+                            are signed by private certificate authorities, or certificates
+                            that are self-signed. If enabled, API Gateway still performs
+                            basic certificate validation, which includes checking
+                            the certificate's expiration date, hostname, and presence
+                            of a root certificate authority. Supported only for HTTP
+                            and HTTP_PROXY integrations.
                           type: boolean
                       type: object
                     type: array
                   type:
+                    description: The integration input's type. Valid values are HTTP
+                      , MOCK , AWS , AWS_PROXY  and HTTP_PROXY . An HTTP or HTTP_PROXY
+                      integration with a connection_type of VPC_LINK is referred to
+                      as a private integration and uses a VpcLink to connect API Gateway
+                      to a network load balancer of a VPC.
                     type: string
                   uri:
+                    description: The input's URI. Required if type is AWS, AWS_PROXY,
+                      HTTP or HTTP_PROXY. For HTTP integrations, the URI must be a
+                      fully formed, encoded HTTP URL according to the RFC-3986 specification
+                      . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}.
+                      region, subdomain and service are used to determine the right
+                      endpoint. e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:012345678901:function:my-func/invocations.
+                      For private integrations, the URI parameter is not used for
+                      routing requests to your endpoint, but is used for setting the
+                      Host header and for certificate validation.
                     type: string
                   uriRef:
                     description: A Reference to a named object.

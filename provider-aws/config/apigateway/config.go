@@ -1,10 +1,22 @@
 package apigateway
 
-import "github.com/upbound/upjet/pkg/config"
+import (
+	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/official-providers/provider-aws/config/common"
+)
 
 // Configure adds configurations for acm group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_api_gateway_rest_api", func(r *config.Resource) {
-		delete(r.TerraformResource.Schema, "policy")
+		config.MoveToStatus(r.TerraformResource, "policy")
+	})
+
+	p.AddResourceConfigurator("aws_api_gateway_vpc_link", func(r *config.Resource) {
+		r.References["target_arns"] = config.Reference{
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/elbv2/v1beta1.LB",
+			Extractor: common.PathARNExtractor,
+		}
+		r.UseAsync = true
 	})
 }

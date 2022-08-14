@@ -905,6 +905,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_api_gateway_base_path_mapping": config.IdentifierFromProvider,
 	// API Gateway domain names can be imported using their name
 	"aws_api_gateway_domain_name": config.IdentifierFromProvider,
+	// AWS API Gateway Usage Plan can be imported using the id
+	"aws_api_gateway_usage_plan": config.IdentifierFromProvider,
+	// AWS API Gateway Usage Plan Key can be imported using the USAGE-PLAN-ID/USAGE-PLAN-KEY-ID
+	"aws_api_gateway_usage_plan_key": config.IdentifierFromProvider,
+	// API Gateway VPC Link can be imported using the id
+	"aws_api_gateway_vpc_link": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

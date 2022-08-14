@@ -72,6 +72,28 @@ spec:
 ---
 
 apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: MethodResponse
+metadata:
+  labels:
+    testing.upbound.io/example-name: response_200
+  name: response-200
+spec:
+  forProvider:
+    httpMethodSelector:
+      matchLabels:
+        testing.upbound.io/example-name: MyDemoMethod
+    region: us-west-1
+    resourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: MyDemoResource
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: MyDemoAPI
+    statusCode: "200"
+
+---
+
+apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Resource
 metadata:
   labels:
@@ -101,3 +123,25 @@ spec:
     description: This is my API for demonstration purposes
     name: MyDemoAPI
     region: us-west-1
+
+---
+
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: Model
+metadata:
+  labels:
+    testing.upbound.io/example-name: MyDemoModel
+  name: mydemomodel
+spec:
+  forProvider:
+    contentType: application/json
+    description: a JSON schema
+    name: user
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: MyDemoAPI
+    schema: |
+      {
+        "type": "object"
+      }

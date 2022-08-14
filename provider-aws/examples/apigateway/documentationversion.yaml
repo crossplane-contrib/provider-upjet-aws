@@ -10,7 +10,7 @@ spec:
     region: us-west-1
     restApiIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: doc-demo
     version: example_version
 
 ---
@@ -29,7 +29,7 @@ spec:
     region: us-west-1
     restApiIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: doc-demo
 
 ---
 
@@ -37,9 +37,9 @@ apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: RestAPI
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: doc-demo
+  name: doc-demo
 spec:
   forProvider:
-    name: example_api
+    name: doc-demo
     region: us-west-1

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Resource is the Schema for the Resources API
+        description: Resource is the Schema for the Resources API. Provides an API
+          Gateway Resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   parentId:
+                    description: The ID of the parent API resource
                     type: string
                   parentIdRef:
                     description: A Reference to a named object.
@@ -139,12 +141,14 @@ spec:
                         type: object
                     type: object
                   pathPart:
+                    description: The last path segment of this API resource.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   restApiId:
+                    description: The ID of the associated REST API
                     type: string
                   restApiIdRef:
                     description: A Reference to a named object.
@@ -400,8 +404,11 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The resource's identifier.
                     type: string
                   path:
+                    description: The complete path for this API resource, including
+                      all parent paths.
                     type: string
                 type: object
               conditions:

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DomainName is the Schema for the DomainNames API
+        description: DomainName is the Schema for the DomainNames API. Registers a
+          custom domain name for use with AWS API Gateway.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,11 @@ spec:
               forProvider:
                 properties:
                   certificateArn:
+                    description: ARN for an AWS-managed certificate. AWS Certificate
+                      Manager is the only supported source. Used when an edge-optimized
+                      domain name is desired. Conflicts with certificate_name, certificate_body,
+                      certificate_chain, certificate_private_key, regional_certificate_arn,
+                      and regional_certificate_name.
                     type: string
                   certificateArnRef:
                     description: A Reference to a named object.
@@ -139,14 +145,29 @@ spec:
                         type: object
                     type: object
                   certificateBody:
+                    description: Certificate issued for the domain name being registered,
+                      in PEM format. Only valid for EDGE endpoint configuration type.
+                      Conflicts with certificate_arn, regional_certificate_arn, and
+                      regional_certificate_name.
                     type: string
                   certificateChain:
+                    description: Certificate for the CA that issued the certificate,
+                      along with any intermediate CA certificates required to create
+                      an unbroken chain to a certificate trusted by the intended API
+                      clients. Only valid for EDGE endpoint configuration type. Conflicts
+                      with certificate_arn, regional_certificate_arn, and regional_certificate_name.
                     type: string
                   certificateName:
+                    description: Unique name to use when registering this certificate
+                      as an IAM server certificate. Conflicts with certificate_arn,
+                      regional_certificate_arn, and regional_certificate_name. Required
+                      if certificate_arn is not set.
                     type: string
                   certificatePrivateKeySecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: Private key associated with the domain certificate
+                      given in certificate_body. Only valid for EDGE endpoint configuration
+                      type. Conflicts with certificate_arn, regional_certificate_arn,
+                      and regional_certificate_name.
                     properties:
                       key:
                         description: The key to select.
@@ -163,11 +184,20 @@ spec:
                     - namespace
                     type: object
                   domainName:
+                    description: Fully-qualified domain name to register.
                     type: string
                   endpointConfiguration:
+                    description: Configuration block defining API endpoint information
+                      including type. See below.
                     items:
                       properties:
                         types:
+                          description: 'List of endpoint types. This resource currently
+                            only supports managing a single value. Valid values: EDGE
+                            or REGIONAL. If unspecified, defaults to EDGE. Must be
+                            declared as REGIONAL in non-Commercial partitions. Refer
+                            to the documentation for more information on the difference
+                            between edge-optimized and regional APIs.'
                           items:
                             type: string
                           type: array
@@ -176,23 +206,40 @@ spec:
                       type: object
                     type: array
                   mutualTlsAuthentication:
+                    description: Mutual TLS authentication configuration for the domain
+                      name. See below.
                     items:
                       properties:
                         truststoreUri:
+                          description: Amazon S3 URL that specifies the truststore
+                            for mutual TLS authentication, for example, s3://bucket-name/key-name.
+                            The truststore can contain certificates from public or
+                            private certificate authorities. To update the truststore,
+                            upload a new version to S3, and then update your custom
+                            domain name to use the new version.
                           type: string
                         truststoreVersion:
+                          description: Version of the S3 object that contains the
+                            truststore. To specify a version, you must have versioning
+                            enabled for the S3 bucket.
                           type: string
                       required:
                       - truststoreUri
                       type: object
                     type: array
                   ownershipVerificationCertificateArn:
+                    description: ARN of the AWS-issued certificate used to validate
+                      custom domain ownership
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   regionalCertificateArn:
+                    description: ARN for an AWS-managed certificate. AWS Certificate
+                      Manager is the only supported source. Used when a regional domain
+                      name is desired. Conflicts with certificate_arn, certificate_name,
+                      certificate_body, certificate_chain, and certificate_private_key.
                     type: string
                   regionalCertificateArnRef:
                     description: A Reference to a named object.
@@ -268,12 +315,22 @@ spec:
                         type: object
                     type: object
                   regionalCertificateName:
+                    description: User-friendly name of the certificate that will be
+                      used by regional endpoint for this domain name. Conflicts with
+                      certificate_arn, certificate_name, certificate_body, certificate_chain,
+                      and certificate_private_key.
                     type: string
                   securityPolicy:
+                    description: Transport Layer Security  version + cipher suite
+                      for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must
+                      be configured to perform drift detection.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - domainName
@@ -456,22 +513,35 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: ARN of domain name.
                     type: string
                   certificateUploadDate:
+                    description: Upload date associated with the domain certificate.
                     type: string
                   cloudfrontDomainName:
+                    description: Hostname created by Cloudfront to represent the distribution
+                      that implements this domain name mapping.
                     type: string
                   cloudfrontZoneId:
+                    description: For convenience, the hosted zone ID  that can be
+                      used to create a Route53 alias record for the distribution.
                     type: string
                   id:
+                    description: Internal identifier assigned to this domain name
+                      by API Gateway.
                     type: string
                   regionalDomainName:
+                    description: Hostname for the custom domain's regional endpoint.
                     type: string
                   regionalZoneId:
+                    description: Hosted zone ID that can be used to create a Route53
+                      alias record for the regional endpoint.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

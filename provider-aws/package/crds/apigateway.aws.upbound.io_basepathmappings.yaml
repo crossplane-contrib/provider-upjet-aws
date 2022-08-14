@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: BasePathMapping is the Schema for the BasePathMappings API
+        description: BasePathMapping is the Schema for the BasePathMappings API. Connects
+          a custom domain with a deployed API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiId:
+                    description: The id of the API to connect.
                     type: string
                   apiIdRef:
                     description: A Reference to a named object.
@@ -139,8 +141,13 @@ spec:
                         type: object
                     type: object
                   basePath:
+                    description: Path segment that must be prepended to the path when
+                      accessing the API via this mapping. If omitted, the API is exposed
+                      at the root of the given domain.
                     type: string
                   domainName:
+                    description: The already-registered domain name to connect the
+                      API to.
                     type: string
                   domainNameRef:
                     description: A Reference to a named object.
@@ -220,6 +227,9 @@ spec:
                       be created in.
                     type: string
                   stageName:
+                    description: The name of a specific deployment stage to expose
+                      at the given path. If omitted, callers may select any stage
+                      by including its name as a path element after the base path.
                     type: string
                   stageNameRef:
                     description: A Reference to a named object.

@@ -14,25 +14,34 @@ import (
 )
 
 type APIKeyObservation struct {
+
+	// Amazon Resource Name
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The creation date of the API key
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
+	// The ID of the API key
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The last update date of the API key
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type APIKeyParameters struct {
 
+	// The API key description. Defaults to "Managed by Terraform".
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies whether the API key can be used by callers. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The name of the API key
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -41,6 +50,7 @@ type APIKeyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -62,7 +72,7 @@ type APIKeyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// APIKey is the Schema for the APIKeys API
+// APIKey is the Schema for the APIKeys API. Provides an API Gateway API Key.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

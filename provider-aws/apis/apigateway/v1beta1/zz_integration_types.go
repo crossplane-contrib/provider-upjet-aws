@@ -19,24 +19,40 @@ type IntegrationObservation struct {
 
 type IntegrationParameters struct {
 
+	// A list of cache key parameters for the integration.
 	// +kubebuilder:validation:Optional
 	CacheKeyParameters []*string `json:"cacheKeyParameters,omitempty" tf:"cache_key_parameters,omitempty"`
 
+	// The integration's cache namespace.
 	// +kubebuilder:validation:Optional
 	CacheNamespace *string `json:"cacheNamespace,omitempty" tf:"cache_namespace,omitempty"`
 
+	// The id of the VpcLink used for the integration. Required if connection_type is VPC_LINK
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.VPCLink
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
+
+	// The integration input's connectionType. Valid values are INTERNET , and VPC_LINK .
+	// +kubebuilder:validation:Optional
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
+	// Specifies how to handle request payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT. If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the passthroughBehaviors is configured to support payload pass-through.
 	// +kubebuilder:validation:Optional
 	ContentHandling *string `json:"contentHandling,omitempty" tf:"content_handling,omitempty"`
 
+	// The credentials required for the integration. For AWS integrations, 2 options are available. To specify an IAM Role for Amazon API Gateway to assume, use the role's ARN. To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::\*:user/\*.
 	// +kubebuilder:validation:Optional
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
+	// The HTTP method
+	// when calling the associated resource.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("http_method",false)
 	// +kubebuilder:validation:Optional
@@ -48,9 +64,15 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPMethodSelector *v1.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
 
+	// The integration HTTP method
+	// specifying how API Gateway will interact with the back end.
+	// Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
+	// Not all methods are compatible with all AWS integrations.
+	// e.g., Lambda function can only be invoked via POST.
 	// +kubebuilder:validation:Optional
 	IntegrationHTTPMethod *string `json:"integrationHttpMethod,omitempty" tf:"integration_http_method,omitempty"`
 
+	// The integration passthrough behavior .  Required if request_templates is used.
 	// +kubebuilder:validation:Optional
 	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`
 
@@ -59,12 +81,16 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of request query string parameters and headers that should be passed to the backend responder.
+	// For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
 	// +kubebuilder:validation:Optional
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
+	// A map of the integration's request templates.
 	// +kubebuilder:validation:Optional
 	RequestTemplates map[string]*string `json:"requestTemplates,omitempty" tf:"request_templates,omitempty"`
 
+	// The API resource ID.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -76,6 +102,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
+	// The ID of the associated REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -87,15 +114,21 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
+	// Configuration block specifying the TLS configuration for an integration. Defined below.
 	// +kubebuilder:validation:Optional
 	TLSConfig []TLSConfigParameters `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
 
+	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds.
 	// +kubebuilder:validation:Optional
 	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 
+	// The integration input's type. Valid values are HTTP , MOCK , AWS , AWS_PROXY  and HTTP_PROXY . An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
+	// The input's URI. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
+	// For HTTP integrations, the URI must be a fully formed, encoded HTTP URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. region, subdomain and service are used to determine the right endpoint.
+	// e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:012345678901:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("invoke_arn",true)
 	// +kubebuilder:validation:Optional
@@ -113,6 +146,7 @@ type TLSConfigObservation struct {
 
 type TLSConfigParameters struct {
 
+	// Specifies whether or not API Gateway skips verification that the certificate for an integration endpoint is issued by a supported certificate authority. This isn’t recommended, but it enables you to use certificates that are signed by private certificate authorities, or certificates that are self-signed. If enabled, API Gateway still performs basic certificate validation, which includes checking the certificate's expiration date, hostname, and presence of a root certificate authority. Supported only for HTTP and HTTP_PROXY integrations.
 	// +kubebuilder:validation:Optional
 	InsecureSkipVerification *bool `json:"insecureSkipVerification,omitempty" tf:"insecure_skip_verification,omitempty"`
 }
@@ -131,7 +165,7 @@ type IntegrationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Integration is the Schema for the Integrations API
+// Integration is the Schema for the Integrations API. Provides an HTTP Method Integration for an API Gateway Integration.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

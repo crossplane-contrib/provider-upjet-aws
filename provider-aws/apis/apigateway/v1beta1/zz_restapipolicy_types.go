@@ -14,11 +14,14 @@ import (
 )
 
 type RestAPIPolicyObservation struct {
+
+	// The ID of the REST API
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type RestAPIPolicyParameters struct {
 
+	// JSON formatted policy document that controls access to the API Gateway. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide
 	// +kubebuilder:validation:Required
 	Policy *string `json:"policy" tf:"policy,omitempty"`
 
@@ -27,6 +30,7 @@ type RestAPIPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -53,7 +57,7 @@ type RestAPIPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// RestAPIPolicy is the Schema for the RestAPIPolicys API
+// RestAPIPolicy is the Schema for the RestAPIPolicys API. Provides an API Gateway REST API Policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
