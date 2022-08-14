@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: VPCEndpointConnectionNotification is the Schema for the VPCEndpointConnectionNotifications
-          API
+          API. Provides a VPC Endpoint connection notification resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,10 +66,13 @@ spec:
               forProvider:
                 properties:
                   connectionEvents:
+                    description: One or more endpoint events for which to receive
+                      notifications.
                     items:
                       type: string
                     type: array
                   connectionNotificationArn:
+                    description: The ARN of the SNS topic for the notifications.
                     type: string
                   connectionNotificationArnRef:
                     description: A Reference to a named object.
@@ -149,8 +152,12 @@ spec:
                       be created in.
                     type: string
                   vpcEndpointId:
+                    description: The ID of the VPC Endpoint to receive notifications
+                      for.
                     type: string
                   vpcEndpointServiceId:
+                    description: The ID of the VPC Endpoint Service to receive notifications
+                      for.
                     type: string
                   vpcEndpointServiceIdRef:
                     description: A Reference to a named object.
@@ -407,10 +414,13 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the VPC connection notification.
                     type: string
                   notificationType:
+                    description: The type of notification.
                     type: string
                   state:
+                    description: The state of the notification.
                     type: string
                 type: object
               conditions:

@@ -14,11 +14,14 @@ import (
 )
 
 type InstanceRoleAssociationObservation struct {
+
+	// DB Instance Identifier and IAM Role ARN separated by a comma
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type InstanceRoleAssociationParameters struct {
 
+	// DB Instance Identifier to associate with the IAM Role.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,6 +33,7 @@ type InstanceRoleAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	DBInstanceIdentifierSelector *v1.Selector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
+	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
 	// +kubebuilder:validation:Required
 	FeatureName *string `json:"featureName" tf:"feature_name,omitempty"`
 
@@ -38,6 +42,7 @@ type InstanceRoleAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Amazon Resource Name  of the IAM Role to associate with the DB Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -64,7 +69,7 @@ type InstanceRoleAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// InstanceRoleAssociation is the Schema for the InstanceRoleAssociations API
+// InstanceRoleAssociation is the Schema for the InstanceRoleAssociations API. Manages an RDS DB Instance association with an IAM Role.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

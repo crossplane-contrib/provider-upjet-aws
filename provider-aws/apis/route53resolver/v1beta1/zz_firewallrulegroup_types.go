@@ -14,19 +14,26 @@ import (
 )
 
 type FirewallRuleGroupObservation struct {
+
+	// The ARN  of the rule group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ID of the rule group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The AWS account ID for the account that created the rule group. When a rule group is shared with your account, this is the account that has shared the rule group with you.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Whether the rule group is shared with other AWS accounts, or was shared with the current account by another AWS account. Sharing is configured through AWS Resource Access Manager . Valid values: NOT_SHARED, SHARED_BY_ME, SHARED_WITH_ME
 	ShareStatus *string `json:"shareStatus,omitempty" tf:"share_status,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type FirewallRuleGroupParameters struct {
 
+	// A name that lets you identify the rule group, to manage and use it.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -35,6 +42,7 @@ type FirewallRuleGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -53,7 +61,7 @@ type FirewallRuleGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FirewallRuleGroup is the Schema for the FirewallRuleGroups API
+// FirewallRuleGroup is the Schema for the FirewallRuleGroups API. Provides a Route 53 Resolver DNS Firewall rule group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

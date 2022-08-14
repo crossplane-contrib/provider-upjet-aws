@@ -14,11 +14,14 @@ import (
 )
 
 type VPCEndpointServiceAllowedPrincipalObservation struct {
+
+	// The ID of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type VPCEndpointServiceAllowedPrincipalParameters struct {
 
+	// The ARN of the principal to allow permissions.
 	// +kubebuilder:validation:Required
 	PrincipalArn *string `json:"principalArn" tf:"principal_arn,omitempty"`
 
@@ -27,6 +30,7 @@ type VPCEndpointServiceAllowedPrincipalParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the VPC endpoint service to allow permission.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -53,7 +57,7 @@ type VPCEndpointServiceAllowedPrincipalStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VPCEndpointServiceAllowedPrincipal is the Schema for the VPCEndpointServiceAllowedPrincipals API
+// VPCEndpointServiceAllowedPrincipal is the Schema for the VPCEndpointServiceAllowedPrincipals API. Provides a resource to allow a principal to discover a VPC endpoint service.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,14 +14,18 @@ import (
 )
 
 type TransitGatewayMulticastGroupSourceObservation struct {
+
+	// EC2 Transit Gateway Multicast Group Member identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type TransitGatewayMulticastGroupSourceParameters struct {
 
+	// The IP address assigned to the transit gateway multicast group.
 	// +kubebuilder:validation:Required
 	GroupIPAddress *string `json:"groupIpAddress" tf:"group_ip_address,omitempty"`
 
+	// The group members' network interface ID to register with the transit gateway multicast group.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -38,6 +42,7 @@ type TransitGatewayMulticastGroupSourceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the transit gateway multicast domain.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGatewayMulticastDomain
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -64,7 +69,7 @@ type TransitGatewayMulticastGroupSourceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// TransitGatewayMulticastGroupSource is the Schema for the TransitGatewayMulticastGroupSources API
+// TransitGatewayMulticastGroupSource is the Schema for the TransitGatewayMulticastGroupSources API. Manages an EC2 Transit Gateway Multicast Group Source
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

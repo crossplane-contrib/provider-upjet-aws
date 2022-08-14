@@ -14,8 +14,11 @@ import (
 )
 
 type PolicyObservation struct {
+
+	// The ARN assigned by AWS to this policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The default version of this policy.
 	DefaultVersionID *string `json:"defaultVersionId,omitempty" tf:"default_version_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -46,7 +49,7 @@ type PolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Policy is the Schema for the Policys API
+// Policy is the Schema for the Policys API. Provides an IoT policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

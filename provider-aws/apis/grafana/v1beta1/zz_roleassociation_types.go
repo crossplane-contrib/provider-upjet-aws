@@ -19,6 +19,7 @@ type RoleAssociationObservation struct {
 
 type RoleAssociationParameters struct {
 
+	// The AWS SSO group ids to be assigned the role given in role.
 	// +kubebuilder:validation:Optional
 	GroupIds []*string `json:"groupIds,omitempty" tf:"group_ids,omitempty"`
 
@@ -27,12 +28,15 @@ type RoleAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The grafana role. Valid values can be found here.
 	// +kubebuilder:validation:Required
 	Role *string `json:"role" tf:"role,omitempty"`
 
+	// The AWS SSO user ids to be assigned the role given in role.
 	// +kubebuilder:validation:Optional
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 
+	// The workspace id.
 	// +crossplane:generate:reference:type=Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
@@ -58,7 +62,7 @@ type RoleAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// RoleAssociation is the Schema for the RoleAssociations API
+// RoleAssociation is the Schema for the RoleAssociations API. Provides an Amazon Managed Grafana workspace role association resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

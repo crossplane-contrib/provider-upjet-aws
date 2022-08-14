@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Accelerator is the Schema for the Accelerators API
+        description: Accelerator is the Schema for the Accelerators API. Provides
+          a Global Accelerator accelerator.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,21 +65,35 @@ spec:
               forProvider:
                 properties:
                   attributes:
+                    description: The attributes of the accelerator. Fields documented
+                      below.
                     items:
                       properties:
                         flowLogsEnabled:
+                          description: 'Indicates whether flow logs are enabled. Defaults
+                            to false. Valid values: true, false.'
                           type: boolean
                         flowLogsS3Bucket:
+                          description: The name of the Amazon S3 bucket for the flow
+                            logs. Required if flow_logs_enabled is true.
                           type: string
                         flowLogsS3Prefix:
+                          description: The prefix for the location in the Amazon S3
+                            bucket for the flow logs. Required if flow_logs_enabled
+                            is true.
                           type: string
                       type: object
                     type: array
                   enabled:
+                    description: 'Indicates whether the accelerator is enabled. Defaults
+                      to true. Valid values: true, false.'
                     type: boolean
                   ipAddressType:
+                    description: 'The value for the address type. Defaults to IPV4.
+                      Valid values: IPV4.'
                     type: string
                   name:
+                    description: The name of the accelerator.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -87,6 +102,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - name
@@ -269,25 +287,38 @@ spec:
               atProvider:
                 properties:
                   dnsName:
+                    description: The DNS name of the accelerator. For example, a5d53ff5ee6bca4ce.awsglobalaccelerator.com.
                     type: string
                   hostedZoneId:
+                    description: The Global Accelerator Route 53 zone ID that can
+                      be used to route an Alias Resource Record Set to the Global
+                      Accelerator. This attribute is simply an alias for the zone
+                      ID Z2BJ6XQ5FK7U4H.
                     type: string
                   id:
+                    description: The Amazon Resource Name  of the accelerator.
                     type: string
                   ipSets:
+                    description: IP address set associated with the accelerator.
                     items:
                       properties:
                         ipAddresses:
+                          description: A list of IP addresses in the IP address set.
                           items:
                             type: string
                           type: array
                         ipFamily:
+                          description: The type of IP addresses included in this IP
+                            set.
                           type: string
                       type: object
                     type: array
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

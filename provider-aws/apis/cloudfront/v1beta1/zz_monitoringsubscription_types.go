@@ -18,16 +18,20 @@ type MonitoringSubscriptionMonitoringSubscriptionObservation struct {
 
 type MonitoringSubscriptionMonitoringSubscriptionParameters struct {
 
+	// A subscription configuration for additional CloudWatch metrics. See below.
 	// +kubebuilder:validation:Required
 	RealtimeMetricsSubscriptionConfig []RealtimeMetricsSubscriptionConfigParameters `json:"realtimeMetricsSubscriptionConfig" tf:"realtime_metrics_subscription_config,omitempty"`
 }
 
 type MonitoringSubscriptionObservation struct {
+
+	// The ID of the CloudFront monitoring subscription, which corresponds to the distribution_id.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type MonitoringSubscriptionParameters struct {
 
+	// The ID of the distribution that you are enabling metrics for.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1.Distribution
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -39,6 +43,7 @@ type MonitoringSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	DistributionIDSelector *v1.Selector `json:"distributionIdSelector,omitempty" tf:"-"`
 
+	// A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
 	// +kubebuilder:validation:Required
 	MonitoringSubscription []MonitoringSubscriptionMonitoringSubscriptionParameters `json:"monitoringSubscription" tf:"monitoring_subscription,omitempty"`
 
@@ -53,6 +58,7 @@ type RealtimeMetricsSubscriptionConfigObservation struct {
 
 type RealtimeMetricsSubscriptionConfigParameters struct {
 
+	// A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution. Valid values are Enabled and Disabled. See below.
 	// +kubebuilder:validation:Required
 	RealtimeMetricsSubscriptionStatus *string `json:"realtimeMetricsSubscriptionStatus" tf:"realtime_metrics_subscription_status,omitempty"`
 }
@@ -71,7 +77,7 @@ type MonitoringSubscriptionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MonitoringSubscription is the Schema for the MonitoringSubscriptions API
+// MonitoringSubscription is the Schema for the MonitoringSubscriptions API. Provides a CloudFront monitoring subscription resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

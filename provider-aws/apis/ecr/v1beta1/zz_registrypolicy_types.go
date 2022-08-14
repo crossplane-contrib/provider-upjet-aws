@@ -16,11 +16,13 @@ import (
 type RegistryPolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The registry ID where the registry was created.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 }
 
 type RegistryPolicyParameters struct {
 
+	// The policy document. This is a JSON formatted string. For more information about building IAM policy documents with Terraform, see the AWS IAM Policy Document Guide
 	// +kubebuilder:validation:Required
 	Policy *string `json:"policy" tf:"policy,omitempty"`
 
@@ -44,7 +46,7 @@ type RegistryPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// RegistryPolicy is the Schema for the RegistryPolicys API
+// RegistryPolicy is the Schema for the RegistryPolicys API. Provides an Elastic Container Registry Policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

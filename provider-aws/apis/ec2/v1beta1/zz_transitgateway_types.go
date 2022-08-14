@@ -14,36 +14,49 @@ import (
 )
 
 type TransitGatewayObservation struct {
+
+	// EC2 Transit Gateway Amazon Resource Name
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Identifier of the default association route table
 	AssociationDefaultRouteTableID *string `json:"associationDefaultRouteTableId,omitempty" tf:"association_default_route_table_id,omitempty"`
 
+	// EC2 Transit Gateway identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Identifier of the AWS account that owns the EC2 Transit Gateway
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Identifier of the default propagation route table
 	PropagationDefaultRouteTableID *string `json:"propagationDefaultRouteTableId,omitempty" tf:"propagation_default_route_table_id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type TransitGatewayParameters struct {
 
+	// Private Autonomous System Number  for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. Default value: 64512.
 	// +kubebuilder:validation:Optional
 	AmazonSideAsn *float64 `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
 
+	// Whether resource attachment requests are automatically accepted. Valid values: disable, enable. Default value: disable.
 	// +kubebuilder:validation:Optional
 	AutoAcceptSharedAttachments *string `json:"autoAcceptSharedAttachments,omitempty" tf:"auto_accept_shared_attachments,omitempty"`
 
+	// Whether DNS support is enabled. Valid values: disable, enable. Default value: enable.
 	// +kubebuilder:validation:Optional
 	DNSSupport *string `json:"dnsSupport,omitempty" tf:"dns_support,omitempty"`
 
+	// Whether resource attachments are automatically associated with the default association route table. Valid values: disable, enable. Default value: enable.
 	// +kubebuilder:validation:Optional
 	DefaultRouteTableAssociation *string `json:"defaultRouteTableAssociation,omitempty" tf:"default_route_table_association,omitempty"`
 
+	// Whether resource attachments automatically propagate routes to the default propagation route table. Valid values: disable, enable. Default value: enable.
 	// +kubebuilder:validation:Optional
 	DefaultRouteTablePropagation *string `json:"defaultRouteTablePropagation,omitempty" tf:"default_route_table_propagation,omitempty"`
 
+	// Description of the EC2 Transit Gateway.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -55,12 +68,15 @@ type TransitGatewayParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Key-value tags for the EC2 Transit Gateway. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// One or more IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.
 	// +kubebuilder:validation:Optional
 	TransitGatewayCidrBlocks []*string `json:"transitGatewayCidrBlocks,omitempty" tf:"transit_gateway_cidr_blocks,omitempty"`
 
+	// Whether VPN Equal Cost Multipath Protocol support is enabled. Valid values: disable, enable. Default value: enable.
 	// +kubebuilder:validation:Optional
 	VPNEcmpSupport *string `json:"vpnEcmpSupport,omitempty" tf:"vpn_ecmp_support,omitempty"`
 }
@@ -79,7 +95,7 @@ type TransitGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 
-// TransitGateway is the Schema for the TransitGateways API
+// TransitGateway is the Schema for the TransitGateways API. Manages an EC2 Transit Gateway
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

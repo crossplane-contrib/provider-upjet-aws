@@ -35,7 +35,9 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: PublicKey is the Schema for the PublicKeys API
+        description: PublicKey is the Schema for the PublicKeys API. Provides a CloudFront
+          Public Key which you add to CloudFront to use with features like field-level
+          encryption.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +66,11 @@ spec:
               forProvider:
                 properties:
                   comment:
+                    description: An optional comment about the public key.
                     type: string
                   encodedKeySecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The encoded public key that you want to add to CloudFront
+                      to use with features like field-level encryption.
                     properties:
                       key:
                         description: The key to select.
@@ -84,8 +87,11 @@ spec:
                     - namespace
                     type: object
                   name:
+                    description: The name for the public key. By default generated
+                      by Terraform.
                     type: string
                   namePrefix:
+                    description: The name for the public key. Conflicts with name.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -272,10 +278,16 @@ spec:
               atProvider:
                 properties:
                   callerReference:
+                    description: Internal value used by CloudFront to allow future
+                      updates to the public key configuration.
                     type: string
                   etag:
+                    description: 'The current version of the public key. For example:
+                      E2QWRUHAPOMQZL.'
                     type: string
                   id:
+                    description: 'The identifier for the public key. For example:
+                      K3D5EWEUDCCXON.'
                     type: string
                 type: object
               conditions:

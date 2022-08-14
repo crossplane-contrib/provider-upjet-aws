@@ -18,6 +18,7 @@ type AllowedPublishersObservation struct {
 
 type AllowedPublishersParameters struct {
 
+	// The Amazon Resource Name  for each of the signing profiles. A signing profile defines a trusted user who can sign a code package.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/signer/v1beta1.SigningProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -31,23 +32,30 @@ type AllowedPublishersParameters struct {
 }
 
 type CodeSigningConfigObservation struct {
+
+	// The Amazon Resource Name  of the code signing configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Unique identifier for the code signing configuration.
 	ConfigID *string `json:"configId,omitempty" tf:"config_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The date and time that the code signing configuration was last modified.
 	LastModified *string `json:"lastModified,omitempty" tf:"last_modified,omitempty"`
 }
 
 type CodeSigningConfigParameters struct {
 
+	// A configuration block of allowed publishers as signing profiles for this code signing configuration. Detailed below.
 	// +kubebuilder:validation:Required
 	AllowedPublishers []AllowedPublishersParameters `json:"allowedPublishers" tf:"allowed_publishers,omitempty"`
 
+	// Descriptive name for this code signing configuration.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// A configuration block of code signing policies that define the actions to take if the validation checks fail. Detailed below.
 	// +kubebuilder:validation:Optional
 	Policies []PoliciesParameters `json:"policies,omitempty" tf:"policies,omitempty"`
 
@@ -62,6 +70,7 @@ type PoliciesObservation struct {
 
 type PoliciesParameters struct {
 
+	// Code signing configuration policy for deployment validation failure. If you set the policy to Enforce, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to Warn, Lambda allows the deployment and creates a CloudWatch log. Valid values: Warn, Enforce. Default value: Warn.
 	// +kubebuilder:validation:Required
 	UntrustedArtifactOnDeployment *string `json:"untrustedArtifactOnDeployment" tf:"untrusted_artifact_on_deployment,omitempty"`
 }
@@ -80,7 +89,7 @@ type CodeSigningConfigStatus struct {
 
 // +kubebuilder:object:root=true
 
-// CodeSigningConfig is the Schema for the CodeSigningConfigs API
+// CodeSigningConfig is the Schema for the CodeSigningConfigs API. Provides a Lambda Code Signing Config resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

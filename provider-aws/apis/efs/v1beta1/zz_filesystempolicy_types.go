@@ -14,14 +14,18 @@ import (
 )
 
 type FileSystemPolicyObservation struct {
+
+	// The ID that identifies the file system .
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type FileSystemPolicyParameters struct {
 
+	// A flag to indicate whether to bypass the aws_efs_file_system_policy lockout safety check. The policy lockout safety check determines whether the policy in the request will prevent the principal making the request will be locked out from making future PutFileSystemPolicy requests on the file system. Set bypass_policy_lockout_safety_check to true only when you intend to prevent the principal that is making the request from making a subsequent PutFileSystemPolicy request on the file system. The default value is false.
 	// +kubebuilder:validation:Optional
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
+	// The ID of the EFS file system.
 	// +crossplane:generate:reference:type=FileSystem
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
@@ -32,6 +36,7 @@ type FileSystemPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
+	// The JSON formatted file system policy for the EFS file system. see Docs for more info.
 	// +kubebuilder:validation:Required
 	Policy *string `json:"policy" tf:"policy,omitempty"`
 
@@ -55,7 +60,7 @@ type FileSystemPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FileSystemPolicy is the Schema for the FileSystemPolicys API
+// FileSystemPolicy is the Schema for the FileSystemPolicys API. Provides an Elastic File System (EFS) File System Policy resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

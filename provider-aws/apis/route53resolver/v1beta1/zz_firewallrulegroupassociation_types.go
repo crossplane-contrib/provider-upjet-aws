@@ -14,15 +14,20 @@ import (
 )
 
 type FirewallRuleGroupAssociationObservation struct {
+
+	// The ARN  of the firewall rule group association.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The identifier for the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type FirewallRuleGroupAssociationParameters struct {
 
+	// The unique identifier of the firewall rule group.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/route53resolver/v1beta1.FirewallRuleGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -34,12 +39,15 @@ type FirewallRuleGroupAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallRuleGroupIDSelector *v1.Selector `json:"firewallRuleGroupIdSelector,omitempty" tf:"-"`
 
+	// If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections. Valid values: ENABLED, DISABLED.
 	// +kubebuilder:validation:Optional
 	MutationProtection *string `json:"mutationProtection,omitempty" tf:"mutation_protection,omitempty"`
 
+	// A name that lets you identify the rule group association, to manage and use it.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from the rule group with the lowest numeric priority setting.
 	// +kubebuilder:validation:Required
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
@@ -48,9 +56,11 @@ type FirewallRuleGroupAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The unique identifier of the VPC that you want to associate with the rule group.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -76,7 +86,7 @@ type FirewallRuleGroupAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FirewallRuleGroupAssociation is the Schema for the FirewallRuleGroupAssociations API
+// FirewallRuleGroupAssociation is the Schema for the FirewallRuleGroupAssociations API. Provides a Route 53 Resolver DNS Firewall rule group association resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

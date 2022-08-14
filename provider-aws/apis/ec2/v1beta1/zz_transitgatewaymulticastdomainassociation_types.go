@@ -14,6 +14,8 @@ import (
 )
 
 type TransitGatewayMulticastDomainAssociationObservation struct {
+
+	// EC2 Transit Gateway Multicast Domain Association identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -24,6 +26,7 @@ type TransitGatewayMulticastDomainAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the subnet to associate with the transit gateway multicast domain.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -34,6 +37,7 @@ type TransitGatewayMulticastDomainAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// The ID of the transit gateway attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGatewayVPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -45,6 +49,7 @@ type TransitGatewayMulticastDomainAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
+	// The ID of the transit gateway multicast domain.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGatewayMulticastDomain
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -71,7 +76,7 @@ type TransitGatewayMulticastDomainAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// TransitGatewayMulticastDomainAssociation is the Schema for the TransitGatewayMulticastDomainAssociations API
+// TransitGatewayMulticastDomainAssociation is the Schema for the TransitGatewayMulticastDomainAssociations API. Manages an EC2 Transit Gateway Multicast Domain Association
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

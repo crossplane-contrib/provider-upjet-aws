@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ManagedPrefixListEntry is the Schema for the ManagedPrefixListEntrys
-          API
+          API. Provides a managed prefix list entry resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   cidr:
+                    description: CIDR block of this entry.
                     type: string
                   cidrRef:
                     description: A Reference to a named object.
@@ -140,8 +141,12 @@ spec:
                         type: object
                     type: object
                   description:
+                    description: Description of this entry. Due to API limitations,
+                      updating only the description of an entry requires recreating
+                      the entry.
                     type: string
                   prefixListId:
+                    description: CIDR block of this entry.
                     type: string
                   prefixListIdRef:
                     description: A Reference to a named object.
@@ -401,6 +406,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: ID of the managed prefix list entry.
                     type: string
                 type: object
               conditions:

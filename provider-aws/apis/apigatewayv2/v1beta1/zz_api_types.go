@@ -14,43 +14,64 @@ import (
 )
 
 type APIObservation struct {
+
+	// The URI of the API, of the form https://{api-id}.execute-api.{region}.amazonaws.com for HTTP APIs and wss://{api-id}.execute-api.{region}.amazonaws.com for WebSocket APIs.
 	APIEndpoint *string `json:"apiEndpoint,omitempty" tf:"api_endpoint,omitempty"`
 
+	// The ARN of the API.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ARN prefix to be used in an aws_lambda_permission's source_arn attribute
+	// or in an aws_iam_policy to authorize access to the @connections API.
+	// See the Amazon API Gateway Developer Guide for details.
 	ExecutionArn *string `json:"executionArn,omitempty" tf:"execution_arn,omitempty"`
 
+	// The API identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type APIParameters struct {
 
+	// An API key selection expression.
+	// Valid values: $context.authorizer.usageIdentifierKey, $request.header.x-api-key. Defaults to $request.header.x-api-key.
+	// Applicable for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	APIKeySelectionExpression *string `json:"apiKeySelectionExpression,omitempty" tf:"api_key_selection_expression,omitempty"`
 
+	// An OpenAPI specification that defines the set of routes and integrations to create as part of the HTTP APIs. Supported only for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
+	// The cross-origin resource sharing  configuration. Applicable for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	CorsConfiguration []CorsConfigurationParameters `json:"corsConfiguration,omitempty" tf:"cors_configuration,omitempty"`
 
+	// Part of quick create. Specifies any credentials required for the integration. Applicable for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	CredentialsArn *string `json:"credentialsArn,omitempty" tf:"credentials_arn,omitempty"`
 
+	// The description of the API. Must be less than or equal to 1024 characters in length.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Whether clients can invoke the API by using the default execute-api endpoint.
+	// By default, clients can invoke the API with the default {api_id}.execute-api.{region}.amazonaws.com endpoint.
+	// To require that clients use a custom domain name to invoke the API, disable the default endpoint.
 	// +kubebuilder:validation:Optional
 	DisableExecuteAPIEndpoint *bool `json:"disableExecuteApiEndpoint,omitempty" tf:"disable_execute_api_endpoint,omitempty"`
 
+	// Whether warnings should return an error while API Gateway is creating or updating the resource using an OpenAPI specification. Defaults to false. Applicable for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	FailOnWarnings *bool `json:"failOnWarnings,omitempty" tf:"fail_on_warnings,omitempty"`
 
+	// The name of the API. Must be less than or equal to 128 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The API protocol. Valid values: HTTP, WEBSOCKET.
 	// +kubebuilder:validation:Required
 	ProtocolType *string `json:"protocolType" tf:"protocol_type,omitempty"`
 
@@ -59,18 +80,26 @@ type APIParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Part of quick create. Specifies any route key. Applicable for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	RouteKey *string `json:"routeKey,omitempty" tf:"route_key,omitempty"`
 
+	// The route selection expression for the API.
+	// Defaults to $request.method $request.path.
 	// +kubebuilder:validation:Optional
 	RouteSelectionExpression *string `json:"routeSelectionExpression,omitempty" tf:"route_selection_expression,omitempty"`
 
+	// A map of tags to assign to the API. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes.
+	// For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN.
+	// The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively. Applicable for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
+	// A version identifier for the API. Must be between 1 and 64 characters in length.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -80,21 +109,27 @@ type CorsConfigurationObservation struct {
 
 type CorsConfigurationParameters struct {
 
+	// Whether credentials are included in the CORS request.
 	// +kubebuilder:validation:Optional
 	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
 
+	// The set of allowed HTTP headers.
 	// +kubebuilder:validation:Optional
 	AllowHeaders []*string `json:"allowHeaders,omitempty" tf:"allow_headers,omitempty"`
 
+	// The set of allowed HTTP methods.
 	// +kubebuilder:validation:Optional
 	AllowMethods []*string `json:"allowMethods,omitempty" tf:"allow_methods,omitempty"`
 
+	// The set of allowed origins.
 	// +kubebuilder:validation:Optional
 	AllowOrigins []*string `json:"allowOrigins,omitempty" tf:"allow_origins,omitempty"`
 
+	// The set of exposed HTTP headers.
 	// +kubebuilder:validation:Optional
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
+	// The number of seconds that the browser should cache preflight request results.
 	// +kubebuilder:validation:Optional
 	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
 }
@@ -113,7 +148,7 @@ type APIStatus struct {
 
 // +kubebuilder:object:root=true
 
-// API is the Schema for the APIs API
+// API is the Schema for the APIs API. Manages an Amazon API Gateway Version 2 API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

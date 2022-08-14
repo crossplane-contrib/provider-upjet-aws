@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: LayerVersionPermission is the Schema for the LayerVersionPermissions
-          API
+          API. Provides a Lambda Layer Version Permission resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,20 +65,36 @@ spec:
               forProvider:
                 properties:
                   action:
+                    description: Action, which will be allowed. lambda:GetLayerVersion
+                      value is suggested by AWS documantation.
                     type: string
                   layerName:
+                    description: The name or ARN of the Lambda Layer, which you want
+                      to grant access to.
                     type: string
                   organizationId:
+                    description: An identifier of AWS Organization, which should be
+                      able to use your Lambda Layer. principal should be equal to
+                      * if organization_id provided.
                     type: string
                   principal:
+                    description: AWS account ID which should be able to use your Lambda
+                      Layer. * can be used here, if you want to share your Lambda
+                      Layer widely.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   statementId:
+                    description: The name of Lambda Layer Permission, for example
+                      dev-account - human readable note about what is this permission
+                      for.
                     type: string
                   versionNumber:
+                    description: 'Version of Lambda Layer, which you want to grant
+                      access to. Note: permissions only apply to a single version
+                      of a layer.'
                     type: number
                 required:
                 - action
@@ -266,10 +282,15 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The layer_name and version_number, separated by a
+                      comma .
                     type: string
                   policy:
+                    description: Full Lambda Layer Permission policy.
                     type: string
                   revisionId:
+                    description: A unique identifier for the current revision of the
+                      policy.
                     type: string
                 type: object
               conditions:

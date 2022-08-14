@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ParameterGroup is the Schema for the ParameterGroups API
+        description: ParameterGroup is the Schema for the ParameterGroups API. Provides
+          an DAX Parameter Group resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,13 +65,16 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: A description of the parameter group.
                     type: string
                   parameters:
+                    description: –  The parameters of the parameter group.
                     items:
                       properties:
                         name:
                           type: string
                         value:
+                          description: The value for the parameter.
                           type: string
                       required:
                       - name
@@ -261,6 +265,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The name of the parameter group.
                     type: string
                 type: object
               conditions:

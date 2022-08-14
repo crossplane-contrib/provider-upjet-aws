@@ -14,14 +14,20 @@ import (
 )
 
 type NATGatewayObservation struct {
+
+	// The ID of the NAT Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ENI ID of the network interface created by the NAT gateway.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
+	// The private IP address of the NAT Gateway.
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
+	// The public IP address of the NAT Gateway.
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -38,6 +44,7 @@ type NATGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	AllocationIDSelector *v1.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
 
+	// Connectivity type for the gateway. Valid values are private and public. Defaults to public.
 	// +kubebuilder:validation:Optional
 	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`
 
@@ -56,6 +63,7 @@ type NATGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -74,7 +82,7 @@ type NATGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 
-// NATGateway is the Schema for the NATGateways API
+// NATGateway is the Schema for the NATGateways API. Provides a resource to create a VPC NAT Gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

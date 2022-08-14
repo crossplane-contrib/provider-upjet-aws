@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketRequestPaymentConfiguration is the Schema for the BucketRequestPaymentConfigurations
-          API
+          API. Provides an S3 bucket request payment configuration resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the bucket.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -141,8 +142,11 @@ spec:
                         type: object
                     type: object
                   expectedBucketOwner:
+                    description: The account ID of the expected bucket owner.
                     type: string
                   payer:
+                    description: 'Specifies who pays for the download and request
+                      fees. Valid values: BucketOwner, Requester.'
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -330,6 +334,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The bucket or bucket and expected_bucket_owner separated
+                      by a comma  if the latter is provided.
                     type: string
                 type: object
               conditions:

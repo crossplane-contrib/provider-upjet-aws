@@ -14,25 +14,33 @@ import (
 )
 
 type FunctionObservation struct {
+
+	// Amazon Resource Name  identifying your CloudFront Function.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ETag hash of the function. This is the value for the DEVELOPMENT stage of the function.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// ETag hash of any LIVE stage of the function.
 	LiveStageEtag *string `json:"liveStageEtag,omitempty" tf:"live_stage_etag,omitempty"`
 
+	// Status of the function. Can be UNPUBLISHED, UNASSOCIATED or ASSOCIATED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type FunctionParameters struct {
 
+	// Source code of the function
 	// +kubebuilder:validation:Required
 	CodeSecretRef v1.SecretKeySelector `json:"codeSecretRef" tf:"-"`
 
+	// Comment.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// Whether to publish creation/change as Live CloudFront Function Version. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
@@ -41,6 +49,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Identifier of the function's runtime. Currently only cloudfront-js-1.0 is valid.
 	// +kubebuilder:validation:Required
 	Runtime *string `json:"runtime" tf:"runtime,omitempty"`
 }
@@ -59,7 +68,7 @@ type FunctionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Function is the Schema for the Functions API
+// Function is the Schema for the Functions API. Provides a CloudFront Function resource. With CloudFront Functions in Amazon CloudFront, you can write lightweight functions in JavaScript for high-scale, latency-sensitive CDN customizations.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,26 +14,34 @@ import (
 )
 
 type FirewallRuleObservation struct {
+
+	// The ID of the rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type FirewallRuleParameters struct {
 
+	// The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list. Valid values: ALLOW, BLOCK, ALERT.
 	// +kubebuilder:validation:Required
 	Action *string `json:"action" tf:"action,omitempty"`
 
+	// The DNS record's type. This determines the format of the record value that you provided in BlockOverrideDomain. Value values: CNAME.
 	// +kubebuilder:validation:Optional
 	BlockOverrideDNSType *string `json:"blockOverrideDnsType,omitempty" tf:"block_override_dns_type,omitempty"`
 
+	// The custom DNS record to send back in response to the query.
 	// +kubebuilder:validation:Optional
 	BlockOverrideDomain *string `json:"blockOverrideDomain,omitempty" tf:"block_override_domain,omitempty"`
 
+	// The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record. Minimum value of 0. Maximum value of 604800.
 	// +kubebuilder:validation:Optional
 	BlockOverrideTTL *float64 `json:"blockOverrideTtl,omitempty" tf:"block_override_ttl,omitempty"`
 
+	// The way that you want DNS Firewall to block the request. Valid values: NODATA, NXDOMAIN, OVERRIDE.
 	// +kubebuilder:validation:Optional
 	BlockResponse *string `json:"blockResponse,omitempty" tf:"block_response,omitempty"`
 
+	// The ID of the domain list that you want to use in the rule.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/route53resolver/v1beta1.FirewallDomainList
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -45,6 +53,7 @@ type FirewallRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallDomainListIDSelector *v1.Selector `json:"firewallDomainListIdSelector,omitempty" tf:"-"`
 
+	// The unique identifier of the firewall rule group where you want to create the rule.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/route53resolver/v1beta1.FirewallRuleGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -56,9 +65,11 @@ type FirewallRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallRuleGroupIDSelector *v1.Selector `json:"firewallRuleGroupIdSelector,omitempty" tf:"-"`
 
+	// A name that lets you identify the rule, to manage and use it.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The setting that determines the processing order of the rule in the rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting.
 	// +kubebuilder:validation:Required
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
@@ -82,7 +93,7 @@ type FirewallRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FirewallRule is the Schema for the FirewallRules API
+// FirewallRule is the Schema for the FirewallRules API. Provides a Route 53 Resolver DNS Firewall rule resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

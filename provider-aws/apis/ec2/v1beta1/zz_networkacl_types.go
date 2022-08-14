@@ -14,22 +14,34 @@ import (
 )
 
 type EgressObservation struct {
+
+	// The action to take.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
+	// The CIDR block to match. This must be a
+	// valid network mask.
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
+	// The from port to match.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// The IPv6 CIDR block.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
+	// The ICMP type code to be used. Default 0.
 	IcmpCode *float64 `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
+	// The ICMP type to be used. Default 0.
 	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
+	// The protocol to match. If using the -1 'all'
+	// protocol, you must specify a from and to port of 0.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// The rule number. Used for ordering.
 	RuleNo *float64 `json:"ruleNo,omitempty" tf:"rule_no,omitempty"`
 
+	// The to port to match.
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
@@ -37,22 +49,34 @@ type EgressParameters struct {
 }
 
 type IngressObservation struct {
+
+	// The action to take.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
+	// The CIDR block to match. This must be a
+	// valid network mask.
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
+	// The from port to match.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// The IPv6 CIDR block.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
+	// The ICMP type code to be used. Default 0.
 	IcmpCode *float64 `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
+	// The ICMP type to be used. Default 0.
 	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
+	// The protocol to match. If using the -1 'all'
+	// protocol, you must specify a from and to port of 0.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// The rule number. Used for ordering.
 	RuleNo *float64 `json:"ruleNo,omitempty" tf:"rule_no,omitempty"`
 
+	// The to port to match.
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
@@ -60,16 +84,25 @@ type IngressParameters struct {
 }
 
 type NetworkACLObservation struct {
+
+	// The ARN of the network ACL
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Specifies an egress rule. Parameters defined below.
+	// This argument is processed in attribute-as-blocks mode.
 	Egress []EgressObservation `json:"egress,omitempty" tf:"egress,omitempty"`
 
+	// The ID of the network ACL
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies an ingress rule. Parameters defined below.
+	// This argument is processed in attribute-as-blocks mode.
 	Ingress []IngressObservation `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
+	// The ID of the AWS account that owns the network ACL.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -86,15 +119,18 @@ type NetworkACLParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// A list of Subnet IDs to apply the ACL to
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The ID of the associated VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -120,7 +156,7 @@ type NetworkACLStatus struct {
 
 // +kubebuilder:object:root=true
 
-// NetworkACL is the Schema for the NetworkACLs API
+// NetworkACL is the Schema for the NetworkACLs API. Provides an network ACL resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

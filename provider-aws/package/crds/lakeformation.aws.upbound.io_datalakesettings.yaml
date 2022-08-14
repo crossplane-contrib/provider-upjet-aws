@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DataLakeSettings is the Schema for the DataLakeSettingss API
+        description: DataLakeSettings is the Schema for the DataLakeSettingss API.
+          Manages data lake administrators and default database and table permissions
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,17 @@ spec:
               forProvider:
                 properties:
                   admins:
+                    description: –  Set of ARNs of AWS Lake Formation principals .
                     items:
                       type: string
                     type: array
                   catalogId:
+                    description: –  Identifier for the Data Catalog. By default, the
+                      account ID.
                     type: string
                   createDatabaseDefaultPermissions:
+                    description: Up to three configuration blocks of principal permissions
+                      for default create database permissions. Detailed below.
                     items:
                       properties:
                         permissions:
@@ -81,6 +87,8 @@ spec:
                       type: object
                     type: array
                   createTableDefaultPermissions:
+                    description: Up to three configuration blocks of principal permissions
+                      for default create table permissions. Detailed below.
                     items:
                       properties:
                         permissions:
@@ -96,6 +104,8 @@ spec:
                       be created in.
                     type: string
                   trustedResourceOwners:
+                    description: wning account IDs that the caller's account can use
+                      to share their user access details .
                     items:
                       type: string
                     type: array

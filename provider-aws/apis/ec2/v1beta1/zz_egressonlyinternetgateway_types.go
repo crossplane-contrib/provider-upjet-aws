@@ -14,8 +14,11 @@ import (
 )
 
 type EgressOnlyInternetGatewayObservation struct {
+
+	// The ID of the egress-only Internet gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -26,9 +29,11 @@ type EgressOnlyInternetGatewayParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The VPC ID to create in.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -54,7 +59,7 @@ type EgressOnlyInternetGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 
-// EgressOnlyInternetGateway is the Schema for the EgressOnlyInternetGateways API
+// EgressOnlyInternetGateway is the Schema for the EgressOnlyInternetGateways API. Provides a resource to create an egress-only Internet gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

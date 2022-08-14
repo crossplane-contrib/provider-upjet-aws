@@ -14,20 +14,27 @@ import (
 )
 
 type ClusterObservation struct {
+
+	// ARN that identifies the cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// List of short names of one or more capacity providers to associate with the cluster. Valid values also include FARGATE and FARGATE_SPOT.
 	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
 
+	// ARN that identifies the cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ClusterParameters struct {
 
+	// The execute command configuration for the cluster. Detailed below.
 	// +kubebuilder:validation:Optional
 	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
+	// Configuration block for capacity provider strategy to use by default for the cluster. Can be one or more. Detailed below.
 	// +kubebuilder:validation:Optional
 	DefaultCapacityProviderStrategy []DefaultCapacityProviderStrategyParameters `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
 
@@ -36,9 +43,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Configuration block with cluster settings. For example, this can be used to enable CloudWatch Container Insights for a cluster. Detailed below.
 	// +kubebuilder:validation:Optional
 	Setting []SettingParameters `json:"setting,omitempty" tf:"setting,omitempty"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -48,6 +57,7 @@ type ConfigurationObservation struct {
 
 type ConfigurationParameters struct {
 
+	// The details of the execute command configuration. Detailed below.
 	// +kubebuilder:validation:Optional
 	ExecuteCommandConfiguration []ExecuteCommandConfigurationParameters `json:"executeCommandConfiguration,omitempty" tf:"execute_command_configuration,omitempty"`
 }
@@ -57,12 +67,15 @@ type DefaultCapacityProviderStrategyObservation struct {
 
 type DefaultCapacityProviderStrategyParameters struct {
 
+	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined.
 	// +kubebuilder:validation:Optional
 	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
 
+	// The short name of the capacity provider.
 	// +kubebuilder:validation:Required
 	CapacityProvider *string `json:"capacityProvider" tf:"capacity_provider,omitempty"`
 
+	// The relative percentage of the total number of launched tasks that should use the specified capacity provider.
 	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
@@ -72,12 +85,15 @@ type ExecuteCommandConfigurationObservation struct {
 
 type ExecuteCommandConfigurationParameters struct {
 
+	// The AWS Key Management Service key ID to encrypt the data between the local client and the container.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// The log configuration for the results of the execute command actions Required when logging is OVERRIDE. Detailed below.
 	// +kubebuilder:validation:Optional
 	LogConfiguration []LogConfigurationParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
+	// The log setting to use for redirecting logs for your execute command results. Valid values are NONE, DEFAULT, and OVERRIDE.
 	// +kubebuilder:validation:Optional
 	Logging *string `json:"logging,omitempty" tf:"logging,omitempty"`
 }
@@ -87,18 +103,23 @@ type LogConfigurationObservation struct {
 
 type LogConfigurationParameters struct {
 
+	// Whether or not to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
 	// +kubebuilder:validation:Optional
 	CloudWatchEncryptionEnabled *bool `json:"cloudWatchEncryptionEnabled,omitempty" tf:"cloud_watch_encryption_enabled,omitempty"`
 
+	// The name of the CloudWatch log group to send logs to.
 	// +kubebuilder:validation:Optional
 	CloudWatchLogGroupName *string `json:"cloudWatchLogGroupName,omitempty" tf:"cloud_watch_log_group_name,omitempty"`
 
+	// Whether or not to enable encryption on the logs sent to S3. If not specified, encryption will be disabled.
 	// +kubebuilder:validation:Optional
 	S3BucketEncryptionEnabled *bool `json:"s3BucketEncryptionEnabled,omitempty" tf:"s3_bucket_encryption_enabled,omitempty"`
 
+	// The name of the S3 bucket to send logs to.
 	// +kubebuilder:validation:Optional
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
 
+	// An optional folder in the S3 bucket to place logs in.
 	// +kubebuilder:validation:Optional
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 }
@@ -111,6 +132,7 @@ type SettingParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The value to assign to the setting. Value values are enabled and disabled.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -129,7 +151,7 @@ type ClusterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Cluster is the Schema for the Clusters API
+// Cluster is the Schema for the Clusters API. Provides an ECS cluster.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

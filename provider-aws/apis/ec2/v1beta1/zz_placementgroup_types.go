@@ -14,17 +14,25 @@ import (
 )
 
 type PlacementGroupObservation struct {
+
+	// Amazon Resource Name  of the placement group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The name of the placement group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ID of the placement group.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type PlacementGroupParameters struct {
 
+	// The number of partitions to create in the
+	// placement group.  Can only be specified when the strategy is set to
+	// "partition".  Valid values are 1 - 7 .
 	// +kubebuilder:validation:Optional
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
@@ -33,9 +41,11 @@ type PlacementGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The placement strategy. Can be "cluster", "partition" or "spread".
 	// +kubebuilder:validation:Required
 	Strategy *string `json:"strategy" tf:"strategy,omitempty"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -54,7 +64,7 @@ type PlacementGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PlacementGroup is the Schema for the PlacementGroups API
+// PlacementGroup is the Schema for the PlacementGroups API. Provides an EC2 placement group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

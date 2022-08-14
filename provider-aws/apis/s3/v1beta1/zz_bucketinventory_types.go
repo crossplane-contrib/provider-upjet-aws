@@ -48,21 +48,27 @@ type BucketInventoryParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// Contains information about where to publish the inventory results .
 	// +kubebuilder:validation:Required
 	Destination []BucketInventoryDestinationParameters `json:"destination" tf:"destination,omitempty"`
 
+	// Specifies whether the inventory is enabled or disabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Specifies an inventory filter. The inventory only includes objects that meet the filter's criteria .
 	// +kubebuilder:validation:Optional
 	Filter []BucketInventoryFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
+	// Object versions to include in the inventory list. Valid values: All, Current.
 	// +kubebuilder:validation:Required
 	IncludedObjectVersions *string `json:"includedObjectVersions" tf:"included_object_versions,omitempty"`
 
+	// Unique identifier of the inventory configuration for the bucket.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// List of optional fields that are included in the inventory results. Please refer to the S3 documentation for more details.
 	// +kubebuilder:validation:Optional
 	OptionalFields []*string `json:"optionalFields,omitempty" tf:"optional_fields,omitempty"`
 
@@ -71,6 +77,7 @@ type BucketInventoryParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Specifies the schedule for generating inventory results .
 	// +kubebuilder:validation:Required
 	Schedule []ScheduleParameters `json:"schedule" tf:"schedule,omitempty"`
 }
@@ -80,9 +87,11 @@ type DestinationBucketObservation struct {
 
 type DestinationBucketParameters struct {
 
+	// The ID of the account that owns the destination bucket. Recommended to be set to prevent problems if the destination bucket ownership changes.
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
+	// The Amazon S3 bucket ARN of the destination.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -94,9 +103,11 @@ type DestinationBucketParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
+	// Contains the type of server-side encryption to use to encrypt the inventory .
 	// +kubebuilder:validation:Optional
 	Encryption []EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
+	// Specifies the output format of the inventory results. Can be CSV, ORC or Parquet.
 	// +kubebuilder:validation:Required
 	Format *string `json:"format" tf:"format,omitempty"`
 
@@ -109,9 +120,11 @@ type EncryptionObservation struct {
 
 type EncryptionParameters struct {
 
+	// Specifies to use server-side encryption with AWS KMS-managed keys to encrypt the inventory file .
 	// +kubebuilder:validation:Optional
 	SseKMS []SseKMSParameters `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
 
+	// Specifies to use server-side encryption with Amazon S3-managed keys  to encrypt the inventory file.
 	// +kubebuilder:validation:Optional
 	SseS3 []SseS3Parameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
 }
@@ -121,6 +134,7 @@ type ScheduleObservation struct {
 
 type ScheduleParameters struct {
 
+	// Specifies how frequently inventory results are produced. Valid values: Daily, Weekly.
 	// +kubebuilder:validation:Required
 	Frequency *string `json:"frequency" tf:"frequency,omitempty"`
 }
@@ -130,6 +144,7 @@ type SseKMSObservation struct {
 
 type SseKMSParameters struct {
 
+	// The ARN of the KMS customer master key  used to encrypt the inventory file.
 	// +kubebuilder:validation:Required
 	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
 }
@@ -154,7 +169,7 @@ type BucketInventoryStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketInventory is the Schema for the BucketInventorys API
+// BucketInventory is the Schema for the BucketInventorys API. Provides a S3 bucket inventory configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

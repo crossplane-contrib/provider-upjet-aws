@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ManagedPrefixList is the Schema for the ManagedPrefixLists API
+        description: ManagedPrefixList is the Schema for the ManagedPrefixLists API.
+          Provides a managed prefix list resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,11 +65,16 @@ spec:
               forProvider:
                 properties:
                   addressFamily:
+                    description: Address family  of this prefix list.
                     type: string
                   entry:
+                    description: Configuration block for prefix list entry. Detailed
+                      below. Different entries may have overlapping CIDR blocks, but
+                      a particular CIDR should not be duplicated.
                     items:
                       properties:
                         cidr:
+                          description: CIDR block of this entry.
                           type: string
                         cidrRef:
                           description: A Reference to a named object.
@@ -147,12 +153,19 @@ spec:
                               type: object
                           type: object
                         description:
+                          description: Description of this entry. Due to API limitations,
+                            updating only the description of an existing entry requires
+                            temporarily removing and re-adding the entry.
                           type: string
                       type: object
                     type: array
                   maxEntries:
+                    description: Maximum number of entries that this prefix list can
+                      contain.
                     type: number
                   name:
+                    description: Name of this resource. The name must not start with
+                      com.amazonaws.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -161,6 +174,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Map of tags to assign to this resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - addressFamily
@@ -345,16 +361,22 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: ARN of the prefix list.
                     type: string
                   id:
+                    description: ID of the prefix list.
                     type: string
                   ownerId:
+                    description: ID of the AWS account that owns this prefix list.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                   version:
+                    description: Latest version of this prefix list.
                     type: number
                 type: object
               conditions:

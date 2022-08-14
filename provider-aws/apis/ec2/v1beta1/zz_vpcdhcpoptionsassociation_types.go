@@ -14,11 +14,14 @@ import (
 )
 
 type VPCDHCPOptionsAssociationObservation struct {
+
+	// The ID of the DHCP Options Set Association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type VPCDHCPOptionsAssociationParameters struct {
 
+	// The ID of the DHCP Options Set to associate to the VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPCDHCPOptions
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -35,6 +38,7 @@ type VPCDHCPOptionsAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the VPC to which we would like to associate a DHCP Options Set.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -60,7 +64,7 @@ type VPCDHCPOptionsAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VPCDHCPOptionsAssociation is the Schema for the VPCDHCPOptionsAssociations API
+// VPCDHCPOptionsAssociation is the Schema for the VPCDHCPOptionsAssociations API. Provides a VPC DHCP Options Association resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

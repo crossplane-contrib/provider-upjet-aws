@@ -37,25 +37,34 @@ type SignatureValidityPeriodParameters struct {
 }
 
 type SigningProfileObservation struct {
+
+	// The Amazon Resource Name  for the signing profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A human-readable name for the signing platform associated with the signing profile.
 	PlatformDisplayName *string `json:"platformDisplayName,omitempty" tf:"platform_display_name,omitempty"`
 
+	// Revocation information for a signing profile.
 	RevocationRecord []RevocationRecordObservation `json:"revocationRecord,omitempty" tf:"revocation_record,omitempty"`
 
+	// The status of the target signing profile.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// The current version of the signing profile.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
+	// The signing profile ARN, including the profile version.
 	VersionArn *string `json:"versionArn,omitempty" tf:"version_arn,omitempty"`
 }
 
 type SigningProfileParameters struct {
 
+	// The ID of the platform that is used by the target signing profile.
 	// +kubebuilder:validation:Required
 	PlatformID *string `json:"platformId" tf:"platform_id,omitempty"`
 
@@ -64,9 +73,11 @@ type SigningProfileParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The validity period for a signing job.
 	// +kubebuilder:validation:Optional
 	SignatureValidityPeriod []SignatureValidityPeriodParameters `json:"signatureValidityPeriod,omitempty" tf:"signature_validity_period,omitempty"`
 
+	// A list of tags associated with the signing profile. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -85,7 +96,7 @@ type SigningProfileStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SigningProfile is the Schema for the SigningProfiles API
+// SigningProfile is the Schema for the SigningProfiles API. Creates a Signer Signing Profile.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

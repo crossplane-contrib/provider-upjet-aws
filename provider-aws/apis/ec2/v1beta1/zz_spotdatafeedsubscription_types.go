@@ -19,9 +19,11 @@ type SpotDatafeedSubscriptionObservation struct {
 
 type SpotDatafeedSubscriptionParameters struct {
 
+	// The Amazon S3 bucket in which to store the Spot instance data feed.
 	// +kubebuilder:validation:Required
 	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 
+	// Path of folder inside bucket to place spot pricing data.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -45,7 +47,7 @@ type SpotDatafeedSubscriptionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SpotDatafeedSubscription is the Schema for the SpotDatafeedSubscriptions API
+// SpotDatafeedSubscription is the Schema for the SpotDatafeedSubscriptions API. Provides a Spot Datafeed Subscription resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,32 +14,44 @@ import (
 )
 
 type ServiceLinkedRoleObservation struct {
+
+	// The Amazon Resource Name  specifying the role.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The creation date of the IAM role.
 	CreateDate *string `json:"createDate,omitempty" tf:"create_date,omitempty"`
 
+	// The Amazon Resource Name  of the role.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the role.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The path of the role.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// The stable and unique string identifying the role.
 	UniqueID *string `json:"uniqueId,omitempty" tf:"unique_id,omitempty"`
 }
 
 type ServiceLinkedRoleParameters struct {
 
+	// The AWS service to which this role is attached. You use a string similar to a URL but without the http:// in front. For example: elasticbeanstalk.amazonaws.com. To find the full list of services that support service-linked roles, check the docs.
 	// +kubebuilder:validation:Required
 	AwsServiceName *string `json:"awsServiceName" tf:"aws_service_name,omitempty"`
 
+	// Additional string appended to the role name. Not all AWS services support custom suffixes.
 	// +kubebuilder:validation:Optional
 	CustomSuffix *string `json:"customSuffix,omitempty" tf:"custom_suffix,omitempty"`
 
+	// The description of the role.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Key-value mapping of tags for the IAM role. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -58,7 +70,7 @@ type ServiceLinkedRoleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ServiceLinkedRole is the Schema for the ServiceLinkedRoles API
+// ServiceLinkedRole is the Schema for the ServiceLinkedRoles API. Provides an IAM service-linked role.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

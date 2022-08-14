@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Configuration is the Schema for the Configurations API
+        description: Configuration is the Schema for the Configurations API. Provides
+          an MQ configuration Resource
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,16 +65,26 @@ spec:
               forProvider:
                 properties:
                   authenticationStrategy:
+                    description: Authentication strategy associated with the configuration.
+                      Valid values are simple and ldap. ldap is not supported for
+                      engine_type RabbitMQ.
                     type: string
                   data:
+                    description: Broker configuration in XML format. See official
+                      docs for supported parameters and format of the XML.
                     type: string
                   description:
+                    description: Description of the configuration.
                     type: string
                   engineType:
+                    description: Type of broker engine. Valid values are ActiveMQ
+                      and RabbitMQ.
                     type: string
                   engineVersion:
+                    description: Version of the broker engine.
                     type: string
                   name:
+                    description: Name of the configuration.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -82,6 +93,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - data
@@ -267,14 +281,20 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: ARN of the configuration.
                     type: string
                   id:
+                    description: Unique ID that Amazon MQ generates for the configuration.
                     type: string
                   latestRevision:
+                    description: Latest revision of the configuration.
                     type: number
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

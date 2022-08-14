@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: BucketMetric is the Schema for the BucketMetrics API
+        description: BucketMetric is the Schema for the BucketMetrics API. Provides
+          a S3 bucket metrics configuration resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the bucket to put metric configuration.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -139,17 +141,23 @@ spec:
                         type: object
                     type: object
                   filter:
+                    description: Object filtering that accepts a prefix, tags, or
+                      a logical AND of prefix and tags .
                     items:
                       properties:
                         prefix:
+                          description: Object prefix for filtering .
                           type: string
                         tags:
                           additionalProperties:
                             type: string
+                          description: Object tags for filtering .
                           type: object
                       type: object
                     type: array
                   name:
+                    description: Unique identifier of the metrics configuration for
+                      the bucket.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

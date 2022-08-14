@@ -14,33 +14,46 @@ import (
 )
 
 type EBSSnapshotObservation struct {
+
+	// Amazon Resource Name  of the EBS Snapshot.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The data encryption key identifier for the snapshot.
 	DataEncryptionKeyID *string `json:"dataEncryptionKeyId,omitempty" tf:"data_encryption_key_id,omitempty"`
 
+	// Whether the snapshot is encrypted.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
+	// The snapshot ID .
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ARN for the KMS encryption key.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// Value from an Amazon-maintained list  of snapshot owners.
 	OwnerAlias *string `json:"ownerAlias,omitempty" tf:"owner_alias,omitempty"`
 
+	// The AWS account ID of the EBS snapshot owner.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// The size of the drive in GiBs.
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 }
 
 type EBSSnapshotParameters struct {
 
+	// A description of what the snapshot is.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The Amazon Resource Name  of the Outpost on which to create a local snapshot.
 	// +kubebuilder:validation:Optional
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
+	// Indicates whether to permanently restore an archived snapshot.
 	// +kubebuilder:validation:Optional
 	PermanentRestore *bool `json:"permanentRestore,omitempty" tf:"permanent_restore,omitempty"`
 
@@ -49,15 +62,19 @@ type EBSSnapshotParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The name of the storage tier. Valid values are archive and standard. Default value is standard.
 	// +kubebuilder:validation:Optional
 	StorageTier *string `json:"storageTier,omitempty" tf:"storage_tier,omitempty"`
 
+	// A map of tags to assign to the snapshot. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Specifies the number of days for which to temporarily restore an archived snapshot. Required for temporary restores only. The snapshot will be automatically re-archived after this period.
 	// +kubebuilder:validation:Optional
 	TemporaryRestoreDays *float64 `json:"temporaryRestoreDays,omitempty" tf:"temporary_restore_days,omitempty"`
 
+	// The Volume ID of which to make a snapshot.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.EBSVolume
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -84,7 +101,7 @@ type EBSSnapshotStatus struct {
 
 // +kubebuilder:object:root=true
 
-// EBSSnapshot is the Schema for the EBSSnapshots API
+// EBSSnapshot is the Schema for the EBSSnapshots API. Provides an elastic block storage snapshot resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

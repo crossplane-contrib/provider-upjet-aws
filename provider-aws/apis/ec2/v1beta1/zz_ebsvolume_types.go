@@ -14,24 +14,32 @@ import (
 )
 
 type EBSVolumeObservation struct {
+
+	// The volume ARN .
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The volume ID .
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type EBSVolumeParameters struct {
 
+	// The AZ where the EBS volume will exist.
 	// +kubebuilder:validation:Required
 	AvailabilityZone *string `json:"availabilityZone" tf:"availability_zone,omitempty"`
 
+	// If true, the disk will be encrypted.
 	// +kubebuilder:validation:Optional
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
+	// The amount of IOPS to provision for the disk. Only valid for type of io1, io2 or gp3.
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
+	// The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true. Note: Terraform must be running with credentials which have the GenerateDataKeyWithoutPlaintext permission on the specified KMS key as required by the EBS KMS CMK volume provisioning process to prevent a volume from being created and almost immediately deleted.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -42,9 +50,11 @@ type EBSVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
+	// Specifies whether to enable Amazon EBS Multi-Attach. Multi-Attach is supported on io1 and io2 volumes.
 	// +kubebuilder:validation:Optional
 	MultiAttachEnabled *bool `json:"multiAttachEnabled,omitempty" tf:"multi_attach_enabled,omitempty"`
 
+	// The Amazon Resource Name  of the Outpost.
 	// +kubebuilder:validation:Optional
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
@@ -53,18 +63,23 @@ type EBSVolumeParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The size of the drive in GiBs.
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// A snapshot to base the EBS volume off of.
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The throughput that the volume supports, in MiB/s. Only valid for type of gp3.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
+	// The type of EBS volume. Can be standard, gp2, gp3, io1, io2, sc1 or st1 .
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -83,7 +98,7 @@ type EBSVolumeStatus struct {
 
 // +kubebuilder:object:root=true
 
-// EBSVolume is the Schema for the EBSVolumes API
+// EBSVolume is the Schema for the EBSVolumes API. Provides an elastic block storage resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

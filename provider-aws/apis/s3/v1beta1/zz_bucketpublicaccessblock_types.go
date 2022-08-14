@@ -14,17 +14,22 @@ import (
 )
 
 type BucketPublicAccessBlockObservation struct {
+
+	// Name of the S3 bucket the configuration is attached to
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type BucketPublicAccessBlockParameters struct {
 
+	// Whether Amazon S3 should block public ACLs for this bucket. Defaults to false. Enabling this setting does not affect existing policies or ACLs. When set to true causes the following behavior:
 	// +kubebuilder:validation:Optional
 	BlockPublicAcls *bool `json:"blockPublicAcls,omitempty" tf:"block_public_acls,omitempty"`
 
+	// Whether Amazon S3 should block public bucket policies for this bucket. Defaults to false. Enabling this setting does not affect the existing bucket policy. When set to true causes Amazon S3 to:
 	// +kubebuilder:validation:Optional
 	BlockPublicPolicy *bool `json:"blockPublicPolicy,omitempty" tf:"block_public_policy,omitempty"`
 
+	// S3 Bucket to which this Public Access Block configuration should be applied.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -36,6 +41,7 @@ type BucketPublicAccessBlockParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// Whether Amazon S3 should ignore public ACLs for this bucket. Defaults to false. Enabling this setting does not affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set. When set to true causes Amazon S3 to:
 	// +kubebuilder:validation:Optional
 	IgnorePublicAcls *bool `json:"ignorePublicAcls,omitempty" tf:"ignore_public_acls,omitempty"`
 
@@ -44,6 +50,7 @@ type BucketPublicAccessBlockParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Whether Amazon S3 should restrict public bucket policies for this bucket. Defaults to false. Enabling this setting does not affect the previously stored bucket policy, except that public and cross-account access within the public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true:
 	// +kubebuilder:validation:Optional
 	RestrictPublicBuckets *bool `json:"restrictPublicBuckets,omitempty" tf:"restrict_public_buckets,omitempty"`
 }
@@ -62,7 +69,7 @@ type BucketPublicAccessBlockStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketPublicAccessBlock is the Schema for the BucketPublicAccessBlocks API
+// BucketPublicAccessBlock is the Schema for the BucketPublicAccessBlocks API. Manages S3 bucket-level Public Access Block Configuration
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

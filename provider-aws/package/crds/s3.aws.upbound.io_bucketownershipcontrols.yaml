@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketOwnershipControls is the Schema for the BucketOwnershipControlss
-          API
+          API. Manages S3 Bucket Ownership Controls.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,8 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the bucket that you want to associate
+                      this access point with.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -145,9 +147,13 @@ spec:
                       be created in.
                     type: string
                   rule:
+                    description: Configuration block with Ownership Controls rules.
+                      Detailed below.
                     items:
                       properties:
                         objectOwnership:
+                          description: 'Object ownership. Valid values: BucketOwnerPreferred,
+                            ObjectWriter or BucketOwnerEnforced'
                           type: string
                       required:
                       - objectOwnership
@@ -335,6 +341,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: S3 Bucket name.
                     type: string
                 type: object
               conditions:

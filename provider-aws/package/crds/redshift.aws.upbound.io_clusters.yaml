@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Cluster is the Schema for the Clusters API
+        description: Cluster is the Schema for the Clusters API. Provides a Redshift
+          Cluster resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,18 +65,28 @@ spec:
               forProvider:
                 properties:
                   allowVersionUpgrade:
+                    description: If true , major version upgrades can be applied during
+                      the maintenance window to the Amazon Redshift engine that is
+                      running on the cluster. Default is true
                     type: boolean
                   automatedSnapshotRetentionPeriod:
                     type: number
                   availabilityZone:
                     type: string
                   availabilityZoneRelocationEnabled:
+                    description: If true, the cluster can be relocated to another
+                      availabity zone, either automatically by AWS or when requested.
+                      Default is false. Available for use on clusters from the RA3
+                      instance family.
                     type: boolean
                   clusterParameterGroupName:
                     type: string
                   clusterPublicKey:
+                    description: The public key for the cluster
                     type: string
                   clusterRevisionNumber:
+                    description: The specific revision number of the database in the
+                      cluster
                     type: string
                   clusterSecurityGroups:
                     items:
@@ -90,14 +101,20 @@ spec:
                   databaseName:
                     type: string
                   elasticIp:
+                    description: The Elastic IP  address for the cluster.
                     type: string
                   encrypted:
                     type: boolean
                   endpoint:
+                    description: The connection endpoint
                     type: string
                   enhancedVpcRouting:
+                    description: If true , enhanced VPC routing is enabled.
                     type: boolean
                   finalSnapshotIdentifier:
+                    description: The identifier of the final snapshot that is to be
+                      created immediately before deleting the cluster. If this parameter
+                      is provided, skip_final_snapshot must be false.
                     type: string
                   iamRoleRefs:
                     items:
@@ -175,10 +192,14 @@ spec:
                         type: object
                     type: object
                   iamRoles:
+                    description: A list of IAM Role ARNs to associate with the cluster.
+                      A Maximum of 10 can be associated to the cluster at any time.
                     items:
                       type: string
                     type: array
                   kmsKeyId:
+                    description: The ARN for the KMS encryption key. When specifying
+                      kms_key_id, encrypted needs to be set to true.
                     type: string
                   kmsKeyIdRef:
                     description: A Reference to a named object.
@@ -254,21 +275,33 @@ spec:
                         type: object
                     type: object
                   logging:
+                    description: Logging, documented below.
                     items:
                       properties:
                         bucketName:
+                          description: The name of an existing S3 bucket where the
+                            log files are to be stored. Must be in the same region
+                            as the cluster and the cluster must have read bucket and
+                            put object permissions. For more information on the permissions
+                            required for the bucket, please read the AWS documentation
                           type: string
                         enable:
+                          description: Enables logging information such as queries
+                            and connection attempts, for the specified Amazon Redshift
+                            cluster.
                           type: boolean
                         s3KeyPrefix:
+                          description: The prefix applied to the log file names.
                           type: string
                       required:
                       - enable
                       type: object
                     type: array
                   masterPasswordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: Password for the master DB user. Note that this may
+                      show up in logs, and it will be stored in the state file. Password
+                      must contain at least 8 chars and contain at least one uppercase
+                      letter, one lowercase letter, and one number.
                     properties:
                       key:
                         description: The key to select.
@@ -285,45 +318,76 @@ spec:
                     - namespace
                     type: object
                   masterUsername:
+                    description: Username for the master DB user.
                     type: string
                   nodeType:
                     type: string
                   numberOfNodes:
+                    description: The number of compute nodes in the cluster. This
+                      parameter is required when the ClusterType parameter is specified
+                      as multi-node. Default is 1.
                     type: number
                   ownerAccount:
+                    description: The AWS customer account used to create or copy the
+                      snapshot. Required if you are restoring a snapshot you do not
+                      own, optional if you own the snapshot.
                     type: string
                   port:
                     type: number
                   preferredMaintenanceWindow:
                     type: string
                   publiclyAccessible:
+                    description: If true, the cluster can be accessed from a public
+                      network. Default is true.
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   skipFinalSnapshot:
+                    description: Determines whether a final snapshot of the cluster
+                      is created before Amazon Redshift deletes the cluster. If true
+                      , a final cluster snapshot is not created. If false , a final
+                      cluster snapshot is created before the cluster is deleted. Default
+                      is false.
                     type: boolean
                   snapshotClusterIdentifier:
+                    description: The name of the cluster the source snapshot was created
+                      from.
                     type: string
                   snapshotCopy:
+                    description: Configuration of automatic copy of snapshots from
+                      one region to another. Documented below.
                     items:
                       properties:
                         destinationRegion:
+                          description: The destination region that you want to copy
+                            snapshots to.
                           type: string
                         grantName:
+                          description: The name of the snapshot copy grant to use
+                            when snapshots of an AWS KMS-encrypted cluster are copied
+                            to the destination region.
                           type: string
                         retentionPeriod:
+                          description: The number of days to retain automated snapshots
+                            in the destination region after they are copied from the
+                            source region. Defaults to 7.
                           type: number
                       required:
                       - destinationRegion
                       type: object
                     type: array
                   snapshotIdentifier:
+                    description: The name of the snapshot from which to create the
+                      new cluster.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                   vpcSecurityGroupIdRefs:
                     items:
@@ -585,25 +649,37 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of cluster
                     type: string
                   clusterNodes:
+                    description: The nodes in the cluster. Cluster node blocks are
+                      documented below
                     items:
                       properties:
                         nodeRole:
+                          description: Whether the node is a leader node or a compute
+                            node
                           type: string
                         privateIpAddress:
+                          description: The private IP address of a node within a cluster
                           type: string
                         publicIpAddress:
+                          description: The public IP address of a node within a cluster
                           type: string
                       type: object
                     type: array
                   dnsName:
+                    description: The DNS name of the cluster
                     type: string
                   id:
+                    description: The Redshift Cluster ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

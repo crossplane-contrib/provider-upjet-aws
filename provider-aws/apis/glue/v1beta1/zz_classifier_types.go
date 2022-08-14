@@ -14,17 +14,22 @@ import (
 )
 
 type ClassifierObservation struct {
+
+	// Name of the classifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ClassifierParameters struct {
 
+	// A classifier for Csv content. Defined below.
 	// +kubebuilder:validation:Optional
 	CsvClassifier []CsvClassifierParameters `json:"csvClassifier,omitempty" tf:"csv_classifier,omitempty"`
 
+	// –  A classifier that uses grok patterns. Defined below.
 	// +kubebuilder:validation:Optional
 	GrokClassifier []GrokClassifierParameters `json:"grokClassifier,omitempty" tf:"grok_classifier,omitempty"`
 
+	// –  A classifier for JSON content. Defined below.
 	// +kubebuilder:validation:Optional
 	JSONClassifier []JSONClassifierParameters `json:"jsonClassifier,omitempty" tf:"json_classifier,omitempty"`
 
@@ -33,6 +38,7 @@ type ClassifierParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// –  A classifier for XML content. Defined below.
 	// +kubebuilder:validation:Optional
 	XMLClassifier []XMLClassifierParameters `json:"xmlClassifier,omitempty" tf:"xml_classifier,omitempty"`
 }
@@ -42,21 +48,27 @@ type CsvClassifierObservation struct {
 
 type CsvClassifierParameters struct {
 
+	// Enables the processing of files that contain only one column.
 	// +kubebuilder:validation:Optional
 	AllowSingleColumn *bool `json:"allowSingleColumn,omitempty" tf:"allow_single_column,omitempty"`
 
+	// Indicates whether the CSV file contains a header. This can be one of "ABSENT", "PRESENT", or "UNKNOWN".
 	// +kubebuilder:validation:Optional
 	ContainsHeader *string `json:"containsHeader,omitempty" tf:"contains_header,omitempty"`
 
+	// The delimiter used in the Csv to separate columns.
 	// +kubebuilder:validation:Optional
 	Delimiter *string `json:"delimiter,omitempty" tf:"delimiter,omitempty"`
 
+	// Specifies whether to trim column values.
 	// +kubebuilder:validation:Optional
 	DisableValueTrimming *bool `json:"disableValueTrimming,omitempty" tf:"disable_value_trimming,omitempty"`
 
+	// A list of strings representing column names.
 	// +kubebuilder:validation:Optional
 	Header []*string `json:"header,omitempty" tf:"header,omitempty"`
 
+	// A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
 	// +kubebuilder:validation:Optional
 	QuoteSymbol *string `json:"quoteSymbol,omitempty" tf:"quote_symbol,omitempty"`
 }
@@ -69,9 +81,11 @@ type GrokClassifierParameters struct {
 	// +kubebuilder:validation:Required
 	Classification *string `json:"classification" tf:"classification,omitempty"`
 
+	// Custom grok patterns used by this classifier.
 	// +kubebuilder:validation:Optional
 	CustomPatterns *string `json:"customPatterns,omitempty" tf:"custom_patterns,omitempty"`
 
+	// The grok pattern used by this classifier.
 	// +kubebuilder:validation:Required
 	GrokPattern *string `json:"grokPattern" tf:"grok_pattern,omitempty"`
 }
@@ -81,6 +95,7 @@ type JSONClassifierObservation struct {
 
 type JSONClassifierParameters struct {
 
+	// A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
 	// +kubebuilder:validation:Required
 	JSONPath *string `json:"jsonPath" tf:"json_path,omitempty"`
 }
@@ -93,6 +108,7 @@ type XMLClassifierParameters struct {
 	// +kubebuilder:validation:Required
 	Classification *string `json:"classification" tf:"classification,omitempty"`
 
+	// The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element . An empty row element that contains only attributes can be parsed as long as it ends with a closing tag .
 	// +kubebuilder:validation:Required
 	RowTag *string `json:"rowTag" tf:"row_tag,omitempty"`
 }
@@ -111,7 +127,7 @@ type ClassifierStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Classifier is the Schema for the Classifiers API
+// Classifier is the Schema for the Classifiers API. Provides an Glue Classifier resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

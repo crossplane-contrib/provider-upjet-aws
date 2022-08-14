@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: SpotDatafeedSubscription is the Schema for the SpotDatafeedSubscriptions
-          API
+          API. Provides a Spot Datafeed Subscription resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,12 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The Amazon S3 bucket in which to store the Spot instance
+                      data feed.
                     type: string
                   prefix:
+                    description: Path of folder inside bucket to place spot pricing
+                      data.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

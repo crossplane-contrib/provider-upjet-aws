@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Deployment is the Schema for the Deployments API
+        description: Deployment is the Schema for the Deployments API. Manages an
+          Amazon API Gateway Version 2 deployment.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiId:
+                    description: The API identifier.
                     type: string
                   apiIdRef:
                     description: A Reference to a named object.
@@ -139,6 +141,8 @@ spec:
                         type: object
                     type: object
                   description:
+                    description: The description for the deployment resource. Must
+                      be less than or equal to 1024 characters in length.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -324,8 +328,10 @@ spec:
               atProvider:
                 properties:
                   autoDeployed:
+                    description: Whether the deployment was automatically released.
                     type: boolean
                   id:
+                    description: The deployment identifier.
                     type: string
                 type: object
               conditions:

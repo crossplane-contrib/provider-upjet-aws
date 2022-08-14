@@ -14,17 +14,23 @@ import (
 )
 
 type TopicObservation struct {
+
+	// The ARN of the SNS topic, as a more obvious property
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ARN of the SNS topic
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The AWS Account ID of the SNS topic owner
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type TopicParameters struct {
 
+	// IAM role for failure feedback
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -36,6 +42,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationFailureFeedbackRoleArnSelector *v1.Selector `json:"applicationFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
+	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -47,21 +54,27 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationSuccessFeedbackRoleArnSelector *v1.Selector `json:"applicationSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
+	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
 	ApplicationSuccessFeedbackSampleRate *float64 `json:"applicationSuccessFeedbackSampleRate,omitempty" tf:"application_success_feedback_sample_rate,omitempty"`
 
+	// Enables content-based deduplication for FIFO topics. For more information, see the related documentation
 	// +kubebuilder:validation:Optional
 	ContentBasedDeduplication *bool `json:"contentBasedDeduplication,omitempty" tf:"content_based_deduplication,omitempty"`
 
+	// The SNS delivery policy. More on AWS documentation
 	// +kubebuilder:validation:Optional
 	DeliveryPolicy *string `json:"deliveryPolicy,omitempty" tf:"delivery_policy,omitempty"`
 
+	// The display name for the topic
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// Boolean indicating whether or not to create a FIFO  topic .
 	// +kubebuilder:validation:Optional
 	FifoTopic *bool `json:"fifoTopic,omitempty" tf:"fifo_topic,omitempty"`
 
+	// IAM role for failure feedback
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -73,6 +86,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	FirehoseFailureFeedbackRoleArnSelector *v1.Selector `json:"firehoseFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
+	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -84,9 +98,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	FirehoseSuccessFeedbackRoleArnSelector *v1.Selector `json:"firehoseSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
+	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
 	FirehoseSuccessFeedbackSampleRate *float64 `json:"firehoseSuccessFeedbackSampleRate,omitempty" tf:"firehose_success_feedback_sample_rate,omitempty"`
 
+	// IAM role for failure feedback
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -98,6 +114,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPFailureFeedbackRoleArnSelector *v1.Selector `json:"httpFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
+	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -109,12 +126,15 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPSuccessFeedbackRoleArnSelector *v1.Selector `json:"httpSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
+	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
 	HTTPSuccessFeedbackSampleRate *float64 `json:"httpSuccessFeedbackSampleRate,omitempty" tf:"http_success_feedback_sample_rate,omitempty"`
 
+	// The ID of an AWS-managed customer master key  for Amazon SNS or a custom CMK. For more information, see Key Terms
 	// +kubebuilder:validation:Optional
 	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
 
+	// IAM role for failure feedback
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -126,6 +146,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	LambdaFailureFeedbackRoleArnSelector *v1.Selector `json:"lambdaFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
+	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -137,15 +158,19 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	LambdaSuccessFeedbackRoleArnSelector *v1.Selector `json:"lambdaSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
+	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
 	LambdaSuccessFeedbackSampleRate *float64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
 
+	// The name of the topic. Topic names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long. For a FIFO  topic, the name must end with the .fifo suffix. If omitted, Terraform will assign a random, unique name. Conflicts with name_prefix
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Creates a unique name beginning with the specified prefix. Conflicts with name
 	// +kubebuilder:validation:Optional
 	NamePrefix *string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty"`
 
+	// The fully-formed AWS policy as JSON. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
@@ -154,6 +179,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// IAM role for failure feedback
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -165,6 +191,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	SqsFailureFeedbackRoleArnSelector *v1.Selector `json:"sqsFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
+	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -176,9 +203,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	SqsSuccessFeedbackRoleArnSelector *v1.Selector `json:"sqsSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
+	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
 	SqsSuccessFeedbackSampleRate *float64 `json:"sqsSuccessFeedbackSampleRate,omitempty" tf:"sqs_success_feedback_sample_rate,omitempty"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -197,7 +226,7 @@ type TopicStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Topic is the Schema for the Topics API
+// Topic is the Schema for the Topics API. Provides an SNS topic resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

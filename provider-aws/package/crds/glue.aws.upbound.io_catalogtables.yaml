@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: CatalogTable is the Schema for the CatalogTables API
+        description: CatalogTable is the Schema for the CatalogTables API. Provides
+          a Glue Catalog Table.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -141,19 +142,25 @@ spec:
                         type: object
                     type: object
                   description:
+                    description: Description of the table.
                     type: string
                   owner:
+                    description: Owner of the table.
                     type: string
                   parameters:
                     additionalProperties:
                       type: string
                     type: object
                   partitionIndex:
+                    description: Configuration block for a maximum of 3 partition
+                      indexes. See partition_index below.
                     items:
                       properties:
                         indexName:
+                          description: Name of the partition index.
                           type: string
                         keys:
+                          description: Keys for the partition index.
                           items:
                             type: string
                           type: array
@@ -163,6 +170,9 @@ spec:
                       type: object
                     type: array
                   partitionKeys:
+                    description: Configuration block of columns by which the table
+                      is partitioned. Only primitive types are supported as partition
+                      keys. See partition_keys below.
                     items:
                       properties:
                         comment:
@@ -180,15 +190,23 @@ spec:
                       be created in.
                     type: string
                   retention:
+                    description: Retention time for this table.
                     type: number
                   storageDescriptor:
+                    description: Configuration block for information about the physical
+                      storage of this table. For more information, refer to the Glue
+                      Developer Guide. See storage_descriptor below.
                     items:
                       properties:
                         bucketColumns:
+                          description: List of reducer grouping columns, clustering
+                            columns, and bucketing columns in the table.
                           items:
                             type: string
                           type: array
                         columns:
+                          description: Configuration block for columns in the table.
+                            See columns below.
                           items:
                             properties:
                               comment:
@@ -206,42 +224,73 @@ spec:
                             type: object
                           type: array
                         compressed:
+                          description: Whether the data in the table is compressed.
                           type: boolean
                         inputFormat:
+                          description: 'Input format: SequenceFileInputFormat , or
+                            TextInputFormat, or a custom format.'
                           type: string
                         location:
+                          description: Physical location of the table. By default
+                            this takes the form of the warehouse location, followed
+                            by the database location in the warehouse, followed by
+                            the table name.
                           type: string
                         numberOfBuckets:
+                          description: Must be specified if the table contains any
+                            dimension columns.
                           type: number
                         outputFormat:
+                          description: 'Output format: SequenceFileOutputFormat ,
+                            or IgnoreKeyTextOutputFormat, or a custom format.'
                           type: string
                         parameters:
                           additionalProperties:
                             type: string
                           type: object
                         schemaReference:
+                          description: Object that references a schema stored in the
+                            AWS Glue Schema Registry. When creating a table, you can
+                            pass an empty list of columns for the schema, and instead
+                            use a schema reference. See Schema Reference below.
                           items:
                             properties:
                               schemaId:
+                                description: Configuration block that contains schema
+                                  identity fields. Either this or the schema_version_id
+                                  has to be provided. See schema_id below.
                                 items:
                                   properties:
                                     registryName:
+                                      description: Name of the schema registry that
+                                        contains the schema. Must be provided when
+                                        schema_name is specified and conflicts with
+                                        schema_arn.
                                       type: string
                                     schemaArn:
+                                      description: ARN of the schema. One of schema_arn
+                                        or schema_name has to be provided.
                                       type: string
                                     schemaName:
+                                      description: Name of the schema. One of schema_arn
+                                        or schema_name has to be provided.
                                       type: string
                                   type: object
                                 type: array
                               schemaVersionId:
+                                description: Unique ID assigned to a version of the
+                                  schema. Either this or the schema_id has to be provided.
                                 type: string
                               schemaVersionNumber:
+                                description: Version number of the schema.
                                 type: number
                             required:
                             - schemaVersionNumber
                             type: object
                           type: array
                         serDeInfo:
+                          description: Configuration block for serialization and deserialization  information.
+                            See ser_de_info below.
                           items:
                             properties:
                               name:
@@ -251,32 +300,48 @@ spec:
                                   type: string
                                 type: object
                               serializationLibrary:
+                                description: Usually the class that implements the
+                                  SerDe. An example is org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.
                                 type: string
                             type: object
                           type: array
                         skewedInfo:
+                          description: Configuration block with information about
+                            values that appear very frequently in a column . See skewed_info
+                            below.
                           items:
                             properties:
                               skewedColumnNames:
+                                description: List of names of columns that contain
+                                  skewed values.
                                 items:
                                   type: string
                                 type: array
                               skewedColumnValueLocationMaps:
                                 additionalProperties:
                                   type: string
+                                description: List of values that appear so frequently
+                                  as to be considered skewed.
                                 type: object
                               skewedColumnValues:
+                                description: Map of skewed values to the columns that
+                                  contain them.
                                 items:
                                   type: string
                                 type: array
                             type: object
                           type: array
                         sortColumns:
+                          description: Configuration block for the sort order of each
+                            bucket in the table. See sort_columns below.
                           items:
                             properties:
                               column:
+                                description: Name of the column.
                                 type: string
                               sortOrder:
+                                description: Whether the column is sorted in ascending  or
+                                  descending order .
                                 type: number
                             required:
                             - column
@@ -284,12 +349,18 @@ spec:
                             type: object
                           type: array
                         storedAsSubDirectories:
+                          description: Whether the table data is stored in subdirectories.
                           type: boolean
                       type: object
                     type: array
                   tableType:
+                    description: Type of this table . While optional, some Athena
+                      DDL queries such as ALTER TABLE and SHOW CREATE TABLE will fail
+                      if this argument is empty.
                     type: string
                   targetTable:
+                    description: Configuration block of a target table for resource
+                      linking. See target_table below.
                     items:
                       properties:
                         catalogId:
@@ -305,8 +376,12 @@ spec:
                       type: object
                     type: array
                   viewExpandedText:
+                    description: If the table is a view, the expanded text of the
+                      view; otherwise null.
                     type: string
                   viewOriginalText:
+                    description: If the table is a view, the original text of the
+                      view; otherwise null.
                     type: string
                 required:
                 - catalogId
@@ -489,10 +564,14 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the Glue Table.
                     type: string
                   id:
+                    description: Catalog ID, Database name and of the name table.
                     type: string
                   partitionIndex:
+                    description: Configuration block for a maximum of 3 partition
+                      indexes. See partition_index below.
                     items:
                       properties:
                         indexStatus:

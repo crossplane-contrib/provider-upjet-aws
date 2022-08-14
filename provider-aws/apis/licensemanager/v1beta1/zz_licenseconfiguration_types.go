@@ -14,32 +14,43 @@ import (
 )
 
 type LicenseConfigurationObservation struct {
+
+	// The license configuration ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The license configuration ARN.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Account ID of the owner of the license configuration.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type LicenseConfigurationParameters struct {
 
+	// Description of the license configuration.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Number of licenses managed by the license configuration.
 	// +kubebuilder:validation:Optional
 	LicenseCount *float64 `json:"licenseCount,omitempty" tf:"license_count,omitempty"`
 
+	// Sets the number of available licenses as a hard limit.
 	// +kubebuilder:validation:Optional
 	LicenseCountHardLimit *bool `json:"licenseCountHardLimit,omitempty" tf:"license_count_hard_limit,omitempty"`
 
+	// Dimension to use to track license inventory. Specify either vCPU, Instance, Core or Socket.
 	// +kubebuilder:validation:Required
 	LicenseCountingType *string `json:"licenseCountingType" tf:"license_counting_type,omitempty"`
 
+	// Array of configured License Manager rules.
 	// +kubebuilder:validation:Optional
 	LicenseRules []*string `json:"licenseRules,omitempty" tf:"license_rules,omitempty"`
 
+	// Name of the license configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -48,6 +59,7 @@ type LicenseConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -66,7 +78,7 @@ type LicenseConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// LicenseConfiguration is the Schema for the LicenseConfigurations API
+// LicenseConfiguration is the Schema for the LicenseConfigurations API. Provides a License Manager license configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

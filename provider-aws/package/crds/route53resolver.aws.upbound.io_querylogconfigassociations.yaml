@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: QueryLogConfigAssociation is the Schema for the QueryLogConfigAssociations
-          API
+          API. Provides a Route 53 Resolver query logging configuration association
+          resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -70,6 +71,8 @@ spec:
                       be created in.
                     type: string
                   resolverQueryLogConfigId:
+                    description: The ID of the Route 53 Resolver query logging configuration
+                      that you want to associate a VPC with.
                     type: string
                   resolverQueryLogConfigIdRef:
                     description: A Reference to a named object.
@@ -145,6 +148,8 @@ spec:
                         type: object
                     type: object
                   resourceId:
+                    description: The ID of a VPC that you want this query logging
+                      configuration to log queries for.
                     type: string
                   resourceIdRef:
                     description: A Reference to a named object.
@@ -400,6 +405,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: he ID of the Route 53 Resolver query logging configuration
+                      association.
                     type: string
                 type: object
               conditions:

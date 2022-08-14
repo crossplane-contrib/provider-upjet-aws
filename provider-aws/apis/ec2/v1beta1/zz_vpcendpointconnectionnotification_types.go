@@ -14,18 +14,24 @@ import (
 )
 
 type VPCEndpointConnectionNotificationObservation struct {
+
+	// The ID of the VPC connection notification.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The type of notification.
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
+	// The state of the notification.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
 type VPCEndpointConnectionNotificationParameters struct {
 
+	// One or more endpoint events for which to receive notifications.
 	// +kubebuilder:validation:Required
 	ConnectionEvents []*string `json:"connectionEvents" tf:"connection_events,omitempty"`
 
+	// The ARN of the SNS topic for the notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -42,9 +48,11 @@ type VPCEndpointConnectionNotificationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the VPC Endpoint to receive notifications for.
 	// +kubebuilder:validation:Optional
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
+	// The ID of the VPC Endpoint Service to receive notifications for.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -71,7 +79,7 @@ type VPCEndpointConnectionNotificationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VPCEndpointConnectionNotification is the Schema for the VPCEndpointConnectionNotifications API
+// VPCEndpointConnectionNotification is the Schema for the VPCEndpointConnectionNotifications API. Provides a VPC Endpoint connection notification resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

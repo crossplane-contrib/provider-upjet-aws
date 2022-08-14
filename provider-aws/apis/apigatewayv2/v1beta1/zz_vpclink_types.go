@@ -14,15 +14,20 @@ import (
 )
 
 type VPCLinkObservation struct {
+
+	// The VPC Link ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The VPC Link identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type VPCLinkParameters struct {
 
+	// The name of the VPC Link. Must be between 1 and 128 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -37,6 +42,7 @@ type VPCLinkParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
+	// Security group IDs for the VPC Link.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -49,12 +55,14 @@ type VPCLinkParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// Subnet IDs for the VPC Link.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// A map of tags to assign to the VPC Link. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -73,7 +81,7 @@ type VPCLinkStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VPCLink is the Schema for the VPCLinks API
+// VPCLink is the Schema for the VPCLinks API. Manages an Amazon API Gateway Version 2 VPC Link.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

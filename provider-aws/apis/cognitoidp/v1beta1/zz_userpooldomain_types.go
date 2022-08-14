@@ -14,19 +14,25 @@ import (
 )
 
 type UserPoolDomainObservation struct {
+
+	// The AWS account ID for the user pool owner.
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
+	// The URL of the CloudFront distribution. This is required to generate the ALIAS aws_route53_record
 	CloudfrontDistributionArn *string `json:"cloudfrontDistributionArn,omitempty" tf:"cloudfront_distribution_arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The S3 bucket where the static files for this domain are stored.
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
+	// The app version.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type UserPoolDomainParameters struct {
 
+	// The ARN of an ISSUED ACM certificate in us-east-1 for a custom domain.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/acm/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -38,6 +44,7 @@ type UserPoolDomainParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
+	// For custom domains, this is the fully-qualified domain name, such as auth.example.com. For Amazon Cognito prefix domains, this is the prefix alone, such as auth.
 	// +kubebuilder:validation:Required
 	Domain *string `json:"domain" tf:"domain,omitempty"`
 
@@ -46,6 +53,7 @@ type UserPoolDomainParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The user pool ID.
 	// +crossplane:generate:reference:type=UserPool
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
@@ -71,7 +79,7 @@ type UserPoolDomainStatus struct {
 
 // +kubebuilder:object:root=true
 
-// UserPoolDomain is the Schema for the UserPoolDomains API
+// UserPoolDomain is the Schema for the UserPoolDomains API. Provides a Cognito User Pool Domain resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

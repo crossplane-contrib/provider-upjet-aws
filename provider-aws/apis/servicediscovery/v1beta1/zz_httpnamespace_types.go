@@ -14,18 +14,24 @@ import (
 )
 
 type HTTPNamespaceObservation struct {
+
+	// The ARN that Amazon Route 53 assigns to the namespace when you create it.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ID of a namespace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type HTTPNamespaceParameters struct {
 
+	// The description that you specify for the namespace when you create it.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The name of the http namespace.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -34,6 +40,7 @@ type HTTPNamespaceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of tags to assign to the namespace. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -52,7 +59,7 @@ type HTTPNamespaceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// HTTPNamespace is the Schema for the HTTPNamespaces API
+// HTTPNamespace is the Schema for the HTTPNamespaces API. Provides a Service Discovery HTTP Namespace resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

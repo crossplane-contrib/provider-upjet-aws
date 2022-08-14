@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: GroupMembership is the Schema for the GroupMemberships API
+        description: GroupMembership is the Schema for the GroupMemberships API. Provides
+          a top level resource to manage IAM Group membership for IAM Users.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

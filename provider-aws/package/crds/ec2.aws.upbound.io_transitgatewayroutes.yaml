@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: TransitGatewayRoute is the Schema for the TransitGatewayRoutes
-          API
+          API. Manages an EC2 Transit Gateway Route
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,14 +65,19 @@ spec:
               forProvider:
                 properties:
                   blackhole:
+                    description: Indicates whether to drop traffic that matches this
+                      route .
                     type: boolean
                   destinationCidrBlock:
+                    description: IPv4 or IPv6 RFC1924 CIDR used for destination matches.
+                      Routing decisions are based on the most specific match.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   transitGatewayAttachmentId:
+                    description: Identifier of EC2 Transit Gateway Attachment .
                     type: string
                   transitGatewayAttachmentIdRef:
                     description: A Reference to a named object.
@@ -148,6 +153,7 @@ spec:
                         type: object
                     type: object
                   transitGatewayRouteTableId:
+                    description: Identifier of EC2 Transit Gateway Route Table.
                     type: string
                   transitGatewayRouteTableIdRef:
                     description: A Reference to a named object.
@@ -403,6 +409,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: EC2 Transit Gateway Route Table identifier combined
+                      with destination
                     type: string
                 type: object
               conditions:

@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Service is the Schema for the Services API
+        description: Service is the Schema for the Services API. Provides an ECS service.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,13 +64,25 @@ spec:
               forProvider:
                 properties:
                   capacityProviderStrategy:
+                    description: Capacity provider strategies to use for the service.
+                      Can be one or more. These can be updated without destroying
+                      and recreating the service only if force_new_deployment = true
+                      and not changing from 0 capacity_provider_strategy blocks to
+                      greater than 0, or vice versa. See below.
                     items:
                       properties:
                         base:
+                          description: Number of tasks, at a minimum, to run on the
+                            specified capacity provider. Only one capacity provider
+                            in a capacity provider strategy can have a base defined.
                           type: number
                         capacityProvider:
+                          description: Short name of the capacity provider.
                           type: string
                         weight:
+                          description: Relative percentage of the total number of
+                            launched tasks that should use the specified capacity
+                            provider.
                           type: number
                       required:
                       - capacityProvider
@@ -152,11 +164,19 @@ spec:
                         type: object
                     type: object
                   deploymentCircuitBreaker:
+                    description: Configuration block for deployment circuit breaker.
+                      See below.
                     items:
                       properties:
                         enable:
+                          description: Whether to enable the deployment circuit breaker
+                            logic for the service.
                           type: boolean
                         rollback:
+                          description: Whether to enable Amazon ECS to roll back the
+                            service if a service deployment fails. If rollback is
+                            enabled, when a service deployment fails, the service
+                            is rolled back to the last deployment that completed successfully.
                           type: boolean
                       required:
                       - enable
@@ -164,6 +184,8 @@ spec:
                       type: object
                     type: array
                   deploymentController:
+                    description: Configuration block for deployment controller configuration.
+                      See below.
                     items:
                       properties:
                         type:
@@ -171,18 +193,36 @@ spec:
                       type: object
                     type: array
                   deploymentMaximumPercent:
+                    description: Upper limit  of the number of running tasks that
+                      can be running in a service during a deployment. Not valid when
+                      using the DAEMON scheduling strategy.
                     type: number
                   deploymentMinimumHealthyPercent:
+                    description: Lower limit  of the number of running tasks that
+                      must remain running and healthy in a service during a deployment.
                     type: number
                   desiredCount:
                     type: number
                   enableEcsManagedTags:
+                    description: Specifies whether to enable Amazon ECS managed tags
+                      for the tasks within the service.
                     type: boolean
                   enableExecuteCommand:
+                    description: Specifies whether to enable Amazon ECS Exec for the
+                      tasks within the service.
                     type: boolean
                   forceNewDeployment:
+                    description: Enable to force a new task deployment of the service.
+                      This can be used to update tasks to use a newer Docker image
+                      with same image/tag combination , roll Fargate tasks onto a
+                      newer platform version, or immediately deploy ordered_placement_strategy
+                      and placement_constraints updates.
                     type: boolean
                   healthCheckGracePeriodSeconds:
+                    description: Seconds to ignore failing load balancer health checks
+                      on newly instantiated tasks to prevent premature shutdown, up
+                      to 2147483647. Only valid for services configured to use load
+                      balancers.
                     type: number
                   iamRole:
                     type: string
@@ -260,8 +300,11 @@ spec:
                         type: object
                     type: object
                   launchType:
+                    description: Launch type on which to run your service. The valid
+                      values are EC2, FARGATE, and EXTERNAL. Defaults to EC2.
                     type: string
                   loadBalancer:
+                    description: Configuration block for load balancers. See below.
                     items:
                       properties:
                         containerName:
@@ -269,8 +312,11 @@ spec:
                         containerPort:
                           type: number
                         elbName:
+                          description: Name of the ELB  to associate with the service.
                           type: string
                         targetGroupArn:
+                          description: ARN of the Load Balancer target group to associate
+                            with the service.
                           type: string
                       required:
                       - containerName
@@ -278,9 +324,15 @@ spec:
                       type: object
                     type: array
                   networkConfiguration:
+                    description: Network configuration for the service. This parameter
+                      is required for task definitions that use the awsvpc network
+                      mode to receive their own Elastic Network Interface, and it
+                      is not supported for other network modes. See below.
                     items:
                       properties:
                         assignPublicIp:
+                          description: Assign a public IP address to the ENI . Valid
+                            values are true or false. Default false.
                           type: boolean
                         securityGroupRefs:
                           items:
@@ -362,6 +414,9 @@ spec:
                               type: object
                           type: object
                         securityGroups:
+                          description: Security groups associated with the task or
+                            service. If you do not specify a security group, the default
+                            security group for the VPC is used.
                           items:
                             type: string
                           type: array
@@ -445,15 +500,28 @@ spec:
                               type: object
                           type: object
                         subnets:
+                          description: Subnets associated with the task or service.
                           items:
                             type: string
                           type: array
                       type: object
                     type: array
                   orderedPlacementStrategy:
+                    description: Service level strategy rules that are taken into
+                      consideration during task placement. List from top to bottom
+                      in order of precedence. Updates to this configuration will take
+                      effect next task deployment unless force_new_deployment is enabled.
+                      The maximum number of ordered_placement_strategy blocks is 5.
+                      See below.
                     items:
                       properties:
                         field:
+                          description: For the spread placement strategy, valid values
+                            are instanceId , or any platform or custom attribute that
+                            is applied to a container instance. For the binpack type,
+                            valid values are memory and cpu. For the random type,
+                            this attribute is not needed. For more information, see
+                            Placement Strategy.
                           type: string
                         type:
                           type: string
@@ -462,9 +530,18 @@ spec:
                       type: object
                     type: array
                   placementConstraints:
+                    description: Rules that are taken into consideration during task
+                      placement. Updates to this configuration will take effect next
+                      task deployment unless force_new_deployment is enabled. Maximum
+                      number of placement_constraints is 10. See below.
                     items:
                       properties:
                         expression:
+                          description: Cluster Query Language expression to apply
+                            to the constraint. Does not need to be specified for the
+                            distinctInstance type. For more information, see Cluster
+                            Query Language in the Amazon EC2 Container Service Developer
+                            Guide.
                           type: string
                         type:
                           type: string
@@ -473,16 +550,28 @@ spec:
                       type: object
                     type: array
                   platformVersion:
+                    description: Platform version on which to run your service. Only
+                      applicable for launch_type set to FARGATE. Defaults to LATEST.
+                      More information about Fargate platform versions can be found
+                      in the AWS ECS User Guide.
                     type: string
                   propagateTags:
+                    description: Specifies whether to propagate the tags from the
+                      task definition or the service to the tasks. The valid values
+                      are SERVICE and TASK_DEFINITION.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   schedulingStrategy:
+                    description: Scheduling strategy to use for the service. The valid
+                      values are REPLICA and DAEMON. Defaults to REPLICA. Note that
+                      Tasks using the Fargate launch type or the .
                     type: string
                   serviceRegistries:
+                    description: Service discovery registries for the service. The
+                      maximum number of service_registries blocks is 1. See below.
                     items:
                       properties:
                         containerName:
@@ -490,8 +579,13 @@ spec:
                         containerPort:
                           type: number
                         port:
+                          description: Port value used if your Service Discovery service
+                            specified an SRV record.
                           type: number
                         registryArn:
+                          description: ARN of the Service Registry. The currently
+                            supported service registry is Amazon Route 53 Auto Naming
+                            Service. For more information, see Service
                           type: string
                       required:
                       - registryArn
@@ -500,10 +594,19 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                   taskDefinition:
+                    description: Family and revision  or full ARN of the task definition
+                      that you want to run in your service. Required unless using
+                      the EXTERNAL deployment controller. If a revision is not specified,
+                      the latest ACTIVE revision is used.
                     type: string
                   waitForSteadyState:
+                    description: If true, Terraform will wait for the service to reach
+                      a steady state  before continuing. Default false.
                     type: boolean
                 required:
                 - region
@@ -685,10 +788,14 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: ARN that identifies the service.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

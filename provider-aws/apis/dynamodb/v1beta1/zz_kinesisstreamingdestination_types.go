@@ -14,6 +14,8 @@ import (
 )
 
 type KinesisStreamingDestinationObservation struct {
+
+	// The table_name and stream_arn separated by a comma .
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -24,6 +26,7 @@ type KinesisStreamingDestinationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ARN for a Kinesis data stream. This must exist in the same account and region as the DynamoDB table.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1.Stream
 	// +kubebuilder:validation:Optional
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
@@ -34,6 +37,8 @@ type KinesisStreamingDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 
+	// The name of the DynamoDB table. There
+	// can only be one Kinesis streaming destination for a given DynamoDB table.
 	// +crossplane:generate:reference:type=Table
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
@@ -59,7 +64,7 @@ type KinesisStreamingDestinationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// KinesisStreamingDestination is the Schema for the KinesisStreamingDestinations API
+// KinesisStreamingDestination is the Schema for the KinesisStreamingDestinations API. Enables a Kinesis streaming destination for a DynamoDB table
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

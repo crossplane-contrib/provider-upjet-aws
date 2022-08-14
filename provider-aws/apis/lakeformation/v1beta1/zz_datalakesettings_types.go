@@ -43,15 +43,19 @@ type DataLakeSettingsObservation struct {
 
 type DataLakeSettingsParameters struct {
 
+	// –  Set of ARNs of AWS Lake Formation principals .
 	// +kubebuilder:validation:Optional
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
 
+	// –  Identifier for the Data Catalog. By default, the account ID.
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
+	// Up to three configuration blocks of principal permissions for default create database permissions. Detailed below.
 	// +kubebuilder:validation:Optional
 	CreateDatabaseDefaultPermissions []CreateDatabaseDefaultPermissionsParameters `json:"createDatabaseDefaultPermissions,omitempty" tf:"create_database_default_permissions,omitempty"`
 
+	// Up to three configuration blocks of principal permissions for default create table permissions. Detailed below.
 	// +kubebuilder:validation:Optional
 	CreateTableDefaultPermissions []CreateTableDefaultPermissionsParameters `json:"createTableDefaultPermissions,omitempty" tf:"create_table_default_permissions,omitempty"`
 
@@ -60,6 +64,7 @@ type DataLakeSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// wning account IDs that the caller's account can use to share their user access details .
 	// +kubebuilder:validation:Optional
 	TrustedResourceOwners []*string `json:"trustedResourceOwners,omitempty" tf:"trusted_resource_owners,omitempty"`
 }
@@ -78,7 +83,7 @@ type DataLakeSettingsStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DataLakeSettings is the Schema for the DataLakeSettingss API
+// DataLakeSettings is the Schema for the DataLakeSettingss API. Manages data lake administrators and default database and table permissions
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

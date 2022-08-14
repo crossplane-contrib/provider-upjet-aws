@@ -14,25 +14,35 @@ import (
 )
 
 type MountTargetObservation struct {
+
+	// The unique and consistent identifier of the Availability Zone  that the mount target resides in.
 	AvailabilityZoneID *string `json:"availabilityZoneId,omitempty" tf:"availability_zone_id,omitempty"`
 
+	// The name of the Availability Zone  that the mount target resides in.
 	AvailabilityZoneName *string `json:"availabilityZoneName,omitempty" tf:"availability_zone_name,omitempty"`
 
+	// The DNS name for the EFS file system.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
+	// Amazon Resource Name of the file system.
 	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
 
+	// The ID of the mount target.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The DNS name for the given subnet/AZ per documented convention.
 	MountTargetDNSName *string `json:"mountTargetDnsName,omitempty" tf:"mount_target_dns_name,omitempty"`
 
+	// The ID of the network interface that Amazon EFS created when it created the mount target.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
+	// AWS account ID that owns the resource.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 }
 
 type MountTargetParameters struct {
 
+	// The ID of the file system for which the mount target is intended.
 	// +crossplane:generate:reference:type=FileSystem
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
@@ -43,6 +53,8 @@ type MountTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
+	// The address  at
+	// which the file system may be mounted via the mount target.
 	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
@@ -51,9 +63,11 @@ type MountTargetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A list of up to 5 VPC security group IDs  in effect for the mount target.
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
+	// The ID of the subnet to add the mount target in.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -79,7 +93,7 @@ type MountTargetStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MountTarget is the Schema for the MountTargets API
+// MountTarget is the Schema for the MountTargets API. Provides an Elastic File System (EFS) mount target.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

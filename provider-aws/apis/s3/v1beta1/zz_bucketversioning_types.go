@@ -14,11 +14,14 @@ import (
 )
 
 type BucketVersioningObservation struct {
+
+	// The bucket or bucket and expected_bucket_owner separated by a comma  if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type BucketVersioningParameters struct {
 
+	// The name of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,9 +33,11 @@ type BucketVersioningParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// The account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
+	// The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
 	// +kubebuilder:validation:Optional
 	Mfa *string `json:"mfa,omitempty" tf:"mfa,omitempty"`
 
@@ -41,6 +46,7 @@ type BucketVersioningParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Configuration block for the versioning parameters detailed below.
 	// +kubebuilder:validation:Required
 	VersioningConfiguration []VersioningConfigurationParameters `json:"versioningConfiguration" tf:"versioning_configuration,omitempty"`
 }
@@ -50,9 +56,11 @@ type VersioningConfigurationObservation struct {
 
 type VersioningConfigurationParameters struct {
 
+	// Specifies whether MFA delete is enabled in the bucket versioning configuration. Valid values: Enabled or Disabled.
 	// +kubebuilder:validation:Optional
 	MfaDelete *string `json:"mfaDelete,omitempty" tf:"mfa_delete,omitempty"`
 
+	// The versioning state of the bucket. Valid values: Enabled, Suspended, or Disabled. Disabled should only be used when creating or importing resources that correspond to unversioned S3 buckets.
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 }
@@ -71,7 +79,7 @@ type BucketVersioningStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketVersioning is the Schema for the BucketVersionings API
+// BucketVersioning is the Schema for the BucketVersionings API. Provides an S3 bucket versioning resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

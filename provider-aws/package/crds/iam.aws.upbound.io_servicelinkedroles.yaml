@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ServiceLinkedRole is the Schema for the ServiceLinkedRoles API
+        description: ServiceLinkedRole is the Schema for the ServiceLinkedRoles API.
+          Provides an IAM service-linked role.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,14 +65,25 @@ spec:
               forProvider:
                 properties:
                   awsServiceName:
+                    description: 'The AWS service to which this role is attached.
+                      You use a string similar to a URL but without the http:// in
+                      front. For example: elasticbeanstalk.amazonaws.com. To find
+                      the full list of services that support service-linked roles,
+                      check the docs.'
                     type: string
                   customSuffix:
+                    description: Additional string appended to the role name. Not
+                      all AWS services support custom suffixes.
                     type: string
                   description:
+                    description: The description of the role.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value mapping of tags for the IAM role. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - awsServiceName
@@ -253,20 +265,29 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  specifying the role.
                     type: string
                   createDate:
+                    description: The creation date of the IAM role.
                     type: string
                   id:
+                    description: The Amazon Resource Name  of the role.
                     type: string
                   name:
+                    description: The name of the role.
                     type: string
                   path:
+                    description: The path of the role.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   uniqueId:
+                    description: The stable and unique string identifying the role.
                     type: string
                 type: object
               conditions:

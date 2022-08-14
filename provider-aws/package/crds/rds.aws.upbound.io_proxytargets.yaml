@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ProxyTarget is the Schema for the ProxyTargets API
+        description: ProxyTarget is the Schema for the ProxyTargets API. Provides
+          an RDS DB proxy target resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,10 @@ spec:
               forProvider:
                 properties:
                   dbClusterIdentifier:
+                    description: DB cluster identifier.
                     type: string
                   dbInstanceIdentifier:
+                    description: DB instance identifier.
                     type: string
                   dbInstanceIdentifierRef:
                     description: A Reference to a named object.
@@ -141,6 +144,7 @@ spec:
                         type: object
                     type: object
                   dbProxyName:
+                    description: The name of the DB proxy.
                     type: string
                   dbProxyNameRef:
                     description: A Reference to a named object.
@@ -220,6 +224,7 @@ spec:
                       be created in.
                     type: string
                   targetGroupName:
+                    description: The name of the target group.
                     type: string
                 required:
                 - region
@@ -402,18 +407,33 @@ spec:
               atProvider:
                 properties:
                   endpoint:
+                    description: Hostname for the target RDS DB Instance. Only returned
+                      for RDS_INSTANCE type.
                     type: string
                   id:
+                    description: Identifier of  db_proxy_name, target_group_name,
+                      target type , and resource identifier separated by forward slashes
+                      .
                     type: string
                   port:
+                    description: Port for the target RDS DB Instance or Aurora DB
+                      Cluster.
                     type: number
                   rdsResourceId:
+                    description: Identifier representing the DB Instance or DB Cluster
+                      target.
                     type: string
                   targetArn:
+                    description: Amazon Resource Name  for the DB instance or DB cluster.
+                      Currently not returned by the RDS API.
                     type: string
                   trackedClusterId:
+                    description: DB Cluster identifier for the DB Instance target.
+                      Not returned unless manually importing an RDS_INSTANCE target
+                      that is part of a DB Cluster.
                     type: string
                   type:
+                    description: Type of targetE.g., RDS_INSTANCE or TRACKED_CLUSTER
                     type: string
                 type: object
               conditions:

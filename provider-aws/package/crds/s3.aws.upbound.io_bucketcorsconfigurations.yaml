@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketCorsConfiguration is the Schema for the BucketCorsConfigurations
-          API
+          API. Provides an S3 bucket CORS configuration resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the bucket.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -141,27 +142,41 @@ spec:
                         type: object
                     type: object
                   corsRule:
+                    description: Set of origins and methods  documented below. You
+                      can configure up to 100 rules.
                     items:
                       properties:
                         allowedHeaders:
+                          description: Set of Headers that are specified in the Access-Control-Request-Headers
+                            header.
                           items:
                             type: string
                           type: array
                         allowedMethods:
+                          description: Set of HTTP methods that you allow the origin
+                            to execute. Valid values are GET, PUT, HEAD, POST, and
+                            DELETE.
                           items:
                             type: string
                           type: array
                         allowedOrigins:
+                          description: Set of origins you want customers to be able
+                            to access the bucket from.
                           items:
                             type: string
                           type: array
                         exposeHeaders:
+                          description: Set of headers in the response that you want
+                            customers to be able to access from their applications
+                            .
                           items:
                             type: string
                           type: array
                         id:
                           type: string
                         maxAgeSeconds:
+                          description: The time in seconds that your browser is to
+                            cache the preflight response for the specified resource.
                           type: number
                       required:
                       - allowedMethods
@@ -169,6 +184,7 @@ spec:
                       type: object
                     type: array
                   expectedBucketOwner:
+                    description: The account ID of the expected bucket owner.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

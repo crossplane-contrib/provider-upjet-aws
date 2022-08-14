@@ -14,6 +14,8 @@ import (
 )
 
 type VPCEndpointRouteTableAssociationObservation struct {
+
+	// A hash of the EC2 Route Table and VPC Endpoint identifiers.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -24,6 +26,7 @@ type VPCEndpointRouteTableAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Identifier of the EC2 Route Table to be associated with the VPC Endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.RouteTable
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -35,6 +38,7 @@ type VPCEndpointRouteTableAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
+	// Identifier of the VPC Endpoint with which the EC2 Route Table will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPCEndpoint
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -61,7 +65,7 @@ type VPCEndpointRouteTableAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VPCEndpointRouteTableAssociation is the Schema for the VPCEndpointRouteTableAssociations API
+// VPCEndpointRouteTableAssociation is the Schema for the VPCEndpointRouteTableAssociations API. Manages a VPC Endpoint Route Table Association
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

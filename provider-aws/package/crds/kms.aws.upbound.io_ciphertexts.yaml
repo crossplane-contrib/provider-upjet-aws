@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Ciphertext is the Schema for the Ciphertexts API
+        description: Ciphertext is the Schema for the Ciphertexts API. Provides ciphertext
+          encrypted using a KMS key
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +67,11 @@ spec:
                   context:
                     additionalProperties:
                       type: string
+                    description: An optional mapping that makes up the encryption
+                      context.
                     type: object
                   keyId:
+                    description: Globally unique key ID for the customer master key.
                     type: string
                   keyIdRef:
                     description: A Reference to a named object.
@@ -143,8 +147,8 @@ spec:
                         type: object
                     type: object
                   plaintextSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: Data to be encrypted. Note that this may show up
+                      in logs, and it will be stored in the state file.
                     properties:
                       key:
                         description: The key to select.
@@ -345,6 +349,7 @@ spec:
               atProvider:
                 properties:
                   ciphertextBlob:
+                    description: Base64 encoded ciphertext
                     type: string
                   id:
                     type: string

@@ -35,7 +35,10 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Function is the Schema for the Functions API
+        description: Function is the Schema for the Functions API. Provides a Lambda
+          Function resource. Lambda allows you to trigger execution of code in response
+          to events in AWS, enabling serverless backend solutions. The Lambda Function
+          itself includes source code and runtime configuration.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,39 +67,66 @@ spec:
               forProvider:
                 properties:
                   architectures:
+                    description: Instruction set architecture for your Lambda function.
+                      Valid values are ["x86_64"] and ["arm64"]. Default is ["x86_64"].
+                      Removing this attribute, function's architecture stay the same.
                     items:
                       type: string
                     type: array
                   codeSigningConfigArn:
+                    description: To enable code signing for this function, specify
+                      the ARN of a code-signing configuration. A code-signing configuration
+                      includes a set of signing profiles, which define the trusted
+                      publishers for this function.
                     type: string
                   deadLetterConfig:
+                    description: Configuration block. Detailed below.
                     items:
                       properties:
                         targetArn:
+                          description: ARN of an SNS topic or SQS queue to notify
+                            when an invocation fails. If this option is used, the
+                            function's IAM role must be granted suitable access to
+                            write to the target object, which means allowing either
+                            the sns:Publish or sqs:SendMessage action on this ARN,
+                            depending on which service is targeted.
                           type: string
                       required:
                       - targetArn
                       type: object
                     type: array
                   description:
+                    description: Description of what your Lambda Function does.
                     type: string
                   environment:
+                    description: Configuration block. Detailed below.
                     items:
                       properties:
                         variables:
                           additionalProperties:
                             type: string
+                          description: Map of environment variables that are accessible
+                            from the function code during execution.
                           type: object
                       type: object
                     type: array
                   ephemeralStorage:
+                    description: The amount of Ephemeral storage to allocate for the
+                      Lambda Function in MB. This parameter is used to expand the
+                      total amount of Ephemeral storage available, beyond the default
+                      amount of 512MB. Detailed below.
                     items:
                       properties:
                         size:
+                          description: The size of the Lambda function Ephemeral storage
+                            represented in MB. The minimum supported ephemeral_storage
+                            value defaults to 512MB and the maximum supported value
+                            is 10240MB.
                           type: number
                       type: object
                     type: array
                   fileSystemConfig:
+                    description: Configuration block. Detailed below.
                     items:
                       properties:
                         arn:
@@ -178,31 +208,49 @@ spec:
                               type: object
                           type: object
                         localMountPath:
+                          description: Path where the function can access the file
+                            system, starting with /mnt/.
                           type: string
                       required:
                       - localMountPath
                       type: object
                     type: array
                   handler:
+                    description: Function entrypoint in your code.
                     type: string
                   imageConfig:
+                    description: Configuration block. Detailed below.
                     items:
                       properties:
                         command:
+                          description: Parameters that you want to pass in with entry_point.
                           items:
                             type: string
                           type: array
                         entryPoint:
+                          description: Entry point to your application, which is typically
+                            the location of the runtime executable.
                           items:
                             type: string
                           type: array
                         workingDirectory:
+                          description: Working directory.
                           type: string
                       type: object
                     type: array
                   imageUri:
+                    description: ECR image URI containing the function's deployment
+                      package. Conflicts with filename, s3_bucket, s3_key, and s3_object_version.
                     type: string
                   kmsKeyArn:
+                    description: Amazon Resource Name  of the AWS Key Management Service  key
+                      that is used to encrypt environment variables. If this configuration
+                      is not provided when environment variables are in use, AWS Lambda
+                      uses a default service key. If this configuration is provided
+                      when environment variables are not in use, the AWS Lambda API
+                      does not save this configuration and Terraform will show a perpetual
+                      difference of adding the key. To fix the perpetual difference,
+                      remove this configuration.
                     type: string
                   kmsKeyArnRef:
                     description: A Reference to a named object.
@@ -278,22 +326,37 @@ spec:
                         type: object
                     type: object
                   layers:
+                    description: List of Lambda Layer Version ARNs  to attach to your
+                      Lambda Function. See Lambda Layers
                     items:
                       type: string
                     type: array
                   memorySize:
+                    description: Amount of memory in MB your Lambda Function can use
+                      at runtime. Defaults to 128. See Limits
                     type: number
                   packageType:
+                    description: Lambda deployment package type. Valid values are
+                      Zip and Image. Defaults to Zip.
                     type: string
                   publish:
+                    description: Whether to publish creation/change as new Lambda
+                      Function Version. Defaults to false.
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   reservedConcurrentExecutions:
+                    description: Amount of reserved concurrent executions for this
+                      lambda function. A value of 0 disables lambda from being triggered
+                      and -1 removes any concurrency limitations. Defaults to Unreserved
+                      Concurrency Limits -1. See Managing Concurrency
                     type: number
                   role:
+                    description: Amazon Resource Name  of the function's execution
+                      role. The role provides the function's identity and access to
+                      AWS services and resources.
                     type: string
                   roleRef:
                     description: A Reference to a named object.
@@ -369,8 +432,14 @@ spec:
                         type: object
                     type: object
                   runtime:
+                    description: Identifier of the function's runtime. See Runtimes
+                      for valid values.
                     type: string
                   s3Bucket:
+                    description: S3 bucket location containing the function's deployment
+                      package. Conflicts with filename and image_uri. This bucket
+                      must reside in the same AWS region where you are creating the
+                      Lambda function.
                     type: string
                   s3BucketRef:
                     description: A Reference to a named object.
@@ -446,34 +515,62 @@ spec:
                         type: object
                     type: object
                   s3Key:
+                    description: S3 key of an object containing the function's deployment
+                      package. Conflicts with filename and image_uri.
                     type: string
                   s3ObjectVersion:
+                    description: Object version containing the function's deployment
+                      package. Conflicts with filename and image_uri.
                     type: string
                   sourceCodeHash:
+                    description: Used to trigger updates. Must be set to a base64-encoded
+                      SHA256 hash of the package file specified with either filename
+                      or s3_key. The usual way to set this is filebase64sha256  or
+                      base64sha256(file) , where "file.zip" is the local filename
+                      of the lambda function source archive.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: Map of tags to assign to the object. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                   timeout:
+                    description: Amount of time your Lambda Function has to run in
+                      seconds. Defaults to 3. See Limits.
                     type: number
                   tracingConfig:
+                    description: Configuration block. Detailed below.
                     items:
                       properties:
                         mode:
+                          description: Whether to to sample and trace a subset of
+                            incoming requests with AWS X-Ray. Valid values are PassThrough
+                            and Active. If PassThrough, Lambda will only trace the
+                            request from an upstream service if it contains a tracing
+                            header with "sampled=1". If Active, Lambda will respect
+                            any tracing header it receives from an upstream service.
+                            If no tracing header is received, Lambda will call X-Ray
+                            for a tracing decision.
                           type: string
                       required:
                       - mode
                       type: object
                     type: array
                   vpcConfig:
+                    description: Configuration block. Detailed below.
                     items:
                       properties:
                         securityGroupIds:
+                          description: List of security group IDs associated with
+                            the Lambda function.
                           items:
                             type: string
                           type: array
                         subnetIds:
+                          description: List of subnet IDs associated with the Lambda
+                            function.
                           items:
                             type: string
                           type: array
@@ -666,24 +763,36 @@ spec:
                   id:
                     type: string
                   invokeArn:
+                    description: ARN to be used for invoking Lambda Function from
+                      API Gateway - to be used in aws_api_gateway_integration's uri.
                     type: string
                   lastModified:
+                    description: Date this resource was last modified.
                     type: string
                   qualifiedArn:
+                    description: ARN identifying your Lambda Function Version .
                     type: string
                   signingJobArn:
+                    description: ARN of the signing job.
                     type: string
                   signingProfileVersionArn:
+                    description: ARN of the signing profile version.
                     type: string
                   sourceCodeSize:
+                    description: Size in bytes of the function .zip file.
                     type: number
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   version:
+                    description: Latest published version of your Lambda Function.
                     type: string
                   vpcConfig:
+                    description: Configuration block. Detailed below.
                     items:
                       properties:
                         vpcId:

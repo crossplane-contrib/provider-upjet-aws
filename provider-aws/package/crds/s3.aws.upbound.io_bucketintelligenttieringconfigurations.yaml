@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketIntelligentTieringConfiguration is the Schema for the BucketIntelligentTieringConfigurations
-          API
+          API. Provides an S3 Intelligent-Tiering configuration resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,8 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the bucket this intelligent tiering configuration
+                      is associated with.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -141,30 +143,47 @@ spec:
                         type: object
                     type: object
                   filter:
+                    description: A bucket filter. The configuration only includes
+                      objects that meet the filter's criteria .
                     items:
                       properties:
                         prefix:
+                          description: An object key name prefix that identifies the
+                            subset of objects to which the configuration applies.
                           type: string
                         tags:
                           additionalProperties:
                             type: string
+                          description: All of these tags must exist in the object's
+                            tag set in order for the configuration to apply.
                           type: object
                       type: object
                     type: array
                   name:
+                    description: The unique name used to identify the S3 Intelligent-Tiering
+                      configuration for the bucket.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   status:
+                    description: 'Specifies the status of the configuration. Valid
+                      values: Enabled, Disabled.'
                     type: string
                   tiering:
+                    description: The S3 Intelligent-Tiering storage class tiers of
+                      the configuration .
                     items:
                       properties:
                         accessTier:
+                          description: 'S3 Intelligent-Tiering access tier. Valid
+                            values: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.'
                           type: string
                         days:
+                          description: The number of consecutive days of no access
+                            after which an object will be eligible to be transitioned
+                            to the corresponding tier.
                           type: number
                       required:
                       - accessTier

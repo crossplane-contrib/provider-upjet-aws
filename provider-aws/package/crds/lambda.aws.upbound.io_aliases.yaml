@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Alias is the Schema for the Aliass API
+        description: Alias is the Schema for the Aliass API. Creates a Lambda function
+          alias.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,10 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: Description of the alias.
                     type: string
                   functionName:
+                    description: Lambda Function name or ARN.
                     type: string
                   functionNameRef:
                     description: A Reference to a named object.
@@ -141,19 +144,27 @@ spec:
                         type: object
                     type: object
                   functionVersion:
+                    description: 'Lambda function version for which you are creating
+                      the alias. Pattern: .'
                     type: string
                   name:
+                    description: 'Name for the alias you are creating. Pattern:'
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   routingConfig:
+                    description: The Lambda alias' route configuration settings. Fields
+                      documented below
                     items:
                       properties:
                         additionalVersionWeights:
                           additionalProperties:
                             type: number
+                          description: A map that defines the proportion of events
+                            that should be sent to different versions of a lambda
+                            function.
                           type: object
                       type: object
                     type: array
@@ -339,10 +350,14 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  identifying your Lambda
+                      function alias.
                     type: string
                   id:
                     type: string
                   invokeArn:
+                    description: The ARN to be used for invoking Lambda Function from
+                      API Gateway - to be used in aws_api_gateway_integration's uri
                     type: string
                 type: object
               conditions:

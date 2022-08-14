@@ -14,6 +14,8 @@ import (
 )
 
 type RegionSettingsObservation struct {
+
+	// The AWS region.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -24,9 +26,11 @@ type RegionSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of services along with the management preferences for the Region.
 	// +kubebuilder:validation:Optional
 	ResourceTypeManagementPreference map[string]*bool `json:"resourceTypeManagementPreference,omitempty" tf:"resource_type_management_preference,omitempty"`
 
+	// A map of services along with the opt-in preferences for the Region.
 	// +kubebuilder:validation:Required
 	ResourceTypeOptInPreference map[string]*bool `json:"resourceTypeOptInPreference" tf:"resource_type_opt_in_preference,omitempty"`
 }
@@ -45,7 +49,7 @@ type RegionSettingsStatus struct {
 
 // +kubebuilder:object:root=true
 
-// RegionSettings is the Schema for the RegionSettingss API
+// RegionSettings is the Schema for the RegionSettingss API. Provides an AWS Backup Region Settings resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

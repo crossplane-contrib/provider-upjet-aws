@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Cluster is the Schema for the Clusters API
+        description: Cluster is the Schema for the Clusters API. Manages an RDS Aurora
+          Cluster
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,34 +65,61 @@ spec:
               forProvider:
                 properties:
                   allocatedStorage:
+                    description: The amount of storage in gibibytes  to allocate to
+                      each DB instance in the Multi-AZ DB cluster. .
                     type: number
                   allowMajorVersionUpgrade:
+                    description: Enable to allow major engine version upgrades when
+                      changing engine versions. Defaults to false.
                     type: boolean
                   applyImmediately:
+                    description: Specifies whether any cluster modifications are applied
+                      immediately, or during the next maintenance window. Default
+                      is false. See Amazon RDS Documentation for more information.
                     type: boolean
                   availabilityZones:
                     items:
                       type: string
                     type: array
                   backtrackWindow:
+                    description: The target backtrack window, in seconds. Only available
+                      for aurora and aurora-mysql engines currently. To disable backtracking,
+                      set this value to 0. Defaults to 0. Must be between 0 and 259200
                     type: number
                   backupRetentionPeriod:
                     type: number
                   clusterMembers:
+                    description: – List of RDS Instances that are a part of this cluster
                     items:
                       type: string
                     type: array
                   copyTagsToSnapshot:
+                    description: –  Copy all Cluster tags to snapshots. Default is
+                      false.
                     type: boolean
                   databaseName:
                     type: string
                   dbClusterInstanceClass:
+                    description: The compute and memory capacity of each DB instance
+                      in the Multi-AZ DB cluster, for example db.m6g.xlarge. Not all
+                      DB instance classes are available in all AWS Regions, or for
+                      all database engines. For the full list of DB instance classes
+                      and availability for your engine, see DB instance class in the
+                      Amazon RDS User Guide. .
                     type: string
                   dbClusterParameterGroupName:
+                    description: A cluster parameter group to associate with the cluster.
                     type: string
                   dbInstanceParameterGroupName:
+                    description: Instance parameter group to associate with all instances
+                      of the DB cluster. The db_instance_parameter_group_name parameter
+                      is only valid in combination with the allow_major_version_upgrade
+                      parameter.
                     type: string
                   dbSubnetGroupName:
+                    description: 'A DB subnet group to associate with this DB instance.
+                      NOTE: This must match the db_subnet_group_name specified on
+                      every aws_rds_cluster_instance in the cluster.'
                     type: string
                   dbSubnetGroupNameRef:
                     description: A Reference to a named object.
@@ -167,30 +195,68 @@ spec:
                         type: object
                     type: object
                   deletionProtection:
+                    description: If the DB instance should have deletion protection
+                      enabled. The database can't be deleted when this value is set
+                      to true. The default is false.
                     type: boolean
                   enableGlobalWriteForwarding:
+                    description: Whether cluster should forward writes to an associated
+                      global cluster. Applied to secondary clusters to enable them
+                      to forward writes to an aws_rds_global_cluster's primary cluster.
+                      See the Aurora Userguide documentation for more information.
                     type: boolean
                   enableHttpEndpoint:
+                    description: Enable HTTP endpoint . Only valid when engine_mode
+                      is set to serverless.
                     type: boolean
                   enabledCloudwatchLogsExports:
+                    description: 'Set of log types to export to cloudwatch. If omitted,
+                      no logs will be exported. The following log types are supported:
+                      audit, error, general, slowquery, postgresql .'
                     items:
                       type: string
                     type: array
                   engine:
                     type: string
                   engineMode:
+                    description: 'The database engine mode. Valid values: global ,
+                      multimaster, parallelquery, provisioned, serverless. Defaults
+                      to: provisioned. See the RDS User Guide for limitations when
+                      using serverless.'
                     type: string
                   engineVersion:
+                    description: The database engine version. Updating this argument
+                      results in an outage. See the Aurora MySQL and Aurora Postgres
+                      documentation for your configured engine to determine this value.
+                      For example with Aurora MySQL 2, a potential value for this
+                      argument is 5.7.mysql_aurora.2.03.2. The value can contain a
+                      partial version where supported by the API. The actual engine
+                      version used is returned in the attribute engine_version_actual,
+                      , see Attributes Reference below.
                     type: string
                   finalSnapshotIdentifier:
+                    description: The name of your final DB snapshot when this DB cluster
+                      is deleted. If omitted, no final snapshot will be made.
                     type: string
                   globalClusterIdentifier:
+                    description: The global cluster identifier specified on aws_rds_global_cluster.
                     type: string
                   iamDatabaseAuthenticationEnabled:
+                    description: Specifies whether or not mappings of AWS Identity
+                      and Access Management  accounts to database accounts is enabled.
+                      Please see AWS Documentation for availability and limitations.
                     type: boolean
                   iops:
+                    description: The amount of Provisioned IOPS  to be initially allocated
+                      for each DB instance in the Multi-AZ DB cluster. For information
+                      about valid Iops values, see Amazon RDS Provisioned IOPS storage
+                      to improve performance in the Amazon RDS User Guide. . Must
+                      be a multiple between .5 and 50 of the storage amount for the
+                      DB cluster.
                     type: number
                   kmsKeyId:
+                    description: The ARN for the KMS encryption key. When specifying
+                      kms_key_id, storage_encrypted needs to be set to true.
                     type: string
                   kmsKeyIdRef:
                     description: A Reference to a named object.
@@ -266,8 +332,9 @@ spec:
                         type: object
                     type: object
                   masterPasswordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: Password for the master DB user. Note that this may
+                      show up in logs, and it will be stored in the state file. Please
+                      refer to the RDS Naming Constraints
                     properties:
                       key:
                         description: The key to select.
@@ -298,13 +365,21 @@ spec:
                   replicationSourceIdentifier:
                     type: string
                   restoreToPointInTime:
+                    description: Nested attribute for point in time restore. More
+                      details below.
                     items:
                       properties:
                         restoreToTime:
+                          description: Date and time in UTC format to restore the
+                            database cluster to. Conflicts with use_latest_restorable_time.
                           type: string
                         restoreType:
+                          description: Type of restore to be performed. Valid options
+                            are full-copy  and copy-on-write.
                           type: string
                         sourceClusterIdentifier:
+                          description: The identifier of the source database cluster
+                            from which to restore.
                           type: string
                         sourceClusterIdentifierRef:
                           description: A Reference to a named object.
@@ -383,6 +458,9 @@ spec:
                               type: object
                           type: object
                         useLatestRestorableTime:
+                          description: Set to true to restore the database cluster
+                            to the latest restorable backup time. Defaults to false.
+                            Conflicts with restore_to_time.
                           type: boolean
                       type: object
                     type: array
@@ -390,6 +468,7 @@ spec:
                     items:
                       properties:
                         bucketName:
+                          description: The bucket name where your backup is stored
                           type: string
                         bucketNameRef:
                           description: A Reference to a named object.
@@ -468,12 +547,17 @@ spec:
                               type: object
                           type: object
                         bucketPrefix:
+                          description: Can be blank, but is the path to your backup
                           type: string
                         ingestionRole:
+                          description: Role applied to load the data.
                           type: string
                         sourceEngine:
+                          description: Source engine for the backup
                           type: string
                         sourceEngineVersion:
+                          description: Version of the source engine used to make the
+                            backup
                           type: string
                       required:
                       - ingestionRole
@@ -482,21 +566,38 @@ spec:
                       type: object
                     type: array
                   scalingConfiguration:
+                    description: Nested attribute with scaling properties. Only valid
+                      when engine_mode is set to serverless. More details below.
                     items:
                       properties:
                         autoPause:
+                          description: Whether to enable automatic pause. A DB cluster
+                            can be paused only when it's idle . If a DB cluster is
+                            paused for more than seven days, the DB cluster might
+                            be backed up with a snapshot. In this case, the DB cluster
+                            is restored when there is a request to connect to it.
+                            Defaults to true.
                           type: boolean
                         maxCapacity:
                           type: number
                         minCapacity:
                           type: number
                         secondsUntilAutoPause:
+                          description: The time, in seconds, before an Aurora DB cluster
+                            in serverless mode is paused. Valid values are 300 through
+                            86400. Defaults to 300.
                           type: number
                         timeoutAction:
+                          description: 'The action to take when the timeout is reached.
+                            Valid values: ForceApplyCapacityChange, RollbackCapacityChange.
+                            Defaults to RollbackCapacityChange. See documentation.'
                           type: string
                       type: object
                     type: array
                   serverlessv2ScalingConfiguration:
+                    description: Nested attribute with scaling properties for ServerlessV2.
+                      Only valid when engine_mode is set to provisioned. More details
+                      below.
                     items:
                       properties:
                         maxCapacity:
@@ -509,18 +610,32 @@ spec:
                       type: object
                     type: array
                   skipFinalSnapshot:
+                    description: Determines whether a final DB snapshot is created
+                      before the DB cluster is deleted. If true is specified, no DB
+                      snapshot is created. If false is specified, a DB snapshot is
+                      created before the DB cluster is deleted, using the value from
+                      final_snapshot_identifier. Default is false.
                     type: boolean
                   snapshotIdentifier:
+                    description: Specifies whether or not to create this cluster from
+                      a snapshot. You can use either the name or ARN when specifying
+                      a DB cluster snapshot, or the ARN when specifying a DB snapshot.
                     type: string
                   sourceRegion:
+                    description: The source region for an encrypted replica DB cluster.
                     type: string
                   storageEncrypted:
                     type: boolean
                   storageType:
+                    description: 'Specifies the storage type to be associated with
+                      the DB cluster. . Valid values: io1, Default: io1.'
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the DB cluster. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                   vpcSecurityGroupIdRefs:
                     items:
@@ -598,6 +713,8 @@ spec:
                         type: object
                     type: object
                   vpcSecurityGroupIds:
+                    description: List of VPC security groups to associate with the
+                      Cluster
                     items:
                       type: string
                     type: array
@@ -781,26 +898,39 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of cluster
                     type: string
                   clusterResourceId:
+                    description: The RDS Cluster Resource ID
                     type: string
                   endpoint:
+                    description: The DNS address of the RDS instance
                     type: string
                   engineVersionActual:
+                    description: The running version of the database.
                     type: string
                   hostedZoneId:
+                    description: The Route53 Hosted Zone ID of the endpoint
                     type: string
                   iamRoles:
+                    description: A List of ARNs for the IAM roles to associate to
+                      the RDS Cluster.
                     items:
                       type: string
                     type: array
                   id:
+                    description: The RDS Cluster Identifier
                     type: string
                   readerEndpoint:
+                    description: A read-only endpoint for the Aurora cluster, automatically
+                      load-balanced across replicas
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

@@ -18,21 +18,26 @@ type BucketCorsConfigurationCorsRuleObservation struct {
 
 type BucketCorsConfigurationCorsRuleParameters struct {
 
+	// Set of Headers that are specified in the Access-Control-Request-Headers header.
 	// +kubebuilder:validation:Optional
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
+	// Set of HTTP methods that you allow the origin to execute. Valid values are GET, PUT, HEAD, POST, and DELETE.
 	// +kubebuilder:validation:Required
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
+	// Set of origins you want customers to be able to access the bucket from.
 	// +kubebuilder:validation:Required
 	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
+	// Set of headers in the response that you want customers to be able to access from their applications .
 	// +kubebuilder:validation:Optional
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The time in seconds that your browser is to cache the preflight response for the specified resource.
 	// +kubebuilder:validation:Optional
 	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
@@ -43,6 +48,7 @@ type BucketCorsConfigurationObservation struct {
 
 type BucketCorsConfigurationParameters struct {
 
+	// The name of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -53,9 +59,11 @@ type BucketCorsConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// Set of origins and methods  documented below. You can configure up to 100 rules.
 	// +kubebuilder:validation:Required
 	CorsRule []BucketCorsConfigurationCorsRuleParameters `json:"corsRule" tf:"cors_rule,omitempty"`
 
+	// The account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
@@ -79,7 +87,7 @@ type BucketCorsConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketCorsConfiguration is the Schema for the BucketCorsConfigurations API
+// BucketCorsConfiguration is the Schema for the BucketCorsConfigurations API. Provides an S3 bucket CORS configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

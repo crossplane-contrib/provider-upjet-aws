@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Permission is the Schema for the Permissions API
+        description: Permission is the Schema for the Permissions API. Creates a Lambda
+          function permission.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,15 @@ spec:
               forProvider:
                 properties:
                   action:
+                    description: The AWS Lambda action you want to allow in this statement.
                     type: string
                   eventSourceToken:
+                    description: The Event Source Token to validate.  Used with Alexa
+                      Skills.
                     type: string
                   functionName:
+                    description: Name of the Lambda function whose resource policy
+                      you are updating
                     type: string
                   functionNameRef:
                     description: A Reference to a named object.
@@ -143,12 +149,23 @@ spec:
                         type: object
                     type: object
                   functionUrlAuthType:
+                    description: 'Lambda Function URLs authentication type. Valid
+                      values are: AWS_IAM or NONE.'
                     type: string
                   principal:
+                    description: The principal who is getting this permission e.g.,
+                      s3.amazonaws.com, an AWS account ID, or any valid AWS service
+                      principal such as events.amazonaws.com or sns.amazonaws.com.
                     type: string
                   principalOrgId:
+                    description: The identifier for your organization in AWS Organizations.
+                      Use this to grant permissions to all the AWS accounts under
+                      this organization.
                     type: string
                   qualifier:
+                    description: Query parameter to specify function version or alias
+                      name. The permission will then apply to the specific qualified
+                      ARN e.g., arn:aws:lambda:aws-region:acct-id:function:function-name:2
                     type: string
                   qualifierRef:
                     description: A Reference to a named object.
@@ -228,12 +245,26 @@ spec:
                       be created in.
                     type: string
                   sourceAccount:
+                    description: This parameter is used for S3 and SES. The AWS account
+                      ID  of the source owner.
                     type: string
                   sourceArn:
+                    description: When the principal is an AWS service, the ARN of
+                      the specific resource within that service to grant permission
+                      to. Without this, any resource from principal will be granted
+                      permission – even if that resource is from another account.
+                      For S3, this should be the ARN of the S3 Bucket. For EventBridge
+                      events, this should be the ARN of the EventBridge Rule. For
+                      API Gateway, this should be the ARN of the API, as described
+                      here.
                     type: string
                   statementId:
+                    description: A unique statement identifier. By default generated
+                      by Terraform.
                     type: string
                   statementIdPrefix:
+                    description: A statement identifier prefix. Terraform will generate
+                      a unique suffix. Conflicts with statement_id.
                     type: string
                 required:
                 - action

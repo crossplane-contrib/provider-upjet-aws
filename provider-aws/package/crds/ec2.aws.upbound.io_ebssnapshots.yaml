@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: EBSSnapshot is the Schema for the EBSSnapshots API
+        description: EBSSnapshot is the Schema for the EBSSnapshots API. Provides
+          an elastic block storage snapshot resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,24 +65,39 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: A description of what the snapshot is.
                     type: string
                   outpostArn:
+                    description: The Amazon Resource Name  of the Outpost on which
+                      to create a local snapshot.
                     type: string
                   permanentRestore:
+                    description: Indicates whether to permanently restore an archived
+                      snapshot.
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   storageTier:
+                    description: The name of the storage tier. Valid values are archive
+                      and standard. Default value is standard.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the snapshot. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                   temporaryRestoreDays:
+                    description: Specifies the number of days for which to temporarily
+                      restore an archived snapshot. Required for temporary restores
+                      only. The snapshot will be automatically re-archived after this
+                      period.
                     type: number
                   volumeId:
+                    description: The Volume ID of which to make a snapshot.
                     type: string
                   volumeIdRef:
                     description: A Reference to a named object.
@@ -336,24 +352,36 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of the EBS Snapshot.
                     type: string
                   dataEncryptionKeyId:
+                    description: The data encryption key identifier for the snapshot.
                     type: string
                   encrypted:
+                    description: Whether the snapshot is encrypted.
                     type: boolean
                   id:
+                    description: The snapshot ID .
                     type: string
                   kmsKeyId:
+                    description: The ARN for the KMS encryption key.
                     type: string
                   ownerAlias:
+                    description: Value from an Amazon-maintained list  of snapshot
+                      owners.
                     type: string
                   ownerId:
+                    description: The AWS account ID of the EBS snapshot owner.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   volumeSize:
+                    description: The size of the drive in GiBs.
                     type: number
                 type: object
               conditions:

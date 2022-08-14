@@ -14,21 +14,28 @@ import (
 )
 
 type ClusterParameterGroupObservation struct {
+
+	// The ARN of the neptune cluster parameter group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The neptune cluster parameter group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ClusterParameterGroupParameters struct {
 
+	// The description of the neptune cluster parameter group. Defaults to "Managed by Terraform".
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The family of the neptune cluster parameter group.
 	// +kubebuilder:validation:Required
 	Family *string `json:"family" tf:"family,omitempty"`
 
+	// A list of neptune parameters to apply.
 	// +kubebuilder:validation:Optional
 	Parameter []ParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
@@ -37,6 +44,7 @@ type ClusterParameterGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -46,12 +54,14 @@ type ParameterObservation struct {
 
 type ParameterParameters struct {
 
+	// Valid values are immediate and pending-reboot. Defaults to pending-reboot.
 	// +kubebuilder:validation:Optional
 	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The value of the neptune parameter.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -70,7 +80,7 @@ type ClusterParameterGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ClusterParameterGroup is the Schema for the ClusterParameterGroups API
+// ClusterParameterGroup is the Schema for the ClusterParameterGroups API. Manages a Neptune Cluster Parameter Group
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

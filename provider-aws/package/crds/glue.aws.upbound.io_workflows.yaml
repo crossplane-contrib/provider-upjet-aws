@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Workflow is the Schema for the Workflows API
+        description: Workflow is the Schema for the Workflows API. Provides a Glue
+          Workflow resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,10 +67,17 @@ spec:
                   defaultRunProperties:
                     additionalProperties:
                       type: string
+                    description: –  A map of default run properties for this workflow.
+                      These properties are passed to all jobs associated to the workflow.
                     type: object
                   description:
+                    description: –  Description of the workflow.
                     type: string
                   maxConcurrentRuns:
+                    description: Prevents exceeding the maximum number of concurrent
+                      runs of any of the component jobs. If you leave this parameter
+                      blank, there is no limit to the number of concurrent workflow
+                      runs.
                     type: number
                   region:
                     description: Region is the region you'd like your resource to
@@ -78,6 +86,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -259,12 +270,17 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of Glue Workflow
                     type: string
                   id:
+                    description: Workflow name
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

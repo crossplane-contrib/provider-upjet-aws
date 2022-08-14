@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ClusterInstance is the Schema for the ClusterInstances API
+        description: ClusterInstance is the Schema for the ClusterInstances API. Provides
+          an DocDB Cluster Resource Instance
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,14 +65,25 @@ spec:
               forProvider:
                 properties:
                   applyImmediately:
+                    description: Specifies whether any database modifications are
+                      applied immediately, or during the next maintenance window.
+                      Default isfalse.
                     type: boolean
                   autoMinorVersionUpgrade:
+                    description: Indicates that minor engine upgrades will be applied
+                      automatically to the DB instance during the maintenance window.
+                      Default true.
                     type: boolean
                   availabilityZone:
+                    description: The EC2 Availability Zone that the DB instance is
+                      created in. See docs about the details.
                     type: string
                   caCertIdentifier:
+                    description: The identifier of the CA certificate for the DB instance.
                     type: string
                   clusterIdentifier:
+                    description: The identifier of the aws_docdb_cluster in which
+                      to launch this instance.
                     type: string
                   clusterIdentifierRef:
                     description: A Reference to a named object.
@@ -147,12 +159,23 @@ spec:
                         type: object
                     type: object
                   engine:
+                    description: 'The name of the database engine to be used for the
+                      DocDB instance. Defaults to docdb. Valid Values: docdb.'
                     type: string
                   instanceClass:
+                    description: The instance class to use. For details on CPU and
+                      memory, see Scaling for DocDB Instances. DocDB currently supports
+                      the below instance classes. Please see AWS Documentation for
+                      complete details.
                     type: string
                   preferredMaintenanceWindow:
+                    description: 'The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+                      Eg: "Mon:00:00-Mon:03:00".'
                     type: string
                   promotionTier:
+                    description: Default 0. Failover Priority setting on instance
+                      level. The reader who has lower tier has higher priority to
+                      get promoter to writer.
                     type: number
                   region:
                     description: Region is the region you'd like your resource to
@@ -161,6 +184,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the instance. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - instanceClass
@@ -343,32 +369,49 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of cluster instance
                     type: string
                   dbSubnetGroupName:
+                    description: The DB subnet group to associate with this DB instance.
                     type: string
                   dbiResourceId:
+                    description: The region-unique, immutable identifier for the DB
+                      instance.
                     type: string
                   endpoint:
+                    description: The DNS address for this instance. May not be writable
                     type: string
                   engineVersion:
+                    description: The database engine version
                     type: string
                   id:
                     type: string
                   kmsKeyId:
+                    description: The ARN for the KMS encryption key if one is set
+                      to the cluster.
                     type: string
                   port:
+                    description: The database port
                     type: number
                   preferredBackupWindow:
+                    description: The daily time range during which automated backups
+                      are created if automated backups are enabled.
                     type: string
                   publiclyAccessible:
                     type: boolean
                   storageEncrypted:
+                    description: Specifies whether the DB cluster is encrypted.
                     type: boolean
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   writer:
+                    description: – Boolean indicating if this instance is writable.
+                      False indicates this instance is a read replica.
                     type: boolean
                 type: object
               conditions:

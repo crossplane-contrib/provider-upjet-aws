@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: StateMachine is the Schema for the StateMachines API
+        description: StateMachine is the Schema for the StateMachines API. Provides
+          a Step Function State Machine resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,25 +65,44 @@ spec:
               forProvider:
                 properties:
                   definition:
+                    description: The Amazon States Language definition of the state
+                      machine.
                     type: string
                   loggingConfiguration:
+                    description: Defines what execution history events are logged
+                      and where they are logged. The logging_configuration parameter
+                      is only valid when type is set to EXPRESS. Defaults to OFF.
+                      For more information see Logging Express Workflows and Log Levels
+                      in the AWS Step Functions User Guide.
                     items:
                       properties:
                         includeExecutionData:
+                          description: Determines whether execution data is included
+                            in your log. When set to false, data is excluded.
                           type: boolean
                         level:
+                          description: 'Defines which category of execution history
+                            events are logged. Valid values: ALL, ERROR, FATAL, OFF'
                           type: string
                         logDestination:
+                          description: Amazon Resource Name  of a CloudWatch log group.
+                            Make sure the State Machine has the correct IAM policies
+                            for logging. The ARN must end with :*
                           type: string
                       type: object
                     type: array
                   name:
+                    description: The name of the state machine. To enable logging
+                      with CloudWatch Logs, the name should only contain 0-9, A-Z,
+                      a-z, - and _.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   roleArn:
+                    description: The Amazon Resource Name  of the IAM role to use
+                      for this state machine.
                     type: string
                   roleArnRef:
                     description: A Reference to a named object.
@@ -160,15 +180,27 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                   tracingConfiguration:
+                    description: Selects whether AWS X-Ray tracing is enabled.
                     items:
                       properties:
                         enabled:
+                          description: When set to true, AWS X-Ray tracing is enabled.
+                            Make sure the State Machine has the correct IAM policies
+                            for logging. See the AWS Step Functions Developer Guide
+                            for details.
                           type: boolean
                       type: object
                     type: array
                   type:
+                    description: 'Determines whether a Standard or Express state machine
+                      is created. The default is STANDARD. You cannot update the type
+                      of a state machine once it has been created. Valid values: STANDARD,
+                      EXPRESS.'
                     type: string
                 required:
                 - definition
@@ -352,16 +384,24 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the state machine.
                     type: string
                   creationDate:
+                    description: The date the state machine was created.
                     type: string
                   id:
+                    description: The ARN of the state machine.
                     type: string
                   status:
+                    description: The current status of the state machine. Either ACTIVE
+                      or DELETING.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

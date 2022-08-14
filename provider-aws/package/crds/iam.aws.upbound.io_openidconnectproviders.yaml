@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: OpenIDConnectProvider is the Schema for the OpenIDConnectProviders
-          API
+          API. Provides an IAM OpenID Connect provider.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,18 +65,29 @@ spec:
               forProvider:
                 properties:
                   clientIdList:
+                    description: A list of client IDs . When a mobile or web app registers
+                      with an OpenID Connect provider, they establish a value that
+                      identifies the application.
                     items:
                       type: string
                     type: array
                   tags:
                     additionalProperties:
                       type: string
+                    description: Map of resource tags for the IAM OIDC provider. If
+                      configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                   thumbprintList:
+                    description: A list of server certificate thumbprints for the
+                      OpenID Connect  identity provider's server certificate.
                     items:
                       type: string
                     type: array
                   url:
+                    description: The URL of the identity provider. Corresponds to
+                      the iss claim.
                     type: string
                 required:
                 - clientIdList
@@ -261,12 +272,16 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN assigned by AWS for this provider.
                     type: string
                   id:
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

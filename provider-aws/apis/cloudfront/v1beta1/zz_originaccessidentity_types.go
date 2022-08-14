@@ -14,21 +14,35 @@ import (
 )
 
 type OriginAccessIdentityObservation struct {
+
+	// Internal value used by CloudFront to allow future
+	// updates to the origin access identity.
 	CallerReference *string `json:"callerReference,omitempty" tf:"caller_reference,omitempty"`
 
+	// A shortcut to the full path for the
+	// origin access identity to use in CloudFront, see below.
 	CloudfrontAccessIdentityPath *string `json:"cloudfrontAccessIdentityPath,omitempty" tf:"cloudfront_access_identity_path,omitempty"`
 
+	// The current version of the origin access identity's information.
+	// For example: E2QWRUHAPOMQZL.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
+	// A pre-generated ARN for use in S3 bucket policies .
+	// Example: arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E2QWRUHAPOMQZL.
 	IAMArn *string `json:"iamArn,omitempty" tf:"iam_arn,omitempty"`
 
+	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Amazon S3 canonical user ID for the origin
+	// access identity, which you use when giving the origin access identity read
+	// permission to an object in Amazon S3.
 	S3CanonicalUserID *string `json:"s3CanonicalUserId,omitempty" tf:"s3_canonical_user_id,omitempty"`
 }
 
 type OriginAccessIdentityParameters struct {
 
+	// An optional comment for the origin access identity.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
@@ -52,7 +66,7 @@ type OriginAccessIdentityStatus struct {
 
 // +kubebuilder:object:root=true
 
-// OriginAccessIdentity is the Schema for the OriginAccessIdentitys API
+// OriginAccessIdentity is the Schema for the OriginAccessIdentitys API. Provides a CloudFront origin access identity.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

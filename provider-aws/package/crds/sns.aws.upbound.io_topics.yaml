@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Topic is the Schema for the Topics API
+        description: Topic is the Schema for the Topics API. Provides an SNS topic
+          resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   applicationFailureFeedbackRoleArn:
+                    description: IAM role for failure feedback
                     type: string
                   applicationFailureFeedbackRoleArnRef:
                     description: A Reference to a named object.
@@ -139,6 +141,8 @@ spec:
                         type: object
                     type: object
                   applicationSuccessFeedbackRoleArn:
+                    description: The IAM role permitted to receive success feedback
+                      for this topic
                     type: string
                   applicationSuccessFeedbackRoleArnRef:
                     description: A Reference to a named object.
@@ -214,16 +218,24 @@ spec:
                         type: object
                     type: object
                   applicationSuccessFeedbackSampleRate:
+                    description: Percentage of success to sample
                     type: number
                   contentBasedDeduplication:
+                    description: Enables content-based deduplication for FIFO topics.
+                      For more information, see the related documentation
                     type: boolean
                   deliveryPolicy:
+                    description: The SNS delivery policy. More on AWS documentation
                     type: string
                   displayName:
+                    description: The display name for the topic
                     type: string
                   fifoTopic:
+                    description: Boolean indicating whether or not to create a FIFO  topic
+                      .
                     type: boolean
                   firehoseFailureFeedbackRoleArn:
+                    description: IAM role for failure feedback
                     type: string
                   firehoseFailureFeedbackRoleArnRef:
                     description: A Reference to a named object.
@@ -299,6 +311,8 @@ spec:
                         type: object
                     type: object
                   firehoseSuccessFeedbackRoleArn:
+                    description: The IAM role permitted to receive success feedback
+                      for this topic
                     type: string
                   firehoseSuccessFeedbackRoleArnRef:
                     description: A Reference to a named object.
@@ -374,8 +388,10 @@ spec:
                         type: object
                     type: object
                   firehoseSuccessFeedbackSampleRate:
+                    description: Percentage of success to sample
                     type: number
                   httpFailureFeedbackRoleArn:
+                    description: IAM role for failure feedback
                     type: string
                   httpFailureFeedbackRoleArnRef:
                     description: A Reference to a named object.
@@ -451,6 +467,8 @@ spec:
                         type: object
                     type: object
                   httpSuccessFeedbackRoleArn:
+                    description: The IAM role permitted to receive success feedback
+                      for this topic
                     type: string
                   httpSuccessFeedbackRoleArnRef:
                     description: A Reference to a named object.
@@ -526,10 +544,14 @@ spec:
                         type: object
                     type: object
                   httpSuccessFeedbackSampleRate:
+                    description: Percentage of success to sample
                     type: number
                   kmsMasterKeyId:
+                    description: The ID of an AWS-managed customer master key  for
+                      Amazon SNS or a custom CMK. For more information, see Key Terms
                     type: string
                   lambdaFailureFeedbackRoleArn:
+                    description: IAM role for failure feedback
                     type: string
                   lambdaFailureFeedbackRoleArnRef:
                     description: A Reference to a named object.
@@ -605,6 +627,8 @@ spec:
                         type: object
                     type: object
                   lambdaSuccessFeedbackRoleArn:
+                    description: The IAM role permitted to receive success feedback
+                      for this topic
                     type: string
                   lambdaSuccessFeedbackRoleArnRef:
                     description: A Reference to a named object.
@@ -680,18 +704,31 @@ spec:
                         type: object
                     type: object
                   lambdaSuccessFeedbackSampleRate:
+                    description: Percentage of success to sample
                     type: number
                   name:
+                    description: The name of the topic. Topic names must be made up
+                      of only uppercase and lowercase ASCII letters, numbers, underscores,
+                      and hyphens, and must be between 1 and 256 characters long.
+                      For a FIFO  topic, the name must end with the .fifo suffix.
+                      If omitted, Terraform will assign a random, unique name. Conflicts
+                      with name_prefix
                     type: string
                   namePrefix:
+                    description: Creates a unique name beginning with the specified
+                      prefix. Conflicts with name
                     type: string
                   policy:
+                    description: The fully-formed AWS policy as JSON. For more information
+                      about building AWS IAM policy documents with Terraform, see
+                      the AWS IAM Policy Document Guide.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   sqsFailureFeedbackRoleArn:
+                    description: IAM role for failure feedback
                     type: string
                   sqsFailureFeedbackRoleArnRef:
                     description: A Reference to a named object.
@@ -767,6 +804,8 @@ spec:
                         type: object
                     type: object
                   sqsSuccessFeedbackRoleArn:
+                    description: The IAM role permitted to receive success feedback
+                      for this topic
                     type: string
                   sqsSuccessFeedbackRoleArnRef:
                     description: A Reference to a named object.
@@ -842,10 +881,14 @@ spec:
                         type: object
                     type: object
                   sqsSuccessFeedbackSampleRate:
+                    description: Percentage of success to sample
                     type: number
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -1027,14 +1070,20 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the SNS topic, as a more obvious property
                     type: string
                   id:
+                    description: The ARN of the SNS topic
                     type: string
                   owner:
+                    description: The AWS Account ID of the SNS topic owner
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

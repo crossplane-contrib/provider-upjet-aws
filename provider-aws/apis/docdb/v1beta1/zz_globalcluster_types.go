@@ -14,8 +14,11 @@ import (
 )
 
 type GlobalClusterMembersObservation struct {
+
+	// Amazon Resource Name  of member DB Cluster.
 	DBClusterArn *string `json:"dbClusterArn,omitempty" tf:"db_cluster_arn,omitempty"`
 
+	// Whether the member is the primary DB Cluster.
 	IsWriter *bool `json:"isWriter,omitempty" tf:"is_writer,omitempty"`
 }
 
@@ -23,12 +26,17 @@ type GlobalClusterMembersParameters struct {
 }
 
 type GlobalClusterObservation struct {
+
+	// Global Cluster Amazon Resource Name
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Set of objects containing Global Cluster members.
 	GlobalClusterMembers []GlobalClusterMembersObservation `json:"globalClusterMembers,omitempty" tf:"global_cluster_members,omitempty"`
 
+	// AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed.
 	GlobalClusterResourceID *string `json:"globalClusterResourceId,omitempty" tf:"global_cluster_resource_id,omitempty"`
 
+	// DocDB Global Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -36,18 +44,23 @@ type GlobalClusterObservation struct {
 
 type GlobalClusterParameters struct {
 
+	// Name for an automatically created database on cluster creation.
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
+	// If the Global Cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false.
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
+	// Name of the database engine to be used for this DB cluster. Terraform will only perform drift detection if a configuration value is provided. Current Valid values: docdb. Defaults to docdb. Conflicts with source_db_cluster_identifier.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
+	// Engine version of the global database. Upgrading the engine version will result in all cluster members being immediately updated and will.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
+	// The global cluster identifier.
 	// +kubebuilder:validation:Required
 	GlobalClusterIdentifier *string `json:"globalClusterIdentifier" tf:"global_cluster_identifier,omitempty"`
 
@@ -56,6 +69,7 @@ type GlobalClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Amazon Resource Name  to use as the primary DB Cluster of the Global Cluster on creation. Terraform cannot perform drift detection of this value.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/docdb/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -67,6 +81,7 @@ type GlobalClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceDBClusterIdentifierSelector *v1.Selector `json:"sourceDbClusterIdentifierSelector,omitempty" tf:"-"`
 
+	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted. Terraform will only perform drift detection if a configuration value is provided.
 	// +kubebuilder:validation:Optional
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 }
@@ -85,7 +100,7 @@ type GlobalClusterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// GlobalCluster is the Schema for the GlobalClusters API
+// GlobalCluster is the Schema for the GlobalClusters API. Manages a DocDB Global Cluster
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

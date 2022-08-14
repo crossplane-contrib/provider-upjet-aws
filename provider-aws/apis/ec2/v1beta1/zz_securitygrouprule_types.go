@@ -14,26 +14,34 @@ import (
 )
 
 type SecurityGroupRuleObservation struct {
+
+	// ID of the security group rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type SecurityGroupRuleParameters struct {
 
+	// List of CIDR blocks. Cannot be specified with source_security_group_id or self.
 	// +kubebuilder:validation:Optional
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
 
+	// Description of the rule.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Start port .
 	// +kubebuilder:validation:Required
 	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
+	// List of IPv6 CIDR blocks. Cannot be specified with source_security_group_id or self.
 	// +kubebuilder:validation:Optional
 	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
 
+	// List of Prefix List IDs.
 	// +kubebuilder:validation:Optional
 	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
 
+	// Protocol. If not icmp, icmpv6, tcp, udp, or all use the protocol number
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
@@ -42,6 +50,7 @@ type SecurityGroupRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Security group to apply this rule to.
 	// +crossplane:generate:reference:type=SecurityGroup
 	// +kubebuilder:validation:Optional
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
@@ -52,9 +61,11 @@ type SecurityGroupRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
+	// Whether the security group itself will be added as a source to this ingress rule. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or source_security_group_id.
 	// +kubebuilder:validation:Optional
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
 
+	// Security group id to allow access to/from, depending on the type. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or self.
 	// +crossplane:generate:reference:type=SecurityGroup
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupID *string `json:"sourceSecurityGroupId,omitempty" tf:"source_security_group_id,omitempty"`
@@ -65,10 +76,12 @@ type SecurityGroupRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 
+	// End port .
 	// +kubebuilder:validation:Required
 	ToPort *float64 `json:"toPort" tf:"to_port,omitempty"`
 
-	// Type of rule, ingress (inbound) or egress (outbound).
+	// Type of rule being created. Valid options are ingress
+	// or egress .
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -87,7 +100,7 @@ type SecurityGroupRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SecurityGroupRule is the Schema for the SecurityGroupRules API
+// SecurityGroupRule is the Schema for the SecurityGroupRules API. Provides an security group rule resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,17 +14,22 @@ import (
 )
 
 type ProvisionedConcurrencyConfigObservation struct {
+
+	// Lambda Function name and qualifier separated by a colon .
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ProvisionedConcurrencyConfigParameters struct {
 
+	// Name or Amazon Resource Name  of the Lambda Function.
 	// +kubebuilder:validation:Required
 	FunctionName *string `json:"functionName" tf:"function_name,omitempty"`
 
+	// Amount of capacity to allocate. Must be greater than or equal to 1.
 	// +kubebuilder:validation:Required
 	ProvisionedConcurrentExecutions *float64 `json:"provisionedConcurrentExecutions" tf:"provisioned_concurrent_executions,omitempty"`
 
+	// Lambda Function version or Lambda Alias name.
 	// +kubebuilder:validation:Required
 	Qualifier *string `json:"qualifier" tf:"qualifier,omitempty"`
 
@@ -48,7 +53,7 @@ type ProvisionedConcurrencyConfigStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ProvisionedConcurrencyConfig is the Schema for the ProvisionedConcurrencyConfigs API
+// ProvisionedConcurrencyConfig is the Schema for the ProvisionedConcurrencyConfigs API. Manages a Lambda Provisioned Concurrency Configuration
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

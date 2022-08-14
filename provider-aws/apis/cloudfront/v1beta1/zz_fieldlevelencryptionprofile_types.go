@@ -18,12 +18,15 @@ type EncryptionEntitiesItemsObservation struct {
 
 type EncryptionEntitiesItemsParameters struct {
 
+	// Object that contains an attribute items that contains the list of field patterns in a field-level encryption content type profile specify the fields that you want to be encrypted.
 	// +kubebuilder:validation:Required
 	FieldPatterns []FieldPatternsParameters `json:"fieldPatterns" tf:"field_patterns,omitempty"`
 
+	// The provider associated with the public key being used for encryption.
 	// +kubebuilder:validation:Required
 	ProviderID *string `json:"providerId" tf:"provider_id,omitempty"`
 
+	// The public key associated with a set of field-level encryption patterns, to be used when encrypting the fields that match the patterns.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1.PublicKey
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -46,21 +49,28 @@ type EncryptionEntitiesParameters struct {
 }
 
 type FieldLevelEncryptionProfileObservation struct {
+
+	// Internal value used by CloudFront to allow future updates to the Field Level Encryption Profile.
 	CallerReference *string `json:"callerReference,omitempty" tf:"caller_reference,omitempty"`
 
+	// The current version of the Field Level Encryption Profile. For example: E2QWRUHAPOMQZL.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
+	// The identifier for the Field Level Encryption Profile. For example: K3D5EWEUDCCXON.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type FieldLevelEncryptionProfileParameters struct {
 
+	// An optional comment about the Field Level Encryption Profile.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// The encryption entities config block for field-level encryption profiles that contains an attribute items which includes the encryption key and field pattern specifications.
 	// +kubebuilder:validation:Required
 	EncryptionEntities []EncryptionEntitiesParameters `json:"encryptionEntities" tf:"encryption_entities,omitempty"`
 
+	// The name of the Field Level Encryption Profile.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -93,7 +103,7 @@ type FieldLevelEncryptionProfileStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FieldLevelEncryptionProfile is the Schema for the FieldLevelEncryptionProfiles API
+// FieldLevelEncryptionProfile is the Schema for the FieldLevelEncryptionProfiles API. Provides a CloudFront Field-level Encryption Profile resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

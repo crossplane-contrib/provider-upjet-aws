@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ParameterGroup is the Schema for the ParameterGroups API
+        description: ParameterGroup is the Schema for the ParameterGroups API. Provides
+          an ElastiCache parameter group resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,15 +65,20 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: The description of the ElastiCache parameter group.
+                      Defaults to "Managed by Terraform".
                     type: string
                   family:
+                    description: The family of the ElastiCache parameter group.
                     type: string
                   parameter:
+                    description: A list of ElastiCache parameters to apply.
                     items:
                       properties:
                         name:
                           type: string
                         value:
+                          description: The value of the ElastiCache parameter.
                           type: string
                       required:
                       - name
@@ -86,6 +92,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value mapping of resource tags. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - family
@@ -268,12 +277,17 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The AWS ARN associated with the parameter group.
                     type: string
                   id:
+                    description: The ElastiCache parameter group name.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

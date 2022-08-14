@@ -14,47 +14,65 @@ import (
 )
 
 type ClusterInstanceObservation struct {
+
+	// Amazon Resource Name  of cluster instance
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The DB subnet group to associate with this DB instance.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
+	// The region-unique, immutable identifier for the DB instance.
 	DbiResourceID *string `json:"dbiResourceId,omitempty" tf:"dbi_resource_id,omitempty"`
 
+	// The DNS address for this instance. May not be writable
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
+	// The database engine version
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ARN for the KMS encryption key if one is set to the cluster.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// The database port
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// The daily time range during which automated backups are created if automated backups are enabled.
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
+	// Specifies whether the DB cluster is encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// – Boolean indicating if this instance is writable. False indicates this instance is a read replica.
 	Writer *bool `json:"writer,omitempty" tf:"writer,omitempty"`
 }
 
 type ClusterInstanceParameters struct {
 
+	// Specifies whether any database modifications
+	// are applied immediately, or during the next maintenance window. Default isfalse.
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
+	// Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Default true.
 	// +kubebuilder:validation:Optional
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
+	// The EC2 Availability Zone that the DB instance is created in. See docs about the details.
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// The identifier of the CA certificate for the DB instance.
 	// +kubebuilder:validation:Optional
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
+	// The identifier of the aws_docdb_cluster in which to launch this instance.
 	// +crossplane:generate:reference:type=Cluster
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
@@ -65,15 +83,21 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
+	// The name of the database engine to be used for the DocDB instance. Defaults to docdb. Valid Values: docdb.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
+	// The instance class to use. For details on CPU and memory, see Scaling for DocDB Instances. DocDB currently
+	// supports the below instance classes. Please see AWS Documentation for complete details.
 	// +kubebuilder:validation:Required
 	InstanceClass *string `json:"instanceClass" tf:"instance_class,omitempty"`
 
+	// The window to perform maintenance in.
+	// Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00".
 	// +kubebuilder:validation:Optional
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
+	// Default 0. Failover Priority setting on instance level. The reader who has lower tier has higher priority to get promoter to writer.
 	// +kubebuilder:validation:Optional
 	PromotionTier *float64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
 
@@ -82,6 +106,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of tags to assign to the instance. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -100,7 +125,7 @@ type ClusterInstanceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ClusterInstance is the Schema for the ClusterInstances API
+// ClusterInstance is the Schema for the ClusterInstances API. Provides an DocDB Cluster Resource Instance
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Table is the Schema for the Tables API
+        description: Table is the Schema for the Tables API. Provides a DynamoDB table
+          resource
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,11 +65,16 @@ spec:
               forProvider:
                 properties:
                   attribute:
+                    description: 'List of nested attribute definitions. Only required
+                      for hash_key and range_key attributes. Each attribute has two
+                      properties:'
                     items:
                       properties:
                         name:
                           type: string
                         type:
+                          description: 'Attribute type, which must be a scalar type:
+                            S, N, or B for tring, umber or inary data'
                           type: string
                       required:
                       - name
@@ -76,8 +82,13 @@ spec:
                       type: object
                     type: array
                   billingMode:
+                    description: Controls how you are charged for read and write throughput
+                      and how you manage capacity. The valid values are PROVISIONED
+                      and PAY_PER_REQUEST. Defaults to PROVISIONED.
                     type: string
                   globalSecondaryIndex:
+                    description: Describe a GSI for the table; subject to the normal
+                      limits on the number of GSIs, projected attributes, etc.
                     items:
                       properties:
                         hashKey:
@@ -105,6 +116,9 @@ spec:
                   hashKey:
                     type: string
                   localSecondaryIndex:
+                    description: Describe an LSI on the table; these can only be allocated
+                      at creation so you cannot change this definition after you have
+                      created the resource.
                     items:
                       properties:
                         name:
@@ -124,6 +138,7 @@ spec:
                       type: object
                     type: array
                   pointInTimeRecovery:
+                    description: Enable point-in-time recovery options.
                     items:
                       properties:
                         enabled:
@@ -141,23 +156,34 @@ spec:
                       be created in.
                     type: string
                   replica:
+                    description: Configuration block with DynamoDB Global Tables V2  replication
+                      configurations. Detailed below.
                     items:
                       properties:
                         kmsKeyArn:
                           type: string
                         regionName:
+                          description: Region name of the replica.
                           type: string
                       required:
                       - regionName
                       type: object
                     type: array
                   restoreDateTime:
+                    description: The time of the point-in-time recovery point to restore.
                     type: string
                   restoreSourceName:
+                    description: The name of the table to restore. Must match the
+                      name of an existing table.
                     type: string
                   restoreToLatestTime:
+                    description: If set, restores table to the most recent point-in-time
+                      recovery point.
                     type: boolean
                   serverSideEncryption:
+                    description: Encryption at rest options. AWS DynamoDB tables are
+                      automatically encrypted at rest with an AWS owned Customer Master
+                      Key if this argument isn't specified.
                     items:
                       properties:
                         enabled:
@@ -169,19 +195,34 @@ spec:
                       type: object
                     type: array
                   streamEnabled:
+                    description: Indicates whether Streams are to be enabled  or disabled
+                      .
                     type: boolean
                   streamViewType:
+                    description: When an item in the table is modified, StreamViewType
+                      determines what information is written to the table's stream.
+                      Valid values are KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES.
                     type: string
                   tableClass:
+                    description: The storage class of the table. Valid values are
+                      STANDARD and STANDARD_INFREQUENT_ACCESS.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to populate on the created table. If
+                      configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                   ttl:
+                    description: 'Defines ttl, has two properties, and can only be
+                      specified once:'
                     items:
                       properties:
                         attributeName:
+                          description: The name of the table attribute to store the
+                            TTL timestamp in.
                           type: string
                         enabled:
                           type: boolean
@@ -371,16 +412,29 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The arn of the table
                     type: string
                   id:
+                    description: The name of the table
                     type: string
                   streamArn:
+                    description: The ARN of the Table Stream. Only available when
+                      stream_enabled = true
                     type: string
                   streamLabel:
+                    description: A timestamp, in ISO 8601 format, for this stream.
+                      Note that this timestamp is not a unique identifier for the
+                      stream on its own. However, the combination of AWS customer
+                      ID, table name and this field is guaranteed to be unique. It
+                      can be used for creating CloudWatch Alarms. Only available when
+                      stream_enabled = true
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

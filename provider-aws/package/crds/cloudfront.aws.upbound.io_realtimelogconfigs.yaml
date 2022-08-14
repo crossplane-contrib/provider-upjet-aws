@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: RealtimeLogConfig is the Schema for the RealtimeLogConfigs API
+        description: RealtimeLogConfig is the Schema for the RealtimeLogConfigs API.
+          Provides a CloudFront real-time log configuration resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,19 @@ spec:
               forProvider:
                 properties:
                   endpoint:
+                    description: The Amazon Kinesis data streams where real-time log
+                      data is sent.
                     items:
                       properties:
                         kinesisStreamConfig:
+                          description: The Amazon Kinesis data stream configuration.
                           items:
                             properties:
                               roleArn:
+                                description: The ARN of an IAM role that CloudFront
+                                  can use to send real-time log data to the Kinesis
+                                  data stream. See the AWS documentation for more
+                                  information.
                                 type: string
                               roleArnRef:
                                 description: A Reference to a named object.
@@ -150,6 +158,7 @@ spec:
                                     type: object
                                 type: object
                               streamArn:
+                                description: The ARN of the Kinesis data stream.
                                 type: string
                               streamArnRef:
                                 description: A Reference to a named object.
@@ -232,6 +241,8 @@ spec:
                             type: object
                           type: array
                         streamType:
+                          description: The type of data stream where real-time log
+                            data is sent. The only valid value is Kinesis.
                           type: string
                       required:
                       - kinesisStreamConfig
@@ -239,16 +250,23 @@ spec:
                       type: object
                     type: array
                   fields:
+                    description: The fields that are included in each real-time log
+                      record. See the AWS documentation for supported values.
                     items:
                       type: string
                     type: array
                   name:
+                    description: The unique name to identify this real-time log configuration.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   samplingRate:
+                    description: The sampling rate for this real-time log configuration.
+                      The sampling rate determines the percentage of viewer requests
+                      that are represented in the real-time log data. An integer between
+                      1 and 100, inclusive.
                     type: number
                 required:
                 - endpoint
@@ -434,8 +452,10 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN  of the CloudFront real-time log configuration.
                     type: string
                   id:
+                    description: The ID of the CloudFront real-time log configuration.
                     type: string
                 type: object
               conditions:

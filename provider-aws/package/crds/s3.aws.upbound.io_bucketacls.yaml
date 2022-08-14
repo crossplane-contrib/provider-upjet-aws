@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: BucketACL is the Schema for the BucketACLs API
+        description: BucketACL is the Schema for the BucketACLs API. Provides an S3
+          bucket ACL resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,36 +65,53 @@ spec:
               forProvider:
                 properties:
                   accessControlPolicy:
+                    description: A configuration block that sets the ACL permissions
+                      for an object per grantee documented below.
                     items:
                       properties:
                         grant:
+                          description: Set of grant configuration blocks documented
+                            below.
                           items:
                             properties:
                               grantee:
+                                description: Configuration block for the person being
+                                  granted permissions documented below.
                                 items:
                                   properties:
                                     emailAddress:
+                                      description: Email address of the grantee. See
+                                        Regions and Endpoints for supported AWS regions
+                                        where this argument can be specified.
                                       type: string
                                     id:
                                       type: string
                                     type:
+                                      description: 'Type of grantee. Valid values:
+                                        CanonicalUser, AmazonCustomerByEmail, Group.'
                                       type: string
                                     uri:
+                                      description: URI of the grantee group.
                                       type: string
                                   required:
                                   - type
                                   type: object
                                 type: array
                               permission:
+                                description: Logging permissions assigned to the grantee
+                                  for the bucket.
                                 type: string
                             required:
                             - permission
                             type: object
                           type: array
                         owner:
+                          description: Configuration block of the bucket owner's display
+                            name and ID documented below.
                           items:
                             properties:
                               displayName:
+                                description: The display name of the owner.
                                 type: string
                               id:
                                 type: string
@@ -106,6 +124,7 @@ spec:
                       type: object
                     type: array
                   bucket:
+                    description: The name of the bucket.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -181,6 +200,7 @@ spec:
                         type: object
                     type: object
                   expectedBucketOwner:
+                    description: The account ID of the expected bucket owner.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -366,15 +386,22 @@ spec:
               atProvider:
                 properties:
                   accessControlPolicy:
+                    description: A configuration block that sets the ACL permissions
+                      for an object per grantee documented below.
                     items:
                       properties:
                         grant:
+                          description: Set of grant configuration blocks documented
+                            below.
                           items:
                             properties:
                               grantee:
+                                description: Configuration block for the person being
+                                  granted permissions documented below.
                                 items:
                                   properties:
                                     displayName:
+                                      description: The display name of the owner.
                                       type: string
                                   type: object
                                 type: array
@@ -383,6 +410,7 @@ spec:
                       type: object
                     type: array
                   acl:
+                    description: The canned ACL to apply to the bucket.
                     type: string
                   id:
                     type: string

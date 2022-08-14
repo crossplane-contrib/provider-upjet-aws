@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ParameterGroup is the Schema for the ParameterGroups API
+        description: ParameterGroup is the Schema for the ParameterGroups API. Manages
+          a Neptune Parameter Group
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,17 +65,25 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: The description of the Neptune parameter group. Defaults
+                      to "Managed by Terraform".
                     type: string
                   family:
+                    description: The family of the Neptune parameter group.
                     type: string
                   parameter:
+                    description: A list of Neptune parameters to apply.
                     items:
                       properties:
                         applyMethod:
+                          description: The apply method of the Neptune parameter.
+                            Valid values are immediate and pending-reboot. Defaults
+                            to pending-reboot.
                           type: string
                         name:
                           type: string
                         value:
+                          description: The value of the Neptune parameter.
                           type: string
                       required:
                       - name
@@ -88,6 +97,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - family
@@ -270,12 +282,18 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Neptune parameter group Amazon Resource Name
+                      .
                     type: string
                   id:
+                    description: The Neptune parameter group name.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

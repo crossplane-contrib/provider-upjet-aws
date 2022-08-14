@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: EBSVolume is the Schema for the EBSVolumes API
+        description: EBSVolume is the Schema for the EBSVolumes API. Provides an elastic
+          block storage resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,22 @@ spec:
               forProvider:
                 properties:
                   availabilityZone:
+                    description: The AZ where the EBS volume will exist.
                     type: string
                   encrypted:
+                    description: If true, the disk will be encrypted.
                     type: boolean
                   iops:
+                    description: The amount of IOPS to provision for the disk. Only
+                      valid for type of io1, io2 or gp3.
                     type: number
                   kmsKeyId:
+                    description: 'The ARN for the KMS encryption key. When specifying
+                      kms_key_id, encrypted needs to be set to true. Note: Terraform
+                      must be running with credentials which have the GenerateDataKeyWithoutPlaintext
+                      permission on the specified KMS key as required by the EBS KMS
+                      CMK volume provisioning process to prevent a volume from being
+                      created and almost immediately deleted.'
                     type: string
                   kmsKeyIdRef:
                     description: A Reference to a named object.
@@ -145,24 +156,36 @@ spec:
                         type: object
                     type: object
                   multiAttachEnabled:
+                    description: Specifies whether to enable Amazon EBS Multi-Attach.
+                      Multi-Attach is supported on io1 and io2 volumes.
                     type: boolean
                   outpostArn:
+                    description: The Amazon Resource Name  of the Outpost.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   size:
+                    description: The size of the drive in GiBs.
                     type: number
                   snapshotId:
+                    description: A snapshot to base the EBS volume off of.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                   throughput:
+                    description: The throughput that the volume supports, in MiB/s.
+                      Only valid for type of gp3.
                     type: number
                   type:
+                    description: The type of EBS volume. Can be standard, gp2, gp3,
+                      io1, io2, sc1 or st1 .
                     type: string
                 required:
                 - availabilityZone
@@ -345,12 +368,17 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The volume ARN .
                     type: string
                   id:
+                    description: The volume ID .
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

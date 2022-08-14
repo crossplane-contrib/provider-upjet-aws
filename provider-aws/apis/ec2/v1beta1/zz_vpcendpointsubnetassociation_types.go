@@ -14,6 +14,8 @@ import (
 )
 
 type VPCEndpointSubnetAssociationObservation struct {
+
+	// The ID of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -24,6 +26,7 @@ type VPCEndpointSubnetAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the subnet to be associated with the VPC endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -34,6 +37,7 @@ type VPCEndpointSubnetAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// The ID of the VPC endpoint with which the subnet will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPCEndpoint
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -60,7 +64,7 @@ type VPCEndpointSubnetAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VPCEndpointSubnetAssociation is the Schema for the VPCEndpointSubnetAssociations API
+// VPCEndpointSubnetAssociation is the Schema for the VPCEndpointSubnetAssociations API. Provides a resource to create an association between a VPC endpoint and a subnet.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

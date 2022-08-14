@@ -14,11 +14,14 @@ import (
 )
 
 type GlobalSettingsObservation struct {
+
+	// The AWS Account ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type GlobalSettingsParameters struct {
 
+	// A list of resources along with the opt-in preferences for the account.
 	// +kubebuilder:validation:Required
 	GlobalSettings map[string]*string `json:"globalSettings" tf:"global_settings,omitempty"`
 
@@ -42,7 +45,7 @@ type GlobalSettingsStatus struct {
 
 // +kubebuilder:object:root=true
 
-// GlobalSettings is the Schema for the GlobalSettingss API
+// GlobalSettings is the Schema for the GlobalSettingss API. Provides an AWS Backup Global Settings resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

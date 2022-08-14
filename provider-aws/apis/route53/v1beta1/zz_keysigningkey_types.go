@@ -14,31 +14,44 @@ import (
 )
 
 type KeySigningKeyObservation struct {
+
+	// A string used to represent the delegation signer digest algorithm. This value must follow the guidelines provided by RFC-8624 Section 3.3.
 	DigestAlgorithmMnemonic *string `json:"digestAlgorithmMnemonic,omitempty" tf:"digest_algorithm_mnemonic,omitempty"`
 
+	// An integer used to represent the delegation signer digest algorithm. This value must follow the guidelines provided by RFC-8624 Section 3.3.
 	DigestAlgorithmType *float64 `json:"digestAlgorithmType,omitempty" tf:"digest_algorithm_type,omitempty"`
 
+	// A cryptographic digest of a DNSKEY resource record . DNSKEY records are used to publish the public key that resolvers can use to verify DNSSEC signatures that are used to secure certain kinds of information provided by the DNS system.
 	DigestValue *string `json:"digestValue,omitempty" tf:"digest_value,omitempty"`
 
+	// A string that represents a DNSKEY record.
 	DnskeyRecord *string `json:"dnskeyRecord,omitempty" tf:"dnskey_record,omitempty"`
 
+	// A string that represents a delegation signer  record.
 	DsRecord *string `json:"dsRecord,omitempty" tf:"ds_record,omitempty"`
 
+	// An integer that specifies how the key is used. For key-signing key , this value is always 257.
 	Flag *float64 `json:"flag,omitempty" tf:"flag,omitempty"`
 
+	// Route 53 Hosted Zone identifier and KMS Key identifier, separated by a comma .
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An integer used to identify the DNSSEC record for the domain name. The process used to calculate the value is described in RFC-4034 Appendix B.
 	KeyTag *float64 `json:"keyTag,omitempty" tf:"key_tag,omitempty"`
 
+	// The public key, represented as a Base64 encoding, as required by RFC-4034 Page 5.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
+	// A string used to represent the signing algorithm. This value must follow the guidelines provided by RFC-8624 Section 3.1.
 	SigningAlgorithmMnemonic *string `json:"signingAlgorithmMnemonic,omitempty" tf:"signing_algorithm_mnemonic,omitempty"`
 
+	// An integer used to represent the signing algorithm. This value must follow the guidelines provided by RFC-8624 Section 3.1.
 	SigningAlgorithmType *float64 `json:"signingAlgorithmType,omitempty" tf:"signing_algorithm_type,omitempty"`
 }
 
 type KeySigningKeyParameters struct {
 
+	// Identifier of the Route 53 Hosted Zone.
 	// +crossplane:generate:reference:type=Zone
 	// +kubebuilder:validation:Optional
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
@@ -49,6 +62,7 @@ type KeySigningKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	HostedZoneIDSelector *v1.Selector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
 
+	// Amazon Resource Name  of the Key Management Service  Key. This must be unique for each key-signing key  in a single hosted zone. This key must be in the us-east-1 Region and meet certain requirements, which are described in the Route 53 Developer Guide and Route 53 API Reference.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.KMSKeyARN()
 	// +kubebuilder:validation:Optional
@@ -65,6 +79,7 @@ type KeySigningKeyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Status of the key-signing key . Valid values: ACTIVE, INACTIVE. Defaults to ACTIVE.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -83,7 +98,7 @@ type KeySigningKeyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// KeySigningKey is the Schema for the KeySigningKeys API
+// KeySigningKey is the Schema for the KeySigningKeys API. Manages an Route 53 Key Signing Key
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

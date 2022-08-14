@@ -14,10 +14,14 @@ import (
 )
 
 type GroupObservation struct {
+
+	// The ARN assigned by AWS for this group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The group's ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The unique ID assigned by AWS.
 	UniqueID *string `json:"uniqueId,omitempty" tf:"unique_id,omitempty"`
 }
 
@@ -41,7 +45,7 @@ type GroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Group is the Schema for the Groups API
+// Group is the Schema for the Groups API. Provides an IAM group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

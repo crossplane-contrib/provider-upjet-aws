@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Repository is the Schema for the Repositorys API
+        description: Repository is the Schema for the Repositorys API. Provides an
+          Elastic Container Registry Repository.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,11 +65,18 @@ spec:
               forProvider:
                 properties:
                   encryptionConfiguration:
+                    description: Encryption configuration for the repository. See
+                      below for schema.
                     items:
                       properties:
                         encryptionType:
+                          description: The encryption type to use for the repository.
+                            Valid values are AES256 or KMS. Defaults to AES256.
                           type: string
                         kmsKey:
+                          description: The ARN of the KMS key to use when encryption_type
+                            is KMS. If not specified, uses the default AWS managed
+                            key for ECR.
                           type: string
                         kmsKeyRef:
                           description: A Reference to a named object.
@@ -149,15 +157,23 @@ spec:
                       type: object
                     type: array
                   imageScanningConfiguration:
+                    description: Configuration block that defines image scanning configuration
+                      for the repository. By default, image scanning must be manually
+                      triggered. See the ECR User Guide for more information about
+                      image scanning.
                     items:
                       properties:
                         scanOnPush:
+                          description: Indicates whether images are scanned after
+                            being pushed to the repository  or not scanned .
                           type: boolean
                       required:
                       - scanOnPush
                       type: object
                     type: array
                   imageTagMutability:
+                    description: 'The tag mutability setting for the repository. Must
+                      be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.'
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -166,6 +182,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -347,16 +366,22 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Full ARN of the repository.
                     type: string
                   id:
                     type: string
                   registryId:
+                    description: The registry ID where the repository was created.
                     type: string
                   repositoryUrl:
+                    description: The URL of the repository .
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

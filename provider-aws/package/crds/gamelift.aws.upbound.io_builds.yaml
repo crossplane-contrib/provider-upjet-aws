@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Build is the Schema for the Builds API
+        description: Build is the Schema for the Builds API. Provides a GameLift Build
+          resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,17 +65,23 @@ spec:
               forProvider:
                 properties:
                   name:
+                    description: Name of the build
                     type: string
                   operatingSystem:
+                    description: Operating system that the game server binaries are
+                      built to run onE.g., WINDOWS_2012, AMAZON_LINUX or AMAZON_LINUX_2.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   storageLocation:
+                    description: Information indicating where your game build files
+                      are stored. See below.
                     items:
                       properties:
                         bucket:
+                          description: Name of your S3 bucket.
                           type: string
                         bucketRef:
                           description: A Reference to a named object.
@@ -153,6 +160,8 @@ spec:
                               type: object
                           type: object
                         key:
+                          description: Name of the zip file containing your build
+                            files.
                           type: string
                         keyRef:
                           description: A Reference to a named object.
@@ -231,8 +240,12 @@ spec:
                               type: object
                           type: object
                         objectVersion:
+                          description: A specific version of the file. If not set,
+                            the latest version of the file is retrieved.
                           type: string
                         roleArn:
+                          description: ARN of the access role that allows Amazon GameLift
+                            to access your S3 bucket.
                           type: string
                         roleArnRef:
                           description: A Reference to a named object.
@@ -315,8 +328,12 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                   version:
+                    description: Version that is associated with this build.
                     type: string
                 required:
                 - name
@@ -501,12 +518,17 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: GameLift Build ARN.
                     type: string
                   id:
+                    description: GameLift Build ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

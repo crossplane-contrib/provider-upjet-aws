@@ -14,19 +14,25 @@ import (
 )
 
 type TransitGatewayPeeringAttachmentObservation struct {
+
+	// EC2 Transit Gateway Attachment identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type TransitGatewayPeeringAttachmentParameters struct {
 
+	// Account ID of EC2 Transit Gateway to peer with. Defaults to the account ID the AWS provider is currently connected to.
 	// +kubebuilder:validation:Optional
 	PeerAccountID *string `json:"peerAccountId,omitempty" tf:"peer_account_id,omitempty"`
 
+	// Region of EC2 Transit Gateway to peer with.
 	// +kubebuilder:validation:Required
 	PeerRegion *string `json:"peerRegion" tf:"peer_region,omitempty"`
 
+	// Identifier of EC2 Transit Gateway to peer with.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -43,9 +49,11 @@ type TransitGatewayPeeringAttachmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Key-value tags for the EC2 Transit Gateway Peering Attachment. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Identifier of EC2 Transit Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -72,7 +80,7 @@ type TransitGatewayPeeringAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 
-// TransitGatewayPeeringAttachment is the Schema for the TransitGatewayPeeringAttachments API
+// TransitGatewayPeeringAttachment is the Schema for the TransitGatewayPeeringAttachments API. Manages an EC2 Transit Gateway Peering Attachment
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

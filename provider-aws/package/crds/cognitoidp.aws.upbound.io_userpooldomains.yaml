@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: UserPoolDomain is the Schema for the UserPoolDomains API
+        description: UserPoolDomain is the Schema for the UserPoolDomains API. Provides
+          a Cognito User Pool Domain resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   certificateArn:
+                    description: The ARN of an ISSUED ACM certificate in us-east-1
+                      for a custom domain.
                     type: string
                   certificateArnRef:
                     description: A Reference to a named object.
@@ -139,12 +142,16 @@ spec:
                         type: object
                     type: object
                   domain:
+                    description: For custom domains, this is the fully-qualified domain
+                      name, such as auth.example.com. For Amazon Cognito prefix domains,
+                      this is the prefix alone, such as auth.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   userPoolId:
+                    description: The user pool ID.
                     type: string
                   userPoolIdRef:
                     description: A Reference to a named object.
@@ -400,14 +407,20 @@ spec:
               atProvider:
                 properties:
                   awsAccountId:
+                    description: The AWS account ID for the user pool owner.
                     type: string
                   cloudfrontDistributionArn:
+                    description: The URL of the CloudFront distribution. This is required
+                      to generate the ALIAS aws_route53_record
                     type: string
                   id:
                     type: string
                   s3Bucket:
+                    description: The S3 bucket where the static files for this domain
+                      are stored.
                     type: string
                   version:
+                    description: The app version.
                     type: string
                 type: object
               conditions:

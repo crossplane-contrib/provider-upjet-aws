@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: TransitGatewayMulticastDomainAssociation is the Schema for the
-          TransitGatewayMulticastDomainAssociations API
+          TransitGatewayMulticastDomainAssociations API. Manages an EC2 Transit Gateway
+          Multicast Domain Association
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -70,6 +71,8 @@ spec:
                       be created in.
                     type: string
                   subnetId:
+                    description: The ID of the subnet to associate with the transit
+                      gateway multicast domain.
                     type: string
                   subnetIdRef:
                     description: A Reference to a named object.
@@ -145,6 +148,7 @@ spec:
                         type: object
                     type: object
                   transitGatewayAttachmentId:
+                    description: The ID of the transit gateway attachment.
                     type: string
                   transitGatewayAttachmentIdRef:
                     description: A Reference to a named object.
@@ -220,6 +224,7 @@ spec:
                         type: object
                     type: object
                   transitGatewayMulticastDomainId:
+                    description: The ID of the transit gateway multicast domain.
                     type: string
                   transitGatewayMulticastDomainIdRef:
                     description: A Reference to a named object.
@@ -475,6 +480,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: EC2 Transit Gateway Multicast Domain Association
+                      identifier.
                     type: string
                 type: object
               conditions:

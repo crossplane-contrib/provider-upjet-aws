@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: UserGroup is the Schema for the UserGroups API
+        description: UserGroup is the Schema for the UserGroups API. Provides an ElastiCache
+          user group.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +67,7 @@ spec:
                   arn:
                     type: string
                   engine:
+                    description: The current supported value is REDIS.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -151,6 +153,7 @@ spec:
                         type: object
                     type: object
                   userIds:
+                    description: The list of user IDs that belong to the user group.
                     items:
                       type: string
                     type: array
@@ -335,6 +338,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The user group identifier.
                     type: string
                   tagsAll:
                     additionalProperties:

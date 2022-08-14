@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: InstanceProfile is the Schema for the InstanceProfiles API
+        description: InstanceProfile is the Schema for the InstanceProfiles API. Provides
+          an IAM instance profile.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,16 @@ spec:
               forProvider:
                 properties:
                   path:
+                    description: Path to the instance profile. For more information
+                      about paths, see IAM Identifiers in the IAM User Guide. Can
+                      be a string of characters consisting of either a forward slash  by
+                      itself or a string that must begin and end with forward slashes.
+                      Can include any ASCII character from the !  through the DEL
+                      character , including most punctuation characters, digits, and
+                      upper and lowercase letters.
                     type: string
                   role:
+                    description: Name of the role to add to the profile.
                     type: string
                   roleRef:
                     description: A Reference to a named object.
@@ -143,6 +152,10 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Map of resource tags for the IAM Instance Profile.
+                      If configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                 type: object
               providerConfigRef:
@@ -322,16 +335,23 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: ARN assigned by AWS to the instance profile.
                     type: string
                   createDate:
+                    description: Creation timestamp of the instance profile.
                     type: string
                   id:
+                    description: Instance profile's ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   uniqueId:
+                    description: Unique ID assigned by AWS.
                     type: string
                 type: object
               conditions:

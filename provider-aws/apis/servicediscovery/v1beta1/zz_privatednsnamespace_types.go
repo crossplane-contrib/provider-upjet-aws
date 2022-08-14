@@ -14,20 +14,27 @@ import (
 )
 
 type PrivateDNSNamespaceObservation struct {
+
+	// The ARN that Amazon Route 53 assigns to the namespace when you create it.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ID for the hosted zone that Amazon Route 53 creates when you create a namespace.
 	HostedZone *string `json:"hostedZone,omitempty" tf:"hosted_zone,omitempty"`
 
+	// The ID of a namespace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type PrivateDNSNamespaceParameters struct {
 
+	// The description that you specify for the namespace when you create it.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The name of the namespace.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -36,9 +43,11 @@ type PrivateDNSNamespaceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of tags to assign to the namespace. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The ID of VPC that you want to associate the namespace with.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPC *string `json:"vpc,omitempty" tf:"vpc,omitempty"`
@@ -64,7 +73,7 @@ type PrivateDNSNamespaceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PrivateDNSNamespace is the Schema for the PrivateDNSNamespaces API
+// PrivateDNSNamespace is the Schema for the PrivateDNSNamespaces API. Provides a Service Discovery Private DNS Namespace resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

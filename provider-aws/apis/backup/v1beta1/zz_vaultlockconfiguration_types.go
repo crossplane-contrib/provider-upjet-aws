@@ -14,6 +14,8 @@ import (
 )
 
 type VaultLockConfigurationObservation struct {
+
+	// The ARN of the vault.
 	BackupVaultArn *string `json:"backupVaultArn,omitempty" tf:"backup_vault_arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -24,12 +26,15 @@ type VaultLockConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	BackupVaultName *string `json:"backupVaultName" tf:"backup_vault_name,omitempty"`
 
+	// The number of days before the lock date.
 	// +kubebuilder:validation:Optional
 	ChangeableForDays *float64 `json:"changeableForDays,omitempty" tf:"changeable_for_days,omitempty"`
 
+	// The maximum retention period that the vault retains its recovery points.
 	// +kubebuilder:validation:Optional
 	MaxRetentionDays *float64 `json:"maxRetentionDays,omitempty" tf:"max_retention_days,omitempty"`
 
+	// The minimum retention period that the vault retains its recovery points.
 	// +kubebuilder:validation:Optional
 	MinRetentionDays *float64 `json:"minRetentionDays,omitempty" tf:"min_retention_days,omitempty"`
 
@@ -53,7 +58,7 @@ type VaultLockConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VaultLockConfiguration is the Schema for the VaultLockConfigurations API
+// VaultLockConfiguration is the Schema for the VaultLockConfigurations API. Provides an AWS Backup vault lock configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,6 +14,8 @@ import (
 )
 
 type QueryLogConfigAssociationObservation struct {
+
+	// he ID of the Route 53 Resolver query logging configuration association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -24,6 +26,7 @@ type QueryLogConfigAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the Route 53 Resolver query logging configuration that you want to associate a VPC with.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/route53resolver/v1beta1.QueryLogConfig
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -35,6 +38,7 @@ type QueryLogConfigAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	ResolverQueryLogConfigIDSelector *v1.Selector `json:"resolverQueryLogConfigIdSelector,omitempty" tf:"-"`
 
+	// The ID of a VPC that you want this query logging configuration to log queries for.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -61,7 +65,7 @@ type QueryLogConfigAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// QueryLogConfigAssociation is the Schema for the QueryLogConfigAssociations API
+// QueryLogConfigAssociation is the Schema for the QueryLogConfigAssociations API. Provides a Route 53 Resolver query logging configuration association resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

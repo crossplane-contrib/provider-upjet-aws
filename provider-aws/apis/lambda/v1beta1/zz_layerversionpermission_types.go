@@ -14,24 +14,32 @@ import (
 )
 
 type LayerVersionPermissionObservation struct {
+
+	// The layer_name and version_number, separated by a comma .
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Full Lambda Layer Permission policy.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// A unique identifier for the current revision of the policy.
 	RevisionID *string `json:"revisionId,omitempty" tf:"revision_id,omitempty"`
 }
 
 type LayerVersionPermissionParameters struct {
 
+	// Action, which will be allowed. lambda:GetLayerVersion value is suggested by AWS documantation.
 	// +kubebuilder:validation:Required
 	Action *string `json:"action" tf:"action,omitempty"`
 
+	// The name or ARN of the Lambda Layer, which you want to grant access to.
 	// +kubebuilder:validation:Required
 	LayerName *string `json:"layerName" tf:"layer_name,omitempty"`
 
+	// An identifier of AWS Organization, which should be able to use your Lambda Layer. principal should be equal to * if organization_id provided.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// AWS account ID which should be able to use your Lambda Layer. * can be used here, if you want to share your Lambda Layer widely.
 	// +kubebuilder:validation:Required
 	Principal *string `json:"principal" tf:"principal,omitempty"`
 
@@ -40,9 +48,11 @@ type LayerVersionPermissionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The name of Lambda Layer Permission, for example dev-account - human readable note about what is this permission for.
 	// +kubebuilder:validation:Required
 	StatementID *string `json:"statementId" tf:"statement_id,omitempty"`
 
+	// Version of Lambda Layer, which you want to grant access to. Note: permissions only apply to a single version of a layer.
 	// +kubebuilder:validation:Required
 	VersionNumber *float64 `json:"versionNumber" tf:"version_number,omitempty"`
 }
@@ -61,7 +71,7 @@ type LayerVersionPermissionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// LayerVersionPermission is the Schema for the LayerVersionPermissions API
+// LayerVersionPermission is the Schema for the LayerVersionPermissions API. Provides a Lambda Layer Version Permission resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

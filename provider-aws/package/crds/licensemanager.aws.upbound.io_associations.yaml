@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Association is the Schema for the Associations API
+        description: Association is the Schema for the Associations API. Provides
+          a License Manager association resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   licenseConfigurationArn:
+                    description: ARN of the license configuration.
                     type: string
                   licenseConfigurationArnRef:
                     description: A Reference to a named object.
@@ -143,6 +145,7 @@ spec:
                       be created in.
                     type: string
                   resourceArn:
+                    description: ARN of the resource associated with the license configuration.
                     type: string
                   resourceArnRef:
                     description: A Reference to a named object.
@@ -397,6 +400,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The license configuration ARN.
                     type: string
                 type: object
               conditions:

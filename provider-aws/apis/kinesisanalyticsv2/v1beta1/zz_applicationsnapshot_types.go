@@ -14,15 +14,20 @@ import (
 )
 
 type ApplicationSnapshotObservation struct {
+
+	// The current application version ID when the snapshot was created.
 	ApplicationVersionID *float64 `json:"applicationVersionId,omitempty" tf:"application_version_id,omitempty"`
 
+	// The application snapshot identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The timestamp of the application snapshot.
 	SnapshotCreationTimestamp *string `json:"snapshotCreationTimestamp,omitempty" tf:"snapshot_creation_timestamp,omitempty"`
 }
 
 type ApplicationSnapshotParameters struct {
 
+	// The name of an existing  Kinesis Analytics v2 Application. Note that the application must be running for a snapshot to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kinesisanalyticsv2/v1beta1.Application
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
@@ -54,7 +59,7 @@ type ApplicationSnapshotStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ApplicationSnapshot is the Schema for the ApplicationSnapshots API
+// ApplicationSnapshot is the Schema for the ApplicationSnapshots API. Manages a Kinesis Analytics v2 Application Snapshot.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

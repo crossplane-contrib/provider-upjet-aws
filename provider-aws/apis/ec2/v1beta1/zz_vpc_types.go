@@ -14,38 +14,54 @@ import (
 )
 
 type VPCObservation struct {
+
+	// Amazon Resource Name  of VPC
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	DHCPOptionsID *string `json:"dhcpOptionsId,omitempty" tf:"dhcp_options_id,omitempty"`
 
+	// The ID of the network ACL created by default on VPC creation
 	DefaultNetworkACLID *string `json:"defaultNetworkAclId,omitempty" tf:"default_network_acl_id,omitempty"`
 
+	// The ID of the route table created by default on VPC creation
 	DefaultRouteTableID *string `json:"defaultRouteTableId,omitempty" tf:"default_route_table_id,omitempty"`
 
+	// The ID of the security group created by default on VPC creation
 	DefaultSecurityGroupID *string `json:"defaultSecurityGroupId,omitempty" tf:"default_security_group_id,omitempty"`
 
+	// The ID of the VPC
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The association ID for the IPv6 CIDR block.
 	IPv6AssociationID *string `json:"ipv6AssociationId,omitempty" tf:"ipv6_association_id,omitempty"`
 
+	// The ID of the main route table associated with
+	// this VPC. Note that you can change a VPC's main route table by using an
+	// aws_main_route_table_association.
 	MainRouteTableID *string `json:"mainRouteTableId,omitempty" tf:"main_route_table_id,omitempty"`
 
+	// The ID of the AWS account that owns the VPC.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type VPCParameters struct {
 
+	// Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block. Default is false. Conflicts with ipv6_ipam_pool_id
 	// +kubebuilder:validation:Optional
 	AssignGeneratedIPv6CidrBlock *bool `json:"assignGeneratedIpv6CidrBlock,omitempty" tf:"assign_generated_ipv6_cidr_block,omitempty"`
 
+	// The IPv4 CIDR block for the VPC. CIDR can be explicitly set or it can be derived from IPAM using ipv4_netmask_length.
 	// +kubebuilder:validation:Optional
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EnableClassiclink *bool `json:"enableClassiclink,omitempty" tf:"enable_classiclink,omitempty"`
 
+	// A boolean flag to enable/disable ClassicLink DNS Support for the VPC.
+	// Only valid in regions and accounts that support EC2 Classic.
 	// +kubebuilder:validation:Optional
 	EnableClassiclinkDNSSupport *bool `json:"enableClassiclinkDnsSupport,omitempty" tf:"enable_classiclink_dns_support,omitempty"`
 
@@ -55,21 +71,26 @@ type VPCParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableDNSSupport *bool `json:"enableDnsSupport,omitempty" tf:"enable_dns_support,omitempty"`
 
+	// The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across AWS Regions and accounts. Using IPAM you can monitor IP address usage throughout your AWS Organization.
 	// +kubebuilder:validation:Optional
 	IPv4IpamPoolID *string `json:"ipv4IpamPoolId,omitempty" tf:"ipv4_ipam_pool_id,omitempty"`
 
+	// The netmask length of the IPv4 CIDR you want to allocate to this VPC. Requires specifying a ipv4_ipam_pool_id.
 	// +kubebuilder:validation:Optional
 	IPv4NetmaskLength *float64 `json:"ipv4NetmaskLength,omitempty" tf:"ipv4_netmask_length,omitempty"`
 
+	// IPv6 CIDR block to request from an IPAM Pool. Can be set explicitly or derived from IPAM using ipv6_netmask_length.
 	// +kubebuilder:validation:Optional
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	IPv6CidrBlockNetworkBorderGroup *string `json:"ipv6CidrBlockNetworkBorderGroup,omitempty" tf:"ipv6_cidr_block_network_border_group,omitempty"`
 
+	// IPAM Pool ID for a IPv6 pool. Conflicts with assign_generated_ipv6_cidr_block.
 	// +kubebuilder:validation:Optional
 	IPv6IpamPoolID *string `json:"ipv6IpamPoolId,omitempty" tf:"ipv6_ipam_pool_id,omitempty"`
 
+	// Netmask length to request from IPAM Pool. Conflicts with ipv6_cidr_block. This can be omitted if IPAM pool as a allocation_default_netmask_length set. Valid values: 56.
 	// +kubebuilder:validation:Optional
 	IPv6NetmaskLength *float64 `json:"ipv6NetmaskLength,omitempty" tf:"ipv6_netmask_length,omitempty"`
 
@@ -81,6 +102,7 @@ type VPCParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -99,7 +121,7 @@ type VPCStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VPC is the Schema for the VPCs API
+// VPC is the Schema for the VPCs API. Provides a VPC resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

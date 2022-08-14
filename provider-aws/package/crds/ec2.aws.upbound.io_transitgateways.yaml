@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: TransitGateway is the Schema for the TransitGateways API
+        description: TransitGateway is the Schema for the TransitGateways API. Manages
+          an EC2 Transit Gateway
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,16 +65,31 @@ spec:
               forProvider:
                 properties:
                   amazonSideAsn:
+                    description: 'Private Autonomous System Number  for the Amazon
+                      side of a BGP session. The range is 64512 to 65534 for 16-bit
+                      ASNs and 4200000000 to 4294967294 for 32-bit ASNs. Default value:
+                      64512.'
                     type: number
                   autoAcceptSharedAttachments:
+                    description: 'Whether resource attachment requests are automatically
+                      accepted. Valid values: disable, enable. Default value: disable.'
                     type: string
                   defaultRouteTableAssociation:
+                    description: 'Whether resource attachments are automatically associated
+                      with the default association route table. Valid values: disable,
+                      enable. Default value: enable.'
                     type: string
                   defaultRouteTablePropagation:
+                    description: 'Whether resource attachments automatically propagate
+                      routes to the default propagation route table. Valid values:
+                      disable, enable. Default value: enable.'
                     type: string
                   description:
+                    description: Description of the EC2 Transit Gateway.
                     type: string
                   dnsSupport:
+                    description: 'Whether DNS support is enabled. Valid values: disable,
+                      enable. Default value: enable.'
                     type: string
                   multicastSupport:
                     type: string
@@ -84,12 +100,20 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value tags for the EC2 Transit Gateway. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                   transitGatewayCidrBlocks:
+                    description: One or more IPv4 or IPv6 CIDR blocks for the transit
+                      gateway. Must be a size /24 CIDR block or larger for IPv4, or
+                      a size /64 CIDR block or larger for IPv6.
                     items:
                       type: string
                     type: array
                   vpnEcmpSupport:
+                    description: 'Whether VPN Equal Cost Multipath Protocol support
+                      is enabled. Valid values: disable, enable. Default value: enable.'
                     type: string
                 required:
                 - region
@@ -271,18 +295,27 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: EC2 Transit Gateway Amazon Resource Name
                     type: string
                   associationDefaultRouteTableId:
+                    description: Identifier of the default association route table
                     type: string
                   id:
+                    description: EC2 Transit Gateway identifier
                     type: string
                   ownerId:
+                    description: Identifier of the AWS account that owns the EC2 Transit
+                      Gateway
                     type: string
                   propagationDefaultRouteTableId:
+                    description: Identifier of the default propagation route table
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

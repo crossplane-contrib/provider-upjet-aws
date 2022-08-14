@@ -18,9 +18,13 @@ type CodeHookObservation struct {
 
 type CodeHookParameters struct {
 
+	// The version of the request-response that you want Amazon Lex to use
+	// to invoke your Lambda function. For more information, see
+	// Using Lambda Functions. Must be less than or equal to 5 characters in length.
 	// +kubebuilder:validation:Required
 	MessageVersion *string `json:"messageVersion" tf:"message_version,omitempty"`
 
+	// The Amazon Resource Name  of the Lambda function.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
@@ -30,12 +34,16 @@ type ConclusionStatementMessageObservation struct {
 
 type ConclusionStatementMessageParameters struct {
 
+	// The text of the message. Must be less than or equal to 1000 characters in length.
 	// +kubebuilder:validation:Required
 	Content *string `json:"content" tf:"content,omitempty"`
 
+	// The content type of the message string.
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 .
 	// +kubebuilder:validation:Optional
 	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
@@ -57,12 +65,16 @@ type ConfirmationPromptMessageObservation struct {
 
 type ConfirmationPromptMessageParameters struct {
 
+	// The text of the message. Must be less than or equal to 1000 characters in length.
 	// +kubebuilder:validation:Required
 	Content *string `json:"content" tf:"content,omitempty"`
 
+	// The content type of the message string.
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 .
 	// +kubebuilder:validation:Optional
 	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
@@ -72,6 +84,7 @@ type ConfirmationPromptObservation struct {
 
 type ConfirmationPromptParameters struct {
 
+	// The number of times to prompt the user for information. Must be a number between 1 and 5 .
 	// +kubebuilder:validation:Required
 	MaxAttempts *float64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
 
@@ -87,9 +100,13 @@ type DialogCodeHookObservation struct {
 
 type DialogCodeHookParameters struct {
 
+	// The version of the request-response that you want Amazon Lex to use
+	// to invoke your Lambda function. For more information, see
+	// Using Lambda Functions. Must be less than or equal to 5 characters in length.
 	// +kubebuilder:validation:Required
 	MessageVersion *string `json:"messageVersion" tf:"message_version,omitempty"`
 
+	// The Amazon Resource Name  of the Lambda function.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
@@ -99,6 +116,7 @@ type FollowUpPromptObservation struct {
 
 type FollowUpPromptParameters struct {
 
+	// Prompts for information from the user. Attributes are documented under prompt.
 	// +kubebuilder:validation:Required
 	Prompt []PromptParameters `json:"prompt" tf:"prompt,omitempty"`
 
@@ -111,50 +129,84 @@ type FulfillmentActivityObservation struct {
 
 type FulfillmentActivityParameters struct {
 
+	// A description of the Lambda function that is run to fulfill the intent.
+	// Required if type is CodeHook. Attributes are documented under code_hook.
 	// +kubebuilder:validation:Optional
 	CodeHook []CodeHookParameters `json:"codeHook,omitempty" tf:"code_hook,omitempty"`
 
+	// How the intent should be fulfilled, either by running a Lambda function or by
+	// returning the slot data to the client application. Type can be either ReturnIntent or CodeHook, as documented here.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type IntentObservation_2 struct {
+
+	// The ARN of the Lex intent.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Checksum identifying the version of the intent that was created. The checksum is not
+	// included as an argument because the resource will add it automatically when updating the intent.
 	Checksum *string `json:"checksum,omitempty" tf:"checksum,omitempty"`
 
+	// The date when the intent version was created.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The date when the $LATEST version of this intent was updated.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
+	// The version of the bot.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type IntentParameters_2 struct {
 
+	// The statement that you want Amazon Lex to convey to the user
+	// after the intent is successfully fulfilled by the Lambda function. This element is relevant only if
+	// you provide a Lambda function in the fulfillment_activity. If you return the intent to the client
+	// application, you can't specify this element. The follow_up_prompt and conclusion_statement are
+	// mutually exclusive. You can specify only one. Attributes are documented under statement.
 	// +kubebuilder:validation:Optional
 	ConclusionStatement []ConclusionStatementParameters `json:"conclusionStatement,omitempty" tf:"conclusion_statement,omitempty"`
 
+	// Prompts the user to confirm the intent. This question should
+	// have a yes or no answer. You you must provide both the rejection_statement and confirmation_prompt,
+	// or neither. Attributes are documented under prompt.
 	// +kubebuilder:validation:Optional
 	ConfirmationPrompt []ConfirmationPromptParameters `json:"confirmationPrompt,omitempty" tf:"confirmation_prompt,omitempty"`
 
+	// Determines if a new slot type version is created when the initial
+	// resource is created and on each update. Defaults to false.
 	// +kubebuilder:validation:Optional
 	CreateVersion *bool `json:"createVersion,omitempty" tf:"create_version,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies a Lambda function to invoke for each user input. You can
+	// invoke this Lambda function to personalize user interaction. Attributes are documented under code_hook.
 	// +kubebuilder:validation:Optional
 	DialogCodeHook []DialogCodeHookParameters `json:"dialogCodeHook,omitempty" tf:"dialog_code_hook,omitempty"`
 
+	// Amazon Lex uses this prompt to solicit additional activity after
+	// fulfilling an intent. For example, after the OrderPizza intent is fulfilled, you might prompt the
+	// user to order a drink. The follow_up_prompt field and the conclusion_statement field are mutually
+	// exclusive. You can specify only one. Attributes are documented under follow_up_prompt.
 	// +kubebuilder:validation:Optional
 	FollowUpPrompt []FollowUpPromptParameters `json:"followUpPrompt,omitempty" tf:"follow_up_prompt,omitempty"`
 
+	// Describes how the intent is fulfilled. For example, after a
+	// user provides all of the information for a pizza order, fulfillment_activity defines how the bot
+	// places an order with a local pizza store. Attributes are documented under fulfillment_activity.
 	// +kubebuilder:validation:Required
 	FulfillmentActivity []FulfillmentActivityParameters `json:"fulfillmentActivity" tf:"fulfillment_activity,omitempty"`
 
+	// A unique identifier for the built-in intent to base this
+	// intent on. To find the signature for an intent, see
+	// Standard Built-in Intents
+	// in the Alexa Skills Kit.
 	// +kubebuilder:validation:Optional
 	ParentIntentSignature *string `json:"parentIntentSignature,omitempty" tf:"parent_intent_signature,omitempty"`
 
@@ -169,6 +221,8 @@ type IntentParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	SampleUtterances []*string `json:"sampleUtterances,omitempty" tf:"sample_utterances,omitempty"`
 
+	// An list of intent slots. At runtime, Amazon Lex elicits required slot values
+	// from the user using prompts defined in the slots. Attributes are documented under slot.
 	// +kubebuilder:validation:Optional
 	Slot []SlotParameters `json:"slot,omitempty" tf:"slot,omitempty"`
 }
@@ -178,12 +232,16 @@ type IntentRejectionStatementMessageObservation struct {
 
 type IntentRejectionStatementMessageParameters struct {
 
+	// The text of the message. Must be less than or equal to 1000 characters in length.
 	// +kubebuilder:validation:Required
 	Content *string `json:"content" tf:"content,omitempty"`
 
+	// The content type of the message string.
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 .
 	// +kubebuilder:validation:Optional
 	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
@@ -205,12 +263,16 @@ type PromptMessageObservation struct {
 
 type PromptMessageParameters struct {
 
+	// The text of the message. Must be less than or equal to 1000 characters in length.
 	// +kubebuilder:validation:Required
 	Content *string `json:"content" tf:"content,omitempty"`
 
+	// The content type of the message string.
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 .
 	// +kubebuilder:validation:Optional
 	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
@@ -220,6 +282,7 @@ type PromptObservation struct {
 
 type PromptParameters struct {
 
+	// The number of times to prompt the user for information. Must be a number between 1 and 5 .
 	// +kubebuilder:validation:Required
 	MaxAttempts *float64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
 
@@ -235,12 +298,16 @@ type RejectionStatementMessageObservation struct {
 
 type RejectionStatementMessageParameters struct {
 
+	// The text of the message. Must be less than or equal to 1000 characters in length.
 	// +kubebuilder:validation:Required
 	Content *string `json:"content" tf:"content,omitempty"`
 
+	// The content type of the message string.
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 .
 	// +kubebuilder:validation:Optional
 	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
@@ -268,6 +335,10 @@ type SlotParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Directs Lex the order in which to elicit this slot value from the user.
+	// For example, if the intent has two slots with priorities 1 and 2, AWS Lex first elicits a value for
+	// the slot with priority 1. If multiple slots share the same priority, the order in which Lex elicits
+	// values is arbitrary. Must be between 1 and 100.
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
@@ -277,15 +348,21 @@ type SlotParameters struct {
 	// +kubebuilder:validation:Optional
 	SampleUtterances []*string `json:"sampleUtterances,omitempty" tf:"sample_utterances,omitempty"`
 
+	// Specifies whether the slot is required or optional.
 	// +kubebuilder:validation:Required
 	SlotConstraint *string `json:"slotConstraint" tf:"slot_constraint,omitempty"`
 
+	// The type of the slot, either a custom slot type that you defined or one of
+	// the built-in slot types. Must be less than or equal to 100 characters in length.
 	// +kubebuilder:validation:Required
 	SlotType *string `json:"slotType" tf:"slot_type,omitempty"`
 
+	// The version of the slot type. Must be less than or equal to 64 characters in length.
 	// +kubebuilder:validation:Optional
 	SlotTypeVersion *string `json:"slotTypeVersion,omitempty" tf:"slot_type_version,omitempty"`
 
+	// The prompt that Amazon Lex uses to elicit the slot value
+	// from the user. Attributes are documented under prompt.
 	// +kubebuilder:validation:Optional
 	ValueElicitationPrompt []ValueElicitationPromptParameters `json:"valueElicitationPrompt,omitempty" tf:"value_elicitation_prompt,omitempty"`
 }
@@ -295,12 +372,16 @@ type ValueElicitationPromptMessageObservation struct {
 
 type ValueElicitationPromptMessageParameters struct {
 
+	// The text of the message. Must be less than or equal to 1000 characters in length.
 	// +kubebuilder:validation:Required
 	Content *string `json:"content" tf:"content,omitempty"`
 
+	// The content type of the message string.
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 .
 	// +kubebuilder:validation:Optional
 	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
@@ -310,6 +391,7 @@ type ValueElicitationPromptObservation struct {
 
 type ValueElicitationPromptParameters struct {
 
+	// The number of times to prompt the user for information. Must be a number between 1 and 5 .
 	// +kubebuilder:validation:Required
 	MaxAttempts *float64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
 
@@ -334,7 +416,7 @@ type IntentStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Intent is the Schema for the Intents API
+// Intent is the Schema for the Intents API. Provides an Amazon Lex intent resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

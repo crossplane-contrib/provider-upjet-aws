@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Plan is the Schema for the Plans API
+        description: Plan is the Schema for the Plans API. Provides an AWS Backup
+          plan resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,13 +65,22 @@ spec:
               forProvider:
                 properties:
                   advancedBackupSetting:
+                    description: An object that specifies backup options for each
+                      resource type.
                     items:
                       properties:
                         backupOptions:
                           additionalProperties:
                             type: string
+                          description: Specifies the backup option for a selected
+                            resource. This option is only available for Windows VSS
+                            backup jobs. Set to { WindowsVSS = "enabled" } to enable
+                            Windows VSS backup option and create a VSS Windows backup.
                           type: object
                         resourceType:
+                          description: 'The type of AWS resource to be backed up.
+                            For VSS Windows backups, the only supported resource type
+                            is Amazon EC2. Valid values: EC2.'
                           type: string
                       required:
                       - backupOptions
@@ -78,27 +88,43 @@ spec:
                       type: object
                     type: array
                   name:
+                    description: The display name of a backup plan.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   rule:
+                    description: A rule object that specifies a scheduled task that
+                      is used to back up a selection of resources.
                     items:
                       properties:
                         completionWindow:
+                          description: The amount of time AWS Backup attempts a backup
+                            before canceling the job and returning an error.
                           type: number
                         copyAction:
+                          description: Configuration block with copy operation settings.
+                            Detailed below.
                           items:
                             properties:
                               destinationVaultArn:
+                                description: An Amazon Resource Name  that uniquely
+                                  identifies the destination backup vault for the
+                                  copied backup.
                                 type: string
                               lifecycle:
                                 items:
                                   properties:
                                     coldStorageAfter:
+                                      description: Specifies the number of days after
+                                        creation that a recovery point is moved to
+                                        cold storage.
                                       type: number
                                     deleteAfter:
+                                      description: Specifies the number of days after
+                                        creation that a recovery point is deleted.
+                                        Must be 90 days greater than cold_storage_after.
                                       type: number
                                   type: object
                                 type: array
@@ -107,27 +133,42 @@ spec:
                             type: object
                           type: array
                         enableContinuousBackup:
+                          description: Enable continuous backups for supported resources.
                           type: boolean
                         lifecycle:
                           items:
                             properties:
                               coldStorageAfter:
+                                description: Specifies the number of days after creation
+                                  that a recovery point is moved to cold storage.
                                 type: number
                               deleteAfter:
+                                description: Specifies the number of days after creation
+                                  that a recovery point is deleted. Must be 90 days
+                                  greater than cold_storage_after.
                                 type: number
                             type: object
                           type: array
                         recoveryPointTags:
                           additionalProperties:
                             type: string
+                          description: Metadata that you can assign to help organize
+                            the resources that you create.
                           type: object
                         ruleName:
+                          description: An display name for a backup rule.
                           type: string
                         schedule:
+                          description: A CRON expression specifying when AWS Backup
+                            initiates a backup job.
                           type: string
                         startWindow:
+                          description: The amount of time in minutes before beginning
+                            a backup.
                           type: number
                         targetVaultName:
+                          description: The name of a logical container where backups
+                            are stored.
                           type: string
                         targetVaultNameRef:
                           description: A Reference to a named object.
@@ -212,6 +253,10 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Metadata that you can assign to help organize the
+                      plans you create. If configured with a provider default_tags
+                      configuration block present, tags with matching keys will overwrite
+                      those defined at the provider-level.
                     type: object
                 required:
                 - name
@@ -395,14 +440,21 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the backup plan.
                     type: string
                   id:
+                    description: The id of the backup plan.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   version:
+                    description: Unique, randomly generated, Unicode, UTF-8 encoded
+                      string that serves as the version ID of the backup plan.
                     type: string
                 type: object
               conditions:

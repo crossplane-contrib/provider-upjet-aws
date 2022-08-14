@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: KeyGroup is the Schema for the KeyGroups API
+        description: KeyGroup is the Schema for the KeyGroups API. Provides a CloudFront
+          key group.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,16 @@ spec:
               forProvider:
                 properties:
                   comment:
+                    description: A comment to describe the key group..
                     type: string
                   items:
+                    description: A list of the identifiers of the public keys in the
+                      key group.
                     items:
                       type: string
                     type: array
                   name:
+                    description: A name to identify the key group.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -257,8 +262,10 @@ spec:
               atProvider:
                 properties:
                   etag:
+                    description: The identifier for this version of the key group.
                     type: string
                   id:
+                    description: The identifier for the key group.
                     type: string
                 type: object
               conditions:
