@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Bot is the Schema for the Bots API
+        description: Bot is the Schema for the Bots API. Provides an Amazon Lex bot
+          resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,16 +65,24 @@ spec:
               forProvider:
                 properties:
                   abortStatement:
+                    description: The message that Amazon Lex uses to abort a conversation.
+                      Attributes are documented under statement.
                     items:
                       properties:
                         message:
                           items:
                             properties:
                               content:
+                                description: The text of the message.
                                 type: string
                               contentType:
+                                description: The content type of the message string.
                                 type: string
                               groupNumber:
+                                description: Identifies the message group that the
+                                  message belongs to. When a group is assigned to
+                                  a message, Amazon Lex returns one message from each
+                                  group in the response.
                                 type: number
                             required:
                             - content
@@ -87,20 +96,36 @@ spec:
                       type: object
                     type: array
                   childDirected:
+                    description: By specifying true, you confirm that your use of
+                      Amazon Lex is related to a website, program, or other application
+                      that is directed or targeted, in whole or in part, to children
+                      under age 13 and subject to COPPA. For more information see
+                      the Amazon Lex FAQ and the Amazon Lex PutBot API Docs.
                     type: boolean
                   clarificationPrompt:
+                    description: The message that Amazon Lex uses when it doesn't
+                      understand the user's request. Attributes are documented under
+                      prompt.
                     items:
                       properties:
                         maxAttempts:
+                          description: The number of times to prompt the user for
+                            information.
                           type: number
                         message:
                           items:
                             properties:
                               content:
+                                description: The text of the message.
                                 type: string
                               contentType:
+                                description: The content type of the message string.
                                 type: string
                               groupNumber:
+                                description: Identifies the message group that the
+                                  message belongs to. When a group is assigned to
+                                  a message, Amazon Lex returns one message from each
+                                  group in the response.
                                 type: number
                             required:
                             - content
@@ -115,21 +140,47 @@ spec:
                       type: object
                     type: array
                   createVersion:
+                    description: Determines if a new bot version is created when the
+                      initial resource is created and on each update. Defaults to
+                      false.
                     type: boolean
                   description:
+                    description: A description of the bot. Must be less than or equal
+                      to 200 characters in length.
                     type: string
                   detectSentiment:
+                    description: When set to true user utterances are sent to Amazon
+                      Comprehend for sentiment analysis. If you don't specify detectSentiment,
+                      the default is false.
                     type: boolean
                   enableModelImprovements:
+                    description: Set to true to enable access to natural language
+                      understanding improvements. When you set the enable_model_improvements
+                      parameter to true you can use the nlu_intent_confidence_threshold
+                      parameter to configure confidence scores. For more information,
+                      see Confidence Scores. You can only set the enable_model_improvements
+                      parameter in certain Regions. If you set the parameter to true,
+                      your bot has access to accuracy improvements. For more information
+                      see the Amazon Lex Bot PutBot API Docs.
                     type: boolean
                   idleSessionTtlInSeconds:
+                    description: The maximum time in seconds that Amazon Lex retains
+                      the data gathered in a conversation. Default is 300. Must be
+                      a number between 60 and 86400 .
                     type: number
                   intent:
+                    description: A set of Intent objects. Each intent represents a
+                      command that a user can express. Attributes are documented under
+                      intent. Can have up to 100 Intent objects.
                     items:
                       properties:
                         intentName:
+                          description: The name of the intent. Must be less than or
+                            equal to 100 characters in length.
                           type: string
                         intentVersion:
+                          description: The version of the intent. Must be less than
+                            or equal to 64 characters in length.
                           type: string
                       required:
                       - intentName
@@ -137,16 +188,36 @@ spec:
                       type: object
                     type: array
                   locale:
+                    description: Specifies the target locale for the bot. Any intent
+                      used in the bot must be compatible with the locale of the bot.
+                      For available locales, see Amazon Lex Bot PutBot API Docs. Default
+                      is en-US.
                     type: string
                   nluIntentConfidenceThreshold:
+                    description: Determines the threshold where Amazon Lex will insert
+                      the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both
+                      when returning alternative intents in a PostContent or PostText
+                      response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent
+                      are only inserted if they are configured for the bot. For more
+                      information see Amazon Lex Bot PutBot API Docs This value requires
+                      enable_model_improvements to be set to true and the default
+                      is 0. Must be a float between 0 and 1.
                     type: number
                   processBehavior:
+                    description: If you set the process_behavior element to BUILD,
+                      Amazon Lex builds the bot so that it can be run. If you set
+                      the element to SAVE Amazon Lex saves the bot, but doesn't build
+                      it. Default is SAVE.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   voiceId:
+                    description: The Amazon Polly voice ID that you want Amazon Lex
+                      to use for voice interactions with the user. The locale configured
+                      for the voice must match the locale of the bot. For more information,
+                      see Available Voices in the Amazon Polly Developer Guide.
                     type: string
                 required:
                 - abortStatement
@@ -333,18 +404,33 @@ spec:
                   arn:
                     type: string
                   checksum:
+                    description: Checksum identifying the version of the bot that
+                      was created. The checksum is not included as an argument because
+                      the resource will add it automatically when updating the bot.
                     type: string
                   createdDate:
+                    description: The date when the bot version was created.
                     type: string
                   failureReason:
+                    description: If status is FAILED, Amazon Lex provides the reason
+                      that it failed to build the bot.
                     type: string
                   id:
                     type: string
                   lastUpdatedDate:
+                    description: The date when the $LATEST version of this bot was
+                      updated.
                     type: string
                   status:
+                    description: When you send a request to create or update a bot,
+                      Amazon Lex sets the status response element to BUILDING. After
+                      Amazon Lex builds the bot, it sets status to READY. If Amazon
+                      Lex can't build the bot, it sets status to FAILED. Amazon Lex
+                      returns the reason for the failure in the failure_reason response
+                      element.
                     type: string
                   version:
+                    description: The version of the bot.
                     type: string
                 type: object
               conditions:

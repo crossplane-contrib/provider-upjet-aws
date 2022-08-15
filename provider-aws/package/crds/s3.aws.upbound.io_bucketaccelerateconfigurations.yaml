@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketAccelerateConfiguration is the Schema for the BucketAccelerateConfigurations
-          API
+          API. Provides an S3 bucket accelerate configuration resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the bucket.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -141,12 +142,15 @@ spec:
                         type: object
                     type: object
                   expectedBucketOwner:
+                    description: The account ID of the expected bucket owner.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   status:
+                    description: 'The transfer acceleration state of the bucket. Valid
+                      values: Enabled, Suspended.'
                     type: string
                 required:
                 - region
@@ -330,6 +334,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The bucket or bucket and expected_bucket_owner separated
+                      by a comma  if the latter is provided.
                     type: string
                 type: object
               conditions:

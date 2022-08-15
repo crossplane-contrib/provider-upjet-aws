@@ -14,17 +14,22 @@ import (
 )
 
 type VPCIPv4CidrBlockAssociationObservation struct {
+
+	// The ID of the VPC CIDR association
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type VPCIPv4CidrBlockAssociationParameters struct {
 
+	// The IPv4 CIDR block for the VPC. CIDR can be explicitly set or it can be derived from IPAM using ipv4_netmask_length.
 	// +kubebuilder:validation:Optional
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
+	// The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across AWS Regions and accounts. Using IPAM you can monitor IP address usage throughout your AWS Organization.
 	// +kubebuilder:validation:Optional
 	IPv4IpamPoolID *string `json:"ipv4IpamPoolId,omitempty" tf:"ipv4_ipam_pool_id,omitempty"`
 
+	// The netmask length of the IPv4 CIDR you want to allocate to this VPC. Requires specifying a ipv4_ipam_pool_id.
 	// +kubebuilder:validation:Optional
 	IPv4NetmaskLength *float64 `json:"ipv4NetmaskLength,omitempty" tf:"ipv4_netmask_length,omitempty"`
 
@@ -33,6 +38,7 @@ type VPCIPv4CidrBlockAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the VPC to make the association with.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -58,7 +64,7 @@ type VPCIPv4CidrBlockAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VPCIPv4CidrBlockAssociation is the Schema for the VPCIPv4CidrBlockAssociations API
+// VPCIPv4CidrBlockAssociation is the Schema for the VPCIPv4CidrBlockAssociations API. Associate additional IPv4 CIDR blocks with a VPC
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

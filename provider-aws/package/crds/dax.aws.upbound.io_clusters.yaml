@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Cluster is the Schema for the Clusters API
+        description: Cluster is the Schema for the Clusters API. Provides an DAX Cluster
+          resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,14 +65,23 @@ spec:
               forProvider:
                 properties:
                   availabilityZones:
+                    description: List of Availability Zones in which the nodes will
+                      be created
                     items:
                       type: string
                     type: array
                   clusterEndpointEncryptionType:
+                    description: '–  The type of encryption the cluster''s endpoint
+                      should support. Valid values are: NONE and TLS. Default value
+                      is NONE.'
                     type: string
                   description:
+                    description: –  Description for the cluster
                     type: string
                   iamRoleArn:
+                    description: A valid Amazon Resource Name  that identifies an
+                      IAM role. At runtime, DAX will assume this role and use the
+                      role's permissions to access DynamoDB on your behalf
                     type: string
                   iamRoleArnRef:
                     description: A Reference to a named object.
@@ -147,18 +157,26 @@ spec:
                         type: object
                     type: object
                   maintenanceWindow:
+                    description: 'dd:hh24:mi . The minimum maintenance window is a
+                      60 minute period. Example: sun:05:00-sun:09:00'
                     type: string
                   nodeType:
+                    description: –  The compute and memory capacity of the nodes.
+                      See Nodes for supported node types
                     type: string
                   notificationTopicArn:
+                    description: ast-1:012345678999:my_sns_topic
                     type: string
                   parameterGroupName:
+                    description: –  Name of the parameter group to associate with
+                      this DAX cluster
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   replicationFactor:
+                    description: ode cluster, without any read replicas
                     type: number
                   securityGroupIdRefs:
                     items:
@@ -236,21 +254,30 @@ spec:
                         type: object
                     type: object
                   securityGroupIds:
+                    description: –  One or more VPC security groups associated with
+                      the cluster
                     items:
                       type: string
                     type: array
                   serverSideEncryption:
+                    description: Encrypt at rest options
                     items:
                       properties:
                         enabled:
+                          description: Whether to enable encryption at rest. Defaults
+                            to false.
                           type: boolean
                       type: object
                     type: array
                   subnetGroupName:
+                    description: –  Name of the subnet group to be used for the cluster
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - nodeType
@@ -434,14 +461,21 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the DAX cluster
                     type: string
                   clusterAddress:
+                    description: The DNS name of the DAX cluster without the port
+                      appended
                     type: string
                   configurationEndpoint:
+                    description: The configuration endpoint for this DAX cluster,
+                      consisting of a DNS name and a port number
                     type: string
                   id:
                     type: string
                   nodes:
+                    description: List of node objects including id, address, port
+                      and availability_zone. Referenceable e.g., as ${aws_dax_cluster.test.nodes.0.address}
                     items:
                       properties:
                         address:
@@ -451,14 +485,19 @@ spec:
                         id:
                           type: string
                         port:
+                          description: The port used by the configuration endpoint
                           type: number
                       type: object
                     type: array
                   port:
+                    description: The port used by the configuration endpoint
                     type: number
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

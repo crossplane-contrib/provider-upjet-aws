@@ -18,36 +18,48 @@ type LoggingConfigurationObservation struct {
 
 type LoggingConfigurationParameters struct {
 
+	// Determines whether execution data is included in your log. When set to false, data is excluded.
 	// +kubebuilder:validation:Optional
 	IncludeExecutionData *bool `json:"includeExecutionData,omitempty" tf:"include_execution_data,omitempty"`
 
+	// Defines which category of execution history events are logged. Valid values: ALL, ERROR, FATAL, OFF
 	// +kubebuilder:validation:Optional
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
+	// Amazon Resource Name  of a CloudWatch log group. Make sure the State Machine has the correct IAM policies for logging. The ARN must end with :*
 	// +kubebuilder:validation:Optional
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 }
 
 type StateMachineObservation struct {
+
+	// The ARN of the state machine.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The date the state machine was created.
 	CreationDate *string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
 
+	// The ARN of the state machine.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The current status of the state machine. Either ACTIVE or DELETING.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type StateMachineParameters struct {
 
+	// The Amazon States Language definition of the state machine.
 	// +kubebuilder:validation:Required
 	Definition *string `json:"definition" tf:"definition,omitempty"`
 
+	// Defines what execution history events are logged and where they are logged. The logging_configuration parameter is only valid when type is set to EXPRESS. Defaults to OFF. For more information see Logging Express Workflows and Log Levels in the AWS Step Functions User Guide.
 	// +kubebuilder:validation:Optional
 	LoggingConfiguration []LoggingConfigurationParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
+	// The name of the state machine. To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -56,6 +68,7 @@ type StateMachineParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The Amazon Resource Name  of the IAM role to use for this state machine.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -66,12 +79,15 @@ type StateMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Selects whether AWS X-Ray tracing is enabled.
 	// +kubebuilder:validation:Optional
 	TracingConfiguration []TracingConfigurationParameters `json:"tracingConfiguration,omitempty" tf:"tracing_configuration,omitempty"`
 
+	// Determines whether a Standard or Express state machine is created. The default is STANDARD. You cannot update the type of a state machine once it has been created. Valid values: STANDARD, EXPRESS.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -81,6 +97,7 @@ type TracingConfigurationObservation struct {
 
 type TracingConfigurationParameters struct {
 
+	// When set to true, AWS X-Ray tracing is enabled. Make sure the State Machine has the correct IAM policies for logging. See the AWS Step Functions Developer Guide for details.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -99,7 +116,7 @@ type StateMachineStatus struct {
 
 // +kubebuilder:object:root=true
 
-// StateMachine is the Schema for the StateMachines API
+// StateMachine is the Schema for the StateMachines API. Provides a Step Function State Machine resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

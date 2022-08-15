@@ -100,9 +100,6 @@ metadata:
 spec:
   forProvider:
     destination: s3
-    lifecycle:
-    - ignore_changes:
-      - ${tags["LogDeliveryEnabled"]}
     name: terraform-kinesis-firehose-msk-broker-logs-stream
     region: us-west-1
     s3Configuration:

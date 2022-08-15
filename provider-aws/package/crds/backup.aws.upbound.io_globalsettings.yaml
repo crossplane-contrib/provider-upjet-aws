@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: GlobalSettings is the Schema for the GlobalSettingss API
+        description: GlobalSettings is the Schema for the GlobalSettingss API. Provides
+          an AWS Backup Global Settings resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +67,8 @@ spec:
                   globalSettings:
                     additionalProperties:
                       type: string
+                    description: A list of resources along with the opt-in preferences
+                      for the account.
                     type: object
                   region:
                     description: Region is the region you'd like your resource to
@@ -252,6 +255,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The AWS Account ID.
                     type: string
                 type: object
               conditions:

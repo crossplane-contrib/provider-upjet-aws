@@ -56,22 +56,29 @@ type OriginRequestPolicyHeadersConfigParameters struct {
 }
 
 type OriginRequestPolicyObservation struct {
+
+	// The current version of the origin request policy.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
+	// The identifier for the origin request policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type OriginRequestPolicyParameters struct {
 
+	// Comment to describe the origin request policy.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// Object that determines whether any cookies in viewer requests  are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Cookies Config for more information.
 	// +kubebuilder:validation:Required
 	CookiesConfig []OriginRequestPolicyCookiesConfigParameters `json:"cookiesConfig" tf:"cookies_config,omitempty"`
 
+	// Object that determines whether any HTTP headers  are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Headers Config for more information.
 	// +kubebuilder:validation:Required
 	HeadersConfig []OriginRequestPolicyHeadersConfigParameters `json:"headersConfig" tf:"headers_config,omitempty"`
 
+	// Object that determines whether any URL query strings in viewer requests  are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Query String Config for more information.
 	// +kubebuilder:validation:Required
 	QueryStringsConfig []OriginRequestPolicyQueryStringsConfigParameters `json:"queryStringsConfig" tf:"query_strings_config,omitempty"`
 
@@ -116,7 +123,7 @@ type OriginRequestPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// OriginRequestPolicy is the Schema for the OriginRequestPolicys API
+// OriginRequestPolicy is the Schema for the OriginRequestPolicys API. Determines the values that CloudFront includes in requests that it sends to the origin.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

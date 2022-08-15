@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Stream is the Schema for the Streams API
+        description: Stream is the Schema for the Streams API. Provides a AWS Kinesis
+          Stream
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,21 @@ spec:
               forProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  specifying the Stream
                     type: string
                   encryptionType:
+                    description: The encryption type to use. The only acceptable values
+                      are NONE or KMS. The default value is NONE.
                     type: string
                   enforceConsumerDeletion:
+                    description: A boolean that indicates all registered consumers
+                      should be deregistered from the stream so that the stream can
+                      be destroyed without error. The default value is false.
                     type: boolean
                   kmsKeyId:
+                    description: The GUID for the customer-managed KMS key to use
+                      for encryption. You can also use a Kinesis-owned master key
+                      by specifying the alias alias/aws/kinesis.
                     type: string
                   kmsKeyIdRef:
                     description: A Reference to a named object.
@@ -151,17 +161,29 @@ spec:
                       be created in.
                     type: string
                   retentionPeriod:
+                    description: Length of time data records are accessible after
+                      they are added to the stream. The maximum value of a stream's
+                      retention period is 8760 hours. Minimum value is 24. Default
+                      is 24.
                     type: number
                   shardCount:
                     type: number
                   shardLevelMetrics:
+                    description: A list of shard-level CloudWatch metrics which can
+                      be enabled for the stream. See Monitoring with CloudWatch for
+                      more. Note that the value ALL should not be used; instead you
+                      should provide an explicit list of metrics you wish to enable.
                     items:
                       type: string
                     type: array
                   streamModeDetails:
+                    description: Indicates the capacity mode of the data stream. Detailed
+                      below.
                     items:
                       properties:
                         streamMode:
+                          description: Specifies the capacity mode of the stream.
+                            Must be either PROVISIONED or ON_DEMAND.
                           type: string
                       required:
                       - streamMode
@@ -170,6 +192,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - name
@@ -352,10 +377,14 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The unique Stream id
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

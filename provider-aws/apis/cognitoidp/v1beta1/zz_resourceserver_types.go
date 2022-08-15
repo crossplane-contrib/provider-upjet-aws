@@ -16,14 +16,17 @@ import (
 type ResourceServerObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A list of all scopes configured for this resource server in the format identifier/scope_name.
 	ScopeIdentifiers []*string `json:"scopeIdentifiers,omitempty" tf:"scope_identifiers,omitempty"`
 }
 
 type ResourceServerParameters struct {
 
+	// An identifier for the resource server.
 	// +kubebuilder:validation:Required
 	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
 
+	// A name for the resource server.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -32,6 +35,7 @@ type ResourceServerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A list of Authorization Scope.
 	// +kubebuilder:validation:Optional
 	Scope []ScopeParameters `json:"scope,omitempty" tf:"scope,omitempty"`
 
@@ -51,9 +55,11 @@ type ScopeObservation struct {
 
 type ScopeParameters struct {
 
+	// The scope description.
 	// +kubebuilder:validation:Required
 	ScopeDescription *string `json:"scopeDescription" tf:"scope_description,omitempty"`
 
+	// The scope name.
 	// +kubebuilder:validation:Required
 	ScopeName *string `json:"scopeName" tf:"scope_name,omitempty"`
 }
@@ -72,7 +78,7 @@ type ResourceServerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ResourceServer is the Schema for the ResourceServers API
+// ResourceServer is the Schema for the ResourceServers API. Provides a Cognito Resource Server.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

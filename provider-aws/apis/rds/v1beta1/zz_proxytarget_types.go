@@ -14,26 +14,36 @@ import (
 )
 
 type ProxyTargetObservation struct {
+
+	// Hostname for the target RDS DB Instance. Only returned for RDS_INSTANCE type.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
+	// Identifier of  db_proxy_name, target_group_name, target type , and resource identifier separated by forward slashes .
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Port for the target RDS DB Instance or Aurora DB Cluster.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Identifier representing the DB Instance or DB Cluster target.
 	RDSResourceID *string `json:"rdsResourceId,omitempty" tf:"rds_resource_id,omitempty"`
 
+	// Amazon Resource Name  for the DB instance or DB cluster. Currently not returned by the RDS API.
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
+	// DB Cluster identifier for the DB Instance target. Not returned unless manually importing an RDS_INSTANCE target that is part of a DB Cluster.
 	TrackedClusterID *string `json:"trackedClusterId,omitempty" tf:"tracked_cluster_id,omitempty"`
 
+	// Type of targetE.g., RDS_INSTANCE or TRACKED_CLUSTER
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProxyTargetParameters struct {
 
+	// DB cluster identifier.
 	// +kubebuilder:validation:Optional
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
+	// DB instance identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -45,6 +55,7 @@ type ProxyTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	DBInstanceIdentifierSelector *v1.Selector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
+	// The name of the DB proxy.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Proxy
 	// +kubebuilder:validation:Optional
 	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
@@ -60,6 +71,7 @@ type ProxyTargetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The name of the target group.
 	// +kubebuilder:validation:Required
 	TargetGroupName *string `json:"targetGroupName" tf:"target_group_name,omitempty"`
 }
@@ -78,7 +90,7 @@ type ProxyTargetStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ProxyTarget is the Schema for the ProxyTargets API
+// ProxyTarget is the Schema for the ProxyTargets API. Provides an RDS DB proxy target resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

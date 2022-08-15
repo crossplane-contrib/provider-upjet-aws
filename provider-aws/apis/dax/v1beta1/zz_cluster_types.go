@@ -14,32 +14,51 @@ import (
 )
 
 type ClusterObservation struct {
+
+	// The ARN of the DAX cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The DNS name of the DAX cluster without the port appended
 	ClusterAddress *string `json:"clusterAddress,omitempty" tf:"cluster_address,omitempty"`
 
+	// The configuration endpoint for this DAX cluster,
+	// consisting of a DNS name and a port number
 	ConfigurationEndpoint *string `json:"configurationEndpoint,omitempty" tf:"configuration_endpoint,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// List of node objects including id, address, port and
+	// availability_zone. Referenceable e.g., as
+	// ${aws_dax_cluster.test.nodes.0.address}
 	Nodes []NodesObservation `json:"nodes,omitempty" tf:"nodes,omitempty"`
 
+	// The port used by the configuration endpoint
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ClusterParameters struct {
 
+	// List of Availability Zones in which the
+	// nodes will be created
 	// +kubebuilder:validation:Optional
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
+	// –  The type of encryption the
+	// cluster's endpoint should support. Valid values are: NONE and TLS.
+	// Default value is NONE.
 	// +kubebuilder:validation:Optional
 	ClusterEndpointEncryptionType *string `json:"clusterEndpointEncryptionType,omitempty" tf:"cluster_endpoint_encryption_type,omitempty"`
 
+	// –  Description for the cluster
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// A valid Amazon Resource Name  that identifies
+	// an IAM role. At runtime, DAX will assume this role and use the role's
+	// permissions to access DynamoDB on your behalf
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -51,15 +70,23 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
+	// dd:hh24:mi
+	// . The minimum maintenance window is a 60 minute period. Example:
+	// sun:05:00-sun:09:00
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
+	// –  The compute and memory capacity of the nodes. See
+	// Nodes for supported node types
 	// +kubebuilder:validation:Required
 	NodeType *string `json:"nodeType" tf:"node_type,omitempty"`
 
+	// ast-1:012345678999:my_sns_topic
 	// +kubebuilder:validation:Optional
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 
+	// –  Name of the parameter group to associate
+	// with this DAX cluster
 	// +kubebuilder:validation:Optional
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
@@ -68,6 +95,8 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// ode cluster, without any read
+	// replicas
 	// +kubebuilder:validation:Required
 	ReplicationFactor *float64 `json:"replicationFactor" tf:"replication_factor,omitempty"`
 
@@ -77,18 +106,24 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
+	// –  One or more VPC security groups associated
+	// with the cluster
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// Encrypt at rest options
 	// +kubebuilder:validation:Optional
 	ServerSideEncryption []ServerSideEncryptionParameters `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
+	// –  Name of the subnet group to be used for the
+	// cluster
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -100,6 +135,7 @@ type NodesObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The port used by the configuration endpoint
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
@@ -111,6 +147,7 @@ type ServerSideEncryptionObservation struct {
 
 type ServerSideEncryptionParameters struct {
 
+	// Whether to enable encryption at rest. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -129,7 +166,7 @@ type ClusterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Cluster is the Schema for the Clusters API
+// Cluster is the Schema for the Clusters API. Provides an DAX Cluster resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

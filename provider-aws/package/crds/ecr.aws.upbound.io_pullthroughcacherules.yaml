@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: PullThroughCacheRule is the Schema for the PullThroughCacheRules
-          API
+          API. Provides an Elastic Container Registry Pull Through Cache Rule.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,12 +65,16 @@ spec:
               forProvider:
                 properties:
                   ecrRepositoryPrefix:
+                    description: The repository name prefix to use when caching images
+                      from the source registry.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   upstreamRegistryUrl:
+                    description: The registry URL of the upstream public registry
+                      to use as the source.
                     type: string
                 required:
                 - ecrRepositoryPrefix
@@ -257,6 +261,7 @@ spec:
                   id:
                     type: string
                   registryId:
+                    description: The registry ID where the repository was created.
                     type: string
                 type: object
               conditions:

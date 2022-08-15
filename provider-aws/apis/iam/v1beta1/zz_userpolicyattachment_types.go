@@ -19,6 +19,7 @@ type UserPolicyAttachmentObservation struct {
 
 type UserPolicyAttachmentParameters struct {
 
+	// he ARN of the policy you want to apply
 	// +crossplane:generate:reference:type=Policy
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -30,6 +31,7 @@ type UserPolicyAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 
+	// r the policy should be applied to
 	// +crossplane:generate:reference:type=User
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
@@ -55,7 +57,7 @@ type UserPolicyAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 
-// UserPolicyAttachment is the Schema for the UserPolicyAttachments API
+// UserPolicyAttachment is the Schema for the UserPolicyAttachments API. Attaches a Managed IAM Policy to an IAM user
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

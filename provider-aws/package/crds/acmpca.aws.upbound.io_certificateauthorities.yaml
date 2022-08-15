@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: CertificateAuthority is the Schema for the CertificateAuthoritys
-          API
+          API. Provides a resource to manage AWS Certificate Manager Private Certificate
+          Authorities
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,40 +66,98 @@ spec:
               forProvider:
                 properties:
                   certificateAuthorityConfiguration:
+                    description: Nested argument containing algorithms and certificate
+                      subject information. Defined below.
                     items:
                       properties:
                         keyAlgorithm:
+                          description: Type of the public key algorithm and size,
+                            in bits, of the key pair that your key pair creates when
+                            it issues a certificate. Valid values can be found in
+                            the ACM PCA Documentation.
                           type: string
                         signingAlgorithm:
+                          description: Name of the algorithm your private CA uses
+                            to sign certificate requests. Valid values can be found
+                            in the ACM PCA Documentation.
                           type: string
                         subject:
+                          description: Nested argument that contains X.500 distinguished
+                            name information. At least one nested attribute must be
+                            specified.
                           items:
                             properties:
                               commonName:
+                                description: Fully qualified domain name  associated
+                                  with the certificate subject. Must be less than
+                                  or equal to 64 characters in length.
                                 type: string
                               country:
+                                description: Two digit code that specifies the country
+                                  in which the certificate subject located. Must be
+                                  less than or equal to 2 characters in length.
                                 type: string
                               distinguishedNameQualifier:
+                                description: Disambiguating information for the certificate
+                                  subject. Must be less than or equal to 64 characters
+                                  in length.
                                 type: string
                               generationQualifier:
+                                description: Typically a qualifier appended to the
+                                  name of an individual. Examples include Jr. for
+                                  junior, Sr. for senior, and III for third. Must
+                                  be less than or equal to 3 characters in length.
                                 type: string
                               givenName:
+                                description: First name. Must be less than or equal
+                                  to 16 characters in length.
                                 type: string
                               initials:
+                                description: Concatenation that typically contains
+                                  the first letter of the given_name, the first letter
+                                  of the middle name if one exists, and the first
+                                  letter of the surname. Must be less than or equal
+                                  to 5 characters in length.
                                 type: string
                               locality:
+                                description: The locality  in which the certificate
+                                  subject is located. Must be less than or equal to
+                                  128 characters in length.
                                 type: string
                               organization:
+                                description: Legal name of the organization with which
+                                  the certificate subject is affiliated. Must be less
+                                  than or equal to 64 characters in length.
                                 type: string
                               organizationalUnit:
+                                description: A subdivision or unit of the organization  with
+                                  which the certificate subject is affiliated. Must
+                                  be less than or equal to 64 characters in length.
                                 type: string
                               pseudonym:
+                                description: Typically a shortened version of a longer
+                                  given_name. For example, Jonathan is often shortened
+                                  to John. Elizabeth is often shortened to Beth, Liz,
+                                  or Eliza. Must be less than or equal to 128 characters
+                                  in length.
                                 type: string
                               state:
+                                description: State in which the subject of the certificate
+                                  is located. Must be less than or equal to 128 characters
+                                  in length.
                                 type: string
                               surname:
+                                description: Family name. In the US and the UK for
+                                  example, the surname of an individual is ordered
+                                  last. In Asian cultures the surname is typically
+                                  ordered first. Must be less than or equal to 40
+                                  characters in length.
                                 type: string
                               title:
+                                description: A title such as Mr. or Ms. which is pre-pended
+                                  to the name to refer formally to the certificate
+                                  subject. Must be less than or equal to 64 characters
+                                  in length.
                                 type: string
                             type: object
                           type: array
@@ -111,26 +170,53 @@ spec:
                   enabled:
                     type: boolean
                   permanentDeletionTimeInDays:
+                    description: The number of days to make a CA restorable after
+                      it has been deleted, must be between 7 to 30 days, with default
+                      to 30 days.
                     type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   revocationConfiguration:
+                    description: Nested argument containing revocation configuration.
+                      Defined below.
                     items:
                       properties:
                         crlConfiguration:
+                          description: Nested argument containing configuration of
+                            the certificate revocation list , if any, maintained by
+                            the certificate authority. Defined below.
                           items:
                             properties:
                               customCname:
+                                description: Name inserted into the certificate CRL
+                                  Distribution Points extension that enables the use
+                                  of an alias for the CRL distribution point. Use
+                                  this value if you don't want the name of your S3
+                                  bucket to be public. Must be less than or equal
+                                  to 253 characters in length.
                                 type: string
                               enabled:
                                 type: boolean
                               expirationInDays:
+                                description: Number of days until a certificate expires.
+                                  Must be between 1 and 5000.
                                 type: number
                               s3BucketName:
+                                description: Name of the S3 bucket that contains the
+                                  CRL. If you do not provide a value for the custom_cname
+                                  argument, the name of your S3 bucket is placed into
+                                  the CRL Distribution Points extension of the issued
+                                  certificate. You must specify a bucket policy that
+                                  allows ACM PCA to write the CRL to your bucket.
+                                  Must be less than or equal to 255 characters in
+                                  length.
                                 type: string
                               s3ObjectAcl:
+                                description: Determines whether the CRL will be publicly
+                                  readable or privately held in the CRL Amazon S3
+                                  bucket. Defaults to PUBLIC_READ.
                                 type: string
                             required:
                             - expirationInDays
@@ -141,8 +227,14 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Specifies a key-value map of user-defined tags that
+                      are attached to the certificate authority. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                   type:
+                    description: 'The type of the certificate authority. Defaults
+                      to SUBORDINATE. Valid values: ROOT and SUBORDINATE.'
                     type: string
                 required:
                 - certificateAuthorityConfiguration
@@ -326,26 +418,52 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of the certificate authority.
                     type: string
                   certificate:
+                    description: Base64-encoded certificate authority  certificate.
+                      Only available after the certificate authority certificate has
+                      been imported.
                     type: string
                   certificateChain:
+                    description: Base64-encoded certificate chain that includes any
+                      intermediate certificates and chains up to root on-premises
+                      certificate that you used to sign your private CA certificate.
+                      The chain does not include your private CA certificate. Only
+                      available after the certificate authority certificate has been
+                      imported.
                     type: string
                   certificateSigningRequest:
+                    description: The base64 PEM-encoded certificate signing request  for
+                      your private CA certificate.
                     type: string
                   id:
+                    description: Amazon Resource Name  of the certificate authority.
                     type: string
                   notAfter:
+                    description: Date and time after which the certificate authority
+                      is not valid. Only available after the certificate authority
+                      certificate has been imported.
                     type: string
                   notBefore:
+                    description: Date and time before which the certificate authority
+                      is not valid. Only available after the certificate authority
+                      certificate has been imported.
                     type: string
                   serial:
+                    description: Serial number of the certificate authority. Only
+                      available after the certificate authority certificate has been
+                      imported.
                     type: string
                   status:
+                    description: Status of the certificate authority.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

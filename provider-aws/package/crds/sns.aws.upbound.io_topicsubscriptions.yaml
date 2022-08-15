@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: TopicSubscription is the Schema for the TopicSubscriptions API
+        description: TopicSubscription is the Schema for the TopicSubscriptions API.
+          Provides a resource for subscribing to SNS topics.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,22 @@ spec:
               forProvider:
                 properties:
                   confirmationTimeoutInMinutes:
+                    description: Integer indicating number of minutes to wait in retrying
+                      mode for fetching subscription arn before marking it as failure.
+                      Only applicable for http and https protocols. Default is 1.
                     type: number
                   deliveryPolicy:
+                    description: JSON String with the delivery policy  that will be
+                      used in the subscription - this only applies to HTTP/S subscriptions.
+                      Refer to the SNS docs for more details.
                     type: string
                   endpoint:
+                    description: Endpoint to send data to. The contents vary with
+                      the protocol. See details below.
                     type: string
                   endpointAutoConfirms:
+                    description: Whether the endpoint is capable of auto confirming
+                      subscription . Default is false.
                     type: boolean
                   endpointRef:
                     description: A Reference to a named object.
@@ -145,18 +156,31 @@ spec:
                         type: object
                     type: object
                   filterPolicy:
+                    description: JSON String with the filter policy that will be used
+                      in the subscription to filter messages seen by the target resource.
+                      Refer to the SNS docs for more details.
                     type: string
                   protocol:
+                    description: 'Protocol to use. Valid values are: sqs, sms, lambda,
+                      firehose, and application. Protocols email, email-json, http
+                      and https are also valid but partially supported. See details
+                      below.'
                     type: string
                   rawMessageDelivery:
+                    description: Whether to enable raw message delivery . Default
+                      is false.
                     type: boolean
                   redrivePolicy:
+                    description: JSON String with the redrive policy that will be
+                      used in the subscription. Refer to the SNS docs for more details.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   subscriptionRoleArn:
+                    description: ARN of the IAM role to publish to Kinesis Data Firehose
+                      delivery stream. Refer to SNS docs.
                     type: string
                   subscriptionRoleArnRef:
                     description: A Reference to a named object.
@@ -232,6 +256,7 @@ spec:
                         type: object
                     type: object
                   topicArn:
+                    description: ARN of the SNS topic to subscribe to.
                     type: string
                   topicArnRef:
                     description: A Reference to a named object.
@@ -487,14 +512,20 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: ARN of the subscription.
                     type: string
                   confirmationWasAuthenticated:
+                    description: Whether the subscription confirmation request was
+                      authenticated.
                     type: boolean
                   id:
+                    description: ARN of the subscription.
                     type: string
                   ownerId:
+                    description: AWS account ID of the subscription's owner.
                     type: string
                   pendingConfirmation:
+                    description: Whether the subscription has not been confirmed.
                     type: boolean
                 type: object
               conditions:

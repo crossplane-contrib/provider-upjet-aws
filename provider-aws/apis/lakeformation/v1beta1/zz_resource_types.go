@@ -16,11 +16,13 @@ import (
 type ResourceObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The date and time the resource was last modified in RFC 3339 format.
 	LastModified *string `json:"lastModified,omitempty" tf:"last_modified,omitempty"`
 }
 
 type ResourceParameters struct {
 
+	// –  Amazon Resource Name  of the resource, an S3 path.
 	// +kubebuilder:validation:Required
 	Arn *string `json:"arn" tf:"arn,omitempty"`
 
@@ -29,6 +31,7 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// inked role must exist and is used.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -55,7 +58,7 @@ type ResourceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Resource is the Schema for the Resources API
+// Resource is the Schema for the Resources API. Registers a Lake Formation resource as managed by the Data Catalog.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

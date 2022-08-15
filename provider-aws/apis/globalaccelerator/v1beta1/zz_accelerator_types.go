@@ -14,28 +14,40 @@ import (
 )
 
 type AcceleratorObservation struct {
+
+	// The DNS name of the accelerator. For example, a5d53ff5ee6bca4ce.awsglobalaccelerator.com.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
+	// The Global Accelerator Route 53 zone ID that can be used to
+	// route an Alias Resource Record Set to the Global Accelerator. This attribute
+	// is simply an alias for the zone ID Z2BJ6XQ5FK7U4H.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
+	// The Amazon Resource Name  of the accelerator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// IP address set associated with the accelerator.
 	IPSets []IPSetsObservation `json:"ipSets,omitempty" tf:"ip_sets,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type AcceleratorParameters struct {
 
+	// The attributes of the accelerator. Fields documented below.
 	// +kubebuilder:validation:Optional
 	Attributes []AttributesParameters `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
+	// Indicates whether the accelerator is enabled. Defaults to true. Valid values: true, false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The value for the address type. Defaults to IPV4. Valid values: IPV4.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
+	// The name of the accelerator.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -44,6 +56,7 @@ type AcceleratorParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -53,19 +66,25 @@ type AttributesObservation struct {
 
 type AttributesParameters struct {
 
+	// Indicates whether flow logs are enabled. Defaults to false. Valid values: true, false.
 	// +kubebuilder:validation:Optional
 	FlowLogsEnabled *bool `json:"flowLogsEnabled,omitempty" tf:"flow_logs_enabled,omitempty"`
 
+	// The name of the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
 	// +kubebuilder:validation:Optional
 	FlowLogsS3Bucket *string `json:"flowLogsS3Bucket,omitempty" tf:"flow_logs_s3_bucket,omitempty"`
 
+	// The prefix for the location in the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
 	// +kubebuilder:validation:Optional
 	FlowLogsS3Prefix *string `json:"flowLogsS3Prefix,omitempty" tf:"flow_logs_s3_prefix,omitempty"`
 }
 
 type IPSetsObservation struct {
+
+	// A list of IP addresses in the IP address set.
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
+	// The type of IP addresses included in this IP set.
 	IPFamily *string `json:"ipFamily,omitempty" tf:"ip_family,omitempty"`
 }
 
@@ -86,7 +105,7 @@ type AcceleratorStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Accelerator is the Schema for the Accelerators API
+// Accelerator is the Schema for the Accelerators API. Provides a Global Accelerator accelerator.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

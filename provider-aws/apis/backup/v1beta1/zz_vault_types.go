@@ -14,17 +14,23 @@ import (
 )
 
 type VaultObservation struct {
+
+	// The ARN of the vault.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The name of the vault.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The number of recovery points that are stored in a backup vault.
 	RecoveryPoints *float64 `json:"recoveryPoints,omitempty" tf:"recovery_points,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type VaultParameters struct {
 
+	// The server-side encryption key that is used to protect your backups.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -41,6 +47,7 @@ type VaultParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Metadata that you can assign to help organize the resources that you create. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -59,7 +66,7 @@ type VaultStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Vault is the Schema for the Vaults API
+// Vault is the Schema for the Vaults API. Provides an AWS Backup vault resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

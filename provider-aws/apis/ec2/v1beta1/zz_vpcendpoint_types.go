@@ -14,8 +14,11 @@ import (
 )
 
 type DNSEntryObservation struct {
+
+	// The DNS name.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
+	// The ID of the private hosted zone.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 }
 
@@ -23,41 +26,60 @@ type DNSEntryParameters struct {
 }
 
 type VPCEndpointObservation struct {
+
+	// The Amazon Resource Name  of the VPC endpoint.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The list of CIDR blocks for the exposed AWS service. Applicable for endpoints of type Gateway.
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
 
+	// The DNS entries for the VPC Endpoint. Applicable for endpoints of type Interface. DNS blocks are documented below.
 	DNSEntry []DNSEntryObservation `json:"dnsEntry,omitempty" tf:"dns_entry,omitempty"`
 
+	// The ID of the VPC endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// One or more network interfaces for the VPC Endpoint. Applicable for endpoints of type Interface.
 	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
 
+	// The ID of the AWS account that owns the VPC endpoint.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// The prefix list ID of the exposed AWS service. Applicable for endpoints of type Gateway.
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
+	// Whether or not the VPC Endpoint is being managed by its service - true or false.
 	RequesterManaged *bool `json:"requesterManaged,omitempty" tf:"requester_managed,omitempty"`
 
+	// One or more route table IDs. Applicable for endpoints of type Gateway.
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 
+	// The ID of one or more security groups to associate with the network interface. Applicable for endpoints of type Interface.
+	// If no security groups are specified, the VPC's default security group is associated with the endpoint.
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// The state of the VPC endpoint.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
+	// The ID of one or more subnets in which to create a network interface for the endpoint. Applicable for endpoints of type GatewayLoadBalancer and Interface.
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type VPCEndpointParameters struct {
 
+	// Accept the VPC endpoint .
 	// +kubebuilder:validation:Optional
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
 
+	// A policy to attach to the endpoint that controls access to the service. This is a JSON formatted string. Defaults to full access. All Gateway and some Interface endpoints support policies - see the relevant AWS documentation for more details. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface.
+	// Defaults to false.
 	// +kubebuilder:validation:Optional
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
@@ -66,6 +88,7 @@ type VPCEndpointParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> .
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("service_name",true)
 	// +kubebuilder:validation:Optional
@@ -77,12 +100,15 @@ type VPCEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The VPC endpoint type, Gateway, GatewayLoadBalancer, or Interface. Defaults to Gateway.
 	// +kubebuilder:validation:Optional
 	VPCEndpointType *string `json:"vpcEndpointType,omitempty" tf:"vpc_endpoint_type,omitempty"`
 
+	// The ID of the VPC in which the endpoint will be used.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -108,7 +134,7 @@ type VPCEndpointStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VPCEndpoint is the Schema for the VPCEndpoints API
+// VPCEndpoint is the Schema for the VPCEndpoints API. Provides a VPC Endpoint resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

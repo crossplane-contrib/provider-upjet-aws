@@ -18,19 +18,24 @@ type BackupPolicyBackupPolicyObservation struct {
 
 type BackupPolicyBackupPolicyParameters struct {
 
+	// A status of the backup policy. Valid values: ENABLED, DISABLED.
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 }
 
 type BackupPolicyObservation struct {
+
+	// The ID that identifies the file system .
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type BackupPolicyParameters struct {
 
+	// A backup_policy object .
 	// +kubebuilder:validation:Required
 	BackupPolicy []BackupPolicyBackupPolicyParameters `json:"backupPolicy" tf:"backup_policy,omitempty"`
 
+	// The ID of the EFS file system.
 	// +crossplane:generate:reference:type=FileSystem
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
@@ -61,7 +66,7 @@ type BackupPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BackupPolicy is the Schema for the BackupPolicys API
+// BackupPolicy is the Schema for the BackupPolicys API. Provides an Elastic File System (EFS) Backup Policy resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

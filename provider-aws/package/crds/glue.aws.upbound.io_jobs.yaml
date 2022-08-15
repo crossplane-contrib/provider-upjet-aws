@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Job is the Schema for the Jobs API
+        description: Job is the Schema for the Jobs API. Provides an Glue Job resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,59 +64,94 @@ spec:
               forProvider:
                 properties:
                   command:
+                    description: –  The command of the job. Defined below.
                     items:
                       properties:
                         name:
                           type: string
                         pythonVersion:
+                          description: The Python version being used to execute a
+                            Python shell job. Allowed values are 2 or 3.
                           type: string
                         scriptLocation:
+                          description: Specifies the S3 path to a script that executes
+                            a job.
                           type: string
                       required:
                       - scriptLocation
                       type: object
                     type: array
                   connections:
+                    description: –  The list of connections used for this job.
                     items:
                       type: string
                     type: array
                   defaultArguments:
                     additionalProperties:
                       type: string
+                    description: xecution script consumes, as well as arguments that
+                      AWS Glue itself consumes. For information about how to specify
+                      and consume your own Job arguments, see the Calling AWS Glue
+                      APIs in Python topic in the developer guide. For information
+                      about the key-value pairs that AWS Glue consumes to set up your
+                      job, see the Special Parameters Used by AWS Glue topic in the
+                      developer guide.
                     type: object
                   description:
+                    description: –  Description of the job.
                     type: string
                   executionProperty:
+                    description: –  Execution property of the job. Defined below.
                     items:
                       properties:
                         maxConcurrentRuns:
+                          description: The maximum number of concurrent runs allowed
+                            for a job. The default is 1.
                           type: number
                       type: object
                     type: array
                   glueVersion:
+                    description: The version of glue to use, for example "1.0". For
+                      information about available versions, see the AWS Glue Release
+                      Notes.
                     type: string
                   maxCapacity:
+                    description: –  The maximum number of AWS Glue data processing
+                      units  that can be allocated when this job runs. Required when
+                      pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers
+                      and worker_type arguments instead with glue_version 2.0 and
+                      above.
                     type: number
                   maxRetries:
+                    description: –  The maximum number of times to retry this job
+                      if it fails.
                     type: number
                   nonOverridableArguments:
                     additionalProperties:
                       type: string
+                    description: verridable arguments for this job, specified as name-value
+                      pairs.
                     type: object
                   notificationProperty:
+                    description: Notification property of the job. Defined below.
                     items:
                       properties:
                         notifyDelayAfter:
+                          description: After a job run starts, the number of minutes
+                            to wait before sending a job run delay notification.
                           type: number
                       type: object
                     type: array
                   numberOfWorkers:
+                    description: The number of workers of a defined workerType that
+                      are allocated when a job runs.
                     type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   roleArn:
+                    description: –  The ARN of the IAM role associated with this job.
                     type: string
                   roleArnRef:
                     description: A Reference to a named object.
@@ -192,14 +227,24 @@ spec:
                         type: object
                     type: object
                   securityConfiguration:
+                    description: The name of the Security Configuration to be associated
+                      with the job.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                   timeout:
+                    description: –  The job timeout in minutes. The default is 2880
+                      minutes  for glueetl and pythonshell jobs, and null  for gluestreaming
+                      jobs.
                     type: number
                   workerType:
+                    description: The type of predefined worker that is allocated when
+                      a job runs. Accepts a value of Standard, G.1X, or G.2X.
                     type: string
                 required:
                 - command
@@ -382,12 +427,17 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of Glue Job
                     type: string
                   id:
+                    description: Job name
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

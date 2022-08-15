@@ -19,6 +19,7 @@ type ContributorInsightsObservation struct {
 
 type ContributorInsightsParameters struct {
 
+	// The global secondary index name
 	// +kubebuilder:validation:Optional
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
@@ -27,6 +28,7 @@ type ContributorInsightsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The name of the table to enable contributor insights
 	// +crossplane:generate:reference:type=Table
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
@@ -52,7 +54,7 @@ type ContributorInsightsStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ContributorInsights is the Schema for the ContributorInsightss API
+// ContributorInsights is the Schema for the ContributorInsightss API. Provides a DynamoDB contributor insights resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

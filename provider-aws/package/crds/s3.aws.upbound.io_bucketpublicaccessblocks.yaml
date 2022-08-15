@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketPublicAccessBlock is the Schema for the BucketPublicAccessBlocks
-          API
+          API. Manages S3 bucket-level Public Access Block Configuration
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,10 +66,20 @@ spec:
               forProvider:
                 properties:
                   blockPublicAcls:
+                    description: 'Whether Amazon S3 should block public ACLs for this
+                      bucket. Defaults to false. Enabling this setting does not affect
+                      existing policies or ACLs. When set to true causes the following
+                      behavior:'
                     type: boolean
                   blockPublicPolicy:
+                    description: 'Whether Amazon S3 should block public bucket policies
+                      for this bucket. Defaults to false. Enabling this setting does
+                      not affect the existing bucket policy. When set to true causes
+                      Amazon S3 to:'
                     type: boolean
                   bucket:
+                    description: S3 Bucket to which this Public Access Block configuration
+                      should be applied.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -145,12 +155,23 @@ spec:
                         type: object
                     type: object
                   ignorePublicAcls:
+                    description: 'Whether Amazon S3 should ignore public ACLs for
+                      this bucket. Defaults to false. Enabling this setting does not
+                      affect the persistence of any existing ACLs and doesn''t prevent
+                      new public ACLs from being set. When set to true causes Amazon
+                      S3 to:'
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   restrictPublicBuckets:
+                    description: 'Whether Amazon S3 should restrict public bucket
+                      policies for this bucket. Defaults to false. Enabling this setting
+                      does not affect the previously stored bucket policy, except
+                      that public and cross-account access within the public bucket
+                      policy, including non-public delegation to specific accounts,
+                      is blocked. When set to true:'
                     type: boolean
                 required:
                 - region
@@ -333,6 +354,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: Name of the S3 bucket the configuration is attached
+                      to
                     type: string
                 type: object
               conditions:

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Group is the Schema for the Groups API
+        description: Group is the Schema for the Groups API. Provides a CloudWatch
+          Log Group resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,12 @@ spec:
               forProvider:
                 properties:
                   kmsKeyId:
+                    description: The ARN of the KMS Key to use when encrypting log
+                      data. Please note, after the AWS KMS CMK is disassociated from
+                      the log group, AWS CloudWatch Logs stops encrypting newly ingested
+                      data for the log group. All previously ingested data remains
+                      encrypted, and AWS CloudWatch Logs requires permissions for
+                      the CMK whenever the encrypted data is requested.
                     type: string
                   kmsKeyIdRef:
                     description: A Reference to a named object.
@@ -143,10 +150,18 @@ spec:
                       be created in.
                     type: string
                   retentionInDays:
+                    description: 'Specifies the number of days you want to retain
+                      log events in the specified log group.  Possible values are:
+                      1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731,
+                      1827, 3653, and 0. If you select 0, the events in the log group
+                      are always retained and never expire.'
                     type: number
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -328,12 +343,20 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  specifying the log group.
+                      Any :* suffix added by the API, denoting all CloudWatch Log
+                      Streams under the CloudWatch Log Group, is removed for greater
+                      compatibility with other AWS services that do not accept the
+                      suffix.
                     type: string
                   id:
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

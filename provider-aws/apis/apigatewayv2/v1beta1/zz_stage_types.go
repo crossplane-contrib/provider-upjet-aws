@@ -18,9 +18,11 @@ type AccessLogSettingsObservation struct {
 
 type AccessLogSettingsParameters struct {
 
+	// The ARN of the CloudWatch Logs log group to receive access logs. Any trailing :* is trimmed from the ARN.
 	// +kubebuilder:validation:Required
 	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
 
+	// A single line format of the access logs of data, as specified by selected $context variables.
 	// +kubebuilder:validation:Required
 	Format *string `json:"format" tf:"format,omitempty"`
 }
@@ -60,6 +62,7 @@ type RouteSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
 
+	// Route key.
 	// +kubebuilder:validation:Required
 	RouteKey *string `json:"routeKey" tf:"route_key,omitempty"`
 
@@ -71,19 +74,29 @@ type RouteSettingsParameters struct {
 }
 
 type StageObservation struct {
+
+	// The ARN of the stage.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ARN prefix to be used in an aws_lambda_permission's source_arn attribute.
+	// For WebSocket APIs this attribute can additionally be used in an aws_iam_policy to authorize access to the @connections API.
+	// See the Amazon API Gateway Developer Guide for details.
 	ExecutionArn *string `json:"executionArn,omitempty" tf:"execution_arn,omitempty"`
 
+	// The stage identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The URL to invoke the API pointing to the stage,
+	// e.g., wss://z4675bid1j.execute-api.eu-west-2.amazonaws.com/example-stage, or https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/
 	InvokeURL *string `json:"invokeUrl,omitempty" tf:"invoke_url,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type StageParameters struct {
 
+	// The API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -94,18 +107,25 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
+	// Settings for logging access in this stage.
+	// Use the aws_api_gateway_account resource to configure permissions for CloudWatch Logging.
 	// +kubebuilder:validation:Optional
 	AccessLogSettings []AccessLogSettingsParameters `json:"accessLogSettings,omitempty" tf:"access_log_settings,omitempty"`
 
+	// Whether updates to an API automatically trigger a new deployment. Defaults to false. Applicable for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	AutoDeploy *bool `json:"autoDeploy,omitempty" tf:"auto_deploy,omitempty"`
 
+	// The identifier of a client certificate for the stage. Use the aws_api_gateway_client_certificate resource to configure a client certificate.
+	// Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	ClientCertificateID *string `json:"clientCertificateId,omitempty" tf:"client_certificate_id,omitempty"`
 
+	// The default route settings for the stage.
 	// +kubebuilder:validation:Optional
 	DefaultRouteSettings []DefaultRouteSettingsParameters `json:"defaultRouteSettings,omitempty" tf:"default_route_settings,omitempty"`
 
+	// The deployment identifier of the stage. Use the aws_apigatewayv2_deployment resource to configure a deployment.
 	// +crossplane:generate:reference:type=Deployment
 	// +kubebuilder:validation:Optional
 	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
@@ -116,6 +136,7 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	DeploymentIDSelector *v1.Selector `json:"deploymentIdSelector,omitempty" tf:"-"`
 
+	// The description for the stage. Must be less than or equal to 1024 characters in length.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -124,12 +145,15 @@ type StageParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Route settings for the stage.
 	// +kubebuilder:validation:Optional
 	RouteSettings []RouteSettingsParameters `json:"routeSettings,omitempty" tf:"route_settings,omitempty"`
 
+	// A map that defines the stage variables for the stage.
 	// +kubebuilder:validation:Optional
 	StageVariables map[string]*string `json:"stageVariables,omitempty" tf:"stage_variables,omitempty"`
 
+	// A map of tags to assign to the stage. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -148,7 +172,7 @@ type StageStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Stage is the Schema for the Stages API
+// Stage is the Schema for the Stages API. Manages an Amazon API Gateway Version 2 stage.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

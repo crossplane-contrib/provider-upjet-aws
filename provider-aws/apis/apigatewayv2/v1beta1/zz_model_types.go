@@ -14,11 +14,14 @@ import (
 )
 
 type ModelObservation struct {
+
+	// The model identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ModelParameters struct {
 
+	// The API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -29,12 +32,15 @@ type ModelParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
+	// The content-type for the model, for example, application/json. Must be between 1 and 256 characters in length.
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
+	// The description of the model. Must be between 1 and 128 characters in length.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The name of the model. Must be alphanumeric. Must be between 1 and 128 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -43,6 +49,7 @@ type ModelParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The schema for the model. This should be a JSON schema draft 4 model. Must be less than or equal to 32768 characters in length.
 	// +kubebuilder:validation:Required
 	Schema *string `json:"schema" tf:"schema,omitempty"`
 }
@@ -61,7 +68,7 @@ type ModelStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Model is the Schema for the Models API
+// Model is the Schema for the Models API. Manages an Amazon API Gateway Version 2 model.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

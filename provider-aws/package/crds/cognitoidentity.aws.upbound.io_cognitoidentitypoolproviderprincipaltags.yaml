@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: CognitoIdentityPoolProviderPrincipalTag is the Schema for the
-          CognitoIdentityPoolProviderPrincipalTags API
+          CognitoIdentityPoolProviderPrincipalTags API. Provides an AWS Cognito Identity
+          Principal Mapping.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +67,7 @@ spec:
               forProvider:
                 properties:
                   identityPoolId:
+                    description: An identity pool ID.
                     type: string
                   identityPoolIdRef:
                     description: A Reference to a named object.
@@ -141,6 +143,7 @@ spec:
                         type: object
                     type: object
                   identityProviderName:
+                    description: The name of the identity provider.
                     type: string
                   identityProviderNameRef:
                     description: A Reference to a named object.
@@ -218,12 +221,14 @@ spec:
                   principalTags:
                     additionalProperties:
                       type: string
+                    description: String to string map of variables.
                     type: object
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   useDefaults:
+                    description: ':  use default  attribute mappings.'
                     type: boolean
                 required:
                 - region

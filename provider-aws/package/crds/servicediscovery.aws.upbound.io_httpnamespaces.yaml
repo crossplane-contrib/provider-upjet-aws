@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: HTTPNamespace is the Schema for the HTTPNamespaces API
+        description: HTTPNamespace is the Schema for the HTTPNamespaces API. Provides
+          a Service Discovery HTTP Namespace resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,11 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: The description that you specify for the namespace
+                      when you create it.
                     type: string
                   name:
+                    description: The name of the http namespace.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -74,6 +78,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the namespace. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - name
@@ -256,12 +263,18 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN that Amazon Route 53 assigns to the namespace
+                      when you create it.
                     type: string
                   id:
+                    description: The ID of a namespace.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

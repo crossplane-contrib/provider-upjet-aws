@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: VPCPeeringConnection is the Schema for the VPCPeeringConnections
-          API
+          API. Provides a resource to manage a VPC peering connection.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,12 +65,21 @@ spec:
               forProvider:
                 properties:
                   autoAccept:
+                    description: Accept the peering .
                     type: boolean
                   peerOwnerId:
+                    description: The AWS account ID of the owner of the peer VPC.
+                      Defaults to the account ID the AWS provider is currently connected
+                      to.
                     type: string
                   peerRegion:
+                    description: The region of the accepter VPC of the VPC Peering
+                      Connection. auto_accept must be false, and use the aws_vpc_peering_connection_accepter
+                      to manage the accepter side.
                     type: string
                   peerVpcId:
+                    description: The ID of the VPC with which you are creating the
+                      VPC Peering Connection.
                     type: string
                   peerVpcIdRef:
                     description: A Reference to a named object.
@@ -152,8 +161,12 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                   vpcId:
+                    description: The ID of the requester VPC.
                     type: string
                   vpcIdRef:
                     description: A Reference to a named object.
@@ -409,34 +422,67 @@ spec:
               atProvider:
                 properties:
                   acceptStatus:
+                    description: The status of the VPC Peering Connection request.
                     type: string
                   accepter:
+                    description: An optional configuration block that allows for VPC
+                      Peering Connection options to be set for the VPC that accepts
+                      the peering connection .
                     items:
                       properties:
                         allowClassicLinkToRemoteVpc:
+                          description: Allow a local linked EC2-Classic instance to
+                            communicate with instances in a peer VPC. This enables
+                            an outbound communication from the local ClassicLink connection
+                            to the remote VPC.
                           type: boolean
                         allowRemoteVpcDnsResolution:
+                          description: Allow a local VPC to resolve public DNS hostnames
+                            to private IP addresses when queried from instances in
+                            the peer VPC.
                           type: boolean
                         allowVpcToRemoteClassicLink:
+                          description: Allow a local VPC to communicate with a linked
+                            EC2-Classic instance in a peer VPC. This enables an outbound
+                            communication from the local VPC to the remote ClassicLink
+                            connection.
                           type: boolean
                       type: object
                     type: array
                   id:
+                    description: The ID of the VPC Peering Connection.
                     type: string
                   requester:
+                    description: A optional configuration block that allows for VPC
+                      Peering Connection options to be set for the VPC that requests
+                      the peering connection .
                     items:
                       properties:
                         allowClassicLinkToRemoteVpc:
+                          description: Allow a local linked EC2-Classic instance to
+                            communicate with instances in a peer VPC. This enables
+                            an outbound communication from the local ClassicLink connection
+                            to the remote VPC.
                           type: boolean
                         allowRemoteVpcDnsResolution:
+                          description: Allow a local VPC to resolve public DNS hostnames
+                            to private IP addresses when queried from instances in
+                            the peer VPC.
                           type: boolean
                         allowVpcToRemoteClassicLink:
+                          description: Allow a local VPC to communicate with a linked
+                            EC2-Classic instance in a peer VPC. This enables an outbound
+                            communication from the local VPC to the remote ClassicLink
+                            connection.
                           type: boolean
                       type: object
                     type: array
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

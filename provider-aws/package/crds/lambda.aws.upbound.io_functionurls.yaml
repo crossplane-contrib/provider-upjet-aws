@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: FunctionURL is the Schema for the FunctionURLs API
+        description: FunctionURL is the Schema for the FunctionURLs API. Provides
+          a Lambda function URL resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,33 +65,58 @@ spec:
               forProvider:
                 properties:
                   authorizationType:
+                    description: The type of authentication that the function URL
+                      uses. Set to "AWS_IAM" to restrict access to authenticated IAM
+                      users only. Set to "NONE" to bypass IAM authentication and create
+                      a public endpoint. See the AWS documentation for more details.
                     type: string
                   cors:
+                    description: The cross-origin resource sharing  settings for the
+                      function URL. Documented below.
                     items:
                       properties:
                         allowCredentials:
+                          description: Whether to allow cookies or other credentials
+                            in requests to the function URL. The default is false.
                           type: boolean
                         allowHeaders:
+                          description: 'The HTTP headers that origins can include
+                            in requests to the function URL. For example: ["date",
+                            "keep-alive", "x-custom-header"].'
                           items:
                             type: string
                           type: array
                         allowMethods:
+                          description: 'The HTTP methods that are allowed when calling
+                            the function URL. For example: ["GET", "POST", "DELETE"],
+                            or the wildcard character .'
                           items:
                             type: string
                           type: array
                         allowOrigins:
+                          description: 'The origins that can access the function URL.
+                            You can list any number of specific origins ), separated
+                            by a comma. For example: ["https://www.example.com", "http://localhost:60905"].'
                           items:
                             type: string
                           type: array
                         exposeHeaders:
+                          description: The HTTP headers in your function response
+                            that you want to expose to origins that call the function
+                            URL.
                           items:
                             type: string
                           type: array
                         maxAge:
+                          description: The maximum amount of time, in seconds, that
+                            web browsers can cache results of a preflight request.
+                            By default, this is set to 0, which means that the browser
+                            doesn't cache results. The maximum value is 86400.
                           type: number
                       type: object
                     type: array
                   functionName:
+                    description: The name  of the Lambda function.
                     type: string
                   functionNameRef:
                     description: A Reference to a named object.
@@ -166,6 +192,7 @@ spec:
                         type: object
                     type: object
                   qualifier:
+                    description: The alias name or "$LATEST".
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -352,12 +379,16 @@ spec:
               atProvider:
                 properties:
                   functionArn:
+                    description: The Amazon Resource Name  of the function.
                     type: string
                   functionUrl:
+                    description: The HTTP URL endpoint for the function in the format
+                      https://<url_id>.lambda-url.<region>.on.aws.
                     type: string
                   id:
                     type: string
                   urlId:
+                    description: A generated ID for the endpoint.
                     type: string
                 type: object
               conditions:

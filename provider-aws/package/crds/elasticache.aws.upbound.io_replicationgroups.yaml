@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ReplicationGroup is the Schema for the ReplicationGroups API
+        description: ReplicationGroup is the Schema for the ReplicationGroups API.
+          Provides an ElastiCache Replication Group resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,15 @@ spec:
               forProvider:
                 properties:
                   applyImmediately:
+                    description: Specifies whether any modifications are applied immediately,
+                      or during the next maintenance window. Default is false.
                     type: boolean
                   atRestEncryptionEnabled:
+                    description: Whether to enable encryption at rest.
                     type: boolean
                   authTokenSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: Password used to access a password protected server.
+                      Can be specified only if transit_encryption_enabled = true.
                     properties:
                       key:
                         description: The key to select.
@@ -86,35 +90,87 @@ spec:
                     - namespace
                     type: object
                   autoMinorVersionUpgrade:
+                    description: Specifies whether minor version engine upgrades will
+                      be applied automatically to the underlying Cache Cluster instances
+                      during the maintenance window. Only supported for engine type
+                      "redis" and if the engine version is 6 or higher. Defaults to
+                      true.
                     type: string
                   automaticFailoverEnabled:
+                    description: Specifies whether a read-only replica will be automatically
+                      promoted to read/write primary if the existing primary fails.
+                      If enabled, number_cache_clusters must be greater than 1. Must
+                      be enabled for Redis  replication groups. Defaults to false.
                     type: boolean
                   availabilityZones:
+                    description: List of EC2 availability zones in which the replication
+                      group's cache clusters will be created. The order of the availability
+                      zones in the list is not considered.
                     items:
                       type: string
                     type: array
                   clusterMode:
+                    description: Create a native Redis cluster. automatic_failover_enabled
+                      must be set to true. Cluster Mode documented below. Only 1 cluster_mode
+                      block is allowed. Note that configuring this block does not
+                      enable cluster mode, i.e., data sharding, this requires using
+                      a parameter group that has the parameter cluster-enabled set
+                      to true.
                     items:
                       properties:
                         numNodeGroups:
+                          description: Number of node groups  for this Redis replication
+                            group. Changing this number will trigger an online resizing
+                            operation before other settings modifications. Required
+                            unless global_replication_group_id is set.
                           type: number
                         replicasPerNodeGroup:
+                          description: Number of replica nodes in each node group.
+                            Valid values are 0 to 5. Changing this number will trigger
+                            an online resizing operation before other settings modifications.
                           type: number
                       type: object
                     type: array
                   dataTieringEnabled:
+                    description: Enables data tiering. Data tiering is only supported
+                      for replication groups using the r6gd node type. This parameter
+                      must be set to true when using r6gd nodes.
                     type: boolean
                   description:
+                    description: reated description for the replication group. Must
+                      not be empty.
                     type: string
                   engine:
+                    description: Name of the cache engine to be used for the clusters
+                      in this replication group. The only valid value is redis.
                     type: string
                   engineVersion:
+                    description: Version number of the cache engine to be used for
+                      the cache clusters in this replication group. If the version
+                      is 6 or higher, the major and minor version can be set, e.g.,
+                      6.2, or the minor version can be unspecified which will use
+                      the latest version at creation time, e.g., 6.x. Otherwise, specify
+                      the full version desired, e.g., 5.0.6. The actual engine version
+                      used is returned in the attribute engine_version_actual, see
+                      Attributes Reference below.
                     type: string
                   finalSnapshotIdentifier:
+                    description: The name of your final node group  snapshot. ElastiCache
+                      creates the snapshot from the primary node in the cluster. If
+                      omitted, no final snapshot will be made.
                     type: string
                   globalReplicationGroupId:
+                    description: The ID of the global replication group to which this
+                      replication group should belong. If this parameter is specified,
+                      the replication group is added to the specified global replication
+                      group as a secondary replication group; otherwise, the replication
+                      group is not part of any global replication group. If global_replication_group_id
+                      is set, the num_node_groups parameter  cannot be set.
                     type: string
                   kmsKeyId:
+                    description: The ARN of the key that you wish to use if encrypting
+                      at rest. If not supplied, uses service managed encryption. Can
+                      be specified only if at_rest_encryption_enabled = true.
                     type: string
                   kmsKeyIdRef:
                     description: A Reference to a named object.
@@ -190,15 +246,25 @@ spec:
                         type: object
                     type: object
                   logDeliveryConfiguration:
+                    description: Specifies the destination and format of Redis SLOWLOG
+                      or Redis Engine Log. See the documentation on Amazon ElastiCache.
+                      See Log Delivery Configuration below for more details.
                     items:
                       properties:
                         destination:
+                          description: Name of either the CloudWatch Logs LogGroup
+                            or Kinesis Data Firehose resource.
                           type: string
                         destinationType:
+                          description: For CloudWatch Logs use cloudwatch-logs or
+                            for Kinesis Data Firehose use kinesis-firehose.
                           type: string
                         logFormat:
+                          description: Valid values are json or text
                           type: string
                         logType:
+                          description: Valid values are  slow-log or engine-log. Max
+                            1 of each.
                           type: string
                       required:
                       - destination
@@ -208,24 +274,55 @@ spec:
                       type: object
                     type: array
                   maintenanceWindow:
+                    description: 'dd:hh24:mi . The minimum maintenance window is a
+                      60 minute period. Example: sun:05:00-sun:09:00'
                     type: string
                   multiAzEnabled:
+                    description: Specifies whether to enable Multi-AZ Support for
+                      the replication group. If true, automatic_failover_enabled must
+                      also be enabled. Defaults to false.
                     type: boolean
                   nodeType:
+                    description: Instance class to be used. See AWS documentation
+                      for information on supported node types and guidance on selecting
+                      node types. Required unless global_replication_group_id is set.
+                      Cannot be set if global_replication_group_id is set.
                     type: string
                   notificationTopicArn:
+                    description: ast-1:012345678999:my_sns_topic
                     type: string
                   numCacheClusters:
+                    description: Number of cache clusters  this replication group
+                      will have. If Multi-AZ is enabled, the value of this parameter
+                      must be at least 2. Updates will occur before other modifications.
+                      Conflicts with num_node_groups, the deprecatednumber_cache_clusters,
+                      or the deprecated cluster_mode. Defaults to 1.
                     type: number
                   numNodeGroups:
+                    description: Number of node groups  for this Redis replication
+                      group. Changing this number will trigger an online resizing
+                      operation before other settings modifications. Required unless
+                      global_replication_group_id is set.
                     type: number
                   numberCacheClusters:
                     type: number
                   parameterGroupName:
+                    description: Name of the parameter group to associate with this
+                      replication group. If this argument is omitted, the default
+                      cache parameter group for the specified engine is used. To enable
+                      "cluster mode", i.e., data sharding, use a parameter group that
+                      has the parameter cluster-enabled set to true.
                     type: string
                   port:
+                    description: –  Port number on which each of the cache nodes will
+                      accept connections. For Memcache the default is 11211, and for
+                      Redis the default port is 6379.
                     type: number
                   preferredCacheClusterAzs:
+                    description: List of EC2 availability zones in which the replication
+                      group's cache clusters will be created. The order of the availability
+                      zones in the list is considered. The first item in the list
+                      will be the primary node. Ignored when updating.
                     items:
                       type: string
                     type: array
@@ -234,8 +331,13 @@ spec:
                       be created in.
                     type: string
                   replicasPerNodeGroup:
+                    description: Number of replica nodes in each node group. Valid
+                      values are 0 to 5. Changing this number will trigger an online
+                      resizing operation before other settings modifications.
                     type: number
                   replicationGroupDescription:
+                    description: reated description for the replication group. Must
+                      not be empty.
                     type: string
                   securityGroupIdRefs:
                     items:
@@ -313,24 +415,48 @@ spec:
                         type: object
                     type: object
                   securityGroupIds:
+                    description: One or more Amazon VPC security groups associated
+                      with this replication group. Use this parameter only when you
+                      are creating a replication group in an Amazon Virtual Private
+                      Cloud
                     items:
                       type: string
                     type: array
                   securityGroupNames:
+                    description: List of cache security group names to associate with
+                      this replication group.
                     items:
                       type: string
                     type: array
                   snapshotArns:
+                    description: –  List of ARNs that identify Redis RDB snapshot
+                      files stored in Amazon S3. The names object names cannot contain
+                      any commas.
                     items:
                       type: string
                     type: array
                   snapshotName:
+                    description: Name of a snapshot from which to restore data into
+                      the new node group. Changing the snapshot_name forces a new
+                      resource.
                     type: string
                   snapshotRetentionLimit:
+                    description: Number of days for which ElastiCache will retain
+                      automatic cache cluster snapshots before deleting them. For
+                      example, if you set SnapshotRetentionLimit to 5, then a snapshot
+                      that was taken today will be retained for 5 days before being
+                      deleted. If the value of snapshot_retention_limit is set to
+                      zero , backups are turned off. Please note that setting a snapshot_retention_limit
+                      is not supported on cache.t1.micro cache nodes
                     type: number
                   snapshotWindow:
+                    description: 'Daily time range  during which ElastiCache will
+                      begin taking a daily snapshot of your cache cluster. The minimum
+                      snapshot window is a 60 minute period. Example: 05:00-09:00'
                     type: string
                   subnetGroupName:
+                    description: Name of the cache subnet group to be used for the
+                      replication group.
                     type: string
                   subnetGroupNameRef:
                     description: A Reference to a named object.
@@ -408,10 +534,22 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Map of tags to assign to the resource. Adding tags
+                      to this resource will add or overwrite any existing tags on
+                      the clusters in the replication group and not to the group itself.
+                      If configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                   transitEncryptionEnabled:
+                    description: Whether to enable encryption in transit.
                     type: boolean
                   userGroupIds:
+                    description: 'User Group ID to associate with the replication
+                      group. Only a maximum of one  user group ID is valid. NOTE:
+                      This argument is a set because the AWS specification allows
+                      for multiple IDs. However, in practice, AWS only allows a maximum
+                      size of one.'
                     items:
                       type: string
                     type: array
@@ -595,26 +733,42 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: ARN of the created ElastiCache Replication Group.
                     type: string
                   clusterEnabled:
+                    description: Indicates if cluster mode is enabled.
                     type: boolean
                   configurationEndpointAddress:
+                    description: Address of the replication group configuration endpoint
+                      when cluster mode is enabled.
                     type: string
                   engineVersionActual:
+                    description: Because ElastiCache pulls the latest minor or patch
+                      for a version, this attribute returns the running version of
+                      the cache engine.
                     type: string
                   id:
+                    description: ID of the ElastiCache Replication Group.
                     type: string
                   memberClusters:
+                    description: Identifiers of all the nodes that are part of this
+                      replication group.
                     items:
                       type: string
                     type: array
                   primaryEndpointAddress:
+                    description: Address of the endpoint for the primary node in the
+                      replication group, if the cluster mode is disabled.
                     type: string
                   readerEndpointAddress:
+                    description: Address of the endpoint for the reader node in the
+                      replication group, if the cluster mode is disabled.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

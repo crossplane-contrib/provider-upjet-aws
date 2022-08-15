@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: UserPoolUICustomization is the Schema for the UserPoolUICustomizations
-          API
+          API. Provides a Cognito User Pool UI Customization resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,9 @@ spec:
               forProvider:
                 properties:
                   clientId:
+                    description: The client ID for the client app. Defaults to ALL.
+                      If ALL is specified, the css and/or image_file settings will
+                      be used for every client that has no UI customization set previously.
                     type: string
                   clientIdRef:
                     description: A Reference to a named object.
@@ -141,14 +144,21 @@ spec:
                         type: object
                     type: object
                   css:
+                    description: The CSS values in the UI customization, provided
+                      as a String. At least one of css or image_file is required.
                     type: string
                   imageFile:
+                    description: The uploaded logo image for the UI customization,
+                      provided as a base64-encoded String. Drift detection is not
+                      possible for this argument. At least one of css or image_file
+                      is required.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   userPoolId:
+                    description: The user pool ID for the user pool.
                     type: string
                   userPoolIdRef:
                     description: A Reference to a named object.
@@ -404,14 +414,19 @@ spec:
               atProvider:
                 properties:
                   creationDate:
+                    description: The creation date in RFC3339 format for the UI customization.
                     type: string
                   cssVersion:
+                    description: The CSS version number.
                     type: string
                   id:
                     type: string
                   imageUrl:
+                    description: The logo image URL for the UI customization.
                     type: string
                   lastModifiedDate:
+                    description: The last-modified date in RFC3339 format for the
+                      UI customization.
                     type: string
                 type: object
               conditions:

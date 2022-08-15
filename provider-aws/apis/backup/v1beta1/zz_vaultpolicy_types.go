@@ -14,13 +14,17 @@ import (
 )
 
 type VaultPolicyObservation struct {
+
+	// The ARN of the vault.
 	BackupVaultArn *string `json:"backupVaultArn,omitempty" tf:"backup_vault_arn,omitempty"`
 
+	// The name of the vault.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type VaultPolicyParameters struct {
 
+	// Name of the backup vault to add policy for.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/backup/v1beta1.Vault
 	// +kubebuilder:validation:Optional
 	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
@@ -31,6 +35,7 @@ type VaultPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
+	// The backup vault access policy document in JSON format.
 	// +kubebuilder:validation:Required
 	Policy *string `json:"policy" tf:"policy,omitempty"`
 
@@ -54,7 +59,7 @@ type VaultPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VaultPolicy is the Schema for the VaultPolicys API
+// VaultPolicy is the Schema for the VaultPolicys API. Provides an AWS Backup vault policy resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

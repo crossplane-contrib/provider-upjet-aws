@@ -18,9 +18,11 @@ type ContentTypeProfileConfigObservation struct {
 
 type ContentTypeProfileConfigParameters struct {
 
+	// Object that contains an attribute items that contains the list of configurations for a field-level encryption content type-profile. See Content Type Profile.
 	// +kubebuilder:validation:Required
 	ContentTypeProfiles []ContentTypeProfilesParameters `json:"contentTypeProfiles" tf:"content_type_profiles,omitempty"`
 
+	// specifies what to do when an unknown content type is provided for the profile. If true, content is forwarded without being encrypted when the content type is unknown. If false , an error is returned when the content type is unknown.
 	// +kubebuilder:validation:Required
 	ForwardWhenContentTypeIsUnknown *bool `json:"forwardWhenContentTypeIsUnknown" tf:"forward_when_content_type_is_unknown,omitempty"`
 }
@@ -30,9 +32,11 @@ type ContentTypeProfilesItemsObservation struct {
 
 type ContentTypeProfilesItemsParameters struct {
 
+	// he content type for a field-level encryption content type-profile mapping. Valid value is application/x-www-form-urlencoded.
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
+	// The format for a field-level encryption content type-profile mapping. Valid value is URLEncoded.
 	// +kubebuilder:validation:Required
 	Format *string `json:"format" tf:"format,omitempty"`
 
@@ -50,21 +54,28 @@ type ContentTypeProfilesParameters struct {
 }
 
 type FieldLevelEncryptionConfigObservation struct {
+
+	// Internal value used by CloudFront to allow future updates to the Field Level Encryption Config.
 	CallerReference *string `json:"callerReference,omitempty" tf:"caller_reference,omitempty"`
 
+	// The current version of the Field Level Encryption Config. For example: E2QWRUHAPOMQZL.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
+	// The identifier for the Field Level Encryption Config. For example: K3D5EWEUDCCXON.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type FieldLevelEncryptionConfigParameters struct {
 
+	// An optional comment about the Field Level Encryption Config.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// Content Type Profile Config specifies when to forward content if a content type isn't recognized and profiles to use as by default in a request if a query argument doesn't specify a profile to use.
 	// +kubebuilder:validation:Required
 	ContentTypeProfileConfig []ContentTypeProfileConfigParameters `json:"contentTypeProfileConfig" tf:"content_type_profile_config,omitempty"`
 
+	// Query Arg Profile Config that specifies when to forward content if a profile isn't found and the profile that can be provided as a query argument in a request.
 	// +kubebuilder:validation:Required
 	QueryArgProfileConfig []QueryArgProfileConfigParameters `json:"queryArgProfileConfig" tf:"query_arg_profile_config,omitempty"`
 
@@ -79,9 +90,11 @@ type QueryArgProfileConfigObservation struct {
 
 type QueryArgProfileConfigParameters struct {
 
+	// Flag to set if you want a request to be forwarded to the origin even if the profile specified by the field-level encryption query argument, fle-profile, is unknown.
 	// +kubebuilder:validation:Required
 	ForwardWhenQueryArgProfileIsUnknown *bool `json:"forwardWhenQueryArgProfileIsUnknown" tf:"forward_when_query_arg_profile_is_unknown,omitempty"`
 
+	// Object that contains an attribute items that contains the list ofrofiles specified for query argument-profile mapping for field-level encryption. see Query Arg Profile.
 	// +kubebuilder:validation:Optional
 	QueryArgProfiles []QueryArgProfilesParameters `json:"queryArgProfiles,omitempty" tf:"query_arg_profiles,omitempty"`
 }
@@ -102,6 +115,7 @@ type QueryArgProfilesItemsParameters struct {
 	// +kubebuilder:validation:Optional
 	ProfileIDSelector *v1.Selector `json:"profileIdSelector,omitempty" tf:"-"`
 
+	// Query argument for field-level encryption query argument-profile mapping.
 	// +kubebuilder:validation:Required
 	QueryArg *string `json:"queryArg" tf:"query_arg,omitempty"`
 }
@@ -129,7 +143,7 @@ type FieldLevelEncryptionConfigStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FieldLevelEncryptionConfig is the Schema for the FieldLevelEncryptionConfigs API
+// FieldLevelEncryptionConfig is the Schema for the FieldLevelEncryptionConfigs API. Provides a CloudFront Field-level Encryption Config resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

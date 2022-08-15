@@ -19,6 +19,7 @@ type BucketNotificationObservation struct {
 
 type BucketNotificationParameters struct {
 
+	// Name of the bucket for notification configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,12 +31,15 @@ type BucketNotificationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// Whether to enable Amazon EventBridge notifications.
 	// +kubebuilder:validation:Optional
 	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
 
+	// Used to configure notifications to a Lambda Function. See below.
 	// +kubebuilder:validation:Optional
 	LambdaFunction []LambdaFunctionParameters `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
+	// Notification configuration to SQS Queue. See below.
 	// +kubebuilder:validation:Optional
 	Queue []QueueParameters `json:"queue,omitempty" tf:"queue,omitempty"`
 
@@ -44,6 +48,7 @@ type BucketNotificationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Notification configuration to SNS Topic. See below.
 	// +kubebuilder:validation:Optional
 	Topic []TopicParameters `json:"topic,omitempty" tf:"topic,omitempty"`
 }
@@ -65,6 +70,7 @@ type LambdaFunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Lambda function ARN.
 	// +kubebuilder:validation:Optional
 	LambdaFunctionArn *string `json:"lambdaFunctionArn,omitempty" tf:"lambda_function_arn,omitempty"`
 }
@@ -86,6 +92,7 @@ type QueueParameters struct {
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// SQS queue ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/sqs/v1beta1.Queue
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -115,6 +122,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// SNS topic ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -141,7 +149,7 @@ type BucketNotificationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketNotification is the Schema for the BucketNotifications API
+// BucketNotification is the Schema for the BucketNotifications API. Manages a S3 Bucket Notification Configuration
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

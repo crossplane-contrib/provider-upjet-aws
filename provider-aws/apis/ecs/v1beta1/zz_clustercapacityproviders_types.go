@@ -18,25 +18,32 @@ type ClusterCapacityProvidersDefaultCapacityProviderStrategyObservation struct {
 
 type ClusterCapacityProvidersDefaultCapacityProviderStrategyParameters struct {
 
+	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
 
+	// Name of the capacity provider.
 	// +kubebuilder:validation:Required
 	CapacityProvider *string `json:"capacityProvider" tf:"capacity_provider,omitempty"`
 
+	// The relative percentage of the total number of launched tasks that should use the specified capacity provider. The weight value is taken into consideration after the base count of tasks has been satisfied. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type ClusterCapacityProvidersObservation struct {
+
+	// Same as cluster_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ClusterCapacityProvidersParameters struct {
 
+	// Set of names of one or more capacity providers to associate with the cluster. Valid values also include FARGATE and FARGATE_SPOT.
 	// +kubebuilder:validation:Optional
 	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
 
+	// Name of the ECS cluster to manage capacity providers for.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ecs/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -47,6 +54,7 @@ type ClusterCapacityProvidersParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
+	// Set of capacity provider strategies to use by default for the cluster. Detailed below.
 	// +kubebuilder:validation:Optional
 	DefaultCapacityProviderStrategy []ClusterCapacityProvidersDefaultCapacityProviderStrategyParameters `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
 
@@ -70,7 +78,7 @@ type ClusterCapacityProvidersStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ClusterCapacityProviders is the Schema for the ClusterCapacityProviderss API
+// ClusterCapacityProviders is the Schema for the ClusterCapacityProviderss API. Provides an ECS cluster capacity providers resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

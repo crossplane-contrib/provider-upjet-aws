@@ -24,9 +24,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    lifecycle:
-    - ignore_changes:
-      - ${vpc}
     name: example.com
     region: us-west-1
 

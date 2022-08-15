@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: DomainServiceAccessPolicy is the Schema for the DomainServiceAccessPolicys
-          API
+          API. Provides an CloudSearch domain service access policy resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,11 @@ spec:
               forProvider:
                 properties:
                   accessPolicy:
+                    description: The access rules you want to configure. These rules
+                      replace any existing rules. See the AWS documentation for details.
                     type: string
                   domainName:
+                    description: The CloudSearch domain name the policy applies to.
                     type: string
                   domainNameRef:
                     description: A Reference to a named object.

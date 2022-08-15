@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Pool is the Schema for the Pools API
+        description: Pool is the Schema for the Pools API. Provides an AWS Cognito
+          Identity Pool.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,13 +65,21 @@ spec:
               forProvider:
                 properties:
                   allowClassicFlow:
+                    description: Enables or disables the classic / basic authentication
+                      flow. Default is false.
                     type: boolean
                   allowUnauthenticatedIdentities:
+                    description: Whether the identity pool supports unauthenticated
+                      logins or not.
                     type: boolean
                   cognitoIdentityProviders:
+                    description: An array of Amazon Cognito Identity user pools and
+                      their client IDs.
                     items:
                       properties:
                         clientId:
+                          description: The client ID for the Amazon Cognito Identity
+                            User Pool.
                           type: string
                         clientIdRef:
                           description: A Reference to a named object.
@@ -149,16 +158,25 @@ spec:
                               type: object
                           type: object
                         providerName:
+                          description: The provider name for an Amazon Cognito Identity
+                            User Pool.
                           type: string
                         serverSideTokenCheck:
+                          description: Whether server-side token validation is enabled
+                            for the identity provider’s token or not.
                           type: boolean
                       type: object
                     type: array
                   developerProviderName:
+                    description: The "domain" by which Cognito will refer to your
+                      users. This name acts as a placeholder that allows your backend
+                      and the Cognito service to communicate about the developer provider.
                     type: string
                   identityPoolName:
+                    description: The Cognito Identity Pool name.
                     type: string
                   openidConnectProviderArns:
+                    description: Set of OpendID Connect provider ARNs.
                     items:
                       type: string
                     type: array
@@ -167,6 +185,8 @@ spec:
                       be created in.
                     type: string
                   samlProviderArns:
+                    description: An array of Amazon Resource Names  of the SAML provider
+                      for your identity.
                     items:
                       type: string
                     type: array
@@ -248,10 +268,16 @@ spec:
                   supportedLoginProviders:
                     additionalProperties:
                       type: string
+                    description: Key-Value pairs mapping provider names to provider
+                      app IDs.
                     type: object
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the Identity Pool. If
+                      configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                 required:
                 - identityPoolName
@@ -434,12 +460,17 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the identity pool.
                     type: string
                   id:
+                    description: An identity pool ID, e.g. us-west-2_abc123.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

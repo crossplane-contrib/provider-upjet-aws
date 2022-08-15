@@ -19,6 +19,7 @@ type CertificateAuthorityCertificateObservation struct {
 
 type CertificateAuthorityCertificateParameters struct {
 
+	// Amazon Resource Name  of the Certificate Authority.
 	// +crossplane:generate:reference:type=CertificateAuthority
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
@@ -29,9 +30,11 @@ type CertificateAuthorityCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
+	// The PEM-encoded certificate chain that includes any intermediate certificates and chains up to root CA. Required for subordinate Certificate Authorities. Not allowed for root Certificate Authorities.
 	// +kubebuilder:validation:Optional
 	CertificateChainSecretRef *v1.SecretKeySelector `json:"certificateChainSecretRef,omitempty" tf:"-"`
 
+	// The PEM-encoded certificate for the Certificate Authority.
 	// +kubebuilder:validation:Required
 	CertificateSecretRef v1.SecretKeySelector `json:"certificateSecretRef" tf:"-"`
 
@@ -55,7 +58,7 @@ type CertificateAuthorityCertificateStatus struct {
 
 // +kubebuilder:object:root=true
 
-// CertificateAuthorityCertificate is the Schema for the CertificateAuthorityCertificates API
+// CertificateAuthorityCertificate is the Schema for the CertificateAuthorityCertificates API. Associates a certificate with an AWS Certificate Manager Private Certificate Authority
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

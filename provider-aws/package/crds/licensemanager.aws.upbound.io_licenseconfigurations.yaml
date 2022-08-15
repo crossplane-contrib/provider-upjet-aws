@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: LicenseConfiguration is the Schema for the LicenseConfigurations
-          API
+          API. Provides a License Manager license configuration resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,18 +65,25 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: Description of the license configuration.
                     type: string
                   licenseCount:
+                    description: Number of licenses managed by the license configuration.
                     type: number
                   licenseCountHardLimit:
+                    description: Sets the number of available licenses as a hard limit.
                     type: boolean
                   licenseCountingType:
+                    description: Dimension to use to track license inventory. Specify
+                      either vCPU, Instance, Core or Socket.
                     type: string
                   licenseRules:
+                    description: Array of configured License Manager rules.
                     items:
                       type: string
                     type: array
                   name:
+                    description: Name of the license configuration.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -85,6 +92,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - licenseCountingType
@@ -269,14 +279,20 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The license configuration ARN.
                     type: string
                   id:
+                    description: The license configuration ARN.
                     type: string
                   ownerAccountId:
+                    description: Account ID of the owner of the license configuration.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

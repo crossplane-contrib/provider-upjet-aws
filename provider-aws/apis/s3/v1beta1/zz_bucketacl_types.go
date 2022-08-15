@@ -14,34 +14,48 @@ import (
 )
 
 type AccessControlPolicyGrantObservation struct {
+
+	// Configuration block for the person being granted permissions documented below.
+	// +kubebuilder:validation:Optional
 	Grantee []GranteeObservation `json:"grantee,omitempty" tf:"grantee,omitempty"`
 }
 
 type AccessControlPolicyGrantParameters struct {
 
+	// Configuration block for the person being granted permissions documented below.
 	// +kubebuilder:validation:Optional
 	Grantee []GranteeParameters `json:"grantee,omitempty" tf:"grantee,omitempty"`
 
+	// Logging permissions assigned to the grantee for the bucket.
 	// +kubebuilder:validation:Required
 	Permission *string `json:"permission" tf:"permission,omitempty"`
 }
 
 type AccessControlPolicyObservation struct {
+
+	// Set of grant configuration blocks documented below.
+	// +kubebuilder:validation:Optional
 	Grant []AccessControlPolicyGrantObservation `json:"grant,omitempty" tf:"grant,omitempty"`
 }
 
 type AccessControlPolicyParameters struct {
 
+	// Set of grant configuration blocks documented below.
 	// +kubebuilder:validation:Optional
 	Grant []AccessControlPolicyGrantParameters `json:"grant,omitempty" tf:"grant,omitempty"`
 
+	// Configuration block of the bucket owner's display name and ID documented below.
 	// +kubebuilder:validation:Required
 	Owner []OwnerParameters `json:"owner" tf:"owner,omitempty"`
 }
 
 type BucketACLObservation struct {
+
+	// The canned ACL to apply to the bucket.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
+	// A configuration block that sets the ACL permissions for an object per grantee documented below.
+	// +kubebuilder:validation:Optional
 	AccessControlPolicy []AccessControlPolicyObservation `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -49,9 +63,11 @@ type BucketACLObservation struct {
 
 type BucketACLParameters struct {
 
+	// A configuration block that sets the ACL permissions for an object per grantee documented below.
 	// +kubebuilder:validation:Optional
 	AccessControlPolicy []AccessControlPolicyParameters `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
 
+	// The name of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -63,6 +79,7 @@ type BucketACLParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// The account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
@@ -73,20 +90,25 @@ type BucketACLParameters struct {
 }
 
 type GranteeObservation struct {
+
+	// The display name of the owner.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 }
 
 type GranteeParameters struct {
 
+	// Email address of the grantee. See Regions and Endpoints for supported AWS regions where this argument can be specified.
 	// +kubebuilder:validation:Optional
 	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Type of grantee. Valid values: CanonicalUser, AmazonCustomerByEmail, Group.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
+	// URI of the grantee group.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
@@ -96,6 +118,7 @@ type OwnerObservation struct {
 
 type OwnerParameters struct {
 
+	// The display name of the owner.
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
@@ -117,7 +140,7 @@ type BucketACLStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketACL is the Schema for the BucketACLs API
+// BucketACL is the Schema for the BucketACLs API. Provides an S3 bucket ACL resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

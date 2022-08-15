@@ -18,6 +18,7 @@ type EntryObservation struct {
 
 type EntryParameters struct {
 
+	// CIDR block of this entry.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPCIPv4CidrBlockAssociation
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("cidr_block",false)
 	// +kubebuilder:validation:Optional
@@ -29,33 +30,44 @@ type EntryParameters struct {
 	// +kubebuilder:validation:Optional
 	CidrSelector *v1.Selector `json:"cidrSelector,omitempty" tf:"-"`
 
+	// Description of this entry. Due to API limitations, updating only the description of an existing entry requires temporarily removing and re-adding the entry.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 }
 
 type ManagedPrefixListObservation struct {
+
+	// ARN of the prefix list.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ID of the prefix list.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// ID of the AWS account that owns this prefix list.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// Latest version of this prefix list.
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ManagedPrefixListParameters struct {
 
+	// Address family  of this prefix list.
 	// +kubebuilder:validation:Required
 	AddressFamily *string `json:"addressFamily" tf:"address_family,omitempty"`
 
+	// Configuration block for prefix list entry. Detailed below. Different entries may have overlapping CIDR blocks, but a particular CIDR should not be duplicated.
 	// +kubebuilder:validation:Optional
 	Entry []EntryParameters `json:"entry,omitempty" tf:"entry,omitempty"`
 
+	// Maximum number of entries that this prefix list can contain.
 	// +kubebuilder:validation:Required
 	MaxEntries *float64 `json:"maxEntries" tf:"max_entries,omitempty"`
 
+	// Name of this resource. The name must not start with com.amazonaws.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -64,6 +76,7 @@ type ManagedPrefixListParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Map of tags to assign to this resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -82,7 +95,7 @@ type ManagedPrefixListStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ManagedPrefixList is the Schema for the ManagedPrefixLists API
+// ManagedPrefixList is the Schema for the ManagedPrefixLists API. Provides a managed prefix list resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

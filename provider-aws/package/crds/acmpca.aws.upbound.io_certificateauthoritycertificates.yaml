@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: CertificateAuthorityCertificate is the Schema for the CertificateAuthorityCertificates
-          API
+          API. Associates a certificate with an AWS Certificate Manager Private Certificate
+          Authority
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +67,7 @@ spec:
               forProvider:
                 properties:
                   certificateAuthorityArn:
+                    description: Amazon Resource Name  of the Certificate Authority.
                     type: string
                   certificateAuthorityArnRef:
                     description: A Reference to a named object.
@@ -141,8 +143,10 @@ spec:
                         type: object
                     type: object
                   certificateChainSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The PEM-encoded certificate chain that includes any
+                      intermediate certificates and chains up to root CA. Required
+                      for subordinate Certificate Authorities. Not allowed for root
+                      Certificate Authorities.
                     properties:
                       key:
                         description: The key to select.
@@ -159,8 +163,7 @@ spec:
                     - namespace
                     type: object
                   certificateSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The PEM-encoded certificate for the Certificate Authority.
                     properties:
                       key:
                         description: The key to select.

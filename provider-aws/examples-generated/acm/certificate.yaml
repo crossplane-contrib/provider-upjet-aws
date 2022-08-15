@@ -7,8 +7,6 @@ metadata:
 spec:
   forProvider:
     domainName: example.com
-    lifecycle:
-    - create_before_destroy: true
     region: us-west-1
     tags:
       Environment: test

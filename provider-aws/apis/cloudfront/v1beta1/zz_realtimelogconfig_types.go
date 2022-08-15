@@ -18,9 +18,11 @@ type EndpointObservation struct {
 
 type EndpointParameters struct {
 
+	// The Amazon Kinesis data stream configuration.
 	// +kubebuilder:validation:Required
 	KinesisStreamConfig []KinesisStreamConfigParameters `json:"kinesisStreamConfig" tf:"kinesis_stream_config,omitempty"`
 
+	// The type of data stream where real-time log data is sent. The only valid value is Kinesis.
 	// +kubebuilder:validation:Required
 	StreamType *string `json:"streamType" tf:"stream_type,omitempty"`
 }
@@ -30,6 +32,8 @@ type KinesisStreamConfigObservation struct {
 
 type KinesisStreamConfigParameters struct {
 
+	// The ARN of an IAM role that CloudFront can use to send real-time log data to the Kinesis data stream.
+	// See the AWS documentation for more information.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -41,6 +45,7 @@ type KinesisStreamConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// The ARN of the Kinesis data stream.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -54,19 +59,25 @@ type KinesisStreamConfigParameters struct {
 }
 
 type RealtimeLogConfigObservation struct {
+
+	// The ARN  of the CloudFront real-time log configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ID of the CloudFront real-time log configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type RealtimeLogConfigParameters struct {
 
+	// The Amazon Kinesis data streams where real-time log data is sent.
 	// +kubebuilder:validation:Required
 	Endpoint []EndpointParameters `json:"endpoint" tf:"endpoint,omitempty"`
 
+	// The fields that are included in each real-time log record. See the AWS documentation for supported values.
 	// +kubebuilder:validation:Required
 	Fields []*string `json:"fields" tf:"fields,omitempty"`
 
+	// The unique name to identify this real-time log configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -75,6 +86,7 @@ type RealtimeLogConfigParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. An integer between 1 and 100, inclusive.
 	// +kubebuilder:validation:Required
 	SamplingRate *float64 `json:"samplingRate" tf:"sampling_rate,omitempty"`
 }
@@ -93,7 +105,7 @@ type RealtimeLogConfigStatus struct {
 
 // +kubebuilder:object:root=true
 
-// RealtimeLogConfig is the Schema for the RealtimeLogConfigs API
+// RealtimeLogConfig is the Schema for the RealtimeLogConfigs API. Provides a CloudFront real-time log configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

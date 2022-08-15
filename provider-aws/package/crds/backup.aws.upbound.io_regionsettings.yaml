@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: RegionSettings is the Schema for the RegionSettingss API
+        description: RegionSettings is the Schema for the RegionSettingss API. Provides
+          an AWS Backup Region Settings resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -70,10 +71,14 @@ spec:
                   resourceTypeManagementPreference:
                     additionalProperties:
                       type: boolean
+                    description: A map of services along with the management preferences
+                      for the Region.
                     type: object
                   resourceTypeOptInPreference:
                     additionalProperties:
                       type: boolean
+                    description: A map of services along with the opt-in preferences
+                      for the Region.
                     type: object
                 required:
                 - region
@@ -256,6 +261,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The AWS region.
                     type: string
                 type: object
               conditions:

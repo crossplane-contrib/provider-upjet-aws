@@ -18,15 +18,23 @@ type CustomErrorResponseObservation struct {
 
 type CustomErrorResponseParameters struct {
 
+	// The minimum amount of time you want
+	// HTTP error codes to stay in CloudFront caches before CloudFront queries your
+	// origin to see whether the object has been updated.
 	// +kubebuilder:validation:Optional
 	ErrorCachingMinTTL *float64 `json:"errorCachingMinTtl,omitempty" tf:"error_caching_min_ttl,omitempty"`
 
+	// The 4xx or 5xx HTTP status code that you want to
+	// customize.
 	// +kubebuilder:validation:Required
 	ErrorCode *float64 `json:"errorCode" tf:"error_code,omitempty"`
 
+	// The HTTP status code that you want CloudFront
+	// to return with the custom error page to the viewer.
 	// +kubebuilder:validation:Optional
 	ResponseCode *float64 `json:"responseCode,omitempty" tf:"response_code,omitempty"`
 
+	// The path of the custom error page .
 	// +kubebuilder:validation:Optional
 	ResponsePagePath *string `json:"responsePagePath,omitempty" tf:"response_page_path,omitempty"`
 }
@@ -48,21 +56,30 @@ type CustomOriginConfigObservation struct {
 
 type CustomOriginConfigParameters struct {
 
+	// The HTTP port the custom origin listens on.
 	// +kubebuilder:validation:Required
 	HTTPPort *float64 `json:"httpPort" tf:"http_port,omitempty"`
 
+	// The HTTPS port the custom origin listens on.
 	// +kubebuilder:validation:Required
 	HTTPSPort *float64 `json:"httpsPort" tf:"https_port,omitempty"`
 
+	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
 	// +kubebuilder:validation:Optional
 	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
 
+	// The origin protocol policy to apply to
+	// your origin. One of http-only, https-only, or match-viewer.
 	// +kubebuilder:validation:Required
 	OriginProtocolPolicy *string `json:"originProtocolPolicy" tf:"origin_protocol_policy,omitempty"`
 
+	// The Custom Read timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
 	// +kubebuilder:validation:Optional
 	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
 
+	// The SSL/TLS protocols that you want
+	// CloudFront to use when communicating with your origin over HTTPS. A list of
+	// one or more of SSLv3, TLSv1, TLSv1.1, and TLSv1.2.
 	// +kubebuilder:validation:Required
 	OriginSSLProtocols []*string `json:"originSslProtocols" tf:"origin_ssl_protocols,omitempty"`
 }
@@ -72,51 +89,88 @@ type DefaultCacheBehaviorObservation struct {
 
 type DefaultCacheBehaviorParameters struct {
 
+	// Controls which HTTP methods CloudFront
+	// processes and forwards to your Amazon S3 bucket or your custom origin.
 	// +kubebuilder:validation:Required
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
+	// The unique identifier of the cache policy that
+	// is attached to the cache behavior.
 	// +kubebuilder:validation:Optional
 	CachePolicyID *string `json:"cachePolicyId,omitempty" tf:"cache_policy_id,omitempty"`
 
+	// Controls whether CloudFront caches the
+	// response to requests using the specified HTTP methods.
 	// +kubebuilder:validation:Required
 	CachedMethods []*string `json:"cachedMethods" tf:"cached_methods,omitempty"`
 
+	// Whether you want CloudFront to automatically
+	// compress content for web requests that include Accept-Encoding: gzip in
+	// the request header .
 	// +kubebuilder:validation:Optional
 	Compress *bool `json:"compress,omitempty" tf:"compress,omitempty"`
 
+	// The default amount of time  that an
+	// object is in a CloudFront cache before CloudFront forwards another request
+	// in the absence of an Cache-Control max-age or Expires header.
 	// +kubebuilder:validation:Optional
 	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
+	// Field level encryption configuration ID
 	// +kubebuilder:validation:Optional
 	FieldLevelEncryptionID *string `json:"fieldLevelEncryptionId,omitempty" tf:"field_level_encryption_id,omitempty"`
 
+	// The forwarded values configuration that specifies how CloudFront
+	// handles query strings, cookies and headers .
 	// +kubebuilder:validation:Optional
 	ForwardedValues []ForwardedValuesParameters `json:"forwardedValues,omitempty" tf:"forwarded_values,omitempty"`
 
+	// A config block that triggers a cloudfront
+	// function with specific actions .
 	// +kubebuilder:validation:Optional
 	FunctionAssociation []FunctionAssociationParameters `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
+	// A config block that triggers a lambda
+	// function with specific actions .
 	// +kubebuilder:validation:Optional
 	LambdaFunctionAssociation []LambdaFunctionAssociationParameters `json:"lambdaFunctionAssociation,omitempty" tf:"lambda_function_association,omitempty"`
 
+	// The maximum amount of time  that an
+	// object is in a CloudFront cache before CloudFront forwards another request
+	// to your origin to determine whether the object has been updated. Only
+	// effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
 	// +kubebuilder:validation:Optional
 	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
+	// The minimum amount of time that you want objects to
+	// stay in CloudFront caches before CloudFront queries your origin to see
+	// whether the object has been updated. Defaults to 0 seconds.
 	// +kubebuilder:validation:Optional
 	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
+	// The unique identifier of the origin request policy
+	// that is attached to the behavior.
 	// +kubebuilder:validation:Optional
 	OriginRequestPolicyID *string `json:"originRequestPolicyId,omitempty" tf:"origin_request_policy_id,omitempty"`
 
+	// The ARN of the real-time log configuration
+	// that is attached to this cache behavior.
 	// +kubebuilder:validation:Optional
 	RealtimeLogConfigArn *string `json:"realtimeLogConfigArn,omitempty" tf:"realtime_log_config_arn,omitempty"`
 
+	// The identifier for a response headers policy.
 	// +kubebuilder:validation:Optional
 	ResponseHeadersPolicyID *string `json:"responseHeadersPolicyId,omitempty" tf:"response_headers_policy_id,omitempty"`
 
+	// Indicates whether you want to distribute
+	// media files in Microsoft Smooth Streaming format using the origin that is
+	// associated with this cache behavior.
 	// +kubebuilder:validation:Optional
 	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 
+	// The value of ID for the origin that you want
+	// CloudFront to route requests to when a request matches the path pattern
+	// either for a cache behavior or for the default cache behavior.
 	// +kubebuilder:validation:Required
 	TargetOriginID *string `json:"targetOriginId" tf:"target_origin_id,omitempty"`
 
@@ -126,29 +180,50 @@ type DefaultCacheBehaviorParameters struct {
 	// +kubebuilder:validation:Optional
 	TrustedSigners []*string `json:"trustedSigners,omitempty" tf:"trusted_signers,omitempty"`
 
+	// Use this element to specify the
+	// protocol that users can use to access the files in the origin specified by
+	// TargetOriginId when a request matches the path pattern in PathPattern. One
+	// of allow-all, https-only, or redirect-to-https.
 	// +kubebuilder:validation:Required
 	ViewerProtocolPolicy *string `json:"viewerProtocolPolicy" tf:"viewer_protocol_policy,omitempty"`
 }
 
 type DistributionObservation struct {
+
+	// The ARN  for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account ID.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Internal value used by CloudFront to allow future
+	// updates to the distribution configuration.
 	CallerReference *string `json:"callerReference,omitempty" tf:"caller_reference,omitempty"`
 
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
+	// The current version of the distribution's information. For example:
+	// E2QWRUHAPOMQZL.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
+	// The CloudFront Route 53 zone ID that can be used to
+	// route an Alias Resource Record Set to. This attribute is simply an
+	// alias for the zone ID Z2FDTNDATAQYW2.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
+	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The number of invalidation batches
+	// currently in progress.
 	InProgressValidationBatches *float64 `json:"inProgressValidationBatches,omitempty" tf:"in_progress_validation_batches,omitempty"`
 
+	// The date and time the distribution was last modified.
 	LastModifiedTime *string `json:"lastModifiedTime,omitempty" tf:"last_modified_time,omitempty"`
 
+	// The current status of the distribution. Deployed if the
+	// distribution's information is fully propagated throughout the Amazon
+	// CloudFront system.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	TrustedKeyGroups []TrustedKeyGroupsObservation `json:"trustedKeyGroups,omitempty" tf:"trusted_key_groups,omitempty"`
@@ -158,42 +233,66 @@ type DistributionObservation struct {
 
 type DistributionParameters struct {
 
+	// Extra CNAMEs , if any, for
+	// this distribution.
 	// +kubebuilder:validation:Optional
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
+	// Any comments you want to include about the
+	// distribution.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// One or more custom error response elements .
 	// +kubebuilder:validation:Optional
 	CustomErrorResponse []CustomErrorResponseParameters `json:"customErrorResponse,omitempty" tf:"custom_error_response,omitempty"`
 
+	// The default cache behavior for this distribution .
 	// +kubebuilder:validation:Required
 	DefaultCacheBehavior []DefaultCacheBehaviorParameters `json:"defaultCacheBehavior" tf:"default_cache_behavior,omitempty"`
 
+	// The object that you want CloudFront to
+	// return  when an end user requests the root URL.
 	// +kubebuilder:validation:Optional
 	DefaultRootObject *string `json:"defaultRootObject,omitempty" tf:"default_root_object,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
+	// The maximum HTTP version to support on the
+	// distribution. Allowed values are http1.1 and http2. The default is
+	// http2.
 	// +kubebuilder:validation:Optional
 	HTTPVersion *string `json:"httpVersion,omitempty" tf:"http_version,omitempty"`
 
+	// Whether the IPv6 is enabled for the distribution.
 	// +kubebuilder:validation:Optional
 	IsIPv6Enabled *bool `json:"isIpv6Enabled,omitempty" tf:"is_ipv6_enabled,omitempty"`
 
+	// The logging
+	// configuration that controls how logs are written
+	// to your distribution .
 	// +kubebuilder:validation:Optional
 	LoggingConfig []LoggingConfigParameters `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
+	// An ordered list of cache behaviors
+	// resource for this distribution. List from top to bottom
+	// in order of precedence. The topmost cache behavior will have precedence 0.
 	// +kubebuilder:validation:Optional
 	OrderedCacheBehavior []OrderedCacheBehaviorParameters `json:"orderedCacheBehavior,omitempty" tf:"ordered_cache_behavior,omitempty"`
 
+	// One or more origins for this
+	// distribution .
 	// +kubebuilder:validation:Required
 	Origin []OriginParameters `json:"origin" tf:"origin,omitempty"`
 
+	// One or more origin_group for this
+	// distribution .
 	// +kubebuilder:validation:Optional
 	OriginGroup []OriginGroupParameters `json:"originGroup,omitempty" tf:"origin_group,omitempty"`
 
+	// The price class for this distribution. One of
+	// PriceClass_All, PriceClass_200, PriceClass_100
 	// +kubebuilder:validation:Optional
 	PriceClass *string `json:"priceClass,omitempty" tf:"price_class,omitempty"`
 
@@ -202,21 +301,39 @@ type DistributionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The restriction
+	// configuration for this distribution .
 	// +kubebuilder:validation:Required
 	Restrictions []RestrictionsParameters `json:"restrictions" tf:"restrictions,omitempty"`
 
+	// Disables the distribution instead of
+	// deleting it when destroying the resource through Terraform. If this is set,
+	// the distribution needs to be deleted manually afterwards. Default: false.
 	// +kubebuilder:validation:Optional
 	RetainOnDelete *bool `json:"retainOnDelete,omitempty" tf:"retain_on_delete,omitempty"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The SSL
+	// configuration for this distribution .
 	// +kubebuilder:validation:Required
 	ViewerCertificate []ViewerCertificateParameters `json:"viewerCertificate" tf:"viewer_certificate,omitempty"`
 
+	// If enabled, the resource will wait for
+	// the distribution status to change from InProgress to Deployed. Setting
+	// this tofalse will skip the process. Default: true.
 	// +kubebuilder:validation:Optional
 	WaitForDeployment *bool `json:"waitForDeployment,omitempty" tf:"wait_for_deployment,omitempty"`
 
+	// A unique identifier that specifies the AWS WAF web ACL,
+	// if any, to associate with this distribution.
+	// To specify a web ACL created using the latest version of AWS WAF , use the ACL ARN,
+	// for example aws_wafv2_web_acl.example.arn. To specify a web
+	// ACL created using AWS WAF Classic, use the ACL ID, for example aws_waf_web_acl.example.id.
+	// The WAF Web ACL must exist in the WAF Global  region and the
+	// credentials configuring this argument must have waf:GetWebACL permissions assigned.
 	// +kubebuilder:validation:Optional
 	WebACLID *string `json:"webAclId,omitempty" tf:"web_acl_id,omitempty"`
 }
@@ -226,6 +343,7 @@ type FailoverCriteriaObservation struct {
 
 type FailoverCriteriaParameters struct {
 
+	// A list of HTTP status codes for the origin group
 	// +kubebuilder:validation:Required
 	StatusCodes []*float64 `json:"statusCodes" tf:"status_codes,omitempty"`
 }
@@ -235,9 +353,16 @@ type ForwardedValuesCookiesObservation struct {
 
 type ForwardedValuesCookiesParameters struct {
 
+	// Specifies whether you want CloudFront to forward
+	// cookies to the origin that is associated with this cache behavior. You can
+	// specify all, none or whitelist. If whitelist, you must include the
+	// subsequent whitelisted_names
 	// +kubebuilder:validation:Required
 	Forward *string `json:"forward" tf:"forward,omitempty"`
 
+	// If you have specified whitelist to
+	// forward, the whitelisted cookies that you want CloudFront to forward to
+	// your origin.
 	// +kubebuilder:validation:Optional
 	WhitelistedNames []*string `json:"whitelistedNames,omitempty" tf:"whitelisted_names,omitempty"`
 }
@@ -247,15 +372,26 @@ type ForwardedValuesObservation struct {
 
 type ForwardedValuesParameters struct {
 
+	// The forwarded values cookies
+	// that specifies how CloudFront handles cookies .
 	// +kubebuilder:validation:Required
 	Cookies []ForwardedValuesCookiesParameters `json:"cookies" tf:"cookies,omitempty"`
 
+	// Specifies the Headers, if any, that you want
+	// CloudFront to vary upon for this cache behavior. Specify * to include all
+	// headers.
 	// +kubebuilder:validation:Optional
 	Headers []*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
+	// Indicates whether you want CloudFront to forward
+	// query strings to the origin that is associated with this cache behavior.
 	// +kubebuilder:validation:Required
 	QueryString *bool `json:"queryString" tf:"query_string,omitempty"`
 
+	// When specified, along with a value of
+	// true for query_string, all query strings are forwarded, however only the
+	// query string keys listed in this argument are cached. When omitted with a
+	// value of true for query_string, all query string keys are cached.
 	// +kubebuilder:validation:Optional
 	QueryStringCacheKeys []*string `json:"queryStringCacheKeys,omitempty" tf:"query_string_cache_keys,omitempty"`
 }
@@ -268,6 +404,7 @@ type FunctionAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	EventType *string `json:"eventType" tf:"event_type,omitempty"`
 
+	// ARN of the Cloudfront function.
 	// +kubebuilder:validation:Required
 	FunctionArn *string `json:"functionArn" tf:"function_arn,omitempty"`
 }
@@ -277,14 +414,22 @@ type GeoRestrictionObservation struct {
 
 type GeoRestrictionParameters struct {
 
+	// The ISO 3166-1-alpha-2 codes for which you
+	// want CloudFront either to distribute your content  or not
+	// distribute your content .
 	// +kubebuilder:validation:Optional
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 
+	// The method that you want to use to restrict
+	// distribution of your content by country: none, whitelist, or
+	// blacklist.
 	// +kubebuilder:validation:Required
 	RestrictionType *string `json:"restrictionType" tf:"restriction_type,omitempty"`
 }
 
 type ItemsObservation struct {
+
+	// The ID of the key group that contains the public keys
 	KeyGroupID *string `json:"keyGroupId,omitempty" tf:"key_group_id,omitempty"`
 
 	KeyPairIds []*string `json:"keyPairIds,omitempty" tf:"key_pair_ids,omitempty"`
@@ -301,9 +446,11 @@ type LambdaFunctionAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	EventType *string `json:"eventType" tf:"event_type,omitempty"`
 
+	// When set to true it exposes the request body to the lambda function. Defaults to false. Valid values: true, false.
 	// +kubebuilder:validation:Optional
 	IncludeBody *bool `json:"includeBody,omitempty" tf:"include_body,omitempty"`
 
+	// ARN of the Lambda function.
 	// +kubebuilder:validation:Required
 	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
 }
@@ -313,12 +460,18 @@ type LoggingConfigObservation struct {
 
 type LoggingConfigParameters struct {
 
+	// The Amazon S3 bucket to store the access logs in, for
+	// example, myawslogbucket.s3.amazonaws.com.
 	// +kubebuilder:validation:Required
 	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 
+	// Specifies whether you want CloudFront to
+	// include cookies in access logs .
 	// +kubebuilder:validation:Optional
 	IncludeCookies *bool `json:"includeCookies,omitempty" tf:"include_cookies,omitempty"`
 
+	// An optional string that you want CloudFront to prefix
+	// to the access log filenames for this distribution, for example, myprefix/.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
@@ -337,9 +490,16 @@ type OrderedCacheBehaviorForwardedValuesCookiesObservation struct {
 
 type OrderedCacheBehaviorForwardedValuesCookiesParameters struct {
 
+	// Specifies whether you want CloudFront to forward
+	// cookies to the origin that is associated with this cache behavior. You can
+	// specify all, none or whitelist. If whitelist, you must include the
+	// subsequent whitelisted_names
 	// +kubebuilder:validation:Required
 	Forward *string `json:"forward" tf:"forward,omitempty"`
 
+	// If you have specified whitelist to
+	// forward, the whitelisted cookies that you want CloudFront to forward to
+	// your origin.
 	// +kubebuilder:validation:Optional
 	WhitelistedNames []*string `json:"whitelistedNames,omitempty" tf:"whitelisted_names,omitempty"`
 }
@@ -349,15 +509,26 @@ type OrderedCacheBehaviorForwardedValuesObservation struct {
 
 type OrderedCacheBehaviorForwardedValuesParameters struct {
 
+	// The forwarded values cookies
+	// that specifies how CloudFront handles cookies .
 	// +kubebuilder:validation:Required
 	Cookies []OrderedCacheBehaviorForwardedValuesCookiesParameters `json:"cookies" tf:"cookies,omitempty"`
 
+	// Specifies the Headers, if any, that you want
+	// CloudFront to vary upon for this cache behavior. Specify * to include all
+	// headers.
 	// +kubebuilder:validation:Optional
 	Headers []*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
+	// Indicates whether you want CloudFront to forward
+	// query strings to the origin that is associated with this cache behavior.
 	// +kubebuilder:validation:Required
 	QueryString *bool `json:"queryString" tf:"query_string,omitempty"`
 
+	// When specified, along with a value of
+	// true for query_string, all query strings are forwarded, however only the
+	// query string keys listed in this argument are cached. When omitted with a
+	// value of true for query_string, all query string keys are cached.
 	// +kubebuilder:validation:Optional
 	QueryStringCacheKeys []*string `json:"queryStringCacheKeys,omitempty" tf:"query_string_cache_keys,omitempty"`
 }
@@ -370,6 +541,7 @@ type OrderedCacheBehaviorFunctionAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	EventType *string `json:"eventType" tf:"event_type,omitempty"`
 
+	// ARN of the Cloudfront function.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -390,9 +562,11 @@ type OrderedCacheBehaviorLambdaFunctionAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	EventType *string `json:"eventType" tf:"event_type,omitempty"`
 
+	// When set to true it exposes the request body to the lambda function. Defaults to false. Valid values: true, false.
 	// +kubebuilder:validation:Optional
 	IncludeBody *bool `json:"includeBody,omitempty" tf:"include_body,omitempty"`
 
+	// ARN of the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("qualified_arn",true)
 	// +kubebuilder:validation:Optional
@@ -410,54 +584,93 @@ type OrderedCacheBehaviorObservation struct {
 
 type OrderedCacheBehaviorParameters struct {
 
+	// Controls which HTTP methods CloudFront
+	// processes and forwards to your Amazon S3 bucket or your custom origin.
 	// +kubebuilder:validation:Required
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
+	// The unique identifier of the cache policy that
+	// is attached to the cache behavior.
 	// +kubebuilder:validation:Optional
 	CachePolicyID *string `json:"cachePolicyId,omitempty" tf:"cache_policy_id,omitempty"`
 
+	// Controls whether CloudFront caches the
+	// response to requests using the specified HTTP methods.
 	// +kubebuilder:validation:Required
 	CachedMethods []*string `json:"cachedMethods" tf:"cached_methods,omitempty"`
 
+	// Whether you want CloudFront to automatically
+	// compress content for web requests that include Accept-Encoding: gzip in
+	// the request header .
 	// +kubebuilder:validation:Optional
 	Compress *bool `json:"compress,omitempty" tf:"compress,omitempty"`
 
+	// The default amount of time  that an
+	// object is in a CloudFront cache before CloudFront forwards another request
+	// in the absence of an Cache-Control max-age or Expires header.
 	// +kubebuilder:validation:Optional
 	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
+	// Field level encryption configuration ID
 	// +kubebuilder:validation:Optional
 	FieldLevelEncryptionID *string `json:"fieldLevelEncryptionId,omitempty" tf:"field_level_encryption_id,omitempty"`
 
+	// The forwarded values configuration that specifies how CloudFront
+	// handles query strings, cookies and headers .
 	// +kubebuilder:validation:Optional
 	ForwardedValues []OrderedCacheBehaviorForwardedValuesParameters `json:"forwardedValues,omitempty" tf:"forwarded_values,omitempty"`
 
+	// A config block that triggers a cloudfront
+	// function with specific actions .
 	// +kubebuilder:validation:Optional
 	FunctionAssociation []OrderedCacheBehaviorFunctionAssociationParameters `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
+	// A config block that triggers a lambda
+	// function with specific actions .
 	// +kubebuilder:validation:Optional
 	LambdaFunctionAssociation []OrderedCacheBehaviorLambdaFunctionAssociationParameters `json:"lambdaFunctionAssociation,omitempty" tf:"lambda_function_association,omitempty"`
 
+	// The maximum amount of time  that an
+	// object is in a CloudFront cache before CloudFront forwards another request
+	// to your origin to determine whether the object has been updated. Only
+	// effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
 	// +kubebuilder:validation:Optional
 	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
+	// The minimum amount of time that you want objects to
+	// stay in CloudFront caches before CloudFront queries your origin to see
+	// whether the object has been updated. Defaults to 0 seconds.
 	// +kubebuilder:validation:Optional
 	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
+	// The unique identifier of the origin request policy
+	// that is attached to the behavior.
 	// +kubebuilder:validation:Optional
 	OriginRequestPolicyID *string `json:"originRequestPolicyId,omitempty" tf:"origin_request_policy_id,omitempty"`
 
+	// The pattern  that
+	// specifies which requests you want this cache behavior to apply to.
 	// +kubebuilder:validation:Required
 	PathPattern *string `json:"pathPattern" tf:"path_pattern,omitempty"`
 
+	// The ARN of the real-time log configuration
+	// that is attached to this cache behavior.
 	// +kubebuilder:validation:Optional
 	RealtimeLogConfigArn *string `json:"realtimeLogConfigArn,omitempty" tf:"realtime_log_config_arn,omitempty"`
 
+	// The identifier for a response headers policy.
 	// +kubebuilder:validation:Optional
 	ResponseHeadersPolicyID *string `json:"responseHeadersPolicyId,omitempty" tf:"response_headers_policy_id,omitempty"`
 
+	// Indicates whether you want to distribute
+	// media files in Microsoft Smooth Streaming format using the origin that is
+	// associated with this cache behavior.
 	// +kubebuilder:validation:Optional
 	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 
+	// The value of ID for the origin that you want
+	// CloudFront to route requests to when a request matches the path pattern
+	// either for a cache behavior or for the default cache behavior.
 	// +kubebuilder:validation:Required
 	TargetOriginID *string `json:"targetOriginId" tf:"target_origin_id,omitempty"`
 
@@ -467,6 +680,10 @@ type OrderedCacheBehaviorParameters struct {
 	// +kubebuilder:validation:Optional
 	TrustedSigners []*string `json:"trustedSigners,omitempty" tf:"trusted_signers,omitempty"`
 
+	// Use this element to specify the
+	// protocol that users can use to access the files in the origin specified by
+	// TargetOriginId when a request matches the path pattern in PathPattern. One
+	// of allow-all, https-only, or redirect-to-https.
 	// +kubebuilder:validation:Required
 	ViewerProtocolPolicy *string `json:"viewerProtocolPolicy" tf:"viewer_protocol_policy,omitempty"`
 }
@@ -476,9 +693,11 @@ type OriginGroupObservation struct {
 
 type OriginGroupParameters struct {
 
+	// The failover criteria for when to failover to the secondary origin
 	// +kubebuilder:validation:Required
 	FailoverCriteria []FailoverCriteriaParameters `json:"failoverCriteria" tf:"failover_criteria,omitempty"`
 
+	// Ordered member configuration blocks assigned to the origin group, where the first member is the primary origin. You must specify two members.
 	// +kubebuilder:validation:Required
 	Member []MemberParameters `json:"member" tf:"member,omitempty"`
 
@@ -491,15 +710,23 @@ type OriginObservation struct {
 
 type OriginParameters struct {
 
+	// The number of times that CloudFront attempts to connect to the origin. Must be between 1-3. Defaults to 3.
 	// +kubebuilder:validation:Optional
 	ConnectionAttempts *float64 `json:"connectionAttempts,omitempty" tf:"connection_attempts,omitempty"`
 
+	// The number of seconds that CloudFront waits when trying to establish a connection to the origin. Must be between 1-10. Defaults to 10.
 	// +kubebuilder:validation:Optional
 	ConnectionTimeout *float64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
 
+	// One or more sub-resources with name and
+	// value parameters that specify header data that will be sent to the origin
+	// .
 	// +kubebuilder:validation:Optional
 	CustomHeader []CustomHeaderParameters `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
 
+	// The CloudFront custom
+	// origin configuration information. If an S3
+	// origin is required, use s3_origin_config instead.
 	// +kubebuilder:validation:Optional
 	CustomOriginConfig []CustomOriginConfigParameters `json:"customOriginConfig,omitempty" tf:"custom_origin_config,omitempty"`
 
@@ -509,12 +736,20 @@ type OriginParameters struct {
 	// +kubebuilder:validation:Required
 	OriginID *string `json:"originId" tf:"origin_id,omitempty"`
 
+	// An optional element that causes CloudFront to
+	// request your content from a directory in your Amazon S3 bucket or your
+	// custom origin.
 	// +kubebuilder:validation:Optional
 	OriginPath *string `json:"originPath,omitempty" tf:"origin_path,omitempty"`
 
+	// The CloudFront Origin Shield
+	// configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
 	// +kubebuilder:validation:Optional
 	OriginShield []OriginShieldParameters `json:"originShield,omitempty" tf:"origin_shield,omitempty"`
 
+	// The CloudFront S3 origin
+	// configuration information. If a custom origin is required, use
+	// custom_origin_config instead.
 	// +kubebuilder:validation:Optional
 	S3OriginConfig []S3OriginConfigParameters `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
 }
@@ -527,6 +762,7 @@ type OriginShieldParameters struct {
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
+	// The AWS Region for Origin Shield. To specify a region, use the region code, not the region name. For example, specify the US East  region as us-east-2.
 	// +kubebuilder:validation:Required
 	OriginShieldRegion *string `json:"originShieldRegion" tf:"origin_shield_region,omitempty"`
 }
@@ -545,6 +781,8 @@ type S3OriginConfigObservation struct {
 
 type S3OriginConfigParameters struct {
 
+	// The CloudFront origin access
+	// identity to associate with the origin.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1.OriginAccessIdentity
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("cloudfront_access_identity_path",true)
 	// +kubebuilder:validation:Optional
@@ -567,6 +805,8 @@ type TrustedKeyGroupsParameters struct {
 }
 
 type TrustedSignersItemsObservation struct {
+
+	// AWS account ID or self
 	AwsAccountNumber *string `json:"awsAccountNumber,omitempty" tf:"aws_account_number,omitempty"`
 
 	KeyPairIds []*string `json:"keyPairIds,omitempty" tf:"key_pair_ids,omitempty"`
@@ -589,18 +829,42 @@ type ViewerCertificateObservation struct {
 
 type ViewerCertificateParameters struct {
 
+	// The ARN of the AWS Certificate Manager
+	// certificate that you wish to use with this distribution. Specify this,
+	// cloudfront_default_certificate, or iam_certificate_id.  The ACM
+	// certificate must be in  US-EAST-1.
 	// +kubebuilder:validation:Optional
 	AcmCertificateArn *string `json:"acmCertificateArn,omitempty" tf:"acm_certificate_arn,omitempty"`
 
+	// true if you want viewers to use HTTPS
+	// to request your objects and you're using the CloudFront domain name for your
+	// distribution. Specify this, acm_certificate_arn, or iam_certificate_id.
 	// +kubebuilder:validation:Optional
 	CloudfrontDefaultCertificate *bool `json:"cloudfrontDefaultCertificate,omitempty" tf:"cloudfront_default_certificate,omitempty"`
 
+	// The IAM certificate identifier of the custom viewer
+	// certificate for this distribution if you are using a custom domain. Specify
+	// this, acm_certificate_arn, or cloudfront_default_certificate.
 	// +kubebuilder:validation:Optional
 	IAMCertificateID *string `json:"iamCertificateId,omitempty" tf:"iam_certificate_id,omitempty"`
 
+	// The minimum version of the SSL protocol that
+	// you want CloudFront to use for HTTPS connections. Can only be set if
+	// cloudfront_default_certificate = false. See all possible values in
+	// this
+	// table under "Security policy." Some examples include: TLSv1.2_2019 and
+	// TLSv1.2_2021. Default: TLSv1. NOTE:
+	// If you are using a custom certificate , and have specified sni-only in
+	// ssl_support_method, TLSv1 or later must be specified. If you have
+	// specified vip in ssl_support_method, only SSLv3 or TLSv1 can be
+	// specified. If you have specified cloudfront_default_certificate, TLSv1
+	// must be specified.
 	// +kubebuilder:validation:Optional
 	MinimumProtocolVersion *string `json:"minimumProtocolVersion,omitempty" tf:"minimum_protocol_version,omitempty"`
 
+	// only. Required if you specify
+	// acm_certificate_arn or iam_certificate_id. NOTE: vip causes
+	// CloudFront to use a dedicated IP address and may incur extra charges.
 	// +kubebuilder:validation:Optional
 	SSLSupportMethod *string `json:"sslSupportMethod,omitempty" tf:"ssl_support_method,omitempty"`
 }
@@ -619,7 +883,7 @@ type DistributionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Distribution is the Schema for the Distributions API
+// Distribution is the Schema for the Distributions API. Provides a CloudFront web distribution resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

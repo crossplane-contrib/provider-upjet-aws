@@ -14,18 +14,23 @@ import (
 )
 
 type GameSessionQueueObservation struct {
+
+	// Game Session Queue ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type GameSessionQueueParameters struct {
 
+	// List of fleet/alias ARNs used by session queue for placing game sessions.
 	// +kubebuilder:validation:Optional
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
+	// One or more policies used to choose fleet based on player latency. See below.
 	// +kubebuilder:validation:Optional
 	PlayerLatencyPolicy []PlayerLatencyPolicyParameters `json:"playerLatencyPolicy,omitempty" tf:"player_latency_policy,omitempty"`
 
@@ -34,9 +39,11 @@ type GameSessionQueueParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Maximum time a game session request can remain in the queue.
 	// +kubebuilder:validation:Optional
 	TimeoutInSeconds *float64 `json:"timeoutInSeconds,omitempty" tf:"timeout_in_seconds,omitempty"`
 }
@@ -46,9 +53,11 @@ type PlayerLatencyPolicyObservation struct {
 
 type PlayerLatencyPolicyParameters struct {
 
+	// Maximum latency value that is allowed for any player.
 	// +kubebuilder:validation:Required
 	MaximumIndividualPlayerLatencyMilliseconds *float64 `json:"maximumIndividualPlayerLatencyMilliseconds" tf:"maximum_individual_player_latency_milliseconds,omitempty"`
 
+	// Length of time that the policy is enforced while placing a new game session. Absence of value for this attribute means that the policy is enforced until the queue times out.
 	// +kubebuilder:validation:Optional
 	PolicyDurationSeconds *float64 `json:"policyDurationSeconds,omitempty" tf:"policy_duration_seconds,omitempty"`
 }
@@ -67,7 +76,7 @@ type GameSessionQueueStatus struct {
 
 // +kubebuilder:object:root=true
 
-// GameSessionQueue is the Schema for the GameSessionQueues API
+// GameSessionQueue is the Schema for the GameSessionQueues API. Provides a GameLift Game Session Queue resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

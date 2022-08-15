@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: LBTargetGroupAttachment is the Schema for the LBTargetGroupAttachments
-          API
+          API. Provides the ability to register instances and containers with a LB
+          target group
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,14 +67,20 @@ spec:
               forProvider:
                 properties:
                   availabilityZone:
+                    description: The Availability Zone where the IP address of the
+                      target is to be registered. If the private ip address is outside
+                      of the VPC scope, this value must be set to 'all'.
                     type: string
                   port:
+                    description: The port on which targets receive traffic.
                     type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   targetGroupArn:
+                    description: The ARN of the target group with which to register
+                      targets
                     type: string
                   targetGroupArnRef:
                     description: A Reference to a named object.
@@ -149,6 +156,11 @@ spec:
                         type: object
                     type: object
                   targetId:
+                    description: The ID of the target. This is the Instance ID for
+                      an instance, or the container ID for an ECS container. If the
+                      target type is ip, specify an IP address. If the target type
+                      is lambda, specify the arn of lambda. If the target type is
+                      alb, specify the arn of alb.
                     type: string
                 required:
                 - region
@@ -332,6 +344,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: A unique identifier for the attachment
                     type: string
                 type: object
               conditions:

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Cluster is the Schema for the Clusters API
+        description: Cluster is the Schema for the Clusters API. Provides an Neptune
+          Cluster Resource
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,28 +65,50 @@ spec:
               forProvider:
                 properties:
                   applyImmediately:
+                    description: Specifies whether any cluster modifications are applied
+                      immediately, or during the next maintenance window. Default
+                      is false.
                     type: boolean
                   availabilityZones:
+                    description: A list of EC2 Availability Zones that instances in
+                      the Neptune cluster can be created in.
                     items:
                       type: string
                     type: array
                   backupRetentionPeriod:
+                    description: The days to retain backups for. Default 1
                     type: number
                   copyTagsToSnapshot:
+                    description: If set to true, tags are copied to any snapshot of
+                      the DB cluster that is created.
                     type: boolean
                   deletionProtection:
+                    description: A value that indicates whether the DB cluster has
+                      deletion protection enabled.The database can't be deleted when
+                      deletion protection is enabled. By default, deletion protection
+                      is disabled.
                     type: boolean
                   enableCloudwatchLogsExports:
+                    description: A list of the log types this DB cluster is configured
+                      to export to Cloudwatch Logs. Currently only supports audit.
                     items:
                       type: string
                     type: array
                   engine:
+                    description: The name of the database engine to be used for this
+                      Neptune cluster. Defaults to neptune.
                     type: string
                   engineVersion:
+                    description: The database engine version.
                     type: string
                   finalSnapshotIdentifier:
+                    description: The name of your final Neptune snapshot when this
+                      Neptune cluster is deleted. If omitted, no final snapshot will
+                      be made.
                     type: string
                   iamDatabaseAuthenticationEnabled:
+                    description: Specifies whether or not mappings of AWS Identity
+                      and Access Management  accounts to database accounts is enabled.
                     type: boolean
                   iamRoleRefs:
                     items:
@@ -163,10 +186,14 @@ spec:
                         type: object
                     type: object
                   iamRoles:
+                    description: A List of ARNs for the IAM roles to associate to
+                      the Neptune Cluster.
                     items:
                       type: string
                     type: array
                   kmsKeyArn:
+                    description: The ARN for the KMS encryption key. When specifying
+                      kms_key_arn, storage_encrypted needs to be set to true.
                     type: string
                   kmsKeyArnRef:
                     description: A Reference to a named object.
@@ -242,6 +269,7 @@ spec:
                         type: object
                     type: object
                   neptuneClusterParameterGroupName:
+                    description: A cluster parameter group to associate with the cluster.
                     type: string
                   neptuneClusterParameterGroupNameRef:
                     description: A Reference to a named object.
@@ -317,6 +345,8 @@ spec:
                         type: object
                     type: object
                   neptuneSubnetGroupName:
+                    description: A Neptune subnet group to associate with this Neptune
+                      instance.
                     type: string
                   neptuneSubnetGroupNameRef:
                     description: A Reference to a named object.
@@ -392,16 +422,26 @@ spec:
                         type: object
                     type: object
                   port:
+                    description: The port on which the Neptune accepts connections.
+                      Default is 8182.
                     type: number
                   preferredBackupWindow:
+                    description: 'The daily time range during which automated backups
+                      are created if automated backups are enabled using the BackupRetentionPeriod
+                      parameter. Time in UTC. Default: A 30-minute window selected
+                      at random from an 8-hour block of time per regionE.g., 04:00-09:00'
                     type: string
                   preferredMaintenanceWindow:
+                    description: The weekly time range during which system maintenance
+                      can occur, in  e.g., wed:04:00-wed:04:30
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   replicationSourceIdentifier:
+                    description: ARN of a source Neptune cluster or Neptune instance
+                      if this Neptune cluster is to be created as a Read Replica.
                     type: string
                   replicationSourceIdentifierRef:
                     description: A Reference to a named object.
@@ -477,8 +517,17 @@ spec:
                         type: object
                     type: object
                   skipFinalSnapshot:
+                    description: Determines whether a final Neptune snapshot is created
+                      before the Neptune cluster is deleted. If true is specified,
+                      no Neptune snapshot is created. If false is specified, a Neptune
+                      snapshot is created before the Neptune cluster is deleted, using
+                      the value from final_snapshot_identifier. Default is false.
                     type: boolean
                   snapshotIdentifier:
+                    description: Specifies whether or not to create this cluster from
+                      a snapshot. You can use either the name or ARN when specifying
+                      a Neptune cluster snapshot, or the ARN when specifying a Neptune
+                      snapshot.
                     type: string
                   snapshotIdentifierRef:
                     description: A Reference to a named object.
@@ -554,10 +603,16 @@ spec:
                         type: object
                     type: object
                   storageEncrypted:
+                    description: Specifies whether the Neptune cluster is encrypted.
+                      The default is false if not specified.
                     type: boolean
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the Neptune cluster. If
+                      configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                   vpcSecurityGroupIdRefs:
                     items:
@@ -635,6 +690,8 @@ spec:
                         type: object
                     type: object
                   vpcSecurityGroupIds:
+                    description: List of VPC security groups to associate with the
+                      Cluster
                     items:
                       type: string
                     type: array
@@ -818,24 +875,36 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Neptune Cluster Amazon Resource Name
                     type: string
                   clusterMembers:
+                    description: – List of Neptune Instances that are a part of this
+                      cluster
                     items:
                       type: string
                     type: array
                   clusterResourceId:
+                    description: The Neptune Cluster Resource ID
                     type: string
                   endpoint:
+                    description: The DNS address of the Neptune instance
                     type: string
                   hostedZoneId:
+                    description: The Route53 Hosted Zone ID of the endpoint
                     type: string
                   id:
+                    description: The Neptune Cluster Identifier
                     type: string
                   readerEndpoint:
+                    description: A read-only endpoint for the Neptune cluster, automatically
+                      load-balanced across replicas
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

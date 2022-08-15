@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Fleet is the Schema for the Fleets API
+        description: Fleet is the Schema for the Fleets API. Provides a GameLift Fleet
+          resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   buildId:
+                    description: ID of the GameLift Build to be deployed on the fleet.
                     type: string
                   buildIdRef:
                     description: A Reference to a named object.
@@ -139,24 +141,43 @@ spec:
                         type: object
                     type: object
                   certificateConfiguration:
+                    description: Prompts GameLift to generate a TLS/SSL certificate
+                      for the fleet. See certificate_configuration.
                     items:
                       properties:
                         certificateType:
+                          description: Indicates whether a TLS/SSL certificate is
+                            generated for a fleet. Valid values are DISABLED and GENERATED.
+                            Default value is DISABLED.
                           type: string
                       type: object
                     type: array
                   description:
+                    description: Human-readable description of the fleet.
                     type: string
                   ec2InboundPermission:
+                    description: Range of IP addresses and port settings that permit
+                      inbound traffic to access server processes running on the fleet.
+                      See below.
                     items:
                       properties:
                         fromPort:
+                          description: Starting value for a range of allowed port
+                            numbers.
                           type: number
                         ipRange:
+                          description: Range of allowed IP addresses expressed in
+                            CIDR notationE.g., 000.000.000.000/[subnet mask] or 0.0.0.0/[subnet
+                            mask].
                           type: string
                         protocol:
+                          description: Network communication protocol used by the
+                            fleetE.g., TCP or UDP
                           type: string
                         toPort:
+                          description: Ending value for a range of allowed port numbers.
+                            Port numbers are end-inclusive. This value must be higher
+                            than from_port.
                           type: number
                       required:
                       - fromPort
@@ -166,10 +187,15 @@ spec:
                       type: object
                     type: array
                   ec2InstanceType:
+                    description: Name of an EC2 instance typeE.g., t2.micro
                     type: string
                   fleetType:
+                    description: Type of fleet. This value must be ON_DEMAND or SPOT.
+                      Defaults to ON_DEMAND.
                     type: string
                   instanceRoleArn:
+                    description: ARN of an IAM role that instances in the fleet can
+                      assume.
                     type: string
                   instanceRoleArnRef:
                     description: A Reference to a named object.
@@ -245,41 +271,71 @@ spec:
                         type: object
                     type: object
                   metricGroups:
+                    description: List of names of metric groups to add this fleet
+                      to. A metric group tracks metrics across all fleets in the group.
+                      Defaults to default.
                     items:
                       type: string
                     type: array
                   name:
+                    description: The name of the fleet.
                     type: string
                   newGameSessionProtectionPolicy:
+                    description: Game session protection policy to apply to all instances
+                      in this fleetE.g., FullProtection. Defaults to NoProtection.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   resourceCreationLimitPolicy:
+                    description: Policy that limits the number of game sessions an
+                      individual player can create over a span of time for this fleet.
+                      See below.
                     items:
                       properties:
                         newGameSessionsPerCreator:
+                          description: Maximum number of game sessions that an individual
+                            can create during the policy period.
                           type: number
                         policyPeriodInMinutes:
+                          description: Time span used in evaluating the resource creation
+                            limit policy.
                           type: number
                       type: object
                     type: array
                   runtimeConfiguration:
+                    description: Instructions for launching server processes on each
+                      instance in the fleet. See below.
                     items:
                       properties:
                         gameSessionActivationTimeoutSeconds:
+                          description: Maximum amount of time  that a game session
+                            can remain in status ACTIVATING.
                           type: number
                         maxConcurrentGameSessionActivations:
+                          description: Maximum number of game sessions with status
+                            ACTIVATING to allow on an instance simultaneously.
                           type: number
                         serverProcess:
+                          description: Collection of server process configurations
+                            that describe which server processes to run on each instance
+                            in a fleet. See below.
                           items:
                             properties:
                               concurrentExecutions:
+                                description: Number of server processes using this
+                                  configuration to run concurrently on an instance.
                                 type: number
                               launchPath:
+                                description: 'Location of the server executable in
+                                  a game build. All game builds are installed on instances
+                                  at the root : for Windows instances C:\game, and
+                                  for Linux instances /local/game.'
                                 type: string
                               parameters:
+                                description: Optional list of parameters to pass to
+                                  the server executable on launch.
                                 type: string
                             required:
                             - concurrentExecutions
@@ -289,10 +345,14 @@ spec:
                       type: object
                     type: array
                   scriptId:
+                    description: ID of the GameLift Script to be deployed on the fleet.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - ec2InstanceType
@@ -476,22 +536,30 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Fleet ARN.
                     type: string
                   buildArn:
+                    description: Build ARN.
                     type: string
                   id:
+                    description: Fleet ID.
                     type: string
                   logPaths:
                     items:
                       type: string
                     type: array
                   operatingSystem:
+                    description: Operating system of the fleet's computing resources.
                     type: string
                   scriptArn:
+                    description: Script ARN.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

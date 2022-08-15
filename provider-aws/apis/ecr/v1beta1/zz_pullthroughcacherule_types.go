@@ -16,11 +16,13 @@ import (
 type PullThroughCacheRuleObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The registry ID where the repository was created.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 }
 
 type PullThroughCacheRuleParameters struct {
 
+	// The repository name prefix to use when caching images from the source registry.
 	// +kubebuilder:validation:Required
 	EcrRepositoryPrefix *string `json:"ecrRepositoryPrefix" tf:"ecr_repository_prefix,omitempty"`
 
@@ -29,6 +31,7 @@ type PullThroughCacheRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The registry URL of the upstream public registry to use as the source.
 	// +kubebuilder:validation:Required
 	UpstreamRegistryURL *string `json:"upstreamRegistryUrl" tf:"upstream_registry_url,omitempty"`
 }
@@ -47,7 +50,7 @@ type PullThroughCacheRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PullThroughCacheRule is the Schema for the PullThroughCacheRules API
+// PullThroughCacheRule is the Schema for the PullThroughCacheRules API. Provides an Elastic Container Registry Pull Through Cache Rule.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

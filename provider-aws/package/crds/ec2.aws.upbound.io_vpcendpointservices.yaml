@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: VPCEndpointService is the Schema for the VPCEndpointServices
-          API
+          API. Provides a VPC Endpoint Service resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,16 +65,24 @@ spec:
               forProvider:
                 properties:
                   acceptanceRequired:
+                    description: Whether or not VPC endpoint connection requests to
+                      the service must be accepted by the service owner - true or
+                      false.
                     type: boolean
                   gatewayLoadBalancerArns:
+                    description: Amazon Resource Names  of one or more Gateway Load
+                      Balancers for the endpoint service.
                     items:
                       type: string
                     type: array
                   networkLoadBalancerArns:
+                    description: Amazon Resource Names  of one or more Network Load
+                      Balancers for the endpoint service.
                     items:
                       type: string
                     type: array
                   privateDnsName:
+                    description: The private DNS name for the service.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -83,6 +91,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - acceptanceRequired
@@ -265,45 +276,67 @@ spec:
               atProvider:
                 properties:
                   allowedPrincipals:
+                    description: The ARNs of one or more principals allowed to discover
+                      the endpoint service.
                     items:
                       type: string
                     type: array
                   arn:
+                    description: The Amazon Resource Name  of the VPC endpoint service.
                     type: string
                   availabilityZones:
+                    description: A set of Availability Zones in which the service
+                      is available.
                     items:
                       type: string
                     type: array
                   baseEndpointDnsNames:
+                    description: A set of DNS names for the service.
                     items:
                       type: string
                     type: array
                   id:
+                    description: The ID of the VPC endpoint service.
                     type: string
                   managesVpcEndpoints:
+                    description: Whether or not the service manages its VPC endpoints
+                      - true or false.
                     type: boolean
                   privateDnsNameConfiguration:
+                    description: List of objects containing information about the
+                      endpoint service private DNS name configuration.
                     items:
                       properties:
                         name:
+                          description: Name of the record subdomain the service provider
+                            needs to create.
                           type: string
                         state:
                           type: string
                         type:
+                          description: Endpoint service verification type, for example
+                            TXT.
                           type: string
                         value:
+                          description: Value the service provider adds to the private
+                            DNS name domain record before verification.
                           type: string
                       type: object
                     type: array
                   serviceName:
+                    description: The service name.
                     type: string
                   serviceType:
+                    description: The service type, Gateway or Interface.
                     type: string
                   state:
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

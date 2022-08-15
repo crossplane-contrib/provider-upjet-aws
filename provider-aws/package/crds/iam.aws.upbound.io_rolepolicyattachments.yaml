@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: RolePolicyAttachment is the Schema for the RolePolicyAttachments
-          API
+          API. Attaches a Managed IAM Policy to an IAM role
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   policyArn:
+                    description: The ARN of the policy you want to apply
                     type: string
                   policyArnRef:
                     description: A Reference to a named object.
@@ -140,6 +141,8 @@ spec:
                         type: object
                     type: object
                   role:
+                    description: he name of the IAM role to which the policy should
+                      be applied
                     type: string
                   roleRef:
                     description: A Reference to a named object.

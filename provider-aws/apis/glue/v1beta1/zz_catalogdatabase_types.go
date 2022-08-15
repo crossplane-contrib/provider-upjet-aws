@@ -14,8 +14,11 @@ import (
 )
 
 type CatalogDatabaseObservation struct {
+
+	// ARN of the Glue Catalog Database.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Catalog ID and name of the database
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -24,15 +27,19 @@ type CatalogDatabaseParameters struct {
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
+	// Creates a set of default permissions on the table for principals. See create_table_default_permission below.
 	// +kubebuilder:validation:Optional
 	CreateTableDefaultPermission []CreateTableDefaultPermissionParameters `json:"createTableDefaultPermission,omitempty" tf:"create_table_default_permission,omitempty"`
 
+	// Description of the database.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Location of the database .
 	// +kubebuilder:validation:Optional
 	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
 
+	// List of key-value pairs that define parameters and properties of the database.
 	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -41,6 +48,7 @@ type CatalogDatabaseParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Configuration block for a target database for resource linking. See target_database below.
 	// +kubebuilder:validation:Optional
 	TargetDatabase []TargetDatabaseParameters `json:"targetDatabase,omitempty" tf:"target_database,omitempty"`
 }
@@ -50,9 +58,11 @@ type CreateTableDefaultPermissionObservation struct {
 
 type CreateTableDefaultPermissionParameters struct {
 
+	// The permissions that are granted to the principal.
 	// +kubebuilder:validation:Optional
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
+	// The principal who is granted permissions.. See principal below.
 	// +kubebuilder:validation:Optional
 	Principal []PrincipalParameters `json:"principal,omitempty" tf:"principal,omitempty"`
 }
@@ -62,6 +72,7 @@ type PrincipalObservation struct {
 
 type PrincipalParameters struct {
 
+	// An identifier for the Lake Formation principal.
 	// +kubebuilder:validation:Optional
 	DataLakePrincipalIdentifier *string `json:"dataLakePrincipalIdentifier,omitempty" tf:"data_lake_principal_identifier,omitempty"`
 }
@@ -74,6 +85,7 @@ type TargetDatabaseParameters struct {
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
+	// Name of the catalog database.
 	// +kubebuilder:validation:Required
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 }
@@ -92,7 +104,7 @@ type CatalogDatabaseStatus struct {
 
 // +kubebuilder:object:root=true
 
-// CatalogDatabase is the Schema for the CatalogDatabases API
+// CatalogDatabase is the Schema for the CatalogDatabases API. Provides a Glue Catalog Database.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

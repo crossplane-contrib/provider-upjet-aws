@@ -19,6 +19,7 @@ type AttachmentObservation struct {
 
 type AttachmentParameters struct {
 
+	// The ARN of an ALB Target Group.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -30,6 +31,7 @@ type AttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ALBTargetGroupArnSelector *v1.Selector `json:"albTargetGroupArnSelector,omitempty" tf:"-"`
 
+	// Name of ASG to associate with the ELB.
 	// +crossplane:generate:reference:type=AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
@@ -40,6 +42,7 @@ type AttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupNameSelector *v1.Selector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
+	// The name of the ELB.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/elb/v1beta1.ELB
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -51,6 +54,7 @@ type AttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
 
+	// The ARN of a load balancer target group.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -82,7 +86,7 @@ type AttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Attachment is the Schema for the Attachments API
+// Attachment is the Schema for the Attachments API. Provides an AutoScaling Group Attachment resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

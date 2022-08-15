@@ -14,13 +14,17 @@ import (
 )
 
 type SubnetGroupObservation struct {
+
+	// The name of the subnet group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// – VPC ID of the subnet group.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type SubnetGroupParameters struct {
 
+	// A description of the subnet group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -35,6 +39,7 @@ type SubnetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// –  A list of VPC subnet IDs for the subnet group.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -56,7 +61,7 @@ type SubnetGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SubnetGroup is the Schema for the SubnetGroups API
+// SubnetGroup is the Schema for the SubnetGroups API. Provides an DAX Subnet Group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

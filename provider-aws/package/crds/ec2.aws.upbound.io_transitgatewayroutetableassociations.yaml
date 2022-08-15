@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: TransitGatewayRouteTableAssociation is the Schema for the TransitGatewayRouteTableAssociations
-          API
+          API. <no value>
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

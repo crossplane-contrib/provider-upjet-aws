@@ -14,14 +14,18 @@ import (
 )
 
 type TrafficPolicyInstanceObservation struct {
+
+	// ID of traffic policy instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type TrafficPolicyInstanceParameters struct {
 
+	// ID of the hosted zone that you want Amazon Route 53 to create resource record sets in by using the configuration in a traffic policy.
 	// +kubebuilder:validation:Required
 	HostedZoneID *string `json:"hostedZoneId" tf:"hosted_zone_id,omitempty"`
 
+	// Domain name for which Amazon Route 53 responds to DNS queries by using the resource record sets that Route 53 creates for this traffic policy instance.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -30,12 +34,15 @@ type TrafficPolicyInstanceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// TTL that you want Amazon Route 53 to assign to all the resource record sets that it creates in the specified hosted zone.
 	// +kubebuilder:validation:Required
 	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
 
+	// ID of the traffic policy that you want to use to create resource record sets in the specified hosted zone.
 	// +kubebuilder:validation:Required
 	TrafficPolicyID *string `json:"trafficPolicyId" tf:"traffic_policy_id,omitempty"`
 
+	// Version of the traffic policy
 	// +kubebuilder:validation:Required
 	TrafficPolicyVersion *float64 `json:"trafficPolicyVersion" tf:"traffic_policy_version,omitempty"`
 }
@@ -54,7 +61,7 @@ type TrafficPolicyInstanceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// TrafficPolicyInstance is the Schema for the TrafficPolicyInstances API
+// TrafficPolicyInstance is the Schema for the TrafficPolicyInstances API. Provides a Route53 traffic policy instance resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

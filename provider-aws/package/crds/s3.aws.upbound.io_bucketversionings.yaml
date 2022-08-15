@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: BucketVersioning is the Schema for the BucketVersionings API
+        description: BucketVersioning is the Schema for the BucketVersionings API.
+          Provides an S3 bucket versioning resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the S3 bucket.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -139,19 +141,32 @@ spec:
                         type: object
                     type: object
                   expectedBucketOwner:
+                    description: The account ID of the expected bucket owner.
                     type: string
                   mfa:
+                    description: The concatenation of the authentication device's
+                      serial number, a space, and the value that is displayed on your
+                      authentication device.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   versioningConfiguration:
+                    description: Configuration block for the versioning parameters
+                      detailed below.
                     items:
                       properties:
                         mfaDelete:
+                          description: 'Specifies whether MFA delete is enabled in
+                            the bucket versioning configuration. Valid values: Enabled
+                            or Disabled.'
                           type: string
                         status:
+                          description: 'The versioning state of the bucket. Valid
+                            values: Enabled, Suspended, or Disabled. Disabled should
+                            only be used when creating or importing resources that
+                            correspond to unversioned S3 buckets.'
                           type: string
                       required:
                       - status
@@ -338,6 +353,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The bucket or bucket and expected_bucket_owner separated
+                      by a comma  if the latter is provided.
                     type: string
                 type: object
               conditions:

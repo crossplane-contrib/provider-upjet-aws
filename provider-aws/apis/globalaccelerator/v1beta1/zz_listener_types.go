@@ -14,11 +14,14 @@ import (
 )
 
 type ListenerObservation struct {
+
+	// The Amazon Resource Name  of the listener.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ListenerParameters struct {
 
+	// The Amazon Resource Name  of your accelerator.
 	// +crossplane:generate:reference:type=Accelerator
 	// +kubebuilder:validation:Optional
 	AcceleratorArn *string `json:"acceleratorArn,omitempty" tf:"accelerator_arn,omitempty"`
@@ -29,12 +32,15 @@ type ListenerParameters struct {
 	// +kubebuilder:validation:Optional
 	AcceleratorArnSelector *v1.Selector `json:"acceleratorArnSelector,omitempty" tf:"-"`
 
+	// Direct all requests from a user to the same endpoint. Valid values are NONE, SOURCE_IP. Default: NONE. If NONE, Global Accelerator uses the "five-tuple" properties of source IP address, source port, destination IP address, destination port, and protocol to select the hash value. If SOURCE_IP, Global Accelerator uses the "two-tuple" properties of source  IP address and destination IP address to select the hash value.
 	// +kubebuilder:validation:Optional
 	ClientAffinity *string `json:"clientAffinity,omitempty" tf:"client_affinity,omitempty"`
 
+	// The list of port ranges for the connections from clients to the accelerator. Fields documented below.
 	// +kubebuilder:validation:Required
 	PortRange []PortRangeParameters `json:"portRange" tf:"port_range,omitempty"`
 
+	// The protocol for the connections from clients to the accelerator. Valid values are TCP, UDP.
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
@@ -49,9 +55,11 @@ type PortRangeObservation struct {
 
 type PortRangeParameters struct {
 
+	// The first port in the range of ports, inclusive.
 	// +kubebuilder:validation:Optional
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// The last port in the range of ports, inclusive.
 	// +kubebuilder:validation:Optional
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
@@ -70,7 +78,7 @@ type ListenerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Listener is the Schema for the Listeners API
+// Listener is the Schema for the Listeners API. Provides a Global Accelerator listener.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

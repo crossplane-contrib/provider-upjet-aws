@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: TransitGatewayVPCAttachment is the Schema for the TransitGatewayVPCAttachments
-          API
+          API. Manages an EC2 Transit Gateway VPC Attachment
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,10 +66,18 @@ spec:
               forProvider:
                 properties:
                   applianceModeSupport:
+                    description: 'Whether Appliance Mode support is enabled. If enabled,
+                      a traffic flow between a source and destination uses the same
+                      Availability Zone for the VPC attachment for the lifetime of
+                      that flow. Valid values: disable, enable. Default value: disable.'
                     type: string
                   dnsSupport:
+                    description: 'Whether DNS support is enabled. Valid values: disable,
+                      enable. Default value: enable.'
                     type: string
                   ipv6Support:
+                    description: 'Whether IPv6 support is enabled. Valid values: disable,
+                      enable. Default value: disable.'
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -151,18 +159,33 @@ spec:
                         type: object
                     type: object
                   subnetIds:
+                    description: Identifiers of EC2 Subnets.
                     items:
                       type: string
                     type: array
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value tags for the EC2 Transit Gateway VPC Attachment.
+                      If configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                   transitGatewayDefaultRouteTableAssociation:
+                    description: 'Boolean whether the VPC Attachment should be associated
+                      with the EC2 Transit Gateway association default route table.
+                      This cannot be configured or perform drift detection with Resource
+                      Access Manager shared EC2 Transit Gateways. Default value: true.'
                     type: boolean
                   transitGatewayDefaultRouteTablePropagation:
+                    description: 'Boolean whether the VPC Attachment should propagate
+                      routes with the EC2 Transit Gateway propagation default route
+                      table. This cannot be configured or perform drift detection
+                      with Resource Access Manager shared EC2 Transit Gateways. Default
+                      value: true.'
                     type: boolean
                   transitGatewayId:
+                    description: Identifier of EC2 Transit Gateway.
                     type: string
                   transitGatewayIdRef:
                     description: A Reference to a named object.
@@ -238,6 +261,7 @@ spec:
                         type: object
                     type: object
                   vpcId:
+                    description: Identifier of EC2 VPC.
                     type: string
                   vpcIdRef:
                     description: A Reference to a named object.
@@ -493,12 +517,17 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: EC2 Transit Gateway Attachment identifier
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   vpcOwnerId:
+                    description: Identifier of the AWS account that owns the EC2 VPC.
                     type: string
                 type: object
               conditions:

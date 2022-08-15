@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SubnetGroup is the Schema for the SubnetGroups API
+        description: SubnetGroup is the Schema for the SubnetGroups API. Provides
+          an RDS DB subnet group resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: The description of the DB subnet group. Defaults
+                      to "Managed by Terraform".
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -145,12 +148,16 @@ spec:
                         type: object
                     type: object
                   subnetIds:
+                    description: A list of VPC subnet IDs.
                     items:
                       type: string
                     type: array
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -332,12 +339,17 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the db subnet group.
                     type: string
                   id:
+                    description: The db subnet group name.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

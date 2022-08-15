@@ -14,10 +14,14 @@ import (
 )
 
 type CertificateObservation struct {
+
+	// Amazon Resource Name  of the certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The PEM-encoded certificate value.
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
+	// The PEM-encoded certificate chain that includes any intermediate certificates and chains up to root CA.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -25,6 +29,7 @@ type CertificateObservation struct {
 
 type CertificateParameters struct {
 
+	// Amazon Resource Name  of the certificate authority.
 	// +crossplane:generate:reference:type=CertificateAuthority
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
@@ -35,6 +40,7 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
+	// Certificate Signing Request in PEM format.
 	// +kubebuilder:validation:Required
 	CertificateSigningRequestSecretRef v1.SecretKeySelector `json:"certificateSigningRequestSecretRef" tf:"-"`
 
@@ -43,12 +49,15 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Algorithm to use to sign certificate requests. Valid values: SHA256WITHRSA, SHA256WITHECDSA, SHA384WITHRSA, SHA384WITHECDSA, SHA512WITHRSA, SHA512WITHECDSA
 	// +kubebuilder:validation:Required
 	SigningAlgorithm *string `json:"signingAlgorithm" tf:"signing_algorithm,omitempty"`
 
+	// The template to use when issuing a certificate. See ACM PCA Documentation for more information.
 	// +kubebuilder:validation:Optional
 	TemplateArn *string `json:"templateArn,omitempty" tf:"template_arn,omitempty"`
 
+	// Configures end of the validity period for the certificate. See validity block below.
 	// +kubebuilder:validation:Required
 	Validity []ValidityParameters `json:"validity" tf:"validity,omitempty"`
 }
@@ -58,9 +67,11 @@ type ValidityObservation struct {
 
 type ValidityParameters struct {
 
+	// Determines how value is interpreted. Valid values: DAYS, MONTHS, YEARS, ABSOLUTE, END_DATE.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
+	// If type is DAYS, MONTHS, or YEARS, the relative time until the certificate expires. If type is ABSOLUTE, the date in seconds since the Unix epoch. If type is END_DATE, the  date in RFC 3339 format.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -79,7 +90,7 @@ type CertificateStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Certificate is the Schema for the Certificates API
+// Certificate is the Schema for the Certificates API. Provides a resource to issue a certificate using AWS Certificate Manager Private Certificate Authority (ACM PCA)
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

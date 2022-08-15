@@ -14,6 +14,8 @@ import (
 )
 
 type CiphertextObservation struct {
+
+	// Base64 encoded ciphertext
 	CiphertextBlob *string `json:"ciphertextBlob,omitempty" tf:"ciphertext_blob,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -21,9 +23,11 @@ type CiphertextObservation struct {
 
 type CiphertextParameters struct {
 
+	// An optional mapping that makes up the encryption context.
 	// +kubebuilder:validation:Optional
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
 
+	// Globally unique key ID for the customer master key.
 	// +crossplane:generate:reference:type=Key
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
@@ -34,6 +38,7 @@ type CiphertextParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
+	// Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
 	// +kubebuilder:validation:Required
 	PlaintextSecretRef v1.SecretKeySelector `json:"plaintextSecretRef" tf:"-"`
 
@@ -57,7 +62,7 @@ type CiphertextStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Ciphertext is the Schema for the Ciphertexts API
+// Ciphertext is the Schema for the Ciphertexts API. Provides ciphertext encrypted using a KMS key
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

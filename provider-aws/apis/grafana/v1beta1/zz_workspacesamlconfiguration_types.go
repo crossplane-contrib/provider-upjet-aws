@@ -16,41 +16,53 @@ import (
 type WorkspaceSAMLConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The status of the SAML configuration.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type WorkspaceSAMLConfigurationParameters struct {
 
+	// The admin role values.
 	// +kubebuilder:validation:Optional
 	AdminRoleValues []*string `json:"adminRoleValues,omitempty" tf:"admin_role_values,omitempty"`
 
+	// The allowed organizations.
 	// +kubebuilder:validation:Optional
 	AllowedOrganizations []*string `json:"allowedOrganizations,omitempty" tf:"allowed_organizations,omitempty"`
 
+	// The editor role values.
 	// +kubebuilder:validation:Required
 	EditorRoleValues []*string `json:"editorRoleValues" tf:"editor_role_values,omitempty"`
 
+	// The email assertion.
 	// +kubebuilder:validation:Optional
 	EmailAssertion *string `json:"emailAssertion,omitempty" tf:"email_assertion,omitempty"`
 
+	// The groups assertion.
 	// +kubebuilder:validation:Optional
 	GroupsAssertion *string `json:"groupsAssertion,omitempty" tf:"groups_assertion,omitempty"`
 
+	// The IDP Metadata URL. Note that either idp_metadata_url or idp_metadata_xml  must be specified.
 	// +kubebuilder:validation:Optional
 	IdpMetadataURL *string `json:"idpMetadataUrl,omitempty" tf:"idp_metadata_url,omitempty"`
 
+	// The IDP Metadata XML. Note that either idp_metadata_url or idp_metadata_xml  must be specified.
 	// +kubebuilder:validation:Optional
 	IdpMetadataXML *string `json:"idpMetadataXml,omitempty" tf:"idp_metadata_xml,omitempty"`
 
+	// The login assertion.
 	// +kubebuilder:validation:Optional
 	LoginAssertion *string `json:"loginAssertion,omitempty" tf:"login_assertion,omitempty"`
 
+	// The login validity duration.
 	// +kubebuilder:validation:Optional
 	LoginValidityDuration *float64 `json:"loginValidityDuration,omitempty" tf:"login_validity_duration,omitempty"`
 
+	// The name assertion.
 	// +kubebuilder:validation:Optional
 	NameAssertion *string `json:"nameAssertion,omitempty" tf:"name_assertion,omitempty"`
 
+	// The org assertion.
 	// +kubebuilder:validation:Optional
 	OrgAssertion *string `json:"orgAssertion,omitempty" tf:"org_assertion,omitempty"`
 
@@ -59,9 +71,11 @@ type WorkspaceSAMLConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The role assertion.
 	// +kubebuilder:validation:Optional
 	RoleAssertion *string `json:"roleAssertion,omitempty" tf:"role_assertion,omitempty"`
 
+	// The workspace id.
 	// +crossplane:generate:reference:type=Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
@@ -87,7 +101,7 @@ type WorkspaceSAMLConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// WorkspaceSAMLConfiguration is the Schema for the WorkspaceSAMLConfigurations API
+// WorkspaceSAMLConfiguration is the Schema for the WorkspaceSAMLConfigurations API. Provides an Amazon Managed Grafana workspace SAML configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

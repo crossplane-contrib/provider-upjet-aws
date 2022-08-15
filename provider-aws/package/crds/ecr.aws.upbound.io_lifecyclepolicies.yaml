@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: LifecyclePolicy is the Schema for the LifecyclePolicys API
+        description: LifecyclePolicy is the Schema for the LifecyclePolicys API. Manages
+          an ECR repository lifecycle policy.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   policy:
+                    description: The policy document. This is a JSON formatted string.
+                      See more details about Policy Parameters in the official AWS
+                      docs.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -327,6 +331,7 @@ spec:
                   id:
                     type: string
                   registryId:
+                    description: The registry ID where the repository was created.
                     type: string
                 type: object
               conditions:

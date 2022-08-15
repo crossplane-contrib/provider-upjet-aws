@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: APIMapping is the Schema for the APIMappings API
+        description: APIMapping is the Schema for the APIMappings API. Manages an
+          Amazon API Gateway Version 2 API mapping.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiId:
+                    description: The API identifier.
                     type: string
                   apiIdRef:
                     description: A Reference to a named object.
@@ -139,8 +141,11 @@ spec:
                         type: object
                     type: object
                   apiMappingKey:
+                    description: The API mapping key.
                     type: string
                   domainName:
+                    description: The domain name. Use the aws_apigatewayv2_domain_name
+                      resource to configure a domain name.
                     type: string
                   domainNameRef:
                     description: A Reference to a named object.
@@ -220,6 +225,8 @@ spec:
                       be created in.
                     type: string
                   stage:
+                    description: The API stage. Use the aws_apigatewayv2_stage resource
+                      to configure an API stage.
                     type: string
                   stageRef:
                     description: A Reference to a named object.
@@ -474,6 +481,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The API mapping identifier.
                     type: string
                 type: object
               conditions:

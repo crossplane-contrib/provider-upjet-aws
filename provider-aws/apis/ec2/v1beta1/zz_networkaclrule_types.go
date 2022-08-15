@@ -14,29 +14,38 @@ import (
 )
 
 type NetworkACLRuleObservation struct {
+
+	// The ID of the network ACL Rule
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type NetworkACLRuleParameters struct {
 
+	// The network range to allow or deny, in CIDR notation .
 	// +kubebuilder:validation:Optional
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
+	// Indicates whether this is an egress rule . Default false.
 	// +kubebuilder:validation:Optional
 	Egress *bool `json:"egress,omitempty" tf:"egress,omitempty"`
 
+	// The from port to match.
 	// +kubebuilder:validation:Optional
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// The IPv6 CIDR block to allow or deny.
 	// +kubebuilder:validation:Optional
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
+	// ICMP protocol: The ICMP code. Required if specifying ICMP for the protocolE.g., -1
 	// +kubebuilder:validation:Optional
 	IcmpCode *float64 `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
+	// ICMP protocol: The ICMP type. Required if specifying ICMP for the protocolE.g., -1
 	// +kubebuilder:validation:Optional
 	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
+	// The ID of the network ACL.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.NetworkACL
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -48,6 +57,7 @@ type NetworkACLRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkACLIDSelector *v1.Selector `json:"networkAclIdSelector,omitempty" tf:"-"`
 
+	// The protocol. A value of -1 means all protocols.
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
@@ -56,12 +66,15 @@ type NetworkACLRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Indicates whether to allow or deny the traffic that matches the rule. Accepted values: allow | deny
 	// +kubebuilder:validation:Required
 	RuleAction *string `json:"ruleAction" tf:"rule_action,omitempty"`
 
+	// The rule number for the entry . ACL entries are processed in ascending order by rule number.
 	// +kubebuilder:validation:Required
 	RuleNumber *float64 `json:"ruleNumber" tf:"rule_number,omitempty"`
 
+	// The to port to match.
 	// +kubebuilder:validation:Optional
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
@@ -80,7 +93,7 @@ type NetworkACLRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// NetworkACLRule is the Schema for the NetworkACLRules API
+// NetworkACLRule is the Schema for the NetworkACLRules API. Provides an network ACL Rule resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

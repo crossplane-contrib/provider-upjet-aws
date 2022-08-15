@@ -14,20 +14,27 @@ import (
 )
 
 type TransitGatewayMulticastDomainObservation struct {
+
+	// EC2 Transit Gateway Multicast Domain Amazon Resource Name .
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// EC2 Transit Gateway Multicast Domain identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Identifier of the AWS account that owns the EC2 Transit Gateway Multicast Domain.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type TransitGatewayMulticastDomainParameters struct {
 
+	// Whether to automatically accept cross-account subnet associations that are associated with the EC2 Transit Gateway Multicast Domain. Valid values: disable, enable. Default value: disable.
 	// +kubebuilder:validation:Optional
 	AutoAcceptSharedAssociations *string `json:"autoAcceptSharedAssociations,omitempty" tf:"auto_accept_shared_associations,omitempty"`
 
+	// Whether to enable Internet Group Management Protocol  version 2 for the EC2 Transit Gateway Multicast Domain. Valid values: disable, enable. Default value: disable.
 	// +kubebuilder:validation:Optional
 	Igmpv2Support *string `json:"igmpv2Support,omitempty" tf:"igmpv2_support,omitempty"`
 
@@ -36,12 +43,15 @@ type TransitGatewayMulticastDomainParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Whether to enable support for statically configuring multicast group sources for the EC2 Transit Gateway Multicast Domain. Valid values: disable, enable. Default value: disable.
 	// +kubebuilder:validation:Optional
 	StaticSourcesSupport *string `json:"staticSourcesSupport,omitempty" tf:"static_sources_support,omitempty"`
 
+	// Key-value tags for the EC2 Transit Gateway Multicast Domain. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// EC2 Transit Gateway identifier. The EC2 Transit Gateway must have multicast_support enabled.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -68,7 +78,7 @@ type TransitGatewayMulticastDomainStatus struct {
 
 // +kubebuilder:object:root=true
 
-// TransitGatewayMulticastDomain is the Schema for the TransitGatewayMulticastDomains API
+// TransitGatewayMulticastDomain is the Schema for the TransitGatewayMulticastDomains API. Manages an EC2 Transit Gateway Multicast Domain
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

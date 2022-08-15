@@ -18,9 +18,11 @@ type BucketMetricFilterObservation struct {
 
 type BucketMetricFilterParameters struct {
 
+	// Object prefix for filtering .
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// Object tags for filtering .
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -31,6 +33,7 @@ type BucketMetricObservation struct {
 
 type BucketMetricParameters struct {
 
+	// The name of the bucket to put metric configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -41,9 +44,11 @@ type BucketMetricParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags .
 	// +kubebuilder:validation:Optional
 	Filter []BucketMetricFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
+	// Unique identifier of the metrics configuration for the bucket.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -67,7 +72,7 @@ type BucketMetricStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketMetric is the Schema for the BucketMetrics API
+// BucketMetric is the Schema for the BucketMetrics API. Provides a S3 bucket metrics configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

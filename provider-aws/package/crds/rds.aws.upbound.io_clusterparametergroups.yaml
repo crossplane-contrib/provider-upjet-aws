@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ClusterParameterGroup is the Schema for the ClusterParameterGroups
-          API
+          API. Provides an RDS DB cluster parameter group resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,17 +65,28 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: The description of the DB cluster parameter group.
+                      Defaults to "Managed by Terraform".
                     type: string
                   family:
+                    description: The family of the DB cluster parameter group.
                     type: string
                   parameter:
+                    description: A list of DB parameters to apply. Note that parameters
+                      may differ from a family to an other. Full list of all parameters
+                      can be discovered via aws rds describe-db-cluster-parameters
+                      after initial creation of the group.
                     items:
                       properties:
                         applyMethod:
+                          description: '"immediate" , or "pending-reboot". Some engines
+                            can''t apply some parameters without a reboot, and you
+                            will need to specify "pending-reboot" here.'
                           type: string
                         name:
                           type: string
                         value:
+                          description: The value of the DB parameter.
                           type: string
                       required:
                       - name
@@ -89,6 +100,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - family
@@ -272,12 +286,17 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the db cluster parameter group.
                     type: string
                   id:
+                    description: The db cluster parameter group name.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

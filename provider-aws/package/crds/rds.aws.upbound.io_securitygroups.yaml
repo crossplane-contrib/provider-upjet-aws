@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SecurityGroup is the Schema for the SecurityGroups API
+        description: SecurityGroup is the Schema for the SecurityGroups API. Provides
+          an RDS security group resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,17 +65,25 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: The description of the DB security group. Defaults
+                      to "Managed by Terraform".
                     type: string
                   ingress:
+                    description: A list of ingress rules.
                     items:
                       properties:
                         cidr:
+                          description: The CIDR block to accept
                           type: string
                         securityGroupId:
+                          description: The ID of the security group to authorize
                           type: string
                         securityGroupName:
+                          description: The name of the security group to authorize
                           type: string
                         securityGroupOwnerId:
+                          description: The owner Id of the security group provided
+                            by security_group_name.
                           type: string
                       type: object
                     type: array
@@ -85,6 +94,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - ingress
@@ -267,12 +279,17 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The arn of the DB security group.
                     type: string
                   id:
+                    description: The db security group ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

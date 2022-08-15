@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MonitoringSubscription is the Schema for the MonitoringSubscriptions
-          API
+          API. Provides a CloudFront monitoring subscription resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   distributionId:
+                    description: The ID of the distribution that you are enabling
+                      metrics for.
                     type: string
                   distributionIdRef:
                     description: A Reference to a named object.
@@ -140,12 +142,21 @@ spec:
                         type: object
                     type: object
                   monitoringSubscription:
+                    description: A monitoring subscription. This structure contains
+                      information about whether additional CloudWatch metrics are
+                      enabled for a given CloudFront distribution.
                     items:
                       properties:
                         realtimeMetricsSubscriptionConfig:
+                          description: A subscription configuration for additional
+                            CloudWatch metrics. See below.
                           items:
                             properties:
                               realtimeMetricsSubscriptionStatus:
+                                description: A flag that indicates whether additional
+                                  CloudWatch metrics are enabled for a given CloudFront
+                                  distribution. Valid values are Enabled and Disabled.
+                                  See below.
                                 type: string
                             required:
                             - realtimeMetricsSubscriptionStatus
@@ -341,6 +352,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the CloudFront monitoring subscription,
+                      which corresponds to the distribution_id.
                     type: string
                 type: object
               conditions:

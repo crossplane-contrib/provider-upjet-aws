@@ -14,11 +14,14 @@ import (
 )
 
 type BucketServerSideEncryptionConfigurationObservation struct {
+
+	// The bucket or bucket and expected_bucket_owner separated by a comma  if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type BucketServerSideEncryptionConfigurationParameters struct {
 
+	// The name of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -29,6 +32,7 @@ type BucketServerSideEncryptionConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// The account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
@@ -37,6 +41,7 @@ type BucketServerSideEncryptionConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Set of server-side encryption configuration rules. documented below. Currently, only a single rule is supported.
 	// +kubebuilder:validation:Required
 	Rule []BucketServerSideEncryptionConfigurationRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
@@ -46,9 +51,11 @@ type BucketServerSideEncryptionConfigurationRuleObservation struct {
 
 type BucketServerSideEncryptionConfigurationRuleParameters struct {
 
+	// A single object for setting server-side encryption by default documented below
 	// +kubebuilder:validation:Optional
 	ApplyServerSideEncryptionByDefault []RuleApplyServerSideEncryptionByDefaultParameters `json:"applyServerSideEncryptionByDefault,omitempty" tf:"apply_server_side_encryption_by_default,omitempty"`
 
+	// Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
 	// +kubebuilder:validation:Optional
 	BucketKeyEnabled *bool `json:"bucketKeyEnabled,omitempty" tf:"bucket_key_enabled,omitempty"`
 }
@@ -58,6 +65,7 @@ type RuleApplyServerSideEncryptionByDefaultObservation struct {
 
 type RuleApplyServerSideEncryptionByDefaultParameters struct {
 
+	// The AWS KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. The default aws/s3 AWS KMS master key is used if this element is absent while the sse_algorithm is aws:kms.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -69,6 +77,7 @@ type RuleApplyServerSideEncryptionByDefaultParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSMasterKeyIDSelector *v1.Selector `json:"kmsMasterKeyIdSelector,omitempty" tf:"-"`
 
+	// The server-side encryption algorithm to use. Valid values are AES256 and aws:kms
 	// +kubebuilder:validation:Required
 	SseAlgorithm *string `json:"sseAlgorithm" tf:"sse_algorithm,omitempty"`
 }
@@ -87,7 +96,7 @@ type BucketServerSideEncryptionConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketServerSideEncryptionConfiguration is the Schema for the BucketServerSideEncryptionConfigurations API
+// BucketServerSideEncryptionConfiguration is the Schema for the BucketServerSideEncryptionConfigurations API. Provides a S3 bucket server-side encryption configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

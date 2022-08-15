@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Classifier is the Schema for the Classifiers API
+        description: Classifier is the Schema for the Classifiers API. Provides an
+          Glue Classifier resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,32 +65,47 @@ spec:
               forProvider:
                 properties:
                   csvClassifier:
+                    description: A classifier for Csv content. Defined below.
                     items:
                       properties:
                         allowSingleColumn:
+                          description: Enables the processing of files that contain
+                            only one column.
                           type: boolean
                         containsHeader:
+                          description: Indicates whether the CSV file contains a header.
+                            This can be one of "ABSENT", "PRESENT", or "UNKNOWN".
                           type: string
                         delimiter:
+                          description: The delimiter used in the Csv to separate columns.
                           type: string
                         disableValueTrimming:
+                          description: Specifies whether to trim column values.
                           type: boolean
                         header:
+                          description: A list of strings representing column names.
                           items:
                             type: string
                           type: array
                         quoteSymbol:
+                          description: A custom symbol to denote what combines content
+                            into a single column value. It must be different from
+                            the column delimiter.
                           type: string
                       type: object
                     type: array
                   grokClassifier:
+                    description: –  A classifier that uses grok patterns. Defined
+                      below.
                     items:
                       properties:
                         classification:
                           type: string
                         customPatterns:
+                          description: Custom grok patterns used by this classifier.
                           type: string
                         grokPattern:
+                          description: The grok pattern used by this classifier.
                           type: string
                       required:
                       - classification
@@ -97,9 +113,13 @@ spec:
                       type: object
                     type: array
                   jsonClassifier:
+                    description: –  A classifier for JSON content. Defined below.
                     items:
                       properties:
                         jsonPath:
+                          description: A JsonPath string defining the JSON data for
+                            the classifier to classify. AWS Glue supports a subset
+                            of JsonPath, as described in Writing JsonPath Custom Classifiers.
                           type: string
                       required:
                       - jsonPath
@@ -110,11 +130,17 @@ spec:
                       be created in.
                     type: string
                   xmlClassifier:
+                    description: –  A classifier for XML content. Defined below.
                     items:
                       properties:
                         classification:
                           type: string
                         rowTag:
+                          description: The XML tag designating the element that contains
+                            each record in an XML document being parsed. Note that
+                            this cannot identify a self-closing element . An empty
+                            row element that contains only attributes can be parsed
+                            as long as it ends with a closing tag .
                           type: string
                       required:
                       - classification
@@ -301,6 +327,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: Name of the classifier
                     type: string
                 type: object
               conditions:

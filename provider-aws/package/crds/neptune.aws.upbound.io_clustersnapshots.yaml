@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ClusterSnapshot is the Schema for the ClusterSnapshots API
+        description: ClusterSnapshot is the Schema for the ClusterSnapshots API. Manages
+          a Neptune database cluster snapshot.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   dbClusterIdentifier:
+                    description: The DB Cluster Identifier from which to take the
+                      snapshot.
                     type: string
                   dbClusterIdentifierRef:
                     description: A Reference to a named object.
@@ -322,34 +325,50 @@ spec:
               atProvider:
                 properties:
                   allocatedStorage:
+                    description: Specifies the allocated storage size in gigabytes
+                      .
                     type: number
                   availabilityZones:
+                    description: List of EC2 Availability Zones that instances in
+                      the DB cluster snapshot can be restored in.
                     items:
                       type: string
                     type: array
                   dbClusterSnapshotArn:
+                    description: The Amazon Resource Name  for the DB Cluster Snapshot.
                     type: string
                   engine:
+                    description: Specifies the name of the database engine.
                     type: string
                   engineVersion:
+                    description: Version of the database engine for this DB cluster
+                      snapshot.
                     type: string
                   id:
                     type: string
                   kmsKeyId:
+                    description: If storage_encrypted is true, the AWS KMS key identifier
+                      for the encrypted DB cluster snapshot.
                     type: string
                   licenseModel:
+                    description: License model information for the restored DB cluster.
                     type: string
                   port:
+                    description: Port that the DB cluster was listening on at the
+                      time of the snapshot.
                     type: number
                   snapshotType:
                     type: string
                   sourceDbClusterSnapshotArn:
                     type: string
                   status:
+                    description: The status of this DB Cluster Snapshot.
                     type: string
                   storageEncrypted:
+                    description: Specifies whether the DB cluster snapshot is encrypted.
                     type: boolean
                   vpcId:
+                    description: The VPC ID associated with the DB cluster snapshot.
                     type: string
                 type: object
               conditions:

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: RouteResponse is the Schema for the RouteResponses API
+        description: RouteResponse is the Schema for the RouteResponses API. Manages
+          an Amazon API Gateway Version 2 route response.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiId:
+                    description: The API identifier.
                     type: string
                   apiIdRef:
                     description: A Reference to a named object.
@@ -139,6 +141,7 @@ spec:
                         type: object
                     type: object
                   modelSelectionExpression:
+                    description: The model selection expression for the route response.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -147,8 +150,10 @@ spec:
                   responseModels:
                     additionalProperties:
                       type: string
+                    description: The response models for the route response.
                     type: object
                   routeId:
+                    description: The identifier of the aws_apigatewayv2_route.
                     type: string
                   routeIdRef:
                     description: A Reference to a named object.
@@ -224,6 +229,7 @@ spec:
                         type: object
                     type: object
                   routeResponseKey:
+                    description: The route response key.
                     type: string
                 required:
                 - region
@@ -406,6 +412,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The route response identifier.
                     type: string
                 type: object
               conditions:

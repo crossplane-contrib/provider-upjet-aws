@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DelegationSet is the Schema for the DelegationSets API
+        description: DelegationSet is the Schema for the DelegationSets API. Provides
+          a Route53 Delegation Set resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   referenceName:
+                    description: This is a reference name used in Caller Reference
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -249,10 +251,14 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  of the Delegation Set.
                     type: string
                   id:
+                    description: The delegation set ID
                     type: string
                   nameServers:
+                    description: A list of authoritative name servers for the hosted
+                      zone .
                     items:
                       type: string
                     type: array

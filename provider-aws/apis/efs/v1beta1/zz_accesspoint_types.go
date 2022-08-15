@@ -14,19 +14,25 @@ import (
 )
 
 type AccessPointObservation struct {
+
+	// ARN of the access point.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ARN of the file system.
 	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
 
+	// ID of the access point.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type AccessPointParameters struct {
 
+	// ID of the file system for which the access point is intended.
 	// +crossplane:generate:reference:type=FileSystem
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
@@ -37,6 +43,7 @@ type AccessPointParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
+	// Operating system user and group applied to all file system requests made using the access point. Detailed below.
 	// +kubebuilder:validation:Optional
 	PosixUser []PosixUserParameters `json:"posixUser,omitempty" tf:"posix_user,omitempty"`
 
@@ -45,9 +52,11 @@ type AccessPointParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Directory on the Amazon EFS file system that the access point provides access to. Detailed below.
 	// +kubebuilder:validation:Optional
 	RootDirectory []RootDirectoryParameters `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
 
+	// Key-value mapping of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -57,12 +66,15 @@ type CreationInfoObservation struct {
 
 type CreationInfoParameters struct {
 
+	// POSIX group ID to apply to the root_directory.
 	// +kubebuilder:validation:Required
 	OwnerGID *float64 `json:"ownerGid" tf:"owner_gid,omitempty"`
 
+	// POSIX user ID to apply to the root_directory.
 	// +kubebuilder:validation:Required
 	OwnerUID *float64 `json:"ownerUid" tf:"owner_uid,omitempty"`
 
+	// POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.
 	// +kubebuilder:validation:Required
 	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
 }
@@ -72,12 +84,15 @@ type PosixUserObservation struct {
 
 type PosixUserParameters struct {
 
+	// POSIX group ID used for all file system operations using this access point.
 	// +kubebuilder:validation:Required
 	GID *float64 `json:"gid" tf:"gid,omitempty"`
 
+	// Secondary POSIX group IDs used for all file system operations using this access point.
 	// +kubebuilder:validation:Optional
 	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
+	// POSIX user ID used for all file system operations using this access point.
 	// +kubebuilder:validation:Required
 	UID *float64 `json:"uid" tf:"uid,omitempty"`
 }
@@ -87,9 +102,11 @@ type RootDirectoryObservation struct {
 
 type RootDirectoryParameters struct {
 
+	// POSIX IDs and permissions to apply to the access point's Root Directory. See Creation Info below.
 	// +kubebuilder:validation:Optional
 	CreationInfo []CreationInfoParameters `json:"creationInfo,omitempty" tf:"creation_info,omitempty"`
 
+	// Path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide creation_info.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
@@ -108,7 +125,7 @@ type AccessPointStatus struct {
 
 // +kubebuilder:object:root=true
 
-// AccessPoint is the Schema for the AccessPoints API
+// AccessPoint is the Schema for the AccessPoints API. Provides an Elastic File System (EFS) access point.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

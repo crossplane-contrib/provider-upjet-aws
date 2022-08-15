@@ -14,18 +14,24 @@ import (
 )
 
 type AliasObservation struct {
+
+	// Alias ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Alias ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type AliasParameters struct {
 
+	// Description of the alias.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Name of the alias.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -34,9 +40,11 @@ type AliasParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Specifies the fleet and/or routing type to use for the alias.
 	// +kubebuilder:validation:Required
 	RoutingStrategy []RoutingStrategyParameters `json:"routingStrategy" tf:"routing_strategy,omitempty"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -46,12 +54,15 @@ type RoutingStrategyObservation struct {
 
 type RoutingStrategyParameters struct {
 
+	// ID of the GameLift Fleet to point the alias to.
 	// +kubebuilder:validation:Optional
 	FleetID *string `json:"fleetId,omitempty" tf:"fleet_id,omitempty"`
 
+	// Message text to be used with the TERMINAL routing strategy.
 	// +kubebuilder:validation:Optional
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 
+	// Type of routing strategyE.g., SIMPLE or TERMINAL
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -70,7 +81,7 @@ type AliasStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Alias is the Schema for the Aliass API
+// Alias is the Schema for the Aliass API. Provides a GameLift Alias resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

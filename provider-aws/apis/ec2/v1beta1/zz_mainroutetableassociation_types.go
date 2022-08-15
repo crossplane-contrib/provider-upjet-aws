@@ -14,8 +14,11 @@ import (
 )
 
 type MainRouteTableAssociationObservation struct {
+
+	// The ID of the Route Table Association
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Used internally, see Notes below
 	OriginalRouteTableID *string `json:"originalRouteTableId,omitempty" tf:"original_route_table_id,omitempty"`
 }
 
@@ -26,6 +29,8 @@ type MainRouteTableAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the Route Table to set as the new
+	// main route table for the target VPC
 	// +crossplane:generate:reference:type=RouteTable
 	// +kubebuilder:validation:Optional
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
@@ -36,6 +41,7 @@ type MainRouteTableAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
+	// The ID of the VPC whose main route table should be set
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -61,7 +67,7 @@ type MainRouteTableAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MainRouteTableAssociation is the Schema for the MainRouteTableAssociations API
+// MainRouteTableAssociation is the Schema for the MainRouteTableAssociations API. Provides a resource for managing the main routing table of a VPC.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SecurityGroupRule is the Schema for the SecurityGroupRules API
+        description: SecurityGroupRule is the Schema for the SecurityGroupRules API.
+          Provides an security group rule resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,28 +65,38 @@ spec:
               forProvider:
                 properties:
                   cidrBlocks:
+                    description: List of CIDR blocks. Cannot be specified with source_security_group_id
+                      or self.
                     items:
                       type: string
                     type: array
                   description:
+                    description: Description of the rule.
                     type: string
                   fromPort:
+                    description: Start port .
                     type: number
                   ipv6CidrBlocks:
+                    description: List of IPv6 CIDR blocks. Cannot be specified with
+                      source_security_group_id or self.
                     items:
                       type: string
                     type: array
                   prefixListIds:
+                    description: List of Prefix List IDs.
                     items:
                       type: string
                     type: array
                   protocol:
+                    description: Protocol. If not icmp, icmpv6, tcp, udp, or all use
+                      the protocol number
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   securityGroupId:
+                    description: Security group to apply this rule to.
                     type: string
                   securityGroupIdRef:
                     description: A Reference to a named object.
@@ -161,8 +172,14 @@ spec:
                         type: object
                     type: object
                   self:
+                    description: Whether the security group itself will be added as
+                      a source to this ingress rule. Cannot be specified with cidr_blocks,
+                      ipv6_cidr_blocks, or source_security_group_id.
                     type: boolean
                   sourceSecurityGroupId:
+                    description: Security group id to allow access to/from, depending
+                      on the type. Cannot be specified with cidr_blocks, ipv6_cidr_blocks,
+                      or self.
                     type: string
                   sourceSecurityGroupIdRef:
                     description: A Reference to a named object.
@@ -238,9 +255,11 @@ spec:
                         type: object
                     type: object
                   toPort:
+                    description: End port .
                     type: number
                   type:
-                    description: Type of rule, ingress (inbound) or egress (outbound).
+                    description: Type of rule being created. Valid options are ingress
+                      or egress .
                     type: string
                 required:
                 - fromPort
@@ -426,6 +445,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: ID of the security group rule.
                     type: string
                 type: object
               conditions:

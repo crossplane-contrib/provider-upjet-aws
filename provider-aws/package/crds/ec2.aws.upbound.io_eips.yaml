@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: EIP is the Schema for the EIPs API
+        description: EIP is the Schema for the EIPs API. Provides an Elastic IP resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +64,22 @@ spec:
               forProvider:
                 properties:
                   address:
+                    description: IP address from an EC2 BYOIP pool. This option is
+                      only available for VPC EIPs.
                     type: string
                   associateWithPrivateIp:
+                    description: User-specified primary or secondary private IP address
+                      to associate with the Elastic IP address. If no private IP address
+                      is specified, the Elastic IP address is associated with the
+                      primary private IP address.
                     type: string
                   customerOwnedIpv4Pool:
+                    description: ID  of a customer-owned address pool. For more on
+                      customer owned IP addressed check out Customer-owned IP addresses
+                      guide.
                     type: string
                   instance:
+                    description: EC2 instance ID.
                     type: string
                   instanceRef:
                     description: A Reference to a named object.
@@ -145,8 +155,11 @@ spec:
                         type: object
                     type: object
                   networkBorderGroup:
+                    description: Location from which the IP address is advertised.
+                      Use this parameter to limit the address to this location.
                     type: string
                   networkInterface:
+                    description: Network interface ID to associate with.
                     type: string
                   networkInterfaceRef:
                     description: A Reference to a named object.
@@ -222,6 +235,8 @@ spec:
                         type: object
                     type: object
                   publicIpv4Pool:
+                    description: EC2 IPv4 address pool identifier or amazon. This
+                      option is only available for VPC EIPs.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -230,8 +245,13 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Map of tags to assign to the resource. Tags can only
+                      be applied to EIPs in a VPC. If configured with a provider default_tags
+                      configuration block present, tags with matching keys will overwrite
+                      those defined at the provider-level.
                     type: object
                   vpc:
+                    description: Boolean if the EIP is in a VPC or not.
                     type: boolean
                 required:
                 - region
@@ -413,28 +433,45 @@ spec:
               atProvider:
                 properties:
                   allocationId:
+                    description: ID that AWS assigns to represent the allocation of
+                      the Elastic IP address for use with instances in a VPC.
                     type: string
                   associationId:
+                    description: ID representing the association of the address with
+                      an instance in a VPC.
                     type: string
                   carrierIp:
+                    description: Carrier IP address.
                     type: string
                   customerOwnedIp:
+                    description: Customer owned IP.
                     type: string
                   domain:
+                    description: Indicates if this EIP is for use in VPC  or EC2 Classic
+                      .
                     type: string
                   id:
+                    description: Contains the EIP allocation ID.
                     type: string
                   privateDns:
+                    description: The Private DNS associated with the Elastic IP address
+                      .
                     type: string
                   privateIp:
+                    description: Contains the private IP address .
                     type: string
                   publicDns:
+                    description: Public DNS associated with the Elastic IP address.
                     type: string
                   publicIp:
+                    description: Contains the public IP address.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

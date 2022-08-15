@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ProvisionedConcurrencyConfig is the Schema for the ProvisionedConcurrencyConfigs
-          API
+          API. Manages a Lambda Provisioned Concurrency Configuration
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,10 +66,14 @@ spec:
               forProvider:
                 properties:
                   functionName:
+                    description: Name or Amazon Resource Name  of the Lambda Function.
                     type: string
                   provisionedConcurrentExecutions:
+                    description: Amount of capacity to allocate. Must be greater than
+                      or equal to 1.
                     type: number
                   qualifier:
+                    description: Lambda Function version or Lambda Alias name.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -259,6 +263,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: Lambda Function name and qualifier separated by a
+                      colon .
                     type: string
                 type: object
               conditions:

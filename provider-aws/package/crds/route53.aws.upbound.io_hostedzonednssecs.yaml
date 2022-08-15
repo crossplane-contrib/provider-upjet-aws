@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: HostedZoneDNSSEC is the Schema for the HostedZoneDNSSECs API
+        description: HostedZoneDNSSEC is the Schema for the HostedZoneDNSSECs API.
+          Manages Route 53 Hosted Zone DNSSEC
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   hostedZoneId:
+                    description: Identifier of the Route 53 Hosted Zone.
                     type: string
                   hostedZoneIdRef:
                     description: A Reference to a named object.
@@ -143,6 +145,8 @@ spec:
                       be created in.
                     type: string
                   signingStatus:
+                    description: 'Hosted Zone signing status. Valid values: SIGNING,
+                      NOT_SIGNING. Defaults to SIGNING.'
                     type: string
                 required:
                 - region
@@ -324,6 +328,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: Route 53 Hosted Zone identifier.
                     type: string
                 type: object
               conditions:

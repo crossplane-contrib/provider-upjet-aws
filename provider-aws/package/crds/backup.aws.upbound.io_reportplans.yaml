@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ReportPlan is the Schema for the ReportPlans API
+        description: ReportPlan is the Schema for the ReportPlans API. Provides an
+          AWS Backup Report Plan resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,38 +65,67 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: The description of the report plan with a maximum
+                      of 1,024 characters
                     type: string
                   name:
+                    description: The unique name of the report plan. The name must
+                      be between 1 and 256 characters, starting with a letter, and
+                      consisting of letters, numbers, and underscores.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   reportDeliveryChannel:
+                    description: An object that contains information about where and
+                      how to deliver your reports, specifically your Amazon S3 bucket
+                      name, S3 key prefix, and the formats of your reports. Detailed
+                      below.
                     items:
                       properties:
                         formats:
+                          description: 'A list of the format of your reports: CSV,
+                            JSON, or both. If not specified, the default format is
+                            CSV.'
                           items:
                             type: string
                           type: array
                         s3BucketName:
+                          description: The unique name of the S3 bucket that receives
+                            your reports.
                           type: string
                         s3KeyPrefix:
+                          description: 'The prefix for where Backup Audit Manager
+                            delivers your reports to Amazon S3. The prefix is this
+                            part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name.
+                            If not specified, there is no prefix.'
                           type: string
                       required:
                       - s3BucketName
                       type: object
                     type: array
                   reportSetting:
+                    description: An object that identifies the report template for
+                      the report. Reports are built using a report template. Detailed
+                      below.
                     items:
                       properties:
                         frameworkArns:
+                          description: Specifies the Amazon Resource Names  of the
+                            frameworks a report covers.
                           items:
                             type: string
                           type: array
                         numberOfFrameworks:
+                          description: Specifies the number of frameworks a report
+                            covers.
                           type: number
                         reportTemplate:
+                          description: 'Identifies the report template for the report.
+                            Reports are built using a report template. The report
+                            templates are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT
+                            | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.'
                           type: string
                       required:
                       - reportTemplate
@@ -104,6 +134,10 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Metadata that you can assign to help organize the
+                      report plans you create. If configured with a provider default_tags
+                      configuration block present, tags with matching keys will overwrite
+                      those defined at the provider-level.
                     type: object
                 required:
                 - name
@@ -288,16 +322,26 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the backup report plan.
                     type: string
                   creationTime:
+                    description: The date and time that a report plan is created,
+                      in Unix format and Coordinated Universal Time .
                     type: string
                   deploymentStatus:
+                    description: 'The deployment status of a report plan. The statuses
+                      are: CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS
+                      | COMPLETED.'
                     type: string
                   id:
+                    description: The id of the backup report plan.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

@@ -14,24 +14,31 @@ import (
 )
 
 type OpenIDConnectProviderObservation struct {
+
+	// The ARN assigned by AWS for this provider.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type OpenIDConnectProviderParameters struct {
 
+	// A list of client IDs . When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application.
 	// +kubebuilder:validation:Required
 	ClientIDList []*string `json:"clientIdList" tf:"client_id_list,omitempty"`
 
+	// Map of resource tags for the IAM OIDC provider. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// A list of server certificate thumbprints for the OpenID Connect  identity provider's server certificate.
 	// +kubebuilder:validation:Required
 	ThumbprintList []*string `json:"thumbprintList" tf:"thumbprint_list,omitempty"`
 
+	// The URL of the identity provider. Corresponds to the iss claim.
 	// +kubebuilder:validation:Required
 	URL *string `json:"url" tf:"url,omitempty"`
 }
@@ -50,7 +57,7 @@ type OpenIDConnectProviderStatus struct {
 
 // +kubebuilder:object:root=true
 
-// OpenIDConnectProvider is the Schema for the OpenIDConnectProviders API
+// OpenIDConnectProvider is the Schema for the OpenIDConnectProviders API. Provides an IAM OpenID Connect provider.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

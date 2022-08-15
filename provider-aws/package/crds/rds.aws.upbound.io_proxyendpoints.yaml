@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ProxyEndpoint is the Schema for the ProxyEndpoints API
+        description: ProxyEndpoint is the Schema for the ProxyEndpoints API. Provides
+          an RDS DB proxy endpoint resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   dbProxyName:
+                    description: The name of the DB proxy associated with the DB proxy
+                      endpoint that you create.
                     type: string
                   dbProxyNameRef:
                     description: A Reference to a named object.
@@ -145,8 +148,12 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   targetRole:
+                    description: Indicates whether the DB proxy endpoint can be used
+                      for read/write or read-only operations. The default is READ_WRITE.
+                      Valid values are READ_WRITE and READ_ONLY.
                     type: string
                   vpcSecurityGroupIdRefs:
                     items:
@@ -224,10 +231,14 @@ spec:
                         type: object
                     type: object
                   vpcSecurityGroupIds:
+                    description: One or more VPC security group IDs to associate with
+                      the new proxy.
                     items:
                       type: string
                     type: array
                   vpcSubnetIds:
+                    description: One or more VPC subnet IDs to associate with the
+                      new proxy.
                     items:
                       type: string
                     type: array
@@ -412,18 +423,27 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  for the proxy endpoint.
                     type: string
                   endpoint:
+                    description: The endpoint that you can use to connect to the proxy.
+                      You include the endpoint value in the connection string for
+                      a database client application.
                     type: string
                   id:
+                    description: The name of the proxy and proxy endpoint separated
+                      by /, DB-PROXY-NAME/DB-PROXY-ENDPOINT-NAME.
                     type: string
                   isDefault:
+                    description: Indicates whether this endpoint is the default endpoint
+                      for the associated DB proxy.
                     type: boolean
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
                   vpcId:
+                    description: The VPC ID of the DB proxy endpoint.
                     type: string
                 type: object
               conditions:

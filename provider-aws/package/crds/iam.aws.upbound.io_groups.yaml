@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Group is the Schema for the Groups API
+        description: Group is the Schema for the Groups API. Provides an IAM group.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -243,10 +243,13 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN assigned by AWS for this group.
                     type: string
                   id:
+                    description: The group's ID.
                     type: string
                   uniqueId:
+                    description: The unique ID assigned by AWS.
                     type: string
                 type: object
               conditions:

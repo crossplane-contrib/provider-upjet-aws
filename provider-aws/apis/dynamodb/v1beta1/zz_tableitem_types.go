@@ -19,12 +19,15 @@ type TableItemObservation struct {
 
 type TableItemParameters struct {
 
+	// Hash key to use for lookups and identification of the item
 	// +kubebuilder:validation:Required
 	HashKey *string `json:"hashKey" tf:"hash_key,omitempty"`
 
+	// JSON representation of a map of attribute name/value pairs, one for each attribute. Only the primary key attributes are required; you can optionally provide other attribute name-value pairs for the item.
 	// +kubebuilder:validation:Required
 	Item *string `json:"item" tf:"item,omitempty"`
 
+	// Range key to use for lookups and identification of the item. Required if there is range key defined in the table.
 	// +kubebuilder:validation:Optional
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
@@ -33,6 +36,7 @@ type TableItemParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Name of the table to contain the item.
 	// +crossplane:generate:reference:type=Table
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
@@ -58,7 +62,7 @@ type TableItemStatus struct {
 
 // +kubebuilder:object:root=true
 
-// TableItem is the Schema for the TableItems API
+// TableItem is the Schema for the TableItems API. Provides a DynamoDB table item resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

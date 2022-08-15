@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: FargateProfile is the Schema for the FargateProfiles API
+        description: FargateProfile is the Schema for the FargateProfiles API. Manages
+          an EKS Fargate Profile
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   clusterName:
+                    description: 00 characters in length. Must begin with an alphanumeric
+                      character, and must only contain alphanumeric characters, dashes
+                      and underscores .
                     type: string
                   clusterNameRef:
                     description: A Reference to a named object.
@@ -139,6 +143,8 @@ spec:
                         type: object
                     type: object
                   podExecutionRoleArn:
+                    description: –  Amazon Resource Name  of the IAM Role that provides
+                      permissions for the EKS Fargate Profile.
                     type: string
                   podExecutionRoleArnRef:
                     description: A Reference to a named object.
@@ -218,13 +224,17 @@ spec:
                       be created in.
                     type: string
                   selector:
+                    description: Configuration block for selecting Kubernetes Pods
+                      to execute with this EKS Fargate Profile. Detailed below.
                     items:
                       properties:
                         labels:
                           additionalProperties:
                             type: string
+                          description: Key-value map of Kubernetes labels for selection.
                           type: object
                         namespace:
+                          description: Kubernetes namespace for selection.
                           type: string
                       required:
                       - namespace
@@ -306,12 +316,18 @@ spec:
                         type: object
                     type: object
                   subnetIds:
+                    description: '–  Identifiers of private EC2 Subnets to associate
+                      with the EKS Fargate Profile. These subnets must have the following
+                      resource tag: kubernetes.io/cluster/CLUSTER_NAME .'
                     items:
                       type: string
                     type: array
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -494,14 +510,21 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of the EKS Fargate Profile.
                     type: string
                   id:
+                    description: EKS Cluster name and EKS Fargate Profile name separated
+                      by a colon .
                     type: string
                   status:
+                    description: Status of the EKS Fargate Profile.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

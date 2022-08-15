@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ResourceShare is the Schema for the ResourceShares API
+        description: ResourceShare is the Schema for the ResourceShares API. Manages
+          a Resource Access Manager (RAM) Resource Share.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,11 @@ spec:
               forProvider:
                 properties:
                   allowExternalPrincipals:
+                    description: Indicates whether principals outside your organization
+                      can be associated with a resource share.
                     type: boolean
                   name:
+                    description: The name of the resource share.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -74,6 +78,10 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource share. If
+                      configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                 required:
                 - name
@@ -256,12 +264,17 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  of the resource share.
                     type: string
                   id:
+                    description: The Amazon Resource Name  of the resource share.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:
