@@ -100,8 +100,10 @@ type SecretParameters struct {
 	RecoveryWindowInDays *float64 `json:"recoveryWindowInDays,omitempty" tf:"recovery_window_in_days,omitempty"`
 
 	// Region for replicating the secret.
+	// Region is the region you'd like your resource to be created in.
+	// +terrajet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"region,omitempty"`
+	Region *string `json:"region" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Replica []ReplicaParameters `json:"replica,omitempty" tf:"replica,omitempty"`

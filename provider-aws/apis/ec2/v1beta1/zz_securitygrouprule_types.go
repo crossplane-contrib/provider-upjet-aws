@@ -82,6 +82,7 @@ type SecurityGroupRuleParameters struct {
 
 	// Type of rule being created. Valid options are ingress
 	// or egress .
+	// Type of rule, ingress (inbound) or egress (outbound).
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
