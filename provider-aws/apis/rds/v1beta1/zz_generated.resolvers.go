@@ -333,6 +333,22 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBSubnetGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DBSubnetGroupNameRef,
+		Selector:     mg.Spec.ForProvider.DBSubnetGroupNameSelector,
+		To: reference.To{
+			List:    &SubnetGroupList{},
+			Managed: &SubnetGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBSubnetGroupName")
+	}
+	mg.Spec.ForProvider.DBSubnetGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBSubnetGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,

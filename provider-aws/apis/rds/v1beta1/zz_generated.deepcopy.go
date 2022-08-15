@@ -2370,6 +2370,16 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DBSubnetGroupNameRef != nil {
+		in, out := &in.DBSubnetGroupNameRef, &out.DBSubnetGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DBSubnetGroupNameSelector != nil {
+		in, out := &in.DBSubnetGroupNameSelector, &out.DBSubnetGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DeleteAutomatedBackups != nil {
 		in, out := &in.DeleteAutomatedBackups, &out.DeleteAutomatedBackups
 		*out = new(bool)
