@@ -13,14 +13,14 @@ spec:
                   "Sid":"ReplicationAccessCrossAccount",
                   "Effect":"Allow",
                   "Principal":{
-                      "AWS":"arn:aws:iam::${data.aws_account_id}:root"
+                      "AWS":"arn:aws:iam::609897127049:root"
                   },
                   "Action":[
                       "ecr:CreateRepository",
                       "ecr:ReplicateImage"
                   ],
                   "Resource": [
-                      "arn:aws:ecr:us-west-2:${data.aws_account_id}:repository/*"
+                      "arn:aws:ecr:us-west-2:609897127049:repository/*"
                   ]
               }
           ]

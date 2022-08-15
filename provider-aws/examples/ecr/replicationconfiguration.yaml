@@ -2,6 +2,8 @@ apiVersion: ecr.aws.upbound.io/v1beta1
 kind: ReplicationConfiguration
 metadata:
   name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires an additional AWS account"
 spec:
   forProvider:
     region: us-east-1
@@ -9,6 +11,6 @@ spec:
     - rule:
       - destination:
         - region: us-east-1
-          registryId: ${data.aws_account_id}
+          registryId: "${aws_account_id}"
   providerConfigRef:
     name: default
