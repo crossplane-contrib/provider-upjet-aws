@@ -32,6 +32,7 @@ type UserParameters struct {
 	// When destroying this user, destroy even if it
 	// has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy
 	// a user with non-Terraform-managed access keys and login profile will fail to be destroyed.
+	// Delete user even if it has non-Terraform-managed IAM access keys, login profile or MFA devices
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 

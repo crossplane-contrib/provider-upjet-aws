@@ -259,7 +259,7 @@ spec:
                     type: number
                   type:
                     description: Type of rule being created. Valid options are ingress
-                      or egress .
+                      or egress . Type of rule, ingress (inbound) or egress (outbound).
                     type: string
                 required:
                 - fromPort

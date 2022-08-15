@@ -115,8 +115,10 @@ type DeliveryStreamParameters struct {
 	RedshiftConfiguration []RedshiftConfigurationParameters `json:"redshiftConfiguration,omitempty" tf:"redshift_configuration,omitempty"`
 
 	// If you don't specify an AWS Region, the default is the current region.
+	// Region is the region you'd like your resource to be created in.
+	// +terrajet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"region,omitempty"`
+	Region *string `json:"region" tf:"-"`
 
 	// Required for non-S3 destinations. For S3 destination, use extended_s3_configuration instead. Configuration options for the s3 destination . More details are given below.
 	// +kubebuilder:validation:Optional
