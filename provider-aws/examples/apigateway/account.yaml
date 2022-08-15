@@ -1,0 +1,7 @@
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: Account
+metadata:
+  name: demo
+spec:
+  forProvider:
+    region: us-west-1

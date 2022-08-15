@@ -14,18 +14,42 @@ import (
 	certificateacmpca "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificate"
 	certificateauthority "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthority"
 	certificateauthoritycertificate "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthoritycertificate"
+	account "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/account"
+	apikey "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/apikey"
+	authorizer "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/authorizer"
+	basepathmapping "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/basepathmapping"
+	clientcertificate "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/clientcertificate"
+	deployment "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/deployment"
+	documentationpart "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/documentationpart"
+	documentationversion "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/documentationversion"
+	domainname "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/domainname"
+	gatewayresponse "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/gatewayresponse"
+	integration "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/integration"
+	integrationresponse "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/integrationresponse"
+	method "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/method"
+	methodresponse "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/methodresponse"
+	methodsettings "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/methodsettings"
+	model "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/model"
+	requestvalidator "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/requestvalidator"
+	resource "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/resource"
+	restapi "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/restapi"
+	restapipolicy "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/restapipolicy"
+	stage "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/stage"
+	usageplan "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/usageplan"
+	usageplankey "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/usageplankey"
+	vpclink "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/vpclink"
 	api "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/api"
 	apimapping "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/apimapping"
-	authorizer "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/authorizer"
-	deployment "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/deployment"
-	domainname "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/domainname"
-	integration "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/integration"
-	integrationresponse "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/integrationresponse"
-	model "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/model"
+	authorizerapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/authorizer"
+	deploymentapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/deployment"
+	domainnameapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/domainname"
+	integrationapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/integration"
+	integrationresponseapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/integrationresponse"
+	modelapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/model"
 	route "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/route"
 	routeresponse "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/routeresponse"
-	stage "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/stage"
-	vpclink "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/vpclink"
+	stageapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/stage"
+	vpclinkapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/vpclink"
 	workgroup "github.com/upbound/official-providers/provider-aws/internal/controller/athena/workgroup"
 	attachment "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/attachment"
 	autoscalinggroup "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/autoscalinggroup"
@@ -229,7 +253,7 @@ import (
 	replicakey "github.com/upbound/official-providers/provider-aws/internal/controller/kms/replicakey"
 	datalakesettings "github.com/upbound/official-providers/provider-aws/internal/controller/lakeformation/datalakesettings"
 	permissions "github.com/upbound/official-providers/provider-aws/internal/controller/lakeformation/permissions"
-	resource "github.com/upbound/official-providers/provider-aws/internal/controller/lakeformation/resource"
+	resourcelakeformation "github.com/upbound/official-providers/provider-aws/internal/controller/lakeformation/resource"
 	aliaslambda "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/alias"
 	codesigningconfig "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/codesigningconfig"
 	eventsourcemapping "github.com/upbound/official-providers/provider-aws/internal/controller/lambda/eventsourcemapping"
@@ -347,18 +371,42 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		certificateacmpca.Setup,
 		certificateauthority.Setup,
 		certificateauthoritycertificate.Setup,
-		api.Setup,
-		apimapping.Setup,
+		account.Setup,
+		apikey.Setup,
 		authorizer.Setup,
+		basepathmapping.Setup,
+		clientcertificate.Setup,
 		deployment.Setup,
+		documentationpart.Setup,
+		documentationversion.Setup,
 		domainname.Setup,
+		gatewayresponse.Setup,
 		integration.Setup,
 		integrationresponse.Setup,
+		method.Setup,
+		methodresponse.Setup,
+		methodsettings.Setup,
 		model.Setup,
+		requestvalidator.Setup,
+		resource.Setup,
+		restapi.Setup,
+		restapipolicy.Setup,
+		stage.Setup,
+		usageplan.Setup,
+		usageplankey.Setup,
+		vpclink.Setup,
+		api.Setup,
+		apimapping.Setup,
+		authorizerapigatewayv2.Setup,
+		deploymentapigatewayv2.Setup,
+		domainnameapigatewayv2.Setup,
+		integrationapigatewayv2.Setup,
+		integrationresponseapigatewayv2.Setup,
+		modelapigatewayv2.Setup,
 		route.Setup,
 		routeresponse.Setup,
-		stage.Setup,
-		vpclink.Setup,
+		stageapigatewayv2.Setup,
+		vpclinkapigatewayv2.Setup,
 		workgroup.Setup,
 		attachment.Setup,
 		autoscalinggroup.Setup,
@@ -562,7 +610,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		replicakey.Setup,
 		datalakesettings.Setup,
 		permissions.Setup,
-		resource.Setup,
+		resourcelakeformation.Setup,
 		aliaslambda.Setup,
 		codesigningconfig.Setup,
 		eventsourcemapping.Setup,

@@ -858,6 +858,59 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudsearch_domain": config.NameAsIdentifier,
 	// CloudSearch domain service access policies can be imported using the domain name
 	"aws_cloudsearch_domain_service_access_policy": config.IdentifierFromProvider,
+
+	// apigateway
+	//
+	// API Gateway Keys can be imported using the id
+	"aws_api_gateway_api_key": config.IdentifierFromProvider,
+	// API Gateway Client Certificates can be imported using the id
+	"aws_api_gateway_client_certificate": config.IdentifierFromProvider,
+	// aws_api_gateway_rest_api can be imported by using the REST API ID
+	"aws_api_gateway_rest_api": config.IdentifierFromProvider,
+	// API Gateway documentation_parts can be imported using REST-API-ID/DOC-PART-ID
+	"aws_api_gateway_documentation_part": config.IdentifierFromProvider,
+	// API Gateway documentation versions can be imported using REST-API-ID/VERSION
+	"aws_api_gateway_documentation_version": FormattedIdentifierFromProvider("/", "rest_api_id", "version"),
+	// aws_api_gateway_gateway_response can be imported using REST-API-ID/RESPONSE-TYPE
+	"aws_api_gateway_gateway_response": FormattedIdentifierFromProvider("/", "rest_api_id", "response_type"),
+	// aws_api_gateway_resource can be imported using REST-API-ID/RESOURCE-ID
+	"aws_api_gateway_resource": config.IdentifierFromProvider,
+	// aws_api_gateway_method can be imported using REST-API-ID/RESOURCE-ID/HTTP-METHOD
+	"aws_api_gateway_method": FormattedIdentifierFromProvider("/", "rest_api_id", "resource_id", "http_method"),
+	// aws_api_gateway_method_response can be imported using REST-API-ID/RESOURCE-ID/HTTP-METHOD/STATUS-CODE
+	"aws_api_gateway_method_response": FormattedIdentifierFromProvider("/", "rest_api_id", "resource_id", "http_method", "status_code"),
+	// No import
+	"aws_api_gateway_deployment": config.IdentifierFromProvider,
+	// API Gateway Accounts can be imported using the word api-gateway-account
+	"aws_api_gateway_account": config.IdentifierFromProvider,
+	// aws_api_gateway_stage can be imported using REST-API-ID/STAGE-NAME
+	"aws_api_gateway_stage": FormattedIdentifierFromProvider("/", "rest_api_id", "stage_name"),
+	// aws_api_gateway_integration can be imported using REST-API-ID/RESOURCE-ID/HTTP-METHOD
+	"aws_api_gateway_integration": FormattedIdentifierFromProvider("/", "rest_api_id", "resource_id", "http_method"),
+	// aws_api_gateway_integration_response can be imported using REST-API-ID/RESOURCE-ID/HTTP-METHOD/STATUS-CODE
+	"aws_api_gateway_integration_response": FormattedIdentifierFromProvider("/", "rest_api_id", "resource_id", "http_method", "status_code"),
+	// aws_api_gateway_method_settings can be imported using REST-API-ID/STAGE-NAME/METHOD-PATH
+	"aws_api_gateway_method_settings": FormattedIdentifierFromProvider("/", "rest_api_id", "stage_name", "method_path"),
+	// aws_api_gateway_model can be imported using REST-API-ID/NAME
+	"aws_api_gateway_model": config.IdentifierFromProvider,
+	// aws_api_gateway_request_validator can be imported using REST-API-ID/REQUEST-VALIDATOR-ID
+	"aws_api_gateway_request_validator": config.IdentifierFromProvider,
+	// aws_api_gateway_rest_api_policy can be imported by using the REST API ID
+	"aws_api_gateway_rest_api_policy": FormattedIdentifierFromProvider("", "rest_api_id"),
+	// AWS API Gateway Authorizer can be imported using the REST-API-ID/AUTHORIZER-ID
+	"aws_api_gateway_authorizer": config.IdentifierFromProvider,
+	// aws_api_gateway_base_path_mapping can be imported by using the domain name and base path.
+	// For empty base_path (e.g., root path (/)): example.com/
+	// Otherwise: example.com/base-path
+	"aws_api_gateway_base_path_mapping": config.IdentifierFromProvider,
+	// API Gateway domain names can be imported using their name
+	"aws_api_gateway_domain_name": config.IdentifierFromProvider,
+	// AWS API Gateway Usage Plan can be imported using the id
+	"aws_api_gateway_usage_plan": config.IdentifierFromProvider,
+	// AWS API Gateway Usage Plan Key can be imported using the USAGE-PLAN-ID/USAGE-PLAN-KEY-ID
+	"aws_api_gateway_usage_plan_key": config.IdentifierFromProvider,
+	// API Gateway VPC Link can be imported using the id
+	"aws_api_gateway_vpc_link": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
