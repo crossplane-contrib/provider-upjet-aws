@@ -2,10 +2,12 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketNotification
 metadata:
   name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
 spec:
   forProvider:
     region: us-west-1
-    bucket: example
+    bucket: upbound-example
     topic:
     - events:
       - "s3:ObjectCreated:*"

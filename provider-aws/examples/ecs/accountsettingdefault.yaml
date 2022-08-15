@@ -4,5 +4,6 @@ metadata:
   name: example
 spec:
   forProvider:
+    name: taskLongArnFormat
     region: us-west-1
     value: enabled

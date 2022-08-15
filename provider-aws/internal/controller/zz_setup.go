@@ -347,7 +347,6 @@ import (
 	bucketversioning "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketversioning"
 	bucketwebsiteconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketwebsiteconfiguration"
 	object "github.com/upbound/official-providers/provider-aws/internal/controller/s3/object"
-	objectcopy "github.com/upbound/official-providers/provider-aws/internal/controller/s3/objectcopy"
 	secret "github.com/upbound/official-providers/provider-aws/internal/controller/secretsmanager/secret"
 	httpnamespace "github.com/upbound/official-providers/provider-aws/internal/controller/servicediscovery/httpnamespace"
 	privatednsnamespace "github.com/upbound/official-providers/provider-aws/internal/controller/servicediscovery/privatednsnamespace"
@@ -704,7 +703,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		bucketversioning.Setup,
 		bucketwebsiteconfiguration.Setup,
 		object.Setup,
-		objectcopy.Setup,
 		secret.Setup,
 		httpnamespace.Setup,
 		privatednsnamespace.Setup,

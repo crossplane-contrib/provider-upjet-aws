@@ -5,8 +5,8 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    bucket: example
-    targetBucket: sample-bucket-2
+    bucket: upbound-example
+    targetBucket: upbound-example-2
     targetPrefix: log/
   providerConfigRef:
     name: default
