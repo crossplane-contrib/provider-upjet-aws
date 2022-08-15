@@ -124,8 +124,10 @@ type BucketParameters struct {
 	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
 	// The AWS region this bucket resides in.
+	// Region is the region you'd like your resource to be created in.
+	// +terrajet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"region,omitempty"`
+	Region *string `json:"region" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

@@ -35,8 +35,10 @@ type ReplicationConfigurationObservation struct {
 type ReplicationConfigurationParameters struct {
 
 	// A Region to replicate to.
+	// Region is the region you'd like your resource to be created in.
+	// +terrajet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"region,omitempty"`
+	Region *string `json:"region" tf:"-"`
 
 	// Replication configuration for a registry. See Replication Configuration.
 	// +kubebuilder:validation:Optional

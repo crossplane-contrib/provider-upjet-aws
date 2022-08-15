@@ -13,6 +13,7 @@ import (
 
 	"github.com/upbound/official-providers/provider-aws/config/acm"
 	"github.com/upbound/official-providers/provider-aws/config/acmpca"
+	"github.com/upbound/official-providers/provider-aws/config/apigateway"
 	"github.com/upbound/official-providers/provider-aws/config/apigatewayv2"
 	"github.com/upbound/official-providers/provider-aws/config/athena"
 	"github.com/upbound/official-providers/provider-aws/config/autoscaling"
@@ -34,6 +35,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/elasticache"
 	"github.com/upbound/official-providers/provider-aws/config/elasticloadbalancing"
 	"github.com/upbound/official-providers/provider-aws/config/elb"
+	"github.com/upbound/official-providers/provider-aws/config/elbv2"
 	"github.com/upbound/official-providers/provider-aws/config/firehose"
 	"github.com/upbound/official-providers/provider-aws/config/gamelift"
 	"github.com/upbound/official-providers/provider-aws/config/globalaccelerator"
@@ -163,6 +165,8 @@ func GetProvider() *config.Provider {
 		dax.Configure,
 		apigatewayv2.Configure,
 		cloudsearch.Configure,
+		apigateway.Configure,
+		elbv2.Configure,
 	} {
 		configure(pc)
 	}

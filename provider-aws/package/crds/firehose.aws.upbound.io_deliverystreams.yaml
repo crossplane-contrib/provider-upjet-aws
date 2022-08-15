@@ -1808,7 +1808,8 @@ spec:
                     type: array
                   region:
                     description: If you don't specify an AWS Region, the default is
-                      the current region.
+                      the current region. Region is the region you'd like your resource
+                      to be created in.
                     type: string
                   s3Configuration:
                     description: Required for non-S3 destinations. For S3 destination,
