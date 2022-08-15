@@ -4,7 +4,8 @@ metadata:
   name: sample-service
 spec:
   forProvider:
-    taskDefinition: sample-task:1
-    cluster: sample-cluster
-    region: us-east-2
+    taskDefinition: service
+    cluster: example
+    region: us-west-1
+    launchType: EC2
     propagateTags: TASK_DEFINITION
