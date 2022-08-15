@@ -16,11 +16,14 @@ import (
 type BucketLoggingObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Set of configuration blocks with information for granting permissions documented below.
+	// +kubebuilder:validation:Optional
 	TargetGrant []TargetGrantObservation `json:"targetGrant,omitempty" tf:"target_grant,omitempty"`
 }
 
 type BucketLoggingParameters struct {
 
+	// The name of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -32,6 +35,7 @@ type BucketLoggingParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// The account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
@@ -40,6 +44,7 @@ type BucketLoggingParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The name of the bucket where you want Amazon S3 to store server access logs.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -51,9 +56,11 @@ type BucketLoggingParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetBucketSelector *v1.Selector `json:"targetBucketSelector,omitempty" tf:"-"`
 
+	// Set of configuration blocks with information for granting permissions documented below.
 	// +kubebuilder:validation:Optional
 	TargetGrant []TargetGrantParameters `json:"targetGrant,omitempty" tf:"target_grant,omitempty"`
 
+	// A prefix for all log object keys.
 	// +kubebuilder:validation:Required
 	TargetPrefix *string `json:"targetPrefix" tf:"target_prefix,omitempty"`
 }
@@ -64,28 +71,36 @@ type TargetGrantGranteeObservation struct {
 
 type TargetGrantGranteeParameters struct {
 
+	// Email address of the grantee. See Regions and Endpoints for supported AWS regions where this argument can be specified.
 	// +kubebuilder:validation:Optional
 	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Type of grantee. Valid values: CanonicalUser, AmazonCustomerByEmail, Group.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
+	// URI of the grantee group.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type TargetGrantObservation struct {
+
+	// A configuration block for the person being granted permissions documented below.
+	// +kubebuilder:validation:Required
 	Grantee []TargetGrantGranteeObservation `json:"grantee,omitempty" tf:"grantee,omitempty"`
 }
 
 type TargetGrantParameters struct {
 
+	// A configuration block for the person being granted permissions documented below.
 	// +kubebuilder:validation:Required
 	Grantee []TargetGrantGranteeParameters `json:"grantee" tf:"grantee,omitempty"`
 
+	// Logging permissions assigned to the grantee for the bucket. Valid values: FULL_CONTROL, READ, WRITE.
 	// +kubebuilder:validation:Required
 	Permission *string `json:"permission" tf:"permission,omitempty"`
 }
@@ -104,7 +119,7 @@ type BucketLoggingStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketLogging is the Schema for the BucketLoggings API
+// BucketLogging is the Schema for the BucketLoggings API. Provides an S3 bucket (server access) logging resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

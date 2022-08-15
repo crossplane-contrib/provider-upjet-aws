@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Model is the Schema for the Models API
+        description: Model is the Schema for the Models API. Manages an Amazon API
+          Gateway Version 2 model.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiId:
+                    description: The API identifier.
                     type: string
                   apiIdRef:
                     description: A Reference to a named object.
@@ -139,16 +141,25 @@ spec:
                         type: object
                     type: object
                   contentType:
+                    description: The content-type for the model, for example, application/json.
+                      Must be between 1 and 256 characters in length.
                     type: string
                   description:
+                    description: The description of the model. Must be between 1 and
+                      128 characters in length.
                     type: string
                   name:
+                    description: The name of the model. Must be alphanumeric. Must
+                      be between 1 and 128 characters in length.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   schema:
+                    description: The schema for the model. This should be a JSON schema
+                      draft 4 model. Must be less than or equal to 32768 characters
+                      in length.
                     type: string
                 required:
                 - contentType
@@ -333,6 +344,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The model identifier.
                     type: string
                 type: object
               conditions:

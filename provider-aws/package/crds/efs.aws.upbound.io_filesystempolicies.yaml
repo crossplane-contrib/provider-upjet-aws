@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: FileSystemPolicy is the Schema for the FileSystemPolicys API
+        description: FileSystemPolicy is the Schema for the FileSystemPolicys API.
+          Provides an Elastic File System (EFS) File System Policy resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,17 @@ spec:
               forProvider:
                 properties:
                   bypassPolicyLockoutSafetyCheck:
+                    description: A flag to indicate whether to bypass the aws_efs_file_system_policy
+                      lockout safety check. The policy lockout safety check determines
+                      whether the policy in the request will prevent the principal
+                      making the request will be locked out from making future PutFileSystemPolicy
+                      requests on the file system. Set bypass_policy_lockout_safety_check
+                      to true only when you intend to prevent the principal that is
+                      making the request from making a subsequent PutFileSystemPolicy
+                      request on the file system. The default value is false.
                     type: boolean
                   fileSystemId:
+                    description: The ID of the EFS file system.
                     type: string
                   fileSystemIdRef:
                     description: A Reference to a named object.
@@ -141,6 +151,8 @@ spec:
                         type: object
                     type: object
                   policy:
+                    description: The JSON formatted file system policy for the EFS
+                      file system. see Docs for more info.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -327,6 +339,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID that identifies the file system .
                     type: string
                 type: object
               conditions:

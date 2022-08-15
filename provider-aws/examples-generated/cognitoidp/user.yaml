@@ -1,16 +1,15 @@
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
-kind: UserPoolClient
+kind: User
 metadata:
   labels:
-    testing.upbound.io/example-name: client
-  name: client
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    name: client
     region: us-west-1
     userPoolIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: pool
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -18,9 +17,12 @@ apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: UserPool
 metadata:
   labels:
-    testing.upbound.io/example-name: pool
-  name: pool
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    name: pool
+    name: MyExamplePool
     region: us-west-1
+
+---
+

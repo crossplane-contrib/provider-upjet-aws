@@ -14,17 +14,22 @@ import (
 )
 
 type ThingObservation struct {
+
+	// The ARN of the thing.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The default client ID.
 	DefaultClientID *string `json:"defaultClientId,omitempty" tf:"default_client_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The current version of the thing record in the registry.
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ThingParameters struct {
 
+	// Map of attributes of the thing.
 	// +kubebuilder:validation:Optional
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
@@ -33,6 +38,7 @@ type ThingParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The thing type name.
 	// +kubebuilder:validation:Optional
 	ThingTypeName *string `json:"thingTypeName,omitempty" tf:"thing_type_name,omitempty"`
 }
@@ -51,7 +57,7 @@ type ThingStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Thing is the Schema for the Things API
+// Thing is the Schema for the Things API. Creates and manages an AWS IoT Thing.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

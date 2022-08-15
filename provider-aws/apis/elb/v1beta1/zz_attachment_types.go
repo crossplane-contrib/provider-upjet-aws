@@ -19,6 +19,7 @@ type AttachmentObservation struct {
 
 type AttachmentParameters struct {
 
+	// The name of the ELB.
 	// +crossplane:generate:reference:type=ELB
 	// +kubebuilder:validation:Optional
 	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
@@ -29,6 +30,7 @@ type AttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
 
+	// Instance ID to place in the ELB pool.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Instance
 	// +kubebuilder:validation:Optional
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
@@ -59,7 +61,7 @@ type AttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Attachment is the Schema for the Attachments API
+// Attachment is the Schema for the Attachments API. Provides an Elastic Load Balancer Attachment resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -18,6 +18,7 @@ type CertificateConfigurationObservation struct {
 
 type CertificateConfigurationParameters struct {
 
+	// Indicates whether a TLS/SSL certificate is generated for a fleet. Valid values are DISABLED and GENERATED. Default value is DISABLED.
 	// +kubebuilder:validation:Optional
 	CertificateType *string `json:"certificateType,omitempty" tf:"certificate_type,omitempty"`
 }
@@ -27,37 +28,49 @@ type EC2InboundPermissionObservation struct {
 
 type EC2InboundPermissionParameters struct {
 
+	// Starting value for a range of allowed port numbers.
 	// +kubebuilder:validation:Required
 	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
+	// Range of allowed IP addresses expressed in CIDR notationE.g., 000.000.000.000/[subnet mask] or 0.0.0.0/[subnet mask].
 	// +kubebuilder:validation:Required
 	IPRange *string `json:"ipRange" tf:"ip_range,omitempty"`
 
+	// Network communication protocol used by the fleetE.g., TCP or UDP
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
+	// Ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than from_port.
 	// +kubebuilder:validation:Required
 	ToPort *float64 `json:"toPort" tf:"to_port,omitempty"`
 }
 
 type FleetObservation struct {
+
+	// Fleet ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Build ARN.
 	BuildArn *string `json:"buildArn,omitempty" tf:"build_arn,omitempty"`
 
+	// Fleet ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	LogPaths []*string `json:"logPaths,omitempty" tf:"log_paths,omitempty"`
 
+	// Operating system of the fleet's computing resources.
 	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
 
+	// Script ARN.
 	ScriptArn *string `json:"scriptArn,omitempty" tf:"script_arn,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type FleetParameters struct {
 
+	// ID of the GameLift Build to be deployed on the fleet.
 	// +crossplane:generate:reference:type=Build
 	// +kubebuilder:validation:Optional
 	BuildID *string `json:"buildId,omitempty" tf:"build_id,omitempty"`
@@ -68,21 +81,27 @@ type FleetParameters struct {
 	// +kubebuilder:validation:Optional
 	BuildIDSelector *v1.Selector `json:"buildIdSelector,omitempty" tf:"-"`
 
+	// Prompts GameLift to generate a TLS/SSL certificate for the fleet. See certificate_configuration.
 	// +kubebuilder:validation:Optional
 	CertificateConfiguration []CertificateConfigurationParameters `json:"certificateConfiguration,omitempty" tf:"certificate_configuration,omitempty"`
 
+	// Human-readable description of the fleet.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Range of IP addresses and port settings that permit inbound traffic to access server processes running on the fleet. See below.
 	// +kubebuilder:validation:Optional
 	EC2InboundPermission []EC2InboundPermissionParameters `json:"ec2InboundPermission,omitempty" tf:"ec2_inbound_permission,omitempty"`
 
+	// Name of an EC2 instance typeE.g., t2.micro
 	// +kubebuilder:validation:Required
 	EC2InstanceType *string `json:"ec2InstanceType" tf:"ec2_instance_type,omitempty"`
 
+	// Type of fleet. This value must be ON_DEMAND or SPOT. Defaults to ON_DEMAND.
 	// +kubebuilder:validation:Optional
 	FleetType *string `json:"fleetType,omitempty" tf:"fleet_type,omitempty"`
 
+	// ARN of an IAM role that instances in the fleet can assume.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -94,12 +113,15 @@ type FleetParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceRoleArnSelector *v1.Selector `json:"instanceRoleArnSelector,omitempty" tf:"-"`
 
+	// List of names of metric groups to add this fleet to. A metric group tracks metrics across all fleets in the group. Defaults to default.
 	// +kubebuilder:validation:Optional
 	MetricGroups []*string `json:"metricGroups,omitempty" tf:"metric_groups,omitempty"`
 
+	// The name of the fleet.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Game session protection policy to apply to all instances in this fleetE.g., FullProtection. Defaults to NoProtection.
 	// +kubebuilder:validation:Optional
 	NewGameSessionProtectionPolicy *string `json:"newGameSessionProtectionPolicy,omitempty" tf:"new_game_session_protection_policy,omitempty"`
 
@@ -108,15 +130,19 @@ type FleetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Policy that limits the number of game sessions an individual player can create over a span of time for this fleet. See below.
 	// +kubebuilder:validation:Optional
 	ResourceCreationLimitPolicy []ResourceCreationLimitPolicyParameters `json:"resourceCreationLimitPolicy,omitempty" tf:"resource_creation_limit_policy,omitempty"`
 
+	// Instructions for launching server processes on each instance in the fleet. See below.
 	// +kubebuilder:validation:Optional
 	RuntimeConfiguration []RuntimeConfigurationParameters `json:"runtimeConfiguration,omitempty" tf:"runtime_configuration,omitempty"`
 
+	// ID of the GameLift Script to be deployed on the fleet.
 	// +kubebuilder:validation:Optional
 	ScriptID *string `json:"scriptId,omitempty" tf:"script_id,omitempty"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -126,9 +152,11 @@ type ResourceCreationLimitPolicyObservation struct {
 
 type ResourceCreationLimitPolicyParameters struct {
 
+	// Maximum number of game sessions that an individual can create during the policy period.
 	// +kubebuilder:validation:Optional
 	NewGameSessionsPerCreator *float64 `json:"newGameSessionsPerCreator,omitempty" tf:"new_game_sessions_per_creator,omitempty"`
 
+	// Time span used in evaluating the resource creation limit policy.
 	// +kubebuilder:validation:Optional
 	PolicyPeriodInMinutes *float64 `json:"policyPeriodInMinutes,omitempty" tf:"policy_period_in_minutes,omitempty"`
 }
@@ -138,12 +166,15 @@ type RuntimeConfigurationObservation struct {
 
 type RuntimeConfigurationParameters struct {
 
+	// Maximum amount of time  that a game session can remain in status ACTIVATING.
 	// +kubebuilder:validation:Optional
 	GameSessionActivationTimeoutSeconds *float64 `json:"gameSessionActivationTimeoutSeconds,omitempty" tf:"game_session_activation_timeout_seconds,omitempty"`
 
+	// Maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously.
 	// +kubebuilder:validation:Optional
 	MaxConcurrentGameSessionActivations *float64 `json:"maxConcurrentGameSessionActivations,omitempty" tf:"max_concurrent_game_session_activations,omitempty"`
 
+	// Collection of server process configurations that describe which server processes to run on each instance in a fleet. See below.
 	// +kubebuilder:validation:Optional
 	ServerProcess []ServerProcessParameters `json:"serverProcess,omitempty" tf:"server_process,omitempty"`
 }
@@ -153,12 +184,15 @@ type ServerProcessObservation struct {
 
 type ServerProcessParameters struct {
 
+	// Number of server processes using this configuration to run concurrently on an instance.
 	// +kubebuilder:validation:Required
 	ConcurrentExecutions *float64 `json:"concurrentExecutions" tf:"concurrent_executions,omitempty"`
 
+	// Location of the server executable in a game build. All game builds are installed on instances at the root : for Windows instances C:\game, and for Linux instances /local/game.
 	// +kubebuilder:validation:Required
 	LaunchPath *string `json:"launchPath" tf:"launch_path,omitempty"`
 
+	// Optional list of parameters to pass to the server executable on launch.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
@@ -177,7 +211,7 @@ type FleetStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Fleet is the Schema for the Fleets API
+// Fleet is the Schema for the Fleets API. Provides a GameLift Fleet resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

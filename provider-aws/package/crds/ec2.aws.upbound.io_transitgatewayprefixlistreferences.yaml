@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: TransitGatewayPrefixListReference is the Schema for the TransitGatewayPrefixListReferences
-          API
+          API. Manages an EC2 Transit Gateway Prefix List Reference
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,11 @@ spec:
               forProvider:
                 properties:
                   blackhole:
+                    description: Indicates whether to drop traffic that matches the
+                      Prefix List. Defaults to false.
                     type: boolean
                   prefixListId:
+                    description: Identifier of EC2 Prefix List.
                     type: string
                   prefixListIdRef:
                     description: A Reference to a named object.
@@ -147,6 +150,7 @@ spec:
                       be created in.
                     type: string
                   transitGatewayAttachmentId:
+                    description: Identifier of EC2 Transit Gateway Attachment.
                     type: string
                   transitGatewayAttachmentIdRef:
                     description: A Reference to a named object.
@@ -222,6 +226,7 @@ spec:
                         type: object
                     type: object
                   transitGatewayRouteTableId:
+                    description: Identifier of EC2 Transit Gateway Route Table.
                     type: string
                   transitGatewayRouteTableIdRef:
                     description: A Reference to a named object.
@@ -477,6 +482,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: EC2 Transit Gateway Route Table identifier and EC2
+                      Prefix List identifier, separated by an underscore
                     type: string
                   prefixListOwnerId:
                     type: string

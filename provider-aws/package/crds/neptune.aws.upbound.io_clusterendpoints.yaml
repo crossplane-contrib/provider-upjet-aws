@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ClusterEndpoint is the Schema for the ClusterEndpoints API
+        description: ClusterEndpoint is the Schema for the ClusterEndpoints API. Provides
+          an Neptune Cluster Endpoint Resource
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   clusterIdentifier:
+                    description: The DB cluster identifier of the DB cluster associated
+                      with the endpoint.
                     type: string
                   clusterIdentifierRef:
                     description: A Reference to a named object.
@@ -139,8 +142,14 @@ spec:
                         type: object
                     type: object
                   endpointType:
+                    description: 'The type of the endpoint. One of: READER, WRITER,
+                      ANY.'
                     type: string
                   excludedMembers:
+                    description: List of DB instance identifiers that aren't part
+                      of the custom endpoint group. All other eligible instances are
+                      reachable through the custom endpoint. Only relevant if the
+                      list of static members is empty.
                     items:
                       type: string
                     type: array
@@ -149,12 +158,18 @@ spec:
                       be created in.
                     type: string
                   staticMembers:
+                    description: List of DB instance identifiers that are part of
+                      the custom endpoint group.
                     items:
                       type: string
                     type: array
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the Neptune cluster. If
+                      configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                 required:
                 - endpointType
@@ -337,14 +352,21 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Neptune Cluster Endpoint Amazon Resource Name
+                      .
                     type: string
                   endpoint:
+                    description: The DNS address of the endpoint.
                     type: string
                   id:
+                    description: The Neptune Cluster Endpoint Identifier.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

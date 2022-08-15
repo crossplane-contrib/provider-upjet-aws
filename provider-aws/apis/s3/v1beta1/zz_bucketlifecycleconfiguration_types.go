@@ -18,6 +18,7 @@ type AbortIncompleteMultipartUploadObservation struct {
 
 type AbortIncompleteMultipartUploadParameters struct {
 
+	// The number of days after which Amazon S3 aborts an incomplete multipart upload.
 	// +kubebuilder:validation:Optional
 	DaysAfterInitiation *float64 `json:"daysAfterInitiation,omitempty" tf:"days_after_initiation,omitempty"`
 }
@@ -36,6 +37,7 @@ type AndParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// Key-value map of resource tags. All of these tags must exist in the object's tag set in order for the rule to apply.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -46,6 +48,7 @@ type BucketLifecycleConfigurationObservation struct {
 
 type BucketLifecycleConfigurationParameters struct {
 
+	// The name of the source S3 bucket you want Amazon S3 to monitor.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -57,6 +60,7 @@ type BucketLifecycleConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP 403  error.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
@@ -65,6 +69,7 @@ type BucketLifecycleConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// List of configuration blocks describing the rules managing the replication documented below.
 	// +kubebuilder:validation:Required
 	Rule []BucketLifecycleConfigurationRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
@@ -74,30 +79,37 @@ type BucketLifecycleConfigurationRuleObservation struct {
 
 type BucketLifecycleConfigurationRuleParameters struct {
 
+	// Configuration block that specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload documented below.
 	// +kubebuilder:validation:Optional
 	AbortIncompleteMultipartUpload []AbortIncompleteMultipartUploadParameters `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
 
+	// Configuration block that specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker documented below.
 	// +kubebuilder:validation:Optional
 	Expiration []RuleExpirationParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
+	// Configuration block used to identify objects that a Lifecycle Rule applies to documented below. If not specified, the rule will default to using prefix.
 	// +kubebuilder:validation:Optional
 	Filter []RuleFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// +kubebuilder:validation:Required
 	ID *string `json:"id" tf:"id,omitempty"`
 
+	// Configuration block that specifies when noncurrent object versions expire documented below.
 	// +kubebuilder:validation:Optional
 	NoncurrentVersionExpiration []RuleNoncurrentVersionExpirationParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
 
+	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class documented below.
 	// +kubebuilder:validation:Optional
 	NoncurrentVersionTransition []RuleNoncurrentVersionTransitionParameters `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// Whether the rule is currently being applied. Valid values: Enabled or Disabled.
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 
+	// Set of configuration blocks that specify when an Amazon S3 object transitions to a specified storage class documented below.
 	// +kubebuilder:validation:Optional
 	Transition []RuleTransitionParameters `json:"transition,omitempty" tf:"transition,omitempty"`
 }
@@ -113,6 +125,7 @@ type RuleExpirationParameters struct {
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
+	// Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action.
 	// +kubebuilder:validation:Optional
 	ExpiredObjectDeleteMarker *bool `json:"expiredObjectDeleteMarker,omitempty" tf:"expired_object_delete_marker,omitempty"`
 }
@@ -122,6 +135,7 @@ type RuleFilterObservation struct {
 
 type RuleFilterParameters struct {
 
+	// Configuration block used to apply a logical AND to two or more predicates documented below. The Lifecycle Rule will apply to any object matching all the predicates configured inside the and block.
 	// +kubebuilder:validation:Optional
 	And []AndParameters `json:"and,omitempty" tf:"and,omitempty"`
 
@@ -134,6 +148,7 @@ type RuleFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// A configuration block for specifying a tag key and value documented below.
 	// +kubebuilder:validation:Optional
 	Tag []TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }
@@ -185,9 +200,11 @@ type TagObservation struct {
 
 type TagParameters struct {
 
+	// Name of the object key.
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
 
+	// Value of the tag.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -206,7 +223,7 @@ type BucketLifecycleConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketLifecycleConfiguration is the Schema for the BucketLifecycleConfigurations API
+// BucketLifecycleConfiguration is the Schema for the BucketLifecycleConfigurations API. Provides a S3 bucket lifecycle configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

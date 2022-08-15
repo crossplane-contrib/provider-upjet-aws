@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: CodeSigningConfig is the Schema for the CodeSigningConfigs API
+        description: CodeSigningConfig is the Schema for the CodeSigningConfigs API.
+          Provides a Lambda Code Signing Config resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,9 +65,14 @@ spec:
               forProvider:
                 properties:
                   allowedPublishers:
+                    description: A configuration block of allowed publishers as signing
+                      profiles for this code signing configuration. Detailed below.
                     items:
                       properties:
                         signingProfileVersionArns:
+                          description: The Amazon Resource Name  for each of the signing
+                            profiles. A signing profile defines a trusted user who
+                            can sign a code package.
                           items:
                             type: string
                           type: array
@@ -152,11 +158,21 @@ spec:
                       type: object
                     type: array
                   description:
+                    description: Descriptive name for this code signing configuration.
                     type: string
                   policies:
+                    description: A configuration block of code signing policies that
+                      define the actions to take if the validation checks fail. Detailed
+                      below.
                     items:
                       properties:
                         untrustedArtifactOnDeployment:
+                          description: 'Code signing configuration policy for deployment
+                            validation failure. If you set the policy to Enforce,
+                            Lambda blocks the deployment request if code-signing validation
+                            checks fail. If you set the policy to Warn, Lambda allows
+                            the deployment and creates a CloudWatch log. Valid values:
+                            Warn, Enforce. Default value: Warn.'
                           type: string
                       required:
                       - untrustedArtifactOnDeployment
@@ -347,12 +363,16 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  of the code signing configuration.
                     type: string
                   configId:
+                    description: Unique identifier for the code signing configuration.
                     type: string
                   id:
                     type: string
                   lastModified:
+                    description: The date and time that the code signing configuration
+                      was last modified.
                     type: string
                 type: object
               conditions:

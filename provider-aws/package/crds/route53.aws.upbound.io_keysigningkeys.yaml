@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: KeySigningKey is the Schema for the KeySigningKeys API
+        description: KeySigningKey is the Schema for the KeySigningKeys API. Manages
+          an Route 53 Key Signing Key
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   hostedZoneId:
+                    description: Identifier of the Route 53 Hosted Zone.
                     type: string
                   hostedZoneIdRef:
                     description: A Reference to a named object.
@@ -139,6 +141,11 @@ spec:
                         type: object
                     type: object
                   keyManagementServiceArn:
+                    description: Amazon Resource Name  of the Key Management Service  Key.
+                      This must be unique for each key-signing key  in a single hosted
+                      zone. This key must be in the us-east-1 Region and meet certain
+                      requirements, which are described in the Route 53 Developer
+                      Guide and Route 53 API Reference.
                     type: string
                   keyManagementServiceArnRef:
                     description: A Reference to a named object.
@@ -218,6 +225,8 @@ spec:
                       be created in.
                     type: string
                   status:
+                    description: 'Status of the key-signing key . Valid values: ACTIVE,
+                      INACTIVE. Defaults to ACTIVE.'
                     type: string
                 required:
                 - region
@@ -399,26 +408,53 @@ spec:
               atProvider:
                 properties:
                   digestAlgorithmMnemonic:
+                    description: A string used to represent the delegation signer
+                      digest algorithm. This value must follow the guidelines provided
+                      by RFC-8624 Section 3.3.
                     type: string
                   digestAlgorithmType:
+                    description: An integer used to represent the delegation signer
+                      digest algorithm. This value must follow the guidelines provided
+                      by RFC-8624 Section 3.3.
                     type: number
                   digestValue:
+                    description: A cryptographic digest of a DNSKEY resource record
+                      . DNSKEY records are used to publish the public key that resolvers
+                      can use to verify DNSSEC signatures that are used to secure
+                      certain kinds of information provided by the DNS system.
                     type: string
                   dnskeyRecord:
+                    description: A string that represents a DNSKEY record.
                     type: string
                   dsRecord:
+                    description: A string that represents a delegation signer  record.
                     type: string
                   flag:
+                    description: An integer that specifies how the key is used. For
+                      key-signing key , this value is always 257.
                     type: number
                   id:
+                    description: Route 53 Hosted Zone identifier and KMS Key identifier,
+                      separated by a comma .
                     type: string
                   keyTag:
+                    description: An integer used to identify the DNSSEC record for
+                      the domain name. The process used to calculate the value is
+                      described in RFC-4034 Appendix B.
                     type: number
                   publicKey:
+                    description: The public key, represented as a Base64 encoding,
+                      as required by RFC-4034 Page 5.
                     type: string
                   signingAlgorithmMnemonic:
+                    description: A string used to represent the signing algorithm.
+                      This value must follow the guidelines provided by RFC-8624 Section
+                      3.1.
                     type: string
                   signingAlgorithmType:
+                    description: An integer used to represent the signing algorithm.
+                      This value must follow the guidelines provided by RFC-8624 Section
+                      3.1.
                     type: number
                 type: object
               conditions:

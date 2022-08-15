@@ -21,9 +21,11 @@ type CloudwatchLoggingOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -36,6 +38,7 @@ type CommonAttributesParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The value of the HTTP endpoint common attribute.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -48,70 +51,91 @@ type DataFormatConversionConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Nested argument that specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. More details below.
 	// +kubebuilder:validation:Required
 	InputFormatConfiguration []InputFormatConfigurationParameters `json:"inputFormatConfiguration" tf:"input_format_configuration,omitempty"`
 
+	// Nested argument that specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. More details below.
 	// +kubebuilder:validation:Required
 	OutputFormatConfiguration []OutputFormatConfigurationParameters `json:"outputFormatConfiguration" tf:"output_format_configuration,omitempty"`
 
+	// Nested argument that specifies the AWS Glue Data Catalog table that contains the column information. More details below.
 	// +kubebuilder:validation:Required
 	SchemaConfiguration []SchemaConfigurationParameters `json:"schemaConfiguration" tf:"schema_configuration,omitempty"`
 }
 
 type DeliveryStreamObservation struct {
+
+	// Configuration options if elasticsearch is the destination. More details are given below.
+	// +kubebuilder:validation:Optional
 	ElasticsearchConfiguration []ElasticsearchConfigurationObservation `json:"elasticsearchConfiguration,omitempty" tf:"elasticsearch_configuration,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type DeliveryStreamParameters struct {
 
+	// The Amazon Resource Name  specifying the Stream
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// –  This is the destination to where the data is delivered. The only options are s3 , extended_s3, redshift, elasticsearch, splunk, and http_endpoint.
 	// +kubebuilder:validation:Required
 	Destination *string `json:"destination" tf:"destination,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	DestinationID *string `json:"destinationId,omitempty" tf:"destination_id,omitempty"`
 
+	// Configuration options if elasticsearch is the destination. More details are given below.
 	// +kubebuilder:validation:Optional
 	ElasticsearchConfiguration []ElasticsearchConfigurationParameters `json:"elasticsearchConfiguration,omitempty" tf:"elasticsearch_configuration,omitempty"`
 
+	// Enhanced configuration options for the s3 destination. More details are given below.
 	// +kubebuilder:validation:Optional
 	ExtendedS3Configuration []ExtendedS3ConfigurationParameters `json:"extendedS3Configuration,omitempty" tf:"extended_s3_configuration,omitempty"`
 
+	// Configuration options if http_endpoint is the destination. requires the user to also specify a s3_configuration block.  More details are given below.
 	// +kubebuilder:validation:Optional
 	HTTPEndpointConfiguration []HTTPEndpointConfigurationParameters `json:"httpEndpointConfiguration,omitempty" tf:"http_endpoint_configuration,omitempty"`
 
+	// Allows the ability to specify the kinesis stream that is used as the source of the firehose delivery stream.
 	// +kubebuilder:validation:Optional
 	KinesisSourceConfiguration []KinesisSourceConfigurationParameters `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Configuration options if redshift is the destination.
+	// Using redshift_configuration requires the user to also specify a
+	// s3_configuration block. More details are given below.
 	// +kubebuilder:validation:Optional
 	RedshiftConfiguration []RedshiftConfigurationParameters `json:"redshiftConfiguration,omitempty" tf:"redshift_configuration,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// If you don't specify an AWS Region, the default is the current region.
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
+	// Required for non-S3 destinations. For S3 destination, use extended_s3_configuration instead. Configuration options for the s3 destination . More details are given below.
 	// +kubebuilder:validation:Optional
 	S3Configuration []S3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
+	// Encrypt at rest options.
+	// Server-side encryption should not be enabled when a kinesis stream is configured as the source of the firehose delivery stream.
 	// +kubebuilder:validation:Optional
 	ServerSideEncryption []ServerSideEncryptionParameters `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
+	// Configuration options if splunk is the destination. More details are given below.
 	// +kubebuilder:validation:Optional
 	SplunkConfiguration []SplunkConfigurationParameters `json:"splunkConfiguration,omitempty" tf:"splunk_configuration,omitempty"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Specifies the table version for the output data schema. Defaults to LATEST.
 	// +kubebuilder:validation:Optional
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
@@ -121,9 +145,11 @@ type DeserializerObservation struct {
 
 type DeserializerParameters struct {
 
+	// Nested argument that specifies the native Hive / HCatalog JsonSerDe. More details below.
 	// +kubebuilder:validation:Optional
 	HiveJSONSerDe []HiveJSONSerDeParameters `json:"hiveJsonSerDe,omitempty" tf:"hive_json_ser_de,omitempty"`
 
+	// Nested argument that specifies the OpenX SerDe. More details below.
 	// +kubebuilder:validation:Optional
 	OpenXJSONSerDe []OpenXJSONSerDeParameters `json:"openXJsonSerDe,omitempty" tf:"open_x_json_ser_de,omitempty"`
 }
@@ -141,6 +167,9 @@ type DynamicPartitioningConfigurationParameters struct {
 }
 
 type ElasticsearchConfigurationObservation struct {
+
+	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. More details are given below
+	// +kubebuilder:validation:Optional
 	VPCConfig []VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
@@ -155,15 +184,19 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []CloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
+	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
 	// +kubebuilder:validation:Optional
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
 
+	// The ARN of the Amazon ES domain.  The IAM role must have permission for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig after assuming RoleARN.  The pattern needs to be arn:.*. Conflicts with cluster_endpoint.
 	// +kubebuilder:validation:Optional
 	DomainArn *string `json:"domainArn,omitempty" tf:"domain_arn,omitempty"`
 
+	// The Elasticsearch index name.
 	// +kubebuilder:validation:Required
 	IndexName *string `json:"indexName" tf:"index_name,omitempty"`
 
+	// The Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	// +kubebuilder:validation:Optional
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
@@ -187,9 +220,11 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
+	// The Elasticsearch type name with maximum length of 100 characters.
 	// +kubebuilder:validation:Optional
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
+	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. More details are given below
 	// +kubebuilder:validation:Optional
 	VPCConfig []VPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
@@ -202,9 +237,11 @@ type ExtendedS3ConfigurationCloudwatchLoggingOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -214,6 +251,7 @@ type ExtendedS3ConfigurationObservation struct {
 
 type ExtendedS3ConfigurationParameters struct {
 
+	// The ARN of the S3 bucket
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -225,30 +263,40 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
+	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	// +kubebuilder:validation:Optional
 	BufferInterval *float64 `json:"bufferInterval,omitempty" tf:"buffer_interval,omitempty"`
 
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.
+	// We recommend setting SizeInMBs to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec set SizeInMBs to be 10 MB or higher.
 	// +kubebuilder:validation:Optional
 	BufferSize *float64 `json:"bufferSize,omitempty" tf:"buffer_size,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []ExtendedS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
+	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
+	// Nested argument for the serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3. More details given below.
 	// +kubebuilder:validation:Optional
 	DataFormatConversionConfiguration []DataFormatConversionConfigurationParameters `json:"dataFormatConversionConfiguration,omitempty" tf:"data_format_conversion_configuration,omitempty"`
 
+	// The configuration for dynamic partitioning. See Dynamic Partitioning Configuration below for more details.
 	// +kubebuilder:validation:Optional
 	DynamicPartitioningConfiguration []DynamicPartitioningConfigurationParameters `json:"dynamicPartitioningConfiguration,omitempty" tf:"dynamic_partitioning_configuration,omitempty"`
 
+	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
+	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
+	// be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
+	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -281,6 +329,7 @@ type ExtendedS3ConfigurationProcessingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Array of data processors. More details are given below
 	// +kubebuilder:validation:Optional
 	Processors []ProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
@@ -293,9 +342,11 @@ type HTTPEndpointConfigurationCloudwatchLoggingOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -305,6 +356,7 @@ type HTTPEndpointConfigurationObservation struct {
 
 type HTTPEndpointConfigurationParameters struct {
 
+	// The access key required for Kinesis Firehose to authenticate with the HTTP endpoint selected as the destination.
 	// +kubebuilder:validation:Optional
 	AccessKeySecretRef *v1.SecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
 
@@ -323,6 +375,7 @@ type HTTPEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []HTTPEndpointConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
+	// The request configuration.  More details are given below.
 	// +kubebuilder:validation:Optional
 	RequestConfiguration []RequestConfigurationParameters `json:"requestConfiguration,omitempty" tf:"request_configuration,omitempty"`
 
@@ -343,6 +396,7 @@ type HTTPEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
+	// The HTTP endpoint URL to which Kinesis Firehose sends your data.
 	// +kubebuilder:validation:Required
 	URL *string `json:"url" tf:"url,omitempty"`
 }
@@ -355,6 +409,7 @@ type HTTPEndpointConfigurationProcessingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Array of data processors. More details are given below
 	// +kubebuilder:validation:Optional
 	Processors []HTTPEndpointConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
@@ -364,9 +419,11 @@ type HTTPEndpointConfigurationProcessingConfigurationProcessorsObservation struc
 
 type HTTPEndpointConfigurationProcessingConfigurationProcessorsParameters struct {
 
+	// Array of processor parameters. More details are given below
 	// +kubebuilder:validation:Optional
 	Parameters []ProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -376,6 +433,7 @@ type HiveJSONSerDeObservation struct {
 
 type HiveJSONSerDeParameters struct {
 
+	// A list of how you want Kinesis Data Firehose to parse the date and time stamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see Class DateTimeFormat. You can also use the special value millis to parse time stamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses java.sql.Timestamp::valueOf by default.
 	// +kubebuilder:validation:Optional
 	TimestampFormats []*string `json:"timestampFormats,omitempty" tf:"timestamp_formats,omitempty"`
 }
@@ -385,6 +443,7 @@ type InputFormatConfigurationObservation struct {
 
 type InputFormatConfigurationParameters struct {
 
+	// Nested argument that specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. More details below.
 	// +kubebuilder:validation:Required
 	Deserializer []DeserializerParameters `json:"deserializer" tf:"deserializer,omitempty"`
 }
@@ -394,6 +453,7 @@ type KinesisSourceConfigurationObservation struct {
 
 type KinesisSourceConfigurationParameters struct {
 
+	// The kinesis stream used as the source of the firehose delivery stream.
 	// +kubebuilder:validation:Required
 	KinesisStreamArn *string `json:"kinesisStreamArn" tf:"kinesis_stream_arn,omitempty"`
 
@@ -406,12 +466,15 @@ type OpenXJSONSerDeObservation struct {
 
 type OpenXJSONSerDeParameters struct {
 
+	// When set to true, which is the default, Kinesis Data Firehose converts JSON keys to lowercase before deserializing them.
 	// +kubebuilder:validation:Optional
 	CaseInsensitive *bool `json:"caseInsensitive,omitempty" tf:"case_insensitive,omitempty"`
 
+	// A map of column names to JSON keys that aren't identical to the column names. This is useful when the JSON contains keys that are Hive keywords. For example, timestamp is a Hive keyword. If you have a JSON key named timestamp, set this parameter to { ts = "timestamp" } to map this key to a column named ts.
 	// +kubebuilder:validation:Optional
 	ColumnToJSONKeyMappings map[string]*string `json:"columnToJsonKeyMappings,omitempty" tf:"column_to_json_key_mappings,omitempty"`
 
+	// When set to true, specifies that the names of the keys include dots and that you want Kinesis Data Firehose to replace them with underscores. This is useful because Apache Hive does not allow dots in column names. For example, if the JSON contains a key whose name is "a.b", you can define the column name to be "a_b" when using this option. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ConvertDotsInJSONKeysToUnderscores *bool `json:"convertDotsInJsonKeysToUnderscores,omitempty" tf:"convert_dots_in_json_keys_to_underscores,omitempty"`
 }
@@ -424,30 +487,38 @@ type OrcSerDeParameters struct {
 	// +kubebuilder:validation:Optional
 	BlockSizeBytes *float64 `json:"blockSizeBytes,omitempty" tf:"block_size_bytes,omitempty"`
 
+	// A list of column names for which you want Kinesis Data Firehose to create bloom filters.
 	// +kubebuilder:validation:Optional
 	BloomFilterColumns []*string `json:"bloomFilterColumns,omitempty" tf:"bloom_filter_columns,omitempty"`
 
+	// The Bloom filter false positive probability . The lower the FPP, the bigger the Bloom filter. The default value is 0.05, the minimum is 0, and the maximum is 1.
 	// +kubebuilder:validation:Optional
 	BloomFilterFalsePositiveProbability *float64 `json:"bloomFilterFalsePositiveProbability,omitempty" tf:"bloom_filter_false_positive_probability,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
+	// A float that represents the fraction of the total number of non-null rows. To turn off dictionary encoding, set this fraction to a number that is less than the number of distinct keys in a dictionary. To always use dictionary encoding, set this threshold to 1.
 	// +kubebuilder:validation:Optional
 	DictionaryKeyThreshold *float64 `json:"dictionaryKeyThreshold,omitempty" tf:"dictionary_key_threshold,omitempty"`
 
+	// Set this to true to indicate that you want stripes to be padded to the HDFS block boundaries. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is false.
 	// +kubebuilder:validation:Optional
 	EnablePadding *bool `json:"enablePadding,omitempty" tf:"enable_padding,omitempty"`
 
+	// The version of the file to write. The possible values are V0_11 and V0_12. The default is V0_12.
 	// +kubebuilder:validation:Optional
 	FormatVersion *string `json:"formatVersion,omitempty" tf:"format_version,omitempty"`
 
+	// A float between 0 and 1 that defines the tolerance for block padding as a decimal fraction of stripe size. The default value is 0.05, which means 5 percent of stripe size. For the default values of 64 MiB ORC stripes and 256 MiB HDFS blocks, the default block padding tolerance of 5 percent reserves a maximum of 3.2 MiB for padding within the 256 MiB block. In such a case, if the available size within the block is more than 3.2 MiB, a new, smaller stripe is inserted to fit within that space. This ensures that no stripe crosses block boundaries and causes remote reads within a node-local task. Kinesis Data Firehose ignores this parameter when enable_padding is false.
 	// +kubebuilder:validation:Optional
 	PaddingTolerance *float64 `json:"paddingTolerance,omitempty" tf:"padding_tolerance,omitempty"`
 
+	// The number of rows between index entries. The default is 10000 and the minimum is 1000.
 	// +kubebuilder:validation:Optional
 	RowIndexStride *float64 `json:"rowIndexStride,omitempty" tf:"row_index_stride,omitempty"`
 
+	// The number of bytes in each stripe. The default is 64 MiB and the minimum is 8 MiB.
 	// +kubebuilder:validation:Optional
 	StripeSizeBytes *float64 `json:"stripeSizeBytes,omitempty" tf:"stripe_size_bytes,omitempty"`
 }
@@ -457,6 +528,7 @@ type OutputFormatConfigurationObservation struct {
 
 type OutputFormatConfigurationParameters struct {
 
+	// Nested argument that specifies which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. More details below.
 	// +kubebuilder:validation:Required
 	Serializer []SerializerParameters `json:"serializer" tf:"serializer,omitempty"`
 }
@@ -466,9 +538,11 @@ type ParametersObservation struct {
 
 type ParametersParameters struct {
 
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Required
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
+	// Parameter value. Must be between 1 and 512 length . When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Required
 	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
@@ -484,15 +558,19 @@ type ParquetSerDeParameters struct {
 	// +kubebuilder:validation:Optional
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
+	// Indicates whether to enable dictionary compression.
 	// +kubebuilder:validation:Optional
 	EnableDictionaryCompression *bool `json:"enableDictionaryCompression,omitempty" tf:"enable_dictionary_compression,omitempty"`
 
+	// The maximum amount of padding to apply. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 0.
 	// +kubebuilder:validation:Optional
 	MaxPaddingBytes *float64 `json:"maxPaddingBytes,omitempty" tf:"max_padding_bytes,omitempty"`
 
+	// The Parquet page size. Column chunks are divided into pages. A page is conceptually an indivisible unit . The minimum value is 64 KiB and the default is 1 MiB.
 	// +kubebuilder:validation:Optional
 	PageSizeBytes *float64 `json:"pageSizeBytes,omitempty" tf:"page_size_bytes,omitempty"`
 
+	// Indicates the version of row format to output. The possible values are V1 and V2. The default is V1.
 	// +kubebuilder:validation:Optional
 	WriterVersion *string `json:"writerVersion,omitempty" tf:"writer_version,omitempty"`
 }
@@ -505,6 +583,7 @@ type ProcessingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Array of data processors. More details are given below
 	// +kubebuilder:validation:Optional
 	Processors []ProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
@@ -514,9 +593,11 @@ type ProcessingConfigurationProcessorsObservation struct {
 
 type ProcessingConfigurationProcessorsParameters struct {
 
+	// Array of processor parameters. More details are given below
 	// +kubebuilder:validation:Optional
 	Parameters []ProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -526,9 +607,11 @@ type ProcessingConfigurationProcessorsParametersObservation struct {
 
 type ProcessingConfigurationProcessorsParametersParameters struct {
 
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Required
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
+	// Parameter value. Must be between 1 and 512 length . When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Required
 	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
@@ -538,9 +621,11 @@ type ProcessorsObservation struct {
 
 type ProcessorsParameters struct {
 
+	// Array of processor parameters. More details are given below
 	// +kubebuilder:validation:Optional
 	Parameters []ParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -550,9 +635,11 @@ type ProcessorsParametersObservation struct {
 
 type ProcessorsParametersParameters struct {
 
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Required
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
+	// Parameter value. Must be between 1 and 512 length . When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Required
 	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
@@ -565,9 +652,11 @@ type RedshiftConfigurationCloudwatchLoggingOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -580,18 +669,23 @@ type RedshiftConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []RedshiftConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
+	// The jdbcurl of the redshift cluster.
 	// +kubebuilder:validation:Required
 	ClusterJdbcurl *string `json:"clusterJdbcurl" tf:"cluster_jdbcurl,omitempty"`
 
+	// Copy options for copying the data from the s3 intermediate bucket into redshift, for example to change the default delimiter. For valid values, see the AWS documentation
 	// +kubebuilder:validation:Optional
 	CopyOptions *string `json:"copyOptions,omitempty" tf:"copy_options,omitempty"`
 
+	// The data table columns that will be targeted by the copy command.
 	// +kubebuilder:validation:Optional
 	DataTableColumns *string `json:"dataTableColumns,omitempty" tf:"data_table_columns,omitempty"`
 
+	// The name of the table in the redshift cluster that the s3 bucket will copy to.
 	// +kubebuilder:validation:Required
 	DataTableName *string `json:"dataTableName" tf:"data_table_name,omitempty"`
 
+	// The password for the username above.
 	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
@@ -618,6 +712,7 @@ type RedshiftConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
+	// The username that the firehose delivery stream will assume. It is strongly recommended that the username and password provided is used exclusively for Amazon Kinesis Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.
 	// +kubebuilder:validation:Required
 	Username *string `json:"username" tf:"username,omitempty"`
 }
@@ -630,6 +725,7 @@ type RedshiftConfigurationProcessingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Array of data processors. More details are given below
 	// +kubebuilder:validation:Optional
 	Processors []RedshiftConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
@@ -639,9 +735,11 @@ type RedshiftConfigurationProcessingConfigurationProcessorsObservation struct {
 
 type RedshiftConfigurationProcessingConfigurationProcessorsParameters struct {
 
+	// Array of processor parameters. More details are given below
 	// +kubebuilder:validation:Optional
 	Parameters []RedshiftConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -651,9 +749,11 @@ type RedshiftConfigurationProcessingConfigurationProcessorsParametersObservation
 
 type RedshiftConfigurationProcessingConfigurationProcessorsParametersParameters struct {
 
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Required
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
+	// Parameter value. Must be between 1 and 512 length . When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Required
 	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
@@ -666,9 +766,11 @@ type RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsParameter
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -678,6 +780,7 @@ type RedshiftConfigurationS3BackupConfigurationObservation struct {
 
 type RedshiftConfigurationS3BackupConfigurationParameters struct {
 
+	// The ARN of the S3 bucket
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -689,24 +792,32 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
+	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	// +kubebuilder:validation:Optional
 	BufferInterval *float64 `json:"bufferInterval,omitempty" tf:"buffer_interval,omitempty"`
 
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.
+	// We recommend setting SizeInMBs to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec set SizeInMBs to be 10 MB or higher.
 	// +kubebuilder:validation:Optional
 	BufferSize *float64 `json:"bufferSize,omitempty" tf:"buffer_size,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
+	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
+	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
+	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
+	// be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
+	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -727,9 +838,11 @@ type RequestConfigurationObservation struct {
 
 type RequestConfigurationParameters struct {
 
+	// Describes the metadata sent to the HTTP endpoint destination. More details are given below
 	// +kubebuilder:validation:Optional
 	CommonAttributes []CommonAttributesParameters `json:"commonAttributes,omitempty" tf:"common_attributes,omitempty"`
 
+	// Kinesis Data Firehose uses the content encoding to compress the body of a request before sending the request to the destination. Valid values are NONE and GZIP.  Default value is NONE.
 	// +kubebuilder:validation:Optional
 	ContentEncoding *string `json:"contentEncoding,omitempty" tf:"content_encoding,omitempty"`
 }
@@ -742,9 +855,11 @@ type S3BackupConfigurationCloudwatchLoggingOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -754,27 +869,36 @@ type S3BackupConfigurationObservation struct {
 
 type S3BackupConfigurationParameters struct {
 
+	// The ARN of the S3 bucket
 	// +kubebuilder:validation:Required
 	BucketArn *string `json:"bucketArn" tf:"bucket_arn,omitempty"`
 
+	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	// +kubebuilder:validation:Optional
 	BufferInterval *float64 `json:"bufferInterval,omitempty" tf:"buffer_interval,omitempty"`
 
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.
+	// We recommend setting SizeInMBs to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec set SizeInMBs to be 10 MB or higher.
 	// +kubebuilder:validation:Optional
 	BufferSize *float64 `json:"bufferSize,omitempty" tf:"buffer_size,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []S3BackupConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
+	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
+	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
+	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
+	// be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
+	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -790,9 +914,11 @@ type S3ConfigurationCloudwatchLoggingOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -802,6 +928,7 @@ type S3ConfigurationObservation struct {
 
 type S3ConfigurationParameters struct {
 
+	// The ARN of the S3 bucket
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -813,24 +940,32 @@ type S3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
+	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	// +kubebuilder:validation:Optional
 	BufferInterval *float64 `json:"bufferInterval,omitempty" tf:"buffer_interval,omitempty"`
 
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.
+	// We recommend setting SizeInMBs to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec set SizeInMBs to be 10 MB or higher.
 	// +kubebuilder:validation:Optional
 	BufferSize *float64 `json:"bufferSize,omitempty" tf:"buffer_size,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []S3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
+	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
+	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
+	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
+	// be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
+	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -851,12 +986,15 @@ type SchemaConfigurationObservation struct {
 
 type SchemaConfigurationParameters struct {
 
+	// The ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account ID is used by default.
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
+	// Specifies the name of the AWS Glue database that contains the schema for the output data.
 	// +kubebuilder:validation:Required
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
+	// If you don't specify an AWS Region, the default is the current region.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -871,6 +1009,7 @@ type SchemaConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogTable
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
@@ -881,6 +1020,7 @@ type SchemaConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
+	// Specifies the table version for the output data schema. Defaults to LATEST.
 	// +kubebuilder:validation:Optional
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
@@ -890,9 +1030,11 @@ type SerializerObservation struct {
 
 type SerializerParameters struct {
 
+	// Nested argument that specifies converting data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. More details below.
 	// +kubebuilder:validation:Optional
 	OrcSerDe []OrcSerDeParameters `json:"orcSerDe,omitempty" tf:"orc_ser_de,omitempty"`
 
+	// Nested argument that specifies converting data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet. More details below.
 	// +kubebuilder:validation:Optional
 	ParquetSerDe []ParquetSerDeParameters `json:"parquetSerDe,omitempty" tf:"parquet_ser_de,omitempty"`
 }
@@ -905,9 +1047,11 @@ type ServerSideEncryptionParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Amazon Resource Name  of the encryption key. Required when key_type is CUSTOMER_MANAGED_CMK.
 	// +kubebuilder:validation:Optional
 	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
 
+	// Type of encryption key. Default is AWS_OWNED_CMK. Valid values are AWS_OWNED_CMK and CUSTOMER_MANAGED_CMK
 	// +kubebuilder:validation:Optional
 	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 }
@@ -920,9 +1064,11 @@ type SplunkConfigurationCloudwatchLoggingOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -935,15 +1081,19 @@ type SplunkConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []SplunkConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
+	// The amount of time, in seconds between 180 and 600, that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data.
 	// +kubebuilder:validation:Optional
 	HecAcknowledgmentTimeout *float64 `json:"hecAcknowledgmentTimeout,omitempty" tf:"hec_acknowledgment_timeout,omitempty"`
 
+	// The HTTP Event Collector  endpoint to which Kinesis Firehose sends your data.
 	// +kubebuilder:validation:Required
 	HecEndpoint *string `json:"hecEndpoint" tf:"hec_endpoint,omitempty"`
 
+	// The HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
 	// +kubebuilder:validation:Optional
 	HecEndpointType *string `json:"hecEndpointType,omitempty" tf:"hec_endpoint_type,omitempty"`
 
+	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint.
 	// +kubebuilder:validation:Required
 	HecToken *string `json:"hecToken" tf:"hec_token,omitempty"`
 
@@ -965,6 +1115,7 @@ type SplunkConfigurationProcessingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Array of data processors. More details are given below
 	// +kubebuilder:validation:Optional
 	Processors []SplunkConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
@@ -974,9 +1125,11 @@ type SplunkConfigurationProcessingConfigurationProcessorsObservation struct {
 
 type SplunkConfigurationProcessingConfigurationProcessorsParameters struct {
 
+	// Array of processor parameters. More details are given below
 	// +kubebuilder:validation:Optional
 	Parameters []SplunkConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -986,9 +1139,11 @@ type SplunkConfigurationProcessingConfigurationProcessorsParametersObservation s
 
 type SplunkConfigurationProcessingConfigurationProcessorsParametersParameters struct {
 
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Required
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
+	// Parameter value. Must be between 1 and 512 length . When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Required
 	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
@@ -1010,9 +1165,11 @@ type VPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// A list of security group IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Required
 	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
+	// A list of subnet IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Required
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
@@ -1031,7 +1188,7 @@ type DeliveryStreamStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DeliveryStream is the Schema for the DeliveryStreams API
+// DeliveryStream is the Schema for the DeliveryStreams API. Provides a AWS Kinesis Firehose Delivery Stream
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

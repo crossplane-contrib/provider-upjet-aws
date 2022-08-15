@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Alias is the Schema for the Aliass API
+        description: Alias is the Schema for the Aliass API. Provides a GameLift Alias
+          resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,21 +65,30 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: Description of the alias.
                     type: string
                   name:
+                    description: Name of the alias.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   routingStrategy:
+                    description: Specifies the fleet and/or routing type to use for
+                      the alias.
                     items:
                       properties:
                         fleetId:
+                          description: ID of the GameLift Fleet to point the alias
+                            to.
                           type: string
                         message:
+                          description: Message text to be used with the TERMINAL routing
+                            strategy.
                           type: string
                         type:
+                          description: Type of routing strategyE.g., SIMPLE or TERMINAL
                           type: string
                       required:
                       - type
@@ -87,6 +97,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - name
@@ -270,12 +283,17 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Alias ARN.
                     type: string
                   id:
+                    description: Alias ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

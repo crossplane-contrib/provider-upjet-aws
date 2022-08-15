@@ -14,15 +14,20 @@ import (
 )
 
 type StreamConsumerObservation struct {
+
+	// Amazon Resource Name  of the stream consumer.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Approximate timestamp in RFC3339 format of when the stream consumer was created.
 	CreationTimestamp *string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
 
+	// Amazon Resource Name  of the stream consumer.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type StreamConsumerParameters struct {
 
+	// Name of the stream consumer.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -31,6 +36,7 @@ type StreamConsumerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// –  Amazon Resource Name  of the data stream the consumer is registered with.
 	// +crossplane:generate:reference:type=Stream
 	// +kubebuilder:validation:Optional
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
@@ -56,7 +62,7 @@ type StreamConsumerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// StreamConsumer is the Schema for the StreamConsumers API
+// StreamConsumer is the Schema for the StreamConsumers API. Manages a Kinesis Stream Consumer.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

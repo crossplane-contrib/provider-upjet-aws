@@ -14,10 +14,14 @@ import (
 )
 
 type ActivityObservation struct {
+
+	// The date the activity was created.
 	CreationDate *string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
 
+	// The Amazon Resource Name  that identifies the created activity.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -31,6 +35,7 @@ type ActivityParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -49,7 +54,7 @@ type ActivityStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Activity is the Schema for the Activitys API
+// Activity is the Schema for the Activitys API. Provides a Step Function Activity resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

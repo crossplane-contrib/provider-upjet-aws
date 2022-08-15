@@ -14,13 +14,17 @@ import (
 )
 
 type DeploymentObservation struct {
+
+	// Whether the deployment was automatically released.
 	AutoDeployed *bool `json:"autoDeployed,omitempty" tf:"auto_deployed,omitempty"`
 
+	// The deployment identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DeploymentParameters struct {
 
+	// The API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -31,6 +35,7 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
+	// The description for the deployment resource. Must be less than or equal to 1024 characters in length.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -54,7 +59,7 @@ type DeploymentStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Deployment is the Schema for the Deployments API
+// Deployment is the Schema for the Deployments API. Manages an Amazon API Gateway Version 2 deployment.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

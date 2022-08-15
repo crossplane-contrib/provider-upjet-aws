@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: TransitGatewayMulticastDomain is the Schema for the TransitGatewayMulticastDomains
-          API
+          API. Manages an EC2 Transit Gateway Multicast Domain
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,20 +66,36 @@ spec:
               forProvider:
                 properties:
                   autoAcceptSharedAssociations:
+                    description: 'Whether to automatically accept cross-account subnet
+                      associations that are associated with the EC2 Transit Gateway
+                      Multicast Domain. Valid values: disable, enable. Default value:
+                      disable.'
                     type: string
                   igmpv2Support:
+                    description: 'Whether to enable Internet Group Management Protocol  version
+                      2 for the EC2 Transit Gateway Multicast Domain. Valid values:
+                      disable, enable. Default value: disable.'
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   staticSourcesSupport:
+                    description: 'Whether to enable support for statically configuring
+                      multicast group sources for the EC2 Transit Gateway Multicast
+                      Domain. Valid values: disable, enable. Default value: disable.'
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value tags for the EC2 Transit Gateway Multicast
+                      Domain. If configured with a provider default_tags configuration
+                      block present, tags with matching keys will overwrite those
+                      defined at the provider-level.
                     type: object
                   transitGatewayId:
+                    description: EC2 Transit Gateway identifier. The EC2 Transit Gateway
+                      must have multicast_support enabled.
                     type: string
                   transitGatewayIdRef:
                     description: A Reference to a named object.
@@ -335,14 +351,22 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: EC2 Transit Gateway Multicast Domain Amazon Resource
+                      Name .
                     type: string
                   id:
+                    description: EC2 Transit Gateway Multicast Domain identifier.
                     type: string
                   ownerId:
+                    description: Identifier of the AWS account that owns the EC2 Transit
+                      Gateway Multicast Domain.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

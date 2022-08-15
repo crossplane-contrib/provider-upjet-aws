@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: UserLoginProfile is the Schema for the UserLoginProfiles API
+        description: UserLoginProfile is the Schema for the UserLoginProfiles API.
+          Manages an IAM User Login Profile
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,21 @@ spec:
               forProvider:
                 properties:
                   passwordLength:
+                    description: The length of the generated password on resource
+                      creation. Only applies on resource creation. Drift detection
+                      is not possible with this argument. Default value is 20.
                     type: number
                   passwordResetRequired:
+                    description: Whether the user should be forced to reset the generated
+                      password on resource creation. Only applies on resource creation.
                     type: boolean
                   pgpKey:
+                    description: Either a base-64 encoded PGP public key, or a keybase
+                      username in the form keybase:username. Only applies on resource
+                      creation. Drift detection is not possible with this argument.
                     type: string
                   user:
+                    description: The IAM user's name.
                     type: string
                   userRef:
                     description: A Reference to a named object.
@@ -322,12 +332,20 @@ spec:
               atProvider:
                 properties:
                   encryptedPassword:
+                    description: The encrypted password, base64 encoded. Only available
+                      if password was handled on Terraform resource creation, not
+                      import.
                     type: string
                   id:
                     type: string
                   keyFingerprint:
+                    description: The fingerprint of the PGP key used to encrypt the
+                      password. Only available if password was handled on Terraform
+                      resource creation, not import.
                     type: string
                   password:
+                    description: The plain text password, only available when pgp_key
+                      is not provided.
                     type: string
                 type: object
               conditions:

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: RoleAssociation is the Schema for the RoleAssociations API
+        description: RoleAssociation is the Schema for the RoleAssociations API. Provides
+          an Amazon Managed Grafana workspace role association resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   groupIds:
+                    description: The AWS SSO group ids to be assigned the role given
+                      in role.
                     items:
                       type: string
                     type: array
@@ -72,12 +75,16 @@ spec:
                       be created in.
                     type: string
                   role:
+                    description: The grafana role. Valid values can be found here.
                     type: string
                   userIds:
+                    description: The AWS SSO user ids to be assigned the role given
+                      in role.
                     items:
                       type: string
                     type: array
                   workspaceId:
+                    description: The workspace id.
                     type: string
                   workspaceIdRef:
                     description: A Reference to a named object.

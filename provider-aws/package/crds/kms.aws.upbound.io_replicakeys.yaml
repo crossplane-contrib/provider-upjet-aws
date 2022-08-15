@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ReplicaKey is the Schema for the ReplicaKeys API
+        description: ReplicaKey is the Schema for the ReplicaKeys API. <no value>
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

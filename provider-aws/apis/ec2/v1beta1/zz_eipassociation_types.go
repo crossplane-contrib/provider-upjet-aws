@@ -30,6 +30,8 @@ type EIPAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	AllocationIDSelector *v1.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
 
+	// Whether to allow an Elastic IP to
+	// be re-associated. Defaults to true in VPC.
 	// +kubebuilder:validation:Optional
 	AllowReassociation *bool `json:"allowReassociation,omitempty" tf:"allow_reassociation,omitempty"`
 
@@ -73,7 +75,7 @@ type EIPAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// EIPAssociation is the Schema for the EIPAssociations API
+// EIPAssociation is the Schema for the EIPAssociations API. Provides an AWS EIP Association
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

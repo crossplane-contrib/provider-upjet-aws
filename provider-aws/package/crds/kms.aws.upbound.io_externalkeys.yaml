@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ExternalKey is the Schema for the ExternalKeys API
+        description: ExternalKey is the Schema for the ExternalKeys API. Manages a
+          single-Region or multi-Region primary KMS key that uses external key material.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,16 +65,31 @@ spec:
               forProvider:
                 properties:
                   bypassPolicyLockoutSafetyCheck:
+                    description: Specifies whether to disable the policy lockout check
+                      performed when creating or updating the key's policy. Setting
+                      this value to true increases the risk that the key becomes unmanageable.
+                      For more information, refer to the scenario in the Default Key
+                      Policy section in the AWS Key Management Service Developer Guide.
+                      Defaults to false.
                     type: boolean
                   deletionWindowInDays:
+                    description: Duration in days after which the key is deleted after
+                      destruction of the resource. Must be between 7 and 30 days.
+                      Defaults to 30.
                     type: number
                   description:
+                    description: Description of the key.
                     type: string
                   enabled:
+                    description: Specifies whether the key is enabled. Keys pending
+                      import can only be false. Imported keys default to true unless
+                      expired.
                     type: boolean
                   keyMaterialBase64SecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: Base64 encoded 256-bit symmetric encryption key material
+                      to import. The CMK is permanently associated with this key material.
+                      The same key material can be reimported, but you cannot import
+                      different key material.
                     properties:
                       key:
                         description: The key to select.
@@ -90,8 +106,12 @@ spec:
                     - namespace
                     type: object
                   multiRegion:
+                    description: Indicates whether the KMS key is a multi-Region  or
+                      regional  key. Defaults to false.
                     type: boolean
                   policy:
+                    description: A key policy JSON document. If you do not provide
+                      a key policy, AWS KMS attaches a default key policy to the CMK.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -100,8 +120,16 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A key-value map of tags to assign to the key. If
+                      configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                   validTo:
+                    description: 'Time at which the imported key material expires.
+                      When the key material expires, AWS KMS deletes the key material
+                      and the CMK becomes unusable. If not specified, key material
+                      does not expire. Valid values: RFC3339 time string'
                     type: string
                 required:
                 - region
@@ -283,18 +311,28 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  of the key.
                     type: string
                   expirationModel:
+                    description: Whether the key material expires. Empty when pending
+                      key material import, otherwise KEY_MATERIAL_EXPIRES or KEY_MATERIAL_DOES_NOT_EXPIRE.
                     type: string
                   id:
+                    description: The unique identifier for the key.
                     type: string
                   keyState:
+                    description: The state of the CMK.
                     type: string
                   keyUsage:
+                    description: The cryptographic operations for which you can use
+                      the CMK.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

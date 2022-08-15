@@ -14,21 +14,28 @@ import (
 )
 
 type TrafficPolicyObservation struct {
+
+	// ID of the traffic policy
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// DNS type of the resource record sets that Amazon Route 53 creates when you use a traffic policy to create a traffic policy instance.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// Version number of the traffic policy. This value is automatically incremented by AWS after each update of this resource.
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type TrafficPolicyParameters struct {
 
+	// Comment for the traffic policy.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// Policy document. This is a JSON formatted string. For more information about building Route53 traffic policy documents, see the AWS Route53 Traffic Policy document format
 	// +kubebuilder:validation:Required
 	Document *string `json:"document" tf:"document,omitempty"`
 
+	// Name of the traffic policy.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -52,7 +59,7 @@ type TrafficPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// TrafficPolicy is the Schema for the TrafficPolicys API
+// TrafficPolicy is the Schema for the TrafficPolicys API. Manages a Route53 Traffic Policy
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: NetworkInterfaceAttachment is the Schema for the NetworkInterfaceAttachments
-          API
+          API. Attach an Elastic network interface (ENI) resource with EC2 instance.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,7 @@ spec:
               forProvider:
                 properties:
                   deviceIndex:
+                    description: Network interface index .
                     type: number
                   instanceId:
                     type: string
@@ -403,10 +404,12 @@ spec:
               atProvider:
                 properties:
                   attachmentId:
+                    description: The ENI Attachment ID.
                     type: string
                   id:
                     type: string
                   status:
+                    description: The status of the Network Interface Attachment.
                     type: string
                 type: object
               conditions:

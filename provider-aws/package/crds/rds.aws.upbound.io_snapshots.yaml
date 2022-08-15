@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Snapshot is the Schema for the Snapshots API
+        description: Snapshot is the Schema for the Snapshots API. Manages an RDS
+          database instance snapshot.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   dbInstanceIdentifier:
+                    description: The DB Instance Identifier from which to take the
+                      snapshot.
                     type: string
                   dbInstanceIdentifierRef:
                     description: A Reference to a named object.
@@ -145,6 +148,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -326,44 +332,68 @@ spec:
               atProvider:
                 properties:
                   allocatedStorage:
+                    description: Specifies the allocated storage size in gigabytes
+                      .
                     type: number
                   availabilityZone:
+                    description: Specifies the name of the Availability Zone the DB
+                      instance was located in at the time of the DB snapshot.
                     type: string
                   dbSnapshotArn:
+                    description: The Amazon Resource Name  for the DB snapshot.
                     type: string
                   encrypted:
+                    description: Specifies whether the DB snapshot is encrypted.
                     type: boolean
                   engine:
+                    description: Specifies the name of the database engine.
                     type: string
                   engineVersion:
+                    description: Specifies the version of the database engine.
                     type: string
                   id:
                     type: string
                   iops:
+                    description: Specifies the Provisioned IOPS  value of the DB instance
+                      at the time of the snapshot.
                     type: number
                   kmsKeyId:
+                    description: The ARN for the KMS encryption key.
                     type: string
                   licenseModel:
+                    description: License model information for the restored DB instance.
                     type: string
                   optionGroupName:
+                    description: Provides the option group name for the DB snapshot.
                     type: string
                   port:
                     type: number
                   snapshotType:
                     type: string
                   sourceDbSnapshotIdentifier:
+                    description: The DB snapshot Arn that the DB snapshot was copied
+                      from. It only has value in case of cross customer or cross region
+                      copy.
                     type: string
                   sourceRegion:
+                    description: The region that the DB snapshot was created in or
+                      copied from.
                     type: string
                   status:
+                    description: Specifies the status of this DB snapshot.
                     type: string
                   storageType:
+                    description: Specifies the storage type associated with DB snapshot.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   vpcId:
+                    description: Provides the VPC ID associated with the DB snapshot.
                     type: string
                 type: object
               conditions:

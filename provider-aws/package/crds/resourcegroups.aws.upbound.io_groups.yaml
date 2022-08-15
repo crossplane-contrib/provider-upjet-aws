@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Group is the Schema for the Groups API
+        description: Group is the Schema for the Groups API. Provides a Resource Group.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,17 +64,23 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: A description of the resource group.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   resourceQuery:
+                    description: A resource_query block. Resource queries are documented
+                      below.
                     items:
                       properties:
                         query:
+                          description: The resource query as a JSON string.
                           type: string
                         type:
+                          description: The type of the resource query. Defaults to
+                            TAG_FILTERS_1_0.
                           type: string
                       required:
                       - query
@@ -83,6 +89,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -265,12 +274,16 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN assigned by AWS for this resource group.
                     type: string
                   id:
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

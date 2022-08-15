@@ -14,12 +14,17 @@ import (
 )
 
 type IdentityProviderConfigObservation struct {
+
+	// Amazon Resource Name  of the EKS Identity Provider Configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// EKS Cluster name and EKS Identity Provider Configuration name separated by a colon .
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Status of the EKS Identity Provider Configuration.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -28,30 +33,38 @@ type IdentityProviderConfigOidcObservation struct {
 
 type IdentityProviderConfigOidcParameters struct {
 
+	// –  Client ID for the OpenID Connect identity provider.
 	// +kubebuilder:validation:Required
 	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
+	// The JWT claim that the provider will use to return groups.
 	// +kubebuilder:validation:Optional
 	GroupsClaim *string `json:"groupsClaim,omitempty" tf:"groups_claim,omitempty"`
 
+	// A prefix that is prepended to group claims e.g., oidc:.
 	// +kubebuilder:validation:Optional
 	GroupsPrefix *string `json:"groupsPrefix,omitempty" tf:"groups_prefix,omitempty"`
 
+	// Issuer URL for the OpenID Connect identity provider.
 	// +kubebuilder:validation:Required
 	IssuerURL *string `json:"issuerUrl" tf:"issuer_url,omitempty"`
 
+	// The key value pairs that describe required claims in the identity token.
 	// +kubebuilder:validation:Optional
 	RequiredClaims map[string]*string `json:"requiredClaims,omitempty" tf:"required_claims,omitempty"`
 
+	// The JWT claim that the provider will use as the username.
 	// +kubebuilder:validation:Optional
 	UsernameClaim *string `json:"usernameClaim,omitempty" tf:"username_claim,omitempty"`
 
+	// A prefix that is prepended to username claims.
 	// +kubebuilder:validation:Optional
 	UsernamePrefix *string `json:"usernamePrefix,omitempty" tf:"username_prefix,omitempty"`
 }
 
 type IdentityProviderConfigParameters struct {
 
+	// –  Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -62,6 +75,7 @@ type IdentityProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
+	// Nested attribute containing OpenID Connect identity provider information for the cluster. Detailed below.
 	// +kubebuilder:validation:Required
 	Oidc []IdentityProviderConfigOidcParameters `json:"oidc" tf:"oidc,omitempty"`
 
@@ -70,6 +84,7 @@ type IdentityProviderConfigParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -88,7 +103,7 @@ type IdentityProviderConfigStatus struct {
 
 // +kubebuilder:object:root=true
 
-// IdentityProviderConfig is the Schema for the IdentityProviderConfigs API
+// IdentityProviderConfig is the Schema for the IdentityProviderConfigs API. Manages an EKS Identity Provider Configuration.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

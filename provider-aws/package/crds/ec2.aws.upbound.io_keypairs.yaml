@@ -35,7 +35,9 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: KeyPair is the Schema for the KeyPairs API
+        description: KeyPair is the Schema for the KeyPairs API. Provides a Key Pair
+          resource. Currently this supports importing an existing key pair but not
+          creating a new key pair.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +66,7 @@ spec:
               forProvider:
                 properties:
                   publicKey:
+                    description: The public key material.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -72,6 +75,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - publicKey
@@ -254,16 +260,24 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The key pair ARN.
                     type: string
                   fingerprint:
+                    description: The MD5 public key fingerprint as specified in section
+                      4 of RFC 4716.
                     type: string
                   id:
+                    description: The key pair name.
                     type: string
                   keyPairId:
+                    description: The key pair ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

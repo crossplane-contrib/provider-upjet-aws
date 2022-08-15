@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: VirtualMfaDevice is the Schema for the VirtualMfaDevices API
+        description: VirtualMfaDevice is the Schema for the VirtualMfaDevices API.
+          Provides an IAM Virtual MFA Device
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,19 @@ spec:
               forProvider:
                 properties:
                   path:
+                    description: –  The path for the virtual MFA device.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: Map of resource tags for the virtual mfa device.
+                      If configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                   virtualMfaDeviceName:
+                    description: The name of the virtual MFA device. Use with path
+                      to uniquely identify a virtual MFA device.
                     type: string
                 required:
                 - virtualMfaDeviceName
@@ -251,16 +259,27 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  specifying the virtual
+                      mfa device.
                     type: string
                   base32StringSeed:
+                    description: The base32 seed defined as specified in RFC3548.
+                      The base_32_string_seed is base64-encoded.
                     type: string
                   id:
                     type: string
                   qrCodePng:
+                    description: A QR code PNG image that encodes otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String
+                      where $virtualMFADeviceName is one of the create call arguments.
+                      AccountName is the user name if set , and Base32String is the
+                      seed in base32 format.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

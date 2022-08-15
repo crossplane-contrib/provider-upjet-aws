@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ELB is the Schema for the ELBs API
+        description: ELB is the Schema for the ELBs API. Provides an Elastic Load
+          Balancer resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,13 +65,19 @@ spec:
               forProvider:
                 properties:
                   accessLogs:
+                    description: An Access Logs block. Access Logs documented below.
                     items:
                       properties:
                         bucket:
+                          description: The S3 bucket name to store the logs in.
                           type: string
                         bucketPrefix:
+                          description: The S3 bucket prefix. Logs are stored in the
+                            root if not configured.
                           type: string
                         enabled:
+                          description: Boolean to enable / disable access_logs. Default
+                            is true
                           type: boolean
                         interval:
                           type: number
@@ -79,29 +86,46 @@ spec:
                       type: object
                     type: array
                   availabilityZones:
+                    description: The AZ's to serve traffic in.
                     items:
                       type: string
                     type: array
                   connectionDraining:
+                    description: 'Boolean to enable connection draining. Default:
+                      false'
                     type: boolean
                   connectionDrainingTimeout:
+                    description: 'The time in seconds to allow for connections to
+                      drain. Default: 300'
                     type: number
                   crossZoneLoadBalancing:
+                    description: 'Enable cross-zone load balancing. Default: true'
                     type: boolean
                   desyncMitigationMode:
+                    description: Determines how the load balancer handles requests
+                      that might pose a security risk to an application due to HTTP
+                      desync. Valid values are monitor, defensive , strictest.
                     type: string
                   healthCheck:
+                    description: A health_check block. Health Check documented below.
                     items:
                       properties:
                         healthyThreshold:
+                          description: The number of checks before the instance is
+                            declared healthy.
                           type: number
                         interval:
                           type: number
                         target:
+                          description: 'The target of the check. Valid pattern is
+                            "${PROTOCOL}:${PORT}${PATH}", where PROTOCOL values are:'
                           type: string
                         timeout:
+                          description: The length of time before the check times out.
                           type: number
                         unhealthyThreshold:
+                          description: The number of checks before the instance is
+                            declared unhealthy.
                           type: number
                       required:
                       - healthyThreshold
@@ -112,6 +136,8 @@ spec:
                       type: object
                     type: array
                   idleTimeout:
+                    description: 'The time in seconds that the connection is allowed
+                      to be idle. Default: 60'
                     type: number
                   instances:
                     items:
@@ -193,19 +219,28 @@ spec:
                         type: object
                     type: object
                   internal:
+                    description: If true, ELB will be an internal ELB.
                     type: boolean
                   listener:
+                    description: A list of listener blocks. Listeners documented below.
                     items:
                       properties:
                         instancePort:
+                          description: The port on the instance to route to
                           type: number
                         instanceProtocol:
+                          description: The protocol to use to the instance. Valid
+                            values are HTTP, HTTPS, TCP, or SSL
                           type: string
                         lbPort:
+                          description: The port to listen on for the load balancer
                           type: number
                         lbProtocol:
                           type: string
                         sslCertificateId:
+                          description: The ARN of an SSL certificate you have uploaded
+                            to AWS IAM. Note ECDSA-specific restrictions below.  Only
+                            valid when
                           type: string
                       required:
                       - instancePort
@@ -219,18 +254,27 @@ spec:
                       be created in.
                     type: string
                   securityGroups:
+                    description: A list of security group IDs to assign to the ELB.
+                      Only valid if creating an ELB within a VPC
                     items:
                       type: string
                     type: array
                   sourceSecurityGroup:
+                    description: The name of the security group that you can use as
+                      part of your inbound rules for your load balancer's back-end
+                      application instances. Use this for Classic or Default VPC only.
                     type: string
                   subnets:
+                    description: A list of subnet IDs to attach to the ELB.
                     items:
                       type: string
                     type: array
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - listener
@@ -413,18 +457,29 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the ELB
                     type: string
                   dnsName:
+                    description: The DNS name of the ELB
                     type: string
                   id:
+                    description: The name of the ELB
                     type: string
                   sourceSecurityGroupId:
+                    description: The ID of the security group that you can use as
+                      part of your inbound rules for your load balancer's back-end
+                      application instances. Only available on ELBs launched in a
+                      VPC.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   zoneId:
+                    description: The canonical hosted zone ID of the ELB
                     type: string
                 type: object
               conditions:

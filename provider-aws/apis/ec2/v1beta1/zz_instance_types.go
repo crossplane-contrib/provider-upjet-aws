@@ -18,9 +18,11 @@ type CapacityReservationSpecificationObservation struct {
 
 type CapacityReservationSpecificationParameters struct {
 
+	// Indicates the instance's Capacity Reservation preferences. Can be "open" or "none". .
 	// +kubebuilder:validation:Optional
 	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
 
+	// Information about the target Capacity Reservation. See Capacity Reservation Target below for more details.
 	// +kubebuilder:validation:Optional
 	CapacityReservationTarget []CapacityReservationTargetParameters `json:"capacityReservationTarget,omitempty" tf:"capacity_reservation_target,omitempty"`
 }
@@ -30,9 +32,11 @@ type CapacityReservationTargetObservation struct {
 
 type CapacityReservationTargetParameters struct {
 
+	// The ID of the Capacity Reservation in which to run the instance.
 	// +kubebuilder:validation:Optional
 	CapacityReservationID *string `json:"capacityReservationId,omitempty" tf:"capacity_reservation_id,omitempty"`
 
+	// The ARN of the Capacity Reservation resource group in which to run the instance.
 	// +kubebuilder:validation:Optional
 	CapacityReservationResourceGroupArn *string `json:"capacityReservationResourceGroupArn,omitempty" tf:"capacity_reservation_resource_group_arn,omitempty"`
 }
@@ -42,6 +46,7 @@ type CreditSpecificationObservation struct {
 
 type CreditSpecificationParameters struct {
 
+	// Credit option for CPU usage. Valid values include standard or unlimited. T3 instances are launched as unlimited by default. T2 instances are launched as standard by default.
 	// +kubebuilder:validation:Optional
 	CPUCredits *string `json:"cpuCredits,omitempty" tf:"cpu_credits,omitempty"`
 }
@@ -74,6 +79,7 @@ type EBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
+	// Snapshot ID to mount.
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
@@ -95,6 +101,7 @@ type EnclaveOptionsObservation struct {
 
 type EnclaveOptionsParameters struct {
 
+	// Whether Nitro Enclaves will be enabled on the instance. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -107,125 +114,171 @@ type EphemeralBlockDeviceParameters struct {
 	// +kubebuilder:validation:Required
 	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
+	// Suppresses the specified device included in the AMI's block device mapping.
 	// +kubebuilder:validation:Optional
 	NoDevice *bool `json:"noDevice,omitempty" tf:"no_device,omitempty"`
 
+	// Instance Store Device Name .
 	// +kubebuilder:validation:Optional
 	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
 
 type InstanceObservation struct {
+
+	// The ARN of the instance.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// One or more configuration blocks with additional EBS block devices to attach to the instance. Block device configurations only apply on resource creation. See Block Devices below for details on attributes and drift detection. When accessing this as an attribute reference, it is a set of objects.
+	// +kubebuilder:validation:Optional
 	EBSBlockDevice []EBSBlockDeviceObservation `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
 
+	// The ID of the launch template. Conflicts with name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The state of the instance. One of: pending, running, shutting-down, terminated, stopping, stopped. See Instance Lifecycle for more information.
 	InstanceState *string `json:"instanceState,omitempty" tf:"instance_state,omitempty"`
 
+	// The ARN of the Outpost the instance is assigned to.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
+	// Base-64 encoded encrypted password data for the instance. Useful for getting the administrator password for instances running Microsoft Windows. This attribute is only exported if get_password_data is true. Note that this encrypted value will be stored in the state file, as with all exported attributes. See GetPasswordData for more information.
 	PasswordData *string `json:"passwordData,omitempty" tf:"password_data,omitempty"`
 
+	// The ID of the instance's primary network interface.
 	PrimaryNetworkInterfaceID *string `json:"primaryNetworkInterfaceId,omitempty" tf:"primary_network_interface_id,omitempty"`
 
+	// The private DNS name assigned to the instance. Can only be used inside the Amazon EC2, and only available if you've enabled DNS hostnames for your VPC.
 	PrivateDNS *string `json:"privateDns,omitempty" tf:"private_dns,omitempty"`
 
+	// The public DNS name assigned to the instance. For EC2-VPC, this is only available if you've enabled DNS hostnames for your VPC.
 	PublicDNS *string `json:"publicDns,omitempty" tf:"public_dns,omitempty"`
 
+	// The public IP address assigned to the instance, if applicable. NOTE: If you are using an aws_eip with your instance, you should refer to the EIP's address directly and not use public_ip as this field will change after the EIP is attached.
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
+	// Configuration block to customize details about the root block device of the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a list containing one object.
+	// +kubebuilder:validation:Optional
 	RootBlockDevice []RootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type InstanceParameters struct {
 
+	// AMI to use for the instance. Required unless launch_template is specified and the Launch Template specifes an AMI. If an AMI is specified in the Launch Template, setting ami will override the AMI specified in the Launch Template.
 	// +kubebuilder:validation:Optional
 	AMI *string `json:"ami,omitempty" tf:"ami,omitempty"`
 
+	// Whether to associate a public IP address with an instance in a VPC.
 	// +kubebuilder:validation:Optional
 	AssociatePublicIPAddress *bool `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
+	// AZ to start the instance in.
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
 	// +kubebuilder:validation:Optional
 	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
 
+	// If set to to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
 	// +kubebuilder:validation:Optional
 	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CapacityReservationSpecification []CapacityReservationSpecificationParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
 
+	// Configuration block for customizing the credit specification of the instance. See Credit Specification below for more details. Terraform will only perform drift detection of its value when present in a configuration. Removing this configuration on existing instances will only stop managing it. It will not change the configuration back to the default for the instance type.
 	// +kubebuilder:validation:Optional
 	CreditSpecification []CreditSpecificationParameters `json:"creditSpecification,omitempty" tf:"credit_specification,omitempty"`
 
+	// If true, enables EC2 Instance Termination Protection.
 	// +kubebuilder:validation:Optional
 	DisableAPITermination *bool `json:"disableApiTermination,omitempty" tf:"disable_api_termination,omitempty"`
 
+	// One or more configuration blocks with additional EBS block devices to attach to the instance. Block device configurations only apply on resource creation. See Block Devices below for details on attributes and drift detection. When accessing this as an attribute reference, it is a set of objects.
 	// +kubebuilder:validation:Optional
 	EBSBlockDevice []EBSBlockDeviceParameters `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
 
+	// If true, the launched EC2 instance will be EBS-optimized. Note that if this is not set on an instance type that is optimized by default then this will show as disabled but if the instance type is optimized by default then there is no need to set this and there is no effect to disabling it. See the EBS Optimized section of the AWS User Guide for more information.
 	// +kubebuilder:validation:Optional
 	EBSOptimized *bool `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
 
+	// Enable Nitro Enclaves on launched instances. See Enclave Options below for more details.
 	// +kubebuilder:validation:Optional
 	EnclaveOptions []EnclaveOptionsParameters `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
 
+	// One or more configuration blocks to customize Ephemeral  volumes on the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a set of objects.
 	// +kubebuilder:validation:Optional
 	EphemeralBlockDevice []EphemeralBlockDeviceParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
+	// If true, wait for password data to become available and retrieve it. Useful for getting the administrator password for instances running Microsoft Windows. The password data is exported to the password_data attribute. See GetPasswordData for more information.
 	// +kubebuilder:validation:Optional
 	GetPasswordData *bool `json:"getPasswordData,omitempty" tf:"get_password_data,omitempty"`
 
+	// If true, the launched EC2 instance will support hibernation.
 	// +kubebuilder:validation:Optional
 	Hibernation *bool `json:"hibernation,omitempty" tf:"hibernation,omitempty"`
 
+	// ID of a dedicated host that the instance will be assigned to. Use when an instance is to be launched on a specific dedicated host.
 	// +kubebuilder:validation:Optional
 	HostID *string `json:"hostId,omitempty" tf:"host_id,omitempty"`
 
+	// IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile. Ensure your credentials have the correct permission to assign the instance profile according to the EC2 documentation, notably iam:PassRole.
 	// +kubebuilder:validation:Optional
 	IAMInstanceProfile *string `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
 
+	// A number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.
 	// +kubebuilder:validation:Optional
 	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
 
+	// Specify one or more IPv6 addresses from the range of the subnet to associate with the primary network interface
 	// +kubebuilder:validation:Optional
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
 
+	// Shutdown behavior for the instance. Amazon defaults this to stop for EBS-backed instances and terminate for instance-store instances. Cannot be set on instance-store instances. See Shutdown Behavior for more information.
 	// +kubebuilder:validation:Optional
 	InstanceInitiatedShutdownBehavior *string `json:"instanceInitiatedShutdownBehavior,omitempty" tf:"instance_initiated_shutdown_behavior,omitempty"`
 
+	// The instance type to use for the instance. Updates to this field will trigger a stop/start of the EC2 instance.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
+	// Key name of the Key Pair to use for the instance; which can be managed using the .
 	// +kubebuilder:validation:Optional
 	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
 
+	// Specifies a Launch Template to configure the instance. Parameters configured on this resource will override the corresponding parameters in the Launch Template.
+	// See Launch Template Specification below for more details.
 	// +kubebuilder:validation:Optional
 	LaunchTemplate []LaunchTemplateParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
+	// The maintenance and recovery options for the instance. See Maintenance Options below for more details.
 	// +kubebuilder:validation:Optional
 	MaintenanceOptions []MaintenanceOptionsParameters `json:"maintenanceOptions,omitempty" tf:"maintenance_options,omitempty"`
 
+	// Customize the metadata options of the instance. See Metadata Options below for more details.
 	// +kubebuilder:validation:Optional
 	MetadataOptions []MetadataOptionsParameters `json:"metadataOptions,omitempty" tf:"metadata_options,omitempty"`
 
+	// If true, the launched EC2 instance will have detailed monitoring enabled.
 	// +kubebuilder:validation:Optional
 	Monitoring *bool `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
 
+	// Customize network interfaces to be attached at instance boot time. See Network Interfaces below for more details.
 	// +kubebuilder:validation:Optional
 	NetworkInterface []NetworkInterfaceParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
+	// Placement Group to start the instance in.
 	// +kubebuilder:validation:Optional
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
+	// The number of the partition the instance is in. Valid only if the  strategy argument is set to "partition".
 	// +kubebuilder:validation:Optional
 	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
 
+	// Private IP address to associate with the instance in a VPC.
 	// +kubebuilder:validation:Optional
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
@@ -234,9 +287,11 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Configuration block to customize details about the root block device of the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a list containing one object.
 	// +kubebuilder:validation:Optional
 	RootBlockDevice []RootBlockDeviceParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
+	// A list of secondary private IPv4 addresses to assign to the instance's primary network interface  in a VPC. Can only be assigned to the primary network interface  attached at instance creation, not a pre-existing network interface i.e., referenced in a network_interface block. Refer to the Elastic network interfaces documentation to see the maximum number of private IP addresses allowed per instance type.
 	// +kubebuilder:validation:Optional
 	SecondaryPrivateIps []*string `json:"secondaryPrivateIps,omitempty" tf:"secondary_private_ips,omitempty"`
 
@@ -246,15 +301,18 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
+	// A list of security group names to associate with.
 	// +crossplane:generate:reference:type=SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
+	// Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs. Defaults true.
 	// +kubebuilder:validation:Optional
 	SourceDestCheck *bool `json:"sourceDestCheck,omitempty" tf:"source_dest_check,omitempty"`
 
+	// VPC Subnet ID to launch in.
 	// +crossplane:generate:reference:type=Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -268,15 +326,19 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Tenancy of the instance . An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command.
 	// +kubebuilder:validation:Optional
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 
+	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
 	// +kubebuilder:validation:Optional
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
+	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
 	// +kubebuilder:validation:Optional
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
 
+	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate when set to true. Defaults to false if not set.
 	// +kubebuilder:validation:Optional
 	UserDataReplaceOnChange *bool `json:"userDataReplaceOnChange,omitempty" tf:"user_data_replace_on_change,omitempty"`
 
@@ -286,12 +348,14 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
+	// A list of security group IDs to associate with.
 	// +crossplane:generate:reference:type=SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
+	// A map of tags to assign, at instance-creation time, to root and EBS volumes.
 	// +kubebuilder:validation:Optional
 	VolumeTags map[string]*string `json:"volumeTags,omitempty" tf:"volume_tags,omitempty"`
 }
@@ -301,12 +365,15 @@ type LaunchTemplateObservation struct {
 
 type LaunchTemplateParameters struct {
 
+	// The ID of the launch template. Conflicts with name.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the launch template. Conflicts with id.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Template version. Can be a specific version number, $Latest or $Default. The default value is $Default.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -316,6 +383,7 @@ type MaintenanceOptionsObservation struct {
 
 type MaintenanceOptionsParameters struct {
 
+	// The automatic recovery behavior of the Instance. Can be "default" or "disabled". See Recover your instance for more details.
 	// +kubebuilder:validation:Optional
 	AutoRecovery *string `json:"autoRecovery,omitempty" tf:"auto_recovery,omitempty"`
 }
@@ -325,15 +393,19 @@ type MetadataOptionsObservation struct {
 
 type MetadataOptionsParameters struct {
 
+	// Whether the metadata service is available. Valid values include enabled or disabled. Defaults to enabled.
 	// +kubebuilder:validation:Optional
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
 
+	// Desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from 1 to 64. Defaults to 1.
 	// +kubebuilder:validation:Optional
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 . Valid values include optional or required. Defaults to optional.
 	// +kubebuilder:validation:Optional
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
+	// Enables or disables access to instance tags from the instance metadata service. Valid values include enabled or disabled. Defaults to disabled.
 	// +kubebuilder:validation:Optional
 	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
 }
@@ -346,12 +418,15 @@ type NetworkInterfaceParameters struct {
 	// +kubebuilder:validation:Optional
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
+	// Integer index of the network interface attachment. Limited by instance type.
 	// +kubebuilder:validation:Required
 	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
 
+	// Integer index of the network card. Limited by instance type. The default index is 0.
 	// +kubebuilder:validation:Optional
 	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
+	// ID of the network interface to attach.
 	// +crossplane:generate:reference:type=NetworkInterface
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
@@ -417,7 +492,7 @@ type InstanceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Instance is the Schema for the Instances API
+// Instance is the Schema for the Instances API. Provides an EC2 instance resource. This allows instances to be created, updated, and deleted. Instances also support provisioning.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

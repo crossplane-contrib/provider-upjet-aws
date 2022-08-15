@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: GroupPolicyAttachment is the Schema for the GroupPolicyAttachments
-          API
+          API. Attaches a Managed IAM Policy to an IAM group
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   group:
+                    description: he group the policy should be applied to
                     type: string
                   groupRef:
                     description: A Reference to a named object.
@@ -140,6 +141,7 @@ spec:
                         type: object
                     type: object
                   policyArn:
+                    description: he ARN of the policy you want to apply
                     type: string
                   policyArnRef:
                     description: A Reference to a named object.

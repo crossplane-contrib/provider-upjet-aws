@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: BucketPolicy is the Schema for the BucketPolicys API
+        description: BucketPolicy is the Schema for the BucketPolicys API. Attaches
+          a policy to an S3 bucket resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the bucket to which to apply the policy.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -139,6 +141,12 @@ spec:
                         type: object
                     type: object
                   policy:
+                    description: 'The text of the policy. Although this is a bucket
+                      policy rather than an IAM policy, the aws_iam_policy_document
+                      data source may be used, so long as it specifies a principal.
+                      For more information about building AWS IAM policy documents
+                      with Terraform, see the AWS IAM Policy Document Guide. Note:
+                      Bucket policies are limited to 20 KB in size.'
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

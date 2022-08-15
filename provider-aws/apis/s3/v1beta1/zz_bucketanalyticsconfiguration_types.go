@@ -21,6 +21,7 @@ type BucketAnalyticsConfigurationFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// Set of object tags for filtering.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -31,6 +32,7 @@ type BucketAnalyticsConfigurationObservation struct {
 
 type BucketAnalyticsConfigurationParameters struct {
 
+	// The name of the bucket this analytics configuration is associated with.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -41,9 +43,11 @@ type BucketAnalyticsConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags .
 	// +kubebuilder:validation:Optional
 	Filter []BucketAnalyticsConfigurationFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
+	// Unique identifier of the analytics configuration for the bucket.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -52,6 +56,7 @@ type BucketAnalyticsConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Configuration for the analytics data export .
 	// +kubebuilder:validation:Optional
 	StorageClassAnalysis []StorageClassAnalysisParameters `json:"storageClassAnalysis,omitempty" tf:"storage_class_analysis,omitempty"`
 }
@@ -61,6 +66,7 @@ type DataExportDestinationObservation struct {
 
 type DataExportDestinationParameters struct {
 
+	// Analytics data export currently only supports an S3 bucket destination .
 	// +kubebuilder:validation:Required
 	S3BucketDestination []S3BucketDestinationParameters `json:"s3BucketDestination" tf:"s3_bucket_destination,omitempty"`
 }
@@ -70,9 +76,11 @@ type DataExportObservation struct {
 
 type DataExportParameters struct {
 
+	// Specifies the destination for the exported analytics data .
 	// +kubebuilder:validation:Required
 	Destination []DataExportDestinationParameters `json:"destination" tf:"destination,omitempty"`
 
+	// The schema version of exported analytics data. Allowed values: V_1. Default value: V_1.
 	// +kubebuilder:validation:Optional
 	OutputSchemaVersion *string `json:"outputSchemaVersion,omitempty" tf:"output_schema_version,omitempty"`
 }
@@ -82,9 +90,11 @@ type S3BucketDestinationObservation struct {
 
 type S3BucketDestinationParameters struct {
 
+	// The account ID that owns the destination bucket.
 	// +kubebuilder:validation:Optional
 	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
 
+	// The ARN of the destination bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -96,6 +106,7 @@ type S3BucketDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
+	// The output format of exported analytics data. Allowed values: CSV. Default value: CSV.
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
@@ -108,6 +119,7 @@ type StorageClassAnalysisObservation struct {
 
 type StorageClassAnalysisParameters struct {
 
+	// Data export configuration .
 	// +kubebuilder:validation:Required
 	DataExport []DataExportParameters `json:"dataExport" tf:"data_export,omitempty"`
 }
@@ -126,7 +138,7 @@ type BucketAnalyticsConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketAnalyticsConfiguration is the Schema for the BucketAnalyticsConfigurations API
+// BucketAnalyticsConfiguration is the Schema for the BucketAnalyticsConfigurations API. Provides a S3 bucket analytics configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

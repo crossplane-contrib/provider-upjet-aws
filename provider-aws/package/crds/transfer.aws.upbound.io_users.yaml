@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: User is the Schema for the Users API
+        description: User is the Schema for the Users API. Provides a AWS Transfer
+          User resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,13 +65,24 @@ spec:
               forProvider:
                 properties:
                   homeDirectory:
+                    description: The landing directory  for a user when they log in
+                      to the server using their SFTP client.  It should begin with
+                      a /.  The first item in the path is the name of the home bucket  and
+                      the rest is the home directory . For example, /example-bucket-1234/username
+                      would set the home bucket to example-bucket-1234 and the home
+                      directory to username.
                     type: string
                   homeDirectoryMappings:
+                    description: Logical directory mappings that specify what S3 paths
+                      and keys should be visible to your user and how you want to
+                      make them visible. See Home Directory Mappings below.
                     items:
                       properties:
                         entry:
+                          description: Represents an entry and a target.
                           type: string
                         target:
+                          description: Represents the map target.
                           type: string
                       required:
                       - entry
@@ -78,19 +90,38 @@ spec:
                       type: object
                     type: array
                   homeDirectoryType:
+                    description: The type of landing directory  you mapped for your
+                      users' home directory. Valid values are PATH and LOGICAL.
                     type: string
                   policy:
+                    description: An IAM JSON policy document that scopes down user
+                      access to portions of their Amazon S3 bucket. IAM variables
+                      you can use inside this policy include ${Transfer:UserName},
+                      ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}. Since
+                      the IAM variable syntax matches Terraform's interpolation syntax,
+                      they must be escaped inside Terraform configuration strings
+                      .  These are evaluated on-the-fly when navigating the bucket.
                     type: string
                   posixProfile:
+                    description: Specifies the full POSIX identity, including user
+                      ID , group ID , and any secondary groups IDs , that controls
+                      your users' access to your Amazon EFS file systems. See Posix
+                      Profile below.
                     items:
                       properties:
                         gid:
+                          description: The POSIX group ID used for all EFS operations
+                            by this user.
                           type: number
                         secondaryGids:
+                          description: The secondary POSIX group IDs used for all
+                            EFS operations by this user.
                           items:
                             type: number
                           type: array
                         uid:
+                          description: The POSIX user ID used for all EFS operations
+                            by this user.
                           type: number
                       required:
                       - gid
@@ -102,6 +133,9 @@ spec:
                       be created in.
                     type: string
                   role:
+                    description: Amazon Resource Name  of an IAM role that allows
+                      the service to controls your user’s access to your Amazon S3
+                      bucket.
                     type: string
                   roleRef:
                     description: A Reference to a named object.
@@ -177,6 +211,7 @@ spec:
                         type: object
                     type: object
                   serverId:
+                    description: The Server ID of the Transfer Server
                     type: string
                   serverIdRef:
                     description: A Reference to a named object.
@@ -254,6 +289,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -435,12 +473,16 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of Transfer User
                     type: string
                   id:
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

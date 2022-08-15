@@ -14,16 +14,21 @@ import (
 )
 
 type VaultNotificationsObservation struct {
+
+	// The ARN of the vault.
 	BackupVaultArn *string `json:"backupVaultArn,omitempty" tf:"backup_vault_arn,omitempty"`
 
+	// The name of the vault.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type VaultNotificationsParameters struct {
 
+	// An array of events that indicate the status of jobs to back up resources to the backup vault.
 	// +kubebuilder:validation:Required
 	BackupVaultEvents []*string `json:"backupVaultEvents" tf:"backup_vault_events,omitempty"`
 
+	// Name of the backup vault to add notifications for.
 	// +kubebuilder:validation:Required
 	BackupVaultName *string `json:"backupVaultName" tf:"backup_vault_name,omitempty"`
 
@@ -32,6 +37,7 @@ type VaultNotificationsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The Amazon Resource Name  that specifies the topic for a backup vault’s events
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -58,7 +64,7 @@ type VaultNotificationsStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VaultNotifications is the Schema for the VaultNotificationss API
+// VaultNotifications is the Schema for the VaultNotificationss API. Provides an AWS Backup vault notifications resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

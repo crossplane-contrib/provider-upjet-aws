@@ -35,7 +35,10 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Function is the Schema for the Functions API
+        description: Function is the Schema for the Functions API. Provides a CloudFront
+          Function resource. With CloudFront Functions in Amazon CloudFront, you can
+          write lightweight functions in JavaScript for high-scale, latency-sensitive
+          CDN customizations.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +67,7 @@ spec:
               forProvider:
                 properties:
                   codeSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: Source code of the function
                     properties:
                       key:
                         description: The key to select.
@@ -82,14 +84,19 @@ spec:
                     - namespace
                     type: object
                   comment:
+                    description: Comment.
                     type: string
                   publish:
+                    description: Whether to publish creation/change as Live CloudFront
+                      Function Version. Defaults to true.
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   runtime:
+                    description: Identifier of the function's runtime. Currently only
+                      cloudfront-js-1.0 is valid.
                     type: string
                 required:
                 - codeSecretRef
@@ -273,14 +280,21 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  identifying your CloudFront
+                      Function.
                     type: string
                   etag:
+                    description: ETag hash of the function. This is the value for
+                      the DEVELOPMENT stage of the function.
                     type: string
                   id:
                     type: string
                   liveStageEtag:
+                    description: ETag hash of any LIVE stage of the function.
                     type: string
                   status:
+                    description: Status of the function. Can be UNPUBLISHED, UNASSOCIATED
+                      or ASSOCIATED.
                     type: string
                 type: object
               conditions:

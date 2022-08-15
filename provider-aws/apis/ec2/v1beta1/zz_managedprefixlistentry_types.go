@@ -14,11 +14,14 @@ import (
 )
 
 type ManagedPrefixListEntryObservation struct {
+
+	// ID of the managed prefix list entry.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ManagedPrefixListEntryParameters struct {
 
+	// CIDR block of this entry.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("cidr_block",false)
 	// +kubebuilder:validation:Optional
@@ -30,9 +33,11 @@ type ManagedPrefixListEntryParameters struct {
 	// +kubebuilder:validation:Optional
 	CidrSelector *v1.Selector `json:"cidrSelector,omitempty" tf:"-"`
 
+	// Description of this entry. Due to API limitations, updating only the description of an entry requires recreating the entry.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// CIDR block of this entry.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -64,7 +69,7 @@ type ManagedPrefixListEntryStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ManagedPrefixListEntry is the Schema for the ManagedPrefixListEntrys API
+// ManagedPrefixListEntry is the Schema for the ManagedPrefixListEntrys API. Provides a managed prefix list entry resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

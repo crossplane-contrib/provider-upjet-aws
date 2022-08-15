@@ -14,40 +14,56 @@ import (
 )
 
 type EIPObservation struct {
+
+	// ID that AWS assigns to represent the allocation of the Elastic IP address for use with instances in a VPC.
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
+	// ID representing the association of the address with an instance in a VPC.
 	AssociationID *string `json:"associationId,omitempty" tf:"association_id,omitempty"`
 
+	// Carrier IP address.
 	CarrierIP *string `json:"carrierIp,omitempty" tf:"carrier_ip,omitempty"`
 
+	// Customer owned IP.
 	CustomerOwnedIP *string `json:"customerOwnedIp,omitempty" tf:"customer_owned_ip,omitempty"`
 
+	// Indicates if this EIP is for use in VPC  or EC2 Classic .
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
+	// Contains the EIP allocation ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Private DNS associated with the Elastic IP address .
 	PrivateDNS *string `json:"privateDns,omitempty" tf:"private_dns,omitempty"`
 
+	// Contains the private IP address .
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
+	// Public DNS associated with the Elastic IP address.
 	PublicDNS *string `json:"publicDns,omitempty" tf:"public_dns,omitempty"`
 
+	// Contains the public IP address.
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type EIPParameters struct {
 
+	// IP address from an EC2 BYOIP pool. This option is only available for VPC EIPs.
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
+	// User-specified primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
 	// +kubebuilder:validation:Optional
 	AssociateWithPrivateIP *string `json:"associateWithPrivateIp,omitempty" tf:"associate_with_private_ip,omitempty"`
 
+	// ID  of a customer-owned address pool. For more on customer owned IP addressed check out Customer-owned IP addresses guide.
 	// +kubebuilder:validation:Optional
 	CustomerOwnedIPv4Pool *string `json:"customerOwnedIpv4Pool,omitempty" tf:"customer_owned_ipv4_pool,omitempty"`
 
+	// EC2 instance ID.
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
@@ -58,9 +74,11 @@ type EIPParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceSelector *v1.Selector `json:"instanceSelector,omitempty" tf:"-"`
 
+	// Location from which the IP address is advertised. Use this parameter to limit the address to this location.
 	// +kubebuilder:validation:Optional
 	NetworkBorderGroup *string `json:"networkBorderGroup,omitempty" tf:"network_border_group,omitempty"`
 
+	// Network interface ID to associate with.
 	// +crossplane:generate:reference:type=NetworkInterface
 	// +kubebuilder:validation:Optional
 	NetworkInterface *string `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
@@ -71,6 +89,7 @@ type EIPParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceSelector *v1.Selector `json:"networkInterfaceSelector,omitempty" tf:"-"`
 
+	// EC2 IPv4 address pool identifier or amazon. This option is only available for VPC EIPs.
 	// +kubebuilder:validation:Optional
 	PublicIPv4Pool *string `json:"publicIpv4Pool,omitempty" tf:"public_ipv4_pool,omitempty"`
 
@@ -79,9 +98,11 @@ type EIPParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Map of tags to assign to the resource. Tags can only be applied to EIPs in a VPC. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Boolean if the EIP is in a VPC or not.
 	// +kubebuilder:validation:Optional
 	VPC *bool `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
@@ -100,7 +121,7 @@ type EIPStatus struct {
 
 // +kubebuilder:object:root=true
 
-// EIP is the Schema for the EIPs API
+// EIP is the Schema for the EIPs API. Provides an Elastic IP resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

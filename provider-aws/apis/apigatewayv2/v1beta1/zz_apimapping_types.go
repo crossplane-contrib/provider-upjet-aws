@@ -14,11 +14,14 @@ import (
 )
 
 type APIMappingObservation struct {
+
+	// The API mapping identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type APIMappingParameters struct {
 
+	// The API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -29,9 +32,11 @@ type APIMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
+	// The API mapping key.
 	// +kubebuilder:validation:Optional
 	APIMappingKey *string `json:"apiMappingKey,omitempty" tf:"api_mapping_key,omitempty"`
 
+	// The domain name. Use the aws_apigatewayv2_domain_name resource to configure a domain name.
 	// +crossplane:generate:reference:type=DomainName
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
@@ -47,6 +52,7 @@ type APIMappingParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The API stage. Use the aws_apigatewayv2_stage resource to configure an API stage.
 	// +crossplane:generate:reference:type=Stage
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
@@ -73,7 +79,7 @@ type APIMappingStatus struct {
 
 // +kubebuilder:object:root=true
 
-// APIMapping is the Schema for the APIMappings API
+// APIMapping is the Schema for the APIMappings API. Manages an Amazon API Gateway Version 2 API mapping.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

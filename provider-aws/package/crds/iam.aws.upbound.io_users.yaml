@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: User is the Schema for the Users API
+        description: User is the Schema for the Users API. Provides an IAM user.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,16 +64,24 @@ spec:
               forProvider:
                 properties:
                   forceDestroy:
-                    description: Delete user even if it has non-Terraform-managed
-                      IAM access keys, login profile or MFA devices
+                    description: When destroying this user, destroy even if it has
+                      non-Terraform-managed IAM access keys, login profile or MFA
+                      devices. Without force_destroy a user with non-Terraform-managed
+                      access keys and login profile will fail to be destroyed.
                     type: boolean
                   path:
+                    description: Path in which to create the user.
                     type: string
                   permissionsBoundary:
+                    description: The ARN of the policy that is used to set the permissions
+                      boundary for the user.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of tags for the IAM user. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 type: object
               providerConfigRef:
@@ -253,14 +261,19 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN assigned by AWS for this user.
                     type: string
                   id:
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   uniqueId:
+                    description: The unique ID assigned by AWS.
                     type: string
                 type: object
               conditions:

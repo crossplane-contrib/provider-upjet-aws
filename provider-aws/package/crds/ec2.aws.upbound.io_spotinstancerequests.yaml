@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: SpotInstanceRequest is the Schema for the SpotInstanceRequests
-          API
+          API. Provides a Spot Instance Request resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -71,6 +71,14 @@ spec:
                   availabilityZone:
                     type: string
                   blockDurationMinutes:
+                    description: The required duration for the Spot instances, in
+                      minutes. This value must be a multiple of 60 . The duration
+                      period starts as soon as your Spot instance receives its instance
+                      ID. At the end of the duration period, Amazon EC2 marks the
+                      Spot instance for termination and provides a Spot instance termination
+                      notice, which gives the instance a two-minute warning before
+                      it terminates. Note that you can't specify an Availability Zone
+                      group or a launch group if you specify a duration.
                     type: number
                   capacityReservationSpecification:
                     items:
@@ -119,6 +127,11 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
+                          description: A map of tags to assign to the Spot Instance
+                            Request. These tags are not automatically applied to the
+                            launched Instance. If configured with a provider default_tags
+                            configuration block present, tags with matching keys will
+                            overwrite those defined at the provider-level.
                           type: object
                         throughput:
                           type: number
@@ -163,6 +176,9 @@ spec:
                   instanceInitiatedShutdownBehavior:
                     type: string
                   instanceInterruptionBehavior:
+                    description: Indicates Spot instance behavior when it is interrupted.
+                      Valid values are terminate, stop, or hibernate. Default value
+                      is terminate.
                     type: string
                   instanceType:
                     type: string
@@ -175,11 +191,15 @@ spec:
                   keyName:
                     type: string
                   launchGroup:
+                    description: A launch group is a group of spot instances that
+                      launch together and terminate together. If left empty instances
+                      are launched and terminated individually.
                     type: string
                   launchTemplate:
                     items:
                       properties:
                         id:
+                          description: The Spot Instance Request ID.
                           type: string
                         name:
                           type: string
@@ -230,6 +250,7 @@ spec:
                   placementPartitionNumber:
                     type: number
                   privateIp:
+                    description: The private IP address assigned to the instance
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -249,6 +270,11 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
+                          description: A map of tags to assign to the Spot Instance
+                            Request. These tags are not automatically applied to the
+                            launched Instance. If configured with a provider default_tags
+                            configuration block present, tags with matching keys will
+                            overwrite those defined at the provider-level.
                           type: object
                         throughput:
                           type: number
@@ -269,8 +295,11 @@ spec:
                   sourceDestCheck:
                     type: boolean
                   spotPrice:
+                    description: The maximum price to request on the spot market.
                     type: string
                   spotType:
+                    description: If set to one-time, after the instance is terminated,
+                      the spot request will be closed.
                     type: string
                   subnetId:
                     type: string
@@ -350,6 +379,11 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the Spot Instance Request.
+                      These tags are not automatically applied to the launched Instance.
+                      If configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                   tenancy:
                     type: string
@@ -360,8 +394,14 @@ spec:
                   userDataReplaceOnChange:
                     type: boolean
                   validFrom:
+                    description: The start date and time of the request, in UTC RFC3339
+                      format. The default is to start fulfilling the request immediately.
                     type: string
                   validUntil:
+                    description: The end date and time of the request, in UTC RFC3339
+                      format. At this point, no new Spot instance requests are placed
+                      or enabled to fulfill the request. The default end date is 7
+                      days from the current date.
                     type: string
                   volumeTags:
                     additionalProperties:
@@ -447,6 +487,9 @@ spec:
                       type: string
                     type: array
                   waitForFulfillment:
+                    description: If set, Terraform will wait for the Spot Request
+                      to be fulfilled, and will throw an error if the timeout of 10m
+                      is reached.
                     type: boolean
                 required:
                 - region
@@ -637,6 +680,7 @@ spec:
                       type: object
                     type: array
                   id:
+                    description: The Spot Instance Request ID.
                     type: string
                   instanceState:
                     type: string
@@ -647,10 +691,18 @@ spec:
                   primaryNetworkInterfaceId:
                     type: string
                   privateDns:
+                    description: The private DNS name assigned to the instance. Can
+                      only be used inside the Amazon EC2, and only available if you've
+                      enabled DNS hostnames for your VPC
                     type: string
                   publicDns:
+                    description: The public DNS name assigned to the instance. For
+                      EC2-VPC, this is only available if you've enabled DNS hostnames
+                      for your VPC
                     type: string
                   publicIp:
+                    description: The public IP address assigned to the instance, if
+                      applicable.
                     type: string
                   rootBlockDevice:
                     items:
@@ -662,14 +714,21 @@ spec:
                       type: object
                     type: array
                   spotBidStatus:
+                    description: The current bid status of the Spot Instance Request.
                     type: string
                   spotInstanceId:
+                    description: The Instance ID  that is currently fulfilling the
+                      Spot Instance request.
                     type: string
                   spotRequestState:
+                    description: The current request state of the Spot Instance Request.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

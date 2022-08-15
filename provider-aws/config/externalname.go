@@ -78,6 +78,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// us-west-2_abc123
 	"aws_cognito_identity_pool": config.IdentifierFromProvider,
+	// us-west-2:b64805ad-cb56-40ba-9ffc-f5d8207e6d42
+	"aws_cognito_identity_pool_roles_attachment": config.IdentifierFromProvider,
+	// us-west-2_abc123:CorpAD
+	"aws_cognito_identity_pool_provider_principal_tag": config.IdentifierFromProvider,
 
 	// cognitoidp
 	//
@@ -90,11 +94,17 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// us-west-2_ZCTarbt5C,12bu4fuk3mlgqa2rtrujgp6egq
 	"aws_cognito_user_pool_ui_customization": config.IdentifierFromProvider,
 	// aws_cognito_user_group.group us-east-1_vG78M4goG/user-group
-	"aws_cognito_user_group": config.IdentifierFromProvider,
+	// disabled until the fix of https://github.com/upbound/official-providers/issues/531
+	// "aws_cognito_user_group": config.IdentifierFromProvider,
 	// us-west-2_abc123|https://example.com
 	"aws_cognito_resource_server": config.IdentifierFromProvider,
 	// us-west-2_abc123:CorpAD
 	"aws_cognito_identity_provider": config.IdentifierFromProvider,
+	// user_pool_id/name: us-east-1_vG78M4goG/user
+	"aws_cognito_user": config.TemplatedStringAsIdentifier("username", "{{ .parameters.user_pool_id }}/{{ .externalName }}"),
+	// no doc
+	// disabled until the fix of https://github.com/upbound/official-providers/issues/531
+	// "aws_cognito_user_in_group": config.IdentifierFromProvider,
 
 	// ebs
 	//
@@ -839,6 +849,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_dax_parameter_group": config.NameAsIdentifier,
 	// DAX Subnet Group can be imported using the name
 	"aws_dax_subnet_group": config.NameAsIdentifier,
+
+	// cloudsearch
+	//
+	// CloudSearch Domains can be imported using the name
+	"aws_cloudsearch_domain": config.NameAsIdentifier,
+	// CloudSearch domain service access policies can be imported using the domain name
+	"aws_cloudsearch_domain_service_access_policy": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

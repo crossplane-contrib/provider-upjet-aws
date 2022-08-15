@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: IdentityProviderConfig is the Schema for the IdentityProviderConfigs
-          API
+          API. Manages an EKS Identity Provider Configuration.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   clusterName:
+                    description: –  Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: A Reference to a named object.
@@ -140,23 +141,38 @@ spec:
                         type: object
                     type: object
                   oidc:
+                    description: Nested attribute containing OpenID Connect identity
+                      provider information for the cluster. Detailed below.
                     items:
                       properties:
                         clientId:
+                          description: –  Client ID for the OpenID Connect identity
+                            provider.
                           type: string
                         groupsClaim:
+                          description: The JWT claim that the provider will use to
+                            return groups.
                           type: string
                         groupsPrefix:
+                          description: A prefix that is prepended to group claims
+                            e.g., oidc:.
                           type: string
                         issuerUrl:
+                          description: Issuer URL for the OpenID Connect identity
+                            provider.
                           type: string
                         requiredClaims:
                           additionalProperties:
                             type: string
+                          description: The key value pairs that describe required
+                            claims in the identity token.
                           type: object
                         usernameClaim:
+                          description: The JWT claim that the provider will use as
+                            the username.
                           type: string
                         usernamePrefix:
+                          description: A prefix that is prepended to username claims.
                           type: string
                       required:
                       - clientId
@@ -170,6 +186,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - oidc
@@ -353,14 +372,22 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of the EKS Identity Provider
+                      Configuration.
                     type: string
                   id:
+                    description: EKS Cluster name and EKS Identity Provider Configuration
+                      name separated by a colon .
                     type: string
                   status:
+                    description: Status of the EKS Identity Provider Configuration.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

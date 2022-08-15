@@ -14,25 +14,34 @@ import (
 )
 
 type AccessKeyObservation struct {
+
+	// Date and time in RFC3339 format that the access key was created.
 	CreateDate *string `json:"createDate,omitempty" tf:"create_date,omitempty"`
 
+	// Encrypted secret, base64 encoded, if pgp_key was specified. This attribute is not available for imported resources. The encrypted secret may be decrypted using the command line, for example: terraform output -raw encrypted_secret | base64 --decode | keybase pgp decrypt.
 	EncryptedSecret *string `json:"encryptedSecret,omitempty" tf:"encrypted_secret,omitempty"`
 
+	// Encrypted SES SMTP password, base64 encoded, if pgp_key was specified. This attribute is not available for imported resources. The encrypted password may be decrypted using the command line, for example: terraform output -raw encrypted_ses_smtp_password_v4 | base64 --decode | keybase pgp decrypt.
 	EncryptedSesSMTPPasswordV4 *string `json:"encryptedSesSmtpPasswordV4,omitempty" tf:"encrypted_ses_smtp_password_v4,omitempty"`
 
+	// Access key ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Fingerprint of the PGP key used to encrypt the secret. This attribute is not available for imported resources.
 	KeyFingerprint *string `json:"keyFingerprint,omitempty" tf:"key_fingerprint,omitempty"`
 }
 
 type AccessKeyParameters struct {
 
+	// Either a base-64 encoded PGP public key, or a keybase username in the form keybase:some_person_that_exists, for use in the encrypted_secret output attribute.
 	// +kubebuilder:validation:Optional
 	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
 
+	// Access key status to apply. Defaults to Active. Valid values are Active and Inactive.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// IAM user to associate with this access key.
 	// +crossplane:generate:reference:type=User
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
@@ -58,7 +67,7 @@ type AccessKeyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// AccessKey is the Schema for the AccessKeys API
+// AccessKey is the Schema for the AccessKeys API. Provides an IAM access key. This is a set of credentials that allow API requests to be made as an IAM user.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

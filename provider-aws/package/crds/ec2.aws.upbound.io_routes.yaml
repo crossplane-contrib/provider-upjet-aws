@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Route is the Schema for the Routes API
+        description: Route is the Schema for the Routes API. Provides a resource to
+          create a routing entry in a VPC routing table.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,16 +65,24 @@ spec:
               forProvider:
                 properties:
                   carrierGatewayId:
+                    description: Identifier of a carrier gateway. This attribute can
+                      only be used when the VPC contains a subnet which is associated
+                      with a Wavelength Zone.
                     type: string
                   coreNetworkArn:
+                    description: The Amazon Resource Name  of a core network.
                     type: string
                   destinationCidrBlock:
+                    description: The destination CIDR block.
                     type: string
                   destinationIpv6CidrBlock:
+                    description: The destination IPv6 CIDR block.
                     type: string
                   destinationPrefixListId:
+                    description: The ID of a managed prefix list destination.
                     type: string
                   egressOnlyGatewayId:
+                    description: Identifier of a VPC Egress Only Internet Gateway.
                     type: string
                   egressOnlyGatewayIdRef:
                     description: A Reference to a named object.
@@ -149,6 +158,8 @@ spec:
                         type: object
                     type: object
                   gatewayId:
+                    description: Identifier of a VPC internet gateway or a virtual
+                      private gateway.
                     type: string
                   gatewayIdRef:
                     description: A Reference to a named object.
@@ -224,6 +235,7 @@ spec:
                         type: object
                     type: object
                   instanceId:
+                    description: Identifier of an EC2 instance.
                     type: string
                   instanceIdRef:
                     description: A Reference to a named object.
@@ -299,10 +311,13 @@ spec:
                         type: object
                     type: object
                   localGatewayId:
+                    description: Identifier of a Outpost local gateway.
                     type: string
                   natGatewayId:
+                    description: Identifier of a VPC NAT gateway.
                     type: string
                   networkInterfaceId:
+                    description: Identifier of an EC2 network interface.
                     type: string
                   networkInterfaceIdRef:
                     description: A Reference to a named object.
@@ -382,6 +397,7 @@ spec:
                       be created in.
                     type: string
                   routeTableId:
+                    description: The ID of the routing table.
                     type: string
                   routeTableIdRef:
                     description: A Reference to a named object.
@@ -457,6 +473,7 @@ spec:
                         type: object
                     type: object
                   transitGatewayId:
+                    description: Identifier of an EC2 Transit Gateway.
                     type: string
                   transitGatewayIdRef:
                     description: A Reference to a named object.
@@ -532,6 +549,7 @@ spec:
                         type: object
                     type: object
                   vpcEndpointId:
+                    description: Identifier of a VPC Endpoint.
                     type: string
                   vpcEndpointIdRef:
                     description: A Reference to a named object.
@@ -607,6 +625,7 @@ spec:
                         type: object
                     type: object
                   vpcPeeringConnectionId:
+                    description: Identifier of a VPC peering connection.
                     type: string
                   vpcPeeringConnectionIdRef:
                     description: A Reference to a named object.
@@ -861,12 +880,18 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: Route identifier computed from the routing table
+                      identifier and route destination.
                     type: string
                   instanceOwnerId:
+                    description: The AWS account ID of the owner of the EC2 instance.
                     type: string
                   origin:
+                    description: How the route was created - CreateRouteTable, CreateRoute
+                      or EnableVgwRoutePropagation.
                     type: string
                   state:
+                    description: The state of the route - active or blackhole.
                     type: string
                 type: object
               conditions:

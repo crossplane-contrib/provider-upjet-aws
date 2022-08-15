@@ -18,6 +18,7 @@ type AutoScalingGroupProviderObservation struct {
 
 type AutoScalingGroupProviderParameters struct {
 
+	// - ARN of the associated auto scaling group.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -29,23 +30,30 @@ type AutoScalingGroupProviderParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoScalingGroupArnSelector *v1.Selector `json:"autoScalingGroupArnSelector,omitempty" tf:"-"`
 
+	// - Configuration block defining the parameters of the auto scaling. Detailed below.
 	// +kubebuilder:validation:Optional
 	ManagedScaling []ManagedScalingParameters `json:"managedScaling,omitempty" tf:"managed_scaling,omitempty"`
 
+	// - Enables or disables container-aware termination of instances in the auto scaling group when scale-in happens. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
 	ManagedTerminationProtection *string `json:"managedTerminationProtection,omitempty" tf:"managed_termination_protection,omitempty"`
 }
 
 type CapacityProviderObservation struct {
+
+	// ARN that identifies the capacity provider.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ARN that identifies the capacity provider.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type CapacityProviderParameters struct {
 
+	// Configuration block for the provider for the ECS auto scaling group. Detailed below.
 	// +kubebuilder:validation:Required
 	AutoScalingGroupProvider []AutoScalingGroupProviderParameters `json:"autoScalingGroupProvider" tf:"auto_scaling_group_provider,omitempty"`
 
@@ -54,6 +62,7 @@ type CapacityProviderParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -63,18 +72,23 @@ type ManagedScalingObservation struct {
 
 type ManagedScalingParameters struct {
 
+	// Period of time, in seconds, after a newly launched Amazon EC2 instance can contribute to CloudWatch metrics for Auto Scaling group. If this parameter is omitted, the default value of 300 seconds is used.
 	// +kubebuilder:validation:Optional
 	InstanceWarmupPeriod *float64 `json:"instanceWarmupPeriod,omitempty" tf:"instance_warmup_period,omitempty"`
 
+	// Maximum step adjustment size. A number between 1 and 10,000.
 	// +kubebuilder:validation:Optional
 	MaximumScalingStepSize *float64 `json:"maximumScalingStepSize,omitempty" tf:"maximum_scaling_step_size,omitempty"`
 
+	// Minimum step adjustment size. A number between 1 and 10,000.
 	// +kubebuilder:validation:Optional
 	MinimumScalingStepSize *float64 `json:"minimumScalingStepSize,omitempty" tf:"minimum_scaling_step_size,omitempty"`
 
+	// Whether auto scaling is managed by ECS. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// Target utilization for the capacity provider. A number between 1 and 100.
 	// +kubebuilder:validation:Optional
 	TargetCapacity *float64 `json:"targetCapacity,omitempty" tf:"target_capacity,omitempty"`
 }
@@ -93,7 +107,7 @@ type CapacityProviderStatus struct {
 
 // +kubebuilder:object:root=true
 
-// CapacityProvider is the Schema for the CapacityProviders API
+// CapacityProvider is the Schema for the CapacityProviders API. Provides an ECS cluster capacity provider.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

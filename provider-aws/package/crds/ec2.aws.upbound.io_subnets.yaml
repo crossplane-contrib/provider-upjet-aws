@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Subnet is the Schema for the Subnets API
+        description: Subnet is the Schema for the Subnets API. Provides an VPC subnet
+          resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,32 +65,67 @@ spec:
               forProvider:
                 properties:
                   assignIpv6AddressOnCreation:
+                    description: Specify true to indicate that network interfaces
+                      created in the specified subnet should be assigned an IPv6 address.
+                      Default is false
                     type: boolean
                   availabilityZone:
+                    description: AZ for the subnet.
                     type: string
                   availabilityZoneId:
+                    description: AZ ID of the subnet. This argument is not supported
+                      in all regions or partitions. If necessary, use availability_zone
+                      instead.
                     type: string
                   cidrBlock:
+                    description: The IPv4 CIDR block for the subnet.
                     type: string
                   customerOwnedIpv4Pool:
+                    description: The customer owned IPv4 address pool. Typically used
+                      with the map_customer_owned_ip_on_launch argument. The outpost_arn
+                      argument must be specified when configured.
                     type: string
                   enableDns64:
+                    description: 'Indicates whether DNS queries made to the Amazon-provided
+                      DNS Resolver in this subnet should return synthetic IPv6 addresses
+                      for IPv4-only destinations. Default: false.'
                     type: boolean
                   enableResourceNameDnsARecordOnLaunch:
+                    description: 'Indicates whether to respond to DNS queries for
+                      instance hostnames with DNS A records. Default: false.'
                     type: boolean
                   enableResourceNameDnsAaaaRecordOnLaunch:
+                    description: 'Indicates whether to respond to DNS queries for
+                      instance hostnames with DNS AAAA records. Default: false.'
                     type: boolean
                   ipv6CidrBlock:
+                    description: The IPv6 network range for the subnet, in CIDR notation.
+                      The subnet size must use a /64 prefix length.
                     type: string
                   ipv6Native:
+                    description: 'Indicates whether to create an IPv6-only subnet.
+                      Default: false.'
                     type: boolean
                   mapCustomerOwnedIpOnLaunch:
+                    description: Specify true to indicate that network interfaces
+                      created in the subnet should be assigned a customer owned IP
+                      address. The customer_owned_ipv4_pool and outpost_arn arguments
+                      must be specified when set to true. Default is false.
                     type: boolean
                   mapPublicIpOnLaunch:
+                    description: Specify true to indicate that instances launched
+                      into the subnet should be assigned a public IP address. Default
+                      is false.
                     type: boolean
                   outpostArn:
+                    description: The Amazon Resource Name  of the Outpost.
                     type: string
                   privateDnsHostnameTypeOnLaunch:
+                    description: 'The type of hostnames to assign to instances in
+                      the subnet at launch. For IPv6-only subnets, an instance DNS
+                      name must be based on the instance ID. For dual-stack and IPv4-only
+                      subnets, you can specify whether DNS names use the instance
+                      IPv4 address or the instance ID. Valid values: ip-name, resource-name.'
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -98,8 +134,12 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                   vpcId:
+                    description: The VPC ID.
                     type: string
                   vpcIdRef:
                     description: A Reference to a named object.
@@ -354,16 +394,23 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the subnet.
                     type: string
                   id:
+                    description: The ID of the subnet
                     type: string
                   ipv6CidrBlockAssociationId:
+                    description: The association ID for the IPv6 CIDR block.
                     type: string
                   ownerId:
+                    description: The ID of the AWS account that owns the subnet.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

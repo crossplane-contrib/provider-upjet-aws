@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Configuration is the Schema for the Configurations API
+        description: Configuration is the Schema for the Configurations API. Terraform
+          resource for managing an Amazon Managed Streaming for Kafka configuration
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,18 +65,24 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: Description of the configuration.
                     type: string
                   kafkaVersions:
+                    description: List of Apache Kafka versions which can use this
+                      configuration.
                     items:
                       type: string
                     type: array
                   name:
+                    description: Name of the configuration.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   serverProperties:
+                    description: Contents of the server.properties file. Supported
+                      properties are documented in the MSK Developer Guide.
                     type: string
                 required:
                 - name
@@ -259,10 +266,12 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of the configuration.
                     type: string
                   id:
                     type: string
                   latestRevision:
+                    description: Latest revision of the configuration.
                     type: number
                 type: object
               conditions:

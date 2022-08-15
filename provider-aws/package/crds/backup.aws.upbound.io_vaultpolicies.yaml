@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: VaultPolicy is the Schema for the VaultPolicys API
+        description: VaultPolicy is the Schema for the VaultPolicys API. Provides
+          an AWS Backup vault policy resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   backupVaultName:
+                    description: Name of the backup vault to add policy for.
                     type: string
                   backupVaultNameRef:
                     description: A Reference to a named object.
@@ -139,6 +141,7 @@ spec:
                         type: object
                     type: object
                   policy:
+                    description: The backup vault access policy document in JSON format.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -325,8 +328,10 @@ spec:
               atProvider:
                 properties:
                   backupVaultArn:
+                    description: The ARN of the vault.
                     type: string
                   id:
+                    description: The name of the vault.
                     type: string
                 type: object
               conditions:

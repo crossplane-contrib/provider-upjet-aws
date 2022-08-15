@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: NATGateway is the Schema for the NATGateways API
+        description: NATGateway is the Schema for the NATGateways API. Provides a
+          resource to create a VPC NAT Gateway.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -139,6 +140,8 @@ spec:
                         type: object
                     type: object
                   connectivityType:
+                    description: Connectivity type for the gateway. Valid values are
+                      private and public. Defaults to public.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -222,6 +225,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -403,16 +409,24 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the NAT Gateway.
                     type: string
                   networkInterfaceId:
+                    description: The ENI ID of the network interface created by the
+                      NAT gateway.
                     type: string
                   privateIp:
+                    description: The private IP address of the NAT Gateway.
                     type: string
                   publicIp:
+                    description: The public IP address of the NAT Gateway.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

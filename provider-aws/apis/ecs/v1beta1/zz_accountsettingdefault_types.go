@@ -14,6 +14,8 @@ import (
 )
 
 type AccountSettingDefaultObservation struct {
+
+	// ARN that identifies the account setting.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
@@ -21,6 +23,7 @@ type AccountSettingDefaultObservation struct {
 
 type AccountSettingDefaultParameters struct {
 
+	// Name of the account setting to set. Valid values are serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking and containerInsights.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -29,6 +32,7 @@ type AccountSettingDefaultParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// State of the setting. Valid values are enabled and disabled.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -47,7 +51,7 @@ type AccountSettingDefaultStatus struct {
 
 // +kubebuilder:object:root=true
 
-// AccountSettingDefault is the Schema for the AccountSettingDefaults API
+// AccountSettingDefault is the Schema for the AccountSettingDefaults API. Provides an ECS Default account setting.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

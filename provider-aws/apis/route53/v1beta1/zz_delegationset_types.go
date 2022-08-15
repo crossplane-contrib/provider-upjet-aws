@@ -14,15 +14,21 @@ import (
 )
 
 type DelegationSetObservation struct {
+
+	// The Amazon Resource Name  of the Delegation Set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The delegation set ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A list of authoritative name servers for the hosted zone
+	// .
 	NameServers []*string `json:"nameServers,omitempty" tf:"name_servers,omitempty"`
 }
 
 type DelegationSetParameters struct {
 
+	// This is a reference name used in Caller Reference
 	// +kubebuilder:validation:Optional
 	ReferenceName *string `json:"referenceName,omitempty" tf:"reference_name,omitempty"`
 
@@ -46,7 +52,7 @@ type DelegationSetStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DelegationSet is the Schema for the DelegationSets API
+// DelegationSet is the Schema for the DelegationSets API. Provides a Route53 Delegation Set resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

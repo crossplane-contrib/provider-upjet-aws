@@ -14,15 +14,20 @@ import (
 )
 
 type BucketWebsiteConfigurationObservation struct {
+
+	// The bucket or bucket and expected_bucket_owner separated by a comma  if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The domain of the website endpoint. This is used to create Route 53 alias records.
 	WebsiteDomain *string `json:"websiteDomain,omitempty" tf:"website_domain,omitempty"`
 
+	// The website endpoint.
 	WebsiteEndpoint *string `json:"websiteEndpoint,omitempty" tf:"website_endpoint,omitempty"`
 }
 
 type BucketWebsiteConfigurationParameters struct {
 
+	// The name of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -33,15 +38,19 @@ type BucketWebsiteConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// The name of the error document for the website detailed below.
 	// +kubebuilder:validation:Optional
 	ErrorDocument []ErrorDocumentParameters `json:"errorDocument,omitempty" tf:"error_document,omitempty"`
 
+	// The account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
+	// The name of the index document for the website detailed below.
 	// +kubebuilder:validation:Optional
 	IndexDocument []IndexDocumentParameters `json:"indexDocument,omitempty" tf:"index_document,omitempty"`
 
+	// The redirect behavior for every request to this bucket's website endpoint detailed below. Conflicts with error_document, index_document, and routing_rule.
 	// +kubebuilder:validation:Optional
 	RedirectAllRequestsTo []RedirectAllRequestsToParameters `json:"redirectAllRequestsTo,omitempty" tf:"redirect_all_requests_to,omitempty"`
 
@@ -50,9 +59,12 @@ type BucketWebsiteConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// List of rules that define when a redirect is applied and the redirect behavior detailed below.
 	// +kubebuilder:validation:Optional
 	RoutingRule []RoutingRuleParameters `json:"routingRule,omitempty" tf:"routing_rule,omitempty"`
 
+	// A json array containing routing rules
+	// describing redirect behavior and when redirects are applied. Use this parameter when your routing rules contain empty String values  as seen in the example above.
 	// +kubebuilder:validation:Optional
 	RoutingRules *string `json:"routingRules,omitempty" tf:"routing_rules,omitempty"`
 }
@@ -62,9 +74,11 @@ type ConditionObservation struct {
 
 type ConditionParameters struct {
 
+	// The HTTP error code when the redirect is applied. If specified with key_prefix_equals, then both must be true for the redirect to be applied.
 	// +kubebuilder:validation:Optional
 	HTTPErrorCodeReturnedEquals *string `json:"httpErrorCodeReturnedEquals,omitempty" tf:"http_error_code_returned_equals,omitempty"`
 
+	// The object key name prefix when the redirect is applied. If specified with http_error_code_returned_equals, then both must be true for the redirect to be applied.
 	// +kubebuilder:validation:Optional
 	KeyPrefixEquals *string `json:"keyPrefixEquals,omitempty" tf:"key_prefix_equals,omitempty"`
 }
@@ -74,6 +88,7 @@ type ErrorDocumentObservation struct {
 
 type ErrorDocumentParameters struct {
 
+	// The object key name to use when a 4XX class error occurs.
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
 }
@@ -83,6 +98,9 @@ type IndexDocumentObservation struct {
 
 type IndexDocumentParameters struct {
 
+	// A suffix that is appended to a request that is for a directory on the website endpoint.
+	// For example, if the suffix is index.html and you make a request to samplebucket/images/, the data that is returned will be for the object with the key name images/index.html.
+	// The suffix must not be empty and must not include a slash character.
 	// +kubebuilder:validation:Required
 	Suffix *string `json:"suffix" tf:"suffix,omitempty"`
 }
@@ -104,6 +122,7 @@ type RedirectObservation struct {
 
 type RedirectParameters struct {
 
+	// The HTTP redirect code to use on the response.
 	// +kubebuilder:validation:Optional
 	HTTPRedirectCode *string `json:"httpRedirectCode,omitempty" tf:"http_redirect_code,omitempty"`
 
@@ -113,9 +132,11 @@ type RedirectParameters struct {
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// The object key prefix to use in the redirect request. For example, to redirect requests for all pages with prefix docs/  to documents/, you can set a condition block with key_prefix_equals set to docs/ and in the redirect set replace_key_prefix_with to /documents.
 	// +kubebuilder:validation:Optional
 	ReplaceKeyPrefixWith *string `json:"replaceKeyPrefixWith,omitempty" tf:"replace_key_prefix_with,omitempty"`
 
+	// The specific object key to use in the redirect request. For example, redirect request to error.html.
 	// +kubebuilder:validation:Optional
 	ReplaceKeyWith *string `json:"replaceKeyWith,omitempty" tf:"replace_key_with,omitempty"`
 }
@@ -125,9 +146,11 @@ type RoutingRuleObservation struct {
 
 type RoutingRuleParameters struct {
 
+	// A configuration block for describing a condition that must be met for the specified redirect to apply detailed below.
 	// +kubebuilder:validation:Optional
 	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
+	// A configuration block for redirect information detailed below.
 	// +kubebuilder:validation:Required
 	Redirect []RedirectParameters `json:"redirect" tf:"redirect,omitempty"`
 }
@@ -146,7 +169,7 @@ type BucketWebsiteConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketWebsiteConfiguration is the Schema for the BucketWebsiteConfigurations API
+// BucketWebsiteConfiguration is the Schema for the BucketWebsiteConfigurations API. Provides an S3 bucket website configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

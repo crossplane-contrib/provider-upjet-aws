@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: GameSessionQueue is the Schema for the GameSessionQueues API
+        description: GameSessionQueue is the Schema for the GameSessionQueues API.
+          Provides a GameLift Game Session Queue resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,15 +65,25 @@ spec:
               forProvider:
                 properties:
                   destinations:
+                    description: List of fleet/alias ARNs used by session queue for
+                      placing game sessions.
                     items:
                       type: string
                     type: array
                   playerLatencyPolicy:
+                    description: One or more policies used to choose fleet based on
+                      player latency. See below.
                     items:
                       properties:
                         maximumIndividualPlayerLatencyMilliseconds:
+                          description: Maximum latency value that is allowed for any
+                            player.
                           type: number
                         policyDurationSeconds:
+                          description: Length of time that the policy is enforced
+                            while placing a new game session. Absence of value for
+                            this attribute means that the policy is enforced until
+                            the queue times out.
                           type: number
                       required:
                       - maximumIndividualPlayerLatencyMilliseconds
@@ -85,8 +96,13 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                   timeoutInSeconds:
+                    description: Maximum time a game session request can remain in
+                      the queue.
                     type: number
                 required:
                 - region
@@ -268,12 +284,16 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Game Session Queue ARN.
                     type: string
                   id:
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

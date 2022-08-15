@@ -16,11 +16,13 @@ import (
 type LifecyclePolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The registry ID where the repository was created.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 }
 
 type LifecyclePolicyParameters struct {
 
+	// The policy document. This is a JSON formatted string. See more details about Policy Parameters in the official AWS docs.
 	// +kubebuilder:validation:Required
 	Policy *string `json:"policy" tf:"policy,omitempty"`
 
@@ -54,7 +56,7 @@ type LifecyclePolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// LifecyclePolicy is the Schema for the LifecyclePolicys API
+// LifecyclePolicy is the Schema for the LifecyclePolicys API. Manages an ECR repository lifecycle policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

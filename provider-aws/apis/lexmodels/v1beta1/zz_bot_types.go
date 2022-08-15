@@ -28,56 +28,78 @@ type AbortStatementParameters struct {
 type BotObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Checksum identifying the version of the bot that was created. The checksum is not
+	// included as an argument because the resource will add it automatically when updating the bot.
 	Checksum *string `json:"checksum,omitempty" tf:"checksum,omitempty"`
 
+	// The date when the bot version was created.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
+	// If status is FAILED, Amazon Lex provides the reason that it failed to build the bot.
 	FailureReason *string `json:"failureReason,omitempty" tf:"failure_reason,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The date when the $LATEST version of this bot was updated.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
+	// When you send a request to create or update a bot, Amazon Lex sets the status response
+	// element to BUILDING. After Amazon Lex builds the bot, it sets status to READY. If Amazon Lex can't
+	// build the bot, it sets status to FAILED. Amazon Lex returns the reason for the failure in the
+	// failure_reason response element.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// The version of the bot.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type BotParameters struct {
 
+	// The message that Amazon Lex uses to abort a conversation. Attributes are documented under statement.
 	// +kubebuilder:validation:Required
 	AbortStatement []AbortStatementParameters `json:"abortStatement" tf:"abort_statement,omitempty"`
 
+	// By specifying true, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. For more information see the Amazon Lex FAQ and the Amazon Lex PutBot API Docs.
 	// +kubebuilder:validation:Required
 	ChildDirected *bool `json:"childDirected" tf:"child_directed,omitempty"`
 
+	// The message that Amazon Lex uses when it doesn't understand the user's request. Attributes are documented under prompt.
 	// +kubebuilder:validation:Optional
 	ClarificationPrompt []ClarificationPromptParameters `json:"clarificationPrompt,omitempty" tf:"clarification_prompt,omitempty"`
 
+	// Determines if a new bot version is created when the initial resource is created and on each update. Defaults to false.
 	// +kubebuilder:validation:Optional
 	CreateVersion *bool `json:"createVersion,omitempty" tf:"create_version,omitempty"`
 
+	// A description of the bot. Must be less than or equal to 200 characters in length.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// When set to true user utterances are sent to Amazon Comprehend for sentiment analysis. If you don't specify detectSentiment, the default is false.
 	// +kubebuilder:validation:Optional
 	DetectSentiment *bool `json:"detectSentiment,omitempty" tf:"detect_sentiment,omitempty"`
 
+	// Set to true to enable access to natural language understanding improvements. When you set the enable_model_improvements parameter to true you can use the nlu_intent_confidence_threshold parameter to configure confidence scores. For more information, see Confidence Scores. You can only set the enable_model_improvements parameter in certain Regions. If you set the parameter to true, your bot has access to accuracy improvements. For more information see the Amazon Lex Bot PutBot API Docs.
 	// +kubebuilder:validation:Optional
 	EnableModelImprovements *bool `json:"enableModelImprovements,omitempty" tf:"enable_model_improvements,omitempty"`
 
+	// The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. Default is 300. Must be a number between 60 and 86400 .
 	// +kubebuilder:validation:Optional
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
+	// A set of Intent objects. Each intent represents a command that a user can express. Attributes are documented under intent. Can have up to 100 Intent objects.
 	// +kubebuilder:validation:Required
 	Intent []IntentParameters `json:"intent" tf:"intent,omitempty"`
 
+	// Specifies the target locale for the bot. Any intent used in the bot must be compatible with the locale of the bot. For available locales, see Amazon Lex Bot PutBot API Docs. Default is en-US.
 	// +kubebuilder:validation:Optional
 	Locale *string `json:"locale,omitempty" tf:"locale,omitempty"`
 
+	// Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot. For more information see Amazon Lex Bot PutBot API Docs This value requires enable_model_improvements to be set to true and the default is 0. Must be a float between 0 and 1.
 	// +kubebuilder:validation:Optional
 	NluIntentConfidenceThreshold *float64 `json:"nluIntentConfidenceThreshold,omitempty" tf:"nlu_intent_confidence_threshold,omitempty"`
 
+	// If you set the process_behavior element to BUILD, Amazon Lex builds the bot so that it can be run. If you set the element to SAVE Amazon Lex saves the bot, but doesn't build it. Default is SAVE.
 	// +kubebuilder:validation:Optional
 	ProcessBehavior *string `json:"processBehavior,omitempty" tf:"process_behavior,omitempty"`
 
@@ -86,6 +108,7 @@ type BotParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see Available Voices in the Amazon Polly Developer Guide.
 	// +kubebuilder:validation:Optional
 	VoiceID *string `json:"voiceId,omitempty" tf:"voice_id,omitempty"`
 }
@@ -95,12 +118,16 @@ type ClarificationPromptMessageObservation struct {
 
 type ClarificationPromptMessageParameters struct {
 
+	// The text of the message.
 	// +kubebuilder:validation:Required
 	Content *string `json:"content" tf:"content,omitempty"`
 
+	// The content type of the message string.
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response.
 	// +kubebuilder:validation:Optional
 	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
@@ -110,6 +137,7 @@ type ClarificationPromptObservation struct {
 
 type ClarificationPromptParameters struct {
 
+	// The number of times to prompt the user for information.
 	// +kubebuilder:validation:Required
 	MaxAttempts *float64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
 
@@ -125,9 +153,11 @@ type IntentObservation struct {
 
 type IntentParameters struct {
 
+	// The name of the intent. Must be less than or equal to 100 characters in length.
 	// +kubebuilder:validation:Required
 	IntentName *string `json:"intentName" tf:"intent_name,omitempty"`
 
+	// The version of the intent. Must be less than or equal to 64 characters in length.
 	// +kubebuilder:validation:Required
 	IntentVersion *string `json:"intentVersion" tf:"intent_version,omitempty"`
 }
@@ -137,12 +167,16 @@ type MessageObservation struct {
 
 type MessageParameters struct {
 
+	// The text of the message.
 	// +kubebuilder:validation:Required
 	Content *string `json:"content" tf:"content,omitempty"`
 
+	// The content type of the message string.
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response.
 	// +kubebuilder:validation:Optional
 	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
@@ -161,7 +195,7 @@ type BotStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Bot is the Schema for the Bots API
+// Bot is the Schema for the Bots API. Provides an Amazon Lex bot resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

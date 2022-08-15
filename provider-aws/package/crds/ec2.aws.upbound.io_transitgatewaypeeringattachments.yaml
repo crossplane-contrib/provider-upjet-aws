@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: TransitGatewayPeeringAttachment is the Schema for the TransitGatewayPeeringAttachments
-          API
+          API. Manages an EC2 Transit Gateway Peering Attachment
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,10 +66,14 @@ spec:
               forProvider:
                 properties:
                   peerAccountId:
+                    description: Account ID of EC2 Transit Gateway to peer with. Defaults
+                      to the account ID the AWS provider is currently connected to.
                     type: string
                   peerRegion:
+                    description: Region of EC2 Transit Gateway to peer with.
                     type: string
                   peerTransitGatewayId:
+                    description: Identifier of EC2 Transit Gateway to peer with.
                     type: string
                   peerTransitGatewayIdRef:
                     description: A Reference to a named object.
@@ -151,8 +155,13 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value tags for the EC2 Transit Gateway Peering
+                      Attachment. If configured with a provider default_tags configuration
+                      block present, tags with matching keys will overwrite those
+                      defined at the provider-level.
                     type: object
                   transitGatewayId:
+                    description: Identifier of EC2 Transit Gateway.
                     type: string
                   transitGatewayIdRef:
                     description: A Reference to a named object.
@@ -409,10 +418,14 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: EC2 Transit Gateway Attachment identifier
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

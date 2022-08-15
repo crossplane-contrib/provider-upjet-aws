@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Proxy is the Schema for the Proxys API
+        description: Proxy is the Schema for the Proxys API. Provides an RDS DB proxy
+          resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,15 +65,30 @@ spec:
               forProvider:
                 properties:
                   auth:
+                    description: Configuration block with authorization mechanisms
+                      to connect to the associated instances or clusters. Described
+                      below.
                     items:
                       properties:
                         authScheme:
+                          description: The type of authentication that the proxy uses
+                            for connections from the proxy to the underlying database.
+                            One of SECRETS.
                           type: string
                         description:
+                          description: A user-specified description about the authentication
+                            used by a proxy to log in as a specific database user.
                           type: string
                         iamAuth:
+                          description: Whether to require or disallow AWS Identity
+                            and Access Management  authentication for connections
+                            to the proxy. One of DISABLED, REQUIRED.
                           type: string
                         secretArn:
+                          description: The Amazon Resource Name  representing the
+                            secret that the proxy uses to authenticate to the RDS
+                            DB instance or Aurora DB cluster. These secrets are stored
+                            within Amazon Secrets Manager.
                           type: string
                         secretArnRef:
                           description: A Reference to a named object.
@@ -151,22 +167,47 @@ spec:
                               type: object
                           type: object
                         username:
+                          description: The name of the database user to which the
+                            proxy connects.
                           type: string
                       type: object
                     type: array
                   debugLogging:
+                    description: Whether the proxy includes detailed information about
+                      SQL statements in its logs. This information helps you to debug
+                      issues involving SQL behavior or the performance and scalability
+                      of the proxy connections. The debug information includes the
+                      text of SQL statements that you submit through the proxy. Thus,
+                      only enable this setting when needed for debugging, and only
+                      when you have security measures in place to safeguard any sensitive
+                      information that appears in the logs.
                     type: boolean
                   engineFamily:
+                    description: The kinds of databases that the proxy can connect
+                      to. This value determines which database network protocol the
+                      proxy recognizes when it interprets network traffic to and from
+                      the database. The engine family applies to MySQL and PostgreSQL
+                      for both RDS and Aurora. Valid values are MYSQL and POSTGRESQL.
                     type: string
                   idleClientTimeout:
+                    description: The number of seconds that a connection to the proxy
+                      can be inactive before the proxy disconnects it. You can set
+                      this value higher or lower than the connection timeout limit
+                      for the associated database.
                     type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   requireTls:
+                    description: A Boolean parameter that specifies whether Transport
+                      Layer Security  encryption is required for connections to the
+                      proxy. By enabling this setting, you can enforce encrypted TLS
+                      connections to the proxy.
                     type: boolean
                   roleArn:
+                    description: The Amazon Resource Name  of the IAM role that the
+                      proxy uses to access secrets in AWS Secrets Manager.
                     type: string
                   roleArnRef:
                     description: A Reference to a named object.
@@ -244,6 +285,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                   vpcSecurityGroupIdRefs:
                     items:
@@ -321,10 +365,14 @@ spec:
                         type: object
                     type: object
                   vpcSecurityGroupIds:
+                    description: One or more VPC security group IDs to associate with
+                      the new proxy.
                     items:
                       type: string
                     type: array
                   vpcSubnetIds:
+                    description: One or more VPC subnet IDs to associate with the
+                      new proxy.
                     items:
                       type: string
                     type: array
@@ -511,14 +559,22 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  for the proxy.
                     type: string
                   endpoint:
+                    description: The endpoint that you can use to connect to the proxy.
+                      You include the endpoint value in the connection string for
+                      a database client application.
                     type: string
                   id:
+                    description: The Amazon Resource Name  for the proxy.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

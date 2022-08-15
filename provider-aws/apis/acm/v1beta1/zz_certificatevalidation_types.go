@@ -14,11 +14,14 @@ import (
 )
 
 type CertificateValidationObservation struct {
+
+	// The time at which the certificate was issued
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type CertificateValidationParameters struct {
 
+	// The ARN of the certificate that is being validated.
 	// +crossplane:generate:reference:type=Certificate
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
@@ -34,6 +37,7 @@ type CertificateValidationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// List of FQDNs that implement the validation. Only valid for DNS validation method ACM certificates. If this is set, the resource can implement additional sanity checks and has an explicit dependency on the resource that is implementing the validation
 	// +kubebuilder:validation:Optional
 	ValidationRecordFqdns []*string `json:"validationRecordFqdns,omitempty" tf:"validation_record_fqdns,omitempty"`
 }
@@ -52,7 +56,7 @@ type CertificateValidationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// CertificateValidation is the Schema for the CertificateValidations API
+// CertificateValidation is the Schema for the CertificateValidations API. Waits for and checks successful validation of an ACM certificate.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

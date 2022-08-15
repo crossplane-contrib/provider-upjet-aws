@@ -35,7 +35,9 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Permissions is the Schema for the Permissionss API
+        description: Permissions is the Schema for the Permissionss API. Grants permissions
+          to the principal to access metadata in the Data Catalog and data organized
+          in underlying data storage such as Amazon S3.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,11 +68,17 @@ spec:
                   catalogId:
                     type: string
                   catalogResource:
+                    description: Whether the permissions are to be granted for the
+                      Data Catalog. Defaults to false.
                     type: boolean
                   dataLocation:
+                    description: Configuration block for a data location resource.
+                      Detailed below.
                     items:
                       properties:
                         arn:
+                          description: –  Amazon Resource Name  that uniquely identifies
+                            the data location resource.
                           type: string
                         arnRef:
                           description: A Reference to a named object.
@@ -153,6 +161,8 @@ spec:
                       type: object
                     type: array
                   database:
+                    description: Configuration block for a database resource. Detailed
+                      below.
                     items:
                       properties:
                         catalogId:
@@ -238,20 +248,30 @@ spec:
                       type: object
                     type: array
                   permissions:
+                    description: –  List of permissions granted to the principal.
+                      Valid values may include ALL, ALTER, CREATE_DATABASE, CREATE_TABLE,
+                      DATA_LOCATION_ACCESS, DELETE, DESCRIBE, DROP, INSERT, and SELECT.
+                      For details on each permission, see Lake Formation Permissions
+                      Reference.
                     items:
                       type: string
                     type: array
                   permissionsWithGrantOption:
+                    description: Subset of permissions which the principal can pass.
                     items:
                       type: string
                     type: array
                   principal:
+                    description: ccount permissions. For more information, see Lake
+                      Formation Permissions Reference.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   table:
+                    description: Configuration block for a table resource. Detailed
+                      below.
                     items:
                       properties:
                         catalogId:
@@ -267,17 +287,23 @@ spec:
                       type: object
                     type: array
                   tableWithColumns:
+                    description: Configuration block for a table with columns resource.
+                      Detailed below.
                     items:
                       properties:
                         catalogId:
                           type: string
                         columnNames:
+                          description: Set of column names for the table.
                           items:
                             type: string
                           type: array
                         databaseName:
                           type: string
                         excludedColumnNames:
+                          description: Set of column names for the table to exclude.
+                            If excluded_column_names is included, wildcard must be
+                            set to true to avoid Terraform reporting a difference.
                           items:
                             type: string
                           type: array

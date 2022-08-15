@@ -14,10 +14,13 @@ import (
 )
 
 type AliasObservation struct {
+
+	// The Amazon Resource Name  of the key alias.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Amazon Resource Name  of the target key identifier.
 	TargetKeyArn *string `json:"targetKeyArn,omitempty" tf:"target_key_arn,omitempty"`
 }
 
@@ -28,6 +31,7 @@ type AliasParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Identifier for the key for which the alias is for, can be either an ARN or key_id.
 	// +crossplane:generate:reference:type=Key
 	// +kubebuilder:validation:Optional
 	TargetKeyID *string `json:"targetKeyId,omitempty" tf:"target_key_id,omitempty"`
@@ -53,7 +57,7 @@ type AliasStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Alias is the Schema for the Aliass API
+// Alias is the Schema for the Aliass API. Provides a display name for a customer master key.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

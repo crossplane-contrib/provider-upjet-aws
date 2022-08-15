@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: VPCEndpointServiceAllowedPrincipal is the Schema for the VPCEndpointServiceAllowedPrincipals
-          API
+          API. Provides a resource to allow a principal to discover a VPC endpoint
+          service.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,12 +67,14 @@ spec:
               forProvider:
                 properties:
                   principalArn:
+                    description: The ARN of the principal to allow permissions.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   vpcEndpointServiceId:
+                    description: The ID of the VPC endpoint service to allow permission.
                     type: string
                   vpcEndpointServiceIdRef:
                     description: A Reference to a named object.
@@ -328,6 +331,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the association.
                     type: string
                 type: object
               conditions:

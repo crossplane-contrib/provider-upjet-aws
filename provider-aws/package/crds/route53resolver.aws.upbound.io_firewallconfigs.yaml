@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: FirewallConfig is the Schema for the FirewallConfigs API
+        description: FirewallConfig is the Schema for the FirewallConfigs API. Provides
+          a Route 53 Resolver DNS Firewall config resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,23 @@ spec:
               forProvider:
                 properties:
                   firewallFailOpen:
+                    description: 'Determines how Route 53 Resolver handles queries
+                      during failures, for example when all traffic that is sent to
+                      DNS Firewall fails to receive a reply. By default, fail open
+                      is disabled, which means the failure mode is closed. This approach
+                      favors security over availability. DNS Firewall blocks queries
+                      that it is unable to evaluate properly. If you enable this option,
+                      the failure mode is open. This approach favors availability
+                      over security. DNS Firewall allows queries to proceed if it
+                      is unable to properly evaluate them. Valid values: ENABLED,
+                      DISABLED.'
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   resourceId:
+                    description: The ID of the VPC that the configuration is for.
                     type: string
                   resourceIdRef:
                     description: A Reference to a named object.
@@ -324,8 +336,11 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the firewall configuration.
                     type: string
                   ownerId:
+                    description: The AWS account ID of the owner of the VPC that this
+                      firewall configuration applies to.
                     type: string
                 type: object
               conditions:

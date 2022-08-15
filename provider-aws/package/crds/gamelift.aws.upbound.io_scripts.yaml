@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Script is the Schema for the Scripts API
+        description: Script is the Schema for the Scripts API. Provides a GameLift
+          Script resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,15 +65,19 @@ spec:
               forProvider:
                 properties:
                   name:
+                    description: Name of the script
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   storageLocation:
+                    description: Information indicating where your game script files
+                      are stored. See below.
                     items:
                       properties:
                         bucket:
+                          description: Name of your S3 bucket.
                           type: string
                         bucketRef:
                           description: A Reference to a named object.
@@ -151,6 +156,8 @@ spec:
                               type: object
                           type: object
                         key:
+                          description: Name of the zip file containing your script
+                            files.
                           type: string
                         keyRef:
                           description: A Reference to a named object.
@@ -229,8 +236,12 @@ spec:
                               type: object
                           type: object
                         objectVersion:
+                          description: A specific version of the file. If not set,
+                            the latest version of the file is retrieved.
                           type: string
                         roleArn:
+                          description: ARN of the access role that allows Amazon GameLift
+                            to access your S3 bucket.
                           type: string
                         roleArnRef:
                           description: A Reference to a named object.
@@ -313,10 +324,17 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                   version:
+                    description: Version that is associated with this script.
                     type: string
                   zipFile:
+                    description: A data object containing your Realtime scripts and
+                      dependencies as a zip  file. The zip file can have one or multiple
+                      files. Maximum size of a zip file is 5 MB.
                     type: string
                 required:
                 - name
@@ -499,12 +517,17 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: GameLift Script ARN.
                     type: string
                   id:
+                    description: GameLift Script ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

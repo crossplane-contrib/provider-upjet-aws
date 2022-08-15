@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: VaultNotifications is the Schema for the VaultNotificationss
-          API
+          API. Provides an AWS Backup vault notifications resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,16 +65,21 @@ spec:
               forProvider:
                 properties:
                   backupVaultEvents:
+                    description: An array of events that indicate the status of jobs
+                      to back up resources to the backup vault.
                     items:
                       type: string
                     type: array
                   backupVaultName:
+                    description: Name of the backup vault to add notifications for.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   snsTopicArn:
+                    description: The Amazon Resource Name  that specifies the topic
+                      for a backup vault’s events
                     type: string
                   snsTopicArnRef:
                     description: A Reference to a named object.
@@ -331,8 +336,10 @@ spec:
               atProvider:
                 properties:
                   backupVaultArn:
+                    description: The ARN of the vault.
                     type: string
                   id:
+                    description: The name of the vault.
                     type: string
                 type: object
               conditions:

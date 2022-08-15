@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: VPCIPv4CidrBlockAssociation is the Schema for the VPCIPv4CidrBlockAssociations
-          API
+          API. Associate additional IPv4 CIDR blocks with a VPC
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,16 +66,27 @@ spec:
               forProvider:
                 properties:
                   cidrBlock:
+                    description: The IPv4 CIDR block for the VPC. CIDR can be explicitly
+                      set or it can be derived from IPAM using ipv4_netmask_length.
                     type: string
                   ipv4IpamPoolId:
+                    description: The ID of an IPv4 IPAM pool you want to use for allocating
+                      this VPC's CIDR. IPAM is a VPC feature that you can use to automate
+                      your IP address management workflows including assigning, tracking,
+                      troubleshooting, and auditing IP addresses across AWS Regions
+                      and accounts. Using IPAM you can monitor IP address usage throughout
+                      your AWS Organization.
                     type: string
                   ipv4NetmaskLength:
+                    description: The netmask length of the IPv4 CIDR you want to allocate
+                      to this VPC. Requires specifying a ipv4_ipam_pool_id.
                     type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   vpcId:
+                    description: The ID of the VPC to make the association with.
                     type: string
                   vpcIdRef:
                     description: A Reference to a named object.
@@ -331,6 +342,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the VPC CIDR association
                     type: string
                 type: object
               conditions:

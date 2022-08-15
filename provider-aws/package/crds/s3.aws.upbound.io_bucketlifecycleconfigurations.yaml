@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketLifecycleConfiguration is the Schema for the BucketLifecycleConfigurations
-          API
+          API. Provides a S3 bucket lifecycle configuration resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,8 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the source S3 bucket you want Amazon
+                      S3 to monitor.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -141,22 +143,37 @@ spec:
                         type: object
                     type: object
                   expectedBucketOwner:
+                    description: The account ID of the expected bucket owner. If the
+                      bucket is owned by a different account, the request will fail
+                      with an HTTP 403  error.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   rule:
+                    description: List of configuration blocks describing the rules
+                      managing the replication documented below.
                     items:
                       properties:
                         abortIncompleteMultipartUpload:
+                          description: Configuration block that specifies the days
+                            since the initiation of an incomplete multipart upload
+                            that Amazon S3 will wait before permanently removing all
+                            parts of the upload documented below.
                           items:
                             properties:
                               daysAfterInitiation:
+                                description: The number of days after which Amazon
+                                  S3 aborts an incomplete multipart upload.
                                 type: number
                             type: object
                           type: array
                         expiration:
+                          description: Configuration block that specifies the expiration
+                            for the lifecycle of the object in the form of date, days
+                            and, whether the object has a delete marker documented
+                            below.
                           items:
                             properties:
                               date:
@@ -164,13 +181,24 @@ spec:
                               days:
                                 type: number
                               expiredObjectDeleteMarker:
+                                description: Indicates whether Amazon S3 will remove
+                                  a delete marker with no noncurrent versions. If
+                                  set to true, the delete marker will be expired;
+                                  if set to false the policy takes no action.
                                 type: boolean
                             type: object
                           type: array
                         filter:
+                          description: Configuration block used to identify objects
+                            that a Lifecycle Rule applies to documented below. If
+                            not specified, the rule will default to using prefix.
                           items:
                             properties:
                               and:
+                                description: Configuration block used to apply a logical
+                                  AND to two or more predicates documented below.
+                                  The Lifecycle Rule will apply to any object matching
+                                  all the predicates configured inside the and block.
                                 items:
                                   properties:
                                     objectSizeGreaterThan:
@@ -182,6 +210,9 @@ spec:
                                     tags:
                                       additionalProperties:
                                         type: string
+                                      description: Key-value map of resource tags.
+                                        All of these tags must exist in the object's
+                                        tag set in order for the rule to apply.
                                       type: object
                                   type: object
                                 type: array
@@ -192,11 +223,15 @@ spec:
                               prefix:
                                 type: string
                               tag:
+                                description: A configuration block for specifying
+                                  a tag key and value documented below.
                                 items:
                                   properties:
                                     key:
+                                      description: Name of the object key.
                                       type: string
                                     value:
+                                      description: Value of the tag.
                                       type: string
                                   required:
                                   - key
@@ -208,6 +243,8 @@ spec:
                         id:
                           type: string
                         noncurrentVersionExpiration:
+                          description: Configuration block that specifies when noncurrent
+                            object versions expire documented below.
                           items:
                             properties:
                               newerNoncurrentVersions:
@@ -217,6 +254,10 @@ spec:
                             type: object
                           type: array
                         noncurrentVersionTransition:
+                          description: Set of configuration blocks that specify the
+                            transition rule for the lifecycle rule that describes
+                            when noncurrent objects transition to a specific storage
+                            class documented below.
                           items:
                             properties:
                               newerNoncurrentVersions:
@@ -232,8 +273,13 @@ spec:
                         prefix:
                           type: string
                         status:
+                          description: 'Whether the rule is currently being applied.
+                            Valid values: Enabled or Disabled.'
                           type: string
                         transition:
+                          description: Set of configuration blocks that specify when
+                            an Amazon S3 object transitions to a specified storage
+                            class documented below.
                           items:
                             properties:
                               date:

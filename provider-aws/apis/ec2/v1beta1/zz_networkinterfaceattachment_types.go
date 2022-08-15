@@ -14,15 +14,19 @@ import (
 )
 
 type NetworkInterfaceAttachmentObservation struct {
+
+	// The ENI Attachment ID.
 	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The status of the Network Interface Attachment.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type NetworkInterfaceAttachmentParameters struct {
 
+	// Network interface index .
 	// +kubebuilder:validation:Required
 	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
 
@@ -68,7 +72,7 @@ type NetworkInterfaceAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 
-// NetworkInterfaceAttachment is the Schema for the NetworkInterfaceAttachments API
+// NetworkInterfaceAttachment is the Schema for the NetworkInterfaceAttachments API. Attach an Elastic network interface (ENI) resource with EC2 instance.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

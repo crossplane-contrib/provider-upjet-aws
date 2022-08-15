@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Certificate is the Schema for the Certificates API
+        description: Certificate is the Schema for the Certificates API. Requests
+          and manages a certificate from Amazon Certificate Manager (ACM).
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,23 +65,31 @@ spec:
               forProvider:
                 properties:
                   certificateAuthorityArn:
+                    description: ARN of an ACM PCA
                     type: string
                   certificateBody:
+                    description: The certificate's PEM-formatted public key
                     type: string
                   certificateChain:
+                    description: The certificate's PEM-formatted chain
                     type: string
                   domainName:
                     type: string
                   options:
+                    description: Configuration block used to set certificate options.
+                      Detailed below.
                     items:
                       properties:
                         certificateTransparencyLoggingPreference:
+                          description: Specifies whether certificate details should
+                            be added to a certificate transparency log. Valid values
+                            are ENABLED or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+                            for more details.
                           type: string
                       type: object
                     type: array
                   privateKeySecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The certificate's PEM-formatted private key
                     properties:
                       key:
                         description: The key to select.
@@ -107,15 +116,30 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                   validationMethod:
+                    description: Which method to use for validation. DNS or EMAIL
+                      are valid, NONE can be used for certificates that were imported
+                      into ACM and then into Terraform.
                     type: string
                   validationOption:
+                    description: Configuration block used to specify information about
+                      the initial validation of each domain name. Detailed below.
                     items:
                       properties:
                         domainName:
                           type: string
                         validationDomain:
+                          description: The domain name that you want ACM to use to
+                            send you validation emails. This domain name is the suffix
+                            of the email addresses that you want ACM to use. This
+                            must be the same as the domain_name value or a superdomain
+                            of the domain_name value. For example, if you request
+                            a certificate for "testing.example.com", you can specify
+                            "example.com" for this value.
                           type: string
                       required:
                       - domainName
@@ -302,29 +326,44 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the certificate
                     type: string
                   domainValidationOptions:
+                    description: Set of domain validation objects which can be used
+                      to complete certificate validation. Can have more than one element,
+                      e.g., if SANs are defined. Only set if DNS-validation was used.
                     items:
                       properties:
                         domainName:
                           type: string
                         resourceRecordName:
+                          description: The name of the DNS record to create to validate
+                            the certificate
                           type: string
                         resourceRecordType:
+                          description: The type of DNS record to create
                           type: string
                         resourceRecordValue:
+                          description: The value the DNS record needs to have
                           type: string
                       type: object
                     type: array
                   id:
+                    description: The ARN of the certificate
                     type: string
                   status:
+                    description: Status of the certificate.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   validationEmails:
+                    description: A list of addresses that received a validation E-Mail.
+                      Only set if EMAIL-validation was used.
                     items:
                       type: string
                     type: array

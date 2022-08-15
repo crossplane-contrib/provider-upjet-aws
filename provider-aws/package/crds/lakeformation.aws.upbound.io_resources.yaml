@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Resource is the Schema for the Resources API
+        description: Resource is the Schema for the Resources API. Registers a Lake
+          Formation resource as managed by the Data Catalog.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,14 @@ spec:
               forProvider:
                 properties:
                   arn:
+                    description: –  Amazon Resource Name  of the resource, an S3 path.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   roleArn:
+                    description: inked role must exist and is used.
                     type: string
                   roleArnRef:
                     description: A Reference to a named object.
@@ -327,6 +330,8 @@ spec:
                   id:
                     type: string
                   lastModified:
+                    description: The date and time the resource was last modified
+                      in RFC 3339 format.
                     type: string
                 type: object
               conditions:

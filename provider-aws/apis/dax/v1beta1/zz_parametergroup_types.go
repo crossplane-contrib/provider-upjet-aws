@@ -14,14 +14,18 @@ import (
 )
 
 type ParameterGroupObservation struct {
+
+	// The name of the parameter group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ParameterGroupParameters struct {
 
+	// A description of the parameter group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// –  The parameters of the parameter group.
 	// +kubebuilder:validation:Optional
 	Parameters []ParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -39,6 +43,7 @@ type ParametersParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The value for the parameter.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -57,7 +62,7 @@ type ParameterGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ParameterGroup is the Schema for the ParameterGroups API
+// ParameterGroup is the Schema for the ParameterGroups API. Provides an DAX Parameter Group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

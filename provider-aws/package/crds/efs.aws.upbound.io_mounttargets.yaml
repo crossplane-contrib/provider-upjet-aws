@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: MountTarget is the Schema for the MountTargets API
+        description: MountTarget is the Schema for the MountTargets API. Provides
+          an Elastic File System (EFS) mount target.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   fileSystemId:
+                    description: The ID of the file system for which the mount target
+                      is intended.
                     type: string
                   fileSystemIdRef:
                     description: A Reference to a named object.
@@ -139,16 +142,21 @@ spec:
                         type: object
                     type: object
                   ipAddress:
+                    description: The address  at which the file system may be mounted
+                      via the mount target.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   securityGroups:
+                    description: A list of up to 5 VPC security group IDs  in effect
+                      for the mount target.
                     items:
                       type: string
                     type: array
                   subnetId:
+                    description: The ID of the subnet to add the mount target in.
                     type: string
                   subnetIdRef:
                     description: A Reference to a named object.
@@ -403,20 +411,32 @@ spec:
               atProvider:
                 properties:
                   availabilityZoneId:
+                    description: The unique and consistent identifier of the Availability
+                      Zone  that the mount target resides in.
                     type: string
                   availabilityZoneName:
+                    description: The name of the Availability Zone  that the mount
+                      target resides in.
                     type: string
                   dnsName:
+                    description: The DNS name for the EFS file system.
                     type: string
                   fileSystemArn:
+                    description: Amazon Resource Name of the file system.
                     type: string
                   id:
+                    description: The ID of the mount target.
                     type: string
                   mountTargetDnsName:
+                    description: The DNS name for the given subnet/AZ per documented
+                      convention.
                     type: string
                   networkInterfaceId:
+                    description: The ID of the network interface that Amazon EFS created
+                      when it created the mount target.
                     type: string
                   ownerId:
+                    description: AWS account ID that owns the resource.
                     type: string
                 type: object
               conditions:

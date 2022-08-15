@@ -14,47 +14,65 @@ import (
 )
 
 type SnapshotObservation struct {
+
+	// Specifies the allocated storage size in gigabytes .
 	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
+	// Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// The Amazon Resource Name  for the DB snapshot.
 	DBSnapshotArn *string `json:"dbSnapshotArn,omitempty" tf:"db_snapshot_arn,omitempty"`
 
+	// Specifies whether the DB snapshot is encrypted.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
+	// Specifies the name of the database engine.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
+	// Specifies the version of the database engine.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the Provisioned IOPS  value of the DB instance at the time of the snapshot.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
+	// The ARN for the KMS encryption key.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// License model information for the restored DB instance.
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
 
+	// Provides the option group name for the DB snapshot.
 	OptionGroupName *string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
 
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 
+	// The DB snapshot Arn that the DB snapshot was copied from. It only has value in case of cross customer or cross region copy.
 	SourceDBSnapshotIdentifier *string `json:"sourceDbSnapshotIdentifier,omitempty" tf:"source_db_snapshot_identifier,omitempty"`
 
+	// The region that the DB snapshot was created in or copied from.
 	SourceRegion *string `json:"sourceRegion,omitempty" tf:"source_region,omitempty"`
 
+	// Specifies the status of this DB snapshot.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// Specifies the storage type associated with DB snapshot.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// Provides the VPC ID associated with the DB snapshot.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type SnapshotParameters struct {
 
+	// The DB Instance Identifier from which to take the snapshot.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -71,6 +89,7 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -89,7 +108,7 @@ type SnapshotStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Snapshot is the Schema for the Snapshots API
+// Snapshot is the Schema for the Snapshots API. Manages an RDS database instance snapshot.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

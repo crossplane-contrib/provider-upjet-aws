@@ -14,12 +14,17 @@ import (
 )
 
 type InternetGatewayObservation struct {
+
+	// The ARN of the Internet Gateway.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ID of the Internet Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ID of the AWS account that owns the internet gateway.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -30,9 +35,11 @@ type InternetGatewayParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The VPC ID to create in.  See the aws_internet_gateway_attachment resource for an alternate way to attach an Internet Gateway to a VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -58,7 +65,7 @@ type InternetGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 
-// InternetGateway is the Schema for the InternetGateways API
+// InternetGateway is the Schema for the InternetGateways API. Provides a resource to create a VPC Internet Gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

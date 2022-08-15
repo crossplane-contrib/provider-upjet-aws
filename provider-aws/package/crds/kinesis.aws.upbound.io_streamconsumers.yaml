@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: StreamConsumer is the Schema for the StreamConsumers API
+        description: StreamConsumer is the Schema for the StreamConsumers API. Manages
+          a Kinesis Stream Consumer.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,15 @@ spec:
               forProvider:
                 properties:
                   name:
+                    description: Name of the stream consumer.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   streamArn:
+                    description: –  Amazon Resource Name  of the data stream the consumer
+                      is registered with.
                     type: string
                   streamArnRef:
                     description: A Reference to a named object.
@@ -325,10 +329,14 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of the stream consumer.
                     type: string
                   creationTimestamp:
+                    description: Approximate timestamp in RFC3339 format of when the
+                      stream consumer was created.
                     type: string
                   id:
+                    description: Amazon Resource Name  of the stream consumer.
                     type: string
                 type: object
               conditions:

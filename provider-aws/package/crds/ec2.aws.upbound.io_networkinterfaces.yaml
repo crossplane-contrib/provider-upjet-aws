@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: NetworkInterface is the Schema for the NetworkInterfaces API
+        description: NetworkInterface is the Schema for the NetworkInterfaces API.
+          Provides an Elastic network interface (ENI) resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,46 +65,75 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: Description for the network interface.
                     type: string
                   interfaceType:
+                    description: Type of network interface to create. Set to efa for
+                      Elastic Fabric Adapter. Changing interface_type will cause the
+                      resource to be destroyed and re-created.
                     type: string
                   ipv4PrefixCount:
+                    description: Number of IPv4 prefixes that AWS automatically assigns
+                      to the network interface.
                     type: number
                   ipv4Prefixes:
+                    description: One or more IPv4 prefixes assigned to the network
+                      interface.
                     items:
                       type: string
                     type: array
                   ipv6AddressCount:
+                    description: Number of IPv6 addresses to assign to a network interface.
+                      You can't use this option if specifying specific ipv6_addresses.
+                      If your subnet has the AssignIpv6AddressOnCreation attribute
+                      set to true, you can specify 0 to override this setting.
                     type: number
                   ipv6AddressList:
+                    description: List of private IPs to assign to the ENI in sequential
+                      order.
                     items:
                       type: string
                     type: array
                   ipv6AddressListEnabled:
                     type: boolean
                   ipv6Addresses:
+                    description: One or more specific IPv6 addresses from the IPv6
+                      CIDR block range of your subnet. Addresses are assigned without
+                      regard to order. You can't use this option if you're specifying
+                      ipv6_address_count.
                     items:
                       type: string
                     type: array
                   ipv6PrefixCount:
+                    description: Number of IPv6 prefixes that AWS automatically assigns
+                      to the network interface.
                     type: number
                   ipv6Prefixes:
+                    description: One or more IPv6 prefixes assigned to the network
+                      interface.
                     items:
                       type: string
                     type: array
                   privateIp:
                     type: string
                   privateIpList:
+                    description: List of private IPs to assign to the ENI in sequential
+                      order. Requires setting private_ip_list_enable to true.
                     items:
                       type: string
                     type: array
                   privateIpListEnabled:
                     type: boolean
                   privateIps:
+                    description: List of private IPs to assign to the ENI without
+                      regard to order.
                     items:
                       type: string
                     type: array
                   privateIpsCount:
+                    description: Number of secondary private IPs to assign to the
+                      ENI. The total number of private IPs will be 1 + private_ips_count,
+                      as a primary private IP will be assiged to an ENI by default.
                     type: number
                   region:
                     description: Region is the region you'd like your resource to
@@ -185,12 +215,16 @@ spec:
                         type: object
                     type: object
                   securityGroups:
+                    description: List of security group IDs to assign to the ENI.
                     items:
                       type: string
                     type: array
                   sourceDestCheck:
+                    description: Whether to enable source destination checking for
+                      the ENI. Default true.
                     type: boolean
                   subnetId:
+                    description: Subnet ID to create the ENI in.
                     type: string
                   subnetIdRef:
                     description: A Reference to a named object.
@@ -268,6 +302,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -449,31 +486,42 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: ARN of the network interface.
                     type: string
                   attachment:
+                    description: Configuration block to define the attachment of the
+                      ENI. See Attachment below for more details!
                     items:
                       properties:
                         attachmentId:
                           type: string
                         deviceIndex:
+                          description: Integer to define the devices index.
                           type: number
                         instance:
+                          description: ID of the instance to attach to.
                           type: string
                       type: object
                     type: array
                   id:
+                    description: ID of the network interface.
                     type: string
                   macAddress:
+                    description: MAC address of the network interface.
                     type: string
                   outpostArn:
                     type: string
                   ownerId:
+                    description: AWS account ID of the owner of the network interface.
                     type: string
                   privateDnsName:
+                    description: Private DNS name of the network interface .
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

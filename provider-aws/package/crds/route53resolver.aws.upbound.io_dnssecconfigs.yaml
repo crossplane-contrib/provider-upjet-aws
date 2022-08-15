@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DNSSECConfig is the Schema for the DNSSECConfigs API
+        description: DNSSECConfig is the Schema for the DNSSECConfigs API. Provides
+          a Route 53 Resolver DNSSEC config resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -68,6 +69,8 @@ spec:
                       be created in.
                     type: string
                   resourceId:
+                    description: The ID of the virtual private cloud  that you're
+                      updating the DNSSEC validation status for.
                     type: string
                   resourceIdRef:
                     description: A Reference to a named object.
@@ -322,12 +325,19 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN for a configuration for DNSSEC validation.
                     type: string
                   id:
+                    description: The ID for a configuration for DNSSEC validation.
                     type: string
                   ownerId:
+                    description: The owner account ID of the virtual private cloud  for
+                      a configuration for DNSSEC validation.
                     type: string
                   validationStatus:
+                    description: 'The validation status for a DNSSEC configuration.
+                      The status can be one of the following: ENABLING, ENABLED, DISABLING
+                      and DISABLED.'
                     type: string
                 type: object
               conditions:

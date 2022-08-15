@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ZoneAssociation is the Schema for the ZoneAssociations API
+        description: ZoneAssociation is the Schema for the ZoneAssociations API. Manages
+          a Route53 Hosted Zone VPC association
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -68,6 +69,7 @@ spec:
                       be created in.
                     type: string
                   vpcId:
+                    description: The VPC to associate with the private hosted zone.
                     type: string
                   vpcIdRef:
                     description: A Reference to a named object.
@@ -143,6 +145,7 @@ spec:
                         type: object
                     type: object
                   zoneId:
+                    description: The private hosted zone to associate.
                     type: string
                   zoneIdRef:
                     description: A Reference to a named object.
@@ -397,10 +400,15 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The calculated unique identifier for the association.
                     type: string
                   owningAccount:
+                    description: The account ID of the account that created the hosted
+                      zone.
                     type: string
                   vpcRegion:
+                    description: The VPC's region. Defaults to the region of the AWS
+                      provider.
                     type: string
                 type: object
               conditions:

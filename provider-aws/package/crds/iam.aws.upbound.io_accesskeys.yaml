@@ -35,7 +35,9 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: AccessKey is the Schema for the AccessKeys API
+        description: AccessKey is the Schema for the AccessKeys API. Provides an IAM
+          access key. This is a set of credentials that allow API requests to be made
+          as an IAM user.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +66,16 @@ spec:
               forProvider:
                 properties:
                   pgpKey:
+                    description: Either a base-64 encoded PGP public key, or a keybase
+                      username in the form keybase:some_person_that_exists, for use
+                      in the encrypted_secret output attribute.
                     type: string
                   status:
+                    description: Access key status to apply. Defaults to Active. Valid
+                      values are Active and Inactive.
                     type: string
                   user:
+                    description: IAM user to associate with this access key.
                     type: string
                   userRef:
                     description: A Reference to a named object.
@@ -320,14 +328,29 @@ spec:
               atProvider:
                 properties:
                   createDate:
+                    description: Date and time in RFC3339 format that the access key
+                      was created.
                     type: string
                   encryptedSecret:
+                    description: 'Encrypted secret, base64 encoded, if pgp_key was
+                      specified. This attribute is not available for imported resources.
+                      The encrypted secret may be decrypted using the command line,
+                      for example: terraform output -raw encrypted_secret | base64
+                      --decode | keybase pgp decrypt.'
                     type: string
                   encryptedSesSmtpPasswordV4:
+                    description: 'Encrypted SES SMTP password, base64 encoded, if
+                      pgp_key was specified. This attribute is not available for imported
+                      resources. The encrypted password may be decrypted using the
+                      command line, for example: terraform output -raw encrypted_ses_smtp_password_v4
+                      | base64 --decode | keybase pgp decrypt.'
                     type: string
                   id:
+                    description: Access key ID.
                     type: string
                   keyFingerprint:
+                    description: Fingerprint of the PGP key used to encrypt the secret.
+                      This attribute is not available for imported resources.
                     type: string
                 type: object
               conditions:

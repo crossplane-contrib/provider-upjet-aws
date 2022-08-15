@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ClusterActivityStream is the Schema for the ClusterActivityStreams
-          API
+          API. Manages RDS Aurora Cluster Database Activity Streams
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,8 +65,16 @@ spec:
               forProvider:
                 properties:
                   engineNativeAuditFieldsIncluded:
+                    description: Specifies whether the database activity stream includes
+                      engine-native audit fields. This option only applies to an Oracle
+                      DB instance. By default, no engine-native audit fields are included.
+                      Defaults false.
                     type: boolean
                   kmsKeyId:
+                    description: The AWS KMS key identifier for encrypting messages
+                      in the database activity stream. The AWS KMS key identifier
+                      is the key ARN, key ID, alias ARN, or alias name for the KMS
+                      key.
                     type: string
                   kmsKeyIdRef:
                     description: A Reference to a named object.
@@ -142,12 +150,17 @@ spec:
                         type: object
                     type: object
                   mode:
+                    description: 'Specifies the mode of the database activity stream.
+                      Database events such as a change or access generate an activity
+                      stream event. The database session can handle these events either
+                      synchronously or asynchronously. One of: sync, async.'
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   resourceArn:
+                    description: The Amazon Resource Name  of the DB cluster.
                     type: string
                   resourceArnRef:
                     description: A Reference to a named object.
@@ -404,8 +417,11 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The Amazon Resource Name  of the DB cluster.
                     type: string
                   kinesisStreamName:
+                    description: The name of the Amazon Kinesis data stream to be
+                      used for the database activity stream.
                     type: string
                 type: object
               conditions:

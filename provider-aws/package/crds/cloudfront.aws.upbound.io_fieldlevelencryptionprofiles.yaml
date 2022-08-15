@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FieldLevelEncryptionProfile is the Schema for the FieldLevelEncryptionProfiles
-          API
+          API. Provides a CloudFront Field-level Encryption Profile resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,14 +66,23 @@ spec:
               forProvider:
                 properties:
                   comment:
+                    description: An optional comment about the Field Level Encryption
+                      Profile.
                     type: string
                   encryptionEntities:
+                    description: The encryption entities config block for field-level
+                      encryption profiles that contains an attribute items which includes
+                      the encryption key and field pattern specifications.
                     items:
                       properties:
                         items:
                           items:
                             properties:
                               fieldPatterns:
+                                description: Object that contains an attribute items
+                                  that contains the list of field patterns in a field-level
+                                  encryption content type profile specify the fields
+                                  that you want to be encrypted.
                                 items:
                                   properties:
                                     items:
@@ -83,8 +92,13 @@ spec:
                                   type: object
                                 type: array
                               providerId:
+                                description: The provider associated with the public
+                                  key being used for encryption.
                                 type: string
                               publicKeyId:
+                                description: The public key associated with a set
+                                  of field-level encryption patterns, to be used when
+                                  encrypting the fields that match the patterns.
                                 type: string
                               publicKeyIdRef:
                                 description: A Reference to a named object.
@@ -172,6 +186,7 @@ spec:
                       type: object
                     type: array
                   name:
+                    description: The name of the Field Level Encryption Profile.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -360,10 +375,16 @@ spec:
               atProvider:
                 properties:
                   callerReference:
+                    description: Internal value used by CloudFront to allow future
+                      updates to the Field Level Encryption Profile.
                     type: string
                   etag:
+                    description: 'The current version of the Field Level Encryption
+                      Profile. For example: E2QWRUHAPOMQZL.'
                     type: string
                   id:
+                    description: 'The identifier for the Field Level Encryption Profile.
+                      For example: K3D5EWEUDCCXON.'
                     type: string
                 type: object
               conditions:

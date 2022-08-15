@@ -14,15 +14,19 @@ import (
 )
 
 type GroupObservation struct {
+
+	// The ARN assigned by AWS for this resource group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type GroupParameters struct {
 
+	// A description of the resource group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -31,9 +35,11 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A resource_query block. Resource queries are documented below.
 	// +kubebuilder:validation:Required
 	ResourceQuery []ResourceQueryParameters `json:"resourceQuery" tf:"resource_query,omitempty"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -43,9 +49,11 @@ type ResourceQueryObservation struct {
 
 type ResourceQueryParameters struct {
 
+	// The resource query as a JSON string.
 	// +kubebuilder:validation:Required
 	Query *string `json:"query" tf:"query,omitempty"`
 
+	// The type of the resource query. Defaults to TAG_FILTERS_1_0.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -64,7 +72,7 @@ type GroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Group is the Schema for the Groups API
+// Group is the Schema for the Groups API. Provides a Resource Group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: UserPool is the Schema for the UserPools API
+        description: UserPool is the Schema for the UserPools API. Provides a Cognito
+          User Pool resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,14 +65,21 @@ spec:
               forProvider:
                 properties:
                   accountRecoverySetting:
+                    description: Configuration block to define which verified available
+                      method a user can use to recover their forgotten password. Detailed
+                      below.
                     items:
                       properties:
                         recoveryMechanism:
+                          description: 'List of Account Recovery Options of the following
+                            structure:'
                           items:
                             properties:
                               name:
                                 type: string
                               priority:
+                                description: Positive integer specifying priority
+                                  of a method with 1 being the highest priority.
                                 type: number
                             required:
                             - name
@@ -83,11 +91,18 @@ spec:
                       type: object
                     type: array
                   adminCreateUserConfig:
+                    description: Configuration block for creating a new user profile.
+                      Detailed below.
                     items:
                       properties:
                         allowAdminCreateUserOnly:
+                          description: Set to True if only the administrator is allowed
+                            to create user profiles. Set to False if users can sign
+                            themselves up via an app.
                           type: boolean
                         inviteMessageTemplate:
+                          description: Invite message template structure. Detailed
+                            below.
                           items:
                             properties:
                               emailMessage:
@@ -101,47 +116,85 @@ spec:
                       type: object
                     type: array
                   aliasAttributes:
+                    description: 'Attributes supported as an alias for this user pool.
+                      Valid values: phone_number, email, or preferred_username. Conflicts
+                      with username_attributes.'
                     items:
                       type: string
                     type: array
                   autoVerifiedAttributes:
+                    description: 'Attributes to be auto-verified. Valid values: email,
+                      phone_number.'
                     items:
                       type: string
                     type: array
                   deviceConfiguration:
+                    description: Configuration block for the user pool's device tracking.
+                      Detailed below.
                     items:
                       properties:
                         challengeRequiredOnNewDevice:
+                          description: Whether a challenge is required on a new device.
+                            Only applicable to a new device.
                           type: boolean
                         deviceOnlyRememberedOnUserPrompt:
+                          description: Whether a device is only remembered on user
+                            prompt. false equates to "Always" remember, true is "User
+                            Opt In," and not using a device_configuration block is
+                            "No."
                           type: boolean
                       type: object
                     type: array
                   emailConfiguration:
+                    description: Configuration block for configuring email. Detailed
+                      below.
                     items:
                       properties:
                         configurationSet:
+                          description: Email configuration set name from SES.
                           type: string
                         emailSendingAccount:
+                          description: Email delivery method to use. COGNITO_DEFAULT
+                            for the default email functionality built into Cognito
+                            or DEVELOPER to use your Amazon SES configuration.
                           type: string
                         fromEmailAddress:
+                          description: Sender’s email address or sender’s display
+                            name with their email address . Escaped double quotes
+                            are required around display names that contain certain
+                            characters as specified in RFC 5322.
                           type: string
                         replyToEmailAddress:
+                          description: REPLY-TO email address.
                           type: string
                         sourceArn:
+                          description: ARN of the SES verified email identity to to
+                            use. Required if email_sending_account is set to DEVELOPER.
                           type: string
                       type: object
                     type: array
                   emailVerificationMessage:
+                    description: String representing the email verification message.
+                      Conflicts with verification_message_template configuration block
+                      email_message argument.
                     type: string
                   emailVerificationSubject:
+                    description: String representing the email verification subject.
+                      Conflicts with verification_message_template configuration block
+                      email_subject argument.
                     type: string
                   lambdaConfig:
+                    description: Configuration block for the AWS Lambda triggers associated
+                      with the user pool. Detailed below.
                     items:
                       properties:
                         createAuthChallenge:
+                          description: ARN of the lambda creating an authentication
+                            challenge.
                           type: string
                         customEmailSender:
+                          description: A custom email sender AWS Lambda trigger. See
+                            custom_email_sender Below.
                           items:
                             properties:
                               lambdaArn:
@@ -154,8 +207,11 @@ spec:
                             type: object
                           type: array
                         customMessage:
+                          description: Custom Message AWS Lambda trigger.
                           type: string
                         customSmsSender:
+                          description: A custom SMS sender AWS Lambda trigger. See
+                            custom_sms_sender Below.
                           items:
                             properties:
                               lambdaArn:
@@ -168,43 +224,75 @@ spec:
                             type: object
                           type: array
                         defineAuthChallenge:
+                          description: Defines the authentication challenge.
                           type: string
                         kmsKeyId:
+                          description: The Amazon Resource Name of Key Management
+                            Service Customer master keys. Amazon Cognito uses the
+                            key to encrypt codes and temporary passwords sent to CustomEmailSender
+                            and CustomSMSSender.
                           type: string
                         postAuthentication:
+                          description: Post-authentication AWS Lambda trigger.
                           type: string
                         postConfirmation:
+                          description: Post-confirmation AWS Lambda trigger.
                           type: string
                         preAuthentication:
+                          description: Pre-authentication AWS Lambda trigger.
                           type: string
                         preSignUp:
+                          description: Pre-registration AWS Lambda trigger.
                           type: string
                         preTokenGeneration:
+                          description: Allow to customize identity token claims before
+                            token generation.
                           type: string
                         userMigration:
+                          description: User migration Lambda config type.
                           type: string
                         verifyAuthChallengeResponse:
+                          description: Verifies the authentication challenge response.
                           type: string
                       type: object
                     type: array
                   mfaConfiguration:
+                    description: Multi-Factor Authentication  configuration for the
+                      User Pool. Defaults of OFF. Valid values are OFF , ON , or OPTIONAL
+                      .
                     type: string
                   name:
                     type: string
                   passwordPolicy:
+                    description: Configuration blocked for information about the user
+                      pool password policy. Detailed below.
                     items:
                       properties:
                         minimumLength:
+                          description: Minimum length of the password policy that
+                            you have set.
                           type: number
                         requireLowercase:
+                          description: Whether you have required users to use at least
+                            one lowercase letter in their password.
                           type: boolean
                         requireNumbers:
+                          description: Whether you have required users to use at least
+                            one number in their password.
                           type: boolean
                         requireSymbols:
+                          description: Whether you have required users to use at least
+                            one symbol in their password.
                           type: boolean
                         requireUppercase:
+                          description: Whether you have required users to use at least
+                            one uppercase letter in their password.
                           type: boolean
                         temporaryPasswordValidityDays:
+                          description: In the password policy you have set, refers
+                            to the number of days a temporary password is valid. If
+                            the user does not sign-in during this time, their password
+                            will need to be reset by an administrator.
                           type: number
                       type: object
                     type: array
@@ -213,33 +301,58 @@ spec:
                       be created in.
                     type: string
                   schema:
+                    description: Configuration block for the schema attributes of
+                      a user pool. Detailed below. Schema attributes from the standard
+                      attribute set only need to be specified if they are different
+                      from the default configuration. Attributes can be added, but
+                      not modified or removed. Maximum of 50 attributes.
                     items:
                       properties:
                         attributeDataType:
+                          description: Attribute data type. Must be one of Boolean,
+                            Number, String, DateTime.
                           type: string
                         developerOnlyAttribute:
+                          description: Whether the attribute type is developer only.
                           type: boolean
                         mutable:
+                          description: Whether the attribute can be changed once it
+                            has been created.
                           type: boolean
                         name:
                           type: string
                         numberAttributeConstraints:
+                          description: Configuration block for the constraints for
+                            an attribute of the number type. Detailed below.
                           items:
                             properties:
                               maxValue:
+                                description: Maximum value of an attribute that is
+                                  of the number data type.
                                 type: string
                               minValue:
+                                description: Minimum value of an attribute that is
+                                  of the number data type.
                                 type: string
                             type: object
                           type: array
                         required:
+                          description: Whether a user pool attribute is required.
+                            If the attribute is required and the user does not provide
+                            a value, registration or sign-in will fail.
                           type: boolean
                         stringAttributeConstraints:
+                          description: Constraints for an attribute of the string
+                            type. Detailed below.
                           items:
                             properties:
                               maxLength:
+                                description: Maximum length of an attribute value
+                                  of the string type.
                                 type: string
                               minLength:
+                                description: Minimum length of an attribute value
+                                  of the string type.
                                 type: string
                             type: object
                           type: array
@@ -249,13 +362,30 @@ spec:
                       type: object
                     type: array
                   smsAuthenticationMessage:
+                    description: String representing the SMS authentication message.
+                      The Message must contain the {####} placeholder, which will
+                      be replaced with the code.
                     type: string
                   smsConfiguration:
+                    description: Configuration block for Short Message Service  settings.
+                      Detailed below. These settings apply to SMS user verification
+                      and SMS Multi-Factor Authentication . Due to Cognito API restrictions,
+                      the SMS configuration cannot be removed without recreating the
+                      Cognito User Pool. For user data safety, this resource will
+                      ignore the removal of this configuration by disabling drift
+                      detection. To force resource recreation after this configuration
+                      has been applied, see the taint command.
                     items:
                       properties:
                         externalId:
+                          description: External ID used in IAM role trust relationships.
+                            For more information about using external IDs, see How
+                            to Use an External ID When Granting Access to Your AWS
+                            Resources to a Third Party.
                           type: string
                         snsCallerArn:
+                          description: ARN of the Amazon SNS caller. This is usually
+                            the IAM role that you've given Cognito permission to assume.
                           type: string
                         snsCallerArnRef:
                           description: A Reference to a named object.
@@ -338,11 +468,21 @@ spec:
                       type: object
                     type: array
                   smsVerificationMessage:
+                    description: String representing the SMS verification message.
+                      Conflicts with verification_message_template configuration block
+                      sms_message argument.
                     type: string
                   softwareTokenMfaConfiguration:
+                    description: Configuration block for software token Mult-Factor
+                      Authentication  settings. Detailed below.
                     items:
                       properties:
                         enabled:
+                          description: Boolean whether to enable software token Multi-Factor  tokens,
+                            such as Time-based One-Time Password . To disable software
+                            token MFA When sms_configuration is not present, the mfa_configuration
+                            argument must be set to OFF and the software_token_mfa_configuration
+                            configuration block must be fully removed.
                           type: boolean
                       required:
                       - enabled
@@ -351,41 +491,63 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Map of tags to assign to the User Pool. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                   userPoolAddOns:
+                    description: Configuration block for user pool add-ons to enable
+                      user pool advanced security mode features. Detailed below.
                     items:
                       properties:
                         advancedSecurityMode:
+                          description: Mode for advanced security, must be one of
+                            OFF, AUDIT or ENFORCED.
                           type: string
                       required:
                       - advancedSecurityMode
                       type: object
                     type: array
                   usernameAttributes:
+                    description: Whether email addresses or phone numbers can be specified
+                      as usernames when a user signs up. Conflicts with alias_attributes.
                     items:
                       type: string
                     type: array
                   usernameConfiguration:
+                    description: Configuration block for username configuration. Detailed
+                      below.
                     items:
                       properties:
                         caseSensitive:
+                          description: Whether username case sensitivity will be applied
+                            for all users in the user pool through Cognito APIs.
                           type: boolean
                       required:
                       - caseSensitive
                       type: object
                     type: array
                   verificationMessageTemplate:
+                    description: Configuration block for verification message templates.
+                      Detailed below.
                     items:
                       properties:
                         defaultEmailOption:
+                          description: Default email option. Must be either CONFIRM_WITH_CODE
+                            or CONFIRM_WITH_LINK. Defaults to CONFIRM_WITH_CODE.
                           type: string
                         emailMessage:
                           type: string
                         emailMessageByLink:
+                          description: Email message template for sending a confirmation
+                            link to the user, it must contain the {##Click Here##}
+                            placeholder.
                           type: string
                         emailSubject:
                           type: string
                         emailSubjectByLink:
+                          description: Subject line for the email message template
+                            for sending a confirmation link to the user.
                           type: string
                         smsMessage:
                           type: string
@@ -572,24 +734,40 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: ARN of the user pool.
                     type: string
                   creationDate:
+                    description: Date the user pool was created.
                     type: string
                   customDomain:
+                    description: 'A custom domain name that you provide to Amazon
+                      Cognito. This parameter applies only if you use a custom domain
+                      to host the sign-up and sign-in pages for your application.
+                      For example: auth.example.com.'
                     type: string
                   domain:
+                    description: Holds the domain prefix if the user pool has a domain
+                      associated with it.
                     type: string
                   endpoint:
+                    description: 'Endpoint name of the user pool. Example format:
+                      cognito-idp.REGION.amazonaws.com/xxxx_yyyyy'
                     type: string
                   estimatedNumberOfUsers:
+                    description: A number estimating the size of the user pool.
                     type: number
                   id:
+                    description: ID of the user pool.
                     type: string
                   lastModifiedDate:
+                    description: Date the user pool was last modified.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

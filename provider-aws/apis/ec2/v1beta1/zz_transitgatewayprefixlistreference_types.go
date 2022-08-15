@@ -14,6 +14,8 @@ import (
 )
 
 type TransitGatewayPrefixListReferenceObservation struct {
+
+	// EC2 Transit Gateway Route Table identifier and EC2 Prefix List identifier, separated by an underscore
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	PrefixListOwnerID *string `json:"prefixListOwnerId,omitempty" tf:"prefix_list_owner_id,omitempty"`
@@ -21,9 +23,11 @@ type TransitGatewayPrefixListReferenceObservation struct {
 
 type TransitGatewayPrefixListReferenceParameters struct {
 
+	// Indicates whether to drop traffic that matches the Prefix List. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Blackhole *bool `json:"blackhole,omitempty" tf:"blackhole,omitempty"`
 
+	// Identifier of EC2 Prefix List.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -40,6 +44,7 @@ type TransitGatewayPrefixListReferenceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Identifier of EC2 Transit Gateway Attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGatewayVPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -51,6 +56,7 @@ type TransitGatewayPrefixListReferenceParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
+	// Identifier of EC2 Transit Gateway Route Table.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.TransitGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("association_default_route_table_id",true)
 	// +kubebuilder:validation:Optional
@@ -77,7 +83,7 @@ type TransitGatewayPrefixListReferenceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// TransitGatewayPrefixListReference is the Schema for the TransitGatewayPrefixListReferences API
+// TransitGatewayPrefixListReference is the Schema for the TransitGatewayPrefixListReferences API. Manages an EC2 Transit Gateway Prefix List Reference
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

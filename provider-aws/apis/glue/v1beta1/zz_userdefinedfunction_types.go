@@ -18,29 +18,38 @@ type ResourceUrisObservation struct {
 
 type ResourceUrisParameters struct {
 
+	// The type of the resource. can be one of JAR, FILE, and ARCHIVE.
 	// +kubebuilder:validation:Required
 	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
 
+	// The URI for accessing the resource.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type UserDefinedFunctionObservation struct {
+
+	// The ARN of the Glue User Defined Function.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The time at which the function was created.
 	CreateTime *string `json:"createTime,omitempty" tf:"create_time,omitempty"`
 
+	// The id of the Glue User Defined Function.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type UserDefinedFunctionParameters struct {
 
+	// ID of the Glue Catalog to create the function in. If omitted, this defaults to the AWS Account ID.
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
+	// The Java class that contains the function code.
 	// +kubebuilder:validation:Required
 	ClassName *string `json:"className" tf:"class_name,omitempty"`
 
+	// The name of the Database to create the Function.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
@@ -51,9 +60,11 @@ type UserDefinedFunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
+	// The owner of the function.
 	// +kubebuilder:validation:Required
 	OwnerName *string `json:"ownerName" tf:"owner_name,omitempty"`
 
+	// The owner type. can be one of USER, ROLE, and GROUP.
 	// +kubebuilder:validation:Required
 	OwnerType *string `json:"ownerType" tf:"owner_type,omitempty"`
 
@@ -62,6 +73,7 @@ type UserDefinedFunctionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The configuration block for Resource URIs. See resource uris below for more details.
 	// +kubebuilder:validation:Optional
 	ResourceUris []ResourceUrisParameters `json:"resourceUris,omitempty" tf:"resource_uris,omitempty"`
 }
@@ -80,7 +92,7 @@ type UserDefinedFunctionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// UserDefinedFunction is the Schema for the UserDefinedFunctions API
+// UserDefinedFunction is the Schema for the UserDefinedFunctions API. Provides a Glue User Defined Function.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

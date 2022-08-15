@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: VPCAssociationAuthorization is the Schema for the VPCAssociationAuthorizations
-          API
+          API. Authorizes a VPC in a different account to be associated with a local
+          Route53 Hosted Zone
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -70,6 +71,8 @@ spec:
                       be created in.
                     type: string
                   vpcId:
+                    description: The VPC to authorize for association with the private
+                      hosted zone.
                     type: string
                   vpcIdRef:
                     description: A Reference to a named object.
@@ -145,8 +148,12 @@ spec:
                         type: object
                     type: object
                   vpcRegion:
+                    description: The VPC's region. Defaults to the region of the AWS
+                      provider.
                     type: string
                   zoneId:
+                    description: The ID of the private hosted zone that you want to
+                      authorize associating a VPC with.
                     type: string
                   zoneIdRef:
                     description: A Reference to a named object.
@@ -402,6 +409,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The calculated unique identifier for the association.
                     type: string
                 type: object
               conditions:

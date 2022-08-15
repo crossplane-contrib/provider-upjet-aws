@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: NetworkInterfaceSgAttachment is the Schema for the NetworkInterfaceSgAttachments
-          API
+          API. Associates a security group with a network interface.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,7 @@ spec:
               forProvider:
                 properties:
                   networkInterfaceId:
+                    description: The ID of the network interface to attach to.
                     type: string
                   networkInterfaceIdRef:
                     description: A Reference to a named object.
@@ -145,6 +146,7 @@ spec:
                       be created in.
                     type: string
                   securityGroupId:
+                    description: The ID of the security group.
                     type: string
                   securityGroupIdRef:
                     description: A Reference to a named object.

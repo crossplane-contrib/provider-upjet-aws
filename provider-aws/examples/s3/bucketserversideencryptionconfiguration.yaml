@@ -3,7 +3,7 @@ kind: BucketServerSideEncryptionConfiguration
 metadata:
   name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+    upjet.upbound.io/manual-intervention: "This resource requires KMS resource ARN."
 spec:
   forProvider:
     region: us-west-1

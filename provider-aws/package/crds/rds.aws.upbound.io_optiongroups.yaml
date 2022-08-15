@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: OptionGroup is the Schema for the OptionGroups API
+        description: OptionGroup is the Schema for the OptionGroups API. Provides
+          an RDS DB option group resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,24 +65,34 @@ spec:
               forProvider:
                 properties:
                   engineName:
+                    description: Specifies the name of the engine that this option
+                      group should be associated with.
                     type: string
                   majorEngineVersion:
+                    description: Specifies the major version of the engine that this
+                      option group should be associated with.
                     type: string
                   option:
+                    description: A list of Options to apply.
                     items:
                       properties:
                         dbSecurityGroupMemberships:
+                          description: A list of DB Security Groups for which the
+                            option is enabled.
                           items:
                             type: string
                           type: array
                         optionName:
+                          description: The Name of the Option .
                           type: string
                         optionSettings:
+                          description: A list of option settings to apply.
                           items:
                             properties:
                               name:
                                 type: string
                               value:
+                                description: The Value of the setting.
                                 type: string
                             required:
                             - name
@@ -89,10 +100,15 @@ spec:
                             type: object
                           type: array
                         port:
+                          description: The Port number when connecting to the Option
+                            .
                           type: number
                         version:
+                          description: The version of the option .
                           type: string
                         vpcSecurityGroupMemberships:
+                          description: A list of VPC Security Groups for which the
+                            option is enabled.
                           items:
                             type: string
                           type: array
@@ -101,6 +117,8 @@ spec:
                       type: object
                     type: array
                   optionGroupDescription:
+                    description: The description of the option group. Defaults to
+                      "Managed by Terraform".
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -109,6 +127,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - engineName
@@ -292,12 +313,17 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the db option group.
                     type: string
                   id:
+                    description: The db option group name.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

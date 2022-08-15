@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ClusterEndpoint is the Schema for the ClusterEndpoints API
+        description: ClusterEndpoint is the Schema for the ClusterEndpoints API. Manages
+          an RDS Aurora Cluster Endpoint
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   clusterIdentifier:
+                    description: The cluster identifier.
                     type: string
                   clusterIdentifierRef:
                     description: A Reference to a named object.
@@ -139,8 +141,13 @@ spec:
                         type: object
                     type: object
                   customEndpointType:
+                    description: 'The type of the endpoint. One of: READER , ANY .'
                     type: string
                   excludedMembers:
+                    description: List of DB instance identifiers that aren't part
+                      of the custom endpoint group. All other eligible instances are
+                      reachable through the custom endpoint. Only relevant if the
+                      list of static members is empty. Conflicts with static_members.
                     items:
                       type: string
                     type: array
@@ -149,12 +156,17 @@ spec:
                       be created in.
                     type: string
                   staticMembers:
+                    description: List of DB instance identifiers that are part of
+                      the custom endpoint group. Conflicts with excluded_members.
                     items:
                       type: string
                     type: array
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - customEndpointType
@@ -337,14 +349,20 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of cluster
                     type: string
                   endpoint:
+                    description: A custom endpoint for the Aurora cluster
                     type: string
                   id:
+                    description: The RDS Cluster Endpoint Identifier
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

@@ -21,18 +21,23 @@ type UserObservation struct {
 
 type UserParameters struct {
 
+	// Access permissions string used for this user. See Specifying Permissions Using an Access String for more details.
 	// +kubebuilder:validation:Required
 	AccessString *string `json:"accessString" tf:"access_string,omitempty"`
 
+	// The ARN of the created ElastiCache User.
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The current supported value is REDIS.
 	// +kubebuilder:validation:Required
 	Engine *string `json:"engine" tf:"engine,omitempty"`
 
+	// Indicates a password is not required for this user.
 	// +kubebuilder:validation:Optional
 	NoPasswordRequired *bool `json:"noPasswordRequired,omitempty" tf:"no_password_required,omitempty"`
 
+	// Passwords used for this user. You can create up to two passwords for each user.
 	// +kubebuilder:validation:Optional
 	PasswordsSecretRef *[]v1.SecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
 
@@ -41,9 +46,11 @@ type UserParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A list of tags to be added to this resource. A tag is a key-value pair.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The username of the user.
 	// +kubebuilder:validation:Required
 	UserName *string `json:"userName" tf:"user_name,omitempty"`
 }
@@ -62,7 +69,7 @@ type UserStatus struct {
 
 // +kubebuilder:object:root=true
 
-// User is the Schema for the Users API
+// User is the Schema for the Users API. Provides an ElastiCache user.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

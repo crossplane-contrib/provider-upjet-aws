@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: EIPAssociation is the Schema for the EIPAssociations API
+        description: EIPAssociation is the Schema for the EIPAssociations API. Provides
+          an AWS EIP Association
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -139,6 +140,8 @@ spec:
                         type: object
                     type: object
                   allowReassociation:
+                    description: Whether to allow an Elastic IP to be re-associated.
+                      Defaults to true in VPC.
                     type: boolean
                   instanceId:
                     type: string

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ResourceServer is the Schema for the ResourceServers API
+        description: ResourceServer is the Schema for the ResourceServers API. Provides
+          a Cognito Resource Server.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,19 +65,24 @@ spec:
               forProvider:
                 properties:
                   identifier:
+                    description: An identifier for the resource server.
                     type: string
                   name:
+                    description: A name for the resource server.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   scope:
+                    description: A list of Authorization Scope.
                     items:
                       properties:
                         scopeDescription:
+                          description: The scope description.
                           type: string
                         scopeName:
+                          description: The scope name.
                           type: string
                       required:
                       - scopeDescription
@@ -342,6 +348,8 @@ spec:
                   id:
                     type: string
                   scopeIdentifiers:
+                    description: A list of all scopes configured for this resource
+                      server in the format identifier/scope_name.
                     items:
                       type: string
                     type: array

@@ -14,11 +14,14 @@ import (
 )
 
 type AssociationObservation struct {
+
+	// The license configuration ARN.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type AssociationParameters struct {
 
+	// ARN of the license configuration.
 	// +crossplane:generate:reference:type=LicenseConfiguration
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -35,6 +38,7 @@ type AssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// ARN of the resource associated with the license configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -61,7 +65,7 @@ type AssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Association is the Schema for the Associations API
+// Association is the Schema for the Associations API. Provides a License Manager association resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

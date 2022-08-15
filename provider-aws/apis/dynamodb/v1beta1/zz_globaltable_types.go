@@ -14,8 +14,11 @@ import (
 )
 
 type GlobalTableObservation struct {
+
+	// The ARN of the DynamoDB Global Table
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The name of the DynamoDB Global Table
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -26,6 +29,7 @@ type GlobalTableParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Underlying DynamoDB Table. At least 1 replica must be defined. See below.
 	// +kubebuilder:validation:Required
 	Replica []ReplicaParameters `json:"replica" tf:"replica,omitempty"`
 }
@@ -35,6 +39,7 @@ type ReplicaObservation struct {
 
 type ReplicaParameters struct {
 
+	// AWS region name of replica DynamoDB TableE.g., us-east-1
 	// +kubebuilder:validation:Required
 	RegionName *string `json:"regionName" tf:"region_name,omitempty"`
 }
@@ -53,7 +58,7 @@ type GlobalTableStatus struct {
 
 // +kubebuilder:object:root=true
 
-// GlobalTable is the Schema for the GlobalTables API
+// GlobalTable is the Schema for the GlobalTables API. Manages DynamoDB Global Tables V1 (version 2017.11.29)
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

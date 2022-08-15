@@ -14,14 +14,18 @@ import (
 )
 
 type LBTargetGroupAttachmentObservation struct {
+
+	// A unique identifier for the attachment
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type LBTargetGroupAttachmentParameters struct {
 
+	// The Availability Zone where the IP address of the target is to be registered. If the private ip address is outside of the VPC scope, this value must be set to 'all'.
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// The port on which targets receive traffic.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -30,6 +34,7 @@ type LBTargetGroupAttachmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ARN of the target group with which to register targets
 	// +crossplane:generate:reference:type=LBTargetGroup
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
@@ -40,6 +45,7 @@ type LBTargetGroupAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
+	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the arn of lambda. If the target type is alb, specify the arn of alb.
 	// +kubebuilder:validation:Required
 	TargetID *string `json:"targetId" tf:"target_id,omitempty"`
 }
@@ -58,7 +64,7 @@ type LBTargetGroupAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 
-// LBTargetGroupAttachment is the Schema for the LBTargetGroupAttachments API
+// LBTargetGroupAttachment is the Schema for the LBTargetGroupAttachments API. Provides the ability to register instances and containers with a LB target group
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

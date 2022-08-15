@@ -18,6 +18,7 @@ type ConnectionPasswordEncryptionObservation struct {
 
 type ConnectionPasswordEncryptionParameters struct {
 
+	// A KMS key ARN that is used to encrypt the connection password. If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -29,6 +30,7 @@ type ConnectionPasswordEncryptionParameters struct {
 	// +kubebuilder:validation:Optional
 	AwsKMSKeyIDSelector *v1.Selector `json:"awsKmsKeyIdSelector,omitempty" tf:"-"`
 
+	// When set to true, passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently of the catalog encryption.
 	// +kubebuilder:validation:Required
 	ReturnConnectionPasswordEncrypted *bool `json:"returnConnectionPasswordEncrypted" tf:"return_connection_password_encrypted,omitempty"`
 }
@@ -38,22 +40,28 @@ type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsObservation struc
 
 type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters struct {
 
+	// When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption. see Connection Password Encryption.
 	// +kubebuilder:validation:Required
 	ConnectionPasswordEncryption []ConnectionPasswordEncryptionParameters `json:"connectionPasswordEncryption" tf:"connection_password_encryption,omitempty"`
 
+	// Specifies the encryption-at-rest configuration for the Data Catalog. see Encryption At Rest.
 	// +kubebuilder:validation:Required
 	EncryptionAtRest []EncryptionAtRestParameters `json:"encryptionAtRest" tf:"encryption_at_rest,omitempty"`
 }
 
 type DataCatalogEncryptionSettingsObservation struct {
+
+	// The ID of the Data Catalog to set the security configuration for.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DataCatalogEncryptionSettingsParameters struct {
 
+	// –  The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
+	// –  The security configuration to set. see Data Catalog Encryption Settings.
 	// +kubebuilder:validation:Required
 	DataCatalogEncryptionSettings []DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters `json:"dataCatalogEncryptionSettings" tf:"data_catalog_encryption_settings,omitempty"`
 
@@ -68,9 +76,11 @@ type EncryptionAtRestObservation struct {
 
 type EncryptionAtRestParameters struct {
 
+	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED and SSE-KMS.
 	// +kubebuilder:validation:Required
 	CatalogEncryptionMode *string `json:"catalogEncryptionMode" tf:"catalog_encryption_mode,omitempty"`
 
+	// The ARN of the AWS KMS key to use for encryption at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -97,7 +107,7 @@ type DataCatalogEncryptionSettingsStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DataCatalogEncryptionSettings is the Schema for the DataCatalogEncryptionSettingss API
+// DataCatalogEncryptionSettings is the Schema for the DataCatalogEncryptionSettingss API. Provides a Glue Data Catalog Encryption Settings resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

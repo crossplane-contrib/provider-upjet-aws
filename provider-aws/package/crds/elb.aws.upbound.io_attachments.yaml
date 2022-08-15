@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Attachment is the Schema for the Attachments API
+        description: Attachment is the Schema for the Attachments API. Provides an
+          Elastic Load Balancer Attachment resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   elb:
+                    description: The name of the ELB.
                     type: string
                   elbRef:
                     description: A Reference to a named object.
@@ -139,6 +141,7 @@ spec:
                         type: object
                     type: object
                   instance:
+                    description: Instance ID to place in the ELB pool.
                     type: string
                   instanceRef:
                     description: A Reference to a named object.

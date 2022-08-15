@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SubnetGroup is the Schema for the SubnetGroups API
+        description: SubnetGroup is the Schema for the SubnetGroups API. Provides
+          an DAX Subnet Group resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: A description of the subnet group.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -145,6 +147,7 @@ spec:
                         type: object
                     type: object
                   subnetIds:
+                    description: –  A list of VPC subnet IDs for the subnet group.
                     items:
                       type: string
                     type: array
@@ -328,8 +331,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The name of the subnet group.
                     type: string
                   vpcId:
+                    description: – VPC ID of the subnet group.
                     type: string
                 type: object
               conditions:

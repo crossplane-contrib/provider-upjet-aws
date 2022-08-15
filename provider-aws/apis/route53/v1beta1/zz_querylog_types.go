@@ -14,13 +14,17 @@ import (
 )
 
 type QueryLogObservation struct {
+
+	// The Amazon Resource Name  of the Query Logging Config.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The query logging configuration ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type QueryLogParameters struct {
 
+	// CloudWatch log group ARN to send query logs.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -37,6 +41,7 @@ type QueryLogParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Route53 hosted zone ID to enable query logs.
 	// +kubebuilder:validation:Required
 	ZoneID *string `json:"zoneId" tf:"zone_id,omitempty"`
 }
@@ -55,7 +60,7 @@ type QueryLogStatus struct {
 
 // +kubebuilder:object:root=true
 
-// QueryLog is the Schema for the QueryLogs API
+// QueryLog is the Schema for the QueryLogs API. Provides a Route53 query logging configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,22 +14,33 @@ import (
 )
 
 type QueryLogConfigObservation struct {
+
+	// The ARN  of the Route 53 Resolver query logging configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ID of the Route 53 Resolver query logging configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The AWS account ID of the account that created the query logging configuration.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// An indication of whether the query logging configuration is shared with other AWS accounts, or was shared with the current account by another AWS account.
+	// Sharing is configured through AWS Resource Access Manager .
+	// Values are NOT_SHARED, SHARED_BY_ME or SHARED_WITH_ME
 	ShareStatus *string `json:"shareStatus,omitempty" tf:"share_status,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type QueryLogConfigParameters struct {
 
+	// The ARN of the resource that you want Route 53 Resolver to send query logs.
+	// You can send query logs to an S3 bucket, a CloudWatch Logs log group, or a Kinesis Data Firehose delivery stream.
 	// +kubebuilder:validation:Required
 	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
 
+	// The name of the Route 53 Resolver query logging configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -38,6 +49,7 @@ type QueryLogConfigParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -56,7 +68,7 @@ type QueryLogConfigStatus struct {
 
 // +kubebuilder:object:root=true
 
-// QueryLogConfig is the Schema for the QueryLogConfigs API
+// QueryLogConfig is the Schema for the QueryLogConfigs API. Provides a Route 53 Resolver query logging configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

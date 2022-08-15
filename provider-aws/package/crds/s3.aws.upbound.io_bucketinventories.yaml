@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: BucketInventory is the Schema for the BucketInventorys API
+        description: BucketInventory is the Schema for the BucketInventorys API. Provides
+          a S3 bucket inventory configuration resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -139,14 +140,20 @@ spec:
                         type: object
                     type: object
                   destination:
+                    description: Contains information about where to publish the inventory
+                      results .
                     items:
                       properties:
                         bucket:
                           items:
                             properties:
                               accountId:
+                                description: The ID of the account that owns the destination
+                                  bucket. Recommended to be set to prevent problems
+                                  if the destination bucket ownership changes.
                                 type: string
                               bucketArn:
+                                description: The Amazon S3 bucket ARN of the destination.
                                 type: string
                               bucketArnRef:
                                 description: A Reference to a named object.
@@ -227,24 +234,37 @@ spec:
                                     type: object
                                 type: object
                               encryption:
+                                description: Contains the type of server-side encryption
+                                  to use to encrypt the inventory .
                                 items:
                                   properties:
                                     sseKms:
+                                      description: Specifies to use server-side encryption
+                                        with AWS KMS-managed keys to encrypt the inventory
+                                        file .
                                       items:
                                         properties:
                                           keyId:
+                                            description: The ARN of the KMS customer
+                                              master key  used to encrypt the inventory
+                                              file.
                                             type: string
                                         required:
                                         - keyId
                                         type: object
                                       type: array
                                     sseS3:
+                                      description: Specifies to use server-side encryption
+                                        with Amazon S3-managed keys  to encrypt the
+                                        inventory file.
                                       items:
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               format:
+                                description: Specifies the output format of the inventory
+                                  results. Can be CSV, ORC or Parquet.
                                 type: string
                               prefix:
                                 type: string
@@ -257,8 +277,11 @@ spec:
                       type: object
                     type: array
                   enabled:
+                    description: Specifies whether the inventory is enabled or disabled.
                     type: boolean
                   filter:
+                    description: Specifies an inventory filter. The inventory only
+                      includes objects that meet the filter's criteria .
                     items:
                       properties:
                         prefix:
@@ -266,10 +289,17 @@ spec:
                       type: object
                     type: array
                   includedObjectVersions:
+                    description: 'Object versions to include in the inventory list.
+                      Valid values: All, Current.'
                     type: string
                   name:
+                    description: Unique identifier of the inventory configuration
+                      for the bucket.
                     type: string
                   optionalFields:
+                    description: List of optional fields that are included in the
+                      inventory results. Please refer to the S3 documentation for
+                      more details.
                     items:
                       type: string
                     type: array
@@ -278,9 +308,13 @@ spec:
                       be created in.
                     type: string
                   schedule:
+                    description: Specifies the schedule for generating inventory results
+                      .
                     items:
                       properties:
                         frequency:
+                          description: 'Specifies how frequently inventory results
+                            are produced. Valid values: Daily, Weekly.'
                           type: string
                       required:
                       - frequency
