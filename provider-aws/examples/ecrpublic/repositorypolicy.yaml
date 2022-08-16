@@ -34,4 +34,4 @@ spec:
       }
     repositoryName: example
   providerConfigRef:
-    name: example
+    name: default
