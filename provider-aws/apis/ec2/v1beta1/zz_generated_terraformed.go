@@ -1638,6 +1638,7 @@ func (tr *Instance) LateInitialize(attrs []byte) (bool, error) {
 	opts = append(opts, resource.WithNameFilter("PrivateIP"))
 	opts = append(opts, resource.WithNameFilter("SourceDestCheck"))
 	opts = append(opts, resource.WithNameFilter("SubnetID"))
+	opts = append(opts, resource.WithNameFilter("VPCSecurityGroupIds"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

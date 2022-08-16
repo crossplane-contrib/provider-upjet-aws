@@ -461,6 +461,18 @@ func (in *ELBParameters) DeepCopyInto(out *ELBParameters) {
 			}
 		}
 	}
+	if in.SubnetsRefs != nil {
+		in, out := &in.SubnetsRefs, &out.SubnetsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetsSelector != nil {
+		in, out := &in.SubnetsSelector, &out.SubnetsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

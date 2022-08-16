@@ -78,5 +78,21 @@ func (mg *ELB) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.Instances = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.InstancesRefs = mrsp.ResolvedReferences
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Subnets),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.SubnetsRefs,
+		Selector:      mg.Spec.ForProvider.SubnetsSelector,
+		To: reference.To{
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Subnets")
+	}
+	mg.Spec.ForProvider.Subnets = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SubnetsRefs = mrsp.ResolvedReferences
+
 	return nil
 }

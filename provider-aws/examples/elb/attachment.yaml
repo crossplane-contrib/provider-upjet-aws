@@ -7,5 +7,5 @@ spec:
     elbRef:
       name: example
     instanceRef:
-      name: example
+      name: upbound-instance
     region: us-west-1

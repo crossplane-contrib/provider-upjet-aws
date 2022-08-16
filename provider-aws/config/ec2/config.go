@@ -43,6 +43,7 @@ func Configure(p *config.Provider) {
 				"network_interface",
 				"private_ip",
 				"source_dest_check",
+				"vpc_security_group_ids",
 			},
 		}
 	})
