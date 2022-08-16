@@ -4,8 +4,9 @@ metadata:
   name: sample-endpoint-group
 spec:
   forProvider:
+    region: eu-west-1
     listenerArnRef:
       name: sample-listener
   writeConnectionSecretToRef:
-    name: accelerator
-    namespace: default
+    name: endpoint
+    namespace: upbound-system
