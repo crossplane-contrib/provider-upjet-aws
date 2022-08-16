@@ -5,6 +5,6 @@ metadata:
 spec:
   forProvider:
     policyArnRef:
-      name: example
+      name: sample-user-policy
     userRef:
       name: sample-user
