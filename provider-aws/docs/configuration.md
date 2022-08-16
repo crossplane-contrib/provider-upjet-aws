@@ -1,4 +1,4 @@
-Install official providers either as hosted control planes in Upbound Cloud or as self-hosted control planes using Universal Crossplane (`UXP`).
+Install official provider on self-hosted control planes using Universal Crossplane (`UXP`).
 
 ## Install the provider
 Official providers require a Kubernetes `imagePullSecret` to install. 
@@ -52,8 +52,6 @@ aws_secret_access_key = <aws_secret_key>
 Create the secret with the command  
 
 `kubectl create secret generic <secret name> --from-file=<aws_credentials_file.txt>`
-
-**Note:** for hosted control planes, use the `-n upbound-system` flag to provision the secret inside the managed control plane.
 
 ### Create a ProviderConfig object
 Apply the secret in a `ProviderConfig` Kubernetes configuration file.
