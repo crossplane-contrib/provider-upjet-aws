@@ -921,10 +921,16 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// opensearch
 	//
+	// NOTE(sergen): Parameter as identifier cannot be used, because terraform
+	// overrides the id after terraform calls.
+	// Please see the following issue in upjet: https://github.com/upbound/upjet/issues/32
 	// OpenSearch domains can be imported using the domain_name
 	"aws_opensearch_domain": config.IdentifierFromProvider,
 	// No imports
 	"aws_opensearch_domain_policy": config.IdentifierFromProvider,
+	// NOTE(sergen): Parameter as identifier cannot be used, because terraform
+	// overrides the id after terraform calls.
+	// Please see the following issue in upjet: https://github.com/upbound/upjet/issues/32
 	// OpenSearch domains can be imported using the domain_name
 	"aws_opensearch_domain_saml_options": config.IdentifierFromProvider,
 }
