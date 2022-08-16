@@ -18,6 +18,7 @@ type CognitoIdentityProvidersObservation struct {
 
 type CognitoIdentityProvidersParameters struct {
 
+	// The client ID for the Amazon Cognito Identity User Pool.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
@@ -28,38 +29,51 @@ type CognitoIdentityProvidersParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
+	// The provider name for an Amazon Cognito Identity User Pool.
 	// +kubebuilder:validation:Optional
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
+	// Whether server-side token validation is enabled for the identity provider’s token or not.
 	// +kubebuilder:validation:Optional
 	ServerSideTokenCheck *bool `json:"serverSideTokenCheck,omitempty" tf:"server_side_token_check,omitempty"`
 }
 
 type PoolObservation struct {
+
+	// The ARN of the identity pool.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// An identity pool ID, e.g. us-west-2_abc123.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type PoolParameters struct {
 
+	// Enables or disables the classic / basic authentication flow. Default is false.
 	// +kubebuilder:validation:Optional
 	AllowClassicFlow *bool `json:"allowClassicFlow,omitempty" tf:"allow_classic_flow,omitempty"`
 
+	// Whether the identity pool supports unauthenticated logins or not.
 	// +kubebuilder:validation:Optional
 	AllowUnauthenticatedIdentities *bool `json:"allowUnauthenticatedIdentities,omitempty" tf:"allow_unauthenticated_identities,omitempty"`
 
+	// An array of Amazon Cognito Identity user pools and their client IDs.
 	// +kubebuilder:validation:Optional
 	CognitoIdentityProviders []CognitoIdentityProvidersParameters `json:"cognitoIdentityProviders,omitempty" tf:"cognito_identity_providers,omitempty"`
 
+	// The "domain" by which Cognito will refer to your users. This name acts as a placeholder that allows your
+	// backend and the Cognito service to communicate about the developer provider.
 	// +kubebuilder:validation:Optional
 	DeveloperProviderName *string `json:"developerProviderName,omitempty" tf:"developer_provider_name,omitempty"`
 
+	// The Cognito Identity Pool name.
 	// +kubebuilder:validation:Required
 	IdentityPoolName *string `json:"identityPoolName" tf:"identity_pool_name,omitempty"`
 
+	// Set of OpendID Connect provider ARNs.
 	// +kubebuilder:validation:Optional
 	OpenIDConnectProviderArns []*string `json:"openidConnectProviderArns,omitempty" tf:"openid_connect_provider_arns,omitempty"`
 
@@ -68,6 +82,7 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// An array of Amazon Resource Names  of the SAML provider for your identity.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.SAMLProvider
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -79,9 +94,11 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	SAMLProviderArnsSelector *v1.Selector `json:"samlProviderArnsSelector,omitempty" tf:"-"`
 
+	// Key-Value pairs mapping provider names to provider app IDs.
 	// +kubebuilder:validation:Optional
 	SupportedLoginProviders map[string]*string `json:"supportedLoginProviders,omitempty" tf:"supported_login_providers,omitempty"`
 
+	// A map of tags to assign to the Identity Pool. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -100,7 +117,7 @@ type PoolStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Pool is the Schema for the Pools API
+// Pool is the Schema for the Pools API. Provides an AWS Cognito Identity Pool.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

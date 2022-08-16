@@ -14,11 +14,14 @@ import (
 )
 
 type BucketOwnershipControlsObservation struct {
+
+	// S3 Bucket name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type BucketOwnershipControlsParameters struct {
 
+	// The name of the bucket that you want to associate this access point with.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -35,6 +38,7 @@ type BucketOwnershipControlsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Configuration block with Ownership Controls rules. Detailed below.
 	// +kubebuilder:validation:Required
 	Rule []BucketOwnershipControlsRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
@@ -44,6 +48,7 @@ type BucketOwnershipControlsRuleObservation struct {
 
 type BucketOwnershipControlsRuleParameters struct {
 
+	// Object ownership. Valid values: BucketOwnerPreferred, ObjectWriter or BucketOwnerEnforced
 	// +kubebuilder:validation:Required
 	ObjectOwnership *string `json:"objectOwnership" tf:"object_ownership,omitempty"`
 }
@@ -62,7 +67,7 @@ type BucketOwnershipControlsStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketOwnershipControls is the Schema for the BucketOwnershipControlss API
+// BucketOwnershipControls is the Schema for the BucketOwnershipControlss API. Manages S3 Bucket Ownership Controls.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

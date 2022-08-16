@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Authorizer is the Schema for the Authorizers API
+        description: Authorizer is the Schema for the Authorizers API. Manages an
+          Amazon API Gateway Version 2 authorizer.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiId:
+                    description: The API identifier.
                     type: string
                   apiIdRef:
                     description: A Reference to a named object.
@@ -139,14 +141,32 @@ spec:
                         type: object
                     type: object
                   authorizerCredentialsArn:
+                    description: The required credentials as an IAM role for API Gateway
+                      to invoke the authorizer. Supported only for REQUEST authorizers.
                     type: string
                   authorizerPayloadFormatVersion:
+                    description: 'The format of the payload sent to an HTTP API Lambda
+                      authorizer. Required for HTTP API Lambda authorizers. Valid
+                      values: 1.0, 2.0.'
                     type: string
                   authorizerResultTtlInSeconds:
+                    description: The time to live  for cached authorizer results,
+                      in seconds. If it equals 0, authorization caching is disabled.
+                      If it is greater than 0, API Gateway caches authorizer responses.
+                      The maximum value is 3600, or 1 hour. Defaults to 300. Supported
+                      only for HTTP API Lambda authorizers.
                     type: number
                   authorizerType:
+                    description: 'The authorizer type. Valid values: JWT, REQUEST.
+                      Specify REQUEST for a Lambda function using incoming request
+                      parameters. For HTTP APIs, specify JWT to use JSON Web Tokens.'
                     type: string
                   authorizerUri:
+                    description: The authorizer's Uniform Resource Identifier . For
+                      REQUEST authorizers this must be a well-formed Lambda function
+                      URI, such as the invoke_arn attribute of the aws_lambda_function
+                      resource. Supported only for REQUEST authorizers. Must be between
+                      1 and 2048 characters in length.
                     type: string
                   authorizerUriRef:
                     description: A Reference to a named object.
@@ -222,23 +242,42 @@ spec:
                         type: object
                     type: object
                   enableSimpleResponses:
+                    description: Whether a Lambda authorizer returns a response in
+                      a simple format. If enabled, the Lambda authorizer can return
+                      a boolean value instead of an IAM policy. Supported only for
+                      HTTP APIs.
                     type: boolean
                   identitySources:
+                    description: The identity sources for which authorization is requested.
+                      For REQUEST authorizers the value is a list of one or more mapping
+                      expressions of the specified request parameters. For JWT authorizers
+                      the single entry specifies where to extract the JSON Web Token  from
+                      inbound requests.
                     items:
                       type: string
                     type: array
                   jwtConfiguration:
+                    description: The configuration of a JWT authorizer. Required for
+                      the JWT authorizer type. Supported only for HTTP APIs.
                     items:
                       properties:
                         audience:
+                          description: A list of the intended recipients of the JWT.
+                            A valid JWT must provide an aud that matches at least
+                            one entry in this list.
                           items:
                             type: string
                           type: array
                         issuer:
+                          description: The base domain of the identity provider that
+                            issues JSON Web Tokens, such as the endpoint attribute
+                            of the aws_cognito_user_pool resource.
                           type: string
                       type: object
                     type: array
                   name:
+                    description: The name of the authorizer. Must be between 1 and
+                      128 characters in length.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -426,6 +465,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The authorizer identifier.
                     type: string
                 type: object
               conditions:

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SigningProfile is the Schema for the SigningProfiles API
+        description: SigningProfile is the Schema for the SigningProfiles API. Creates
+          a Signer Signing Profile.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,15 @@ spec:
               forProvider:
                 properties:
                   platformId:
+                    description: The ID of the platform that is used by the target
+                      signing profile.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   signatureValidityPeriod:
+                    description: The validity period for a signing job.
                     items:
                       properties:
                         type:
@@ -84,6 +88,10 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A list of tags associated with the signing profile.
+                      If configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                 required:
                 - platformId
@@ -266,12 +274,16 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  for the signing profile.
                     type: string
                   id:
                     type: string
                   platformDisplayName:
+                    description: A human-readable name for the signing platform associated
+                      with the signing profile.
                     type: string
                   revocationRecord:
+                    description: Revocation information for a signing profile.
                     items:
                       properties:
                         revocationEffectiveFrom:
@@ -283,14 +295,20 @@ spec:
                       type: object
                     type: array
                   status:
+                    description: The status of the target signing profile.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   version:
+                    description: The current version of the signing profile.
                     type: string
                   versionArn:
+                    description: The signing profile ARN, including the profile version.
                     type: string
                 type: object
               conditions:

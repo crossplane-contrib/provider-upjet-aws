@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: IdentityProvider is the Schema for the IdentityProviders API
+        description: IdentityProvider is the Schema for the IdentityProviders API.
+          Provides a Cognito User Identity Provider resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,24 +67,31 @@ spec:
                   attributeMapping:
                     additionalProperties:
                       type: string
+                    description: The map of attribute mapping of user pool attributes.
+                      AttributeMapping in AWS API documentation
                     type: object
                   idpIdentifiers:
+                    description: The list of identity providers.
                     items:
                       type: string
                     type: array
                   providerDetails:
                     additionalProperties:
                       type: string
+                    description: The map of identity details, such as access token
                     type: object
                   providerName:
+                    description: The provider name
                     type: string
                   providerType:
+                    description: The provider type.  See AWS API for valid values
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   userPoolId:
+                    description: The user pool id
                     type: string
                   userPoolIdRef:
                     description: A Reference to a named object.

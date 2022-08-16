@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: FirewallRuleGroup is the Schema for the FirewallRuleGroups API
+        description: FirewallRuleGroup is the Schema for the FirewallRuleGroups API.
+          Provides a Route 53 Resolver DNS Firewall rule group resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   name:
+                    description: A name that lets you identify the rule group, to
+                      manage and use it.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -72,6 +75,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - name
@@ -254,16 +260,28 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN  of the rule group.
                     type: string
                   id:
+                    description: The ID of the rule group.
                     type: string
                   ownerId:
+                    description: The AWS account ID for the account that created the
+                      rule group. When a rule group is shared with your account, this
+                      is the account that has shared the rule group with you.
                     type: string
                   shareStatus:
+                    description: 'Whether the rule group is shared with other AWS
+                      accounts, or was shared with the current account by another
+                      AWS account. Sharing is configured through AWS Resource Access
+                      Manager . Valid values: NOT_SHARED, SHARED_BY_ME, SHARED_WITH_ME'
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

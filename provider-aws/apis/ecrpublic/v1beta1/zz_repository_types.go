@@ -18,37 +18,49 @@ type CatalogDataObservation struct {
 
 type CatalogDataParameters struct {
 
+	// A detailed description of the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The text must be in markdown format.
 	// +kubebuilder:validation:Optional
 	AboutText *string `json:"aboutText,omitempty" tf:"about_text,omitempty"`
 
+	// The system architecture that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported architectures will appear as badges on the repository and are used as search filters: ARM, ARM 64, x86, x86-64
 	// +kubebuilder:validation:Optional
 	Architectures []*string `json:"architectures,omitempty" tf:"architectures,omitempty"`
 
+	// A short description of the contents of the repository. This text appears in both the image details and also when searching for repositories on the Amazon ECR Public Gallery.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The base64-encoded repository logo payload.  Note that drift detection is disabled for this attribute.
 	// +kubebuilder:validation:Optional
 	LogoImageBlob *string `json:"logoImageBlob,omitempty" tf:"logo_image_blob,omitempty"`
 
+	// The operating systems that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported operating systems will appear as badges on the repository and are used as search filters: Linux, Windows
 	// +kubebuilder:validation:Optional
 	OperatingSystems []*string `json:"operatingSystems,omitempty" tf:"operating_systems,omitempty"`
 
+	// Detailed information on how to use the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The usage text provides context, support information, and additional usage details for users of the repository. The text must be in markdown format.
 	// +kubebuilder:validation:Optional
 	UsageText *string `json:"usageText,omitempty" tf:"usage_text,omitempty"`
 }
 
 type RepositoryObservation struct {
+
+	// Full ARN of the repository.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The repository name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The registry ID where the repository was created.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 
+	// The URI of the repository.
 	RepositoryURI *string `json:"repositoryUri,omitempty" tf:"repository_uri,omitempty"`
 }
 
 type RepositoryParameters struct {
 
+	// Catalog data configuration for the repository. See below for schema.
 	// +kubebuilder:validation:Optional
 	CatalogData []CatalogDataParameters `json:"catalogData,omitempty" tf:"catalog_data,omitempty"`
 
@@ -75,7 +87,7 @@ type RepositoryStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Repository is the Schema for the Repositorys API
+// Repository is the Schema for the Repositorys API. Provides a Public Elastic Container Registry Repository.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

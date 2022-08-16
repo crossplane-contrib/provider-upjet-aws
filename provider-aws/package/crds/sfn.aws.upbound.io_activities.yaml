@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Activity is the Schema for the Activitys API
+        description: Activity is the Schema for the Activitys API. Provides a Step
+          Function Activity resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -72,6 +73,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - name
@@ -254,12 +258,18 @@ spec:
               atProvider:
                 properties:
                   creationDate:
+                    description: The date the activity was created.
                     type: string
                   id:
+                    description: The Amazon Resource Name  that identifies the created
+                      activity.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

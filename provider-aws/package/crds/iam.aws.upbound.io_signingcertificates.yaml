@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: SigningCertificate is the Schema for the SigningCertificates
-          API
+          API. Provides an IAM Signing Certificate
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,10 +65,17 @@ spec:
               forProvider:
                 properties:
                   certificateBody:
+                    description: ncoded format.
                     type: string
                   status:
+                    description: –   The status you want to assign to the certificate.
+                      Active means that the certificate can be used for programmatic
+                      calls to Amazon Web Services Inactive means that the certificate
+                      cannot be used.
                     type: string
                   userName:
+                    description: –  The name of the user the signing certificate is
+                      for.
                     type: string
                 required:
                 - certificateBody
@@ -251,8 +258,10 @@ spec:
               atProvider:
                 properties:
                   certificateId:
+                    description: The ID for the signing certificate.
                     type: string
                   id:
+                    description: The certificate_id:user_name
                     type: string
                 type: object
               conditions:

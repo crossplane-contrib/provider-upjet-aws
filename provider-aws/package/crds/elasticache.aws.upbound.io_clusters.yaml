@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Cluster is the Schema for the Clusters API
+        description: Cluster is the Schema for the Clusters API. Provides an ElastiCache
+          Cluster resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,29 +65,70 @@ spec:
               forProvider:
                 properties:
                   applyImmediately:
+                    description: Whether any database modifications are applied immediately,
+                      or during the next maintenance window. Default is false. See
+                      Amazon ElastiCache Documentation for more information..
                     type: boolean
                   autoMinorVersionUpgrade:
+                    description: Specifies whether minor version engine upgrades will
+                      be applied automatically to the underlying Cache Cluster instances
+                      during the maintenance window. Only supported for engine type
+                      "redis" and if the engine version is 6 or higher. Defaults to
+                      true.
                     type: string
                   availabilityZone:
+                    description: 'Availability Zone for the cache cluster. If you
+                      want to create cache nodes in multi-az, use preferred_availability_zones
+                      instead. Default: System chosen Availability Zone. Changing
+                      this value will re-create the resource.'
                     type: string
                   azMode:
+                    description: Whether the nodes in this Memcached node group are
+                      created in a single Availability Zone or created across multiple
+                      Availability Zones in the cluster's region. Valid values for
+                      this parameter are single-az or cross-az, default is single-az.
+                      If you want to choose cross-az, num_cache_nodes must be greater
+                      than 1.
                     type: string
                   engine:
+                    description: –  Name of the cache engine to be used for this cache
+                      cluster. Valid values are memcached or redis.
                     type: string
                   engineVersion:
+                    description: –  Version number of the cache engine to be used.
+                      If not set, defaults to the latest version. See Describe Cache
+                      Engine Versions in the AWS Documentation for supported versions.
+                      When engine is redis and the version is 6 or higher, the major
+                      and minor version can be set, e.g., 6.2, or the minor version
+                      can be unspecified which will use the latest version at creation
+                      time, e.g., 6.x. Otherwise, specify the full version desired,
+                      e.g., 5.0.6. The actual engine version used is returned in the
+                      attribute engine_version_actual, see Attributes Reference below.
                     type: string
                   finalSnapshotIdentifier:
+                    description: Name of your final cluster snapshot. If omitted,
+                      no final snapshot will be made.
                     type: string
                   logDeliveryConfiguration:
+                    description: Specifies the destination and format of Redis SLOWLOG
+                      or Redis Engine Log. See the documentation on Amazon ElastiCache.
+                      See Log Delivery Configuration below for more details.
                     items:
                       properties:
                         destination:
+                          description: Name of either the CloudWatch Logs LogGroup
+                            or Kinesis Data Firehose resource.
                           type: string
                         destinationType:
+                          description: For CloudWatch Logs use cloudwatch-logs or
+                            for Kinesis Data Firehose use kinesis-firehose.
                           type: string
                         logFormat:
+                          description: Valid values are json or text
                           type: string
                         logType:
+                          description: Valid values are  slow-log or engine-log. Max
+                            1 of each.
                           type: string
                       required:
                       - destination
@@ -96,14 +138,24 @@ spec:
                       type: object
                     type: array
                   maintenanceWindow:
+                    description: 'dd:hh24:mi . The minimum maintenance window is a
+                      60 minute period. Example: sun:05:00-sun:09:00.'
                     type: string
                   nodeType:
+                    description: reate the resource.
                     type: string
                   notificationTopicArn:
+                    description: ast-1:012345678999:my_sns_topic.
                     type: string
                   numCacheNodes:
+                    description: –  The initial number of cache nodes that the cache
+                      cluster will have. For Redis, this value must be 1. For Memcached,
+                      this value must be between 1 and 40. If this number is reduced
+                      on subsequent runs, the highest numbered nodes will be removed.
                     type: number
                   parameterGroupName:
+                    description: –  The name of the parameter group to associate with
+                      this cache cluster.
                     type: string
                   parameterGroupNameRef:
                     description: A Reference to a named object.
@@ -179,8 +231,21 @@ spec:
                         type: object
                     type: object
                   port:
+                    description: reate the resource.
                     type: number
                   preferredAvailabilityZones:
+                    description: 'List of the Availability Zones in which cache nodes
+                      are created. If you are creating your cluster in an Amazon VPC
+                      you can only locate nodes in Availability Zones that are associated
+                      with the subnets in the selected subnet group. The number of
+                      Availability Zones listed must equal the value of num_cache_nodes.
+                      If you want all the nodes in the same Availability Zone, use
+                      availability_zone instead, or repeat the Availability Zone multiple
+                      times in the list. Default: System chosen Availability Zones.
+                      Detecting drift of existing node availability zone is not currently
+                      supported. Updating this argument by itself to migrate existing
+                      node availability zones is not currently supported and will
+                      show a perpetual difference.'
                     items:
                       type: string
                     type: array
@@ -189,26 +254,51 @@ spec:
                       be created in.
                     type: string
                   replicationGroupId:
+                    description: ID of the replication group to which this cluster
+                      should belong. If this parameter is specified, the cluster is
+                      added to the specified replication group as a read replica;
+                      otherwise, the cluster is a standalone primary that is not part
+                      of any replication group.
                     type: string
                   securityGroupIds:
+                    description: –  One or more VPC security groups associated with
+                      the cache cluster
                     items:
                       type: string
                     type: array
                   securityGroupNames:
+                    description: reate the resource.
                     items:
                       type: string
                     type: array
                   snapshotArns:
+                    description: lement string list containing an Amazon Resource
+                      Name  of a Redis RDB snapshot file stored in Amazon S3. The
+                      object name cannot contain any commas. Changing snapshot_arns
+                      forces a new resource.
                     items:
                       type: string
                     type: array
                   snapshotName:
+                    description: Name of a snapshot from which to restore data into
+                      the new node group. Changing snapshot_name forces a new resource.
                     type: string
                   snapshotRetentionLimit:
+                    description: Number of days for which ElastiCache will retain
+                      automatic cache cluster snapshots before deleting them. For
+                      example, if you set SnapshotRetentionLimit to 5, then a snapshot
+                      that was taken today will be retained for 5 days before being
+                      deleted. If the value of SnapshotRetentionLimit is set to zero
+                      , backups are turned off. Please note that setting a snapshot_retention_limit
+                      is not supported on cache.t1.micro cache nodes
                     type: number
                   snapshotWindow:
+                    description: 'Daily time range  during which ElastiCache will
+                      begin taking a daily snapshot of your cache cluster. Example:
+                      05:00-09:00'
                     type: string
                   subnetGroupName:
+                    description: reate the resource.
                     type: string
                   subnetGroupNameRef:
                     description: A Reference to a named object.
@@ -286,6 +376,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -467,31 +560,46 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the created ElastiCache Cluster.
                     type: string
                   cacheNodes:
+                    description: List of node objects including id, address, port
+                      and availability_zone.
                     items:
                       properties:
                         address:
                           type: string
                         availabilityZone:
+                          description: 'Availability Zone for the cache cluster. If
+                            you want to create cache nodes in multi-az, use preferred_availability_zones
+                            instead. Default: System chosen Availability Zone. Changing
+                            this value will re-create the resource.'
                           type: string
                         id:
                           type: string
                         port:
+                          description: reate the resource.
                           type: number
                       type: object
                     type: array
                   clusterAddress:
+                    description: DNS name of the cache cluster without the port appended.
                     type: string
                   configurationEndpoint:
+                    description: Configuration endpoint to allow host discovery.
                     type: string
                   engineVersionActual:
+                    description: Because ElastiCache pulls the latest minor or patch
+                      for a version, this attribute returns the running version of
+                      the cache engine.
                     type: string
                   id:
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

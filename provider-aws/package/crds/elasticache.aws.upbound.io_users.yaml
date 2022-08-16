@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: User is the Schema for the Users API
+        description: User is the Schema for the Users API. Provides an ElastiCache
+          user.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,14 +65,21 @@ spec:
               forProvider:
                 properties:
                   accessString:
+                    description: Access permissions string used for this user. See
+                      Specifying Permissions Using an Access String for more details.
                     type: string
                   arn:
+                    description: The ARN of the created ElastiCache User.
                     type: string
                   engine:
+                    description: The current supported value is REDIS.
                     type: string
                   noPasswordRequired:
+                    description: Indicates a password is not required for this user.
                     type: boolean
                   passwordsSecretRef:
+                    description: Passwords used for this user. You can create up to
+                      two passwords for each user.
                     items:
                       description: A SecretKeySelector is a reference to a secret
                         key in an arbitrary namespace.
@@ -98,8 +106,11 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A list of tags to be added to this resource. A tag
+                      is a key-value pair.
                     type: object
                   userName:
+                    description: The username of the user.
                     type: string
                 required:
                 - accessString

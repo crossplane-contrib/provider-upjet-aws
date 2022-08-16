@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Thing is the Schema for the Things API
+        description: Thing is the Schema for the Things API. Creates and manages an
+          AWS IoT Thing.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,12 +67,14 @@ spec:
                   attributes:
                     additionalProperties:
                       type: string
+                    description: Map of attributes of the thing.
                     type: object
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   thingTypeName:
+                    description: The thing type name.
                     type: string
                 required:
                 - region
@@ -253,12 +256,15 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the thing.
                     type: string
                   defaultClientId:
+                    description: The default client ID.
                     type: string
                   id:
                     type: string
                   version:
+                    description: The current version of the thing record in the registry.
                     type: number
                 type: object
               conditions:

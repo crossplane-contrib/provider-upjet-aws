@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Stage is the Schema for the Stages API
+        description: Stage is the Schema for the Stages API. Manages an Amazon API
+          Gateway Version 2 stage.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,11 +65,19 @@ spec:
               forProvider:
                 properties:
                   accessLogSettings:
+                    description: Settings for logging access in this stage. Use the
+                      aws_api_gateway_account resource to configure permissions for
+                      CloudWatch Logging.
                     items:
                       properties:
                         destinationArn:
+                          description: The ARN of the CloudWatch Logs log group to
+                            receive access logs. Any trailing :* is trimmed from the
+                            ARN.
                           type: string
                         format:
+                          description: A single line format of the access logs of
+                            data, as specified by selected $context variables.
                           type: string
                       required:
                       - destinationArn
@@ -76,6 +85,7 @@ spec:
                       type: object
                     type: array
                   apiId:
+                    description: The API identifier.
                     type: string
                   apiIdRef:
                     description: A Reference to a named object.
@@ -151,10 +161,16 @@ spec:
                         type: object
                     type: object
                   autoDeploy:
+                    description: Whether updates to an API automatically trigger a
+                      new deployment. Defaults to false. Applicable for HTTP APIs.
                     type: boolean
                   clientCertificateId:
+                    description: The identifier of a client certificate for the stage.
+                      Use the aws_api_gateway_client_certificate resource to configure
+                      a client certificate. Supported only for WebSocket APIs.
                     type: string
                   defaultRouteSettings:
+                    description: The default route settings for the stage.
                     items:
                       properties:
                         dataTraceEnabled:
@@ -170,6 +186,8 @@ spec:
                       type: object
                     type: array
                   deploymentId:
+                    description: The deployment identifier of the stage. Use the aws_apigatewayv2_deployment
+                      resource to configure a deployment.
                     type: string
                   deploymentIdRef:
                     description: A Reference to a named object.
@@ -245,12 +263,15 @@ spec:
                         type: object
                     type: object
                   description:
+                    description: The description for the stage. Must be less than
+                      or equal to 1024 characters in length.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   routeSettings:
+                    description: Route settings for the stage.
                     items:
                       properties:
                         dataTraceEnabled:
@@ -260,6 +281,7 @@ spec:
                         loggingLevel:
                           type: string
                         routeKey:
+                          description: Route key.
                           type: string
                         throttlingBurstLimit:
                           type: number
@@ -272,10 +294,14 @@ spec:
                   stageVariables:
                     additionalProperties:
                       type: string
+                    description: A map that defines the stage variables for the stage.
                     type: object
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the stage. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -457,16 +483,29 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the stage.
                     type: string
                   executionArn:
+                    description: The ARN prefix to be used in an aws_lambda_permission's
+                      source_arn attribute. For WebSocket APIs this attribute can
+                      additionally be used in an aws_iam_policy to authorize access
+                      to the @connections API. See the Amazon API Gateway Developer
+                      Guide for details.
                     type: string
                   id:
+                    description: The stage identifier.
                     type: string
                   invokeUrl:
+                    description: The URL to invoke the API pointing to the stage,
+                      e.g., wss://z4675bid1j.execute-api.eu-west-2.amazonaws.com/example-stage,
+                      or https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

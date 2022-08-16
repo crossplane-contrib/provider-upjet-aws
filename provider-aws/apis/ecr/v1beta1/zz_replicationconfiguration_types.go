@@ -18,6 +18,7 @@ type DestinationObservation struct {
 
 type DestinationParameters struct {
 
+	// A Region to replicate to.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
@@ -33,11 +34,13 @@ type ReplicationConfigurationObservation struct {
 
 type ReplicationConfigurationParameters struct {
 
+	// A Region to replicate to.
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Replication configuration for a registry. See Replication Configuration.
 	// +kubebuilder:validation:Optional
 	ReplicationConfiguration []ReplicationConfigurationReplicationConfigurationParameters `json:"replicationConfiguration,omitempty" tf:"replication_configuration,omitempty"`
 }
@@ -47,6 +50,7 @@ type ReplicationConfigurationReplicationConfigurationObservation struct {
 
 type ReplicationConfigurationReplicationConfigurationParameters struct {
 
+	// The replication rules for a replication configuration. A maximum of 10 are allowed per replication_configuration. See Rule
 	// +kubebuilder:validation:Required
 	Rule []ReplicationConfigurationRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
@@ -56,9 +60,11 @@ type ReplicationConfigurationRuleObservation struct {
 
 type ReplicationConfigurationRuleParameters struct {
 
+	// the details of a replication destination. A maximum of 25 are allowed per rule. See Destination.
 	// +kubebuilder:validation:Required
 	Destination []DestinationParameters `json:"destination" tf:"destination,omitempty"`
 
+	// filters for a replication rule. See Repository Filter.
 	// +kubebuilder:validation:Optional
 	RepositoryFilter []RuleRepositoryFilterParameters `json:"repositoryFilter,omitempty" tf:"repository_filter,omitempty"`
 }
@@ -68,9 +74,11 @@ type RuleRepositoryFilterObservation struct {
 
 type RuleRepositoryFilterParameters struct {
 
+	// The repository filter details.
 	// +kubebuilder:validation:Required
 	Filter *string `json:"filter" tf:"filter,omitempty"`
 
+	// The repository filter type. The only supported value is PREFIX_MATCH, which is a repository name prefix specified with the filter parameter.
 	// +kubebuilder:validation:Required
 	FilterType *string `json:"filterType" tf:"filter_type,omitempty"`
 }
@@ -89,7 +97,7 @@ type ReplicationConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ReplicationConfiguration is the Schema for the ReplicationConfigurations API
+// ReplicationConfiguration is the Schema for the ReplicationConfigurations API. Provides an Elastic Container Registry Replication Configuration.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ClusterInstance is the Schema for the ClusterInstances API
+        description: ClusterInstance is the Schema for the ClusterInstances API. Provides
+          an Neptune Cluster Resource Instance
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,22 @@ spec:
               forProvider:
                 properties:
                   applyImmediately:
+                    description: Specifies whether any instance modifications are
+                      applied immediately, or during the next maintenance window.
+                      Default isfalse.
                     type: boolean
                   autoMinorVersionUpgrade:
+                    description: Indicates that minor engine upgrades will be applied
+                      automatically to the instance during the maintenance window.
+                      Default is true.
                     type: boolean
                   availabilityZone:
+                    description: The EC2 Availability Zone that the neptune instance
+                      is created in.
                     type: string
                   clusterIdentifier:
+                    description: The identifier of the aws_neptune_cluster in which
+                      to launch this instance.
                     type: string
                   clusterIdentifierRef:
                     description: A Reference to a named object.
@@ -145,12 +156,18 @@ spec:
                         type: object
                     type: object
                   engine:
+                    description: 'The name of the database engine to be used for the
+                      neptune instance. Defaults to neptune. Valid Values: neptune.'
                     type: string
                   engineVersion:
+                    description: The neptune engine version.
                     type: string
                   instanceClass:
+                    description: The instance class to use.
                     type: string
                   neptuneParameterGroupName:
+                    description: The name of the neptune parameter group to associate
+                      with this instance.
                     type: string
                   neptuneParameterGroupNameRef:
                     description: A Reference to a named object.
@@ -226,6 +243,9 @@ spec:
                         type: object
                     type: object
                   neptuneSubnetGroupName:
+                    description: 'A subnet group to associate with this neptune instance.
+                      NOTE: This must match the neptune_subnet_group_name of the attached
+                      aws_neptune_cluster.'
                     type: string
                   neptuneSubnetGroupNameRef:
                     description: A Reference to a named object.
@@ -301,14 +321,25 @@ spec:
                         type: object
                     type: object
                   port:
+                    description: The port on which the DB accepts connections. Defaults
+                      to 8182.
                     type: number
                   preferredBackupWindow:
+                    description: 'The daily time range during which automated backups
+                      are created if automated backups are enabled. Eg: "04:00-09:00"'
                     type: string
                   preferredMaintenanceWindow:
+                    description: 'The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+                      Eg: "Mon:00:00-Mon:03:00".'
                     type: string
                   promotionTier:
+                    description: Default 0. Failover Priority setting on instance
+                      level. The reader who has lower tier has higher priority to
+                      get promoter to writer.
                     type: number
                   publiclyAccessible:
+                    description: Bool to control if instance is publicly accessible.
+                      Default is false.
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to
@@ -317,6 +348,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the instance. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - instanceClass
@@ -499,24 +533,39 @@ spec:
               atProvider:
                 properties:
                   address:
+                    description: The hostname of the instance. See also endpoint and
+                      port.
                     type: string
                   arn:
+                    description: Amazon Resource Name  of neptune instance
                     type: string
                   dbiResourceId:
+                    description: The region-unique, immutable identifier for the neptune
+                      instance.
                     type: string
                   endpoint:
+                    description: The connection endpoint in address:port format.
                     type: string
                   id:
+                    description: The Instance identifier
                     type: string
                   kmsKeyArn:
+                    description: The ARN for the KMS encryption key if one is set
+                      to the neptune cluster.
                     type: string
                   storageEncrypted:
+                    description: Specifies whether the neptune cluster is encrypted.
                     type: boolean
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   writer:
+                    description: – Boolean indicating if this instance is writable.
+                      False indicates this instance is a read replica.
                     type: boolean
                 type: object
               conditions:

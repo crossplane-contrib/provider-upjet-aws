@@ -35,7 +35,9 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Certificate is the Schema for the Certificates API
+        description: Certificate is the Schema for the Certificates API. Provides
+          a resource to issue a certificate using AWS Certificate Manager Private
+          Certificate Authority (ACM PCA)
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +66,7 @@ spec:
               forProvider:
                 properties:
                   certificateAuthorityArn:
+                    description: Amazon Resource Name  of the certificate authority.
                     type: string
                   certificateAuthorityArnRef:
                     description: A Reference to a named object.
@@ -139,8 +142,7 @@ spec:
                         type: object
                     type: object
                   certificateSigningRequestSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: Certificate Signing Request in PEM format.
                     properties:
                       key:
                         description: The key to select.
@@ -161,15 +163,28 @@ spec:
                       be created in.
                     type: string
                   signingAlgorithm:
+                    description: 'Algorithm to use to sign certificate requests. Valid
+                      values: SHA256WITHRSA, SHA256WITHECDSA, SHA384WITHRSA, SHA384WITHECDSA,
+                      SHA512WITHRSA, SHA512WITHECDSA'
                     type: string
                   templateArn:
+                    description: The template to use when issuing a certificate. See
+                      ACM PCA Documentation for more information.
                     type: string
                   validity:
+                    description: Configures end of the validity period for the certificate.
+                      See validity block below.
                     items:
                       properties:
                         type:
+                          description: 'Determines how value is interpreted. Valid
+                            values: DAYS, MONTHS, YEARS, ABSOLUTE, END_DATE.'
                           type: string
                         value:
+                          description: If type is DAYS, MONTHS, or YEARS, the relative
+                            time until the certificate expires. If type is ABSOLUTE,
+                            the date in seconds since the Unix epoch. If type is END_DATE,
+                            the  date in RFC 3339 format.
                           type: string
                       required:
                       - type
@@ -359,10 +374,14 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of the certificate.
                     type: string
                   certificate:
+                    description: The PEM-encoded certificate value.
                     type: string
                   certificateChain:
+                    description: The PEM-encoded certificate chain that includes any
+                      intermediate certificates and chains up to root CA.
                     type: string
                   id:
                     type: string

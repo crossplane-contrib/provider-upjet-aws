@@ -25,12 +25,14 @@ type UserGroupMembershipParameters struct {
 	// +kubebuilder:validation:Optional
 	GroupSelector *v1.Selector `json:"groupSelector,omitempty" tf:"-"`
 
+	// A list of IAM Groups to add the user to
 	// +crossplane:generate:reference:type=Group
 	// +crossplane:generate:reference:refFieldName=GroupRefs
 	// +crossplane:generate:reference:selectorFieldName=GroupSelector
 	// +kubebuilder:validation:Optional
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
+	// The name of the IAM User to add to groups
 	// +crossplane:generate:reference:type=User
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
@@ -56,7 +58,7 @@ type UserGroupMembershipStatus struct {
 
 // +kubebuilder:object:root=true
 
-// UserGroupMembership is the Schema for the UserGroupMemberships API
+// UserGroupMembership is the Schema for the UserGroupMemberships API. Provides a resource for adding an IAM User to IAM Groups without conflicting with itself.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketAnalyticsConfiguration is the Schema for the BucketAnalyticsConfigurations
-          API
+          API. Provides a S3 bucket analytics configuration resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,8 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the bucket this analytics configuration
+                      is associated with.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -141,6 +143,8 @@ spec:
                         type: object
                     type: object
                   filter:
+                    description: Object filtering that accepts a prefix, tags, or
+                      a logical AND of prefix and tags .
                     items:
                       properties:
                         prefix:
@@ -148,30 +152,43 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
+                          description: Set of object tags for filtering.
                           type: object
                       type: object
                     type: array
                   name:
+                    description: Unique identifier of the analytics configuration
+                      for the bucket.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   storageClassAnalysis:
+                    description: Configuration for the analytics data export .
                     items:
                       properties:
                         dataExport:
+                          description: Data export configuration .
                           items:
                             properties:
                               destination:
+                                description: Specifies the destination for the exported
+                                  analytics data .
                                 items:
                                   properties:
                                     s3BucketDestination:
+                                      description: Analytics data export currently
+                                        only supports an S3 bucket destination .
                                       items:
                                         properties:
                                           bucketAccountId:
+                                            description: The account ID that owns
+                                              the destination bucket.
                                             type: string
                                           bucketArn:
+                                            description: The ARN of the destination
+                                              bucket.
                                             type: string
                                           bucketArnRef:
                                             description: A Reference to a named object.
@@ -262,6 +279,9 @@ spec:
                                                 type: object
                                             type: object
                                           format:
+                                            description: 'The output format of exported
+                                              analytics data. Allowed values: CSV.
+                                              Default value: CSV.'
                                             type: string
                                           prefix:
                                             type: string
@@ -272,6 +292,8 @@ spec:
                                   type: object
                                 type: array
                               outputSchemaVersion:
+                                description: 'The schema version of exported analytics
+                                  data. Allowed values: V_1. Default value: V_1.'
                                 type: string
                             required:
                             - destination

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Workgroup is the Schema for the Workgroups API
+        description: Workgroup is the Schema for the Workgroups API. Manages an Athena
+          Workgroup.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -67,38 +68,78 @@ spec:
                     items:
                       properties:
                         bytesScannedCutoffPerQuery:
+                          description: Integer for the upper data usage limit  for
+                            the amount of bytes a single query in a workgroup is allowed
+                            to scan. Must be at least 10485760.
                           type: number
                         enforceWorkgroupConfiguration:
+                          description: Boolean whether the settings for the workgroup
+                            override client-side settings. For more information, see
+                            Workgroup Settings Override Client-Side Settings. Defaults
+                            to true.
                           type: boolean
                         engineVersion:
                           items:
                             properties:
                               selectedEngineVersion:
+                                description: The requested engine version. Defaults
+                                  to AUTO.
                                 type: string
                             type: object
                           type: array
                         publishCloudwatchMetricsEnabled:
+                          description: Boolean whether Amazon CloudWatch metrics are
+                            enabled for the workgroup. Defaults to true.
                           type: boolean
                         requesterPaysEnabled:
+                          description: If set to true , allows members assigned to
+                            a workgroup to reference Amazon S3 Requester Pays buckets
+                            in queries. If set to false , workgroup members cannot
+                            query data from Requester Pays buckets, and queries that
+                            retrieve data from Requester Pays buckets cause an error.
+                            The default is false . For more information about Requester
+                            Pays buckets, see Requester Pays Buckets in the Amazon
+                            Simple Storage Service Developer Guide.
                           type: boolean
                         resultConfiguration:
+                          description: Configuration block with result settings. See
+                            Result Configuration below.
                           items:
                             properties:
                               aclConfiguration:
+                                description: Indicates that an Amazon S3 canned ACL
+                                  should be set to control ownership of stored query
+                                  results. See ACL Configuration below.
                                 items:
                                   properties:
                                     s3AclOption:
+                                      description: The Amazon S3 canned ACL that Athena
+                                        should specify when storing query results.
+                                        Valid value is BUCKET_OWNER_FULL_CONTROL.
                                       type: string
                                   required:
                                   - s3AclOption
                                   type: object
                                 type: array
                               encryptionConfiguration:
+                                description: Configuration block with encryption settings.
+                                  See Encryption Configuration below.
                                 items:
                                   properties:
                                     encryptionOption:
+                                      description: Indicates whether Amazon S3 server-side
+                                        encryption with Amazon S3-managed keys , server-side
+                                        encryption with KMS-managed keys , or client-side
+                                        encryption with KMS-managed keys  is used.
+                                        If a query runs in a workgroup and the workgroup
+                                        overrides client-side settings, then the workgroup's
+                                        setting for encryption is used. It specifies
+                                        whether query results must be encrypted, for
+                                        all queries that run in this workgroup.
                                       type: string
                                     kmsKeyArn:
+                                      description: For SSE_KMS and CSE_KMS, this is
+                                        the KMS key Amazon Resource Name .
                                       type: string
                                     kmsKeyArnRef:
                                       description: A Reference to a named object.
@@ -185,26 +226,41 @@ spec:
                                   type: object
                                 type: array
                               expectedBucketOwner:
+                                description: The AWS account ID that you expect to
+                                  be the owner of the Amazon S3 bucket.
                                 type: string
                               outputLocation:
+                                description: The location in Amazon S3 where your
+                                  query results are stored, such as s3://path/to/query/bucket/.
+                                  For more information, see Queries and Query Result
+                                  Files.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   description:
+                    description: Description of the workgroup.
                     type: string
                   forceDestroy:
+                    description: The option to delete the workgroup and its contents
+                      even if the workgroup contains any named queries.
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   state:
+                    description: State of the workgroup. Valid values are DISABLED
+                      or ENABLED. Defaults to ENABLED.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags for the workgroup.
+                      If configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                 required:
                 - region
@@ -386,6 +442,7 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of the workgroup
                     type: string
                   configuration:
                     items:
@@ -394,16 +451,23 @@ spec:
                           items:
                             properties:
                               effectiveEngineVersion:
+                                description: The engine version on which the query
+                                  runs. If selected_engine_version is set to AUTO,
+                                  the effective engine version is chosen by Athena.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   id:
+                    description: The workgroup name
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

@@ -18,6 +18,7 @@ type DataLocationObservation struct {
 
 type DataLocationParameters struct {
 
+	// –  Amazon Resource Name  that uniquely identifies the data location resource.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lakeformation/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -61,21 +62,27 @@ type PermissionsParameters struct {
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
+	// Whether the permissions are to be granted for the Data Catalog. Defaults to false.
 	// +kubebuilder:validation:Optional
 	CatalogResource *bool `json:"catalogResource,omitempty" tf:"catalog_resource,omitempty"`
 
+	// Configuration block for a data location resource. Detailed below.
 	// +kubebuilder:validation:Optional
 	DataLocation []DataLocationParameters `json:"dataLocation,omitempty" tf:"data_location,omitempty"`
 
+	// Configuration block for a database resource. Detailed below.
 	// +kubebuilder:validation:Optional
 	Database []DatabaseParameters `json:"database,omitempty" tf:"database,omitempty"`
 
+	// –  List of permissions granted to the principal. Valid values may include ALL, ALTER, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, DELETE, DESCRIBE, DROP, INSERT, and SELECT. For details on each permission, see Lake Formation Permissions Reference.
 	// +kubebuilder:validation:Required
 	Permissions []*string `json:"permissions" tf:"permissions,omitempty"`
 
+	// Subset of permissions which the principal can pass.
 	// +kubebuilder:validation:Optional
 	PermissionsWithGrantOption []*string `json:"permissionsWithGrantOption,omitempty" tf:"permissions_with_grant_option,omitempty"`
 
+	// ccount permissions. For more information, see Lake Formation Permissions Reference.
 	// +kubebuilder:validation:Required
 	Principal *string `json:"principal" tf:"principal,omitempty"`
 
@@ -84,9 +91,11 @@ type PermissionsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Configuration block for a table resource. Detailed below.
 	// +kubebuilder:validation:Optional
 	Table []TableParameters `json:"table,omitempty" tf:"table,omitempty"`
 
+	// Configuration block for a table with columns resource. Detailed below.
 	// +kubebuilder:validation:Optional
 	TableWithColumns []TableWithColumnsParameters `json:"tableWithColumns,omitempty" tf:"table_with_columns,omitempty"`
 }
@@ -117,12 +126,14 @@ type TableWithColumnsParameters struct {
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
+	// Set of column names for the table.
 	// +kubebuilder:validation:Optional
 	ColumnNames []*string `json:"columnNames,omitempty" tf:"column_names,omitempty"`
 
 	// +kubebuilder:validation:Required
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
+	// Set of column names for the table to exclude. If excluded_column_names is included, wildcard must be set to true to avoid Terraform reporting a difference.
 	// +kubebuilder:validation:Optional
 	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`
 
@@ -154,7 +165,7 @@ type PermissionsStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Permissions is the Schema for the Permissionss API
+// Permissions is the Schema for the Permissionss API. Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

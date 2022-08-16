@@ -21,6 +21,7 @@ type AttributeParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Attribute type, which must be a scalar type: S, N, or B for tring, umber or inary data
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -96,6 +97,7 @@ type TTLObservation struct {
 
 type TTLParameters struct {
 
+	// The name of the table attribute to store the TTL timestamp in.
 	// +kubebuilder:validation:Required
 	AttributeName *string `json:"attributeName" tf:"attribute_name,omitempty"`
 
@@ -104,34 +106,52 @@ type TTLParameters struct {
 }
 
 type TableObservation struct {
+
+	// The arn of the table
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The name of the table
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ARN of the Table Stream. Only available when stream_enabled = true
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
+	// A timestamp, in ISO 8601 format, for this stream. Note that this timestamp is not
+	// a unique identifier for the stream on its own. However, the combination of AWS customer ID,
+	// table name and this field is guaranteed to be unique.
+	// It can be used for creating CloudWatch Alarms. Only available when stream_enabled = true
 	StreamLabel *string `json:"streamLabel,omitempty" tf:"stream_label,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type TableParameters struct {
 
+	// List of nested attribute definitions. Only required for hash_key and range_key attributes. Each attribute has two properties:
 	// +kubebuilder:validation:Optional
 	Attribute []AttributeParameters `json:"attribute,omitempty" tf:"attribute,omitempty"`
 
+	// Controls how you are charged for read and write throughput and how you manage capacity. The valid values are PROVISIONED and PAY_PER_REQUEST. Defaults to PROVISIONED.
 	// +kubebuilder:validation:Optional
 	BillingMode *string `json:"billingMode,omitempty" tf:"billing_mode,omitempty"`
 
+	// Describe a GSI for the table;
+	// subject to the normal limits on the number of GSIs, projected
+	// attributes, etc.
 	// +kubebuilder:validation:Optional
 	GlobalSecondaryIndex []GlobalSecondaryIndexParameters `json:"globalSecondaryIndex,omitempty" tf:"global_secondary_index,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
 
+	// Describe an LSI on the table;
+	// these can only be allocated at creation so you cannot change this
+	// definition after you have created the resource.
 	// +kubebuilder:validation:Optional
 	LocalSecondaryIndex []LocalSecondaryIndexParameters `json:"localSecondaryIndex,omitempty" tf:"local_secondary_index,omitempty"`
 
+	// Enable point-in-time recovery options.
 	// +kubebuilder:validation:Optional
 	PointInTimeRecovery []PointInTimeRecoveryParameters `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
@@ -146,33 +166,43 @@ type TableParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Configuration block with DynamoDB Global Tables V2  replication configurations. Detailed below.
 	// +kubebuilder:validation:Optional
 	Replica []TableReplicaParameters `json:"replica,omitempty" tf:"replica,omitempty"`
 
+	// The time of the point-in-time recovery point to restore.
 	// +kubebuilder:validation:Optional
 	RestoreDateTime *string `json:"restoreDateTime,omitempty" tf:"restore_date_time,omitempty"`
 
+	// The name of the table to restore. Must match the name of an existing table.
 	// +kubebuilder:validation:Optional
 	RestoreSourceName *string `json:"restoreSourceName,omitempty" tf:"restore_source_name,omitempty"`
 
+	// If set, restores table to the most recent point-in-time recovery point.
 	// +kubebuilder:validation:Optional
 	RestoreToLatestTime *bool `json:"restoreToLatestTime,omitempty" tf:"restore_to_latest_time,omitempty"`
 
+	// Encryption at rest options. AWS DynamoDB tables are automatically encrypted at rest with an AWS owned Customer Master Key if this argument isn't specified.
 	// +kubebuilder:validation:Optional
 	ServerSideEncryption []ServerSideEncryptionParameters `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
+	// Indicates whether Streams are to be enabled  or disabled .
 	// +kubebuilder:validation:Optional
 	StreamEnabled *bool `json:"streamEnabled,omitempty" tf:"stream_enabled,omitempty"`
 
+	// When an item in the table is modified, StreamViewType determines what information is written to the table's stream. Valid values are KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES.
 	// +kubebuilder:validation:Optional
 	StreamViewType *string `json:"streamViewType,omitempty" tf:"stream_view_type,omitempty"`
 
+	// Defines ttl, has two properties, and can only be specified once:
 	// +kubebuilder:validation:Optional
 	TTL []TTLParameters `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
+	// The storage class of the table. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
 	// +kubebuilder:validation:Optional
 	TableClass *string `json:"tableClass,omitempty" tf:"table_class,omitempty"`
 
+	// A map of tags to populate on the created table. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -188,6 +218,7 @@ type TableReplicaParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
+	// Region name of the replica.
 	// +kubebuilder:validation:Required
 	RegionName *string `json:"regionName" tf:"region_name,omitempty"`
 }
@@ -206,7 +237,7 @@ type TableStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Table is the Schema for the Tables API
+// Table is the Schema for the Tables API. Provides a DynamoDB table resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

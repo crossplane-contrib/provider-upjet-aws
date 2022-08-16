@@ -18,35 +18,46 @@ type ConnectionPoolConfigObservation struct {
 
 type ConnectionPoolConfigParameters struct {
 
+	// The number of seconds for a proxy to wait for a connection to become available in the connection pool. Only applies when the proxy has opened its maximum number of connections and all connections are busy with client sessions.
 	// +kubebuilder:validation:Optional
 	ConnectionBorrowTimeout *float64 `json:"connectionBorrowTimeout,omitempty" tf:"connection_borrow_timeout,omitempty"`
 
+	// One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2.
 	// +kubebuilder:validation:Optional
 	InitQuery *string `json:"initQuery,omitempty" tf:"init_query,omitempty"`
 
+	// The maximum size of the connection pool for each target in a target group. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group.
 	// +kubebuilder:validation:Optional
 	MaxConnectionsPercent *float64 `json:"maxConnectionsPercent,omitempty" tf:"max_connections_percent,omitempty"`
 
+	// Controls how actively the proxy closes idle database connections in the connection pool. A high value enables the proxy to leave a high percentage of idle connections open. A low value causes the proxy to close idle client connections and return the underlying database connections to the connection pool. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group.
 	// +kubebuilder:validation:Optional
 	MaxIdleConnectionsPercent *float64 `json:"maxIdleConnectionsPercent,omitempty" tf:"max_idle_connections_percent,omitempty"`
 
+	// Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior. Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
 	// +kubebuilder:validation:Optional
 	SessionPinningFilters []*string `json:"sessionPinningFilters,omitempty" tf:"session_pinning_filters,omitempty"`
 }
 
 type ProxyDefaultTargetGroupObservation struct {
+
+	// The Amazon Resource Name  representing the target group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Name of the RDS DB Proxy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the default target group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ProxyDefaultTargetGroupParameters struct {
 
+	// The settings that determine the size and behavior of the connection pool for the target group.
 	// +kubebuilder:validation:Optional
 	ConnectionPoolConfig []ConnectionPoolConfigParameters `json:"connectionPoolConfig,omitempty" tf:"connection_pool_config,omitempty"`
 
+	// Name of the RDS DB Proxy.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Proxy
 	// +kubebuilder:validation:Optional
 	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
@@ -77,7 +88,7 @@ type ProxyDefaultTargetGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ProxyDefaultTargetGroup is the Schema for the ProxyDefaultTargetGroups API
+// ProxyDefaultTargetGroup is the Schema for the ProxyDefaultTargetGroups API. Manage an RDS DB proxy default target group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

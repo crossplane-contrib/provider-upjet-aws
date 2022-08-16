@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketWebsiteConfiguration is the Schema for the BucketWebsiteConfigurations
-          API
+          API. Provides an S3 bucket website configuration resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the bucket.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -141,26 +142,43 @@ spec:
                         type: object
                     type: object
                   errorDocument:
+                    description: The name of the error document for the website detailed
+                      below.
                     items:
                       properties:
                         key:
+                          description: The object key name to use when a 4XX class
+                            error occurs.
                           type: string
                       required:
                       - key
                       type: object
                     type: array
                   expectedBucketOwner:
+                    description: The account ID of the expected bucket owner.
                     type: string
                   indexDocument:
+                    description: The name of the index document for the website detailed
+                      below.
                     items:
                       properties:
                         suffix:
+                          description: A suffix that is appended to a request that
+                            is for a directory on the website endpoint. For example,
+                            if the suffix is index.html and you make a request to
+                            samplebucket/images/, the data that is returned will be
+                            for the object with the key name images/index.html. The
+                            suffix must not be empty and must not include a slash
+                            character.
                           type: string
                       required:
                       - suffix
                       type: object
                     type: array
                   redirectAllRequestsTo:
+                    description: The redirect behavior for every request to this bucket's
+                      website endpoint detailed below. Conflicts with error_document,
+                      index_document, and routing_rule.
                     items:
                       properties:
                         hostName:
@@ -176,29 +194,53 @@ spec:
                       be created in.
                     type: string
                   routingRule:
+                    description: List of rules that define when a redirect is applied
+                      and the redirect behavior detailed below.
                     items:
                       properties:
                         condition:
+                          description: A configuration block for describing a condition
+                            that must be met for the specified redirect to apply detailed
+                            below.
                           items:
                             properties:
                               httpErrorCodeReturnedEquals:
+                                description: The HTTP error code when the redirect
+                                  is applied. If specified with key_prefix_equals,
+                                  then both must be true for the redirect to be applied.
                                 type: string
                               keyPrefixEquals:
+                                description: The object key name prefix when the redirect
+                                  is applied. If specified with http_error_code_returned_equals,
+                                  then both must be true for the redirect to be applied.
                                 type: string
                             type: object
                           type: array
                         redirect:
+                          description: A configuration block for redirect information
+                            detailed below.
                           items:
                             properties:
                               hostName:
                                 type: string
                               httpRedirectCode:
+                                description: The HTTP redirect code to use on the
+                                  response.
                                 type: string
                               protocol:
                                 type: string
                               replaceKeyPrefixWith:
+                                description: The object key prefix to use in the redirect
+                                  request. For example, to redirect requests for all
+                                  pages with prefix docs/  to documents/, you can
+                                  set a condition block with key_prefix_equals set
+                                  to docs/ and in the redirect set replace_key_prefix_with
+                                  to /documents.
                                 type: string
                               replaceKeyWith:
+                                description: The specific object key to use in the
+                                  redirect request. For example, redirect request
+                                  to error.html.
                                 type: string
                             type: object
                           type: array
@@ -207,6 +249,10 @@ spec:
                       type: object
                     type: array
                   routingRules:
+                    description: A json array containing routing rules describing
+                      redirect behavior and when redirects are applied. Use this parameter
+                      when your routing rules contain empty String values  as seen
+                      in the example above.
                     type: string
                 required:
                 - region
@@ -389,10 +435,15 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The bucket or bucket and expected_bucket_owner separated
+                      by a comma  if the latter is provided.
                     type: string
                   websiteDomain:
+                    description: The domain of the website endpoint. This is used
+                      to create Route 53 alias records.
                     type: string
                   websiteEndpoint:
+                    description: The website endpoint.
                     type: string
                 type: object
               conditions:

@@ -32,14 +32,18 @@ type ConditionParameters struct {
 }
 
 type SelectionObservation struct {
+
+	// Backup Selection identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type SelectionParameters struct {
 
+	// A list of conditions that you define to assign resources to your backup plans using tags.
 	// +kubebuilder:validation:Optional
 	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
+	// The ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -51,12 +55,15 @@ type SelectionParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
+	// The display name of a resource selection document.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// An array of strings that either contain Amazon Resource Names  or match patterns of resources to exclude from a backup plan.
 	// +kubebuilder:validation:Optional
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
+	// The backup plan ID to be associated with the selection of resources.
 	// +crossplane:generate:reference:type=Plan
 	// +kubebuilder:validation:Optional
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
@@ -72,9 +79,11 @@ type SelectionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// An array of strings that either contain Amazon Resource Names  or match patterns of resources to assign to a backup plan.
 	// +kubebuilder:validation:Optional
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
+	// Tag-based conditions used to specify a set of resources to assign to a backup plan.
 	// +kubebuilder:validation:Optional
 	SelectionTag []SelectionTagParameters `json:"selectionTag,omitempty" tf:"selection_tag,omitempty"`
 }
@@ -84,12 +93,15 @@ type SelectionTagObservation struct {
 
 type SelectionTagParameters struct {
 
+	// The key in a key-value pair.
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
 
+	// An operation, such as StringEquals, that is applied to a key-value pair used to filter resources in a selection.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
+	// The value in a key-value pair.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -99,9 +111,11 @@ type StringEqualsObservation struct {
 
 type StringEqualsParameters struct {
 
+	// The key in a key-value pair.
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
 
+	// The value in a key-value pair.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -111,9 +125,11 @@ type StringLikeObservation struct {
 
 type StringLikeParameters struct {
 
+	// The key in a key-value pair.
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
 
+	// The value in a key-value pair.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -123,9 +139,11 @@ type StringNotEqualsObservation struct {
 
 type StringNotEqualsParameters struct {
 
+	// The key in a key-value pair.
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
 
+	// The value in a key-value pair.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -135,9 +153,11 @@ type StringNotLikeObservation struct {
 
 type StringNotLikeParameters struct {
 
+	// The key in a key-value pair.
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
 
+	// The value in a key-value pair.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -156,7 +176,7 @@ type SelectionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Selection is the Schema for the Selections API
+// Selection is the Schema for the Selections API. Manages selection conditions for AWS Backup plan resources.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

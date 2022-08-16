@@ -14,26 +14,34 @@ import (
 )
 
 type UserLoginProfileObservation struct {
+
+	// The encrypted password, base64 encoded. Only available if password was handled on Terraform resource creation, not import.
 	EncryptedPassword *string `json:"encryptedPassword,omitempty" tf:"encrypted_password,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The fingerprint of the PGP key used to encrypt the password. Only available if password was handled on Terraform resource creation, not import.
 	KeyFingerprint *string `json:"keyFingerprint,omitempty" tf:"key_fingerprint,omitempty"`
 
+	// The plain text password, only available when pgp_key is not provided.
 	Password *string `json:"password,omitempty" tf:"password,omitempty"`
 }
 
 type UserLoginProfileParameters struct {
 
+	// The length of the generated password on resource creation. Only applies on resource creation. Drift detection is not possible with this argument. Default value is 20.
 	// +kubebuilder:validation:Optional
 	PasswordLength *float64 `json:"passwordLength,omitempty" tf:"password_length,omitempty"`
 
+	// Whether the user should be forced to reset the generated password on resource creation. Only applies on resource creation.
 	// +kubebuilder:validation:Optional
 	PasswordResetRequired *bool `json:"passwordResetRequired,omitempty" tf:"password_reset_required,omitempty"`
 
+	// Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Only applies on resource creation. Drift detection is not possible with this argument.
 	// +kubebuilder:validation:Optional
 	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
 
+	// The IAM user's name.
 	// +crossplane:generate:reference:type=User
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
@@ -59,7 +67,7 @@ type UserLoginProfileStatus struct {
 
 // +kubebuilder:object:root=true
 
-// UserLoginProfile is the Schema for the UserLoginProfiles API
+// UserLoginProfile is the Schema for the UserLoginProfiles API. Manages an IAM User Login Profile
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Alias is the Schema for the Aliass API
+        description: Alias is the Schema for the Aliass API. Provides a display name
+          for a customer master key.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -68,6 +69,8 @@ spec:
                       be created in.
                     type: string
                   targetKeyId:
+                    description: Identifier for the key for which the alias is for,
+                      can be either an ARN or key_id.
                     type: string
                   targetKeyIdRef:
                     description: A Reference to a named object.
@@ -322,10 +325,12 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  of the key alias.
                     type: string
                   id:
                     type: string
                   targetKeyArn:
+                    description: The Amazon Resource Name  of the target key identifier.
                     type: string
                 type: object
               conditions:

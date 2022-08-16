@@ -2,14 +2,16 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketReplicationConfiguration
 metadata:
   name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource depends on requires manual intervention."
 spec:
   forProvider:
     region: us-west-1
-    bucket: example
+    bucket: upbound-example
     role: arn:aws:iam::123456789012:role/service-role/example
     rule:
     - destination:
-      - bucket: arn:aws:s3:::example
+      - bucket: arn:aws:s3:::upbound-example
         storageClass: STANDARD
       filter:
       - prefix: foo

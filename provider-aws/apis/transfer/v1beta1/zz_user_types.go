@@ -18,9 +18,11 @@ type HomeDirectoryMappingsObservation struct {
 
 type HomeDirectoryMappingsParameters struct {
 
+	// Represents an entry and a target.
 	// +kubebuilder:validation:Required
 	Entry *string `json:"entry" tf:"entry,omitempty"`
 
+	// Represents the map target.
 	// +kubebuilder:validation:Required
 	Target *string `json:"target" tf:"target,omitempty"`
 }
@@ -30,38 +32,49 @@ type PosixProfileObservation struct {
 
 type PosixProfileParameters struct {
 
+	// The POSIX group ID used for all EFS operations by this user.
 	// +kubebuilder:validation:Required
 	GID *float64 `json:"gid" tf:"gid,omitempty"`
 
+	// The secondary POSIX group IDs used for all EFS operations by this user.
 	// +kubebuilder:validation:Optional
 	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
+	// The POSIX user ID used for all EFS operations by this user.
 	// +kubebuilder:validation:Required
 	UID *float64 `json:"uid" tf:"uid,omitempty"`
 }
 
 type UserObservation struct {
+
+	// Amazon Resource Name  of Transfer User
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type UserParameters struct {
 
+	// The landing directory  for a user when they log in to the server using their SFTP client.  It should begin with a /.  The first item in the path is the name of the home bucket  and the rest is the home directory . For example, /example-bucket-1234/username would set the home bucket to example-bucket-1234 and the home directory to username.
 	// +kubebuilder:validation:Optional
 	HomeDirectory *string `json:"homeDirectory,omitempty" tf:"home_directory,omitempty"`
 
+	// Logical directory mappings that specify what S3 paths and keys should be visible to your user and how you want to make them visible. See Home Directory Mappings below.
 	// +kubebuilder:validation:Optional
 	HomeDirectoryMappings []HomeDirectoryMappingsParameters `json:"homeDirectoryMappings,omitempty" tf:"home_directory_mappings,omitempty"`
 
+	// The type of landing directory  you mapped for your users' home directory. Valid values are PATH and LOGICAL.
 	// +kubebuilder:validation:Optional
 	HomeDirectoryType *string `json:"homeDirectoryType,omitempty" tf:"home_directory_type,omitempty"`
 
+	// An IAM JSON policy document that scopes down user access to portions of their Amazon S3 bucket. IAM variables you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}. Since the IAM variable syntax matches Terraform's interpolation syntax, they must be escaped inside Terraform configuration strings .  These are evaluated on-the-fly when navigating the bucket.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Specifies the full POSIX identity, including user ID , group ID , and any secondary groups IDs , that controls your users' access to your Amazon EFS file systems. See Posix Profile below.
 	// +kubebuilder:validation:Optional
 	PosixProfile []PosixProfileParameters `json:"posixProfile,omitempty" tf:"posix_profile,omitempty"`
 
@@ -70,6 +83,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Amazon Resource Name  of an IAM role that allows the service to controls your user’s access to your Amazon S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -81,6 +95,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
+	// The Server ID of the Transfer Server
 	// +crossplane:generate:reference:type=Server
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
@@ -91,6 +106,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -109,7 +125,7 @@ type UserStatus struct {
 
 // +kubebuilder:object:root=true
 
-// User is the Schema for the Users API
+// User is the Schema for the Users API. Provides a AWS Transfer User resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

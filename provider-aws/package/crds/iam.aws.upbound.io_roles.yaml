@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Role is the Schema for the Roles API
+        description: Role is the Schema for the Roles API. Provides an IAM role.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,20 +64,35 @@ spec:
               forProvider:
                 properties:
                   assumeRolePolicy:
+                    description: Policy that grants an entity permission to assume
+                      the role.
                     type: string
                   description:
+                    description: Description of the role.
                     type: string
                   forceDetachPolicies:
+                    description: Whether to force detaching any policies the role
+                      has before destroying it. Defaults to false.
                     type: boolean
                   maxSessionDuration:
+                    description: Maximum session duration  that you want to set for
+                      the specified role. If you do not specify a value for this setting,
+                      the default maximum of one hour is applied. This setting can
+                      have a value from 1 hour to 12 hours.
                     type: number
                   path:
+                    description: Path to the role. See IAM Identifiers for more information.
                     type: string
                   permissionsBoundary:
+                    description: ARN of the policy that is used to set the permissions
+                      boundary for the role.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value mapping of tags for the IAM role. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - assumeRolePolicy
@@ -259,29 +274,52 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  specifying the role.
                     type: string
                   createDate:
+                    description: Creation date of the IAM role.
                     type: string
                   id:
+                    description: Name of the role.
                     type: string
                   inlinePolicy:
+                    description: Configuration block defining an exclusive set of
+                      IAM inline policies associated with the IAM role. See below.
+                      If no blocks are configured, Terraform will not manage any inline
+                      policies in this resource. Configuring one empty block  will
+                      cause Terraform to remove all inline policies added out of band
+                      on apply.
                     items:
                       properties:
                         name:
                           type: string
                         policy:
+                          description: Policy document as a JSON formatted string.
+                            For more information about building IAM policy documents
+                            with Terraform, see the AWS IAM Policy Document Guide.
                           type: string
                       type: object
                     type: array
                   managedPolicyArns:
+                    description: Set of exclusive IAM managed policy ARNs to attach
+                      to the IAM role. If this attribute is not configured, Terraform
+                      will ignore policy attachments to this resource. When configured,
+                      Terraform will align the role's managed policy attachments with
+                      this set by attaching or detaching managed policies. Configuring
+                      an empty set  will cause Terraform to remove all managed policy
+                      attachments.
                     items:
                       type: string
                     type: array
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   uniqueId:
+                    description: Stable and unique string identifying the role.
                     type: string
                 type: object
               conditions:

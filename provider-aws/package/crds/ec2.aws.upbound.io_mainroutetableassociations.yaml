@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MainRouteTableAssociation is the Schema for the MainRouteTableAssociations
-          API
+          API. Provides a resource for managing the main routing table of a VPC.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -70,6 +70,8 @@ spec:
                       be created in.
                     type: string
                   routeTableId:
+                    description: The ID of the Route Table to set as the new main
+                      route table for the target VPC
                     type: string
                   routeTableIdRef:
                     description: A Reference to a named object.
@@ -145,6 +147,8 @@ spec:
                         type: object
                     type: object
                   vpcId:
+                    description: The ID of the VPC whose main route table should be
+                      set
                     type: string
                   vpcIdRef:
                     description: A Reference to a named object.
@@ -400,8 +404,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Route Table Association
                     type: string
                   originalRouteTableId:
+                    description: Used internally, see Notes below
                     type: string
                 type: object
               conditions:

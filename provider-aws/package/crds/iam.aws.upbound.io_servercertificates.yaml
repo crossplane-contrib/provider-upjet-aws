@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ServerCertificate is the Schema for the ServerCertificates API
+        description: ServerCertificate is the Schema for the ServerCertificates API.
+          Provides an IAM Server Certificate
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,14 +65,19 @@ spec:
               forProvider:
                 properties:
                   certificateBody:
+                    description: ncoded format.
                     type: string
                   certificateChain:
+                    description: ncoded public key certificates of the chain.
                     type: string
                   path:
+                    description: The IAM path for the server certificate.  If it is
+                      not included, it defaults to a slash . If this certificate is
+                      for use with AWS CloudFront, the path must be in format /cloudfront/your_path_here.
+                      See IAM Identifiers for more details on IAM Paths.
                     type: string
                   privateKeySecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: ncoded format.
                     properties:
                       key:
                         description: The key to select.
@@ -90,6 +96,10 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Map of resource tags for the server certificate.
+                      If configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                 required:
                 - certificateBody
@@ -272,16 +282,25 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name  specifying the server certificate.
                     type: string
                   expiration:
+                    description: Date and time in RFC3339 format on which the certificate
+                      is set to expire.
                     type: string
                   id:
+                    description: The unique Server Certificate name
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   uploadDate:
+                    description: Date and time in RFC3339 format when the server certificate
+                      was uploaded.
                     type: string
                 type: object
               conditions:

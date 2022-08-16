@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: TransitGatewayMulticastGroupSource is the Schema for the TransitGatewayMulticastGroupSources
-          API
+          API. Manages an EC2 Transit Gateway Multicast Group Source
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,12 @@ spec:
               forProvider:
                 properties:
                   groupIpAddress:
+                    description: The IP address assigned to the transit gateway multicast
+                      group.
                     type: string
                   networkInterfaceId:
+                    description: The group members' network interface ID to register
+                      with the transit gateway multicast group.
                     type: string
                   networkInterfaceIdRef:
                     description: A Reference to a named object.
@@ -147,6 +151,7 @@ spec:
                       be created in.
                     type: string
                   transitGatewayMulticastDomainId:
+                    description: The ID of the transit gateway multicast domain.
                     type: string
                   transitGatewayMulticastDomainIdRef:
                     description: A Reference to a named object.
@@ -403,6 +408,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: EC2 Transit Gateway Multicast Group Member identifier.
                     type: string
                 type: object
               conditions:

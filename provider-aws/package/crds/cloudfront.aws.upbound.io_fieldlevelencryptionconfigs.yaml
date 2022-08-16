@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FieldLevelEncryptionConfig is the Schema for the FieldLevelEncryptionConfigs
-          API
+          API. Provides a CloudFront Field-level Encryption Config resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,19 +66,34 @@ spec:
               forProvider:
                 properties:
                   comment:
+                    description: An optional comment about the Field Level Encryption
+                      Config.
                     type: string
                   contentTypeProfileConfig:
+                    description: Content Type Profile Config specifies when to forward
+                      content if a content type isn't recognized and profiles to use
+                      as by default in a request if a query argument doesn't specify
+                      a profile to use.
                     items:
                       properties:
                         contentTypeProfiles:
+                          description: Object that contains an attribute items that
+                            contains the list of configurations for a field-level
+                            encryption content type-profile. See Content Type Profile.
                           items:
                             properties:
                               items:
                                 items:
                                   properties:
                                     contentType:
+                                      description: he content type for a field-level
+                                        encryption content type-profile mapping. Valid
+                                        value is application/x-www-form-urlencoded.
                                       type: string
                                     format:
+                                      description: The format for a field-level encryption
+                                        content type-profile mapping. Valid value
+                                        is URLEncoded.
                                       type: string
                                     profileId:
                                       type: string
@@ -92,6 +107,11 @@ spec:
                             type: object
                           type: array
                         forwardWhenContentTypeIsUnknown:
+                          description: specifies what to do when an unknown content
+                            type is provided for the profile. If true, content is
+                            forwarded without being encrypted when the content type
+                            is unknown. If false , an error is returned when the content
+                            type is unknown.
                           type: boolean
                       required:
                       - contentTypeProfiles
@@ -99,11 +119,20 @@ spec:
                       type: object
                     type: array
                   queryArgProfileConfig:
+                    description: Query Arg Profile Config that specifies when to forward
+                      content if a profile isn't found and the profile that can be
+                      provided as a query argument in a request.
                     items:
                       properties:
                         forwardWhenQueryArgProfileIsUnknown:
+                          description: Flag to set if you want a request to be forwarded
+                            to the origin even if the profile specified by the field-level
+                            encryption query argument, fle-profile, is unknown.
                           type: boolean
                         queryArgProfiles:
+                          description: Object that contains an attribute items that
+                            contains the list ofrofiles specified for query argument-profile
+                            mapping for field-level encryption. see Query Arg Profile.
                           items:
                             properties:
                               items:
@@ -194,6 +223,8 @@ spec:
                                           type: object
                                       type: object
                                     queryArg:
+                                      description: Query argument for field-level
+                                        encryption query argument-profile mapping.
                                       type: string
                                   required:
                                   - queryArg
@@ -392,10 +423,16 @@ spec:
               atProvider:
                 properties:
                   callerReference:
+                    description: Internal value used by CloudFront to allow future
+                      updates to the Field Level Encryption Config.
                     type: string
                   etag:
+                    description: 'The current version of the Field Level Encryption
+                      Config. For example: E2QWRUHAPOMQZL.'
                     type: string
                   id:
+                    description: 'The identifier for the Field Level Encryption Config.
+                      For example: K3D5EWEUDCCXON.'
                     type: string
                 type: object
               conditions:

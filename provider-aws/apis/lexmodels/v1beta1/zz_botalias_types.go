@@ -14,30 +14,41 @@ import (
 )
 
 type BotAliasObservation struct {
+
+	// The ARN of the bot alias.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Checksum of the bot alias.
 	Checksum *string `json:"checksum,omitempty" tf:"checksum,omitempty"`
 
+	// The settings that determine how Amazon Lex uses conversation logs for the alias. Attributes are documented under conversation_logs.
+	// +kubebuilder:validation:Optional
 	ConversationLogs []ConversationLogsObservation `json:"conversationLogs,omitempty" tf:"conversation_logs,omitempty"`
 
+	// The date that the bot alias was created.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The date that the bot alias was updated. When you create a resource, the creation date and the last updated date are the same.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 }
 
 type BotAliasParameters struct {
 
+	// The name of the bot.
 	// +kubebuilder:validation:Required
 	BotName *string `json:"botName" tf:"bot_name,omitempty"`
 
+	// The name of the bot.
 	// +kubebuilder:validation:Required
 	BotVersion *string `json:"botVersion" tf:"bot_version,omitempty"`
 
+	// The settings that determine how Amazon Lex uses conversation logs for the alias. Attributes are documented under conversation_logs.
 	// +kubebuilder:validation:Optional
 	ConversationLogs []ConversationLogsParameters `json:"conversationLogs,omitempty" tf:"conversation_logs,omitempty"`
 
+	// A description of the alias. Must be less than or equal to 200 characters in length.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -48,33 +59,44 @@ type BotAliasParameters struct {
 }
 
 type ConversationLogsObservation struct {
+
+	// The settings for your conversation logs. You can log text, audio, or both. Attributes are documented under log_settings.
+	// +kubebuilder:validation:Optional
 	LogSettings []LogSettingsObservation `json:"logSettings,omitempty" tf:"log_settings,omitempty"`
 }
 
 type ConversationLogsParameters struct {
 
+	// The Amazon Resource Name  of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
 	// +kubebuilder:validation:Required
 	IAMRoleArn *string `json:"iamRoleArn" tf:"iam_role_arn,omitempty"`
 
+	// The settings for your conversation logs. You can log text, audio, or both. Attributes are documented under log_settings.
 	// +kubebuilder:validation:Optional
 	LogSettings []LogSettingsParameters `json:"logSettings,omitempty" tf:"log_settings,omitempty"`
 }
 
 type LogSettingsObservation struct {
+
+	// The prefix of the S3 object key for AUDIO logs or the log stream name for TEXT logs.
 	ResourcePrefix *string `json:"resourcePrefix,omitempty" tf:"resource_prefix,omitempty"`
 }
 
 type LogSettingsParameters struct {
 
+	// The destination where logs are delivered. Options are CLOUDWATCH_LOGS or S3.
 	// +kubebuilder:validation:Required
 	Destination *string `json:"destination" tf:"destination,omitempty"`
 
+	// The Amazon Resource Name  of the key used to encrypt audio logs in an S3 bucket. This can only be specified when destination is set to S3. Must be between 20 and 2048 characters in length.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
+	// The type of logging that is enabled. Options are AUDIO or TEXT.
 	// +kubebuilder:validation:Required
 	LogType *string `json:"logType" tf:"log_type,omitempty"`
 
+	// The Amazon Resource Name  of the CloudWatch Logs log group or S3 bucket where the logs are delivered. Must be less than or equal to 2048 characters in length.
 	// +kubebuilder:validation:Required
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }
@@ -93,7 +115,7 @@ type BotAliasStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BotAlias is the Schema for the BotAliass API
+// BotAlias is the Schema for the BotAliass API. Provides an Amazon Lex Bot Alias resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

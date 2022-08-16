@@ -14,11 +14,14 @@ import (
 )
 
 type BucketRequestPaymentConfigurationObservation struct {
+
+	// The bucket or bucket and expected_bucket_owner separated by a comma  if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type BucketRequestPaymentConfigurationParameters struct {
 
+	// The name of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -29,9 +32,11 @@ type BucketRequestPaymentConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// The account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
+	// Specifies who pays for the download and request fees. Valid values: BucketOwner, Requester.
 	// +kubebuilder:validation:Required
 	Payer *string `json:"payer" tf:"payer,omitempty"`
 
@@ -55,7 +60,7 @@ type BucketRequestPaymentConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketRequestPaymentConfiguration is the Schema for the BucketRequestPaymentConfigurations API
+// BucketRequestPaymentConfiguration is the Schema for the BucketRequestPaymentConfigurations API. Provides an S3 bucket request payment configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

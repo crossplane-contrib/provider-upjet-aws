@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: InternetGateway is the Schema for the InternetGateways API
+        description: InternetGateway is the Schema for the InternetGateways API. Provides
+          a resource to create a VPC Internet Gateway.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -70,8 +71,14 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                   vpcId:
+                    description: The VPC ID to create in.  See the aws_internet_gateway_attachment
+                      resource for an alternate way to attach an Internet Gateway
+                      to a VPC.
                     type: string
                   vpcIdRef:
                     description: A Reference to a named object.
@@ -326,14 +333,21 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the Internet Gateway.
                     type: string
                   id:
+                    description: The ID of the Internet Gateway.
                     type: string
                   ownerId:
+                    description: The ID of the AWS account that owns the internet
+                      gateway.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

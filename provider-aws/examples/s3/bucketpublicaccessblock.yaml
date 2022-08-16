@@ -7,6 +7,6 @@ spec:
     region: us-west-1
     blockPublicAcls: true
     blockPublicPolicy: true
-    bucket: example
+    bucket: upbound-example
   providerConfigRef:
     name: default

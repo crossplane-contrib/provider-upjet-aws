@@ -14,17 +14,23 @@ import (
 )
 
 type ClusterEndpointObservation struct {
+
+	// Amazon Resource Name  of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A custom endpoint for the Aurora cluster
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
+	// The RDS Cluster Endpoint Identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ClusterEndpointParameters struct {
 
+	// The cluster identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -36,9 +42,11 @@ type ClusterEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
+	// The type of the endpoint. One of: READER , ANY .
 	// +kubebuilder:validation:Required
 	CustomEndpointType *string `json:"customEndpointType" tf:"custom_endpoint_type,omitempty"`
 
+	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
 	// +kubebuilder:validation:Optional
 	ExcludedMembers []*string `json:"excludedMembers,omitempty" tf:"excluded_members,omitempty"`
 
@@ -47,9 +55,11 @@ type ClusterEndpointParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
 	// +kubebuilder:validation:Optional
 	StaticMembers []*string `json:"staticMembers,omitempty" tf:"static_members,omitempty"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -68,7 +78,7 @@ type ClusterEndpointStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ClusterEndpoint is the Schema for the ClusterEndpoints API
+// ClusterEndpoint is the Schema for the ClusterEndpoints API. Manages an RDS Aurora Cluster Endpoint
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

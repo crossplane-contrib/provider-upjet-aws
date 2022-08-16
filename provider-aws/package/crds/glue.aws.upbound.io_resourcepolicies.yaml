@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ResourcePolicy is the Schema for the ResourcePolicys API
+        description: ResourcePolicy is the Schema for the ResourcePolicys API. Provides
+          a resource to configure the aws glue resource policy.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,14 @@ spec:
               forProvider:
                 properties:
                   enableHybrid:
+                    description: Indicates that you are using both methods to grant
+                      cross-account. Valid values are TRUE and FALSE. Note the terraform
+                      will not perform drift detetction on this field as its not return
+                      on read.
                     type: string
                   policy:
+                    description: –  The policy to be applied to the aws glue data
+                      catalog.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

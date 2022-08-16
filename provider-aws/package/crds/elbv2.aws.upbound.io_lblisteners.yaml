@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: LBListener is the Schema for the LBListeners API
+        description: LBListener is the Schema for the LBListeners API. Provides a
+          Load Balancer Listener resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,13 +65,25 @@ spec:
               forProvider:
                 properties:
                   alpnPolicy:
+                    description: Name of the Application-Layer Protocol Negotiation  policy.
+                      Can be set if protocol is TLS. Valid values are HTTP1Only, HTTP2Only,
+                      HTTP2Optional, HTTP2Preferred, and None.
                     type: string
                   certificateArn:
+                    description: ARN of the default SSL server certificate. Exactly
+                      one certificate is required if the protocol is HTTPS. For adding
+                      additional SSL certificates, see the aws_lb_listener_certificate
+                      resource.
                     type: string
                   defaultAction:
+                    description: Configuration block for default actions. Detailed
+                      below.
                     items:
                       properties:
                         authenticateCognito:
+                          description: Configuration block for using Amazon Cognito
+                            to authenticate users. Specify only when type is authenticate-cognito.
+                            Detailed below.
                           items:
                             properties:
                               authenticationRequestExtraParams:
@@ -86,10 +99,14 @@ spec:
                               sessionTimeout:
                                 type: number
                               userPoolArn:
+                                description: ARN of the Cognito user pool.
                                 type: string
                               userPoolClientId:
+                                description: ID of the Cognito user pool client.
                                 type: string
                               userPoolDomain:
+                                description: Domain prefix or fully-qualified domain
+                                  name of the Cognito user pool.
                                 type: string
                             required:
                             - userPoolArn
@@ -98,6 +115,9 @@ spec:
                             type: object
                           type: array
                         authenticateOidc:
+                          description: Configuration block for an identity provider
+                            that is compliant with OpenID Connect . Specify only when
+                            type is authenticate-oidc. Detailed below.
                           items:
                             properties:
                               authenticationRequestExtraParams:
@@ -105,12 +125,13 @@ spec:
                                   type: string
                                 type: object
                               authorizationEndpoint:
+                                description: Authorization endpoint of the IdP.
                                 type: string
                               clientId:
+                                description: OAuth 2.0 client identifier.
                                 type: string
                               clientSecretSecretRef:
-                                description: A SecretKeySelector is a reference to
-                                  a secret key in an arbitrary namespace.
+                                description: OAuth 2.0 client secret.
                                 properties:
                                   key:
                                     description: The key to select.
@@ -127,6 +148,7 @@ spec:
                                 - namespace
                                 type: object
                               issuer:
+                                description: OIDC issuer identifier of the IdP.
                                 type: string
                               onUnauthenticatedRequest:
                                 type: string
@@ -137,8 +159,10 @@ spec:
                               sessionTimeout:
                                 type: number
                               tokenEndpoint:
+                                description: Token endpoint of the IdP.
                                 type: string
                               userInfoEndpoint:
+                                description: User info endpoint of the IdP.
                                 type: string
                             required:
                             - authorizationEndpoint
@@ -150,11 +174,17 @@ spec:
                             type: object
                           type: array
                         fixedResponse:
+                          description: Information for creating an action that returns
+                            a custom HTTP response. Required if type is fixed-response.
                           items:
                             properties:
                               contentType:
+                                description: Content type. Valid values are text/plain,
+                                  text/css, text/html, application/javascript and
+                                  application/json.
                                 type: string
                               messageBody:
+                                description: Message body.
                                 type: string
                               statusCode:
                                 type: string
@@ -163,20 +193,37 @@ spec:
                             type: object
                           type: array
                         forward:
+                          description: Configuration block for creating an action
+                            that distributes requests among one or more target groups.
+                            Specify only if type is forward. If you specify both forward
+                            block and target_group_arn attribute, you can specify
+                            only one target group using forward and it must be the
+                            same target group specified in target_group_arn. Detailed
+                            below.
                           items:
                             properties:
                               stickiness:
+                                description: Configuration block for target group
+                                  stickiness for the rule. Detailed below.
                                 items:
                                   properties:
                                     duration:
+                                      description: Time period, in seconds, during
+                                        which requests from a client should be routed
+                                        to the same target group. The range is 1-604800
+                                        seconds .
                                       type: number
                                     enabled:
+                                      description: Whether target group stickiness
+                                        is enabled. Default is false.
                                       type: boolean
                                   required:
                                   - duration
                                   type: object
                                 type: array
                               targetGroup:
+                                description: Set of 1-5 target group blocks. Detailed
+                                  below.
                                 items:
                                   properties:
                                     arn:
@@ -264,6 +311,7 @@ spec:
                                           type: object
                                       type: object
                                     weight:
+                                      description: Weight. The range is 0 to 999.
                                       type: number
                                   type: object
                                 type: array
@@ -272,19 +320,34 @@ spec:
                             type: object
                           type: array
                         order:
+                          description: Order for the action. This value is required
+                            for rules with multiple actions. The action with the lowest
+                            value for order is performed first. Valid values are between
+                            1 and 50000.
                           type: number
                         redirect:
+                          description: Configuration block for creating a redirect
+                            action. Required if type is redirect. Detailed below.
                           items:
                             properties:
                               host:
+                                description: 'Hostname. This component is not percent-encoded.
+                                  The hostname can contain #{host}. Defaults to #{host}.'
                                 type: string
                               path:
+                                description: 'Absolute path, starting with the leading
+                                  "/". This component is not percent-encoded. The
+                                  path can contain #{host}, #{path}, and #{port}.
+                                  Defaults to /#{path}.'
                                 type: string
                               port:
                                 type: string
                               protocol:
                                 type: string
                               query:
+                                description: 'Query parameters, URL-encoded when necessary,
+                                  but not percent-encoded. Do not include the leading
+                                  "?". Defaults to #{query}.'
                                 type: string
                               statusCode:
                                 type: string
@@ -293,6 +356,10 @@ spec:
                             type: object
                           type: array
                         targetGroupArn:
+                          description: ARN of the Target Group to which to route traffic.
+                            Specify only if type is forward and you want to route
+                            to a single target group. To route to one or more target
+                            groups, use a forward block instead.
                           type: string
                         targetGroupArnRef:
                           description: A Reference to a named object.
@@ -371,12 +438,15 @@ spec:
                               type: object
                           type: object
                         type:
+                          description: Type of routing action. Valid values are forward,
+                            redirect, fixed-response, authenticate-cognito and authenticate-oidc.
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   loadBalancerArn:
+                    description: ARN of the load balancer.
                     type: string
                   loadBalancerArnRef:
                     description: A Reference to a named object.
@@ -460,10 +530,15 @@ spec:
                       be created in.
                     type: string
                   sslPolicy:
+                    description: Name of the SSL Policy for the listener. Required
+                      if protocol is HTTPS or TLS.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - defaultAction
@@ -648,10 +723,14 @@ spec:
                   arn:
                     type: string
                   id:
+                    description: ARN of the listener .
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

@@ -5,7 +5,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    bucket: example
+    bucket: upbound-example
     status: Enabled
   providerConfigRef:
     name: default

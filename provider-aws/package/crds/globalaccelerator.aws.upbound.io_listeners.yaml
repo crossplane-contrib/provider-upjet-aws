@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Listener is the Schema for the Listeners API
+        description: Listener is the Schema for the Listeners API. Provides a Global
+          Accelerator listener.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   acceleratorArn:
+                    description: The Amazon Resource Name  of your accelerator.
                     type: string
                   acceleratorArnRef:
                     description: A Reference to a named object.
@@ -139,17 +141,30 @@ spec:
                         type: object
                     type: object
                   clientAffinity:
+                    description: 'Direct all requests from a user to the same endpoint.
+                      Valid values are NONE, SOURCE_IP. Default: NONE. If NONE, Global
+                      Accelerator uses the "five-tuple" properties of source IP address,
+                      source port, destination IP address, destination port, and protocol
+                      to select the hash value. If SOURCE_IP, Global Accelerator uses
+                      the "two-tuple" properties of source  IP address and destination
+                      IP address to select the hash value.'
                     type: string
                   portRange:
+                    description: The list of port ranges for the connections from
+                      clients to the accelerator. Fields documented below.
                     items:
                       properties:
                         fromPort:
+                          description: The first port in the range of ports, inclusive.
                           type: number
                         toPort:
+                          description: The last port in the range of ports, inclusive.
                           type: number
                       type: object
                     type: array
                   protocol:
+                    description: The protocol for the connections from clients to
+                      the accelerator. Valid values are TCP, UDP.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -337,6 +352,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The Amazon Resource Name  of the listener.
                     type: string
                 type: object
               conditions:

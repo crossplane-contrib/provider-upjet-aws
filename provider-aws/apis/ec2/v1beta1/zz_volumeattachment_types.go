@@ -22,6 +22,10 @@ type VolumeAttachmentParameters struct {
 	// +kubebuilder:validation:Required
 	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
+	// Set to true if you want to force the
+	// volume to detach. Useful if previous attempts failed, but use this option only
+	// as a last resort, as this can result in data loss. See
+	// Detaching an Amazon EBS Volume from an Instance for more information.
 	// +kubebuilder:validation:Optional
 	ForceDetach *bool `json:"forceDetach,omitempty" tf:"force_detach,omitempty"`
 
@@ -41,9 +45,16 @@ type VolumeAttachmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Set this to true if you do not wish
+	// to detach the volume from the instance to which it is attached at destroy
+	// time, and instead just remove the attachment from Terraform state. This is
+	// useful when destroying an instance which has volumes created by some other
+	// means attached.
 	// +kubebuilder:validation:Optional
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
+	// Set this to true to ensure that the target instance is stopped
+	// before trying to detach the volume. Stops the instance, if it is not already stopped.
 	// +kubebuilder:validation:Optional
 	StopInstanceBeforeDetaching *bool `json:"stopInstanceBeforeDetaching,omitempty" tf:"stop_instance_before_detaching,omitempty"`
 
@@ -73,7 +84,7 @@ type VolumeAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VolumeAttachment is the Schema for the VolumeAttachments API
+// VolumeAttachment is the Schema for the VolumeAttachments API. Provides an AWS EBS Volume Attachment
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -19,18 +19,23 @@ type IdentityProviderObservation struct {
 
 type IdentityProviderParameters struct {
 
+	// The map of attribute mapping of user pool attributes. AttributeMapping in AWS API documentation
 	// +kubebuilder:validation:Optional
 	AttributeMapping map[string]*string `json:"attributeMapping,omitempty" tf:"attribute_mapping,omitempty"`
 
+	// The list of identity providers.
 	// +kubebuilder:validation:Optional
 	IdpIdentifiers []*string `json:"idpIdentifiers,omitempty" tf:"idp_identifiers,omitempty"`
 
+	// The map of identity details, such as access token
 	// +kubebuilder:validation:Required
 	ProviderDetails map[string]*string `json:"providerDetails" tf:"provider_details,omitempty"`
 
+	// The provider name
 	// +kubebuilder:validation:Required
 	ProviderName *string `json:"providerName" tf:"provider_name,omitempty"`
 
+	// The provider type.  See AWS API for valid values
 	// +kubebuilder:validation:Required
 	ProviderType *string `json:"providerType" tf:"provider_type,omitempty"`
 
@@ -39,6 +44,7 @@ type IdentityProviderParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The user pool id
 	// +crossplane:generate:reference:type=UserPool
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
@@ -64,7 +70,7 @@ type IdentityProviderStatus struct {
 
 // +kubebuilder:object:root=true
 
-// IdentityProvider is the Schema for the IdentityProviders API
+// IdentityProvider is the Schema for the IdentityProviders API. Provides a Cognito User Identity Provider resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: QueryLogConfig is the Schema for the QueryLogConfigs API
+        description: QueryLogConfig is the Schema for the QueryLogConfigs API. Provides
+          a Route 53 Resolver query logging configuration resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,13 @@ spec:
               forProvider:
                 properties:
                   destinationArn:
+                    description: The ARN of the resource that you want Route 53 Resolver
+                      to send query logs. You can send query logs to an S3 bucket,
+                      a CloudWatch Logs log group, or a Kinesis Data Firehose delivery
+                      stream.
                     type: string
                   name:
+                    description: The name of the Route 53 Resolver query logging configuration.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -74,6 +80,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - destinationArn
@@ -257,16 +266,28 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN  of the Route 53 Resolver query logging configuration.
                     type: string
                   id:
+                    description: The ID of the Route 53 Resolver query logging configuration.
                     type: string
                   ownerId:
+                    description: The AWS account ID of the account that created the
+                      query logging configuration.
                     type: string
                   shareStatus:
+                    description: An indication of whether the query logging configuration
+                      is shared with other AWS accounts, or was shared with the current
+                      account by another AWS account. Sharing is configured through
+                      AWS Resource Access Manager . Values are NOT_SHARED, SHARED_BY_ME
+                      or SHARED_WITH_ME
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

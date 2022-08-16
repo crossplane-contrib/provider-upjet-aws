@@ -18,9 +18,11 @@ type BucketIntelligentTieringConfigurationFilterObservation struct {
 
 type BucketIntelligentTieringConfigurationFilterParameters struct {
 
+	// An object key name prefix that identifies the subset of objects to which the configuration applies.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// All of these tags must exist in the object's tag set in order for the configuration to apply.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -31,6 +33,7 @@ type BucketIntelligentTieringConfigurationObservation struct {
 
 type BucketIntelligentTieringConfigurationParameters struct {
 
+	// The name of the bucket this intelligent tiering configuration is associated with.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -41,9 +44,11 @@ type BucketIntelligentTieringConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// A bucket filter. The configuration only includes objects that meet the filter's criteria .
 	// +kubebuilder:validation:Optional
 	Filter []BucketIntelligentTieringConfigurationFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
+	// The unique name used to identify the S3 Intelligent-Tiering configuration for the bucket.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -52,9 +57,11 @@ type BucketIntelligentTieringConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Specifies the status of the configuration. Valid values: Enabled, Disabled.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// The S3 Intelligent-Tiering storage class tiers of the configuration .
 	// +kubebuilder:validation:Required
 	Tiering []TieringParameters `json:"tiering" tf:"tiering,omitempty"`
 }
@@ -64,9 +71,11 @@ type TieringObservation struct {
 
 type TieringParameters struct {
 
+	// S3 Intelligent-Tiering access tier. Valid values: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.
 	// +kubebuilder:validation:Required
 	AccessTier *string `json:"accessTier" tf:"access_tier,omitempty"`
 
+	// The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier.
 	// +kubebuilder:validation:Required
 	Days *float64 `json:"days" tf:"days,omitempty"`
 }
@@ -85,7 +94,7 @@ type BucketIntelligentTieringConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BucketIntelligentTieringConfiguration is the Schema for the BucketIntelligentTieringConfigurations API
+// BucketIntelligentTieringConfiguration is the Schema for the BucketIntelligentTieringConfigurations API. Provides an S3 Intelligent-Tiering configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

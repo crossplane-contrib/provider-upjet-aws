@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Attachment is the Schema for the Attachments API
+        description: Attachment is the Schema for the Attachments API. Provides an
+          AutoScaling Group Attachment resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   albTargetGroupArn:
+                    description: The ARN of an ALB Target Group.
                     type: string
                   albTargetGroupArnRef:
                     description: A Reference to a named object.
@@ -139,6 +141,7 @@ spec:
                         type: object
                     type: object
                   autoscalingGroupName:
+                    description: Name of ASG to associate with the ELB.
                     type: string
                   autoscalingGroupNameRef:
                     description: A Reference to a named object.
@@ -214,6 +217,7 @@ spec:
                         type: object
                     type: object
                   elb:
+                    description: The name of the ELB.
                     type: string
                   elbRef:
                     description: A Reference to a named object.
@@ -289,6 +293,7 @@ spec:
                         type: object
                     type: object
                   lbTargetGroupArn:
+                    description: The ARN of a load balancer target group.
                     type: string
                   lbTargetGroupArnRef:
                     description: A Reference to a named object.

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Repository is the Schema for the Repositorys API
+        description: Repository is the Schema for the Repositorys API. Provides a
+          Public Elastic Container Registry Repository.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,23 +65,49 @@ spec:
               forProvider:
                 properties:
                   catalogData:
+                    description: Catalog data configuration for the repository. See
+                      below for schema.
                     items:
                       properties:
                         aboutText:
+                          description: A detailed description of the contents of the
+                            repository. It is publicly visible in the Amazon ECR Public
+                            Gallery. The text must be in markdown format.
                           type: string
                         architectures:
+                          description: 'The system architecture that the images in
+                            the repository are compatible with. On the Amazon ECR
+                            Public Gallery, the following supported architectures
+                            will appear as badges on the repository and are used as
+                            search filters: ARM, ARM 64, x86, x86-64'
                           items:
                             type: string
                           type: array
                         description:
+                          description: A short description of the contents of the
+                            repository. This text appears in both the image details
+                            and also when searching for repositories on the Amazon
+                            ECR Public Gallery.
                           type: string
                         logoImageBlob:
+                          description: The base64-encoded repository logo payload.  Note
+                            that drift detection is disabled for this attribute.
                           type: string
                         operatingSystems:
+                          description: 'The operating systems that the images in the
+                            repository are compatible with. On the Amazon ECR Public
+                            Gallery, the following supported operating systems will
+                            appear as badges on the repository and are used as search
+                            filters: Linux, Windows'
                           items:
                             type: string
                           type: array
                         usageText:
+                          description: Detailed information on how to use the contents
+                            of the repository. It is publicly visible in the Amazon
+                            ECR Public Gallery. The usage text provides context, support
+                            information, and additional usage details for users of
+                            the repository. The text must be in markdown format.
                           type: string
                       type: object
                     type: array
@@ -270,12 +297,16 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Full ARN of the repository.
                     type: string
                   id:
+                    description: The repository name.
                     type: string
                   registryId:
+                    description: The registry ID where the repository was created.
                     type: string
                   repositoryUri:
+                    description: The URI of the repository.
                     type: string
                 type: object
               conditions:

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ResponseHeadersPolicy is the Schema for the ResponseHeadersPolicys
-          API
+          API. Provides a CloudFront response headers policy resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,13 +65,25 @@ spec:
               forProvider:
                 properties:
                   comment:
+                    description: A comment to describe the response headers policy.
+                      The comment cannot be longer than 128 characters.
                     type: string
                   corsConfig:
+                    description: A configuration for a set of HTTP response headers
+                      that are used for Cross-Origin Resource Sharing . See Cors Config
+                      for more information.
                     items:
                       properties:
                         accessControlAllowCredentials:
+                          description: A Boolean value that CloudFront uses as the
+                            value for the Access-Control-Allow-Credentials HTTP response
+                            header.
                           type: boolean
                         accessControlAllowHeaders:
+                          description: Object that contains an attribute items that
+                            contains a list of HTTP header names that CloudFront includes
+                            as values for the Access-Control-Allow-Headers HTTP response
+                            header.
                           items:
                             properties:
                               items:
@@ -81,6 +93,11 @@ spec:
                             type: object
                           type: array
                         accessControlAllowMethods:
+                          description: 'Object that contains an attribute items that
+                            contains a list of HTTP methods that CloudFront includes
+                            as values for the Access-Control-Allow-Methods HTTP response
+                            header. Valid values: GET | POST | OPTIONS | PUT | DELETE
+                            | HEAD | ALL'
                           items:
                             properties:
                               items:
@@ -90,6 +107,10 @@ spec:
                             type: object
                           type: array
                         accessControlAllowOrigins:
+                          description: Object that contains an attribute items that
+                            contains a list of origins that CloudFront can use as
+                            the value for the Access-Control-Allow-Origin HTTP response
+                            header.
                           items:
                             properties:
                               items:
@@ -99,6 +120,10 @@ spec:
                             type: object
                           type: array
                         accessControlExposeHeaders:
+                          description: Object that contains an attribute items that
+                            contains a list of HTTP headers that CloudFront includes
+                            as values for the Access-Control-Expose-Headers HTTP response
+                            header.
                           items:
                             properties:
                               items:
@@ -110,6 +135,8 @@ spec:
                         accessControlMaxAgeSec:
                           type: number
                         originOverride:
+                          description: A Boolean value that determines how CloudFront
+                            behaves for the HTTP response header.
                           type: boolean
                       required:
                       - accessControlAllowCredentials
@@ -120,16 +147,20 @@ spec:
                       type: object
                     type: array
                   customHeadersConfig:
+                    description: Object that contains an attribute items that contains
+                      a list of custom headers. See Custom Header for more information.
                     items:
                       properties:
                         items:
                           items:
                             properties:
                               header:
+                                description: The HTTP response header name.
                                 type: string
                               override:
                                 type: boolean
                               value:
+                                description: The value for the HTTP response header.
                                 type: string
                             required:
                             - header
@@ -140,14 +171,18 @@ spec:
                       type: object
                     type: array
                   etag:
+                    description: The current version of the response headers policy.
                     type: string
                   name:
+                    description: A unique name to identify the response headers policy.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   securityHeadersConfig:
+                    description: A configuration for a set of security-related HTTP
+                      response headers. See Security Headers Config for more information.
                     items:
                       properties:
                         contentSecurityPolicy:
@@ -163,6 +198,9 @@ spec:
                             type: object
                           type: array
                         contentTypeOptions:
+                          description: Determines whether CloudFront includes the
+                            X-Content-Type-Options HTTP response header with its value
+                            set to nosniff. See Content Type Options for more information.
                           items:
                             properties:
                               override:
@@ -172,9 +210,14 @@ spec:
                             type: object
                           type: array
                         frameOptions:
+                          description: Determines whether CloudFront includes the
+                            X-Frame-Options HTTP response header and the header’s
+                            value. See Frame Options for more information.
                           items:
                             properties:
                               frameOption:
+                                description: 'The value of the X-Frame-Options HTTP
+                                  response header. Valid values: DENY | SAMEORIGIN'
                                 type: string
                               override:
                                 type: boolean
@@ -196,15 +239,25 @@ spec:
                             type: object
                           type: array
                         strictTransportSecurity:
+                          description: Determines whether CloudFront includes the
+                            Strict-Transport-Security HTTP response header and the
+                            header’s value. See Strict Transport Security for more
+                            information.
                           items:
                             properties:
                               accessControlMaxAgeSec:
                                 type: number
                               includeSubdomains:
+                                description: A Boolean value that determines whether
+                                  CloudFront includes the includeSubDomains directive
+                                  in the Strict-Transport-Security HTTP response header.
                                 type: boolean
                               override:
                                 type: boolean
                               preload:
+                                description: A Boolean value that determines whether
+                                  CloudFront includes the preload directive in the
+                                  Strict-Transport-Security HTTP response header.
                                 type: boolean
                             required:
                             - accessControlMaxAgeSec
@@ -212,15 +265,30 @@ spec:
                             type: object
                           type: array
                         xssProtection:
+                          description: Determine whether CloudFront includes the X-XSS-Protection
+                            HTTP response header and the header’s value. See XSS Protection
+                            for more information.
                           items:
                             properties:
                               modeBlock:
+                                description: A Boolean value that determines whether
+                                  CloudFront includes the mode=block directive in
+                                  the X-XSS-Protection header.
                                 type: boolean
                               override:
                                 type: boolean
                               protection:
+                                description: A Boolean value that determines the value
+                                  of the X-XSS-Protection HTTP response header. When
+                                  this setting is true, the value of the X-XSS-Protection
+                                  header is 1. When this setting is false, the value
+                                  of the X-XSS-Protection header is 0.
                                 type: boolean
                               reportUri:
+                                description: A reporting URI, which CloudFront uses
+                                  as the value of the report directive in the X-XSS-Protection
+                                  header. You cannot specify a report_uri when mode_block
+                                  is true.
                                 type: string
                             required:
                             - override
@@ -411,6 +479,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The identifier for the response headers policy.
                     type: string
                 type: object
               conditions:

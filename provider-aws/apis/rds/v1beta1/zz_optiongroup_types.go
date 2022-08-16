@@ -14,24 +14,32 @@ import (
 )
 
 type OptionGroupObservation struct {
+
+	// The ARN of the db option group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The db option group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type OptionGroupParameters struct {
 
+	// Specifies the name of the engine that this option group should be associated with.
 	// +kubebuilder:validation:Required
 	EngineName *string `json:"engineName" tf:"engine_name,omitempty"`
 
+	// Specifies the major version of the engine that this option group should be associated with.
 	// +kubebuilder:validation:Required
 	MajorEngineVersion *string `json:"majorEngineVersion" tf:"major_engine_version,omitempty"`
 
+	// A list of Options to apply.
 	// +kubebuilder:validation:Optional
 	Option []OptionParameters `json:"option,omitempty" tf:"option,omitempty"`
 
+	// The description of the option group. Defaults to "Managed by Terraform".
 	// +kubebuilder:validation:Optional
 	OptionGroupDescription *string `json:"optionGroupDescription,omitempty" tf:"option_group_description,omitempty"`
 
@@ -40,6 +48,7 @@ type OptionGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -49,21 +58,27 @@ type OptionObservation struct {
 
 type OptionParameters struct {
 
+	// A list of DB Security Groups for which the option is enabled.
 	// +kubebuilder:validation:Optional
 	DBSecurityGroupMemberships []*string `json:"dbSecurityGroupMemberships,omitempty" tf:"db_security_group_memberships,omitempty"`
 
+	// The Name of the Option .
 	// +kubebuilder:validation:Required
 	OptionName *string `json:"optionName" tf:"option_name,omitempty"`
 
+	// A list of option settings to apply.
 	// +kubebuilder:validation:Optional
 	OptionSettings []OptionSettingsParameters `json:"optionSettings,omitempty" tf:"option_settings,omitempty"`
 
+	// The Port number when connecting to the Option .
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// A list of VPC Security Groups for which the option is enabled.
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupMemberships []*string `json:"vpcSecurityGroupMemberships,omitempty" tf:"vpc_security_group_memberships,omitempty"`
 
+	// The version of the option .
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -76,6 +91,7 @@ type OptionSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The Value of the setting.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -94,7 +110,7 @@ type OptionGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// OptionGroup is the Schema for the OptionGroups API
+// OptionGroup is the Schema for the OptionGroups API. Provides an RDS DB option group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

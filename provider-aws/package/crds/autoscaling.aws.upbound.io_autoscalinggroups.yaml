@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: AutoscalingGroup is the Schema for the AutoscalingGroups API
+        description: AutoscalingGroup is the Schema for the AutoscalingGroups API.
+          Provides an Auto Scaling Group resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -68,16 +69,26 @@ spec:
                       type: string
                     type: array
                   capacityRebalance:
+                    description: Indicates whether capacity rebalance is enabled.
+                      Otherwise, capacity rebalance is disabled.
                     type: boolean
                   defaultCooldown:
                     type: number
                   desiredCapacity:
                     type: number
                   enabledMetrics:
+                    description: A list of metrics to collect. The allowed values
+                      are defined by the underlying AWS API.
                     items:
                       type: string
                     type: array
                   forceDelete:
+                    description: Allows deleting the Auto Scaling Group without waiting
+                      for all instances in the pool to terminate.  You can force an
+                      Auto Scaling Group to delete even if it's in the process of
+                      scaling a resource. Normally, Terraform drains all the instances
+                      before deleting the group.  This bypasses that behavior and
+                      potentially leaves resources dangling.
                     type: boolean
                   forceDeleteWarmPool:
                     type: boolean
@@ -86,6 +97,13 @@ spec:
                   healthCheckType:
                     type: string
                   initialLifecycleHook:
+                    description: One or more Lifecycle Hooks to attach to the Auto
+                      Scaling Group before instances are launched. The syntax is exactly
+                      the same as the separate aws_autoscaling_lifecycle_hook resource,
+                      without the autoscaling_group_name attribute. Please note that
+                      this will only work when creating a new Auto Scaling Group.
+                      For all other use-cases, please use aws_autoscaling_lifecycle_hook
+                      resource.
                     items:
                       properties:
                         defaultResult:
@@ -108,28 +126,53 @@ spec:
                       type: object
                     type: array
                   instanceRefresh:
+                    description: If this block is configured, start an Instance Refresh
+                      when this Auto Scaling Group is updated. Defined below.
                     items:
                       properties:
                         preferences:
+                          description: Override default parameters for Instance Refresh.
                           items:
                             properties:
                               checkpointDelay:
+                                description: The number of seconds to wait after a
+                                  checkpoint. Defaults to 3600.
                                 type: string
                               checkpointPercentages:
+                                description: List of percentages for each checkpoint.
+                                  Values must be unique and in ascending order. To
+                                  replace all instances, the final number must be
+                                  100.
                                 items:
                                   type: number
                                 type: array
                               instanceWarmup:
+                                description: The number of seconds until a newly launched
+                                  instance is configured and ready to use. Default
+                                  behavior is to use the Auto Scaling Group's health
+                                  check grace period.
                                 type: string
                               minHealthyPercentage:
+                                description: The amount of capacity in the Auto Scaling
+                                  group that must remain healthy during an instance
+                                  refresh to allow the operation to continue, as a
+                                  percentage of the desired capacity of the Auto Scaling
+                                  group. Defaults to 90.
                                 type: number
                               skipMatching:
                                 type: boolean
                             type: object
                           type: array
                         strategy:
+                          description: The strategy to use for instance refresh. The
+                            only allowed value is Rolling. See StartInstanceRefresh
+                            Action for more information.
                           type: string
                         triggers:
+                          description: Set of additional property names that will
+                            trigger an Instance Refresh. A refresh will always be
+                            triggered by a change in any of launch_configuration,
+                            launch_template, or mixed_instances_policy.
                           items:
                             type: string
                           type: array
@@ -227,32 +270,68 @@ spec:
                       type: object
                     type: array
                   maxInstanceLifetime:
+                    description: The maximum amount of time, in seconds, that an instance
+                      can be in service, values must be either equal to 0 or between
+                      86400 and 31536000 seconds.
                     type: number
                   maxSize:
                     type: number
                   metricsGranularity:
+                    description: The granularity to associate with the metrics to
+                      collect. The only valid value is 1Minute. Default is 1Minute.
                     type: string
                   minElbCapacity:
+                    description: Setting this causes Terraform to wait for this number
+                      of instances from this Auto Scaling Group to show up healthy
+                      in the ELB only on creation. Updates will not wait on ELB instance
+                      number changes.
                     type: number
                   minSize:
                     type: number
                   mixedInstancesPolicy:
+                    description: Configuration block containing settings to define
+                      launch targets for Auto Scaling groups. See Mixed Instances
+                      Policy below for more details.
                     items:
                       properties:
                         instancesDistribution:
+                          description: Nested argument containing settings on how
+                            to mix on-demand and Spot instances in the Auto Scaling
+                            group. Defined below.
                           items:
                             properties:
                               onDemandAllocationStrategy:
+                                description: 'Strategy to use when launching on-demand
+                                  instances. Valid values: prioritized. Default: prioritized.'
                                 type: string
                               onDemandBaseCapacity:
+                                description: 'Absolute minimum amount of desired capacity
+                                  that must be fulfilled by on-demand instances. Default:
+                                  0.'
                                 type: number
                               onDemandPercentageAboveBaseCapacity:
+                                description: 'Percentage split between on-demand and
+                                  Spot instances above the base on-demand capacity.
+                                  Default: 100.'
                                 type: number
                               spotAllocationStrategy:
+                                description: 'How to allocate capacity across the
+                                  Spot pools. Valid values: lowest-price, capacity-optimized,
+                                  capacity-optimized-prioritized. Default: lowest-price.'
                                 type: string
                               spotInstancePools:
+                                description: 'Number of Spot pools per availability
+                                  zone to allocate capacity. EC2 Auto Scaling selects
+                                  the cheapest Spot pools and evenly allocates Spot
+                                  capacity across the number of Spot pools that you
+                                  specify. Only available with spot_allocation_strategy
+                                  set to lowest-price. Otherwise it must be set to
+                                  0, if it has been defined before. Default: 2.'
                                 type: number
                               spotMaxPrice:
+                                description: 'Maximum price per unit hour that the
+                                  user is willing to pay for the Spot instances. Default:
+                                  an empty string which means the on-demand price.'
                                 type: string
                             type: object
                           type: array
@@ -263,6 +342,8 @@ spec:
                                 items:
                                   properties:
                                     launchTemplateId:
+                                      description: The ID of the launch template.
+                                        Conflicts with launch_template_name.
                                       type: string
                                     launchTemplateIdRef:
                                       description: A Reference to a named object.
@@ -347,20 +428,33 @@ spec:
                                           type: object
                                       type: object
                                     launchTemplateName:
+                                      description: The name of the launch template.
+                                        Conflicts with launch_template_id.
                                       type: string
                                     version:
                                       type: string
                                   type: object
                                 type: array
                               override:
+                                description: List of nested arguments provides the
+                                  ability to specify multiple instance types. This
+                                  will override the same parameter in the launch template.
+                                  For on-demand instances, Auto Scaling considers
+                                  the order of preference of instance types to launch
+                                  based on the order specified in the overrides list.
+                                  Defined below.
                                 items:
                                   properties:
                                     instanceType:
+                                      description: Override the instance type in the
+                                        Launch Template.
                                       type: string
                                     launchTemplateSpecification:
                                       items:
                                         properties:
                                           launchTemplateId:
+                                            description: The ID of the launch template.
+                                              Conflicts with launch_template_name.
                                             type: string
                                           launchTemplateIdRef:
                                             description: A Reference to a named object.
@@ -451,12 +545,17 @@ spec:
                                                 type: object
                                             type: object
                                           launchTemplateName:
+                                            description: The name of the launch template.
+                                              Conflicts with launch_template_id.
                                             type: string
                                           version:
                                             type: string
                                         type: object
                                       type: array
                                     weightedCapacity:
+                                      description: The number of capacity units, which
+                                        gives the instance type a proportional weight
+                                        to other instance types.
                                       type: string
                                   type: object
                                 type: array
@@ -469,6 +568,8 @@ spec:
                       type: object
                     type: array
                   placementGroup:
+                    description: The name of the placement group into which you'll
+                      launch your instances, if any.
                     type: string
                   placementGroupRef:
                     description: A Reference to a named object.
@@ -544,12 +645,16 @@ spec:
                         type: object
                     type: object
                   protectFromScaleIn:
+                    description: n protection in the Amazon EC2 Auto Scaling User
+                      Guide.
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   serviceLinkedRoleArn:
+                    description: inked role that the ASG will use to call other AWS
+                      services
                     type: string
                   serviceLinkedRoleArnRef:
                     description: A Reference to a named object.
@@ -625,17 +730,29 @@ spec:
                         type: object
                     type: object
                   suspendedProcesses:
+                    description: A list of processes to suspend for the Auto Scaling
+                      Group. The allowed values are Launch, Terminate, HealthCheck,
+                      ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions,
+                      AddToLoadBalancer. Note that if you suspend either the Launch
+                      or Terminate process types, it can prevent your Auto Scaling
+                      Group from functioning properly.
                     items:
                       type: string
                     type: array
                   tag:
+                    description: Configuration block containing resource tags. Conflicts
+                      with tags. See Tag below for more details.
                     items:
                       properties:
                         key:
+                          description: Key
                           type: string
                         propagateAtLaunch:
+                          description: Enables propagation of the tag to Amazon EC2
+                            instances launched via this ASG
                           type: boolean
                         value:
+                          description: Value
                           type: string
                       required:
                       - key
@@ -644,12 +761,19 @@ spec:
                       type: object
                     type: array
                   tags:
+                    description: Set of maps containing resource tags. Conflicts with
+                      tag. See Tags below for more details.
                     items:
                       additionalProperties:
                         type: string
                       type: object
                     type: array
                   terminationPolicies:
+                    description: A list of policies to decide how the instances in
+                      the Auto Scaling Group should be terminated. The allowed values
+                      are OldestInstance, NewestInstance, OldestLaunchConfiguration,
+                      ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy,
+                      Default.
                     items:
                       type: string
                     type: array
@@ -733,24 +857,45 @@ spec:
                         type: object
                     type: object
                   waitForCapacityTimeout:
+                    description: A maximum duration that Terraform should wait for
+                      ASG instances to be healthy before timing out.   Setting this
+                      to "0" causes Terraform to skip all Capacity Waiting behavior.
                     type: string
                   waitForElbCapacity:
+                    description: Setting this will cause Terraform to wait for exactly
+                      this number of healthy instances from this Auto Scaling Group
+                      in all attached load balancers on both create and update operations.
                     type: number
                   warmPool:
+                    description: If this block is configured, add a Warm Pool to the
+                      specified Auto Scaling group. Defined below
                     items:
                       properties:
                         instanceReusePolicy:
+                          description: Indicates whether instances in the Auto Scaling
+                            group can be returned to the warm pool on scale in. The
+                            default is to terminate instances in the Auto Scaling
+                            group when the group scales in.
                           items:
                             properties:
                               reuseOnScaleIn:
+                                description: Specifies whether instances in the Auto
+                                  Scaling group can be returned to the warm pool on
+                                  scale in.
                                 type: boolean
                             type: object
                           type: array
                         maxGroupPreparedCapacity:
+                          description: Specifies the total maximum number of instances
+                            that are allowed to be in the warm pool or in any state
+                            except Terminated for the Auto Scaling group.
                           type: number
                         minSize:
                           type: number
                         poolState:
+                          description: 'Sets the instance state to transition to after
+                            the lifecycle hooks finish. Valid values are: Stopped
+                            , Running or Hibernated.'
                           type: string
                       type: object
                     type: array
@@ -936,14 +1081,20 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN for this Auto Scaling Group
                     type: string
                   id:
                     type: string
                   loadBalancers:
+                    description: A list of elastic load balancer names to add to the
+                      autoscaling group names. Only valid for classic load balancers.
+                      For ALBs, use target_group_arns instead.
                     items:
                       type: string
                     type: array
                   targetGroupArns:
+                    description: A set of aws_alb_target_group ARNs, for use with
+                      Application or Network Load Balancing.
                     items:
                       type: string
                     type: array

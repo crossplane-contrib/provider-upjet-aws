@@ -14,25 +14,33 @@ import (
 )
 
 type VirtualMfaDeviceObservation struct {
+
+	// The Amazon Resource Name  specifying the virtual mfa device.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The base32 seed defined as specified in RFC3548. The base_32_string_seed is base64-encoded.
 	Base32StringSeed *string `json:"base32StringSeed,omitempty" tf:"base_32_string_seed,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A QR code PNG image that encodes otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String where $virtualMFADeviceName is one of the create call arguments. AccountName is the user name if set , and Base32String is the seed in base32 format.
 	QrCodePng *string `json:"qrCodePng,omitempty" tf:"qr_code_png,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type VirtualMfaDeviceParameters struct {
 
+	// –  The path for the virtual MFA device.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
+	// Map of resource tags for the virtual mfa device. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.
 	// +kubebuilder:validation:Required
 	VirtualMfaDeviceName *string `json:"virtualMfaDeviceName" tf:"virtual_mfa_device_name,omitempty"`
 }
@@ -51,7 +59,7 @@ type VirtualMfaDeviceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VirtualMfaDevice is the Schema for the VirtualMfaDevices API
+// VirtualMfaDevice is the Schema for the VirtualMfaDevices API. Provides an IAM Virtual MFA Device
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

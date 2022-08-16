@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: AccountSettingDefault is the Schema for the AccountSettingDefaults
-          API
+          API. Provides an ECS Default account setting.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,12 +65,17 @@ spec:
               forProvider:
                 properties:
                   name:
+                    description: Name of the account setting to set. Valid values
+                      are serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat,
+                      awsvpcTrunking and containerInsights.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   value:
+                    description: State of the setting. Valid values are enabled and
+                      disabled.
                     type: string
                 required:
                 - name
@@ -255,6 +260,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: ARN that identifies the account setting.
                     type: string
                   principalArn:
                     type: string

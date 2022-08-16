@@ -36,7 +36,9 @@ spec:
     schema:
       openAPIV3Schema:
         description: RouteTableAssociation is the Schema for the RouteTableAssociations
-          API
+          API. Provides a resource to create an association between a route table
+          and a subnet or a route table and an internet gateway or virtual private
+          gateway.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +67,8 @@ spec:
               forProvider:
                 properties:
                   gatewayId:
+                    description: The gateway ID to create an association. Conflicts
+                      with subnet_id.
                     type: string
                   gatewayIdRef:
                     description: A Reference to a named object.
@@ -144,6 +148,7 @@ spec:
                       be created in.
                     type: string
                   routeTableId:
+                    description: The ID of the routing table to associate with.
                     type: string
                   routeTableIdRef:
                     description: A Reference to a named object.
@@ -219,6 +224,8 @@ spec:
                         type: object
                     type: object
                   subnetId:
+                    description: The subnet ID to create an association. Conflicts
+                      with gateway_id.
                     type: string
                   subnetIdRef:
                     description: A Reference to a named object.
@@ -474,6 +481,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the association
                     type: string
                 type: object
               conditions:

@@ -19,9 +19,11 @@ type ResourcePolicyObservation struct {
 
 type ResourcePolicyParameters struct {
 
+	// Indicates that you are using both methods to grant cross-account. Valid values are TRUE and FALSE. Note the terraform will not perform drift detetction on this field as its not return on read.
 	// +kubebuilder:validation:Optional
 	EnableHybrid *string `json:"enableHybrid,omitempty" tf:"enable_hybrid,omitempty"`
 
+	// –  The policy to be applied to the aws glue data catalog.
 	// +kubebuilder:validation:Required
 	Policy *string `json:"policy" tf:"policy,omitempty"`
 
@@ -45,7 +47,7 @@ type ResourcePolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ResourcePolicy is the Schema for the ResourcePolicys API
+// ResourcePolicy is the Schema for the ResourcePolicys API. Provides a resource to configure the aws glue resource policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

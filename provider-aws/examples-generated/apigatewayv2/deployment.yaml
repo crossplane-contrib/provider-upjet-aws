@@ -10,7 +10,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     description: Example deployment
-    lifecycle: null
     region: us-west-1
 
 ---

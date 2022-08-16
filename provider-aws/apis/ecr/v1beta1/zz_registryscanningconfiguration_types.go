@@ -16,6 +16,7 @@ import (
 type RegistryScanningConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The registry ID the scanning configuration applies to.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 }
 
@@ -26,9 +27,11 @@ type RegistryScanningConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// One or multiple blocks specifying scanning rules to determine which repository filters are used and at what frequency scanning will occur. See below for schema.
 	// +kubebuilder:validation:Optional
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
+	// the scanning type to set for the registry. Can be either ENHANCED or BASIC.
 	// +kubebuilder:validation:Required
 	ScanType *string `json:"scanType" tf:"scan_type,omitempty"`
 }
@@ -50,9 +53,11 @@ type RuleObservation struct {
 
 type RuleParameters struct {
 
+	// One or more repository filter blocks, containing a filter  and a filter_type .
 	// +kubebuilder:validation:Required
 	RepositoryFilter []RepositoryFilterParameters `json:"repositoryFilter" tf:"repository_filter,omitempty"`
 
+	// The frequency that scans are performed at for a private registry. Can be SCAN_ON_PUSH, CONTINUOUS_SCAN, or MANUAL.
 	// +kubebuilder:validation:Required
 	ScanFrequency *string `json:"scanFrequency" tf:"scan_frequency,omitempty"`
 }
@@ -71,7 +76,7 @@ type RegistryScanningConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// RegistryScanningConfiguration is the Schema for the RegistryScanningConfigurations API
+// RegistryScanningConfiguration is the Schema for the RegistryScanningConfigurations API. Provides an Elastic Container Registry Scanning Configuration.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

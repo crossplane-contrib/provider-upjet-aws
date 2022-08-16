@@ -1,0 +1,33 @@
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: RestAPIPolicy
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "RestAPIPolicy needs a valid arn for its policy json."
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "*"
+            },
+            "Action": "execute-api:Invoke",
+            "Resource": "<rest-api-arn>",
+            "Condition": {
+              "IpAddress": {
+                "aws:SourceIp": "123.123.123.123/32"
+              }
+            }
+          }
+        ]
+      }
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test

@@ -14,22 +14,31 @@ import (
 )
 
 type AddonObservation struct {
+
+	// Amazon Resource Name  of the EKS add-on.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Date and time in RFC3339 format that the EKS add-on was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// EKS Cluster name and EKS Addon name separated by a colon .
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Date and time in RFC3339 format that the EKS add-on was updated.
 	ModifiedAt *string `json:"modifiedAt,omitempty" tf:"modified_at,omitempty"`
 
+	// Key-value map of resource tags, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type AddonParameters struct {
 
+	// n. The version must
+	// match one of the versions returned by describe-addon-versions.
 	// +kubebuilder:validation:Optional
 	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
 
+	// 00 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores .
 	// +crossplane:generate:reference:type=Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -40,6 +49,7 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
+	// Indicates if you want to preserve the created resources when deleting the EKS add-on.
 	// +kubebuilder:validation:Optional
 	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
 
@@ -48,9 +58,18 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Define how to resolve parameter value conflicts
+	// when migrating an existing add-on to an Amazon EKS add-on or when applying
+	// version updates to the add-on. Valid values are NONE and OVERWRITE.
 	// +kubebuilder:validation:Optional
 	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
 
+	// The Amazon Resource Name  of an
+	// existing IAM role to bind to the add-on's service account. The role must be
+	// assigned the IAM permissions required by the add-on. If you don't specify
+	// an existing IAM role, then the add-on uses the permissions assigned to the node
+	// IAM role. For more information, see Amazon EKS node IAM role
+	// in the Amazon EKS User Guide.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -62,6 +81,7 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountRoleArnSelector *v1.Selector `json:"serviceAccountRoleArnSelector,omitempty" tf:"-"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -80,7 +100,7 @@ type AddonStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Addon is the Schema for the Addons API
+// Addon is the Schema for the Addons API. Manages an EKS add-on
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

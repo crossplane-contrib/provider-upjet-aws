@@ -1,7 +1,21 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
-  name: example
+  name: upbound-example
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: SampleBucket
+  providerConfigRef:
+    name: default
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  name: upbound-example-2
 spec:
   forProvider:
     region: us-west-1

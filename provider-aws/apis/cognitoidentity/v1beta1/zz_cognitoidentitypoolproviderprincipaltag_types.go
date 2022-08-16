@@ -19,6 +19,7 @@ type CognitoIdentityPoolProviderPrincipalTagObservation struct {
 
 type CognitoIdentityPoolProviderPrincipalTagParameters struct {
 
+	// An identity pool ID.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cognitoidentity/v1beta1.Pool
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,6 +31,7 @@ type CognitoIdentityPoolProviderPrincipalTagParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityPoolIDSelector *v1.Selector `json:"identityPoolIdSelector,omitempty" tf:"-"`
 
+	// The name of the identity provider.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cognitoidp/v1beta1.UserPool
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("endpoint",true)
 	// +kubebuilder:validation:Optional
@@ -41,6 +43,7 @@ type CognitoIdentityPoolProviderPrincipalTagParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityProviderNameSelector *v1.Selector `json:"identityProviderNameSelector,omitempty" tf:"-"`
 
+	// String to string map of variables.
 	// +kubebuilder:validation:Optional
 	PrincipalTags map[string]*string `json:"principalTags,omitempty" tf:"principal_tags,omitempty"`
 
@@ -49,6 +52,7 @@ type CognitoIdentityPoolProviderPrincipalTagParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// :  use default  attribute mappings.
 	// +kubebuilder:validation:Optional
 	UseDefaults *bool `json:"useDefaults,omitempty" tf:"use_defaults,omitempty"`
 }
@@ -67,7 +71,7 @@ type CognitoIdentityPoolProviderPrincipalTagStatus struct {
 
 // +kubebuilder:object:root=true
 
-// CognitoIdentityPoolProviderPrincipalTag is the Schema for the CognitoIdentityPoolProviderPrincipalTags API
+// CognitoIdentityPoolProviderPrincipalTag is the Schema for the CognitoIdentityPoolProviderPrincipalTags API. Provides an AWS Cognito Identity Principal Mapping.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

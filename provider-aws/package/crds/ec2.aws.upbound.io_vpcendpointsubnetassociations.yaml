@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: VPCEndpointSubnetAssociation is the Schema for the VPCEndpointSubnetAssociations
-          API
+          API. Provides a resource to create an association between a VPC endpoint
+          and a subnet.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -70,6 +71,8 @@ spec:
                       be created in.
                     type: string
                   subnetId:
+                    description: The ID of the subnet to be associated with the VPC
+                      endpoint.
                     type: string
                   subnetIdRef:
                     description: A Reference to a named object.
@@ -145,6 +148,8 @@ spec:
                         type: object
                     type: object
                   vpcEndpointId:
+                    description: The ID of the VPC endpoint with which the subnet
+                      will be associated.
                     type: string
                   vpcEndpointIdRef:
                     description: A Reference to a named object.
@@ -400,6 +405,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the association.
                     type: string
                 type: object
               conditions:

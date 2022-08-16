@@ -14,37 +14,50 @@ import (
 )
 
 type ClusterSnapshotObservation struct {
+
+	// Specifies the allocated storage size in gigabytes .
 	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
+	// List of EC2 Availability Zones that instances in the DB cluster snapshot can be restored in.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
+	// The Amazon Resource Name  for the DB Cluster Snapshot.
 	DBClusterSnapshotArn *string `json:"dbClusterSnapshotArn,omitempty" tf:"db_cluster_snapshot_arn,omitempty"`
 
+	// Specifies the name of the database engine.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
+	// Version of the database engine for this DB cluster snapshot.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// If storage_encrypted is true, the AWS KMS key identifier for the encrypted DB cluster snapshot.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// License model information for the restored DB cluster.
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
 
+	// Port that the DB cluster was listening on at the time of the snapshot.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 
 	SourceDBClusterSnapshotArn *string `json:"sourceDbClusterSnapshotArn,omitempty" tf:"source_db_cluster_snapshot_arn,omitempty"`
 
+	// The status of this DB Cluster Snapshot.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// Specifies whether the DB cluster snapshot is encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
+	// The VPC ID associated with the DB cluster snapshot.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type ClusterSnapshotParameters struct {
 
+	// The DB Cluster Identifier from which to take the snapshot.
 	// +crossplane:generate:reference:type=Cluster
 	// +kubebuilder:validation:Optional
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
@@ -75,7 +88,7 @@ type ClusterSnapshotStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ClusterSnapshot is the Schema for the ClusterSnapshots API
+// ClusterSnapshot is the Schema for the ClusterSnapshots API. Manages a Neptune database cluster snapshot.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

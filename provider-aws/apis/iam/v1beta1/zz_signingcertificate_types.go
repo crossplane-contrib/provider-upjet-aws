@@ -14,19 +14,25 @@ import (
 )
 
 type SigningCertificateObservation struct {
+
+	// The ID for the signing certificate.
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 
+	// The certificate_id:user_name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type SigningCertificateParameters struct {
 
+	// ncoded format.
 	// +kubebuilder:validation:Required
 	CertificateBody *string `json:"certificateBody" tf:"certificate_body,omitempty"`
 
+	// –   The status you want to assign to the certificate. Active means that the certificate can be used for programmatic calls to Amazon Web Services Inactive means that the certificate cannot be used.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// –  The name of the user the signing certificate is for.
 	// +kubebuilder:validation:Required
 	UserName *string `json:"userName" tf:"user_name,omitempty"`
 }
@@ -45,7 +51,7 @@ type SigningCertificateStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SigningCertificate is the Schema for the SigningCertificates API
+// SigningCertificate is the Schema for the SigningCertificates API. Provides an IAM Signing Certificate
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

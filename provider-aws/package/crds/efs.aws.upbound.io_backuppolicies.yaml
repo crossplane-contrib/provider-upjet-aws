@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: BackupPolicy is the Schema for the BackupPolicys API
+        description: BackupPolicy is the Schema for the BackupPolicys API. Provides
+          an Elastic File System (EFS) Backup Policy resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,15 +65,19 @@ spec:
               forProvider:
                 properties:
                   backupPolicy:
+                    description: A backup_policy object .
                     items:
                       properties:
                         status:
+                          description: 'A status of the backup policy. Valid values:
+                            ENABLED, DISABLED.'
                           type: string
                       required:
                       - status
                       type: object
                     type: array
                   fileSystemId:
+                    description: The ID of the EFS file system.
                     type: string
                   fileSystemIdRef:
                     description: A Reference to a named object.
@@ -332,6 +337,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID that identifies the file system .
                     type: string
                 type: object
               conditions:

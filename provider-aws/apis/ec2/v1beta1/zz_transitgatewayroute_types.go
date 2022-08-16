@@ -14,14 +14,18 @@ import (
 )
 
 type TransitGatewayRouteObservation struct {
+
+	// EC2 Transit Gateway Route Table identifier combined with destination
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type TransitGatewayRouteParameters struct {
 
+	// Indicates whether to drop traffic that matches this route .
 	// +kubebuilder:validation:Optional
 	Blackhole *bool `json:"blackhole,omitempty" tf:"blackhole,omitempty"`
 
+	// IPv4 or IPv6 RFC1924 CIDR used for destination matches. Routing decisions are based on the most specific match.
 	// +kubebuilder:validation:Required
 	DestinationCidrBlock *string `json:"destinationCidrBlock" tf:"destination_cidr_block,omitempty"`
 
@@ -30,6 +34,7 @@ type TransitGatewayRouteParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Identifier of EC2 Transit Gateway Attachment .
 	// +crossplane:generate:reference:type=TransitGatewayVPCAttachment
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
@@ -40,6 +45,7 @@ type TransitGatewayRouteParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
+	// Identifier of EC2 Transit Gateway Route Table.
 	// +crossplane:generate:reference:type=TransitGatewayRouteTable
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
@@ -65,7 +71,7 @@ type TransitGatewayRouteStatus struct {
 
 // +kubebuilder:object:root=true
 
-// TransitGatewayRoute is the Schema for the TransitGatewayRoutes API
+// TransitGatewayRoute is the Schema for the TransitGatewayRoutes API. Manages an EC2 Transit Gateway Route
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

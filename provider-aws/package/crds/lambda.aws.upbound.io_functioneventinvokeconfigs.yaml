@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: FunctionEventInvokeConfig is the Schema for the FunctionEventInvokeConfigs
-          API
+          API. Manages an asynchronous invocation configuration for a Lambda Function
+          or Alias.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,9 +67,13 @@ spec:
               forProvider:
                 properties:
                   destinationConfig:
+                    description: Configuration block with destination configuration.
+                      See below for details.
                     items:
                       properties:
                         onFailure:
+                          description: Configuration block with destination configuration
+                            for failed asynchronous invocations. See below for details.
                           items:
                             properties:
                               destination:
@@ -154,6 +159,9 @@ spec:
                             type: object
                           type: array
                         onSuccess:
+                          description: Configuration block with destination configuration
+                            for successful asynchronous invocations. See below for
+                            details.
                           items:
                             properties:
                               destination:
@@ -241,12 +249,21 @@ spec:
                       type: object
                     type: array
                   functionName:
+                    description: Name or Amazon Resource Name  of the Lambda Function,
+                      omitting any version or alias qualifier.
                     type: string
                   maximumEventAgeInSeconds:
+                    description: Maximum age of a request that Lambda sends to a function
+                      for processing in seconds. Valid values between 60 and 21600.
                     type: number
                   maximumRetryAttempts:
+                    description: Maximum number of times to retry when the function
+                      returns an error. Valid values between 0 and 2. Defaults to
+                      2.
                     type: number
                   qualifier:
+                    description: Lambda Function published version, $LATEST, or Lambda
+                      Alias name.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -434,6 +451,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: Fully qualified Lambda Function name or Amazon Resource
+                      Name
                     type: string
                 type: object
               conditions:

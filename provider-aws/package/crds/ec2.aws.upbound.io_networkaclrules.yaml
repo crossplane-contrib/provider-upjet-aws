@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: NetworkACLRule is the Schema for the NetworkACLRules API
+        description: NetworkACLRule is the Schema for the NetworkACLRules API. Provides
+          an network ACL Rule resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,18 +65,29 @@ spec:
               forProvider:
                 properties:
                   cidrBlock:
+                    description: The network range to allow or deny, in CIDR notation
+                      .
                     type: string
                   egress:
+                    description: Indicates whether this is an egress rule . Default
+                      false.
                     type: boolean
                   fromPort:
+                    description: The from port to match.
                     type: number
                   icmpCode:
+                    description: 'ICMP protocol: The ICMP code. Required if specifying
+                      ICMP for the protocolE.g., -1'
                     type: number
                   icmpType:
+                    description: 'ICMP protocol: The ICMP type. Required if specifying
+                      ICMP for the protocolE.g., -1'
                     type: number
                   ipv6CidrBlock:
+                    description: The IPv6 CIDR block to allow or deny.
                     type: string
                   networkAclId:
+                    description: The ID of the network ACL.
                     type: string
                   networkAclIdRef:
                     description: A Reference to a named object.
@@ -151,16 +163,22 @@ spec:
                         type: object
                     type: object
                   protocol:
+                    description: The protocol. A value of -1 means all protocols.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   ruleAction:
+                    description: 'Indicates whether to allow or deny the traffic that
+                      matches the rule. Accepted values: allow | deny'
                     type: string
                   ruleNumber:
+                    description: The rule number for the entry . ACL entries are processed
+                      in ascending order by rule number.
                     type: number
                   toPort:
+                    description: The to port to match.
                     type: number
                 required:
                 - protocol
@@ -345,6 +363,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the network ACL Rule
                     type: string
                 type: object
               conditions:

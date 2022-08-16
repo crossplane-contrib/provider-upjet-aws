@@ -14,11 +14,14 @@ import (
 )
 
 type HostedZoneDNSSECObservation struct {
+
+	// Route 53 Hosted Zone identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type HostedZoneDNSSECParameters struct {
 
+	// Identifier of the Route 53 Hosted Zone.
 	// +crossplane:generate:reference:type=Zone
 	// +kubebuilder:validation:Optional
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
@@ -34,6 +37,7 @@ type HostedZoneDNSSECParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Hosted Zone signing status. Valid values: SIGNING, NOT_SIGNING. Defaults to SIGNING.
 	// +kubebuilder:validation:Optional
 	SigningStatus *string `json:"signingStatus,omitempty" tf:"signing_status,omitempty"`
 }
@@ -52,7 +56,7 @@ type HostedZoneDNSSECStatus struct {
 
 // +kubebuilder:object:root=true
 
-// HostedZoneDNSSEC is the Schema for the HostedZoneDNSSECs API
+// HostedZoneDNSSEC is the Schema for the HostedZoneDNSSECs API. Manages Route 53 Hosted Zone DNSSEC
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,13 +14,17 @@ import (
 )
 
 type DomainNameConfigurationObservation struct {
+
+	// Amazon Route 53 Hosted Zone ID of the endpoint.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
+	// Target domain name.
 	TargetDomainName *string `json:"targetDomainName,omitempty" tf:"target_domain_name,omitempty"`
 }
 
 type DomainNameConfigurationParameters struct {
 
+	// ARN of an AWS-managed certificate that will be used by the endpoint for the domain name. AWS Certificate Manager is the only supported source. Use the aws_acm_certificate resource to configure an ACM certificate.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/acm/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -32,33 +36,45 @@ type DomainNameConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
+	// Endpoint type. Valid values: REGIONAL.
 	// +kubebuilder:validation:Required
 	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
 
+	// ARN of the AWS-issued certificate used to validate custom domain ownership
 	// +kubebuilder:validation:Optional
 	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
 
+	// Transport Layer Security  version of the security policy for the domain name. Valid values: TLS_1_2.
 	// +kubebuilder:validation:Required
 	SecurityPolicy *string `json:"securityPolicy" tf:"security_policy,omitempty"`
 }
 
 type DomainNameObservation struct {
+
+	// API mapping selection expression for the domain name.
 	APIMappingSelectionExpression *string `json:"apiMappingSelectionExpression,omitempty" tf:"api_mapping_selection_expression,omitempty"`
 
+	// ARN of the domain name.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Domain name configuration. See below.
+	// +kubebuilder:validation:Required
 	DomainNameConfiguration []DomainNameConfigurationObservation `json:"domainNameConfiguration,omitempty" tf:"domain_name_configuration,omitempty"`
 
+	// Domain name identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type DomainNameParameters struct {
 
+	// Domain name configuration. See below.
 	// +kubebuilder:validation:Required
 	DomainNameConfiguration []DomainNameConfigurationParameters `json:"domainNameConfiguration" tf:"domain_name_configuration,omitempty"`
 
+	// Mutual TLS authentication configuration for the domain name.
 	// +kubebuilder:validation:Optional
 	MutualTLSAuthentication []MutualTLSAuthenticationParameters `json:"mutualTlsAuthentication,omitempty" tf:"mutual_tls_authentication,omitempty"`
 
@@ -67,6 +83,7 @@ type DomainNameParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Map of tags to assign to the domain name. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -76,9 +93,11 @@ type MutualTLSAuthenticationObservation struct {
 
 type MutualTLSAuthenticationParameters struct {
 
+	// Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version.
 	// +kubebuilder:validation:Required
 	TruststoreURI *string `json:"truststoreUri" tf:"truststore_uri,omitempty"`
 
+	// Version of the S3 object that contains the truststore. To specify a version, you must have versioning enabled for the S3 bucket.
 	// +kubebuilder:validation:Optional
 	TruststoreVersion *string `json:"truststoreVersion,omitempty" tf:"truststore_version,omitempty"`
 }
@@ -97,7 +116,7 @@ type DomainNameStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DomainName is the Schema for the DomainNames API
+// DomainName is the Schema for the DomainNames API. Manages an Amazon API Gateway Version 2 domain name.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

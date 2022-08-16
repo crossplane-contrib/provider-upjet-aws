@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: DataCatalogEncryptionSettings is the Schema for the DataCatalogEncryptionSettingss
-          API
+          API. Provides a Glue Data Catalog Encryption Settings resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,14 +66,31 @@ spec:
               forProvider:
                 properties:
                   catalogId:
+                    description: –  The ID of the Data Catalog to set the security
+                      configuration for. If none is provided, the AWS account ID is
+                      used by default.
                     type: string
                   dataCatalogEncryptionSettings:
+                    description: –  The security configuration to set. see Data Catalog
+                      Encryption Settings.
                     items:
                       properties:
                         connectionPasswordEncryption:
+                          description: When connection password protection is enabled,
+                            the Data Catalog uses a customer-provided key to encrypt
+                            the password as part of CreateConnection or UpdateConnection
+                            and store it in the ENCRYPTED_PASSWORD field in the connection
+                            properties. You can enable catalog encryption or only
+                            password encryption. see Connection Password Encryption.
                           items:
                             properties:
                               awsKmsKeyId:
+                                description: A KMS key ARN that is used to encrypt
+                                  the connection password. If connection password
+                                  protection is enabled, the caller of CreateConnection
+                                  and UpdateConnection needs at least kms:Encrypt
+                                  permission on the specified AWS KMS key, to encrypt
+                                  passwords before storing them in the Data Catalog.
                                 type: string
                               awsKmsKeyIdRef:
                                 description: A Reference to a named object.
@@ -154,17 +171,28 @@ spec:
                                     type: object
                                 type: object
                               returnConnectionPasswordEncrypted:
+                                description: When set to true, passwords remain encrypted
+                                  in the responses of GetConnection and GetConnections.
+                                  This encryption takes effect independently of the
+                                  catalog encryption.
                                 type: boolean
                             required:
                             - returnConnectionPasswordEncrypted
                             type: object
                           type: array
                         encryptionAtRest:
+                          description: Specifies the encryption-at-rest configuration
+                            for the Data Catalog. see Encryption At Rest.
                           items:
                             properties:
                               catalogEncryptionMode:
+                                description: The encryption-at-rest mode for encrypting
+                                  Data Catalog data. Valid values are DISABLED and
+                                  SSE-KMS.
                                 type: string
                               sseAwsKmsKeyId:
+                                description: The ARN of the AWS KMS key to use for
+                                  encryption at rest.
                                 type: string
                               sseAwsKmsKeyIdRef:
                                 description: A Reference to a named object.
@@ -439,6 +467,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Data Catalog to set the security configuration
+                      for.
                     type: string
                 type: object
               conditions:

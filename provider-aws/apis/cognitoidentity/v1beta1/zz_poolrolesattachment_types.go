@@ -18,12 +18,15 @@ type MappingRuleObservation struct {
 
 type MappingRuleParameters struct {
 
+	// The claim name that must be present in the token, for example, "isAdmin" or "paid".
 	// +kubebuilder:validation:Required
 	Claim *string `json:"claim" tf:"claim,omitempty"`
 
+	// The match condition that specifies how closely the claim value in the IdP token must match Value.
 	// +kubebuilder:validation:Required
 	MatchType *string `json:"matchType" tf:"match_type,omitempty"`
 
+	// The role ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -35,16 +38,20 @@ type MappingRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// A brief string that the claim must match, for example, "paid" or "yes".
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type PoolRolesAttachmentObservation struct {
+
+	// The identity pool ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type PoolRolesAttachmentParameters struct {
 
+	// An identity pool ID in the format REGION_GUID.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cognitoidentity/v1beta1.Pool
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -61,9 +68,11 @@ type PoolRolesAttachmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A List of Role Mapping.
 	// +kubebuilder:validation:Optional
 	RoleMapping []RoleMappingParameters `json:"roleMapping,omitempty" tf:"role_mapping,omitempty"`
 
+	// The map of roles associated with this pool. For a given role, the key will be either "authenticated" or "unauthenticated" and the value will be the Role ARN.
 	// +kubebuilder:validation:Required
 	Roles map[string]*string `json:"roles" tf:"roles,omitempty"`
 }
@@ -73,15 +82,19 @@ type RoleMappingObservation struct {
 
 type RoleMappingParameters struct {
 
+	// Specifies the action to be taken if either no rules match the claim value for the Rules type, or there is no cognito:preferred_role claim and there are multiple cognito:roles matches for the Token type. Required if you specify Token or Rules as the Type.
 	// +kubebuilder:validation:Optional
 	AmbiguousRoleResolution *string `json:"ambiguousRoleResolution,omitempty" tf:"ambiguous_role_resolution,omitempty"`
 
+	// A string identifying the identity provider, for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id". Depends on cognito_identity_providers set on aws_cognito_identity_pool resource or a aws_cognito_identity_provider resource.
 	// +kubebuilder:validation:Required
 	IdentityProvider *string `json:"identityProvider" tf:"identity_provider,omitempty"`
 
+	// The Rules Configuration to be used for mapping users to roles. You can specify up to 25 rules per identity provider. Rules are evaluated in order. The first one to match specifies the role.
 	// +kubebuilder:validation:Optional
 	MappingRule []MappingRuleParameters `json:"mappingRule,omitempty" tf:"mapping_rule,omitempty"`
 
+	// The role mapping type.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -100,7 +113,7 @@ type PoolRolesAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PoolRolesAttachment is the Schema for the PoolRolesAttachments API
+// PoolRolesAttachment is the Schema for the PoolRolesAttachments API. Provides an AWS Cognito Identity Pool Roles Attachment.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

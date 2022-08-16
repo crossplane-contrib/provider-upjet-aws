@@ -14,25 +14,34 @@ import (
 )
 
 type StreamObservation struct {
+
+	// The Amazon Resource Name  specifying the Stream
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A time stamp that indicates when the stream was created.
 	CreationTime *string `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
 
+	// The unique Stream id
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// The version of the stream.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type StreamParameters struct {
 
+	// –  The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
 	// +kubebuilder:validation:Optional
 	DataRetentionInHours *float64 `json:"dataRetentionInHours,omitempty" tf:"data_retention_in_hours,omitempty"`
 
+	// The name of the device that is writing to the stream. In the current implementation, Kinesis Video Streams does not use this name.
 	// +kubebuilder:validation:Optional
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
+	// The ID of the AWS Key Management Service  key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key  is used.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -43,9 +52,12 @@ type StreamParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
+	// The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see Media Types. If you choose to specify the MediaType, see Naming Requirements for guidelines.
 	// +kubebuilder:validation:Optional
 	MediaType *string `json:"mediaType,omitempty" tf:"media_type,omitempty"`
 
+	// A name to identify the stream. This is unique to the
+	// AWS account and region the Stream is created in.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -54,6 +66,7 @@ type StreamParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -72,7 +85,7 @@ type StreamStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Stream is the Schema for the Streams API
+// Stream is the Schema for the Streams API. Provides a AWS Kinesis Video Stream
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

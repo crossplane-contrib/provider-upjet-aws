@@ -14,14 +14,20 @@ import (
 )
 
 type TransitGatewayRouteTableObservation struct {
+
+	// EC2 Transit Gateway Route Table Amazon Resource Name .
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Boolean whether this is the default association route table for the EC2 Transit Gateway.
 	DefaultAssociationRouteTable *bool `json:"defaultAssociationRouteTable,omitempty" tf:"default_association_route_table,omitempty"`
 
+	// Boolean whether this is the default propagation route table for the EC2 Transit Gateway.
 	DefaultPropagationRouteTable *bool `json:"defaultPropagationRouteTable,omitempty" tf:"default_propagation_route_table,omitempty"`
 
+	// EC2 Transit Gateway Route Table identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -32,9 +38,11 @@ type TransitGatewayRouteTableParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Key-value tags for the EC2 Transit Gateway Route Table. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Identifier of EC2 Transit Gateway.
 	// +crossplane:generate:reference:type=TransitGateway
 	// +kubebuilder:validation:Optional
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
@@ -60,7 +68,7 @@ type TransitGatewayRouteTableStatus struct {
 
 // +kubebuilder:object:root=true
 
-// TransitGatewayRouteTable is the Schema for the TransitGatewayRouteTables API
+// TransitGatewayRouteTable is the Schema for the TransitGatewayRouteTables API. Manages an EC2 Transit Gateway Route Table
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

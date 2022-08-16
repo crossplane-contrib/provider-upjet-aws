@@ -36,7 +36,9 @@ spec:
     schema:
       openAPIV3Schema:
         description: EventSourceMapping is the Schema for the EventSourceMappings
-          API
+          API. Provides a Lambda event source mapping. This allows Lambda functions
+          to get events from Kinesis, DynamoDB, SQS, Amazon MQ and Managed Streaming
+          for Apache Kafka (MSK).
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,16 +67,29 @@ spec:
               forProvider:
                 properties:
                   batchSize:
+                    description: The largest number of records that Lambda will retrieve
+                      from your event source at the time of invocation. Defaults to
+                      100 for DynamoDB, Kinesis, MQ and MSK, 10 for SQS.
                     type: number
                   bisectBatchOnFunctionError:
+                    description: If the function returns an error, split the batch
+                      in two and retry. Only available for stream sources . Defaults
+                      to false.
                     type: boolean
                   destinationConfig:
+                    description: An Amazon SQS queue or Amazon SNS topic destination
+                      for failed records. Only available for stream sources . Detailed
+                      below.
                     items:
                       properties:
                         onFailure:
+                          description: The destination configuration for failed invocations.
+                            Detailed below.
                           items:
                             properties:
                               destinationArn:
+                                description: The Amazon Resource Name  of the destination
+                                  resource.
                                 type: string
                             required:
                             - destinationArn
@@ -83,22 +98,36 @@ spec:
                       type: object
                     type: array
                   enabled:
+                    description: Determines if the mapping will be enabled on creation.
+                      Defaults to true.
                     type: boolean
                   eventSourceArn:
+                    description: The event source ARN - this is required for Kinesis
+                      stream, DynamoDB stream, SQS queue, MQ broker or MSK cluster.  It
+                      is incompatible with a Self Managed Kafka source.
                     type: string
                   filterCriteria:
+                    description: The criteria to use for event filtering Kinesis stream,
+                      DynamoDB stream, SQS queue event sources. Detailed below.
                     items:
                       properties:
                         filter:
+                          description: A set of up to 5 filter. If an event satisfies
+                            at least one, Lambda sends the event to the function or
+                            adds it to the next batch. Detailed below.
                           items:
                             properties:
                               pattern:
+                                description: A filter pattern up to 4096 characters.
+                                  See Filter Rule Syntax.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   functionName:
+                    description: The name or the ARN of the Lambda function that will
+                      be subscribing to events.
                     type: string
                   functionNameRef:
                     description: A Reference to a named object.
@@ -174,18 +203,41 @@ spec:
                         type: object
                     type: object
                   functionResponseTypes:
+                    description: 'A list of current response type enums applied to
+                      the event source mapping for AWS Lambda checkpointing. Only
+                      available for SQS and stream sources . Valid values: ReportBatchItemFailures.'
                     items:
                       type: string
                     type: array
                   maximumBatchingWindowInSeconds:
+                    description: The maximum amount of time to gather records before
+                      invoking the function, in seconds . Records will continue to
+                      buffer  until either maximum_batching_window_in_seconds expires
+                      or batch_size has been met. For streaming event sources, defaults
+                      to as soon as records are available in the stream. If the batch
+                      it reads from the stream/queue only has one record in it, Lambda
+                      only sends one record to the function. Only available for stream
+                      sources  and SQS standard queues.
                     type: number
                   maximumRecordAgeInSeconds:
+                    description: The maximum age of a record that Lambda sends to
+                      a function for processing. Only available for stream sources
+                      . Must be either -1  or between 60 and 604800 .
                     type: number
                   maximumRetryAttempts:
+                    description: The maximum number of times to retry when the function
+                      returns an error. Only available for stream sources . Minimum
+                      and default of -1 , maximum of 10000.
                     type: number
                   parallelizationFactor:
+                    description: The number of batches to process from each shard
+                      concurrently. Only available for stream sources . Minimum and
+                      default of 1, maximum of 10.
                     type: number
                   queues:
+                    description: The name of the Amazon MQ broker destination queue
+                      to consume. Only available for MQ sources. A single queue name
+                      must be specified.
                     items:
                       type: string
                     type: array
@@ -194,22 +246,42 @@ spec:
                       be created in.
                     type: string
                   selfManagedEventSource:
+                    description: For Self Managed Kafka sources, the location of the
+                      self managed cluster. If set, configuration must also include
+                      source_access_configuration. Detailed below.
                     items:
                       properties:
                         endpoints:
                           additionalProperties:
                             type: string
+                          description: A map of endpoints for the self managed source.  For
+                            Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS
+                            and the value should be a string with a comma separated
+                            list of broker endpoints.
                           type: object
                       required:
                       - endpoints
                       type: object
                     type: array
                   sourceAccessConfiguration:
+                    description: ':  For Self Managed Kafka sources, the access configuration
+                      for the source. If set, configuration must also include self_managed_event_source.
+                      Detailed below.'
                     items:
                       properties:
                         type:
+                          description: The type of this configuration.  For Self Managed
+                            Kafka you will need to supply blocks for type VPC_SUBNET
+                            and VPC_SECURITY_GROUP.
                           type: string
                         uri:
+                          description: The URI for this configuration.  For type VPC_SUBNET
+                            the value should be subnet:subnet_id where subnet_id is
+                            the value you would find in an aws_subnet resource's id
+                            attribute.  For type VPC_SECURITY_GROUP the value should
+                            be security_group:security_group_id where security_group_id
+                            is the value you would find in an aws_security_group resource's
+                            id attribute.
                           type: string
                       required:
                       - type
@@ -217,14 +289,30 @@ spec:
                       type: object
                     type: array
                   startingPosition:
+                    description: The position in the stream where AWS Lambda should
+                      start reading. Must be one of AT_TIMESTAMP , LATEST or TRIM_HORIZON
+                      if getting events from Kinesis, DynamoDB or MSK. Must not be
+                      provided if getting events from SQS. More information about
+                      these positions can be found in the AWS DynamoDB Streams API
+                      Reference and AWS Kinesis API Reference.
                     type: string
                   startingPositionTimestamp:
+                    description: A timestamp in RFC3339 format of the data record
+                      which to start reading when using starting_position set to AT_TIMESTAMP.
+                      If a record with this exact timestamp does not exist, the next
+                      later record is chosen. If the timestamp is older than the current
+                      trim horizon, the oldest available record is chosen.
                     type: string
                   topics:
+                    description: The name of the Kafka topics. Only available for
+                      MSK sources. A single topic name must be specified.
                     items:
                       type: string
                     type: array
                   tumblingWindowInSeconds:
+                    description: The duration in seconds of a processing window for
+                      AWS Lambda streaming analytics. The range is between 1 second
+                      up to 900 seconds. Only available for stream sources .
                     type: number
                 required:
                 - region
@@ -406,18 +494,27 @@ spec:
               atProvider:
                 properties:
                   functionArn:
+                    description: The the ARN of the Lambda function the event source
+                      mapping is sending events to.
                     type: string
                   id:
                     type: string
                   lastModified:
+                    description: The date this resource was last modified.
                     type: string
                   lastProcessingResult:
+                    description: The result of the last AWS Lambda invocation of your
+                      Lambda function.
                     type: string
                   state:
+                    description: The state of the event source mapping.
                     type: string
                   stateTransitionReason:
+                    description: The reason the event source mapping is in its current
+                      state.
                     type: string
                   uuid:
+                    description: The UUID of the created event source mapping.
                     type: string
                 type: object
               conditions:

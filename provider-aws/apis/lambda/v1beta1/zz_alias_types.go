@@ -14,18 +14,23 @@ import (
 )
 
 type AliasObservation struct {
+
+	// The Amazon Resource Name  identifying your Lambda function alias.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ARN to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri
 	InvokeArn *string `json:"invokeArn,omitempty" tf:"invoke_arn,omitempty"`
 }
 
 type AliasParameters struct {
 
+	// Description of the alias.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Lambda Function name or ARN.
 	// +crossplane:generate:reference:type=Function
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
@@ -36,9 +41,11 @@ type AliasParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
+	// Lambda function version for which you are creating the alias. Pattern: .
 	// +kubebuilder:validation:Required
 	FunctionVersion *string `json:"functionVersion" tf:"function_version,omitempty"`
 
+	// Name for the alias you are creating. Pattern:
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -47,6 +54,7 @@ type AliasParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The Lambda alias' route configuration settings. Fields documented below
 	// +kubebuilder:validation:Optional
 	RoutingConfig []RoutingConfigParameters `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
 }
@@ -56,6 +64,7 @@ type RoutingConfigObservation struct {
 
 type RoutingConfigParameters struct {
 
+	// A map that defines the proportion of events that should be sent to different versions of a lambda function.
 	// +kubebuilder:validation:Optional
 	AdditionalVersionWeights map[string]*float64 `json:"additionalVersionWeights,omitempty" tf:"additional_version_weights,omitempty"`
 }
@@ -74,7 +83,7 @@ type AliasStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Alias is the Schema for the Aliass API
+// Alias is the Schema for the Aliass API. Creates a Lambda function alias.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

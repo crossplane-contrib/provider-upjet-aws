@@ -14,45 +14,59 @@ import (
 )
 
 type WorkspaceObservation struct {
+
+	// The Amazon Resource Name  of the Grafana workspace.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The endpoint of the Grafana workspace.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
+	// The version of Grafana running on the workspace.
 	GrafanaVersion *string `json:"grafanaVersion,omitempty" tf:"grafana_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	SAMLConfigurationStatus *string `json:"samlConfigurationStatus,omitempty" tf:"saml_configuration_status,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type WorkspaceParameters struct {
 
+	// The type of account access for the workspace. Valid values are CURRENT_ACCOUNT and ORGANIZATION. If ORGANIZATION is specified, then organizational_units must also be present.
 	// +kubebuilder:validation:Required
 	AccountAccessType *string `json:"accountAccessType" tf:"account_access_type,omitempty"`
 
+	// The authentication providers for the workspace. Valid values are AWS_SSO, SAML, or both.
 	// +kubebuilder:validation:Required
 	AuthenticationProviders []*string `json:"authenticationProviders" tf:"authentication_providers,omitempty"`
 
+	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, XRAY
 	// +kubebuilder:validation:Optional
 	DataSources []*string `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
 
+	// The workspace description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The Grafana workspace name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The notification destinations. If a data source is specified here, Amazon Managed Grafana will create IAM roles and permissions needed to use these destinations. Must be set to SNS.
 	// +kubebuilder:validation:Optional
 	NotificationDestinations []*string `json:"notificationDestinations,omitempty" tf:"notification_destinations,omitempty"`
 
+	// The role name that the workspace uses to access resources through Amazon Organizations.
 	// +kubebuilder:validation:Optional
 	OrganizationRoleName *string `json:"organizationRoleName,omitempty" tf:"organization_role_name,omitempty"`
 
+	// The Amazon Organizations organizational units that the workspace is authorized to use data sources from.
 	// +kubebuilder:validation:Optional
 	OrganizationalUnits []*string `json:"organizationalUnits,omitempty" tf:"organizational_units,omitempty"`
 
+	// The permission type of the workspace. If SERVICE_MANAGED is specified, the IAM roles and IAM policy attachments are generated automatically. If CUSTOMER_MANAGED is specified, the IAM roles and IAM policy attachments will not be created.
 	// +kubebuilder:validation:Required
 	PermissionType *string `json:"permissionType" tf:"permission_type,omitempty"`
 
@@ -61,6 +75,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The IAM role ARN that the workspace assumes.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -72,9 +87,11 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// The AWS CloudFormation stack set name that provisions IAM roles to be used by the workspace.
 	// +kubebuilder:validation:Optional
 	StackSetName *string `json:"stackSetName,omitempty" tf:"stack_set_name,omitempty"`
 
+	// Key-value mapping of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -93,7 +110,7 @@ type WorkspaceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Workspace is the Schema for the Workspaces API
+// Workspace is the Schema for the Workspaces API. Provides an Amazon Managed Grafana workspace resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

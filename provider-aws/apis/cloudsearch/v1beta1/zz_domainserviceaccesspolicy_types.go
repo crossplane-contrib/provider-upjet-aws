@@ -19,9 +19,11 @@ type DomainServiceAccessPolicyObservation struct {
 
 type DomainServiceAccessPolicyParameters struct {
 
+	// The access rules you want to configure. These rules replace any existing rules. See the AWS documentation for details.
 	// +kubebuilder:validation:Required
 	AccessPolicy *string `json:"accessPolicy" tf:"access_policy,omitempty"`
 
+	// The CloudSearch domain name the policy applies to.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudsearch/v1beta1.Domain
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -53,7 +55,7 @@ type DomainServiceAccessPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DomainServiceAccessPolicy is the Schema for the DomainServiceAccessPolicys API
+// DomainServiceAccessPolicy is the Schema for the DomainServiceAccessPolicys API. Provides an CloudSearch domain service access policy resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

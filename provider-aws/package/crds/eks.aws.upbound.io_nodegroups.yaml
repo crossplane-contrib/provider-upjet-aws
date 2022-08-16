@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: NodeGroup is the Schema for the NodeGroups API
+        description: NodeGroup is the Schema for the NodeGroups API. Manages an EKS
+          Node Group
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,20 @@ spec:
               forProvider:
                 properties:
                   amiType:
+                    description: Type of Amazon Machine Image  associated with the
+                      EKS Node Group. See the AWS documentation for valid values.
+                      Terraform will only perform drift detection if a configuration
+                      value is provided.
                     type: string
                   capacityType:
+                    description: 'Type of capacity associated with the EKS Node Group.
+                      Valid values: ON_DEMAND, SPOT. Terraform will only perform drift
+                      detection if a configuration value is provided.'
                     type: string
                   clusterName:
+                    description: 00 characters in length. Must begin with an alphanumeric
+                      character, and must only contain alphanumeric characters, dashes
+                      and underscores .
                     type: string
                   clusterNameRef:
                     description: A Reference to a named object.
@@ -143,18 +154,32 @@ spec:
                         type: object
                     type: object
                   diskSize:
+                    description: Disk size in GiB for worker nodes. Defaults to 20.
+                      Terraform will only perform drift detection if a configuration
+                      value is provided.
                     type: number
                   forceUpdateVersion:
+                    description: Force version update if existing pods are unable
+                      to be drained due to a pod disruption budget issue.
                     type: boolean
                   instanceTypes:
+                    description: List of instance types associated with the EKS Node
+                      Group. Defaults to ["t3.medium"]. Terraform will only perform
+                      drift detection if a configuration value is provided.
                     items:
                       type: string
                     type: array
                   labels:
                     additionalProperties:
                       type: string
+                    description: Key-value map of Kubernetes labels. Only labels that
+                      are applied with the EKS API are managed by this argument. Other
+                      Kubernetes labels applied to the EKS Node Group will not be
+                      managed.
                     type: object
                   launchTemplate:
+                    description: Configuration block with Launch Template settings.
+                      Detailed below.
                     items:
                       properties:
                         id:
@@ -168,6 +193,8 @@ spec:
                       type: object
                     type: array
                   nodeRoleArn:
+                    description: –  Amazon Resource Name  of the IAM Role that provides
+                      permissions for the EKS Node Group.
                     type: string
                   nodeRoleArnRef:
                     description: A Reference to a named object.
@@ -247,11 +274,21 @@ spec:
                       be created in.
                     type: string
                   releaseVersion:
+                    description: –  AMI version of the EKS Node Group. Defaults to
+                      latest version for Kubernetes version.
                     type: string
                   remoteAccess:
+                    description: Configuration block with remote access settings.
+                      Detailed below.
                     items:
                       properties:
                         ec2SshKey:
+                          description: EC2 Key Pair name that provides access for
+                            SSH communication with the worker nodes in the EKS Node
+                            Group. If you specify this configuration, but do not specify
+                            source_security_group_ids when you create an EKS Node
+                            Group, port 22 on the worker nodes is opened to the Internet
+                            .
                           type: string
                         sourceSecurityGroupIdRefs:
                           items:
@@ -333,19 +370,29 @@ spec:
                               type: object
                           type: object
                         sourceSecurityGroupIds:
+                          description: Set of EC2 Security Group IDs to allow SSH
+                            access  from on the worker nodes. If you specify ec2_ssh_key,
+                            but do not specify this configuration when you create
+                            an EKS Node Group, port 22 on the worker nodes is opened
+                            to the Internet .
                           items:
                             type: string
                           type: array
                       type: object
                     type: array
                   scalingConfig:
+                    description: Configuration block with scaling settings. Detailed
+                      below.
                     items:
                       properties:
                         desiredSize:
+                          description: Desired number of worker nodes.
                           type: number
                         maxSize:
+                          description: Maximum number of worker nodes.
                           type: number
                         minSize:
+                          description: Minimum number of worker nodes.
                           type: number
                       required:
                       - desiredSize
@@ -429,21 +476,34 @@ spec:
                         type: object
                     type: object
                   subnetIds:
+                    description: '–  Identifiers of EC2 Subnets to associate with
+                      the EKS Node Group. These subnets must have the following resource
+                      tag: kubernetes.io/cluster/CLUSTER_NAME .'
                     items:
                       type: string
                     type: array
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                   taint:
+                    description: The Kubernetes taints to be applied to the nodes
+                      in the node group. Maximum of 50 taints per node group. Detailed
+                      below.
                     items:
                       properties:
                         effect:
+                          description: 'The effect of the taint. Valid values: NO_SCHEDULE,
+                            NO_EXECUTE, PREFER_NO_SCHEDULE.'
                           type: string
                         key:
+                          description: The key of the taint. Maximum length of 63.
                           type: string
                         value:
+                          description: The value of the taint. Maximum length of 63.
                           type: string
                       required:
                       - effect
@@ -454,8 +514,12 @@ spec:
                     items:
                       properties:
                         maxUnavailable:
+                          description: Desired max number of unavailable worker nodes
+                            during node group update.
                           type: number
                         maxUnavailablePercentage:
+                          description: Desired max percentage of unavailable worker
+                            nodes during node group update.
                           type: number
                       type: object
                     type: array
@@ -642,13 +706,18 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name  of the EKS Node Group.
                     type: string
                   id:
                     type: string
                   resources:
+                    description: List of objects containing information about underlying
+                      resources.
                     items:
                       properties:
                         autoscalingGroups:
+                          description: List of objects containing information about
+                            AutoScaling Groups.
                           items:
                             properties:
                               name:
@@ -656,14 +725,20 @@ spec:
                             type: object
                           type: array
                         remoteAccessSecurityGroupId:
+                          description: Identifier of the remote access EC2 Security
+                            Group.
                           type: string
                       type: object
                     type: array
                   status:
+                    description: Status of the EKS Node Group.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

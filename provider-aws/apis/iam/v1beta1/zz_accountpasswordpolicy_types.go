@@ -14,6 +14,8 @@ import (
 )
 
 type AccountPasswordPolicyObservation struct {
+
+	// Indicates whether passwords in the account expire. Returns true if max_password_age contains a value greater than 0. Returns false if it is 0 or not present.
 	ExpirePasswords *bool `json:"expirePasswords,omitempty" tf:"expire_passwords,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -21,30 +23,39 @@ type AccountPasswordPolicyObservation struct {
 
 type AccountPasswordPolicyParameters struct {
 
+	// Whether to allow users to change their own password
 	// +kubebuilder:validation:Optional
 	AllowUsersToChangePassword *bool `json:"allowUsersToChangePassword,omitempty" tf:"allow_users_to_change_password,omitempty"`
 
+	// Whether users are prevented from setting a new password after their password has expired
 	// +kubebuilder:validation:Optional
 	HardExpiry *bool `json:"hardExpiry,omitempty" tf:"hard_expiry,omitempty"`
 
+	// The number of days that an user password is valid.
 	// +kubebuilder:validation:Optional
 	MaxPasswordAge *float64 `json:"maxPasswordAge,omitempty" tf:"max_password_age,omitempty"`
 
+	// Minimum length to require for user passwords.
 	// +kubebuilder:validation:Optional
 	MinimumPasswordLength *float64 `json:"minimumPasswordLength,omitempty" tf:"minimum_password_length,omitempty"`
 
+	// The number of previous passwords that users are prevented from reusing.
 	// +kubebuilder:validation:Optional
 	PasswordReusePrevention *float64 `json:"passwordReusePrevention,omitempty" tf:"password_reuse_prevention,omitempty"`
 
+	// Whether to require lowercase characters for user passwords.
 	// +kubebuilder:validation:Optional
 	RequireLowercaseCharacters *bool `json:"requireLowercaseCharacters,omitempty" tf:"require_lowercase_characters,omitempty"`
 
+	// Whether to require numbers for user passwords.
 	// +kubebuilder:validation:Optional
 	RequireNumbers *bool `json:"requireNumbers,omitempty" tf:"require_numbers,omitempty"`
 
+	// Whether to require symbols for user passwords.
 	// +kubebuilder:validation:Optional
 	RequireSymbols *bool `json:"requireSymbols,omitempty" tf:"require_symbols,omitempty"`
 
+	// Whether to require uppercase characters for user passwords.
 	// +kubebuilder:validation:Optional
 	RequireUppercaseCharacters *bool `json:"requireUppercaseCharacters,omitempty" tf:"require_uppercase_characters,omitempty"`
 }
@@ -63,7 +74,7 @@ type AccountPasswordPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// AccountPasswordPolicy is the Schema for the AccountPasswordPolicys API
+// AccountPasswordPolicy is the Schema for the AccountPasswordPolicys API. Manages Password Policy for the AWS Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

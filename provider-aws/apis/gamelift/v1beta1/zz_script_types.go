@@ -14,15 +14,20 @@ import (
 )
 
 type ScriptObservation struct {
+
+	// GameLift Script ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// GameLift Script ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ScriptParameters struct {
 
+	// Name of the script
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -31,15 +36,19 @@ type ScriptParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Information indicating where your game script files are stored. See below.
 	// +kubebuilder:validation:Optional
 	StorageLocation []ScriptStorageLocationParameters `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Version that is associated with this script.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
+	// A data object containing your Realtime scripts and dependencies as a zip  file. The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
 	// +kubebuilder:validation:Optional
 	ZipFile *string `json:"zipFile,omitempty" tf:"zip_file,omitempty"`
 }
@@ -49,6 +58,7 @@ type ScriptStorageLocationObservation struct {
 
 type ScriptStorageLocationParameters struct {
 
+	// Name of your S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -59,6 +69,7 @@ type ScriptStorageLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// Name of the zip file containing your script files.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Object
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("key",false)
 	// +kubebuilder:validation:Optional
@@ -70,9 +81,11 @@ type ScriptStorageLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	KeySelector *v1.Selector `json:"keySelector,omitempty" tf:"-"`
 
+	// A specific version of the file. If not set, the latest version of the file is retrieved.
 	// +kubebuilder:validation:Optional
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 
+	// ARN of the access role that allows Amazon GameLift to access your S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -99,7 +112,7 @@ type ScriptStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Script is the Schema for the Scripts API
+// Script is the Schema for the Scripts API. Provides a GameLift Script resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

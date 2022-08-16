@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Vault is the Schema for the Vaults API
+        description: Vault is the Schema for the Vaults API. Provides an AWS Backup
+          vault resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   kmsKeyArn:
+                    description: The server-side encryption key that is used to protect
+                      your backups.
                     type: string
                   kmsKeyArnRef:
                     description: A Reference to a named object.
@@ -145,6 +148,10 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Metadata that you can assign to help organize the
+                      resources that you create. If configured with a provider default_tags
+                      configuration block present, tags with matching keys will overwrite
+                      those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -326,14 +333,21 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN of the vault.
                     type: string
                   id:
+                    description: The name of the vault.
                     type: string
                   recoveryPoints:
+                    description: The number of recovery points that are stored in
+                      a backup vault.
                     type: number
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

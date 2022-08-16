@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Cluster is the Schema for the Clusters API
+        description: Cluster is the Schema for the Clusters API. Manages an EKS Cluster
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,22 +64,38 @@ spec:
               forProvider:
                 properties:
                   enabledClusterLogTypes:
+                    description: List of the desired control plane logging to enable.
+                      For more information, see Amazon EKS Control Plane Logging.
                     items:
                       type: string
                     type: array
                   encryptionConfig:
+                    description: Configuration block with encryption configuration
+                      for the cluster. Only available on Kubernetes 1.13 and above
+                      clusters created after March 6, 2020. Detailed below.
                     items:
                       properties:
                         provider:
+                          description: Configuration block with provider for encryption.
+                            Detailed below.
                           items:
                             properties:
                               keyArn:
+                                description: ARN of the Key Management Service  customer
+                                  master key . The CMK must be symmetric, created
+                                  in the same region as the cluster, and if the CMK
+                                  was created in a different account, the user must
+                                  have access to the CMK. For more information, see
+                                  Allowing Users in Other Accounts to Use a CMK in
+                                  the AWS Key Management Service Developer Guide.
                                 type: string
                             required:
                             - keyArn
                             type: object
                           type: array
                         resources:
+                          description: 'List of strings with resources to be encrypted.
+                            Valid values: secrets.'
                           items:
                             type: string
                           type: array
@@ -89,11 +105,27 @@ spec:
                       type: object
                     type: array
                   kubernetesNetworkConfig:
+                    description: Configuration block with kubernetes network configuration
+                      for the cluster. Detailed below. If removed, Terraform will
+                      only perform drift detection if a configuration value is provided.
                     items:
                       properties:
                         ipFamily:
+                          description: The IP family used to assign Kubernetes pod
+                            and service addresses. Valid values are ipv4  and ipv6.
+                            You can only specify an IP family when you create a cluster,
+                            changing this value will force a new cluster to be created.
                           type: string
                         serviceIpv4Cidr:
+                          description: 'The CIDR block to assign Kubernetes service
+                            IP addresses from. If you don''t specify a block, Kubernetes
+                            assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16
+                            CIDR blocks. We recommend that you specify a block that
+                            does not overlap with resources in other networks that
+                            are peered or connected to your VPC. You can only specify
+                            a custom CIDR block when you create a cluster, changing
+                            this value will force a new cluster to be created. The
+                            block must meet the following requirements:'
                           type: string
                       type: object
                     type: array
@@ -102,6 +134,13 @@ spec:
                       be created in.
                     type: string
                   roleArn:
+                    description: ARN of the IAM role that provides permissions for
+                      the Kubernetes control plane to make calls to AWS API operations
+                      on your behalf. Ensure the resource configuration includes explicit
+                      dependencies on the IAM Role permissions by adding depends_on
+                      if using the aws_iam_role_policy resource or aws_iam_role_policy_attachment
+                      resource, otherwise EKS cannot delete EKS managed EC2 infrastructure
+                      such as Security Groups on EKS Cluster deletion.
                     type: string
                   roleArnRef:
                     description: A Reference to a named object.
@@ -179,17 +218,35 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags. If configured with
+                      a provider default_tags configuration block present, tags with
+                      matching keys will overwrite those defined at the provider-level.
                     type: object
                   version:
+                    description: –  Desired Kubernetes master version. If you do not
+                      specify a value, the latest available version at resource creation
+                      is used and no upgrades will occur except those automatically
+                      triggered by EKS. The value must be configured and increased
+                      to upgrade the version when desired. Downgrades are not supported
+                      by EKS.
                     type: string
                   vpcConfig:
                     items:
                       properties:
                         endpointPrivateAccess:
+                          description: Whether the Amazon EKS private API server endpoint
+                            is enabled. Default is false.
                           type: boolean
                         endpointPublicAccess:
+                          description: Whether the Amazon EKS public API server endpoint
+                            is enabled. Default is true.
                           type: boolean
                         publicAccessCidrs:
+                          description: List of CIDR blocks. Indicates which CIDR blocks
+                            can access the Amazon EKS public API server endpoint when
+                            enabled. EKS defaults this to a list with 0.0.0.0/0. Terraform
+                            will only perform drift detection of its value when present
+                            in a configuration.
                           items:
                             type: string
                           type: array
@@ -273,6 +330,9 @@ spec:
                               type: object
                           type: object
                         securityGroupIds:
+                          description: ccount elastic network interfaces that Amazon
+                            EKS creates to use to allow communication between your
+                            worker nodes and the Kubernetes control plane.
                           items:
                             type: string
                           type: array
@@ -356,6 +416,9 @@ spec:
                               type: object
                           type: object
                         subnetIds:
+                          description: ccount elastic network interfaces in these
+                            subnets to allow communication between your worker nodes
+                            and the Kubernetes control plane.
                           items:
                             type: string
                           type: array
@@ -542,46 +605,73 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: ARN of the cluster.
                     type: string
                   certificateAuthority:
+                    description: Attribute block containing certificate-authority-data
+                      for your cluster. Detailed below.
                     items:
                       properties:
                         data:
+                          description: Base64 encoded certificate data required to
+                            communicate with your cluster. Add this to the certificate-authority-data
+                            section of the kubeconfig file for your cluster.
                           type: string
                       type: object
                     type: array
                   createdAt:
+                    description: Unix epoch timestamp in seconds for when the cluster
+                      was created.
                     type: string
                   endpoint:
+                    description: Endpoint for your Kubernetes API server.
                     type: string
                   id:
+                    description: Name of the cluster.
                     type: string
                   identity:
+                    description: Attribute block containing identity provider information
+                      for your cluster. Only available on Kubernetes version 1.13
+                      and 1.14 clusters created or upgraded on or after September
+                      3, 2019. Detailed below.
                     items:
                       properties:
                         oidc:
+                          description: Nested block containing OpenID Connect identity
+                            provider information for the cluster. Detailed below.
                           items:
                             properties:
                               issuer:
+                                description: Issuer URL for the OpenID Connect identity
+                                  provider.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   platformVersion:
+                    description: Platform version for the cluster.
                     type: string
                   status:
+                    description: Status of the EKS cluster. One of CREATING, ACTIVE,
+                      DELETING, FAILED.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                   vpcConfig:
                     items:
                       properties:
                         clusterSecurityGroupId:
+                          description: Cluster security group that was created by
+                            Amazon EKS for the cluster. Managed node groups use this
+                            security group for control-plane-to-data-plane communication.
                           type: string
                         vpcId:
+                          description: ID of the VPC associated with your cluster.
                           type: string
                       type: object
                     type: array

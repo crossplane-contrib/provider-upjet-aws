@@ -14,11 +14,14 @@ import (
 )
 
 type IntegrationResponseObservation struct {
+
+	// The integration response identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type IntegrationResponseParameters struct {
 
+	// The API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -29,9 +32,11 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
+	// How to handle response payload content type conversions. Valid values: CONVERT_TO_BINARY, CONVERT_TO_TEXT.
 	// +kubebuilder:validation:Optional
 	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
 
+	// The identifier of the aws_apigatewayv2_integration.
 	// +crossplane:generate:reference:type=Integration
 	// +kubebuilder:validation:Optional
 	IntegrationID *string `json:"integrationId,omitempty" tf:"integration_id,omitempty"`
@@ -42,6 +47,7 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	IntegrationIDSelector *v1.Selector `json:"integrationIdSelector,omitempty" tf:"-"`
 
+	// The integration response key.
 	// +kubebuilder:validation:Required
 	IntegrationResponseKey *string `json:"integrationResponseKey" tf:"integration_response_key,omitempty"`
 
@@ -50,9 +56,11 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client.
 	// +kubebuilder:validation:Optional
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
+	// The template selection expression for the integration response.
 	// +kubebuilder:validation:Optional
 	TemplateSelectionExpression *string `json:"templateSelectionExpression,omitempty" tf:"template_selection_expression,omitempty"`
 }
@@ -71,7 +79,7 @@ type IntegrationResponseStatus struct {
 
 // +kubebuilder:object:root=true
 
-// IntegrationResponse is the Schema for the IntegrationResponses API
+// IntegrationResponse is the Schema for the IntegrationResponses API. Manages an Amazon API Gateway Version 2 integration response.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

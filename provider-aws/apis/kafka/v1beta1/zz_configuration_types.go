@@ -14,21 +14,27 @@ import (
 )
 
 type ConfigurationObservation struct {
+
+	// Amazon Resource Name  of the configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Latest revision of the configuration.
 	LatestRevision *float64 `json:"latestRevision,omitempty" tf:"latest_revision,omitempty"`
 }
 
 type ConfigurationParameters struct {
 
+	// Description of the configuration.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// List of Apache Kafka versions which can use this configuration.
 	// +kubebuilder:validation:Optional
 	KafkaVersions []*string `json:"kafkaVersions,omitempty" tf:"kafka_versions,omitempty"`
 
+	// Name of the configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -37,6 +43,7 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Contents of the server.properties file. Supported properties are documented in the MSK Developer Guide.
 	// +kubebuilder:validation:Required
 	ServerProperties *string `json:"serverProperties" tf:"server_properties,omitempty"`
 }
@@ -55,7 +62,7 @@ type ConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Configuration is the Schema for the Configurations API
+// Configuration is the Schema for the Configurations API. Terraform resource for managing an Amazon Managed Streaming for Kafka configuration
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

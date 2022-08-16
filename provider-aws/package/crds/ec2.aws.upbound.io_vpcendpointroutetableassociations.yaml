@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: VPCEndpointRouteTableAssociation is the Schema for the VPCEndpointRouteTableAssociations
-          API
+          API. Manages a VPC Endpoint Route Table Association
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -70,6 +70,8 @@ spec:
                       be created in.
                     type: string
                   routeTableId:
+                    description: Identifier of the EC2 Route Table to be associated
+                      with the VPC Endpoint.
                     type: string
                   routeTableIdRef:
                     description: A Reference to a named object.
@@ -145,6 +147,8 @@ spec:
                         type: object
                     type: object
                   vpcEndpointId:
+                    description: Identifier of the VPC Endpoint with which the EC2
+                      Route Table will be associated.
                     type: string
                   vpcEndpointIdRef:
                     description: A Reference to a named object.
@@ -400,6 +404,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: A hash of the EC2 Route Table and VPC Endpoint identifiers.
                     type: string
                 type: object
               conditions:

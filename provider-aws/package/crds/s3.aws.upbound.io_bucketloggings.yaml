@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: BucketLogging is the Schema for the BucketLoggings API
+        description: BucketLogging is the Schema for the BucketLoggings API. Provides
+          an S3 bucket (server access) logging resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the bucket.
                     type: string
                   bucketRef:
                     description: A Reference to a named object.
@@ -139,12 +141,15 @@ spec:
                         type: object
                     type: object
                   expectedBucketOwner:
+                    description: The account ID of the expected bucket owner.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   targetBucket:
+                    description: The name of the bucket where you want Amazon S3 to
+                      store server access logs.
                     type: string
                   targetBucketRef:
                     description: A Reference to a named object.
@@ -220,24 +225,36 @@ spec:
                         type: object
                     type: object
                   targetGrant:
+                    description: Set of configuration blocks with information for
+                      granting permissions documented below.
                     items:
                       properties:
                         grantee:
+                          description: A configuration block for the person being
+                            granted permissions documented below.
                           items:
                             properties:
                               emailAddress:
+                                description: Email address of the grantee. See Regions
+                                  and Endpoints for supported AWS regions where this
+                                  argument can be specified.
                                 type: string
                               id:
                                 type: string
                               type:
+                                description: 'Type of grantee. Valid values: CanonicalUser,
+                                  AmazonCustomerByEmail, Group.'
                                 type: string
                               uri:
+                                description: URI of the grantee group.
                                 type: string
                             required:
                             - type
                             type: object
                           type: array
                         permission:
+                          description: 'Logging permissions assigned to the grantee
+                            for the bucket. Valid values: FULL_CONTROL, READ, WRITE.'
                           type: string
                       required:
                       - grantee
@@ -245,6 +262,7 @@ spec:
                       type: object
                     type: array
                   targetPrefix:
+                    description: A prefix for all log object keys.
                     type: string
                 required:
                 - region
@@ -429,9 +447,13 @@ spec:
                   id:
                     type: string
                   targetGrant:
+                    description: Set of configuration blocks with information for
+                      granting permissions documented below.
                     items:
                       properties:
                         grantee:
+                          description: A configuration block for the person being
+                            granted permissions documented below.
                           items:
                             properties:
                               displayName:

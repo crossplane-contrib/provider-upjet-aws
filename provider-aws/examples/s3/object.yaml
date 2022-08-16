@@ -1,12 +1,12 @@
 apiVersion: s3.aws.upbound.io/v1beta1
-kind: BucketObject
+kind: Object
 metadata:
   name: example
 spec:
   forProvider:
     region: us-west-1
-    bucket: example
-    key: new_object_key
+    bucket: upbound-example
+    key: object_key
     contentBase64: dGhpcyBpcyBhIHRleHQg
   providerConfigRef:
     name: default

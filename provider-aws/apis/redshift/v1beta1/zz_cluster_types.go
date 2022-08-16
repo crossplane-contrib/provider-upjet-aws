@@ -14,10 +14,14 @@ import (
 )
 
 type ClusterNodesObservation struct {
+
+	// Whether the node is a leader node or a compute node
 	NodeRole *string `json:"nodeRole,omitempty" tf:"node_role,omitempty"`
 
+	// The private IP address of a node within a cluster
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
+	// The public IP address of a node within a cluster
 	PublicIPAddress *string `json:"publicIpAddress,omitempty" tf:"public_ip_address,omitempty"`
 }
 
@@ -25,19 +29,26 @@ type ClusterNodesParameters struct {
 }
 
 type ClusterObservation struct {
+
+	// Amazon Resource Name  of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The nodes in the cluster. Cluster node blocks are documented below
 	ClusterNodes []ClusterNodesObservation `json:"clusterNodes,omitempty" tf:"cluster_nodes,omitempty"`
 
+	// The DNS name of the cluster
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
+	// The Redshift Cluster ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ClusterParameters struct {
 
+	// If true , major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. Default is true
 	// +kubebuilder:validation:Optional
 	AllowVersionUpgrade *bool `json:"allowVersionUpgrade,omitempty" tf:"allow_version_upgrade,omitempty"`
 
@@ -47,15 +58,18 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// If true, the cluster can be relocated to another availabity zone, either automatically by AWS or when requested. Default is false. Available for use on clusters from the RA3 instance family.
 	// +kubebuilder:validation:Optional
 	AvailabilityZoneRelocationEnabled *bool `json:"availabilityZoneRelocationEnabled,omitempty" tf:"availability_zone_relocation_enabled,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ClusterParameterGroupName *string `json:"clusterParameterGroupName,omitempty" tf:"cluster_parameter_group_name,omitempty"`
 
+	// The public key for the cluster
 	// +kubebuilder:validation:Optional
 	ClusterPublicKey *string `json:"clusterPublicKey,omitempty" tf:"cluster_public_key,omitempty"`
 
+	// The specific revision number of the database in the cluster
 	// +kubebuilder:validation:Optional
 	ClusterRevisionNumber *string `json:"clusterRevisionNumber,omitempty" tf:"cluster_revision_number,omitempty"`
 
@@ -74,18 +88,22 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
+	// The Elastic IP  address for the cluster.
 	// +kubebuilder:validation:Optional
 	ElasticIP *string `json:"elasticIp,omitempty" tf:"elastic_ip,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
+	// The connection endpoint
 	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
+	// If true , enhanced VPC routing is enabled.
 	// +kubebuilder:validation:Optional
 	EnhancedVPCRouting *bool `json:"enhancedVpcRouting,omitempty" tf:"enhanced_vpc_routing,omitempty"`
 
+	// The identifier of the final snapshot that is to be created immediately before deleting the cluster. If this parameter is provided, skip_final_snapshot must be false.
 	// +kubebuilder:validation:Optional
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
@@ -95,12 +113,14 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
+	// A list of IAM Role ARNs to associate with the cluster. A Maximum of 10 can be associated to the cluster at any time.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
 	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
 	// +kubebuilder:validation:Optional
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
+	// The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -111,21 +131,28 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
+	// Logging, documented below.
 	// +kubebuilder:validation:Optional
 	Logging []LoggingParameters `json:"logging,omitempty" tf:"logging,omitempty"`
 
+	// Password for the master DB user.
+	// Note that this may show up in logs, and it will be stored in the state file. Password must contain at least 8 chars and
+	// contain at least one uppercase letter, one lowercase letter, and one number.
 	// +kubebuilder:validation:Optional
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 
+	// Username for the master DB user.
 	// +kubebuilder:validation:Optional
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
 	// +kubebuilder:validation:Required
 	NodeType *string `json:"nodeType" tf:"node_type,omitempty"`
 
+	// The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node. Default is 1.
 	// +kubebuilder:validation:Optional
 	NumberOfNodes *float64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
 
+	// The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.
 	// +kubebuilder:validation:Optional
 	OwnerAccount *string `json:"ownerAccount,omitempty" tf:"owner_account,omitempty"`
 
@@ -135,6 +162,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
+	// If true, the cluster can be accessed from a public network. Default is true.
 	// +kubebuilder:validation:Optional
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
@@ -143,18 +171,23 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Determines whether a final snapshot of the cluster is created before Amazon Redshift deletes the cluster. If true , a final cluster snapshot is not created. If false , a final cluster snapshot is created before the cluster is deleted. Default is false.
 	// +kubebuilder:validation:Optional
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
+	// The name of the cluster the source snapshot was created from.
 	// +kubebuilder:validation:Optional
 	SnapshotClusterIdentifier *string `json:"snapshotClusterIdentifier,omitempty" tf:"snapshot_cluster_identifier,omitempty"`
 
+	// Configuration of automatic copy of snapshots from one region to another. Documented below.
 	// +kubebuilder:validation:Optional
 	SnapshotCopy []SnapshotCopyParameters `json:"snapshotCopy,omitempty" tf:"snapshot_copy,omitempty"`
 
+	// The name of the snapshot from which to create the new cluster.
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
+	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -176,12 +209,16 @@ type LoggingObservation struct {
 
 type LoggingParameters struct {
 
+	// The name of an existing S3 bucket where the log files are to be stored. Must be in the same region as the cluster and the cluster must have read bucket and put object permissions.
+	// For more information on the permissions required for the bucket, please read the AWS documentation
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
+	// Enables logging information such as queries and connection attempts, for the specified Amazon Redshift cluster.
 	// +kubebuilder:validation:Required
 	Enable *bool `json:"enable" tf:"enable,omitempty"`
 
+	// The prefix applied to the log file names.
 	// +kubebuilder:validation:Optional
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 }
@@ -191,12 +228,15 @@ type SnapshotCopyObservation struct {
 
 type SnapshotCopyParameters struct {
 
+	// The destination region that you want to copy snapshots to.
 	// +kubebuilder:validation:Required
 	DestinationRegion *string `json:"destinationRegion" tf:"destination_region,omitempty"`
 
+	// The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.
 	// +kubebuilder:validation:Optional
 	GrantName *string `json:"grantName,omitempty" tf:"grant_name,omitempty"`
 
+	// The number of days to retain automated snapshots in the destination region after they are copied from the source region. Defaults to 7.
 	// +kubebuilder:validation:Optional
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 }
@@ -215,7 +255,7 @@ type ClusterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Cluster is the Schema for the Clusters API
+// Cluster is the Schema for the Clusters API. Provides a Redshift Cluster resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

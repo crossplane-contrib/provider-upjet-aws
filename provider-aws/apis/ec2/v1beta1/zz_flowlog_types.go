@@ -18,32 +18,42 @@ type DestinationOptionsObservation struct {
 
 type DestinationOptionsParameters struct {
 
+	// The format for the flow log. Default value: plain-text. Valid values: plain-text, parquet.
 	// +kubebuilder:validation:Optional
 	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
 
+	// Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon S3. Default value: false.
 	// +kubebuilder:validation:Optional
 	HiveCompatiblePartitions *bool `json:"hiveCompatiblePartitions,omitempty" tf:"hive_compatible_partitions,omitempty"`
 
+	// Indicates whether to partition the flow log per hour. This reduces the cost and response time for queries. Default value: false.
 	// +kubebuilder:validation:Optional
 	PerHourPartition *bool `json:"perHourPartition,omitempty" tf:"per_hour_partition,omitempty"`
 }
 
 type FlowLogObservation struct {
+
+	// The ARN of the Flow Log.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The Flow Log ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type FlowLogParameters struct {
 
+	// Describes the destination options for a flow log. More details below.
 	// +kubebuilder:validation:Optional
 	DestinationOptions []DestinationOptionsParameters `json:"destinationOptions,omitempty" tf:"destination_options,omitempty"`
 
+	// Elastic Network Interface ID to attach to
 	// +kubebuilder:validation:Optional
 	EniID *string `json:"eniId,omitempty" tf:"eni_id,omitempty"`
 
+	// The ARN for the IAM role that's used to post flow logs to a CloudWatch Logs log group
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -55,6 +65,7 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
+	// The ARN of the logging destination.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -66,15 +77,21 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDestinationSelector *v1.Selector `json:"logDestinationSelector,omitempty" tf:"-"`
 
+	// The type of the logging destination. Valid values: cloud-watch-logs, s3. Default: cloud-watch-logs.
 	// +kubebuilder:validation:Optional
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
+	// The fields to include in the flow log record, in the order in which they should appear.
 	// +kubebuilder:validation:Optional
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
+	// Deprecated: Use log_destination instead. The name of the CloudWatch log group.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
+	// The maximum interval of time
+	// during which a flow of packets is captured and aggregated into a flow
+	// log record. Valid Values: 60 seconds  or 600 seconds . Default: 600.
 	// +kubebuilder:validation:Optional
 	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
@@ -83,6 +100,7 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Subnet ID to attach to
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -93,12 +111,15 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.
 	// +kubebuilder:validation:Required
 	TrafficType *string `json:"trafficType" tf:"traffic_type,omitempty"`
 
+	// VPC ID to attach to
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -124,7 +145,7 @@ type FlowLogStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FlowLog is the Schema for the FlowLogs API
+// FlowLog is the Schema for the FlowLogs API. Provides a VPC/Subnet/ENI Flow Log
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

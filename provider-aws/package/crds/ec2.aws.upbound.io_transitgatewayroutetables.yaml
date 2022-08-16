@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: TransitGatewayRouteTable is the Schema for the TransitGatewayRouteTables
-          API
+          API. Manages an EC2 Transit Gateway Route Table
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -72,8 +72,13 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value tags for the EC2 Transit Gateway Route
+                      Table. If configured with a provider default_tags configuration
+                      block present, tags with matching keys will overwrite those
+                      defined at the provider-level.
                     type: object
                   transitGatewayId:
+                    description: Identifier of EC2 Transit Gateway.
                     type: string
                   transitGatewayIdRef:
                     description: A Reference to a named object.
@@ -329,16 +334,26 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: EC2 Transit Gateway Route Table Amazon Resource Name
+                      .
                     type: string
                   defaultAssociationRouteTable:
+                    description: Boolean whether this is the default association route
+                      table for the EC2 Transit Gateway.
                     type: boolean
                   defaultPropagationRouteTable:
+                    description: Boolean whether this is the default propagation route
+                      table for the EC2 Transit Gateway.
                     type: boolean
                   id:
+                    description: EC2 Transit Gateway Route Table identifier
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

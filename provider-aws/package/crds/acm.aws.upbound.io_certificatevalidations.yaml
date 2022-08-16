@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: CertificateValidation is the Schema for the CertificateValidations
-          API
+          API. Waits for and checks successful validation of an ACM certificate.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   certificateArn:
+                    description: The ARN of the certificate that is being validated.
                     type: string
                   certificateArnRef:
                     description: A Reference to a named object.
@@ -144,6 +145,11 @@ spec:
                       be created in.
                     type: string
                   validationRecordFqdns:
+                    description: List of FQDNs that implement the validation. Only
+                      valid for DNS validation method ACM certificates. If this is
+                      set, the resource can implement additional sanity checks and
+                      has an explicit dependency on the resource that is implementing
+                      the validation
                     items:
                       type: string
                     type: array
@@ -328,6 +334,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The time at which the certificate was issued
                     type: string
                 type: object
               conditions:

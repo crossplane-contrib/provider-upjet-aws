@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: EventSubscription is the Schema for the EventSubscriptions API
+        description: EventSubscription is the Schema for the EventSubscriptions API.
+          Provides a Neptune event subscription resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,13 @@ spec:
               forProvider:
                 properties:
                   enabled:
+                    description: A boolean flag to enable/disable the subscription.
+                      Defaults to true.
                     type: boolean
                   eventCategories:
+                    description: A list of event categories for a source_type that
+                      you want to subscribe to. Run aws neptune describe-event-categories
+                      to find all the event categories.
                     items:
                       type: string
                     type: array
@@ -74,6 +80,7 @@ spec:
                       be created in.
                     type: string
                   snsTopicArn:
+                    description: The ARN of the SNS topic to send events to.
                     type: string
                   snsTopicArnRef:
                     description: A Reference to a named object.
@@ -149,14 +156,25 @@ spec:
                         type: object
                     type: object
                   sourceIds:
+                    description: A list of identifiers of the event sources for which
+                      events will be returned. If not specified, then all sources
+                      are included in the response. If specified, a source_type must
+                      also be specified.
                     items:
                       type: string
                     type: array
                   sourceType:
+                    description: The type of source that will be generating the events.
+                      Valid options are db-instance, db-security-group, db-parameter-group,
+                      db-snapshot, db-cluster or db-cluster-snapshot. If not set,
+                      all sources will be subscribed to.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -338,14 +356,22 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name of the Neptune event notification
+                      subscription.
                     type: string
                   customerAwsId:
+                    description: The AWS customer account associated with the Neptune
+                      event notification subscription.
                     type: string
                   id:
+                    description: The name of the Neptune event notification subscription.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

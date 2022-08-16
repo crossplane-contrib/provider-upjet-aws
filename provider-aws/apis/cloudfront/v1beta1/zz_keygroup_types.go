@@ -14,19 +14,25 @@ import (
 )
 
 type KeyGroupObservation struct {
+
+	// The identifier for this version of the key group.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
+	// The identifier for the key group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type KeyGroupParameters struct {
 
+	// A comment to describe the key group..
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// A list of the identifiers of the public keys in the key group.
 	// +kubebuilder:validation:Required
 	Items []*string `json:"items" tf:"items,omitempty"`
 
+	// A name to identify the key group.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -50,7 +56,7 @@ type KeyGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// KeyGroup is the Schema for the KeyGroups API
+// KeyGroup is the Schema for the KeyGroups API. Provides a CloudFront key group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

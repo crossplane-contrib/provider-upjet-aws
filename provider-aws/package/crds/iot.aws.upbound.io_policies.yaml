@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Policy is the Schema for the Policys API
+        description: Policy is the Schema for the Policys API. Provides an IoT policy.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -250,8 +250,10 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The ARN assigned by AWS to this policy.
                     type: string
                   defaultVersionId:
+                    description: The default version of this policy.
                     type: string
                   id:
                     type: string

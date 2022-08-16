@@ -5,10 +5,10 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    bucket: example
+    bucket: upbound-example
     destination:
     - bucket:
-      - bucketArn: arn:aws:s3:::sample-bucket-2
+      - bucketArn: arn:aws:s3:::upbound-example-2
         format: ORC
     includedObjectVersions: All
     name: EntireBucketDaily
