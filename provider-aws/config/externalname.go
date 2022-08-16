@@ -278,7 +278,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// elasticache
 	//
-	"aws_elasticache_parameter_group":   config.NameAsIdentifier,
+	"aws_elasticache_parameter_group":   config.IdentifierFromProvider,
 	"aws_elasticache_subnet_group":      config.NameAsIdentifier,
 	"aws_elasticache_cluster":           config.ParameterAsIdentifier("cluster_id"),
 	"aws_elasticache_replication_group": config.ParameterAsIdentifier("replication_group_id"),

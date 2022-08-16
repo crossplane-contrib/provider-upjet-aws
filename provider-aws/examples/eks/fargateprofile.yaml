@@ -6,10 +6,44 @@ spec:
   forProvider:
     region: us-west-1
     clusterNameRef:
-      name: example
+      name: sample-eks-cluster
     podExecutionRoleArnRef:
       name: sample-fargate-role
     selector:
     - namespace: example
     subnetIdRefs:
     - name: sample-subnet1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: sample-fargate-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "eks-fargate-pods.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  name: sample-fargate-policy
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy
+    roleRef:
+      name: sample-fargate-role
