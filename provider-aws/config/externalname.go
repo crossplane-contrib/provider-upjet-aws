@@ -918,6 +918,15 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_api_gateway_usage_plan_key": config.IdentifierFromProvider,
 	// API Gateway VPC Link can be imported using the id
 	"aws_api_gateway_vpc_link": config.IdentifierFromProvider,
+
+	// opensearch
+	//
+	// OpenSearch domains can be imported using the domain_name
+	"aws_opensearch_domain": config.IdentifierFromProvider,
+	// No imports
+	"aws_opensearch_domain_policy": config.IdentifierFromProvider,
+	// OpenSearch domains can be imported using the domain_name
+	"aws_opensearch_domain_saml_options": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
