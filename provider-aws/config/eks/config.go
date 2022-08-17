@@ -81,6 +81,7 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 				SelectorFieldName: "SubnetIDSelector",
 			},
 		}
+		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_eks_addon", func(r *config.Resource) {
 		r.References = config.References{
@@ -92,5 +93,6 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 				Extractor: common.PathARNExtractor,
 			},
 		}
+		r.UseAsync = true
 	})
 }

@@ -12,7 +12,7 @@ spec:
     selector:
     - namespace: example
     subnetIdRefs:
-    - name: sample-subnet1
+    - name: private-subnet
 
 ---
 

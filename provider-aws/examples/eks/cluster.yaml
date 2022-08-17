@@ -1,6 +1,8 @@
 apiVersion: eks.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  annotations:
+    upjet.upbound.io/timeout: "2400"
   name: sample-eks-cluster
   labels:
     testing.upbound.io/example-name: example
@@ -80,6 +82,48 @@ spec:
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.11.0/24
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: private-subnet
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1b
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.12.0/24
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: example
+    vpcIdRef:
+      name: sample-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    routeTableIdRef:
+      name: example
+    subnetIdRef:
+      name: private-subnet
 
 ---
 
