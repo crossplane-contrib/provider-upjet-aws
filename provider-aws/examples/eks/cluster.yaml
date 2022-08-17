@@ -60,6 +60,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
+    mapPublicIpOnLaunch: true
     availabilityZone: us-west-1b
     vpcIdRef:
       name: sample-vpc
@@ -74,6 +75,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
+    mapPublicIpOnLaunch: true
     availabilityZone: us-west-1c
     vpcIdRef:
       name: sample-vpc
@@ -87,7 +89,36 @@ metadata:
   name: sample-vpc
 spec:
   forProvider:
+    enableDnsHostnames: true
     region: us-west-1
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: InternetGateway
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdRef:
+      name: sample-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: DefaultRouteTable
+metadata:
+  name: example
+spec:
+  forProvider:
+    defaultRouteTableIdRef:
+      name: sample-vpc
+    region: us-west-1
+    route:
+      - gatewayIdRef:
+          name: example
+        cidrBlock: 0.0.0.0/0

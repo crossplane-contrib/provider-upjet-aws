@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type RouteObservation struct {
+type RouteObservation_2 struct {
 
 	// Route identifier computed from the routing table identifier and route destination.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -28,7 +28,7 @@ type RouteObservation struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
-type RouteParameters struct {
+type RouteParameters_2 struct {
 
 	// Identifier of a carrier gateway. This attribute can only be used when the VPC contains a subnet which is associated with a Wavelength Zone.
 	// +kubebuilder:validation:Optional
@@ -156,13 +156,13 @@ type RouteParameters struct {
 // RouteSpec defines the desired state of Route
 type RouteSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     RouteParameters `json:"forProvider"`
+	ForProvider     RouteParameters_2 `json:"forProvider"`
 }
 
 // RouteStatus defines the observed state of Route.
 type RouteStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        RouteObservation `json:"atProvider,omitempty"`
+	AtProvider        RouteObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

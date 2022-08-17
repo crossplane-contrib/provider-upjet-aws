@@ -227,6 +227,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_endpoint_service_allowed_principal": config.IdentifierFromProvider,
 	// VPC Endpoint Subnet Associations can be imported using vpc_endpoint_id together with subnet_id
 	"aws_vpc_endpoint_subnet_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "subnet_id"),
+	// Default VPC route tables can be imported using the vpc_id
+	"aws_default_route_table": config.IdentifierFromProvider,
 
 	// ecr
 	//
@@ -268,7 +270,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_eks_cluster": config.NameAsIdentifier,
 	// Imported using the cluster_name and node_group_name separated by a
 	// colon (:): my_cluster:my_node_group
-	"aws_eks_node_group": FormattedIdentifierUserDefined("node_group_name", ":", "cluster_name"),
+	"aws_eks_node_group": config.TemplatedStringAsIdentifier("node_group_name", "{{ .parameters.cluster_name }}:{{ .externalName }}"),
 	// my_cluster:my_eks_addon
 	"aws_eks_addon": FormattedIdentifierUserDefined("addon_name", ":", "cluster_name"),
 	// my_cluster:my_fargate_profile

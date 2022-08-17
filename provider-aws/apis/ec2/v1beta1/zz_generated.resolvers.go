@@ -18,6 +18,69 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this DefaultRouteTable.
+func (mg *DefaultRouteTable) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultRouteTableID),
+		Extract:      resource.ExtractParamPath("default_route_table_id", true),
+		Reference:    mg.Spec.ForProvider.DefaultRouteTableIDRef,
+		Selector:     mg.Spec.ForProvider.DefaultRouteTableIDSelector,
+		To: reference.To{
+			List:    &VPCList{},
+			Managed: &VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DefaultRouteTableID")
+	}
+	mg.Spec.ForProvider.DefaultRouteTableID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DefaultRouteTableIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Route); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Route[i3].EgressOnlyGatewayID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.Route[i3].EgressOnlyGatewayIDRef,
+			Selector:     mg.Spec.ForProvider.Route[i3].EgressOnlyGatewayIDSelector,
+			To: reference.To{
+				List:    &EgressOnlyInternetGatewayList{},
+				Managed: &EgressOnlyInternetGateway{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Route[i3].EgressOnlyGatewayID")
+		}
+		mg.Spec.ForProvider.Route[i3].EgressOnlyGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Route[i3].EgressOnlyGatewayIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Route); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Route[i3].GatewayID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.Route[i3].GatewayIDRef,
+			Selector:     mg.Spec.ForProvider.Route[i3].GatewayIDSelector,
+			To: reference.To{
+				List:    &InternetGatewayList{},
+				Managed: &InternetGateway{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Route[i3].GatewayID")
+		}
+		mg.Spec.ForProvider.Route[i3].GatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Route[i3].GatewayIDRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this EBSSnapshot.
 func (mg *EBSSnapshot) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
