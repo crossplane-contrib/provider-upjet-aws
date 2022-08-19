@@ -1,53 +1,17 @@
 The Upbound AWS Provider is the officially supported provider for Amazon Web Services (AWS).
 
-View the [AWS Provider Documentation](configuration) for details and configuration options. 
+View the AWS Provider Documentation configuration for details and configuration options. 
 
 ## Quickstart
-This guide walks through the process to create an Upbound managed control plane and install the AWS official provider.
+This guide walks through the process to install Upbound Universal Crossplane and install the AWS official provider.
 
-To use this official provider, install it into your Upbound control plane, apply a `ProviderConfiguration`, and create a *managed resource* in AWS via Kubernetes.
-
-- [Quickstart](#quickstart)
-- [Create an Upbound.io user account](#create-an-upboundio-user-account)
-- [Create an Upbound user token](#create-an-upbound-user-token)
-- [Create a robot account and robot token](#create-a-robot-account-and-robot-token)
-- [Install the Up command-line](#install-the-up-command-line)
-- [Log in to Upbound](#log-in-to-upbound)
-- [Create a managed control plane](#create-a-managed-control-plane)
-- [Connect to the managed control plane](#connect-to-the-managed-control-plane)
-- [Create a Kubernetes imagePullSecret for Upbound](#create-a-kubernetes-imagepullsecret-for-upbound)
-- [Install the official AWS provider in to the managed control plane](#install-the-official-aws-provider-in-to-the-managed-control-plane)
-- [Create a Kubernetes secret for AWS](#create-a-kubernetes-secret-for-aws)
-  - [Generate an AWS key-pair file](#generate-an-aws-key-pair-file)
-  - [Create a Kubernetes secret with AWS credentials](#create-a-kubernetes-secret-with-aws-credentials)
-- [Create a ProviderConfig](#create-a-providerconfig)
-- [Create a managed resource](#create-a-managed-resource)
-- [Delete the managed resource](#delete-the-managed-resource)
+To use this official provider, install Upbound Universal Crossplane into your Kubernetes cluster, install the `Provider`, apply a `ProviderConfiguration`, and create a *managed resource* in AWS via Kubernetes.
 
 ## Create an Upbound.io user account
 Create an account on [Upbound.io](https://cloud.upbound.io/register). 
 
 <!-- Find detailed instructions in the [account documentation](/getting-started/create-account). -->
-
-## Create an Upbound user token
-Authentication to an Upbound managed control plane requires a unique user authentication token.
-
-Generate a user token through the [Upbound Universal Console](https://cloud.upbound.io/).
-
-![Create an API Token](images/create-api-token.gif)
-
-To generate a user token in the Upbound Universal Console:
-*<!-- vale Microsoft.FirstPerson = NO -->*
-1. Log in to the [Upbound Universal Console](https://cloud.upbound.io) and select **My Account** from the account menu.
-2. Select **API Tokens**.
-3. Select the **Create New Token** button.
-4. Provide a token name.
-5. Select **Create Token**.
-*<!-- vale Microsoft.FirstPerson = Yes -->*
-
-The Console generates a new token and displays it on screen. Save this token. The Console can't print the token again.
-
-## Create a robot account and robot token
+## Create an Upbound robot account and robot token
 Installing an Official Provider requires an Upbound account and associated _Robot Token_.
 
 To create a robot account and robot token in the Upbound Universal Console:
@@ -74,62 +38,23 @@ curl -sL "https://cli.upbound.io" | sh
 sudo mv up /usr/local/bin/
 ```
 
-## Log in to Upbound
-Log in to Upbound with the `up` command-line.
-
-`up login`
-
-## Create a managed control plane
-Create a new managed control plane using the command `up controlplane create <control plane name>`.
-
-For example  
-`up controlplane create my-aws-controlplane`
-
-Verify control plane creation with the command
-
-`up controlplane list`
-
-The `STATUS` starts as `provisioning` and moves to `ready`.
+## Install Universal Crossplane
+Install Upbound Universal Crossplane with the Up command-line.
 
 ```shell
-$ up controlplane list
-NAME                  ID                                     STATUS
-my-aws-controlplane   dd8b6e4b-f892-4c03-a0c3-193b85dc98de   ready
+up uxp install
 ```
-## Connect to the managed control plane
-Connecting to a managed control plane requires a `kubeconfig` file to connect to the remote cluster.  
 
-Using the **user token** generated earlier and the control plane ID from `up controlplane list`, generate a kubeconfig context configuration.  
-
-`up controlplane kubeconfig get --token <token> <control plane ID>`
-
-Verify that a new context is available in `kubectl` and is the `CURRENT` context.
+Verify the UXP pods are running with `kubectl get pods -n upbound-system`
 
 ```shell
-$ kubectl config get-contexts
-CURRENT   NAME                                           CLUSTER                                        AUTHINFO                                       NAMESPACE
-          kubernetes-admin@kubernetes                    kubernetes                                     kubernetes-admin
-*         upbound-8856147c-03f3-4d68-aba4-4d02cc66d33a   upbound-8856147c-03f3-4d68-aba4-4d02cc66d33a   upbound-8856147c-03f3-4d68-aba4-4d02cc66d33a
-```
-
-**Note:** change the `CURRENT` context with `kubectl config use-context <context name>`.
-
-Confirm your token's access with any `kubectl` command.
-
-```shell
-$ kubectl get pods -A
-NAMESPACE        NAME                                       READY   STATUS    RESTARTS   AGE
-upbound-system   crossplane-745cc78565-b6xkx                1/1     Running   0          113s
-upbound-system   crossplane-rbac-manager-766657bc6d-z5v5p   1/1     Running   0          113s
-upbound-system   upbound-agent-66d7c4f88f-lqxkh             1/1     Running   1          102s
-upbound-system   upbound-bootstrapper-c5dccc8fd-7rgqm       1/1     Running   0          113s
-upbound-system   xgql-6f56c847c7-8vs6n                      1/1     Running   2          113s
-```
-
-**Note:** if the token is incorrect the `kubectl` command returns an error.
-```
-$ kubectl get pods -A
-Error from server (BadRequest): the server rejected our request for an unknown reason
+$ kubectl get pods -n upbound-system
+NAME                                        READY   STATUS    RESTARTS      AGE
+crossplane-7fdfbd897c-pmrml                 1/1     Running   0             68m
+crossplane-rbac-manager-7d6867bc4d-v7wpb    1/1     Running   0             68m
+provider-aws-136444403808-cfd7b6dbb-s9l9n   1/1     Running   0             54m
+upbound-bootstrapper-5f47977d54-t8kvk       1/1     Running   0             68m
+xgql-7c4b74c458-5bf2q                       1/1     Running   3 (67m ago)   68m
 ```
 
 ## Create a Kubernetes imagePullSecret for Upbound
@@ -138,14 +63,18 @@ Official providers require a Kubernetes `imagePullSecret` to download and instal
 Using the **robot token** generated earlier create an `imagePullSecret` with the command `kubectl create secret docker-registry package-pull-secret`.
 
 ```shell
-kubectl create secret docker-registry package-pull-secret --namespace=crossplane-system --docker-server=xpkg.upbound.io --docker-username=<robot token access ID> --docker-password=<robot token value>
+kubectl create secret docker-registry package-pull-secret \
+--namespace=upbound-system \
+--docker-server=xpkg.upbound.io \
+--docker-username=<robot token access ID> \
+--docker-password=<robot token value> 
 ```
 
 Replace `<robot token access ID>` with the `Access ID` of the robot token and `<robot token value>` with the value of the robot token.
 
 Verify the secret with `kubectl get secrets`
 ```shell
-$ kubectl get secrets -n crossplane-system package-pull-secret
+$ kubectl get secrets -n upbound-system package-pull-secret
 NAME                  TYPE                             DATA   AGE
 package-pull-secret   kubernetes.io/dockerconfigjson   1      23s
 ```
@@ -161,7 +90,7 @@ kind: Provider
 metadata:
   name: provider-aws
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws:v0.5.0
+  package: xpkg.upbound.io/upbound/provider-aws:v0.8.0
   packagePullSecrets:
     - name: package-pull-secret
 ```
@@ -173,7 +102,7 @@ After installing the provider, verify the install with `kubectl get providers`.
 ```shell
 $ kubectl get providers
 NAME           INSTALLED   HEALTHY   PACKAGE                                       AGE
-provider-aws   True        True      xpkg.upbound.io/upbound/provider-aws:v0.5.0   62s
+provider-aws   True        True      xpkg.upbound.io/upbound/provider-aws:v0.8.0   62s
 ```
 
 It may take up to 5 minutes to report `HEALTHY`.
@@ -287,7 +216,7 @@ $ echo "upbound-bucket-"$(head -n 4096 /dev/urandom | openssl sha1 | tail -c 10)
 upbound-bucket-fb8360b455dd9
 ```
 
-Use this bucket name for `metadata.annotations.crossplane.io/external-name` value.
+Use this bucket name for `metadata.name` value.
 
 Create a `Bucket` configuration file. Replace `<BUCKET NAME>` with the `upbound-bucket-` generated name.
 
