@@ -633,6 +633,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// SQS Queues can be imported using the queue url / id
 	"aws_sqs_queue": config.IdentifierFromProvider,
+	// SQS Queue Policies can be imported using the queue URL
+	// e.g. https://queue.amazonaws.com/0123456789012/myqueue
+	"aws_sqs_queue_policy": config.IdentifierFromProvider,
 
 	// secretsmanager
 	//

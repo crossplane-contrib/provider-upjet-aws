@@ -357,6 +357,7 @@ import (
 	topic "github.com/upbound/official-providers/provider-aws/internal/controller/sns/topic"
 	topicsubscription "github.com/upbound/official-providers/provider-aws/internal/controller/sns/topicsubscription"
 	queue "github.com/upbound/official-providers/provider-aws/internal/controller/sqs/queue"
+	queuepolicy "github.com/upbound/official-providers/provider-aws/internal/controller/sqs/queuepolicy"
 	server "github.com/upbound/official-providers/provider-aws/internal/controller/transfer/server"
 	usertransfer "github.com/upbound/official-providers/provider-aws/internal/controller/transfer/user"
 )
@@ -713,6 +714,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		topic.Setup,
 		topicsubscription.Setup,
 		queue.Setup,
+		queuepolicy.Setup,
 		server.Setup,
 		usertransfer.Setup,
 	} {

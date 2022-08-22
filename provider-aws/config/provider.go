@@ -60,6 +60,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/servicediscovery"
 	"github.com/upbound/official-providers/provider-aws/config/sfn"
 	"github.com/upbound/official-providers/provider-aws/config/sns"
+	"github.com/upbound/official-providers/provider-aws/config/sqs"
 	"github.com/upbound/official-providers/provider-aws/config/transfer"
 )
 
@@ -167,6 +168,7 @@ func GetProvider() *config.Provider {
 		cloudsearch.Configure,
 		apigateway.Configure,
 		elbv2.Configure,
+		sqs.Configure,
 	} {
 		configure(pc)
 	}
