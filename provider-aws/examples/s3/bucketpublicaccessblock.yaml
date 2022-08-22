@@ -5,8 +5,8 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    blockPublicAcls: true
-    blockPublicPolicy: true
+    blockPublicAcls: false
+    blockPublicPolicy: false
     bucket: upbound-example
   providerConfigRef:
     name: default
