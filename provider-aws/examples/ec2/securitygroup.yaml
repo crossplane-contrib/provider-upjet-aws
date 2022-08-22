@@ -10,4 +10,4 @@ spec:
     tags:
       Name: allow_tls
     vpcIdRef:
-      name: example
+      name: sample-vpc

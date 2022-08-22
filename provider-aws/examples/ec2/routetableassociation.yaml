@@ -1,12 +1,13 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
-kind: Route
+kind: RouteTableAssociation
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: a
+  name: a
 spec:
   forProvider:
     region: us-west-1
-    destinationCidrBlock: 0.0.0.0/0
-    gatewayIdRef:
-      name: example
     routeTableIdRef:
       name: example
+    subnetIdRef:
+      name: sample-subnet1

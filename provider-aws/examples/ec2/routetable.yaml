@@ -8,6 +8,4 @@ spec:
     tags:
       Name: example
     vpcIdRef:
-      name: example
-  providerConfigRef:
-    name: default
+      name: sample-vpc

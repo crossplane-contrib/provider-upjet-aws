@@ -379,22 +379,6 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mg.Spec.ForProvider.RootBlockDevice[i3].KMSKeyIDRef = rsp.ResolvedReference
 
 	}
-	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroups),
-		Extract:       reference.ExternalName(),
-		References:    mg.Spec.ForProvider.SecurityGroupRefs,
-		Selector:      mg.Spec.ForProvider.SecurityGroupSelector,
-		To: reference.To{
-			List:    &SecurityGroupList{},
-			Managed: &SecurityGroup{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityGroups")
-	}
-	mg.Spec.ForProvider.SecurityGroups = reference.ToPtrValues(mrsp.ResolvedValues)
-	mg.Spec.ForProvider.SecurityGroupRefs = mrsp.ResolvedReferences
-
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 		Extract:      reference.ExternalName(),
@@ -1328,7 +1312,7 @@ func (mg *TransitGatewayMulticastDomain) ResolveReferences(ctx context.Context, 
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransitGatewayID),
-		Extract:      resource.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.TransitGatewayIDRef,
 		Selector:     mg.Spec.ForProvider.TransitGatewayIDSelector,
 		To: reference.To{
@@ -1612,12 +1596,12 @@ func (mg *TransitGatewayRoute) ResolveReferences(ctx context.Context, c client.R
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransitGatewayRouteTableID),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractParamPath("association_default_route_table_id", true),
 		Reference:    mg.Spec.ForProvider.TransitGatewayRouteTableIDRef,
 		Selector:     mg.Spec.ForProvider.TransitGatewayRouteTableIDSelector,
 		To: reference.To{
-			List:    &TransitGatewayRouteTableList{},
-			Managed: &TransitGatewayRouteTable{},
+			List:    &TransitGatewayList{},
+			Managed: &TransitGateway{},
 		},
 	})
 	if err != nil {
