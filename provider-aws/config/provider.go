@@ -8,6 +8,8 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
+	"github.com/upbound/official-providers/provider-aws/config/opensearch"
+
 	"github.com/upbound/upjet/pkg/config"
 	"github.com/upbound/upjet/pkg/registry/reference"
 
@@ -169,6 +171,7 @@ func GetProvider() *config.Provider {
 		apigateway.Configure,
 		elbv2.Configure,
 		sqs.Configure,
+		opensearch.Configure,
 	} {
 		configure(pc)
 	}

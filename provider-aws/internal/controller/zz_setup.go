@@ -284,6 +284,9 @@ import (
 	eventsubscription "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/eventsubscription"
 	parametergroupneptune "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/parametergroup"
 	subnetgroupneptune "github.com/upbound/official-providers/provider-aws/internal/controller/neptune/subnetgroup"
+	domainopensearch "github.com/upbound/official-providers/provider-aws/internal/controller/opensearch/domain"
+	domainpolicy "github.com/upbound/official-providers/provider-aws/internal/controller/opensearch/domainpolicy"
+	domainsamloptions "github.com/upbound/official-providers/provider-aws/internal/controller/opensearch/domainsamloptions"
 	providerconfig "github.com/upbound/official-providers/provider-aws/internal/controller/providerconfig"
 	resourceshare "github.com/upbound/official-providers/provider-aws/internal/controller/ram/resourceshare"
 	clusterrds "github.com/upbound/official-providers/provider-aws/internal/controller/rds/cluster"
@@ -644,6 +647,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventsubscription.Setup,
 		parametergroupneptune.Setup,
 		subnetgroupneptune.Setup,
+		domainopensearch.Setup,
+		domainpolicy.Setup,
+		domainsamloptions.Setup,
 		providerconfig.Setup,
 		resourceshare.Setup,
 		clusterrds.Setup,
