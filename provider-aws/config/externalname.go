@@ -800,6 +800,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Athena Workgroups can be imported using their name
 	"aws_athena_workgroup": config.NameAsIdentifier,
+	// Data catalogs can be imported using their name
+	"aws_athena_data_catalog": config.NameAsIdentifier,
+	// Athena Databases can be imported using their name
+	"aws_athena_database": config.NameAsIdentifier,
+	// Athena Named Query can be imported using the query ID
+	"aws_athena_named_query": config.IdentifierFromProvider,
 
 	// cloudwatchlogs
 	//

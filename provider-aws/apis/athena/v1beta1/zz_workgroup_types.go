@@ -13,16 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ACLConfigurationObservation struct {
-}
-
-type ACLConfigurationParameters struct {
-
-	// The Amazon S3 canned ACL that Athena should specify when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
-	// +kubebuilder:validation:Required
-	S3ACLOption *string `json:"s3AclOption" tf:"s3_acl_option,omitempty"`
-}
-
 type ConfigurationObservation struct {
 
 	// +kubebuilder:validation:Optional
@@ -55,10 +45,33 @@ type ConfigurationParameters struct {
 	ResultConfiguration []ResultConfigurationParameters `json:"resultConfiguration,omitempty" tf:"result_configuration,omitempty"`
 }
 
-type EncryptionConfigurationObservation struct {
+type EngineVersionObservation struct {
+
+	// The engine version on which the query runs. If selected_engine_version is set to AUTO, the effective engine version is chosen by Athena.
+	EffectiveEngineVersion *string `json:"effectiveEngineVersion,omitempty" tf:"effective_engine_version,omitempty"`
 }
 
-type EncryptionConfigurationParameters struct {
+type EngineVersionParameters struct {
+
+	// The requested engine version. Defaults to AUTO.
+	// +kubebuilder:validation:Optional
+	SelectedEngineVersion *string `json:"selectedEngineVersion,omitempty" tf:"selected_engine_version,omitempty"`
+}
+
+type ResultConfigurationACLConfigurationObservation struct {
+}
+
+type ResultConfigurationACLConfigurationParameters struct {
+
+	// The Amazon S3 canned ACL that Athena should specify when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
+	// +kubebuilder:validation:Required
+	S3ACLOption *string `json:"s3AclOption" tf:"s3_acl_option,omitempty"`
+}
+
+type ResultConfigurationEncryptionConfigurationObservation struct {
+}
+
+type ResultConfigurationEncryptionConfigurationParameters struct {
 
 	// Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys , server-side encryption with KMS-managed keys , or client-side encryption with KMS-managed keys  is used. If a query runs in a workgroup and the workgroup overrides client-side settings, then the workgroup's setting for encryption is used. It specifies whether query results must be encrypted, for all queries that run in this workgroup.
 	// +kubebuilder:validation:Optional
@@ -77,19 +90,6 @@ type EncryptionConfigurationParameters struct {
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 }
 
-type EngineVersionObservation struct {
-
-	// The engine version on which the query runs. If selected_engine_version is set to AUTO, the effective engine version is chosen by Athena.
-	EffectiveEngineVersion *string `json:"effectiveEngineVersion,omitempty" tf:"effective_engine_version,omitempty"`
-}
-
-type EngineVersionParameters struct {
-
-	// The requested engine version. Defaults to AUTO.
-	// +kubebuilder:validation:Optional
-	SelectedEngineVersion *string `json:"selectedEngineVersion,omitempty" tf:"selected_engine_version,omitempty"`
-}
-
 type ResultConfigurationObservation struct {
 }
 
@@ -97,11 +97,11 @@ type ResultConfigurationParameters struct {
 
 	// Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results. See ACL Configuration below.
 	// +kubebuilder:validation:Optional
-	ACLConfiguration []ACLConfigurationParameters `json:"aclConfiguration,omitempty" tf:"acl_configuration,omitempty"`
+	ACLConfiguration []ResultConfigurationACLConfigurationParameters `json:"aclConfiguration,omitempty" tf:"acl_configuration,omitempty"`
 
 	// Configuration block with encryption settings. See Encryption Configuration below.
 	// +kubebuilder:validation:Optional
-	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+	EncryptionConfiguration []ResultConfigurationEncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// The AWS account ID that you expect to be the owner of the Amazon S3 bucket.
 	// +kubebuilder:validation:Optional

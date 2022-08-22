@@ -1,16 +1,32 @@
 apiVersion: athena.aws.upbound.io/v1beta1
 kind: Workgroup
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
 spec:
   forProvider:
     configuration:
-    - enforceWorkgroupConfiguration: true
-      publishCloudwatchMetricsEnabled: true
-      resultConfiguration:
-      - encryptionConfiguration:
-        - encryptionOption: SSE_KMS
-          kmsKeyArnRef:
-            name: example
-        outputLocation: s3://<bucket-name>/output/
-    region: us-east-1
+      - resultConfiguration:
+          - encryptionConfiguration:
+              - encryptionOption: SSE_KMS
+                kmsKeyArnSelector:
+                  matchLabels:
+                    testing.upbound.io/example-name: test
+            outputLocation: s3://upbound-example/output/
+    region: us-west-1
+
+---
+
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    deletionWindowInDays: 7
+    description: Athena KMS Key
+    region: us-west-1
+
