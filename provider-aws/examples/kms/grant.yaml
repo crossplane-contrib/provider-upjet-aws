@@ -2,6 +2,8 @@ apiVersion: kms.aws.upbound.io/v1beta1
 kind: Grant
 metadata:
   name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource has a principal reference."
 spec:
   forProvider:
     region: us-east-1

@@ -1,11 +1,26 @@
 apiVersion: kms.aws.upbound.io/v1beta1
-kind: ReplicaExternalKey
+kind: ExternalKey
 metadata:
-  name: example
+  name: sample-replicaexternalkey
 spec:
   forProvider:
     region: us-east-1
+    description: Created with Crossplane
+    multiRegion: true
+    deletionWindowInDays: 7
+
+---
+
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: ReplicaExternalKey
+metadata:
+  name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The referenced external key is in PendingImport state as we do not supply the key material to import."
+spec:
+  forProvider:
+    region: us-east-2
     description: "Multi-Region replica key"
     deletionWindowInDays: 7
     primaryKeyArnRef:
-      name: example
+      name: sample-replicaexternalkey
