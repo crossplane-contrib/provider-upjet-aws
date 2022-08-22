@@ -50,6 +50,9 @@ import (
 	routeresponse "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/routeresponse"
 	stageapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/stage"
 	vpclinkapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/vpclink"
+	database "github.com/upbound/official-providers/provider-aws/internal/controller/athena/database"
+	datacatalog "github.com/upbound/official-providers/provider-aws/internal/controller/athena/datacatalog"
+	namedquery "github.com/upbound/official-providers/provider-aws/internal/controller/athena/namedquery"
 	workgroup "github.com/upbound/official-providers/provider-aws/internal/controller/athena/workgroup"
 	attachment "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/attachment"
 	autoscalinggroup "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/autoscalinggroup"
@@ -357,6 +360,7 @@ import (
 	topic "github.com/upbound/official-providers/provider-aws/internal/controller/sns/topic"
 	topicsubscription "github.com/upbound/official-providers/provider-aws/internal/controller/sns/topicsubscription"
 	queue "github.com/upbound/official-providers/provider-aws/internal/controller/sqs/queue"
+	queuepolicy "github.com/upbound/official-providers/provider-aws/internal/controller/sqs/queuepolicy"
 	server "github.com/upbound/official-providers/provider-aws/internal/controller/transfer/server"
 	usertransfer "github.com/upbound/official-providers/provider-aws/internal/controller/transfer/user"
 )
@@ -406,6 +410,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		routeresponse.Setup,
 		stageapigatewayv2.Setup,
 		vpclinkapigatewayv2.Setup,
+		database.Setup,
+		datacatalog.Setup,
+		namedquery.Setup,
 		workgroup.Setup,
 		attachment.Setup,
 		autoscalinggroup.Setup,
@@ -713,6 +720,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		topic.Setup,
 		topicsubscription.Setup,
 		queue.Setup,
+		queuepolicy.Setup,
 		server.Setup,
 		usertransfer.Setup,
 	} {

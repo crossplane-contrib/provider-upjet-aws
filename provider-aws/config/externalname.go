@@ -633,6 +633,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// SQS Queues can be imported using the queue url / id
 	"aws_sqs_queue": config.IdentifierFromProvider,
+	// SQS Queue Policies can be imported using the queue URL
+	// e.g. https://queue.amazonaws.com/0123456789012/myqueue
+	"aws_sqs_queue_policy": config.IdentifierFromProvider,
 
 	// secretsmanager
 	//
@@ -797,6 +800,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Athena Workgroups can be imported using their name
 	"aws_athena_workgroup": config.NameAsIdentifier,
+	// Data catalogs can be imported using their name
+	"aws_athena_data_catalog": config.NameAsIdentifier,
+	// Athena Databases can be imported using their name
+	"aws_athena_database": config.NameAsIdentifier,
+	// Athena Named Query can be imported using the query ID
+	"aws_athena_named_query": config.IdentifierFromProvider,
 
 	// cloudwatchlogs
 	//

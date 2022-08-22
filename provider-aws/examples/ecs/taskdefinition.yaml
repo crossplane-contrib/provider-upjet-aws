@@ -5,7 +5,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    family: service
+    family: sampleservice
     containerDefinitions: |-
       [
         {
