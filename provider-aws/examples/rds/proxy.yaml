@@ -2,6 +2,8 @@ apiVersion: rds.aws.upbound.io/v1beta1
 kind: Proxy
 metadata:
   name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource has a secret reference."
 spec:
   forProvider:
     region: us-west-1
@@ -21,5 +23,3 @@ spec:
     vpcSubnetIds:
       - example1
       - example2
-  providerConfigRef:
-    name: default

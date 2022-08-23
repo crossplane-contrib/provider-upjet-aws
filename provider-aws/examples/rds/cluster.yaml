@@ -1,7 +1,9 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
-  name: sample-cluster
+  name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource has a password secret reference."
 spec:
   forProvider:
     region: us-west-1
@@ -9,9 +11,9 @@ spec:
     masterUsername: cpadmin
     masterPasswordSecretRef:
       name: sample-cluster-password
-      namespace: crossplane-system
+      namespace: upbound-system
       key: password
     skipFinalSnapshot: true
   writeConnectionSecretToRef:
     name: sample-rds-cluster-secret
-    namespace: crossplane-system
+    namespace: upbound-system

@@ -2,6 +2,8 @@ apiVersion: rds.aws.upbound.io/v1beta1
 kind: ProxyDefaultTargetGroup
 metadata:
   name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource has a reference to Proxy, which needs manual intervention."
 spec:
   forProvider:
     dbProxyName: example
@@ -13,5 +15,3 @@ spec:
         maxIdleConnectionsPercent: 50
         sessionPinningFilters:
           - EXCLUDE_VARIABLE_SETS
-  providerConfigRef:
-    name: default

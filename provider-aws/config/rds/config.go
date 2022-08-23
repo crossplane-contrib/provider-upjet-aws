@@ -89,4 +89,12 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_db_proxy_target", func(r *config.Resource) {
 		delete(r.References, "target_group_name")
 	})
+
+	p.AddResourceConfigurator("aws_rds_cluster_endpoint", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("aws_rds_cluster_role_association", func(r *config.Resource) {
+		r.UseAsync = true
+	})
 }

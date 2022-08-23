@@ -2,29 +2,29 @@ apiVersion: rds.aws.upbound.io/v1beta1
 kind: Instance
 metadata:
   name: example-dbinstance
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource has a password secret reference."
 spec:
   forProvider:
-    region: us-east-1
+    region: us-west-1
     allocatedStorage: 20
     autoMinorVersionUpgrade: true
     backupRetentionPeriod: 14
     instanceClass: db.t3.micro
     name: example
     engine: postgres
-    engineVersion: "13.1"
+    engineVersion: "13.7"
     username: adminuser
     passwordSecretRef:
       key: password
       name: example-dbinstance
-      namespace: crossplane-system
+      namespace: upbound-system
     backupWindow: "09:46-10:16"
     maintenanceWindow: "Mon:00:00-Mon:03:00"
     publiclyAccessible: false
     skipFinalSnapshot: true
     storageEncrypted: false
     storageType: gp2
-    parameterGroupNameRef:
-      name: example-parametergroup
   writeConnectionSecretToRef:
     name: example-dbinstance-out
     namespace: default
