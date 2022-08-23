@@ -1,3 +1,14 @@
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  name: sample-neptune-topic
+spec:
+  forProvider:
+    region: eu-central-1
+    name: user-updates-topic
+
+---
+
 apiVersion: neptune.aws.upbound.io/v1beta1
 kind: EventSubscription
 metadata:
@@ -5,6 +16,7 @@ metadata:
 spec:
   forProvider:
     region: eu-central-1
-    snsTopicArn: arn:aws:sns:eu-central-1:609897127049:sample-sns
+    snsTopicArnRef:
+      name: sample-neptune-topic
     tags:
       env: test
