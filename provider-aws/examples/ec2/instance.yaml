@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Instance
 metadata:
+  annotations:
+    upjet.upbound.io/timeout: "3600"
   name: sample-instance
 spec:
   forProvider:
