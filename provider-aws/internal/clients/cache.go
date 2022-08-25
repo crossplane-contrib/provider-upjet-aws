@@ -7,21 +7,58 @@ package clients
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/pkg/errors"
 )
 
+const (
+	errGetCallerIdentityFailed = "GetCallerIdentity query failed"
+)
+
 // GlobalCallerIdentityCache is a global cache to be used by all controllers.
-var GlobalCallerIdentityCache = NewCallerIdentityCache(100)
+var GlobalCallerIdentityCache = NewCallerIdentityCache()
+
+// CallerIdentityCacheOption lets you configure *CallerIdentityCache.
+type CallerIdentityCacheOption func(*CallerIdentityCache)
+
+// GetCallerIdentityFn is the function type to call GetCallerIdentity API.
+type GetCallerIdentityFn func(ctx context.Context, cfg aws.Config) (*sts.GetCallerIdentityOutput, error)
+
+// WithGetCallerIdentityFn lets you override the default GetCallerIdentityFn.
+func WithGetCallerIdentityFn(f GetCallerIdentityFn) CallerIdentityCacheOption {
+	return func(c *CallerIdentityCache) {
+		c.getCallerIdentityFn = f
+	}
+}
+
+// WithMaxSize lets you override the default MaxSize.
+func WithMaxSize(n int) CallerIdentityCacheOption {
+	return func(c *CallerIdentityCache) {
+		c.maxSize = n
+	}
+}
+
+// WithCache lets you bootstrap with your own cache.
+func WithCache(cache map[string]*callerIdentityCacheEntry) CallerIdentityCacheOption {
+	return func(c *CallerIdentityCache) {
+		c.cache = cache
+	}
+}
 
 // NewCallerIdentityCache returns a new empty *CallerIdentityCache.
-func NewCallerIdentityCache(maxSize int) *CallerIdentityCache {
-	return &CallerIdentityCache{
-		cache:   map[string]*sts.GetCallerIdentityOutput{},
-		maxSize: maxSize,
+func NewCallerIdentityCache(opts ...CallerIdentityCacheOption) *CallerIdentityCache {
+	c := &CallerIdentityCache{
+		cache:               map[string]*callerIdentityCacheEntry{},
+		maxSize:             100,
+		getCallerIdentityFn: AWSGetCallerIdentity,
 	}
+	for _, f := range opts {
+		f(c)
+	}
+	return c
 }
 
 // CallerIdentityCache holds GetCallerIdentityOutput objects in memory so that
@@ -32,11 +69,20 @@ type CallerIdentityCache struct {
 	// cache holds caller identity with a key whose format is the following:
 	// <access_key>:<secret_key>:<token>
 	// Any of the variables could be empty.
-	cache map[string]*sts.GetCallerIdentityOutput
+	cache map[string]*callerIdentityCacheEntry
 
 	// maxSize is the maximum number of elements this cache can have. When it
 	// reaches above this number, randomly selected entries will be deleted.
 	maxSize int
+
+	// newClientFn returns a client that we can call GetCallerIdentity function
+	/// of. You need to override the default only in the tests.
+	getCallerIdentityFn GetCallerIdentityFn
+}
+
+type callerIdentityCacheEntry struct {
+	*sts.GetCallerIdentityOutput
+	LastAccessTime time.Time
 }
 
 // GetCallerIdentity returns the identity of the caller.
@@ -47,35 +93,42 @@ func (c *CallerIdentityCache) GetCallerIdentity(ctx context.Context, cfg aws.Con
 		creds.SessionToken,
 	)
 	if i, ok := c.cache[key]; ok {
-		return i, nil
+		i.LastAccessTime = time.Now()
+		return i.GetCallerIdentityOutput, nil
 	}
-	i, err := sts.NewFromConfig(cfg).GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
+	i, err := c.getCallerIdentityFn(ctx, cfg)
 	if err != nil {
-		return nil, errors.Wrap(err, "GetCallerIdentity query failed")
+		return nil, errors.Wrap(err, errGetCallerIdentityFailed)
 	}
-	c.cache[key] = i
-	c.checkCache()
+	c.makeRoom()
+	c.cache[key] = &callerIdentityCacheEntry{
+		LastAccessTime:          time.Now(),
+		GetCallerIdentityOutput: i,
+	}
 	return i, nil
 }
 
-// NOTE(muvaf): I considered deleting the entries that are not accessed in
-// a given timeframe or are older than a given expiration window. However, the
-// only worry we have for this cache is to use too much memory because
-// invalidation is not necessary since the value is always the same for a given
-// caller. The maximum size method guarantees that we don't have ever-growing
-// memory, which may be possible with other methods.
-
-// checkCache checks whether we reached the maximum number of elements and
-// remove randomly selected entries till we reduce it back to the maximum. Since
-// the value for a given key never changes, we don't really need to invalidate
-// entries. It's only to put a limit on how much memory it can ever use.
-func (c *CallerIdentityCache) checkCache() {
-	n := len(c.cache) - c.maxSize
-	for key := range c.cache {
-		if n <= 0 {
-			return
-		}
-		delete(c.cache, key)
-		n--
+// makeRoom ensures that there is at most maxSize-1 elements in the cache map
+// so that a new entry can be added. It deletes the object that was last accessed
+// before all others.
+func (c *CallerIdentityCache) makeRoom() {
+	if 1+len(c.cache) <= c.maxSize {
+		return
 	}
+	var dustiest string
+	for key, val := range c.cache {
+		if dustiest == "" {
+			dustiest = key
+		}
+		if val.LastAccessTime.Before(c.cache[dustiest].LastAccessTime) {
+			dustiest = key
+		}
+	}
+	delete(c.cache, dustiest)
+}
+
+// AWSGetCallerIdentity makes sends a request to AWS to get the caller identity.
+func AWSGetCallerIdentity(ctx context.Context, cfg aws.Config) (*sts.GetCallerIdentityOutput, error) {
+	i, err := sts.NewFromConfig(cfg).GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
+	return i, errors.Wrap(err, errGetCallerIdentityFailed)
 }
