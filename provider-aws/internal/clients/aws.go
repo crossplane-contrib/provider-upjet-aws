@@ -7,8 +7,6 @@ package clients
 import (
 	"context"
 
-	"github.com/aws/aws-sdk-go-v2/service/sts"
-
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -30,17 +28,15 @@ const (
 // expected form of a Terraform provider.
 func TerraformSetupBuilder(version, providerSource, providerVersion string) terraform.SetupFn { //nolint:gocyclo
 	return func(ctx context.Context, client client.Client, mg resource.Managed) (terraform.Setup, error) {
-		awsConf, err := GetAWSConfig(ctx, client, mg)
+		cfg, err := GetAWSConfig(ctx, client, mg)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "cannot get AWS config")
 		}
-		creds, err := awsConf.Credentials.Retrieve(ctx)
+		creds, err := cfg.Credentials.Retrieve(ctx)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
 		}
-		// TODO(muvaf): Maybe some sort of cache so that we don't make this call
-		// every time?
-		identity, err := sts.NewFromConfig(*awsConf).GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
+		identity, err := GlobalCallerIdentityCache.GetCallerIdentity(ctx, *cfg, creds)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "cannot get the caller identity")
 		}
@@ -52,7 +48,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 				Version: providerVersion,
 			},
 			Configuration: map[string]any{
-				keyRegion:          awsConf.Region,
+				keyRegion:          cfg.Region,
 				keyAccessKeyID:     creds.AccessKeyID,
 				keySecretAccessKey: creds.SecretAccessKey,
 				keySessionToken:    creds.SessionToken,
