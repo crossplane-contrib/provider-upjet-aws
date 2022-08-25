@@ -13,6 +13,80 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this DefaultRouteTable
+func (mg *DefaultRouteTable) GetTerraformResourceType() string {
+	return "aws_default_route_table"
+}
+
+// GetConnectionDetailsMapping for this DefaultRouteTable
+func (tr *DefaultRouteTable) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this DefaultRouteTable
+func (tr *DefaultRouteTable) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this DefaultRouteTable
+func (tr *DefaultRouteTable) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this DefaultRouteTable
+func (tr *DefaultRouteTable) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this DefaultRouteTable
+func (tr *DefaultRouteTable) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this DefaultRouteTable
+func (tr *DefaultRouteTable) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this DefaultRouteTable using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *DefaultRouteTable) LateInitialize(attrs []byte) (bool, error) {
+	params := &DefaultRouteTableParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *DefaultRouteTable) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this EBSSnapshot
 func (mg *EBSSnapshot) GetTerraformResourceType() string {
 	return "aws_ebs_snapshot"
@@ -1634,10 +1708,12 @@ func (tr *Instance) LateInitialize(attrs []byte) (bool, error) {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("AssociatePublicIPAddress"))
 	opts = append(opts, resource.WithNameFilter("NetworkInterface"))
 	opts = append(opts, resource.WithNameFilter("PrivateIP"))
 	opts = append(opts, resource.WithNameFilter("SourceDestCheck"))
 	opts = append(opts, resource.WithNameFilter("SubnetID"))
+	opts = append(opts, resource.WithNameFilter("VPCSecurityGroupIds"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)
@@ -2524,7 +2600,7 @@ func (tr *Route) SetParameters(params map[string]any) error {
 // LateInitialize this Route using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Route) LateInitialize(attrs []byte) (bool, error) {
-	params := &RouteParameters{}
+	params := &RouteParameters_2{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
@@ -2975,6 +3051,11 @@ func (tr *SpotInstanceRequest) LateInitialize(attrs []byte) (bool, error) {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("InstanceInterruptionBehavior"))
+	opts = append(opts, resource.WithNameFilter("SourceDestCheck"))
+	opts = append(opts, resource.WithNameFilter("SpotType"))
+	opts = append(opts, resource.WithNameFilter("ValidFrom"))
+	opts = append(opts, resource.WithNameFilter("ValidUntil"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)
@@ -3198,6 +3279,7 @@ func (tr *VPC) LateInitialize(attrs []byte) (bool, error) {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("IPv6CidrBlock"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

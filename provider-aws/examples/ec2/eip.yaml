@@ -6,8 +6,7 @@ metadata:
   name: lb
 spec:
   forProvider:
-    instanceSelector:
-      matchLabels:
-        testing.upbound.io/example-name: web
+    instanceRef:
+      name: sample-instance
     vpc: true
     region: us-west-1

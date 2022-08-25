@@ -1,6 +1,8 @@
 apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: User
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs secrets that must contain valid credentials."
   name: sample-user
 spec:
   forProvider:

@@ -9,4 +9,4 @@ spec:
     region: eu-west-1
   writeConnectionSecretToRef:
     name: accelerator
-    namespace: default
+    namespace: upbound-system

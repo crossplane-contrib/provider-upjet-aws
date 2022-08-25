@@ -6,13 +6,13 @@ metadata:
   name: test
 spec:
   forProvider:
-    deviceIndex: 0
+    deviceIndex: 1
     instanceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: test
     networkInterfaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: test2
     region: us-west-1
 
 ---
@@ -25,6 +25,10 @@ metadata:
   name: test
 spec:
   forProvider:
+    networkInterface:
+    - deviceIndex: 0
+      networkInterfaceIdRef:
+        name: test
     region: us-west-1
     ami: ami-0d9858aa3c6322f73 # t2.micro us-west-1
     instanceType: t2.micro
@@ -42,7 +46,22 @@ spec:
     region: us-west-1
     subnetIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: subnet1
+        testing.upbound.io/example-name: subnetattach
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: NetworkInterface
+metadata:
+  labels:
+    testing.upbound.io/example-name: test2
+  name: test2
+spec:
+  forProvider:
+    region: us-west-1
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: subnetattach2
 
 ---
 
@@ -50,15 +69,33 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   labels:
-    testing.upbound.io/example-name: subnet1
-  name: subnet1
+    testing.upbound.io/example-name: subnetattach2
+  name: subnetattach2
 spec:
   forProvider:
+    availabilityZone: us-west-1b
     region: us-west-1
     cidrBlock: 10.0.1.0/24
     vpcIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: vpc1
+        testing.upbound.io/example-name: vpcattach
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: subnetattach
+  name: subnetattach
+spec:
+  forProvider:
+    availabilityZone: us-west-1b
+    region: us-west-1
+    cidrBlock: 10.0.5.0/24
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpcattach
 
 ---
 
@@ -66,8 +103,8 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   labels:
-    testing.upbound.io/example-name: vpc1
-  name: vpc1
+    testing.upbound.io/example-name: vpcattach
+  name: vpcattach
 spec:
   forProvider:
     region: us-west-1

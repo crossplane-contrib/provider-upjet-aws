@@ -43,8 +43,11 @@ func Configure(p *config.Provider) {
 				"network_interface",
 				"private_ip",
 				"source_dest_check",
+				"vpc_security_group_ids",
+				"associate_public_ip_address",
 			},
 		}
+		config.MoveToStatus(r.TerraformResource, "security_groups")
 	})
 	p.AddResourceConfigurator("aws_eip", func(r *config.Resource) {
 		r.References["instance"] = config.Reference{
@@ -59,9 +62,6 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_route", func(r *config.Resource) {
 		r.References["transit_gateway_attachment_id"] = config.Reference{
 			Type: "TransitGatewayVPCAttachment",
-		}
-		r.References["transit_gateway_route_table_id"] = config.Reference{
-			Type: "TransitGatewayRouteTable",
 		}
 	})
 
@@ -138,6 +138,7 @@ func Configure(p *config.Provider) {
 				"availability_zone_id",
 			},
 		}
+		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("aws_network_interface", func(r *config.Resource) {
@@ -276,5 +277,32 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_spot_datafeed_subscription", func(r *config.Resource) {
 		delete(r.References, "bucket")
+	})
+
+	p.AddResourceConfigurator("aws_vpc", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{
+				"ipv6_cidr_block",
+			},
+		}
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("aws_ec2_transit_gateway_multicast_domain", func(r *config.Resource) {
+		r.References["transit_gateway_id"] = config.Reference{
+			Type: "TransitGateway",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_spot_instance_request", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{
+				"valid_until",
+				"valid_from",
+				"instance_interruption_behavior",
+				"source_dest_check",
+				"spot_type",
+			},
+		}
 	})
 }

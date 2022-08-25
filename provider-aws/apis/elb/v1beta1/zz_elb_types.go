@@ -126,8 +126,15 @@ type ELBParameters struct {
 	SourceSecurityGroup *string `json:"sourceSecurityGroup,omitempty" tf:"source_security_group,omitempty"`
 
 	// A list of subnet IDs to attach to the ELB.
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubnetsRefs []v1.Reference `json:"subnetsRefs,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	SubnetsSelector *v1.Selector `json:"subnetsSelector,omitempty" tf:"-"`
 
 	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional

@@ -1,14 +1,53 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Route
 metadata:
-  name: example
+  name: route
 spec:
   forProvider:
     region: us-west-1
     destinationCidrBlock: 0.0.0.0/0
     gatewayIdRef:
-      name: example
+      name: routegw
     routeTableIdRef:
-      name: example
-  providerConfigRef:
-    name: default
+      name: table
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  name: table
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: example
+    vpcIdRef:
+      name: route-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: InternetGateway
+metadata:
+  name: routegw
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: main
+    vpcIdRef:
+      name: route-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: route-vpc
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc

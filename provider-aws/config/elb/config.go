@@ -8,6 +8,9 @@ func Configure(p *config.Provider) {
 		r.References["instances"] = config.Reference{
 			Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Instance",
 		}
+		r.References["subnets"] = config.Reference{
+			Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
+		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"access_logs"},
 		}

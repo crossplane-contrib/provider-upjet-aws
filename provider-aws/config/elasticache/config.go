@@ -33,6 +33,11 @@ func Configure(p *config.Provider) {
 			// Conflicting configuration arguments: "number_cache_clusters": conflicts with cluster_mode.0.num_node_groups
 			IgnoredFields: []string{
 				"cluster_mode",
+				"num_node_groups",
+				"num_cache_clusters",
+				"number_cache_clusters",
+				"replication_group_description",
+				"description",
 			},
 		}
 		delete(r.References, "log_delivery_configuration.destination")

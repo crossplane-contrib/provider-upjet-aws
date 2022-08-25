@@ -1,12 +1,14 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: NATGateway
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource exceeds limit of 8 NAT gateways."
   name: example
 spec:
   forProvider:
     region: us-west-1
     connectivityType: "private"
     subnetIdRef:
-      name: example
+      name: sample-subnet1
     tags:
       Name: gw NAT
