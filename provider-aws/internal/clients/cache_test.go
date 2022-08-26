@@ -86,7 +86,7 @@ func TestGetCallerIdentity(t *testing.T) {
 			},
 		},
 		"CleanCache": {
-			reason: "It should make sure the size of the cache is within the limits after every call.",
+			reason: "It should make sure the size of the cache is within the limits after every call and the dustiest one is deleted.",
 			args: args{
 				getCallerIdentityFn: func(_ context.Context, _ aws.Config) (*sts.GetCallerIdentityOutput, error) {
 					return sample, nil
@@ -99,11 +99,11 @@ func TestGetCallerIdentity(t *testing.T) {
 				cache: map[string]*callerIdentityCacheEntry{
 					"sampleaccess:samplesecret:sampletoken": {
 						GetCallerIdentityOutput: sample,
-						LastAccessTime:          ti.Truncate(time.Minute * 1),
+						LastAccessTime:          ti.Add(-time.Hour * 1),
 					},
 					"sampleaccess:samplesecret:sampletoken2": {
 						GetCallerIdentityOutput: sample,
-						LastAccessTime:          ti.Truncate(time.Minute * 5),
+						LastAccessTime:          ti.Add(-time.Hour * 5), // this should be deleted
 					},
 				},
 				maxSize: 2,

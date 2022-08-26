@@ -63,16 +63,19 @@ func NewCallerIdentityCache(opts ...CallerIdentityCacheOption) *CallerIdentityCa
 
 // CallerIdentityCache holds GetCallerIdentityOutput objects in memory so that
 // we don't need to make API calls to AWS in every reconciliation of every
-// resource. It has a maximum size that when it's reached, random entries from
-// the cache will be deleted to keep a ceiling on the memory it uses.
+// resource. It has a maximum size that when it's reached, the entry that has
+// the oldest access time will be removed from the cache, i.e. FIFO on last access
+// time.
+// Note that there is no need to invalidate the values in the cache because they
+// never change so we don't need concurrency-safety to prevent access to an
+// invalidated entry.
 type CallerIdentityCache struct {
 	// cache holds caller identity with a key whose format is the following:
 	// <access_key>:<secret_key>:<token>
 	// Any of the variables could be empty.
 	cache map[string]*callerIdentityCacheEntry
 
-	// maxSize is the maximum number of elements this cache can have. When it
-	// reaches above this number, randomly selected entries will be deleted.
+	// maxSize is the maximum number of elements this cache can ever have.
 	maxSize int
 
 	// newClientFn returns a client that we can call GetCallerIdentity function
