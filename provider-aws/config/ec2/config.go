@@ -170,6 +170,7 @@ func Configure(p *config.Provider) {
 				"name", "name_prefix",
 			},
 		}
+		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("aws_security_group_rule", func(r *config.Resource) {
