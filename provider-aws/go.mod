@@ -14,7 +14,7 @@ require (
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.17.0
 	github.com/pkg/errors v0.9.1
 	github.com/upbound/official-providers/updoc v0.0.0-00010101000000-000000000000
-	github.com/upbound/upjet v0.6.1-0.20220815154333-a5c382cb0ed9
+	github.com/upbound/upjet v0.6.1-0.20220824074918-97fd5c1cf37e
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.24.0
 	k8s.io/client-go v0.24.0
@@ -151,7 +151,6 @@ require (
 	google.golang.org/genproto v0.0.0-20220617124728-180714bec0ad // indirect
 	google.golang.org/grpc v1.47.0 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
-	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/ini.v1 v1.62.0 // indirect
 	gopkg.in/square/go-jose.v2 v2.5.1 // indirect
