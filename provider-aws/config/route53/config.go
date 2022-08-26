@@ -10,6 +10,14 @@ import (
 
 // Configure route53 resources.
 func Configure(p *config.Provider) {
+	p.AddResourceConfigurator("aws_route53_traffic_policy_instance", func(r *config.Resource) {
+		r.References["hosted_zone_id"] = config.Reference{
+			Type: "Zone",
+		}
+		r.References["traffic_policy_id"] = config.Reference{
+			Type: "TrafficPolicy",
+		}
+	})
 	p.AddResourceConfigurator("aws_route53_hosted_zone_dnssec", func(r *config.Resource) {
 		r.References["hosted_zone_id"] = config.Reference{
 			Type: "Zone",
@@ -28,7 +36,6 @@ func Configure(p *config.Provider) {
 		r.References["hosted_zone_id"] = config.Reference{
 			Type: "Zone",
 		}
-		delete(r.References, "zone_id")
 	})
 	p.AddResourceConfigurator("aws_route53_record", func(r *config.Resource) {
 		r.References["zone_id"] = config.Reference{

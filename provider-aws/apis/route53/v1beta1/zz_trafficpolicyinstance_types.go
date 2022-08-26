@@ -22,8 +22,15 @@ type TrafficPolicyInstanceObservation struct {
 type TrafficPolicyInstanceParameters struct {
 
 	// ID of the hosted zone that you want Amazon Route 53 to create resource record sets in by using the configuration in a traffic policy.
-	// +kubebuilder:validation:Required
-	HostedZoneID *string `json:"hostedZoneId" tf:"hosted_zone_id,omitempty"`
+	// +crossplane:generate:reference:type=Zone
+	// +kubebuilder:validation:Optional
+	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	HostedZoneIDRef *v1.Reference `json:"hostedZoneIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	HostedZoneIDSelector *v1.Selector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
 
 	// Domain name for which Amazon Route 53 responds to DNS queries by using the resource record sets that Route 53 creates for this traffic policy instance.
 	// +kubebuilder:validation:Required
@@ -39,8 +46,15 @@ type TrafficPolicyInstanceParameters struct {
 	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
 
 	// ID of the traffic policy that you want to use to create resource record sets in the specified hosted zone.
-	// +kubebuilder:validation:Required
-	TrafficPolicyID *string `json:"trafficPolicyId" tf:"traffic_policy_id,omitempty"`
+	// +crossplane:generate:reference:type=TrafficPolicy
+	// +kubebuilder:validation:Optional
+	TrafficPolicyID *string `json:"trafficPolicyId,omitempty" tf:"traffic_policy_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TrafficPolicyIDRef *v1.Reference `json:"trafficPolicyIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	TrafficPolicyIDSelector *v1.Selector `json:"trafficPolicyIdSelector,omitempty" tf:"-"`
 
 	// Version of the traffic policy
 	// +kubebuilder:validation:Required

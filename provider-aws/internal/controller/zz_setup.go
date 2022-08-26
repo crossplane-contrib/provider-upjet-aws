@@ -306,14 +306,11 @@ import (
 	delegationset "github.com/upbound/official-providers/provider-aws/internal/controller/route53/delegationset"
 	healthcheck "github.com/upbound/official-providers/provider-aws/internal/controller/route53/healthcheck"
 	hostedzonednssec "github.com/upbound/official-providers/provider-aws/internal/controller/route53/hostedzonednssec"
-	keysigningkey "github.com/upbound/official-providers/provider-aws/internal/controller/route53/keysigningkey"
-	querylog "github.com/upbound/official-providers/provider-aws/internal/controller/route53/querylog"
 	record "github.com/upbound/official-providers/provider-aws/internal/controller/route53/record"
 	trafficpolicy "github.com/upbound/official-providers/provider-aws/internal/controller/route53/trafficpolicy"
 	trafficpolicyinstance "github.com/upbound/official-providers/provider-aws/internal/controller/route53/trafficpolicyinstance"
 	vpcassociationauthorization "github.com/upbound/official-providers/provider-aws/internal/controller/route53/vpcassociationauthorization"
 	zone "github.com/upbound/official-providers/provider-aws/internal/controller/route53/zone"
-	zoneassociation "github.com/upbound/official-providers/provider-aws/internal/controller/route53/zoneassociation"
 	dnssecconfig "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/dnssecconfig"
 	endpoint "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/endpoint"
 	firewallconfig "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/firewallconfig"
@@ -662,14 +659,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		delegationset.Setup,
 		healthcheck.Setup,
 		hostedzonednssec.Setup,
-		keysigningkey.Setup,
-		querylog.Setup,
 		record.Setup,
 		trafficpolicy.Setup,
 		trafficpolicyinstance.Setup,
 		vpcassociationauthorization.Setup,
 		zone.Setup,
-		zoneassociation.Setup,
 		dnssecconfig.Setup,
 		endpoint.Setup,
 		firewallconfig.Setup,

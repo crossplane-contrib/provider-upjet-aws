@@ -467,9 +467,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_route53_hosted_zone_dnssec": config.IdentifierFromProvider,
 	// Imported by using the Route 53 Hosted Zone identifier and KMS Key
 	// identifier, separated by a comma (,), e.g., Z1D633PJN98FT9,example
-	"aws_route53_key_signing_key": FormattedIdentifierUserDefined("name", ",", "hosted_zone_id"),
+	// disabled until it's successfully tested
+	// "aws_route53_key_signing_key": FormattedIdentifierUserDefined("name", ",", "hosted_zone_id"),
 	// xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-	"aws_route53_query_log": config.IdentifierFromProvider,
+	// disabled until it's successfully tested
+	// "aws_route53_query_log": config.IdentifierFromProvider,
 	// Imported using ID of the record, which is the zone identifier, record
 	// name, and record type, separated by underscores (_)
 	// Z4KAPRWWNC7JR_dev.example.com_NS
@@ -479,7 +481,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Z1D633PJN98FT9
 	"aws_route53_zone": config.IdentifierFromProvider,
 	// Z123456ABCDEFG:vpc-12345678
-	"aws_route53_zone_association": FormattedIdentifierFromProvider(":", "zone_id", "vpc_id"),
+	// disabled until it's successfully tested
+	// "aws_route53_zone_association": FormattedIdentifierFromProvider(":", "zone_id", "vpc_id"),
 	// Imported using the id and version, e.g.,
 	// 01a52019-d16f-422a-ae72-c306d2b6df7e/1
 	"aws_route53_traffic_policy": config.IdentifierFromProvider,

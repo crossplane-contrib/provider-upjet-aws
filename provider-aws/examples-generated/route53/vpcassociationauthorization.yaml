@@ -29,25 +29,6 @@ spec:
 
 ---
 
-apiVersion: route53.aws.upbound.io/v1beta1
-kind: ZoneAssociation
-metadata:
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    provider: aws.alternate
-    region: us-west-1
-    vpcIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    zoneIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-
----
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
