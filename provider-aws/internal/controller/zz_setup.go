@@ -103,6 +103,7 @@ import (
 	kinesisstreamingdestination "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
 	table "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/table"
 	tableitem "github.com/upbound/official-providers/provider-aws/internal/controller/dynamodb/tableitem"
+	defaultroutetable "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/defaultroutetable"
 	ebssnapshot "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/ebssnapshot"
 	ebsvolume "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/ebsvolume"
 	egressonlyinternetgateway "github.com/upbound/official-providers/provider-aws/internal/controller/ec2/egressonlyinternetgateway"
@@ -466,6 +467,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		kinesisstreamingdestination.Setup,
 		table.Setup,
 		tableitem.Setup,
+		defaultroutetable.Setup,
 		ebssnapshot.Setup,
 		ebsvolume.Setup,
 		egressonlyinternetgateway.Setup,

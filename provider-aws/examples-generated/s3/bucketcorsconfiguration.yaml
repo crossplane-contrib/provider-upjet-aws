@@ -31,6 +31,8 @@ spec:
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: example
   name: example

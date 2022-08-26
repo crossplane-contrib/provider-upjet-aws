@@ -1,11 +1,13 @@
 apiVersion: eks.aws.upbound.io/v1alpha2
 kind: IdentityProviderConfig
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs valid OpenID Connect id and url."
   name: example
 spec:
   forProvider:
     clusterNameRef:
-      name: example
+      name: sample-eks-cluster
     oidc:
     - clientId: your client_id
       identityProviderConfigName: example

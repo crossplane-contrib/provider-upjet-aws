@@ -1,6 +1,8 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: UserSSHKey
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires a valid public key."
   name: example
 spec:
   forProvider:

@@ -7,6 +7,7 @@ metadata:
 spec:
   forProvider:
     family: redis2.8
+    name: cache-params
     parameter:
     - name: activerehashing
       value: "yes"

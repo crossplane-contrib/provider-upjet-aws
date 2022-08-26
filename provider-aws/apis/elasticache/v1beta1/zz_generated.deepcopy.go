@@ -617,6 +617,11 @@ func (in *ParameterGroupParameters) DeepCopyInto(out *ParameterGroupParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.Parameter != nil {
 		in, out := &in.Parameter, &out.Parameter
 		*out = make([]ParameterParameters, len(*in))

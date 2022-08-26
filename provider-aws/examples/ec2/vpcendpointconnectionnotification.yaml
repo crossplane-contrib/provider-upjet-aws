@@ -2,6 +2,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCEndpointConnectionNotification
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs a VPCEndpointService and it requires manual intervention."
   labels:
     testing.upbound.io/example-name: foo
   name: foo
@@ -23,6 +25,8 @@ spec:
 apiVersion: sns.aws.upbound.io/v1beta1
 kind: Topic
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs a VPCEndpointService and it requires manual intervention."
   labels:
     testing.upbound.io/example-name: topic
   name: topic
@@ -48,6 +52,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCEndpointService
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs manual intervention."
   labels:
     testing.upbound.io/example-name: foo
   name: foo

@@ -160,6 +160,9 @@ type InstanceObservation struct {
 	// +kubebuilder:validation:Optional
 	RootBlockDevice []RootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
+	// A list of security group names to associate with.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -294,19 +297,6 @@ type InstanceParameters struct {
 	// A list of secondary private IPv4 addresses to assign to the instance's primary network interface  in a VPC. Can only be assigned to the primary network interface  attached at instance creation, not a pre-existing network interface i.e., referenced in a network_interface block. Refer to the Elastic network interfaces documentation to see the maximum number of private IP addresses allowed per instance type.
 	// +kubebuilder:validation:Optional
 	SecondaryPrivateIps []*string `json:"secondaryPrivateIps,omitempty" tf:"secondary_private_ips,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
-
-	// A list of security group names to associate with.
-	// +crossplane:generate:reference:type=SecurityGroup
-	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
-	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
-	// +kubebuilder:validation:Optional
-	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs. Defaults true.
 	// +kubebuilder:validation:Optional

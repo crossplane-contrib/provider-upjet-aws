@@ -8,4 +8,4 @@ spec:
       name: sample-user
   writeConnectionSecretToRef:
     name: sample-access-key-secret
-    namespace: crossplane-system
+    namespace: upbound-system

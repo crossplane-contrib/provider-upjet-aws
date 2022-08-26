@@ -71,6 +71,8 @@ spec:
                   family:
                     description: The family of the ElastiCache parameter group.
                     type: string
+                  name:
+                    type: string
                   parameter:
                     description: A list of ElastiCache parameters to apply.
                     items:
@@ -98,6 +100,7 @@ spec:
                     type: object
                 required:
                 - family
+                - name
                 - region
                 type: object
               providerConfigRef:

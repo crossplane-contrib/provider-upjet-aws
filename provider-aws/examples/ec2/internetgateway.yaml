@@ -9,5 +9,3 @@ spec:
       Name: main
     vpcIdRef:
       name: sample-vpc
-  providerConfigRef:
-    name: default
