@@ -1,7 +1,7 @@
 apiVersion: sfn.aws.upbound.io/v1beta1
 kind: StateMachine
 metadata:
-  name: example
+  name: my-state-machine
 spec:
   forProvider:
     definition: |
@@ -16,7 +16,6 @@ spec:
           }
         }
       }
-    name: my-state-machine
     region: us-west-1
     roleArnRef:
       name: example

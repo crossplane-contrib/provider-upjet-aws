@@ -4,7 +4,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    name: example
     region: us-west-1
     description: a sample description
     functionNameRef:

@@ -46,7 +46,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    name: order_item_changes
     region: us-west-1
     shardCount: 1
 

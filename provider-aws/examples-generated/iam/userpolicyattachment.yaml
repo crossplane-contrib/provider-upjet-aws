@@ -28,7 +28,6 @@ metadata:
 spec:
   forProvider:
     description: A test policy
-    name: test-policy
     policy: '{ ... policy JSON ... }'
 
 ---

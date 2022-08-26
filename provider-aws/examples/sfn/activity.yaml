@@ -1,8 +1,7 @@
 apiVersion: sfn.aws.upbound.io/v1beta1
 kind: Activity
 metadata:
-  name: example
+  name: my-activity
 spec:
   forProvider:
-    name: my-activity
     region: us-west-1

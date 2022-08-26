@@ -339,11 +339,6 @@ func (in *StreamParameters) DeepCopyInto(out *StreamParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)

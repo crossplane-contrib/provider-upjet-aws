@@ -2045,11 +2045,6 @@ func (in *RegistryParameters) DeepCopyInto(out *RegistryParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.RegistryName != nil {
-		in, out := &in.RegistryName, &out.RegistryName
-		*out = new(string)
-		**out = **in
-	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

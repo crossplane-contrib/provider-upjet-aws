@@ -64,7 +64,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     functionVersion: $LATEST
-    name: testalias
     region: us-west-1
 
 ---

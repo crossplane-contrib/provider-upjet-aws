@@ -71,9 +71,6 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  registryName:
-                    description: –  The Name of the registry.
-                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -83,7 +80,6 @@ spec:
                     type: object
                 required:
                 - region
-                - registryName
                 type: object
               providerConfigRef:
                 default:

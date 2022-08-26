@@ -43,7 +43,6 @@ metadata:
   name: default
 spec:
   forProvider:
-    name: my-saml-provider
     samlMetadataDocument: ${file("saml-metadata.xml")}
 
 ---

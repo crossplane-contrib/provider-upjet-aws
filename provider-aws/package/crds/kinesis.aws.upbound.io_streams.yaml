@@ -154,8 +154,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  name:
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -197,7 +195,6 @@ spec:
                       with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

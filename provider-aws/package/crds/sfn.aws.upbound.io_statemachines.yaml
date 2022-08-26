@@ -91,11 +91,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  name:
-                    description: The name of the state machine. To enable logging
-                      with CloudWatch Logs, the name should only contain 0-9, A-Z,
-                      a-z, - and _.
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -204,7 +199,6 @@ spec:
                     type: string
                 required:
                 - definition
-                - name
                 - region
                 type: object
               providerConfigRef:

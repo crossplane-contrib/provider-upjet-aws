@@ -40,7 +40,6 @@ spec:
           configurationType: CUSTOM
           parallelism: 10
           parallelismPerKpu: 4
-    name: example-flink-application
     region: us-west-1
     runtimeEnvironment: FLINK-1_8
     serviceExecutionRoleSelector:

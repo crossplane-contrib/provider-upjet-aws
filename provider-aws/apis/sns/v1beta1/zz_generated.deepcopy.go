@@ -286,16 +286,6 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
-	if in.NamePrefix != nil {
-		in, out := &in.NamePrefix, &out.NamePrefix
-		*out = new(string)
-		**out = **in
-	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
 		*out = new(string)

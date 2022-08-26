@@ -147,9 +147,6 @@ spec:
                     description: 'Lambda function version for which you are creating
                       the alias. Pattern: .'
                     type: string
-                  name:
-                    description: 'Name for the alias you are creating. Pattern:'
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -170,7 +167,6 @@ spec:
                     type: array
                 required:
                 - functionVersion
-                - name
                 - region
                 type: object
               providerConfigRef:

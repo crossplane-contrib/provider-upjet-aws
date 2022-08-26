@@ -1,7 +1,7 @@
 apiVersion: kinesisanalytics.aws.upbound.io/v1beta1
 kind: Application
 metadata:
-  name: example
+  name: kinesis-analytics-application-test
 spec:
   forProvider:
     region: us-west-1
@@ -24,4 +24,3 @@ spec:
         - mappingParameters:
           - json:
             - recordRowPath: $
-    name: kinesis-analytics-application-test

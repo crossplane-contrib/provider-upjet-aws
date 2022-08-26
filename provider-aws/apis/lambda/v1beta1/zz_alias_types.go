@@ -47,10 +47,6 @@ type AliasParameters struct {
 	// +kubebuilder:validation:Required
 	FunctionVersion *string `json:"functionVersion" tf:"function_version,omitempty"`
 
-	// Name for the alias you are creating. Pattern:
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
-
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

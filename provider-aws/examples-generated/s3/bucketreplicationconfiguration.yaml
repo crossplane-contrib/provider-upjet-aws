@@ -39,7 +39,6 @@ metadata:
   name: replication
 spec:
   forProvider:
-    name: tf-iam-role-policy-replication-12345
     policy: |
       {
         "Version": "2012-10-17",

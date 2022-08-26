@@ -31,7 +31,6 @@ metadata:
   name: test
 spec:
   forProvider:
-    name: backup-vault-events
     region: us-west-1
 
 ---

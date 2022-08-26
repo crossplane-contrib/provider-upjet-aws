@@ -1390,8 +1390,6 @@ spec:
                       - roleArn
                       type: object
                     type: array
-                  name:
-                    type: string
                   redshiftConfiguration:
                     description: Configuration options if redshift is the destination.
                       Using redshift_configuration requires the user to also specify
@@ -2163,7 +2161,6 @@ spec:
                     type: string
                 required:
                 - destination
-                - name
                 - region
                 type: object
               providerConfigRef:

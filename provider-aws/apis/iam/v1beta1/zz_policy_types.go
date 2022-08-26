@@ -34,13 +34,6 @@ type PolicyParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Creates a unique name beginning with the specified prefix. Conflicts with name.
-	// +kubebuilder:validation:Optional
-	NamePrefix *string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty"`
-
-	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// +kubebuilder:validation:Required
