@@ -492,25 +492,33 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// route53resolver
 	//
 	// rdsc-be1866ecc1683e95
-	"aws_route53_resolver_dnssec_config": config.IdentifierFromProvider,
+	// disabled until it's successfully tested
+	// "aws_route53_resolver_dnssec_config": config.IdentifierFromProvider,
 	// rslvr-in-abcdef01234567890
 	"aws_route53_resolver_endpoint": config.IdentifierFromProvider,
 	// rdsc-be1866ecc1683e95
-	"aws_route53_resolver_firewall_config": config.IdentifierFromProvider,
+	// disabled until it's successfully tested
+	// "aws_route53_resolver_firewall_config": config.IdentifierFromProvider,
 	// rslvr-fdl-0123456789abcdef
-	"aws_route53_resolver_firewall_domain_list": config.IdentifierFromProvider,
+	// disabled until it's successfully tested
+	// "aws_route53_resolver_firewall_domain_list": config.IdentifierFromProvider,
 	// Imported using the Route 53 Resolver DNS Firewall rule group ID and
 	// domain list ID separated by ':', e.g.,
 	// rslvr-frg-0123456789abcdef:rslvr-fdl-0123456789abcdef
-	"aws_route53_resolver_firewall_rule": config.IdentifierFromProvider,
+	// disabled until it's successfully tested
+	// "aws_route53_resolver_firewall_rule": config.IdentifierFromProvider,
 	// rslvr-frg-0123456789abcdef
-	"aws_route53_resolver_firewall_rule_group": config.IdentifierFromProvider,
+	// disabled until it's successfully tested
+	// "aws_route53_resolver_firewall_rule_group": config.IdentifierFromProvider,
 	// rslvr-frgassoc-0123456789abcdef
-	"aws_route53_resolver_firewall_rule_group_association": config.IdentifierFromProvider,
+	// disabled until it's successfully tested
+	// "aws_route53_resolver_firewall_rule_group_association": config.IdentifierFromProvider,
 	// rqlc-92edc3b1838248bf
-	"aws_route53_resolver_query_log_config": config.IdentifierFromProvider,
+	// disabled until it's successfully tested
+	// "aws_route53_resolver_query_log_config": config.IdentifierFromProvider,
 	// rqlca-b320624fef3c4d70
-	"aws_route53_resolver_query_log_config_association": config.IdentifierFromProvider,
+	// disabled until it's successfully tested
+	// "aws_route53_resolver_query_log_config_association": config.IdentifierFromProvider,
 	// rslvr-rr-0123456789abcdef0
 	"aws_route53_resolver_rule": config.IdentifierFromProvider,
 	// rslvr-rrassoc-97242eaf88example

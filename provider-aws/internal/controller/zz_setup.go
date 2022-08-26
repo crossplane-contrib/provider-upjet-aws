@@ -311,15 +311,7 @@ import (
 	trafficpolicyinstance "github.com/upbound/official-providers/provider-aws/internal/controller/route53/trafficpolicyinstance"
 	vpcassociationauthorization "github.com/upbound/official-providers/provider-aws/internal/controller/route53/vpcassociationauthorization"
 	zone "github.com/upbound/official-providers/provider-aws/internal/controller/route53/zone"
-	dnssecconfig "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/dnssecconfig"
 	endpoint "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/endpoint"
-	firewallconfig "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/firewallconfig"
-	firewalldomainlist "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/firewalldomainlist"
-	firewallrule "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/firewallrule"
-	firewallrulegroup "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/firewallrulegroup"
-	firewallrulegroupassociation "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/firewallrulegroupassociation"
-	querylogconfig "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/querylogconfig"
-	querylogconfigassociation "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/querylogconfigassociation"
 	rule "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/rule"
 	ruleassociation "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/ruleassociation"
 	bucket "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucket"
@@ -664,15 +656,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		trafficpolicyinstance.Setup,
 		vpcassociationauthorization.Setup,
 		zone.Setup,
-		dnssecconfig.Setup,
 		endpoint.Setup,
-		firewallconfig.Setup,
-		firewalldomainlist.Setup,
-		firewallrule.Setup,
-		firewallrulegroup.Setup,
-		firewallrulegroupassociation.Setup,
-		querylogconfig.Setup,
-		querylogconfigassociation.Setup,
 		rule.Setup,
 		ruleassociation.Setup,
 		bucket.Setup,
