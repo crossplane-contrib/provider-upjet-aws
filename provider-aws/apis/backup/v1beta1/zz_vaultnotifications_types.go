@@ -29,8 +29,15 @@ type VaultNotificationsParameters struct {
 	BackupVaultEvents []*string `json:"backupVaultEvents" tf:"backup_vault_events,omitempty"`
 
 	// Name of the backup vault to add notifications for.
-	// +kubebuilder:validation:Required
-	BackupVaultName *string `json:"backupVaultName" tf:"backup_vault_name,omitempty"`
+	// +crossplane:generate:reference:type=Vault
+	// +kubebuilder:validation:Optional
+	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	BackupVaultNameRef *v1.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-

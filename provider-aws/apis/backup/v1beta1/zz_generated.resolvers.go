@@ -121,6 +121,22 @@ func (mg *VaultNotifications) ResolveReferences(ctx context.Context, c client.Re
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackupVaultName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.BackupVaultNameRef,
+		Selector:     mg.Spec.ForProvider.BackupVaultNameSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.BackupVaultName")
+	}
+	mg.Spec.ForProvider.BackupVaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BackupVaultNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnsTopicArn),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.SnsTopicArnRef,

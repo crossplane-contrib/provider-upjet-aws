@@ -2,8 +2,23 @@ apiVersion: backup.aws.upbound.io/v1beta1
 kind: Vault
 metadata:
   name: example-bucket-vault
+  labels:
+    testing.upbound.io/example-name: example
 spec:
   forProvider:
     region: us-west-1
-    kmsKeyArnRef:
-      name: sample-key
+    kmsKeyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: kmskey
+---
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  labels:
+    testing.upbound.io/example-name: kmskey
+  name: kmskey
+spec:
+  forProvider:
+    deletionWindowInDays: 10
+    description: KMS key 1
+    region: us-west-1

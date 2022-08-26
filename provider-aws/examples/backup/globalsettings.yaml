@@ -2,6 +2,8 @@ apiVersion: backup.aws.upbound.io/v1beta1
 kind: GlobalSettings
 metadata:
   name: example
+  annotation:
+    upjet.upbound.io/manual-intervention: "This resource requires you to use the management user, not an IAM user, which makes it incompatible for Uptest."
 spec:
   forProvider:
     region: us-west-1

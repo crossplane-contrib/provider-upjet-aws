@@ -1,16 +1,55 @@
 apiVersion: backup.aws.upbound.io/v1beta1
 kind: Selection
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    region: us-west-1
-    selectionTag:
-    - type: "STRINGEQUALS"
-      key: "foo"
-      value: "bar"
-    planIdRef:
-      name: example
     name: example
-    iamRoleArnRef:
-      name: sample-iam-role
+    selectionTag:
+      - key: some
+        type: STRINGEQUALS
+        value: resource
+    iamRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    planIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": ["sts:AssumeRole"],
+            "Effect": "allow",
+            "Principal": {
+              "Service": ["backup.amazonaws.com"]
+            }
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policyArn: "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

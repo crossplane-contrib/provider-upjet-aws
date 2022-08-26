@@ -30,5 +30,8 @@ func Configure(p *config.Provider) {
 			Type:      "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1.Topic",
 			Extractor: common.PathARNExtractor,
 		}
+		r.References["backup_vault_name"] = config.Reference{
+			Type: "Vault",
+		}
 	})
 }

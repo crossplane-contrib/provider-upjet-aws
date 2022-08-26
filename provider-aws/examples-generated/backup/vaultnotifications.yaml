@@ -11,7 +11,9 @@ spec:
     backupVaultEvents:
     - BACKUP_JOB_STARTED
     - RESTORE_JOB_COMPLETED
-    backupVaultName: example_backup_vault
+    backupVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
     snsTopicArnSelector:
       matchLabels:
