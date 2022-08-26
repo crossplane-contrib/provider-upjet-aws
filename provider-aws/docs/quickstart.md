@@ -8,41 +8,31 @@ This guide walks through the process to install Upbound Universal Crossplane and
 To use this official provider, install Upbound Universal Crossplane into your Kubernetes cluster, install the `Provider`, apply a `ProviderConfiguration`, and create a *managed resource* in AWS via Kubernetes.
 
 ## Create an Upbound.io user account
-Create an account on [Upbound.io](https://cloud.upbound.io/register). 
-
-<!-- Find detailed instructions in the [account documentation](/getting-started/create-account). -->
-## Create an Upbound robot account and robot token
-Installing an Official Provider requires an Upbound account and associated _Robot Token_.
-
-To create a robot account and robot token in the Upbound Universal Console:
-1. Log in to the [Upbound Universal Console](https://cloud.upbound.io) and select **Create New Organization** from the account menu.
-2. Provide a unique **Organization ID** and **Display Name**.
-3. Select the organization from the account menu.
-4. Select **Admin Console**.
-5. Select **Robots** from the left-hand navigation. 
-6. Select **Create Robot Account**.
-7. Provide a **Name** and optional description.
-8. Select **Create Robot**.
-9. Select **Create Token**.
-10. Provide a **Name** for the token.
-
-The console generates an `Access ID` and `Token` on screen. Save this token. The Console can't print the token again.
-
-<!-- Find detailed instructions in the [Robot account and Robot Token](/upbound-cloud/robot-accounts) documentation.  -->
+Create an account on [Upbound.io](https://accounts.upbound.io/register). 
 
 ## Install the Up command-line
-Install the [Up command-line](https://cloud.upbound.io/docs/cli/install) to connect to Upbound managed control planes.
+Download and install the Upbound `up` command-line.
 
 ```shell
 curl -sL "https://cli.upbound.io" | sh
-sudo mv up /usr/local/bin/
+mv up /usr/local/bin/
 ```
+
+Verify the version of `up` with `up --version`
+
+```shell
+$ up --version
+v0.13.0
+```
+
+_Note_: official providers only support `up` command-line versions v0.13.0 or later.
 
 ## Install Universal Crossplane
 Install Upbound Universal Crossplane with the Up command-line.
 
 ```shell
-up uxp install
+$ up uxp install
+UXP 1.9.0-up.3 installed
 ```
 
 Verify the UXP pods are running with `kubectl get pods -n upbound-system`
@@ -52,31 +42,44 @@ $ kubectl get pods -n upbound-system
 NAME                                        READY   STATUS    RESTARTS      AGE
 crossplane-7fdfbd897c-pmrml                 1/1     Running   0             68m
 crossplane-rbac-manager-7d6867bc4d-v7wpb    1/1     Running   0             68m
-provider-aws-136444403808-cfd7b6dbb-s9l9n   1/1     Running   0             54m
 upbound-bootstrapper-5f47977d54-t8kvk       1/1     Running   0             68m
 xgql-7c4b74c458-5bf2q                       1/1     Running   3 (67m ago)   68m
 ```
 
-## Create a Kubernetes imagePullSecret for Upbound
-Official providers require a Kubernetes `imagePullSecret` to download and install. The credentials for the `imagePullSecret` are from an Upbound robot token. 
+## Log in with the Up command-line
+Use `up login` to authenticate to the Upbound Marketplace.
 
-Using the **robot token** generated earlier create an `imagePullSecret` with the command `kubectl create secret docker-registry package-pull-secret`.
+It's important to use `-a <your organization>` when logging in. Only accounts belonging to organizations can use official providers.
 
 ```shell
-kubectl create secret docker-registry package-pull-secret \
---namespace=upbound-system \
---docker-server=xpkg.upbound.io \
---docker-username=<robot token access ID> \
---docker-password=<robot token value> 
+$ up login -a my-org
+username: my-user
+password: 
+my-user logged in
+```
+## Create a Kubernetes pull secret
+Downloading and installing official providers requires Kubernetes to authenticate to the Upbound Marketplace using a Kubernetes `secret` object.
+
+Using the `up controlplane pull-secret` command creates an [Upbound robot account](http://docs.upbound.io/cli/command-reference/robot/) account. 
+
+_Note_: robot accounts are independent from your account. Your account information is never stored in Kubernetes.
+
+```shell
+$ up controlplane pull-secret create my-upbound-secret
+WARNING: Using temporary user credentials that will expire within 30 days.
+my-org/my-upbound-secret created
 ```
 
-Replace `<robot token access ID>` with the `Access ID` of the robot token and `<robot token value>` with the value of the robot token.
+`Up` creates the secret in the `upbound-system` namespace. 
 
-Verify the secret with `kubectl get secrets`
 ```shell
-$ kubectl get secrets -n upbound-system package-pull-secret
-NAME                  TYPE                             DATA   AGE
-package-pull-secret   kubernetes.io/dockerconfigjson   1      23s
+$ kubectl get secret -n upbound-system
+NAME                                         TYPE                             DATA   AGE
+my-upbound-secret                            kubernetes.io/dockerconfigjson   1      8m46s
+sh.helm.release.v1.universal-crossplane.v1   helm.sh/release.v1               1      21m
+upbound-agent-tls                            Opaque                           3      21m
+uxp-ca                                       Opaque                           3      21m
+xgql-tls                                     Opaque                           3      21m
 ```
 
 ## Install the official AWS provider in to the managed control plane
@@ -92,8 +95,10 @@ metadata:
 spec:
   package: xpkg.upbound.io/upbound/provider-aws:v0.8.0
   packagePullSecrets:
-    - name: package-pull-secret
+    - name: my-upbound-secret
 ```
+
+_Note_: the `name` of the `packagePullSecrets` must be the same as the name of the Kubernetes secret just created.
 
 Apply this configuration with `kubectl apply -f`.
 
