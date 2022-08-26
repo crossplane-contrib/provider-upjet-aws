@@ -19,7 +19,7 @@ kind: Bucket
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "For deletion of this resource, firstly needs to be cleaned up."
-  name: up-spotdata
+  name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     region: us-west-1
