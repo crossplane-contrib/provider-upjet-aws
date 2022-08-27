@@ -17,5 +17,5 @@ spec:
     - passwordSecretRef:
         key: password
         name: mq-secret
-        namespace: crossplane-system
+        namespace: upbound-system
       username: admin
