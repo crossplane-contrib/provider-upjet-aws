@@ -34,4 +34,12 @@ func Configure(p *config.Provider) {
 			Type: "Vault",
 		}
 	})
+
+	p.AddResourceConfigurator("aws_backup_framework", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("aws_backup_plan", func(r *config.Resource) {
+		r.UseAsync = true
+	})
 }
