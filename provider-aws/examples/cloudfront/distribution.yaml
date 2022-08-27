@@ -2,6 +2,8 @@ apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: Distribution
 metadata:
   name: example-distribution
+  labels:
+    testing.upbound.io/example-name: cloudfront
 spec:
   forProvider:
     region: us-west-1

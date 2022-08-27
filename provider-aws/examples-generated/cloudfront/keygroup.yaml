@@ -9,8 +9,8 @@ metadata:
 spec:
   forProvider:
     comment: example key group
-    items:
-    - ${aws_cloudfront_public_key.example.id}
+    itemRefs:
+    - name: example
     name: example-key-group
     region: us-west-1
 

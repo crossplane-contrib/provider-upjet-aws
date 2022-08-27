@@ -2,7 +2,7 @@ apiVersion: backup.aws.upbound.io/v1beta1
 kind: VaultPolicy
 metadata:
   name: example
-  annotation:
+  annotations:
     upjet.upbound.io/manual-intervention: "The ARN of the Vault in the policy needs to be entered manually."
 spec:
   forProvider:

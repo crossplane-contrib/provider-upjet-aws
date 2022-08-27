@@ -6,8 +6,9 @@ spec:
   forProvider:
     region: us-west-1
     comment: example key group
-    items:
-    - ${aws_cloudfront_public_key.example.id}
+    itemSelector:
+      matchLabels:
+        testing.upbound.io/example-name: cloudfront
     name: example-key-group
   providerConfigRef:
     name: example

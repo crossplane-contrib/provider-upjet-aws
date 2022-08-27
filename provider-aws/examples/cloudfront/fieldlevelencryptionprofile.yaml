@@ -2,6 +2,8 @@ apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: FieldLevelEncryptionProfile
 metadata:
   name: example-field-level-encryption-profile
+  labels:
+    testing.upbound.io/example-name: cloudfront
 spec:
   forProvider:
     region: us-west-1
@@ -12,7 +14,9 @@ spec:
         - items:
           - DateOfBirth
         providerId: testprovider
-        publicKeyId: ${aws_cloudfront_public_key.example.id}
+        publicKeyIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: cloudfront
     name: testprofile
   providerConfigRef:
     name: example

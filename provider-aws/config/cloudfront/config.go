@@ -21,4 +21,12 @@ func Configure(p *config.Provider) {
 		r.TerraformResource.Schema["encoded_key"].Sensitive = true
 	})
 
+	p.AddResourceConfigurator("aws_cloudfront_key_group", func(r *config.Resource) {
+		r.References["items"] = config.Reference{
+			Type:              "PublicKey",
+			RefFieldName:      "ItemRefs",
+			SelectorFieldName: "ItemSelector",
+		}
+	})
+
 }
