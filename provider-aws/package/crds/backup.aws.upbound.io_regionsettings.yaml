@@ -71,14 +71,17 @@ spec:
                   resourceTypeManagementPreference:
                     additionalProperties:
                       type: boolean
-                    description: A map of services along with the management preferences
-                      for the Region.
+                    description: "A map of services along with the management preferences
+                      for the Region. \n WARNING: All parameters are required to be
+                      given: EFS, DynamoDB"
                     type: object
                   resourceTypeOptInPreference:
                     additionalProperties:
                       type: boolean
-                    description: A map of services along with the opt-in preferences
-                      for the Region.
+                    description: "A map of services along with the opt-in preferences
+                      for the Region. \n WARNING: All parameters are required to be
+                      given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage
+                      Gateway, VirtualMachine"
                     type: object
                 required:
                 - region

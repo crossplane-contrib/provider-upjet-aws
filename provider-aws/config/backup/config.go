@@ -42,4 +42,9 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_backup_plan", func(r *config.Resource) {
 		r.UseAsync = true
 	})
+	p.AddResourceConfigurator("aws_backup_region_settings", func(r *config.Resource) {
+		r.TerraformResource.Schema["resource_type_management_preference"].Description += "\nWARNING: All parameters are required to be given: EFS, DynamoDB"
+		r.TerraformResource.Schema["resource_type_opt_in_preference"].Description += "\nWARNING: All parameters are required to be given: " +
+			"EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage Gateway, VirtualMachine"
+	})
 }

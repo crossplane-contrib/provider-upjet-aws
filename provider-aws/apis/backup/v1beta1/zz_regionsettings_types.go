@@ -27,10 +27,14 @@ type RegionSettingsParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// A map of services along with the management preferences for the Region.
+	//
+	// WARNING: All parameters are required to be given: EFS, DynamoDB
 	// +kubebuilder:validation:Optional
 	ResourceTypeManagementPreference map[string]*bool `json:"resourceTypeManagementPreference,omitempty" tf:"resource_type_management_preference,omitempty"`
 
 	// A map of services along with the opt-in preferences for the Region.
+	//
+	// WARNING: All parameters are required to be given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage Gateway, VirtualMachine
 	// +kubebuilder:validation:Required
 	ResourceTypeOptInPreference map[string]*bool `json:"resourceTypeOptInPreference" tf:"resource_type_opt_in_preference,omitempty"`
 }
