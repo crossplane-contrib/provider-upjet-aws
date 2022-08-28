@@ -13,6 +13,7 @@ import (
 // Configure adds configurations for ec2 group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_instance", func(r *config.Resource) {
+		r.UseAsync = true
 		r.References["subnet_id"] = config.Reference{
 			Type: "Subnet",
 		}
