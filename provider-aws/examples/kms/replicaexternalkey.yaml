@@ -1,13 +1,22 @@
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: ExternalKey
 metadata:
-  name: sample-replicaexternalkey
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource has a secret reference."
+  labels:
+    testing.upbound.io/example-name: sample-externalkey-replicated
+  name: sample-externalkey-replicated
 spec:
   forProvider:
-    region: us-east-1
+    enabled: true
+    region: us-west-1
     description: Created with Crossplane
     multiRegion: true
     deletionWindowInDays: 7
+    keyMaterialBase64SecretRef:
+      key: key-metarial
+      name: example-externalkey
+      namespace: upbound-system
 
 ---
 
@@ -16,11 +25,16 @@ kind: ReplicaExternalKey
 metadata:
   name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "The referenced external key is in PendingImport state as we do not supply the key material to import."
+    upjet.upbound.io/manual-intervention: "This resource has a secret reference."
 spec:
   forProvider:
-    region: us-east-2
+    region: us-west-2
     description: "Multi-Region replica key"
     deletionWindowInDays: 7
-    primaryKeyArnRef:
-      name: sample-replicaexternalkey
+    keyMaterialBase64SecretRef:
+      key: key-metarial
+      name: example-externalkey
+      namespace: upbound-system
+    primaryKeyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-externalkey-replicated
