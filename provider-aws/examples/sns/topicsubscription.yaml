@@ -2,11 +2,32 @@ apiVersion: sns.aws.upbound.io/v1beta1
 kind: TopicSubscription
 metadata:
   name: example
+  labels:
+    testing.upbound.io/example-name: sns
 spec:
   forProvider:
     region: us-west-1
-    endpointRef:
-      name: example
+    endpointSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sns
     protocol: sqs
-    topicArnRef:
-      name: example
+    topicArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sns
+---
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  name: example
+  labels:
+    testing.upbound.io/example-name: sns
+spec:
+  forProvider:
+    name: upbound-sqs
+    delaySeconds: 90
+    maxMessageSize: 2048
+    messageRetentionSeconds: 86400
+    receiveWaitTimeSeconds: 10
+    region: us-west-1
+    tags:
+      Environment: production
