@@ -4,7 +4,7 @@ metadata:
   name: example-parametergroup
 spec:
   forProvider:
-    region: us-east-1
+    region: us-west-1
     family: postgres12
     description: example
     parameter:

@@ -7,7 +7,7 @@ spec:
     region: us-west-1
     name: www
     records:
-    - "dev.example.com"
+    - "dev.upbound.io"
     ttl: 5
     type: CNAME
     zoneIdRef:

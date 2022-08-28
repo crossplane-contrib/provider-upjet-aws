@@ -1,3 +1,7 @@
+/*
+Copyright 2022 Upbound Inc.
+*/
+
 package kms
 
 import (

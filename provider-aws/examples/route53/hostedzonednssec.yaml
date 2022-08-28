@@ -1,17 +1,16 @@
 apiVersion: route53.aws.upbound.io/v1beta1
-kind: KeySigningKey
+kind: HostedZoneDNSSEC
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is not stable due to https://github.com/upbound/upjet/issues/80."
   name: example
 spec:
   forProvider:
     hostedZoneIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
-    keyManagementServiceArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
     region: us-west-1
 
 ---
@@ -21,6 +20,8 @@ kind: Key
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource HostedZoneDNSSEC is not stable and is thus skipped."
   name: example
 spec:
   forProvider:
@@ -82,30 +83,14 @@ spec:
 ---
 
 apiVersion: route53.aws.upbound.io/v1beta1
-kind: HostedZoneDNSSEC
-metadata:
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    hostedZoneIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    region: us-west-1
-
----
-
-apiVersion: route53.aws.upbound.io/v1beta1
 kind: Zone
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource HostedZoneDNSSEC is not stable and is thus skipped."
   name: example
 spec:
   forProvider:
-    name: example.com
+    name: mycompany.test
     region: us-west-1
-
----
-

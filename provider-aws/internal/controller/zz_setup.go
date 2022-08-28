@@ -313,23 +313,12 @@ import (
 	delegationset "github.com/upbound/official-providers/provider-aws/internal/controller/route53/delegationset"
 	healthcheck "github.com/upbound/official-providers/provider-aws/internal/controller/route53/healthcheck"
 	hostedzonednssec "github.com/upbound/official-providers/provider-aws/internal/controller/route53/hostedzonednssec"
-	keysigningkey "github.com/upbound/official-providers/provider-aws/internal/controller/route53/keysigningkey"
-	querylog "github.com/upbound/official-providers/provider-aws/internal/controller/route53/querylog"
 	record "github.com/upbound/official-providers/provider-aws/internal/controller/route53/record"
 	trafficpolicy "github.com/upbound/official-providers/provider-aws/internal/controller/route53/trafficpolicy"
 	trafficpolicyinstance "github.com/upbound/official-providers/provider-aws/internal/controller/route53/trafficpolicyinstance"
 	vpcassociationauthorization "github.com/upbound/official-providers/provider-aws/internal/controller/route53/vpcassociationauthorization"
 	zone "github.com/upbound/official-providers/provider-aws/internal/controller/route53/zone"
-	zoneassociation "github.com/upbound/official-providers/provider-aws/internal/controller/route53/zoneassociation"
-	dnssecconfig "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/dnssecconfig"
 	endpoint "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/endpoint"
-	firewallconfig "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/firewallconfig"
-	firewalldomainlist "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/firewalldomainlist"
-	firewallrule "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/firewallrule"
-	firewallrulegroup "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/firewallrulegroup"
-	firewallrulegroupassociation "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/firewallrulegroupassociation"
-	querylogconfig "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/querylogconfig"
-	querylogconfigassociation "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/querylogconfigassociation"
 	rule "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/rule"
 	ruleassociation "github.com/upbound/official-providers/provider-aws/internal/controller/route53resolver/ruleassociation"
 	bucket "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucket"
@@ -677,23 +666,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		delegationset.Setup,
 		healthcheck.Setup,
 		hostedzonednssec.Setup,
-		keysigningkey.Setup,
-		querylog.Setup,
 		record.Setup,
 		trafficpolicy.Setup,
 		trafficpolicyinstance.Setup,
 		vpcassociationauthorization.Setup,
 		zone.Setup,
-		zoneassociation.Setup,
-		dnssecconfig.Setup,
 		endpoint.Setup,
-		firewallconfig.Setup,
-		firewalldomainlist.Setup,
-		firewallrule.Setup,
-		firewallrulegroup.Setup,
-		firewallrulegroupassociation.Setup,
-		querylogconfig.Setup,
-		querylogconfigassociation.Setup,
 		rule.Setup,
 		ruleassociation.Setup,
 		bucket.Setup,

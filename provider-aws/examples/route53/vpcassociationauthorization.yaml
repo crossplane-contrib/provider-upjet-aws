@@ -1,15 +1,15 @@
 apiVersion: route53.aws.upbound.io/v1beta1
-kind: ZoneAssociation
+kind: VPCAssociationAuthorization
 metadata:
   labels:
-    testing.upbound.io/example-name: secondary
-  name: secondary
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     region: us-west-1
     vpcIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: secondary
+        testing.upbound.io/example-name: alternate
     zoneIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -24,7 +24,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    name: example.com
+    name: mycompany.test
     region: us-west-1
 
 ---
@@ -33,23 +33,8 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   labels:
-    testing.upbound.io/example-name: primary
-  name: primary
-spec:
-  forProvider:
-    cidrBlock: 10.6.0.0/16
-    enableDnsHostnames: true
-    enableDnsSupport: true
-    region: us-west-1
-
----
-
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPC
-metadata:
-  labels:
-    testing.upbound.io/example-name: secondary
-  name: secondary
+    testing.upbound.io/example-name: alternate
+  name: alternate
 spec:
   forProvider:
     cidrBlock: 10.7.0.0/16
@@ -59,3 +44,15 @@ spec:
 
 ---
 
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cidrBlock: 10.6.0.0/16
+    enableDnsHostnames: true
+    enableDnsSupport: true
+    region: us-west-1

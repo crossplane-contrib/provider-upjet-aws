@@ -2,6 +2,8 @@ apiVersion: kms.aws.upbound.io/v1beta1
 kind: Ciphertext
 metadata:
   name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource has a secret reference."
 spec:
   forProvider:
     region: us-east-1
@@ -10,4 +12,4 @@ spec:
     plaintextSecretRef:
       key: example-key
       name: example-secret
-      namespace: crossplane-system
+      namespace: upbound-system
