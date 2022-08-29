@@ -57,16 +57,49 @@ username: my-user
 password: 
 my-user logged in
 ```
+
+## Create an Upbound robot account
+Upbound robots are identities used for authentication that are independent from a single user and aren’t tied to specific usernames or passwords.
+
+Creating a robot account allows Kubernetes to install an official provider.
+
+Use `up robot create <robot account name>` to create a new robot account.
+
+_Note_: only users logged into an organization can create robot accounts.
+
+```shell
+$ up robot create my-robot
+my-org/my-robot created
+```
+
+## Create an Upbound robot account token
+The token associates with a specific robot account and acts as a username and password for authentication.
+
+Generate a token using `up robot token create <robot account> <token name> --output=<file>`.
+
+```shell
+$ up robot token create my-robot my-token --output=token.json
+my-org/my-robot/my-token created
+```
+
+The `output` file is a JSON file containing the robot token's `accessId` and `token`. The `accessId` is the username and `token` is the password for the token.
+
+_Note_: you can't recover a lost robot token. You must delete and recreate the token.
+
+
 ## Create a Kubernetes pull secret
 Downloading and installing official providers requires Kubernetes to authenticate to the Upbound Marketplace using a Kubernetes `secret` object.
 
-Using the `up controlplane pull-secret` command creates an [Upbound robot account](http://docs.upbound.io/cli/command-reference/robot/) account. 
+Using the `up controlplane pull-secret create <secret name> -f <robot token file>` command create an [Upbound robot account](http://docs.upbound.io/cli/command-reference/robot/) account. 
+
+Provide a name for your Kubernetes secret and the robot token JSON file.
 
 _Note_: robot accounts are independent from your account. Your account information is never stored in Kubernetes.
 
+_Note_: you must provide the robot token file or you can't authenticate to install an official provider.  
+
 ```shell
-$ up controlplane pull-secret create my-upbound-secret
-WARNING: Using temporary user credentials that will expire within 30 days.
+$ up controlplane pull-secret create my-upbound-secret -f token.json
 my-org/my-upbound-secret created
 ```
 
