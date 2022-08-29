@@ -109,6 +109,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: cloudfront/v1beta1/distribution
   labels:
     testing.upbound.io/example-name: b
   name: b

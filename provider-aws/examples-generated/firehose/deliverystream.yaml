@@ -107,6 +107,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: firehose/v1beta1/deliverystream
   labels:
     testing.upbound.io/example-name: bucket
   name: bucket

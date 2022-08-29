@@ -20,6 +20,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: athena/v1beta1/database
   labels:
     testing.upbound.io/example-name: example
   name: example

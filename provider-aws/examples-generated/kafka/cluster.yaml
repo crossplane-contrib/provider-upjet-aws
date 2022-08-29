@@ -142,6 +142,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: bucket
   name: bucket

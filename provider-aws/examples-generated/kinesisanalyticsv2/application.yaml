@@ -56,6 +56,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/application
   labels:
     testing.upbound.io/example-name: example
   name: example
