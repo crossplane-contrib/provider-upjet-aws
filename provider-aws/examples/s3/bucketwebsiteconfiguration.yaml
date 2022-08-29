@@ -5,7 +5,9 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    bucket: upbound-example
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3
     errorDocument:
     - key: error.html
     indexDocument:
@@ -15,5 +17,3 @@ spec:
       - keyPrefixEquals: docs/
       redirect:
       - replaceKeyPrefixWith: documents/
-  providerConfigRef:
-    name: default

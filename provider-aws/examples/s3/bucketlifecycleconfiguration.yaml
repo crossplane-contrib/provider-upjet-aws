@@ -5,7 +5,9 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    bucket: upbound-example
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3
     rule:
       - id: rule-1
         status: Enabled
@@ -13,5 +15,3 @@ spec:
           - prefix: "tmp/"
         expiration:
           - days: 90
-  providerConfigRef:
-    name: default

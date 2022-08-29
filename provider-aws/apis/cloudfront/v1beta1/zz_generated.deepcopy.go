@@ -2673,6 +2673,18 @@ func (in *KeyGroupParameters) DeepCopyInto(out *KeyGroupParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ItemRefs != nil {
+		in, out := &in.ItemRefs, &out.ItemRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ItemSelector != nil {
+		in, out := &in.ItemSelector, &out.ItemSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]*string, len(*in))

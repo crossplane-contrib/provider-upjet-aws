@@ -1,19 +1,69 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: RealtimeLogConfig
 metadata:
-  name: example-realtime-log-config
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    region: us-west-1
     endpoint:
-    - kinesisStreamConfig:
-      - roleArn: ${aws_iam_role.example.arn}
-        streamArn: ${aws_kinesis_stream.example.arn}
-      streamType: Kinesis
+      - kinesisStreamConfig:
+          - roleArnSelector:
+              matchLabels:
+                testing.upbound.io/example-name: example
+            streamArnSelector:
+              matchLabels:
+                testing.upbound.io/example-name: example
+        streamType: Kinesis
     fields:
-    - timestamp
-    - c-ip
+      - timestamp
+      - c-ip
     name: example
+    region: us-west-1
     samplingRate: 75
 
+---
 
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "cloudfront.amazonaws.com"
+            },
+            "Effect": "Allow"
+          }
+        ]
+      }
+
+---
+
+apiVersion: kinesis.aws.upbound.io/v1beta1
+kind: Stream
+metadata:
+  name: example
+  labels:
+    testing.upbound.io/example-name: example
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+    retentionPeriod: 48
+    shardCount: 1
+    shardLevelMetrics:
+      - IncomingBytes
+      - OutgoingBytes
+    streamModeDetails:
+      - streamMode: PROVISIONED
+    tags:
+      Environment: test

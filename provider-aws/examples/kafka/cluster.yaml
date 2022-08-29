@@ -106,7 +106,7 @@ kind: Bucket
 metadata:
   labels:
     testing.upbound.io/example-name: bucket
-  name: bucket
+  name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     region: us-west-1

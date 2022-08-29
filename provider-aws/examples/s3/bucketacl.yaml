@@ -3,11 +3,13 @@ kind: BucketACL
 metadata:
   name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+    upjet.upbound.io/manual-intervention: "Requires adding canonical ID of the owner user who created the Bucket."
 spec:
   forProvider:
     region: us-west-1
-    bucket: upbound-example
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3
     accessControlPolicy:
       -  grant:
            -  permission: "READ"
@@ -16,5 +18,3 @@ spec:
                   type: CanonicalUser
          owner:
            -  id: ${data.aws_canonical_user_id.current.id}
-  providerConfigRef:
-    name: default

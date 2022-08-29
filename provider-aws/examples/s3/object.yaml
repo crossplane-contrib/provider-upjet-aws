@@ -5,7 +5,9 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    bucket: upbound-example
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3
     key: object_key
     contentBase64: dGhpcyBpcyBhIHRleHQg
   providerConfigRef:

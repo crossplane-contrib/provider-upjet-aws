@@ -5,8 +5,8 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    bucket: upbound-example
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3
     versioningConfiguration:
     - status: Enabled
-  providerConfigRef:
-    name: default

@@ -3,15 +3,17 @@ kind: BucketNotification
 metadata:
   name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+    upjet.upbound.io/manual-intervention: "Requires a TopicPolicy for the referenced Topic and TopicPolicy is not covered yet."
 spec:
   forProvider:
     region: us-west-1
-    bucket: upbound-example
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3
     topic:
     - events:
       - "s3:ObjectCreated:*"
       filterSuffix: ".log"
-      topicArn: arn:aws:sns:us-west-1:123456789123:example
-  providerConfigRef:
-    name: default
+      topicArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: s3

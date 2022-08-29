@@ -5,7 +5,9 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    distributionId: ${aws_cloudfront_distribution.example.id}
+    distributionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: cloudfront
     monitoringSubscription:
     - realtimeMetricsSubscriptionConfig:
       - realtimeMetricsSubscriptionStatus: Enabled

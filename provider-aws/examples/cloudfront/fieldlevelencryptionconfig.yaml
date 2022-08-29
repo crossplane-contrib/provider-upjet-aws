@@ -16,5 +16,7 @@ spec:
     - forwardWhenQueryArgProfileIsUnknown: true
       queryArgProfiles:
       - items:
-        - profileId: ${aws_cloudfront_field_level_encryption_profile.test.id}
+        - profileIdSelector:
+            matchLabels:
+              testing.upbound.io/example-name: cloudfront
           queryArg: Arg1

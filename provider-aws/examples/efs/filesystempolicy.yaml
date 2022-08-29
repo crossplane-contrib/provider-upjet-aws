@@ -2,11 +2,14 @@ apiVersion: efs.aws.upbound.io/v1beta1
 kind: FileSystemPolicy
 metadata:
   name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "User needs to add the ARN of the FileSystem to the policy manually."
 spec:
   forProvider:
     bypassPolicyLockoutSafetyCheck: true
-    fileSystemIdRef:
-      name: example
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: efs
     policy: |
       {
           "Version": "2012-10-17",

@@ -2,6 +2,8 @@ apiVersion: backup.aws.upbound.io/v1beta1
 kind: Plan
 metadata:
   name: example
+  labels:
+    testing.upbound.io/example-name: example
 spec:
   forProvider:
     region: us-west-1
@@ -15,4 +17,6 @@ spec:
       - deleteAfter: 14
       ruleName: up_example_backup_rule
       schedule: cron(0 12 * * ? *)
-      targetVaultName: example-bucket-vault
+      targetVaultNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example

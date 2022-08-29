@@ -2,11 +2,36 @@ apiVersion: backup.aws.upbound.io/v1beta1
 kind: VaultPolicy
 metadata:
   name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The ARN of the Vault in the policy needs to be entered manually."
 spec:
   forProvider:
     region: us-west-1
-    backupVaultName: example-bucket-vault
-    policy: "{\n  \"Version\": \"2012-10-17\",\n  \"Id\": \"default\",\n  \"Statement\":
-      [\n    {\n      \"Sid\": \"default\",\n      \"Effect\": \"Allow\",\n      \"Principal\":
-      {\n        \"AWS\": \"*\"\n      },\n      \"Action\": [\n\t\t\"backup:DescribeBackupVault\",\n\t\t\"backup:DeleteBackupVault\",\n\t\t\"backup:PutBackupVaultAccessPolicy\",\n\t\t\"backup:DeleteBackupVaultAccessPolicy\",\n\t\t\"backup:GetBackupVaultAccessPolicy\",\n\t\t\"backup:StartBackupJob\",\n\t\t\"backup:GetBackupVaultNotifications\",\n\t\t\"backup:PutBackupVaultNotifications\"\n
-      \     ],\n      \"Resource\": \"***\"\n    }\n  ]\n}\n"
+    backupVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policy: |-
+      {
+        "Version": "2012-10-17",
+        "Id": "default",
+        "Statement": [
+          {
+            "Sid": "default",
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "*"
+            },
+            "Action": [
+              "backup:DescribeBackupVault",
+              "backup:DeleteBackupVault",
+              "backup:PutBackupVaultAccessPolicy",
+              "backup:DeleteBackupVaultAccessPolicy",
+              "backup:GetBackupVaultAccessPolicy",
+              "backup:StartBackupJob",
+              "backup:GetBackupVaultNotifications",
+              "backup:PutBackupVaultNotifications"
+            ],
+            "Resource": "arn:aws:backup:us-west-1:609897127049:backup-vault:example-bucket-vault"
+          }
+        ]
+      }

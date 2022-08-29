@@ -5,7 +5,37 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    fileSystemIdRef:
-      name: example
-    subnetIdRef:
-      name: sample-subnet1
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: efs
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: efs
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: sample-vpc
+  labels:
+    testing.upbound.io/example-name: efs
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: EFSVpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: efs-subnet1
+  labels:
+    testing.upbound.io/example-name: efs
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1b
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: efs
+    cidrBlock: 172.16.10.0/24
