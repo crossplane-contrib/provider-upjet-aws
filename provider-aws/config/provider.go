@@ -8,6 +8,8 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
+	"github.com/upbound/official-providers/provider-aws/config/secretsmanager"
+
 	"github.com/upbound/official-providers/provider-aws/config/opensearch"
 
 	"github.com/upbound/upjet/pkg/config"
@@ -172,6 +174,7 @@ func GetProvider() *config.Provider {
 		elbv2.Configure,
 		sqs.Configure,
 		opensearch.Configure,
+		secretsmanager.Configure,
 	} {
 		configure(pc)
 	}

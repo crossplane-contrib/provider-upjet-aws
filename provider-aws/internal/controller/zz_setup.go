@@ -344,6 +344,9 @@ import (
 	bucketwebsiteconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/s3/bucketwebsiteconfiguration"
 	object "github.com/upbound/official-providers/provider-aws/internal/controller/s3/object"
 	secret "github.com/upbound/official-providers/provider-aws/internal/controller/secretsmanager/secret"
+	secretpolicy "github.com/upbound/official-providers/provider-aws/internal/controller/secretsmanager/secretpolicy"
+	secretrotation "github.com/upbound/official-providers/provider-aws/internal/controller/secretsmanager/secretrotation"
+	secretversion "github.com/upbound/official-providers/provider-aws/internal/controller/secretsmanager/secretversion"
 	httpnamespace "github.com/upbound/official-providers/provider-aws/internal/controller/servicediscovery/httpnamespace"
 	privatednsnamespace "github.com/upbound/official-providers/provider-aws/internal/controller/servicediscovery/privatednsnamespace"
 	publicdnsnamespace "github.com/upbound/official-providers/provider-aws/internal/controller/servicediscovery/publicdnsnamespace"
@@ -697,6 +700,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		bucketwebsiteconfiguration.Setup,
 		object.Setup,
 		secret.Setup,
+		secretpolicy.Setup,
+		secretrotation.Setup,
+		secretversion.Setup,
 		httpnamespace.Setup,
 		privatednsnamespace.Setup,
 		publicdnsnamespace.Setup,
