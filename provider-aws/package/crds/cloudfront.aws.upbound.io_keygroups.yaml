@@ -68,6 +68,7 @@ spec:
                     description: A comment to describe the key group..
                     type: string
                   itemRefs:
+                    description: References to PublicKey to populate items.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -104,7 +105,7 @@ spec:
                       type: object
                     type: array
                   itemSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of PublicKey to populate items.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

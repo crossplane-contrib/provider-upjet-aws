@@ -5,8 +5,10 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    bucket: upbound-example
-    targetBucket: upbound-example-2
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3
+    targetBucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3-2
     targetPrefix: log/
-  providerConfigRef:
-    name: default

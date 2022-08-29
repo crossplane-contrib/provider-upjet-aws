@@ -28,9 +28,11 @@ type KeyGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// References to PublicKey to populate items.
 	// +kubebuilder:validation:Optional
 	ItemRefs []v1.Reference `json:"itemRefs,omitempty" tf:"-"`
 
+	// Selector for a list of PublicKey to populate items.
 	// +kubebuilder:validation:Optional
 	ItemSelector *v1.Selector `json:"itemSelector,omitempty" tf:"-"`
 

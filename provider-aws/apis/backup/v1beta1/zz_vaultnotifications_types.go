@@ -33,9 +33,11 @@ type VaultNotificationsParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
 
+	// Reference to a Vault to populate backupVaultName.
 	// +kubebuilder:validation:Optional
 	BackupVaultNameRef *v1.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
 
+	// Selector for a Vault to populate backupVaultName.
 	// +kubebuilder:validation:Optional
 	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 

@@ -74,7 +74,7 @@ spec:
                     description: Name of the backup vault to add notifications for.
                     type: string
                   backupVaultNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Vault to populate backupVaultName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -108,7 +108,7 @@ spec:
                     - name
                     type: object
                   backupVaultNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Vault to populate backupVaultName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

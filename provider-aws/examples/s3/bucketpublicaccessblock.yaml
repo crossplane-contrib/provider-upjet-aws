@@ -7,6 +7,6 @@ spec:
     region: us-west-1
     blockPublicAcls: false
     blockPublicPolicy: false
-    bucket: upbound-example
-  providerConfigRef:
-    name: default
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3

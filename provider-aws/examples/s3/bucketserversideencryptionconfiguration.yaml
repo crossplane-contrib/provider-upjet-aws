@@ -2,15 +2,27 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketServerSideEncryptionConfiguration
 metadata:
   name: example
-  annotations:
-    upjet.upbound.io/manual-intervention: "This resource requires KMS resource ARN."
 spec:
   forProvider:
     region: us-west-1
-    bucket: upbound-example
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3
     rule:
     - applyServerSideEncryptionByDefault:
-      - kmsMasterKeyId: example-key-arn
+      - kmsMasterKeyIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: s3
         sseAlgorithm: aws:kms
-  providerConfigRef:
-    name: default
+---
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  name: s3-key
+  labels:
+    testing.upbound.io/example-name: s3
+spec:
+  forProvider:
+    region: us-west-1
+    description: Created with Crossplane
+    deletionWindowInDays: 7

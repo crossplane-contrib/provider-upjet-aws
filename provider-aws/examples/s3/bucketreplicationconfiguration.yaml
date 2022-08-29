@@ -3,15 +3,19 @@ kind: BucketReplicationConfiguration
 metadata:
   name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource depends on requires manual intervention."
+    upjet.upbound.io/manual-intervention: "Requires a Role with permissions on both buckets."
 spec:
   forProvider:
     region: us-west-1
-    bucket: upbound-example
-    role: arn:aws:iam::123456789012:role/service-role/example
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3
+    role: <role ARN>
     rule:
     - destination:
-      - bucket: arn:aws:s3:::upbound-example
+      - bucketSelector:
+          matchLabels:
+            testing.upbound.io/example-name: s3
         storageClass: STANDARD
       filter:
       - prefix: foo
@@ -19,5 +23,3 @@ spec:
       deleteMarkerReplication:
       - status: Enabled
       status: Enabled
-  providerConfigRef:
-    name: default
