@@ -38,6 +38,42 @@ func (mg *Secret) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
 
+	return nil
+}
+
+// ResolveReferences of this SecretPolicy.
+func (mg *SecretPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.SecretArnRef,
+		Selector:     mg.Spec.ForProvider.SecretArnSelector,
+		To: reference.To{
+			List:    &SecretList{},
+			Managed: &Secret{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecretArn")
+	}
+	mg.Spec.ForProvider.SecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SecretArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SecretRotation.
+func (mg *SecretRotation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RotationLambdaArn),
 		Extract:      resource.ExtractParamPath("arn", true),
@@ -53,6 +89,48 @@ func (mg *Secret) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.RotationLambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RotationLambdaArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SecretIDRef,
+		Selector:     mg.Spec.ForProvider.SecretIDSelector,
+		To: reference.To{
+			List:    &SecretList{},
+			Managed: &Secret{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecretID")
+	}
+	mg.Spec.ForProvider.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SecretIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SecretVersion.
+func (mg *SecretVersion) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SecretIDRef,
+		Selector:     mg.Spec.ForProvider.SecretIDSelector,
+		To: reference.To{
+			List:    &SecretList{},
+			Managed: &Secret{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecretID")
+	}
+	mg.Spec.ForProvider.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SecretIDRef = rsp.ResolvedReference
 
 	return nil
 }

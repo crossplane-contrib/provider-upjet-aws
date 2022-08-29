@@ -36,13 +36,12 @@ type ReplicaParameters struct {
 }
 
 type RotationRulesObservation struct {
+
+	// Specifies the number of days between automatic scheduled rotations of the secret.
+	AutomaticallyAfterDays *float64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
 }
 
 type RotationRulesParameters struct {
-
-	// Specifies the number of days between automatic scheduled rotations of the secret.
-	// +kubebuilder:validation:Required
-	AutomaticallyAfterDays *float64 `json:"automaticallyAfterDays" tf:"automatically_after_days,omitempty"`
 }
 
 type SecretObservation struct {
@@ -53,11 +52,20 @@ type SecretObservation struct {
 	// ARN of the secret.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Valid JSON document representing a resource policy. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide. Removing policy from your configuration or setting policy to null or an empty string  will not delete the policy since it could have been set by aws_secretsmanager_secret_policy. To delete the policy, set it to "{}" .
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
 	// +kubebuilder:validation:Optional
 	Replica []ReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
 
 	// Whether automatic rotation is enabled for this secret.
 	RotationEnabled *bool `json:"rotationEnabled,omitempty" tf:"rotation_enabled,omitempty"`
+
+	// ARN of the Lambda function that can rotate the secret. Use the aws_secretsmanager_secret_rotation resource to manage this configuration instead. As of version 2.67.0, removal of this configuration will no longer remove rotation due to supporting the new resource. Either import the new resource and remove the configuration or manually remove rotation.
+	RotationLambdaArn *string `json:"rotationLambdaArn,omitempty" tf:"rotation_lambda_arn,omitempty"`
+
+	// Configuration block for the rotation configuration of this secret. Defined below. Use the aws_secretsmanager_secret_rotation resource to manage this configuration instead. As of version 2.67.0, removal of this configuration will no longer remove rotation due to supporting the new resource. Either import the new resource and remove the configuration or manually remove rotation.
+	RotationRules []RotationRulesObservation `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -89,14 +97,6 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Creates a unique name beginning with the specified prefix. Conflicts with name.
-	// +kubebuilder:validation:Optional
-	NamePrefix *string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty"`
-
-	// Valid JSON document representing a resource policy. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide. Removing policy from your configuration or setting policy to null or an empty string  will not delete the policy since it could have been set by aws_secretsmanager_secret_policy. To delete the policy, set it to "{}" .
-	// +kubebuilder:validation:Optional
-	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
-
 	// Number of days that AWS Secrets Manager waits before it can delete the secret. This value can be 0 to force deletion without recovery or range from 7 to 30 days. The default value is 30.
 	// +kubebuilder:validation:Optional
 	RecoveryWindowInDays *float64 `json:"recoveryWindowInDays,omitempty" tf:"recovery_window_in_days,omitempty"`
@@ -109,24 +109,6 @@ type SecretParameters struct {
 
 	// +kubebuilder:validation:Optional
 	Replica []ReplicaParameters `json:"replica,omitempty" tf:"replica,omitempty"`
-
-	// ARN of the Lambda function that can rotate the secret. Use the aws_secretsmanager_secret_rotation resource to manage this configuration instead. As of version 2.67.0, removal of this configuration will no longer remove rotation due to supporting the new resource. Either import the new resource and remove the configuration or manually remove rotation.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
-	// +kubebuilder:validation:Optional
-	RotationLambdaArn *string `json:"rotationLambdaArn,omitempty" tf:"rotation_lambda_arn,omitempty"`
-
-	// Reference to a Function in lambda to populate rotationLambdaArn.
-	// +kubebuilder:validation:Optional
-	RotationLambdaArnRef *v1.Reference `json:"rotationLambdaArnRef,omitempty" tf:"-"`
-
-	// Selector for a Function in lambda to populate rotationLambdaArn.
-	// +kubebuilder:validation:Optional
-	RotationLambdaArnSelector *v1.Selector `json:"rotationLambdaArnSelector,omitempty" tf:"-"`
-
-	// Configuration block for the rotation configuration of this secret. Defined below. Use the aws_secretsmanager_secret_rotation resource to manage this configuration instead. As of version 2.67.0, removal of this configuration will no longer remove rotation due to supporting the new resource. Either import the new resource and remove the configuration or manually remove rotation.
-	// +kubebuilder:validation:Optional
-	RotationRules []RotationRulesParameters `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
 
 	// Key-value map of user-defined tags that are attached to the secret. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional

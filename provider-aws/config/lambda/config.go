@@ -27,6 +27,8 @@ func Configure(p *config.Provider) {
 			Extractor: common.PathARNExtractor,
 		}
 		delete(r.References, "event_source_arn")
+		// It can be fulfilled by multiple types.
+		delete(r.References, "source_access_configuration.uri")
 		r.UseAsync = true
 	})
 

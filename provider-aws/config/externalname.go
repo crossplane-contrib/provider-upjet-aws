@@ -652,8 +652,17 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// secretsmanager
 	//
-	// aws_secretsmanager_secret can be imported by using the secret Amazon Resource Name (ARN)
+	// It be imported by using the secret Amazon Resource Name (ARN)
+	// However, the real ID of the Secret has an Amazon-assigned random suffix,
+	// i.e. if you name it with `example`, the real ID is
+	// arn:aws:secretsmanager:us-west-1:609897127049:secret:example-VaznFM
 	"aws_secretsmanager_secret": config.IdentifierFromProvider,
+	// It uses ARN of secret and a randomly assigned ID.
+	"aws_secretsmanager_secret_version": config.IdentifierFromProvider,
+	// It uses its own secret_id parameter.
+	"aws_secretsmanager_secret_rotation": config.IdentifierFromProvider,
+	// It uses its own secert_arn parameter.
+	"aws_secretsmanager_secret_policy": config.IdentifierFromProvider,
 
 	// transfer
 	//
