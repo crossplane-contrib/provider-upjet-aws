@@ -64,9 +64,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
 	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
@@ -100,9 +102,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Required
 	ReplicationFactor *float64 `json:"replicationFactor" tf:"replication_factor,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 

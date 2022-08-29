@@ -39,9 +39,11 @@ type LBTargetGroupAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
+	// Reference to a LBTargetGroup to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
 	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
 
+	// Selector for a LBTargetGroup to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
 	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 

@@ -81,7 +81,7 @@ spec:
                       and underscores .
                     type: string
                   clusterNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Cluster to populate clusterName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -115,7 +115,7 @@ spec:
                     - name
                     type: object
                   clusterNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Cluster to populate clusterName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -197,7 +197,7 @@ spec:
                       permissions for the EKS Node Group.
                     type: string
                   nodeRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate nodeRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -231,7 +231,7 @@ spec:
                     - name
                     type: object
                   nodeRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate nodeRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -291,6 +291,8 @@ spec:
                             .
                           type: string
                         sourceSecurityGroupIdRefs:
+                          description: References to SecurityGroup in ec2 to populate
+                            sourceSecurityGroupIds.
                           items:
                             description: A Reference to a named object.
                             properties:
@@ -329,7 +331,8 @@ spec:
                             type: object
                           type: array
                         sourceSecurityGroupIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a list of SecurityGroup in ec2
+                            to populate sourceSecurityGroupIds.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -401,6 +404,7 @@ spec:
                       type: object
                     type: array
                   subnetIdRefs:
+                    description: References to Subnet in ec2 to populate subnetIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -437,7 +441,8 @@ spec:
                       type: object
                     type: array
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of Subnet in ec2 to populate
+                      subnetIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

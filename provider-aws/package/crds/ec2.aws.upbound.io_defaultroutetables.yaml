@@ -68,7 +68,7 @@ spec:
                     description: ID of the default route table.
                     type: string
                   defaultRouteTableIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VPC in ec2 to populate defaultRouteTableId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   defaultRouteTableIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VPC in ec2 to populate defaultRouteTableId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -171,7 +171,8 @@ spec:
                           description: Identifier of a VPC Egress Only Internet Gateway.
                           type: string
                         egressOnlyGatewayIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a EgressOnlyInternetGateway in
+                            ec2 to populate egressOnlyGatewayId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -206,7 +207,8 @@ spec:
                           - name
                           type: object
                         egressOnlyGatewayIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a EgressOnlyInternetGateway in
+                            ec2 to populate egressOnlyGatewayId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -251,7 +253,8 @@ spec:
                             private gateway.
                           type: string
                         gatewayIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a InternetGateway in ec2 to populate
+                            gatewayId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -286,7 +289,8 @@ spec:
                           - name
                           type: object
                         gatewayIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a InternetGateway in ec2 to populate
+                            gatewayId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

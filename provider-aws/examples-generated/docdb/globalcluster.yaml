@@ -1,6 +1,8 @@
 apiVersion: docdb.aws.upbound.io/v1beta1
 kind: GlobalCluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/globalcluster
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -16,6 +18,8 @@ spec:
 apiVersion: docdb.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/globalcluster
   labels:
     testing.upbound.io/example-name: primary
   name: primary
@@ -38,6 +42,8 @@ spec:
 apiVersion: docdb.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/globalcluster
   labels:
     testing.upbound.io/example-name: secondary
   name: secondary
@@ -55,6 +61,8 @@ spec:
 apiVersion: docdb.aws.upbound.io/v1beta1
 kind: ClusterInstance
 metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/globalcluster
   labels:
     testing.upbound.io/example-name: primary
   name: primary
@@ -73,6 +81,8 @@ spec:
 apiVersion: docdb.aws.upbound.io/v1beta1
 kind: ClusterInstance
 metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/globalcluster
   labels:
     testing.upbound.io/example-name: secondary
   name: secondary

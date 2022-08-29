@@ -90,7 +90,7 @@ spec:
                     description: The ID of the network ACL.
                     type: string
                   networkAclIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a NetworkACL in ec2 to populate networkAclId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -124,7 +124,7 @@ spec:
                     - name
                     type: object
                   networkAclIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a NetworkACL in ec2 to populate networkAclId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

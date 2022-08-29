@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: NetworkInterfaceSgAttachment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/networkinterfacesgattachment
   labels:
     testing.upbound.io/example-name: sg_attachment
   name: sg-attachment
@@ -19,6 +21,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Instance
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/networkinterfacesgattachment
   labels:
     testing.upbound.io/example-name: instance
   name: instance
@@ -35,6 +39,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/networkinterfacesgattachment
   labels:
     testing.upbound.io/example-name: sg
   name: sg

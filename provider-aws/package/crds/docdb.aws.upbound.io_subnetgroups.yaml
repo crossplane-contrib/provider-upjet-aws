@@ -78,6 +78,7 @@ spec:
                       type: string
                     type: array
                   subnetIdsRefs:
+                    description: References to Subnet in ec2 to populate subnetIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -114,7 +115,8 @@ spec:
                       type: object
                     type: array
                   subnetIdsSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of Subnet in ec2 to populate
+                      subnetIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -77,7 +77,8 @@ spec:
                       if connection_type is VPC_LINK
                     type: string
                   connectionIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VPCLink in apigateway to populate
+                      connectionId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +112,8 @@ spec:
                     - name
                     type: object
                   connectionIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VPCLink in apigateway to populate
+                      connectionId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -172,7 +174,7 @@ spec:
                     description: The HTTP method when calling the associated resource.
                     type: string
                   httpMethodRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Method in apigateway to populate httpMethod.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -206,7 +208,7 @@ spec:
                     - name
                     type: object
                   httpMethodSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Method in apigateway to populate httpMethod.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -276,7 +278,8 @@ spec:
                     description: The API resource ID.
                     type: string
                   resourceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Resource in apigateway to populate
+                      resourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -310,7 +313,8 @@ spec:
                     - name
                     type: object
                   resourceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Resource in apigateway to populate
+                      resourceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -352,7 +356,8 @@ spec:
                     description: The ID of the associated REST API.
                     type: string
                   restApiIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a RestAPI in apigateway to populate
+                      restApiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -386,7 +391,8 @@ spec:
                     - name
                     type: object
                   restApiIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a RestAPI in apigateway to populate
+                      restApiId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -466,7 +472,7 @@ spec:
                       Host header and for certificate validation.
                     type: string
                   uriRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Function in lambda to populate uri.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -500,7 +506,7 @@ spec:
                     - name
                     type: object
                   uriSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Function in lambda to populate uri.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

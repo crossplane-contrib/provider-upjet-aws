@@ -68,7 +68,7 @@ spec:
                   domainName:
                     type: string
                   domainNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Domain to populate domainName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   domainNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Domain to populate domainName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

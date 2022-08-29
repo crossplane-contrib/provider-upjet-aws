@@ -80,7 +80,7 @@ spec:
                           description: Name of your S3 bucket.
                           type: string
                         bucketRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Bucket in s3 to populate bucket.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -115,7 +115,7 @@ spec:
                           - name
                           type: object
                         bucketSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Bucket in s3 to populate bucket.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -160,7 +160,7 @@ spec:
                             files.
                           type: string
                         keyRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Object in s3 to populate key.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -195,7 +195,7 @@ spec:
                           - name
                           type: object
                         keySelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Object in s3 to populate key.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -244,7 +244,7 @@ spec:
                             to access your S3 bucket.
                           type: string
                         roleArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Role in iam to populate roleArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -279,7 +279,7 @@ spec:
                           - name
                           type: object
                         roleArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Role in iam to populate roleArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

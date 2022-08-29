@@ -77,7 +77,7 @@ spec:
                     description: Name of the role to add to the profile.
                     type: string
                   roleRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role to populate role.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +111,7 @@ spec:
                     - name
                     type: object
                   roleSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role to populate role.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

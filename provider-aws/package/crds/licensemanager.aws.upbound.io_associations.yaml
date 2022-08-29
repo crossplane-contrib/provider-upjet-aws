@@ -68,7 +68,7 @@ spec:
                     description: ARN of the license configuration.
                     type: string
                   licenseConfigurationArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a LicenseConfiguration to populate licenseConfigurationArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   licenseConfigurationArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a LicenseConfiguration to populate licenseConfigurationArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -148,7 +148,7 @@ spec:
                     description: ARN of the resource associated with the license configuration.
                     type: string
                   resourceArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Instance in ec2 to populate resourceArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -182,7 +182,7 @@ spec:
                     - name
                     type: object
                   resourceArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Instance in ec2 to populate resourceArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

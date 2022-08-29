@@ -36,9 +36,11 @@ type RepositoryPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 
+	// Reference to a Repository in ecrpublic to populate repositoryName.
 	// +kubebuilder:validation:Optional
 	RepositoryNameRef *v1.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
 
+	// Selector for a Repository in ecrpublic to populate repositoryName.
 	// +kubebuilder:validation:Optional
 	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 }

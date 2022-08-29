@@ -80,7 +80,8 @@ spec:
                     description: Identifier of EC2 Transit Gateway Attachment .
                     type: string
                   transitGatewayAttachmentIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a TransitGatewayVPCAttachment to populate
+                      transitGatewayAttachmentId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -114,7 +115,8 @@ spec:
                     - name
                     type: object
                   transitGatewayAttachmentIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a TransitGatewayVPCAttachment to populate
+                      transitGatewayAttachmentId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -156,7 +158,8 @@ spec:
                     description: Identifier of EC2 Transit Gateway Route Table.
                     type: string
                   transitGatewayRouteTableIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a TransitGateway in ec2 to populate
+                      transitGatewayRouteTableId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -190,7 +193,8 @@ spec:
                     - name
                     type: object
                   transitGatewayRouteTableIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a TransitGateway in ec2 to populate
+                      transitGatewayRouteTableId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

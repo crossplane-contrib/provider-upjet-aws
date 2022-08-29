@@ -26,9 +26,11 @@ type ListenerParameters struct {
 	// +kubebuilder:validation:Optional
 	AcceleratorArn *string `json:"acceleratorArn,omitempty" tf:"accelerator_arn,omitempty"`
 
+	// Reference to a Accelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
 	AcceleratorArnRef *v1.Reference `json:"acceleratorArnRef,omitempty" tf:"-"`
 
+	// Selector for a Accelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
 	AcceleratorArnSelector *v1.Selector `json:"acceleratorArnSelector,omitempty" tf:"-"`
 

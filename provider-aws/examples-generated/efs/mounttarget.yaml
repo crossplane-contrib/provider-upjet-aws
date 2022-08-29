@@ -1,6 +1,8 @@
 apiVersion: efs.aws.upbound.io/v1beta1
 kind: MountTarget
 metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/mounttarget
   labels:
     testing.upbound.io/example-name: alpha
   name: alpha
@@ -19,6 +21,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/mounttarget
   labels:
     testing.upbound.io/example-name: alpha
   name: alpha
@@ -36,6 +40,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/mounttarget
   labels:
     testing.upbound.io/example-name: foo
   name: foo

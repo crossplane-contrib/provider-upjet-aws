@@ -67,7 +67,7 @@ spec:
                   group:
                     type: string
                   groupRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Group to populate group.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -101,7 +101,7 @@ spec:
                     - name
                     type: object
                   groupSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Group to populate group.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -146,6 +146,7 @@ spec:
                       type: string
                     type: array
                   usersRefs:
+                    description: References to User to populate users.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -182,7 +183,7 @@ spec:
                       type: object
                     type: array
                   usersSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of User to populate users.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

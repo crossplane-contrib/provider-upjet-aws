@@ -77,7 +77,8 @@ spec:
                     description: The ID of the VPC endpoint service to allow permission.
                     type: string
                   vpcEndpointServiceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VPCEndpointService in ec2 to populate
+                      vpcEndpointServiceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +112,8 @@ spec:
                     - name
                     type: object
                   vpcEndpointServiceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VPCEndpointService in ec2 to populate
+                      vpcEndpointServiceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

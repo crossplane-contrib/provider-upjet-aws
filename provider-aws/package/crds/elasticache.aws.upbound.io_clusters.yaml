@@ -158,7 +158,7 @@ spec:
                       this cache cluster.
                     type: string
                   parameterGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ParameterGroup to populate parameterGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -192,7 +192,7 @@ spec:
                     - name
                     type: object
                   parameterGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ParameterGroup to populate parameterGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -301,7 +301,7 @@ spec:
                     description: reate the resource.
                     type: string
                   subnetGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a SubnetGroup to populate subnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -335,7 +335,7 @@ spec:
                     - name
                     type: object
                   subnetGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a SubnetGroup to populate subnetGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

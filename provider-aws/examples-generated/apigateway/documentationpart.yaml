@@ -1,6 +1,8 @@
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: DocumentationPart
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/documentationpart
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -21,6 +23,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: RestAPI
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/documentationpart
   labels:
     testing.upbound.io/example-name: example
   name: example

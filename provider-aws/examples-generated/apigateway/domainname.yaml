@@ -1,6 +1,8 @@
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: DomainName
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/domainname
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -17,6 +19,8 @@ spec:
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: Record
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/domainname
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -75,7 +75,7 @@ spec:
                     description: The name of the table to enable contributor insights
                     type: string
                   tableNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Table to populate tableName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -109,7 +109,7 @@ spec:
                     - name
                     type: object
                   tableNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Table to populate tableName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

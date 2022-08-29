@@ -117,7 +117,7 @@ spec:
                       kms_key_id, storage_encrypted needs to be set to true.
                     type: string
                   kmsKeyIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Key in kms to populate kmsKeyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -151,7 +151,7 @@ spec:
                     - name
                     type: object
                   kmsKeyIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Key in kms to populate kmsKeyId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -252,6 +252,7 @@ spec:
                       with matching keys will overwrite those defined at the provider-level.
                     type: object
                   vpcSecurityGroupIdRefs:
+                    description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -288,7 +289,8 @@ spec:
                       type: object
                     type: array
                   vpcSecurityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup in ec2 to populate
+                      vpcSecurityGroupIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

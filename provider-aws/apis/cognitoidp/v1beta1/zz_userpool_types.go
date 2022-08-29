@@ -246,9 +246,11 @@ type SMSConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	SnsCallerArn *string `json:"snsCallerArn,omitempty" tf:"sns_caller_arn,omitempty"`
 
+	// Reference to a Role in iam to populate snsCallerArn.
 	// +kubebuilder:validation:Optional
 	SnsCallerArnRef *v1.Reference `json:"snsCallerArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate snsCallerArn.
 	// +kubebuilder:validation:Optional
 	SnsCallerArnSelector *v1.Selector `json:"snsCallerArnSelector,omitempty" tf:"-"`
 }

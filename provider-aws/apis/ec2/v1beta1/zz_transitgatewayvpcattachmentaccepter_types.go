@@ -59,9 +59,11 @@ type TransitGatewayVPCAttachmentAccepterParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
+	// Reference to a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
+	// Selector for a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 

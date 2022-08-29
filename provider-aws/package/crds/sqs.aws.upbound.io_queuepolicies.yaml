@@ -73,7 +73,7 @@ spec:
                     description: The URL of the SQS Queue to which to attach the policy
                     type: string
                   queueUrlRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Queue in sqs to populate queueUrl.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -107,7 +107,7 @@ spec:
                     - name
                     type: object
                   queueUrlSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Queue in sqs to populate queueUrl.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

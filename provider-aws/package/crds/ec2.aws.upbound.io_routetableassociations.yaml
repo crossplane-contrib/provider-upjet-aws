@@ -71,7 +71,8 @@ spec:
                       with subnet_id.
                     type: string
                   gatewayIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a InternetGateway in ec2 to populate
+                      gatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -105,7 +106,8 @@ spec:
                     - name
                     type: object
                   gatewayIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a InternetGateway in ec2 to populate
+                      gatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -151,7 +153,7 @@ spec:
                     description: The ID of the routing table to associate with.
                     type: string
                   routeTableIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a RouteTable to populate routeTableId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -185,7 +187,7 @@ spec:
                     - name
                     type: object
                   routeTableIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a RouteTable to populate routeTableId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -228,7 +230,7 @@ spec:
                       with gateway_id.
                     type: string
                   subnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -262,7 +264,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

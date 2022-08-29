@@ -1,6 +1,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketVersioning
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketversioning
   labels:
     testing.upbound.io/example-name: versioning_example
   name: versioning-example
@@ -20,6 +22,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: s3/v1beta1/bucketversioning
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -32,6 +35,8 @@ spec:
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketACL
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketversioning
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -36,9 +36,11 @@ type VPCEndpointServiceAllowedPrincipalParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCEndpointServiceID *string `json:"vpcEndpointServiceId,omitempty" tf:"vpc_endpoint_service_id,omitempty"`
 
+	// Reference to a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
 	VPCEndpointServiceIDRef *v1.Reference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
 	VPCEndpointServiceIDSelector *v1.Selector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
 }

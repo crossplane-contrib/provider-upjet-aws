@@ -36,9 +36,11 @@ type AuthParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
+	// Reference to a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
 	SecretArnRef *v1.Reference `json:"secretArnRef,omitempty" tf:"-"`
 
+	// Selector for a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
 	SecretArnSelector *v1.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 
@@ -95,9 +97,11 @@ type ProxyParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
@@ -105,9 +109,11 @@ type ProxyParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
+	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 

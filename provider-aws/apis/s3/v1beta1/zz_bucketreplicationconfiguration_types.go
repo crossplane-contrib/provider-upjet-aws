@@ -24,9 +24,11 @@ type BucketReplicationConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
@@ -41,9 +43,11 @@ type BucketReplicationConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
 	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
@@ -240,9 +244,11 @@ type RuleDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 

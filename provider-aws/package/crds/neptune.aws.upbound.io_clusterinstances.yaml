@@ -83,7 +83,7 @@ spec:
                       to launch this instance.
                     type: string
                   clusterIdentifierRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Cluster to populate clusterIdentifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -117,7 +117,7 @@ spec:
                     - name
                     type: object
                   clusterIdentifierSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Cluster to populate clusterIdentifier.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -170,7 +170,7 @@ spec:
                       with this instance.
                     type: string
                   neptuneParameterGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ParameterGroup to populate neptuneParameterGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -204,7 +204,7 @@ spec:
                     - name
                     type: object
                   neptuneParameterGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ParameterGroup to populate neptuneParameterGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -248,7 +248,7 @@ spec:
                       aws_neptune_cluster.'
                     type: string
                   neptuneSubnetGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a SubnetGroup to populate neptuneSubnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -282,7 +282,7 @@ spec:
                     - name
                     type: object
                   neptuneSubnetGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a SubnetGroup to populate neptuneSubnetGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

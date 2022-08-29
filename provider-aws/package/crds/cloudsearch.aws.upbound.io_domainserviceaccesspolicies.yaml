@@ -73,7 +73,8 @@ spec:
                     description: The CloudSearch domain name the policy applies to.
                     type: string
                   domainNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Domain in cloudsearch to populate
+                      domainName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -107,7 +108,8 @@ spec:
                     - name
                     type: object
                   domainNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Domain in cloudsearch to populate
+                      domainName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

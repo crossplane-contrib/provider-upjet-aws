@@ -1,6 +1,8 @@
 apiVersion: sns.aws.upbound.io/v1beta1
 kind: TopicSubscription
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sns/v1beta1/topicsubscription
   labels:
     testing.upbound.io/example-name: user_updates_sqs_target
   name: user-updates-sqs-target

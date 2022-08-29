@@ -1,6 +1,8 @@
 apiVersion: cognitoidentity.aws.upbound.io/v1beta1
 kind: Pool
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidentity/v1beta1/pool
   labels:
     testing.upbound.io/example-name: main
   name: main
@@ -34,6 +36,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: SAMLProvider
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidentity/v1beta1/pool
   labels:
     testing.upbound.io/example-name: default
   name: default

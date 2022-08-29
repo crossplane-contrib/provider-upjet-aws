@@ -71,7 +71,7 @@ spec:
                           description: The S3 bucket name to store the logs in.
                           type: string
                         bucketRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Bucket in s3 to populate bucket.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -106,7 +106,7 @@ spec:
                           - name
                           type: object
                         bucketSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Bucket in s3 to populate bucket.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -219,6 +219,7 @@ spec:
                       be created in.
                     type: string
                   securityGroupRefs:
+                    description: References to SecurityGroup in ec2 to populate securityGroups.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -255,7 +256,8 @@ spec:
                       type: object
                     type: array
                   securityGroupSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup in ec2 to populate
+                      securityGroups.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -320,7 +322,7 @@ spec:
                             Availability Zone.
                           type: string
                         subnetIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Subnet in ec2 to populate subnetId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -355,7 +357,7 @@ spec:
                           - name
                           type: object
                         subnetIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Subnet in ec2 to populate subnetId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -398,6 +400,7 @@ spec:
                       type: object
                     type: array
                   subnetRefs:
+                    description: References to Subnet in ec2 to populate subnets.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -434,7 +437,8 @@ spec:
                       type: object
                     type: array
                   subnetSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of Subnet in ec2 to populate
+                      subnets.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

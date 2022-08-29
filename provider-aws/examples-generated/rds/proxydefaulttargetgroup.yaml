@@ -1,6 +1,8 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: ProxyDefaultTargetGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/proxydefaulttargetgroup
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -23,6 +25,8 @@ spec:
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: Proxy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/proxydefaulttargetgroup
   labels:
     testing.upbound.io/example-name: example
   name: example

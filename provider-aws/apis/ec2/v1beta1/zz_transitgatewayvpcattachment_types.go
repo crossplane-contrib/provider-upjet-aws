@@ -44,9 +44,11 @@ type TransitGatewayVPCAttachmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
@@ -74,9 +76,11 @@ type TransitGatewayVPCAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
+	// Reference to a TransitGateway to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a TransitGateway to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
@@ -85,9 +89,11 @@ type TransitGatewayVPCAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
+	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }

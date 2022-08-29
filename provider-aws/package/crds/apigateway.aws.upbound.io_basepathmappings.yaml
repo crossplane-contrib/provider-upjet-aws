@@ -68,7 +68,8 @@ spec:
                     description: The id of the API to connect.
                     type: string
                   apiIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a RestAPI in apigateway to populate
+                      apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +103,8 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a RestAPI in apigateway to populate
+                      apiId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -150,7 +152,8 @@ spec:
                       API to.
                     type: string
                   domainNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a DomainName in apigateway to populate
+                      domainName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -184,7 +187,8 @@ spec:
                     - name
                     type: object
                   domainNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a DomainName in apigateway to populate
+                      domainName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -232,7 +236,7 @@ spec:
                       by including its name as a path element after the base path.
                     type: string
                   stageNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Stage in apigateway to populate stageName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -266,7 +270,7 @@ spec:
                     - name
                     type: object
                   stageNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Stage in apigateway to populate stageName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -26,9 +26,11 @@ type TrafficPolicyInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
+	// Reference to a Zone to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
 	HostedZoneIDRef *v1.Reference `json:"hostedZoneIdRef,omitempty" tf:"-"`
 
+	// Selector for a Zone to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
 	HostedZoneIDSelector *v1.Selector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
 
@@ -50,9 +52,11 @@ type TrafficPolicyInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	TrafficPolicyID *string `json:"trafficPolicyId,omitempty" tf:"traffic_policy_id,omitempty"`
 
+	// Reference to a TrafficPolicy to populate trafficPolicyId.
 	// +kubebuilder:validation:Optional
 	TrafficPolicyIDRef *v1.Reference `json:"trafficPolicyIdRef,omitempty" tf:"-"`
 
+	// Selector for a TrafficPolicy to populate trafficPolicyId.
 	// +kubebuilder:validation:Optional
 	TrafficPolicyIDSelector *v1.Selector `json:"trafficPolicyIdSelector,omitempty" tf:"-"`
 

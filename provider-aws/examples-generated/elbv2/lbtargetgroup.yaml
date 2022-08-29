@@ -1,6 +1,8 @@
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBTargetGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lbtargetgroup
   labels:
     testing.upbound.io/example-name: test
   name: test
@@ -19,6 +21,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lbtargetgroup
   labels:
     testing.upbound.io/example-name: main
   name: main

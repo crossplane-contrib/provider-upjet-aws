@@ -56,9 +56,11 @@ type TransitGatewayMulticastDomainParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
+	// Reference to a TransitGateway to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a TransitGateway to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 }

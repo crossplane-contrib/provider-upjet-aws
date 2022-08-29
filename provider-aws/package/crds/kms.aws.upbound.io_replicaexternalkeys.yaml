@@ -95,7 +95,7 @@ spec:
                   primaryKeyArn:
                     type: string
                   primaryKeyArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ExternalKey to populate primaryKeyArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -129,7 +129,7 @@ spec:
                     - name
                     type: object
                   primaryKeyArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ExternalKey to populate primaryKeyArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

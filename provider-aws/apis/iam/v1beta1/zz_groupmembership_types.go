@@ -23,9 +23,11 @@ type GroupMembershipParameters struct {
 	// +kubebuilder:validation:Optional
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
+	// Reference to a Group to populate group.
 	// +kubebuilder:validation:Optional
 	GroupRef *v1.Reference `json:"groupRef,omitempty" tf:"-"`
 
+	// Selector for a Group to populate group.
 	// +kubebuilder:validation:Optional
 	GroupSelector *v1.Selector `json:"groupSelector,omitempty" tf:"-"`
 
@@ -36,9 +38,11 @@ type GroupMembershipParameters struct {
 	// +kubebuilder:validation:Optional
 	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 
+	// References to User to populate users.
 	// +kubebuilder:validation:Optional
 	UsersRefs []v1.Reference `json:"usersRefs,omitempty" tf:"-"`
 
+	// Selector for a list of User to populate users.
 	// +kubebuilder:validation:Optional
 	UsersSelector *v1.Selector `json:"usersSelector,omitempty" tf:"-"`
 }

@@ -1,6 +1,8 @@
 apiVersion: gamelift.aws.upbound.io/v1beta1
 kind: GameSessionQueue
 metadata:
+  annotations:
+    meta.upbound.io/example-id: gamelift/v1beta1/gamesessionqueue
   labels:
     testing.upbound.io/example-name: test
   name: test

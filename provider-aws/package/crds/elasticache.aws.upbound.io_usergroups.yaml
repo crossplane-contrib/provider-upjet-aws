@@ -78,6 +78,7 @@ spec:
                       type: string
                     type: object
                   userIdRefs:
+                    description: References to User to populate userIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -114,7 +115,7 @@ spec:
                       type: object
                     type: array
                   userIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of User to populate userIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

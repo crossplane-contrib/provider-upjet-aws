@@ -56,9 +56,11 @@ type RouteParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	EgressOnlyGatewayID *string `json:"egressOnlyGatewayId,omitempty" tf:"egress_only_gateway_id,omitempty"`
 
+	// Reference to a EgressOnlyInternetGateway in ec2 to populate egressOnlyGatewayId.
 	// +kubebuilder:validation:Optional
 	EgressOnlyGatewayIDRef *v1.Reference `json:"egressOnlyGatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a EgressOnlyInternetGateway in ec2 to populate egressOnlyGatewayId.
 	// +kubebuilder:validation:Optional
 	EgressOnlyGatewayIDSelector *v1.Selector `json:"egressOnlyGatewayIdSelector,omitempty" tf:"-"`
 
@@ -67,9 +69,11 @@ type RouteParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
+	// Reference to a InternetGateway to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDRef *v1.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a InternetGateway to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
@@ -78,9 +82,11 @@ type RouteParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
+	// Reference to a Instance to populate instanceId.
 	// +kubebuilder:validation:Optional
 	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
+	// Selector for a Instance to populate instanceId.
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
@@ -97,9 +103,11 @@ type RouteParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
+	// Reference to a NetworkInterface to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
+	// Selector for a NetworkInterface to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
@@ -113,9 +121,11 @@ type RouteParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
+	// Reference to a RouteTable to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDRef *v1.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
 
+	// Selector for a RouteTable to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
@@ -124,9 +134,11 @@ type RouteParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
+	// Reference to a TransitGateway to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a TransitGateway to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
@@ -135,9 +147,11 @@ type RouteParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
+	// Reference to a VPCEndpoint to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
 	VPCEndpointIDRef *v1.Reference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPCEndpoint to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
 	VPCEndpointIDSelector *v1.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 
@@ -146,9 +160,11 @@ type RouteParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
 
+	// Reference to a VPCPeeringConnection to populate vpcPeeringConnectionId.
 	// +kubebuilder:validation:Optional
 	VPCPeeringConnectionIDRef *v1.Reference `json:"vpcPeeringConnectionIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPCPeeringConnection to populate vpcPeeringConnectionId.
 	// +kubebuilder:validation:Optional
 	VPCPeeringConnectionIDSelector *v1.Selector `json:"vpcPeeringConnectionIdSelector,omitempty" tf:"-"`
 }

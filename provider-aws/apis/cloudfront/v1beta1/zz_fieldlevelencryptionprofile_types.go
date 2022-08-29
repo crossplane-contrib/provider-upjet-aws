@@ -32,9 +32,11 @@ type EncryptionEntitiesItemsParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicKeyID *string `json:"publicKeyId,omitempty" tf:"public_key_id,omitempty"`
 
+	// Reference to a PublicKey in cloudfront to populate publicKeyId.
 	// +kubebuilder:validation:Optional
 	PublicKeyIDRef *v1.Reference `json:"publicKeyIdRef,omitempty" tf:"-"`
 
+	// Selector for a PublicKey in cloudfront to populate publicKeyId.
 	// +kubebuilder:validation:Optional
 	PublicKeyIDSelector *v1.Selector `json:"publicKeyIdSelector,omitempty" tf:"-"`
 }

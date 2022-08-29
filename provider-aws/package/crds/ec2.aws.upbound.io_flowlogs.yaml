@@ -92,7 +92,7 @@ spec:
                       logs to a CloudWatch Logs log group
                     type: string
                   iamRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate iamRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -126,7 +126,7 @@ spec:
                     - name
                     type: object
                   iamRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate iamRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -168,7 +168,8 @@ spec:
                     description: The ARN of the logging destination.
                     type: string
                   logDestinationRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Group in cloudwatchlogs to populate
+                      logDestination.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -202,7 +203,8 @@ spec:
                     - name
                     type: object
                   logDestinationSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Group in cloudwatchlogs to populate
+                      logDestination.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -265,7 +267,7 @@ spec:
                     description: Subnet ID to attach to
                     type: string
                   subnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet in ec2 to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -299,7 +301,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet in ec2 to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -352,7 +354,7 @@ spec:
                     description: VPC ID to attach to
                     type: string
                   vpcIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VPC in ec2 to populate vpcId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -386,7 +388,7 @@ spec:
                     - name
                     type: object
                   vpcIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VPC in ec2 to populate vpcId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

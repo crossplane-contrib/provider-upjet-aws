@@ -92,7 +92,7 @@ spec:
                   userPoolId:
                     type: string
                   userPoolIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a UserPool to populate userPoolId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -126,7 +126,7 @@ spec:
                     - name
                     type: object
                   userPoolIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a UserPool to populate userPoolId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

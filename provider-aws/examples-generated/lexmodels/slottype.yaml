@@ -1,6 +1,8 @@
 apiVersion: lexmodels.aws.upbound.io/v1beta1
 kind: SlotType
 metadata:
+  annotations:
+    meta.upbound.io/example-id: lexmodels/v1beta1/slottype
   labels:
     testing.upbound.io/example-name: flower_types
   name: flower-types

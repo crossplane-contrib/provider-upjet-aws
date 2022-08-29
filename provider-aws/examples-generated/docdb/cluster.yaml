@@ -1,6 +1,8 @@
 apiVersion: docdb.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: docdb
   name: docdb

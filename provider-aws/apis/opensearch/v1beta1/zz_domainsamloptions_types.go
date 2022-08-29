@@ -27,9 +27,11 @@ type DomainSAMLOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
+	// Reference to a Domain in opensearch to populate domainName.
 	// +kubebuilder:validation:Optional
 	DomainNameRef *v1.Reference `json:"domainNameRef,omitempty" tf:"-"`
 
+	// Selector for a Domain in opensearch to populate domainName.
 	// +kubebuilder:validation:Optional
 	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
 

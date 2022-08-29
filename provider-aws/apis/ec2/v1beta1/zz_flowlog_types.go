@@ -59,9 +59,11 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
 	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
@@ -71,9 +73,11 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
+	// Reference to a Group in cloudwatchlogs to populate logDestination.
 	// +kubebuilder:validation:Optional
 	LogDestinationRef *v1.Reference `json:"logDestinationRef,omitempty" tf:"-"`
 
+	// Selector for a Group in cloudwatchlogs to populate logDestination.
 	// +kubebuilder:validation:Optional
 	LogDestinationSelector *v1.Selector `json:"logDestinationSelector,omitempty" tf:"-"`
 
@@ -105,9 +109,11 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
+	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
@@ -124,9 +130,11 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
+	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }

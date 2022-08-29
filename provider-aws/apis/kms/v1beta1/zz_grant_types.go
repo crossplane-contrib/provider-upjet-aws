@@ -54,9 +54,11 @@ type GrantParameters struct {
 	// +kubebuilder:validation:Optional
 	GranteePrincipal *string `json:"granteePrincipal,omitempty" tf:"grantee_principal,omitempty"`
 
+	// Reference to a Role in iam to populate granteePrincipal.
 	// +kubebuilder:validation:Optional
 	GranteePrincipalRef *v1.Reference `json:"granteePrincipalRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate granteePrincipal.
 	// +kubebuilder:validation:Optional
 	GranteePrincipalSelector *v1.Selector `json:"granteePrincipalSelector,omitempty" tf:"-"`
 
@@ -66,9 +68,11 @@ type GrantParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
+	// Reference to a Key to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
+	// Selector for a Key to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 

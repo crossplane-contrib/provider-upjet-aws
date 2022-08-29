@@ -142,7 +142,8 @@ spec:
                                         the KMS key Amazon Resource Name .
                                       type: string
                                     kmsKeyArnRef:
-                                      description: A Reference to a named object.
+                                      description: Reference to a Key in kms to populate
+                                        kmsKeyArn.
                                       properties:
                                         name:
                                           description: Name of the referenced object.
@@ -180,7 +181,8 @@ spec:
                                       - name
                                       type: object
                                     kmsKeyArnSelector:
-                                      description: A Selector selects an object.
+                                      description: Selector for a Key in kms to populate
+                                        kmsKeyArn.
                                       properties:
                                         matchControllerRef:
                                           description: MatchControllerRef ensures

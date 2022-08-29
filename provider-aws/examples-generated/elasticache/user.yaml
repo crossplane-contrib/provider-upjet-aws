@@ -1,6 +1,8 @@
 apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: User
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/user
   labels:
     testing.upbound.io/example-name: test
   name: test

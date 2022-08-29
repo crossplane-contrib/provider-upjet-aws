@@ -75,9 +75,11 @@ type FleetParameters struct {
 	// +kubebuilder:validation:Optional
 	BuildID *string `json:"buildId,omitempty" tf:"build_id,omitempty"`
 
+	// Reference to a Build to populate buildId.
 	// +kubebuilder:validation:Optional
 	BuildIDRef *v1.Reference `json:"buildIdRef,omitempty" tf:"-"`
 
+	// Selector for a Build to populate buildId.
 	// +kubebuilder:validation:Optional
 	BuildIDSelector *v1.Selector `json:"buildIdSelector,omitempty" tf:"-"`
 
@@ -107,9 +109,11 @@ type FleetParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceRoleArn *string `json:"instanceRoleArn,omitempty" tf:"instance_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate instanceRoleArn.
 	// +kubebuilder:validation:Optional
 	InstanceRoleArnRef *v1.Reference `json:"instanceRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate instanceRoleArn.
 	// +kubebuilder:validation:Optional
 	InstanceRoleArnSelector *v1.Selector `json:"instanceRoleArnSelector,omitempty" tf:"-"`
 

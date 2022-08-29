@@ -32,9 +32,11 @@ type VPCEndpointRouteTableAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
+	// Reference to a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDRef *v1.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
 
+	// Selector for a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
@@ -44,9 +46,11 @@ type VPCEndpointRouteTableAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
+	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
 	VPCEndpointIDRef *v1.Reference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
 	VPCEndpointIDSelector *v1.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 }

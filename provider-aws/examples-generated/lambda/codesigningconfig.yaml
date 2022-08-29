@@ -1,6 +1,8 @@
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: CodeSigningConfig
 metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/codesigningconfig
   labels:
     testing.upbound.io/example-name: new_csc
   name: new-csc

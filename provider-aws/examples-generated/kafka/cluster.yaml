@@ -1,6 +1,8 @@
 apiVersion: kafka.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -57,6 +59,8 @@ spec:
 apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
 kind: Group
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: test
   name: test
@@ -69,6 +73,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: firehose_role
   name: firehose-role
@@ -94,6 +100,8 @@ spec:
 apiVersion: firehose.aws.upbound.io/v1beta1
 kind: DeliveryStream
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: test_stream
   name: test-stream
@@ -117,6 +125,8 @@ spec:
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Key
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: kms
   name: kms
@@ -132,6 +142,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: bucket
   name: bucket
@@ -144,6 +155,8 @@ spec:
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketACL
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: bucket_acl
   name: bucket-acl
@@ -159,6 +172,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: sg
   name: sg
@@ -174,6 +189,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: subnet_az1
   name: subnet-az1
@@ -191,6 +208,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: subnet_az2
   name: subnet-az2
@@ -208,6 +227,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: subnet_az3
   name: subnet-az3
@@ -225,6 +246,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: vpc
   name: vpc

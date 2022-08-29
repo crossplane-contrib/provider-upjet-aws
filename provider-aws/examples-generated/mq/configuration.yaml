@@ -1,6 +1,8 @@
 apiVersion: mq.aws.upbound.io/v1beta1
 kind: Configuration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1beta1/configuration
   labels:
     testing.upbound.io/example-name: example
   name: example

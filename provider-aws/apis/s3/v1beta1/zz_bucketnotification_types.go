@@ -25,9 +25,11 @@ type BucketNotificationParameters struct {
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
@@ -98,9 +100,11 @@ type QueueParameters struct {
 	// +kubebuilder:validation:Optional
 	QueueArn *string `json:"queueArn,omitempty" tf:"queue_arn,omitempty"`
 
+	// Reference to a Queue in sqs to populate queueArn.
 	// +kubebuilder:validation:Optional
 	QueueArnRef *v1.Reference `json:"queueArnRef,omitempty" tf:"-"`
 
+	// Selector for a Queue in sqs to populate queueArn.
 	// +kubebuilder:validation:Optional
 	QueueArnSelector *v1.Selector `json:"queueArnSelector,omitempty" tf:"-"`
 }
@@ -128,9 +132,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
+	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
 	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
 
+	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
 	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }

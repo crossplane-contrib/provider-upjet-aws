@@ -73,9 +73,11 @@ type EndpointGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
 
+	// Reference to a Listener to populate listenerArn.
 	// +kubebuilder:validation:Optional
 	ListenerArnRef *v1.Reference `json:"listenerArnRef,omitempty" tf:"-"`
 
+	// Selector for a Listener to populate listenerArn.
 	// +kubebuilder:validation:Optional
 	ListenerArnSelector *v1.Selector `json:"listenerArnSelector,omitempty" tf:"-"`
 

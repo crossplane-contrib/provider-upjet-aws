@@ -1,6 +1,8 @@
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: UsagePlan
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/usageplan
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -36,6 +38,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Deployment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/usageplan
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -53,6 +57,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: RestAPI
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/usageplan
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -86,6 +92,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Stage
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/usageplan
   labels:
     testing.upbound.io/example-name: development
   name: development
@@ -105,6 +113,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Stage
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/usageplan
   labels:
     testing.upbound.io/example-name: production
   name: production

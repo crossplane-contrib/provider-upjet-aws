@@ -76,7 +76,7 @@ spec:
                       you are updating
                     type: string
                   functionNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Function to populate functionName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -110,7 +110,7 @@ spec:
                     - name
                     type: object
                   functionNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Function to populate functionName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -168,7 +168,7 @@ spec:
                       ARN e.g., arn:aws:lambda:aws-region:acct-id:function:function-name:2
                     type: string
                   qualifierRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Alias to populate qualifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -202,7 +202,7 @@ spec:
                     - name
                     type: object
                   qualifierSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Alias to populate qualifier.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

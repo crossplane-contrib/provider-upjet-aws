@@ -95,9 +95,11 @@ type ELBParameters struct {
 	// +kubebuilder:validation:Optional
 	Instances []*string `json:"instances,omitempty" tf:"instances,omitempty"`
 
+	// References to Instance in ec2 to populate instances.
 	// +kubebuilder:validation:Optional
 	InstancesRefs []v1.Reference `json:"instancesRefs,omitempty" tf:"-"`
 
+	// Selector for a list of Instance in ec2 to populate instances.
 	// +kubebuilder:validation:Optional
 	InstancesSelector *v1.Selector `json:"instancesSelector,omitempty" tf:"-"`
 
@@ -130,9 +132,11 @@ type ELBParameters struct {
 	// +kubebuilder:validation:Optional
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
+	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
 	SubnetsRefs []v1.Reference `json:"subnetsRefs,omitempty" tf:"-"`
 
+	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
 	SubnetsSelector *v1.Selector `json:"subnetsSelector,omitempty" tf:"-"`
 

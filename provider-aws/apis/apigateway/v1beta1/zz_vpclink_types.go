@@ -48,9 +48,11 @@ type VPCLinkParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetArns []*string `json:"targetArns,omitempty" tf:"target_arns,omitempty"`
 
+	// References to LB in elbv2 to populate targetArns.
 	// +kubebuilder:validation:Optional
 	TargetArnsRefs []v1.Reference `json:"targetArnsRefs,omitempty" tf:"-"`
 
+	// Selector for a list of LB in elbv2 to populate targetArns.
 	// +kubebuilder:validation:Optional
 	TargetArnsSelector *v1.Selector `json:"targetArnsSelector,omitempty" tf:"-"`
 }

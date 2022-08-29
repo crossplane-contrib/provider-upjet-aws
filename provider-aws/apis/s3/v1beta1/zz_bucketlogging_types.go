@@ -29,9 +29,11 @@ type BucketLoggingParameters struct {
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
@@ -50,9 +52,11 @@ type BucketLoggingParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetBucket *string `json:"targetBucket,omitempty" tf:"target_bucket,omitempty"`
 
+	// Reference to a Bucket in s3 to populate targetBucket.
 	// +kubebuilder:validation:Optional
 	TargetBucketRef *v1.Reference `json:"targetBucketRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate targetBucket.
 	// +kubebuilder:validation:Optional
 	TargetBucketSelector *v1.Selector `json:"targetBucketSelector,omitempty" tf:"-"`
 

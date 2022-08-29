@@ -25,9 +25,11 @@ type AttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ALBTargetGroupArn *string `json:"albTargetGroupArn,omitempty" tf:"alb_target_group_arn,omitempty"`
 
+	// Reference to a LBTargetGroup in elbv2 to populate albTargetGroupArn.
 	// +kubebuilder:validation:Optional
 	ALBTargetGroupArnRef *v1.Reference `json:"albTargetGroupArnRef,omitempty" tf:"-"`
 
+	// Selector for a LBTargetGroup in elbv2 to populate albTargetGroupArn.
 	// +kubebuilder:validation:Optional
 	ALBTargetGroupArnSelector *v1.Selector `json:"albTargetGroupArnSelector,omitempty" tf:"-"`
 
@@ -36,9 +38,11 @@ type AttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 
+	// Reference to a AutoscalingGroup to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupNameRef *v1.Reference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a AutoscalingGroup to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupNameSelector *v1.Selector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
@@ -48,9 +52,11 @@ type AttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
 
+	// Reference to a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
 	ELBRef *v1.Reference `json:"elbRef,omitempty" tf:"-"`
 
+	// Selector for a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
 	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
 
@@ -60,9 +66,11 @@ type AttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	LBTargetGroupArn *string `json:"lbTargetGroupArn,omitempty" tf:"lb_target_group_arn,omitempty"`
 
+	// Reference to a LBTargetGroup in elbv2 to populate lbTargetGroupArn.
 	// +kubebuilder:validation:Optional
 	LBTargetGroupArnRef *v1.Reference `json:"lbTargetGroupArnRef,omitempty" tf:"-"`
 
+	// Selector for a LBTargetGroup in elbv2 to populate lbTargetGroupArn.
 	// +kubebuilder:validation:Optional
 	LBTargetGroupArnSelector *v1.Selector `json:"lbTargetGroupArnSelector,omitempty" tf:"-"`
 

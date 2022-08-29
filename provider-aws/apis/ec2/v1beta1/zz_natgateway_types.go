@@ -38,9 +38,11 @@ type NATGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
+	// Reference to a EIP in ec2 to populate allocationId.
 	// +kubebuilder:validation:Optional
 	AllocationIDRef *v1.Reference `json:"allocationIdRef,omitempty" tf:"-"`
 
+	// Selector for a EIP in ec2 to populate allocationId.
 	// +kubebuilder:validation:Optional
 	AllocationIDSelector *v1.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
 
@@ -57,9 +59,11 @@ type NATGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
+	// Reference to a Subnet to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 

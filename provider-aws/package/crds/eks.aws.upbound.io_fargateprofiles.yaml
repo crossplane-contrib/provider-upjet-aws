@@ -70,7 +70,7 @@ spec:
                       and underscores .
                     type: string
                   clusterNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Cluster to populate clusterName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -104,7 +104,7 @@ spec:
                     - name
                     type: object
                   clusterNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Cluster to populate clusterName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -147,7 +147,7 @@ spec:
                       permissions for the EKS Fargate Profile.
                     type: string
                   podExecutionRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate podExecutionRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -181,7 +181,7 @@ spec:
                     - name
                     type: object
                   podExecutionRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate podExecutionRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -241,6 +241,7 @@ spec:
                       type: object
                     type: array
                   subnetIdRefs:
+                    description: References to Subnet in ec2 to populate subnetIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -277,7 +278,8 @@ spec:
                       type: object
                     type: array
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of Subnet in ec2 to populate
+                      subnetIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -69,6 +69,7 @@ spec:
                       be created in.
                     type: string
                   subnetIdRefs:
+                    description: References to Subnet in ec2 to populate subnetIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -105,7 +106,8 @@ spec:
                       type: object
                     type: array
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of Subnet in ec2 to populate
+                      subnetIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -159,7 +161,7 @@ spec:
                     description: The ID of the associated VPC.
                     type: string
                   vpcIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VPC in ec2 to populate vpcId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -193,7 +195,7 @@ spec:
                     - name
                     type: object
                   vpcIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VPC in ec2 to populate vpcId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

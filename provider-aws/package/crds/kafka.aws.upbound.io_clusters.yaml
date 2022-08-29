@@ -80,6 +80,7 @@ spec:
                             type: string
                           type: array
                         clientSubnetsRefs:
+                          description: References to Subnet in ec2 to populate clientSubnets.
                           items:
                             description: A Reference to a named object.
                             properties:
@@ -118,7 +119,8 @@ spec:
                             type: object
                           type: array
                         clientSubnetsSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a list of Subnet in ec2 to populate
+                            clientSubnets.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -196,6 +198,8 @@ spec:
                             type: string
                           type: array
                         securityGroupsRefs:
+                          description: References to SecurityGroup in ec2 to populate
+                            securityGroups.
                           items:
                             description: A Reference to a named object.
                             properties:
@@ -234,7 +238,8 @@ spec:
                             type: object
                           type: array
                         securityGroupsSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a list of SecurityGroup in ec2
+                            to populate securityGroups.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -387,7 +392,7 @@ spec:
                             data at rest.
                           type: string
                         encryptionAtRestKmsKeyArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Key in kms to populate encryptionAtRestKmsKeyArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -422,7 +427,7 @@ spec:
                           - name
                           type: object
                         encryptionAtRestKmsKeyArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Key in kms to populate encryptionAtRestKmsKeyArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -507,7 +512,8 @@ spec:
                                         to deliver logs to.
                                       type: string
                                     logGroupRef:
-                                      description: A Reference to a named object.
+                                      description: Reference to a Group in cloudwatchlogs
+                                        to populate logGroup.
                                       properties:
                                         name:
                                           description: Name of the referenced object.
@@ -545,7 +551,8 @@ spec:
                                       - name
                                       type: object
                                     logGroupSelector:
-                                      description: A Selector selects an object.
+                                      description: Selector for a Group in cloudwatchlogs
+                                        to populate logGroup.
                                       properties:
                                         matchControllerRef:
                                           description: MatchControllerRef ensures
@@ -600,7 +607,8 @@ spec:
                                         delivery stream to deliver logs to.
                                       type: string
                                     deliveryStreamRef:
-                                      description: A Reference to a named object.
+                                      description: Reference to a DeliveryStream in
+                                        firehose to populate deliveryStream.
                                       properties:
                                         name:
                                           description: Name of the referenced object.
@@ -638,7 +646,8 @@ spec:
                                       - name
                                       type: object
                                     deliveryStreamSelector:
-                                      description: A Selector selects an object.
+                                      description: Selector for a DeliveryStream in
+                                        firehose to populate deliveryStream.
                                       properties:
                                         matchControllerRef:
                                           description: MatchControllerRef ensures
@@ -695,7 +704,8 @@ spec:
                                         logs to.
                                       type: string
                                     bucketRef:
-                                      description: A Reference to a named object.
+                                      description: Reference to a Bucket in s3 to
+                                        populate bucket.
                                       properties:
                                         name:
                                           description: Name of the referenced object.
@@ -733,7 +743,8 @@ spec:
                                       - name
                                       type: object
                                     bucketSelector:
-                                      description: A Selector selects an object.
+                                      description: Selector for a Bucket in s3 to
+                                        populate bucket.
                                       properties:
                                         matchControllerRef:
                                           description: MatchControllerRef ensures

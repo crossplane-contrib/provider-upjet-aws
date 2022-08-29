@@ -109,9 +109,11 @@ type QueryArgProfilesItemsParameters struct {
 	// +kubebuilder:validation:Optional
 	ProfileID *string `json:"profileId,omitempty" tf:"profile_id,omitempty"`
 
+	// Reference to a FieldLevelEncryptionProfile in cloudfront to populate profileId.
 	// +kubebuilder:validation:Optional
 	ProfileIDRef *v1.Reference `json:"profileIdRef,omitempty" tf:"-"`
 
+	// Selector for a FieldLevelEncryptionProfile in cloudfront to populate profileId.
 	// +kubebuilder:validation:Optional
 	ProfileIDSelector *v1.Selector `json:"profileIdSelector,omitempty" tf:"-"`
 

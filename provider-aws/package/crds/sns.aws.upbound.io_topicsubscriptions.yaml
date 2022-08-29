@@ -83,7 +83,7 @@ spec:
                       subscription . Default is false.
                     type: boolean
                   endpointRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Queue in sqs to populate endpoint.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -117,7 +117,7 @@ spec:
                     - name
                     type: object
                   endpointSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Queue in sqs to populate endpoint.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -183,7 +183,7 @@ spec:
                       delivery stream. Refer to SNS docs.
                     type: string
                   subscriptionRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate subscriptionRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -217,7 +217,7 @@ spec:
                     - name
                     type: object
                   subscriptionRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate subscriptionRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -259,7 +259,7 @@ spec:
                     description: ARN of the SNS topic to subscribe to.
                     type: string
                   topicArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Topic to populate topicArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -293,7 +293,7 @@ spec:
                     - name
                     type: object
                   topicArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Topic to populate topicArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

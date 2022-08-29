@@ -1,6 +1,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketNotification
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketnotification
   labels:
     testing.upbound.io/example-name: bucket_notification
   name: bucket-notification
@@ -25,6 +27,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: s3/v1beta1/bucketnotification
   labels:
     testing.upbound.io/example-name: bucket
   name: bucket
@@ -37,6 +40,8 @@ spec:
 apiVersion: sns.aws.upbound.io/v1beta1
 kind: Topic
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketnotification
   labels:
     testing.upbound.io/example-name: topic
   name: topic

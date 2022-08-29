@@ -76,7 +76,8 @@ spec:
                     description: Identifier of EC2 Transit Gateway to peer with.
                     type: string
                   peerTransitGatewayIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a TransitGateway in ec2 to populate
+                      peerTransitGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -110,7 +111,8 @@ spec:
                     - name
                     type: object
                   peerTransitGatewayIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a TransitGateway in ec2 to populate
+                      peerTransitGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -164,7 +166,8 @@ spec:
                     description: Identifier of EC2 Transit Gateway.
                     type: string
                   transitGatewayIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a TransitGateway in ec2 to populate
+                      transitGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -198,7 +201,8 @@ spec:
                     - name
                     type: object
                   transitGatewayIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a TransitGateway in ec2 to populate
+                      transitGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

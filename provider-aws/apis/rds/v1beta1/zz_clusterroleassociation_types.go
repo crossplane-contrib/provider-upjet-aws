@@ -27,9 +27,11 @@ type ClusterRoleAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
+	// Reference to a Cluster in rds to populate dbClusterIdentifier.
 	// +kubebuilder:validation:Optional
 	DBClusterIdentifierRef *v1.Reference `json:"dbClusterIdentifierRef,omitempty" tf:"-"`
 
+	// Selector for a Cluster in rds to populate dbClusterIdentifier.
 	// +kubebuilder:validation:Optional
 	DBClusterIdentifierSelector *v1.Selector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
 
@@ -48,9 +50,11 @@ type ClusterRoleAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }

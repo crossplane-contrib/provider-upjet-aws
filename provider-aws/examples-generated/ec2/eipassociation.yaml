@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: EIPAssociation
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/eipassociation
   labels:
     testing.upbound.io/example-name: eip_assoc
   name: eip-assoc
@@ -19,6 +21,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: EIP
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/eipassociation
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -32,6 +36,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Instance
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/eipassociation
   labels:
     testing.upbound.io/example-name: web
   name: web

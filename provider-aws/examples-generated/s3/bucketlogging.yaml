@@ -1,6 +1,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketLogging
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketlogging
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -22,6 +24,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: s3/v1beta1/bucketlogging
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -36,6 +39,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: s3/v1beta1/bucketlogging
   labels:
     testing.upbound.io/example-name: log_bucket
   name: log-bucket
@@ -48,6 +52,8 @@ spec:
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketACL
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketlogging
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -63,6 +69,8 @@ spec:
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketACL
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketlogging
   labels:
     testing.upbound.io/example-name: log_bucket_acl
   name: log-bucket-acl

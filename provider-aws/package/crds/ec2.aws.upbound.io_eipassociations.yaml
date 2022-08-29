@@ -67,7 +67,7 @@ spec:
                   allocationId:
                     type: string
                   allocationIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a EIP in ec2 to populate allocationId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -101,7 +101,7 @@ spec:
                     - name
                     type: object
                   allocationIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a EIP in ec2 to populate allocationId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -146,7 +146,7 @@ spec:
                   instanceId:
                     type: string
                   instanceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Instance in ec2 to populate instanceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -180,7 +180,7 @@ spec:
                     - name
                     type: object
                   instanceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Instance in ec2 to populate instanceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

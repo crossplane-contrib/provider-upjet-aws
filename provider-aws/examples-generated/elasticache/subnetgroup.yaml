@@ -1,6 +1,8 @@
 apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: SubnetGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/subnetgroup
   labels:
     testing.upbound.io/example-name: bar
   name: bar
@@ -15,6 +17,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/subnetgroup
   labels:
     testing.upbound.io/example-name: foo
   name: foo
@@ -34,6 +38,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/subnetgroup
   labels:
     testing.upbound.io/example-name: foo
   name: foo

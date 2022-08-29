@@ -74,7 +74,7 @@ spec:
                     description: Globally unique key ID for the customer master key.
                     type: string
                   keyIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Key to populate keyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -108,7 +108,7 @@ spec:
                     - name
                     type: object
                   keyIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Key to populate keyId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

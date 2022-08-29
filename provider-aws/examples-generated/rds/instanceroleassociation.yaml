@@ -1,6 +1,8 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: InstanceRoleAssociation
 metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/instanceroleassociation
   labels:
     testing.upbound.io/example-name: example
   name: example

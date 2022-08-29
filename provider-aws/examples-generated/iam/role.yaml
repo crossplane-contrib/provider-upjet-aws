@@ -1,6 +1,8 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/role
   labels:
     testing.upbound.io/example-name: test_role
   name: test-role

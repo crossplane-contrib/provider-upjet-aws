@@ -1,6 +1,8 @@
 apiVersion: athena.aws.upbound.io/v1beta1
 kind: NamedQuery
 metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/namedquery
   labels:
     testing.upbound.io/example-name: foo
   name: foo
@@ -21,6 +23,8 @@ spec:
 apiVersion: athena.aws.upbound.io/v1beta1
 kind: Database
 metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/namedquery
   labels:
     testing.upbound.io/example-name: hoge
   name: hoge
@@ -36,6 +40,8 @@ spec:
 apiVersion: athena.aws.upbound.io/v1beta1
 kind: Workgroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/namedquery
   labels:
     testing.upbound.io/example-name: test
   name: test
@@ -55,6 +61,8 @@ spec:
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Key
 metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/namedquery
   labels:
     testing.upbound.io/example-name: test
   name: test
@@ -71,6 +79,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: athena/v1beta1/namedquery
   labels:
     testing.upbound.io/example-name: hoge
   name: hoge

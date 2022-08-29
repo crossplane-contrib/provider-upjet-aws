@@ -83,7 +83,7 @@ spec:
                           description: The ID of the subnet that contains the IP address.
                           type: string
                         subnetIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Subnet in ec2 to populate subnetId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -118,7 +118,7 @@ spec:
                           - name
                           type: object
                         subnetIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Subnet in ec2 to populate subnetId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -168,6 +168,7 @@ spec:
                       be created in.
                     type: string
                   securityGroupIdRefs:
+                    description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -204,7 +205,8 @@ spec:
                       type: object
                     type: array
                   securityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup in ec2 to populate
+                      securityGroupIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

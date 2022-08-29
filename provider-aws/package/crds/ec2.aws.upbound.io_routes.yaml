@@ -85,7 +85,8 @@ spec:
                     description: Identifier of a VPC Egress Only Internet Gateway.
                     type: string
                   egressOnlyGatewayIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a EgressOnlyInternetGateway in ec2 to
+                      populate egressOnlyGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -119,7 +120,8 @@ spec:
                     - name
                     type: object
                   egressOnlyGatewayIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a EgressOnlyInternetGateway in ec2 to
+                      populate egressOnlyGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -162,7 +164,7 @@ spec:
                       private gateway.
                     type: string
                   gatewayIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a InternetGateway to populate gatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -196,7 +198,7 @@ spec:
                     - name
                     type: object
                   gatewayIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a InternetGateway to populate gatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -238,7 +240,7 @@ spec:
                     description: Identifier of an EC2 instance.
                     type: string
                   instanceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Instance to populate instanceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -272,7 +274,7 @@ spec:
                     - name
                     type: object
                   instanceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Instance to populate instanceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -320,7 +322,7 @@ spec:
                     description: Identifier of an EC2 network interface.
                     type: string
                   networkInterfaceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a NetworkInterface to populate networkInterfaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -354,7 +356,7 @@ spec:
                     - name
                     type: object
                   networkInterfaceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a NetworkInterface to populate networkInterfaceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -400,7 +402,7 @@ spec:
                     description: The ID of the routing table.
                     type: string
                   routeTableIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a RouteTable to populate routeTableId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -434,7 +436,7 @@ spec:
                     - name
                     type: object
                   routeTableIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a RouteTable to populate routeTableId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -476,7 +478,7 @@ spec:
                     description: Identifier of an EC2 Transit Gateway.
                     type: string
                   transitGatewayIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a TransitGateway to populate transitGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -510,7 +512,7 @@ spec:
                     - name
                     type: object
                   transitGatewayIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a TransitGateway to populate transitGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -552,7 +554,7 @@ spec:
                     description: Identifier of a VPC Endpoint.
                     type: string
                   vpcEndpointIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VPCEndpoint to populate vpcEndpointId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -586,7 +588,7 @@ spec:
                     - name
                     type: object
                   vpcEndpointIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VPCEndpoint to populate vpcEndpointId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -628,7 +630,7 @@ spec:
                     description: Identifier of a VPC peering connection.
                     type: string
                   vpcPeeringConnectionIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VPCPeeringConnection to populate vpcPeeringConnectionId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -662,7 +664,7 @@ spec:
                     - name
                     type: object
                   vpcPeeringConnectionIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VPCPeeringConnection to populate vpcPeeringConnectionId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

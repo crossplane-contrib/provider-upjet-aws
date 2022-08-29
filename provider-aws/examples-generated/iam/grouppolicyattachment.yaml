@@ -1,6 +1,8 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: GroupPolicyAttachment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/grouppolicyattachment
   labels:
     testing.upbound.io/example-name: test-attach
   name: test-attach
@@ -18,6 +20,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Group
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/grouppolicyattachment
   labels:
     testing.upbound.io/example-name: group
   name: group
@@ -29,6 +33,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/grouppolicyattachment
   labels:
     testing.upbound.io/example-name: policy
   name: policy

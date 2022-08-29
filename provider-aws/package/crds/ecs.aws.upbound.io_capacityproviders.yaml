@@ -73,7 +73,8 @@ spec:
                           description: '- ARN of the associated auto scaling group.'
                           type: string
                         autoScalingGroupArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a AutoscalingGroup in autoscaling
+                            to populate autoScalingGroupArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -108,7 +109,8 @@ spec:
                           - name
                           type: object
                         autoScalingGroupArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a AutoscalingGroup in autoscaling
+                            to populate autoScalingGroupArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

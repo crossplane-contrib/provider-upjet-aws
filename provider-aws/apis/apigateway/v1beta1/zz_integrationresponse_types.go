@@ -29,9 +29,11 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
+	// Reference to a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
 	HTTPMethodRef *v1.Reference `json:"httpMethodRef,omitempty" tf:"-"`
 
+	// Selector for a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
 	HTTPMethodSelector *v1.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
 
@@ -46,9 +48,11 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
+	// Reference to a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
+	// Selector for a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
@@ -67,9 +71,11 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
+	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
 	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
+	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
@@ -86,9 +92,11 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 
+	// Reference to a MethodResponse in apigateway to populate statusCode.
 	// +kubebuilder:validation:Optional
 	StatusCodeRef *v1.Reference `json:"statusCodeRef,omitempty" tf:"-"`
 
+	// Selector for a MethodResponse in apigateway to populate statusCode.
 	// +kubebuilder:validation:Optional
 	StatusCodeSelector *v1.Selector `json:"statusCodeSelector,omitempty" tf:"-"`
 }

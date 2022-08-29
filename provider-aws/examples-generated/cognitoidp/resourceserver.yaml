@@ -1,6 +1,8 @@
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: ResourceServer
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/resourceserver
   labels:
     testing.upbound.io/example-name: resource
   name: resource
@@ -18,6 +20,8 @@ spec:
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: UserPool
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/resourceserver
   labels:
     testing.upbound.io/example-name: pool
   name: pool

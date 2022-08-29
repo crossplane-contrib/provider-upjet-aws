@@ -77,9 +77,11 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
 	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
+	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
@@ -114,9 +116,11 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	RotationLambdaArn *string `json:"rotationLambdaArn,omitempty" tf:"rotation_lambda_arn,omitempty"`
 
+	// Reference to a Function in lambda to populate rotationLambdaArn.
 	// +kubebuilder:validation:Optional
 	RotationLambdaArnRef *v1.Reference `json:"rotationLambdaArnRef,omitempty" tf:"-"`
 
+	// Selector for a Function in lambda to populate rotationLambdaArn.
 	// +kubebuilder:validation:Optional
 	RotationLambdaArnSelector *v1.Selector `json:"rotationLambdaArnSelector,omitempty" tf:"-"`
 

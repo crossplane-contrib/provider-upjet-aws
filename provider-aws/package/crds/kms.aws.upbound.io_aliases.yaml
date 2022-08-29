@@ -73,7 +73,7 @@ spec:
                       can be either an ARN or key_id.
                     type: string
                   targetKeyIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Key to populate targetKeyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -107,7 +107,7 @@ spec:
                     - name
                     type: object
                   targetKeyIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Key to populate targetKeyId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

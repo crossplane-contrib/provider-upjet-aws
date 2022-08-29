@@ -124,7 +124,8 @@ spec:
                     description: The ID of the deployment that the stage points to
                     type: string
                   deploymentIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Deployment in apigateway to populate
+                      deploymentId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -158,7 +159,8 @@ spec:
                     - name
                     type: object
                   deploymentIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Deployment in apigateway to populate
+                      deploymentId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -210,7 +212,8 @@ spec:
                     description: The ID of the associated REST API
                     type: string
                   restApiIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a RestAPI in apigateway to populate
+                      restApiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -244,7 +247,8 @@ spec:
                     - name
                     type: object
                   restApiIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a RestAPI in apigateway to populate
+                      restApiId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -51,9 +51,11 @@ type NetworkACLRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkACLID *string `json:"networkAclId,omitempty" tf:"network_acl_id,omitempty"`
 
+	// Reference to a NetworkACL in ec2 to populate networkAclId.
 	// +kubebuilder:validation:Optional
 	NetworkACLIDRef *v1.Reference `json:"networkAclIdRef,omitempty" tf:"-"`
 
+	// Selector for a NetworkACL in ec2 to populate networkAclId.
 	// +kubebuilder:validation:Optional
 	NetworkACLIDSelector *v1.Selector `json:"networkAclIdSelector,omitempty" tf:"-"`
 

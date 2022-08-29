@@ -82,7 +82,7 @@ spec:
                   clusterIdentifier:
                     type: string
                   clusterIdentifierRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Cluster in rds to populate clusterIdentifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -116,7 +116,7 @@ spec:
                     - name
                     type: object
                   clusterIdentifierSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Cluster in rds to populate clusterIdentifier.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -168,7 +168,7 @@ spec:
                       aws_rds_cluster.'
                     type: string
                   dbSubnetGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a SubnetGroup to populate dbSubnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -202,7 +202,7 @@ spec:
                     - name
                     type: object
                   dbSubnetGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a SubnetGroup to populate dbSubnetGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -264,7 +264,7 @@ spec:
                       are needed to allow Enhanced Monitoring for RDS Instances.
                     type: string
                   monitoringRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate monitoringRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -298,7 +298,7 @@ spec:
                     - name
                     type: object
                   monitoringRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate monitoringRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -341,7 +341,7 @@ spec:
                   performanceInsightsKmsKeyId:
                     type: string
                   performanceInsightsKmsKeyIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Key in kms to populate performanceInsightsKmsKeyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -375,7 +375,7 @@ spec:
                     - name
                     type: object
                   performanceInsightsKmsKeyIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Key in kms to populate performanceInsightsKmsKeyId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

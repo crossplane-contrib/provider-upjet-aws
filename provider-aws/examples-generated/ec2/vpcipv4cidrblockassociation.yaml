@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCIPv4CidrBlockAssociation
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipv4cidrblockassociation
   labels:
     testing.upbound.io/example-name: secondary_cidr
   name: secondary-cidr
@@ -17,6 +19,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipv4cidrblockassociation
   labels:
     testing.upbound.io/example-name: main
   name: main

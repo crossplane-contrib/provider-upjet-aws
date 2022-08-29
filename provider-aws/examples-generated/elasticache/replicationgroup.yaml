@@ -1,6 +1,8 @@
 apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: ReplicationGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/replicationgroup
   labels:
     testing.upbound.io/example-name: example
   name: example

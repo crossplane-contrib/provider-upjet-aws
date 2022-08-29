@@ -125,9 +125,11 @@ type DefaultActionParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
+	// Reference to a LBTargetGroup to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
 	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
 
+	// Selector for a LBTargetGroup to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
 	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
@@ -196,9 +198,11 @@ type LBListenerParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerArn *string `json:"loadBalancerArn,omitempty" tf:"load_balancer_arn,omitempty"`
 
+	// Reference to a LB to populate loadBalancerArn.
 	// +kubebuilder:validation:Optional
 	LoadBalancerArnRef *v1.Reference `json:"loadBalancerArnRef,omitempty" tf:"-"`
 
+	// Selector for a LB to populate loadBalancerArn.
 	// +kubebuilder:validation:Optional
 	LoadBalancerArnSelector *v1.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
 
@@ -272,9 +276,11 @@ type TargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Reference to a LBTargetGroup to populate arn.
 	// +kubebuilder:validation:Optional
 	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
 
+	// Selector for a LBTargetGroup to populate arn.
 	// +kubebuilder:validation:Optional
 	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 

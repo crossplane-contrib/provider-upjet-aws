@@ -68,7 +68,7 @@ spec:
                     description: The name of the ELB.
                     type: string
                   elbRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ELB to populate elb.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   elbSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ELB to populate elb.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -144,7 +144,7 @@ spec:
                     description: Instance ID to place in the ELB pool.
                     type: string
                   instanceRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Instance in ec2 to populate instance.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -178,7 +178,7 @@ spec:
                     - name
                     type: object
                   instanceSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Instance in ec2 to populate instance.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

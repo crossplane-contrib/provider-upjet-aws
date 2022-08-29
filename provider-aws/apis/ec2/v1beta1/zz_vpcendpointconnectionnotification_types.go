@@ -37,9 +37,11 @@ type VPCEndpointConnectionNotificationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionNotificationArn *string `json:"connectionNotificationArn,omitempty" tf:"connection_notification_arn,omitempty"`
 
+	// Reference to a Topic in sns to populate connectionNotificationArn.
 	// +kubebuilder:validation:Optional
 	ConnectionNotificationArnRef *v1.Reference `json:"connectionNotificationArnRef,omitempty" tf:"-"`
 
+	// Selector for a Topic in sns to populate connectionNotificationArn.
 	// +kubebuilder:validation:Optional
 	ConnectionNotificationArnSelector *v1.Selector `json:"connectionNotificationArnSelector,omitempty" tf:"-"`
 
@@ -58,9 +60,11 @@ type VPCEndpointConnectionNotificationParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCEndpointServiceID *string `json:"vpcEndpointServiceId,omitempty" tf:"vpc_endpoint_service_id,omitempty"`
 
+	// Reference to a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
 	VPCEndpointServiceIDRef *v1.Reference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
 	VPCEndpointServiceIDSelector *v1.Selector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
 }

@@ -33,9 +33,11 @@ type ClusterActivityStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
 	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
+	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
@@ -54,9 +56,11 @@ type ClusterActivityStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
+	// Reference to a Cluster in rds to populate resourceArn.
 	// +kubebuilder:validation:Optional
 	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
 
+	// Selector for a Cluster in rds to populate resourceArn.
 	// +kubebuilder:validation:Optional
 	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }

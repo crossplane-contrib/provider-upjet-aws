@@ -26,9 +26,11 @@ type DomainPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
+	// Reference to a Domain to populate domainName.
 	// +kubebuilder:validation:Optional
 	DomainNameRef *v1.Reference `json:"domainNameRef,omitempty" tf:"-"`
 
+	// Selector for a Domain to populate domainName.
 	// +kubebuilder:validation:Optional
 	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
 

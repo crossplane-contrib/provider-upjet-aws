@@ -68,7 +68,7 @@ spec:
                     description: IAM role for failure feedback
                     type: string
                   applicationFailureFeedbackRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate applicationFailureFeedbackRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   applicationFailureFeedbackRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate applicationFailureFeedbackRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -145,7 +145,7 @@ spec:
                       for this topic
                     type: string
                   applicationSuccessFeedbackRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate applicationSuccessFeedbackRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -179,7 +179,7 @@ spec:
                     - name
                     type: object
                   applicationSuccessFeedbackRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate applicationSuccessFeedbackRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -238,7 +238,7 @@ spec:
                     description: IAM role for failure feedback
                     type: string
                   firehoseFailureFeedbackRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate firehoseFailureFeedbackRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -272,7 +272,7 @@ spec:
                     - name
                     type: object
                   firehoseFailureFeedbackRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate firehoseFailureFeedbackRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -315,7 +315,7 @@ spec:
                       for this topic
                     type: string
                   firehoseSuccessFeedbackRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate firehoseSuccessFeedbackRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -349,7 +349,7 @@ spec:
                     - name
                     type: object
                   firehoseSuccessFeedbackRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate firehoseSuccessFeedbackRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -394,7 +394,7 @@ spec:
                     description: IAM role for failure feedback
                     type: string
                   httpFailureFeedbackRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate httpFailureFeedbackRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -428,7 +428,7 @@ spec:
                     - name
                     type: object
                   httpFailureFeedbackRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate httpFailureFeedbackRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -471,7 +471,7 @@ spec:
                       for this topic
                     type: string
                   httpSuccessFeedbackRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate httpSuccessFeedbackRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -505,7 +505,7 @@ spec:
                     - name
                     type: object
                   httpSuccessFeedbackRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate httpSuccessFeedbackRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -554,7 +554,7 @@ spec:
                     description: IAM role for failure feedback
                     type: string
                   lambdaFailureFeedbackRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate lambdaFailureFeedbackRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -588,7 +588,7 @@ spec:
                     - name
                     type: object
                   lambdaFailureFeedbackRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate lambdaFailureFeedbackRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -631,7 +631,7 @@ spec:
                       for this topic
                     type: string
                   lambdaSuccessFeedbackRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate lambdaSuccessFeedbackRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -665,7 +665,7 @@ spec:
                     - name
                     type: object
                   lambdaSuccessFeedbackRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate lambdaSuccessFeedbackRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -731,7 +731,7 @@ spec:
                     description: IAM role for failure feedback
                     type: string
                   sqsFailureFeedbackRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate sqsFailureFeedbackRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -765,7 +765,7 @@ spec:
                     - name
                     type: object
                   sqsFailureFeedbackRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate sqsFailureFeedbackRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -808,7 +808,7 @@ spec:
                       for this topic
                     type: string
                   sqsSuccessFeedbackRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate sqsSuccessFeedbackRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -842,7 +842,7 @@ spec:
                     - name
                     type: object
                   sqsSuccessFeedbackRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate sqsSuccessFeedbackRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

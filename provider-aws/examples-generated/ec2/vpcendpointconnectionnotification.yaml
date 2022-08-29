@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCEndpointConnectionNotification
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionnotification
   labels:
     testing.upbound.io/example-name: foo
   name: foo
@@ -22,6 +24,8 @@ spec:
 apiVersion: sns.aws.upbound.io/v1beta1
 kind: Topic
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionnotification
   labels:
     testing.upbound.io/example-name: topic
   name: topic
@@ -47,6 +51,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCEndpointService
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionnotification
   labels:
     testing.upbound.io/example-name: foo
   name: foo

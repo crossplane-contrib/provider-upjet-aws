@@ -31,9 +31,11 @@ type KinesisStreamingDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
+	// Reference to a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
 	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
 
+	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
 	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 
@@ -43,9 +45,11 @@ type KinesisStreamingDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
+	// Reference to a Table to populate tableName.
 	// +kubebuilder:validation:Optional
 	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
 
+	// Selector for a Table to populate tableName.
 	// +kubebuilder:validation:Optional
 	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }

@@ -1,6 +1,8 @@
 apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: KinesisStreamingDestination
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/kinesisstreamingdestination
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -19,6 +21,8 @@ spec:
 apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: Table
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/kinesisstreamingdestination
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -35,6 +39,8 @@ spec:
 apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/kinesisstreamingdestination
   labels:
     testing.upbound.io/example-name: example
   name: example

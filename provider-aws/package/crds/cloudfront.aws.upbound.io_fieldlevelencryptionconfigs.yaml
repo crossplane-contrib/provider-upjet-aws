@@ -141,7 +141,8 @@ spec:
                                     profileId:
                                       type: string
                                     profileIdRef:
-                                      description: A Reference to a named object.
+                                      description: Reference to a FieldLevelEncryptionProfile
+                                        in cloudfront to populate profileId.
                                       properties:
                                         name:
                                           description: Name of the referenced object.
@@ -179,7 +180,8 @@ spec:
                                       - name
                                       type: object
                                     profileIdSelector:
-                                      description: A Selector selects an object.
+                                      description: Selector for a FieldLevelEncryptionProfile
+                                        in cloudfront to populate profileId.
                                       properties:
                                         matchControllerRef:
                                           description: MatchControllerRef ensures

@@ -82,7 +82,8 @@ spec:
                             User Pool.
                           type: string
                         clientIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a UserPoolClient in cognitoidp
+                            to populate clientId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -117,7 +118,8 @@ spec:
                           - name
                           type: object
                         clientIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a UserPoolClient in cognitoidp
+                            to populate clientId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -191,6 +193,7 @@ spec:
                       type: string
                     type: array
                   samlProviderArnsRefs:
+                    description: References to SAMLProvider in iam to populate samlProviderArns.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -227,7 +230,8 @@ spec:
                       type: object
                     type: array
                   samlProviderArnsSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SAMLProvider in iam to populate
+                      samlProviderArns.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

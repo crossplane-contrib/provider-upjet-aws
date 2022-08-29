@@ -1,6 +1,8 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: OpenIDConnectProvider
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/openidconnectprovider
   labels:
     testing.upbound.io/example-name: default
   name: default

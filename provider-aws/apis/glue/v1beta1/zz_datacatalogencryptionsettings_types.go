@@ -24,9 +24,11 @@ type ConnectionPasswordEncryptionParameters struct {
 	// +kubebuilder:validation:Optional
 	AwsKMSKeyID *string `json:"awsKmsKeyId,omitempty" tf:"aws_kms_key_id,omitempty"`
 
+	// Reference to a Key in kms to populate awsKmsKeyId.
 	// +kubebuilder:validation:Optional
 	AwsKMSKeyIDRef *v1.Reference `json:"awsKmsKeyIdRef,omitempty" tf:"-"`
 
+	// Selector for a Key in kms to populate awsKmsKeyId.
 	// +kubebuilder:validation:Optional
 	AwsKMSKeyIDSelector *v1.Selector `json:"awsKmsKeyIdSelector,omitempty" tf:"-"`
 
@@ -86,9 +88,11 @@ type EncryptionAtRestParameters struct {
 	// +kubebuilder:validation:Optional
 	SseAwsKMSKeyID *string `json:"sseAwsKmsKeyId,omitempty" tf:"sse_aws_kms_key_id,omitempty"`
 
+	// Reference to a Key in kms to populate sseAwsKmsKeyId.
 	// +kubebuilder:validation:Optional
 	SseAwsKMSKeyIDRef *v1.Reference `json:"sseAwsKmsKeyIdRef,omitempty" tf:"-"`
 
+	// Selector for a Key in kms to populate sseAwsKmsKeyId.
 	// +kubebuilder:validation:Optional
 	SseAwsKMSKeyIDSelector *v1.Selector `json:"sseAwsKmsKeyIdSelector,omitempty" tf:"-"`
 }

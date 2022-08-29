@@ -1,6 +1,8 @@
 apiVersion: acm.aws.upbound.io/v1beta1
 kind: CertificateValidation
 metadata:
+  annotations:
+    meta.upbound.io/example-id: acm/v1beta1/certificatevalidation
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -17,6 +19,8 @@ spec:
 apiVersion: acm.aws.upbound.io/v1beta1
 kind: Certificate
 metadata:
+  annotations:
+    meta.upbound.io/example-id: acm/v1beta1/certificatevalidation
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -31,6 +35,8 @@ spec:
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBListener
 metadata:
+  annotations:
+    meta.upbound.io/example-id: acm/v1beta1/certificatevalidation
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -44,6 +50,8 @@ spec:
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: Record
 metadata:
+  annotations:
+    meta.upbound.io/example-id: acm/v1beta1/certificatevalidation
   labels:
     testing.upbound.io/example-name: example
   name: example

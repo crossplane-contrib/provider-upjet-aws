@@ -68,7 +68,7 @@ spec:
                     description: The database to which the query belongs.
                     type: string
                   databaseRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Database in athena to populate database.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   databaseSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Database in athena to populate database.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -161,7 +161,7 @@ spec:
                       to primary
                     type: string
                   workgroupRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Workgroup in athena to populate workgroup.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -195,7 +195,7 @@ spec:
                     - name
                     type: object
                   workgroupSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Workgroup in athena to populate workgroup.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

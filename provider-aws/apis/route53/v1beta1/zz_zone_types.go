@@ -57,9 +57,11 @@ type ZoneParameters struct {
 	// +kubebuilder:validation:Optional
 	DelegationSetID *string `json:"delegationSetId,omitempty" tf:"delegation_set_id,omitempty"`
 
+	// Reference to a DelegationSet to populate delegationSetId.
 	// +kubebuilder:validation:Optional
 	DelegationSetIDRef *v1.Reference `json:"delegationSetIdRef,omitempty" tf:"-"`
 
+	// Selector for a DelegationSet to populate delegationSetId.
 	// +kubebuilder:validation:Optional
 	DelegationSetIDSelector *v1.Selector `json:"delegationSetIdSelector,omitempty" tf:"-"`
 

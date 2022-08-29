@@ -80,9 +80,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
@@ -177,9 +179,11 @@ type VPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicAccessCidrs []*string `json:"publicAccessCidrs,omitempty" tf:"public_access_cidrs,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
@@ -190,9 +194,11 @@ type VPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 

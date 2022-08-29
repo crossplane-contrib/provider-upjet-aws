@@ -26,9 +26,11 @@ type NamedQueryParameters struct {
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
+	// Reference to a Database in athena to populate database.
 	// +kubebuilder:validation:Optional
 	DatabaseRef *v1.Reference `json:"databaseRef,omitempty" tf:"-"`
 
+	// Selector for a Database in athena to populate database.
 	// +kubebuilder:validation:Optional
 	DatabaseSelector *v1.Selector `json:"databaseSelector,omitempty" tf:"-"`
 
@@ -55,9 +57,11 @@ type NamedQueryParameters struct {
 	// +kubebuilder:validation:Optional
 	Workgroup *string `json:"workgroup,omitempty" tf:"workgroup,omitempty"`
 
+	// Reference to a Workgroup in athena to populate workgroup.
 	// +kubebuilder:validation:Optional
 	WorkgroupRef *v1.Reference `json:"workgroupRef,omitempty" tf:"-"`
 
+	// Selector for a Workgroup in athena to populate workgroup.
 	// +kubebuilder:validation:Optional
 	WorkgroupSelector *v1.Selector `json:"workgroupSelector,omitempty" tf:"-"`
 }

@@ -1,6 +1,8 @@
 apiVersion: ecs.aws.upbound.io/v1beta1
 kind: Service
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ecs/v1beta1/service
   labels:
     testing.upbound.io/example-name: mongo
   name: mongo

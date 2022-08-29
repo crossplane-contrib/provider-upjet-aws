@@ -388,7 +388,7 @@ spec:
                             the IAM role that you've given Cognito permission to assume.
                           type: string
                         snsCallerArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Role in iam to populate snsCallerArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -423,7 +423,7 @@ spec:
                           - name
                           type: object
                         snsCallerArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Role in iam to populate snsCallerArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

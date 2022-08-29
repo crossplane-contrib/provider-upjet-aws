@@ -77,7 +77,7 @@ spec:
                     description: Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
                     type: boolean
                   bucketRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Bucket in s3 to populate bucket.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +111,7 @@ spec:
                     - name
                     type: object
                   bucketSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Bucket in s3 to populate bucket.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -204,7 +204,7 @@ spec:
                       provided.
                     type: string
                   kmsKeyIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Key in kms to populate kmsKeyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -238,7 +238,7 @@ spec:
                     - name
                     type: object
                   kmsKeyIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Key in kms to populate kmsKeyId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

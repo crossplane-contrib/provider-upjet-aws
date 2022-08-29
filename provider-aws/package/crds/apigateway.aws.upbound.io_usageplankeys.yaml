@@ -67,7 +67,7 @@ spec:
                   keyId:
                     type: string
                   keyIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a APIKey in apigateway to populate keyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -101,7 +101,7 @@ spec:
                     - name
                     type: object
                   keyIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a APIKey in apigateway to populate keyId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -148,7 +148,8 @@ spec:
                   usagePlanId:
                     type: string
                   usagePlanIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a UsagePlan in apigateway to populate
+                      usagePlanId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -182,7 +183,8 @@ spec:
                     - name
                     type: object
                   usagePlanIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a UsagePlan in apigateway to populate
+                      usagePlanId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

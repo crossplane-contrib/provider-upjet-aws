@@ -25,9 +25,11 @@ type RolePolicyAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 
+	// Reference to a Policy to populate policyArn.
 	// +kubebuilder:validation:Optional
 	PolicyArnRef *v1.Reference `json:"policyArnRef,omitempty" tf:"-"`
 
+	// Selector for a Policy to populate policyArn.
 	// +kubebuilder:validation:Optional
 	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 
@@ -36,9 +38,11 @@ type RolePolicyAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// Reference to a Role to populate role.
 	// +kubebuilder:validation:Optional
 	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
 
+	// Selector for a Role to populate role.
 	// +kubebuilder:validation:Optional
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 }

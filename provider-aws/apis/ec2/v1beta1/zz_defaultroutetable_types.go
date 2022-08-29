@@ -39,9 +39,11 @@ type DefaultRouteTableParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultRouteTableID *string `json:"defaultRouteTableId,omitempty" tf:"default_route_table_id,omitempty"`
 
+	// Reference to a VPC in ec2 to populate defaultRouteTableId.
 	// +kubebuilder:validation:Optional
 	DefaultRouteTableIDRef *v1.Reference `json:"defaultRouteTableIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPC in ec2 to populate defaultRouteTableId.
 	// +kubebuilder:validation:Optional
 	DefaultRouteTableIDSelector *v1.Selector `json:"defaultRouteTableIdSelector,omitempty" tf:"-"`
 
@@ -86,9 +88,11 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	EgressOnlyGatewayID *string `json:"egressOnlyGatewayId,omitempty" tf:"egress_only_gateway_id"`
 
+	// Reference to a EgressOnlyInternetGateway in ec2 to populate egressOnlyGatewayId.
 	// +kubebuilder:validation:Optional
 	EgressOnlyGatewayIDRef *v1.Reference `json:"egressOnlyGatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a EgressOnlyInternetGateway in ec2 to populate egressOnlyGatewayId.
 	// +kubebuilder:validation:Optional
 	EgressOnlyGatewayIDSelector *v1.Selector `json:"egressOnlyGatewayIdSelector,omitempty" tf:"-"`
 
@@ -98,9 +102,11 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id"`
 
+	// Reference to a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDRef *v1.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 

@@ -67,9 +67,11 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
+	// Reference to a Cluster to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
+	// Selector for a Cluster to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
@@ -99,9 +101,11 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeRoleArn *string `json:"nodeRoleArn,omitempty" tf:"node_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate nodeRoleArn.
 	// +kubebuilder:validation:Optional
 	NodeRoleArnRef *v1.Reference `json:"nodeRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate nodeRoleArn.
 	// +kubebuilder:validation:Optional
 	NodeRoleArnSelector *v1.Selector `json:"nodeRoleArnSelector,omitempty" tf:"-"`
 
@@ -122,9 +126,11 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Required
 	ScalingConfig []ScalingConfigParameters `json:"scalingConfig" tf:"scaling_config,omitempty"`
 
+	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
@@ -159,9 +165,11 @@ type RemoteAccessParameters struct {
 	// +kubebuilder:validation:Optional
 	EC2SSHKey *string `json:"ec2SshKey,omitempty" tf:"ec2_ssh_key,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate sourceSecurityGroupIds.
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupIDRefs []v1.Reference `json:"sourceSecurityGroupIdRefs,omitempty" tf:"-"`
 
+	// Selector for a list of SecurityGroup in ec2 to populate sourceSecurityGroupIds.
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 

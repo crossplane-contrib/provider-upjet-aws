@@ -100,7 +100,7 @@ spec:
                     description: The Volume ID of which to make a snapshot.
                     type: string
                   volumeIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a EBSVolume in ec2 to populate volumeId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -134,7 +134,7 @@ spec:
                     - name
                     type: object
                   volumeIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a EBSVolume in ec2 to populate volumeId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

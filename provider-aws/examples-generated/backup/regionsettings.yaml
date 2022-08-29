@@ -1,6 +1,8 @@
 apiVersion: backup.aws.upbound.io/v1beta1
 kind: RegionSettings
 metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/regionsettings
   labels:
     testing.upbound.io/example-name: test
   name: test

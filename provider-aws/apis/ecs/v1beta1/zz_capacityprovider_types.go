@@ -24,9 +24,11 @@ type AutoScalingGroupProviderParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoScalingGroupArn *string `json:"autoScalingGroupArn,omitempty" tf:"auto_scaling_group_arn,omitempty"`
 
+	// Reference to a AutoscalingGroup in autoscaling to populate autoScalingGroupArn.
 	// +kubebuilder:validation:Optional
 	AutoScalingGroupArnRef *v1.Reference `json:"autoScalingGroupArnRef,omitempty" tf:"-"`
 
+	// Selector for a AutoscalingGroup in autoscaling to populate autoScalingGroupArn.
 	// +kubebuilder:validation:Optional
 	AutoScalingGroupArnSelector *v1.Selector `json:"autoScalingGroupArnSelector,omitempty" tf:"-"`
 

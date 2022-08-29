@@ -78,7 +78,7 @@ spec:
                     description: IAM user to associate with this access key.
                     type: string
                   userRef:
-                    description: A Reference to a named object.
+                    description: Reference to a User to populate user.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +112,7 @@ spec:
                     - name
                     type: object
                   userSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a User to populate user.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

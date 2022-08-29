@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCEndpoint
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpoint
   labels:
     testing.upbound.io/example-name: s3
   name: s3

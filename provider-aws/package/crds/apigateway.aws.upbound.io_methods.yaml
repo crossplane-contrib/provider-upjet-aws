@@ -81,7 +81,8 @@ spec:
                       is CUSTOM or COGNITO_USER_POOLS
                     type: string
                   authorizerIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Authorizer in apigateway to populate
+                      authorizerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -115,7 +116,8 @@ spec:
                     - name
                     type: object
                   authorizerIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Authorizer in apigateway to populate
+                      authorizerId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -190,7 +192,8 @@ spec:
                     description: The API resource ID
                     type: string
                   resourceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Resource in apigateway to populate
+                      resourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -224,7 +227,8 @@ spec:
                     - name
                     type: object
                   resourceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Resource in apigateway to populate
+                      resourceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -266,7 +270,8 @@ spec:
                     description: The ID of the associated REST API
                     type: string
                   restApiIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a RestAPI in apigateway to populate
+                      restApiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -300,7 +305,8 @@ spec:
                     - name
                     type: object
                   restApiIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a RestAPI in apigateway to populate
+                      restApiId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

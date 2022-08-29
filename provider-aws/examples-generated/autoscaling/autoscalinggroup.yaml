@@ -1,6 +1,8 @@
 apiVersion: autoscaling.aws.upbound.io/v1beta1
 kind: AutoscalingGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscaling/v1beta1/autoscalinggroup
   labels:
     testing.upbound.io/example-name: bar
   name: bar
@@ -46,6 +48,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: PlacementGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscaling/v1beta1/autoscalinggroup
   labels:
     testing.upbound.io/example-name: test
   name: test

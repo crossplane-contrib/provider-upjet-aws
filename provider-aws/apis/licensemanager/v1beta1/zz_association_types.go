@@ -27,9 +27,11 @@ type AssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	LicenseConfigurationArn *string `json:"licenseConfigurationArn,omitempty" tf:"license_configuration_arn,omitempty"`
 
+	// Reference to a LicenseConfiguration to populate licenseConfigurationArn.
 	// +kubebuilder:validation:Optional
 	LicenseConfigurationArnRef *v1.Reference `json:"licenseConfigurationArnRef,omitempty" tf:"-"`
 
+	// Selector for a LicenseConfiguration to populate licenseConfigurationArn.
 	// +kubebuilder:validation:Optional
 	LicenseConfigurationArnSelector *v1.Selector `json:"licenseConfigurationArnSelector,omitempty" tf:"-"`
 
@@ -44,9 +46,11 @@ type AssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
+	// Reference to a Instance in ec2 to populate resourceArn.
 	// +kubebuilder:validation:Optional
 	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
 
+	// Selector for a Instance in ec2 to populate resourceArn.
 	// +kubebuilder:validation:Optional
 	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }

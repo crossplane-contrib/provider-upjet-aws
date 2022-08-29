@@ -34,9 +34,11 @@ type MethodSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
+	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
 	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
+	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
@@ -50,9 +52,11 @@ type MethodSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
+	// Reference to a Stage in apigateway to populate stageName.
 	// +kubebuilder:validation:Optional
 	StageNameRef *v1.Reference `json:"stageNameRef,omitempty" tf:"-"`
 
+	// Selector for a Stage in apigateway to populate stageName.
 	// +kubebuilder:validation:Optional
 	StageNameSelector *v1.Selector `json:"stageNameSelector,omitempty" tf:"-"`
 }

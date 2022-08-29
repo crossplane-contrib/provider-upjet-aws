@@ -1,6 +1,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketpolicy
   labels:
     testing.upbound.io/example-name: allow_access_from_another_account
   name: allow-access-from-another-account
@@ -19,6 +21,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: s3/v1beta1/bucketpolicy
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -41,9 +41,11 @@ type StreamConsumerParameters struct {
 	// +kubebuilder:validation:Optional
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
+	// Reference to a Stream to populate streamArn.
 	// +kubebuilder:validation:Optional
 	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
 
+	// Selector for a Stream to populate streamArn.
 	// +kubebuilder:validation:Optional
 	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }

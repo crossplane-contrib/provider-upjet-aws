@@ -1,6 +1,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketReplicationConfiguration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
   labels:
     testing.upbound.io/example-name: replication
   name: replication
@@ -30,6 +32,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
   labels:
     testing.upbound.io/example-name: replication
   name: replication
@@ -78,6 +82,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
   labels:
     testing.upbound.io/example-name: replication
   name: replication
@@ -103,6 +109,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
   labels:
     testing.upbound.io/example-name: replication
   name: replication
@@ -122,6 +130,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
   labels:
     testing.upbound.io/example-name: destination
   name: destination
@@ -136,6 +145,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
   labels:
     testing.upbound.io/example-name: source
   name: source
@@ -149,6 +159,8 @@ spec:
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketACL
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
   labels:
     testing.upbound.io/example-name: source_bucket_acl
   name: source-bucket-acl
@@ -165,6 +177,8 @@ spec:
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketVersioning
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
   labels:
     testing.upbound.io/example-name: destination
   name: destination
@@ -182,6 +196,8 @@ spec:
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketVersioning
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
   labels:
     testing.upbound.io/example-name: source
   name: source

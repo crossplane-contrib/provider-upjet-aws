@@ -40,9 +40,11 @@ type EndpointDetailsParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
+	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
@@ -87,9 +89,11 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
+	// Reference to a Certificate in acm to populate certificate.
 	// +kubebuilder:validation:Optional
 	CertificateRef *v1.Reference `json:"certificateRef,omitempty" tf:"-"`
 
+	// Selector for a Certificate in acm to populate certificate.
 	// +kubebuilder:validation:Optional
 	CertificateSelector *v1.Selector `json:"certificateSelector,omitempty" tf:"-"`
 

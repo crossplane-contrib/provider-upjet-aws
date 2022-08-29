@@ -26,9 +26,11 @@ type BucketServerSideEncryptionConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
@@ -71,9 +73,11 @@ type RuleApplyServerSideEncryptionByDefaultParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
 
+	// Reference to a Key in kms to populate kmsMasterKeyId.
 	// +kubebuilder:validation:Optional
 	KMSMasterKeyIDRef *v1.Reference `json:"kmsMasterKeyIdRef,omitempty" tf:"-"`
 
+	// Selector for a Key in kms to populate kmsMasterKeyId.
 	// +kubebuilder:validation:Optional
 	KMSMasterKeyIDSelector *v1.Selector `json:"kmsMasterKeyIdSelector,omitempty" tf:"-"`
 

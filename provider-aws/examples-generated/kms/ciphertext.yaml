@@ -1,6 +1,8 @@
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Ciphertext
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1beta1/ciphertext
   labels:
     testing.upbound.io/example-name: oauth
   name: oauth
@@ -20,6 +22,8 @@ spec:
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Key
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1beta1/ciphertext
   labels:
     testing.upbound.io/example-name: oauth_config
   name: oauth-config

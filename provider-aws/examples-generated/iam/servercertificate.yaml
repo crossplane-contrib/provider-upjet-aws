@@ -1,6 +1,8 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: ServerCertificate
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/servercertificate
   labels:
     testing.upbound.io/example-name: test_cert
   name: test-cert

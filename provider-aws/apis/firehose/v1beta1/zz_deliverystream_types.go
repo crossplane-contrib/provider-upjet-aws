@@ -213,9 +213,11 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
@@ -259,9 +261,11 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
+	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
 	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
@@ -310,9 +314,11 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
@@ -389,9 +395,11 @@ type HTTPEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
@@ -702,9 +710,11 @@ type RedshiftConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
@@ -788,9 +798,11 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
+	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
 	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
@@ -828,9 +840,11 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
@@ -936,9 +950,11 @@ type S3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
+	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
 	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
@@ -976,9 +992,11 @@ type S3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
@@ -1005,9 +1023,11 @@ type SchemaConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
@@ -1016,9 +1036,11 @@ type SchemaConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
+	// Reference to a CatalogTable in glue to populate tableName.
 	// +kubebuilder:validation:Optional
 	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
 
+	// Selector for a CatalogTable in glue to populate tableName.
 	// +kubebuilder:validation:Optional
 	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
@@ -1161,9 +1183,11 @@ type VPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 

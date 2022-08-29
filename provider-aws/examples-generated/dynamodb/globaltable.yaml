@@ -1,6 +1,8 @@
 apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: GlobalTable
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/globaltable
   labels:
     testing.upbound.io/example-name: myTable
   name: mytable
@@ -17,6 +19,8 @@ spec:
 apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: Table
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/globaltable
   labels:
     testing.upbound.io/example-name: us-east-1
   name: us-east-1
@@ -38,6 +42,8 @@ spec:
 apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: Table
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/globaltable
   labels:
     testing.upbound.io/example-name: us-west-2
   name: us-west-2

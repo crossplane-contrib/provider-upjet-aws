@@ -28,9 +28,11 @@ type EncryptionConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 
+	// Reference to a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
 	KMSKeyRef *v1.Reference `json:"kmsKeyRef,omitempty" tf:"-"`
 
+	// Selector for a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
 	KMSKeySelector *v1.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 }

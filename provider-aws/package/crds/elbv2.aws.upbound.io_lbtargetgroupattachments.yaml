@@ -83,7 +83,7 @@ spec:
                       targets
                     type: string
                   targetGroupArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a LBTargetGroup to populate targetGroupArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -117,7 +117,7 @@ spec:
                     - name
                     type: object
                   targetGroupArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a LBTargetGroup to populate targetGroupArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

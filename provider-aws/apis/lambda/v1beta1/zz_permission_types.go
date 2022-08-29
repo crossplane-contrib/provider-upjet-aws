@@ -32,9 +32,11 @@ type PermissionParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
+	// Reference to a Function to populate functionName.
 	// +kubebuilder:validation:Optional
 	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
 
+	// Selector for a Function to populate functionName.
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
@@ -55,9 +57,11 @@ type PermissionParameters struct {
 	// +kubebuilder:validation:Optional
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
+	// Reference to a Alias to populate qualifier.
 	// +kubebuilder:validation:Optional
 	QualifierRef *v1.Reference `json:"qualifierRef,omitempty" tf:"-"`
 
+	// Selector for a Alias to populate qualifier.
 	// +kubebuilder:validation:Optional
 	QualifierSelector *v1.Selector `json:"qualifierSelector,omitempty" tf:"-"`
 

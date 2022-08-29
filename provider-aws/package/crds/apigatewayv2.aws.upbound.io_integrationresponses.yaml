@@ -68,7 +68,7 @@ spec:
                     description: The API identifier.
                     type: string
                   apiIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a API to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a API to populate apiId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -148,7 +148,7 @@ spec:
                     description: The identifier of the aws_apigatewayv2_integration.
                     type: string
                   integrationIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Integration to populate integrationId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -182,7 +182,7 @@ spec:
                     - name
                     type: object
                   integrationIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Integration to populate integrationId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

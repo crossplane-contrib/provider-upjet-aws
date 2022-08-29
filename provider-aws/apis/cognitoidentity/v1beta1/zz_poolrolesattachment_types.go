@@ -32,9 +32,11 @@ type MappingRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
@@ -57,9 +59,11 @@ type PoolRolesAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
 
+	// Reference to a Pool in cognitoidentity to populate identityPoolId.
 	// +kubebuilder:validation:Optional
 	IdentityPoolIDRef *v1.Reference `json:"identityPoolIdRef,omitempty" tf:"-"`
 
+	// Selector for a Pool in cognitoidentity to populate identityPoolId.
 	// +kubebuilder:validation:Optional
 	IdentityPoolIDSelector *v1.Selector `json:"identityPoolIdSelector,omitempty" tf:"-"`
 

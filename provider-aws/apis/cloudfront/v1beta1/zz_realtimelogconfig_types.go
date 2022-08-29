@@ -39,9 +39,11 @@ type KinesisStreamConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
@@ -51,9 +53,11 @@ type KinesisStreamConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
+	// Reference to a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
 	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
 
+	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
 	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }

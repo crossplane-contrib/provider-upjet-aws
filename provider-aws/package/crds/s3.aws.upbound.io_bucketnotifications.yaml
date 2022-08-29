@@ -68,7 +68,7 @@ spec:
                     description: Name of the bucket for notification configuration.
                     type: string
                   bucketRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Bucket in s3 to populate bucket.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   bucketSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Bucket in s3 to populate bucket.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -183,7 +183,7 @@ spec:
                           description: SQS queue ARN.
                           type: string
                         queueArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Queue in sqs to populate queueArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -218,7 +218,7 @@ spec:
                           - name
                           type: object
                         queueArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Queue in sqs to populate queueArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -284,7 +284,7 @@ spec:
                           description: SNS topic ARN.
                           type: string
                         topicArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Topic in sns to populate topicArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -319,7 +319,7 @@ spec:
                           - name
                           type: object
                         topicArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Topic in sns to populate topicArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

@@ -37,9 +37,11 @@ type MethodParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
 
+	// Reference to a Authorizer in apigateway to populate authorizerId.
 	// +kubebuilder:validation:Optional
 	AuthorizerIDRef *v1.Reference `json:"authorizerIdRef,omitempty" tf:"-"`
 
+	// Selector for a Authorizer in apigateway to populate authorizerId.
 	// +kubebuilder:validation:Optional
 	AuthorizerIDSelector *v1.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
 
@@ -77,9 +79,11 @@ type MethodParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
+	// Reference to a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
+	// Selector for a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
@@ -89,9 +93,11 @@ type MethodParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
+	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
 	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
+	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 }

@@ -69,7 +69,7 @@ spec:
                       an IAM Role for API Gateway to assume, use the IAM Role ARN.
                     type: string
                   authorizerCredentialsRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate authorizerCredentials.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -103,7 +103,7 @@ spec:
                     - name
                     type: object
                   authorizerCredentialsSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate authorizerCredentials.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -151,7 +151,7 @@ spec:
                       e.g., arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:012345678912:function:my-function/invocations
                     type: string
                   authorizerUriRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Function in lambda to populate authorizerUri.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -185,7 +185,7 @@ spec:
                     - name
                     type: object
                   authorizerUriSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Function in lambda to populate authorizerUri.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -254,7 +254,8 @@ spec:
                     description: The ID of the associated REST API
                     type: string
                   restApiIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a RestAPI in apigateway to populate
+                      restApiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -288,7 +289,8 @@ spec:
                     - name
                     type: object
                   restApiIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a RestAPI in apigateway to populate
+                      restApiId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

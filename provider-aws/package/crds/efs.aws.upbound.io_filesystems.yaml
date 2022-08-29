@@ -83,7 +83,7 @@ spec:
                       kms_key_id, encrypted needs to be set to true.
                     type: string
                   kmsKeyIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Key in kms to populate kmsKeyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -117,7 +117,7 @@ spec:
                     - name
                     type: object
                   kmsKeyIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Key in kms to populate kmsKeyId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

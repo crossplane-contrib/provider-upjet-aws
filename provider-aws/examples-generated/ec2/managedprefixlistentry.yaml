@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: ManagedPrefixListEntry
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/managedprefixlistentry
   labels:
     testing.upbound.io/example-name: entry_1
   name: entry-1
@@ -20,6 +22,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: ManagedPrefixList
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/managedprefixlistentry
   labels:
     testing.upbound.io/example-name: example
   name: example

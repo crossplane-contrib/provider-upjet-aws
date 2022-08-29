@@ -1,6 +1,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketCorsConfiguration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketcorsconfiguration
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -33,6 +35,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: s3/v1beta1/bucketcorsconfiguration
   labels:
     testing.upbound.io/example-name: example
   name: example

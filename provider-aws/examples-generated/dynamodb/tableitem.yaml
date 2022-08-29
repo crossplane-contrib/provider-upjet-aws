@@ -1,6 +1,8 @@
 apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: TableItem
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/tableitem
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -25,6 +27,8 @@ spec:
 apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: Table
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/tableitem
   labels:
     testing.upbound.io/example-name: example
   name: example

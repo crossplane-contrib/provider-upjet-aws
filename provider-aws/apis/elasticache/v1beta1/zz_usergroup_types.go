@@ -38,9 +38,11 @@ type UserGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// References to User to populate userIds.
 	// +kubebuilder:validation:Optional
 	UserIDRefs []v1.Reference `json:"userIdRefs,omitempty" tf:"-"`
 
+	// Selector for a list of User to populate userIds.
 	// +kubebuilder:validation:Optional
 	UserIDSelector *v1.Selector `json:"userIdSelector,omitempty" tf:"-"`
 

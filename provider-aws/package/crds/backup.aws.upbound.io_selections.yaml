@@ -135,7 +135,7 @@ spec:
                       the IAM role.
                     type: string
                   iamRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate iamRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -169,7 +169,7 @@ spec:
                     - name
                     type: object
                   iamRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate iamRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -222,7 +222,7 @@ spec:
                       of resources.
                     type: string
                   planIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Plan to populate planId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -256,7 +256,7 @@ spec:
                     - name
                     type: object
                   planIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Plan to populate planId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -68,7 +68,7 @@ spec:
                   bucket:
                     type: string
                   bucketRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Bucket in s3 to populate bucket.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   bucketSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Bucket in s3 to populate bucket.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -149,7 +149,7 @@ spec:
                       replicating the objects.
                     type: string
                   roleRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate role.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -183,7 +183,7 @@ spec:
                     - name
                     type: object
                   roleSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate role.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -273,7 +273,8 @@ spec:
                               bucket:
                                 type: string
                               bucketRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Bucket in s3 to populate
+                                  bucket.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -309,7 +310,8 @@ spec:
                                 - name
                                 type: object
                               bucketSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Bucket in s3 to populate
+                                  bucket.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object

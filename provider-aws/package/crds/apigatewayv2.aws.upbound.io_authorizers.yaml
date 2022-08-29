@@ -68,7 +68,7 @@ spec:
                     description: The API identifier.
                     type: string
                   apiIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a API to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a API to populate apiId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -169,7 +169,7 @@ spec:
                       1 and 2048 characters in length.
                     type: string
                   authorizerUriRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Function in lambda to populate authorizerUri.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -203,7 +203,7 @@ spec:
                     - name
                     type: object
                   authorizerUriSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Function in lambda to populate authorizerUri.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

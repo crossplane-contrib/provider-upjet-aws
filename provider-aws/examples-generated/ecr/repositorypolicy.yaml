@@ -1,6 +1,8 @@
 apiVersion: ecr.aws.upbound.io/v1beta1
 kind: RepositoryPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ecr/v1beta1/repositorypolicy
   labels:
     testing.upbound.io/example-name: foopolicy
   name: foopolicy
@@ -43,6 +45,8 @@ spec:
 apiVersion: ecr.aws.upbound.io/v1beta1
 kind: Repository
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ecr/v1beta1/repositorypolicy
   labels:
     testing.upbound.io/example-name: foo
   name: foo

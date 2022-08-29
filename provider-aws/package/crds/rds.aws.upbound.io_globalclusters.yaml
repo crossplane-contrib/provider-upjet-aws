@@ -103,7 +103,7 @@ spec:
                       drift detection of this value.
                     type: string
                   sourceDbClusterIdentifierRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Cluster in rds to populate sourceDbClusterIdentifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -137,7 +137,7 @@ spec:
                     - name
                     type: object
                   sourceDbClusterIdentifierSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Cluster in rds to populate sourceDbClusterIdentifier.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

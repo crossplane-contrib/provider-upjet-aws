@@ -82,7 +82,7 @@ spec:
                       for a backup vault’s events
                     type: string
                   snsTopicArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Topic in sns to populate snsTopicArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -116,7 +116,7 @@ spec:
                     - name
                     type: object
                   snsTopicArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Topic in sns to populate snsTopicArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

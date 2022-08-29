@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroup
   labels:
     testing.upbound.io/example-name: allow_tls
   name: allow-tls

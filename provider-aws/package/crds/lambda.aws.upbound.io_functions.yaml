@@ -132,7 +132,8 @@ spec:
                         arn:
                           type: string
                         arnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a AccessPoint in efs to populate
+                            arn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -167,7 +168,8 @@ spec:
                           - name
                           type: object
                         arnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a AccessPoint in efs to populate
+                            arn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -253,7 +255,7 @@ spec:
                       remove this configuration.
                     type: string
                   kmsKeyArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Key in kms to populate kmsKeyArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -287,7 +289,7 @@ spec:
                     - name
                     type: object
                   kmsKeyArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Key in kms to populate kmsKeyArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -359,7 +361,7 @@ spec:
                       AWS services and resources.
                     type: string
                   roleRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate role.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -393,7 +395,7 @@ spec:
                     - name
                     type: object
                   roleSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate role.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -442,7 +444,7 @@ spec:
                       Lambda function.
                     type: string
                   s3BucketRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Bucket in s3 to populate s3Bucket.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -476,7 +478,7 @@ spec:
                     - name
                     type: object
                   s3BucketSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Bucket in s3 to populate s3Bucket.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

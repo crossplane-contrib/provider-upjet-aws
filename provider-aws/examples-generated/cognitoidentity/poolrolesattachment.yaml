@@ -1,6 +1,8 @@
 apiVersion: cognitoidentity.aws.upbound.io/v1beta1
 kind: PoolRolesAttachment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidentity/v1beta1/poolrolesattachment
   labels:
     testing.upbound.io/example-name: main
   name: main
@@ -29,6 +31,8 @@ spec:
 apiVersion: cognitoidentity.aws.upbound.io/v1beta1
 kind: Pool
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidentity/v1beta1/poolrolesattachment
   labels:
     testing.upbound.io/example-name: main
   name: main
@@ -45,6 +49,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidentity/v1beta1/poolrolesattachment
   labels:
     testing.upbound.io/example-name: authenticated
   name: authenticated

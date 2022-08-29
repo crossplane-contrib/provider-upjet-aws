@@ -68,7 +68,7 @@ spec:
                     description: The ARN of the certificate that is being validated.
                     type: string
                   certificateArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Certificate to populate certificateArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   certificateArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Certificate to populate certificateArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

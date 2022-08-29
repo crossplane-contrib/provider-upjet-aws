@@ -24,9 +24,11 @@ type AllowedPublishersParameters struct {
 	// +kubebuilder:validation:Optional
 	SigningProfileVersionArns []*string `json:"signingProfileVersionArns,omitempty" tf:"signing_profile_version_arns,omitempty"`
 
+	// References to SigningProfile in signer to populate signingProfileVersionArns.
 	// +kubebuilder:validation:Optional
 	SigningProfileVersionArnsRefs []v1.Reference `json:"signingProfileVersionArnsRefs,omitempty" tf:"-"`
 
+	// Selector for a list of SigningProfile in signer to populate signingProfileVersionArns.
 	// +kubebuilder:validation:Optional
 	SigningProfileVersionArnsSelector *v1.Selector `json:"signingProfileVersionArnsSelector,omitempty" tf:"-"`
 }

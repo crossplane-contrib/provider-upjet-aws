@@ -70,7 +70,7 @@ spec:
                       otherwise tuned on the API Gateway Stage level.
                     type: string
                   cloudwatchRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate cloudwatchRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -104,7 +104,7 @@ spec:
                     - name
                     type: object
                   cloudwatchRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate cloudwatchRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

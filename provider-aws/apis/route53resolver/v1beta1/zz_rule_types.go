@@ -54,9 +54,11 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ResolverEndpointID *string `json:"resolverEndpointId,omitempty" tf:"resolver_endpoint_id,omitempty"`
 
+	// Reference to a Endpoint in route53resolver to populate resolverEndpointId.
 	// +kubebuilder:validation:Optional
 	ResolverEndpointIDRef *v1.Reference `json:"resolverEndpointIdRef,omitempty" tf:"-"`
 
+	// Selector for a Endpoint in route53resolver to populate resolverEndpointId.
 	// +kubebuilder:validation:Optional
 	ResolverEndpointIDSelector *v1.Selector `json:"resolverEndpointIdSelector,omitempty" tf:"-"`
 

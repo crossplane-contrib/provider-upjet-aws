@@ -98,9 +98,11 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
 
+	// Reference to a Deployment in apigateway to populate deploymentId.
 	// +kubebuilder:validation:Optional
 	DeploymentIDRef *v1.Reference `json:"deploymentIdRef,omitempty" tf:"-"`
 
+	// Selector for a Deployment in apigateway to populate deploymentId.
 	// +kubebuilder:validation:Optional
 	DeploymentIDSelector *v1.Selector `json:"deploymentIdSelector,omitempty" tf:"-"`
 
@@ -123,9 +125,11 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
+	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
 	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
+	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 

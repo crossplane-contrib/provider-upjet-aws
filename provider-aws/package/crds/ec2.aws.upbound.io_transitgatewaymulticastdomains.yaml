@@ -98,7 +98,7 @@ spec:
                       must have multicast_support enabled.
                     type: string
                   transitGatewayIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a TransitGateway to populate transitGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -132,7 +132,7 @@ spec:
                     - name
                     type: object
                   transitGatewayIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a TransitGateway to populate transitGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -86,7 +86,8 @@ spec:
                                           bucketArn:
                                             type: string
                                           bucketArnRef:
-                                            description: A Reference to a named object.
+                                            description: Reference to a Bucket in
+                                              s3 to populate bucketArn.
                                             properties:
                                               name:
                                                 description: Name of the referenced
@@ -127,7 +128,8 @@ spec:
                                             - name
                                             type: object
                                           bucketArnSelector:
-                                            description: A Selector selects an object.
+                                            description: Selector for a Bucket in
+                                              s3 to populate bucketArn.
                                             properties:
                                               matchControllerRef:
                                                 description: MatchControllerRef ensures
@@ -176,7 +178,8 @@ spec:
                                           fileKey:
                                             type: string
                                           fileKeyRef:
-                                            description: A Reference to a named object.
+                                            description: Reference to a Object in
+                                              s3 to populate fileKey.
                                             properties:
                                               name:
                                                 description: Name of the referenced
@@ -217,7 +220,8 @@ spec:
                                             - name
                                             type: object
                                           fileKeySelector:
-                                            description: A Selector selects an object.
+                                            description: Selector for a Object in
+                                              s3 to populate fileKey.
                                             properties:
                                               matchControllerRef:
                                                 description: MatchControllerRef ensures
@@ -617,7 +621,8 @@ spec:
                                           resourceArn:
                                             type: string
                                           resourceArnRef:
-                                            description: A Reference to a named object.
+                                            description: Reference to a Stream in
+                                              kinesis to populate resourceArn.
                                             properties:
                                               name:
                                                 description: Name of the referenced
@@ -658,7 +663,8 @@ spec:
                                             - name
                                             type: object
                                           resourceArnSelector:
-                                            description: A Selector selects an object.
+                                            description: Selector for a Stream in
+                                              kinesis to populate resourceArn.
                                             properties:
                                               matchControllerRef:
                                                 description: MatchControllerRef ensures
@@ -738,7 +744,8 @@ spec:
                                           resourceArn:
                                             type: string
                                           resourceArnRef:
-                                            description: A Reference to a named object.
+                                            description: Reference to a DeliveryStream
+                                              in firehose to populate resourceArn.
                                             properties:
                                               name:
                                                 description: Name of the referenced
@@ -779,7 +786,8 @@ spec:
                                             - name
                                             type: object
                                           resourceArnSelector:
-                                            description: A Selector selects an object.
+                                            description: Selector for a DeliveryStream
+                                              in firehose to populate resourceArn.
                                             properties:
                                               matchControllerRef:
                                                 description: MatchControllerRef ensures
@@ -846,7 +854,8 @@ spec:
                                           resourceArn:
                                             type: string
                                           resourceArnRef:
-                                            description: A Reference to a named object.
+                                            description: Reference to a Function in
+                                              lambda to populate resourceArn.
                                             properties:
                                               name:
                                                 description: Name of the referenced
@@ -887,7 +896,8 @@ spec:
                                             - name
                                             type: object
                                           resourceArnSelector:
-                                            description: A Selector selects an object.
+                                            description: Selector for a Function in
+                                              lambda to populate resourceArn.
                                             properties:
                                               matchControllerRef:
                                                 description: MatchControllerRef ensures
@@ -1051,7 +1061,8 @@ spec:
                                           bucketArn:
                                             type: string
                                           bucketArnRef:
-                                            description: A Reference to a named object.
+                                            description: Reference to a Bucket in
+                                              s3 to populate bucketArn.
                                             properties:
                                               name:
                                                 description: Name of the referenced
@@ -1092,7 +1103,8 @@ spec:
                                             - name
                                             type: object
                                           bucketArnSelector:
-                                            description: A Selector selects an object.
+                                            description: Selector for a Bucket in
+                                              s3 to populate bucketArn.
                                             properties:
                                               matchControllerRef:
                                                 description: MatchControllerRef ensures
@@ -1216,7 +1228,7 @@ spec:
                       streams, Amazon S3 objects, and other external resources.
                     type: string
                   serviceExecutionRoleRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate serviceExecutionRole.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1250,7 +1262,7 @@ spec:
                     - name
                     type: object
                   serviceExecutionRoleSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate serviceExecutionRole.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -99,7 +99,7 @@ spec:
                     description: Security group to apply this rule to.
                     type: string
                   securityGroupIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a SecurityGroup to populate securityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -133,7 +133,7 @@ spec:
                     - name
                     type: object
                   securityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a SecurityGroup to populate securityGroupId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -182,7 +182,7 @@ spec:
                       or self.
                     type: string
                   sourceSecurityGroupIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a SecurityGroup to populate sourceSecurityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -216,7 +216,7 @@ spec:
                     - name
                     type: object
                   sourceSecurityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a SecurityGroup to populate sourceSecurityGroupId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -75,7 +75,7 @@ spec:
                   instanceId:
                     type: string
                   instanceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Instance in ec2 to populate instanceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -109,7 +109,7 @@ spec:
                     - name
                     type: object
                   instanceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Instance in ec2 to populate instanceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -166,7 +166,7 @@ spec:
                   volumeId:
                     type: string
                   volumeIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a EBSVolume in ec2 to populate volumeId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -200,7 +200,7 @@ spec:
                     - name
                     type: object
                   volumeIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a EBSVolume in ec2 to populate volumeId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

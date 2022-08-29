@@ -81,7 +81,8 @@ spec:
                             the data location resource.
                           type: string
                         arnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Resource in lakeformation to
+                            populate arn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -116,7 +117,8 @@ spec:
                           - name
                           type: object
                         arnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Resource in lakeformation to
+                            populate arn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -170,7 +172,8 @@ spec:
                         name:
                           type: string
                         nameRef:
-                          description: A Reference to a named object.
+                          description: Reference to a CatalogDatabase in glue to populate
+                            name.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -205,7 +208,8 @@ spec:
                           - name
                           type: object
                         nameSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a CatalogDatabase in glue to populate
+                            name.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -310,7 +314,8 @@ spec:
                         name:
                           type: string
                         nameRef:
-                          description: A Reference to a named object.
+                          description: Reference to a CatalogTable in glue to populate
+                            name.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -345,7 +350,8 @@ spec:
                           - name
                           type: object
                         nameSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a CatalogTable in glue to populate
+                            name.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

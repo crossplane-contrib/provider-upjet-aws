@@ -1,6 +1,8 @@
 apiVersion: kinesisanalytics.aws.upbound.io/v1beta1
 kind: Application
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
   labels:
     testing.upbound.io/example-name: test_application
   name: test-application
@@ -35,6 +37,8 @@ spec:
 apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
   labels:
     testing.upbound.io/example-name: test_stream
   name: test-stream

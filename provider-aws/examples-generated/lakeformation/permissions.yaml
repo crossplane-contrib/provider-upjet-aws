@@ -1,6 +1,8 @@
 apiVersion: lakeformation.aws.upbound.io/v1beta1
 kind: Permissions
 metadata:
+  annotations:
+    meta.upbound.io/example-id: lakeformation/v1beta1/permissions
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -23,6 +25,8 @@ spec:
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: CatalogDatabase
 metadata:
+  annotations:
+    meta.upbound.io/example-id: lakeformation/v1beta1/permissions
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -35,6 +39,8 @@ spec:
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: CatalogTable
 metadata:
+  annotations:
+    meta.upbound.io/example-id: lakeformation/v1beta1/permissions
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -137,9 +137,11 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceExecutionRole *string `json:"serviceExecutionRole,omitempty" tf:"service_execution_role,omitempty"`
 
+	// Reference to a Role in iam to populate serviceExecutionRole.
 	// +kubebuilder:validation:Optional
 	ServiceExecutionRoleRef *v1.Reference `json:"serviceExecutionRoleRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate serviceExecutionRole.
 	// +kubebuilder:validation:Optional
 	ServiceExecutionRoleSelector *v1.Selector `json:"serviceExecutionRoleSelector,omitempty" tf:"-"`
 
@@ -404,9 +406,11 @@ type KinesisFirehoseOutputParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
+	// Reference to a DeliveryStream in firehose to populate resourceArn.
 	// +kubebuilder:validation:Optional
 	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
 
+	// Selector for a DeliveryStream in firehose to populate resourceArn.
 	// +kubebuilder:validation:Optional
 	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
@@ -421,9 +425,11 @@ type KinesisStreamsInputParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
+	// Reference to a Stream in kinesis to populate resourceArn.
 	// +kubebuilder:validation:Optional
 	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
 
+	// Selector for a Stream in kinesis to populate resourceArn.
 	// +kubebuilder:validation:Optional
 	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
@@ -447,9 +453,11 @@ type LambdaOutputParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
+	// Reference to a Function in lambda to populate resourceArn.
 	// +kubebuilder:validation:Optional
 	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
 
+	// Selector for a Function in lambda to populate resourceArn.
 	// +kubebuilder:validation:Optional
 	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
@@ -702,9 +710,11 @@ type S3ContentLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
+	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
 	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
@@ -713,9 +723,11 @@ type S3ContentLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	FileKey *string `json:"fileKey,omitempty" tf:"file_key,omitempty"`
 
+	// Reference to a Object in s3 to populate fileKey.
 	// +kubebuilder:validation:Optional
 	FileKeyRef *v1.Reference `json:"fileKeyRef,omitempty" tf:"-"`
 
+	// Selector for a Object in s3 to populate fileKey.
 	// +kubebuilder:validation:Optional
 	FileKeySelector *v1.Selector `json:"fileKeySelector,omitempty" tf:"-"`
 
@@ -734,9 +746,11 @@ type S3ReferenceDataSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
+	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
 	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 

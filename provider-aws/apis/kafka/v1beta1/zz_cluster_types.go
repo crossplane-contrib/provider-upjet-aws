@@ -42,9 +42,11 @@ type BrokerNodeGroupInfoParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientSubnets []*string `json:"clientSubnets,omitempty" tf:"client_subnets,omitempty"`
 
+	// References to Subnet in ec2 to populate clientSubnets.
 	// +kubebuilder:validation:Optional
 	ClientSubnetsRefs []v1.Reference `json:"clientSubnetsRefs,omitempty" tf:"-"`
 
+	// Selector for a list of Subnet in ec2 to populate clientSubnets.
 	// +kubebuilder:validation:Optional
 	ClientSubnetsSelector *v1.Selector `json:"clientSubnetsSelector,omitempty" tf:"-"`
 
@@ -65,9 +67,11 @@ type BrokerNodeGroupInfoParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
 	SecurityGroupsRefs []v1.Reference `json:"securityGroupsRefs,omitempty" tf:"-"`
 
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
 	SecurityGroupsSelector *v1.Selector `json:"securityGroupsSelector,omitempty" tf:"-"`
 
@@ -107,9 +111,11 @@ type CloudwatchLogsParameters struct {
 	// +kubebuilder:validation:Optional
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
+	// Reference to a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
 	LogGroupRef *v1.Reference `json:"logGroupRef,omitempty" tf:"-"`
 
+	// Selector for a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
 	LogGroupSelector *v1.Selector `json:"logGroupSelector,omitempty" tf:"-"`
 }
@@ -267,9 +273,11 @@ type EncryptionInfoParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionAtRestKMSKeyArn *string `json:"encryptionAtRestKmsKeyArn,omitempty" tf:"encryption_at_rest_kms_key_arn,omitempty"`
 
+	// Reference to a Key in kms to populate encryptionAtRestKmsKeyArn.
 	// +kubebuilder:validation:Optional
 	EncryptionAtRestKMSKeyArnRef *v1.Reference `json:"encryptionAtRestKmsKeyArnRef,omitempty" tf:"-"`
 
+	// Selector for a Key in kms to populate encryptionAtRestKmsKeyArn.
 	// +kubebuilder:validation:Optional
 	EncryptionAtRestKMSKeyArnSelector *v1.Selector `json:"encryptionAtRestKmsKeyArnSelector,omitempty" tf:"-"`
 
@@ -289,9 +297,11 @@ type FirehoseParameters struct {
 	// +kubebuilder:validation:Optional
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
 
+	// Reference to a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
 	DeliveryStreamRef *v1.Reference `json:"deliveryStreamRef,omitempty" tf:"-"`
 
+	// Selector for a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
 	DeliveryStreamSelector *v1.Selector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
@@ -384,9 +394,11 @@ type S3Parameters struct {
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 

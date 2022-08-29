@@ -1,6 +1,8 @@
 apiVersion: backup.aws.upbound.io/v1beta1
 kind: VaultPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/vaultpolicy
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -20,6 +22,8 @@ spec:
 apiVersion: backup.aws.upbound.io/v1beta1
 kind: Vault
 metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/vaultpolicy
   labels:
     testing.upbound.io/example-name: example
   name: example

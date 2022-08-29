@@ -1,6 +1,8 @@
 apiVersion: sqs.aws.upbound.io/v1beta1
 kind: Queue
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queue
   labels:
     testing.upbound.io/example-name: terraform_queue
   name: terraform-queue

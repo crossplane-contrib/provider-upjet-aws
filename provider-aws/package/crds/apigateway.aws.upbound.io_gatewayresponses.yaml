@@ -86,7 +86,8 @@ spec:
                     description: The string identifier of the associated REST API.
                     type: string
                   restApiIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a RestAPI in apigateway to populate
+                      restApiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -120,7 +121,8 @@ spec:
                     - name
                     type: object
                   restApiIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a RestAPI in apigateway to populate
+                      restApiId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -68,7 +68,7 @@ spec:
                     description: The API identifier.
                     type: string
                   apiIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a API to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a API to populate apiId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -164,7 +164,7 @@ spec:
                       resource to be associated with this route.
                     type: string
                   authorizerIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Authorizer to populate authorizerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -198,7 +198,7 @@ spec:
                     - name
                     type: object
                   authorizerIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Authorizer to populate authorizerId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -286,7 +286,7 @@ spec:
                       resource.
                     type: string
                   targetRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Integration to populate target.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -320,7 +320,7 @@ spec:
                     - name
                     type: object
                   targetSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Integration to populate target.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
