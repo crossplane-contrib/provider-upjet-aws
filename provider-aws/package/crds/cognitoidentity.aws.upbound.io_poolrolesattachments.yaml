@@ -68,7 +68,8 @@ spec:
                     description: An identity pool ID in the format REGION_GUID.
                     type: string
                   identityPoolIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Pool in cognitoidentity to populate
+                      identityPoolId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +103,8 @@ spec:
                     - name
                     type: object
                   identityPoolIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Pool in cognitoidentity to populate
+                      identityPoolId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -181,7 +183,8 @@ spec:
                                 description: The role ARN.
                                 type: string
                               roleArnRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Role in iam to populate
+                                  roleArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -217,7 +220,8 @@ spec:
                                 - name
                                 type: object
                               roleArnSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Role in iam to populate
+                                  roleArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object

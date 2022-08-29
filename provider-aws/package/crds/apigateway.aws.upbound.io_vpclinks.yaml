@@ -88,6 +88,7 @@ spec:
                       type: string
                     type: array
                   targetArnsRefs:
+                    description: References to LB in elbv2 to populate targetArns.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -124,7 +125,7 @@ spec:
                       type: object
                     type: array
                   targetArnsSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of LB in elbv2 to populate targetArns.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

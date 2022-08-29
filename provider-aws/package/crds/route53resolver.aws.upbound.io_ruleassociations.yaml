@@ -77,7 +77,8 @@ spec:
                       with the VPC.
                     type: string
                   resolverRuleIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Rule in route53resolver to populate
+                      resolverRuleId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +112,8 @@ spec:
                     - name
                     type: object
                   resolverRuleIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Rule in route53resolver to populate
+                      resolverRuleId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -154,7 +156,7 @@ spec:
                       resolver rule with.
                     type: string
                   vpcIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VPC in ec2 to populate vpcId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -188,7 +190,7 @@ spec:
                     - name
                     type: object
                   vpcIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VPC in ec2 to populate vpcId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

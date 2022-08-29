@@ -128,7 +128,7 @@ spec:
                     description: The Amazon Resource Name  of the listener.
                     type: string
                   listenerArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Listener to populate listenerArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -162,7 +162,7 @@ spec:
                     - name
                     type: object
                   listenerArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Listener to populate listenerArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

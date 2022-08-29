@@ -41,9 +41,11 @@ type UserPoolUICustomizationParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// Reference to a UserPoolClient to populate clientId.
 	// +kubebuilder:validation:Optional
 	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
 
+	// Selector for a UserPoolClient to populate clientId.
 	// +kubebuilder:validation:Optional
 	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
@@ -61,9 +63,11 @@ type UserPoolUICustomizationParameters struct {
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
+	// Reference to a UserPool to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
+	// Selector for a UserPool to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }

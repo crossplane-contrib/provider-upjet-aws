@@ -51,9 +51,11 @@ type TopicSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointAutoConfirms *bool `json:"endpointAutoConfirms,omitempty" tf:"endpoint_auto_confirms,omitempty"`
 
+	// Reference to a Queue in sqs to populate endpoint.
 	// +kubebuilder:validation:Optional
 	EndpointRef *v1.Reference `json:"endpointRef,omitempty" tf:"-"`
 
+	// Selector for a Queue in sqs to populate endpoint.
 	// +kubebuilder:validation:Optional
 	EndpointSelector *v1.Selector `json:"endpointSelector,omitempty" tf:"-"`
 
@@ -84,9 +86,11 @@ type TopicSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	SubscriptionRoleArn *string `json:"subscriptionRoleArn,omitempty" tf:"subscription_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate subscriptionRoleArn.
 	// +kubebuilder:validation:Optional
 	SubscriptionRoleArnRef *v1.Reference `json:"subscriptionRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate subscriptionRoleArn.
 	// +kubebuilder:validation:Optional
 	SubscriptionRoleArnSelector *v1.Selector `json:"subscriptionRoleArnSelector,omitempty" tf:"-"`
 
@@ -96,9 +100,11 @@ type TopicSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
+	// Reference to a Topic to populate topicArn.
 	// +kubebuilder:validation:Optional
 	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
 
+	// Selector for a Topic to populate topicArn.
 	// +kubebuilder:validation:Optional
 	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }

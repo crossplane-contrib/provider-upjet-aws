@@ -37,9 +37,11 @@ type MonitoringSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	DistributionID *string `json:"distributionId,omitempty" tf:"distribution_id,omitempty"`
 
+	// Reference to a Distribution in cloudfront to populate distributionId.
 	// +kubebuilder:validation:Optional
 	DistributionIDRef *v1.Reference `json:"distributionIdRef,omitempty" tf:"-"`
 
+	// Selector for a Distribution in cloudfront to populate distributionId.
 	// +kubebuilder:validation:Optional
 	DistributionIDSelector *v1.Selector `json:"distributionIdSelector,omitempty" tf:"-"`
 

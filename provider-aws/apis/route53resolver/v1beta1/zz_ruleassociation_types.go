@@ -36,9 +36,11 @@ type RuleAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	ResolverRuleID *string `json:"resolverRuleId,omitempty" tf:"resolver_rule_id,omitempty"`
 
+	// Reference to a Rule in route53resolver to populate resolverRuleId.
 	// +kubebuilder:validation:Optional
 	ResolverRuleIDRef *v1.Reference `json:"resolverRuleIdRef,omitempty" tf:"-"`
 
+	// Selector for a Rule in route53resolver to populate resolverRuleId.
 	// +kubebuilder:validation:Optional
 	ResolverRuleIDSelector *v1.Selector `json:"resolverRuleIdSelector,omitempty" tf:"-"`
 
@@ -47,9 +49,11 @@ type RuleAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
+	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }

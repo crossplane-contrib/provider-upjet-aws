@@ -68,7 +68,7 @@ spec:
                     description: The name of the bucket to which to apply the policy.
                     type: string
                   bucketRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Bucket in s3 to populate bucket.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   bucketSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Bucket in s3 to populate bucket.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

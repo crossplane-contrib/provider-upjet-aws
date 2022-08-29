@@ -24,9 +24,11 @@ type AttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
 
+	// Reference to a ELB to populate elb.
 	// +kubebuilder:validation:Optional
 	ELBRef *v1.Reference `json:"elbRef,omitempty" tf:"-"`
 
+	// Selector for a ELB to populate elb.
 	// +kubebuilder:validation:Optional
 	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
 
@@ -35,9 +37,11 @@ type AttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
 
+	// Reference to a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
 	InstanceRef *v1.Reference `json:"instanceRef,omitempty" tf:"-"`
 
+	// Selector for a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
 	InstanceSelector *v1.Selector `json:"instanceSelector,omitempty" tf:"-"`
 

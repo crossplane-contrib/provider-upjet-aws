@@ -48,9 +48,11 @@ type DomainNameParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
+	// Reference to a CertificateValidation in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
 	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
 
+	// Selector for a CertificateValidation in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
 	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
@@ -97,9 +99,11 @@ type DomainNameParameters struct {
 	// +kubebuilder:validation:Optional
 	RegionalCertificateArn *string `json:"regionalCertificateArn,omitempty" tf:"regional_certificate_arn,omitempty"`
 
+	// Reference to a CertificateValidation in acm to populate regionalCertificateArn.
 	// +kubebuilder:validation:Optional
 	RegionalCertificateArnRef *v1.Reference `json:"regionalCertificateArnRef,omitempty" tf:"-"`
 
+	// Selector for a CertificateValidation in acm to populate regionalCertificateArn.
 	// +kubebuilder:validation:Optional
 	RegionalCertificateArnSelector *v1.Selector `json:"regionalCertificateArnSelector,omitempty" tf:"-"`
 

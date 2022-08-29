@@ -39,9 +39,11 @@ type ActionsParameters struct {
 	// +kubebuilder:validation:Optional
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
 
+	// Reference to a Job in glue to populate jobName.
 	// +kubebuilder:validation:Optional
 	JobNameRef *v1.Reference `json:"jobNameRef,omitempty" tf:"-"`
 
+	// Selector for a Job in glue to populate jobName.
 	// +kubebuilder:validation:Optional
 	JobNameSelector *v1.Selector `json:"jobNameSelector,omitempty" tf:"-"`
 
@@ -74,9 +76,11 @@ type ConditionsParameters struct {
 	// +kubebuilder:validation:Optional
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
 
+	// Reference to a Job in glue to populate jobName.
 	// +kubebuilder:validation:Optional
 	JobNameRef *v1.Reference `json:"jobNameRef,omitempty" tf:"-"`
 
+	// Selector for a Job in glue to populate jobName.
 	// +kubebuilder:validation:Optional
 	JobNameSelector *v1.Selector `json:"jobNameSelector,omitempty" tf:"-"`
 

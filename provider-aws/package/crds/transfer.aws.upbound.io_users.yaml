@@ -138,7 +138,7 @@ spec:
                       bucket.
                     type: string
                   roleRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate role.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -172,7 +172,7 @@ spec:
                     - name
                     type: object
                   roleSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate role.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -214,7 +214,7 @@ spec:
                     description: The Server ID of the Transfer Server
                     type: string
                   serverIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Server to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -248,7 +248,7 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Server to populate serverId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -43,9 +43,11 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
+	// Reference to a Cluster to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
+	// Selector for a Cluster to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
@@ -75,9 +77,11 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountRoleArn *string `json:"serviceAccountRoleArn,omitempty" tf:"service_account_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate serviceAccountRoleArn.
 	// +kubebuilder:validation:Optional
 	ServiceAccountRoleArnRef *v1.Reference `json:"serviceAccountRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate serviceAccountRoleArn.
 	// +kubebuilder:validation:Optional
 	ServiceAccountRoleArnSelector *v1.Selector `json:"serviceAccountRoleArnSelector,omitempty" tf:"-"`
 

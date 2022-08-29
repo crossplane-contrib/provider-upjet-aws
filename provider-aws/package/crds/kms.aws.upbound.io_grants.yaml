@@ -107,7 +107,7 @@ spec:
                       AWS.
                     type: string
                   granteePrincipalRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate granteePrincipal.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -141,7 +141,7 @@ spec:
                     - name
                     type: object
                   granteePrincipalSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate granteePrincipal.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -186,7 +186,7 @@ spec:
                       you must use the key ARN.
                     type: string
                   keyIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Key to populate keyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -220,7 +220,7 @@ spec:
                     - name
                     type: object
                   keyIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Key to populate keyId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

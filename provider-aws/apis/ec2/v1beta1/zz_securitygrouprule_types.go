@@ -55,9 +55,11 @@ type SecurityGroupRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
+	// Reference to a SecurityGroup to populate securityGroupId.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
+	// Selector for a SecurityGroup to populate securityGroupId.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
@@ -70,9 +72,11 @@ type SecurityGroupRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupID *string `json:"sourceSecurityGroupId,omitempty" tf:"source_security_group_id,omitempty"`
 
+	// Reference to a SecurityGroup to populate sourceSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupIDRef *v1.Reference `json:"sourceSecurityGroupIdRef,omitempty" tf:"-"`
 
+	// Selector for a SecurityGroup to populate sourceSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 

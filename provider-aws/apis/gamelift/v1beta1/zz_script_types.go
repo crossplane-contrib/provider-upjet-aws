@@ -63,9 +63,11 @@ type ScriptStorageLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
@@ -75,9 +77,11 @@ type ScriptStorageLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
+	// Reference to a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
 	KeyRef *v1.Reference `json:"keyRef,omitempty" tf:"-"`
 
+	// Selector for a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
 	KeySelector *v1.Selector `json:"keySelector,omitempty" tf:"-"`
 
@@ -91,9 +95,11 @@ type ScriptStorageLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }

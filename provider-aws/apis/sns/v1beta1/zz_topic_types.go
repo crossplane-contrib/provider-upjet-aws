@@ -36,9 +36,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationFailureFeedbackRoleArn *string `json:"applicationFailureFeedbackRoleArn,omitempty" tf:"application_failure_feedback_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate applicationFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	ApplicationFailureFeedbackRoleArnRef *v1.Reference `json:"applicationFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate applicationFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	ApplicationFailureFeedbackRoleArnSelector *v1.Selector `json:"applicationFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
@@ -48,9 +50,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationSuccessFeedbackRoleArn *string `json:"applicationSuccessFeedbackRoleArn,omitempty" tf:"application_success_feedback_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate applicationSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	ApplicationSuccessFeedbackRoleArnRef *v1.Reference `json:"applicationSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate applicationSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	ApplicationSuccessFeedbackRoleArnSelector *v1.Selector `json:"applicationSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
@@ -80,9 +84,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	FirehoseFailureFeedbackRoleArn *string `json:"firehoseFailureFeedbackRoleArn,omitempty" tf:"firehose_failure_feedback_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate firehoseFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	FirehoseFailureFeedbackRoleArnRef *v1.Reference `json:"firehoseFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate firehoseFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	FirehoseFailureFeedbackRoleArnSelector *v1.Selector `json:"firehoseFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
@@ -92,9 +98,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	FirehoseSuccessFeedbackRoleArn *string `json:"firehoseSuccessFeedbackRoleArn,omitempty" tf:"firehose_success_feedback_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate firehoseSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	FirehoseSuccessFeedbackRoleArnRef *v1.Reference `json:"firehoseSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate firehoseSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	FirehoseSuccessFeedbackRoleArnSelector *v1.Selector `json:"firehoseSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
@@ -108,9 +116,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPFailureFeedbackRoleArn *string `json:"httpFailureFeedbackRoleArn,omitempty" tf:"http_failure_feedback_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate httpFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	HTTPFailureFeedbackRoleArnRef *v1.Reference `json:"httpFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate httpFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	HTTPFailureFeedbackRoleArnSelector *v1.Selector `json:"httpFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
@@ -120,9 +130,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPSuccessFeedbackRoleArn *string `json:"httpSuccessFeedbackRoleArn,omitempty" tf:"http_success_feedback_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate httpSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	HTTPSuccessFeedbackRoleArnRef *v1.Reference `json:"httpSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate httpSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	HTTPSuccessFeedbackRoleArnSelector *v1.Selector `json:"httpSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
@@ -140,9 +152,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	LambdaFailureFeedbackRoleArn *string `json:"lambdaFailureFeedbackRoleArn,omitempty" tf:"lambda_failure_feedback_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate lambdaFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	LambdaFailureFeedbackRoleArnRef *v1.Reference `json:"lambdaFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate lambdaFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	LambdaFailureFeedbackRoleArnSelector *v1.Selector `json:"lambdaFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
@@ -152,9 +166,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	LambdaSuccessFeedbackRoleArn *string `json:"lambdaSuccessFeedbackRoleArn,omitempty" tf:"lambda_success_feedback_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate lambdaSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	LambdaSuccessFeedbackRoleArnRef *v1.Reference `json:"lambdaSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate lambdaSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	LambdaSuccessFeedbackRoleArnSelector *v1.Selector `json:"lambdaSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
@@ -185,9 +201,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	SqsFailureFeedbackRoleArn *string `json:"sqsFailureFeedbackRoleArn,omitempty" tf:"sqs_failure_feedback_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate sqsFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	SqsFailureFeedbackRoleArnRef *v1.Reference `json:"sqsFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate sqsFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	SqsFailureFeedbackRoleArnSelector *v1.Selector `json:"sqsFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
@@ -197,9 +215,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	SqsSuccessFeedbackRoleArn *string `json:"sqsSuccessFeedbackRoleArn,omitempty" tf:"sqs_success_feedback_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate sqsSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	SqsSuccessFeedbackRoleArnRef *v1.Reference `json:"sqsSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate sqsSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
 	SqsSuccessFeedbackRoleArnSelector *v1.Selector `json:"sqsSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 

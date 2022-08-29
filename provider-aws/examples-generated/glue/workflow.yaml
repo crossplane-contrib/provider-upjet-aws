@@ -1,6 +1,8 @@
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: Workflow
 metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/workflow
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -13,6 +15,8 @@ spec:
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: Trigger
 metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/workflow
   labels:
     testing.upbound.io/example-name: example-inner
   name: example-inner
@@ -37,6 +41,8 @@ spec:
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: Trigger
 metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/workflow
   labels:
     testing.upbound.io/example-name: example-start
   name: example-start

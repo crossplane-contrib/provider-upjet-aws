@@ -1,6 +1,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketACL
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketacl
   labels:
     testing.upbound.io/example-name: example_bucket_acl
   name: example-bucket-acl

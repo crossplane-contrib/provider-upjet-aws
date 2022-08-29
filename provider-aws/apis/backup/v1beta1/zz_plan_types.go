@@ -148,9 +148,11 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetVaultName *string `json:"targetVaultName,omitempty" tf:"target_vault_name,omitempty"`
 
+	// Reference to a Vault in backup to populate targetVaultName.
 	// +kubebuilder:validation:Optional
 	TargetVaultNameRef *v1.Reference `json:"targetVaultNameRef,omitempty" tf:"-"`
 
+	// Selector for a Vault in backup to populate targetVaultName.
 	// +kubebuilder:validation:Optional
 	TargetVaultNameSelector *v1.Selector `json:"targetVaultNameSelector,omitempty" tf:"-"`
 }

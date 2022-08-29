@@ -1,6 +1,8 @@
 apiVersion: lexmodels.aws.upbound.io/v1beta1
 kind: Bot
 metadata:
+  annotations:
+    meta.upbound.io/example-id: lexmodels/v1beta1/bot
   labels:
     testing.upbound.io/example-name: order_flowers_bot
   name: order-flowers-bot

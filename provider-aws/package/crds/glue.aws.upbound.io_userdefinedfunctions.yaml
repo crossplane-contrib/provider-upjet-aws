@@ -75,7 +75,8 @@ spec:
                     description: The name of the Database to create the Function.
                     type: string
                   databaseNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a CatalogDatabase in glue to populate
+                      databaseName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -109,7 +110,8 @@ spec:
                     - name
                     type: object
                   databaseNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a CatalogDatabase in glue to populate
+                      databaseName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

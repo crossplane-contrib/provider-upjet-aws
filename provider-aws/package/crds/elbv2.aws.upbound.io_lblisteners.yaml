@@ -229,7 +229,8 @@ spec:
                                     arn:
                                       type: string
                                     arnRef:
-                                      description: A Reference to a named object.
+                                      description: Reference to a LBTargetGroup to
+                                        populate arn.
                                       properties:
                                         name:
                                           description: Name of the referenced object.
@@ -267,7 +268,8 @@ spec:
                                       - name
                                       type: object
                                     arnSelector:
-                                      description: A Selector selects an object.
+                                      description: Selector for a LBTargetGroup to
+                                        populate arn.
                                       properties:
                                         matchControllerRef:
                                           description: MatchControllerRef ensures
@@ -362,7 +364,7 @@ spec:
                             groups, use a forward block instead.
                           type: string
                         targetGroupArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a LBTargetGroup to populate targetGroupArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -397,7 +399,7 @@ spec:
                           - name
                           type: object
                         targetGroupArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a LBTargetGroup to populate targetGroupArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -449,7 +451,7 @@ spec:
                     description: ARN of the load balancer.
                     type: string
                   loadBalancerArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a LB to populate loadBalancerArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -483,7 +485,7 @@ spec:
                     - name
                     type: object
                   loadBalancerArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a LB to populate loadBalancerArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

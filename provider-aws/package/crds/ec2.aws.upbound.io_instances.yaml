@@ -152,7 +152,7 @@ spec:
                         kmsKeyId:
                           type: string
                         kmsKeyIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Key in kms to populate kmsKeyId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -187,7 +187,7 @@ spec:
                           - name
                           type: object
                         kmsKeyIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Key in kms to populate kmsKeyId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -413,7 +413,8 @@ spec:
                           description: ID of the network interface to attach.
                           type: string
                         networkInterfaceIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a NetworkInterface to populate
+                            networkInterfaceId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -448,7 +449,8 @@ spec:
                           - name
                           type: object
                         networkInterfaceIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a NetworkInterface to populate
+                            networkInterfaceId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -523,7 +525,7 @@ spec:
                         kmsKeyId:
                           type: string
                         kmsKeyIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Key in kms to populate kmsKeyId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -558,7 +560,7 @@ spec:
                           - name
                           type: object
                         kmsKeyIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Key in kms to populate kmsKeyId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -630,7 +632,7 @@ spec:
                     description: VPC Subnet ID to launch in.
                     type: string
                   subnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -664,7 +666,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -741,6 +743,7 @@ spec:
                       to root and EBS volumes.
                     type: object
                   vpcSecurityGroupIdRefs:
+                    description: References to SecurityGroup to populate vpcSecurityGroupIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -777,7 +780,8 @@ spec:
                       type: object
                     type: array
                   vpcSecurityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup to populate
+                      vpcSecurityGroupIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

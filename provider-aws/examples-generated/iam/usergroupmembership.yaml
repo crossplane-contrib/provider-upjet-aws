@@ -1,6 +1,8 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: UserGroupMembership
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/usergroupmembership
   labels:
     testing.upbound.io/example-name: example1
   name: example1
@@ -18,6 +20,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Group
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/usergroupmembership
   labels:
     testing.upbound.io/example-name: group1
   name: group1
@@ -29,6 +33,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Group
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/usergroupmembership
   labels:
     testing.upbound.io/example-name: group2
   name: group2
@@ -40,6 +46,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Group
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/usergroupmembership
   labels:
     testing.upbound.io/example-name: group3
   name: group3
@@ -51,6 +59,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: User
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/usergroupmembership
   labels:
     testing.upbound.io/example-name: user1
   name: user1

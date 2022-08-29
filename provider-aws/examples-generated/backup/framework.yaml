@@ -1,6 +1,8 @@
 apiVersion: backup.aws.upbound.io/v1beta1
 kind: Framework
 metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/framework
   labels:
     testing.upbound.io/example-name: Example
   name: example

@@ -122,7 +122,7 @@ spec:
                       every aws_rds_cluster_instance in the cluster.'
                     type: string
                   dbSubnetGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a SubnetGroup to populate dbSubnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -156,7 +156,7 @@ spec:
                     - name
                     type: object
                   dbSubnetGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a SubnetGroup to populate dbSubnetGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -259,7 +259,7 @@ spec:
                       kms_key_id, storage_encrypted needs to be set to true.
                     type: string
                   kmsKeyIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Key in kms to populate kmsKeyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -293,7 +293,7 @@ spec:
                     - name
                     type: object
                   kmsKeyIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Key in kms to populate kmsKeyId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -382,7 +382,7 @@ spec:
                             from which to restore.
                           type: string
                         sourceClusterIdentifierRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Cluster to populate sourceClusterIdentifier.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -417,7 +417,7 @@ spec:
                           - name
                           type: object
                         sourceClusterIdentifierSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Cluster to populate sourceClusterIdentifier.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -471,7 +471,7 @@ spec:
                           description: The bucket name where your backup is stored
                           type: string
                         bucketNameRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Bucket in s3 to populate bucketName.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -506,7 +506,7 @@ spec:
                           - name
                           type: object
                         bucketNameSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Bucket in s3 to populate bucketName.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -638,6 +638,7 @@ spec:
                       with matching keys will overwrite those defined at the provider-level.
                     type: object
                   vpcSecurityGroupIdRefs:
+                    description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -674,7 +675,8 @@ spec:
                       type: object
                     type: array
                   vpcSecurityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup in ec2 to populate
+                      vpcSecurityGroupIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

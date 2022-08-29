@@ -1,6 +1,8 @@
 apiVersion: servicediscovery.aws.upbound.io/v1beta1
 kind: PrivateDNSNamespace
 metadata:
+  annotations:
+    meta.upbound.io/example-id: servicediscovery/v1beta1/privatednsnamespace
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -18,6 +20,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: servicediscovery/v1beta1/privatednsnamespace
   labels:
     testing.upbound.io/example-name: example
   name: example

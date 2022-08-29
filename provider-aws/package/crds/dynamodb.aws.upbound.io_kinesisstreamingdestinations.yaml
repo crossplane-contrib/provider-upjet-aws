@@ -74,7 +74,7 @@ spec:
                       in the same account and region as the DynamoDB table.
                     type: string
                   streamArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Stream in kinesis to populate streamArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -108,7 +108,7 @@ spec:
                     - name
                     type: object
                   streamArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Stream in kinesis to populate streamArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -151,7 +151,7 @@ spec:
                       one Kinesis streaming destination for a given DynamoDB table.
                     type: string
                   tableNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Table to populate tableName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -185,7 +185,7 @@ spec:
                     - name
                     type: object
                   tableNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Table to populate tableName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

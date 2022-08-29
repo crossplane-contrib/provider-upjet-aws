@@ -74,7 +74,8 @@ spec:
                       with the transit gateway multicast group.
                     type: string
                   networkInterfaceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a NetworkInterface in ec2 to populate
+                      networkInterfaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -108,7 +109,8 @@ spec:
                     - name
                     type: object
                   networkInterfaceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a NetworkInterface in ec2 to populate
+                      networkInterfaceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -154,7 +156,8 @@ spec:
                     description: The ID of the transit gateway multicast domain.
                     type: string
                   transitGatewayMulticastDomainIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a TransitGatewayMulticastDomain in ec2
+                      to populate transitGatewayMulticastDomainId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -188,7 +191,8 @@ spec:
                     - name
                     type: object
                   transitGatewayMulticastDomainIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a TransitGatewayMulticastDomain in ec2
+                      to populate transitGatewayMulticastDomainId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -1,6 +1,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketIntelligentTieringConfiguration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketintelligenttieringconfiguration
   labels:
     testing.upbound.io/example-name: example-entire-bucket
   name: example-entire-bucket

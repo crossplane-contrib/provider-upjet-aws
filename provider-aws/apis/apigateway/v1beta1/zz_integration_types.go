@@ -33,9 +33,11 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
+	// Reference to a VPCLink in apigateway to populate connectionId.
 	// +kubebuilder:validation:Optional
 	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPCLink in apigateway to populate connectionId.
 	// +kubebuilder:validation:Optional
 	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
@@ -58,9 +60,11 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
+	// Reference to a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
 	HTTPMethodRef *v1.Reference `json:"httpMethodRef,omitempty" tf:"-"`
 
+	// Selector for a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
 	HTTPMethodSelector *v1.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
 
@@ -96,9 +100,11 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
+	// Reference to a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
+	// Selector for a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
@@ -108,9 +114,11 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
+	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
 	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
+	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
@@ -134,9 +142,11 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
+	// Reference to a Function in lambda to populate uri.
 	// +kubebuilder:validation:Optional
 	URIRef *v1.Reference `json:"uriRef,omitempty" tf:"-"`
 
+	// Selector for a Function in lambda to populate uri.
 	// +kubebuilder:validation:Optional
 	URISelector *v1.Selector `json:"uriSelector,omitempty" tf:"-"`
 }

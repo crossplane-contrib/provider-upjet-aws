@@ -416,7 +416,8 @@ spec:
                                 description: ARN of the Cloudfront function.
                                 type: string
                               functionArnRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Function in cloudfront
+                                  to populate functionArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -452,7 +453,8 @@ spec:
                                 - name
                                 type: object
                               functionArnSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Function in cloudfront
+                                  to populate functionArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -513,7 +515,8 @@ spec:
                                 description: ARN of the Lambda function.
                                 type: string
                               lambdaArnRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Function in lambda to
+                                  populate lambdaArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -549,7 +552,8 @@ spec:
                                 - name
                                 type: object
                               lambdaArnSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Function in lambda to
+                                  populate lambdaArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -767,7 +771,8 @@ spec:
                                   to associate with the origin.
                                 type: string
                               originAccessIdentityRef:
-                                description: A Reference to a named object.
+                                description: Reference to a OriginAccessIdentity in
+                                  cloudfront to populate originAccessIdentity.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -803,7 +808,8 @@ spec:
                                 - name
                                 type: object
                               originAccessIdentitySelector:
-                                description: A Selector selects an object.
+                                description: Selector for a OriginAccessIdentity in
+                                  cloudfront to populate originAccessIdentity.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object

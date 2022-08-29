@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: EIP
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/eip
   labels:
     testing.upbound.io/example-name: lb
   name: lb

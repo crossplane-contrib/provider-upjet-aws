@@ -30,9 +30,11 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizerCredentials *string `json:"authorizerCredentials,omitempty" tf:"authorizer_credentials,omitempty"`
 
+	// Reference to a Role in iam to populate authorizerCredentials.
 	// +kubebuilder:validation:Optional
 	AuthorizerCredentialsRef *v1.Reference `json:"authorizerCredentialsRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate authorizerCredentials.
 	// +kubebuilder:validation:Optional
 	AuthorizerCredentialsSelector *v1.Selector `json:"authorizerCredentialsSelector,omitempty" tf:"-"`
 
@@ -47,9 +49,11 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
 
+	// Reference to a Function in lambda to populate authorizerUri.
 	// +kubebuilder:validation:Optional
 	AuthorizerURIRef *v1.Reference `json:"authorizerUriRef,omitempty" tf:"-"`
 
+	// Selector for a Function in lambda to populate authorizerUri.
 	// +kubebuilder:validation:Optional
 	AuthorizerURISelector *v1.Selector `json:"authorizerUriSelector,omitempty" tf:"-"`
 
@@ -80,9 +84,11 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
+	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
 	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
+	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 

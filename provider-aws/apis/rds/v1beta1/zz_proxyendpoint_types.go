@@ -40,9 +40,11 @@ type ProxyEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
 
+	// Reference to a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
 	DBProxyNameRef *v1.Reference `json:"dbProxyNameRef,omitempty" tf:"-"`
 
+	// Selector for a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
 	DBProxyNameSelector *v1.Selector `json:"dbProxyNameSelector,omitempty" tf:"-"`
 
@@ -59,9 +61,11 @@ type ProxyEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetRole *string `json:"targetRole,omitempty" tf:"target_role,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
+	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 

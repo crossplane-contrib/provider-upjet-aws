@@ -75,7 +75,7 @@ spec:
                       gateway multicast domain.
                     type: string
                   subnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet in ec2 to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -109,7 +109,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet in ec2 to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -151,7 +151,8 @@ spec:
                     description: The ID of the transit gateway attachment.
                     type: string
                   transitGatewayAttachmentIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a TransitGatewayVPCAttachment in ec2
+                      to populate transitGatewayAttachmentId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -185,7 +186,8 @@ spec:
                     - name
                     type: object
                   transitGatewayAttachmentIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a TransitGatewayVPCAttachment in ec2
+                      to populate transitGatewayAttachmentId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -227,7 +229,8 @@ spec:
                     description: The ID of the transit gateway multicast domain.
                     type: string
                   transitGatewayMulticastDomainIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a TransitGatewayMulticastDomain in ec2
+                      to populate transitGatewayMulticastDomainId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -261,7 +264,8 @@ spec:
                     - name
                     type: object
                   transitGatewayMulticastDomainIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a TransitGatewayMulticastDomain in ec2
+                      to populate transitGatewayMulticastDomainId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

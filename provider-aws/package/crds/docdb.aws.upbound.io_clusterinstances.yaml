@@ -86,7 +86,7 @@ spec:
                       to launch this instance.
                     type: string
                   clusterIdentifierRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Cluster to populate clusterIdentifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -120,7 +120,7 @@ spec:
                     - name
                     type: object
                   clusterIdentifierSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Cluster to populate clusterIdentifier.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

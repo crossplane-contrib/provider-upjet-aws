@@ -72,7 +72,8 @@ spec:
                       and regional_certificate_name.
                     type: string
                   certificateArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a CertificateValidation in acm to populate
+                      certificateArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -106,7 +107,8 @@ spec:
                     - name
                     type: object
                   certificateArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a CertificateValidation in acm to populate
+                      certificateArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -242,7 +244,8 @@ spec:
                       certificate_body, certificate_chain, and certificate_private_key.
                     type: string
                   regionalCertificateArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a CertificateValidation in acm to populate
+                      regionalCertificateArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -276,7 +279,8 @@ spec:
                     - name
                     type: object
                   regionalCertificateArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a CertificateValidation in acm to populate
+                      regionalCertificateArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

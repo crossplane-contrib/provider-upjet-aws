@@ -1,6 +1,8 @@
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: UsagePlanKey
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/usageplankey
   labels:
     testing.upbound.io/example-name: main
   name: main
@@ -20,6 +22,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: APIKey
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/usageplankey
   labels:
     testing.upbound.io/example-name: mykey
   name: mykey
@@ -33,6 +37,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: RestAPI
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/usageplankey
   labels:
     testing.upbound.io/example-name: test
   name: test
@@ -46,6 +52,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: UsagePlan
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/usageplankey
   labels:
     testing.upbound.io/example-name: myusageplan
   name: myusageplan

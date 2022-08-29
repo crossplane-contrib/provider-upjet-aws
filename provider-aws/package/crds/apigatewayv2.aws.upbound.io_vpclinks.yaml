@@ -73,6 +73,7 @@ spec:
                       be created in.
                     type: string
                   securityGroupIdRefs:
+                    description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -109,7 +110,8 @@ spec:
                       type: object
                     type: array
                   securityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup in ec2 to populate
+                      securityGroupIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -153,6 +155,7 @@ spec:
                       type: string
                     type: array
                   subnetIdRefs:
+                    description: References to Subnet in ec2 to populate subnetIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -189,7 +192,8 @@ spec:
                       type: object
                     type: array
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of Subnet in ec2 to populate
+                      subnetIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

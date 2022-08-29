@@ -101,7 +101,8 @@ spec:
                                   encrypting the fields that match the patterns.
                                 type: string
                               publicKeyIdRef:
-                                description: A Reference to a named object.
+                                description: Reference to a PublicKey in cloudfront
+                                  to populate publicKeyId.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -137,7 +138,8 @@ spec:
                                 - name
                                 type: object
                               publicKeyIdSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a PublicKey in cloudfront
+                                  to populate publicKeyId.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object

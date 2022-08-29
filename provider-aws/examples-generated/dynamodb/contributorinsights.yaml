@@ -1,6 +1,8 @@
 apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: ContributorInsights
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/contributorinsights
   labels:
     testing.upbound.io/example-name: test
   name: test

@@ -70,7 +70,8 @@ spec:
                     description: An identity pool ID.
                     type: string
                   identityPoolIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Pool in cognitoidentity to populate
+                      identityPoolId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -104,7 +105,8 @@ spec:
                     - name
                     type: object
                   identityPoolIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Pool in cognitoidentity to populate
+                      identityPoolId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -146,7 +148,8 @@ spec:
                     description: The name of the identity provider.
                     type: string
                   identityProviderNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a UserPool in cognitoidp to populate
+                      identityProviderName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -180,7 +183,8 @@ spec:
                     - name
                     type: object
                   identityProviderNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a UserPool in cognitoidp to populate
+                      identityProviderName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

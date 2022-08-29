@@ -29,9 +29,11 @@ type QueuePolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
 
+	// Reference to a Queue in sqs to populate queueUrl.
 	// +kubebuilder:validation:Optional
 	QueueURLRef *v1.Reference `json:"queueUrlRef,omitempty" tf:"-"`
 
+	// Selector for a Queue in sqs to populate queueUrl.
 	// +kubebuilder:validation:Optional
 	QueueURLSelector *v1.Selector `json:"queueUrlSelector,omitempty" tf:"-"`
 

@@ -1,6 +1,8 @@
 apiVersion: transfer.aws.upbound.io/v1beta1
 kind: User
 metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/user
   labels:
     testing.upbound.io/example-name: foo
   name: foo
@@ -23,6 +25,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/user
   labels:
     testing.upbound.io/example-name: foo
   name: foo
@@ -37,6 +41,8 @@ spec:
 apiVersion: transfer.aws.upbound.io/v1beta1
 kind: Server
 metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/user
   labels:
     testing.upbound.io/example-name: foo
   name: foo

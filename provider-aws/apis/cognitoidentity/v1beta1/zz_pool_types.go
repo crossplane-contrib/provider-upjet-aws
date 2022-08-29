@@ -23,9 +23,11 @@ type CognitoIdentityProvidersParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// Reference to a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
 	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
 
+	// Selector for a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
 	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
@@ -88,9 +90,11 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	SAMLProviderArns []*string `json:"samlProviderArns,omitempty" tf:"saml_provider_arns,omitempty"`
 
+	// References to SAMLProvider in iam to populate samlProviderArns.
 	// +kubebuilder:validation:Optional
 	SAMLProviderArnsRefs []v1.Reference `json:"samlProviderArnsRefs,omitempty" tf:"-"`
 
+	// Selector for a list of SAMLProvider in iam to populate samlProviderArns.
 	// +kubebuilder:validation:Optional
 	SAMLProviderArnsSelector *v1.Selector `json:"samlProviderArnsSelector,omitempty" tf:"-"`
 

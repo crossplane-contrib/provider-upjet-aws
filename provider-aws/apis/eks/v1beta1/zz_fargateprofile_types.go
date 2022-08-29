@@ -35,9 +35,11 @@ type FargateProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
+	// Reference to a Cluster to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
+	// Selector for a Cluster to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
@@ -47,9 +49,11 @@ type FargateProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	PodExecutionRoleArn *string `json:"podExecutionRoleArn,omitempty" tf:"pod_execution_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate podExecutionRoleArn.
 	// +kubebuilder:validation:Optional
 	PodExecutionRoleArnRef *v1.Reference `json:"podExecutionRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate podExecutionRoleArn.
 	// +kubebuilder:validation:Optional
 	PodExecutionRoleArnSelector *v1.Selector `json:"podExecutionRoleArnSelector,omitempty" tf:"-"`
 
@@ -62,9 +66,11 @@ type FargateProfileParameters struct {
 	// +kubebuilder:validation:Required
 	Selector []SelectorParameters `json:"selector" tf:"selector,omitempty"`
 
+	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 

@@ -93,7 +93,8 @@ spec:
                                   passwords before storing them in the Data Catalog.
                                 type: string
                               awsKmsKeyIdRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Key in kms to populate
+                                  awsKmsKeyId.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -129,7 +130,8 @@ spec:
                                 - name
                                 type: object
                               awsKmsKeyIdSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Key in kms to populate
+                                  awsKmsKeyId.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -195,7 +197,8 @@ spec:
                                   encryption at rest.
                                 type: string
                               sseAwsKmsKeyIdRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Key in kms to populate
+                                  sseAwsKmsKeyId.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -231,7 +234,8 @@ spec:
                                 - name
                                 type: object
                               sseAwsKmsKeyIdSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Key in kms to populate
+                                  sseAwsKmsKeyId.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object

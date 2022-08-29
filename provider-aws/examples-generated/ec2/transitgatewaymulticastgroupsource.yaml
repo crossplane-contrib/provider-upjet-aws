@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayMulticastGroupSource
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewaymulticastgroupsource
   labels:
     testing.upbound.io/example-name: example
   name: example

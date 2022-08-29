@@ -87,7 +87,7 @@ spec:
                       with.
                     type: string
                   vpcRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VPC in ec2 to populate vpc.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -121,7 +121,7 @@ spec:
                     - name
                     type: object
                   vpcSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VPC in ec2 to populate vpc.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

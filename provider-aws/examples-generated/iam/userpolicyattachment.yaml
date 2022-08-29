@@ -1,6 +1,8 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: UserPolicyAttachment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/userpolicyattachment
   labels:
     testing.upbound.io/example-name: test-attach
   name: test-attach
@@ -18,6 +20,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/userpolicyattachment
   labels:
     testing.upbound.io/example-name: policy
   name: policy
@@ -32,6 +36,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: User
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/userpolicyattachment
   labels:
     testing.upbound.io/example-name: user
   name: user

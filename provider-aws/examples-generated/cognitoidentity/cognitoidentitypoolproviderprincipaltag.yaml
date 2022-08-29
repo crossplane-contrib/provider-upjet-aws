@@ -1,6 +1,8 @@
 apiVersion: cognitoidentity.aws.upbound.io/v1beta1
 kind: CognitoIdentityPoolProviderPrincipalTag
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidentity/v1beta1/cognitoidentitypoolproviderprincipaltag
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -22,6 +24,8 @@ spec:
 apiVersion: cognitoidentity.aws.upbound.io/v1beta1
 kind: Pool
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidentity/v1beta1/cognitoidentitypoolproviderprincipaltag
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -42,6 +46,8 @@ spec:
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: UserPool
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidentity/v1beta1/cognitoidentitypoolproviderprincipaltag
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -57,6 +63,8 @@ spec:
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: UserPoolClient
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidentity/v1beta1/cognitoidentitypoolproviderprincipaltag
   labels:
     testing.upbound.io/example-name: example
   name: example

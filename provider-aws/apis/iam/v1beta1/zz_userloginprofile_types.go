@@ -46,9 +46,11 @@ type UserLoginProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 
+	// Reference to a User to populate user.
 	// +kubebuilder:validation:Optional
 	UserRef *v1.Reference `json:"userRef,omitempty" tf:"-"`
 
+	// Selector for a User to populate user.
 	// +kubebuilder:validation:Optional
 	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
 }

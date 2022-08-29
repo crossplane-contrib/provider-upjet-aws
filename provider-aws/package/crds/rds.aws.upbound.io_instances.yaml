@@ -112,7 +112,7 @@ spec:
                       for additional read replica contraints.
                     type: string
                   dbSubnetGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a SubnetGroup to populate dbSubnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -146,7 +146,7 @@ spec:
                     - name
                     type: object
                   dbSubnetGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a SubnetGroup to populate dbSubnetGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -241,7 +241,7 @@ spec:
                       encrypted replica, set this to the destination KMS ARN.
                     type: string
                   kmsKeyIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Key in kms to populate kmsKeyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -275,7 +275,7 @@ spec:
                     - name
                     type: object
                   kmsKeyIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Key in kms to populate kmsKeyId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -338,7 +338,7 @@ spec:
                       are needed to allow Enhanced Monitoring for RDS Instances.
                     type: string
                   monitoringRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate monitoringRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -372,7 +372,7 @@ spec:
                     - name
                     type: object
                   monitoringRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate monitoringRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -589,6 +589,7 @@ spec:
                   username:
                     type: string
                   vpcSecurityGroupIdRefs:
+                    description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -625,7 +626,8 @@ spec:
                       type: object
                     type: array
                   vpcSecurityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup in ec2 to populate
+                      vpcSecurityGroupIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -28,9 +28,11 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudwatchRoleArn *string `json:"cloudwatchRoleArn,omitempty" tf:"cloudwatch_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate cloudwatchRoleArn.
 	// +kubebuilder:validation:Optional
 	CloudwatchRoleArnRef *v1.Reference `json:"cloudwatchRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate cloudwatchRoleArn.
 	// +kubebuilder:validation:Optional
 	CloudwatchRoleArnSelector *v1.Selector `json:"cloudwatchRoleArnSelector,omitempty" tf:"-"`
 

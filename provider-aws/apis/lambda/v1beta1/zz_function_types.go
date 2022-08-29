@@ -53,9 +53,11 @@ type FileSystemConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Reference to a AccessPoint in efs to populate arn.
 	// +kubebuilder:validation:Optional
 	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
 
+	// Selector for a AccessPoint in efs to populate arn.
 	// +kubebuilder:validation:Optional
 	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
@@ -145,9 +147,11 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
+	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
 	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
+	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
@@ -182,9 +186,11 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
 	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
@@ -197,9 +203,11 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
+	// Reference to a Bucket in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
 	S3BucketRef *v1.Reference `json:"s3BucketRef,omitempty" tf:"-"`
 
+	// Selector for a Bucket in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
 	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
 

@@ -1,6 +1,8 @@
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: DelegationSet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/delegationset
   labels:
     testing.upbound.io/example-name: main
   name: main
@@ -14,6 +16,8 @@ spec:
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: Zone
 metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/delegationset
   labels:
     testing.upbound.io/example-name: primary
   name: primary
@@ -30,6 +34,8 @@ spec:
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: Zone
 metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/delegationset
   labels:
     testing.upbound.io/example-name: secondary
   name: secondary

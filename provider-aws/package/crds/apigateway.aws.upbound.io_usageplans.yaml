@@ -72,7 +72,8 @@ spec:
                             plan.
                           type: string
                         apiIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a RestAPI in apigateway to populate
+                            apiId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -107,7 +108,8 @@ spec:
                           - name
                           type: object
                         apiIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a RestAPI in apigateway to populate
+                            apiId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -152,7 +154,8 @@ spec:
                             in a usage plan.
                           type: string
                         stageRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Stage in apigateway to populate
+                            stage.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -187,7 +190,8 @@ spec:
                           - name
                           type: object
                         stageSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Stage in apigateway to populate
+                            stage.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

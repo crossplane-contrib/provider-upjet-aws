@@ -88,7 +88,7 @@ spec:
                     description: The API identifier.
                     type: string
                   apiIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a API to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -122,7 +122,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a API to populate apiId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -190,7 +190,7 @@ spec:
                       resource to configure a deployment.
                     type: string
                   deploymentIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Deployment to populate deploymentId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -224,7 +224,7 @@ spec:
                     - name
                     type: object
                   deploymentIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Deployment to populate deploymentId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

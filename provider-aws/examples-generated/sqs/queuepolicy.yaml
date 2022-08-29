@@ -1,6 +1,8 @@
 apiVersion: sqs.aws.upbound.io/v1beta1
 kind: QueuePolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queuepolicy
   labels:
     testing.upbound.io/example-name: test
   name: test
@@ -35,6 +37,8 @@ spec:
 apiVersion: sqs.aws.upbound.io/v1beta1
 kind: Queue
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queuepolicy
   labels:
     testing.upbound.io/example-name: q
   name: q

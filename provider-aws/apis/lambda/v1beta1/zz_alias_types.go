@@ -35,9 +35,11 @@ type AliasParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
+	// Reference to a Function to populate functionName.
 	// +kubebuilder:validation:Optional
 	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
 
+	// Selector for a Function to populate functionName.
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 

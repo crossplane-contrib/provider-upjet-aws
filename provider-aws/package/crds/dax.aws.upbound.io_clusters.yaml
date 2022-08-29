@@ -84,7 +84,7 @@ spec:
                       role's permissions to access DynamoDB on your behalf
                     type: string
                   iamRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate iamRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -118,7 +118,7 @@ spec:
                     - name
                     type: object
                   iamRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate iamRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -179,6 +179,7 @@ spec:
                     description: ode cluster, without any read replicas
                     type: number
                   securityGroupIdRefs:
+                    description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -215,7 +216,8 @@ spec:
                       type: object
                     type: array
                   securityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup in ec2 to populate
+                      securityGroupIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

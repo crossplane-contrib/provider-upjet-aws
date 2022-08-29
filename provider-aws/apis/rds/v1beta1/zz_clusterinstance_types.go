@@ -69,9 +69,11 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
+	// Reference to a Cluster in rds to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
+	// Selector for a Cluster in rds to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
@@ -88,9 +90,11 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
+	// Reference to a SubnetGroup to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameRef *v1.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a SubnetGroup to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
@@ -118,9 +122,11 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MonitoringRoleArn *string `json:"monitoringRoleArn,omitempty" tf:"monitoring_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
 	MonitoringRoleArnRef *v1.Reference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
 	MonitoringRoleArnSelector *v1.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
@@ -131,9 +137,11 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
+	// Reference to a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyIDRef *v1.Reference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
 
+	// Selector for a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyIDSelector *v1.Selector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
 

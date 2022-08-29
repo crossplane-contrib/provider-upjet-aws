@@ -68,9 +68,11 @@ type EIPParameters struct {
 	// +kubebuilder:validation:Optional
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
 
+	// Reference to a Instance to populate instance.
 	// +kubebuilder:validation:Optional
 	InstanceRef *v1.Reference `json:"instanceRef,omitempty" tf:"-"`
 
+	// Selector for a Instance to populate instance.
 	// +kubebuilder:validation:Optional
 	InstanceSelector *v1.Selector `json:"instanceSelector,omitempty" tf:"-"`
 
@@ -83,9 +85,11 @@ type EIPParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterface *string `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
+	// Reference to a NetworkInterface to populate networkInterface.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceRef *v1.Reference `json:"networkInterfaceRef,omitempty" tf:"-"`
 
+	// Selector for a NetworkInterface to populate networkInterface.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceSelector *v1.Selector `json:"networkInterfaceSelector,omitempty" tf:"-"`
 

@@ -68,7 +68,7 @@ spec:
                     description: The Amazon Resource Name  of your accelerator.
                     type: string
                   acceleratorArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Accelerator to populate acceleratorArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   acceleratorArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Accelerator to populate acceleratorArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

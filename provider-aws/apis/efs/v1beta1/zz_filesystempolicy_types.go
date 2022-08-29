@@ -30,9 +30,11 @@ type FileSystemPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
+	// Reference to a FileSystem to populate fileSystemId.
 	// +kubebuilder:validation:Optional
 	FileSystemIDRef *v1.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
+	// Selector for a FileSystem to populate fileSystemId.
 	// +kubebuilder:validation:Optional
 	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 

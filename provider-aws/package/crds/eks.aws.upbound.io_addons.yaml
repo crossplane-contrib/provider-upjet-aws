@@ -73,7 +73,7 @@ spec:
                       and underscores .
                     type: string
                   clusterNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Cluster to populate clusterName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -107,7 +107,7 @@ spec:
                     - name
                     type: object
                   clusterNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Cluster to populate clusterName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -168,7 +168,7 @@ spec:
                       IAM role in the Amazon EKS User Guide.
                     type: string
                   serviceAccountRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate serviceAccountRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -202,7 +202,7 @@ spec:
                     - name
                     type: object
                   serviceAccountRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate serviceAccountRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

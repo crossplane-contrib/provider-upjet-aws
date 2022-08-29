@@ -68,7 +68,7 @@ spec:
                     description: ID of the GameLift Build to be deployed on the fleet.
                     type: string
                   buildIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Build to populate buildId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   buildIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Build to populate buildId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -198,7 +198,7 @@ spec:
                       assume.
                     type: string
                   instanceRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate instanceRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -232,7 +232,7 @@ spec:
                     - name
                     type: object
                   instanceRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate instanceRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

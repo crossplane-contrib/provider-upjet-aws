@@ -1,6 +1,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketOwnershipControls
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketownershipcontrols
   labels:
     testing.upbound.io/example-name: example
   name: example

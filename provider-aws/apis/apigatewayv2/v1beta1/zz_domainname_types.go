@@ -30,9 +30,11 @@ type DomainNameConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
+	// Reference to a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
 	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
 
+	// Selector for a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
 	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 

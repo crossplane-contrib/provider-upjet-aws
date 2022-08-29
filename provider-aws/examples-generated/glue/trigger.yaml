@@ -1,6 +1,8 @@
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: Trigger
 metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/trigger
   labels:
     testing.upbound.io/example-name: example
   name: example

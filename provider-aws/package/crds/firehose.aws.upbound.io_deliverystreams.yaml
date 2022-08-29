@@ -172,7 +172,7 @@ spec:
                         roleArn:
                           type: string
                         roleArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Role in iam to populate roleArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -207,7 +207,7 @@ spec:
                           - name
                           type: object
                         roleArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Role in iam to populate roleArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -262,7 +262,8 @@ spec:
                               roleArn:
                                 type: string
                               roleArnRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Role in iam to populate
+                                  roleArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -298,7 +299,8 @@ spec:
                                 - name
                                 type: object
                               roleArnSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Role in iam to populate
+                                  roleArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -369,7 +371,7 @@ spec:
                           description: The ARN of the S3 bucket
                           type: string
                         bucketArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Bucket in s3 to populate bucketArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -404,7 +406,7 @@ spec:
                           - name
                           type: object
                         bucketArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Bucket in s3 to populate bucketArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -744,7 +746,8 @@ spec:
                                     roleArn:
                                       type: string
                                     roleArnRef:
-                                      description: A Reference to a named object.
+                                      description: Reference to a Role in iam to populate
+                                        roleArn.
                                       properties:
                                         name:
                                           description: Name of the referenced object.
@@ -782,7 +785,8 @@ spec:
                                       - name
                                       type: object
                                     roleArnSelector:
-                                      description: A Selector selects an object.
+                                      description: Selector for a Role in iam to populate
+                                        roleArn.
                                       properties:
                                         matchControllerRef:
                                           description: MatchControllerRef ensures
@@ -831,7 +835,8 @@ spec:
                                         your data schema.
                                       type: string
                                     tableNameRef:
-                                      description: A Reference to a named object.
+                                      description: Reference to a CatalogTable in
+                                        glue to populate tableName.
                                       properties:
                                         name:
                                           description: Name of the referenced object.
@@ -869,7 +874,8 @@ spec:
                                       - name
                                       type: object
                                     tableNameSelector:
-                                      description: A Selector selects an object.
+                                      description: Selector for a CatalogTable in
+                                        glue to populate tableName.
                                       properties:
                                         matchControllerRef:
                                           description: MatchControllerRef ensures
@@ -1007,7 +1013,7 @@ spec:
                         roleArn:
                           type: string
                         roleArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Role in iam to populate roleArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1042,7 +1048,7 @@ spec:
                           - name
                           type: object
                         roleArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Role in iam to populate roleArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -1283,7 +1289,7 @@ spec:
                         roleArn:
                           type: string
                         roleArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Role in iam to populate roleArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1318,7 +1324,7 @@ spec:
                           - name
                           type: object
                         roleArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Role in iam to populate roleArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -1493,7 +1499,7 @@ spec:
                         roleArn:
                           type: string
                         roleArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Role in iam to populate roleArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1528,7 +1534,7 @@ spec:
                           - name
                           type: object
                         roleArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Role in iam to populate roleArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -1575,7 +1581,8 @@ spec:
                                 description: The ARN of the S3 bucket
                                 type: string
                               bucketArnRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Bucket in s3 to populate
+                                  bucketArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -1611,7 +1618,8 @@ spec:
                                 - name
                                 type: object
                               bucketArnSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Bucket in s3 to populate
+                                  bucketArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -1711,7 +1719,8 @@ spec:
                               roleArn:
                                 type: string
                               roleArnRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Role in iam to populate
+                                  roleArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -1747,7 +1756,8 @@ spec:
                                 - name
                                 type: object
                               roleArnSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Role in iam to populate
+                                  roleArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -1821,7 +1831,7 @@ spec:
                           description: The ARN of the S3 bucket
                           type: string
                         bucketArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Bucket in s3 to populate bucketArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1856,7 +1866,7 @@ spec:
                           - name
                           type: object
                         bucketArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Bucket in s3 to populate bucketArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -1951,7 +1961,7 @@ spec:
                         roleArn:
                           type: string
                         roleArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Role in iam to populate roleArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1986,7 +1996,7 @@ spec:
                           - name
                           type: object
                         roleArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Role in iam to populate roleArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

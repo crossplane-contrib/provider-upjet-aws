@@ -547,9 +547,11 @@ type OrderedCacheBehaviorFunctionAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 
+	// Reference to a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
 	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
 
+	// Selector for a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
 	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 }
@@ -572,9 +574,11 @@ type OrderedCacheBehaviorLambdaFunctionAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
+	// Reference to a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
 	LambdaArnRef *v1.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
 
+	// Selector for a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
 	LambdaArnSelector *v1.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
 }
@@ -788,9 +792,11 @@ type S3OriginConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	OriginAccessIdentity *string `json:"originAccessIdentity,omitempty" tf:"origin_access_identity,omitempty"`
 
+	// Reference to a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
 	OriginAccessIdentityRef *v1.Reference `json:"originAccessIdentityRef,omitempty" tf:"-"`
 
+	// Selector for a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
 	OriginAccessIdentitySelector *v1.Selector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
 }

@@ -63,9 +63,11 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
+	// Reference to a Cluster to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
+	// Selector for a Cluster to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
@@ -86,9 +88,11 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	NeptuneParameterGroupName *string `json:"neptuneParameterGroupName,omitempty" tf:"neptune_parameter_group_name,omitempty"`
 
+	// Reference to a ParameterGroup to populate neptuneParameterGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneParameterGroupNameRef *v1.Reference `json:"neptuneParameterGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ParameterGroup to populate neptuneParameterGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneParameterGroupNameSelector *v1.Selector `json:"neptuneParameterGroupNameSelector,omitempty" tf:"-"`
 
@@ -97,9 +101,11 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
 
+	// Reference to a SubnetGroup to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameRef *v1.Reference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a SubnetGroup to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameSelector *v1.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
 

@@ -116,9 +116,11 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
+	// Reference to a PlacementGroup in ec2 to populate placementGroup.
 	// +kubebuilder:validation:Optional
 	PlacementGroupRef *v1.Reference `json:"placementGroupRef,omitempty" tf:"-"`
 
+	// Selector for a PlacementGroup in ec2 to populate placementGroup.
 	// +kubebuilder:validation:Optional
 	PlacementGroupSelector *v1.Selector `json:"placementGroupSelector,omitempty" tf:"-"`
 
@@ -138,9 +140,11 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceLinkedRoleArn *string `json:"serviceLinkedRoleArn,omitempty" tf:"service_linked_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate serviceLinkedRoleArn.
 	// +kubebuilder:validation:Optional
 	ServiceLinkedRoleArnRef *v1.Reference `json:"serviceLinkedRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate serviceLinkedRoleArn.
 	// +kubebuilder:validation:Optional
 	ServiceLinkedRoleArnSelector *v1.Selector `json:"serviceLinkedRoleArnSelector,omitempty" tf:"-"`
 
@@ -165,9 +169,11 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCZoneIdentifier []*string `json:"vpcZoneIdentifier,omitempty" tf:"vpc_zone_identifier,omitempty"`
 
+	// References to Subnet in ec2 to populate vpcZoneIdentifier.
 	// +kubebuilder:validation:Optional
 	VPCZoneIdentifierRefs []v1.Reference `json:"vpcZoneIdentifierRefs,omitempty" tf:"-"`
 
+	// Selector for a list of Subnet in ec2 to populate vpcZoneIdentifier.
 	// +kubebuilder:validation:Optional
 	VPCZoneIdentifierSelector *v1.Selector `json:"vpcZoneIdentifierSelector,omitempty" tf:"-"`
 
@@ -285,9 +291,11 @@ type LaunchTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Reference to a LaunchTemplate in ec2 to populate id.
 	// +kubebuilder:validation:Optional
 	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
 
+	// Selector for a LaunchTemplate in ec2 to populate id.
 	// +kubebuilder:validation:Optional
 	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
 
@@ -309,9 +317,11 @@ type LaunchTemplateSpecificationParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
 
+	// Reference to a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
 	LaunchTemplateIDRef *v1.Reference `json:"launchTemplateIdRef,omitempty" tf:"-"`
 
+	// Selector for a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
 	LaunchTemplateIDSelector *v1.Selector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 
@@ -360,9 +370,11 @@ type OverrideLaunchTemplateSpecificationParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
 
+	// Reference to a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
 	LaunchTemplateIDRef *v1.Reference `json:"launchTemplateIdRef,omitempty" tf:"-"`
 
+	// Selector for a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
 	LaunchTemplateIDSelector *v1.Selector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 

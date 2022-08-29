@@ -83,9 +83,11 @@ type NetworkConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
 	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
 	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
@@ -96,9 +98,11 @@ type NetworkConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
+	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
 	SubnetRefs []v1.Reference `json:"subnetRefs,omitempty" tf:"-"`
 
+	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
 	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
 
@@ -158,9 +162,11 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	Cluster *string `json:"cluster,omitempty" tf:"cluster,omitempty"`
 
+	// Reference to a Cluster to populate cluster.
 	// +kubebuilder:validation:Optional
 	ClusterRef *v1.Reference `json:"clusterRef,omitempty" tf:"-"`
 
+	// Selector for a Cluster to populate cluster.
 	// +kubebuilder:validation:Optional
 	ClusterSelector *v1.Selector `json:"clusterSelector,omitempty" tf:"-"`
 
@@ -204,9 +210,11 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRole *string `json:"iamRole,omitempty" tf:"iam_role,omitempty"`
 
+	// Reference to a Role in iam to populate iamRole.
 	// +kubebuilder:validation:Optional
 	IAMRoleRef *v1.Reference `json:"iamRoleRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate iamRole.
 	// +kubebuilder:validation:Optional
 	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 

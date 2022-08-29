@@ -1,6 +1,8 @@
 apiVersion: gamelift.aws.upbound.io/v1beta1
 kind: Fleet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: gamelift/v1beta1/fleet
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -1,6 +1,8 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Route
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/route
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -17,6 +19,8 @@ spec:
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: API
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/route
   labels:
     testing.upbound.io/example-name: example
   name: example

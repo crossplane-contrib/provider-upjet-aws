@@ -70,7 +70,7 @@ spec:
                       to FTPS
                     type: string
                   certificateRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Certificate in acm to populate certificate.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -104,7 +104,7 @@ spec:
                     - name
                     type: object
                   certificateSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Certificate in acm to populate certificate.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -192,7 +192,7 @@ spec:
                             VPC.
                           type: string
                         vpcIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a VPC in ec2 to populate vpcId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -227,7 +227,7 @@ spec:
                           - name
                           type: object
                         vpcIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a VPC in ec2 to populate vpcId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

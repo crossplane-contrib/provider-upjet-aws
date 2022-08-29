@@ -33,9 +33,11 @@ type ApplicationSnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationName *string `json:"applicationName,omitempty" tf:"application_name,omitempty"`
 
+	// Reference to a Application in kinesisanalyticsv2 to populate applicationName.
 	// +kubebuilder:validation:Optional
 	ApplicationNameRef *v1.Reference `json:"applicationNameRef,omitempty" tf:"-"`
 
+	// Selector for a Application in kinesisanalyticsv2 to populate applicationName.
 	// +kubebuilder:validation:Optional
 	ApplicationNameSelector *v1.Selector `json:"applicationNameSelector,omitempty" tf:"-"`
 

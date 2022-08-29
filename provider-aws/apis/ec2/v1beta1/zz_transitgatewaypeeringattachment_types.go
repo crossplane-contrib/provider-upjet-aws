@@ -38,9 +38,11 @@ type TransitGatewayPeeringAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	PeerTransitGatewayID *string `json:"peerTransitGatewayId,omitempty" tf:"peer_transit_gateway_id,omitempty"`
 
+	// Reference to a TransitGateway in ec2 to populate peerTransitGatewayId.
 	// +kubebuilder:validation:Optional
 	PeerTransitGatewayIDRef *v1.Reference `json:"peerTransitGatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a TransitGateway in ec2 to populate peerTransitGatewayId.
 	// +kubebuilder:validation:Optional
 	PeerTransitGatewayIDSelector *v1.Selector `json:"peerTransitGatewayIdSelector,omitempty" tf:"-"`
 
@@ -59,9 +61,11 @@ type TransitGatewayPeeringAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
+	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 }

@@ -26,9 +26,11 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
+	// Reference to a API to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
+	// Selector for a API to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -62,9 +64,11 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
 
+	// Reference to a Function in lambda to populate authorizerUri.
 	// +kubebuilder:validation:Optional
 	AuthorizerURIRef *v1.Reference `json:"authorizerUriRef,omitempty" tf:"-"`
 
+	// Selector for a Function in lambda to populate authorizerUri.
 	// +kubebuilder:validation:Optional
 	AuthorizerURISelector *v1.Selector `json:"authorizerUriSelector,omitempty" tf:"-"`
 

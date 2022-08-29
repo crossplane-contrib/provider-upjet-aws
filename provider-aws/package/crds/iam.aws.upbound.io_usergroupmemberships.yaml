@@ -66,6 +66,7 @@ spec:
               forProvider:
                 properties:
                   groupRefs:
+                    description: References to Group to populate groups.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -102,7 +103,7 @@ spec:
                       type: object
                     type: array
                   groupSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of Group to populate groups.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -149,7 +150,7 @@ spec:
                     description: The name of the IAM User to add to groups
                     type: string
                   userRef:
-                    description: A Reference to a named object.
+                    description: Reference to a User to populate user.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -183,7 +184,7 @@ spec:
                     - name
                     type: object
                   userSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a User to populate user.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

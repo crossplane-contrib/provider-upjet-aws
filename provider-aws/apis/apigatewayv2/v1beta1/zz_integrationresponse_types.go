@@ -26,9 +26,11 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
+	// Reference to a API to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
+	// Selector for a API to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -41,9 +43,11 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	IntegrationID *string `json:"integrationId,omitempty" tf:"integration_id,omitempty"`
 
+	// Reference to a Integration to populate integrationId.
 	// +kubebuilder:validation:Optional
 	IntegrationIDRef *v1.Reference `json:"integrationIdRef,omitempty" tf:"-"`
 
+	// Selector for a Integration to populate integrationId.
 	// +kubebuilder:validation:Optional
 	IntegrationIDSelector *v1.Selector `json:"integrationIdSelector,omitempty" tf:"-"`
 

@@ -1,6 +1,8 @@
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: VPCAssociationAuthorization
 metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/vpcassociationauthorization
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -19,6 +21,8 @@ spec:
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: Zone
 metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/vpcassociationauthorization
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -32,6 +36,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/vpcassociationauthorization
   labels:
     testing.upbound.io/example-name: alternate
   name: alternate
@@ -48,6 +54,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/vpcassociationauthorization
   labels:
     testing.upbound.io/example-name: example
   name: example

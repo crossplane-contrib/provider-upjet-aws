@@ -1,6 +1,8 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: UserLoginProfile
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/userloginprofile
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -16,6 +18,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: User
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/userloginprofile
   labels:
     testing.upbound.io/example-name: example
   name: example

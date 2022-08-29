@@ -23,9 +23,11 @@ type DestinationConfigOnFailureParameters struct {
 	// +kubebuilder:validation:Optional
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
+	// Reference to a Queue in sqs to populate destination.
 	// +kubebuilder:validation:Optional
 	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
 
+	// Selector for a Queue in sqs to populate destination.
 	// +kubebuilder:validation:Optional
 	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
 }
@@ -88,9 +90,11 @@ type OnSuccessParameters struct {
 	// +kubebuilder:validation:Optional
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
+	// Reference to a Topic in sns to populate destination.
 	// +kubebuilder:validation:Optional
 	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
 
+	// Selector for a Topic in sns to populate destination.
 	// +kubebuilder:validation:Optional
 	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
 }

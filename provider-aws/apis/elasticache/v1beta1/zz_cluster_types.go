@@ -115,9 +115,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
+	// Reference to a ParameterGroup to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
 	ParameterGroupNameRef *v1.Reference `json:"parameterGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ParameterGroup to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
 	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
@@ -167,9 +169,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
+	// Reference to a SubnetGroup to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
 	SubnetGroupNameRef *v1.Reference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a SubnetGroup to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
 	SubnetGroupNameSelector *v1.Selector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 

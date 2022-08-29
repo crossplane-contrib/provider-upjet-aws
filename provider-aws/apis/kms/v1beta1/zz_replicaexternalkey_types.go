@@ -54,9 +54,11 @@ type ReplicaExternalKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	PrimaryKeyArn *string `json:"primaryKeyArn,omitempty" tf:"primary_key_arn,omitempty"`
 
+	// Reference to a ExternalKey to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
 	PrimaryKeyArnRef *v1.Reference `json:"primaryKeyArnRef,omitempty" tf:"-"`
 
+	// Selector for a ExternalKey to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
 	PrimaryKeyArnSelector *v1.Selector `json:"primaryKeyArnSelector,omitempty" tf:"-"`
 

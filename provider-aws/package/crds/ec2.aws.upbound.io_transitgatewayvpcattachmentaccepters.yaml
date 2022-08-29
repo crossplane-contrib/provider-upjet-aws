@@ -81,7 +81,8 @@ spec:
                     description: The ID of the EC2 Transit Gateway Attachment to manage.
                     type: string
                   transitGatewayAttachmentIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a TransitGatewayVPCAttachment to populate
+                      transitGatewayAttachmentId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -115,7 +116,8 @@ spec:
                     - name
                     type: object
                   transitGatewayAttachmentIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a TransitGatewayVPCAttachment to populate
+                      transitGatewayAttachmentId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

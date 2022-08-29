@@ -98,9 +98,11 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Optional
 	HealthCheckID *string `json:"healthCheckId,omitempty" tf:"health_check_id,omitempty"`
 
+	// Reference to a HealthCheck to populate healthCheckId.
 	// +kubebuilder:validation:Optional
 	HealthCheckIDRef *v1.Reference `json:"healthCheckIdRef,omitempty" tf:"-"`
 
+	// Selector for a HealthCheck to populate healthCheckId.
 	// +kubebuilder:validation:Optional
 	HealthCheckIDSelector *v1.Selector `json:"healthCheckIdSelector,omitempty" tf:"-"`
 
@@ -144,9 +146,11 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
+	// Reference to a Zone to populate zoneId.
 	// +kubebuilder:validation:Optional
 	ZoneIDRef *v1.Reference `json:"zoneIdRef,omitempty" tf:"-"`
 
+	// Selector for a Zone to populate zoneId.
 	// +kubebuilder:validation:Optional
 	ZoneIDSelector *v1.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
 }

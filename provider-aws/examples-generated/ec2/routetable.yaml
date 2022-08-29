@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: RouteTable
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/routetable
   labels:
     testing.upbound.io/example-name: example
   name: example

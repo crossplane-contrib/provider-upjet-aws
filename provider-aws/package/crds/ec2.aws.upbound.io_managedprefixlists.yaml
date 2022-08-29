@@ -77,7 +77,8 @@ spec:
                           description: CIDR block of this entry.
                           type: string
                         cidrRef:
-                          description: A Reference to a named object.
+                          description: Reference to a VPCIPv4CidrBlockAssociation
+                            in ec2 to populate cidr.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -112,7 +113,8 @@ spec:
                           - name
                           type: object
                         cidrSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a VPCIPv4CidrBlockAssociation
+                            in ec2 to populate cidr.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

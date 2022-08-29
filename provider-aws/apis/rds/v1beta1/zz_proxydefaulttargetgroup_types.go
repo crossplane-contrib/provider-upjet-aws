@@ -62,9 +62,11 @@ type ProxyDefaultTargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
 
+	// Reference to a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
 	DBProxyNameRef *v1.Reference `json:"dbProxyNameRef,omitempty" tf:"-"`
 
+	// Selector for a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
 	DBProxyNameSelector *v1.Selector `json:"dbProxyNameSelector,omitempty" tf:"-"`
 

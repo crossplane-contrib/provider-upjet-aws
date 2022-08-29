@@ -79,7 +79,8 @@ spec:
                               destination:
                                 type: string
                               destinationRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Queue in sqs to populate
+                                  destination.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -115,7 +116,8 @@ spec:
                                 - name
                                 type: object
                               destinationSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Queue in sqs to populate
+                                  destination.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -167,7 +169,8 @@ spec:
                               destination:
                                 type: string
                               destinationRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Topic in sns to populate
+                                  destination.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -203,7 +206,8 @@ spec:
                                 - name
                                 type: object
                               destinationSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Topic in sns to populate
+                                  destination.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object

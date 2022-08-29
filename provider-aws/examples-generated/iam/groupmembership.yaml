@@ -1,6 +1,8 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: GroupMembership
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/groupmembership
   labels:
     testing.upbound.io/example-name: team
   name: team
@@ -19,6 +21,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Group
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/groupmembership
   labels:
     testing.upbound.io/example-name: group
   name: group
@@ -30,6 +34,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: User
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/groupmembership
   labels:
     testing.upbound.io/example-name: user_one
   name: user-one
@@ -41,6 +47,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: User
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/groupmembership
   labels:
     testing.upbound.io/example-name: user_two
   name: user-two

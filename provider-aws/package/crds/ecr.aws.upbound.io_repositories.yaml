@@ -79,7 +79,7 @@ spec:
                             key for ECR.
                           type: string
                         kmsKeyRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Key in kms to populate kmsKey.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -114,7 +114,7 @@ spec:
                           - name
                           type: object
                         kmsKeySelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Key in kms to populate kmsKey.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

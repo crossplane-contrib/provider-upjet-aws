@@ -1,6 +1,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketObjectLockConfiguration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketobjectlockconfiguration
   labels:
     testing.upbound.io/example-name: example
   name: example

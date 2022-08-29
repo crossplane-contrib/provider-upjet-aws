@@ -75,7 +75,7 @@ spec:
                         roleArn:
                           type: string
                         roleArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Role in iam to populate roleArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -110,7 +110,7 @@ spec:
                           - name
                           type: object
                         roleArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Role in iam to populate roleArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -183,7 +183,8 @@ spec:
                               resourceArn:
                                 type: string
                               resourceArnRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Stream in kinesis to populate
+                                  resourceArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -219,7 +220,8 @@ spec:
                                 - name
                                 type: object
                               resourceArnSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Stream in kinesis to populate
+                                  resourceArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -263,7 +265,8 @@ spec:
                               roleArn:
                                 type: string
                               roleArnRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Role in iam to populate
+                                  roleArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -299,7 +302,8 @@ spec:
                                 - name
                                 type: object
                               roleArnSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Role in iam to populate
+                                  roleArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -489,7 +493,8 @@ spec:
                               resourceArn:
                                 type: string
                               resourceArnRef:
-                                description: A Reference to a named object.
+                                description: Reference to a DeliveryStream in firehose
+                                  to populate resourceArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -525,7 +530,8 @@ spec:
                                 - name
                                 type: object
                               resourceArnSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a DeliveryStream in firehose
+                                  to populate resourceArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -569,7 +575,8 @@ spec:
                               roleArn:
                                 type: string
                               roleArnRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Role in iam to populate
+                                  roleArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -605,7 +612,8 @@ spec:
                                 - name
                                 type: object
                               roleArnSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Role in iam to populate
+                                  roleArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object

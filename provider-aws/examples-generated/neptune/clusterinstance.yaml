@@ -1,6 +1,8 @@
 apiVersion: neptune.aws.upbound.io/v1beta1
 kind: ClusterInstance
 metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/clusterinstance
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -20,6 +22,8 @@ spec:
 apiVersion: neptune.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/clusterinstance
   labels:
     testing.upbound.io/example-name: default
   name: default

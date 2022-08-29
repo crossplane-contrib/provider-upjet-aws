@@ -1,6 +1,8 @@
 apiVersion: resourcegroups.aws.upbound.io/v1beta1
 kind: Group
 metadata:
+  annotations:
+    meta.upbound.io/example-id: resourcegroups/v1beta1/group
   labels:
     testing.upbound.io/example-name: test
   name: test

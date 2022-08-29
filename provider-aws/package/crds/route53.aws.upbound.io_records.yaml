@@ -131,7 +131,7 @@ spec:
                       with.
                     type: string
                   healthCheckIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a HealthCheck to populate healthCheckId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -165,7 +165,7 @@ spec:
                     - name
                     type: object
                   healthCheckIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a HealthCheck to populate healthCheckId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -263,7 +263,7 @@ spec:
                   zoneId:
                     type: string
                   zoneIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Zone to populate zoneId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -297,7 +297,7 @@ spec:
                     - name
                     type: object
                   zoneIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Zone to populate zoneId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

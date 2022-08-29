@@ -27,9 +27,11 @@ type ManagedPrefixListEntryParameters struct {
 	// +kubebuilder:validation:Optional
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
+	// Reference to a VPC in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
 	CidrRef *v1.Reference `json:"cidrRef,omitempty" tf:"-"`
 
+	// Selector for a VPC in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
 	CidrSelector *v1.Selector `json:"cidrSelector,omitempty" tf:"-"`
 
@@ -43,9 +45,11 @@ type ManagedPrefixListEntryParameters struct {
 	// +kubebuilder:validation:Optional
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
+	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
 	PrefixListIDRef *v1.Reference `json:"prefixListIdRef,omitempty" tf:"-"`
 
+	// Selector for a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
 	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
 

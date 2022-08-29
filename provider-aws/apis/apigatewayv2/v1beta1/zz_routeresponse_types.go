@@ -26,9 +26,11 @@ type RouteResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
+	// Reference to a API to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
+	// Selector for a API to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -50,9 +52,11 @@ type RouteResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	RouteID *string `json:"routeId,omitempty" tf:"route_id,omitempty"`
 
+	// Reference to a Route to populate routeId.
 	// +kubebuilder:validation:Optional
 	RouteIDRef *v1.Reference `json:"routeIdRef,omitempty" tf:"-"`
 
+	// Selector for a Route to populate routeId.
 	// +kubebuilder:validation:Optional
 	RouteIDSelector *v1.Selector `json:"routeIdSelector,omitempty" tf:"-"`
 

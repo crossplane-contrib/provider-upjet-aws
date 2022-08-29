@@ -1,6 +1,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketServerSideEncryptionConfiguration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketserversideencryptionconfiguration
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -22,6 +24,8 @@ spec:
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Key
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketserversideencryptionconfiguration
   labels:
     testing.upbound.io/example-name: mykey
   name: mykey

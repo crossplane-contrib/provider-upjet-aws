@@ -130,7 +130,7 @@ spec:
                       be subscribing to events.
                     type: string
                   functionNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Function to populate functionName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -164,7 +164,7 @@ spec:
                     - name
                     type: object
                   functionNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Function to populate functionName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

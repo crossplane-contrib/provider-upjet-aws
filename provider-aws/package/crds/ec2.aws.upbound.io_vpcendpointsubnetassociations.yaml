@@ -75,7 +75,7 @@ spec:
                       endpoint.
                     type: string
                   subnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet in ec2 to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -109,7 +109,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet in ec2 to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -152,7 +152,7 @@ spec:
                       will be associated.
                     type: string
                   vpcEndpointIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -186,7 +186,7 @@ spec:
                     - name
                     type: object
                   vpcEndpointIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

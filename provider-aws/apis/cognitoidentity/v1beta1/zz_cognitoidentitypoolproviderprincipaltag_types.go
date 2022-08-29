@@ -25,9 +25,11 @@ type CognitoIdentityPoolProviderPrincipalTagParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
 
+	// Reference to a Pool in cognitoidentity to populate identityPoolId.
 	// +kubebuilder:validation:Optional
 	IdentityPoolIDRef *v1.Reference `json:"identityPoolIdRef,omitempty" tf:"-"`
 
+	// Selector for a Pool in cognitoidentity to populate identityPoolId.
 	// +kubebuilder:validation:Optional
 	IdentityPoolIDSelector *v1.Selector `json:"identityPoolIdSelector,omitempty" tf:"-"`
 
@@ -37,9 +39,11 @@ type CognitoIdentityPoolProviderPrincipalTagParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityProviderName *string `json:"identityProviderName,omitempty" tf:"identity_provider_name,omitempty"`
 
+	// Reference to a UserPool in cognitoidp to populate identityProviderName.
 	// +kubebuilder:validation:Optional
 	IdentityProviderNameRef *v1.Reference `json:"identityProviderNameRef,omitempty" tf:"-"`
 
+	// Selector for a UserPool in cognitoidp to populate identityProviderName.
 	// +kubebuilder:validation:Optional
 	IdentityProviderNameSelector *v1.Selector `json:"identityProviderNameSelector,omitempty" tf:"-"`
 

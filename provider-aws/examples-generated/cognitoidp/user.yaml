@@ -1,6 +1,8 @@
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: User
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/user
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -16,6 +18,8 @@ spec:
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: UserPool
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/user
   labels:
     testing.upbound.io/example-name: example
   name: example

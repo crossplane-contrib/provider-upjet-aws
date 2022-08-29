@@ -121,7 +121,7 @@ spec:
                     description: Name of the RDS DB Proxy.
                     type: string
                   dbProxyNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Proxy in rds to populate dbProxyName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -155,7 +155,7 @@ spec:
                     - name
                     type: object
                   dbProxyNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Proxy in rds to populate dbProxyName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

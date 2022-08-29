@@ -75,7 +75,7 @@ spec:
                     description: The ARN of the SNS topic for the notifications.
                     type: string
                   connectionNotificationArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Topic in sns to populate connectionNotificationArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -109,7 +109,7 @@ spec:
                     - name
                     type: object
                   connectionNotificationArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Topic in sns to populate connectionNotificationArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -160,7 +160,8 @@ spec:
                       for.
                     type: string
                   vpcEndpointServiceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VPCEndpointService in ec2 to populate
+                      vpcEndpointServiceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -194,7 +195,8 @@ spec:
                     - name
                     type: object
                   vpcEndpointServiceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VPCEndpointService in ec2 to populate
+                      vpcEndpointServiceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

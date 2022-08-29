@@ -1,6 +1,8 @@
 apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: Table
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/table
   labels:
     testing.upbound.io/example-name: basic-dynamodb-table
   name: basic-dynamodb-table

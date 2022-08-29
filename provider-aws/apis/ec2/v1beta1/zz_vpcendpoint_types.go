@@ -94,9 +94,11 @@ type VPCEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
+	// Reference to a VPCEndpointService in ec2 to populate serviceName.
 	// +kubebuilder:validation:Optional
 	ServiceNameRef *v1.Reference `json:"serviceNameRef,omitempty" tf:"-"`
 
+	// Selector for a VPCEndpointService in ec2 to populate serviceName.
 	// +kubebuilder:validation:Optional
 	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 
@@ -113,9 +115,11 @@ type VPCEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
+	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }

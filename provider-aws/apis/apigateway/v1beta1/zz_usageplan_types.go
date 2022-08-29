@@ -24,9 +24,11 @@ type APIStagesParameters struct {
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
+	// Reference to a RestAPI in apigateway to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
+	// Selector for a RestAPI in apigateway to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -36,9 +38,11 @@ type APIStagesParameters struct {
 	// +kubebuilder:validation:Optional
 	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
 
+	// Reference to a Stage in apigateway to populate stage.
 	// +kubebuilder:validation:Optional
 	StageRef *v1.Reference `json:"stageRef,omitempty" tf:"-"`
 
+	// Selector for a Stage in apigateway to populate stage.
 	// +kubebuilder:validation:Optional
 	StageSelector *v1.Selector `json:"stageSelector,omitempty" tf:"-"`
 

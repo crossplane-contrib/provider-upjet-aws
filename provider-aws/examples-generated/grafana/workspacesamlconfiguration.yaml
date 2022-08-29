@@ -1,6 +1,8 @@
 apiVersion: grafana.aws.upbound.io/v1beta1
 kind: WorkspaceSAMLConfiguration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: grafana/v1beta1/workspacesamlconfiguration
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -19,6 +21,8 @@ spec:
 apiVersion: grafana.aws.upbound.io/v1beta1
 kind: Workspace
 metadata:
+  annotations:
+    meta.upbound.io/example-id: grafana/v1beta1/workspacesamlconfiguration
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -38,6 +42,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
+  annotations:
+    meta.upbound.io/example-id: grafana/v1beta1/workspacesamlconfiguration
   labels:
     testing.upbound.io/example-name: assume
   name: assume

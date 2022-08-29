@@ -1,6 +1,8 @@
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: UserPoolClient
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/userpoolclient
   labels:
     testing.upbound.io/example-name: client
   name: client
@@ -17,6 +19,8 @@ spec:
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: UserPool
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/userpoolclient
   labels:
     testing.upbound.io/example-name: pool
   name: pool

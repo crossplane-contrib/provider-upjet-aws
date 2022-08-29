@@ -68,7 +68,7 @@ spec:
                     description: The API identifier.
                     type: string
                   apiIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a API to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a API to populate apiId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -146,7 +146,8 @@ spec:
                       in length.
                     type: string
                   connectionIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VPCLink in apigatewayv2 to populate
+                      connectionId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -180,7 +181,8 @@ spec:
                     - name
                     type: object
                   connectionIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VPCLink in apigatewayv2 to populate
+                      connectionId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -232,7 +234,7 @@ spec:
                       any.
                     type: string
                   credentialsArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate credentialsArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -266,7 +268,7 @@ spec:
                     - name
                     type: object
                   credentialsArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate credentialsArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -331,7 +333,7 @@ spec:
                       Map service.
                     type: string
                   integrationUriRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Function in lambda to populate integrationUri.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -365,7 +367,7 @@ spec:
                     - name
                     type: object
                   integrationUriSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Function in lambda to populate integrationUri.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

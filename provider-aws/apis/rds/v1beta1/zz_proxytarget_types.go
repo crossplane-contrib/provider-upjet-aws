@@ -49,9 +49,11 @@ type ProxyTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
 
+	// Reference to a Instance in rds to populate dbInstanceIdentifier.
 	// +kubebuilder:validation:Optional
 	DBInstanceIdentifierRef *v1.Reference `json:"dbInstanceIdentifierRef,omitempty" tf:"-"`
 
+	// Selector for a Instance in rds to populate dbInstanceIdentifier.
 	// +kubebuilder:validation:Optional
 	DBInstanceIdentifierSelector *v1.Selector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
@@ -60,9 +62,11 @@ type ProxyTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
 
+	// Reference to a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
 	DBProxyNameRef *v1.Reference `json:"dbProxyNameRef,omitempty" tf:"-"`
 
+	// Selector for a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
 	DBProxyNameSelector *v1.Selector `json:"dbProxyNameSelector,omitempty" tf:"-"`
 

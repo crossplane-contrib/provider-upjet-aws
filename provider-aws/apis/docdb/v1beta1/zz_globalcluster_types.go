@@ -75,9 +75,11 @@ type GlobalClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceDBClusterIdentifier *string `json:"sourceDbClusterIdentifier,omitempty" tf:"source_db_cluster_identifier,omitempty"`
 
+	// Reference to a Cluster in docdb to populate sourceDbClusterIdentifier.
 	// +kubebuilder:validation:Optional
 	SourceDBClusterIdentifierRef *v1.Reference `json:"sourceDbClusterIdentifierRef,omitempty" tf:"-"`
 
+	// Selector for a Cluster in docdb to populate sourceDbClusterIdentifier.
 	// +kubebuilder:validation:Optional
 	SourceDBClusterIdentifierSelector *v1.Selector `json:"sourceDbClusterIdentifierSelector,omitempty" tf:"-"`
 

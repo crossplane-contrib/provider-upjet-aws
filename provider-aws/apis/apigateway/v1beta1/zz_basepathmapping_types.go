@@ -25,9 +25,11 @@ type BasePathMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
+	// Reference to a RestAPI in apigateway to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
+	// Selector for a RestAPI in apigateway to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -41,9 +43,11 @@ type BasePathMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
+	// Reference to a DomainName in apigateway to populate domainName.
 	// +kubebuilder:validation:Optional
 	DomainNameRef *v1.Reference `json:"domainNameRef,omitempty" tf:"-"`
 
+	// Selector for a DomainName in apigateway to populate domainName.
 	// +kubebuilder:validation:Optional
 	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
 
@@ -58,9 +62,11 @@ type BasePathMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
+	// Reference to a Stage in apigateway to populate stageName.
 	// +kubebuilder:validation:Optional
 	StageNameRef *v1.Reference `json:"stageNameRef,omitempty" tf:"-"`
 
+	// Selector for a Stage in apigateway to populate stageName.
 	// +kubebuilder:validation:Optional
 	StageNameSelector *v1.Selector `json:"stageNameSelector,omitempty" tf:"-"`
 }

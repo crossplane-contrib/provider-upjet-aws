@@ -1,6 +1,8 @@
 apiVersion: autoscaling.aws.upbound.io/v1beta1
 kind: Attachment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscaling/v1beta1/attachment
   labels:
     testing.upbound.io/example-name: asg_attachment_bar
   name: asg-attachment-bar

@@ -1,6 +1,8 @@
 apiVersion: lakeformation.aws.upbound.io/v1beta1
 kind: Resource
 metadata:
+  annotations:
+    meta.upbound.io/example-id: lakeformation/v1beta1/resource
   labels:
     testing.upbound.io/example-name: example
   name: example

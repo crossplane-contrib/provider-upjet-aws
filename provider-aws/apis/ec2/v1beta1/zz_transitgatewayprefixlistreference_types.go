@@ -33,9 +33,11 @@ type TransitGatewayPrefixListReferenceParameters struct {
 	// +kubebuilder:validation:Optional
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
+	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
 	PrefixListIDRef *v1.Reference `json:"prefixListIdRef,omitempty" tf:"-"`
 
+	// Selector for a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
 	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
@@ -50,9 +52,11 @@ type TransitGatewayPrefixListReferenceParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
+	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
+	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
@@ -62,9 +66,11 @@ type TransitGatewayPrefixListReferenceParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 
+	// Reference to a TransitGateway in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableIDRef *v1.Reference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
 
+	// Selector for a TransitGateway in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableIDSelector *v1.Selector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
 }

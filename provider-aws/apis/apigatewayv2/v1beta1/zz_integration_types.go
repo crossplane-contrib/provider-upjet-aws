@@ -29,9 +29,11 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
+	// Reference to a API to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
+	// Selector for a API to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -41,9 +43,11 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
+	// Reference to a VPCLink in apigatewayv2 to populate connectionId.
 	// +kubebuilder:validation:Optional
 	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPCLink in apigatewayv2 to populate connectionId.
 	// +kubebuilder:validation:Optional
 	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
@@ -61,9 +65,11 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsArn *string `json:"credentialsArn,omitempty" tf:"credentials_arn,omitempty"`
 
+	// Reference to a Role in iam to populate credentialsArn.
 	// +kubebuilder:validation:Optional
 	CredentialsArnRef *v1.Reference `json:"credentialsArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate credentialsArn.
 	// +kubebuilder:validation:Optional
 	CredentialsArnSelector *v1.Selector `json:"credentialsArnSelector,omitempty" tf:"-"`
 
@@ -91,9 +97,11 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	IntegrationURI *string `json:"integrationUri,omitempty" tf:"integration_uri,omitempty"`
 
+	// Reference to a Function in lambda to populate integrationUri.
 	// +kubebuilder:validation:Optional
 	IntegrationURIRef *v1.Reference `json:"integrationUriRef,omitempty" tf:"-"`
 
+	// Selector for a Function in lambda to populate integrationUri.
 	// +kubebuilder:validation:Optional
 	IntegrationURISelector *v1.Selector `json:"integrationUriSelector,omitempty" tf:"-"`
 

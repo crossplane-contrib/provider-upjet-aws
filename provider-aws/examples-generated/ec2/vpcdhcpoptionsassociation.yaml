@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCDHCPOptionsAssociation
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcdhcpoptionsassociation
   labels:
     testing.upbound.io/example-name: dns_resolver
   name: dns-resolver

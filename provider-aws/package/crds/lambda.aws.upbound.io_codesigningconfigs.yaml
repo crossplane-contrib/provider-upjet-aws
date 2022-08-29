@@ -77,6 +77,8 @@ spec:
                             type: string
                           type: array
                         signingProfileVersionArnsRefs:
+                          description: References to SigningProfile in signer to populate
+                            signingProfileVersionArns.
                           items:
                             description: A Reference to a named object.
                             properties:
@@ -115,7 +117,8 @@ spec:
                             type: object
                           type: array
                         signingProfileVersionArnsSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a list of SigningProfile in signer
+                            to populate signingProfileVersionArns.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

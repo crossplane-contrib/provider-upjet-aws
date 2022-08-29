@@ -81,7 +81,7 @@ spec:
                         jobName:
                           type: string
                         jobNameRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Job in glue to populate jobName.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -116,7 +116,7 @@ spec:
                           - name
                           type: object
                         jobNameSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Job in glue to populate jobName.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -223,7 +223,8 @@ spec:
                               jobName:
                                 type: string
                               jobNameRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Job in glue to populate
+                                  jobName.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -259,7 +260,8 @@ spec:
                                 - name
                                 type: object
                               jobNameSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Job in glue to populate
+                                  jobName.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object

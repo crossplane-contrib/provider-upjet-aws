@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: EgressOnlyInternetGateway
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/egressonlyinternetgateway
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -18,6 +20,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/egressonlyinternetgateway
   labels:
     testing.upbound.io/example-name: example
   name: example

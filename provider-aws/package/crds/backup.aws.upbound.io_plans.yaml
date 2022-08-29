@@ -171,7 +171,8 @@ spec:
                             are stored.
                           type: string
                         targetVaultNameRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Vault in backup to populate
+                            targetVaultName.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -206,7 +207,8 @@ spec:
                           - name
                           type: object
                         targetVaultNameSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Vault in backup to populate
+                            targetVaultName.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

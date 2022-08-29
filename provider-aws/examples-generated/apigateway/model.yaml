@@ -1,6 +1,8 @@
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Model
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/model
   labels:
     testing.upbound.io/example-name: MyDemoModel
   name: mydemomodel
@@ -23,6 +25,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: RestAPI
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/model
   labels:
     testing.upbound.io/example-name: MyDemoAPI
   name: mydemoapi

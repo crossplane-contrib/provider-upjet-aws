@@ -68,7 +68,7 @@ spec:
                     description: –  Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Cluster to populate clusterName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   clusterNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Cluster to populate clusterName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

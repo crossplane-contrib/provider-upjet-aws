@@ -1,6 +1,8 @@
 apiVersion: ecr.aws.upbound.io/v1beta1
 kind: RegistryPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ecr/v1beta1/registrypolicy
   labels:
     testing.upbound.io/example-name: example
   name: example

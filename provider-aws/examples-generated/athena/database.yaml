@@ -1,6 +1,8 @@
 apiVersion: athena.aws.upbound.io/v1beta1
 kind: Database
 metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/database
   labels:
     testing.upbound.io/example-name: example
   name: example

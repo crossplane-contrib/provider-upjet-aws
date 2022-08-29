@@ -1,6 +1,8 @@
 apiVersion: efs.aws.upbound.io/v1beta1
 kind: BackupPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/backuppolicy
   labels:
     testing.upbound.io/example-name: policy
   name: policy
@@ -18,6 +20,8 @@ spec:
 apiVersion: efs.aws.upbound.io/v1beta1
 kind: FileSystem
 metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/backuppolicy
   labels:
     testing.upbound.io/example-name: fs
   name: fs

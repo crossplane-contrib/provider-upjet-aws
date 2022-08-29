@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayPeeringAttachment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewaypeeringattachment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -23,6 +25,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGateway
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewaypeeringattachment
   labels:
     testing.upbound.io/example-name: local
   name: local
@@ -38,6 +42,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGateway
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewaypeeringattachment
   labels:
     testing.upbound.io/example-name: peer
   name: peer

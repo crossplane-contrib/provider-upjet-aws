@@ -75,7 +75,8 @@ spec:
                             resource to configure an ACM certificate.
                           type: string
                         certificateArnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Certificate in acm to populate
+                            certificateArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -110,7 +111,8 @@ spec:
                           - name
                           type: object
                         certificateArnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Certificate in acm to populate
+                            certificateArn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

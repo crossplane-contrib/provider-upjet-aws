@@ -194,9 +194,11 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnRef *v1.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 

@@ -78,7 +78,8 @@ spec:
                     description: The ID of the REST API
                     type: string
                   restApiIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a RestAPI in apigateway to populate
+                      restApiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +113,8 @@ spec:
                     - name
                     type: object
                   restApiIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a RestAPI in apigateway to populate
+                      restApiId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -205,7 +207,7 @@ spec:
                     description: The name of the stage
                     type: string
                   stageNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Stage in apigateway to populate stageName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -239,7 +241,7 @@ spec:
                     - name
                     type: object
                   stageNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Stage in apigateway to populate stageName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

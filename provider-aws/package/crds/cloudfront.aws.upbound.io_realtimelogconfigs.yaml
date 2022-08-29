@@ -80,7 +80,8 @@ spec:
                                   information.
                                 type: string
                               roleArnRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Role in iam to populate
+                                  roleArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -116,7 +117,8 @@ spec:
                                 - name
                                 type: object
                               roleArnSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Role in iam to populate
+                                  roleArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -161,7 +163,8 @@ spec:
                                 description: The ARN of the Kinesis data stream.
                                 type: string
                               streamArnRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Stream in kinesis to populate
+                                  streamArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -197,7 +200,8 @@ spec:
                                 - name
                                 type: object
                               streamArnSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Stream in kinesis to populate
+                                  streamArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object

@@ -77,7 +77,8 @@ spec:
                     description: Name of the repository to apply the policy.
                     type: string
                   repositoryNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Repository in ecrpublic to populate
+                      repositoryName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +112,8 @@ spec:
                     - name
                     type: object
                   repositoryNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Repository in ecrpublic to populate
+                      repositoryName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

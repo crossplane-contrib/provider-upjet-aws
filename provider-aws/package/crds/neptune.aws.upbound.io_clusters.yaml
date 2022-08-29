@@ -111,6 +111,7 @@ spec:
                       and Access Management  accounts to database accounts is enabled.
                     type: boolean
                   iamRoleRefs:
+                    description: References to Role in iam to populate iamRoles.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -147,7 +148,7 @@ spec:
                       type: object
                     type: array
                   iamRoleSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of Role in iam to populate iamRoles.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -196,7 +197,7 @@ spec:
                       kms_key_arn, storage_encrypted needs to be set to true.
                     type: string
                   kmsKeyArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Key in kms to populate kmsKeyArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -230,7 +231,7 @@ spec:
                     - name
                     type: object
                   kmsKeyArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Key in kms to populate kmsKeyArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -272,7 +273,8 @@ spec:
                     description: A cluster parameter group to associate with the cluster.
                     type: string
                   neptuneClusterParameterGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ClusterParameterGroup to populate
+                      neptuneClusterParameterGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -306,7 +308,8 @@ spec:
                     - name
                     type: object
                   neptuneClusterParameterGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ClusterParameterGroup to populate
+                      neptuneClusterParameterGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -349,7 +352,7 @@ spec:
                       instance.
                     type: string
                   neptuneSubnetGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a SubnetGroup to populate neptuneSubnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -383,7 +386,7 @@ spec:
                     - name
                     type: object
                   neptuneSubnetGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a SubnetGroup to populate neptuneSubnetGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -444,7 +447,7 @@ spec:
                       if this Neptune cluster is to be created as a Read Replica.
                     type: string
                   replicationSourceIdentifierRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Cluster to populate replicationSourceIdentifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -478,7 +481,7 @@ spec:
                     - name
                     type: object
                   replicationSourceIdentifierSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Cluster to populate replicationSourceIdentifier.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -530,7 +533,7 @@ spec:
                       snapshot.
                     type: string
                   snapshotIdentifierRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ClusterSnapshot to populate snapshotIdentifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -564,7 +567,7 @@ spec:
                     - name
                     type: object
                   snapshotIdentifierSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ClusterSnapshot to populate snapshotIdentifier.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -615,6 +618,7 @@ spec:
                       at the provider-level.
                     type: object
                   vpcSecurityGroupIdRefs:
+                    description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -651,7 +655,8 @@ spec:
                       type: object
                     type: array
                   vpcSecurityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup in ec2 to populate
+                      vpcSecurityGroupIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

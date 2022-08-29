@@ -32,9 +32,11 @@ type UsagePlanKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
+	// Reference to a APIKey in apigateway to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
+	// Selector for a APIKey in apigateway to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
@@ -51,9 +53,11 @@ type UsagePlanKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	UsagePlanID *string `json:"usagePlanId,omitempty" tf:"usage_plan_id,omitempty"`
 
+	// Reference to a UsagePlan in apigateway to populate usagePlanId.
 	// +kubebuilder:validation:Optional
 	UsagePlanIDRef *v1.Reference `json:"usagePlanIdRef,omitempty" tf:"-"`
 
+	// Selector for a UsagePlan in apigateway to populate usagePlanId.
 	// +kubebuilder:validation:Optional
 	UsagePlanIDSelector *v1.Selector `json:"usagePlanIdSelector,omitempty" tf:"-"`
 }

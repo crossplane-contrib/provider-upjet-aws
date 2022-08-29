@@ -1,6 +1,8 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: UserSSHKey
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/usersshkey
   labels:
     testing.upbound.io/example-name: user
   name: user
@@ -18,6 +20,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: User
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/usersshkey
   labels:
     testing.upbound.io/example-name: user
   name: user

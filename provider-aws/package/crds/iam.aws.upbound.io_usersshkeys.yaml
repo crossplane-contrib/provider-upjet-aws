@@ -84,7 +84,7 @@ spec:
                       key with.
                     type: string
                   usernameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a User to populate username.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -118,7 +118,7 @@ spec:
                     - name
                     type: object
                   usernameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a User to populate username.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

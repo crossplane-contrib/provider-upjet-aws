@@ -24,9 +24,11 @@ type EntryParameters struct {
 	// +kubebuilder:validation:Optional
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
+	// Reference to a VPCIPv4CidrBlockAssociation in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
 	CidrRef *v1.Reference `json:"cidrRef,omitempty" tf:"-"`
 
+	// Selector for a VPCIPv4CidrBlockAssociation in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
 	CidrSelector *v1.Selector `json:"cidrSelector,omitempty" tf:"-"`
 

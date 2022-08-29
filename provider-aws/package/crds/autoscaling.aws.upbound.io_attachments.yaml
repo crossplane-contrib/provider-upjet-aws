@@ -68,7 +68,8 @@ spec:
                     description: The ARN of an ALB Target Group.
                     type: string
                   albTargetGroupArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a LBTargetGroup in elbv2 to populate
+                      albTargetGroupArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +103,8 @@ spec:
                     - name
                     type: object
                   albTargetGroupArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a LBTargetGroup in elbv2 to populate
+                      albTargetGroupArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -144,7 +146,7 @@ spec:
                     description: Name of ASG to associate with the ELB.
                     type: string
                   autoscalingGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a AutoscalingGroup to populate autoscalingGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -178,7 +180,7 @@ spec:
                     - name
                     type: object
                   autoscalingGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a AutoscalingGroup to populate autoscalingGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -220,7 +222,7 @@ spec:
                     description: The name of the ELB.
                     type: string
                   elbRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ELB in elb to populate elb.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -254,7 +256,7 @@ spec:
                     - name
                     type: object
                   elbSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ELB in elb to populate elb.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -296,7 +298,8 @@ spec:
                     description: The ARN of a load balancer target group.
                     type: string
                   lbTargetGroupArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a LBTargetGroup in elbv2 to populate
+                      lbTargetGroupArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -330,7 +333,8 @@ spec:
                     - name
                     type: object
                   lbTargetGroupArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a LBTargetGroup in elbv2 to populate
+                      lbTargetGroupArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

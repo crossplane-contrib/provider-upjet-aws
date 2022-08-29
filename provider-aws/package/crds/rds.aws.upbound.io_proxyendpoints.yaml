@@ -69,7 +69,7 @@ spec:
                       endpoint that you create.
                     type: string
                   dbProxyNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Proxy in rds to populate dbProxyName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -103,7 +103,7 @@ spec:
                     - name
                     type: object
                   dbProxyNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Proxy in rds to populate dbProxyName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -156,6 +156,7 @@ spec:
                       Valid values are READ_WRITE and READ_ONLY.
                     type: string
                   vpcSecurityGroupIdRefs:
+                    description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -192,7 +193,8 @@ spec:
                       type: object
                     type: array
                   vpcSecurityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup in ec2 to populate
+                      vpcSecurityGroupIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

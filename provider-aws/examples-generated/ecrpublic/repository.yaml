@@ -1,6 +1,8 @@
 apiVersion: ecrpublic.aws.upbound.io/v1beta1
 kind: Repository
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ecrpublic/v1beta1/repository
   labels:
     testing.upbound.io/example-name: foo
   name: foo

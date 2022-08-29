@@ -1,6 +1,8 @@
 apiVersion: opensearch.aws.upbound.io/v1beta1
 kind: DomainSAMLOptions
 metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/domainsamloptions
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -21,6 +23,8 @@ spec:
 apiVersion: opensearch.aws.upbound.io/v1beta1
 kind: Domain
 metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/domainsamloptions
   labels:
     testing.upbound.io/example-name: example
   name: example

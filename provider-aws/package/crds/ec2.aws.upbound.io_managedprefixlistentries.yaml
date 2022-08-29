@@ -68,7 +68,7 @@ spec:
                     description: CIDR block of this entry.
                     type: string
                   cidrRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VPC in ec2 to populate cidr.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   cidrSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VPC in ec2 to populate cidr.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -149,7 +149,8 @@ spec:
                     description: CIDR block of this entry.
                     type: string
                   prefixListIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ManagedPrefixList in ec2 to populate
+                      prefixListId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -183,7 +184,8 @@ spec:
                     - name
                     type: object
                   prefixListIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ManagedPrefixList in ec2 to populate
+                      prefixListId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

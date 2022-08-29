@@ -1,6 +1,8 @@
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: UserDefinedFunction
 metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/userdefinedfunction
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -23,6 +25,8 @@ spec:
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: CatalogDatabase
 metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/userdefinedfunction
   labels:
     testing.upbound.io/example-name: example
   name: example

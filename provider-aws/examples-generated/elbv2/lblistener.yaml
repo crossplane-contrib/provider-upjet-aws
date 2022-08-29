@@ -1,6 +1,8 @@
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBListener
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistener
   labels:
     testing.upbound.io/example-name: front_end
   name: front-end
@@ -25,6 +27,8 @@ spec:
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LB
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistener
   labels:
     testing.upbound.io/example-name: front_end
   name: front-end
@@ -37,6 +41,8 @@ spec:
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBTargetGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistener
   labels:
     testing.upbound.io/example-name: front_end
   name: front-end

@@ -38,9 +38,11 @@ type UserPoolDomainParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
+	// Reference to a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
 	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
 
+	// Selector for a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
 	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
@@ -58,9 +60,11 @@ type UserPoolDomainParameters struct {
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
+	// Reference to a UserPool to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
+	// Selector for a UserPool to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }

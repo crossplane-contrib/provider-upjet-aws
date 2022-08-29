@@ -43,9 +43,11 @@ type UserSSHKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
+	// Reference to a User to populate username.
 	// +kubebuilder:validation:Optional
 	UsernameRef *v1.Reference `json:"usernameRef,omitempty" tf:"-"`
 
+	// Selector for a User to populate username.
 	// +kubebuilder:validation:Optional
 	UsernameSelector *v1.Selector `json:"usernameSelector,omitempty" tf:"-"`
 }

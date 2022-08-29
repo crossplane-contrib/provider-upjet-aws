@@ -52,9 +52,11 @@ type PrivateDNSNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	VPC *string `json:"vpc,omitempty" tf:"vpc,omitempty"`
 
+	// Reference to a VPC in ec2 to populate vpc.
 	// +kubebuilder:validation:Optional
 	VPCRef *v1.Reference `json:"vpcRef,omitempty" tf:"-"`
 
+	// Selector for a VPC in ec2 to populate vpc.
 	// +kubebuilder:validation:Optional
 	VPCSelector *v1.Selector `json:"vpcSelector,omitempty" tf:"-"`
 }

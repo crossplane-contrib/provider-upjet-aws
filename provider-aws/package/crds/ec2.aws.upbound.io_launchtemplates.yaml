@@ -94,7 +94,8 @@ spec:
                                   encrypted must be set to true when this is set.
                                 type: string
                               kmsKeyIdRef:
-                                description: A Reference to a named object.
+                                description: Reference to a Key in kms to populate
+                                  kmsKeyId.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -130,7 +131,8 @@ spec:
                                 - name
                                 type: object
                               kmsKeyIdSelector:
-                                description: A Selector selects an object.
+                                description: Selector for a Key in kms to populate
+                                  kmsKeyId.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -313,7 +315,8 @@ spec:
                         arn:
                           type: string
                         arnRef:
-                          description: A Reference to a named object.
+                          description: Reference to a InstanceProfile in iam to populate
+                            arn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -348,7 +351,8 @@ spec:
                           - name
                           type: object
                         arnSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a InstanceProfile in iam to populate
+                            arn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -391,7 +395,8 @@ spec:
                         name:
                           type: string
                         nameRef:
-                          description: A Reference to a named object.
+                          description: Reference to a InstanceProfile in iam to populate
+                            name.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -426,7 +431,8 @@ spec:
                           - name
                           type: object
                         nameSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a InstanceProfile in iam to populate
+                            name.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -862,7 +868,8 @@ spec:
                           description: The ID of the network interface to attach.
                           type: string
                         networkInterfaceIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a NetworkInterface to populate
+                            networkInterfaceId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -897,7 +904,8 @@ spec:
                           - name
                           type: object
                         networkInterfaceIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a NetworkInterface to populate
+                            networkInterfaceId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -941,6 +949,7 @@ spec:
                           description: The primary private IPv4 address.
                           type: string
                         securityGroupRefs:
+                          description: References to SecurityGroup to populate securityGroups.
                           items:
                             description: A Reference to a named object.
                             properties:
@@ -979,7 +988,8 @@ spec:
                             type: object
                           type: array
                         securityGroupSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a list of SecurityGroup to populate
+                            securityGroups.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -1028,7 +1038,7 @@ spec:
                           description: The VPC Subnet ID to associate.
                           type: string
                         subnetIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Subnet to populate subnetId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1063,7 +1073,7 @@ spec:
                           - name
                           type: object
                         subnetIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Subnet to populate subnetId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -1174,6 +1184,7 @@ spec:
                       be created in.
                     type: string
                   securityGroupNameRefs:
+                    description: References to SecurityGroup to populate securityGroupNames.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -1210,7 +1221,8 @@ spec:
                       type: object
                     type: array
                   securityGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup to populate
+                      securityGroupNames.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -1282,6 +1294,7 @@ spec:
                       the instance.
                     type: string
                   vpcSecurityGroupIdRefs:
+                    description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -1318,7 +1331,8 @@ spec:
                       type: object
                     type: array
                   vpcSecurityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup in ec2 to populate
+                      vpcSecurityGroupIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

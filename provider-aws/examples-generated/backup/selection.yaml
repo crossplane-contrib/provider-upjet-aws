@@ -1,6 +1,8 @@
 apiVersion: backup.aws.upbound.io/v1beta1
 kind: Selection
 metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/selection
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -16,6 +18,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/selection
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -40,6 +44,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/selection
   labels:
     testing.upbound.io/example-name: example
   name: example

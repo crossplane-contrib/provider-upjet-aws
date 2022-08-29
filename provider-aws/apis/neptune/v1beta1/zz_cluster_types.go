@@ -82,9 +82,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
+	// References to Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
 	IAMRoleRefs []v1.Reference `json:"iamRoleRefs,omitempty" tf:"-"`
 
+	// Selector for a list of Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
 	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
@@ -100,9 +102,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
+	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
 	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
+	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
@@ -111,9 +115,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupName *string `json:"neptuneClusterParameterGroupName,omitempty" tf:"neptune_cluster_parameter_group_name,omitempty"`
 
+	// Reference to a ClusterParameterGroup to populate neptuneClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupNameRef *v1.Reference `json:"neptuneClusterParameterGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ClusterParameterGroup to populate neptuneClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupNameSelector *v1.Selector `json:"neptuneClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
@@ -122,9 +128,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
 
+	// Reference to a SubnetGroup to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameRef *v1.Reference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a SubnetGroup to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameSelector *v1.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
 
@@ -150,9 +158,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
+	// Reference to a Cluster to populate replicationSourceIdentifier.
 	// +kubebuilder:validation:Optional
 	ReplicationSourceIdentifierRef *v1.Reference `json:"replicationSourceIdentifierRef,omitempty" tf:"-"`
 
+	// Selector for a Cluster to populate replicationSourceIdentifier.
 	// +kubebuilder:validation:Optional
 	ReplicationSourceIdentifierSelector *v1.Selector `json:"replicationSourceIdentifierSelector,omitempty" tf:"-"`
 
@@ -165,9 +175,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
+	// Reference to a ClusterSnapshot to populate snapshotIdentifier.
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifierRef *v1.Reference `json:"snapshotIdentifierRef,omitempty" tf:"-"`
 
+	// Selector for a ClusterSnapshot to populate snapshotIdentifier.
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifierSelector *v1.Selector `json:"snapshotIdentifierSelector,omitempty" tf:"-"`
 
@@ -179,9 +191,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
+	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 

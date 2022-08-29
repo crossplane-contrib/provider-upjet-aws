@@ -173,7 +173,7 @@ spec:
                       be specified only if at_rest_encryption_enabled = true.
                     type: string
                   kmsKeyIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Key in kms to populate kmsKeyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -207,7 +207,7 @@ spec:
                     - name
                     type: object
                   kmsKeyIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Key in kms to populate kmsKeyId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -340,6 +340,7 @@ spec:
                       not be empty.
                     type: string
                   securityGroupIdRefs:
+                    description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -376,7 +377,8 @@ spec:
                       type: object
                     type: array
                   securityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup in ec2 to populate
+                      securityGroupIds.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -459,7 +461,7 @@ spec:
                       replication group.
                     type: string
                   subnetGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a SubnetGroup to populate subnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -493,7 +495,7 @@ spec:
                     - name
                     type: object
                   subnetGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a SubnetGroup to populate subnetGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

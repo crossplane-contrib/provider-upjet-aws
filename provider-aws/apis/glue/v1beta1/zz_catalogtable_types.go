@@ -35,9 +35,11 @@ type CatalogTableParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
+	// Reference to a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
 	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
+	// Selector for a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 

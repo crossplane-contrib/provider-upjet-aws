@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: NetworkACLRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/networkaclrule
   labels:
     testing.upbound.io/example-name: bar
   name: bar
@@ -23,6 +25,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: NetworkACL
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/networkaclrule
   labels:
     testing.upbound.io/example-name: bar
   name: bar

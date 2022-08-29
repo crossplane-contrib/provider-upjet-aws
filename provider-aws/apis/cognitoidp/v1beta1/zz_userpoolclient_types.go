@@ -36,9 +36,11 @@ type AnalyticsConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
@@ -155,9 +157,11 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
+	// Reference to a UserPool to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
+	// Selector for a UserPool to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 

@@ -24,9 +24,11 @@ type EIPAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
+	// Reference to a EIP in ec2 to populate allocationId.
 	// +kubebuilder:validation:Optional
 	AllocationIDRef *v1.Reference `json:"allocationIdRef,omitempty" tf:"-"`
 
+	// Selector for a EIP in ec2 to populate allocationId.
 	// +kubebuilder:validation:Optional
 	AllocationIDSelector *v1.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
 
@@ -40,9 +42,11 @@ type EIPAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
+	// Reference to a Instance in ec2 to populate instanceId.
 	// +kubebuilder:validation:Optional
 	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
+	// Selector for a Instance in ec2 to populate instanceId.
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 

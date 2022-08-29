@@ -140,6 +140,7 @@ spec:
                       be created in.
                     type: string
                   securityGroupRefs:
+                    description: References to SecurityGroup to populate securityGroups.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -176,7 +177,8 @@ spec:
                       type: object
                     type: array
                   securityGroupSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of SecurityGroup to populate
+                      securityGroups.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -227,7 +229,7 @@ spec:
                     description: Subnet ID to create the ENI in.
                     type: string
                   subnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -261,7 +263,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

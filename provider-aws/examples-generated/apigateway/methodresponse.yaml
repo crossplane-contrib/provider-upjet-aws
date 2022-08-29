@@ -1,6 +1,8 @@
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: MethodResponse
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/methodresponse
   labels:
     testing.upbound.io/example-name: response_200
   name: response-200
@@ -23,6 +25,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Integration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/methodresponse
   labels:
     testing.upbound.io/example-name: MyDemoIntegration
   name: mydemointegration
@@ -45,6 +49,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Method
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/methodresponse
   labels:
     testing.upbound.io/example-name: MyDemoMethod
   name: mydemomethod
@@ -65,6 +71,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Resource
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/methodresponse
   labels:
     testing.upbound.io/example-name: MyDemoResource
   name: mydemoresource
@@ -84,6 +92,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: RestAPI
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/methodresponse
   labels:
     testing.upbound.io/example-name: MyDemoAPI
   name: mydemoapi

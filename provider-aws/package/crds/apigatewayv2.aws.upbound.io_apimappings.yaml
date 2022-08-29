@@ -68,7 +68,7 @@ spec:
                     description: The API identifier.
                     type: string
                   apiIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a API to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -102,7 +102,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a API to populate apiId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -148,7 +148,7 @@ spec:
                       resource to configure a domain name.
                     type: string
                   domainNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a DomainName to populate domainName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -182,7 +182,7 @@ spec:
                     - name
                     type: object
                   domainNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a DomainName to populate domainName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -229,7 +229,7 @@ spec:
                       to configure an API stage.
                     type: string
                   stageRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Stage to populate stage.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -263,7 +263,7 @@ spec:
                     - name
                     type: object
                   stageSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Stage to populate stage.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

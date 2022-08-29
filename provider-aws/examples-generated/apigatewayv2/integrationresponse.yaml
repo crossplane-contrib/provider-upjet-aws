@@ -1,6 +1,8 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: IntegrationResponse
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/integrationresponse
   labels:
     testing.upbound.io/example-name: example
   name: example

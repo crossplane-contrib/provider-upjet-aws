@@ -1,6 +1,8 @@
 apiVersion: elb.aws.upbound.io/v1beta1
 kind: ELB
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elb/v1beta1/elb
   labels:
     testing.upbound.io/example-name: bar
   name: bar

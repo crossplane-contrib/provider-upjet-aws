@@ -144,6 +144,7 @@ spec:
                       type: string
                     type: array
                   instancesRefs:
+                    description: References to Instance in ec2 to populate instances.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -180,7 +181,8 @@ spec:
                       type: object
                     type: array
                   instancesSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of Instance in ec2 to populate
+                      instances.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -270,6 +272,7 @@ spec:
                       type: string
                     type: array
                   subnetsRefs:
+                    description: References to Subnet in ec2 to populate subnets.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -306,7 +309,8 @@ spec:
                       type: object
                     type: array
                   subnetsSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of Subnet in ec2 to populate
+                      subnets.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

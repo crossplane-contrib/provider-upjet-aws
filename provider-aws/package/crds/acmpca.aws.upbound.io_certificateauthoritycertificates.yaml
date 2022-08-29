@@ -70,7 +70,7 @@ spec:
                     description: Amazon Resource Name  of the Certificate Authority.
                     type: string
                   certificateAuthorityArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a CertificateAuthority to populate certificateAuthorityArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -104,7 +104,7 @@ spec:
                     - name
                     type: object
                   certificateAuthorityArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a CertificateAuthority to populate certificateAuthorityArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

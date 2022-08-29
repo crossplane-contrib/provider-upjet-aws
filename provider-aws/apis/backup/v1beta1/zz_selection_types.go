@@ -49,9 +49,11 @@ type SelectionParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
 	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
+	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
@@ -68,9 +70,11 @@ type SelectionParameters struct {
 	// +kubebuilder:validation:Optional
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
+	// Reference to a Plan to populate planId.
 	// +kubebuilder:validation:Optional
 	PlanIDRef *v1.Reference `json:"planIdRef,omitempty" tf:"-"`
 
+	// Selector for a Plan to populate planId.
 	// +kubebuilder:validation:Optional
 	PlanIDSelector *v1.Selector `json:"planIdSelector,omitempty" tf:"-"`
 

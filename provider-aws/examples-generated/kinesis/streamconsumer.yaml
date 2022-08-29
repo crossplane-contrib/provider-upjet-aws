@@ -1,6 +1,8 @@
 apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: StreamConsumer
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kinesis/v1beta1/streamconsumer
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -17,6 +19,8 @@ spec:
 apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kinesis/v1beta1/streamconsumer
   labels:
     testing.upbound.io/example-name: example
   name: example

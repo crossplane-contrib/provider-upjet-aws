@@ -188,7 +188,8 @@ spec:
                         id:
                           type: string
                         idRef:
-                          description: A Reference to a named object.
+                          description: Reference to a LaunchTemplate in ec2 to populate
+                            id.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -223,7 +224,8 @@ spec:
                           - name
                           type: object
                         idSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a LaunchTemplate in ec2 to populate
+                            id.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -346,7 +348,8 @@ spec:
                                         Conflicts with launch_template_name.
                                       type: string
                                     launchTemplateIdRef:
-                                      description: A Reference to a named object.
+                                      description: Reference to a LaunchTemplate in
+                                        ec2 to populate launchTemplateId.
                                       properties:
                                         name:
                                           description: Name of the referenced object.
@@ -384,7 +387,8 @@ spec:
                                       - name
                                       type: object
                                     launchTemplateIdSelector:
-                                      description: A Selector selects an object.
+                                      description: Selector for a LaunchTemplate in
+                                        ec2 to populate launchTemplateId.
                                       properties:
                                         matchControllerRef:
                                           description: MatchControllerRef ensures
@@ -457,7 +461,8 @@ spec:
                                               Conflicts with launch_template_name.
                                             type: string
                                           launchTemplateIdRef:
-                                            description: A Reference to a named object.
+                                            description: Reference to a LaunchTemplate
+                                              in ec2 to populate launchTemplateId.
                                             properties:
                                               name:
                                                 description: Name of the referenced
@@ -498,7 +503,8 @@ spec:
                                             - name
                                             type: object
                                           launchTemplateIdSelector:
-                                            description: A Selector selects an object.
+                                            description: Selector for a LaunchTemplate
+                                              in ec2 to populate launchTemplateId.
                                             properties:
                                               matchControllerRef:
                                                 description: MatchControllerRef ensures
@@ -572,7 +578,8 @@ spec:
                       launch your instances, if any.
                     type: string
                   placementGroupRef:
-                    description: A Reference to a named object.
+                    description: Reference to a PlacementGroup in ec2 to populate
+                      placementGroup.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -606,7 +613,8 @@ spec:
                     - name
                     type: object
                   placementGroupSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a PlacementGroup in ec2 to populate
+                      placementGroup.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -657,7 +665,7 @@ spec:
                       services
                     type: string
                   serviceLinkedRoleArnRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Role in iam to populate serviceLinkedRoleArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -691,7 +699,7 @@ spec:
                     - name
                     type: object
                   serviceLinkedRoleArnSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Role in iam to populate serviceLinkedRoleArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -782,6 +790,7 @@ spec:
                       type: string
                     type: array
                   vpcZoneIdentifierRefs:
+                    description: References to Subnet in ec2 to populate vpcZoneIdentifier.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -818,7 +827,8 @@ spec:
                       type: object
                     type: array
                   vpcZoneIdentifierSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of Subnet in ec2 to populate
+                      vpcZoneIdentifier.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -1,6 +1,8 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: ClusterInstance
 metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterinstance
   labels:
     testing.upbound.io/example-name: cluster_instances
   name: cluster-instances
@@ -20,6 +22,8 @@ spec:
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterinstance
   labels:
     testing.upbound.io/example-name: default
   name: default

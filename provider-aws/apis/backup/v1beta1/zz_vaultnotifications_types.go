@@ -43,9 +43,11 @@ type VaultNotificationsParameters struct {
 	// +kubebuilder:validation:Optional
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 
+	// Reference to a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
 	SnsTopicArnRef *v1.Reference `json:"snsTopicArnRef,omitempty" tf:"-"`
 
+	// Selector for a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
 	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 }
