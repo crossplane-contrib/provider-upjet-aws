@@ -5,7 +5,7 @@ View the AWS Provider Documentation configuration for details and configuration 
 ## Quickstart
 This guide walks through the process to install Upbound Universal Crossplane and install the AWS official provider.
 
-To use this official provider, install Upbound Universal Crossplane into your Kubernetes cluster, install the `Provider`, apply a `ProviderConfiguration`, and create a *managed resource* in AWS via Kubernetes.
+To use this official provider, install Upbound Universal Crossplane into your Kubernetes cluster, install the `Provider`, apply a `ProviderConfig`, and create a *managed resource* in AWS via Kubernetes.
 
 ## Create an Upbound.io user account
 Create an account on [Upbound.io](https://accounts.upbound.io/register). 
@@ -126,7 +126,7 @@ kind: Provider
 metadata:
   name: provider-aws
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws:v0.8.0
+  package: xpkg.upbound.io/upbound/provider-aws:latest
   packagePullSecrets:
     - name: my-upbound-secret
 ```
@@ -140,7 +140,7 @@ After installing the provider, verify the install with `kubectl get providers`.
 ```shell
 $ kubectl get providers
 NAME           INSTALLED   HEALTHY   PACKAGE                                       AGE
-provider-aws   True        True      xpkg.upbound.io/upbound/provider-aws:v0.8.0   62s
+provider-aws   True        True      xpkg.upbound.io/upbound/provider-aws:latest   62s
 ```
 
 It may take up to 5 minutes to report `HEALTHY`.
@@ -211,7 +211,7 @@ spec:
 
 Apply this configuration with `kubectl apply -f`.
 
-**Note:** the `Providerconfig` value `spec.secretRef.name` must match the `name` of the secret in `kubectl get secrets -n upbound-system` and `spec.SecretRef.key` must match the value in the `Data` section of the secret.
+**Note:** the `ProviderConfig` value `spec.secretRef.name` must match the `name` of the secret in `kubectl get secrets -n upbound-system` and `spec.secretRef.key` must match the value in the `Data` section of the secret.
 
 Verify the `ProviderConfig` with `kubectl describe providerconfigs`. 
 
@@ -231,10 +231,10 @@ Spec:
     Source:       Secret
 ```
 
-**Note:** the `ProviderConfig` install fails and Kubernetes returns an error if the `Provider` isn't installed, for example, due to `packagePullSecrets` authentication.
+**Note:** the `ProviderConfig` install fails and Kubernetes returns an error if the `Provider` isn't installed, for example, due to invalid credentials provided via `packagePullSecrets`.
 
 ```shell
-vagrant@kubecontroller-01:~$ kubectl apply -f providerconfig.yml
+$ kubectl apply -f providerconfig.yml
 error: resource mapping not found for name: "default" namespace: "" from "providerconfig.yml": no matches for kind "ProviderConfig" in version "aws.upbound.io/v1beta1"
 ensure CRDs are installed first
 ```
@@ -320,7 +320,7 @@ Events:
   ----     ------                   ----             ----                                            -------
   Warning  CannotConnectToProvider  1s (x3 over 2s)  managed/s3.aws.upbound.io/v1beta1, kind=bucket  cannot get terraform setup: cannot get AWS config: cannot get referenced Provider: ProviderConfig.aws.upbound.io "default" not found
 ```
-The output indicates the `Bucket` is using `ProviderConfig` named `default`. The applied `ProviderConfig` is `my-config`. 
+The output indicates the `Bucket` is using a `ProviderConfig` named `default`. The applied `ProviderConfig` is `my-config`. 
 
 ```shell
 $ kubectl get providerconfig
