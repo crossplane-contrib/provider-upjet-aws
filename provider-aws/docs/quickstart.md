@@ -115,10 +115,10 @@ uxp-ca                                       Opaque                           3 
 xgql-tls                                     Opaque                           3      21m
 ```
 
-## Install the official AWS provider in to the managed control plane
+## Install the official AWS provider
 <!-- Use the marketplace button -->
 
-Install the official provider into the managed control plane with a Kubernetes configuration file. 
+Install the official provider into the Kubernetes cluster with a Kubernetes configuration file. 
 
 ```yaml
 apiVersion: pkg.crossplane.io/v1
@@ -174,7 +174,7 @@ aws_secret_access_key = <aws_secret_key>
 Save this text file as `aws-credentials.txt`.
 
 ### Create a Kubernetes secret with AWS credentials
-Use `kubectl create secret -n upbound-system` to generate the Kubernetes secret object inside the managed control plane.
+Use `kubectl create secret -n upbound-system` to generate a Kubernetes secret object inside the Kubernetes cluster.
 
 `kubectl create secret generic aws-secret -n upbound-system --from-file=creds=./aws-credentials.txt`
 
