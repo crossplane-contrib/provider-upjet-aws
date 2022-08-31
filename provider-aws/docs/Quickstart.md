@@ -1,8 +1,5 @@
-The Upbound AWS Provider is the officially supported provider for Amazon Web Services (AWS).
+# Quickstart
 
-View the AWS Provider Documentation configuration for details and configuration options. 
-
-## Quickstart
 This guide walks through the process to install Upbound Universal Crossplane and install the AWS official provider.
 
 To use this official provider, install Upbound Universal Crossplane into your Kubernetes cluster, install the `Provider`, apply a `ProviderConfig`, and create a *managed resource* in AWS via Kubernetes.
