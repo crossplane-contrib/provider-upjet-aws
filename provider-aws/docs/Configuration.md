@@ -43,7 +43,7 @@ View the Crossplane [Provider CRD definition](https://doc.crds.dev/github.com/cr
 The AWS provider requires credentials for authentication to AWS. The AWS provider consumes the credentials from a Kubernetes secret object.
 
 ### Generate a Kubernetes secret
-To create the Kubernetes secret, create a text file containing the AWS account `aws_access_key_id` and `aws_secret_access_key`. The [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-creds)
+To create the Kubernetes secret, create a text file containing the AWS account `aws_access_key_id` and `aws_secret_access_key`. The [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-creds) provides information on how to generate these keys.
 
 ```ini
 [default]
