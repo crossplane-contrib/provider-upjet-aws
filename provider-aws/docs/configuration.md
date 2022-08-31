@@ -16,12 +16,12 @@ kind: Provider
 metadata:
   name: provider-aws
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws:v0.5.0
+  package: xpkg.upbound.io/upbound/provider-aws:latest
   packagePullSecrets:
     - name: package-pull-secret
 ```
 
-Define the provider version with `spec.package`. This example uses version `v0.5.0`.
+Define the provider version with `spec.package`. This example uses version `latest`.
 
 The `spec.packagePullSecrets.name` value matches the Kubernetes `imagePullSecret`. The secret must be in the same namespace as the Upbound pod.
 
@@ -32,7 +32,7 @@ Verify the configuration with `kubectl get provider`.
 ```shell
 $ kubectl get providers
 NAME           INSTALLED   HEALTHY   PACKAGE                                       AGE
-provider-aws   True        True      xpkg.upbound.io/upbound/provider-aws:v0.5.0   62s
+provider-aws   True        True      xpkg.upbound.io/upbound/provider-aws:latest   62s
 ```
 
 View the Crossplane [Provider CRD definition](https://doc.crds.dev/github.com/crossplane/crossplane/pkg.crossplane.io/Provider/v1) to view all available `Provider` options.
