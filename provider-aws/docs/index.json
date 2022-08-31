@@ -1,4 +1,4 @@
 {
-	"configuration": "../docs/configuration.md",
-	"quickstart": "../docs/quickstart.md"
+	"Configuration": "../docs/Configuration.md",
+	"Quickstart": "../docs/Quickstart.md"
 }
