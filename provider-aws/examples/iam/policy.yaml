@@ -1,7 +1,7 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
-  name: my-policy-name
+  name: sample-user-policy
 spec:
   forProvider:
     policy: |
