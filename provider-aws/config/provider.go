@@ -114,10 +114,10 @@ func GetProvider() *config.Provider {
 			RegionAddition(),
 			TagsAllRemoval(),
 			IdentifierAssignedByAWS(),
-			NamePrefixRemoval(),
 			KnownReferencers(),
 			AddExternalTagsField(),
 			ExternalNameConfigurations(),
+			NamePrefixRemoval(),
 		),
 	)
 

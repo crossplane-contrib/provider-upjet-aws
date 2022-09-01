@@ -504,10 +504,6 @@ type LaunchTemplateParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Creates a unique name beginning with the specified prefix. Conflicts with name.
-	// +kubebuilder:validation:Optional
-	NamePrefix *string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty"`
-
 	// Customize network interfaces to be attached at instance boot time. See Network
 	// Interfaces below for more details.
 	// +kubebuilder:validation:Optional

@@ -141,11 +141,7 @@ spec:
                     type: object
                   name:
                     type: string
-                  users:
-                    items:
-                      type: string
-                    type: array
-                  usersRefs:
+                  userRefs:
                     description: References to User to populate users.
                     items:
                       description: A Reference to a named object.
@@ -182,7 +178,7 @@ spec:
                       - name
                       type: object
                     type: array
-                  usersSelector:
+                  userSelector:
                     description: Selector for a list of User to populate users.
                     properties:
                       matchControllerRef:
@@ -221,6 +217,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  users:
+                    items:
+                      type: string
+                    type: array
                 required:
                 - name
                 type: object

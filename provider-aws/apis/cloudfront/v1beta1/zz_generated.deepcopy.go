@@ -4293,11 +4293,6 @@ func (in *PublicKeyParameters) DeepCopyInto(out *PublicKeyParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.NamePrefix != nil {
-		in, out := &in.NamePrefix, &out.NamePrefix
-		*out = new(string)
-		**out = **in
-	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
