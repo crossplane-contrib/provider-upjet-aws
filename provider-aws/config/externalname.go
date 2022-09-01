@@ -41,26 +41,26 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	"aws_apigatewayv2_api": config.IdentifierFromProvider,
 	// Case4: Imported by using the API mapping identifier and domain name.
-	"aws_apigatewayv2_api_mapping": TemplatedStringAsIdentifierWithNoName("{{ .externalName }}/{{ .parameters.domain_name }}"),
+	"aws_apigatewayv2_api_mapping": TemplatedStringAsIdentifierWithNoName("{{ .external_name }}/{{ .parameters.domain_name }}"),
 	// Case4: Imported by using the API identifier and authorizer identifier.
-	"aws_apigatewayv2_authorizer": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_authorizer": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
 	// Case4: Imported by using the API identifier and deployment identifier.
-	"aws_apigatewayv2_deployment":  TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_deployment":  TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
 	"aws_apigatewayv2_domain_name": config.ParameterAsIdentifier("domain_name"),
 	// Case4: Imported by using the API identifier and integration identifier.
-	"aws_apigatewayv2_integration": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_integration": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
 	// Case4: Imported by using the API identifier, integration identifier and
 	// integration response identifier.
-	"aws_apigatewayv2_integration_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.integration_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_integration_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.integration_id }}/{{ .external_name }}"),
 	// Case4: Imported by using the API identifier and model identifier.
-	"aws_apigatewayv2_model": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_model": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
 	// Case4: Imported by using the API identifier and route identifier.
-	"aws_apigatewayv2_route": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_route": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
 	// Case4: Imported by using the API identifier, route identifier and route
 	// response identifier.
-	"aws_apigatewayv2_route_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.route_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_route_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.route_id }}/{{ .external_name }}"),
 	// Imported by using the API identifier and stage name.
-	"aws_apigatewayv2_stage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_stage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_id }}/{{ .external_name }}"),
 	// aws_apigatewayv2_vpc_link can be imported by using the VPC Link id
 	"aws_apigatewayv2_vpc_link": config.IdentifierFromProvider,
 
@@ -104,7 +104,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// us-west-2_abc123:CorpAD
 	"aws_cognito_identity_provider": config.IdentifierFromProvider,
 	// user_pool_id/name: us-east-1_vG78M4goG/user
-	"aws_cognito_user": config.TemplatedStringAsIdentifier("username", "{{ .parameters.user_pool_id }}/{{ .externalName }}"),
+	"aws_cognito_user": config.TemplatedStringAsIdentifier("username", "{{ .parameters.user_pool_id }}/{{ .external_name }}"),
 	// no doc
 	// disabled until the fix of https://github.com/upbound/official-providers/issues/531
 	// "aws_cognito_user_in_group": config.IdentifierFromProvider,
@@ -274,7 +274,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_eks_cluster": config.NameAsIdentifier,
 	// Imported using the cluster_name and node_group_name separated by a
 	// colon (:): my_cluster:my_node_group
-	"aws_eks_node_group": config.TemplatedStringAsIdentifier("node_group_name", "{{ .parameters.cluster_name }}:{{ .externalName }}"),
+	"aws_eks_node_group": config.TemplatedStringAsIdentifier("node_group_name", "{{ .parameters.cluster_name }}:{{ .external_name }}"),
 	// my_cluster:my_eks_addon
 	"aws_eks_addon": FormattedIdentifierUserDefined("addon_name", ":", "cluster_name"),
 	// my_cluster:my_fargate_profile
@@ -319,12 +319,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// "aws_glue_schema": config.IdentifierFromProvider,
 	// Imported using "name".
 	"aws_glue_trigger":               config.NameAsIdentifier,
-	"aws_glue_user_defined_function": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .externalName }}"),
+	"aws_glue_user_defined_function": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
 	// "aws_glue_security_configuration": config.NameAsIdentifier,
 	// Imported using the account ID: 12356789012
 	"aws_glue_resource_policy":  config.IdentifierFromProvider,
-	"aws_glue_catalog_database": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .externalName }}"),
-	"aws_glue_catalog_table":    config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .externalName }}"),
+	"aws_glue_catalog_database": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .external_name }}"),
+	"aws_glue_catalog_table":    config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
 	"aws_glue_classifier":       config.NameAsIdentifier,
 	// "aws_glue_crawler":          config.NameAsIdentifier,
 	// Imported using CATALOG-ID (AWS account ID if not custom), e.g., 123456789012
@@ -443,7 +443,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// DB proxy default target groups can be imported using the db_proxy_name
 	"aws_db_proxy_default_target_group": config.IdentifierFromProvider,
 	// DB proxy endpoints can be imported using the DB-PROXY-NAME/DB-PROXY-ENDPOINT-NAME
-	"aws_db_proxy_endpoint": config.TemplatedStringAsIdentifier("db_proxy_endpoint_name", "{{ .externalName }}/{{ .parameters.db_proxy_name }}"),
+	"aws_db_proxy_endpoint": config.TemplatedStringAsIdentifier("db_proxy_endpoint_name", "{{ .external_name }}/{{ .parameters.db_proxy_name }}"),
 	// RDS DB Proxy Targets can be imported using the db_proxy_name, target_group_name, target type (e.g., RDS_INSTANCE or TRACKED_CLUSTER), and resource identifier separated by forward slashes (/)
 	"aws_db_proxy_target": config.IdentifierFromProvider,
 	// DB Security groups can be imported using the name
