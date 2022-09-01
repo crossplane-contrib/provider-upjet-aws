@@ -1,8 +1,14 @@
 # Quickstart
 
-This guide walks through the process to install Upbound Universal Crossplane and install the AWS official provider.
+This guide walks through the process to install Upbound Universal Crossplane and install the AWS official provider. For more details about the AWS official provider read the [Configuration](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/docs/configuration) .
 
-To use this official provider, install Upbound Universal Crossplane into your Kubernetes cluster, install the `Provider`, apply a `ProviderConfig`, and create a *managed resource* in AWS via Kubernetes.
+To install and use this official provider:
+* Create an upbound.io account.
+* Install the `up` command-line.
+* Install Upbound Universal Crossplane (UXP) into your Kubernetes cluster. 
+* Authenticate to the Upbound Marketplace and generate a Kubernetes secret.
+* Install the `Provider` and apply a `ProviderConfig`.
+* Create a *managed resource* in AWS with Kubernetes.
 
 ## Create an Upbound.io user account
 Create an account on [Upbound.io](https://accounts.upbound.io/register). 
@@ -24,8 +30,10 @@ v0.13.0
 
 _Note_: official providers only support `up` command-line versions v0.13.0 or later.
 
-## Install Universal Crossplane
-Install Upbound Universal Crossplane with the Up command-line.
+More information about the Up command-line is available in the [Upbound Up documentation](https://docs.upbound.io/cli/).
+
+## Install Upbound Universal Crossplane
+Install Upbound Universal Crossplane (UXP) with the Up command-line.
 
 ```shell
 $ up uxp install
@@ -43,6 +51,8 @@ upbound-bootstrapper-5f47977d54-t8kvk       1/1     Running   0             68m
 xgql-7c4b74c458-5bf2q                       1/1     Running   3 (67m ago)   68m
 ```
 
+Find more information in the [Upbound UXP documentation](https://docs.upbound.io/uxp/).
+
 ## Log in with the Up command-line
 Use `up login` to authenticate to the Upbound Marketplace.
 
@@ -56,11 +66,15 @@ my-user logged in
 ```
 
 ## Create an Upbound robot account
-Upbound robots are identities used for authentication that are independent from a single user and aren’t tied to specific usernames or passwords.
+Upbound robots are identities used for authentication that are independent from a single user and aren't tied to specific usernames or passwords.
 
 Creating a robot account allows Kubernetes to install an official provider.
 
-Use `up robot create <robot account name>` to create a new robot account.
+Create a new robot account with the command
+```shell
+up robot create \
+<robot account name>
+```
 
 _Note_: only users logged into an organization can create robot accounts.
 
@@ -72,7 +86,13 @@ my-org/my-robot created
 ## Create an Upbound robot account token
 The token associates with a specific robot account and acts as a username and password for authentication.
 
-Generate a token using `up robot token create <robot account> <token name> --output=<file>`.
+Generate a token using the command
+```shell
+up robot token create \
+<robot account> \
+<token name> \
+--output=<file>
+```
 
 ```shell
 $ up robot token create my-robot my-token --output=token.json
@@ -87,25 +107,30 @@ _Note_: you can't recover a lost robot token. You must delete and recreate the t
 ## Create a Kubernetes pull secret
 Downloading and installing official providers requires Kubernetes to authenticate to the Upbound Marketplace using a Kubernetes `secret` object.
 
-Using the `up controlplane pull-secret create <secret name> -f <robot token file>` command create an [Upbound robot account](http://docs.upbound.io/cli/command-reference/robot/) account. 
+Use the `up` command-line to generate a Kubernetes secret using your robot account and token. 
+```shell
+up controlplane \
+pull-secret create \
+package-pull-secret \
+-f <robot token file> 
+```
 
 Provide a name for your Kubernetes secret and the robot token JSON file.
 
-_Note_: robot accounts are independent from your account. Your account information is never stored in Kubernetes.
+For example,
+```shell
+$ up controlplane pull-secret create package-pull-secret -f token.json
+my-org/package-pull-secret created
+```
 
 _Note_: you must provide the robot token file or you can't authenticate to install an official provider.  
 
-```shell
-$ up controlplane pull-secret create my-upbound-secret -f token.json
-my-org/my-upbound-secret created
-```
-
-`Up` creates the secret in the `upbound-system` namespace. 
+`up` creates the secret in the `upbound-system` namespace. 
 
 ```shell
 $ kubectl get secret -n upbound-system
 NAME                                         TYPE                             DATA   AGE
-my-upbound-secret                            kubernetes.io/dockerconfigjson   1      8m46s
+package-pull-secret                            kubernetes.io/dockerconfigjson   1      8m46s
 sh.helm.release.v1.universal-crossplane.v1   helm.sh/release.v1               1      21m
 upbound-agent-tls                            Opaque                           3      21m
 uxp-ca                                       Opaque                           3      21m
@@ -113,8 +138,6 @@ xgql-tls                                     Opaque                           3 
 ```
 
 ## Install the official AWS provider
-<!-- Use the marketplace button -->
-
 Install the official provider into the Kubernetes cluster with a Kubernetes configuration file. 
 
 ```yaml
@@ -125,7 +148,7 @@ metadata:
 spec:
   package: xpkg.upbound.io/upbound/provider-aws:latest
   packagePullSecrets:
-    - name: my-upbound-secret
+    - name: package-pull-secret
 ```
 
 _Note_: the `name` of the `packagePullSecrets` must be the same as the name of the Kubernetes secret just created.
@@ -173,7 +196,12 @@ Save this text file as `aws-credentials.txt`.
 ### Create a Kubernetes secret with AWS credentials
 Use `kubectl create secret -n upbound-system` to generate a Kubernetes secret object inside the Kubernetes cluster.
 
-`kubectl create secret generic aws-secret -n upbound-system --from-file=creds=./aws-credentials.txt`
+```shell
+kubectl create secret \
+generic aws-secret \
+-n upbound-system \
+--from-file=creds=./aws-credentials.txt
+```
 
 View the secret with `kubectl describe secret`
 ```shell
@@ -206,9 +234,12 @@ spec:
       key: creds
 ```
 
-Apply this configuration with `kubectl apply -f`.
+The `spec.secretRef` describes the parameters of the secret to use. 
+* `namespace` is the Kubernetes namespace the secret is in.
+* `name` is the name of the Kubernetes `secret` object.
+* `key` is the `Data` field from `kubectl describe secret`.
 
-**Note:** the `ProviderConfig` value `spec.secretRef.name` must match the `name` of the secret in `kubectl get secrets -n upbound-system` and `spec.secretRef.key` must match the value in the `Data` section of the secret.
+Apply this configuration with `kubectl apply -f`.
 
 Verify the `ProviderConfig` with `kubectl describe providerconfigs`. 
 
@@ -228,7 +259,7 @@ Spec:
     Source:       Secret
 ```
 
-**Note:** the `ProviderConfig` install fails and Kubernetes returns an error if the `Provider` isn't installed, for example, due to invalid credentials provided via `packagePullSecrets`.
+**Note:** the `ProviderConfig` install fails and Kubernetes returns an error if the `Provider` isn't installed, for example, due to incorrect credentials provided via `packagePullSecrets`.
 
 ```shell
 $ kubectl apply -f providerconfig.yml
@@ -271,10 +302,10 @@ spec:
 
 Apply this configuration with `kubectl apply -f`.
 
-Use `kubectl get bucket` to verify bucket creation.
+Use `kubectl get buckets` to verify bucket creation.
 
 ```shell
-$ kubectl get bucket
+$ kubectl get buckets
 NAME                           READY   SYNCED   EXTERNAL-NAME                  AGE
 upbound-bucket-fb8360b455dd9   True    True     upbound-bucket-fb8360b455dd9   8s
 ```
@@ -326,9 +357,12 @@ providerconfig.aws.upbound.io/my-config   114s
 ```
 
 ## Delete the managed resource
-Remove the managed resource by using `kubectl delete -f` with the same `Bucket` object file. Verify removal of the bucket with `kubectl get bucket`
+Remove the managed resource by using `kubectl delete -f` with the same `Bucket` object file. Verify removal of the bucket with `kubectl get buckets`
 
 ```shell
-$ kubectl get bucket
+$ kubectl delete -f bucket.yml
+bucket.s3.aws.upbound.io "upbound-bucket-fb8360b455dd9" deleted
+
+$ kubectl get buckets
 No resources found
 ```
