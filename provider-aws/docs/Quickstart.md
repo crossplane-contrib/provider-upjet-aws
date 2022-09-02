@@ -338,7 +338,7 @@ Status:
     Reason:                ActivePackageRevision
     Status:                True
     Type:                  Installed
-  Current Identifier:      xpkg.upbound.io/upbound/provider-aws:v0.10.0
+  Current Identifier:      xpkg.upbound.io/upbound/provider-aws:latest
   Current Revision:        provider-aws-ab4a3525fb0b
 Events:
   Type     Reason                  Age               From                                 Message
@@ -351,7 +351,7 @@ The `INSTALLED` value should be `True`. It may take up to 5 minutes for `HEALTHY
 ```shell
 $ kubectl get provider
 NAME           INSTALLED   HEALTHY   PACKAGE                                        AGE
-provider-aws   True        True   xpkg.upbound.io/upbound/provider-aws:v0.10.0      5s
+provider-aws   True        True   xpkg.upbound.io/upbound/provider-aws:latest      5s
 ```
 
 If there are issues downloading and installing the provider the `INSTALLED` field is empty.
