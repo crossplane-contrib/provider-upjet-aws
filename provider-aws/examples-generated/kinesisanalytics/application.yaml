@@ -29,7 +29,6 @@ spec:
         - mappingParameters:
           - json:
             - recordRowPath: $
-    name: kinesis-analytics-application-test
     region: us-west-1
 
 ---
@@ -44,7 +43,6 @@ metadata:
   name: test-stream
 spec:
   forProvider:
-    name: terraform-kinesis-test
     region: us-west-1
     shardCount: 1
 

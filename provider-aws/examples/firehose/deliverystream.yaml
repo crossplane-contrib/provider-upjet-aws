@@ -11,4 +11,3 @@ spec:
         name: example
       roleArnRef:
         name: example
-    name: up-kinesis-firehose-extended-s3-test-stream

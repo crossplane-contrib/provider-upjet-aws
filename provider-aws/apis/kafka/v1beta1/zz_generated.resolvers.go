@@ -15,7 +15,6 @@ import (
 	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1"
 	v1beta14 "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1"
 	common "github.com/upbound/official-providers/provider-aws/config/common"
-	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -108,7 +107,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose); i5++ {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStream),
-					Extract:      resource.ExtractParamPath("name", false),
+					Extract:      reference.ExternalName(),
 					Reference:    mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamRef,
 					Selector:     mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamSelector,
 					To: reference.To{

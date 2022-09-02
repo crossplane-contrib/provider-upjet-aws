@@ -119,9 +119,6 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	ForceStop *bool `json:"forceStop,omitempty" tf:"force_stop,omitempty"`
 
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
-
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

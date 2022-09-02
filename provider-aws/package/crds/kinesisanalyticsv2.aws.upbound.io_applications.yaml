@@ -1212,8 +1212,6 @@ spec:
                     description: Whether to force stop an unresponsive Flink-based
                       application.
                     type: boolean
-                  name:
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -1311,7 +1309,6 @@ spec:
                       with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
-                - name
                 - region
                 - runtimeEnvironment
                 type: object

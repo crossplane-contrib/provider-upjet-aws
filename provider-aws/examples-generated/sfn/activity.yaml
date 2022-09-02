@@ -8,7 +8,6 @@ metadata:
   name: sfn-activity
 spec:
   forProvider:
-    name: my-activity
     region: us-west-1
 
 ---

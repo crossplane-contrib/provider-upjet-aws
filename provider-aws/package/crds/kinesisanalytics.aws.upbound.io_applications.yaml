@@ -480,8 +480,6 @@ spec:
                       - schema
                       type: object
                     type: array
-                  name:
-                    type: string
                   outputs:
                     description: Output destination configuration of the application.
                       See Outputs below for more details.
@@ -831,7 +829,6 @@ spec:
                       at the provider-level.
                     type: object
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

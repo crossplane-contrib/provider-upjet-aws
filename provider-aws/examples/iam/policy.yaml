@@ -4,7 +4,6 @@ metadata:
   name: sample-user-policy
 spec:
   forProvider:
-    name: my-policy-name
     policy: |
       {
         "Version": "2012-10-17",

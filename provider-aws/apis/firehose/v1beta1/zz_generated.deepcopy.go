@@ -302,11 +302,6 @@ func (in *DeliveryStreamParameters) DeepCopyInto(out *DeliveryStreamParameters) 
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.RedshiftConfiguration != nil {
 		in, out := &in.RedshiftConfiguration, &out.RedshiftConfiguration
 		*out = make([]RedshiftConfigurationParameters, len(*in))

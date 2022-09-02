@@ -20,7 +20,6 @@ spec:
           }
         }
       }
-    name: my-state-machine
     region: us-west-1
     roleArnSelector:
       matchLabels:

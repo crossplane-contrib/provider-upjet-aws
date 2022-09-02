@@ -36,10 +36,6 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// –  The Name of the registry.
-	// +kubebuilder:validation:Required
-	RegistryName *string `json:"registryName" tf:"registry_name,omitempty"`
-
 	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

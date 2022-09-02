@@ -9,7 +9,6 @@ metadata:
 spec:
   forProvider:
     description: My test policy
-    name: test_policy
     path: /
     policy: |-
       ${jsonencode({
