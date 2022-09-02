@@ -29,10 +29,9 @@ metadata:
     upjet.upbound.io/manual-intervention: "This resource needs a VPCEndpointService and it requires manual intervention."
   labels:
     testing.upbound.io/example-name: topic
-  name: topic
+  name: vpce-notification-topic
 spec:
   forProvider:
-    name: vpce-notification-topic
     policy: |
       {
           "Version":"2012-10-17",
@@ -46,9 +45,7 @@ spec:
           }]
       }
     region: us-west-1
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCEndpointService
 metadata:

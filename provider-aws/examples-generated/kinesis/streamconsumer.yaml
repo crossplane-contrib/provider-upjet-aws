@@ -26,7 +26,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    name: example-stream
     region: us-west-1
     shardCount: 1
 

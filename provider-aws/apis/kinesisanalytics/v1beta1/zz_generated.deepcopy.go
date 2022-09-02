@@ -188,11 +188,6 @@ func (in *ApplicationParameters) DeepCopyInto(out *ApplicationParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.Outputs != nil {
 		in, out := &in.Outputs, &out.Outputs
 		*out = make([]OutputsParameters, len(*in))

@@ -13,7 +13,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: lambda_function_test
     functionVersion: "1"
-    name: my_alias
     region: us-west-1
     routingConfig:
     - additionalVersionWeights:

@@ -83,7 +83,6 @@ metadata:
   name: default
 spec:
   forProvider:
-    name: neptune-events
     region: us-west-1
 
 ---

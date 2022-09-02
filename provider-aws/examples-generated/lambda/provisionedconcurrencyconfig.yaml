@@ -10,7 +10,7 @@ spec:
   forProvider:
     functionName: ${aws_lambda_alias.example.function_name}
     provisionedConcurrentExecutions: 1
-    qualifier: my_alias
+    qualifier: ${aws_lambda_alias.example.name}
     region: us-west-1
 
 ---

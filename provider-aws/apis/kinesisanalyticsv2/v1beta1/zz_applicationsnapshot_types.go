@@ -29,7 +29,6 @@ type ApplicationSnapshotParameters struct {
 
 	// The name of an existing  Kinesis Analytics v2 Application. Note that the application must be running for a snapshot to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kinesisanalyticsv2/v1beta1.Application
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	ApplicationName *string `json:"applicationName,omitempty" tf:"application_name,omitempty"`
 

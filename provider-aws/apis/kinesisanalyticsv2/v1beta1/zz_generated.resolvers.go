@@ -198,7 +198,7 @@ func (mg *ApplicationSnapshot) ResolveReferences(ctx context.Context, c client.R
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationName),
-		Extract:      resource.ExtractParamPath("name", false),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ApplicationNameRef,
 		Selector:     mg.Spec.ForProvider.ApplicationNameSelector,
 		To: reference.To{

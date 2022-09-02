@@ -21,7 +21,8 @@ import (
 var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// ACM
-	// Imported using ARN: arn:aws:acm:eu-central-1:123456789012:certificate/7e7a28d2-163f-4b8f-b9cd-822f96c08d6a
+	// Imported using ARN that has a random substring:
+	// arn:aws:acm:eu-central-1:123456789012:certificate/7e7a28d2-163f-4b8f-b9cd-822f96c08d6a
 	"aws_acm_certificate": config.IdentifierFromProvider,
 	// No import documented, but https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate_validation#id
 	"aws_acm_certificate_validation": config.IdentifierFromProvider,
@@ -29,35 +30,37 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// ACM PCA
 	// aws_acmpca_certificate can not be imported at this time.
 	"aws_acmpca_certificate": config.IdentifierFromProvider,
-	// Imported using ARN: arn:aws:acm-pca:us-east-1:123456789012:certificate-authority/12345678-1234-1234-1234-123456789012
+	// Imported using ARN that has a random substring:
+	//	// arn:aws:acm-pca:us-east-1:123456789012:certificate-authority/12345678-1234-1234-1234-123456789012
 	"aws_acmpca_certificate_authority": config.IdentifierFromProvider,
-	// No doc on import, but resource is getting CA ARN: arn:aws:acm-pca:eu-central-1:609897127049:certificate-authority/ba0c7989-9641-4f36-a033-dee60121d595
+	// No doc on import, but resource is getting CA ARN:
+	// arn:aws:acm-pca:eu-central-1:609897127049:certificate-authority/ba0c7989-9641-4f36-a033-dee60121d595
 	"aws_acmpca_certificate_authority_certificate": config.IdentifierFromProvider,
 
 	// apigatewayv2
 	//
 	"aws_apigatewayv2_api": config.IdentifierFromProvider,
 	// Case4: Imported by using the API mapping identifier and domain name.
-	"aws_apigatewayv2_api_mapping": TemplatedStringAsIdentifierWithNoName("{{ .externalName }}/{{ .parameters.domain_name }}"),
+	"aws_apigatewayv2_api_mapping": TemplatedStringAsIdentifierWithNoName("{{ .external_name }}/{{ .parameters.domain_name }}"),
 	// Case4: Imported by using the API identifier and authorizer identifier.
-	"aws_apigatewayv2_authorizer": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_authorizer": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
 	// Case4: Imported by using the API identifier and deployment identifier.
-	"aws_apigatewayv2_deployment":  TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_deployment":  TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
 	"aws_apigatewayv2_domain_name": config.ParameterAsIdentifier("domain_name"),
 	// Case4: Imported by using the API identifier and integration identifier.
-	"aws_apigatewayv2_integration": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_integration": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
 	// Case4: Imported by using the API identifier, integration identifier and
 	// integration response identifier.
-	"aws_apigatewayv2_integration_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.integration_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_integration_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.integration_id }}/{{ .external_name }}"),
 	// Case4: Imported by using the API identifier and model identifier.
-	"aws_apigatewayv2_model": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_model": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
 	// Case4: Imported by using the API identifier and route identifier.
-	"aws_apigatewayv2_route": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_route": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
 	// Case4: Imported by using the API identifier, route identifier and route
 	// response identifier.
-	"aws_apigatewayv2_route_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.route_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_route_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.route_id }}/{{ .external_name }}"),
 	// Imported by using the API identifier and stage name.
-	"aws_apigatewayv2_stage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_id }}/{{ .externalName }}"),
+	"aws_apigatewayv2_stage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_id }}/{{ .external_name }}"),
 	// aws_apigatewayv2_vpc_link can be imported by using the VPC Link id
 	"aws_apigatewayv2_vpc_link": config.IdentifierFromProvider,
 
@@ -101,7 +104,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// us-west-2_abc123:CorpAD
 	"aws_cognito_identity_provider": config.IdentifierFromProvider,
 	// user_pool_id/name: us-east-1_vG78M4goG/user
-	"aws_cognito_user": config.TemplatedStringAsIdentifier("username", "{{ .parameters.user_pool_id }}/{{ .externalName }}"),
+	"aws_cognito_user": config.TemplatedStringAsIdentifier("username", "{{ .parameters.user_pool_id }}/{{ .external_name }}"),
 	// no doc
 	// disabled until the fix of https://github.com/upbound/official-providers/issues/531
 	// "aws_cognito_user_in_group": config.IdentifierFromProvider,
@@ -258,7 +261,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ecs_cluster":           config.NameAsIdentifier,
 	"aws_ecs_service":           config.NameAsIdentifier,
 	"aws_ecs_capacity_provider": config.NameAsIdentifier,
-	// Imported using ARN: arn:aws:ecs:us-east-1:012345678910:task-definition/mytaskfamily:123
+	// Imported using ARN that has a random substring, revision at the end:
+	// arn:aws:ecs:us-east-1:012345678910:task-definition/mytaskfamily:123
 	"aws_ecs_task_definition": config.IdentifierFromProvider,
 	// ECS Account Setting defaults can be imported using the name
 	"aws_ecs_account_setting_default": config.IdentifierFromProvider,
@@ -270,7 +274,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_eks_cluster": config.NameAsIdentifier,
 	// Imported using the cluster_name and node_group_name separated by a
 	// colon (:): my_cluster:my_node_group
-	"aws_eks_node_group": config.TemplatedStringAsIdentifier("node_group_name", "{{ .parameters.cluster_name }}:{{ .externalName }}"),
+	"aws_eks_node_group": config.TemplatedStringAsIdentifier("node_group_name", "{{ .parameters.cluster_name }}:{{ .external_name }}"),
 	// my_cluster:my_eks_addon
 	"aws_eks_addon": FormattedIdentifierUserDefined("addon_name", ":", "cluster_name"),
 	// my_cluster:my_fargate_profile
@@ -315,12 +319,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// "aws_glue_schema": config.IdentifierFromProvider,
 	// Imported using "name".
 	"aws_glue_trigger":               config.NameAsIdentifier,
-	"aws_glue_user_defined_function": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .externalName }}"),
+	"aws_glue_user_defined_function": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
 	// "aws_glue_security_configuration": config.NameAsIdentifier,
 	// Imported using the account ID: 12356789012
 	"aws_glue_resource_policy":  config.IdentifierFromProvider,
-	"aws_glue_catalog_database": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .externalName }}"),
-	"aws_glue_catalog_table":    config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .externalName }}"),
+	"aws_glue_catalog_database": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .external_name }}"),
+	"aws_glue_catalog_table":    config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
 	"aws_glue_classifier":       config.NameAsIdentifier,
 	// "aws_glue_crawler":          config.NameAsIdentifier,
 	// Imported using CATALOG-ID (AWS account ID if not custom), e.g., 123456789012
@@ -337,7 +341,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// each with their own name.
 	// "aws_glue_partition_index": config.IdentifierFromProvider,
 	// Imported using ARN: arn:aws:glue:us-west-2:123456789012:registry/example
-	"aws_glue_registry": config.IdentifierFromProvider,
+	"aws_glue_registry": config.TemplatedStringAsIdentifier("registry_name", "arn:aws:glue:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:registry/{{ .external_name }}"),
 
 	// iam
 	//
@@ -345,7 +349,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_iam_access_key":       config.IdentifierFromProvider,
 	"aws_iam_instance_profile": config.NameAsIdentifier,
 	// arn:aws:iam::123456789012:policy/UsersManageOwnCredentials
-	"aws_iam_policy": config.IdentifierFromProvider,
+	"aws_iam_policy": config.TemplatedStringAsIdentifier("name", "arn:aws:iam::{{ .setup.client_metadata.account_id }}:policy/{{ .external_name }}"),
 	"aws_iam_user":   config.NameAsIdentifier,
 	"aws_iam_group":  config.NameAsIdentifier,
 	"aws_iam_role":   config.NameAsIdentifier,
@@ -370,10 +374,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// No import
 	"aws_iam_group_membership": config.IdentifierFromProvider,
 	// IAM SAML Providers can be imported using the arn
-	"aws_iam_saml_provider": config.IdentifierFromProvider,
+	"aws_iam_saml_provider": config.TemplatedStringAsIdentifier("name", "arn:aws:iam::{{ .setup.client_metadata.account_id }}:saml-provider/{{ .external_name }}"),
 	// IAM Server Certificates can be imported using the name
 	"aws_iam_server_certificate": config.NameAsIdentifier,
-	// IAM service-linked roles can be imported using role ARN
+	// IAM service-linked roles can be imported using role ARN that contains the
+	// service name.
 	"aws_iam_service_linked_role": config.IdentifierFromProvider,
 	// IAM Service Specific Credentials can be imported using the service_name:user_name:service_specific_credential_id
 	"aws_iam_service_specific_credential": config.IdentifierFromProvider,
@@ -438,7 +443,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// DB proxy default target groups can be imported using the db_proxy_name
 	"aws_db_proxy_default_target_group": config.IdentifierFromProvider,
 	// DB proxy endpoints can be imported using the DB-PROXY-NAME/DB-PROXY-ENDPOINT-NAME
-	"aws_db_proxy_endpoint": config.TemplatedStringAsIdentifier("db_proxy_endpoint_name", "{{ .externalName }}/{{ .parameters.db_proxy_name }}"),
+	"aws_db_proxy_endpoint": config.TemplatedStringAsIdentifier("db_proxy_endpoint_name", "{{ .external_name }}/{{ .parameters.db_proxy_name }}"),
 	// RDS DB Proxy Targets can be imported using the db_proxy_name, target_group_name, target type (e.g., RDS_INSTANCE or TRACKED_CLUSTER), and resource identifier separated by forward slashes (/)
 	"aws_db_proxy_target": config.IdentifierFromProvider,
 	// DB Security groups can be imported using the name
@@ -681,8 +686,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// sns
 	//
 	// SNS Topics can be imported using the topic arn
-	"aws_sns_topic": config.IdentifierFromProvider,
-	// SNS Topic Subscriptions can be imported using the subscription arn
+	"aws_sns_topic": config.TemplatedStringAsIdentifier("name", "arn:aws:sns:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:{{ .external_name }}"),
+	// SNS Topic Subscriptions can be imported using the subscription arn that
+	// contains a random substring in the end.
 	"aws_sns_topic_subscription": config.IdentifierFromProvider,
 
 	// backup
@@ -733,32 +739,32 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// kinesis
 	//
 	// Kinesis Streams can be imported using the name
-	"aws_kinesis_stream": config.IdentifierFromProvider,
+	"aws_kinesis_stream": config.NameAsIdentifier,
 	// Kinesis Stream Consumers can be imported using the Amazon Resource Name (ARN)
+	// that has a random substring.
 	"aws_kinesis_stream_consumer": config.IdentifierFromProvider,
 
 	// kinesisanalytics
 	//
-	// Kinesis Analytics Application can be imported by using ARN
-	"aws_kinesis_analytics_application": config.IdentifierFromProvider,
+	"aws_kinesis_analytics_application": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesisanalytics:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:application/{{ .external_name }}"),
 
 	// kinesisanalyticsv2
 	//
-	// aws_kinesisanalyticsv2_application can be imported by using the application ARN
-	"aws_kinesisanalyticsv2_application": config.IdentifierFromProvider,
+	"aws_kinesisanalyticsv2_application": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesisanalytics:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:application/{{ .external_name }}"),
 	// aws_kinesisanalyticsv2_application can be imported by using application_name together with snapshot_name
 	// e.g. example-application/example-snapshot
 	"aws_kinesisanalyticsv2_application_snapshot": FormattedIdentifierUserDefined("snapshot_name", "/", "application_name"),
 
 	// kinesisvideo
 	//
-	// Kinesis Streams can be imported using the arn
+	// Kinesis Streams can be imported using the arn that has a random substring
+	// in the end.
+	// arn:aws:kinesisvideo:us-west-2:123456789012:stream/terraform-kinesis-test/1554978910975
 	"aws_kinesis_video_stream": config.IdentifierFromProvider,
 
 	// firehose
 	//
-	// Kinesis Firehose Delivery streams can be imported using the stream ARN
-	"aws_kinesis_firehose_delivery_stream": config.IdentifierFromProvider,
+	"aws_kinesis_firehose_delivery_stream": config.TemplatedStringAsIdentifier("name", "arn:aws:firehose:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:deliverystream/{{ .external_name }}"),
 
 	// lakeformation
 	//
@@ -790,21 +796,24 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// lambda
 	//
 	// Lambda Function Aliases can be imported using the function_name/alias
-	"aws_lambda_alias": config.IdentifierFromProvider,
-	// Code Signing Configs can be imported using their ARN
+	"aws_lambda_alias": config.TemplatedStringAsIdentifier("name", "{{ .parameters.function_name }}/{{ .external_name }}"),
+	// Code Signing Configs can be imported using their ARN that has a random
+	// substring in the end.
+	// arn:aws:lambda:us-west-2:123456789012:code-signing-config:csc-0f6c334abcdea4d8b
 	"aws_lambda_code_signing_config": config.IdentifierFromProvider,
 	// Lambda event source mappings can be imported using the UUID (event source mapping identifier)
 	"aws_lambda_event_source_mapping": config.IdentifierFromProvider,
 	// Lambda Functions can be imported using the function_name
 	"aws_lambda_function": config.ParameterAsIdentifier("function_name"),
 	// Lambda Function Event Invoke Configs can be imported using the
-	// fully qualified Function name or Amazon Resource Name (ARN)
+	// fully qualified Function name or Amazon Resource Name (ARN) of the function.
 	"aws_lambda_function_event_invoke_config": config.IdentifierFromProvider,
 	// Lambda function URLs can be imported using the function_name or function_name/qualifier
 	"aws_lambda_function_url": lambdaFunctionURL(),
 	// No import"
 	"aws_lambda_invocation": config.IdentifierFromProvider,
-	// Lambda Layers can be imported using arn
+	// Lambda Layers can be imported using arn that has an assigned version in the
+	// end
 	"aws_lambda_layer_version": config.IdentifierFromProvider,
 	// Lambda Layer Permissions can be imported using layer_name and version_number, separated by a comma (,)
 	"aws_lambda_layer_version_permission": config.IdentifierFromProvider,
@@ -850,9 +859,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// kafka
 	//
-	// MSK configurations can be imported using the configuration ARN
+	// MSK configurations can be imported using the configuration ARN that has
+	// a random substring in the end.
 	"aws_msk_configuration": config.IdentifierFromProvider,
-	// MSK clusters can be imported using the cluster arn
+	// MSK clusters can be imported using the cluster arn that has a random substring
+	// in the end.
 	"aws_msk_cluster": config.IdentifierFromProvider,
 
 	// ram
@@ -867,10 +878,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// sfn
 	//
-	// Activities can be imported using the arn
-	"aws_sfn_activity": config.IdentifierFromProvider,
-	// State Machines can be imported using the arn
-	"aws_sfn_state_machine": config.IdentifierFromProvider,
+	"aws_sfn_activity":      config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:activity/{{ .external_name }}"),
+	"aws_sfn_state_machine": config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:stateMachine/{{ .external_name }}"),
 
 	// dax
 	//

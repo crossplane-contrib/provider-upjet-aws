@@ -59,10 +59,6 @@ type StateMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	LoggingConfiguration []LoggingConfigurationParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
-	// The name of the state machine. To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
-
 	// Region is the region you'd like your resource to be created in.
 	// +terrajet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

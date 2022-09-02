@@ -25,7 +25,9 @@ spec:
     loggingInfo:
       - brokerLogs:
           - firehose:
-              - deliveryStream: upbound-kinesis-firehose-msk-broker-logs-stream
+              - deliveryStreamSelector:
+                  matchLabels:
+                    testing.upbound.io/example-name: test_stream
                 enabled: true
     numberOfBrokerNodes: 2
     openMonitoring:
@@ -74,7 +76,6 @@ metadata:
 spec:
   forProvider:
     destination: s3
-    name: upbound-kinesis-firehose-msk-broker-logs-stream
     region: us-west-1
     s3Configuration:
       - bucketArnSelector:

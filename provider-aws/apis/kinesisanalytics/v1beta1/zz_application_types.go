@@ -74,9 +74,6 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	Inputs []InputsParameters `json:"inputs,omitempty" tf:"inputs,omitempty"`
 
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
-
 	// Output destination configuration of the application. See Outputs below for more details.
 	// +kubebuilder:validation:Optional
 	Outputs []OutputsParameters `json:"outputs,omitempty" tf:"outputs,omitempty"`

@@ -31,7 +31,6 @@ metadata:
   name: topic
 spec:
   forProvider:
-    name: vpce-notification-topic
     policy: |
       {
           "Version":"2012-10-17",
