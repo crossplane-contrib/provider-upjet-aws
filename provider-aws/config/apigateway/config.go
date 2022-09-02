@@ -14,8 +14,10 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_api_gateway_vpc_link", func(r *config.Resource) {
 		r.References["target_arns"] = config.Reference{
-			Type:      "github.com/upbound/official-providers/provider-aws/apis/elbv2/v1beta1.LB",
-			Extractor: common.PathARNExtractor,
+			Type:              "github.com/upbound/official-providers/provider-aws/apis/elbv2/v1beta1.LB",
+			RefFieldName:      "TargetArnRefs",
+			SelectorFieldName: "TargetArnSelector",
+			Extractor:         common.PathARNExtractor,
 		}
 		r.UseAsync = true
 	})

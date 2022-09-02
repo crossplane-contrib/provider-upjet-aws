@@ -2066,6 +2066,16 @@ func (in *VaultLockConfigurationParameters) DeepCopyInto(out *VaultLockConfigura
 		*out = new(string)
 		**out = **in
 	}
+	if in.BackupVaultNameRef != nil {
+		in, out := &in.BackupVaultNameRef, &out.BackupVaultNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BackupVaultNameSelector != nil {
+		in, out := &in.BackupVaultNameSelector, &out.BackupVaultNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ChangeableForDays != nil {
 		in, out := &in.ChangeableForDays, &out.ChangeableForDays
 		*out = new(float64)

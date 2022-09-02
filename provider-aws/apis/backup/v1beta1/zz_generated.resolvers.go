@@ -113,6 +113,32 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 	return nil
 }
 
+// ResolveReferences of this VaultLockConfiguration.
+func (mg *VaultLockConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackupVaultName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.BackupVaultNameRef,
+		Selector:     mg.Spec.ForProvider.BackupVaultNameSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.BackupVaultName")
+	}
+	mg.Spec.ForProvider.BackupVaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BackupVaultNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this VaultNotifications.
 func (mg *VaultNotifications) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

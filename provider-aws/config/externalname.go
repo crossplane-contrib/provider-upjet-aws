@@ -341,7 +341,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// each with their own name.
 	// "aws_glue_partition_index": config.IdentifierFromProvider,
 	// Imported using ARN: arn:aws:glue:us-west-2:123456789012:registry/example
-	"aws_glue_registry": config.TemplatedStringAsIdentifier("registry_name", "arn:aws:glue:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:registry/{{ .external_name }}"),
+	"aws_glue_registry": config.TemplatedStringAsIdentifier("registry_name", "arn:aws:glue:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:registry/{{ .external_name }}"),
 
 	// iam
 	//
@@ -686,7 +686,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// sns
 	//
 	// SNS Topics can be imported using the topic arn
-	"aws_sns_topic": config.TemplatedStringAsIdentifier("name", "arn:aws:sns:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:{{ .external_name }}"),
+	"aws_sns_topic": config.TemplatedStringAsIdentifier("name", "arn:aws:sns:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:{{ .external_name }}"),
 	// SNS Topic Subscriptions can be imported using the subscription arn that
 	// contains a random substring in the end.
 	"aws_sns_topic_subscription": config.IdentifierFromProvider,
@@ -746,11 +746,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// kinesisanalytics
 	//
-	"aws_kinesis_analytics_application": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesisanalytics:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:application/{{ .external_name }}"),
+	"aws_kinesis_analytics_application": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesisanalytics:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:application/{{ .external_name }}"),
 
 	// kinesisanalyticsv2
 	//
-	"aws_kinesisanalyticsv2_application": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesisanalytics:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:application/{{ .external_name }}"),
+	"aws_kinesisanalyticsv2_application": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesisanalytics:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:application/{{ .external_name }}"),
 	// aws_kinesisanalyticsv2_application can be imported by using application_name together with snapshot_name
 	// e.g. example-application/example-snapshot
 	"aws_kinesisanalyticsv2_application_snapshot": FormattedIdentifierUserDefined("snapshot_name", "/", "application_name"),
@@ -764,7 +764,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// firehose
 	//
-	"aws_kinesis_firehose_delivery_stream": config.TemplatedStringAsIdentifier("name", "arn:aws:firehose:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:deliverystream/{{ .external_name }}"),
+	"aws_kinesis_firehose_delivery_stream": config.TemplatedStringAsIdentifier("name", "arn:aws:firehose:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:deliverystream/{{ .external_name }}"),
 
 	// lakeformation
 	//
@@ -878,8 +878,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// sfn
 	//
-	"aws_sfn_activity":      config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:activity/{{ .external_name }}"),
-	"aws_sfn_state_machine": config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:stateMachine/{{ .external_name }}"),
+	"aws_sfn_activity":      config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:activity/{{ .external_name }}"),
+	"aws_sfn_state_machine": config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stateMachine/{{ .external_name }}"),
 
 	// dax
 	//

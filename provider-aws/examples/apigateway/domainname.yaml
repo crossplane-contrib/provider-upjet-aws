@@ -4,7 +4,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "The BasePathMapping resource needs a DomainName and DomainName resource needs valid certificates."
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: domainname
   name: example
 spec:
   forProvider:
@@ -18,16 +18,14 @@ spec:
     stageNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
 ---
-
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: DomainName
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "The DomainName resource needs valid certificates."
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: domainname
   name: example
 spec:
   forProvider:

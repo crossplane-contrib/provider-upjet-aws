@@ -19,3 +19,4 @@ spec:
       RDS: true
       Storage Gateway: true
       VirtualMachine: true
+      Neptune: true
