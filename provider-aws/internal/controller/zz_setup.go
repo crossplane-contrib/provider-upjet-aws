@@ -14,6 +14,9 @@ import (
 	certificateacmpca "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificate"
 	certificateauthority "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthority"
 	certificateauthoritycertificate "github.com/upbound/official-providers/provider-aws/internal/controller/acmpca/certificateauthoritycertificate"
+	alertmanagerdefinition "github.com/upbound/official-providers/provider-aws/internal/controller/amp/alertmanagerdefinition"
+	rulegroupnamespace "github.com/upbound/official-providers/provider-aws/internal/controller/amp/rulegroupnamespace"
+	workspace "github.com/upbound/official-providers/provider-aws/internal/controller/amp/workspace"
 	account "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/account"
 	apikey "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/apikey"
 	authorizer "github.com/upbound/official-providers/provider-aws/internal/controller/apigateway/authorizer"
@@ -214,7 +217,7 @@ import (
 	userdefinedfunction "github.com/upbound/official-providers/provider-aws/internal/controller/glue/userdefinedfunction"
 	workflow "github.com/upbound/official-providers/provider-aws/internal/controller/glue/workflow"
 	roleassociation "github.com/upbound/official-providers/provider-aws/internal/controller/grafana/roleassociation"
-	workspace "github.com/upbound/official-providers/provider-aws/internal/controller/grafana/workspace"
+	workspacegrafana "github.com/upbound/official-providers/provider-aws/internal/controller/grafana/workspace"
 	workspacesamlconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/grafana/workspacesamlconfiguration"
 	accesskey "github.com/upbound/official-providers/provider-aws/internal/controller/iam/accesskey"
 	accountalias "github.com/upbound/official-providers/provider-aws/internal/controller/iam/accountalias"
@@ -370,6 +373,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		certificateacmpca.Setup,
 		certificateauthority.Setup,
 		certificateauthoritycertificate.Setup,
+		alertmanagerdefinition.Setup,
+		rulegroupnamespace.Setup,
+		workspace.Setup,
 		account.Setup,
 		apikey.Setup,
 		authorizer.Setup,
@@ -570,7 +576,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userdefinedfunction.Setup,
 		workflow.Setup,
 		roleassociation.Setup,
-		workspace.Setup,
+		workspacegrafana.Setup,
 		workspacesamlconfiguration.Setup,
 		accesskey.Setup,
 		accountalias.Setup,

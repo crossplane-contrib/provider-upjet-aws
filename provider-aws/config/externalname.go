@@ -37,6 +37,14 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// arn:aws:acm-pca:eu-central-1:609897127049:certificate-authority/ba0c7989-9641-4f36-a033-dee60121d595
 	"aws_acmpca_certificate_authority_certificate": config.IdentifierFromProvider,
 
+	// amp
+	//
+	// ID is a random UUID.
+	"aws_prometheus_workspace":            config.IdentifierFromProvider,
+	"aws_prometheus_rule_group_namespace": config.TemplatedStringAsIdentifier("name", "arn:aws:aps:{{ .parameters.region }}:{{ .client_metadata.account_id }}:rulegroupsnamespace/IDstring/{{ .external_name }}"),
+	// Uses the ID of workspace, workspace_id parameter.
+	"aws_prometheus_alert_manager_definition": config.IdentifierFromProvider,
+
 	// apigatewayv2
 	//
 	"aws_apigatewayv2_api": config.IdentifierFromProvider,
