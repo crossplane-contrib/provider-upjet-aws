@@ -18,7 +18,7 @@ Download and install the Upbound `up` command-line.
 
 ```shell
 curl -sL "https://cli.upbound.io" | sh
-mv up /usr/local/bin/
+sudo mv up /usr/local/bin/
 ```
 
 Verify the version of `up` with `up --version`
