@@ -2,6 +2,8 @@ apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: CachePolicy
 metadata:
   name: example-policy
+  labels:
+    testing.upbound.io/example-name: cachepolicy
 spec:
   forProvider:
     region: us-west-1

@@ -16,5 +16,6 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"enforce_consumer_deletion"},
 		}
+		config.MoveToStatus(r.TerraformResource, "arn")
 	})
 }

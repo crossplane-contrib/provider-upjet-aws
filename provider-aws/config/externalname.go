@@ -738,8 +738,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// kinesis
 	//
-	// Kinesis Streams can be imported using the name
-	"aws_kinesis_stream": config.NameAsIdentifier,
+	// Even though the documentation says the ID is name, it uses ARN..
+	"aws_kinesis_stream": config.TemplatedStringAsIdentifier("name", " arn:aws:kinesis:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stream/{{ .external_name }}"),
 	// Kinesis Stream Consumers can be imported using the Amazon Resource Name (ARN)
 	// that has a random substring.
 	"aws_kinesis_stream_consumer": config.IdentifierFromProvider,

@@ -2,7 +2,7 @@ apiVersion: cloudsearch.aws.upbound.io/v1beta1
 kind: Domain
 metadata:
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: domain
   name: example
 spec:
   forProvider:
@@ -23,4 +23,30 @@ spec:
     region: us-west-1
     scalingParameters:
     - desiredInstanceType: search.medium
-
+---
+apiVersion: cloudsearch.aws.upbound.io/v1beta1
+kind: DomainServiceAccessPolicy
+metadata:
+  labels:
+    testing.upbound.io/example-name: domain
+  name: example
+spec:
+  forProvider:
+    accessPolicy: |
+      {
+        "Version":"2012-10-17",
+        "Statement":[{
+          "Sid":"search_only",
+          "Effect":"Allow",
+          "Principal":"*",
+          "Action":[
+            "cloudsearch:search",
+            "cloudsearch:document"
+          ],
+          "Condition":{"IpAddress":{"aws:SourceIp":"192.0.2.0/32"}}
+        }]
+      }
+    domainNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: domain
+    region: us-west-1

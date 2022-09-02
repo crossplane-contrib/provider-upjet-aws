@@ -2,7 +2,7 @@ apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: RealtimeLogConfig
 metadata:
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: realtimelogconfig
   name: example
 spec:
   forProvider:
@@ -10,10 +10,10 @@ spec:
       - kinesisStreamConfig:
           - roleArnSelector:
               matchLabels:
-                testing.upbound.io/example-name: example
+                testing.upbound.io/example-name: realtimelogconfig
             streamArnSelector:
               matchLabels:
-                testing.upbound.io/example-name: example
+                testing.upbound.io/example-name: realtimelogconfig
         streamType: Kinesis
     fields:
       - timestamp
@@ -21,14 +21,12 @@ spec:
     name: example
     region: us-west-1
     samplingRate: 75
-
 ---
-
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: realtimelogconfig
   name: example
 spec:
   forProvider:
@@ -45,18 +43,15 @@ spec:
           }
         ]
       }
-
 ---
-
 apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
-  name: example
+  name: example-op-0ix00uz1
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: realtimelogconfig
 spec:
   forProvider:
-    name: example
     region: us-west-1
     retentionPeriod: 48
     shardCount: 1
