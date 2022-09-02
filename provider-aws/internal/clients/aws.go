@@ -32,6 +32,9 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "cannot get AWS config")
 		}
+		if cfg.Region == "" && mg.GetObjectKind().GroupVersionKind().Group == "iam.aws.upbound.io" {
+			cfg.Region = "us-east-1"
+		}
 		creds, err := cfg.Credentials.Retrieve(ctx)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
@@ -58,18 +61,6 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			ClientMetadata: map[string]string{
 				keyAccountId: *identity.Account,
 			},
-		}
-		if ps.Configuration["region"] == "" {
-			// Some resources, like iam group, do not have a notion of region
-			// hence we have no region in their schema. However, terraform still
-			// attempts validating region in provider config and does not like
-			// both empty string or not setting it at all. We need to skip
-			// region validation in this case.
-			ps.Configuration["skip_region_validation"] = true
-
-			if mg.GetObjectKind().GroupVersionKind().Group == "iam.aws.upbound.io" {
-				ps.Configuration["region"] = "us-east-1"
-			}
 		}
 		return ps, err
 	}
