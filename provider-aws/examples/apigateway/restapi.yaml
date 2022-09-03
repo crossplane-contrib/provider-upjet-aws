@@ -54,9 +54,7 @@ spec:
     authorizerCredentialsSelector:
       matchLabels:
         testing.upbound.io/example-name: restapi
-    authorizerUriSelector:
-      matchLabels:
-        testing.upbound.io/example-name: restapi
+    authorizerUri: arn:aws:lambda:us-west-1:609897127049:function:official-providers-noop-test-func
     name: demo
     region: us-west-1
     restApiIdSelector:
@@ -136,45 +134,3 @@ spec:
         ]
       }
     path: /
----
-apiVersion: iam.aws.upbound.io/v1beta1
-kind: Role
-metadata:
-  labels:
-    testing.upbound.io/example-name: restapi
-    testing.upbound.io/example-name-subgroup: lambda
-  name: lambda
-spec:
-  forProvider:
-    assumeRolePolicy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": "sts:AssumeRole",
-            "Principal": {
-              "Service": "lambda.amazonaws.com"
-            },
-            "Effect": "Allow",
-            "Sid": ""
-          }
-        ]
-      }
----
-apiVersion: lambda.aws.upbound.io/v1beta1
-kind: Function
-metadata:
-  labels:
-    testing.upbound.io/example-name: restapi
-  name: authorizer-${Rand.RFC1123Subdomain}
-spec:
-  forProvider:
-    s3Bucket: up-example
-    s3Key: index-js.zip
-    handler: exports.example
-    region: us-west-1
-    runtime: nodejs12.x
-    roleSelector:
-      matchLabels:
-        testing.upbound.io/example-name: restapi
-        testing.upbound.io/example-name-subgroup: lambda
