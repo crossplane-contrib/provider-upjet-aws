@@ -80,6 +80,10 @@ import (
 	responseheaderspolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudfront/responseheaderspolicy"
 	domain "github.com/upbound/official-providers/provider-aws/internal/controller/cloudsearch/domain"
 	domainserviceaccesspolicy "github.com/upbound/official-providers/provider-aws/internal/controller/cloudsearch/domainserviceaccesspolicy"
+	compositealarm "github.com/upbound/official-providers/provider-aws/internal/controller/cloudwatch/compositealarm"
+	dashboard "github.com/upbound/official-providers/provider-aws/internal/controller/cloudwatch/dashboard"
+	metricalarm "github.com/upbound/official-providers/provider-aws/internal/controller/cloudwatch/metricalarm"
+	metricstream "github.com/upbound/official-providers/provider-aws/internal/controller/cloudwatch/metricstream"
 	group "github.com/upbound/official-providers/provider-aws/internal/controller/cloudwatchlogs/group"
 	cognitoidentitypoolproviderprincipaltag "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
 	pool "github.com/upbound/official-providers/provider-aws/internal/controller/cognitoidentity/pool"
@@ -436,6 +440,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		responseheaderspolicy.Setup,
 		domain.Setup,
 		domainserviceaccesspolicy.Setup,
+		compositealarm.Setup,
+		dashboard.Setup,
+		metricalarm.Setup,
+		metricstream.Setup,
 		group.Setup,
 		cognitoidentitypoolproviderprincipaltag.Setup,
 		pool.Setup,

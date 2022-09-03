@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: healthchecks.route53.aws.upbound.io
+  name: metricalarms.cloudwatch.aws.upbound.io
 spec:
-  group: route53.aws.upbound.io
+  group: cloudwatch.aws.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - aws
-    kind: HealthCheck
-    listKind: HealthCheckList
-    plural: healthchecks
-    singular: healthcheck
+    kind: MetricAlarm
+    listKind: MetricAlarmList
+    plural: metricalarms
+    singular: metricalarm
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: HealthCheck is the Schema for the HealthChecks API. Provides
-          a Route53 health check.
+        description: MetricAlarm is the Schema for the MetricAlarms API. Provides
+          a CloudWatch Metric Alarm resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: HealthCheckSpec defines the desired state of HealthCheck
+            description: MetricAlarmSpec defines the desired state of MetricAlarm
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,186 +64,175 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  childHealthThreshold:
-                    description: The minimum number of child health checks that must
-                      be healthy for Route 53 to consider the parent health check
-                      to be healthy. Valid values are integers between 0 and 256,
-                      inclusive
-                    type: number
-                  childHealthchecks:
-                    description: For a specified parent health check, a list of HealthCheckId
-                      values for the associated child health checks.
+                  actionsEnabled:
+                    description: Indicates whether or not actions should be executed
+                      during any changes to the alarm's state. Defaults to true.
+                    type: boolean
+                  alarmActions:
+                    description: The list of actions to execute when this alarm transitions
+                      into an ALARM state from any other state. Each action is specified
+                      as an Amazon Resource Name .
                     items:
                       type: string
                     type: array
-                  cloudwatchAlarmName:
-                    description: The name of the CloudWatch alarm.
+                  alarmDescription:
+                    description: The description for the alarm.
                     type: string
-                  cloudwatchAlarmNameRef:
-                    description: Reference to a MetricAlarm in cloudwatch to populate
-                      cloudwatchAlarmName.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
+                  comparisonOperator:
+                    description: 'The arithmetic operation to use when comparing the
+                      specified Statistic and Threshold. The specified Statistic value
+                      is used as the first operand. Either of the following is supported:
+                      GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold,
+                      LessThanOrEqualToThreshold. Additionally, the values  LessThanLowerOrGreaterThanUpperThreshold,
+                      LessThanLowerThreshold, and GreaterThanUpperThreshold are used
+                      only for alarms based on anomaly detection models.'
+                    type: string
+                  datapointsToAlarm:
+                    description: The number of datapoints that must be breaching to
+                      trigger the alarm.
+                    type: number
+                  dimensions:
+                    additionalProperties:
+                      type: string
                     type: object
-                  cloudwatchAlarmNameSelector:
-                    description: Selector for a MetricAlarm in cloudwatch to populate
-                      cloudwatchAlarmName.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
+                  evaluateLowSampleCountPercentiles:
+                    description: 'Used only for alarms based on percentiles. If you
+                      specify ignore, the alarm state will not change during periods
+                      with too few data points to be statistically significant. If
+                      you specify evaluate or omit this parameter, the alarm will
+                      always be evaluated and possibly change state no matter how
+                      many data points are available. The following values are supported:
+                      ignore, and evaluate.'
+                    type: string
+                  evaluationPeriods:
+                    description: The number of periods over which data is compared
+                      to the specified threshold.
+                    type: number
+                  extendedStatistic:
+                    description: The percentile statistic for the metric associated
+                      with the alarm. Specify a value between p0.0 and p100.
+                    type: string
+                  insufficientDataActions:
+                    description: The list of actions to execute when this alarm transitions
+                      into an INSUFFICIENT_DATA state from any other state. Each action
+                      is specified as an Amazon Resource Name .
+                    items:
+                      type: string
+                    type: array
+                  metricName:
+                    type: string
+                  metricQuery:
+                    description: Enables you to create an alarm based on a metric
+                      math expression. You may specify at most 20.
+                    items:
+                      properties:
+                        accountId:
+                          description: The ID of the account where the metrics are
+                            located, if this is a cross-account alarm.
                           type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  cloudwatchAlarmRegion:
-                    description: The CloudWatchRegion that the CloudWatch alarm was
-                      created in.
+                        expression:
+                          description: The math expression to be performed on the
+                            returned data, if this object is performing a math expression.
+                            This expression can use the id of the other metrics to
+                            refer to those metrics, and can also use the id of other
+                            expressions to use the result of those expressions. For
+                            more information about metric math expressions, see Metric
+                            Math Syntax and Functions in the Amazon CloudWatch User
+                            Guide.
+                          type: string
+                        id:
+                          type: string
+                        label:
+                          description: A human-readable label for this metric or expression.
+                            This is especially useful if this is an expression, so
+                            that you know what the value represents.
+                          type: string
+                        metric:
+                          description: The metric to be returned, along with statistics,
+                            period, and units. Use this parameter only if this object
+                            is retrieving a metric and not performing a math expression
+                            on returned data.
+                          items:
+                            properties:
+                              dimensions:
+                                additionalProperties:
+                                  type: string
+                                type: object
+                              metricName:
+                                type: string
+                              namespace:
+                                type: string
+                              period:
+                                type: number
+                              stat:
+                                description: The statistic to apply to this metric.
+                                  See docs for supported statistics.
+                                type: string
+                              unit:
+                                type: string
+                            required:
+                            - metricName
+                            - period
+                            - stat
+                            type: object
+                          type: array
+                        returnData:
+                          description: Specify exactly one metric_query to be true
+                            to use that metric_query result as the alarm.
+                          type: boolean
+                      required:
+                      - id
+                      type: object
+                    type: array
+                  namespace:
                     type: string
-                  disabled:
-                    description: 'A boolean value that stops Route 53 from performing
-                      health checks. When set to true, Route 53 will do the following
-                      depending on the type of health check:'
-                    type: boolean
-                  enableSni:
-                    description: 'A boolean value that indicates whether Route53 should
-                      send the fqdn to the endpoint when performing the health check.
-                      This defaults to AWS'' defaults: when the type is "HTTPS" enable_sni
-                      defaults to true, when type is anything else enable_sni defaults
-                      to false.'
-                    type: boolean
-                  failureThreshold:
-                    description: The number of consecutive health checks that an endpoint
-                      must pass or fail.
+                  okActions:
+                    description: The list of actions to execute when this alarm transitions
+                      into an OK state from any other state. Each action is specified
+                      as an Amazon Resource Name .
+                    items:
+                      type: string
+                    type: array
+                  period:
                     type: number
-                  fqdn:
-                    description: The fully qualified domain name of the endpoint to
-                      be checked.
-                    type: string
-                  insufficientDataHealthStatus:
-                    description: The status of the health check when CloudWatch has
-                      insufficient data about the state of associated alarm. Valid
-                      values are Healthy , Unhealthy and LastKnownStatus.
-                    type: string
-                  invertHealthcheck:
-                    type: boolean
-                  ipAddress:
-                    description: The IP address of the endpoint to be checked.
-                    type: string
-                  measureLatency:
-                    description: A Boolean value that indicates whether you want Route
-                      53 to measure the latency between health checkers in multiple
-                      AWS regions and your endpoint and to display CloudWatch latency
-                      graphs in the Route 53 console.
-                    type: boolean
-                  port:
-                    description: The port of the endpoint to be checked.
-                    type: number
-                  referenceName:
-                    description: This is a reference name used in Caller Reference
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  regions:
-                    description: A list of AWS regions that you want Amazon Route
-                      53 health checkers to check the specified endpoint from.
-                    items:
-                      type: string
-                    type: array
-                  requestInterval:
-                    description: The number of seconds between the time that Amazon
-                      Route 53 gets a response from your endpoint and the time that
-                      it sends the next health-check request.
-                    type: number
-                  resourcePath:
-                    description: The path that you want Amazon Route 53 to request
-                      when performing health checks.
-                    type: string
-                  routingControlArn:
-                    description: The Amazon Resource Name  for the Route 53 Application
-                      Recovery Controller routing control. This is used when health
-                      check type is RECOVERY_CONTROL
-                    type: string
-                  searchString:
-                    description: String searched in the first 5120 bytes of the response
-                      body for check to be considered healthy. Only valid with HTTP_STR_MATCH
-                      and HTTPS_STR_MATCH.
+                  statistic:
+                    description: 'The statistic to apply to the alarm''s associated
+                      metric. Either of the following is supported: SampleCount, Average,
+                      Sum, Minimum, Maximum'
                     type: string
                   tags:
                     additionalProperties:
                       type: string
-                    description: A map of tags to assign to the health check. If configured
+                    description: A map of tags to assign to the resource. If configured
                       with a provider default_tags configuration block present, tags
                       with matching keys will overwrite those defined at the provider-level.
                     type: object
-                  type:
-                    description: The protocol to use when performing health checks.
-                      Valid values are HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH,
-                      TCP, CALCULATED, CLOUDWATCH_METRIC and RECOVERY_CONTROL.
+                  threshold:
+                    description: The value against which the specified statistic is
+                      compared. This parameter is required for alarms based on static
+                      thresholds, but should not be used for alarms based on anomaly
+                      detection models.
+                    type: number
+                  thresholdMetricId:
+                    description: If this is an alarm based on an anomaly detection
+                      model, make this value match the ID of the ANOMALY_DETECTION_BAND
+                      function.
+                    type: string
+                  treatMissingData:
+                    description: 'Sets how this alarm is to handle missing data points.
+                      The following values are supported: missing, ignore, breaching
+                      and notBreaching. Defaults to missing.'
+                    type: string
+                  unit:
                     type: string
                 required:
+                - comparisonOperator
+                - evaluationPeriods
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:
@@ -417,15 +406,14 @@ spec:
             - forProvider
             type: object
           status:
-            description: HealthCheckStatus defines the observed state of HealthCheck.
+            description: MetricAlarmStatus defines the observed state of MetricAlarm.
             properties:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  of the Health Check.
+                    description: The ARN of the CloudWatch Metric Alarm.
                     type: string
                   id:
-                    description: The id of the health check
                     type: string
                   tagsAll:
                     additionalProperties:

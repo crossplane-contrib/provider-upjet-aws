@@ -416,6 +416,16 @@ func (in *HealthCheckParameters) DeepCopyInto(out *HealthCheckParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CloudwatchAlarmNameRef != nil {
+		in, out := &in.CloudwatchAlarmNameRef, &out.CloudwatchAlarmNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CloudwatchAlarmNameSelector != nil {
+		in, out := &in.CloudwatchAlarmNameSelector, &out.CloudwatchAlarmNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CloudwatchAlarmRegion != nil {
 		in, out := &in.CloudwatchAlarmRegion, &out.CloudwatchAlarmRegion
 		*out = new(string)

@@ -27,7 +27,7 @@ func Configure(p *config.Provider) {
 		// aws_s3_bucket_website_configuration
 		config.MoveToStatus(r.TerraformResource, "acceleration_status", "acl", "grant", "cors_rule", "lifecycle_rule",
 			"logging", "object_lock_configuration", "policy", "replication_configuration", "request_payer",
-			"server_side_encryption_configuration", "versioning", "website")
+			"server_side_encryption_configuration", "versioning", "website", "arn")
 		r.MetaResource.ExternalName = registry.RandRFC1123Subdomain
 	})
 
