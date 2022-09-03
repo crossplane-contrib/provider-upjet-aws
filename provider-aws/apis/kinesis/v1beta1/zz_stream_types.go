@@ -25,6 +25,9 @@ type StreamModeDetailsParameters struct {
 
 type StreamObservation struct {
 
+	// The Amazon Resource Name  specifying the Stream
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// The unique Stream id
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -33,10 +36,6 @@ type StreamObservation struct {
 }
 
 type StreamParameters struct {
-
-	// The Amazon Resource Name  specifying the Stream
-	// +kubebuilder:validation:Optional
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The encryption type to use. The only acceptable values are NONE or KMS. The default value is NONE.
 	// +kubebuilder:validation:Optional
