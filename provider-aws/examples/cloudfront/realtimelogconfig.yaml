@@ -18,7 +18,7 @@ spec:
     fields:
       - timestamp
       - c-ip
-    name: example
+    name: example-${Rand.RFC1123Subdomain}
     region: us-west-1
     samplingRate: 75
 ---
@@ -27,7 +27,7 @@ kind: Role
 metadata:
   labels:
     testing.upbound.io/example-name: realtimelogconfig
-  name: example
+  name: test-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -47,7 +47,7 @@ spec:
 apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
-  name: example-op-0ix00uz1
+  name: example-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: realtimelogconfig
 spec:

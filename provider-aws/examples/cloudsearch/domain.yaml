@@ -29,7 +29,7 @@ kind: DomainServiceAccessPolicy
 metadata:
   labels:
     testing.upbound.io/example-name: domain
-  name: example
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     accessPolicy: |

@@ -12,6 +12,7 @@ import (
 	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
 	v1beta12 "github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1"
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1"
+	common "github.com/upbound/official-providers/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -234,7 +235,7 @@ func (mg *RealtimeLogConfig) ResolveReferences(ctx context.Context, c client.Rea
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig[i4].StreamArn),
-				Extract:      resource.ExtractParamPath("arn", false),
+				Extract:      common.TerraformID(),
 				Reference:    mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig[i4].StreamArnRef,
 				Selector:     mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig[i4].StreamArnSelector,
 				To: reference.To{
