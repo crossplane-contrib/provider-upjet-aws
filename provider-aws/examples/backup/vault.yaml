@@ -1,7 +1,7 @@
 apiVersion: backup.aws.upbound.io/v1beta1
 kind: Vault
 metadata:
-  name: example-bucket-vault
+  name: test-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: vault
 spec:
@@ -36,7 +36,7 @@ spec:
       - backupOptions:
           WindowsVSS: enabled
         resourceType: EC2
-    name: up_example_backup_plan
+    name: test-${Rand.RFC1123Subdomain}
     rule:
       - lifecycle:
           - deleteAfter: 14
