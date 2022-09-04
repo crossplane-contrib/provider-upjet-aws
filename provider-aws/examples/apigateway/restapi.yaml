@@ -54,7 +54,7 @@ spec:
     authorizerCredentialsSelector:
       matchLabels:
         testing.upbound.io/example-name: restapi
-    authorizerUri: arn:aws:lambda:us-west-1:609897127049:function:official-providers-noop-test-func
+    authorizerUri: arn:aws:apigateway:us-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-1:609897127049:function:official-providers-noop-test-func/invocations
     name: demo
     region: us-west-1
     restApiIdSelector:
@@ -116,7 +116,7 @@ kind: Role
 metadata:
   labels:
     testing.upbound.io/example-name: restapi
-  name: invocation-role
+  name: test-invocation-role-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     assumeRolePolicy: |
