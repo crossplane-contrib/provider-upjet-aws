@@ -152,7 +152,7 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 				for i6 := 0; i6 < len(mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].ReferenceDataSource[i5].S3ReferenceDataSource); i6++ {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].ReferenceDataSource[i5].S3ReferenceDataSource[i6].BucketArn),
-						Extract:      resource.ExtractParamPath("arn", false),
+						Extract:      resource.ExtractParamPath("arn", true),
 						Reference:    mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].ReferenceDataSource[i5].S3ReferenceDataSource[i6].BucketArnRef,
 						Selector:     mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].ReferenceDataSource[i5].S3ReferenceDataSource[i6].BucketArnSelector,
 						To: reference.To{

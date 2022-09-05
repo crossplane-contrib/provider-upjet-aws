@@ -182,7 +182,7 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].BucketArn),
-				Extract:      resource.ExtractParamPath("arn", false),
+				Extract:      resource.ExtractParamPath("arn", true),
 				Reference:    mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].BucketArnRef,
 				Selector:     mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].BucketArnSelector,
 				To: reference.To{
