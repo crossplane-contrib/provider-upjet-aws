@@ -714,8 +714,8 @@ github.com/tmc/grpc-websocket-proxy v0.0.0-20201229170055-e5319fda7802/go.mod h1
 github.com/tmccombs/hcl2json v0.3.3 h1:+DLNYqpWE0CsOQiEZu+OZm5ZBImake3wtITYxQ8uLFQ=
 github.com/tmccombs/hcl2json v0.3.3/go.mod h1:Y2chtz2x9bAeRTvSibVRVgbLJhLJXKlUeIvjeVdnm4w=
 github.com/tv42/httpunix v0.0.0-20150427012821-b75d8614f926/go.mod h1:9ESjWnEqriFuLhtthL60Sar/7RFoluCcXsuvEwTV5KM=
-github.com/upbound/upjet v0.6.1-0.20220901113013-ac8f3821aee3 h1:wl6cy7pxsz3iJeLbm1SjUrqsxKme3DGOaNfmrHuwdrw=
-github.com/upbound/upjet v0.6.1-0.20220901113013-ac8f3821aee3/go.mod h1:0+wpQK5gAAvLwiiyq5ZCVeXJioDFPtq2rZ2FUViyaxA=
+github.com/upbound/upjet v0.6.1-0.20220905075120-ff96a5ece857 h1:TAfygauxx7pxU+zV9/2vemMI4uxfSXCi/l/LoHPElPc=
+github.com/upbound/upjet v0.6.1-0.20220905075120-ff96a5ece857/go.mod h1:0+wpQK5gAAvLwiiyq5ZCVeXJioDFPtq2rZ2FUViyaxA=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.4+incompatible h1:dSLoQfGFAo3F6OoNhwUmLwVgaUXK79GlxNBwueZn0xI=
 github.com/vmihailenco/msgpack v4.0.4+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
