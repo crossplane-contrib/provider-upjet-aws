@@ -11,7 +11,7 @@ spec:
     description: example description
     name: example
     region: us-west-1
-    targetArnsRefs:
+    targetArnRefs:
     - name: example
 
 ---

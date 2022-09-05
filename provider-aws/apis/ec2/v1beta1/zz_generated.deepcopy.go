@@ -4367,11 +4367,6 @@ func (in *LaunchTemplateParameters_2) DeepCopyInto(out *LaunchTemplateParameters
 		*out = new(string)
 		**out = **in
 	}
-	if in.NamePrefix != nil {
-		in, out := &in.NamePrefix, &out.NamePrefix
-		*out = new(string)
-		**out = **in
-	}
 	if in.NetworkInterfaces != nil {
 		in, out := &in.NetworkInterfaces, &out.NetworkInterfaces
 		*out = make([]NetworkInterfacesParameters, len(*in))
@@ -8627,11 +8622,6 @@ func (in *SecurityGroupParameters) DeepCopyInto(out *SecurityGroupParameters) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
-	if in.NamePrefix != nil {
-		in, out := &in.NamePrefix, &out.NamePrefix
 		*out = new(string)
 		**out = **in
 	}

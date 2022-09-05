@@ -66,8 +66,8 @@ func (mg *GroupMembership) ResolveReferences(ctx context.Context, c client.Reade
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Users),
 		Extract:       reference.ExternalName(),
-		References:    mg.Spec.ForProvider.UsersRefs,
-		Selector:      mg.Spec.ForProvider.UsersSelector,
+		References:    mg.Spec.ForProvider.UserRefs,
+		Selector:      mg.Spec.ForProvider.UserSelector,
 		To: reference.To{
 			List:    &UserList{},
 			Managed: &User{},
@@ -77,7 +77,7 @@ func (mg *GroupMembership) ResolveReferences(ctx context.Context, c client.Reade
 		return errors.Wrap(err, "mg.Spec.ForProvider.Users")
 	}
 	mg.Spec.ForProvider.Users = reference.ToPtrValues(mrsp.ResolvedValues)
-	mg.Spec.ForProvider.UsersRefs = mrsp.ResolvedReferences
+	mg.Spec.ForProvider.UserRefs = mrsp.ResolvedReferences
 
 	return nil
 }

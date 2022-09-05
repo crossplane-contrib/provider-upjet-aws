@@ -90,9 +90,6 @@ spec:
                     description: The name for the public key. By default generated
                       by Terraform.
                     type: string
-                  namePrefix:
-                    description: The name for the public key. Conflicts with name.
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.

@@ -87,7 +87,9 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_iam_group_membership", func(r *config.Resource) {
 		r.References["users"] = config.Reference{
-			Type: "User",
+			Type:              "User",
+			RefFieldName:      "UserRefs",
+			SelectorFieldName: "UserSelector",
 		}
 		r.References["group"] = config.Reference{
 			Type: "Group",
@@ -113,5 +115,10 @@ func Configure(p *config.Provider) {
 		r.References["username"] = config.Reference{
 			Type: "User",
 		}
+	})
+
+	p.AddResourceConfigurator("aws_iam_policy", func(r *config.Resource) {
+		// Otherwise TF assigns a random string.
+		config.MarkAsRequired(r.TerraformResource, "name")
 	})
 }

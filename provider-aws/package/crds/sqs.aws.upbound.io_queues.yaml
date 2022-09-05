@@ -114,10 +114,6 @@ spec:
                       Terraform will assign a random, unique name. Conflicts with
                       name_prefix
                     type: string
-                  namePrefix:
-                    description: Creates a unique name beginning with the specified
-                      prefix. Conflicts with name
-                    type: string
                   policy:
                     description: The JSON policy for the SQS queue. For more information
                       about building AWS IAM policy documents with Terraform, see

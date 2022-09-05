@@ -889,8 +889,8 @@ func (mg *VPCLink) ResolveReferences(ctx context.Context, c client.Reader) error
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.TargetArns),
 		Extract:       common.ARNExtractor(),
-		References:    mg.Spec.ForProvider.TargetArnsRefs,
-		Selector:      mg.Spec.ForProvider.TargetArnsSelector,
+		References:    mg.Spec.ForProvider.TargetArnRefs,
+		Selector:      mg.Spec.ForProvider.TargetArnSelector,
 		To: reference.To{
 			List:    &v1beta13.LBList{},
 			Managed: &v1beta13.LB{},
@@ -900,7 +900,7 @@ func (mg *VPCLink) ResolveReferences(ctx context.Context, c client.Reader) error
 		return errors.Wrap(err, "mg.Spec.ForProvider.TargetArns")
 	}
 	mg.Spec.ForProvider.TargetArns = reference.ToPtrValues(mrsp.ResolvedValues)
-	mg.Spec.ForProvider.TargetArnsRefs = mrsp.ResolvedReferences
+	mg.Spec.ForProvider.TargetArnRefs = mrsp.ResolvedReferences
 
 	return nil
 }

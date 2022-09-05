@@ -1,7 +1,9 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
-  name: sample-eks-cluster
+  name: sample-role
+  labels:
+    testing.upbound.io/example-name: role
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -19,21 +21,38 @@ spec:
       }
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
-kind: Role
+kind: RolePolicyAttachment
 metadata:
-  name: sample-node-role
+  name: sample-policy-attachment
+  labels:
+    testing.upbound.io/example-name: role
 spec:
   forProvider:
-    assumeRolePolicy: |
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  name: sample-user-policy
+  labels:
+    testing.upbound.io/example-name: role
+spec:
+  forProvider:
+    name: my-policy-name-${Rand.RFC1123Subdomain}
+    policy: |
       {
         "Version": "2012-10-17",
         "Statement": [
           {
-            "Effect": "Allow",
-            "Principal": {
-              "Service": "ec2.amazonaws.com"
-            },
-            "Action": "sts:AssumeRole"
+              "Sid": "VisualEditor0",
+              "Effect": "Allow",
+              "Action": "elastic-inference:Connect",
+              "Resource": "*"
           }
         ]
       }

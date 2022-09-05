@@ -81,13 +81,7 @@ spec:
                       a provider default_tags configuration block present, tags with
                       matching keys will overwrite those defined at the provider-level.
                     type: object
-                  targetArns:
-                    description: The list of network load balancer arns in the VPC
-                      targeted by the VPC link. Currently AWS only supports 1 target.
-                    items:
-                      type: string
-                    type: array
-                  targetArnsRefs:
+                  targetArnRefs:
                     description: References to LB in elbv2 to populate targetArns.
                     items:
                       description: A Reference to a named object.
@@ -124,7 +118,7 @@ spec:
                       - name
                       type: object
                     type: array
-                  targetArnsSelector:
+                  targetArnSelector:
                     description: Selector for a list of LB in elbv2 to populate targetArns.
                     properties:
                       matchControllerRef:
@@ -163,6 +157,12 @@ spec:
                             type: string
                         type: object
                     type: object
+                  targetArns:
+                    description: The list of network load balancer arns in the VPC
+                      targeted by the VPC link. Currently AWS only supports 1 target.
+                    items:
+                      type: string
+                    type: array
                 required:
                 - name
                 - region

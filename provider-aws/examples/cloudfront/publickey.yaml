@@ -3,7 +3,7 @@ kind: PublicKey
 metadata:
   name: example-public-key
   labels:
-    testing.upbound.io/example-name: cloudfront
+    testing.upbound.io/example-name: publickey
 spec:
   forProvider:
     region: us-west-1
@@ -32,3 +32,62 @@ stringData:
     3L4KCoce9D7Da5wLn788TWeL4mV8mj2o4uzuCuQXVnAFtmIEjznffp2Q8z1BnBmj
     ywIDAQAB
     -----END PUBLIC KEY-----
+---
+apiVersion: cloudfront.aws.upbound.io/v1beta1
+kind: KeyGroup
+metadata:
+  name: example-key-group
+spec:
+  forProvider:
+    region: us-west-1
+    comment: example key group
+    itemSelector:
+      matchLabels:
+        testing.upbound.io/example-name: publickey
+    name: example-key-group
+---
+apiVersion: cloudfront.aws.upbound.io/v1beta1
+kind: FieldLevelEncryptionProfile
+metadata:
+  name: example-field-level-encryption-profile
+  labels:
+    testing.upbound.io/example-name: publickey
+spec:
+  forProvider:
+    region: us-west-1
+    comment: test comment
+    encryptionEntities:
+      - items:
+          - fieldPatterns:
+              - items:
+                  - DateOfBirth
+            providerId: testprovider
+            publicKeyIdSelector:
+              matchLabels:
+                testing.upbound.io/example-name: publickey
+    name: ${Rand.RFC1123Subdomain}
+---
+apiVersion: cloudfront.aws.upbound.io/v1beta1
+kind: FieldLevelEncryptionConfig
+metadata:
+  name: example-field-level-encryption-config
+  labels:
+    testing.upbound.io/example-name: publickey
+spec:
+  forProvider:
+    region: us-west-1
+    comment: test comment
+    contentTypeProfileConfig:
+      - contentTypeProfiles:
+          - items:
+              - contentType: application/x-www-form-urlencoded
+                format: URLEncoded
+        forwardWhenContentTypeIsUnknown: true
+    queryArgProfileConfig:
+      - forwardWhenQueryArgProfileIsUnknown: true
+        queryArgProfiles:
+          - items:
+              - profileIdSelector:
+                  matchLabels:
+                    testing.upbound.io/example-name: publickey
+                queryArg: Arg1

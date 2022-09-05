@@ -42,19 +42,21 @@ type VPCLinkParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The list of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/elbv2/v1beta1.LB
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
-	// +kubebuilder:validation:Optional
-	TargetArns []*string `json:"targetArns,omitempty" tf:"target_arns,omitempty"`
-
 	// References to LB in elbv2 to populate targetArns.
 	// +kubebuilder:validation:Optional
-	TargetArnsRefs []v1.Reference `json:"targetArnsRefs,omitempty" tf:"-"`
+	TargetArnRefs []v1.Reference `json:"targetArnRefs,omitempty" tf:"-"`
 
 	// Selector for a list of LB in elbv2 to populate targetArns.
 	// +kubebuilder:validation:Optional
-	TargetArnsSelector *v1.Selector `json:"targetArnsSelector,omitempty" tf:"-"`
+	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+
+	// The list of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target.
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/elbv2/v1beta1.LB
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:refFieldName=TargetArnRefs
+	// +crossplane:generate:reference:selectorFieldName=TargetArnSelector
+	// +kubebuilder:validation:Optional
+	TargetArns []*string `json:"targetArns,omitempty" tf:"target_arns,omitempty"`
 }
 
 // VPCLinkSpec defines the desired state of VPCLink
