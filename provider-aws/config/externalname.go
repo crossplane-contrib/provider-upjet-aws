@@ -972,6 +972,17 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Please see the following issue in upjet: https://github.com/upbound/upjet/issues/32
 	// OpenSearch domains can be imported using the domain_name
 	"aws_opensearch_domain_saml_options": config.IdentifierFromProvider,
+
+	// cloudwatch
+	//
+	// Use the alarm_name to import a CloudWatch Composite Alarm.
+	"aws_cloudwatch_composite_alarm": config.ParameterAsIdentifier("alarm_name"),
+	// CloudWatch dashboards can be imported using the dashboard_name
+	"aws_cloudwatch_dashboard": config.ParameterAsIdentifier("dashboard_name"),
+	// CloudWatch Metric Alarm can be imported using the alarm_name
+	"aws_cloudwatch_metric_alarm": config.ParameterAsIdentifier("alarm_name"),
+	// CloudWatch metric streams can be imported using the name
+	"aws_cloudwatch_metric_stream": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

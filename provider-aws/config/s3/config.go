@@ -27,7 +27,7 @@ func Configure(p *config.Provider) {
 		// aws_s3_bucket_website_configuration
 		config.MoveToStatus(r.TerraformResource, "acceleration_status", "acl", "grant", "cors_rule", "lifecycle_rule",
 			"logging", "object_lock_configuration", "policy", "replication_configuration", "request_payer",
-			"server_side_encryption_configuration", "versioning", "website")
+			"server_side_encryption_configuration", "versioning", "website", "arn")
 		r.MetaResource.ExternalName = registry.RandRFC1123Subdomain
 	})
 
@@ -60,5 +60,26 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_s3_bucket_notification", func(r *config.Resource) {
 		// NOTE(muvaf): It causes circular dependency. See https://github.com/crossplane/crossplane-runtime/issues/313
 		delete(r.References, "lambda_function.lambda_function_arn")
+	})
+
+	p.AddResourceConfigurator("aws_s3_bucket_analytics_configuration", func(r *config.Resource) {
+		r.References["storage_class_analysis.data_export.destination.s3_bucket_destination.bucket_arn"] = config.Reference{
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
+			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+		}
+	})
+
+	p.AddResourceConfigurator("aws_s3_bucket_replication_configuration", func(r *config.Resource) {
+		r.References["rule.destination.bucket"] = config.Reference{
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
+			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+		}
+	})
+
+	p.AddResourceConfigurator("aws_s3_bucket_inventory", func(r *config.Resource) {
+		r.References["destination.bucket.bucket_arn"] = config.Reference{
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
+			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+		}
 	})
 }

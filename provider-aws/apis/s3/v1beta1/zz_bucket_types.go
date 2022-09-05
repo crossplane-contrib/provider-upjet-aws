@@ -41,6 +41,9 @@ type BucketObservation struct {
 	// Use the resource aws_s3_bucket_accelerate_configuration instead.
 	AccelerationStatus *string `json:"accelerationStatus,omitempty" tf:"acceleration_status,omitempty"`
 
+	// The ARN of the bucket. Will be of format arn:aws:s3:::bucketname.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// The bucket domain name. Will be of format bucketname.s3.amazonaws.com.
 	BucketDomainName *string `json:"bucketDomainName,omitempty" tf:"bucket_domain_name,omitempty"`
 
@@ -107,10 +110,6 @@ type BucketObservation struct {
 }
 
 type BucketParameters struct {
-
-	// The ARN of the bucket. Will be of format arn:aws:s3:::bucketname.
-	// +kubebuilder:validation:Optional
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A boolean that indicates all objects  should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable.
 	// +kubebuilder:validation:Optional

@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: healthchecks.route53.aws.upbound.io
+  name: metricstreams.cloudwatch.aws.upbound.io
 spec:
-  group: route53.aws.upbound.io
+  group: cloudwatch.aws.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - aws
-    kind: HealthCheck
-    listKind: HealthCheckList
-    plural: healthchecks
-    singular: healthcheck
+    kind: MetricStream
+    listKind: MetricStreamList
+    plural: metricstreams
+    singular: metricstream
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: HealthCheck is the Schema for the HealthChecks API. Provides
-          a Route53 health check.
+        description: MetricStream is the Schema for the MetricStreams API. Provides
+          a CloudWatch Metric Stream resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: HealthCheckSpec defines the desired state of HealthCheck
+            description: MetricStreamSpec defines the desired state of MetricStream
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,24 +64,26 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  childHealthThreshold:
-                    description: The minimum number of child health checks that must
-                      be healthy for Route 53 to consider the parent health check
-                      to be healthy. Valid values are integers between 0 and 256,
-                      inclusive
-                    type: number
-                  childHealthchecks:
-                    description: For a specified parent health check, a list of HealthCheckId
-                      values for the associated child health checks.
+                  excludeFilter:
+                    description: List of exclusive metric filters. If you specify
+                      this parameter, the stream sends metrics from all metric namespaces
+                      except for the namespaces that you specify here. Conflicts with
+                      include_filter.
                     items:
-                      type: string
+                      properties:
+                        namespace:
+                          type: string
+                      required:
+                      - namespace
+                      type: object
                     type: array
-                  cloudwatchAlarmName:
-                    description: The name of the CloudWatch alarm.
+                  firehoseArn:
+                    description: ARN of the Amazon Kinesis Firehose delivery stream
+                      to use for this metric stream.
                     type: string
-                  cloudwatchAlarmNameRef:
-                    description: Reference to a MetricAlarm in cloudwatch to populate
-                      cloudwatchAlarmName.
+                  firehoseArnRef:
+                    description: Reference to a DeliveryStream in firehose to populate
+                      firehoseArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -114,9 +116,9 @@ spec:
                     required:
                     - name
                     type: object
-                  cloudwatchAlarmNameSelector:
-                    description: Selector for a MetricAlarm in cloudwatch to populate
-                      cloudwatchAlarmName.
+                  firehoseArnSelector:
+                    description: Selector for a DeliveryStream in firehose to populate
+                      firehoseArn.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -154,96 +156,125 @@ spec:
                             type: string
                         type: object
                     type: object
-                  cloudwatchAlarmRegion:
-                    description: The CloudWatchRegion that the CloudWatch alarm was
-                      created in.
+                  includeFilter:
+                    description: List of inclusive metric filters. If you specify
+                      this parameter, the stream sends only the metrics from the metric
+                      namespaces that you specify here. Conflicts with exclude_filter.
+                    items:
+                      properties:
+                        namespace:
+                          type: string
+                      required:
+                      - namespace
+                      type: object
+                    type: array
+                  name:
+                    description: Friendly name of the metric stream. If omitted, Terraform
+                      will assign a random, unique name. Conflicts with name_prefix.
                     type: string
-                  disabled:
-                    description: 'A boolean value that stops Route 53 from performing
-                      health checks. When set to true, Route 53 will do the following
-                      depending on the type of health check:'
-                    type: boolean
-                  enableSni:
-                    description: 'A boolean value that indicates whether Route53 should
-                      send the fqdn to the endpoint when performing the health check.
-                      This defaults to AWS'' defaults: when the type is "HTTPS" enable_sni
-                      defaults to true, when type is anything else enable_sni defaults
-                      to false.'
-                    type: boolean
-                  failureThreshold:
-                    description: The number of consecutive health checks that an endpoint
-                      must pass or fail.
-                    type: number
-                  fqdn:
-                    description: The fully qualified domain name of the endpoint to
-                      be checked.
+                  namePrefix:
+                    description: Creates a unique friendly name beginning with the
+                      specified prefix. Conflicts with name.
                     type: string
-                  insufficientDataHealthStatus:
-                    description: The status of the health check when CloudWatch has
-                      insufficient data about the state of associated alarm. Valid
-                      values are Healthy , Unhealthy and LastKnownStatus.
-                    type: string
-                  invertHealthcheck:
-                    type: boolean
-                  ipAddress:
-                    description: The IP address of the endpoint to be checked.
-                    type: string
-                  measureLatency:
-                    description: A Boolean value that indicates whether you want Route
-                      53 to measure the latency between health checkers in multiple
-                      AWS regions and your endpoint and to display CloudWatch latency
-                      graphs in the Route 53 console.
-                    type: boolean
-                  port:
-                    description: The port of the endpoint to be checked.
-                    type: number
-                  referenceName:
-                    description: This is a reference name used in Caller Reference
+                  outputFormat:
+                    description: Output format for the stream. Possible values are
+                      json and opentelemetry0.7. For more information about output
+                      formats, see Metric streams output formats.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  regions:
-                    description: A list of AWS regions that you want Amazon Route
-                      53 health checkers to check the specified endpoint from.
-                    items:
-                      type: string
-                    type: array
-                  requestInterval:
-                    description: The number of seconds between the time that Amazon
-                      Route 53 gets a response from your endpoint and the time that
-                      it sends the next health-check request.
-                    type: number
-                  resourcePath:
-                    description: The path that you want Amazon Route 53 to request
-                      when performing health checks.
+                  roleArn:
+                    description: ARN of the IAM role that this metric stream will
+                      use to access Amazon Kinesis Firehose resources. For more information
+                      about role permissions, see Trust between CloudWatch and Kinesis
+                      Data Firehose.
                     type: string
-                  routingControlArn:
-                    description: The Amazon Resource Name  for the Route 53 Application
-                      Recovery Controller routing control. This is used when health
-                      check type is RECOVERY_CONTROL
-                    type: string
-                  searchString:
-                    description: String searched in the first 5120 bytes of the response
-                      body for check to be considered healthy. Only valid with HTTP_STR_MATCH
-                      and HTTPS_STR_MATCH.
-                    type: string
+                  roleArnRef:
+                    description: Reference to a Role in iam to populate roleArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  roleArnSelector:
+                    description: Selector for a Role in iam to populate roleArn.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
-                    description: A map of tags to assign to the health check. If configured
+                    description: Map of tags to assign to the resource. If configured
                       with a provider default_tags configuration block present, tags
                       with matching keys will overwrite those defined at the provider-level.
                     type: object
-                  type:
-                    description: The protocol to use when performing health checks.
-                      Valid values are HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH,
-                      TCP, CALCULATED, CLOUDWATCH_METRIC and RECOVERY_CONTROL.
-                    type: string
                 required:
+                - name
+                - outputFormat
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:
@@ -417,15 +448,26 @@ spec:
             - forProvider
             type: object
           status:
-            description: HealthCheckStatus defines the observed state of HealthCheck.
+            description: MetricStreamStatus defines the observed state of MetricStream.
             properties:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  of the Health Check.
+                    description: ARN of the metric stream.
+                    type: string
+                  creationDate:
+                    description: Date and time in RFC3339 format that the metric stream
+                      was created.
                     type: string
                   id:
-                    description: The id of the health check
+                    type: string
+                  lastUpdateDate:
+                    description: Date and time in RFC3339 format that the metric stream
+                      was last updated.
+                    type: string
+                  state:
+                    description: State of the metric stream. Possible values are running
+                      and stopped.
                     type: string
                   tagsAll:
                     additionalProperties:

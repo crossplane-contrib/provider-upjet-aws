@@ -17,5 +17,9 @@ func Configure(p *config.Provider) {
 			Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
 			Extractor: common.PathARNExtractor,
 		}
+		r.References["application_configuration.sql_application_configuration.reference_data_source.s3_reference_data_source.bucket_arn"] = config.Reference{
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
+			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+		}
 	})
 }

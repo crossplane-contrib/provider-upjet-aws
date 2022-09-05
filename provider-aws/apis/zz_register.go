@@ -20,6 +20,7 @@ import (
 	v1beta1backup "github.com/upbound/official-providers/provider-aws/apis/backup/v1beta1"
 	v1beta1cloudfront "github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1"
 	v1beta1cloudsearch "github.com/upbound/official-providers/provider-aws/apis/cloudsearch/v1beta1"
+	v1beta1cloudwatch "github.com/upbound/official-providers/provider-aws/apis/cloudwatch/v1beta1"
 	v1beta1cloudwatchlogs "github.com/upbound/official-providers/provider-aws/apis/cloudwatchlogs/v1beta1"
 	v1beta1cognitoidentity "github.com/upbound/official-providers/provider-aws/apis/cognitoidentity/v1beta1"
 	v1beta1cognitoidp "github.com/upbound/official-providers/provider-aws/apis/cognitoidp/v1beta1"
@@ -86,6 +87,7 @@ func init() {
 		v1beta1backup.SchemeBuilder.AddToScheme,
 		v1beta1cloudfront.SchemeBuilder.AddToScheme,
 		v1beta1cloudsearch.SchemeBuilder.AddToScheme,
+		v1beta1cloudwatch.SchemeBuilder.AddToScheme,
 		v1beta1cloudwatchlogs.SchemeBuilder.AddToScheme,
 		v1beta1cognitoidentity.SchemeBuilder.AddToScheme,
 		v1beta1cognitoidp.SchemeBuilder.AddToScheme,

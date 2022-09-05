@@ -64,9 +64,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  arn:
-                    description: The ARN of the bucket. Will be of format arn:aws:s3:::bucketname.
-                    type: string
                   forceDestroy:
                     description: A boolean that indicates all objects  should be deleted
                       from the bucket so that the bucket can be destroyed without
@@ -277,6 +274,9 @@ spec:
                       and log-delivery-write. Defaults to private.  Conflicts with
                       grant. Terraform will only perform drift detection if a configuration
                       value is provided. Use the resource aws_s3_bucket_acl instead.
+                    type: string
+                  arn:
+                    description: The ARN of the bucket. Will be of format arn:aws:s3:::bucketname.
                     type: string
                   bucketDomainName:
                     description: The bucket domain name. Will be of format bucketname.s3.amazonaws.com.
