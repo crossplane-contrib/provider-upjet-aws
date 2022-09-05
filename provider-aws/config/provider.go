@@ -8,10 +8,6 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
-	"github.com/upbound/official-providers/provider-aws/config/secretsmanager"
-
-	"github.com/upbound/official-providers/provider-aws/config/opensearch"
-
 	"github.com/upbound/upjet/pkg/config"
 	"github.com/upbound/upjet/pkg/registry/reference"
 
@@ -24,6 +20,7 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/backup"
 	"github.com/upbound/official-providers/provider-aws/config/cloudfront"
 	"github.com/upbound/official-providers/provider-aws/config/cloudsearch"
+	"github.com/upbound/official-providers/provider-aws/config/cloudwatch"
 	"github.com/upbound/official-providers/provider-aws/config/cognitoidentity"
 	"github.com/upbound/official-providers/provider-aws/config/cognitoidp"
 	"github.com/upbound/official-providers/provider-aws/config/dax"
@@ -56,11 +53,13 @@ import (
 	"github.com/upbound/official-providers/provider-aws/config/licensemanager"
 	"github.com/upbound/official-providers/provider-aws/config/mq"
 	"github.com/upbound/official-providers/provider-aws/config/neptune"
+	"github.com/upbound/official-providers/provider-aws/config/opensearch"
 	"github.com/upbound/official-providers/provider-aws/config/rds"
 	"github.com/upbound/official-providers/provider-aws/config/redshift"
 	"github.com/upbound/official-providers/provider-aws/config/route53"
 	"github.com/upbound/official-providers/provider-aws/config/route53resolver"
 	"github.com/upbound/official-providers/provider-aws/config/s3"
+	"github.com/upbound/official-providers/provider-aws/config/secretsmanager"
 	"github.com/upbound/official-providers/provider-aws/config/servicediscovery"
 	"github.com/upbound/official-providers/provider-aws/config/sfn"
 	"github.com/upbound/official-providers/provider-aws/config/sns"
@@ -114,10 +113,10 @@ func GetProvider() *config.Provider {
 			RegionAddition(),
 			TagsAllRemoval(),
 			IdentifierAssignedByAWS(),
-			NamePrefixRemoval(),
 			KnownReferencers(),
 			AddExternalTagsField(),
 			ExternalNameConfigurations(),
+			NamePrefixRemoval(),
 		),
 	)
 
@@ -175,6 +174,7 @@ func GetProvider() *config.Provider {
 		sqs.Configure,
 		opensearch.Configure,
 		secretsmanager.Configure,
+		cloudwatch.Configure,
 	} {
 		configure(pc)
 	}

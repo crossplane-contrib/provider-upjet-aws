@@ -34,6 +34,11 @@ func Configure(p *config.Provider) {
 			Type: "Vault",
 		}
 	})
+	p.AddResourceConfigurator("aws_backup_vault_lock_configuration", func(r *config.Resource) {
+		r.References["backup_vault_name"] = config.Reference{
+			Type: "Vault",
+		}
+	})
 
 	p.AddResourceConfigurator("aws_backup_framework", func(r *config.Resource) {
 		r.UseAsync = true

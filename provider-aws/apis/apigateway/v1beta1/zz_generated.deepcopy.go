@@ -5443,6 +5443,18 @@ func (in *VPCLinkParameters) DeepCopyInto(out *VPCLinkParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.TargetArnRefs != nil {
+		in, out := &in.TargetArnRefs, &out.TargetArnRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.TargetArnSelector != nil {
+		in, out := &in.TargetArnSelector, &out.TargetArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TargetArns != nil {
 		in, out := &in.TargetArns, &out.TargetArns
 		*out = make([]*string, len(*in))
@@ -5453,18 +5465,6 @@ func (in *VPCLinkParameters) DeepCopyInto(out *VPCLinkParameters) {
 				**out = **in
 			}
 		}
-	}
-	if in.TargetArnsRefs != nil {
-		in, out := &in.TargetArnsRefs, &out.TargetArnsRefs
-		*out = make([]v1.Reference, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
-	}
-	if in.TargetArnsSelector != nil {
-		in, out := &in.TargetArnsSelector, &out.TargetArnsSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 }
 

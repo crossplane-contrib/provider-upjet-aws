@@ -786,10 +786,6 @@ spec:
                     type: array
                   name:
                     type: string
-                  namePrefix:
-                    description: Creates a unique name beginning with the specified
-                      prefix. Conflicts with name.
-                    type: string
                   networkInterfaces:
                     description: Customize network interfaces to be attached at instance
                       boot time. See Network Interfaces below for more details.

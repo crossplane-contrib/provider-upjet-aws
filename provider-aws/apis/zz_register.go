@@ -12,6 +12,7 @@ import (
 
 	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/acm/v1beta1"
 	v1beta1acmpca "github.com/upbound/official-providers/provider-aws/apis/acmpca/v1beta1"
+	v1beta1amp "github.com/upbound/official-providers/provider-aws/apis/amp/v1beta1"
 	v1beta1apigateway "github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1"
 	v1beta1apigatewayv2 "github.com/upbound/official-providers/provider-aws/apis/apigatewayv2/v1beta1"
 	v1beta1athena "github.com/upbound/official-providers/provider-aws/apis/athena/v1beta1"
@@ -19,6 +20,7 @@ import (
 	v1beta1backup "github.com/upbound/official-providers/provider-aws/apis/backup/v1beta1"
 	v1beta1cloudfront "github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1"
 	v1beta1cloudsearch "github.com/upbound/official-providers/provider-aws/apis/cloudsearch/v1beta1"
+	v1beta1cloudwatch "github.com/upbound/official-providers/provider-aws/apis/cloudwatch/v1beta1"
 	v1beta1cloudwatchlogs "github.com/upbound/official-providers/provider-aws/apis/cloudwatchlogs/v1beta1"
 	v1beta1cognitoidentity "github.com/upbound/official-providers/provider-aws/apis/cognitoidentity/v1beta1"
 	v1beta1cognitoidp "github.com/upbound/official-providers/provider-aws/apis/cognitoidp/v1beta1"
@@ -77,6 +79,7 @@ func init() {
 	AddToSchemes = append(AddToSchemes,
 		v1beta1.SchemeBuilder.AddToScheme,
 		v1beta1acmpca.SchemeBuilder.AddToScheme,
+		v1beta1amp.SchemeBuilder.AddToScheme,
 		v1beta1apigateway.SchemeBuilder.AddToScheme,
 		v1beta1apigatewayv2.SchemeBuilder.AddToScheme,
 		v1beta1athena.SchemeBuilder.AddToScheme,
@@ -84,6 +87,7 @@ func init() {
 		v1beta1backup.SchemeBuilder.AddToScheme,
 		v1beta1cloudfront.SchemeBuilder.AddToScheme,
 		v1beta1cloudsearch.SchemeBuilder.AddToScheme,
+		v1beta1cloudwatch.SchemeBuilder.AddToScheme,
 		v1beta1cloudwatchlogs.SchemeBuilder.AddToScheme,
 		v1beta1cognitoidentity.SchemeBuilder.AddToScheme,
 		v1beta1cognitoidp.SchemeBuilder.AddToScheme,

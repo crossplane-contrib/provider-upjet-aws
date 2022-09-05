@@ -23,8 +23,17 @@ type VaultLockConfigurationObservation struct {
 
 type VaultLockConfigurationParameters struct {
 
-	// +kubebuilder:validation:Required
-	BackupVaultName *string `json:"backupVaultName" tf:"backup_vault_name,omitempty"`
+	// +crossplane:generate:reference:type=Vault
+	// +kubebuilder:validation:Optional
+	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
+
+	// Reference to a Vault to populate backupVaultName.
+	// +kubebuilder:validation:Optional
+	BackupVaultNameRef *v1.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
+
+	// Selector for a Vault to populate backupVaultName.
+	// +kubebuilder:validation:Optional
+	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// The number of days before the lock date.
 	// +kubebuilder:validation:Optional

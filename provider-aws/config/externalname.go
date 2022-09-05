@@ -37,6 +37,14 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// arn:aws:acm-pca:eu-central-1:609897127049:certificate-authority/ba0c7989-9641-4f36-a033-dee60121d595
 	"aws_acmpca_certificate_authority_certificate": config.IdentifierFromProvider,
 
+	// amp
+	//
+	// ID is a random UUID.
+	"aws_prometheus_workspace":            config.IdentifierFromProvider,
+	"aws_prometheus_rule_group_namespace": config.TemplatedStringAsIdentifier("name", "arn:aws:aps:{{ .parameters.region }}:{{ .client_metadata.account_id }}:rulegroupsnamespace/IDstring/{{ .external_name }}"),
+	// Uses the ID of workspace, workspace_id parameter.
+	"aws_prometheus_alert_manager_definition": config.IdentifierFromProvider,
+
 	// apigatewayv2
 	//
 	"aws_apigatewayv2_api": config.IdentifierFromProvider,
@@ -341,7 +349,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// each with their own name.
 	// "aws_glue_partition_index": config.IdentifierFromProvider,
 	// Imported using ARN: arn:aws:glue:us-west-2:123456789012:registry/example
-	"aws_glue_registry": config.TemplatedStringAsIdentifier("registry_name", "arn:aws:glue:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:registry/{{ .external_name }}"),
+	"aws_glue_registry": config.TemplatedStringAsIdentifier("registry_name", "arn:aws:glue:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:registry/{{ .external_name }}"),
 
 	// iam
 	//
@@ -686,7 +694,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// sns
 	//
 	// SNS Topics can be imported using the topic arn
-	"aws_sns_topic": config.TemplatedStringAsIdentifier("name", "arn:aws:sns:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:{{ .external_name }}"),
+	"aws_sns_topic": config.TemplatedStringAsIdentifier("name", "arn:aws:sns:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:{{ .external_name }}"),
 	// SNS Topic Subscriptions can be imported using the subscription arn that
 	// contains a random substring in the end.
 	"aws_sns_topic_subscription": config.IdentifierFromProvider,
@@ -738,19 +746,19 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// kinesis
 	//
-	// Kinesis Streams can be imported using the name
-	"aws_kinesis_stream": config.NameAsIdentifier,
+	// Even though the documentation says the ID is name, it uses ARN..
+	"aws_kinesis_stream": config.TemplatedStringAsIdentifier("name", " arn:aws:kinesis:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stream/{{ .external_name }}"),
 	// Kinesis Stream Consumers can be imported using the Amazon Resource Name (ARN)
 	// that has a random substring.
 	"aws_kinesis_stream_consumer": config.IdentifierFromProvider,
 
 	// kinesisanalytics
 	//
-	"aws_kinesis_analytics_application": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesisanalytics:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:application/{{ .external_name }}"),
+	"aws_kinesis_analytics_application": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesisanalytics:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:application/{{ .external_name }}"),
 
 	// kinesisanalyticsv2
 	//
-	"aws_kinesisanalyticsv2_application": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesisanalytics:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:application/{{ .external_name }}"),
+	"aws_kinesisanalyticsv2_application": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesisanalytics:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:application/{{ .external_name }}"),
 	// aws_kinesisanalyticsv2_application can be imported by using application_name together with snapshot_name
 	// e.g. example-application/example-snapshot
 	"aws_kinesisanalyticsv2_application_snapshot": FormattedIdentifierUserDefined("snapshot_name", "/", "application_name"),
@@ -764,7 +772,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// firehose
 	//
-	"aws_kinesis_firehose_delivery_stream": config.TemplatedStringAsIdentifier("name", "arn:aws:firehose:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:deliverystream/{{ .external_name }}"),
+	"aws_kinesis_firehose_delivery_stream": config.TemplatedStringAsIdentifier("name", "arn:aws:firehose:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:deliverystream/{{ .external_name }}"),
 
 	// lakeformation
 	//
@@ -878,8 +886,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// sfn
 	//
-	"aws_sfn_activity":      config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:activity/{{ .external_name }}"),
-	"aws_sfn_state_machine": config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:stateMachine/{{ .external_name }}"),
+	"aws_sfn_activity":      config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:activity/{{ .external_name }}"),
+	"aws_sfn_state_machine": config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stateMachine/{{ .external_name }}"),
 
 	// dax
 	//
@@ -964,6 +972,17 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Please see the following issue in upjet: https://github.com/upbound/upjet/issues/32
 	// OpenSearch domains can be imported using the domain_name
 	"aws_opensearch_domain_saml_options": config.IdentifierFromProvider,
+
+	// cloudwatch
+	//
+	// Use the alarm_name to import a CloudWatch Composite Alarm.
+	"aws_cloudwatch_composite_alarm": config.ParameterAsIdentifier("alarm_name"),
+	// CloudWatch dashboards can be imported using the dashboard_name
+	"aws_cloudwatch_dashboard": config.ParameterAsIdentifier("dashboard_name"),
+	// CloudWatch Metric Alarm can be imported using the alarm_name
+	"aws_cloudwatch_metric_alarm": config.ParameterAsIdentifier("alarm_name"),
+	// CloudWatch metric streams can be imported using the name
+	"aws_cloudwatch_metric_stream": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

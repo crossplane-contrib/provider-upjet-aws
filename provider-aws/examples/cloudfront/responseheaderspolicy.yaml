@@ -19,5 +19,3 @@ spec:
         - test.example.comtest
       originOverride: true
     name: example-policy
-  providerConfigRef:
-    name: example

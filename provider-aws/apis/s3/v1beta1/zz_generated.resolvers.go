@@ -98,7 +98,7 @@ func (mg *BucketAnalyticsConfiguration) ResolveReferences(ctx context.Context, c
 				for i6 := 0; i6 < len(mg.Spec.ForProvider.StorageClassAnalysis[i3].DataExport[i4].Destination[i5].S3BucketDestination); i6++ {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageClassAnalysis[i3].DataExport[i4].Destination[i5].S3BucketDestination[i6].BucketArn),
-						Extract:      resource.ExtractParamPath("arn", false),
+						Extract:      resource.ExtractParamPath("arn", true),
 						Reference:    mg.Spec.ForProvider.StorageClassAnalysis[i3].DataExport[i4].Destination[i5].S3BucketDestination[i6].BucketArnRef,
 						Selector:     mg.Spec.ForProvider.StorageClassAnalysis[i3].DataExport[i4].Destination[i5].S3BucketDestination[i6].BucketArnSelector,
 						To: reference.To{
@@ -199,7 +199,7 @@ func (mg *BucketInventory) ResolveReferences(ctx context.Context, c client.Reade
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Destination[i3].Bucket); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Destination[i3].Bucket[i4].BucketArn),
-				Extract:      resource.ExtractParamPath("arn", false),
+				Extract:      resource.ExtractParamPath("arn", true),
 				Reference:    mg.Spec.ForProvider.Destination[i3].Bucket[i4].BucketArnRef,
 				Selector:     mg.Spec.ForProvider.Destination[i3].Bucket[i4].BucketArnSelector,
 				To: reference.To{
@@ -565,7 +565,7 @@ func (mg *BucketReplicationConfiguration) ResolveReferences(ctx context.Context,
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Rule[i3].Destination); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule[i3].Destination[i4].Bucket),
-				Extract:      resource.ExtractParamPath("arn", false),
+				Extract:      resource.ExtractParamPath("arn", true),
 				Reference:    mg.Spec.ForProvider.Rule[i3].Destination[i4].BucketRef,
 				Selector:     mg.Spec.ForProvider.Rule[i3].Destination[i4].BucketSelector,
 				To: reference.To{

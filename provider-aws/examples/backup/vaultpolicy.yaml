@@ -9,7 +9,7 @@ spec:
     region: us-west-1
     backupVaultNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: vault
     policy: |-
       {
         "Version": "2012-10-17",

@@ -1,0 +1,18 @@
+apiVersion: amp.aws.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/workspace
+  labels:
+    testing.upbound.io/example-name: demo
+  name: demo
+spec:
+  forProvider:
+    alias: prometheus-test
+    region: us-west-1
+    tags:
+      Environment: production
+      Owner: abhi
+
+---
+

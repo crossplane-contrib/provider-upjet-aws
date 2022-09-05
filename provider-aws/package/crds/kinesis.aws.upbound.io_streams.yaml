@@ -64,9 +64,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  arn:
-                    description: The Amazon Resource Name  specifying the Stream
-                    type: string
                   encryptionType:
                     description: The encryption type to use. The only acceptable values
                       are NONE or KMS. The default value is NONE.
@@ -373,6 +370,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The Amazon Resource Name  specifying the Stream
+                    type: string
                   id:
                     description: The unique Stream id
                     type: string

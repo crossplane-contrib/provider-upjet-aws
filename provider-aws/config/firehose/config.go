@@ -27,6 +27,11 @@ func Configure(p *config.Provider) {
 			Extractor: common.PathARNExtractor,
 		}
 
+		r.References["redshift_configuration.s3_backup_configuration.bucket_arn"] = config.Reference{
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
+			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+		}
+
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"server_side_encryption"},
 		}

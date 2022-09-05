@@ -654,6 +654,18 @@ func (in *GroupMembershipParameters) DeepCopyInto(out *GroupMembershipParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.UserRefs != nil {
+		in, out := &in.UserRefs, &out.UserRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.UserSelector != nil {
+		in, out := &in.UserSelector, &out.UserSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Users != nil {
 		in, out := &in.Users, &out.Users
 		*out = make([]*string, len(*in))
@@ -664,18 +676,6 @@ func (in *GroupMembershipParameters) DeepCopyInto(out *GroupMembershipParameters
 				**out = **in
 			}
 		}
-	}
-	if in.UsersRefs != nil {
-		in, out := &in.UsersRefs, &out.UsersRefs
-		*out = make([]v1.Reference, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
-	}
-	if in.UsersSelector != nil {
-		in, out := &in.UsersSelector, &out.UsersSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 }
 
