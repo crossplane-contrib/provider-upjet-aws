@@ -216,7 +216,7 @@ No organizations found.
 Create an organization with `up organization create <organization name>`
 
 ```shell
-$ uporganization create my-org
+$ up organization create my-org
 my-org created
 ```
 
