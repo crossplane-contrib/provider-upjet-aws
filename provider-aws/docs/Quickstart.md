@@ -224,7 +224,7 @@ Verify you belong to an organization with `up organization list`
 ```shell
 $ up organization list
 NAME           ROLE
-organization   owner
+my-org         owner
 ```
 
 ### Create an Upbound robot account
