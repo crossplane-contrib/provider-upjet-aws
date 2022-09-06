@@ -18,7 +18,7 @@ UXP is the Upbound official enterprise-grade distribution of Crossplane for self
 
 Official providers aren't supported with open source Crossplane.
 
-Install UXP into your Kubernetes cluster using the up command-line.
+Install UXP into your Kubernetes cluster using the Up command-line.
 
 ```shell
 up uxp install
