@@ -74,7 +74,7 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block"`
 
-	// The Amazon Resource Name  of a core network.
+	// The Amazon Resource Name (ARN) of a core network.
 	// +kubebuilder:validation:Optional
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn"`
 

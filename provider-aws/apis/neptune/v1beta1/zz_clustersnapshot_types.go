@@ -15,13 +15,13 @@ import (
 
 type ClusterSnapshotObservation struct {
 
-	// Specifies the allocated storage size in gigabytes .
+	// Specifies the allocated storage size in gigabytes (GB).
 	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
 	// List of EC2 Availability Zones that instances in the DB cluster snapshot can be restored in.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// The Amazon Resource Name  for the DB Cluster Snapshot.
+	// The Amazon Resource Name (ARN) for the DB Cluster Snapshot.
 	DBClusterSnapshotArn *string `json:"dbClusterSnapshotArn,omitempty" tf:"db_cluster_snapshot_arn,omitempty"`
 
 	// Specifies the name of the database engine.
@@ -43,6 +43,7 @@ type ClusterSnapshotObservation struct {
 
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 
+	// The Amazon Resource Name (ARN) for the DB Cluster Snapshot.
 	SourceDBClusterSnapshotArn *string `json:"sourceDbClusterSnapshotArn,omitempty" tf:"source_db_cluster_snapshot_arn,omitempty"`
 
 	// The status of this DB Cluster Snapshot.

@@ -22,7 +22,7 @@ type ContentTypeProfileConfigParameters struct {
 	// +kubebuilder:validation:Required
 	ContentTypeProfiles []ContentTypeProfilesParameters `json:"contentTypeProfiles" tf:"content_type_profiles,omitempty"`
 
-	// specifies what to do when an unknown content type is provided for the profile. If true, content is forwarded without being encrypted when the content type is unknown. If false , an error is returned when the content type is unknown.
+	// specifies what to do when an unknown content type is provided for the profile. If true, content is forwarded without being encrypted when the content type is unknown. If false (the default), an error is returned when the content type is unknown.
 	// +kubebuilder:validation:Required
 	ForwardWhenContentTypeIsUnknown *bool `json:"forwardWhenContentTypeIsUnknown" tf:"forward_when_content_type_is_unknown,omitempty"`
 }
@@ -40,6 +40,7 @@ type ContentTypeProfilesItemsParameters struct {
 	// +kubebuilder:validation:Required
 	Format *string `json:"format" tf:"format,omitempty"`
 
+	// The identifier for the Field Level Encryption Config. For example: K3D5EWEUDCCXON.
 	// +kubebuilder:validation:Optional
 	ProfileID *string `json:"profileId,omitempty" tf:"profile_id,omitempty"`
 }
@@ -104,6 +105,7 @@ type QueryArgProfilesItemsObservation struct {
 
 type QueryArgProfilesItemsParameters struct {
 
+	// The identifier for the Field Level Encryption Config. For example: K3D5EWEUDCCXON.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1.FieldLevelEncryptionProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

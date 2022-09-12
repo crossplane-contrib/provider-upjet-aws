@@ -68,8 +68,8 @@ spec:
                     description: A description of what the snapshot is.
                     type: string
                   outpostArn:
-                    description: The Amazon Resource Name  of the Outpost on which
-                      to create a local snapshot.
+                    description: The Amazon Resource Name (ARN) of the Outpost on
+                      which to create a local snapshot.
                     type: string
                   permanentRestore:
                     description: Indicates whether to permanently restore an archived
@@ -352,7 +352,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of the EBS Snapshot.
+                    description: Amazon Resource Name (ARN) of the EBS Snapshot.
                     type: string
                   dataEncryptionKeyId:
                     description: The data encryption key identifier for the snapshot.
@@ -361,14 +361,14 @@ spec:
                     description: Whether the snapshot is encrypted.
                     type: boolean
                   id:
-                    description: The snapshot ID .
+                    description: The snapshot ID (e.g., snap-59fcb34e).
                     type: string
                   kmsKeyId:
                     description: The ARN for the KMS encryption key.
                     type: string
                   ownerAlias:
-                    description: Value from an Amazon-maintained list  of snapshot
-                      owners.
+                    description: Value from an Amazon-maintained list (amazon, aws-marketplace,
+                      microsoft) of snapshot owners.
                     type: string
                   ownerId:
                     description: The AWS account ID of the EBS snapshot owner.

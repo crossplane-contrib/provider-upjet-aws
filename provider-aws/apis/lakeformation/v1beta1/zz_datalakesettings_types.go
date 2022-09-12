@@ -21,6 +21,7 @@ type CreateDatabaseDefaultPermissionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
+	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
 	// +kubebuilder:validation:Optional
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 }
@@ -33,6 +34,7 @@ type CreateTableDefaultPermissionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
+	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
 	// +kubebuilder:validation:Optional
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 }
@@ -43,7 +45,7 @@ type DataLakeSettingsObservation struct {
 
 type DataLakeSettingsParameters struct {
 
-	// –  Set of ARNs of AWS Lake Formation principals .
+	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
 	// +kubebuilder:validation:Optional
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
 
@@ -64,7 +66,7 @@ type DataLakeSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// wning account IDs that the caller's account can use to share their user access details .
+	// owning account IDs that the caller's account can use to share their user access details (user ARNs).
 	// +kubebuilder:validation:Optional
 	TrustedResourceOwners []*string `json:"trustedResourceOwners,omitempty" tf:"trusted_resource_owners,omitempty"`
 }

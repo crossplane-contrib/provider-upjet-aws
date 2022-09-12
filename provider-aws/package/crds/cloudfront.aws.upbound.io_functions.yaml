@@ -280,7 +280,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  identifying your CloudFront
+                    description: Amazon Resource Name (ARN) identifying your CloudFront
                       Function.
                     type: string
                   etag:

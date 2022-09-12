@@ -270,7 +270,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of Glue Workflow
+                    description: Amazon Resource Name (ARN) of Glue Workflow
                     type: string
                   id:
                     description: Workflow name

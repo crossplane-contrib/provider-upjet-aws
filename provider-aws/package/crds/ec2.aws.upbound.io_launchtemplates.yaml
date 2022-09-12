@@ -79,19 +79,24 @@ spec:
                           items:
                             properties:
                               deleteOnTermination:
+                                description: Whether the volume should be destroyed
+                                  on instance termination. Defaults to false if not
+                                  set. See Preserving Amazon EBS Volumes on Instance
+                                  Termination for more information.
                                 type: string
                               encrypted:
-                                description: Enables EBS encryption on the volume
-                                  . Cannot be used with snapshot_id.
+                                description: 'Enables EBS encryption on the volume
+                                  (Default: false). Cannot be used with snapshot_id.'
                                 type: string
                               iops:
                                 description: The amount of provisioned IOPS. This
                                   must be set with a volume_type of "io1/io2".
                                 type: number
                               kmsKeyId:
-                                description: The ARN of the AWS Key Management Service  customer
-                                  master key  to use when creating the encrypted volume.
-                                  encrypted must be set to true when this is set.
+                                description: The ARN of the AWS Key Management Service
+                                  (AWS KMS) customer master key (CMK) to use when
+                                  creating the encrypted volume. encrypted must be
+                                  set to true when this is set.
                                 type: string
                               kmsKeyIdRef:
                                 description: Reference to a Key in kms to populate
@@ -178,14 +183,15 @@ spec:
                                 type: string
                               throughput:
                                 description: The throughput to provision for a gp3
-                                  volume in MiB/s , with a maximum of 1,000 MiB/s.
+                                  volume in MiB/s (specified as an integer, e.g.,
+                                  500), with a maximum of 1,000 MiB/s.
                                 type: number
                               volumeSize:
                                 description: The size of the volume in gigabytes.
                                 type: number
                               volumeType:
-                                description: The volume type. Can be standard, gp2,
-                                  gp3, io1, io2, sc1 or st1 .
+                                description: 'The volume type. Can be standard, gp2,
+                                  gp3, io1, io2, sc1 or st1 (Default: gp2).'
                                 type: string
                             type: object
                           type: array
@@ -194,7 +200,7 @@ spec:
                             the AMI's block device mapping.
                           type: string
                         virtualName:
-                          description: The Instance Store Device Name .
+                          description: The Instance Store Device Name (e.g., "ephemeral0").
                           type: string
                       type: object
                     type: array
@@ -205,7 +211,7 @@ spec:
                       properties:
                         capacityReservationPreference:
                           description: Indicates the instance's Capacity Reservation
-                            preferences. Can be open or none. .
+                            preferences. Can be open or none. (Default none).
                           type: string
                         capacityReservationTarget:
                           description: 'Used to target a specific Capacity Reservation:'
@@ -255,6 +261,7 @@ spec:
                     description: Default Version of the launch template.
                     type: number
                   description:
+                    description: Description of the launch template.
                     type: string
                   disableApiTermination:
                     description: If true, enables EC2 Instance Termination Protection
@@ -268,6 +275,7 @@ spec:
                     items:
                       properties:
                         type:
+                          description: The Elastic GPU Type
                           type: string
                       required:
                       - type
@@ -280,6 +288,7 @@ spec:
                     items:
                       properties:
                         type:
+                          description: Accelerator type.
                           type: string
                       required:
                       - type
@@ -291,6 +300,8 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: If set to true, Nitro Enclaves will be enabled
+                            on the instance.
                           type: boolean
                       type: object
                     type: array
@@ -313,6 +324,8 @@ spec:
                     items:
                       properties:
                         arn:
+                          description: The Amazon Resource Name (ARN) of the instance
+                            profile.
                           type: string
                         arnRef:
                           description: Reference to a InstanceProfile in iam to populate
@@ -393,6 +406,7 @@ spec:
                               type: object
                           type: object
                         name:
+                          description: The name of the instance profile.
                           type: string
                         nameRef:
                           description: Reference to a InstanceProfile in iam to populate
@@ -478,12 +492,12 @@ spec:
                     description: The AMI from which to launch the instance.
                     type: string
                   instanceInitiatedShutdownBehavior:
-                    description: Shutdown behavior for the instance. Can be stop or
-                      terminate. .
+                    description: 'Shutdown behavior for the instance. Can be stop
+                      or terminate. (Default: stop).'
                     type: string
                   instanceMarketOptions:
-                    description: The market  option for the instance. See Market Options
-                      below for details.
+                    description: The market (purchasing) option for the instance.
+                      See Market Options below for details.
                     items:
                       properties:
                         marketType:
@@ -498,9 +512,9 @@ spec:
                                   value must be a multiple of 60.
                                 type: number
                               instanceInterruptionBehavior:
-                                description: The behavior when a Spot Instance is
+                                description: 'The behavior when a Spot Instance is
                                   interrupted. Can be hibernate, stop, or terminate.
-                                  .
+                                  (Default: terminate).'
                                 type: string
                               maxPrice:
                                 description: The maximum hourly price you're willing
@@ -524,7 +538,8 @@ spec:
                       properties:
                         acceleratorCount:
                           description: Block describing the minimum and maximum number
-                            of accelerators . Default is no minimum or maximum.
+                            of accelerators (GPUs, FPGAs, or AWS Inferentia chips).
+                            Default is no minimum or maximum.
                           items:
                             properties:
                               max:
@@ -590,7 +605,7 @@ spec:
                         excludedInstanceTypes:
                           description: 'List of instance types to exclude. You can
                             use strings with one or more wild cards, represented by
-                            an asterisk . The following are examples: c5*, m5a.*,
+                            an asterisk (*). The following are examples: c5*, m5a.*,
                             r*, *3*. For example, if you specify c5*, you are excluding
                             the entire C5 instance family, which includes all C5a
                             and C5n instance types. If you specify m5a.*, you are
@@ -620,7 +635,7 @@ spec:
                           type: array
                         memoryGibPerVcpu:
                           description: Block describing the minimum and maximum amount
-                            of memory  per vCPU. Default is no minimum or maximum.
+                            of memory (GiB) per vCPU. Default is no minimum or maximum.
                           items:
                             properties:
                               max:
@@ -631,7 +646,7 @@ spec:
                           type: array
                         memoryMib:
                           description: Block describing the minimum and maximum amount
-                            of memory . Default is no maximum.
+                            of memory (MiB). Default is no maximum.
                           items:
                             properties:
                               max:
@@ -684,7 +699,7 @@ spec:
                           type: number
                         totalLocalStorageGb:
                           description: Block describing the minimum and maximum total
-                            local storage . Default is no minimum or maximum.
+                            local storage (GB). Default is no minimum or maximum.
                           items:
                             properties:
                               max:
@@ -751,27 +766,28 @@ spec:
                     items:
                       properties:
                         httpEndpoint:
-                          description: Whether the metadata service is available.
-                            Can be "enabled" or "disabled". .
+                          description: 'Whether the metadata service is available.
+                            Can be "enabled" or "disabled". (Default: "enabled").'
                           type: string
                         httpProtocolIpv6:
-                          description: Enables or disables the IPv6 endpoint for the
-                            instance metadata service. .
+                          description: 'Enables or disables the IPv6 endpoint for
+                            the instance metadata service. (Default: disabled).'
                           type: string
                         httpPutResponseHopLimit:
-                          description: The desired HTTP PUT response hop limit for
+                          description: 'The desired HTTP PUT response hop limit for
                             instance metadata requests. The larger the number, the
                             further instance metadata requests can travel. Can be
-                            an integer from 1 to 64. .
+                            an integer from 1 to 64. (Default: 1).'
                           type: number
                         httpTokens:
-                          description: Whether or not the metadata service requires
+                          description: 'Whether or not the metadata service requires
                             session tokens, also referred to as Instance Metadata
-                            Service Version 2 . Can be "optional" or "required". .
+                            Service Version 2 (IMDSv2). Can be "optional" or "required".
+                            (Default: "optional").'
                           type: string
                         instanceMetadataTags:
-                          description: Enables or disables access to instance tags
-                            from the instance metadata service. .
+                          description: 'Enables or disables access to instance tags
+                            from the instance metadata service. (Default: disabled).'
                           type: string
                       type: object
                     type: array
@@ -781,10 +797,13 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: If true, the launched EC2 instance will have
+                            detailed monitoring enabled.
                           type: boolean
                       type: object
                     type: array
                   name:
+                    description: The name of the launch template.
                     type: string
                   networkInterfaces:
                     description: Customize network interfaces to be attached at instance
@@ -803,8 +822,11 @@ spec:
                             interface.  Boolean value.
                           type: string
                         deleteOnTermination:
+                          description: Whether the network interface should be destroyed
+                            on instance termination. Defaults to false if not set.
                           type: string
                         description:
+                          description: Description of the network interface.
                           type: string
                         deviceIndex:
                           description: The integer index of the network interface
@@ -812,7 +834,7 @@ spec:
                           type: number
                         interfaceType:
                           description: The type of network interface. To create an
-                            Elastic Fabric Adapter , specify efa.
+                            Elastic Fabric Adapter (EFA), specify efa.
                           type: string
                         ipv4AddressCount:
                           description: The number of secondary private IPv4 addresses
@@ -1142,8 +1164,8 @@ spec:
                           description: Reserved for future use.
                           type: string
                         tenancy:
-                          description: The tenancy of the instance . Can be default,
-                            dedicated, or host.
+                          description: The tenancy of the instance (if the instance
+                            is running in a VPC). Can be default, dedicated, or host.
                           type: string
                       type: object
                     type: array
@@ -1274,12 +1296,17 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
+                          description: A map of tags to assign to the resource.
                           type: object
                       type: object
                     type: array
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the launch template. If
+                      configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                   updateDefaultVersion:
                     description: Whether to update Default Version each update. Conflicts
@@ -1552,6 +1579,7 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name (ARN) of the launch template.
                     type: string
                   id:
                     description: The ID of the launch template.

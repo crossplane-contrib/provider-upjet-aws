@@ -75,10 +75,10 @@ spec:
                       has before destroying it. Defaults to false.
                     type: boolean
                   maxSessionDuration:
-                    description: Maximum session duration  that you want to set for
-                      the specified role. If you do not specify a value for this setting,
-                      the default maximum of one hour is applied. This setting can
-                      have a value from 1 hour to 12 hours.
+                    description: Maximum session duration (in seconds) that you want
+                      to set for the specified role. If you do not specify a value
+                      for this setting, the default maximum of one hour is applied.
+                      This setting can have a value from 1 hour to 12 hours.
                     type: number
                   path:
                     description: Path to the role. See IAM Identifiers for more information.
@@ -274,7 +274,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  specifying the role.
+                    description: Amazon Resource Name (ARN) specifying the role.
                     type: string
                   createDate:
                     description: Creation date of the IAM role.
@@ -285,29 +285,19 @@ spec:
                   inlinePolicy:
                     description: Configuration block defining an exclusive set of
                       IAM inline policies associated with the IAM role. See below.
-                      If no blocks are configured, Terraform will not manage any inline
-                      policies in this resource. Configuring one empty block  will
-                      cause Terraform to remove all inline policies added out of band
-                      on apply.
+                      Configuring one empty block (i.e.
                     items:
                       properties:
                         name:
                           type: string
                         policy:
                           description: Policy document as a JSON formatted string.
-                            For more information about building IAM policy documents
-                            with Terraform, see the AWS IAM Policy Document Guide.
                           type: string
                       type: object
                     type: array
                   managedPolicyArns:
                     description: Set of exclusive IAM managed policy ARNs to attach
-                      to the IAM role. If this attribute is not configured, Terraform
-                      will ignore policy attachments to this resource. When configured,
-                      Terraform will align the role's managed policy attachments with
-                      this set by attaching or detaching managed policies. Configuring
-                      an empty set  will cause Terraform to remove all managed policy
-                      attachments.
+                      to the IAM role. Configuring an empty set (i.e.
                     items:
                       type: string
                     type: array

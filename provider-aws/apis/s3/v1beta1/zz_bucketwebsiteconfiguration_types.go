@@ -15,7 +15,7 @@ import (
 
 type BucketWebsiteConfigurationObservation struct {
 
-	// The bucket or bucket and expected_bucket_owner separated by a comma  if the latter is provided.
+	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The domain of the website endpoint. This is used to create Route 53 alias records.
@@ -66,7 +66,7 @@ type BucketWebsiteConfigurationParameters struct {
 	RoutingRule []RoutingRuleParameters `json:"routingRule,omitempty" tf:"routing_rule,omitempty"`
 
 	// A json array containing routing rules
-	// describing redirect behavior and when redirects are applied. Use this parameter when your routing rules contain empty String values  as seen in the example above.
+	// describing redirect behavior and when redirects are applied. Use this parameter when your routing rules contain empty String values ("") as seen in the example above.
 	// +kubebuilder:validation:Optional
 	RoutingRules *string `json:"routingRules,omitempty" tf:"routing_rules,omitempty"`
 }
@@ -112,9 +112,11 @@ type RedirectAllRequestsToObservation struct {
 
 type RedirectAllRequestsToParameters struct {
 
+	// Name of the host where requests are redirected.
 	// +kubebuilder:validation:Required
 	HostName *string `json:"hostName" tf:"host_name,omitempty"`
 
+	// Protocol to use when redirecting requests. The default is the protocol that is used in the original request. Valid values: http, https.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
@@ -128,13 +130,15 @@ type RedirectParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPRedirectCode *string `json:"httpRedirectCode,omitempty" tf:"http_redirect_code,omitempty"`
 
+	// The host name to use in the redirect request.
 	// +kubebuilder:validation:Optional
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
+	// Protocol to use when redirecting requests. The default is the protocol that is used in the original request. Valid values: http, https.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// The object key prefix to use in the redirect request. For example, to redirect requests for all pages with prefix docs/  to documents/, you can set a condition block with key_prefix_equals set to docs/ and in the redirect set replace_key_prefix_with to /documents.
+	// The object key prefix to use in the redirect request. For example, to redirect requests for all pages with prefix docs/ (objects in the docs/ folder) to documents/, you can set a condition block with key_prefix_equals set to docs/ and in the redirect set replace_key_prefix_with to /documents.
 	// +kubebuilder:validation:Optional
 	ReplaceKeyPrefixWith *string `json:"replaceKeyPrefixWith,omitempty" tf:"replace_key_prefix_with,omitempty"`
 

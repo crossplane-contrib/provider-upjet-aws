@@ -87,8 +87,7 @@ spec:
                     - namespace
                     type: object
                   name:
-                    description: The name for the public key. By default generated
-                      by Terraform.
+                    description: The name for the public key.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

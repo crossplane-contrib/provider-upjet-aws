@@ -283,7 +283,7 @@ spec:
                 properties:
                   id:
                     description: The layer_name and version_number, separated by a
-                      comma .
+                      comma (,).
                     type: string
                   policy:
                     description: Full Lambda Layer Permission policy.

@@ -15,7 +15,7 @@ import (
 
 type ClusterObservation struct {
 
-	// Amazon Resource Name  of cluster
+	// Amazon Resource Name (ARN) of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// – List of DocDB Instances that are a part of this cluster
@@ -123,7 +123,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
-	// The weekly time range during which system maintenance can occur, in  e.g., wed:04:00-wed:04:30
+	// The weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	// +kubebuilder:validation:Optional
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 

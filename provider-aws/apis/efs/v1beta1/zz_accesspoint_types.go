@@ -24,6 +24,7 @@ type AccessPointObservation struct {
 	// ID of the access point.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// ID of the access point.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.

@@ -258,8 +258,8 @@ spec:
                     description: The date the activity was created.
                     type: string
                   id:
-                    description: The Amazon Resource Name  that identifies the created
-                      activity.
+                    description: The Amazon Resource Name (ARN) that identifies the
+                      created activity.
                     type: string
                   tagsAll:
                     additionalProperties:

@@ -64,6 +64,7 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Set of domains that should be SANs in the issued certificate.
 	// +kubebuilder:validation:Optional
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 
@@ -71,7 +72,7 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Which method to use for validation. DNS or EMAIL are valid, NONE can be used for certificates that were imported into ACM and then into Terraform.
+	// Which method to use for validation.
 	// +kubebuilder:validation:Optional
 	ValidationMethod *string `json:"validationMethod,omitempty" tf:"validation_method,omitempty"`
 

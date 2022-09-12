@@ -42,6 +42,7 @@ type CustomEmailSenderObservation struct {
 
 type CustomEmailSenderParameters struct {
 
+	// ARN of the user pool.
 	// +kubebuilder:validation:Required
 	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
 
@@ -54,6 +55,7 @@ type CustomSMSSenderObservation struct {
 
 type CustomSMSSenderParameters struct {
 
+	// ARN of the user pool.
 	// +kubebuilder:validation:Required
 	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
 
@@ -88,7 +90,7 @@ type EmailConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EmailSendingAccount *string `json:"emailSendingAccount,omitempty" tf:"email_sending_account,omitempty"`
 
-	// Sender’s email address or sender’s display name with their email address . Escaped double quotes are required around display names that contain certain characters as specified in RFC 5322.
+	// Sender’s email address or sender’s display name with their email address (e.g., john@example.com, John Smith <john@example.com> or \"John Smith Ph.D.\" <john@example.com>). Escaped double quotes are required around display names that contain certain characters as specified in RFC 5322.
 	// +kubebuilder:validation:Optional
 	FromEmailAddress *string `json:"fromEmailAddress,omitempty" tf:"from_email_address,omitempty"`
 
@@ -293,7 +295,7 @@ type SoftwareTokenMfaConfigurationObservation struct {
 
 type SoftwareTokenMfaConfigurationParameters struct {
 
-	// Boolean whether to enable software token Multi-Factor  tokens, such as Time-based One-Time Password . To disable software token MFA When sms_configuration is not present, the mfa_configuration argument must be set to OFF and the software_token_mfa_configuration configuration block must be fully removed.
+	// Boolean whether to enable software token Multi-Factor (MFA) tokens, such as Time-based One-Time Password (TOTP). To disable software token MFA When sms_configuration is not present, the mfa_configuration argument must be set to OFF and the software_token_mfa_configuration configuration block must be fully removed.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
@@ -390,7 +392,7 @@ type UserPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	LambdaConfig []LambdaConfigParameters `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
 
-	// Multi-Factor Authentication  configuration for the User Pool. Defaults of OFF. Valid values are OFF , ON , or OPTIONAL .
+	// Multi-Factor Authentication (MFA) configuration for the User Pool. Defaults of OFF. Valid values are OFF (MFA Tokens are not required), ON (MFA is required for all users to sign in; requires at least one of sms_configuration or software_token_mfa_configuration to be configured), or OPTIONAL (MFA Will be required only for individual users who have MFA Enabled; requires at least one of sms_configuration or software_token_mfa_configuration to be configured).
 	// +kubebuilder:validation:Optional
 	MfaConfiguration *string `json:"mfaConfiguration,omitempty" tf:"mfa_configuration,omitempty"`
 
@@ -410,7 +412,7 @@ type UserPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	SMSAuthenticationMessage *string `json:"smsAuthenticationMessage,omitempty" tf:"sms_authentication_message,omitempty"`
 
-	// Configuration block for Short Message Service  settings. Detailed below. These settings apply to SMS user verification and SMS Multi-Factor Authentication . Due to Cognito API restrictions, the SMS configuration cannot be removed without recreating the Cognito User Pool. For user data safety, this resource will ignore the removal of this configuration by disabling drift detection. To force resource recreation after this configuration has been applied, see the taint command.
+	// Configuration block for Short Message Service (SMS) settings. Detailed below. These settings apply to SMS user verification and SMS Multi-Factor Authentication (MFA). Due to Cognito API restrictions, the SMS configuration cannot be removed without recreating the Cognito User Pool. For user data safety, this resource will ignore the removal of this configuration by disabling drift detection. To force resource recreation after this configuration has been applied, see the taint command.
 	// +kubebuilder:validation:Optional
 	SMSConfiguration []SMSConfigurationParameters `json:"smsConfiguration,omitempty" tf:"sms_configuration,omitempty"`
 
@@ -422,7 +424,7 @@ type UserPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	Schema []SchemaParameters `json:"schema,omitempty" tf:"schema,omitempty"`
 
-	// Configuration block for software token Mult-Factor Authentication  settings. Detailed below.
+	// Configuration block for software token Mult-Factor Authentication (MFA) settings. Detailed below.
 	// +kubebuilder:validation:Optional
 	SoftwareTokenMfaConfiguration []SoftwareTokenMfaConfigurationParameters `json:"softwareTokenMfaConfiguration,omitempty" tf:"software_token_mfa_configuration,omitempty"`
 

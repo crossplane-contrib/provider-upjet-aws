@@ -425,7 +425,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  for the proxy endpoint.
+                    description: The Amazon Resource Name (ARN) for the proxy endpoint.
                     type: string
                   endpoint:
                     description: The endpoint that you can use to connect to the proxy.

@@ -42,11 +42,11 @@ type WorkspaceSAMLConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	GroupsAssertion *string `json:"groupsAssertion,omitempty" tf:"groups_assertion,omitempty"`
 
-	// The IDP Metadata URL. Note that either idp_metadata_url or idp_metadata_xml  must be specified.
+	// The IDP Metadata URL. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
 	// +kubebuilder:validation:Optional
 	IdpMetadataURL *string `json:"idpMetadataUrl,omitempty" tf:"idp_metadata_url,omitempty"`
 
-	// The IDP Metadata XML. Note that either idp_metadata_url or idp_metadata_xml  must be specified.
+	// The IDP Metadata XML. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
 	// +kubebuilder:validation:Optional
 	IdpMetadataXML *string `json:"idpMetadataXml,omitempty" tf:"idp_metadata_xml,omitempty"`
 

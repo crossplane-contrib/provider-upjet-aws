@@ -15,10 +15,10 @@ import (
 
 type MountTargetObservation struct {
 
-	// The unique and consistent identifier of the Availability Zone  that the mount target resides in.
+	// The unique and consistent identifier of the Availability Zone (AZ) that the mount target resides in.
 	AvailabilityZoneID *string `json:"availabilityZoneId,omitempty" tf:"availability_zone_id,omitempty"`
 
-	// The name of the Availability Zone  that the mount target resides in.
+	// The name of the Availability Zone (AZ) that the mount target resides in.
 	AvailabilityZoneName *string `json:"availabilityZoneName,omitempty" tf:"availability_zone_name,omitempty"`
 
 	// The DNS name for the EFS file system.
@@ -55,7 +55,7 @@ type MountTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
-	// The address  at
+	// The address (within the address range of the specified subnet) at
 	// which the file system may be mounted via the mount target.
 	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
@@ -65,7 +65,8 @@ type MountTargetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// A list of up to 5 VPC security group IDs  in effect for the mount target.
+	// A list of up to 5 VPC security group IDs (that must
+	// be for the same VPC as subnet specified) in effect for the mount target.
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 

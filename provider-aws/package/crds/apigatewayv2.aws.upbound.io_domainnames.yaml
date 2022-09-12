@@ -157,11 +157,14 @@ spec:
                           type: string
                         ownershipVerificationCertificateArn:
                           description: ARN of the AWS-issued certificate used to validate
-                            custom domain ownership
+                            custom domain ownership (when certificate_arn is issued
+                            via an ACM Private CA or mutual_tls_authentication is
+                            configured with an ACM-imported certificate.)
                           type: string
                         securityPolicy:
-                          description: 'Transport Layer Security  version of the security
-                            policy for the domain name. Valid values: TLS_1_2.'
+                          description: 'Transport Layer Security (TLS) version of
+                            the security policy for the domain name. Valid values:
+                            TLS_1_2.'
                           type: string
                       required:
                       - endpointType
@@ -392,10 +395,11 @@ spec:
                     items:
                       properties:
                         hostedZoneId:
-                          description: Amazon Route 53 Hosted Zone ID of the endpoint.
+                          description: (Computed) Amazon Route 53 Hosted Zone ID of
+                            the endpoint.
                           type: string
                         targetDomainName:
-                          description: Target domain name.
+                          description: (Computed) Target domain name.
                           type: string
                       type: object
                     type: array

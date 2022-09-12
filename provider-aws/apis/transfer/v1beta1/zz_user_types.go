@@ -47,7 +47,7 @@ type PosixProfileParameters struct {
 
 type UserObservation struct {
 
-	// Amazon Resource Name  of Transfer User
+	// Amazon Resource Name (ARN) of Transfer User
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -58,7 +58,7 @@ type UserObservation struct {
 
 type UserParameters struct {
 
-	// The landing directory  for a user when they log in to the server using their SFTP client.  It should begin with a /.  The first item in the path is the name of the home bucket  and the rest is the home directory . For example, /example-bucket-1234/username would set the home bucket to example-bucket-1234 and the home directory to username.
+	// The landing directory (folder) for a user when they log in to the server using their SFTP client.  It should begin with a /.  The first item in the path is the name of the home bucket (accessible as ${Transfer:HomeBucket} in the policy) and the rest is the home directory (accessible as ${Transfer:HomeDirectory} in the policy). For example, /example-bucket-1234/username would set the home bucket to example-bucket-1234 and the home directory to username.
 	// +kubebuilder:validation:Optional
 	HomeDirectory *string `json:"homeDirectory,omitempty" tf:"home_directory,omitempty"`
 
@@ -66,15 +66,15 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	HomeDirectoryMappings []HomeDirectoryMappingsParameters `json:"homeDirectoryMappings,omitempty" tf:"home_directory_mappings,omitempty"`
 
-	// The type of landing directory  you mapped for your users' home directory. Valid values are PATH and LOGICAL.
+	// The type of landing directory (folder) you mapped for your users' home directory. Valid values are PATH and LOGICAL.
 	// +kubebuilder:validation:Optional
 	HomeDirectoryType *string `json:"homeDirectoryType,omitempty" tf:"home_directory_type,omitempty"`
 
-	// An IAM JSON policy document that scopes down user access to portions of their Amazon S3 bucket. IAM variables you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}. Since the IAM variable syntax matches Terraform's interpolation syntax, they must be escaped inside Terraform configuration strings .  These are evaluated on-the-fly when navigating the bucket.
+	// An IAM JSON policy document that scopes down user access to portions of their Amazon S3 bucket. IAM variables you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  These are evaluated on-the-fly when navigating the bucket.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// Specifies the full POSIX identity, including user ID , group ID , and any secondary groups IDs , that controls your users' access to your Amazon EFS file systems. See Posix Profile below.
+	// Specifies the full POSIX identity, including user ID (Uid), group ID (Gid), and any secondary groups IDs (SecondaryGids), that controls your users' access to your Amazon EFS file systems. See Posix Profile below.
 	// +kubebuilder:validation:Optional
 	PosixProfile []PosixProfileParameters `json:"posixProfile,omitempty" tf:"posix_profile,omitempty"`
 
@@ -83,7 +83,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Amazon Resource Name  of an IAM role that allows the service to controls your user’s access to your Amazon S3 bucket.
+	// Amazon Resource Name (ARN) of an IAM role that allows the service to controls your user’s access to your Amazon S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -97,7 +97,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
-	// The Server ID of the Transfer Server
+	// The Server ID of the Transfer Server (e.g., s-12345678)
 	// +crossplane:generate:reference:type=Server
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`

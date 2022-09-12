@@ -61,7 +61,7 @@ type SelectionParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// An array of strings that either contain Amazon Resource Names  or match patterns of resources to exclude from a backup plan.
+	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
 	// +kubebuilder:validation:Optional
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
@@ -83,7 +83,7 @@ type SelectionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// An array of strings that either contain Amazon Resource Names  or match patterns of resources to assign to a backup plan.
+	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
 	// +kubebuilder:validation:Optional
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 

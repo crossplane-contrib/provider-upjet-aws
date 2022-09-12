@@ -231,7 +231,9 @@ spec:
                     type: array
                   ownershipVerificationCertificateArn:
                     description: ARN of the AWS-issued certificate used to validate
-                      custom domain ownership
+                      custom domain ownership (when certificate_arn is issued via
+                      an ACM Private CA or mutual_tls_authentication is configured
+                      with an ACM-imported certificate.)
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -325,7 +327,7 @@ spec:
                       and certificate_private_key.
                     type: string
                   securityPolicy:
-                    description: Transport Layer Security  version + cipher suite
+                    description: Transport Layer Security (TLS) version + cipher suite
                       for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must
                       be configured to perform drift detection.
                     type: string
@@ -527,8 +529,8 @@ spec:
                       that implements this domain name mapping.
                     type: string
                   cloudfrontZoneId:
-                    description: For convenience, the hosted zone ID  that can be
-                      used to create a Route53 alias record for the distribution.
+                    description: For convenience, the hosted zone ID (Z2FDTNDATAQYW2)
+                      that can be used to create a Route53 alias record for the distribution.
                     type: string
                   id:
                     description: Internal identifier assigned to this domain name

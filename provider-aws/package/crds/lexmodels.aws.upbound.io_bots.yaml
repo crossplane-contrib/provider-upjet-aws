@@ -90,6 +90,9 @@ spec:
                             type: object
                           type: array
                         responseCard:
+                          description: 'The response card. Amazon Lex will substitute
+                            session attributes and slot values into the response card.
+                            For more information, see Example: Using a Response Card.'
                           type: string
                       required:
                       - message
@@ -133,6 +136,9 @@ spec:
                             type: object
                           type: array
                         responseCard:
+                          description: 'The response card. Amazon Lex will substitute
+                            session attributes and slot values into the response card.
+                            For more information, see Example: Using a Response Card.'
                           type: string
                       required:
                       - maxAttempts
@@ -166,7 +172,7 @@ spec:
                   idleSessionTtlInSeconds:
                     description: The maximum time in seconds that Amazon Lex retains
                       the data gathered in a conversation. Default is 300. Must be
-                      a number between 60 and 86400 .
+                      a number between 60 and 86400 (inclusive).
                     type: number
                   intent:
                     description: A set of Intent objects. Each intent represents a

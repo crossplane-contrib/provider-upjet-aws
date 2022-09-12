@@ -48,7 +48,7 @@ type GrantParameters struct {
 	// +kubebuilder:validation:Optional
 	GrantCreationTokens []*string `json:"grantCreationTokens,omitempty" tf:"grant_creation_tokens,omitempty"`
 
-	// The principal that is given permission to perform the operations that the grant permits in ARN format. Note that due to eventual consistency issues around IAM principals, terraform's state may not always be refreshed to reflect what is true in AWS.
+	// The principal that is given permission to perform the operations that the grant permits in ARN format.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -62,7 +62,7 @@ type GrantParameters struct {
 	// +kubebuilder:validation:Optional
 	GranteePrincipalSelector *v1.Selector `json:"granteePrincipalSelector,omitempty" tf:"-"`
 
-	// The unique identifier for the customer master key  that the grant applies to. Specify the key ID or the Amazon Resource Name  of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.
+	// The unique identifier for the customer master key (CMK) that the grant applies to. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.
 	// +crossplane:generate:reference:type=Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -89,12 +89,12 @@ type GrantParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Defaults to false, Forces new resources) If set to false  the grants will be revoked upon deletion, and if set to true the grants will try to be retired upon deletion. Note that retiring grants requires special permissions, hence why we default to revoking grants.
+	// (Defaults to false, Forces new resources) If set to false (the default) the grants will be revoked upon deletion, and if set to true the grants will try to be retired upon deletion. Note that retiring grants requires special permissions, hence why we default to revoking grants.
 	// See RetireGrant for more information.
 	// +kubebuilder:validation:Optional
 	RetireOnDelete *bool `json:"retireOnDelete,omitempty" tf:"retire_on_delete,omitempty"`
 
-	// The principal that is given permission to retire the grant by using RetireGrant operation in ARN format. Note that due to eventual consistency issues around IAM principals, terraform's state may not always be refreshed to reflect what is true in AWS.
+	// The principal that is given permission to retire the grant by using RetireGrant operation in ARN format.
 	// +kubebuilder:validation:Optional
 	RetiringPrincipal *string `json:"retiringPrincipal,omitempty" tf:"retiring_principal,omitempty"`
 }

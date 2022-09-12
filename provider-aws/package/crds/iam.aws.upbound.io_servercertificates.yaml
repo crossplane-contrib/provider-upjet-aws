@@ -65,19 +65,19 @@ spec:
               forProvider:
                 properties:
                   certificateBody:
-                    description: ncoded format.
+                    description: encoded format.
                     type: string
                   certificateChain:
-                    description: ncoded public key certificates of the chain.
+                    description: encoded public key certificates of the chain.
                     type: string
                   path:
                     description: The IAM path for the server certificate.  If it is
-                      not included, it defaults to a slash . If this certificate is
-                      for use with AWS CloudFront, the path must be in format /cloudfront/your_path_here.
+                      not included, it defaults to a slash (/). If this certificate
+                      is for use with AWS CloudFront, the path must be in format /cloudfront/your_path_here.
                       See IAM Identifiers for more details on IAM Paths.
                     type: string
                   privateKeySecretRef:
-                    description: ncoded format.
+                    description: encoded format.
                     properties:
                       key:
                         description: The key to select.
@@ -282,7 +282,8 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  specifying the server certificate.
+                    description: The Amazon Resource Name (ARN) specifying the server
+                      certificate.
                     type: string
                   expiration:
                     description: Date and time in RFC3339 format on which the certificate

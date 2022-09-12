@@ -15,7 +15,7 @@ import (
 
 type FileSystemPolicyObservation struct {
 
-	// The ID that identifies the file system .
+	// The ID that identifies the file system (e.g., fs-ccfc0d65).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

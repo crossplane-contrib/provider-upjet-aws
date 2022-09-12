@@ -310,8 +310,8 @@ spec:
                     items:
                       properties:
                         gameSessionActivationTimeoutSeconds:
-                          description: Maximum amount of time  that a game session
-                            can remain in status ACTIVATING.
+                          description: Maximum amount of time (in seconds) that a
+                            game session can remain in status ACTIVATING.
                           type: number
                         maxConcurrentGameSessionActivations:
                           description: Maximum number of game sessions with status

@@ -21,11 +21,11 @@ type NetworkACLRuleObservation struct {
 
 type NetworkACLRuleParameters struct {
 
-	// The network range to allow or deny, in CIDR notation .
+	// The network range to allow or deny, in CIDR notation (for example 172.16.0.0/24 ).
 	// +kubebuilder:validation:Optional
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
-	// Indicates whether this is an egress rule . Default false.
+	// Indicates whether this is an egress rule (rule is applied to traffic leaving the subnet). Default false.
 	// +kubebuilder:validation:Optional
 	Egress *bool `json:"egress,omitempty" tf:"egress,omitempty"`
 
@@ -72,7 +72,7 @@ type NetworkACLRuleParameters struct {
 	// +kubebuilder:validation:Required
 	RuleAction *string `json:"ruleAction" tf:"rule_action,omitempty"`
 
-	// The rule number for the entry . ACL entries are processed in ascending order by rule number.
+	// The rule number for the entry (for example, 100). ACL entries are processed in ascending order by rule number.
 	// +kubebuilder:validation:Required
 	RuleNumber *float64 `json:"ruleNumber" tf:"rule_number,omitempty"`
 

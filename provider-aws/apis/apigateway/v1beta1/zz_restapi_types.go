@@ -29,7 +29,7 @@ type RestAPIEndpointConfigurationParameters struct {
 
 type RestAPIObservation struct {
 
-	// Amazon Resource Name
+	// Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The creation date of the REST API
@@ -43,7 +43,7 @@ type RestAPIObservation struct {
 	// The ID of the REST API
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// JSON formatted policy document that controls access to the API Gateway. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide. Terraform will only perform drift detection of its value when present in a configuration. It is recommended to use the aws_api_gateway_rest_api_policy resource instead. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-policy extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
+	// JSON formatted policy document that controls access to the API Gateway. It is recommended to use the aws_api_gateway_rest_api_policy resource instead. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-policy extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The resource ID of the REST API's root
@@ -55,7 +55,7 @@ type RestAPIObservation struct {
 
 type RestAPIParameters struct {
 
-	// Source of the API key for requests. Valid values are HEADER  and AUTHORIZER. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-api-key-source extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
+	// Source of the API key for requests. Valid values are HEADER (default) and AUTHORIZER. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-api-key-source extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	// +kubebuilder:validation:Optional
 	APIKeySource *string `json:"apiKeySource,omitempty" tf:"api_key_source,omitempty"`
 
@@ -79,7 +79,7 @@ type RestAPIParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointConfiguration []RestAPIEndpointConfigurationParameters `json:"endpointConfiguration,omitempty" tf:"endpoint_configuration,omitempty"`
 
-	// Minimum response size to compress for the REST API. Integer between -1 and 10485760 . Setting a value greater than -1 will enable compression, -1 disables compression . If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-minimum-compression-size extension. If the argument value  is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
+	// Minimum response size to compress for the REST API. Integer between -1 and 10485760 (10MB). Setting a value greater than -1 will enable compression, -1 disables compression (default). If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-minimum-compression-size extension. If the argument value (except -1) is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	// +kubebuilder:validation:Optional
 	MinimumCompressionSize *float64 `json:"minimumCompressionSize,omitempty" tf:"minimum_compression_size,omitempty"`
 

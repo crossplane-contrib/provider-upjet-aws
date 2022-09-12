@@ -401,6 +401,7 @@ spec:
                     description: ID of the access point.
                     type: string
                   ownerId:
+                    description: ID of the access point.
                     type: string
                   tagsAll:
                     additionalProperties:

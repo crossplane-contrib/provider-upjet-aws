@@ -45,7 +45,7 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// The cross-origin resource sharing  configuration. Applicable for HTTP APIs.
+	// The cross-origin resource sharing (CORS) configuration. Applicable for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	CorsConfiguration []CorsConfigurationParameters `json:"corsConfiguration,omitempty" tf:"cors_configuration,omitempty"`
 

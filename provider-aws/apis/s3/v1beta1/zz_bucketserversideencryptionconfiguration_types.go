@@ -15,7 +15,7 @@ import (
 
 type BucketServerSideEncryptionConfigurationObservation struct {
 
-	// The bucket or bucket and expected_bucket_owner separated by a comma  if the latter is provided.
+	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

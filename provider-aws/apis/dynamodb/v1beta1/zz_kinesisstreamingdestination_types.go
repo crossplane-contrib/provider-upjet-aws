@@ -15,7 +15,7 @@ import (
 
 type KinesisStreamingDestinationObservation struct {
 
-	// The table_name and stream_arn separated by a comma .
+	// The table_name and stream_arn separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

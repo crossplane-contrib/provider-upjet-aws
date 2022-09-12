@@ -46,7 +46,7 @@ type VaultNotificationsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The Amazon Resource Name  that specifies the topic for a backup vault’s events
+	// The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

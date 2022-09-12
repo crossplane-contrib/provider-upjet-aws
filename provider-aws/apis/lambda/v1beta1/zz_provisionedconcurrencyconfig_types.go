@@ -15,13 +15,13 @@ import (
 
 type ProvisionedConcurrencyConfigObservation struct {
 
-	// Lambda Function name and qualifier separated by a colon .
+	// Lambda Function name and qualifier separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ProvisionedConcurrencyConfigParameters struct {
 
-	// Name or Amazon Resource Name  of the Lambda Function.
+	// Name or Amazon Resource Name (ARN) of the Lambda Function.
 	// +kubebuilder:validation:Required
 	FunctionName *string `json:"functionName" tf:"function_name,omitempty"`
 

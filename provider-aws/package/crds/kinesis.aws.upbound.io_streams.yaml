@@ -371,7 +371,8 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  specifying the Stream
+                    description: The Amazon Resource Name (ARN) specifying the Stream
+                      (same as id)
                     type: string
                   id:
                     description: The unique Stream id

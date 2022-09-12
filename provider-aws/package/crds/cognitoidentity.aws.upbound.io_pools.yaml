@@ -187,8 +187,8 @@ spec:
                       be created in.
                     type: string
                   samlProviderArns:
-                    description: An array of Amazon Resource Names  of the SAML provider
-                      for your identity.
+                    description: An array of Amazon Resource Names (ARNs) of the SAML
+                      provider for your identity.
                     items:
                       type: string
                     type: array

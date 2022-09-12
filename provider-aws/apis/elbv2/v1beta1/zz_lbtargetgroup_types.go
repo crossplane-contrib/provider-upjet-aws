@@ -29,11 +29,11 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// 99" or "0-99"). Required for HTTP/HTTPS/GRPC ALB. Only applies to Application Load Balancers  not Network Load Balancers .
+	// 299" or "0-99"). Required for HTTP/HTTPS/GRPC ALB. Only applies to Application Load Balancers (i.e., HTTP/HTTPS/GRPC) not Network Load Balancers (i.e., TCP).
 	// +kubebuilder:validation:Optional
 	Matcher *string `json:"matcher,omitempty" tf:"matcher,omitempty"`
 
-	// Destination for the health check request. Required for HTTP/HTTPS ALB and HTTP NLB. Only applies to HTTP/HTTPS.
+	// (May be required) Destination for the health check request. Required for HTTP/HTTPS ALB and HTTP NLB. Only applies to HTTP/HTTPS.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
@@ -54,13 +54,13 @@ type HealthCheckParameters struct {
 
 type LBTargetGroupObservation struct {
 
-	// ARN of the Target Group .
+	// ARN of the Target Group (matches id).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// ARN suffix for use with CloudWatch Metrics.
 	ArnSuffix *string `json:"arnSuffix,omitempty" tf:"arn_suffix,omitempty"`
 
-	// ARN of the Target Group .
+	// ARN of the Target Group (matches arn).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
@@ -127,7 +127,7 @@ type LBTargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Type of target that you must specify when registering targets with this target group. See doc for supported values. The default is instance.
+	// (May be required, Forces new resource) Type of target that you must specify when registering targets with this target group. See doc for supported values. The default is instance.
 	// +kubebuilder:validation:Optional
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 
@@ -150,7 +150,7 @@ type LBTargetGroupStickinessObservation struct {
 
 type LBTargetGroupStickinessParameters struct {
 
-	// Only used when the type is lb_cookie. The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week . The default value is 1 day .
+	// Only used when the type is lb_cookie. The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).
 	// +kubebuilder:validation:Optional
 	CookieDuration *float64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
 

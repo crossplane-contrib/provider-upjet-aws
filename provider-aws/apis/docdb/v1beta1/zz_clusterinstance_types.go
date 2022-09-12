@@ -15,7 +15,7 @@ import (
 
 type ClusterInstanceObservation struct {
 
-	// Amazon Resource Name  of cluster instance
+	// Amazon Resource Name (ARN) of cluster instance
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The DB subnet group to associate with this DB instance.

@@ -34,7 +34,7 @@ type RouteParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	CarrierGatewayID *string `json:"carrierGatewayId,omitempty" tf:"carrier_gateway_id,omitempty"`
 
-	// The Amazon Resource Name  of a core network.
+	// The Amazon Resource Name (ARN) of a core network.
 	// +kubebuilder:validation:Optional
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
 

@@ -74,7 +74,7 @@ spec:
                           type: string
                         type:
                           description: 'Attribute type, which must be a scalar type:
-                            S, N, or B for tring, umber or inary data'
+                            S, N, or B for (S)tring, (N)umber or (B)inary data'
                           type: string
                       required:
                       - name
@@ -96,10 +96,18 @@ spec:
                         name:
                           type: string
                         nonKeyAttributes:
+                          description: Only required with INCLUDE as a projection
+                            type; a list of attributes to project into the index.
+                            These do not need to be defined as attributes on the table.
                           items:
                             type: string
                           type: array
                         projectionType:
+                          description: One of ALL, INCLUDE or KEYS_ONLY where ALL
+                            projects every attribute into the index, KEYS_ONLY projects
+                            just the hash and range key into the index, and INCLUDE
+                            projects only the keys specified in the non_key_attributes
+                            parameter.
                           type: string
                         rangeKey:
                           type: string
@@ -124,10 +132,18 @@ spec:
                         name:
                           type: string
                         nonKeyAttributes:
+                          description: Only required with INCLUDE as a projection
+                            type; a list of attributes to project into the index.
+                            These do not need to be defined as attributes on the table.
                           items:
                             type: string
                           type: array
                         projectionType:
+                          description: One of ALL, INCLUDE or KEYS_ONLY where ALL
+                            projects every attribute into the index, KEYS_ONLY projects
+                            just the hash and range key into the index, and INCLUDE
+                            projects only the keys specified in the non_key_attributes
+                            parameter.
                           type: string
                         rangeKey:
                           type: string
@@ -142,6 +158,8 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: Indicates whether ttl is enabled (true) or
+                            disabled (false).
                           type: boolean
                       required:
                       - enabled
@@ -156,8 +174,9 @@ spec:
                       be created in.
                     type: string
                   replica:
-                    description: Configuration block with DynamoDB Global Tables V2  replication
-                      configurations. Detailed below.
+                    description: Configuration block(s) with DynamoDB Global Tables
+                      V2 (version 2019.11.21) replication configurations. Detailed
+                      below.
                     items:
                       properties:
                         kmsKeyArn:
@@ -187,6 +206,8 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: Indicates whether ttl is enabled (true) or
+                            disabled (false).
                           type: boolean
                         kmsKeyArn:
                           type: string
@@ -195,8 +216,8 @@ spec:
                       type: object
                     type: array
                   streamEnabled:
-                    description: Indicates whether Streams are to be enabled  or disabled
-                      .
+                    description: Indicates whether Streams are to be enabled (true)
+                      or disabled (false).
                     type: boolean
                   streamViewType:
                     description: When an item in the table is modified, StreamViewType
@@ -225,6 +246,8 @@ spec:
                             TTL timestamp in.
                           type: string
                         enabled:
+                          description: Indicates whether ttl is enabled (true) or
+                            disabled (false).
                           type: boolean
                       required:
                       - attributeName

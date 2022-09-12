@@ -144,7 +144,7 @@ spec:
                     type: object
                   filter:
                     description: Object filtering that accepts a prefix, tags, or
-                      a logical AND of prefix and tags .
+                      a logical AND of prefix and tags (documented below).
                     items:
                       properties:
                         prefix:
@@ -165,21 +165,23 @@ spec:
                       be created in.
                     type: string
                   storageClassAnalysis:
-                    description: Configuration for the analytics data export .
+                    description: Configuration for the analytics data export (documented
+                      below).
                     items:
                       properties:
                         dataExport:
-                          description: Data export configuration .
+                          description: Data export configuration (documented below).
                           items:
                             properties:
                               destination:
                                 description: Specifies the destination for the exported
-                                  analytics data .
+                                  analytics data (documented below).
                                 items:
                                   properties:
                                     s3BucketDestination:
                                       description: Analytics data export currently
-                                        only supports an S3 bucket destination .
+                                        only supports an S3 bucket destination (documented
+                                        below).
                                       items:
                                         properties:
                                           bucketAccountId:

@@ -118,7 +118,7 @@ spec:
                       is false.
                     type: boolean
                   outpostArn:
-                    description: The Amazon Resource Name  of the Outpost.
+                    description: The Amazon Resource Name (ARN) of the Outpost.
                     type: string
                   privateDnsHostnameTypeOnLaunch:
                     description: 'The type of hostnames to assign to instances in

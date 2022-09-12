@@ -101,9 +101,10 @@ spec:
                       properties:
                         cookiesConfig:
                           description: Object that determines whether any cookies
-                            in viewer requests  are included in the cache key and
-                            automatically included in requests that CloudFront sends
-                            to the origin. See Cookies Config for more information.
+                            in viewer requests (and if so, which cookies) are included
+                            in the cache key and automatically included in requests
+                            that CloudFront sends to the origin. See Cookies Config
+                            for more information.
                           items:
                             properties:
                               cookieBehavior:
@@ -119,7 +120,8 @@ spec:
                                 items:
                                   properties:
                                     items:
-                                      description: A list of item names .
+                                      description: A list of item names (cookies,
+                                        headers, or query strings).
                                       items:
                                         type: string
                                       type: array
@@ -140,10 +142,10 @@ spec:
                             in requests that CloudFront sends to the origin.
                           type: boolean
                         headersConfig:
-                          description: Object that determines whether any HTTP headers  are
-                            included in the cache key and automatically included in
-                            requests that CloudFront sends to the origin. See Headers
-                            Config for more information.
+                          description: Object that determines whether any HTTP headers
+                            (and if so, which headers) are included in the cache key
+                            and automatically included in requests that CloudFront
+                            sends to the origin. See Headers Config for more information.
                           items:
                             properties:
                               headerBehavior:
@@ -158,7 +160,8 @@ spec:
                                 items:
                                   properties:
                                     items:
-                                      description: A list of item names .
+                                      description: A list of item names (cookies,
+                                        headers, or query strings).
                                       items:
                                         type: string
                                       type: array
@@ -168,10 +171,10 @@ spec:
                           type: array
                         queryStringsConfig:
                           description: Object that determines whether any URL query
-                            strings in viewer requests  are included in the cache
-                            key and automatically included in requests that CloudFront
-                            sends to the origin. See Query String Config for more
-                            information.
+                            strings in viewer requests (and if so, which query strings)
+                            are included in the cache key and automatically included
+                            in requests that CloudFront sends to the origin. See Query
+                            String Config for more information.
                           items:
                             properties:
                               queryStringBehavior:
@@ -187,7 +190,8 @@ spec:
                                 items:
                                   properties:
                                     items:
-                                      description: A list of item names .
+                                      description: A list of item names (cookies,
+                                        headers, or query strings).
                                       items:
                                         type: string
                                       type: array

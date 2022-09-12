@@ -65,12 +65,12 @@ spec:
               forProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  specifying the Stream
+                    description: The Amazon Resource Name (ARN) specifying the Stream
                     type: string
                   destination:
                     description: –  This is the destination to where the data is delivered.
-                      The only options are s3 , extended_s3, redshift, elasticsearch,
-                      splunk, and http_endpoint.
+                      The only options are s3 (Deprecated, use extended_s3 instead),
+                      extended_s3, redshift, elasticsearch, splunk, and http_endpoint.
                     type: string
                   destinationId:
                     type: string
@@ -120,6 +120,8 @@ spec:
                             is OneDay.
                           type: string
                         processingConfiguration:
+                          description: The data processing configuration.  More details
+                            are given below.
                           items:
                             properties:
                               enabled:
@@ -145,9 +147,9 @@ spec:
                                             type: string
                                           parameterValue:
                                             description: Parameter value. Must be
-                                              between 1 and 512 length . When providing
-                                              a Lambda ARN, you should specify the
-                                              resource version as well.
+                                              between 1 and 512 length (inclusive).
+                                              When providing a Lambda ARN, you should
+                                              specify the resource version as well.
                                             type: string
                                         required:
                                         - parameterName
@@ -170,6 +172,8 @@ spec:
                         retryDuration:
                           type: number
                         roleArn:
+                          description: The Amazon Resource Name (ARN) specifying the
+                            Stream
                           type: string
                         roleArnRef:
                           description: Reference to a Role in iam to populate roleArn.
@@ -260,6 +264,8 @@ spec:
                           items:
                             properties:
                               roleArn:
+                                description: The Amazon Resource Name (ARN) specifying
+                                  the Stream
                                 type: string
                               roleArnRef:
                                 description: Reference to a Role in iam to populate
@@ -599,6 +605,14 @@ spec:
                                             items:
                                               properties:
                                                 blockSizeBytes:
+                                                  description: The Hadoop Distributed
+                                                    File System (HDFS) block size.
+                                                    This is useful if you intend to
+                                                    copy the data from Amazon S3 to
+                                                    HDFS before querying. The default
+                                                    is 256 MiB and the minimum is
+                                                    64 MiB. Kinesis Data Firehose
+                                                    uses this value for padding calculations.
                                                   type: number
                                                 bloomFilterColumns:
                                                   description: A list of column names
@@ -609,11 +623,11 @@ spec:
                                                   type: array
                                                 bloomFilterFalsePositiveProbability:
                                                   description: The Bloom filter false
-                                                    positive probability . The lower
-                                                    the FPP, the bigger the Bloom
-                                                    filter. The default value is 0.05,
-                                                    the minimum is 0, and the maximum
-                                                    is 1.
+                                                    positive probability (FPP). The
+                                                    lower the FPP, the bigger the
+                                                    Bloom filter. The default value
+                                                    is 0.05, the minimum is 0, and
+                                                    the maximum is 1.
                                                   type: number
                                                 compression:
                                                   type: string
@@ -687,6 +701,14 @@ spec:
                                             items:
                                               properties:
                                                 blockSizeBytes:
+                                                  description: The Hadoop Distributed
+                                                    File System (HDFS) block size.
+                                                    This is useful if you intend to
+                                                    copy the data from Amazon S3 to
+                                                    HDFS before querying. The default
+                                                    is 256 MiB and the minimum is
+                                                    64 MiB. Kinesis Data Firehose
+                                                    uses this value for padding calculations.
                                                   type: number
                                                 compression:
                                                   type: string
@@ -705,9 +727,10 @@ spec:
                                                   description: The Parquet page size.
                                                     Column chunks are divided into
                                                     pages. A page is conceptually
-                                                    an indivisible unit . The minimum
-                                                    value is 64 KiB and the default
-                                                    is 1 MiB.
+                                                    an indivisible unit (in terms
+                                                    of compression and encoding).
+                                                    The minimum value is 64 KiB and
+                                                    the default is 1 MiB.
                                                   type: number
                                                 writerVersion:
                                                   description: Indicates the version
@@ -744,6 +767,8 @@ spec:
                                         the default is the current region.
                                       type: string
                                     roleArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        specifying the Stream
                                       type: string
                                     roleArnRef:
                                       description: Reference to a Role in iam to populate
@@ -963,6 +988,8 @@ spec:
                             as a folder in the S3 bucket
                           type: string
                         processingConfiguration:
+                          description: The data processing configuration.  More details
+                            are given below.
                           items:
                             properties:
                               enabled:
@@ -988,9 +1015,9 @@ spec:
                                             type: string
                                           parameterValue:
                                             description: Parameter value. Must be
-                                              between 1 and 512 length . When providing
-                                              a Lambda ARN, you should specify the
-                                              resource version as well.
+                                              between 1 and 512 length (inclusive).
+                                              When providing a Lambda ARN, you should
+                                              specify the resource version as well.
                                             type: string
                                         required:
                                         - parameterName
@@ -1011,6 +1038,8 @@ spec:
                             type: object
                           type: array
                         roleArn:
+                          description: The Amazon Resource Name (ARN) specifying the
+                            Stream
                           type: string
                         roleArnRef:
                           description: Reference to a Role in iam to populate roleArn.
@@ -1089,6 +1118,9 @@ spec:
                               type: object
                           type: object
                         s3BackupConfiguration:
+                          description: The configuration for backup in Amazon S3.
+                            Required if s3_backup_mode is Enabled. Supports the same
+                            fields as s3_configuration object.
                           items:
                             properties:
                               bucketArn:
@@ -1151,6 +1183,8 @@ spec:
                                   S3 bucket
                                 type: string
                               roleArn:
+                                description: The Amazon Resource Name (ARN) specifying
+                                  the Stream
                                 type: string
                             required:
                             - bucketArn
@@ -1208,6 +1242,8 @@ spec:
                         name:
                           type: string
                         processingConfiguration:
+                          description: The data processing configuration.  More details
+                            are given below.
                           items:
                             properties:
                               enabled:
@@ -1233,9 +1269,9 @@ spec:
                                             type: string
                                           parameterValue:
                                             description: Parameter value. Must be
-                                              between 1 and 512 length . When providing
-                                              a Lambda ARN, you should specify the
-                                              resource version as well.
+                                              between 1 and 512 length (inclusive).
+                                              When providing a Lambda ARN, you should
+                                              specify the resource version as well.
                                             type: string
                                         required:
                                         - parameterName
@@ -1287,6 +1323,8 @@ spec:
                         retryDuration:
                           type: number
                         roleArn:
+                          description: The Amazon Resource Name (ARN) specifying the
+                            Stream
                           type: string
                         roleArnRef:
                           description: Reference to a Role in iam to populate roleArn.
@@ -1384,6 +1422,8 @@ spec:
                             firehose delivery stream.
                           type: string
                         roleArn:
+                          description: The Amazon Resource Name (ARN) specifying the
+                            Stream
                           type: string
                       required:
                       - kinesisStreamArn
@@ -1445,6 +1485,8 @@ spec:
                           - namespace
                           type: object
                         processingConfiguration:
+                          description: The data processing configuration.  More details
+                            are given below.
                           items:
                             properties:
                               enabled:
@@ -1470,9 +1512,9 @@ spec:
                                             type: string
                                           parameterValue:
                                             description: Parameter value. Must be
-                                              between 1 and 512 length . When providing
-                                              a Lambda ARN, you should specify the
-                                              resource version as well.
+                                              between 1 and 512 length (inclusive).
+                                              When providing a Lambda ARN, you should
+                                              specify the resource version as well.
                                             type: string
                                         required:
                                         - parameterName
@@ -1495,6 +1537,8 @@ spec:
                         retryDuration:
                           type: number
                         roleArn:
+                          description: The Amazon Resource Name (ARN) specifying the
+                            Stream
                           type: string
                         roleArnRef:
                           description: Reference to a Role in iam to populate roleArn.
@@ -1573,6 +1617,9 @@ spec:
                               type: object
                           type: object
                         s3BackupConfiguration:
+                          description: The configuration for backup in Amazon S3.
+                            Required if s3_backup_mode is Enabled. Supports the same
+                            fields as s3_configuration object.
                           items:
                             properties:
                               bucketArn:
@@ -1715,6 +1762,8 @@ spec:
                                   S3 bucket
                                 type: string
                               roleArn:
+                                description: The Amazon Resource Name (ARN) specifying
+                                  the Stream
                                 type: string
                               roleArnRef:
                                 description: Reference to a Role in iam to populate
@@ -1822,7 +1871,8 @@ spec:
                   s3Configuration:
                     description: Required for non-S3 destinations. For S3 destination,
                       use extended_s3_configuration instead. Configuration options
-                      for the s3 destination . More details are given below.
+                      for the s3 destination (or the intermediate bucket if the destination
+                      is redshift). More details are given below.
                     items:
                       properties:
                         bucketArn:
@@ -1957,6 +2007,8 @@ spec:
                             as a folder in the S3 bucket
                           type: string
                         roleArn:
+                          description: The Amazon Resource Name (ARN) specifying the
+                            Stream
                           type: string
                         roleArnRef:
                           description: Reference to a Role in iam to populate roleArn.
@@ -2045,8 +2097,8 @@ spec:
                         enabled:
                           type: boolean
                         keyArn:
-                          description: Amazon Resource Name  of the encryption key.
-                            Required when key_type is CUSTOMER_MANAGED_CMK.
+                          description: Amazon Resource Name (ARN) of the encryption
+                            key. Required when key_type is CUSTOMER_MANAGED_CMK.
                           type: string
                         keyType:
                           description: Type of encryption key. Default is AWS_OWNED_CMK.
@@ -2080,8 +2132,8 @@ spec:
                             from Splunk after it sends it data.
                           type: number
                         hecEndpoint:
-                          description: The HTTP Event Collector  endpoint to which
-                            Kinesis Firehose sends your data.
+                          description: The HTTP Event Collector (HEC) endpoint to
+                            which Kinesis Firehose sends your data.
                           type: string
                         hecEndpointType:
                           description: The HEC endpoint type. Valid values are Raw
@@ -2092,6 +2144,8 @@ spec:
                             when you create a new HEC endpoint.
                           type: string
                         processingConfiguration:
+                          description: The data processing configuration.  More details
+                            are given below.
                           items:
                             properties:
                               enabled:
@@ -2117,9 +2171,9 @@ spec:
                                             type: string
                                           parameterValue:
                                             description: Parameter value. Must be
-                                              between 1 and 512 length . When providing
-                                              a Lambda ARN, you should specify the
-                                              resource version as well.
+                                              between 1 and 512 length (inclusive).
+                                              When providing a Lambda ARN, you should
+                                              specify the resource version as well.
                                             type: string
                                         required:
                                         - parameterName

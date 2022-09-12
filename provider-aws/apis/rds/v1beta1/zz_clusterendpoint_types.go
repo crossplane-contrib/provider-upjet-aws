@@ -15,7 +15,7 @@ import (
 
 type ClusterEndpointObservation struct {
 
-	// Amazon Resource Name  of cluster
+	// Amazon Resource Name (ARN) of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A custom endpoint for the Aurora cluster

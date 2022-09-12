@@ -369,7 +369,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of cluster instance
+                    description: Amazon Resource Name (ARN) of cluster instance
                     type: string
                   dbSubnetGroupName:
                     description: The DB subnet group to associate with this DB instance.

@@ -50,7 +50,7 @@ type SecurityGroupObservation struct {
 
 type SecurityGroupParameters struct {
 
-	// The description of the DB security group. Defaults to "Managed by Terraform".
+	// The description of the DB security group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

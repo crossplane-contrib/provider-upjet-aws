@@ -18,7 +18,7 @@ type CapacityReservationSpecificationObservation struct {
 
 type CapacityReservationSpecificationParameters struct {
 
-	// Indicates the instance's Capacity Reservation preferences. Can be "open" or "none". .
+	// Indicates the instance's Capacity Reservation preferences. Can be "open" or "none". (Default: "open").
 	// +kubebuilder:validation:Optional
 	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
 
@@ -57,18 +57,23 @@ type EBSBlockDeviceObservation struct {
 
 type EBSBlockDeviceParameters struct {
 
+	// Whether the volume should be destroyed on instance termination. Defaults to true.
 	// +kubebuilder:validation:Optional
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
+	// Name of the device to mount.
 	// +kubebuilder:validation:Required
 	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
+	// Enables EBS encryption on the volume. Defaults to false. Cannot be used with snapshot_id. Must be configured to perform drift detection.
 	// +kubebuilder:validation:Optional
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
+	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
+	// Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -85,15 +90,19 @@ type EBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
+	// A map of tags to assign to the device.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
+	// Size of the volume in gibibytes (GiB).
 	// +kubebuilder:validation:Optional
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
+	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -113,6 +122,7 @@ type EphemeralBlockDeviceObservation struct {
 
 type EphemeralBlockDeviceParameters struct {
 
+	// The name of the block device to mount on the instance.
 	// +kubebuilder:validation:Required
 	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
@@ -120,7 +130,7 @@ type EphemeralBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	NoDevice *bool `json:"noDevice,omitempty" tf:"no_device,omitempty"`
 
-	// Instance Store Device Name .
+	// Instance Store Device Name (e.g., ephemeral0).
 	// +kubebuilder:validation:Optional
 	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
@@ -191,10 +201,11 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
+	// Describes an instance's Capacity Reservation targeting option. See Capacity Reservation Specification below for more details.
 	// +kubebuilder:validation:Optional
 	CapacityReservationSpecification []CapacityReservationSpecificationParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
 
-	// Configuration block for customizing the credit specification of the instance. See Credit Specification below for more details. Terraform will only perform drift detection of its value when present in a configuration. Removing this configuration on existing instances will only stop managing it. It will not change the configuration back to the default for the instance type.
+	// Configuration block for customizing the credit specification of the instance. See Credit Specification below for more details. Removing this configuration on existing instances will only stop managing it. It will not change the configuration back to the default for the instance type.
 	// +kubebuilder:validation:Optional
 	CreditSpecification []CreditSpecificationParameters `json:"creditSpecification,omitempty" tf:"credit_specification,omitempty"`
 
@@ -214,7 +225,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	EnclaveOptions []EnclaveOptionsParameters `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
 
-	// One or more configuration blocks to customize Ephemeral  volumes on the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a set of objects.
+	// One or more configuration blocks to customize Ephemeral (also known as "Instance Store") volumes on the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a set of objects.
 	// +kubebuilder:validation:Optional
 	EphemeralBlockDevice []EphemeralBlockDeviceParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
@@ -267,7 +278,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MetadataOptions []MetadataOptionsParameters `json:"metadataOptions,omitempty" tf:"metadata_options,omitempty"`
 
-	// If true, the launched EC2 instance will have detailed monitoring enabled.
+	// If true, the launched EC2 instance will have detailed monitoring enabled. (Available since v0.6.0)
 	// +kubebuilder:validation:Optional
 	Monitoring *bool `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
 
@@ -296,7 +307,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	RootBlockDevice []RootBlockDeviceParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
-	// A list of secondary private IPv4 addresses to assign to the instance's primary network interface  in a VPC. Can only be assigned to the primary network interface  attached at instance creation, not a pre-existing network interface i.e., referenced in a network_interface block. Refer to the Elastic network interfaces documentation to see the maximum number of private IP addresses allowed per instance type.
+	// A list of secondary private IPv4 addresses to assign to the instance's primary network interface (eth0) in a VPC. Can only be assigned to the primary network interface (eth0) attached at instance creation, not a pre-existing network interface i.e., referenced in a network_interface block. Refer to the Elastic network interfaces documentation to see the maximum number of private IP addresses allowed per instance type.
 	// +kubebuilder:validation:Optional
 	SecondaryPrivateIps []*string `json:"secondaryPrivateIps,omitempty" tf:"secondary_private_ips,omitempty"`
 
@@ -317,10 +328,11 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// A map of tags to assign to the resource. Note that these tags apply to the instance and not block storage devices. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Tenancy of the instance . An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command.
+	// Tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command.
 	// +kubebuilder:validation:Optional
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 
@@ -397,7 +409,7 @@ type MetadataOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
-	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 . Valid values include optional or required. Defaults to optional.
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required. Defaults to optional.
 	// +kubebuilder:validation:Optional
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
@@ -411,6 +423,7 @@ type NetworkInterfaceObservation struct {
 
 type NetworkInterfaceParameters struct {
 
+	// Whether or not to delete the network interface on instance termination. Defaults to false. Currently, the only valid value is false, as this is only supported when creating new network interfaces when launching an instance.
 	// +kubebuilder:validation:Optional
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
@@ -437,6 +450,8 @@ type NetworkInterfaceParameters struct {
 }
 
 type RootBlockDeviceObservation struct {
+
+	// Device name, e.g., /dev/sdh or xvdh.
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
@@ -444,15 +459,19 @@ type RootBlockDeviceObservation struct {
 
 type RootBlockDeviceParameters struct {
 
+	// Whether the volume should be destroyed on instance termination. Defaults to true.
 	// +kubebuilder:validation:Optional
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
+	// Whether to enable volume encryption. Defaults to false. Must be configured to perform drift detection.
 	// +kubebuilder:validation:Optional
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
+	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
+	// Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -465,15 +484,19 @@ type RootBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
+	// A map of tags to assign to the device.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
+	// Size of the volume in gibibytes (GiB).
 	// +kubebuilder:validation:Optional
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
+	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }

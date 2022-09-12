@@ -18,7 +18,7 @@ type ActivityObservation struct {
 	// The date the activity was created.
 	CreationDate *string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
 
-	// The Amazon Resource Name  that identifies the created activity.
+	// The Amazon Resource Name (ARN) that identifies the created activity.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.

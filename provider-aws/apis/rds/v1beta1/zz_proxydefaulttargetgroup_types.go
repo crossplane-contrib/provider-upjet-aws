@@ -41,7 +41,7 @@ type ConnectionPoolConfigParameters struct {
 
 type ProxyDefaultTargetGroupObservation struct {
 
-	// The Amazon Resource Name  representing the target group.
+	// The Amazon Resource Name (ARN) representing the target group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Name of the RDS DB Proxy.

@@ -372,12 +372,12 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of the EKS Identity Provider
+                    description: Amazon Resource Name (ARN) of the EKS Identity Provider
                       Configuration.
                     type: string
                   id:
                     description: EKS Cluster name and EKS Identity Provider Configuration
-                      name separated by a colon .
+                      name separated by a colon (:).
                     type: string
                   status:
                     description: Status of the EKS Identity Provider Configuration.

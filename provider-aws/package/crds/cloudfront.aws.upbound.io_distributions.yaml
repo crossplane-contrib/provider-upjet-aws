@@ -65,7 +65,8 @@ spec:
               forProvider:
                 properties:
                   aliases:
-                    description: Extra CNAMEs , if any, for this distribution.
+                    description: Extra CNAMEs (alternate domain names), if any, for
+                      this distribution.
                     items:
                       type: string
                     type: array
@@ -73,7 +74,8 @@ spec:
                     description: Any comments you want to include about the distribution.
                     type: string
                   customErrorResponse:
-                    description: One or more custom error response elements .
+                    description: One or more custom error response elements (multiples
+                      allowed).
                     items:
                       properties:
                         errorCachingMinTtl:
@@ -90,7 +92,8 @@ spec:
                             to return with the custom error page to the viewer.
                           type: number
                         responsePagePath:
-                          description: The path of the custom error page .
+                          description: The path of the custom error page (for example,
+                            /custom_404.html).
                           type: string
                       required:
                       - errorCode
@@ -98,7 +101,7 @@ spec:
                     type: array
                   defaultCacheBehavior:
                     description: The default cache behavior for this distribution
-                      .
+                      (maximum one).
                     items:
                       properties:
                         allowedMethods:
@@ -120,13 +123,13 @@ spec:
                         compress:
                           description: 'Whether you want CloudFront to automatically
                             compress content for web requests that include Accept-Encoding:
-                            gzip in the request header .'
+                            gzip in the request header (default: false).'
                           type: boolean
                         defaultTtl:
-                          description: The default amount of time  that an object
-                            is in a CloudFront cache before CloudFront forwards another
-                            request in the absence of an Cache-Control max-age or
-                            Expires header.
+                          description: The default amount of time (in seconds) that
+                            an object is in a CloudFront cache before CloudFront forwards
+                            another request in the absence of an Cache-Control max-age
+                            or Expires header.
                           type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID
@@ -134,12 +137,12 @@ spec:
                         forwardedValues:
                           description: The forwarded values configuration that specifies
                             how CloudFront handles query strings, cookies and headers
-                            .
+                            (maximum one).
                           items:
                             properties:
                               cookies:
                                 description: The forwarded values cookies that specifies
-                                  how CloudFront handles cookies .
+                                  how CloudFront handles cookies (maximum one).
                                 items:
                                   properties:
                                     forward:
@@ -189,7 +192,7 @@ spec:
                           type: array
                         functionAssociation:
                           description: A config block that triggers a cloudfront function
-                            with specific actions .
+                            with specific actions (maximum 2).
                           items:
                             properties:
                               eventType:
@@ -204,7 +207,7 @@ spec:
                           type: array
                         lambdaFunctionAssociation:
                           description: A config block that triggers a lambda function
-                            with specific actions .
+                            with specific actions (maximum 4).
                           items:
                             properties:
                               eventType:
@@ -223,11 +226,12 @@ spec:
                             type: object
                           type: array
                         maxTtl:
-                          description: The maximum amount of time  that an object
-                            is in a CloudFront cache before CloudFront forwards another
-                            request to your origin to determine whether the object
-                            has been updated. Only effective in the presence of Cache-Control
-                            max-age, Cache-Control s-maxage, and Expires headers.
+                          description: The maximum amount of time (in seconds) that
+                            an object is in a CloudFront cache before CloudFront forwards
+                            another request to your origin to determine whether the
+                            object has been updated. Only effective in the presence
+                            of Cache-Control max-age, Cache-Control s-maxage, and
+                            Expires headers.
                           type: number
                         minTtl:
                           description: The minimum amount of time that you want objects
@@ -279,8 +283,8 @@ spec:
                       type: object
                     type: array
                   defaultRootObject:
-                    description: The object that you want CloudFront to return  when
-                      an end user requests the root URL.
+                    description: The object that you want CloudFront to return (for
+                      example, index.html) when an end user requests the root URL.
                     type: string
                   enabled:
                     type: boolean
@@ -293,7 +297,7 @@ spec:
                     type: boolean
                   loggingConfig:
                     description: The logging configuration that controls how logs
-                      are written to your distribution .
+                      are written to your distribution (maximum one).
                     items:
                       properties:
                         bucket:
@@ -301,8 +305,8 @@ spec:
                             in, for example, myawslogbucket.s3.amazonaws.com.
                           type: string
                         includeCookies:
-                          description: Specifies whether you want CloudFront to include
-                            cookies in access logs .
+                          description: 'Specifies whether you want CloudFront to include
+                            cookies in access logs (default: false).'
                           type: boolean
                         prefix:
                           description: An optional string that you want CloudFront
@@ -338,13 +342,13 @@ spec:
                         compress:
                           description: 'Whether you want CloudFront to automatically
                             compress content for web requests that include Accept-Encoding:
-                            gzip in the request header .'
+                            gzip in the request header (default: false).'
                           type: boolean
                         defaultTtl:
-                          description: The default amount of time  that an object
-                            is in a CloudFront cache before CloudFront forwards another
-                            request in the absence of an Cache-Control max-age or
-                            Expires header.
+                          description: The default amount of time (in seconds) that
+                            an object is in a CloudFront cache before CloudFront forwards
+                            another request in the absence of an Cache-Control max-age
+                            or Expires header.
                           type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID
@@ -352,12 +356,12 @@ spec:
                         forwardedValues:
                           description: The forwarded values configuration that specifies
                             how CloudFront handles query strings, cookies and headers
-                            .
+                            (maximum one).
                           items:
                             properties:
                               cookies:
                                 description: The forwarded values cookies that specifies
-                                  how CloudFront handles cookies .
+                                  how CloudFront handles cookies (maximum one).
                                 items:
                                   properties:
                                     forward:
@@ -407,7 +411,7 @@ spec:
                           type: array
                         functionAssociation:
                           description: A config block that triggers a cloudfront function
-                            with specific actions .
+                            with specific actions (maximum 2).
                           items:
                             properties:
                               eventType:
@@ -501,7 +505,7 @@ spec:
                           type: array
                         lambdaFunctionAssociation:
                           description: A config block that triggers a lambda function
-                            with specific actions .
+                            with specific actions (maximum 4).
                           items:
                             properties:
                               eventType:
@@ -599,11 +603,12 @@ spec:
                             type: object
                           type: array
                         maxTtl:
-                          description: The maximum amount of time  that an object
-                            is in a CloudFront cache before CloudFront forwards another
-                            request to your origin to determine whether the object
-                            has been updated. Only effective in the presence of Cache-Control
-                            max-age, Cache-Control s-maxage, and Expires headers.
+                          description: The maximum amount of time (in seconds) that
+                            an object is in a CloudFront cache before CloudFront forwards
+                            another request to your origin to determine whether the
+                            object has been updated. Only effective in the presence
+                            of Cache-Control max-age, Cache-Control s-maxage, and
+                            Expires headers.
                           type: number
                         minTtl:
                           description: The minimum amount of time that you want objects
@@ -616,8 +621,9 @@ spec:
                             policy that is attached to the behavior.
                           type: string
                         pathPattern:
-                          description: The pattern  that specifies which requests
-                            you want this cache behavior to apply to.
+                          description: The pattern (for example, images/*.jpg) that
+                            specifies which requests you want this cache behavior
+                            to apply to.
                           type: string
                         realtimeLogConfigArn:
                           description: The ARN of the real-time log configuration
@@ -660,7 +666,8 @@ spec:
                       type: object
                     type: array
                   origin:
-                    description: One or more origins for this distribution .
+                    description: One or more origins for this distribution (multiples
+                      allowed).
                     items:
                       properties:
                         connectionAttempts:
@@ -676,7 +683,7 @@ spec:
                         customHeader:
                           description: One or more sub-resources with name and value
                             parameters that specify header data that will be sent
-                            to the origin .
+                            to the origin (multiples allowed).
                           items:
                             properties:
                               name:
@@ -734,6 +741,8 @@ spec:
                         domainName:
                           type: string
                         originId:
+                          description: 'The identifier for the distribution. For example:
+                            EDFDVBD632BHDS5.'
                           type: string
                         originPath:
                           description: An optional element that causes CloudFront
@@ -752,8 +761,8 @@ spec:
                               originShieldRegion:
                                 description: The AWS Region for Origin Shield. To
                                   specify a region, use the region code, not the region
-                                  name. For example, specify the US East  region as
-                                  us-east-2.
+                                  name. For example, specify the US East (Ohio) region
+                                  as us-east-2.
                                 type: string
                             required:
                             - enabled
@@ -858,7 +867,8 @@ spec:
                       type: object
                     type: array
                   originGroup:
-                    description: One or more origin_group for this distribution .
+                    description: One or more origin_group for this distribution (multiples
+                      allowed).
                     items:
                       properties:
                         failoverCriteria:
@@ -883,12 +893,16 @@ spec:
                           items:
                             properties:
                               originId:
+                                description: 'The identifier for the distribution.
+                                  For example: EDFDVBD632BHDS5.'
                                 type: string
                             required:
                             - originId
                             type: object
                           type: array
                         originId:
+                          description: 'The identifier for the distribution. For example:
+                            EDFDVBD632BHDS5.'
                           type: string
                       required:
                       - failoverCriteria
@@ -906,7 +920,7 @@ spec:
                     type: string
                   restrictions:
                     description: The restriction configuration for this distribution
-                      .
+                      (maximum one).
                     items:
                       properties:
                         geoRestriction:
@@ -914,8 +928,8 @@ spec:
                             properties:
                               locations:
                                 description: The ISO 3166-1-alpha-2 codes for which
-                                  you want CloudFront either to distribute your content  or
-                                  not distribute your content .
+                                  you want CloudFront either to distribute your content
+                                  (whitelist) or not distribute your content (blacklist).
                                 items:
                                   type: string
                                 type: array
@@ -933,10 +947,8 @@ spec:
                       type: object
                     type: array
                   retainOnDelete:
-                    description: 'Disables the distribution instead of deleting it
-                      when destroying the resource through Terraform. If this is set,
-                      the distribution needs to be deleted manually afterwards. Default:
-                      false.'
+                    description: 'If this is set, the distribution needs to be deleted
+                      manually afterwards. Default: false.'
                     type: boolean
                   tags:
                     additionalProperties:
@@ -946,7 +958,8 @@ spec:
                       with matching keys will overwrite those defined at the provider-level.
                     type: object
                   viewerCertificate:
-                    description: The SSL configuration for this distribution .
+                    description: The SSL configuration for this distribution (maximum
+                      one).
                     items:
                       properties:
                         acmCertificateArn:
@@ -974,7 +987,8 @@ spec:
                             See all possible values in this table under "Security
                             policy." Some examples include: TLSv1.2_2019 and TLSv1.2_2021.
                             Default: TLSv1. NOTE: If you are using a custom certificate
-                            , and have specified sni-only in ssl_support_method, TLSv1
+                            (specified with acm_certificate_arn or iam_certificate_id),
+                            and have specified sni-only in ssl_support_method, TLSv1
                             or later must be specified. If you have specified vip
                             in ssl_support_method, only SSLv3 or TLSv1 can be specified.
                             If you have specified cloudfront_default_certificate,
@@ -995,12 +1009,13 @@ spec:
                   webAclId:
                     description: A unique identifier that specifies the AWS WAF web
                       ACL, if any, to associate with this distribution. To specify
-                      a web ACL created using the latest version of AWS WAF , use
-                      the ACL ARN, for example aws_wafv2_web_acl.example.arn. To specify
-                      a web ACL created using AWS WAF Classic, use the ACL ID, for
-                      example aws_waf_web_acl.example.id. The WAF Web ACL must exist
-                      in the WAF Global  region and the credentials configuring this
-                      argument must have waf:GetWebACL permissions assigned.
+                      a web ACL created using the latest version of AWS WAF (WAFv2),
+                      use the ACL ARN, for example aws_wafv2_web_acl.example.arn.
+                      To specify a web ACL created using AWS WAF Classic, use the
+                      ACL ID, for example aws_waf_web_acl.example.id. The WAF Web
+                      ACL must exist in the WAF Global (CloudFront) region and the
+                      credentials configuring this argument must have waf:GetWebACL
+                      permissions assigned.
                     type: string
                 required:
                 - defaultCacheBehavior
@@ -1187,7 +1202,8 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: 'The ARN  for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5,
+                    description: 'The ARN (Amazon Resource Name) for the distribution.
+                      For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5,
                       where 123456789012 is your AWS account ID.'
                     type: string
                   callerReference:

@@ -319,7 +319,7 @@ spec:
                     type: string
                   creationTime:
                     description: The date and time that a framework is created, in
-                      Unix format and Coordinated Universal Time .
+                      Unix format and Coordinated Universal Time (UTC).
                     type: string
                   deploymentStatus:
                     description: 'The deployment status of a framework. The statuses

@@ -15,7 +15,7 @@ import (
 
 type APIKeyObservation struct {
 
-	// Amazon Resource Name
+	// Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The creation date of the API key
@@ -33,7 +33,7 @@ type APIKeyObservation struct {
 
 type APIKeyParameters struct {
 
-	// The API key description. Defaults to "Managed by Terraform".
+	// The API key description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

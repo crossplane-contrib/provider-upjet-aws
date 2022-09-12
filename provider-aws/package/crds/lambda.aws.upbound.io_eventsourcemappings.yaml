@@ -73,13 +73,13 @@ spec:
                     type: number
                   bisectBatchOnFunctionError:
                     description: If the function returns an error, split the batch
-                      in two and retry. Only available for stream sources . Defaults
-                      to false.
+                      in two and retry. Only available for stream sources (DynamoDB
+                      and Kinesis). Defaults to false.
                     type: boolean
                   destinationConfig:
                     description: An Amazon SQS queue or Amazon SNS topic destination
-                      for failed records. Only available for stream sources . Detailed
-                      below.
+                      for failed records. Only available for stream sources (DynamoDB
+                      and Kinesis). Detailed below.
                     items:
                       properties:
                         onFailure:
@@ -88,8 +88,8 @@ spec:
                           items:
                             properties:
                               destinationArn:
-                                description: The Amazon Resource Name  of the destination
-                                  resource.
+                                description: The Amazon Resource Name (ARN) of the
+                                  destination resource.
                                 type: string
                             required:
                             - destinationArn
@@ -205,34 +205,38 @@ spec:
                   functionResponseTypes:
                     description: 'A list of current response type enums applied to
                       the event source mapping for AWS Lambda checkpointing. Only
-                      available for SQS and stream sources . Valid values: ReportBatchItemFailures.'
+                      available for SQS and stream sources (DynamoDB and Kinesis).
+                      Valid values: ReportBatchItemFailures.'
                     items:
                       type: string
                     type: array
                   maximumBatchingWindowInSeconds:
                     description: The maximum amount of time to gather records before
-                      invoking the function, in seconds . Records will continue to
-                      buffer  until either maximum_batching_window_in_seconds expires
-                      or batch_size has been met. For streaming event sources, defaults
-                      to as soon as records are available in the stream. If the batch
-                      it reads from the stream/queue only has one record in it, Lambda
-                      only sends one record to the function. Only available for stream
-                      sources  and SQS standard queues.
+                      invoking the function, in seconds (between 0 and 300). Records
+                      will continue to buffer (or accumulate in the case of an SQS
+                      queue event source) until either maximum_batching_window_in_seconds
+                      expires or batch_size has been met. For streaming event sources,
+                      defaults to as soon as records are available in the stream.
+                      If the batch it reads from the stream/queue only has one record
+                      in it, Lambda only sends one record to the function. Only available
+                      for stream sources (DynamoDB and Kinesis) and SQS standard queues.
                     type: number
                   maximumRecordAgeInSeconds:
                     description: The maximum age of a record that Lambda sends to
                       a function for processing. Only available for stream sources
-                      . Must be either -1  or between 60 and 604800 .
+                      (DynamoDB and Kinesis). Must be either -1 (forever, and the
+                      default value) or between 60 and 604800 (inclusive).
                     type: number
                   maximumRetryAttempts:
                     description: The maximum number of times to retry when the function
-                      returns an error. Only available for stream sources . Minimum
-                      and default of -1 , maximum of 10000.
+                      returns an error. Only available for stream sources (DynamoDB
+                      and Kinesis). Minimum and default of -1 (forever), maximum of
+                      10000.
                     type: number
                   parallelizationFactor:
                     description: The number of batches to process from each shard
-                      concurrently. Only available for stream sources . Minimum and
-                      default of 1, maximum of 10.
+                      concurrently. Only available for stream sources (DynamoDB and
+                      Kinesis). Minimum and default of 1, maximum of 10.
                     type: number
                   queues:
                     description: The name of the Amazon MQ broker destination queue
@@ -290,11 +294,11 @@ spec:
                     type: array
                   startingPosition:
                     description: The position in the stream where AWS Lambda should
-                      start reading. Must be one of AT_TIMESTAMP , LATEST or TRIM_HORIZON
-                      if getting events from Kinesis, DynamoDB or MSK. Must not be
-                      provided if getting events from SQS. More information about
-                      these positions can be found in the AWS DynamoDB Streams API
-                      Reference and AWS Kinesis API Reference.
+                      start reading. Must be one of AT_TIMESTAMP (Kinesis only), LATEST
+                      or TRIM_HORIZON if getting events from Kinesis, DynamoDB or
+                      MSK. Must not be provided if getting events from SQS. More information
+                      about these positions can be found in the AWS DynamoDB Streams
+                      API Reference and AWS Kinesis API Reference.
                     type: string
                   startingPositionTimestamp:
                     description: A timestamp in RFC3339 format of the data record
@@ -312,7 +316,8 @@ spec:
                   tumblingWindowInSeconds:
                     description: The duration in seconds of a processing window for
                       AWS Lambda streaming analytics. The range is between 1 second
-                      up to 900 seconds. Only available for stream sources .
+                      up to 900 seconds. Only available for stream sources (DynamoDB
+                      and Kinesis).
                     type: number
                 required:
                 - region
@@ -494,8 +499,9 @@ spec:
               atProvider:
                 properties:
                   functionArn:
-                    description: The the ARN of the Lambda function the event source
-                      mapping is sending events to.
+                    description: 'The the ARN of the Lambda function the event source
+                      mapping is sending events to. (Note: this is a computed value
+                      that differs from function_name above.)'
                     type: string
                   id:
                     type: string

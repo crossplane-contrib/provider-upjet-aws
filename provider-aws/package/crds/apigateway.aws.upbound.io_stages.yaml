@@ -70,7 +70,7 @@ spec:
                     items:
                       properties:
                         destinationArn:
-                          description: The Amazon Resource Name  of the CloudWatch
+                          description: The Amazon Resource Name (ARN) of the CloudWatch
                             Logs log group or Kinesis Data Firehose delivery stream
                             to receive access logs. If you specify a Kinesis Data
                             Firehose delivery stream, the stream name must begin with
@@ -108,8 +108,8 @@ spec:
                         stageVariableOverrides:
                           additionalProperties:
                             type: string
-                          description: A map of overridden stage variables  for the
-                            canary deployment.
+                          description: A map of overridden stage variables (including
+                            new variables) for the canary deployment.
                           type: object
                         useStageCache:
                           description: Whether the canary deployment uses the stage
@@ -486,7 +486,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name
+                    description: Amazon Resource Name (ARN)
                     type: string
                   executionArn:
                     description: The execution ARN to be used in lambda_permission's

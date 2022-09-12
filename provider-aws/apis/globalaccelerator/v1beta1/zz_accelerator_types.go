@@ -18,12 +18,12 @@ type AcceleratorObservation struct {
 	// The DNS name of the accelerator. For example, a5d53ff5ee6bca4ce.awsglobalaccelerator.com.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// The Global Accelerator Route 53 zone ID that can be used to
+	// -  The Global Accelerator Route 53 zone ID that can be used to
 	// route an Alias Resource Record Set to the Global Accelerator. This attribute
 	// is simply an alias for the zone ID Z2BJ6XQ5FK7U4H.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// The Amazon Resource Name  of the accelerator.
+	// The Amazon Resource Name (ARN) of the accelerator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// IP address set associated with the accelerator.

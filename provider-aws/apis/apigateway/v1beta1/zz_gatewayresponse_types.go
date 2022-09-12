@@ -24,7 +24,7 @@ type GatewayResponseParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// A map specifying the parameters  of the Gateway Response.
+	// A map specifying the parameters (paths, query strings and headers) of the Gateway Response.
 	// +kubebuilder:validation:Optional
 	ResponseParameters map[string]*string `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 

@@ -15,7 +15,7 @@ import (
 
 type DashboardObservation struct {
 
-	// The Amazon Resource Name  of the dashboard.
+	// The Amazon Resource Name (ARN) of the dashboard.
 	DashboardArn *string `json:"dashboardArn,omitempty" tf:"dashboard_arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

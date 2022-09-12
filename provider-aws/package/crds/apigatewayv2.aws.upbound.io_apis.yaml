@@ -75,7 +75,7 @@ spec:
                       Supported only for HTTP APIs.
                     type: string
                   corsConfiguration:
-                    description: The cross-origin resource sharing  configuration.
+                    description: The cross-origin resource sharing (CORS) configuration.
                       Applicable for HTTP APIs.
                     items:
                       properties:

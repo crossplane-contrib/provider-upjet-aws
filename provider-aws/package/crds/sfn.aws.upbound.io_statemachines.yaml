@@ -85,9 +85,9 @@ spec:
                             events are logged. Valid values: ALL, ERROR, FATAL, OFF'
                           type: string
                         logDestination:
-                          description: Amazon Resource Name  of a CloudWatch log group.
-                            Make sure the State Machine has the correct IAM policies
-                            for logging. The ARN must end with :*
+                          description: Amazon Resource Name (ARN) of a CloudWatch
+                            log group. Make sure the State Machine has the correct
+                            IAM policies for logging. The ARN must end with :*
                           type: string
                       type: object
                     type: array
@@ -96,8 +96,8 @@ spec:
                       be created in.
                     type: string
                   roleArn:
-                    description: The Amazon Resource Name  of the IAM role to use
-                      for this state machine.
+                    description: The Amazon Resource Name (ARN) of the IAM role to
+                      use for this state machine.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.

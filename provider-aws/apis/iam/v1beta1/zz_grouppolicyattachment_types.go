@@ -19,7 +19,7 @@ type GroupPolicyAttachmentObservation struct {
 
 type GroupPolicyAttachmentParameters struct {
 
-	// he group the policy should be applied to
+	// The group the policy should be applied to
 	// +crossplane:generate:reference:type=Group
 	// +kubebuilder:validation:Optional
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
@@ -32,7 +32,7 @@ type GroupPolicyAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	GroupSelector *v1.Selector `json:"groupSelector,omitempty" tf:"-"`
 
-	// he ARN of the policy you want to apply
+	// The ARN of the policy you want to apply
 	// +crossplane:generate:reference:type=Policy
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

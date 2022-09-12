@@ -15,7 +15,7 @@ import (
 
 type ClusterObservation struct {
 
-	// The Neptune Cluster Amazon Resource Name
+	// The Neptune Cluster Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// – List of Neptune Instances that are a part of this cluster
@@ -78,7 +78,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
-	// Specifies whether or not mappings of AWS Identity and Access Management  accounts to database accounts is enabled.
+	// Specifies whether or not mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
 	// +kubebuilder:validation:Optional
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
@@ -144,7 +144,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
-	// The weekly time range during which system maintenance can occur, in  e.g., wed:04:00-wed:04:30
+	// The weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	// +kubebuilder:validation:Optional
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 

@@ -21,7 +21,7 @@ type ConfigurationObservation struct {
 
 type ConfigurationParameters struct {
 
-	// Integer for the upper data usage limit  for the amount of bytes a single query in a workgroup is allowed to scan. Must be at least 10485760.
+	// Integer for the upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan. Must be at least 10485760.
 	// +kubebuilder:validation:Optional
 	BytesScannedCutoffPerQuery *float64 `json:"bytesScannedCutoffPerQuery,omitempty" tf:"bytes_scanned_cutoff_per_query,omitempty"`
 
@@ -73,11 +73,11 @@ type ResultConfigurationEncryptionConfigurationObservation struct {
 
 type ResultConfigurationEncryptionConfigurationParameters struct {
 
-	// Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys , server-side encryption with KMS-managed keys , or client-side encryption with KMS-managed keys  is used. If a query runs in a workgroup and the workgroup overrides client-side settings, then the workgroup's setting for encryption is used. It specifies whether query results must be encrypted, for all queries that run in this workgroup.
+	// Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE_S3), server-side encryption with KMS-managed keys (SSE_KMS), or client-side encryption with KMS-managed keys (CSE_KMS) is used. If a query runs in a workgroup and the workgroup overrides client-side settings, then the workgroup's setting for encryption is used. It specifies whether query results must be encrypted, for all queries that run in this workgroup.
 	// +kubebuilder:validation:Optional
 	EncryptionOption *string `json:"encryptionOption,omitempty" tf:"encryption_option,omitempty"`
 
-	// For SSE_KMS and CSE_KMS, this is the KMS key Amazon Resource Name .
+	// For SSE_KMS and CSE_KMS, this is the KMS key Amazon Resource Name (ARN).
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -116,7 +116,7 @@ type ResultConfigurationParameters struct {
 
 type WorkgroupObservation struct {
 
-	// Amazon Resource Name  of the workgroup
+	// Amazon Resource Name (ARN) of the workgroup
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// +kubebuilder:validation:Optional

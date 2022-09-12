@@ -517,7 +517,7 @@ spec:
                     description: AWS account ID of the owner of the network interface.
                     type: string
                   privateDnsName:
-                    description: Private DNS name of the network interface .
+                    description: Private DNS name of the network interface (IPv4).
                     type: string
                   tagsAll:
                     additionalProperties:

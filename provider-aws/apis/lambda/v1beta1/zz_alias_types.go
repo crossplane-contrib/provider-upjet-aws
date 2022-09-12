@@ -15,7 +15,7 @@ import (
 
 type AliasObservation struct {
 
-	// The Amazon Resource Name  identifying your Lambda function alias.
+	// The Amazon Resource Name (ARN) identifying your Lambda function alias.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -43,7 +43,7 @@ type AliasParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
-	// Lambda function version for which you are creating the alias. Pattern: .
+	// Lambda function version for which you are creating the alias. Pattern: (\$LATEST|[0-9]+).
 	// +kubebuilder:validation:Required
 	FunctionVersion *string `json:"functionVersion" tf:"function_version,omitempty"`
 

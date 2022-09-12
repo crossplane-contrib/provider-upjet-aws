@@ -65,6 +65,11 @@ spec:
               forProvider:
                 properties:
                   allocatedStorage:
+                    description: The allocated storage in gibibytes. If max_allocated_storage
+                      is configured, this argument represents the initial storage
+                      allocation and differences from the configuration will be ignored
+                      automatically when Storage Autoscaling occurs. If replicate_source_db
+                      is set, the value is ignored during the creation of the instance.
                     type: number
                   allowMajorVersionUpgrade:
                     description: Indicates that major version upgrades are allowed.
@@ -82,25 +87,44 @@ spec:
                       Defaults to true.
                     type: boolean
                   availabilityZone:
+                    description: The AZ for the RDS instance.
                     type: string
                   backupRetentionPeriod:
+                    description: The days to retain backups for. Must be between 0
+                      and 35. Must be greater than 0 if the database is used as a
+                      source for a Read Replica. See Read Replica.
                     type: number
                   backupWindow:
+                    description: 'The daily time range (in UTC) during which automated
+                      backups are created if they are enabled. Example: "09:46-10:16".
+                      Must not overlap with maintenance_window.'
                     type: string
                   caCertIdentifier:
+                    description: The identifier of the CA certificate for the DB instance.
                     type: string
                   characterSetName:
+                    description: The character set name to use for DB encoding in
+                      Oracle and Microsoft SQL instances (collation). This can't be
+                      changed. See Oracle Character Sets Supported in Amazon RDS or
+                      Server-Level Collation for Microsoft SQL Server for more information.
                     type: string
                   copyTagsToSnapshot:
                     description: –  Copy all Instance tags to snapshots. Default is
                       false.
                     type: boolean
                   customerOwnedIpEnabled:
-                    description: Indicates whether to enable a customer-owned IP address  for
-                      an RDS on Outposts DB instance. See CoIP for RDS on Outposts
-                      for more information.
+                    description: Indicates whether to enable a customer-owned IP address
+                      (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS
+                      on Outposts for more information.
                     type: boolean
                   dbName:
+                    description: The name of the database to create when the DB instance
+                      is created. If this parameter is not specified, no database
+                      is created in the DB instance. Note that this does not apply
+                      for Oracle or SQL Server engines. See the AWS documentation
+                      for more details on what applies for those engines. If you are
+                      providing an Oracle db name, it needs to be in all upper case.
+                      Cannot be specified for a replica.
                     type: string
                   dbSubnetGroupName:
                     description: Name of DB subnet group. DB instance will be created
@@ -194,29 +218,40 @@ spec:
                       to true. The default is false.
                     type: boolean
                   domain:
+                    description: The ID of the Directory Service Active Directory
+                      domain to create the instance in.
                     type: string
                   domainIamRoleName:
+                    description: The name of the IAM role to be used when making API
+                      calls to the Directory Service.
                     type: string
                   enabledCloudwatchLogsExports:
                     description: 'Set of log types to enable for exporting to CloudWatch
-                      logs. If omitted, no logs will be exported. Valid values . MySQL
-                      and MariaDB: audit, error, general, slowquery. PostgreSQL: postgresql,
-                      upgrade. MSSQL: agent , error. Oracle: alert, audit, listener,
-                      trace.'
+                      logs. If omitted, no logs will be exported. Valid values (depending
+                      on engine). MySQL and MariaDB: audit, error, general, slowquery.
+                      PostgreSQL: postgresql, upgrade. MSSQL: agent , error. Oracle:
+                      alert, audit, listener, trace.'
                     items:
                       type: string
                     type: array
                   engine:
+                    description: The database engine to use.  For supported values,
+                      see the Engine parameter in API action CreateDBInstance. Cannot
+                      be specified for a replica. Note that for Amazon Aurora instances
+                      the engine must match the DB cluster's engine'. For information
+                      on the difference between the available Aurora MySQL engines
+                      see Comparison between Aurora MySQL 1 and Aurora MySQL 2 in
+                      the Amazon RDS User Guide.
                     type: string
                   engineVersion:
                     description: The engine version to use. If auto_minor_version_upgrade
                       is enabled, you can provide a prefix of the version such as
-                      5.7 . The actual engine version used is returned in the attribute
-                      engine_version_actual, see Attributes Reference below. For supported
-                      values, see the EngineVersion parameter in API action CreateDBInstance.
-                      Note that for Amazon Aurora instances the engine version must
-                      match the DB cluster's engine version'. Cannot be specified
-                      for a replica.
+                      5.7 (for 5.7.10). The actual engine version used is returned
+                      in the attribute engine_version_actual, see Attributes Reference
+                      below. For supported values, see the EngineVersion parameter
+                      in API action CreateDBInstance. Note that for Amazon Aurora
+                      instances the engine version must match the DB cluster's engine
+                      version'. Cannot be specified for a replica.
                     type: string
                   finalSnapshotIdentifier:
                     description: The name of your final DB snapshot when this DB instance
@@ -228,9 +263,10 @@ spec:
                     type: string
                   iamDatabaseAuthenticationEnabled:
                     description: Specifies whether or mappings of AWS Identity and
-                      Access Management  accounts to database accounts is enabled.
+                      Access Management (IAM) accounts to database accounts is enabled.
                     type: boolean
                   instanceClass:
+                    description: The instance type of the RDS instance.
                     type: string
                   iops:
                     description: The amount of provisioned IOPS. Setting this implies
@@ -317,6 +353,9 @@ spec:
                     description: License model information for this DB instance.
                     type: string
                   maintenanceWindow:
+                    description: 'The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+                      Eg: "Mon:00:00-Mon:03:00". See RDS Maintenance Window docs for
+                      more information.'
                     type: string
                   maxAllocatedStorage:
                     description: When configured, the upper limit to which Amazon
@@ -411,8 +450,16 @@ spec:
                         type: object
                     type: object
                   multiAz:
+                    description: Specifies if the RDS instance is multi-AZ
                     type: boolean
                   name:
+                    description: The name of the database to create when the DB instance
+                      is created. If this parameter is not specified, no database
+                      is created in the DB instance. Note that this does not apply
+                      for Oracle or SQL Server engines. See the AWS documentation
+                      for more details on what applies for those engines. If you are
+                      providing an Oracle db name, it needs to be in all upper case.
+                      Cannot be specified for a replica.
                     type: string
                   ncharCharacterSetName:
                     description: The national character set is used in the NCHAR,
@@ -455,11 +502,12 @@ spec:
                     type: string
                   performanceInsightsRetentionPeriod:
                     description: The amount of time in days to retain Performance
-                      Insights data. Either 7  or 731 . When specifying performance_insights_retention_period,
-                      performance_insights_enabled needs to be set to true. Defaults
-                      to '7'.
+                      Insights data. Either 7 (7 days) or 731 (2 years). When specifying
+                      performance_insights_retention_period, performance_insights_enabled
+                      needs to be set to true. Defaults to '7'.
                     type: number
                   port:
+                    description: The port on which the DB accepts connections.
                     type: number
                   publiclyAccessible:
                     description: Bool to control if instance is publicly accessible.
@@ -479,12 +527,13 @@ spec:
                   replicateSourceDb:
                     description: Specifies that this resource is a Replicate database,
                       and to use this value as the source database. This correlates
-                      to the identifier of another Amazon RDS Database to replicate  or
-                      ARN of the Amazon RDS Database to replicate . Note that if you
-                      are creating a cross-region replica of an encrypted database
-                      you will also need to specify a kms_key_id. See DB Instance
-                      Replication and Working with PostgreSQL and MySQL Read Replicas
-                      for more information on using Replication.
+                      to the identifier of another Amazon RDS Database to replicate
+                      (if replicating within a single region) or ARN of the Amazon
+                      RDS Database to replicate (if replicating cross-region). Note
+                      that if you are creating a cross-region replica of an encrypted
+                      database you will also need to specify a kms_key_id. See DB
+                      Instance Replication and Working with PostgreSQL and MySQL Read
+                      Replicas for more information on using Replication.
                     type: string
                   restoreToPointInTime:
                     description: A configuration block for restoring a DB instance
@@ -495,8 +544,8 @@ spec:
                       properties:
                         restoreTime:
                           description: The date and time to restore from. Value must
-                            be a time in Universal Coordinated Time  format and must
-                            be before the latest restorable time for the DB instance.
+                            be a time in Universal Coordinated Time (UTC) format and
+                            must be before the latest restorable time for the DB instance.
                             Cannot be specified with use_latest_restorable_time.
                           type: string
                         sourceDbInstanceAutomatedBackupsArn:
@@ -528,7 +577,14 @@ spec:
                     items:
                       properties:
                         bucketName:
-                          description: The bucket name where your backup is stored
+                          description: The name of the database to create when the
+                            DB instance is created. If this parameter is not specified,
+                            no database is created in the DB instance. Note that this
+                            does not apply for Oracle or SQL Server engines. See the
+                            AWS documentation for more details on what applies for
+                            those engines. If you are providing an Oracle db name,
+                            it needs to be in all upper case. Cannot be specified
+                            for a replica.
                           type: string
                         bucketPrefix:
                           description: Can be blank, but is the path to your backup
@@ -537,11 +593,25 @@ spec:
                           description: Role applied to load the data.
                           type: string
                         sourceEngine:
-                          description: Source engine for the backup
+                          description: The database engine to use.  For supported
+                            values, see the Engine parameter in API action CreateDBInstance.
+                            Cannot be specified for a replica. Note that for Amazon
+                            Aurora instances the engine must match the DB cluster's
+                            engine'. For information on the difference between the
+                            available Aurora MySQL engines see Comparison between
+                            Aurora MySQL 1 and Aurora MySQL 2 in the Amazon RDS User
+                            Guide.
                           type: string
                         sourceEngineVersion:
-                          description: Version of the source engine used to make the
-                            backup
+                          description: The engine version to use. If auto_minor_version_upgrade
+                            is enabled, you can provide a prefix of the version such
+                            as 5.7 (for 5.7.10). The actual engine version used is
+                            returned in the attribute engine_version_actual, see Attributes
+                            Reference below. For supported values, see the EngineVersion
+                            parameter in API action CreateDBInstance. Note that for
+                            Amazon Aurora instances the engine version must match
+                            the DB cluster's engine version'. Cannot be specified
+                            for a replica.
                           type: string
                       required:
                       - bucketName
@@ -569,10 +639,15 @@ spec:
                       in the RDS console, e.g: rds:production-2015-06-26-06-05.'
                     type: string
                   storageEncrypted:
+                    description: Specifies whether the DB instance is encrypted. Note
+                      that if you are creating a cross-region read replica this field
+                      is ignored and you should instead declare kms_key_id with a
+                      valid ARN. The default is false if not specified.
                     type: boolean
                   storageType:
-                    description: One of "standard" , "gp2" , or "io1" . The default
-                      is "io1" if iops is specified, "gp2" if not.
+                    description: One of "standard" (magnetic), "gp2" (general purpose
+                      SSD), or "io1" (provisioned IOPS SSD). The default is "io1"
+                      if iops is specified, "gp2" if not.
                     type: string
                   tags:
                     additionalProperties:
@@ -587,6 +662,8 @@ spec:
                       be set on creation. See MSSQL User Guide for more information.
                     type: string
                   username:
+                    description: Username for the master DB user. Cannot be specified
+                      for a replica.
                     type: string
                   vpcSecurityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
@@ -864,7 +941,8 @@ spec:
                     description: The running version of the database.
                     type: string
                   hostedZoneId:
-                    description: The canonical hosted zone ID of the DB instance .
+                    description: The canonical hosted zone ID of the DB instance (to
+                      be used in a Route 53 Alias record).
                     type: string
                   id:
                     description: The RDS instance ID.

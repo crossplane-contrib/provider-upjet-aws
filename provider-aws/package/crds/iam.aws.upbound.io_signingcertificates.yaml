@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   certificateBody:
-                    description: ncoded format.
+                    description: encoded format.
                     type: string
                   status:
                     description: –   The status you want to assign to the certificate.

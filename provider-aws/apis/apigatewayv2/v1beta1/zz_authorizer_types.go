@@ -44,7 +44,7 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizerPayloadFormatVersion *string `json:"authorizerPayloadFormatVersion,omitempty" tf:"authorizer_payload_format_version,omitempty"`
 
-	// The time to live  for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled.
+	// The time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled.
 	// If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Defaults to 300.
 	// Supported only for HTTP API Lambda authorizers.
 	// +kubebuilder:validation:Optional
@@ -56,7 +56,7 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Required
 	AuthorizerType *string `json:"authorizerType" tf:"authorizer_type,omitempty"`
 
-	// The authorizer's Uniform Resource Identifier .
+	// The authorizer's Uniform Resource Identifier (URI).
 	// For REQUEST authorizers this must be a well-formed Lambda function URI, such as the invoke_arn attribute of the aws_lambda_function resource.
 	// Supported only for REQUEST authorizers. Must be between 1 and 2048 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
@@ -79,7 +79,7 @@ type AuthorizerParameters struct {
 
 	// The identity sources for which authorization is requested.
 	// For REQUEST authorizers the value is a list of one or more mapping expressions of the specified request parameters.
-	// For JWT authorizers the single entry specifies where to extract the JSON Web Token  from inbound requests.
+	// For JWT authorizers the single entry specifies where to extract the JSON Web Token (JWT) from inbound requests.
 	// +kubebuilder:validation:Optional
 	IdentitySources []*string `json:"identitySources,omitempty" tf:"identity_sources,omitempty"`
 

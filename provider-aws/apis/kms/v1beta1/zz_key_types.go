@@ -15,7 +15,7 @@ import (
 
 type KeyObservation struct {
 
-	// The Amazon Resource Name  of the key.
+	// The Amazon Resource Name (ARN) of the key.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -64,11 +64,11 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyUsage *string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
 
-	// Indicates whether the KMS key is a multi-Region  or regional  key. Defaults to false.
+	// Indicates whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
 	// +kubebuilder:validation:Optional
 	MultiRegion *bool `json:"multiRegion,omitempty" tf:"multi_region,omitempty"`
 
-	// A valid policy JSON document. Although this is a key policy, not an IAM policy, an aws_iam_policy_document, in the form that designates a principal, can be used. For more information about building policy documents with Terraform, see the AWS IAM Policy Document Guide.
+	// A valid policy JSON document. Although this is a key policy, not an IAM policy, an aws_iam_policy_document, in the form that designates a principal, can be used.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 

@@ -19,7 +19,7 @@ type QueuePolicyObservation struct {
 
 type QueuePolicyParameters struct {
 
-	// The JSON policy for the SQS queue. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide.
+	// The JSON policy for the SQS queue.
 	// +kubebuilder:validation:Required
 	Policy *string `json:"policy" tf:"policy,omitempty"`
 

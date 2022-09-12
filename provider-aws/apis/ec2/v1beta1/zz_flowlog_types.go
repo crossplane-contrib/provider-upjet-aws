@@ -95,7 +95,8 @@ type FlowLogParameters struct {
 
 	// The maximum interval of time
 	// during which a flow of packets is captured and aggregated into a flow
-	// log record. Valid Values: 60 seconds  or 600 seconds . Default: 600.
+	// log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
+	// minutes). Default: 600.
 	// +kubebuilder:validation:Optional
 	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 

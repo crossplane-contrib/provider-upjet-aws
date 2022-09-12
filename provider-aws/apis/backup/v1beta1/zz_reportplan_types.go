@@ -36,7 +36,7 @@ type ReportPlanObservation struct {
 	// The ARN of the backup report plan.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The date and time that a report plan is created, in Unix format and Coordinated Universal Time .
+	// The date and time that a report plan is created, in Unix format and Coordinated Universal Time (UTC).
 	CreationTime *string `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
 
 	// The deployment status of a report plan. The statuses are: CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED.
@@ -82,7 +82,7 @@ type ReportSettingObservation struct {
 
 type ReportSettingParameters struct {
 
-	// Specifies the Amazon Resource Names  of the frameworks a report covers.
+	// Specifies the Amazon Resource Names (ARNs) of the frameworks a report covers.
 	// +kubebuilder:validation:Optional
 	FrameworkArns []*string `json:"frameworkArns,omitempty" tf:"framework_arns,omitempty"`
 

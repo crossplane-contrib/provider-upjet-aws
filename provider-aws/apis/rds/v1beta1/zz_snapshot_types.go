@@ -15,13 +15,13 @@ import (
 
 type SnapshotObservation struct {
 
-	// Specifies the allocated storage size in gigabytes .
+	// Specifies the allocated storage size in gigabytes (GB).
 	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
 	// Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The Amazon Resource Name  for the DB snapshot.
+	// The Amazon Resource Name (ARN) for the DB snapshot.
 	DBSnapshotArn *string `json:"dbSnapshotArn,omitempty" tf:"db_snapshot_arn,omitempty"`
 
 	// Specifies whether the DB snapshot is encrypted.
@@ -35,7 +35,7 @@ type SnapshotObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the Provisioned IOPS  value of the DB instance at the time of the snapshot.
+	// Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The ARN for the KMS encryption key.

@@ -14,22 +14,28 @@ import (
 )
 
 type SecurityGroupEgressObservation struct {
+
+	// List of CIDR blocks.
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
 
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// List of IPv6 CIDR blocks.
 	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
 
+	// List of Prefix List IDs.
 	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
 
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// List of security group Group Names if using EC2-Classic, or Group IDs if using a VPC.
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
 
+	// End range port (or ICMP code if protocol is icmp).
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
@@ -37,22 +43,28 @@ type SecurityGroupEgressParameters struct {
 }
 
 type SecurityGroupIngressObservation struct {
+
+	// List of CIDR blocks.
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
 
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// List of IPv6 CIDR blocks.
 	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
 
+	// List of Prefix List IDs.
 	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
 
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// List of security group Group Names if using EC2-Classic, or Group IDs if using a VPC.
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
 
+	// End range port (or ICMP code if protocol is icmp).
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
@@ -85,7 +97,7 @@ type SecurityGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Name of the security group. If omitted, Terraform will assign a random, unique name.
+	// Name of the security group.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -94,7 +106,7 @@ type SecurityGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Instruct Terraform to revoke all of the Security Groups attached ingress and egress rules before deleting the rule itself. This is normally not needed, however certain AWS services such as Elastic Map Reduce may automatically add required rules to security groups used with the service, and those rules may contain a cyclic dependency that prevent the security groups from being destroyed without removing the dependency first. Default false.
+	// This is normally not needed, however certain AWS services such as Elastic Map Reduce may automatically add required rules to security groups used with the service, and those rules may contain a cyclic dependency that prevent the security groups from being destroyed without removing the dependency first. Default false.
 	// +kubebuilder:validation:Optional
 	RevokeRulesOnDelete *bool `json:"revokeRulesOnDelete,omitempty" tf:"revoke_rules_on_delete,omitempty"`
 

@@ -45,7 +45,7 @@ type BucketAnalyticsConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags .
+	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
 	// +kubebuilder:validation:Optional
 	Filter []BucketAnalyticsConfigurationFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
@@ -58,7 +58,7 @@ type BucketAnalyticsConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Configuration for the analytics data export .
+	// Configuration for the analytics data export (documented below).
 	// +kubebuilder:validation:Optional
 	StorageClassAnalysis []StorageClassAnalysisParameters `json:"storageClassAnalysis,omitempty" tf:"storage_class_analysis,omitempty"`
 }
@@ -68,7 +68,7 @@ type DataExportDestinationObservation struct {
 
 type DataExportDestinationParameters struct {
 
-	// Analytics data export currently only supports an S3 bucket destination .
+	// Analytics data export currently only supports an S3 bucket destination (documented below).
 	// +kubebuilder:validation:Required
 	S3BucketDestination []S3BucketDestinationParameters `json:"s3BucketDestination" tf:"s3_bucket_destination,omitempty"`
 }
@@ -78,7 +78,7 @@ type DataExportObservation struct {
 
 type DataExportParameters struct {
 
-	// Specifies the destination for the exported analytics data .
+	// Specifies the destination for the exported analytics data (documented below).
 	// +kubebuilder:validation:Required
 	Destination []DataExportDestinationParameters `json:"destination" tf:"destination,omitempty"`
 
@@ -123,7 +123,7 @@ type StorageClassAnalysisObservation struct {
 
 type StorageClassAnalysisParameters struct {
 
-	// Data export configuration .
+	// Data export configuration (documented below).
 	// +kubebuilder:validation:Required
 	DataExport []DataExportParameters `json:"dataExport" tf:"data_export,omitempty"`
 }

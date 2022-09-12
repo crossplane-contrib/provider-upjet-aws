@@ -66,6 +66,8 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the source S3 bucket you want Amazon
+                      S3 to monitor.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -229,10 +231,12 @@ spec:
                         deleteMarkerReplication:
                           description: Whether delete markers are replicated. This
                             argument is only valid with V2 replication configurations
-                            documented below.
+                            (i.e., when filter is used)documented below.
                           items:
                             properties:
                               status:
+                                description: Whether delete markers should be replicated.
+                                  Either "Enabled" or "Disabled".
                                 type: string
                             required:
                             - status
@@ -247,12 +251,13 @@ spec:
                                 description: A configuration block that specifies
                                   the overrides to use for object owners on replication
                                   documented below. Specify this only in a cross-account
-                                  scenario , and you want to change replica ownership
-                                  to the AWS account that owns the destination bucket.
-                                  If this is not specified in the replication configuration,
-                                  the replicas are owned by same AWS account that
-                                  owns the source object. Must be used in conjunction
-                                  with account owner override configuration.
+                                  scenario (where source and destination bucket owners
+                                  are not the same), and you want to change replica
+                                  ownership to the AWS account that owns the destination
+                                  bucket. If this is not specified in the replication
+                                  configuration, the replicas are owned by same AWS
+                                  account that owns the source object. Must be used
+                                  in conjunction with account owner override configuration.
                                 items:
                                   properties:
                                     owner:
@@ -271,6 +276,9 @@ spec:
                                   override configuration.
                                 type: string
                               bucket:
+                                description: The ARN of the S3 bucket where you want
+                                  Amazon S3 to store replicas of the objects identified
+                                  by the rule.
                                 type: string
                               bucketRef:
                                 description: Reference to a Bucket in s3 to populate
@@ -359,9 +367,10 @@ spec:
                                 items:
                                   properties:
                                     replicaKmsKeyId:
-                                      description: The ID  of the customer managed
-                                        AWS KMS key stored in AWS Key Management Service  for
-                                        the destination bucket.
+                                      description: The ID (Key ARN or Alias ARN) of
+                                        the customer managed AWS KMS key stored in
+                                        AWS Key Management Service (KMS) for the destination
+                                        bucket.
                                       type: string
                                   required:
                                   - replicaKmsKeyId
@@ -380,12 +389,16 @@ spec:
                                       items:
                                         properties:
                                           minutes:
+                                            description: 'Time in minutes. Valid values:
+                                              15.'
                                             type: number
                                         required:
                                         - minutes
                                         type: object
                                       type: array
                                     status:
+                                      description: The status of the Destination Metrics.
+                                        Either "Enabled" or "Disabled".
                                       type: string
                                   required:
                                   - status
@@ -393,14 +406,16 @@ spec:
                                 type: array
                               replicationTime:
                                 description: A configuration block that specifies
-                                  S3 Replication Time Control , including whether
-                                  S3 RTC is enabled and the time when all objects
-                                  and operations on objects must be replicated documented
-                                  below. Replication Time Control must be used in
-                                  conjunction with metrics.
+                                  S3 Replication Time Control (S3 RTC), including
+                                  whether S3 RTC is enabled and the time when all
+                                  objects and operations on objects must be replicated
+                                  documented below. Replication Time Control must
+                                  be used in conjunction with metrics.
                                 items:
                                   properties:
                                     status:
+                                      description: The status of the Replication Time
+                                        Control. Either "Enabled" or "Disabled".
                                       type: string
                                     time:
                                       description: A configuration block specifying
@@ -410,6 +425,8 @@ spec:
                                       items:
                                         properties:
                                           minutes:
+                                            description: 'Time in minutes. Valid values:
+                                              15.'
                                             type: number
                                         required:
                                         - minutes
@@ -433,6 +450,8 @@ spec:
                           items:
                             properties:
                               status:
+                                description: Whether the existing objects should be
+                                  replicated. Either "Enabled" or "Disabled".
                                 type: string
                             required:
                             - status
@@ -452,18 +471,25 @@ spec:
                                 items:
                                   properties:
                                     prefix:
+                                      description: An object key name prefix that
+                                        identifies subset of objects to which the
+                                        rule applies. Must be less than or equal to
+                                        1024 characters in length.
                                       type: string
                                     tags:
                                       additionalProperties:
                                         type: string
-                                      description: A map of tags  that identifies
-                                        a subset of objects to which the rule applies.
-                                        The rule applies only to objects having all
-                                        the tags in its tagset.
+                                      description: A map of tags (key and value pairs)
+                                        that identifies a subset of objects to which
+                                        the rule applies. The rule applies only to
+                                        objects having all the tags in its tagset.
                                       type: object
                                   type: object
                                 type: array
                               prefix:
+                                description: An object key name prefix that identifies
+                                  subset of objects to which the rule applies. Must
+                                  be less than or equal to 1024 characters in length.
                                 type: string
                               tag:
                                 description: A configuration block for specifying
@@ -484,8 +510,14 @@ spec:
                             type: object
                           type: array
                         id:
+                          description: Unique identifier for the rule. Must be less
+                            than or equal to 255 characters in length.
                           type: string
                         prefix:
+                          description: Object key name prefix identifying one or more
+                            objects to which the rule applies. Must be less than or
+                            equal to 1024 characters in length. Defaults to an empty
+                            string ("") if filter is not specified.
                           type: string
                         priority:
                           description: The priority associated with the rule. Priority
@@ -503,11 +535,14 @@ spec:
                                   for selections for modifications on replicas. Amazon
                                   S3 doesn't replicate replica modifications by default.
                                   In the latest version of replication configuration
-                                  , you can specify this element and set the status
-                                  to Enabled to replicate modifications on replicas.
+                                  (when filter is specified), you can specify this
+                                  element and set the status to Enabled to replicate
+                                  modifications on replicas.
                                 items:
                                   properties:
                                     status:
+                                      description: Whether the existing objects should
+                                        be replicated. Either "Enabled" or "Disabled".
                                       type: string
                                   required:
                                   - status
@@ -522,6 +557,8 @@ spec:
                                 items:
                                   properties:
                                     status:
+                                      description: Whether the existing objects should
+                                        be replicated. Either "Enabled" or "Disabled".
                                       type: string
                                   required:
                                   - status
@@ -530,6 +567,8 @@ spec:
                             type: object
                           type: array
                         status:
+                          description: The status of the rule. Either "Enabled" or
+                            "Disabled". The rule is ignored if status is not "Enabled".
                           type: string
                       required:
                       - destination
@@ -738,6 +777,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The S3 source bucket name.
                     type: string
                 type: object
               conditions:

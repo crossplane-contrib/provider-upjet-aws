@@ -81,7 +81,7 @@ spec:
                     description: Description of what your Lambda Layer does.
                     type: string
                   filename:
-                    description: refixed options cannot be used.
+                    description: prefixed options cannot be used.
                     type: string
                   layerName:
                     description: Unique name for your Lambda Layer
@@ -117,9 +117,10 @@ spec:
                   sourceCodeHash:
                     description: Used to trigger updates. Must be set to a base64-encoded
                       SHA256 hash of the package file specified with either filename
-                      or s3_key. The usual way to set this is ${filebase64sha256}  or
-                      ${base64sha256(file)} , where "file.zip" is the local filename
-                      of the lambda layer source archive.
+                      or s3_key. The usual way to set this is ${filebase64sha256("file.11.12
+                      or later) or ${base64sha256(file("file.11.11 and earlier), where
+                      "file.zip" is the local filename of the lambda layer source
+                      archive.
                     type: string
                 required:
                 - layerName

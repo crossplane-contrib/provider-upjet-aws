@@ -160,8 +160,8 @@ spec:
                     type: string
                   encryptionConfiguration:
                     description: The encryption key block AWS Athena uses to decrypt
-                      the data in S3, such as an AWS Key Management Service  key.
-                      See Encryption Configuration below.
+                      the data in S3, such as an AWS Key Management Service (AWS KMS)
+                      key. See Encryption Configuration below.
                     items:
                       properties:
                         encryptionOption:

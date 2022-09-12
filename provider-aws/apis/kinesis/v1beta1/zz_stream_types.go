@@ -25,7 +25,7 @@ type StreamModeDetailsParameters struct {
 
 type StreamObservation struct {
 
-	// The Amazon Resource Name  specifying the Stream
+	// The Amazon Resource Name (ARN) specifying the Stream (same as id)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The unique Stream id

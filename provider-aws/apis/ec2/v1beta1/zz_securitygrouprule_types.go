@@ -29,7 +29,7 @@ type SecurityGroupRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Start port .
+	// Start port (or ICMP type number if protocol is "icmp" or "icmpv6").
 	// +kubebuilder:validation:Required
 	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
@@ -80,12 +80,12 @@ type SecurityGroupRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 
-	// End port .
+	// End port (or ICMP code if protocol is "icmp").
 	// +kubebuilder:validation:Required
 	ToPort *float64 `json:"toPort" tf:"to_port,omitempty"`
 
-	// Type of rule being created. Valid options are ingress
-	// or egress .
+	// Type of rule being created. Valid options are ingress (inbound)
+	// or egress (outbound).
 	// Type of rule, ingress (inbound) or egress (outbound).
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`

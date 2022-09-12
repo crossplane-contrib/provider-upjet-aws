@@ -70,7 +70,7 @@ spec:
                       value will be overridden if you have entered a value in token_validity_units.
                     type: number
                   allowedOauthFlows:
-                    description: List of allowed OAuth flows .
+                    description: List of allowed OAuth flows (code, implicit, client_credentials).
                     items:
                       type: string
                     type: array
@@ -79,7 +79,8 @@ spec:
                       protocol when interacting with Cognito user pools.
                     type: boolean
                   allowedOauthScopes:
-                    description: List of allowed OAuth scopes .
+                    description: List of allowed OAuth scopes (phone, email, openid,
+                      profile, and aws.cognito.signin.user.admin).
                     items:
                       type: string
                     type: array
@@ -200,7 +201,10 @@ spec:
                     description: Enables or disables token revocation.
                     type: boolean
                   explicitAuthFlows:
-                    description: List of authentication flows .
+                    description: List of authentication flows (ADMIN_NO_SRP_AUTH,
+                      CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH,
+                      ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH,
+                      ALLOW_REFRESH_TOKEN_AUTH).
                     items:
                       type: string
                     type: array
@@ -247,8 +251,8 @@ spec:
                   supportedIdentityProviders:
                     description: List of provider names for the identity providers
                       that are supported on this client. Uses the provider_name attribute
-                      of aws_cognito_identity_provider resource, or the equivalent
-                      string.
+                      of aws_cognito_identity_provider resource(s), or the equivalent
+                      string(s).
                     items:
                       type: string
                     type: array

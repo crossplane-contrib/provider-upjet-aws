@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   policyArn:
-                    description: he ARN of the policy you want to apply
+                    description: The ARN of the policy you want to apply
                     type: string
                   policyArnRef:
                     description: Reference to a Policy to populate policyArn.
@@ -141,7 +141,7 @@ spec:
                         type: object
                     type: object
                   user:
-                    description: r the policy should be applied to
+                    description: The user the policy should be applied to
                     type: string
                   userRef:
                     description: Reference to a User to populate user.

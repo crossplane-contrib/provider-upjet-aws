@@ -66,7 +66,7 @@ spec:
               forProvider:
                 properties:
                   certificateAuthorityArn:
-                    description: Amazon Resource Name  of the certificate authority.
+                    description: Amazon Resource Name (ARN) of the certificate authority.
                     type: string
                   certificateAuthorityArnRef:
                     description: Reference to a CertificateAuthority to populate certificateAuthorityArn.
@@ -374,7 +374,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of the certificate.
+                    description: Amazon Resource Name (ARN) of the certificate.
                     type: string
                   certificate:
                     description: The PEM-encoded certificate value.

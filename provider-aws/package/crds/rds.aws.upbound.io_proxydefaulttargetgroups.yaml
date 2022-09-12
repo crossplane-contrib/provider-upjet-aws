@@ -378,7 +378,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  representing the target
+                    description: The Amazon Resource Name (ARN) representing the target
                       group.
                     type: string
                   id:

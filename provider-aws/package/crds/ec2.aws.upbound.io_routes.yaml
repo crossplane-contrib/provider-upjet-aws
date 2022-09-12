@@ -70,7 +70,7 @@ spec:
                       with a Wavelength Zone.
                     type: string
                   coreNetworkArn:
-                    description: The Amazon Resource Name  of a core network.
+                    description: The Amazon Resource Name (ARN) of a core network.
                     type: string
                   destinationCidrBlock:
                     description: The destination CIDR block.

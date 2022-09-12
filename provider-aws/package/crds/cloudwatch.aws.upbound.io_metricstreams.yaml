@@ -72,6 +72,7 @@ spec:
                     items:
                       properties:
                         namespace:
+                          description: Name of the metric namespace in the filter.
                           type: string
                       required:
                       - namespace
@@ -163,14 +164,15 @@ spec:
                     items:
                       properties:
                         namespace:
+                          description: Name of the metric namespace in the filter.
                           type: string
                       required:
                       - namespace
                       type: object
                     type: array
                   name:
-                    description: Friendly name of the metric stream. If omitted, Terraform
-                      will assign a random, unique name. Conflicts with name_prefix.
+                    description: Friendly name of the metric stream. Conflicts with
+                      name_prefix.
                     type: string
                   outputFormat:
                     description: Output format for the stream. Possible values are

@@ -86,7 +86,7 @@ type SubnetParameters struct {
 	// +kubebuilder:validation:Optional
 	MapPublicIPOnLaunch *bool `json:"mapPublicIpOnLaunch,omitempty" tf:"map_public_ip_on_launch,omitempty"`
 
-	// The Amazon Resource Name  of the Outpost.
+	// The Amazon Resource Name (ARN) of the Outpost.
 	// +kubebuilder:validation:Optional
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 

@@ -66,6 +66,7 @@ spec:
                 properties:
                   referenceName:
                     description: This is a reference name used in Caller Reference
+                      (helpful for identifying single delegation set amongst others)
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -251,14 +252,15 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  of the Delegation Set.
+                    description: The Amazon Resource Name (ARN) of the Delegation
+                      Set.
                     type: string
                   id:
                     description: The delegation set ID
                     type: string
                   nameServers:
                     description: A list of authoritative name servers for the hosted
-                      zone .
+                      zone (effectively a list of NS records).
                     items:
                       type: string
                     type: array

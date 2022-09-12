@@ -15,10 +15,10 @@ import (
 
 type DomainNameConfigurationObservation struct {
 
-	// Amazon Route 53 Hosted Zone ID of the endpoint.
+	// (Computed) Amazon Route 53 Hosted Zone ID of the endpoint.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// Target domain name.
+	// (Computed) Target domain name.
 	TargetDomainName *string `json:"targetDomainName,omitempty" tf:"target_domain_name,omitempty"`
 }
 
@@ -42,11 +42,11 @@ type DomainNameConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
 
-	// ARN of the AWS-issued certificate used to validate custom domain ownership
+	// ARN of the AWS-issued certificate used to validate custom domain ownership (when certificate_arn is issued via an ACM Private CA or mutual_tls_authentication is configured with an ACM-imported certificate.)
 	// +kubebuilder:validation:Optional
 	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
 
-	// Transport Layer Security  version of the security policy for the domain name. Valid values: TLS_1_2.
+	// Transport Layer Security (TLS) version of the security policy for the domain name. Valid values: TLS_1_2.
 	// +kubebuilder:validation:Required
 	SecurityPolicy *string `json:"securityPolicy" tf:"security_policy,omitempty"`
 }

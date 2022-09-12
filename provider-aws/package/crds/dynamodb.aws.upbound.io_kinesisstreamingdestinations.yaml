@@ -405,7 +405,7 @@ spec:
                 properties:
                   id:
                     description: The table_name and stream_arn separated by a comma
-                      .
+                      (,).
                     type: string
                 type: object
               conditions:

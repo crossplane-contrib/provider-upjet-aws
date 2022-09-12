@@ -33,6 +33,7 @@ type NATGatewayObservation struct {
 
 type NATGatewayParameters struct {
 
+	// The ID of the NAT Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -55,6 +56,7 @@ type NATGatewayParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The ID of the NAT Gateway.
 	// +crossplane:generate:reference:type=Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

@@ -94,13 +94,14 @@ spec:
                             lambda. Default 30 seconds.
                           type: number
                         matcher:
-                          description: 99" or "0-99"). Required for HTTP/HTTPS/GRPC
-                            ALB. Only applies to Application Load Balancers  not Network
-                            Load Balancers .
+                          description: 299" or "0-99"). Required for HTTP/HTTPS/GRPC
+                            ALB. Only applies to Application Load Balancers (i.e.,
+                            HTTP/HTTPS/GRPC) not Network Load Balancers (i.e., TCP).
                           type: string
                         path:
-                          description: Destination for the health check request. Required
-                            for HTTP/HTTPS ALB and HTTP NLB. Only applies to HTTP/HTTPS.
+                          description: (May be required) Destination for the health
+                            check request. Required for HTTP/HTTPS ALB and HTTP NLB.
+                            Only applies to HTTP/HTTPS.
                           type: string
                         port:
                           type: string
@@ -176,8 +177,8 @@ spec:
                             period, in seconds, during which requests from a client
                             should be routed to the same target. After this time period
                             expires, the load balancer-generated cookie is considered
-                            stale. The range is 1 second to 1 week . The default value
-                            is 1 day .
+                            stale. The range is 1 second to 1 week (604800 seconds).
+                            The default value is 1 day (86400 seconds).
                           type: number
                         cookieName:
                           description: Name of the application based cookie. AWSALB,
@@ -203,9 +204,9 @@ spec:
                       with matching keys will overwrite those defined at the provider-level.
                     type: object
                   targetType:
-                    description: Type of target that you must specify when registering
-                      targets with this target group. See doc for supported values.
-                      The default is instance.
+                    description: (May be required, Forces new resource) Type of target
+                      that you must specify when registering targets with this target
+                      group. See doc for supported values. The default is instance.
                     type: string
                   vpcId:
                     description: Identifier of the VPC in which to create the target
@@ -466,13 +467,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: ARN of the Target Group .
+                    description: ARN of the Target Group (matches id).
                     type: string
                   arnSuffix:
                     description: ARN suffix for use with CloudWatch Metrics.
                     type: string
                   id:
-                    description: ARN of the Target Group .
+                    description: ARN of the Target Group (matches arn).
                     type: string
                   tagsAll:
                     additionalProperties:

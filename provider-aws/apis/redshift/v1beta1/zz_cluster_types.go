@@ -30,7 +30,7 @@ type ClusterNodesParameters struct {
 
 type ClusterObservation struct {
 
-	// Amazon Resource Name  of cluster
+	// Amazon Resource Name (ARN) of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The nodes in the cluster. Cluster node blocks are documented below
@@ -52,6 +52,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowVersionUpgrade *bool `json:"allowVersionUpgrade,omitempty" tf:"allow_version_upgrade,omitempty"`
 
+	// The number of days to retain automated snapshots in the destination region after they are copied from the source region. Defaults to 7.
 	// +kubebuilder:validation:Optional
 	AutomatedSnapshotRetentionPeriod *float64 `json:"automatedSnapshotRetentionPeriod,omitempty" tf:"automated_snapshot_retention_period,omitempty"`
 
@@ -88,7 +89,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// The Elastic IP  address for the cluster.
+	// The Elastic IP (EIP) address for the cluster.
 	// +kubebuilder:validation:Optional
 	ElasticIP *string `json:"elasticIp,omitempty" tf:"elastic_ip,omitempty"`
 

@@ -258,10 +258,10 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of Glue Registry.
+                    description: Amazon Resource Name (ARN) of Glue Registry.
                     type: string
                   id:
-                    description: Amazon Resource Name  of Glue Registry.
+                    description: Amazon Resource Name (ARN) of Glue Registry.
                     type: string
                   tagsAll:
                     additionalProperties:

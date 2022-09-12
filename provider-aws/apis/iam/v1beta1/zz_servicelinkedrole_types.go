@@ -15,13 +15,13 @@ import (
 
 type ServiceLinkedRoleObservation struct {
 
-	// The Amazon Resource Name  specifying the role.
+	// The Amazon Resource Name (ARN) specifying the role.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The creation date of the IAM role.
 	CreateDate *string `json:"createDate,omitempty" tf:"create_date,omitempty"`
 
-	// The Amazon Resource Name  of the role.
+	// The Amazon Resource Name (ARN) of the role.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The name of the role.

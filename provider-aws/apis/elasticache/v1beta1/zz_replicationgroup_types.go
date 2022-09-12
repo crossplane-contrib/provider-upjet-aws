@@ -18,7 +18,7 @@ type ClusterModeObservation struct {
 
 type ClusterModeParameters struct {
 
-	// Number of node groups  for this Redis replication group. Changing this number will trigger an online resizing operation before other settings modifications. Required unless global_replication_group_id is set.
+	// Number of node groups (shards) for this Redis replication group. Changing this number will trigger an online resizing operation before other settings modifications. Required unless global_replication_group_id is set.
 	// +kubebuilder:validation:Optional
 	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
@@ -69,10 +69,10 @@ type ReplicationGroupObservation struct {
 	// Identifiers of all the nodes that are part of this replication group.
 	MemberClusters []*string `json:"memberClusters,omitempty" tf:"member_clusters,omitempty"`
 
-	// Address of the endpoint for the primary node in the replication group, if the cluster mode is disabled.
+	// (Redis only) Address of the endpoint for the primary node in the replication group, if the cluster mode is disabled.
 	PrimaryEndpointAddress *string `json:"primaryEndpointAddress,omitempty" tf:"primary_endpoint_address,omitempty"`
 
-	// Address of the endpoint for the reader node in the replication group, if the cluster mode is disabled.
+	// (Redis only) Address of the endpoint for the reader node in the replication group, if the cluster mode is disabled.
 	ReaderEndpointAddress *string `json:"readerEndpointAddress,omitempty" tf:"reader_endpoint_address,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
@@ -99,7 +99,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoMinorVersionUpgrade *string `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
-	// Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. If enabled, number_cache_clusters must be greater than 1. Must be enabled for Redis  replication groups. Defaults to false.
+	// Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. If enabled, number_cache_clusters must be greater than 1. Must be enabled for Redis (cluster mode enabled) replication groups. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AutomaticFailoverEnabled *bool `json:"automaticFailoverEnabled,omitempty" tf:"automatic_failover_enabled,omitempty"`
 
@@ -115,7 +115,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	DataTieringEnabled *bool `json:"dataTieringEnabled,omitempty" tf:"data_tiering_enabled,omitempty"`
 
-	// reated description for the replication group. Must not be empty.
+	// created description for the replication group. Must not be empty.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -131,11 +131,11 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The name of your final node group  snapshot. ElastiCache creates the snapshot from the primary node in the cluster. If omitted, no final snapshot will be made.
+	// The name of your final node group (shard) snapshot. ElastiCache creates the snapshot from the primary node in the cluster. If omitted, no final snapshot will be made.
 	// +kubebuilder:validation:Optional
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
-	// The ID of the global replication group to which this replication group should belong. If this parameter is specified, the replication group is added to the specified global replication group as a secondary replication group; otherwise, the replication group is not part of any global replication group. If global_replication_group_id is set, the num_node_groups parameter  cannot be set.
+	// The ID of the global replication group to which this replication group should belong. If this parameter is specified, the replication group is added to the specified global replication group as a secondary replication group; otherwise, the replication group is not part of any global replication group. If global_replication_group_id is set, the num_node_groups parameter (or the num_node_groups parameter of the deprecated cluster_mode block) cannot be set.
 	// +kubebuilder:validation:Optional
 	GlobalReplicationGroupID *string `json:"globalReplicationGroupId,omitempty" tf:"global_replication_group_id,omitempty"`
 
@@ -156,7 +156,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDeliveryConfiguration []ReplicationGroupLogDeliveryConfigurationParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
-	// dd:hh24:mi . The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00
+	// ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -168,15 +168,15 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// ast-1:012345678999:my_sns_topic
+	// east-1:012345678999:my_sns_topic
 	// +kubebuilder:validation:Optional
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 
-	// Number of cache clusters  this replication group will have. If Multi-AZ is enabled, the value of this parameter must be at least 2. Updates will occur before other modifications. Conflicts with num_node_groups, the deprecatednumber_cache_clusters, or the deprecated cluster_mode. Defaults to 1.
+	// Number of cache clusters (primary and replicas) this replication group will have. If Multi-AZ is enabled, the value of this parameter must be at least 2. Updates will occur before other modifications. Conflicts with num_node_groups, the deprecatednumber_cache_clusters, or the deprecated cluster_mode. Defaults to 1.
 	// +kubebuilder:validation:Optional
 	NumCacheClusters *float64 `json:"numCacheClusters,omitempty" tf:"num_cache_clusters,omitempty"`
 
-	// Number of node groups  for this Redis replication group. Changing this number will trigger an online resizing operation before other settings modifications. Required unless global_replication_group_id is set.
+	// Number of node groups (shards) for this Redis replication group. Changing this number will trigger an online resizing operation before other settings modifications. Required unless global_replication_group_id is set.
 	// +kubebuilder:validation:Optional
 	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
@@ -204,7 +204,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 
-	// reated description for the replication group. Must not be empty.
+	// created description for the replication group. Must not be empty.
 	// +kubebuilder:validation:Optional
 	ReplicationGroupDescription *string `json:"replicationGroupDescription,omitempty" tf:"replication_group_description,omitempty"`
 
@@ -235,11 +235,11 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotName *string `json:"snapshotName,omitempty" tf:"snapshot_name,omitempty"`
 
-	// Number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, then a snapshot that was taken today will be retained for 5 days before being deleted. If the value of snapshot_retention_limit is set to zero , backups are turned off. Please note that setting a snapshot_retention_limit is not supported on cache.t1.micro cache nodes
+	// Number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, then a snapshot that was taken today will be retained for 5 days before being deleted. If the value of snapshot_retention_limit is set to zero (0), backups are turned off. Please note that setting a snapshot_retention_limit is not supported on cache.t1.micro cache nodes
 	// +kubebuilder:validation:Optional
 	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
-	// Daily time range  during which ElastiCache will begin taking a daily snapshot of your cache cluster. The minimum snapshot window is a 60 minute period. Example: 05:00-09:00
+	// Daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. The minimum snapshot window is a 60 minute period. Example: 05:00-09:00
 	// +kubebuilder:validation:Optional
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
@@ -264,7 +264,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 
-	// User Group ID to associate with the replication group. Only a maximum of one  user group ID is valid. NOTE: This argument is a set because the AWS specification allows for multiple IDs. However, in practice, AWS only allows a maximum size of one.
+	// User Group ID to associate with the replication group. Only a maximum of one (1) user group ID is valid. NOTE: This argument is a set because the AWS specification allows for multiple IDs. However, in practice, AWS only allows a maximum size of one.
 	// +kubebuilder:validation:Optional
 	UserGroupIds []*string `json:"userGroupIds,omitempty" tf:"user_group_ids,omitempty"`
 }

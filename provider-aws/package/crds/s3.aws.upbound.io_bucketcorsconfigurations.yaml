@@ -142,8 +142,9 @@ spec:
                         type: object
                     type: object
                   corsRule:
-                    description: Set of origins and methods  documented below. You
-                      can configure up to 100 rules.
+                    description: Set of origins and methods (cross-origin access that
+                      you want to allow) documented below. You can configure up to
+                      100 rules.
                     items:
                       properties:
                         allowedHeaders:
@@ -168,7 +169,7 @@ spec:
                         exposeHeaders:
                           description: Set of headers in the response that you want
                             customers to be able to access from their applications
-                            .
+                            (for example, from a JavaScript XMLHttpRequest object).
                           items:
                             type: string
                           type: array

@@ -35,8 +35,9 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Configuration is the Schema for the Configurations API. Terraform
-          resource for managing an Amazon Managed Streaming for Kafka configuration
+        description: Configuration is the Schema for the Configurations API. Upbound
+          official provider resource for managing an amazon managed streaming for
+          kafka configuration
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -266,7 +267,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of the configuration.
+                    description: Amazon Resource Name (ARN) of the configuration.
                     type: string
                   id:
                     type: string

@@ -33,7 +33,7 @@ type InstanceProfileObservation struct {
 
 type InstanceProfileParameters struct {
 
-	// Path to the instance profile. For more information about paths, see IAM Identifiers in the IAM User Guide. Can be a string of characters consisting of either a forward slash  by itself or a string that must begin and end with forward slashes. Can include any ASCII character from the !  through the DEL character , including most punctuation characters, digits, and upper and lowercase letters.
+	// Path to the instance profile. For more information about paths, see IAM Identifiers in the IAM User Guide. Can be a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. Can include any ASCII character from the ! (\u0021) through the DEL character (\u007F), including most punctuation characters, digits, and upper and lowercase letters.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 

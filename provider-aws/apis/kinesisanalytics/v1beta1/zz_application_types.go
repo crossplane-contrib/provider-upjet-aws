@@ -110,6 +110,7 @@ type CloudwatchLoggingOptionsParameters struct {
 	// +kubebuilder:validation:Required
 	LogStreamArn *string `json:"logStreamArn" tf:"log_stream_arn,omitempty"`
 
+	// The ARN of the IAM Role used to send application messages.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -143,6 +144,7 @@ type InputsObservation struct {
 	// The ARN of the Kinesis Analytics Application.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Schema format of the data in the streaming source. See Source Schema below for more details.
 	// +kubebuilder:validation:Required
 	Schema []SchemaObservation `json:"schema,omitempty" tf:"schema,omitempty"`
 
@@ -151,9 +153,13 @@ type InputsObservation struct {
 
 type InputsParameters struct {
 
+	// The Kinesis Firehose configuration for the streaming source. Conflicts with kinesis_stream.
+	// See Kinesis Firehose below for more details.
 	// +kubebuilder:validation:Optional
 	KinesisFirehose []KinesisFirehoseParameters `json:"kinesisFirehose,omitempty" tf:"kinesis_firehose,omitempty"`
 
+	// The Kinesis Stream configuration for the streaming source. Conflicts with kinesis_firehose.
+	// See Kinesis Stream below for more details.
 	// +kubebuilder:validation:Optional
 	KinesisStream []KinesisStreamParameters `json:"kinesisStream,omitempty" tf:"kinesis_stream,omitempty"`
 
@@ -171,6 +177,7 @@ type InputsParameters struct {
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []ProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
+	// The Schema format of the data in the streaming source. See Source Schema below for more details.
 	// +kubebuilder:validation:Required
 	Schema []SchemaParameters `json:"schema" tf:"schema,omitempty"`
 
@@ -195,9 +202,11 @@ type KinesisFirehoseObservation struct {
 
 type KinesisFirehoseParameters struct {
 
+	// The ARN of the Kinesis Firehose delivery stream.
 	// +kubebuilder:validation:Required
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 
+	// The ARN of the IAM Role used to access the stream.
 	// +kubebuilder:validation:Required
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
@@ -207,6 +216,7 @@ type KinesisStreamObservation struct {
 
 type KinesisStreamParameters struct {
 
+	// The ARN of the Kinesis Stream.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1.Stream
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -219,6 +229,7 @@ type KinesisStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 
+	// The ARN of the IAM Role used to access the stream.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -238,9 +249,11 @@ type LambdaObservation struct {
 
 type LambdaParameters struct {
 
+	// The ARN of the Lambda function.
 	// +kubebuilder:validation:Required
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 
+	// The ARN of the IAM Role used to access the Lambda function.
 	// +kubebuilder:validation:Required
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
@@ -290,6 +303,7 @@ type OutputsKinesisFirehoseObservation struct {
 
 type OutputsKinesisFirehoseParameters struct {
 
+	// The ARN of the Kinesis Firehose delivery stream.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/firehose/v1beta1.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -303,6 +317,7 @@ type OutputsKinesisFirehoseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 
+	// The ARN of the IAM Role used to access the stream.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -322,9 +337,11 @@ type OutputsKinesisStreamObservation struct {
 
 type OutputsKinesisStreamParameters struct {
 
+	// The ARN of the Kinesis Stream.
 	// +kubebuilder:validation:Required
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 
+	// The ARN of the IAM Role used to access the stream.
 	// +kubebuilder:validation:Required
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
@@ -334,9 +351,11 @@ type OutputsLambdaObservation struct {
 
 type OutputsLambdaParameters struct {
 
+	// The ARN of the Lambda function.
 	// +kubebuilder:validation:Required
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 
+	// The ARN of the IAM Role used to access the Lambda function.
 	// +kubebuilder:validation:Required
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
@@ -349,18 +368,25 @@ type OutputsObservation struct {
 
 type OutputsParameters struct {
 
+	// The Kinesis Firehose configuration for the destination stream. Conflicts with kinesis_stream.
+	// See Kinesis Firehose below for more details.
 	// +kubebuilder:validation:Optional
 	KinesisFirehose []OutputsKinesisFirehoseParameters `json:"kinesisFirehose,omitempty" tf:"kinesis_firehose,omitempty"`
 
+	// The Kinesis Stream configuration for the destination stream. Conflicts with kinesis_firehose.
+	// See Kinesis Stream below for more details.
 	// +kubebuilder:validation:Optional
 	KinesisStream []OutputsKinesisStreamParameters `json:"kinesisStream,omitempty" tf:"kinesis_stream,omitempty"`
 
+	// The Lambda function destination. See Lambda below for more details.
 	// +kubebuilder:validation:Optional
 	Lambda []OutputsLambdaParameters `json:"lambda,omitempty" tf:"lambda,omitempty"`
 
+	// The Name of the in-application stream.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The Schema format of the data written to the destination. See Destination Schema below for more details.
 	// +kubebuilder:validation:Required
 	Schema []OutputsSchemaParameters `json:"schema" tf:"schema,omitempty"`
 }
@@ -370,6 +396,7 @@ type OutputsSchemaObservation struct {
 
 type OutputsSchemaParameters struct {
 
+	// The Format Type of the records on the output stream. Can be CSV or JSON.
 	// +kubebuilder:validation:Required
 	RecordFormatType *string `json:"recordFormatType" tf:"record_format_type,omitempty"`
 }
@@ -389,6 +416,7 @@ type ProcessingConfigurationObservation struct {
 
 type ProcessingConfigurationParameters struct {
 
+	// The Lambda function configuration. See Lambda below for more details.
 	// +kubebuilder:validation:Required
 	Lambda []LambdaParameters `json:"lambda" tf:"lambda,omitempty"`
 }
@@ -402,6 +430,7 @@ type RecordColumnsParameters struct {
 	// +kubebuilder:validation:Optional
 	Mapping *string `json:"mapping,omitempty" tf:"mapping,omitempty"`
 
+	// Name of the column.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -427,6 +456,8 @@ type RecordFormatMappingParametersParameters struct {
 }
 
 type RecordFormatObservation struct {
+
+	// The type of Record Format. Can be CSV or JSON.
 	RecordFormatType *string `json:"recordFormatType,omitempty" tf:"record_format_type,omitempty"`
 }
 
@@ -443,6 +474,7 @@ type ReferenceDataSourcesObservation struct {
 	// The ARN of the Kinesis Analytics Application.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Schema format of the data in the streaming source. See Source Schema below for more details.
 	// +kubebuilder:validation:Required
 	Schema []ReferenceDataSourcesSchemaObservation `json:"schema,omitempty" tf:"schema,omitempty"`
 }
@@ -453,6 +485,7 @@ type ReferenceDataSourcesParameters struct {
 	// +kubebuilder:validation:Required
 	S3 []S3Parameters `json:"s3" tf:"s3,omitempty"`
 
+	// The Schema format of the data in the streaming source. See Source Schema below for more details.
 	// +kubebuilder:validation:Required
 	Schema []ReferenceDataSourcesSchemaParameters `json:"schema" tf:"schema,omitempty"`
 
@@ -499,6 +532,7 @@ type S3Parameters struct {
 	// +kubebuilder:validation:Required
 	FileKey *string `json:"fileKey" tf:"file_key,omitempty"`
 
+	// The ARN of the IAM Role used to access the Lambda function.
 	// +kubebuilder:validation:Required
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
@@ -537,6 +571,7 @@ type SchemaRecordColumnsParameters struct {
 	// +kubebuilder:validation:Optional
 	Mapping *string `json:"mapping,omitempty" tf:"mapping,omitempty"`
 
+	// Name of the column.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -546,6 +581,8 @@ type SchemaRecordColumnsParameters struct {
 }
 
 type SchemaRecordFormatObservation struct {
+
+	// The type of Record Format. Can be CSV or JSON.
 	RecordFormatType *string `json:"recordFormatType,omitempty" tf:"record_format_type,omitempty"`
 }
 

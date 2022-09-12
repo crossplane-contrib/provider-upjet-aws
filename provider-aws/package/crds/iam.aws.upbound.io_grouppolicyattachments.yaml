@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   group:
-                    description: he group the policy should be applied to
+                    description: The group the policy should be applied to
                     type: string
                   groupRef:
                     description: Reference to a Group to populate group.
@@ -141,7 +141,7 @@ spec:
                         type: object
                     type: object
                   policyArn:
-                    description: he ARN of the policy you want to apply
+                    description: The ARN of the policy you want to apply
                     type: string
                   policyArnRef:
                     description: Reference to a Policy to populate policyArn.

@@ -37,7 +37,7 @@ type TopicSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfirmationTimeoutInMinutes *float64 `json:"confirmationTimeoutInMinutes,omitempty" tf:"confirmation_timeout_in_minutes,omitempty"`
 
-	// JSON String with the delivery policy  that will be used in the subscription - this only applies to HTTP/S subscriptions. Refer to the SNS docs for more details.
+	// JSON String with the delivery policy (retries, backoff, etc.) that will be used in the subscription - this only applies to HTTP/S subscriptions. Refer to the SNS docs for more details.
 	// +kubebuilder:validation:Optional
 	DeliveryPolicy *string `json:"deliveryPolicy,omitempty" tf:"delivery_policy,omitempty"`
 
@@ -47,7 +47,7 @@ type TopicSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// Whether the endpoint is capable of auto confirming subscription . Default is false.
+	// Whether the endpoint is capable of auto confirming subscription (e.g., PagerDuty). Default is false.
 	// +kubebuilder:validation:Optional
 	EndpointAutoConfirms *bool `json:"endpointAutoConfirms,omitempty" tf:"endpoint_auto_confirms,omitempty"`
 
@@ -67,7 +67,7 @@ type TopicSubscriptionParameters struct {
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
-	// Whether to enable raw message delivery . Default is false.
+	// Whether to enable raw message delivery (the original message is directly passed, not wrapped in JSON with the original message in the message property). Default is false.
 	// +kubebuilder:validation:Optional
 	RawMessageDelivery *bool `json:"rawMessageDelivery,omitempty" tf:"raw_message_delivery,omitempty"`
 

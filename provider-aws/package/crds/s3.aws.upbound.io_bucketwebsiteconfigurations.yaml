@@ -182,8 +182,12 @@ spec:
                     items:
                       properties:
                         hostName:
+                          description: Name of the host where requests are redirected.
                           type: string
                         protocol:
+                          description: 'Protocol to use when redirecting requests.
+                            The default is the protocol that is used in the original
+                            request. Valid values: http, https.'
                           type: string
                       required:
                       - hostName
@@ -222,20 +226,25 @@ spec:
                           items:
                             properties:
                               hostName:
+                                description: The host name to use in the redirect
+                                  request.
                                 type: string
                               httpRedirectCode:
                                 description: The HTTP redirect code to use on the
                                   response.
                                 type: string
                               protocol:
+                                description: 'Protocol to use when redirecting requests.
+                                  The default is the protocol that is used in the
+                                  original request. Valid values: http, https.'
                                 type: string
                               replaceKeyPrefixWith:
                                 description: The object key prefix to use in the redirect
                                   request. For example, to redirect requests for all
-                                  pages with prefix docs/  to documents/, you can
-                                  set a condition block with key_prefix_equals set
-                                  to docs/ and in the redirect set replace_key_prefix_with
-                                  to /documents.
+                                  pages with prefix docs/ (objects in the docs/ folder)
+                                  to documents/, you can set a condition block with
+                                  key_prefix_equals set to docs/ and in the redirect
+                                  set replace_key_prefix_with to /documents.
                                 type: string
                               replaceKeyWith:
                                 description: The specific object key to use in the
@@ -251,8 +260,8 @@ spec:
                   routingRules:
                     description: A json array containing routing rules describing
                       redirect behavior and when redirects are applied. Use this parameter
-                      when your routing rules contain empty String values  as seen
-                      in the example above.
+                      when your routing rules contain empty String values ("") as
+                      seen in the example above.
                     type: string
                 required:
                 - region
@@ -436,7 +445,7 @@ spec:
                 properties:
                   id:
                     description: The bucket or bucket and expected_bucket_owner separated
-                      by a comma  if the latter is provided.
+                      by a comma (,) if the latter is provided.
                     type: string
                   websiteDomain:
                     description: The domain of the website endpoint. This is used

@@ -39,7 +39,7 @@ type InvocationParameters struct {
 	// +kubebuilder:validation:Required
 	Input *string `json:"input" tf:"input,omitempty"`
 
-	// Qualifier  of the lambda function. Defaults to $LATEST.
+	// Qualifier (i.e., version) of the lambda function. Defaults to $LATEST.
 	// +kubebuilder:validation:Optional
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
@@ -48,7 +48,7 @@ type InvocationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Map of arbitrary keys and values that, when changed, will trigger a re-invocation. To force a re-invocation without changing these keys/values, use the terraform taint command.
+	// Map of arbitrary keys and values that, when changed, will trigger a re-invocation.
 	// +kubebuilder:validation:Optional
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }

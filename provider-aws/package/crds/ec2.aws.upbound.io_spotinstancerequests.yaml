@@ -72,13 +72,14 @@ spec:
                     type: string
                   blockDurationMinutes:
                     description: The required duration for the Spot instances, in
-                      minutes. This value must be a multiple of 60 . The duration
-                      period starts as soon as your Spot instance receives its instance
-                      ID. At the end of the duration period, Amazon EC2 marks the
-                      Spot instance for termination and provides a Spot instance termination
-                      notice, which gives the instance a two-minute warning before
-                      it terminates. Note that you can't specify an Availability Zone
-                      group or a launch group if you specify a duration.
+                      minutes. This value must be a multiple of 60 (60, 120, 180,
+                      240, 300, or 360). The duration period starts as soon as your
+                      Spot instance receives its instance ID. At the end of the duration
+                      period, Amazon EC2 marks the Spot instance for termination and
+                      provides a Spot instance termination notice, which gives the
+                      instance a two-minute warning before it terminates. Note that
+                      you can't specify an Availability Zone group or a launch group
+                      if you specify a duration.
                     type: number
                   capacityReservationSpecification:
                     items:
@@ -89,6 +90,7 @@ spec:
                           items:
                             properties:
                               capacityReservationId:
+                                description: The Spot Instance Request ID.
                                 type: string
                               capacityReservationResourceGroupArn:
                                 type: string
@@ -121,8 +123,10 @@ spec:
                         iops:
                           type: number
                         kmsKeyId:
+                          description: The Spot Instance Request ID.
                           type: string
                         snapshotId:
+                          description: The Spot Instance Request ID.
                           type: string
                         tags:
                           additionalProperties:
@@ -170,6 +174,7 @@ spec:
                   hibernation:
                     type: boolean
                   hostId:
+                    description: The Spot Instance Request ID.
                     type: string
                   iamInstanceProfile:
                     type: string
@@ -224,6 +229,11 @@ spec:
                         httpTokens:
                           type: string
                         instanceMetadataTags:
+                          description: A map of tags to assign to the Spot Instance
+                            Request. These tags are not automatically applied to the
+                            launched Instance. If configured with a provider default_tags
+                            configuration block present, tags with matching keys will
+                            overwrite those defined at the provider-level.
                           type: string
                       type: object
                     type: array
@@ -239,6 +249,7 @@ spec:
                         networkCardIndex:
                           type: number
                         networkInterfaceId:
+                          description: The Spot Instance Request ID.
                           type: string
                       required:
                       - deviceIndex
@@ -266,6 +277,7 @@ spec:
                         iops:
                           type: number
                         kmsKeyId:
+                          description: The Spot Instance Request ID.
                           type: string
                         tags:
                           additionalProperties:
@@ -302,6 +314,7 @@ spec:
                       the spot request will be closed.
                     type: string
                   subnetId:
+                    description: The Spot Instance Request ID.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in ec2 to populate subnetId.
@@ -395,17 +408,24 @@ spec:
                     type: boolean
                   validFrom:
                     description: The start date and time of the request, in UTC RFC3339
-                      format. The default is to start fulfilling the request immediately.
+                      format(for example, YYYY-MM-DDTHH:MM:SSZ). The default is to
+                      start fulfilling the request immediately.
                     type: string
                   validUntil:
                     description: The end date and time of the request, in UTC RFC3339
-                      format. At this point, no new Spot instance requests are placed
-                      or enabled to fulfill the request. The default end date is 7
-                      days from the current date.
+                      format(for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no
+                      new Spot instance requests are placed or enabled to fulfill
+                      the request. The default end date is 7 days from the current
+                      date.
                     type: string
                   volumeTags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the Spot Instance Request.
+                      These tags are not automatically applied to the launched Instance.
+                      If configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                   vpcSecurityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
@@ -489,9 +509,6 @@ spec:
                       type: string
                     type: array
                   waitForFulfillment:
-                    description: If set, Terraform will wait for the Spot Request
-                      to be fulfilled, and will throw an error if the timeout of 10m
-                      is reached.
                     type: boolean
                 required:
                 - region
@@ -678,6 +695,7 @@ spec:
                     items:
                       properties:
                         volumeId:
+                          description: The Spot Instance Request ID.
                           type: string
                       type: object
                     type: array
@@ -691,6 +709,7 @@ spec:
                   passwordData:
                     type: string
                   primaryNetworkInterfaceId:
+                    description: The Spot Instance Request ID.
                     type: string
                   privateDns:
                     description: The private DNS name assigned to the instance. Can
@@ -712,6 +731,7 @@ spec:
                         deviceName:
                           type: string
                         volumeId:
+                          description: The Spot Instance Request ID.
                           type: string
                       type: object
                     type: array
@@ -719,8 +739,8 @@ spec:
                     description: The current bid status of the Spot Instance Request.
                     type: string
                   spotInstanceId:
-                    description: The Instance ID  that is currently fulfilling the
-                      Spot Instance request.
+                    description: The Instance ID (if any) that is currently fulfilling
+                      the Spot Instance request.
                     type: string
                   spotRequestState:
                     description: The current request state of the Spot Instance Request.

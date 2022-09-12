@@ -274,7 +274,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  for the signing profile.
+                    description: The Amazon Resource Name (ARN) for the signing profile.
                     type: string
                   id:
                     type: string

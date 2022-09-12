@@ -27,7 +27,7 @@ type DNSEntryParameters struct {
 
 type VPCEndpointObservation struct {
 
-	// The Amazon Resource Name  of the VPC endpoint.
+	// The Amazon Resource Name (ARN) of the VPC endpoint.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The list of CIDR blocks for the exposed AWS service. Applicable for endpoints of type Gateway.
@@ -70,11 +70,11 @@ type VPCEndpointObservation struct {
 
 type VPCEndpointParameters struct {
 
-	// Accept the VPC endpoint .
+	// Accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).
 	// +kubebuilder:validation:Optional
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
 
-	// A policy to attach to the endpoint that controls access to the service. This is a JSON formatted string. Defaults to full access. All Gateway and some Interface endpoints support policies - see the relevant AWS documentation for more details. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide.
+	// A policy to attach to the endpoint that controls access to the service. This is a JSON formatted string. Defaults to full access. All Gateway and some Interface endpoints support policies - see the relevant AWS documentation for more details.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
@@ -88,7 +88,7 @@ type VPCEndpointParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> .
+	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook).
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("service_name",true)
 	// +kubebuilder:validation:Optional

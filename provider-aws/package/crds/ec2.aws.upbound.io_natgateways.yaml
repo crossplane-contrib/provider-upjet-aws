@@ -65,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   allocationId:
+                    description: The ID of the NAT Gateway.
                     type: string
                   allocationIdRef:
                     description: Reference to a EIP in ec2 to populate allocationId.
@@ -148,6 +149,7 @@ spec:
                       be created in.
                     type: string
                   subnetId:
+                    description: The ID of the NAT Gateway.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet to populate subnetId.

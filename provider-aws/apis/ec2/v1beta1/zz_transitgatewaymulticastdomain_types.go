@@ -15,7 +15,7 @@ import (
 
 type TransitGatewayMulticastDomainObservation struct {
 
-	// EC2 Transit Gateway Multicast Domain Amazon Resource Name .
+	// EC2 Transit Gateway Multicast Domain Amazon Resource Name (ARN).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// EC2 Transit Gateway Multicast Domain identifier.
@@ -34,7 +34,7 @@ type TransitGatewayMulticastDomainParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoAcceptSharedAssociations *string `json:"autoAcceptSharedAssociations,omitempty" tf:"auto_accept_shared_associations,omitempty"`
 
-	// Whether to enable Internet Group Management Protocol  version 2 for the EC2 Transit Gateway Multicast Domain. Valid values: disable, enable. Default value: disable.
+	// Whether to enable Internet Group Management Protocol (IGMP) version 2 for the EC2 Transit Gateway Multicast Domain. Valid values: disable, enable. Default value: disable.
 	// +kubebuilder:validation:Optional
 	Igmpv2Support *string `json:"igmpv2Support,omitempty" tf:"igmpv2_support,omitempty"`
 

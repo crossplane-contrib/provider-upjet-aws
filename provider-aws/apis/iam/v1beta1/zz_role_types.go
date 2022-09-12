@@ -16,7 +16,7 @@ import (
 type InlinePolicyObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Policy document as a JSON formatted string. For more information about building IAM policy documents with Terraform, see the AWS IAM Policy Document Guide.
+	// Policy document as a JSON formatted string.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
@@ -25,7 +25,7 @@ type InlinePolicyParameters struct {
 
 type RoleObservation struct {
 
-	// Amazon Resource Name  specifying the role.
+	// Amazon Resource Name (ARN) specifying the role.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Creation date of the IAM role.
@@ -34,10 +34,10 @@ type RoleObservation struct {
 	// Name of the role.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Configuration block defining an exclusive set of IAM inline policies associated with the IAM role. See below. If no blocks are configured, Terraform will not manage any inline policies in this resource. Configuring one empty block  will cause Terraform to remove all inline policies added out of band on apply.
+	// Configuration block defining an exclusive set of IAM inline policies associated with the IAM role. See below. Configuring one empty block (i.e.
 	InlinePolicy []InlinePolicyObservation `json:"inlinePolicy,omitempty" tf:"inline_policy,omitempty"`
 
-	// Set of exclusive IAM managed policy ARNs to attach to the IAM role. If this attribute is not configured, Terraform will ignore policy attachments to this resource. When configured, Terraform will align the role's managed policy attachments with this set by attaching or detaching managed policies. Configuring an empty set  will cause Terraform to remove all managed policy attachments.
+	// Set of exclusive IAM managed policy ARNs to attach to the IAM role. Configuring an empty set (i.e.
 	ManagedPolicyArns []*string `json:"managedPolicyArns,omitempty" tf:"managed_policy_arns,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
@@ -61,7 +61,7 @@ type RoleParameters struct {
 	// +kubebuilder:validation:Optional
 	ForceDetachPolicies *bool `json:"forceDetachPolicies,omitempty" tf:"force_detach_policies,omitempty"`
 
-	// Maximum session duration  that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
+	// Maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
 	// +kubebuilder:validation:Optional
 	MaxSessionDuration *float64 `json:"maxSessionDuration,omitempty" tf:"max_session_duration,omitempty"`
 

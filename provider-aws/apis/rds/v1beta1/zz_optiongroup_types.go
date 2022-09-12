@@ -39,7 +39,7 @@ type OptionGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Option []OptionParameters `json:"option,omitempty" tf:"option,omitempty"`
 
-	// The description of the option group. Defaults to "Managed by Terraform".
+	// The description of the option group.
 	// +kubebuilder:validation:Optional
 	OptionGroupDescription *string `json:"optionGroupDescription,omitempty" tf:"option_group_description,omitempty"`
 
@@ -62,7 +62,7 @@ type OptionParameters struct {
 	// +kubebuilder:validation:Optional
 	DBSecurityGroupMemberships []*string `json:"dbSecurityGroupMemberships,omitempty" tf:"db_security_group_memberships,omitempty"`
 
-	// The Name of the Option .
+	// The Name of the Option (e.g., MEMCACHED).
 	// +kubebuilder:validation:Required
 	OptionName *string `json:"optionName" tf:"option_name,omitempty"`
 
@@ -70,7 +70,7 @@ type OptionParameters struct {
 	// +kubebuilder:validation:Optional
 	OptionSettings []OptionSettingsParameters `json:"optionSettings,omitempty" tf:"option_settings,omitempty"`
 
-	// The Port number when connecting to the Option .
+	// The Port number when connecting to the Option (e.g., 11211).
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -78,7 +78,7 @@ type OptionParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupMemberships []*string `json:"vpcSecurityGroupMemberships,omitempty" tf:"vpc_security_group_memberships,omitempty"`
 
-	// The version of the option .
+	// The version of the option (e.g., 13.1.0.0).
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }

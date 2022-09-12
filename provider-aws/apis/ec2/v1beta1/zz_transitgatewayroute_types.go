@@ -21,7 +21,7 @@ type TransitGatewayRouteObservation struct {
 
 type TransitGatewayRouteParameters struct {
 
-	// Indicates whether to drop traffic that matches this route .
+	// Indicates whether to drop traffic that matches this route (default to false).
 	// +kubebuilder:validation:Optional
 	Blackhole *bool `json:"blackhole,omitempty" tf:"blackhole,omitempty"`
 

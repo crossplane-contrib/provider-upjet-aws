@@ -65,9 +65,9 @@ spec:
               forProvider:
                 properties:
                   alpnPolicy:
-                    description: Name of the Application-Layer Protocol Negotiation  policy.
-                      Can be set if protocol is TLS. Valid values are HTTP1Only, HTTP2Only,
-                      HTTP2Optional, HTTP2Preferred, and None.
+                    description: Name of the Application-Layer Protocol Negotiation
+                      (ALPN) policy. Can be set if protocol is TLS. Valid values are
+                      HTTP1Only, HTTP2Only, HTTP2Optional, HTTP2Preferred, and None.
                     type: string
                   certificateArn:
                     description: ARN of the default SSL server certificate. Exactly
@@ -93,10 +93,16 @@ spec:
                               onUnauthenticatedRequest:
                                 type: string
                               scope:
+                                description: Set of user claims to be requested from
+                                  the IdP.
                                 type: string
                               sessionCookieName:
+                                description: Name of the cookie used to maintain session
+                                  information.
                                 type: string
                               sessionTimeout:
+                                description: Maximum duration of the authentication
+                                  session, in seconds.
                                 type: number
                               userPoolArn:
                                 description: ARN of the Cognito user pool.
@@ -116,8 +122,8 @@ spec:
                           type: array
                         authenticateOidc:
                           description: Configuration block for an identity provider
-                            that is compliant with OpenID Connect . Specify only when
-                            type is authenticate-oidc. Detailed below.
+                            that is compliant with OpenID Connect (OIDC). Specify
+                            only when type is authenticate-oidc. Detailed below.
                           items:
                             properties:
                               authenticationRequestExtraParams:
@@ -153,10 +159,16 @@ spec:
                               onUnauthenticatedRequest:
                                 type: string
                               scope:
+                                description: Set of user claims to be requested from
+                                  the IdP.
                                 type: string
                               sessionCookieName:
+                                description: Name of the cookie used to maintain session
+                                  information.
                                 type: string
                               sessionTimeout:
+                                description: Maximum duration of the authentication
+                                  session, in seconds.
                                 type: number
                               tokenEndpoint:
                                 description: Token endpoint of the IdP.
@@ -211,7 +223,7 @@ spec:
                                       description: Time period, in seconds, during
                                         which requests from a client should be routed
                                         to the same target group. The range is 1-604800
-                                        seconds .
+                                        seconds (7 days).
                                       type: number
                                     enabled:
                                       description: Whether target group stickiness
@@ -725,7 +737,7 @@ spec:
                   arn:
                     type: string
                   id:
-                    description: ARN of the listener .
+                    description: ARN of the listener (matches arn).
                     type: string
                   tagsAll:
                     additionalProperties:

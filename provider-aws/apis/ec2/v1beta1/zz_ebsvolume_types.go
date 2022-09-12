@@ -15,10 +15,10 @@ import (
 
 type EBSVolumeObservation struct {
 
-	// The volume ARN .
+	// The volume ARN (e.g., arn:aws:ec2:us-east-1:0123456789012:volume/vol-59fcb34e).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The volume ID .
+	// The volume ID (e.g., vol-59fcb34e).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
@@ -39,7 +39,7 @@ type EBSVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true. Note: Terraform must be running with credentials which have the GenerateDataKeyWithoutPlaintext permission on the specified KMS key as required by the EBS KMS CMK volume provisioning process to prevent a volume from being created and almost immediately deleted.
+	// The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -56,7 +56,7 @@ type EBSVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	MultiAttachEnabled *bool `json:"multiAttachEnabled,omitempty" tf:"multi_attach_enabled,omitempty"`
 
-	// The Amazon Resource Name  of the Outpost.
+	// The Amazon Resource Name (ARN) of the Outpost.
 	// +kubebuilder:validation:Optional
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
@@ -81,7 +81,7 @@ type EBSVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	// The type of EBS volume. Can be standard, gp2, gp3, io1, io2, sc1 or st1 .
+	// The type of EBS volume. Can be standard, gp2, gp3, io1, io2, sc1 or st1 (Default: gp2).
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

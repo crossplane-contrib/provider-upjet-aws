@@ -89,7 +89,7 @@ spec:
                   defaultArguments:
                     additionalProperties:
                       type: string
-                    description: xecution script consumes, as well as arguments that
+                    description: execution script consumes, as well as arguments that
                       AWS Glue itself consumes. For information about how to specify
                       and consume your own Job arguments, see the Calling AWS Glue
                       APIs in Python topic in the developer guide. For information
@@ -117,8 +117,8 @@ spec:
                     type: string
                   maxCapacity:
                     description: –  The maximum number of AWS Glue data processing
-                      units  that can be allocated when this job runs. Required when
-                      pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers
+                      units (DPUs) that can be allocated when this job runs. Required
+                      when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers
                       and worker_type arguments instead with glue_version 2.0 and
                       above.
                     type: number
@@ -129,8 +129,8 @@ spec:
                   nonOverridableArguments:
                     additionalProperties:
                       type: string
-                    description: verridable arguments for this job, specified as name-value
-                      pairs.
+                    description: overridable arguments for this job, specified as
+                      name-value pairs.
                     type: object
                   notificationProperty:
                     description: Notification property of the job. Defined below.
@@ -239,8 +239,8 @@ spec:
                     type: object
                   timeout:
                     description: –  The job timeout in minutes. The default is 2880
-                      minutes  for glueetl and pythonshell jobs, and null  for gluestreaming
-                      jobs.
+                      minutes (48 hours) for glueetl and pythonshell jobs, and null
+                      (unlimted) for gluestreaming jobs.
                     type: number
                   workerType:
                     description: The type of predefined worker that is allocated when
@@ -427,7 +427,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of Glue Job
+                    description: Amazon Resource Name (ARN) of Glue Job
                     type: string
                   id:
                     description: Job name

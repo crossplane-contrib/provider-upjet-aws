@@ -15,7 +15,7 @@ import (
 
 type TopicObservation struct {
 
-	// The ARN of the SNS topic, as a more obvious property
+	// The ARN of the SNS topic, as a more obvious property (clone of id)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ARN of the SNS topic
@@ -74,7 +74,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Boolean indicating whether or not to create a FIFO  topic .
+	// Boolean indicating whether or not to create a FIFO (first-in-first-out) topic (default is false).
 	// +kubebuilder:validation:Optional
 	FifoTopic *bool `json:"fifoTopic,omitempty" tf:"fifo_topic,omitempty"`
 
@@ -142,7 +142,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPSuccessFeedbackSampleRate *float64 `json:"httpSuccessFeedbackSampleRate,omitempty" tf:"http_success_feedback_sample_rate,omitempty"`
 
-	// The ID of an AWS-managed customer master key  for Amazon SNS or a custom CMK. For more information, see Key Terms
+	// The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms
 	// +kubebuilder:validation:Optional
 	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
 
@@ -178,7 +178,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	LambdaSuccessFeedbackSampleRate *float64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
 
-	// The fully-formed AWS policy as JSON. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide.
+	// The fully-formed AWS policy as JSON.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 

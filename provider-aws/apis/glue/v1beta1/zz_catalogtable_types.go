@@ -28,6 +28,7 @@ type CatalogTableObservation struct {
 
 type CatalogTableParameters struct {
 
+	// Catalog ID, Database name and of the name table.
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
@@ -75,7 +76,7 @@ type CatalogTableParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageDescriptor []StorageDescriptorParameters `json:"storageDescriptor,omitempty" tf:"storage_descriptor,omitempty"`
 
-	// Type of this table . While optional, some Athena DDL queries such as ALTER TABLE and SHOW CREATE TABLE will fail if this argument is empty.
+	// Type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.). While optional, some Athena DDL queries such as ALTER TABLE and SHOW CREATE TABLE will fail if this argument is empty.
 	// +kubebuilder:validation:Optional
 	TableType *string `json:"tableType,omitempty" tf:"table_type,omitempty"`
 
@@ -97,6 +98,7 @@ type ColumnsObservation struct {
 
 type ColumnsParameters struct {
 
+	// Free-form text comment.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
@@ -130,6 +132,7 @@ type PartitionKeysObservation struct {
 
 type PartitionKeysParameters struct {
 
+	// Free-form text comment.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
@@ -219,7 +222,7 @@ type SortColumnsParameters struct {
 	// +kubebuilder:validation:Required
 	Column *string `json:"column" tf:"column,omitempty"`
 
-	// Whether the column is sorted in ascending  or descending order .
+	// Whether the column is sorted in ascending (1) or descending order (0).
 	// +kubebuilder:validation:Required
 	SortOrder *float64 `json:"sortOrder" tf:"sort_order,omitempty"`
 }
@@ -241,7 +244,7 @@ type StorageDescriptorParameters struct {
 	// +kubebuilder:validation:Optional
 	Compressed *bool `json:"compressed,omitempty" tf:"compressed,omitempty"`
 
-	// Input format: SequenceFileInputFormat , or TextInputFormat, or a custom format.
+	// Input format: SequenceFileInputFormat (binary), or TextInputFormat, or a custom format.
 	// +kubebuilder:validation:Optional
 	InputFormat *string `json:"inputFormat,omitempty" tf:"input_format,omitempty"`
 
@@ -253,7 +256,7 @@ type StorageDescriptorParameters struct {
 	// +kubebuilder:validation:Optional
 	NumberOfBuckets *float64 `json:"numberOfBuckets,omitempty" tf:"number_of_buckets,omitempty"`
 
-	// Output format: SequenceFileOutputFormat , or IgnoreKeyTextOutputFormat, or a custom format.
+	// Output format: SequenceFileOutputFormat (binary), or IgnoreKeyTextOutputFormat, or a custom format.
 	// +kubebuilder:validation:Optional
 	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
 
@@ -264,11 +267,11 @@ type StorageDescriptorParameters struct {
 	// +kubebuilder:validation:Optional
 	SchemaReference []SchemaReferenceParameters `json:"schemaReference,omitempty" tf:"schema_reference,omitempty"`
 
-	// Configuration block for serialization and deserialization  information. See ser_de_info below.
+	// Configuration block for serialization and deserialization ("SerDe") information. See ser_de_info below.
 	// +kubebuilder:validation:Optional
 	SerDeInfo []SerDeInfoParameters `json:"serDeInfo,omitempty" tf:"ser_de_info,omitempty"`
 
-	// Configuration block with information about values that appear very frequently in a column . See skewed_info below.
+	// Configuration block with information about values that appear very frequently in a column (skewed values). See skewed_info below.
 	// +kubebuilder:validation:Optional
 	SkewedInfo []SkewedInfoParameters `json:"skewedInfo,omitempty" tf:"skewed_info,omitempty"`
 
@@ -286,6 +289,7 @@ type TargetTableObservation struct {
 
 type TargetTableParameters struct {
 
+	// Catalog ID, Database name and of the name table.
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 

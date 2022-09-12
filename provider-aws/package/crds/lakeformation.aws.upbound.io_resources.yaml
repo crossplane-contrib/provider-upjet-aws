@@ -65,14 +65,15 @@ spec:
               forProvider:
                 properties:
                   arn:
-                    description: –  Amazon Resource Name  of the resource, an S3 path.
+                    description: –  Amazon Resource Name (ARN) of the resource, an
+                      S3 path.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   roleArn:
-                    description: inked role must exist and is used.
+                    description: linked role must exist and is used.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.

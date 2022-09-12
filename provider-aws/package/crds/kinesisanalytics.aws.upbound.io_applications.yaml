@@ -73,6 +73,8 @@ spec:
                           description: The ARN of the CloudWatch Log Stream.
                           type: string
                         roleArn:
+                          description: The ARN of the IAM Role used to send application
+                            messages.
                           type: string
                         roleArnRef:
                           description: Reference to a Role in iam to populate roleArn.
@@ -166,11 +168,18 @@ spec:
                     items:
                       properties:
                         kinesisFirehose:
+                          description: The Kinesis Firehose configuration for the
+                            streaming source. Conflicts with kinesis_stream. See Kinesis
+                            Firehose below for more details.
                           items:
                             properties:
                               resourceArn:
+                                description: The ARN of the Kinesis Firehose delivery
+                                  stream.
                                 type: string
                               roleArn:
+                                description: The ARN of the IAM Role used to access
+                                  the stream.
                                 type: string
                             required:
                             - resourceArn
@@ -178,9 +187,13 @@ spec:
                             type: object
                           type: array
                         kinesisStream:
+                          description: The Kinesis Stream configuration for the streaming
+                            source. Conflicts with kinesis_firehose. See Kinesis Stream
+                            below for more details.
                           items:
                             properties:
                               resourceArn:
+                                description: The ARN of the Kinesis Stream.
                                 type: string
                               resourceArnRef:
                                 description: Reference to a Stream in kinesis to populate
@@ -263,6 +276,8 @@ spec:
                                     type: object
                                 type: object
                               roleArn:
+                                description: The ARN of the IAM Role used to access
+                                  the stream.
                                 type: string
                               roleArnRef:
                                 description: Reference to a Role in iam to populate
@@ -367,11 +382,16 @@ spec:
                           items:
                             properties:
                               lambda:
+                                description: The Lambda function configuration. See
+                                  Lambda below for more details.
                                 items:
                                   properties:
                                     resourceArn:
+                                      description: The ARN of the Lambda function.
                                       type: string
                                     roleArn:
+                                      description: The ARN of the IAM Role used to
+                                        access the Lambda function.
                                       type: string
                                   required:
                                   - resourceArn
@@ -383,6 +403,8 @@ spec:
                             type: object
                           type: array
                         schema:
+                          description: The Schema format of the data in the streaming
+                            source. See Source Schema below for more details.
                           items:
                             properties:
                               recordColumns:
@@ -396,6 +418,7 @@ spec:
                                         element.
                                       type: string
                                     name:
+                                      description: Name of the column.
                                       type: string
                                     sqlType:
                                       description: The SQL Type of the column.
@@ -486,9 +509,14 @@ spec:
                     items:
                       properties:
                         kinesisFirehose:
+                          description: The Kinesis Firehose configuration for the
+                            destination stream. Conflicts with kinesis_stream. See
+                            Kinesis Firehose below for more details.
                           items:
                             properties:
                               resourceArn:
+                                description: The ARN of the Kinesis Firehose delivery
+                                  stream.
                                 type: string
                               resourceArnRef:
                                 description: Reference to a DeliveryStream in firehose
@@ -571,6 +599,8 @@ spec:
                                     type: object
                                 type: object
                               roleArn:
+                                description: The ARN of the IAM Role used to access
+                                  the stream.
                                 type: string
                               roleArnRef:
                                 description: Reference to a Role in iam to populate
@@ -655,11 +685,17 @@ spec:
                             type: object
                           type: array
                         kinesisStream:
+                          description: The Kinesis Stream configuration for the destination
+                            stream. Conflicts with kinesis_firehose. See Kinesis Stream
+                            below for more details.
                           items:
                             properties:
                               resourceArn:
+                                description: The ARN of the Kinesis Stream.
                                 type: string
                               roleArn:
+                                description: The ARN of the IAM Role used to access
+                                  the stream.
                                 type: string
                             required:
                             - resourceArn
@@ -667,11 +703,16 @@ spec:
                             type: object
                           type: array
                         lambda:
+                          description: The Lambda function destination. See Lambda
+                            below for more details.
                           items:
                             properties:
                               resourceArn:
+                                description: The ARN of the Lambda function.
                                 type: string
                               roleArn:
+                                description: The ARN of the IAM Role used to access
+                                  the Lambda function.
                                 type: string
                             required:
                             - resourceArn
@@ -679,11 +720,16 @@ spec:
                             type: object
                           type: array
                         name:
+                          description: The Name of the in-application stream.
                           type: string
                         schema:
+                          description: The Schema format of the data written to the
+                            destination. See Destination Schema below for more details.
                           items:
                             properties:
                               recordFormatType:
+                                description: The Format Type of the records on the
+                                  output stream. Can be CSV or JSON.
                                 type: string
                             required:
                             - recordFormatType
@@ -712,6 +758,8 @@ spec:
                                   data.
                                 type: string
                               roleArn:
+                                description: The ARN of the IAM Role used to access
+                                  the Lambda function.
                                 type: string
                             required:
                             - bucketArn
@@ -720,6 +768,8 @@ spec:
                             type: object
                           type: array
                         schema:
+                          description: The Schema format of the data in the streaming
+                            source. See Source Schema below for more details.
                           items:
                             properties:
                               recordColumns:
@@ -733,6 +783,7 @@ spec:
                                         element.
                                       type: string
                                     name:
+                                      description: Name of the column.
                                       type: string
                                     sqlType:
                                       description: The SQL Type of the column.
@@ -1035,6 +1086,8 @@ spec:
                           description: The ARN of the Kinesis Analytics Application.
                           type: string
                         schema:
+                          description: The Schema format of the data in the streaming
+                            source. See Source Schema below for more details.
                           items:
                             properties:
                               recordFormat:
@@ -1044,6 +1097,8 @@ spec:
                                 items:
                                   properties:
                                     recordFormatType:
+                                      description: The type of Record Format. Can
+                                        be CSV or JSON.
                                       type: string
                                   type: object
                                 type: array
@@ -1077,6 +1132,8 @@ spec:
                           description: The ARN of the Kinesis Analytics Application.
                           type: string
                         schema:
+                          description: The Schema format of the data in the streaming
+                            source. See Source Schema below for more details.
                           items:
                             properties:
                               recordFormat:
@@ -1086,6 +1143,8 @@ spec:
                                 items:
                                   properties:
                                     recordFormatType:
+                                      description: The type of Record Format. Can
+                                        be CSV or JSON.
                                       type: string
                                   type: object
                                 type: array

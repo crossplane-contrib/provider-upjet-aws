@@ -65,7 +65,8 @@ spec:
               forProvider:
                 properties:
                   admins:
-                    description: –  Set of ARNs of AWS Lake Formation principals .
+                    description: –  Set of ARNs of AWS Lake Formation principals (IAM
+                      users or roles).
                     items:
                       type: string
                     type: array
@@ -83,6 +84,10 @@ spec:
                             type: string
                           type: array
                         principal:
+                          description: Principal who is granted permissions. To enforce
+                            metadata and underlying data access control only by IAM
+                            on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS
+                            and permissions to ["ALL"].
                           type: string
                       type: object
                     type: array
@@ -96,6 +101,10 @@ spec:
                             type: string
                           type: array
                         principal:
+                          description: Principal who is granted permissions. To enforce
+                            metadata and underlying data access control only by IAM
+                            on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS
+                            and permissions to ["ALL"].
                           type: string
                       type: object
                     type: array
@@ -104,8 +113,8 @@ spec:
                       be created in.
                     type: string
                   trustedResourceOwners:
-                    description: wning account IDs that the caller's account can use
-                      to share their user access details .
+                    description: owning account IDs that the caller's account can
+                      use to share their user access details (user ARNs).
                     items:
                       type: string
                     type: array

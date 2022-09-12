@@ -65,14 +65,17 @@ spec:
               forProvider:
                 properties:
                   forceDestroy:
-                    description: A boolean that indicates all objects  should be deleted
-                      from the bucket so that the bucket can be destroyed without
-                      error. These objects are not recoverable.
+                    description: A boolean that indicates all objects (including any
+                      locked objects) should be deleted from the bucket so that the
+                      bucket can be destroyed without error. These objects are not
+                      recoverable.
                     type: boolean
                   hostedZoneId:
                     description: The Route 53 Hosted Zone ID for this bucket's region.
                     type: string
                   objectLockEnabled:
+                    description: Indicates whether this bucket has an Object Lock
+                      configuration enabled. Valid values are true or false.
                     type: boolean
                   region:
                     description: The AWS region this bucket resides in. Region is
@@ -81,6 +84,9 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the bucket. If configured
+                      with a provider default_tags configuration block present, tags
+                      with matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -264,16 +270,14 @@ spec:
                   accelerationStatus:
                     description: Sets the accelerate configuration of an existing
                       bucket. Can be Enabled or Suspended. Cannot be used in cn-north-1
-                      or us-gov-west-1. Terraform will only perform drift detection
-                      if a configuration value is provided. Use the resource aws_s3_bucket_accelerate_configuration
+                      or us-gov-west-1. Use the resource aws_s3_bucket_accelerate_configuration
                       instead.
                     type: string
                   acl:
                     description: The canned ACL to apply. Valid values are private,
                       public-read, public-read-write, aws-exec-read, authenticated-read,
                       and log-delivery-write. Defaults to private.  Conflicts with
-                      grant. Terraform will only perform drift detection if a configuration
-                      value is provided. Use the resource aws_s3_bucket_acl instead.
+                      grant. Use the resource aws_s3_bucket_acl instead.
                     type: string
                   arn:
                     description: The ARN of the bucket. Will be of format arn:aws:s3:::bucketname.
@@ -290,8 +294,7 @@ spec:
                     type: string
                   corsRule:
                     description: A rule of Cross-Origin Resource Sharing. See CORS
-                      rule below for details. Terraform will only perform drift detection
-                      if a configuration value is provided. Use the resource aws_s3_bucket_cors_configuration
+                      rule below for details. Use the resource aws_s3_bucket_cors_configuration
                       instead.
                     items:
                       properties:
@@ -315,7 +318,7 @@ spec:
                         exposeHeaders:
                           description: One or more headers in the response that you
                             want customers to be able to access from their applications
-                            .
+                            (for example, from a JavaScript XMLHttpRequest object).
                           items:
                             type: string
                           type: array
@@ -327,12 +330,12 @@ spec:
                     type: array
                   grant:
                     description: An ACL policy grant. See Grant below for details.
-                      Conflicts with acl. Terraform will only perform drift detection
-                      if a configuration value is provided. Use the resource aws_s3_bucket_acl
-                      instead.
+                      Conflicts with acl. Use the resource aws_s3_bucket_acl instead.
                     items:
                       properties:
                         id:
+                          description: Canonical user id to grant for. Used only when
+                            type is CanonicalUser.
                           type: string
                         permissions:
                           description: List of permissions to apply for grantee. Valid
@@ -352,12 +355,12 @@ spec:
                       type: object
                     type: array
                   id:
+                    description: The name of the bucket.
                     type: string
                   lifecycleRule:
                     description: A configuration of object lifecycle management. See
-                      Lifecycle Rule below for details. Terraform will only perform
-                      drift detection if a configuration value is provided. Use the
-                      resource aws_s3_bucket_lifecycle_configuration instead.
+                      Lifecycle Rule below for details. Use the resource aws_s3_bucket_lifecycle_configuration
+                      instead.
                     items:
                       properties:
                         abortIncompleteMultipartUploadDays:
@@ -365,6 +368,7 @@ spec:
                             a multipart upload when the multipart upload must be completed.
                           type: number
                         enabled:
+                          description: Specifies lifecycle rule status.
                           type: boolean
                         expiration:
                           description: Specifies a period in the object's expire.
@@ -372,11 +376,16 @@ spec:
                           items:
                             properties:
                               date:
+                                description: Specifies the date after which you want
+                                  the corresponding action to take effect.
                                 type: string
                               days:
+                                description: Specifies the number of days after object
+                                  creation when the specific rule action takes effect.
                                 type: number
                               expiredObjectDeleteMarker:
-                                description: On a versioned bucket , you can add this
+                                description: On a versioned bucket (versioning-enabled
+                                  or versioning-suspended bucket), you can add this
                                   element in the lifecycle configuration to direct
                                   Amazon S3 to delete expired object delete markers.
                                   This cannot be specified with Days or Date in a
@@ -385,6 +394,8 @@ spec:
                             type: object
                           type: array
                         id:
+                          description: Unique identifier for the rule. Must be less
+                            than or equal to 255 characters in length.
                           type: string
                         noncurrentVersionExpiration:
                           description: Specifies when noncurrent object versions expire.
@@ -392,6 +403,8 @@ spec:
                           items:
                             properties:
                               days:
+                                description: Specifies the number of days after object
+                                  creation when the specific rule action takes effect.
                                 type: number
                             type: object
                           type: array
@@ -401,16 +414,23 @@ spec:
                           items:
                             properties:
                               days:
+                                description: Specifies the number of days after object
+                                  creation when the specific rule action takes effect.
                                 type: number
                               storageClass:
+                                description: Specifies the Amazon S3 storage class
+                                  to which you want the object to transition.
                                 type: string
                             type: object
                           type: array
                         prefix:
+                          description: Object key prefix identifying one or more objects
+                            to which the rule applies.
                           type: string
                         tags:
                           additionalProperties:
                             type: string
+                          description: Specifies object tags key and value.
                           type: object
                         transition:
                           description: Specifies a period in the object's transitions.
@@ -418,10 +438,16 @@ spec:
                           items:
                             properties:
                               date:
+                                description: Specifies the date after which you want
+                                  the corresponding action to take effect.
                                 type: string
                               days:
+                                description: Specifies the number of days after object
+                                  creation when the specific rule action takes effect.
                                 type: number
                               storageClass:
+                                description: Specifies the Amazon S3 storage class
+                                  to which you want the object to transition.
                                 type: string
                             type: object
                           type: array
@@ -429,9 +455,8 @@ spec:
                     type: array
                   logging:
                     description: A configuration of S3 bucket logging parameters.
-                      See Logging below for details. Terraform will only perform drift
-                      detection if a configuration value is provided. Use the resource
-                      aws_s3_bucket_logging instead.
+                      See Logging below for details. Use the resource aws_s3_bucket_logging
+                      instead.
                     items:
                       properties:
                         targetBucket:
@@ -445,24 +470,30 @@ spec:
                     type: array
                   objectLockConfiguration:
                     description: A configuration of S3 object locking. See Object
-                      Lock Configuration below for details. Terraform wil only perform
-                      drift detection if a configuration value is provided. Use the
-                      object_lock_enabled parameter and the resource aws_s3_bucket_object_lock_configuration
+                      Lock Configuration below for details. Use the object_lock_enabled
+                      parameter and the resource aws_s3_bucket_object_lock_configuration
                       instead.
                     items:
                       properties:
                         objectLockEnabled:
+                          description: Indicates whether this bucket has an Object
+                            Lock configuration enabled. Valid value is Enabled. Use
+                            the top-level argument object_lock_enabled instead.
                           type: string
                         rule:
+                          description: The Object Lock rule in place for this bucket
+                            (documented below).
                           items:
                             properties:
                               defaultRetention:
                                 description: The default retention period that you
                                   want to apply to new objects placed in this bucket
-                                  .
+                                  (documented below).
                                 items:
                                   properties:
                                     days:
+                                      description: The number of days that you want
+                                        to specify for the default retention period.
                                       type: number
                                     mode:
                                       description: The default Object Lock retention
@@ -481,20 +512,14 @@ spec:
                       type: object
                     type: array
                   policy:
-                    description: A valid bucket policy JSON document. Note that if
-                      the policy document is not specific enough , Terraform may view
-                      the policy as constantly changing in a terraform plan. In this
-                      case, please make sure you use the verbose/specific version
-                      of the policy. For more information about building AWS IAM policy
-                      documents with Terraform, see the AWS IAM Policy Document Guide.
-                      Terraform will only perform drift detection if a configuration
-                      value is provided. Use the resource aws_s3_bucket_policy instead.
+                    description: A valid bucket policy JSON document. In this case,
+                      please make sure you use the verbose/specific version of the
+                      policy. Use the resource aws_s3_bucket_policy instead.
                     type: string
                   replicationConfiguration:
                     description: A configuration of replication configuration. See
-                      Replication Configuration below for details. Terraform will
-                      only perform drift detection if a configuration value is provided.
-                      Use the resource aws_s3_bucket_replication_configuration instead.
+                      Replication Configuration below for details. Use the resource
+                      aws_s3_bucket_replication_configuration instead.
                     items:
                       properties:
                         role:
@@ -503,18 +528,19 @@ spec:
                           type: string
                         rules:
                           description: Specifies the rules managing the replication
-                            .
+                            (documented below).
                           items:
                             properties:
                               deleteMarkerReplicationStatus:
                                 description: Whether delete markers are replicated.
                                   The only valid value is Enabled. To disable, omit
                                   this argument. This argument is only valid with
-                                  V2 replication configurations .
+                                  V2 replication configurations (i.e., when filter
+                                  is used).
                                 type: string
                               destination:
                                 description: Specifies the destination for the rule
-                                  .
+                                  (documented below).
                                 items:
                                   properties:
                                     accessControlTranslation:
@@ -535,14 +561,23 @@ spec:
                                         override configuration.
                                       type: string
                                     bucket:
+                                      description: The ARN of the S3 bucket where
+                                        you want Amazon S3 to store replicas of the
+                                        object identified by the rule.
                                       type: string
                                     metrics:
-                                      description: Enables replication metrics  .
+                                      description: Enables replication metrics  (documented
+                                        below).
                                       items:
                                         properties:
                                           minutes:
+                                            description: Threshold within which objects
+                                              are to be replicated. The only valid
+                                              value is 15.
                                             type: number
                                           status:
+                                            description: The status of replication
+                                              metrics. Either Enabled or Disabled.
                                             type: string
                                         type: object
                                       type: array
@@ -553,35 +588,59 @@ spec:
                                         source selection criteria.
                                       type: string
                                     replicationTime:
-                                      description: Enables S3 Replication Time Control  .
+                                      description: Enables S3 Replication Time Control
+                                        (S3 RTC) (documented below).
                                       items:
                                         properties:
                                           minutes:
+                                            description: Threshold within which objects
+                                              are to be replicated. The only valid
+                                              value is 15.
                                             type: number
                                           status:
+                                            description: The status of RTC. Either
+                                              Enabled or Disabled.
                                             type: string
                                         type: object
                                       type: array
                                     storageClass:
+                                      description: The storage class used to store
+                                        the object. By default, Amazon S3 uses the
+                                        storage class of the source object to create
+                                        the object replica.
                                       type: string
                                   type: object
                                 type: array
                               filter:
                                 description: Filter that identifies subset of objects
-                                  to which the replication rule applies .
+                                  to which the replication rule applies (documented
+                                  below).
                                 items:
                                   properties:
                                     prefix:
+                                      description: Object keyname prefix that identifies
+                                        subset of objects to which the rule applies.
+                                        Must be less than or equal to 1024 characters
+                                        in length.
                                       type: string
                                     tags:
                                       additionalProperties:
                                         type: string
+                                      description: A map of tags that identifies subset
+                                        of objects to which the rule applies. The
+                                        rule applies only to objects having all the
+                                        tags in its tagset.
                                       type: object
                                   type: object
                                 type: array
                               id:
+                                description: Unique identifier for the rule. Must
+                                  be less than or equal to 255 characters in length.
                                 type: string
                               prefix:
+                                description: Object keyname prefix identifying one
+                                  or more objects to which the rule applies. Must
+                                  be less than or equal to 1024 characters in length.
                                 type: string
                               priority:
                                 description: The priority associated with the rule.
@@ -591,22 +650,27 @@ spec:
                                 type: number
                               sourceSelectionCriteria:
                                 description: Specifies special object selection criteria
-                                  .
+                                  (documented below).
                                 items:
                                   properties:
                                     sseKmsEncryptedObjects:
                                       description: Match SSE-KMS encrypted objects
-                                        . If specified, replica_kms_key_id in destination
-                                        must be specified as well.
+                                        (documented below). If specified, replica_kms_key_id
+                                        in destination must be specified as well.
                                       items:
                                         properties:
                                           enabled:
+                                            description: Boolean which indicates if
+                                              this criteria is enabled.
                                             type: boolean
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               status:
+                                description: The status of the rule. Either Enabled
+                                  or Disabled. The rule is ignored if status is not
+                                  Enabled.
                                 type: string
                             type: object
                           type: array
@@ -617,24 +681,24 @@ spec:
                       transfer. Can be either BucketOwner or Requester. By default,
                       the owner of the S3 bucket would incur the costs of any data
                       transfer. See Requester Pays Buckets developer guide for more
-                      information. Terraform will only perform drift detection if
-                      a configuration value is provided. Use the resource aws_s3_bucket_request_payment_configuration
+                      information. Use the resource aws_s3_bucket_request_payment_configuration
                       instead.
                     type: string
                   serverSideEncryptionConfiguration:
                     description: A configuration of server-side encryption configuration.
                       See Server Side Encryption Configuration below for details.
-                      Terraform will only perform drift detection if a configuration
-                      value is provided. Use the resource aws_s3_bucket_server_side_encryption_configuration
+                      Use the resource aws_s3_bucket_server_side_encryption_configuration
                       instead.
                     items:
                       properties:
                         rule:
+                          description: A single object for server-side encryption
+                            by default configuration. (documented below)
                           items:
                             properties:
                               applyServerSideEncryptionByDefault:
                                 description: A single object for setting server-side
-                                  encryption by default.
+                                  encryption by default. (documented below)
                                 items:
                                   properties:
                                     kmsMasterKeyId:
@@ -668,12 +732,14 @@ spec:
                     type: object
                   versioning:
                     description: A configuration of the S3 bucket versioning state.
-                      See Versioning below for details. Terraform will only perform
-                      drift detection if a configuration value is provided. Use the
-                      resource aws_s3_bucket_versioning instead.
+                      See Versioning below for details. Use the resource aws_s3_bucket_versioning
+                      instead.
                     items:
                       properties:
                         enabled:
+                          description: Enable versioning. Once you version-enable
+                            a bucket, it can never return to an unversioned state.
+                            You can, however, suspend versioning on that bucket.
                           type: boolean
                         mfaDelete:
                           description: Enable MFA delete for either Change the versioning
@@ -686,8 +752,7 @@ spec:
                     type: array
                   website:
                     description: A configuration of the S3 bucket website. See Website
-                      below for details. Terraform will only perform drift detection
-                      if a configuration value is provided. Use the resource aws_s3_bucket_website_configuration
+                      below for details. Use the resource aws_s3_bucket_website_configuration
                       instead.
                     items:
                       properties:
@@ -702,8 +767,9 @@ spec:
                         redirectAllRequestsTo:
                           description: A hostname to redirect all website requests
                             for this bucket to. Hostname can optionally be prefixed
-                            with a protocol  to use when redirecting requests. The
-                            default is the protocol that is used in the original request.
+                            with a protocol (http:// or https://) to use when redirecting
+                            requests. The default is the protocol that is used in
+                            the original request.
                           type: string
                         routingRules:
                           description: A json array containing routing rules describing

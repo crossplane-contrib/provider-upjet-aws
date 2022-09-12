@@ -27,7 +27,8 @@ type InstanceObservation struct {
 	// The running version of the database.
 	EngineVersionActual *string `json:"engineVersionActual,omitempty" tf:"engine_version_actual,omitempty"`
 
-	// The canonical hosted zone ID of the DB instance .
+	// The canonical hosted zone ID of the DB instance (to be used
+	// in a Route 53 Alias record).
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
 	// The RDS instance ID.
@@ -50,6 +51,7 @@ type InstanceObservation struct {
 
 type InstanceParameters struct {
 
+	// The allocated storage in gibibytes. If max_allocated_storage is configured, this argument represents the initial storage allocation and differences from the configuration will be ignored automatically when Storage Autoscaling occurs. If replicate_source_db is set, the value is ignored during the creation of the instance.
 	// +kubebuilder:validation:Optional
 	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
@@ -72,18 +74,29 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
+	// The AZ for the RDS instance.
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// The days to retain backups for. Must be
+	// between 0 and 35. Must be greater than 0 if the database is used as a source for a Read Replica. See Read Replica.
 	// +kubebuilder:validation:Optional
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
+	// The daily time range (in UTC) during which
+	// automated backups are created if they are enabled. Example: "09:46-10:16". Must
+	// not overlap with maintenance_window.
 	// +kubebuilder:validation:Optional
 	BackupWindow *string `json:"backupWindow,omitempty" tf:"backup_window,omitempty"`
 
+	// The identifier of the CA certificate for the DB instance.
 	// +kubebuilder:validation:Optional
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
+	// The character set name to use for DB
+	// encoding in Oracle and Microsoft SQL instances (collation). This can't be changed. See Oracle Character Sets
+	// Supported in Amazon RDS
+	// or Server-Level Collation for Microsoft SQL Server for more information.
 	// +kubebuilder:validation:Optional
 	CharacterSetName *string `json:"characterSetName,omitempty" tf:"character_set_name,omitempty"`
 
@@ -91,10 +104,11 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
-	// Indicates whether to enable a customer-owned IP address  for an RDS on Outposts DB instance. See CoIP for RDS on Outposts for more information.
+	// Indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS on Outposts for more information.
 	// +kubebuilder:validation:Optional
 	CustomerOwnedIPEnabled *bool `json:"customerOwnedIpEnabled,omitempty" tf:"customer_owned_ip_enabled,omitempty"`
 
+	// The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
 	// +kubebuilder:validation:Optional
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
@@ -125,21 +139,28 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
+	// The ID of the Directory Service Active Directory domain to create the instance in.
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
+	// The name of the IAM role to be used when making API calls to the Directory Service.
 	// +kubebuilder:validation:Optional
 	DomainIAMRoleName *string `json:"domainIamRoleName,omitempty" tf:"domain_iam_role_name,omitempty"`
 
-	// Set of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values . MySQL and MariaDB: audit, error, general, slowquery. PostgreSQL: postgresql, upgrade. MSSQL: agent , error. Oracle: alert, audit, listener, trace.
+	// Set of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine). MySQL and MariaDB: audit, error, general, slowquery. PostgreSQL: postgresql, upgrade. MSSQL: agent , error. Oracle: alert, audit, listener, trace.
 	// +kubebuilder:validation:Optional
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
+	// The database engine to use.  For supported values, see the Engine parameter in API action CreateDBInstance. Cannot be specified for a replica.
+	// Note that for Amazon Aurora instances the engine must match the DB cluster's engine'.
+	// For information on the difference between the available Aurora MySQL engines
+	// see Comparison between Aurora MySQL 1 and Aurora MySQL 2
+	// in the Amazon RDS User Guide.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// The engine version to use. If auto_minor_version_upgrade
-	// is enabled, you can provide a prefix of the version such as 5.7 .
+	// is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10).
 	// The actual engine version used is returned in the attribute engine_version_actual, see Attributes Reference below.
 	// For supported values, see the EngineVersion parameter in API action CreateDBInstance.
 	// Note that for Amazon Aurora instances the engine version must match the DB cluster's engine version'. Cannot be specified for a replica.
@@ -153,11 +174,12 @@ type InstanceParameters struct {
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
 	// Specifies whether or
-	// mappings of AWS Identity and Access Management  accounts to database
+	// mappings of AWS Identity and Access Management (IAM) accounts to database
 	// accounts is enabled.
 	// +kubebuilder:validation:Optional
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
+	// The instance type of the RDS instance.
 	// +kubebuilder:validation:Required
 	InstanceClass *string `json:"instanceClass" tf:"instance_class,omitempty"`
 
@@ -184,6 +206,11 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
 
+	// The window to perform maintenance in.
+	// Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00". See RDS
+	// Maintenance Window
+	// docs
+	// for more information.
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -216,9 +243,11 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MonitoringRoleArnSelector *v1.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
+	// Specifies if the RDS instance is multi-AZ
 	// +kubebuilder:validation:Optional
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
+	// The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -249,10 +278,11 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
-	// The amount of time in days to retain Performance Insights data. Either 7  or 731 . When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
+	// The amount of time in days to retain Performance Insights data. Either 7 (7 days) or 731 (2 years). When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
 
+	// The port on which the DB accepts connections.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -273,7 +303,9 @@ type InstanceParameters struct {
 
 	// Specifies that this resource is a Replicate
 	// database, and to use this value as the source database. This correlates to the
-	// identifier of another Amazon RDS Database to replicate  or ARN of the Amazon RDS Database to replicate . Note that if you are
+	// identifier of another Amazon RDS Database to replicate (if replicating within
+	// a single region) or ARN of the Amazon RDS Database to replicate (if replicating
+	// cross-region). Note that if you are
 	// creating a cross-region replica of an encrypted database you will also need to
 	// specify a kms_key_id. See DB Instance Replication and Working with
 	// PostgreSQL and MySQL Read Replicas
@@ -308,10 +340,15 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
+	// Specifies whether the DB instance is
+	// encrypted. Note that if you are creating a cross-region read replica this field
+	// is ignored and you should instead declare kms_key_id with a valid ARN. The
+	// default is false if not specified.
 	// +kubebuilder:validation:Optional
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
-	// One of "standard" , "gp2" , or "io1" . The default is "io1" if iops is
+	// One of "standard" (magnetic), "gp2" (general
+	// purpose SSD), or "io1" (provisioned IOPS SSD). The default is "io1" if iops is
 	// specified, "gp2" if not.
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
@@ -328,6 +365,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
+	// Username for the master DB user. Cannot be specified for a replica.
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
@@ -353,7 +391,7 @@ type RestoreToPointInTimeObservation struct {
 
 type RestoreToPointInTimeParameters struct {
 
-	// The date and time to restore from. Value must be a time in Universal Coordinated Time  format and must be before the latest restorable time for the DB instance. Cannot be specified with use_latest_restorable_time.
+	// The date and time to restore from. Value must be a time in Universal Coordinated Time (UTC) format and must be before the latest restorable time for the DB instance. Cannot be specified with use_latest_restorable_time.
 	// +kubebuilder:validation:Optional
 	RestoreTime *string `json:"restoreTime,omitempty" tf:"restore_time,omitempty"`
 
@@ -379,7 +417,7 @@ type S3ImportObservation struct {
 
 type S3ImportParameters struct {
 
-	// The bucket name where your backup is stored
+	// The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
 	// +kubebuilder:validation:Required
 	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
 
@@ -391,11 +429,19 @@ type S3ImportParameters struct {
 	// +kubebuilder:validation:Required
 	IngestionRole *string `json:"ingestionRole" tf:"ingestion_role,omitempty"`
 
-	// Source engine for the backup
+	// The database engine to use.  For supported values, see the Engine parameter in API action CreateDBInstance. Cannot be specified for a replica.
+	// Note that for Amazon Aurora instances the engine must match the DB cluster's engine'.
+	// For information on the difference between the available Aurora MySQL engines
+	// see Comparison between Aurora MySQL 1 and Aurora MySQL 2
+	// in the Amazon RDS User Guide.
 	// +kubebuilder:validation:Required
 	SourceEngine *string `json:"sourceEngine" tf:"source_engine,omitempty"`
 
-	// Version of the source engine used to make the backup
+	// The engine version to use. If auto_minor_version_upgrade
+	// is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10).
+	// The actual engine version used is returned in the attribute engine_version_actual, see Attributes Reference below.
+	// For supported values, see the EngineVersion parameter in API action CreateDBInstance.
+	// Note that for Amazon Aurora instances the engine version must match the DB cluster's engine version'. Cannot be specified for a replica.
 	// +kubebuilder:validation:Required
 	SourceEngineVersion *string `json:"sourceEngineVersion" tf:"source_engine_version,omitempty"`
 }

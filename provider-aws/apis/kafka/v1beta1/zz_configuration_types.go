@@ -15,7 +15,7 @@ import (
 
 type ConfigurationObservation struct {
 
-	// Amazon Resource Name  of the configuration.
+	// Amazon Resource Name (ARN) of the configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -62,7 +62,7 @@ type ConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Configuration is the Schema for the Configurations API. Terraform resource for managing an Amazon Managed Streaming for Kafka configuration
+// Configuration is the Schema for the Configurations API. Upbound official provider resource for managing an amazon managed streaming for kafka configuration
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,6 +14,8 @@ import (
 )
 
 type BucketNotificationObservation struct {
+
+	// Unique identifier for each of the notification configurations.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -63,12 +65,15 @@ type LambdaFunctionParameters struct {
 	// +kubebuilder:validation:Required
 	Events []*string `json:"events" tf:"events,omitempty"`
 
+	// Object key name prefix.
 	// +kubebuilder:validation:Optional
 	FilterPrefix *string `json:"filterPrefix,omitempty" tf:"filter_prefix,omitempty"`
 
+	// Object key name suffix.
 	// +kubebuilder:validation:Optional
 	FilterSuffix *string `json:"filterSuffix,omitempty" tf:"filter_suffix,omitempty"`
 
+	// Unique identifier for each of the notification configurations.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -85,12 +90,15 @@ type QueueParameters struct {
 	// +kubebuilder:validation:Required
 	Events []*string `json:"events" tf:"events,omitempty"`
 
+	// Object key name prefix.
 	// +kubebuilder:validation:Optional
 	FilterPrefix *string `json:"filterPrefix,omitempty" tf:"filter_prefix,omitempty"`
 
+	// Object key name suffix.
 	// +kubebuilder:validation:Optional
 	FilterSuffix *string `json:"filterSuffix,omitempty" tf:"filter_suffix,omitempty"`
 
+	// Unique identifier for each of the notification configurations.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -117,12 +125,15 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Required
 	Events []*string `json:"events" tf:"events,omitempty"`
 
+	// Object key name prefix.
 	// +kubebuilder:validation:Optional
 	FilterPrefix *string `json:"filterPrefix,omitempty" tf:"filter_prefix,omitempty"`
 
+	// Object key name suffix.
 	// +kubebuilder:validation:Optional
 	FilterSuffix *string `json:"filterSuffix,omitempty" tf:"filter_suffix,omitempty"`
 
+	// Unique identifier for each of the notification configurations.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

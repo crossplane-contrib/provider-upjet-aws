@@ -160,9 +160,11 @@ spec:
                           type: string
                         fromEmailAddress:
                           description: Sender’s email address or sender’s display
-                            name with their email address . Escaped double quotes
-                            are required around display names that contain certain
-                            characters as specified in RFC 5322.
+                            name with their email address (e.g., john@example.com,
+                            John Smith <john@example.com> or \"John Smith Ph.D.\"
+                            <john@example.com>). Escaped double quotes are required
+                            around display names that contain certain characters as
+                            specified in RFC 5322.
                           type: string
                         replyToEmailAddress:
                           description: REPLY-TO email address.
@@ -198,6 +200,7 @@ spec:
                           items:
                             properties:
                               lambdaArn:
+                                description: ARN of the user pool.
                                 type: string
                               lambdaVersion:
                                 type: string
@@ -215,6 +218,7 @@ spec:
                           items:
                             properties:
                               lambdaArn:
+                                description: ARN of the user pool.
                                 type: string
                               lambdaVersion:
                                 type: string
@@ -257,9 +261,14 @@ spec:
                       type: object
                     type: array
                   mfaConfiguration:
-                    description: Multi-Factor Authentication  configuration for the
-                      User Pool. Defaults of OFF. Valid values are OFF , ON , or OPTIONAL
-                      .
+                    description: Multi-Factor Authentication (MFA) configuration for
+                      the User Pool. Defaults of OFF. Valid values are OFF (MFA Tokens
+                      are not required), ON (MFA is required for all users to sign
+                      in; requires at least one of sms_configuration or software_token_mfa_configuration
+                      to be configured), or OPTIONAL (MFA Will be required only for
+                      individual users who have MFA Enabled; requires at least one
+                      of sms_configuration or software_token_mfa_configuration to
+                      be configured).
                     type: string
                   name:
                     type: string
@@ -367,13 +376,13 @@ spec:
                       be replaced with the code.
                     type: string
                   smsConfiguration:
-                    description: Configuration block for Short Message Service  settings.
-                      Detailed below. These settings apply to SMS user verification
-                      and SMS Multi-Factor Authentication . Due to Cognito API restrictions,
-                      the SMS configuration cannot be removed without recreating the
-                      Cognito User Pool. For user data safety, this resource will
-                      ignore the removal of this configuration by disabling drift
-                      detection. To force resource recreation after this configuration
+                    description: Configuration block for Short Message Service (SMS)
+                      settings. Detailed below. These settings apply to SMS user verification
+                      and SMS Multi-Factor Authentication (MFA). Due to Cognito API
+                      restrictions, the SMS configuration cannot be removed without
+                      recreating the Cognito User Pool. For user data safety, this
+                      resource will ignore the removal of this configuration by disabling
+                      drift detection. To force resource recreation after this configuration
                       has been applied, see the taint command.
                     items:
                       properties:
@@ -474,15 +483,16 @@ spec:
                     type: string
                   softwareTokenMfaConfiguration:
                     description: Configuration block for software token Mult-Factor
-                      Authentication  settings. Detailed below.
+                      Authentication (MFA) settings. Detailed below.
                     items:
                       properties:
                         enabled:
-                          description: Boolean whether to enable software token Multi-Factor  tokens,
-                            such as Time-based One-Time Password . To disable software
-                            token MFA When sms_configuration is not present, the mfa_configuration
-                            argument must be set to OFF and the software_token_mfa_configuration
-                            configuration block must be fully removed.
+                          description: Boolean whether to enable software token Multi-Factor
+                            (MFA) tokens, such as Time-based One-Time Password (TOTP).
+                            To disable software token MFA When sms_configuration is
+                            not present, the mfa_configuration argument must be set
+                            to OFF and the software_token_mfa_configuration configuration
+                            block must be fully removed.
                           type: boolean
                       required:
                       - enabled

@@ -15,7 +15,7 @@ import (
 
 type CertificateObservation struct {
 
-	// Amazon Resource Name  of the certificate.
+	// Amazon Resource Name (ARN) of the certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The PEM-encoded certificate value.
@@ -29,7 +29,7 @@ type CertificateObservation struct {
 
 type CertificateParameters struct {
 
-	// Amazon Resource Name  of the certificate authority.
+	// Amazon Resource Name (ARN) of the certificate authority.
 	// +crossplane:generate:reference:type=CertificateAuthority
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`

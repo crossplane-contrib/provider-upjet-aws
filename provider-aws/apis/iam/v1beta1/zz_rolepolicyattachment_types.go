@@ -33,7 +33,7 @@ type RolePolicyAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 
-	// he name of the IAM role to which the policy should be applied
+	// The name of the IAM role to which the policy should be applied
 	// +crossplane:generate:reference:type=Role
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`

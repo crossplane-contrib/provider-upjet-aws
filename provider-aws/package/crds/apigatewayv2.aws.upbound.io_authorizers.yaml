@@ -150,7 +150,7 @@ spec:
                       values: 1.0, 2.0.'
                     type: string
                   authorizerResultTtlInSeconds:
-                    description: The time to live  for cached authorizer results,
+                    description: The time to live (TTL) for cached authorizer results,
                       in seconds. If it equals 0, authorization caching is disabled.
                       If it is greater than 0, API Gateway caches authorizer responses.
                       The maximum value is 3600, or 1 hour. Defaults to 300. Supported
@@ -162,8 +162,8 @@ spec:
                       parameters. For HTTP APIs, specify JWT to use JSON Web Tokens.'
                     type: string
                   authorizerUri:
-                    description: The authorizer's Uniform Resource Identifier . For
-                      REQUEST authorizers this must be a well-formed Lambda function
+                    description: The authorizer's Uniform Resource Identifier (URI).
+                      For REQUEST authorizers this must be a well-formed Lambda function
                       URI, such as the invoke_arn attribute of the aws_lambda_function
                       resource. Supported only for REQUEST authorizers. Must be between
                       1 and 2048 characters in length.
@@ -251,8 +251,8 @@ spec:
                     description: The identity sources for which authorization is requested.
                       For REQUEST authorizers the value is a list of one or more mapping
                       expressions of the specified request parameters. For JWT authorizers
-                      the single entry specifies where to extract the JSON Web Token  from
-                      inbound requests.
+                      the single entry specifies where to extract the JSON Web Token
+                      (JWT) from inbound requests.
                     items:
                       type: string
                     type: array

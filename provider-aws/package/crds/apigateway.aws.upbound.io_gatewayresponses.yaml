@@ -71,7 +71,8 @@ spec:
                   responseParameters:
                     additionalProperties:
                       type: string
-                    description: A map specifying the parameters  of the Gateway Response.
+                    description: A map specifying the parameters (paths, query strings
+                      and headers) of the Gateway Response.
                     type: object
                   responseTemplates:
                     additionalProperties:

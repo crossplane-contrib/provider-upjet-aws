@@ -25,13 +25,13 @@ type BackupPolicyBackupPolicyParameters struct {
 
 type BackupPolicyObservation struct {
 
-	// The ID that identifies the file system .
+	// The ID that identifies the file system (e.g., fs-ccfc0d65).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type BackupPolicyParameters struct {
 
-	// A backup_policy object .
+	// A backup_policy object (documented below).
 	// +kubebuilder:validation:Required
 	BackupPolicy []BackupPolicyBackupPolicyParameters `json:"backupPolicy" tf:"backup_policy,omitempty"`
 

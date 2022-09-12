@@ -24,7 +24,7 @@ type SigningCertificateObservation struct {
 
 type SigningCertificateParameters struct {
 
-	// ncoded format.
+	// encoded format.
 	// +kubebuilder:validation:Required
 	CertificateBody *string `json:"certificateBody" tf:"certificate_body,omitempty"`
 

@@ -18,6 +18,7 @@ type SpotInstanceRequestCapacityReservationSpecificationCapacityReservationTarge
 
 type SpotInstanceRequestCapacityReservationSpecificationCapacityReservationTargetParameters struct {
 
+	// The Spot Instance Request ID.
 	// +kubebuilder:validation:Optional
 	CapacityReservationID *string `json:"capacityReservationId,omitempty" tf:"capacity_reservation_id,omitempty"`
 
@@ -47,6 +48,8 @@ type SpotInstanceRequestCreditSpecificationParameters struct {
 }
 
 type SpotInstanceRequestEBSBlockDeviceObservation struct {
+
+	// The Spot Instance Request ID.
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 }
 
@@ -64,9 +67,11 @@ type SpotInstanceRequestEBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
+	// The Spot Instance Request ID.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// The Spot Instance Request ID.
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
@@ -147,6 +152,7 @@ type SpotInstanceRequestMetadataOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
+	// A map of tags to assign to the Spot Instance Request. These tags are not automatically applied to the launched Instance. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
 }
@@ -165,6 +171,7 @@ type SpotInstanceRequestNetworkInterfaceParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
+	// The Spot Instance Request ID.
 	// +kubebuilder:validation:Required
 	NetworkInterfaceID *string `json:"networkInterfaceId" tf:"network_interface_id,omitempty"`
 }
@@ -184,6 +191,7 @@ type SpotInstanceRequestObservation struct {
 
 	PasswordData *string `json:"passwordData,omitempty" tf:"password_data,omitempty"`
 
+	// The Spot Instance Request ID.
 	PrimaryNetworkInterfaceID *string `json:"primaryNetworkInterfaceId,omitempty" tf:"primary_network_interface_id,omitempty"`
 
 	// The private DNS name assigned to the instance. Can only be
@@ -206,7 +214,7 @@ type SpotInstanceRequestObservation struct {
 	// of the Spot Instance Request.
 	SpotBidStatus *string `json:"spotBidStatus,omitempty" tf:"spot_bid_status,omitempty"`
 
-	// The Instance ID  that is currently fulfilling
+	// The Instance ID (if any) that is currently fulfilling
 	// the Spot Instance request.
 	SpotInstanceID *string `json:"spotInstanceId,omitempty" tf:"spot_instance_id,omitempty"`
 
@@ -230,7 +238,7 @@ type SpotInstanceRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The required duration for the Spot instances, in minutes. This value must be a multiple of 60 .
+	// The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
 	// The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
 	// Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
 	// +kubebuilder:validation:Optional
@@ -269,6 +277,7 @@ type SpotInstanceRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	Hibernation *bool `json:"hibernation,omitempty" tf:"hibernation,omitempty"`
 
+	// The Spot Instance Request ID.
 	// +kubebuilder:validation:Optional
 	HostID *string `json:"hostId,omitempty" tf:"host_id,omitempty"`
 
@@ -350,6 +359,7 @@ type SpotInstanceRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	SpotType *string `json:"spotType,omitempty" tf:"spot_type,omitempty"`
 
+	// The Spot Instance Request ID.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -392,20 +402,18 @@ type SpotInstanceRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
-	// The start date and time of the request, in UTC RFC3339 format. The default is to start fulfilling the request immediately.
+	// The start date and time of the request, in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ). The default is to start fulfilling the request immediately.
 	// +kubebuilder:validation:Optional
 	ValidFrom *string `json:"validFrom,omitempty" tf:"valid_from,omitempty"`
 
-	// The end date and time of the request, in UTC RFC3339 format. At this point, no new Spot instance requests are placed or enabled to fulfill the request. The default end date is 7 days from the current date.
+	// The end date and time of the request, in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new Spot instance requests are placed or enabled to fulfill the request. The default end date is 7 days from the current date.
 	// +kubebuilder:validation:Optional
 	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
 
+	// A map of tags to assign to the Spot Instance Request. These tags are not automatically applied to the launched Instance. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	VolumeTags map[string]*string `json:"volumeTags,omitempty" tf:"volume_tags,omitempty"`
 
-	// If set, Terraform will
-	// wait for the Spot Request to be fulfilled, and will throw an error if the
-	// timeout of 10m is reached.
 	// +kubebuilder:validation:Optional
 	WaitForFulfillment *bool `json:"waitForFulfillment,omitempty" tf:"wait_for_fulfillment,omitempty"`
 }
@@ -413,6 +421,7 @@ type SpotInstanceRequestParameters struct {
 type SpotInstanceRequestRootBlockDeviceObservation struct {
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
+	// The Spot Instance Request ID.
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 }
 
@@ -427,6 +436,7 @@ type SpotInstanceRequestRootBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
+	// The Spot Instance Request ID.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 

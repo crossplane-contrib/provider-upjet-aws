@@ -339,7 +339,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The ID that identifies the file system .
+                    description: The ID that identifies the file system (e.g., fs-ccfc0d65).
                     type: string
                 type: object
               conditions:

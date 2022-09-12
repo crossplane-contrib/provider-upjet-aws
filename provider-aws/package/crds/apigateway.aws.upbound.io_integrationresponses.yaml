@@ -72,7 +72,8 @@ spec:
                       without modification.
                     type: string
                   httpMethod:
-                    description: The HTTP method
+                    description: The HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
+                      ANY)
                     type: string
                   httpMethodRef:
                     description: Reference to a Method in apigateway to populate httpMethod.

@@ -57,7 +57,7 @@ type ManagedPrefixListObservation struct {
 
 type ManagedPrefixListParameters struct {
 
-	// Address family  of this prefix list.
+	// Address family (IPv4 or IPv6) of this prefix list.
 	// +kubebuilder:validation:Required
 	AddressFamily *string `json:"addressFamily" tf:"address_family,omitempty"`
 

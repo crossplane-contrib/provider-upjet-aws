@@ -27,19 +27,19 @@ type VPCParameters struct {
 
 type ZoneObservation struct {
 
-	// The Amazon Resource Name  of the Hosted Zone.
+	// The Amazon Resource Name (ARN) of the Hosted Zone.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A list of name servers in associated  delegation set.
+	// A list of name servers in associated (or default) delegation set.
 	// Find more about delegation sets in AWS docs.
 	NameServers []*string `json:"nameServers,omitempty" tf:"name_servers,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Configuration block specifying VPC to associate with a private hosted zone. Conflicts with the delegation_set_id argument in this resource and any aws_route53_zone_association resource specifying the same zone ID. Detailed below.
+	// Configuration block(s) specifying VPC(s) to associate with a private hosted zone. Conflicts with the delegation_set_id argument in this resource and any aws_route53_zone_association resource specifying the same zone ID. Detailed below.
 	VPC []VPCObservation `json:"vpc,omitempty" tf:"vpc,omitempty"`
 
 	// The Hosted Zone ID. This can be referenced by zone records.
@@ -48,7 +48,7 @@ type ZoneObservation struct {
 
 type ZoneParameters struct {
 
-	// A comment for the hosted zone. Defaults to 'Managed by Terraform'.
+	// A comment for the hosted zone.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
@@ -65,7 +65,6 @@ type ZoneParameters struct {
 	// +kubebuilder:validation:Optional
 	DelegationSetIDSelector *v1.Selector `json:"delegationSetIdSelector,omitempty" tf:"-"`
 
-	// Whether to destroy all records  in the zone when destroying the zone.
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 

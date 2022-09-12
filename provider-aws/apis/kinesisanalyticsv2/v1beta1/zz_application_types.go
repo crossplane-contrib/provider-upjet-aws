@@ -197,6 +197,8 @@ type CheckpointConfigurationParameters struct {
 }
 
 type CloudwatchLoggingOptionsObservation struct {
+
+	// The application identifier.
 	CloudwatchLoggingOptionID *string `json:"cloudwatchLoggingOptionId,omitempty" tf:"cloudwatch_logging_option_id,omitempty"`
 }
 
@@ -226,7 +228,7 @@ type CsvMappingParametersObservation struct {
 
 type CsvMappingParametersParameters struct {
 
-	// The column delimiter. For example, in a CSV format, a comma  is the typical column delimiter.
+	// The column delimiter. For example, in a CSV format, a comma (,) is the typical column delimiter.
 	// +kubebuilder:validation:Required
 	RecordColumnDelimiter *string `json:"recordColumnDelimiter" tf:"record_column_delimiter,omitempty"`
 
@@ -287,6 +289,7 @@ type InputLambdaProcessorObservation struct {
 
 type InputLambdaProcessorParameters struct {
 
+	// The ARN of the application.
 	// +kubebuilder:validation:Required
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }
@@ -294,6 +297,7 @@ type InputLambdaProcessorParameters struct {
 type InputObservation struct {
 	InAppStreamNames []*string `json:"inAppStreamNames,omitempty" tf:"in_app_stream_names,omitempty"`
 
+	// The application identifier.
 	InputID *string `json:"inputId,omitempty" tf:"input_id,omitempty"`
 }
 
@@ -330,7 +334,7 @@ type InputParameters struct {
 	// +kubebuilder:validation:Optional
 	KinesisFirehoseInput []KinesisFirehoseInputParameters `json:"kinesisFirehoseInput,omitempty" tf:"kinesis_firehose_input,omitempty"`
 
-	// If the streaming source is a Kinesis data stream, identifies the stream's Amazon Resource Name .
+	// If the streaming source is a Kinesis data stream, identifies the stream's Amazon Resource Name (ARN).
 	// +kubebuilder:validation:Optional
 	KinesisStreamsInput []KinesisStreamsInputParameters `json:"kinesisStreamsInput,omitempty" tf:"kinesis_streams_input,omitempty"`
 
@@ -354,12 +358,15 @@ type InputSchemaObservation struct {
 
 type InputSchemaParameters struct {
 
+	// Describes the mapping of each data element in the streaming source to the corresponding column in the in-application stream.
 	// +kubebuilder:validation:Required
 	RecordColumn []RecordColumnParameters `json:"recordColumn" tf:"record_column,omitempty"`
 
+	// Specifies the encoding of the records in the streaming source. For example, UTF-8.
 	// +kubebuilder:validation:Optional
 	RecordEncoding *string `json:"recordEncoding,omitempty" tf:"record_encoding,omitempty"`
 
+	// Specifies the format of the records on the streaming source.
 	// +kubebuilder:validation:Required
 	RecordFormat []RecordFormatParameters `json:"recordFormat" tf:"record_format,omitempty"`
 }
@@ -389,6 +396,7 @@ type KinesisFirehoseInputObservation struct {
 
 type KinesisFirehoseInputParameters struct {
 
+	// The ARN of the application.
 	// +kubebuilder:validation:Required
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }
@@ -398,6 +406,7 @@ type KinesisFirehoseOutputObservation struct {
 
 type KinesisFirehoseOutputParameters struct {
 
+	// The ARN of the application.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/firehose/v1beta1.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -417,6 +426,7 @@ type KinesisStreamsInputObservation struct {
 
 type KinesisStreamsInputParameters struct {
 
+	// The ARN of the application.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -436,6 +446,7 @@ type KinesisStreamsOutputObservation struct {
 
 type KinesisStreamsOutputParameters struct {
 
+	// The ARN of the application.
 	// +kubebuilder:validation:Required
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }
@@ -445,6 +456,7 @@ type LambdaOutputObservation struct {
 
 type LambdaOutputParameters struct {
 
+	// The ARN of the application.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -464,7 +476,7 @@ type MappingParametersCsvMappingParametersObservation struct {
 
 type MappingParametersCsvMappingParametersParameters struct {
 
-	// The column delimiter. For example, in a CSV format, a comma  is the typical column delimiter.
+	// The column delimiter. For example, in a CSV format, a comma (,) is the typical column delimiter.
 	// +kubebuilder:validation:Required
 	RecordColumnDelimiter *string `json:"recordColumnDelimiter" tf:"record_column_delimiter,omitempty"`
 
@@ -488,7 +500,7 @@ type MappingParametersObservation struct {
 
 type MappingParametersParameters struct {
 
-	// Provides additional mapping information when the record format uses delimiters .
+	// Provides additional mapping information when the record format uses delimiters (for example, CSV).
 	// +kubebuilder:validation:Optional
 	CsvMappingParameters []CsvMappingParametersParameters `json:"csvMappingParameters,omitempty" tf:"csv_mapping_parameters,omitempty"`
 
@@ -515,6 +527,8 @@ type MonitoringConfigurationParameters struct {
 }
 
 type OutputObservation struct {
+
+	// The application identifier.
 	OutputID *string `json:"outputId,omitempty" tf:"output_id,omitempty"`
 }
 
@@ -556,7 +570,7 @@ type ParallelismConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Parallelism *float64 `json:"parallelism,omitempty" tf:"parallelism,omitempty"`
 
-	// Describes the number of parallel tasks that a Flink-based Kinesis Data Analytics application can perform per Kinesis Processing Unit  used by the application.
+	// Describes the number of parallel tasks that a Flink-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application.
 	// +kubebuilder:validation:Optional
 	ParallelismPerKpu *float64 `json:"parallelismPerKpu,omitempty" tf:"parallelism_per_kpu,omitempty"`
 }
@@ -597,7 +611,7 @@ type RecordFormatMappingParametersObservation struct {
 
 type RecordFormatMappingParametersParameters struct {
 
-	// Provides additional mapping information when the record format uses delimiters .
+	// Provides additional mapping information when the record format uses delimiters (for example, CSV).
 	// +kubebuilder:validation:Optional
 	CsvMappingParameters []MappingParametersCsvMappingParametersParameters `json:"csvMappingParameters,omitempty" tf:"csv_mapping_parameters,omitempty"`
 
@@ -611,7 +625,7 @@ type RecordFormatObservation struct {
 
 type RecordFormatParameters struct {
 
-	// Provides additional mapping information specific to the record format  on the streaming source.
+	// Provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.
 	// +kubebuilder:validation:Required
 	MappingParameters []MappingParametersParameters `json:"mappingParameters" tf:"mapping_parameters,omitempty"`
 
@@ -620,6 +634,8 @@ type RecordFormatParameters struct {
 }
 
 type ReferenceDataSourceObservation struct {
+
+	// The application identifier.
 	ReferenceID *string `json:"referenceId,omitempty" tf:"reference_id,omitempty"`
 }
 
@@ -643,12 +659,15 @@ type ReferenceSchemaObservation struct {
 
 type ReferenceSchemaParameters struct {
 
+	// Describes the mapping of each data element in the streaming source to the corresponding column in the in-application stream.
 	// +kubebuilder:validation:Required
 	RecordColumn []ReferenceSchemaRecordColumnParameters `json:"recordColumn" tf:"record_column,omitempty"`
 
+	// Specifies the encoding of the records in the streaming source. For example, UTF-8.
 	// +kubebuilder:validation:Optional
 	RecordEncoding *string `json:"recordEncoding,omitempty" tf:"record_encoding,omitempty"`
 
+	// Specifies the format of the records on the streaming source.
 	// +kubebuilder:validation:Required
 	RecordFormat []ReferenceSchemaRecordFormatParameters `json:"recordFormat" tf:"record_format,omitempty"`
 }
@@ -675,7 +694,7 @@ type ReferenceSchemaRecordFormatObservation struct {
 
 type ReferenceSchemaRecordFormatParameters struct {
 
-	// Provides additional mapping information specific to the record format  on the streaming source.
+	// Provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.
 	// +kubebuilder:validation:Required
 	MappingParameters []RecordFormatMappingParametersParameters `json:"mappingParameters" tf:"mapping_parameters,omitempty"`
 
@@ -702,6 +721,7 @@ type S3ContentLocationObservation struct {
 
 type S3ContentLocationParameters struct {
 
+	// The ARN of the application.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -738,6 +758,7 @@ type S3ReferenceDataSourceObservation struct {
 
 type S3ReferenceDataSourceParameters struct {
 
+	// The ARN of the application.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -786,8 +807,11 @@ type SQLApplicationConfigurationParameters struct {
 }
 
 type VPCConfigurationObservation struct {
+
+	// The application identifier.
 	VPCConfigurationID *string `json:"vpcConfigurationId,omitempty" tf:"vpc_configuration_id,omitempty"`
 
+	// The application identifier.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 

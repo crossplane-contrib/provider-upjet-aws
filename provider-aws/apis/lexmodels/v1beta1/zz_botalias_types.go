@@ -67,7 +67,7 @@ type ConversationLogsObservation struct {
 
 type ConversationLogsParameters struct {
 
-	// The Amazon Resource Name  of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
+	// The Amazon Resource Name (ARN) of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
 	// +kubebuilder:validation:Required
 	IAMRoleArn *string `json:"iamRoleArn" tf:"iam_role_arn,omitempty"`
 
@@ -78,7 +78,7 @@ type ConversationLogsParameters struct {
 
 type LogSettingsObservation struct {
 
-	// The prefix of the S3 object key for AUDIO logs or the log stream name for TEXT logs.
+	// (Computed) The prefix of the S3 object key for AUDIO logs or the log stream name for TEXT logs.
 	ResourcePrefix *string `json:"resourcePrefix,omitempty" tf:"resource_prefix,omitempty"`
 }
 
@@ -88,7 +88,7 @@ type LogSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	Destination *string `json:"destination" tf:"destination,omitempty"`
 
-	// The Amazon Resource Name  of the key used to encrypt audio logs in an S3 bucket. This can only be specified when destination is set to S3. Must be between 20 and 2048 characters in length.
+	// The Amazon Resource Name (ARN) of the key used to encrypt audio logs in an S3 bucket. This can only be specified when destination is set to S3. Must be between 20 and 2048 characters in length.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -96,7 +96,7 @@ type LogSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	LogType *string `json:"logType" tf:"log_type,omitempty"`
 
-	// The Amazon Resource Name  of the CloudWatch Logs log group or S3 bucket where the logs are delivered. Must be less than or equal to 2048 characters in length.
+	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket where the logs are delivered. Must be less than or equal to 2048 characters in length.
 	// +kubebuilder:validation:Required
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }

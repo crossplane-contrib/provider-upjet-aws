@@ -71,7 +71,7 @@ spec:
                   alarmActions:
                     description: The list of actions to execute when this alarm transitions
                       into an ALARM state from any other state. Each action is specified
-                      as an Amazon Resource Name .
+                      as an Amazon Resource Name (ARN).
                     items:
                       type: string
                     type: array
@@ -115,7 +115,7 @@ spec:
                   insufficientDataActions:
                     description: The list of actions to execute when this alarm transitions
                       into an INSUFFICIENT_DATA state from any other state. Each action
-                      is specified as an Amazon Resource Name .
+                      is specified as an Amazon Resource Name (ARN).
                     items:
                       type: string
                     type: array
@@ -189,7 +189,7 @@ spec:
                   okActions:
                     description: The list of actions to execute when this alarm transitions
                       into an OK state from any other state. Each action is specified
-                      as an Amazon Resource Name .
+                      as an Amazon Resource Name (ARN).
                     items:
                       type: string
                     type: array

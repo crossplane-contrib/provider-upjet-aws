@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   addressFamily:
-                    description: Address family  of this prefix list.
+                    description: Address family (IPv4 or IPv6) of this prefix list.
                     type: string
                   entry:
                     description: Configuration block for prefix list entry. Detailed

@@ -14,11 +14,14 @@ import (
 )
 
 type BucketReplicationConfigurationObservation struct {
+
+	// The S3 source bucket name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type BucketReplicationConfigurationParameters struct {
 
+	// The name of the source S3 bucket you want Amazon S3 to monitor.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -70,6 +73,7 @@ type BucketReplicationConfigurationRuleFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	And []FilterAndParameters `json:"and,omitempty" tf:"and,omitempty"`
 
+	// An object key name prefix that identifies subset of objects to which the rule applies. Must be less than or equal to 1024 characters in length.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -83,7 +87,7 @@ type BucketReplicationConfigurationRuleObservation struct {
 
 type BucketReplicationConfigurationRuleParameters struct {
 
-	// Whether delete markers are replicated. This argument is only valid with V2 replication configurations documented below.
+	// Whether delete markers are replicated. This argument is only valid with V2 replication configurations (i.e., when filter is used)documented below.
 	// +kubebuilder:validation:Optional
 	DeleteMarkerReplication []DeleteMarkerReplicationParameters `json:"deleteMarkerReplication,omitempty" tf:"delete_marker_replication,omitempty"`
 
@@ -99,9 +103,11 @@ type BucketReplicationConfigurationRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Filter []BucketReplicationConfigurationRuleFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
+	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -113,6 +119,7 @@ type BucketReplicationConfigurationRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceSelectionCriteria []RuleSourceSelectionCriteriaParameters `json:"sourceSelectionCriteria,omitempty" tf:"source_selection_criteria,omitempty"`
 
+	// The status of the rule. Either "Enabled" or "Disabled". The rule is ignored if status is not "Enabled".
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 }
@@ -122,6 +129,7 @@ type DeleteMarkerReplicationObservation struct {
 
 type DeleteMarkerReplicationParameters struct {
 
+	// Whether delete markers should be replicated. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 }
@@ -145,6 +153,7 @@ type DestinationMetricsParameters struct {
 	// +kubebuilder:validation:Optional
 	EventThreshold []EventThresholdParameters `json:"eventThreshold,omitempty" tf:"event_threshold,omitempty"`
 
+	// The status of the Destination Metrics. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 }
@@ -154,6 +163,7 @@ type DestinationReplicationTimeObservation struct {
 
 type DestinationReplicationTimeParameters struct {
 
+	// The status of the Replication Time Control. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 
@@ -167,7 +177,7 @@ type EncryptionConfigurationObservation struct {
 
 type EncryptionConfigurationParameters struct {
 
-	// The ID  of the customer managed AWS KMS key stored in AWS Key Management Service  for the destination bucket.
+	// The ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in AWS Key Management Service (KMS) for the destination bucket.
 	// +kubebuilder:validation:Required
 	ReplicaKMSKeyID *string `json:"replicaKmsKeyId" tf:"replica_kms_key_id,omitempty"`
 }
@@ -177,6 +187,7 @@ type EventThresholdObservation struct {
 
 type EventThresholdParameters struct {
 
+	// Time in minutes. Valid values: 15.
 	// +kubebuilder:validation:Required
 	Minutes *float64 `json:"minutes" tf:"minutes,omitempty"`
 }
@@ -186,6 +197,7 @@ type ExistingObjectReplicationObservation struct {
 
 type ExistingObjectReplicationParameters struct {
 
+	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 }
@@ -195,10 +207,11 @@ type FilterAndObservation struct {
 
 type FilterAndParameters struct {
 
+	// An object key name prefix that identifies subset of objects to which the rule applies. Must be less than or equal to 1024 characters in length.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// A map of tags  that identifies a subset of objects to which the rule applies. The rule applies only to objects having all the tags in its tagset.
+	// A map of tags (key and value pairs) that identifies a subset of objects to which the rule applies. The rule applies only to objects having all the tags in its tagset.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -222,6 +235,7 @@ type ReplicaModificationsObservation struct {
 
 type ReplicaModificationsParameters struct {
 
+	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 }
@@ -231,7 +245,7 @@ type RuleDestinationObservation struct {
 
 type RuleDestinationParameters struct {
 
-	// A configuration block that specifies the overrides to use for object owners on replication documented below. Specify this only in a cross-account scenario , and you want to change replica ownership to the AWS account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS account that owns the source object. Must be used in conjunction with account owner override configuration.
+	// A configuration block that specifies the overrides to use for object owners on replication documented below. Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS account that owns the source object. Must be used in conjunction with account owner override configuration.
 	// +kubebuilder:validation:Optional
 	AccessControlTranslation []DestinationAccessControlTranslationParameters `json:"accessControlTranslation,omitempty" tf:"access_control_translation,omitempty"`
 
@@ -239,6 +253,7 @@ type RuleDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	Account *string `json:"account,omitempty" tf:"account,omitempty"`
 
+	// The ARN of the S3 bucket where you want Amazon S3 to store replicas of the objects identified by the rule.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -260,7 +275,7 @@ type RuleDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	Metrics []DestinationMetricsParameters `json:"metrics,omitempty" tf:"metrics,omitempty"`
 
-	// A configuration block that specifies S3 Replication Time Control , including whether S3 RTC is enabled and the time when all objects and operations on objects must be replicated documented below. Replication Time Control must be used in conjunction with metrics.
+	// A configuration block that specifies S3 Replication Time Control (S3 RTC), including whether S3 RTC is enabled and the time when all objects and operations on objects must be replicated documented below. Replication Time Control must be used in conjunction with metrics.
 	// +kubebuilder:validation:Optional
 	ReplicationTime []DestinationReplicationTimeParameters `json:"replicationTime,omitempty" tf:"replication_time,omitempty"`
 
@@ -274,7 +289,7 @@ type RuleSourceSelectionCriteriaObservation struct {
 
 type RuleSourceSelectionCriteriaParameters struct {
 
-	// A configuration block that you can specify for selections for modifications on replicas. Amazon S3 doesn't replicate replica modifications by default. In the latest version of replication configuration , you can specify this element and set the status to Enabled to replicate modifications on replicas.
+	// A configuration block that you can specify for selections for modifications on replicas. Amazon S3 doesn't replicate replica modifications by default. In the latest version of replication configuration (when filter is specified), you can specify this element and set the status to Enabled to replicate modifications on replicas.
 	// +kubebuilder:validation:Optional
 	ReplicaModifications []ReplicaModificationsParameters `json:"replicaModifications,omitempty" tf:"replica_modifications,omitempty"`
 
@@ -288,6 +303,7 @@ type SourceSelectionCriteriaSseKMSEncryptedObjectsObservation struct {
 
 type SourceSelectionCriteriaSseKMSEncryptedObjectsParameters struct {
 
+	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 }
@@ -297,6 +313,7 @@ type TimeObservation struct {
 
 type TimeParameters struct {
 
+	// Time in minutes. Valid values: 15.
 	// +kubebuilder:validation:Required
 	Minutes *float64 `json:"minutes" tf:"minutes,omitempty"`
 }

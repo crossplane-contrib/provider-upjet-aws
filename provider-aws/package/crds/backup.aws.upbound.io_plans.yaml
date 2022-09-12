@@ -104,12 +104,12 @@ spec:
                             before canceling the job and returning an error.
                           type: number
                         copyAction:
-                          description: Configuration block with copy operation settings.
-                            Detailed below.
+                          description: Configuration block(s) with copy operation
+                            settings. Detailed below.
                           items:
                             properties:
                               destinationVaultArn:
-                                description: An Amazon Resource Name  that uniquely
+                                description: An Amazon Resource Name (ARN) that uniquely
                                   identifies the destination backup vault for the
                                   copied backup.
                                 type: string

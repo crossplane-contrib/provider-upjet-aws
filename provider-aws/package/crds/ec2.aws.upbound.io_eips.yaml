@@ -447,18 +447,18 @@ spec:
                     description: Customer owned IP.
                     type: string
                   domain:
-                    description: Indicates if this EIP is for use in VPC  or EC2 Classic
-                      .
+                    description: Indicates if this EIP is for use in VPC (vpc) or
+                      EC2 Classic (standard).
                     type: string
                   id:
                     description: Contains the EIP allocation ID.
                     type: string
                   privateDns:
                     description: The Private DNS associated with the Elastic IP address
-                      .
+                      (if in VPC).
                     type: string
                   privateIp:
-                    description: Contains the private IP address .
+                    description: Contains the private IP address (if in VPC).
                     type: string
                   publicDns:
                     description: Public DNS associated with the Elastic IP address.

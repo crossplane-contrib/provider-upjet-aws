@@ -19,7 +19,7 @@ type MethodSettingsObservation struct {
 
 type MethodSettingsParameters struct {
 
-	// Method path defined as {resource_path}/{http_method} for an individual method override, or */* for overriding all methods in the stage. Ensure to trim any leading forward slashes in the path ).
+	// Method path defined as {resource_path}/{http_method} for an individual method override, or */* for overriding all methods in the stage. Ensure to trim any leading forward slashes in the path (e.g., trimprefix(aws_api_gateway_resource.example.path, "/")).
 	// +kubebuilder:validation:Required
 	MethodPath *string `json:"methodPath" tf:"method_path,omitempty"`
 
@@ -70,7 +70,7 @@ type SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheDataEncrypted *bool `json:"cacheDataEncrypted,omitempty" tf:"cache_data_encrypted,omitempty"`
 
-	// Specifies the time to live , in seconds, for cached responses. The higher the TTL, the longer the response will be cached.
+	// Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.
 	// +kubebuilder:validation:Optional
 	CacheTTLInSeconds *float64 `json:"cacheTtlInSeconds,omitempty" tf:"cache_ttl_in_seconds,omitempty"`
 
@@ -94,11 +94,11 @@ type SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	RequireAuthorizationForCacheControl *bool `json:"requireAuthorizationForCacheControl,omitempty" tf:"require_authorization_for_cache_control,omitempty"`
 
-	// Specifies the throttling burst limit. Default: -1 .
+	// Specifies the throttling burst limit. Default: -1 (throttling disabled).
 	// +kubebuilder:validation:Optional
 	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
-	// Specifies the throttling rate limit. Default: -1 .
+	// Specifies the throttling rate limit. Default: -1 (throttling disabled).
 	// +kubebuilder:validation:Optional
 	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
 

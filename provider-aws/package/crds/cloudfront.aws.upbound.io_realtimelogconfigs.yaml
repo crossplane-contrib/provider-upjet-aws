@@ -456,7 +456,8 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN  of the CloudFront real-time log configuration.
+                    description: The ARN (Amazon Resource Name) of the CloudFront
+                      real-time log configuration.
                     type: string
                   id:
                     description: The ID of the CloudFront real-time log configuration.

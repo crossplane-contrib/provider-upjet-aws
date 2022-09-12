@@ -65,9 +65,7 @@ spec:
               forProvider:
                 properties:
                   policy:
-                    description: The JSON policy for the SQS queue. For more information
-                      about building AWS IAM policy documents with Terraform, see
-                      the AWS IAM Policy Document Guide.
+                    description: The JSON policy for the SQS queue.
                     type: string
                   queueUrl:
                     description: The URL of the SQS Queue to which to attach the policy

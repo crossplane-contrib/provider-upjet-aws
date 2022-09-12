@@ -42,7 +42,7 @@ type ImageScanningConfigurationObservation struct {
 
 type ImageScanningConfigurationParameters struct {
 
-	// Indicates whether images are scanned after being pushed to the repository  or not scanned .
+	// Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false).
 	// +kubebuilder:validation:Required
 	ScanOnPush *bool `json:"scanOnPush" tf:"scan_on_push,omitempty"`
 }
@@ -57,7 +57,7 @@ type RepositoryObservation struct {
 	// The registry ID where the repository was created.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 
-	// The URL of the repository .
+	// The URL of the repository (in the form aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName).
 	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.

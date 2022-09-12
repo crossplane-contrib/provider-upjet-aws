@@ -53,7 +53,7 @@ type LayerVersionParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// refixed options cannot be used.
+	// prefixed options cannot be used.
 	// +kubebuilder:validation:Optional
 	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
@@ -86,7 +86,7 @@ type LayerVersionParameters struct {
 	// +kubebuilder:validation:Optional
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
-	// Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is ${filebase64sha256}  or ${base64sha256(file)} , where "file.zip" is the local filename of the lambda layer source archive.
+	// Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is ${filebase64sha256("file.11.12 or later) or ${base64sha256(file("file.11.11 and earlier), where "file.zip" is the local filename of the lambda layer source archive.
 	// +kubebuilder:validation:Optional
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
 }

@@ -76,10 +76,10 @@ spec:
                       use this name.
                     type: string
                   kmsKeyId:
-                    description: The ID of the AWS Key Management Service  key that
-                      you want Kinesis Video Streams to use to encrypt stream data.
-                      If no key ID is specified, the default, Kinesis Video-managed
-                      key  is used.
+                    description: The ID of the AWS Key Management Service (AWS KMS)
+                      key that you want Kinesis Video Streams to use to encrypt stream
+                      data. If no key ID is specified, the default, Kinesis Video-managed
+                      key (aws/kinesisvideo) is used.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -356,7 +356,8 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  specifying the Stream
+                    description: The Amazon Resource Name (ARN) specifying the Stream
+                      (same as id)
                     type: string
                   creationTime:
                     description: A time stamp that indicates when the stream was created.

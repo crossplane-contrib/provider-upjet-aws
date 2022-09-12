@@ -153,7 +153,9 @@ spec:
                     type: object
                   connectionType:
                     description: The integration input's connectionType. Valid values
-                      are INTERNET , and VPC_LINK .
+                      are INTERNET (default for connections through the public routable
+                      internet), and VPC_LINK (for private connections between API
+                      Gateway and a network load balancer in a VPC).
                     type: string
                   contentHandling:
                     description: Specifies how to handle request payload content type
@@ -171,7 +173,8 @@ spec:
                       request, specify the string arn:aws:iam::\*:user/\*.
                     type: string
                   httpMethod:
-                    description: The HTTP method when calling the associated resource.
+                    description: The HTTP method (GET, POST, PUT, DELETE, HEAD, OPTION,
+                      ANY) when calling the associated resource.
                     type: string
                   httpMethodRef:
                     description: Reference to a Method in apigateway to populate httpMethod.
@@ -247,15 +250,16 @@ spec:
                         type: object
                     type: object
                   integrationHttpMethod:
-                    description: The integration HTTP method specifying how API Gateway
-                      will interact with the back end. Required if type is AWS, AWS_PROXY,
-                      HTTP or HTTP_PROXY. Not all methods are compatible with all
-                      AWS integrations. e.g., Lambda function can only be invoked
-                      via POST.
+                    description: The integration HTTP method (GET, POST, PUT, DELETE,
+                      HEAD, OPTIONs, ANY, PATCH) specifying how API Gateway will interact
+                      with the back end. Required if type is AWS, AWS_PROXY, HTTP
+                      or HTTP_PROXY. Not all methods are compatible with all AWS integrations.
+                      e.g., Lambda function can only be invoked via POST.
                     type: string
                   passthroughBehavior:
-                    description: The integration passthrough behavior .  Required
-                      if request_templates is used.
+                    description: The integration passthrough behavior (WHEN_NO_MATCH,
+                      WHEN_NO_TEMPLATES, NEVER).  Required if request_templates is
+                      used.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -455,7 +459,9 @@ spec:
                     type: array
                   type:
                     description: The integration input's type. Valid values are HTTP
-                      , MOCK , AWS , AWS_PROXY  and HTTP_PROXY . An HTTP or HTTP_PROXY
+                      (for HTTP backends), MOCK (not calling any real backend), AWS
+                      (for AWS services), AWS_PROXY (for Lambda proxy integration)
+                      and HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY
                       integration with a connection_type of VPC_LINK is referred to
                       as a private integration and uses a VpcLink to connect API Gateway
                       to a network load balancer of a VPC.
@@ -463,8 +469,9 @@ spec:
                   uri:
                     description: The input's URI. Required if type is AWS, AWS_PROXY,
                       HTTP or HTTP_PROXY. For HTTP integrations, the URI must be a
-                      fully formed, encoded HTTP URL according to the RFC-3986 specification
-                      . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}.
+                      fully formed, encoded HTTP(S) URL according to the RFC-3986
+                      specification . For AWS integrations, the URI should be of the
+                      form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}.
                       region, subdomain and service are used to determine the right
                       endpoint. e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:012345678901:function:my-func/invocations.
                       For private integrations, the URI parameter is not used for

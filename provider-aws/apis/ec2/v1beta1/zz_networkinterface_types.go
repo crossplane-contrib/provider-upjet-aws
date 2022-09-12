@@ -45,7 +45,7 @@ type NetworkInterfaceObservation_2 struct {
 	// AWS account ID of the owner of the network interface.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
-	// Private DNS name of the network interface .
+	// Private DNS name of the network interface (IPv4).
 	PrivateDNSName *string `json:"privateDnsName,omitempty" tf:"private_dns_name,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.

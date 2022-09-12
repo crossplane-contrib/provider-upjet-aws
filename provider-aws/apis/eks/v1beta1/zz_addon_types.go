@@ -15,13 +15,13 @@ import (
 
 type AddonObservation struct {
 
-	// Amazon Resource Name  of the EKS add-on.
+	// Amazon Resource Name (ARN) of the EKS add-on.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Date and time in RFC3339 format that the EKS add-on was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// EKS Cluster name and EKS Addon name separated by a colon .
+	// EKS Cluster name and EKS Addon name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Date and time in RFC3339 format that the EKS add-on was updated.
@@ -33,12 +33,12 @@ type AddonObservation struct {
 
 type AddonParameters struct {
 
-	// n. The version must
+	// on. The version must
 	// match one of the versions returned by describe-addon-versions.
 	// +kubebuilder:validation:Optional
 	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
 
-	// 00 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores .
+	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
 	// +crossplane:generate:reference:type=Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -66,7 +66,7 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
 
-	// The Amazon Resource Name  of an
+	// The Amazon Resource Name (ARN) of an
 	// existing IAM role to bind to the add-on's service account. The role must be
 	// assigned the IAM permissions required by the add-on. If you don't specify
 	// an existing IAM role, then the add-on uses the permissions assigned to the node

@@ -15,7 +15,7 @@ import (
 
 type ExternalKeyObservation struct {
 
-	// The Amazon Resource Name  of the key.
+	// The Amazon Resource Name (ARN) of the key.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Whether the key material expires. Empty when pending key material import, otherwise KEY_MATERIAL_EXPIRES or KEY_MATERIAL_DOES_NOT_EXPIRE.
@@ -56,7 +56,7 @@ type ExternalKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyMaterialBase64SecretRef *v1.SecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
 
-	// Indicates whether the KMS key is a multi-Region  or regional  key. Defaults to false.
+	// Indicates whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
 	// +kubebuilder:validation:Optional
 	MultiRegion *bool `json:"multiRegion,omitempty" tf:"multi_region,omitempty"`
 
@@ -73,7 +73,7 @@ type ExternalKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Time at which the imported key material expires. When the key material expires, AWS KMS deletes the key material and the CMK becomes unusable. If not specified, key material does not expire. Valid values: RFC3339 time string
+	// Time at which the imported key material expires. When the key material expires, AWS KMS deletes the key material and the CMK becomes unusable. If not specified, key material does not expire. Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)
 	// +kubebuilder:validation:Optional
 	ValidTo *string `json:"validTo,omitempty" tf:"valid_to,omitempty"`
 }

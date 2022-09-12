@@ -26,7 +26,7 @@ type LoggingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
-	// Amazon Resource Name  of a CloudWatch log group. Make sure the State Machine has the correct IAM policies for logging. The ARN must end with :*
+	// Amazon Resource Name (ARN) of a CloudWatch log group. Make sure the State Machine has the correct IAM policies for logging. The ARN must end with :*
 	// +kubebuilder:validation:Optional
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 }
@@ -64,7 +64,7 @@ type StateMachineParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The Amazon Resource Name  of the IAM role to use for this state machine.
+	// The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`

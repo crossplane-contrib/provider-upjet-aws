@@ -151,8 +151,8 @@ spec:
                       be created in.
                     type: string
                   snsTopicArn:
-                    description: The Amazon Resource Name  that specifies the topic
-                      for a backup vault’s events
+                    description: The Amazon Resource Name (ARN) that specifies the
+                      topic for a backup vault’s events
                     type: string
                   snsTopicArnRef:
                     description: Reference to a Topic in sns to populate snsTopicArn.

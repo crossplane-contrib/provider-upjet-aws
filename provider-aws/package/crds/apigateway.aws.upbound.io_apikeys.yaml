@@ -65,8 +65,7 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The API key description. Defaults to "Managed by
-                      Terraform".
+                    description: The API key description.
                     type: string
                   enabled:
                     description: Specifies whether the API key can be used by callers.
@@ -285,7 +284,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name
+                    description: Amazon Resource Name (ARN)
                     type: string
                   createdDate:
                     description: The creation date of the API key

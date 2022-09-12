@@ -100,7 +100,8 @@ spec:
                     description: Specifies whether a read-only replica will be automatically
                       promoted to read/write primary if the existing primary fails.
                       If enabled, number_cache_clusters must be greater than 1. Must
-                      be enabled for Redis  replication groups. Defaults to false.
+                      be enabled for Redis (cluster mode enabled) replication groups.
+                      Defaults to false.
                     type: boolean
                   availabilityZones:
                     description: List of EC2 availability zones in which the replication
@@ -119,10 +120,10 @@ spec:
                     items:
                       properties:
                         numNodeGroups:
-                          description: Number of node groups  for this Redis replication
-                            group. Changing this number will trigger an online resizing
-                            operation before other settings modifications. Required
-                            unless global_replication_group_id is set.
+                          description: Number of node groups (shards) for this Redis
+                            replication group. Changing this number will trigger an
+                            online resizing operation before other settings modifications.
+                            Required unless global_replication_group_id is set.
                           type: number
                         replicasPerNodeGroup:
                           description: Number of replica nodes in each node group.
@@ -137,7 +138,7 @@ spec:
                       must be set to true when using r6gd nodes.
                     type: boolean
                   description:
-                    description: reated description for the replication group. Must
+                    description: created description for the replication group. Must
                       not be empty.
                     type: string
                   engine:
@@ -155,9 +156,9 @@ spec:
                       Attributes Reference below.
                     type: string
                   finalSnapshotIdentifier:
-                    description: The name of your final node group  snapshot. ElastiCache
-                      creates the snapshot from the primary node in the cluster. If
-                      omitted, no final snapshot will be made.
+                    description: The name of your final node group (shard) snapshot.
+                      ElastiCache creates the snapshot from the primary node in the
+                      cluster. If omitted, no final snapshot will be made.
                     type: string
                   globalReplicationGroupId:
                     description: The ID of the global replication group to which this
@@ -165,7 +166,8 @@ spec:
                       the replication group is added to the specified global replication
                       group as a secondary replication group; otherwise, the replication
                       group is not part of any global replication group. If global_replication_group_id
-                      is set, the num_node_groups parameter  cannot be set.
+                      is set, the num_node_groups parameter (or the num_node_groups
+                      parameter of the deprecated cluster_mode block) cannot be set.
                     type: string
                   kmsKeyId:
                     description: The ARN of the key that you wish to use if encrypting
@@ -274,8 +276,8 @@ spec:
                       type: object
                     type: array
                   maintenanceWindow:
-                    description: 'dd:hh24:mi . The minimum maintenance window is a
-                      60 minute period. Example: sun:05:00-sun:09:00'
+                    description: 'ddd:hh24:mi (24H Clock UTC). The minimum maintenance
+                      window is a 60 minute period. Example: sun:05:00-sun:09:00'
                     type: string
                   multiAzEnabled:
                     description: Specifies whether to enable Multi-AZ Support for
@@ -289,17 +291,17 @@ spec:
                       Cannot be set if global_replication_group_id is set.
                     type: string
                   notificationTopicArn:
-                    description: ast-1:012345678999:my_sns_topic
+                    description: east-1:012345678999:my_sns_topic
                     type: string
                   numCacheClusters:
-                    description: Number of cache clusters  this replication group
-                      will have. If Multi-AZ is enabled, the value of this parameter
-                      must be at least 2. Updates will occur before other modifications.
-                      Conflicts with num_node_groups, the deprecatednumber_cache_clusters,
+                    description: Number of cache clusters (primary and replicas) this
+                      replication group will have. If Multi-AZ is enabled, the value
+                      of this parameter must be at least 2. Updates will occur before
+                      other modifications. Conflicts with num_node_groups, the deprecatednumber_cache_clusters,
                       or the deprecated cluster_mode. Defaults to 1.
                     type: number
                   numNodeGroups:
-                    description: Number of node groups  for this Redis replication
+                    description: Number of node groups (shards) for this Redis replication
                       group. Changing this number will trigger an online resizing
                       operation before other settings modifications. Required unless
                       global_replication_group_id is set.
@@ -336,7 +338,7 @@ spec:
                       resizing operation before other settings modifications.
                     type: number
                   replicationGroupDescription:
-                    description: reated description for the replication group. Must
+                    description: created description for the replication group. Must
                       not be empty.
                     type: string
                   securityGroupIdRefs:
@@ -448,13 +450,14 @@ spec:
                       example, if you set SnapshotRetentionLimit to 5, then a snapshot
                       that was taken today will be retained for 5 days before being
                       deleted. If the value of snapshot_retention_limit is set to
-                      zero , backups are turned off. Please note that setting a snapshot_retention_limit
-                      is not supported on cache.t1.micro cache nodes
+                      zero (0), backups are turned off. Please note that setting a
+                      snapshot_retention_limit is not supported on cache.t1.micro
+                      cache nodes
                     type: number
                   snapshotWindow:
-                    description: 'Daily time range  during which ElastiCache will
-                      begin taking a daily snapshot of your cache cluster. The minimum
-                      snapshot window is a 60 minute period. Example: 05:00-09:00'
+                    description: 'Daily time range (in UTC) during which ElastiCache
+                      will begin taking a daily snapshot of your cache cluster. The
+                      minimum snapshot window is a 60 minute period. Example: 05:00-09:00'
                     type: string
                   subnetGroupName:
                     description: Name of the cache subnet group to be used for the
@@ -548,7 +551,7 @@ spec:
                     type: boolean
                   userGroupIds:
                     description: 'User Group ID to associate with the replication
-                      group. Only a maximum of one  user group ID is valid. NOTE:
+                      group. Only a maximum of one (1) user group ID is valid. NOTE:
                       This argument is a set because the AWS specification allows
                       for multiple IDs. However, in practice, AWS only allows a maximum
                       size of one.'
@@ -759,12 +762,12 @@ spec:
                       type: string
                     type: array
                   primaryEndpointAddress:
-                    description: Address of the endpoint for the primary node in the
-                      replication group, if the cluster mode is disabled.
+                    description: (Redis only) Address of the endpoint for the primary
+                      node in the replication group, if the cluster mode is disabled.
                     type: string
                   readerEndpointAddress:
-                    description: Address of the endpoint for the reader node in the
-                      replication group, if the cluster mode is disabled.
+                    description: (Redis only) Address of the endpoint for the reader
+                      node in the replication group, if the cluster mode is disabled.
                     type: string
                   tagsAll:
                     additionalProperties:

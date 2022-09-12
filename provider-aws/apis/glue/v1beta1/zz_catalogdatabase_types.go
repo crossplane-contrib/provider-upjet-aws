@@ -24,6 +24,7 @@ type CatalogDatabaseObservation struct {
 
 type CatalogDatabaseParameters struct {
 
+	// Catalog ID and name of the database
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
@@ -35,7 +36,7 @@ type CatalogDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Location of the database .
+	// Location of the database (for example, an HDFS path).
 	// +kubebuilder:validation:Optional
 	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
 
@@ -82,6 +83,7 @@ type TargetDatabaseObservation struct {
 
 type TargetDatabaseParameters struct {
 
+	// Catalog ID and name of the database
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 

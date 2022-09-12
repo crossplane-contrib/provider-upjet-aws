@@ -15,7 +15,7 @@ import (
 
 type VirtualMfaDeviceObservation struct {
 
-	// The Amazon Resource Name  specifying the virtual mfa device.
+	// The Amazon Resource Name (ARN) specifying the virtual mfa device.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The base32 seed defined as specified in RFC3548. The base_32_string_seed is base64-encoded.
@@ -23,7 +23,7 @@ type VirtualMfaDeviceObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A QR code PNG image that encodes otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String where $virtualMFADeviceName is one of the create call arguments. AccountName is the user name if set , and Base32String is the seed in base32 format.
+	// A QR code PNG image that encodes otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String where $virtualMFADeviceName is one of the create call arguments. AccountName is the user name if set (otherwise, the account ID otherwise), and Base32String is the seed in base32 format.
 	QrCodePng *string `json:"qrCodePng,omitempty" tf:"qr_code_png,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.

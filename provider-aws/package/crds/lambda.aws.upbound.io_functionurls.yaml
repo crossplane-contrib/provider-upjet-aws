@@ -71,8 +71,8 @@ spec:
                       a public endpoint. See the AWS documentation for more details.
                     type: string
                   cors:
-                    description: The cross-origin resource sharing  settings for the
-                      function URL. Documented below.
+                    description: The cross-origin resource sharing (CORS) settings
+                      for the function URL. Documented below.
                     items:
                       properties:
                         allowCredentials:
@@ -89,14 +89,15 @@ spec:
                         allowMethods:
                           description: 'The HTTP methods that are allowed when calling
                             the function URL. For example: ["GET", "POST", "DELETE"],
-                            or the wildcard character .'
+                            or the wildcard character (["*"]).'
                           items:
                             type: string
                           type: array
                         allowOrigins:
                           description: 'The origins that can access the function URL.
-                            You can list any number of specific origins ), separated
-                            by a comma. For example: ["https://www.example.com", "http://localhost:60905"].'
+                            You can list any number of specific origins (or the wildcard
+                            character ("*")), separated by a comma. For example: ["https://www.example.com",
+                            "http://localhost:60905"].'
                           items:
                             type: string
                           type: array
@@ -116,7 +117,7 @@ spec:
                       type: object
                     type: array
                   functionName:
-                    description: The name  of the Lambda function.
+                    description: The name (or ARN) of the Lambda function.
                     type: string
                   functionNameRef:
                     description: Reference to a Function to populate functionName.
@@ -379,7 +380,7 @@ spec:
               atProvider:
                 properties:
                   functionArn:
-                    description: The Amazon Resource Name  of the function.
+                    description: The Amazon Resource Name (ARN) of the function.
                     type: string
                   functionUrl:
                     description: The HTTP URL endpoint for the function in the format

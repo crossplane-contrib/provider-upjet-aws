@@ -111,14 +111,14 @@ spec:
                       type: object
                     type: array
                   ephemeralStorage:
-                    description: The amount of Ephemeral storage to allocate for the
-                      Lambda Function in MB. This parameter is used to expand the
-                      total amount of Ephemeral storage available, beyond the default
-                      amount of 512MB. Detailed below.
+                    description: The amount of Ephemeral storage(/tmp) to allocate
+                      for the Lambda Function in MB. This parameter is used to expand
+                      the total amount of Ephemeral storage available, beyond the
+                      default amount of 512MB. Detailed below.
                     items:
                       properties:
                         size:
-                          description: The size of the Lambda function Ephemeral storage
+                          description: The size of the Lambda function Ephemeral storage(/tmp)
                             represented in MB. The minimum supported ephemeral_storage
                             value defaults to 512MB and the maximum supported value
                             is 10240MB.
@@ -245,14 +245,11 @@ spec:
                       package. Conflicts with filename, s3_bucket, s3_key, and s3_object_version.
                     type: string
                   kmsKeyArn:
-                    description: Amazon Resource Name  of the AWS Key Management Service  key
-                      that is used to encrypt environment variables. If this configuration
-                      is not provided when environment variables are in use, AWS Lambda
-                      uses a default service key. If this configuration is provided
-                      when environment variables are not in use, the AWS Lambda API
-                      does not save this configuration and Terraform will show a perpetual
-                      difference of adding the key. To fix the perpetual difference,
-                      remove this configuration.
+                    description: Amazon Resource Name (ARN) of the AWS Key Management
+                      Service (KMS) key that is used to encrypt environment variables.
+                      If this configuration is not provided when environment variables
+                      are in use, AWS Lambda uses a default service key. To fix the
+                      perpetual difference, remove this configuration.
                     type: string
                   kmsKeyArnRef:
                     description: Reference to a Key in kms to populate kmsKeyArn.
@@ -328,8 +325,8 @@ spec:
                         type: object
                     type: object
                   layers:
-                    description: List of Lambda Layer Version ARNs  to attach to your
-                      Lambda Function. See Lambda Layers
+                    description: List of Lambda Layer Version ARNs (maximum of 5)
+                      to attach to your Lambda Function. See Lambda Layers
                     items:
                       type: string
                     type: array
@@ -356,7 +353,7 @@ spec:
                       Concurrency Limits -1. See Managing Concurrency
                     type: number
                   role:
-                    description: Amazon Resource Name  of the function's execution
+                    description: Amazon Resource Name (ARN) of the function's execution
                       role. The role provides the function's identity and access to
                       AWS services and resources.
                     type: string
@@ -527,9 +524,10 @@ spec:
                   sourceCodeHash:
                     description: Used to trigger updates. Must be set to a base64-encoded
                       SHA256 hash of the package file specified with either filename
-                      or s3_key. The usual way to set this is filebase64sha256  or
-                      base64sha256(file) , where "file.zip" is the local filename
-                      of the lambda function source archive.
+                      or s3_key. The usual way to set this is filebase64sha256("file.11.12
+                      and later) or base64sha256(file("file.11.11 and earlier), where
+                      "file.zip" is the local filename of the lambda function source
+                      archive.
                     type: string
                   tags:
                     additionalProperties:
@@ -772,7 +770,8 @@ spec:
                     description: Date this resource was last modified.
                     type: string
                   qualifiedArn:
-                    description: ARN identifying your Lambda Function Version .
+                    description: ARN identifying your Lambda Function Version (if
+                      versioning is enabled via publish = true).
                     type: string
                   signingJobArn:
                     description: ARN of the signing job.
@@ -798,6 +797,7 @@ spec:
                     items:
                       properties:
                         vpcId:
+                          description: ID of the VPC.
                           type: string
                       type: object
                     type: array

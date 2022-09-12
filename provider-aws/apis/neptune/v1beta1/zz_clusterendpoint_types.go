@@ -15,7 +15,7 @@ import (
 
 type ClusterEndpointObservation struct {
 
-	// The Neptune Cluster Endpoint Amazon Resource Name .
+	// The Neptune Cluster Endpoint Amazon Resource Name (ARN).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The DNS address of the endpoint.

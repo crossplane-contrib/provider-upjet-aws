@@ -52,7 +52,7 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// The encryption key block AWS Athena uses to decrypt the data in S3, such as an AWS Key Management Service  key. See Encryption Configuration below.
+	// The encryption key block AWS Athena uses to decrypt the data in S3, such as an AWS Key Management Service (AWS KMS) key. See Encryption Configuration below.
 	// +kubebuilder:validation:Optional
 	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 

@@ -166,7 +166,7 @@ type ResponseHeadersPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// A configuration for a set of HTTP response headers that are used for Cross-Origin Resource Sharing . See Cors Config for more information.
+	// A configuration for a set of HTTP response headers that are used for Cross-Origin Resource Sharing (CORS). See Cors Config for more information.
 	// +kubebuilder:validation:Optional
 	CorsConfig []CorsConfigParameters `json:"corsConfig,omitempty" tf:"cors_config,omitempty"`
 

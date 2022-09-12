@@ -303,7 +303,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of VPC
+                    description: Amazon Resource Name (ARN) of VPC
                     type: string
                   defaultNetworkAclId:
                     description: The ID of the network ACL created by default on VPC
@@ -318,6 +318,7 @@ spec:
                       VPC creation
                     type: string
                   dhcpOptionsId:
+                    description: The ID of the VPC
                     type: string
                   id:
                     description: The ID of the VPC

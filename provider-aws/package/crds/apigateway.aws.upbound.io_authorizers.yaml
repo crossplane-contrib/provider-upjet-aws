@@ -146,9 +146,10 @@ spec:
                       Defaults to 300.
                     type: number
                   authorizerUri:
-                    description: The authorizer's Uniform Resource Identifier . This
-                      must be a well-formed Lambda function URI in the form of arn:aws:apigateway:{region}:lambda:path/{service_api},
-                      e.g., arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:012345678912:function:my-function/invocations
+                    description: The authorizer's Uniform Resource Identifier (URI).
+                      This must be a well-formed Lambda function URI in the form of
+                      arn:aws:apigateway:{region}:lambda:path/{service_api}, e.g.,
+                      arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:012345678912:function:my-function/invocations
                     type: string
                   authorizerUriRef:
                     description: Reference to a Function in lambda to populate authorizerUri.
@@ -516,7 +517,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of the API Gateway Authorizer
+                    description: Amazon Resource Name (ARN) of the API Gateway Authorizer
                     type: string
                   id:
                     description: The Authorizer identifier.

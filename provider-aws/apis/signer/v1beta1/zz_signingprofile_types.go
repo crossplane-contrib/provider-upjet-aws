@@ -38,7 +38,7 @@ type SignatureValidityPeriodParameters struct {
 
 type SigningProfileObservation struct {
 
-	// The Amazon Resource Name  for the signing profile.
+	// The Amazon Resource Name (ARN) for the signing profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

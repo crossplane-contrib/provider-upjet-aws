@@ -222,7 +222,7 @@ spec:
                     type: string
                   preferredMaintenanceWindow:
                     description: The weekly time range during which system maintenance
-                      can occur, in  e.g., wed:04:00-wed:04:30
+                      can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -514,7 +514,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of cluster
+                    description: Amazon Resource Name (ARN) of cluster
                     type: string
                   clusterMembers:
                     description: – List of DocDB Instances that are a part of this

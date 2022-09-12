@@ -160,7 +160,7 @@ spec:
                       be created in.
                     type: string
                   resourceArn:
-                    description: The Amazon Resource Name  of the DB cluster.
+                    description: The Amazon Resource Name (ARN) of the DB cluster.
                     type: string
                   resourceArnRef:
                     description: Reference to a Cluster in rds to populate resourceArn.
@@ -417,7 +417,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The Amazon Resource Name  of the DB cluster.
+                    description: The Amazon Resource Name (ARN) of the DB cluster.
                     type: string
                   kinesisStreamName:
                     description: The name of the Amazon Kinesis data stream to be

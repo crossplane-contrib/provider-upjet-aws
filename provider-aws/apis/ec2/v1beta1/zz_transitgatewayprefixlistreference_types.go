@@ -15,9 +15,10 @@ import (
 
 type TransitGatewayPrefixListReferenceObservation struct {
 
-	// EC2 Transit Gateway Route Table identifier and EC2 Prefix List identifier, separated by an underscore
+	// EC2 Transit Gateway Route Table identifier and EC2 Prefix List identifier, separated by an underscore (_)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// EC2 Transit Gateway Route Table identifier and EC2 Prefix List identifier, separated by an underscore (_)
 	PrefixListOwnerID *string `json:"prefixListOwnerId,omitempty" tf:"prefix_list_owner_id,omitempty"`
 }
 
