@@ -66,7 +66,6 @@ spec:
                 properties:
                   description:
                     description: The description of the DB cluster parameter group.
-                      Defaults to "Managed by Terraform".
                     type: string
                   family:
                     description: The family of the DB cluster parameter group.
@@ -79,9 +78,9 @@ spec:
                     items:
                       properties:
                         applyMethod:
-                          description: '"immediate" , or "pending-reboot". Some engines
-                            can''t apply some parameters without a reboot, and you
-                            will need to specify "pending-reboot" here.'
+                          description: '"immediate" (default), or "pending-reboot".
+                            Some engines can''t apply some parameters without a reboot,
+                            and you will need to specify "pending-reboot" here.'
                           type: string
                         name:
                           type: string

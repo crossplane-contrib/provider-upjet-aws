@@ -19,11 +19,10 @@ type EndpointConfigurationObservation struct {
 type EndpointConfigurationParameters struct {
 
 	// Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. See the AWS documentation for more details. The default value is false.
-	// Note: When client IP address preservation is enabled, the Global Accelerator service creates an EC2 Security Group in the VPC named GlobalAccelerator that must be deleted  before the VPC will successfully delete. If this EC2 Security Group is not deleted, Terraform will retry the VPC deletion for a few minutes before reporting a DependencyViolation error. This cannot be resolved by re-running Terraform.
 	// +kubebuilder:validation:Optional
 	ClientIPPreservationEnabled *bool `json:"clientIpPreservationEnabled,omitempty" tf:"client_ip_preservation_enabled,omitempty"`
 
-	// An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name  of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.
+	// An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.
 	// +kubebuilder:validation:Optional
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
@@ -34,10 +33,10 @@ type EndpointConfigurationParameters struct {
 
 type EndpointGroupObservation struct {
 
-	// The Amazon Resource Name  of the endpoint group.
+	// The Amazon Resource Name (ARN) of the endpoint group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The Amazon Resource Name  of the endpoint group.
+	// The Amazon Resource Name (ARN) of the endpoint group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -55,12 +54,11 @@ type EndpointGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	HealthCheckIntervalSeconds *float64 `json:"healthCheckIntervalSeconds,omitempty" tf:"health_check_interval_seconds,omitempty"`
 
-	// If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The default value is slash . Terraform will only perform drift detection of its value when present in a configuration.
+	// If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The default value is slash (/).
 	// +kubebuilder:validation:Optional
 	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
 
 	// The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port is the listener port that this endpoint group is associated with. If listener port is a list of ports, Global Accelerator uses the first port in the list.
-	// Terraform will only perform drift detection of its value when present in a configuration.
 	// +kubebuilder:validation:Optional
 	HealthCheckPort *float64 `json:"healthCheckPort,omitempty" tf:"health_check_port,omitempty"`
 
@@ -68,7 +66,7 @@ type EndpointGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	HealthCheckProtocol *string `json:"healthCheckProtocol,omitempty" tf:"health_check_protocol,omitempty"`
 
-	// The Amazon Resource Name  of the listener.
+	// The Amazon Resource Name (ARN) of the listener.
 	// +crossplane:generate:reference:type=Listener
 	// +kubebuilder:validation:Optional
 	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`

@@ -88,11 +88,11 @@ spec:
                     type: string
                   idpMetadataUrl:
                     description: The IDP Metadata URL. Note that either idp_metadata_url
-                      or idp_metadata_xml  must be specified.
+                      or idp_metadata_xml (but not both) must be specified.
                     type: string
                   idpMetadataXml:
                     description: The IDP Metadata XML. Note that either idp_metadata_url
-                      or idp_metadata_xml  must be specified.
+                      or idp_metadata_xml (but not both) must be specified.
                     type: string
                   loginAssertion:
                     description: The login assertion.

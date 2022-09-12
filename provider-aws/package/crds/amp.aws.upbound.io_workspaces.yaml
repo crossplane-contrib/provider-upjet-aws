@@ -259,7 +259,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of the workspace.
+                    description: Amazon Resource Name (ARN) of the workspace.
                     type: string
                   id:
                     description: Identifier of the workspace

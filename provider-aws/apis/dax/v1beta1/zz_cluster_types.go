@@ -56,7 +56,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A valid Amazon Resource Name  that identifies
+	// A valid Amazon Resource Name (ARN) that identifies
 	// an IAM role. At runtime, DAX will assume this role and use the role's
 	// permissions to access DynamoDB on your behalf
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
@@ -72,8 +72,8 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
-	// dd:hh24:mi
-	// . The minimum maintenance window is a 60 minute period. Example:
+	// ddd:hh24:mi
+	// (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example:
 	// sun:05:00-sun:09:00
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
@@ -83,7 +83,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Required
 	NodeType *string `json:"nodeType" tf:"node_type,omitempty"`
 
-	// ast-1:012345678999:my_sns_topic
+	// east-1:012345678999:my_sns_topic
 	// +kubebuilder:validation:Optional
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 
@@ -97,7 +97,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// ode cluster, without any read
+	// node cluster, without any read
 	// replicas
 	// +kubebuilder:validation:Required
 	ReplicationFactor *float64 `json:"replicationFactor" tf:"replication_factor,omitempty"`

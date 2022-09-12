@@ -69,24 +69,17 @@ spec:
                     items:
                       properties:
                         clientIpPreservationEnabled:
-                          description: 'Indicates whether client IP address preservation
+                          description: Indicates whether client IP address preservation
                             is enabled for an Application Load Balancer endpoint.
                             See the AWS documentation for more details. The default
-                            value is false. Note: When client IP address preservation
-                            is enabled, the Global Accelerator service creates an
-                            EC2 Security Group in the VPC named GlobalAccelerator
-                            that must be deleted  before the VPC will successfully
-                            delete. If this EC2 Security Group is not deleted, Terraform
-                            will retry the VPC deletion for a few minutes before reporting
-                            a DependencyViolation error. This cannot be resolved by
-                            re-running Terraform.'
+                            value is false.
                           type: boolean
                         endpointId:
                           description: An ID for the endpoint. If the endpoint is
                             a Network Load Balancer or Application Load Balancer,
-                            this is the Amazon Resource Name  of the resource. If
-                            the endpoint is an Elastic IP address, this is the Elastic
-                            IP address allocation ID.
+                            this is the Amazon Resource Name (ARN) of the resource.
+                            If the endpoint is an Elastic IP address, this is the
+                            Elastic IP address allocation ID.
                           type: string
                         weight:
                           description: The weight associated with the endpoint. When
@@ -107,17 +100,14 @@ spec:
                   healthCheckPath:
                     description: If the protocol is HTTP/S, then this specifies the
                       path that is the destination for health check targets. The default
-                      value is slash . Terraform will only perform drift detection
-                      of its value when present in a configuration.
+                      value is slash (/).
                     type: string
                   healthCheckPort:
                     description: The port that AWS Global Accelerator uses to check
                       the health of endpoints that are part of this endpoint group.
                       The default port is the listener port that this endpoint group
                       is associated with. If listener port is a list of ports, Global
-                      Accelerator uses the first port in the list. Terraform will
-                      only perform drift detection of its value when present in a
-                      configuration.
+                      Accelerator uses the first port in the list.
                     type: number
                   healthCheckProtocol:
                     description: The protocol that AWS Global Accelerator uses to
@@ -125,7 +115,7 @@ spec:
                       group. The default value is TCP.
                     type: string
                   listenerArn:
-                    description: The Amazon Resource Name  of the listener.
+                    description: The Amazon Resource Name (ARN) of the listener.
                     type: string
                   listenerArnRef:
                     description: Reference to a Listener to populate listenerArn.
@@ -415,10 +405,10 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  of the endpoint group.
+                    description: The Amazon Resource Name (ARN) of the endpoint group.
                     type: string
                   id:
-                    description: The Amazon Resource Name  of the endpoint group.
+                    description: The Amazon Resource Name (ARN) of the endpoint group.
                     type: string
                 type: object
               conditions:

@@ -74,6 +74,7 @@ type ThrottleObservation struct {
 
 type ThrottleParameters struct {
 
+	// The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.
 	// +kubebuilder:validation:Optional
 	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
 
@@ -81,13 +82,14 @@ type ThrottleParameters struct {
 	// +kubebuilder:validation:Required
 	Path *string `json:"path" tf:"path,omitempty"`
 
+	// The API request steady-state rate limit.
 	// +kubebuilder:validation:Optional
 	RateLimit *float64 `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
 }
 
 type UsagePlanObservation struct {
 
-	// Amazon Resource Name
+	// Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ID of the API resource
@@ -132,9 +134,11 @@ type UsagePlanThrottleSettingsObservation struct {
 
 type UsagePlanThrottleSettingsParameters struct {
 
+	// The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.
 	// +kubebuilder:validation:Optional
 	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
 
+	// The API request steady-state rate limit.
 	// +kubebuilder:validation:Optional
 	RateLimit *float64 `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
 }

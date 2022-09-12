@@ -15,7 +15,7 @@ import (
 
 type ParameterGroupObservation struct {
 
-	// The Neptune parameter group Amazon Resource Name .
+	// The Neptune parameter group Amazon Resource Name (ARN).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The Neptune parameter group name.
@@ -44,7 +44,7 @@ type ParameterGroupParameterParameters struct {
 
 type ParameterGroupParameters struct {
 
-	// The description of the Neptune parameter group. Defaults to "Managed by Terraform".
+	// The description of the Neptune parameter group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

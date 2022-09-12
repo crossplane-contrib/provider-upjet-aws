@@ -22,7 +22,7 @@ type ResourceObservation struct {
 
 type ResourceParameters struct {
 
-	// –  Amazon Resource Name  of the resource, an S3 path.
+	// –  Amazon Resource Name (ARN) of the resource, an S3 path.
 	// +kubebuilder:validation:Required
 	Arn *string `json:"arn" tf:"arn,omitempty"`
 
@@ -31,7 +31,7 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// inked role must exist and is used.
+	// linked role must exist and is used.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

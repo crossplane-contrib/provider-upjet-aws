@@ -96,6 +96,8 @@ spec:
                                         is URLEncoded.
                                       type: string
                                     profileId:
+                                      description: 'The identifier for the Field Level
+                                        Encryption Config. For example: K3D5EWEUDCCXON.'
                                       type: string
                                   required:
                                   - contentType
@@ -110,8 +112,8 @@ spec:
                           description: specifies what to do when an unknown content
                             type is provided for the profile. If true, content is
                             forwarded without being encrypted when the content type
-                            is unknown. If false , an error is returned when the content
-                            type is unknown.
+                            is unknown. If false (the default), an error is returned
+                            when the content type is unknown.
                           type: boolean
                       required:
                       - contentTypeProfiles
@@ -139,6 +141,8 @@ spec:
                                 items:
                                   properties:
                                     profileId:
+                                      description: 'The identifier for the Field Level
+                                        Encryption Config. For example: K3D5EWEUDCCXON.'
                                       type: string
                                     profileIdRef:
                                       description: Reference to a FieldLevelEncryptionProfile

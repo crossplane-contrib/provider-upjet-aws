@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   backupPolicy:
-                    description: A backup_policy object .
+                    description: A backup_policy object (documented below).
                     items:
                       properties:
                         status:
@@ -337,7 +337,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The ID that identifies the file system .
+                    description: The ID that identifies the file system (e.g., fs-ccfc0d65).
                     type: string
                 type: object
               conditions:

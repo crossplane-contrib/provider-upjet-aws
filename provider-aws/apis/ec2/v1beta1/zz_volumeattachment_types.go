@@ -47,9 +47,7 @@ type VolumeAttachmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Set this to true if you do not wish
-	// to detach the volume from the instance to which it is attached at destroy
-	// time, and instead just remove the attachment from Terraform state. This is
+	// This is
 	// useful when destroying an instance which has volumes created by some other
 	// means attached.
 	// +kubebuilder:validation:Optional

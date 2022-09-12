@@ -27,16 +27,16 @@ type EIPObservation struct {
 	// Customer owned IP.
 	CustomerOwnedIP *string `json:"customerOwnedIp,omitempty" tf:"customer_owned_ip,omitempty"`
 
-	// Indicates if this EIP is for use in VPC  or EC2 Classic .
+	// Indicates if this EIP is for use in VPC (vpc) or EC2 Classic (standard).
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// Contains the EIP allocation ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Private DNS associated with the Elastic IP address .
+	// The Private DNS associated with the Elastic IP address (if in VPC).
 	PrivateDNS *string `json:"privateDns,omitempty" tf:"private_dns,omitempty"`
 
-	// Contains the private IP address .
+	// Contains the private IP address (if in VPC).
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
 	// Public DNS associated with the Elastic IP address.

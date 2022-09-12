@@ -35,7 +35,7 @@ type VPCEndpointServiceObservation struct {
 	// The ARNs of one or more principals allowed to discover the endpoint service.
 	AllowedPrincipals []*string `json:"allowedPrincipals,omitempty" tf:"allowed_principals,omitempty"`
 
-	// The Amazon Resource Name  of the VPC endpoint service.
+	// The Amazon Resource Name (ARN) of the VPC endpoint service.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A set of Availability Zones in which the service is available.
@@ -71,11 +71,11 @@ type VPCEndpointServiceParameters struct {
 	// +kubebuilder:validation:Required
 	AcceptanceRequired *bool `json:"acceptanceRequired" tf:"acceptance_required,omitempty"`
 
-	// Amazon Resource Names  of one or more Gateway Load Balancers for the endpoint service.
+	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
 	// +kubebuilder:validation:Optional
 	GatewayLoadBalancerArns []*string `json:"gatewayLoadBalancerArns,omitempty" tf:"gateway_load_balancer_arns,omitempty"`
 
-	// Amazon Resource Names  of one or more Network Load Balancers for the endpoint service.
+	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
 	// +kubebuilder:validation:Optional
 	NetworkLoadBalancerArns []*string `json:"networkLoadBalancerArns,omitempty" tf:"network_load_balancer_arns,omitempty"`
 

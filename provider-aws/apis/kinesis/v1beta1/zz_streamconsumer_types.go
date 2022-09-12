@@ -15,13 +15,13 @@ import (
 
 type StreamConsumerObservation struct {
 
-	// Amazon Resource Name  of the stream consumer.
+	// Amazon Resource Name (ARN) of the stream consumer.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Approximate timestamp in RFC3339 format of when the stream consumer was created.
 	CreationTimestamp *string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
 
-	// Amazon Resource Name  of the stream consumer.
+	// Amazon Resource Name (ARN) of the stream consumer.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -36,7 +36,7 @@ type StreamConsumerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// –  Amazon Resource Name  of the data stream the consumer is registered with.
+	// –  Amazon Resource Name (ARN) of the data stream the consumer is registered with.
 	// +crossplane:generate:reference:type=Stream
 	// +kubebuilder:validation:Optional
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`

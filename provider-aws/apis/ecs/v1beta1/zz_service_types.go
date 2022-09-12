@@ -50,6 +50,7 @@ type DeploymentControllerObservation struct {
 
 type DeploymentControllerParameters struct {
 
+	// Type of deployment controller. Valid values: CODE_DEPLOY, ECS, EXTERNAL. Default: ECS.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -59,13 +60,15 @@ type LoadBalancerObservation struct {
 
 type LoadBalancerParameters struct {
 
+	// Container name value, already specified in the task definition, to be used for your service discovery service.
 	// +kubebuilder:validation:Required
 	ContainerName *string `json:"containerName" tf:"container_name,omitempty"`
 
+	// Port value, already specified in the task definition, to be used for your service discovery service.
 	// +kubebuilder:validation:Required
 	ContainerPort *float64 `json:"containerPort" tf:"container_port,omitempty"`
 
-	// Name of the ELB  to associate with the service.
+	// Name of the service (up to 255 letters, numbers, hyphens, and underscores)
 	// +kubebuilder:validation:Optional
 	ELBName *string `json:"elbName,omitempty" tf:"elb_name,omitempty"`
 
@@ -79,7 +82,7 @@ type NetworkConfigurationObservation struct {
 
 type NetworkConfigurationParameters struct {
 
-	// Assign a public IP address to the ENI . Valid values are true or false. Default false.
+	// Assign a public IP address to the ENI (Fargate launch type only). Valid values are true or false. Default false.
 	// +kubebuilder:validation:Optional
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
@@ -119,12 +122,14 @@ type OrderedPlacementStrategyObservation struct {
 
 type OrderedPlacementStrategyParameters struct {
 
-	// For the spread placement strategy, valid values are instanceId , or any platform or custom attribute that is applied to a container instance.
+	// For the spread placement strategy, valid values are instanceId (or host,
+	// which has the same effect), or any platform or custom attribute that is applied to a container instance.
 	// For the binpack type, valid values are memory and cpu. For the random type, this attribute is not
 	// needed. For more information, see Placement Strategy.
 	// +kubebuilder:validation:Optional
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
+	// Type of deployment controller. Valid values: CODE_DEPLOY, ECS, EXTERNAL. Default: ECS.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -138,6 +143,7 @@ type PlacementConstraintsParameters struct {
 	// +kubebuilder:validation:Optional
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
+	// Type of deployment controller. Valid values: CODE_DEPLOY, ECS, EXTERNAL. Default: ECS.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -157,6 +163,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	CapacityProviderStrategy []CapacityProviderStrategyParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
+	// ARN of an ECS cluster.
 	// +crossplane:generate:reference:type=Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -178,14 +185,15 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	DeploymentController []DeploymentControllerParameters `json:"deploymentController,omitempty" tf:"deployment_controller,omitempty"`
 
-	// Upper limit  of the number of running tasks that can be running in a service during a deployment. Not valid when using the DAEMON scheduling strategy.
+	// Upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment. Not valid when using the DAEMON scheduling strategy.
 	// +kubebuilder:validation:Optional
 	DeploymentMaximumPercent *float64 `json:"deploymentMaximumPercent,omitempty" tf:"deployment_maximum_percent,omitempty"`
 
-	// Lower limit  of the number of running tasks that must remain running and healthy in a service during a deployment.
+	// Lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment.
 	// +kubebuilder:validation:Optional
 	DeploymentMinimumHealthyPercent *float64 `json:"deploymentMinimumHealthyPercent,omitempty" tf:"deployment_minimum_healthy_percent,omitempty"`
 
+	// Number of instances of the task definition to place and keep running. Defaults to 0. Do not specify if using the DAEMON scheduling strategy.
 	// +kubebuilder:validation:Optional
 	DesiredCount *float64 `json:"desiredCount,omitempty" tf:"desired_count,omitempty"`
 
@@ -197,7 +205,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
 
-	// Enable to force a new task deployment of the service. This can be used to update tasks to use a newer Docker image with same image/tag combination , roll Fargate tasks onto a newer platform version, or immediately deploy ordered_placement_strategy and placement_constraints updates.
+	// Enable to force a new task deployment of the service. This can be used to update tasks to use a newer Docker image with same image/tag combination (e.g., myimage:latest), roll Fargate tasks onto a newer platform version, or immediately deploy ordered_placement_strategy and placement_constraints updates.
 	// +kubebuilder:validation:Optional
 	ForceNewDeployment *bool `json:"forceNewDeployment,omitempty" tf:"force_new_deployment,omitempty"`
 
@@ -205,6 +213,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	HealthCheckGracePeriodSeconds *float64 `json:"healthCheckGracePeriodSeconds,omitempty" tf:"health_check_grace_period_seconds,omitempty"`
 
+	// ARN of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is required if you are using a load balancer with your service, but only if your task definition does not use the awsvpc network mode. If using awsvpc network mode, do not specify this role. If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -263,11 +272,11 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Family and revision  or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
+	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
 	// +kubebuilder:validation:Optional
 	TaskDefinition *string `json:"taskDefinition,omitempty" tf:"task_definition,omitempty"`
 
-	// If true, Terraform will wait for the service to reach a steady state  before continuing. Default false.
+	// Default false.
 	// +kubebuilder:validation:Optional
 	WaitForSteadyState *bool `json:"waitForSteadyState,omitempty" tf:"wait_for_steady_state,omitempty"`
 }
@@ -277,9 +286,11 @@ type ServiceRegistriesObservation struct {
 
 type ServiceRegistriesParameters struct {
 
+	// Name of the service (up to 255 letters, numbers, hyphens, and underscores)
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
+	// Port value, already specified in the task definition, to be used for your service discovery service.
 	// +kubebuilder:validation:Optional
 	ContainerPort *float64 `json:"containerPort,omitempty" tf:"container_port,omitempty"`
 
@@ -287,7 +298,7 @@ type ServiceRegistriesParameters struct {
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// ARN of the Service Registry. The currently supported service registry is Amazon Route 53 Auto Naming Service. For more information, see Service
+	// ARN of the Service Registry. The currently supported service registry is Amazon Route 53 Auto Naming Service(aws_service_discovery_service). For more information, see Service
 	// +kubebuilder:validation:Required
 	RegistryArn *string `json:"registryArn" tf:"registry_arn,omitempty"`
 }

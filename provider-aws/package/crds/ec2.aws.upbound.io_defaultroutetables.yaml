@@ -161,7 +161,7 @@ spec:
                           description: The CIDR block of the route.
                           type: string
                         coreNetworkArn:
-                          description: The Amazon Resource Name  of a core network.
+                          description: The Amazon Resource Name (ARN) of a core network.
                           type: string
                         destinationPrefixListId:
                           description: The ID of a managed prefix list destination

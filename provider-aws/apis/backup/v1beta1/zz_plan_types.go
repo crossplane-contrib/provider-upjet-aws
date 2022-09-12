@@ -32,7 +32,7 @@ type CopyActionObservation struct {
 
 type CopyActionParameters struct {
 
-	// An Amazon Resource Name  that uniquely identifies the destination backup vault for the copied backup.
+	// An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup.
 	// +kubebuilder:validation:Required
 	DestinationVaultArn *string `json:"destinationVaultArn" tf:"destination_vault_arn,omitempty"`
 
@@ -116,7 +116,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	CompletionWindow *float64 `json:"completionWindow,omitempty" tf:"completion_window,omitempty"`
 
-	// Configuration block with copy operation settings. Detailed below.
+	// Configuration block(s) with copy operation settings. Detailed below.
 	// +kubebuilder:validation:Optional
 	CopyAction []CopyActionParameters `json:"copyAction,omitempty" tf:"copy_action,omitempty"`
 

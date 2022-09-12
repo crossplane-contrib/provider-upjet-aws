@@ -64,13 +64,13 @@ spec:
               forProvider:
                 properties:
                   addonVersion:
-                    description: n. The version must match one of the versions returned
+                    description: on. The version must match one of the versions returned
                       by describe-addon-versions.
                     type: string
                   clusterName:
-                    description: 00 characters in length. Must begin with an alphanumeric
+                    description: 100 characters in length. Must begin with an alphanumeric
                       character, and must only contain alphanumeric characters, dashes
-                      and underscores .
+                      and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster to populate clusterName.
@@ -160,12 +160,12 @@ spec:
                       and OVERWRITE.
                     type: string
                   serviceAccountRoleArn:
-                    description: The Amazon Resource Name  of an existing IAM role
-                      to bind to the add-on's service account. The role must be assigned
-                      the IAM permissions required by the add-on. If you don't specify
-                      an existing IAM role, then the add-on uses the permissions assigned
-                      to the node IAM role. For more information, see Amazon EKS node
-                      IAM role in the Amazon EKS User Guide.
+                    description: The Amazon Resource Name (ARN) of an existing IAM
+                      role to bind to the add-on's service account. The role must
+                      be assigned the IAM permissions required by the add-on. If you
+                      don't specify an existing IAM role, then the add-on uses the
+                      permissions assigned to the node IAM role. For more information,
+                      see Amazon EKS node IAM role in the Amazon EKS User Guide.
                     type: string
                   serviceAccountRoleArnRef:
                     description: Reference to a Role in iam to populate serviceAccountRoleArn.
@@ -427,7 +427,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of the EKS add-on.
+                    description: Amazon Resource Name (ARN) of the EKS add-on.
                     type: string
                   createdAt:
                     description: Date and time in RFC3339 format that the EKS add-on
@@ -435,7 +435,7 @@ spec:
                     type: string
                   id:
                     description: EKS Cluster name and EKS Addon name separated by
-                      a colon .
+                      a colon (:).
                     type: string
                   modifiedAt:
                     description: Date and time in RFC3339 format that the EKS add-on

@@ -70,14 +70,14 @@ spec:
                       false.
                     type: boolean
                   gatewayLoadBalancerArns:
-                    description: Amazon Resource Names  of one or more Gateway Load
-                      Balancers for the endpoint service.
+                    description: Amazon Resource Names (ARNs) of one or more Gateway
+                      Load Balancers for the endpoint service.
                     items:
                       type: string
                     type: array
                   networkLoadBalancerArns:
-                    description: Amazon Resource Names  of one or more Network Load
-                      Balancers for the endpoint service.
+                    description: Amazon Resource Names (ARNs) of one or more Network
+                      Load Balancers for the endpoint service.
                     items:
                       type: string
                     type: array
@@ -282,7 +282,8 @@ spec:
                       type: string
                     type: array
                   arn:
-                    description: The Amazon Resource Name  of the VPC endpoint service.
+                    description: The Amazon Resource Name (ARN) of the VPC endpoint
+                      service.
                     type: string
                   availabilityZones:
                     description: A set of Availability Zones in which the service

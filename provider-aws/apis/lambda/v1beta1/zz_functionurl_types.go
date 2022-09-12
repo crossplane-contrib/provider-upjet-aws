@@ -26,11 +26,11 @@ type CorsParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowHeaders []*string `json:"allowHeaders,omitempty" tf:"allow_headers,omitempty"`
 
-	// The HTTP methods that are allowed when calling the function URL. For example: ["GET", "POST", "DELETE"], or the wildcard character .
+	// The HTTP methods that are allowed when calling the function URL. For example: ["GET", "POST", "DELETE"], or the wildcard character (["*"]).
 	// +kubebuilder:validation:Optional
 	AllowMethods []*string `json:"allowMethods,omitempty" tf:"allow_methods,omitempty"`
 
-	// The origins that can access the function URL. You can list any number of specific origins ), separated by a comma. For example: ["https://www.example.com", "http://localhost:60905"].
+	// The origins that can access the function URL. You can list any number of specific origins (or the wildcard character ("*")), separated by a comma. For example: ["https://www.example.com", "http://localhost:60905"].
 	// +kubebuilder:validation:Optional
 	AllowOrigins []*string `json:"allowOrigins,omitempty" tf:"allow_origins,omitempty"`
 
@@ -45,7 +45,7 @@ type CorsParameters struct {
 
 type FunctionURLObservation struct {
 
-	// The Amazon Resource Name  of the function.
+	// The Amazon Resource Name (ARN) of the function.
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 
 	// The HTTP URL endpoint for the function in the format https://<url_id>.lambda-url.<region>.on.aws.
@@ -63,11 +63,11 @@ type FunctionURLParameters struct {
 	// +kubebuilder:validation:Required
 	AuthorizationType *string `json:"authorizationType" tf:"authorization_type,omitempty"`
 
-	// The cross-origin resource sharing  settings for the function URL. Documented below.
+	// The cross-origin resource sharing (CORS) settings for the function URL. Documented below.
 	// +kubebuilder:validation:Optional
 	Cors []CorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
-	// The name  of the Lambda function.
+	// The name (or ARN) of the Lambda function.
 	// +crossplane:generate:reference:type=Function
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`

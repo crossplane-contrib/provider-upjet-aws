@@ -27,7 +27,7 @@ type SubnetGroupObservation struct {
 
 type SubnetGroupParameters struct {
 
-	// The description of the docDB subnet group. Defaults to "Managed by Terraform".
+	// The description of the docDB subnet group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

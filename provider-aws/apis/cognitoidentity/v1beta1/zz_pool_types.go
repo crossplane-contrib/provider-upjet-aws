@@ -84,7 +84,7 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// An array of Amazon Resource Names  of the SAML provider for your identity.
+	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.SAMLProvider
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

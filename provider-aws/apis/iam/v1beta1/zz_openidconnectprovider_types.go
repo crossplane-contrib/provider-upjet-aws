@@ -26,7 +26,7 @@ type OpenIDConnectProviderObservation struct {
 
 type OpenIDConnectProviderParameters struct {
 
-	// A list of client IDs . When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application.
+	// A list of client IDs (also known as audiences). When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. (This is the value that's sent as the client_id parameter on OAuth requests.)
 	// +kubebuilder:validation:Required
 	ClientIDList []*string `json:"clientIdList" tf:"client_id_list,omitempty"`
 
@@ -34,7 +34,7 @@ type OpenIDConnectProviderParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A list of server certificate thumbprints for the OpenID Connect  identity provider's server certificate.
+	// A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s).
 	// +kubebuilder:validation:Required
 	ThumbprintList []*string `json:"thumbprintList" tf:"thumbprint_list,omitempty"`
 

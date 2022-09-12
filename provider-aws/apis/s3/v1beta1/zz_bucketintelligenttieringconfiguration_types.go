@@ -46,7 +46,7 @@ type BucketIntelligentTieringConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// A bucket filter. The configuration only includes objects that meet the filter's criteria .
+	// A bucket filter. The configuration only includes objects that meet the filter's criteria (documented below).
 	// +kubebuilder:validation:Optional
 	Filter []BucketIntelligentTieringConfigurationFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
@@ -63,7 +63,7 @@ type BucketIntelligentTieringConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The S3 Intelligent-Tiering storage class tiers of the configuration .
+	// The S3 Intelligent-Tiering storage class tiers of the configuration (documented below).
 	// +kubebuilder:validation:Required
 	Tiering []TieringParameters `json:"tiering" tf:"tiering,omitempty"`
 }

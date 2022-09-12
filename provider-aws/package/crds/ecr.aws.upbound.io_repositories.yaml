@@ -165,7 +165,7 @@ spec:
                       properties:
                         scanOnPush:
                           description: Indicates whether images are scanned after
-                            being pushed to the repository  or not scanned .
+                            being pushed to the repository (true) or not scanned (false).
                           type: boolean
                       required:
                       - scanOnPush
@@ -374,7 +374,7 @@ spec:
                     description: The registry ID where the repository was created.
                     type: string
                   repositoryUrl:
-                    description: The URL of the repository .
+                    description: The URL of the repository (in the form aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName).
                     type: string
                   tagsAll:
                     additionalProperties:

@@ -15,7 +15,7 @@ import (
 
 type ClusterObservation struct {
 
-	// Amazon Resource Name  of cluster
+	// Amazon Resource Name (ARN) of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The RDS Cluster Resource ID
@@ -46,7 +46,7 @@ type ClusterObservation struct {
 
 type ClusterParameters struct {
 
-	// The amount of storage in gibibytes  to allocate to each DB instance in the Multi-AZ DB cluster. .
+	// The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster. (This setting is required to create a Multi-AZ DB cluster).
 	// +kubebuilder:validation:Optional
 	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
@@ -61,7 +61,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// The target backtrack window, in seconds. Only available for aurora and aurora-mysql engines currently. To disable backtracking, set this value to 0. Defaults to 0. Must be between 0 and 259200
+	// The target backtrack window, in seconds. Only available for aurora and aurora-mysql engines currently. To disable backtracking, set this value to 0. Defaults to 0. Must be between 0 and 259200 (72 hours)
 	// +kubebuilder:validation:Optional
 	BacktrackWindow *float64 `json:"backtrackWindow,omitempty" tf:"backtrack_window,omitempty"`
 
@@ -76,7 +76,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
-	// The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge. Not all DB instance classes are available in all AWS Regions, or for all database engines. For the full list of DB instance classes and availability for your engine, see DB instance class in the Amazon RDS User Guide. .
+	// The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge. Not all DB instance classes are available in all AWS Regions, or for all database engines. For the full list of DB instance classes and availability for your engine, see DB instance class in the Amazon RDS User Guide. (This setting is required to create a Multi-AZ DB cluster).
 	// +kubebuilder:validation:Optional
 	DBClusterInstanceClass *string `json:"dbClusterInstanceClass,omitempty" tf:"db_cluster_instance_class,omitempty"`
 
@@ -112,18 +112,18 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableGlobalWriteForwarding *bool `json:"enableGlobalWriteForwarding,omitempty" tf:"enable_global_write_forwarding,omitempty"`
 
-	// Enable HTTP endpoint . Only valid when engine_mode is set to serverless.
+	// Enable HTTP endpoint (data API). Only valid when engine_mode is set to serverless.
 	// +kubebuilder:validation:Optional
 	EnableHTTPEndpoint *bool `json:"enableHttpEndpoint,omitempty" tf:"enable_http_endpoint,omitempty"`
 
-	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, postgresql .
+	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, postgresql (PostgreSQL).
 	// +kubebuilder:validation:Optional
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The database engine mode. Valid values: global , multimaster, parallelquery, provisioned, serverless. Defaults to: provisioned. See the RDS User Guide for limitations when using serverless.
+	// The database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), multimaster, parallelquery, provisioned, serverless. Defaults to: provisioned. See the RDS User Guide for limitations when using serverless.
 	// +kubebuilder:validation:Optional
 	EngineMode *string `json:"engineMode,omitempty" tf:"engine_mode,omitempty"`
 
@@ -139,11 +139,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
-	// Specifies whether or not mappings of AWS Identity and Access Management  accounts to database accounts is enabled. Please see AWS Documentation for availability and limitations.
+	// Specifies whether or not mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled. Please see AWS Documentation for availability and limitations.
 	// +kubebuilder:validation:Optional
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
-	// The amount of Provisioned IOPS  to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid Iops values, see Amazon RDS Provisioned IOPS storage to improve performance in the Amazon RDS User Guide. . Must be a multiple between .5 and 50 of the storage amount for the DB cluster.
+	// The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid Iops values, see Amazon RDS Provisioned IOPS storage to improve performance in the Amazon RDS User Guide. (This setting is required to create a Multi-AZ DB cluster). Must be a multiple between .5 and 50 of the storage amount for the DB cluster.
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
@@ -214,7 +214,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
-	// Specifies the storage type to be associated with the DB cluster. . Valid values: io1, Default: io1.
+	// Specifies the storage type to be associated with the DB cluster. (This setting is required to create a Multi-AZ DB cluster). Valid values: io1, Default: io1.
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
@@ -248,7 +248,7 @@ type ClusterRestoreToPointInTimeParameters struct {
 	RestoreToTime *string `json:"restoreToTime,omitempty" tf:"restore_to_time,omitempty"`
 
 	// Type of restore to be performed.
-	// Valid options are full-copy  and copy-on-write.
+	// Valid options are full-copy (default) and copy-on-write.
 	// +kubebuilder:validation:Optional
 	RestoreType *string `json:"restoreType,omitempty" tf:"restore_type,omitempty"`
 
@@ -310,7 +310,7 @@ type ScalingConfigurationObservation struct {
 
 type ScalingConfigurationParameters struct {
 
-	// Whether to enable automatic pause. A DB cluster can be paused only when it's idle . If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot. In this case, the DB cluster is restored when there is a request to connect to it. Defaults to true.
+	// Whether to enable automatic pause. A DB cluster can be paused only when it's idle (it has no connections). If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot. In this case, the DB cluster is restored when there is a request to connect to it. Defaults to true.
 	// +kubebuilder:validation:Optional
 	AutoPause *bool `json:"autoPause,omitempty" tf:"auto_pause,omitempty"`
 

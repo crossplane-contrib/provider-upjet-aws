@@ -85,6 +85,7 @@ spec:
                                         where this argument can be specified.
                                       type: string
                                     id:
+                                      description: The ID of the owner.
                                       type: string
                                     type:
                                       description: 'Type of grantee. Valid values:
@@ -114,6 +115,7 @@ spec:
                                 description: The display name of the owner.
                                 type: string
                               id:
+                                description: The ID of the owner.
                                 type: string
                             required:
                             - id
@@ -413,6 +415,7 @@ spec:
                     description: The canned ACL to apply to the bucket.
                     type: string
                   id:
+                    description: The ID of the owner.
                     type: string
                 type: object
               conditions:

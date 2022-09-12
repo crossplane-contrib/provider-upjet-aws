@@ -537,7 +537,7 @@ spec:
                       port.
                     type: string
                   arn:
-                    description: Amazon Resource Name  of neptune instance
+                    description: Amazon Resource Name (ARN) of neptune instance
                     type: string
                   dbiResourceId:
                     description: The region-unique, immutable identifier for the neptune

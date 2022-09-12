@@ -147,7 +147,7 @@ spec:
                       be created in.
                     type: string
                   rule:
-                    description: Configuration block with Ownership Controls rules.
+                    description: Configuration block(s) with Ownership Controls rules.
                       Detailed below.
                     items:
                       properties:

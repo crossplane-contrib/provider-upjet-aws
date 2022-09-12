@@ -65,7 +65,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionConfig []EncryptionConfigParameters `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
 
-	// Configuration block with kubernetes network configuration for the cluster. Detailed below. If removed, Terraform will only perform drift detection if a configuration value is provided.
+	// Configuration block with kubernetes network configuration for the cluster. Detailed below.
 	// +kubebuilder:validation:Optional
 	KubernetesNetworkConfig []KubernetesNetworkConfigParameters `json:"kubernetesNetworkConfig,omitempty" tf:"kubernetes_network_config,omitempty"`
 
@@ -128,7 +128,7 @@ type KubernetesNetworkConfigObservation struct {
 
 type KubernetesNetworkConfigParameters struct {
 
-	// The IP family used to assign Kubernetes pod and service addresses. Valid values are ipv4  and ipv6. You can only specify an IP family when you create a cluster, changing this value will force a new cluster to be created.
+	// The IP family used to assign Kubernetes pod and service addresses. Valid values are ipv4 (default) and ipv6. You can only specify an IP family when you create a cluster, changing this value will force a new cluster to be created.
 	// +kubebuilder:validation:Optional
 	IPFamily *string `json:"ipFamily,omitempty" tf:"ip_family,omitempty"`
 
@@ -151,7 +151,7 @@ type ProviderObservation struct {
 
 type ProviderParameters struct {
 
-	// ARN of the Key Management Service  customer master key . The CMK must be symmetric, created in the same region as the cluster, and if the CMK was created in a different account, the user must have access to the CMK. For more information, see Allowing Users in Other Accounts to Use a CMK in the AWS Key Management Service Developer Guide.
+	// ARN of the Key Management Service (KMS) customer master key (CMK). The CMK must be symmetric, created in the same region as the cluster, and if the CMK was created in a different account, the user must have access to the CMK. For more information, see Allowing Users in Other Accounts to Use a CMK in the AWS Key Management Service Developer Guide.
 	// +kubebuilder:validation:Required
 	KeyArn *string `json:"keyArn" tf:"key_arn,omitempty"`
 }
@@ -175,7 +175,7 @@ type VPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointPublicAccess *bool `json:"endpointPublicAccess,omitempty" tf:"endpoint_public_access,omitempty"`
 
-	// List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled. EKS defaults this to a list with 0.0.0.0/0. Terraform will only perform drift detection of its value when present in a configuration.
+	// List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled. EKS defaults this to a list with 0.0.0.0/0.
 	// +kubebuilder:validation:Optional
 	PublicAccessCidrs []*string `json:"publicAccessCidrs,omitempty" tf:"public_access_cidrs,omitempty"`
 
@@ -187,7 +187,7 @@ type VPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// ccount elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
+	// account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -202,7 +202,7 @@ type VPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// ccount elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
+	// account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector

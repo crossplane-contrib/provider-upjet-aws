@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   acceleratorArn:
-                    description: The Amazon Resource Name  of your accelerator.
+                    description: The Amazon Resource Name (ARN) of your accelerator.
                     type: string
                   acceleratorArnRef:
                     description: Reference to a Accelerator to populate acceleratorArn.
@@ -146,8 +146,8 @@ spec:
                       Accelerator uses the "five-tuple" properties of source IP address,
                       source port, destination IP address, destination port, and protocol
                       to select the hash value. If SOURCE_IP, Global Accelerator uses
-                      the "two-tuple" properties of source  IP address and destination
-                      IP address to select the hash value.'
+                      the "two-tuple" properties of source (client) IP address and
+                      destination IP address to select the hash value.'
                     type: string
                   portRange:
                     description: The list of port ranges for the connections from
@@ -352,7 +352,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The Amazon Resource Name  of the listener.
+                    description: The Amazon Resource Name (ARN) of the listener.
                     type: string
                 type: object
               conditions:

@@ -141,7 +141,7 @@ spec:
                         type: object
                     type: object
                   role:
-                    description: he name of the IAM role to which the policy should
+                    description: The name of the IAM role to which the policy should
                       be applied
                     type: string
                   roleRef:

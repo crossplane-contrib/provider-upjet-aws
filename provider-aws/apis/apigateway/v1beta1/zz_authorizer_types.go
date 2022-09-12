@@ -15,7 +15,7 @@ import (
 
 type AuthorizerObservation struct {
 
-	// Amazon Resource Name  of the API Gateway Authorizer
+	// Amazon Resource Name (ARN) of the API Gateway Authorizer
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The Authorizer identifier.
@@ -42,7 +42,7 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
-	// The authorizer's Uniform Resource Identifier . This must be a well-formed Lambda function URI in the form of arn:aws:apigateway:{region}:lambda:path/{service_api},
+	// The authorizer's Uniform Resource Identifier (URI). This must be a well-formed Lambda function URI in the form of arn:aws:apigateway:{region}:lambda:path/{service_api},
 	// e.g., arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:012345678912:function:my-function/invocations
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("invoke_arn",true)

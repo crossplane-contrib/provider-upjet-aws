@@ -65,8 +65,7 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the Neptune parameter group. Defaults
-                      to "Managed by Terraform".
+                    description: The description of the Neptune parameter group.
                     type: string
                   family:
                     description: The family of the Neptune parameter group.
@@ -283,7 +282,7 @@ spec:
                 properties:
                   arn:
                     description: The Neptune parameter group Amazon Resource Name
-                      .
+                      (ARN).
                     type: string
                   id:
                     description: The Neptune parameter group name.

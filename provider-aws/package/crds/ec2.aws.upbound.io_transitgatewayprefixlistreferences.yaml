@@ -489,9 +489,11 @@ spec:
                 properties:
                   id:
                     description: EC2 Transit Gateway Route Table identifier and EC2
-                      Prefix List identifier, separated by an underscore
+                      Prefix List identifier, separated by an underscore (_)
                     type: string
                   prefixListOwnerId:
+                    description: EC2 Transit Gateway Route Table identifier and EC2
+                      Prefix List identifier, separated by an underscore (_)
                     type: string
                 type: object
               conditions:

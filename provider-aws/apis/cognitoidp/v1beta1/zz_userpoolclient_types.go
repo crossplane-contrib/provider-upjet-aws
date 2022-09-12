@@ -79,7 +79,7 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessTokenValidity *float64 `json:"accessTokenValidity,omitempty" tf:"access_token_validity,omitempty"`
 
-	// List of allowed OAuth flows .
+	// List of allowed OAuth flows (code, implicit, client_credentials).
 	// +kubebuilder:validation:Optional
 	AllowedOauthFlows []*string `json:"allowedOauthFlows,omitempty" tf:"allowed_oauth_flows,omitempty"`
 
@@ -87,7 +87,7 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowedOauthFlowsUserPoolClient *bool `json:"allowedOauthFlowsUserPoolClient,omitempty" tf:"allowed_oauth_flows_user_pool_client,omitempty"`
 
-	// List of allowed OAuth scopes .
+	// List of allowed OAuth scopes (phone, email, openid, profile, and aws.cognito.signin.user.admin).
 	// +kubebuilder:validation:Optional
 	AllowedOauthScopes []*string `json:"allowedOauthScopes,omitempty" tf:"allowed_oauth_scopes,omitempty"`
 
@@ -107,7 +107,7 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableTokenRevocation *bool `json:"enableTokenRevocation,omitempty" tf:"enable_token_revocation,omitempty"`
 
-	// List of authentication flows .
+	// List of authentication flows (ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH).
 	// +kubebuilder:validation:Optional
 	ExplicitAuthFlows []*string `json:"explicitAuthFlows,omitempty" tf:"explicit_auth_flows,omitempty"`
 
@@ -144,7 +144,7 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// List of provider names for the identity providers that are supported on this client. Uses the provider_name attribute of aws_cognito_identity_provider resource, or the equivalent string.
+	// List of provider names for the identity providers that are supported on this client. Uses the provider_name attribute of aws_cognito_identity_provider resource(s), or the equivalent string(s).
 	// +kubebuilder:validation:Optional
 	SupportedIdentityProviders []*string `json:"supportedIdentityProviders,omitempty" tf:"supported_identity_providers,omitempty"`
 

@@ -325,12 +325,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  of the key alias.
+                    description: The Amazon Resource Name (ARN) of the key alias.
                     type: string
                   id:
                     type: string
                   targetKeyArn:
-                    description: The Amazon Resource Name  of the target key identifier.
+                    description: The Amazon Resource Name (ARN) of the target key
+                      identifier.
                     type: string
                 type: object
               conditions:

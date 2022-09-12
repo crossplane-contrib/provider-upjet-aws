@@ -353,7 +353,7 @@ spec:
                 properties:
                   arn:
                     description: The Neptune Cluster Endpoint Amazon Resource Name
-                      .
+                      (ARN).
                     type: string
                   endpoint:
                     description: The DNS address of the endpoint.

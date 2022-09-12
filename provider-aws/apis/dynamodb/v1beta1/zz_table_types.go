@@ -21,7 +21,7 @@ type AttributeParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Attribute type, which must be a scalar type: S, N, or B for tring, umber or inary data
+	// Attribute type, which must be a scalar type: S, N, or B for (S)tring, (N)umber or (B)inary data
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -37,9 +37,17 @@ type GlobalSecondaryIndexParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Only required with INCLUDE as a
+	// projection type; a list of attributes to project into the index. These
+	// do not need to be defined as attributes on the table.
 	// +kubebuilder:validation:Optional
 	NonKeyAttributes []*string `json:"nonKeyAttributes,omitempty" tf:"non_key_attributes,omitempty"`
 
+	// One of ALL, INCLUDE or KEYS_ONLY
+	// where ALL projects every attribute into the index, KEYS_ONLY
+	// projects just the hash and range key into the index, and INCLUDE
+	// projects only the keys specified in the non_key_attributes
+	// parameter.
 	// +kubebuilder:validation:Required
 	ProjectionType *string `json:"projectionType" tf:"projection_type,omitempty"`
 
@@ -61,9 +69,17 @@ type LocalSecondaryIndexParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Only required with INCLUDE as a
+	// projection type; a list of attributes to project into the index. These
+	// do not need to be defined as attributes on the table.
 	// +kubebuilder:validation:Optional
 	NonKeyAttributes []*string `json:"nonKeyAttributes,omitempty" tf:"non_key_attributes,omitempty"`
 
+	// One of ALL, INCLUDE or KEYS_ONLY
+	// where ALL projects every attribute into the index, KEYS_ONLY
+	// projects just the hash and range key into the index, and INCLUDE
+	// projects only the keys specified in the non_key_attributes
+	// parameter.
 	// +kubebuilder:validation:Required
 	ProjectionType *string `json:"projectionType" tf:"projection_type,omitempty"`
 
@@ -76,6 +92,7 @@ type PointInTimeRecoveryObservation struct {
 
 type PointInTimeRecoveryParameters struct {
 
+	// Indicates whether ttl is enabled (true) or disabled (false).
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
@@ -85,6 +102,7 @@ type ServerSideEncryptionObservation struct {
 
 type ServerSideEncryptionParameters struct {
 
+	// Indicates whether ttl is enabled (true) or disabled (false).
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
@@ -101,6 +119,7 @@ type TTLParameters struct {
 	// +kubebuilder:validation:Required
 	AttributeName *string `json:"attributeName" tf:"attribute_name,omitempty"`
 
+	// Indicates whether ttl is enabled (true) or disabled (false).
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -166,7 +185,7 @@ type TableParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Configuration block with DynamoDB Global Tables V2  replication configurations. Detailed below.
+	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. Detailed below.
 	// +kubebuilder:validation:Optional
 	Replica []TableReplicaParameters `json:"replica,omitempty" tf:"replica,omitempty"`
 
@@ -186,7 +205,7 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerSideEncryption []ServerSideEncryptionParameters `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
-	// Indicates whether Streams are to be enabled  or disabled .
+	// Indicates whether Streams are to be enabled (true) or disabled (false).
 	// +kubebuilder:validation:Optional
 	StreamEnabled *bool `json:"streamEnabled,omitempty" tf:"stream_enabled,omitempty"`
 

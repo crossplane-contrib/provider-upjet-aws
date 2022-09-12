@@ -68,7 +68,7 @@ type RouteTableRouteObservation struct {
 	// The CIDR block of the route.
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
-	// The Amazon Resource Name  of a core network.
+	// The Amazon Resource Name (ARN) of a core network.
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
 
 	// The ID of a managed prefix list destination of the route.

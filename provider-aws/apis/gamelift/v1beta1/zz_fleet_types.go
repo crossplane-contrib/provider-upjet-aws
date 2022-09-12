@@ -170,7 +170,7 @@ type RuntimeConfigurationObservation struct {
 
 type RuntimeConfigurationParameters struct {
 
-	// Maximum amount of time  that a game session can remain in status ACTIVATING.
+	// Maximum amount of time (in seconds) that a game session can remain in status ACTIVATING.
 	// +kubebuilder:validation:Optional
 	GameSessionActivationTimeoutSeconds *float64 `json:"gameSessionActivationTimeoutSeconds,omitempty" tf:"game_session_activation_timeout_seconds,omitempty"`
 

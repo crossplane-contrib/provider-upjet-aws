@@ -21,6 +21,9 @@ type AbortStatementParameters struct {
 	// +kubebuilder:validation:Required
 	Message []MessageParameters `json:"message" tf:"message,omitempty"`
 
+	// The response card. Amazon Lex will substitute session attributes and
+	// slot values into the response card. For more information, see
+	// Example: Using a Response Card.
 	// +kubebuilder:validation:Optional
 	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
 }
@@ -83,7 +86,7 @@ type BotParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableModelImprovements *bool `json:"enableModelImprovements,omitempty" tf:"enable_model_improvements,omitempty"`
 
-	// The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. Default is 300. Must be a number between 60 and 86400 .
+	// The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. Default is 300. Must be a number between 60 and 86400 (inclusive).
 	// +kubebuilder:validation:Optional
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
@@ -144,6 +147,9 @@ type ClarificationPromptParameters struct {
 	// +kubebuilder:validation:Required
 	Message []ClarificationPromptMessageParameters `json:"message" tf:"message,omitempty"`
 
+	// The response card. Amazon Lex will substitute session attributes and
+	// slot values into the response card. For more information, see
+	// Example: Using a Response Card.
 	// +kubebuilder:validation:Optional
 	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
 }

@@ -15,7 +15,7 @@ import (
 
 type InstanceRoleAssociationObservation struct {
 
-	// DB Instance Identifier and IAM Role ARN separated by a comma
+	// DB Instance Identifier and IAM Role ARN separated by a comma (,)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -44,7 +44,7 @@ type InstanceRoleAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Amazon Resource Name  of the IAM Role to associate with the DB Instance.
+	// Amazon Resource Name (ARN) of the IAM Role to associate with the DB Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

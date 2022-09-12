@@ -25,7 +25,7 @@ type DestinationConfigParameters struct {
 
 type EventSourceMappingObservation struct {
 
-	// The the ARN of the Lambda function the event source mapping is sending events to.
+	// The the ARN of the Lambda function the event source mapping is sending events to. (Note: this is a computed value that differs from function_name above.)
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -52,11 +52,11 @@ type EventSourceMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// If the function returns an error, split the batch in two and retry. Only available for stream sources . Defaults to false.
+	// If the function returns an error, split the batch in two and retry. Only available for stream sources (DynamoDB and Kinesis). Defaults to false.
 	// +kubebuilder:validation:Optional
 	BisectBatchOnFunctionError *bool `json:"bisectBatchOnFunctionError,omitempty" tf:"bisect_batch_on_function_error,omitempty"`
 
-	// An Amazon SQS queue or Amazon SNS topic destination for failed records. Only available for stream sources . Detailed below.
+	// An Amazon SQS queue or Amazon SNS topic destination for failed records. Only available for stream sources (DynamoDB and Kinesis). Detailed below.
 	// +kubebuilder:validation:Optional
 	DestinationConfig []DestinationConfigParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
@@ -86,23 +86,23 @@ type EventSourceMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
-	// A list of current response type enums applied to the event source mapping for AWS Lambda checkpointing. Only available for SQS and stream sources . Valid values: ReportBatchItemFailures.
+	// A list of current response type enums applied to the event source mapping for AWS Lambda checkpointing. Only available for SQS and stream sources (DynamoDB and Kinesis). Valid values: ReportBatchItemFailures.
 	// +kubebuilder:validation:Optional
 	FunctionResponseTypes []*string `json:"functionResponseTypes,omitempty" tf:"function_response_types,omitempty"`
 
-	// The maximum amount of time to gather records before invoking the function, in seconds . Records will continue to buffer  until either maximum_batching_window_in_seconds expires or batch_size has been met. For streaming event sources, defaults to as soon as records are available in the stream. If the batch it reads from the stream/queue only has one record in it, Lambda only sends one record to the function. Only available for stream sources  and SQS standard queues.
+	// The maximum amount of time to gather records before invoking the function, in seconds (between 0 and 300). Records will continue to buffer (or accumulate in the case of an SQS queue event source) until either maximum_batching_window_in_seconds expires or batch_size has been met. For streaming event sources, defaults to as soon as records are available in the stream. If the batch it reads from the stream/queue only has one record in it, Lambda only sends one record to the function. Only available for stream sources (DynamoDB and Kinesis) and SQS standard queues.
 	// +kubebuilder:validation:Optional
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
-	// The maximum age of a record that Lambda sends to a function for processing. Only available for stream sources . Must be either -1  or between 60 and 604800 .
+	// The maximum age of a record that Lambda sends to a function for processing. Only available for stream sources (DynamoDB and Kinesis). Must be either -1 (forever, and the default value) or between 60 and 604800 (inclusive).
 	// +kubebuilder:validation:Optional
 	MaximumRecordAgeInSeconds *float64 `json:"maximumRecordAgeInSeconds,omitempty" tf:"maximum_record_age_in_seconds,omitempty"`
 
-	// The maximum number of times to retry when the function returns an error. Only available for stream sources . Minimum and default of -1 , maximum of 10000.
+	// The maximum number of times to retry when the function returns an error. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of -1 (forever), maximum of 10000.
 	// +kubebuilder:validation:Optional
 	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 
-	// The number of batches to process from each shard concurrently. Only available for stream sources . Minimum and default of 1, maximum of 10.
+	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
 	// +kubebuilder:validation:Optional
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
@@ -123,7 +123,7 @@ type EventSourceMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceAccessConfiguration []SourceAccessConfigurationParameters `json:"sourceAccessConfiguration,omitempty" tf:"source_access_configuration,omitempty"`
 
-	// The position in the stream where AWS Lambda should start reading. Must be one of AT_TIMESTAMP , LATEST or TRIM_HORIZON if getting events from Kinesis, DynamoDB or MSK. Must not be provided if getting events from SQS. More information about these positions can be found in the AWS DynamoDB Streams API Reference and AWS Kinesis API Reference.
+	// The position in the stream where AWS Lambda should start reading. Must be one of AT_TIMESTAMP (Kinesis only), LATEST or TRIM_HORIZON if getting events from Kinesis, DynamoDB or MSK. Must not be provided if getting events from SQS. More information about these positions can be found in the AWS DynamoDB Streams API Reference and AWS Kinesis API Reference.
 	// +kubebuilder:validation:Optional
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 
@@ -135,7 +135,7 @@ type EventSourceMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	Topics []*string `json:"topics,omitempty" tf:"topics,omitempty"`
 
-	// The duration in seconds of a processing window for AWS Lambda streaming analytics. The range is between 1 second up to 900 seconds. Only available for stream sources .
+	// The duration in seconds of a processing window for AWS Lambda streaming analytics. The range is between 1 second up to 900 seconds. Only available for stream sources (DynamoDB and Kinesis).
 	// +kubebuilder:validation:Optional
 	TumblingWindowInSeconds *float64 `json:"tumblingWindowInSeconds,omitempty" tf:"tumbling_window_in_seconds,omitempty"`
 }
@@ -165,7 +165,7 @@ type OnFailureObservation struct {
 
 type OnFailureParameters struct {
 
-	// The Amazon Resource Name  of the destination resource.
+	// The Amazon Resource Name (ARN) of the destination resource.
 	// +kubebuilder:validation:Required
 	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
 }

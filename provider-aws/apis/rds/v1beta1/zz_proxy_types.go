@@ -26,11 +26,11 @@ type AuthParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Whether to require or disallow AWS Identity and Access Management  authentication for connections to the proxy. One of DISABLED, REQUIRED.
+	// Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy. One of DISABLED, REQUIRED.
 	// +kubebuilder:validation:Optional
 	IAMAuth *string `json:"iamAuth,omitempty" tf:"iam_auth,omitempty"`
 
-	// The Amazon Resource Name  representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
+	// The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -51,13 +51,13 @@ type AuthParameters struct {
 
 type ProxyObservation struct {
 
-	// The Amazon Resource Name  for the proxy.
+	// The Amazon Resource Name (ARN) for the proxy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The Amazon Resource Name  for the proxy.
+	// The Amazon Resource Name (ARN) for the proxy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
@@ -66,7 +66,7 @@ type ProxyObservation struct {
 
 type ProxyParameters struct {
 
-	// Configuration block with authorization mechanisms to connect to the associated instances or clusters. Described below.
+	// Configuration block(s) with authorization mechanisms to connect to the associated instances or clusters. Described below.
 	// +kubebuilder:validation:Required
 	Auth []AuthParameters `json:"auth" tf:"auth,omitempty"`
 
@@ -87,11 +87,11 @@ type ProxyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// A Boolean parameter that specifies whether Transport Layer Security  encryption is required for connections to the proxy. By enabling this setting, you can enforce encrypted TLS connections to the proxy.
+	// A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy. By enabling this setting, you can enforce encrypted TLS connections to the proxy.
 	// +kubebuilder:validation:Optional
 	RequireTLS *bool `json:"requireTls,omitempty" tf:"require_tls,omitempty"`
 
-	// The Amazon Resource Name  of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
+	// The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

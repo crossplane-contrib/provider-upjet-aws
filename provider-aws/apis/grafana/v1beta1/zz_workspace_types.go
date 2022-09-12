@@ -15,7 +15,7 @@ import (
 
 type WorkspaceObservation struct {
 
-	// The Amazon Resource Name  of the Grafana workspace.
+	// The Amazon Resource Name (ARN) of the Grafana workspace.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The endpoint of the Grafana workspace.

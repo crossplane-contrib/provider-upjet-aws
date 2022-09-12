@@ -141,7 +141,7 @@ spec:
                     type: object
                   destination:
                     description: Contains information about where to publish the inventory
-                      results .
+                      results (documented below).
                     items:
                       properties:
                         bucket:
@@ -237,19 +237,19 @@ spec:
                                 type: object
                               encryption:
                                 description: Contains the type of server-side encryption
-                                  to use to encrypt the inventory .
+                                  to use to encrypt the inventory (documented below).
                                 items:
                                   properties:
                                     sseKms:
                                       description: Specifies to use server-side encryption
                                         with AWS KMS-managed keys to encrypt the inventory
-                                        file .
+                                        file (documented below).
                                       items:
                                         properties:
                                           keyId:
                                             description: The ARN of the KMS customer
-                                              master key  used to encrypt the inventory
-                                              file.
+                                              master key (CMK) used to encrypt the
+                                              inventory file.
                                             type: string
                                         required:
                                         - keyId
@@ -257,8 +257,8 @@ spec:
                                       type: array
                                     sseS3:
                                       description: Specifies to use server-side encryption
-                                        with Amazon S3-managed keys  to encrypt the
-                                        inventory file.
+                                        with Amazon S3-managed keys (SSE-S3) to encrypt
+                                        the inventory file.
                                       items:
                                         type: object
                                       type: array
@@ -283,7 +283,8 @@ spec:
                     type: boolean
                   filter:
                     description: Specifies an inventory filter. The inventory only
-                      includes objects that meet the filter's criteria .
+                      includes objects that meet the filter's criteria (documented
+                      below).
                     items:
                       properties:
                         prefix:
@@ -311,7 +312,7 @@ spec:
                     type: string
                   schedule:
                     description: Specifies the schedule for generating inventory results
-                      .
+                      (documented below).
                     items:
                       properties:
                         frequency:

@@ -27,7 +27,7 @@ type AccountPasswordPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowUsersToChangePassword *bool `json:"allowUsersToChangePassword,omitempty" tf:"allow_users_to_change_password,omitempty"`
 
-	// Whether users are prevented from setting a new password after their password has expired
+	// Whether users are prevented from setting a new password after their password has expired (i.e., require administrator reset)
 	// +kubebuilder:validation:Optional
 	HardExpiry *bool `json:"hardExpiry,omitempty" tf:"hard_expiry,omitempty"`
 

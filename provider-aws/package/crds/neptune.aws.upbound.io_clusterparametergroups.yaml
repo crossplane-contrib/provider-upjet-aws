@@ -66,7 +66,7 @@ spec:
                 properties:
                   description:
                     description: The description of the neptune cluster parameter
-                      group. Defaults to "Managed by Terraform".
+                      group.
                     type: string
                   family:
                     description: The family of the neptune cluster parameter group.

@@ -15,12 +15,12 @@ import (
 
 type AliasObservation struct {
 
-	// The Amazon Resource Name  of the key alias.
+	// The Amazon Resource Name (ARN) of the key alias.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name  of the target key identifier.
+	// The Amazon Resource Name (ARN) of the target key identifier.
 	TargetKeyArn *string `json:"targetKeyArn,omitempty" tf:"target_key_arn,omitempty"`
 }
 

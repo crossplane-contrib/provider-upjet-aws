@@ -15,7 +15,7 @@ import (
 
 type ProxyEndpointObservation struct {
 
-	// The Amazon Resource Name  for the proxy endpoint.
+	// The Amazon Resource Name (ARN) for the proxy endpoint.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.

@@ -15,20 +15,21 @@ import (
 
 type DelegationSetObservation struct {
 
-	// The Amazon Resource Name  of the Delegation Set.
+	// The Amazon Resource Name (ARN) of the Delegation Set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The delegation set ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A list of authoritative name servers for the hosted zone
-	// .
+	// (effectively a list of NS records).
 	NameServers []*string `json:"nameServers,omitempty" tf:"name_servers,omitempty"`
 }
 
 type DelegationSetParameters struct {
 
 	// This is a reference name used in Caller Reference
+	// (helpful for identifying single delegation set amongst others)
 	// +kubebuilder:validation:Optional
 	ReferenceName *string `json:"referenceName,omitempty" tf:"reference_name,omitempty"`
 

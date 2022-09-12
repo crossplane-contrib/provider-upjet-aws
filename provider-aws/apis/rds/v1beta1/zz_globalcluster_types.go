@@ -15,7 +15,7 @@ import (
 
 type GlobalClusterMembersObservation struct {
 
-	// Amazon Resource Name  of member DB Cluster
+	// Amazon Resource Name (ARN) of member DB Cluster
 	DBClusterArn *string `json:"dbClusterArn,omitempty" tf:"db_cluster_arn,omitempty"`
 
 	// Whether the member is the primary DB Cluster
@@ -27,7 +27,7 @@ type GlobalClusterMembersParameters struct {
 
 type GlobalClusterObservation struct {
 
-	// RDS Global Cluster Amazon Resource Name
+	// RDS Global Cluster Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Set of objects containing Global Cluster members.
@@ -50,11 +50,11 @@ type GlobalClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Name of the database engine to be used for this DB cluster. Terraform will only perform drift detection if a configuration value is provided. Valid values: aurora, aurora-mysql, aurora-postgresql. Defaults to aurora. Conflicts with source_db_cluster_identifier.
+	// Name of the database engine to be used for this DB cluster. Valid values: aurora, aurora-mysql, aurora-postgresql. Defaults to aurora. Conflicts with source_db_cluster_identifier.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// Engine version of the Aurora global database. The engine, engine_version, and instance_class  must together support global databases. See Using Amazon Aurora global databases for more information. By upgrading the engine version, Terraform will upgrade cluster members. NOTE: To avoid an inconsistent final plan error while upgrading, use the lifecycle ignore_changes for engine_version meta argument on the associated aws_rds_cluster resource as shown above in Upgrading Engine Versions example.
+	// Engine version of the Aurora global database. The engine, engine_version, and instance_class (on the aws_rds_cluster_instance) must together support global databases. See Using Amazon Aurora global databases for more information. NOTE: To avoid an inconsistent final plan error while upgrading, use the lifecycle ignore_changes for engine_version meta argument on the associated aws_rds_cluster resource as shown above in Upgrading Engine Versions example.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -67,7 +67,7 @@ type GlobalClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Amazon Resource Name  to use as the primary DB Cluster of the Global Cluster on creation. Terraform cannot perform drift detection of this value.
+	// Amazon Resource Name (ARN) to use as the primary DB Cluster of the Global Cluster on creation.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -81,7 +81,7 @@ type GlobalClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceDBClusterIdentifierSelector *v1.Selector `json:"sourceDbClusterIdentifierSelector,omitempty" tf:"-"`
 
-	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted. Terraform will only perform drift detection if a configuration value is provided.
+	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
 	// +kubebuilder:validation:Optional
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 }

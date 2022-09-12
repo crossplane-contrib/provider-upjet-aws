@@ -35,7 +35,7 @@ type FrameworkObservation struct {
 	// The ARN of the backup framework.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The date and time that a framework is created, in Unix format and Coordinated Universal Time .
+	// The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC).
 	CreationTime *string `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
 
 	// The deployment status of a framework. The statuses are: CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED.

@@ -89,6 +89,7 @@ spec:
                       type: object
                     type: array
                   cluster:
+                    description: ARN of an ECS cluster.
                     type: string
                   clusterRef:
                     description: Reference to a Cluster to populate cluster.
@@ -189,19 +190,26 @@ spec:
                     items:
                       properties:
                         type:
+                          description: 'Type of deployment controller. Valid values:
+                            CODE_DEPLOY, ECS, EXTERNAL. Default: ECS.'
                           type: string
                       type: object
                     type: array
                   deploymentMaximumPercent:
-                    description: Upper limit  of the number of running tasks that
-                      can be running in a service during a deployment. Not valid when
-                      using the DAEMON scheduling strategy.
+                    description: Upper limit (as a percentage of the service's desiredCount)
+                      of the number of running tasks that can be running in a service
+                      during a deployment. Not valid when using the DAEMON scheduling
+                      strategy.
                     type: number
                   deploymentMinimumHealthyPercent:
-                    description: Lower limit  of the number of running tasks that
-                      must remain running and healthy in a service during a deployment.
+                    description: Lower limit (as a percentage of the service's desiredCount)
+                      of the number of running tasks that must remain running and
+                      healthy in a service during a deployment.
                     type: number
                   desiredCount:
+                    description: Number of instances of the task definition to place
+                      and keep running. Defaults to 0. Do not specify if using the
+                      DAEMON scheduling strategy.
                     type: number
                   enableEcsManagedTags:
                     description: Specifies whether to enable Amazon ECS managed tags
@@ -214,9 +222,10 @@ spec:
                   forceNewDeployment:
                     description: Enable to force a new task deployment of the service.
                       This can be used to update tasks to use a newer Docker image
-                      with same image/tag combination , roll Fargate tasks onto a
-                      newer platform version, or immediately deploy ordered_placement_strategy
-                      and placement_constraints updates.
+                      with same image/tag combination (e.g., myimage:latest), roll
+                      Fargate tasks onto a newer platform version, or immediately
+                      deploy ordered_placement_strategy and placement_constraints
+                      updates.
                     type: boolean
                   healthCheckGracePeriodSeconds:
                     description: Seconds to ignore failing load balancer health checks
@@ -225,6 +234,14 @@ spec:
                       balancers.
                     type: number
                   iamRole:
+                    description: ARN of the IAM role that allows Amazon ECS to make
+                      calls to your load balancer on your behalf. This parameter is
+                      required if you are using a load balancer with your service,
+                      but only if your task definition does not use the awsvpc network
+                      mode. If using awsvpc network mode, do not specify this role.
+                      If your account has already created the Amazon ECS service-linked
+                      role, that role is used by default for your service unless you
+                      specify a role here.
                     type: string
                   iamRoleRef:
                     description: Reference to a Role in iam to populate iamRole.
@@ -308,11 +325,17 @@ spec:
                     items:
                       properties:
                         containerName:
+                          description: Container name value, already specified in
+                            the task definition, to be used for your service discovery
+                            service.
                           type: string
                         containerPort:
+                          description: Port value, already specified in the task definition,
+                            to be used for your service discovery service.
                           type: number
                         elbName:
-                          description: Name of the ELB  to associate with the service.
+                          description: Name of the service (up to 255 letters, numbers,
+                            hyphens, and underscores)
                           type: string
                         targetGroupArn:
                           description: ARN of the Load Balancer target group to associate
@@ -331,8 +354,9 @@ spec:
                     items:
                       properties:
                         assignPublicIp:
-                          description: Assign a public IP address to the ENI . Valid
-                            values are true or false. Default false.
+                          description: Assign a public IP address to the ENI (Fargate
+                            launch type only). Valid values are true or false. Default
+                            false.
                           type: boolean
                         securityGroupRefs:
                           description: References to SecurityGroup in ec2 to populate
@@ -522,13 +546,15 @@ spec:
                       properties:
                         field:
                           description: For the spread placement strategy, valid values
-                            are instanceId , or any platform or custom attribute that
-                            is applied to a container instance. For the binpack type,
-                            valid values are memory and cpu. For the random type,
-                            this attribute is not needed. For more information, see
-                            Placement Strategy.
+                            are instanceId (or host, which has the same effect), or
+                            any platform or custom attribute that is applied to a
+                            container instance. For the binpack type, valid values
+                            are memory and cpu. For the random type, this attribute
+                            is not needed. For more information, see Placement Strategy.
                           type: string
                         type:
+                          description: 'Type of deployment controller. Valid values:
+                            CODE_DEPLOY, ECS, EXTERNAL. Default: ECS.'
                           type: string
                       required:
                       - type
@@ -549,6 +575,8 @@ spec:
                             Guide.
                           type: string
                         type:
+                          description: 'Type of deployment controller. Valid values:
+                            CODE_DEPLOY, ECS, EXTERNAL. Default: ECS.'
                           type: string
                       required:
                       - type
@@ -580,8 +608,12 @@ spec:
                     items:
                       properties:
                         containerName:
+                          description: Name of the service (up to 255 letters, numbers,
+                            hyphens, and underscores)
                           type: string
                         containerPort:
+                          description: Port value, already specified in the task definition,
+                            to be used for your service discovery service.
                           type: number
                         port:
                           description: Port value used if your Service Discovery service
@@ -590,7 +622,8 @@ spec:
                         registryArn:
                           description: ARN of the Service Registry. The currently
                             supported service registry is Amazon Route 53 Auto Naming
-                            Service. For more information, see Service
+                            Service(aws_service_discovery_service). For more information,
+                            see Service
                           type: string
                       required:
                       - registryArn
@@ -604,14 +637,13 @@ spec:
                       matching keys will overwrite those defined at the provider-level.
                     type: object
                   taskDefinition:
-                    description: Family and revision  or full ARN of the task definition
-                      that you want to run in your service. Required unless using
-                      the EXTERNAL deployment controller. If a revision is not specified,
-                      the latest ACTIVE revision is used.
+                    description: Family and revision (family:revision) or full ARN
+                      of the task definition that you want to run in your service.
+                      Required unless using the EXTERNAL deployment controller. If
+                      a revision is not specified, the latest ACTIVE revision is used.
                     type: string
                   waitForSteadyState:
-                    description: If true, Terraform will wait for the service to reach
-                      a steady state  before continuing. Default false.
+                    description: Default false.
                     type: boolean
                 required:
                 - region

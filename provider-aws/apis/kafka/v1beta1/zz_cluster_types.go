@@ -33,11 +33,11 @@ type BrokerNodeGroupInfoObservation struct {
 
 type BrokerNodeGroupInfoParameters struct {
 
-	// The distribution of broker nodes across availability zones . Currently the only valid value is DEFAULT.
+	// The distribution of broker nodes across availability zones (documentation). Currently the only valid value is DEFAULT.
 	// +kubebuilder:validation:Optional
 	AzDistribution *string `json:"azDistribution,omitempty" tf:"az_distribution,omitempty"`
 
-	// A list of subnets to connect to in client VPC .
+	// A list of subnets to connect to in client VPC (documentation).
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	ClientSubnets []*string `json:"clientSubnets,omitempty" tf:"client_subnets,omitempty"`
@@ -50,7 +50,7 @@ type BrokerNodeGroupInfoParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientSubnetsSelector *v1.Selector `json:"clientSubnetsSelector,omitempty" tf:"-"`
 
-	// Information about the cluster access configuration. See below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible .
+	// Information about the cluster access configuration. See below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
 	// +kubebuilder:validation:Optional
 	ConnectivityInfo []ConnectivityInfoParameters `json:"connectivityInfo,omitempty" tf:"connectivity_info,omitempty"`
 
@@ -58,7 +58,7 @@ type BrokerNodeGroupInfoParameters struct {
 	// +kubebuilder:validation:Optional
 	EBSVolumeSize *float64 `json:"ebsVolumeSize,omitempty" tf:"ebs_volume_size,omitempty"`
 
-	// Specify the instance type to use for the kafka brokersE.g., kafka.m5.large.
+	// Specify the instance type to use for the kafka brokersE.g., kafka.m5.large. (Pricing info)
 	// +kubebuilder:validation:Required
 	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
 
@@ -126,22 +126,22 @@ type ClusterObservation struct {
 	// Comma separated list of one or more hostname:port pairs of kafka brokers suitable to bootstrap connectivity to the kafka cluster. Contains a value if encryption_info.0.encryption_in_transit.0.client_broker is set to PLAINTEXT or TLS_PLAINTEXT. The resource sorts values alphabetically. AWS may not always return all endpoints so this value is not guaranteed to be stable across applies.
 	BootstrapBrokers *string `json:"bootstrapBrokers,omitempty" tf:"bootstrap_brokers,omitempty"`
 
-	// One or more DNS names  and SASL IAM port pairs. For example, b-1-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198,b-2-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198,b-3-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198. This attribute will have a value if encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS and client_authentication.0.sasl.0.iam is set to true and broker_node_group_info.0.connectivity_info.0.public_access.0.type is set to SERVICE_PROVIDED_EIPS and the cluster fulfill all other requirements for public access. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
+	// One or more DNS names (or IP addresses) and SASL IAM port pairs. For example, b-1-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198,b-2-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198,b-3-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198. This attribute will have a value if encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS and client_authentication.0.sasl.0.iam is set to true and broker_node_group_info.0.connectivity_info.0.public_access.0.type is set to SERVICE_PROVIDED_EIPS and the cluster fulfill all other requirements for public access. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
 	BootstrapBrokersPublicSaslIAM *string `json:"bootstrapBrokersPublicSaslIam,omitempty" tf:"bootstrap_brokers_public_sasl_iam,omitempty"`
 
-	// One or more DNS names  and SASL SCRAM port pairs. For example, b-1-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196,b-2-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196,b-3-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196. This attribute will have a value if encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS and client_authentication.0.sasl.0.scram is set to true and broker_node_group_info.0.connectivity_info.0.public_access.0.type is set to SERVICE_PROVIDED_EIPS and the cluster fulfill all other requirements for public access. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
+	// One or more DNS names (or IP addresses) and SASL SCRAM port pairs. For example, b-1-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196,b-2-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196,b-3-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196. This attribute will have a value if encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS and client_authentication.0.sasl.0.scram is set to true and broker_node_group_info.0.connectivity_info.0.public_access.0.type is set to SERVICE_PROVIDED_EIPS and the cluster fulfill all other requirements for public access. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
 	BootstrapBrokersPublicSaslScram *string `json:"bootstrapBrokersPublicSaslScram,omitempty" tf:"bootstrap_brokers_public_sasl_scram,omitempty"`
 
-	// One or more DNS names  and TLS port pairs. For example, b-1-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194,b-2-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194,b-3-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194. This attribute will have a value if encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS and broker_node_group_info.0.connectivity_info.0.public_access.0.type is set to SERVICE_PROVIDED_EIPS and the cluster fulfill all other requirements for public access. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
+	// One or more DNS names (or IP addresses) and TLS port pairs. For example, b-1-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194,b-2-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194,b-3-public.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194. This attribute will have a value if encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS and broker_node_group_info.0.connectivity_info.0.public_access.0.type is set to SERVICE_PROVIDED_EIPS and the cluster fulfill all other requirements for public access. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
 	BootstrapBrokersPublicTLS *string `json:"bootstrapBrokersPublicTls,omitempty" tf:"bootstrap_brokers_public_tls,omitempty"`
 
-	// One or more DNS names  and SASL IAM port pairs. For example, b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098. This attribute will have a value if encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS and client_authentication.0.sasl.0.iam is set to true. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
+	// One or more DNS names (or IP addresses) and SASL IAM port pairs. For example, b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098. This attribute will have a value if encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS and client_authentication.0.sasl.0.iam is set to true. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
 	BootstrapBrokersSaslIAM *string `json:"bootstrapBrokersSaslIam,omitempty" tf:"bootstrap_brokers_sasl_iam,omitempty"`
 
-	// One or more DNS names  and SASL SCRAM port pairs. For example, b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096. This attribute will have a value if encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS and client_authentication.0.sasl.0.scram is set to true. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
+	// One or more DNS names (or IP addresses) and SASL SCRAM port pairs. For example, b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096. This attribute will have a value if encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS and client_authentication.0.sasl.0.scram is set to true. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
 	BootstrapBrokersSaslScram *string `json:"bootstrapBrokersSaslScram,omitempty" tf:"bootstrap_brokers_sasl_scram,omitempty"`
 
-	// One or more DNS names  and TLS port pairs. For example, b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094. This attribute will have a value if encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
+	// One or more DNS names (or IP addresses) and TLS port pairs. For example, b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094. This attribute will have a value if encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
 	BootstrapBrokersTLS *string `json:"bootstrapBrokersTls,omitempty" tf:"bootstrap_brokers_tls,omitempty"`
 
 	// Current version of the MSK Cluster used for updates, e.g., K13V1IB3VIYZZH
@@ -267,7 +267,7 @@ type EncryptionInfoObservation struct {
 
 type EncryptionInfoParameters struct {
 
-	// You may specify a KMS key short ID or ARN  to use for encrypting your data at rest.  If no key is specified, an AWS managed KMS  key will be used for encrypting the data at rest.
+	// You may specify a KMS key short ID or ARN (it will always output an ARN) to use for encrypting your data at rest.  If no key is specified, an AWS managed KMS ('aws/msk' managed service) key will be used for encrypting the data at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -438,7 +438,7 @@ type TLSObservation struct {
 
 type TLSParameters struct {
 
-	// List of ACM Certificate Authority Amazon Resource Names .
+	// List of ACM Certificate Authority Amazon Resource Names (ARNs).
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
@@ -457,7 +457,7 @@ type ClusterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Cluster is the Schema for the Clusters API. Terraform resource for managing an AWS Managed Streaming for Kafka cluster
+// Cluster is the Schema for the Clusters API. Upbound official provider resource for managing an aws managed streaming for kafka cluster
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

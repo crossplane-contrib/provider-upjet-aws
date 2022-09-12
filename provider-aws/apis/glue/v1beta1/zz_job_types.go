@@ -42,7 +42,7 @@ type ExecutionPropertyParameters struct {
 
 type JobObservation struct {
 
-	// Amazon Resource Name  of Glue Job
+	// Amazon Resource Name (ARN) of Glue Job
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Job name
@@ -62,7 +62,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	Connections []*string `json:"connections,omitempty" tf:"connections,omitempty"`
 
-	// xecution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+	// execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
 	// +kubebuilder:validation:Optional
 	DefaultArguments map[string]*string `json:"defaultArguments,omitempty" tf:"default_arguments,omitempty"`
 
@@ -78,7 +78,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	GlueVersion *string `json:"glueVersion,omitempty" tf:"glue_version,omitempty"`
 
-	// –  The maximum number of AWS Glue data processing units  that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
+	// –  The maximum number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
 	// +kubebuilder:validation:Optional
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
@@ -86,7 +86,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 
-	// verridable arguments for this job, specified as name-value pairs.
+	// overridable arguments for this job, specified as name-value pairs.
 	// +kubebuilder:validation:Optional
 	NonOverridableArguments map[string]*string `json:"nonOverridableArguments,omitempty" tf:"non_overridable_arguments,omitempty"`
 
@@ -125,7 +125,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// –  The job timeout in minutes. The default is 2880 minutes  for glueetl and pythonshell jobs, and null  for gluestreaming jobs.
+	// –  The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimted) for gluestreaming jobs.
 	// +kubebuilder:validation:Optional
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 

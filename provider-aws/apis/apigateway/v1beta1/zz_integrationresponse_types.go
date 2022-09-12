@@ -23,7 +23,7 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	ContentHandling *string `json:"contentHandling,omitempty" tf:"content_handling,omitempty"`
 
-	// The HTTP method
+	// The HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("http_method",false)
 	// +kubebuilder:validation:Optional

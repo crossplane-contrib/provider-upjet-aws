@@ -43,7 +43,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Configuration block with cluster settings. For example, this can be used to enable CloudWatch Container Insights for a cluster. Detailed below.
+	// Configuration block(s) with cluster settings. For example, this can be used to enable CloudWatch Container Insights for a cluster. Detailed below.
 	// +kubebuilder:validation:Optional
 	Setting []SettingParameters `json:"setting,omitempty" tf:"setting,omitempty"`
 

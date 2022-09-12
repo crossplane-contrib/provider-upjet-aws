@@ -66,11 +66,11 @@ spec:
                 properties:
                   cidrBlock:
                     description: The network range to allow or deny, in CIDR notation
-                      .
+                      (for example 172.16.0.0/24 ).
                     type: string
                   egress:
-                    description: Indicates whether this is an egress rule . Default
-                      false.
+                    description: Indicates whether this is an egress rule (rule is
+                      applied to traffic leaving the subnet). Default false.
                     type: boolean
                   fromPort:
                     description: The from port to match.
@@ -174,8 +174,8 @@ spec:
                       matches the rule. Accepted values: allow | deny'
                     type: string
                   ruleNumber:
-                    description: The rule number for the entry . ACL entries are processed
-                      in ascending order by rule number.
+                    description: The rule number for the entry (for example, 100).
+                      ACL entries are processed in ascending order by rule number.
                     type: number
                   toPort:
                     description: The to port to match.

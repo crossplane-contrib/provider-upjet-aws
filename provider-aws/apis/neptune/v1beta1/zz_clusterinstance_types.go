@@ -18,7 +18,7 @@ type ClusterInstanceObservation struct {
 	// The hostname of the instance. See also endpoint and port.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// Amazon Resource Name  of neptune instance
+	// Amazon Resource Name (ARN) of neptune instance
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The region-unique, immutable identifier for the neptune instance.

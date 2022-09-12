@@ -108,7 +108,8 @@ spec:
                     type: string
                   iamDatabaseAuthenticationEnabled:
                     description: Specifies whether or not mappings of AWS Identity
-                      and Access Management  accounts to database accounts is enabled.
+                      and Access Management (IAM) accounts to database accounts is
+                      enabled.
                     type: boolean
                   iamRoleRefs:
                     description: References to Role in iam to populate iamRoles.
@@ -436,7 +437,7 @@ spec:
                     type: string
                   preferredMaintenanceWindow:
                     description: The weekly time range during which system maintenance
-                      can occur, in  e.g., wed:04:00-wed:04:30
+                      can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -880,7 +881,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Neptune Cluster Amazon Resource Name
+                    description: The Neptune Cluster Amazon Resource Name (ARN)
                     type: string
                   clusterMembers:
                     description: – List of Neptune Instances that are a part of this

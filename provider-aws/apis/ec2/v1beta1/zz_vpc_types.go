@@ -15,9 +15,10 @@ import (
 
 type VPCObservation struct {
 
-	// Amazon Resource Name  of VPC
+	// Amazon Resource Name (ARN) of VPC
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ID of the VPC
 	DHCPOptionsID *string `json:"dhcpOptionsId,omitempty" tf:"dhcp_options_id,omitempty"`
 
 	// The ID of the network ACL created by default on VPC creation

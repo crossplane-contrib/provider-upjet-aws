@@ -78,11 +78,11 @@ type DeliveryStreamObservation struct {
 
 type DeliveryStreamParameters struct {
 
-	// The Amazon Resource Name  specifying the Stream
+	// The Amazon Resource Name (ARN) specifying the Stream
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  This is the destination to where the data is delivered. The only options are s3 , extended_s3, redshift, elasticsearch, splunk, and http_endpoint.
+	// –  This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, and http_endpoint.
 	// +kubebuilder:validation:Required
 	Destination *string `json:"destination" tf:"destination,omitempty"`
 
@@ -117,7 +117,8 @@ type DeliveryStreamParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Required for non-S3 destinations. For S3 destination, use extended_s3_configuration instead. Configuration options for the s3 destination . More details are given below.
+	// Required for non-S3 destinations. For S3 destination, use extended_s3_configuration instead. Configuration options for the s3 destination (or the intermediate bucket if the destination
+	// is redshift). More details are given below.
 	// +kubebuilder:validation:Optional
 	S3Configuration []S3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
@@ -199,12 +200,14 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
+	// The data processing configuration.  More details are given below.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []ProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
+	// The Amazon Resource Name (ARN) specifying the Stream
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -303,9 +306,11 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// The data processing configuration.  More details are given below.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []ExtendedS3ConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
+	// The Amazon Resource Name (ARN) specifying the Stream
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -319,6 +324,7 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
 	// +kubebuilder:validation:Optional
 	S3BackupConfiguration []S3BackupConfigurationParameters `json:"s3BackupConfiguration,omitempty" tf:"s3_backup_configuration,omitempty"`
 
@@ -377,6 +383,7 @@ type HTTPEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The data processing configuration.  More details are given below.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []HTTPEndpointConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
@@ -387,6 +394,7 @@ type HTTPEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
+	// The Amazon Resource Name (ARN) specifying the Stream
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -464,6 +472,7 @@ type KinesisSourceConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	KinesisStreamArn *string `json:"kinesisStreamArn" tf:"kinesis_stream_arn,omitempty"`
 
+	// The Amazon Resource Name (ARN) specifying the Stream
 	// +kubebuilder:validation:Required
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
@@ -491,6 +500,7 @@ type OrcSerDeObservation struct {
 
 type OrcSerDeParameters struct {
 
+	// The Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
 	// +kubebuilder:validation:Optional
 	BlockSizeBytes *float64 `json:"blockSizeBytes,omitempty" tf:"block_size_bytes,omitempty"`
 
@@ -498,7 +508,7 @@ type OrcSerDeParameters struct {
 	// +kubebuilder:validation:Optional
 	BloomFilterColumns []*string `json:"bloomFilterColumns,omitempty" tf:"bloom_filter_columns,omitempty"`
 
-	// The Bloom filter false positive probability . The lower the FPP, the bigger the Bloom filter. The default value is 0.05, the minimum is 0, and the maximum is 1.
+	// The Bloom filter false positive probability (FPP). The lower the FPP, the bigger the Bloom filter. The default value is 0.05, the minimum is 0, and the maximum is 1.
 	// +kubebuilder:validation:Optional
 	BloomFilterFalsePositiveProbability *float64 `json:"bloomFilterFalsePositiveProbability,omitempty" tf:"bloom_filter_false_positive_probability,omitempty"`
 
@@ -549,7 +559,7 @@ type ParametersParameters struct {
 	// +kubebuilder:validation:Required
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
-	// Parameter value. Must be between 1 and 512 length . When providing a Lambda ARN, you should specify the resource version as well.
+	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Required
 	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
@@ -559,6 +569,7 @@ type ParquetSerDeObservation struct {
 
 type ParquetSerDeParameters struct {
 
+	// The Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
 	// +kubebuilder:validation:Optional
 	BlockSizeBytes *float64 `json:"blockSizeBytes,omitempty" tf:"block_size_bytes,omitempty"`
 
@@ -573,7 +584,7 @@ type ParquetSerDeParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxPaddingBytes *float64 `json:"maxPaddingBytes,omitempty" tf:"max_padding_bytes,omitempty"`
 
-	// The Parquet page size. Column chunks are divided into pages. A page is conceptually an indivisible unit . The minimum value is 64 KiB and the default is 1 MiB.
+	// The Parquet page size. Column chunks are divided into pages. A page is conceptually an indivisible unit (in terms of compression and encoding). The minimum value is 64 KiB and the default is 1 MiB.
 	// +kubebuilder:validation:Optional
 	PageSizeBytes *float64 `json:"pageSizeBytes,omitempty" tf:"page_size_bytes,omitempty"`
 
@@ -618,7 +629,7 @@ type ProcessingConfigurationProcessorsParametersParameters struct {
 	// +kubebuilder:validation:Required
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
-	// Parameter value. Must be between 1 and 512 length . When providing a Lambda ARN, you should specify the resource version as well.
+	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Required
 	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
@@ -646,7 +657,7 @@ type ProcessorsParametersParameters struct {
 	// +kubebuilder:validation:Required
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
-	// Parameter value. Must be between 1 and 512 length . When providing a Lambda ARN, you should specify the resource version as well.
+	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Required
 	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
@@ -696,12 +707,14 @@ type RedshiftConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
+	// The data processing configuration.  More details are given below.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []RedshiftConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
+	// The Amazon Resource Name (ARN) specifying the Stream
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -715,6 +728,7 @@ type RedshiftConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
 	// +kubebuilder:validation:Optional
 	S3BackupConfiguration []RedshiftConfigurationS3BackupConfigurationParameters `json:"s3BackupConfiguration,omitempty" tf:"s3_backup_configuration,omitempty"`
 
@@ -762,7 +776,7 @@ type RedshiftConfigurationProcessingConfigurationProcessorsParametersParameters 
 	// +kubebuilder:validation:Required
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
-	// Parameter value. Must be between 1 and 512 length . When providing a Lambda ARN, you should specify the resource version as well.
+	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Required
 	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
@@ -832,6 +846,7 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// The Amazon Resource Name (ARN) specifying the Stream
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -915,6 +930,7 @@ type S3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// The Amazon Resource Name (ARN) specifying the Stream
 	// +kubebuilder:validation:Required
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
@@ -984,6 +1000,7 @@ type S3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// The Amazon Resource Name (ARN) specifying the Stream
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -1015,6 +1032,7 @@ type SchemaConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// The Amazon Resource Name (ARN) specifying the Stream
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -1068,7 +1086,7 @@ type ServerSideEncryptionParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Amazon Resource Name  of the encryption key. Required when key_type is CUSTOMER_MANAGED_CMK.
+	// Amazon Resource Name (ARN) of the encryption key. Required when key_type is CUSTOMER_MANAGED_CMK.
 	// +kubebuilder:validation:Optional
 	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
 
@@ -1106,7 +1124,7 @@ type SplunkConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	HecAcknowledgmentTimeout *float64 `json:"hecAcknowledgmentTimeout,omitempty" tf:"hec_acknowledgment_timeout,omitempty"`
 
-	// The HTTP Event Collector  endpoint to which Kinesis Firehose sends your data.
+	// The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
 	// +kubebuilder:validation:Required
 	HecEndpoint *string `json:"hecEndpoint" tf:"hec_endpoint,omitempty"`
 
@@ -1118,6 +1136,7 @@ type SplunkConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	HecToken *string `json:"hecToken" tf:"hec_token,omitempty"`
 
+	// The data processing configuration.  More details are given below.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []SplunkConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
@@ -1164,7 +1183,7 @@ type SplunkConfigurationProcessingConfigurationProcessorsParametersParameters st
 	// +kubebuilder:validation:Required
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
-	// Parameter value. Must be between 1 and 512 length . When providing a Lambda ARN, you should specify the resource version as well.
+	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Required
 	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
@@ -1175,6 +1194,7 @@ type VPCConfigObservation struct {
 
 type VPCConfigParameters struct {
 
+	// The Amazon Resource Name (ARN) specifying the Stream
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

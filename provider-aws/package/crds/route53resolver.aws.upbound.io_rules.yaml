@@ -169,9 +169,9 @@ spec:
                       with matching keys will overwrite those defined at the provider-level.
                     type: object
                   targetIp:
-                    description: Configuration block indicating the IPs that you want
-                      Resolver to forward DNS queries to . This argument should only
-                      be specified for FORWARD type rules.
+                    description: Configuration block(s) indicating the IPs that you
+                      want Resolver to forward DNS queries to (documented below).
+                      This argument should only be specified for FORWARD type rules.
                     items:
                       properties:
                         ip:
@@ -368,7 +368,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN  for the resolver rule.
+                    description: The ARN (Amazon Resource Name) for the resolver rule.
                     type: string
                   id:
                     description: The ID of the resolver rule.

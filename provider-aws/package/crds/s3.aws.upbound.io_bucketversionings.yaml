@@ -354,7 +354,7 @@ spec:
                 properties:
                   id:
                     description: The bucket or bucket and expected_bucket_owner separated
-                      by a comma  if the latter is provided.
+                      by a comma (,) if the latter is provided.
                     type: string
                 type: object
               conditions:

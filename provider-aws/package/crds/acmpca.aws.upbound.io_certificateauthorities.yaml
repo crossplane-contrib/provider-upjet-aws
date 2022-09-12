@@ -88,7 +88,7 @@ spec:
                           items:
                             properties:
                               commonName:
-                                description: Fully qualified domain name  associated
+                                description: Fully qualified domain name (FQDN) associated
                                   with the certificate subject. Must be less than
                                   or equal to 64 characters in length.
                                 type: string
@@ -120,9 +120,9 @@ spec:
                                   to 5 characters in length.
                                 type: string
                               locality:
-                                description: The locality  in which the certificate
-                                  subject is located. Must be less than or equal to
-                                  128 characters in length.
+                                description: The locality (such as a city or town)
+                                  in which the certificate subject is located. Must
+                                  be less than or equal to 128 characters in length.
                                 type: string
                               organization:
                                 description: Legal name of the organization with which
@@ -130,9 +130,10 @@ spec:
                                   than or equal to 64 characters in length.
                                 type: string
                               organizationalUnit:
-                                description: A subdivision or unit of the organization  with
-                                  which the certificate subject is affiliated. Must
-                                  be less than or equal to 64 characters in length.
+                                description: A subdivision or unit of the organization
+                                  (such as sales or finance) with which the certificate
+                                  subject is affiliated. Must be less than or equal
+                                  to 64 characters in length.
                                 type: string
                               pseudonym:
                                 description: Typically a shortened version of a longer
@@ -185,8 +186,8 @@ spec:
                       properties:
                         crlConfiguration:
                           description: Nested argument containing configuration of
-                            the certificate revocation list , if any, maintained by
-                            the certificate authority. Defined below.
+                            the certificate revocation list (CRL), if any, maintained
+                            by the certificate authority. Defined below.
                           items:
                             properties:
                               customCname:
@@ -418,10 +419,10 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of the certificate authority.
+                    description: Amazon Resource Name (ARN) of the certificate authority.
                     type: string
                   certificate:
-                    description: Base64-encoded certificate authority  certificate.
+                    description: Base64-encoded certificate authority (CA) certificate.
                       Only available after the certificate authority certificate has
                       been imported.
                     type: string
@@ -434,11 +435,11 @@ spec:
                       imported.
                     type: string
                   certificateSigningRequest:
-                    description: The base64 PEM-encoded certificate signing request  for
-                      your private CA certificate.
+                    description: The base64 PEM-encoded certificate signing request
+                      (CSR) for your private CA certificate.
                     type: string
                   id:
-                    description: Amazon Resource Name  of the certificate authority.
+                    description: Amazon Resource Name (ARN) of the certificate authority.
                     type: string
                   notAfter:
                     description: Date and time after which the certificate authority
@@ -456,7 +457,8 @@ spec:
                       imported.
                     type: string
                   status:
-                    description: Status of the certificate authority.
+                    description: (Deprecated use the enabled attribute instead) Status
+                      of the certificate authority.
                     type: string
                   tagsAll:
                     additionalProperties:

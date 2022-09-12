@@ -77,6 +77,9 @@ spec:
                           items:
                             properties:
                               destination:
+                                description: Amazon Resource Name (ARN) of the destination
+                                  resource. See the Lambda Developer Guide for acceptable
+                                  resource types and associated IAM permissions.
                                 type: string
                               destinationRef:
                                 description: Reference to a Queue in sqs to populate
@@ -167,6 +170,9 @@ spec:
                           items:
                             properties:
                               destination:
+                                description: Amazon Resource Name (ARN) of the destination
+                                  resource. See the Lambda Developer Guide for acceptable
+                                  resource types and associated IAM permissions.
                                 type: string
                               destinationRef:
                                 description: Reference to a Topic in sns to populate
@@ -253,8 +259,8 @@ spec:
                       type: object
                     type: array
                   functionName:
-                    description: Name or Amazon Resource Name  of the Lambda Function,
-                      omitting any version or alias qualifier.
+                    description: Name or Amazon Resource Name (ARN) of the Lambda
+                      Function, omitting any version or alias qualifier.
                     type: string
                   maximumEventAgeInSeconds:
                     description: Maximum age of a request that Lambda sends to a function
@@ -456,7 +462,7 @@ spec:
                 properties:
                   id:
                     description: Fully qualified Lambda Function name or Amazon Resource
-                      Name
+                      Name (ARN)
                     type: string
                 type: object
               conditions:

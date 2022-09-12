@@ -86,7 +86,7 @@ type IntegrationParameters struct {
 	IntegrationSubtype *string `json:"integrationSubtype,omitempty" tf:"integration_subtype,omitempty"`
 
 	// The integration type of an integration.
-	// Valid values: AWS , AWS_PROXY, HTTP , HTTP_PROXY, MOCK . For an HTTP API private integration, use HTTP_PROXY.
+	// Valid values: AWS (supported only for WebSocket APIs), AWS_PROXY, HTTP (supported only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.
 	// +kubebuilder:validation:Required
 	IntegrationType *string `json:"integrationType" tf:"integration_type,omitempty"`
 
@@ -144,7 +144,6 @@ type IntegrationParameters struct {
 
 	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs.
 	// The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
-	// Terraform will only perform drift detection of its value when present in a configuration.
 	// +kubebuilder:validation:Optional
 	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 }
@@ -169,7 +168,7 @@ type TLSConfigObservation struct {
 
 type TLSConfigParameters struct {
 
-	// If you specify a server name, API Gateway uses it to verify the hostname on the integration's certificate. The server name is also included in the TLS handshake to support Server Name Indication  or virtual hosting.
+	// If you specify a server name, API Gateway uses it to verify the hostname on the integration's certificate. The server name is also included in the TLS handshake to support Server Name Indication (SNI) or virtual hosting.
 	// +kubebuilder:validation:Optional
 	ServerNameToVerify *string `json:"serverNameToVerify,omitempty" tf:"server_name_to_verify,omitempty"`
 }

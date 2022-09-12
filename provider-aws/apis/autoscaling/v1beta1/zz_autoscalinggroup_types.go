@@ -18,6 +18,7 @@ type AutoscalingGroupObservation struct {
 	// The ARN for this Auto Scaling Group
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The Auto Scaling Group id.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A list of elastic load balancer names to add to the autoscaling
@@ -49,12 +50,13 @@ type AutoscalingGroupParameters struct {
 
 	// Allows deleting the Auto Scaling Group without waiting
 	// for all instances in the pool to terminate.  You can force an Auto Scaling Group to delete
-	// even if it's in the process of scaling a resource. Normally, Terraform
-	// drains all the instances before deleting the group.  This bypasses that
+	// even if it's in the process of scaling a resource.  This bypasses that
 	// behavior and potentially leaves resources dangling.
 	// +kubebuilder:validation:Optional
 	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
+	// If this block is configured, add a Warm Pool
+	// to the specified Auto Scaling group. Defined below
 	// +kubebuilder:validation:Optional
 	ForceDeleteWarmPool *bool `json:"forceDeleteWarmPool,omitempty" tf:"force_delete_warm_pool,omitempty"`
 
@@ -83,6 +85,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchConfiguration *string `json:"launchConfiguration,omitempty" tf:"launch_configuration,omitempty"`
 
+	// Nested argument with Launch template specification to use to launch instances. See Launch Template below for more details.
 	// +kubebuilder:validation:Optional
 	LaunchTemplate []LaunchTemplateParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
@@ -97,9 +100,8 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	MetricsGranularity *string `json:"metricsGranularity,omitempty" tf:"metrics_granularity,omitempty"`
 
-	// Setting this causes Terraform to wait for
-	// this number of instances from this Auto Scaling Group to show up healthy in the
-	// ELB only on creation. Updates will not wait on ELB instance number changes.
+	// Updates will not wait on ELB instance number changes.
+	// (See also Waiting for Capacity below.)
 	// +kubebuilder:validation:Optional
 	MinELBCapacity *float64 `json:"minElbCapacity,omitempty" tf:"min_elb_capacity,omitempty"`
 
@@ -124,7 +126,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementGroupSelector *v1.Selector `json:"placementGroupSelector,omitempty" tf:"-"`
 
-	// n protection
+	// in protection
 	// in the Amazon EC2 Auto Scaling User Guide.
 	// +kubebuilder:validation:Optional
 	ProtectFromScaleIn *bool `json:"protectFromScaleIn,omitempty" tf:"protect_from_scale_in,omitempty"`
@@ -134,7 +136,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// inked role that the ASG will use to call other AWS services
+	// linked role that the ASG will use to call other AWS services
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -153,7 +155,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
-	// Configuration block containing resource tags. Conflicts with tags. See Tag below for more details.
+	// Configuration block(s) containing resource tags. Conflicts with tags. See Tag below for more details.
 	// +kubebuilder:validation:Optional
 	Tag []TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 
@@ -177,16 +179,14 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCZoneIdentifierSelector *v1.Selector `json:"vpcZoneIdentifierSelector,omitempty" tf:"-"`
 
-	// A maximum
-	// duration that Terraform should
-	// wait for ASG instances to be healthy before timing out.   Setting this to "0" causes
-	// Terraform to skip all Capacity Waiting behavior.
+	// (See also Waiting
+	// for Capacity below.
 	// +kubebuilder:validation:Optional
 	WaitForCapacityTimeout *string `json:"waitForCapacityTimeout,omitempty" tf:"wait_for_capacity_timeout,omitempty"`
 
-	// Setting this will cause Terraform to wait
-	// for exactly this number of healthy instances from this Auto Scaling Group in
-	// all attached load balancers on both create and update operations.
+	// (Takes
+	// precedence over min_elb_capacity behavior.)
+	// (See also Waiting for Capacity below.)
 	// +kubebuilder:validation:Optional
 	WaitForELBCapacity *float64 `json:"waitForElbCapacity,omitempty" tf:"wait_for_elb_capacity,omitempty"`
 
@@ -210,15 +210,18 @@ type InitialLifecycleHookParameters struct {
 	// +kubebuilder:validation:Required
 	LifecycleTransition *string `json:"lifecycleTransition" tf:"lifecycle_transition,omitempty"`
 
+	// The name of the launch template. Conflicts with id.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NotificationMetadata *string `json:"notificationMetadata,omitempty" tf:"notification_metadata,omitempty"`
 
+	// The ARN for this Auto Scaling Group
 	// +kubebuilder:validation:Optional
 	NotificationTargetArn *string `json:"notificationTargetArn,omitempty" tf:"notification_target_arn,omitempty"`
 
+	// The ARN for this Auto Scaling Group
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
@@ -286,6 +289,7 @@ type LaunchTemplateObservation struct {
 
 type LaunchTemplateParameters struct {
 
+	// The ID of the launch template. Conflicts with name.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.LaunchTemplate
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -299,9 +303,11 @@ type LaunchTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
 
+	// The name of the launch template. Conflicts with id.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Template version. Can be version number, $Latest, or $Default. (Default: $Default).
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -329,6 +335,7 @@ type LaunchTemplateSpecificationParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
 
+	// Template version. Can be version number, $Latest, or $Default. (Default: $Default).
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -355,6 +362,7 @@ type MixedInstancesPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	InstancesDistribution []InstancesDistributionParameters `json:"instancesDistribution,omitempty" tf:"instances_distribution,omitempty"`
 
+	// Nested argument with Launch template specification to use to launch instances. See Launch Template below for more details.
 	// +kubebuilder:validation:Required
 	LaunchTemplate []MixedInstancesPolicyLaunchTemplateParameters `json:"launchTemplate" tf:"launch_template,omitempty"`
 }
@@ -382,6 +390,7 @@ type OverrideLaunchTemplateSpecificationParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
 
+	// Template version. Can be version number, $Latest, or $Default. (Default: $Default).
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -463,7 +472,7 @@ type WarmPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
-	// Sets the instance state to transition to after the lifecycle hooks finish. Valid values are: Stopped , Running or Hibernated.
+	// Sets the instance state to transition to after the lifecycle hooks finish. Valid values are: Stopped (default), Running or Hibernated.
 	// +kubebuilder:validation:Optional
 	PoolState *string `json:"poolState,omitempty" tf:"pool_state,omitempty"`
 }

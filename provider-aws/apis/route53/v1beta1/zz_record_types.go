@@ -81,7 +81,7 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Optional
 	Alias []AliasParameters `json:"alias,omitempty" tf:"alias,omitempty"`
 
-	// Allow creation of this record in Terraform to overwrite an existing record, if any. This does not affect the ability to update the record in Terraform and does not prevent other resources within Terraform or manual Route 53 changes outside Terraform from overwriting this record. false by default. This configuration is not recommended for most environments.
+	// false by default. This configuration is not recommended for most environments.
 	// +kubebuilder:validation:Optional
 	AllowOverwrite *bool `json:"allowOverwrite,omitempty" tf:"allow_overwrite,omitempty"`
 
@@ -117,7 +117,7 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// A string list of records. To specify a single record value longer than 255 characters such as a TXT record for DKIM, add \"\" inside the Terraform configuration string .
+	// A string list of records.g., "first255characters\"\"morecharacters").
 	// +kubebuilder:validation:Optional
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 

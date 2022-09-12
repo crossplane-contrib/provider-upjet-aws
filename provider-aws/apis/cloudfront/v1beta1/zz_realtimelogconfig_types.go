@@ -64,7 +64,7 @@ type KinesisStreamConfigParameters struct {
 
 type RealtimeLogConfigObservation struct {
 
-	// The ARN  of the CloudFront real-time log configuration.
+	// The ARN (Amazon Resource Name) of the CloudFront real-time log configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ID of the CloudFront real-time log configuration.

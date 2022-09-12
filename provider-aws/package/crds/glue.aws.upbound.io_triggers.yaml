@@ -77,8 +77,10 @@ spec:
                             consumes, as well as arguments that AWS Glue itself consumes.
                           type: object
                         crawlerName:
+                          description: –  The name of the trigger.
                           type: string
                         jobName:
+                          description: –  The name of the trigger.
                           type: string
                         jobNameRef:
                           description: Reference to a Job in glue to populate jobName.
@@ -184,7 +186,8 @@ spec:
                     description: –  Start the trigger. Defaults to true.
                     type: boolean
                   eventBatchingCondition:
-                    description: Batch condition that must be met  before EventBridge
+                    description: Batch condition that must be met (specified number
+                      of events received or batch time window expired) before EventBridge
                       event trigger fires. See Event Batching Condition.
                     items:
                       properties:
@@ -219,8 +222,10 @@ spec:
                                   also be specified. Conflicts with state.
                                 type: string
                               crawlerName:
+                                description: –  The name of the trigger.
                                 type: string
                               jobName:
+                                description: –  The name of the trigger.
                                 type: string
                               jobNameRef:
                                 description: Reference to a Job in glue to populate
@@ -322,7 +327,7 @@ spec:
                       be created in.
                     type: string
                   schedule:
-                    description: ased Schedules for Jobs and Crawlers
+                    description: Based Schedules for Jobs and Crawlers
                     type: string
                   startOnCreation:
                     description: –  Set to true to start SCHEDULED and CONDITIONAL
@@ -341,8 +346,9 @@ spec:
                     type: string
                   workflowName:
                     description: A workflow to which the trigger should be associated
-                      to. Every workflow graph  needs a starting trigger  and can
-                      contain multiple additional CONDITIONAL triggers.
+                      to. Every workflow graph (DAG) needs a starting trigger (ON_DEMAND
+                      or SCHEDULED type) and can contain multiple additional CONDITIONAL
+                      triggers.
                     type: string
                 required:
                 - actions
@@ -526,7 +532,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of Glue Trigger
+                    description: Amazon Resource Name (ARN) of Glue Trigger
                     type: string
                   id:
                     description: Trigger name

@@ -18,11 +18,11 @@ type BucketMetricFilterObservation struct {
 
 type BucketMetricFilterParameters struct {
 
-	// Object prefix for filtering .
+	// Object prefix for filtering (singular).
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Object tags for filtering .
+	// Object tags for filtering (up to 10).
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -46,7 +46,7 @@ type BucketMetricParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags .
+	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
 	// +kubebuilder:validation:Optional
 	Filter []BucketMetricFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 

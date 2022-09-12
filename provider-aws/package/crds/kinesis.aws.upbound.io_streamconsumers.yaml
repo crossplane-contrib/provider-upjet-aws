@@ -72,8 +72,8 @@ spec:
                       be created in.
                     type: string
                   streamArn:
-                    description: –  Amazon Resource Name  of the data stream the consumer
-                      is registered with.
+                    description: –  Amazon Resource Name (ARN) of the data stream
+                      the consumer is registered with.
                     type: string
                   streamArnRef:
                     description: Reference to a Stream to populate streamArn.
@@ -329,14 +329,14 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of the stream consumer.
+                    description: Amazon Resource Name (ARN) of the stream consumer.
                     type: string
                   creationTimestamp:
                     description: Approximate timestamp in RFC3339 format of when the
                       stream consumer was created.
                     type: string
                   id:
-                    description: Amazon Resource Name  of the stream consumer.
+                    description: Amazon Resource Name (ARN) of the stream consumer.
                     type: string
                 type: object
               conditions:

@@ -66,7 +66,7 @@ spec:
                 properties:
                   blackhole:
                     description: Indicates whether to drop traffic that matches this
-                      route .
+                      route (default to false).
                     type: boolean
                   destinationCidrBlock:
                     description: IPv4 or IPv6 RFC1924 CIDR used for destination matches.

@@ -66,13 +66,16 @@ spec:
                 properties:
                   direction:
                     description: The direction of DNS queries to or from the Route
-                      53 Resolver endpoint. Valid values are INBOUND or OUTBOUND .
+                      53 Resolver endpoint. Valid values are INBOUND (resolver forwards
+                      DNS queries to the DNS service for a VPC from your network or
+                      another VPC) or OUTBOUND (resolver forwards DNS queries from
+                      the DNS service for a VPC to your network or another VPC).
                     type: string
                   ipAddress:
                     description: The subnets and IP addresses in your VPC that you
                       want DNS queries to pass through on the way from your VPCs to
-                      your network  or on the way from your network to your VPCs .
-                      Described below.
+                      your network (for outbound endpoints) or on the way from your
+                      network to your VPCs (for inbound endpoints). Described below.
                     items:
                       properties:
                         ip:
@@ -451,11 +454,12 @@ spec:
                   ipAddress:
                     description: The subnets and IP addresses in your VPC that you
                       want DNS queries to pass through on the way from your VPCs to
-                      your network  or on the way from your network to your VPCs .
-                      Described below.
+                      your network (for outbound endpoints) or on the way from your
+                      network to your VPCs (for inbound endpoints). Described below.
                     items:
                       properties:
                         ipId:
+                          description: The ID of the Route 53 Resolver endpoint.
                           type: string
                       type: object
                     type: array

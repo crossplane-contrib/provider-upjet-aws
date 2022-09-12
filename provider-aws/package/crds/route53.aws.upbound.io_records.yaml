@@ -87,12 +87,8 @@ spec:
                       type: object
                     type: array
                   allowOverwrite:
-                    description: Allow creation of this record in Terraform to overwrite
-                      an existing record, if any. This does not affect the ability
-                      to update the record in Terraform and does not prevent other
-                      resources within Terraform or manual Route 53 changes outside
-                      Terraform from overwriting this record. false by default. This
-                      configuration is not recommended for most environments.
+                    description: false by default. This configuration is not recommended
+                      for most environments.
                     type: boolean
                   failoverRoutingPolicy:
                     description: A block indicating the routing behavior when associated
@@ -224,9 +220,7 @@ spec:
                   name:
                     type: string
                   records:
-                    description: A string list of records. To specify a single record
-                      value longer than 255 characters such as a TXT record for DKIM,
-                      add \"\" inside the Terraform configuration string .
+                    description: A string list of records.g., "first255characters\"\"morecharacters").
                     items:
                       type: string
                     type: array

@@ -41,7 +41,7 @@ type VPCDHCPOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	NetbiosNameServers []*string `json:"netbiosNameServers,omitempty" tf:"netbios_name_servers,omitempty"`
 
-	// The NetBIOS node type . AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see RFC 2132.
+	// The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see RFC 2132.
 	// +kubebuilder:validation:Optional
 	NetbiosNodeType *string `json:"netbiosNodeType,omitempty" tf:"netbios_node_type,omitempty"`
 

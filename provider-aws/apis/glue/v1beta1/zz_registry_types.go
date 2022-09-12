@@ -15,10 +15,10 @@ import (
 
 type RegistryObservation struct {
 
-	// Amazon Resource Name  of Glue Registry.
+	// Amazon Resource Name (ARN) of Glue Registry.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Amazon Resource Name  of Glue Registry.
+	// Amazon Resource Name (ARN) of Glue Registry.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.

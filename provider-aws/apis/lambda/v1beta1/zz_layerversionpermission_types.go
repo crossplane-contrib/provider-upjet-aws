@@ -15,7 +15,7 @@ import (
 
 type LayerVersionPermissionObservation struct {
 
-	// The layer_name and version_number, separated by a comma .
+	// The layer_name and version_number, separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Full Lambda Layer Permission policy.

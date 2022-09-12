@@ -40,7 +40,7 @@ type BucketOwnershipControlsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Configuration block with Ownership Controls rules. Detailed below.
+	// Configuration block(s) with Ownership Controls rules. Detailed below.
 	// +kubebuilder:validation:Required
 	Rule []BucketOwnershipControlsRuleParameters `json:"rule" tf:"rule,omitempty"`
 }

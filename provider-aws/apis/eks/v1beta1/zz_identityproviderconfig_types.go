@@ -15,10 +15,10 @@ import (
 
 type IdentityProviderConfigObservation struct {
 
-	// Amazon Resource Name  of the EKS Identity Provider Configuration.
+	// Amazon Resource Name (ARN) of the EKS Identity Provider Configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// EKS Cluster name and EKS Identity Provider Configuration name separated by a colon .
+	// EKS Cluster name and EKS Identity Provider Configuration name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Status of the EKS Identity Provider Configuration.

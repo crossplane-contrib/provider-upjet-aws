@@ -30,7 +30,7 @@ type BucketCorsConfigurationCorsRuleParameters struct {
 	// +kubebuilder:validation:Required
 	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
-	// Set of headers in the response that you want customers to be able to access from their applications .
+	// Set of headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).
 	// +kubebuilder:validation:Optional
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
@@ -61,7 +61,7 @@ type BucketCorsConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Set of origins and methods  documented below. You can configure up to 100 rules.
+	// Set of origins and methods (cross-origin access that you want to allow) documented below. You can configure up to 100 rules.
 	// +kubebuilder:validation:Required
 	CorsRule []BucketCorsConfigurationCorsRuleParameters `json:"corsRule" tf:"cors_rule,omitempty"`
 

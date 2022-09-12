@@ -145,7 +145,7 @@ spec:
                     type: object
                   functionVersion:
                     description: 'Lambda function version for which you are creating
-                      the alias. Pattern: .'
+                      the alias. Pattern: (\$LATEST|[0-9]+).'
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -346,7 +346,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  identifying your Lambda
+                    description: The Amazon Resource Name (ARN) identifying your Lambda
                       function alias.
                     type: string
                   id:

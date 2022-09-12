@@ -15,7 +15,7 @@ import (
 
 type GroupObservation struct {
 
-	// The Amazon Resource Name  specifying the log group. Any :* suffix added by the API, denoting all CloudWatch Log Streams under the CloudWatch Log Group, is removed for greater compatibility with other AWS services that do not accept the suffix.
+	// The Amazon Resource Name (ARN) specifying the log group. Any :* suffix added by the API, denoting all CloudWatch Log Streams under the CloudWatch Log Group, is removed for greater compatibility with other AWS services that do not accept the suffix.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

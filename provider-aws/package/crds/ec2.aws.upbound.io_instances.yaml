@@ -79,11 +79,14 @@ spec:
                     description: AZ to start the instance in.
                     type: string
                   capacityReservationSpecification:
+                    description: Describes an instance's Capacity Reservation targeting
+                      option. See Capacity Reservation Specification below for more
+                      details.
                     items:
                       properties:
                         capacityReservationPreference:
-                          description: Indicates the instance's Capacity Reservation
-                            preferences. Can be "open" or "none". .
+                          description: 'Indicates the instance''s Capacity Reservation
+                            preferences. Can be "open" or "none". (Default: "open").'
                           type: string
                         capacityReservationTarget:
                           description: Information about the target Capacity Reservation.
@@ -117,10 +120,9 @@ spec:
                   creditSpecification:
                     description: Configuration block for customizing the credit specification
                       of the instance. See Credit Specification below for more details.
-                      Terraform will only perform drift detection of its value when
-                      present in a configuration. Removing this configuration on existing
-                      instances will only stop managing it. It will not change the
-                      configuration back to the default for the instance type.
+                      Removing this configuration on existing instances will only
+                      stop managing it. It will not change the configuration back
+                      to the default for the instance type.
                     items:
                       properties:
                         cpuCredits:
@@ -142,14 +144,25 @@ spec:
                     items:
                       properties:
                         deleteOnTermination:
+                          description: Whether the volume should be destroyed on instance
+                            termination. Defaults to true.
                           type: boolean
                         deviceName:
+                          description: Name of the device to mount.
                           type: string
                         encrypted:
+                          description: Enables EBS encryption on the volume. Defaults
+                            to false. Cannot be used with snapshot_id. Must be configured
+                            to perform drift detection.
                           type: boolean
                         iops:
+                          description: Amount of provisioned IOPS. Only valid for
+                            volume_type of io1, io2 or gp3.
                           type: number
                         kmsKeyId:
+                          description: Amazon Resource Name (ARN) of the KMS Key to
+                            use when encrypting the volume. Must be configured to
+                            perform drift detection.
                           type: string
                         kmsKeyIdRef:
                           description: Reference to a Key in kms to populate kmsKeyId.
@@ -233,12 +246,19 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
+                          description: A map of tags to assign to the device.
                           type: object
                         throughput:
+                          description: Throughput to provision for a volume in mebibytes
+                            per second (MiB/s). This is only valid for volume_type
+                            of gp3.
                           type: number
                         volumeSize:
+                          description: Size of the volume in gibibytes (GiB).
                           type: number
                         volumeType:
+                          description: Type of volume. Valid values include standard,
+                            gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
                           type: string
                       required:
                       - deviceName
@@ -264,19 +284,22 @@ spec:
                       type: object
                     type: array
                   ephemeralBlockDevice:
-                    description: One or more configuration blocks to customize Ephemeral  volumes
-                      on the instance. See Block Devices below for details. When accessing
-                      this as an attribute reference, it is a set of objects.
+                    description: One or more configuration blocks to customize Ephemeral
+                      (also known as "Instance Store") volumes on the instance. See
+                      Block Devices below for details. When accessing this as an attribute
+                      reference, it is a set of objects.
                     items:
                       properties:
                         deviceName:
+                          description: The name of the block device to mount on the
+                            instance.
                           type: string
                         noDevice:
                           description: Suppresses the specified device included in
                             the AMI's block device mapping.
                           type: boolean
                         virtualName:
-                          description: Instance Store Device Name .
+                          description: Instance Store Device Name (e.g., ephemeral0).
                           type: string
                       required:
                       - deviceName
@@ -380,8 +403,8 @@ spec:
                         httpTokens:
                           description: Whether or not the metadata service requires
                             session tokens, also referred to as Instance Metadata
-                            Service Version 2 . Valid values include optional or required.
-                            Defaults to optional.
+                            Service Version 2 (IMDSv2). Valid values include optional
+                            or required. Defaults to optional.
                           type: string
                         instanceMetadataTags:
                           description: Enables or disables access to instance tags
@@ -392,7 +415,7 @@ spec:
                     type: array
                   monitoring:
                     description: If true, the launched EC2 instance will have detailed
-                      monitoring enabled.
+                      monitoring enabled. (Available since v0.6.0)
                     type: boolean
                   networkInterface:
                     description: Customize network interfaces to be attached at instance
@@ -400,6 +423,11 @@ spec:
                     items:
                       properties:
                         deleteOnTermination:
+                          description: Whether or not to delete the network interface
+                            on instance termination. Defaults to false. Currently,
+                            the only valid value is false, as this is only supported
+                            when creating new network interfaces when launching an
+                            instance.
                           type: boolean
                         deviceIndex:
                           description: Integer index of the network interface attachment.
@@ -517,12 +545,21 @@ spec:
                     items:
                       properties:
                         deleteOnTermination:
+                          description: Whether the volume should be destroyed on instance
+                            termination. Defaults to true.
                           type: boolean
                         encrypted:
+                          description: Whether to enable volume encryption. Defaults
+                            to false. Must be configured to perform drift detection.
                           type: boolean
                         iops:
+                          description: Amount of provisioned IOPS. Only valid for
+                            volume_type of io1, io2 or gp3.
                           type: number
                         kmsKeyId:
+                          description: Amazon Resource Name (ARN) of the KMS Key to
+                            use when encrypting the volume. Must be configured to
+                            perform drift detection.
                           type: string
                         kmsKeyIdRef:
                           description: Reference to a Key in kms to populate kmsKeyId.
@@ -603,23 +640,30 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
+                          description: A map of tags to assign to the device.
                           type: object
                         throughput:
+                          description: Throughput to provision for a volume in mebibytes
+                            per second (MiB/s). This is only valid for volume_type
+                            of gp3.
                           type: number
                         volumeSize:
+                          description: Size of the volume in gibibytes (GiB).
                           type: number
                         volumeType:
+                          description: Type of volume. Valid values include standard,
+                            gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
                           type: string
                       type: object
                     type: array
                   secondaryPrivateIps:
                     description: A list of secondary private IPv4 addresses to assign
-                      to the instance's primary network interface  in a VPC. Can only
-                      be assigned to the primary network interface  attached at instance
-                      creation, not a pre-existing network interface i.e., referenced
-                      in a network_interface block. Refer to the Elastic network interfaces
-                      documentation to see the maximum number of private IP addresses
-                      allowed per instance type.
+                      to the instance's primary network interface (eth0) in a VPC.
+                      Can only be assigned to the primary network interface (eth0)
+                      attached at instance creation, not a pre-existing network interface
+                      i.e., referenced in a network_interface block. Refer to the
+                      Elastic network interfaces documentation to see the maximum
+                      number of private IP addresses allowed per instance type.
                     items:
                       type: string
                     type: array
@@ -707,11 +751,17 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A map of tags to assign to the resource. Note that
+                      these tags apply to the instance and not block storage devices.
+                      If configured with a provider default_tags configuration block
+                      present, tags with matching keys will overwrite those defined
+                      at the provider-level.
                     type: object
                   tenancy:
-                    description: Tenancy of the instance . An instance with a tenancy
-                      of dedicated runs on single-tenant hardware. The host tenancy
-                      is not supported for the import-instance command.
+                    description: Tenancy of the instance (if the instance is running
+                      in a VPC). An instance with a tenancy of dedicated runs on single-tenant
+                      hardware. The host tenancy is not supported for the import-instance
+                      command.
                     type: string
                   userData:
                     description: User data to provide when launching the instance.
@@ -1064,6 +1114,7 @@ spec:
                     items:
                       properties:
                         deviceName:
+                          description: Device name, e.g., /dev/sdh or xvdh.
                           type: string
                         volumeId:
                           type: string

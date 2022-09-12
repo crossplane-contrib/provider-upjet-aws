@@ -106,8 +106,8 @@ spec:
                     - namespace
                     type: object
                   multiRegion:
-                    description: Indicates whether the KMS key is a multi-Region  or
-                      regional  key. Defaults to false.
+                    description: Indicates whether the KMS key is a multi-Region (true)
+                      or regional (false) key. Defaults to false.
                     type: boolean
                   policy:
                     description: A key policy JSON document. If you do not provide
@@ -129,7 +129,7 @@ spec:
                     description: 'Time at which the imported key material expires.
                       When the key material expires, AWS KMS deletes the key material
                       and the CMK becomes unusable. If not specified, key material
-                      does not expire. Valid values: RFC3339 time string'
+                      does not expire. Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)'
                     type: string
                 required:
                 - region
@@ -311,7 +311,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  of the key.
+                    description: The Amazon Resource Name (ARN) of the key.
                     type: string
                   expirationModel:
                     description: Whether the key material expires. Empty when pending

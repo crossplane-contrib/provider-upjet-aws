@@ -27,6 +27,7 @@ type ReplicaObservation struct {
 
 type ReplicaParameters struct {
 
+	// ARN of the secret.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -52,7 +53,7 @@ type SecretObservation struct {
 	// ARN of the secret.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Valid JSON document representing a resource policy. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide. Removing policy from your configuration or setting policy to null or an empty string  will not delete the policy since it could have been set by aws_secretsmanager_secret_policy. To delete the policy, set it to "{}" .
+	// Valid JSON document representing a resource policy. Removing policy from your configuration or setting policy to null or an empty string (i.e., policy = "") will not delete the policy since it could have been set by aws_secretsmanager_secret_policy. To delete the policy, set it to "{}" (an empty JSON document).
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -81,6 +82,7 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	ForceOverwriteReplicaSecret *bool `json:"forceOverwriteReplicaSecret,omitempty" tf:"force_overwrite_replica_secret,omitempty"`
 
+	// ARN of the secret.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`

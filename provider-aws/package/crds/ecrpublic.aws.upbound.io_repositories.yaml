@@ -90,8 +90,9 @@ spec:
                             ECR Public Gallery.
                           type: string
                         logoImageBlob:
-                          description: The base64-encoded repository logo payload.  Note
-                            that drift detection is disabled for this attribute.
+                          description: The base64-encoded repository logo payload.
+                            (Only visible for verified accounts) Note that drift detection
+                            is disabled for this attribute.
                           type: string
                         operatingSystems:
                           description: 'The operating systems that the images in the

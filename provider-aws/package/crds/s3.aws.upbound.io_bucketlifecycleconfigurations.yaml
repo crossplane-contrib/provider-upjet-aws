@@ -145,7 +145,7 @@ spec:
                   expectedBucketOwner:
                     description: The account ID of the expected bucket owner. If the
                       bucket is owned by a different account, the request will fail
-                      with an HTTP 403  error.
+                      with an HTTP 403 (Access Denied) error.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -177,8 +177,13 @@ spec:
                           items:
                             properties:
                               date:
+                                description: The date the object is to be moved or
+                                  deleted. Should be in RFC3339 format.
                                 type: string
                               days:
+                                description: The lifetime, in days, of the objects
+                                  that are subject to the rule. The value must be
+                                  a non-zero positive integer.
                                 type: number
                               expiredObjectDeleteMarker:
                                 description: Indicates whether Amazon S3 will remove
@@ -202,10 +207,18 @@ spec:
                                 items:
                                   properties:
                                     objectSizeGreaterThan:
+                                      description: Minimum object size to which the
+                                        rule applies. Value must be at least 0 if
+                                        specified.
                                       type: number
                                     objectSizeLessThan:
+                                      description: Maximum object size to which the
+                                        rule applies. Value must be at least 1 if
+                                        specified.
                                       type: number
                                     prefix:
+                                      description: Prefix identifying one or more
+                                        objects to which the rule applies.
                                       type: string
                                     tags:
                                       additionalProperties:
@@ -217,10 +230,17 @@ spec:
                                   type: object
                                 type: array
                               objectSizeGreaterThan:
+                                description: Minimum object size (in bytes) to which
+                                  the rule applies.
                                 type: string
                               objectSizeLessThan:
+                                description: Maximum object size (in bytes) to which
+                                  the rule applies.
                                 type: string
                               prefix:
+                                description: Prefix identifying one or more objects
+                                  to which the rule applies. Defaults to an empty
+                                  string ("") if not specified.
                                 type: string
                               tag:
                                 description: A configuration block for specifying
@@ -241,6 +261,8 @@ spec:
                             type: object
                           type: array
                         id:
+                          description: Unique identifier for the rule. The value cannot
+                            be longer than 255 characters.
                           type: string
                         noncurrentVersionExpiration:
                           description: Configuration block that specifies when noncurrent
@@ -248,8 +270,13 @@ spec:
                           items:
                             properties:
                               newerNoncurrentVersions:
+                                description: The number of noncurrent versions Amazon
+                                  S3 will retain. Must be a non-zero positive integer.
                                 type: string
                               noncurrentDays:
+                                description: The number of days an object is noncurrent
+                                  before Amazon S3 can perform the associated action.
+                                  Must be a positive integer.
                                 type: number
                             type: object
                           type: array
@@ -261,16 +288,27 @@ spec:
                           items:
                             properties:
                               newerNoncurrentVersions:
+                                description: The number of noncurrent versions Amazon
+                                  S3 will retain. Must be a non-zero positive integer.
                                 type: string
                               noncurrentDays:
+                                description: The number of days an object is noncurrent
+                                  before Amazon S3 can perform the associated action.
                                 type: number
                               storageClass:
+                                description: 'The class of storage used to store the
+                                  object. Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA,
+                                  INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.'
                                 type: string
                             required:
                             - storageClass
                             type: object
                           type: array
                         prefix:
+                          description: DEPRECATED Use filter instead. This has been
+                            deprecated by Amazon S3. Prefix identifying one or more
+                            objects to which the rule applies. Defaults to an empty
+                            string ("") if filter is not specified.
                           type: string
                         status:
                           description: 'Whether the rule is currently being applied.
@@ -283,10 +321,23 @@ spec:
                           items:
                             properties:
                               date:
+                                description: The date objects are transitioned to
+                                  the specified storage class. The date value must
+                                  be in RFC3339 format and set to midnight UTC e.g.
+                                  2023-01-13T00:00:00Z.
                                 type: string
                               days:
+                                description: The number of days after creation when
+                                  objects are transitioned to the specified storage
+                                  class. The value must be a positive integer. If
+                                  both days and date are not specified, defaults to
+                                  0. Valid values depend on storage_class, see Transition
+                                  objects using Amazon S3 Lifecycle for more details.
                                 type: number
                               storageClass:
+                                description: 'The class of storage used to store the
+                                  object. Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA,
+                                  INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.'
                                 type: string
                             required:
                             - storageClass
@@ -479,6 +530,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: and status)
                     type: string
                 type: object
               conditions:

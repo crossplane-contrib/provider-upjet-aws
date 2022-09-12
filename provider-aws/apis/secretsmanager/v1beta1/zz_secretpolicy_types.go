@@ -15,7 +15,7 @@ import (
 
 type SecretPolicyObservation struct {
 
-	// Amazon Resource Name  of the secret.
+	// Amazon Resource Name (ARN) of the secret.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -25,7 +25,7 @@ type SecretPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	BlockPublicPolicy *bool `json:"blockPublicPolicy,omitempty" tf:"block_public_policy,omitempty"`
 
-	// Valid JSON document representing a resource policy. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide. Unlike aws_secretsmanager_secret, where policy can be set to "{}" to delete the policy, "{}" is not a valid policy since policy is required.
+	// Valid JSON document representing a resource policy. Unlike aws_secretsmanager_secret, where policy can be set to "{}" to delete the policy, "{}" is not a valid policy since policy is required.
 	// +kubebuilder:validation:Required
 	Policy *string `json:"policy" tf:"policy,omitempty"`
 

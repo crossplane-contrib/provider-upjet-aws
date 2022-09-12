@@ -104,7 +104,7 @@ spec:
                   desyncMitigationMode:
                     description: Determines how the load balancer handles requests
                       that might pose a security risk to an application due to HTTP
-                      desync. Valid values are monitor, defensive , strictest.
+                      desync. Valid values are monitor, defensive (default), strictest.
                     type: string
                   healthCheck:
                     description: A health_check block. Health Check documented below.
@@ -558,7 +558,8 @@ spec:
                       block.
                     type: object
                   zoneId:
-                    description: The canonical hosted zone ID of the ELB
+                    description: The canonical hosted zone ID of the ELB (to be used
+                      in a Route 53 Alias record)
                     type: string
                 type: object
               conditions:

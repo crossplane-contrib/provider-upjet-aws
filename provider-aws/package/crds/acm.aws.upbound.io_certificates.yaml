@@ -110,6 +110,8 @@ spec:
                       be created in.
                     type: string
                   subjectAlternativeNames:
+                    description: Set of domains that should be SANs in the issued
+                      certificate.
                     items:
                       type: string
                     type: array
@@ -121,9 +123,7 @@ spec:
                       with matching keys will overwrite those defined at the provider-level.
                     type: object
                   validationMethod:
-                    description: Which method to use for validation. DNS or EMAIL
-                      are valid, NONE can be used for certificates that were imported
-                      into ACM and then into Terraform.
+                    description: Which method to use for validation.
                     type: string
                   validationOption:
                     description: Configuration block used to specify information about

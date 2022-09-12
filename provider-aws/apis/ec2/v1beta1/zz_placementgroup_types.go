@@ -15,7 +15,7 @@ import (
 
 type PlacementGroupObservation struct {
 
-	// Amazon Resource Name  of the placement group.
+	// Amazon Resource Name (ARN) of the placement group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The name of the placement group.
@@ -32,7 +32,7 @@ type PlacementGroupParameters struct {
 
 	// The number of partitions to create in the
 	// placement group.  Can only be specified when the strategy is set to
-	// "partition".  Valid values are 1 - 7 .
+	// "partition".  Valid values are 1 - 7 (default is 2).
 	// +kubebuilder:validation:Optional
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 

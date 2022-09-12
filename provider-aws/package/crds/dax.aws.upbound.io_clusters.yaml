@@ -79,8 +79,8 @@ spec:
                     description: –  Description for the cluster
                     type: string
                   iamRoleArn:
-                    description: A valid Amazon Resource Name  that identifies an
-                      IAM role. At runtime, DAX will assume this role and use the
+                    description: A valid Amazon Resource Name (ARN) that identifies
+                      an IAM role. At runtime, DAX will assume this role and use the
                       role's permissions to access DynamoDB on your behalf
                     type: string
                   iamRoleArnRef:
@@ -157,15 +157,15 @@ spec:
                         type: object
                     type: object
                   maintenanceWindow:
-                    description: 'dd:hh24:mi . The minimum maintenance window is a
-                      60 minute period. Example: sun:05:00-sun:09:00'
+                    description: 'ddd:hh24:mi (24H Clock UTC). The minimum maintenance
+                      window is a 60 minute period. Example: sun:05:00-sun:09:00'
                     type: string
                   nodeType:
                     description: –  The compute and memory capacity of the nodes.
                       See Nodes for supported node types
                     type: string
                   notificationTopicArn:
-                    description: ast-1:012345678999:my_sns_topic
+                    description: east-1:012345678999:my_sns_topic
                     type: string
                   parameterGroupName:
                     description: –  Name of the parameter group to associate with
@@ -176,7 +176,7 @@ spec:
                       be created in.
                     type: string
                   replicationFactor:
-                    description: ode cluster, without any read replicas
+                    description: node cluster, without any read replicas
                     type: number
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.

@@ -19,7 +19,7 @@ type MethodResponseObservation struct {
 
 type MethodResponseParameters struct {
 
-	// The HTTP Method
+	// The HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("http_method",false)
 	// +kubebuilder:validation:Optional

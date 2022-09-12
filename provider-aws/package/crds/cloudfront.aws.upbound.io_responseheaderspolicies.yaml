@@ -70,8 +70,8 @@ spec:
                     type: string
                   corsConfig:
                     description: A configuration for a set of HTTP response headers
-                      that are used for Cross-Origin Resource Sharing . See Cors Config
-                      for more information.
+                      that are used for Cross-Origin Resource Sharing (CORS). See
+                      Cors Config for more information.
                     items:
                       properties:
                         accessControlAllowCredentials:

@@ -152,11 +152,8 @@ spec:
                       be created in.
                     type: string
                   skipDestroy:
-                    description: Set this to true if you do not wish to detach the
-                      volume from the instance to which it is attached at destroy
-                      time, and instead just remove the attachment from Terraform
-                      state. This is useful when destroying an instance which has
-                      volumes created by some other means attached.
+                    description: This is useful when destroying an instance which
+                      has volumes created by some other means attached.
                     type: boolean
                   stopInstanceBeforeDetaching:
                     description: Set this to true to ensure that the target instance

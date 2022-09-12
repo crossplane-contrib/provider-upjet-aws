@@ -15,10 +15,10 @@ import (
 
 type ResourceShareObservation struct {
 
-	// The Amazon Resource Name  of the resource share.
+	// The Amazon Resource Name (ARN) of the resource share.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The Amazon Resource Name  of the resource share.
+	// The Amazon Resource Name (ARN) of the resource share.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.

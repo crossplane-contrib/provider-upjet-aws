@@ -163,14 +163,15 @@ spec:
                   desyncMitigationMode:
                     description: Determines how the load balancer handles requests
                       that might pose a security risk to an application due to HTTP
-                      desync. Valid values are monitor, defensive , strictest.
+                      desync. Valid values are monitor, defensive (default), strictest.
                     type: string
                   dropInvalidHeaderFields:
                     description: Indicates whether HTTP headers with header fields
-                      that are not valid are removed by the load balancer  or routed
-                      to targets . The default is false. Elastic Load Balancing requires
-                      that message header names contain only alphanumeric characters
-                      and hyphens. Only valid for Load Balancers of type application.
+                      that are not valid are removed by the load balancer (true) or
+                      routed to targets (false). The default is false. Elastic Load
+                      Balancing requires that message header names contain only alphanumeric
+                      characters and hyphens. Only valid for Load Balancers of type
+                      application.
                     type: boolean
                   enableCrossZoneLoadBalancing:
                     description: If true, cross-zone load balancing of the load balancer
@@ -179,8 +180,7 @@ spec:
                     type: boolean
                   enableDeletionProtection:
                     description: If true, deletion of the load balancer will be disabled
-                      via the AWS API. This will prevent Terraform from deleting the
-                      load balancer. Defaults to false.
+                      via the AWS API. Defaults to false.
                     type: boolean
                   enableHttp2:
                     description: Indicates whether HTTP/2 is enabled in application
@@ -211,8 +211,7 @@ spec:
                     description: The name of the LB. This name must be unique within
                       your AWS account, can have a maximum of 32 characters, must
                       contain only alphanumeric characters or hyphens, and must not
-                      begin or end with a hyphen. If not specified, Terraform will
-                      autogenerate a name beginning with tf-lb.
+                      begin or end with a hyphen.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -671,22 +670,26 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the load balancer .
+                    description: The ARN of the load balancer (matches id).
                     type: string
                   arnSuffix:
                     description: The ARN suffix for use with CloudWatch Metrics.
                     type: string
                   dnsName:
-                    description: The DNS name of the load balancer.
+                    description: The name of the LB. This name must be unique within
+                      your AWS account, can have a maximum of 32 characters, must
+                      contain only alphanumeric characters or hyphens, and must not
+                      begin or end with a hyphen.
                     type: string
                   id:
-                    description: The ARN of the load balancer .
+                    description: The ARN of the load balancer (matches arn).
                     type: string
                   subnetMapping:
                     description: A subnet mapping block as documented below.
                     items:
                       properties:
                         outpostId:
+                          description: ID of the Outpost containing the load balancer.
                           type: string
                       type: object
                     type: array
@@ -701,7 +704,7 @@ spec:
                     type: string
                   zoneId:
                     description: The canonical hosted zone ID of the load balancer
-                      .
+                      (to be used in a Route 53 Alias record).
                     type: string
                 type: object
               conditions:

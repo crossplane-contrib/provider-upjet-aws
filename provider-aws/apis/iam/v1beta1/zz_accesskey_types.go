@@ -18,10 +18,10 @@ type AccessKeyObservation struct {
 	// Date and time in RFC3339 format that the access key was created.
 	CreateDate *string `json:"createDate,omitempty" tf:"create_date,omitempty"`
 
-	// Encrypted secret, base64 encoded, if pgp_key was specified. This attribute is not available for imported resources. The encrypted secret may be decrypted using the command line, for example: terraform output -raw encrypted_secret | base64 --decode | keybase pgp decrypt.
+	// Encrypted secret, base64 encoded, if pgp_key was specified. This attribute is not available for imported resources.
 	EncryptedSecret *string `json:"encryptedSecret,omitempty" tf:"encrypted_secret,omitempty"`
 
-	// Encrypted SES SMTP password, base64 encoded, if pgp_key was specified. This attribute is not available for imported resources. The encrypted password may be decrypted using the command line, for example: terraform output -raw encrypted_ses_smtp_password_v4 | base64 --decode | keybase pgp decrypt.
+	// Encrypted SES SMTP password, base64 encoded, if pgp_key was specified. This attribute is not available for imported resources.
 	EncryptedSesSMTPPasswordV4 *string `json:"encryptedSesSmtpPasswordV4,omitempty" tf:"encrypted_ses_smtp_password_v4,omitempty"`
 
 	// Access key ID.

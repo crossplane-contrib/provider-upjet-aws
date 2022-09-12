@@ -18,6 +18,7 @@ type ExcludeFilterObservation struct {
 
 type ExcludeFilterParameters struct {
 
+	// Name of the metric namespace in the filter.
 	// +kubebuilder:validation:Required
 	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 }
@@ -27,6 +28,7 @@ type IncludeFilterObservation struct {
 
 type IncludeFilterParameters struct {
 
+	// Name of the metric namespace in the filter.
 	// +kubebuilder:validation:Required
 	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 }
@@ -75,7 +77,7 @@ type MetricStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	IncludeFilter []IncludeFilterParameters `json:"includeFilter,omitempty" tf:"include_filter,omitempty"`
 
-	// Friendly name of the metric stream. If omitted, Terraform will assign a random, unique name. Conflicts with name_prefix.
+	// Friendly name of the metric stream. Conflicts with name_prefix.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

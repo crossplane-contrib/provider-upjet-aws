@@ -65,8 +65,7 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the DB security group. Defaults
-                      to "Managed by Terraform".
+                    description: The description of the DB security group.
                     type: string
                   ingress:
                     description: A list of ingress rules.

@@ -19,7 +19,7 @@ type ResourcePolicyObservation struct {
 
 type ResourcePolicyParameters struct {
 
-	// Indicates that you are using both methods to grant cross-account. Valid values are TRUE and FALSE. Note the terraform will not perform drift detetction on this field as its not return on read.
+	// Indicates that you are using both methods to grant cross-account. Valid values are TRUE and FALSE.
 	// +kubebuilder:validation:Optional
 	EnableHybrid *string `json:"enableHybrid,omitempty" tf:"enable_hybrid,omitempty"`
 

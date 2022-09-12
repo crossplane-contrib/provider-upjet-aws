@@ -59,14 +59,14 @@ type VPCPeeringConnectionObservation struct {
 	AcceptStatus *string `json:"acceptStatus,omitempty" tf:"accept_status,omitempty"`
 
 	// An optional configuration block that allows for VPC Peering Connection options to be set for the VPC that accepts
-	// the peering connection .
+	// the peering connection (a maximum of one).
 	Accepter []AccepterObservation `json:"accepter,omitempty" tf:"accepter,omitempty"`
 
 	// The ID of the VPC Peering Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requests
-	// the peering connection .
+	// the peering connection (a maximum of one).
 	Requester []RequesterObservation `json:"requester,omitempty" tf:"requester,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
@@ -75,7 +75,7 @@ type VPCPeeringConnectionObservation struct {
 
 type VPCPeeringConnectionParameters struct {
 
-	// Accept the peering .
+	// Accept the peering (both VPCs need to be in the same AWS account and region).
 	// +kubebuilder:validation:Optional
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
 

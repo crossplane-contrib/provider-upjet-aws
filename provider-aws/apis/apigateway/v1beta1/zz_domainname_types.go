@@ -24,7 +24,7 @@ type DomainNameObservation struct {
 	// Hostname created by Cloudfront to represent the distribution that implements this domain name mapping.
 	CloudfrontDomainName *string `json:"cloudfrontDomainName,omitempty" tf:"cloudfront_domain_name,omitempty"`
 
-	// For convenience, the hosted zone ID  that can be used to create a Route53 alias record for the distribution.
+	// For convenience, the hosted zone ID (Z2FDTNDATAQYW2) that can be used to create a Route53 alias record for the distribution.
 	CloudfrontZoneID *string `json:"cloudfrontZoneId,omitempty" tf:"cloudfront_zone_id,omitempty"`
 
 	// Internal identifier assigned to this domain name by API Gateway.
@@ -84,7 +84,7 @@ type DomainNameParameters struct {
 	// +kubebuilder:validation:Optional
 	MutualTLSAuthentication []MutualTLSAuthenticationParameters `json:"mutualTlsAuthentication,omitempty" tf:"mutual_tls_authentication,omitempty"`
 
-	// ARN of the AWS-issued certificate used to validate custom domain ownership
+	// ARN of the AWS-issued certificate used to validate custom domain ownership (when certificate_arn is issued via an ACM Private CA or mutual_tls_authentication is configured with an ACM-imported certificate.)
 	// +kubebuilder:validation:Optional
 	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
 
@@ -111,7 +111,7 @@ type DomainNameParameters struct {
 	// +kubebuilder:validation:Optional
 	RegionalCertificateName *string `json:"regionalCertificateName,omitempty" tf:"regional_certificate_name,omitempty"`
 
-	// Transport Layer Security  version + cipher suite for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must be configured to perform drift detection.
+	// Transport Layer Security (TLS) version + cipher suite for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must be configured to perform drift detection.
 	// +kubebuilder:validation:Optional
 	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 

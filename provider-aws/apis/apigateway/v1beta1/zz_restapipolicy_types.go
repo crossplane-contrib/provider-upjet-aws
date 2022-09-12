@@ -21,7 +21,7 @@ type RestAPIPolicyObservation struct {
 
 type RestAPIPolicyParameters struct {
 
-	// JSON formatted policy document that controls access to the API Gateway. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide
+	// JSON formatted policy document that controls access to the API Gateway
 	// +kubebuilder:validation:Required
 	Policy *string `json:"policy" tf:"policy,omitempty"`
 

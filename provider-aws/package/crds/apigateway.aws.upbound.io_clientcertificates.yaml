@@ -258,7 +258,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name
+                    description: Amazon Resource Name (ARN)
                     type: string
                   createdDate:
                     description: The date when the client certificate was created.

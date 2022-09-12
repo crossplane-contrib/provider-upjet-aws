@@ -56,7 +56,7 @@ type CognitoIdentityPoolProviderPrincipalTagParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// :  use default  attribute mappings.
+	// :  use default (username and clientID) attribute mappings.
 	// +kubebuilder:validation:Optional
 	UseDefaults *bool `json:"useDefaults,omitempty" tf:"use_defaults,omitempty"`
 }

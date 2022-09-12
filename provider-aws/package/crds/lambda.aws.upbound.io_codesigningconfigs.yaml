@@ -70,9 +70,9 @@ spec:
                     items:
                       properties:
                         signingProfileVersionArns:
-                          description: The Amazon Resource Name  for each of the signing
-                            profiles. A signing profile defines a trusted user who
-                            can sign a code package.
+                          description: The Amazon Resource Name (ARN) for each of
+                            the signing profiles. A signing profile defines a trusted
+                            user who can sign a code package.
                           items:
                             type: string
                           type: array
@@ -366,7 +366,8 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  of the code signing configuration.
+                    description: The Amazon Resource Name (ARN) of the code signing
+                      configuration.
                     type: string
                   configId:
                     description: Unique identifier for the code signing configuration.

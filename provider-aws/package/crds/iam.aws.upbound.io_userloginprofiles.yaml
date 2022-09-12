@@ -332,16 +332,13 @@ spec:
               atProvider:
                 properties:
                   encryptedPassword:
-                    description: The encrypted password, base64 encoded. Only available
-                      if password was handled on Terraform resource creation, not
-                      import.
+                    description: The encrypted password, base64 encoded.
                     type: string
                   id:
                     type: string
                   keyFingerprint:
                     description: The fingerprint of the PGP key used to encrypt the
-                      password. Only available if password was handled on Terraform
-                      resource creation, not import.
+                      password.
                     type: string
                   password:
                     description: The plain text password, only available when pgp_key

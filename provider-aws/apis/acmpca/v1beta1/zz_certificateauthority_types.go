@@ -33,19 +33,19 @@ type CertificateAuthorityConfigurationParameters struct {
 
 type CertificateAuthorityObservation struct {
 
-	// Amazon Resource Name  of the certificate authority.
+	// Amazon Resource Name (ARN) of the certificate authority.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Base64-encoded certificate authority  certificate. Only available after the certificate authority certificate has been imported.
+	// Base64-encoded certificate authority (CA) certificate. Only available after the certificate authority certificate has been imported.
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// Base64-encoded certificate chain that includes any intermediate certificates and chains up to root on-premises certificate that you used to sign your private CA certificate. The chain does not include your private CA certificate. Only available after the certificate authority certificate has been imported.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
-	// The base64 PEM-encoded certificate signing request  for your private CA certificate.
+	// The base64 PEM-encoded certificate signing request (CSR) for your private CA certificate.
 	CertificateSigningRequest *string `json:"certificateSigningRequest,omitempty" tf:"certificate_signing_request,omitempty"`
 
-	// Amazon Resource Name  of the certificate authority.
+	// Amazon Resource Name (ARN) of the certificate authority.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Date and time after which the certificate authority is not valid. Only available after the certificate authority certificate has been imported.
@@ -57,7 +57,7 @@ type CertificateAuthorityObservation struct {
 	// Serial number of the certificate authority. Only available after the certificate authority certificate has been imported.
 	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
 
-	// Status of the certificate authority.
+	// (Deprecated use the enabled attribute instead) Status of the certificate authority.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
@@ -125,7 +125,7 @@ type RevocationConfigurationObservation struct {
 
 type RevocationConfigurationParameters struct {
 
-	// Nested argument containing configuration of the certificate revocation list , if any, maintained by the certificate authority. Defined below.
+	// Nested argument containing configuration of the certificate revocation list (CRL), if any, maintained by the certificate authority. Defined below.
 	// +kubebuilder:validation:Optional
 	CrlConfiguration []CrlConfigurationParameters `json:"crlConfiguration,omitempty" tf:"crl_configuration,omitempty"`
 }
@@ -135,7 +135,7 @@ type SubjectObservation struct {
 
 type SubjectParameters struct {
 
-	// Fully qualified domain name  associated with the certificate subject. Must be less than or equal to 64 characters in length.
+	// Fully qualified domain name (FQDN) associated with the certificate subject. Must be less than or equal to 64 characters in length.
 	// +kubebuilder:validation:Optional
 	CommonName *string `json:"commonName,omitempty" tf:"common_name,omitempty"`
 
@@ -159,7 +159,7 @@ type SubjectParameters struct {
 	// +kubebuilder:validation:Optional
 	Initials *string `json:"initials,omitempty" tf:"initials,omitempty"`
 
-	// The locality  in which the certificate subject is located. Must be less than or equal to 128 characters in length.
+	// The locality (such as a city or town) in which the certificate subject is located. Must be less than or equal to 128 characters in length.
 	// +kubebuilder:validation:Optional
 	Locality *string `json:"locality,omitempty" tf:"locality,omitempty"`
 
@@ -167,7 +167,7 @@ type SubjectParameters struct {
 	// +kubebuilder:validation:Optional
 	Organization *string `json:"organization,omitempty" tf:"organization,omitempty"`
 
-	// A subdivision or unit of the organization  with which the certificate subject is affiliated. Must be less than or equal to 64 characters in length.
+	// A subdivision or unit of the organization (such as sales or finance) with which the certificate subject is affiliated. Must be less than or equal to 64 characters in length.
 	// +kubebuilder:validation:Optional
 	OrganizationalUnit *string `json:"organizationalUnit,omitempty" tf:"organizational_unit,omitempty"`
 

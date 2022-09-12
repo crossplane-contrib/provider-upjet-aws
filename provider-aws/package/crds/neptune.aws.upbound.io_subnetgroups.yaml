@@ -65,8 +65,7 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the neptune subnet group. Defaults
-                      to "Managed by Terraform".
+                    description: The description of the neptune subnet group.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

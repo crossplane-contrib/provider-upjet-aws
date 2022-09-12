@@ -37,7 +37,7 @@ type LaunchTemplateParameters struct {
 
 type NodeGroupObservation struct {
 
-	// Amazon Resource Name  of the EKS Node Group.
+	// Amazon Resource Name (ARN) of the EKS Node Group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -54,15 +54,15 @@ type NodeGroupObservation struct {
 
 type NodeGroupParameters struct {
 
-	// Type of Amazon Machine Image  associated with the EKS Node Group. See the AWS documentation for valid values. Terraform will only perform drift detection if a configuration value is provided.
+	// Type of Amazon Machine Image (AMI) associated with the EKS Node Group. See the AWS documentation for valid values.
 	// +kubebuilder:validation:Optional
 	AMIType *string `json:"amiType,omitempty" tf:"ami_type,omitempty"`
 
-	// Type of capacity associated with the EKS Node Group. Valid values: ON_DEMAND, SPOT. Terraform will only perform drift detection if a configuration value is provided.
+	// Type of capacity associated with the EKS Node Group. Valid values: ON_DEMAND, SPOT.
 	// +kubebuilder:validation:Optional
 	CapacityType *string `json:"capacityType,omitempty" tf:"capacity_type,omitempty"`
 
-	// 00 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores .
+	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
 	// +crossplane:generate:reference:type=Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -75,7 +75,7 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// Disk size in GiB for worker nodes. Defaults to 20. Terraform will only perform drift detection if a configuration value is provided.
+	// Disk size in GiB for worker nodes. Defaults to 20.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
@@ -83,7 +83,7 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ForceUpdateVersion *bool `json:"forceUpdateVersion,omitempty" tf:"force_update_version,omitempty"`
 
-	// List of instance types associated with the EKS Node Group. Defaults to ["t3.medium"]. Terraform will only perform drift detection if a configuration value is provided.
+	// List of instance types associated with the EKS Node Group. Defaults to ["t3.medium"].
 	// +kubebuilder:validation:Optional
 	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
 
@@ -95,7 +95,7 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchTemplate []LaunchTemplateParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
-	// –  Amazon Resource Name  of the IAM Role that provides permissions for the EKS Node Group.
+	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -134,7 +134,7 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// –  Identifiers of EC2 Subnets to associate with the EKS Node Group. These subnets must have the following resource tag: kubernetes.io/cluster/CLUSTER_NAME .
+	// –  Identifiers of EC2 Subnets to associate with the EKS Node Group. These subnets must have the following resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME is replaced with the name of the EKS Cluster).
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -161,7 +161,7 @@ type RemoteAccessObservation struct {
 
 type RemoteAccessParameters struct {
 
-	// EC2 Key Pair name that provides access for SSH communication with the worker nodes in the EKS Node Group. If you specify this configuration, but do not specify source_security_group_ids when you create an EKS Node Group, port 22 on the worker nodes is opened to the Internet .
+	// EC2 Key Pair name that provides access for SSH communication with the worker nodes in the EKS Node Group. If you specify this configuration, but do not specify source_security_group_ids when you create an EKS Node Group, port 22 on the worker nodes is opened to the Internet (0.0.0.0/0).
 	// +kubebuilder:validation:Optional
 	EC2SSHKey *string `json:"ec2SshKey,omitempty" tf:"ec2_ssh_key,omitempty"`
 
@@ -173,7 +173,7 @@ type RemoteAccessParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 
-	// Set of EC2 Security Group IDs to allow SSH access  from on the worker nodes. If you specify ec2_ssh_key, but do not specify this configuration when you create an EKS Node Group, port 22 on the worker nodes is opened to the Internet .
+	// Set of EC2 Security Group IDs to allow SSH access (port 22) from on the worker nodes. If you specify ec2_ssh_key, but do not specify this configuration when you create an EKS Node Group, port 22 on the worker nodes is opened to the Internet (0.0.0.0/0).
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SourceSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SourceSecurityGroupIDSelector

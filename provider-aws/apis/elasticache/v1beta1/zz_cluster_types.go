@@ -21,7 +21,7 @@ type CacheNodesObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// reate the resource.
+	// create the resource.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
@@ -36,10 +36,10 @@ type ClusterObservation struct {
 	// List of node objects including id, address, port and availability_zone.
 	CacheNodes []CacheNodesObservation `json:"cacheNodes,omitempty" tf:"cache_nodes,omitempty"`
 
-	// DNS name of the cache cluster without the port appended.
+	// (Memcached only) DNS name of the cache cluster without the port appended.
 	ClusterAddress *string `json:"clusterAddress,omitempty" tf:"cluster_address,omitempty"`
 
-	// Configuration endpoint to allow host discovery.
+	// (Memcached only) Configuration endpoint to allow host discovery.
 	ConfigurationEndpoint *string `json:"configurationEndpoint,omitempty" tf:"configuration_endpoint,omitempty"`
 
 	// Because ElastiCache pulls the latest minor or patch for a version, this attribute returns the running version of the cache engine.
@@ -93,16 +93,16 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDeliveryConfiguration []LogDeliveryConfigurationParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
-	// dd:hh24:mi .
+	// ddd:hh24:mi (24H Clock UTC).
 	// The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00.
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// reate the resource.
+	// create the resource.
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// ast-1:012345678999:my_sns_topic.
+	// east-1:012345678999:my_sns_topic.
 	// +kubebuilder:validation:Optional
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 
@@ -123,7 +123,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
-	// reate the resource.
+	// create the resource.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -144,11 +144,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// reate the resource.
+	// create the resource.
 	// +kubebuilder:validation:Optional
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
-	// lement string list containing an Amazon Resource Name  of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
+	// element string list containing an Amazon Resource Name (ARN) of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
 	// +kubebuilder:validation:Optional
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
 
@@ -156,15 +156,15 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotName *string `json:"snapshotName,omitempty" tf:"snapshot_name,omitempty"`
 
-	// Number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, then a snapshot that was taken today will be retained for 5 days before being deleted. If the value of SnapshotRetentionLimit is set to zero , backups are turned off. Please note that setting a snapshot_retention_limit is not supported on cache.t1.micro cache nodes
+	// Number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, then a snapshot that was taken today will be retained for 5 days before being deleted. If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off. Please note that setting a snapshot_retention_limit is not supported on cache.t1.micro cache nodes
 	// +kubebuilder:validation:Optional
 	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
-	// Daily time range  during which ElastiCache will begin taking a daily snapshot of your cache cluster. Example: 05:00-09:00
+	// Daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. Example: 05:00-09:00
 	// +kubebuilder:validation:Optional
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
-	// reate the resource.
+	// create the resource.
 	// +crossplane:generate:reference:type=SubnetGroup
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`

@@ -32,9 +32,11 @@ type ActionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Arguments map[string]*string `json:"arguments,omitempty" tf:"arguments,omitempty"`
 
+	// –  The name of the trigger.
 	// +kubebuilder:validation:Optional
 	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
 
+	// –  The name of the trigger.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.Job
 	// +kubebuilder:validation:Optional
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
@@ -69,9 +71,11 @@ type ConditionsParameters struct {
 	// +kubebuilder:validation:Optional
 	CrawlState *string `json:"crawlState,omitempty" tf:"crawl_state,omitempty"`
 
+	// –  The name of the trigger.
 	// +kubebuilder:validation:Optional
 	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
 
+	// –  The name of the trigger.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.Job
 	// +kubebuilder:validation:Optional
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
@@ -122,7 +126,7 @@ type PredicateParameters struct {
 
 type TriggerObservation struct {
 
-	// Amazon Resource Name  of Glue Trigger
+	// Amazon Resource Name (ARN) of Glue Trigger
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Trigger name
@@ -148,7 +152,7 @@ type TriggerParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Batch condition that must be met  before EventBridge event trigger fires. See Event Batching Condition.
+	// Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires. See Event Batching Condition.
 	// +kubebuilder:validation:Optional
 	EventBatchingCondition []EventBatchingConditionParameters `json:"eventBatchingCondition,omitempty" tf:"event_batching_condition,omitempty"`
 
@@ -161,7 +165,7 @@ type TriggerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// ased Schedules for Jobs and Crawlers
+	// Based Schedules for Jobs and Crawlers
 	// +kubebuilder:validation:Optional
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
@@ -177,7 +181,7 @@ type TriggerParameters struct {
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// A workflow to which the trigger should be associated to. Every workflow graph  needs a starting trigger  and can contain multiple additional CONDITIONAL triggers.
+	// A workflow to which the trigger should be associated to. Every workflow graph (DAG) needs a starting trigger (ON_DEMAND or SCHEDULED type) and can contain multiple additional CONDITIONAL triggers.
 	// +kubebuilder:validation:Optional
 	WorkflowName *string `json:"workflowName,omitempty" tf:"workflow_name,omitempty"`
 }

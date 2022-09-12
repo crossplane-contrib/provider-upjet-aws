@@ -65,9 +65,10 @@ spec:
               forProvider:
                 properties:
                   cloudwatchRoleArn:
-                    description: The ARN of an IAM role for CloudWatch . See more
-                      in AWS Docs. Logging & monitoring can be enabled/disabled and
-                      otherwise tuned on the API Gateway Stage level.
+                    description: The ARN of an IAM role for CloudWatch (to allow logging
+                      & monitoring). See more in AWS Docs. Logging & monitoring can
+                      be enabled/disabled and otherwise tuned on the API Gateway Stage
+                      level.
                     type: string
                   cloudwatchRoleArnRef:
                     description: Reference to a Role in iam to populate cloudwatchRoleArn.
@@ -334,11 +335,11 @@ spec:
                       properties:
                         burstLimit:
                           description: The absolute maximum number of times API Gateway
-                            allows the API to be called per second .
+                            allows the API to be called per second (RPS).
                           type: number
                         rateLimit:
                           description: The number of times API Gateway allows the
-                            API to be called per second on average .
+                            API to be called per second on average (RPS).
                           type: number
                       type: object
                     type: array

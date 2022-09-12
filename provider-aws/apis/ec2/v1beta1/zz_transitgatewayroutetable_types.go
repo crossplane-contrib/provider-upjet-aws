@@ -15,7 +15,7 @@ import (
 
 type TransitGatewayRouteTableObservation struct {
 
-	// EC2 Transit Gateway Route Table Amazon Resource Name .
+	// EC2 Transit Gateway Route Table Amazon Resource Name (ARN).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Boolean whether this is the default association route table for the EC2 Transit Gateway.

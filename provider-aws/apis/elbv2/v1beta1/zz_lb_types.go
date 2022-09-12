@@ -42,16 +42,17 @@ type AccessLogsParameters struct {
 
 type LBObservation struct {
 
-	// The ARN of the load balancer .
+	// The ARN of the load balancer (matches id).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ARN suffix for use with CloudWatch Metrics.
 	ArnSuffix *string `json:"arnSuffix,omitempty" tf:"arn_suffix,omitempty"`
 
-	// The DNS name of the load balancer.
+	// The name of the LB. This name must be unique within your AWS account, can have a maximum of 32 characters,
+	// must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// The ARN of the load balancer .
+	// The ARN of the load balancer (matches arn).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A subnet mapping block as documented below.
@@ -63,7 +64,7 @@ type LBObservation struct {
 
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
-	// The canonical hosted zone ID of the load balancer .
+	// The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record).
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
@@ -77,11 +78,11 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerOwnedIPv4Pool *string `json:"customerOwnedIpv4Pool,omitempty" tf:"customer_owned_ipv4_pool,omitempty"`
 
-	// Determines how the load balancer handles requests that might pose a security risk to an application due to HTTP desync. Valid values are monitor, defensive , strictest.
+	// Determines how the load balancer handles requests that might pose a security risk to an application due to HTTP desync. Valid values are monitor, defensive (default), strictest.
 	// +kubebuilder:validation:Optional
 	DesyncMitigationMode *string `json:"desyncMitigationMode,omitempty" tf:"desync_mitigation_mode,omitempty"`
 
-	// Indicates whether HTTP headers with header fields that are not valid are removed by the load balancer  or routed to targets . The default is false. Elastic Load Balancing requires that message header names contain only alphanumeric characters and hyphens. Only valid for Load Balancers of type application.
+	// Indicates whether HTTP headers with header fields that are not valid are removed by the load balancer (true) or routed to targets (false). The default is false. Elastic Load Balancing requires that message header names contain only alphanumeric characters and hyphens. Only valid for Load Balancers of type application.
 	// +kubebuilder:validation:Optional
 	DropInvalidHeaderFields *bool `json:"dropInvalidHeaderFields,omitempty" tf:"drop_invalid_header_fields,omitempty"`
 
@@ -91,7 +92,7 @@ type LBParameters struct {
 	EnableCrossZoneLoadBalancing *bool `json:"enableCrossZoneLoadBalancing,omitempty" tf:"enable_cross_zone_load_balancing,omitempty"`
 
 	// If true, deletion of the load balancer will be disabled via
-	// the AWS API. This will prevent Terraform from deleting the load balancer. Defaults to false.
+	// the AWS API. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableDeletionProtection *bool `json:"enableDeletionProtection,omitempty" tf:"enable_deletion_protection,omitempty"`
 
@@ -120,8 +121,7 @@ type LBParameters struct {
 	LoadBalancerType *string `json:"loadBalancerType,omitempty" tf:"load_balancer_type,omitempty"`
 
 	// The name of the LB. This name must be unique within your AWS account, can have a maximum of 32 characters,
-	// must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen. If not specified,
-	// Terraform will autogenerate a name beginning with tf-lb.
+	// must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -172,6 +172,8 @@ type LBParameters struct {
 }
 
 type SubnetMappingObservation struct {
+
+	// ID of the Outpost containing the load balancer.
 	OutpostID *string `json:"outpostId,omitempty" tf:"outpost_id,omitempty"`
 }
 

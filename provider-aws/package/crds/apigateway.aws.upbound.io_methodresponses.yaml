@@ -65,7 +65,8 @@ spec:
               forProvider:
                 properties:
                   httpMethod:
-                    description: The HTTP Method
+                    description: The HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
+                      ANY)
                     type: string
                   httpMethodRef:
                     description: Reference to a Method in apigateway to populate httpMethod.

@@ -18,6 +18,7 @@ type DestinationConfigOnFailureObservation struct {
 
 type DestinationConfigOnFailureParameters struct {
 
+	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/sqs/v1beta1.Queue
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -48,7 +49,7 @@ type FunctionEventInvokeConfigDestinationConfigParameters struct {
 
 type FunctionEventInvokeConfigObservation struct {
 
-	// Fully qualified Lambda Function name or Amazon Resource Name
+	// Fully qualified Lambda Function name or Amazon Resource Name (ARN)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -58,7 +59,7 @@ type FunctionEventInvokeConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationConfig []FunctionEventInvokeConfigDestinationConfigParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
-	// Name or Amazon Resource Name  of the Lambda Function, omitting any version or alias qualifier.
+	// Name or Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
 	// +kubebuilder:validation:Required
 	FunctionName *string `json:"functionName" tf:"function_name,omitempty"`
 
@@ -85,6 +86,7 @@ type OnSuccessObservation struct {
 
 type OnSuccessParameters struct {
 
+	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

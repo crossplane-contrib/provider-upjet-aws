@@ -144,7 +144,8 @@ spec:
                     description: JSON payload to the lambda function.
                     type: string
                   qualifier:
-                    description: Qualifier  of the lambda function. Defaults to $LATEST.
+                    description: Qualifier (i.e., version) of the lambda function.
+                      Defaults to $LATEST.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -154,8 +155,7 @@ spec:
                     additionalProperties:
                       type: string
                     description: Map of arbitrary keys and values that, when changed,
-                      will trigger a re-invocation. To force a re-invocation without
-                      changing these keys/values, use the terraform taint command.
+                      will trigger a re-invocation.
                     type: object
                 required:
                 - input

@@ -321,8 +321,9 @@ spec:
                     type: string
                   integrationType:
                     description: 'The integration type of an integration. Valid values:
-                      AWS , AWS_PROXY, HTTP , HTTP_PROXY, MOCK . For an HTTP API private
-                      integration, use HTTP_PROXY.'
+                      AWS (supported only for WebSocket APIs), AWS_PROXY, HTTP (supported
+                      only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for
+                      WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.'
                     type: string
                   integrationUri:
                     description: The URI of the Lambda function for a Lambda proxy
@@ -469,8 +470,7 @@ spec:
                     description: Custom timeout between 50 and 29,000 milliseconds
                       for WebSocket APIs and between 50 and 30,000 milliseconds for
                       HTTP APIs. The default timeout is 29 seconds for WebSocket APIs
-                      and 30 seconds for HTTP APIs. Terraform will only perform drift
-                      detection of its value when present in a configuration.
+                      and 30 seconds for HTTP APIs.
                     type: number
                   tlsConfig:
                     description: The TLS configuration for a private integration.
@@ -481,7 +481,7 @@ spec:
                           description: If you specify a server name, API Gateway uses
                             it to verify the hostname on the integration's certificate.
                             The server name is also included in the TLS handshake
-                            to support Server Name Indication  or virtual hosting.
+                            to support Server Name Indication (SNI) or virtual hosting.
                           type: string
                       type: object
                     type: array

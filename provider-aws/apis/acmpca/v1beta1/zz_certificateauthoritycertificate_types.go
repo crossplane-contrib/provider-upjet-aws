@@ -19,7 +19,7 @@ type CertificateAuthorityCertificateObservation struct {
 
 type CertificateAuthorityCertificateParameters struct {
 
-	// Amazon Resource Name  of the Certificate Authority.
+	// Amazon Resource Name (ARN) of the Certificate Authority.
 	// +crossplane:generate:reference:type=CertificateAuthority
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`

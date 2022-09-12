@@ -83,7 +83,7 @@ spec:
                             type: string
                           type: array
                         optionName:
-                          description: The Name of the Option .
+                          description: The Name of the Option (e.g., MEMCACHED).
                           type: string
                         optionSettings:
                           description: A list of option settings to apply.
@@ -101,10 +101,10 @@ spec:
                           type: array
                         port:
                           description: The Port number when connecting to the Option
-                            .
+                            (e.g., 11211).
                           type: number
                         version:
-                          description: The version of the option .
+                          description: The version of the option (e.g., 13.1.0.0).
                           type: string
                         vpcSecurityGroupMemberships:
                           description: A list of VPC Security Groups for which the
@@ -117,8 +117,7 @@ spec:
                       type: object
                     type: array
                   optionGroupDescription:
-                    description: The description of the option group. Defaults to
-                      "Managed by Terraform".
+                    description: The description of the option group.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

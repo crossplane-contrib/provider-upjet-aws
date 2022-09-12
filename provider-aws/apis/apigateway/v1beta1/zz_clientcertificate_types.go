@@ -15,7 +15,7 @@ import (
 
 type ClientCertificateObservation struct {
 
-	// Amazon Resource Name
+	// Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The date when the client certificate was created.

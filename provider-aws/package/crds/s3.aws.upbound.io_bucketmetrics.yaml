@@ -142,16 +142,16 @@ spec:
                     type: object
                   filter:
                     description: Object filtering that accepts a prefix, tags, or
-                      a logical AND of prefix and tags .
+                      a logical AND of prefix and tags (documented below).
                     items:
                       properties:
                         prefix:
-                          description: Object prefix for filtering .
+                          description: Object prefix for filtering (singular).
                           type: string
                         tags:
                           additionalProperties:
                             type: string
-                          description: Object tags for filtering .
+                          description: Object tags for filtering (up to 10).
                           type: object
                       type: object
                     type: array

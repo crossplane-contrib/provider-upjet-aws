@@ -77,8 +77,8 @@ spec:
                     items:
                       properties:
                         arn:
-                          description: –  Amazon Resource Name  that uniquely identifies
-                            the data location resource.
+                          description: –  Amazon Resource Name (ARN) that uniquely
+                            identifies the data location resource.
                           type: string
                         arnRef:
                           description: Reference to a Resource in lakeformation to
@@ -266,7 +266,7 @@ spec:
                       type: string
                     type: array
                   principal:
-                    description: ccount permissions. For more information, see Lake
+                    description: account permissions. For more information, see Lake
                       Formation Permissions Reference.
                     type: string
                   region:
@@ -306,8 +306,6 @@ spec:
                           type: string
                         excludedColumnNames:
                           description: Set of column names for the table to exclude.
-                            If excluded_column_names is included, wildcard must be
-                            set to true to avoid Terraform reporting a difference.
                           items:
                             type: string
                           type: array

@@ -58,6 +58,7 @@ type BucketACLObservation struct {
 	// +kubebuilder:validation:Optional
 	AccessControlPolicy []AccessControlPolicyObservation `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
 
+	// The ID of the owner.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -103,6 +104,7 @@ type GranteeParameters struct {
 	// +kubebuilder:validation:Optional
 	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
 
+	// The ID of the owner.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -124,6 +126,7 @@ type OwnerParameters struct {
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// The ID of the owner.
 	// +kubebuilder:validation:Required
 	ID *string `json:"id" tf:"id,omitempty"`
 }

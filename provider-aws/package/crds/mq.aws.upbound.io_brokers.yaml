@@ -181,11 +181,11 @@ spec:
                     items:
                       properties:
                         kmsKeyId:
-                          description: Amazon Resource Name  of Key Management Service  Customer
-                            Master Key  to use for encryption at rest. Requires setting
-                            use_aws_owned_key to false. To perform drift detection
-                            when AWS-managed CMKs or customer-managed CMKs are in
-                            use, this value must be configured.
+                          description: Amazon Resource Name (ARN) of Key Management
+                            Service (KMS) Customer Master Key (CMK) to use for encryption
+                            at rest. Requires setting use_aws_owned_key to false.
+                            To perform drift detection when AWS-managed CMKs or customer-managed
+                            CMKs are in use, this value must be configured.
                           type: string
                         useAwsOwnedKey:
                           description: Whether to enable an AWS-owned KMS CMK that
@@ -210,7 +210,8 @@ spec:
                   ldapServerMetadata:
                     description: Configuration block for the LDAP server used to authenticate
                       and authorize connections to the broker. Not supported for engine_type
-                      RabbitMQ. Detailed below.
+                      RabbitMQ. Detailed below. (Currently, AWS may not process changes
+                      to LDAP server metadata.)
                     items:
                       properties:
                         hosts:
@@ -434,8 +435,8 @@ spec:
                             only.
                           type: boolean
                         groups:
-                          description: List of groups  to which the ActiveMQ user
-                            belongs. Applies to engine_type of ActiveMQ only.
+                          description: List of groups (20 maximum) to which the ActiveMQ
+                            user belongs. Applies to engine_type of ActiveMQ only.
                           items:
                             type: string
                           type: array
@@ -656,16 +657,22 @@ spec:
                   id:
                     type: string
                   instances:
-                    description: List of information about allocated brokers .
+                    description: List of information about allocated brokers (both
+                      active & standby).
                     items:
                       properties:
                         consoleUrl:
+                          description: The URL of the broker's ActiveMQ Web Console.
                           type: string
                         endpoints:
+                          description: 'Broker''s wire-level protocol endpoints in
+                            the following order & format referenceable e.g., as instances.0.endpoints.0
+                            (SSL):'
                           items:
                             type: string
                           type: array
                         ipAddress:
+                          description: IP Address of the broker.
                           type: string
                       type: object
                     type: array

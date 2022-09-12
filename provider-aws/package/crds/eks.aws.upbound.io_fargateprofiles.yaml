@@ -65,9 +65,9 @@ spec:
               forProvider:
                 properties:
                   clusterName:
-                    description: 00 characters in length. Must begin with an alphanumeric
+                    description: 100 characters in length. Must begin with an alphanumeric
                       character, and must only contain alphanumeric characters, dashes
-                      and underscores .
+                      and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster to populate clusterName.
@@ -143,8 +143,8 @@ spec:
                         type: object
                     type: object
                   podExecutionRoleArn:
-                    description: –  Amazon Resource Name  of the IAM Role that provides
-                      permissions for the EKS Fargate Profile.
+                    description: –  Amazon Resource Name (ARN) of the IAM Role that
+                      provides permissions for the EKS Fargate Profile.
                     type: string
                   podExecutionRoleArnRef:
                     description: Reference to a Role in iam to populate podExecutionRoleArn.
@@ -224,7 +224,7 @@ spec:
                       be created in.
                     type: string
                   selector:
-                    description: Configuration block for selecting Kubernetes Pods
+                    description: Configuration block(s) for selecting Kubernetes Pods
                       to execute with this EKS Fargate Profile. Detailed below.
                     items:
                       properties:
@@ -320,7 +320,8 @@ spec:
                   subnetIds:
                     description: '–  Identifiers of private EC2 Subnets to associate
                       with the EKS Fargate Profile. These subnets must have the following
-                      resource tag: kubernetes.io/cluster/CLUSTER_NAME .'
+                      resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME
+                      is replaced with the name of the EKS Cluster).'
                     items:
                       type: string
                     type: array
@@ -512,11 +513,11 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of the EKS Fargate Profile.
+                    description: Amazon Resource Name (ARN) of the EKS Fargate Profile.
                     type: string
                   id:
                     description: EKS Cluster name and EKS Fargate Profile name separated
-                      by a colon .
+                      by a colon (:).
                     type: string
                   status:
                     description: Status of the EKS Fargate Profile.

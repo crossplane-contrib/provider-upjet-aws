@@ -15,7 +15,7 @@ import (
 
 type WorkspaceObservation struct {
 
-	// Amazon Resource Name  of the workspace.
+	// Amazon Resource Name (ARN) of the workspace.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Identifier of the workspace

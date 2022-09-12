@@ -349,7 +349,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name  of cluster
+                    description: Amazon Resource Name (ARN) of cluster
                     type: string
                   endpoint:
                     description: A custom endpoint for the Aurora cluster

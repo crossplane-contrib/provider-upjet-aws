@@ -38,7 +38,7 @@ type EphemeralStorageObservation struct {
 
 type EphemeralStorageParameters struct {
 
-	// The size of the Lambda function Ephemeral storage represented in MB. The minimum supported ephemeral_storage value defaults to 512MB and the maximum supported value is 10240MB.
+	// The size of the Lambda function Ephemeral storage(/tmp) represented in MB. The minimum supported ephemeral_storage value defaults to 512MB and the maximum supported value is 10240MB.
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 }
@@ -77,7 +77,7 @@ type FunctionObservation struct {
 	// Date this resource was last modified.
 	LastModified *string `json:"lastModified,omitempty" tf:"last_modified,omitempty"`
 
-	// ARN identifying your Lambda Function Version .
+	// ARN identifying your Lambda Function Version (if versioning is enabled via publish = true).
 	QualifiedArn *string `json:"qualifiedArn,omitempty" tf:"qualified_arn,omitempty"`
 
 	// ARN of the signing job.
@@ -122,7 +122,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Environment []EnvironmentParameters `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The amount of Ephemeral storage to allocate for the Lambda Function in MB. This parameter is used to expand the total amount of Ephemeral storage available, beyond the default amount of 512MB. Detailed below.
+	// The amount of Ephemeral storage(/tmp) to allocate for the Lambda Function in MB. This parameter is used to expand the total amount of Ephemeral storage available, beyond the default amount of 512MB. Detailed below.
 	// +kubebuilder:validation:Optional
 	EphemeralStorage []EphemeralStorageParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
@@ -142,7 +142,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
-	// Amazon Resource Name  of the AWS Key Management Service  key that is used to encrypt environment variables. If this configuration is not provided when environment variables are in use, AWS Lambda uses a default service key. If this configuration is provided when environment variables are not in use, the AWS Lambda API does not save this configuration and Terraform will show a perpetual difference of adding the key. To fix the perpetual difference, remove this configuration.
+	// Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key that is used to encrypt environment variables. If this configuration is not provided when environment variables are in use, AWS Lambda uses a default service key. To fix the perpetual difference, remove this configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -155,7 +155,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
-	// List of Lambda Layer Version ARNs  to attach to your Lambda Function. See Lambda Layers
+	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. See Lambda Layers
 	// +kubebuilder:validation:Optional
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
 
@@ -180,7 +180,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
 
-	// Amazon Resource Name  of the function's execution role. The role provides the function's identity and access to AWS services and resources.
+	// Amazon Resource Name (ARN) of the function's execution role. The role provides the function's identity and access to AWS services and resources.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -219,7 +219,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	S3ObjectVersion *string `json:"s3ObjectVersion,omitempty" tf:"s3_object_version,omitempty"`
 
-	// Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is filebase64sha256  or base64sha256(file) , where "file.zip" is the local filename of the lambda function source archive.
+	// Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is filebase64sha256("file.11.12 and later) or base64sha256(file("file.11.11 and earlier), where "file.zip" is the local filename of the lambda function source archive.
 	// +kubebuilder:validation:Optional
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
 
@@ -269,6 +269,8 @@ type TracingConfigParameters struct {
 }
 
 type VPCConfigObservation struct {
+
+	// ID of the VPC.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 

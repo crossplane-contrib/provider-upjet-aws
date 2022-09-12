@@ -15,7 +15,7 @@ import (
 
 type ServerCertificateObservation struct {
 
-	// The Amazon Resource Name  specifying the server certificate.
+	// The Amazon Resource Name (ARN) specifying the server certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Date and time in RFC3339 format on which the certificate is set to expire.
@@ -33,23 +33,23 @@ type ServerCertificateObservation struct {
 
 type ServerCertificateParameters struct {
 
-	// ncoded format.
+	// encoded format.
 	// +kubebuilder:validation:Required
 	CertificateBody *string `json:"certificateBody" tf:"certificate_body,omitempty"`
 
-	// ncoded public key certificates
+	// encoded public key certificates
 	// of the chain.
 	// +kubebuilder:validation:Optional
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
 	// The IAM path for the server certificate.  If it is not
-	// included, it defaults to a slash . If this certificate is for use with
+	// included, it defaults to a slash (/). If this certificate is for use with
 	// AWS CloudFront, the path must be in format /cloudfront/your_path_here.
 	// See IAM Identifiers for more details on IAM Paths.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// ncoded format.
+	// encoded format.
 	// +kubebuilder:validation:Required
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 

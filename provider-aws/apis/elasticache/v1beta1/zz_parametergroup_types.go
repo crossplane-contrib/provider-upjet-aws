@@ -27,7 +27,7 @@ type ParameterGroupObservation struct {
 
 type ParameterGroupParameters struct {
 
-	// The description of the ElastiCache parameter group. Defaults to "Managed by Terraform".
+	// The description of the ElastiCache parameter group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

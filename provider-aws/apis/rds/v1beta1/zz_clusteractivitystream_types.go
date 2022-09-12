@@ -15,7 +15,7 @@ import (
 
 type ClusterActivityStreamObservation struct {
 
-	// The Amazon Resource Name  of the DB cluster.
+	// The Amazon Resource Name (ARN) of the DB cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The name of the Amazon Kinesis data stream to be used for the database activity stream.
@@ -50,7 +50,7 @@ type ClusterActivityStreamParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The Amazon Resource Name  of the DB cluster.
+	// The Amazon Resource Name (ARN) of the DB cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/rds/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

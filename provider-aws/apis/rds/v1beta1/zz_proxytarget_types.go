@@ -18,7 +18,7 @@ type ProxyTargetObservation struct {
 	// Hostname for the target RDS DB Instance. Only returned for RDS_INSTANCE type.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// Identifier of  db_proxy_name, target_group_name, target type , and resource identifier separated by forward slashes .
+	// Identifier of  db_proxy_name, target_group_name, target type (e.g., RDS_INSTANCE or TRACKED_CLUSTER), and resource identifier separated by forward slashes (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Port for the target RDS DB Instance or Aurora DB Cluster.
@@ -27,7 +27,7 @@ type ProxyTargetObservation struct {
 	// Identifier representing the DB Instance or DB Cluster target.
 	RDSResourceID *string `json:"rdsResourceId,omitempty" tf:"rds_resource_id,omitempty"`
 
-	// Amazon Resource Name  for the DB instance or DB cluster. Currently not returned by the RDS API.
+	// Amazon Resource Name (ARN) for the DB instance or DB cluster. Currently not returned by the RDS API.
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
 	// DB Cluster identifier for the DB Instance target. Not returned unless manually importing an RDS_INSTANCE target that is part of a DB Cluster.

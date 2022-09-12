@@ -20,7 +20,7 @@ type BrokerObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// List of information about allocated brokers .
+	// List of information about allocated brokers (both active & standby).
 	Instances []InstancesObservation `json:"instances,omitempty" tf:"instances,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
@@ -69,7 +69,7 @@ type BrokerParameters struct {
 	// +kubebuilder:validation:Required
 	HostInstanceType *string `json:"hostInstanceType" tf:"host_instance_type,omitempty"`
 
-	// Configuration block for the LDAP server used to authenticate and authorize connections to the broker. Not supported for engine_type RabbitMQ. Detailed below.
+	// Configuration block for the LDAP server used to authenticate and authorize connections to the broker. Not supported for engine_type RabbitMQ. Detailed below. (Currently, AWS may not process changes to LDAP server metadata.)
 	// +kubebuilder:validation:Optional
 	LdapServerMetadata []LdapServerMetadataParameters `json:"ldapServerMetadata,omitempty" tf:"ldap_server_metadata,omitempty"`
 
@@ -150,7 +150,7 @@ type EncryptionOptionsObservation struct {
 
 type EncryptionOptionsParameters struct {
 
-	// Amazon Resource Name  of Key Management Service  Customer Master Key  to use for encryption at rest. Requires setting use_aws_owned_key to false. To perform drift detection when AWS-managed CMKs or customer-managed CMKs are in use, this value must be configured.
+	// Amazon Resource Name (ARN) of Key Management Service (KMS) Customer Master Key (CMK) to use for encryption at rest. Requires setting use_aws_owned_key to false. To perform drift detection when AWS-managed CMKs or customer-managed CMKs are in use, this value must be configured.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -160,10 +160,14 @@ type EncryptionOptionsParameters struct {
 }
 
 type InstancesObservation struct {
+
+	// The URL of the broker's ActiveMQ Web Console.
 	ConsoleURL *string `json:"consoleUrl,omitempty" tf:"console_url,omitempty"`
 
+	// Broker's wire-level protocol endpoints in the following order & format referenceable e.g., as instances.0.endpoints.0 (SSL):
 	Endpoints []*string `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 
+	// IP Address of the broker.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 }
 
@@ -261,7 +265,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
 
-	// List of groups  to which the ActiveMQ user belongs. Applies to engine_type of ActiveMQ only.
+	// List of groups (20 maximum) to which the ActiveMQ user belongs. Applies to engine_type of ActiveMQ only.
 	// +kubebuilder:validation:Optional
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 

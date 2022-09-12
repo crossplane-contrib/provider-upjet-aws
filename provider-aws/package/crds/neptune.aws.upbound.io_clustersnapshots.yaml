@@ -326,7 +326,7 @@ spec:
                 properties:
                   allocatedStorage:
                     description: Specifies the allocated storage size in gigabytes
-                      .
+                      (GB).
                     type: number
                   availabilityZones:
                     description: List of EC2 Availability Zones that instances in
@@ -335,7 +335,8 @@ spec:
                       type: string
                     type: array
                   dbClusterSnapshotArn:
-                    description: The Amazon Resource Name  for the DB Cluster Snapshot.
+                    description: The Amazon Resource Name (ARN) for the DB Cluster
+                      Snapshot.
                     type: string
                   engine:
                     description: Specifies the name of the database engine.
@@ -360,6 +361,8 @@ spec:
                   snapshotType:
                     type: string
                   sourceDbClusterSnapshotArn:
+                    description: The Amazon Resource Name (ARN) for the DB Cluster
+                      Snapshot.
                     type: string
                   status:
                     description: The status of this DB Cluster Snapshot.

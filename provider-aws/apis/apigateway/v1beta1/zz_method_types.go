@@ -23,7 +23,7 @@ type MethodParameters struct {
 	// +kubebuilder:validation:Optional
 	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
 
-	// The type of authorization used for the method
+	// The type of authorization used for the method (NONE, CUSTOM, AWS_IAM, COGNITO_USER_POOLS)
 	// +kubebuilder:validation:Required
 	Authorization *string `json:"authorization" tf:"authorization,omitempty"`
 
@@ -45,7 +45,7 @@ type MethodParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizerIDSelector *v1.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
 
-	// The HTTP Method
+	// The HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
 	// +kubebuilder:validation:Required
 	HTTPMethod *string `json:"httpMethod" tf:"http_method,omitempty"`
 
@@ -59,12 +59,12 @@ type MethodParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// A map of the API models used for the request's content type
-	// where key is the content type
-	// and value is either Error, Empty  or aws_api_gateway_model's name.
+	// where key is the content type (e.g., application/json)
+	// and value is either Error, Empty (built-in models) or aws_api_gateway_model's name.
 	// +kubebuilder:validation:Optional
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
-	// A map of request parameters  that should be passed to the integration. The boolean value indicates whether the parameter is required  or optional .
+	// A map of request parameters (from the path, query string and headers) that should be passed to the integration. The boolean value indicates whether the parameter is required (true) or optional (false).
 	// For example: request_parameters = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param" = true} would define that the header X-Some-Header and the query string some-query-param must be provided in the request.
 	// +kubebuilder:validation:Optional
 	RequestParameters map[string]*bool `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`

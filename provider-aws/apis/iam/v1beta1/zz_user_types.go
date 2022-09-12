@@ -29,10 +29,10 @@ type UserObservation struct {
 
 type UserParameters struct {
 
-	// When destroying this user, destroy even if it
-	// has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy
-	// a user with non-Terraform-managed access keys and login profile will fail to be destroyed.
-	// Delete user even if it has non-Terraform-managed IAM access keys, login profile or MFA devices
+	// when destroying this user, destroy even if it
+	// has non-Upbound official provider-managed iam access keys, login profile or mfa devices. without force_destroy
+	// a user with non-Upbound official provider-managed access keys and login profile will fail to be destroyed.
+	// delete user even if it has non-Upbound official provider-managed iam access keys, login profile or mfa devices
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 

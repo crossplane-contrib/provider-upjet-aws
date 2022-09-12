@@ -145,9 +145,9 @@ spec:
                       be created in.
                     type: string
                   setting:
-                    description: Configuration block with cluster settings. For example,
-                      this can be used to enable CloudWatch Container Insights for
-                      a cluster. Detailed below.
+                    description: Configuration block(s) with cluster settings. For
+                      example, this can be used to enable CloudWatch Container Insights
+                      for a cluster. Detailed below.
                     items:
                       properties:
                         name:

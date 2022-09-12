@@ -144,7 +144,7 @@ spec:
                     type: object
                   filter:
                     description: A bucket filter. The configuration only includes
-                      objects that meet the filter's criteria .
+                      objects that meet the filter's criteria (documented below).
                     items:
                       properties:
                         prefix:
@@ -173,7 +173,7 @@ spec:
                     type: string
                   tiering:
                     description: The S3 Intelligent-Tiering storage class tiers of
-                      the configuration .
+                      the configuration (documented below).
                     items:
                       properties:
                         accessTier:

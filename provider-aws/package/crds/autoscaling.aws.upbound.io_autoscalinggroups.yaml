@@ -86,11 +86,12 @@ spec:
                     description: Allows deleting the Auto Scaling Group without waiting
                       for all instances in the pool to terminate.  You can force an
                       Auto Scaling Group to delete even if it's in the process of
-                      scaling a resource. Normally, Terraform drains all the instances
-                      before deleting the group.  This bypasses that behavior and
-                      potentially leaves resources dangling.
+                      scaling a resource.  This bypasses that behavior and potentially
+                      leaves resources dangling.
                     type: boolean
                   forceDeleteWarmPool:
+                    description: If this block is configured, add a Warm Pool to the
+                      specified Auto Scaling group. Defined below
                     type: boolean
                   healthCheckGracePeriod:
                     type: number
@@ -113,12 +114,16 @@ spec:
                         lifecycleTransition:
                           type: string
                         name:
+                          description: The name of the launch template. Conflicts
+                            with id.
                           type: string
                         notificationMetadata:
                           type: string
                         notificationTargetArn:
+                          description: The ARN for this Auto Scaling Group
                           type: string
                         roleArn:
+                          description: The ARN for this Auto Scaling Group
                           type: string
                       required:
                       - lifecycleTransition
@@ -183,9 +188,14 @@ spec:
                   launchConfiguration:
                     type: string
                   launchTemplate:
+                    description: Nested argument with Launch template specification
+                      to use to launch instances. See Launch Template below for more
+                      details.
                     items:
                       properties:
                         id:
+                          description: The ID of the launch template. Conflicts with
+                            name.
                           type: string
                         idRef:
                           description: Reference to a LaunchTemplate in ec2 to populate
@@ -266,8 +276,12 @@ spec:
                               type: object
                           type: object
                         name:
+                          description: The name of the launch template. Conflicts
+                            with id.
                           type: string
                         version:
+                          description: 'Template version. Can be version number, $Latest,
+                            or $Default. (Default: $Default).'
                           type: string
                       type: object
                     type: array
@@ -283,10 +297,8 @@ spec:
                       collect. The only valid value is 1Minute. Default is 1Minute.
                     type: string
                   minElbCapacity:
-                    description: Setting this causes Terraform to wait for this number
-                      of instances from this Auto Scaling Group to show up healthy
-                      in the ELB only on creation. Updates will not wait on ELB instance
-                      number changes.
+                    description: Updates will not wait on ELB instance number changes.
+                      (See also Waiting for Capacity below.)
                     type: number
                   minSize:
                     type: number
@@ -338,6 +350,9 @@ spec:
                             type: object
                           type: array
                         launchTemplate:
+                          description: Nested argument with Launch template specification
+                            to use to launch instances. See Launch Template below
+                            for more details.
                           items:
                             properties:
                               launchTemplateSpecification:
@@ -436,6 +451,8 @@ spec:
                                         Conflicts with launch_template_id.
                                       type: string
                                     version:
+                                      description: 'Template version. Can be version
+                                        number, $Latest, or $Default. (Default: $Default).'
                                       type: string
                                   type: object
                                 type: array
@@ -555,6 +572,9 @@ spec:
                                               Conflicts with launch_template_id.
                                             type: string
                                           version:
+                                            description: 'Template version. Can be
+                                              version number, $Latest, or $Default.
+                                              (Default: $Default).'
                                             type: string
                                         type: object
                                       type: array
@@ -653,7 +673,7 @@ spec:
                         type: object
                     type: object
                   protectFromScaleIn:
-                    description: n protection in the Amazon EC2 Auto Scaling User
+                    description: in protection in the Amazon EC2 Auto Scaling User
                       Guide.
                     type: boolean
                   region:
@@ -661,7 +681,7 @@ spec:
                       be created in.
                     type: string
                   serviceLinkedRoleArn:
-                    description: inked role that the ASG will use to call other AWS
+                    description: linked role that the ASG will use to call other AWS
                       services
                     type: string
                   serviceLinkedRoleArnRef:
@@ -748,8 +768,8 @@ spec:
                       type: string
                     type: array
                   tag:
-                    description: Configuration block containing resource tags. Conflicts
-                      with tags. See Tag below for more details.
+                    description: Configuration block(s) containing resource tags.
+                      Conflicts with tags. See Tag below for more details.
                     items:
                       properties:
                         key:
@@ -867,14 +887,11 @@ spec:
                         type: object
                     type: object
                   waitForCapacityTimeout:
-                    description: A maximum duration that Terraform should wait for
-                      ASG instances to be healthy before timing out.   Setting this
-                      to "0" causes Terraform to skip all Capacity Waiting behavior.
+                    description: (See also Waiting for Capacity below.
                     type: string
                   waitForElbCapacity:
-                    description: Setting this will cause Terraform to wait for exactly
-                      this number of healthy instances from this Auto Scaling Group
-                      in all attached load balancers on both create and update operations.
+                    description: (Takes precedence over min_elb_capacity behavior.)
+                      (See also Waiting for Capacity below.)
                     type: number
                   warmPool:
                     description: If this block is configured, add a Warm Pool to the
@@ -905,7 +922,7 @@ spec:
                         poolState:
                           description: 'Sets the instance state to transition to after
                             the lifecycle hooks finish. Valid values are: Stopped
-                            , Running or Hibernated.'
+                            (default), Running or Hibernated.'
                           type: string
                       type: object
                     type: array
@@ -1094,6 +1111,7 @@ spec:
                     description: The ARN for this Auto Scaling Group
                     type: string
                   id:
+                    description: The Auto Scaling Group id.
                     type: string
                   loadBalancers:
                     description: A list of elastic load balancer names to add to the

@@ -153,10 +153,14 @@ spec:
                             type: string
                           type: array
                         filterPrefix:
+                          description: Object key name prefix.
                           type: string
                         filterSuffix:
+                          description: Object key name suffix.
                           type: string
                         id:
+                          description: Unique identifier for each of the notification
+                            configurations.
                           type: string
                         lambdaFunctionArn:
                           description: Lambda function ARN.
@@ -174,10 +178,14 @@ spec:
                             type: string
                           type: array
                         filterPrefix:
+                          description: Object key name prefix.
                           type: string
                         filterSuffix:
+                          description: Object key name suffix.
                           type: string
                         id:
+                          description: Unique identifier for each of the notification
+                            configurations.
                           type: string
                         queueArn:
                           description: SQS queue ARN.
@@ -275,10 +283,14 @@ spec:
                             type: string
                           type: array
                         filterPrefix:
+                          description: Object key name prefix.
                           type: string
                         filterSuffix:
+                          description: Object key name suffix.
                           type: string
                         id:
+                          description: Unique identifier for each of the notification
+                            configurations.
                           type: string
                         topicArn:
                           description: SNS topic ARN.
@@ -543,6 +555,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: Unique identifier for each of the notification configurations.
                     type: string
                 type: object
               conditions:

@@ -386,7 +386,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  of the Grafana workspace.
+                    description: The Amazon Resource Name (ARN) of the Grafana workspace.
                     type: string
                   endpoint:
                     description: The endpoint of the Grafana workspace.

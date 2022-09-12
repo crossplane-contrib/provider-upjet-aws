@@ -15,7 +15,7 @@ import (
 
 type EBSSnapshotObservation struct {
 
-	// Amazon Resource Name  of the EBS Snapshot.
+	// Amazon Resource Name (ARN) of the EBS Snapshot.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The data encryption key identifier for the snapshot.
@@ -24,13 +24,13 @@ type EBSSnapshotObservation struct {
 	// Whether the snapshot is encrypted.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	// The snapshot ID .
+	// The snapshot ID (e.g., snap-59fcb34e).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ARN for the KMS encryption key.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Value from an Amazon-maintained list  of snapshot owners.
+	// Value from an Amazon-maintained list (amazon, aws-marketplace, microsoft) of snapshot owners.
 	OwnerAlias *string `json:"ownerAlias,omitempty" tf:"owner_alias,omitempty"`
 
 	// The AWS account ID of the EBS snapshot owner.
@@ -49,7 +49,7 @@ type EBSSnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The Amazon Resource Name  of the Outpost on which to create a local snapshot.
+	// The Amazon Resource Name (ARN) of the Outpost on which to create a local snapshot.
 	// +kubebuilder:validation:Optional
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 

@@ -15,7 +15,7 @@ import (
 
 type SecretRotationObservation struct {
 
-	// Amazon Resource Name  of the secret.
+	// Amazon Resource Name (ARN) of the secret.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies whether automatic rotation is enabled for this secret.
@@ -47,7 +47,7 @@ type SecretRotationParameters struct {
 	// +kubebuilder:validation:Required
 	RotationRules []SecretRotationRotationRulesParameters `json:"rotationRules" tf:"rotation_rules,omitempty"`
 
-	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name  or the friendly name of the secret. The secret must already exist.
+	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

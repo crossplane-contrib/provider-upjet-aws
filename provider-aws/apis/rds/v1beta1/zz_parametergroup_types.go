@@ -27,7 +27,7 @@ type ParameterGroupObservation struct {
 
 type ParameterGroupParameters struct {
 
-	// The description of the DB parameter group. Defaults to "Managed by Terraform".
+	// The description of the DB parameter group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -54,7 +54,7 @@ type ParameterObservation struct {
 
 type ParameterParameters struct {
 
-	// "immediate" , or "pending-reboot". Some
+	// "immediate" (default), or "pending-reboot". Some
 	// engines can't apply some parameters without a reboot, and you will need to
 	// specify "pending-reboot" here.
 	// +kubebuilder:validation:Optional

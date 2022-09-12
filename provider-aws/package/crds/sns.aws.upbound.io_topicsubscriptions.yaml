@@ -70,9 +70,9 @@ spec:
                       Only applicable for http and https protocols. Default is 1.
                     type: number
                   deliveryPolicy:
-                    description: JSON String with the delivery policy  that will be
-                      used in the subscription - this only applies to HTTP/S subscriptions.
-                      Refer to the SNS docs for more details.
+                    description: JSON String with the delivery policy (retries, backoff,
+                      etc.) that will be used in the subscription - this only applies
+                      to HTTP/S subscriptions. Refer to the SNS docs for more details.
                     type: string
                   endpoint:
                     description: Endpoint to send data to. The contents vary with
@@ -80,7 +80,7 @@ spec:
                     type: string
                   endpointAutoConfirms:
                     description: Whether the endpoint is capable of auto confirming
-                      subscription . Default is false.
+                      subscription (e.g., PagerDuty). Default is false.
                     type: boolean
                   endpointRef:
                     description: Reference to a Queue in sqs to populate endpoint.
@@ -167,8 +167,9 @@ spec:
                       below.'
                     type: string
                   rawMessageDelivery:
-                    description: Whether to enable raw message delivery . Default
-                      is false.
+                    description: Whether to enable raw message delivery (the original
+                      message is directly passed, not wrapped in JSON with the original
+                      message in the message property). Default is false.
                     type: boolean
                   redrivePolicy:
                     description: JSON String with the redrive policy that will be

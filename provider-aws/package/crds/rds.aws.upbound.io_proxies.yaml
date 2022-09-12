@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   auth:
-                    description: Configuration block with authorization mechanisms
+                    description: Configuration block(s) with authorization mechanisms
                       to connect to the associated instances or clusters. Described
                       below.
                     items:
@@ -81,14 +81,14 @@ spec:
                           type: string
                         iamAuth:
                           description: Whether to require or disallow AWS Identity
-                            and Access Management  authentication for connections
+                            and Access Management (IAM) authentication for connections
                             to the proxy. One of DISABLED, REQUIRED.
                           type: string
                         secretArn:
-                          description: The Amazon Resource Name  representing the
-                            secret that the proxy uses to authenticate to the RDS
-                            DB instance or Aurora DB cluster. These secrets are stored
-                            within Amazon Secrets Manager.
+                          description: The Amazon Resource Name (ARN) representing
+                            the secret that the proxy uses to authenticate to the
+                            RDS DB instance or Aurora DB cluster. These secrets are
+                            stored within Amazon Secrets Manager.
                           type: string
                         secretArnRef:
                           description: Reference to a Secret in secretsmanager to
@@ -203,13 +203,13 @@ spec:
                     type: string
                   requireTls:
                     description: A Boolean parameter that specifies whether Transport
-                      Layer Security  encryption is required for connections to the
-                      proxy. By enabling this setting, you can enforce encrypted TLS
-                      connections to the proxy.
+                      Layer Security (TLS) encryption is required for connections
+                      to the proxy. By enabling this setting, you can enforce encrypted
+                      TLS connections to the proxy.
                     type: boolean
                   roleArn:
-                    description: The Amazon Resource Name  of the IAM role that the
-                      proxy uses to access secrets in AWS Secrets Manager.
+                    description: The Amazon Resource Name (ARN) of the IAM role that
+                      the proxy uses to access secrets in AWS Secrets Manager.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -563,7 +563,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  for the proxy.
+                    description: The Amazon Resource Name (ARN) for the proxy.
                     type: string
                   endpoint:
                     description: The endpoint that you can use to connect to the proxy.
@@ -571,7 +571,7 @@ spec:
                       a database client application.
                     type: string
                   id:
-                    description: The Amazon Resource Name  for the proxy.
+                    description: The Amazon Resource Name (ARN) for the proxy.
                     type: string
                   tagsAll:
                     additionalProperties:

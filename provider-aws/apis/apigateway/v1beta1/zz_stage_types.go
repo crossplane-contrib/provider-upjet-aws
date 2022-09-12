@@ -18,7 +18,7 @@ type AccessLogSettingsObservation struct {
 
 type AccessLogSettingsParameters struct {
 
-	// The Amazon Resource Name  of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with amazon-apigateway-. Automatically removes trailing :* if present.
+	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with amazon-apigateway-. Automatically removes trailing :* if present.
 	// +kubebuilder:validation:Required
 	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
 
@@ -37,7 +37,7 @@ type CanarySettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
 
-	// A map of overridden stage variables  for the canary deployment.
+	// A map of overridden stage variables (including new variables) for the canary deployment.
 	// +kubebuilder:validation:Optional
 	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
 
@@ -48,7 +48,7 @@ type CanarySettingsParameters struct {
 
 type StageObservation struct {
 
-	// Amazon Resource Name
+	// Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The execution ARN to be used in lambda_permission's source_arn

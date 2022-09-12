@@ -15,7 +15,7 @@ import (
 
 type ClusterInstanceObservation struct {
 
-	// Amazon Resource Name  of cluster instance
+	// Amazon Resource Name (ARN) of cluster instance
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The region-unique, immutable identifier for the DB instance.
@@ -77,7 +77,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
-	// efined tags from the DB instance to snapshots of the DB instance. Default false.
+	// defined tags from the DB instance to snapshots of the DB instance. Default false.
 	// +kubebuilder:validation:Optional
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
@@ -133,6 +133,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
+	// The ARN for the KMS encryption key if one is set to the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
@@ -145,7 +146,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyIDSelector *v1.Selector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
 
-	// Amount of time in days to retain Performance Insights data. Either 7  or 731 . When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
+	// Amount of time in days to retain Performance Insights data. Either 7 (7 days) or 731 (2 years). When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
 

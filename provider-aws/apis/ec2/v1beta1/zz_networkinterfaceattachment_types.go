@@ -26,7 +26,7 @@ type NetworkInterfaceAttachmentObservation struct {
 
 type NetworkInterfaceAttachmentParameters struct {
 
-	// Network interface index .
+	// Network interface index (int).
 	// +kubebuilder:validation:Required
 	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
 

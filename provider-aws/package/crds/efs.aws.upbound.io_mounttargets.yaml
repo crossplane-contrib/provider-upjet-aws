@@ -142,16 +142,18 @@ spec:
                         type: object
                     type: object
                   ipAddress:
-                    description: The address  at which the file system may be mounted
-                      via the mount target.
+                    description: The address (within the address range of the specified
+                      subnet) at which the file system may be mounted via the mount
+                      target.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   securityGroups:
-                    description: A list of up to 5 VPC security group IDs  in effect
-                      for the mount target.
+                    description: A list of up to 5 VPC security group IDs (that must
+                      be for the same VPC as subnet specified) in effect for the mount
+                      target.
                     items:
                       type: string
                     type: array
@@ -412,10 +414,10 @@ spec:
                 properties:
                   availabilityZoneId:
                     description: The unique and consistent identifier of the Availability
-                      Zone  that the mount target resides in.
+                      Zone (AZ) that the mount target resides in.
                     type: string
                   availabilityZoneName:
-                    description: The name of the Availability Zone  that the mount
+                    description: The name of the Availability Zone (AZ) that the mount
                       target resides in.
                     type: string
                   dnsName:

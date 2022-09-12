@@ -30,7 +30,7 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
 
-	// The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name .
+	// The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 	// +kubebuilder:validation:Optional
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
 
@@ -66,7 +66,7 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	ExtendedStatistic *string `json:"extendedStatistic,omitempty" tf:"extended_statistic,omitempty"`
 
-	// The list of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name .
+	// The list of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 	// +kubebuilder:validation:Optional
 	InsufficientDataActions []*string `json:"insufficientDataActions,omitempty" tf:"insufficient_data_actions,omitempty"`
 
@@ -80,7 +80,7 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Name .
+	// The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 	// +kubebuilder:validation:Optional
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
 

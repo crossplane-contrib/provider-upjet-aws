@@ -68,7 +68,7 @@ type BlockDeviceMappingsParameters struct {
 
 	// The Instance Store Device
 	// Name
-	// .
+	// (e.g., "ephemeral0").
 	// +kubebuilder:validation:Optional
 	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
@@ -107,11 +107,12 @@ type EBSObservation struct {
 
 type EBSParameters struct {
 
+	// Whether the volume should be destroyed on instance termination. Defaults to false if not set. See Preserving Amazon EBS Volumes on Instance Termination for more information.
 	// +kubebuilder:validation:Optional
 	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
 	// Enables EBS encryption
-	// on the volume . Cannot be used with snapshot_id.
+	// on the volume (Default: false). Cannot be used with snapshot_id.
 	// +kubebuilder:validation:Optional
 	Encrypted *string `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
@@ -121,7 +122,7 @@ type EBSParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// The ARN of the AWS Key Management Service  customer master key  to use when creating the encrypted volume.
+	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume.
 	// encrypted must be set to true when this is set.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
@@ -139,7 +140,7 @@ type EBSParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// The throughput to provision for a gp3 volume in MiB/s , with a maximum of 1,000 MiB/s.
+	// The throughput to provision for a gp3 volume in MiB/s (specified as an integer, e.g., 500), with a maximum of 1,000 MiB/s.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
@@ -147,7 +148,7 @@ type EBSParameters struct {
 	// +kubebuilder:validation:Optional
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
-	// The volume type. Can be standard, gp2, gp3, io1, io2, sc1 or st1 .
+	// The volume type. Can be standard, gp2, gp3, io1, io2, sc1 or st1 (Default: gp2).
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -157,6 +158,7 @@ type ElasticGpuSpecificationsObservation struct {
 
 type ElasticGpuSpecificationsParameters struct {
 
+	// The Elastic GPU Type
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -166,6 +168,7 @@ type ElasticInferenceAcceleratorObservation struct {
 
 type ElasticInferenceAcceleratorParameters struct {
 
+	// Accelerator type.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -185,6 +188,7 @@ type IAMInstanceProfileObservation struct {
 
 type IAMInstanceProfileParameters struct {
 
+	// The Amazon Resource Name (ARN) of the instance profile.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.InstanceProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -198,6 +202,7 @@ type IAMInstanceProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
+	// The name of the instance profile.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.InstanceProfile
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -230,7 +235,7 @@ type InstanceRequirementsObservation struct {
 
 type InstanceRequirementsParameters struct {
 
-	// Block describing the minimum and maximum number of accelerators . Default is no minimum or maximum.
+	// Block describing the minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips). Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
 	AcceleratorCount []AcceleratorCountParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
 
@@ -266,7 +271,7 @@ type InstanceRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
-	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk . The following are examples: c5*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*). The following are examples: c5*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
 	// +kubebuilder:validation:Optional
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
@@ -282,11 +287,11 @@ type InstanceRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
-	// Block describing the minimum and maximum amount of memory  per vCPU. Default is no minimum or maximum.
+	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
 	MemoryGibPerVcpu []MemoryGibPerVcpuParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
 
-	// Block describing the minimum and maximum amount of memory . Default is no maximum.
+	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
 	// +kubebuilder:validation:Required
 	MemoryMib []MemoryMibParameters `json:"memoryMib" tf:"memory_mib,omitempty"`
 
@@ -306,7 +311,7 @@ type InstanceRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
-	// Block describing the minimum and maximum total local storage . Default is no minimum or maximum.
+	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
 	TotalLocalStorageGb []TotalLocalStorageGbParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
 
@@ -320,7 +325,7 @@ type LaunchTemplateCapacityReservationSpecificationObservation struct {
 
 type LaunchTemplateCapacityReservationSpecificationParameters struct {
 
-	// Indicates the instance's Capacity Reservation preferences. Can be open or none. .
+	// Indicates the instance's Capacity Reservation preferences. Can be open or none. (Default none).
 	// +kubebuilder:validation:Optional
 	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
 
@@ -344,6 +349,7 @@ type LaunchTemplateEnclaveOptionsObservation struct {
 
 type LaunchTemplateEnclaveOptionsParameters struct {
 
+	// If set to true, Nitro Enclaves will be enabled on the instance.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -363,28 +369,30 @@ type LaunchTemplateMetadataOptionsObservation struct {
 
 type LaunchTemplateMetadataOptionsParameters struct {
 
-	// Whether the metadata service is available. Can be "enabled" or "disabled". .
+	// Whether the metadata service is available. Can be "enabled" or "disabled". (Default: "enabled").
 	// +kubebuilder:validation:Optional
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
 
-	// Enables or disables the IPv6 endpoint for the instance metadata service. .
+	// Enables or disables the IPv6 endpoint for the instance metadata service. (Default: disabled).
 	// +kubebuilder:validation:Optional
 	HTTPProtocolIPv6 *string `json:"httpProtocolIpv6,omitempty" tf:"http_protocol_ipv6,omitempty"`
 
-	// The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from 1 to 64. .
+	// The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from 1 to 64. (Default: 1).
 	// +kubebuilder:validation:Optional
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
-	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 . Can be "optional" or "required". .
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be "optional" or "required". (Default: "optional").
 	// +kubebuilder:validation:Optional
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
-	// Enables or disables access to instance tags from the instance metadata service. .
+	// Enables or disables access to instance tags from the instance metadata service. (Default: disabled).
 	// +kubebuilder:validation:Optional
 	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
 }
 
 type LaunchTemplateObservation_2 struct {
+
+	// Amazon Resource Name (ARN) of the launch template.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ID of the launch template.
@@ -421,6 +429,7 @@ type LaunchTemplateParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	DefaultVersion *float64 `json:"defaultVersion,omitempty" tf:"default_version,omitempty"`
 
+	// Description of the launch template.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -460,11 +469,11 @@ type LaunchTemplateParameters_2 struct {
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// Shutdown behavior for the instance. Can be stop or terminate.
-	// .
+	// (Default: stop).
 	// +kubebuilder:validation:Optional
 	InstanceInitiatedShutdownBehavior *string `json:"instanceInitiatedShutdownBehavior,omitempty" tf:"instance_initiated_shutdown_behavior,omitempty"`
 
-	// The market  option for the instance. See Market Options
+	// The market (purchasing) option for the instance. See Market Options
 	// below for details.
 	// +kubebuilder:validation:Optional
 	InstanceMarketOptions []InstanceMarketOptionsParameters `json:"instanceMarketOptions,omitempty" tf:"instance_market_options,omitempty"`
@@ -501,6 +510,7 @@ type LaunchTemplateParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Monitoring []MonitoringParameters `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
 
+	// The name of the launch template.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -546,6 +556,7 @@ type LaunchTemplateParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	TagSpecifications []TagSpecificationsParameters `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
 
+	// A map of tags to assign to the launch template. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -612,6 +623,7 @@ type MonitoringObservation struct {
 
 type MonitoringParameters struct {
 
+	// If true, the launched EC2 instance will have detailed monitoring enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -641,9 +653,11 @@ type NetworkInterfacesParameters struct {
 	// +kubebuilder:validation:Optional
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
+	// Whether the network interface should be destroyed on instance termination. Defaults to false if not set.
 	// +kubebuilder:validation:Optional
 	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
+	// Description of the network interface.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -683,7 +697,7 @@ type NetworkInterfacesParameters struct {
 	// +kubebuilder:validation:Optional
 	IPv6Prefixes []*string `json:"ipv6Prefixes,omitempty" tf:"ipv6_prefixes,omitempty"`
 
-	// The type of network interface. To create an Elastic Fabric Adapter , specify efa.
+	// The type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa.
 	// +kubebuilder:validation:Optional
 	InterfaceType *string `json:"interfaceType,omitempty" tf:"interface_type,omitempty"`
 
@@ -770,7 +784,7 @@ type PlacementParameters struct {
 	// +kubebuilder:validation:Optional
 	SpreadDomain *string `json:"spreadDomain,omitempty" tf:"spread_domain,omitempty"`
 
-	// The tenancy of the instance . Can be default, dedicated, or host.
+	// The tenancy of the instance (if the instance is running in a VPC). Can be default, dedicated, or host.
 	// +kubebuilder:validation:Optional
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 }
@@ -803,7 +817,7 @@ type SpotOptionsParameters struct {
 	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
 
 	// The behavior when a Spot Instance is interrupted. Can be hibernate,
-	// stop, or terminate. .
+	// stop, or terminate. (Default: terminate).
 	// +kubebuilder:validation:Optional
 	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
 
@@ -829,6 +843,7 @@ type TagSpecificationsParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
+	// A map of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }

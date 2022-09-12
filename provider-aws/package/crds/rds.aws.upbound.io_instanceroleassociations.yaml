@@ -153,7 +153,7 @@ spec:
                       be created in.
                     type: string
                   roleArn:
-                    description: Amazon Resource Name  of the IAM Role to associate
+                    description: Amazon Resource Name (ARN) of the IAM Role to associate
                       with the DB Instance.
                     type: string
                   roleArnRef:
@@ -412,7 +412,7 @@ spec:
                 properties:
                   id:
                     description: DB Instance Identifier and IAM Role ARN separated
-                      by a comma
+                      by a comma (,)
                     type: string
                 type: object
               conditions:

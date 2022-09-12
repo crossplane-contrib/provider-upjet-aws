@@ -25,7 +25,7 @@ type EndpointObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
-	// to your network  or on the way from your network to your VPCs . Described below.
+	// to your network (for outbound endpoints) or on the way from your network to your VPCs (for inbound endpoints). Described below.
 	// +kubebuilder:validation:Required
 	IPAddress []IPAddressObservation `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
@@ -36,13 +36,13 @@ type EndpointObservation struct {
 type EndpointParameters struct {
 
 	// The direction of DNS queries to or from the Route 53 Resolver endpoint.
-	// Valid values are INBOUND
-	// or OUTBOUND .
+	// Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC)
+	// or OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC).
 	// +kubebuilder:validation:Required
 	Direction *string `json:"direction" tf:"direction,omitempty"`
 
 	// The subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
-	// to your network  or on the way from your network to your VPCs . Described below.
+	// to your network (for outbound endpoints) or on the way from your network to your VPCs (for inbound endpoints). Described below.
 	// +kubebuilder:validation:Required
 	IPAddress []IPAddressParameters `json:"ipAddress" tf:"ip_address,omitempty"`
 
@@ -76,6 +76,8 @@ type EndpointParameters struct {
 }
 
 type IPAddressObservation struct {
+
+	// The ID of the Route 53 Resolver endpoint.
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
 }
 

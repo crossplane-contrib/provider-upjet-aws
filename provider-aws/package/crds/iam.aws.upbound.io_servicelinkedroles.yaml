@@ -265,13 +265,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  specifying the role.
+                    description: The Amazon Resource Name (ARN) specifying the role.
                     type: string
                   createDate:
                     description: The creation date of the IAM role.
                     type: string
                   id:
-                    description: The Amazon Resource Name  of the role.
+                    description: The Amazon Resource Name (ARN) of the role.
                     type: string
                   name:
                     description: The name of the role.

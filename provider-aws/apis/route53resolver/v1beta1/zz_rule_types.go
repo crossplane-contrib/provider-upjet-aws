@@ -15,7 +15,7 @@ import (
 
 type RuleObservation struct {
 
-	// The ARN  for the resolver rule.
+	// The ARN (Amazon Resource Name) for the resolver rule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ID of the resolver rule.
@@ -70,7 +70,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Configuration block indicating the IPs that you want Resolver to forward DNS queries to .
+	// Configuration block(s) indicating the IPs that you want Resolver to forward DNS queries to (documented below).
 	// This argument should only be specified for FORWARD type rules.
 	// +kubebuilder:validation:Optional
 	TargetIP []TargetIPParameters `json:"targetIp,omitempty" tf:"target_ip,omitempty"`

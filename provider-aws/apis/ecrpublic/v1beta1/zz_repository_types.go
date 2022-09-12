@@ -30,7 +30,7 @@ type CatalogDataParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The base64-encoded repository logo payload.  Note that drift detection is disabled for this attribute.
+	// The base64-encoded repository logo payload. (Only visible for verified accounts) Note that drift detection is disabled for this attribute.
 	// +kubebuilder:validation:Optional
 	LogoImageBlob *string `json:"logoImageBlob,omitempty" tf:"logo_image_blob,omitempty"`
 

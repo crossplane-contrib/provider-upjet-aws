@@ -41,7 +41,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
-	// The integration input's connectionType. Valid values are INTERNET , and VPC_LINK .
+	// The integration input's connectionType. Valid values are INTERNET (default for connections through the public routable internet), and VPC_LINK (for private connections between API Gateway and a network load balancer in a VPC).
 	// +kubebuilder:validation:Optional
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
@@ -53,7 +53,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// The HTTP method
+	// The HTTP method (GET, POST, PUT, DELETE, HEAD, OPTION, ANY)
 	// when calling the associated resource.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("http_method",false)
@@ -69,14 +69,14 @@ type IntegrationParameters struct {
 	HTTPMethodSelector *v1.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
 
 	// The integration HTTP method
-	// specifying how API Gateway will interact with the back end.
+	// (GET, POST, PUT, DELETE, HEAD, OPTIONs, ANY, PATCH) specifying how API Gateway will interact with the back end.
 	// Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
 	// Not all methods are compatible with all AWS integrations.
 	// e.g., Lambda function can only be invoked via POST.
 	// +kubebuilder:validation:Optional
 	IntegrationHTTPMethod *string `json:"integrationHttpMethod,omitempty" tf:"integration_http_method,omitempty"`
 
-	// The integration passthrough behavior .  Required if request_templates is used.
+	// The integration passthrough behavior (WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER).  Required if request_templates is used.
 	// +kubebuilder:validation:Optional
 	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`
 
@@ -130,12 +130,12 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 
-	// The integration input's type. Valid values are HTTP , MOCK , AWS , AWS_PROXY  and HTTP_PROXY . An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
+	// The integration input's type. Valid values are HTTP (for HTTP backends), MOCK (not calling any real backend), AWS (for AWS services), AWS_PROXY (for Lambda proxy integration) and HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The input's URI. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
-	// For HTTP integrations, the URI must be a fully formed, encoded HTTP URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. region, subdomain and service are used to determine the right endpoint.
+	// For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. region, subdomain and service are used to determine the right endpoint.
 	// e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:012345678901:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("invoke_arn",true)

@@ -91,11 +91,11 @@ type FSXWindowsFileServerVolumeConfigurationAuthorizationConfigObservation struc
 
 type FSXWindowsFileServerVolumeConfigurationAuthorizationConfigParameters struct {
 
-	// The authorization credential option to use. The authorization credential options can be provided using either the Amazon Resource Name  of an AWS Secrets Manager secret or AWS Systems Manager Parameter Store parameter. The ARNs refer to the stored credentials.
+	// The authorization credential option to use. The authorization credential options can be provided using either the Amazon Resource Name (ARN) of an AWS Secrets Manager secret or AWS Systems Manager Parameter Store parameter. The ARNs refer to the stored credentials.
 	// +kubebuilder:validation:Required
 	CredentialsParameter *string `json:"credentialsParameter" tf:"credentials_parameter,omitempty"`
 
-	// A fully qualified domain name hosted by an AWS Directory Service Managed Microsoft AD  or self-hosted AD on Amazon EC2.
+	// A fully qualified domain name hosted by an AWS Directory Service Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.
 	// +kubebuilder:validation:Required
 	Domain *string `json:"domain" tf:"domain,omitempty"`
 }
@@ -138,7 +138,7 @@ type ProxyConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	ContainerName *string `json:"containerName" tf:"container_name,omitempty"`
 
-	// Set of network configuration parameters to provide the Container Network Interface  plugin, specified a key-value mapping.
+	// Set of network configuration parameters to provide the Container Network Interface (CNI) plugin, specified a key-value mapping.
 	// +kubebuilder:validation:Optional
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
@@ -162,7 +162,7 @@ type RuntimePlatformParameters struct {
 
 type TaskDefinitionObservation struct {
 
-	// Full ARN of the Task Definition .
+	// Full ARN of the Task Definition (including both family and revision).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -206,7 +206,7 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Required
 	Family *string `json:"family" tf:"family,omitempty"`
 
-	// Configuration block with Inference Accelerators settings. Detailed below.
+	// Configuration block(s) with Inference Accelerators settings. Detailed below.
 	// +kubebuilder:validation:Optional
 	InferenceAccelerator []InferenceAcceleratorParameters `json:"inferenceAccelerator,omitempty" tf:"inference_accelerator,omitempty"`
 
@@ -214,7 +214,7 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	IpcMode *string `json:"ipcMode,omitempty" tf:"ipc_mode,omitempty"`
 
-	// Amount  of memory used by the task. If the requires_compatibilities is FARGATE this field is required.
+	// Amount (in MiB) of memory used by the task. If the requires_compatibilities is FARGATE this field is required.
 	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 

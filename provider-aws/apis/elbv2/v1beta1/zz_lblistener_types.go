@@ -24,12 +24,15 @@ type AuthenticateCognitoParameters struct {
 	// +kubebuilder:validation:Optional
 	OnUnauthenticatedRequest *string `json:"onUnauthenticatedRequest,omitempty" tf:"on_unauthenticated_request,omitempty"`
 
+	// Set of user claims to be requested from the IdP.
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
+	// Name of the cookie used to maintain session information.
 	// +kubebuilder:validation:Optional
 	SessionCookieName *string `json:"sessionCookieName,omitempty" tf:"session_cookie_name,omitempty"`
 
+	// Maximum duration of the authentication session, in seconds.
 	// +kubebuilder:validation:Optional
 	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
 
@@ -73,12 +76,15 @@ type AuthenticateOidcParameters struct {
 	// +kubebuilder:validation:Optional
 	OnUnauthenticatedRequest *string `json:"onUnauthenticatedRequest,omitempty" tf:"on_unauthenticated_request,omitempty"`
 
+	// Set of user claims to be requested from the IdP.
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
+	// Name of the cookie used to maintain session information.
 	// +kubebuilder:validation:Optional
 	SessionCookieName *string `json:"sessionCookieName,omitempty" tf:"session_cookie_name,omitempty"`
 
+	// Maximum duration of the authentication session, in seconds.
 	// +kubebuilder:validation:Optional
 	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
 
@@ -100,7 +106,7 @@ type DefaultActionParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticateCognito []AuthenticateCognitoParameters `json:"authenticateCognito,omitempty" tf:"authenticate_cognito,omitempty"`
 
-	// Configuration block for an identity provider that is compliant with OpenID Connect . Specify only when type is authenticate-oidc. Detailed below.
+	// Configuration block for an identity provider that is compliant with OpenID Connect (OIDC). Specify only when type is authenticate-oidc. Detailed below.
 	// +kubebuilder:validation:Optional
 	AuthenticateOidc []AuthenticateOidcParameters `json:"authenticateOidc,omitempty" tf:"authenticate_oidc,omitempty"`
 
@@ -172,7 +178,7 @@ type ForwardParameters struct {
 type LBListenerObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// ARN of the listener .
+	// ARN of the listener (matches arn).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
@@ -181,7 +187,7 @@ type LBListenerObservation struct {
 
 type LBListenerParameters struct {
 
-	// Name of the Application-Layer Protocol Negotiation  policy. Can be set if protocol is TLS. Valid values are HTTP1Only, HTTP2Only, HTTP2Optional, HTTP2Preferred, and None.
+	// Name of the Application-Layer Protocol Negotiation (ALPN) policy. Can be set if protocol is TLS. Valid values are HTTP1Only, HTTP2Only, HTTP2Optional, HTTP2Preferred, and None.
 	// +kubebuilder:validation:Optional
 	AlpnPolicy *string `json:"alpnPolicy,omitempty" tf:"alpn_policy,omitempty"`
 
@@ -258,7 +264,7 @@ type StickinessObservation struct {
 
 type StickinessParameters struct {
 
-	// Time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds .
+	// Time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days).
 	// +kubebuilder:validation:Required
 	Duration *float64 `json:"duration" tf:"duration,omitempty"`
 

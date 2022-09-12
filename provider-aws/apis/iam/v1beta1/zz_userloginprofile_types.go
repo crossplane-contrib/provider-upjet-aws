@@ -15,12 +15,12 @@ import (
 
 type UserLoginProfileObservation struct {
 
-	// The encrypted password, base64 encoded. Only available if password was handled on Terraform resource creation, not import.
+	// The encrypted password, base64 encoded.
 	EncryptedPassword *string `json:"encryptedPassword,omitempty" tf:"encrypted_password,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The fingerprint of the PGP key used to encrypt the password. Only available if password was handled on Terraform resource creation, not import.
+	// The fingerprint of the PGP key used to encrypt the password.
 	KeyFingerprint *string `json:"keyFingerprint,omitempty" tf:"key_fingerprint,omitempty"`
 
 	// The plain text password, only available when pgp_key is not provided.

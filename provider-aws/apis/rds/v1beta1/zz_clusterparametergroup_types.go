@@ -30,7 +30,7 @@ type ClusterParameterGroupParameterObservation struct {
 
 type ClusterParameterGroupParameterParameters struct {
 
-	// "immediate" , or "pending-reboot". Some
+	// "immediate" (default), or "pending-reboot". Some
 	// engines can't apply some parameters without a reboot, and you will need to
 	// specify "pending-reboot" here.
 	// +kubebuilder:validation:Optional
@@ -46,7 +46,7 @@ type ClusterParameterGroupParameterParameters struct {
 
 type ClusterParameterGroupParameters struct {
 
-	// The description of the DB cluster parameter group. Defaults to "Managed by Terraform".
+	// The description of the DB cluster parameter group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

@@ -15,7 +15,7 @@ import (
 
 type HealthCheckObservation struct {
 
-	// The Amazon Resource Name  of the Health Check.
+	// The Amazon Resource Name (ARN) of the Health Check.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The id of the health check
@@ -88,6 +88,7 @@ type HealthCheckParameters struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// This is a reference name used in Caller Reference
+	// (helpful for identifying single health_check set amongst others)
 	// +kubebuilder:validation:Optional
 	ReferenceName *string `json:"referenceName,omitempty" tf:"reference_name,omitempty"`
 
@@ -108,7 +109,7 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourcePath *string `json:"resourcePath,omitempty" tf:"resource_path,omitempty"`
 
-	// The Amazon Resource Name  for the Route 53 Application Recovery Controller routing control. This is used when health check type is RECOVERY_CONTROL
+	// The Amazon Resource Name (ARN) for the Route 53 Application Recovery Controller routing control. This is used when health check type is RECOVERY_CONTROL
 	// +kubebuilder:validation:Optional
 	RoutingControlArn *string `json:"routingControlArn,omitempty" tf:"routing_control_arn,omitempty"`
 

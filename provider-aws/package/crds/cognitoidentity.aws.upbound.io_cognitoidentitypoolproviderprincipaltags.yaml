@@ -232,7 +232,8 @@ spec:
                       be created in.
                     type: string
                   useDefaults:
-                    description: ':  use default  attribute mappings.'
+                    description: ':  use default (username and clientID) attribute
+                      mappings.'
                     type: boolean
                 required:
                 - region

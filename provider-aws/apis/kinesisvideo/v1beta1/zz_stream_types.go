@@ -15,7 +15,7 @@ import (
 
 type StreamObservation struct {
 
-	// The Amazon Resource Name  specifying the Stream
+	// The Amazon Resource Name (ARN) specifying the Stream (same as id)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A time stamp that indicates when the stream was created.
@@ -41,7 +41,7 @@ type StreamParameters struct {
 	// +kubebuilder:validation:Optional
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
-	// The ID of the AWS Key Management Service  key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key  is used.
+	// The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (aws/kinesisvideo) is used.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`

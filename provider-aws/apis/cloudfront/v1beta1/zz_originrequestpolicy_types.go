@@ -70,15 +70,15 @@ type OriginRequestPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// Object that determines whether any cookies in viewer requests  are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Cookies Config for more information.
+	// Object that determines whether any cookies in viewer requests (and if so, which cookies) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Cookies Config for more information.
 	// +kubebuilder:validation:Required
 	CookiesConfig []OriginRequestPolicyCookiesConfigParameters `json:"cookiesConfig" tf:"cookies_config,omitempty"`
 
-	// Object that determines whether any HTTP headers  are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Headers Config for more information.
+	// Object that determines whether any HTTP headers (and if so, which headers) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Headers Config for more information.
 	// +kubebuilder:validation:Required
 	HeadersConfig []OriginRequestPolicyHeadersConfigParameters `json:"headersConfig" tf:"headers_config,omitempty"`
 
-	// Object that determines whether any URL query strings in viewer requests  are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Query String Config for more information.
+	// Object that determines whether any URL query strings in viewer requests (and if so, which query strings) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Query String Config for more information.
 	// +kubebuilder:validation:Required
 	QueryStringsConfig []OriginRequestPolicyQueryStringsConfigParameters `json:"queryStringsConfig" tf:"query_strings_config,omitempty"`
 

@@ -50,7 +50,7 @@ type BucketInventoryParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Contains information about where to publish the inventory results .
+	// Contains information about where to publish the inventory results (documented below).
 	// +kubebuilder:validation:Required
 	Destination []BucketInventoryDestinationParameters `json:"destination" tf:"destination,omitempty"`
 
@@ -58,7 +58,7 @@ type BucketInventoryParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies an inventory filter. The inventory only includes objects that meet the filter's criteria .
+	// Specifies an inventory filter. The inventory only includes objects that meet the filter's criteria (documented below).
 	// +kubebuilder:validation:Optional
 	Filter []BucketInventoryFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
@@ -79,7 +79,7 @@ type BucketInventoryParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Specifies the schedule for generating inventory results .
+	// Specifies the schedule for generating inventory results (documented below).
 	// +kubebuilder:validation:Required
 	Schedule []ScheduleParameters `json:"schedule" tf:"schedule,omitempty"`
 }
@@ -107,7 +107,7 @@ type DestinationBucketParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Contains the type of server-side encryption to use to encrypt the inventory .
+	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
 	// +kubebuilder:validation:Optional
 	Encryption []EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
@@ -124,11 +124,11 @@ type EncryptionObservation struct {
 
 type EncryptionParameters struct {
 
-	// Specifies to use server-side encryption with AWS KMS-managed keys to encrypt the inventory file .
+	// Specifies to use server-side encryption with AWS KMS-managed keys to encrypt the inventory file (documented below).
 	// +kubebuilder:validation:Optional
 	SseKMS []SseKMSParameters `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
 
-	// Specifies to use server-side encryption with Amazon S3-managed keys  to encrypt the inventory file.
+	// Specifies to use server-side encryption with Amazon S3-managed keys (SSE-S3) to encrypt the inventory file.
 	// +kubebuilder:validation:Optional
 	SseS3 []SseS3Parameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
 }
@@ -148,7 +148,7 @@ type SseKMSObservation struct {
 
 type SseKMSParameters struct {
 
-	// The ARN of the KMS customer master key  used to encrypt the inventory file.
+	// The ARN of the KMS customer master key (CMK) used to encrypt the inventory file.
 	// +kubebuilder:validation:Required
 	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
 }

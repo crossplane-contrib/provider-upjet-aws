@@ -66,9 +66,7 @@ spec:
                 properties:
                   policy:
                     description: JSON formatted policy document that controls access
-                      to the API Gateway. For more information about building AWS
-                      IAM policy documents with Terraform, see the AWS IAM Policy
-                      Document Guide
+                      to the API Gateway
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

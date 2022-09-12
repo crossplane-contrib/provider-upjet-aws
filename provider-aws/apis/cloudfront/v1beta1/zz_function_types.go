@@ -15,7 +15,7 @@ import (
 
 type FunctionObservation struct {
 
-	// Amazon Resource Name  identifying your CloudFront Function.
+	// Amazon Resource Name (ARN) identifying your CloudFront Function.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// ETag hash of the function. This is the value for the DEVELOPMENT stage of the function.

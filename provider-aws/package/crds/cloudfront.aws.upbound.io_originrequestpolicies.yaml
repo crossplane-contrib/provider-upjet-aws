@@ -70,9 +70,9 @@ spec:
                     type: string
                   cookiesConfig:
                     description: Object that determines whether any cookies in viewer
-                      requests  are included in the origin request key and automatically
-                      included in requests that CloudFront sends to the origin. See
-                      Cookies Config for more information.
+                      requests (and if so, which cookies) are included in the origin
+                      request key and automatically included in requests that CloudFront
+                      sends to the origin. See Cookies Config for more information.
                     items:
                       properties:
                         cookieBehavior:
@@ -91,10 +91,10 @@ spec:
                       type: object
                     type: array
                   headersConfig:
-                    description: Object that determines whether any HTTP headers  are
-                      included in the origin request key and automatically included
-                      in requests that CloudFront sends to the origin. See Headers
-                      Config for more information.
+                    description: Object that determines whether any HTTP headers (and
+                      if so, which headers) are included in the origin request key
+                      and automatically included in requests that CloudFront sends
+                      to the origin. See Headers Config for more information.
                     items:
                       properties:
                         headerBehavior:
@@ -112,9 +112,10 @@ spec:
                     type: array
                   queryStringsConfig:
                     description: Object that determines whether any URL query strings
-                      in viewer requests  are included in the origin request key and
-                      automatically included in requests that CloudFront sends to
-                      the origin. See Query String Config for more information.
+                      in viewer requests (and if so, which query strings) are included
+                      in the origin request key and automatically included in requests
+                      that CloudFront sends to the origin. See Query String Config
+                      for more information.
                     items:
                       properties:
                         queryStringBehavior:

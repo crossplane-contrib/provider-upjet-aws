@@ -27,6 +27,7 @@ type UsagePlanKeyObservation struct {
 
 type UsagePlanKeyParameters struct {
 
+	// The Id of a usage plan key.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.APIKey
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -48,6 +49,7 @@ type UsagePlanKeyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The Id of a usage plan key.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.UsagePlan
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

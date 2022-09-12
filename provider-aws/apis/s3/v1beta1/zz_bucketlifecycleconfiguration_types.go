@@ -28,12 +28,15 @@ type AndObservation struct {
 
 type AndParameters struct {
 
+	// Minimum object size to which the rule applies. Value must be at least 0 if specified.
 	// +kubebuilder:validation:Optional
 	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
 
+	// Maximum object size to which the rule applies. Value must be at least 1 if specified.
 	// +kubebuilder:validation:Optional
 	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
+	// Prefix identifying one or more objects to which the rule applies.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -43,6 +46,8 @@ type AndParameters struct {
 }
 
 type BucketLifecycleConfigurationObservation struct {
+
+	// and status)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -62,7 +67,7 @@ type BucketLifecycleConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP 403  error.
+	// The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP 403 (Access Denied) error.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
@@ -93,6 +98,7 @@ type BucketLifecycleConfigurationRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Filter []RuleFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
+	// Unique identifier for the rule. The value cannot be longer than 255 characters.
 	// +kubebuilder:validation:Required
 	ID *string `json:"id" tf:"id,omitempty"`
 
@@ -104,6 +110,7 @@ type BucketLifecycleConfigurationRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	NoncurrentVersionTransition []RuleNoncurrentVersionTransitionParameters `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
 
+	// DEPRECATED Use filter instead. This has been deprecated by Amazon S3. Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if filter is not specified.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -121,9 +128,11 @@ type RuleExpirationObservation struct {
 
 type RuleExpirationParameters struct {
 
+	// The date the object is to be moved or deleted. Should be in RFC3339 format.
 	// +kubebuilder:validation:Optional
 	Date *string `json:"date,omitempty" tf:"date,omitempty"`
 
+	// The lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
@@ -141,12 +150,15 @@ type RuleFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	And []AndParameters `json:"and,omitempty" tf:"and,omitempty"`
 
+	// Minimum object size (in bytes) to which the rule applies.
 	// +kubebuilder:validation:Optional
 	ObjectSizeGreaterThan *string `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
 
+	// Maximum object size (in bytes) to which the rule applies.
 	// +kubebuilder:validation:Optional
 	ObjectSizeLessThan *string `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
+	// Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if not specified.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -160,9 +172,11 @@ type RuleNoncurrentVersionExpirationObservation struct {
 
 type RuleNoncurrentVersionExpirationParameters struct {
 
+	// The number of noncurrent versions Amazon S3 will retain. Must be a non-zero positive integer.
 	// +kubebuilder:validation:Optional
 	NewerNoncurrentVersions *string `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
 
+	// The number of days an object is noncurrent before Amazon S3 can perform the associated action. Must be a positive integer.
 	// +kubebuilder:validation:Optional
 	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
 }
@@ -172,12 +186,15 @@ type RuleNoncurrentVersionTransitionObservation struct {
 
 type RuleNoncurrentVersionTransitionParameters struct {
 
+	// The number of noncurrent versions Amazon S3 will retain. Must be a non-zero positive integer.
 	// +kubebuilder:validation:Optional
 	NewerNoncurrentVersions *string `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
 
+	// The number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	// +kubebuilder:validation:Optional
 	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
 
+	// The class of storage used to store the object. Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
 	// +kubebuilder:validation:Required
 	StorageClass *string `json:"storageClass" tf:"storage_class,omitempty"`
 }
@@ -187,12 +204,15 @@ type RuleTransitionObservation struct {
 
 type RuleTransitionParameters struct {
 
+	// The date objects are transitioned to the specified storage class. The date value must be in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
 	// +kubebuilder:validation:Optional
 	Date *string `json:"date,omitempty" tf:"date,omitempty"`
 
+	// The number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer. If both days and date are not specified, defaults to 0. Valid values depend on storage_class, see Transition objects using Amazon S3 Lifecycle for more details.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
+	// The class of storage used to store the object. Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
 	// +kubebuilder:validation:Required
 	StorageClass *string `json:"storageClass" tf:"storage_class,omitempty"`
 }

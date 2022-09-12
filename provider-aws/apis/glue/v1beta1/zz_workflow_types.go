@@ -15,7 +15,7 @@ import (
 
 type WorkflowObservation struct {
 
-	// Amazon Resource Name  of Glue Workflow
+	// Amazon Resource Name (ARN) of Glue Workflow
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Workflow name

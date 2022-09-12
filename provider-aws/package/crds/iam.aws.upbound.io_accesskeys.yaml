@@ -332,18 +332,13 @@ spec:
                       was created.
                     type: string
                   encryptedSecret:
-                    description: 'Encrypted secret, base64 encoded, if pgp_key was
+                    description: Encrypted secret, base64 encoded, if pgp_key was
                       specified. This attribute is not available for imported resources.
-                      The encrypted secret may be decrypted using the command line,
-                      for example: terraform output -raw encrypted_secret | base64
-                      --decode | keybase pgp decrypt.'
                     type: string
                   encryptedSesSmtpPasswordV4:
-                    description: 'Encrypted SES SMTP password, base64 encoded, if
-                      pgp_key was specified. This attribute is not available for imported
-                      resources. The encrypted password may be decrypted using the
-                      command line, for example: terraform output -raw encrypted_ses_smtp_password_v4
-                      | base64 --decode | keybase pgp decrypt.'
+                    description: Encrypted SES SMTP password, base64 encoded, if pgp_key
+                      was specified. This attribute is not available for imported
+                      resources.
                     type: string
                   id:
                     description: Access key ID.

@@ -18,7 +18,7 @@ type DataLocationObservation struct {
 
 type DataLocationParameters struct {
 
-	// –  Amazon Resource Name  that uniquely identifies the data location resource.
+	// –  Amazon Resource Name (ARN) that uniquely identifies the data location resource.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lakeformation/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -86,7 +86,7 @@ type PermissionsParameters struct {
 	// +kubebuilder:validation:Optional
 	PermissionsWithGrantOption []*string `json:"permissionsWithGrantOption,omitempty" tf:"permissions_with_grant_option,omitempty"`
 
-	// ccount permissions. For more information, see Lake Formation Permissions Reference.
+	// account permissions. For more information, see Lake Formation Permissions Reference.
 	// +kubebuilder:validation:Required
 	Principal *string `json:"principal" tf:"principal,omitempty"`
 
@@ -137,7 +137,7 @@ type TableWithColumnsParameters struct {
 	// +kubebuilder:validation:Required
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
-	// Set of column names for the table to exclude. If excluded_column_names is included, wildcard must be set to true to avoid Terraform reporting a difference.
+	// Set of column names for the table to exclude.
 	// +kubebuilder:validation:Optional
 	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`
 

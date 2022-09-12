@@ -65,8 +65,7 @@ spec:
               forProvider:
                 properties:
                   comment:
-                    description: A comment for the hosted zone. Defaults to 'Managed
-                      by Terraform'.
+                    description: A comment for the hosted zone.
                     type: string
                   delegationSetId:
                     description: The ID of the reusable delegation set whose NS records
@@ -147,8 +146,6 @@ spec:
                         type: object
                     type: object
                   forceDestroy:
-                    description: Whether to destroy all records  in the zone when
-                      destroying the zone.
                     type: boolean
                   name:
                     description: This is the name of the hosted zone.
@@ -345,13 +342,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name  of the Hosted Zone.
+                    description: The Amazon Resource Name (ARN) of the Hosted Zone.
                     type: string
                   id:
                     type: string
                   nameServers:
-                    description: A list of name servers in associated  delegation
-                      set. Find more about delegation sets in AWS docs.
+                    description: A list of name servers in associated (or default)
+                      delegation set. Find more about delegation sets in AWS docs.
                     items:
                       type: string
                     type: array
@@ -363,8 +360,8 @@ spec:
                       block.
                     type: object
                   vpc:
-                    description: Configuration block specifying VPC to associate with
-                      a private hosted zone. Conflicts with the delegation_set_id
+                    description: Configuration block(s) specifying VPC(s) to associate
+                      with a private hosted zone. Conflicts with the delegation_set_id
                       argument in this resource and any aws_route53_zone_association
                       resource specifying the same zone ID. Detailed below.
                     items:
