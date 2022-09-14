@@ -530,4 +530,123 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// aws_dynamodb_tag can be imported by using the DynamoDB resource identifier and key, separated by a comma (,)
 	"aws_dynamodb_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_arn }},{{ .parameters.key }}"),
+
+	// ec2
+	//
+	// aws_ami can be imported using the ID of the AMI
+	"aws_ami": config.IdentifierFromProvider,
+	// No import
+	"aws_ami_copy": config.IdentifierFromProvider,
+	// No import
+	"aws_ami_from_instance": config.IdentifierFromProvider,
+	// AMI Launch Permissions can be imported using [ACCOUNT-ID|GROUP-NAME|ORGANIZATION-ARN|ORGANIZATIONAL-UNIT-ARN]/IMAGE-ID
+	"aws_ami_launch_permission": config.IdentifierFromProvider,
+	// Customer Gateways can be imported using the id
+	"aws_customer_gateway": config.IdentifierFromProvider,
+	// Default Network ACLs can be imported using the id
+	"aws_default_network_acl": config.IdentifierFromProvider,
+	// Security Groups can be imported using the security group id
+	"aws_default_security_group": config.IdentifierFromProvider,
+	// Subnets can be imported using the subnet id
+	"aws_default_subnet": config.IdentifierFromProvider,
+	// Default VPCs can be imported using the vpc id
+	"aws_default_vpc": config.IdentifierFromProvider,
+	// VPC DHCP Options can be imported using the dhcp options id
+	"aws_default_vpc_dhcp_options": config.IdentifierFromProvider,
+	// The EBS default KMS CMK can be imported with the KMS key ARN
+	"aws_ebs_default_kms_key": config.IdentifierFromProvider,
+	// Default EBS encryption state can be imported
+	"aws_ebs_encryption_by_default": config.IdentifierFromProvider,
+	// No import
+	"aws_ebs_snapshot_copy": config.IdentifierFromProvider,
+	// No import
+	"aws_ebs_snapshot_import": config.IdentifierFromProvider,
+	// EC2 Availability Zone Groups can be imported using the group name
+	"aws_ec2_availability_zone_group": config.ParameterAsIdentifier("group_name"),
+	// Capacity Reservations can be imported using the id
+	"aws_ec2_capacity_reservation": config.IdentifierFromProvider,
+	// aws_ec2_carrier_gateway can be imported using the carrier gateway's ID
+	"aws_ec2_carrier_gateway": config.IdentifierFromProvider,
+	//
+	"aws_ec2_client_vpn_authorization_rule": config.IdentifierFromProvider,
+	// AWS Client VPN endpoints can be imported using the id value found via aws ec2 describe-client-vpn-endpoints
+	"aws_ec2_client_vpn_endpoint": config.IdentifierFromProvider,
+	// AWS Client VPN network associations can be imported using the endpoint ID and the association ID. Values are separated by a ,
+	"aws_ec2_client_vpn_network_association": config.IdentifierFromProvider,
+	// AWS Client VPN routes can be imported using the endpoint ID, target subnet ID, and destination CIDR block. All values are separated by a ,
+	"aws_ec2_client_vpn_route": config.TemplatedStringAsIdentifier("", "{{ .parameters.client_vpn_endpoint_id }},{{ .parameters.target_vpc_subnet_id }},{{ .parameters.destination_cidr_block }}"),
+	// aws_ec2_fleet can be imported by using the Fleet identifier
+	"aws_ec2_fleet": config.IdentifierFromProvider,
+	// Hosts can be imported using the host id
+	"aws_ec2_host": config.IdentifierFromProvider,
+	// aws_ec2_local_gateway_route can be imported by using the EC2 Local Gateway Route Table identifier and destination CIDR block separated by underscores (_)
+	"aws_ec2_local_gateway_route": config.TemplatedStringAsIdentifier("", "{{ .parameters.local_gateway_route_table_id }}_{{ .parameters.destination_cidr_block }}"),
+	// aws_ec2_local_gateway_route_table_vpc_association can be imported by using the Local Gateway Route Table VPC Association identifier
+	"aws_ec2_local_gateway_route_table_vpc_association": config.IdentifierFromProvider,
+	// Network Insights Paths can be imported using the id
+	"aws_ec2_network_insights_path": config.IdentifierFromProvider,
+	// Serial console access state can be imported
+	"aws_ec2_serial_console_access": config.IdentifierFromProvider,
+	// Existing CIDR reservations can be imported using SUBNET_ID:RESERVATION_ID
+	"aws_ec2_subnet_cidr_reservation": config.IdentifierFromProvider,
+	// aws_ec2_tag can be imported by using the EC2 resource identifier and key, separated by a comma (,)
+	"aws_ec2_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_id }}_{{ .parameters.key }}"),
+	// Traffic mirror filter can be imported using the id
+	"aws_ec2_traffic_mirror_filter": config.IdentifierFromProvider,
+	// Traffic mirror rules can be imported using the traffic_mirror_filter_id and id separated by :
+	"aws_ec2_traffic_mirror_filter_rule": config.IdentifierFromProvider,
+	// Traffic mirror sessions can be imported using the id
+	"aws_ec2_traffic_mirror_session": config.IdentifierFromProvider,
+	// Traffic mirror targets can be imported using the id
+	"aws_ec2_traffic_mirror_target": config.IdentifierFromProvider,
+	// aws_ec2_transit_gateway_connect can be imported by using the EC2 Transit Gateway Connect identifier
+	"aws_ec2_transit_gateway_connect": config.IdentifierFromProvider,
+	// aws_ec2_transit_gateway_connect_peer can be imported by using the EC2 Transit Gateway Connect Peer identifier
+	"aws_ec2_transit_gateway_connect_peer": config.IdentifierFromProvider,
+	// aws_ec2_transit_gateway_peering_attachment_accepter can be imported by using the EC2 Transit Gateway Attachment identifier
+	"aws_ec2_transit_gateway_peering_attachment_accepter": config.IdentifierFromProvider,
+	// Internet Gateway Attachments can be imported using the id
+	"aws_internet_gateway_attachment": config.IdentifierFromProvider,
+	// No import
+	"aws_network_acl_association": config.IdentifierFromProvider,
+	// No import
+	"aws_snapshot_create_volume_permission": config.IdentifierFromProvider,
+	// Spot Fleet Requests can be imported using id
+	"aws_spot_fleet_request": config.IdentifierFromProvider,
+	// VPC Endpoint Services can be imported using ID of the connection, which is the VPC Endpoint Service ID and VPC Endpoint ID separated by underscore (_)
+	"aws_vpc_endpoint_connection_accepter": config.TemplatedStringAsIdentifier("", "{{ .parameters.vpc_endpoint_service_id }}_{{ .parameters.vpc_endpoint_id }}"),
+	// VPC Endpoint Policies can be imported using the id
+	"aws_vpc_endpoint_policy": config.IdentifierFromProvider,
+	// No import
+	"aws_vpc_endpoint_security_group_association": config.IdentifierFromProvider,
+	// IPAMs can be imported using the ipam id
+	"aws_vpc_ipam": config.IdentifierFromProvider,
+	// IPAMs can be imported using the delegate account id
+	"aws_vpc_ipam_organization_admin_account": config.ParameterAsIdentifier("delegated_admin_account_id"),
+	// IPAMs can be imported using the ipam pool id
+	"aws_vpc_ipam_pool": config.IdentifierFromProvider,
+	// IPAMs can be imported using the <cidr>_<ipam-pool-id>
+	"aws_vpc_ipam_pool_cidr": config.IdentifierFromProvider,
+	// IPAMs can be imported using the allocation id
+	"aws_vpc_ipam_pool_cidr_allocation": config.IdentifierFromProvider,
+	// No import
+	"aws_vpc_ipam_preview_next_cidr": config.IdentifierFromProvider,
+	// IPAMs can be imported using the scope_id
+	"aws_vpc_ipam_scope": config.IdentifierFromProvider,
+	// aws_vpc_ipv6_cidr_block_association can be imported by using the VPC CIDR Association ID
+	"aws_vpc_ipv6_cidr_block_association": config.IdentifierFromProvider,
+	// VPC Peering Connection Accepters can be imported by using the Peering Connection ID
+	"aws_vpc_peering_connection_accepter": config.ParameterAsIdentifier("vpc_peering_connection_id"),
+	// VPC Peering Connection Options can be imported using the vpc peering id
+	"aws_vpc_peering_connection_options": config.ParameterAsIdentifier("vpc_peering_connection_id"),
+	// VPN Connections can be imported using the vpn connection id
+	"aws_vpn_connection": config.IdentifierFromProvider,
+	// No import
+	"aws_vpn_connection_route": config.IdentifierFromProvider,
+	// VPN Gateways can be imported using the vpn gateway id
+	"aws_vpn_gateway": config.IdentifierFromProvider,
+	// No import
+	"aws_vpn_gateway_attachment": config.IdentifierFromProvider,
+	// No import
+	"aws_vpn_gateway_route_propagation": config.IdentifierFromProvider,
 }
