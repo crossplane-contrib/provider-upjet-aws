@@ -175,4 +175,173 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_batch_job_queue": config.TemplatedStringAsIdentifier("name", "arn:aws:batch:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:job-queue/{{ .external_name }}"),
 	// Batch Scheduling Policy can be imported using the arn: arn:aws:batch:us-east-1:123456789012:scheduling-policy/sample
 	"aws_batch_scheduling_policy": config.TemplatedStringAsIdentifier("name", "arn:aws:batch:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:scheduling-policy/{{ .external_name }}"),
+
+	// budgets
+	//
+	// Budgets can be imported using AccountID:BudgetName
+	"aws_budgets_budget": config.TemplatedStringAsIdentifier("name", "{{ .setup.client_metadata.account_id }}:{{ .external_name }}"),
+	// Budgets can be imported using AccountID:ActionID:BudgetName
+	"aws_budgets_budget_action": config.IdentifierFromProvider,
+
+	// ce
+	//
+	// aws_ce_cost_category can be imported using the id
+	"aws_ce_cost_category": config.IdentifierFromProvider,
+
+	// chime
+	//
+	// Configuration Recorder can be imported using the name
+	"aws_chime_voice_connector": config.NameAsIdentifier,
+	// Configuration Recorder can be imported using the name
+	"aws_chime_voice_connector_group": config.NameAsIdentifier,
+	// Chime Voice Connector Logging can be imported using the voice_connector_id
+	"aws_chime_voice_connector_logging": config.ParameterAsIdentifier("voice_connector_id"),
+	// Chime Voice Connector Origination can be imported using the voice_connector_id
+	"aws_chime_voice_connector_origination": config.ParameterAsIdentifier("voice_connector_id"),
+	// Chime Voice Connector Streaming can be imported using the voice_connector_id
+	"aws_chime_voice_connector_streaming": config.ParameterAsIdentifier("voice_connector_id"),
+	// Chime Voice Connector Termination can be imported using the voice_connector_id
+	"aws_chime_voice_connector_termination": config.ParameterAsIdentifier("voice_connector_id"),
+	// Chime Voice Connector Termination Credentials can be imported using the voice_connector_id
+	"aws_chime_voice_connector_termination_credentials": config.ParameterAsIdentifier("voice_connector_id"),
+
+	// cloud9
+	//
+	// No import
+	"aws_cloud9_environment_ec2": config.IdentifierFromProvider,
+	// Cloud9 environment membership can be imported using the environment-id#user-arn
+	"aws_cloud9_environment_membership": config.TemplatedStringAsIdentifier("", "{{ .parameters.environment_id }}#{{ .parameters.user_arn }}"),
+
+	// cloudcontrol
+	//
+	// No import
+	"aws_cloudcontrolapi_resource": config.IdentifierFromProvider,
+
+	// cloudformation
+	//
+	// Cloudformation Stacks can be imported using the name
+	"aws_cloudformation_stack": config.NameAsIdentifier,
+	// CloudFormation StackSets can be imported using the name
+	"aws_cloudformation_stack_set": config.NameAsIdentifier,
+	//
+	"aws_cloudformation_stack_set_instance": config.IdentifierFromProvider,
+	// aws_cloudformation_type can be imported with their type version Amazon Resource Name (ARN)
+	"aws_cloudformation_type": config.IdentifierFromProvider,
+
+	// cloudhsmv2
+	//
+	// CloudHSM v2 Clusters can be imported using the cluster id
+	"aws_cloudhsm_v2_cluster": config.IdentifierFromProvider,
+	// HSM modules can be imported using their HSM ID
+	"aws_cloudhsm_v2_hsm": config.IdentifierFromProvider,
+
+	// cloudtrail
+	//
+	// Cloudtrails can be imported using the name
+	"aws_cloudtrail": config.NameAsIdentifier,
+	// Event data stores can be imported using their arn
+	"aws_cloudtrail_event_data_store": config.IdentifierFromProvider,
+
+	// cloudwatchlogs
+	//
+	// CloudWatch Logs destinations can be imported using the name
+	"aws_cloudwatch_log_destination": config.NameAsIdentifier,
+	// CloudWatch Logs destination policies can be imported using the destination_name
+	"aws_cloudwatch_log_destination_policy": config.ParameterAsIdentifier("destination_name"),
+	// CloudWatch Log Metric Filter can be imported using the log_group_name:name
+	"aws_cloudwatch_log_metric_filter": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_group_name }}:{{ .external_name }}"),
+	// CloudWatch log resource policies can be imported using the policy name
+	"aws_cloudwatch_log_resource_policy": config.ParameterAsIdentifier("policy_name"),
+	// Cloudwatch Log Stream can be imported using the stream's log_group_name and name
+	"aws_cloudwatch_log_stream": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_group_name }}:{{ .external_name }}"),
+	// CloudWatch Logs subscription filter can be imported using the log group name and subscription filter name separated by |
+	"aws_cloudwatch_log_subscription_filter": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_group_name }}|{{ .external_name }}"),
+	// CloudWatch query definitions can be imported using the query definition ARN.
+	"aws_cloudwatch_query_definition": config.IdentifierFromProvider,
+
+	// codeartifact
+	//
+	// CodeArtifact Domain can be imported using the CodeArtifact Domain arn
+	"aws_codeartifact_domain": config.IdentifierFromProvider,
+	// CodeArtifact Domain Permissions Policies can be imported using the CodeArtifact Domain ARN
+	"aws_codeartifact_domain_permissions_policy": config.IdentifierFromProvider,
+	// CodeArtifact Repository can be imported using the CodeArtifact Repository ARN
+	"aws_codeartifact_repository": config.IdentifierFromProvider,
+	// CodeArtifact Repository Permissions Policies can be imported using the CodeArtifact Repository ARN
+	"aws_codeartifact_repository_permissions_policy": config.IdentifierFromProvider,
+
+	// codebuild
+	//
+	// CodeBuild Project can be imported using the name
+	"aws_codebuild_project": config.NameAsIdentifier,
+	// CodeBuild Report Group can be imported using the CodeBuild Report Group arn: arn:aws:codebuild:us-west-2:123456789:report-group/report-group-name
+	"aws_codebuild_report_group": config.TemplatedStringAsIdentifier("name", "arn:aws:codebuild:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:report-group/{{ .external_name }}"),
+	// CodeBuild Resource Policy can be imported using the CodeBuild Resource Policy arn
+	"aws_codebuild_resource_policy": config.IdentifierFromProvider,
+	// CodeBuild Source Credential can be imported using the CodeBuild Source Credential arn: arn:aws:codebuild:us-west-2:123456789:token:github
+	"aws_codebuild_source_credential": config.TemplatedStringAsIdentifier("", "arn:aws:codebuild:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:token:{{ .parameters.token }}"),
+	// CodeBuild Webhooks can be imported using the CodeBuild Project name
+	"aws_codebuild_webhook": config.ParameterAsIdentifier("project_name"),
+
+	// codecommit
+	//
+	// CodeCommit approval rule templates can be imported using the name
+	"aws_codecommit_approval_rule_template": config.NameAsIdentifier,
+	// CodeCommit approval rule template associations can be imported using the approval_rule_template_name and repository_name separated by a comma (,)
+	"aws_codecommit_approval_rule_template_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.approval_rule_template_name }},.parameters.repository_name }}"),
+	// Codecommit repository can be imported using repository name
+	"aws_codecommit_repository": config.NameAsIdentifier,
+	// No import
+	"aws_codecommit_trigger": config.IdentifierFromProvider,
+
+	// codepipeline
+	//
+	// CodePipelines can be imported using the name
+	"aws_codepipeline": config.NameAsIdentifier,
+	// CodePipeline Webhooks can be imported by their ARN: arn:aws:codepipeline:us-west-2:123456789012:webhook:example
+	"aws_codepipeline_webhook": config.TemplatedStringAsIdentifier("name", "arn:aws:codepipeline:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:webhook:{{ .external_name }}"),
+
+	// codestarconnections
+	//
+	// CodeStar connections can be imported using the ARN
+	"aws_codestarconnections_connection": config.IdentifierFromProvider,
+	// CodeStar Host can be imported using the ARN
+	"aws_codestarconnections_host": config.IdentifierFromProvider,
+
+	// codestarnotifications
+	//
+	// CodeStar notification rule can be imported using the ARN
+	"aws_codestarnotifications_notification_rule": config.IdentifierFromProvider,
+
+	// cognitoidp
+	//
+	// Cognito User Groups can be imported using the user_pool_id/name attributes concatenated
+	"aws_cognito_user_group": config.TemplatedStringAsIdentifier("name", "{{ .parameters.user_pool_id }}/{{ .external_name }}"),
+	// No import
+	"aws_cognito_user_in_group": config.IdentifierFromProvider,
+
+	// configservice
+	//
+	// Config aggregate authorizations can be imported using account_id:region
+	"aws_config_aggregate_authorization": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.region }}"),
+	// Config Rule can be imported using the name
+	"aws_config_config_rule": config.NameAsIdentifier,
+	// Configuration Aggregators can be imported using the name
+	"aws_config_configuration_aggregator": config.NameAsIdentifier,
+	// Configuration Recorder can be imported using the name
+	"aws_config_configuration_recorder": config.NameAsIdentifier,
+	// Configuration Recorder Status can be imported using the name of the Configuration Recorder
+	"aws_config_configuration_recorder_status": config.NameAsIdentifier,
+	// Config Conformance Packs can be imported using the name
+	"aws_config_conformance_pack": config.NameAsIdentifier,
+	// Delivery Channel can be imported using the name
+	"aws_config_delivery_channel": config.NameAsIdentifier,
+	// Config Organization Conformance Packs can be imported using the name
+	"aws_config_organization_conformance_pack": config.NameAsIdentifier,
+	// Config Organization Custom Rules can be imported using the name
+	"aws_config_organization_custom_rule": config.NameAsIdentifier,
+	// Config Organization Managed Rules can be imported using the name
+	"aws_config_organization_managed_rule": config.NameAsIdentifier,
+	// Remediation Configurations can be imported using the name config_rule_name
+	"aws_config_remediation_configuration": config.ParameterAsIdentifier("config_rule_name"),
 }
