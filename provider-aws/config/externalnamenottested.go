@@ -344,4 +344,190 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_config_organization_managed_rule": config.NameAsIdentifier,
 	// Remediation Configurations can be imported using the name config_rule_name
 	"aws_config_remediation_configuration": config.ParameterAsIdentifier("config_rule_name"),
+
+	// connect
+	//
+	// aws_connect_bot_association can be imported by using the Amazon Connect instance ID, Lex (V1) bot name, and Lex (V1) bot region separated by colons (:)
+	// TODO: lex_bot.lex_region parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
+	"aws_connect_bot_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }}:{{ .parameters.lex_bot.name }}:{{ .parameters.lex_bot.lex_region }}"),
+	// Amazon Connect Contact Flows can be imported using the instance_id and contact_flow_id separated by a colon (:)
+	"aws_connect_contact_flow": config.IdentifierFromProvider,
+	// Amazon Connect Contact Flow Modules can be imported using the instance_id and contact_flow_module_id separated by a colon (:)
+	"aws_connect_contact_flow_module": config.IdentifierFromProvider,
+	// Amazon Connect Hours of Operations can be imported using the instance_id and hours_of_operation_id separated by a colon (:)
+	"aws_connect_hours_of_operation": config.IdentifierFromProvider,
+	// Connect instances can be imported using the id
+	"aws_connect_instance": config.IdentifierFromProvider,
+	// aws_connect_lambda_function_association can be imported using the instance_id and function_arn separated by a comma (,)
+	"aws_connect_lambda_function_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }},{{ .parameters.function_arn }}"),
+	// Amazon Connect Queues can be imported using the instance_id and queue_id separated by a colon (:)
+	"aws_connect_queue": config.IdentifierFromProvider,
+	// Amazon Connect Quick Connects can be imported using the instance_id and quick_connect_id separated by a colon (:)
+	"aws_connect_quick_connect": config.IdentifierFromProvider,
+	// Amazon Connect Routing Profiles can be imported using the instance_id and routing_profile_id separated by a colon (:)
+	"aws_connect_routing_profile": config.IdentifierFromProvider,
+	// Amazon Connect Security Profiles can be imported using the instance_id and security_profile_id separated by a colon (:)
+	"aws_connect_security_profile": config.IdentifierFromProvider,
+	// Amazon Connect User Hierarchy Groups can be imported using the instance_id and hierarchy_group_id separated by a colon (:)
+	"aws_connect_user_hierarchy_group": config.IdentifierFromProvider,
+	// Amazon Connect User Hierarchy Structures can be imported using the instance_id
+	"aws_connect_user_hierarchy_structure": config.ParameterAsIdentifier("instance_id"),
+
+	// cur
+	//
+	// Report Definitions can be imported using the report_name
+	"aws_cur_report_definition": config.ParameterAsIdentifier("report_name"),
+
+	// dataexchange
+	//
+	// DataExchange DataSets can be imported by their arn
+	"aws_dataexchange_data_set": config.IdentifierFromProvider,
+	// DataExchange Revisions can be imported by their data-set-id:revision-id
+	"aws_dataexchange_revision": config.IdentifierFromProvider,
+
+	// datapipeline
+	//
+	// aws_datapipeline_pipeline can be imported by using the id (Pipeline ID)
+	"aws_datapipeline_pipeline": config.IdentifierFromProvider,
+	// aws_datapipeline_pipeline_definition can be imported using the id
+	"aws_datapipeline_pipeline_definition": config.IdentifierFromProvider,
+
+	// datasync
+	//
+	// aws_datasync_agent can be imported by using the DataSync Agent Amazon Resource Name (ARN)
+	"aws_datasync_agent": config.IdentifierFromProvider,
+	// aws_datasync_location_efs can be imported by using the DataSync Task Amazon Resource Name (ARN)
+	"aws_datasync_location_efs": config.IdentifierFromProvider,
+	// aws_datasync_location_fsx_lustre_file_system can be imported by using the DataSync-ARN#FSx-Lustre-ARN
+	"aws_datasync_location_fsx_lustre_file_system": config.IdentifierFromProvider,
+	// aws_datasync_location_fsx_openzfs_file_system can be imported by using the DataSync-ARN#FSx-openzfs-ARN
+	"aws_datasync_location_fsx_openzfs_file_system": config.IdentifierFromProvider,
+	// aws_datasync_location_fsx_windows_file_system can be imported by using the DataSync-ARN#FSx-Windows-ARN
+	"aws_datasync_location_fsx_windows_file_system": config.IdentifierFromProvider,
+	// aws_datasync_location_hdfs can be imported by using the Amazon Resource Name (ARN)
+	"aws_datasync_location_hdfs": config.IdentifierFromProvider,
+	// aws_datasync_location_nfs can be imported by using the DataSync Task Amazon Resource Name (ARN)
+	"aws_datasync_location_nfs": config.IdentifierFromProvider,
+	// aws_datasync_location_s3 can be imported by using the DataSync Task Amazon Resource Name (ARN)
+	"aws_datasync_location_s3": config.IdentifierFromProvider,
+	// aws_datasync_location_smb can be imported by using the Amazon Resource Name (ARN)
+	"aws_datasync_location_smb": config.IdentifierFromProvider,
+	// aws_datasync_task can be imported by using the DataSync Task Amazon Resource Name (ARN)
+	"aws_datasync_task": config.IdentifierFromProvider,
+
+	// deploy
+	//
+	// CodeDeploy Applications can be imported using the name
+	"aws_codedeploy_app": config.NameAsIdentifier,
+	// CodeDeploy Deployment Configurations can be imported using the deployment_config_name
+	"aws_codedeploy_deployment_config": config.ParameterAsIdentifier("deployment_config_name"),
+	// CodeDeploy Deployment Groups can be imported by their app_name, a colon, and deployment_group_name
+	"aws_codedeploy_deployment_group": config.ParameterAsIdentifier("deployment_group_name"),
+
+	// detective
+	//
+	// aws_detective_graph can be imported using the ARN
+	"aws_detective_graph": config.IdentifierFromProvider,
+	// aws_detective_invitation_accepter can be imported using the graph ARN
+	"aws_detective_invitation_accepter": config.IdentifierFromProvider,
+	// aws_detective_member can be imported using the ARN of the graph followed by the account ID of the member account
+	"aws_detective_member": config.IdentifierFromProvider,
+
+	// devicefarm
+	//
+	// DeviceFarm Device Pools can be imported by their arn
+	"aws_devicefarm_device_pool": config.IdentifierFromProvider,
+	// DeviceFarm Instance Profiles can be imported by their arn
+	"aws_devicefarm_instance_profile": config.IdentifierFromProvider,
+	// DeviceFarm Network Profiles can be imported by their arn
+	"aws_devicefarm_network_profile": config.IdentifierFromProvider,
+	// DeviceFarm Projects can be imported by their arn
+	"aws_devicefarm_project": config.IdentifierFromProvider,
+	// DeviceFarm Test Grid Projects can be imported by their arn
+	"aws_devicefarm_test_grid_project": config.IdentifierFromProvider,
+	// DeviceFarm Uploads can be imported by their arn
+	"aws_devicefarm_upload": config.IdentifierFromProvider,
+
+	// directconnect
+	//
+	// No import
+	"aws_dx_bgp_peer": config.IdentifierFromProvider,
+	// Direct Connect connections can be imported using the connection id
+	"aws_dx_connection": config.IdentifierFromProvider,
+	// No import
+	"aws_dx_connection_association": config.IdentifierFromProvider,
+	// No import
+	"aws_dx_connection_confirmation": config.IdentifierFromProvider,
+	// Direct Connect Gateways can be imported using the gateway id
+	"aws_dx_gateway": config.IdentifierFromProvider,
+	// Direct Connect gateway associations can be imported using dx_gateway_id together with associated_gateway_id
+	// TODO: associated_gateway_id parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
+	"aws_dx_gateway_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.dx_gateway_id }}/{{ .parameters.associated_gateway_id }}"),
+	//
+	"aws_dx_gateway_association_proposal": config.IdentifierFromProvider,
+	// No import
+	"aws_dx_hosted_connection": config.IdentifierFromProvider,
+	// Direct Connect hosted private virtual interfaces can be imported using the vif id
+	"aws_dx_hosted_private_virtual_interface": config.IdentifierFromProvider,
+	// Direct Connect hosted private virtual interfaces can be imported using the vif id
+	"aws_dx_hosted_private_virtual_interface_accepter": config.ParameterAsIdentifier("virtual_interface_id"),
+	// Direct Connect hosted public virtual interfaces can be imported using the vif id
+	"aws_dx_hosted_public_virtual_interface": config.IdentifierFromProvider,
+	// Direct Connect hosted public virtual interfaces can be imported using the vif id
+	"aws_dx_hosted_public_virtual_interface_accepter": config.ParameterAsIdentifier("virtual_interface_id"),
+	// Direct Connect hosted transit virtual interfaces can be imported using the vif id
+	"aws_dx_hosted_transit_virtual_interface": config.IdentifierFromProvider,
+	// Direct Connect hosted transit virtual interfaces can be imported using the vif id
+	"aws_dx_hosted_transit_virtual_interface_accepter": config.ParameterAsIdentifier("virtual_interface_id"),
+	// Direct Connect LAGs can be imported using the lag id
+	"aws_dx_lag": config.IdentifierFromProvider,
+	// Direct Connect private virtual interfaces can be imported using the vif id
+	"aws_dx_private_virtual_interface": config.IdentifierFromProvider,
+	// Direct Connect public virtual interfaces can be imported using the vif id
+	"aws_dx_public_virtual_interface": config.IdentifierFromProvider,
+	// Direct Connect transit virtual interfaces can be imported using the vif id
+	"aws_dx_transit_virtual_interface": config.IdentifierFromProvider,
+
+	// dlm
+	//
+	// DLM lifecycle policies can be imported by their policy ID
+	"aws_dlm_lifecycle_policy": config.IdentifierFromProvider,
+
+	// dms
+	//
+	// Certificates can be imported using the certificate_id
+	"aws_dms_certificate": config.ParameterAsIdentifier("certificate_id"),
+	// Endpoints can be imported using the endpoint_id
+	"aws_dms_endpoint": config.ParameterAsIdentifier("endpoint_id"),
+	// Event subscriptions can be imported using the name
+	"aws_dms_event_subscription": config.NameAsIdentifier,
+	// Replication instances can be imported using the replication_instance_id
+	"aws_dms_replication_instance": config.ParameterAsIdentifier("replication_instance_id"),
+	// Replication subnet groups can be imported using the replication_subnet_group_id
+	"aws_dms_replication_subnet_group": config.ParameterAsIdentifier("replication_subnet_group_id"),
+	// Replication tasks can be imported using the replication_task_id
+	"aws_dms_replication_task": config.ParameterAsIdentifier("replication_task_id"),
+
+	// docdb
+	//
+	// DocumentDB Cluster Parameter Groups can be imported using the name
+	"aws_docdb_cluster_parameter_group": config.NameAsIdentifier,
+	// aws_docdb_cluster_snapshot can be imported by using the cluster snapshot identifier
+	"aws_docdb_cluster_snapshot": config.ParameterAsIdentifier("db_cluster_snapshot_identifier"),
+	// DocDB Event Subscriptions can be imported using the name
+	"aws_docdb_event_subscription": config.NameAsIdentifier,
+
+	// ds
+	//
+	// Conditional forwarders can be imported using the directory id and remote_domain_name: d-1234567890:example.com
+	"aws_directory_service_conditional_forwarder": config.TemplatedStringAsIdentifier("", "{{ .parameters.directory_id }}:{{ .parameters.remote_domain_name }}"),
+	// DirectoryService directories can be imported using the directory id
+	"aws_directory_service_directory": config.IdentifierFromProvider,
+	// Directory Service Log Subscriptions can be imported using the directory id
+	"aws_directory_service_log_subscription": config.ParameterAsIdentifier("directory_id"),
+
+	// dynamodb
+	//
+	// aws_dynamodb_tag can be imported by using the DynamoDB resource identifier and key, separated by a comma (,)
+	"aws_dynamodb_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_arn }},{{ .parameters.key }}"),
 }
