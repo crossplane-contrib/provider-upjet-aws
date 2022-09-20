@@ -7686,6 +7686,16 @@ func (in *RouteParameters_2) DeepCopyInto(out *RouteParameters_2) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.NATGatewayIDRef != nil {
+		in, out := &in.NATGatewayIDRef, &out.NATGatewayIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NATGatewayIDSelector != nil {
+		in, out := &in.NATGatewayIDSelector, &out.NATGatewayIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.NetworkInterfaceID != nil {
 		in, out := &in.NetworkInterfaceID, &out.NetworkInterfaceID
 		*out = new(string)

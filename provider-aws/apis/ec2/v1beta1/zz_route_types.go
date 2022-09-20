@@ -95,8 +95,17 @@ type RouteParameters_2 struct {
 	LocalGatewayID *string `json:"localGatewayId,omitempty" tf:"local_gateway_id,omitempty"`
 
 	// Identifier of a VPC NAT gateway.
+	// +crossplane:generate:reference:type=NATGateway
 	// +kubebuilder:validation:Optional
 	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
+
+	// Reference to a NATGateway to populate natGatewayId.
+	// +kubebuilder:validation:Optional
+	NATGatewayIDRef *v1.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a NATGateway to populate natGatewayId.
+	// +kubebuilder:validation:Optional
+	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of an EC2 network interface.
 	// +crossplane:generate:reference:type=NetworkInterface
