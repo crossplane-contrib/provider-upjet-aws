@@ -132,12 +132,18 @@ func (e *external) Create(ctx context.Context, mg resource.Managed) (managed.Ext
 		return managed.ExternalCreation{}, errors.Wrap(err, errDescribeCluster)
 	}
 	// NOTE(muvaf): The maximum time allowed for a token to live is 15 minutes
-	// even though API allows setting longer durations.
+	// even though API allows setting longer durations. Additional duration is
+	// add cushion so that we have the room for reconciliation to kick in at most
+	// in 5 minutes.
+	d := cr.Spec.ForProvider.RefreshPeriod.Duration + additionalDurationForExpiration
+	if d > time.Minute*15 {
+		d = time.Minute * 15
+	}
 	conn, err := GetConnectionDetails(
 		ctx,
 		e.presignClient,
 		cl.Cluster,
-		cr.Spec.ForProvider.RefreshPeriod.Duration+additionalDurationForExpiration,
+		d,
 	)
 	if err != nil {
 		return managed.ExternalCreation{}, errors.Wrap(err, errGetKubeconfig)
@@ -164,12 +170,18 @@ func (e *external) Update(ctx context.Context, mg resource.Managed) (managed.Ext
 		return managed.ExternalUpdate{}, errors.Wrap(err, errDescribeCluster)
 	}
 	// NOTE(muvaf): The maximum time allowed for a token to live is 15 minutes
-	// even though API allows setting longer durations.
+	// even though API allows setting longer durations. Additional duration is
+	// add cushion so that we have the room for reconciliation to kick in at most
+	// in 5 minutes.
+	d := cr.Spec.ForProvider.RefreshPeriod.Duration + additionalDurationForExpiration
+	if d > time.Minute*15 {
+		d = time.Minute * 15
+	}
 	conn, err := GetConnectionDetails(
 		ctx,
 		e.presignClient,
 		cl.Cluster,
-		cr.Spec.ForProvider.RefreshPeriod.Duration+additionalDurationForExpiration,
+		d,
 	)
 	if err != nil {
 		return managed.ExternalUpdate{}, errors.Wrap(err, errGetKubeconfig)
