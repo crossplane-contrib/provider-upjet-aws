@@ -213,6 +213,9 @@ func Configure(p *config.Provider) {
 		r.References["vpc_endpoint_id"] = config.Reference{
 			Type: "VPCEndpoint",
 		}
+		r.References["nat_gateway_id"] = config.Reference{
+			Type: "NATGateway",
+		}
 		r.UseAsync = true
 	})
 
