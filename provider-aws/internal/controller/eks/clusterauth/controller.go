@@ -8,23 +8,22 @@ import (
 	"context"
 	"time"
 
-	"github.com/crossplane/crossplane-runtime/pkg/meta"
-
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/eks"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/pkg/connection"
 	"github.com/crossplane/crossplane-runtime/pkg/event"
+	"github.com/crossplane/crossplane-runtime/pkg/meta"
 	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	tjcontroller "github.com/upbound/upjet/pkg/controller"
+	ujresource "github.com/upbound/upjet/pkg/resource"
 
 	"github.com/upbound/official-providers/provider-aws/apis/eks/v1beta1"
 	"github.com/upbound/official-providers/provider-aws/apis/v1alpha1"
@@ -116,6 +115,7 @@ func (e *external) Observe(_ context.Context, mg resource.Managed) (managed.Exte
 		}, nil
 	}
 	cr.Status.SetConditions(xpv1.Available())
+	ujresource.SetUpToDateCondition(mg, true)
 	return managed.ExternalObservation{
 		ResourceExists:   true,
 		ResourceUpToDate: true,
@@ -136,7 +136,7 @@ func (e *external) Create(ctx context.Context, mg resource.Managed) (managed.Ext
 	conn, err := GetConnectionDetails(
 		ctx,
 		e.presignClient,
-		*cl.Cluster,
+		cl.Cluster,
 		cr.Spec.ForProvider.RefreshPeriod.Duration+additionalDurationForExpiration,
 	)
 	if err != nil {
@@ -168,7 +168,7 @@ func (e *external) Update(ctx context.Context, mg resource.Managed) (managed.Ext
 	conn, err := GetConnectionDetails(
 		ctx,
 		e.presignClient,
-		*cl.Cluster,
+		cl.Cluster,
 		cr.Spec.ForProvider.RefreshPeriod.Duration+additionalDurationForExpiration,
 	)
 	if err != nil {

@@ -130,7 +130,7 @@ func (mg *ClusterAuth) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: mg.Spec.ForProvider.ClusterName,
-		Extract:      reference.ExternalName(),
+		Extract:      ExternalNameIfReady(),
 		Reference:    mg.Spec.ForProvider.ClusterNameRef,
 		Selector:     mg.Spec.ForProvider.ClusterNameSelector,
 		To: reference.To{

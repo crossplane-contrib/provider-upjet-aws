@@ -146,10 +146,10 @@ spec:
                         type: object
                     type: object
                   refreshPeriod:
-                    default: 15m
-                    description: 'RefreshPeriod is how frequently you''d like the
-                      token in the published Kubeconfig to be refreshed. Example values:
-                      15m, 1h, 6h. The default is 15m.'
+                    default: 10m0s
+                    description: RefreshPeriod is how frequently you'd like the token
+                      in the published Kubeconfig to be refreshed. The maximum is
+                      10m0s. The default is 10m0s.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

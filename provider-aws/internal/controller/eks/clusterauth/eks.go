@@ -33,7 +33,7 @@ func newPresignClient(cfg aws.Config, optFns ...func(*sts.Options)) *sts.Presign
 }
 
 // GetConnectionDetails extracts managed.ConnectionDetails out of ekstypes.Cluster.
-func GetConnectionDetails(ctx context.Context, stsClient *sts.PresignClient, cluster ekstypes.Cluster, expiration time.Duration) (managed.ConnectionDetails, error) {
+func GetConnectionDetails(ctx context.Context, stsClient *sts.PresignClient, cluster *ekstypes.Cluster, expiration time.Duration) (managed.ConnectionDetails, error) {
 	getCallerIdentity, err := stsClient.PresignGetCallerIdentity(ctx, &sts.GetCallerIdentityInput{},
 		func(po *sts.PresignOptions) {
 			po.ClientOptions = []func(*sts.Options){
@@ -56,7 +56,7 @@ func GetConnectionDetails(ctx context.Context, stsClient *sts.PresignClient, clu
 	// NOTE(hasheddan): We must decode the CA data before constructing our
 	// Kubeconfig, as the raw Kubeconfig will be base64 encoded again when
 	// written as a Secret.
-	caData, err := base64.StdEncoding.DecodeString(*cluster.CertificateAuthority.Data)
+	caData, err := base64.StdEncoding.DecodeString(aws.ToString(cluster.CertificateAuthority.Data))
 	if err != nil {
 		return managed.ConnectionDetails{}, errors.Wrap(err, errDecodeCA)
 	}

@@ -19,6 +19,7 @@ type ClusterAuthParameters struct {
 	// ClusterName is the name of the cluster you'd like to fetch Kubeconfig of.
 	// Either ClusterName, ClusterNameRef or ClusterNameSelector has to be given.
 	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:extractor=ExternalNameIfReady()
 	ClusterName string `json:"clusterName,omitempty"`
 
 	// Reference to a Cluster to populate clusterName.
