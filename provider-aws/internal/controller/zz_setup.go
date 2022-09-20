@@ -186,6 +186,7 @@ import (
 	mounttarget "github.com/upbound/official-providers/provider-aws/internal/controller/efs/mounttarget"
 	addon "github.com/upbound/official-providers/provider-aws/internal/controller/eks/addon"
 	clustereks "github.com/upbound/official-providers/provider-aws/internal/controller/eks/cluster"
+	clusterauth "github.com/upbound/official-providers/provider-aws/internal/controller/eks/clusterauth"
 	fargateprofile "github.com/upbound/official-providers/provider-aws/internal/controller/eks/fargateprofile"
 	identityproviderconfig "github.com/upbound/official-providers/provider-aws/internal/controller/eks/identityproviderconfig"
 	nodegroup "github.com/upbound/official-providers/provider-aws/internal/controller/eks/nodegroup"
@@ -549,6 +550,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mounttarget.Setup,
 		addon.Setup,
 		clustereks.Setup,
+		clusterauth.Setup,
 		fargateprofile.Setup,
 		identityproviderconfig.Setup,
 		nodegroup.Setup,
