@@ -15,12 +15,21 @@ spec:
       - subnetIdRefs:
           - name: sample-subnet1
           - name: sample-subnet2
+---
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: ClusterAuth
+metadata:
+  name: auth
+spec:
+  forProvider:
+    region: us-west-1
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
   writeConnectionSecretToRef:
     name: cluster-conn
-    namespace: default
-
+    namespace: upbound-system
 ---
-
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
@@ -40,9 +49,7 @@ spec:
           }
         ]
       }
-
 ---
-
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
@@ -52,9 +59,7 @@ spec:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
     roleRef:
       name: sample-eks-cluster
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
@@ -67,9 +72,7 @@ spec:
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.10.0/24
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
@@ -82,9 +85,7 @@ spec:
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.11.0/24
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
@@ -96,9 +97,7 @@ spec:
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.12.0/24
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: RouteTable
 metadata:
@@ -110,9 +109,7 @@ spec:
       Name: example
     vpcIdRef:
       name: sample-vpc
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: RouteTableAssociation
 metadata:
@@ -124,9 +121,7 @@ spec:
       name: example
     subnetIdRef:
       name: private-subnet
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
@@ -138,9 +133,7 @@ spec:
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: InternetGateway
 metadata:
@@ -150,9 +143,7 @@ spec:
     region: us-west-1
     vpcIdRef:
       name: sample-vpc
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: DefaultRouteTable
 metadata:

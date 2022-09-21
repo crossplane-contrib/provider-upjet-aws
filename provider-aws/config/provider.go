@@ -75,6 +75,18 @@ var (
 	providerMetadata []byte
 )
 
+var (
+	BasePackages = config.BasePackages{
+		APIVersion: []string{
+			"apis/v1beta1",
+		},
+		Controller: []string{
+			"internal/controller/providerconfig",
+			"internal/controller/eks/clusterauth",
+		},
+	}
+)
+
 var skipList = []string{
 	"aws_waf_rule_group$",              // Too big CRD schema
 	"aws_wafregional_rule_group$",      // Too big CRD schema
@@ -107,6 +119,7 @@ func GetProvider() *config.Provider {
 		config.WithIncludeList(ResourcesWithExternalNameConfig()),
 		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
 		config.WithSkipList(skipList),
+		config.WithBasePackages(BasePackages),
 		config.WithDefaultResourceOptions(
 			GroupKindOverrides(),
 			KindOverrides(),
