@@ -17,6 +17,3 @@ spec:
     - predefinedMetricSpecification:
       - predefinedMetricType: DynamoDBReadCapacityUtilization
       targetValue: 70
-
----
-
