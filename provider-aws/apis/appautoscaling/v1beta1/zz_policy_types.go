@@ -73,16 +73,46 @@ type PolicyParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The resource type and unique identifier string for the resource associated with the scaling policy. Documentation can be found in the ResourceId parameter at: AWS Application Auto Scaling API Reference
-	// +kubebuilder:validation:Required
-	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/appautoscaling/v1beta1.Target
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("resource_id",false)
+	// +kubebuilder:validation:Optional
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Reference to a Target in appautoscaling to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Target in appautoscaling to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// The scalable dimension of the scalable target. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference
-	// +kubebuilder:validation:Required
-	ScalableDimension *string `json:"scalableDimension" tf:"scalable_dimension,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/appautoscaling/v1beta1.Target
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("scalable_dimension",false)
+	// +kubebuilder:validation:Optional
+	ScalableDimension *string `json:"scalableDimension,omitempty" tf:"scalable_dimension,omitempty"`
+
+	// Reference to a Target in appautoscaling to populate scalableDimension.
+	// +kubebuilder:validation:Optional
+	ScalableDimensionRef *v1.Reference `json:"scalableDimensionRef,omitempty" tf:"-"`
+
+	// Selector for a Target in appautoscaling to populate scalableDimension.
+	// +kubebuilder:validation:Optional
+	ScalableDimensionSelector *v1.Selector `json:"scalableDimensionSelector,omitempty" tf:"-"`
 
 	// The AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
-	// +kubebuilder:validation:Required
-	ServiceNamespace *string `json:"serviceNamespace" tf:"service_namespace,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/appautoscaling/v1beta1.Target
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("service_namespace",false)
+	// +kubebuilder:validation:Optional
+	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
+
+	// Reference to a Target in appautoscaling to populate serviceNamespace.
+	// +kubebuilder:validation:Optional
+	ServiceNamespaceRef *v1.Reference `json:"serviceNamespaceRef,omitempty" tf:"-"`
+
+	// Selector for a Target in appautoscaling to populate serviceNamespace.
+	// +kubebuilder:validation:Optional
+	ServiceNamespaceSelector *v1.Selector `json:"serviceNamespaceSelector,omitempty" tf:"-"`
 
 	// Step scaling policy configuration, requires policy_type = "StepScaling" (default). See supported fields below.
 	// +kubebuilder:validation:Optional
