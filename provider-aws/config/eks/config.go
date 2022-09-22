@@ -34,24 +34,23 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_eks_node_group", func(r *config.Resource) {
-		r.References = config.References{
-			"cluster_name": {
-				Type: "Cluster",
-			},
-			"node_role_arn": {
-				Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
-				Extractor: common.PathARNExtractor,
-			},
-			"remote_access.source_security_group_ids": {
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
-				RefFieldName:      "SourceSecurityGroupIDRefs",
-				SelectorFieldName: "SourceSecurityGroupIDSelector",
-			},
-			"subnet_ids": {
-				Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
-				RefFieldName:      "SubnetIDRefs",
-				SelectorFieldName: "SubnetIDSelector",
-			},
+		r.References["cluster_name"] = config.Reference{
+			Type:      "Cluster",
+			Extractor: "ExternalNameIfClusterActive()",
+		}
+		r.References["node_role_arn"] = config.Reference{
+			Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
+			Extractor: common.PathARNExtractor,
+		}
+		r.References["remote_access.source_security_group_ids"] = config.Reference{
+			Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			RefFieldName:      "SourceSecurityGroupIDRefs",
+			SelectorFieldName: "SourceSecurityGroupIDSelector",
+		}
+		r.References["subnet_ids"] = config.Reference{
+			Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
+			RefFieldName:      "SubnetIDRefs",
+			SelectorFieldName: "SubnetIDSelector",
 		}
 		r.UseAsync = true
 	})

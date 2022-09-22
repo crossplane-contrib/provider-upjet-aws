@@ -131,6 +131,9 @@ func (e *external) Create(ctx context.Context, mg resource.Managed) (managed.Ext
 	if err != nil {
 		return managed.ExternalCreation{}, errors.Wrap(err, errDescribeCluster)
 	}
+	if aws.ToString(cl.Cluster.CertificateAuthority.Data) == "" {
+		return managed.ExternalCreation{}, errors.New("ca data from the retrieved cluster is empty")
+	}
 	// NOTE(muvaf): The maximum time allowed for a token to live is 15 minutes
 	// even though API allows setting longer durations. Additional duration is
 	// add cushion so that we have the room for reconciliation to kick in at most
@@ -168,6 +171,9 @@ func (e *external) Update(ctx context.Context, mg resource.Managed) (managed.Ext
 	cl, err := e.eksClient.DescribeCluster(ctx, &eks.DescribeClusterInput{Name: aws.String(cr.Spec.ForProvider.ClusterName)})
 	if err != nil {
 		return managed.ExternalUpdate{}, errors.Wrap(err, errDescribeCluster)
+	}
+	if aws.ToString(cl.Cluster.CertificateAuthority.Data) == "" {
+		return managed.ExternalUpdate{}, errors.New("ca data from the retrieved cluster is empty")
 	}
 	// NOTE(muvaf): The maximum time allowed for a token to live is 15 minutes
 	// even though API allows setting longer durations. Additional duration is

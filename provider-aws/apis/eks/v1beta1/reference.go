@@ -1,18 +1,20 @@
 package v1beta1
 
 import (
-	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	"k8s.io/utils/pointer"
 )
 
-// TODO(muvaf): Move this to crossplane-runtime.
-
-// ExternalNameIfReady returns the external name only if the targeted resource
-// reports itself as ready.
-func ExternalNameIfReady() reference.ExtractValueFn {
+// ExternalNameIfClusterActive returns the external name only if the EKS cluster
+// is in ACTIVE state.
+func ExternalNameIfClusterActive() reference.ExtractValueFn {
 	return func(mr xpresource.Managed) string {
-		if !mr.GetCondition(xpv1.TypeReady).Equal(xpv1.Available()) {
+		cl, ok := mr.(*Cluster)
+		if !ok {
+			return ""
+		}
+		if pointer.StringDeref(cl.Status.AtProvider.Status, "") != "ACTIVE" {
 			return ""
 		}
 		return reference.ExternalName()(mr)
