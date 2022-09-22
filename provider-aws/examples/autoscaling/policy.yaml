@@ -39,9 +39,40 @@ spec:
     maxCapacity: 100
     minCapacity: 5
     region: us-west-1
-    resourceId: table/tableName
+    resourceId: table/table
     scalableDimension: dynamodb:table:ReadCapacityUnits
     serviceNamespace: dynamodb
 
 ---
 
+apiVersion: dynamodb.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  name: table
+spec:
+  forProvider:
+    region: us-west-1
+    attribute:
+    - name: UserId
+      type: S
+    - name: GameTitle
+      type: S
+    - name: TopScore
+      type: "N"
+    billingMode: PROVISIONED
+    globalSecondaryIndex:
+    - hashKey: GameTitle
+      name: GameTitleIndex
+      nonKeyAttributes:
+      - UserId
+      projectionType: INCLUDE
+      rangeKey: TopScore
+      readCapacity: 10
+      writeCapacity: 10
+    hashKey: UserId
+    rangeKey: GameTitle
+    readCapacity: 20
+    tags:
+      Environment: production
+      Name: table
+    writeCapacity: 20
