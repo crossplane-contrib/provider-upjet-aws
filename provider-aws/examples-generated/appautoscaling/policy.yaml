@@ -42,3 +42,6 @@ spec:
     resourceId: table/tableName
     scalableDimension: dynamodb:table:ReadCapacityUnits
     serviceNamespace: dynamodb
+
+---
+
