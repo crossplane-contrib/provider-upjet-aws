@@ -45,8 +45,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// appautoscaling
 	//
-	// Application AutoScaling Policy can be imported using the service-namespace, resource-id, scalable-dimension and policy-name separated by /
-	"aws_appautoscaling_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.service_namespace }}/{{ .parameters.resource_id }}/{{ .parameters.scalable_dimension }}/{{ .external_name }}"),
 	// No import
 	"aws_appautoscaling_scheduled_action": config.IdentifierFromProvider,
 	// Application AutoScaling Target can be imported using the service-namespace , resource-id and scalable-dimension separated by /

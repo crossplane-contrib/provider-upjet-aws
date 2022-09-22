@@ -15,6 +15,7 @@ import (
 	v1beta1amp "github.com/upbound/official-providers/provider-aws/apis/amp/v1beta1"
 	v1beta1apigateway "github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1"
 	v1beta1apigatewayv2 "github.com/upbound/official-providers/provider-aws/apis/apigatewayv2/v1beta1"
+	v1beta1appautoscaling "github.com/upbound/official-providers/provider-aws/apis/appautoscaling/v1beta1"
 	v1beta1athena "github.com/upbound/official-providers/provider-aws/apis/athena/v1beta1"
 	v1beta1autoscaling "github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1beta1"
 	v1beta1backup "github.com/upbound/official-providers/provider-aws/apis/backup/v1beta1"
@@ -81,6 +82,7 @@ func init() {
 		v1beta1amp.SchemeBuilder.AddToScheme,
 		v1beta1apigateway.SchemeBuilder.AddToScheme,
 		v1beta1apigatewayv2.SchemeBuilder.AddToScheme,
+		v1beta1appautoscaling.SchemeBuilder.AddToScheme,
 		v1beta1athena.SchemeBuilder.AddToScheme,
 		v1beta1autoscaling.SchemeBuilder.AddToScheme,
 		v1beta1backup.SchemeBuilder.AddToScheme,

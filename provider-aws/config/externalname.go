@@ -983,6 +983,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudwatch_metric_alarm": config.ParameterAsIdentifier("alarm_name"),
 	// CloudWatch metric streams can be imported using the name
 	"aws_cloudwatch_metric_stream": config.IdentifierFromProvider,
+
+	// appautoscaling
+	//
+	// Application AutoScaling Policy can be imported using the service-namespace, resource-id, scalable-dimension and policy-name separated by /
+	"aws_appautoscaling_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.service_namespace }}/{{ .parameters.resource_id }}/{{ .parameters.scalable_dimension }}/{{ .external_name }}"),
 }
 
 func lambdaFunctionURL() config.ExternalName {

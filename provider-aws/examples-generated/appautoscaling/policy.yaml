@@ -1,0 +1,22 @@
+apiVersion: appautoscaling.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appautoscaling/v1beta1/policy
+  labels:
+    testing.upbound.io/example-name: dynamodb_table_read_policy
+  name: dynamodb-table-read-policy
+spec:
+  forProvider:
+    policyType: TargetTrackingScaling
+    region: us-west-1
+    resourceId: ${aws_appautoscaling_target.dynamodb_table_read_target.resource_id}
+    scalableDimension: ${aws_appautoscaling_target.dynamodb_table_read_target.scalable_dimension}
+    serviceNamespace: ${aws_appautoscaling_target.dynamodb_table_read_target.service_namespace}
+    targetTrackingScalingPolicyConfiguration:
+    - predefinedMetricSpecification:
+      - predefinedMetricType: DynamoDBReadCapacityUtilization
+      targetValue: 70
+
+---
+
