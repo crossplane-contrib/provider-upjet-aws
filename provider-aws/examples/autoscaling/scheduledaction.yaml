@@ -1,11 +1,39 @@
 apiVersion: appautoscaling.aws.upbound.io/v1beta1
+kind: ScheduledAction
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appautoscaling/v1beta1/scheduledaction
+  labels:
+    testing.upbound.io/example-name: dynamodb
+  name: dynamodb
+spec:
+  forProvider:
+    name: dynamodb
+    region: us-west-1
+    resourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: dynamodb
+    scalableDimensionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: dynamodb
+    scalableTargetAction:
+    - maxCapacity: 200
+      minCapacity: 1
+    schedule: at(2006-01-02T15:04:05)
+    serviceNamespaceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: dynamodb
+
+---
+
+apiVersion: appautoscaling.aws.upbound.io/v1beta1
 kind: Target
 metadata:
   annotations:
-    meta.upbound.io/example-id: appautoscaling/v1beta1/target
+    meta.upbound.io/example-id: appautoscaling/v1beta1/scheduledaction
   labels:
-    testing.upbound.io/example-name: dynamodb_table_read_target
-  name: dynamodb-table-read-target
+    testing.upbound.io/example-name: dynamodb
+  name: dynamodb
 spec:
   forProvider:
     maxCapacity: 100

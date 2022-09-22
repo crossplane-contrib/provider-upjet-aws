@@ -54,6 +54,7 @@ import (
 	stageapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/stage"
 	vpclinkapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/vpclink"
 	policy "github.com/upbound/official-providers/provider-aws/internal/controller/appautoscaling/policy"
+	scheduledaction "github.com/upbound/official-providers/provider-aws/internal/controller/appautoscaling/scheduledaction"
 	target "github.com/upbound/official-providers/provider-aws/internal/controller/appautoscaling/target"
 	database "github.com/upbound/official-providers/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/official-providers/provider-aws/internal/controller/athena/datacatalog"
@@ -420,6 +421,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		stageapigatewayv2.Setup,
 		vpclinkapigatewayv2.Setup,
 		policy.Setup,
+		scheduledaction.Setup,
 		target.Setup,
 		database.Setup,
 		datacatalog.Setup,

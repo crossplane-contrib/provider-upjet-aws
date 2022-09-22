@@ -43,11 +43,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Amplify webhook can be imported using a webhook ID
 	"aws_amplify_webhook": config.IdentifierFromProvider,
 
-	// appautoscaling
-	//
-	// No import
-	"aws_appautoscaling_scheduled_action": config.IdentifierFromProvider,
-
 	// appconfig
 
 	// AppConfig Applications can be imported using their application ID,
