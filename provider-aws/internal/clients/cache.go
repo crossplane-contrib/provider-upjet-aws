@@ -100,29 +100,32 @@ func (c *CallerIdentityCache) GetCallerIdentity(ctx context.Context, cfg aws.Con
 		creds.SecretAccessKey,
 		creds.SessionToken,
 	)
-	if i, ok := c.cache[key]; ok {
+	c.mu.RLock()
+	o, ok := c.cache[key]
+	c.mu.RUnlock()
+	if ok {
 		// Because this is in the hot path of the execution, i.e. all CRs get
 		// here in every reconciliation, we don't want to block with a lock
 		// unless it's really necessary. Even an unnecessary cache invalidation
 		// is fine since the cost is one additional API call.
-		if time.Since(i.AccessedAt) > 10*time.Minute {
+		if time.Since(o.AccessedAt) > 10*time.Minute {
 			c.mu.Lock()
-			i.AccessedAt = time.Now()
+			o.AccessedAt = time.Now()
 			c.mu.Unlock()
 		}
-		return i.GetCallerIdentityOutput, nil
+		return o.GetCallerIdentityOutput, nil
 	}
 	i, err := c.getCallerIdentityFn(ctx, cfg)
 	if err != nil {
 		return nil, errors.Wrap(err, errGetCallerIdentityFailed)
 	}
 	c.mu.Lock()
+	defer c.mu.Unlock()
 	c.makeRoom()
 	c.cache[key] = &callerIdentityCacheEntry{
 		AccessedAt:              time.Now(),
 		GetCallerIdentityOutput: i,
 	}
-	c.mu.Unlock()
 	return i, nil
 }
 
