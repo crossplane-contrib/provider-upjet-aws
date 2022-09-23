@@ -226,8 +226,7 @@ spec:
                           items:
                             properties:
                               hostName:
-                                description: The host name to use in the redirect
-                                  request.
+                                description: Name of the host where requests are redirected.
                                 type: string
                               httpRedirectCode:
                                 description: The HTTP redirect code to use on the

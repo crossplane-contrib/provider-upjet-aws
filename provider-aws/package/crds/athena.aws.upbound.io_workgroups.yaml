@@ -65,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   configuration:
+                    description: Configuration block with various settings for the
+                      workgroup. Documented below.
                     items:
                       properties:
                         bytesScannedCutoffPerQuery:
@@ -79,6 +81,9 @@ spec:
                             to true.
                           type: boolean
                         engineVersion:
+                          description: Configuration block for the Athena Engine Versioning.
+                            For more information, see Athena Engine Versioning. See
+                            Engine Version below.
                           items:
                             properties:
                               selectedEngineVersion:
@@ -448,9 +453,14 @@ spec:
                     description: Amazon Resource Name (ARN) of the workgroup
                     type: string
                   configuration:
+                    description: Configuration block with various settings for the
+                      workgroup. Documented below.
                     items:
                       properties:
                         engineVersion:
+                          description: Configuration block for the Athena Engine Versioning.
+                            For more information, see Athena Engine Versioning. See
+                            Engine Version below.
                           items:
                             properties:
                               effectiveEngineVersion:

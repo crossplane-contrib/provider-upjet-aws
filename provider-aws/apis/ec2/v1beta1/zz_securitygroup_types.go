@@ -18,8 +18,10 @@ type SecurityGroupEgressObservation struct {
 	// List of CIDR blocks.
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
 
+	// Security group description. Cannot be "". NOTE: This field maps to the AWS GroupDescription attribute, for which there is no Update API. If you'd like to classify your security groups in a way that can be updated, use tags.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Start port (or ICMP type number if protocol is icmp or icmpv6).
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// List of IPv6 CIDR blocks.
@@ -28,11 +30,13 @@ type SecurityGroupEgressObservation struct {
 	// List of Prefix List IDs.
 	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
 
+	// Protocol. If you select a protocol of -1 (semantically equivalent to all, which is not a valid value here), you must specify a from_port and to_port equal to 0.  The supported values are defined in the IpProtocol argument on the IpPermission API reference.12.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// List of security group Group Names if using EC2-Classic, or Group IDs if using a VPC.
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
+	// Whether the security group itself will be added as a source to this ingress rule.
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
 
 	// End range port (or ICMP code if protocol is icmp).
@@ -47,8 +51,10 @@ type SecurityGroupIngressObservation struct {
 	// List of CIDR blocks.
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
 
+	// Security group description. Cannot be "". NOTE: This field maps to the AWS GroupDescription attribute, for which there is no Update API. If you'd like to classify your security groups in a way that can be updated, use tags.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Start port (or ICMP type number if protocol is icmp or icmpv6).
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// List of IPv6 CIDR blocks.
@@ -57,11 +63,13 @@ type SecurityGroupIngressObservation struct {
 	// List of Prefix List IDs.
 	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
 
+	// Protocol. If you select a protocol of -1 (semantically equivalent to all, which is not a valid value here), you must specify a from_port and to_port equal to 0.  The supported values are defined in the IpProtocol argument on the IpPermission API reference.12.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// List of security group Group Names if using EC2-Classic, or Group IDs if using a VPC.
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
+	// Whether the security group itself will be added as a source to this ingress rule.
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
 
 	// End range port (or ICMP code if protocol is icmp).
@@ -94,6 +102,7 @@ type SecurityGroupObservation struct {
 
 type SecurityGroupParameters struct {
 
+	// Security group description. Cannot be "". NOTE: This field maps to the AWS GroupDescription attribute, for which there is no Update API. If you'd like to classify your security groups in a way that can be updated, use tags.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

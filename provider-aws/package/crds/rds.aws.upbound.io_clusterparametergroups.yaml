@@ -83,6 +83,7 @@ spec:
                             and you will need to specify "pending-reboot" here.'
                           type: string
                         name:
+                          description: The name of the DB cluster parameter group.
                           type: string
                         value:
                           description: The value of the DB parameter.

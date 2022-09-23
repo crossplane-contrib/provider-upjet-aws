@@ -289,6 +289,8 @@ spec:
                     items:
                       properties:
                         name:
+                          description: Friendly name of the role. See IAM Identifiers
+                            for more information.
                           type: string
                         policy:
                           description: Policy document as a JSON formatted string.

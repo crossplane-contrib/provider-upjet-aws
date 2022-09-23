@@ -16,7 +16,7 @@ require (
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.17.0
 	github.com/pkg/errors v0.9.1
 	github.com/upbound/official-providers/updoc v0.0.0-00010101000000-000000000000
-	github.com/upbound/upjet v0.6.1-0.20220912163839-4bae257367da
+	github.com/upbound/upjet v0.6.1-0.20220926102814-ae77d3dd4c15
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.24.0
 	k8s.io/client-go v0.24.0

@@ -174,14 +174,27 @@ spec:
                     items:
                       properties:
                         dataTraceEnabled:
+                          description: Whether data trace logging is enabled for the
+                            default route. Affects the log entries pushed to Amazon
+                            CloudWatch Logs. Defaults to false. Supported only for
+                            WebSocket APIs.
                           type: boolean
                         detailedMetricsEnabled:
+                          description: Whether detailed metrics are enabled for the
+                            default route. Defaults to false.
                           type: boolean
                         loggingLevel:
+                          description: 'The logging level for the default route. Affects
+                            the log entries pushed to Amazon CloudWatch Logs. Valid
+                            values: ERROR, INFO, OFF. Defaults to OFF. Supported only
+                            for WebSocket APIs.'
                           type: string
                         throttlingBurstLimit:
+                          description: The throttling burst limit for the default
+                            route.
                           type: number
                         throttlingRateLimit:
+                          description: The throttling rate limit for the default route.
                           type: number
                       type: object
                     type: array
@@ -275,17 +288,30 @@ spec:
                     items:
                       properties:
                         dataTraceEnabled:
+                          description: Whether data trace logging is enabled for the
+                            default route. Affects the log entries pushed to Amazon
+                            CloudWatch Logs. Defaults to false. Supported only for
+                            WebSocket APIs.
                           type: boolean
                         detailedMetricsEnabled:
+                          description: Whether detailed metrics are enabled for the
+                            default route. Defaults to false.
                           type: boolean
                         loggingLevel:
+                          description: 'The logging level for the default route. Affects
+                            the log entries pushed to Amazon CloudWatch Logs. Valid
+                            values: ERROR, INFO, OFF. Defaults to OFF. Supported only
+                            for WebSocket APIs.'
                           type: string
                         routeKey:
                           description: Route key.
                           type: string
                         throttlingBurstLimit:
+                          description: The throttling burst limit for the default
+                            route.
                           type: number
                         throttlingRateLimit:
+                          description: The throttling rate limit for the default route.
                           type: number
                       required:
                       - routeKey

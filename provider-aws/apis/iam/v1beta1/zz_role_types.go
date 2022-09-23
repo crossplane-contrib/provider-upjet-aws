@@ -14,6 +14,8 @@ import (
 )
 
 type InlinePolicyObservation struct {
+
+	// Friendly name of the role. See IAM Identifiers for more information.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Policy document as a JSON formatted string.

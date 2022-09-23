@@ -52,10 +52,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowVersionUpgrade *bool `json:"allowVersionUpgrade,omitempty" tf:"allow_version_upgrade,omitempty"`
 
-	// The number of days to retain automated snapshots in the destination region after they are copied from the source region. Defaults to 7.
+	// The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with create-cluster-snapshot. Default is 1.
 	// +kubebuilder:validation:Optional
 	AutomatedSnapshotRetentionPeriod *float64 `json:"automatedSnapshotRetentionPeriod,omitempty" tf:"automated_snapshot_retention_period,omitempty"`
 
+	// The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency. Can only be changed if availability_zone_relocation_enabled is true.
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
@@ -63,6 +64,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZoneRelocationEnabled *bool `json:"availabilityZoneRelocationEnabled,omitempty" tf:"availability_zone_relocation_enabled,omitempty"`
 
+	// The name of the parameter group to be associated with this cluster.
 	// +kubebuilder:validation:Optional
 	ClusterParameterGroupName *string `json:"clusterParameterGroupName,omitempty" tf:"cluster_parameter_group_name,omitempty"`
 
@@ -74,18 +76,25 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterRevisionNumber *string `json:"clusterRevisionNumber,omitempty" tf:"cluster_revision_number,omitempty"`
 
+	// A list of security groups to be associated with this cluster.
 	// +kubebuilder:validation:Optional
 	ClusterSecurityGroups []*string `json:"clusterSecurityGroups,omitempty" tf:"cluster_security_groups,omitempty"`
 
+	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
 	// +kubebuilder:validation:Optional
 	ClusterSubnetGroupName *string `json:"clusterSubnetGroupName,omitempty" tf:"cluster_subnet_group_name,omitempty"`
 
+	// The cluster type to use. Either single-node or multi-node.
 	// +kubebuilder:validation:Optional
 	ClusterType *string `json:"clusterType,omitempty" tf:"cluster_type,omitempty"`
 
+	// The version of the Amazon Redshift engine software that you want to deploy on the cluster.
+	// The version selected runs on all the nodes in the cluster.
 	// +kubebuilder:validation:Optional
 	ClusterVersion *string `json:"clusterVersion,omitempty" tf:"cluster_version,omitempty"`
 
+	// The name of the first database to be created when the cluster is created.
+	// If you do not provide a name, Amazon Redshift will create a default database called dev.
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
@@ -93,6 +102,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ElasticIP *string `json:"elasticIp,omitempty" tf:"elastic_ip,omitempty"`
 
+	// If true , the data in the cluster is encrypted at rest.
 	// +kubebuilder:validation:Optional
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
@@ -150,6 +160,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
+	// The node type to be provisioned for the cluster.
 	// +kubebuilder:validation:Required
 	NodeType *string `json:"nodeType" tf:"node_type,omitempty"`
 
@@ -161,9 +172,15 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	OwnerAccount *string `json:"ownerAccount,omitempty" tf:"owner_account,omitempty"`
 
+	// The port number on which the cluster accepts incoming connections.
+	// The cluster is accessible only via the JDBC and ODBC connection strings.
+	// Part of the connection string requires the port on which the cluster will listen for incoming connections.
+	// Default port is 5439.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// The weekly time range (in UTC) during which automated cluster maintenance can occur.
+	// Format: ddd:hh24:mi-ddd:hh24:mi
 	// +kubebuilder:validation:Optional
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
@@ -204,6 +221,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
+	// A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector

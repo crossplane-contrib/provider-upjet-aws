@@ -76,6 +76,7 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	InsufficientDataHealthStatus *string `json:"insufficientDataHealthStatus,omitempty" tf:"insufficient_data_health_status,omitempty"`
 
+	// A boolean value that indicates whether the status of health check should be inverted. For example, if a health check is healthy but Inverted is True , then Route 53 considers the health check to be unhealthy.
 	// +kubebuilder:validation:Optional
 	InvertHealthcheck *bool `json:"invertHealthcheck,omitempty" tf:"invert_healthcheck,omitempty"`
 

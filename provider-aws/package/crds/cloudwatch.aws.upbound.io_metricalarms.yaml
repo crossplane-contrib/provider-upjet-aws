@@ -94,6 +94,8 @@ spec:
                   dimensions:
                     additionalProperties:
                       type: string
+                    description: The dimensions for the alarm's associated metric.  For
+                      the list of available dimensions see the AWS documentation here.
                     type: object
                   evaluateLowSampleCountPercentiles:
                     description: 'Used only for alarms based on percentiles. If you
@@ -120,6 +122,8 @@ spec:
                       type: string
                     type: array
                   metricName:
+                    description: The name for the alarm's associated metric. See docs
+                      for supported metrics.
                     type: string
                   metricQuery:
                     description: Enables you to create an alarm based on a metric
@@ -141,6 +145,12 @@ spec:
                             Guide.
                           type: string
                         id:
+                          description: A short name used to tie this object to the
+                            results in the response. If you are performing math expressions
+                            on this set of data, this name represents that data and
+                            can serve as a variable in the mathematical expression.
+                            The valid characters are letters, numbers, and underscore.
+                            The first character must be a lowercase letter.
                           type: string
                         label:
                           description: A human-readable label for this metric or expression.
@@ -157,18 +167,29 @@ spec:
                               dimensions:
                                 additionalProperties:
                                   type: string
+                                description: The dimensions for this metric.  For
+                                  the list of available dimensions see the AWS documentation
+                                  here.
                                 type: object
                               metricName:
+                                description: The name for this metric. See docs for
+                                  supported metrics.
                                 type: string
                               namespace:
+                                description: The namespace for this metric. See docs
+                                  for the list of namespaces. See docs for supported
+                                  metrics.
                                 type: string
                               period:
+                                description: The period in seconds over which the
+                                  specified stat is applied.
                                 type: number
                               stat:
                                 description: The statistic to apply to this metric.
                                   See docs for supported statistics.
                                 type: string
                               unit:
+                                description: The unit for this metric.
                                 type: string
                             required:
                             - metricName
@@ -185,6 +206,9 @@ spec:
                       type: object
                     type: array
                   namespace:
+                    description: The namespace for the alarm's associated metric.
+                      See docs for the list of namespaces. See docs for supported
+                      metrics.
                     type: string
                   okActions:
                     description: The list of actions to execute when this alarm transitions
@@ -194,6 +218,8 @@ spec:
                       type: string
                     type: array
                   period:
+                    description: The period in seconds over which the specified statistic
+                      is applied.
                     type: number
                   region:
                     description: Region is the region you'd like your resource to
@@ -228,6 +254,7 @@ spec:
                       and notBreaching. Defaults to missing.'
                     type: string
                   unit:
+                    description: The unit for the alarm's associated metric.
                     type: string
                 required:
                 - comparisonOperator
@@ -414,6 +441,7 @@ spec:
                     description: The ARN of the CloudWatch Metric Alarm.
                     type: string
                   id:
+                    description: The ID of the health check.
                     type: string
                   tagsAll:
                     additionalProperties:

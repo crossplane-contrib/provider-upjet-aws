@@ -89,8 +89,13 @@ spec:
                               authenticationRequestExtraParams:
                                 additionalProperties:
                                   type: string
+                                description: 'Query parameters to include in the redirect
+                                  request to the authorization endpoint. Max: 10.
+                                  Detailed below.'
                                 type: object
                               onUnauthenticatedRequest:
+                                description: Behavior if the user is not authenticated.
+                                  Valid values are deny, allow and authenticate.
                                 type: string
                               scope:
                                 description: Set of user claims to be requested from
@@ -129,6 +134,8 @@ spec:
                               authenticationRequestExtraParams:
                                 additionalProperties:
                                   type: string
+                                description: 'Query parameters to include in the redirect
+                                  request to the authorization endpoint. Max: 10.'
                                 type: object
                               authorizationEndpoint:
                                 description: Authorization endpoint of the IdP.
@@ -157,6 +164,8 @@ spec:
                                 description: OIDC issuer identifier of the IdP.
                                 type: string
                               onUnauthenticatedRequest:
+                                description: 'Behavior if the user is not authenticated.
+                                  Valid values: deny, allow and authenticate'
                                 type: string
                               scope:
                                 description: Set of user claims to be requested from
@@ -199,6 +208,8 @@ spec:
                                 description: Message body.
                                 type: string
                               statusCode:
+                                description: HTTP response code. Valid values are
+                                  2XX, 4XX, or 5XX.
                                 type: string
                             required:
                             - contentType
@@ -239,6 +250,7 @@ spec:
                                 items:
                                   properties:
                                     arn:
+                                      description: ARN of the target group.
                                       type: string
                                     arnRef:
                                       description: Reference to a LBTargetGroup to
@@ -355,8 +367,12 @@ spec:
                                   Defaults to /#{path}.'
                                 type: string
                               port:
+                                description: 'Port. Specify a value from 1 to 65535
+                                  or #{port}. Defaults to #{port}.'
                                 type: string
                               protocol:
+                                description: 'Protocol. Valid values are HTTP, HTTPS,
+                                  or #{protocol}. Defaults to #{protocol}.'
                                 type: string
                               query:
                                 description: 'Query parameters, URL-encoded when necessary,
@@ -364,6 +380,8 @@ spec:
                                   "?". Defaults to #{query}.'
                                 type: string
                               statusCode:
+                                description: HTTP redirect code. The redirect is either
+                                  permanent (HTTP_301) or temporary (HTTP_302).
                                 type: string
                             required:
                             - statusCode
@@ -536,8 +554,16 @@ spec:
                         type: object
                     type: object
                   port:
+                    description: Port on which the load balancer is listening. Not
+                      valid for Gateway Load Balancers.
                     type: number
                   protocol:
+                    description: Protocol for connections from clients to the load
+                      balancer. For Application Load Balancers, valid values are HTTP
+                      and HTTPS, with a default of HTTP. For Network Load Balancers,
+                      valid values are TCP, TLS, UDP, and TCP_UDP. Not valid to use
+                      UDP or TCP_UDP if dual-stack mode is enabled. Not valid for
+                      Gateway Load Balancers.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -735,6 +761,7 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: ARN of the listener (matches id).
                     type: string
                   id:
                     description: ARN of the listener (matches arn).

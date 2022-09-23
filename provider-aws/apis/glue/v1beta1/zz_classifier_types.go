@@ -78,6 +78,7 @@ type GrokClassifierObservation struct {
 
 type GrokClassifierParameters struct {
 
+	// An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on.
 	// +kubebuilder:validation:Required
 	Classification *string `json:"classification" tf:"classification,omitempty"`
 
@@ -105,6 +106,7 @@ type XMLClassifierObservation struct {
 
 type XMLClassifierParameters struct {
 
+	// An identifier of the data format that the classifier matches.
 	// +kubebuilder:validation:Required
 	Classification *string `json:"classification" tf:"classification,omitempty"`
 

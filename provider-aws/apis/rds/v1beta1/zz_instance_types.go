@@ -417,7 +417,7 @@ type S3ImportObservation struct {
 
 type S3ImportParameters struct {
 
-	// The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
+	// The bucket name where your backup is stored
 	// +kubebuilder:validation:Required
 	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
 
@@ -429,19 +429,11 @@ type S3ImportParameters struct {
 	// +kubebuilder:validation:Required
 	IngestionRole *string `json:"ingestionRole" tf:"ingestion_role,omitempty"`
 
-	// The database engine to use.  For supported values, see the Engine parameter in API action CreateDBInstance. Cannot be specified for a replica.
-	// Note that for Amazon Aurora instances the engine must match the DB cluster's engine'.
-	// For information on the difference between the available Aurora MySQL engines
-	// see Comparison between Aurora MySQL 1 and Aurora MySQL 2
-	// in the Amazon RDS User Guide.
+	// Source engine for the backup
 	// +kubebuilder:validation:Required
 	SourceEngine *string `json:"sourceEngine" tf:"source_engine,omitempty"`
 
-	// The engine version to use. If auto_minor_version_upgrade
-	// is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10).
-	// The actual engine version used is returned in the attribute engine_version_actual, see Attributes Reference below.
-	// For supported values, see the EngineVersion parameter in API action CreateDBInstance.
-	// Note that for Amazon Aurora instances the engine version must match the DB cluster's engine version'. Cannot be specified for a replica.
+	// Version of the source engine used to make the backup
 	// +kubebuilder:validation:Required
 	SourceEngineVersion *string `json:"sourceEngineVersion" tf:"source_engine_version,omitempty"`
 }

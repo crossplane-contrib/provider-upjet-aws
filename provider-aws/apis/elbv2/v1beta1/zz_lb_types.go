@@ -48,8 +48,7 @@ type LBObservation struct {
 	// The ARN suffix for use with CloudWatch Metrics.
 	ArnSuffix *string `json:"arnSuffix,omitempty" tf:"arn_suffix,omitempty"`
 
-	// The name of the LB. This name must be unique within your AWS account, can have a maximum of 32 characters,
-	// must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
+	// The DNS name of the load balancer.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
 	// The ARN of the load balancer (matches arn).
@@ -62,6 +61,7 @@ type LBObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// The ARN of the load balancer (matches arn).
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record).

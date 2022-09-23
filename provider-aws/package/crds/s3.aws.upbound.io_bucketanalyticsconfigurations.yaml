@@ -148,6 +148,7 @@ spec:
                     items:
                       properties:
                         prefix:
+                          description: Object prefix for filtering.
                           type: string
                         tags:
                           additionalProperties:
@@ -288,6 +289,7 @@ spec:
                                               Default value: CSV.'
                                             type: string
                                           prefix:
+                                            description: Object prefix for filtering.
                                             type: string
                                         type: object
                                       type: array

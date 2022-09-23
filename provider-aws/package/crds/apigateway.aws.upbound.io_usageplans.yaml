@@ -65,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiStages:
+                    description: The associated API stages of the usage plan.
                     items:
                       properties:
                         apiId:
@@ -255,12 +256,17 @@ spec:
                       type: object
                     type: array
                   description:
+                    description: The description of a usage plan.
                     type: string
                   name:
+                    description: The name of the usage plan.
                     type: string
                   productCode:
+                    description: The AWS Marketplace product identifier to associate
+                      with the usage plan as a SaaS product on AWS Marketplace.
                     type: string
                   quotaSettings:
+                    description: The quota settings of the usage plan.
                     items:
                       properties:
                         limit:
@@ -292,6 +298,7 @@ spec:
                       matching keys will overwrite those defined at the provider-level.
                     type: object
                   throttleSettings:
+                    description: The throttling limits of the usage plan.
                     items:
                       properties:
                         burstLimit:

@@ -196,6 +196,9 @@ spec:
                           items:
                             properties:
                               eventType:
+                                description: 'The specific event to trigger this function.
+                                  Valid values: viewer-request, origin-request, viewer-response,
+                                  origin-response'
                                 type: string
                               functionArn:
                                 description: ARN of the Cloudfront function.
@@ -211,6 +214,9 @@ spec:
                           items:
                             properties:
                               eventType:
+                                description: 'The specific event to trigger this function.
+                                  Valid values: viewer-request, origin-request, viewer-response,
+                                  origin-response'
                                 type: string
                               includeBody:
                                 description: 'When set to true it exposes the request
@@ -262,10 +268,18 @@ spec:
                             default cache behavior.
                           type: string
                         trustedKeyGroups:
+                          description: A list of key group IDs that CloudFront can
+                            use to validate signed URLs or signed cookies. See the
+                            CloudFront User Guide for more information about this
+                            feature.
                           items:
                             type: string
                           type: array
                         trustedSigners:
+                          description: List of AWS account IDs (or self) that you
+                            want to allow to create signed URLs for private content.
+                            See the CloudFront User Guide for more information about
+                            this feature.
                           items:
                             type: string
                           type: array
@@ -287,6 +301,8 @@ spec:
                       example, index.html) when an end user requests the root URL.
                     type: string
                   enabled:
+                    description: Whether the distribution is enabled to accept end
+                      user requests for content.
                     type: boolean
                   httpVersion:
                     description: The maximum HTTP version to support on the distribution.
@@ -415,6 +431,9 @@ spec:
                           items:
                             properties:
                               eventType:
+                                description: 'The specific event to trigger this function.
+                                  Valid values: viewer-request, origin-request, viewer-response,
+                                  origin-response'
                                 type: string
                               functionArn:
                                 description: ARN of the Cloudfront function.
@@ -509,6 +528,9 @@ spec:
                           items:
                             properties:
                               eventType:
+                                description: 'The specific event to trigger this function.
+                                  Valid values: viewer-request, origin-request, viewer-response,
+                                  origin-response'
                                 type: string
                               includeBody:
                                 description: 'When set to true it exposes the request
@@ -644,10 +666,18 @@ spec:
                             default cache behavior.
                           type: string
                         trustedKeyGroups:
+                          description: A list of key group IDs that CloudFront can
+                            use to validate signed URLs or signed cookies. See the
+                            CloudFront User Guide for more information about this
+                            feature.
                           items:
                             type: string
                           type: array
                         trustedSigners:
+                          description: List of AWS account IDs (or self) that you
+                            want to allow to create signed URLs for private content.
+                            See the CloudFront User Guide for more information about
+                            this feature.
                           items:
                             type: string
                           type: array
@@ -739,10 +769,11 @@ spec:
                             type: object
                           type: array
                         domainName:
+                          description: The DNS domain name of either the S3 bucket,
+                            or web site of your custom origin.
                           type: string
                         originId:
-                          description: 'The identifier for the distribution. For example:
-                            EDFDVBD632BHDS5.'
+                          description: A unique identifier for the origin.
                           type: string
                         originPath:
                           description: An optional element that causes CloudFront
@@ -757,6 +788,8 @@ spec:
                           items:
                             properties:
                               enabled:
+                                description: Whether the distribution is enabled to
+                                  accept end user requests for content.
                                 type: boolean
                               originShieldRegion:
                                 description: The AWS Region for Origin Shield. To
@@ -893,16 +926,14 @@ spec:
                           items:
                             properties:
                               originId:
-                                description: 'The identifier for the distribution.
-                                  For example: EDFDVBD632BHDS5.'
+                                description: A unique identifier for the origin.
                                 type: string
                             required:
                             - originId
                             type: object
                           type: array
                         originId:
-                          description: 'The identifier for the distribution. For example:
-                            EDFDVBD632BHDS5.'
+                          description: A unique identifier for the origin.
                           type: string
                       required:
                       - failoverCriteria
@@ -1211,6 +1242,8 @@ spec:
                       updates to the distribution configuration.
                     type: string
                   domainName:
+                    description: The DNS domain name of either the S3 bucket, or web
+                      site of your custom origin.
                     type: string
                   etag:
                     description: 'The current version of the distribution''s information.
@@ -1244,11 +1277,17 @@ spec:
                       block.
                     type: object
                   trustedKeyGroups:
+                    description: A list of key group IDs that CloudFront can use to
+                      validate signed URLs or signed cookies. See the CloudFront User
+                      Guide for more information about this feature.
                     items:
                       properties:
                         enabled:
+                          description: Whether the distribution is enabled to accept
+                            end user requests for content.
                           type: boolean
                         items:
+                          description: List of nested attributes for each key group
                           items:
                             properties:
                               keyGroupId:
@@ -1256,6 +1295,7 @@ spec:
                                   the public keys
                                 type: string
                               keyPairIds:
+                                description: Set of CloudFront key pair IDs
                                 items:
                                   type: string
                                 type: array
@@ -1264,17 +1304,24 @@ spec:
                       type: object
                     type: array
                   trustedSigners:
+                    description: List of AWS account IDs (or self) that you want to
+                      allow to create signed URLs for private content. See the CloudFront
+                      User Guide for more information about this feature.
                     items:
                       properties:
                         enabled:
+                          description: Whether the distribution is enabled to accept
+                            end user requests for content.
                           type: boolean
                         items:
+                          description: List of nested attributes for each key group
                           items:
                             properties:
                               awsAccountNumber:
                                 description: AWS account ID or self
                                 type: string
                               keyPairIds:
+                                description: Set of CloudFront key pair IDs
                                 items:
                                   type: string
                                 type: array

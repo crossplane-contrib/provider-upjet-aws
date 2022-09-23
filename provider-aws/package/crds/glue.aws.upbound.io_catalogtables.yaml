@@ -65,9 +65,13 @@ spec:
               forProvider:
                 properties:
                   catalogId:
-                    description: Catalog ID, Database name and of the name table.
+                    description: ID of the Glue Catalog and database to create the
+                      table in. If omitted, this defaults to the AWS Account ID plus
+                      the database name.
                     type: string
                   databaseName:
+                    description: Name of the metadata database where the table metadata
+                      resides. For Hive compatibility, this must be all lowercase.
                     type: string
                   databaseNameRef:
                     description: Reference to a CatalogDatabase in glue to populate
@@ -153,6 +157,8 @@ spec:
                   parameters:
                     additionalProperties:
                       type: string
+                    description: Properties associated with this table, as a list
+                      of key-value pairs.
                     type: object
                   partitionIndex:
                     description: Configuration block for a maximum of 3 partition
@@ -182,8 +188,10 @@ spec:
                           description: Free-form text comment.
                           type: string
                         name:
+                          description: Name of the Partition Key.
                           type: string
                         type:
+                          description: Datatype of data in the Partition Key.
                           type: string
                       required:
                       - name
@@ -217,12 +225,16 @@ spec:
                                 description: Free-form text comment.
                                 type: string
                               name:
+                                description: Name of the Column.
                                 type: string
                               parameters:
                                 additionalProperties:
                                   type: string
+                                description: Key-value pairs defining properties associated
+                                  with the column.
                                 type: object
                               type:
+                                description: Datatype of data in the Column.
                                 type: string
                             required:
                             - name
@@ -252,6 +264,7 @@ spec:
                         parameters:
                           additionalProperties:
                             type: string
+                          description: User-supplied properties in key-value form.
                           type: object
                         schemaReference:
                           description: Object that references a schema stored in the
@@ -299,10 +312,13 @@ spec:
                           items:
                             properties:
                               name:
+                                description: Name of the SerDe.
                                 type: string
                               parameters:
                                 additionalProperties:
                                   type: string
+                                description: Map of initialization parameters for
+                                  the SerDe, in key-value form.
                                 type: object
                               serializationLibrary:
                                 description: Usually the class that implements the
@@ -369,11 +385,14 @@ spec:
                     items:
                       properties:
                         catalogId:
-                          description: Catalog ID, Database name and of the name table.
+                          description: ID of the Data Catalog in which the table resides.
                           type: string
                         databaseName:
+                          description: Name of the catalog database that contains
+                            the target table.
                           type: string
                         name:
+                          description: Name of the target table.
                           type: string
                       required:
                       - catalogId

@@ -1065,6 +1065,8 @@ spec:
                     items:
                       properties:
                         volumeId:
+                          description: ID of the volume. For example, the ID can be
+                            accessed like this, aws_instance.web.ebs_block_device.2.volume_id.
                           type: string
                       type: object
                     type: array
@@ -1117,6 +1119,8 @@ spec:
                           description: Device name, e.g., /dev/sdh or xvdh.
                           type: string
                         volumeId:
+                          description: ID of the volume. For example, the ID can be
+                            accessed like this, aws_instance.web.root_block_device.0.volume_id.
                           type: string
                       type: object
                     type: array

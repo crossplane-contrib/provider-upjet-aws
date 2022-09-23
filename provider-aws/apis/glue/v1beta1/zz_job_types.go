@@ -18,6 +18,7 @@ type CommandObservation struct {
 
 type CommandParameters struct {
 
+	// –  The name you assign to this job. It must be unique in your account.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

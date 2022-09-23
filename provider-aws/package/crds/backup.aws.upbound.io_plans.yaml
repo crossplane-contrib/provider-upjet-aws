@@ -114,6 +114,9 @@ spec:
                                   copied backup.
                                 type: string
                               lifecycle:
+                                description: The lifecycle defines when a protected
+                                  resource is transitioned to cold storage and when
+                                  it expires.  Fields documented below.
                                 items:
                                   properties:
                                     coldStorageAfter:
@@ -136,6 +139,9 @@ spec:
                           description: Enable continuous backups for supported resources.
                           type: boolean
                         lifecycle:
+                          description: The lifecycle defines when a protected resource
+                            is transitioned to cold storage and when it expires.  Fields
+                            documented below.
                           items:
                             properties:
                               coldStorageAfter:

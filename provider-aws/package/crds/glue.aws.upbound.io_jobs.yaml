@@ -68,6 +68,8 @@ spec:
                     items:
                       properties:
                         name:
+                          description: –  The name you assign to this job. It must
+                            be unique in your account.
                           type: string
                         pythonVersion:
                           description: The Python version being used to execute a

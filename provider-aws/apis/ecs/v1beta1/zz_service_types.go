@@ -60,15 +60,15 @@ type LoadBalancerObservation struct {
 
 type LoadBalancerParameters struct {
 
-	// Container name value, already specified in the task definition, to be used for your service discovery service.
+	// Name of the container to associate with the load balancer (as it appears in a container definition).
 	// +kubebuilder:validation:Required
 	ContainerName *string `json:"containerName" tf:"container_name,omitempty"`
 
-	// Port value, already specified in the task definition, to be used for your service discovery service.
+	// Port on the container to associate with the load balancer.
 	// +kubebuilder:validation:Required
 	ContainerPort *float64 `json:"containerPort" tf:"container_port,omitempty"`
 
-	// Name of the service (up to 255 letters, numbers, hyphens, and underscores)
+	// Name of the ELB (Classic) to associate with the service.
 	// +kubebuilder:validation:Optional
 	ELBName *string `json:"elbName,omitempty" tf:"elb_name,omitempty"`
 
@@ -129,7 +129,7 @@ type OrderedPlacementStrategyParameters struct {
 	// +kubebuilder:validation:Optional
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
-	// Type of deployment controller. Valid values: CODE_DEPLOY, ECS, EXTERNAL. Default: ECS.
+	// Type of placement strategy. Must be one of: binpack, random, or spread
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -143,7 +143,7 @@ type PlacementConstraintsParameters struct {
 	// +kubebuilder:validation:Optional
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
-	// Type of deployment controller. Valid values: CODE_DEPLOY, ECS, EXTERNAL. Default: ECS.
+	// Type of constraint. The only valid values at this time are memberOf and distinctInstance.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -286,7 +286,7 @@ type ServiceRegistriesObservation struct {
 
 type ServiceRegistriesParameters struct {
 
-	// Name of the service (up to 255 letters, numbers, hyphens, and underscores)
+	// Container name value, already specified in the task definition, to be used for your service discovery service.
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 

@@ -231,6 +231,12 @@ spec:
                       by EKS.
                     type: string
                   vpcConfig:
+                    description: Configuration block for the VPC associated with your
+                      cluster. Amazon EKS VPC resources have specific requirements
+                      to work properly with Kubernetes. For more information, see
+                      Cluster VPC Considerations and Cluster Security Group Considerations
+                      in the Amazon EKS User Guide. Detailed below. Also contains
+                      attributes detailed in the Attributes section.
                     items:
                       properties:
                         endpointPrivateAccess:
@@ -666,6 +672,12 @@ spec:
                       inherited from the provider default_tags configuration block.
                     type: object
                   vpcConfig:
+                    description: Configuration block for the VPC associated with your
+                      cluster. Amazon EKS VPC resources have specific requirements
+                      to work properly with Kubernetes. For more information, see
+                      Cluster VPC Considerations and Cluster Security Group Considerations
+                      in the Amazon EKS User Guide. Detailed below. Also contains
+                      attributes detailed in the Attributes section.
                     items:
                       properties:
                         clusterSecurityGroupId:

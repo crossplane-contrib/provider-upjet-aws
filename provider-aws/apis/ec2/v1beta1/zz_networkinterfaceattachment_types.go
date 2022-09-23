@@ -30,6 +30,7 @@ type NetworkInterfaceAttachmentParameters struct {
 	// +kubebuilder:validation:Required
 	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
 
+	// Instance ID to attach.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -43,6 +44,7 @@ type NetworkInterfaceAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
+	// ENI ID to attach.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

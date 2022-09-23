@@ -80,6 +80,10 @@ spec:
                     items:
                       properties:
                         permissions:
+                          description: List of permissions that are granted to the
+                            principal. Valid values may include ALL, SELECT, ALTER,
+                            DROP, DELETE, INSERT, DESCRIBE, and CREATE_TABLE. For
+                            more details, see Lake Formation Permissions Reference.
                           items:
                             type: string
                           type: array
@@ -97,6 +101,10 @@ spec:
                     items:
                       properties:
                         permissions:
+                          description: List of permissions that are granted to the
+                            principal. Valid values may include ALL, SELECT, ALTER,
+                            DROP, DELETE, INSERT, and DESCRIBE. For more details,
+                            see Lake Formation Permissions Reference.
                           items:
                             type: string
                           type: array

@@ -42,10 +42,11 @@ type CustomEmailSenderObservation struct {
 
 type CustomEmailSenderParameters struct {
 
-	// ARN of the user pool.
+	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send email notifications to users.
 	// +kubebuilder:validation:Required
 	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
 
+	// The Lambda version represents the signature of the "request" attribute in the "event" information Amazon Cognito passes to your custom email Lambda function. The only supported value is V1_0.
 	// +kubebuilder:validation:Required
 	LambdaVersion *string `json:"lambdaVersion" tf:"lambda_version,omitempty"`
 }
@@ -55,10 +56,11 @@ type CustomSMSSenderObservation struct {
 
 type CustomSMSSenderParameters struct {
 
-	// ARN of the user pool.
+	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
 	// +kubebuilder:validation:Required
 	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
 
+	// The Lambda version represents the signature of the "request" attribute in the "event" information Amazon Cognito passes to your custom SMS Lambda function. The only supported value is V1_0.
 	// +kubebuilder:validation:Required
 	LambdaVersion *string `json:"lambdaVersion" tf:"lambda_version,omitempty"`
 }
@@ -108,12 +110,15 @@ type InviteMessageTemplateObservation struct {
 
 type InviteMessageTemplateParameters struct {
 
+	// Message template for email messages. Must contain {username} and {####} placeholders, for username and temporary password, respectively.
 	// +kubebuilder:validation:Optional
 	EmailMessage *string `json:"emailMessage,omitempty" tf:"email_message,omitempty"`
 
+	// Subject line for email messages.
 	// +kubebuilder:validation:Optional
 	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
 
+	// Message template for SMS messages. Must contain {username} and {####} placeholders, for username and temporary password, respectively.
 	// +kubebuilder:validation:Optional
 	SMSMessage *string `json:"smsMessage,omitempty" tf:"sms_message,omitempty"`
 }
@@ -225,6 +230,7 @@ type RecoveryMechanismObservation struct {
 
 type RecoveryMechanismParameters struct {
 
+	// Name of the user pool.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -274,6 +280,7 @@ type SchemaParameters struct {
 	// +kubebuilder:validation:Optional
 	Mutable *bool `json:"mutable,omitempty" tf:"mutable,omitempty"`
 
+	// Name of the user pool.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -396,6 +403,7 @@ type UserPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	MfaConfiguration *string `json:"mfaConfiguration,omitempty" tf:"mfa_configuration,omitempty"`
 
+	// Name of the user pool.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -468,6 +476,7 @@ type VerificationMessageTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultEmailOption *string `json:"defaultEmailOption,omitempty" tf:"default_email_option,omitempty"`
 
+	// Email message template. Must contain the {####} placeholder. Conflicts with email_verification_message argument.
 	// +kubebuilder:validation:Optional
 	EmailMessage *string `json:"emailMessage,omitempty" tf:"email_message,omitempty"`
 
@@ -475,6 +484,7 @@ type VerificationMessageTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	EmailMessageByLink *string `json:"emailMessageByLink,omitempty" tf:"email_message_by_link,omitempty"`
 
+	// Subject line for the email message template. Conflicts with email_verification_subject argument.
 	// +kubebuilder:validation:Optional
 	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
 
@@ -482,6 +492,7 @@ type VerificationMessageTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	EmailSubjectByLink *string `json:"emailSubjectByLink,omitempty" tf:"email_subject_by_link,omitempty"`
 
+	// SMS message template. Must contain the {####} placeholder. Conflicts with sms_verification_message argument.
 	// +kubebuilder:validation:Optional
 	SMSMessage *string `json:"smsMessage,omitempty" tf:"sms_message,omitempty"`
 }

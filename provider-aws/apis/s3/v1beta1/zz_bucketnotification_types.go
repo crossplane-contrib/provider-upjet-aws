@@ -62,6 +62,7 @@ type LambdaFunctionObservation struct {
 
 type LambdaFunctionParameters struct {
 
+	// Event for which to send notifications.
 	// +kubebuilder:validation:Required
 	Events []*string `json:"events" tf:"events,omitempty"`
 
@@ -87,6 +88,7 @@ type QueueObservation struct {
 
 type QueueParameters struct {
 
+	// Specifies event for which to send notifications.
 	// +kubebuilder:validation:Required
 	Events []*string `json:"events" tf:"events,omitempty"`
 
@@ -122,6 +124,7 @@ type TopicObservation struct {
 
 type TopicParameters struct {
 
+	// Event for which to send notifications.
 	// +kubebuilder:validation:Required
 	Events []*string `json:"events" tf:"events,omitempty"`
 

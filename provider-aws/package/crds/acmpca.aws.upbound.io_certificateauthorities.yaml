@@ -169,6 +169,8 @@ spec:
                       type: object
                     type: array
                   enabled:
+                    description: Whether the certificate authority is enabled or disabled.
+                      Defaults to true.
                     type: boolean
                   permanentDeletionTimeInDays:
                     description: The number of days to make a CA restorable after
@@ -199,6 +201,9 @@ spec:
                                   to 253 characters in length.
                                 type: string
                               enabled:
+                                description: Boolean value that specifies whether
+                                  certificate revocation lists (CRLs) are enabled.
+                                  Defaults to false.
                                 type: boolean
                               expirationInDays:
                                 description: Number of days until a certificate expires.

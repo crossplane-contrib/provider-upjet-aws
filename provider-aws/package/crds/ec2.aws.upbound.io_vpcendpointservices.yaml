@@ -313,6 +313,7 @@ spec:
                             needs to create.
                           type: string
                         state:
+                          description: The state of the VPC endpoint service.
                           type: string
                         type:
                           description: Endpoint service verification type, for example
@@ -331,6 +332,7 @@ spec:
                     description: The service type, Gateway or Interface.
                     type: string
                   state:
+                    description: The state of the VPC endpoint service.
                     type: string
                   tagsAll:
                     additionalProperties:

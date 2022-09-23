@@ -48,6 +48,7 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
+	// A domain name for which the certificate should be issued
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
@@ -82,6 +83,8 @@ type CertificateParameters struct {
 }
 
 type DomainValidationOptionsObservation struct {
+
+	// A fully qualified domain name (FQDN) in the certificate.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// The name of the DNS record to create to validate the certificate
@@ -112,6 +115,7 @@ type ValidationOptionObservation struct {
 
 type ValidationOptionParameters struct {
 
+	// A fully qualified domain name (FQDN) in the certificate.
 	// +kubebuilder:validation:Required
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 

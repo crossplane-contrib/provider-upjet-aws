@@ -96,8 +96,8 @@ spec:
                                         is URLEncoded.
                                       type: string
                                     profileId:
-                                      description: 'The identifier for the Field Level
-                                        Encryption Config. For example: K3D5EWEUDCCXON.'
+                                      description: The profile ID for a field-level
+                                        encryption content type-profile mapping.
                                       type: string
                                   required:
                                   - contentType
@@ -141,8 +141,8 @@ spec:
                                 items:
                                   properties:
                                     profileId:
-                                      description: 'The identifier for the Field Level
-                                        Encryption Config. For example: K3D5EWEUDCCXON.'
+                                      description: The profile ID for a field-level
+                                        encryption content type-profile mapping.
                                       type: string
                                     profileIdRef:
                                       description: Reference to a FieldLevelEncryptionProfile

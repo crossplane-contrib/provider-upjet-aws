@@ -28,10 +28,11 @@ type CatalogTableObservation struct {
 
 type CatalogTableParameters struct {
 
-	// Catalog ID, Database name and of the name table.
+	// ID of the Glue Catalog and database to create the table in. If omitted, this defaults to the AWS Account ID plus the database name.
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
+	// Name of the metadata database where the table metadata resides. For Hive compatibility, this must be all lowercase.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
@@ -52,6 +53,7 @@ type CatalogTableParameters struct {
 	// +kubebuilder:validation:Optional
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
+	// Properties associated with this table, as a list of key-value pairs.
 	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -102,12 +104,15 @@ type ColumnsParameters struct {
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// Name of the Column.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Key-value pairs defining properties associated with the column.
 	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// Datatype of data in the Column.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -136,9 +141,11 @@ type PartitionKeysParameters struct {
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// Name of the Partition Key.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Datatype of data in the Partition Key.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -184,9 +191,11 @@ type SerDeInfoObservation struct {
 
 type SerDeInfoParameters struct {
 
+	// Name of the SerDe.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Map of initialization parameters for the SerDe, in key-value form.
 	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -260,6 +269,7 @@ type StorageDescriptorParameters struct {
 	// +kubebuilder:validation:Optional
 	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
 
+	// User-supplied properties in key-value form.
 	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -289,13 +299,15 @@ type TargetTableObservation struct {
 
 type TargetTableParameters struct {
 
-	// Catalog ID, Database name and of the name table.
+	// ID of the Data Catalog in which the table resides.
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
+	// Name of the catalog database that contains the target table.
 	// +kubebuilder:validation:Required
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
+	// Name of the target table.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }

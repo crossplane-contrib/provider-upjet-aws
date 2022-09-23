@@ -48,6 +48,7 @@ type FileSystemConfigObservation struct {
 
 type FileSystemConfigParameters struct {
 
+	// Amazon Resource Name (ARN) of the Amazon EFS Access Point that provides access to the file system.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/efs/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -67,6 +68,8 @@ type FileSystemConfigParameters struct {
 }
 
 type FunctionObservation struct {
+
+	// Amazon Resource Name (ARN) identifying your Lambda Function.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

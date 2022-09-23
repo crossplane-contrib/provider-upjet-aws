@@ -543,8 +543,10 @@ spec:
                           items:
                             properties:
                               max:
+                                description: Maximum.
                                 type: number
                               min:
+                                description: Minimum.
                                 type: number
                             type: object
                           type: array
@@ -565,8 +567,10 @@ spec:
                           items:
                             properties:
                               max:
+                                description: Maximum.
                                 type: number
                               min:
+                                description: Minimum.
                                 type: number
                             type: object
                           type: array
@@ -586,8 +590,10 @@ spec:
                           items:
                             properties:
                               max:
+                                description: Maximum.
                                 type: number
                               min:
+                                description: Minimum.
                                 type: number
                             type: object
                           type: array
@@ -639,8 +645,10 @@ spec:
                           items:
                             properties:
                               max:
+                                description: Maximum.
                                 type: number
                               min:
+                                description: Minimum.
                                 type: number
                             type: object
                           type: array
@@ -650,8 +658,10 @@ spec:
                           items:
                             properties:
                               max:
+                                description: Maximum.
                                 type: number
                               min:
+                                description: Minimum.
                                 type: number
                             required:
                             - min
@@ -663,8 +673,10 @@ spec:
                           items:
                             properties:
                               max:
+                                description: Maximum.
                                 type: number
                               min:
+                                description: Minimum.
                                 type: number
                             type: object
                           type: array
@@ -703,8 +715,10 @@ spec:
                           items:
                             properties:
                               max:
+                                description: Maximum.
                                 type: number
                               min:
+                                description: Minimum.
                                 type: number
                             type: object
                           type: array
@@ -714,8 +728,10 @@ spec:
                           items:
                             properties:
                               max:
+                                description: Maximum.
                                 type: number
                               min:
+                                description: Minimum.
                                 type: number
                             required:
                             - min

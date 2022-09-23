@@ -69,6 +69,7 @@ spec:
                     description: Network interface index (int).
                     type: number
                   instanceId:
+                    description: Instance ID to attach.
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance in ec2 to populate instanceId.
@@ -144,6 +145,7 @@ spec:
                         type: object
                     type: object
                   networkInterfaceId:
+                    description: ENI ID to attach.
                     type: string
                   networkInterfaceIdRef:
                     description: Reference to a NetworkInterface in ec2 to populate

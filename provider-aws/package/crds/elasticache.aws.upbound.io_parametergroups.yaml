@@ -71,12 +71,14 @@ spec:
                     description: The family of the ElastiCache parameter group.
                     type: string
                   name:
+                    description: The name of the ElastiCache parameter group.
                     type: string
                   parameter:
                     description: A list of ElastiCache parameters to apply.
                     items:
                       properties:
                         name:
+                          description: The name of the ElastiCache parameter group.
                           type: string
                         value:
                           description: The value of the ElastiCache parameter.

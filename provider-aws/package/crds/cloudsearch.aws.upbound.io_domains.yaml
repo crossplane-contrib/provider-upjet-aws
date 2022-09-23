@@ -100,6 +100,7 @@ spec:
                           description: You can highlight information.
                           type: boolean
                         name:
+                          description: The name of the CloudSearch domain.
                           type: string
                         return:
                           description: You can enable returning the value of all searchable

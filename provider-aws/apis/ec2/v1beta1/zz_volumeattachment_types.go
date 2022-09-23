@@ -19,6 +19,8 @@ type VolumeAttachmentObservation struct {
 
 type VolumeAttachmentParameters struct {
 
+	// The device name to expose to the instance (for
+	// example, /dev/sdh or xvdh).  See Device Naming on Linux Instances and Device Naming on Windows Instances for more information.
 	// +kubebuilder:validation:Required
 	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
@@ -29,6 +31,7 @@ type VolumeAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ForceDetach *bool `json:"forceDetach,omitempty" tf:"force_detach,omitempty"`
 
+	// ID of the Instance to attach to
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -58,6 +61,7 @@ type VolumeAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	StopInstanceBeforeDetaching *bool `json:"stopInstanceBeforeDetaching,omitempty" tf:"stop_instance_before_detaching,omitempty"`
 
+	// ID of the Volume to be attached
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.EBSVolume
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

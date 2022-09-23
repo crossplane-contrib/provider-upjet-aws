@@ -54,9 +54,11 @@ type ContentSecurityPolicyObservation struct {
 
 type ContentSecurityPolicyParameters struct {
 
+	// The policy directives and their values that CloudFront includes as values for the Content-Security-Policy HTTP response header. See Content Security Policy for more information.
 	// +kubebuilder:validation:Required
 	ContentSecurityPolicy *string `json:"contentSecurityPolicy" tf:"content_security_policy,omitempty"`
 
+	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 }
@@ -66,6 +68,7 @@ type ContentTypeOptionsObservation struct {
 
 type ContentTypeOptionsParameters struct {
 
+	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 }
@@ -95,6 +98,7 @@ type CorsConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessControlExposeHeaders []AccessControlExposeHeadersParameters `json:"accessControlExposeHeaders,omitempty" tf:"access_control_expose_headers,omitempty"`
 
+	// A number that CloudFront uses as the value for the Access-Control-Max-Age HTTP response header.
 	// +kubebuilder:validation:Optional
 	AccessControlMaxAgeSec *float64 `json:"accessControlMaxAgeSec,omitempty" tf:"access_control_max_age_sec,omitempty"`
 
@@ -112,6 +116,7 @@ type CustomHeadersConfigItemsParameters struct {
 	// +kubebuilder:validation:Required
 	Header *string `json:"header" tf:"header,omitempty"`
 
+	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 
@@ -138,6 +143,7 @@ type FrameOptionsParameters struct {
 	// +kubebuilder:validation:Required
 	FrameOption *string `json:"frameOption" tf:"frame_option,omitempty"`
 
+	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 }
@@ -147,9 +153,11 @@ type ReferrerPolicyObservation struct {
 
 type ReferrerPolicyParameters struct {
 
+	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 
+	// Determines whether CloudFront includes the Referrer-Policy HTTP response header and the header’s value. See Referrer Policy for more information.
 	// +kubebuilder:validation:Required
 	ReferrerPolicy *string `json:"referrerPolicy" tf:"referrer_policy,omitempty"`
 }
@@ -197,6 +205,7 @@ type SecurityHeadersConfigObservation struct {
 
 type SecurityHeadersConfigParameters struct {
 
+	// The policy directives and their values that CloudFront includes as values for the Content-Security-Policy HTTP response header. See Content Security Policy for more information.
 	// +kubebuilder:validation:Optional
 	ContentSecurityPolicy []ContentSecurityPolicyParameters `json:"contentSecurityPolicy,omitempty" tf:"content_security_policy,omitempty"`
 
@@ -208,6 +217,7 @@ type SecurityHeadersConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	FrameOptions []FrameOptionsParameters `json:"frameOptions,omitempty" tf:"frame_options,omitempty"`
 
+	// Determines whether CloudFront includes the Referrer-Policy HTTP response header and the header’s value. See Referrer Policy for more information.
 	// +kubebuilder:validation:Optional
 	ReferrerPolicy []ReferrerPolicyParameters `json:"referrerPolicy,omitempty" tf:"referrer_policy,omitempty"`
 
@@ -225,6 +235,7 @@ type StrictTransportSecurityObservation struct {
 
 type StrictTransportSecurityParameters struct {
 
+	// A number that CloudFront uses as the value for the Access-Control-Max-Age HTTP response header.
 	// +kubebuilder:validation:Required
 	AccessControlMaxAgeSec *float64 `json:"accessControlMaxAgeSec" tf:"access_control_max_age_sec,omitempty"`
 
@@ -232,6 +243,7 @@ type StrictTransportSecurityParameters struct {
 	// +kubebuilder:validation:Optional
 	IncludeSubdomains *bool `json:"includeSubdomains,omitempty" tf:"include_subdomains,omitempty"`
 
+	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 
@@ -249,6 +261,7 @@ type XSSProtectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ModeBlock *bool `json:"modeBlock,omitempty" tf:"mode_block,omitempty"`
 
+	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 

@@ -397,8 +397,8 @@ spec:
                                         type: object
                                       type: array
                                     status:
-                                      description: The status of the Destination Metrics.
-                                        Either "Enabled" or "Disabled".
+                                      description: Whether the existing objects should
+                                        be replicated. Either "Enabled" or "Disabled".
                                       type: string
                                   required:
                                   - status
@@ -414,8 +414,8 @@ spec:
                                 items:
                                   properties:
                                     status:
-                                      description: The status of the Replication Time
-                                        Control. Either "Enabled" or "Disabled".
+                                      description: Whether the existing objects should
+                                        be replicated. Either "Enabled" or "Disabled".
                                       type: string
                                     time:
                                       description: A configuration block specifying
@@ -471,10 +471,11 @@ spec:
                                 items:
                                   properties:
                                     prefix:
-                                      description: An object key name prefix that
-                                        identifies subset of objects to which the
-                                        rule applies. Must be less than or equal to
-                                        1024 characters in length.
+                                      description: Object key name prefix identifying
+                                        one or more objects to which the rule applies.
+                                        Must be less than or equal to 1024 characters
+                                        in length. Defaults to an empty string ("")
+                                        if filter is not specified.
                                       type: string
                                     tags:
                                       additionalProperties:
@@ -487,9 +488,11 @@ spec:
                                   type: object
                                 type: array
                               prefix:
-                                description: An object key name prefix that identifies
-                                  subset of objects to which the rule applies. Must
+                                description: Object key name prefix identifying one
+                                  or more objects to which the rule applies. Must
                                   be less than or equal to 1024 characters in length.
+                                  Defaults to an empty string ("") if filter is not
+                                  specified.
                                 type: string
                               tag:
                                 description: A configuration block for specifying

@@ -87,6 +87,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The Configuration ID.
                           type: string
                         idRef:
                           description: Reference to a Configuration in mq to populate
@@ -655,6 +656,7 @@ spec:
                     description: ARN of the broker.
                     type: string
                   id:
+                    description: Unique ID that Amazon MQ generates for the broker.
                     type: string
                   instances:
                     description: List of information about allocated brokers (both

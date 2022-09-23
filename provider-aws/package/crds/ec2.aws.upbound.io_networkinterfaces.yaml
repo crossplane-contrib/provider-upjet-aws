@@ -496,6 +496,7 @@ spec:
                     items:
                       properties:
                         attachmentId:
+                          description: ID of the network interface.
                           type: string
                         deviceIndex:
                           description: Integer to define the devices index.
@@ -512,6 +513,7 @@ spec:
                     description: MAC address of the network interface.
                     type: string
                   outpostArn:
+                    description: ARN of the network interface.
                     type: string
                   ownerId:
                     description: AWS account ID of the owner of the network interface.

@@ -34,6 +34,7 @@ type BucketCorsConfigurationCorsRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
+	// Unique identifier for the rule. The value cannot be longer than 255 characters.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -43,6 +44,8 @@ type BucketCorsConfigurationCorsRuleParameters struct {
 }
 
 type BucketCorsConfigurationObservation struct {
+
+	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

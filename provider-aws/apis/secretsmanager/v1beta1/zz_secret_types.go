@@ -27,7 +27,7 @@ type ReplicaObservation struct {
 
 type ReplicaParameters struct {
 
-	// ARN of the secret.
+	// ARN, Key ID, or Alias of the AWS KMS key within the region secret is replicated to. If one is not specified, then Secrets Manager defaults to using the AWS account's default KMS key (aws/secretsmanager) in the region or creates one for use if non-existent.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -56,6 +56,7 @@ type SecretObservation struct {
 	// Valid JSON document representing a resource policy. Removing policy from your configuration or setting policy to null or an empty string (i.e., policy = "") will not delete the policy since it could have been set by aws_secretsmanager_secret_policy. To delete the policy, set it to "{}" (an empty JSON document).
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Configuration block to support secret replication. See details below.
 	// +kubebuilder:validation:Optional
 	Replica []ReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
 
@@ -82,7 +83,7 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	ForceOverwriteReplicaSecret *bool `json:"forceOverwriteReplicaSecret,omitempty" tf:"force_overwrite_replica_secret,omitempty"`
 
-	// ARN of the secret.
+	// ARN or Id of the AWS KMS key to be used to encrypt the secret values in the versions stored in this secret. If you don't specify this value, then Secrets Manager defaults to using the AWS account's default KMS key (the one named aws/secretsmanager). If the default KMS key with that name doesn't yet exist, then AWS Secrets Manager creates it for you automatically the first time.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -109,6 +110,7 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Configuration block to support secret replication. See details below.
 	// +kubebuilder:validation:Optional
 	Replica []ReplicaParameters `json:"replica,omitempty" tf:"replica,omitempty"`
 

@@ -65,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   backupVaultName:
+                    description: Name of the backup vault to add a lock configuration
+                      for.
                     type: string
                   backupVaultNameRef:
                     description: Reference to a Vault to populate backupVaultName.

@@ -26,6 +26,7 @@ type PolicyObservation struct {
 
 type PolicyParameters struct {
 
+	// The policy document. This is a JSON formatted string. Use the IoT Developer Guide for more information on IoT Policies.
 	// +kubebuilder:validation:Required
 	Policy *string `json:"policy" tf:"policy,omitempty"`
 

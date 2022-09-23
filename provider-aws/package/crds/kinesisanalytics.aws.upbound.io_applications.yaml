@@ -174,12 +174,10 @@ spec:
                           items:
                             properties:
                               resourceArn:
-                                description: The ARN of the Kinesis Firehose delivery
-                                  stream.
+                                description: The ARN of the Lambda function.
                                 type: string
                               roleArn:
-                                description: The ARN of the IAM Role used to access
-                                  the stream.
+                                description: The IAM Role ARN to read the data.
                                 type: string
                             required:
                             - resourceArn
@@ -193,7 +191,7 @@ spec:
                           items:
                             properties:
                               resourceArn:
-                                description: The ARN of the Kinesis Stream.
+                                description: The ARN of the Lambda function.
                                 type: string
                               resourceArnRef:
                                 description: Reference to a Stream in kinesis to populate
@@ -276,8 +274,7 @@ spec:
                                     type: object
                                 type: object
                               roleArn:
-                                description: The ARN of the IAM Role used to access
-                                  the stream.
+                                description: The IAM Role ARN to read the data.
                                 type: string
                               roleArnRef:
                                 description: Reference to a Role in iam to populate
@@ -390,8 +387,7 @@ spec:
                                       description: The ARN of the Lambda function.
                                       type: string
                                     roleArn:
-                                      description: The ARN of the IAM Role used to
-                                        access the Lambda function.
+                                      description: The IAM Role ARN to read the data.
                                       type: string
                                   required:
                                   - resourceArn
@@ -515,8 +511,7 @@ spec:
                           items:
                             properties:
                               resourceArn:
-                                description: The ARN of the Kinesis Firehose delivery
-                                  stream.
+                                description: The ARN of the Lambda function.
                                 type: string
                               resourceArnRef:
                                 description: Reference to a DeliveryStream in firehose
@@ -599,8 +594,7 @@ spec:
                                     type: object
                                 type: object
                               roleArn:
-                                description: The ARN of the IAM Role used to access
-                                  the stream.
+                                description: The IAM Role ARN to read the data.
                                 type: string
                               roleArnRef:
                                 description: Reference to a Role in iam to populate
@@ -691,11 +685,10 @@ spec:
                           items:
                             properties:
                               resourceArn:
-                                description: The ARN of the Kinesis Stream.
+                                description: The ARN of the Lambda function.
                                 type: string
                               roleArn:
-                                description: The ARN of the IAM Role used to access
-                                  the stream.
+                                description: The IAM Role ARN to read the data.
                                 type: string
                             required:
                             - resourceArn
@@ -711,8 +704,7 @@ spec:
                                 description: The ARN of the Lambda function.
                                 type: string
                               roleArn:
-                                description: The ARN of the IAM Role used to access
-                                  the Lambda function.
+                                description: The IAM Role ARN to read the data.
                                 type: string
                             required:
                             - resourceArn
@@ -758,8 +750,7 @@ spec:
                                   data.
                                 type: string
                               roleArn:
-                                description: The ARN of the IAM Role used to access
-                                  the Lambda function.
+                                description: The IAM Role ARN to read the data.
                                 type: string
                             required:
                             - bucketArn
@@ -1097,8 +1088,8 @@ spec:
                                 items:
                                   properties:
                                     recordFormatType:
-                                      description: The type of Record Format. Can
-                                        be CSV or JSON.
+                                      description: The Format Type of the records
+                                        on the output stream. Can be CSV or JSON.
                                       type: string
                                   type: object
                                 type: array
@@ -1143,8 +1134,8 @@ spec:
                                 items:
                                   properties:
                                     recordFormatType:
-                                      description: The type of Record Format. Can
-                                        be CSV or JSON.
+                                      description: The Format Type of the records
+                                        on the output stream. Can be CSV or JSON.
                                       type: string
                                   type: object
                                 type: array

@@ -70,6 +70,9 @@ spec:
                       ends up being the search value in the /etc/resolv.conf file.
                     type: string
                   domainNameServers:
+                    description: List of name servers to configure in /etc/resolv.conf.
+                      If you want to use the default AWS nameservers you should set
+                      this to AmazonProvidedDNS.
                     items:
                       type: string
                     type: array

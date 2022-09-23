@@ -65,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   deviceName:
+                    description: The device name to expose to the instance (for example,
+                      /dev/sdh or xvdh).  See Device Naming on Linux Instances and
+                      Device Naming on Windows Instances for more information.
                     type: string
                   forceDetach:
                     description: Set to true if you want to force the volume to detach.
@@ -73,6 +76,7 @@ spec:
                       an Amazon EBS Volume from an Instance for more information.
                     type: boolean
                   instanceId:
+                    description: ID of the Instance to attach to
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance in ec2 to populate instanceId.
@@ -161,6 +165,7 @@ spec:
                       if it is not already stopped.
                     type: boolean
                   volumeId:
+                    description: ID of the Volume to be attached
                     type: string
                   volumeIdRef:
                     description: Reference to a EBSVolume in ec2 to populate volumeId.

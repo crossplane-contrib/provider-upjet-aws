@@ -74,6 +74,7 @@ spec:
                       be created in.
                     type: string
                   repository:
+                    description: Name of the repository to apply the policy.
                     type: string
                   repositoryRef:
                     description: Reference to a Repository in ecr to populate repository.

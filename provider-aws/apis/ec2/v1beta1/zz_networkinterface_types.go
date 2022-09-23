@@ -14,6 +14,8 @@ import (
 )
 
 type AttachmentObservation struct {
+
+	// ID of the network interface.
 	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
 
 	// Integer to define the devices index.
@@ -40,6 +42,7 @@ type NetworkInterfaceObservation_2 struct {
 	// MAC address of the network interface.
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
 
+	// ARN of the network interface.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// AWS account ID of the owner of the network interface.
