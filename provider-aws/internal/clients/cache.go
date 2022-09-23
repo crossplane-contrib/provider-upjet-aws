@@ -7,6 +7,7 @@ package clients
 import (
 	"context"
 	"fmt"
+	"sync"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -54,6 +55,7 @@ func NewCallerIdentityCache(opts ...CallerIdentityCacheOption) *CallerIdentityCa
 		cache:               map[string]*callerIdentityCacheEntry{},
 		maxSize:             100,
 		getCallerIdentityFn: AWSGetCallerIdentity,
+		mu:                  &sync.RWMutex{},
 	}
 	for _, f := range opts {
 		f(c)
@@ -81,11 +83,14 @@ type CallerIdentityCache struct {
 	// newClientFn returns a client that we can call GetCallerIdentity function
 	/// of. You need to override the default only in the tests.
 	getCallerIdentityFn GetCallerIdentityFn
+
+	// mu is used to make sure the cache map is concurrency-safe.
+	mu *sync.RWMutex
 }
 
 type callerIdentityCacheEntry struct {
 	*sts.GetCallerIdentityOutput
-	LastAccessTime time.Time
+	AccessedAt time.Time
 }
 
 // GetCallerIdentity returns the identity of the caller.
@@ -96,18 +101,28 @@ func (c *CallerIdentityCache) GetCallerIdentity(ctx context.Context, cfg aws.Con
 		creds.SessionToken,
 	)
 	if i, ok := c.cache[key]; ok {
-		i.LastAccessTime = time.Now()
+		// Because this is in the hot path of the execution, i.e. all CRs get
+		// here in every reconciliation, we don't want to block with a lock
+		// unless it's really necessary. Even an unnecessary cache invalidation
+		// is fine since the cost is one additional API call.
+		if time.Since(i.AccessedAt) > 10*time.Minute {
+			c.mu.Lock()
+			i.AccessedAt = time.Now()
+			c.mu.Unlock()
+		}
 		return i.GetCallerIdentityOutput, nil
 	}
 	i, err := c.getCallerIdentityFn(ctx, cfg)
 	if err != nil {
 		return nil, errors.Wrap(err, errGetCallerIdentityFailed)
 	}
+	c.mu.Lock()
 	c.makeRoom()
 	c.cache[key] = &callerIdentityCacheEntry{
-		LastAccessTime:          time.Now(),
+		AccessedAt:              time.Now(),
 		GetCallerIdentityOutput: i,
 	}
+	c.mu.Unlock()
 	return i, nil
 }
 
@@ -123,7 +138,7 @@ func (c *CallerIdentityCache) makeRoom() {
 		if dustiest == "" {
 			dustiest = key
 		}
-		if val.LastAccessTime.Before(c.cache[dustiest].LastAccessTime) {
+		if val.AccessedAt.Before(c.cache[dustiest].AccessedAt) {
 			dustiest = key
 		}
 	}

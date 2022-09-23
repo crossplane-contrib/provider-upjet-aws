@@ -77,7 +77,7 @@ func TestGetCallerIdentity(t *testing.T) {
 				cache: map[string]*callerIdentityCacheEntry{
 					"sampleaccess:samplesecret:sampletoken": {
 						GetCallerIdentityOutput: sample,
-						LastAccessTime:          ti,
+						AccessedAt:              ti,
 					},
 				},
 			},
@@ -99,11 +99,11 @@ func TestGetCallerIdentity(t *testing.T) {
 				cache: map[string]*callerIdentityCacheEntry{
 					"sampleaccess:samplesecret:sampletoken": {
 						GetCallerIdentityOutput: sample,
-						LastAccessTime:          ti.Add(-time.Hour * 1),
+						AccessedAt:              ti.Add(-time.Hour * 1),
 					},
 					"sampleaccess:samplesecret:sampletoken2": {
 						GetCallerIdentityOutput: sample,
-						LastAccessTime:          ti.Add(-time.Hour * 5), // this should be deleted
+						AccessedAt:              ti.Add(-time.Hour * 5), // this should be deleted
 					},
 				},
 				maxSize: 2,
@@ -142,7 +142,7 @@ func TestGetCallerIdentity(t *testing.T) {
 			}
 			if tc.want.cache != nil {
 				if diff := cmp.Diff(tc.want.cache, c.cache,
-					cmpopts.IgnoreFields(callerIdentityCacheEntry{}, "LastAccessTime"),
+					cmpopts.IgnoreFields(callerIdentityCacheEntry{}, "AccessedAt"),
 					cmpopts.IgnoreUnexported(sts.GetCallerIdentityOutput{}, middleware.Metadata{})); diff != "" {
 					t.Fatalf("%s: GetCallerIdentity(...): -want, +got: %s", tc.reason, diff)
 				}
