@@ -991,7 +991,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Application AutoScaling Policy can be imported using the service-namespace, resource-id, scalable-dimension and policy-name separated by /
 	"aws_appautoscaling_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.service_namespace }}/{{ .parameters.resource_id }}/{{ .parameters.scalable_dimension }}/{{ .external_name }}"),
 	// Application AutoScaling Target can be imported using the service-namespace , resource-id and scalable-dimension separated by /
-	"aws_appautoscaling_target": config.TemplatedStringAsIdentifier("", "{{ .parameters.service_namespace }}/{{ .parameters.resource_id }}/{{ .parameters.scalable_dimension }}"),
+	"aws_appautoscaling_target": TemplatedStringAsIdentifierWithNoName("{{ .parameters.service_namespace }}/{{ .parameters.resource_id }}/{{ .parameters.scalable_dimension }}"),
 }
 
 func lambdaFunctionURL() config.ExternalName {

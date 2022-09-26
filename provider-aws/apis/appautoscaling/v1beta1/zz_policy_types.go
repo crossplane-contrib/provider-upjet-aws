@@ -22,7 +22,7 @@ type CustomizedMetricSpecificationParameters struct {
 	// +kubebuilder:validation:Optional
 	Dimensions []DimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
-	// The name of the policy. Must be between 1 and 255 characters in length.
+	// The name of the metric.
 	// +kubebuilder:validation:Required
 	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
@@ -44,7 +44,7 @@ type DimensionsObservation struct {
 
 type DimensionsParameters struct {
 
-	// The name of the policy. Must be between 1 and 255 characters in length.
+	// Name of the dimension.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

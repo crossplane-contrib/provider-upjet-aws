@@ -389,8 +389,7 @@ spec:
                                 items:
                                   properties:
                                     name:
-                                      description: The name of the policy. Must be
-                                        between 1 and 255 characters in length.
+                                      description: Name of the dimension.
                                       type: string
                                     value:
                                       description: Value of the dimension.
@@ -401,8 +400,7 @@ spec:
                                   type: object
                                 type: array
                               metricName:
-                                description: The name of the policy. Must be between
-                                  1 and 255 characters in length.
+                                description: The name of the metric.
                                 type: string
                               namespace:
                                 description: The namespace of the metric.
