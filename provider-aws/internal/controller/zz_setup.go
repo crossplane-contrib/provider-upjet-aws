@@ -53,6 +53,9 @@ import (
 	routeresponse "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/routeresponse"
 	stageapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/stage"
 	vpclinkapigatewayv2 "github.com/upbound/official-providers/provider-aws/internal/controller/apigatewayv2/vpclink"
+	policy "github.com/upbound/official-providers/provider-aws/internal/controller/appautoscaling/policy"
+	scheduledaction "github.com/upbound/official-providers/provider-aws/internal/controller/appautoscaling/scheduledaction"
+	target "github.com/upbound/official-providers/provider-aws/internal/controller/appautoscaling/target"
 	database "github.com/upbound/official-providers/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/official-providers/provider-aws/internal/controller/athena/datacatalog"
 	namedquery "github.com/upbound/official-providers/provider-aws/internal/controller/athena/namedquery"
@@ -232,7 +235,7 @@ import (
 	grouppolicyattachment "github.com/upbound/official-providers/provider-aws/internal/controller/iam/grouppolicyattachment"
 	instanceprofile "github.com/upbound/official-providers/provider-aws/internal/controller/iam/instanceprofile"
 	openidconnectprovider "github.com/upbound/official-providers/provider-aws/internal/controller/iam/openidconnectprovider"
-	policy "github.com/upbound/official-providers/provider-aws/internal/controller/iam/policy"
+	policyiam "github.com/upbound/official-providers/provider-aws/internal/controller/iam/policy"
 	role "github.com/upbound/official-providers/provider-aws/internal/controller/iam/role"
 	rolepolicyattachment "github.com/upbound/official-providers/provider-aws/internal/controller/iam/rolepolicyattachment"
 	samlprovider "github.com/upbound/official-providers/provider-aws/internal/controller/iam/samlprovider"
@@ -417,6 +420,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		routeresponse.Setup,
 		stageapigatewayv2.Setup,
 		vpclinkapigatewayv2.Setup,
+		policy.Setup,
+		scheduledaction.Setup,
+		target.Setup,
 		database.Setup,
 		datacatalog.Setup,
 		namedquery.Setup,
@@ -596,7 +602,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		grouppolicyattachment.Setup,
 		instanceprofile.Setup,
 		openidconnectprovider.Setup,
-		policy.Setup,
+		policyiam.Setup,
 		role.Setup,
 		rolepolicyattachment.Setup,
 		samlprovider.Setup,
