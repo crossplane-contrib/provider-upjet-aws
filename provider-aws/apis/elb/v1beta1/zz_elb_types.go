@@ -30,6 +30,7 @@ type AccessLogsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The publishing interval in minutes. Default: 60 minutes.
 	// +kubebuilder:validation:Optional
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 }
@@ -91,6 +92,7 @@ type ELBParameters struct {
 	// +kubebuilder:validation:Optional
 	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
+	// A list of instance ids to place in the ELB pool.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Instance
 	// +kubebuilder:validation:Optional
 	Instances []*string `json:"instances,omitempty" tf:"instances,omitempty"`
@@ -154,6 +156,7 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Required
 	HealthyThreshold *float64 `json:"healthyThreshold" tf:"healthy_threshold,omitempty"`
 
+	// The publishing interval in minutes. Default: 60 minutes.
 	// +kubebuilder:validation:Required
 	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 
@@ -189,6 +192,8 @@ type ListenerParameters struct {
 	// +kubebuilder:validation:Required
 	LBPort *float64 `json:"lbPort" tf:"lb_port,omitempty"`
 
+	// The protocol to listen on. Valid values are HTTP,
+	// HTTPS, TCP, or SSL
 	// +kubebuilder:validation:Required
 	LBProtocol *string `json:"lbProtocol" tf:"lb_protocol,omitempty"`
 

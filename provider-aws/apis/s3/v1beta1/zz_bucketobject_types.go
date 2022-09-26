@@ -77,6 +77,7 @@ type BucketObjectParameters struct {
 	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
+	// Triggers updates when the value changes.11.11.11 or earlier). This attribute is not compatible with KMS encryption, kms_key_id or server_side_encryption = "aws:kms" (see source_hash instead).
 	// +kubebuilder:validation:Optional
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 

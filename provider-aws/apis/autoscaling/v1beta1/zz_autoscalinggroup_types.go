@@ -31,6 +31,7 @@ type AutoscalingGroupObservation struct {
 
 type AutoscalingGroupParameters struct {
 
+	// A list of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
 	// +kubebuilder:validation:Optional
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
@@ -38,9 +39,13 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	CapacityRebalance *bool `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
 
+	// The amount of time, in seconds, after a scaling activity completes before another scaling activity can start.
 	// +kubebuilder:validation:Optional
 	DefaultCooldown *float64 `json:"defaultCooldown,omitempty" tf:"default_cooldown,omitempty"`
 
+	// The number of Amazon EC2 instances that
+	// should be running in the group. (See also Waiting for
+	// Capacity below.)
 	// +kubebuilder:validation:Optional
 	DesiredCapacity *float64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
 
@@ -60,9 +65,11 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ForceDeleteWarmPool *bool `json:"forceDeleteWarmPool,omitempty" tf:"force_delete_warm_pool,omitempty"`
 
+	// Time (in seconds) after instance comes into service before checking health.
 	// +kubebuilder:validation:Optional
 	HealthCheckGracePeriod *float64 `json:"healthCheckGracePeriod,omitempty" tf:"health_check_grace_period,omitempty"`
 
+	// "EC2" or "ELB". Controls how health checking is done.
 	// +kubebuilder:validation:Optional
 	HealthCheckType *string `json:"healthCheckType,omitempty" tf:"health_check_type,omitempty"`
 
@@ -82,6 +89,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceRefresh []InstanceRefreshParameters `json:"instanceRefresh,omitempty" tf:"instance_refresh,omitempty"`
 
+	// The name of the launch configuration to use.
 	// +kubebuilder:validation:Optional
 	LaunchConfiguration *string `json:"launchConfiguration,omitempty" tf:"launch_configuration,omitempty"`
 
@@ -93,6 +101,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxInstanceLifetime *float64 `json:"maxInstanceLifetime,omitempty" tf:"max_instance_lifetime,omitempty"`
 
+	// The maximum size of the Auto Scaling Group.
 	// +kubebuilder:validation:Required
 	MaxSize *float64 `json:"maxSize" tf:"max_size,omitempty"`
 
@@ -105,6 +114,8 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	MinELBCapacity *float64 `json:"minElbCapacity,omitempty" tf:"min_elb_capacity,omitempty"`
 
+	// The minimum size of the Auto Scaling Group.
+	// (See also Waiting for Capacity below.)
 	// +kubebuilder:validation:Required
 	MinSize *float64 `json:"minSize" tf:"min_size,omitempty"`
 
@@ -167,6 +178,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
 
+	// A list of subnet IDs to launch resources in. Subnets automatically determine which availability zones the group will reside. Conflicts with availability_zones.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	VPCZoneIdentifier []*string `json:"vpcZoneIdentifier,omitempty" tf:"vpc_zone_identifier,omitempty"`
@@ -210,7 +222,7 @@ type InitialLifecycleHookParameters struct {
 	// +kubebuilder:validation:Required
 	LifecycleTransition *string `json:"lifecycleTransition" tf:"lifecycle_transition,omitempty"`
 
-	// The name of the launch template. Conflicts with id.
+	// The name of the Auto Scaling Group. Conflicts with name_prefix.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -345,6 +357,7 @@ type MixedInstancesPolicyLaunchTemplateObservation struct {
 
 type MixedInstancesPolicyLaunchTemplateParameters struct {
 
+	// Nested argument defines the Launch Template. Defined below.
 	// +kubebuilder:validation:Required
 	LaunchTemplateSpecification []LaunchTemplateSpecificationParameters `json:"launchTemplateSpecification" tf:"launch_template_specification,omitempty"`
 
@@ -362,7 +375,7 @@ type MixedInstancesPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	InstancesDistribution []InstancesDistributionParameters `json:"instancesDistribution,omitempty" tf:"instances_distribution,omitempty"`
 
-	// Nested argument with Launch template specification to use to launch instances. See Launch Template below for more details.
+	// Nested argument containing launch template settings along with the overrides to specify multiple instance types and weights. Defined below.
 	// +kubebuilder:validation:Required
 	LaunchTemplate []MixedInstancesPolicyLaunchTemplateParameters `json:"launchTemplate" tf:"launch_template,omitempty"`
 }
@@ -404,6 +417,7 @@ type OverrideParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
+	// Nested argument defines the Launch Template. Defined below.
 	// +kubebuilder:validation:Optional
 	LaunchTemplateSpecification []OverrideLaunchTemplateSpecificationParameters `json:"launchTemplateSpecification,omitempty" tf:"launch_template_specification,omitempty"`
 
@@ -469,6 +483,8 @@ type WarmPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
 
+	// The minimum size of the Auto Scaling Group.
+	// (See also Waiting for Capacity below.)
 	// +kubebuilder:validation:Optional
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 

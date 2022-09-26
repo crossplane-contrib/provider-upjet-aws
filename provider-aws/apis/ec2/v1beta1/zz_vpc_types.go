@@ -58,6 +58,9 @@ type VPCParameters struct {
 	// +kubebuilder:validation:Optional
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
+	// A boolean flag to enable/disable ClassicLink
+	// for the VPC. Only valid in regions and accounts that support EC2 Classic.
+	// See the ClassicLink documentation for more information. Defaults false.
 	// +kubebuilder:validation:Optional
 	EnableClassiclink *bool `json:"enableClassiclink,omitempty" tf:"enable_classiclink,omitempty"`
 
@@ -66,9 +69,11 @@ type VPCParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableClassiclinkDNSSupport *bool `json:"enableClassiclinkDnsSupport,omitempty" tf:"enable_classiclink_dns_support,omitempty"`
 
+	// A boolean flag to enable/disable DNS hostnames in the VPC. Defaults false.
 	// +kubebuilder:validation:Optional
 	EnableDNSHostnames *bool `json:"enableDnsHostnames,omitempty" tf:"enable_dns_hostnames,omitempty"`
 
+	// A boolean flag to enable/disable DNS support in the VPC. Defaults true.
 	// +kubebuilder:validation:Optional
 	EnableDNSSupport *bool `json:"enableDnsSupport,omitempty" tf:"enable_dns_support,omitempty"`
 
@@ -84,6 +89,7 @@ type VPCParameters struct {
 	// +kubebuilder:validation:Optional
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
+	// By default when an IPv6 CIDR is assigned to a VPC a default ipv6_cidr_block_network_border_group will be set to the region of the VPC. This can be changed to restrict advertisement of public addresses to specific Network Border Groups such as LocalZones.
 	// +kubebuilder:validation:Optional
 	IPv6CidrBlockNetworkBorderGroup *string `json:"ipv6CidrBlockNetworkBorderGroup,omitempty" tf:"ipv6_cidr_block_network_border_group,omitempty"`
 
@@ -95,6 +101,7 @@ type VPCParameters struct {
 	// +kubebuilder:validation:Optional
 	IPv6NetmaskLength *float64 `json:"ipv6NetmaskLength,omitempty" tf:"ipv6_netmask_length,omitempty"`
 
+	// A tenancy option for instances launched into the VPC. Default is default, which ensures that EC2 instances launched in this VPC use the EC2 instance tenancy attribute specified when the EC2 instance is launched. The only other option is dedicated, which ensures that EC2 instances launched in this VPC are run on dedicated tenancy instances regardless of the tenancy attribute specified at launch. This has a dedicated per region fee of $2 per hour, plus an hourly per instance usage fee.
 	// +kubebuilder:validation:Optional
 	InstanceTenancy *string `json:"instanceTenancy,omitempty" tf:"instance_tenancy,omitempty"`
 

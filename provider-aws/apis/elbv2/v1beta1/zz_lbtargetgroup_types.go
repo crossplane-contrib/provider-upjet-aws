@@ -18,6 +18,7 @@ type HealthCheckObservation struct {
 
 type HealthCheckParameters struct {
 
+	// Whether health checks are enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -37,9 +38,11 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
+	// Port to use to connect with the target. Valid values are either ports 1-65535, or traffic-port. Defaults to traffic-port.
 	// +kubebuilder:validation:Optional
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Protocol to use to connect with the target. Defaults to HTTP. Not applicable when target_type is lambda.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
@@ -89,9 +92,11 @@ type LBTargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancingAlgorithmType *string `json:"loadBalancingAlgorithmType,omitempty" tf:"load_balancing_algorithm_type,omitempty"`
 
+	// Name of the target group.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// (May be required, Forces new resource) Port on which targets receive traffic, unless overridden when registering a specific target. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -99,6 +104,7 @@ type LBTargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	PreserveClientIP *string `json:"preserveClientIp,omitempty" tf:"preserve_client_ip,omitempty"`
 
+	// (May be required, Forces new resource) Protocol to use for routing traffic to the targets. Should be one of GENEVE, HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
@@ -158,6 +164,7 @@ type LBTargetGroupStickinessParameters struct {
 	// +kubebuilder:validation:Optional
 	CookieName *string `json:"cookieName,omitempty" tf:"cookie_name,omitempty"`
 
+	// Whether health checks are enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 

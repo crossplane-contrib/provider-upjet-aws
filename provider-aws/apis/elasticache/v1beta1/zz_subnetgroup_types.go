@@ -24,6 +24,7 @@ type SubnetGroupObservation struct {
 
 type SubnetGroupParameters struct {
 
+	// –  Description for the cache subnet group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -40,6 +41,7 @@ type SubnetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// –  List of VPC Subnet IDs for the cache subnet group
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector

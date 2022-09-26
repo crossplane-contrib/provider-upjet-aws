@@ -70,6 +70,7 @@ type CertificateAuthorityParameters struct {
 	// +kubebuilder:validation:Required
 	CertificateAuthorityConfiguration []CertificateAuthorityConfigurationParameters `json:"certificateAuthorityConfiguration" tf:"certificate_authority_configuration,omitempty"`
 
+	// Whether the certificate authority is enabled or disabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -104,6 +105,7 @@ type CrlConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomCname *string `json:"customCname,omitempty" tf:"custom_cname,omitempty"`
 
+	// Boolean value that specifies whether certificate revocation lists (CRLs) are enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 

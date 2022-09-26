@@ -72,6 +72,7 @@ spec:
                     items:
                       properties:
                         name:
+                          description: The name of the parameter.
                           type: string
                         value:
                           description: The value for the parameter.

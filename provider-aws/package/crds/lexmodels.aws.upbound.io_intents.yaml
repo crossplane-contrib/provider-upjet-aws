@@ -167,6 +167,8 @@ spec:
                       to false.
                     type: boolean
                   description:
+                    description: A description of the intent. Must be less than or
+                      equal to 200 characters in length.
                     type: string
                   dialogCodeHook:
                     description: Specifies a Lambda function to invoke for each user
@@ -249,6 +251,10 @@ spec:
                             type: object
                           type: array
                         rejectionStatement:
+                          description: If the user answers "no" to the question defined
+                            in the prompt field, Amazon Lex responds with this statement
+                            to acknowledge that the intent was canceled. Attributes
+                            are documented below under statement.
                           items:
                             properties:
                               message:
@@ -344,6 +350,11 @@ spec:
                       be created in.
                     type: string
                   rejectionStatement:
+                    description: When the user answers "no" to the question defined
+                      in confirmation_prompt, Amazon Lex responds with this statement
+                      to acknowledge that the intent was canceled. You must provide
+                      both the rejection_statement and the confirmation_prompt, or
+                      neither. Attributes are documented under statement.
                     items:
                       properties:
                         message:
@@ -384,6 +395,12 @@ spec:
                       type: object
                     type: array
                   sampleUtterances:
+                    description: An array of utterances (strings) that a user might
+                      say to signal the intent. For example, "I want {PizzaSize} pizza",
+                      "Order {Quantity} {PizzaSize} pizzas". In each utterance, a
+                      slot name is enclosed in curly braces. Must have between 1 and
+                      10 items in the list, and each item must be less than or equal
+                      to 200 characters in length.
                     items:
                       type: string
                     type: array
@@ -394,8 +411,13 @@ spec:
                     items:
                       properties:
                         description:
+                          description: A description of the bot. Must be less than
+                            or equal to 200 characters in length.
                           type: string
                         name:
+                          description: The name of the intent slot that you want to
+                            create. The name is case sensitive. Must be less than
+                            or equal to 100 characters in length.
                           type: string
                         priority:
                           description: Directs Lex the order in which to elicit this
@@ -412,6 +434,13 @@ spec:
                             Must be less than or equal to 50000 characters in length.'
                           type: string
                         sampleUtterances:
+                          description: If you know a specific pattern with which users
+                            might respond to an Amazon Lex request for a slot value,
+                            you can provide those utterances to improve accuracy.
+                            This is optional. In most cases, Amazon Lex is capable
+                            of understanding user utterances. Must have between 1
+                            and 10 items in the list, and each item must be less than
+                            or equal to 200 characters in length.
                           items:
                             type: string
                           type: array

@@ -65,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: –  Description for the cache subnet group.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -148,6 +149,7 @@ spec:
                         type: object
                     type: object
                   subnetIds:
+                    description: –  List of VPC Subnet IDs for the cache subnet group
                     items:
                       type: string
                     type: array

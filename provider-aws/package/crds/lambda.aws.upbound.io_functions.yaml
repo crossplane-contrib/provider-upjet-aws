@@ -130,6 +130,8 @@ spec:
                     items:
                       properties:
                         arn:
+                          description: Amazon Resource Name (ARN) of the Amazon EFS
+                            Access Point that provides access to the file system.
                           type: string
                         arnRef:
                           description: Reference to a AccessPoint in efs to populate
@@ -759,6 +761,8 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: Amazon Resource Name (ARN) identifying your Lambda
+                      Function.
                     type: string
                   id:
                     type: string

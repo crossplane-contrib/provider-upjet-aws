@@ -576,8 +576,9 @@ spec:
                                               value is 15.
                                             type: number
                                           status:
-                                            description: The status of replication
-                                              metrics. Either Enabled or Disabled.
+                                            description: The status of the rule. Either
+                                              Enabled or Disabled. The rule is ignored
+                                              if status is not Enabled.
                                             type: string
                                         type: object
                                       type: array
@@ -598,16 +599,15 @@ spec:
                                               value is 15.
                                             type: number
                                           status:
-                                            description: The status of RTC. Either
-                                              Enabled or Disabled.
+                                            description: The status of the rule. Either
+                                              Enabled or Disabled. The rule is ignored
+                                              if status is not Enabled.
                                             type: string
                                         type: object
                                       type: array
                                     storageClass:
-                                      description: The storage class used to store
-                                        the object. By default, Amazon S3 uses the
-                                        storage class of the source object to create
-                                        the object replica.
+                                      description: Specifies the Amazon S3 storage
+                                        class to which you want the object to transition.
                                       type: string
                                   type: object
                                 type: array
@@ -660,8 +660,11 @@ spec:
                                       items:
                                         properties:
                                           enabled:
-                                            description: Boolean which indicates if
-                                              this criteria is enabled.
+                                            description: Enable versioning. Once you
+                                              version-enable a bucket, it can never
+                                              return to an unversioned state. You
+                                              can, however, suspend versioning on
+                                              that bucket.
                                             type: boolean
                                         type: object
                                       type: array

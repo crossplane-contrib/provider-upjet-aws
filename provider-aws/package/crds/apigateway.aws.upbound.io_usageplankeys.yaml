@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   keyId:
-                    description: The Id of a usage plan key.
+                    description: The identifier of the API key resource.
                     type: string
                   keyIdRef:
                     description: Reference to a APIKey in apigateway to populate keyId.
@@ -141,13 +141,16 @@ spec:
                         type: object
                     type: object
                   keyType:
+                    description: The type of the API key resource. Currently, the
+                      valid key type is API_KEY.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   usagePlanId:
-                    description: The Id of a usage plan key.
+                    description: The Id of the usage plan resource representing to
+                      associate the key to.
                     type: string
                   usagePlanIdRef:
                     description: Reference to a UsagePlan in apigateway to populate

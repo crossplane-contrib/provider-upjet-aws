@@ -80,6 +80,8 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: Whether health checks are enabled. Defaults
+                            to true.
                           type: boolean
                         healthyThreshold:
                           description: Number of consecutive health checks successes
@@ -104,8 +106,13 @@ spec:
                             Only applies to HTTP/HTTPS.
                           type: string
                         port:
+                          description: Port to use to connect with the target. Valid
+                            values are either ports 1-65535, or traffic-port. Defaults
+                            to traffic-port.
                           type: string
                         protocol:
+                          description: Protocol to use to connect with the target.
+                            Defaults to HTTP. Not applicable when target_type is lambda.
                           type: string
                         timeout:
                           description: Amount of time, in seconds, during which no
@@ -138,14 +145,23 @@ spec:
                       The default is round_robin.
                     type: string
                   name:
+                    description: Name of the target group.
                     type: string
                   port:
+                    description: (May be required, Forces new resource) Port on which
+                      targets receive traffic, unless overridden when registering
+                      a specific target. Required when target_type is instance, ip
+                      or alb. Does not apply when target_type is lambda.
                     type: number
                   preserveClientIp:
                     description: Whether client IP preservation is enabled. See doc
                       for more information.
                     type: string
                   protocol:
+                    description: (May be required, Forces new resource) Protocol to
+                      use for routing traffic to the targets. Should be one of GENEVE,
+                      HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP. Required when target_type
+                      is instance, ip or alb. Does not apply when target_type is lambda.
                     type: string
                   protocolVersion:
                     description: Only applicable when protocol is HTTP or HTTPS. The
@@ -186,6 +202,8 @@ spec:
                             be used. Only needed when type is app_cookie.
                           type: string
                         enabled:
+                          description: Whether health checks are enabled. Defaults
+                            to true.
                           type: boolean
                         type:
                           description: The type of sticky sessions. The only current

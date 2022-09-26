@@ -88,6 +88,7 @@ type OptionSettingsObservation struct {
 
 type OptionSettingsParameters struct {
 
+	// The name of the option group. Must be lowercase, to match as it is stored in AWS.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

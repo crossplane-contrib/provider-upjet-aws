@@ -65,7 +65,8 @@ spec:
               forProvider:
                 properties:
                   catalogId:
-                    description: Catalog ID and name of the database
+                    description: ID of the Glue Catalog to create the database in.
+                      If omitted, this defaults to the AWS Account ID.
                     type: string
                   createTableDefaultPermission:
                     description: Creates a set of default permissions on the table
@@ -112,7 +113,8 @@ spec:
                     items:
                       properties:
                         catalogId:
-                          description: Catalog ID and name of the database
+                          description: ID of the Data Catalog in which the database
+                            resides.
                           type: string
                         databaseName:
                           description: Name of the catalog database.

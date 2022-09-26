@@ -18,6 +18,9 @@ type AbortStatementObservation struct {
 
 type AbortStatementParameters struct {
 
+	// A set of messages, each of which provides a message string and its type.
+	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
+	// Attributes are documented under message.
 	// +kubebuilder:validation:Required
 	Message []MessageParameters `json:"message" tf:"message,omitempty"`
 
@@ -144,6 +147,9 @@ type ClarificationPromptParameters struct {
 	// +kubebuilder:validation:Required
 	MaxAttempts *float64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
 
+	// A set of messages, each of which provides a message string and its type.
+	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
+	// Attributes are documented under message.
 	// +kubebuilder:validation:Required
 	Message []ClarificationPromptMessageParameters `json:"message" tf:"message,omitempty"`
 

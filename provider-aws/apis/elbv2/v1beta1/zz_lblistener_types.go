@@ -18,9 +18,11 @@ type AuthenticateCognitoObservation struct {
 
 type AuthenticateCognitoParameters struct {
 
+	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. Detailed below.
 	// +kubebuilder:validation:Optional
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
+	// Behavior if the user is not authenticated. Valid values are deny, allow and authenticate.
 	// +kubebuilder:validation:Optional
 	OnUnauthenticatedRequest *string `json:"onUnauthenticatedRequest,omitempty" tf:"on_unauthenticated_request,omitempty"`
 
@@ -54,6 +56,7 @@ type AuthenticateOidcObservation struct {
 
 type AuthenticateOidcParameters struct {
 
+	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10.
 	// +kubebuilder:validation:Optional
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
@@ -73,6 +76,7 @@ type AuthenticateOidcParameters struct {
 	// +kubebuilder:validation:Required
 	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
 
+	// Behavior if the user is not authenticated. Valid values: deny, allow and authenticate
 	// +kubebuilder:validation:Optional
 	OnUnauthenticatedRequest *string `json:"onUnauthenticatedRequest,omitempty" tf:"on_unauthenticated_request,omitempty"`
 
@@ -157,6 +161,7 @@ type FixedResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	MessageBody *string `json:"messageBody,omitempty" tf:"message_body,omitempty"`
 
+	// HTTP response code. Valid values are 2XX, 4XX, or 5XX.
 	// +kubebuilder:validation:Optional
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
@@ -176,6 +181,8 @@ type ForwardParameters struct {
 }
 
 type LBListenerObservation struct {
+
+	// ARN of the listener (matches id).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// ARN of the listener (matches arn).
@@ -212,9 +219,11 @@ type LBListenerParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerArnSelector *v1.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
 
+	// Port on which the load balancer is listening. Not valid for Gateway Load Balancers.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Protocol for connections from clients to the load balancer. For Application Load Balancers, valid values are HTTP and HTTPS, with a default of HTTP. For Network Load Balancers, valid values are TCP, TLS, UDP, and TCP_UDP. Not valid to use UDP or TCP_UDP if dual-stack mode is enabled. Not valid for Gateway Load Balancers.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
@@ -245,9 +254,11 @@ type RedirectParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
+	// Port. Specify a value from 1 to 65535 or #{port}. Defaults to #{port}.
 	// +kubebuilder:validation:Optional
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Protocol. Valid values are HTTP, HTTPS, or #{protocol}. Defaults to #{protocol}.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
@@ -255,6 +266,7 @@ type RedirectParameters struct {
 	// +kubebuilder:validation:Optional
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
+	// HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302).
 	// +kubebuilder:validation:Required
 	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
 }
@@ -278,6 +290,7 @@ type TargetGroupObservation struct {
 
 type TargetGroupParameters struct {
 
+	// ARN of the target group.
 	// +crossplane:generate:reference:type=LBTargetGroup
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`

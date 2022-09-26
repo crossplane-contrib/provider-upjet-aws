@@ -58,12 +58,15 @@ type EFSVolumeConfigurationObservation struct {
 
 type EFSVolumeConfigurationParameters struct {
 
+	// Configuration block for authorization for the Amazon EFS file system. Detailed below.
 	// +kubebuilder:validation:Optional
 	AuthorizationConfig []AuthorizationConfigParameters `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
 
+	// ID of the EFS File System.
 	// +kubebuilder:validation:Required
 	FileSystemID *string `json:"fileSystemId" tf:"file_system_id,omitempty"`
 
+	// Directory within the Amazon EFS file system to mount as the root directory inside the host. If this parameter is omitted, the root of the Amazon EFS volume will be used. Specifying / will have the same effect as omitting this parameter. This argument is ignored when using authorization_config.
 	// +kubebuilder:validation:Optional
 	RootDirectory *string `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
 
@@ -105,12 +108,15 @@ type FSXWindowsFileServerVolumeConfigurationObservation struct {
 
 type FSXWindowsFileServerVolumeConfigurationParameters struct {
 
+	// Configuration block for authorization for the Amazon FSx for Windows File Server file system detailed below.
 	// +kubebuilder:validation:Required
 	AuthorizationConfig []FSXWindowsFileServerVolumeConfigurationAuthorizationConfigParameters `json:"authorizationConfig" tf:"authorization_config,omitempty"`
 
+	// The Amazon FSx for Windows File Server file system ID to use.
 	// +kubebuilder:validation:Required
 	FileSystemID *string `json:"fileSystemId" tf:"file_system_id,omitempty"`
 
+	// The directory within the Amazon FSx for Windows File Server file system to mount as the root directory inside the host.
 	// +kubebuilder:validation:Required
 	RootDirectory *string `json:"rootDirectory" tf:"root_directory,omitempty"`
 }
@@ -142,6 +148,7 @@ type ProxyConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
+	// Proxy type. The default value is APPMESH. The only supported value is APPMESH.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -272,6 +279,7 @@ type TaskDefinitionPlacementConstraintsParameters struct {
 	// +kubebuilder:validation:Optional
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
+	// Type of constraint. Use memberOf to restrict selection to a group of valid candidates. Note that distinctInstance is not supported in task definitions.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

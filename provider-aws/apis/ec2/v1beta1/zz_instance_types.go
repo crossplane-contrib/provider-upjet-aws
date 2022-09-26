@@ -52,6 +52,8 @@ type CreditSpecificationParameters struct {
 }
 
 type EBSBlockDeviceObservation struct {
+
+	// ID of the volume. For example, the ID can be accessed like this, aws_instance.web.ebs_block_device.2.volume_id.
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 }
 
@@ -454,6 +456,7 @@ type RootBlockDeviceObservation struct {
 	// Device name, e.g., /dev/sdh or xvdh.
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
+	// ID of the volume. For example, the ID can be accessed like this, aws_instance.web.root_block_device.0.volume_id.
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 }
 

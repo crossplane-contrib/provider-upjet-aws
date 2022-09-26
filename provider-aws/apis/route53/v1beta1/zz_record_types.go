@@ -22,9 +22,11 @@ type AliasParameters struct {
 	// +kubebuilder:validation:Required
 	EvaluateTargetHealth *bool `json:"evaluateTargetHealth" tf:"evaluate_target_health,omitempty"`
 
+	// The name of the record.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The ID of the hosted zone to contain this record.
 	// +kubebuilder:validation:Required
 	ZoneID *string `json:"zoneId" tf:"zone_id,omitempty"`
 }
@@ -34,6 +36,7 @@ type FailoverRoutingPolicyObservation struct {
 
 type FailoverRoutingPolicyParameters struct {
 
+	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -114,6 +117,7 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Optional
 	MultivalueAnswerRoutingPolicy *bool `json:"multivalueAnswerRoutingPolicy,omitempty" tf:"multivalue_answer_routing_policy,omitempty"`
 
+	// The name of the record.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -135,6 +139,7 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
+	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
@@ -142,6 +147,7 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Optional
 	WeightedRoutingPolicy []WeightedRoutingPolicyParameters `json:"weightedRoutingPolicy,omitempty" tf:"weighted_routing_policy,omitempty"`
 
+	// The ID of the hosted zone to contain this record.
 	// +crossplane:generate:reference:type=Zone
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`

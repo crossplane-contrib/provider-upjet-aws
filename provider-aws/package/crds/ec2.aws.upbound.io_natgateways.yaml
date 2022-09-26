@@ -65,7 +65,8 @@ spec:
               forProvider:
                 properties:
                   allocationId:
-                    description: The ID of the NAT Gateway.
+                    description: The Allocation ID of the Elastic IP address for the
+                      gateway. Required for connectivity_type of public.
                     type: string
                   allocationIdRef:
                     description: Reference to a EIP in ec2 to populate allocationId.
@@ -149,7 +150,8 @@ spec:
                       be created in.
                     type: string
                   subnetId:
-                    description: The ID of the NAT Gateway.
+                    description: The Subnet ID of the subnet in which to place the
+                      gateway.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet to populate subnetId.

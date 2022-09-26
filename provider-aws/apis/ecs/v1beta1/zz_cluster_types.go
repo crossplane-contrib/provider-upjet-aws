@@ -129,6 +129,7 @@ type SettingObservation struct {
 
 type SettingParameters struct {
 
+	// Name of the setting to manage. Valid values: containerInsights.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

@@ -65,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   group:
+                    description: –  The IAM Group name to attach the list of users
+                      to
                     type: string
                   groupRef:
                     description: Reference to a Group to populate group.
@@ -140,6 +142,7 @@ spec:
                         type: object
                     type: object
                   name:
+                    description: The name to identify the Group Membership
                     type: string
                   userRefs:
                     description: References to User to populate users.
@@ -218,6 +221,7 @@ spec:
                         type: object
                     type: object
                   users:
+                    description: A list of IAM User names to associate with the Group
                     items:
                       type: string
                     type: array

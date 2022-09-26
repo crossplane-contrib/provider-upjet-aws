@@ -22,6 +22,7 @@ type DestinationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
+	// The account ID of the destination registry to replicate to.
 	// +kubebuilder:validation:Required
 	RegistryID *string `json:"registryId" tf:"registry_id,omitempty"`
 }
@@ -29,6 +30,7 @@ type DestinationParameters struct {
 type ReplicationConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The account ID of the destination registry to replicate to.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 }
 

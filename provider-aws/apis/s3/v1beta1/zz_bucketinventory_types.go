@@ -18,6 +18,7 @@ type BucketInventoryDestinationObservation struct {
 
 type BucketInventoryDestinationParameters struct {
 
+	// The name of the source bucket that inventory lists the objects for.
 	// +kubebuilder:validation:Required
 	Bucket []DestinationBucketParameters `json:"bucket" tf:"bucket,omitempty"`
 }
@@ -27,6 +28,7 @@ type BucketInventoryFilterObservation struct {
 
 type BucketInventoryFilterParameters struct {
 
+	// The prefix that an object must have to be included in the inventory results.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
@@ -37,6 +39,7 @@ type BucketInventoryObservation struct {
 
 type BucketInventoryParameters struct {
 
+	// The name of the source bucket that inventory lists the objects for.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -115,6 +118,7 @@ type DestinationBucketParameters struct {
 	// +kubebuilder:validation:Required
 	Format *string `json:"format" tf:"format,omitempty"`
 
+	// The prefix that an object must have to be included in the inventory results.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }

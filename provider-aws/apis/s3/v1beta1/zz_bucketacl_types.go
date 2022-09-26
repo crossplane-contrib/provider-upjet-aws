@@ -58,7 +58,7 @@ type BucketACLObservation struct {
 	// +kubebuilder:validation:Optional
 	AccessControlPolicy []AccessControlPolicyObservation `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
 
-	// The ID of the owner.
+	// The bucket, expected_bucket_owner (if configured), and acl (if configured) separated by commas (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

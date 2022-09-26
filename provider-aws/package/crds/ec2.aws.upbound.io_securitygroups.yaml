@@ -65,6 +65,10 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: 'Security group description. Cannot be "". NOTE:
+                      This field maps to the AWS GroupDescription attribute, for which
+                      there is no Update API. If you''d like to classify your security
+                      groups in a way that can be updated, use tags.'
                     type: string
                   name:
                     description: Name of the security group.
@@ -359,8 +363,15 @@ spec:
                             type: string
                           type: array
                         description:
+                          description: 'Security group description. Cannot be "".
+                            NOTE: This field maps to the AWS GroupDescription attribute,
+                            for which there is no Update API. If you''d like to classify
+                            your security groups in a way that can be updated, use
+                            tags.'
                           type: string
                         fromPort:
+                          description: Start port (or ICMP type number if protocol
+                            is icmp or icmpv6).
                           type: number
                         ipv6CidrBlocks:
                           description: List of IPv6 CIDR blocks.
@@ -373,6 +384,11 @@ spec:
                             type: string
                           type: array
                         protocol:
+                          description: Protocol. If you select a protocol of -1 (semantically
+                            equivalent to all, which is not a valid value here), you
+                            must specify a from_port and to_port equal to 0.  The
+                            supported values are defined in the IpProtocol argument
+                            on the IpPermission API reference.12.
                           type: string
                         securityGroups:
                           description: List of security group Group Names if using
@@ -381,6 +397,8 @@ spec:
                             type: string
                           type: array
                         self:
+                          description: Whether the security group itself will be added
+                            as a source to this ingress rule.
                           type: boolean
                         toPort:
                           description: End range port (or ICMP code if protocol is
@@ -404,8 +422,15 @@ spec:
                             type: string
                           type: array
                         description:
+                          description: 'Security group description. Cannot be "".
+                            NOTE: This field maps to the AWS GroupDescription attribute,
+                            for which there is no Update API. If you''d like to classify
+                            your security groups in a way that can be updated, use
+                            tags.'
                           type: string
                         fromPort:
+                          description: Start port (or ICMP type number if protocol
+                            is icmp or icmpv6).
                           type: number
                         ipv6CidrBlocks:
                           description: List of IPv6 CIDR blocks.
@@ -418,6 +443,11 @@ spec:
                             type: string
                           type: array
                         protocol:
+                          description: Protocol. If you select a protocol of -1 (semantically
+                            equivalent to all, which is not a valid value here), you
+                            must specify a from_port and to_port equal to 0.  The
+                            supported values are defined in the IpProtocol argument
+                            on the IpPermission API reference.12.
                           type: string
                         securityGroups:
                           description: List of security group Group Names if using
@@ -426,6 +456,8 @@ spec:
                             type: string
                           type: array
                         self:
+                          description: Whether the security group itself will be added
+                            as a source to this ingress rule.
                           type: boolean
                         toPort:
                           description: End range port (or ICMP code if protocol is

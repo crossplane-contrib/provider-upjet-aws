@@ -79,6 +79,10 @@ spec:
                           items:
                             properties:
                               name:
+                                description: The unique name of the framework. The
+                                  name must be between 1 and 256 characters, starting
+                                  with a letter, and consisting of letters, numbers,
+                                  and underscores.
                                 type: string
                               value:
                                 description: The value of parameter, for example,
@@ -87,6 +91,9 @@ spec:
                             type: object
                           type: array
                         name:
+                          description: The unique name of the framework. The name
+                            must be between 1 and 256 characters, starting with a
+                            letter, and consisting of letters, numbers, and underscores.
                           type: string
                         scope:
                           description: 'The scope of a control. The control scope
@@ -112,6 +119,11 @@ spec:
                               tags:
                                 additionalProperties:
                                   type: string
+                                description: Metadata that you can assign to help
+                                  organize the frameworks you create. If configured
+                                  with a provider default_tags configuration block
+                                  present, tags with matching keys will overwrite
+                                  those defined at the provider-level.
                                 type: object
                             type: object
                           type: array
@@ -124,6 +136,9 @@ spec:
                       1,024 characters
                     type: string
                   name:
+                    description: The unique name of the framework. The name must be
+                      between 1 and 256 characters, starting with a letter, and consisting
+                      of letters, numbers, and underscores.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -132,6 +147,10 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Metadata that you can assign to help organize the
+                      frameworks you create. If configured with a provider default_tags
+                      configuration block present, tags with matching keys will overwrite
+                      those defined at the provider-level.
                     type: object
                 required:
                 - control

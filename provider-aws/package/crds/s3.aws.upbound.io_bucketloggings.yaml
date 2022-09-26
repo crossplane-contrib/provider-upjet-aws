@@ -240,6 +240,7 @@ spec:
                                   argument can be specified.
                                 type: string
                               id:
+                                description: The canonical user ID of the grantee.
                                 type: string
                               type:
                                 description: 'Type of grantee. Valid values: CanonicalUser,
@@ -445,6 +446,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The bucket or bucket and expected_bucket_owner separated
+                      by a comma (,) if the latter is provided.
                     type: string
                   targetGrant:
                     description: Set of configuration blocks with information for

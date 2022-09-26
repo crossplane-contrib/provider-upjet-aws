@@ -18,6 +18,7 @@ type BrokerObservation struct {
 	// ARN of the broker.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Unique ID that Amazon MQ generates for the broker.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of information about allocated brokers (both active & standby).
@@ -127,6 +128,7 @@ type ConfigurationObservation struct {
 
 type ConfigurationParameters struct {
 
+	// The Configuration ID.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/mq/v1beta1.Configuration
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

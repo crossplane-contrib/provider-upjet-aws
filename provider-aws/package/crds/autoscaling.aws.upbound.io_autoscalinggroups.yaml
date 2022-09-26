@@ -65,6 +65,10 @@ spec:
               forProvider:
                 properties:
                   availabilityZones:
+                    description: A list of one or more availability zones for the
+                      group. Used for EC2-Classic, attaching a network interface via
+                      id from a launch template and default subnets when not specified
+                      with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
                     items:
                       type: string
                     type: array
@@ -73,8 +77,12 @@ spec:
                       Otherwise, capacity rebalance is disabled.
                     type: boolean
                   defaultCooldown:
+                    description: The amount of time, in seconds, after a scaling activity
+                      completes before another scaling activity can start.
                     type: number
                   desiredCapacity:
+                    description: The number of Amazon EC2 instances that should be
+                      running in the group. (See also Waiting for Capacity below.)
                     type: number
                   enabledMetrics:
                     description: A list of metrics to collect. The allowed values
@@ -94,8 +102,12 @@ spec:
                       specified Auto Scaling group. Defined below
                     type: boolean
                   healthCheckGracePeriod:
+                    description: Time (in seconds) after instance comes into service
+                      before checking health.
                     type: number
                   healthCheckType:
+                    description: '"EC2" or "ELB". Controls how health checking is
+                      done.'
                     type: string
                   initialLifecycleHook:
                     description: One or more Lifecycle Hooks to attach to the Auto
@@ -114,8 +126,8 @@ spec:
                         lifecycleTransition:
                           type: string
                         name:
-                          description: The name of the launch template. Conflicts
-                            with id.
+                          description: The name of the Auto Scaling Group. Conflicts
+                            with name_prefix.
                           type: string
                         notificationMetadata:
                           type: string
@@ -186,6 +198,7 @@ spec:
                       type: object
                     type: array
                   launchConfiguration:
+                    description: The name of the launch configuration to use.
                     type: string
                   launchTemplate:
                     description: Nested argument with Launch template specification
@@ -291,6 +304,7 @@ spec:
                       86400 and 31536000 seconds.
                     type: number
                   maxSize:
+                    description: The maximum size of the Auto Scaling Group.
                     type: number
                   metricsGranularity:
                     description: The granularity to associate with the metrics to
@@ -301,6 +315,8 @@ spec:
                       (See also Waiting for Capacity below.)
                     type: number
                   minSize:
+                    description: The minimum size of the Auto Scaling Group. (See
+                      also Waiting for Capacity below.)
                     type: number
                   mixedInstancesPolicy:
                     description: Configuration block containing settings to define
@@ -350,12 +366,14 @@ spec:
                             type: object
                           type: array
                         launchTemplate:
-                          description: Nested argument with Launch template specification
-                            to use to launch instances. See Launch Template below
-                            for more details.
+                          description: Nested argument containing launch template
+                            settings along with the overrides to specify multiple
+                            instance types and weights. Defined below.
                           items:
                             properties:
                               launchTemplateSpecification:
+                                description: Nested argument defines the Launch Template.
+                                  Defined below.
                                 items:
                                   properties:
                                     launchTemplateId:
@@ -471,6 +489,8 @@ spec:
                                         Launch Template.
                                       type: string
                                     launchTemplateSpecification:
+                                      description: Nested argument defines the Launch
+                                        Template. Defined below.
                                       items:
                                         properties:
                                           launchTemplateId:
@@ -806,6 +826,9 @@ spec:
                       type: string
                     type: array
                   vpcZoneIdentifier:
+                    description: A list of subnet IDs to launch resources in. Subnets
+                      automatically determine which availability zones the group will
+                      reside. Conflicts with availability_zones.
                     items:
                       type: string
                     type: array
@@ -918,6 +941,8 @@ spec:
                             except Terminated for the Auto Scaling group.
                           type: number
                         minSize:
+                          description: The minimum size of the Auto Scaling Group.
+                            (See also Waiting for Capacity below.)
                           type: number
                         poolState:
                           description: 'Sets the instance state to transition to after

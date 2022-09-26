@@ -53,6 +53,7 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 			SelectorFieldName: "SubnetIDSelector",
 		}
 		r.UseAsync = true
+		r.MetaResource.ArgumentDocs["launch_template.version"] = `- (Required) EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.`
 	})
 	p.AddResourceConfigurator("aws_eks_identity_provider_config", func(r *config.Resource) {
 		r.Version = common.VersionV1Beta1

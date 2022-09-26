@@ -64,10 +64,14 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: Description of the IAM policy.
                     type: string
                   path:
+                    description: Path in which to create the policy. See IAM Identifiers
+                      for more information.
                     type: string
                   policy:
+                    description: The policy document. This is a JSON formatted string
                     type: string
                   tags:
                     additionalProperties:

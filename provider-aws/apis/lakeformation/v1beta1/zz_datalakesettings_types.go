@@ -18,6 +18,7 @@ type CreateDatabaseDefaultPermissionsObservation struct {
 
 type CreateDatabaseDefaultPermissionsParameters struct {
 
+	// List of permissions that are granted to the principal. Valid values may include ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, and CREATE_TABLE. For more details, see Lake Formation Permissions Reference.
 	// +kubebuilder:validation:Optional
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
@@ -31,6 +32,7 @@ type CreateTableDefaultPermissionsObservation struct {
 
 type CreateTableDefaultPermissionsParameters struct {
 
+	// List of permissions that are granted to the principal. Valid values may include ALL, SELECT, ALTER, DROP, DELETE, INSERT, and DESCRIBE. For more details, see Lake Formation Permissions Reference.
 	// +kubebuilder:validation:Optional
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 

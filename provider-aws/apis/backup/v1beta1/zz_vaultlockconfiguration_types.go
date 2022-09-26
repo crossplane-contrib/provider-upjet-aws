@@ -23,6 +23,7 @@ type VaultLockConfigurationObservation struct {
 
 type VaultLockConfigurationParameters struct {
 
+	// Name of the backup vault to add a lock configuration for.
 	// +crossplane:generate:reference:type=Vault
 	// +kubebuilder:validation:Optional
 	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`

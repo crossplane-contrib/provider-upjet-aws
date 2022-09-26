@@ -18,6 +18,7 @@ type BucketAnalyticsConfigurationFilterObservation struct {
 
 type BucketAnalyticsConfigurationFilterParameters struct {
 
+	// Object prefix for filtering.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -114,6 +115,7 @@ type S3BucketDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
+	// Object prefix for filtering.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }

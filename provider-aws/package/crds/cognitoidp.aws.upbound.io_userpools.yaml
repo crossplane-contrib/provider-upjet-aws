@@ -76,6 +76,7 @@ spec:
                           items:
                             properties:
                               name:
+                                description: Name of the user pool.
                                 type: string
                               priority:
                                 description: Positive integer specifying priority
@@ -106,10 +107,17 @@ spec:
                           items:
                             properties:
                               emailMessage:
+                                description: Message template for email messages.
+                                  Must contain {username} and {####} placeholders,
+                                  for username and temporary password, respectively.
                                 type: string
                               emailSubject:
+                                description: Subject line for email messages.
                                 type: string
                               smsMessage:
+                                description: Message template for SMS messages. Must
+                                  contain {username} and {####} placeholders, for
+                                  username and temporary password, respectively.
                                 type: string
                             type: object
                           type: array
@@ -200,9 +208,15 @@ spec:
                           items:
                             properties:
                               lambdaArn:
-                                description: ARN of the user pool.
+                                description: The Lambda Amazon Resource Name of the
+                                  Lambda function that Amazon Cognito triggers to
+                                  send email notifications to users.
                                 type: string
                               lambdaVersion:
+                                description: The Lambda version represents the signature
+                                  of the "request" attribute in the "event" information
+                                  Amazon Cognito passes to your custom email Lambda
+                                  function. The only supported value is V1_0.
                                 type: string
                             required:
                             - lambdaArn
@@ -218,9 +232,15 @@ spec:
                           items:
                             properties:
                               lambdaArn:
-                                description: ARN of the user pool.
+                                description: The Lambda Amazon Resource Name of the
+                                  Lambda function that Amazon Cognito triggers to
+                                  send SMS notifications to users.
                                 type: string
                               lambdaVersion:
+                                description: The Lambda version represents the signature
+                                  of the "request" attribute in the "event" information
+                                  Amazon Cognito passes to your custom SMS Lambda
+                                  function. The only supported value is V1_0.
                                 type: string
                             required:
                             - lambdaArn
@@ -271,6 +291,7 @@ spec:
                       be configured).
                     type: string
                   name:
+                    description: Name of the user pool.
                     type: string
                   passwordPolicy:
                     description: Configuration blocked for information about the user
@@ -329,6 +350,7 @@ spec:
                             has been created.
                           type: boolean
                         name:
+                          description: Name of the user pool.
                           type: string
                         numberAttributeConstraints:
                           description: Configuration block for the constraints for
@@ -547,6 +569,9 @@ spec:
                             or CONFIRM_WITH_LINK. Defaults to CONFIRM_WITH_CODE.
                           type: string
                         emailMessage:
+                          description: Email message template. Must contain the {####}
+                            placeholder. Conflicts with email_verification_message
+                            argument.
                           type: string
                         emailMessageByLink:
                           description: Email message template for sending a confirmation
@@ -554,12 +579,16 @@ spec:
                             placeholder.
                           type: string
                         emailSubject:
+                          description: Subject line for the email message template.
+                            Conflicts with email_verification_subject argument.
                           type: string
                         emailSubjectByLink:
                           description: Subject line for the email message template
                             for sending a confirmation link to the user.
                           type: string
                         smsMessage:
+                          description: SMS message template. Must contain the {####}
+                            placeholder. Conflicts with sms_verification_message argument.
                           type: string
                       type: object
                     type: array

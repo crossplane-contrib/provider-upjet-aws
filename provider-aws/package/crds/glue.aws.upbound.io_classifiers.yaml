@@ -100,6 +100,9 @@ spec:
                     items:
                       properties:
                         classification:
+                          description: An identifier of the data format that the classifier
+                            matches, such as Twitter, JSON, Omniture logs, Amazon
+                            CloudWatch Logs, and so on.
                           type: string
                         customPatterns:
                           description: Custom grok patterns used by this classifier.
@@ -134,6 +137,8 @@ spec:
                     items:
                       properties:
                         classification:
+                          description: An identifier of the data format that the classifier
+                            matches.
                           type: string
                         rowTag:
                           description: The XML tag designating the element that contains

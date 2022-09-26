@@ -103,6 +103,7 @@ type CloudwatchLogsObservation struct {
 
 type CloudwatchLogsParameters struct {
 
+	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
@@ -121,6 +122,8 @@ type CloudwatchLogsParameters struct {
 }
 
 type ClusterObservation struct {
+
+	// Amazon Resource Name (ARN) of the MSK Configuration to use in the cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Comma separated list of one or more hostname:port pairs of kafka brokers suitable to bootstrap connectivity to the kafka cluster. Contains a value if encryption_info.0.encryption_in_transit.0.client_broker is set to PLAINTEXT or TLS_PLAINTEXT. The resource sorts values alphabetically. AWS may not always return all endpoints so this value is not guaranteed to be stable across applies.
@@ -216,6 +219,7 @@ type ConfigurationInfoObservation struct {
 
 type ConfigurationInfoParameters struct {
 
+	// Amazon Resource Name (ARN) of the MSK Configuration to use in the cluster.
 	// +kubebuilder:validation:Required
 	Arn *string `json:"arn" tf:"arn,omitempty"`
 
@@ -267,7 +271,7 @@ type EncryptionInfoObservation struct {
 
 type EncryptionInfoParameters struct {
 
-	// You may specify a KMS key short ID or ARN (it will always output an ARN) to use for encrypting your data at rest.  If no key is specified, an AWS managed KMS ('aws/msk' managed service) key will be used for encrypting the data at rest.
+	// The ARN of the KMS key used for encryption at rest of the broker data volumes.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -304,6 +308,7 @@ type FirehoseParameters struct {
 	// +kubebuilder:validation:Optional
 	DeliveryStreamSelector *v1.Selector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
+	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
@@ -313,6 +318,7 @@ type JmxExporterObservation struct {
 
 type JmxExporterParameters struct {
 
+	// Indicates whether you want to enable or disable the JMX Exporter.
 	// +kubebuilder:validation:Required
 	EnabledInBroker *bool `json:"enabledInBroker" tf:"enabled_in_broker,omitempty"`
 }
@@ -332,6 +338,7 @@ type NodeExporterObservation struct {
 
 type NodeExporterParameters struct {
 
+	// Indicates whether you want to enable or disable the JMX Exporter.
 	// +kubebuilder:validation:Required
 	EnabledInBroker *bool `json:"enabledInBroker" tf:"enabled_in_broker,omitempty"`
 }
@@ -365,6 +372,7 @@ type ProvisionedThroughputObservation struct {
 
 type ProvisionedThroughputParameters struct {
 
+	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -401,6 +409,7 @@ type S3Parameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 

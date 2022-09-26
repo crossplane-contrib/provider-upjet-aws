@@ -188,7 +188,7 @@ type DestinationObservation struct {
 	// Enables S3 Replication Time Control (S3 RTC) (documented below).
 	ReplicationTime []ReplicationTimeObservation `json:"replicationTime,omitempty" tf:"replication_time,omitempty"`
 
-	// The storage class used to store the object. By default, Amazon S3 uses the storage class of the source object to create the object replica.
+	// Specifies the Amazon S3 storage class to which you want the object to transition.
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 }
 
@@ -291,7 +291,7 @@ type MetricsObservation struct {
 	// Threshold within which objects are to be replicated. The only valid value is 15.
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
-	// The status of replication metrics. Either Enabled or Disabled.
+	// The status of the rule. Either Enabled or Disabled. The rule is ignored if status is not Enabled.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -348,7 +348,7 @@ type ReplicationTimeObservation struct {
 	// Threshold within which objects are to be replicated. The only valid value is 15.
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
-	// The status of RTC. Either Enabled or Disabled.
+	// The status of the rule. Either Enabled or Disabled. The rule is ignored if status is not Enabled.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -427,7 +427,7 @@ type SourceSelectionCriteriaParameters struct {
 
 type SseKMSEncryptedObjectsObservation struct {
 
-	// Boolean which indicates if this criteria is enabled.
+	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 

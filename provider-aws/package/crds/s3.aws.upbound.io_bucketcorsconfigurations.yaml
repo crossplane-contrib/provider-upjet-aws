@@ -174,6 +174,8 @@ spec:
                             type: string
                           type: array
                         id:
+                          description: Unique identifier for the rule. The value cannot
+                            be longer than 255 characters.
                           type: string
                         maxAgeSeconds:
                           description: The time in seconds that your browser is to
@@ -373,6 +375,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The bucket or bucket and expected_bucket_owner separated
+                      by a comma (,) if the latter is provided.
                     type: string
                 type: object
               conditions:

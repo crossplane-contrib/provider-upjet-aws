@@ -19,6 +19,7 @@ type EIPAssociationObservation struct {
 
 type EIPAssociationParameters struct {
 
+	// The allocation ID. This is required for EC2-VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -37,6 +38,10 @@ type EIPAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowReassociation *bool `json:"allowReassociation,omitempty" tf:"allow_reassociation,omitempty"`
 
+	// The ID of the instance. This is required for
+	// EC2-Classic. For EC2-VPC, you can specify either the instance ID or the
+	// network interface ID, but not both. The operation fails if you specify an
+	// instance ID unless exactly one network interface is attached.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -50,12 +55,20 @@ type EIPAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
+	// The ID of the network interface. If the
+	// instance has more than one network interface, you must specify a network
+	// interface ID.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
+	// The primary or secondary private IP address
+	// to associate with the Elastic IP address. If no private IP address is
+	// specified, the Elastic IP address is associated with the primary private IP
+	// address.
 	// +kubebuilder:validation:Optional
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
+	// The Elastic IP address. This is required for EC2-Classic.
 	// +kubebuilder:validation:Optional
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 

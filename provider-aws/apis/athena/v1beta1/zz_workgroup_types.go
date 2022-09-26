@@ -15,6 +15,7 @@ import (
 
 type ConfigurationObservation struct {
 
+	// Configuration block for the Athena Engine Versioning. For more information, see Athena Engine Versioning. See Engine Version below.
 	// +kubebuilder:validation:Optional
 	EngineVersion []EngineVersionObservation `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 }
@@ -29,6 +30,7 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EnforceWorkgroupConfiguration *bool `json:"enforceWorkgroupConfiguration,omitempty" tf:"enforce_workgroup_configuration,omitempty"`
 
+	// Configuration block for the Athena Engine Versioning. For more information, see Athena Engine Versioning. See Engine Version below.
 	// +kubebuilder:validation:Optional
 	EngineVersion []EngineVersionParameters `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -119,6 +121,7 @@ type WorkgroupObservation struct {
 	// Amazon Resource Name (ARN) of the workgroup
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Configuration block with various settings for the workgroup. Documented below.
 	// +kubebuilder:validation:Optional
 	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
@@ -131,6 +134,7 @@ type WorkgroupObservation struct {
 
 type WorkgroupParameters struct {
 
+	// Configuration block with various settings for the workgroup. Documented below.
 	// +kubebuilder:validation:Optional
 	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 

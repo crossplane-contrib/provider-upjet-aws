@@ -74,6 +74,10 @@ spec:
                       set or it can be derived from IPAM using ipv4_netmask_length.
                     type: string
                   enableClassiclink:
+                    description: A boolean flag to enable/disable ClassicLink for
+                      the VPC. Only valid in regions and accounts that support EC2
+                      Classic. See the ClassicLink documentation for more information.
+                      Defaults false.
                     type: boolean
                   enableClassiclinkDnsSupport:
                     description: A boolean flag to enable/disable ClassicLink DNS
@@ -81,10 +85,23 @@ spec:
                       support EC2 Classic.
                     type: boolean
                   enableDnsHostnames:
+                    description: A boolean flag to enable/disable DNS hostnames in
+                      the VPC. Defaults false.
                     type: boolean
                   enableDnsSupport:
+                    description: A boolean flag to enable/disable DNS support in the
+                      VPC. Defaults true.
                     type: boolean
                   instanceTenancy:
+                    description: A tenancy option for instances launched into the
+                      VPC. Default is default, which ensures that EC2 instances launched
+                      in this VPC use the EC2 instance tenancy attribute specified
+                      when the EC2 instance is launched. The only other option is
+                      dedicated, which ensures that EC2 instances launched in this
+                      VPC are run on dedicated tenancy instances regardless of the
+                      tenancy attribute specified at launch. This has a dedicated
+                      per region fee of $2 per hour, plus an hourly per instance usage
+                      fee.
                     type: string
                   ipv4IpamPoolId:
                     description: The ID of an IPv4 IPAM pool you want to use for allocating
@@ -103,6 +120,11 @@ spec:
                       be set explicitly or derived from IPAM using ipv6_netmask_length.
                     type: string
                   ipv6CidrBlockNetworkBorderGroup:
+                    description: By default when an IPv6 CIDR is assigned to a VPC
+                      a default ipv6_cidr_block_network_border_group will be set to
+                      the region of the VPC. This can be changed to restrict advertisement
+                      of public addresses to specific Network Border Groups such as
+                      LocalZones.
                     type: string
                   ipv6IpamPoolId:
                     description: IPAM Pool ID for a IPv6 pool. Conflicts with assign_generated_ipv6_cidr_block.

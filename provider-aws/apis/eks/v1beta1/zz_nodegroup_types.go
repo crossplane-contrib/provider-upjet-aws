@@ -14,6 +14,8 @@ import (
 )
 
 type AutoscalingGroupsObservation struct {
+
+	// Name of the AutoScaling Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -25,12 +27,15 @@ type LaunchTemplateObservation struct {
 
 type LaunchTemplateParameters struct {
 
+	// Identifier of the EC2 Launch Template. Conflicts with name.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Name of the EC2 Launch Template. Conflicts with id.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 }
@@ -40,6 +45,7 @@ type NodeGroupObservation struct {
 	// Amazon Resource Name (ARN) of the EKS Node Group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// EKS Cluster name and EKS Node Group name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of objects containing information about underlying resources.
@@ -153,6 +159,7 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	UpdateConfig []UpdateConfigParameters `json:"updateConfig,omitempty" tf:"update_config,omitempty"`
 
+	// –  Kubernetes version. Defaults to EKS Cluster Kubernetes version.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }

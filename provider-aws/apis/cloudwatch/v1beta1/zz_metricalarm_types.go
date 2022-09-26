@@ -18,6 +18,7 @@ type MetricAlarmObservation struct {
 	// The ARN of the CloudWatch Metric Alarm.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ID of the health check.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
@@ -46,6 +47,7 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	DatapointsToAlarm *float64 `json:"datapointsToAlarm,omitempty" tf:"datapoints_to_alarm,omitempty"`
 
+	// The dimensions for the alarm's associated metric.  For the list of available dimensions see the AWS documentation here.
 	// +kubebuilder:validation:Optional
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
@@ -70,6 +72,8 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	InsufficientDataActions []*string `json:"insufficientDataActions,omitempty" tf:"insufficient_data_actions,omitempty"`
 
+	// The name for the alarm's associated metric.
+	// See docs for supported metrics.
 	// +kubebuilder:validation:Optional
 	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
@@ -77,6 +81,8 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	MetricQuery []MetricQueryParameters `json:"metricQuery,omitempty" tf:"metric_query,omitempty"`
 
+	// The namespace for the alarm's associated metric. See docs for the list of namespaces.
+	// See docs for supported metrics.
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
@@ -84,6 +90,7 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
 
+	// The period in seconds over which the specified statistic is applied.
 	// +kubebuilder:validation:Optional
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
@@ -113,6 +120,7 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	TreatMissingData *string `json:"treatMissingData,omitempty" tf:"treat_missing_data,omitempty"`
 
+	// The unit for the alarm's associated metric.
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
@@ -122,15 +130,21 @@ type MetricObservation struct {
 
 type MetricParameters struct {
 
+	// The dimensions for this metric.  For the list of available dimensions see the AWS documentation here.
 	// +kubebuilder:validation:Optional
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
+	// The name for this metric.
+	// See docs for supported metrics.
 	// +kubebuilder:validation:Required
 	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
+	// The namespace for this metric. See docs for the list of namespaces.
+	// See docs for supported metrics.
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
+	// The period in seconds over which the specified stat is applied.
 	// +kubebuilder:validation:Required
 	Period *float64 `json:"period" tf:"period,omitempty"`
 
@@ -139,6 +153,7 @@ type MetricParameters struct {
 	// +kubebuilder:validation:Required
 	Stat *string `json:"stat" tf:"stat,omitempty"`
 
+	// The unit for this metric.
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
@@ -156,6 +171,7 @@ type MetricQueryParameters struct {
 	// +kubebuilder:validation:Optional
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
+	// A short name used to tie this object to the results in the response. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscore. The first character must be a lowercase letter.
 	// +kubebuilder:validation:Required
 	ID *string `json:"id" tf:"id,omitempty"`
 

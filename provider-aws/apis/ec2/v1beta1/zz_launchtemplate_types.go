@@ -18,9 +18,11 @@ type AcceleratorCountObservation struct {
 
 type AcceleratorCountParameters struct {
 
+	// Maximum.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
@@ -30,9 +32,11 @@ type AcceleratorTotalMemoryMibObservation struct {
 
 type AcceleratorTotalMemoryMibParameters struct {
 
+	// Maximum.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
@@ -42,9 +46,11 @@ type BaselineEBSBandwidthMbpsObservation struct {
 
 type BaselineEBSBandwidthMbpsParameters struct {
 
+	// Maximum.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
@@ -599,9 +605,11 @@ type MemoryGibPerVcpuObservation struct {
 
 type MemoryGibPerVcpuParameters struct {
 
+	// Maximum.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
@@ -611,9 +619,11 @@ type MemoryMibObservation struct {
 
 type MemoryMibParameters struct {
 
+	// Maximum.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum.
 	// +kubebuilder:validation:Required
 	Min *float64 `json:"min" tf:"min,omitempty"`
 }
@@ -633,9 +643,11 @@ type NetworkInterfaceCountObservation struct {
 
 type NetworkInterfaceCountParameters struct {
 
+	// Maximum.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
@@ -853,9 +865,11 @@ type TotalLocalStorageGbObservation struct {
 
 type TotalLocalStorageGbParameters struct {
 
+	// Maximum.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
@@ -865,9 +879,11 @@ type VcpuCountObservation struct {
 
 type VcpuCountParameters struct {
 
+	// Maximum.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum.
 	// +kubebuilder:validation:Required
 	Min *float64 `json:"min" tf:"min,omitempty"`
 }

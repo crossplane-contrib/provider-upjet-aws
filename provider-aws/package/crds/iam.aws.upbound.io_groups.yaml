@@ -64,6 +64,7 @@ spec:
               forProvider:
                 properties:
                   path:
+                    description: Path in which to create the group.
                     type: string
                 type: object
               providerConfigRef:

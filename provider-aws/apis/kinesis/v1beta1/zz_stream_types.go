@@ -67,6 +67,8 @@ type StreamParameters struct {
 	// +kubebuilder:validation:Optional
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
+	// –  The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
+	// Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
 	// +kubebuilder:validation:Optional
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 

@@ -27,7 +27,7 @@ type UsagePlanKeyObservation struct {
 
 type UsagePlanKeyParameters struct {
 
-	// The Id of a usage plan key.
+	// The identifier of the API key resource.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.APIKey
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -41,6 +41,7 @@ type UsagePlanKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
+	// The type of the API key resource. Currently, the valid key type is API_KEY.
 	// +kubebuilder:validation:Required
 	KeyType *string `json:"keyType" tf:"key_type,omitempty"`
 
@@ -49,7 +50,7 @@ type UsagePlanKeyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The Id of a usage plan key.
+	// The Id of the usage plan resource representing to associate the key to.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/apigateway/v1beta1.UsagePlan
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

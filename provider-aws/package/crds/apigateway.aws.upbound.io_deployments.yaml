@@ -162,6 +162,11 @@ spec:
                   triggers:
                     additionalProperties:
                       type: string
+                    description: argument or explicit resource references using the
+                      resource . The triggers argument should be preferred over depends_on,
+                      since depends_on can only capture dependency ordering and will
+                      not cause the resource to recreate (redeploy the REST API) with
+                      upstream configuration changes.
                     type: object
                   variables:
                     additionalProperties:

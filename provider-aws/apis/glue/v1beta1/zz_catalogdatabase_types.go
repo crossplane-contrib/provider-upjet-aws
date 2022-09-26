@@ -24,7 +24,7 @@ type CatalogDatabaseObservation struct {
 
 type CatalogDatabaseParameters struct {
 
-	// Catalog ID and name of the database
+	// ID of the Glue Catalog to create the database in. If omitted, this defaults to the AWS Account ID.
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
@@ -83,7 +83,7 @@ type TargetDatabaseObservation struct {
 
 type TargetDatabaseParameters struct {
 
-	// Catalog ID and name of the database
+	// ID of the Data Catalog in which the database resides.
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 

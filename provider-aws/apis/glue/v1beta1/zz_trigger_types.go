@@ -32,11 +32,11 @@ type ActionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Arguments map[string]*string `json:"arguments,omitempty" tf:"arguments,omitempty"`
 
-	// –  The name of the trigger.
+	// The name of the crawler to be executed. Conflicts with job_name.
 	// +kubebuilder:validation:Optional
 	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
 
-	// –  The name of the trigger.
+	// The name of a job to be executed. Conflicts with crawler_name.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.Job
 	// +kubebuilder:validation:Optional
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
@@ -71,11 +71,11 @@ type ConditionsParameters struct {
 	// +kubebuilder:validation:Optional
 	CrawlState *string `json:"crawlState,omitempty" tf:"crawl_state,omitempty"`
 
-	// –  The name of the trigger.
+	// The name of the crawler to be executed. Conflicts with job_name.
 	// +kubebuilder:validation:Optional
 	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
 
-	// –  The name of the trigger.
+	// The name of a job to be executed. Conflicts with crawler_name.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.Job
 	// +kubebuilder:validation:Optional
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
@@ -92,6 +92,7 @@ type ConditionsParameters struct {
 	// +kubebuilder:validation:Optional
 	LogicalOperator *string `json:"logicalOperator,omitempty" tf:"logical_operator,omitempty"`
 
+	// The condition job state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED. If this is specified, job_name must also be specified. Conflicts with crawler_state.
 	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
@@ -132,6 +133,7 @@ type TriggerObservation struct {
 	// Trigger name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The condition job state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED. If this is specified, job_name must also be specified. Conflicts with crawler_state.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.

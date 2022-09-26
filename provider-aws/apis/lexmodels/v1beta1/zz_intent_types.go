@@ -132,6 +132,9 @@ type FollowUpPromptParameters struct {
 	// +kubebuilder:validation:Required
 	Prompt []PromptParameters `json:"prompt" tf:"prompt,omitempty"`
 
+	// If the user answers "no" to the question defined in the prompt field,
+	// Amazon Lex responds with this statement to acknowledge that the intent was canceled. Attributes are
+	// documented below under statement.
 	// +kubebuilder:validation:Required
 	RejectionStatement []RejectionStatementParameters `json:"rejectionStatement" tf:"rejection_statement,omitempty"`
 }
@@ -194,6 +197,7 @@ type IntentParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	CreateVersion *bool `json:"createVersion,omitempty" tf:"create_version,omitempty"`
 
+	// A description of the intent. Must be less than or equal to 200 characters in length.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -227,9 +231,16 @@ type IntentParameters_2 struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// When the user answers "no" to the question defined in
+	// confirmation_prompt, Amazon Lex responds with this statement to acknowledge that the intent was
+	// canceled. You must provide both the rejection_statement and the confirmation_prompt, or neither.
+	// Attributes are documented under statement.
 	// +kubebuilder:validation:Optional
 	RejectionStatement []IntentRejectionStatementParameters `json:"rejectionStatement,omitempty" tf:"rejection_statement,omitempty"`
 
+	// An array of utterances (strings) that a user might say to signal
+	// the intent. For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".
+	// In each utterance, a slot name is enclosed in curly braces. Must have between 1 and 10 items in the list, and each item must be less than or equal to 200 characters in length.
 	// +kubebuilder:validation:Optional
 	SampleUtterances []*string `json:"sampleUtterances,omitempty" tf:"sample_utterances,omitempty"`
 
@@ -359,9 +370,11 @@ type SlotObservation struct {
 
 type SlotParameters struct {
 
+	// A description of the bot. Must be less than or equal to 200 characters in length.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The name of the intent slot that you want to create. The name is case sensitive. Must be less than or equal to 100 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -378,6 +391,9 @@ type SlotParameters struct {
 	// +kubebuilder:validation:Optional
 	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
 
+	// If you know a specific pattern with which users might respond to
+	// an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy. This
+	// is optional. In most cases, Amazon Lex is capable of understanding user utterances. Must have between 1 and 10 items in the list, and each item must be less than or equal to 200 characters in length.
 	// +kubebuilder:validation:Optional
 	SampleUtterances []*string `json:"sampleUtterances,omitempty" tf:"sample_utterances,omitempty"`
 

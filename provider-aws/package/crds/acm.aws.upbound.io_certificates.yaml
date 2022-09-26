@@ -74,6 +74,8 @@ spec:
                     description: The certificate's PEM-formatted chain
                     type: string
                   domainName:
+                    description: A domain name for which the certificate should be
+                      issued
                     type: string
                   options:
                     description: Configuration block used to set certificate options.
@@ -131,6 +133,8 @@ spec:
                     items:
                       properties:
                         domainName:
+                          description: A fully qualified domain name (FQDN) in the
+                            certificate.
                           type: string
                         validationDomain:
                           description: The domain name that you want ACM to use to
@@ -335,6 +339,8 @@ spec:
                     items:
                       properties:
                         domainName:
+                          description: A fully qualified domain name (FQDN) in the
+                            certificate.
                           type: string
                         resourceRecordName:
                           description: The name of the DNS record to create to validate

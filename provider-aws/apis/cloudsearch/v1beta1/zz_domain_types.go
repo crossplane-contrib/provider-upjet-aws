@@ -89,6 +89,7 @@ type IndexFieldParameters struct {
 	// +kubebuilder:validation:Optional
 	Highlight *bool `json:"highlight,omitempty" tf:"highlight,omitempty"`
 
+	// The name of the CloudSearch domain.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

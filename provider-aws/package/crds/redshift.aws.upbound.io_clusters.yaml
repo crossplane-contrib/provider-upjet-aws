@@ -70,11 +70,19 @@ spec:
                       running on the cluster. Default is true
                     type: boolean
                   automatedSnapshotRetentionPeriod:
-                    description: The number of days to retain automated snapshots
-                      in the destination region after they are copied from the source
-                      region. Defaults to 7.
+                    description: The number of days that automated snapshots are retained.
+                      If the value is 0, automated snapshots are disabled. Even if
+                      automated snapshots are disabled, you can still create manual
+                      snapshots when you want with create-cluster-snapshot. Default
+                      is 1.
                     type: number
                   availabilityZone:
+                    description: The EC2 Availability Zone (AZ) in which you want
+                      Amazon Redshift to provision the cluster. For example, if you
+                      have several EC2 instances running in a specific Availability
+                      Zone, then you might want the cluster to be provisioned in the
+                      same zone in order to decrease network latency. Can only be
+                      changed if availability_zone_relocation_enabled is true.
                     type: string
                   availabilityZoneRelocationEnabled:
                     description: If true, the cluster can be relocated to another
@@ -83,6 +91,8 @@ spec:
                       instance family.
                     type: boolean
                   clusterParameterGroupName:
+                    description: The name of the parameter group to be associated
+                      with this cluster.
                     type: string
                   clusterPublicKey:
                     description: The public key for the cluster
@@ -92,21 +102,35 @@ spec:
                       cluster
                     type: string
                   clusterSecurityGroups:
+                    description: A list of security groups to be associated with this
+                      cluster.
                     items:
                       type: string
                     type: array
                   clusterSubnetGroupName:
+                    description: The name of a cluster subnet group to be associated
+                      with this cluster. If this parameter is not provided the resulting
+                      cluster will be deployed outside virtual private cloud (VPC).
                     type: string
                   clusterType:
+                    description: The cluster type to use. Either single-node or multi-node.
                     type: string
                   clusterVersion:
+                    description: The version of the Amazon Redshift engine software
+                      that you want to deploy on the cluster. The version selected
+                      runs on all the nodes in the cluster.
                     type: string
                   databaseName:
+                    description: The name of the first database to be created when
+                      the cluster is created. If you do not provide a name, Amazon
+                      Redshift will create a default database called dev.
                     type: string
                   elasticIp:
                     description: The Elastic IP (EIP) address for the cluster.
                     type: string
                   encrypted:
+                    description: If true , the data in the cluster is encrypted at
+                      rest.
                     type: boolean
                   endpoint:
                     description: The connection endpoint
@@ -325,6 +349,7 @@ spec:
                     description: Username for the master DB user.
                     type: string
                   nodeType:
+                    description: The node type to be provisioned for the cluster.
                     type: string
                   numberOfNodes:
                     description: The number of compute nodes in the cluster. This
@@ -337,8 +362,15 @@ spec:
                       own, optional if you own the snapshot.
                     type: string
                   port:
+                    description: The port number on which the cluster accepts incoming
+                      connections. The cluster is accessible only via the JDBC and
+                      ODBC connection strings. Part of the connection string requires
+                      the port on which the cluster will listen for incoming connections.
+                      Default port is 5439.
                     type: number
                   preferredMaintenanceWindow:
+                    description: 'The weekly time range (in UTC) during which automated
+                      cluster maintenance can occur. Format: ddd:hh24:mi-ddd:hh24:mi'
                     type: string
                   publiclyAccessible:
                     description: If true, the cluster can be accessed from a public
@@ -471,6 +503,8 @@ spec:
                         type: object
                     type: object
                   vpcSecurityGroupIds:
+                    description: A list of Virtual Private Cloud (VPC) security groups
+                      to be associated with the cluster.
                     items:
                       type: string
                     type: array

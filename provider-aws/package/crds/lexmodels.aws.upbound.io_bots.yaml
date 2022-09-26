@@ -70,6 +70,10 @@ spec:
                     items:
                       properties:
                         message:
+                          description: A set of messages, each of which provides a
+                            message string and its type. You can specify the message
+                            string in plain text or in Speech Synthesis Markup Language
+                            (SSML). Attributes are documented under message.
                           items:
                             properties:
                               content:
@@ -116,6 +120,10 @@ spec:
                             information.
                           type: number
                         message:
+                          description: A set of messages, each of which provides a
+                            message string and its type. You can specify the message
+                            string in plain text or in Speech Synthesis Markup Language
+                            (SSML). Attributes are documented under message.
                           items:
                             properties:
                               content:

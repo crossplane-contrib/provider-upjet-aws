@@ -84,7 +84,8 @@ spec:
                                       items:
                                         properties:
                                           bucketArn:
-                                            description: The ARN of the application.
+                                            description: The ARN for the S3 bucket
+                                              containing the application code.
                                             type: string
                                           bucketArnRef:
                                             description: Reference to a Bucket in
@@ -177,6 +178,8 @@ spec:
                                                 type: object
                                             type: object
                                           fileKey:
+                                            description: The file key for the object
+                                              containing the application code.
                                             type: string
                                           fileKeyRef:
                                             description: Reference to a Object in
@@ -348,6 +351,15 @@ spec:
                                         Analytics application.
                                       type: boolean
                                     configurationType:
+                                      description: 'Describes whether the application
+                                        uses Kinesis Data Analytics'' default checkpointing
+                                        behavior. Valid values: CUSTOM, DEFAULT. Set
+                                        this attribute to CUSTOM in order for any
+                                        specified checkpointing_enabled, checkpoint_interval,
+                                        or min_pause_between_checkpoints attribute
+                                        values to be effective. If this attribute
+                                        is set to DEFAULT, the application will always
+                                        use the following values:'
                                       type: string
                                     minPauseBetweenCheckpoints:
                                       description: Describes the minimum time in milliseconds
@@ -364,6 +376,15 @@ spec:
                                 items:
                                   properties:
                                     configurationType:
+                                      description: 'Describes whether the application
+                                        uses Kinesis Data Analytics'' default checkpointing
+                                        behavior. Valid values: CUSTOM, DEFAULT. Set
+                                        this attribute to CUSTOM in order for any
+                                        specified checkpointing_enabled, checkpoint_interval,
+                                        or min_pause_between_checkpoints attribute
+                                        values to be effective. If this attribute
+                                        is set to DEFAULT, the application will always
+                                        use the following values:'
                                       type: string
                                     logLevel:
                                       description: 'Describes the verbosity of the
@@ -392,6 +413,15 @@ spec:
                                         throughput.
                                       type: boolean
                                     configurationType:
+                                      description: 'Describes whether the application
+                                        uses Kinesis Data Analytics'' default checkpointing
+                                        behavior. Valid values: CUSTOM, DEFAULT. Set
+                                        this attribute to CUSTOM in order for any
+                                        specified checkpointing_enabled, checkpoint_interval,
+                                        or min_pause_between_checkpoints attribute
+                                        values to be effective. If this attribute
+                                        is set to DEFAULT, the application will always
+                                        use the following values:'
                                       type: string
                                     parallelism:
                                       description: Describes the initial number of
@@ -483,7 +513,9 @@ spec:
                                             items:
                                               properties:
                                                 resourceArn:
-                                                  description: The ARN of the application.
+                                                  description: The ARN of the Lambda
+                                                    function that operates on records
+                                                    in the stream.
                                                   type: string
                                               required:
                                               - resourceArn
@@ -513,6 +545,7 @@ spec:
                                                     input or the reference data source.
                                                   type: string
                                                 name:
+                                                  description: The name of the application.
                                                   type: string
                                                 sqlType:
                                                   description: The type of column
@@ -589,6 +622,8 @@ spec:
                                                     type: object
                                                   type: array
                                                 recordFormatType:
+                                                  description: 'The type of record
+                                                    format. Valid values: CSV, JSON.'
                                                   type: string
                                               required:
                                               - mappingParameters
@@ -620,7 +655,8 @@ spec:
                                       items:
                                         properties:
                                           resourceArn:
-                                            description: The ARN of the application.
+                                            description: The ARN of the Lambda function
+                                              that operates on records in the stream.
                                             type: string
                                         required:
                                         - resourceArn
@@ -633,7 +669,8 @@ spec:
                                       items:
                                         properties:
                                           resourceArn:
-                                            description: The ARN of the application.
+                                            description: The ARN of the Lambda function
+                                              that operates on records in the stream.
                                             type: string
                                           resourceArnRef:
                                             description: Reference to a Stream in
@@ -746,6 +783,8 @@ spec:
                                       items:
                                         properties:
                                           recordFormatType:
+                                            description: 'The type of record format.
+                                              Valid values: CSV, JSON.'
                                             type: string
                                         required:
                                         - recordFormatType
@@ -757,7 +796,8 @@ spec:
                                       items:
                                         properties:
                                           resourceArn:
-                                            description: The ARN of the application.
+                                            description: The ARN of the Lambda function
+                                              that operates on records in the stream.
                                             type: string
                                           resourceArnRef:
                                             description: Reference to a DeliveryStream
@@ -857,7 +897,8 @@ spec:
                                       items:
                                         properties:
                                           resourceArn:
-                                            description: The ARN of the application.
+                                            description: The ARN of the Lambda function
+                                              that operates on records in the stream.
                                             type: string
                                         required:
                                         - resourceArn
@@ -869,7 +910,8 @@ spec:
                                       items:
                                         properties:
                                           resourceArn:
-                                            description: The ARN of the application.
+                                            description: The ARN of the Lambda function
+                                              that operates on records in the stream.
                                             type: string
                                           resourceArnRef:
                                             description: Reference to a Function in
@@ -964,6 +1006,7 @@ spec:
                                         type: object
                                       type: array
                                     name:
+                                      description: The name of the application.
                                       type: string
                                   required:
                                   - destinationSchema
@@ -995,6 +1038,7 @@ spec:
                                                     input or the reference data source.
                                                   type: string
                                                 name:
+                                                  description: The name of the application.
                                                   type: string
                                                 sqlType:
                                                   description: The type of column
@@ -1071,6 +1115,8 @@ spec:
                                                     type: object
                                                   type: array
                                                 recordFormatType:
+                                                  description: 'The type of record
+                                                    format. Valid values: CSV, JSON.'
                                                   type: string
                                               required:
                                               - mappingParameters
@@ -1088,7 +1134,8 @@ spec:
                                       items:
                                         properties:
                                           bucketArn:
-                                            description: The ARN of the application.
+                                            description: The ARN for the S3 bucket
+                                              containing the application code.
                                             type: string
                                           bucketArnRef:
                                             description: Reference to a Bucket in
@@ -1181,6 +1228,8 @@ spec:
                                                 type: object
                                             type: object
                                           fileKey:
+                                            description: The file key for the object
+                                              containing the application code.
                                             type: string
                                         required:
                                         - fileKey

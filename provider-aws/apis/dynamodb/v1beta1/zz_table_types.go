@@ -18,6 +18,8 @@ type AttributeObservation struct {
 
 type AttributeParameters struct {
 
+	// The name of the table, this needs to be unique
+	// within a region.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -31,9 +33,12 @@ type GlobalSecondaryIndexObservation struct {
 
 type GlobalSecondaryIndexParameters struct {
 
+	// The name of the hash key in the index; must be
+	// defined as an attribute in the resource.
 	// +kubebuilder:validation:Required
 	HashKey *string `json:"hashKey" tf:"hash_key,omitempty"`
 
+	// The name of the index
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -51,12 +56,15 @@ type GlobalSecondaryIndexParameters struct {
 	// +kubebuilder:validation:Required
 	ProjectionType *string `json:"projectionType" tf:"projection_type,omitempty"`
 
+	// The name of the range key; must be defined
 	// +kubebuilder:validation:Optional
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
+	// The number of read units for this index. Must be set if billing_mode is set to PROVISIONED.
 	// +kubebuilder:validation:Optional
 	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
+	// The number of write units for this index. Must be set if billing_mode is set to PROVISIONED.
 	// +kubebuilder:validation:Optional
 	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
 }
@@ -66,6 +74,7 @@ type LocalSecondaryIndexObservation struct {
 
 type LocalSecondaryIndexParameters struct {
 
+	// The name of the index
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -83,6 +92,7 @@ type LocalSecondaryIndexParameters struct {
 	// +kubebuilder:validation:Required
 	ProjectionType *string `json:"projectionType" tf:"projection_type,omitempty"`
 
+	// The name of the range key; must be defined
 	// +kubebuilder:validation:Required
 	RangeKey *string `json:"rangeKey" tf:"range_key,omitempty"`
 }
@@ -92,7 +102,7 @@ type PointInTimeRecoveryObservation struct {
 
 type PointInTimeRecoveryParameters struct {
 
-	// Indicates whether ttl is enabled (true) or disabled (false).
+	// Whether to enable point-in-time recovery - note that it can take up to 10 minutes to enable for new tables. If the point_in_time_recovery block is not provided then this defaults to false.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
@@ -102,10 +112,12 @@ type ServerSideEncryptionObservation struct {
 
 type ServerSideEncryptionParameters struct {
 
-	// Indicates whether ttl is enabled (true) or disabled (false).
+	// Whether or not to enable encryption at rest using an AWS managed KMS customer master key (CMK).
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
+	// The ARN of the CMK that should be used for the AWS KMS encryption.
+	// This attribute should only be specified if the key is different from the default DynamoDB CMK, alias/aws/dynamodb.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
@@ -119,7 +131,7 @@ type TTLParameters struct {
 	// +kubebuilder:validation:Required
 	AttributeName *string `json:"attributeName" tf:"attribute_name,omitempty"`
 
-	// Indicates whether ttl is enabled (true) or disabled (false).
+	// Whether or not to enable encryption at rest using an AWS managed KMS customer master key (CMK).
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -161,6 +173,7 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalSecondaryIndex []GlobalSecondaryIndexParameters `json:"globalSecondaryIndex,omitempty" tf:"global_secondary_index,omitempty"`
 
+	// The attribute to use as the hash (partition) key. Must also be defined as an attribute, see below.
 	// +kubebuilder:validation:Optional
 	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
 
@@ -174,9 +187,11 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	PointInTimeRecovery []PointInTimeRecoveryParameters `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
+	// The attribute to use as the range (sort) key. Must also be defined as an attribute, see below.
 	// +kubebuilder:validation:Optional
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
+	// The number of read units for this table. If the billing_mode is PROVISIONED, this field is required.
 	// +kubebuilder:validation:Optional
 	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
@@ -225,6 +240,7 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The number of write units for this table. If the billing_mode is PROVISIONED, this field is required.
 	// +kubebuilder:validation:Optional
 	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
 }
@@ -234,6 +250,7 @@ type TableReplicaObservation struct {
 
 type TableReplicaParameters struct {
 
+	// The ARN of the CMK that should be used for the AWS KMS encryption.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 

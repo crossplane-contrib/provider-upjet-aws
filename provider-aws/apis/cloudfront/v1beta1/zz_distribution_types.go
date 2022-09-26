@@ -175,9 +175,13 @@ type DefaultCacheBehaviorParameters struct {
 	// +kubebuilder:validation:Required
 	TargetOriginID *string `json:"targetOriginId" tf:"target_origin_id,omitempty"`
 
+	// A list of key group IDs that CloudFront can use to validate signed URLs or signed cookies.
+	// See the CloudFront User Guide for more information about this feature.
 	// +kubebuilder:validation:Optional
 	TrustedKeyGroups []*string `json:"trustedKeyGroups,omitempty" tf:"trusted_key_groups,omitempty"`
 
+	// List of AWS account IDs (or self) that you want to allow to create signed URLs for private content.
+	// See the CloudFront User Guide for more information about this feature.
 	// +kubebuilder:validation:Optional
 	TrustedSigners []*string `json:"trustedSigners,omitempty" tf:"trusted_signers,omitempty"`
 
@@ -198,6 +202,8 @@ type DistributionObservation struct {
 	// updates to the distribution configuration.
 	CallerReference *string `json:"callerReference,omitempty" tf:"caller_reference,omitempty"`
 
+	// The DNS domain name of either the S3 bucket, or
+	// web site of your custom origin.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// The current version of the distribution's information. For example:
@@ -227,8 +233,12 @@ type DistributionObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// A list of key group IDs that CloudFront can use to validate signed URLs or signed cookies.
+	// See the CloudFront User Guide for more information about this feature.
 	TrustedKeyGroups []TrustedKeyGroupsObservation `json:"trustedKeyGroups,omitempty" tf:"trusted_key_groups,omitempty"`
 
+	// List of AWS account IDs (or self) that you want to allow to create signed URLs for private content.
+	// See the CloudFront User Guide for more information about this feature.
 	TrustedSigners []TrustedSignersObservation `json:"trustedSigners,omitempty" tf:"trusted_signers,omitempty"`
 }
 
@@ -258,6 +268,8 @@ type DistributionParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultRootObject *string `json:"defaultRootObject,omitempty" tf:"default_root_object,omitempty"`
 
+	// Whether the distribution is enabled to accept end
+	// user requests for content.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
@@ -403,6 +415,9 @@ type FunctionAssociationObservation struct {
 
 type FunctionAssociationParameters struct {
 
+	// The specific event to trigger this function.
+	// Valid values: viewer-request, origin-request, viewer-response,
+	// origin-response
 	// +kubebuilder:validation:Required
 	EventType *string `json:"eventType" tf:"event_type,omitempty"`
 
@@ -434,6 +449,7 @@ type ItemsObservation struct {
 	// The ID of the key group that contains the public keys
 	KeyGroupID *string `json:"keyGroupId,omitempty" tf:"key_group_id,omitempty"`
 
+	// Set of CloudFront key pair IDs
 	KeyPairIds []*string `json:"keyPairIds,omitempty" tf:"key_pair_ids,omitempty"`
 }
 
@@ -445,6 +461,9 @@ type LambdaFunctionAssociationObservation struct {
 
 type LambdaFunctionAssociationParameters struct {
 
+	// The specific event to trigger this function.
+	// Valid values: viewer-request, origin-request, viewer-response,
+	// origin-response
 	// +kubebuilder:validation:Required
 	EventType *string `json:"eventType" tf:"event_type,omitempty"`
 
@@ -483,7 +502,7 @@ type MemberObservation struct {
 
 type MemberParameters struct {
 
-	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
+	// A unique identifier for the origin.
 	// +kubebuilder:validation:Required
 	OriginID *string `json:"originId" tf:"origin_id,omitempty"`
 }
@@ -541,6 +560,9 @@ type OrderedCacheBehaviorFunctionAssociationObservation struct {
 
 type OrderedCacheBehaviorFunctionAssociationParameters struct {
 
+	// The specific event to trigger this function.
+	// Valid values: viewer-request, origin-request, viewer-response,
+	// origin-response
 	// +kubebuilder:validation:Required
 	EventType *string `json:"eventType" tf:"event_type,omitempty"`
 
@@ -564,6 +586,9 @@ type OrderedCacheBehaviorLambdaFunctionAssociationObservation struct {
 
 type OrderedCacheBehaviorLambdaFunctionAssociationParameters struct {
 
+	// The specific event to trigger this function.
+	// Valid values: viewer-request, origin-request, viewer-response,
+	// origin-response
 	// +kubebuilder:validation:Required
 	EventType *string `json:"eventType" tf:"event_type,omitempty"`
 
@@ -681,9 +706,13 @@ type OrderedCacheBehaviorParameters struct {
 	// +kubebuilder:validation:Required
 	TargetOriginID *string `json:"targetOriginId" tf:"target_origin_id,omitempty"`
 
+	// A list of key group IDs that CloudFront can use to validate signed URLs or signed cookies.
+	// See the CloudFront User Guide for more information about this feature.
 	// +kubebuilder:validation:Optional
 	TrustedKeyGroups []*string `json:"trustedKeyGroups,omitempty" tf:"trusted_key_groups,omitempty"`
 
+	// List of AWS account IDs (or self) that you want to allow to create signed URLs for private content.
+	// See the CloudFront User Guide for more information about this feature.
 	// +kubebuilder:validation:Optional
 	TrustedSigners []*string `json:"trustedSigners,omitempty" tf:"trusted_signers,omitempty"`
 
@@ -708,7 +737,7 @@ type OriginGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Member []MemberParameters `json:"member" tf:"member,omitempty"`
 
-	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
+	// A unique identifier for the origin.
 	// +kubebuilder:validation:Required
 	OriginID *string `json:"originId" tf:"origin_id,omitempty"`
 }
@@ -738,10 +767,12 @@ type OriginParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomOriginConfig []CustomOriginConfigParameters `json:"customOriginConfig,omitempty" tf:"custom_origin_config,omitempty"`
 
+	// The DNS domain name of either the S3 bucket, or
+	// web site of your custom origin.
 	// +kubebuilder:validation:Required
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
-	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
+	// A unique identifier for the origin.
 	// +kubebuilder:validation:Required
 	OriginID *string `json:"originId" tf:"origin_id,omitempty"`
 
@@ -768,6 +799,8 @@ type OriginShieldObservation struct {
 
 type OriginShieldParameters struct {
 
+	// Whether the distribution is enabled to accept end
+	// user requests for content.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
@@ -807,8 +840,12 @@ type S3OriginConfigParameters struct {
 }
 
 type TrustedKeyGroupsObservation struct {
+
+	// Whether the distribution is enabled to accept end
+	// user requests for content.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// List of nested attributes for each key group
 	Items []ItemsObservation `json:"items,omitempty" tf:"items,omitempty"`
 }
 
@@ -820,6 +857,7 @@ type TrustedSignersItemsObservation struct {
 	// AWS account ID or self
 	AwsAccountNumber *string `json:"awsAccountNumber,omitempty" tf:"aws_account_number,omitempty"`
 
+	// Set of CloudFront key pair IDs
 	KeyPairIds []*string `json:"keyPairIds,omitempty" tf:"key_pair_ids,omitempty"`
 }
 
@@ -827,8 +865,12 @@ type TrustedSignersItemsParameters struct {
 }
 
 type TrustedSignersObservation struct {
+
+	// Whether the distribution is enabled to accept end
+	// user requests for content.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// List of nested attributes for each key group
 	Items []TrustedSignersItemsObservation `json:"items,omitempty" tf:"items,omitempty"`
 }
 

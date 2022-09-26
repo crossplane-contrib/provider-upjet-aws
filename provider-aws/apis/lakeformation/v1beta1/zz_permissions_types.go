@@ -32,6 +32,7 @@ type DataLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
+	// Identifier for the Data Catalog where the location is registered with Lake Formation. By default, it is the account ID of the caller.
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 }
@@ -41,9 +42,11 @@ type DatabaseObservation struct {
 
 type DatabaseParameters struct {
 
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
+	// –  Name of the database resource. Unique to the Data Catalog.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -63,6 +66,7 @@ type PermissionsObservation struct {
 
 type PermissionsParameters struct {
 
+	// –  Identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
@@ -109,15 +113,19 @@ type TableObservation struct {
 
 type TableParameters struct {
 
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
+	// –  Name of the database for the table. Unique to a Data Catalog.
 	// +kubebuilder:validation:Required
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
+	// Name of the table.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Whether to use a wildcard representing every table under a database. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Wildcard *bool `json:"wildcard,omitempty" tf:"wildcard,omitempty"`
 }
@@ -127,6 +135,7 @@ type TableWithColumnsObservation struct {
 
 type TableWithColumnsParameters struct {
 
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
@@ -134,6 +143,7 @@ type TableWithColumnsParameters struct {
 	// +kubebuilder:validation:Optional
 	ColumnNames []*string `json:"columnNames,omitempty" tf:"column_names,omitempty"`
 
+	// –  Name of the database for the table with columns resource. Unique to the Data Catalog.
 	// +kubebuilder:validation:Required
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
@@ -141,6 +151,7 @@ type TableWithColumnsParameters struct {
 	// +kubebuilder:validation:Optional
 	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`
 
+	// –  Name of the table resource.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogTable
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -153,6 +164,7 @@ type TableWithColumnsParameters struct {
 	// +kubebuilder:validation:Optional
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
+	// Whether to use a column wildcard.
 	// +kubebuilder:validation:Optional
 	Wildcard *bool `json:"wildcard,omitempty" tf:"wildcard,omitempty"`
 }

@@ -27,6 +27,7 @@ type GroupObservation struct {
 
 type GroupParameters struct {
 
+	// Path in which to create the group.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }

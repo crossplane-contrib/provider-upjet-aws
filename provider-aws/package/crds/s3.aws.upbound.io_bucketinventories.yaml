@@ -65,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   bucket:
+                    description: The name of the source bucket that inventory lists
+                      the objects for.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -145,6 +147,8 @@ spec:
                     items:
                       properties:
                         bucket:
+                          description: The name of the source bucket that inventory
+                            lists the objects for.
                           items:
                             properties:
                               accountId:
@@ -269,6 +273,8 @@ spec:
                                   results. Can be CSV, ORC or Parquet.
                                 type: string
                               prefix:
+                                description: The prefix that an object must have to
+                                  be included in the inventory results.
                                 type: string
                             required:
                             - format
@@ -288,6 +294,8 @@ spec:
                     items:
                       properties:
                         prefix:
+                          description: The prefix that an object must have to be included
+                            in the inventory results.
                           type: string
                       type: object
                     type: array

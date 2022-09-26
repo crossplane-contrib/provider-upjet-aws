@@ -36,6 +36,7 @@ type ClusterParameterGroupParameterParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
 
+	// The name of the DB cluster parameter group.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

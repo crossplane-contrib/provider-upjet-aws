@@ -77,8 +77,10 @@ spec:
                             part of documentation.
                           type: boolean
                         name:
+                          description: The name of the record.
                           type: string
                         zoneId:
+                          description: The ID of the hosted zone to contain this record.
                           type: string
                       required:
                       - evaluateTargetHealth
@@ -97,6 +99,9 @@ spec:
                     items:
                       properties:
                         type:
+                          description: The record type. Valid values are A, AAAA,
+                            CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and
+                            TXT.
                           type: string
                       required:
                       - type
@@ -218,6 +223,7 @@ spec:
                       policy. Conflicts with any other routing policy.
                     type: boolean
                   name:
+                    description: The name of the record.
                     type: string
                   records:
                     description: A string list of records.g., "first255characters\"\"morecharacters").
@@ -240,6 +246,8 @@ spec:
                     description: The TTL of the record.
                     type: number
                   type:
+                    description: The record type. Valid values are A, AAAA, CAA, CNAME,
+                      DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
                     type: string
                   weightedRoutingPolicy:
                     description: A block indicating a weighted routing policy. Conflicts
@@ -255,6 +263,7 @@ spec:
                       type: object
                     type: array
                   zoneId:
+                    description: The ID of the hosted zone to contain this record.
                     type: string
                   zoneIdRef:
                     description: Reference to a Zone to populate zoneId.

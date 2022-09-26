@@ -30,12 +30,16 @@ type PolicyObservation struct {
 
 type PolicyParameters struct {
 
+	// Description of the IAM policy.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Path in which to create the policy.
+	// See IAM Identifiers for more information.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
+	// The policy document. This is a JSON formatted string
 	// +kubebuilder:validation:Required
 	Policy *string `json:"policy" tf:"policy,omitempty"`
 

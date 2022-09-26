@@ -28,15 +28,15 @@ type AndObservation struct {
 
 type AndParameters struct {
 
-	// Minimum object size to which the rule applies. Value must be at least 0 if specified.
+	// Minimum object size (in bytes) to which the rule applies.
 	// +kubebuilder:validation:Optional
 	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
 
-	// Maximum object size to which the rule applies. Value must be at least 1 if specified.
+	// Maximum object size (in bytes) to which the rule applies.
 	// +kubebuilder:validation:Optional
 	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
-	// Prefix identifying one or more objects to which the rule applies.
+	// DEPRECATED Use filter instead. This has been deprecated by Amazon S3. Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if filter is not specified.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -128,11 +128,11 @@ type RuleExpirationObservation struct {
 
 type RuleExpirationParameters struct {
 
-	// The date the object is to be moved or deleted. Should be in RFC3339 format.
+	// The date objects are transitioned to the specified storage class. The date value must be in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
 	// +kubebuilder:validation:Optional
 	Date *string `json:"date,omitempty" tf:"date,omitempty"`
 
-	// The lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.
+	// The number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer. If both days and date are not specified, defaults to 0. Valid values depend on storage_class, see Transition objects using Amazon S3 Lifecycle for more details.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
@@ -158,7 +158,7 @@ type RuleFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	ObjectSizeLessThan *string `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
-	// Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if not specified.
+	// DEPRECATED Use filter instead. This has been deprecated by Amazon S3. Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if filter is not specified.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -176,7 +176,7 @@ type RuleNoncurrentVersionExpirationParameters struct {
 	// +kubebuilder:validation:Optional
 	NewerNoncurrentVersions *string `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
 
-	// The number of days an object is noncurrent before Amazon S3 can perform the associated action. Must be a positive integer.
+	// The number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	// +kubebuilder:validation:Optional
 	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
 }

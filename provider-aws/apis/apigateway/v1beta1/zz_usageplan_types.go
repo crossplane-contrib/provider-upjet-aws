@@ -101,18 +101,23 @@ type UsagePlanObservation struct {
 
 type UsagePlanParameters struct {
 
+	// The associated API stages of the usage plan.
 	// +kubebuilder:validation:Optional
 	APIStages []APIStagesParameters `json:"apiStages,omitempty" tf:"api_stages,omitempty"`
 
+	// The description of a usage plan.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The name of the usage plan.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The AWS Marketplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.
 	// +kubebuilder:validation:Optional
 	ProductCode *string `json:"productCode,omitempty" tf:"product_code,omitempty"`
 
+	// The quota settings of the usage plan.
 	// +kubebuilder:validation:Optional
 	QuotaSettings []QuotaSettingsParameters `json:"quotaSettings,omitempty" tf:"quota_settings,omitempty"`
 
@@ -125,6 +130,7 @@ type UsagePlanParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The throttling limits of the usage plan.
 	// +kubebuilder:validation:Optional
 	ThrottleSettings []UsagePlanThrottleSettingsParameters `json:"throttleSettings,omitempty" tf:"throttle_settings,omitempty"`
 }

@@ -80,6 +80,7 @@ spec:
                             to pending-reboot.
                           type: string
                         name:
+                          description: The name of the Neptune parameter group.
                           type: string
                         value:
                           description: The value of the Neptune parameter.

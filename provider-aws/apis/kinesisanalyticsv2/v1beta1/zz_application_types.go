@@ -188,6 +188,7 @@ type CheckpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CheckpointingEnabled *bool `json:"checkpointingEnabled,omitempty" tf:"checkpointing_enabled,omitempty"`
 
+	// Describes whether the application uses Kinesis Data Analytics' default checkpointing behavior. Valid values: CUSTOM, DEFAULT. Set this attribute to CUSTOM in order for any specified checkpointing_enabled, checkpoint_interval, or min_pause_between_checkpoints attribute values to be effective. If this attribute is set to DEFAULT, the application will always use the following values:
 	// +kubebuilder:validation:Required
 	ConfigurationType *string `json:"configurationType" tf:"configuration_type,omitempty"`
 
@@ -242,6 +243,7 @@ type DestinationSchemaObservation struct {
 
 type DestinationSchemaParameters struct {
 
+	// The type of record format. Valid values: CSV, JSON.
 	// +kubebuilder:validation:Required
 	RecordFormatType *string `json:"recordFormatType" tf:"record_format_type,omitempty"`
 }
@@ -289,7 +291,7 @@ type InputLambdaProcessorObservation struct {
 
 type InputLambdaProcessorParameters struct {
 
-	// The ARN of the application.
+	// The ARN of the Lambda function that operates on records in the stream.
 	// +kubebuilder:validation:Required
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }
@@ -396,7 +398,7 @@ type KinesisFirehoseInputObservation struct {
 
 type KinesisFirehoseInputParameters struct {
 
-	// The ARN of the application.
+	// The ARN of the Lambda function that operates on records in the stream.
 	// +kubebuilder:validation:Required
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }
@@ -406,7 +408,7 @@ type KinesisFirehoseOutputObservation struct {
 
 type KinesisFirehoseOutputParameters struct {
 
-	// The ARN of the application.
+	// The ARN of the Lambda function that operates on records in the stream.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/firehose/v1beta1.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -426,7 +428,7 @@ type KinesisStreamsInputObservation struct {
 
 type KinesisStreamsInputParameters struct {
 
-	// The ARN of the application.
+	// The ARN of the Lambda function that operates on records in the stream.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -446,7 +448,7 @@ type KinesisStreamsOutputObservation struct {
 
 type KinesisStreamsOutputParameters struct {
 
-	// The ARN of the application.
+	// The ARN of the Lambda function that operates on records in the stream.
 	// +kubebuilder:validation:Required
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }
@@ -456,7 +458,7 @@ type LambdaOutputObservation struct {
 
 type LambdaOutputParameters struct {
 
-	// The ARN of the application.
+	// The ARN of the Lambda function that operates on records in the stream.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -514,6 +516,7 @@ type MonitoringConfigurationObservation struct {
 
 type MonitoringConfigurationParameters struct {
 
+	// Describes whether the application uses Kinesis Data Analytics' default checkpointing behavior. Valid values: CUSTOM, DEFAULT. Set this attribute to CUSTOM in order for any specified checkpointing_enabled, checkpoint_interval, or min_pause_between_checkpoints attribute values to be effective. If this attribute is set to DEFAULT, the application will always use the following values:
 	// +kubebuilder:validation:Required
 	ConfigurationType *string `json:"configurationType" tf:"configuration_type,omitempty"`
 
@@ -550,6 +553,7 @@ type OutputParameters struct {
 	// +kubebuilder:validation:Optional
 	LambdaOutput []LambdaOutputParameters `json:"lambdaOutput,omitempty" tf:"lambda_output,omitempty"`
 
+	// The name of the application.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -563,6 +567,7 @@ type ParallelismConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoScalingEnabled *bool `json:"autoScalingEnabled,omitempty" tf:"auto_scaling_enabled,omitempty"`
 
+	// Describes whether the application uses Kinesis Data Analytics' default checkpointing behavior. Valid values: CUSTOM, DEFAULT. Set this attribute to CUSTOM in order for any specified checkpointing_enabled, checkpoint_interval, or min_pause_between_checkpoints attribute values to be effective. If this attribute is set to DEFAULT, the application will always use the following values:
 	// +kubebuilder:validation:Required
 	ConfigurationType *string `json:"configurationType" tf:"configuration_type,omitempty"`
 
@@ -598,6 +603,7 @@ type RecordColumnParameters struct {
 	// +kubebuilder:validation:Optional
 	Mapping *string `json:"mapping,omitempty" tf:"mapping,omitempty"`
 
+	// The name of the application.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -629,6 +635,7 @@ type RecordFormatParameters struct {
 	// +kubebuilder:validation:Required
 	MappingParameters []MappingParametersParameters `json:"mappingParameters" tf:"mapping_parameters,omitempty"`
 
+	// The type of record format. Valid values: CSV, JSON.
 	// +kubebuilder:validation:Required
 	RecordFormatType *string `json:"recordFormatType" tf:"record_format_type,omitempty"`
 }
@@ -681,6 +688,7 @@ type ReferenceSchemaRecordColumnParameters struct {
 	// +kubebuilder:validation:Optional
 	Mapping *string `json:"mapping,omitempty" tf:"mapping,omitempty"`
 
+	// The name of the application.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -698,6 +706,7 @@ type ReferenceSchemaRecordFormatParameters struct {
 	// +kubebuilder:validation:Required
 	MappingParameters []RecordFormatMappingParametersParameters `json:"mappingParameters" tf:"mapping_parameters,omitempty"`
 
+	// The type of record format. Valid values: CSV, JSON.
 	// +kubebuilder:validation:Required
 	RecordFormatType *string `json:"recordFormatType" tf:"record_format_type,omitempty"`
 }
@@ -721,7 +730,7 @@ type S3ContentLocationObservation struct {
 
 type S3ContentLocationParameters struct {
 
-	// The ARN of the application.
+	// The ARN for the S3 bucket containing the application code.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -735,6 +744,7 @@ type S3ContentLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
+	// The file key for the object containing the application code.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Object
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("key",false)
 	// +kubebuilder:validation:Optional
@@ -758,7 +768,7 @@ type S3ReferenceDataSourceObservation struct {
 
 type S3ReferenceDataSourceParameters struct {
 
-	// The ARN of the application.
+	// The ARN for the S3 bucket containing the application code.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -772,6 +782,7 @@ type S3ReferenceDataSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
+	// The file key for the object containing the application code.
 	// +kubebuilder:validation:Required
 	FileKey *string `json:"fileKey" tf:"file_key,omitempty"`
 }

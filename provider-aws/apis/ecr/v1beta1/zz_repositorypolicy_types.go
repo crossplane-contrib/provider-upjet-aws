@@ -31,6 +31,7 @@ type RepositoryPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Name of the repository to apply the policy.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ecr/v1beta1.Repository
 	// +kubebuilder:validation:Optional
 	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`

@@ -162,6 +162,11 @@ spec:
                       is 24.
                     type: number
                   shardCount:
+                    description: –  The number of shards that the stream will use.
+                      If the stream_mode is PROVISIONED, this field is required. Amazon
+                      has guidelines for specifying the Stream size that should be
+                      referenced when creating a Kinesis stream. See Amazon Kinesis
+                      Streams for more.
                     type: number
                   shardLevelMetrics:
                     description: A list of shard-level CloudWatch metrics which can

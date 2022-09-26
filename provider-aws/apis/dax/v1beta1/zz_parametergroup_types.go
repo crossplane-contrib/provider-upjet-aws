@@ -40,6 +40,7 @@ type ParametersObservation struct {
 
 type ParametersParameters struct {
 
+	// The name of the parameter.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

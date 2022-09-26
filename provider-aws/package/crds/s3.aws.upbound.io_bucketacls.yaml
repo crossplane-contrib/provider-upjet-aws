@@ -415,7 +415,8 @@ spec:
                     description: The canned ACL to apply to the bucket.
                     type: string
                   id:
-                    description: The ID of the owner.
+                    description: The bucket, expected_bucket_owner (if configured),
+                      and acl (if configured) separated by commas (,).
                     type: string
                 type: object
               conditions:

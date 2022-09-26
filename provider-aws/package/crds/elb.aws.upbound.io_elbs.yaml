@@ -80,6 +80,8 @@ spec:
                             is true
                           type: boolean
                         interval:
+                          description: 'The publishing interval in minutes. Default:
+                            60 minutes.'
                           type: number
                       required:
                       - bucket
@@ -115,6 +117,8 @@ spec:
                             declared healthy.
                           type: number
                         interval:
+                          description: 'The publishing interval in minutes. Default:
+                            60 minutes.'
                           type: number
                         target:
                           description: 'The target of the check. Valid pattern is
@@ -140,6 +144,7 @@ spec:
                       to be idle. Default: 60'
                     type: number
                   instances:
+                    description: A list of instance ids to place in the ELB pool.
                     items:
                       type: string
                     type: array
@@ -238,6 +243,8 @@ spec:
                           description: The port to listen on for the load balancer
                           type: number
                         lbProtocol:
+                          description: The protocol to listen on. Valid values are
+                            HTTP, HTTPS, TCP, or SSL
                           type: string
                         sslCertificateId:
                           description: The ARN of an SSL certificate you have uploaded

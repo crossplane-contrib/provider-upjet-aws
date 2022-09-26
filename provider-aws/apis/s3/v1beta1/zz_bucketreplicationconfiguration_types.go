@@ -73,7 +73,7 @@ type BucketReplicationConfigurationRuleFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	And []FilterAndParameters `json:"and,omitempty" tf:"and,omitempty"`
 
-	// An object key name prefix that identifies subset of objects to which the rule applies. Must be less than or equal to 1024 characters in length.
+	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -153,7 +153,7 @@ type DestinationMetricsParameters struct {
 	// +kubebuilder:validation:Optional
 	EventThreshold []EventThresholdParameters `json:"eventThreshold,omitempty" tf:"event_threshold,omitempty"`
 
-	// The status of the Destination Metrics. Either "Enabled" or "Disabled".
+	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 }
@@ -163,7 +163,7 @@ type DestinationReplicationTimeObservation struct {
 
 type DestinationReplicationTimeParameters struct {
 
-	// The status of the Replication Time Control. Either "Enabled" or "Disabled".
+	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 
@@ -207,7 +207,7 @@ type FilterAndObservation struct {
 
 type FilterAndParameters struct {
 
-	// An object key name prefix that identifies subset of objects to which the rule applies. Must be less than or equal to 1024 characters in length.
+	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 

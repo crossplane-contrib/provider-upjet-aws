@@ -133,6 +133,8 @@ spec:
                             type: object
                           type: array
                         accessControlMaxAgeSec:
+                          description: A number that CloudFront uses as the value
+                            for the Access-Control-Max-Age HTTP response header.
                           type: number
                         originOverride:
                           description: A Boolean value that determines how CloudFront
@@ -158,6 +160,10 @@ spec:
                                 description: The HTTP response header name.
                                 type: string
                               override:
+                                description: A Boolean value that determines whether
+                                  CloudFront overrides a response header with the
+                                  same name received from the origin with the header
+                                  specifies here.
                                 type: boolean
                               value:
                                 description: The value for the HTTP response header.
@@ -186,11 +192,23 @@ spec:
                     items:
                       properties:
                         contentSecurityPolicy:
+                          description: The policy directives and their values that
+                            CloudFront includes as values for the Content-Security-Policy
+                            HTTP response header. See Content Security Policy for
+                            more information.
                           items:
                             properties:
                               contentSecurityPolicy:
+                                description: The policy directives and their values
+                                  that CloudFront includes as values for the Content-Security-Policy
+                                  HTTP response header. See Content Security Policy
+                                  for more information.
                                 type: string
                               override:
+                                description: A Boolean value that determines whether
+                                  CloudFront overrides a response header with the
+                                  same name received from the origin with the header
+                                  specifies here.
                                 type: boolean
                             required:
                             - contentSecurityPolicy
@@ -204,6 +222,10 @@ spec:
                           items:
                             properties:
                               override:
+                                description: A Boolean value that determines whether
+                                  CloudFront overrides a response header with the
+                                  same name received from the origin with the header
+                                  specifies here.
                                 type: boolean
                             required:
                             - override
@@ -220,6 +242,10 @@ spec:
                                   response header. Valid values: DENY | SAMEORIGIN'
                                 type: string
                               override:
+                                description: A Boolean value that determines whether
+                                  CloudFront overrides a response header with the
+                                  same name received from the origin with the header
+                                  specifies here.
                                 type: boolean
                             required:
                             - frameOption
@@ -227,11 +253,21 @@ spec:
                             type: object
                           type: array
                         referrerPolicy:
+                          description: Determines whether CloudFront includes the
+                            Referrer-Policy HTTP response header and the header’s
+                            value. See Referrer Policy for more information.
                           items:
                             properties:
                               override:
+                                description: A Boolean value that determines whether
+                                  CloudFront overrides a response header with the
+                                  same name received from the origin with the header
+                                  specifies here.
                                 type: boolean
                               referrerPolicy:
+                                description: Determines whether CloudFront includes
+                                  the Referrer-Policy HTTP response header and the
+                                  header’s value. See Referrer Policy for more information.
                                 type: string
                             required:
                             - override
@@ -246,6 +282,9 @@ spec:
                           items:
                             properties:
                               accessControlMaxAgeSec:
+                                description: A number that CloudFront uses as the
+                                  value for the Access-Control-Max-Age HTTP response
+                                  header.
                                 type: number
                               includeSubdomains:
                                 description: A Boolean value that determines whether
@@ -253,6 +292,10 @@ spec:
                                   in the Strict-Transport-Security HTTP response header.
                                 type: boolean
                               override:
+                                description: A Boolean value that determines whether
+                                  CloudFront overrides a response header with the
+                                  same name received from the origin with the header
+                                  specifies here.
                                 type: boolean
                               preload:
                                 description: A Boolean value that determines whether
@@ -276,6 +319,10 @@ spec:
                                   the X-XSS-Protection header.
                                 type: boolean
                               override:
+                                description: A Boolean value that determines whether
+                                  CloudFront overrides a response header with the
+                                  same name received from the origin with the header
+                                  specifies here.
                                 type: boolean
                               protection:
                                 description: A Boolean value that determines the value

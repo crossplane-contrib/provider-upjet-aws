@@ -180,6 +180,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
+	// 00#.
 	// +kubebuilder:validation:Optional
 	NumberCacheClusters *float64 `json:"numberCacheClusters,omitempty" tf:"number_cache_clusters,omitempty"`
 

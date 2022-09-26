@@ -79,6 +79,9 @@ spec:
                       is false. See Amazon RDS Documentation for more information.
                     type: boolean
                   availabilityZones:
+                    description: A list of EC2 Availability Zones for the DB cluster
+                      storage where DB cluster instances can be created. It is recommended
+                      to specify 3 AZs or use the  if necessary.
                     items:
                       type: string
                     type: array
@@ -89,6 +92,7 @@ spec:
                       (72 hours)
                     type: number
                   backupRetentionPeriod:
+                    description: The days to retain backups for. Default 1
                     type: number
                   clusterMembers:
                     description: – List of RDS Instances that are a part of this cluster
@@ -100,6 +104,9 @@ spec:
                       false.
                     type: boolean
                   databaseName:
+                    description: 'Name for an automatically created database on cluster
+                      creation. There are different naming restrictions per database
+                      engine: RDS Naming Constraints'
                     type: string
                   dbClusterInstanceClass:
                     description: The compute and memory capacity of each DB instance
@@ -220,6 +227,10 @@ spec:
                       type: string
                     type: array
                   engine:
+                    description: 'The name of the database engine to be used for this
+                      DB cluster. Defaults to aurora. Valid Values: aurora, aurora-mysql,
+                      aurora-postgresql, mysql, postgres. (Note that mysql and postgres
+                      are Multi-AZ RDS clusters).'
                     type: string
                   engineMode:
                     description: 'The database engine mode. Valid values: global (only
@@ -355,18 +366,30 @@ spec:
                     - namespace
                     type: object
                   masterUsername:
+                    description: Username for the master DB user. Please refer to
+                      the RDS Naming Constraints. This argument does not support in-place
+                      updates and cannot be changed during a restore from snapshot.
                     type: string
                   port:
+                    description: The port on which the DB accepts connections
                     type: number
                   preferredBackupWindow:
+                    description: 'The daily time range during which automated backups
+                      are created if automated backups are enabled using the BackupRetentionPeriod
+                      parameter.Time in UTC. Default: A 30-minute window selected
+                      at random from an 8-hour block of time per regionE.g., 04:00-09:00'
                     type: string
                   preferredMaintenanceWindow:
+                    description: The weekly time range during which system maintenance
+                      can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   replicationSourceIdentifier:
+                    description: ARN of a source DB cluster or DB instance if this
+                      DB cluster is to be created as a Read Replica.
                     type: string
                   restoreToPointInTime:
                     description: Nested attribute for point in time restore. More
@@ -469,6 +492,7 @@ spec:
                       type: object
                     type: array
                   s3Import:
+                    description: The port on which the DB accepts connections
                     items:
                       properties:
                         bucketName:
@@ -583,8 +607,20 @@ spec:
                             to connect to it. Defaults to true.
                           type: boolean
                         maxCapacity:
+                          description: The maximum capacity for an Aurora DB cluster
+                            in serverless DB engine mode. The maximum capacity must
+                            be greater than or equal to the minimum capacity. Valid
+                            Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64,
+                            128, 256. Valid Aurora PostgreSQL capacity values are
+                            (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
                           type: number
                         minCapacity:
+                          description: The minimum capacity for an Aurora DB cluster
+                            in serverless DB engine mode. The minimum capacity must
+                            be lesser than or equal to the maximum capacity. Valid
+                            Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64,
+                            128, 256. Valid Aurora PostgreSQL capacity values are
+                            (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
                           type: number
                         secondsUntilAutoPause:
                           description: The time, in seconds, before an Aurora DB cluster
@@ -605,8 +641,20 @@ spec:
                     items:
                       properties:
                         maxCapacity:
+                          description: The maximum capacity for an Aurora DB cluster
+                            in serverless DB engine mode. The maximum capacity must
+                            be greater than or equal to the minimum capacity. Valid
+                            Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64,
+                            128, 256. Valid Aurora PostgreSQL capacity values are
+                            (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
                           type: number
                         minCapacity:
+                          description: The minimum capacity for an Aurora DB cluster
+                            in serverless DB engine mode. The minimum capacity must
+                            be lesser than or equal to the maximum capacity. Valid
+                            Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64,
+                            128, 256. Valid Aurora PostgreSQL capacity values are
+                            (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
                           type: number
                       required:
                       - maxCapacity
@@ -629,6 +677,11 @@ spec:
                     description: The source region for an encrypted replica DB cluster.
                     type: string
                   storageEncrypted:
+                    description: Specifies whether the DB cluster is encrypted. The
+                      default is false for provisioned engine_mode and true for serverless
+                      engine_mode. When restoring an unencrypted snapshot_identifier,
+                      the kms_key_id argument must be provided to encrypt the restored
+                      cluster.
                     type: boolean
                   storageType:
                     description: 'Specifies the storage type to be associated with

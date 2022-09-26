@@ -80,13 +80,23 @@ spec:
                     items:
                       properties:
                         bufferingInterval:
+                          description: Buffer incoming data for the specified period
+                            of time, in seconds between 60 to 900, before delivering
+                            it to the destination.  The default value is 300s.
                           type: number
                         bufferingSize:
+                          description: Buffer incoming data to the specified size,
+                            in MBs between 1 to 100, before delivering it to the destination.  The
+                            default value is 5MB.
                           type: number
                         cloudwatchLoggingOptions:
+                          description: The CloudWatch Logging Options for the delivery
+                            stream. More details are given below
                           items:
                             properties:
                               enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
                                 type: boolean
                               logGroupName:
                                 description: The CloudWatch group name for logging.
@@ -125,6 +135,8 @@ spec:
                           items:
                             properties:
                               enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
                                 type: boolean
                               processors:
                                 description: Array of data processors. More details
@@ -170,10 +182,15 @@ spec:
                             type: object
                           type: array
                         retryDuration:
+                          description: The length of time during which Firehose retries
+                            delivery after a failure, starting from the initial request
+                            and including the first attempt. The default value is
+                            3600 seconds (60 minutes). Firehose does not retry if
+                            the value of DurationInSeconds is 0 (zero) or if the first
+                            delivery attempt takes longer than the current value.
                           type: number
                         roleArn:
-                          description: The Amazon Resource Name (ARN) specifying the
-                            Stream
+                          description: The ARN of the AWS credentials.
                           type: string
                         roleArnRef:
                           description: Reference to a Role in iam to populate roleArn.
@@ -252,6 +269,8 @@ spec:
                               type: object
                           type: object
                         s3BackupMode:
+                          description: The Amazon S3 backup mode.  Valid values are
+                            Disabled and Enabled.  Default value is Disabled.
                           type: string
                         typeName:
                           description: The Elasticsearch type name with maximum length
@@ -264,8 +283,7 @@ spec:
                           items:
                             properties:
                               roleArn:
-                                description: The Amazon Resource Name (ARN) specifying
-                                  the Stream
+                                description: The ARN of the AWS credentials.
                                 type: string
                               roleArnRef:
                                 description: Reference to a Role in iam to populate
@@ -467,9 +485,13 @@ spec:
                             10 MB or higher.
                           type: number
                         cloudwatchLoggingOptions:
+                          description: The CloudWatch Logging Options for the delivery
+                            stream. More details are given below
                           items:
                             properties:
                               enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
                                 type: boolean
                               logGroupName:
                                 description: The CloudWatch group name for logging.
@@ -494,6 +516,8 @@ spec:
                           items:
                             properties:
                               enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
                                 type: boolean
                               inputFormatConfiguration:
                                 description: Nested argument that specifies the deserializer
@@ -630,6 +654,14 @@ spec:
                                                     the maximum is 1.
                                                   type: number
                                                 compression:
+                                                  description: The compression code
+                                                    to use over data blocks. The possible
+                                                    values are UNCOMPRESSED, SNAPPY,
+                                                    and GZIP, with the default being
+                                                    SNAPPY. Use SNAPPY for higher
+                                                    decompression speed. Use GZIP
+                                                    if the compression ratio is more
+                                                    important than speed.
                                                   type: string
                                                 dictionaryKeyThreshold:
                                                   description: A float that represents
@@ -711,6 +743,14 @@ spec:
                                                     uses this value for padding calculations.
                                                   type: number
                                                 compression:
+                                                  description: The compression code
+                                                    to use over data blocks. The possible
+                                                    values are UNCOMPRESSED, SNAPPY,
+                                                    and GZIP, with the default being
+                                                    SNAPPY. Use SNAPPY for higher
+                                                    decompression speed. Use GZIP
+                                                    if the compression ratio is more
+                                                    important than speed.
                                                   type: string
                                                 enableDictionaryCompression:
                                                   description: Indicates whether to
@@ -767,8 +807,7 @@ spec:
                                         the default is the current region.
                                       type: string
                                     roleArn:
-                                      description: The Amazon Resource Name (ARN)
-                                        specifying the Stream
+                                      description: The ARN of the AWS credentials.
                                       type: string
                                     roleArnRef:
                                       description: Reference to a Role in iam to populate
@@ -964,8 +1003,17 @@ spec:
                           items:
                             properties:
                               enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
                                 type: boolean
                               retryDuration:
+                                description: The length of time during which Firehose
+                                  retries delivery after a failure, starting from
+                                  the initial request and including the first attempt.
+                                  The default value is 3600 seconds (60 minutes).
+                                  Firehose does not retry if the value of DurationInSeconds
+                                  is 0 (zero) or if the first delivery attempt takes
+                                  longer than the current value.
                                 type: number
                             type: object
                           type: array
@@ -993,6 +1041,8 @@ spec:
                           items:
                             properties:
                               enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
                                 type: boolean
                               processors:
                                 description: Array of data processors. More details
@@ -1038,8 +1088,7 @@ spec:
                             type: object
                           type: array
                         roleArn:
-                          description: The Amazon Resource Name (ARN) specifying the
-                            Stream
+                          description: The ARN of the AWS credentials.
                           type: string
                         roleArnRef:
                           description: Reference to a Role in iam to populate roleArn.
@@ -1141,9 +1190,13 @@ spec:
                                   set SizeInMBs to be 10 MB or higher.
                                 type: number
                               cloudwatchLoggingOptions:
+                                description: The CloudWatch Logging Options for the
+                                  delivery stream. More details are given below
                                 items:
                                   properties:
                                     enabled:
+                                      description: Enables or disables the logging.
+                                        Defaults to false.
                                       type: boolean
                                     logGroupName:
                                       description: The CloudWatch group name for logging.
@@ -1183,8 +1236,7 @@ spec:
                                   S3 bucket
                                 type: string
                               roleArn:
-                                description: The Amazon Resource Name (ARN) specifying
-                                  the Stream
+                                description: The ARN of the AWS credentials.
                                 type: string
                             required:
                             - bucketArn
@@ -1192,6 +1244,8 @@ spec:
                             type: object
                           type: array
                         s3BackupMode:
+                          description: The Amazon S3 backup mode.  Valid values are
+                            Disabled and Enabled.  Default value is Disabled.
                           type: string
                       type: object
                     type: array
@@ -1221,13 +1275,23 @@ spec:
                           - namespace
                           type: object
                         bufferingInterval:
+                          description: Buffer incoming data for the specified period
+                            of time, in seconds between 60 to 900, before delivering
+                            it to the destination.  The default value is 300s.
                           type: number
                         bufferingSize:
+                          description: Buffer incoming data to the specified size,
+                            in MBs between 1 to 100, before delivering it to the destination.  The
+                            default value is 5MB.
                           type: number
                         cloudwatchLoggingOptions:
+                          description: The CloudWatch Logging Options for the delivery
+                            stream. More details are given below
                           items:
                             properties:
                               enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
                                 type: boolean
                               logGroupName:
                                 description: The CloudWatch group name for logging.
@@ -1240,6 +1304,7 @@ spec:
                             type: object
                           type: array
                         name:
+                          description: The HTTP endpoint name.
                           type: string
                         processingConfiguration:
                           description: The data processing configuration.  More details
@@ -1247,6 +1312,8 @@ spec:
                           items:
                             properties:
                               enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
                                 type: boolean
                               processors:
                                 description: Array of data processors. More details
@@ -1302,6 +1369,7 @@ spec:
                                 items:
                                   properties:
                                     name:
+                                      description: The HTTP endpoint name.
                                       type: string
                                     value:
                                       description: The value of the HTTP endpoint
@@ -1321,10 +1389,15 @@ spec:
                             type: object
                           type: array
                         retryDuration:
+                          description: The length of time during which Firehose retries
+                            delivery after a failure, starting from the initial request
+                            and including the first attempt. The default value is
+                            3600 seconds (60 minutes). Firehose does not retry if
+                            the value of DurationInSeconds is 0 (zero) or if the first
+                            delivery attempt takes longer than the current value.
                           type: number
                         roleArn:
-                          description: The Amazon Resource Name (ARN) specifying the
-                            Stream
+                          description: The ARN of the AWS credentials.
                           type: string
                         roleArnRef:
                           description: Reference to a Role in iam to populate roleArn.
@@ -1403,6 +1476,8 @@ spec:
                               type: object
                           type: object
                         s3BackupMode:
+                          description: The Amazon S3 backup mode.  Valid values are
+                            Disabled and Enabled.  Default value is Disabled.
                           type: string
                         url:
                           description: The HTTP endpoint URL to which Kinesis Firehose
@@ -1422,8 +1497,7 @@ spec:
                             firehose delivery stream.
                           type: string
                         roleArn:
-                          description: The Amazon Resource Name (ARN) specifying the
-                            Stream
+                          description: The ARN of the AWS credentials.
                           type: string
                       required:
                       - kinesisStreamArn
@@ -1437,9 +1511,13 @@ spec:
                     items:
                       properties:
                         cloudwatchLoggingOptions:
+                          description: The CloudWatch Logging Options for the delivery
+                            stream. More details are given below
                           items:
                             properties:
                               enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
                                 type: boolean
                               logGroupName:
                                 description: The CloudWatch group name for logging.
@@ -1490,6 +1568,8 @@ spec:
                           items:
                             properties:
                               enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
                                 type: boolean
                               processors:
                                 description: Array of data processors. More details
@@ -1535,10 +1615,15 @@ spec:
                             type: object
                           type: array
                         retryDuration:
+                          description: The length of time during which Firehose retries
+                            delivery after a failure, starting from the initial request
+                            and including the first attempt. The default value is
+                            3600 seconds (60 minutes). Firehose does not retry if
+                            the value of DurationInSeconds is 0 (zero) or if the first
+                            delivery attempt takes longer than the current value.
                           type: number
                         roleArn:
-                          description: The Amazon Resource Name (ARN) specifying the
-                            Stream
+                          description: The ARN of the AWS credentials.
                           type: string
                         roleArnRef:
                           description: Reference to a Role in iam to populate roleArn.
@@ -1720,9 +1805,13 @@ spec:
                                   set SizeInMBs to be 10 MB or higher.
                                 type: number
                               cloudwatchLoggingOptions:
+                                description: The CloudWatch Logging Options for the
+                                  delivery stream. More details are given below
                                 items:
                                   properties:
                                     enabled:
+                                      description: Enables or disables the logging.
+                                        Defaults to false.
                                       type: boolean
                                     logGroupName:
                                       description: The CloudWatch group name for logging.
@@ -1762,8 +1851,7 @@ spec:
                                   S3 bucket
                                 type: string
                               roleArn:
-                                description: The Amazon Resource Name (ARN) specifying
-                                  the Stream
+                                description: The ARN of the AWS credentials.
                                 type: string
                               roleArnRef:
                                 description: Reference to a Role in iam to populate
@@ -1848,6 +1936,8 @@ spec:
                             type: object
                           type: array
                         s3BackupMode:
+                          description: The Amazon S3 backup mode.  Valid values are
+                            Disabled and Enabled.  Default value is Disabled.
                           type: string
                         username:
                           description: The username that the firehose delivery stream
@@ -1969,9 +2059,13 @@ spec:
                             10 MB or higher.
                           type: number
                         cloudwatchLoggingOptions:
+                          description: The CloudWatch Logging Options for the delivery
+                            stream. More details are given below
                           items:
                             properties:
                               enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
                                 type: boolean
                               logGroupName:
                                 description: The CloudWatch group name for logging.
@@ -2007,8 +2101,7 @@ spec:
                             as a folder in the S3 bucket
                           type: string
                         roleArn:
-                          description: The Amazon Resource Name (ARN) specifying the
-                            Stream
+                          description: The ARN of the AWS credentials.
                           type: string
                         roleArnRef:
                           description: Reference to a Role in iam to populate roleArn.
@@ -2095,6 +2188,8 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: Enables or disables the logging. Defaults to
+                            false.
                           type: boolean
                         keyArn:
                           description: Amazon Resource Name (ARN) of the encryption
@@ -2112,9 +2207,13 @@ spec:
                     items:
                       properties:
                         cloudwatchLoggingOptions:
+                          description: The CloudWatch Logging Options for the delivery
+                            stream. More details are given below
                           items:
                             properties:
                               enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
                                 type: boolean
                               logGroupName:
                                 description: The CloudWatch group name for logging.
@@ -2149,6 +2248,8 @@ spec:
                           items:
                             properties:
                               enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
                                 type: boolean
                               processors:
                                 description: Array of data processors. More details
@@ -2194,8 +2295,16 @@ spec:
                             type: object
                           type: array
                         retryDuration:
+                          description: The length of time during which Firehose retries
+                            delivery after a failure, starting from the initial request
+                            and including the first attempt. The default value is
+                            3600 seconds (60 minutes). Firehose does not retry if
+                            the value of DurationInSeconds is 0 (zero) or if the first
+                            delivery attempt takes longer than the current value.
                           type: number
                         s3BackupMode:
+                          description: The Amazon S3 backup mode.  Valid values are
+                            Disabled and Enabled.  Default value is Disabled.
                           type: string
                       required:
                       - hecEndpoint

@@ -18,6 +18,7 @@ type PrivateDNSNameConfigurationObservation struct {
 	// Name of the record subdomain the service provider needs to create.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The state of the VPC endpoint service.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Endpoint service verification type, for example TXT.
@@ -59,6 +60,7 @@ type VPCEndpointServiceObservation struct {
 	// The service type, Gateway or Interface.
 	ServiceType *string `json:"serviceType,omitempty" tf:"service_type,omitempty"`
 
+	// The state of the VPC endpoint service.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.

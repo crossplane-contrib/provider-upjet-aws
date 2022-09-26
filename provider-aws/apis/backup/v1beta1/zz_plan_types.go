@@ -36,6 +36,7 @@ type CopyActionParameters struct {
 	// +kubebuilder:validation:Required
 	DestinationVaultArn *string `json:"destinationVaultArn" tf:"destination_vault_arn,omitempty"`
 
+	// The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.  Fields documented below.
 	// +kubebuilder:validation:Optional
 	Lifecycle []LifecycleParameters `json:"lifecycle,omitempty" tf:"lifecycle,omitempty"`
 }
@@ -124,6 +125,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableContinuousBackup *bool `json:"enableContinuousBackup,omitempty" tf:"enable_continuous_backup,omitempty"`
 
+	// The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.  Fields documented below.
 	// +kubebuilder:validation:Optional
 	Lifecycle []RuleLifecycleParameters `json:"lifecycle,omitempty" tf:"lifecycle,omitempty"`
 

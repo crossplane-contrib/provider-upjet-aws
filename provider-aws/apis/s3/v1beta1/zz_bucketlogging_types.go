@@ -14,6 +14,8 @@ import (
 )
 
 type BucketLoggingObservation struct {
+
+	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Set of configuration blocks with information for granting permissions documented below.
@@ -79,6 +81,7 @@ type TargetGrantGranteeParameters struct {
 	// +kubebuilder:validation:Optional
 	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
 
+	// The canonical user ID of the grantee.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

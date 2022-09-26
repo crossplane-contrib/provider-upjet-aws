@@ -676,10 +676,7 @@ spec:
                     description: The ARN suffix for use with CloudWatch Metrics.
                     type: string
                   dnsName:
-                    description: The name of the LB. This name must be unique within
-                      your AWS account, can have a maximum of 32 characters, must
-                      contain only alphanumeric characters or hyphens, and must not
-                      begin or end with a hyphen.
+                    description: The DNS name of the load balancer.
                     type: string
                   id:
                     description: The ARN of the load balancer (matches arn).
@@ -701,6 +698,7 @@ spec:
                       block.
                     type: object
                   vpcId:
+                    description: The ARN of the load balancer (matches arn).
                     type: string
                   zoneId:
                     description: The canonical hosted zone ID of the load balancer

@@ -130,7 +130,7 @@ type RedirectParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPRedirectCode *string `json:"httpRedirectCode,omitempty" tf:"http_redirect_code,omitempty"`
 
-	// The host name to use in the redirect request.
+	// Name of the host where requests are redirected.
 	// +kubebuilder:validation:Optional
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 

@@ -18,6 +18,7 @@ type CloudwatchLoggingOptionsObservation struct {
 
 type CloudwatchLoggingOptionsParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -35,6 +36,7 @@ type CommonAttributesObservation struct {
 
 type CommonAttributesParameters struct {
 
+	// The HTTP endpoint name.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -48,6 +50,7 @@ type DataFormatConversionConfigurationObservation struct {
 
 type DataFormatConversionConfigurationParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -159,9 +162,11 @@ type DynamicPartitioningConfigurationObservation struct {
 
 type DynamicPartitioningConfigurationParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 }
@@ -175,12 +180,15 @@ type ElasticsearchConfigurationObservation struct {
 
 type ElasticsearchConfigurationParameters struct {
 
+	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
+	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
+	// The CloudWatch Logging Options for the delivery stream. More details are given below
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []CloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -204,10 +212,11 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []ProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
+	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The Amazon Resource Name (ARN) specifying the Stream
+	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -221,6 +230,7 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
@@ -238,6 +248,7 @@ type ExtendedS3ConfigurationCloudwatchLoggingOptionsObservation struct {
 
 type ExtendedS3ConfigurationCloudwatchLoggingOptionsParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -278,6 +289,7 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferSize *float64 `json:"bufferSize,omitempty" tf:"buffer_size,omitempty"`
 
+	// The CloudWatch Logging Options for the delivery stream. More details are given below
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []ExtendedS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -310,7 +322,7 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []ExtendedS3ConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The Amazon Resource Name (ARN) specifying the Stream
+	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -328,6 +340,7 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BackupConfiguration []S3BackupConfigurationParameters `json:"s3BackupConfiguration,omitempty" tf:"s3_backup_configuration,omitempty"`
 
+	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 }
@@ -337,6 +350,7 @@ type ExtendedS3ConfigurationProcessingConfigurationObservation struct {
 
 type ExtendedS3ConfigurationProcessingConfigurationParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -350,6 +364,7 @@ type HTTPEndpointConfigurationCloudwatchLoggingOptionsObservation struct {
 
 type HTTPEndpointConfigurationCloudwatchLoggingOptionsParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -371,15 +386,19 @@ type HTTPEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessKeySecretRef *v1.SecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
 
+	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
+	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
+	// The CloudWatch Logging Options for the delivery stream. More details are given below
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []HTTPEndpointConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
+	// The HTTP endpoint name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -391,10 +410,11 @@ type HTTPEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RequestConfiguration []RequestConfigurationParameters `json:"requestConfiguration,omitempty" tf:"request_configuration,omitempty"`
 
+	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The Amazon Resource Name (ARN) specifying the Stream
+	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -408,6 +428,7 @@ type HTTPEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
@@ -421,6 +442,7 @@ type HTTPEndpointConfigurationProcessingConfigurationObservation struct {
 
 type HTTPEndpointConfigurationProcessingConfigurationParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -472,7 +494,7 @@ type KinesisSourceConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	KinesisStreamArn *string `json:"kinesisStreamArn" tf:"kinesis_stream_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) specifying the Stream
+	// The ARN of the AWS credentials.
 	// +kubebuilder:validation:Required
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
@@ -512,6 +534,7 @@ type OrcSerDeParameters struct {
 	// +kubebuilder:validation:Optional
 	BloomFilterFalsePositiveProbability *float64 `json:"bloomFilterFalsePositiveProbability,omitempty" tf:"bloom_filter_false_positive_probability,omitempty"`
 
+	// The compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
 	// +kubebuilder:validation:Optional
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
@@ -573,6 +596,7 @@ type ParquetSerDeParameters struct {
 	// +kubebuilder:validation:Optional
 	BlockSizeBytes *float64 `json:"blockSizeBytes,omitempty" tf:"block_size_bytes,omitempty"`
 
+	// The compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
 	// +kubebuilder:validation:Optional
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
@@ -598,6 +622,7 @@ type ProcessingConfigurationObservation struct {
 
 type ProcessingConfigurationParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -667,6 +692,7 @@ type RedshiftConfigurationCloudwatchLoggingOptionsObservation struct {
 
 type RedshiftConfigurationCloudwatchLoggingOptionsParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -684,6 +710,7 @@ type RedshiftConfigurationObservation struct {
 
 type RedshiftConfigurationParameters struct {
 
+	// The CloudWatch Logging Options for the delivery stream. More details are given below
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []RedshiftConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -711,10 +738,11 @@ type RedshiftConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []RedshiftConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
+	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The Amazon Resource Name (ARN) specifying the Stream
+	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -732,6 +760,7 @@ type RedshiftConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BackupConfiguration []RedshiftConfigurationS3BackupConfigurationParameters `json:"s3BackupConfiguration,omitempty" tf:"s3_backup_configuration,omitempty"`
 
+	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
@@ -745,6 +774,7 @@ type RedshiftConfigurationProcessingConfigurationObservation struct {
 
 type RedshiftConfigurationProcessingConfigurationParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -786,6 +816,7 @@ type RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsObservati
 
 type RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -826,6 +857,7 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferSize *float64 `json:"bufferSize,omitempty" tf:"buffer_size,omitempty"`
 
+	// The CloudWatch Logging Options for the delivery stream. More details are given below
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -846,7 +878,7 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The Amazon Resource Name (ARN) specifying the Stream
+	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -880,6 +912,7 @@ type S3BackupConfigurationCloudwatchLoggingOptionsObservation struct {
 
 type S3BackupConfigurationCloudwatchLoggingOptionsParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -910,6 +943,7 @@ type S3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferSize *float64 `json:"bufferSize,omitempty" tf:"buffer_size,omitempty"`
 
+	// The CloudWatch Logging Options for the delivery stream. More details are given below
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []S3BackupConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -930,7 +964,7 @@ type S3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The Amazon Resource Name (ARN) specifying the Stream
+	// The ARN of the AWS credentials.
 	// +kubebuilder:validation:Required
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
@@ -940,6 +974,7 @@ type S3ConfigurationCloudwatchLoggingOptionsObservation struct {
 
 type S3ConfigurationCloudwatchLoggingOptionsParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -980,6 +1015,7 @@ type S3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferSize *float64 `json:"bufferSize,omitempty" tf:"buffer_size,omitempty"`
 
+	// The CloudWatch Logging Options for the delivery stream. More details are given below
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []S3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -1000,7 +1036,7 @@ type S3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The Amazon Resource Name (ARN) specifying the Stream
+	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -1032,7 +1068,7 @@ type SchemaConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) specifying the Stream
+	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -1083,6 +1119,7 @@ type ServerSideEncryptionObservation struct {
 
 type ServerSideEncryptionParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -1100,6 +1137,7 @@ type SplunkConfigurationCloudwatchLoggingOptionsObservation struct {
 
 type SplunkConfigurationCloudwatchLoggingOptionsParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -1117,6 +1155,7 @@ type SplunkConfigurationObservation struct {
 
 type SplunkConfigurationParameters struct {
 
+	// The CloudWatch Logging Options for the delivery stream. More details are given below
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []SplunkConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -1140,9 +1179,11 @@ type SplunkConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []SplunkConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
+	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
+	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 }
@@ -1152,6 +1193,7 @@ type SplunkConfigurationProcessingConfigurationObservation struct {
 
 type SplunkConfigurationProcessingConfigurationParameters struct {
 
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -1194,7 +1236,7 @@ type VPCConfigObservation struct {
 
 type VPCConfigParameters struct {
 
-	// The Amazon Resource Name (ARN) specifying the Stream
+	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
