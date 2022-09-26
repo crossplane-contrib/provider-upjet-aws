@@ -1,3 +1,7 @@
+---
+title: Configuration
+weight: 2
+---
 # AWS official provider documentation
 Upbound supports and maintains the Upbound AWS official provider.
 

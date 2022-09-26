@@ -1,4 +1,10 @@
-{
-	"Configuration": "../docs/Configuration.md",
-	"Quickstart": "../docs/Quickstart.md"
-}
+[
+	{
+		"name": "Quickstart",
+		"location": "../docs/Quickstart.md"
+	},
+	{
+		"name": "Configuration",
+		"location": "../docs/Configuration.md"
+	}
+]

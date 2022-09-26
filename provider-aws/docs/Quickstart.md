@@ -1,3 +1,7 @@
+---
+title: Quickstart
+weight: 1
+---
 # Quickstart
 
 This guide walks through the process to install Upbound Universal Crossplane and install the AWS official provider. For more details about the AWS official provider read the [Configuration](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/docs/configuration) .
