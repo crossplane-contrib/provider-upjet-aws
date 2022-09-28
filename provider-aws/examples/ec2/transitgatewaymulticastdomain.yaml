@@ -1,13 +1,17 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayMulticastDomain
 metadata:
-  name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  labels:
+    testing.upbound.io/example-name: domain
+  name: domain
 spec:
   forProvider:
     region: us-west-1
     staticSourcesSupport: enable
     tags:
       Name: Transit_Gateway_Multicast_Domain_Example
-    transitGatewayId: ${aws_ec2_transit_gateway.tgw.id}
+    transitGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

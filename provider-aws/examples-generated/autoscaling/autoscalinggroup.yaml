@@ -23,7 +23,9 @@ spec:
         }
       notificationTargetArn: arn:aws:sqs:us-east-1:444455556666:queue1*
       roleArn: arn:aws:iam::123456789012:role/S3Access
-    launchConfiguration: ${aws_launch_configuration.foobar.name}
+    launchConfigurationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foobar
     maxSize: 5
     minSize: 2
     placementGroupSelector:

@@ -62,6 +62,7 @@ import (
 	workgroup "github.com/upbound/official-providers/provider-aws/internal/controller/athena/workgroup"
 	attachment "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/attachment"
 	autoscalinggroup "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/autoscalinggroup"
+	launchconfiguration "github.com/upbound/official-providers/provider-aws/internal/controller/autoscaling/launchconfiguration"
 	framework "github.com/upbound/official-providers/provider-aws/internal/controller/backup/framework"
 	globalsettings "github.com/upbound/official-providers/provider-aws/internal/controller/backup/globalsettings"
 	plan "github.com/upbound/official-providers/provider-aws/internal/controller/backup/plan"
@@ -429,6 +430,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		workgroup.Setup,
 		attachment.Setup,
 		autoscalinggroup.Setup,
+		launchconfiguration.Setup,
 		framework.Setup,
 		globalsettings.Setup,
 		plan.Setup,

@@ -1,14 +1,15 @@
-apiVersion: eks.aws.upbound.io/v1alpha2
+apiVersion: eks.aws.upbound.io/v1beta1
 kind: IdentityProviderConfig
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource needs valid OpenID Connect id and url."
+    upjet.upbound.io/timeout: "3600" # one hour timeout
   name: example
 spec:
   forProvider:
-    clusterNameRef:
-      name: sample-eks-cluster
+    region: us-west-1
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     oidc:
-    - clientId: your client_id
-      identityProviderConfigName: example
-      issuerUrl: your issuer_url
+    - clientId: test-audience
+      issuerUrl: https://issuer.url

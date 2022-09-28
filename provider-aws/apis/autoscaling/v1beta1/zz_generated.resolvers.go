@@ -100,6 +100,22 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchConfiguration),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.LaunchConfigurationRef,
+		Selector:     mg.Spec.ForProvider.LaunchConfigurationSelector,
+		To: reference.To{
+			List:    &LaunchConfigurationList{},
+			Managed: &LaunchConfiguration{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LaunchConfiguration")
+	}
+	mg.Spec.ForProvider.LaunchConfiguration = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LaunchConfigurationRef = rsp.ResolvedReference
+
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchTemplate); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchTemplate[i3].ID),
