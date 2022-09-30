@@ -38,7 +38,7 @@ You can also (re)set your password in the `My Account` page.
 
 <!-- vale Microsoft.FirstPerson = NO -->
 <!-- disable Microsoft.FirstPerson to avoid 'my' error -->
-![A username in the My Account page](images/username.png)
+<!-- ![A username in the My Account page](images/username.png) -->
 <!-- vale Microsoft.FirstPerson = YES -->
 
 ### Bash script
@@ -146,7 +146,7 @@ You can also (re)set your password in the `My Account` page.
 
 <!-- vale Microsoft.FirstPerson = NO -->
 <!-- disable Microsoft.FirstPerson to avoid 'my' error -->
-![A username in the My Account page](images/username.png)
+<!-- ![A username in the My Account page](images/username.png) -->
 <!-- vale Microsoft.FirstPerson = YES -->
 
 ### Install the Up command-line
