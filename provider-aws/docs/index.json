@@ -1,10 +1,10 @@
 [
 	{
 		"name": "Quickstart",
-		"location": "../docs/Quickstart.md"
+		"location": "Quickstart.md"
 	},
 	{
 		"name": "Configuration",
-		"location": "../docs/Configuration.md"
+		"location": "Configuration.md"
 	}
 ]
