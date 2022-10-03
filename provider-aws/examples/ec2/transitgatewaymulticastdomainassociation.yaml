@@ -2,12 +2,12 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayMulticastDomainAssociation
 metadata:
   name: example
-  annotations:
-    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
 spec:
   forProvider:
     region: us-west-1
     subnetIdRef:
+      name: sample-subnet1
+    transitGatewayAttachmentIdRef:
       name: example
-    transitGatewayAttachmentId: ${aws_ec2_transit_gateway_vpc_attachment.example.id}
-    transitGatewayMulticastDomainId: ${aws_ec2_transit_gateway_multicast_domain.example.id}
+    transitGatewayMulticastDomainIdRef:
+      name: domain

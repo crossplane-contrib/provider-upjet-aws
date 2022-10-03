@@ -149,6 +149,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ec2_transit_gateway_vpc_attachment_accepter": FormattedIdentifierFromProvider("", "transit_gateway_attachment_id"),
 	// Imported using the id: lt-12345678
 	"aws_launch_template": config.IdentifierFromProvider,
+	// Launch configurations can be imported using the name
+	"aws_launch_configuration": config.NameAsIdentifier,
 	// Imported using the id: vpc-23123
 	"aws_vpc": config.IdentifierFromProvider,
 	// Imported using the vpc endpoint id: vpce-3ecf2a57
@@ -268,7 +270,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	"aws_ecs_cluster":           config.NameAsIdentifier,
 	"aws_ecs_service":           config.NameAsIdentifier,
-	"aws_ecs_capacity_provider": config.NameAsIdentifier,
+	"aws_ecs_capacity_provider": config.TemplatedStringAsIdentifier("name", "arn:aws:ecs:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:capacity-provider/{{ .external_name }}"),
 	// Imported using ARN that has a random substring, revision at the end:
 	// arn:aws:ecs:us-east-1:012345678910:task-definition/mytaskfamily:123
 	"aws_ecs_task_definition": config.IdentifierFromProvider,
@@ -1077,8 +1079,12 @@ func eksOIDCIdentityProvider() config.ExternalName {
 			if _, ok := base["oidc"]; !ok {
 				base["oidc"] = map[string]interface{}{}
 			}
-			if m, ok := base["oidc"].(map[string]interface{}); ok {
-				m["identity_provider_config_name"] = externalName
+			// max length is 1:
+			// https://github.com/hashicorp/terraform-provider-aws/blob/7ff39c5b11aafe812e3a4b414aa6d345286b95ec/internal/service/eks/identity_provider_config.go#L58
+			if arr, ok := base["oidc"].([]interface{}); ok && len(arr) == 1 {
+				if m, ok := arr[0].(map[string]interface{}); ok {
+					m["identity_provider_config_name"] = externalName
+				}
 			}
 		},
 		GetExternalNameFn: func(tfstate map[string]interface{}) (string, error) {

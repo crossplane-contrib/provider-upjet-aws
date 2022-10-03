@@ -1,17 +1,16 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
-kind: TransitGatewayMulticastDomain
+kind: TransitGatewayMulticastGroupMember
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewaymulticastgroupmember
   labels:
-    testing.upbound.io/example-name: domain
-  name: domain
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
+    groupIpAddress: 224.0.0.1
+    networkInterfaceIdRef:
+      name: sample-ni
     region: us-west-1
-    staticSourcesSupport: enable
-    tags:
-      Name: Transit_Gateway_Multicast_Domain_Example
-    transitGatewayIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: tgw
+    transitGatewayMulticastDomainIdRef:
+      name: domain

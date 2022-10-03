@@ -90,8 +90,17 @@ type AutoscalingGroupParameters struct {
 	InstanceRefresh []InstanceRefreshParameters `json:"instanceRefresh,omitempty" tf:"instance_refresh,omitempty"`
 
 	// The name of the launch configuration to use.
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1beta1.LaunchConfiguration
 	// +kubebuilder:validation:Optional
 	LaunchConfiguration *string `json:"launchConfiguration,omitempty" tf:"launch_configuration,omitempty"`
+
+	// Reference to a LaunchConfiguration in autoscaling to populate launchConfiguration.
+	// +kubebuilder:validation:Optional
+	LaunchConfigurationRef *v1.Reference `json:"launchConfigurationRef,omitempty" tf:"-"`
+
+	// Selector for a LaunchConfiguration in autoscaling to populate launchConfiguration.
+	// +kubebuilder:validation:Optional
+	LaunchConfigurationSelector *v1.Selector `json:"launchConfigurationSelector,omitempty" tf:"-"`
 
 	// Nested argument with Launch template specification to use to launch instances. See Launch Template below for more details.
 	// +kubebuilder:validation:Optional
