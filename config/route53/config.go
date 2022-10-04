@@ -28,8 +28,8 @@ func Configure(p *config.Provider) {
 			Type: "Zone",
 		}
 		r.References["key_management_service_arn"] = config.Reference{
-			Type:      "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
-			Extractor: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.KMSKeyARN()",
+			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			Extractor: "github.com/upbound/provider-aws/apis/kms/v1beta1.KMSKeyARN()",
 		}
 	})
 	p.AddResourceConfigurator("aws_route53_query_log", func(r *config.Resource) {

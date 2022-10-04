@@ -34,7 +34,7 @@ type BucketMetricObservation struct {
 type BucketMetricParameters struct {
 
 	// The name of the bucket to put metric configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 

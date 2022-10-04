@@ -22,7 +22,7 @@ type DomainSAMLOptionsObservation struct {
 type DomainSAMLOptionsParameters struct {
 
 	// Name of the domain.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/opensearch/v1beta1.Domain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opensearch/v1beta1.Domain
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("domain_name",false)
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`

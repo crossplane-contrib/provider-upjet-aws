@@ -36,7 +36,7 @@ type HealthCheckParameters struct {
 	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`
 
 	// The name of the CloudWatch alarm.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudwatch/v1beta1.MetricAlarm
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatch/v1beta1.MetricAlarm
 	// +kubebuilder:validation:Optional
 	CloudwatchAlarmName *string `json:"cloudwatchAlarmName,omitempty" tf:"cloudwatch_alarm_name,omitempty"`
 

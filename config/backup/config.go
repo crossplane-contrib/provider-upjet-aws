@@ -3,21 +3,21 @@ package backup
 import (
 	"github.com/upbound/upjet/pkg/config"
 
-	"github.com/upbound/official-providers/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure adds configurations for backup group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_backup_vault", func(r *config.Resource) {
 		r.References["kms_key_arn"] = config.Reference{
-			Type:      "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
+			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 			Extractor: common.PathARNExtractor,
 		}
 	})
 
 	p.AddResourceConfigurator("aws_backup_selection", func(r *config.Resource) {
 		r.References["iam_role_arn"] = config.Reference{
-			Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
+			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
 			Extractor: common.PathARNExtractor,
 		}
 		r.References["plan_id"] = config.Reference{
@@ -27,7 +27,7 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_backup_vault_notifications", func(r *config.Resource) {
 		r.References["sns_topic_arn"] = config.Reference{
-			Type:      "github.com/upbound/official-providers/provider-aws/apis/sns/v1beta1.Topic",
+			Type:      "github.com/upbound/provider-aws/apis/sns/v1beta1.Topic",
 			Extractor: common.PathARNExtractor,
 		}
 		r.References["backup_vault_name"] = config.Reference{

@@ -6,10 +6,10 @@ import "github.com/upbound/upjet/pkg/config"
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_elb", func(r *config.Resource) {
 		r.References["instances"] = config.Reference{
-			Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Instance",
+			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance",
 		}
 		r.References["subnets"] = config.Reference{
-			Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
+			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
 		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"access_logs"},
@@ -21,7 +21,7 @@ func Configure(p *config.Provider) {
 			Type: "ELB",
 		}
 		r.References["instance"] = config.Reference{
-			Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Instance",
+			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance",
 		}
 	})
 }

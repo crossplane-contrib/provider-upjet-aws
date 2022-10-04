@@ -23,7 +23,7 @@ func Configure(p *config.Provider) {
 		}
 
 		r.References["stream_arn"] = config.Reference{
-			Type: "github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1.Stream",
+			Type: "github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream",
 		}
 	})
 

@@ -19,8 +19,8 @@ type AutoScalingGroupProviderObservation struct {
 type AutoScalingGroupProviderParameters struct {
 
 	// - ARN of the associated auto scaling group.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	AutoScalingGroupArn *string `json:"autoScalingGroupArn,omitempty" tf:"auto_scaling_group_arn,omitempty"`
 

@@ -3,7 +3,7 @@ package cloudfront
 import (
 	"github.com/upbound/upjet/pkg/config"
 
-	"github.com/upbound/official-providers/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure adds configurations for ebs group.
@@ -33,7 +33,7 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_cloudfront_realtime_log_config", func(r *config.Resource) {
 		r.References["endpoint.kinesis_stream_config.stream_arn"] = config.Reference{
-			Type:      "github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1.Stream",
+			Type:      "github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream",
 			Extractor: common.PathTerraformIDExtractor,
 		}
 	})

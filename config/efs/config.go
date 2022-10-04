@@ -10,7 +10,7 @@ func Configure(p *config.Provider) {
 			Type: "FileSystem",
 		}
 		r.References["subnet_id"] = config.Reference{
-			Type: "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Subnet",
+			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
 		}
 		/*r.MetaResource.Examples[0].Dependencies["aws_efs_file_system.foo"] = `{"creation_token": "my-product-foo", "region": "us-west-1"}`
 		if err := r.MetaResource.Examples[0].Dependencies.SetPathValue("aws_subnet.alpha", "availability_zone", "us-west-1b"); err != nil {

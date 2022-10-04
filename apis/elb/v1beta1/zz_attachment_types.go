@@ -33,7 +33,7 @@ type AttachmentParameters struct {
 	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
 
 	// Instance ID to place in the ELB pool.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
 	// +kubebuilder:validation:Optional
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
 

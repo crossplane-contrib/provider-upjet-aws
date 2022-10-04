@@ -106,7 +106,7 @@ type QueryArgProfilesItemsObservation struct {
 type QueryArgProfilesItemsParameters struct {
 
 	// The profile ID for a field-level encryption content type-profile mapping.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1.FieldLevelEncryptionProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.FieldLevelEncryptionProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProfileID *string `json:"profileId,omitempty" tf:"profile_id,omitempty"`

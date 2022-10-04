@@ -27,7 +27,7 @@ func Configure(p *config.Provider) {
 			Type: "SubnetGroup",
 		}
 		r.References["kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
+			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 		}
 		r.LateInitializer = config.LateInitializer{
 			// Conflicting configuration arguments: "number_cache_clusters": conflicts with cluster_mode.0.num_node_groups

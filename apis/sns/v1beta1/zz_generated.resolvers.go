@@ -9,9 +9,9 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1"
-	v1beta11 "github.com/upbound/official-providers/provider-aws/apis/sqs/v1beta1"
-	common "github.com/upbound/official-providers/provider-aws/config/common"
+	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/sqs/v1beta1"
+	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 

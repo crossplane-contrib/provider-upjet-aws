@@ -27,7 +27,7 @@ type MappingRuleParameters struct {
 	MatchType *string `json:"matchType" tf:"match_type,omitempty"`
 
 	// The role ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -54,7 +54,7 @@ type PoolRolesAttachmentObservation struct {
 type PoolRolesAttachmentParameters struct {
 
 	// An identity pool ID in the format REGION_GUID.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cognitoidentity/v1beta1.Pool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidentity/v1beta1.Pool
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`

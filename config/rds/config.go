@@ -14,7 +14,7 @@ func Configure(p *config.Provider) {
 		// Mutually exclusive with aws_rds_cluster_role_association
 		config.MoveToStatus(r.TerraformResource, "iam_roles")
 		r.References["s3_import.bucket_name"] = config.Reference{
-			Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
+			Type: "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
 		}
 		r.References["restore_to_point_in_time.source_cluster_identifier"] = config.Reference{
 			Type: "Cluster",
@@ -30,19 +30,19 @@ func Configure(p *config.Provider) {
 			Type: "Instance",
 		}
 		r.References["s3_import.bucket_name"] = config.Reference{
-			Type: "github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket",
+			Type: "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
 		}
 		r.References["kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
+			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 		}
 		r.References["performance_insights_kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
+			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 		}
 		r.References["restore_to_point_in_time.source_cluster_identifier"] = config.Reference{
 			Type: "Cluster",
 		}
 		r.References["security_group_names"] = config.Reference{
-			Type:              "github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 			RefFieldName:      "SecurityGroupNameRefs",
 			SelectorFieldName: "SecurityGroupNameSelector",
 		}

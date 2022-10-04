@@ -146,7 +146,7 @@ type RuleParameters struct {
 	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
 
 	// The name of a logical container where backups are stored.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/backup/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Vault
 	// +kubebuilder:validation:Optional
 	TargetVaultName *string `json:"targetVaultName,omitempty" tf:"target_vault_name,omitempty"`
 

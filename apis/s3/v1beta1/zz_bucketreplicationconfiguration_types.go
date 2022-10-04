@@ -22,7 +22,7 @@ type BucketReplicationConfigurationObservation struct {
 type BucketReplicationConfigurationParameters struct {
 
 	// The name of the source S3 bucket you want Amazon S3 to monitor.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -41,7 +41,7 @@ type BucketReplicationConfigurationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ARN of the IAM role for Amazon S3 to assume when replicating the objects.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
@@ -254,7 +254,7 @@ type RuleDestinationParameters struct {
 	Account *string `json:"account,omitempty" tf:"account,omitempty"`
 
 	// The ARN of the S3 bucket where you want Amazon S3 to store replicas of the objects identified by the rule.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`

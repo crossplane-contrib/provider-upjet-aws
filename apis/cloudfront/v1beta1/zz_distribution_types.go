@@ -567,7 +567,7 @@ type OrderedCacheBehaviorFunctionAssociationParameters struct {
 	EventType *string `json:"eventType" tf:"event_type,omitempty"`
 
 	// ARN of the Cloudfront function.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
@@ -597,7 +597,7 @@ type OrderedCacheBehaviorLambdaFunctionAssociationParameters struct {
 	IncludeBody *bool `json:"includeBody,omitempty" tf:"include_body,omitempty"`
 
 	// ARN of the Lambda function.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("qualified_arn",true)
 	// +kubebuilder:validation:Optional
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
@@ -825,7 +825,7 @@ type S3OriginConfigParameters struct {
 
 	// The CloudFront origin access
 	// identity to associate with the origin.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/cloudfront/v1beta1.OriginAccessIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.OriginAccessIdentity
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("cloudfront_access_identity_path",true)
 	// +kubebuilder:validation:Optional
 	OriginAccessIdentity *string `json:"originAccessIdentity,omitempty" tf:"origin_access_identity,omitempty"`

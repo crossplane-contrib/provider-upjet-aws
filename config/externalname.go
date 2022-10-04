@@ -13,7 +13,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/config"
 
-	"github.com/upbound/official-providers/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/common"
 )
 
 // ExternalNameConfigs contains all external name configurations for this

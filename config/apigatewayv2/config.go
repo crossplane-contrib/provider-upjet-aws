@@ -7,7 +7,7 @@ package apigatewayv2
 import (
 	"github.com/upbound/upjet/pkg/config"
 
-	"github.com/upbound/official-providers/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure adds configurations for autoscaling group.
@@ -29,13 +29,13 @@ func Configure(p *config.Provider) {
 			Type: "API",
 		}
 		r.References["authorizer_uri"] = config.Reference{
-			Type:      "github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.Function",
-			Extractor: "github.com/upbound/official-providers/provider-aws/apis/lambda/v1beta1.LambdaFunctionInvokeARN()",
+			Type:      "github.com/upbound/provider-aws/apis/lambda/v1beta1.Function",
+			Extractor: "github.com/upbound/provider-aws/apis/lambda/v1beta1.LambdaFunctionInvokeARN()",
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_domain_name", func(r *config.Resource) {
 		r.References["domain_name_configuration.certificate_arn"] = config.Reference{
-			Type:      "github.com/upbound/official-providers/provider-aws/apis/acm/v1beta1.Certificate",
+			Type:      "github.com/upbound/provider-aws/apis/acm/v1beta1.Certificate",
 			Extractor: common.PathARNExtractor,
 		}
 	})
@@ -75,7 +75,7 @@ func Configure(p *config.Provider) {
 		}
 		r.References["target"] = config.Reference{
 			Type:      "Integration",
-			Extractor: "github.com/upbound/official-providers/provider-aws/apis/apigatewayv2/v1beta1.IntegrationIDPrefixed()",
+			Extractor: "github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.IntegrationIDPrefixed()",
 		}
 		r.References["authorizer_id"] = config.Reference{
 			Type: "Authorizer",
