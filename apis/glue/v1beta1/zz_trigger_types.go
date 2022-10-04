@@ -37,7 +37,7 @@ type ActionsParameters struct {
 	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
 
 	// The name of a job to be executed. Conflicts with crawler_name.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.Job
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Job
 	// +kubebuilder:validation:Optional
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
 
@@ -76,7 +76,7 @@ type ConditionsParameters struct {
 	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
 
 	// The name of a job to be executed. Conflicts with crawler_name.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.Job
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Job
 	// +kubebuilder:validation:Optional
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
 

@@ -39,7 +39,7 @@ type VPCIPv4CidrBlockAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ID of the VPC to make the association with.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 

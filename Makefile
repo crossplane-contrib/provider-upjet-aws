@@ -2,7 +2,7 @@
 # Setup Project
 
 PROJECT_NAME := provider-aws
-PROJECT_REPO := github.com/upbound/official-providers/$(PROJECT_NAME)
+PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
 PROJECT_VERSION_TAG_GROUP := aws
 
 export TERRAFORM_VERSION := 1.2.1
@@ -42,6 +42,8 @@ GO_TEST_PARALLEL := $(shell echo $$(( $(NPROCS) / 2 )))
 # correctly.
 export GOPRIVATE = github.com/upbound/*
 
+GO_REQUIRED_VERSION ?= 1.19
+GOLANGCILINT_VERSION ?= 1.50.0
 GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/provider $(GO_PROJECT)/cmd/generator
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
 GO_SUBDIRS += cmd internal apis
@@ -163,12 +165,34 @@ generate.init: $(TERRAFORM_PROVIDER_SCHEMA)
 
 # ====================================================================================
 # Extract Terraform registry metadata
-metadata:
-	@WORK_DIR=.work ../scripts/scrape_metadata.sh
+pull-docs:
+	@if [ ! -d "$(WORK_DIR)/$(notdir $(TERRAFORM_PROVIDER_REPO))" ]; then \
+		git clone -c advice.detachedHead=false --depth 1 --filter=blob:none --branch "v$(TERRAFORM_PROVIDER_VERSION)" --sparse "$(TERRAFORM_PROVIDER_REPO)" "$(WORK_DIR)/$(notdir $(TERRAFORM_PROVIDER_REPO))"; \
+	fi
+	@git -C "$(WORK_DIR)/$(notdir $(TERRAFORM_PROVIDER_REPO))" sparse-checkout set "$(TERRAFORM_DOCS_PATH)"
 
-generate.init: metadata
+generate.init: pull-docs
 
-.PHONY: metadata
+# ====================================================================================
+# Test utilities
+# TODO(muvaf): Move most of this to build submodule.
+
+uptest: $(KIND) $(KUBECTL) $(HELM3) $(UP) $(KUTTL)
+	@$(INFO) running uptest using kind $(KIND_VERSION)
+	@KIND_NODE_IMAGE_TAG=${KIND_NODE_IMAGE_TAG} PLATFORM=${PLATFORM} ./cluster/install_provider.sh || $(FAIL)
+	@KIND=$(KIND) KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd || $(FAIL)
+
+uptest-local: $(KUBECTL) $(KUTTL)
+	@$(INFO) running automated tests with uptest using current kubeconfig $(KIND_VERSION)
+	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd --skip-provider-config || $(FAIL)
+
+cluster_dump: $(KUBECTL)
+	@mkdir -p ${DUMP_DIRECTORY}
+	@$(KUBECTL) cluster-info dump --output-directory ${DUMP_DIRECTORY} --all-namespaces || true
+	@$(KUBECTL) get managed -o yaml > ${DUMP_DIRECTORY}/managed.yaml || true
+	@cat /tmp/automated-tests/case/*.yaml > ${DUMP_DIRECTORY}/kuttl-inputs.yaml
+
+.PHONY: pull-docs
 
 # ====================================================================================
 # Special Targets

@@ -150,6 +150,6 @@ func (c *CallerIdentityCache) makeRoom() {
 
 // AWSGetCallerIdentity makes sends a request to AWS to get the caller identity.
 func AWSGetCallerIdentity(ctx context.Context, cfg aws.Config) (*sts.GetCallerIdentityOutput, error) {
-	i, err := sts.NewFromConfig(cfg).GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
+	i, err := sts.NewFromConfig(cfg).GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{}) //nolint:contextcheck
 	return i, errors.Wrap(err, errGetCallerIdentityFailed)
 }

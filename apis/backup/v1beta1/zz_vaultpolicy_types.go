@@ -25,7 +25,7 @@ type VaultPolicyObservation struct {
 type VaultPolicyParameters struct {
 
 	// Name of the backup vault to add policy for.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/backup/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Vault
 	// +kubebuilder:validation:Optional
 	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
 

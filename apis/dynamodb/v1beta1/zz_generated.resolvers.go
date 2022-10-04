@@ -9,7 +9,7 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/official-providers/provider-aws/apis/kinesis/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/kinesis/v1beta1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 

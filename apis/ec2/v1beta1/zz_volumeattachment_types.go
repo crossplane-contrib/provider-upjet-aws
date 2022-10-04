@@ -32,7 +32,7 @@ type VolumeAttachmentParameters struct {
 	ForceDetach *bool `json:"forceDetach,omitempty" tf:"force_detach,omitempty"`
 
 	// ID of the Instance to attach to
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
@@ -62,7 +62,7 @@ type VolumeAttachmentParameters struct {
 	StopInstanceBeforeDetaching *bool `json:"stopInstanceBeforeDetaching,omitempty" tf:"stop_instance_before_detaching,omitempty"`
 
 	// ID of the Volume to be attached
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.EBSVolume
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EBSVolume
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`

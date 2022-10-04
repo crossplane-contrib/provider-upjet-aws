@@ -74,7 +74,7 @@ type EventSourceMappingParameters struct {
 
 	// The name or the ARN of the Lambda function that will be subscribing to events.
 	// +crossplane:generate:reference:type=Function
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 

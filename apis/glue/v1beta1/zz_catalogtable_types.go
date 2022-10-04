@@ -33,7 +33,7 @@ type CatalogTableParameters struct {
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
 	// Name of the metadata database where the table metadata resides. For Hive compatibility, this must be all lowercase.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 

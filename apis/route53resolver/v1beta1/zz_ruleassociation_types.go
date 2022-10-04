@@ -31,7 +31,7 @@ type RuleAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ID of the resolver rule that you want to associate with the VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/route53resolver/v1beta1.Rule
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53resolver/v1beta1.Rule
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResolverRuleID *string `json:"resolverRuleId,omitempty" tf:"resolver_rule_id,omitempty"`
@@ -45,7 +45,7 @@ type RuleAssociationParameters struct {
 	ResolverRuleIDSelector *v1.Selector `json:"resolverRuleIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC that you want to associate the resolver rule with.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 

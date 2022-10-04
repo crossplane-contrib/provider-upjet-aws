@@ -19,7 +19,7 @@ type DataLocationObservation struct {
 type DataLocationParameters struct {
 
 	// –  Amazon Resource Name (ARN) that uniquely identifies the data location resource.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/lakeformation/v1beta1.Resource
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lakeformation/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -47,7 +47,7 @@ type DatabaseParameters struct {
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// –  Name of the database resource. Unique to the Data Catalog.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -152,7 +152,7 @@ type TableWithColumnsParameters struct {
 	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`
 
 	// –  Name of the table resource.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/glue/v1beta1.CatalogTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogTable
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

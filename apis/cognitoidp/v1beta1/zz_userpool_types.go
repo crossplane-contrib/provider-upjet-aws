@@ -249,7 +249,7 @@ type SMSConfigurationParameters struct {
 	ExternalID *string `json:"externalId" tf:"external_id,omitempty"`
 
 	// ARN of the Amazon SNS caller. This is usually the IAM role that you've given Cognito permission to assume.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SnsCallerArn *string `json:"snsCallerArn,omitempty" tf:"sns_caller_arn,omitempty"`

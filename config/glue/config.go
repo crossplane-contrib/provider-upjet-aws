@@ -3,7 +3,7 @@ package glue
 import (
 	"github.com/upbound/upjet/pkg/config"
 
-	"github.com/upbound/official-providers/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure glue resources.
@@ -32,17 +32,17 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_glue_crawler", func(r *config.Resource) {
 		r.References["role"] = config.Reference{
-			Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
+			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
 			Extractor: common.PathARNExtractor,
 		}
 	})
 	p.AddResourceConfigurator("aws_glue_data_catalog_encryption_settings", func(r *config.Resource) {
 		r.References["data_catalog_encryption_settings.connection_password_encryption.aws_kms_key_id"] = config.Reference{
-			Type:      "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
+			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 			Extractor: common.PathARNExtractor,
 		}
 		r.References["data_catalog_encryption_settings.encryption_at_rest.sse_aws_kms_key_id"] = config.Reference{
-			Type:      "github.com/upbound/official-providers/provider-aws/apis/kms/v1beta1.Key",
+			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 			Extractor: common.PathARNExtractor,
 		}
 	})

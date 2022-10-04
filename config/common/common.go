@@ -13,7 +13,7 @@ import (
 
 const (
 	// SelfPackagePath is the golang path for this package.
-	SelfPackagePath = "github.com/upbound/official-providers/provider-aws/config/common"
+	SelfPackagePath = "github.com/upbound/provider-aws/config/common"
 
 	// PathARNExtractor is the golang path to ARNExtractor function
 	// in this package.

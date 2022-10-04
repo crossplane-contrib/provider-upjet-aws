@@ -7,7 +7,7 @@ package kms
 import (
 	"github.com/upbound/upjet/pkg/config"
 
-	"github.com/upbound/official-providers/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure adds configurations for kms group.

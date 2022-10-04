@@ -27,8 +27,8 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 
-	"github.com/upbound/official-providers/provider-aws/apis/v1beta1"
-	"github.com/upbound/official-providers/provider-aws/internal/version"
+	"github.com/upbound/provider-aws/apis/v1beta1"
+	"github.com/upbound/provider-aws/internal/version"
 )
 
 const (
@@ -253,7 +253,7 @@ func GetRoleChainConfig(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, cf
 	pCfg := cfg
 	for _, aro := range pcs.AssumeRoleChain {
 		stsAssume := stscreds.NewAssumeRoleProvider(
-			sts.NewFromConfig(*pCfg),
+			sts.NewFromConfig(*pCfg), //nolint:contextcheck
 			aws.ToString(aro.RoleARN),
 			SetAssumeRoleOptions(aro),
 		)
@@ -277,7 +277,7 @@ func GetAssumeRoleWithWebIdentityConfig(ctx context.Context, cfg *aws.Config, pc
 	if pcs.Credentials.WebIdentity == nil {
 		return nil, errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
 	}
-	stsclient := sts.NewFromConfig(*cfg)
+	stsclient := sts.NewFromConfig(*cfg) //nolint:contextcheck
 	awsConfig, err := config.LoadDefaultConfig(
 		ctx,
 		userAgentV2,

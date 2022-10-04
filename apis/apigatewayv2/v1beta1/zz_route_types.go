@@ -107,7 +107,7 @@ type RouteParameters struct {
 
 	// The target for the route, of the form integrations/IntegrationID, where IntegrationID is the identifier of an aws_apigatewayv2_integration resource.
 	// +crossplane:generate:reference:type=Integration
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/apis/apigatewayv2/v1beta1.IntegrationIDPrefixed()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.IntegrationIDPrefixed()
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 

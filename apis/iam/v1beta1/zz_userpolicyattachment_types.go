@@ -21,7 +21,7 @@ type UserPolicyAttachmentParameters struct {
 
 	// The ARN of the policy you want to apply
 	// +crossplane:generate:reference:type=Policy
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 

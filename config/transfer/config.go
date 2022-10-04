@@ -3,7 +3,7 @@ package transfer
 import (
 	"github.com/upbound/upjet/pkg/config"
 
-	"github.com/upbound/official-providers/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure adds configurations for transfer group.
@@ -13,7 +13,7 @@ func Configure(p *config.Provider) {
 			Type: "Server",
 		}
 		r.References["role"] = config.Reference{
-			Type:      "github.com/upbound/official-providers/provider-aws/apis/iam/v1beta1.Role",
+			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
 			Extractor: common.PathARNExtractor,
 		}
 	})
