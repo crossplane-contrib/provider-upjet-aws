@@ -173,6 +173,25 @@ pull-docs:
 
 generate.init: pull-docs
 
+# ====================================================================================
+# Test utilities
+# TODO(muvaf): Move most of this to build submodule.
+
+uptest: $(KIND) $(KUBECTL) $(HELM3) $(UP) $(KUTTL)
+	@$(INFO) running uptest using kind $(KIND_VERSION)
+	@KIND_NODE_IMAGE_TAG=${KIND_NODE_IMAGE_TAG} PLATFORM=${PLATFORM} ./cluster/install_provider.sh || $(FAIL)
+	@KIND=$(KIND) KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd || $(FAIL)
+
+uptest-local: $(KUBECTL) $(KUTTL)
+	@$(INFO) running automated tests with uptest using current kubeconfig $(KIND_VERSION)
+	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd --skip-provider-config || $(FAIL)
+
+cluster_dump: $(KUBECTL)
+	@mkdir -p ${DUMP_DIRECTORY}
+	@$(KUBECTL) cluster-info dump --output-directory ${DUMP_DIRECTORY} --all-namespaces || true
+	@$(KUBECTL) get managed -o yaml > ${DUMP_DIRECTORY}/managed.yaml || true
+	@cat /tmp/automated-tests/case/*.yaml > ${DUMP_DIRECTORY}/kuttl-inputs.yaml
+
 .PHONY: pull-docs
 
 # ====================================================================================

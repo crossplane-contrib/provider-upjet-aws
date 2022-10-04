@@ -1,0 +1,62 @@
+name: Updoc
+on:
+  workflow_dispatch:
+    inputs:
+      provider:
+        description: 'The name of the provider, e.g. provider-aws'
+        required: true
+        type: string
+      version:
+        description: 'The version you would like the release to have, e.g. v0.1'
+        required: true
+        type: string
+      env:
+        description: 'The environment you want to upload docs for '
+        required: true
+        type: choice
+        default: 'PROD'
+        options:
+        - DEV
+        - STAGING
+        - PROD
+
+
+env:
+  GO_VERSION: '1.18'
+
+jobs:
+  upload:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ env.GO_VERSION }}
+      - name: Find the Go Build Cache
+        id: go
+        run: echo "::set-output name=cache::$(go env GOCACHE)"
+      - name: Cache the Go Build Cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.go.outputs.cache }}
+          key: ${{ runner.os }}-build-updoc-artifacts-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-build-updoc-artifacts-
+      - name: Cache Go Dependencies
+        uses: actions/cache@v2
+        with:
+          path: .work/pkg
+          key: ${{ runner.os }}-updoc-pkg-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-updoc-pkg-
+      - name: Create Service Account File
+        env:
+          GAC: ${{ secrets[format('UPBOUND_CI_{0}_BUCKET_SA', github.event.inputs.env)] }}
+        run: |
+          echo "$GAC" > updoc/internal/sa.json
+      - name: Upload Docs
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: internal/sa.json
+        run: make updocs_upload name=${{ github.event.inputs.provider }} version=${{ github.event.inputs.version }} bucket_name=${{ secrets[format('UPBOUND_CI_{0}_BUCKET_NAME', github.event.inputs.env)] }} cdn_domain=${{ secrets[format('UPBOUND_CI_{0}_BUCKET_CDN', github.event.inputs.env)] }}

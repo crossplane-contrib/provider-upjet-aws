@@ -1,0 +1,31 @@
+name: Comment Commands
+
+on: issue_comment
+
+jobs:
+  backport:
+    runs-on: ubuntu-20.04
+    if: github.event.issue.pull_request && startsWith(github.event.comment.body, '/backport')
+    steps:
+    - name: Extract Command
+      id: command
+      uses: xt0rted/slash-command-action@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        command: backport
+        reaction: "true"
+        reaction-type: "eyes"
+        allow-edits: "false"
+        permission-level: write
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Open Backport PR
+      uses: zeebe-io/backport-action@v0.0.4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_workspace: ${{ github.workspace }}
+        version: v0.0.4
