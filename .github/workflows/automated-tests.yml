@@ -140,7 +140,7 @@ jobs:
       - name: Run Uptest
         id: run-uptest
         env:
-          PROVIDER_AWS_CREDS: ${{ secrets.PROVIDER_AWS_CREDS }}
+          UPTEST_AWS_CREDS: ${{ secrets.UPTEST_AWS_CREDS }}
           EXAMPLE_LIST: ${{ needs.detect-provider.outputs.example_list }}
           EXAMPLE_HASH: ${{ needs.detect-provider.outputs.example_hash }}
         run: make uptest
