@@ -34,14 +34,14 @@ echo_error(){
 }
 
 # ------------------------------
-projectdir="$( cd "$( dirname "${BASH_SOURCE[0]}")"/.. && pwd )"
+projectdir="$(pwd)"
 
 # get the build environment variables from the special build.vars target in the main makefile
 eval $(make --no-print-directory -C ${projectdir} build.vars)
 
 # ------------------------------
 
-CROSSPLANE_NAMESPACE="crossplane-system"
+CROSSPLANE_NAMESPACE="upbound-system"
 K8S_CLUSTER="automated-tests"
 
 # setup package cache
@@ -50,7 +50,7 @@ CACHE_PATH="${projectdir}/.work/automated-tests-package-cache"
 mkdir -p "${CACHE_PATH}"
 echo "created cache dir at ${CACHE_PATH}"
 
-"${UP}" xpkg xp-extract --from-xpkg ./"${PROVIDER_NAME}"/_output/xpkg/"${PLATFORM}"/"${PROVIDER_NAME}"-*.xpkg -o "${CACHE_PATH}/${PROVIDER_NAME}.gz" && chmod 644 "${CACHE_PATH}/${PROVIDER_NAME}.gz"
+"${UP}" xpkg xp-extract --from-xpkg "./_output/xpkg/${PLATFORM}/${PROVIDER_NAME}-*.xpkg" -o "${CACHE_PATH}/${PROVIDER_NAME}.gz" && chmod 644 "${CACHE_PATH}/${PROVIDER_NAME}.gz"
 
 # create kind cluster with extra mounts
 KIND_NODE_IMAGE="kindest/node:${KIND_NODE_IMAGE_TAG}"
@@ -68,7 +68,6 @@ EOF
 echo "${KIND_CONFIG}" | "${KIND}" create cluster --name="${K8S_CLUSTER}" --wait=5m --image="${KIND_NODE_IMAGE}" --config=-
 
 # tag controller image and load it into kind cluster
-cd ./"${PROVIDER_NAME}"
 BUILD_REGISTRY="build-$(echo "${HOSTNAME}"-"$(pwd)" | shasum -a 256 | cut -c1-8)"
 cd "${projectdir}"
 
@@ -78,8 +77,8 @@ PACKAGE_IMAGE="${PROVIDER_NAME}:${VERSION}"
 docker tag "${BUILD_IMAGE}" "${PACKAGE_IMAGE}"
 "${KIND}" load docker-image "${PACKAGE_IMAGE}" --name="${K8S_CLUSTER}"
 
-echo_step "create crossplane-system namespace"
-"${KUBECTL}" create ns crossplane-system
+echo_step "create ${CROSSPLANE_NAMESPACE} namespace"
+"${KUBECTL}" create ns ${CROSSPLANE_NAMESPACE}
 
 echo_step "create persistent volume and claim for mounting package-cache"
 PV_YAML="$( cat <<EOF
@@ -106,7 +105,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: package-cache
-  namespace: crossplane-system
+  namespace: ${CROSSPLANE_NAMESPACE}
 spec:
   accessModes:
     - ReadWriteOnce
@@ -119,16 +118,15 @@ EOF
 )"
 echo "${PVC_YAML}" | "${KUBECTL}" create -f -
 
-# install crossplane from stable channel
-# TODO(hasheddan): switch to using UXP for all testing
-echo_step "installing crossplane from stable channel"
-"${HELM3}" repo add crossplane-stable https://charts.crossplane.io/stable/
-chart_version="$("${HELM3}" search repo crossplane-stable/crossplane | awk 'FNR == 2 {print $2}')"
-echo_info "using crossplane version ${chart_version}"
+# install universal-crossplane
+echo_step "installing universal-crossplane from stable channel"
+"${HELM3}" repo add upbound-stable https://charts.upbound.io/stable
+chart_version="$("${HELM3}" search repo upbound-stable/universal-crossplane --devel  | awk 'FNR == 2 {print $2}')"
+echo_info "using universal-crossplane version ${chart_version}"
 echo
 # we replace empty dir with our PVC so that the /cache dir in the kind node
 # container is exposed to the crossplane pod
-"${HELM3}" install crossplane --namespace crossplane-system crossplane-stable/crossplane --version ${chart_version} --wait --set packageCache.pvc=package-cache
+"${HELM3}" install uxp --namespace ${CROSSPLANE_NAMESPACE} upbound-stable/universal-crossplane --devel --version ${chart_version} --wait --set packageCache.pvc=package-cache
 
 # ----------- integration tests
 echo_step "--- INTEGRATION TESTS ---"
@@ -174,4 +172,4 @@ echo_step "waiting for provider to be installed"
 
 kubectl wait "provider.pkg.crossplane.io/${PROVIDER_NAME}" --for=condition=healthy --timeout=180s
 
-kubectl get deployment -n crossplane-system
+kubectl get deployment -n ${CROSSPLANE_NAMESPACE}
