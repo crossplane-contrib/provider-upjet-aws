@@ -53,8 +53,7 @@ echo "created cache dir at ${CACHE_PATH}"
 "${UP}" xpkg xp-extract --from-xpkg "./_output/xpkg/${PLATFORM}/${PROVIDER_NAME}-*.xpkg" -o "${CACHE_PATH}/${PROVIDER_NAME}.gz" && chmod 644 "${CACHE_PATH}/${PROVIDER_NAME}.gz"
 
 # create kind cluster with extra mounts
-KIND_NODE_IMAGE="kindest/node:${KIND_NODE_IMAGE_TAG}"
-echo_step "creating k8s cluster using kind and node image ${KIND_NODE_IMAGE}"
+echo_step "creating k8s cluster using kind"
 KIND_CONFIG="$( cat <<EOF
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -65,7 +64,7 @@ nodes:
     containerPath: /cache
 EOF
 )"
-echo "${KIND_CONFIG}" | "${KIND}" create cluster --name="${K8S_CLUSTER}" --wait=5m --image="${KIND_NODE_IMAGE}" --config=-
+echo "${KIND_CONFIG}" | "${KIND}" create cluster --name="${K8S_CLUSTER}" --wait=5m --config=-
 
 # tag controller image and load it into kind cluster
 BUILD_REGISTRY="build-$(echo "${HOSTNAME}"-"$(pwd)" | shasum -a 256 | cut -c1-8)"

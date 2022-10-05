@@ -179,7 +179,7 @@ generate.init: pull-docs
 
 uptest: $(KIND) $(KUBECTL) $(HELM3) $(UP) $(KUTTL)
 	@$(INFO) running uptest using kind $(KIND_VERSION)
-	@KIND_NODE_IMAGE_TAG=${KIND_NODE_IMAGE_TAG} PLATFORM=${PLATFORM} PROVIDER_NAME=$(PROJECT_NAME) ./cluster/install_provider.sh || $(FAIL)
+	@PLATFORM=${PLATFORM} PROVIDER_NAME=$(PROJECT_NAME) ./cluster/install_provider.sh || $(FAIL)
 	@KIND=$(KIND) KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd || $(FAIL)
 
 uptest-local: $(KUBECTL) $(KUTTL)
