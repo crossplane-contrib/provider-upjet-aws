@@ -116,7 +116,7 @@ xpkg.build: $(UP) do.build.images
 		--controller $(BUILD_REGISTRY)/$(PROJECT_NAME)-$(ARCH) \
 		--package-root ./package \
 		--examples-root ./examples \
-		--output ./_output/xpkg/$(PLATFORM)/$(PROJECT_NAME)-$(VERSION).xpkg || $(FAIL)
+		--output $(OUTPUT_DIR)/xpkg/$(PLATFORM)/$(PROJECT_NAME)-$(VERSION).xpkg || $(FAIL)
 	@$(OK) Built package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM)
 
 build.artifacts.platform: xpkg.build
@@ -179,7 +179,7 @@ generate.init: pull-docs
 
 uptest: $(KIND) $(KUBECTL) $(HELM3) $(UP) $(KUTTL)
 	@$(INFO) running uptest using kind $(KIND_VERSION)
-	@PLATFORM=${PLATFORM} PROVIDER_NAME=$(PROJECT_NAME) ./cluster/install_provider.sh || $(FAIL)
+	@cluster/install_provider.sh || $(FAIL)
 	@KIND=$(KIND) KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd || $(FAIL)
 
 uptest-local: $(KUBECTL) $(KUTTL)
