@@ -278,4 +278,4 @@ jobs:
 
       - name: Check Example Manifests
         run: |
-          ./scripts/check-examples.py . package/crds examples
+          ./scripts/check-examples.py package/crds examples
