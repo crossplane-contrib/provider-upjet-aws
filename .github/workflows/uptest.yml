@@ -13,13 +13,13 @@ env:
   UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
 
 jobs:
-  detect-provider:
+  get-example-list:
     runs-on: ubuntu-22.04
     if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, '/test-examples') }}
     outputs:
-      provider_name: ${{ steps.detect-provider-name.outputs.provider-name }}
-      example_list: ${{ steps.detect-provider-name.outputs.example-list }}
-      example_hash: ${{ steps.detect-provider-name.outputs.example-hash }}
+      provider_name: ${{ steps.get-example-list-name.outputs.provider-name }}
+      example_list: ${{ steps.get-example-list-name.outputs.example-list }}
+      example_hash: ${{ steps.get-example-list-name.outputs.example-hash }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -38,7 +38,7 @@ jobs:
       - name: Detect Provider Name from Issue Comment
         env:
           COMMENT: ${{ github.event.comment.body }}
-        id: detect-provider-name
+        id: get-example-list-name
         run: |
           PATHS=$(echo $COMMENT | sed 's/^.*\/test-examples="//g' | cut -d '"' -f 1 | sed 's/,/ /g')
           EXAMPLE_LIST=""
@@ -64,10 +64,10 @@ jobs:
             -f state='pending' \
             -f target_url='https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}' \
             -f description='Running...' \
-            -f context="Uptest-${{ steps.detect-provider-name.outputs.example-hash }}"
+            -f context="Uptest-${{ steps.get-example-list-name.outputs.example-hash }}"
   uptest:
     runs-on: ubuntu-22.04
-    needs: detect-provider
+    needs: get-example-list
     if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, '/test-examples') }}
     steps:
       - name: Setup QEMU
@@ -141,14 +141,14 @@ jobs:
         id: run-uptest
         env:
           UPTEST_AWS_CREDS: ${{ secrets.UPTEST_AWS_CREDS }}
-          EXAMPLE_LIST: ${{ needs.detect-provider.outputs.example_list }}
-          EXAMPLE_HASH: ${{ needs.detect-provider.outputs.example_hash }}
+          EXAMPLE_LIST: ${{ needs.get-example-list.outputs.example_list }}
+          EXAMPLE_HASH: ${{ needs.get-example-list.outputs.example_hash }}
         run: make uptest
 
       - name: Create Successful Status Check
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          EXAMPLE_HASH: ${{ needs.detect-provider.outputs.example_hash }}
+          EXAMPLE_HASH: ${{ needs.get-example-list.outputs.example_hash }}
         run: |
           gh api \
             --method POST \
@@ -169,7 +169,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: cluster-dump-${{ needs.detect-provider.outputs.provider_name }}
+          name: cluster-dump-${{ needs.get-example-list.outputs.provider_name }}
           path: ./_output/cluster-dump
 
       - name: Cleanup
@@ -181,7 +181,7 @@ jobs:
         if: failure()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          EXAMPLE_HASH: ${{ needs.detect-provider.outputs.example_hash }}
+          EXAMPLE_HASH: ${{ needs.get-example-list.outputs.example_hash }}
         run: |
           gh api \
             --method POST \
