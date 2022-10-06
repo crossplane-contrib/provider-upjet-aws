@@ -44,17 +44,17 @@ NAMESPACE="upbound-system"
 K8S_CLUSTER="uptest"
 
 # setup package cache
-echo_step "setting up local package cache"
+echo_step "Setting up local package cache"
 CACHE_PATH="${WORK_DIR}/package-cache"
 mkdir -p "${CACHE_PATH}"
-echo "created cache dir at ${CACHE_PATH}"
+echo "Created cache dir at ${CACHE_PATH}"
 
 # ${PLATFORM} should be available here but for some reason it is not and all CI
 # runners are linux_amd64 anyway.
 "${UP}" xpkg xp-extract --from-xpkg "${OUTPUT_DIR}/xpkg/linux_amd64/${PROJECT_NAME}-${VERSION}.xpkg" -o "${CACHE_PATH}/${PROJECT_NAME}.gz" && chmod 644 "${CACHE_PATH}/${PROJECT_NAME}.gz"
 
 # create kind cluster with extra mounts
-echo_step "creating k8s cluster using kind"
+echo_step "Creating k8s cluster using kind"
 KIND_CONFIG="$( cat <<EOF
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -76,10 +76,10 @@ PACKAGE_IMAGE="${PROJECT_NAME}:${VERSION}"
 docker tag "${BUILD_IMAGE}" "${PACKAGE_IMAGE}"
 "${KIND}" load docker-image "${PACKAGE_IMAGE}" --name="${K8S_CLUSTER}"
 
-echo_step "create ${NAMESPACE} namespace"
+echo_step "Create ${NAMESPACE} namespace"
 "${KUBECTL}" create ns ${NAMESPACE}
 
-echo_step "create persistent volume and claim for mounting package-cache"
+echo_step "Create persistent volume and claim for mounting package-cache"
 PV_YAML="$( cat <<EOF
 apiVersion: v1
 kind: PersistentVolume
@@ -118,7 +118,7 @@ EOF
 echo "${PVC_YAML}" | "${KUBECTL}" create -f -
 
 # install universal-crossplane
-echo_step "installing universal-crossplane from stable channel"
+echo_step "Installing universal-crossplane from stable channel"
 "${HELM3}" repo add upbound-stable https://charts.upbound.io/stable
 chart_version="$("${HELM3}" search repo upbound-stable/universal-crossplane --devel  | awk 'FNR == 2 {print $2}')"
 echo_info "using universal-crossplane version ${chart_version}"
@@ -131,7 +131,7 @@ echo
 echo_step "--- INTEGRATION TESTS ---"
 
 # install package
-echo_step "installing ${PROJECT_NAME} into \"${NAMESPACE}\" namespace"
+echo_step "Installing ${PROJECT_NAME} into \"${NAMESPACE}\" namespace"
 
 CONFIG_YAML="$( cat <<EOF
 apiVersion: pkg.crossplane.io/v1alpha1
@@ -160,12 +160,35 @@ EOF
 echo "${CONFIG_YAML}" | "${KUBECTL}" apply -f -
 echo "${INSTALL_YAML}" | "${KUBECTL}" apply -f -
 
-# printing the cache dir contents can be useful for troubleshooting failures
-echo_step "check kind node cache dir contents"
+echo_step "Check kind node cache dir contents"
 docker exec "${K8S_CLUSTER}-control-plane" ls -la /cache
 
-echo_step "waiting for provider to be installed"
+echo_step "Waiting for provider to be installed"
 
 kubectl wait "provider.pkg.crossplane.io/${PROJECT_NAME}" --for=condition=healthy --timeout=180s
 
 kubectl get deployment -n ${NAMESPACE}
+
+echo_step "Create default ProviderConfig for AWS"
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Secret
+metadata:
+  name: aws-creds
+  namespace: upbound-system
+stringData:
+  creds: |-
+    ${UPTEST_AWS_CREDS}
+---
+apiVersion: aws.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: aws-creds
+      namespace: upbound-system
+      key: creds
+EOF

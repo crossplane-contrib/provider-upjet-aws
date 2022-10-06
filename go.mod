@@ -2,7 +2,7 @@ module github.com/upbound/provider-aws
 
 go 1.19
 
-replace github.com/upbound/official-providers/testing => github.com/muvaf/official-providers/testing v0.0.0-20221006161530-750c3c33454a
+replace github.com/upbound/official-providers/testing => github.com/muvaf/official-providers/testing v0.0.0-20221006164434-7527e69df4c3
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.15
