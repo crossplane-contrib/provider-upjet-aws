@@ -49,7 +49,9 @@ CACHE_PATH="${WORK_DIR}/package-cache"
 mkdir -p "${CACHE_PATH}"
 echo "created cache dir at ${CACHE_PATH}"
 
-"${UP}" xpkg xp-extract --from-xpkg "${OUTPUT_DIR}/xpkg/${PLATFORM}/${PROJECT_NAME}-${VERSION}.xpkg" -o "${CACHE_PATH}/${PROJECT_NAME}.gz" && chmod 644 "${CACHE_PATH}/${PROJECT_NAME}.gz"
+# ${PLATFORM} should be available here but for some reason it is not and all CI
+# runners are linux_amd64 anyway.
+"${UP}" xpkg xp-extract --from-xpkg "${OUTPUT_DIR}/xpkg/linux_amd64/${PROJECT_NAME}-${VERSION}.xpkg" -o "${CACHE_PATH}/${PROJECT_NAME}.gz" && chmod 644 "${CACHE_PATH}/${PROJECT_NAME}.gz"
 
 # create kind cluster with extra mounts
 echo_step "creating k8s cluster using kind"
@@ -139,9 +141,6 @@ metadata:
 spec:
   image: "${PACKAGE_IMAGE}"
   args: ["-d"]
-  env:
-  - name: UPBOUND_CONTEXT
-    value: testing
 EOF
 )"
 
