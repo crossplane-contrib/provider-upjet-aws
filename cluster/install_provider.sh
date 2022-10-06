@@ -49,9 +49,8 @@ CACHE_PATH="${WORK_DIR}/package-cache"
 mkdir -p "${CACHE_PATH}"
 echo "Created cache dir at ${CACHE_PATH}"
 
-# ${PLATFORM} should be available here but for some reason it is not and all CI
-# runners are linux_amd64 anyway.
-"${UP}" xpkg xp-extract --from-xpkg "${OUTPUT_DIR}/xpkg/linux_amd64/${PROJECT_NAME}-${VERSION}.xpkg" -o "${CACHE_PATH}/${PROJECT_NAME}.gz" && chmod 644 "${CACHE_PATH}/${PROJECT_NAME}.gz"
+echo_step "Extracting xpkg content to ${CACHE_PATH}/${PROJECT_NAME}.gz"
+"${UP}" xpkg xp-extract --from-xpkg "${OUTPUT_DIR}/xpkg/${PLATFORM}/${PROJECT_NAME}-${VERSION}.xpkg" -o "${CACHE_PATH}/${PROJECT_NAME}.gz" && chmod 644 "${CACHE_PATH}/${PROJECT_NAME}.gz"
 
 # create kind cluster with extra mounts
 echo_step "Creating k8s cluster using kind"
@@ -144,9 +143,6 @@ spec:
   controllerConfigRef:
     name: config
 EOF
-
-echo "${CONFIG_YAML}" | "${KUBECTL}" apply -f -
-echo "${INSTALL_YAML}" | "${KUBECTL}" apply -f -
 
 echo_step "Check kind node cache dir contents"
 docker exec "${K8S_CLUSTER}-control-plane" ls -la /cache
