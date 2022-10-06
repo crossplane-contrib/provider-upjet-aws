@@ -11,6 +11,8 @@ env:
 
   UPBOUND_CI_ROBOT_USR: ${{ secrets.UPBOUND_CI_ROBOT_USR }}
   UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
+  UPTEST_AWS_CREDS: ${{ secrets.UPTEST_AWS_CREDS }}
+  UPTEST_EXAMPLE_VALUE_REPLACEMENTS: ${{ secrets.UPTEST_EXAMPLE_VALUE_REPLACEMENTS }}
 
 jobs:
   get-example-list:
@@ -140,10 +142,10 @@ jobs:
       - name: Run Uptest
         id: run-uptest
         env:
-          UPTEST_AWS_CREDS: ${{ secrets.UPTEST_AWS_CREDS }}
+          UPTEST_AWS_CREDS: ${UPTEST_AWS_CREDS}
           EXAMPLE_LIST: ${{ needs.get-example-list.outputs.example_list }}
           EXAMPLE_HASH: ${{ needs.get-example-list.outputs.example_hash }}
-          UPTEST_EXAMPLE_VALUE_REPLACEMENTS: ${{ secrets.UPTEST_EXAMPLE_VALUE_REPLACEMENTS }}
+          UPTEST_EXAMPLE_VALUE_REPLACEMENTS: ${UPTEST_EXAMPLE_VALUE_REPLACEMENTS}
         run: make uptest
 
       - name: Create Successful Status Check
