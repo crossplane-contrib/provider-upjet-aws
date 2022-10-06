@@ -2,6 +2,8 @@ module github.com/upbound/provider-aws
 
 go 1.19
 
+replace github.com/upbound/official-providers/testing => github.com/muvaf/official-providers/testing v0.0.0-20221006164434-7527e69df4c3
+
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.15
 	github.com/aws/aws-sdk-go-v2/config v1.10.0
@@ -15,6 +17,7 @@ require (
 	github.com/google/go-cmp v0.5.8
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.17.0
 	github.com/pkg/errors v0.9.1
+	github.com/upbound/official-providers/testing v0.0.0-20221006150316-b0352a1e153a
 	github.com/upbound/official-providers/updoc v0.0.0-20221003124519-d2819057cba0
 	github.com/upbound/upjet v0.6.1-0.20220926184909-9fcb735d2821
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
@@ -37,7 +40,7 @@ require (
 	github.com/agext/levenshtein v1.2.3 // indirect
 	github.com/alecthomas/kong v0.6.1 // indirect
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 // indirect
-	github.com/alecthomas/units v0.0.0-20210927113745-59d0afb8317a // indirect
+	github.com/alecthomas/units v0.0.0-20211218093645-b94a6e3cc137 // indirect
 	github.com/antchfx/htmlquery v1.2.4 // indirect
 	github.com/antchfx/xpath v1.2.0 // indirect
 	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect

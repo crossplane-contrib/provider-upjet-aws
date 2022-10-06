@@ -116,7 +116,7 @@ jobs:
       - name: Run Automated Tests
         id: run-uptest
         env:
-          PROVIDER_AWS_CREDS: ${{ secrets.PROVIDER_AWS_CREDS }}
+          UPTEST_AWS_CREDS: ${{ secrets.UPTEST_AWS_CREDS }}
           EXAMPLE_LIST: ${{ steps.prepare-example-list.outputs.example-list }}
         run: make uptest
 
