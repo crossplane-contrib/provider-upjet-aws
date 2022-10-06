@@ -55,7 +55,7 @@ echo "Created cache dir at ${CACHE_PATH}"
 
 # create kind cluster with extra mounts
 echo_step "Creating k8s cluster using kind"
-KIND_CONFIG="$( cat <<EOF
+cat <<EOF | "${KIND}" create cluster --name="${K8S_CLUSTER}" --wait=5m --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
@@ -64,8 +64,6 @@ nodes:
   - hostPath: "${CACHE_PATH}/"
     containerPath: /cache
 EOF
-)"
-echo "${KIND_CONFIG}" | "${KIND}" create cluster --name="${K8S_CLUSTER}" --wait=5m --config=-
 
 # tag controller image and load it into kind cluster
 BUILD_REGISTRY="build-$(echo "${HOSTNAME}"-"$(pwd)" | shasum -a 256 | cut -c1-8)"
@@ -80,7 +78,7 @@ echo_step "Create ${NAMESPACE} namespace"
 "${KUBECTL}" create ns ${NAMESPACE}
 
 echo_step "Create persistent volume and claim for mounting package-cache"
-PV_YAML="$( cat <<EOF
+cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -95,11 +93,7 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/cache"
-EOF
-)"
-echo "${PV_YAML}" | "${KUBECTL}" create -f -
-
-PVC_YAML="$( cat <<EOF
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -114,8 +108,6 @@ spec:
     requests:
       storage: 1Mi
 EOF
-)"
-echo "${PVC_YAML}" | "${KUBECTL}" create -f -
 
 # install universal-crossplane
 echo_step "Installing universal-crossplane from stable channel"
@@ -133,7 +125,7 @@ echo_step "--- INTEGRATION TESTS ---"
 # install package
 echo_step "Installing ${PROJECT_NAME} into \"${NAMESPACE}\" namespace"
 
-CONFIG_YAML="$( cat <<EOF
+cat <<EOF | kubectl apply -f -
 apiVersion: pkg.crossplane.io/v1alpha1
 kind: ControllerConfig
 metadata:
@@ -141,10 +133,7 @@ metadata:
 spec:
   image: "${PACKAGE_IMAGE}"
   args: ["-d"]
-EOF
-)"
-
-INSTALL_YAML="$( cat <<EOF
+---
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
@@ -155,7 +144,6 @@ spec:
   controllerConfigRef:
     name: config
 EOF
-)"
 
 echo "${CONFIG_YAML}" | "${KUBECTL}" apply -f -
 echo "${INSTALL_YAML}" | "${KUBECTL}" apply -f -
