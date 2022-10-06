@@ -35,7 +35,7 @@ jobs:
           OUTPUT=$(git log -1 --format='%H')
           echo "::set-output name=commit-sha::$OUTPUT"
 
-      - name: Detect Provider Name from Issue Comment
+      - name: Get The Example List To Test
         env:
           COMMENT: ${{ github.event.comment.body }}
         id: get-example-list-name

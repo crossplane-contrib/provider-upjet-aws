@@ -113,16 +113,16 @@ echo_step "Installing universal-crossplane from stable channel"
 "${HELM3}" repo add upbound-stable https://charts.upbound.io/stable
 chart_version="$("${HELM3}" search repo upbound-stable/universal-crossplane --devel  | awk 'FNR == 2 {print $2}')"
 echo_info "using universal-crossplane version ${chart_version}"
-echo
+
 # we replace empty dir with our PVC so that the /cache dir in the kind node
 # container is exposed to the crossplane pod
-"${HELM3}" install uxp --namespace ${NAMESPACE} upbound-stable/universal-crossplane --devel --version ${chart_version} --wait --set packageCache.pvc=package-cache
+"${HELM3}" install uxp --namespace "${NAMESPACE}" upbound-stable/universal-crossplane --devel --version "${chart_version}" --wait --set packageCache.pvc=package-cache
 
 # ----------- integration tests
 echo_step "--- INTEGRATION TESTS ---"
 
 # install package
-echo_step "Installing ${PROJECT_NAME} into \"${NAMESPACE}\" namespace"
+echo_step "Installing ${PROJECT_NAME} into ${NAMESPACE} namespace"
 
 cat <<EOF | kubectl apply -f -
 apiVersion: pkg.crossplane.io/v1alpha1
@@ -151,7 +151,7 @@ echo_step "Waiting for provider to be installed"
 
 kubectl wait "provider.pkg.crossplane.io/${PROJECT_NAME}" --for=condition=healthy --timeout=180s
 
-kubectl get deployment -n ${NAMESPACE}
+kubectl get deployment -n "${NAMESPACE}"
 
 echo_step "Create default ProviderConfig for AWS"
 cat <<EOF | kubectl apply -f -
@@ -162,7 +162,7 @@ metadata:
   namespace: upbound-system
 stringData:
   creds: |-
-    ${UPTEST_AWS_CREDS}
+$(echo ${UPTEST_AWS_CREDS} | sed 's/^/    /g')
 ---
 apiVersion: aws.upbound.io/v1beta1
 kind: ProviderConfig
