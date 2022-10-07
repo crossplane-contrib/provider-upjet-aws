@@ -1,4 +1,4 @@
-name: Coverage Report
+name: Uptest All
 
 on:
   workflow_dispatch: {}

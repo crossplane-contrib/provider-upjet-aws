@@ -14,26 +14,27 @@ env:
   GOLANGCI_VERSION: 'v1.50.0'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
 
-  UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
   UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
 jobs:
-  detect-changes:
+  detect-noop:
     runs-on: ubuntu-22.04
     outputs:
       noop: ${{ steps.noop.outputs.should_skip }}
     steps:
       - name: Detect No-op Changes
         id: noop
-        uses: fkirc/skip-duplicate-actions@v4.0.0
+        uses: fkirc/skip-duplicate-actions@v2.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           paths_ignore: '["**.md", "**.png", "**.jpg"]'
           do_not_skip: '["workflow_dispatch", "schedule", "push"]'
 
+
   lint:
     runs-on: ubuntu-22.04
-    needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.noop != 'true' }}
+    needs: detect-noop
+    if: needs.detect-noop.outputs.noop != 'true'
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -45,9 +46,15 @@ jobs:
         with:
           go-version: ${{ env.GO_VERSION }}
 
+      # git needs to be able to access private repositories under upbound.
+      - name: Login to Github
+        run: |
+          git config --global user.name "upbound-bot"
+          echo "machine github.com login upbound-bot password $UPBOUND_BOT_GITHUB_TOKEN" > ~/.netrc
+
       - name: Find the Go Build Cache
         id: go
-        run: echo "::set-output name=cache::$(go env GOCACHE)"
+        run: echo "::set-output name=cache::$(make go.cachedir)"
 
       - name: Cache the Go Build Cache
         uses: actions/cache@v2
@@ -72,20 +79,18 @@ jobs:
       - name: Vendor Dependencies
         run: make vendor vendor.check
 
-      # We could run 'make lint' to ensure our desired Go version, but we
-      # prefer this action because it leaves 'annotations' (i.e. it comments
-      # on PRs to point out linter violations).
+      # We could run 'make lint' but we prefer this action because it leaves
+      # 'annotations' (i.e. it comments on PRs to point out linter violations).
       - name: Lint
         uses: golangci/golangci-lint-action@v3
         with:
           version: ${{ env.GOLANGCI_VERSION }}
-          working-directory: ${{ matrix.providers }}
-          args: --timeout 10m0s
 
   check-diff:
     runs-on: ubuntu-22.04
-    needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.noop != 'true' }}
+    needs: detect-noop
+    if: needs.detect-noop.outputs.noop != 'true'
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -97,32 +102,30 @@ jobs:
         with:
           go-version: ${{ env.GO_VERSION }}
 
-      - name: Install goimports
-        run: go install golang.org/x/tools/cmd/goimports
-
-      - name: Find the Go Build Cache
-        id: go-cache-paths
-        run: |
-          echo "::set-output name=go-build::$(make go.cachedir)"
-          echo "::set-output name=go-mod::$(make go.mod.cachedir)"
-
-      - name: Cache the Go Build Cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.go-cache-paths.outputs.go-build }}
-          key: ${{ runner.os }}-build-check-diff-${{ hashFiles('**/go.sum') }}
-          restore-keys: ${{ runner.os }}-build-check-diff-
-      
       # git needs to be able to access private repositories under upbound.
       - name: Login to Github
         run: |
           git config --global user.name "upbound-bot"
           echo "machine github.com login upbound-bot password $UPBOUND_BOT_GITHUB_TOKEN" > ~/.netrc
 
+      - name: Install goimports
+        run: go install golang.org/x/tools/cmd/goimports
+
+      - name: Find the Go Build Cache
+        id: go
+        run: echo "::set-output name=cache::$(make go.cachedir)"
+
+      - name: Cache the Go Build Cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.go.outputs.cache }}
+          key: ${{ runner.os }}-build-check-diff-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-build-check-diff-
+
       - name: Cache Go Dependencies
         uses: actions/cache@v2
         with:
-          path: ${{ steps.go-cache-paths.outputs.go-mod }}
+          path: .work/pkg
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-pkg-
 
@@ -134,8 +137,8 @@ jobs:
 
   unit-tests:
     runs-on: ubuntu-22.04
-    needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.noop != 'true' }}
+    needs: detect-noop
+    if: needs.detect-noop.outputs.noop != 'true'
 
     steps:
       - name: Checkout
@@ -151,29 +154,27 @@ jobs:
         with:
           go-version: ${{ env.GO_VERSION }}
 
-      - name: Find the Go Build Cache
-        id: go-cache-paths
-        run: |
-          echo "::set-output name=go-build::$(make go.cachedir)"
-          echo "::set-output name=go-mod::$(make go.mod.cachedir)"
-
-      - name: Cache the Go Build Cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.go-cache-paths.outputs.go-build }}
-          key: ${{ runner.os }}-build-unit-tests-${{ hashFiles('**/go.sum') }}
-          restore-keys: ${{ runner.os }}-build-unit-tests-
-      
       # git needs to be able to access private repositories under upbound.
       - name: Login to Github
         run: |
           git config --global user.name "upbound-bot"
           echo "machine github.com login upbound-bot password $UPBOUND_BOT_GITHUB_TOKEN" > ~/.netrc
 
+      - name: Find the Go Build Cache
+        id: go
+        run: echo "::set-output name=cache::$(make go.cachedir)"
+
+      - name: Cache the Go Build Cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.go.outputs.cache }}
+          key: ${{ runner.os }}-build-unit-tests-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-build-unit-tests-
+
       - name: Cache Go Dependencies
         uses: actions/cache@v2
         with:
-          path: ${{ steps.go-cache-paths.outputs.go-mod }}
+          path: .work/pkg
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-pkg-
 
@@ -187,12 +188,16 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           flags: unittests
-          file: ./_output/tests/linux_amd64/coverage.txt
+          file: _output/tests/linux_amd64/coverage.txt
 
-  e2e-tests:
+  publish-artifacts:
     runs-on: ubuntu-22.04
-    needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.noop != 'true' }}
+    needs: detect-noop
+    if: needs.detect-noop.outputs.noop != 'true'
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets[format('UPBOUND_CI_{0}_BUCKET_SA', github.event.inputs.env)] }}
+      BUCKET_NAME: ${{ secrets[format('UPBOUND_CI_{0}_BUCKET_NAME', github.event.inputs.env)] }}
+      CDN_DOMAIN: ${{ secrets[format('UPBOUND_CI_{0}_BUCKET_CDN', github.event.inputs.env)] }}
 
     steps:
       - name: Setup QEMU
@@ -205,6 +210,22 @@ jobs:
         with:
           version: ${{ env.DOCKER_BUILDX_VERSION }}
           install: true
+
+      # git needs to be able to access private repositories under upbound.
+      - name: Login to Github
+        run: |
+          git config --global user.name "upbound-bot"
+          echo "machine github.com login upbound-bot password $UPBOUND_BOT_GITHUB_TOKEN" > ~/.netrc
+
+      - name: Login to Upbound
+        uses: docker/login-action@v1
+        with:
+          registry: xpkg.upbound.io
+          username: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
+          password: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
+
+      - name: Prepare to Upload Docs
+        run: echo "${GOOGLE_APPLICATION_CREDENTIALS_JSON}" > /tmp/gcp_sa.json
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -220,31 +241,22 @@ jobs:
           go-version: ${{ env.GO_VERSION }}
 
       - name: Find the Go Build Cache
-        id: go-cache-paths
-        run: |
-          echo "::set-output name=go-build::$(make go.cachedir)"
-          echo "::set-output name=go-mod::$(make go.mod.cachedir)"
+        id: go
+        run: echo "::set-output name=cache::$(make go.cachedir)"
 
       - name: Cache the Go Build Cache
         uses: actions/cache@v2
         with:
-          path: ${{ steps.go-cache-paths.outputs.go-build }}
-          key: ${{ runner.os }}-build-e2e-tests-${{ hashFiles('**/go.sum') }}
-          restore-keys: ${{ runner.os }}-build-e2e-tests-
-      
-      # git needs to be able to access private repositories under upbound.
-      - name: Login to Github
-        run: |
-          git config --global user.name "upbound-bot"
-          echo "machine github.com login upbound-bot password $UPBOUND_BOT_GITHUB_TOKEN" > ~/.netrc
+          path: ${{ steps.go.outputs.cache }}
+          key: ${{ runner.os }}-build-publish-artifacts-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-build-publish-artifacts-
 
       - name: Cache Go Dependencies
         uses: actions/cache@v2
         with:
-          path: ${{ steps.go-cache-paths.outputs.go-mod }}
+          path: .work/pkg
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-pkg-
+          restore-keys: ${{ runner.os }}-pkg-
 
       - name: Vendor Dependencies
         run: make vendor vendor.check
@@ -255,27 +267,14 @@ jobs:
           # We're using docker buildx, which doesn't actually load the images it
           # builds by default. Specifying --load does so.
           BUILD_ARGS: "--load"
-      
-      # NOTE(hasheddan): this will load the package into the Docker daemon, but
-      # we will likely need to setup a step to apply a tag to the image in order
-      # for it to be used in e2e tests when they are added.
-      - name: Load Packages
-        run: make xpkg.load
 
-      - name: Run E2E Tests
-        run: make e2e USE_HELM3=true
-
-  check-examples:
-    runs-on: ubuntu-22.04
-    needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.noop != 'true' }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Publish Artifacts to GitHub
+        uses: actions/upload-artifact@v2
         with:
-          submodules: true
+          name: output
+          path: _output/**
 
-      - name: Check Example Manifests
-        run: |
-          ./scripts/check-examples.py package/crds examples
+      - name: Publish Artifacts
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/gcp_sa.json
+        run: make publish BRANCH_NAME=${GITHUB_REF##*/}
