@@ -181,12 +181,12 @@ generate.init: pull-docs
 uptest: $(KIND) $(KUBECTL) $(HELM3) $(UP) $(KUTTL)
 	@$(INFO) running uptest using kind $(KIND_VERSION)
 	@./cluster/install_provider.sh || $(FAIL)
-	@echo ${UPTEST_EXAMPLE_VALUE_REPLACEMENTS} > $(WORK_DIR)/replacements.yaml
+	@echo "$${UPTEST_EXAMPLE_VALUE_REPLACEMENTS}" > $(WORK_DIR)/replacements.yaml
 	@KIND=$(KIND) KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd --data-source "$(WORK_DIR)/replacements.yaml" || $(FAIL)
 
 uptest-local: $(KUBECTL) $(KUTTL)
 	@$(INFO) running automated tests with uptest using current kubeconfig $(KIND_VERSION)
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd --skip-provider-config || $(FAIL)
+	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd || $(FAIL)
 
 cluster_dump: $(KUBECTL)
 	@mkdir -p ${DUMP_DIRECTORY}

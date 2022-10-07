@@ -598,8 +598,6 @@ github.com/modern-go/reflect2 v1.0.2/go.mod h1:yWuevngMOJpCy52FWWMvUC8ws7m/LJsjY
 github.com/munnerz/goautoneg v0.0.0-20120707110453-a547fc61f48d/go.mod h1:+n7T8mK8HuQTcFwEeznm/DIxMOiR9yIdICNftLE1DvQ=
 github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 h1:C3w9PqII01/Oq1c1nUAm88MOHcQC9l5mIlSMApZMrHA=
 github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822/go.mod h1:+n7T8mK8HuQTcFwEeznm/DIxMOiR9yIdICNftLE1DvQ=
-github.com/muvaf/official-providers/testing v0.0.0-20221006164434-7527e69df4c3 h1:DNdMqBB5duL2Klipzq5HzQAdVZSvmJO9tQsg/fZXeXE=
-github.com/muvaf/official-providers/testing v0.0.0-20221006164434-7527e69df4c3/go.mod h1:gq+aSoWo842rxD5/iQMkn5e722zmTn3NK+PjuIY7eh8=
 github.com/muvaf/typewriter v0.0.0-20210910160850-80e49fe1eb32 h1:yBQlHXLeUJL3TWVmzup5uT3wG5FLxhiTAiTsmNVocys=
 github.com/muvaf/typewriter v0.0.0-20210910160850-80e49fe1eb32/go.mod h1:SAAdeMEiFXR8LcHffvIdiLI1w243DCH2DuHq7UrA5YQ=
 github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRWi+5nqEBWmkhHvq77mSJWrCKwh8bxhgT7d/eI7P4U=
@@ -727,6 +725,8 @@ github.com/tmc/grpc-websocket-proxy v0.0.0-20201229170055-e5319fda7802/go.mod h1
 github.com/tmccombs/hcl2json v0.3.3 h1:+DLNYqpWE0CsOQiEZu+OZm5ZBImake3wtITYxQ8uLFQ=
 github.com/tmccombs/hcl2json v0.3.3/go.mod h1:Y2chtz2x9bAeRTvSibVRVgbLJhLJXKlUeIvjeVdnm4w=
 github.com/tv42/httpunix v0.0.0-20150427012821-b75d8614f926/go.mod h1:9ESjWnEqriFuLhtthL60Sar/7RFoluCcXsuvEwTV5KM=
+github.com/upbound/official-providers/testing v0.0.0-20221007091039-7542108227b1 h1:j/JYel7ByIcPG8s4QHBaR8fSsM+efJxHGNxKCHJvbcE=
+github.com/upbound/official-providers/testing v0.0.0-20221007091039-7542108227b1/go.mod h1:gq+aSoWo842rxD5/iQMkn5e722zmTn3NK+PjuIY7eh8=
 github.com/upbound/official-providers/updoc v0.0.0-20221003124519-d2819057cba0 h1:jnUxtwOXUBT9wGbJTFLIsWO+zUdrn8xBwOtbtJcA+q8=
 github.com/upbound/official-providers/updoc v0.0.0-20221003124519-d2819057cba0/go.mod h1:4QnHDhS0ZuF7+jguUQTOXHw6U4t7BQUuIVPT8BOQalM=
 github.com/upbound/upjet v0.6.1-0.20220926184909-9fcb735d2821 h1:8P17hfOo0t0dH5OIdShGY+tNgrV3sxLmhJ5S5yTi3DY=

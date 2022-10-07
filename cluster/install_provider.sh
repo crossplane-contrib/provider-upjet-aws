@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eux
+set -eu
 
 # setting up colors
 BLU='\033[0;34m'
@@ -77,7 +77,7 @@ echo_step "Create ${NAMESPACE} namespace"
 "${KUBECTL}" create ns ${NAMESPACE}
 
 echo_step "Create persistent volume and claim for mounting package-cache"
-cat <<EOF | kubectl apply -f -
+cat <<EOF | "${KUBECTL}" apply -f -
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -113,18 +113,18 @@ echo_step "Installing universal-crossplane from stable channel"
 "${HELM3}" repo add upbound-stable https://charts.upbound.io/stable
 chart_version="$("${HELM3}" search repo upbound-stable/universal-crossplane --devel  | awk 'FNR == 2 {print $2}')"
 echo_info "using universal-crossplane version ${chart_version}"
-echo
+
 # we replace empty dir with our PVC so that the /cache dir in the kind node
 # container is exposed to the crossplane pod
-"${HELM3}" install uxp --namespace ${NAMESPACE} upbound-stable/universal-crossplane --devel --version ${chart_version} --wait --set packageCache.pvc=package-cache
+"${HELM3}" install uxp --namespace "${NAMESPACE}" upbound-stable/universal-crossplane --devel --version "${chart_version}" --wait --set packageCache.pvc=package-cache
 
 # ----------- integration tests
 echo_step "--- INTEGRATION TESTS ---"
 
 # install package
-echo_step "Installing ${PROJECT_NAME} into \"${NAMESPACE}\" namespace"
+echo_step "Installing ${PROJECT_NAME} into ${NAMESPACE} namespace"
 
-cat <<EOF | kubectl apply -f -
+cat <<EOF | "${KUBECTL}" apply -f -
 apiVersion: pkg.crossplane.io/v1alpha1
 kind: ControllerConfig
 metadata:
@@ -148,13 +148,16 @@ echo_step "Check kind node cache dir contents"
 docker exec "${K8S_CLUSTER}-control-plane" ls -la /cache
 
 echo_step "Waiting for provider to be installed"
+"${KUBECTL}" wait "provider.pkg.crossplane.io/${PROJECT_NAME}" --for=condition=healthy --timeout=180s
 
-kubectl wait "provider.pkg.crossplane.io/${PROJECT_NAME}" --for=condition=healthy --timeout=180s
+echo_step "Waiting for all pods to come online"
+"${KUBECTL}" -n "${NAMESPACE}" wait --for=condition=available deployment --all --timeout=180s
 
-kubectl get deployment -n ${NAMESPACE}
+"${KUBECTL}" -n "${NAMESPACE}" get deployment
 
 echo_step "Create default ProviderConfig for AWS"
-cat <<EOF | kubectl apply -f -
+multiline="$(echo "${UPTEST_AWS_CREDS}" | sed 's/^/    /g')"
+cat <<EOF | "${KUBECTL}" apply -f -
 apiVersion: v1
 kind: Secret
 metadata:
@@ -162,7 +165,7 @@ metadata:
   namespace: upbound-system
 stringData:
   creds: |-
-    ${UPTEST_AWS_CREDS}
+${multiline}
 ---
 apiVersion: aws.upbound.io/v1beta1
 kind: ProviderConfig
