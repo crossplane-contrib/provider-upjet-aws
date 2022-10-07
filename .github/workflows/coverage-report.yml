@@ -8,7 +8,7 @@ env:
   GO_VERSION: '1.19'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
 
-  UPBOUND_CI_ROBOT_USR: ${{ secrets.UPBOUND_CI_ROBOT_USR }}
+  UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
   UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
 
 jobs:
@@ -104,7 +104,7 @@ jobs:
           # builds by default. Specifying --load does so.
           BUILD_ARGS: "--load"
 
-      - name: Prepare Example List
+      - name: Prepare The Example List
         id: prepare-example-list
         run: |
           cd ..
@@ -113,11 +113,12 @@ jobs:
           echo "::set-output name=example-list::${EXAMPLE_LIST:1}"
           echo "Examples: ${EXAMPLE_LIST:1}"
 
-      - name: Run Automated Tests
+      - name: Run Uptest
         id: run-uptest
         env:
           UPTEST_AWS_CREDS: ${{ secrets.UPTEST_AWS_CREDS }}
-          EXAMPLE_LIST: ${{ steps.prepare-example-list.outputs.example-list }}
+          EXAMPLE_LIST: ${{ needs.get-example-list.outputs.example_list }}
+          UPTEST_EXAMPLE_VALUE_REPLACEMENTS: ${{ secrets.UPTEST_EXAMPLE_VALUE_REPLACEMENTS }}
         run: make uptest
 
       - name: Collect Cluster Dump

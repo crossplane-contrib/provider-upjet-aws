@@ -9,7 +9,7 @@ env:
   GO_VERSION: '1.19'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
 
-  UPBOUND_CI_ROBOT_USR: ${{ secrets.UPBOUND_CI_ROBOT_USR }}
+  UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
   UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
 
 jobs:
@@ -35,7 +35,7 @@ jobs:
           OUTPUT=$(git log -1 --format='%H')
           echo "::set-output name=commit-sha::$OUTPUT"
 
-      - name: Get The Example List To Test
+      - name: Prepare The Example List
         env:
           COMMENT: ${{ github.event.comment.body }}
         id: get-example-list-name

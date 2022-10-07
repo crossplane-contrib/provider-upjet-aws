@@ -12,35 +12,42 @@ env:
   GOLANGCI_VERSION: 'v1.50.0'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
 
-  UPBOUND_CI_ROBOT_USR: ${{ secrets.UPBOUND_CI_ROBOT_USR }}
+  UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
   UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
 jobs:
   release:
     runs-on: ubuntu-22.04
     steps:
+
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v1
-        if: env.UPBOUND_CI_ROBOT_USR != ''
+        if: env.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR != ''
         with:
           platforms: all
+
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v1
         with:
           version: ${{ env.DOCKER_BUILDX_VERSION }}
           install: true
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
           submodules: true
+
       - name: Fetch History
         run: git fetch --prune --unshallow
+
       - name: Setup Go
         uses: actions/setup-go@v2
         with:
           go-version: ${{ env.GO_VERSION }}
+
       - name: Find the Go Build Cache
         id: go
         run: echo "::set-output name=cache::$(go env GOCACHE)"
+
       - name: Cache the Go Build Cache
         uses: actions/cache@v2
         with:
@@ -48,37 +55,45 @@ jobs:
           key: ${{ runner.os }}-build-publish-artifacts-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-build-publish-artifacts-
       # git needs to be able to access private repositories under upbound.
+
       - name: Login to Github
         run: |
           git config --global user.name "upbound-bot"
           echo "machine github.com login upbound-bot password $UPBOUND_BOT_GITHUB_TOKEN" > ~/.netrc
+
       - name: Cache Go Dependencies
         uses: actions/cache@v2
         with:
           path: .work/pkg
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-pkg-
+
       - name: Vendor Dependencies
         run: make vendor vendor.check
+
       - name: Tag
         run: |
           make tag VERSION=${{ inputs.version }}
+
       - name: Build Artifacts
         run: make -j2 build.all
         env:
           # We're using docker buildx, which doesn't actually load the images it
           # builds by default. Specifying --load does so.
           BUILD_ARGS: "--load"
+
       - name: Publish Artifacts to GitHub
         uses: actions/upload-artifact@v2
         with:
           name: output
           path: ./_output/**
+
       - name: Login to Upbound Marketplace
         uses: docker/login-action@v1
         with:
           registry: xpkg.upbound.io
-          username: ${{ secrets.UPBOUND_CI_ROBOT_USR }}
-          password: ${{ secrets.UPBOUND_CI_ROBOT_PSW }}
+          username: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
+          password: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
+
       - name: Publish Packages to Upbound Marketplace
         run: make xpkg.push XPKG_REPO=provider-aws

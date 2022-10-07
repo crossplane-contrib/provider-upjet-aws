@@ -11,7 +11,7 @@ env:
   GOLANGCI_VERSION: 'v1.50.0'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
 
-  UPBOUND_CI_ROBOT_USR: ${{ secrets.UPBOUND_CI_ROBOT_USR }}
+  UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
   UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
   UPBOUND_BOT_GITHUB_USER: upbound-bot
 jobs:
@@ -33,7 +33,7 @@ jobs:
 
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v1
-        if: env.UPBOUND_CI_ROBOT_USR != ''
+        if: env.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR != ''
         with:
           platforms: all
 
@@ -92,8 +92,8 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: xpkg.upbound.io
-          username: ${{ secrets.UPBOUND_CI_ROBOT_USR }}
-          password: ${{ secrets.UPBOUND_CI_ROBOT_PSW }}
+          username: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
+          password: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
 
       - name: Publish Packages to Upbound Marketplace
         run: make xpkg.push XPKG_REPO=provider-aws-staging

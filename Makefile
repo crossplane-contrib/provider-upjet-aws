@@ -3,7 +3,6 @@
 
 PROJECT_NAME := provider-aws
 PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
-PROJECT_VERSION_TAG_GROUP := aws
 
 export TERRAFORM_VERSION := 1.2.1
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
@@ -193,6 +192,11 @@ cluster_dump: $(KUBECTL)
 	@$(KUBECTL) cluster-info dump --output-directory ${DUMP_DIRECTORY} --all-namespaces || true
 	@$(KUBECTL) get managed -o yaml > ${DUMP_DIRECTORY}/managed.yaml || true
 	@cat /tmp/automated-tests/case/*.yaml > ${DUMP_DIRECTORY}/kuttl-inputs.yaml
+
+updoc-upload:
+	@$(INFO) uploading docs $(name)@$(version)
+	@go run github.com/upbound/official-providers/updoc/cmd upload --docs-dir=$(ROOT_DIR)/docs --name=$(PROJECT_NAME) --version=$(VERSION) --bucket-name=$(BUCKET_NAME) --cdn-domain=$(CDN_DOMAIN) || $(FAIL)
+	@$(OK) docs $(name)@$(version) uploaded
 
 .PHONY: pull-docs
 
