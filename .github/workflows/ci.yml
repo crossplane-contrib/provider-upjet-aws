@@ -195,9 +195,9 @@ jobs:
     needs: detect-noop
     if: needs.detect-noop.outputs.noop != 'true'
     env:
-      GOOGLE_APPLICATION_CREDENTIALS_JSON_ENCODED: ${{ secrets[format('UPBOUND_MARKETPLACE_DOCS_BUCKET_{0}_SA_JSON_ENCODED', github.event.inputs.env)] }}
-      BUCKET_NAME: ${{ secrets[format('UPBOUND_MARKETPLACE_DOCS_BUCKET_{0}_NAME', github.event.inputs.env)] }}
-      CDN_DOMAIN: ${{ secrets[format('UPBOUND_MARKETPLACE_DOCS_BUCKET_{0}_CDN', github.event.inputs.env)] }}
+      GOOGLE_APPLICATION_CREDENTIALS_JSON_ENCODED: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_SA_JSON_ENCODED }}
+      BUCKET_NAME: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_NAME }}
+      CDN_DOMAIN: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_CDN }}
 
     steps:
       - name: Setup QEMU
