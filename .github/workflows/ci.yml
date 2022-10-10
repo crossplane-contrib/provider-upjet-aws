@@ -195,7 +195,7 @@ jobs:
     needs: detect-noop
     if: needs.detect-noop.outputs.noop != 'true'
     env:
-      GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets[format('UPBOUND_MARKETPLACE_DOCS_BUCKET_{0}_SA_JSON', github.event.inputs.env)] }}
+      GOOGLE_APPLICATION_CREDENTIALS_JSON_ENCODED: ${{ secrets[format('UPBOUND_MARKETPLACE_DOCS_BUCKET_{0}_SA_JSON_ENCODED', github.event.inputs.env)] }}
       BUCKET_NAME: ${{ secrets[format('UPBOUND_MARKETPLACE_DOCS_BUCKET_{0}_NAME', github.event.inputs.env)] }}
       CDN_DOMAIN: ${{ secrets[format('UPBOUND_MARKETPLACE_DOCS_BUCKET_{0}_CDN', github.event.inputs.env)] }}
 
@@ -225,7 +225,7 @@ jobs:
           password: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
 
       - name: Prepare to Upload Docs
-        run: echo "${GOOGLE_APPLICATION_CREDENTIALS_JSON}" > /tmp/gcp_sa.json
+        run: echo "${GOOGLE_APPLICATION_CREDENTIALS_JSON_ENCODED}" | base64 -d > /tmp/gcp_sa.json
 
       - name: Checkout
         uses: actions/checkout@v2
