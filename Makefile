@@ -82,14 +82,14 @@ xpkg.build.provider-aws: do.build.images
 # Setup Upbound Docs
 
 updoc-upload:
-	@$(INFO) uploading docs for $(VERSION_MINOR)
+	@$(INFO) uploading docs for v$(VERSION_MAJOR).$(VERSION_MINOR)
 	@go run github.com/upbound/official-providers/updoc/cmd upload \
         --docs-dir=$(ROOT_DIR)/docs \
         --name=$(PROJECT_NAME) \
-        --version=$(VERSION_MINOR) \
+        --version=v$(VERSION_MAJOR).$(VERSION_MINOR) \
         --bucket-name=$(BUCKET_NAME) \
         --cdn-domain=$(CDN_DOMAIN) || $(FAIL)
-	@$(OK) uploaded docs for $(VERSION_MINOR)
+	@$(OK) uploaded docs for v$(VERSION_MAJOR).$(VERSION_MINOR)
 
 ifneq ($(filter release-%,$(BRANCH_NAME)),)
 publish.artifacts: updoc-upload
