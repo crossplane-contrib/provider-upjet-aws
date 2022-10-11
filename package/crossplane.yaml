@@ -4,6 +4,7 @@ metadata:
   name: provider-aws
   annotations:
     meta.crossplane.io/maintainer: Upbound <support@upbound.io>
+    meta.crossplane.io/source: github.com/upbound/provider-aws
     meta.crossplane.io/description: |
       Upbound's official Crossplane provider to manage Amazon Web Services (AWS)
       resources in Kubernetes.

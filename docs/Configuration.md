@@ -9,16 +9,21 @@ Only Upbound customers can download official providers.
 ## Install the provider
 ### Prerequisites
 #### Upbound Up command-line
-The Upbound Up command-line simplifies configuration and management of Upbound Universal Crossplane (UXP) and interacts with the Upbound Marketplace to manage users and accounts.
+The Upbound Up command-line simplifies configuration and management of Upbound
+Universal Crossplane (UXP) and interacts with the Upbound Marketplace to manage
+users and accounts.
 
 Install `up` with the command:
 ```shell
 curl -sL "https://cli.upbound.io" | sh
 ```
-More information about the Up command-line is available in the [Upbound Up documentation](https://docs.upbound.io/cli/).
+More information about the Up command-line is available in the [Upbound Up
+documentation](https://docs.upbound.io/cli/).
 
 #### Upbound Universal Crossplane
-UXP is the Upbound official enterprise-grade distribution of Crossplane for self-hosted control planes. Only Upbound Universal Crossplane (UXP) supports official providers.  
+UXP is the Upbound official enterprise-grade distribution of Crossplane for
+self-hosted control planes. Only Upbound Universal Crossplane (UXP) supports
+official providers.  
 
 Official providers aren't supported with open source Crossplane.
 
@@ -28,14 +33,10 @@ Install UXP into your Kubernetes cluster using the Up command-line.
 up uxp install
 ```
 
-Find more information in the [Upbound UXP documentation](https://docs.upbound.io/uxp/).
+Find more information in the [Upbound UXP
+documentation](https://docs.upbound.io/uxp/).
 
 ### Install the provider
-Official providers require a Kubernetes `imagePullSecret` to install. 
-
-Details on creating an `imagePullSecret` are available in the [Upbound Marketplace authentication](https://docs.upbound.io/upbound-marketplace/authentication/)
-
-_Note:_ if you already installed an official provider using an `imagePullSecret` a new secret isn't required.
 
 Install the Upbound official AWS provider with the following configuration file
 
@@ -45,20 +46,10 @@ kind: Provider
 metadata:
   name: provider-aws
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws:latest
-  packagePullSecrets:
-    - name: package-pull-secret
+  package: xpkg.upbound.io/upbound/provider-aws:<version>
 ```
 
 Define the provider version with `spec.package`.
-
-The `spec.packagePullSecrets.name` value must match the Kubernetes `imagePullSecret`. The secret must be in the same namespace as the Upbound pod, by default `upbound-system`.
-
-```shell
-$ kubectl get secrets -n upbound-system
-NAME                                         TYPE                             DATA   AGE
-package-pull-secret                          kubernetes.io/dockerconfigjson   1      51m
-```
 
 Install the provider with `kubectl apply -f`.
 
@@ -67,24 +58,33 @@ Verify the configuration with `kubectl get providers`.
 ```shell
 $ kubectl get providers
 NAME           INSTALLED   HEALTHY   PACKAGE                                       AGE
-provider-aws   True        True      xpkg.upbound.io/upbound/provider-aws:latest   62s
+provider-aws   True        True      xpkg.upbound.io/upbound/provider-aws:v0.17.0  62s
 ```
 
-View the Crossplane [Provider CRD definition](https://doc.crds.dev/github.com/crossplane/crossplane/pkg.crossplane.io/Provider/v1) to view all available `Provider` options.
+View the Crossplane [Provider CRD
+definition](https://doc.crds.dev/github.com/crossplane/crossplane/pkg.crossplane.io/Provider/v1)
+to view all available `Provider` options.
 
 ## Configure the provider
-The AWS provider requires credentials for authentication to AWS. The AWS provider consumes the credentials from a Kubernetes secret object.
+The AWS provider requires credentials for authentication to AWS. The AWS
+provider consumes the credentials from a Kubernetes secret object.
 
 ### Configure authentication
-Upbound supports authentication to AWS via access keys, service accounts or with `AssumeRole`.
+Upbound supports authentication to AWS via access keys, service accounts or with
+`AssumeRole`.
 
-Apply the specific authentication method with a `ProviderConfig` object, applied to the `Provider`.
+Apply the specific authentication method with a `ProviderConfig` object, applied
+to the `Provider`.
 
 #### Authenticate using AWS access keys
-Authenticating with AWS access keys requires creating a Kubernetes secret object and storing the AWS keys inside Kubernetes.
+Authenticating with AWS access keys requires creating a Kubernetes secret object
+and storing the AWS keys inside Kubernetes.
 
 ##### Place the AWS access keys in a text file
-Create a text file containing the AWS account `aws_access_key_id` and `aws_secret_access_key`. The [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-creds) provides information on how to generate these keys.
+Create a text file containing the AWS account `aws_access_key_id` and
+`aws_secret_access_key`. The [AWS
+documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-creds)
+provides information on how to generate these keys.
 
 ```ini
 [default]
@@ -92,7 +92,8 @@ aws_access_key_id = <aws_access_key>
 aws_secret_access_key = <aws_secret_key>
 ```
 
-More information about AWS credential files are in the [AWS credential file documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
+More information about AWS credential files are in the [AWS credential file
+documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
 
 ##### Generate a Kubernetes secret with the AWS access keys
 Create the secret with the command  
@@ -103,7 +104,8 @@ kubectl create secret generic \
 --from-file=key-file=<aws_credentials_file.txt>
 ```
 
-For example, to create a secret named `aws-secret` from a text file named `aws-credentials.txt`
+For example, to create a secret named `aws-secret` from a text file named
+`aws-credentials.txt`
 ```shell
 $ kubectl create secret generic aws-secret --from-file=key-file=aws-credentials.txt
 $ kubectl describe secret aws-secret
@@ -120,7 +122,8 @@ key-file:  116 bytes
 ```
 
 ##### Create a ProviderConfig object
-Apply the secret in a `ProviderConfig` Kubernetes configuration file. For example using a secret named `aws-secret`:
+Apply the secret in a `ProviderConfig` Kubernetes configuration file. For
+example using a secret named `aws-secret`:
 
 ```yaml
 apiVersion: aws.upbound.io/v1beta1
@@ -141,13 +144,20 @@ The `spec.secretRef` describes the parameters of the secret to use.
 * `name` is the name of the Kubernetes `secret` object.
 * `key` is the `Data` field from `kubectl describe secret`.
 
-View the [ProviderConfig CRD](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/aws.upbound.io/ProviderConfig/v1beta1) definition to view all available `ProviderConfig` options.
+View the [ProviderConfig
+CRD](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/aws.upbound.io/ProviderConfig/v1beta1)
+definition to view all available `ProviderConfig` options.
 
 #### Authenticate using IAM Roles for Service Accounts
-Universal Crossplane clusters running inside Amazon Elastic Kubernetes Service (`EKS`) can use [IAM Roles for Service Accounts (`IRSA`)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) to authenticate the AWS provider.
+Universal Crossplane clusters running inside Amazon Elastic Kubernetes Service
+(`EKS`) can use [IAM Roles for Service Accounts
+(`IRSA`)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)
+to authenticate the AWS provider.
 
 An IRSA configuration requires multiple components:
-* Enable the [IAM OIDC provider](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) for EKS.
+* Enable the [IAM OIDC
+  provider](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
+  for EKS.
 * Creating an IAM policy granting the AWS provider access to AWS resources.
 * Creating an IAM role for the AWS provider to associate with the AWS provider.
 * Creating a Kubernetes service account.
@@ -155,15 +165,20 @@ An IRSA configuration requires multiple components:
 * Apply the `ControllerConfig` to the `Provider`.
 * Instruct the `ProviderConfig` to use `IRSA` credentials.
 
-_Note:_ `IRSA` authentication requires [Upbound Universal Crossplane (UXP)](https://docs.upbound.io/uxp) installed in the EKS cluster.
+_Note:_ `IRSA` authentication requires [Upbound Universal Crossplane
+(UXP)](https://docs.upbound.io/uxp) installed in the EKS cluster.
 
 <!-- Disable heading acronym rule to ignore "OIDC" -->
 <!-- vale Microsoft.HeadingAcronyms = NO -->
 ##### Enable an IAM OIDC provider
 <!-- vale Microsoft.HeadingAcronyms = YES -->
-The EKS cluster must have an IAM OpenID Connect (`OIDC`) provider enabled to configure IRSA. The AWS documentation contains full details on [enabling IAM OIDC providers](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html).
+The EKS cluster must have an IAM OpenID Connect (`OIDC`) provider enabled to
+configure IRSA. The AWS documentation contains full details on [enabling IAM
+OIDC
+providers](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html).
 
-Using the [`eksctl`](https://eksctl.io/) tool, create an IAM OIDC provider with the command
+Using the [`eksctl`](https://eksctl.io/) tool, create an IAM OIDC provider with
+the command
 
 ```shell
 eksctl utils associate-iam-oidc-provider \ 
@@ -171,7 +186,8 @@ eksctl utils associate-iam-oidc-provider \
 --approve
 ```
 
-Confirm IAM OIDC provider creation using the [AWS command-line](https://aws.amazon.com/cli/)
+Confirm IAM OIDC provider creation using the [AWS
+command-line](https://aws.amazon.com/cli/)
 ```shell
 $ aws iam list-open-id-connect-providers
 {
@@ -186,7 +202,8 @@ $ aws iam list-open-id-connect-providers
 ##### Create an IAM policy
 Define the actions the AWS provider can take by creating an IAM policy. 
 
-For example, here is a custom IAM policy to enable `SystemAdministrator` level access. 
+For example, here is a custom IAM policy to enable `SystemAdministrator` level
+access. 
 ```json
 {
     "Version": "2012-10-17",
@@ -206,7 +223,8 @@ aws iam create-policy \
 --policy-document file://<policy json file>
 ```
 
-For example, to create a new policy named `custom-irsa-policy` from a policy file named `custom-policy.json`:  
+For example, to create a new policy named `custom-irsa-policy` from a policy
+file named `custom-policy.json`:  
 ```shell
 $ aws iam create-policy --policy-name custom-irsa-policy --policy-document file://custom-policy.json
 {
@@ -225,15 +243,21 @@ $ aws iam create-policy --policy-name custom-irsa-policy --policy-document file:
 }
 ```
 
-_Note:_ if you plan to use an AWS managed policy, a custom policy isn't required.
+_Note:_ if you plan to use an AWS managed policy, a custom policy isn't
+required.
 
 ##### Create an IAM role
-Creating a Kubernetes service account requires an IAM role to apply an IAM policy.
-The AWS documentation contains full details on [creating a role and assigning it to the Kubernetes service account](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
+Creating a Kubernetes service account requires an IAM role to apply an IAM
+policy. The AWS documentation contains full details on [creating a role and
+assigning it to the Kubernetes service
+account](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
 
-_Note:_ `eksctl` is the simplest way to create the required role, attach the policy and generate a service account. You **must** change the role trust policy after creating it with `eksctl`.
+_Note:_ `eksctl` is the simplest way to create the required role, attach the
+policy and generate a service account. You **must** change the role trust policy
+after creating it with `eksctl`.
 
-To use `eksctl` to create a new service account and IAM role use the command `eksctl create iamserviceaccount`. 
+To use `eksctl` to create a new service account and IAM role use the command
+`eksctl create iamserviceaccount`. 
 
 ```shell
 eksctl create iamserviceaccount \
@@ -274,14 +298,18 @@ eksctl create iamserviceaccount \
 --approve
 ```
 
-_Note:_ the policy ARN value comes from the `Arn` field from the command `aws iam create-policy`. To find the ARN of the policy use the command `aws iam list-policies` replacing `POLICY_NAME` with the name of the policy.
+_Note:_ the policy ARN value comes from the `Arn` field from the command `aws
+iam create-policy`. To find the ARN of the policy use the command `aws iam
+list-policies` replacing `POLICY_NAME` with the name of the policy.
 
 ```shell
 $ aws iam list-policies --query 'Policies[?PolicyName==`POLICY_NAME`].Arn' --output text`
 arn:aws:iam::000000000000:policy/custom-irsa-policy
 ```
 
-Verify the creation of the service account with the command `kubectl describe sa -n <namespace> <service account name>`. The `Annotations` field is the newly created IAM role.
+Verify the creation of the service account with the command `kubectl describe sa
+-n <namespace> <service account name>`. The `Annotations` field is the newly
+created IAM role.
 
 From the example service account named `my-upbound-sa`:
 ```yaml
@@ -317,7 +345,8 @@ arn:aws:iam::000000000000:policy/custom-irsa-policy
 The output of the command matches the policy ARN.
 
 
-Next, verify the new IAM role with the command `aws iam get-role --role-name <role name> --query Role.AssumeRolePolicyDocument`.
+Next, verify the new IAM role with the command `aws iam get-role --role-name
+<role name> --query Role.AssumeRolePolicyDocument`.
 
 Using the example role name `eks-test-role`
 ```shell
@@ -344,7 +373,8 @@ $ aws iam get-role \
 }
 ```
 ##### Update the IAM role
-The IAM role created by `eksctl` doesn't have the correct `Conditions` for the AWS provider. 
+The IAM role created by `eksctl` doesn't have the correct `Conditions` for the
+AWS provider. 
 
 Update the role `Trust relationship`. 
 
@@ -357,7 +387,8 @@ Use the output of `aws iam-get role` as a starting template.
 ```
 
 * Replace the body of the new `Condition.StringLike` with the provider string.
-First, get the `OIDC issuer` with the command `aws eks decribe-cluster --name <cluster-name>`. 
+First, get the `OIDC issuer` with the command `aws eks decribe-cluster --name
+<cluster-name>`. 
 
 For example, 
 ```shell
@@ -365,13 +396,16 @@ $ aws eks describe-cluster --name upbound-docs --query "cluster.identity.oidc.is
 oidc.eks.us-east-2.amazonaws.com/id/266A01FA1DBF8083FA1C23EB7D4736E4
 ```
 Use this value to build the new contents, in the form:  
-`"<oidc issuer>:sub": "system:serviceaccount:<Universal Crossplane namespace>:provider-aws-*"`
+`"<oidc issuer>:sub": "system:serviceaccount:<Universal Crossplane
+namespace>:provider-aws-*"`
 
 For example, using the previous output:
 
-`"oidc.eks.us-east-2.amazonaws.com/id/266A01FA1DBF8083FA1C23EB7D4736E4:sub": "system:serviceaccount:upbound-system:provider-aws-*"`
+`"oidc.eks.us-east-2.amazonaws.com/id/266A01FA1DBF8083FA1C23EB7D4736E4:sub":
+"system:serviceaccount:upbound-system:provider-aws-*"`
 
-The value `provider-aws-*` defines the AWS provider and version that needs to authenticate. Using `*` allows any AWS provider version to authenticate.
+The value `provider-aws-*` defines the AWS provider and version that needs to
+authenticate. Using `*` allows any AWS provider version to authenticate.
 
 An example of the final JSON file.
 ```json
@@ -394,8 +428,8 @@ An example of the final JSON file.
 }
 ```
 
-* Apply the new trust policy.
-Use the command `aws iam update-assume-role-policy` to apply the trust policy.
+* Apply the new trust policy. Use the command `aws iam
+update-assume-role-policy` to apply the trust policy.
 
 ```shell
 aws iam update-assume-role-policy \
@@ -413,9 +447,11 @@ aws iam update-assume-role-policy \
 ##### Create a ControllerConfig
 A `ControllerConfig` creates settings used by the `Provider` deployment.
 
-For IRSA, the `ControllerConfig` provides an `annotation` of the ARN of the role used by the Kubernetes service account.
+For IRSA, the `ControllerConfig` provides an `annotation` of the ARN of the role
+used by the Kubernetes service account.
 
-First, use `kubectl describe service-account <name> -n upbound-system` to get the ARN value.
+First, use `kubectl describe service-account <name> -n upbound-system` to get
+the ARN value.
 
 ```yaml
 $ kubectl describe service-account \
@@ -433,7 +469,8 @@ Events:              <none>
 
 The `Annotations` value is the input for the `ControllerConfig`.
 
-_Note:_ the `ControllerConfig` required for IRSA configuration doesn't require a `spec` body.
+_Note:_ the `ControllerConfig` required for IRSA configuration doesn't require a
+`spec` body.
 
 ```yaml
 apiVersion: pkg.crossplane.io/v1alpha1
@@ -445,7 +482,8 @@ metadata:
 spec:
 ```
 
-Apply the `ControllerConfig` with `kubectl apply -f` and verify the installation with `kubectl get controllerconfig`.
+Apply the `ControllerConfig` with `kubectl apply -f` and verify the installation
+with `kubectl get controllerconfig`.
 
 ```shell
 $ kubectl apply -f controller-config.yml
@@ -455,11 +493,14 @@ irsa-controllerconfig   6s
 ```
 
 ##### Create a Provider
-The `Provider` object references the `ControllerConfig` to use the AWS IAM role ARN.
+The `Provider` object references the `ControllerConfig` to use the AWS IAM role
+ARN.
 
-_Note:_ the official AWS provider requires a `packagePullSecret` to authenticate against Upbound Marketplace and install. 
+_Note:_ the official AWS provider requires a `packagePullSecret` to authenticate
+against Upbound Marketplace and install. 
 
-The `Provider.spec.controllerConfigRef.name` must match the `ControllerConfig.name` value. 
+The `Provider.spec.controllerConfigRef.name` must match the
+`ControllerConfig.name` value. 
 
 ```yaml
 apiVersion: pkg.crossplane.io/v1
@@ -474,7 +515,8 @@ spec:
     name: irsa-controllerconfig
 ```
 
-Apply the `Provider` object with `kubectl apply -f` and verify with `kubectl get providers`.
+Apply the `Provider` object with `kubectl apply -f` and verify with `kubectl get
+providers`.
 
 ```shell
 $ kubectl apply -f provider.yaml
@@ -483,10 +525,12 @@ NAME           INSTALLED   HEALTHY   PACKAGE                                    
 provider-aws   True        True      xpkg.upbound.io/upbound/provider-aws:latest   83s
 ```
 
-_Note_: it may take up to five minutes for the provider `HEALTHY` value to be `True`.
+_Note_: it may take up to five minutes for the provider `HEALTHY` value to be
+`True`.
 
 ##### Create a ProviderConfig
-The `ProviderConfig` explicitly configures the official AWS provider to use `IRSA` authentication. 
+The `ProviderConfig` explicitly configures the official AWS provider to use
+`IRSA` authentication. 
 
 Define the `ProviderConfig.spec.credentials.source` as `IRSA`. 
 
@@ -502,7 +546,8 @@ spec:
 
 _Note:_ the value `IRSA` is case sensitive.
 
-Apply the `ProviderConfig` with `kubectl apply -f` and verify with `kubectl get providerconfigs`.
+Apply the `ProviderConfig` with `kubectl apply -f` and verify with `kubectl get
+providerconfigs`.
 
 ```shell
 $ kubectl apply -f providerconfig.yaml
