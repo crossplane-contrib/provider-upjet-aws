@@ -23,13 +23,7 @@ EOF
 kubectl wait "providers.pkg.crossplane.io/provider-aws" --for=condition=Installed --timeout=180s
 kubectl wait "providers.pkg.crossplane.io/provider-aws" --for=condition=Healthy --timeout=180s
 
-creds=$(
-cat <<EOF | base64
-[default]
-aws_access_key_id = $AWS_KEY
-aws_secret_access_key = $AWS_SECRET
-EOF
-)
+creds=$(printf "[default]\naws_access_key_id = %s\naws_secret_access_key = %s" "${AWS_KEY}" "${AWS_SECRET}" | base64)
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
