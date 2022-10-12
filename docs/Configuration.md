@@ -496,9 +496,6 @@ irsa-controllerconfig   6s
 The `Provider` object references the `ControllerConfig` to use the AWS IAM role
 ARN.
 
-_Note:_ the official AWS provider requires a `packagePullSecret` to authenticate
-against Upbound Marketplace and install. 
-
 The `Provider.spec.controllerConfigRef.name` must match the
 `ControllerConfig.name` value. 
 
@@ -509,8 +506,6 @@ metadata:
   name: provider-aws
 spec:
   package: xpkg.upbound.io/upbound/provider-aws:latest
-  packagePullSecrets:
-    - name: package-pull-secret
   controllerConfigRef:
     name: irsa-controllerconfig
 ```

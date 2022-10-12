@@ -49,22 +49,20 @@ _Note:_ run each command individually or copy to a local to prevent issues
 running the commands in the terminal.
 
 ```shell
-read -p "AWS access_key_id: " aws_access_key; read -sp "AWS secret_access_key: " aws_secret_key; export AWS_KEY=$aws_access_key; export AWS_SECRET=$aws_secret_key;
+#!/usr/bin/env bash
+set -eE
 
-if ! kubectl -n upbound-system get deployment crossplane > /dev/null 2>&1
-then
-  printf "\n\nInstalling up CLI...\n"
-  curl -sL "https://cli.upbound.io" | sh
-  sudo mv up /usr/local/bin/
-  printf "\n\nInstalling UXP...\n"
-  up uxp install
-fi
+read -p "AWS access_key_id: " aws_access_key; read -sp "AWS secret_access_key: " aws_secret_key; export AWS_KEY=$aws_access_key; export AWS_SECRET=$aws_secret_key; printf "\n"
 
-printf "\n\nChecking the UXP installation (this only takes a minute)...\n"
+if ! up --version > /dev/null 2>&1; then printf "Installing up CLI...\n"; curl -sL "https://cli.upbound.io" | sh; sudo mv up /usr/local/bin/; fi
+
+if ! kubectl -n upbound-system get deployment crossplane > /dev/null 2>&1; then printf "Installing UXP...\n" && up uxp install; fi
+
+printf "Checking the UXP installation (this only takes a minute)...\n"
 kubectl -n upbound-system wait deployment crossplane --for=condition=Available --timeout=180s
 
 
-printf "\n\nInstalling the provider (this will take a few minutes)...\n"
+printf "Installing the provider (this will take a few minutes)...\n"
 cat <<EOF | kubectl apply -f -
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
@@ -76,13 +74,7 @@ EOF
 kubectl wait "providers.pkg.crossplane.io/provider-aws" --for=condition=Installed --timeout=180s
 kubectl wait "providers.pkg.crossplane.io/provider-aws" --for=condition=Healthy --timeout=180s
 
-creds=$(
-cat <<EOF | base64
-[default]
-aws_access_key_id = $AWS_KEY
-aws_secret_access_key = $AWS_SECRET
-EOF
-)
+creds=$(echo "[default]\naws_access_key_id = ${AWS_KEY}\naws_secret_access_key = ${AWS_SECRET}" | base64)
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -118,7 +110,7 @@ spec:
     region: us-east-1
 EOF
 
-printf "\n\nChecking AWS bucket creation (this only takes a minute)...\n"
+printf "Checking AWS bucket creation (this only takes a minute)...\n"
 kubectl wait "$(kubectl get buckets -o name)" --for=condition=Ready --timeout=180s
 
 kubectl get buckets
