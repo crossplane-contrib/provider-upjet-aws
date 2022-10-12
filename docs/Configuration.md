@@ -5,7 +5,6 @@ weight: 2
 # AWS official provider documentation
 Upbound supports and maintains the Upbound AWS official provider.
 
-Only Upbound customers can download official providers.
 ## Install the provider
 ### Prerequisites
 #### Upbound Up command-line
@@ -23,7 +22,7 @@ documentation](https://docs.upbound.io/cli/).
 #### Upbound Universal Crossplane
 UXP is the Upbound official enterprise-grade distribution of Crossplane for
 self-hosted control planes. Only Upbound Universal Crossplane (UXP) supports
-official providers.  
+official providers.
 
 Official providers aren't supported with open source Crossplane.
 
