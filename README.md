@@ -9,9 +9,7 @@ generation tools and exposes XRM-conformant managed resources for
 
 Follow the quick start guide [here](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/docs/quickstart).
 
-## Contributing
-
-Please see the [Adding New Resources](/docs/adding-resources.md) guide.
+You can find a detailed API reference with all CRDs and examples [here](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/crds).
 
 ## Report a Bug
 

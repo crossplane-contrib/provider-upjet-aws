@@ -74,7 +74,7 @@ EOF
 kubectl wait "providers.pkg.crossplane.io/provider-aws" --for=condition=Installed --timeout=180s
 kubectl wait "providers.pkg.crossplane.io/provider-aws" --for=condition=Healthy --timeout=180s
 
-creds=$(echo "[default]\naws_access_key_id = ${AWS_KEY}\naws_secret_access_key = ${AWS_SECRET}" | base64)
+
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -82,8 +82,9 @@ kind: Secret
 metadata:
   name: aws-secret
   namespace: upbound-system
-data:
-  creds: ${creds}
+stringData:
+  creds: |
+    $(printf "[default]\n    aws_access_key_id = %s\n    aws_secret_access_key = %s" "${AWS_KEY}" "${AWS_SECRET}")
 EOF
 
 cat <<EOF | kubectl apply -f -
@@ -121,7 +122,7 @@ Your Kubernetes cluster created this AWS S3 bucket.
 Remove it with the following command.
 
 ```shell
-kubectl delete bucket --all
+$ kubectl delete bucket --all
 ```
 
 ## Guided tour
@@ -195,8 +196,9 @@ EOF
 Verify the provider installed with `kubectl describe providers` and `kubectl get
 providers`. This `kubectl describe providers` output is from an installed
 provider.
-```yaml
-vagrant@kubecontroller-01:~$ kubectl describe provider
+```
+$ kubectl describe provider
+
 Name:         provider-aws
 Namespace:
 Labels:       <none>
