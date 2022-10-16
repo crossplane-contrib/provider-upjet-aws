@@ -95,7 +95,7 @@ type SubnetParameters struct {
 	PrivateDNSHostnameTypeOnLaunch *string `json:"privateDnsHostnameTypeOnLaunch,omitempty" tf:"private_dns_hostname_type_on_launch,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 

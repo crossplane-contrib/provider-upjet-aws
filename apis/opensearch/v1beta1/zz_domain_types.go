@@ -191,7 +191,7 @@ type DomainParameters struct {
 	NodeToNodeEncryption []NodeToNodeEncryptionParameters `json:"nodeToNodeEncryption,omitempty" tf:"node_to_node_encryption,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 

@@ -115,7 +115,7 @@ type NetworkInterfaceParameters_2 struct {
 	PrivateIpsCount *float64 `json:"privateIpsCount,omitempty" tf:"private_ips_count,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 

@@ -68,7 +68,7 @@ type DataCatalogEncryptionSettingsParameters struct {
 	DataCatalogEncryptionSettings []DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters `json:"dataCatalogEncryptionSettings" tf:"data_catalog_encryption_settings,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 }

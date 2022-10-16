@@ -119,7 +119,7 @@ type ObjectParameters struct {
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 

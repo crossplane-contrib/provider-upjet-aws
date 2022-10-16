@@ -95,7 +95,7 @@ type MetricAlarmParameters struct {
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 

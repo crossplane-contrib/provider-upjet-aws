@@ -227,7 +227,7 @@ type IntentParameters_2 struct {
 	ParentIntentSignature *string `json:"parentIntentSignature,omitempty" tf:"parent_intent_signature,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 

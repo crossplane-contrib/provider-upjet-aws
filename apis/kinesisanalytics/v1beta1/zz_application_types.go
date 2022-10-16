@@ -84,7 +84,7 @@ type ApplicationParameters struct {
 	ReferenceDataSources []ReferenceDataSourcesParameters `json:"referenceDataSources,omitempty" tf:"reference_data_sources,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 

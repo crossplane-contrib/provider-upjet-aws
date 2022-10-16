@@ -80,7 +80,7 @@ type PoolParameters struct {
 	OpenIDConnectProviderArns []*string `json:"openidConnectProviderArns,omitempty" tf:"openid_connect_provider_arns,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 

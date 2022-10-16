@@ -71,7 +71,7 @@ type UserDefinedFunctionParameters struct {
 	OwnerType *string `json:"ownerType" tf:"owner_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
