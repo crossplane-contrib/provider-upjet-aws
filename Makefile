@@ -168,15 +168,15 @@ generate.init: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs
 # Test utilities
 # TODO(muvaf): Move most of this to build submodule.
 
-uptest: $(KIND) $(KUBECTL) $(HELM3) $(UP) $(KUTTL)
+uptest: $(KIND) $(KUBECTL) $(HELM3) $(UP) $(KUTTL) $(UPTEST)
 	@$(INFO) running uptest using kind $(KIND_VERSION)
 	@./cluster/install_provider.sh || $(FAIL)
 	@echo "$${UPTEST_EXAMPLE_VALUE_REPLACEMENTS}" > $(WORK_DIR)/replacements.yaml
-	@KIND=$(KIND) KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd --data-source "$(WORK_DIR)/replacements.yaml" || $(FAIL)
+	@KIND=$(KIND) KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) $(UPTEST) e2e ${EXAMPLE_LIST} --default-conditions="Test" --data-source "$(WORK_DIR)/replacements.yaml" || $(FAIL)
 
-uptest-local: $(KUBECTL) $(KUTTL)
+uptest-local: $(KUBECTL) $(KUTTL) $(UPTEST)
 	@$(INFO) running automated tests with uptest using current kubeconfig $(KIND_VERSION)
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd || $(FAIL)
+	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) $(UPTEST) e2e ${EXAMPLE_LIST} --default-conditions="Test" --data-source "$(WORK_DIR)/replacements.yaml" || $(FAIL)
 
 cluster_dump: $(KUBECTL)
 	@mkdir -p ${DUMP_DIRECTORY}

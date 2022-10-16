@@ -735,8 +735,6 @@ github.com/tmc/grpc-websocket-proxy v0.0.0-20201229170055-e5319fda7802/go.mod h1
 github.com/tmccombs/hcl2json v0.3.3 h1:+DLNYqpWE0CsOQiEZu+OZm5ZBImake3wtITYxQ8uLFQ=
 github.com/tmccombs/hcl2json v0.3.3/go.mod h1:Y2chtz2x9bAeRTvSibVRVgbLJhLJXKlUeIvjeVdnm4w=
 github.com/tv42/httpunix v0.0.0-20150427012821-b75d8614f926/go.mod h1:9ESjWnEqriFuLhtthL60Sar/7RFoluCcXsuvEwTV5KM=
-github.com/upbound/official-providers/testing v0.0.0-20221007091039-7542108227b1 h1:j/JYel7ByIcPG8s4QHBaR8fSsM+efJxHGNxKCHJvbcE=
-github.com/upbound/official-providers/testing v0.0.0-20221007091039-7542108227b1/go.mod h1:gq+aSoWo842rxD5/iQMkn5e722zmTn3NK+PjuIY7eh8=
 github.com/upbound/official-providers/updoc v0.0.0-20221003124519-d2819057cba0 h1:jnUxtwOXUBT9wGbJTFLIsWO+zUdrn8xBwOtbtJcA+q8=
 github.com/upbound/official-providers/updoc v0.0.0-20221003124519-d2819057cba0/go.mod h1:4QnHDhS0ZuF7+jguUQTOXHw6U4t7BQUuIVPT8BOQalM=
 github.com/upbound/upjet v0.7.0 h1:DxfijsUHk5qhdpQemyQe0NYL89vbXgfoH85c5ma8rUA=
