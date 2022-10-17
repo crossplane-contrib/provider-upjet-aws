@@ -538,7 +538,7 @@ type LaunchTemplateParameters_2 struct {
 	RAMDiskID *string `json:"ramDiskId,omitempty" tf:"ram_disk_id,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 

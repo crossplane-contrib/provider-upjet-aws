@@ -51,7 +51,7 @@ type VPCDHCPOptionsParameters struct {
 	NtpServers []*string `json:"ntpServers,omitempty" tf:"ntp_servers,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 

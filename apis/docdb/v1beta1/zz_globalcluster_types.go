@@ -65,7 +65,7 @@ type GlobalClusterParameters struct {
 	GlobalClusterIdentifier *string `json:"globalClusterIdentifier" tf:"global_cluster_identifier,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +terrajet:crd:field:TFTag=-
+	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
