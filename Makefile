@@ -52,6 +52,7 @@ GO111MODULE = on
 # ====================================================================================
 # Setup Kubernetes tools
 
+UPTEST_VERSION = v0.1.1
 KIND_VERSION = v0.15.0
 UP_VERSION = v0.14.0
 UP_CHANNEL = stable
@@ -172,11 +173,11 @@ uptest: $(KIND) $(KUBECTL) $(HELM3) $(UP) $(KUTTL) $(UPTEST)
 	@$(INFO) running uptest using kind $(KIND_VERSION)
 	@./cluster/install_provider.sh || $(FAIL)
 	@echo "$${UPTEST_EXAMPLE_VALUE_REPLACEMENTS}" > $(WORK_DIR)/replacements.yaml
-	@KIND=$(KIND) KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) $(UPTEST) e2e ${EXAMPLE_LIST} --default-conditions="Test" --data-source "$(WORK_DIR)/replacements.yaml" || $(FAIL)
+	@KIND=$(KIND) KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) $(UPTEST) e2e "${EXAMPLE_LIST}" --default-conditions="Test" --test-directory="${DUMP_DIRECTORY}" --data-source "$(WORK_DIR)/replacements.yaml" || $(FAIL)
 
 uptest-local: $(KUBECTL) $(KUTTL) $(UPTEST)
 	@$(INFO) running automated tests with uptest using current kubeconfig $(KIND_VERSION)
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) $(UPTEST) e2e ${EXAMPLE_LIST} --default-conditions="Test" --data-source "$(WORK_DIR)/replacements.yaml" || $(FAIL)
+	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) $(UPTEST) e2e "${EXAMPLE_LIST}" --default-conditions="Test" --data-source "$(WORK_DIR)/replacements.yaml" || $(FAIL)
 
 cluster_dump: $(KUBECTL)
 	@mkdir -p ${DUMP_DIRECTORY}
