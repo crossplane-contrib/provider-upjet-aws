@@ -145,6 +145,7 @@ jobs:
           UPTEST_AWS_CREDS: ${{ secrets.UPTEST_AWS_CREDS }}
           EXAMPLE_LIST: ${{ needs.get-example-list.outputs.example_list }}
           UPTEST_EXAMPLE_VALUE_REPLACEMENTS: ${{ secrets.UPTEST_EXAMPLE_VALUE_REPLACEMENTS }}
+          DUMP_DIRECTORY: "./_output/cluster-dump"
         run: make uptest
 
       - name: Create Successful Status Check
