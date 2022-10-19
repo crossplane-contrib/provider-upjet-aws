@@ -183,7 +183,6 @@ cluster_dump: $(KUBECTL)
 	@mkdir -p ${DUMP_DIRECTORY}
 	@$(KUBECTL) cluster-info dump --output-directory ${DUMP_DIRECTORY} --all-namespaces || true
 	@$(KUBECTL) get managed -o yaml > ${DUMP_DIRECTORY}/managed.yaml || true
-	@cat /tmp/automated-tests/case/*.yaml > ${DUMP_DIRECTORY}/kuttl-inputs.yaml
 
 .PHONY: pull-docs
 
