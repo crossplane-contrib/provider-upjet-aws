@@ -7,7 +7,7 @@ weight: 1
 This guide walks through the process to install Upbound Universal Crossplane and
 install the AWS official provider. For more details about the AWS official
 provider read the
-[Configuration](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/docs/configuration)
+[Configuration](https://marketplace.upbound.io/providers/upbound/provider-aws/v0.18.0/docs/configuration)
 .
 
 To install and use this official provider:
@@ -40,7 +40,7 @@ _Note:_ all commands use the current `kubeconfig` context and configuration.
 ### Bash script
 Run the following to download and install 
 ```shell
-curl -sL "https://raw.githubusercontent.com/upbound/provider-aws/main/docs/quickstart.sh" | sh
+curl -sL "https://raw.githubusercontent.com/upbound/provider-aws/v0.18.0/docs/quickstart.sh" | sh
 ```
 
 ### Shell commands
@@ -216,7 +216,7 @@ Status:
     Reason:                ActivePackageRevision
     Status:                True
     Type:                  Installed
-  Current Identifier:      xpkg.upbound.io/upbound/provider-aws:latest
+  Current Identifier:      xpkg.upbound.io/upbound/provider-aws:v0.18.0
   Current Revision:        provider-aws-ab4a3525fb0b
 Events:
   Type     Reason                  Age               From                                 Message
@@ -230,7 +230,7 @@ The `INSTALLED` value should be `True`. It may take up to 5 minutes for
 ```shell
 $ kubectl get provider
 NAME           INSTALLED   HEALTHY   PACKAGE                                        AGE
-provider-aws   True        True   xpkg.upbound.io/upbound/provider-aws:latest      5s
+provider-aws   True        True   xpkg.upbound.io/upbound/provider-aws:v0.18.0      5s
 ```
 
 If there are issues downloading and installing the provider the `INSTALLED`
@@ -239,7 +239,7 @@ field is empty.
 ```shell
 $ kubectl get providers
 NAME           INSTALLED   HEALTHY   PACKAGE                                       AGE
-provider-aws                         xpkg.upbound.io/upbound/provider-aws:latest   62s
+provider-aws                         xpkg.upbound.io/upbound/provider-aws:v0.18.0   62s
 ```
 
 Use `kubectl describe providers` for more information.
