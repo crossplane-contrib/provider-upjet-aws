@@ -92,6 +92,7 @@ import (
 	metricalarm "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricalarm"
 	metricstream "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricstream"
 	group "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/group"
+	repository "github.com/upbound/provider-aws/internal/controller/codecommit/repository"
 	cognitoidentitypoolproviderprincipaltag "github.com/upbound/provider-aws/internal/controller/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
 	pool "github.com/upbound/provider-aws/internal/controller/cognitoidentity/pool"
 	poolrolesattachment "github.com/upbound/provider-aws/internal/controller/cognitoidentity/poolrolesattachment"
@@ -173,7 +174,7 @@ import (
 	registrypolicy "github.com/upbound/provider-aws/internal/controller/ecr/registrypolicy"
 	registryscanningconfiguration "github.com/upbound/provider-aws/internal/controller/ecr/registryscanningconfiguration"
 	replicationconfiguration "github.com/upbound/provider-aws/internal/controller/ecr/replicationconfiguration"
-	repository "github.com/upbound/provider-aws/internal/controller/ecr/repository"
+	repositoryecr "github.com/upbound/provider-aws/internal/controller/ecr/repository"
 	repositorypolicy "github.com/upbound/provider-aws/internal/controller/ecr/repositorypolicy"
 	repositoryecrpublic "github.com/upbound/provider-aws/internal/controller/ecrpublic/repository"
 	repositorypolicyecrpublic "github.com/upbound/provider-aws/internal/controller/ecrpublic/repositorypolicy"
@@ -460,6 +461,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		metricalarm.Setup,
 		metricstream.Setup,
 		group.Setup,
+		repository.Setup,
 		cognitoidentitypoolproviderprincipaltag.Setup,
 		pool.Setup,
 		poolrolesattachment.Setup,
@@ -541,7 +543,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		registrypolicy.Setup,
 		registryscanningconfiguration.Setup,
 		replicationconfiguration.Setup,
-		repository.Setup,
+		repositoryecr.Setup,
 		repositorypolicy.Setup,
 		repositoryecrpublic.Setup,
 		repositorypolicyecrpublic.Setup,
