@@ -10,7 +10,4 @@ spec:
   forProvider:
     description: This is the Sample App Repository
     region: us-west-1
-    repositoryName: MyTestRepository
-
----
-
+  
