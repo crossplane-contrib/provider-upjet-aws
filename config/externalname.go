@@ -996,7 +996,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_appautoscaling_target": TemplatedStringAsIdentifierWithNoName("{{ .parameters.service_namespace }}/{{ .parameters.resource_id }}/{{ .parameters.scalable_dimension }}"),
 
 	// Codecommit repository can be imported using repository name
-	"aws_codecommit_repository": config.NameAsIdentifier,
+	"aws_codecommit_repository": config.ParameterAsIdentifier("repository_name"),
 }
 
 func lambdaFunctionURL() config.ExternalName {
