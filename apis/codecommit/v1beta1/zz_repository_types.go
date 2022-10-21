@@ -48,10 +48,6 @@ type RepositoryParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The name for the repository. This needs to be less than 100 characters.
-	// +kubebuilder:validation:Required
-	RepositoryName *string `json:"repositoryName" tf:"repository_name,omitempty"`
-
 	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

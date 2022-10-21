@@ -76,10 +76,6 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  repositoryName:
-                    description: The name for the repository. This needs to be less
-                      than 100 characters.
-                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -89,7 +85,6 @@ spec:
                     type: object
                 required:
                 - region
-                - repositoryName
                 type: object
               providerConfigRef:
                 default:

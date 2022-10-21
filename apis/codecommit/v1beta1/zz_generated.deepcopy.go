@@ -145,11 +145,6 @@ func (in *RepositoryParameters) DeepCopyInto(out *RepositoryParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.RepositoryName != nil {
-		in, out := &in.RepositoryName, &out.RepositoryName
-		*out = new(string)
-		**out = **in
-	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
