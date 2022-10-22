@@ -92,6 +92,7 @@ import (
 	metricalarm "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricalarm"
 	metricstream "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricstream"
 	group "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/group"
+	approvalruletemplate "github.com/upbound/provider-aws/internal/controller/codecommit/approvalruletemplate"
 	repository "github.com/upbound/provider-aws/internal/controller/codecommit/repository"
 	cognitoidentitypoolproviderprincipaltag "github.com/upbound/provider-aws/internal/controller/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
 	pool "github.com/upbound/provider-aws/internal/controller/cognitoidentity/pool"
@@ -461,6 +462,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		metricalarm.Setup,
 		metricstream.Setup,
 		group.Setup,
+		approvalruletemplate.Setup,
 		repository.Setup,
 		cognitoidentitypoolproviderprincipaltag.Setup,
 		pool.Setup,
