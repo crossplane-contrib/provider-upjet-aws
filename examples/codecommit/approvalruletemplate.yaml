@@ -15,7 +15,7 @@ spec:
           "Statements": [{
               "Type": "Approvers",
               "NumberOfApprovalsNeeded": 2,
-              "ApprovalPoolMembers": ["arn:aws:sts::123456789012:assumed-role/CodeCommitReview/*"]
+              "ApprovalPoolMembers": ["arn:aws:sts::${data.aws_account_id}:assumed-role/CodeCommitReview/*"]
           }]
       }
     description: This is an example approval rule template
