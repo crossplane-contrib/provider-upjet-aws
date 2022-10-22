@@ -73,6 +73,72 @@ func (mg *ApprovalRuleTemplate) SetWriteConnectionSecretToReference(r *xpv1.Secr
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ApprovalRuleTemplateAssociation.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ApprovalRuleTemplateAssociation) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ApprovalRuleTemplateAssociation.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ApprovalRuleTemplateAssociation) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Repository.
 func (mg *Repository) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
