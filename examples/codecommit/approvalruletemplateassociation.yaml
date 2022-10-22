@@ -1,4 +1,44 @@
 apiVersion: codecommit.aws.upbound.io/v1beta1
+kind: Repository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codecommit/v1beta1/repository
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    description: This is the Sample App Repository
+    region: us-west-1
+
+---
+
+apiVersion: codecommit.aws.upbound.io/v1beta1
+kind: ApprovalRuleTemplate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codecommit/v1beta1/approvalruletemplate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    content: |
+      {
+          "Version": "2018-11-08",
+          "DestinationReferences": ["refs/heads/master"],
+          "Statements": [{
+              "Type": "Approvers",
+              "NumberOfApprovalsNeeded": 2,
+              "ApprovalPoolMembers": ["arn:aws:sts::${data.aws_account_id}:assumed-role/CodeCommitReview/*"]
+          }]
+      }
+    description: This is an example approval rule template
+    region: us-west-1
+
+---
+
+apiVersion: codecommit.aws.upbound.io/v1beta1
 kind: ApprovalRuleTemplateAssociation
 metadata:
   annotations:
@@ -14,7 +54,5 @@ spec:
     region: us-west-1
     repositoryNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
-
----
+        testing.upbound.io/example-name: test
 
