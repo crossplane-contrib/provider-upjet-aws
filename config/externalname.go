@@ -999,6 +999,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_codecommit_repository": config.ParameterAsIdentifier("repository_name"),
 	// CodeCommit approval rule templates can be imported using the name
 	"aws_codecommit_approval_rule_template": config.NameAsIdentifier,
+	// CodeCommit approval rule template associations can be imported using the approval_rule_template_name and repository_name separated by a comma (,)
+	"aws_codecommit_approval_rule_template_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.approval_rule_template_name }},.parameters.repository_name }}"),
 }
 
 func lambdaFunctionURL() config.ExternalName {
