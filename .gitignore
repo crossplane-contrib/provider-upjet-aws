@@ -5,6 +5,7 @@ cover.out
 /vendor
 /.vendor-new
 .DS_Store
+kubeconfig
 
 # ignore IDE folders
 .vscode/
