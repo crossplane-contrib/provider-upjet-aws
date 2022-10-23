@@ -95,6 +95,7 @@ import (
 	approvalruletemplate "github.com/upbound/provider-aws/internal/controller/codecommit/approvalruletemplate"
 	approvalruletemplateassociation "github.com/upbound/provider-aws/internal/controller/codecommit/approvalruletemplateassociation"
 	repository "github.com/upbound/provider-aws/internal/controller/codecommit/repository"
+	trigger "github.com/upbound/provider-aws/internal/controller/codecommit/trigger"
 	cognitoidentitypoolproviderprincipaltag "github.com/upbound/provider-aws/internal/controller/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
 	pool "github.com/upbound/provider-aws/internal/controller/cognitoidentity/pool"
 	poolrolesattachment "github.com/upbound/provider-aws/internal/controller/cognitoidentity/poolrolesattachment"
@@ -225,7 +226,7 @@ import (
 	job "github.com/upbound/provider-aws/internal/controller/glue/job"
 	registry "github.com/upbound/provider-aws/internal/controller/glue/registry"
 	resourcepolicy "github.com/upbound/provider-aws/internal/controller/glue/resourcepolicy"
-	trigger "github.com/upbound/provider-aws/internal/controller/glue/trigger"
+	triggerglue "github.com/upbound/provider-aws/internal/controller/glue/trigger"
 	userdefinedfunction "github.com/upbound/provider-aws/internal/controller/glue/userdefinedfunction"
 	workflow "github.com/upbound/provider-aws/internal/controller/glue/workflow"
 	roleassociation "github.com/upbound/provider-aws/internal/controller/grafana/roleassociation"
@@ -466,6 +467,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		approvalruletemplate.Setup,
 		approvalruletemplateassociation.Setup,
 		repository.Setup,
+		trigger.Setup,
 		cognitoidentitypoolproviderprincipaltag.Setup,
 		pool.Setup,
 		poolrolesattachment.Setup,
@@ -596,7 +598,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		job.Setup,
 		registry.Setup,
 		resourcepolicy.Setup,
-		trigger.Setup,
+		triggerglue.Setup,
 		userdefinedfunction.Setup,
 		workflow.Setup,
 		roleassociation.Setup,
