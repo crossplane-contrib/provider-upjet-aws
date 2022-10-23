@@ -276,9 +276,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// codecommit
 	//
-	// No import
-	"aws_codecommit_trigger": config.IdentifierFromProvider,
-
+	
 	// codepipeline
 	//
 	// CodePipelines can be imported using the name
