@@ -274,9 +274,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// CodeBuild Webhooks can be imported using the CodeBuild Project name
 	"aws_codebuild_webhook": config.ParameterAsIdentifier("project_name"),
 
-	// codecommit
-	//
-	
 	// codepipeline
 	//
 	// CodePipelines can be imported using the name
