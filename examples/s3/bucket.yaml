@@ -9,7 +9,7 @@ spec:
     region: us-west-1
     objectLockEnabled: true
     tags:
-      Name: SampleBucket
+      Name: SampleBucket1
 ---
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
