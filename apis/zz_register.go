@@ -27,6 +27,7 @@ import (
 	v1beta1cognitoidentity "github.com/upbound/provider-aws/apis/cognitoidentity/v1beta1"
 	v1beta1cognitoidp "github.com/upbound/provider-aws/apis/cognitoidp/v1beta1"
 	v1beta1dax "github.com/upbound/provider-aws/apis/dax/v1beta1"
+	v1beta1deploy "github.com/upbound/provider-aws/apis/deploy/v1beta1"
 	v1beta1docdb "github.com/upbound/provider-aws/apis/docdb/v1beta1"
 	v1beta1dynamodb "github.com/upbound/provider-aws/apis/dynamodb/v1beta1"
 	v1beta1ec2 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
@@ -95,6 +96,7 @@ func init() {
 		v1beta1cognitoidentity.SchemeBuilder.AddToScheme,
 		v1beta1cognitoidp.SchemeBuilder.AddToScheme,
 		v1beta1dax.SchemeBuilder.AddToScheme,
+		v1beta1deploy.SchemeBuilder.AddToScheme,
 		v1beta1docdb.SchemeBuilder.AddToScheme,
 		v1beta1dynamodb.SchemeBuilder.AddToScheme,
 		v1beta1ec2.SchemeBuilder.AddToScheme,
