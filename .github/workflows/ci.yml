@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - release-*
-  pull_request_target: {}
+  pull_request: {}
   workflow_dispatch: {}
 
 env:
@@ -14,6 +14,11 @@ env:
   GOLANGCI_VERSION: 'v1.50.0'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
 
+  UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
+  UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
+  CDN_DOMAIN: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_CDN }}
+  BUCKET_NAME: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_NAME }}
+  GOOGLE_APPLICATION_CREDENTIALS_JSON_ENCODED: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_SA_JSON_ENCODED }}
   UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
 jobs:
   detect-noop:
@@ -194,11 +199,6 @@ jobs:
     runs-on: ubuntu-22.04
     needs: detect-noop
     if: needs.detect-noop.outputs.noop != 'true'
-    env:
-      GOOGLE_APPLICATION_CREDENTIALS_JSON_ENCODED: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_SA_JSON_ENCODED }}
-      BUCKET_NAME: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_NAME }}
-      CDN_DOMAIN: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_CDN }}
-
     steps:
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v1
@@ -221,8 +221,8 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: xpkg.upbound.io
-          username: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
-          password: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
+          username: ${{ env.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
+          password: ${{ env.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
 
       - name: Prepare to Upload Docs
         run: echo "${GOOGLE_APPLICATION_CREDENTIALS_JSON_ENCODED}" | base64 -d > /tmp/gcp_sa.json
