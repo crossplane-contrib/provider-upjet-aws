@@ -1009,7 +1009,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// deploy
 	//
 	// CodeDeploy Applications can be imported using the name
-	"aws_codedeploy_app": config.NameAsIdentifier,
+	"aws_codedeploy_app": config.TemplatedStringAsIdentifier("name", "{{ .parameters.application_id }}:{{ .external_name }}"),
 }
 
 func lambdaFunctionURL() config.ExternalName {
