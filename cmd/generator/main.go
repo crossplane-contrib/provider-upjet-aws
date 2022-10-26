@@ -14,6 +14,8 @@ import (
 	"github.com/upbound/provider-aws/config"
 )
 
+TEST
+
 func main() {
 	if len(os.Args) < 2 || os.Args[1] == "" {
 		panic("root directory is required to be given as argument")
