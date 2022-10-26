@@ -69,7 +69,7 @@ jobs:
   uptest:
     runs-on: ubuntu-22.04
     needs: get-example-list
-    if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, '/test-examples') }}
+    if: ${{ github.event.comment.author_association == 'MEMBER' && github.event.issue.pull_request && contains(github.event.comment.body, '/test-examples') }}
     steps:
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v1
