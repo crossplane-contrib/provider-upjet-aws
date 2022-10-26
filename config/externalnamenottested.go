@@ -397,9 +397,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// deploy
 	//
-
-	// CodeDeploy Deployment Configurations can be imported using the deployment_config_name
-	"aws_codedeploy_deployment_config": config.ParameterAsIdentifier("deployment_config_name"),
 	// CodeDeploy Deployment Groups can be imported by their app_name, a colon, and deployment_group_name
 	"aws_codedeploy_deployment_group": config.ParameterAsIdentifier("deployment_group_name"),
 

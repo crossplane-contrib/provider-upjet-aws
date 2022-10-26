@@ -15,3 +15,12 @@ func (l *AppList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this DeploymentConfigList.
+func (l *DeploymentConfigList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
