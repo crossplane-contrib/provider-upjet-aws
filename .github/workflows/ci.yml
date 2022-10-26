@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - release-*
-  pull_request_target: {}
+  pull_request: {}
   workflow_dispatch: {}
 
 env:
@@ -14,7 +14,10 @@ env:
   GOLANGCI_VERSION: 'v1.50.0'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
 
-  UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
+  # Common users. We can't run a step 'if secrets.XXX != ""' but we can run a
+  # step 'if env.XXX' != ""', so we copy these to succinctly test whether
+  # credentials have been provided before trying to run steps that need them.
+  UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
 jobs:
   detect-noop:
     runs-on: ubuntu-22.04
@@ -46,12 +49,6 @@ jobs:
         with:
           go-version: ${{ env.GO_VERSION }}
 
-      # git needs to be able to access private repositories under upbound.
-      - name: Login to Github
-        run: |
-          git config --global user.name "upbound-bot"
-          echo "machine github.com login upbound-bot password $UPBOUND_BOT_GITHUB_TOKEN" > ~/.netrc
-
       - name: Find the Go Build Cache
         id: go
         run: echo "::set-output name=cache::$(make go.cachedir)"
@@ -69,12 +66,6 @@ jobs:
           path: .work/pkg
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-pkg-
-      
-      # git needs to be able to access private repositories under upbound.
-      - name: Login to Github
-        run: |
-          git config --global user.name "upbound-bot"
-          echo "machine github.com login upbound-bot password $UPBOUND_BOT_GITHUB_TOKEN" > ~/.netrc
 
       - name: Vendor Dependencies
         run: make vendor vendor.check
@@ -101,12 +92,6 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ${{ env.GO_VERSION }}
-
-      # git needs to be able to access private repositories under upbound.
-      - name: Login to Github
-        run: |
-          git config --global user.name "upbound-bot"
-          echo "machine github.com login upbound-bot password $UPBOUND_BOT_GITHUB_TOKEN" > ~/.netrc
 
       - name: Install goimports
         run: go install golang.org/x/tools/cmd/goimports
@@ -154,12 +139,6 @@ jobs:
         with:
           go-version: ${{ env.GO_VERSION }}
 
-      # git needs to be able to access private repositories under upbound.
-      - name: Login to Github
-        run: |
-          git config --global user.name "upbound-bot"
-          echo "machine github.com login upbound-bot password $UPBOUND_BOT_GITHUB_TOKEN" > ~/.netrc
-
       - name: Find the Go Build Cache
         id: go
         run: echo "::set-output name=cache::$(make go.cachedir)"
@@ -194,10 +173,6 @@ jobs:
     runs-on: ubuntu-22.04
     needs: detect-noop
     if: needs.detect-noop.outputs.noop != 'true'
-    env:
-      GOOGLE_APPLICATION_CREDENTIALS_JSON_ENCODED: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_SA_JSON_ENCODED }}
-      BUCKET_NAME: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_NAME }}
-      CDN_DOMAIN: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_CDN }}
 
     steps:
       - name: Setup QEMU
@@ -211,21 +186,13 @@ jobs:
           version: ${{ env.DOCKER_BUILDX_VERSION }}
           install: true
 
-      # git needs to be able to access private repositories under upbound.
-      - name: Login to Github
-        run: |
-          git config --global user.name "upbound-bot"
-          echo "machine github.com login upbound-bot password $UPBOUND_BOT_GITHUB_TOKEN" > ~/.netrc
-
       - name: Login to Upbound
         uses: docker/login-action@v1
+        if: env.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR != ''
         with:
           registry: xpkg.upbound.io
           username: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
           password: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
-
-      - name: Prepare to Upload Docs
-        run: echo "${GOOGLE_APPLICATION_CREDENTIALS_JSON_ENCODED}" | base64 -d > /tmp/gcp_sa.json
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -275,6 +242,5 @@ jobs:
           path: _output/**
 
       - name: Publish Artifacts
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: /tmp/gcp_sa.json
+        if: env.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR != ''
         run: make publish BRANCH_NAME=${GITHUB_REF##*/}
