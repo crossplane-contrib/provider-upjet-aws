@@ -13,27 +13,27 @@ env:
   GO_VERSION: '1.19'
   GOLANGCI_VERSION: 'v1.50.0'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
-
+  UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
   UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
   UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
   CDN_DOMAIN: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_CDN }}
   BUCKET_NAME: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_NAME }}
   GOOGLE_APPLICATION_CREDENTIALS_JSON_ENCODED: ${{ secrets.UPBOUND_MARKETPLACE_DOCS_BUCKET_PROD_SA_JSON_ENCODED }}
-  UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
+  TEST_SECRET: ${{ secrets.TEST_SECRET }}
 jobs:
   detect-noop:
     runs-on: ubuntu-22.04
     outputs:
       noop: ${{ steps.noop.outputs.should_skip }}
+    secrets: inherit
     steps:
+      - name: test-ci
+        run: |
+          echo "test: $TEST_SECRET"
+
       - name: Detect No-op Changes
         id: noop
-        uses: fkirc/skip-duplicate-actions@v2.0.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          paths_ignore: '["**.md", "**.png", "**.jpg"]'
-          do_not_skip: '["workflow_dispatch", "schedule", "push"]'
-
+        run: echo "noop=false" >> $GITHUB_OUTPUT
 
   lint:
     runs-on: ubuntu-22.04
