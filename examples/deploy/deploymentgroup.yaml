@@ -38,9 +38,7 @@ spec:
       triggerTargetArnSelector:
         matchLabels:
           testing.upbound.io/example-name: example
-
 ---
-
 apiVersion: deploy.aws.upbound.io/v1beta1
 kind: App
 metadata:
@@ -52,9 +50,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-
 ---
-
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
@@ -79,28 +75,22 @@ spec:
           }
         ]
       }
-
 ---
-
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
     meta.upbound.io/example-id: deploy/v1beta1/deploymentgroup
   labels:
-    testing.upbound.io/example-name: AWSCodeDeployRole
-  name: awscodedeployrole
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    policyArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    policyArn: arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
 ---
-
 apiVersion: sns.aws.upbound.io/v1beta1
 kind: Topic
 metadata:
@@ -112,6 +102,4 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-
 ---
-
