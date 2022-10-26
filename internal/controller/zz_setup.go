@@ -111,6 +111,7 @@ import (
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/dax/subnetgroup"
 	app "github.com/upbound/provider-aws/internal/controller/deploy/app"
 	deploymentconfig "github.com/upbound/provider-aws/internal/controller/deploy/deploymentconfig"
+	deploymentgroup "github.com/upbound/provider-aws/internal/controller/deploy/deploymentgroup"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
 	globalcluster "github.com/upbound/provider-aws/internal/controller/docdb/globalcluster"
@@ -485,6 +486,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subnetgroup.Setup,
 		app.Setup,
 		deploymentconfig.Setup,
+		deploymentgroup.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,
 		globalcluster.Setup,
