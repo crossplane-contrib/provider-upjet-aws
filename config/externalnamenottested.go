@@ -395,11 +395,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// aws_datasync_task can be imported by using the DataSync Task Amazon Resource Name (ARN)
 	"aws_datasync_task": config.IdentifierFromProvider,
 
-	// deploy
-	//
-	// CodeDeploy Deployment Groups can be imported by their app_name, a colon, and deployment_group_name
-	"aws_codedeploy_deployment_group": config.ParameterAsIdentifier("deployment_group_name"),
-
 	// detective
 	//
 	// aws_detective_graph can be imported using the ARN
