@@ -1,11 +1,12 @@
 apiVersion: codecommit.aws.upbound.io/v1beta1
 kind: Repository
 metadata:
-  name: example
+  name: example-trigger
   annotations:
     meta.upbound.io/example-id: codecommit/v1beta1/repository
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-trigger.sh
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: example-trigger
 spec:
   forProvider:
     description: This is the Sample App Repository
@@ -27,7 +28,6 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: codecommit/v1beta1/trigger
-    uptest.upbound.io/post-assert-hook: testhooks/delete-trigger.sh    
   labels:
     testing.upbound.io/example-name: example
 spec:
@@ -35,7 +35,7 @@ spec:
     region: us-west-1
     repositoryNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-trigger
     trigger:
     - destinationArnSelector:
         matchLabels:
