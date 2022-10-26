@@ -14,7 +14,6 @@ jobs:
     runs-on: ubuntu-22.04
     if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, '/test-examples') }}
     outputs:
-      provider_name: ${{ steps.get-example-list-name.outputs.provider-name }}
       example_list: ${{ steps.get-example-list-name.outputs.example-list }}
       example_hash: ${{ steps.get-example-list-name.outputs.example-hash }}
     steps:
@@ -163,7 +162,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: cluster-dump-${{ needs.get-example-list.outputs.provider_name }}
+          name: cluster-dump-aws
           path: ./_output/cluster-dump
 
       - name: Cleanup
