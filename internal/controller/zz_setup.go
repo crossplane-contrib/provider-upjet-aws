@@ -92,6 +92,10 @@ import (
 	metricalarm "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricalarm"
 	metricstream "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricstream"
 	group "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/group"
+	approvalruletemplate "github.com/upbound/provider-aws/internal/controller/codecommit/approvalruletemplate"
+	approvalruletemplateassociation "github.com/upbound/provider-aws/internal/controller/codecommit/approvalruletemplateassociation"
+	repository "github.com/upbound/provider-aws/internal/controller/codecommit/repository"
+	trigger "github.com/upbound/provider-aws/internal/controller/codecommit/trigger"
 	cognitoidentitypoolproviderprincipaltag "github.com/upbound/provider-aws/internal/controller/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
 	pool "github.com/upbound/provider-aws/internal/controller/cognitoidentity/pool"
 	poolrolesattachment "github.com/upbound/provider-aws/internal/controller/cognitoidentity/poolrolesattachment"
@@ -173,7 +177,7 @@ import (
 	registrypolicy "github.com/upbound/provider-aws/internal/controller/ecr/registrypolicy"
 	registryscanningconfiguration "github.com/upbound/provider-aws/internal/controller/ecr/registryscanningconfiguration"
 	replicationconfiguration "github.com/upbound/provider-aws/internal/controller/ecr/replicationconfiguration"
-	repository "github.com/upbound/provider-aws/internal/controller/ecr/repository"
+	repositoryecr "github.com/upbound/provider-aws/internal/controller/ecr/repository"
 	repositorypolicy "github.com/upbound/provider-aws/internal/controller/ecr/repositorypolicy"
 	repositoryecrpublic "github.com/upbound/provider-aws/internal/controller/ecrpublic/repository"
 	repositorypolicyecrpublic "github.com/upbound/provider-aws/internal/controller/ecrpublic/repositorypolicy"
@@ -222,7 +226,7 @@ import (
 	job "github.com/upbound/provider-aws/internal/controller/glue/job"
 	registry "github.com/upbound/provider-aws/internal/controller/glue/registry"
 	resourcepolicy "github.com/upbound/provider-aws/internal/controller/glue/resourcepolicy"
-	trigger "github.com/upbound/provider-aws/internal/controller/glue/trigger"
+	triggerglue "github.com/upbound/provider-aws/internal/controller/glue/trigger"
 	userdefinedfunction "github.com/upbound/provider-aws/internal/controller/glue/userdefinedfunction"
 	workflow "github.com/upbound/provider-aws/internal/controller/glue/workflow"
 	roleassociation "github.com/upbound/provider-aws/internal/controller/grafana/roleassociation"
@@ -460,6 +464,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		metricalarm.Setup,
 		metricstream.Setup,
 		group.Setup,
+		approvalruletemplate.Setup,
+		approvalruletemplateassociation.Setup,
+		repository.Setup,
+		trigger.Setup,
 		cognitoidentitypoolproviderprincipaltag.Setup,
 		pool.Setup,
 		poolrolesattachment.Setup,
@@ -541,7 +549,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		registrypolicy.Setup,
 		registryscanningconfiguration.Setup,
 		replicationconfiguration.Setup,
-		repository.Setup,
+		repositoryecr.Setup,
 		repositorypolicy.Setup,
 		repositoryecrpublic.Setup,
 		repositorypolicyecrpublic.Setup,
@@ -590,7 +598,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		job.Setup,
 		registry.Setup,
 		resourcepolicy.Setup,
-		trigger.Setup,
+		triggerglue.Setup,
 		userdefinedfunction.Setup,
 		workflow.Setup,
 		roleassociation.Setup,

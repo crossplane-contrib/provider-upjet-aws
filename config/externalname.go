@@ -994,6 +994,15 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_appautoscaling_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.service_namespace }}/{{ .parameters.resource_id }}/{{ .parameters.scalable_dimension }}/{{ .external_name }}"),
 	// Application AutoScaling Target can be imported using the service-namespace , resource-id and scalable-dimension separated by /
 	"aws_appautoscaling_target": TemplatedStringAsIdentifierWithNoName("{{ .parameters.service_namespace }}/{{ .parameters.resource_id }}/{{ .parameters.scalable_dimension }}"),
+
+	// Codecommit repository can be imported using repository name
+	"aws_codecommit_repository": config.ParameterAsIdentifier("repository_name"),
+	// CodeCommit approval rule templates can be imported using the name
+	"aws_codecommit_approval_rule_template": config.NameAsIdentifier,
+	// CodeCommit approval rule template associations can be imported using the approval_rule_template_name and repository_name separated by a comma (,)
+	"aws_codecommit_approval_rule_template_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.approval_rule_template_name }},{{ .parameters.repository_name }}"),
+	// No import
+	"aws_codecommit_trigger": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
