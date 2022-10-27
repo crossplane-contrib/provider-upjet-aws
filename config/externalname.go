@@ -1014,6 +1014,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_codedeploy_deployment_config": config.ParameterAsIdentifier("deployment_config_name"),
 	// CodeDeploy Deployment Groups can be imported by their app_name, a colon, and deployment_group_name
 	"aws_codedeploy_deployment_group": config.TemplatedStringAsIdentifier("deployment_group_name", "{{ .parameters.app_name }}:{{ .external_name }}"),
+
+	// codepipeline
+	//
+	// CodePipelines can be imported using the name
+	"aws_codepipeline": config.NameAsIdentifier,
 }
 
 func lambdaFunctionURL() config.ExternalName {
