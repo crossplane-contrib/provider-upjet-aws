@@ -9,10 +9,7 @@ metadata:
 spec:
   forProvider:
     artifactStore:
-    - encryptionKey:
-      - id: ${data.aws_kms_alias.s3kmskey.arn}
-        type: KMS
-      locationSelector:
+    - locationSelector:
         matchLabels:
           testing.upbound.io/example-name: codepipeline_bucket
       type: S3
@@ -25,13 +22,12 @@ spec:
       - category: Source
         configuration:
           BranchName: main
-          ConnectionArn: ${aws_codestarconnections_connection.example.arn}
-          FullRepositoryId: my-organization/example
+          RepositoryName: codepipeline-repository-example
         name: Source
         outputArtifacts:
         - source_output
         owner: AWS
-        provider: CodeStarSourceConnection
+        provider: CodeCommit
         version: "1"
       name: Source
     - action:
@@ -62,9 +58,7 @@ spec:
         provider: CloudFormation
         version: "1"
       name: Deploy
-
 ---
-
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
@@ -88,9 +82,20 @@ spec:
           }
         ]
       }
-
 ---
-
+apiVersion: codecommit.aws.upbound.io/v1beta1
+kind: Repository
+metadata:
+  name: codepipeline-repository-example
+  annotations:
+    meta.upbound.io/example-id: codepipeline/v1beta1/codepipeline
+  labels:
+    testing.upbound.io/example-name: example
+spec:
+  forProvider:
+    description: This is the Sample App Repository
+    region: us-west-1
+---
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
@@ -103,23 +108,3 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-
----
-
-apiVersion: s3.aws.upbound.io/v1beta1
-kind: BucketACL
-metadata:
-  annotations:
-    meta.upbound.io/example-id: codepipeline/v1beta1/codepipeline
-  labels:
-    testing.upbound.io/example-name: codepipeline_bucket_acl
-  name: codepipeline-bucket-acl
-spec:
-  forProvider:
-    bucketSelector:
-      matchLabels:
-        testing.upbound.io/example-name: codepipeline_bucket
-    region: us-west-1
-
----
-
