@@ -58,3 +58,29 @@ func (mg *Codepipeline) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	return nil
 }
+
+// ResolveReferences of this Webhook.
+func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetPipeline),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.TargetPipelineRef,
+		Selector:     mg.Spec.ForProvider.TargetPipelineSelector,
+		To: reference.To{
+			List:    &CodepipelineList{},
+			Managed: &Codepipeline{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TargetPipeline")
+	}
+	mg.Spec.ForProvider.TargetPipeline = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetPipelineRef = rsp.ResolvedReference
+
+	return nil
+}
