@@ -12,6 +12,3 @@ spec:
     - type: HOST_COUNT
       value: 2
     region: us-west-1
-
----
-

@@ -5,14 +5,14 @@ metadata:
     meta.upbound.io/example-id: codepipeline/v1beta1/webhook
   labels:
     testing.upbound.io/example-name: codepipeline
-  name: codepipeline
+  name: codepipeline-webhook
 spec:
   forProvider:
     authentication: GITHUB_HMAC
     authenticationConfiguration:
     - secretTokenSecretRef:
         key: example-key
-        name: example-secret
+        name: example-secret-webhook
         namespace: upbound-system
     filter:
     - jsonPath: $.ref
@@ -22,6 +22,15 @@ spec:
     targetPipelineSelector:
       matchLabels:
         testing.upbound.io/example-name: codepipeline
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret-webhook
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: "super-secret"
 ---
 apiVersion: codepipeline.aws.upbound.io/v1beta1
 kind: Codepipeline
@@ -46,13 +55,15 @@ spec:
     - action:
       - category: Source
         configuration:
-          BranchName: main
-          RepositoryName: codepipeline-repository-example
+          Branch: master
+          Repo: test
+          Owner: my-organization
+          OAuthToken: your-token-here
         name: Source
         outputArtifacts:
-        - source_output
-        owner: AWS
-        provider: CodeCommit
+        - test
+        owner: ThirdParty
+        provider: GitHub
         version: "1"
       name: Source
     - action:
@@ -60,7 +71,7 @@ spec:
         configuration:
           ProjectName: test
         inputArtifacts:
-        - source_output
+        - test
         name: Build
         outputArtifacts:
         - build_output
@@ -107,19 +118,6 @@ spec:
           }
         ]
       }
----
-apiVersion: codecommit.aws.upbound.io/v1beta1
-kind: Repository
-metadata:
-  name: codepipeline-repository-example
-  annotations:
-    meta.upbound.io/example-id: codepipeline/v1beta1/codepipeline
-  labels:
-    testing.upbound.io/example-name: example
-spec:
-  forProvider:
-    description: This is the Sample App Repository
-    region: us-west-1
 ---
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket

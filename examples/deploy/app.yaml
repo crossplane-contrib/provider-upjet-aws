@@ -10,6 +10,3 @@ spec:
   forProvider:
     computePlatform: ECS
     region: us-west-1
-
----
-
