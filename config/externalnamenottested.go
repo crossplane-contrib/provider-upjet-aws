@@ -274,10 +274,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// CodeBuild Webhooks can be imported using the CodeBuild Project name
 	"aws_codebuild_webhook": config.ParameterAsIdentifier("project_name"),
 
-	// codestarconnections
-	//
-	// CodeStar connections can be imported using the ARN
-	"aws_codestarconnections_connection": config.IdentifierFromProvider,
 	// CodeStar Host can be imported using the ARN
 	"aws_codestarconnections_host": config.IdentifierFromProvider,
 

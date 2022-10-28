@@ -1021,6 +1021,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_codepipeline": config.NameAsIdentifier,
 	// CodePipeline Webhooks can be imported by their ARN: arn:aws:codepipeline:us-west-2:123456789012:webhook:example
 	"aws_codepipeline_webhook": config.TemplatedStringAsIdentifier("name", "arn:aws:codepipeline:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:webhook:{{ .external_name }}"),
+
+	// codestarconnections
+	//
+	// CodeStar connections can be imported using the ARN
+	"aws_codestarconnections_connection": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
