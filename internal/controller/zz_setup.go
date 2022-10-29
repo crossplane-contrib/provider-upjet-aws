@@ -96,6 +96,8 @@ import (
 	approvalruletemplateassociation "github.com/upbound/provider-aws/internal/controller/codecommit/approvalruletemplateassociation"
 	repository "github.com/upbound/provider-aws/internal/controller/codecommit/repository"
 	trigger "github.com/upbound/provider-aws/internal/controller/codecommit/trigger"
+	codepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/codepipeline"
+	webhook "github.com/upbound/provider-aws/internal/controller/codepipeline/webhook"
 	cognitoidentitypoolproviderprincipaltag "github.com/upbound/provider-aws/internal/controller/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
 	pool "github.com/upbound/provider-aws/internal/controller/cognitoidentity/pool"
 	poolrolesattachment "github.com/upbound/provider-aws/internal/controller/cognitoidentity/poolrolesattachment"
@@ -109,6 +111,9 @@ import (
 	cluster "github.com/upbound/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/dax/parametergroup"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/dax/subnetgroup"
+	app "github.com/upbound/provider-aws/internal/controller/deploy/app"
+	deploymentconfig "github.com/upbound/provider-aws/internal/controller/deploy/deploymentconfig"
+	deploymentgroup "github.com/upbound/provider-aws/internal/controller/deploy/deploymentgroup"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
 	globalcluster "github.com/upbound/provider-aws/internal/controller/docdb/globalcluster"
@@ -468,6 +473,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		approvalruletemplateassociation.Setup,
 		repository.Setup,
 		trigger.Setup,
+		codepipeline.Setup,
+		webhook.Setup,
 		cognitoidentitypoolproviderprincipaltag.Setup,
 		pool.Setup,
 		poolrolesattachment.Setup,
@@ -481,6 +488,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		cluster.Setup,
 		parametergroup.Setup,
 		subnetgroup.Setup,
+		app.Setup,
+		deploymentconfig.Setup,
+		deploymentgroup.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,
 		globalcluster.Setup,

@@ -995,6 +995,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Application AutoScaling Target can be imported using the service-namespace , resource-id and scalable-dimension separated by /
 	"aws_appautoscaling_target": TemplatedStringAsIdentifierWithNoName("{{ .parameters.service_namespace }}/{{ .parameters.resource_id }}/{{ .parameters.scalable_dimension }}"),
 
+	// codecommit
+	//
 	// Codecommit repository can be imported using repository name
 	"aws_codecommit_repository": config.ParameterAsIdentifier("repository_name"),
 	// CodeCommit approval rule templates can be imported using the name
@@ -1003,6 +1005,22 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_codecommit_approval_rule_template_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.approval_rule_template_name }},{{ .parameters.repository_name }}"),
 	// No import
 	"aws_codecommit_trigger": config.IdentifierFromProvider,
+
+	// deploy
+	//
+	// CodeDeploy Applications can be imported using the name
+	"aws_codedeploy_app": config.TemplatedStringAsIdentifier("name", "{{ .parameters.application_id }}:{{ .external_name }}"),
+	// CodeDeploy Deployment Configurations can be imported using the deployment_config_name
+	"aws_codedeploy_deployment_config": config.ParameterAsIdentifier("deployment_config_name"),
+	// CodeDeploy Deployment Groups can be imported by their app_name, a colon, and deployment_group_name
+	"aws_codedeploy_deployment_group": config.TemplatedStringAsIdentifier("deployment_group_name", "{{ .parameters.app_name }}:{{ .external_name }}"),
+
+	// codepipeline
+	//
+	// CodePipelines can be imported using the name
+	"aws_codepipeline": config.NameAsIdentifier,
+	// CodePipeline Webhooks can be imported by their ARN: arn:aws:codepipeline:us-west-2:123456789012:webhook:example
+	"aws_codepipeline_webhook": config.TemplatedStringAsIdentifier("name", "arn:aws:codepipeline:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:webhook:{{ .external_name }}"),
 }
 
 func lambdaFunctionURL() config.ExternalName {
