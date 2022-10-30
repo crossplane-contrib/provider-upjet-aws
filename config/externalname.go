@@ -336,7 +336,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_glue_catalog_database": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .external_name }}"),
 	"aws_glue_catalog_table":    config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
 	"aws_glue_classifier":       config.NameAsIdentifier,
-	// "aws_glue_crawler":          config.NameAsIdentifier,
+	// Imported as CATALOG_ID:name 123456789012:MyConnection
+	// "aws_glue_connection": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .external_name }}"),
+	// "aws_glue_crawler": config.NameAsIdentifier,
 	// Imported using CATALOG-ID (AWS account ID if not custom), e.g., 123456789012
 	"aws_glue_data_catalog_encryption_settings": config.IdentifierFromProvider,
 	// "aws_glue_dev_endpoint":                     config.NameAsIdentifier,
@@ -352,6 +354,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// "aws_glue_partition_index": config.IdentifierFromProvider,
 	// Imported using ARN: arn:aws:glue:us-west-2:123456789012:registry/example
 	"aws_glue_registry": config.TemplatedStringAsIdentifier("registry_name", "arn:aws:glue:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:registry/{{ .external_name }}"),
+
+	// Imported using "name".
+	"aws_glue_security_configuration": config.NameAsIdentifier,
 
 	// iam
 	//
