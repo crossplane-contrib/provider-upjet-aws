@@ -111,6 +111,7 @@ import (
 	userpoolclient "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpoolclient"
 	userpooldomain "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooldomain"
 	userpooluicustomization "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooluicustomization"
+	instance "github.com/upbound/provider-aws/internal/controller/connect/instance"
 	cluster "github.com/upbound/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/dax/parametergroup"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/dax/subnetgroup"
@@ -133,7 +134,7 @@ import (
 	eip "github.com/upbound/provider-aws/internal/controller/ec2/eip"
 	eipassociation "github.com/upbound/provider-aws/internal/controller/ec2/eipassociation"
 	flowlog "github.com/upbound/provider-aws/internal/controller/ec2/flowlog"
-	instance "github.com/upbound/provider-aws/internal/controller/ec2/instance"
+	instanceec2 "github.com/upbound/provider-aws/internal/controller/ec2/instance"
 	internetgateway "github.com/upbound/provider-aws/internal/controller/ec2/internetgateway"
 	keypair "github.com/upbound/provider-aws/internal/controller/ec2/keypair"
 	launchtemplate "github.com/upbound/provider-aws/internal/controller/ec2/launchtemplate"
@@ -492,6 +493,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userpoolclient.Setup,
 		userpooldomain.Setup,
 		userpooluicustomization.Setup,
+		instance.Setup,
 		cluster.Setup,
 		parametergroup.Setup,
 		subnetgroup.Setup,
@@ -514,7 +516,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eip.Setup,
 		eipassociation.Setup,
 		flowlog.Setup,
-		instance.Setup,
+		instanceec2.Setup,
 		internetgateway.Setup,
 		keypair.Setup,
 		launchtemplate.Setup,

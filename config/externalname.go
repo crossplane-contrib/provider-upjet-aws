@@ -1038,6 +1038,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// CodeStar notification rule can be imported using the ARN
 	"aws_codestarnotifications_notification_rule": config.IdentifierFromProvider,
+
+	// Connect instances can be imported using the id
+	"aws_connect_instance": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
