@@ -65,6 +65,22 @@ spec:
 
 ---
 
+apiVersion: codestarconnections.aws.upbound.io/v1beta1
+kind: Connection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codepipeline/v1beta1/codepipeline
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example-connection
+    providerType: GitHub
+    region: us-west-1
+
+---
+
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:

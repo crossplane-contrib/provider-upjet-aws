@@ -274,18 +274,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// CodeBuild Webhooks can be imported using the CodeBuild Project name
 	"aws_codebuild_webhook": config.ParameterAsIdentifier("project_name"),
 
-	// codestarconnections
-	//
-	// CodeStar connections can be imported using the ARN
-	"aws_codestarconnections_connection": config.IdentifierFromProvider,
-	// CodeStar Host can be imported using the ARN
-	"aws_codestarconnections_host": config.IdentifierFromProvider,
-
-	// codestarnotifications
-	//
-	// CodeStar notification rule can be imported using the ARN
-	"aws_codestarnotifications_notification_rule": config.IdentifierFromProvider,
-
 	// cognitoidp
 	//
 	// Cognito User Groups can be imported using the user_pool_id/name attributes concatenated
