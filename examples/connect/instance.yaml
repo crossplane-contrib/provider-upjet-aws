@@ -10,9 +10,6 @@ spec:
   forProvider:
     identityManagementType: CONNECT_MANAGED
     inboundCallsEnabled: true
-    instanceAlias: friendly-name-connect
+    instanceAlias: friendly-name-connect-${Rand.RFC1123Subdomain}
     outboundCallsEnabled: true
-    region: us-west-1
-
----
-
+    region: us-east-1
