@@ -16,13 +16,7 @@ spec:
     resourceSelector:
       matchLabels:
         testing.upbound.io/example-name: code
-    target:
-    - addressSelector:
-        matchLabels:
-          testing.upbound.io/example-name: notif
-
 ---
-
 apiVersion: codecommit.aws.upbound.io/v1beta1
 kind: Repository
 metadata:
@@ -34,20 +28,3 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-
----
-
-apiVersion: sns.aws.upbound.io/v1beta1
-kind: Topic
-metadata:
-  annotations:
-    meta.upbound.io/example-id: codestarnotifications/v1beta1/notificationrule
-  labels:
-    testing.upbound.io/example-name: notif
-  name: notif
-spec:
-  forProvider:
-    region: us-west-1
-
----
-
