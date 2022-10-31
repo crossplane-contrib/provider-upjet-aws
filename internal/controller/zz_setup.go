@@ -99,6 +99,7 @@ import (
 	codepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/codepipeline"
 	webhook "github.com/upbound/provider-aws/internal/controller/codepipeline/webhook"
 	connection "github.com/upbound/provider-aws/internal/controller/codestarconnections/connection"
+	host "github.com/upbound/provider-aws/internal/controller/codestarconnections/host"
 	cognitoidentitypoolproviderprincipaltag "github.com/upbound/provider-aws/internal/controller/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
 	pool "github.com/upbound/provider-aws/internal/controller/cognitoidentity/pool"
 	poolrolesattachment "github.com/upbound/provider-aws/internal/controller/cognitoidentity/poolrolesattachment"
@@ -477,6 +478,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		codepipeline.Setup,
 		webhook.Setup,
 		connection.Setup,
+		host.Setup,
 		cognitoidentitypoolproviderprincipaltag.Setup,
 		pool.Setup,
 		poolrolesattachment.Setup,

@@ -15,3 +15,12 @@ func (l *ConnectionList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this HostList.
+func (l *HostList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
