@@ -1026,6 +1026,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// CodeStar connections can be imported using the ARN
 	"aws_codestarconnections_connection": config.IdentifierFromProvider,
+	// CodeStar Host can be imported using the ARN
+	"aws_codestarconnections_host": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
