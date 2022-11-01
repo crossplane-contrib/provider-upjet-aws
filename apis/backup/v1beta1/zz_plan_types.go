@@ -89,7 +89,7 @@ type PlanParameters struct {
 	// +kubebuilder:validation:Required
 	Rule []RuleParameters `json:"rule" tf:"rule,omitempty"`
 
-	// Metadata that you can assign to help organize the plans you create. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }

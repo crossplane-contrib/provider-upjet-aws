@@ -33,7 +33,7 @@ type SAMLProviderParameters struct {
 	// +kubebuilder:validation:Required
 	SAMLMetadataDocument *string `json:"samlMetadataDocument" tf:"saml_metadata_document,omitempty"`
 
-	// Map of resource tags for the IAM SAML provider. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }

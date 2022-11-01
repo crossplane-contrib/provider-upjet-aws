@@ -884,8 +884,7 @@ spec:
                       type: object
                     type: array
                   tags:
-                    description: Set of maps containing resource tags. Conflicts with
-                      tag. See Tags below for more details.
+                    description: Key-value map of resource tags.
                     items:
                       additionalProperties:
                         type: string

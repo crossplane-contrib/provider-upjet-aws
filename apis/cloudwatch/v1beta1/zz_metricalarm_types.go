@@ -104,7 +104,7 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
 
-	// A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 

@@ -106,8 +106,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: A list of tags to be added to this resource. A tag
-                      is a key-value pair.
+                    description: Key-value map of resource tags.
                     type: object
                   userName:
                     description: The username of the user.

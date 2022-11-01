@@ -30,7 +30,7 @@ type OpenIDConnectProviderParameters struct {
 	// +kubebuilder:validation:Required
 	ClientIDList []*string `json:"clientIdList" tf:"client_id_list,omitempty"`
 
-	// Map of resource tags for the IAM OIDC provider. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 

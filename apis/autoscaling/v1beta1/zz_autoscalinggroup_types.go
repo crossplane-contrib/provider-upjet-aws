@@ -179,7 +179,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Tag []TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 
-	// Set of maps containing resource tags. Conflicts with tag. See Tags below for more details.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags []map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 

@@ -148,7 +148,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags to assign to the resource.
+                    description: Key-value map of resource tags.
                     type: object
                   targetRole:
                     description: Indicates whether the DB proxy endpoint can be used

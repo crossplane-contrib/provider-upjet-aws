@@ -22,7 +22,7 @@ type BucketIntelligentTieringConfigurationFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// All of these tags must exist in the object's tag set in order for the configuration to apply.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }

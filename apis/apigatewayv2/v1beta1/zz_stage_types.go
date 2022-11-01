@@ -171,7 +171,7 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	StageVariables map[string]*string `json:"stageVariables,omitempty" tf:"stage_variables,omitempty"`
 
-	// A map of tags to assign to the stage. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }

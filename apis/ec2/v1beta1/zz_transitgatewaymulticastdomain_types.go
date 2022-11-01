@@ -47,7 +47,7 @@ type TransitGatewayMulticastDomainParameters struct {
 	// +kubebuilder:validation:Optional
 	StaticSourcesSupport *string `json:"staticSourcesSupport,omitempty" tf:"static_sources_support,omitempty"`
 
-	// Key-value tags for the EC2 Transit Gateway Multicast Domain. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 

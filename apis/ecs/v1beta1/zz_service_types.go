@@ -268,7 +268,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceRegistries []ServiceRegistriesParameters `json:"serviceRegistries,omitempty" tf:"service_registries,omitempty"`
 
-	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
