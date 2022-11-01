@@ -111,6 +111,7 @@ import (
 	userpoolclient "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpoolclient"
 	userpooldomain "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooldomain"
 	userpooluicustomization "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooluicustomization"
+	botassociation "github.com/upbound/provider-aws/internal/controller/connect/botassociation"
 	instance "github.com/upbound/provider-aws/internal/controller/connect/instance"
 	cluster "github.com/upbound/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/dax/parametergroup"
@@ -493,6 +494,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userpoolclient.Setup,
 		userpooldomain.Setup,
 		userpooluicustomization.Setup,
+		botassociation.Setup,
 		instance.Setup,
 		cluster.Setup,
 		parametergroup.Setup,

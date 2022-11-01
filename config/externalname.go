@@ -1039,6 +1039,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// CodeStar notification rule can be imported using the ARN
 	"aws_codestarnotifications_notification_rule": config.IdentifierFromProvider,
 
+	// connect
+	//
+	// aws_connect_bot_association can be imported by using the Amazon Connect instance ID, Lex (V1) bot name, and Lex (V1) bot region separated by colons (:)
+	// TODO: lex_bot.lex_region parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
+	"aws_connect_bot_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }}:{{ .parameters.lex_bot.name }}:{{ .parameters.lex_bot.lex_region }}"),
 	// Connect instances can be imported using the id
 	"aws_connect_instance": config.IdentifierFromProvider,
 }
