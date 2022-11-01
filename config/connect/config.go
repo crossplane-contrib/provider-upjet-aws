@@ -26,4 +26,12 @@ func Configure(p *config.Provider) {
 			},
 		}
 	})
+	p.AddResourceConfigurator("aws_connect_hours_of_operation", func(r *config.Resource) {
+		r.References = map[string]config.Reference{
+			"instance_id": {
+				Type:      "github.com/upbound/provider-aws/apis/connect/v1beta1.Instance",
+				Extractor: "github.com/upbound/upjet/pkg/resource.ExtractResourceID()",
+			},
+		}
+	})
 }

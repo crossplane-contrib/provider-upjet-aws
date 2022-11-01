@@ -24,12 +24,27 @@ spec:
       - hours: 9
         minutes: 0
     description: Monday office hours
-    instanceId: aaaaaaaa-bbbb-cccc-dddd-111111111111
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     name: Office Hours
-    region: us-west-1
+    region: us-east-1
     tags:
       Name: Example Hours of Operation
     timeZone: EST
-
 ---
-
+apiVersion: connect.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/botassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identityManagementType: CONNECT_MANAGED
+    inboundCallsEnabled: true
+    instanceAlias: friendly-name-connect-${Rand.RFC1123Subdomain}
+    outboundCallsEnabled: true
+    region: us-east-1

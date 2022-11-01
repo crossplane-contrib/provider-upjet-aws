@@ -24,7 +24,9 @@ spec:
       - hours: 9
         minutes: 0
     description: Monday office hours
-    instanceId: aaaaaaaa-bbbb-cccc-dddd-111111111111
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     name: Office Hours
     region: us-west-1
     tags:
