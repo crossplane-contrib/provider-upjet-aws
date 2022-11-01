@@ -306,8 +306,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Remediation Configurations can be imported using the name config_rule_name
 	"aws_config_remediation_configuration": config.ParameterAsIdentifier("config_rule_name"),
 
-	// Amazon Connect Hours of Operations can be imported using the instance_id and hours_of_operation_id separated by a colon (:)
-	"aws_connect_hours_of_operation": config.IdentifierFromProvider,
 	// aws_connect_lambda_function_association can be imported using the instance_id and function_arn separated by a comma (,)
 	"aws_connect_lambda_function_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }},{{ .parameters.function_arn }}"),
 	// Amazon Connect Queues can be imported using the instance_id and queue_id separated by a colon (:)
