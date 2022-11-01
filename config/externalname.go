@@ -1046,6 +1046,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_connect_bot_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }}:{{ (index .parameters.lex_bot 0).name }}:{{ (index .parameters.lex_bot 0).lex_region }}"),
 	// Amazon Connect Contact Flows can be imported using the instance_id and contact_flow_id separated by a colon (:)
 	"aws_connect_contact_flow": config.IdentifierFromProvider,
+	// Amazon Connect Contact Flow Modules can be imported using the instance_id and contact_flow_module_id separated by a colon (:)
+	"aws_connect_contact_flow_module": config.IdentifierFromProvider,
 	// Connect instances can be imported using the id
 	"aws_connect_instance": config.IdentifierFromProvider,
 }

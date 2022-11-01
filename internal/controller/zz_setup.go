@@ -113,6 +113,7 @@ import (
 	userpooluicustomization "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooluicustomization"
 	botassociation "github.com/upbound/provider-aws/internal/controller/connect/botassociation"
 	contactflow "github.com/upbound/provider-aws/internal/controller/connect/contactflow"
+	contactflowmodule "github.com/upbound/provider-aws/internal/controller/connect/contactflowmodule"
 	instance "github.com/upbound/provider-aws/internal/controller/connect/instance"
 	cluster "github.com/upbound/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/dax/parametergroup"
@@ -497,6 +498,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userpooluicustomization.Setup,
 		botassociation.Setup,
 		contactflow.Setup,
+		contactflowmodule.Setup,
 		instance.Setup,
 		cluster.Setup,
 		parametergroup.Setup,
