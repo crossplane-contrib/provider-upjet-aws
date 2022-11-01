@@ -1044,6 +1044,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// aws_connect_bot_association can be imported by using the Amazon Connect instance ID, Lex (V1) bot name, and Lex (V1) bot region separated by colons (:)
 	// TODO: lex_bot.lex_region parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
 	"aws_connect_bot_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }}:{{ (index .parameters.lex_bot 0).name }}:{{ (index .parameters.lex_bot 0).lex_region }}"),
+	// Amazon Connect Contact Flows can be imported using the instance_id and contact_flow_id separated by a colon (:)
+	"aws_connect_contact_flow": config.IdentifierFromProvider,
 	// Connect instances can be imported using the id
 	"aws_connect_instance": config.IdentifierFromProvider,
 }
