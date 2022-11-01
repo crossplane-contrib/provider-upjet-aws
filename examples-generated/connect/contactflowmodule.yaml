@@ -20,7 +20,9 @@ spec:
       \"\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"DisplayName\": \"Error\",\n\t\t\t\t\t\"ReferenceName\":
       \"Error\",\n\t\t\t\t\t\"Description\": \"\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t}\n"
     description: Example Contact Flow Module Description
-    instanceId: aaaaaaaa-bbbb-cccc-dddd-111111111111
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     name: Example
     region: us-west-1
     tags:
