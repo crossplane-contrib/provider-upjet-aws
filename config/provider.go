@@ -130,6 +130,7 @@ func GetProvider() *config.Provider {
 			AddExternalTagsField(),
 			ExternalNameConfigurations(),
 			NamePrefixRemoval(),
+			DocumentationForTags(),
 		),
 	)
 
