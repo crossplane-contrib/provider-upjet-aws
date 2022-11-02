@@ -116,6 +116,7 @@ import (
 	contactflowmodule "github.com/upbound/provider-aws/internal/controller/connect/contactflowmodule"
 	hoursofoperation "github.com/upbound/provider-aws/internal/controller/connect/hoursofoperation"
 	instance "github.com/upbound/provider-aws/internal/controller/connect/instance"
+	lambdafunctionassociation "github.com/upbound/provider-aws/internal/controller/connect/lambdafunctionassociation"
 	cluster "github.com/upbound/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/dax/parametergroup"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/dax/subnetgroup"
@@ -502,6 +503,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		contactflowmodule.Setup,
 		hoursofoperation.Setup,
 		instance.Setup,
+		lambdafunctionassociation.Setup,
 		cluster.Setup,
 		parametergroup.Setup,
 		subnetgroup.Setup,

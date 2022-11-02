@@ -306,8 +306,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Remediation Configurations can be imported using the name config_rule_name
 	"aws_config_remediation_configuration": config.ParameterAsIdentifier("config_rule_name"),
 
-	// aws_connect_lambda_function_association can be imported using the instance_id and function_arn separated by a comma (,)
-	"aws_connect_lambda_function_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }},{{ .parameters.function_arn }}"),
 	// Amazon Connect Queues can be imported using the instance_id and queue_id separated by a colon (:)
 	"aws_connect_queue": config.IdentifierFromProvider,
 	// Amazon Connect Quick Connects can be imported using the instance_id and quick_connect_id separated by a colon (:)

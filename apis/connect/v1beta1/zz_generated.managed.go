@@ -336,3 +336,69 @@ func (mg *Instance) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetai
 func (mg *Instance) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this LambdaFunctionAssociation.
+func (mg *LambdaFunctionAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LambdaFunctionAssociation.
+func (mg *LambdaFunctionAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LambdaFunctionAssociation.
+func (mg *LambdaFunctionAssociation) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LambdaFunctionAssociation.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LambdaFunctionAssociation) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LambdaFunctionAssociation.
+func (mg *LambdaFunctionAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LambdaFunctionAssociation.
+func (mg *LambdaFunctionAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LambdaFunctionAssociation.
+func (mg *LambdaFunctionAssociation) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LambdaFunctionAssociation.
+func (mg *LambdaFunctionAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LambdaFunctionAssociation.
+func (mg *LambdaFunctionAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LambdaFunctionAssociation.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LambdaFunctionAssociation) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LambdaFunctionAssociation.
+func (mg *LambdaFunctionAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LambdaFunctionAssociation.
+func (mg *LambdaFunctionAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

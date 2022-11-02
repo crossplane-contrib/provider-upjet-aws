@@ -1052,6 +1052,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_connect_hours_of_operation": config.IdentifierFromProvider,
 	// Connect instances can be imported using the id
 	"aws_connect_instance": config.IdentifierFromProvider,
+	// aws_connect_lambda_function_association can be imported using the instance_id and function_arn separated by a comma (,)
+	"aws_connect_lambda_function_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }},{{ .parameters.function_arn }}"),
 }
 
 func lambdaFunctionURL() config.ExternalName {
