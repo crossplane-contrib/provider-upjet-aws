@@ -117,6 +117,7 @@ import (
 	hoursofoperation "github.com/upbound/provider-aws/internal/controller/connect/hoursofoperation"
 	instance "github.com/upbound/provider-aws/internal/controller/connect/instance"
 	lambdafunctionassociation "github.com/upbound/provider-aws/internal/controller/connect/lambdafunctionassociation"
+	queue "github.com/upbound/provider-aws/internal/controller/connect/queue"
 	cluster "github.com/upbound/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/dax/parametergroup"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/dax/subnetgroup"
@@ -386,7 +387,7 @@ import (
 	signingprofile "github.com/upbound/provider-aws/internal/controller/signer/signingprofile"
 	topic "github.com/upbound/provider-aws/internal/controller/sns/topic"
 	topicsubscription "github.com/upbound/provider-aws/internal/controller/sns/topicsubscription"
-	queue "github.com/upbound/provider-aws/internal/controller/sqs/queue"
+	queuesqs "github.com/upbound/provider-aws/internal/controller/sqs/queue"
 	queuepolicy "github.com/upbound/provider-aws/internal/controller/sqs/queuepolicy"
 	server "github.com/upbound/provider-aws/internal/controller/transfer/server"
 	usertransfer "github.com/upbound/provider-aws/internal/controller/transfer/user"
@@ -504,6 +505,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		hoursofoperation.Setup,
 		instance.Setup,
 		lambdafunctionassociation.Setup,
+		queue.Setup,
 		cluster.Setup,
 		parametergroup.Setup,
 		subnetgroup.Setup,
@@ -773,7 +775,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		signingprofile.Setup,
 		topic.Setup,
 		topicsubscription.Setup,
-		queue.Setup,
+		queuesqs.Setup,
 		queuepolicy.Setup,
 		server.Setup,
 		usertransfer.Setup,
