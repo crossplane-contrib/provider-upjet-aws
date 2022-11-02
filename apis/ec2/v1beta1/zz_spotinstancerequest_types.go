@@ -75,7 +75,7 @@ type SpotInstanceRequestEBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// A map of tags to assign to the Spot Instance Request. These tags are not automatically applied to the launched Instance. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -152,7 +152,7 @@ type SpotInstanceRequestMetadataOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
-	// A map of tags to assign to the Spot Instance Request. These tags are not automatically applied to the launched Instance. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
 }
@@ -372,7 +372,7 @@ type SpotInstanceRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// A map of tags to assign to the Spot Instance Request. These tags are not automatically applied to the launched Instance. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -410,7 +410,7 @@ type SpotInstanceRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
 
-	// A map of tags to assign to the Spot Instance Request. These tags are not automatically applied to the launched Instance. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	VolumeTags map[string]*string `json:"volumeTags,omitempty" tf:"volume_tags,omitempty"`
 
@@ -440,7 +440,7 @@ type SpotInstanceRequestRootBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// A map of tags to assign to the Spot Instance Request. These tags are not automatically applied to the launched Instance. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 

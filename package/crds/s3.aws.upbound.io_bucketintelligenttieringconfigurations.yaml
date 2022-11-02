@@ -154,8 +154,7 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
-                          description: All of these tags must exist in the object's
-                            tag set in order for the configuration to apply.
+                          description: Key-value map of resource tags.
                           type: object
                       type: object
                     type: array

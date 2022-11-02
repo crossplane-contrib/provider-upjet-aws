@@ -258,10 +258,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: A map of tags to associate with the alarm. Up to
-                      50 tags are allowed. If configured with a provider default_tags
-                      configuration block present, tags with matching keys will overwrite
-                      those defined at the provider-level.
+                    description: Key-value map of resource tags.
                     type: object
                 required:
                 - alarmRule

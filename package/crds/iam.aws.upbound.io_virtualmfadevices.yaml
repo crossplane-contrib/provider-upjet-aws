@@ -70,10 +70,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: Map of resource tags for the virtual mfa device.
-                      If configured with a provider default_tags configuration block
-                      present, tags with matching keys will overwrite those defined
-                      at the provider-level.
+                    description: Key-value map of resource tags.
                     type: object
                   virtualMfaDeviceName:
                     description: The name of the virtual MFA device. Use with path

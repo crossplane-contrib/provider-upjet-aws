@@ -131,11 +131,7 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
-                          description: A map of tags to assign to the Spot Instance
-                            Request. These tags are not automatically applied to the
-                            launched Instance. If configured with a provider default_tags
-                            configuration block present, tags with matching keys will
-                            overwrite those defined at the provider-level.
+                          description: Key-value map of resource tags.
                           type: object
                         throughput:
                           type: number
@@ -229,11 +225,7 @@ spec:
                         httpTokens:
                           type: string
                         instanceMetadataTags:
-                          description: A map of tags to assign to the Spot Instance
-                            Request. These tags are not automatically applied to the
-                            launched Instance. If configured with a provider default_tags
-                            configuration block present, tags with matching keys will
-                            overwrite those defined at the provider-level.
+                          description: Key-value map of resource tags.
                           type: string
                       type: object
                     type: array
@@ -282,11 +274,7 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
-                          description: A map of tags to assign to the Spot Instance
-                            Request. These tags are not automatically applied to the
-                            launched Instance. If configured with a provider default_tags
-                            configuration block present, tags with matching keys will
-                            overwrite those defined at the provider-level.
+                          description: Key-value map of resource tags.
                           type: object
                         throughput:
                           type: number
@@ -392,11 +380,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: A map of tags to assign to the Spot Instance Request.
-                      These tags are not automatically applied to the launched Instance.
-                      If configured with a provider default_tags configuration block
-                      present, tags with matching keys will overwrite those defined
-                      at the provider-level.
+                    description: Key-value map of resource tags.
                     type: object
                   tenancy:
                     type: string
@@ -421,11 +405,7 @@ spec:
                   volumeTags:
                     additionalProperties:
                       type: string
-                    description: A map of tags to assign to the Spot Instance Request.
-                      These tags are not automatically applied to the launched Instance.
-                      If configured with a provider default_tags configuration block
-                      present, tags with matching keys will overwrite those defined
-                      at the provider-level.
+                    description: Key-value map of resource tags.
                     type: object
                   vpcSecurityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.

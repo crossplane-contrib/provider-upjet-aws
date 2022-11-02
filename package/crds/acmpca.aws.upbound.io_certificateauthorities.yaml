@@ -233,10 +233,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: Specifies a key-value map of user-defined tags that
-                      are attached to the certificate authority. If configured with
-                      a provider default_tags configuration block present, tags with
-                      matching keys will overwrite those defined at the provider-level.
+                    description: Key-value map of resource tags.
                     type: object
                   type:
                     description: 'The type of the certificate authority. Defaults

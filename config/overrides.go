@@ -165,3 +165,16 @@ func AddExternalTagsField() config.ResourceOption {
 		}
 	}
 }
+
+// DocumentationForTags overrides the API documentation of the tags fields since
+// it contains Terraform-specific feature call out.
+func DocumentationForTags() config.ResourceOption {
+	return func(r *config.Resource) {
+		if r.MetaResource == nil {
+			return
+		}
+		if _, ok := r.MetaResource.ArgumentDocs["tags"]; ok {
+			r.MetaResource.ArgumentDocs["tags"] = "- (Optional) Key-value map of resource tags."
+		}
+	}
+}

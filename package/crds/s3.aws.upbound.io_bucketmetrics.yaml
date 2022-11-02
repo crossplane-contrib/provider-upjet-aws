@@ -151,7 +151,7 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
-                          description: Object tags for filtering (up to 10).
+                          description: Key-value map of resource tags.
                           type: object
                       type: object
                     type: array
