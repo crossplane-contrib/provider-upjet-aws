@@ -2234,6 +2234,16 @@ func (in *RoutingProfileParameters) DeepCopyInto(out *RoutingProfileParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.DefaultOutboundQueueIDRef != nil {
+		in, out := &in.DefaultOutboundQueueIDRef, &out.DefaultOutboundQueueIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DefaultOutboundQueueIDSelector != nil {
+		in, out := &in.DefaultOutboundQueueIDSelector, &out.DefaultOutboundQueueIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -2243,6 +2253,16 @@ func (in *RoutingProfileParameters) DeepCopyInto(out *RoutingProfileParameters) 
 		in, out := &in.InstanceID, &out.InstanceID
 		*out = new(string)
 		**out = **in
+	}
+	if in.InstanceIDRef != nil {
+		in, out := &in.InstanceIDRef, &out.InstanceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.InstanceIDSelector != nil {
+		in, out := &in.InstanceIDSelector, &out.InstanceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MediaConcurrencies != nil {
 		in, out := &in.MediaConcurrencies, &out.MediaConcurrencies

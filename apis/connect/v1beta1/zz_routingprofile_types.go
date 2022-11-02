@@ -103,16 +103,36 @@ type RoutingProfileObservation struct {
 type RoutingProfileParameters struct {
 
 	// Specifies the default outbound queue for the Routing Profile.
-	// +kubebuilder:validation:Required
-	DefaultOutboundQueueID *string `json:"defaultOutboundQueueId" tf:"default_outbound_queue_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("queue_id",true)
+	// +kubebuilder:validation:Optional
+	DefaultOutboundQueueID *string `json:"defaultOutboundQueueId,omitempty" tf:"default_outbound_queue_id,omitempty"`
+
+	// Reference to a Queue in connect to populate defaultOutboundQueueId.
+	// +kubebuilder:validation:Optional
+	DefaultOutboundQueueIDRef *v1.Reference `json:"defaultOutboundQueueIdRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in connect to populate defaultOutboundQueueId.
+	// +kubebuilder:validation:Optional
+	DefaultOutboundQueueIDSelector *v1.Selector `json:"defaultOutboundQueueIdSelector,omitempty" tf:"-"`
 
 	// Specifies the description of the Routing Profile.
 	// +kubebuilder:validation:Required
 	Description *string `json:"description" tf:"description,omitempty"`
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
-	// +kubebuilder:validation:Required
-	InstanceID *string `json:"instanceId" tf:"instance_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Reference to a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// One or more media_concurrencies blocks that specify the channels that agents can handle in the Contact Control Panel (CCP) for this Routing Profile. The media_concurrencies block is documented below.
 	// +kubebuilder:validation:Required

@@ -54,4 +54,16 @@ func Configure(p *config.Provider) {
 			},
 		}
 	})
+	p.AddResourceConfigurator("aws_connect_routing_profile", func(r *config.Resource) {
+		r.References = map[string]config.Reference{
+			"instance_id": {
+				Type:      "github.com/upbound/provider-aws/apis/connect/v1beta1.Instance",
+				Extractor: "github.com/upbound/upjet/pkg/resource.ExtractResourceID()",
+			},
+			"default_outbound_queue_id": {
+				Type:      "github.com/upbound/provider-aws/apis/connect/v1beta1.Queue",
+				Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("queue_id",true)`,
+			},
+		}
+	})
 }
