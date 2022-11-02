@@ -1860,6 +1860,16 @@ func (in *QuickConnectParameters) DeepCopyInto(out *QuickConnectParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.InstanceIDRef != nil {
+		in, out := &in.InstanceIDRef, &out.InstanceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.InstanceIDSelector != nil {
+		in, out := &in.InstanceIDSelector, &out.InstanceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
