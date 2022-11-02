@@ -9,8 +9,12 @@ metadata:
 spec:
   forProvider:
     description: Example Description
-    hoursOfOperationId: 12345678-1234-1234-1234-123456789012
-    instanceId: aaaaaaaa-bbbb-cccc-dddd-111111111111
+    hoursOfOperationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     name: Example Name
     region: us-west-1
     tags:

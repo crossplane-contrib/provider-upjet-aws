@@ -1488,10 +1488,30 @@ func (in *QueueParameters) DeepCopyInto(out *QueueParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.HoursOfOperationIDRef != nil {
+		in, out := &in.HoursOfOperationIDRef, &out.HoursOfOperationIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.HoursOfOperationIDSelector != nil {
+		in, out := &in.HoursOfOperationIDSelector, &out.HoursOfOperationIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.InstanceID != nil {
 		in, out := &in.InstanceID, &out.InstanceID
 		*out = new(string)
 		**out = **in
+	}
+	if in.InstanceIDRef != nil {
+		in, out := &in.InstanceIDRef, &out.InstanceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.InstanceIDSelector != nil {
+		in, out := &in.InstanceIDSelector, &out.InstanceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MaxContacts != nil {
 		in, out := &in.MaxContacts, &out.MaxContacts

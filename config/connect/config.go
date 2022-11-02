@@ -34,4 +34,16 @@ func Configure(p *config.Provider) {
 			},
 		}
 	})
+	p.AddResourceConfigurator("aws_connect_queue", func(r *config.Resource) {
+		r.References = map[string]config.Reference{
+			"instance_id": {
+				Type:      "github.com/upbound/provider-aws/apis/connect/v1beta1.Instance",
+				Extractor: "github.com/upbound/upjet/pkg/resource.ExtractResourceID()",
+			},
+			"hours_of_operation_id": {
+				Type:      "github.com/upbound/provider-aws/apis/connect/v1beta1.HoursOfOperation",
+				Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("hours_of_operation_id",true)`,
+			},
+		}
+	})
 }
