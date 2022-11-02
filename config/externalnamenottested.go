@@ -306,8 +306,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Remediation Configurations can be imported using the name config_rule_name
 	"aws_config_remediation_configuration": config.ParameterAsIdentifier("config_rule_name"),
 
-	// Amazon Connect Quick Connects can be imported using the instance_id and quick_connect_id separated by a colon (:)
-	"aws_connect_quick_connect": config.IdentifierFromProvider,
 	// Amazon Connect Routing Profiles can be imported using the instance_id and routing_profile_id separated by a colon (:)
 	"aws_connect_routing_profile": config.IdentifierFromProvider,
 	// Amazon Connect Security Profiles can be imported using the instance_id and security_profile_id separated by a colon (:)

@@ -118,6 +118,7 @@ import (
 	instance "github.com/upbound/provider-aws/internal/controller/connect/instance"
 	lambdafunctionassociation "github.com/upbound/provider-aws/internal/controller/connect/lambdafunctionassociation"
 	queue "github.com/upbound/provider-aws/internal/controller/connect/queue"
+	quickconnect "github.com/upbound/provider-aws/internal/controller/connect/quickconnect"
 	cluster "github.com/upbound/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/dax/parametergroup"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/dax/subnetgroup"
@@ -506,6 +507,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		instance.Setup,
 		lambdafunctionassociation.Setup,
 		queue.Setup,
+		quickconnect.Setup,
 		cluster.Setup,
 		parametergroup.Setup,
 		subnetgroup.Setup,
