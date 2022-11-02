@@ -1,0 +1,12 @@
+name: End to End Testing
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  e2e:
+    uses: upbound/uptest/.github/workflows/pr-comment-trigger.yml@main
+    secrets:
+      UPTEST_CLOUD_CREDENTIALS: ${{ secrets.UPTEST_CLOUD_CREDENTIALS }}
+      UPTEST_DATASOURCE: ${{ secrets.UPTEST_DATASOURCE }}
