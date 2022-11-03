@@ -301,6 +301,16 @@ func (in *CloudwatchLoggingOptionsParameters) DeepCopyInto(out *CloudwatchLoggin
 		*out = new(string)
 		**out = **in
 	}
+	if in.LogStreamArnRef != nil {
+		in, out := &in.LogStreamArnRef, &out.LogStreamArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogStreamArnSelector != nil {
+		in, out := &in.LogStreamArnSelector, &out.LogStreamArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)

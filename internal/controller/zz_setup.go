@@ -91,7 +91,11 @@ import (
 	dashboard "github.com/upbound/provider-aws/internal/controller/cloudwatch/dashboard"
 	metricalarm "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricalarm"
 	metricstream "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricstream"
+	definition "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/definition"
 	group "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/group"
+	metricfilter "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/metricfilter"
+	resourcepolicy "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/resourcepolicy"
+	stream "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/stream"
 	cognitoidentitypoolproviderprincipaltag "github.com/upbound/provider-aws/internal/controller/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
 	pool "github.com/upbound/provider-aws/internal/controller/cognitoidentity/pool"
 	poolrolesattachment "github.com/upbound/provider-aws/internal/controller/cognitoidentity/poolrolesattachment"
@@ -221,7 +225,7 @@ import (
 	datacatalogencryptionsettings "github.com/upbound/provider-aws/internal/controller/glue/datacatalogencryptionsettings"
 	job "github.com/upbound/provider-aws/internal/controller/glue/job"
 	registry "github.com/upbound/provider-aws/internal/controller/glue/registry"
-	resourcepolicy "github.com/upbound/provider-aws/internal/controller/glue/resourcepolicy"
+	resourcepolicyglue "github.com/upbound/provider-aws/internal/controller/glue/resourcepolicy"
 	trigger "github.com/upbound/provider-aws/internal/controller/glue/trigger"
 	userdefinedfunction "github.com/upbound/provider-aws/internal/controller/glue/userdefinedfunction"
 	workflow "github.com/upbound/provider-aws/internal/controller/glue/workflow"
@@ -254,7 +258,7 @@ import (
 	thing "github.com/upbound/provider-aws/internal/controller/iot/thing"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
-	stream "github.com/upbound/provider-aws/internal/controller/kinesis/stream"
+	streamkinesis "github.com/upbound/provider-aws/internal/controller/kinesis/stream"
 	streamconsumer "github.com/upbound/provider-aws/internal/controller/kinesis/streamconsumer"
 	application "github.com/upbound/provider-aws/internal/controller/kinesisanalytics/application"
 	applicationkinesisanalyticsv2 "github.com/upbound/provider-aws/internal/controller/kinesisanalyticsv2/application"
@@ -459,7 +463,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		dashboard.Setup,
 		metricalarm.Setup,
 		metricstream.Setup,
+		definition.Setup,
 		group.Setup,
+		metricfilter.Setup,
+		resourcepolicy.Setup,
+		stream.Setup,
 		cognitoidentitypoolproviderprincipaltag.Setup,
 		pool.Setup,
 		poolrolesattachment.Setup,
@@ -589,7 +597,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		datacatalogencryptionsettings.Setup,
 		job.Setup,
 		registry.Setup,
-		resourcepolicy.Setup,
+		resourcepolicyglue.Setup,
 		trigger.Setup,
 		userdefinedfunction.Setup,
 		workflow.Setup,
@@ -622,7 +630,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		thing.Setup,
 		clusterkafka.Setup,
 		configuration.Setup,
-		stream.Setup,
+		streamkinesis.Setup,
 		streamconsumer.Setup,
 		application.Setup,
 		applicationkinesisanalyticsv2.Setup,
