@@ -306,8 +306,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Remediation Configurations can be imported using the name config_rule_name
 	"aws_config_remediation_configuration": config.ParameterAsIdentifier("config_rule_name"),
 
-	// Amazon Connect Security Profiles can be imported using the instance_id and security_profile_id separated by a colon (:)
-	"aws_connect_security_profile": config.IdentifierFromProvider,
 	// Amazon Connect User Hierarchy Groups can be imported using the instance_id and hierarchy_group_id separated by a colon (:)
 	"aws_connect_user_hierarchy_group": config.IdentifierFromProvider,
 	// Amazon Connect User Hierarchy Structures can be imported using the instance_id

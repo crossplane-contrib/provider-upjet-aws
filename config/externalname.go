@@ -1060,6 +1060,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_connect_quick_connect": config.IdentifierFromProvider,
 	// Amazon Connect Routing Profiles can be imported using the instance_id and routing_profile_id separated by a colon (:)
 	"aws_connect_routing_profile": config.IdentifierFromProvider,
+	// Amazon Connect Security Profiles can be imported using the instance_id and security_profile_id separated by a colon (:)
+	"aws_connect_security_profile": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

@@ -120,6 +120,7 @@ import (
 	queue "github.com/upbound/provider-aws/internal/controller/connect/queue"
 	quickconnect "github.com/upbound/provider-aws/internal/controller/connect/quickconnect"
 	routingprofile "github.com/upbound/provider-aws/internal/controller/connect/routingprofile"
+	securityprofile "github.com/upbound/provider-aws/internal/controller/connect/securityprofile"
 	cluster "github.com/upbound/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/dax/parametergroup"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/dax/subnetgroup"
@@ -510,6 +511,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		queue.Setup,
 		quickconnect.Setup,
 		routingprofile.Setup,
+		securityprofile.Setup,
 		cluster.Setup,
 		parametergroup.Setup,
 		subnetgroup.Setup,

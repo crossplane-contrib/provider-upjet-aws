@@ -1,0 +1,22 @@
+apiVersion: connect.aws.upbound.io/v1beta1
+kind: SecurityProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/securityprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: example description
+    instanceId: aaaaaaaa-bbbb-cccc-dddd-111111111111
+    name: example
+    permissions:
+    - BasicAgentAccess
+    - OutboundCallAccess
+    region: us-west-1
+    tags:
+      Name: Example Security Profile
+
+---
+
