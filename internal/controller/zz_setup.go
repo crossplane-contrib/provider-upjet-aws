@@ -121,6 +121,7 @@ import (
 	quickconnect "github.com/upbound/provider-aws/internal/controller/connect/quickconnect"
 	routingprofile "github.com/upbound/provider-aws/internal/controller/connect/routingprofile"
 	securityprofile "github.com/upbound/provider-aws/internal/controller/connect/securityprofile"
+	userhierarchystructure "github.com/upbound/provider-aws/internal/controller/connect/userhierarchystructure"
 	cluster "github.com/upbound/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/dax/parametergroup"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/dax/subnetgroup"
@@ -512,6 +513,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		quickconnect.Setup,
 		routingprofile.Setup,
 		securityprofile.Setup,
+		userhierarchystructure.Setup,
 		cluster.Setup,
 		parametergroup.Setup,
 		subnetgroup.Setup,
