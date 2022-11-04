@@ -40,6 +40,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/lambdafunctionassociation
   name: sample-role
   labels:
     testing.upbound.io/example-name: role

@@ -171,9 +171,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: Tags to apply to the Contact Flow. If configured
-                      with a provider default_tags configuration block present, tags
-                      with matching keys will overwrite those defined at the provider-level.
+                    description: Key-value map of resource tags.
                     type: object
                   type:
                     description: 'Specifies the type of the Contact Flow. Defaults
