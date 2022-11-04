@@ -1063,7 +1063,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Amazon Connect Security Profiles can be imported using the instance_id and security_profile_id separated by a colon (:)
 	"aws_connect_security_profile": config.IdentifierFromProvider,
 	// Amazon Connect User Hierarchy Structures can be imported using the instance_id
-	"aws_connect_user_hierarchy_structure": config.ParameterAsIdentifier("instance_id"),
+	"aws_connect_user_hierarchy_structure": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
