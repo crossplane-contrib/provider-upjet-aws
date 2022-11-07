@@ -234,6 +234,7 @@ import (
 	job "github.com/upbound/provider-aws/internal/controller/glue/job"
 	registry "github.com/upbound/provider-aws/internal/controller/glue/registry"
 	resourcepolicy "github.com/upbound/provider-aws/internal/controller/glue/resourcepolicy"
+	securityconfiguration "github.com/upbound/provider-aws/internal/controller/glue/securityconfiguration"
 	triggerglue "github.com/upbound/provider-aws/internal/controller/glue/trigger"
 	userdefinedfunction "github.com/upbound/provider-aws/internal/controller/glue/userdefinedfunction"
 	workflow "github.com/upbound/provider-aws/internal/controller/glue/workflow"
@@ -614,6 +615,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		job.Setup,
 		registry.Setup,
 		resourcepolicy.Setup,
+		securityconfiguration.Setup,
 		triggerglue.Setup,
 		userdefinedfunction.Setup,
 		workflow.Setup,

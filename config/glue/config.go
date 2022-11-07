@@ -36,6 +36,7 @@ func Configure(p *config.Provider) {
 			Extractor: common.PathARNExtractor,
 		}
 	})
+
 	p.AddResourceConfigurator("aws_glue_data_catalog_encryption_settings", func(r *config.Resource) {
 		r.References["data_catalog_encryption_settings.connection_password_encryption.aws_kms_key_id"] = config.Reference{
 			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
@@ -46,4 +47,22 @@ func Configure(p *config.Provider) {
 			Extractor: common.PathARNExtractor,
 		}
 	})
+
+	p.AddResourceConfigurator("aws_glue_security_configuration", func(r *config.Resource) {
+		r.References["encryption_configuration.cloudwatch_encryption.kms_key_arn"] = config.Reference{
+			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			Extractor: common.PathARNExtractor,
+		}
+
+		r.References["encryption_configuration.job_bookmarks_encryption.kms_key_arn"] = config.Reference{
+			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			Extractor: common.PathARNExtractor,
+		}
+
+		r.References["encryption_configuration.s3_encryption.kms_key_arn"] = config.Reference{
+			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			Extractor: common.PathARNExtractor,
+		}
+	})
+
 }

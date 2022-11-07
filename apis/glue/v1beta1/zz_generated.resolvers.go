@@ -118,6 +118,77 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 	return nil
 }
 
+// ResolveReferences of this SecurityConfiguration.
+func (mg *SecurityConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.EncryptionConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.EncryptionConfiguration[i3].CloudwatchEncryption); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArnRef,
+				Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArnSelector,
+				To: reference.To{
+					List:    &v1beta1.KeyList{},
+					Managed: &v1beta1.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArn")
+			}
+			mg.Spec.ForProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.EncryptionConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.EncryptionConfiguration[i3].JobBookmarksEncryption); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArnRef,
+				Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArnSelector,
+				To: reference.To{
+					List:    &v1beta1.KeyList{},
+					Managed: &v1beta1.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArn")
+			}
+			mg.Spec.ForProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.EncryptionConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArnRef,
+				Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArnSelector,
+				To: reference.To{
+					List:    &v1beta1.KeyList{},
+					Managed: &v1beta1.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArn")
+			}
+			mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArnRef = rsp.ResolvedReference
+
+		}
+	}
+
+	return nil
+}
+
 // ResolveReferences of this Trigger.
 func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
