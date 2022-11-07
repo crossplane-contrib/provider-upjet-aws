@@ -107,8 +107,18 @@ type CloudwatchLoggingOptionsObservation struct {
 type CloudwatchLoggingOptionsParameters struct {
 
 	// The ARN of the CloudWatch Log Stream.
-	// +kubebuilder:validation:Required
-	LogStreamArn *string `json:"logStreamArn" tf:"log_stream_arn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	LogStreamArn *string `json:"logStreamArn,omitempty" tf:"log_stream_arn,omitempty"`
+
+	// Reference to a Stream in cloudwatchlogs to populate logStreamArn.
+	// +kubebuilder:validation:Optional
+	LogStreamArnRef *v1.Reference `json:"logStreamArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in cloudwatchlogs to populate logStreamArn.
+	// +kubebuilder:validation:Optional
+	LogStreamArnSelector *v1.Selector `json:"logStreamArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the IAM Role used to send application messages.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role

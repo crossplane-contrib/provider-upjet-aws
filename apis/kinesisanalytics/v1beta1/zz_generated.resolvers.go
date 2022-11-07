@@ -9,9 +9,10 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta12 "github.com/upbound/provider-aws/apis/firehose/v1beta1"
-	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/kinesis/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/firehose/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/kinesis/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -26,13 +27,31 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchLoggingOptions); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArnRef,
+			Selector:     mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArnSelector,
+			To: reference.To{
+				List:    &v1beta1.StreamList{},
+				Managed: &v1beta1.Stream{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArn")
+		}
+		mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchLoggingOptions); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].RoleArn),
 			Extract:      resource.ExtractParamPath("arn", true),
 			Reference:    mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].RoleArnRef,
 			Selector:     mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].RoleArnSelector,
 			To: reference.To{
-				List:    &v1beta1.RoleList{},
-				Managed: &v1beta1.Role{},
+				List:    &v1beta11.RoleList{},
+				Managed: &v1beta11.Role{},
 			},
 		})
 		if err != nil {
@@ -50,8 +69,8 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 				Reference:    mg.Spec.ForProvider.Inputs[i3].KinesisStream[i4].ResourceArnRef,
 				Selector:     mg.Spec.ForProvider.Inputs[i3].KinesisStream[i4].ResourceArnSelector,
 				To: reference.To{
-					List:    &v1beta11.StreamList{},
-					Managed: &v1beta11.Stream{},
+					List:    &v1beta12.StreamList{},
+					Managed: &v1beta12.Stream{},
 				},
 			})
 			if err != nil {
@@ -70,8 +89,8 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 				Reference:    mg.Spec.ForProvider.Inputs[i3].KinesisStream[i4].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.Inputs[i3].KinesisStream[i4].RoleArnSelector,
 				To: reference.To{
-					List:    &v1beta1.RoleList{},
-					Managed: &v1beta1.Role{},
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
 				},
 			})
 			if err != nil {
@@ -90,8 +109,8 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 				Reference:    mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].ResourceArnRef,
 				Selector:     mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].ResourceArnSelector,
 				To: reference.To{
-					List:    &v1beta12.DeliveryStreamList{},
-					Managed: &v1beta12.DeliveryStream{},
+					List:    &v1beta13.DeliveryStreamList{},
+					Managed: &v1beta13.DeliveryStream{},
 				},
 			})
 			if err != nil {
@@ -110,8 +129,8 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 				Reference:    mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].RoleArnSelector,
 				To: reference.To{
-					List:    &v1beta1.RoleList{},
-					Managed: &v1beta1.Role{},
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
 				},
 			})
 			if err != nil {

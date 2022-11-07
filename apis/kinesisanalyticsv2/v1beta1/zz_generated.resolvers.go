@@ -9,8 +9,9 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1beta14 "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1"
 	v1beta12 "github.com/upbound/provider-aws/apis/firehose/v1beta1"
-	v1beta14 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta15 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/kinesis/v1beta1"
 	v1beta13 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/s3/v1beta1"
@@ -170,14 +171,32 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 			}
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchLoggingOptions); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArnRef,
+			Selector:     mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArnSelector,
+			To: reference.To{
+				List:    &v1beta14.StreamList{},
+				Managed: &v1beta14.Stream{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArn")
+		}
+		mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArnRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceExecutionRole),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.ServiceExecutionRoleRef,
 		Selector:     mg.Spec.ForProvider.ServiceExecutionRoleSelector,
 		To: reference.To{
-			List:    &v1beta14.RoleList{},
-			Managed: &v1beta14.Role{},
+			List:    &v1beta15.RoleList{},
+			Managed: &v1beta15.Role{},
 		},
 	})
 	if err != nil {
