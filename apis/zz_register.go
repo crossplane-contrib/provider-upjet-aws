@@ -16,6 +16,7 @@ import (
 	v1beta1apigateway "github.com/upbound/provider-aws/apis/apigateway/v1beta1"
 	v1beta1apigatewayv2 "github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1"
 	v1beta1appautoscaling "github.com/upbound/provider-aws/apis/appautoscaling/v1beta1"
+	v1beta1apprunner "github.com/upbound/provider-aws/apis/apprunner/v1beta1"
 	v1beta1appmesh "github.com/upbound/provider-aws/apis/appmesh/v1beta1"
 	v1beta1athena "github.com/upbound/provider-aws/apis/athena/v1beta1"
 	v1beta1autoscaling "github.com/upbound/provider-aws/apis/autoscaling/v1beta1"
@@ -91,6 +92,7 @@ func init() {
 		v1beta1apigateway.SchemeBuilder.AddToScheme,
 		v1beta1apigatewayv2.SchemeBuilder.AddToScheme,
 		v1beta1appautoscaling.SchemeBuilder.AddToScheme,
+		v1beta1apprunner.SchemeBuilder.AddToScheme,
 		v1beta1appmesh.SchemeBuilder.AddToScheme,
 		v1beta1athena.SchemeBuilder.AddToScheme,
 		v1beta1autoscaling.SchemeBuilder.AddToScheme,

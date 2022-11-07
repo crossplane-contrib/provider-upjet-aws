@@ -89,8 +89,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// App Runner AutoScaling Configuration Versions can be imported by using the arn
 	"aws_apprunner_auto_scaling_configuration_version": config.IdentifierFromProvider,
-	// App Runner Connections can be imported by using the connection_name
-	"aws_apprunner_connection": config.ParameterAsIdentifier("connection_name"),
 	// App Runner Custom Domain Associations can be imported by using the domain_name and service_arn separated by a comma (,)
 	"aws_apprunner_custom_domain_association": config.TemplatedStringAsIdentifier("domain_name", "{{ .external_name }},{{ .parameters.service_arn }}"),
 	// App Runner Services can be imported by using the arn

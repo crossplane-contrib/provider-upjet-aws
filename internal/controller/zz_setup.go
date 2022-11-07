@@ -56,6 +56,7 @@ import (
 	policy "github.com/upbound/provider-aws/internal/controller/appautoscaling/policy"
 	scheduledaction "github.com/upbound/provider-aws/internal/controller/appautoscaling/scheduledaction"
 	target "github.com/upbound/provider-aws/internal/controller/appautoscaling/target"
+	connection "github.com/upbound/provider-aws/internal/controller/apprunner/connection"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
@@ -103,7 +104,7 @@ import (
 	trigger "github.com/upbound/provider-aws/internal/controller/codecommit/trigger"
 	codepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/codepipeline"
 	webhook "github.com/upbound/provider-aws/internal/controller/codepipeline/webhook"
-	connection "github.com/upbound/provider-aws/internal/controller/codestarconnections/connection"
+	connectioncodestarconnections "github.com/upbound/provider-aws/internal/controller/codestarconnections/connection"
 	host "github.com/upbound/provider-aws/internal/controller/codestarconnections/host"
 	notificationrule "github.com/upbound/provider-aws/internal/controller/codestarnotifications/notificationrule"
 	cognitoidentitypoolproviderprincipaltag "github.com/upbound/provider-aws/internal/controller/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
@@ -477,6 +478,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		policy.Setup,
 		scheduledaction.Setup,
 		target.Setup,
+		connection.Setup,
 		mesh.Setup,
 		database.Setup,
 		datacatalog.Setup,
@@ -524,7 +526,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		trigger.Setup,
 		codepipeline.Setup,
 		webhook.Setup,
-		connection.Setup,
+		connectioncodestarconnections.Setup,
 		host.Setup,
 		notificationrule.Setup,
 		cognitoidentitypoolproviderprincipaltag.Setup,
