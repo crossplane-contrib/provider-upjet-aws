@@ -2,6 +2,8 @@ apiVersion: kinesisanalytics.aws.upbound.io/v1beta1
 kind: Application
 metadata:
   name: kinesis-analytics-application-test
+  annotations:
+    upjet.upbound.io/manual-intervention: "A role must be configured to access the Kinesis stream"
 spec:
   forProvider:
     region: us-west-1
@@ -24,3 +26,22 @@ spec:
         - mappingParameters:
           - json:
             - recordRowPath: $
+
+---
+
+apiVersion: kinesis.aws.upbound.io/v1beta1
+kind: Stream
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    retentionPeriod: 48
+    shardCount: 1
+    shardLevelMetrics:
+      - IncomingBytes
+      - OutgoingBytes
+    streamModeDetails:
+      - streamMode: PROVISIONED
+    tags:
+      Environment: test
