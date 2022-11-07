@@ -12,9 +12,6 @@ spec:
     maxConcurrency: 50
     maxSize: 10
     minSize: 2
-    region: us-west-1
+    region: us-east-1
     tags:
       Name: example-apprunner-autoscaling
-
----
-
