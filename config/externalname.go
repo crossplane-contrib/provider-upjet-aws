@@ -1107,6 +1107,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Amazon Connect User Hierarchy Structures can be imported using the instance_id
 	"aws_connect_user_hierarchy_structure": config.IdentifierFromProvider,
 
+	// apprunner
+	//
+	// App Runner AutoScaling Configuration Versions can be imported by using the arn
+	"aws_apprunner_auto_scaling_configuration_version": config.IdentifierFromProvider,
 	// App Runner Connections can be imported by using the connection_name
 	"aws_apprunner_connection": config.ParameterAsIdentifier("connection_name"),
 

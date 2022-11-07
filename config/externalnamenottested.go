@@ -85,10 +85,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// App Mesh virtual services can be imported using mesh_name together with the virtual service's name: simpleapp/servicea.simpleapp.local
 	"aws_appmesh_virtual_service": config.TemplatedStringAsIdentifier("name", "{{ .parameters.mesh_name }}/{{ .external_name }}"),
 
-	// apprunner
-	//
-	// App Runner AutoScaling Configuration Versions can be imported by using the arn
-	"aws_apprunner_auto_scaling_configuration_version": config.IdentifierFromProvider,
 	// App Runner Custom Domain Associations can be imported by using the domain_name and service_arn separated by a comma (,)
 	"aws_apprunner_custom_domain_association": config.TemplatedStringAsIdentifier("domain_name", "{{ .external_name }},{{ .parameters.service_arn }}"),
 	// App Runner Services can be imported by using the arn

@@ -13,6 +13,80 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this AutoScalingConfigurationVersion
+func (mg *AutoScalingConfigurationVersion) GetTerraformResourceType() string {
+	return "aws_apprunner_auto_scaling_configuration_version"
+}
+
+// GetConnectionDetailsMapping for this AutoScalingConfigurationVersion
+func (tr *AutoScalingConfigurationVersion) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this AutoScalingConfigurationVersion
+func (tr *AutoScalingConfigurationVersion) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this AutoScalingConfigurationVersion
+func (tr *AutoScalingConfigurationVersion) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this AutoScalingConfigurationVersion
+func (tr *AutoScalingConfigurationVersion) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this AutoScalingConfigurationVersion
+func (tr *AutoScalingConfigurationVersion) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this AutoScalingConfigurationVersion
+func (tr *AutoScalingConfigurationVersion) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this AutoScalingConfigurationVersion using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *AutoScalingConfigurationVersion) LateInitialize(attrs []byte) (bool, error) {
+	params := &AutoScalingConfigurationVersionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *AutoScalingConfigurationVersion) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Connection
 func (mg *Connection) GetTerraformResourceType() string {
 	return "aws_apprunner_connection"
