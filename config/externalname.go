@@ -123,6 +123,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ebs_volume": config.IdentifierFromProvider,
 	// EBS Snapshot can be imported using the id
 	"aws_ebs_snapshot": config.IdentifierFromProvider,
+	// No import
+	"aws_ebs_snapshot_copy": config.IdentifierFromProvider,
+	// No import
+	"aws_ebs_snapshot_import": config.IdentifierFromProvider,
 
 	// ec2
 	//
@@ -242,6 +246,36 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_endpoint_subnet_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "subnet_id"),
 	// Default VPC route tables can be imported using the vpc_id
 	"aws_default_route_table": config.IdentifierFromProvider,
+	// Hosts can be imported using the host id
+	"aws_ec2_host": config.IdentifierFromProvider,
+	// Default VPCs can be imported using the vpc id
+	"aws_default_vpc": config.IdentifierFromProvider,
+	// Subnets can be imported using the subnet id
+	"aws_default_subnet": config.IdentifierFromProvider,
+	// VPC DHCP Options can be imported using the dhcp options id
+	"aws_default_vpc_dhcp_options": config.IdentifierFromProvider,
+	// The EBS default KMS CMK can be imported with the KMS key ARN
+	"aws_ebs_default_kms_key": config.IdentifierFromProvider,
+	// Default EBS encryption state can be imported
+	"aws_ebs_encryption_by_default": config.IdentifierFromProvider,
+	// EC2 Availability Zone Groups can be imported using the group name
+	"aws_ec2_availability_zone_group": config.ParameterAsIdentifier("group_name"),
+	// Capacity Reservations can be imported using the id
+	"aws_ec2_capacity_reservation": config.IdentifierFromProvider,
+	// aws_ec2_carrier_gateway can be imported using the carrier gateway's ID
+	"aws_ec2_carrier_gateway": config.IdentifierFromProvider,
+	// Serial console access state can be imported
+	"aws_ec2_serial_console_access": config.IdentifierFromProvider,
+	// Existing CIDR reservations can be imported using SUBNET_ID:RESERVATION_ID
+	"aws_ec2_subnet_cidr_reservation": config.IdentifierFromProvider,
+	// Traffic mirror filter can be imported using the id
+	"aws_ec2_traffic_mirror_filter": config.IdentifierFromProvider,
+	// Traffic mirror rules can be imported using the traffic_mirror_filter_id and id separated by :
+	"aws_ec2_traffic_mirror_filter_rule": config.IdentifierFromProvider,
+	// Traffic mirror targets can be imported using the id
+	"aws_ec2_transit_gateway_connect": config.IdentifierFromProvider,
+	// Network Insights Paths can be imported using the id
+	"aws_ec2_network_insights_path": config.IdentifierFromProvider,
 
 	// ecr
 	//

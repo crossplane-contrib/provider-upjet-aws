@@ -137,14 +137,25 @@ import (
 	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
 	table "github.com/upbound/provider-aws/internal/controller/dynamodb/table"
 	tableitem "github.com/upbound/provider-aws/internal/controller/dynamodb/tableitem"
+	availabilityzonegroup "github.com/upbound/provider-aws/internal/controller/ec2/availabilityzonegroup"
+	capacityreservation "github.com/upbound/provider-aws/internal/controller/ec2/capacityreservation"
+	carriergateway "github.com/upbound/provider-aws/internal/controller/ec2/carriergateway"
 	defaultroutetable "github.com/upbound/provider-aws/internal/controller/ec2/defaultroutetable"
+	defaultsubnet "github.com/upbound/provider-aws/internal/controller/ec2/defaultsubnet"
+	defaultvpc "github.com/upbound/provider-aws/internal/controller/ec2/defaultvpc"
+	defaultvpcdhcpoptions "github.com/upbound/provider-aws/internal/controller/ec2/defaultvpcdhcpoptions"
+	ebsdefaultkmskey "github.com/upbound/provider-aws/internal/controller/ec2/ebsdefaultkmskey"
+	ebsencryptionbydefault "github.com/upbound/provider-aws/internal/controller/ec2/ebsencryptionbydefault"
 	ebssnapshot "github.com/upbound/provider-aws/internal/controller/ec2/ebssnapshot"
+	ebssnapshotcopy "github.com/upbound/provider-aws/internal/controller/ec2/ebssnapshotcopy"
+	ebssnapshotimport "github.com/upbound/provider-aws/internal/controller/ec2/ebssnapshotimport"
 	ebsvolume "github.com/upbound/provider-aws/internal/controller/ec2/ebsvolume"
 	egressonlyinternetgateway "github.com/upbound/provider-aws/internal/controller/ec2/egressonlyinternetgateway"
 	eip "github.com/upbound/provider-aws/internal/controller/ec2/eip"
 	eipassociation "github.com/upbound/provider-aws/internal/controller/ec2/eipassociation"
 	flowlog "github.com/upbound/provider-aws/internal/controller/ec2/flowlog"
-	instanceec2 "github.com/upbound/provider-aws/internal/controller/ec2/instance"
+	host "github.com/upbound/provider-aws/internal/controller/ec2/host"
+	instance "github.com/upbound/provider-aws/internal/controller/ec2/instance"
 	internetgateway "github.com/upbound/provider-aws/internal/controller/ec2/internetgateway"
 	keypair "github.com/upbound/provider-aws/internal/controller/ec2/keypair"
 	launchtemplate "github.com/upbound/provider-aws/internal/controller/ec2/launchtemplate"
@@ -154,6 +165,7 @@ import (
 	natgateway "github.com/upbound/provider-aws/internal/controller/ec2/natgateway"
 	networkacl "github.com/upbound/provider-aws/internal/controller/ec2/networkacl"
 	networkaclrule "github.com/upbound/provider-aws/internal/controller/ec2/networkaclrule"
+	networkinsightspath "github.com/upbound/provider-aws/internal/controller/ec2/networkinsightspath"
 	networkinterface "github.com/upbound/provider-aws/internal/controller/ec2/networkinterface"
 	networkinterfaceattachment "github.com/upbound/provider-aws/internal/controller/ec2/networkinterfaceattachment"
 	networkinterfacesgattachment "github.com/upbound/provider-aws/internal/controller/ec2/networkinterfacesgattachment"
@@ -163,10 +175,15 @@ import (
 	routetableassociation "github.com/upbound/provider-aws/internal/controller/ec2/routetableassociation"
 	securitygroup "github.com/upbound/provider-aws/internal/controller/ec2/securitygroup"
 	securitygrouprule "github.com/upbound/provider-aws/internal/controller/ec2/securitygrouprule"
+	serialconsoleaccess "github.com/upbound/provider-aws/internal/controller/ec2/serialconsoleaccess"
 	spotdatafeedsubscription "github.com/upbound/provider-aws/internal/controller/ec2/spotdatafeedsubscription"
 	spotinstancerequest "github.com/upbound/provider-aws/internal/controller/ec2/spotinstancerequest"
 	subnet "github.com/upbound/provider-aws/internal/controller/ec2/subnet"
+	subnetcidrreservation "github.com/upbound/provider-aws/internal/controller/ec2/subnetcidrreservation"
+	trafficmirrorfilter "github.com/upbound/provider-aws/internal/controller/ec2/trafficmirrorfilter"
+	trafficmirrorfilterrule "github.com/upbound/provider-aws/internal/controller/ec2/trafficmirrorfilterrule"
 	transitgateway "github.com/upbound/provider-aws/internal/controller/ec2/transitgateway"
+	transitgatewayconnect "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewayconnect"
 	transitgatewaymulticastdomain "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaymulticastdomain"
 	transitgatewaymulticastdomainassociation "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaymulticastdomainassociation"
 	transitgatewaymulticastgroupmember "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaymulticastgroupmember"
@@ -529,14 +546,25 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		kinesisstreamingdestination.Setup,
 		table.Setup,
 		tableitem.Setup,
+		availabilityzonegroup.Setup,
+		capacityreservation.Setup,
+		carriergateway.Setup,
 		defaultroutetable.Setup,
+		defaultsubnet.Setup,
+		defaultvpc.Setup,
+		defaultvpcdhcpoptions.Setup,
+		ebsdefaultkmskey.Setup,
+		ebsencryptionbydefault.Setup,
 		ebssnapshot.Setup,
+		ebssnapshotcopy.Setup,
+		ebssnapshotimport.Setup,
 		ebsvolume.Setup,
 		egressonlyinternetgateway.Setup,
 		eip.Setup,
 		eipassociation.Setup,
 		flowlog.Setup,
-		instanceec2.Setup,
+		host.Setup,
+		instance.Setup,
 		internetgateway.Setup,
 		keypair.Setup,
 		launchtemplate.Setup,
@@ -546,6 +574,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		natgateway.Setup,
 		networkacl.Setup,
 		networkaclrule.Setup,
+		networkinsightspath.Setup,
 		networkinterface.Setup,
 		networkinterfaceattachment.Setup,
 		networkinterfacesgattachment.Setup,
@@ -555,10 +584,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		routetableassociation.Setup,
 		securitygroup.Setup,
 		securitygrouprule.Setup,
+		serialconsoleaccess.Setup,
 		spotdatafeedsubscription.Setup,
 		spotinstancerequest.Setup,
 		subnet.Setup,
+		subnetcidrreservation.Setup,
+		trafficmirrorfilter.Setup,
+		trafficmirrorfilterrule.Setup,
 		transitgateway.Setup,
+		transitgatewayconnect.Setup,
 		transitgatewaymulticastdomain.Setup,
 		transitgatewaymulticastdomainassociation.Setup,
 		transitgatewaymulticastgroupmember.Setup,
