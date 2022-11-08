@@ -21,10 +21,7 @@ documentation](https://docs.upbound.io/cli/).
 
 #### Upbound Universal Crossplane
 UXP is the Upbound official enterprise-grade distribution of Crossplane for
-self-hosted control planes. Only Upbound Universal Crossplane (UXP) supports
-official providers.
-
-Official providers aren't supported with open source Crossplane.
+self-hosted control planes. 
 
 Install UXP into your Kubernetes cluster using the Up command-line.
 
@@ -34,6 +31,8 @@ up uxp install
 
 Find more information in the [Upbound UXP
 documentation](https://docs.upbound.io/uxp/).
+
+_The Upbound AWS official provider may also be used with upstream [Crossplane](https://crossplane.io/docs/master/getting-started/install-configure.html)._
 
 ### Install the provider
 
@@ -163,9 +162,6 @@ An IRSA configuration requires multiple components:
 * Create a `ControllerConfig` to associate the IAM role ARN.
 * Apply the `ControllerConfig` to the `Provider`.
 * Instruct the `ProviderConfig` to use `IRSA` credentials.
-
-_Note:_ `IRSA` authentication requires [Upbound Universal Crossplane
-(UXP)](https://docs.upbound.io/uxp) installed in the EKS cluster.
 
 <!-- Disable heading acronym rule to ignore "OIDC" -->
 <!-- vale Microsoft.HeadingAcronyms = NO -->
