@@ -4,7 +4,6 @@ metadata:
   name: kinesis-analytics-application-test
   annotations:
     meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
-    upjet.upbound.io/manual-intervention: "A role must be configured to access the Kinesis stream"
 spec:
   forProvider:
     region: us-west-1
@@ -13,7 +12,7 @@ spec:
       - resourceArnRef:
           name: example
         roleArnRef:
-          name: example
+          name: kinesis-app-role
       namePrefix: test_prefix
       parallelism:
       - count: 1
@@ -36,7 +35,6 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
-    upjet.upbound.io/manual-intervention: "A role must be configured to access the Kinesis stream"
 spec:
   forProvider:
     region: us-west-1
@@ -49,3 +47,27 @@ spec:
       - streamMode: PROVISIONED
     tags:
       Environment: test
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: kinesis-app-role
+  annotations:
+    meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "kinesisanalytics.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }

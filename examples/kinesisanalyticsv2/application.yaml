@@ -4,7 +4,6 @@ metadata:
   name: example-application
   annotations:
     meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/application
-    upjet.upbound.io/manual-intervention: "A role must be configured to access Kinesis data streams, Kinesis Data Firehose delivery streams, Amazon S3 objects, and other external resources"
 spec:
   forProvider:
     region: us-west-1
@@ -22,6 +21,30 @@ spec:
             KeyB: ValueB
     runtimeEnvironment: FLINK-1_8
     serviceExecutionRoleRef:
-      name: example
+      name: kinesis-app-role
     tags:
       Environment: test
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: kinesis-app-role
+  annotations:
+    meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/application
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "kinesisanalytics.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
