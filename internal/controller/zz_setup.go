@@ -58,6 +58,7 @@ import (
 	target "github.com/upbound/provider-aws/internal/controller/appautoscaling/target"
 	autoscalingconfigurationversion "github.com/upbound/provider-aws/internal/controller/apprunner/autoscalingconfigurationversion"
 	connection "github.com/upbound/provider-aws/internal/controller/apprunner/connection"
+	vpcconnector "github.com/upbound/provider-aws/internal/controller/apprunner/vpcconnector"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
@@ -481,6 +482,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		target.Setup,
 		autoscalingconfigurationversion.Setup,
 		connection.Setup,
+		vpcconnector.Setup,
 		mesh.Setup,
 		database.Setup,
 		datacatalog.Setup,

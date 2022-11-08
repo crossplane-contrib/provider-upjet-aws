@@ -89,8 +89,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_apprunner_custom_domain_association": config.TemplatedStringAsIdentifier("domain_name", "{{ .external_name }},{{ .parameters.service_arn }}"),
 	// App Runner Services can be imported by using the arn
 	"aws_apprunner_service": config.IdentifierFromProvider,
-	// App Runner vpc connector can be imported by using the arn
-	"aws_apprunner_vpc_connector": config.IdentifierFromProvider,
 
 	// appstream
 	//
