@@ -111,6 +111,17 @@ import (
 	userpoolclient "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpoolclient"
 	userpooldomain "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooldomain"
 	userpooluicustomization "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooluicustomization"
+	botassociation "github.com/upbound/provider-aws/internal/controller/connect/botassociation"
+	contactflow "github.com/upbound/provider-aws/internal/controller/connect/contactflow"
+	contactflowmodule "github.com/upbound/provider-aws/internal/controller/connect/contactflowmodule"
+	hoursofoperation "github.com/upbound/provider-aws/internal/controller/connect/hoursofoperation"
+	instance "github.com/upbound/provider-aws/internal/controller/connect/instance"
+	lambdafunctionassociation "github.com/upbound/provider-aws/internal/controller/connect/lambdafunctionassociation"
+	queue "github.com/upbound/provider-aws/internal/controller/connect/queue"
+	quickconnect "github.com/upbound/provider-aws/internal/controller/connect/quickconnect"
+	routingprofile "github.com/upbound/provider-aws/internal/controller/connect/routingprofile"
+	securityprofile "github.com/upbound/provider-aws/internal/controller/connect/securityprofile"
+	userhierarchystructure "github.com/upbound/provider-aws/internal/controller/connect/userhierarchystructure"
 	cluster "github.com/upbound/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/dax/parametergroup"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/dax/subnetgroup"
@@ -133,7 +144,7 @@ import (
 	eip "github.com/upbound/provider-aws/internal/controller/ec2/eip"
 	eipassociation "github.com/upbound/provider-aws/internal/controller/ec2/eipassociation"
 	flowlog "github.com/upbound/provider-aws/internal/controller/ec2/flowlog"
-	instance "github.com/upbound/provider-aws/internal/controller/ec2/instance"
+	instanceec2 "github.com/upbound/provider-aws/internal/controller/ec2/instance"
 	internetgateway "github.com/upbound/provider-aws/internal/controller/ec2/internetgateway"
 	keypair "github.com/upbound/provider-aws/internal/controller/ec2/keypair"
 	launchtemplate "github.com/upbound/provider-aws/internal/controller/ec2/launchtemplate"
@@ -380,7 +391,7 @@ import (
 	signingprofile "github.com/upbound/provider-aws/internal/controller/signer/signingprofile"
 	topic "github.com/upbound/provider-aws/internal/controller/sns/topic"
 	topicsubscription "github.com/upbound/provider-aws/internal/controller/sns/topicsubscription"
-	queue "github.com/upbound/provider-aws/internal/controller/sqs/queue"
+	queuesqs "github.com/upbound/provider-aws/internal/controller/sqs/queue"
 	queuepolicy "github.com/upbound/provider-aws/internal/controller/sqs/queuepolicy"
 	server "github.com/upbound/provider-aws/internal/controller/transfer/server"
 	usertransfer "github.com/upbound/provider-aws/internal/controller/transfer/user"
@@ -492,6 +503,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userpoolclient.Setup,
 		userpooldomain.Setup,
 		userpooluicustomization.Setup,
+		botassociation.Setup,
+		contactflow.Setup,
+		contactflowmodule.Setup,
+		hoursofoperation.Setup,
+		instance.Setup,
+		lambdafunctionassociation.Setup,
+		queue.Setup,
+		quickconnect.Setup,
+		routingprofile.Setup,
+		securityprofile.Setup,
+		userhierarchystructure.Setup,
 		cluster.Setup,
 		parametergroup.Setup,
 		subnetgroup.Setup,
@@ -514,7 +536,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eip.Setup,
 		eipassociation.Setup,
 		flowlog.Setup,
-		instance.Setup,
+		instanceec2.Setup,
 		internetgateway.Setup,
 		keypair.Setup,
 		launchtemplate.Setup,
@@ -761,7 +783,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		signingprofile.Setup,
 		topic.Setup,
 		topicsubscription.Setup,
-		queue.Setup,
+		queuesqs.Setup,
 		queuepolicy.Setup,
 		server.Setup,
 		usertransfer.Setup,

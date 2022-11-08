@@ -308,31 +308,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// connect
 	//
-	// aws_connect_bot_association can be imported by using the Amazon Connect instance ID, Lex (V1) bot name, and Lex (V1) bot region separated by colons (:)
-	// TODO: lex_bot.lex_region parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
-	"aws_connect_bot_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }}:{{ .parameters.lex_bot.name }}:{{ .parameters.lex_bot.lex_region }}"),
-	// Amazon Connect Contact Flows can be imported using the instance_id and contact_flow_id separated by a colon (:)
-	"aws_connect_contact_flow": config.IdentifierFromProvider,
-	// Amazon Connect Contact Flow Modules can be imported using the instance_id and contact_flow_module_id separated by a colon (:)
-	"aws_connect_contact_flow_module": config.IdentifierFromProvider,
-	// Amazon Connect Hours of Operations can be imported using the instance_id and hours_of_operation_id separated by a colon (:)
-	"aws_connect_hours_of_operation": config.IdentifierFromProvider,
-	// Connect instances can be imported using the id
-	"aws_connect_instance": config.IdentifierFromProvider,
-	// aws_connect_lambda_function_association can be imported using the instance_id and function_arn separated by a comma (,)
-	"aws_connect_lambda_function_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }},{{ .parameters.function_arn }}"),
-	// Amazon Connect Queues can be imported using the instance_id and queue_id separated by a colon (:)
-	"aws_connect_queue": config.IdentifierFromProvider,
-	// Amazon Connect Quick Connects can be imported using the instance_id and quick_connect_id separated by a colon (:)
-	"aws_connect_quick_connect": config.IdentifierFromProvider,
-	// Amazon Connect Routing Profiles can be imported using the instance_id and routing_profile_id separated by a colon (:)
-	"aws_connect_routing_profile": config.IdentifierFromProvider,
-	// Amazon Connect Security Profiles can be imported using the instance_id and security_profile_id separated by a colon (:)
-	"aws_connect_security_profile": config.IdentifierFromProvider,
 	// Amazon Connect User Hierarchy Groups can be imported using the instance_id and hierarchy_group_id separated by a colon (:)
 	"aws_connect_user_hierarchy_group": config.IdentifierFromProvider,
-	// Amazon Connect User Hierarchy Structures can be imported using the instance_id
-	"aws_connect_user_hierarchy_structure": config.ParameterAsIdentifier("instance_id"),
 
 	// cur
 	//

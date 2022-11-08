@@ -1,16 +1,45 @@
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: Function
 metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/function
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-1
     environment:
     - variables:
         foo: bar
-    s3Bucket: <bucket-name>
-    s3Key: <zip-object-key>
-    handler: index.test
+    s3Bucket: upbound-provider-test-data
+    s3Key: hello-python.zip
+    handler: index.py
     roleRef:
-      name: iam-for-lambda
-    runtime: nodejs12.x
+      name: sample-role
+    runtime: python3.9
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/function
+  name: sample-role
+  labels:
+    testing.upbound.io/example-name: role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "lambda.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }

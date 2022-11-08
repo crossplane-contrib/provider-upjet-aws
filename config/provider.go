@@ -23,6 +23,7 @@ import (
 	"github.com/upbound/provider-aws/config/cloudwatch"
 	"github.com/upbound/provider-aws/config/cognitoidentity"
 	"github.com/upbound/provider-aws/config/cognitoidp"
+	"github.com/upbound/provider-aws/config/connect"
 	"github.com/upbound/provider-aws/config/dax"
 	"github.com/upbound/provider-aws/config/docdb"
 	"github.com/upbound/provider-aws/config/dynamodb"
@@ -140,6 +141,7 @@ func GetProvider() *config.Provider {
 		autoscaling.Configure,
 		cognitoidentity.Configure,
 		cognitoidp.Configure,
+		connect.Configure,
 		dynamodb.Configure,
 		ebs.Configure,
 		ec2.Configure,
