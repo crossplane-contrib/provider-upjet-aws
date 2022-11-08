@@ -32,7 +32,7 @@ up uxp install
 Find more information in the [Upbound UXP
 documentation](https://docs.upbound.io/uxp/).
 
-_The Upbound AWS official provider may also be used with upstream [Crossplane](https://crossplane.io/docs/v1.9/getting-started/install-configure.html)._
+_The Upbound AWS official provider may also be used with upstream [Crossplane](https://crossplane.io/docs/master/getting-started/install-configure.html)._
 
 ### Install the provider
 
