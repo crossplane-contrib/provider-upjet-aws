@@ -1,0 +1,19 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: ClientVPNAuthorizationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/clientvpnauthorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    authorizeAllGroups: true
+    clientVpnEndpointId: ${aws_ec2_client_vpn_endpoint.example.id}
+    region: us-west-1
+    targetNetworkCidrSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
