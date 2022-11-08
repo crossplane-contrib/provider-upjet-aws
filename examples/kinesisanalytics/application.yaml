@@ -3,6 +3,7 @@ kind: Application
 metadata:
   name: kinesis-analytics-application-test
   annotations:
+    meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
     upjet.upbound.io/manual-intervention: "A role must be configured to access the Kinesis stream"
 spec:
   forProvider:
@@ -33,6 +34,9 @@ apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
   name: example
+  annotations:
+    meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
+    upjet.upbound.io/manual-intervention: "A role must be configured to access the Kinesis stream"
 spec:
   forProvider:
     region: us-west-1

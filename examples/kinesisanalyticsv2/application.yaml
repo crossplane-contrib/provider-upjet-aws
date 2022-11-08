@@ -3,6 +3,7 @@ kind: Application
 metadata:
   name: example-application
   annotations:
+    meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/application
     upjet.upbound.io/manual-intervention: "A role must be configured to access Kinesis data streams, Kinesis Data Firehose delivery streams, Amazon S3 objects, and other external resources"
 spec:
   forProvider:

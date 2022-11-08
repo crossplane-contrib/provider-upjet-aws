@@ -2,6 +2,8 @@ apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: KinesisStreamingDestination
 metadata:
   name: example
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/kinesisstreamingdestination
 spec:
   forProvider:
     region: us-west-1
@@ -16,6 +18,8 @@ apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
   name: example
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/kinesisstreamingdestination
 spec:
   forProvider:
     region: us-west-1
