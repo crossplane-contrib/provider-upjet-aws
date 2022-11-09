@@ -12,12 +12,12 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     region: us-west-1
-
 ---
-
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Key
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/ebsdefaultkmskey
   labels:
     testing.upbound.io/example-name: example
   name: example

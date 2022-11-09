@@ -16,14 +16,12 @@ spec:
     sourceSelector:
       matchLabels:
         testing.upbound.io/example-name: source
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: NetworkInterface
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/networkinterface
+    meta.upbound.io/example-id: ec2/v1beta1/networkinsightspath
   labels:
     testing.upbound.io/example-name: destination
   name: testdest
@@ -35,14 +33,12 @@ spec:
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: public_a
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/subnet
+    meta.upbound.io/example-id: ec2/v1beta1/networkinsightspath
   labels:
     testing.upbound.io/example-name: public_a
   name: publica
@@ -55,14 +51,12 @@ spec:
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: NetworkInterface
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/networkinterface
+    meta.upbound.io/example-id: ec2/v1beta1/networkinsightspath
   labels:
     testing.upbound.io/example-name: source
   name: testsource
@@ -74,14 +68,12 @@ spec:
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: public_b
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/subnet
+    meta.upbound.io/example-id: ec2/v1beta1/networkinsightspath
   labels:
     testing.upbound.io/example-name: public_b
   name: piblicb
@@ -94,14 +86,12 @@ spec:
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpc
+    meta.upbound.io/example-id: ec2/v1beta1/networkinsightspath
   labels:
     testing.upbound.io/example-name: main
   name: main

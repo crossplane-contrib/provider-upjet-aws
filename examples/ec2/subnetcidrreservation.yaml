@@ -14,13 +14,13 @@ spec:
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   name: sample-subnet1
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/subnetcidrreservation
   labels:
     testing.upbound.io/example-name: example
 spec:
@@ -30,13 +30,13 @@ spec:
     vpcIdRef:
       name: default
     cidrBlock: 172.16.10.0/24
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   name: default
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/subnetcidrreservation
 spec:
   forProvider:
     region: us-west-1

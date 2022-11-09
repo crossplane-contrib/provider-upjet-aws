@@ -14,12 +14,12 @@ spec:
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/carriergateway
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -29,14 +29,12 @@ spec:
     enableDnsHostnames: true
     enableDnsSupport: true
     region: us-east-1
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: AvailabilityZoneGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/availabilityzonegroup
+    meta.upbound.io/example-id: ec2/v1beta1/carriergateway
   labels:
     testing.upbound.io/example-name: example
   name: us-east-1-wl1

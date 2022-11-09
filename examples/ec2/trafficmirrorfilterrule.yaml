@@ -18,9 +18,7 @@ spec:
     trafficMirrorFilterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: filter
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TrafficMirrorFilter
 metadata:
@@ -35,6 +33,3 @@ spec:
     networkServices:
     - amazon-dns
     region: us-west-1
-
----
-

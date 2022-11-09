@@ -10,6 +10,3 @@ spec:
   forProvider:
     optInStatus: opted-in
     region: us-west-2
-
----
-

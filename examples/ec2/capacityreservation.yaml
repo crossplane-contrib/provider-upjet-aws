@@ -13,6 +13,3 @@ spec:
     instancePlatform: Linux/UNIX
     instanceType: t2.micro
     region: us-west-1
-
----
-
