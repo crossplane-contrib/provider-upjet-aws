@@ -275,26 +275,12 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// Config aggregate authorizations can be imported using account_id:region
 	"aws_config_aggregate_authorization": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.region }}"),
-	// Config Rule can be imported using the name
-	"aws_config_config_rule": config.NameAsIdentifier,
-	// Configuration Aggregators can be imported using the name
-	"aws_config_configuration_aggregator": config.NameAsIdentifier,
-	// Configuration Recorder can be imported using the name
-	"aws_config_configuration_recorder": config.NameAsIdentifier,
-	// Configuration Recorder Status can be imported using the name of the Configuration Recorder
-	"aws_config_configuration_recorder_status": config.NameAsIdentifier,
-	// Config Conformance Packs can be imported using the name
-	"aws_config_conformance_pack": config.NameAsIdentifier,
-	// Delivery Channel can be imported using the name
-	"aws_config_delivery_channel": config.NameAsIdentifier,
 	// Config Organization Conformance Packs can be imported using the name
 	"aws_config_organization_conformance_pack": config.NameAsIdentifier,
 	// Config Organization Custom Rules can be imported using the name
 	"aws_config_organization_custom_rule": config.NameAsIdentifier,
 	// Config Organization Managed Rules can be imported using the name
 	"aws_config_organization_managed_rule": config.NameAsIdentifier,
-	// Remediation Configurations can be imported using the name config_rule_name
-	"aws_config_remediation_configuration": config.ParameterAsIdentifier("config_rule_name"),
 
 	// connect
 	//

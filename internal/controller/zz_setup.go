@@ -116,6 +116,13 @@ import (
 	userpoolclient "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpoolclient"
 	userpooldomain "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooldomain"
 	userpooluicustomization "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooluicustomization"
+	awsconfigurationrecorderstatus "github.com/upbound/provider-aws/internal/controller/configservice/awsconfigurationrecorderstatus"
+	configrule "github.com/upbound/provider-aws/internal/controller/configservice/configrule"
+	configurationaggregator "github.com/upbound/provider-aws/internal/controller/configservice/configurationaggregator"
+	configurationrecorder "github.com/upbound/provider-aws/internal/controller/configservice/configurationrecorder"
+	conformancepack "github.com/upbound/provider-aws/internal/controller/configservice/conformancepack"
+	deliverychannel "github.com/upbound/provider-aws/internal/controller/configservice/deliverychannel"
+	remediationconfiguration "github.com/upbound/provider-aws/internal/controller/configservice/remediationconfiguration"
 	botassociation "github.com/upbound/provider-aws/internal/controller/connect/botassociation"
 	contactflow "github.com/upbound/provider-aws/internal/controller/connect/contactflow"
 	contactflowmodule "github.com/upbound/provider-aws/internal/controller/connect/contactflowmodule"
@@ -513,6 +520,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userpoolclient.Setup,
 		userpooldomain.Setup,
 		userpooluicustomization.Setup,
+		awsconfigurationrecorderstatus.Setup,
+		configrule.Setup,
+		configurationaggregator.Setup,
+		configurationrecorder.Setup,
+		conformancepack.Setup,
+		deliverychannel.Setup,
+		remediationconfiguration.Setup,
 		botassociation.Setup,
 		contactflow.Setup,
 		contactflowmodule.Setup,
