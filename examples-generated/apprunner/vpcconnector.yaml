@@ -9,12 +9,12 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    securityGroups:
-    - sg1
-    - sg2
-    subnets:
-    - subnet1
-    - subnet2
+    securityGroupRefs:
+    - name: example
+    - name: example
+    subnetRefs:
+    - name: example
+    - name: example
     vpcConnectorName: name
 
 ---

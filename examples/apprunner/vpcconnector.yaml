@@ -8,14 +8,67 @@ metadata:
   name: connector
 spec:
   forProvider:
-    region: us-west-1
-    securityGroups:
-    - sg1
-    - sg2
-    subnets:
-    - subnet1
-    - subnet2
+    region: us-east-1
     vpcConnectorName: name
-
+    subnetRefs:
+      - name: sample-subnet1
+      - name: sample-subnet2
+    securityGroupRefs:
+      - name: securitygroup-example
 ---
-
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apprunner/v1beta1/vpcconnector
+  name: sample-subnet1
+spec:
+  forProvider:
+    region: us-east-1
+    availabilityZone: us-east-1b
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apprunner/v1beta1/vpcconnector
+  name: sample-subnet2
+spec:
+  forProvider:
+    region: us-east-1
+    availabilityZone: us-east-1c
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.11.0/24
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apprunner/v1beta1/vpcconnector
+  name: sample-vpc
+spec:
+  forProvider:
+    region: us-east-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apprunner/v1beta1/vpcconnector
+  name: securitygroup-example
+spec:
+  forProvider:
+    region: us-east-1
+    description: Allow TLS inbound traffic
+    name: allow_tls
+    tags:
+      Name: allow_tls
+    vpcIdRef:
+      name: sample-vpc

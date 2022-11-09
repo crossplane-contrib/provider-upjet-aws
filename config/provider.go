@@ -15,6 +15,7 @@ import (
 	"github.com/upbound/provider-aws/config/acmpca"
 	"github.com/upbound/provider-aws/config/apigateway"
 	"github.com/upbound/provider-aws/config/apigatewayv2"
+	"github.com/upbound/provider-aws/config/apprunner"
 	"github.com/upbound/provider-aws/config/athena"
 	"github.com/upbound/provider-aws/config/autoscaling"
 	"github.com/upbound/provider-aws/config/backup"
@@ -139,6 +140,7 @@ func GetProvider() *config.Provider {
 	for _, configure := range []func(provider *config.Provider){
 		acm.Configure,
 		acmpca.Configure,
+		apprunner.Configure,
 		autoscaling.Configure,
 		cognitoidentity.Configure,
 		cognitoidp.Configure,
