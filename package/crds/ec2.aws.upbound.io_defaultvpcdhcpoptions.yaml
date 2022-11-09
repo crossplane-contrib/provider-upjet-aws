@@ -86,7 +86,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: A map of tags to assign to the resource.
+                    description: Key-value map of resource tags.
                     type: object
                 required:
                 - region

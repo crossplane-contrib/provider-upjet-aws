@@ -228,7 +228,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: A map of tags to assign to the snapshot.
+                    description: Key-value map of resource tags.
                     type: object
                   temporaryRestoreDays:
                     description: Specifies the number of days for which to temporarily

@@ -154,8 +154,8 @@ import (
 	eip "github.com/upbound/provider-aws/internal/controller/ec2/eip"
 	eipassociation "github.com/upbound/provider-aws/internal/controller/ec2/eipassociation"
 	flowlog "github.com/upbound/provider-aws/internal/controller/ec2/flowlog"
-	host "github.com/upbound/provider-aws/internal/controller/ec2/host"
-	instance "github.com/upbound/provider-aws/internal/controller/ec2/instance"
+	hostec2 "github.com/upbound/provider-aws/internal/controller/ec2/host"
+	instanceec2 "github.com/upbound/provider-aws/internal/controller/ec2/instance"
 	internetgateway "github.com/upbound/provider-aws/internal/controller/ec2/internetgateway"
 	keypair "github.com/upbound/provider-aws/internal/controller/ec2/keypair"
 	launchtemplate "github.com/upbound/provider-aws/internal/controller/ec2/launchtemplate"
@@ -563,8 +563,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eip.Setup,
 		eipassociation.Setup,
 		flowlog.Setup,
-		host.Setup,
-		instance.Setup,
+		hostec2.Setup,
+		instanceec2.Setup,
 		internetgateway.Setup,
 		keypair.Setup,
 		launchtemplate.Setup,
