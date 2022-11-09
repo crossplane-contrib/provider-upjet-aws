@@ -6,6 +6,8 @@ package dynamodb
 
 import (
 	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure adds configurations for the dynamodb group.
@@ -23,7 +25,8 @@ func Configure(p *config.Provider) {
 		}
 
 		r.References["stream_arn"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream",
+			TerraformName: "aws_kinesis_stream",
+			Extractor:     common.PathTerraformIDExtractor,
 		}
 	})
 

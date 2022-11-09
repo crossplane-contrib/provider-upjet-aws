@@ -33,9 +33,8 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_cloudfront_realtime_log_config", func(r *config.Resource) {
 		r.References["endpoint.kinesis_stream_config.stream_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream",
-			Extractor: common.PathTerraformIDExtractor,
+			TerraformName: "aws_kinesis_stream",
+			Extractor:     common.PathTerraformIDExtractor,
 		}
 	})
-
 }

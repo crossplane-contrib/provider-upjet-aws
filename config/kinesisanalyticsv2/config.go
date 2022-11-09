@@ -21,5 +21,9 @@ func Configure(p *config.Provider) {
 			Type:      "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
 			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)`,
 		}
+		r.References["application_configuration.sql_application_configuration.input.kinesis_streams_input.resource_arn"] = config.Reference{
+			TerraformName: "aws_kinesis_stream",
+			Extractor:     common.PathTerraformIDExtractor,
+		}
 	})
 }

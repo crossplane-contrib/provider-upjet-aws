@@ -21,6 +21,7 @@ import (
 	"github.com/upbound/provider-aws/config/cloudfront"
 	"github.com/upbound/provider-aws/config/cloudsearch"
 	"github.com/upbound/provider-aws/config/cloudwatch"
+	"github.com/upbound/provider-aws/config/cloudwatchlogs"
 	"github.com/upbound/provider-aws/config/cognitoidentity"
 	"github.com/upbound/provider-aws/config/cognitoidp"
 	"github.com/upbound/provider-aws/config/connect"
@@ -191,6 +192,7 @@ func GetProvider() *config.Provider {
 		opensearch.Configure,
 		secretsmanager.Configure,
 		cloudwatch.Configure,
+		cloudwatchlogs.Configure,
 	} {
 		configure(pc)
 	}

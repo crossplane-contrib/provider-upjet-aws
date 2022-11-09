@@ -228,6 +228,7 @@ type KinesisStreamParameters struct {
 
 	// The ARN of the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 

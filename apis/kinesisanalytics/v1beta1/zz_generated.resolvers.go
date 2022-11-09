@@ -65,7 +65,7 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Inputs[i3].KinesisStream); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Inputs[i3].KinesisStream[i4].ResourceArn),
-				Extract:      reference.ExternalName(),
+				Extract:      common.TerraformID(),
 				Reference:    mg.Spec.ForProvider.Inputs[i3].KinesisStream[i4].ResourceArnRef,
 				Selector:     mg.Spec.ForProvider.Inputs[i3].KinesisStream[i4].ResourceArnSelector,
 				To: reference.To{

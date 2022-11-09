@@ -10,7 +10,8 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_kinesis_analytics_application", func(r *config.Resource) {
 		r.References["inputs.kinesis_stream.resource_arn"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream",
+			TerraformName: "aws_kinesis_stream",
+			Extractor:     common.PathTerraformIDExtractor,
 		}
 		r.References["inputs.kinesis_stream.role_arn"] = config.Reference{
 			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
