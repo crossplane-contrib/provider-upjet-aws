@@ -10,8 +10,60 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this Service.
+func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.NetworkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkConfiguration[i3].EgressConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArnRef,
+				Selector:     mg.Spec.ForProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArnSelector,
+				To: reference.To{
+					List:    &VPCConnectorList{},
+					Managed: &VPCConnector{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArn")
+			}
+			mg.Spec.ForProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.SourceConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArnRef,
+				Selector:     mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArnSelector,
+				To: reference.To{
+					List:    &ConnectionList{},
+					Managed: &Connection{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArn")
+			}
+			mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArnRef = rsp.ResolvedReference
+
+		}
+	}
+
+	return nil
+}
 
 // ResolveReferences of this VPCConnector.
 func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) error {

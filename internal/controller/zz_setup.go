@@ -58,6 +58,7 @@ import (
 	target "github.com/upbound/provider-aws/internal/controller/appautoscaling/target"
 	autoscalingconfigurationversion "github.com/upbound/provider-aws/internal/controller/apprunner/autoscalingconfigurationversion"
 	connection "github.com/upbound/provider-aws/internal/controller/apprunner/connection"
+	service "github.com/upbound/provider-aws/internal/controller/apprunner/service"
 	vpcconnector "github.com/upbound/provider-aws/internal/controller/apprunner/vpcconnector"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
@@ -236,7 +237,7 @@ import (
 	capacityprovider "github.com/upbound/provider-aws/internal/controller/ecs/capacityprovider"
 	clusterecs "github.com/upbound/provider-aws/internal/controller/ecs/cluster"
 	clustercapacityproviders "github.com/upbound/provider-aws/internal/controller/ecs/clustercapacityproviders"
-	service "github.com/upbound/provider-aws/internal/controller/ecs/service"
+	serviceecs "github.com/upbound/provider-aws/internal/controller/ecs/service"
 	taskdefinition "github.com/upbound/provider-aws/internal/controller/ecs/taskdefinition"
 	accesspoint "github.com/upbound/provider-aws/internal/controller/efs/accesspoint"
 	backuppolicy "github.com/upbound/provider-aws/internal/controller/efs/backuppolicy"
@@ -482,6 +483,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		target.Setup,
 		autoscalingconfigurationversion.Setup,
 		connection.Setup,
+		service.Setup,
 		vpcconnector.Setup,
 		mesh.Setup,
 		database.Setup,
@@ -660,7 +662,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		capacityprovider.Setup,
 		clusterecs.Setup,
 		clustercapacityproviders.Setup,
-		service.Setup,
+		serviceecs.Setup,
 		taskdefinition.Setup,
 		accesspoint.Setup,
 		backuppolicy.Setup,
