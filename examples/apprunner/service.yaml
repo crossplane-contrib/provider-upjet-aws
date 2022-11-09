@@ -8,33 +8,14 @@ metadata:
   name: example
 spec:
   forProvider:
-    networkConfiguration:
-    - egressConfiguration:
-      - egressType: VPC
-        vpcConnectorArnSelector:
-          matchLabels:
-            testing.upbound.io/example-name: connector
-    region: us-west-1
+    region: us-east-1
     serviceName: example
     sourceConfiguration:
-    - authenticationConfiguration:
-      - connectionArnSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
-      codeRepository:
-      - codeConfiguration:
-        - codeConfigurationValues:
-          - buildCommand: python setup.py develop
-            port: "8000"
-            runtime: PYTHON_3
-            startCommand: python runapp.py
-          configurationSource: API
-        repositoryUrl: https://github.com/example/my-example-python-app
-        sourceCodeVersion:
-        - type: BRANCH
-          value: main
+    - imageRepository:
+      - imageConfiguration:
+          - port: "8000"
+        imageIdentifier: public.ecr.aws/aws-containers/hello-app-runner:latest
+        imageRepositoryType: ECR_PUBLIC
+      autoDeploymentsEnabled: false
     tags:
       Name: example-apprunner-service
-
----
-
