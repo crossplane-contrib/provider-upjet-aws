@@ -157,3 +157,5 @@ require (
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
+
+replace github.com/upbound/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20221111092000-df1b435adc54

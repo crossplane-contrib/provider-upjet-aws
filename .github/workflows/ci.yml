@@ -118,7 +118,19 @@ jobs:
         run: make vendor vendor.check
 
       - name: Check Diff
-        run: make check-diff
+        run: |
+          mkdir _output
+          make check-diff
+        env:
+          # check-diff depends on the generate Make target, and we would like
+          # to save a skipped resource list
+          SKIPPED_RESOURCES_CSV: ../_output/skipped_resources.csv
+
+      - name: Publish skipped resources CSV to Github
+        uses: actions/upload-artifact@v3
+        with:
+          name: skipped_resources
+          path: _output/skipped_resources.csv
 
   unit-tests:
     runs-on: ubuntu-22.04
@@ -236,7 +248,7 @@ jobs:
           BUILD_ARGS: "--load"
 
       - name: Publish Artifacts to GitHub
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: output
           path: _output/**
