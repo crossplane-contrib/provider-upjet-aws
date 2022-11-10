@@ -1211,6 +1211,15 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// aws_datapipeline_pipeline can be imported by using the id (Pipeline ID)
 	"aws_datapipeline_pipeline": config.IdentifierFromProvider,
+
+	// detective
+    //
+    // aws_detective_graph can be imported using the ARN
+    "aws_detective_graph": config.IdentifierFromProvider,
+    // aws_detective_member can be imported using the ARN of the graph followed by the account ID of the member account
+    "aws_detective_member": config.IdentifierFromProvider,
+    // aws_detective_invitation_accepter can be imported using the graph ARN
+    "aws_detective_invitation_accepter": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

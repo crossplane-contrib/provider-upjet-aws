@@ -167,6 +167,9 @@ import (
 	appdeploy "github.com/upbound/provider-aws/internal/controller/deploy/app"
 	deploymentconfig "github.com/upbound/provider-aws/internal/controller/deploy/deploymentconfig"
 	deploymentgroup "github.com/upbound/provider-aws/internal/controller/deploy/deploymentgroup"
+	graph "github.com/upbound/provider-aws/internal/controller/detective/graph"
+	invitationaccepter "github.com/upbound/provider-aws/internal/controller/detective/invitationaccepter"
+	member "github.com/upbound/provider-aws/internal/controller/detective/member"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
 	globalcluster "github.com/upbound/provider-aws/internal/controller/docdb/globalcluster"
@@ -619,6 +622,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		appdeploy.Setup,
 		deploymentconfig.Setup,
 		deploymentgroup.Setup,
+		graph.Setup,
+		invitationaccepter.Setup,
+		member.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,
 		globalcluster.Setup,
