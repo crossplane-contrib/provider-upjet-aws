@@ -3,7 +3,7 @@ kind: EBSSnapshotImport
 metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/ebssnapshotimport
-    upjet.upbound.io/timeout: "3600" # one hour timeout
+    upjet.upbound.io/timeout: "5400" # one and half hour timeout
   labels:
     testing.upbound.io/example-name: example
   name: example
