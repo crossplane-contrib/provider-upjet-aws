@@ -56,7 +56,13 @@ import (
 	policy "github.com/upbound/provider-aws/internal/controller/appautoscaling/policy"
 	scheduledaction "github.com/upbound/provider-aws/internal/controller/appautoscaling/scheduledaction"
 	target "github.com/upbound/provider-aws/internal/controller/appautoscaling/target"
+	gatewayroute "github.com/upbound/provider-aws/internal/controller/appmesh/gatewayroute"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
+	routeappmesh "github.com/upbound/provider-aws/internal/controller/appmesh/route"
+	virtualgateway "github.com/upbound/provider-aws/internal/controller/appmesh/virtualgateway"
+	virtualnode "github.com/upbound/provider-aws/internal/controller/appmesh/virtualnode"
+	virtualrouter "github.com/upbound/provider-aws/internal/controller/appmesh/virtualrouter"
+	virtualservice "github.com/upbound/provider-aws/internal/controller/appmesh/virtualservice"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
 	namedquery "github.com/upbound/provider-aws/internal/controller/athena/namedquery"
@@ -477,7 +483,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		policy.Setup,
 		scheduledaction.Setup,
 		target.Setup,
+		gatewayroute.Setup,
 		mesh.Setup,
+		routeappmesh.Setup,
+		virtualgateway.Setup,
+		virtualnode.Setup,
+		virtualrouter.Setup,
+		virtualservice.Setup,
 		database.Setup,
 		datacatalog.Setup,
 		namedquery.Setup,
