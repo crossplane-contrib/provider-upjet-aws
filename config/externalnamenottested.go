@@ -92,8 +92,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// aws_appstream_directory_config can be imported using the id
 	"aws_appstream_directory_config": config.IdentifierFromProvider,
-	// aws_appstream_fleet can be imported using the id
-	"aws_appstream_fleet": config.IdentifierFromProvider,
 	// AppStream Stack Fleet Association can be imported by using the fleet_name and stack_name separated by a slash (/)
 	"aws_appstream_fleet_stack_association": config.TemplatedStringAsIdentifier("stack_name", "{{ .parameters.fleet_name }}/{{ .external_name }}"),
 	// aws_appstream_image_builder can be imported using the name

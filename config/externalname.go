@@ -1118,6 +1118,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// App Runner vpc connector can be imported by using the arn
 	"aws_apprunner_vpc_connector": config.IdentifierFromProvider,
 
+	// appstream
+	//
+	// aws_appstream_fleet can be imported using the id
+	"aws_appstream_fleet": config.IdentifierFromProvider,
+
 	// appmesh
 	//
 	// App Mesh service meshes can be imported using the name

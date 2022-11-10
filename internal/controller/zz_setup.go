@@ -60,6 +60,7 @@ import (
 	connection "github.com/upbound/provider-aws/internal/controller/apprunner/connection"
 	service "github.com/upbound/provider-aws/internal/controller/apprunner/service"
 	vpcconnector "github.com/upbound/provider-aws/internal/controller/apprunner/vpcconnector"
+	fleet "github.com/upbound/provider-aws/internal/controller/appstream/fleet"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
@@ -265,7 +266,7 @@ import (
 	deliverystream "github.com/upbound/provider-aws/internal/controller/firehose/deliverystream"
 	alias "github.com/upbound/provider-aws/internal/controller/gamelift/alias"
 	build "github.com/upbound/provider-aws/internal/controller/gamelift/build"
-	fleet "github.com/upbound/provider-aws/internal/controller/gamelift/fleet"
+	fleetgamelift "github.com/upbound/provider-aws/internal/controller/gamelift/fleet"
 	gamesessionqueue "github.com/upbound/provider-aws/internal/controller/gamelift/gamesessionqueue"
 	script "github.com/upbound/provider-aws/internal/controller/gamelift/script"
 	accelerator "github.com/upbound/provider-aws/internal/controller/globalaccelerator/accelerator"
@@ -485,6 +486,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		connection.Setup,
 		service.Setup,
 		vpcconnector.Setup,
+		fleet.Setup,
 		mesh.Setup,
 		database.Setup,
 		datacatalog.Setup,
@@ -690,7 +692,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		deliverystream.Setup,
 		alias.Setup,
 		build.Setup,
-		fleet.Setup,
+		fleetgamelift.Setup,
 		gamesessionqueue.Setup,
 		script.Setup,
 		accelerator.Setup,
