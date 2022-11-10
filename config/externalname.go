@@ -1072,6 +1072,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_connect_security_profile": config.IdentifierFromProvider,
 	// Amazon Connect User Hierarchy Structures can be imported using the instance_id
 	"aws_connect_user_hierarchy_structure": config.IdentifierFromProvider,
+
+	// appmesh
+	//
+	// App Mesh service meshes can be imported using the name
+	"aws_appmesh_mesh": config.NameAsIdentifier,
 }
 
 func lambdaFunctionURL() config.ExternalName {

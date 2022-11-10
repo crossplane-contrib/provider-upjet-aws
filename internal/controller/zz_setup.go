@@ -56,6 +56,7 @@ import (
 	policy "github.com/upbound/provider-aws/internal/controller/appautoscaling/policy"
 	scheduledaction "github.com/upbound/provider-aws/internal/controller/appautoscaling/scheduledaction"
 	target "github.com/upbound/provider-aws/internal/controller/appautoscaling/target"
+	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
 	namedquery "github.com/upbound/provider-aws/internal/controller/athena/namedquery"
@@ -452,6 +453,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		policy.Setup,
 		scheduledaction.Setup,
 		target.Setup,
+		mesh.Setup,
 		database.Setup,
 		datacatalog.Setup,
 		namedquery.Setup,
