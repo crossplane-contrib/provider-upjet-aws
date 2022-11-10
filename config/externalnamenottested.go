@@ -73,8 +73,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// App Mesh gateway routes can be imported using mesh_name and virtual_gateway_name together with the gateway route's name, e.g.,
 	// mesh/gw1/example-gateway-route
 	"aws_appmesh_gateway_route": config.TemplatedStringAsIdentifier("name", "{{ .parameters.mesh_name }}/{{ .parameters.virtual_gateway_name }}/{{ .external_name }}"),
-	// App Mesh service meshes can be imported using the name
-	"aws_appmesh_mesh": config.NameAsIdentifier,
 	// App Mesh virtual routes can be imported using mesh_name and virtual_router_name together with the route's name, e.g.,
 	// simpleapp/serviceB/serviceB-route
 	"aws_appmesh_route": config.TemplatedStringAsIdentifier("name", "{{ .parameters.mesh_name }}/{{ .parameters.virtual_router_name }}/{{ .external_name }}"),
