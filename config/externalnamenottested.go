@@ -92,8 +92,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// AppStream Stack Fleet Association can be imported by using the fleet_name and stack_name separated by a slash (/)
 	"aws_appstream_fleet_stack_association": config.TemplatedStringAsIdentifier("stack_name", "{{ .parameters.fleet_name }}/{{ .external_name }}"),
-	// aws_appstream_stack can be imported using the id
-	"aws_appstream_stack": config.IdentifierFromProvider,
 	// aws_appstream_user can be imported using the user_name and authentication_type separated by a slash (/)
 	"aws_appstream_user": config.TemplatedStringAsIdentifier("user_name", "{{ .external_name }}/{{ .parameters.authentication_type }}"),
 	// AppStream User Stack Association can be imported by using the user_name, authentication_type, and stack_name, separated by a slash (/)

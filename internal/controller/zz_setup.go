@@ -63,6 +63,7 @@ import (
 	directoryconfig "github.com/upbound/provider-aws/internal/controller/appstream/directoryconfig"
 	fleet "github.com/upbound/provider-aws/internal/controller/appstream/fleet"
 	imagebuilder "github.com/upbound/provider-aws/internal/controller/appstream/imagebuilder"
+	stack "github.com/upbound/provider-aws/internal/controller/appstream/stack"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
@@ -491,6 +492,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		directoryconfig.Setup,
 		fleet.Setup,
 		imagebuilder.Setup,
+		stack.Setup,
 		mesh.Setup,
 		database.Setup,
 		datacatalog.Setup,
