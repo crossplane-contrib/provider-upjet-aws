@@ -60,6 +60,7 @@ import (
 	connection "github.com/upbound/provider-aws/internal/controller/apprunner/connection"
 	service "github.com/upbound/provider-aws/internal/controller/apprunner/service"
 	vpcconnector "github.com/upbound/provider-aws/internal/controller/apprunner/vpcconnector"
+	directoryconfig "github.com/upbound/provider-aws/internal/controller/appstream/directoryconfig"
 	fleet "github.com/upbound/provider-aws/internal/controller/appstream/fleet"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
@@ -486,6 +487,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		connection.Setup,
 		service.Setup,
 		vpcconnector.Setup,
+		directoryconfig.Setup,
 		fleet.Setup,
 		mesh.Setup,
 		database.Setup,
