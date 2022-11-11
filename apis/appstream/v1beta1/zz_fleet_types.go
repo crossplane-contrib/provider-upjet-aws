@@ -98,8 +98,18 @@ type FleetParameters struct {
 	FleetType *string `json:"fleetType,omitempty" tf:"fleet_type,omitempty"`
 
 	// ARN of the IAM role to apply to the fleet.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins.
 	// +kubebuilder:validation:Optional

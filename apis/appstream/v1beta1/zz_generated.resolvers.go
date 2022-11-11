@@ -9,8 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -19,8 +19,25 @@ import (
 func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
+	var rsp reference.ResolutionResponse
 	var mrsp reference.MultiResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IAMRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.ForProvider.IAMRoleArnRef,
+		Selector:     mg.Spec.ForProvider.IAMRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IAMRoleArn")
+	}
+	mg.Spec.ForProvider.IAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IAMRoleArnRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCConfig); i3++ {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
@@ -29,8 +46,8 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 			References:    mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs,
 			Selector:      mg.Spec.ForProvider.VPCConfig[i3].SubnetIDSelector,
 			To: reference.To{
-				List:    &v1beta1.SubnetList{},
-				Managed: &v1beta1.Subnet{},
+				List:    &v1beta11.SubnetList{},
+				Managed: &v1beta11.Subnet{},
 			},
 		})
 		if err != nil {
@@ -49,6 +66,7 @@ func (mg *ImageBuilder) ResolveReferences(ctx context.Context, c client.Reader) 
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -57,8 +75,8 @@ func (mg *ImageBuilder) ResolveReferences(ctx context.Context, c client.Reader) 
 		Reference:    mg.Spec.ForProvider.IAMRoleArnRef,
 		Selector:     mg.Spec.ForProvider.IAMRoleArnSelector,
 		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
 		},
 	})
 	if err != nil {
@@ -66,6 +84,25 @@ func (mg *ImageBuilder) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.IAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IAMRoleArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCConfig); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfig[i3].SubnetIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs,
+			Selector:      mg.Spec.ForProvider.VPCConfig[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta11.SubnetList{},
+				Managed: &v1beta11.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.VPCConfig[i3].SubnetIds")
+		}
+		mg.Spec.ForProvider.VPCConfig[i3].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs = mrsp.ResolvedReferences
+
+	}
 
 	return nil
 }

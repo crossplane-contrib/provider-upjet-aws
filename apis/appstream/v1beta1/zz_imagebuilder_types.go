@@ -52,6 +52,9 @@ type ImageBuilderObservation struct {
 	// The name of the image builder.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Name of the image used to create the image builder.
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
 	// State of the image builder. Can be: PENDING, UPDATING_AGENT, RUNNING, STOPPING, STOPPED, REBOOTING, SNAPSHOTTING, DELETING, FAILED, UPDATING, PENDING_QUALIFICATION
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
@@ -103,10 +106,6 @@ type ImageBuilderParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageArn *string `json:"imageArn,omitempty" tf:"image_arn,omitempty"`
 
-	// Name of the image used to create the image builder.
-	// +kubebuilder:validation:Optional
-	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
-
 	// The instance type to use when launching the image builder.
 	// +kubebuilder:validation:Required
 	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
@@ -134,7 +133,18 @@ type ImageBuilderVPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// Identifiers of the subnets to which a network interface is attached from the image builder instance or image builder instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }

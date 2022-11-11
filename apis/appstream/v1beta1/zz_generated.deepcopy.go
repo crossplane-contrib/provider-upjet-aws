@@ -468,6 +468,16 @@ func (in *FleetParameters) DeepCopyInto(out *FleetParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IAMRoleArnRef != nil {
+		in, out := &in.IAMRoleArnRef, &out.IAMRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.IAMRoleArnSelector != nil {
+		in, out := &in.IAMRoleArnSelector, &out.IAMRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.IdleDisconnectTimeoutInSeconds != nil {
 		in, out := &in.IdleDisconnectTimeoutInSeconds, &out.IdleDisconnectTimeoutInSeconds
 		*out = new(float64)
@@ -693,6 +703,11 @@ func (in *ImageBuilderObservation) DeepCopyInto(out *ImageBuilderObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ImageName != nil {
+		in, out := &in.ImageName, &out.ImageName
+		*out = new(string)
+		**out = **in
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
@@ -779,11 +794,6 @@ func (in *ImageBuilderParameters) DeepCopyInto(out *ImageBuilderParameters) {
 	}
 	if in.ImageArn != nil {
 		in, out := &in.ImageArn, &out.ImageArn
-		*out = new(string)
-		**out = **in
-	}
-	if in.ImageName != nil {
-		in, out := &in.ImageName, &out.ImageName
 		*out = new(string)
 		**out = **in
 	}
@@ -893,6 +903,18 @@ func (in *ImageBuilderVPCConfigParameters) DeepCopyInto(out *ImageBuilderVPCConf
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetIDRefs != nil {
+		in, out := &in.SubnetIDRefs, &out.SubnetIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
