@@ -13,10 +13,10 @@ spec:
       settingsGroup: SettingsGroup
     description: stack description
     displayName: stack display name
-    feedbackUrl: http://your-domain/feedback
-    name: stack name
-    redirectUrl: http://your-domain/redirect
-    region: us-west-1
+    feedbackUrl: https://aws.amazon.com
+    name: ${Rand.RFC1123Subdomain}
+    redirectUrl: https://aws.amazon.com
+    region: us-east-1
     storageConnectors:
     - connectorType: HOMEFOLDERS
     tags:
@@ -30,6 +30,3 @@ spec:
       permission: ENABLED
     - action: FILE_DOWNLOAD
       permission: ENABLED
-
----
-
