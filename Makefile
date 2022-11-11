@@ -55,7 +55,7 @@ GO111MODULE = on
 KIND_VERSION = v0.15.0
 UP_VERSION = v0.14.0
 UP_CHANNEL = stable
-UPTEST_VERSION = v0.2.1
+UPTEST_VERSION = v0.3.0
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================
