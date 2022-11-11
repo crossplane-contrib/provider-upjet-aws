@@ -62,6 +62,7 @@ import (
 	vpcconnector "github.com/upbound/provider-aws/internal/controller/apprunner/vpcconnector"
 	directoryconfig "github.com/upbound/provider-aws/internal/controller/appstream/directoryconfig"
 	fleet "github.com/upbound/provider-aws/internal/controller/appstream/fleet"
+	imagebuilder "github.com/upbound/provider-aws/internal/controller/appstream/imagebuilder"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
@@ -489,6 +490,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcconnector.Setup,
 		directoryconfig.Setup,
 		fleet.Setup,
+		imagebuilder.Setup,
 		mesh.Setup,
 		database.Setup,
 		datacatalog.Setup,

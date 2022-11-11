@@ -1124,6 +1124,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_appstream_directory_config": config.IdentifierFromProvider,
 	// aws_appstream_fleet can be imported using the id
 	"aws_appstream_fleet": config.IdentifierFromProvider,
+	// aws_appstream_image_builder can be imported using the name
+	"aws_appstream_image_builder": config.NameAsIdentifier,
 
 	// appmesh
 	//
