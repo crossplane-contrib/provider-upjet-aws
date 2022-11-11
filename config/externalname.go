@@ -1111,6 +1111,23 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// App Mesh service meshes can be imported using the name
 	"aws_appmesh_mesh": config.NameAsIdentifier,
+
+	// configservice
+	//
+	// Config Rule can be imported using the name
+	"aws_config_config_rule": config.NameAsIdentifier,
+	// Configuration Aggregators can be imported using the name
+	"aws_config_configuration_aggregator": config.NameAsIdentifier,
+	// Configuration Recorder can be imported using the name
+	"aws_config_configuration_recorder": config.NameAsIdentifier,
+	// Configuration Recorder Status can be imported using the name of the Configuration Recorder
+	"aws_config_configuration_recorder_status": config.NameAsIdentifier,
+	// Config Conformance Packs can be imported using the name
+	"aws_config_conformance_pack": config.NameAsIdentifier,
+	// Delivery Channel can be imported using the name
+	"aws_config_delivery_channel": config.NameAsIdentifier,
+	// Remediation Configurations can be imported using the name config_rule_name
+	"aws_config_remediation_configuration": config.ParameterAsIdentifier("config_rule_name"),
 }
 
 func lambdaFunctionURL() config.ExternalName {
