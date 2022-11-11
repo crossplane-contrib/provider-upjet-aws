@@ -8,16 +8,22 @@ metadata:
   name: example
 spec:
   forProvider:
-    directoryName: NAME OF DIRECTORY
+    directoryName: corp.example.com
     organizationalUnitDistinguishedNames:
     - DISTINGUISHED NAME
-    region: us-west-1
+    region: us-east-1
     serviceAccountCredentials:
-    - accountName: NAME OF ACCOUNT
+    - accountName: DOMAIN\username
       accountPasswordSecretRef:
-        key: example-key
+        key: credentials
         name: example-secret
         namespace: upbound-system
-
 ---
-
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+stringData: 
+  credentials: change-me
