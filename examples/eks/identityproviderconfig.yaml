@@ -2,7 +2,7 @@ apiVersion: eks.aws.upbound.io/v1beta1
 kind: IdentityProviderConfig
 metadata:
   annotations:
-    upjet.upbound.io/timeout: "3600" # one hour timeout
+    uptest.upbound.io/timeout: "3600" # one hour timeout
   name: example
 spec:
   forProvider:

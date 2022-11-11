@@ -2,7 +2,7 @@ apiVersion: cloudsearch.aws.upbound.io/v1beta1
 kind: Domain
 metadata:
   annotations:
-    upjet.upbound.io/timeout: "5400" # Takes very long.
+    uptest.upbound.io/timeout: "5400" # Takes very long.
   labels:
     testing.upbound.io/example-name: domain
   name: example-${Rand.RFC1123Subdomain}
@@ -30,7 +30,7 @@ apiVersion: cloudsearch.aws.upbound.io/v1beta1
 kind: DomainServiceAccessPolicy
 metadata:
   annotations:
-    upjet.upbound.io/timeout: "5400" # Takes very long.
+    uptest.upbound.io/timeout: "5400" # Takes very long.
   labels:
     testing.upbound.io/example-name: domain
   name: example-${Rand.RFC1123Subdomain}
