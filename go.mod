@@ -2,7 +2,7 @@ module github.com/upbound/provider-aws
 
 go 1.19
 
-replace github.com/upbound/upjet => ../upjet
+replace github.com/upbound/upjet => github.com/turkenh/upjet v0.0.0-20221111211326-06e26cb0202d
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.15
