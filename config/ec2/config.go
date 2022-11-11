@@ -93,6 +93,19 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("aws_ec2_transit_gateway_connect", func(r *config.Resource) {
+		r.References["subnet_ids"] = config.Reference{
+			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+			RefFieldName:      "SubnetIDRefs",
+			SelectorFieldName: "SubnetIDSelector",
+		}
+		r.References["vpc_id"] = config.Reference{
+			Type:              "VPC",
+			RefFieldName:      "VPCIDRef",
+			SelectorFieldName: "VPCIDSelector",
+		}
+	})
+
 	p.AddResourceConfigurator("aws_launch_template", func(r *config.Resource) {
 		r.References["security_group_names"] = config.Reference{
 			Type:              "SecurityGroup",
@@ -309,5 +322,9 @@ func Configure(p *config.Provider) {
 				"spot_type",
 			},
 		}
+	})
+
+	p.AddResourceConfigurator("aws_ec2_traffic_mirror_target", func(r *config.Resource) {
+		delete(r.References, "network_load_balancer_arn")
 	})
 }
