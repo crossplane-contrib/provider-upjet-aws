@@ -270,6 +270,7 @@ import (
 	catalogdatabase "github.com/upbound/provider-aws/internal/controller/glue/catalogdatabase"
 	catalogtable "github.com/upbound/provider-aws/internal/controller/glue/catalogtable"
 	classifier "github.com/upbound/provider-aws/internal/controller/glue/classifier"
+	connectionglue "github.com/upbound/provider-aws/internal/controller/glue/connection"
 	datacatalogencryptionsettings "github.com/upbound/provider-aws/internal/controller/glue/datacatalogencryptionsettings"
 	job "github.com/upbound/provider-aws/internal/controller/glue/job"
 	registry "github.com/upbound/provider-aws/internal/controller/glue/registry"
@@ -691,6 +692,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		catalogdatabase.Setup,
 		catalogtable.Setup,
 		classifier.Setup,
+		connectionglue.Setup,
 		datacatalogencryptionsettings.Setup,
 		job.Setup,
 		registry.Setup,

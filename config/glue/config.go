@@ -65,4 +65,12 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("aws_glue_connection", func(r *config.Resource) {
+		// Catalog ID is a required field but set as optional in schema since TF defaults it to Account ID.
+		// We need to mark it as required since it is used as part of "id" field in tfstate.
+		r.TerraformResource.Schema["catalog_id"].Required = true
+		r.TerraformResource.Schema["catalog_id"].Optional = false
+		r.TerraformResource.Schema["catalog_id"].Computed = false
+	})
+
 }

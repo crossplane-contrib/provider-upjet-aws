@@ -34,6 +34,15 @@ func (l *ClassifierList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ConnectionList.
+func (l *ConnectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this DataCatalogEncryptionSettingsList.
 func (l *DataCatalogEncryptionSettingsList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

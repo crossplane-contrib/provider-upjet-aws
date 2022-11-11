@@ -9,9 +9,11 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta1 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/kms/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -41,6 +43,53 @@ func (mg *CatalogTable) ResolveReferences(ctx context.Context, c client.Reader) 
 	return nil
 }
 
+// ResolveReferences of this Connection.
+func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PhysicalConnectionRequirements); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].AvailabilityZone),
+			Extract:      resource.ExtractParamPath("availability_zone", false),
+			Reference:    mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].AvailabilityZoneRef,
+			Selector:     mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].AvailabilityZoneSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].AvailabilityZone")
+		}
+		mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].AvailabilityZone = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].AvailabilityZoneRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PhysicalConnectionRequirements); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SubnetID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SubnetIDRef,
+			Selector:     mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SubnetID")
+		}
+		mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this DataCatalogEncryptionSettings.
 func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -56,8 +105,8 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 				Reference:    mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDRef,
 				Selector:     mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDSelector,
 				To: reference.To{
-					List:    &v1beta1.KeyList{},
-					Managed: &v1beta1.Key{},
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
 				},
 			})
 			if err != nil {
@@ -76,8 +125,8 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 				Reference:    mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyIDRef,
 				Selector:     mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyIDSelector,
 				To: reference.To{
-					List:    &v1beta1.KeyList{},
-					Managed: &v1beta1.Key{},
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
 				},
 			})
 			if err != nil {
@@ -105,8 +154,8 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
 		},
 	})
 	if err != nil {
@@ -133,8 +182,8 @@ func (mg *SecurityConfiguration) ResolveReferences(ctx context.Context, c client
 				Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArnRef,
 				Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArnSelector,
 				To: reference.To{
-					List:    &v1beta1.KeyList{},
-					Managed: &v1beta1.Key{},
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
 				},
 			})
 			if err != nil {
@@ -153,8 +202,8 @@ func (mg *SecurityConfiguration) ResolveReferences(ctx context.Context, c client
 				Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArnRef,
 				Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArnSelector,
 				To: reference.To{
-					List:    &v1beta1.KeyList{},
-					Managed: &v1beta1.Key{},
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
 				},
 			})
 			if err != nil {
@@ -173,8 +222,8 @@ func (mg *SecurityConfiguration) ResolveReferences(ctx context.Context, c client
 				Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArnRef,
 				Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArnSelector,
 				To: reference.To{
-					List:    &v1beta1.KeyList{},
-					Managed: &v1beta1.Key{},
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
 				},
 			})
 			if err != nil {

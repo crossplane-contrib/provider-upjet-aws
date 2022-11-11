@@ -371,7 +371,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_glue_catalog_table":    config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
 	"aws_glue_classifier":       config.NameAsIdentifier,
 	// Imported as CATALOG_ID:name 123456789012:MyConnection
-	// "aws_glue_connection": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .external_name }}"),
+	"aws_glue_connection": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .external_name }}"),
 	// "aws_glue_crawler": config.NameAsIdentifier,
 	// Imported using CATALOG-ID (AWS account ID if not custom), e.g., 123456789012
 	"aws_glue_data_catalog_encryption_settings": config.IdentifierFromProvider,

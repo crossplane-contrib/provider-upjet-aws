@@ -24,3 +24,4 @@ spec:
       name: provider-secret
       namespace: upbound-system
       key: credentials
+EOF
