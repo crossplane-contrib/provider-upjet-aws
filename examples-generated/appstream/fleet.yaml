@@ -23,8 +23,8 @@ spec:
     tags:
       TagName: tag-value
     vpcConfig:
-    - subnetIds:
-      - subnet-06e9b13400c225127
+    - subnetIdRefs:
+      - name: example
 
 ---
 

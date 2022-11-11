@@ -17,14 +17,38 @@ spec:
     idleDisconnectTimeoutInSeconds: 60
     imageName: Amazon-AppStream2-Sample-Image-02-04-2019
     instanceType: stream.standard.large
-    maxUserDurationInSeconds: 600
+    maxUserDurationInSeconds: 960
     name: test-fleet
-    region: us-west-1
+    region: us-east-1
     tags:
       TagName: tag-value
     vpcConfig:
-    - subnetIds:
-      - subnet-06e9b13400c225127
-
+      - subnetIdRefs:
+          - name: sample-subnet1
 ---
-
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apprunner/v1beta1/fleet
+  name: sample-subnet1
+spec:
+  forProvider:
+    region: us-east-1
+    availabilityZone: us-east-1b
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apprunner/v1beta1/fleet
+  name: sample-vpc
+spec:
+  forProvider:
+    region: us-east-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
