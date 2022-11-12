@@ -12,6 +12,7 @@ import (
 	v1beta11 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -57,6 +58,32 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs = mrsp.ResolvedReferences
 
 	}
+
+	return nil
+}
+
+// ResolveReferences of this FleetStackAssociation.
+func (mg *FleetStackAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FleetName),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.ForProvider.FleetNameRef,
+		Selector:     mg.Spec.ForProvider.FleetNameSelector,
+		To: reference.To{
+			List:    &FleetList{},
+			Managed: &Fleet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FleetName")
+	}
+	mg.Spec.ForProvider.FleetName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FleetNameRef = rsp.ResolvedReference
 
 	return nil
 }

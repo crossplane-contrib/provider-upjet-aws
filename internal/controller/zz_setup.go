@@ -62,6 +62,7 @@ import (
 	vpcconnector "github.com/upbound/provider-aws/internal/controller/apprunner/vpcconnector"
 	directoryconfig "github.com/upbound/provider-aws/internal/controller/appstream/directoryconfig"
 	fleet "github.com/upbound/provider-aws/internal/controller/appstream/fleet"
+	fleetstackassociation "github.com/upbound/provider-aws/internal/controller/appstream/fleetstackassociation"
 	imagebuilder "github.com/upbound/provider-aws/internal/controller/appstream/imagebuilder"
 	stack "github.com/upbound/provider-aws/internal/controller/appstream/stack"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
@@ -491,6 +492,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcconnector.Setup,
 		directoryconfig.Setup,
 		fleet.Setup,
+		fleetstackassociation.Setup,
 		imagebuilder.Setup,
 		stack.Setup,
 		mesh.Setup,
