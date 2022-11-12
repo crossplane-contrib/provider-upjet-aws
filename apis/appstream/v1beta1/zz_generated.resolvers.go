@@ -85,6 +85,22 @@ func (mg *FleetStackAssociation) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.FleetName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FleetNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackName),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.ForProvider.StackNameRef,
+		Selector:     mg.Spec.ForProvider.StackNameSelector,
+		To: reference.To{
+			List:    &StackList{},
+			Managed: &Stack{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StackName")
+	}
+	mg.Spec.ForProvider.StackName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StackNameRef = rsp.ResolvedReference
+
 	return nil
 }
 

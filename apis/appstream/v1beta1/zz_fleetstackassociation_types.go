@@ -39,6 +39,20 @@ type FleetStackAssociationParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Name of the stack.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appstream/v1beta1.Stack
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +kubebuilder:validation:Optional
+	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
+
+	// Reference to a Stack in appstream to populate stackName.
+	// +kubebuilder:validation:Optional
+	StackNameRef *v1.Reference `json:"stackNameRef,omitempty" tf:"-"`
+
+	// Selector for a Stack in appstream to populate stackName.
+	// +kubebuilder:validation:Optional
+	StackNameSelector *v1.Selector `json:"stackNameSelector,omitempty" tf:"-"`
 }
 
 // FleetStackAssociationSpec defines the desired state of FleetStackAssociation

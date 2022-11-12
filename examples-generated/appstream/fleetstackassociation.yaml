@@ -12,6 +12,9 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     region: us-west-1
+    stackNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
