@@ -1133,7 +1133,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// aws_appstream_user can be imported using the user_name and authentication_type separated by a slash (/)
 	"aws_appstream_user": config.TemplatedStringAsIdentifier("", "{{ .parameters.user_name }}/{{ .parameters.authentication_type }}"),
 	// AppStream User Stack Association can be imported by using the user_name, authentication_type, and stack_name, separated by a slash (/)
-	"aws_appstream_user_stack_association": config.TemplatedStringAsIdentifier("stack_name", "{{ .parameters.user_name }}/{{ .parameters.authentication_type }}/{{ .external_name }}/"),
+	"aws_appstream_user_stack_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.user_name }}/{{ .parameters.authentication_type }}/{{ .parameters.stack_name }}/"),
 
 	// appmesh
 	//

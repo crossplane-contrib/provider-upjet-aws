@@ -1809,6 +1809,21 @@ func (in *UserStackAssociationParameters) DeepCopyInto(out *UserStackAssociation
 		*out = new(bool)
 		**out = **in
 	}
+	if in.StackName != nil {
+		in, out := &in.StackName, &out.StackName
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackNameRef != nil {
+		in, out := &in.StackNameRef, &out.StackNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackNameSelector != nil {
+		in, out := &in.StackNameSelector, &out.StackNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.UserName != nil {
 		in, out := &in.UserName, &out.UserName
 		*out = new(string)

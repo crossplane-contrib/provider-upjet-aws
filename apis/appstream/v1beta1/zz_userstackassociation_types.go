@@ -44,6 +44,20 @@ type UserStackAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	SendEmailNotification *bool `json:"sendEmailNotification,omitempty" tf:"send_email_notification,omitempty"`
 
+	// Name of the stack that is associated with the user.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appstream/v1beta1.Stack
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +kubebuilder:validation:Optional
+	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
+
+	// Reference to a Stack in appstream to populate stackName.
+	// +kubebuilder:validation:Optional
+	StackNameRef *v1.Reference `json:"stackNameRef,omitempty" tf:"-"`
+
+	// Selector for a Stack in appstream to populate stackName.
+	// +kubebuilder:validation:Optional
+	StackNameSelector *v1.Selector `json:"stackNameSelector,omitempty" tf:"-"`
+
 	// Email address of the user who is associated with the stack.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appstream/v1beta1.User
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("user_name",false)
