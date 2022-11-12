@@ -149,3 +149,45 @@ func (mg *ImageBuilder) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	return nil
 }
+
+// ResolveReferences of this UserStackAssociation.
+func (mg *UserStackAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthenticationType),
+		Extract:      resource.ExtractParamPath("authentication_type", false),
+		Reference:    mg.Spec.ForProvider.AuthenticationTypeRef,
+		Selector:     mg.Spec.ForProvider.AuthenticationTypeSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AuthenticationType")
+	}
+	mg.Spec.ForProvider.AuthenticationType = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AuthenticationTypeRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserName),
+		Extract:      resource.ExtractParamPath("user_name", false),
+		Reference:    mg.Spec.ForProvider.UserNameRef,
+		Selector:     mg.Spec.ForProvider.UserNameSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.UserName")
+	}
+	mg.Spec.ForProvider.UserName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UserNameRef = rsp.ResolvedReference
+
+	return nil
+}

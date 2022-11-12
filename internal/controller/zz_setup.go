@@ -66,6 +66,7 @@ import (
 	imagebuilder "github.com/upbound/provider-aws/internal/controller/appstream/imagebuilder"
 	stack "github.com/upbound/provider-aws/internal/controller/appstream/stack"
 	user "github.com/upbound/provider-aws/internal/controller/appstream/user"
+	userstackassociation "github.com/upbound/provider-aws/internal/controller/appstream/userstackassociation"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
@@ -497,6 +498,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		imagebuilder.Setup,
 		stack.Setup,
 		user.Setup,
+		userstackassociation.Setup,
 		mesh.Setup,
 		database.Setup,
 		datacatalog.Setup,
