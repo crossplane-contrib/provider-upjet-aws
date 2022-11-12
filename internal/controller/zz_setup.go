@@ -65,6 +65,7 @@ import (
 	fleetstackassociation "github.com/upbound/provider-aws/internal/controller/appstream/fleetstackassociation"
 	imagebuilder "github.com/upbound/provider-aws/internal/controller/appstream/imagebuilder"
 	stack "github.com/upbound/provider-aws/internal/controller/appstream/stack"
+	user "github.com/upbound/provider-aws/internal/controller/appstream/user"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
@@ -120,7 +121,7 @@ import (
 	poolrolesattachment "github.com/upbound/provider-aws/internal/controller/cognitoidentity/poolrolesattachment"
 	identityprovider "github.com/upbound/provider-aws/internal/controller/cognitoidp/identityprovider"
 	resourceserver "github.com/upbound/provider-aws/internal/controller/cognitoidp/resourceserver"
-	user "github.com/upbound/provider-aws/internal/controller/cognitoidp/user"
+	usercognitoidp "github.com/upbound/provider-aws/internal/controller/cognitoidp/user"
 	userpool "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpool"
 	userpoolclient "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpoolclient"
 	userpooldomain "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooldomain"
@@ -495,6 +496,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		fleetstackassociation.Setup,
 		imagebuilder.Setup,
 		stack.Setup,
+		user.Setup,
 		mesh.Setup,
 		database.Setup,
 		datacatalog.Setup,
@@ -550,7 +552,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		poolrolesattachment.Setup,
 		identityprovider.Setup,
 		resourceserver.Setup,
-		user.Setup,
+		usercognitoidp.Setup,
 		userpool.Setup,
 		userpoolclient.Setup,
 		userpooldomain.Setup,
