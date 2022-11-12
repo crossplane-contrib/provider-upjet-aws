@@ -12,6 +12,7 @@ spec:
     firstName: FIRST NAME
     lastName: LAST NAME
     region: us-west-1
+    userName: EMAIL
 
 ---
 

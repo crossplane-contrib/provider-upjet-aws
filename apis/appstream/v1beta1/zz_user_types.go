@@ -51,6 +51,10 @@ type UserParameters struct {
 	// Send an email notification.
 	// +kubebuilder:validation:Optional
 	SendEmailNotification *bool `json:"sendEmailNotification,omitempty" tf:"send_email_notification,omitempty"`
+
+	// Email address of the user.
+	// +kubebuilder:validation:Required
+	UserName *string `json:"userName" tf:"user_name,omitempty"`
 }
 
 // UserSpec defines the desired state of User

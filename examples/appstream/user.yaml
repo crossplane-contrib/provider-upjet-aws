@@ -11,7 +11,5 @@ spec:
     authenticationType: USERPOOL
     firstName: FIRST NAME
     lastName: LAST NAME
-    region: us-west-1
-
----
-
+    region: us-east-1
+    userName: user@example.com
