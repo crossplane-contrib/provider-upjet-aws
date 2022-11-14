@@ -15,7 +15,7 @@ require (
 	github.com/google/go-cmp v0.5.9
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.0
 	github.com/pkg/errors v0.9.1
-	github.com/upbound/upjet v0.8.0-rc.0.0.20221024111721-c82119f5ef34
+	github.com/upbound/upjet v0.8.0-rc.0.0.20221111123128-6de200a3a8b0
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.25.0
 	k8s.io/client-go v0.25.0
@@ -157,5 +157,3 @@ require (
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
-
-replace github.com/upbound/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20221111092000-df1b435adc54
