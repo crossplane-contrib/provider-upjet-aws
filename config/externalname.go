@@ -922,6 +922,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// MSK clusters can be imported using the cluster arn that has a random substring
 	// in the end.
 	"aws_msk_cluster": config.IdentifierFromProvider,
+	// MSK SCRAM secret associations are not themselves identifiable. Each association is
+	// a one-to-many association per cluster.
+	"aws_msk_scram_secret_association": config.IdentifierFromProvider,
 
 	// ram
 	//
