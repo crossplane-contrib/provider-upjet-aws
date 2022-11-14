@@ -92,7 +92,6 @@ var (
 var skipList = []string{
 	"aws_waf_rule_group$",              // Too big CRD schema
 	"aws_wafregional_rule_group$",      // Too big CRD schema
-	"aws_glue_connection$",             // See https://github.com/crossplane-contrib/terrajet/issues/100
 	"aws_mwaa_environment$",            // See https://github.com/crossplane-contrib/terrajet/issues/100
 	"aws_ecs_tag$",                     // tags are already managed by ecs resources.
 	"aws_alb$",                         // identical with aws_lb
