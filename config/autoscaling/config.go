@@ -16,6 +16,12 @@ func Configure(p *config.Provider) {
 		// These are mutually exclusive with aws_autoscaling_attachment.
 		config.MoveToStatus(r.TerraformResource, "load_balancers", "target_group_arns")
 
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{
+				"availability_zones",
+			},
+		}
+
 		r.References["vpc_zone_identifier"] = config.Reference{
 			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
 		}
