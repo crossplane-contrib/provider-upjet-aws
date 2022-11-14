@@ -56,6 +56,7 @@ import (
 	policy "github.com/upbound/provider-aws/internal/controller/appautoscaling/policy"
 	scheduledaction "github.com/upbound/provider-aws/internal/controller/appautoscaling/scheduledaction"
 	target "github.com/upbound/provider-aws/internal/controller/appautoscaling/target"
+	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	autoscalingconfigurationversion "github.com/upbound/provider-aws/internal/controller/apprunner/autoscalingconfigurationversion"
 	connection "github.com/upbound/provider-aws/internal/controller/apprunner/connection"
 	service "github.com/upbound/provider-aws/internal/controller/apprunner/service"
@@ -67,7 +68,6 @@ import (
 	stack "github.com/upbound/provider-aws/internal/controller/appstream/stack"
 	user "github.com/upbound/provider-aws/internal/controller/appstream/user"
 	userstackassociation "github.com/upbound/provider-aws/internal/controller/appstream/userstackassociation"
-	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
 	namedquery "github.com/upbound/provider-aws/internal/controller/athena/namedquery"
@@ -488,6 +488,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		policy.Setup,
 		scheduledaction.Setup,
 		target.Setup,
+		mesh.Setup,
 		autoscalingconfigurationversion.Setup,
 		connection.Setup,
 		service.Setup,
@@ -499,7 +500,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		stack.Setup,
 		user.Setup,
 		userstackassociation.Setup,
-		mesh.Setup,
 		database.Setup,
 		datacatalog.Setup,
 		namedquery.Setup,

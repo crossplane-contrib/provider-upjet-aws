@@ -85,17 +85,10 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// App Mesh virtual services can be imported using mesh_name together with the virtual service's name: simpleapp/servicea.simpleapp.local
 	"aws_appmesh_virtual_service": config.TemplatedStringAsIdentifier("name", "{{ .parameters.mesh_name }}/{{ .external_name }}"),
 
+	// apprunner
+	//
 	// App Runner Custom Domain Associations can be imported by using the domain_name and service_arn separated by a comma (,)
 	"aws_apprunner_custom_domain_association": config.TemplatedStringAsIdentifier("domain_name", "{{ .external_name }},{{ .parameters.service_arn }}"),
-
-	// appstream
-	//
-	// AppStream Stack Fleet Association can be imported by using the fleet_name and stack_name separated by a slash (/)
-	"aws_appstream_fleet_stack_association": config.TemplatedStringAsIdentifier("stack_name", "{{ .parameters.fleet_name }}/{{ .external_name }}"),
-	// aws_appstream_user can be imported using the user_name and authentication_type separated by a slash (/)
-	"aws_appstream_user": config.TemplatedStringAsIdentifier("user_name", "{{ .external_name }}/{{ .parameters.authentication_type }}"),
-	// AppStream User Stack Association can be imported by using the user_name, authentication_type, and stack_name, separated by a slash (/)
-	"aws_appstream_user_stack_association": config.TemplatedStringAsIdentifier("stack_name", "{{ .parameters.user_name }}/{{ .parameters.authentication_type }}/{{ .external_name }}/"),
 
 	// appsync
 	//
