@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: appstream/v1beta1/userstackassociation
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     authenticationTypeSelector:
@@ -35,7 +35,7 @@ spec:
     description: stack description
     displayName: stack display name
     feedbackUrl: https://aws.amazon.com
-    name: ${Rand.RFC1123Subdomain}
+    name: new-test-stack-example
     redirectUrl: https://aws.amazon.com
     region: us-east-1
     storageConnectors:

@@ -2,10 +2,11 @@ apiVersion: appstream.aws.upbound.io/v1beta1
 kind: Fleet
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: appstream/v1beta1/fleet
   labels:
-    testing.upbound.io/example-name: test_fleet
-  name: test-fleet
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     computeCapacity:

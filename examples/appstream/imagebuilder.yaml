@@ -2,10 +2,11 @@ apiVersion: appstream.aws.upbound.io/v1beta1
 kind: ImageBuilder
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: appstream/v1beta1/imagebuilder
   labels:
-    testing.upbound.io/example-name: test_fleet
-  name: test-fleet
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     description: Description of a ImageBuilder
