@@ -1,0 +1,63 @@
+apiVersion: devicefarm.aws.upbound.io/v1beta1
+kind: TestGridProject
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devicefarm/v1beta1/testgridproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+    vpcConfig:
+      - securityGroupIds: ${aws_security_group.example.*.id}
+        subnetIds: ${aws_subnet.example.*.id}
+        vpcIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  name: example
+  labels:
+    testing.upbound.io/example-name: example
+spec:
+  forProvider:
+    region: us-west-1
+    description: Allow TLS inbound traffic
+    name: allow_tls
+    tags:
+      Name: allow_tls
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: sample-subnet1
+  labels:
+    testing.upbound.io/example-name: example
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1b
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: sample-vpc
+  labels:
+    testing.upbound.io/example-name: example
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc

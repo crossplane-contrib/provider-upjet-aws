@@ -264,18 +264,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// devicefarm
 	//
-	// DeviceFarm Device Pools can be imported by their arn
-	"aws_devicefarm_device_pool": config.IdentifierFromProvider,
-	// DeviceFarm Instance Profiles can be imported by their arn
-	"aws_devicefarm_instance_profile": config.IdentifierFromProvider,
-	// DeviceFarm Network Profiles can be imported by their arn
-	"aws_devicefarm_network_profile": config.IdentifierFromProvider,
-	// DeviceFarm Projects can be imported by their arn
-	"aws_devicefarm_project": config.IdentifierFromProvider,
 	// DeviceFarm Test Grid Projects can be imported by their arn
 	"aws_devicefarm_test_grid_project": config.IdentifierFromProvider,
-	// DeviceFarm Uploads can be imported by their arn
-	"aws_devicefarm_upload": config.IdentifierFromProvider,
 
 	// directconnect
 	//

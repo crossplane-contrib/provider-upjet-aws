@@ -8,9 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    accountId: AWS ACCOUNT ID
+    accountId: "948998139724"
     disableEmailNotification: true
-    emailAddress: EMAIL
+    emailAddress: "schegolevatych@gmail.com"
     graphArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -30,4 +30,6 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
+
+---
 

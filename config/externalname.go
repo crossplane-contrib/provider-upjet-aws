@@ -1220,6 +1220,23 @@ var ExternalNameConfigs = map[string]config.ExternalName{
     "aws_detective_member": config.IdentifierFromProvider,
     // aws_detective_invitation_accepter can be imported using the graph ARN
     "aws_detective_invitation_accepter": config.IdentifierFromProvider,
+
+
+    // devicefarm
+	//
+    // DeviceFarm Projects can be imported by their arn
+	"aws_devicefarm_project": config.IdentifierFromProvider,
+	// DeviceFarm Instance Profiles can be imported by their arn
+    "aws_devicefarm_instance_profile": config.IdentifierFromProvider,
+    // DeviceFarm Device Pools can be imported by their arn
+    "aws_devicefarm_device_pool": config.IdentifierFromProvider,
+    // DeviceFarm Network Profiles can be imported by their arn
+    "aws_devicefarm_network_profile": config.IdentifierFromProvider,
+    // DeviceFarm Uploads can be imported by their arn
+    "aws_devicefarm_upload": config.IdentifierFromProvider,
+    // DeviceFarm Test Grid Projects can be imported by their arn
+    "aws_devicefarm_test_grid_project": config.IdentifierFromProvider,
+
 }
 
 func lambdaFunctionURL() config.ExternalName {
