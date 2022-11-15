@@ -82,6 +82,7 @@ import (
 	userstackassociation "github.com/upbound/provider-aws/internal/controller/appstream/userstackassociation"
 	apicache "github.com/upbound/provider-aws/internal/controller/appsync/apicache"
 	apikeyappsync "github.com/upbound/provider-aws/internal/controller/appsync/apikey"
+	datasource "github.com/upbound/provider-aws/internal/controller/appsync/datasource"
 	graphqlapi "github.com/upbound/provider-aws/internal/controller/appsync/graphqlapi"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
@@ -531,6 +532,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userstackassociation.Setup,
 		apicache.Setup,
 		apikeyappsync.Setup,
+		datasource.Setup,
 		graphqlapi.Setup,
 		database.Setup,
 		datacatalog.Setup,
