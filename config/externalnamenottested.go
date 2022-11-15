@@ -56,10 +56,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// App Runner Custom Domain Associations can be imported by using the domain_name and service_arn separated by a comma (,)
 	"aws_apprunner_custom_domain_association": config.TemplatedStringAsIdentifier("domain_name", "{{ .external_name }},{{ .parameters.service_arn }}"),
 
-	// appsync
-	//
-	// aws_appsync_api_cache can be imported using the AppSync API ID
-	"aws_appsync_api_cache": config.IdentifierFromProvider,
 	// aws_appsync_datasource can be imported with their api_id, a hyphen, and name
 	"aws_appsync_datasource": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_id }}-{{ .external_name }}"),
 	// aws_appsync_domain_name can be imported using the AppSync domain name

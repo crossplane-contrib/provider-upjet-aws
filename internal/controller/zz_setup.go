@@ -80,6 +80,7 @@ import (
 	stack "github.com/upbound/provider-aws/internal/controller/appstream/stack"
 	user "github.com/upbound/provider-aws/internal/controller/appstream/user"
 	userstackassociation "github.com/upbound/provider-aws/internal/controller/appstream/userstackassociation"
+	apicache "github.com/upbound/provider-aws/internal/controller/appsync/apicache"
 	apikeyappsync "github.com/upbound/provider-aws/internal/controller/appsync/apikey"
 	graphqlapi "github.com/upbound/provider-aws/internal/controller/appsync/graphqlapi"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
@@ -528,6 +529,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		stack.Setup,
 		user.Setup,
 		userstackassociation.Setup,
+		apicache.Setup,
 		apikeyappsync.Setup,
 		graphqlapi.Setup,
 		database.Setup,
