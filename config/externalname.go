@@ -1111,7 +1111,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// App Mesh service meshes can be imported using the name
 	"aws_appmesh_mesh": config.NameAsIdentifier,
-    // App Mesh virtual nodes can be imported using mesh_name together with the virtual node's name: simpleapp/serviceBv1
+	// App Mesh virtual nodes can be imported using mesh_name together with the virtual node's name: simpleapp/serviceBv1
 	"aws_appmesh_virtual_node": config.IdentifierFromProvider,
 	// App Mesh virtual routers can be imported using mesh_name together with the virtual router's name: simpleapp/serviceB
 	"aws_appmesh_virtual_router": config.IdentifierFromProvider,

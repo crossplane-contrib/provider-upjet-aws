@@ -31,7 +31,7 @@ apiVersion: appmesh.aws.upbound.io/v1beta1
 kind: VirtualGateway
 metadata:
   annotations:
-    meta.upbound.io/example-id: appmesh/v1beta1/virtualgateway
+    meta.upbound.io/example-id: appmesh/v1beta1/gatewayroute
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -52,7 +52,7 @@ apiVersion: appmesh.aws.upbound.io/v1beta1
 kind: Mesh
 metadata:
   annotations:
-    meta.upbound.io/example-id: appmesh/v1beta1/mesh
+    meta.upbound.io/example-id: appmesh/v1beta1/gatewayroute
   labels:
     testing.upbound.io/example-name: simple
   name: simple
@@ -64,7 +64,7 @@ apiVersion: appmesh.aws.upbound.io/v1beta1
 kind: VirtualService
 metadata:
   annotations:
-    meta.upbound.io/example-id: appmesh/v1beta1/virtualservice
+    meta.upbound.io/example-id: appmesh/v1beta1/gatewayroute
   labels:
     testing.upbound.io/example-name: servicea
   name: servicea
@@ -86,7 +86,7 @@ apiVersion: appmesh.aws.upbound.io/v1beta1
 kind: VirtualNode
 metadata:
   annotations:
-    meta.upbound.io/example-id: appmesh/v1beta1/virtualnode
+    meta.upbound.io/example-id: appmesh/v1beta1/gatewayroute
   labels:
     testing.upbound.io/example-name: serviceb1
   name: serviceb1
