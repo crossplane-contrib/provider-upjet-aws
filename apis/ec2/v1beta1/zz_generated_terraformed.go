@@ -2085,6 +2085,80 @@ func (tr *TransitGatewayPeeringAttachment) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this TransitGatewayPeeringAttachmentAccepter
+func (mg *TransitGatewayPeeringAttachmentAccepter) GetTerraformResourceType() string {
+	return "aws_ec2_transit_gateway_peering_attachment_accepter"
+}
+
+// GetConnectionDetailsMapping for this TransitGatewayPeeringAttachmentAccepter
+func (tr *TransitGatewayPeeringAttachmentAccepter) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this TransitGatewayPeeringAttachmentAccepter
+func (tr *TransitGatewayPeeringAttachmentAccepter) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this TransitGatewayPeeringAttachmentAccepter
+func (tr *TransitGatewayPeeringAttachmentAccepter) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this TransitGatewayPeeringAttachmentAccepter
+func (tr *TransitGatewayPeeringAttachmentAccepter) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this TransitGatewayPeeringAttachmentAccepter
+func (tr *TransitGatewayPeeringAttachmentAccepter) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this TransitGatewayPeeringAttachmentAccepter
+func (tr *TransitGatewayPeeringAttachmentAccepter) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this TransitGatewayPeeringAttachmentAccepter using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *TransitGatewayPeeringAttachmentAccepter) LateInitialize(attrs []byte) (bool, error) {
+	params := &TransitGatewayPeeringAttachmentAccepterParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *TransitGatewayPeeringAttachmentAccepter) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this TransitGatewayPrefixListReference
 func (mg *TransitGatewayPrefixListReference) GetTerraformResourceType() string {
 	return "aws_ec2_transit_gateway_prefix_list_reference"
@@ -4168,6 +4242,80 @@ func (tr *SecurityGroupRule) LateInitialize(attrs []byte) (bool, error) {
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SecurityGroupRule) GetTerraformSchemaVersion() int {
 	return 2
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SnapshotCreateVolumePermission
+func (mg *SnapshotCreateVolumePermission) GetTerraformResourceType() string {
+	return "aws_snapshot_create_volume_permission"
+}
+
+// GetConnectionDetailsMapping for this SnapshotCreateVolumePermission
+func (tr *SnapshotCreateVolumePermission) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SnapshotCreateVolumePermission
+func (tr *SnapshotCreateVolumePermission) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SnapshotCreateVolumePermission
+func (tr *SnapshotCreateVolumePermission) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SnapshotCreateVolumePermission
+func (tr *SnapshotCreateVolumePermission) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SnapshotCreateVolumePermission
+func (tr *SnapshotCreateVolumePermission) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SnapshotCreateVolumePermission
+func (tr *SnapshotCreateVolumePermission) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SnapshotCreateVolumePermission using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SnapshotCreateVolumePermission) LateInitialize(attrs []byte) (bool, error) {
+	params := &SnapshotCreateVolumePermissionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SnapshotCreateVolumePermission) GetTerraformSchemaVersion() int {
+	return 0
 }
 
 // GetTerraformResourceType returns Terraform resource type for this SpotDatafeedSubscription

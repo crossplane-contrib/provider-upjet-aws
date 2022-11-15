@@ -153,6 +153,7 @@ import (
 	securitygroup "github.com/upbound/provider-aws/internal/controller/ec2/securitygroup"
 	securitygrouprule "github.com/upbound/provider-aws/internal/controller/ec2/securitygrouprule"
 	serialconsoleaccess "github.com/upbound/provider-aws/internal/controller/ec2/serialconsoleaccess"
+	snapshotcreatevolumepermission "github.com/upbound/provider-aws/internal/controller/ec2/snapshotcreatevolumepermission"
 	spotdatafeedsubscription "github.com/upbound/provider-aws/internal/controller/ec2/spotdatafeedsubscription"
 	spotinstancerequest "github.com/upbound/provider-aws/internal/controller/ec2/spotinstancerequest"
 	subnet "github.com/upbound/provider-aws/internal/controller/ec2/subnet"
@@ -166,6 +167,7 @@ import (
 	transitgatewaymulticastgroupmember "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaymulticastgroupmember"
 	transitgatewaymulticastgroupsource "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaymulticastgroupsource"
 	transitgatewaypeeringattachment "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaypeeringattachment"
+	transitgatewaypeeringattachmentaccepter "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaypeeringattachmentaccepter"
 	transitgatewayprefixlistreference "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewayprefixlistreference"
 	transitgatewayroute "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewayroute"
 	transitgatewayroutetable "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewayroutetable"
@@ -538,6 +540,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		securitygroup.Setup,
 		securitygrouprule.Setup,
 		serialconsoleaccess.Setup,
+		snapshotcreatevolumepermission.Setup,
 		spotdatafeedsubscription.Setup,
 		spotinstancerequest.Setup,
 		subnet.Setup,
@@ -551,6 +554,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		transitgatewaymulticastgroupmember.Setup,
 		transitgatewaymulticastgroupsource.Setup,
 		transitgatewaypeeringattachment.Setup,
+		transitgatewaypeeringattachmentaccepter.Setup,
 		transitgatewayprefixlistreference.Setup,
 		transitgatewayroute.Setup,
 		transitgatewayroutetable.Setup,

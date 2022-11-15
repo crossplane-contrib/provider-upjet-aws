@@ -566,8 +566,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_internet_gateway_attachment": config.IdentifierFromProvider,
 	// No import
 	"aws_network_acl_association": config.IdentifierFromProvider,
-	// No import
-	"aws_snapshot_create_volume_permission": config.IdentifierFromProvider,
 	// Spot Fleet Requests can be imported using id
 	"aws_spot_fleet_request": config.IdentifierFromProvider,
 	// VPC Endpoint Services can be imported using ID of the connection, which is the VPC Endpoint Service ID and VPC Endpoint ID separated by underscore (_)

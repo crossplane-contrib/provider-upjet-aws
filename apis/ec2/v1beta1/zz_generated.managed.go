@@ -2581,6 +2581,72 @@ func (mg *SerialConsoleAccess) SetWriteConnectionSecretToReference(r *xpv1.Secre
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this SnapshotCreateVolumePermission.
+func (mg *SnapshotCreateVolumePermission) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SnapshotCreateVolumePermission.
+func (mg *SnapshotCreateVolumePermission) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SnapshotCreateVolumePermission.
+func (mg *SnapshotCreateVolumePermission) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SnapshotCreateVolumePermission.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SnapshotCreateVolumePermission) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SnapshotCreateVolumePermission.
+func (mg *SnapshotCreateVolumePermission) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SnapshotCreateVolumePermission.
+func (mg *SnapshotCreateVolumePermission) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SnapshotCreateVolumePermission.
+func (mg *SnapshotCreateVolumePermission) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SnapshotCreateVolumePermission.
+func (mg *SnapshotCreateVolumePermission) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SnapshotCreateVolumePermission.
+func (mg *SnapshotCreateVolumePermission) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SnapshotCreateVolumePermission.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SnapshotCreateVolumePermission) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SnapshotCreateVolumePermission.
+func (mg *SnapshotCreateVolumePermission) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SnapshotCreateVolumePermission.
+func (mg *SnapshotCreateVolumePermission) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SpotDatafeedSubscription.
 func (mg *SpotDatafeedSubscription) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -3436,6 +3502,72 @@ func (mg *TransitGatewayPeeringAttachment) SetPublishConnectionDetailsTo(r *xpv1
 
 // SetWriteConnectionSecretToReference of this TransitGatewayPeeringAttachment.
 func (mg *TransitGatewayPeeringAttachment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this TransitGatewayPeeringAttachmentAccepter.
+func (mg *TransitGatewayPeeringAttachmentAccepter) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this TransitGatewayPeeringAttachmentAccepter.
+func (mg *TransitGatewayPeeringAttachmentAccepter) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this TransitGatewayPeeringAttachmentAccepter.
+func (mg *TransitGatewayPeeringAttachmentAccepter) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this TransitGatewayPeeringAttachmentAccepter.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *TransitGatewayPeeringAttachmentAccepter) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this TransitGatewayPeeringAttachmentAccepter.
+func (mg *TransitGatewayPeeringAttachmentAccepter) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this TransitGatewayPeeringAttachmentAccepter.
+func (mg *TransitGatewayPeeringAttachmentAccepter) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this TransitGatewayPeeringAttachmentAccepter.
+func (mg *TransitGatewayPeeringAttachmentAccepter) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this TransitGatewayPeeringAttachmentAccepter.
+func (mg *TransitGatewayPeeringAttachmentAccepter) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this TransitGatewayPeeringAttachmentAccepter.
+func (mg *TransitGatewayPeeringAttachmentAccepter) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this TransitGatewayPeeringAttachmentAccepter.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *TransitGatewayPeeringAttachmentAccepter) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this TransitGatewayPeeringAttachmentAccepter.
+func (mg *TransitGatewayPeeringAttachmentAccepter) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this TransitGatewayPeeringAttachmentAccepter.
+func (mg *TransitGatewayPeeringAttachmentAccepter) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

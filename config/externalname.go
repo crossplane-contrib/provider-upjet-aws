@@ -276,6 +276,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ec2_transit_gateway_connect": config.IdentifierFromProvider,
 	// Network Insights Paths can be imported using the id
 	"aws_ec2_network_insights_path": config.IdentifierFromProvider,
+	// No import
+	"aws_snapshot_create_volume_permission": config.IdentifierFromProvider,
+	// aws_ec2_transit_gateway_peering_attachment_accepter can be imported by using the EC2 Transit Gateway Attachment identifier
+	"aws_ec2_transit_gateway_peering_attachment_accepter": config.IdentifierFromProvider,
 
 	// ecr
 	//
