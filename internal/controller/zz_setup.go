@@ -80,6 +80,7 @@ import (
 	stack "github.com/upbound/provider-aws/internal/controller/appstream/stack"
 	user "github.com/upbound/provider-aws/internal/controller/appstream/user"
 	userstackassociation "github.com/upbound/provider-aws/internal/controller/appstream/userstackassociation"
+	graphqlapi "github.com/upbound/provider-aws/internal/controller/appsync/graphqlapi"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
 	namedquery "github.com/upbound/provider-aws/internal/controller/athena/namedquery"
@@ -526,6 +527,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		stack.Setup,
 		user.Setup,
 		userstackassociation.Setup,
+		graphqlapi.Setup,
 		database.Setup,
 		datacatalog.Setup,
 		namedquery.Setup,
