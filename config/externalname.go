@@ -1170,6 +1170,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Remediation Configurations can be imported using the name config_rule_name
 	"aws_config_remediation_configuration": config.ParameterAsIdentifier("config_rule_name"),
 
+	// aws_appsync_api_key can be imported using the AppSync API ID and key separated by :
+	"aws_appsync_api_key": config.IdentifierFromProvider,
 	// AppSync GraphQL API can be imported using the GraphQL API ID
 	"aws_appsync_graphql_api": config.IdentifierFromProvider,
 
