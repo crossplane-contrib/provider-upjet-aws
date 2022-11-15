@@ -270,22 +270,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Amazon Connect User Hierarchy Groups can be imported using the instance_id and hierarchy_group_id separated by a colon (:)
 	"aws_connect_user_hierarchy_group": config.IdentifierFromProvider,
 
-	// cur
-	//
-	// Report Definitions can be imported using the report_name
-	"aws_cur_report_definition": config.ParameterAsIdentifier("report_name"),
-
-	// dataexchange
-	//
-	// DataExchange DataSets can be imported by their arn
-	"aws_dataexchange_data_set": config.IdentifierFromProvider,
-	// DataExchange Revisions can be imported by their data-set-id:revision-id
-	"aws_dataexchange_revision": config.IdentifierFromProvider,
-
 	// datapipeline
 	//
-	// aws_datapipeline_pipeline can be imported by using the id (Pipeline ID)
-	"aws_datapipeline_pipeline": config.IdentifierFromProvider,
 	// aws_datapipeline_pipeline_definition can be imported using the id
 	"aws_datapipeline_pipeline_definition": config.IdentifierFromProvider,
 

@@ -32,6 +32,9 @@ import (
 	v1beta1cognitoidp "github.com/upbound/provider-aws/apis/cognitoidp/v1beta1"
 	v1beta1configservice "github.com/upbound/provider-aws/apis/configservice/v1beta1"
 	v1beta1connect "github.com/upbound/provider-aws/apis/connect/v1beta1"
+	v1beta1cur "github.com/upbound/provider-aws/apis/cur/v1beta1"
+	v1beta1dataexchange "github.com/upbound/provider-aws/apis/dataexchange/v1beta1"
+	v1beta1datapipeline "github.com/upbound/provider-aws/apis/datapipeline/v1beta1"
 	v1beta1dax "github.com/upbound/provider-aws/apis/dax/v1beta1"
 	v1beta1deploy "github.com/upbound/provider-aws/apis/deploy/v1beta1"
 	v1beta1docdb "github.com/upbound/provider-aws/apis/docdb/v1beta1"
@@ -107,6 +110,9 @@ func init() {
 		v1beta1cognitoidp.SchemeBuilder.AddToScheme,
 		v1beta1configservice.SchemeBuilder.AddToScheme,
 		v1beta1connect.SchemeBuilder.AddToScheme,
+		v1beta1cur.SchemeBuilder.AddToScheme,
+		v1beta1dataexchange.SchemeBuilder.AddToScheme,
+		v1beta1datapipeline.SchemeBuilder.AddToScheme,
 		v1beta1dax.SchemeBuilder.AddToScheme,
 		v1beta1deploy.SchemeBuilder.AddToScheme,
 		v1beta1docdb.SchemeBuilder.AddToScheme,

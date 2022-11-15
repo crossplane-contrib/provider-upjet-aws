@@ -1141,6 +1141,23 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_config_delivery_channel": config.NameAsIdentifier,
 	// Remediation Configurations can be imported using the name config_rule_name
 	"aws_config_remediation_configuration": config.ParameterAsIdentifier("config_rule_name"),
+
+	// cur
+	//
+	// Report Definitions can be imported using the report_name
+	"aws_cur_report_definition": config.ParameterAsIdentifier("report_name"),
+
+	// dataexchange
+	//
+	// DataExchange DataSets can be imported by their arn
+	"aws_dataexchange_data_set": config.IdentifierFromProvider,
+	// DataExchange Revisions can be imported by their data-set-id:revision-id
+	"aws_dataexchange_revision": config.IdentifierFromProvider,
+
+	// datapipeline
+	//
+	// aws_datapipeline_pipeline can be imported by using the id (Pipeline ID)
+	"aws_datapipeline_pipeline": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
