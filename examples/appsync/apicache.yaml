@@ -11,11 +11,11 @@ spec:
     apiIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    expires: "2018-05-03T04:00:00Z"
+    apiCachingBehavior: FULL_REQUEST_CACHING
+    type: LARGE
+    ttl: 900
     region: us-west-1
-
 ---
-
 apiVersion: appsync.aws.upbound.io/v1beta1
 kind: GraphQLAPI
 metadata:
@@ -29,6 +29,3 @@ spec:
     authenticationType: API_KEY
     name: example
     region: us-west-1
-
----
-
