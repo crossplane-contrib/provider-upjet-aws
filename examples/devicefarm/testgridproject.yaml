@@ -2,31 +2,34 @@ apiVersion: devicefarm.aws.upbound.io/v1beta1
 kind: TestGridProject
 metadata:
   annotations:
-    meta.upbound.io/example-id: devicefarm/v1beta1/testgridproject
+    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     name: example
-    region: us-west-1
+    region: us-west-2
     vpcConfig:
-      - securityGroupIds: ${aws_security_group.example.*.id}
-        subnetIds: ${aws_subnet.example.*.id}
+      - securityGroupIds:
+          - sg-06083286afd8d667e
+        subnetIds:
+          - subnet-00e90f1b4dff7158d
         vpcIdSelector:
           matchLabels:
             testing.upbound.io/example-name: example
-
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
   name: example
   labels:
     testing.upbound.io/example-name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-west-2
     description: Allow TLS inbound traffic
     name: allow_tls
     tags:
@@ -34,17 +37,20 @@ spec:
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
   name: sample-subnet1
   labels:
     testing.upbound.io/example-name: example
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-west-2
+    availabilityZone: us-west-2b
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.10.0/24
@@ -52,12 +58,14 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
   name: sample-vpc
   labels:
     testing.upbound.io/example-name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-west-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
