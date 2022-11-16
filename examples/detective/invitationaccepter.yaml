@@ -2,7 +2,7 @@ apiVersion: detective.aws.upbound.io/v1beta1
 kind: InvitationAccepter
 metadata:
   annotations:
-    meta.upbound.io/example-id: detective/v1beta1/invitationaccepter
+    upjet.upbound.io/manual-intervention: "Requires AccountId1 and AccountEmail1 to replaced manually."
   labels:
     testing.upbound.io/example-name: member
   name: member
@@ -12,6 +12,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: primary
     region: us-west-1
+  providerConfigRef:
+    name: test1   #Provider config for second aws account used for creation Member
 
 ---
 
@@ -19,7 +21,7 @@ apiVersion: detective.aws.upbound.io/v1beta1
 kind: Graph
 metadata:
   annotations:
-    meta.upbound.io/example-id: detective/v1beta1/invitationaccepter
+    upjet.upbound.io/manual-intervention: "Requires AccountId1 and AccountEmail1 to replaced manually."
   labels:
     testing.upbound.io/example-name: primary
   name: primary
@@ -33,19 +35,17 @@ apiVersion: detective.aws.upbound.io/v1beta1
 kind: Member
 metadata:
   annotations:
-    meta.upbound.io/example-id: detective/v1beta1/invitationaccepter
+    upjet.upbound.io/manual-intervention: "Requires AccountId1 and AccountEmail1 to replaced manually."
   labels:
     testing.upbound.io/example-name: primary
   name: primary
 spec:
   forProvider:
-    accountId: "948998139724"
-    emailAddress: "schegolevatych@gmail.com"
+    accountId: <AccountId1>
+    emailAddress: <AccountEmail1>
     graphArnSelector:
       matchLabels:
         testing.upbound.io/example-name: primary
     message: Message of the invite
     region: us-west-1
-
----
 
