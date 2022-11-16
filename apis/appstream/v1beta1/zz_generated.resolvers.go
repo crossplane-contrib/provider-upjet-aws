@@ -191,7 +191,7 @@ func (mg *UserStackAssociation) ResolveReferences(ctx context.Context, c client.
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserName),
-		Extract:      resource.ExtractParamPath("user_name", false),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.UserNameRef,
 		Selector:     mg.Spec.ForProvider.UserNameSelector,
 		To: reference.To{

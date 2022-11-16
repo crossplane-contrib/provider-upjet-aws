@@ -57,6 +57,7 @@ kind: User
 metadata:
   annotations:
     meta.upbound.io/example-id: appstream/v1beta1/userstackassociation
+    crossplane.io/external-name: user@example.com
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -66,4 +67,3 @@ spec:
     firstName: FIRST NAME
     lastName: LAST NAME
     region: us-east-1
-    userName: user@example.com

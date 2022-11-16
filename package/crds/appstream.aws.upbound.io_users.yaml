@@ -83,13 +83,9 @@ spec:
                   sendEmailNotification:
                     description: Send an email notification.
                     type: boolean
-                  userName:
-                    description: Email address of the user.
-                    type: string
                 required:
                 - authenticationType
                 - region
-                - userName
                 type: object
               providerConfigRef:
                 default:

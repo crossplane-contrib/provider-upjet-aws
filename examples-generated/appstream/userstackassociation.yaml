@@ -48,7 +48,6 @@ spec:
   forProvider:
     authenticationType: USERPOOL
     region: us-west-1
-    userName: EMAIL
 
 ---
 
