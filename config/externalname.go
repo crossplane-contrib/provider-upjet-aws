@@ -1111,6 +1111,19 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// App Mesh service meshes can be imported using the name
 	"aws_appmesh_mesh": config.NameAsIdentifier,
+	// App Mesh virtual nodes can be imported using mesh_name together with the virtual node's name: simpleapp/serviceBv1
+	"aws_appmesh_virtual_node": config.IdentifierFromProvider,
+	// App Mesh virtual routers can be imported using mesh_name together with the virtual router's name: simpleapp/serviceB
+	"aws_appmesh_virtual_router": config.IdentifierFromProvider,
+	// App Mesh virtual gateway can be imported using mesh_name together with the virtual gateway's name: mesh/gw1
+	"aws_appmesh_virtual_gateway": config.IdentifierFromProvider,
+	// App Mesh virtual services can be imported using mesh_name together with the virtual service's name: simpleapp/servicea.simpleapp.local
+	"aws_appmesh_virtual_service": config.IdentifierFromProvider,
+	// mesh/gw1/example-gateway-route
+	"aws_appmesh_gateway_route": config.IdentifierFromProvider,
+	// App Mesh virtual routes can be imported using mesh_name and virtual_router_name together with the route's name, e.g.,
+	// simpleapp/serviceB/serviceB-route
+	"aws_appmesh_route": config.IdentifierFromProvider,
 
 	// configservice
 	//

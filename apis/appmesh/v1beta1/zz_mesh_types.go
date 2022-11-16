@@ -57,17 +57,17 @@ type MeshParameters struct {
 
 	// The service mesh specification to apply.
 	// +kubebuilder:validation:Optional
-	Spec []SpecParameters `json:"spec,omitempty" tf:"spec,omitempty"`
+	Spec []MeshSpecParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type SpecObservation struct {
+type MeshSpecObservation struct {
 }
 
-type SpecParameters struct {
+type MeshSpecParameters struct {
 
 	// The egress filter rules for the service mesh.
 	// +kubebuilder:validation:Optional
