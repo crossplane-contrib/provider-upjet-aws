@@ -56,7 +56,13 @@ import (
 	policy "github.com/upbound/provider-aws/internal/controller/appautoscaling/policy"
 	scheduledaction "github.com/upbound/provider-aws/internal/controller/appautoscaling/scheduledaction"
 	target "github.com/upbound/provider-aws/internal/controller/appautoscaling/target"
+	gatewayroute "github.com/upbound/provider-aws/internal/controller/appmesh/gatewayroute"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
+	routeappmesh "github.com/upbound/provider-aws/internal/controller/appmesh/route"
+	virtualgateway "github.com/upbound/provider-aws/internal/controller/appmesh/virtualgateway"
+	virtualnode "github.com/upbound/provider-aws/internal/controller/appmesh/virtualnode"
+	virtualrouter "github.com/upbound/provider-aws/internal/controller/appmesh/virtualrouter"
+	virtualservice "github.com/upbound/provider-aws/internal/controller/appmesh/virtualservice"
 	autoscalingconfigurationversion "github.com/upbound/provider-aws/internal/controller/apprunner/autoscalingconfigurationversion"
 	connection "github.com/upbound/provider-aws/internal/controller/apprunner/connection"
 	service "github.com/upbound/provider-aws/internal/controller/apprunner/service"
@@ -488,7 +494,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		policy.Setup,
 		scheduledaction.Setup,
 		target.Setup,
+		gatewayroute.Setup,
 		mesh.Setup,
+		routeappmesh.Setup,
+		virtualgateway.Setup,
+		virtualnode.Setup,
+		virtualrouter.Setup,
+		virtualservice.Setup,
 		autoscalingconfigurationversion.Setup,
 		connection.Setup,
 		service.Setup,
