@@ -271,6 +271,72 @@ func (mg *CustomerGateway) SetWriteConnectionSecretToReference(r *xpv1.SecretRef
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this DefaultNetworkACL.
+func (mg *DefaultNetworkACL) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this DefaultNetworkACL.
+func (mg *DefaultNetworkACL) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this DefaultNetworkACL.
+func (mg *DefaultNetworkACL) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this DefaultNetworkACL.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *DefaultNetworkACL) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this DefaultNetworkACL.
+func (mg *DefaultNetworkACL) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this DefaultNetworkACL.
+func (mg *DefaultNetworkACL) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this DefaultNetworkACL.
+func (mg *DefaultNetworkACL) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this DefaultNetworkACL.
+func (mg *DefaultNetworkACL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this DefaultNetworkACL.
+func (mg *DefaultNetworkACL) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this DefaultNetworkACL.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *DefaultNetworkACL) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this DefaultNetworkACL.
+func (mg *DefaultNetworkACL) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this DefaultNetworkACL.
+func (mg *DefaultNetworkACL) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this DefaultRouteTable.
 func (mg *DefaultRouteTable) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

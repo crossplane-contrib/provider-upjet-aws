@@ -43,6 +43,15 @@ func (l *CustomerGatewayList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this DefaultNetworkACLList.
+func (l *DefaultNetworkACLList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this DefaultRouteTableList.
 func (l *DefaultRouteTableList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

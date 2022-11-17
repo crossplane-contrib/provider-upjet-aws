@@ -44,6 +44,67 @@ func (mg *CarrierGateway) ResolveReferences(ctx context.Context, c client.Reader
 	return nil
 }
 
+// ResolveReferences of this DefaultNetworkACL.
+func (mg *DefaultNetworkACL) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultNetworkACLID),
+		Extract:      resource.ExtractParamPath("default_network_acl_id", true),
+		Reference:    mg.Spec.ForProvider.DefaultNetworkACLIDRef,
+		Selector:     mg.Spec.ForProvider.DefaultNetworkACLIDSelector,
+		To: reference.To{
+			List:    &VPCList{},
+			Managed: &VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DefaultNetworkACLID")
+	}
+	mg.Spec.ForProvider.DefaultNetworkACLID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DefaultNetworkACLIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Ingress); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Ingress[i3].CidrBlock),
+			Extract:      resource.ExtractParamPath("cidr_block", true),
+			Reference:    mg.Spec.ForProvider.Ingress[i3].CidrBlockRef,
+			Selector:     mg.Spec.ForProvider.Ingress[i3].CidrBlockSelector,
+			To: reference.To{
+				List:    &DefaultVPCList{},
+				Managed: &DefaultVPC{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Ingress[i3].CidrBlock")
+		}
+		mg.Spec.ForProvider.Ingress[i3].CidrBlock = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Ingress[i3].CidrBlockRef = rsp.ResolvedReference
+
+	}
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.SubnetIDRefs,
+		Selector:      mg.Spec.ForProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &SubnetList{},
+			Managed: &Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetIds")
+	}
+	mg.Spec.ForProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SubnetIDRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
 // ResolveReferences of this DefaultRouteTable.
 func (mg *DefaultRouteTable) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

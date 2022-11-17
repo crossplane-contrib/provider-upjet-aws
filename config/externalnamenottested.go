@@ -294,10 +294,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_ami_from_instance": config.IdentifierFromProvider,
 	// AMI Launch Permissions can be imported using [ACCOUNT-ID|GROUP-NAME|ORGANIZATION-ARN|ORGANIZATIONAL-UNIT-ARN]/IMAGE-ID
 	"aws_ami_launch_permission": config.IdentifierFromProvider,
-	// Customer Gateways can be imported using the id
-	"aws_customer_gateway": config.IdentifierFromProvider,
-	// Default Network ACLs can be imported using the id
-	"aws_default_network_acl": config.IdentifierFromProvider,
 	// Security Groups can be imported using the security group id
 	"aws_default_security_group": config.IdentifierFromProvider,
 	//
@@ -341,7 +337,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// IPAMs can be imported using the ipam pool id
 	"aws_vpc_ipam_pool": config.IdentifierFromProvider,
 	// IPAMs can be imported using the <cidr>_<ipam-pool-id>
-	"aws_vpc_ipam_pool_cidr": config.IdentifierFromProvider,
+	"aws_vpc_ipam_pool_aws_default_network_acl": config.IdentifierFromProvider,
 	// IPAMs can be imported using the allocation id
 	"aws_vpc_ipam_pool_cidr_allocation": config.IdentifierFromProvider,
 	// No import

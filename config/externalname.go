@@ -282,6 +282,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_snapshot_create_volume_permission": config.IdentifierFromProvider,
 	// Customer Gateways can be imported using the id
 	"aws_customer_gateway": config.IdentifierFromProvider,
+	// Default Network ACLs can be imported using the id
+	"aws_default_network_acl": config.IdentifierFromProvider,
 
 	// ecr
 	//
