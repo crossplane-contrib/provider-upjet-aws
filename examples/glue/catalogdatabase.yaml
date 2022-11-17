@@ -2,6 +2,8 @@ apiVersion: glue.aws.upbound.io/v1beta1
 kind: CatalogDatabase
 metadata:
   name: example
+  labels:
+    testing.upbound.io/example-name: example
 spec:
   forProvider:
     region: us-east-1
