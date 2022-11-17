@@ -7,4 +7,4 @@ metadata:
 spec:
   forProvider:
     region: us-east-1
-    catalogId: "609897127049"
+    catalogId: "${data.aws_account_id}" 
