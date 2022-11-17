@@ -18,9 +18,9 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayPeeringAttachment
 metadata:
-  name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewaypeeringattachmentaccepter
+  name: example
   labels:
     testing.upbound.io/example-name: example
 spec:
@@ -40,6 +40,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGateway
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewaypeeringattachmentaccepter
   labels:
     testing.upbound.io/example-name: example-peer
   name: example-peer
@@ -51,6 +53,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGateway
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewaypeeringattachmentaccepter
   labels:
     testing.upbound.io/example-name: example-local
   name: example-local
