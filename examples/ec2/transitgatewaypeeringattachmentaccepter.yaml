@@ -3,6 +3,7 @@ kind: TransitGatewayPeeringAttachmentAccepter
 metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/transitgatewaypeeringattachmentaccepter
+    uptest.upbound.io/timeout: "3600" # one hour timeout
   labels:
     testing.upbound.io/example-name: example
   name: example
