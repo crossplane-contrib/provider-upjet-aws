@@ -30,4 +30,3 @@ spec:
   forProvider:
     name: my-device-farm
     region: us-west-2
-

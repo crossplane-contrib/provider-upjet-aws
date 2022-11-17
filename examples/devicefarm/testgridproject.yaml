@@ -2,7 +2,7 @@ apiVersion: devicefarm.aws.upbound.io/v1beta1
 kind: TestGridProject
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+    upjet.upbound.io/manual-intervention: "Requires manually add securityGroupIds and subnetIds"
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -11,10 +11,10 @@ spec:
     name: example
     region: us-west-2
     vpcConfig:
-      - securityGroupIds:
-          - sg-06083286afd8d667e
-        subnetIds:
-          - subnet-00e90f1b4dff7158d
+      - securityGroupIds: #${aws_security_group.example.*.id} - should be manually added all GroupId
+          - <securityGroupId1>
+        subnetIds: #${aws_subnet.example.*.id} - should be manually added all SubnetId
+          - <SubnetId1>
         vpcIdSelector:
           matchLabels:
             testing.upbound.io/example-name: example
@@ -23,27 +23,22 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+    upjet.upbound.io/manual-intervention: "Requires manually add securityGroupIds and subnetIds"
   name: example
   labels:
     testing.upbound.io/example-name: example
 spec:
   forProvider:
     region: us-west-2
-    description: Allow TLS inbound traffic
-    name: allow_tls
-    tags:
-      Name: allow_tls
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+    upjet.upbound.io/manual-intervention: "Requires manually add securityGroupIds and subnetIds"
   name: sample-subnet1
   labels:
     testing.upbound.io/example-name: example
@@ -59,7 +54,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+    upjet.upbound.io/manual-intervention: "Requires manually add securityGroupIds and subnetIds"
   name: sample-vpc
   labels:
     testing.upbound.io/example-name: example

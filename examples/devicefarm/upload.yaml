@@ -14,9 +14,7 @@ spec:
         testing.upbound.io/example-name: example
     region: us-west-2
     type: APPIUM_JAVA_TESTNG_TEST_SPEC
-
 ---
-
 apiVersion: devicefarm.aws.upbound.io/v1beta1
 kind: Project
 metadata:
@@ -29,6 +27,3 @@ spec:
   forProvider:
     name: example
     region: us-west-2
-
----
-
