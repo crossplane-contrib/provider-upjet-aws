@@ -1412,6 +1412,32 @@ func (mg *SecurityGroupRule) ResolveReferences(ctx context.Context, c client.Rea
 	return nil
 }
 
+// ResolveReferences of this SnapshotCreateVolumePermission.
+func (mg *SnapshotCreateVolumePermission) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnapshotID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SnapshotIDRef,
+		Selector:     mg.Spec.ForProvider.SnapshotIDSelector,
+		To: reference.To{
+			List:    &EBSSnapshotList{},
+			Managed: &EBSSnapshot{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SnapshotID")
+	}
+	mg.Spec.ForProvider.SnapshotID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SnapshotIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this SpotInstanceRequest.
 func (mg *SpotInstanceRequest) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -1781,6 +1807,32 @@ func (mg *TransitGatewayPeeringAttachment) ResolveReferences(ctx context.Context
 	}
 	mg.Spec.ForProvider.TransitGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TransitGatewayIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this TransitGatewayPeeringAttachmentAccepter.
+func (mg *TransitGatewayPeeringAttachmentAccepter) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransitGatewayAttachmentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.TransitGatewayAttachmentIDRef,
+		Selector:     mg.Spec.ForProvider.TransitGatewayAttachmentIDSelector,
+		To: reference.To{
+			List:    &TransitGatewayPeeringAttachmentList{},
+			Managed: &TransitGatewayPeeringAttachment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TransitGatewayAttachmentID")
+	}
+	mg.Spec.ForProvider.TransitGatewayAttachmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TransitGatewayAttachmentIDRef = rsp.ResolvedReference
 
 	return nil
 }
