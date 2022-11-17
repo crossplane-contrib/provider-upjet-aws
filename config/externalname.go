@@ -280,6 +280,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ec2_transit_gateway_peering_attachment_accepter": config.IdentifierFromProvider,
 	// No import
 	"aws_snapshot_create_volume_permission": config.IdentifierFromProvider,
+	// Customer Gateways can be imported using the id
+	"aws_customer_gateway": config.IdentifierFromProvider,
 
 	// ecr
 	//
