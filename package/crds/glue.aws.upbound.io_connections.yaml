@@ -277,6 +277,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
+                - catalogId
                 - region
                 type: object
               providerConfigRef:

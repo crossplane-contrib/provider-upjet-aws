@@ -28,8 +28,8 @@ type ConnectionObservation struct {
 type ConnectionParameters struct {
 
 	// –  The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
-	// +kubebuilder:validation:Optional
-	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+	// +kubebuilder:validation:Required
+	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
 	// value pairs used as parameters for this connection.
 	// +kubebuilder:validation:Optional
