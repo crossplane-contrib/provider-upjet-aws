@@ -27,7 +27,7 @@ metadata:
 spec:
   forProvider:
     peerAccountId: "${data.aws_account_id}"
-    peerRegion: ${data.aws_region}
+    peerRegion: us-west-2
     peerTransitGatewayIdSelector: 
       matchLabels:
         testing.upbound.io/example-name: example-peer
