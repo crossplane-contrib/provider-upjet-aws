@@ -25,7 +25,7 @@ metadata:
     testing.upbound.io/example-name: example
 spec:
   forProvider:
-    peerAccountId: ${data.aws_account_id}
+    peerAccountId: "${data.aws_account_id}"
     peerRegion: ${data.aws_region}
     peerTransitGatewayIdSelector: 
       matchLabels:
