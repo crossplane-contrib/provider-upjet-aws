@@ -85,6 +85,7 @@ import (
 	datasource "github.com/upbound/provider-aws/internal/controller/appsync/datasource"
 	function "github.com/upbound/provider-aws/internal/controller/appsync/function"
 	graphqlapi "github.com/upbound/provider-aws/internal/controller/appsync/graphqlapi"
+	resolver "github.com/upbound/provider-aws/internal/controller/appsync/resolver"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
 	namedquery "github.com/upbound/provider-aws/internal/controller/athena/namedquery"
@@ -536,6 +537,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		datasource.Setup,
 		function.Setup,
 		graphqlapi.Setup,
+		resolver.Setup,
 		database.Setup,
 		datacatalog.Setup,
 		namedquery.Setup,

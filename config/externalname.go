@@ -1182,6 +1182,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_appsync_function": config.IdentifierFromProvider,
 	// AppSync GraphQL API can be imported using the GraphQL API ID
 	"aws_appsync_graphql_api": config.IdentifierFromProvider,
+	// aws_appsync_resolver can be imported with their api_id, a hyphen, type, a hypen and field
+	"aws_appsync_resolver": config.TemplatedStringAsIdentifier("", "{{ .parameters.api_id }}-{{ .parameters.type }}-{{ .parameters.field }}"),
 
 	// accessanalyzer
 	//
