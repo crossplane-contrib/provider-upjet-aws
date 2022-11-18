@@ -1,0 +1,19 @@
+apiVersion: batch.aws.upbound.io/v1beta1
+kind: JobQueue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+  labels:
+    testing.upbound.io/example-name: test_queue
+  name: test-queue
+spec:
+  forProvider:
+    computeEnvironments:
+    - ${aws_batch_compute_environment.test_environment_1.arn}
+    - ${aws_batch_compute_environment.test_environment_2.arn}
+    priority: 1
+    region: us-west-1
+    state: ENABLED
+
+---
+

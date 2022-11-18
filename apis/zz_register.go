@@ -26,6 +26,11 @@ import (
 	v1beta1athena "github.com/upbound/provider-aws/apis/athena/v1beta1"
 	v1beta1autoscaling "github.com/upbound/provider-aws/apis/autoscaling/v1beta1"
 	v1beta1backup "github.com/upbound/provider-aws/apis/backup/v1beta1"
+	v1beta1batch "github.com/upbound/provider-aws/apis/batch/v1beta1"
+	v1beta1budgets "github.com/upbound/provider-aws/apis/budgets/v1beta1"
+	v1beta1chime "github.com/upbound/provider-aws/apis/chime/v1beta1"
+	v1beta1cloud9 "github.com/upbound/provider-aws/apis/cloud9/v1beta1"
+	v1beta1cloudcontrol "github.com/upbound/provider-aws/apis/cloudcontrol/v1beta1"
 	v1beta1cloudfront "github.com/upbound/provider-aws/apis/cloudfront/v1beta1"
 	v1beta1cloudsearch "github.com/upbound/provider-aws/apis/cloudsearch/v1beta1"
 	v1beta1cloudwatch "github.com/upbound/provider-aws/apis/cloudwatch/v1beta1"
@@ -113,6 +118,11 @@ func init() {
 		v1beta1athena.SchemeBuilder.AddToScheme,
 		v1beta1autoscaling.SchemeBuilder.AddToScheme,
 		v1beta1backup.SchemeBuilder.AddToScheme,
+		v1beta1batch.SchemeBuilder.AddToScheme,
+		v1beta1budgets.SchemeBuilder.AddToScheme,
+		v1beta1chime.SchemeBuilder.AddToScheme,
+		v1beta1cloud9.SchemeBuilder.AddToScheme,
+		v1beta1cloudcontrol.SchemeBuilder.AddToScheme,
 		v1beta1cloudfront.SchemeBuilder.AddToScheme,
 		v1beta1cloudsearch.SchemeBuilder.AddToScheme,
 		v1beta1cloudwatch.SchemeBuilder.AddToScheme,
