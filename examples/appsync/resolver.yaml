@@ -37,9 +37,7 @@ spec:
           $utils.appendError($ctx.result.body, $ctx.result.statusCode)
       #end
     type: Query
-
 ---
-
 apiVersion: appsync.aws.upbound.io/v1beta1
 kind: Datasource
 metadata:
@@ -57,9 +55,7 @@ spec:
     - endpoint: http://example.com
     region: us-west-1
     type: HTTP
-
 ---
-
 apiVersion: appsync.aws.upbound.io/v1beta1
 kind: GraphQLAPI
 metadata:
@@ -73,9 +69,21 @@ spec:
     authenticationType: API_KEY
     name: tf-example
     region: us-west-1
-    schema: "type Mutation {\n\tputPost(id: ID!, title: String!): Post\n}\n\ntype
-      Post {\n\tid: ID!\n\ttitle: String!\n}\n\ntype Query {\n\tsinglePost(id: ID!):
-      Post\n}\n\nschema {\n\tquery: Query\n\tmutation: Mutation\n}\n"
+    schema: |
+      type Mutation {
+        putPost(id: ID!, title: String!): Post
+      }
 
----
+      type Post {
+        id: ID!
+        title: String!
+      }
 
+      type Query {
+        singlePost(id: ID!): Post
+      }
+
+      schema {
+        query: Query
+        mutation: Mutation
+      }
