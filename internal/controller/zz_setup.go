@@ -83,6 +83,7 @@ import (
 	apicache "github.com/upbound/provider-aws/internal/controller/appsync/apicache"
 	apikeyappsync "github.com/upbound/provider-aws/internal/controller/appsync/apikey"
 	datasource "github.com/upbound/provider-aws/internal/controller/appsync/datasource"
+	function "github.com/upbound/provider-aws/internal/controller/appsync/function"
 	graphqlapi "github.com/upbound/provider-aws/internal/controller/appsync/graphqlapi"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
@@ -105,7 +106,7 @@ import (
 	distribution "github.com/upbound/provider-aws/internal/controller/cloudfront/distribution"
 	fieldlevelencryptionconfig "github.com/upbound/provider-aws/internal/controller/cloudfront/fieldlevelencryptionconfig"
 	fieldlevelencryptionprofile "github.com/upbound/provider-aws/internal/controller/cloudfront/fieldlevelencryptionprofile"
-	function "github.com/upbound/provider-aws/internal/controller/cloudfront/function"
+	functioncloudfront "github.com/upbound/provider-aws/internal/controller/cloudfront/function"
 	keygroup "github.com/upbound/provider-aws/internal/controller/cloudfront/keygroup"
 	monitoringsubscription "github.com/upbound/provider-aws/internal/controller/cloudfront/monitoringsubscription"
 	originaccessidentity "github.com/upbound/provider-aws/internal/controller/cloudfront/originaccessidentity"
@@ -533,6 +534,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		apicache.Setup,
 		apikeyappsync.Setup,
 		datasource.Setup,
+		function.Setup,
 		graphqlapi.Setup,
 		database.Setup,
 		datacatalog.Setup,
@@ -555,7 +557,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		distribution.Setup,
 		fieldlevelencryptionconfig.Setup,
 		fieldlevelencryptionprofile.Setup,
-		function.Setup,
+		functioncloudfront.Setup,
 		keygroup.Setup,
 		monitoringsubscription.Setup,
 		originaccessidentity.Setup,

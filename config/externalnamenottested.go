@@ -60,8 +60,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_appsync_domain_name": config.ParameterAsIdentifier("domain_name"),
 	// aws_appsync_domain_name_api_association can be imported using the AppSync domain name
 	"aws_appsync_domain_name_api_association": config.ParameterAsIdentifier("domain_name"),
-	// aws_appsync_function can be imported using the AppSync API ID and Function ID separated by -
-	"aws_appsync_function": config.IdentifierFromProvider,
 	// aws_appsync_resolver can be imported with their api_id, a hyphen, type, a hypen and field
 	"aws_appsync_resolver": config.TemplatedStringAsIdentifier("", "{{ .parameters.api_id }}-{{ .parameters.type }}-{{ .parameters.field }}"),
 

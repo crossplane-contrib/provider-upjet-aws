@@ -129,6 +129,48 @@ func (mg *Datasource) ResolveReferences(ctx context.Context, c client.Reader) er
 	return nil
 }
 
+// ResolveReferences of this Function.
+func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.APIIDRef,
+		Selector:     mg.Spec.ForProvider.APIIDSelector,
+		To: reference.To{
+			List:    &GraphQLAPIList{},
+			Managed: &GraphQLAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
+	}
+	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataSource),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DataSourceRef,
+		Selector:     mg.Spec.ForProvider.DataSourceSelector,
+		To: reference.To{
+			List:    &DatasourceList{},
+			Managed: &Datasource{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DataSource")
+	}
+	mg.Spec.ForProvider.DataSource = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataSourceRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this GraphQLAPI.
 func (mg *GraphQLAPI) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
