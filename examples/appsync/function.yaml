@@ -31,9 +31,7 @@ spec:
       #else
           $utils.appendError($ctx.result.body, $ctx.result.statusCode)
       #end
-
 ---
-
 apiVersion: appsync.aws.upbound.io/v1beta1
 kind: Datasource
 metadata:
@@ -51,9 +49,7 @@ spec:
     - endpoint: http://example.com
     region: us-west-1
     type: HTTP
-
 ---
-
 apiVersion: appsync.aws.upbound.io/v1beta1
 kind: GraphQLAPI
 metadata:
@@ -85,6 +81,3 @@ spec:
         query: Query
         mutation: Mutation
       }
-
----
-
