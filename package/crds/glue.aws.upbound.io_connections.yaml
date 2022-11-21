@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: triggers.glue.aws.upbound.io
+  name: connections.glue.aws.upbound.io
 spec:
   group: glue.aws.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - aws
-    kind: Trigger
-    listKind: TriggerList
-    plural: triggers
-    singular: trigger
+    kind: Connection
+    listKind: ConnectionList
+    plural: connections
+    singular: connection
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Trigger is the Schema for the Triggers API. Manages a Glue Trigger
-          resource.
+        description: Connection is the Schema for the Connections API. Provides an
+          Glue Connection resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: TriggerSpec defines the desired state of Trigger
+            description: ConnectionSpec defines the desired state of Connection
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,460 +64,221 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  actions:
-                    description: –  List of actions initiated by this trigger when
-                      it fires. See Actions Below.
-                    items:
-                      properties:
-                        arguments:
-                          additionalProperties:
-                            type: string
-                          description: Arguments to be passed to the job. You can
-                            specify arguments here that your own job-execution script
-                            consumes, as well as arguments that AWS Glue itself consumes.
-                          type: object
-                        crawlerName:
-                          description: The name of the crawler to be executed. Conflicts
-                            with job_name.
-                          type: string
-                        crawlerNameRef:
-                          description: Reference to a Crawler in glue to populate
-                            crawlerName.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                            policy:
-                              description: Policies for referencing.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          required:
-                          - name
-                          type: object
-                        crawlerNameSelector:
-                          description: Selector for a Crawler in glue to populate
-                            crawlerName.
-                          properties:
-                            matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                            policy:
-                              description: Policies for selection.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          type: object
-                        jobName:
-                          description: The name of a job to be executed. Conflicts
-                            with crawler_name.
-                          type: string
-                        jobNameRef:
-                          description: Reference to a Job in glue to populate jobName.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                            policy:
-                              description: Policies for referencing.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          required:
-                          - name
-                          type: object
-                        jobNameSelector:
-                          description: Selector for a Job in glue to populate jobName.
-                          properties:
-                            matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                            policy:
-                              description: Policies for selection.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          type: object
-                        notificationProperty:
-                          description: Specifies configuration properties of a job
-                            run notification. See Notification Property details below.
-                          items:
-                            properties:
-                              notifyDelayAfter:
-                                description: After a job run starts, the number of
-                                  minutes to wait before sending a job run delay notification.
-                                type: number
-                            type: object
-                          type: array
-                        securityConfiguration:
-                          description: The name of the Security Configuration structure
-                            to be used with this action.
-                          type: string
-                        timeout:
-                          description: The job run timeout in minutes. It overrides
-                            the timeout value of the job.
-                          type: number
-                      type: object
-                    type: array
-                  description:
-                    description: –  A description of the new trigger.
+                  catalogId:
+                    description: –  The ID of the Data Catalog in which to create
+                      the connection. If none is supplied, the AWS account ID is used
+                      by default.
                     type: string
-                  enabled:
-                    description: –  Start the trigger. Defaults to true.
-                    type: boolean
-                  eventBatchingCondition:
-                    description: Batch condition that must be met (specified number
-                      of events received or batch time window expired) before EventBridge
-                      event trigger fires. See Event Batching Condition.
+                  connectionPropertiesSecretRef:
+                    description: value pairs used as parameters for this connection.
+                    properties:
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - name
+                    - namespace
+                    type: object
+                  connectionType:
+                    description: '–  The type of the connection. Supported are: JDBC,
+                      MONGODB, KAFKA, and NETWORK. Defaults to JBDC.'
+                    type: string
+                  description:
+                    description: –  Description of the connection.
+                    type: string
+                  matchCriteria:
+                    description: –  A list of criteria that can be used in selecting
+                      this connection.
                     items:
-                      properties:
-                        batchSize:
-                          description: Number of events that must be received from
-                            Amazon EventBridge before EventBridge  event trigger fires.
-                          type: number
-                        batchWindow:
-                          description: Window of time in seconds after which EventBridge
-                            event trigger fires. Window starts when first event is
-                            received. Default value is 900.
-                          type: number
-                      required:
-                      - batchSize
-                      type: object
+                      type: string
                     type: array
-                  predicate:
-                    description: –  A predicate to specify when the new trigger should
-                      fire. Required when trigger type is CONDITIONAL. See Predicate
-                      Below.
+                  physicalConnectionRequirements:
+                    description: A map of physical connection requirements, such as
+                      VPC and SecurityGroup. Defined below.
                     items:
                       properties:
-                        conditions:
-                          description: A list of the conditions that determine when
-                            the trigger will fire. See Conditions.
-                          items:
-                            properties:
-                              crawlState:
-                                description: The condition crawl state. Currently,
-                                  the values supported are RUNNING, SUCCEEDED, CANCELLED,
-                                  and FAILED. If this is specified, crawler_name must
-                                  also be specified. Conflicts with state.
-                                type: string
-                              crawlerName:
-                                description: The name of the crawler to be executed.
-                                  Conflicts with job_name.
-                                type: string
-                              crawlerNameRef:
-                                description: Reference to a Crawler in glue to populate
-                                  crawlerName.
-                                properties:
-                                  name:
-                                    description: Name of the referenced object.
-                                    type: string
-                                  policy:
-                                    description: Policies for referencing.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: Resolution specifies whether
-                                          resolution of this reference is required.
-                                          The default is 'Required', which means the
-                                          reconcile will fail if the reference cannot
-                                          be resolved. 'Optional' means this reference
-                                          will be a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: Resolve specifies when this reference
-                                          should be resolved. The default is 'IfNotPresent',
-                                          which will attempt to resolve the reference
-                                          only when the corresponding field is not
-                                          present. Use 'Always' to resolve the reference
-                                          on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                required:
-                                - name
-                                type: object
-                              crawlerNameSelector:
-                                description: Selector for a Crawler in glue to populate
-                                  crawlerName.
-                                properties:
-                                  matchControllerRef:
-                                    description: MatchControllerRef ensures an object
-                                      with the same controller reference as the selecting
-                                      object is selected.
-                                    type: boolean
-                                  matchLabels:
-                                    additionalProperties:
-                                      type: string
-                                    description: MatchLabels ensures an object with
-                                      matching labels is selected.
-                                    type: object
-                                  policy:
-                                    description: Policies for selection.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: Resolution specifies whether
-                                          resolution of this reference is required.
-                                          The default is 'Required', which means the
-                                          reconcile will fail if the reference cannot
-                                          be resolved. 'Optional' means this reference
-                                          will be a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: Resolve specifies when this reference
-                                          should be resolved. The default is 'IfNotPresent',
-                                          which will attempt to resolve the reference
-                                          only when the corresponding field is not
-                                          present. Use 'Always' to resolve the reference
-                                          on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                type: object
-                              jobName:
-                                description: The name of a job to be executed. Conflicts
-                                  with crawler_name.
-                                type: string
-                              jobNameRef:
-                                description: Reference to a Job in glue to populate
-                                  jobName.
-                                properties:
-                                  name:
-                                    description: Name of the referenced object.
-                                    type: string
-                                  policy:
-                                    description: Policies for referencing.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: Resolution specifies whether
-                                          resolution of this reference is required.
-                                          The default is 'Required', which means the
-                                          reconcile will fail if the reference cannot
-                                          be resolved. 'Optional' means this reference
-                                          will be a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: Resolve specifies when this reference
-                                          should be resolved. The default is 'IfNotPresent',
-                                          which will attempt to resolve the reference
-                                          only when the corresponding field is not
-                                          present. Use 'Always' to resolve the reference
-                                          on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                required:
-                                - name
-                                type: object
-                              jobNameSelector:
-                                description: Selector for a Job in glue to populate
-                                  jobName.
-                                properties:
-                                  matchControllerRef:
-                                    description: MatchControllerRef ensures an object
-                                      with the same controller reference as the selecting
-                                      object is selected.
-                                    type: boolean
-                                  matchLabels:
-                                    additionalProperties:
-                                      type: string
-                                    description: MatchLabels ensures an object with
-                                      matching labels is selected.
-                                    type: object
-                                  policy:
-                                    description: Policies for selection.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: Resolution specifies whether
-                                          resolution of this reference is required.
-                                          The default is 'Required', which means the
-                                          reconcile will fail if the reference cannot
-                                          be resolved. 'Optional' means this reference
-                                          will be a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: Resolve specifies when this reference
-                                          should be resolved. The default is 'IfNotPresent',
-                                          which will attempt to resolve the reference
-                                          only when the corresponding field is not
-                                          present. Use 'Always' to resolve the reference
-                                          on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                type: object
-                              logicalOperator:
-                                description: A logical operator. Defaults to EQUALS.
-                                type: string
-                              state:
-                                description: The condition job state. Currently, the
-                                  values supported are SUCCEEDED, STOPPED, TIMEOUT
-                                  and FAILED. If this is specified, job_name must
-                                  also be specified. Conflicts with crawler_state.
-                                type: string
-                            type: object
-                          type: array
-                        logical:
-                          description: How to handle multiple conditions. Defaults
-                            to AND. Valid values are AND or ANY.
+                        availabilityZone:
+                          description: The availability zone of the connection. This
+                            field is redundant and implied by subnet_id, but is currently
+                            an api requirement.
                           type: string
-                      required:
-                      - conditions
+                        availabilityZoneRef:
+                          description: Reference to a Subnet in ec2 to populate availabilityZone.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        availabilityZoneSelector:
+                          description: Selector for a Subnet in ec2 to populate availabilityZone.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        securityGroupIdList:
+                          description: The security group ID list used by the connection.
+                          items:
+                            type: string
+                          type: array
+                        subnetId:
+                          description: The subnet ID used by the connection.
+                          type: string
+                        subnetIdRef:
+                          description: Reference to a Subnet in ec2 to populate subnetId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        subnetIdSelector:
+                          description: Selector for a Subnet in ec2 to populate subnetId.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                       type: object
                     type: array
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  schedule:
-                    description: Based Schedules for Jobs and Crawlers
-                    type: string
-                  startOnCreation:
-                    description: –  Set to true to start SCHEDULED and CONDITIONAL
-                      triggers when created. True is not supported for ON_DEMAND triggers.
-                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
-                  type:
-                    description: –  The type of trigger. Valid values are CONDITIONAL,
-                      ON_DEMAND, and SCHEDULED.
-                    type: string
-                  workflowName:
-                    description: A workflow to which the trigger should be associated
-                      to. Every workflow graph (DAG) needs a starting trigger (ON_DEMAND
-                      or SCHEDULED type) and can contain multiple additional CONDITIONAL
-                      triggers.
-                    type: string
                 required:
-                - actions
+                - catalogId
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:
@@ -691,20 +452,15 @@ spec:
             - forProvider
             type: object
           status:
-            description: TriggerStatus defines the observed state of Trigger.
+            description: ConnectionStatus defines the observed state of Connection.
             properties:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of Glue Trigger
+                    description: The ARN of the Glue Connection.
                     type: string
                   id:
-                    description: Trigger name
-                    type: string
-                  state:
-                    description: The condition job state. Currently, the values supported
-                      are SUCCEEDED, STOPPED, TIMEOUT and FAILED. If this is specified,
-                      job_name must also be specified. Conflicts with crawler_state.
+                    description: Catalog ID and name of the connection
                     type: string
                   tagsAll:
                     additionalProperties:

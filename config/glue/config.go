@@ -22,6 +22,14 @@ func Configure(p *config.Provider) {
 		r.TerraformResource.Schema["catalog_id"].Optional = false
 	})
 
+	p.AddResourceConfigurator("aws_glue_connection", func(r *config.Resource) {
+		// Required in ID but optional in schema since TF defaults to Account ID.
+		// This causes refresh to fail in the first reconcile.
+		r.TerraformResource.Schema["catalog_id"].Required = true
+		r.TerraformResource.Schema["catalog_id"].Computed = false
+		r.TerraformResource.Schema["catalog_id"].Optional = false
+	})
+
 	p.AddResourceConfigurator("aws_glue_user_defined_function", func(r *config.Resource) {
 		// Required in ID but optional in schema since TF defaults to Account ID.
 		// This causes refresh to fail in the first reconcile.

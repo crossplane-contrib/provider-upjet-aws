@@ -33,8 +33,17 @@ type ActionsParameters struct {
 	Arguments map[string]*string `json:"arguments,omitempty" tf:"arguments,omitempty"`
 
 	// The name of the crawler to be executed. Conflicts with job_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Crawler
 	// +kubebuilder:validation:Optional
 	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
+
+	// Reference to a Crawler in glue to populate crawlerName.
+	// +kubebuilder:validation:Optional
+	CrawlerNameRef *v1.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Crawler in glue to populate crawlerName.
+	// +kubebuilder:validation:Optional
+	CrawlerNameSelector *v1.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
 
 	// The name of a job to be executed. Conflicts with crawler_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Job
@@ -72,8 +81,17 @@ type ConditionsParameters struct {
 	CrawlState *string `json:"crawlState,omitempty" tf:"crawl_state,omitempty"`
 
 	// The name of the crawler to be executed. Conflicts with job_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Crawler
 	// +kubebuilder:validation:Optional
 	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
+
+	// Reference to a Crawler in glue to populate crawlerName.
+	// +kubebuilder:validation:Optional
+	CrawlerNameRef *v1.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Crawler in glue to populate crawlerName.
+	// +kubebuilder:validation:Optional
+	CrawlerNameSelector *v1.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
 
 	// The name of a job to be executed. Conflicts with crawler_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Job
