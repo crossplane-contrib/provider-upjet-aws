@@ -9,6 +9,8 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
+	analyzer "github.com/upbound/provider-aws/internal/controller/accessanalyzer/analyzer"
+	alternatecontact "github.com/upbound/provider-aws/internal/controller/account/alternatecontact"
 	certificate "github.com/upbound/provider-aws/internal/controller/acm/certificate"
 	certificatevalidation "github.com/upbound/provider-aws/internal/controller/acm/certificatevalidation"
 	certificateacmpca "github.com/upbound/provider-aws/internal/controller/acmpca/certificate"
@@ -17,6 +19,10 @@ import (
 	alertmanagerdefinition "github.com/upbound/provider-aws/internal/controller/amp/alertmanagerdefinition"
 	rulegroupnamespace "github.com/upbound/provider-aws/internal/controller/amp/rulegroupnamespace"
 	workspace "github.com/upbound/provider-aws/internal/controller/amp/workspace"
+	app "github.com/upbound/provider-aws/internal/controller/amplify/app"
+	backendenvironment "github.com/upbound/provider-aws/internal/controller/amplify/backendenvironment"
+	branch "github.com/upbound/provider-aws/internal/controller/amplify/branch"
+	webhook "github.com/upbound/provider-aws/internal/controller/amplify/webhook"
 	account "github.com/upbound/provider-aws/internal/controller/apigateway/account"
 	apikey "github.com/upbound/provider-aws/internal/controller/apigateway/apikey"
 	authorizer "github.com/upbound/provider-aws/internal/controller/apigateway/authorizer"
@@ -121,6 +127,8 @@ import (
 	codepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/codepipeline"
 	webhook "github.com/upbound/provider-aws/internal/controller/codepipeline/webhook"
 	connectioncodestarconnections "github.com/upbound/provider-aws/internal/controller/codestarconnections/connection"
+	webhookcodepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/webhook"
+	connection "github.com/upbound/provider-aws/internal/controller/codestarconnections/connection"
 	host "github.com/upbound/provider-aws/internal/controller/codestarconnections/host"
 	notificationrule "github.com/upbound/provider-aws/internal/controller/codestarnotifications/notificationrule"
 	cognitoidentitypoolproviderprincipaltag "github.com/upbound/provider-aws/internal/controller/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
@@ -154,7 +162,7 @@ import (
 	cluster "github.com/upbound/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/dax/parametergroup"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/dax/subnetgroup"
-	app "github.com/upbound/provider-aws/internal/controller/deploy/app"
+	appdeploy "github.com/upbound/provider-aws/internal/controller/deploy/app"
 	deploymentconfig "github.com/upbound/provider-aws/internal/controller/deploy/deploymentconfig"
 	deploymentgroup "github.com/upbound/provider-aws/internal/controller/deploy/deploymentgroup"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
@@ -449,6 +457,8 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		analyzer.Setup,
+		alternatecontact.Setup,
 		certificate.Setup,
 		certificatevalidation.Setup,
 		certificateacmpca.Setup,
@@ -457,6 +467,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		alertmanagerdefinition.Setup,
 		rulegroupnamespace.Setup,
 		workspace.Setup,
+		app.Setup,
+		backendenvironment.Setup,
+		branch.Setup,
+		webhook.Setup,
 		account.Setup,
 		apikey.Setup,
 		authorizer.Setup,
@@ -561,6 +575,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		codepipeline.Setup,
 		webhook.Setup,
 		connectioncodestarconnections.Setup,
+		webhookcodepipeline.Setup,
+		connection.Setup,
 		host.Setup,
 		notificationrule.Setup,
 		cognitoidentitypoolproviderprincipaltag.Setup,
@@ -594,7 +610,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		cluster.Setup,
 		parametergroup.Setup,
 		subnetgroup.Setup,
-		app.Setup,
+		appdeploy.Setup,
 		deploymentconfig.Setup,
 		deploymentgroup.Setup,
 		clusterdocdb.Setup,

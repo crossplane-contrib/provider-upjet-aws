@@ -11,15 +11,6 @@ import (
 // ExternalNameNotTestedConfigs contains no-tested configurations for this
 // provider.
 var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
-	// accessanalyzer
-	//
-	// Access Analyzer Analyzers can be imported using the analyzer_name
-	"aws_accessanalyzer_analyzer": config.ParameterAsIdentifier("analyzer_name"),
-
-	// account
-	//
-	// The Alternate Contact for the current account can be imported using the alternate_contact_type
-	"aws_account_alternate_contact": config.TemplatedStringAsIdentifier("", "{{ .parameters.alternate_contact_type }}"),
 
 	// amp
 	//
@@ -32,16 +23,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// amplify
 	//
-	// Amplify App can be imported using Amplify App ID (appId)
-	"aws_amplify_app": config.IdentifierFromProvider,
-	// Amplify backend environment can be imported using app_id and environment_name: d2ypk4k47z8u6/example
-	"aws_amplify_backend_environment": config.TemplatedStringAsIdentifier("environment_name", "{{ .parameters.app_id }}/{{ .external_name }}"),
-	// Amplify branch can be imported using app_id and branch_name: d2ypk4k47z8u6/master
-	"aws_amplify_branch": config.TemplatedStringAsIdentifier("branch_name", "{{ .parameters.app_id }}/{{ .external_name }}"),
 	// Amplify domain association can be imported using app_id and domain_name: d2ypk4k47z8u6/example.com
 	"aws_amplify_domain_association": config.TemplatedStringAsIdentifier("domain_name", "{{ .parameters.app_id }}/{{ .external_name }}"),
-	// Amplify webhook can be imported using a webhook ID
-	"aws_amplify_webhook": config.IdentifierFromProvider,
 
 	// appconfig
 

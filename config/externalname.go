@@ -1169,6 +1169,27 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_config_delivery_channel": config.NameAsIdentifier,
 	// Remediation Configurations can be imported using the name config_rule_name
 	"aws_config_remediation_configuration": config.ParameterAsIdentifier("config_rule_name"),
+
+	// accessanalyzer
+	//
+	// Access Analyzer Analyzers can be imported using the analyzer_name
+	"aws_accessanalyzer_analyzer": config.ParameterAsIdentifier("analyzer_name"),
+
+	// account
+	//
+	// The Alternate Contact for the current account can be imported using the alternate_contact_type
+	"aws_account_alternate_contact": config.TemplatedStringAsIdentifier("", "{{ .parameters.alternate_contact_type }}"),
+
+	// amplify
+	//
+	// Amplify App can be imported using Amplify App ID (appId)
+	"aws_amplify_app": config.IdentifierFromProvider,
+	// Amplify branch can be imported using app_id and branch_name: d2ypk4k47z8u6/master
+	"aws_amplify_branch": config.TemplatedStringAsIdentifier("branch_name", "{{ .parameters.app_id }}/{{ .external_name }}"),
+	// Amplify backend environment can be imported using app_id and environment_name: d2ypk4k47z8u6/example
+	"aws_amplify_backend_environment": config.TemplatedStringAsIdentifier("environment_name", "{{ .parameters.app_id }}/{{ .external_name }}"),
+	// Amplify webhook can be imported using a webhook ID
+	"aws_amplify_webhook": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
