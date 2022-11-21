@@ -1107,6 +1107,34 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Amazon Connect User Hierarchy Structures can be imported using the instance_id
 	"aws_connect_user_hierarchy_structure": config.IdentifierFromProvider,
 
+	// apprunner
+	//
+	// App Runner AutoScaling Configuration Versions can be imported by using the arn
+	"aws_apprunner_auto_scaling_configuration_version": config.IdentifierFromProvider,
+	// App Runner Connections can be imported by using the connection_name
+	"aws_apprunner_connection": config.ParameterAsIdentifier("connection_name"),
+	// App Runner Services can be imported by using the arn
+	"aws_apprunner_service": config.IdentifierFromProvider,
+	// App Runner vpc connector can be imported by using the arn
+	"aws_apprunner_vpc_connector": config.IdentifierFromProvider,
+
+	// appstream
+	//
+	// aws_appstream_directory_config can be imported using the id
+	"aws_appstream_directory_config": config.IdentifierFromProvider,
+	// aws_appstream_fleet can be imported using the id
+	"aws_appstream_fleet": config.IdentifierFromProvider,
+	// AppStream Stack Fleet Association can be imported by using the fleet_name and stack_name separated by a slash (/)
+	"aws_appstream_fleet_stack_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.fleet_name }}/{{ .parameters.stack_name}}"),
+	// aws_appstream_image_builder can be imported using the name
+	"aws_appstream_image_builder": config.NameAsIdentifier,
+	// aws_appstream_stack can be imported using the id
+	"aws_appstream_stack": config.IdentifierFromProvider,
+	// aws_appstream_user can be imported using the user_name and authentication_type separated by a slash (/)
+	"aws_appstream_user": config.TemplatedStringAsIdentifier("user_name", "{{ .external_name }}/{{ .parameters.authentication_type }}"),
+	// AppStream User Stack Association can be imported by using the user_name, authentication_type, and stack_name, separated by a slash (/)
+	"aws_appstream_user_stack_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.user_name }}/{{ .parameters.authentication_type }}/{{ .parameters.stack_name }}/"),
+
 	// appmesh
 	//
 	// App Mesh service meshes can be imported using the name

@@ -63,6 +63,17 @@ import (
 	virtualnode "github.com/upbound/provider-aws/internal/controller/appmesh/virtualnode"
 	virtualrouter "github.com/upbound/provider-aws/internal/controller/appmesh/virtualrouter"
 	virtualservice "github.com/upbound/provider-aws/internal/controller/appmesh/virtualservice"
+	autoscalingconfigurationversion "github.com/upbound/provider-aws/internal/controller/apprunner/autoscalingconfigurationversion"
+	connection "github.com/upbound/provider-aws/internal/controller/apprunner/connection"
+	service "github.com/upbound/provider-aws/internal/controller/apprunner/service"
+	vpcconnector "github.com/upbound/provider-aws/internal/controller/apprunner/vpcconnector"
+	directoryconfig "github.com/upbound/provider-aws/internal/controller/appstream/directoryconfig"
+	fleet "github.com/upbound/provider-aws/internal/controller/appstream/fleet"
+	fleetstackassociation "github.com/upbound/provider-aws/internal/controller/appstream/fleetstackassociation"
+	imagebuilder "github.com/upbound/provider-aws/internal/controller/appstream/imagebuilder"
+	stack "github.com/upbound/provider-aws/internal/controller/appstream/stack"
+	user "github.com/upbound/provider-aws/internal/controller/appstream/user"
+	userstackassociation "github.com/upbound/provider-aws/internal/controller/appstream/userstackassociation"
 	database "github.com/upbound/provider-aws/internal/controller/athena/database"
 	datacatalog "github.com/upbound/provider-aws/internal/controller/athena/datacatalog"
 	namedquery "github.com/upbound/provider-aws/internal/controller/athena/namedquery"
@@ -109,7 +120,7 @@ import (
 	trigger "github.com/upbound/provider-aws/internal/controller/codecommit/trigger"
 	codepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/codepipeline"
 	webhook "github.com/upbound/provider-aws/internal/controller/codepipeline/webhook"
-	connection "github.com/upbound/provider-aws/internal/controller/codestarconnections/connection"
+	connectioncodestarconnections "github.com/upbound/provider-aws/internal/controller/codestarconnections/connection"
 	host "github.com/upbound/provider-aws/internal/controller/codestarconnections/host"
 	notificationrule "github.com/upbound/provider-aws/internal/controller/codestarnotifications/notificationrule"
 	cognitoidentitypoolproviderprincipaltag "github.com/upbound/provider-aws/internal/controller/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
@@ -117,7 +128,7 @@ import (
 	poolrolesattachment "github.com/upbound/provider-aws/internal/controller/cognitoidentity/poolrolesattachment"
 	identityprovider "github.com/upbound/provider-aws/internal/controller/cognitoidp/identityprovider"
 	resourceserver "github.com/upbound/provider-aws/internal/controller/cognitoidp/resourceserver"
-	user "github.com/upbound/provider-aws/internal/controller/cognitoidp/user"
+	usercognitoidp "github.com/upbound/provider-aws/internal/controller/cognitoidp/user"
 	userpool "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpool"
 	userpoolclient "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpoolclient"
 	userpooldomain "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooldomain"
@@ -239,7 +250,7 @@ import (
 	capacityprovider "github.com/upbound/provider-aws/internal/controller/ecs/capacityprovider"
 	clusterecs "github.com/upbound/provider-aws/internal/controller/ecs/cluster"
 	clustercapacityproviders "github.com/upbound/provider-aws/internal/controller/ecs/clustercapacityproviders"
-	service "github.com/upbound/provider-aws/internal/controller/ecs/service"
+	serviceecs "github.com/upbound/provider-aws/internal/controller/ecs/service"
 	taskdefinition "github.com/upbound/provider-aws/internal/controller/ecs/taskdefinition"
 	accesspoint "github.com/upbound/provider-aws/internal/controller/efs/accesspoint"
 	backuppolicy "github.com/upbound/provider-aws/internal/controller/efs/backuppolicy"
@@ -267,7 +278,7 @@ import (
 	deliverystream "github.com/upbound/provider-aws/internal/controller/firehose/deliverystream"
 	alias "github.com/upbound/provider-aws/internal/controller/gamelift/alias"
 	build "github.com/upbound/provider-aws/internal/controller/gamelift/build"
-	fleet "github.com/upbound/provider-aws/internal/controller/gamelift/fleet"
+	fleetgamelift "github.com/upbound/provider-aws/internal/controller/gamelift/fleet"
 	gamesessionqueue "github.com/upbound/provider-aws/internal/controller/gamelift/gamesessionqueue"
 	script "github.com/upbound/provider-aws/internal/controller/gamelift/script"
 	accelerator "github.com/upbound/provider-aws/internal/controller/globalaccelerator/accelerator"
@@ -490,6 +501,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		virtualnode.Setup,
 		virtualrouter.Setup,
 		virtualservice.Setup,
+		autoscalingconfigurationversion.Setup,
+		connection.Setup,
+		service.Setup,
+		vpcconnector.Setup,
+		directoryconfig.Setup,
+		fleet.Setup,
+		fleetstackassociation.Setup,
+		imagebuilder.Setup,
+		stack.Setup,
+		user.Setup,
+		userstackassociation.Setup,
 		database.Setup,
 		datacatalog.Setup,
 		namedquery.Setup,
@@ -536,7 +558,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		trigger.Setup,
 		codepipeline.Setup,
 		webhook.Setup,
-		connection.Setup,
+		connectioncodestarconnections.Setup,
 		host.Setup,
 		notificationrule.Setup,
 		cognitoidentitypoolproviderprincipaltag.Setup,
@@ -544,7 +566,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		poolrolesattachment.Setup,
 		identityprovider.Setup,
 		resourceserver.Setup,
-		user.Setup,
+		usercognitoidp.Setup,
 		userpool.Setup,
 		userpoolclient.Setup,
 		userpooldomain.Setup,
@@ -666,7 +688,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		capacityprovider.Setup,
 		clusterecs.Setup,
 		clustercapacityproviders.Setup,
-		service.Setup,
+		serviceecs.Setup,
 		taskdefinition.Setup,
 		accesspoint.Setup,
 		backuppolicy.Setup,
@@ -694,7 +716,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		deliverystream.Setup,
 		alias.Setup,
 		build.Setup,
-		fleet.Setup,
+		fleetgamelift.Setup,
 		gamesessionqueue.Setup,
 		script.Setup,
 		accelerator.Setup,

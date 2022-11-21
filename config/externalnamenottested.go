@@ -70,33 +70,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// apprunner
 	//
-	// App Runner AutoScaling Configuration Versions can be imported by using the arn
-	"aws_apprunner_auto_scaling_configuration_version": config.IdentifierFromProvider,
-	// App Runner Connections can be imported by using the connection_name
-	"aws_apprunner_connection": config.ParameterAsIdentifier("connection_name"),
 	// App Runner Custom Domain Associations can be imported by using the domain_name and service_arn separated by a comma (,)
 	"aws_apprunner_custom_domain_association": config.TemplatedStringAsIdentifier("domain_name", "{{ .external_name }},{{ .parameters.service_arn }}"),
-	// App Runner Services can be imported by using the arn
-	"aws_apprunner_service": config.IdentifierFromProvider,
-	// App Runner vpc connector can be imported by using the arn
-	"aws_apprunner_vpc_connector": config.IdentifierFromProvider,
-
-	// appstream
-	//
-	// aws_appstream_directory_config can be imported using the id
-	"aws_appstream_directory_config": config.IdentifierFromProvider,
-	// aws_appstream_fleet can be imported using the id
-	"aws_appstream_fleet": config.IdentifierFromProvider,
-	// AppStream Stack Fleet Association can be imported by using the fleet_name and stack_name separated by a slash (/)
-	"aws_appstream_fleet_stack_association": config.TemplatedStringAsIdentifier("stack_name", "{{ .parameters.fleet_name }}/{{ .external_name }}"),
-	// aws_appstream_image_builder can be imported using the name
-	"aws_appstream_image_builder": config.NameAsIdentifier,
-	// aws_appstream_stack can be imported using the id
-	"aws_appstream_stack": config.IdentifierFromProvider,
-	// aws_appstream_user can be imported using the user_name and authentication_type separated by a slash (/)
-	"aws_appstream_user": config.TemplatedStringAsIdentifier("user_name", "{{ .external_name }}/{{ .parameters.authentication_type }}"),
-	// AppStream User Stack Association can be imported by using the user_name, authentication_type, and stack_name, separated by a slash (/)
-	"aws_appstream_user_stack_association": config.TemplatedStringAsIdentifier("stack_name", "{{ .parameters.user_name }}/{{ .parameters.authentication_type }}/{{ .external_name }}/"),
 
 	// appsync
 	//
