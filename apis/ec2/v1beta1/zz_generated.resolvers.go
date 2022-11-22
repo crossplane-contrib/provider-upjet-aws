@@ -2193,6 +2193,32 @@ func (mg *TransitGatewayVPCAttachmentAccepter) ResolveReferences(ctx context.Con
 	return nil
 }
 
+// ResolveReferences of this VPC.
+func (mg *VPC) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IPv4IpamPoolID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.IPv4IpamPoolIDRef,
+		Selector:     mg.Spec.ForProvider.IPv4IpamPoolIDSelector,
+		To: reference.To{
+			List:    &VPCIpamPoolList{},
+			Managed: &VPCIpamPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IPv4IpamPoolID")
+	}
+	mg.Spec.ForProvider.IPv4IpamPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IPv4IpamPoolIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this VPCDHCPOptionsAssociation.
 func (mg *VPCDHCPOptionsAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -2451,6 +2477,74 @@ func (mg *VPCIPv4CidrBlockAssociation) ResolveReferences(ctx context.Context, c 
 	}
 	mg.Spec.ForProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPCIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VPCIpamPool.
+func (mg *VPCIpamPool) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IpamScopeID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.IpamScopeIDRef,
+		Selector:     mg.Spec.ForProvider.IpamScopeIDSelector,
+		To: reference.To{
+			List:    &VPCIpamScopeList{},
+			Managed: &VPCIpamScope{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IpamScopeID")
+	}
+	mg.Spec.ForProvider.IpamScopeID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IpamScopeIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceIpamPoolID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SourceIpamPoolIDRef,
+		Selector:     mg.Spec.ForProvider.SourceIpamPoolIDSelector,
+		To: reference.To{
+			List:    &VPCIpamPoolList{},
+			Managed: &VPCIpamPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceIpamPoolID")
+	}
+	mg.Spec.ForProvider.SourceIpamPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceIpamPoolIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VPCIpamScope.
+func (mg *VPCIpamScope) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IpamID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.IpamIDRef,
+		Selector:     mg.Spec.ForProvider.IpamIDSelector,
+		To: reference.To{
+			List:    &VPCIpamList{},
+			Managed: &VPCIpam{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IpamID")
+	}
+	mg.Spec.ForProvider.IpamID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IpamIDRef = rsp.ResolvedReference
 
 	return nil
 }

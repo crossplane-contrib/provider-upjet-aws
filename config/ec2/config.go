@@ -327,4 +327,16 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ec2_traffic_mirror_target", func(r *config.Resource) {
 		delete(r.References, "network_load_balancer_arn")
 	})
+
+	p.AddResourceConfigurator("aws_vpc_ipam_pool", func(r *config.Resource) {
+		r.References["ipam_scope_id"] = config.Reference{
+			Type: "VPCIpamScope",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_vpc_ipam_scope", func(r *config.Resource) {
+		r.References["ipam_id"] = config.Reference{
+			Type: "VPCIpam",
+		}
+	})
 }

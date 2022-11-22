@@ -5435,6 +5435,228 @@ func (tr *VPCEndpointSubnetAssociation) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this VPCIpam
+func (mg *VPCIpam) GetTerraformResourceType() string {
+	return "aws_vpc_ipam"
+}
+
+// GetConnectionDetailsMapping for this VPCIpam
+func (tr *VPCIpam) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this VPCIpam
+func (tr *VPCIpam) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this VPCIpam
+func (tr *VPCIpam) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this VPCIpam
+func (tr *VPCIpam) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this VPCIpam
+func (tr *VPCIpam) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this VPCIpam
+func (tr *VPCIpam) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this VPCIpam using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *VPCIpam) LateInitialize(attrs []byte) (bool, error) {
+	params := &VPCIpamParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *VPCIpam) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this VPCIpamPool
+func (mg *VPCIpamPool) GetTerraformResourceType() string {
+	return "aws_vpc_ipam_pool"
+}
+
+// GetConnectionDetailsMapping for this VPCIpamPool
+func (tr *VPCIpamPool) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this VPCIpamPool
+func (tr *VPCIpamPool) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this VPCIpamPool
+func (tr *VPCIpamPool) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this VPCIpamPool
+func (tr *VPCIpamPool) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this VPCIpamPool
+func (tr *VPCIpamPool) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this VPCIpamPool
+func (tr *VPCIpamPool) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this VPCIpamPool using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *VPCIpamPool) LateInitialize(attrs []byte) (bool, error) {
+	params := &VPCIpamPoolParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *VPCIpamPool) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this VPCIpamScope
+func (mg *VPCIpamScope) GetTerraformResourceType() string {
+	return "aws_vpc_ipam_scope"
+}
+
+// GetConnectionDetailsMapping for this VPCIpamScope
+func (tr *VPCIpamScope) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this VPCIpamScope
+func (tr *VPCIpamScope) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this VPCIpamScope
+func (tr *VPCIpamScope) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this VPCIpamScope
+func (tr *VPCIpamScope) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this VPCIpamScope
+func (tr *VPCIpamScope) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this VPCIpamScope
+func (tr *VPCIpamScope) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this VPCIpamScope using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *VPCIpamScope) LateInitialize(attrs []byte) (bool, error) {
+	params := &VPCIpamScopeParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *VPCIpamScope) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this VPCIPv4CidrBlockAssociation
 func (mg *VPCIPv4CidrBlockAssociation) GetTerraformResourceType() string {
 	return "aws_vpc_ipv4_cidr_block_association"

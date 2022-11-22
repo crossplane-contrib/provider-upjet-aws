@@ -277,6 +277,9 @@ import (
 	vpcendpointservice "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointservice"
 	vpcendpointserviceallowedprincipal "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointserviceallowedprincipal"
 	vpcendpointsubnetassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointsubnetassociation"
+	vpcipam "github.com/upbound/provider-aws/internal/controller/ec2/vpcipam"
+	vpcipampool "github.com/upbound/provider-aws/internal/controller/ec2/vpcipampool"
+	vpcipamscope "github.com/upbound/provider-aws/internal/controller/ec2/vpcipamscope"
 	vpcipv4cidrblockassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcipv4cidrblockassociation"
 	vpcpeeringconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnection"
 	lifecyclepolicy "github.com/upbound/provider-aws/internal/controller/ecr/lifecyclepolicy"
@@ -765,6 +768,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcendpointservice.Setup,
 		vpcendpointserviceallowedprincipal.Setup,
 		vpcendpointsubnetassociation.Setup,
+		vpcipam.Setup,
+		vpcipampool.Setup,
+		vpcipamscope.Setup,
 		vpcipv4cidrblockassociation.Setup,
 		vpcpeeringconnection.Setup,
 		lifecyclepolicy.Setup,

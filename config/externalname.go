@@ -284,6 +284,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_customer_gateway": config.IdentifierFromProvider,
 	// Default Network ACLs can be imported using the id
 	"aws_default_network_acl": config.IdentifierFromProvider,
+	// IPAMs can be imported using the ipam pool id
+	"aws_vpc_ipam_pool": config.IdentifierFromProvider,
+	// IPAMs can be imported using the scope_id
+	"aws_vpc_ipam_scope": config.IdentifierFromProvider,
+	// IPAMs can be imported using the ipam id
+	"aws_vpc_ipam": config.IdentifierFromProvider,
 
 	// ecr
 	//

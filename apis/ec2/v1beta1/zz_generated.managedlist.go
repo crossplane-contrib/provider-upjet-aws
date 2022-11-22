@@ -655,6 +655,33 @@ func (l *VPCIPv4CidrBlockAssociationList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this VPCIpamList.
+func (l *VPCIpamList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPCIpamPoolList.
+func (l *VPCIpamPoolList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPCIpamScopeList.
+func (l *VPCIpamScopeList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this VPCList.
 func (l *VPCList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
