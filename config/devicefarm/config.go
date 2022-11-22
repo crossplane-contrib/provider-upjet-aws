@@ -19,10 +19,10 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 	})
 
 	p.AddResourceConfigurator("aws_devicefarm_test_grid_project", func(r *config.Resource) {
-    	r.References["vpc_config.security_group_ids"] = config.Reference{
-    		Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
-    		RefFieldName:      "SecurityGroupIDRefs",
-            SelectorFieldName: "SecurityGroupIDSelector",
-    	}
-    })
+		r.References["vpc_config.security_group_ids"] = config.Reference{
+			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			RefFieldName:      "SecurityGroupIDRefs",
+			SelectorFieldName: "SecurityGroupIDSelector",
+		}
+	})
 }

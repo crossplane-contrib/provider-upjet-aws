@@ -29,6 +29,7 @@ import (
 	"github.com/upbound/provider-aws/config/connect"
 	"github.com/upbound/provider-aws/config/cur"
 	"github.com/upbound/provider-aws/config/dax"
+	"github.com/upbound/provider-aws/config/devicefarm"
 	"github.com/upbound/provider-aws/config/docdb"
 	"github.com/upbound/provider-aws/config/dynamodb"
 	"github.com/upbound/provider-aws/config/ebs"
@@ -71,7 +72,6 @@ import (
 	"github.com/upbound/provider-aws/config/sns"
 	"github.com/upbound/provider-aws/config/sqs"
 	"github.com/upbound/provider-aws/config/transfer"
-	"github.com/upbound/provider-aws/config/devicefarm"
 )
 
 var (
