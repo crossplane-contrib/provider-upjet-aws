@@ -125,10 +125,8 @@ import (
 	repository "github.com/upbound/provider-aws/internal/controller/codecommit/repository"
 	trigger "github.com/upbound/provider-aws/internal/controller/codecommit/trigger"
 	codepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/codepipeline"
-	webhook "github.com/upbound/provider-aws/internal/controller/codepipeline/webhook"
-	connectioncodestarconnections "github.com/upbound/provider-aws/internal/controller/codestarconnections/connection"
 	webhookcodepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/webhook"
-	connection "github.com/upbound/provider-aws/internal/controller/codestarconnections/connection"
+	connectioncodestarconnections "github.com/upbound/provider-aws/internal/controller/codestarconnections/connection"
 	host "github.com/upbound/provider-aws/internal/controller/codestarconnections/host"
 	notificationrule "github.com/upbound/provider-aws/internal/controller/codestarnotifications/notificationrule"
 	cognitoidentitypoolproviderprincipaltag "github.com/upbound/provider-aws/internal/controller/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
@@ -573,10 +571,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		repository.Setup,
 		trigger.Setup,
 		codepipeline.Setup,
-		webhook.Setup,
-		connectioncodestarconnections.Setup,
 		webhookcodepipeline.Setup,
-		connection.Setup,
+		connectioncodestarconnections.Setup,
 		host.Setup,
 		notificationrule.Setup,
 		cognitoidentitypoolproviderprincipaltag.Setup,
