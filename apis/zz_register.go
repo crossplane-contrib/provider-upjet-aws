@@ -10,9 +10,12 @@ package apis
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1beta1 "github.com/upbound/provider-aws/apis/acm/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/accessanalyzer/v1beta1"
+	v1beta1account "github.com/upbound/provider-aws/apis/account/v1beta1"
+	v1beta1acm "github.com/upbound/provider-aws/apis/acm/v1beta1"
 	v1beta1acmpca "github.com/upbound/provider-aws/apis/acmpca/v1beta1"
 	v1beta1amp "github.com/upbound/provider-aws/apis/amp/v1beta1"
+	v1beta1amplify "github.com/upbound/provider-aws/apis/amplify/v1beta1"
 	v1beta1apigateway "github.com/upbound/provider-aws/apis/apigateway/v1beta1"
 	v1beta1apigatewayv2 "github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1"
 	v1beta1appautoscaling "github.com/upbound/provider-aws/apis/appautoscaling/v1beta1"
@@ -88,8 +91,11 @@ func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1beta1.SchemeBuilder.AddToScheme,
+		v1beta1account.SchemeBuilder.AddToScheme,
+		v1beta1acm.SchemeBuilder.AddToScheme,
 		v1beta1acmpca.SchemeBuilder.AddToScheme,
 		v1beta1amp.SchemeBuilder.AddToScheme,
+		v1beta1amplify.SchemeBuilder.AddToScheme,
 		v1beta1apigateway.SchemeBuilder.AddToScheme,
 		v1beta1apigatewayv2.SchemeBuilder.AddToScheme,
 		v1beta1appautoscaling.SchemeBuilder.AddToScheme,
