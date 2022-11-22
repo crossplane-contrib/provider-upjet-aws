@@ -157,6 +157,10 @@ import (
 	routingprofile "github.com/upbound/provider-aws/internal/controller/connect/routingprofile"
 	securityprofile "github.com/upbound/provider-aws/internal/controller/connect/securityprofile"
 	userhierarchystructure "github.com/upbound/provider-aws/internal/controller/connect/userhierarchystructure"
+	reportdefinition "github.com/upbound/provider-aws/internal/controller/cur/reportdefinition"
+	dataset "github.com/upbound/provider-aws/internal/controller/dataexchange/dataset"
+	revision "github.com/upbound/provider-aws/internal/controller/dataexchange/revision"
+	pipeline "github.com/upbound/provider-aws/internal/controller/datapipeline/pipeline"
 	cluster "github.com/upbound/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/dax/parametergroup"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/dax/subnetgroup"
@@ -603,6 +607,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		routingprofile.Setup,
 		securityprofile.Setup,
 		userhierarchystructure.Setup,
+		reportdefinition.Setup,
+		dataset.Setup,
+		revision.Setup,
+		pipeline.Setup,
 		cluster.Setup,
 		parametergroup.Setup,
 		subnetgroup.Setup,

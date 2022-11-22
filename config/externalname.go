@@ -1190,6 +1190,23 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_amplify_backend_environment": config.TemplatedStringAsIdentifier("environment_name", "{{ .parameters.app_id }}/{{ .external_name }}"),
 	// Amplify webhook can be imported using a webhook ID
 	"aws_amplify_webhook": config.IdentifierFromProvider,
+
+	// cur
+	//
+	// Report Definitions can be imported using the report_name
+	"aws_cur_report_definition": config.ParameterAsIdentifier("report_name"),
+
+	// dataexchange
+	//
+	// DataExchange DataSets can be imported by their arn
+	"aws_dataexchange_data_set": config.IdentifierFromProvider,
+	// DataExchange Revisions can be imported by their data-set-id:revision-id
+	"aws_dataexchange_revision": config.IdentifierFromProvider,
+
+	// datapipeline
+	//
+	// aws_datapipeline_pipeline can be imported by using the id (Pipeline ID)
+	"aws_datapipeline_pipeline": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

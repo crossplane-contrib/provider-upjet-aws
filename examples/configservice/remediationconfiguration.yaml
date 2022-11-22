@@ -16,7 +16,7 @@ spec:
     maximumAutomaticAttempts: 10
     parameter:
     - name: AutomationAssumeRole
-      staticValue: arn:aws:iam::153891904029:role/security_config
+      staticValue: arn:aws:iam::${data.aws_account_id}:role/security_config
     - name: BucketName
       resourceValue: RESOURCE_ID
     - name: SSEAlgorithm
