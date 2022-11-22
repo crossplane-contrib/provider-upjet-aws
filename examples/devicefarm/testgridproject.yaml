@@ -13,10 +13,8 @@ spec:
     vpcConfig:
       - securityGroupIdRefs:
           - name: example
-          - name: example2
         subnetIdRefs:
           - name: sample-subnet1
-          - name: sample-subnet2
         vpcIdSelector:
           matchLabels:
             testing.upbound.io/example-name: example
