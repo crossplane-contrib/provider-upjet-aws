@@ -11,8 +11,12 @@ spec:
     name: example
     region: us-west-1
     vpcConfig:
-    - securityGroupIds: ${aws_security_group.example.*.id}
-      subnetIds: ${aws_subnet.example.*.id}
+    - securityGroupIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
       vpcIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example

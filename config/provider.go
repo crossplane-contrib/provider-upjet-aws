@@ -71,6 +71,7 @@ import (
 	"github.com/upbound/provider-aws/config/sns"
 	"github.com/upbound/provider-aws/config/sqs"
 	"github.com/upbound/provider-aws/config/transfer"
+	"github.com/upbound/provider-aws/config/devicefarm"
 )
 
 var (
@@ -200,6 +201,7 @@ func GetProvider() *config.Provider {
 		cloudwatchlogs.Configure,
 		cur.Configure,
 		servicecatalog.Configure,
+		devicefarm.Configure,
 	} {
 		configure(pc)
 	}

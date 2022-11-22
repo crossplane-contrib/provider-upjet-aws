@@ -2,6 +2,7 @@ apiVersion: detective.aws.upbound.io/v1beta1
 kind: Member
 metadata:
   annotations:
+    meta.upbound.io/example-id: detective/v1beta1/member
     upjet.upbound.io/manual-intervention: "Requires AccountId and AccountEmail to replaced manually."
   labels:
     testing.upbound.io/example-name: example
@@ -21,6 +22,7 @@ apiVersion: detective.aws.upbound.io/v1beta1
 kind: Graph
 metadata:
   annotations:
+    meta.upbound.io/example-id: detective/v1beta1/member
     upjet.upbound.io/manual-intervention: "Requires AccountId and AccountEmail to replaced manually."
   labels:
     testing.upbound.io/example-name: example
