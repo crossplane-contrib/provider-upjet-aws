@@ -1,0 +1,138 @@
+apiVersion: appflow.aws.upbound.io/v1beta1
+kind: ConnectorProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appflow/v1beta1/connectorprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connectionMode: Public
+    connectorProfileConfig:
+    - connectorProfileCredentials:
+      - redshift:
+        - passwordSecretRef:
+            key: example-key
+            name: example-secret
+            namespace: upbound-system
+          usernameSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example
+      connectorProfileProperties:
+      - redshift:
+        - bucketNameSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example
+          databaseUrl: jdbc:redshift://example.cteapgmkylwv.us-west-1.redshift.amazonaws.com:5439/example_db
+          roleArnSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example
+    connectorType: Redshift
+    name: example_profile
+    region: us-west-1
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appflow/v1beta1/connectorprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "ec2.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }
+---
+apiVersion: redshift.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appflow/v1beta1/connectorprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clusterType: single-node
+    databaseName: example_db
+    masterPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    masterUsername: exampleuser
+    nodeType: ra3.xlplus
+    region: us-west-1
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: example-bucket-connectorprofile
+    meta.upbound.io/example-id: appflow/v1beta1/connectorprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  name: sample-user-policy
+  labels:
+    testing.upbound.io/example-name: role
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+              "Sid": "",
+              "Effect": "Allow",
+              "Action": "redshift:*",
+              "Resource": "*"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  name: sample-policy-attachment
+  labels:
+    testing.upbound.io/example-name: role
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/connection
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: "examplePassword123!"
