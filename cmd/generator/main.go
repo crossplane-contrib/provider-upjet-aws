@@ -41,7 +41,10 @@ func main() {
 	p := config.GetProvider()
 	pipeline.Run(p, absRootDir)
 	if len(*skippedResourcesCSV) != 0 {
-		if err := os.WriteFile(*skippedResourcesCSV, []byte(strings.Join(p.GetSkippedResourceNames(), "\n")), 0o600); err != nil {
+		skippedCount := len(p.GetSkippedResourceNames())
+		totalCount := skippedCount + len(p.Resources)
+		summaryLine := fmt.Sprintf("Skipped, total, coverage: %d, %d, %.1f%%", skippedCount, totalCount, (1.0-float64(skippedCount)/float64(totalCount))*100)
+		if err := os.WriteFile(*skippedResourcesCSV, []byte(strings.Join(append([]string{summaryLine}, p.GetSkippedResourceNames()...), "\n")), 0o600); err != nil {
 			panic(fmt.Sprintf("cannot write skipped resources CSV to file %s: %s", *skippedResourcesCSV, err.Error()))
 		}
 	}
