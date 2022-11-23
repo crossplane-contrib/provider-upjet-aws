@@ -30,7 +30,7 @@ metadata:
     meta.upbound.io/example-id: cur/v1beta1/reportdefinition
   labels:
     testing.upbound.io/example-name: example
-  name: test-definition-bucket-${Rand.RFC1123Subdomain}
+  name: test-definition-bucket
 spec:
   forProvider:
     forceDestroy: true
@@ -63,7 +63,7 @@ spec:
                     "s3:GetBucketAcl",
                     "s3:GetBucketPolicy"
                 ],
-                "Resource":"arn:aws:s3:::test-definition-bucket",
+                "Resource":"arn:aws:s3:::test-definition-bucket-*",
                 "Condition": {
                     "StringEquals": {
                         "aws:SourceArn": "arn:aws:cur:us-east-1:${data.aws_account_id}:definition/*",
@@ -78,7 +78,7 @@ spec:
                     "Service": "billingreports.amazonaws.com"
                 },
                 "Action": "s3:PutObject",
-                "Resource": "arn:aws:s3:::test-definition-bucket/*",
+                "Resource": "arn:aws:s3:::test-definition-bucket-*/*",
                 "Condition": {
                     "StringEquals": {
                         "aws:SourceArn": "arn:aws:cur:us-east-1:${data.aws_account_id}:definition/*",
@@ -134,7 +134,7 @@ spec:
               "s3:GetBucketAcl",
               "s3:GetBucketPolicy"
             ],
-            "Resource":"arn:aws:s3:::test-definition-bucket",
+            "Resource":"arn:aws:s3:::test-definition-bucket-*",
             "Condition": {
               "StringEquals": {
                 "aws:SourceArn": "arn:aws:cur:us-east-1:${data.aws_account_id}:definition/*",
@@ -146,7 +146,7 @@ spec:
             "Sid": "Stmt1335892526596",
             "Effect": "Allow",
             "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::test-definition-bucket/*",
+            "Resource": "arn:aws:s3:::test-definition-bucket-*/*",
             "Condition": {
               "StringEquals": {
                 "aws:SourceArn": "arn:aws:cur:us-east-1:${data.aws_account_id}:definition/*",
@@ -160,8 +160,8 @@ spec:
             ],
             "Effect": "Allow",
             "Resource": [
-              "arn:aws:s3:::test-definition-bucket",
-              "arn:aws:s3:::test-definition-bucket/*"
+              "arn:aws:s3:::test-definition-bucket-*",
+              "arn:aws:s3:::test-definition-bucket-*/*"
             ]
           }
         ]
