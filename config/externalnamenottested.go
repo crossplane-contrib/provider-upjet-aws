@@ -14,12 +14,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// amp
 	//
-	// The prometheus alert manager definition can be imported using the workspace identifier
-	"aws_prometheus_alert_manager_definition": config.ParameterAsIdentifier("workspace_id"),
-	// The prometheus rule group namespace can be imported using the arn
-	"aws_prometheus_rule_group_namespace": config.IdentifierFromProvider,
-	// AMP Workspaces can be imported using the identifier
-	"aws_prometheus_workspace": config.IdentifierFromProvider,
 
 	// amplify
 	//
@@ -87,8 +81,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_autoscaling_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.autoscaling_group_name }}/{{ .external_name }}"),
 	// AutoScaling ScheduledAction can be imported using the auto-scaling-group-name and scheduled-action-name: auto-scaling-group-name/scheduled-action-name
 	"aws_autoscaling_schedule": config.TemplatedStringAsIdentifier("scheduled_action_name", "{{ .parameters.autoscaling_group_name }}/{{ .external_name }}"),
-	// Launch configurations can be imported using the name
-	"aws_launch_configuration": config.NameAsIdentifier,
 
 	// autoscalingplans
 	//
