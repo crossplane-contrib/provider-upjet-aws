@@ -118,6 +118,7 @@ jobs:
         run: make vendor vendor.check
 
       - name: Check Diff
+        id: check-diff
         run: |
           mkdir _output
           make check-diff
@@ -125,6 +126,10 @@ jobs:
           # check-diff depends on the generate Make target, and we would like
           # to save a skipped resource list
           SKIPPED_RESOURCES_CSV: ../_output/skipped_resources.csv
+
+      - name: Show diff
+        if: failure() && steps.check-diff.outcome == 'failure'
+        run: git diff
 
       - name: Publish skipped resources CSV to Github
         uses: actions/upload-artifact@v3
