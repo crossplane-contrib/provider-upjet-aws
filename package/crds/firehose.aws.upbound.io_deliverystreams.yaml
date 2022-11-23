@@ -113,11 +113,8 @@ spec:
                             the cluster. Conflicts with domain_arn.
                           type: string
                         domainArn:
-                          description: The ARN of the Amazon ES domain.  The IAM role
-                            must have permission for DescribeElasticsearchDomain,
-                            DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig
-                            after assuming RoleARN.  The pattern needs to be arn:.*.
-                            Conflicts with cluster_endpoint.
+                          description: The ARN of the Amazon ES domain.  The pattern
+                            needs to be arn:.*.  Conflicts with cluster_endpoint.
                           type: string
                         domainArnRef:
                           description: Reference to a Domain in elasticsearch to populate

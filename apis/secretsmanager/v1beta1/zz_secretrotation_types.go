@@ -60,9 +60,6 @@ type SecretRotationParameters struct {
 	// Selector for a Secret in secretsmanager to populate secretId.
 	// +kubebuilder:validation:Optional
 	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type SecretRotationRotationRulesObservation struct {

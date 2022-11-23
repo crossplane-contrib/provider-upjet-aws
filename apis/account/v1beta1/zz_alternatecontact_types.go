@@ -19,11 +19,11 @@ type AlternateContactObservation struct {
 
 type AlternateContactParameters struct {
 
-	// The ID of the target account when managing member accounts. Will manage current user's account by default if omitted.
+	// ID of the target account when managing member accounts. Will manage current user's account by default if omitted.
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The type of the alternate contact. Allowed values are: BILLING, OPERATIONS, SECURITY.
+	// Type of the alternate contact. Allowed values are: BILLING, OPERATIONS, SECURITY.
 	// +kubebuilder:validation:Required
 	AlternateContactType *string `json:"alternateContactType" tf:"alternate_contact_type,omitempty"`
 
@@ -31,11 +31,11 @@ type AlternateContactParameters struct {
 	// +kubebuilder:validation:Required
 	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
 
-	// The name of the alternate contact.
+	// Name of the alternate contact.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// A phone number for the alternate contact.
+	// Phone number for the alternate contact.
 	// +kubebuilder:validation:Required
 	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
 
@@ -44,7 +44,7 @@ type AlternateContactParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// A title for the alternate contact.
+	// Title for the alternate contact.
 	// +kubebuilder:validation:Required
 	Title *string `json:"title" tf:"title,omitempty"`
 }

@@ -27,6 +27,9 @@ type KeyPairObservation struct {
 	// The key pair ID.
 	KeyPairID *string `json:"keyPairId,omitempty" tf:"key_pair_id,omitempty"`
 
+	// The type of key pair.
+	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }

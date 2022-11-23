@@ -19,11 +19,11 @@ type NotificationObservation struct {
 
 type NotificationParameters struct {
 
-	// A list of AutoScaling Group Names
+	// List of AutoScaling Group Names
 	// +kubebuilder:validation:Required
 	GroupNames []*string `json:"groupNames" tf:"group_names,omitempty"`
 
-	// A list of Notification Types that trigger
+	// List of Notification Types that trigger
 	// notifications. Acceptable values are documented in the AWS documentation here
 	// +kubebuilder:validation:Required
 	Notifications []*string `json:"notifications" tf:"notifications,omitempty"`
@@ -33,7 +33,7 @@ type NotificationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The Topic ARN for notifications to be sent through
+	// Topic ARN for notifications to be sent through
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

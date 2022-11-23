@@ -18,11 +18,11 @@ type CachingConfigObservation struct {
 
 type CachingConfigParameters struct {
 
-	// The list of caching key.
+	// List of caching key.
 	// +kubebuilder:validation:Optional
 	CachingKeys []*string `json:"cachingKeys,omitempty" tf:"caching_keys,omitempty"`
 
-	// The TTL in seconds.
+	// TTL in seconds.
 	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
@@ -32,14 +32,14 @@ type PipelineConfigObservation struct {
 
 type PipelineConfigParameters struct {
 
-	// The list of Function ID.
+	// List of Function ID.
 	// +kubebuilder:validation:Optional
 	Functions []*string `json:"functions,omitempty" tf:"functions,omitempty"`
 }
 
 type ResolverObservation struct {
 
-	// The ARN
+	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -47,7 +47,7 @@ type ResolverObservation struct {
 
 type ResolverParameters struct {
 
-	// The API ID for the GraphQL API.
+	// API ID for the GraphQL API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.GraphQLAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -61,11 +61,11 @@ type ResolverParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The CachingConfig.
+	// CachingConfig.
 	// +kubebuilder:validation:Optional
 	CachingConfig []CachingConfigParameters `json:"cachingConfig,omitempty" tf:"caching_config,omitempty"`
 
-	// The DataSource name.
+	// Data source name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.Datasource
 	// +kubebuilder:validation:Optional
 	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
@@ -78,19 +78,19 @@ type ResolverParameters struct {
 	// +kubebuilder:validation:Optional
 	DataSourceSelector *v1.Selector `json:"dataSourceSelector,omitempty" tf:"-"`
 
-	// The field name from the schema defined in the GraphQL API.
+	// Field name from the schema defined in the GraphQL API.
 	// +kubebuilder:validation:Required
 	Field *string `json:"field" tf:"field,omitempty"`
 
-	// The resolver type. Valid values are UNIT and PIPELINE.
+	// Resolver type. Valid values are UNIT and PIPELINE.
 	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
-	// The maximum batching size for a resolver. Valid values are between 0 and 2000.
+	// Maximum batching size for a resolver. Valid values are between 0 and 2000.
 	// +kubebuilder:validation:Optional
 	MaxBatchSize *float64 `json:"maxBatchSize,omitempty" tf:"max_batch_size,omitempty"`
 
-	// The PipelineConfig.
+	// PipelineConfig.
 	// +kubebuilder:validation:Optional
 	PipelineConfig []PipelineConfigParameters `json:"pipelineConfig,omitempty" tf:"pipeline_config,omitempty"`
 
@@ -99,11 +99,11 @@ type ResolverParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The request mapping template for UNIT resolver or 'before mapping template' for PIPELINE resolver. Required for non-Lambda resolvers.
+	// Request mapping template for UNIT resolver or 'before mapping template' for PIPELINE resolver. Required for non-Lambda resolvers.
 	// +kubebuilder:validation:Optional
 	RequestTemplate *string `json:"requestTemplate,omitempty" tf:"request_template,omitempty"`
 
-	// The response mapping template for UNIT resolver or 'after mapping template' for PIPELINE resolver. Required for non-Lambda resolvers.
+	// Response mapping template for UNIT resolver or 'after mapping template' for PIPELINE resolver. Required for non-Lambda resolvers.
 	// +kubebuilder:validation:Optional
 	ResponseTemplate *string `json:"responseTemplate,omitempty" tf:"response_template,omitempty"`
 
@@ -111,7 +111,7 @@ type ResolverParameters struct {
 	// +kubebuilder:validation:Optional
 	SyncConfig []ResolverSyncConfigParameters `json:"syncConfig,omitempty" tf:"sync_config,omitempty"`
 
-	// The type name from the schema defined in the GraphQL API.
+	// Type name from the schema defined in the GraphQL API.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -121,15 +121,15 @@ type ResolverSyncConfigObservation struct {
 
 type ResolverSyncConfigParameters struct {
 
-	// The Conflict Detection strategy to use. Valid values are NONE and VERSION.
+	// Conflict Detection strategy to use. Valid values are NONE and VERSION.
 	// +kubebuilder:validation:Optional
 	ConflictDetection *string `json:"conflictDetection,omitempty" tf:"conflict_detection,omitempty"`
 
-	// The Conflict Resolution strategy to perform in the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY, AUTOMERGE, and LAMBDA.
+	// Conflict Resolution strategy to perform in the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY, AUTOMERGE, and LAMBDA.
 	// +kubebuilder:validation:Optional
 	ConflictHandler *string `json:"conflictHandler,omitempty" tf:"conflict_handler,omitempty"`
 
-	// The Lambda Conflict Handler Config when configuring LAMBDA as the Conflict Handler. See Lambda Conflict Handler Config.
+	// Lambda Conflict Handler Config when configuring LAMBDA as the Conflict Handler. See Lambda Conflict Handler Config.
 	// +kubebuilder:validation:Optional
 	LambdaConflictHandlerConfig []SyncConfigLambdaConflictHandlerConfigParameters `json:"lambdaConflictHandlerConfig,omitempty" tf:"lambda_conflict_handler_config,omitempty"`
 }
@@ -139,7 +139,7 @@ type SyncConfigLambdaConflictHandlerConfigObservation struct {
 
 type SyncConfigLambdaConflictHandlerConfigParameters struct {
 
-	// The Amazon Resource Name (ARN) for the Lambda function to use as the Conflict Handler.
+	// ARN for the Lambda function to use as the Conflict Handler.
 	// +kubebuilder:validation:Optional
 	LambdaConflictHandlerArn *string `json:"lambdaConflictHandlerArn,omitempty" tf:"lambda_conflict_handler_arn,omitempty"`
 }

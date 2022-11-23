@@ -27,7 +27,7 @@ type DataCatalogObservation struct {
 
 type DataCatalogParameters struct {
 
-	// A description of the data catalog.
+	// Description of the data catalog.
 	// +kubebuilder:validation:Required
 	Description *string `json:"description" tf:"description,omitempty"`
 
@@ -44,7 +44,7 @@ type DataCatalogParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of data catalog: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.
+	// Type of data catalog: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

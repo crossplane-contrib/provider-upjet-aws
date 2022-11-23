@@ -11,6 +11,9 @@ spec:
     destinations:
     - ${aws_gamelift_fleet.us_west_2_fleet.arn}
     - ${aws_gamelift_fleet.eu_central_1_fleet.arn}
+    notificationTargetSelector:
+      matchLabels:
+        testing.upbound.io/example-name: game_session_queue_notifications
     playerLatencyPolicy:
     - maximumIndividualPlayerLatencyMilliseconds: 100
       policyDurationSeconds: 5

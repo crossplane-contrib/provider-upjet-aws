@@ -18,6 +18,10 @@ type CatalogTargetObservation struct {
 
 type CatalogTargetParameters struct {
 
+	// The name of the connection to use to connect to the JDBC target.
+	// +kubebuilder:validation:Optional
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
 	// Glue database where results are written.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase
 	// +kubebuilder:validation:Optional
@@ -30,6 +34,14 @@ type CatalogTargetParameters struct {
 	// Selector for a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+
+	// The ARN of the dead-letter SQS queue.
+	// +kubebuilder:validation:Optional
+	DlqEventQueueArn *string `json:"dlqEventQueueArn,omitempty" tf:"dlq_event_queue_arn,omitempty"`
+
+	// The ARN of the SQS queue to receive S3 notifications from.
+	// +kubebuilder:validation:Optional
+	EventQueueArn *string `json:"eventQueueArn,omitempty" tf:"event_queue_arn,omitempty"`
 
 	// A list of catalog tables to be synchronized.
 	// +kubebuilder:validation:Required
@@ -88,6 +100,10 @@ type CrawlerParameters struct {
 	// List of nested JBDC target arguments. See JDBC Target below.
 	// +kubebuilder:validation:Optional
 	JdbcTarget []JdbcTargetParameters `json:"jdbcTarget,omitempty" tf:"jdbc_target,omitempty"`
+
+	// Specifies Lake Formation configuration settings for the crawler. See Lake Formation Configuration below.
+	// +kubebuilder:validation:Optional
+	LakeFormationConfiguration []LakeFormationConfigurationParameters `json:"lakeFormationConfiguration,omitempty" tf:"lake_formation_configuration,omitempty"`
 
 	// Specifies data lineage configuration settings for the crawler. See Lineage Configuration below.
 	// +kubebuilder:validation:Optional
@@ -151,8 +167,8 @@ type DeltaTargetObservation struct {
 type DeltaTargetParameters struct {
 
 	// The name of the connection to use to connect to the JDBC target.
-	// +kubebuilder:validation:Required
-	ConnectionName *string `json:"connectionName" tf:"connection_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
 
 	// A list of the Amazon S3 paths to the Delta tables.
 	// +kubebuilder:validation:Required
@@ -199,6 +215,10 @@ type JdbcTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionNameSelector *v1.Selector `json:"connectionNameSelector,omitempty" tf:"-"`
 
+	// Specify a value of RAWTYPES or COMMENTS to enable additional metadata intable responses. RAWTYPES provides the native-level datatype. COMMENTS provides comments associated with a column or table in the database.
+	// +kubebuilder:validation:Optional
+	EnableAdditionalMetadata []*string `json:"enableAdditionalMetadata,omitempty" tf:"enable_additional_metadata,omitempty"`
+
 	// A list of glob patterns used to exclude from the crawl.
 	// +kubebuilder:validation:Optional
 	Exclusions []*string `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
@@ -206,6 +226,20 @@ type JdbcTargetParameters struct {
 	// The name of the DynamoDB table to crawl.
 	// +kubebuilder:validation:Required
 	Path *string `json:"path" tf:"path,omitempty"`
+}
+
+type LakeFormationConfigurationObservation struct {
+}
+
+type LakeFormationConfigurationParameters struct {
+
+	// Required for cross account crawls. For same account crawls as the target data, this can omitted.
+	// +kubebuilder:validation:Optional
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// Specifies whether to use Lake Formation credentials for the crawler instead of the IAM role credentials.
+	// +kubebuilder:validation:Optional
+	UseLakeFormationCredentials *bool `json:"useLakeFormationCredentials,omitempty" tf:"use_lake_formation_credentials,omitempty"`
 }
 
 type LineageConfigurationObservation struct {
@@ -250,7 +284,7 @@ type RecrawlPolicyObservation struct {
 
 type RecrawlPolicyParameters struct {
 
-	// Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. Valid Values are: CRAWL_EVERYTHING and CRAWL_NEW_FOLDERS_ONLY. Default value is CRAWL_EVERYTHING.
+	// Specifies whether to crawl the entire dataset again, crawl only folders that were added since the last crawler run, or crawl what S3 notifies the crawler of via SQS. Valid Values are: CRAWL_EVENT_MODE, CRAWL_EVERYTHING and CRAWL_NEW_FOLDERS_ONLY. Default value is CRAWL_EVERYTHING.
 	// +kubebuilder:validation:Optional
 	RecrawlBehavior *string `json:"recrawlBehavior,omitempty" tf:"recrawl_behavior,omitempty"`
 }

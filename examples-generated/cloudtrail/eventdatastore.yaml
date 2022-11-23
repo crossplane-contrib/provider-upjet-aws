@@ -10,7 +10,6 @@ spec:
   forProvider:
     name: example-event-data-store
     region: us-west-1
-    retentionPeriod: 7
 
 ---
 

@@ -15,13 +15,13 @@ import (
 
 type IntegrationResponseObservation struct {
 
-	// The integration response identifier.
+	// Integration response identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type IntegrationResponseParameters struct {
 
-	// The API identifier.
+	// API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -38,7 +38,7 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
 
-	// The identifier of the aws_apigatewayv2_integration.
+	// Identifier of the aws_apigatewayv2_integration.
 	// +crossplane:generate:reference:type=Integration
 	// +kubebuilder:validation:Optional
 	IntegrationID *string `json:"integrationId,omitempty" tf:"integration_id,omitempty"`
@@ -51,7 +51,7 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	IntegrationIDSelector *v1.Selector `json:"integrationIdSelector,omitempty" tf:"-"`
 
-	// The integration response key.
+	// Integration response key.
 	// +kubebuilder:validation:Required
 	IntegrationResponseKey *string `json:"integrationResponseKey" tf:"integration_response_key,omitempty"`
 
@@ -60,7 +60,7 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// A map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client.
+	// Map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client.
 	// +kubebuilder:validation:Optional
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 

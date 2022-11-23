@@ -57,6 +57,9 @@ type PortInfoParameters struct {
 	// +kubebuilder:validation:Required
 	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	IPv6Cidrs []*string `json:"ipv6Cidrs,omitempty" tf:"ipv6_cidrs,omitempty"`
+
 	// IP protocol name. Valid values are tcp, all, udp, and icmp.
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`

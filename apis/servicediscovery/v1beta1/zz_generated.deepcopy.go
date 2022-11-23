@@ -178,6 +178,11 @@ func (in *HTTPNamespaceObservation) DeepCopyInto(out *HTTPNamespaceObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.HTTPName != nil {
+		in, out := &in.HTTPName, &out.HTTPName
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)

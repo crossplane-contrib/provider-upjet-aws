@@ -65,28 +65,28 @@ spec:
               forProvider:
                 properties:
                   accountId:
-                    description: The ID of the target account when managing member
-                      accounts. Will manage current user's account by default if omitted.
+                    description: ID of the target account when managing member accounts.
+                      Will manage current user's account by default if omitted.
                     type: string
                   alternateContactType:
-                    description: 'The type of the alternate contact. Allowed values
-                      are: BILLING, OPERATIONS, SECURITY.'
+                    description: 'Type of the alternate contact. Allowed values are:
+                      BILLING, OPERATIONS, SECURITY.'
                     type: string
                   emailAddress:
                     description: An email address for the alternate contact.
                     type: string
                   name:
-                    description: The name of the alternate contact.
+                    description: Name of the alternate contact.
                     type: string
                   phoneNumber:
-                    description: A phone number for the alternate contact.
+                    description: Phone number for the alternate contact.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   title:
-                    description: A title for the alternate contact.
+                    description: Title for the alternate contact.
                     type: string
                 required:
                 - alternateContactType

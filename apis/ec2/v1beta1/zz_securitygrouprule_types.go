@@ -17,6 +17,9 @@ type SecurityGroupRuleObservation struct {
 
 	// ID of the security group rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// If the aws_security_group_rule resource has a single source or destination then this is the AWS Security Group Rule resource ID. Otherwise it is empty.
+	SecurityGroupRuleID *string `json:"securityGroupRuleId,omitempty" tf:"security_group_rule_id,omitempty"`
 }
 
 type SecurityGroupRuleParameters struct {
@@ -86,7 +89,6 @@ type SecurityGroupRuleParameters struct {
 
 	// Type of rule being created. Valid options are ingress (inbound)
 	// or egress (outbound).
-	// Type of rule, ingress (inbound) or egress (outbound).
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

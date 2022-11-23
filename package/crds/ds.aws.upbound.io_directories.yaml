@@ -178,9 +178,14 @@ spec:
                   description:
                     description: A textual description for the directory.
                     type: string
+                  desiredNumberOfDomainControllers:
+                    description: The number of domain controllers desired in the directory.
+                      Minimum value of 2. Scaling of domain controllers is only supported
+                      for MicrosoftAD directories.
+                    type: number
                   edition:
                     description: The MicrosoftAD edition (Standard or Enterprise).
-                      Defaults to Enterprise (applies to MicrosoftAD type only).
+                      Defaults to Enterprise.
                     type: string
                   enableSso:
                     description: Whether to enable single-sign on for the directory.
@@ -216,8 +221,9 @@ spec:
                     description: The short name of the directory, such as CORP.
                     type: string
                   size:
-                    description: The size of the directory (Small or Large are accepted
-                      values).
+                    description: (For SimpleAD and ADConnector types) The size of
+                      the directory (Small or Large are accepted values). Large by
+                      default.
                     type: string
                   tags:
                     additionalProperties:

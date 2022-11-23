@@ -43,6 +43,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Configures a default Service Connect namespace. Detailed below.
+	// +kubebuilder:validation:Optional
+	ServiceConnectDefaults []ServiceConnectDefaultsParameters `json:"serviceConnectDefaults,omitempty" tf:"service_connect_defaults,omitempty"`
+
 	// Configuration block(s) with cluster settings. For example, this can be used to enable CloudWatch Container Insights for a cluster. Detailed below.
 	// +kubebuilder:validation:Optional
 	Setting []SettingParameters `json:"setting,omitempty" tf:"setting,omitempty"`
@@ -124,6 +128,16 @@ type LogConfigurationParameters struct {
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 }
 
+type ServiceConnectDefaultsObservation struct {
+}
+
+type ServiceConnectDefaultsParameters struct {
+
+	// The ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration.
+	// +kubebuilder:validation:Required
+	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+}
+
 type SettingObservation struct {
 }
 
@@ -133,7 +147,7 @@ type SettingParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The value to assign to the setting. Value values are enabled and disabled.
+	// The value to assign to the setting. Valid values are enabled and disabled.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }

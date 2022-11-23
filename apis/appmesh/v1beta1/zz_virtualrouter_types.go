@@ -18,39 +18,39 @@ type SpecListenerPortMappingObservation struct {
 
 type SpecListenerPortMappingParameters struct {
 
-	// The port used for the port mapping.
+	// Port used for the port mapping.
 	// +kubebuilder:validation:Required
 	Port *float64 `json:"port" tf:"port,omitempty"`
 
-	// The protocol used for the port mapping. Valid values are http,http2, tcp and grpc.
+	// Protocol used for the port mapping. Valid values are http,http2, tcp and grpc.
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 }
 
 type VirtualRouterObservation struct {
 
-	// The ARN of the virtual router.
+	// ARN of the virtual router.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The creation date of the virtual router.
+	// Creation date of the virtual router.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
-	// The ID of the virtual router.
+	// ID of the virtual router.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The last update date of the virtual router.
+	// Last update date of the virtual router.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
-	// The resource owner's AWS account ID.
+	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type VirtualRouterParameters struct {
 
-	// The name of the service mesh in which to create the virtual router. Must be between 1 and 255 characters in length.
+	// Name of the service mesh in which to create the virtual router. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.Mesh
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -64,11 +64,11 @@ type VirtualRouterParameters struct {
 	// +kubebuilder:validation:Optional
 	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
 
-	// The AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
+	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	// +kubebuilder:validation:Optional
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
 
-	// The name to use for the virtual router. Must be between 1 and 255 characters in length.
+	// Name to use for the virtual router. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -77,7 +77,7 @@ type VirtualRouterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The virtual router specification to apply.
+	// Virtual router specification to apply.
 	// +kubebuilder:validation:Required
 	Spec []VirtualRouterSpecParameters `json:"spec" tf:"spec,omitempty"`
 
@@ -91,7 +91,7 @@ type VirtualRouterSpecListenerObservation struct {
 
 type VirtualRouterSpecListenerParameters struct {
 
-	// The port mapping information for the listener.
+	// Port mapping information for the listener.
 	// +kubebuilder:validation:Required
 	PortMapping []SpecListenerPortMappingParameters `json:"portMapping" tf:"port_mapping,omitempty"`
 }

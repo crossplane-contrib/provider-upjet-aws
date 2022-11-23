@@ -274,7 +274,7 @@ type DistributionParameters struct {
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// The maximum HTTP version to support on the
-	// distribution. Allowed values are http1.1 and http2. The default is
+	// distribution. Allowed values are http1.1, http2, http2and3 and http3. The default is
 	// http2.
 	// +kubebuilder:validation:Optional
 	HTTPVersion *string `json:"httpVersion,omitempty" tf:"http_version,omitempty"`
@@ -367,7 +367,7 @@ type ForwardedValuesCookiesObservation struct {
 
 type ForwardedValuesCookiesParameters struct {
 
-	// Specifies whether you want CloudFront to forward
+	// Whether you want CloudFront to forward
 	// cookies to the origin that is associated with this cache behavior. You can
 	// specify all, none or whitelist. If whitelist, you must include the
 	// subsequent whitelisted_names
@@ -391,7 +391,7 @@ type ForwardedValuesParameters struct {
 	// +kubebuilder:validation:Required
 	Cookies []ForwardedValuesCookiesParameters `json:"cookies" tf:"cookies,omitempty"`
 
-	// Specifies the Headers, if any, that you want
+	// Headers, if any, that you want
 	// CloudFront to vary upon for this cache behavior. Specify * to include all
 	// headers.
 	// +kubebuilder:validation:Optional
@@ -433,7 +433,7 @@ type GeoRestrictionParameters struct {
 
 	// The ISO 3166-1-alpha-2 codes for which you
 	// want CloudFront either to distribute your content (whitelist) or not
-	// distribute your content (blacklist).
+	// distribute your content (blacklist). If the type is specified as none an empty array can be used.
 	// +kubebuilder:validation:Optional
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 
@@ -512,7 +512,7 @@ type OrderedCacheBehaviorForwardedValuesCookiesObservation struct {
 
 type OrderedCacheBehaviorForwardedValuesCookiesParameters struct {
 
-	// Specifies whether you want CloudFront to forward
+	// Whether you want CloudFront to forward
 	// cookies to the origin that is associated with this cache behavior. You can
 	// specify all, none or whitelist. If whitelist, you must include the
 	// subsequent whitelisted_names
@@ -536,7 +536,7 @@ type OrderedCacheBehaviorForwardedValuesParameters struct {
 	// +kubebuilder:validation:Required
 	Cookies []OrderedCacheBehaviorForwardedValuesCookiesParameters `json:"cookies" tf:"cookies,omitempty"`
 
-	// Specifies the Headers, if any, that you want
+	// Headers, if any, that you want
 	// CloudFront to vary upon for this cache behavior. Specify * to include all
 	// headers.
 	// +kubebuilder:validation:Optional
@@ -763,7 +763,7 @@ type OriginParameters struct {
 
 	// The CloudFront custom
 	// origin configuration information. If an S3
-	// origin is required, use s3_origin_config instead.
+	// origin is required, use origin_access_control_id or s3_origin_config instead.
 	// +kubebuilder:validation:Optional
 	CustomOriginConfig []CustomOriginConfigParameters `json:"customOriginConfig,omitempty" tf:"custom_origin_config,omitempty"`
 
@@ -771,6 +771,10 @@ type OriginParameters struct {
 	// web site of your custom origin.
 	// +kubebuilder:validation:Required
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
+
+	// The unique identifier of a CloudFront origin access control for this origin.
+	// +kubebuilder:validation:Optional
+	OriginAccessControlID *string `json:"originAccessControlId,omitempty" tf:"origin_access_control_id,omitempty"`
 
 	// A unique identifier for the origin.
 	// +kubebuilder:validation:Required
@@ -823,8 +827,7 @@ type S3OriginConfigObservation struct {
 
 type S3OriginConfigParameters struct {
 
-	// The CloudFront origin access
-	// identity to associate with the origin.
+	// The CloudFront origin access identity to associate with the origin.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.OriginAccessIdentity
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("cloudfront_access_identity_path",true)
 	// +kubebuilder:validation:Optional

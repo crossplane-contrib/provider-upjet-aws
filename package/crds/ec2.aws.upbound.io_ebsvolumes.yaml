@@ -70,6 +70,11 @@ spec:
                   encrypted:
                     description: If true, the disk will be encrypted.
                     type: boolean
+                  finalSnapshot:
+                    description: If true, snapshot will be created before volume deletion.
+                      Any tags on the volume will be migrated to the snapshot. By
+                      default set to false
+                    type: boolean
                   iops:
                     description: The amount of IOPS to provision for the disk. Only
                       valid for type of io1, io2 or gp3.

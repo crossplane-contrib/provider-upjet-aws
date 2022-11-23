@@ -54,7 +54,7 @@ type ByteMatchTuplesParameters struct {
 	// +kubebuilder:validation:Required
 	PositionalConstraint *string `json:"positionalConstraint" tf:"positional_constraint,omitempty"`
 
-	// The value that you want to search forE.g., HEADER, METHOD or BODY.
+	// The value that you want to search for within the field specified by field_to_match, e.g., badrefer1.
 	// See docs
 	// for all supported values.
 	// +kubebuilder:validation:Optional

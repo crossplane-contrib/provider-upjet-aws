@@ -880,6 +880,21 @@ func (in *GameSessionQueueParameters) DeepCopyInto(out *GameSessionQueueParamete
 			}
 		}
 	}
+	if in.NotificationTarget != nil {
+		in, out := &in.NotificationTarget, &out.NotificationTarget
+		*out = new(string)
+		**out = **in
+	}
+	if in.NotificationTargetRef != nil {
+		in, out := &in.NotificationTargetRef, &out.NotificationTargetRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NotificationTargetSelector != nil {
+		in, out := &in.NotificationTargetSelector, &out.NotificationTargetSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PlayerLatencyPolicy != nil {
 		in, out := &in.PlayerLatencyPolicy, &out.PlayerLatencyPolicy
 		*out = make([]PlayerLatencyPolicyParameters, len(*in))

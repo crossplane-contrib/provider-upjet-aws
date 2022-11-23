@@ -35,6 +35,10 @@ type EBSVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
+	// If true, snapshot will be created before volume deletion. Any tags on the volume will be migrated to the snapshot. By default set to false
+	// +kubebuilder:validation:Optional
+	FinalSnapshot *bool `json:"finalSnapshot,omitempty" tf:"final_snapshot,omitempty"`
+
 	// The amount of IOPS to provision for the disk. Only valid for type of io1, io2 or gp3.
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`

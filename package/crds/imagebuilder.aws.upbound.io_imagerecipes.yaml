@@ -99,6 +99,10 @@ spec:
                               snapshotId:
                                 description: Identifier of the EC2 Volume Snapshot.
                                 type: string
+                              throughput:
+                                description: For GP3 volumes only. The throughput
+                                  in MiB/s that the volume supports.
+                                type: number
                               volumeSize:
                                 description: Size of the volume, in GiB.
                                 type: number
@@ -154,7 +158,9 @@ spec:
                     description: Name of the image recipe.
                     type: string
                   parentImage:
-                    description: Platform of the image recipe.
+                    description: The image recipe uses this image as a base from which
+                      to build your customized image. The value can be the base image
+                      ARN or an AMI ID.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -183,7 +189,10 @@ spec:
                       or a command script to run when you launch your build instance.
                     type: string
                   version:
-                    description: Version of the image recipe.
+                    description: 'The semantic version of the image recipe, which
+                      specifies the version in the following format, with numeric
+                      values in each position to indicate a specific version: major.minor.patch.
+                      For example: 1.0.0.'
                     type: string
                   workingDirectory:
                     description: The working directory to be used during build and

@@ -67,15 +67,15 @@ spec:
               forProvider:
                 properties:
                   cookieName:
-                    description: The application cookie whose lifetime the ELB's cookie
+                    description: Application cookie whose lifetime the ELB's cookie
                       should follow.
                     type: string
                   lbPort:
-                    description: The load balancer port to which the policy should
-                      be applied. This must be an active listener on the load balancer.
+                    description: Load balancer port to which the policy should be
+                      applied. This must be an active listener on the load balancer.
                     type: number
                   loadBalancer:
-                    description: The name of load balancer to which the policy should
+                    description: Name of load balancer to which the policy should
                       be attached.
                     type: string
                   loadBalancerRef:
@@ -338,7 +338,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the policy.
+                    description: ID of the policy.
                     type: string
                 type: object
               conditions:

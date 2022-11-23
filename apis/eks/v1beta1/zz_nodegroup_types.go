@@ -160,8 +160,18 @@ type NodeGroupParameters struct {
 	UpdateConfig []UpdateConfigParameters `json:"updateConfig,omitempty" tf:"update_config,omitempty"`
 
 	// –  Kubernetes version. Defaults to EKS Cluster Kubernetes version.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("version",false)
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// Reference to a Cluster in eks to populate version.
+	// +kubebuilder:validation:Optional
+	VersionRef *v1.Reference `json:"versionRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in eks to populate version.
+	// +kubebuilder:validation:Optional
+	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
 }
 
 type RemoteAccessObservation struct {

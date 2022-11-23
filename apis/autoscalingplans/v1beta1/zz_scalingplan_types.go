@@ -18,11 +18,11 @@ type ApplicationSourceObservation struct {
 
 type ApplicationSourceParameters struct {
 
-	// The Amazon Resource Name (ARN) of a AWS CloudFormation stack.
+	// ARN of a AWS CloudFormation stack.
 	// +kubebuilder:validation:Optional
 	CloudFormationStackArn *string `json:"cloudformationStackArn,omitempty" tf:"cloudformation_stack_arn,omitempty"`
 
-	// A set of tags.
+	// Set of tags.
 	// +kubebuilder:validation:Optional
 	TagFilter []TagFilterParameters `json:"tagFilter,omitempty" tf:"tag_filter,omitempty"`
 }
@@ -32,23 +32,23 @@ type CustomizedLoadMetricSpecificationObservation struct {
 
 type CustomizedLoadMetricSpecificationParameters struct {
 
-	// The dimensions of the metric.
+	// Dimensions of the metric.
 	// +kubebuilder:validation:Optional
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
-	// The name of the metric.
+	// Name of the metric.
 	// +kubebuilder:validation:Required
 	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
-	// The namespace of the metric.
+	// Namespace of the metric.
 	// +kubebuilder:validation:Required
 	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 
-	// The statistic of the metric. Currently, the value must always be Sum.
+	// Statistic of the metric. Currently, the value must always be Sum.
 	// +kubebuilder:validation:Required
 	Statistic *string `json:"statistic" tf:"statistic,omitempty"`
 
-	// The unit of the metric.
+	// Unit of the metric.
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
@@ -58,23 +58,23 @@ type CustomizedScalingMetricSpecificationObservation struct {
 
 type CustomizedScalingMetricSpecificationParameters struct {
 
-	// The dimensions of the metric.
+	// Dimensions of the metric.
 	// +kubebuilder:validation:Optional
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
-	// The name of the metric.
+	// Name of the metric.
 	// +kubebuilder:validation:Required
 	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
-	// The namespace of the metric.
+	// Namespace of the metric.
 	// +kubebuilder:validation:Required
 	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 
-	// The statistic of the metric. Currently, the value must always be Sum.
+	// Statistic of the metric. Currently, the value must always be Sum.
 	// +kubebuilder:validation:Required
 	Statistic *string `json:"statistic" tf:"statistic,omitempty"`
 
-	// The unit of the metric.
+	// Unit of the metric.
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
@@ -84,7 +84,7 @@ type PredefinedLoadMetricSpecificationObservation struct {
 
 type PredefinedLoadMetricSpecificationParameters struct {
 
-	// The metric type. Valid values: ALBTargetGroupRequestCount, ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut.
+	// Metric type. Valid values: ALBTargetGroupRequestCount, ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut.
 	// +kubebuilder:validation:Required
 	PredefinedLoadMetricType *string `json:"predefinedLoadMetricType" tf:"predefined_load_metric_type,omitempty"`
 
@@ -98,7 +98,7 @@ type PredefinedScalingMetricSpecificationObservation struct {
 
 type PredefinedScalingMetricSpecificationParameters struct {
 
-	// The metric type. Valid values: ALBRequestCountPerTarget, ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections.
+	// Metric type. Valid values: ALBRequestCountPerTarget, ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections.
 	// +kubebuilder:validation:Required
 	PredefinedScalingMetricType *string `json:"predefinedScalingMetricType" tf:"predefined_scaling_metric_type,omitempty"`
 
@@ -112,7 +112,7 @@ type ScalingInstructionObservation struct {
 
 type ScalingInstructionParameters struct {
 
-	// The customized load metric to use for predictive scaling. You must specify either customized_load_metric_specification or predefined_load_metric_specification when configuring predictive scaling.
+	// Customized load metric to use for predictive scaling. You must specify either customized_load_metric_specification or predefined_load_metric_specification when configuring predictive scaling.
 	// More details can be found in the AWS Auto Scaling API Reference.
 	// +kubebuilder:validation:Optional
 	CustomizedLoadMetricSpecification []CustomizedLoadMetricSpecificationParameters `json:"customizedLoadMetricSpecification,omitempty" tf:"customized_load_metric_specification,omitempty"`
@@ -121,15 +121,15 @@ type ScalingInstructionParameters struct {
 	// +kubebuilder:validation:Optional
 	DisableDynamicScaling *bool `json:"disableDynamicScaling,omitempty" tf:"disable_dynamic_scaling,omitempty"`
 
-	// The maximum capacity of the resource. The exception to this upper limit is if you specify a non-default setting for predictive_scaling_max_capacity_behavior.
+	// Maximum capacity of the resource. The exception to this upper limit is if you specify a non-default setting for predictive_scaling_max_capacity_behavior.
 	// +kubebuilder:validation:Required
 	MaxCapacity *float64 `json:"maxCapacity" tf:"max_capacity,omitempty"`
 
-	// The minimum capacity of the resource.
+	// Minimum capacity of the resource.
 	// +kubebuilder:validation:Required
 	MinCapacity *float64 `json:"minCapacity" tf:"min_capacity,omitempty"`
 
-	// The predefined load metric to use for predictive scaling. You must specify either predefined_load_metric_specification or customized_load_metric_specification when configuring predictive scaling.
+	// Predefined load metric to use for predictive scaling. You must specify either predefined_load_metric_specification or customized_load_metric_specification when configuring predictive scaling.
 	// More details can be found in the AWS Auto Scaling API Reference.
 	// +kubebuilder:validation:Optional
 	PredefinedLoadMetricSpecification []PredefinedLoadMetricSpecificationParameters `json:"predefinedLoadMetricSpecification,omitempty" tf:"predefined_load_metric_specification,omitempty"`
@@ -139,19 +139,19 @@ type ScalingInstructionParameters struct {
 	// +kubebuilder:validation:Optional
 	PredictiveScalingMaxCapacityBehavior *string `json:"predictiveScalingMaxCapacityBehavior,omitempty" tf:"predictive_scaling_max_capacity_behavior,omitempty"`
 
-	// The size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity.
+	// Size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity.
 	// +kubebuilder:validation:Optional
 	PredictiveScalingMaxCapacityBuffer *float64 `json:"predictiveScalingMaxCapacityBuffer,omitempty" tf:"predictive_scaling_max_capacity_buffer,omitempty"`
 
-	// The predictive scaling mode. Valid values: ForecastAndScale, ForecastOnly.
+	// Predictive scaling mode. Valid values: ForecastAndScale, ForecastOnly.
 	// +kubebuilder:validation:Optional
 	PredictiveScalingMode *string `json:"predictiveScalingMode,omitempty" tf:"predictive_scaling_mode,omitempty"`
 
-	// The ID of the resource. This string consists of the resource type and unique identifier.
+	// ID of the resource. This string consists of the resource type and unique identifier.
 	// +kubebuilder:validation:Required
 	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
 
-	// The scalable dimension associated with the resource. Valid values: autoscaling:autoScalingGroup:DesiredCapacity, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, rds:cluster:ReadReplicaCount.
+	// Scalable dimension associated with the resource. Valid values: autoscaling:autoScalingGroup:DesiredCapacity, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, rds:cluster:ReadReplicaCount.
 	// +kubebuilder:validation:Required
 	ScalableDimension *string `json:"scalableDimension" tf:"scalable_dimension,omitempty"`
 
@@ -159,15 +159,15 @@ type ScalingInstructionParameters struct {
 	// +kubebuilder:validation:Optional
 	ScalingPolicyUpdateBehavior *string `json:"scalingPolicyUpdateBehavior,omitempty" tf:"scaling_policy_update_behavior,omitempty"`
 
-	// The amount of time, in seconds, to buffer the run time of scheduled scaling actions when scaling out.
+	// Amount of time, in seconds, to buffer the run time of scheduled scaling actions when scaling out.
 	// +kubebuilder:validation:Optional
 	ScheduledActionBufferTime *float64 `json:"scheduledActionBufferTime,omitempty" tf:"scheduled_action_buffer_time,omitempty"`
 
-	// The namespace of the AWS service. Valid values: autoscaling, dynamodb, ecs, ec2, rds.
+	// Namespace of the AWS service. Valid values: autoscaling, dynamodb, ecs, ec2, rds.
 	// +kubebuilder:validation:Required
 	ServiceNamespace *string `json:"serviceNamespace" tf:"service_namespace,omitempty"`
 
-	// The structure that defines new target tracking configurations. Each of these structures includes a specific scaling metric and a target value for the metric, along with various parameters to use with dynamic scaling.
+	// Structure that defines new target tracking configurations. Each of these structures includes a specific scaling metric and a target value for the metric, along with various parameters to use with dynamic scaling.
 	// More details can be found in the AWS Auto Scaling API Reference.
 	// +kubebuilder:validation:Required
 	TargetTrackingConfiguration []TargetTrackingConfigurationParameters `json:"targetTrackingConfiguration" tf:"target_tracking_configuration,omitempty"`
@@ -175,7 +175,7 @@ type ScalingInstructionParameters struct {
 
 type ScalingPlanObservation struct {
 
-	// The scaling plan identifier.
+	// Scaling plan identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The version number of the scaling plan. This value is always 1.
@@ -184,11 +184,11 @@ type ScalingPlanObservation struct {
 
 type ScalingPlanParameters struct {
 
-	// A CloudFormation stack or set of tags. You can create one scaling plan per application source.
+	// CloudFormation stack or set of tags. You can create one scaling plan per application source.
 	// +kubebuilder:validation:Required
 	ApplicationSource []ApplicationSourceParameters `json:"applicationSource" tf:"application_source,omitempty"`
 
-	// The name of the scaling plan. Names cannot contain vertical bars, colons, or forward slashes.
+	// Name of the scaling plan. Names cannot contain vertical bars, colons, or forward slashes.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -197,7 +197,7 @@ type ScalingPlanParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The scaling instructions. More details can be found in the AWS Auto Scaling API Reference.
+	// Scaling instructions. More details can be found in the AWS Auto Scaling API Reference.
 	// +kubebuilder:validation:Required
 	ScalingInstruction []ScalingInstructionParameters `json:"scalingInstruction" tf:"scaling_instruction,omitempty"`
 }
@@ -207,11 +207,11 @@ type TagFilterObservation struct {
 
 type TagFilterParameters struct {
 
-	// The tag key.
+	// Tag key.
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// The tag values.
+	// Tag values.
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
@@ -221,7 +221,7 @@ type TargetTrackingConfigurationObservation struct {
 
 type TargetTrackingConfigurationParameters struct {
 
-	// A customized metric. You can specify either customized_scaling_metric_specification or predefined_scaling_metric_specification.
+	// Customized metric. You can specify either customized_scaling_metric_specification or predefined_scaling_metric_specification.
 	// More details can be found in the AWS Auto Scaling API Reference.
 	// +kubebuilder:validation:Optional
 	CustomizedScalingMetricSpecification []CustomizedScalingMetricSpecificationParameters `json:"customizedScalingMetricSpecification,omitempty" tf:"customized_scaling_metric_specification,omitempty"`
@@ -230,27 +230,27 @@ type TargetTrackingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DisableScaleIn *bool `json:"disableScaleIn,omitempty" tf:"disable_scale_in,omitempty"`
 
-	// The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics.
+	// Estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics.
 	// This value is used only if the resource is an Auto Scaling group.
 	// +kubebuilder:validation:Optional
 	EstimatedInstanceWarmup *float64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
 
-	// A predefined metric. You can specify either predefined_scaling_metric_specification or customized_scaling_metric_specification.
+	// Predefined metric. You can specify either predefined_scaling_metric_specification or customized_scaling_metric_specification.
 	// More details can be found in the AWS Auto Scaling API Reference.
 	// +kubebuilder:validation:Optional
 	PredefinedScalingMetricSpecification []PredefinedScalingMetricSpecificationParameters `json:"predefinedScalingMetricSpecification,omitempty" tf:"predefined_scaling_metric_specification,omitempty"`
 
-	// The amount of time, in seconds, after a scale in activity completes before another scale in activity can start.
+	// Amount of time, in seconds, after a scale in activity completes before another scale in activity can start.
 	// This value is not used if the scalable resource is an Auto Scaling group.
 	// +kubebuilder:validation:Optional
 	ScaleInCooldown *float64 `json:"scaleInCooldown,omitempty" tf:"scale_in_cooldown,omitempty"`
 
-	// The amount of time, in seconds, after a scale-out activity completes before another scale-out activity can start.
+	// Amount of time, in seconds, after a scale-out activity completes before another scale-out activity can start.
 	// This value is not used if the scalable resource is an Auto Scaling group.
 	// +kubebuilder:validation:Optional
 	ScaleOutCooldown *float64 `json:"scaleOutCooldown,omitempty" tf:"scale_out_cooldown,omitempty"`
 
-	// The target value for the metric.
+	// Target value for the metric.
 	// +kubebuilder:validation:Required
 	TargetValue *float64 `json:"targetValue" tf:"target_value,omitempty"`
 }

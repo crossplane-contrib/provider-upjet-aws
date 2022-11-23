@@ -18,7 +18,7 @@ type InstanceObservation struct {
 	// Amazon Resource Name (ARN) of the instance.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Specifies when the instance was created.
+	// When the instance was created.
 	CreatedTime *string `json:"createdTime,omitempty" tf:"created_time,omitempty"`
 
 	// The identifier of the instance.
@@ -74,6 +74,10 @@ type InstanceParameters struct {
 	// Specifies the name of the instance. Required if directory_id not specified.
 	// +kubebuilder:validation:Optional
 	InstanceAlias *string `json:"instanceAlias,omitempty" tf:"instance_alias,omitempty"`
+
+	// Specifies whether multi-party calls/conference is enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	MultiPartyConferenceEnabled *bool `json:"multiPartyConferenceEnabled,omitempty" tf:"multi_party_conference_enabled,omitempty"`
 
 	// Specifies whether outbound calls are enabled.
 	// +kubebuilder:validation:Required

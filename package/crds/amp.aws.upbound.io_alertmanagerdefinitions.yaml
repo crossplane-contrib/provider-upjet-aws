@@ -74,7 +74,7 @@ spec:
                       be created in.
                     type: string
                   workspaceId:
-                    description: The id of the prometheus workspace the alert manager
+                    description: ID of the prometheus workspace the alert manager
                       definition should be linked to
                     type: string
                   workspaceIdRef:

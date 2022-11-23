@@ -24,23 +24,31 @@ type PlatformApplicationObservation struct {
 
 type PlatformApplicationParameters struct {
 
-	// SNS Topic triggered when a delivery to any of the platform endpoints associated with your platform application encounters a permanent failure.
+	// The bundle identifier that's assigned to your iOS app. May only include alphanumeric characters, hyphens (-), and periods (.).
+	// +kubebuilder:validation:Optional
+	ApplePlatformBundleID *string `json:"applePlatformBundleId,omitempty" tf:"apple_platform_bundle_id,omitempty"`
+
+	// The identifier that's assigned to your Apple developer account team. Must be 10 alphanumeric characters.
+	// +kubebuilder:validation:Optional
+	ApplePlatformTeamID *string `json:"applePlatformTeamId,omitempty" tf:"apple_platform_team_id,omitempty"`
+
+	// The ARN of the SNS Topic triggered when a delivery to any of the platform endpoints associated with your platform application encounters a permanent failure.
 	// +kubebuilder:validation:Optional
 	EventDeliveryFailureTopicArn *string `json:"eventDeliveryFailureTopicArn,omitempty" tf:"event_delivery_failure_topic_arn,omitempty"`
 
-	// SNS Topic triggered when a new platform endpoint is added to your platform application.
+	// The ARN of the SNS Topic triggered when a new platform endpoint is added to your platform application.
 	// +kubebuilder:validation:Optional
 	EventEndpointCreatedTopicArn *string `json:"eventEndpointCreatedTopicArn,omitempty" tf:"event_endpoint_created_topic_arn,omitempty"`
 
-	// SNS Topic triggered when an existing platform endpoint is deleted from your platform application.
+	// The ARN of the SNS Topic triggered when an existing platform endpoint is deleted from your platform application.
 	// +kubebuilder:validation:Optional
 	EventEndpointDeletedTopicArn *string `json:"eventEndpointDeletedTopicArn,omitempty" tf:"event_endpoint_deleted_topic_arn,omitempty"`
 
-	// SNS Topic triggered when an existing platform endpoint is changed from your platform application.
+	// The ARN of the SNS Topic triggered when an existing platform endpoint is changed from your platform application.
 	// +kubebuilder:validation:Optional
 	EventEndpointUpdatedTopicArn *string `json:"eventEndpointUpdatedTopicArn,omitempty" tf:"event_endpoint_updated_topic_arn,omitempty"`
 
-	// The IAM role permitted to receive failure feedback for this application.
+	// The IAM role ARN permitted to receive failure feedback for this application and give SNS write access to use CloudWatch logs on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -71,7 +79,7 @@ type PlatformApplicationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The IAM role permitted to receive success feedback for this application.
+	// The IAM role ARN permitted to receive success feedback for this application and give SNS write access to use CloudWatch logs on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -85,7 +93,7 @@ type PlatformApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	SuccessFeedbackRoleArnSelector *v1.Selector `json:"successFeedbackRoleArnSelector,omitempty" tf:"-"`
 
-	// The percentage of success to sample (0-100)
+	// The sample rate percentage (0-100) of successfully delivered messages.
 	// +kubebuilder:validation:Optional
 	SuccessFeedbackSampleRate *string `json:"successFeedbackSampleRate,omitempty" tf:"success_feedback_sample_rate,omitempty"`
 }

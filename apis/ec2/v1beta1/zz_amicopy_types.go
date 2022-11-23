@@ -16,18 +16,18 @@ import (
 type AMICopyEBSBlockDeviceObservation struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
-	// A region-unique name for the AMI.
+	// Region-unique name for the AMI.
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
-	// Specifies whether the destination snapshots of the copied image should be encrypted. Defaults to false
+	// Whether the destination snapshots of the copied image should be encrypted. Defaults to false
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// The ARN of the AMI.
+	// ARN of the AMI.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
-	// The ID of the created AMI.
+	// ID of the created AMI.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
@@ -42,10 +42,10 @@ type AMICopyEBSBlockDeviceParameters struct {
 
 type AMICopyEphemeralBlockDeviceObservation struct {
 
-	// A region-unique name for the AMI.
+	// Region-unique name for the AMI.
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
-	// A region-unique name for the AMI.
+	// Region-unique name for the AMI.
 	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
 
@@ -55,7 +55,7 @@ type AMICopyEphemeralBlockDeviceParameters struct {
 type AMICopyObservation struct {
 	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
 
-	// The ARN of the AMI.
+	// ARN of the AMI.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	BootMode *string `json:"bootMode,omitempty" tf:"boot_mode,omitempty"`
@@ -70,7 +70,7 @@ type AMICopyObservation struct {
 
 	Hypervisor *string `json:"hypervisor,omitempty" tf:"hypervisor,omitempty"`
 
-	// The ID of the created AMI.
+	// ID of the created AMI.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	ImageLocation *string `json:"imageLocation,omitempty" tf:"image_location,omitempty"`
@@ -79,12 +79,14 @@ type AMICopyObservation struct {
 
 	ImageType *string `json:"imageType,omitempty" tf:"image_type,omitempty"`
 
-	// The ID of the created AMI.
+	ImdsSupport *string `json:"imdsSupport,omitempty" tf:"imds_support,omitempty"`
+
+	// ID of the created AMI.
 	KernelID *string `json:"kernelId,omitempty" tf:"kernel_id,omitempty"`
 
 	ManageEBSSnapshots *bool `json:"manageEbsSnapshots,omitempty" tf:"manage_ebs_snapshots,omitempty"`
 
-	// The ID of the created AMI.
+	// ID of the created AMI.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
@@ -93,18 +95,20 @@ type AMICopyObservation struct {
 
 	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
 
-	// The ID of the created AMI.
+	// ID of the created AMI.
 	RamdiskID *string `json:"ramdiskId,omitempty" tf:"ramdisk_id,omitempty"`
 
-	// A region-unique name for the AMI.
+	// Region-unique name for the AMI.
 	RootDeviceName *string `json:"rootDeviceName,omitempty" tf:"root_device_name,omitempty"`
 
-	// The ID of the created AMI.
+	// ID of the created AMI.
 	RootSnapshotID *string `json:"rootSnapshotId,omitempty" tf:"root_snapshot_id,omitempty"`
 
 	SriovNetSupport *string `json:"sriovNetSupport,omitempty" tf:"sriov_net_support,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
 
 	UsageOperation *string `json:"usageOperation,omitempty" tf:"usage_operation,omitempty"`
 
@@ -119,7 +123,7 @@ type AMICopyParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ARN of the Outpost to which to copy the AMI.
+	// ARN of the Outpost to which to copy the AMI.
 	// Only specify this parameter when copying an AMI from an AWS Region to an Outpost. The AMI must be in the Region of the destination Outpost.
 	// +kubebuilder:validation:Optional
 	DestinationOutpostArn *string `json:"destinationOutpostArn,omitempty" tf:"destination_outpost_arn,omitempty"`
@@ -127,14 +131,14 @@ type AMICopyParameters struct {
 	// +kubebuilder:validation:Optional
 	EBSBlockDevice []AMICopyEBSBlockDeviceParameters `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
 
-	// Specifies whether the destination snapshots of the copied image should be encrypted. Defaults to false
+	// Whether the destination snapshots of the copied image should be encrypted. Defaults to false
 	// +kubebuilder:validation:Optional
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EphemeralBlockDevice []AMICopyEphemeralBlockDeviceParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
-	// The full ARN of the KMS Key to use when encrypting the snapshots of an image during a copy operation. If not specified, then the default AWS KMS Key will be used
+	// Full ARN of the KMS Key to use when encrypting the snapshots of an image during a copy operation. If not specified, then the default AWS KMS Key will be used
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -147,7 +151,7 @@ type AMICopyParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// A region-unique name for the AMI.
+	// Region-unique name for the AMI.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -156,7 +160,7 @@ type AMICopyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The id of the AMI to copy. This id must be valid in the region
+	// Id of the AMI to copy. This id must be valid in the region
 	// given by source_ami_region.
 	// +crossplane:generate:reference:type=AMI
 	// +kubebuilder:validation:Optional
@@ -170,7 +174,7 @@ type AMICopyParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceAMIIDSelector *v1.Selector `json:"sourceAmiIdSelector,omitempty" tf:"-"`
 
-	// The region from which the AMI will be copied. This may be the
+	// Region from which the AMI will be copied. This may be the
 	// same as the AWS provider region in order to create a copy within the same region.
 	// +kubebuilder:validation:Required
 	SourceAMIRegion *string `json:"sourceAmiRegion" tf:"source_ami_region,omitempty"`

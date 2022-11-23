@@ -325,6 +325,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
 	if in.KeyPairName != nil {
 		in, out := &in.KeyPairName, &out.KeyPairName
 		*out = new(string)
@@ -762,6 +767,17 @@ func (in *PortInfoParameters) DeepCopyInto(out *PortInfoParameters) {
 		in, out := &in.FromPort, &out.FromPort
 		*out = new(float64)
 		**out = **in
+	}
+	if in.IPv6Cidrs != nil {
+		in, out := &in.IPv6Cidrs, &out.IPv6Cidrs
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Protocol != nil {
 		in, out := &in.Protocol, &out.Protocol

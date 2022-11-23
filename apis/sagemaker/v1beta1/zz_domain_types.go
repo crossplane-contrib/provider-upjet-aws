@@ -13,23 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CanvasAppSettingsObservation struct {
+}
+
+type CanvasAppSettingsParameters struct {
+
+	// Time series forecast settings for the Canvas app. see Time Series Forecasting Settings below.
+	// +kubebuilder:validation:Optional
+	TimeSeriesForecastingSettings []TimeSeriesForecastingSettingsParameters `json:"timeSeriesForecastingSettings,omitempty" tf:"time_series_forecasting_settings,omitempty"`
+}
+
 type CustomImageObservation struct {
 }
 
 type CustomImageParameters struct {
 
 	// The name of the App Image Config.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.AppImageConfig
-	// +kubebuilder:validation:Optional
-	AppImageConfigName *string `json:"appImageConfigName,omitempty" tf:"app_image_config_name,omitempty"`
-
-	// Reference to a AppImageConfig in sagemaker to populate appImageConfigName.
-	// +kubebuilder:validation:Optional
-	AppImageConfigNameRef *v1.Reference `json:"appImageConfigNameRef,omitempty" tf:"-"`
-
-	// Selector for a AppImageConfig in sagemaker to populate appImageConfigName.
-	// +kubebuilder:validation:Optional
-	AppImageConfigNameSelector *v1.Selector `json:"appImageConfigNameSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	AppImageConfigName *string `json:"appImageConfigName" tf:"app_image_config_name,omitempty"`
 
 	// The name of the Custom Image.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.ImageVersion
@@ -72,12 +73,106 @@ type DefaultResourceSpecParameters struct {
 	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
 }
 
+type DefaultSpaceSettingsObservation struct {
+}
+
+type DefaultSpaceSettingsParameters struct {
+
+	// The execution role for the space.
+	// +kubebuilder:validation:Required
+	ExecutionRole *string `json:"executionRole" tf:"execution_role,omitempty"`
+
+	// The Jupyter server's app settings. See Jupyter Server App Settings below.
+	// +kubebuilder:validation:Optional
+	JupyterServerAppSettings []JupyterServerAppSettingsParameters `json:"jupyterServerAppSettings,omitempty" tf:"jupyter_server_app_settings,omitempty"`
+
+	// The kernel gateway app settings. See Kernel Gateway App Settings below.
+	// +kubebuilder:validation:Optional
+	KernelGatewayAppSettings []KernelGatewayAppSettingsParameters `json:"kernelGatewayAppSettings,omitempty" tf:"kernel_gateway_app_settings,omitempty"`
+
+	// The security groups for the Amazon Virtual Private Cloud that the space uses for communication.
+	// +kubebuilder:validation:Optional
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+}
+
+type DefaultUserSettingsJupyterServerAppSettingsCodeRepositoryObservation struct {
+}
+
+type DefaultUserSettingsJupyterServerAppSettingsCodeRepositoryParameters struct {
+
+	// The URL of the Git repository.
+	// +kubebuilder:validation:Required
+	RepositoryURL *string `json:"repositoryUrl" tf:"repository_url,omitempty"`
+}
+
+type DefaultUserSettingsJupyterServerAppSettingsObservation struct {
+}
+
+type DefaultUserSettingsJupyterServerAppSettingsParameters struct {
+
+	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
+	// +kubebuilder:validation:Optional
+	CodeRepository []DefaultUserSettingsJupyterServerAppSettingsCodeRepositoryParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
+
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// +kubebuilder:validation:Optional
+	DefaultResourceSpec []JupyterServerAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +kubebuilder:validation:Optional
+	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
+}
+
+type DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecObservation struct {
+}
+
+type DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters struct {
+
+	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// +kubebuilder:validation:Optional
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
+	// +kubebuilder:validation:Optional
+	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
+
+	// The ARN of the SageMaker image that the image version belongs to.
+	// +kubebuilder:validation:Optional
+	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The ARN of the image version created on the instance.
+	// +kubebuilder:validation:Optional
+	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
+}
+
+type DefaultUserSettingsKernelGatewayAppSettingsObservation struct {
+}
+
+type DefaultUserSettingsKernelGatewayAppSettingsParameters struct {
+
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// +kubebuilder:validation:Optional
+	CustomImage []KernelGatewayAppSettingsCustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
+
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// +kubebuilder:validation:Optional
+	DefaultResourceSpec []DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +kubebuilder:validation:Optional
+	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
+}
+
 type DefaultUserSettingsObservation struct {
 }
 
 type DefaultUserSettingsParameters struct {
 
-	// The execution role ARN for the user.
+	// The Canvas app settings. See Canvas App Settings below.
+	// +kubebuilder:validation:Optional
+	CanvasAppSettings []CanvasAppSettingsParameters `json:"canvasAppSettings,omitempty" tf:"canvas_app_settings,omitempty"`
+
+	// The execution role for the space.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -93,13 +188,17 @@ type DefaultUserSettingsParameters struct {
 
 	// The Jupyter server's app settings. See Jupyter Server App Settings below.
 	// +kubebuilder:validation:Optional
-	JupyterServerAppSettings []JupyterServerAppSettingsParameters `json:"jupyterServerAppSettings,omitempty" tf:"jupyter_server_app_settings,omitempty"`
+	JupyterServerAppSettings []DefaultUserSettingsJupyterServerAppSettingsParameters `json:"jupyterServerAppSettings,omitempty" tf:"jupyter_server_app_settings,omitempty"`
 
 	// The kernel gateway app settings. See Kernel Gateway App Settings below.
 	// +kubebuilder:validation:Optional
-	KernelGatewayAppSettings []KernelGatewayAppSettingsParameters `json:"kernelGatewayAppSettings,omitempty" tf:"kernel_gateway_app_settings,omitempty"`
+	KernelGatewayAppSettings []DefaultUserSettingsKernelGatewayAppSettingsParameters `json:"kernelGatewayAppSettings,omitempty" tf:"kernel_gateway_app_settings,omitempty"`
 
-	// The security groups.
+	// The RSession app settings. See RSession App Settings below.
+	// +kubebuilder:validation:Optional
+	RSessionAppSettings []RSessionAppSettingsParameters `json:"rSessionAppSettings,omitempty" tf:"r_session_app_settings,omitempty"`
+
+	// The security groups for the Amazon Virtual Private Cloud that the space uses for communication.
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
@@ -123,6 +222,9 @@ type DomainObservation struct {
 	// The ID of the Domain.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.
+	SecurityGroupIDForDomainBoundary *string `json:"securityGroupIdForDomainBoundary,omitempty" tf:"security_group_id_for_domain_boundary,omitempty"`
+
 	// The SSO managed application instance ID.
 	SingleSignOnManagedApplicationInstanceID *string `json:"singleSignOnManagedApplicationInstanceId,omitempty" tf:"single_sign_on_managed_application_instance_id,omitempty"`
 
@@ -139,9 +241,17 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	AppNetworkAccessType *string `json:"appNetworkAccessType,omitempty" tf:"app_network_access_type,omitempty"`
 
+	// The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Valid values are Service and Customer.
+	// +kubebuilder:validation:Optional
+	AppSecurityGroupManagement *string `json:"appSecurityGroupManagement,omitempty" tf:"app_security_group_management,omitempty"`
+
 	// The mode of authentication that members use to access the domain. Valid values are IAM and SSO.
 	// +kubebuilder:validation:Required
 	AuthMode *string `json:"authMode" tf:"auth_mode,omitempty"`
+
+	// The default space settings. See Default Space Settings below.
+	// +kubebuilder:validation:Optional
+	DefaultSpaceSettings []DefaultSpaceSettingsParameters `json:"defaultSpaceSettings,omitempty" tf:"default_space_settings,omitempty"`
 
 	// The default user settings. See Default User Settings below.
 	// +kubebuilder:validation:Required
@@ -150,6 +260,10 @@ type DomainParameters struct {
 	// The domain name.
 	// +kubebuilder:validation:Required
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
+
+	// The domain settings. See Domain Settings below.
+	// +kubebuilder:validation:Optional
+	DomainSettings []DomainSettingsParameters `json:"domainSettings,omitempty" tf:"domain_settings,omitempty"`
 
 	// The AWS KMS customer managed CMK used to encrypt the EFS volume attached to the domain.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
@@ -206,10 +320,60 @@ type DomainParameters struct {
 	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
+type DomainSettingsObservation struct {
+}
+
+type DomainSettingsParameters struct {
+
+	// The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
+	// +kubebuilder:validation:Optional
+	ExecutionRoleIdentityConfig *string `json:"executionRoleIdentityConfig,omitempty" tf:"execution_role_identity_config,omitempty"`
+
+	// The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+}
+
+type JupyterServerAppSettingsCodeRepositoryObservation struct {
+}
+
+type JupyterServerAppSettingsCodeRepositoryParameters struct {
+
+	// The URL of the Git repository.
+	// +kubebuilder:validation:Required
+	RepositoryURL *string `json:"repositoryUrl" tf:"repository_url,omitempty"`
+}
+
+type JupyterServerAppSettingsDefaultResourceSpecObservation struct {
+}
+
+type JupyterServerAppSettingsDefaultResourceSpecParameters struct {
+
+	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// +kubebuilder:validation:Optional
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
+	// +kubebuilder:validation:Optional
+	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
+
+	// The ARN of the SageMaker image that the image version belongs to.
+	// +kubebuilder:validation:Optional
+	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The ARN of the image version created on the instance.
+	// +kubebuilder:validation:Optional
+	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
+}
+
 type JupyterServerAppSettingsObservation struct {
 }
 
 type JupyterServerAppSettingsParameters struct {
+
+	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
+	// +kubebuilder:validation:Optional
+	CodeRepository []JupyterServerAppSettingsCodeRepositoryParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	// +kubebuilder:validation:Optional
@@ -218,6 +382,33 @@ type JupyterServerAppSettingsParameters struct {
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
+}
+
+type KernelGatewayAppSettingsCustomImageObservation struct {
+}
+
+type KernelGatewayAppSettingsCustomImageParameters struct {
+
+	// The name of the App Image Config.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.AppImageConfig
+	// +kubebuilder:validation:Optional
+	AppImageConfigName *string `json:"appImageConfigName,omitempty" tf:"app_image_config_name,omitempty"`
+
+	// Reference to a AppImageConfig in sagemaker to populate appImageConfigName.
+	// +kubebuilder:validation:Optional
+	AppImageConfigNameRef *v1.Reference `json:"appImageConfigNameRef,omitempty" tf:"-"`
+
+	// Selector for a AppImageConfig in sagemaker to populate appImageConfigName.
+	// +kubebuilder:validation:Optional
+	AppImageConfigNameSelector *v1.Selector `json:"appImageConfigNameSelector,omitempty" tf:"-"`
+
+	// The name of the Custom Image.
+	// +kubebuilder:validation:Required
+	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
+
+	// The version number of the Custom Image.
+	// +kubebuilder:validation:Optional
+	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type KernelGatewayAppSettingsDefaultResourceSpecObservation struct {
@@ -258,6 +449,60 @@ type KernelGatewayAppSettingsParameters struct {
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
+}
+
+type RSessionAppSettingsCustomImageObservation struct {
+}
+
+type RSessionAppSettingsCustomImageParameters struct {
+
+	// The name of the App Image Config.
+	// +kubebuilder:validation:Required
+	AppImageConfigName *string `json:"appImageConfigName" tf:"app_image_config_name,omitempty"`
+
+	// The name of the Custom Image.
+	// +kubebuilder:validation:Required
+	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
+
+	// The version number of the Custom Image.
+	// +kubebuilder:validation:Optional
+	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+}
+
+type RSessionAppSettingsDefaultResourceSpecObservation struct {
+}
+
+type RSessionAppSettingsDefaultResourceSpecParameters struct {
+
+	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// +kubebuilder:validation:Optional
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
+	// +kubebuilder:validation:Optional
+	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
+
+	// The ARN of the SageMaker image that the image version belongs to.
+	// +kubebuilder:validation:Optional
+	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The ARN of the image version created on the instance.
+	// +kubebuilder:validation:Optional
+	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
+}
+
+type RSessionAppSettingsObservation struct {
+}
+
+type RSessionAppSettingsParameters struct {
+
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// +kubebuilder:validation:Optional
+	CustomImage []RSessionAppSettingsCustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
+
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// +kubebuilder:validation:Optional
+	DefaultResourceSpec []RSessionAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
 type RetentionPolicyObservation struct {
@@ -318,6 +563,20 @@ type TensorBoardAppSettingsParameters struct {
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec []TensorBoardAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
+}
+
+type TimeSeriesForecastingSettingsObservation struct {
+}
+
+type TimeSeriesForecastingSettingsParameters struct {
+
+	// The IAM role that Canvas passes to Amazon Forecast for time series forecasting. By default, Canvas uses the execution role specified in the UserProfile that launches the Canvas app. If an execution role is not specified in the UserProfile, Canvas uses the execution role specified in the Domain that owns the UserProfile. To allow time series forecasting, this IAM role should have the AmazonSageMakerCanvasForecastAccess policy attached and forecast.amazonaws.com added in the trust relationship as a service principal.
+	// +kubebuilder:validation:Optional
+	AmazonForecastRoleArn *string `json:"amazonForecastRoleArn,omitempty" tf:"amazon_forecast_role_arn,omitempty"`
+
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 // DomainSpec defines the desired state of Domain

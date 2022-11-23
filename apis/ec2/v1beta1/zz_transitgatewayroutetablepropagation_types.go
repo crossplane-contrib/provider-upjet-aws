@@ -14,10 +14,14 @@ import (
 )
 
 type TransitGatewayRouteTablePropagationObservation struct {
+
+	// EC2 Transit Gateway Route Table identifier combined with EC2 Transit Gateway Attachment identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Identifier of the resource
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
+	// Type of the resource
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 }
 
@@ -28,6 +32,7 @@ type TransitGatewayRouteTablePropagationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Identifier of EC2 Transit Gateway Attachment.
 	// +crossplane:generate:reference:type=TransitGatewayVPCAttachment
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
@@ -40,6 +45,7 @@ type TransitGatewayRouteTablePropagationParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
+	// Identifier of EC2 Transit Gateway Route Table.
 	// +crossplane:generate:reference:type=TransitGatewayRouteTable
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
@@ -67,7 +73,7 @@ type TransitGatewayRouteTablePropagationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// TransitGatewayRouteTablePropagation is the Schema for the TransitGatewayRouteTablePropagations API. <no value>
+// TransitGatewayRouteTablePropagation is the Schema for the TransitGatewayRouteTablePropagations API. Manages an EC2 Transit Gateway Route Table propagation
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

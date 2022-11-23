@@ -334,8 +334,7 @@ spec:
               atProvider:
                 properties:
                   allocatedStorage:
-                    description: Specifies the allocated storage size in gigabytes
-                      (GB).
+                    description: Allocated storage size in gigabytes (GB).
                     type: number
                   availabilityZones:
                     description: List of EC2 Availability Zones that instances in
@@ -348,7 +347,7 @@ spec:
                       Snapshot.
                     type: string
                   engine:
-                    description: Specifies the name of the database engine.
+                    description: Name of the database engine.
                     type: string
                   engineVersion:
                     description: Version of the database engine for this DB cluster
@@ -377,7 +376,7 @@ spec:
                     description: The status of this DB Cluster Snapshot.
                     type: string
                   storageEncrypted:
-                    description: Specifies whether the DB cluster snapshot is encrypted.
+                    description: Whether the DB cluster snapshot is encrypted.
                     type: boolean
                   tagsAll:
                     additionalProperties:

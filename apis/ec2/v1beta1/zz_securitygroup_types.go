@@ -33,7 +33,7 @@ type SecurityGroupEgressObservation struct {
 	// Protocol. If you select a protocol of -1 (semantically equivalent to all, which is not a valid value here), you must specify a from_port and to_port equal to 0.  The supported values are defined in the IpProtocol argument on the IpPermission API reference.12.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// List of security group Group Names if using EC2-Classic, or Group IDs if using a VPC.
+	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Whether the security group itself will be added as a source to this ingress rule.
@@ -66,7 +66,7 @@ type SecurityGroupIngressObservation struct {
 	// Protocol. If you select a protocol of -1 (semantically equivalent to all, which is not a valid value here), you must specify a from_port and to_port equal to 0.  The supported values are defined in the IpProtocol argument on the IpPermission API reference.12.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// List of security group Group Names if using EC2-Classic, or Group IDs if using a VPC.
+	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Whether the security group itself will be added as a source to this ingress rule.
@@ -124,6 +124,7 @@ type SecurityGroupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// VPC ID.
+	// Defaults to the region's default VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`

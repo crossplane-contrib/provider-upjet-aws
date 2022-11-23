@@ -25,6 +25,16 @@ type DNSEntryObservation struct {
 type DNSEntryParameters struct {
 }
 
+type DNSOptionsObservation struct {
+}
+
+type DNSOptionsParameters struct {
+
+	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
+	// +kubebuilder:validation:Optional
+	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
+}
+
 type VPCEndpointObservation struct {
 
 	// The Amazon Resource Name (ARN) of the VPC endpoint.
@@ -73,6 +83,14 @@ type VPCEndpointParameters struct {
 	// Accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).
 	// +kubebuilder:validation:Optional
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
+
+	// The DNS options for the endpoint. See dns_options below.
+	// +kubebuilder:validation:Optional
+	DNSOptions []DNSOptionsParameters `json:"dnsOptions,omitempty" tf:"dns_options,omitempty"`
+
+	// The IP address type for the endpoint. Valid values are ipv4, dualstack, and ipv6.
+	// +kubebuilder:validation:Optional
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// A policy to attach to the endpoint that controls access to the service. This is a JSON formatted string. Defaults to full access. All Gateway and some Interface endpoints support policies - see the relevant AWS documentation for more details.
 	// +kubebuilder:validation:Optional

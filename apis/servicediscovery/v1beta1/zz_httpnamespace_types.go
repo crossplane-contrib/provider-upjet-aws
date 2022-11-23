@@ -18,6 +18,9 @@ type HTTPNamespaceObservation struct {
 	// The ARN that Amazon Route 53 assigns to the namespace when you create it.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The name of an HTTP namespace.
+	HTTPName *string `json:"httpName,omitempty" tf:"http_name,omitempty"`
+
 	// The ID of a namespace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

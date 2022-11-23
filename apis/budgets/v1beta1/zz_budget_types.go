@@ -13,10 +13,31 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AutoAdjustDataObservation struct {
+
+	// +kubebuilder:validation:Optional
+	HistoricalOptions []HistoricalOptionsObservation `json:"historicalOptions,omitempty" tf:"historical_options,omitempty"`
+
+	LastAutoAdjustTime *string `json:"lastAutoAdjustTime,omitempty" tf:"last_auto_adjust_time,omitempty"`
+}
+
+type AutoAdjustDataParameters struct {
+
+	// +kubebuilder:validation:Required
+	AutoAdjustType *string `json:"autoAdjustType" tf:"auto_adjust_type,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	HistoricalOptions []HistoricalOptionsParameters `json:"historicalOptions,omitempty" tf:"historical_options,omitempty"`
+}
+
 type BudgetObservation struct {
 
 	// The ARN of the budget.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Object containing [AutoAdjustData] which determines the budget amount for an auto-adjusting budget.
+	// +kubebuilder:validation:Optional
+	AutoAdjustData []AutoAdjustDataObservation `json:"autoAdjustData,omitempty" tf:"auto_adjust_data,omitempty"`
 
 	// id of resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -27,6 +48,10 @@ type BudgetParameters struct {
 	// The ID of the target account for budget. Will use current user's account_id by default if omitted.
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// Object containing [AutoAdjustData] which determines the budget amount for an auto-adjusting budget.
+	// +kubebuilder:validation:Optional
+	AutoAdjustData []AutoAdjustDataParameters `json:"autoAdjustData,omitempty" tf:"auto_adjust_data,omitempty"`
 
 	// Whether this budget tracks monetary cost or usage.
 	// +kubebuilder:validation:Required
@@ -45,16 +70,20 @@ type BudgetParameters struct {
 	CostTypes []CostTypesParameters `json:"costTypes,omitempty" tf:"cost_types,omitempty"`
 
 	// The amount of cost or usage being measured for a budget.
-	// +kubebuilder:validation:Required
-	LimitAmount *string `json:"limitAmount" tf:"limit_amount,omitempty"`
+	// +kubebuilder:validation:Optional
+	LimitAmount *string `json:"limitAmount,omitempty" tf:"limit_amount,omitempty"`
 
 	// The unit of measurement used for the budget forecast, actual spend, or budget threshold, such as dollars or GB. See Spend documentation.
-	// +kubebuilder:validation:Required
-	LimitUnit *string `json:"limitUnit" tf:"limit_unit,omitempty"`
+	// +kubebuilder:validation:Optional
+	LimitUnit *string `json:"limitUnit,omitempty" tf:"limit_unit,omitempty"`
 
-	// Object containing Budget Notifications. Can be used multiple times to define more than one budget notification
+	// Object containing Budget Notifications. Can be used multiple times to define more than one budget notification.
 	// +kubebuilder:validation:Optional
 	Notification []NotificationParameters `json:"notification,omitempty" tf:"notification,omitempty"`
+
+	// Object containing Planned Budget Limits. Can be used multiple times to plan more than one budget limit. See PlannedBudgetLimits documentation.
+	// +kubebuilder:validation:Optional
+	PlannedLimit []PlannedLimitParameters `json:"plannedLimit,omitempty" tf:"planned_limit,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -96,7 +125,7 @@ type CostTypesParameters struct {
 	// +kubebuilder:validation:Optional
 	IncludeCredit *bool `json:"includeCredit,omitempty" tf:"include_credit,omitempty"`
 
-	// Specifies whether a budget includes discounts. Defaults to true
+	// Whether a budget includes discounts. Defaults to true
 	// +kubebuilder:validation:Optional
 	IncludeDiscount *bool `json:"includeDiscount,omitempty" tf:"include_discount,omitempty"`
 
@@ -128,13 +157,23 @@ type CostTypesParameters struct {
 	// +kubebuilder:validation:Optional
 	IncludeUpfront *bool `json:"includeUpfront,omitempty" tf:"include_upfront,omitempty"`
 
-	// Specifies whether a budget uses the amortized rate. Defaults to false
+	// Whether a budget uses the amortized rate. Defaults to false
 	// +kubebuilder:validation:Optional
 	UseAmortized *bool `json:"useAmortized,omitempty" tf:"use_amortized,omitempty"`
 
 	// A boolean value whether to use blended costs in the cost budget. Defaults to false
 	// +kubebuilder:validation:Optional
 	UseBlended *bool `json:"useBlended,omitempty" tf:"use_blended,omitempty"`
+}
+
+type HistoricalOptionsObservation struct {
+	LookbackAvailablePeriods *float64 `json:"lookbackAvailablePeriods,omitempty" tf:"lookback_available_periods,omitempty"`
+}
+
+type HistoricalOptionsParameters struct {
+
+	// +kubebuilder:validation:Required
+	BudgetAdjustmentPeriod *float64 `json:"budgetAdjustmentPeriod" tf:"budget_adjustment_period,omitempty"`
 }
 
 type NotificationObservation struct {
@@ -165,6 +204,24 @@ type NotificationParameters struct {
 	// What kind of threshold is defined. Can be PERCENTAGE OR ABSOLUTE_VALUE.
 	// +kubebuilder:validation:Required
 	ThresholdType *string `json:"thresholdType" tf:"threshold_type,omitempty"`
+}
+
+type PlannedLimitObservation struct {
+}
+
+type PlannedLimitParameters struct {
+
+	// The amount of cost or usage being measured for a budget.
+	// +kubebuilder:validation:Required
+	Amount *string `json:"amount" tf:"amount,omitempty"`
+
+	// The start time of the budget limit. Format: 2017-01-01_12:00. See PlannedBudgetLimits documentation.
+	// +kubebuilder:validation:Required
+	StartTime *string `json:"startTime" tf:"start_time,omitempty"`
+
+	// The unit of measurement used for the budget forecast, actual spend, or budget threshold, such as dollars or GB. See Spend documentation.
+	// +kubebuilder:validation:Required
+	Unit *string `json:"unit" tf:"unit,omitempty"`
 }
 
 // BudgetSpec defines the desired state of Budget

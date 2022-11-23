@@ -15,13 +15,13 @@ import (
 
 type AnalyzerObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Analyzer.
+	// ARN of the Analyzer.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Analyzer name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 

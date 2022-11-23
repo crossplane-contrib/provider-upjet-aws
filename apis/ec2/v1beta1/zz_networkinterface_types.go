@@ -77,6 +77,7 @@ type NetworkInterfaceParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	IPv6AddressList []*string `json:"ipv6AddressList,omitempty" tf:"ipv6_address_list,omitempty"`
 
+	// Whether ipv6_address_list is allowed and controls the IPs to assign to the ENI and ipv6_addresses and ipv6_address_count become read-only. Default false.
 	// +kubebuilder:validation:Optional
 	IPv6AddressListEnabled *bool `json:"ipv6AddressListEnabled,omitempty" tf:"ipv6_address_list_enabled,omitempty"`
 
@@ -99,10 +100,11 @@ type NetworkInterfaceParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
-	// List of private IPs to assign to the ENI in sequential order. Requires setting private_ip_list_enable to true.
+	// List of private IPs to assign to the ENI in sequential order. Requires setting private_ip_list_enabled to true.
 	// +kubebuilder:validation:Optional
 	PrivateIPList []*string `json:"privateIpList,omitempty" tf:"private_ip_list,omitempty"`
 
+	// Whether private_ip_list is allowed and controls the IPs to assign to the ENI and private_ips and private_ips_count become read-only. Default false.
 	// +kubebuilder:validation:Optional
 	PrivateIPListEnabled *bool `json:"privateIpListEnabled,omitempty" tf:"private_ip_list_enabled,omitempty"`
 

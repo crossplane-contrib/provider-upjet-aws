@@ -31,6 +31,20 @@ type CapacityProviderStrategyParameters struct {
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
+type ClientAliasObservation struct {
+}
+
+type ClientAliasParameters struct {
+
+	// The name that you use in the applications of client tasks to connect to this service.
+	// +kubebuilder:validation:Optional
+	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
+
+	// The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
+	// +kubebuilder:validation:Required
+	Port *float64 `json:"port" tf:"port,omitempty"`
+}
+
 type DeploymentCircuitBreakerObservation struct {
 }
 
@@ -146,6 +160,82 @@ type PlacementConstraintsParameters struct {
 	// Type of constraint. The only valid values at this time are memberOf and distinctInstance.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type SecretOptionObservation struct {
+}
+
+type SecretOptionParameters struct {
+
+	// The name of the secret.
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the SSM Parameter Store.
+	// +kubebuilder:validation:Required
+	ValueFrom *string `json:"valueFrom" tf:"value_from,omitempty"`
+}
+
+type ServiceConnectConfigurationLogConfigurationObservation struct {
+}
+
+type ServiceConnectConfigurationLogConfigurationParameters struct {
+
+	// The log driver to use for the container.
+	// +kubebuilder:validation:Optional
+	LogDriver *string `json:"logDriver,omitempty" tf:"log_driver,omitempty"`
+
+	// The configuration options to send to the log driver.
+	// +kubebuilder:validation:Optional
+	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
+
+	// The secrets to pass to the log configuration. See below.
+	// +kubebuilder:validation:Optional
+	SecretOption []SecretOptionParameters `json:"secretOption,omitempty" tf:"secret_option,omitempty"`
+}
+
+type ServiceConnectConfigurationObservation struct {
+}
+
+type ServiceConnectConfigurationParameters struct {
+
+	// Specifies whether to use Service Connect with this service.
+	// +kubebuilder:validation:Required
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// The log configuration for the container. See below.
+	// +kubebuilder:validation:Optional
+	LogConfiguration []ServiceConnectConfigurationLogConfigurationParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
+
+	// The namespace name or ARN of the aws_service_discovery_http_namespace for use with Service Connect.
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// The list of Service Connect service objects. See below.
+	// +kubebuilder:validation:Optional
+	Service []ServiceConnectConfigurationServiceParameters `json:"service,omitempty" tf:"service,omitempty"`
+}
+
+type ServiceConnectConfigurationServiceObservation struct {
+}
+
+type ServiceConnectConfigurationServiceParameters struct {
+
+	// The list of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. See below.
+	// +kubebuilder:validation:Required
+	ClientAlias []ClientAliasParameters `json:"clientAlias" tf:"client_alias,omitempty"`
+
+	// The name of the new AWS Cloud Map service that Amazon ECS creates for this Amazon ECS service.
+	// +kubebuilder:validation:Optional
+	DiscoveryName *string `json:"discoveryName,omitempty" tf:"discovery_name,omitempty"`
+
+	// The port number for the Service Connect proxy to listen on.
+	// +kubebuilder:validation:Optional
+	IngressPortOverride *float64 `json:"ingressPortOverride,omitempty" tf:"ingress_port_override,omitempty"`
+
+	// The name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
+	// +kubebuilder:validation:Required
+	PortName *string `json:"portName" tf:"port_name,omitempty"`
 }
 
 type ServiceObservation struct {
@@ -264,6 +354,10 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	SchedulingStrategy *string `json:"schedulingStrategy,omitempty" tf:"scheduling_strategy,omitempty"`
 
+	// The ECS Service Connect configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace. See below.
+	// +kubebuilder:validation:Optional
+	ServiceConnectConfiguration []ServiceConnectConfigurationParameters `json:"serviceConnectConfiguration,omitempty" tf:"service_connect_configuration,omitempty"`
+
 	// Service discovery registries for the service. The maximum number of service_registries blocks is 1. See below.
 	// +kubebuilder:validation:Optional
 	ServiceRegistries []ServiceRegistriesParameters `json:"serviceRegistries,omitempty" tf:"service_registries,omitempty"`
@@ -275,6 +369,10 @@ type ServiceParameters struct {
 	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
 	// +kubebuilder:validation:Optional
 	TaskDefinition *string `json:"taskDefinition,omitempty" tf:"task_definition,omitempty"`
+
+	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with timestamp(). See example above.
+	// +kubebuilder:validation:Optional
+	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Default false.
 	// +kubebuilder:validation:Optional

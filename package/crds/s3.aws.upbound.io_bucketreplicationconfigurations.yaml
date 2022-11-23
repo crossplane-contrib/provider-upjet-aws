@@ -276,7 +276,7 @@ spec:
                                   override configuration.
                                 type: string
                               bucket:
-                                description: The ARN of the S3 bucket where you want
+                                description: The name of the S3 bucket where you want
                                   Amazon S3 to store replicas of the objects identified
                                   by the rule.
                                 type: string

@@ -15,16 +15,16 @@ import (
 
 type BackendEnvironmentObservation struct {
 
-	// The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app.
+	// ARN for a backend environment that is part of an Amplify app.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The unique ID of the Amplify backend environment.
+	// Unique ID of the Amplify backend environment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type BackendEnvironmentParameters struct {
 
-	// The unique ID for an Amplify app.
+	// Unique ID for an Amplify app.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amplify/v1beta1.App
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -38,7 +38,7 @@ type BackendEnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	AppIDSelector *v1.Selector `json:"appIdSelector,omitempty" tf:"-"`
 
-	// The name of deployment artifacts.
+	// Name of deployment artifacts.
 	// +kubebuilder:validation:Optional
 	DeploymentArtifacts *string `json:"deploymentArtifacts,omitempty" tf:"deployment_artifacts,omitempty"`
 
@@ -47,7 +47,7 @@ type BackendEnvironmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The AWS CloudFormation stack name of a backend environment.
+	// AWS CloudFormation stack name of a backend environment.
 	// +kubebuilder:validation:Optional
 	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
 }

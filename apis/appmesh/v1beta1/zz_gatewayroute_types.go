@@ -18,9 +18,23 @@ type ActionObservation struct {
 
 type ActionParameters struct {
 
-	// The target that traffic is routed to when a request matches the gateway route.
+	// Target that traffic is routed to when a request matches the gateway route.
 	// +kubebuilder:validation:Required
 	Target []TargetParameters `json:"target" tf:"target,omitempty"`
+}
+
+type ActionRewriteObservation struct {
+}
+
+type ActionRewriteParameters struct {
+
+	// Host name to rewrite.
+	// +kubebuilder:validation:Optional
+	Hostname []RewriteHostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// Specified beginning characters to rewrite.
+	// +kubebuilder:validation:Optional
+	Prefix []RewritePrefixParameters `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type ActionTargetObservation struct {
@@ -28,7 +42,7 @@ type ActionTargetObservation struct {
 
 type ActionTargetParameters struct {
 
-	// The virtual service gateway route target.
+	// Virtual service gateway route target.
 	// +kubebuilder:validation:Required
 	VirtualService []TargetVirtualServiceParameters `json:"virtualService" tf:"virtual_service,omitempty"`
 }
@@ -38,7 +52,7 @@ type ActionTargetVirtualServiceObservation struct {
 
 type ActionTargetVirtualServiceParameters struct {
 
-	// The name of the virtual service that traffic is routed to. Must be between 1 and 255 characters in length.
+	// Name of the virtual service that traffic is routed to. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualService
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
@@ -58,47 +72,47 @@ type GRPCRouteObservation struct {
 
 type GRPCRouteParameters struct {
 
-	// The action to take if a match is determined.
+	// Action to take if a match is determined.
 	// +kubebuilder:validation:Required
 	Action []ActionParameters `json:"action" tf:"action,omitempty"`
 
-	// The criteria for determining a request match.
+	// Criteria for determining a request match.
 	// +kubebuilder:validation:Required
 	Match []MatchParameters `json:"match" tf:"match,omitempty"`
 }
 
 type GatewayRouteObservation struct {
 
-	// The ARN of the gateway route.
+	// ARN of the gateway route.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The creation date of the gateway route.
+	// Creation date of the gateway route.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
-	// The ID of the gateway route.
+	// ID of the gateway route.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The last update date of the gateway route.
+	// Last update date of the gateway route.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
-	// The resource owner's AWS account ID.
+	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type GatewayRouteParameters struct {
 
-	// The name of the service mesh in which to create the gateway route. Must be between 1 and 255 characters in length.
+	// Name of the service mesh in which to create the gateway route. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	MeshName *string `json:"meshName" tf:"mesh_name,omitempty"`
 
-	// The AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
+	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	// +kubebuilder:validation:Optional
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
 
-	// The name to use for the gateway route. Must be between 1 and 255 characters in length.
+	// Name to use for the gateway route. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -107,7 +121,7 @@ type GatewayRouteParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The gateway route specification to apply.
+	// Gateway route specification to apply.
 	// +kubebuilder:validation:Required
 	Spec []SpecParameters `json:"spec" tf:"spec,omitempty"`
 
@@ -115,7 +129,7 @@ type GatewayRouteParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The name of the virtual gateway to associate the gateway route with. Must be between 1 and 255 characters in length.
+	// Name of the virtual gateway to associate the gateway route with. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
@@ -135,7 +149,11 @@ type HTTPRouteActionObservation struct {
 
 type HTTPRouteActionParameters struct {
 
-	// The target that traffic is routed to when a request matches the gateway route.
+	// Gateway route action to rewrite.
+	// +kubebuilder:validation:Optional
+	Rewrite []ActionRewriteParameters `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
+
+	// Target that traffic is routed to when a request matches the gateway route.
 	// +kubebuilder:validation:Required
 	Target []HTTPRouteActionTargetParameters `json:"target" tf:"target,omitempty"`
 }
@@ -145,9 +163,23 @@ type HTTPRouteActionTargetObservation struct {
 
 type HTTPRouteActionTargetParameters struct {
 
-	// The virtual service gateway route target.
+	// Virtual service gateway route target.
 	// +kubebuilder:validation:Required
 	VirtualService []ActionTargetVirtualServiceParameters `json:"virtualService" tf:"virtual_service,omitempty"`
+}
+
+type HTTPRouteMatchHostnameObservation struct {
+}
+
+type HTTPRouteMatchHostnameParameters struct {
+
+	// Exact host name to match on.
+	// +kubebuilder:validation:Optional
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+
+	// Specified ending characters of the host name to match on.
+	// +kubebuilder:validation:Optional
+	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type HTTPRouteMatchObservation struct {
@@ -155,9 +187,13 @@ type HTTPRouteMatchObservation struct {
 
 type HTTPRouteMatchParameters struct {
 
-	// Specifies the path to match requests with. This parameter must always start with /, which by itself matches all requests to the virtual service name.
-	// +kubebuilder:validation:Required
-	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
+	// Host name to rewrite.
+	// +kubebuilder:validation:Optional
+	Hostname []HTTPRouteMatchHostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// Specified beginning characters to rewrite.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type HTTPRouteObservation struct {
@@ -165,13 +201,23 @@ type HTTPRouteObservation struct {
 
 type HTTPRouteParameters struct {
 
-	// The action to take if a match is determined.
+	// Action to take if a match is determined.
 	// +kubebuilder:validation:Required
 	Action []HTTPRouteActionParameters `json:"action" tf:"action,omitempty"`
 
-	// The criteria for determining a request match.
+	// Criteria for determining a request match.
 	// +kubebuilder:validation:Required
 	Match []HTTPRouteMatchParameters `json:"match" tf:"match,omitempty"`
+}
+
+type HostnameObservation struct {
+}
+
+type HostnameParameters struct {
+
+	// Default target host name to write to. Valid values: ENABLED, DISABLED.
+	// +kubebuilder:validation:Required
+	DefaultTargetHostname *string `json:"defaultTargetHostname" tf:"default_target_hostname,omitempty"`
 }
 
 type Http2RouteActionObservation struct {
@@ -179,7 +225,11 @@ type Http2RouteActionObservation struct {
 
 type Http2RouteActionParameters struct {
 
-	// The target that traffic is routed to when a request matches the gateway route.
+	// Gateway route action to rewrite.
+	// +kubebuilder:validation:Optional
+	Rewrite []RewriteParameters `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
+
+	// Target that traffic is routed to when a request matches the gateway route.
 	// +kubebuilder:validation:Required
 	Target []ActionTargetParameters `json:"target" tf:"target,omitempty"`
 }
@@ -189,9 +239,13 @@ type Http2RouteMatchObservation struct {
 
 type Http2RouteMatchParameters struct {
 
-	// Specifies the path to match requests with. This parameter must always start with /, which by itself matches all requests to the virtual service name.
-	// +kubebuilder:validation:Required
-	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
+	// Host name to rewrite.
+	// +kubebuilder:validation:Optional
+	Hostname []MatchHostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// Specified beginning characters to rewrite.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type Http2RouteObservation struct {
@@ -199,13 +253,27 @@ type Http2RouteObservation struct {
 
 type Http2RouteParameters struct {
 
-	// The action to take if a match is determined.
+	// Action to take if a match is determined.
 	// +kubebuilder:validation:Required
 	Action []Http2RouteActionParameters `json:"action" tf:"action,omitempty"`
 
-	// The criteria for determining a request match.
+	// Criteria for determining a request match.
 	// +kubebuilder:validation:Required
 	Match []Http2RouteMatchParameters `json:"match" tf:"match,omitempty"`
+}
+
+type MatchHostnameObservation struct {
+}
+
+type MatchHostnameParameters struct {
+
+	// Exact host name to match on.
+	// +kubebuilder:validation:Optional
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+
+	// Specified ending characters of the host name to match on.
+	// +kubebuilder:validation:Optional
+	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type MatchObservation struct {
@@ -213,9 +281,61 @@ type MatchObservation struct {
 
 type MatchParameters struct {
 
-	// The fully qualified domain name for the service to match from the request.
+	// Fully qualified domain name for the service to match from the request.
 	// +kubebuilder:validation:Required
 	ServiceName *string `json:"serviceName" tf:"service_name,omitempty"`
+}
+
+type PrefixObservation struct {
+}
+
+type PrefixParameters struct {
+
+	// Default prefix used to replace the incoming route prefix when rewritten. Valid values: ENABLED, DISABLED.
+	// +kubebuilder:validation:Optional
+	DefaultPrefix *string `json:"defaultPrefix,omitempty" tf:"default_prefix,omitempty"`
+
+	// Value used to replace the incoming route prefix when rewritten.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type RewriteHostnameObservation struct {
+}
+
+type RewriteHostnameParameters struct {
+
+	// Default target host name to write to. Valid values: ENABLED, DISABLED.
+	// +kubebuilder:validation:Required
+	DefaultTargetHostname *string `json:"defaultTargetHostname" tf:"default_target_hostname,omitempty"`
+}
+
+type RewriteObservation struct {
+}
+
+type RewriteParameters struct {
+
+	// Host name to rewrite.
+	// +kubebuilder:validation:Optional
+	Hostname []HostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// Specified beginning characters to rewrite.
+	// +kubebuilder:validation:Optional
+	Prefix []PrefixParameters `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type RewritePrefixObservation struct {
+}
+
+type RewritePrefixParameters struct {
+
+	// Default prefix used to replace the incoming route prefix when rewritten. Valid values: ENABLED, DISABLED.
+	// +kubebuilder:validation:Optional
+	DefaultPrefix *string `json:"defaultPrefix,omitempty" tf:"default_prefix,omitempty"`
+
+	// Value used to replace the incoming route prefix when rewritten.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type SpecObservation struct {
@@ -223,15 +343,15 @@ type SpecObservation struct {
 
 type SpecParameters struct {
 
-	// The specification of a gRPC gateway route.
+	// Specification of a gRPC gateway route.
 	// +kubebuilder:validation:Optional
 	GRPCRoute []GRPCRouteParameters `json:"grpcRoute,omitempty" tf:"grpc_route,omitempty"`
 
-	// The specification of an HTTP gateway route.
+	// Specification of an HTTP gateway route.
 	// +kubebuilder:validation:Optional
 	HTTPRoute []HTTPRouteParameters `json:"httpRoute,omitempty" tf:"http_route,omitempty"`
 
-	// The specification of an HTTP/2 gateway route.
+	// Specification of an HTTP/2 gateway route.
 	// +kubebuilder:validation:Optional
 	Http2Route []Http2RouteParameters `json:"http2Route,omitempty" tf:"http2_route,omitempty"`
 }
@@ -241,7 +361,7 @@ type TargetObservation struct {
 
 type TargetParameters struct {
 
-	// The virtual service gateway route target.
+	// Virtual service gateway route target.
 	// +kubebuilder:validation:Required
 	VirtualService []VirtualServiceParameters `json:"virtualService" tf:"virtual_service,omitempty"`
 }
@@ -251,7 +371,7 @@ type TargetVirtualServiceObservation struct {
 
 type TargetVirtualServiceParameters struct {
 
-	// The name of the virtual service that traffic is routed to. Must be between 1 and 255 characters in length.
+	// Name of the virtual service that traffic is routed to. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	VirtualServiceName *string `json:"virtualServiceName" tf:"virtual_service_name,omitempty"`
 }
@@ -261,7 +381,7 @@ type VirtualServiceObservation struct {
 
 type VirtualServiceParameters struct {
 
-	// The name of the virtual service that traffic is routed to. Must be between 1 and 255 characters in length.
+	// Name of the virtual service that traffic is routed to. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	VirtualServiceName *string `json:"virtualServiceName" tf:"virtual_service_name,omitempty"`
 }

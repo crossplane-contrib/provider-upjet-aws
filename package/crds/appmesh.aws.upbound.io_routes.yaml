@@ -65,8 +65,8 @@ spec:
               forProvider:
                 properties:
                   meshName:
-                    description: The name of the service mesh in which to create the
-                      route. Must be between 1 and 255 characters in length.
+                    description: Name of the service mesh in which to create the route.
+                      Must be between 1 and 255 characters in length.
                     type: string
                   meshNameRef:
                     description: Reference to a Mesh in appmesh to populate meshName.
@@ -142,45 +142,44 @@ spec:
                         type: object
                     type: object
                   meshOwner:
-                    description: The AWS account ID of the service mesh's owner. Defaults
+                    description: AWS account ID of the service mesh's owner. Defaults
                       to the account ID the AWS provider is currently connected to.
                     type: string
                   name:
-                    description: The name to use for the route. Must be between 1
-                      and 255 characters in length.
+                    description: Name to use for the route. Must be between 1 and
+                      255 characters in length.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   spec:
-                    description: The route specification to apply.
+                    description: Route specification to apply.
                     items:
                       properties:
                         grpcRoute:
-                          description: The gRPC routing information for the route.
+                          description: GRPC routing information for the route.
                           items:
                             properties:
                               action:
-                                description: The action to take if a match is determined.
+                                description: Action to take if a match is determined.
                                 items:
                                   properties:
                                     weightedTarget:
-                                      description: The targets that traffic is routed
+                                      description: Targets that traffic is routed
                                         to when a request matches the route. You can
                                         specify one or more targets and their relative
                                         weights with which to distribute traffic.
                                       items:
                                         properties:
                                           virtualNode:
-                                            description: The virtual node to associate
+                                            description: Virtual node to associate
                                               with the weighted target. Must be between
                                               1 and 255 characters in length.
                                             type: string
                                           weight:
-                                            description: The relative weight of the
-                                              weighted target. An integer between
-                                              0 and 100.
+                                            description: Relative weight of the weighted
+                                              target. An integer between 0 and 100.
                                             type: number
                                         required:
                                         - virtualNode
@@ -192,13 +191,12 @@ spec:
                                   type: object
                                 type: array
                               match:
-                                description: The criteria for determining an gRPC
-                                  request match.
+                                description: Criteria for determining an gRPC request
+                                  match.
                                 items:
                                   properties:
                                     metadata:
-                                      description: The data to match from the gRPC
-                                        request.
+                                      description: Data to match from the gRPC request.
                                       items:
                                         properties:
                                           invert:
@@ -207,36 +205,35 @@ spec:
                                               Default is false.
                                             type: boolean
                                           match:
-                                            description: The criteria for determining
+                                            description: Criteria for determining
                                               an gRPC request match.
                                             items:
                                               properties:
                                                 exact:
-                                                  description: The value sent by the
-                                                    client must match the specified
-                                                    value exactly. Must be between
-                                                    1 and 255 characters in length.
+                                                  description: Value sent by the client
+                                                    must match the specified value
+                                                    exactly. Must be between 1 and
+                                                    255 characters in length.
                                                   type: string
                                                 prefix:
-                                                  description: The value sent by the
-                                                    client must begin with the specified
+                                                  description: Value sent by the client
+                                                    must begin with the specified
                                                     characters. Must be between 1
                                                     and 255 characters in length.
                                                   type: string
                                                 range:
-                                                  description: The object that specifies
+                                                  description: Object that specifies
                                                     the range of numbers that the
                                                     value sent by the client must
                                                     be included in.
                                                   items:
                                                     properties:
                                                       end:
-                                                        description: The end of the
-                                                          range.
+                                                        description: End of the range.
                                                         type: number
                                                       start:
-                                                        description: (Requited) The
-                                                          start of the range.
+                                                        description: (Requited) Start
+                                                          of the range.
                                                         type: number
                                                     required:
                                                     - end
@@ -244,21 +241,21 @@ spec:
                                                     type: object
                                                   type: array
                                                 regex:
-                                                  description: The value sent by the
-                                                    client must include the specified
-                                                    characters. Must be between 1
-                                                    and 255 characters in length.
+                                                  description: Value sent by the client
+                                                    must include the specified characters.
+                                                    Must be between 1 and 255 characters
+                                                    in length.
                                                   type: string
                                                 suffix:
-                                                  description: The value sent by the
-                                                    client must end with the specified
-                                                    characters. Must be between 1
-                                                    and 255 characters in length.
+                                                  description: Value sent by the client
+                                                    must end with the specified characters.
+                                                    Must be between 1 and 255 characters
+                                                    in length.
                                                   type: string
                                               type: object
                                             type: array
                                           name:
-                                            description: The name to use for the route.
+                                            description: Name to use for the route.
                                               Must be between 1 and 255 characters
                                               in length.
                                             type: string
@@ -267,23 +264,23 @@ spec:
                                         type: object
                                       type: array
                                     methodName:
-                                      description: The method name to match from the
-                                        request. If you specify a name, you must also
-                                        specify a service_name.
+                                      description: Method name to match from the request.
+                                        If you specify a name, you must also specify
+                                        a service_name.
                                       type: string
                                     prefix:
-                                      description: The value sent by the client must
-                                        begin with the specified characters. Must
-                                        be between 1 and 255 characters in length.
+                                      description: Value sent by the client must begin
+                                        with the specified characters. Must be between
+                                        1 and 255 characters in length.
                                       type: string
                                     serviceName:
-                                      description: The fully qualified domain name
-                                        for the service to match from the request.
+                                      description: Fully qualified domain name for
+                                        the service to match from the request.
                                       type: string
                                   type: object
                                 type: array
                               retryPolicy:
-                                description: The retry policy.
+                                description: Retry policy.
                                 items:
                                   properties:
                                     grpcRetryEvents:
@@ -305,19 +302,19 @@ spec:
                                         type: string
                                       type: array
                                     maxRetries:
-                                      description: The maximum number of retries.
+                                      description: Maximum number of retries.
                                       type: number
                                     perRetryTimeout:
-                                      description: The per-retry timeout.
+                                      description: Per-retry timeout.
                                       items:
                                         properties:
                                           unit:
-                                            description: 'The unit of time. Valid
-                                              values: ms, s.'
+                                            description: 'Unit of time. Valid values:
+                                              ms, s.'
                                             type: string
                                           value:
-                                            description: The number of time units.
-                                              Minimum value of 0.
+                                            description: Number of time units. Minimum
+                                              value of 0.
                                             type: number
                                         required:
                                         - unit
@@ -336,22 +333,22 @@ spec:
                                   type: object
                                 type: array
                               timeout:
-                                description: The types of timeouts.
+                                description: Types of timeouts.
                                 items:
                                   properties:
                                     idle:
-                                      description: The idle timeout. An idle timeout
-                                        bounds the amount of time that a connection
-                                        may be idle.
+                                      description: Idle timeout. An idle timeout bounds
+                                        the amount of time that a connection may be
+                                        idle.
                                       items:
                                         properties:
                                           unit:
-                                            description: 'The unit of time. Valid
-                                              values: ms, s.'
+                                            description: 'Unit of time. Valid values:
+                                              ms, s.'
                                             type: string
                                           value:
-                                            description: The number of time units.
-                                              Minimum value of 0.
+                                            description: Number of time units. Minimum
+                                              value of 0.
                                             type: number
                                         required:
                                         - unit
@@ -359,16 +356,16 @@ spec:
                                         type: object
                                       type: array
                                     perRequest:
-                                      description: The per request timeout.
+                                      description: Per request timeout.
                                       items:
                                         properties:
                                           unit:
-                                            description: 'The unit of time. Valid
-                                              values: ms, s.'
+                                            description: 'Unit of time. Valid values:
+                                              ms, s.'
                                             type: string
                                           value:
-                                            description: The number of time units.
-                                              Minimum value of 0.
+                                            description: Number of time units. Minimum
+                                              value of 0.
                                             type: number
                                         required:
                                         - unit
@@ -382,29 +379,28 @@ spec:
                             type: object
                           type: array
                         http2Route:
-                          description: The HTTP/2 routing information for the route.
+                          description: HTTP/2 routing information for the route.
                           items:
                             properties:
                               action:
-                                description: The action to take if a match is determined.
+                                description: Action to take if a match is determined.
                                 items:
                                   properties:
                                     weightedTarget:
-                                      description: The targets that traffic is routed
+                                      description: Targets that traffic is routed
                                         to when a request matches the route. You can
                                         specify one or more targets and their relative
                                         weights with which to distribute traffic.
                                       items:
                                         properties:
                                           virtualNode:
-                                            description: The virtual node to associate
+                                            description: Virtual node to associate
                                               with the weighted target. Must be between
                                               1 and 255 characters in length.
                                             type: string
                                           weight:
-                                            description: The relative weight of the
-                                              weighted target. An integer between
-                                              0 and 100.
+                                            description: Relative weight of the weighted
+                                              target. An integer between 0 and 100.
                                             type: number
                                         required:
                                         - virtualNode
@@ -416,12 +412,12 @@ spec:
                                   type: object
                                 type: array
                               match:
-                                description: The criteria for determining an gRPC
-                                  request match.
+                                description: Criteria for determining an gRPC request
+                                  match.
                                 items:
                                   properties:
                                     header:
-                                      description: The client request headers to match
+                                      description: Client request headers to match
                                         on.
                                       items:
                                         properties:
@@ -431,36 +427,35 @@ spec:
                                               Default is false.
                                             type: boolean
                                           match:
-                                            description: The criteria for determining
+                                            description: Criteria for determining
                                               an gRPC request match.
                                             items:
                                               properties:
                                                 exact:
-                                                  description: The value sent by the
-                                                    client must match the specified
-                                                    value exactly. Must be between
-                                                    1 and 255 characters in length.
+                                                  description: Value sent by the client
+                                                    must match the specified value
+                                                    exactly. Must be between 1 and
+                                                    255 characters in length.
                                                   type: string
                                                 prefix:
-                                                  description: The value sent by the
-                                                    client must begin with the specified
+                                                  description: Value sent by the client
+                                                    must begin with the specified
                                                     characters. Must be between 1
                                                     and 255 characters in length.
                                                   type: string
                                                 range:
-                                                  description: The object that specifies
+                                                  description: Object that specifies
                                                     the range of numbers that the
                                                     value sent by the client must
                                                     be included in.
                                                   items:
                                                     properties:
                                                       end:
-                                                        description: The end of the
-                                                          range.
+                                                        description: End of the range.
                                                         type: number
                                                       start:
-                                                        description: (Requited) The
-                                                          start of the range.
+                                                        description: (Requited) Start
+                                                          of the range.
                                                         type: number
                                                     required:
                                                     - end
@@ -468,21 +463,21 @@ spec:
                                                     type: object
                                                   type: array
                                                 regex:
-                                                  description: The value sent by the
-                                                    client must include the specified
-                                                    characters. Must be between 1
-                                                    and 255 characters in length.
+                                                  description: Value sent by the client
+                                                    must include the specified characters.
+                                                    Must be between 1 and 255 characters
+                                                    in length.
                                                   type: string
                                                 suffix:
-                                                  description: The value sent by the
-                                                    client must end with the specified
-                                                    characters. Must be between 1
-                                                    and 255 characters in length.
+                                                  description: Value sent by the client
+                                                    must end with the specified characters.
+                                                    Must be between 1 and 255 characters
+                                                    in length.
                                                   type: string
                                               type: object
                                             type: array
                                           name:
-                                            description: The name to use for the route.
+                                            description: Name to use for the route.
                                               Must be between 1 and 255 characters
                                               in length.
                                             type: string
@@ -491,25 +486,25 @@ spec:
                                         type: object
                                       type: array
                                     method:
-                                      description: 'The client request header method
-                                        to match on. Valid values: GET, HEAD, POST,
-                                        PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH.'
+                                      description: 'Client request header method to
+                                        match on. Valid values: GET, HEAD, POST, PUT,
+                                        DELETE, CONNECT, OPTIONS, TRACE, PATCH.'
                                       type: string
                                     prefix:
-                                      description: The value sent by the client must
-                                        begin with the specified characters. Must
-                                        be between 1 and 255 characters in length.
+                                      description: Value sent by the client must begin
+                                        with the specified characters. Must be between
+                                        1 and 255 characters in length.
                                       type: string
                                     scheme:
-                                      description: 'The client request header scheme
-                                        to match on. Valid values: http, https.'
+                                      description: 'Client request header scheme to
+                                        match on. Valid values: http, https.'
                                       type: string
                                   required:
                                   - prefix
                                   type: object
                                 type: array
                               retryPolicy:
-                                description: The retry policy.
+                                description: Retry policy.
                                 items:
                                   properties:
                                     httpRetryEvents:
@@ -524,19 +519,19 @@ spec:
                                         type: string
                                       type: array
                                     maxRetries:
-                                      description: The maximum number of retries.
+                                      description: Maximum number of retries.
                                       type: number
                                     perRetryTimeout:
-                                      description: The per-retry timeout.
+                                      description: Per-retry timeout.
                                       items:
                                         properties:
                                           unit:
-                                            description: 'The unit of time. Valid
-                                              values: ms, s.'
+                                            description: 'Unit of time. Valid values:
+                                              ms, s.'
                                             type: string
                                           value:
-                                            description: The number of time units.
-                                              Minimum value of 0.
+                                            description: Number of time units. Minimum
+                                              value of 0.
                                             type: number
                                         required:
                                         - unit
@@ -555,22 +550,22 @@ spec:
                                   type: object
                                 type: array
                               timeout:
-                                description: The types of timeouts.
+                                description: Types of timeouts.
                                 items:
                                   properties:
                                     idle:
-                                      description: The idle timeout. An idle timeout
-                                        bounds the amount of time that a connection
-                                        may be idle.
+                                      description: Idle timeout. An idle timeout bounds
+                                        the amount of time that a connection may be
+                                        idle.
                                       items:
                                         properties:
                                           unit:
-                                            description: 'The unit of time. Valid
-                                              values: ms, s.'
+                                            description: 'Unit of time. Valid values:
+                                              ms, s.'
                                             type: string
                                           value:
-                                            description: The number of time units.
-                                              Minimum value of 0.
+                                            description: Number of time units. Minimum
+                                              value of 0.
                                             type: number
                                         required:
                                         - unit
@@ -578,16 +573,16 @@ spec:
                                         type: object
                                       type: array
                                     perRequest:
-                                      description: The per request timeout.
+                                      description: Per request timeout.
                                       items:
                                         properties:
                                           unit:
-                                            description: 'The unit of time. Valid
-                                              values: ms, s.'
+                                            description: 'Unit of time. Valid values:
+                                              ms, s.'
                                             type: string
                                           value:
-                                            description: The number of time units.
-                                              Minimum value of 0.
+                                            description: Number of time units. Minimum
+                                              value of 0.
                                             type: number
                                         required:
                                         - unit
@@ -602,22 +597,22 @@ spec:
                             type: object
                           type: array
                         httpRoute:
-                          description: The HTTP routing information for the route.
+                          description: HTTP routing information for the route.
                           items:
                             properties:
                               action:
-                                description: The action to take if a match is determined.
+                                description: Action to take if a match is determined.
                                 items:
                                   properties:
                                     weightedTarget:
-                                      description: The targets that traffic is routed
+                                      description: Targets that traffic is routed
                                         to when a request matches the route. You can
                                         specify one or more targets and their relative
                                         weights with which to distribute traffic.
                                       items:
                                         properties:
                                           virtualNode:
-                                            description: The virtual node to associate
+                                            description: Virtual node to associate
                                               with the weighted target. Must be between
                                               1 and 255 characters in length.
                                             type: string
@@ -712,9 +707,8 @@ spec:
                                                 type: object
                                             type: object
                                           weight:
-                                            description: The relative weight of the
-                                              weighted target. An integer between
-                                              0 and 100.
+                                            description: Relative weight of the weighted
+                                              target. An integer between 0 and 100.
                                             type: number
                                         required:
                                         - weight
@@ -725,12 +719,12 @@ spec:
                                   type: object
                                 type: array
                               match:
-                                description: The criteria for determining an gRPC
-                                  request match.
+                                description: Criteria for determining an gRPC request
+                                  match.
                                 items:
                                   properties:
                                     header:
-                                      description: The client request headers to match
+                                      description: Client request headers to match
                                         on.
                                       items:
                                         properties:
@@ -740,36 +734,35 @@ spec:
                                               Default is false.
                                             type: boolean
                                           match:
-                                            description: The criteria for determining
+                                            description: Criteria for determining
                                               an gRPC request match.
                                             items:
                                               properties:
                                                 exact:
-                                                  description: The value sent by the
-                                                    client must match the specified
-                                                    value exactly. Must be between
-                                                    1 and 255 characters in length.
+                                                  description: Value sent by the client
+                                                    must match the specified value
+                                                    exactly. Must be between 1 and
+                                                    255 characters in length.
                                                   type: string
                                                 prefix:
-                                                  description: The value sent by the
-                                                    client must begin with the specified
+                                                  description: Value sent by the client
+                                                    must begin with the specified
                                                     characters. Must be between 1
                                                     and 255 characters in length.
                                                   type: string
                                                 range:
-                                                  description: The object that specifies
+                                                  description: Object that specifies
                                                     the range of numbers that the
                                                     value sent by the client must
                                                     be included in.
                                                   items:
                                                     properties:
                                                       end:
-                                                        description: The end of the
-                                                          range.
+                                                        description: End of the range.
                                                         type: number
                                                       start:
-                                                        description: (Requited) The
-                                                          start of the range.
+                                                        description: (Requited) Start
+                                                          of the range.
                                                         type: number
                                                     required:
                                                     - end
@@ -777,21 +770,21 @@ spec:
                                                     type: object
                                                   type: array
                                                 regex:
-                                                  description: The value sent by the
-                                                    client must include the specified
-                                                    characters. Must be between 1
-                                                    and 255 characters in length.
+                                                  description: Value sent by the client
+                                                    must include the specified characters.
+                                                    Must be between 1 and 255 characters
+                                                    in length.
                                                   type: string
                                                 suffix:
-                                                  description: The value sent by the
-                                                    client must end with the specified
-                                                    characters. Must be between 1
-                                                    and 255 characters in length.
+                                                  description: Value sent by the client
+                                                    must end with the specified characters.
+                                                    Must be between 1 and 255 characters
+                                                    in length.
                                                   type: string
                                               type: object
                                             type: array
                                           name:
-                                            description: The name to use for the route.
+                                            description: Name to use for the route.
                                               Must be between 1 and 255 characters
                                               in length.
                                             type: string
@@ -800,25 +793,25 @@ spec:
                                         type: object
                                       type: array
                                     method:
-                                      description: 'The client request header method
-                                        to match on. Valid values: GET, HEAD, POST,
-                                        PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH.'
+                                      description: 'Client request header method to
+                                        match on. Valid values: GET, HEAD, POST, PUT,
+                                        DELETE, CONNECT, OPTIONS, TRACE, PATCH.'
                                       type: string
                                     prefix:
-                                      description: The value sent by the client must
-                                        begin with the specified characters. Must
-                                        be between 1 and 255 characters in length.
+                                      description: Value sent by the client must begin
+                                        with the specified characters. Must be between
+                                        1 and 255 characters in length.
                                       type: string
                                     scheme:
-                                      description: 'The client request header scheme
-                                        to match on. Valid values: http, https.'
+                                      description: 'Client request header scheme to
+                                        match on. Valid values: http, https.'
                                       type: string
                                   required:
                                   - prefix
                                   type: object
                                 type: array
                               retryPolicy:
-                                description: The retry policy.
+                                description: Retry policy.
                                 items:
                                   properties:
                                     httpRetryEvents:
@@ -833,19 +826,19 @@ spec:
                                         type: string
                                       type: array
                                     maxRetries:
-                                      description: The maximum number of retries.
+                                      description: Maximum number of retries.
                                       type: number
                                     perRetryTimeout:
-                                      description: The per-retry timeout.
+                                      description: Per-retry timeout.
                                       items:
                                         properties:
                                           unit:
-                                            description: 'The unit of time. Valid
-                                              values: ms, s.'
+                                            description: 'Unit of time. Valid values:
+                                              ms, s.'
                                             type: string
                                           value:
-                                            description: The number of time units.
-                                              Minimum value of 0.
+                                            description: Number of time units. Minimum
+                                              value of 0.
                                             type: number
                                         required:
                                         - unit
@@ -864,22 +857,22 @@ spec:
                                   type: object
                                 type: array
                               timeout:
-                                description: The types of timeouts.
+                                description: Types of timeouts.
                                 items:
                                   properties:
                                     idle:
-                                      description: The idle timeout. An idle timeout
-                                        bounds the amount of time that a connection
-                                        may be idle.
+                                      description: Idle timeout. An idle timeout bounds
+                                        the amount of time that a connection may be
+                                        idle.
                                       items:
                                         properties:
                                           unit:
-                                            description: 'The unit of time. Valid
-                                              values: ms, s.'
+                                            description: 'Unit of time. Valid values:
+                                              ms, s.'
                                             type: string
                                           value:
-                                            description: The number of time units.
-                                              Minimum value of 0.
+                                            description: Number of time units. Minimum
+                                              value of 0.
                                             type: number
                                         required:
                                         - unit
@@ -887,16 +880,16 @@ spec:
                                         type: object
                                       type: array
                                     perRequest:
-                                      description: The per request timeout.
+                                      description: Per request timeout.
                                       items:
                                         properties:
                                           unit:
-                                            description: 'The unit of time. Valid
-                                              values: ms, s.'
+                                            description: 'Unit of time. Valid values:
+                                              ms, s.'
                                             type: string
                                           value:
-                                            description: The number of time units.
-                                              Minimum value of 0.
+                                            description: Number of time units. Minimum
+                                              value of 0.
                                             type: number
                                         required:
                                         - unit
@@ -911,27 +904,27 @@ spec:
                             type: object
                           type: array
                         priority:
-                          description: The priority for the route, between 0 and 1000.
+                          description: Priority for the route, between 0 and 1000.
                             Routes are matched based on the specified value, where
                             0 is the highest priority.
                           type: number
                         tcpRoute:
-                          description: The TCP routing information for the route.
+                          description: TCP routing information for the route.
                           items:
                             properties:
                               action:
-                                description: The action to take if a match is determined.
+                                description: Action to take if a match is determined.
                                 items:
                                   properties:
                                     weightedTarget:
-                                      description: The targets that traffic is routed
+                                      description: Targets that traffic is routed
                                         to when a request matches the route. You can
                                         specify one or more targets and their relative
                                         weights with which to distribute traffic.
                                       items:
                                         properties:
                                           virtualNode:
-                                            description: The virtual node to associate
+                                            description: Virtual node to associate
                                               with the weighted target. Must be between
                                               1 and 255 characters in length.
                                             type: string
@@ -1026,9 +1019,8 @@ spec:
                                                 type: object
                                             type: object
                                           weight:
-                                            description: The relative weight of the
-                                              weighted target. An integer between
-                                              0 and 100.
+                                            description: Relative weight of the weighted
+                                              target. An integer between 0 and 100.
                                             type: number
                                         required:
                                         - weight
@@ -1039,22 +1031,22 @@ spec:
                                   type: object
                                 type: array
                               timeout:
-                                description: The types of timeouts.
+                                description: Types of timeouts.
                                 items:
                                   properties:
                                     idle:
-                                      description: The idle timeout. An idle timeout
-                                        bounds the amount of time that a connection
-                                        may be idle.
+                                      description: Idle timeout. An idle timeout bounds
+                                        the amount of time that a connection may be
+                                        idle.
                                       items:
                                         properties:
                                           unit:
-                                            description: 'The unit of time. Valid
-                                              values: ms, s.'
+                                            description: 'Unit of time. Valid values:
+                                              ms, s.'
                                             type: string
                                           value:
-                                            description: The number of time units.
-                                              Minimum value of 0.
+                                            description: Number of time units. Minimum
+                                              value of 0.
                                             type: number
                                         required:
                                         - unit
@@ -1075,8 +1067,8 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   virtualRouterName:
-                    description: The name of the virtual router in which to create
-                      the route. Must be between 1 and 255 characters in length.
+                    description: Name of the virtual router in which to create the
+                      route. Must be between 1 and 255 characters in length.
                     type: string
                   virtualRouterNameRef:
                     description: Reference to a VirtualRouter in appmesh to populate
@@ -1335,26 +1327,25 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the route.
+                    description: ARN of the route.
                     type: string
                   createdDate:
-                    description: The creation date of the route.
+                    description: Creation date of the route.
                     type: string
                   id:
-                    description: The ID of the route.
+                    description: ID of the route.
                     type: string
                   lastUpdatedDate:
-                    description: The last update date of the route.
+                    description: Last update date of the route.
                     type: string
                   resourceOwner:
-                    description: The resource owner's AWS account ID.
+                    description: Resource owner's AWS account ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

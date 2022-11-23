@@ -13,43 +13,79 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AcceleratorCountObservation struct {
+}
+
+type AcceleratorCountParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type AcceleratorTotalMemoryMibObservation struct {
+}
+
+type AcceleratorTotalMemoryMibParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
 type AutoscalingGroupObservation struct {
 
-	// The ARN for this Auto Scaling Group
+	// ARN for this Auto Scaling Group
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The Auto Scaling Group id.
+	// Auto Scaling Group id.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A list of elastic load balancer names to add to the autoscaling
+	// List of elastic load balancer names to add to the autoscaling
 	// group names. Only valid for classic load balancers. For ALBs, use target_group_arns instead.
 	LoadBalancers []*string `json:"loadBalancers,omitempty" tf:"load_balancers,omitempty"`
 
-	// A set of aws_alb_target_group ARNs, for use with Application or Network Load Balancing.
+	// Set of aws_alb_target_group ARNs, for use with Application or Network Load Balancing.
 	TargetGroupArns []*string `json:"targetGroupArns,omitempty" tf:"target_group_arns,omitempty"`
 }
 
 type AutoscalingGroupParameters struct {
 
-	// A list of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
+	// List of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
 	// +kubebuilder:validation:Optional
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// Indicates whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled.
+	// Whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled.
 	// +kubebuilder:validation:Optional
 	CapacityRebalance *bool `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
 
-	// The amount of time, in seconds, after a scaling activity completes before another scaling activity can start.
+	// Reserved.
+	// +kubebuilder:validation:Optional
+	Context *string `json:"context,omitempty" tf:"context,omitempty"`
+
+	// Amount of time, in seconds, after a scaling activity completes before another scaling activity can start.
 	// +kubebuilder:validation:Optional
 	DefaultCooldown *float64 `json:"defaultCooldown,omitempty" tf:"default_cooldown,omitempty"`
 
-	// The number of Amazon EC2 instances that
+	// Amount of time, in seconds, until a newly launched instance can contribute to the Amazon CloudWatch metrics. This delay lets an instance finish initializing before Amazon EC2 Auto Scaling aggregates instance metrics, resulting in more reliable usage data. Set this value equal to the amount of time that it takes for resource consumption to become stable after an instance reaches the InService state. (See Set the default instance warmup for an Auto Scaling group)
+	// +kubebuilder:validation:Optional
+	DefaultInstanceWarmup *float64 `json:"defaultInstanceWarmup,omitempty" tf:"default_instance_warmup,omitempty"`
+
+	// Number of Amazon EC2 instances that
 	// should be running in the group. (See also Waiting for
 	// Capacity below.)
 	// +kubebuilder:validation:Optional
 	DesiredCapacity *float64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
 
-	// A list of metrics to collect. The allowed values are defined by the underlying AWS API.
+	// List of metrics to collect. The allowed values are defined by the underlying AWS API.
 	// +kubebuilder:validation:Optional
 	EnabledMetrics []*string `json:"enabledMetrics,omitempty" tf:"enabled_metrics,omitempty"`
 
@@ -89,7 +125,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceRefresh []InstanceRefreshParameters `json:"instanceRefresh,omitempty" tf:"instance_refresh,omitempty"`
 
-	// The name of the launch configuration to use.
+	// Name of the launch configuration to use.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta1.LaunchConfiguration
 	// +kubebuilder:validation:Optional
 	LaunchConfiguration *string `json:"launchConfiguration,omitempty" tf:"launch_configuration,omitempty"`
@@ -106,15 +142,15 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchTemplate []LaunchTemplateParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
-	// The maximum amount of time, in seconds, that an instance can be in service, values must be either equal to 0 or between 86400 and 31536000 seconds.
+	// Maximum amount of time, in seconds, that an instance can be in service, values must be either equal to 0 or between 86400 and 31536000 seconds.
 	// +kubebuilder:validation:Optional
 	MaxInstanceLifetime *float64 `json:"maxInstanceLifetime,omitempty" tf:"max_instance_lifetime,omitempty"`
 
-	// The maximum size of the Auto Scaling Group.
+	// Maximum size of the Auto Scaling Group.
 	// +kubebuilder:validation:Required
 	MaxSize *float64 `json:"maxSize" tf:"max_size,omitempty"`
 
-	// The granularity to associate with the metrics to collect. The only valid value is 1Minute. Default is 1Minute.
+	// Granularity to associate with the metrics to collect. The only valid value is 1Minute. Default is 1Minute.
 	// +kubebuilder:validation:Optional
 	MetricsGranularity *string `json:"metricsGranularity,omitempty" tf:"metrics_granularity,omitempty"`
 
@@ -123,7 +159,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	MinELBCapacity *float64 `json:"minElbCapacity,omitempty" tf:"min_elb_capacity,omitempty"`
 
-	// The minimum size of the Auto Scaling Group.
+	// Minimum size of the Auto Scaling Group.
 	// (See also Waiting for Capacity below.)
 	// +kubebuilder:validation:Required
 	MinSize *float64 `json:"minSize" tf:"min_size,omitempty"`
@@ -132,7 +168,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	MixedInstancesPolicy []MixedInstancesPolicyParameters `json:"mixedInstancesPolicy,omitempty" tf:"mixed_instances_policy,omitempty"`
 
-	// The name of the placement group into which you'll launch your instances, if any.
+	// Name of the placement group into which you'll launch your instances, if any.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.PlacementGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -170,7 +206,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceLinkedRoleArnSelector *v1.Selector `json:"serviceLinkedRoleArnSelector,omitempty" tf:"-"`
 
-	// A list of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer.
+	// List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
 	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
 	// +kubebuilder:validation:Optional
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
@@ -183,11 +219,11 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A list of policies to decide how the instances in the Auto Scaling Group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default.
+	// List of policies to decide how the instances in the Auto Scaling Group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
 	// +kubebuilder:validation:Optional
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
 
-	// A list of subnet IDs to launch resources in. Subnets automatically determine which availability zones the group will reside. Conflicts with availability_zones.
+	// List of subnet IDs to launch resources in. Subnets automatically determine which availability zones the group will reside. Conflicts with availability_zones.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	VPCZoneIdentifier []*string `json:"vpcZoneIdentifier,omitempty" tf:"vpc_zone_identifier,omitempty"`
@@ -217,6 +253,20 @@ type AutoscalingGroupParameters struct {
 	WarmPool []WarmPoolParameters `json:"warmPool,omitempty" tf:"warm_pool,omitempty"`
 }
 
+type BaselineEBSBandwidthMbpsObservation struct {
+}
+
+type BaselineEBSBandwidthMbpsParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
 type InitialLifecycleHookObservation struct {
 }
 
@@ -231,18 +281,18 @@ type InitialLifecycleHookParameters struct {
 	// +kubebuilder:validation:Required
 	LifecycleTransition *string `json:"lifecycleTransition" tf:"lifecycle_transition,omitempty"`
 
-	// The name of the Auto Scaling Group. Conflicts with name_prefix.
+	// Name of the Auto Scaling Group. Conflicts with name_prefix.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NotificationMetadata *string `json:"notificationMetadata,omitempty" tf:"notification_metadata,omitempty"`
 
-	// The ARN for this Auto Scaling Group
+	// ARN for this Auto Scaling Group
 	// +kubebuilder:validation:Optional
 	NotificationTargetArn *string `json:"notificationTargetArn,omitempty" tf:"notification_target_arn,omitempty"`
 
-	// The ARN for this Auto Scaling Group
+	// ARN for this Auto Scaling Group
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
@@ -256,7 +306,7 @@ type InstanceRefreshParameters struct {
 	// +kubebuilder:validation:Optional
 	Preferences []PreferencesParameters `json:"preferences,omitempty" tf:"preferences,omitempty"`
 
-	// The strategy to use for instance refresh. The only allowed value is Rolling. See StartInstanceRefresh Action for more information.
+	// Strategy to use for instance refresh. The only allowed value is Rolling. See StartInstanceRefresh Action for more information.
 	// +kubebuilder:validation:Required
 	Strategy *string `json:"strategy" tf:"strategy,omitempty"`
 
@@ -265,12 +315,102 @@ type InstanceRefreshParameters struct {
 	Triggers []*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
+type InstanceRequirementsObservation struct {
+}
+
+type InstanceRequirementsParameters struct {
+
+	// Block describing the minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips). Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	AcceleratorCount []AcceleratorCountParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
+
+	// List of accelerator manufacturer names. Default is any manufacturer.
+	// +kubebuilder:validation:Optional
+	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
+
+	// List of accelerator names. Default is any acclerator.
+	// +kubebuilder:validation:Optional
+	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
+
+	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	AcceleratorTotalMemoryMib []AcceleratorTotalMemoryMibParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
+
+	// List of accelerator types. Default is any accelerator type.
+	// +kubebuilder:validation:Optional
+	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
+
+	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	// +kubebuilder:validation:Optional
+	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
+
+	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	BaselineEBSBandwidthMbps []BaselineEBSBandwidthMbpsParameters `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
+
+	// Indicate whether burstable performance instance types should be included, excluded, or required. Default is excluded.
+	// +kubebuilder:validation:Optional
+	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
+
+	// List of CPU manufacturer names. Default is any manufacturer.
+	// +kubebuilder:validation:Optional
+	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
+
+	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*). The following are examples: c5*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// +kubebuilder:validation:Optional
+	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
+
+	// List of instance generation names. Default is any generation.
+	// +kubebuilder:validation:Optional
+	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
+
+	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
+	// +kubebuilder:validation:Optional
+	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
+
+	// List of local storage type names. Default any storage type.
+	// +kubebuilder:validation:Optional
+	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
+
+	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	MemoryGibPerVcpu []MemoryGibPerVcpuParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
+
+	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
+	// +kubebuilder:validation:Optional
+	MemoryMib []MemoryMibParameters `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
+
+	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceCount []NetworkInterfaceCountParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
+
+	// Price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
+	// +kubebuilder:validation:Optional
+	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
+
+	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
+	// +kubebuilder:validation:Optional
+	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
+
+	// Price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
+	// +kubebuilder:validation:Optional
+	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
+
+	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	TotalLocalStorageGb []TotalLocalStorageGbParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
+
+	// Block describing the minimum and maximum number of vCPUs. Default is no maximum.
+	// +kubebuilder:validation:Optional
+	VcpuCount []VcpuCountParameters `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
+}
+
 type InstanceReusePolicyObservation struct {
 }
 
 type InstanceReusePolicyParameters struct {
 
-	// Specifies whether instances in the Auto Scaling group can be returned to the warm pool on scale in.
+	// Whether instances in the Auto Scaling group can be returned to the warm pool on scale in.
 	// +kubebuilder:validation:Optional
 	ReuseOnScaleIn *bool `json:"reuseOnScaleIn,omitempty" tf:"reuse_on_scale_in,omitempty"`
 }
@@ -292,7 +432,7 @@ type InstancesDistributionParameters struct {
 	// +kubebuilder:validation:Optional
 	OnDemandPercentageAboveBaseCapacity *float64 `json:"onDemandPercentageAboveBaseCapacity,omitempty" tf:"on_demand_percentage_above_base_capacity,omitempty"`
 
-	// How to allocate capacity across the Spot pools. Valid values: lowest-price, capacity-optimized, capacity-optimized-prioritized. Default: lowest-price.
+	// How to allocate capacity across the Spot pools. Valid values: lowest-price, capacity-optimized, capacity-optimized-prioritized, and price-capacity-optimized. Default: lowest-price.
 	// +kubebuilder:validation:Optional
 	SpotAllocationStrategy *string `json:"spotAllocationStrategy,omitempty" tf:"spot_allocation_strategy,omitempty"`
 
@@ -310,7 +450,7 @@ type LaunchTemplateObservation struct {
 
 type LaunchTemplateParameters struct {
 
-	// The ID of the launch template. Conflicts with name.
+	// ID of the launch template. Conflicts with name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -324,7 +464,7 @@ type LaunchTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
 
-	// The name of the launch template. Conflicts with id.
+	// Name of the launch template. Conflicts with id.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -338,7 +478,7 @@ type LaunchTemplateSpecificationObservation struct {
 
 type LaunchTemplateSpecificationParameters struct {
 
-	// The ID of the launch template. Conflicts with launch_template_name.
+	// ID of the launch template. Conflicts with launch_template_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -352,13 +492,41 @@ type LaunchTemplateSpecificationParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchTemplateIDSelector *v1.Selector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 
-	// The name of the launch template. Conflicts with launch_template_id.
+	// Name of the launch template. Conflicts with launch_template_id.
 	// +kubebuilder:validation:Optional
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
 
 	// Template version. Can be version number, $Latest, or $Default. (Default: $Default).
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type MemoryGibPerVcpuObservation struct {
+}
+
+type MemoryGibPerVcpuParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type MemoryMibObservation struct {
+}
+
+type MemoryMibParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type MixedInstancesPolicyLaunchTemplateObservation struct {
@@ -389,12 +557,26 @@ type MixedInstancesPolicyParameters struct {
 	LaunchTemplate []MixedInstancesPolicyLaunchTemplateParameters `json:"launchTemplate" tf:"launch_template,omitempty"`
 }
 
+type NetworkInterfaceCountObservation struct {
+}
+
+type NetworkInterfaceCountParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
 type OverrideLaunchTemplateSpecificationObservation struct {
 }
 
 type OverrideLaunchTemplateSpecificationParameters struct {
 
-	// The ID of the launch template. Conflicts with launch_template_name.
+	// ID of the launch template. Conflicts with launch_template_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -408,7 +590,7 @@ type OverrideLaunchTemplateSpecificationParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchTemplateIDSelector *v1.Selector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 
-	// The name of the launch template. Conflicts with launch_template_id.
+	// Name of the launch template. Conflicts with launch_template_id.
 	// +kubebuilder:validation:Optional
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
 
@@ -422,6 +604,10 @@ type OverrideObservation struct {
 
 type OverrideParameters struct {
 
+	// Override the instance type in the Launch Template with instance types that satisfy the requirements.
+	// +kubebuilder:validation:Optional
+	InstanceRequirements []InstanceRequirementsParameters `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
+
 	// Override the instance type in the Launch Template.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
@@ -430,7 +616,7 @@ type OverrideParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchTemplateSpecification []OverrideLaunchTemplateSpecificationParameters `json:"launchTemplateSpecification,omitempty" tf:"launch_template_specification,omitempty"`
 
-	// The number of capacity units, which gives the instance type a proportional weight to other instance types.
+	// Number of capacity units, which gives the instance type a proportional weight to other instance types.
 	// +kubebuilder:validation:Optional
 	WeightedCapacity *string `json:"weightedCapacity,omitempty" tf:"weighted_capacity,omitempty"`
 }
@@ -440,7 +626,7 @@ type PreferencesObservation struct {
 
 type PreferencesParameters struct {
 
-	// The number of seconds to wait after a checkpoint. Defaults to 3600.
+	// Number of seconds to wait after a checkpoint. Defaults to 3600.
 	// +kubebuilder:validation:Optional
 	CheckpointDelay *string `json:"checkpointDelay,omitempty" tf:"checkpoint_delay,omitempty"`
 
@@ -448,14 +634,15 @@ type PreferencesParameters struct {
 	// +kubebuilder:validation:Optional
 	CheckpointPercentages []*float64 `json:"checkpointPercentages,omitempty" tf:"checkpoint_percentages,omitempty"`
 
-	// The number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling Group's health check grace period.
+	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling Group's health check grace period.
 	// +kubebuilder:validation:Optional
 	InstanceWarmup *string `json:"instanceWarmup,omitempty" tf:"instance_warmup,omitempty"`
 
-	// The amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
+	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
 	// +kubebuilder:validation:Optional
 	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
 
+	// Replace instances that already have your desired configuration. Defaults to false.
 	// +kubebuilder:validation:Optional
 	SkipMatching *bool `json:"skipMatching,omitempty" tf:"skip_matching,omitempty"`
 }
@@ -479,20 +666,48 @@ type TagParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
+type TotalLocalStorageGbObservation struct {
+}
+
+type TotalLocalStorageGbParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type VcpuCountObservation struct {
+}
+
+type VcpuCountParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
 type WarmPoolObservation struct {
 }
 
 type WarmPoolParameters struct {
 
-	// Indicates whether instances in the Auto Scaling group can be returned to the warm pool on scale in. The default is to terminate instances in the Auto Scaling group when the group scales in.
+	// Whether instances in the Auto Scaling group can be returned to the warm pool on scale in. The default is to terminate instances in the Auto Scaling group when the group scales in.
 	// +kubebuilder:validation:Optional
 	InstanceReusePolicy []InstanceReusePolicyParameters `json:"instanceReusePolicy,omitempty" tf:"instance_reuse_policy,omitempty"`
 
-	// Specifies the total maximum number of instances that are allowed to be in the warm pool or in any state except Terminated for the Auto Scaling group.
+	// Total maximum number of instances that are allowed to be in the warm pool or in any state except Terminated for the Auto Scaling group.
 	// +kubebuilder:validation:Optional
 	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
 
-	// The minimum size of the Auto Scaling Group.
+	// Minimum size of the Auto Scaling Group.
 	// (See also Waiting for Capacity below.)
 	// +kubebuilder:validation:Optional
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`

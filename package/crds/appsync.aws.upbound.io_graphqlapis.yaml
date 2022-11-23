@@ -70,7 +70,7 @@ spec:
                     items:
                       properties:
                         authenticationType:
-                          description: 'The authentication type. Valid values: API_KEY,
+                          description: 'Authentication type. Valid values: API_KEY,
                             AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA'
                           type: string
                         lambdaAuthorizerConfig:
@@ -79,22 +79,22 @@ spec:
                           items:
                             properties:
                               authorizerResultTtlInSeconds:
-                                description: The number of seconds a response should
-                                  be cached for. The default is 5 minutes (300 seconds).
+                                description: Number of seconds a response should be
+                                  cached for. The default is 5 minutes (300 seconds).
                                   The Lambda function can override this by returning
                                   a ttlOverride key in its response. A value of 0
                                   disables caching of responses. Minimum value of
                                   0. Maximum value of 3600.
                                 type: number
                               authorizerUri:
-                                description: 'The ARN of the Lambda function to be
-                                  called for authorization. Note: This Lambda function
-                                  must have a resource-based policy assigned to it,
-                                  to allow lambda:InvokeFunction from service principal
+                                description: 'ARN of the Lambda function to be called
+                                  for authorization. Note: This Lambda function must
+                                  have a resource-based policy assigned to it, to
+                                  allow lambda:InvokeFunction from service principal
                                   appsync.amazonaws.com.'
                                 type: string
                               identityValidationExpression:
-                                description: A regular expression for validation of
+                                description: Regular expression for validation of
                                   tokens before the Lambda function is called.
                                 type: string
                             required:
@@ -133,20 +133,20 @@ spec:
                             type: object
                           type: array
                         userPoolConfig:
-                          description: The Amazon Cognito User Pool configuration.
-                            Defined below.
+                          description: Amazon Cognito User Pool configuration. Defined
+                            below.
                           items:
                             properties:
                               appIdClientRegex:
-                                description: A regular expression for validating the
+                                description: Regular expression for validating the
                                   incoming Amazon Cognito User Pool app client ID.
                                 type: string
                               awsRegion:
-                                description: The AWS region in which the user pool
-                                  was created.
+                                description: AWS region in which the user pool was
+                                  created.
                                 type: string
                               userPoolId:
-                                description: The user pool ID.
+                                description: User pool ID.
                                 type: string
                             required:
                             - userPoolId
@@ -157,8 +157,8 @@ spec:
                       type: object
                     type: array
                   authenticationType:
-                    description: 'The authentication type. Valid values: API_KEY,
-                      AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA'
+                    description: 'Authentication type. Valid values: API_KEY, AWS_IAM,
+                      AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA'
                     type: string
                   lambdaAuthorizerConfig:
                     description: Nested argument containing Lambda authorizer configuration.
@@ -166,20 +166,20 @@ spec:
                     items:
                       properties:
                         authorizerResultTtlInSeconds:
-                          description: The number of seconds a response should be
-                            cached for. The default is 5 minutes (300 seconds). The
-                            Lambda function can override this by returning a ttlOverride
+                          description: Number of seconds a response should be cached
+                            for. The default is 5 minutes (300 seconds). The Lambda
+                            function can override this by returning a ttlOverride
                             key in its response. A value of 0 disables caching of
                             responses. Minimum value of 0. Maximum value of 3600.
                           type: number
                         authorizerUri:
-                          description: 'The ARN of the Lambda function to be called
-                            for authorization. Note: This Lambda function must have
-                            a resource-based policy assigned to it, to allow lambda:InvokeFunction
+                          description: 'ARN of the Lambda function to be called for
+                            authorization. Note: This Lambda function must have a
+                            resource-based policy assigned to it, to allow lambda:InvokeFunction
                             from service principal appsync.amazonaws.com.'
                           type: string
                         identityValidationExpression:
-                          description: A regular expression for validation of tokens
+                          description: Regular expression for validation of tokens
                             before the Lambda function is called.
                           type: string
                       required:
@@ -287,7 +287,7 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: A user-supplied name for the GraphqlApi.
+                    description: User-supplied name for the GraphqlApi.
                     type: string
                   openidConnectConfig:
                     description: Nested argument containing OpenID Connect configuration.
@@ -324,8 +324,7 @@ spec:
                       be created in.
                     type: string
                   schema:
-                    description: The schema definition, in GraphQL schema language
-                      format.
+                    description: Schema definition, in GraphQL schema language format.
                     type: string
                   tags:
                     additionalProperties:
@@ -333,25 +332,24 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   userPoolConfig:
-                    description: The Amazon Cognito User Pool configuration. Defined
-                      below.
+                    description: Amazon Cognito User Pool configuration. Defined below.
                     items:
                       properties:
                         appIdClientRegex:
-                          description: A regular expression for validating the incoming
+                          description: Regular expression for validating the incoming
                             Amazon Cognito User Pool app client ID.
                           type: string
                         awsRegion:
-                          description: The AWS region in which the user pool was created.
+                          description: AWS region in which the user pool was created.
                           type: string
                         defaultAction:
-                          description: 'The action that you want your GraphQL API
-                            to take when a request that uses Amazon Cognito User Pool
-                            authentication doesn''t match the Amazon Cognito User
-                            Pool configuration. Valid: ALLOW and DENY'
+                          description: 'Action that you want your GraphQL API to take
+                            when a request that uses Amazon Cognito User Pool authentication
+                            doesn''t match the Amazon Cognito User Pool configuration.
+                            Valid: ALLOW and DENY'
                           type: string
                         userPoolId:
-                          description: The user pool ID.
+                          description: User pool ID.
                           type: string
                         userPoolIdRef:
                           description: Reference to a UserPool in cognitoidp to populate
@@ -621,7 +619,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN
+                    description: ARN
                     type: string
                   id:
                     description: API ID
@@ -629,9 +627,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                   uris:
                     additionalProperties:

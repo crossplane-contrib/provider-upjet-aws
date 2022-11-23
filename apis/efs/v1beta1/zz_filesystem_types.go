@@ -91,7 +91,7 @@ type FileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Throughput mode for the file system. Defaults to bursting. Valid values: bursting, provisioned. When using provisioned, also set provisioned_throughput_in_mibps.
+	// Throughput mode for the file system. Defaults to bursting. Valid values: bursting, provisioned, or elastic. When using provisioned, also set provisioned_throughput_in_mibps.
 	// +kubebuilder:validation:Optional
 	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
 }
@@ -101,7 +101,7 @@ type LifecyclePolicyObservation struct {
 
 type LifecyclePolicyParameters struct {
 
-	// Indicates how long it takes to transition files to the IA storage class. Valid values: AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, or AFTER_90_DAYS.
+	// Indicates how long it takes to transition files to the IA storage class. Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, or AFTER_90_DAYS.
 	// +kubebuilder:validation:Optional
 	TransitionToIa *string `json:"transitionToIa,omitempty" tf:"transition_to_ia,omitempty"`
 

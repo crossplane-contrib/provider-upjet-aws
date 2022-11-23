@@ -64,7 +64,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Required
 	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
 
-	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, db2, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase.
+	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, db2, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
 	// +kubebuilder:validation:Required
 	EngineName *string `json:"engineName" tf:"engine_name,omitempty"`
 
@@ -105,6 +105,13 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	RedisSettings []RedisSettingsParameters `json:"redisSettings,omitempty" tf:"redis_settings,omitempty"`
+
+	// Configuration block for Redshift settings. See below.
+	// +kubebuilder:validation:Optional
+	RedshiftSettings []RedshiftSettingsParameters `json:"redshiftSettings,omitempty" tf:"redshift_settings,omitempty"`
+
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -132,7 +139,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretsManagerAccessRoleArnSelector *v1.Selector `json:"secretsManagerAccessRoleArnSelector,omitempty" tf:"-"`
 
-	// Full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the endpoint connection details. Supported only for engine_name as oracle and postgres.
+	// Full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the endpoint connection details. Supported only for engine_name as aurora, aurora-postgresql, mariadb, mongodb, mysql, oracle, postgres, redshift or sqlserver.
 	// +kubebuilder:validation:Optional
 	SecretsManagerArn *string `json:"secretsManagerArn,omitempty" tf:"secrets_manager_arn,omitempty"`
 
@@ -303,6 +310,66 @@ type MongodbSettingsParameters struct {
 	NestingLevel *string `json:"nestingLevel,omitempty" tf:"nesting_level,omitempty"`
 }
 
+type RedisSettingsObservation struct {
+}
+
+type RedisSettingsParameters struct {
+
+	// The password provided with the auth-role and auth-token options of the AuthType setting for a Redis target endpoint.
+	// +kubebuilder:validation:Optional
+	AuthPasswordSecretRef *v1.SecretKeySelector `json:"authPasswordSecretRef,omitempty" tf:"-"`
+
+	// Authentication type to access the MongoDB source endpoint. Default is password.
+	// +kubebuilder:validation:Required
+	AuthType *string `json:"authType" tf:"auth_type,omitempty"`
+
+	// The username provided with the auth-role option of the AuthType setting for a Redis target endpoint.
+	// +kubebuilder:validation:Optional
+	AuthUserName *string `json:"authUserName,omitempty" tf:"auth_user_name,omitempty"`
+
+	// Port used by the endpoint database.
+	// +kubebuilder:validation:Required
+	Port *float64 `json:"port" tf:"port,omitempty"`
+
+	// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
+	// +kubebuilder:validation:Optional
+	SSLCACertificateArn *string `json:"sslCaCertificateArn,omitempty" tf:"ssl_ca_certificate_arn,omitempty"`
+
+	// The plaintext option doesn't provide Transport Layer Security (TLS) encryption for traffic between endpoint and database. Options include plaintext, ssl-encryption. The default is ssl-encryption.
+	// +kubebuilder:validation:Optional
+	SSLSecurityProtocol *string `json:"sslSecurityProtocol,omitempty" tf:"ssl_security_protocol,omitempty"`
+
+	// Host name of the server.
+	// +kubebuilder:validation:Required
+	ServerName *string `json:"serverName" tf:"server_name,omitempty"`
+}
+
+type RedshiftSettingsObservation struct {
+}
+
+type RedshiftSettingsParameters struct {
+
+	// Custom S3 Bucket Object prefix for intermediate storage.
+	// +kubebuilder:validation:Optional
+	BucketFolder *string `json:"bucketFolder,omitempty" tf:"bucket_folder,omitempty"`
+
+	// Custom S3 Bucket name for intermediate storage.
+	// +kubebuilder:validation:Optional
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// The server-side encryption mode that you want to encrypt your intermediate .csv object files copied to S3. Defaults to SSE_S3. Valid values are SSE_S3 and SSE_KMS.
+	// +kubebuilder:validation:Optional
+	EncryptionMode *string `json:"encryptionMode,omitempty" tf:"encryption_mode,omitempty"`
+
+	// If you set encryptionMode to SSE_KMS, set this parameter to the Amazon Resource Name (ARN) for the AWS KMS key.
+	// +kubebuilder:validation:Optional
+	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
+
+	// Amazon Resource Name (ARN) of the IAM Role with permissions to read from or write to the S3 Bucket for intermediate storage.
+	// +kubebuilder:validation:Optional
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
+}
+
 type S3SettingsObservation struct {
 }
 
@@ -451,6 +518,12 @@ type S3SettingsParameters struct {
 	// Whether to use csv_no_sup_value for columns not included in the supplemental log.
 	// +kubebuilder:validation:Optional
 	UseCsvNoSupValue *bool `json:"useCsvNoSupValue,omitempty" tf:"use_csv_no_sup_value,omitempty"`
+
+	// When set to true, uses the task start time as the timestamp column value instead of the time data is written to target.
+	// For full load, when set to true, each row of the timestamp column contains the task start time. For CDC loads, each row of the timestamp column contains the transaction commit time.
+	// When set to false, the full load timestamp in the timestamp column increments with the time data arrives at the target. Default is false.
+	// +kubebuilder:validation:Optional
+	UseTaskStartTimeForFullLoadTimestamp *bool `json:"useTaskStartTimeForFullLoadTimestamp,omitempty" tf:"use_task_start_time_for_full_load_timestamp,omitempty"`
 }
 
 // EndpointSpec defines the desired state of Endpoint

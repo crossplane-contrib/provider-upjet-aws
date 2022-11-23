@@ -21,15 +21,15 @@ type AMILaunchPermissionObservation struct {
 
 type AMILaunchPermissionParameters struct {
 
-	// The AWS account ID for the launch permission.
+	// AWS account ID for the launch permission.
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The name of the group for the launch permission. Valid values: "all".
+	// Name of the group for the launch permission. Valid values: "all".
 	// +kubebuilder:validation:Optional
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
-	// The ID of the AMI.
+	// ID of the AMI.
 	// +crossplane:generate:reference:type=AMI
 	// +kubebuilder:validation:Optional
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
@@ -42,11 +42,11 @@ type AMILaunchPermissionParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageIDSelector *v1.Selector `json:"imageIdSelector,omitempty" tf:"-"`
 
-	// The ARN of an organization for the launch permission.
+	// ARN of an organization for the launch permission.
 	// +kubebuilder:validation:Optional
 	OrganizationArn *string `json:"organizationArn,omitempty" tf:"organization_arn,omitempty"`
 
-	// The ARN of an organizational unit for the launch permission.
+	// ARN of an organizational unit for the launch permission.
 	// +kubebuilder:validation:Optional
 	OrganizationalUnitArn *string `json:"organizationalUnitArn,omitempty" tf:"organizational_unit_arn,omitempty"`
 

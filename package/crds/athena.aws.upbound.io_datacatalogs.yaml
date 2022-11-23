@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: A description of the data catalog.
+                    description: Description of the data catalog.
                     type: string
                   parameters:
                     additionalProperties:
@@ -84,9 +84,8 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   type:
-                    description: 'The type of data catalog: LAMBDA for a federated
-                      catalog, GLUE for AWS Glue Catalog, or HIVE for an external
-                      hive metastore.'
+                    description: 'Type of data catalog: LAMBDA for a federated catalog,
+                      GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.'
                     type: string
                 required:
                 - description

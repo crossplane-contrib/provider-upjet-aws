@@ -14,6 +14,7 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: example
       volumeSize: 8
+    imdsSupport: v2.0
     name: terraform-example
     region: us-west-1
     rootDeviceName: /dev/xvda

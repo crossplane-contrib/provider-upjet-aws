@@ -13,6 +13,20 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConfigurationObservation struct {
+}
+
+type ConfigurationParameters struct {
+
+	// A collection of parameters for this group configuration item. See below for details.
+	// +kubebuilder:validation:Optional
+	Parameters []ParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Specifies the type of group configuration item.
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type GroupObservation struct {
 
 	// The ARN assigned by AWS for this resource group.
@@ -26,6 +40,10 @@ type GroupObservation struct {
 
 type GroupParameters struct {
 
+	// A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. See below for details.
+	// +kubebuilder:validation:Optional
+	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
 	// A description of the resource group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -36,12 +54,26 @@ type GroupParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// A resource_query block. Resource queries are documented below.
-	// +kubebuilder:validation:Required
-	ResourceQuery []ResourceQueryParameters `json:"resourceQuery" tf:"resource_query,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceQuery []ResourceQueryParameters `json:"resourceQuery,omitempty" tf:"resource_query,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type ParametersObservation struct {
+}
+
+type ParametersParameters struct {
+
+	// The name of the group configuration parameter.
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The value or values to be used for the specified parameter.
+	// +kubebuilder:validation:Required
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type ResourceQueryObservation struct {

@@ -26,10 +26,10 @@ type AutoScalingConfigurationVersionObservation struct {
 	// Whether the auto scaling configuration has the highest auto_scaling_configuration_revision among all configurations that share the same auto_scaling_configuration_name.
 	Latest *bool `json:"latest,omitempty" tf:"latest,omitempty"`
 
-	// The current state of the auto scaling configuration. An INACTIVE configuration revision has been deleted and can't be used. It is permanently removed some time after deletion.
+	// Current state of the auto scaling configuration. An INACTIVE configuration revision has been deleted and can't be used. It is permanently removed some time after deletion.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -39,15 +39,15 @@ type AutoScalingConfigurationVersionParameters struct {
 	// +kubebuilder:validation:Required
 	AutoScalingConfigurationName *string `json:"autoScalingConfigurationName" tf:"auto_scaling_configuration_name,omitempty"`
 
-	// The maximal number of concurrent requests that you want an instance to process. When the number of concurrent requests goes over this limit, App Runner scales up your service.
+	// Maximal number of concurrent requests that you want an instance to process. When the number of concurrent requests goes over this limit, App Runner scales up your service.
 	// +kubebuilder:validation:Optional
 	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
-	// The maximal number of instances that App Runner provisions for your service.
+	// Maximal number of instances that App Runner provisions for your service.
 	// +kubebuilder:validation:Optional
 	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
-	// The minimal number of instances that App Runner provisions for your service.
+	// Minimal number of instances that App Runner provisions for your service.
 	// +kubebuilder:validation:Optional
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 

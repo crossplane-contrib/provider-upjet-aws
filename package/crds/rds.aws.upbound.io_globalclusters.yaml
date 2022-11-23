@@ -359,6 +359,8 @@ spec:
                   arn:
                     description: RDS Global Cluster Amazon Resource Name (ARN)
                     type: string
+                  engineVersionActual:
+                    type: string
                   globalClusterMembers:
                     description: Set of objects containing Global Cluster members.
                     items:

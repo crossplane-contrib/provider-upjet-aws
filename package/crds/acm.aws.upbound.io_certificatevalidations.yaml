@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   certificateArn:
-                    description: The ARN of the certificate that is being validated.
+                    description: ARN of the certificate that is being validated.
                     type: string
                   certificateArnRef:
                     description: Reference to a Certificate to populate certificateArn.
@@ -334,7 +334,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The time at which the certificate was issued
+                    description: Time at which the certificate was issued
                     type: string
                 type: object
               conditions:

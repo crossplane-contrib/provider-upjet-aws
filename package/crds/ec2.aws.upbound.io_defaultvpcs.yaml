@@ -76,6 +76,9 @@ spec:
                     type: boolean
                   enableDnsSupport:
                     type: boolean
+                  enableNetworkAddressUsageMetrics:
+                    description: is true
+                    type: boolean
                   forceDestroy:
                     description: 'Whether destroying the resource deletes the default
                       VPC. Default: false'

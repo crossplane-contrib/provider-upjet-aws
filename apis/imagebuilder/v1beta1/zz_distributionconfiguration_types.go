@@ -130,6 +130,10 @@ type DistributionParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerDistributionConfiguration []ContainerDistributionConfigurationParameters `json:"containerDistributionConfiguration,omitempty" tf:"container_distribution_configuration,omitempty"`
 
+	// Set of Windows faster-launching configurations to use for AMI distribution. Detailed below.
+	// +kubebuilder:validation:Optional
+	FastLaunchConfiguration []FastLaunchConfigurationParameters `json:"fastLaunchConfiguration,omitempty" tf:"fast_launch_configuration,omitempty"`
+
 	// Set of launch template configuration settings that apply to image distribution. Detailed below.
 	// +kubebuilder:validation:Optional
 	LaunchTemplateConfiguration []LaunchTemplateConfigurationParameters `json:"launchTemplateConfiguration,omitempty" tf:"launch_template_configuration,omitempty"`
@@ -141,6 +145,32 @@ type DistributionParameters struct {
 	// AWS Region for the distribution.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+}
+
+type FastLaunchConfigurationObservation struct {
+}
+
+type FastLaunchConfigurationParameters struct {
+
+	// The owner account ID for the fast-launch enabled Windows AMI.
+	// +kubebuilder:validation:Required
+	AccountID *string `json:"accountId" tf:"account_id,omitempty"`
+
+	// A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.
+	// +kubebuilder:validation:Required
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// Configuration block for the launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots. Detailed below.
+	// +kubebuilder:validation:Optional
+	LaunchTemplate []LaunchTemplateParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
+
+	// The maximum number of parallel instances that are launched for creating resources.
+	// +kubebuilder:validation:Optional
+	MaxParallelLaunches *float64 `json:"maxParallelLaunches,omitempty" tf:"max_parallel_launches,omitempty"`
+
+	// Configuration block for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled. Detailed below.
+	// +kubebuilder:validation:Optional
+	SnapshotConfiguration []SnapshotConfigurationParameters `json:"snapshotConfiguration,omitempty" tf:"snapshot_configuration,omitempty"`
 }
 
 type LaunchPermissionObservation struct {
@@ -181,6 +211,34 @@ type LaunchTemplateConfigurationParameters struct {
 	// The ID of the Amazon EC2 launch template to use.
 	// +kubebuilder:validation:Required
 	LaunchTemplateID *string `json:"launchTemplateId" tf:"launch_template_id,omitempty"`
+}
+
+type LaunchTemplateObservation struct {
+}
+
+type LaunchTemplateParameters struct {
+
+	// The ID of the launch template to use for faster launching for a Windows AMI.
+	// +kubebuilder:validation:Optional
+	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
+
+	// The name of the launch template to use for faster launching for a Windows AMI.
+	// +kubebuilder:validation:Optional
+	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
+
+	// The version of the launch template to use for faster launching for a Windows AMI.
+	// +kubebuilder:validation:Optional
+	LaunchTemplateVersion *string `json:"launchTemplateVersion,omitempty" tf:"launch_template_version,omitempty"`
+}
+
+type SnapshotConfigurationObservation struct {
+}
+
+type SnapshotConfigurationParameters struct {
+
+	// The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
+	// +kubebuilder:validation:Optional
+	TargetResourceCount *float64 `json:"targetResourceCount,omitempty" tf:"target_resource_count,omitempty"`
 }
 
 // DistributionConfigurationSpec defines the desired state of DistributionConfiguration

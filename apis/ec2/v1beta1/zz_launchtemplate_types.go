@@ -439,6 +439,10 @@ type LaunchTemplateParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// If true, enables EC2 Instance Stop Protection.
+	// +kubebuilder:validation:Optional
+	DisableAPIStop *bool `json:"disableApiStop,omitempty" tf:"disable_api_stop,omitempty"`
+
 	// If true, enables EC2 Instance
 	// Termination Protection
 	// +kubebuilder:validation:Optional
@@ -531,7 +535,7 @@ type LaunchTemplateParameters_2 struct {
 
 	// The options for the instance hostname. The default values are inherited from the subnet. See Private DNS Name Options below for more details.
 	// +kubebuilder:validation:Optional
-	PrivateDNSNameOptions []PrivateDNSNameOptionsParameters `json:"privateDnsNameOptions,omitempty" tf:"private_dns_name_options,omitempty"`
+	PrivateDNSNameOptions []LaunchTemplatePrivateDNSNameOptionsParameters `json:"privateDnsNameOptions,omitempty" tf:"private_dns_name_options,omitempty"`
 
 	// The ID of the RAM disk.
 	// +kubebuilder:validation:Optional
@@ -588,6 +592,24 @@ type LaunchTemplateParameters_2 struct {
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+}
+
+type LaunchTemplatePrivateDNSNameOptionsObservation struct {
+}
+
+type LaunchTemplatePrivateDNSNameOptionsParameters struct {
+
+	// Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+	// +kubebuilder:validation:Optional
+	EnableResourceNameDNSARecord *bool `json:"enableResourceNameDnsARecord,omitempty" tf:"enable_resource_name_dns_a_record,omitempty"`
+
+	// Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+	// +kubebuilder:validation:Optional
+	EnableResourceNameDNSAaaaRecord *bool `json:"enableResourceNameDnsAaaaRecord,omitempty" tf:"enable_resource_name_dns_aaaa_record,omitempty"`
+
+	// The type of hostname for Amazon EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 native subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. Valid values: ip-name and resource-name.
+	// +kubebuilder:validation:Optional
+	HostnameType *string `json:"hostnameType,omitempty" tf:"hostname_type,omitempty"`
 }
 
 type LicenseSpecificationObservation struct {
@@ -799,24 +821,6 @@ type PlacementParameters struct {
 	// The tenancy of the instance (if the instance is running in a VPC). Can be default, dedicated, or host.
 	// +kubebuilder:validation:Optional
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
-}
-
-type PrivateDNSNameOptionsObservation struct {
-}
-
-type PrivateDNSNameOptionsParameters struct {
-
-	// Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
-	// +kubebuilder:validation:Optional
-	EnableResourceNameDNSARecord *bool `json:"enableResourceNameDnsARecord,omitempty" tf:"enable_resource_name_dns_a_record,omitempty"`
-
-	// Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
-	// +kubebuilder:validation:Optional
-	EnableResourceNameDNSAaaaRecord *bool `json:"enableResourceNameDnsAaaaRecord,omitempty" tf:"enable_resource_name_dns_aaaa_record,omitempty"`
-
-	// The type of hostname for Amazon EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 native subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. Valid values: ip-name and resource-name.
-	// +kubebuilder:validation:Optional
-	HostnameType *string `json:"hostnameType,omitempty" tf:"hostname_type,omitempty"`
 }
 
 type SpotOptionsObservation struct {

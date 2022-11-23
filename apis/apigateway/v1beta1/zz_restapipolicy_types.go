@@ -15,7 +15,7 @@ import (
 
 type RestAPIPolicyObservation struct {
 
-	// The ID of the REST API
+	// ID of the REST API
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -30,7 +30,7 @@ type RestAPIPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The ID of the REST API.
+	// ID of the REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

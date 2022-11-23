@@ -30,7 +30,7 @@ type AccessLogsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The publishing interval in minutes. Default: 60 minutes.
+	// The publishing interval in minutes. Valid values: 5 and 60. Default: 60
 	// +kubebuilder:validation:Optional
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 }
@@ -156,7 +156,7 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Required
 	HealthyThreshold *float64 `json:"healthyThreshold" tf:"healthy_threshold,omitempty"`
 
-	// The publishing interval in minutes. Default: 60 minutes.
+	// The publishing interval in minutes. Valid values: 5 and 60. Default: 60
 	// +kubebuilder:validation:Required
 	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 

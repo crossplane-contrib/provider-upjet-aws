@@ -105,6 +105,10 @@ type IndexFieldParameters struct {
 	// +kubebuilder:validation:Optional
 	Sort *bool `json:"sort,omitempty" tf:"sort,omitempty"`
 
+	// A comma-separated list of source fields to map to the field. Specifying a source field copies data from one field to another, enabling you to use the same source data in different ways by configuring different options for the fields.
+	// +kubebuilder:validation:Optional
+	SourceFields *string `json:"sourceFields,omitempty" tf:"source_fields,omitempty"`
+
 	// The field type. Valid values: date, date-array, double, double-array, int, int-array, literal, literal-array, text, text-array.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`

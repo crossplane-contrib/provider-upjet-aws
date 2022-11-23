@@ -156,6 +156,10 @@ spec:
                         fromPort:
                           description: First port in a range of open ports on an instance.
                           type: number
+                        ipv6Cidrs:
+                          items:
+                            type: string
+                          type: array
                         protocol:
                           description: IP protocol name. Valid values are tcp, all,
                             udp, and icmp.

@@ -13,7 +13,7 @@ spec:
         testing.upbound.io/example-name: test
     region: us-west-1
     targetRole: READ_ONLY
-    vpcSubnetIds: ${aws_subnet.test.*.id}
+    vpcSubnetIds: ${aws_subnet.test[*].id}
 
 ---
 

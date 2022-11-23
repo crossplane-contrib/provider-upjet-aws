@@ -35,6 +35,24 @@ type BatchTargetParameters struct {
 	JobName *string `json:"jobName" tf:"job_name,omitempty"`
 }
 
+type CapacityProviderStrategyObservation struct {
+}
+
+type CapacityProviderStrategyParameters struct {
+
+	// The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. If no value is specified, the default value of 0 is used.
+	// +kubebuilder:validation:Optional
+	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+
+	// Short name of the capacity provider.
+	// +kubebuilder:validation:Required
+	CapacityProvider *string `json:"capacityProvider" tf:"capacity_provider,omitempty"`
+
+	// The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied.
+	// +kubebuilder:validation:Optional
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
 type DeadLetterConfigObservation struct {
 }
 
@@ -50,6 +68,10 @@ type EcsTargetObservation struct {
 
 type EcsTargetParameters struct {
 
+	// The capacity provider strategy to use for the task. If a capacity_provider_strategy specified, the launch_type parameter must be omitted. If no capacity_provider_strategy or launch_type is specified, the default capacity provider strategy for the cluster is used. Can be one or more. See below.
+	// +kubebuilder:validation:Optional
+	CapacityProviderStrategy []CapacityProviderStrategyParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
+
 	// Specifies whether to enable Amazon ECS managed tags for the task.
 	// +kubebuilder:validation:Optional
 	EnableEcsManagedTags *bool `json:"enableEcsManagedTags,omitempty" tf:"enable_ecs_managed_tags,omitempty"`
@@ -62,7 +84,7 @@ type EcsTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
-	// Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. Valid values include: an empty string "" (to specify no launch type), EC2, or FARGATE.
+	// Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. Valid values include: EC2, EXTERNAL, or FARGATE.
 	// +kubebuilder:validation:Optional
 	LaunchType *string `json:"launchType,omitempty" tf:"launch_type,omitempty"`
 

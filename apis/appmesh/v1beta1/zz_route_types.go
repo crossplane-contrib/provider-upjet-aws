@@ -18,11 +18,11 @@ type ActionWeightedTargetObservation struct {
 
 type ActionWeightedTargetParameters struct {
 
-	// The virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
+	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	VirtualNode *string `json:"virtualNode" tf:"virtual_node,omitempty"`
 
-	// The relative weight of the weighted target. An integer between 0 and 100.
+	// Relative weight of the weighted target. An integer between 0 and 100.
 	// +kubebuilder:validation:Required
 	Weight *float64 `json:"weight" tf:"weight,omitempty"`
 }
@@ -32,7 +32,7 @@ type GRPCRouteActionObservation struct {
 
 type GRPCRouteActionParameters struct {
 
-	// The targets that traffic is routed to when a request matches the route.
+	// Targets that traffic is routed to when a request matches the route.
 	// You can specify one or more targets and their relative weights with which to distribute traffic.
 	// +kubebuilder:validation:Required
 	WeightedTarget []WeightedTargetParameters `json:"weightedTarget" tf:"weighted_target,omitempty"`
@@ -43,19 +43,19 @@ type GRPCRouteMatchObservation struct {
 
 type GRPCRouteMatchParameters struct {
 
-	// The data to match from the gRPC request.
+	// Data to match from the gRPC request.
 	// +kubebuilder:validation:Optional
 	Metadata []MetadataParameters `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The method name to match from the request. If you specify a name, you must also specify a service_name.
+	// Method name to match from the request. If you specify a name, you must also specify a service_name.
 	// +kubebuilder:validation:Optional
 	MethodName *string `json:"methodName,omitempty" tf:"method_name,omitempty"`
 
-	// The value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
+	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The fully qualified domain name for the service to match from the request.
+	// Fully qualified domain name for the service to match from the request.
 	// +kubebuilder:validation:Optional
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 }
@@ -65,7 +65,7 @@ type HTTPRouteActionWeightedTargetObservation struct {
 
 type HTTPRouteActionWeightedTargetParameters struct {
 
-	// The virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
+	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualNode
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
@@ -79,7 +79,7 @@ type HTTPRouteActionWeightedTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNodeSelector *v1.Selector `json:"virtualNodeSelector,omitempty" tf:"-"`
 
-	// The relative weight of the weighted target. An integer between 0 and 100.
+	// Relative weight of the weighted target. An integer between 0 and 100.
 	// +kubebuilder:validation:Required
 	Weight *float64 `json:"weight" tf:"weight,omitempty"`
 }
@@ -94,11 +94,11 @@ type HTTPRouteRetryPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
-	// The maximum number of retries.
+	// Maximum number of retries.
 	// +kubebuilder:validation:Required
 	MaxRetries *float64 `json:"maxRetries" tf:"max_retries,omitempty"`
 
-	// The per-retry timeout.
+	// Per-retry timeout.
 	// +kubebuilder:validation:Required
 	PerRetryTimeout []HTTPRouteRetryPolicyPerRetryTimeoutParameters `json:"perRetryTimeout" tf:"per_retry_timeout,omitempty"`
 
@@ -112,11 +112,11 @@ type HTTPRouteRetryPolicyPerRetryTimeoutObservation struct {
 
 type HTTPRouteRetryPolicyPerRetryTimeoutParameters struct {
 
-	// The unit of time. Valid values: ms, s.
+	// Unit of time. Valid values: ms, s.
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The number of time units. Minimum value of 0.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -126,11 +126,11 @@ type HTTPRouteTimeoutIdleObservation struct {
 
 type HTTPRouteTimeoutIdleParameters struct {
 
-	// The unit of time. Valid values: ms, s.
+	// Unit of time. Valid values: ms, s.
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The number of time units. Minimum value of 0.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -140,11 +140,11 @@ type HTTPRouteTimeoutObservation struct {
 
 type HTTPRouteTimeoutParameters struct {
 
-	// The idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
 	// +kubebuilder:validation:Optional
 	Idle []HTTPRouteTimeoutIdleParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// The per request timeout.
+	// Per request timeout.
 	// +kubebuilder:validation:Optional
 	PerRequest []HTTPRouteTimeoutPerRequestParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
@@ -154,11 +154,11 @@ type HTTPRouteTimeoutPerRequestObservation struct {
 
 type HTTPRouteTimeoutPerRequestParameters struct {
 
-	// The unit of time. Valid values: ms, s.
+	// Unit of time. Valid values: ms, s.
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The number of time units. Minimum value of 0.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -168,23 +168,23 @@ type HeaderMatchObservation struct {
 
 type HeaderMatchParameters struct {
 
-	// The value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
+	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// The value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
+	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The object that specifies the range of numbers that the value sent by the client must be included in.
+	// Object that specifies the range of numbers that the value sent by the client must be included in.
 	// +kubebuilder:validation:Optional
 	Range []MatchRangeParameters `json:"range,omitempty" tf:"range,omitempty"`
 
-	// The value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
-	// The value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
+	// Value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
@@ -194,11 +194,11 @@ type HeaderMatchRangeObservation struct {
 
 type HeaderMatchRangeParameters struct {
 
-	// The end of the range.
+	// End of the range.
 	// +kubebuilder:validation:Required
 	End *float64 `json:"end" tf:"end,omitempty"`
 
-	// (Requited) The start of the range.
+	// (Requited) Start of the range.
 	// +kubebuilder:validation:Required
 	Start *float64 `json:"start" tf:"start,omitempty"`
 }
@@ -212,11 +212,11 @@ type HeaderParameters struct {
 	// +kubebuilder:validation:Optional
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// The criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match.
 	// +kubebuilder:validation:Optional
 	Match []HeaderMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
-	// The name to use for the route. Must be between 1 and 255 characters in length.
+	// Name to use for the route. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -231,11 +231,11 @@ type Http2RouteRetryPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
-	// The maximum number of retries.
+	// Maximum number of retries.
 	// +kubebuilder:validation:Required
 	MaxRetries *float64 `json:"maxRetries" tf:"max_retries,omitempty"`
 
-	// The per-retry timeout.
+	// Per-retry timeout.
 	// +kubebuilder:validation:Required
 	PerRetryTimeout []RetryPolicyPerRetryTimeoutParameters `json:"perRetryTimeout" tf:"per_retry_timeout,omitempty"`
 
@@ -249,11 +249,11 @@ type Http2RouteTimeoutObservation struct {
 
 type Http2RouteTimeoutParameters struct {
 
-	// The idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
 	// +kubebuilder:validation:Optional
 	Idle []TimeoutIdleParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// The per request timeout.
+	// Per request timeout.
 	// +kubebuilder:validation:Optional
 	PerRequest []TimeoutPerRequestParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
@@ -263,11 +263,11 @@ type IdleObservation struct {
 
 type IdleParameters struct {
 
-	// The unit of time. Valid values: ms, s.
+	// Unit of time. Valid values: ms, s.
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The number of time units. Minimum value of 0.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -277,23 +277,23 @@ type MatchHeaderMatchObservation struct {
 
 type MatchHeaderMatchParameters struct {
 
-	// The value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
+	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// The value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
+	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The object that specifies the range of numbers that the value sent by the client must be included in.
+	// Object that specifies the range of numbers that the value sent by the client must be included in.
 	// +kubebuilder:validation:Optional
 	Range []HeaderMatchRangeParameters `json:"range,omitempty" tf:"range,omitempty"`
 
-	// The value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
-	// The value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
+	// Value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
@@ -307,11 +307,11 @@ type MatchHeaderParameters struct {
 	// +kubebuilder:validation:Optional
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// The criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match.
 	// +kubebuilder:validation:Optional
 	Match []MatchHeaderMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
-	// The name to use for the route. Must be between 1 and 255 characters in length.
+	// Name to use for the route. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -321,11 +321,11 @@ type MatchRangeObservation struct {
 
 type MatchRangeParameters struct {
 
-	// The end of the range.
+	// End of the range.
 	// +kubebuilder:validation:Required
 	End *float64 `json:"end" tf:"end,omitempty"`
 
-	// (Requited) The start of the range.
+	// (Requited) Start of the range.
 	// +kubebuilder:validation:Required
 	Start *float64 `json:"start" tf:"start,omitempty"`
 }
@@ -335,23 +335,23 @@ type MetadataMatchObservation struct {
 
 type MetadataMatchParameters struct {
 
-	// The value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
+	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// The value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
+	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The object that specifies the range of numbers that the value sent by the client must be included in.
+	// Object that specifies the range of numbers that the value sent by the client must be included in.
 	// +kubebuilder:validation:Optional
 	Range []RangeParameters `json:"range,omitempty" tf:"range,omitempty"`
 
-	// The value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
-	// The value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
+	// Value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
@@ -365,11 +365,11 @@ type MetadataParameters struct {
 	// +kubebuilder:validation:Optional
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// The criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match.
 	// +kubebuilder:validation:Optional
 	Match []MetadataMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
-	// The name to use for the route. Must be between 1 and 255 characters in length.
+	// Name to use for the route. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -379,11 +379,11 @@ type PerRequestObservation struct {
 
 type PerRequestParameters struct {
 
-	// The unit of time. Valid values: ms, s.
+	// Unit of time. Valid values: ms, s.
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The number of time units. Minimum value of 0.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -393,11 +393,11 @@ type PerRetryTimeoutObservation struct {
 
 type PerRetryTimeoutParameters struct {
 
-	// The unit of time. Valid values: ms, s.
+	// Unit of time. Valid values: ms, s.
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The number of time units. Minimum value of 0.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -407,11 +407,11 @@ type RangeObservation struct {
 
 type RangeParameters struct {
 
-	// The end of the range.
+	// End of the range.
 	// +kubebuilder:validation:Required
 	End *float64 `json:"end" tf:"end,omitempty"`
 
-	// (Requited) The start of the range.
+	// (Requited) Start of the range.
 	// +kubebuilder:validation:Required
 	Start *float64 `json:"start" tf:"start,omitempty"`
 }
@@ -431,11 +431,11 @@ type RetryPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
-	// The maximum number of retries.
+	// Maximum number of retries.
 	// +kubebuilder:validation:Required
 	MaxRetries *float64 `json:"maxRetries" tf:"max_retries,omitempty"`
 
-	// The per-retry timeout.
+	// Per-retry timeout.
 	// +kubebuilder:validation:Required
 	PerRetryTimeout []PerRetryTimeoutParameters `json:"perRetryTimeout" tf:"per_retry_timeout,omitempty"`
 
@@ -449,39 +449,39 @@ type RetryPolicyPerRetryTimeoutObservation struct {
 
 type RetryPolicyPerRetryTimeoutParameters struct {
 
-	// The unit of time. Valid values: ms, s.
+	// Unit of time. Valid values: ms, s.
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The number of time units. Minimum value of 0.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type RouteObservation struct {
 
-	// The ARN of the route.
+	// ARN of the route.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The creation date of the route.
+	// Creation date of the route.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
-	// The ID of the route.
+	// ID of the route.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The last update date of the route.
+	// Last update date of the route.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
-	// The resource owner's AWS account ID.
+	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type RouteParameters struct {
 
-	// The name of the service mesh in which to create the route. Must be between 1 and 255 characters in length.
+	// Name of the service mesh in which to create the route. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.Mesh
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -495,11 +495,11 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
 
-	// The AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
+	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	// +kubebuilder:validation:Optional
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
 
-	// The name to use for the route. Must be between 1 and 255 characters in length.
+	// Name to use for the route. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -508,7 +508,7 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The route specification to apply.
+	// Route specification to apply.
 	// +kubebuilder:validation:Required
 	Spec []RouteSpecParameters `json:"spec" tf:"spec,omitempty"`
 
@@ -516,7 +516,7 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The name of the virtual router in which to create the route. Must be between 1 and 255 characters in length.
+	// Name of the virtual router in which to create the route. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualRouter
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
@@ -536,24 +536,24 @@ type RouteSpecObservation struct {
 
 type RouteSpecParameters struct {
 
-	// The gRPC routing information for the route.
+	// GRPC routing information for the route.
 	// +kubebuilder:validation:Optional
 	GRPCRoute []SpecGRPCRouteParameters `json:"grpcRoute,omitempty" tf:"grpc_route,omitempty"`
 
-	// The HTTP routing information for the route.
+	// HTTP routing information for the route.
 	// +kubebuilder:validation:Optional
 	HTTPRoute []SpecHTTPRouteParameters `json:"httpRoute,omitempty" tf:"http_route,omitempty"`
 
-	// The HTTP/2 routing information for the route.
+	// HTTP/2 routing information for the route.
 	// +kubebuilder:validation:Optional
 	Http2Route []SpecHttp2RouteParameters `json:"http2Route,omitempty" tf:"http2_route,omitempty"`
 
-	// The priority for the route, between 0 and 1000.
+	// Priority for the route, between 0 and 1000.
 	// Routes are matched based on the specified value, where 0 is the highest priority.
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// The TCP routing information for the route.
+	// TCP routing information for the route.
 	// +kubebuilder:validation:Optional
 	TCPRoute []TCPRouteParameters `json:"tcpRoute,omitempty" tf:"tcp_route,omitempty"`
 }
@@ -563,19 +563,19 @@ type SpecGRPCRouteObservation struct {
 
 type SpecGRPCRouteParameters struct {
 
-	// The action to take if a match is determined.
+	// Action to take if a match is determined.
 	// +kubebuilder:validation:Required
 	Action []GRPCRouteActionParameters `json:"action" tf:"action,omitempty"`
 
-	// The criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match.
 	// +kubebuilder:validation:Optional
 	Match []GRPCRouteMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
-	// The retry policy.
+	// Retry policy.
 	// +kubebuilder:validation:Optional
 	RetryPolicy []RetryPolicyParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
-	// The types of timeouts.
+	// Types of timeouts.
 	// +kubebuilder:validation:Optional
 	Timeout []TimeoutParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
@@ -585,7 +585,7 @@ type SpecHTTPRouteActionObservation struct {
 
 type SpecHTTPRouteActionParameters struct {
 
-	// The targets that traffic is routed to when a request matches the route.
+	// Targets that traffic is routed to when a request matches the route.
 	// You can specify one or more targets and their relative weights with which to distribute traffic.
 	// +kubebuilder:validation:Required
 	WeightedTarget []HTTPRouteActionWeightedTargetParameters `json:"weightedTarget" tf:"weighted_target,omitempty"`
@@ -596,19 +596,19 @@ type SpecHTTPRouteMatchObservation struct {
 
 type SpecHTTPRouteMatchParameters struct {
 
-	// The client request headers to match on.
+	// Client request headers to match on.
 	// +kubebuilder:validation:Optional
 	Header []MatchHeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
 
-	// The client request header method to match on. Valid values: GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH.
+	// Client request header method to match on. Valid values: GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH.
 	// +kubebuilder:validation:Optional
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// The value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
+	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
 
-	// The client request header scheme to match on. Valid values: http, https.
+	// Client request header scheme to match on. Valid values: http, https.
 	// +kubebuilder:validation:Optional
 	Scheme *string `json:"scheme,omitempty" tf:"scheme,omitempty"`
 }
@@ -618,19 +618,19 @@ type SpecHTTPRouteObservation struct {
 
 type SpecHTTPRouteParameters struct {
 
-	// The action to take if a match is determined.
+	// Action to take if a match is determined.
 	// +kubebuilder:validation:Required
 	Action []SpecHTTPRouteActionParameters `json:"action" tf:"action,omitempty"`
 
-	// The criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match.
 	// +kubebuilder:validation:Required
 	Match []SpecHTTPRouteMatchParameters `json:"match" tf:"match,omitempty"`
 
-	// The retry policy.
+	// Retry policy.
 	// +kubebuilder:validation:Optional
 	RetryPolicy []HTTPRouteRetryPolicyParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
-	// The types of timeouts.
+	// Types of timeouts.
 	// +kubebuilder:validation:Optional
 	Timeout []HTTPRouteTimeoutParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
@@ -640,7 +640,7 @@ type SpecHttp2RouteActionObservation struct {
 
 type SpecHttp2RouteActionParameters struct {
 
-	// The targets that traffic is routed to when a request matches the route.
+	// Targets that traffic is routed to when a request matches the route.
 	// You can specify one or more targets and their relative weights with which to distribute traffic.
 	// +kubebuilder:validation:Required
 	WeightedTarget []ActionWeightedTargetParameters `json:"weightedTarget" tf:"weighted_target,omitempty"`
@@ -651,19 +651,19 @@ type SpecHttp2RouteMatchObservation struct {
 
 type SpecHttp2RouteMatchParameters struct {
 
-	// The client request headers to match on.
+	// Client request headers to match on.
 	// +kubebuilder:validation:Optional
 	Header []HeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
 
-	// The client request header method to match on. Valid values: GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH.
+	// Client request header method to match on. Valid values: GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH.
 	// +kubebuilder:validation:Optional
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// The value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
+	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
 
-	// The client request header scheme to match on. Valid values: http, https.
+	// Client request header scheme to match on. Valid values: http, https.
 	// +kubebuilder:validation:Optional
 	Scheme *string `json:"scheme,omitempty" tf:"scheme,omitempty"`
 }
@@ -673,19 +673,19 @@ type SpecHttp2RouteObservation struct {
 
 type SpecHttp2RouteParameters struct {
 
-	// The action to take if a match is determined.
+	// Action to take if a match is determined.
 	// +kubebuilder:validation:Required
 	Action []SpecHttp2RouteActionParameters `json:"action" tf:"action,omitempty"`
 
-	// The criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match.
 	// +kubebuilder:validation:Required
 	Match []SpecHttp2RouteMatchParameters `json:"match" tf:"match,omitempty"`
 
-	// The retry policy.
+	// Retry policy.
 	// +kubebuilder:validation:Optional
 	RetryPolicy []Http2RouteRetryPolicyParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
-	// The types of timeouts.
+	// Types of timeouts.
 	// +kubebuilder:validation:Optional
 	Timeout []Http2RouteTimeoutParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
@@ -695,7 +695,7 @@ type TCPRouteActionObservation struct {
 
 type TCPRouteActionParameters struct {
 
-	// The targets that traffic is routed to when a request matches the route.
+	// Targets that traffic is routed to when a request matches the route.
 	// You can specify one or more targets and their relative weights with which to distribute traffic.
 	// +kubebuilder:validation:Required
 	WeightedTarget []TCPRouteActionWeightedTargetParameters `json:"weightedTarget" tf:"weighted_target,omitempty"`
@@ -706,7 +706,7 @@ type TCPRouteActionWeightedTargetObservation struct {
 
 type TCPRouteActionWeightedTargetParameters struct {
 
-	// The virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
+	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualNode
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
@@ -720,7 +720,7 @@ type TCPRouteActionWeightedTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNodeSelector *v1.Selector `json:"virtualNodeSelector,omitempty" tf:"-"`
 
-	// The relative weight of the weighted target. An integer between 0 and 100.
+	// Relative weight of the weighted target. An integer between 0 and 100.
 	// +kubebuilder:validation:Required
 	Weight *float64 `json:"weight" tf:"weight,omitempty"`
 }
@@ -730,11 +730,11 @@ type TCPRouteObservation struct {
 
 type TCPRouteParameters struct {
 
-	// The action to take if a match is determined.
+	// Action to take if a match is determined.
 	// +kubebuilder:validation:Required
 	Action []TCPRouteActionParameters `json:"action" tf:"action,omitempty"`
 
-	// The types of timeouts.
+	// Types of timeouts.
 	// +kubebuilder:validation:Optional
 	Timeout []TCPRouteTimeoutParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
@@ -744,11 +744,11 @@ type TCPRouteTimeoutIdleObservation struct {
 
 type TCPRouteTimeoutIdleParameters struct {
 
-	// The unit of time. Valid values: ms, s.
+	// Unit of time. Valid values: ms, s.
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The number of time units. Minimum value of 0.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -758,7 +758,7 @@ type TCPRouteTimeoutObservation struct {
 
 type TCPRouteTimeoutParameters struct {
 
-	// The idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
 	// +kubebuilder:validation:Optional
 	Idle []TCPRouteTimeoutIdleParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 }
@@ -768,11 +768,11 @@ type TimeoutIdleObservation struct {
 
 type TimeoutIdleParameters struct {
 
-	// The unit of time. Valid values: ms, s.
+	// Unit of time. Valid values: ms, s.
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The number of time units. Minimum value of 0.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -782,11 +782,11 @@ type TimeoutObservation struct {
 
 type TimeoutParameters struct {
 
-	// The idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
 	// +kubebuilder:validation:Optional
 	Idle []IdleParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// The per request timeout.
+	// Per request timeout.
 	// +kubebuilder:validation:Optional
 	PerRequest []PerRequestParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
@@ -796,11 +796,11 @@ type TimeoutPerRequestObservation struct {
 
 type TimeoutPerRequestParameters struct {
 
-	// The unit of time. Valid values: ms, s.
+	// Unit of time. Valid values: ms, s.
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The number of time units. Minimum value of 0.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -810,11 +810,11 @@ type WeightedTargetObservation struct {
 
 type WeightedTargetParameters struct {
 
-	// The virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
+	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	VirtualNode *string `json:"virtualNode" tf:"virtual_node,omitempty"`
 
-	// The relative weight of the weighted target. An integer between 0 and 100.
+	// Relative weight of the weighted target. An integer between 0 and 100.
 	// +kubebuilder:validation:Required
 	Weight *float64 `json:"weight" tf:"weight,omitempty"`
 }

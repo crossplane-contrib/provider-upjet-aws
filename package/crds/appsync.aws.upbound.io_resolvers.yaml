@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiId:
-                    description: The API ID for the GraphQL API.
+                    description: API ID for the GraphQL API.
                     type: string
                   apiIdRef:
                     description: Reference to a GraphQLAPI in appsync to populate
@@ -143,21 +143,21 @@ spec:
                         type: object
                     type: object
                   cachingConfig:
-                    description: The CachingConfig.
+                    description: CachingConfig.
                     items:
                       properties:
                         cachingKeys:
-                          description: The list of caching key.
+                          description: List of caching key.
                           items:
                             type: string
                           type: array
                         ttl:
-                          description: The TTL in seconds.
+                          description: TTL in seconds.
                           type: number
                       type: object
                     type: array
                   dataSource:
-                    description: The DataSource name.
+                    description: Data source name.
                     type: string
                   dataSourceRef:
                     description: Reference to a Datasource in appsync to populate
@@ -235,22 +235,22 @@ spec:
                         type: object
                     type: object
                   field:
-                    description: The field name from the schema defined in the GraphQL
+                    description: Field name from the schema defined in the GraphQL
                       API.
                     type: string
                   kind:
-                    description: The resolver type. Valid values are UNIT and PIPELINE.
+                    description: Resolver type. Valid values are UNIT and PIPELINE.
                     type: string
                   maxBatchSize:
-                    description: The maximum batching size for a resolver. Valid values
+                    description: Maximum batching size for a resolver. Valid values
                       are between 0 and 2000.
                     type: number
                   pipelineConfig:
-                    description: The PipelineConfig.
+                    description: PipelineConfig.
                     items:
                       properties:
                         functions:
-                          description: The list of Function ID.
+                          description: List of Function ID.
                           items:
                             type: string
                           type: array
@@ -261,14 +261,14 @@ spec:
                       be created in.
                     type: string
                   requestTemplate:
-                    description: The request mapping template for UNIT resolver or
-                      'before mapping template' for PIPELINE resolver. Required for
-                      non-Lambda resolvers.
+                    description: Request mapping template for UNIT resolver or 'before
+                      mapping template' for PIPELINE resolver. Required for non-Lambda
+                      resolvers.
                     type: string
                   responseTemplate:
-                    description: The response mapping template for UNIT resolver or
-                      'after mapping template' for PIPELINE resolver. Required for
-                      non-Lambda resolvers.
+                    description: Response mapping template for UNIT resolver or 'after
+                      mapping template' for PIPELINE resolver. Required for non-Lambda
+                      resolvers.
                     type: string
                   syncConfig:
                     description: Describes a Sync configuration for a resolver. See
@@ -276,30 +276,30 @@ spec:
                     items:
                       properties:
                         conflictDetection:
-                          description: The Conflict Detection strategy to use. Valid
-                            values are NONE and VERSION.
+                          description: Conflict Detection strategy to use. Valid values
+                            are NONE and VERSION.
                           type: string
                         conflictHandler:
-                          description: The Conflict Resolution strategy to perform
-                            in the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY,
+                          description: Conflict Resolution strategy to perform in
+                            the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY,
                             AUTOMERGE, and LAMBDA.
                           type: string
                         lambdaConflictHandlerConfig:
-                          description: The Lambda Conflict Handler Config when configuring
+                          description: Lambda Conflict Handler Config when configuring
                             LAMBDA as the Conflict Handler. See Lambda Conflict Handler
                             Config.
                           items:
                             properties:
                               lambdaConflictHandlerArn:
-                                description: The Amazon Resource Name (ARN) for the
-                                  Lambda function to use as the Conflict Handler.
+                                description: ARN for the Lambda function to use as
+                                  the Conflict Handler.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   type:
-                    description: The type name from the schema defined in the GraphQL
+                    description: Type name from the schema defined in the GraphQL
                       API.
                     type: string
                 required:
@@ -484,7 +484,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN
+                    description: ARN
                     type: string
                   id:
                     type: string

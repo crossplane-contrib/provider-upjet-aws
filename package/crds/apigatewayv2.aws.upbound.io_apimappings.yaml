@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiId:
-                    description: The API identifier.
+                    description: API identifier.
                     type: string
                   apiIdRef:
                     description: Reference to a API to populate apiId.
@@ -144,7 +144,7 @@ spec:
                     description: The API mapping key.
                     type: string
                   domainName:
-                    description: The domain name. Use the aws_apigatewayv2_domain_name
+                    description: Domain name. Use the aws_apigatewayv2_domain_name
                       resource to configure a domain name.
                     type: string
                   domainNameRef:
@@ -225,7 +225,7 @@ spec:
                       be created in.
                     type: string
                   stage:
-                    description: The API stage. Use the aws_apigatewayv2_stage resource
+                    description: API stage. Use the aws_apigatewayv2_stage resource
                       to configure an API stage.
                     type: string
                   stageRef:
@@ -481,7 +481,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The API mapping identifier.
+                    description: API mapping identifier.
                     type: string
                 type: object
               conditions:

@@ -19,7 +19,7 @@ type LifecycleHookObservation struct {
 
 type LifecycleHookParameters struct {
 
-	// The name of the Auto Scaling group to which you want to assign the lifecycle hook
+	// Name of the Auto Scaling group to which you want to assign the lifecycle hook
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
@@ -40,7 +40,7 @@ type LifecycleHookParameters struct {
 	// +kubebuilder:validation:Optional
 	HeartbeatTimeout *float64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
 
-	// The instance state to which you want to attach the lifecycle hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
+	// Instance state to which you want to attach the lifecycle hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
 	// +kubebuilder:validation:Required
 	LifecycleTransition *string `json:"lifecycleTransition" tf:"lifecycle_transition,omitempty"`
 
@@ -48,7 +48,7 @@ type LifecycleHookParameters struct {
 	// +kubebuilder:validation:Optional
 	NotificationMetadata *string `json:"notificationMetadata,omitempty" tf:"notification_metadata,omitempty"`
 
-	// The ARN of the notification target that Auto Scaling will use to notify you when an instance is in the transition state for the lifecycle hook. This ARN target can be either an SQS queue or an SNS topic.
+	// ARN of the notification target that Auto Scaling will use to notify you when an instance is in the transition state for the lifecycle hook. This ARN target can be either an SQS queue or an SNS topic.
 	// +kubebuilder:validation:Optional
 	NotificationTargetArn *string `json:"notificationTargetArn,omitempty" tf:"notification_target_arn,omitempty"`
 
@@ -57,7 +57,7 @@ type LifecycleHookParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target.
+	// ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

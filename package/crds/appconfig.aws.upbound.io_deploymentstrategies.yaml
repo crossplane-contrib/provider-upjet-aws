@@ -69,27 +69,26 @@ spec:
                       value of 0, maximum value of 1440.
                     type: number
                   description:
-                    description: A description of the deployment strategy. Can be
-                      at most 1024 characters.
+                    description: Description of the deployment strategy. Can be at
+                      most 1024 characters.
                     type: string
                   finalBakeTimeInMinutes:
-                    description: The amount of time AWS AppConfig monitors for alarms
+                    description: Amount of time AWS AppConfig monitors for alarms
                       before considering the deployment to be complete and no longer
                       eligible for automatic roll back. Minimum value of 0, maximum
                       value of 1440.
                     type: number
                   growthFactor:
-                    description: The percentage of targets to receive a deployed configuration
+                    description: Percentage of targets to receive a deployed configuration
                       during each interval. Minimum value of 1.0, maximum value of
                       100.0.
                     type: number
                   growthType:
-                    description: 'The algorithm used to define how percentage grows
-                      over time. Valid value: LINEAR and EXPONENTIAL. Defaults to
-                      LINEAR.'
+                    description: 'Algorithm used to define how percentage grows over
+                      time. Valid value: LINEAR and EXPONENTIAL. Defaults to LINEAR.'
                     type: string
                   name:
-                    description: A name for the deployment strategy. Must be between
+                    description: Name for the deployment strategy. Must be between
                       1 and 64 characters in length.
                     type: string
                   region:
@@ -289,18 +288,16 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the AppConfig Deployment
-                      Strategy.
+                    description: ARN of the AppConfig Deployment Strategy.
                     type: string
                   id:
-                    description: The AppConfig deployment strategy ID.
+                    description: AppConfig deployment strategy ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

@@ -15,37 +15,37 @@ import (
 
 type AppObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Amplify app.
+	// ARN of the Amplify app.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The default domain for the Amplify app.
+	// Default domain for the Amplify app.
 	DefaultDomain *string `json:"defaultDomain,omitempty" tf:"default_domain,omitempty"`
 
-	// The unique ID of the Amplify app.
+	// Unique ID of the Amplify app.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Describes the information about a production branch for an Amplify app. A production_branch block is documented below.
 	ProductionBranch []ProductionBranchObservation `json:"productionBranch,omitempty" tf:"production_branch,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type AppParameters struct {
 
-	// The personal access token for a third-party source control system for an Amplify app. The personal access token is used to create a webhook and a read-only deploy key. The token is not stored.
+	// Personal access token for a third-party source control system for an Amplify app. The personal access token is used to create a webhook and a read-only deploy key. The token is not stored.
 	// +kubebuilder:validation:Optional
 	AccessTokenSecretRef *v1.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
 
-	// The automated branch creation configuration for an Amplify app. An auto_branch_creation_config block is documented below.
+	// Automated branch creation configuration for an Amplify app. An auto_branch_creation_config block is documented below.
 	// +kubebuilder:validation:Optional
 	AutoBranchCreationConfig []AutoBranchCreationConfigParameters `json:"autoBranchCreationConfig,omitempty" tf:"auto_branch_creation_config,omitempty"`
 
-	// The automated branch creation glob patterns for an Amplify app.
+	// Automated branch creation glob patterns for an Amplify app.
 	// +kubebuilder:validation:Optional
 	AutoBranchCreationPatterns []*string `json:"autoBranchCreationPatterns,omitempty" tf:"auto_branch_creation_patterns,omitempty"`
 
-	// The credentials for basic authorization for an Amplify app.
+	// Credentials for basic authorization for an Amplify app.
 	// +kubebuilder:validation:Optional
 	BasicAuthCredentialsSecretRef *v1.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
 
@@ -53,11 +53,11 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
 
-	// The custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
+	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
 	// +kubebuilder:validation:Optional
 	CustomRule []CustomRuleParameters `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
 
-	// The description for an Amplify app.
+	// Description for an Amplify app.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -77,11 +77,11 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableBranchAutoDeletion *bool `json:"enableBranchAutoDeletion,omitempty" tf:"enable_branch_auto_deletion,omitempty"`
 
-	// The environment variables map for an Amplify app.
+	// Environment variables map for an Amplify app.
 	// +kubebuilder:validation:Optional
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
-	// The AWS Identity and Access Management (IAM) service role for an Amplify app.
+	// AWS Identity and Access Management (IAM) service role for an Amplify app.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -95,15 +95,15 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMServiceRoleArnSelector *v1.Selector `json:"iamServiceRoleArnSelector,omitempty" tf:"-"`
 
-	// The name for an Amplify app.
+	// Name for an Amplify app.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored.
+	// OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored.
 	// +kubebuilder:validation:Optional
 	OauthTokenSecretRef *v1.SecretKeySelector `json:"oauthTokenSecretRef,omitempty" tf:"-"`
 
-	// The platform or framework for an Amplify app. Valid values: WEB.
+	// Platform or framework for an Amplify app. Valid values: WEB, WEB_COMPUTE. Default value: WEB.
 	// +kubebuilder:validation:Optional
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
@@ -112,7 +112,7 @@ type AppParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The repository for an Amplify app.
+	// Repository for an Amplify app.
 	// +kubebuilder:validation:Optional
 	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
 
@@ -126,11 +126,11 @@ type AutoBranchCreationConfigObservation struct {
 
 type AutoBranchCreationConfigParameters struct {
 
-	// The basic authorization credentials for the autocreated branch.
+	// Basic authorization credentials for the autocreated branch.
 	// +kubebuilder:validation:Optional
 	BasicAuthCredentialsSecretRef *v1.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
 
-	// The build specification (build spec) for the autocreated branch.
+	// Build specification (build spec) for the autocreated branch.
 	// +kubebuilder:validation:Optional
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
 
@@ -150,15 +150,15 @@ type AutoBranchCreationConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	EnablePullRequestPreview *bool `json:"enablePullRequestPreview,omitempty" tf:"enable_pull_request_preview,omitempty"`
 
-	// The environment variables for the autocreated branch.
+	// Environment variables for the autocreated branch.
 	// +kubebuilder:validation:Optional
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
-	// The framework for the autocreated branch.
+	// Framework for the autocreated branch.
 	// +kubebuilder:validation:Optional
 	Framework *string `json:"framework,omitempty" tf:"framework,omitempty"`
 
-	// The Amplify environment name for the pull request.
+	// Amplify environment name for the pull request.
 	// +kubebuilder:validation:Optional
 	PullRequestEnvironmentName *string `json:"pullRequestEnvironmentName,omitempty" tf:"pull_request_environment_name,omitempty"`
 
@@ -172,35 +172,35 @@ type CustomRuleObservation struct {
 
 type CustomRuleParameters struct {
 
-	// The condition for a URL rewrite or redirect rule, such as a country code.
+	// Condition for a URL rewrite or redirect rule, such as a country code.
 	// +kubebuilder:validation:Optional
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// The source pattern for a URL rewrite or redirect rule.
+	// Source pattern for a URL rewrite or redirect rule.
 	// +kubebuilder:validation:Required
 	Source *string `json:"source" tf:"source,omitempty"`
 
-	// The status code for a URL rewrite or redirect rule. Valid values: 200, 301, 302, 404, 404-200.
+	// Status code for a URL rewrite or redirect rule. Valid values: 200, 301, 302, 404, 404-200.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The target pattern for a URL rewrite or redirect rule.
+	// Target pattern for a URL rewrite or redirect rule.
 	// +kubebuilder:validation:Required
 	Target *string `json:"target" tf:"target,omitempty"`
 }
 
 type ProductionBranchObservation struct {
 
-	// The branch name for the production branch.
+	// Branch name for the production branch.
 	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
 
-	// The last deploy time of the production branch.
+	// Last deploy time of the production branch.
 	LastDeployTime *string `json:"lastDeployTime,omitempty" tf:"last_deploy_time,omitempty"`
 
-	// The status of the production branch.
+	// Status of the production branch.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The thumbnail URL for the production branch.
+	// Thumbnail URL for the production branch.
 	ThumbnailURL *string `json:"thumbnailUrl,omitempty" tf:"thumbnail_url,omitempty"`
 }
 

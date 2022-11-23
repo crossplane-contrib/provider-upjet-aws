@@ -65,8 +65,7 @@ spec:
               forProvider:
                 properties:
                   autoscalingGroupName:
-                    description: The name or Amazon Resource Name (ARN) of the Auto
-                      Scaling group.
+                    description: Name or ARN of the Auto Scaling group.
                     type: string
                   autoscalingGroupNameRef:
                     description: Reference to a AutoscalingGroup in autoscaling to
@@ -144,37 +143,37 @@ spec:
                         type: object
                     type: object
                   desiredCapacity:
-                    description: The number of EC2 instances that should be running
-                      in the group. Default 0.  Set to -1 if you don't want to change
+                    description: Number of EC2 instances that should be running in
+                      the group. Default 0.  Set to -1 if you don't want to change
                       the desired capacity at the scheduled time.
                     type: number
                   endTime:
-                    description: The time for this action to end, in "YYYY-MM-DDThh:mm:ssZ"
+                    description: Time for this action to end, in "YYYY-MM-DDThh:mm:ssZ"
                       format in UTC/GMT only (for example, 2014-06-01T00:00:00Z ).
                       If you try to schedule your action in the past, Auto Scaling
                       returns an error message.
                     type: string
                   maxSize:
-                    description: The maximum size for the Auto Scaling group. Default
+                    description: Maximum size for the Auto Scaling group. Default
                       0. Set to -1 if you don't want to change the maximum size at
                       the scheduled time.
                     type: number
                   minSize:
-                    description: The minimum size for the Auto Scaling group. Default
+                    description: Minimum size for the Auto Scaling group. Default
                       0. Set to -1 if you don't want to change the minimum size at
                       the scheduled time.
                     type: number
                   recurrence:
-                    description: The time when recurring future actions will start.
-                      Start time is specified by the user following the Unix cron
-                      syntax format.
+                    description: Time when recurring future actions will start. Start
+                      time is specified by the user following the Unix cron syntax
+                      format.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   startTime:
-                    description: The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ"
+                    description: Time for this action to start, in "YYYY-MM-DDThh:mm:ssZ"
                       format in UTC/GMT only (for example, 2014-06-01T00:00:00Z ).
                       If you try to schedule your action in the past, Auto Scaling
                       returns an error message.
@@ -364,7 +363,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN assigned by AWS to the autoscaling schedule.
+                    description: ARN assigned by AWS to the autoscaling schedule.
                     type: string
                   id:
                     type: string

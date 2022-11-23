@@ -99,8 +99,9 @@ spec:
                             or EXACTLY. See docs for all supported values.
                           type: string
                         targetString:
-                          description: The value that you want to search forE.g.,
-                            HEADER, METHOD or BODY. See docs for all supported values.
+                          description: The value that you want to search for within
+                            the field specified by field_to_match, e.g., badrefer1.
+                            See docs for all supported values.
                           type: string
                         textTransformation:
                           description: Text transformations used to eliminate unusual

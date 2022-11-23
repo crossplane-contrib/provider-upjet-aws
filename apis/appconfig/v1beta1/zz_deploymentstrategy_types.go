@@ -15,13 +15,13 @@ import (
 
 type DeploymentStrategyObservation struct {
 
-	// The Amazon Resource Name (ARN) of the AppConfig Deployment Strategy.
+	// ARN of the AppConfig Deployment Strategy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The AppConfig deployment strategy ID.
+	// AppConfig deployment strategy ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -31,23 +31,23 @@ type DeploymentStrategyParameters struct {
 	// +kubebuilder:validation:Required
 	DeploymentDurationInMinutes *float64 `json:"deploymentDurationInMinutes" tf:"deployment_duration_in_minutes,omitempty"`
 
-	// A description of the deployment strategy. Can be at most 1024 characters.
+	// Description of the deployment strategy. Can be at most 1024 characters.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The amount of time AWS AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back. Minimum value of 0, maximum value of 1440.
+	// Amount of time AWS AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back. Minimum value of 0, maximum value of 1440.
 	// +kubebuilder:validation:Optional
 	FinalBakeTimeInMinutes *float64 `json:"finalBakeTimeInMinutes,omitempty" tf:"final_bake_time_in_minutes,omitempty"`
 
-	// The percentage of targets to receive a deployed configuration during each interval. Minimum value of 1.0, maximum value of 100.0.
+	// Percentage of targets to receive a deployed configuration during each interval. Minimum value of 1.0, maximum value of 100.0.
 	// +kubebuilder:validation:Required
 	GrowthFactor *float64 `json:"growthFactor" tf:"growth_factor,omitempty"`
 
-	// The algorithm used to define how percentage grows over time. Valid value: LINEAR and EXPONENTIAL. Defaults to LINEAR.
+	// Algorithm used to define how percentage grows over time. Valid value: LINEAR and EXPONENTIAL. Defaults to LINEAR.
 	// +kubebuilder:validation:Optional
 	GrowthType *string `json:"growthType,omitempty" tf:"growth_type,omitempty"`
 
-	// A name for the deployment strategy. Must be between 1 and 64 characters in length.
+	// Name for the deployment strategy. Must be between 1 and 64 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

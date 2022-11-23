@@ -9,6 +9,7 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1beta1 "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -46,6 +47,24 @@ func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.EventSubscription); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventSubscription[i3].TopicArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.EventSubscription[i3].TopicArnRef,
+			Selector:     mg.Spec.ForProvider.EventSubscription[i3].TopicArnSelector,
+			To: reference.To{
+				List:    &v1beta1.TopicList{},
+				Managed: &v1beta1.Topic{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.EventSubscription[i3].TopicArn")
+		}
+		mg.Spec.ForProvider.EventSubscription[i3].TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.EventSubscription[i3].TopicArnRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetArn),
 		Extract:      resource.ExtractParamPath("arn", true),

@@ -9,7 +9,14 @@ metadata:
 spec:
   forProvider:
     datasources:
-    - s3Logs:
+    - kubernetes:
+      - auditLogs:
+        - enable: false
+      malwareProtection:
+      - scanEc2InstanceWithFindings:
+        - ebsVolumes:
+          - enable: true
+      s3Logs:
       - enable: true
     enable: true
     region: us-west-1

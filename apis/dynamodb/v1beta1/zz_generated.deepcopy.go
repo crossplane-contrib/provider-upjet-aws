@@ -1226,6 +1226,16 @@ func (in *TableReplicaParameters) DeepCopyInto(out *TableReplicaParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PointInTimeRecovery != nil {
+		in, out := &in.PointInTimeRecovery, &out.PointInTimeRecovery
+		*out = new(bool)
+		**out = **in
+	}
+	if in.PropagateTags != nil {
+		in, out := &in.PropagateTags, &out.PropagateTags
+		*out = new(bool)
+		**out = **in
+	}
 	if in.RegionName != nil {
 		in, out := &in.RegionName, &out.RegionName
 		*out = new(string)

@@ -21,7 +21,7 @@ type SnapshotCreateVolumePermissionObservation struct {
 
 type SnapshotCreateVolumePermissionParameters struct {
 
-	// An AWS Account ID to add create volume permissions
+	// An AWS Account ID to add create volume permissions. The AWS Account cannot be the snapshot's owner
 	// +kubebuilder:validation:Required
 	AccountID *string `json:"accountId" tf:"account_id,omitempty"`
 

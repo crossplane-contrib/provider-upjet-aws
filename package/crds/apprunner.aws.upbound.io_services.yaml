@@ -79,7 +79,7 @@ spec:
                     items:
                       properties:
                         kmsKey:
-                          description: The ARN of the KMS key used for encryption.
+                          description: ARN of the KMS key used for encryption.
                           type: string
                       required:
                       - kmsKey
@@ -92,36 +92,34 @@ spec:
                     items:
                       properties:
                         healthyThreshold:
-                          description: The number of consecutive checks that must
-                            succeed before App Runner decides that the service is
-                            healthy. Defaults to 1. Minimum value of 1. Maximum value
-                            of 20.
+                          description: Number of consecutive checks that must succeed
+                            before App Runner decides that the service is healthy.
+                            Defaults to 1. Minimum value of 1. Maximum value of 20.
                           type: number
                         interval:
-                          description: The time interval, in seconds, between health
-                            checks. Defaults to 5. Minimum value of 1. Maximum value
-                            of 20.
+                          description: Time interval, in seconds, between health checks.
+                            Defaults to 5. Minimum value of 1. Maximum value of 20.
                           type: number
                         path:
-                          description: The URL to send requests to for health checks.
+                          description: URL to send requests to for health checks.
                             Defaults to /. Minimum length of 0. Maximum length of
                             51200.
                           type: string
                         protocol:
-                          description: 'The IP protocol that App Runner uses to perform
+                          description: 'IP protocol that App Runner uses to perform
                             health checks for your service. Valid values: TCP, HTTP.
                             Defaults to TCP. If you set protocol to HTTP, App Runner
                             sends health check requests to the HTTP path specified
                             by path.'
                           type: string
                         timeout:
-                          description: The time, in seconds, to wait for a health
-                            check response before deciding it failed. Defaults to
-                            2. Minimum value of  1. Maximum value of 20.
+                          description: Time, in seconds, to wait for a health check
+                            response before deciding it failed. Defaults to 2. Minimum
+                            value of  1. Maximum value of 20.
                           type: number
                         unhealthyThreshold:
-                          description: The number of consecutive checks that must
-                            fail before App Runner decides that the service is unhealthy.
+                          description: Number of consecutive checks that must fail
+                            before App Runner decides that the service is unhealthy.
                             Defaults to 5. Minimum value of  1. Maximum value of 20.
                           type: number
                       type: object
@@ -133,44 +131,44 @@ spec:
                     items:
                       properties:
                         cpu:
-                          description: 'The number of CPU units reserved for each
-                            instance of your App Runner service represented as a String.
-                            Defaults to 1024. Valid values: 1024|2048|(1|2) vCPU.'
+                          description: 'Number of CPU units reserved for each instance
+                            of your App Runner service represented as a String. Defaults
+                            to 1024. Valid values: 1024|2048|(1|2) vCPU.'
                           type: string
                         instanceRoleArn:
-                          description: The Amazon Resource Name (ARN) of an IAM role
-                            that provides permissions to your App Runner service.
-                            These are permissions that your code needs when it calls
-                            any AWS APIs.
+                          description: ARN of an IAM role that provides permissions
+                            to your App Runner service. These are permissions that
+                            your code needs when it calls any AWS APIs.
                           type: string
                         memory:
-                          description: 'The amount of memory, in MB or GB, reserved
-                            for each instance of your App Runner service. Defaults
-                            to 2048. Valid values: 2048|3072|4096|(2|3|4) GB.'
+                          description: 'Amount of memory, in MB or GB, reserved for
+                            each instance of your App Runner service. Defaults to
+                            2048. Valid values: 2048|3072|4096|(2|3|4) GB.'
                           type: string
                       type: object
                     type: array
                   networkConfiguration:
                     description: Configuration settings related to network traffic
-                      of the web application that the App Runner service runs.
+                      of the web application that the App Runner service runs. See
+                      Network Configuration below for more details.
                     items:
                       properties:
                         egressConfiguration:
                           description: Network configuration settings for outbound
-                            message traffic.
+                            message traffic. See Egress Configuration below for more
+                            details.
                           items:
                             properties:
                               egressType:
-                                description: The type of egress configuration.Set
-                                  to DEFAULT for access to resources hosted on public
-                                  networks.Set to VPC to associate your service to
-                                  a custom VPC specified by VpcConnectorArn.
+                                description: Type of egress configuration.Set to DEFAULT
+                                  for access to resources hosted on public networks.Set
+                                  to VPC to associate your service to a custom VPC
+                                  specified by VpcConnectorArn.
                                 type: string
                               vpcConnectorArn:
-                                description: The Amazon Resource Name (ARN) of the
-                                  App Runner VPC connector that you want to associate
-                                  with your App Runner service. Only valid when EgressType
-                                  = VPC.
+                                description: ARN of the App Runner VPC connector that
+                                  you want to associate with your App Runner service.
+                                  Only valid when EgressType = VPC.
                                 type: string
                               vpcConnectorArnRef:
                                 description: Reference to a VPCConnector in apprunner
@@ -254,6 +252,39 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        ingressConfiguration:
+                          description: Network configuration settings for inbound
+                            network traffic. See Ingress Configuration below for more
+                            details.
+                          items:
+                            properties:
+                              isPubliclyAccessible:
+                                description: Specifies whether your App Runner service
+                                  is publicly accessible. To make the service publicly
+                                  accessible set it to True. To make the service privately
+                                  accessible, from only within an Amazon VPC set it
+                                  to False.
+                                type: boolean
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  observabilityConfiguration:
+                    description: The observability configuration of your service.
+                      See Observability Configuration below for more details.
+                    items:
+                      properties:
+                        observabilityConfigurationArn:
+                          description: ARN of the observability configuration that
+                            is associated with the service.
+                          type: string
+                        observabilityEnabled:
+                          description: When true, an observability configuration resource
+                            is associated with the service.
+                          type: boolean
+                      required:
+                      - observabilityConfigurationArn
+                      - observabilityEnabled
                       type: object
                     type: array
                   region:
@@ -395,19 +426,21 @@ spec:
                                       items:
                                         properties:
                                           buildCommand:
-                                            description: The command App Runner runs
-                                              to build your application.
+                                            description: Command App Runner runs to
+                                              build your application.
                                             type: string
                                           port:
-                                            description: The port that your application
+                                            description: Port that your application
                                               listens to in the container. Defaults
                                               to "8080".
                                             type: string
                                           runtime:
-                                            description: 'A runtime environment type
+                                            description: 'Runtime environment type
                                               for building and running an App Runner
                                               service. Represents a programming language
-                                              runtime. Valid values: PYTHON_3, NODEJS_12.'
+                                              runtime. Valid values: PYTHON_3, NODEJS_12,
+                                              NODEJS_14, NODEJS_16, CORRETTO_8, CORRETTO_11,
+                                              GO_1, DOTNET_6, PHP_81, RUBY_31.'
                                             type: string
                                           runtimeEnvironmentVariables:
                                             additionalProperties:
@@ -419,8 +452,8 @@ spec:
                                               for system use and aren't valid.
                                             type: object
                                           startCommand:
-                                            description: A command App Runner runs
-                                              to start the application in the source
+                                            description: Command App Runner runs to
+                                              start the application in the source
                                               image. If specified, this command overrides
                                               the Docker image’s default start command.
                                             type: string
@@ -429,7 +462,7 @@ spec:
                                         type: object
                                       type: array
                                     configurationSource:
-                                      description: 'The source of the App Runner configuration.
+                                      description: 'Source of the App Runner configuration.
                                         Valid values: REPOSITORY, API. Values are
                                         interpreted as follows:'
                                       type: string
@@ -438,22 +471,22 @@ spec:
                                   type: object
                                 type: array
                               repositoryUrl:
-                                description: The location of the repository that contains
+                                description: Location of the repository that contains
                                   the source code.
                                 type: string
                               sourceCodeVersion:
-                                description: The version that should be used within
-                                  the source code repository. See Source Code Version
+                                description: Version that should be used within the
+                                  source code repository. See Source Code Version
                                   below for more details.
                                 items:
                                   properties:
                                     type:
-                                      description: 'The type of version identifier.
-                                        For a git-based repository, branches represent
+                                      description: 'Type of version identifier. For
+                                        a git-based repository, branches represent
                                         versions. Valid values: BRANCH.'
                                       type: string
                                     value:
-                                      description: A source code version. For a git-based
+                                      description: Source code version. For a git-based
                                         repository, a branch name maps to a specific
                                         version. App Runner uses the most recent commit
                                         to the branch.
@@ -479,8 +512,8 @@ spec:
                                 items:
                                   properties:
                                     port:
-                                      description: The port that your application
-                                        listens to in the container. Defaults to "8080".
+                                      description: Port that your application listens
+                                        to in the container. Defaults to "8080".
                                       type: string
                                     runtimeEnvironmentVariables:
                                       additionalProperties:
@@ -492,7 +525,7 @@ spec:
                                         aren't valid.
                                       type: object
                                     startCommand:
-                                      description: A command App Runner runs to start
+                                      description: Command App Runner runs to start
                                         the application in the source image. If specified,
                                         this command overrides the Docker image’s
                                         default start command.
@@ -500,16 +533,15 @@ spec:
                                   type: object
                                 type: array
                               imageIdentifier:
-                                description: The identifier of an image. For an image
+                                description: Identifier of an image. For an image
                                   in Amazon Elastic Container Registry (Amazon ECR),
                                   this is an image name. For the image name format,
                                   see Pulling an image in the Amazon ECR User Guide.
                                 type: string
                               imageRepositoryType:
-                                description: 'The type of the image repository. This
-                                  reflects the repository provider and whether the
-                                  repository is private or public. Valid values: ECR
-                                  , ECR_PUBLIC.'
+                                description: 'Type of the image repository. This reflects
+                                  the repository provider and whether the repository
+                                  is private or public. Valid values: ECR , ECR_PUBLIC.'
                                 type: string
                             required:
                             - imageIdentifier
@@ -714,18 +746,17 @@ spec:
                       this service. Unique within the AWS Region.
                     type: string
                   serviceUrl:
-                    description: A subdomain URL that App Runner generated for this
+                    description: Subdomain URL that App Runner generated for this
                       service. You can use this URL to access your service web application.
                     type: string
                   status:
-                    description: The current state of the App Runner service.
+                    description: Current state of the App Runner service.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

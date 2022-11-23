@@ -15,19 +15,19 @@ import (
 
 type VPCLinkObservation struct {
 
-	// The VPC Link ARN.
+	// VPC Link ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The VPC Link identifier.
+	// VPC Link identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type VPCLinkParameters struct {
 
-	// The name of the VPC Link. Must be between 1 and 128 characters in length.
+	// Name of the VPC Link. Must be between 1 and 128 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

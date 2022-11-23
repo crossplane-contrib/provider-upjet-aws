@@ -66,6 +66,20 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  amazonManagedKafkaEventSourceConfig:
+                    description: Additional configuration block for Amazon Managed
+                      Kafka sources. Incompatible with "self_managed_event_source"
+                      and "self_managed_kafka_event_source_config". Detailed below.
+                    items:
+                      properties:
+                        consumerGroupId:
+                          description: A Kafka consumer group ID between 1 and 200
+                            characters for use when creating this event source mapping.
+                            If one is not specified, this value will be automatically
+                            generated. See AmazonManagedKafkaEventSourceConfig Syntax.
+                          type: string
+                      type: object
+                    type: array
                   batchSize:
                     description: The largest number of records that Lambda will retrieve
                       from your event source at the time of invocation. Defaults to
@@ -265,6 +279,20 @@ spec:
                           type: object
                       required:
                       - endpoints
+                      type: object
+                    type: array
+                  selfManagedKafkaEventSourceConfig:
+                    description: Additional configuration block for Self Managed Kafka
+                      sources. Incompatible with "event_source_arn" and "amazon_managed_kafka_event_source_config".
+                      Detailed below.
+                    items:
+                      properties:
+                        consumerGroupId:
+                          description: A Kafka consumer group ID between 1 and 200
+                            characters for use when creating this event source mapping.
+                            If one is not specified, this value will be automatically
+                            generated. See SelfManagedKafkaEventSourceConfig Syntax.
+                          type: string
                       type: object
                     type: array
                   sourceAccessConfiguration:

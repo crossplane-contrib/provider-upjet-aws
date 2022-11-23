@@ -66,6 +66,10 @@ spec:
                   catalogTarget:
                     items:
                       properties:
+                        connectionName:
+                          description: The name of the connection to use to connect
+                            to the JDBC target.
+                          type: string
                         databaseName:
                           description: Glue database where results are written.
                           type: string
@@ -147,6 +151,13 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        dlqEventQueueArn:
+                          description: The ARN of the dead-letter SQS queue.
+                          type: string
+                        eventQueueArn:
+                          description: The ARN of the SQS queue to receive S3 notifications
+                            from.
+                          type: string
                         tables:
                           description: A list of catalog tables to be synchronized.
                           items:
@@ -263,7 +274,6 @@ spec:
                             to the Delta table path.
                           type: boolean
                       required:
-                      - connectionName
                       - deltaTables
                       - writeManifest
                       type: object
@@ -381,6 +391,14 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        enableAdditionalMetadata:
+                          description: Specify a value of RAWTYPES or COMMENTS to
+                            enable additional metadata intable responses. RAWTYPES
+                            provides the native-level datatype. COMMENTS provides
+                            comments associated with a column or table in the database.
+                          items:
+                            type: string
+                          type: array
                         exclusions:
                           description: A list of glob patterns used to exclude from
                             the crawl.
@@ -392,6 +410,21 @@ spec:
                           type: string
                       required:
                       - path
+                      type: object
+                    type: array
+                  lakeFormationConfiguration:
+                    description: Specifies Lake Formation configuration settings for
+                      the crawler. See Lake Formation Configuration below.
+                    items:
+                      properties:
+                        accountId:
+                          description: Required for cross account crawls. For same
+                            account crawls as the target data, this can omitted.
+                          type: string
+                        useLakeFormationCredentials:
+                          description: Specifies whether to use Lake Formation credentials
+                            for the crawler instead of the IAM role credentials.
+                          type: boolean
                       type: object
                     type: array
                   lineageConfiguration:
@@ -514,9 +547,10 @@ spec:
                       properties:
                         recrawlBehavior:
                           description: 'Specifies whether to crawl the entire dataset
-                            again or to crawl only folders that were added since the
-                            last crawler run. Valid Values are: CRAWL_EVERYTHING and
-                            CRAWL_NEW_FOLDERS_ONLY. Default value is CRAWL_EVERYTHING.'
+                            again, crawl only folders that were added since the last
+                            crawler run, or crawl what S3 notifies the crawler of
+                            via SQS. Valid Values are: CRAWL_EVENT_MODE, CRAWL_EVERYTHING
+                            and CRAWL_NEW_FOLDERS_ONLY. Default value is CRAWL_EVERYTHING.'
                           type: string
                       type: object
                     type: array

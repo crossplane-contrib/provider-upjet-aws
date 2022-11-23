@@ -65,15 +65,15 @@ spec:
               forProvider:
                 properties:
                   contentHandling:
-                    description: Specifies how to handle request payload content type
-                      conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT.
+                    description: How to handle request payload content type conversions.
+                      Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT.
                       If this property is not defined, the response payload will be
                       passed through from the integration response to the method response
                       without modification.
                     type: string
                   httpMethod:
-                    description: The HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
-                      ANY)
+                    description: HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
+                      ANY).
                     type: string
                   httpMethodRef:
                     description: Reference to a Method in apigateway to populate httpMethod.
@@ -153,7 +153,7 @@ spec:
                       be created in.
                     type: string
                   resourceId:
-                    description: The API resource ID
+                    description: API resource ID.
                     type: string
                   resourceIdRef:
                     description: Reference to a Resource in apigateway to populate
@@ -233,18 +233,18 @@ spec:
                   responseParameters:
                     additionalProperties:
                       type: string
-                    description: 'A map of response parameters that can be read from
+                    description: 'Map of response parameters that can be read from
                       the backend response. For example: response_parameters = { "method.response.header.X-Some-Header"
-                      = "integration.response.header.X-Some-Other-Header" }'
+                      = "integration.response.header.X-Some-Other-Header" }.'
                     type: object
                   responseTemplates:
                     additionalProperties:
                       type: string
-                    description: A map specifying the templates used to transform
-                      the integration response body
+                    description: Map of templates used to transform the integration
+                      response body.
                     type: object
                   restApiId:
-                    description: The ID of the associated REST API
+                    description: ID of the associated REST API.
                     type: string
                   restApiIdRef:
                     description: Reference to a RestAPI in apigateway to populate
@@ -322,15 +322,15 @@ spec:
                         type: object
                     type: object
                   selectionPattern:
-                    description: Specifies the regular expression pattern used to
-                      choose an integration response based on the response from the
-                      backend. Omit configuring this to make the integration the default
-                      one. If the backend is an AWS Lambda function, the AWS Lambda
-                      function error header is matched. For all other HTTP and AWS
-                      backends, the HTTP status code is matched.
+                    description: Regular expression pattern used to choose an integration
+                      response based on the response from the backend. Omit configuring
+                      this to make the integration the default one. If the backend
+                      is an AWS Lambda function, the AWS Lambda function error header
+                      is matched. For all other HTTP and AWS backends, the HTTP status
+                      code is matched.
                     type: string
                   statusCode:
-                    description: The HTTP status code
+                    description: HTTP status code.
                     type: string
                   statusCodeRef:
                     description: Reference to a MethodResponse in apigateway to populate

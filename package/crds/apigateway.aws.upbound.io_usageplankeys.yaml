@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   keyId:
-                    description: The identifier of the API key resource.
+                    description: Identifier of the API key resource.
                     type: string
                   keyIdRef:
                     description: Reference to a APIKey in apigateway to populate keyId.
@@ -141,16 +141,16 @@ spec:
                         type: object
                     type: object
                   keyType:
-                    description: The type of the API key resource. Currently, the
-                      valid key type is API_KEY.
+                    description: Type of the API key resource. Currently, the valid
+                      key type is API_KEY.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   usagePlanId:
-                    description: The Id of the usage plan resource representing to
-                      associate the key to.
+                    description: Id of the usage plan resource representing to associate
+                      the key to.
                     type: string
                   usagePlanIdRef:
                     description: Reference to a UsagePlan in apigateway to populate
@@ -408,13 +408,13 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The Id of a usage plan key.
+                    description: ID of a usage plan key.
                     type: string
                   name:
-                    description: The name of a usage plan key.
+                    description: Name of a usage plan key.
                     type: string
                   value:
-                    description: The value of a usage plan key.
+                    description: Value of a usage plan key.
                     type: string
                 type: object
               conditions:

@@ -11,6 +11,7 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/s3/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -119,6 +120,32 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.InstanceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceRoleArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this GameSessionQueue.
+func (mg *GameSessionQueue) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NotificationTarget),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.ForProvider.NotificationTargetRef,
+		Selector:     mg.Spec.ForProvider.NotificationTargetSelector,
+		To: reference.To{
+			List:    &v1beta12.TopicList{},
+			Managed: &v1beta12.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NotificationTarget")
+	}
+	mg.Spec.ForProvider.NotificationTarget = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NotificationTargetRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   appId:
-                    description: The unique ID for an Amplify app.
+                    description: Unique ID for an Amplify app.
                     type: string
                   appIdRef:
                     description: Reference to a App in amplify to populate appId.
@@ -141,14 +141,14 @@ spec:
                         type: object
                     type: object
                   deploymentArtifacts:
-                    description: The name of deployment artifacts.
+                    description: Name of deployment artifacts.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   stackName:
-                    description: The AWS CloudFormation stack name of a backend environment.
+                    description: AWS CloudFormation stack name of a backend environment.
                     type: string
                 required:
                 - region
@@ -330,11 +330,11 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) for a backend environment
-                      that is part of an Amplify app.
+                    description: ARN for a backend environment that is part of an
+                      Amplify app.
                     type: string
                   id:
-                    description: The unique ID of the Amplify backend environment.
+                    description: Unique ID of the Amplify backend environment.
                     type: string
                 type: object
               conditions:

@@ -67,6 +67,10 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Required
 	BundleID *string `json:"bundleId" tf:"bundle_id,omitempty"`
 
+	// The IP address type of the Lightsail Instance. Valid Values: dualstack | ipv4.
+	// +kubebuilder:validation:Optional
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// The name of your key pair. Created in the
 	// Lightsail console (cannot use aws_key_pair at this time)
 	// +kubebuilder:validation:Optional

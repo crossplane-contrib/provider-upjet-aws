@@ -146,8 +146,8 @@ spec:
                                 items:
                                   properties:
                                     forward:
-                                      description: Specifies whether you want CloudFront
-                                        to forward cookies to the origin that is associated
+                                      description: Whether you want CloudFront to
+                                        forward cookies to the origin that is associated
                                         with this cache behavior. You can specify
                                         all, none or whitelist. If whitelist, you
                                         must include the subsequent whitelisted_names
@@ -164,9 +164,9 @@ spec:
                                   type: object
                                 type: array
                               headers:
-                                description: Specifies the Headers, if any, that you
-                                  want CloudFront to vary upon for this cache behavior.
-                                  Specify * to include all headers.
+                                description: Headers, if any, that you want CloudFront
+                                  to vary upon for this cache behavior. Specify *
+                                  to include all headers.
                                 items:
                                   type: string
                                 type: array
@@ -306,7 +306,8 @@ spec:
                     type: boolean
                   httpVersion:
                     description: The maximum HTTP version to support on the distribution.
-                      Allowed values are http1.1 and http2. The default is http2.
+                      Allowed values are http1.1, http2, http2and3 and http3. The
+                      default is http2.
                     type: string
                   isIpv6Enabled:
                     description: Whether the IPv6 is enabled for the distribution.
@@ -381,8 +382,8 @@ spec:
                                 items:
                                   properties:
                                     forward:
-                                      description: Specifies whether you want CloudFront
-                                        to forward cookies to the origin that is associated
+                                      description: Whether you want CloudFront to
+                                        forward cookies to the origin that is associated
                                         with this cache behavior. You can specify
                                         all, none or whitelist. If whitelist, you
                                         must include the subsequent whitelisted_names
@@ -399,9 +400,9 @@ spec:
                                   type: object
                                 type: array
                               headers:
-                                description: Specifies the Headers, if any, that you
-                                  want CloudFront to vary upon for this cache behavior.
-                                  Specify * to include all headers.
+                                description: Headers, if any, that you want CloudFront
+                                  to vary upon for this cache behavior. Specify *
+                                  to include all headers.
                                 items:
                                   type: string
                                 type: array
@@ -727,8 +728,8 @@ spec:
                           type: array
                         customOriginConfig:
                           description: The CloudFront custom origin configuration
-                            information. If an S3 origin is required, use s3_origin_config
-                            instead.
+                            information. If an S3 origin is required, use origin_access_control_id
+                            or s3_origin_config instead.
                           items:
                             properties:
                               httpPort:
@@ -771,6 +772,10 @@ spec:
                         domainName:
                           description: The DNS domain name of either the S3 bucket,
                             or web site of your custom origin.
+                          type: string
+                        originAccessControlId:
+                          description: The unique identifier of a CloudFront origin
+                            access control for this origin.
                           type: string
                         originId:
                           description: A unique identifier for the origin.
@@ -961,6 +966,8 @@ spec:
                                 description: The ISO 3166-1-alpha-2 codes for which
                                   you want CloudFront either to distribute your content
                                   (whitelist) or not distribute your content (blacklist).
+                                  If the type is specified as none an empty array
+                                  can be used.
                                 items:
                                   type: string
                                 type: array

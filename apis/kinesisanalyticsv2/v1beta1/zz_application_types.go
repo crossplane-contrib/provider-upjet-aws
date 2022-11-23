@@ -124,7 +124,7 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13.
+	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15.
 	// +kubebuilder:validation:Required
 	RuntimeEnvironment *string `json:"runtimeEnvironment" tf:"runtime_environment,omitempty"`
 

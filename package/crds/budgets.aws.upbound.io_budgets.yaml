@@ -68,6 +68,26 @@ spec:
                     description: The ID of the target account for budget. Will use
                       current user's account_id by default if omitted.
                     type: string
+                  autoAdjustData:
+                    description: Object containing [AutoAdjustData] which determines
+                      the budget amount for an auto-adjusting budget.
+                    items:
+                      properties:
+                        autoAdjustType:
+                          type: string
+                        historicalOptions:
+                          items:
+                            properties:
+                              budgetAdjustmentPeriod:
+                                type: number
+                            required:
+                            - budgetAdjustmentPeriod
+                            type: object
+                          type: array
+                      required:
+                      - autoAdjustType
+                      type: object
+                    type: array
                   budgetType:
                     description: Whether this budget tracks monetary cost or usage.
                     type: string
@@ -104,8 +124,8 @@ spec:
                             in the cost budget. Defaults to true
                           type: boolean
                         includeDiscount:
-                          description: Specifies whether a budget includes discounts.
-                            Defaults to true
+                          description: Whether a budget includes discounts. Defaults
+                            to true
                           type: boolean
                         includeOtherSubscription:
                           description: A boolean value whether to include other subscription
@@ -136,8 +156,8 @@ spec:
                             costs in the cost budget. Defaults to true
                           type: boolean
                         useAmortized:
-                          description: Specifies whether a budget uses the amortized
-                            rate. Defaults to false
+                          description: Whether a budget uses the amortized rate. Defaults
+                            to false
                           type: boolean
                         useBlended:
                           description: A boolean value whether to use blended costs
@@ -156,7 +176,7 @@ spec:
                     type: string
                   notification:
                     description: Object containing Budget Notifications. Can be used
-                      multiple times to define more than one budget notification
+                      multiple times to define more than one budget notification.
                     items:
                       properties:
                         comparisonOperator:
@@ -193,6 +213,31 @@ spec:
                       - thresholdType
                       type: object
                     type: array
+                  plannedLimit:
+                    description: Object containing Planned Budget Limits. Can be used
+                      multiple times to plan more than one budget limit. See PlannedBudgetLimits
+                      documentation.
+                    items:
+                      properties:
+                        amount:
+                          description: The amount of cost or usage being measured
+                            for a budget.
+                          type: string
+                        startTime:
+                          description: 'The start time of the budget limit. Format:
+                            2017-01-01_12:00. See PlannedBudgetLimits documentation.'
+                          type: string
+                        unit:
+                          description: The unit of measurement used for the budget
+                            forecast, actual spend, or budget threshold, such as dollars
+                            or GB. See Spend documentation.
+                          type: string
+                      required:
+                      - amount
+                      - startTime
+                      - unit
+                      type: object
+                    type: array
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -214,8 +259,6 @@ spec:
                     type: string
                 required:
                 - budgetType
-                - limitAmount
-                - limitUnit
                 - region
                 - timeUnit
                 type: object
@@ -398,6 +441,22 @@ spec:
                   arn:
                     description: The ARN of the budget.
                     type: string
+                  autoAdjustData:
+                    description: Object containing [AutoAdjustData] which determines
+                      the budget amount for an auto-adjusting budget.
+                    items:
+                      properties:
+                        historicalOptions:
+                          items:
+                            properties:
+                              lookbackAvailablePeriods:
+                                type: number
+                            type: object
+                          type: array
+                        lastAutoAdjustTime:
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: id of resource.
                     type: string

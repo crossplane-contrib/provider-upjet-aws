@@ -66,6 +66,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  enableMediaMetricLogs:
+                    description: When true, enables logging of detailed media metrics
+                      for Voice Connectors to Amazon CloudWatch logs.
+                    type: boolean
                   enableSipLogs:
                     description: When true, enables SIP message logs for sending to
                       Amazon CloudWatch Logs.

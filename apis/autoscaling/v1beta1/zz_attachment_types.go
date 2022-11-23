@@ -19,7 +19,7 @@ type AttachmentObservation struct {
 
 type AttachmentParameters struct {
 
-	// The ARN of an ALB Target Group.
+	// ARN of an ALB Target Group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -46,7 +46,7 @@ type AttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupNameSelector *v1.Selector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
-	// The name of the ELB.
+	// Name of the ELB.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -60,7 +60,7 @@ type AttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
 
-	// The ARN of a load balancer target group.
+	// ARN of a load balancer target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

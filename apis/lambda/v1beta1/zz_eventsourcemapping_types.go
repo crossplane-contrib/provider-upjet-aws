@@ -13,6 +13,16 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AmazonManagedKafkaEventSourceConfigObservation struct {
+}
+
+type AmazonManagedKafkaEventSourceConfigParameters struct {
+
+	// A Kafka consumer group ID between 1 and 200 characters for use when creating this event source mapping. If one is not specified, this value will be automatically generated. See AmazonManagedKafkaEventSourceConfig Syntax.
+	// +kubebuilder:validation:Optional
+	ConsumerGroupID *string `json:"consumerGroupId,omitempty" tf:"consumer_group_id,omitempty"`
+}
+
 type DestinationConfigObservation struct {
 }
 
@@ -47,6 +57,10 @@ type EventSourceMappingObservation struct {
 }
 
 type EventSourceMappingParameters struct {
+
+	// Additional configuration block for Amazon Managed Kafka sources. Incompatible with "self_managed_event_source" and "self_managed_kafka_event_source_config". Detailed below.
+	// +kubebuilder:validation:Optional
+	AmazonManagedKafkaEventSourceConfig []AmazonManagedKafkaEventSourceConfigParameters `json:"amazonManagedKafkaEventSourceConfig,omitempty" tf:"amazon_managed_kafka_event_source_config,omitempty"`
 
 	// The largest number of records that Lambda will retrieve from your event source at the time of invocation. Defaults to 100 for DynamoDB, Kinesis, MQ and MSK, 10 for SQS.
 	// +kubebuilder:validation:Optional
@@ -119,6 +133,10 @@ type EventSourceMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	SelfManagedEventSource []SelfManagedEventSourceParameters `json:"selfManagedEventSource,omitempty" tf:"self_managed_event_source,omitempty"`
 
+	// Additional configuration block for Self Managed Kafka sources. Incompatible with "event_source_arn" and "amazon_managed_kafka_event_source_config". Detailed below.
+	// +kubebuilder:validation:Optional
+	SelfManagedKafkaEventSourceConfig []SelfManagedKafkaEventSourceConfigParameters `json:"selfManagedKafkaEventSourceConfig,omitempty" tf:"self_managed_kafka_event_source_config,omitempty"`
+
 	// :  For Self Managed Kafka sources, the access configuration for the source. If set, configuration must also include self_managed_event_source. Detailed below.
 	// +kubebuilder:validation:Optional
 	SourceAccessConfiguration []SourceAccessConfigurationParameters `json:"sourceAccessConfiguration,omitempty" tf:"source_access_configuration,omitempty"`
@@ -178,6 +196,16 @@ type SelfManagedEventSourceParameters struct {
 	// A map of endpoints for the self managed source.  For Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS and the value should be a string with a comma separated list of broker endpoints.
 	// +kubebuilder:validation:Required
 	Endpoints map[string]*string `json:"endpoints" tf:"endpoints,omitempty"`
+}
+
+type SelfManagedKafkaEventSourceConfigObservation struct {
+}
+
+type SelfManagedKafkaEventSourceConfigParameters struct {
+
+	// A Kafka consumer group ID between 1 and 200 characters for use when creating this event source mapping. If one is not specified, this value will be automatically generated. See SelfManagedKafkaEventSourceConfig Syntax.
+	// +kubebuilder:validation:Optional
+	ConsumerGroupID *string `json:"consumerGroupId,omitempty" tf:"consumer_group_id,omitempty"`
 }
 
 type SourceAccessConfigurationObservation struct {

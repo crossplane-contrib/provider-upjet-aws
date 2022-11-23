@@ -125,6 +125,10 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Indicates whether the Application Load Balancer should preserve the Host header in the HTTP request and send it to the target without any change. Defaults to false.
+	// +kubebuilder:validation:Optional
+	PreserveHostHeader *bool `json:"preserveHostHeader,omitempty" tf:"preserve_host_header,omitempty"`
+
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -191,7 +195,7 @@ type SubnetMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateIPv4Address *string `json:"privateIpv4Address,omitempty" tf:"private_ipv4_address,omitempty"`
 
-	// The id of the subnet of which to attach to the load balancer. You can specify only one subnet per Availability Zone.
+	// ID of the subnet of which to attach to the load balancer. You can specify only one subnet per Availability Zone.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

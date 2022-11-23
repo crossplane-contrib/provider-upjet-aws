@@ -13,6 +13,20 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCConfigurationObservation struct {
+}
+
+type VPCConfigurationParameters struct {
+
+	// - The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
+	// +kubebuilder:validation:Required
+	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
+
+	// - The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.
+	// +kubebuilder:validation:Required
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
+}
+
 type WorkspaceObservation struct {
 
 	// The Amazon Resource Name (ARN) of the Grafana workspace.
@@ -96,6 +110,10 @@ type WorkspaceParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to. See VPC Configuration below.
+	// +kubebuilder:validation:Optional
+	VPCConfiguration []VPCConfigurationParameters `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }
 
 // WorkspaceSpec defines the desired state of Workspace

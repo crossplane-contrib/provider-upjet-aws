@@ -76,7 +76,7 @@ type FieldSelectorParameters struct {
 	// +kubebuilder:validation:Optional
 	Equals []*string `json:"equals,omitempty" tf:"equals,omitempty"`
 
-	// Specifies a field in an event record on which to filter events to be logged. You can specify only the following values: readOnly, eventSource, eventName, eventCategory, resources.type, resources.ARN.
+	// Field in an event record on which to filter events to be logged. You can specify only the following values: readOnly, eventSource, eventName, eventCategory, resources.type, resources.ARN.
 	// +kubebuilder:validation:Required
 	Field *string `json:"field" tf:"field,omitempty"`
 

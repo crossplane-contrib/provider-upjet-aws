@@ -33,6 +33,20 @@ type IncludeFilterParameters struct {
 	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 }
 
+type IncludeMetricObservation struct {
+}
+
+type IncludeMetricParameters struct {
+
+	// The name of the metric.
+	// +kubebuilder:validation:Required
+	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+
+	// The namespace of the metric.
+	// +kubebuilder:validation:Required
+	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+}
+
 type MetricStreamObservation struct {
 
 	// ARN of the metric stream.
@@ -104,9 +118,27 @@ type MetricStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's output_format. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7, you can stream percentile statistics (p99 etc.). See details below.
+	// +kubebuilder:validation:Optional
+	StatisticsConfiguration []StatisticsConfigurationParameters `json:"statisticsConfiguration,omitempty" tf:"statistics_configuration,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type StatisticsConfigurationObservation struct {
+}
+
+type StatisticsConfigurationParameters struct {
+
+	// The additional statistics to stream for the metrics listed in include_metrics.
+	// +kubebuilder:validation:Required
+	AdditionalStatistics []*string `json:"additionalStatistics" tf:"additional_statistics,omitempty"`
+
+	// An array that defines the metrics that are to have additional statistics streamed. See details below.
+	// +kubebuilder:validation:Required
+	IncludeMetric []IncludeMetricParameters `json:"includeMetric" tf:"include_metric,omitempty"`
 }
 
 // MetricStreamSpec defines the desired state of MetricStream

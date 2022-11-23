@@ -56,6 +56,9 @@ type BucketObservation struct {
 	// An ACL policy grant. See Grant below for details. Conflicts with acl. Use the resource aws_s3_bucket_acl instead.
 	Grant []GrantObservation `json:"grant,omitempty" tf:"grant,omitempty"`
 
+	// The Route 53 Hosted Zone ID for this bucket's region.
+	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
+
 	// The name of the bucket.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -108,15 +111,11 @@ type BucketObservation struct {
 
 type BucketParameters struct {
 
-	// A boolean that indicates all objects (including any locked objects) should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable.
+	// A boolean that indicates all objects (including any locked objects) should be deleted from the bucket when the bucket is destroyed so that the bucket can be destroyed without error. These objects are not recoverable. This only deletes objects when the bucket is destroyed, not when setting this parameter to true.
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// The Route 53 Hosted Zone ID for this bucket's region.
-	// +kubebuilder:validation:Optional
-	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
-
-	// Indicates whether this bucket has an Object Lock configuration enabled. Valid values are true or false.
+	// Indicates whether this bucket has an Object Lock configuration enabled. Valid values are true or false. This argument is not supported in all regions or partitions.
 	// +kubebuilder:validation:Optional
 	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 

@@ -33,6 +33,20 @@ type DimensionParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
+type EncryptionConfigurationObservation struct {
+}
+
+type EncryptionConfigurationParameters struct {
+
+	// The ID of the customer managed key. You can use any of the key identifiers that KMS supports, unless you're using a key that's managed by another account. If you're using a key managed by another account, then specify the key ARN.
+	// +kubebuilder:validation:Optional
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The type of AWS KMS key to use for encryption of your Network Firewall resources. Valid values are CUSTOMER_KMS and AWS_OWNED_KMS_KEY.
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type FirewallPolicyFirewallPolicyObservation struct {
 }
 
@@ -90,6 +104,10 @@ type FirewallPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// KMS encryption configuration settings. See Encryption Configuration below for details.
+	// +kubebuilder:validation:Optional
+	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+
 	// A configuration block describing the rule groups and policy actions to use in the firewall policy. See Firewall Policy below for details.
 	// +kubebuilder:validation:Required
 	FirewallPolicy []FirewallPolicyFirewallPolicyParameters `json:"firewallPolicy" tf:"firewall_policy,omitempty"`
@@ -102,6 +120,16 @@ type FirewallPolicyParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OverrideObservation struct {
+}
+
+type OverrideParameters struct {
+
+	// The action that changes the rule group from DROP to ALERT . This only applies to managed rule groups.
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 }
 
 type PublishMetricActionObservation struct {
@@ -128,6 +156,10 @@ type StatefulRuleGroupReferenceObservation struct {
 }
 
 type StatefulRuleGroupReferenceParameters struct {
+
+	// Configuration block for override values
+	// +kubebuilder:validation:Optional
+	Override []OverrideParameters `json:"override,omitempty" tf:"override,omitempty"`
 
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
 	// +kubebuilder:validation:Optional

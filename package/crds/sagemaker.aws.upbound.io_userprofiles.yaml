@@ -169,6 +169,40 @@ spec:
                     description: The user settings. See User Settings below.
                     items:
                       properties:
+                        canvasAppSettings:
+                          description: The Canvas app settings. See Canvas App Settings
+                            below.
+                          items:
+                            properties:
+                              timeSeriesForecastingSettings:
+                                description: Time series forecast settings for the
+                                  Canvas app. see Time Series Forecasting Settings
+                                  below.
+                                items:
+                                  properties:
+                                    amazonForecastRoleArn:
+                                      description: The IAM role that Canvas passes
+                                        to Amazon Forecast for time series forecasting.
+                                        By default, Canvas uses the execution role
+                                        specified in the UserProfile that launches
+                                        the Canvas app. If an execution role is not
+                                        specified in the UserProfile, Canvas uses
+                                        the execution role specified in the Domain
+                                        that owns the UserProfile. To allow time series
+                                        forecasting, this IAM role should have the
+                                        AmazonSageMakerCanvasForecastAccess policy
+                                        attached and forecast.amazonaws.com added
+                                        in the trust relationship as a service principal.
+                                      type: string
+                                    status:
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         executionRole:
                           description: The execution role ARN for the user.
                           type: string
@@ -177,6 +211,19 @@ spec:
                             Server App Settings below.
                           items:
                             properties:
+                              codeRepository:
+                                description: A list of Git repositories that SageMaker
+                                  automatically displays to users for cloning in the
+                                  JupyterServer application. see Code Repository below.
+                                items:
+                                  properties:
+                                    repositoryUrl:
+                                      description: The URL of the Git repository.
+                                      type: string
+                                  required:
+                                  - repositoryUrl
+                                  type: object
+                                type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
@@ -269,6 +316,58 @@ spec:
                                 type: array
                             required:
                             - defaultResourceSpec
+                            type: object
+                          type: array
+                        rSessionAppSettings:
+                          description: The RSession app settings. See RSession App
+                            Settings below.
+                          items:
+                            properties:
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a KernelGateway app. see
+                                  Custom Image below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  required:
+                                  - appImageConfigName
+                                  - imageName
+                                  type: object
+                                type: array
+                              defaultResourceSpec:
+                                description: The default instance type and the Amazon
+                                  Resource Name (ARN) of the SageMaker image created
+                                  on the instance. see Default Resource Spec below.
+                                items:
+                                  properties:
+                                    instanceType:
+                                      description: The instance type.
+                                      type: string
+                                    lifecycleConfigArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the Lifecycle Configuration attached to
+                                        the Resource.
+                                      type: string
+                                    sagemakerImageArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the SageMaker image created on the instance.
+                                      type: string
+                                    sagemakerImageVersionArn:
+                                      description: The ARN of the image version created
+                                        on the instance.
+                                      type: string
+                                  type: object
+                                type: array
                             type: object
                           type: array
                         securityGroups:

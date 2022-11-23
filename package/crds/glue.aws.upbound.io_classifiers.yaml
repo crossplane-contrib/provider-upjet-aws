@@ -76,6 +76,18 @@ spec:
                           description: Indicates whether the CSV file contains a header.
                             This can be one of "ABSENT", "PRESENT", or "UNKNOWN".
                           type: string
+                        customDatatypeConfigured:
+                          description: A custom symbol to denote what combines content
+                            into a single column value. It must be different from
+                            the column delimiter.
+                          type: boolean
+                        customDatatypes:
+                          description: A list of supported custom datatypes. Valid
+                            values are BINARY, BOOLEAN, DATE, DECIMAL, DOUBLE, FLOAT,
+                            INT, LONG, SHORT, STRING, TIMESTAMP.
+                          items:
+                            type: string
+                          type: array
                         delimiter:
                           description: The delimiter used in the Csv to separate columns.
                           type: string

@@ -201,6 +201,30 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                  vpcConfiguration:
+                    description: The configuration settings for an Amazon VPC that
+                      contains data sources for your Grafana workspace to connect
+                      to. See VPC Configuration below.
+                    items:
+                      properties:
+                        securityGroupIds:
+                          description: '- The list of Amazon EC2 security group IDs
+                            attached to the Amazon VPC for your Grafana workspace
+                            to connect.'
+                          items:
+                            type: string
+                          type: array
+                        subnetIds:
+                          description: '- The list of Amazon EC2 subnet IDs created
+                            in the Amazon VPC for your Grafana workspace to connect.'
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - securityGroupIds
+                      - subnetIds
+                      type: object
+                    type: array
                 required:
                 - accountAccessType
                 - authenticationProviders

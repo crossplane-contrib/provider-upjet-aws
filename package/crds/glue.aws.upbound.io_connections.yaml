@@ -83,8 +83,9 @@ spec:
                     - namespace
                     type: object
                   connectionType:
-                    description: '–  The type of the connection. Supported are: JDBC,
-                      MONGODB, KAFKA, and NETWORK. Defaults to JBDC.'
+                    description: '–  The type of the connection. Supported are: CUSTOM,
+                      JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to
+                      JBDC.'
                     type: string
                   description:
                     description: –  Description of the connection.

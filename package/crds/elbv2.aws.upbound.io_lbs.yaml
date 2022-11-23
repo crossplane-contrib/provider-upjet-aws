@@ -213,6 +213,11 @@ spec:
                       contain only alphanumeric characters or hyphens, and must not
                       begin or end with a hyphen.
                     type: string
+                  preserveHostHeader:
+                    description: Indicates whether the Application Load Balancer should
+                      preserve the Host header in the HTTP request and send it to
+                      the target without any change. Defaults to false.
+                    type: boolean
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -316,9 +321,9 @@ spec:
                             assign to the internal-facing load balancer.
                           type: string
                         subnetId:
-                          description: The id of the subnet of which to attach to
-                            the load balancer. You can specify only one subnet per
-                            Availability Zone.
+                          description: ID of the subnet of which to attach to the
+                            load balancer. You can specify only one subnet per Availability
+                            Zone.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in ec2 to populate subnetId.

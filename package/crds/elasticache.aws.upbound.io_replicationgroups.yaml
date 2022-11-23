@@ -99,7 +99,7 @@ spec:
                   automaticFailoverEnabled:
                     description: Specifies whether a read-only replica will be automatically
                       promoted to read/write primary if the existing primary fails.
-                      If enabled, number_cache_clusters must be greater than 1. Must
+                      If enabled, num_cache_clusters must be greater than 1. Must
                       be enabled for Redis (cluster mode enabled) replication groups.
                       Defaults to false.
                     type: boolean
@@ -121,14 +121,14 @@ spec:
                       properties:
                         numNodeGroups:
                           description: Number of node groups (shards) for this Redis
-                            replication group. Changing this number will trigger an
-                            online resizing operation before other settings modifications.
-                            Required unless global_replication_group_id is set.
+                            replication group. Changing this number will trigger a
+                            resizing operation before other settings modifications.
                           type: number
                         replicasPerNodeGroup:
                           description: Number of replica nodes in each node group.
-                            Valid values are 0 to 5. Changing this number will trigger
-                            an online resizing operation before other settings modifications.
+                            Changing this number will trigger a resizing operation
+                            before other settings modifications. Valid values are
+                            0 to 5.
                           type: number
                       type: object
                     type: array
@@ -294,20 +294,19 @@ spec:
                     description: east-1:012345678999:my_sns_topic
                     type: string
                   numCacheClusters:
-                    description: Number of cache clusters (primary and replicas) this
-                      replication group will have. If Multi-AZ is enabled, the value
-                      of this parameter must be at least 2. Updates will occur before
-                      other modifications. Conflicts with num_node_groups, the deprecatednumber_cache_clusters,
-                      or the deprecated cluster_mode. Defaults to 1.
+                    description: 00#.
                     type: number
                   numNodeGroups:
                     description: Number of node groups (shards) for this Redis replication
-                      group. Changing this number will trigger an online resizing
-                      operation before other settings modifications. Required unless
-                      global_replication_group_id is set.
+                      group. Changing this number will trigger a resizing operation
+                      before other settings modifications.
                     type: number
                   numberCacheClusters:
-                    description: 00#.
+                    description: Number of cache clusters (primary and replicas) this
+                      replication group will have. If Multi-AZ is enabled, the value
+                      of this parameter must be at least 2. Updates will occur before
+                      other modifications. Conflicts with num_cache_clusters, num_node_groups,
+                      or the deprecated cluster_mode. Defaults to 1.
                     type: number
                   parameterGroupName:
                     description: Name of the parameter group to associate with this
@@ -334,9 +333,9 @@ spec:
                       be created in.
                     type: string
                   replicasPerNodeGroup:
-                    description: Number of replica nodes in each node group. Valid
-                      values are 0 to 5. Changing this number will trigger an online
-                      resizing operation before other settings modifications.
+                    description: Number of replica nodes in each node group. Changing
+                      this number will trigger a resizing operation before other settings
+                      modifications. Valid values are 0 to 5.
                     type: number
                   replicationGroupDescription:
                     description: created description for the replication group. Must

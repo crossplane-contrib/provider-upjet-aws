@@ -65,12 +65,12 @@ spec:
               forProvider:
                 properties:
                   groupNames:
-                    description: A list of AutoScaling Group Names
+                    description: List of AutoScaling Group Names
                     items:
                       type: string
                     type: array
                   notifications:
-                    description: A list of Notification Types that trigger notifications.
+                    description: List of Notification Types that trigger notifications.
                       Acceptable values are documented in the AWS documentation here
                     items:
                       type: string
@@ -80,7 +80,7 @@ spec:
                       be created in.
                     type: string
                   topicArn:
-                    description: The Topic ARN for notifications to be sent through
+                    description: Topic ARN for notifications to be sent through
                     type: string
                   topicArnRef:
                     description: Reference to a Topic in sns to populate topicArn.

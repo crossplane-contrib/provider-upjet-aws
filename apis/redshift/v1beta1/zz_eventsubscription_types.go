@@ -45,7 +45,7 @@ type EventSubscriptionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The event severity to be published by the notification subscription. Valid options are INFO or ERROR.
+	// The event severity to be published by the notification subscription. Valid options are INFO or ERROR. Default value of INFO.
 	// +kubebuilder:validation:Optional
 	Severity *string `json:"severity,omitempty" tf:"severity,omitempty"`
 
@@ -67,7 +67,7 @@ type EventSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
 
-	// The type of source that will be generating the events. Valid options are cluster, cluster-parameter-group, cluster-security-group, or cluster-snapshot. If not set, all sources will be subscribed to.
+	// The type of source that will be generating the events. Valid options are cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, or scheduled-action. If not set, all sources will be subscribed to.
 	// +kubebuilder:validation:Optional
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
 

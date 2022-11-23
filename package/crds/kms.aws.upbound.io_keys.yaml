@@ -73,6 +73,10 @@ spec:
                       Key Management Service Developer Guide. The default value is
                       false.
                     type: boolean
+                  customKeyStoreId:
+                    description: ID of the KMS Custom Key Store where the key will
+                      be stored instead of KMS (eg CloudHSM).
+                    type: string
                   customerMasterKeySpec:
                     description: 'Specifies whether the key contains a symmetric key
                       or an asymmetric key pair and the encryption algorithms or signing
@@ -104,7 +108,8 @@ spec:
                     type: boolean
                   keyUsage:
                     description: 'Specifies the intended use of the key. Valid values:
-                      ENCRYPT_DECRYPT or SIGN_VERIFY. Defaults to ENCRYPT_DECRYPT.'
+                      ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC. Defaults
+                      to ENCRYPT_DECRYPT.'
                     type: string
                   multiRegion:
                     description: Indicates whether the KMS key is a multi-Region (true)

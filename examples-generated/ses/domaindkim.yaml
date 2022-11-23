@@ -23,9 +23,9 @@ metadata:
 spec:
   forProvider:
     count: 3
-    name: ${element(aws_ses_domain_dkim.example.dkim_tokens, count.index)}._domainkey
+    name: ${aws_ses_domain_dkim.example.dkim_tokens[count.index]}._domainkey
     records:
-    - ${element(aws_ses_domain_dkim.example.dkim_tokens, count.index)}.dkim.amazonses.com
+    - ${aws_ses_domain_dkim.example.dkim_tokens[count.index]}.dkim.amazonses.com
     region: us-west-1
     ttl: "600"
     type: CNAME

@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   database:
-                    description: The database to which the query belongs.
+                    description: Database to which the query belongs.
                     type: string
                   databaseRef:
                     description: Reference to a Database in athena to populate database.
@@ -141,24 +141,24 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: A brief explanation of the query. Maximum length
-                      of 1024.
+                    description: Brief explanation of the query. Maximum length of
+                      1024.
                     type: string
                   name:
-                    description: The plain language name for the query. Maximum length
+                    description: Plain language name for the query. Maximum length
                       of 128.
                     type: string
                   query:
-                    description: The text of the query itself. In other words, all
-                      query statements. Maximum length of 262144.
+                    description: Text of the query itself. In other words, all query
+                      statements. Maximum length of 262144.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   workgroup:
-                    description: The workgroup to which the query belongs. Defaults
-                      to primary
+                    description: Workgroup to which the query belongs. Defaults to
+                      primary
                     type: string
                   workgroupRef:
                     description: Reference to a Workgroup in athena to populate workgroup.
@@ -415,7 +415,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The unique ID of the query.
+                    description: Unique ID of the query.
                     type: string
                 type: object
               conditions:

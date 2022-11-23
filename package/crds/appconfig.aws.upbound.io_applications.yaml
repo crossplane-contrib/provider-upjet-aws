@@ -65,12 +65,12 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the application. Can be at most
-                      1024 characters.
+                    description: Description of the application. Can be at most 1024
+                      characters.
                     type: string
                   name:
-                    description: The name for the application. Must be between 1 and
-                      64 characters in length.
+                    description: Name for the application. Must be between 1 and 64
+                      characters in length.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -262,17 +262,16 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the AppConfig Application.
+                    description: ARN of the AppConfig Application.
                     type: string
                   id:
-                    description: The AppConfig application ID.
+                    description: AppConfig application ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:
