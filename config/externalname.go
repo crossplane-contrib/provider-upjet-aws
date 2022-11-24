@@ -1348,6 +1348,9 @@ func FormattedIdentifierFromProvider(separator string, keys ...string) config.Ex
 // using some of the spec fields as well as a field that users use to name the
 // resource. For example, vpc_id:cluster_name where vpc_id comes from spec
 // but cluster_name is a naming field we can use external name for.
+// This function assumes that the naming field is the LAST component
+// in the constructed identifier, which may not always hold
+// (e.g., aws_servicecatalog_budget_resource_association).
 func FormattedIdentifierUserDefined(param, separator string, keys ...string) config.ExternalName {
 	e := config.ParameterAsIdentifier(param)
 	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
@@ -1377,6 +1380,46 @@ func FormattedIdentifierUserDefined(param, separator string, keys ...string) con
 		}
 		w := strings.Split(s, separator)
 		return w[len(w)-1], nil
+	}
+	return e
+}
+
+// FormattedIdentifierUserDefinedNameFirst is used in cases where the ID is constructed
+// using some of the spec fields as well as a field that users use to name the
+// resource. For example, budget_name:product_id where product_id comes from spec
+// but budget_name is a naming field we can use external name for.
+// This function assumes that the naming field is the FIRST component
+// in the constructed identifier, which may not always hold
+// (e.g., aws_eks_addon).
+func FormattedIdentifierUserDefinedNameFirst(param, separator string, keys ...string) config.ExternalName {
+	e := config.ParameterAsIdentifier(param)
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		vals := make([]string, len(keys)+1)
+		for i, k := range keys {
+			v, ok := parameters[k]
+			if !ok {
+				return "", errors.Errorf("%s cannot be empty", k)
+			}
+			s, ok := v.(string)
+			if !ok {
+				return "", errors.Errorf("%s needs to be a string", k)
+			}
+			vals[i+1] = s
+		}
+		vals[0] = externalName
+		return strings.Join(vals, separator), nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("id in tfstate cannot be empty")
+		}
+		s, ok := id.(string)
+		if !ok {
+			return "", errors.New("value of id needs to be string")
+		}
+		w := strings.Split(s, separator)
+		return w[0], nil
 	}
 	return e
 }

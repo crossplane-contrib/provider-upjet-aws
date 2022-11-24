@@ -65,6 +65,7 @@ import (
 	"github.com/upbound/provider-aws/config/route53resolver"
 	"github.com/upbound/provider-aws/config/s3"
 	"github.com/upbound/provider-aws/config/secretsmanager"
+	"github.com/upbound/provider-aws/config/servicecatalog"
 	"github.com/upbound/provider-aws/config/servicediscovery"
 	"github.com/upbound/provider-aws/config/sfn"
 	"github.com/upbound/provider-aws/config/sns"
@@ -198,6 +199,7 @@ func GetProvider() *config.Provider {
 		cloudwatch.Configure,
 		cloudwatchlogs.Configure,
 		cur.Configure,
+		servicecatalog.Configure,
 	} {
 		configure(pc)
 	}
