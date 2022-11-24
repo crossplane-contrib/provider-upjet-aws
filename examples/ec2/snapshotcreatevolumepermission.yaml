@@ -3,7 +3,6 @@ kind: SnapshotCreateVolumePermission
 metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/snapshotcreatevolumepermission
-    upjet.upbound.io/manual-intervention: "Problem on deletion. EBSSnapshot deleting beforeSnapshotCreateVolumePermission, what leads to stuck deletion proccess"
   labels:
     testing.upbound.io/example-name: example_perm
   name: example-perm
@@ -20,7 +19,7 @@ kind: EBSSnapshot
 metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/snapshotcreatevolumepermission
-    upjet.upbound.io/manual-intervention: "SnapshotCreateVolumePermission depend on EBSSnapshot"
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-snapshot-permissions.sh
   labels:
     testing.upbound.io/example-name: example_snapshot
   name: example-snapshot
@@ -36,7 +35,6 @@ kind: EBSVolume
 metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/snapshotcreatevolumepermission
-    upjet.upbound.io/manual-intervention: "SnapshotCreateVolumePermission depend on EBSSnapshot"
   labels:
     testing.upbound.io/example-name: example
   name: example
