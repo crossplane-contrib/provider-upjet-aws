@@ -324,9 +324,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// colon (:): my_cluster:my_node_group
 	"aws_eks_node_group": config.TemplatedStringAsIdentifier("node_group_name", "{{ .parameters.cluster_name }}:{{ .external_name }}"),
 	// my_cluster:my_eks_addon
-	"aws_eks_addon": FormattedIdentifierUserDefined("addon_name", ":", "cluster_name"),
+	"aws_eks_addon": FormattedIdentifierUserDefinedNameLast("addon_name", ":", "cluster_name"),
 	// my_cluster:my_fargate_profile
-	"aws_eks_fargate_profile": FormattedIdentifierUserDefined("fargate_profile_name", ":", "cluster_name"),
+	"aws_eks_fargate_profile": FormattedIdentifierUserDefinedNameLast("fargate_profile_name", ":", "cluster_name"),
 	// It has a complex config, adding empty entry here just to enable it.
 	"aws_eks_identity_provider_config": eksOIDCIdentityProvider(),
 
@@ -472,7 +472,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	"aws_neptune_cluster": config.ParameterAsIdentifier("cluster_identifier"),
 	// my_cluster:my_cluster_endpoint
-	"aws_neptune_cluster_endpoint":        FormattedIdentifierUserDefined("cluster_endpoint_identifier", ":", "cluster_identifier"),
+	"aws_neptune_cluster_endpoint":        FormattedIdentifierUserDefinedNameLast("cluster_endpoint_identifier", ":", "cluster_identifier"),
 	"aws_neptune_cluster_instance":        config.ParameterAsIdentifier("identifier"),
 	"aws_neptune_cluster_parameter_group": config.NameAsIdentifier,
 	"aws_neptune_cluster_snapshot":        config.ParameterAsIdentifier("db_cluster_snapshot_identifier"),
@@ -528,7 +528,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Imported by using the Route 53 Hosted Zone identifier and KMS Key
 	// identifier, separated by a comma (,), e.g., Z1D633PJN98FT9,example
 	// disabled until it's successfully tested
-	// "aws_route53_key_signing_key": FormattedIdentifierUserDefined("name", ",", "hosted_zone_id"),
+	// "aws_route53_key_signing_key": FormattedIdentifierUserDefinedNameLast("name", ",", "hosted_zone_id"),
 	// xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 	// disabled until it's successfully tested
 	// "aws_route53_query_log": config.IdentifierFromProvider,
@@ -727,7 +727,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Transfer Servers can be imported using the id
 	"aws_transfer_server": config.IdentifierFromProvider,
 	// Transfer Users can be imported using the server_id and user_name separated by /
-	"aws_transfer_user": FormattedIdentifierUserDefined("user_name", "/", "server_id"),
+	"aws_transfer_user": FormattedIdentifierUserDefinedNameLast("user_name", "/", "server_id"),
 
 	// dynamodb
 	//
@@ -806,7 +806,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_kinesisanalyticsv2_application": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesisanalytics:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:application/{{ .external_name }}"),
 	// aws_kinesisanalyticsv2_application can be imported by using application_name together with snapshot_name
 	// e.g. example-application/example-snapshot
-	"aws_kinesisanalyticsv2_application_snapshot": FormattedIdentifierUserDefined("snapshot_name", "/", "application_name"),
+	"aws_kinesisanalyticsv2_application_snapshot": FormattedIdentifierUserDefinedNameLast("snapshot_name", "/", "application_name"),
 
 	// kinesisvideo
 	//
@@ -833,7 +833,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Bots can be imported using their name.
 	"aws_lex_bot": config.NameAsIdentifier,
 	// Bot aliases can be imported using an ID with the format bot_name:bot_alias_name
-	"aws_lex_bot_alias": FormattedIdentifierUserDefined("name", ":", "bot_name"),
+	"aws_lex_bot_alias": FormattedIdentifierUserDefinedNameLast("name", ":", "bot_name"),
 	// Intents can be imported using their name.
 	"aws_lex_intent": config.NameAsIdentifier,
 	// Slot types can be imported using their name.
@@ -1344,11 +1344,14 @@ func FormattedIdentifierFromProvider(separator string, keys ...string) config.Ex
 	return e
 }
 
-// FormattedIdentifierUserDefined is used in cases where the ID is constructed
+// FormattedIdentifierUserDefinedNameLast is used in cases where the ID is constructed
 // using some of the spec fields as well as a field that users use to name the
 // resource. For example, vpc_id:cluster_name where vpc_id comes from spec
 // but cluster_name is a naming field we can use external name for.
-func FormattedIdentifierUserDefined(param, separator string, keys ...string) config.ExternalName {
+// This function assumes that the naming field is the LAST component
+// in the constructed identifier, which may not always hold
+// (e.g., aws_servicecatalog_budget_resource_association).
+func FormattedIdentifierUserDefinedNameLast(param, separator string, keys ...string) config.ExternalName {
 	e := config.ParameterAsIdentifier(param)
 	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
 		vals := make([]string, len(keys)+1)
@@ -1377,6 +1380,46 @@ func FormattedIdentifierUserDefined(param, separator string, keys ...string) con
 		}
 		w := strings.Split(s, separator)
 		return w[len(w)-1], nil
+	}
+	return e
+}
+
+// FormattedIdentifierUserDefinedNameFirst is used in cases where the ID is constructed
+// using some of the spec fields as well as a field that users use to name the
+// resource. For example, budget_name:product_id where product_id comes from spec
+// but budget_name is a naming field we can use external name for.
+// This function assumes that the naming field is the FIRST component
+// in the constructed identifier, which may not always hold
+// (e.g., aws_eks_addon).
+func FormattedIdentifierUserDefinedNameFirst(param, separator string, keys ...string) config.ExternalName {
+	e := config.ParameterAsIdentifier(param)
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		vals := make([]string, len(keys)+1)
+		for i, k := range keys {
+			v, ok := parameters[k]
+			if !ok {
+				return "", errors.Errorf("%s cannot be empty", k)
+			}
+			s, ok := v.(string)
+			if !ok {
+				return "", errors.Errorf("%s needs to be a string", k)
+			}
+			vals[i+1] = s
+		}
+		vals[0] = externalName
+		return strings.Join(vals, separator), nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("id in tfstate cannot be empty")
+		}
+		s, ok := id.(string)
+		if !ok {
+			return "", errors.New("value of id needs to be string")
+		}
+		w := strings.Split(s, separator)
+		return w[0], nil
 	}
 	return e
 }
