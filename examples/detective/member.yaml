@@ -8,9 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    accountId: "${data.aws_account_id}"
+    accountId: "${data.aws_peer_account_id}"
     disableEmailNotification: true
-    emailAddress: "${data.aws_account_root_user_email}"
+    emailAddress: "${data.aws_peer_account_root_user_email}"
     graphArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
