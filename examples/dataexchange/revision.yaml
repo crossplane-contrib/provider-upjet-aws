@@ -12,9 +12,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     region: us-west-1
-
 ---
-
 apiVersion: dataexchange.aws.upbound.io/v1beta1
 kind: DataSet
 metadata:
