@@ -27,6 +27,7 @@ import (
 	"github.com/upbound/provider-aws/config/cognitoidentity"
 	"github.com/upbound/provider-aws/config/cognitoidp"
 	"github.com/upbound/provider-aws/config/connect"
+	"github.com/upbound/provider-aws/config/cur"
 	"github.com/upbound/provider-aws/config/dax"
 	"github.com/upbound/provider-aws/config/docdb"
 	"github.com/upbound/provider-aws/config/dynamodb"
@@ -196,6 +197,7 @@ func GetProvider() *config.Provider {
 		secretsmanager.Configure,
 		cloudwatch.Configure,
 		cloudwatchlogs.Configure,
+		cur.Configure,
 	} {
 		configure(pc)
 	}
