@@ -26,7 +26,7 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
-    crossplane.io/external-name: test-definition-bucket-${Rand.RFC1123Subdomain}
+    crossplane.io/external-name: test-definition-bucket-axbjhdwjdk
     meta.upbound.io/example-id: cur/v1beta1/reportdefinition
   labels:
     testing.upbound.io/example-name: example
@@ -63,7 +63,7 @@ spec:
                     "s3:GetBucketAcl",
                     "s3:GetBucketPolicy"
                 ],
-                "Resource":"arn:aws:s3:::test-definition-bucket-*",
+                "Resource":"arn:aws:s3:::test-definition-bucket-axbjhdwjdk",
                 "Condition": {
                     "StringEquals": {
                         "aws:SourceArn": "arn:aws:cur:us-east-1:${data.aws_account_id}:definition/*",
@@ -78,7 +78,7 @@ spec:
                     "Service": "billingreports.amazonaws.com"
                 },
                 "Action": "s3:PutObject",
-                "Resource": "arn:aws:s3:::test-definition-bucket-*/*",
+                "Resource": "arn:aws:s3:::test-definition-bucket-axbjhdwjdk/*",
                 "Condition": {
                     "StringEquals": {
                         "aws:SourceArn": "arn:aws:cur:us-east-1:${data.aws_account_id}:definition/*",
