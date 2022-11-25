@@ -3,6 +3,7 @@ kind: Organization
 metadata:
   annotations:
     meta.upbound.io/example-id: organizations/v1beta1/organization
+    upjet.upbound.io/manual-intervention: "This resource requires permissions to work with organizations, manually tested with a free tier account"
   labels:
     testing.upbound.io/example-name: org
   name: org
