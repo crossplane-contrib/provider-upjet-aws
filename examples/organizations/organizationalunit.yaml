@@ -3,11 +3,12 @@ kind: OrganizationalUnit
 metadata:
   annotations:
     meta.upbound.io/example-id: organizations/v1beta1/organizationalunit
+    upjet.upbound.io/manual-intervention: "This requires permissions to work with organizations, manually tested with a free tier account"
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     name: example
-    parentId: ${aws_organizations_organization.example.roots[0].id}
+    parentId: <parent-id>
     region: us-west-1
