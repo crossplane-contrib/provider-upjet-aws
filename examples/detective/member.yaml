@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    accountId: ${data.aws_account_id}
+    accountId: "${data.aws_account_id}"
     disableEmailNotification: true
     emailAddress: ${data.aws_account_root_user_email}
     graphArnSelector:
