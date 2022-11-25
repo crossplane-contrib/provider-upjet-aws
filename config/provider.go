@@ -20,6 +20,7 @@ import (
 	"github.com/upbound/provider-aws/config/athena"
 	"github.com/upbound/provider-aws/config/autoscaling"
 	"github.com/upbound/provider-aws/config/backup"
+	"github.com/upbound/provider-aws/config/budgets"
 	"github.com/upbound/provider-aws/config/cloudfront"
 	"github.com/upbound/provider-aws/config/cloudsearch"
 	"github.com/upbound/provider-aws/config/cloudwatch"
@@ -73,7 +74,6 @@ import (
 	"github.com/upbound/provider-aws/config/sns"
 	"github.com/upbound/provider-aws/config/sqs"
 	"github.com/upbound/provider-aws/config/transfer"
-	"github.com/upbound/provider-aws/config/budgets"
 )
 
 var (
