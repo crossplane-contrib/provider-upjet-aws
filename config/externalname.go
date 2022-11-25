@@ -1235,6 +1235,27 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_devicefarm_upload": config.IdentifierFromProvider,
 	// DeviceFarm Test Grid Projects can be imported by their arn
 	"aws_devicefarm_test_grid_project": config.IdentifierFromProvider,
+
+	// organization
+	//
+	// imported by using the account id, which is provider-generated
+	"aws_organizations_account": config.IdentifierFromProvider,
+	// imported by using the account ID and its service principal:
+	// 123456789012/config.amazonaws.com
+	"aws_organizations_delegated_administrator": FormattedIdentifierFromProvider("/", "account_id", "service_principal"),
+	//  imported by using the id, which is a Cloud provider-generated string:
+	// o-1234567
+	"aws_organizations_organization": config.IdentifierFromProvider,
+	// imported by using the id, which is a Cloud provider-generated string:
+	// ou-1234567
+	"aws_organizations_organizational_unit": config.IdentifierFromProvider,
+	// imported by using the policy ID,
+	// which is a Cloud provider-generated string:
+	// p-12345678
+	"aws_organizations_policy": config.IdentifierFromProvider,
+	// imported by using the target ID and policy ID
+	// 123456789012:p-12345678
+	"aws_organizations_policy_attachment": FormattedIdentifierFromProvider(":", "target_id", "policy_id"),
 }
 
 func lambdaFunctionURL() config.ExternalName {
