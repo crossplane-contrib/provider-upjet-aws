@@ -3,15 +3,14 @@ kind: Member
 metadata:
   annotations:
     meta.upbound.io/example-id: detective/v1beta1/member
-    upjet.upbound.io/manual-intervention: "Requires AccountId and AccountEmail to replaced manually."
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    accountId: <AccountId>
+    accountId: ${data.aws_account_id}
     disableEmailNotification: true
-    emailAddress: <AccountEmail>
+    emailAddress: ${data.aws_account_root_user_email}
     graphArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -23,7 +22,6 @@ kind: Graph
 metadata:
   annotations:
     meta.upbound.io/example-id: detective/v1beta1/member
-    upjet.upbound.io/manual-intervention: "Requires AccountId and AccountEmail to replaced manually."
   labels:
     testing.upbound.io/example-name: example
   name: example
