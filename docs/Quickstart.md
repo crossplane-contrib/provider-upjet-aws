@@ -40,7 +40,9 @@ _Note:_ all commands use the current `kubeconfig` context and configuration.
 ### Bash script
 Run the following to download and install 
 ```shell
-curl -sL "https://raw.githubusercontent.com/upbound/provider-aws/main/docs/quickstart.sh" | sh
+curl -sLO "https://raw.githubusercontent.com/upbound/provider-aws/main/docs/quickstart.sh"
+chmod +x quickstart.sh
+./quickstart.sh
 ```
 
 ### Shell commands
@@ -69,7 +71,7 @@ kind: Provider
 metadata:
   name: provider-aws
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws:v0.18.0
+  package: xpkg.upbound.io/upbound/provider-aws:v0.21.0
 EOF
 kubectl wait "providers.pkg.crossplane.io/provider-aws" --for=condition=Installed --timeout=180s
 kubectl wait "providers.pkg.crossplane.io/provider-aws" --for=condition=Healthy --timeout=180s
