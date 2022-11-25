@@ -358,6 +358,15 @@ func (l *SerialConsoleAccessList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this SnapshotCreateVolumePermissionList.
+func (l *SnapshotCreateVolumePermissionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SpotDatafeedSubscriptionList.
 func (l *SpotDatafeedSubscriptionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -459,6 +468,15 @@ func (l *TransitGatewayMulticastGroupMemberList) GetItems() []resource.Managed {
 
 // GetItems of this TransitGatewayMulticastGroupSourceList.
 func (l *TransitGatewayMulticastGroupSourceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this TransitGatewayPeeringAttachmentAccepterList.
+func (l *TransitGatewayPeeringAttachmentAccepterList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
