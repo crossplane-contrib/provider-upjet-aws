@@ -18,6 +18,77 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this AMI.
+func (mg *AMI) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.EBSBlockDevice); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EBSBlockDevice[i3].SnapshotID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.EBSBlockDevice[i3].SnapshotIDRef,
+			Selector:     mg.Spec.ForProvider.EBSBlockDevice[i3].SnapshotIDSelector,
+			To: reference.To{
+				List:    &EBSSnapshotList{},
+				Managed: &EBSSnapshot{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.EBSBlockDevice[i3].SnapshotID")
+		}
+		mg.Spec.ForProvider.EBSBlockDevice[i3].SnapshotID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.EBSBlockDevice[i3].SnapshotIDRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
+// ResolveReferences of this AMICopy.
+func (mg *AMICopy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
+		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyID")
+	}
+	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceAMIID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.SourceAMIIDRef,
+		Selector:     mg.Spec.ForProvider.SourceAMIIDSelector,
+		To: reference.To{
+			List:    &AMIList{},
+			Managed: &AMI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceAMIID")
+	}
+	mg.Spec.ForProvider.SourceAMIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceAMIIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this CarrierGateway.
 func (mg *CarrierGateway) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

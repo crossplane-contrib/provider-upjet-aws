@@ -204,6 +204,8 @@ import (
 	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
 	table "github.com/upbound/provider-aws/internal/controller/dynamodb/table"
 	tableitem "github.com/upbound/provider-aws/internal/controller/dynamodb/tableitem"
+	ami "github.com/upbound/provider-aws/internal/controller/ec2/ami"
+	amicopy "github.com/upbound/provider-aws/internal/controller/ec2/amicopy"
 	availabilityzonegroup "github.com/upbound/provider-aws/internal/controller/ec2/availabilityzonegroup"
 	capacityreservation "github.com/upbound/provider-aws/internal/controller/ec2/capacityreservation"
 	carriergateway "github.com/upbound/provider-aws/internal/controller/ec2/carriergateway"
@@ -695,6 +697,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		kinesisstreamingdestination.Setup,
 		table.Setup,
 		tableitem.Setup,
+		ami.Setup,
+		amicopy.Setup,
 		availabilityzonegroup.Setup,
 		capacityreservation.Setup,
 		carriergateway.Setup,

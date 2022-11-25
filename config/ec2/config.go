@@ -339,4 +339,16 @@ func Configure(p *config.Provider) {
 			Type: "VPCIpam",
 		}
 	})
+
+	p.AddResourceConfigurator("aws_ami", func(r *config.Resource) {
+		r.References["ebs_block_device.snapshot_id"] = config.Reference{
+			Type: "EBSSnapshot",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_ami_copy", func(r *config.Resource) {
+		r.References["source_ami_id"] = config.Reference{
+			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.AMI",
+		}
+	})
 }

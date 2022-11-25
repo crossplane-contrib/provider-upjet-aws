@@ -290,6 +290,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_ipam_scope": config.IdentifierFromProvider,
 	// IPAMs can be imported using the ipam id
 	"aws_vpc_ipam": config.IdentifierFromProvider,
+	// aws_ami can be imported using the ID of the AMI
+	"aws_ami": config.IdentifierFromProvider,
+	// No import
+	"aws_ami_copy": config.IdentifierFromProvider,
 
 	// ecr
 	//
