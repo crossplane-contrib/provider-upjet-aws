@@ -294,6 +294,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ami": config.IdentifierFromProvider,
 	// No import
 	"aws_ami_copy": config.IdentifierFromProvider,
+	// AMI Launch Permissions can be imported using [ACCOUNT-ID|GROUP-NAME|ORGANIZATION-ARN|ORGANIZATIONAL-UNIT-ARN]/IMAGE-ID
+	"aws_ami_launch_permission": config.IdentifierFromProvider,
 
 	// ecr
 	//

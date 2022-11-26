@@ -351,4 +351,10 @@ func Configure(p *config.Provider) {
 			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.AMI",
 		}
 	})
+
+	p.AddResourceConfigurator("aws_ami_launch_permission", func(r *config.Resource) {
+		r.References["image_id"] = config.Reference{
+			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.AMI",
+		}
+	})
 }

@@ -286,10 +286,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// ec2
 	//
-	// aws_ami can be imported using the ID of the AMI
-	"aws_ami": config.IdentifierFromProvider,
-	// No import
-	"aws_ami_copy": config.IdentifierFromProvider,
 	// No import
 	"aws_ami_from_instance": config.IdentifierFromProvider,
 	// AMI Launch Permissions can be imported using [ACCOUNT-ID|GROUP-NAME|ORGANIZATION-ARN|ORGANIZATIONAL-UNIT-ARN]/IMAGE-ID

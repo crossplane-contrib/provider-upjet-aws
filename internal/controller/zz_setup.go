@@ -206,6 +206,7 @@ import (
 	tableitem "github.com/upbound/provider-aws/internal/controller/dynamodb/tableitem"
 	ami "github.com/upbound/provider-aws/internal/controller/ec2/ami"
 	amicopy "github.com/upbound/provider-aws/internal/controller/ec2/amicopy"
+	amilaunchpermission "github.com/upbound/provider-aws/internal/controller/ec2/amilaunchpermission"
 	availabilityzonegroup "github.com/upbound/provider-aws/internal/controller/ec2/availabilityzonegroup"
 	capacityreservation "github.com/upbound/provider-aws/internal/controller/ec2/capacityreservation"
 	carriergateway "github.com/upbound/provider-aws/internal/controller/ec2/carriergateway"
@@ -699,6 +700,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		tableitem.Setup,
 		ami.Setup,
 		amicopy.Setup,
+		amilaunchpermission.Setup,
 		availabilityzonegroup.Setup,
 		capacityreservation.Setup,
 		carriergateway.Setup,

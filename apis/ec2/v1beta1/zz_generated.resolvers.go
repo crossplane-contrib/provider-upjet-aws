@@ -89,6 +89,32 @@ func (mg *AMICopy) ResolveReferences(ctx context.Context, c client.Reader) error
 	return nil
 }
 
+// ResolveReferences of this AMILaunchPermission.
+func (mg *AMILaunchPermission) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ImageID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ImageIDRef,
+		Selector:     mg.Spec.ForProvider.ImageIDSelector,
+		To: reference.To{
+			List:    &AMIList{},
+			Managed: &AMI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ImageID")
+	}
+	mg.Spec.ForProvider.ImageID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ImageIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this CarrierGateway.
 func (mg *CarrierGateway) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
