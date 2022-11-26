@@ -1026,6 +1026,25 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// OpenSearch domains can be imported using the domain_name
 	"aws_opensearch_domain_saml_options": config.IdentifierFromProvider,
 
+	// eventbridge
+	//
+	// Imported using name
+	"aws_cloudwatch_event_api_destination": config.ParameterAsIdentifier("name"),
+	// Imported using name
+	"aws_cloudwatch_event_archive": config.ParameterAsIdentifier("name"),
+	// Imported using name
+	"aws_cloudwatch_event_bus": config.NameAsIdentifier,
+	// Imported using event_bus_name
+	"aws_cloudwatch_event_bus_policy": config.IdentifierFromProvider,
+	// Imported using name
+	"aws_cloudwatch_event_connection": config.NameAsIdentifier,
+	// Imported using event_bus_name/statement_id
+	"aws_cloudwatch_event_permission": FormattedIdentifierFromProvider("/", "event_bus_name", "statement_id"),
+	// Imported using event_bus_name/rule_name
+	"aws_cloudwatch_event_rule": FormattedIdentifierFromProvider("/", "event_bus_name", "name"),
+	// Imported using event_bus_name/rule_name/target_id
+	"aws_cloudwatch_event_target": FormattedIdentifierFromProvider("/", "event_bus_name", "rule", "target_id"),
+
 	// cloudwatch
 	//
 	// Use the alarm_name to import a CloudWatch Composite Alarm.

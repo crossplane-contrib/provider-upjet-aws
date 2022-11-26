@@ -317,6 +317,14 @@ import (
 	lblistener "github.com/upbound/provider-aws/internal/controller/elbv2/lblistener"
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
+	apidestination "github.com/upbound/provider-aws/internal/controller/events/apidestination"
+	archive "github.com/upbound/provider-aws/internal/controller/events/archive"
+	bus "github.com/upbound/provider-aws/internal/controller/events/bus"
+	buspolicy "github.com/upbound/provider-aws/internal/controller/events/buspolicy"
+	connectionevents "github.com/upbound/provider-aws/internal/controller/events/connection"
+	permission "github.com/upbound/provider-aws/internal/controller/events/permission"
+	rule "github.com/upbound/provider-aws/internal/controller/events/rule"
+	targetevents "github.com/upbound/provider-aws/internal/controller/events/target"
 	deliverystream "github.com/upbound/provider-aws/internal/controller/firehose/deliverystream"
 	alias "github.com/upbound/provider-aws/internal/controller/gamelift/alias"
 	build "github.com/upbound/provider-aws/internal/controller/gamelift/build"
@@ -393,7 +401,7 @@ import (
 	invocation "github.com/upbound/provider-aws/internal/controller/lambda/invocation"
 	layerversion "github.com/upbound/provider-aws/internal/controller/lambda/layerversion"
 	layerversionpermission "github.com/upbound/provider-aws/internal/controller/lambda/layerversionpermission"
-	permission "github.com/upbound/provider-aws/internal/controller/lambda/permission"
+	permissionlambda "github.com/upbound/provider-aws/internal/controller/lambda/permission"
 	provisionedconcurrencyconfig "github.com/upbound/provider-aws/internal/controller/lambda/provisionedconcurrencyconfig"
 	bot "github.com/upbound/provider-aws/internal/controller/lexmodels/bot"
 	botalias "github.com/upbound/provider-aws/internal/controller/lexmodels/botalias"
@@ -451,7 +459,7 @@ import (
 	vpcassociationauthorization "github.com/upbound/provider-aws/internal/controller/route53/vpcassociationauthorization"
 	zone "github.com/upbound/provider-aws/internal/controller/route53/zone"
 	endpoint "github.com/upbound/provider-aws/internal/controller/route53resolver/endpoint"
-	rule "github.com/upbound/provider-aws/internal/controller/route53resolver/rule"
+	ruleroute53resolver "github.com/upbound/provider-aws/internal/controller/route53resolver/rule"
 	ruleassociation "github.com/upbound/provider-aws/internal/controller/route53resolver/ruleassociation"
 	bucket "github.com/upbound/provider-aws/internal/controller/s3/bucket"
 	bucketaccelerateconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketaccelerateconfiguration"
@@ -812,6 +820,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lblistener.Setup,
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
+		apidestination.Setup,
+		archive.Setup,
+		bus.Setup,
+		buspolicy.Setup,
+		connectionevents.Setup,
+		permission.Setup,
+		rule.Setup,
+		targetevents.Setup,
 		deliverystream.Setup,
 		alias.Setup,
 		build.Setup,
@@ -888,7 +904,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		invocation.Setup,
 		layerversion.Setup,
 		layerversionpermission.Setup,
-		permission.Setup,
+		permissionlambda.Setup,
 		provisionedconcurrencyconfig.Setup,
 		bot.Setup,
 		botalias.Setup,
@@ -946,7 +962,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcassociationauthorization.Setup,
 		zone.Setup,
 		endpoint.Setup,
-		rule.Setup,
+		ruleroute53resolver.Setup,
 		ruleassociation.Setup,
 		bucket.Setup,
 		bucketaccelerateconfiguration.Setup,
