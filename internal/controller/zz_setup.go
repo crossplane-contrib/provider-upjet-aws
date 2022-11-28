@@ -167,6 +167,15 @@ import (
 	appdeploy "github.com/upbound/provider-aws/internal/controller/deploy/app"
 	deploymentconfig "github.com/upbound/provider-aws/internal/controller/deploy/deploymentconfig"
 	deploymentgroup "github.com/upbound/provider-aws/internal/controller/deploy/deploymentgroup"
+	graph "github.com/upbound/provider-aws/internal/controller/detective/graph"
+	invitationaccepter "github.com/upbound/provider-aws/internal/controller/detective/invitationaccepter"
+	member "github.com/upbound/provider-aws/internal/controller/detective/member"
+	devicepool "github.com/upbound/provider-aws/internal/controller/devicefarm/devicepool"
+	instanceprofile "github.com/upbound/provider-aws/internal/controller/devicefarm/instanceprofile"
+	networkprofile "github.com/upbound/provider-aws/internal/controller/devicefarm/networkprofile"
+	project "github.com/upbound/provider-aws/internal/controller/devicefarm/project"
+	testgridproject "github.com/upbound/provider-aws/internal/controller/devicefarm/testgridproject"
+	upload "github.com/upbound/provider-aws/internal/controller/devicefarm/upload"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
 	globalcluster "github.com/upbound/provider-aws/internal/controller/docdb/globalcluster"
@@ -318,7 +327,7 @@ import (
 	groupiam "github.com/upbound/provider-aws/internal/controller/iam/group"
 	groupmembership "github.com/upbound/provider-aws/internal/controller/iam/groupmembership"
 	grouppolicyattachment "github.com/upbound/provider-aws/internal/controller/iam/grouppolicyattachment"
-	instanceprofile "github.com/upbound/provider-aws/internal/controller/iam/instanceprofile"
+	instanceprofileiam "github.com/upbound/provider-aws/internal/controller/iam/instanceprofile"
 	openidconnectprovider "github.com/upbound/provider-aws/internal/controller/iam/openidconnectprovider"
 	policyiam "github.com/upbound/provider-aws/internal/controller/iam/policy"
 	role "github.com/upbound/provider-aws/internal/controller/iam/role"
@@ -619,6 +628,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		appdeploy.Setup,
 		deploymentconfig.Setup,
 		deploymentgroup.Setup,
+		graph.Setup,
+		invitationaccepter.Setup,
+		member.Setup,
+		devicepool.Setup,
+		instanceprofile.Setup,
+		networkprofile.Setup,
+		project.Setup,
+		testgridproject.Setup,
+		upload.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,
 		globalcluster.Setup,
@@ -770,7 +788,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		groupiam.Setup,
 		groupmembership.Setup,
 		grouppolicyattachment.Setup,
-		instanceprofile.Setup,
+		instanceprofileiam.Setup,
 		openidconnectprovider.Setup,
 		policyiam.Setup,
 		role.Setup,

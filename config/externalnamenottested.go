@@ -253,30 +253,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// aws_datasync_task can be imported by using the DataSync Task Amazon Resource Name (ARN)
 	"aws_datasync_task": config.IdentifierFromProvider,
 
-	// detective
-	//
-	// aws_detective_graph can be imported using the ARN
-	"aws_detective_graph": config.IdentifierFromProvider,
-	// aws_detective_invitation_accepter can be imported using the graph ARN
-	"aws_detective_invitation_accepter": config.IdentifierFromProvider,
-	// aws_detective_member can be imported using the ARN of the graph followed by the account ID of the member account
-	"aws_detective_member": config.IdentifierFromProvider,
-
-	// devicefarm
-	//
-	// DeviceFarm Device Pools can be imported by their arn
-	"aws_devicefarm_device_pool": config.IdentifierFromProvider,
-	// DeviceFarm Instance Profiles can be imported by their arn
-	"aws_devicefarm_instance_profile": config.IdentifierFromProvider,
-	// DeviceFarm Network Profiles can be imported by their arn
-	"aws_devicefarm_network_profile": config.IdentifierFromProvider,
-	// DeviceFarm Projects can be imported by their arn
-	"aws_devicefarm_project": config.IdentifierFromProvider,
-	// DeviceFarm Test Grid Projects can be imported by their arn
-	"aws_devicefarm_test_grid_project": config.IdentifierFromProvider,
-	// DeviceFarm Uploads can be imported by their arn
-	"aws_devicefarm_upload": config.IdentifierFromProvider,
-
 	// directconnect
 	//
 	// No import
