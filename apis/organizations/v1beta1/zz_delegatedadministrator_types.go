@@ -43,8 +43,17 @@ type DelegatedAdministratorObservation struct {
 type DelegatedAdministratorParameters struct {
 
 	// The account ID number of the member account in the organization to register as a delegated administrator.
-	// +kubebuilder:validation:Required
-	AccountID *string `json:"accountId" tf:"account_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/organizations/v1beta1.Account
+	// +kubebuilder:validation:Optional
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// Reference to a Account in organizations to populate accountId.
+	// +kubebuilder:validation:Optional
+	AccountIDRef *v1.Reference `json:"accountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in organizations to populate accountId.
+	// +kubebuilder:validation:Optional
+	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

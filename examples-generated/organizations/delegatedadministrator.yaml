@@ -8,7 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    accountId: "123456789012"
+    accountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
     servicePrincipal: principal
 
