@@ -39,16 +39,14 @@ type PolicyAttachmentParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The unique identifier (ID) of the root, organizational unit, or account number that you want to attach the policy to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/organizations/v1beta1.OrganizationalUnit
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 
-	// Reference to a OrganizationalUnit in organizations to populate targetId.
+	// Reference to a  to populate targetId.
 	// +kubebuilder:validation:Optional
 	TargetIDRef *v1.Reference `json:"targetIdRef,omitempty" tf:"-"`
 
-	// Selector for a OrganizationalUnit in organizations to populate targetId.
+	// Selector for a  to populate targetId.
 	// +kubebuilder:validation:Optional
 	TargetIDSelector *v1.Selector `json:"targetIdSelector,omitempty" tf:"-"`
 }

@@ -30,4 +30,7 @@ func Configure(p *config.Provider) {
 			Type:      "github.com/upbound/provider-aws/apis/organizations/v1beta1.Account",
 		}		
 	})
+	p.AddResourceConfigurator("aws_organizations_policy_attachment", func(r *config.Resource) {
+		r.References["target_id"] = config.Reference{}
+	})
 }

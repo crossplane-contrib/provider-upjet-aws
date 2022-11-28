@@ -153,8 +153,7 @@ spec:
                       unit, or account number that you want to attach the policy to.
                     type: string
                   targetIdRef:
-                    description: Reference to a OrganizationalUnit in organizations
-                      to populate targetId.
+                    description: Reference to a  to populate targetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -188,8 +187,7 @@ spec:
                     - name
                     type: object
                   targetIdSelector:
-                    description: Selector for a OrganizationalUnit in organizations
-                      to populate targetId.
+                    description: Selector for a  to populate targetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -62,21 +62,5 @@ func (mg *PolicyAttachment) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.PolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyIDRef = rsp.ResolvedReference
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetID),
-		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.ForProvider.TargetIDRef,
-		Selector:     mg.Spec.ForProvider.TargetIDSelector,
-		To: reference.To{
-			List:    &OrganizationalUnitList{},
-			Managed: &OrganizationalUnit{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.TargetID")
-	}
-	mg.Spec.ForProvider.TargetID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.TargetIDRef = rsp.ResolvedReference
-
 	return nil
 }
