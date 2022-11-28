@@ -1368,6 +1368,21 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName("arn:aws:cloudformation:{{ .parameters.region }}:{{ .client_metadata.account_id }}:stack/{{ .parameters.name }}/{{ .external_name }}"),
 	// CloudFormation StackSets can be imported using the name
 	"aws_cloudformation_stack_set": config.NameAsIdentifier,
+
+	// directconnect
+    //
+    // Direct Connect Gateways can be imported using the gateway id
+    "aws_dx_gateway": config.IdentifierFromProvider,
+    // Direct Connect gateway associations can be imported using dx_gateway_id together with associated_gateway_id
+    // TODO: associated_gateway_id parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
+    "aws_dx_gateway_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.dx_gateway_id }}/{{ .parameters.associated_gateway_id }}"),
+    // Direct Connect connections can be imported using the connection id
+    "aws_dx_connection": config.IdentifierFromProvider,
+    // Direct Connect public virtual interfaces can be imported using the vif id
+    "aws_dx_public_virtual_interface": config.IdentifierFromProvider,
+    // No import
+    "aws_dx_connection_association": config.IdentifierFromProvider,
+
 }
 
 func lambdaFunctionURL() config.ExternalName {

@@ -197,6 +197,11 @@ import (
 	project "github.com/upbound/provider-aws/internal/controller/devicefarm/project"
 	testgridproject "github.com/upbound/provider-aws/internal/controller/devicefarm/testgridproject"
 	upload "github.com/upbound/provider-aws/internal/controller/devicefarm/upload"
+	connectiondirectconnect "github.com/upbound/provider-aws/internal/controller/directconnect/connection"
+	connectionassociation "github.com/upbound/provider-aws/internal/controller/directconnect/connectionassociation"
+	gateway "github.com/upbound/provider-aws/internal/controller/directconnect/gateway"
+	gatewayassociation "github.com/upbound/provider-aws/internal/controller/directconnect/gatewayassociation"
+	publicvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/publicvirtualinterface"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
 	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/docdb/clusterparametergroup"
@@ -695,6 +700,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		project.Setup,
 		testgridproject.Setup,
 		upload.Setup,
+		connectiondirectconnect.Setup,
+		connectionassociation.Setup,
+		gateway.Setup,
+		gatewayassociation.Setup,
+		publicvirtualinterface.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,
 		clusterparametergroup.Setup,
