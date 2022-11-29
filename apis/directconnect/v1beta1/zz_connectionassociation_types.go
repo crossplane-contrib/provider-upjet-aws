@@ -34,8 +34,18 @@ type ConnectionAssociationParameters struct {
 	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the LAG with which to associate the connection.
-	// +kubebuilder:validation:Required
-	LagID *string `json:"lagId" tf:"lag_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Lag
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	LagID *string `json:"lagId,omitempty" tf:"lag_id,omitempty"`
+
+	// Reference to a Lag in directconnect to populate lagId.
+	// +kubebuilder:validation:Optional
+	LagIDRef *v1.Reference `json:"lagIdRef,omitempty" tf:"-"`
+
+	// Selector for a Lag in directconnect to populate lagId.
+	// +kubebuilder:validation:Optional
+	LagIDSelector *v1.Selector `json:"lagIdSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

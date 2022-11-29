@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: gatewayassociations.directconnect.aws.upbound.io
+  name: lags.directconnect.aws.upbound.io
 spec:
   group: directconnect.aws.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - aws
-    kind: GatewayAssociation
-    listKind: GatewayAssociationList
-    plural: gatewayassociations
-    singular: gatewayassociation
+    kind: Lag
+    listKind: LagList
+    plural: lags
+    singular: lag
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: GatewayAssociation is the Schema for the GatewayAssociations
-          API. Associates a Direct Connect Gateway with a VGW or transit gateway.
+        description: Lag is the Schema for the Lags API. Provides a Direct Connect
+          LAG.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: GatewayAssociationSpec defines the desired state of GatewayAssociation
+            description: LagSpec defines the desired state of Lag
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,189 +64,46 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  allowedPrefixes:
-                    description: VPC prefixes (CIDRs) to advertise to the Direct Connect
-                      gateway. Defaults to the CIDR block of the VPC associated with
-                      the Virtual Gateway. To enable drift detection, must be configured.
-                    items:
-                      type: string
-                    type: array
-                  associatedGatewayId:
-                    description: The ID of the VGW or transit gateway with which to
-                      associate the Direct Connect gateway. Used for single account
-                      Direct Connect gateway associations.
+                  connectionId:
+                    description: The ID of an existing dedicated connection to migrate
+                      to the LAG.
                     type: string
-                  associatedGatewayIdRef:
-                    description: Reference to a TransitGateway in ec2 to populate
-                      associatedGatewayId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  associatedGatewayIdSelector:
-                    description: Selector for a TransitGateway in ec2 to populate
-                      associatedGatewayId.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  associatedGatewayOwnerAccountId:
-                    description: The ID of the AWS account that owns the VGW or transit
-                      gateway with which to associate the Direct Connect gateway.
-                      Used for cross-account Direct Connect gateway associations.
+                  connectionsBandwidth:
+                    description: 'The bandwidth of the individual physical connections
+                      bundled by the LAG. Valid values: 50Mbps, 100Mbps, 200Mbps,
+                      300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, 10Gbps and 100Gbps.
+                      Case sensitive.'
                     type: string
-                  dxGatewayId:
-                    description: The ID of the Direct Connect gateway.
+                  forceDestroy:
+                    description: A boolean that indicates all connections associated
+                      with the LAG should be deleted so that the LAG can be destroyed
+                      without error. These objects are not recoverable.
+                    type: boolean
+                  location:
+                    description: The AWS Direct Connect location in which the LAG
+                      should be allocated. See DescribeLocations for the list of AWS
+                      Direct Connect locations. Use locationCode.
                     type: string
-                  dxGatewayIdRef:
-                    description: Reference to a Gateway in directconnect to populate
-                      dxGatewayId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  dxGatewayIdSelector:
-                    description: Selector for a Gateway in directconnect to populate
-                      dxGatewayId.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  proposalId:
-                    description: The ID of the Direct Connect gateway association
-                      proposal. Used for cross-account Direct Connect gateway associations.
+                  name:
+                    description: The name of the LAG.
+                    type: string
+                  providerName:
+                    description: The name of the service provider associated with
+                      the LAG.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  vpnGatewayId:
-                    description: The ID of the Direct Connect gateway association
-                      resource.
-                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 required:
+                - connectionsBandwidth
+                - location
+                - name
                 - region
                 type: object
               providerConfigRef:
@@ -421,25 +278,33 @@ spec:
             - forProvider
             type: object
           status:
-            description: GatewayAssociationStatus defines the observed state of GatewayAssociation.
+            description: LagStatus defines the observed state of Lag.
             properties:
               atProvider:
                 properties:
-                  associatedGatewayType:
-                    description: The type of the associated gateway, transitGateway
-                      or virtualPrivateGateway.
+                  arn:
+                    description: The ARN of the LAG.
                     type: string
-                  dxGatewayAssociationId:
-                    description: The ID of the Direct Connect gateway association.
-                    type: string
-                  dxGatewayOwnerAccountId:
-                    description: The ID of the AWS account that owns the Direct Connect
-                      gateway.
+                  hasLogicalRedundancy:
+                    description: Indicates whether the LAG supports a secondary BGP
+                      peer in the same address family (IPv4/IPv6).
                     type: string
                   id:
-                    description: The ID of the Direct Connect gateway association
-                      resource.
+                    description: The ID of the LAG.
                     type: string
+                  jumboFrameCapable:
+                    description: Indicates whether jumbo frames (9001 MTU) are supported.
+                    type: boolean
+                  ownerAccountId:
+                    description: The ID of the AWS account that owns the LAG.
+                    type: string
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

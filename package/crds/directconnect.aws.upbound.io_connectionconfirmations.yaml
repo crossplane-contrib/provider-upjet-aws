@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: connectionassociations.directconnect.aws.upbound.io
+  name: connectionconfirmations.directconnect.aws.upbound.io
 spec:
   group: directconnect.aws.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - aws
-    kind: ConnectionAssociation
-    listKind: ConnectionAssociationList
-    plural: connectionassociations
-    singular: connectionassociation
+    kind: ConnectionConfirmation
+    listKind: ConnectionConfirmationList
+    plural: connectionconfirmations
+    singular: connectionconfirmation
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,9 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ConnectionAssociation is the Schema for the ConnectionAssociations
-          API. Associates a Direct Connect Connection with a LAG.
+        description: ConnectionConfirmation is the Schema for the ConnectionConfirmations
+          API. Provides a confirmation of the creation of the specified hosted connection
+          on an interconnect.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +52,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ConnectionAssociationSpec defines the desired state of ConnectionAssociation
+            description: ConnectionConfirmationSpec defines the desired state of ConnectionConfirmation
             properties:
               deletionPolicy:
                 default: Delete
@@ -65,164 +66,14 @@ spec:
               forProvider:
                 properties:
                   connectionId:
-                    description: The ID of the connection.
+                    description: The ID of the hosted connection.
                     type: string
-                  connectionIdRef:
-                    description: Reference to a Connection in directconnect to populate
-                      connectionId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  connectionIdSelector:
-                    description: Selector for a Connection in directconnect to populate
-                      connectionId.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  lagId:
-                    description: The ID of the LAG with which to associate the connection.
-                    type: string
-                  lagIdRef:
-                    description: Reference to a Lag in directconnect to populate lagId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  lagIdSelector:
-                    description: Selector for a Lag in directconnect to populate lagId.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                 required:
+                - connectionId
                 - region
                 type: object
               providerConfigRef:
@@ -397,12 +248,13 @@ spec:
             - forProvider
             type: object
           status:
-            description: ConnectionAssociationStatus defines the observed state of
-              ConnectionAssociation.
+            description: ConnectionConfirmationStatus defines the observed state of
+              ConnectionConfirmation.
             properties:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the connection.
                     type: string
                 type: object
               conditions:

@@ -199,8 +199,10 @@ import (
 	upload "github.com/upbound/provider-aws/internal/controller/devicefarm/upload"
 	connectiondirectconnect "github.com/upbound/provider-aws/internal/controller/directconnect/connection"
 	connectionassociation "github.com/upbound/provider-aws/internal/controller/directconnect/connectionassociation"
+	connectionconfirmation "github.com/upbound/provider-aws/internal/controller/directconnect/connectionconfirmation"
 	gateway "github.com/upbound/provider-aws/internal/controller/directconnect/gateway"
-	gatewayassociation "github.com/upbound/provider-aws/internal/controller/directconnect/gatewayassociation"
+	hostedconnection "github.com/upbound/provider-aws/internal/controller/directconnect/hostedconnection"
+	lag "github.com/upbound/provider-aws/internal/controller/directconnect/lag"
 	publicvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/publicvirtualinterface"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
@@ -702,8 +704,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		upload.Setup,
 		connectiondirectconnect.Setup,
 		connectionassociation.Setup,
+		connectionconfirmation.Setup,
 		gateway.Setup,
-		gatewayassociation.Setup,
+		hostedconnection.Setup,
+		lag.Setup,
 		publicvirtualinterface.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,

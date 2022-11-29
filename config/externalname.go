@@ -1373,15 +1373,18 @@ var ExternalNameConfigs = map[string]config.ExternalName{
     //
     // Direct Connect Gateways can be imported using the gateway id
     "aws_dx_gateway": config.IdentifierFromProvider,
-    // Direct Connect gateway associations can be imported using dx_gateway_id together with associated_gateway_id
-    // TODO: associated_gateway_id parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
-    "aws_dx_gateway_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.dx_gateway_id }}/{{ .parameters.associated_gateway_id }}"),
     // Direct Connect connections can be imported using the connection id
     "aws_dx_connection": config.IdentifierFromProvider,
     // Direct Connect public virtual interfaces can be imported using the vif id
     "aws_dx_public_virtual_interface": config.IdentifierFromProvider,
     // No import
     "aws_dx_connection_association": config.IdentifierFromProvider,
+    // Direct Connect LAGs can be imported using the lag id
+    "aws_dx_lag": config.IdentifierFromProvider,
+    // No import
+    "aws_dx_connection_confirmation": config.IdentifierFromProvider,
+    // No import
+    "aws_dx_hosted_connection": config.IdentifierFromProvider,
 
 }
 

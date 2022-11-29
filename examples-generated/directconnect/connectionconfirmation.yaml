@@ -1,0 +1,15 @@
+apiVersion: directconnect.aws.upbound.io/v1beta1
+kind: ConnectionConfirmation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: directconnect/v1beta1/connectionconfirmation
+  labels:
+    testing.upbound.io/example-name: confirmation
+  name: confirmation
+spec:
+  forProvider:
+    connectionId: dxcon-ffabc123
+    region: us-west-1
+
+---
+

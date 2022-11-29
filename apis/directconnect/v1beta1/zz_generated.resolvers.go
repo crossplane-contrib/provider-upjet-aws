@@ -9,7 +9,6 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -37,47 +36,21 @@ func (mg *ConnectionAssociation) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.ConnectionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ConnectionIDRef = rsp.ResolvedReference
 
-	return nil
-}
-
-// ResolveReferences of this GatewayAssociation.
-func (mg *GatewayAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AssociatedGatewayID),
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LagID),
 		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.ForProvider.AssociatedGatewayIDRef,
-		Selector:     mg.Spec.ForProvider.AssociatedGatewayIDSelector,
+		Reference:    mg.Spec.ForProvider.LagIDRef,
+		Selector:     mg.Spec.ForProvider.LagIDSelector,
 		To: reference.To{
-			List:    &v1beta1.TransitGatewayList{},
-			Managed: &v1beta1.TransitGateway{},
+			List:    &LagList{},
+			Managed: &Lag{},
 		},
 	})
 	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.AssociatedGatewayID")
+		return errors.Wrap(err, "mg.Spec.ForProvider.LagID")
 	}
-	mg.Spec.ForProvider.AssociatedGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.AssociatedGatewayIDRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DxGatewayID),
-		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.ForProvider.DxGatewayIDRef,
-		Selector:     mg.Spec.ForProvider.DxGatewayIDSelector,
-		To: reference.To{
-			List:    &GatewayList{},
-			Managed: &Gateway{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.DxGatewayID")
-	}
-	mg.Spec.ForProvider.DxGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.DxGatewayIDRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.LagID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LagIDRef = rsp.ResolvedReference
 
 	return nil
 }

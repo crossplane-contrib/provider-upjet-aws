@@ -19,9 +19,7 @@ spec:
     - 210.52.109.0/24
     - 175.45.176.0/22
     vlan: 4094
-
 ---
-
 apiVersion: directconnect.aws.upbound.io/v1beta1
 kind: Connection
 metadata:
@@ -36,6 +34,4 @@ spec:
     location: PNP51
     name: example
     region: us-west-1
-
 ---
-

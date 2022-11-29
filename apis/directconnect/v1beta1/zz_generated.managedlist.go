@@ -16,6 +16,15 @@ func (l *ConnectionAssociationList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ConnectionConfirmationList.
+func (l *ConnectionConfirmationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ConnectionList.
 func (l *ConnectionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -25,8 +34,8 @@ func (l *ConnectionList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this GatewayAssociationList.
-func (l *GatewayAssociationList) GetItems() []resource.Managed {
+// GetItems of this GatewayList.
+func (l *GatewayList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -34,8 +43,17 @@ func (l *GatewayAssociationList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this GatewayList.
-func (l *GatewayList) GetItems() []resource.Managed {
+// GetItems of this HostedConnectionList.
+func (l *HostedConnectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this LagList.
+func (l *LagList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
