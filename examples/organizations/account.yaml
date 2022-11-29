@@ -4,7 +4,7 @@ kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: organizations/v1beta1/account
-    upjet.upbound.io/manual-intervention: "This resource requires an organization, manually tested with a free tier account"
+    upjet.upbound.io/manual-intervention: "This resource requires a valid email address, manually tested with a free tier account"
   labels:
     testing.upbound.io/example-name: account
   name: account
