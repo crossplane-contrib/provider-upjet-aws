@@ -30,6 +30,8 @@ func Configure(p *config.Provider) {
 			Type: "github.com/upbound/provider-aws/apis/organizations/v1beta1.Account",
 		}
 	})
+	// We are deleting this reference as we have three different types: Organization Account,
+	// Organization Root, Organization Unit.
 	p.AddResourceConfigurator("aws_organizations_policy_attachment", func(r *config.Resource) {
 		delete(r.References, "target_id")
 	})
