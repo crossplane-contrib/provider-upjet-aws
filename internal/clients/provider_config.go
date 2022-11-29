@@ -58,6 +58,7 @@ const (
 // userAgentV2 constructs the Crossplane user agent for AWS v2 clients
 var userAgentV2 = config.WithAPIOptions([]func(*middleware.Stack) error{
 	awsmiddleware.AddUserAgentKeyValue("upbound-provider-aws", version.Version),
+	awsmiddleware.AddUserAgentKeyValue("crossplane-provider-aws", version.Version),
 })
 
 func getRegion(obj runtime.Object) (string, error) {
