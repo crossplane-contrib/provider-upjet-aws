@@ -1175,7 +1175,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// aws_appsync_api_cache can be imported using the AppSync API ID
 	"aws_appsync_api_cache": config.IdentifierFromProvider,
 	// aws_appsync_api_key can be imported using the AppSync API ID and key separated by :
-	"aws_appsync_api_key": config.IdentifierFromProvider,
+	"aws_appsync_api_key": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}:{{ .external_name }}"),
 	// aws_appsync_datasource can be imported with their api_id, a hyphen, and name
 	"aws_appsync_datasource": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_id }}-{{ .external_name }}"),
 	// aws_appsync_function can be imported using the AppSync API ID and Function ID separated by -
