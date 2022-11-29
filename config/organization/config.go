@@ -27,10 +27,10 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_organizations_delegated_administrator", func(r *config.Resource) {
 		r.References["account_id"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/organizations/v1beta1.Account",
-		}		
+			Type: "github.com/upbound/provider-aws/apis/organizations/v1beta1.Account",
+		}
 	})
 	p.AddResourceConfigurator("aws_organizations_policy_attachment", func(r *config.Resource) {
-		r.References["target_id"] = config.Reference{}
+		delete(r.References, "target_id")
 	})
 }

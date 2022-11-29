@@ -39,16 +39,8 @@ type PolicyAttachmentParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The unique identifier (ID) of the root, organizational unit, or account number that you want to attach the policy to.
-	// +kubebuilder:validation:Optional
-	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
-
-	// Reference to a  to populate targetId.
-	// +kubebuilder:validation:Optional
-	TargetIDRef *v1.Reference `json:"targetIdRef,omitempty" tf:"-"`
-
-	// Selector for a  to populate targetId.
-	// +kubebuilder:validation:Optional
-	TargetIDSelector *v1.Selector `json:"targetIdSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	TargetID *string `json:"targetId" tf:"target_id,omitempty"`
 }
 
 // PolicyAttachmentSpec defines the desired state of PolicyAttachment
