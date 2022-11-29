@@ -1312,6 +1312,15 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// No import
 	"aws_cloudcontrolapi_resource": config.IdentifierFromProvider,
+
+	// securityhub
+	//
+	// An existing Security Hub enabled account can be imported using the AWS account ID
+	"aws_securityhub_account": config.IdentifierFromProvider,
+	// imported using the account ID
+	"aws_securityhub_invite_accepter": FormattedIdentifierFromProvider("", "master_id"),
+	// imported using security hub member account ID
+	"aws_securityhub_member": FormattedIdentifierFromProvider("", "account_id"),
 }
 
 func lambdaFunctionURL() config.ExternalName {

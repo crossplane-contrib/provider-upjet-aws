@@ -1,0 +1,124 @@
+apiVersion: codebuild.aws.upbound.io/v1beta1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codebuild/v1beta1/project
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    artifacts:
+    - type: NO_ARTIFACTS
+    buildTimeout: 5
+    cache:
+    - locationSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      type: S3
+    description: test_codebuild_project
+    environment:
+    - computeType: BUILD_GENERAL1_SMALL
+      environmentVariable:
+      - name: SOME_KEY1
+        value: SOME_VALUE1
+      - name: SOME_KEY2
+        type: PARAMETER_STORE
+        value: SOME_VALUE2
+      image: aws/codebuild/standard:1.0
+      imagePullCredentialsType: CODEBUILD
+      type: LINUX_CONTAINER
+    logsConfig:
+    - cloudwatchLogs:
+      - groupName: log-group
+        streamName: log-stream
+      s3Logs:
+      - location:
+          bucketSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example
+        status: ENABLED
+    region: us-west-1
+    serviceRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    source:
+    - gitCloneDepth: 1
+      gitSubmodulesConfig:
+      - fetchSubmodules: true
+      location: https://github.com/mitchellh/packer.git
+      type: GITHUB
+    sourceVersion: master
+    tags:
+      Environment: Test
+    vpcConfig:
+    - securityGroupIds:
+      - ${aws_security_group.example1.id}
+      - ${aws_security_group.example2.id}
+      subnets:
+      - ${aws_subnet.example1.id}
+      - ${aws_subnet.example2.id}
+      vpcIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codebuild/v1beta1/project
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "codebuild.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: "avhvHKGYfdhKDVdhdvwjbdkwh"
+    meta.upbound.io/example-id: codebuild/v1beta1/project
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codebuild/v1beta1/project
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+
+---
+

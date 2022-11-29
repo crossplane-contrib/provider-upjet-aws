@@ -90,6 +90,7 @@ import (
 	v1beta1route53resolver "github.com/upbound/provider-aws/apis/route53resolver/v1beta1"
 	v1beta1s3 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	v1beta1secretsmanager "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1"
+	v1beta1securityhub "github.com/upbound/provider-aws/apis/securityhub/v1beta1"
 	v1beta1servicediscovery "github.com/upbound/provider-aws/apis/servicediscovery/v1beta1"
 	v1beta1sfn "github.com/upbound/provider-aws/apis/sfn/v1beta1"
 	v1beta1signer "github.com/upbound/provider-aws/apis/signer/v1beta1"
@@ -182,6 +183,7 @@ func init() {
 		v1beta1route53resolver.SchemeBuilder.AddToScheme,
 		v1beta1s3.SchemeBuilder.AddToScheme,
 		v1beta1secretsmanager.SchemeBuilder.AddToScheme,
+		v1beta1securityhub.SchemeBuilder.AddToScheme,
 		v1beta1servicediscovery.SchemeBuilder.AddToScheme,
 		v1beta1sfn.SchemeBuilder.AddToScheme,
 		v1beta1signer.SchemeBuilder.AddToScheme,
