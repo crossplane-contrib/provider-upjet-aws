@@ -27,8 +27,18 @@ type ConditionParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 
 	// Value for the key.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/organizations/v1beta1.Organization
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+
+	// Reference to a Organization in organizations to populate value.
+	// +kubebuilder:validation:Optional
+	ValueRef *v1.Reference `json:"valueRef,omitempty" tf:"-"`
+
+	// Selector for a Organization in organizations to populate value.
+	// +kubebuilder:validation:Optional
+	ValueSelector *v1.Selector `json:"valueSelector,omitempty" tf:"-"`
 }
 
 type PermissionObservation struct {
