@@ -1,0 +1,44 @@
+apiVersion: securityhub.aws.upbound.io/v1beta1
+kind: OrganizationAdminAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/organizationadminaccount
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    adminAccountId: "153891904029"
+    region: us-west-1
+
+---
+
+apiVersion: securityhub.aws.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/organizationadminaccount
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: securityhub.aws.upbound.io/v1beta1
+kind: OrganizationConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/organizationadminaccount
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    autoEnable: true
+    region: us-west-1
+
+---
+

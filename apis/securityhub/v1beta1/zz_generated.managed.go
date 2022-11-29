@@ -73,134 +73,68 @@ func (mg *Account) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) 
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this InviteAccepter.
-func (mg *InviteAccepter) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this FindingAggregator.
+func (mg *FindingAggregator) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this InviteAccepter.
-func (mg *InviteAccepter) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this FindingAggregator.
+func (mg *FindingAggregator) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetProviderConfigReference of this InviteAccepter.
-func (mg *InviteAccepter) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this FindingAggregator.
+func (mg *FindingAggregator) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 /*
-GetProviderReference of this InviteAccepter.
+GetProviderReference of this FindingAggregator.
 Deprecated: Use GetProviderConfigReference.
 */
-func (mg *InviteAccepter) GetProviderReference() *xpv1.Reference {
+func (mg *FindingAggregator) GetProviderReference() *xpv1.Reference {
 	return mg.Spec.ProviderReference
 }
 
-// GetPublishConnectionDetailsTo of this InviteAccepter.
-func (mg *InviteAccepter) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+// GetPublishConnectionDetailsTo of this FindingAggregator.
+func (mg *FindingAggregator) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
-// GetWriteConnectionSecretToReference of this InviteAccepter.
-func (mg *InviteAccepter) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this FindingAggregator.
+func (mg *FindingAggregator) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this InviteAccepter.
-func (mg *InviteAccepter) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this FindingAggregator.
+func (mg *FindingAggregator) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this InviteAccepter.
-func (mg *InviteAccepter) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this FindingAggregator.
+func (mg *FindingAggregator) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetProviderConfigReference of this InviteAccepter.
-func (mg *InviteAccepter) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this FindingAggregator.
+func (mg *FindingAggregator) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 /*
-SetProviderReference of this InviteAccepter.
+SetProviderReference of this FindingAggregator.
 Deprecated: Use SetProviderConfigReference.
 */
-func (mg *InviteAccepter) SetProviderReference(r *xpv1.Reference) {
+func (mg *FindingAggregator) SetProviderReference(r *xpv1.Reference) {
 	mg.Spec.ProviderReference = r
 }
 
-// SetPublishConnectionDetailsTo of this InviteAccepter.
-func (mg *InviteAccepter) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+// SetPublishConnectionDetailsTo of this FindingAggregator.
+func (mg *FindingAggregator) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
 }
 
-// SetWriteConnectionSecretToReference of this InviteAccepter.
-func (mg *InviteAccepter) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
-// GetCondition of this Member.
-func (mg *Member) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this Member.
-func (mg *Member) GetDeletionPolicy() xpv1.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetProviderConfigReference of this Member.
-func (mg *Member) GetProviderConfigReference() *xpv1.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this Member.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Member) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
-// GetPublishConnectionDetailsTo of this Member.
-func (mg *Member) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
-// GetWriteConnectionSecretToReference of this Member.
-func (mg *Member) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this Member.
-func (mg *Member) SetConditions(c ...xpv1.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this Member.
-func (mg *Member) SetDeletionPolicy(r xpv1.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetProviderConfigReference of this Member.
-func (mg *Member) SetProviderConfigReference(r *xpv1.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Member.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Member) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Member.
-func (mg *Member) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
-// SetWriteConnectionSecretToReference of this Member.
-func (mg *Member) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this FindingAggregator.
+func (mg *FindingAggregator) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

@@ -1,23 +1,21 @@
 apiVersion: securityhub.aws.upbound.io/v1beta1
-kind: Member
+kind: StandardsSubscription
 metadata:
   annotations:
-    meta.upbound.io/example-id: securityhub/v1beta1/member
+    meta.upbound.io/example-id: securityhub/v1beta1/standardssubscription
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: cis
+  name: cis
 spec:
   forProvider:
-    accountId: ${data.aws_account_id}
-    email: example@example.com
-    invite: true
     region: us-west-1
+    standardsArn: arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0
 ---
 apiVersion: securityhub.aws.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:
-    meta.upbound.io/example-id: securityhub/v1beta1/member
+    meta.upbound.io/example-id: securityhub/v1beta1/standardssubscription
   labels:
     testing.upbound.io/example-name: example
   name: example

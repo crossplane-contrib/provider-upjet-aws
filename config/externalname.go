@@ -1317,10 +1317,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// An existing Security Hub enabled account can be imported using the AWS account ID
 	"aws_securityhub_account": config.IdentifierFromProvider,
-	// imported using the account ID
-	"aws_securityhub_invite_accepter": FormattedIdentifierFromProvider("", "master_id"),
-	// imported using security hub member account ID
-	"aws_securityhub_member": FormattedIdentifierFromProvider("", "account_id"),
+	// imported using the arn that has a random substring:
+    // arn:aws:securityhub:eu-west-1:123456789098:finding-aggregator/abcd1234-abcd-1234-1234-abcdef123456
+    "aws_securityhub_finding_aggregator": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

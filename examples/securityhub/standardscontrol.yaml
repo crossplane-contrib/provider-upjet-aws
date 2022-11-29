@@ -1,0 +1,46 @@
+apiVersion: securityhub.aws.upbound.io/v1beta1
+kind: StandardsControl
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/standardscontrol
+  labels:
+    testing.upbound.io/example-name: ensure_iam_password_policy_prevents_password_reuse
+  name: ensure-iam-password-policy-prevents-password-reuse
+spec:
+  forProvider:
+    controlStatus: DISABLED
+    disabledReason: We handle password policies within Okta
+    region: us-west-1
+    standardsControlArn: arn:aws:securityhub:us-east-1:111111111111:control/cis-aws-foundations-benchmark/v/1.2.0/1.10
+
+---
+
+apiVersion: securityhub.aws.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/standardscontrol
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: securityhub.aws.upbound.io/v1beta1
+kind: StandardsSubscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/standardscontrol
+  labels:
+    testing.upbound.io/example-name: cis_aws_foundations_benchmark
+  name: cis-aws-foundations-benchmark
+spec:
+  forProvider:
+    region: us-west-1
+    standardsArn: arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0
+
+---
+

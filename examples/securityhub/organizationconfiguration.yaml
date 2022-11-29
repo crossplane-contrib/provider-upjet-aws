@@ -1,26 +1,30 @@
 apiVersion: securityhub.aws.upbound.io/v1beta1
-kind: Member
+kind: OrganizationConfiguration
 metadata:
   annotations:
-    meta.upbound.io/example-id: securityhub/v1beta1/member
+    meta.upbound.io/example-id: securityhub/v1beta1/organizationconfiguration
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    accountId: ${data.aws_account_id}
-    email: example@example.com
-    invite: true
+    autoEnable: true
     region: us-west-1
+
 ---
+
 apiVersion: securityhub.aws.upbound.io/v1beta1
-kind: Account
+kind: OrganizationAdminAccount
 metadata:
   annotations:
-    meta.upbound.io/example-id: securityhub/v1beta1/member
+    meta.upbound.io/example-id: securityhub/v1beta1/organizationconfiguration
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
+    adminAccountId: "153891904029"
     region: us-west-1
+
+---
+
