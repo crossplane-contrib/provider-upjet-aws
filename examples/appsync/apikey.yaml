@@ -18,6 +18,7 @@ kind: GraphQLAPI
 metadata:
   annotations:
     meta.upbound.io/example-id: appsync/v1beta1/apikey
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-apikey.sh
   labels:
     testing.upbound.io/example-name: example
   name: example
