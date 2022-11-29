@@ -60,6 +60,7 @@ import (
 	"github.com/upbound/provider-aws/config/mq"
 	"github.com/upbound/provider-aws/config/neptune"
 	"github.com/upbound/provider-aws/config/opensearch"
+	"github.com/upbound/provider-aws/config/organization"
 	"github.com/upbound/provider-aws/config/rds"
 	"github.com/upbound/provider-aws/config/redshift"
 	"github.com/upbound/provider-aws/config/route53"
@@ -202,6 +203,7 @@ func GetProvider() *config.Provider {
 		cur.Configure,
 		servicecatalog.Configure,
 		devicefarm.Configure,
+		organization.Configure,
 	} {
 		configure(pc)
 	}

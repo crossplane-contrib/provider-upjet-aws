@@ -393,6 +393,12 @@ import (
 	domainopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domain"
 	domainpolicy "github.com/upbound/provider-aws/internal/controller/opensearch/domainpolicy"
 	domainsamloptions "github.com/upbound/provider-aws/internal/controller/opensearch/domainsamloptions"
+	accountorganizations "github.com/upbound/provider-aws/internal/controller/organizations/account"
+	delegatedadministrator "github.com/upbound/provider-aws/internal/controller/organizations/delegatedadministrator"
+	organization "github.com/upbound/provider-aws/internal/controller/organizations/organization"
+	organizationalunit "github.com/upbound/provider-aws/internal/controller/organizations/organizationalunit"
+	policyorganizations "github.com/upbound/provider-aws/internal/controller/organizations/policy"
+	policyattachment "github.com/upbound/provider-aws/internal/controller/organizations/policyattachment"
 	providerconfig "github.com/upbound/provider-aws/internal/controller/providerconfig"
 	resourceshare "github.com/upbound/provider-aws/internal/controller/ram/resourceshare"
 	clusterrds "github.com/upbound/provider-aws/internal/controller/rds/cluster"
@@ -854,6 +860,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		domainopensearch.Setup,
 		domainpolicy.Setup,
 		domainsamloptions.Setup,
+		accountorganizations.Setup,
+		delegatedadministrator.Setup,
+		organization.Setup,
+		organizationalunit.Setup,
+		policyorganizations.Setup,
+		policyattachment.Setup,
 		providerconfig.Setup,
 		resourceshare.Setup,
 		clusterrds.Setup,

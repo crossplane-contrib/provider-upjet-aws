@@ -75,6 +75,7 @@ import (
 	v1beta1mq "github.com/upbound/provider-aws/apis/mq/v1beta1"
 	v1beta1neptune "github.com/upbound/provider-aws/apis/neptune/v1beta1"
 	v1beta1opensearch "github.com/upbound/provider-aws/apis/opensearch/v1beta1"
+	v1beta1organizations "github.com/upbound/provider-aws/apis/organizations/v1beta1"
 	v1beta1ram "github.com/upbound/provider-aws/apis/ram/v1beta1"
 	v1beta1rds "github.com/upbound/provider-aws/apis/rds/v1beta1"
 	v1beta1redshift "github.com/upbound/provider-aws/apis/redshift/v1beta1"
@@ -160,6 +161,7 @@ func init() {
 		v1beta1mq.SchemeBuilder.AddToScheme,
 		v1beta1neptune.SchemeBuilder.AddToScheme,
 		v1beta1opensearch.SchemeBuilder.AddToScheme,
+		v1beta1organizations.SchemeBuilder.AddToScheme,
 		v1beta1ram.SchemeBuilder.AddToScheme,
 		v1beta1rds.SchemeBuilder.AddToScheme,
 		v1beta1redshift.SchemeBuilder.AddToScheme,
