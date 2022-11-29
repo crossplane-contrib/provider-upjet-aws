@@ -350,6 +350,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// No import.
 	"aws_lb_target_group_attachment": config.IdentifierFromProvider,
 
+	// emrcontainers
+	//
+	"aws_emrcontainers_virtual_cluster": config.IdentifierFromProvider,
+
 	// globalaccelerator
 	//
 	// arn:aws:globalaccelerator::111111111111:accelerator/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx

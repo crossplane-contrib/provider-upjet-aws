@@ -302,6 +302,7 @@ import (
 	lblistener "github.com/upbound/provider-aws/internal/controller/elbv2/lblistener"
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
+	virtualcluster "github.com/upbound/provider-aws/internal/controller/emrcontainers/virtualcluster"
 	deliverystream "github.com/upbound/provider-aws/internal/controller/firehose/deliverystream"
 	alias "github.com/upbound/provider-aws/internal/controller/gamelift/alias"
 	build "github.com/upbound/provider-aws/internal/controller/gamelift/build"
@@ -775,6 +776,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lblistener.Setup,
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
+		virtualcluster.Setup,
 		deliverystream.Setup,
 		alias.Setup,
 		build.Setup,

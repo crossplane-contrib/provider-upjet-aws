@@ -56,6 +56,7 @@ import (
 	v1beta1elasticache "github.com/upbound/provider-aws/apis/elasticache/v1beta1"
 	v1beta1elb "github.com/upbound/provider-aws/apis/elb/v1beta1"
 	v1beta1elbv2 "github.com/upbound/provider-aws/apis/elbv2/v1beta1"
+	v1beta1emrcontainers "github.com/upbound/provider-aws/apis/emrcontainers/v1beta1"
 	v1beta1firehose "github.com/upbound/provider-aws/apis/firehose/v1beta1"
 	v1beta1gamelift "github.com/upbound/provider-aws/apis/gamelift/v1beta1"
 	v1beta1globalaccelerator "github.com/upbound/provider-aws/apis/globalaccelerator/v1beta1"
@@ -143,6 +144,7 @@ func init() {
 		v1beta1elasticache.SchemeBuilder.AddToScheme,
 		v1beta1elb.SchemeBuilder.AddToScheme,
 		v1beta1elbv2.SchemeBuilder.AddToScheme,
+		v1beta1emrcontainers.SchemeBuilder.AddToScheme,
 		v1beta1firehose.SchemeBuilder.AddToScheme,
 		v1beta1gamelift.SchemeBuilder.AddToScheme,
 		v1beta1globalaccelerator.SchemeBuilder.AddToScheme,
