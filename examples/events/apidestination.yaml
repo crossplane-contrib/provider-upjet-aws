@@ -1,18 +1,46 @@
 apiVersion: events.aws.upbound.io/v1beta1
 kind: APIDestination
 metadata:
-  annotations:
-    meta.upbound.io/example-id: events/v1beta1/apidestination
-  labels:
-    testing.upbound.io/example-name: test
-  name: test
+  name: test-api-dest
 spec:
   forProvider:
     connectionArnSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: apitest
     description: An API Destination
     httpMethod: POST
-    invocationEndpoint: https://api.destination.com/endpoint
+    invocationEndpoint: https://api.publicapis.org/entries
     invocationRateLimitPerSecond: 20
+    region: us-west-1
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret-api
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: "dummysecretdata"
+
+---
+
+apiVersion: events.aws.upbound.io/v1beta1
+kind: Connection
+metadata:
+  labels:
+    testing.upbound.io/example-name: apitest
+  name: apitest
+spec:
+  forProvider:
+    authParameters:
+      - apiKey:
+          - key: x-signature
+            valueSecretRef:
+              key: example-key
+              name: example-secret-api
+              namespace: upbound-system
+    authorizationType: API_KEY
+    description: A connection description
     region: us-west-1

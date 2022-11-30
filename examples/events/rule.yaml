@@ -1,8 +1,6 @@
 apiVersion: events.aws.upbound.io/v1beta1
 kind: Rule
 metadata:
-  annotations:
-    meta.upbound.io/example-id: events/v1beta1/rule
   labels:
     testing.upbound.io/example-name: console
   name: console
@@ -17,38 +15,18 @@ spec:
       }
     name: capture-aws-sign-in
     region: us-west-1
+    eventBusNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rule-bus
 
 ---
 
 apiVersion: events.aws.upbound.io/v1beta1
-kind: Target
+kind: Bus
 metadata:
-  annotations:
-    meta.upbound.io/example-id: events/v1beta1/rule
   labels:
-    testing.upbound.io/example-name: sns
-  name: sns
-spec:
-  forProvider:
-    arnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: aws_logins
-    region: us-west-1
-    ruleSelector:
-      matchLabels:
-        testing.upbound.io/example-name: console
-    targetId: SendToSNS
-
----
-
-apiVersion: sns.aws.upbound.io/v1beta1
-kind: Topic
-metadata:
-  annotations:
-    meta.upbound.io/example-id: events/v1beta1/rule
-  labels:
-    testing.upbound.io/example-name: aws_logins
-  name: aws-logins
+    testing.upbound.io/example-name: rule-bus
+  name: rule-bus
 spec:
   forProvider:
     region: us-west-1

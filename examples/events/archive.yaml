@@ -1,10 +1,6 @@
 apiVersion: events.aws.upbound.io/v1beta1
 kind: Archive
 metadata:
-  annotations:
-    meta.upbound.io/example-id: events/v1beta1/archive
-  labels:
-    testing.upbound.io/example-name: order
   name: order
 spec:
   forProvider:
@@ -18,8 +14,6 @@ spec:
 apiVersion: events.aws.upbound.io/v1beta1
 kind: Bus
 metadata:
-  annotations:
-    meta.upbound.io/example-id: events/v1beta1/archive
   labels:
     testing.upbound.io/example-name: order
   name: order

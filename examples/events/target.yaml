@@ -1,20 +1,16 @@
 apiVersion: events.aws.upbound.io/v1beta1
 kind: Target
 metadata:
-  annotations:
-    meta.upbound.io/example-id: events/v1beta1/target
-  labels:
-    testing.upbound.io/example-name: yada
-  name: yada
+  name: console-target
 spec:
   forProvider:
     arnSelector:
       matchLabels:
-        testing.upbound.io/example-name: test_stream
+        testing.upbound.io/example-name: test-stream
     region: us-west-1
     ruleSelector:
       matchLabels:
-        testing.upbound.io/example-name: console
+        testing.upbound.io/example-name: console-rule
     runCommandTargets:
     - key: tag:Name
       values:
@@ -22,18 +18,19 @@ spec:
     - key: InstanceIds
       values:
       - i-162058cd308bffec2
-    targetId: Yada
+    targetId: ConsoleTarget
+    eventBusNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: target-bus
 
 ---
 
 apiVersion: events.aws.upbound.io/v1beta1
 kind: Rule
 metadata:
-  annotations:
-    meta.upbound.io/example-id: events/v1beta1/target
   labels:
-    testing.upbound.io/example-name: console
-  name: console
+    testing.upbound.io/example-name: console-rule
+  name: console-rule
 spec:
   forProvider:
     description: Capture all EC2 scaling events
@@ -51,18 +48,31 @@ spec:
       }
     name: capture-ec2-scaling-events
     region: us-west-1
+    eventBusNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: target-bus
 
 ---
 
 apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
-  annotations:
-    meta.upbound.io/example-id: events/v1beta1/target
   labels:
-    testing.upbound.io/example-name: test_stream
+    testing.upbound.io/example-name: test-stream
   name: test-stream
 spec:
   forProvider:
     region: us-west-1
     shardCount: 1
+
+---
+
+apiVersion: events.aws.upbound.io/v1beta1
+kind: Bus
+metadata:
+  labels:
+    testing.upbound.io/example-name: target-bus
+  name: target-bus
+spec:
+  forProvider:
+    region: us-west-1
