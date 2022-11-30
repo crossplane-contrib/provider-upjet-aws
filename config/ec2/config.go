@@ -357,4 +357,10 @@ func Configure(p *config.Provider) {
 			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.AMI",
 		}
 	})
+
+	p.AddResourceConfigurator("aws_vpn_connection", func(r *config.Resource) {
+		r.References["vpn_gateway_id"] = config.Reference{
+			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.VPNGateway",
+		}
+	})
 }

@@ -727,6 +727,51 @@ func (l *VPCPeeringConnectionList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this VPNConnectionList.
+func (l *VPNConnectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPNConnectionRouteList.
+func (l *VPNConnectionRouteList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPNGatewayAttachmentList.
+func (l *VPNGatewayAttachmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPNGatewayList.
+func (l *VPNGatewayList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPNGatewayRoutePropagationList.
+func (l *VPNGatewayRoutePropagationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this VolumeAttachmentList.
 func (l *VolumeAttachmentList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

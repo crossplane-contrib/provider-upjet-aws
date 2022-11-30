@@ -288,8 +288,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// No import
 	"aws_ami_from_instance": config.IdentifierFromProvider,
-	// AMI Launch Permissions can be imported using [ACCOUNT-ID|GROUP-NAME|ORGANIZATION-ARN|ORGANIZATIONAL-UNIT-ARN]/IMAGE-ID
-	"aws_ami_launch_permission": config.IdentifierFromProvider,
 	// Security Groups can be imported using the security group id
 	"aws_default_security_group": config.IdentifierFromProvider,
 	//
@@ -340,16 +338,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_vpc_peering_connection_accepter": config.ParameterAsIdentifier("vpc_peering_connection_id"),
 	// VPC Peering Connection Options can be imported using the vpc peering id
 	"aws_vpc_peering_connection_options": config.ParameterAsIdentifier("vpc_peering_connection_id"),
-	// VPN Connections can be imported using the vpn connection id
-	"aws_vpn_connection": config.IdentifierFromProvider,
-	// No import
-	"aws_vpn_connection_route": config.IdentifierFromProvider,
-	// VPN Gateways can be imported using the vpn gateway id
-	"aws_vpn_gateway": config.IdentifierFromProvider,
-	// No import
-	"aws_vpn_gateway_attachment": config.IdentifierFromProvider,
-	// No import
-	"aws_vpn_gateway_route_propagation": config.IdentifierFromProvider,
 
 	// securityhub
 	//

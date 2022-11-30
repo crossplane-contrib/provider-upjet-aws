@@ -296,6 +296,16 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ami_copy": config.IdentifierFromProvider,
 	// AMI Launch Permissions can be imported using [ACCOUNT-ID|GROUP-NAME|ORGANIZATION-ARN|ORGANIZATIONAL-UNIT-ARN]/IMAGE-ID
 	"aws_ami_launch_permission": config.IdentifierFromProvider,
+	// VPN Connections can be imported using the vpn connection id
+	"aws_vpn_connection": config.IdentifierFromProvider,
+	// No import
+	"aws_vpn_connection_route": config.IdentifierFromProvider,
+	// VPN Gateways can be imported using the vpn gateway id
+	"aws_vpn_gateway": config.IdentifierFromProvider,
+	// No import
+	"aws_vpn_gateway_attachment": config.IdentifierFromProvider,
+	// No import
+	"aws_vpn_gateway_route_propagation": config.IdentifierFromProvider,
 
 	// ecr
 	//
