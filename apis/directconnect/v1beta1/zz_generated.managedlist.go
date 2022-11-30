@@ -16,15 +16,6 @@ func (l *ConnectionAssociationList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this ConnectionConfirmationList.
-func (l *ConnectionConfirmationList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this ConnectionList.
 func (l *ConnectionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -43,35 +34,8 @@ func (l *GatewayList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this HostedConnectionList.
-func (l *HostedConnectionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this HostedPrivateVirtualInterfaceList.
-func (l *HostedPrivateVirtualInterfaceList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this LagList.
 func (l *LagList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this PrivateVirtualInterfaceList.
-func (l *PrivateVirtualInterfaceList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
