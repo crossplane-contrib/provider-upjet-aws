@@ -12,19 +12,18 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: console-rule
     runCommandTargets:
-    - key: tag:Name
-      values:
-      - FooBar
-    - key: InstanceIds
-      values:
-      - i-162058cd308bffec2
+      - key: tag:Name
+        values:
+          - FooBar
+      - key: InstanceIds
+        values:
+          - i-162058cd308bffec2
     targetId: ConsoleTarget
     eventBusNameSelector:
       matchLabels:
         testing.upbound.io/example-name: target-bus
 
 ---
-
 apiVersion: events.aws.upbound.io/v1beta1
 kind: Rule
 metadata:
@@ -53,7 +52,6 @@ spec:
         testing.upbound.io/example-name: target-bus
 
 ---
-
 apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
@@ -66,7 +64,6 @@ spec:
     shardCount: 1
 
 ---
-
 apiVersion: events.aws.upbound.io/v1beta1
 kind: Bus
 metadata:
