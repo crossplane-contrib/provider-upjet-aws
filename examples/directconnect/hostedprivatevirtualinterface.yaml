@@ -1,0 +1,32 @@
+apiVersion: directconnect.aws.upbound.io/v1beta1
+kind: HostedPrivateVirtualInterface
+metadata:
+  annotations:
+    meta.upbound.io/example-id: directconnect/v1beta1/hostedprivatevirtualinterface
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    addressFamily: ipv4
+    bgpAsn: 65352
+    ownerAccountId: "153891904029"
+    connectionId: dxcon-fgd1cdsd
+    name: vif-foo
+    region: us-west-1
+    vlan: 4094
+---
+apiVersion: directconnect.aws.upbound.io/v1beta1
+kind: Connection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: directconnect/v1beta1/connection
+  labels:
+    testing.upbound.io/example-name: hoge
+  name: hoge
+spec:
+  forProvider:
+    bandwidth: 1Gbps
+    location: PNP51
+    name: tf-dx-connection
+    region: us-west-1

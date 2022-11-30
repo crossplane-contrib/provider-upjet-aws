@@ -337,6 +337,72 @@ func (mg *HostedConnection) SetWriteConnectionSecretToReference(r *xpv1.SecretRe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this HostedPrivateVirtualInterface.
+func (mg *HostedPrivateVirtualInterface) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this HostedPrivateVirtualInterface.
+func (mg *HostedPrivateVirtualInterface) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this HostedPrivateVirtualInterface.
+func (mg *HostedPrivateVirtualInterface) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this HostedPrivateVirtualInterface.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *HostedPrivateVirtualInterface) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this HostedPrivateVirtualInterface.
+func (mg *HostedPrivateVirtualInterface) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this HostedPrivateVirtualInterface.
+func (mg *HostedPrivateVirtualInterface) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this HostedPrivateVirtualInterface.
+func (mg *HostedPrivateVirtualInterface) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this HostedPrivateVirtualInterface.
+func (mg *HostedPrivateVirtualInterface) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this HostedPrivateVirtualInterface.
+func (mg *HostedPrivateVirtualInterface) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this HostedPrivateVirtualInterface.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *HostedPrivateVirtualInterface) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this HostedPrivateVirtualInterface.
+func (mg *HostedPrivateVirtualInterface) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this HostedPrivateVirtualInterface.
+func (mg *HostedPrivateVirtualInterface) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Lag.
 func (mg *Lag) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -400,6 +466,72 @@ func (mg *Lag) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo)
 
 // SetWriteConnectionSecretToReference of this Lag.
 func (mg *Lag) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this PrivateVirtualInterface.
+func (mg *PrivateVirtualInterface) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateVirtualInterface.
+func (mg *PrivateVirtualInterface) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this PrivateVirtualInterface.
+func (mg *PrivateVirtualInterface) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this PrivateVirtualInterface.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *PrivateVirtualInterface) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this PrivateVirtualInterface.
+func (mg *PrivateVirtualInterface) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PrivateVirtualInterface.
+func (mg *PrivateVirtualInterface) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateVirtualInterface.
+func (mg *PrivateVirtualInterface) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateVirtualInterface.
+func (mg *PrivateVirtualInterface) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this PrivateVirtualInterface.
+func (mg *PrivateVirtualInterface) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this PrivateVirtualInterface.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *PrivateVirtualInterface) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PrivateVirtualInterface.
+func (mg *PrivateVirtualInterface) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateVirtualInterface.
+func (mg *PrivateVirtualInterface) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

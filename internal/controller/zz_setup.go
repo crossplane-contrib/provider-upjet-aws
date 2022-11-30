@@ -202,7 +202,9 @@ import (
 	connectionconfirmation "github.com/upbound/provider-aws/internal/controller/directconnect/connectionconfirmation"
 	gateway "github.com/upbound/provider-aws/internal/controller/directconnect/gateway"
 	hostedconnection "github.com/upbound/provider-aws/internal/controller/directconnect/hostedconnection"
+	hostedprivatevirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/hostedprivatevirtualinterface"
 	lag "github.com/upbound/provider-aws/internal/controller/directconnect/lag"
+	privatevirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/privatevirtualinterface"
 	publicvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/publicvirtualinterface"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
@@ -707,7 +709,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		connectionconfirmation.Setup,
 		gateway.Setup,
 		hostedconnection.Setup,
+		hostedprivatevirtualinterface.Setup,
 		lag.Setup,
+		privatevirtualinterface.Setup,
 		publicvirtualinterface.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,

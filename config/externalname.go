@@ -1385,9 +1385,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
     "aws_dx_connection_confirmation": config.IdentifierFromProvider,
     // No import
     "aws_dx_hosted_connection": config.IdentifierFromProvider,
+    // Direct Connect hosted private virtual interfaces can be imported using the vif id
+    "aws_dx_hosted_private_virtual_interface": config.IdentifierFromProvider,
+    // Direct Connect private virtual interfaces can be imported using the vif id
+    "aws_dx_private_virtual_interface": config.IdentifierFromProvider,
 
 }
-
 func lambdaFunctionURL() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
