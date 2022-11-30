@@ -24,6 +24,7 @@ spec:
         testing.upbound.io/example-name: target-bus
 
 ---
+
 apiVersion: events.aws.upbound.io/v1beta1
 kind: Rule
 metadata:
@@ -52,6 +53,7 @@ spec:
         testing.upbound.io/example-name: target-bus
 
 ---
+
 apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
@@ -64,6 +66,7 @@ spec:
     shardCount: 1
 
 ---
+
 apiVersion: events.aws.upbound.io/v1beta1
 kind: Bus
 metadata:

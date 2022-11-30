@@ -4,7 +4,7 @@ metadata:
   name: devaccountaccess
 spec:
   forProvider:
-    principal: "123456789012"
+    principal: "${data.aws_account_id}"
     region: us-west-1
     statementId: DevAccountAccess
     eventBusNameSelector:
