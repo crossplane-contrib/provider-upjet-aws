@@ -19,7 +19,6 @@ spec:
     - apiKey:
       - key: x-signature
         valueSecretRef:
-          # Value present in secret must have '\n' stripped from it or will cause validation error
           key: example-key 
           name: example-secret
           namespace: upbound-system
