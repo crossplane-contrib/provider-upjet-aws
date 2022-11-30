@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    accountId: ${data.aws_account_id}
+    accountId: "123456789012"
     email: example@example.com
     invite: true
     region: us-west-1

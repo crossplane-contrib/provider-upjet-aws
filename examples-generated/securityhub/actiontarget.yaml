@@ -1,24 +1,30 @@
 apiVersion: securityhub.aws.upbound.io/v1beta1
-kind: ProductSubscription
+kind: ActionTarget
 metadata:
   annotations:
-    meta.upbound.io/example-id: securityhub/v1beta1/productsubscription
+    meta.upbound.io/example-id: securityhub/v1beta1/actiontarget
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    productArn: arn:aws:securityhub:${data.aws_region}:733251395267:product/alertlogic/althreatmanagement
+    description: This is custom action sends selected findings to chat
+    name: Send notification to chat
     region: us-west-1
+
 ---
+
 apiVersion: securityhub.aws.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:
-    meta.upbound.io/example-id: securityhub/v1beta1/productsubscription
+    meta.upbound.io/example-id: securityhub/v1beta1/actiontarget
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     region: us-west-1
+
+---
+

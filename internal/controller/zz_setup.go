@@ -478,7 +478,12 @@ import (
 	secretrotation "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretrotation"
 	secretversion "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretversion"
 	accountsecurityhub "github.com/upbound/provider-aws/internal/controller/securityhub/account"
+	actiontarget "github.com/upbound/provider-aws/internal/controller/securityhub/actiontarget"
 	findingaggregator "github.com/upbound/provider-aws/internal/controller/securityhub/findingaggregator"
+	insight "github.com/upbound/provider-aws/internal/controller/securityhub/insight"
+	membersecurityhub "github.com/upbound/provider-aws/internal/controller/securityhub/member"
+	productsubscription "github.com/upbound/provider-aws/internal/controller/securityhub/productsubscription"
+	standardssubscription "github.com/upbound/provider-aws/internal/controller/securityhub/standardssubscription"
 	httpnamespace "github.com/upbound/provider-aws/internal/controller/servicediscovery/httpnamespace"
 	privatednsnamespace "github.com/upbound/provider-aws/internal/controller/servicediscovery/privatednsnamespace"
 	publicdnsnamespace "github.com/upbound/provider-aws/internal/controller/servicediscovery/publicdnsnamespace"
@@ -966,7 +971,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		secretrotation.Setup,
 		secretversion.Setup,
 		accountsecurityhub.Setup,
+		actiontarget.Setup,
 		findingaggregator.Setup,
+		insight.Setup,
+		membersecurityhub.Setup,
+		productsubscription.Setup,
+		standardssubscription.Setup,
 		httpnamespace.Setup,
 		privatednsnamespace.Setup,
 		publicdnsnamespace.Setup,

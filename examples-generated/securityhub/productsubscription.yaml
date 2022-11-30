@@ -1,29 +1,28 @@
 apiVersion: securityhub.aws.upbound.io/v1beta1
-kind: OrganizationConfiguration
+kind: ProductSubscription
 metadata:
   annotations:
-    meta.upbound.io/example-id: securityhub/v1beta1/organizationconfiguration
+    meta.upbound.io/example-id: securityhub/v1beta1/productsubscription
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    autoEnable: true
+    productArn: arn:aws:securityhub:${data.aws_region.current.name}:733251395267:product/alertlogic/althreatmanagement
     region: us-west-1
 
 ---
 
 apiVersion: securityhub.aws.upbound.io/v1beta1
-kind: OrganizationAdminAccount
+kind: Account
 metadata:
   annotations:
-    meta.upbound.io/example-id: securityhub/v1beta1/organizationconfiguration
+    meta.upbound.io/example-id: securityhub/v1beta1/productsubscription
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    adminAccountId: "153891904029"
     region: us-west-1
 
 ---

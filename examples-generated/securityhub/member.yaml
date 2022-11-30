@@ -1,24 +1,31 @@
 apiVersion: securityhub.aws.upbound.io/v1beta1
-kind: ProductSubscription
+kind: Member
 metadata:
   annotations:
-    meta.upbound.io/example-id: securityhub/v1beta1/productsubscription
+    meta.upbound.io/example-id: securityhub/v1beta1/member
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    productArn: arn:aws:securityhub:${data.aws_region}:733251395267:product/alertlogic/althreatmanagement
+    accountId: "123456789012"
+    email: example@example.com
+    invite: true
     region: us-west-1
+
 ---
+
 apiVersion: securityhub.aws.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:
-    meta.upbound.io/example-id: securityhub/v1beta1/productsubscription
+    meta.upbound.io/example-id: securityhub/v1beta1/member
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     region: us-west-1
+
+---
+
