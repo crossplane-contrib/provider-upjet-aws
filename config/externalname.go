@@ -1271,6 +1271,47 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// imported by using the target ID and policy ID
 	// 123456789012:p-12345678
 	"aws_organizations_policy_attachment": FormattedIdentifierFromProvider(":", "target_id", "policy_id"),
+
+	// batch
+	//
+	// Batch Scheduling Policy can be imported using the arn: arn:aws:batch:us-east-1:123456789012:scheduling-policy/sample
+	"aws_batch_scheduling_policy": config.TemplatedStringAsIdentifier("name", "arn:aws:batch:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:scheduling-policy/{{ .external_name }}"),
+
+	// budgets
+	//
+	// Budgets can be imported using AccountID:BudgetName
+	"aws_budgets_budget": config.TemplatedStringAsIdentifier("name", "{{ .setup.client_metadata.account_id }}:{{ .external_name }}"),
+	// Budgets can be imported using AccountID:ActionID:BudgetName
+	"aws_budgets_budget_action": config.IdentifierFromProvider,
+
+	// chime
+	//
+	// Configuration Recorder can be imported using the name
+	"aws_chime_voice_connector": config.NameAsIdentifier,
+	// Configuration Recorder can be imported using the name
+	"aws_chime_voice_connector_group": config.NameAsIdentifier,
+	// Chime Voice Connector Logging can be imported using the voice_connector_id
+	"aws_chime_voice_connector_logging": config.IdentifierFromProvider,
+	// Chime Voice Connector Origination can be imported using the voice_connector_id
+	"aws_chime_voice_connector_origination": config.IdentifierFromProvider,
+	// Chime Voice Connector Streaming can be imported using the voice_connector_id
+	"aws_chime_voice_connector_streaming": config.IdentifierFromProvider,
+	// Chime Voice Connector Termination can be imported using the voice_connector_id
+	"aws_chime_voice_connector_termination": config.IdentifierFromProvider,
+	// Chime Voice Connector Termination Credentials can be imported using the voice_connector_id
+	"aws_chime_voice_connector_termination_credentials": config.IdentifierFromProvider,
+
+	// cloud9
+	//
+	// No import
+	"aws_cloud9_environment_ec2": config.IdentifierFromProvider,
+	// Cloud9 environment membership can be imported using the environment-id#user-arn
+	"aws_cloud9_environment_membership": config.TemplatedStringAsIdentifier("", "{{ .parameters.environment_id }}#{{ .parameters.user_arn }}"),
+
+	// cloudcontrol
+	//
+	// No import
+	"aws_cloudcontrolapi_resource": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

@@ -103,6 +103,19 @@ import (
 	vaultlockconfiguration "github.com/upbound/provider-aws/internal/controller/backup/vaultlockconfiguration"
 	vaultnotifications "github.com/upbound/provider-aws/internal/controller/backup/vaultnotifications"
 	vaultpolicy "github.com/upbound/provider-aws/internal/controller/backup/vaultpolicy"
+	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
+	budget "github.com/upbound/provider-aws/internal/controller/budgets/budget"
+	budgetaction "github.com/upbound/provider-aws/internal/controller/budgets/budgetaction"
+	voiceconnector "github.com/upbound/provider-aws/internal/controller/chime/voiceconnector"
+	voiceconnectorgroup "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectorgroup"
+	voiceconnectorlogging "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectorlogging"
+	voiceconnectororigination "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectororigination"
+	voiceconnectorstreaming "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectorstreaming"
+	voiceconnectortermination "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectortermination"
+	voiceconnectorterminationcredentials "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectorterminationcredentials"
+	environmentec2 "github.com/upbound/provider-aws/internal/controller/cloud9/environmentec2"
+	environmentmembership "github.com/upbound/provider-aws/internal/controller/cloud9/environmentmembership"
+	resourcecloudcontrol "github.com/upbound/provider-aws/internal/controller/cloudcontrol/resource"
 	cachepolicy "github.com/upbound/provider-aws/internal/controller/cloudfront/cachepolicy"
 	distribution "github.com/upbound/provider-aws/internal/controller/cloudfront/distribution"
 	fieldlevelencryptionconfig "github.com/upbound/provider-aws/internal/controller/cloudfront/fieldlevelencryptionconfig"
@@ -576,6 +589,19 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vaultlockconfiguration.Setup,
 		vaultnotifications.Setup,
 		vaultpolicy.Setup,
+		schedulingpolicy.Setup,
+		budget.Setup,
+		budgetaction.Setup,
+		voiceconnector.Setup,
+		voiceconnectorgroup.Setup,
+		voiceconnectorlogging.Setup,
+		voiceconnectororigination.Setup,
+		voiceconnectorstreaming.Setup,
+		voiceconnectortermination.Setup,
+		voiceconnectorterminationcredentials.Setup,
+		environmentec2.Setup,
+		environmentmembership.Setup,
+		resourcecloudcontrol.Setup,
 		cachepolicy.Setup,
 		distribution.Setup,
 		fieldlevelencryptionconfig.Setup,
