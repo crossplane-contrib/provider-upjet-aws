@@ -204,11 +204,8 @@ func GetProvider() *config.Provider {
 		cur.Configure,
 		servicecatalog.Configure,
 		devicefarm.Configure,
-<<<<<<< HEAD
 		organization.Configure,
-=======
 		budgets.Configure,
->>>>>>> fa3c0781 (issue-69)
 	} {
 		configure(pc)
 	}
