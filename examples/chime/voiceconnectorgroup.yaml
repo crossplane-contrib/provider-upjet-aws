@@ -29,7 +29,6 @@ metadata:
   name: vc1
 spec:
   forProvider:
-    awsRegion: us-west-1
     region: us-west-1
     requireEncryption: true
 ---
@@ -43,6 +42,5 @@ metadata:
   name: vc2
 spec:
   forProvider:
-    awsRegion: us-west-1
     region: us-west-1
     requireEncryption: true

@@ -24,6 +24,5 @@ metadata:
   name: default
 spec:
   forProvider:
-    awsRegion: us-west-1
     region: us-west-1
     requireEncryption: true
