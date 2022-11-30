@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     desiredState: |-
-      ${
+      ${jsonencode({
           ClusterName = "example"
           Tags = [
             {
@@ -17,6 +17,6 @@ spec:
               Value = "IT"
             }
           ]
-        }
+        })}
     region: us-west-1
     typeName: AWS::ECS::Cluster
