@@ -29,6 +29,20 @@ type VoiceConnectorLoggingParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// The Amazon Chime Voice Connector ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/chime/v1beta1.VoiceConnector
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	VoiceConnectorID *string `json:"voiceConnectorId,omitempty" tf:"voice_connector_id,omitempty"`
+
+	// Reference to a VoiceConnector in chime to populate voiceConnectorId.
+	// +kubebuilder:validation:Optional
+	VoiceConnectorIDRef *v1.Reference `json:"voiceConnectorIdRef,omitempty" tf:"-"`
+
+	// Selector for a VoiceConnector in chime to populate voiceConnectorId.
+	// +kubebuilder:validation:Optional
+	VoiceConnectorIDSelector *v1.Selector `json:"voiceConnectorIdSelector,omitempty" tf:"-"`
 }
 
 // VoiceConnectorLoggingSpec defines the desired state of VoiceConnectorLogging

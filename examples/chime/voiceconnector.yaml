@@ -8,6 +8,6 @@ metadata:
   name: test
 spec:
   forProvider:
-    awsRegion: us-east-1
+    awsRegion: us-west-1
     region: us-west-1
     requireEncryption: true

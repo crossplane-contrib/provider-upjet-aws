@@ -10,6 +10,9 @@ spec:
   forProvider:
     enableSipLogs: true
     region: us-west-1
+    voiceConnectorIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
 
 ---
 

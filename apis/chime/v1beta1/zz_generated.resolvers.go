@@ -42,6 +42,32 @@ func (mg *VoiceConnectorGroup) ResolveReferences(ctx context.Context, c client.R
 	return nil
 }
 
+// ResolveReferences of this VoiceConnectorLogging.
+func (mg *VoiceConnectorLogging) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VoiceConnectorID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VoiceConnectorIDRef,
+		Selector:     mg.Spec.ForProvider.VoiceConnectorIDSelector,
+		To: reference.To{
+			List:    &VoiceConnectorList{},
+			Managed: &VoiceConnector{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VoiceConnectorID")
+	}
+	mg.Spec.ForProvider.VoiceConnectorID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VoiceConnectorIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this VoiceConnectorOrigination.
 func (mg *VoiceConnectorOrigination) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

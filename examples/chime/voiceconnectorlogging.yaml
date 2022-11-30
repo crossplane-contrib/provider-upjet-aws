@@ -10,6 +10,9 @@ spec:
   forProvider:
     enableSipLogs: true
     region: us-west-1
+    voiceConnectorIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
 ---
 apiVersion: chime.aws.upbound.io/v1beta1
 kind: VoiceConnector
@@ -21,5 +24,6 @@ metadata:
   name: default
 spec:
   forProvider:
+    awsRegion: us-west-1
     region: us-west-1
     requireEncryption: true

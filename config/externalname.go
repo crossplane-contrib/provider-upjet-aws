@@ -1291,7 +1291,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Configuration Recorder can be imported using the name
 	"aws_chime_voice_connector_group": config.NameAsIdentifier,
 	// Chime Voice Connector Logging can be imported using the voice_connector_id
-	"aws_chime_voice_connector_logging": config.ParameterAsIdentifier("voice_connector_id"),
+	"aws_chime_voice_connector_logging": config.IdentifierFromProvider,
 	// Chime Voice Connector Origination can be imported using the voice_connector_id
 	"aws_chime_voice_connector_origination": config.IdentifierFromProvider,
 	// Chime Voice Connector Streaming can be imported using the voice_connector_id
