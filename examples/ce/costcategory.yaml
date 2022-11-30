@@ -36,6 +36,3 @@ spec:
           - -dev
       value: testing
     ruleVersion: CostCategoryExpression.v1
-
----
-
