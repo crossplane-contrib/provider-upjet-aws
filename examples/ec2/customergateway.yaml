@@ -14,4 +14,3 @@ spec:
     tags:
       Name: main-customer-gateway
     type: ipsec.1
----
