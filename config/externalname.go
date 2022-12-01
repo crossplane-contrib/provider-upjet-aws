@@ -1312,6 +1312,48 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// No import
 	"aws_cloudcontrolapi_resource": config.IdentifierFromProvider,
+
+	// securityhub
+	//
+	// An existing Security Hub enabled account can be imported using the AWS account ID
+	"aws_securityhub_account": config.IdentifierFromProvider,
+	// imported using the action target ARN:
+	// arn:aws:securityhub:eu-west-1:312940875350:action/custom/a
+	// TODO: following configuration assumes the `a` in the above ARN
+	// is the security hub custom action identifier
+	"aws_securityhub_action_target": config.TemplatedStringAsIdentifier("identifier", "arn:aws:securityhub:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:action/custom/{{ .external_name }}"),
+	// imported using the arn that has a random substring:
+	// arn:aws:securityhub:eu-west-1:123456789098:finding-aggregator/abcd1234-abcd-1234-1234-abcdef123456
+	"aws_securityhub_finding_aggregator": config.IdentifierFromProvider,
+	// imported using the ARN that has a random substring:
+	// arn:aws:securityhub:us-west-2:1234567890:insight/1234567890/custom/91299ed7-abd0-4e44-a858-d0b15e37141a
+	"aws_securityhub_insight": config.IdentifierFromProvider,
+	// imported using security hub member account ID
+	"aws_securityhub_member": FormattedIdentifierFromProvider("", "account_id"),
+	// imported in the form product_arn,arn:
+	// arn:aws:securityhub:eu-west-1:733251395267:product/alertlogic/althreatmanagement,arn:aws:securityhub:eu-west-1:123456789012:product-subscription/alertlogic/althreatmanagement
+	// looks like it's possible to derive the external-name from
+	// the product_arn argument according to the above example
+	// (by replacing product by product-subscription), which makes this
+	// a special case of FormattedIdentifierFromProvider
+	"aws_securityhub_product_subscription": func() config.ExternalName {
+		e := config.IdentifierFromProvider
+		e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+			val, ok := parameters["product_arn"]
+			if !ok {
+				return "", errors.New("product_arn cannot be empty")
+			}
+			s, ok := val.(string)
+			if !ok {
+				return "", errors.New("product_arn needs to be a string")
+			}
+			return fmt.Sprintf("%s,%s", s, strings.Replace(s, ":product", ":product-subscription", 1)), nil
+		}
+		return e
+	}(),
+	// imported using the standards subscription ARN:
+	// arn:aws:securityhub:eu-west-1:123456789012:subscription/pci-dss/v/3.2.1
+	"aws_securityhub_standards_subscription": FormattedIdentifierFromProvider("", "standards_arn"),
 }
 
 func lambdaFunctionURL() config.ExternalName {
