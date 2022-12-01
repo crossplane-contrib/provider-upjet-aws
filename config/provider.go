@@ -24,6 +24,7 @@ import (
 	"github.com/upbound/provider-aws/config/cloudfront"
 	"github.com/upbound/provider-aws/config/cloudsearch"
 	"github.com/upbound/provider-aws/config/cloudwatch"
+	"github.com/upbound/provider-aws/config/cloudwatchevents"
 	"github.com/upbound/provider-aws/config/cloudwatchlogs"
 	"github.com/upbound/provider-aws/config/cognitoidentity"
 	"github.com/upbound/provider-aws/config/cognitoidp"
@@ -44,7 +45,6 @@ import (
 	"github.com/upbound/provider-aws/config/elasticloadbalancing"
 	"github.com/upbound/provider-aws/config/elb"
 	"github.com/upbound/provider-aws/config/elbv2"
-	"github.com/upbound/provider-aws/config/events"
 	"github.com/upbound/provider-aws/config/firehose"
 	"github.com/upbound/provider-aws/config/gamelift"
 	"github.com/upbound/provider-aws/config/globalaccelerator"
@@ -203,6 +203,7 @@ func GetProvider() *config.Provider {
 		servicecatalog.Configure,
 		devicefarm.Configure,
 		organization.Configure,
+		cloudwatchevents.Configure,
 		budgets.Configure,
 		servicediscovery.Configure,
 		sfn.Configure,

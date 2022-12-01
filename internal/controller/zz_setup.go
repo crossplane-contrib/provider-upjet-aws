@@ -136,6 +136,14 @@ import (
 	dashboard "github.com/upbound/provider-aws/internal/controller/cloudwatch/dashboard"
 	metricalarm "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricalarm"
 	metricstream "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricstream"
+	apidestination "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/apidestination"
+	archive "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/archive"
+	bus "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/bus"
+	buspolicy "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/buspolicy"
+	connectioncloudwatchevents "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/connection"
+	permission "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/permission"
+	rule "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/rule"
+	targetcloudwatchevents "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/target"
 	definition "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/definition"
 	group "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/group"
 	metricfilter "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/metricfilter"
@@ -317,14 +325,6 @@ import (
 	lblistener "github.com/upbound/provider-aws/internal/controller/elbv2/lblistener"
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
-	apidestination "github.com/upbound/provider-aws/internal/controller/events/apidestination"
-	archive "github.com/upbound/provider-aws/internal/controller/events/archive"
-	bus "github.com/upbound/provider-aws/internal/controller/events/bus"
-	buspolicy "github.com/upbound/provider-aws/internal/controller/events/buspolicy"
-	connectionevents "github.com/upbound/provider-aws/internal/controller/events/connection"
-	permission "github.com/upbound/provider-aws/internal/controller/events/permission"
-	rule "github.com/upbound/provider-aws/internal/controller/events/rule"
-	targetevents "github.com/upbound/provider-aws/internal/controller/events/target"
 	deliverystream "github.com/upbound/provider-aws/internal/controller/firehose/deliverystream"
 	alias "github.com/upbound/provider-aws/internal/controller/gamelift/alias"
 	build "github.com/upbound/provider-aws/internal/controller/gamelift/build"
@@ -639,6 +639,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		dashboard.Setup,
 		metricalarm.Setup,
 		metricstream.Setup,
+		apidestination.Setup,
+		archive.Setup,
+		bus.Setup,
+		buspolicy.Setup,
+		connectioncloudwatchevents.Setup,
+		permission.Setup,
+		rule.Setup,
+		targetcloudwatchevents.Setup,
 		definition.Setup,
 		group.Setup,
 		metricfilter.Setup,
@@ -820,14 +828,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lblistener.Setup,
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
-		apidestination.Setup,
-		archive.Setup,
-		bus.Setup,
-		buspolicy.Setup,
-		connectionevents.Setup,
-		permission.Setup,
-		rule.Setup,
-		targetevents.Setup,
 		deliverystream.Setup,
 		alias.Setup,
 		build.Setup,

@@ -35,6 +35,7 @@ import (
 	v1beta1cloudfront "github.com/upbound/provider-aws/apis/cloudfront/v1beta1"
 	v1beta1cloudsearch "github.com/upbound/provider-aws/apis/cloudsearch/v1beta1"
 	v1beta1cloudwatch "github.com/upbound/provider-aws/apis/cloudwatch/v1beta1"
+	v1beta1cloudwatchevents "github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1"
 	v1beta1cloudwatchlogs "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1"
 	v1beta1codecommit "github.com/upbound/provider-aws/apis/codecommit/v1beta1"
 	v1beta1codepipeline "github.com/upbound/provider-aws/apis/codepipeline/v1beta1"
@@ -62,7 +63,6 @@ import (
 	v1beta1elasticache "github.com/upbound/provider-aws/apis/elasticache/v1beta1"
 	v1beta1elb "github.com/upbound/provider-aws/apis/elb/v1beta1"
 	v1beta1elbv2 "github.com/upbound/provider-aws/apis/elbv2/v1beta1"
-	v1beta1events "github.com/upbound/provider-aws/apis/events/v1beta1"
 	v1beta1firehose "github.com/upbound/provider-aws/apis/firehose/v1beta1"
 	v1beta1gamelift "github.com/upbound/provider-aws/apis/gamelift/v1beta1"
 	v1beta1globalaccelerator "github.com/upbound/provider-aws/apis/globalaccelerator/v1beta1"
@@ -130,6 +130,7 @@ func init() {
 		v1beta1cloudfront.SchemeBuilder.AddToScheme,
 		v1beta1cloudsearch.SchemeBuilder.AddToScheme,
 		v1beta1cloudwatch.SchemeBuilder.AddToScheme,
+		v1beta1cloudwatchevents.SchemeBuilder.AddToScheme,
 		v1beta1cloudwatchlogs.SchemeBuilder.AddToScheme,
 		v1beta1codecommit.SchemeBuilder.AddToScheme,
 		v1beta1codepipeline.SchemeBuilder.AddToScheme,
@@ -157,7 +158,6 @@ func init() {
 		v1beta1elasticache.SchemeBuilder.AddToScheme,
 		v1beta1elb.SchemeBuilder.AddToScheme,
 		v1beta1elbv2.SchemeBuilder.AddToScheme,
-		v1beta1events.SchemeBuilder.AddToScheme,
 		v1beta1firehose.SchemeBuilder.AddToScheme,
 		v1beta1gamelift.SchemeBuilder.AddToScheme,
 		v1beta1globalaccelerator.SchemeBuilder.AddToScheme,
