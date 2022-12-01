@@ -1029,9 +1029,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// eventbridge
 	//
 	// Imported using name
-	"aws_cloudwatch_event_api_destination": config.ParameterAsIdentifier("name"),
+	"aws_cloudwatch_event_api_destination": config.NameAsIdentifier,
 	// Imported using name
-	"aws_cloudwatch_event_archive": config.ParameterAsIdentifier("name"),
+	"aws_cloudwatch_event_archive": config.NameAsIdentifier,
 	// Imported using name
 	"aws_cloudwatch_event_bus": config.NameAsIdentifier,
 	// Imported using event_bus_name
@@ -1041,9 +1041,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Imported using event_bus_name/statement_id
 	"aws_cloudwatch_event_permission": FormattedIdentifierFromProvider("/", "event_bus_name", "statement_id"),
 	// Imported using event_bus_name/rule_name
-	"aws_cloudwatch_event_rule": FormattedIdentifierFromProvider("/", "event_bus_name", "name"),
+	"aws_cloudwatch_event_rule": FormattedIdentifierUserDefinedNameLast("name", "/", "event_bus_name"),
 	// Imported using event_bus_name/rule_name/target_id
-	"aws_cloudwatch_event_target": FormattedIdentifierFromProvider("/", "event_bus_name", "rule", "target_id"),
+	"aws_cloudwatch_event_target": FormattedIdentifierUserDefinedNameLast("target_id", "/", "event_bus_name", "rule"),
 
 	// cloudwatch
 	//
