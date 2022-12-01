@@ -8,9 +8,7 @@ metadata:
   name: yada
 spec:
   forProvider:
-    arnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: test_stream
+    arn: ${aws_kinesis_stream.test_stream.arn}
     region: us-west-1
     ruleSelector:
       matchLabels:

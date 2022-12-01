@@ -2596,16 +2596,6 @@ func (in *TargetParameters) DeepCopyInto(out *TargetParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ArnRef != nil {
-		in, out := &in.ArnRef, &out.ArnRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ArnSelector != nil {
-		in, out := &in.ArnSelector, &out.ArnSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.BatchTarget != nil {
 		in, out := &in.BatchTarget, &out.BatchTarget
 		*out = make([]BatchTargetParameters, len(*in))

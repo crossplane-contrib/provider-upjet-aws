@@ -254,18 +254,8 @@ type TargetObservation struct {
 type TargetParameters struct {
 
 	// The Amazon Resource Name (ARN) of the target.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
-	// +kubebuilder:validation:Optional
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
-
-	// Reference to a Stream in kinesis to populate arn.
-	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
-
-	// Selector for a Stream in kinesis to populate arn.
-	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	Arn *string `json:"arn" tf:"arn,omitempty"`
 
 	// Parameters used when you are using the rule to invoke an Amazon Batch Job. Documented below. A maximum of 1 are allowed.
 	// +kubebuilder:validation:Optional

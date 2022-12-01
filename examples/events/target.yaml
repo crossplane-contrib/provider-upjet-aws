@@ -1,24 +1,15 @@
 apiVersion: events.aws.upbound.io/v1beta1
 kind: Target
 metadata:
-  name: console-target
+  name: aws-login
 spec:
   forProvider:
-    arnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: test-stream
+    arn: "arn:aws:sns:${data.aws_region}:${data.aws_account_id}:topic"
     region: us-west-1
     ruleSelector:
       matchLabels:
-        testing.upbound.io/example-name: console-rule
-    runCommandTargets:
-      - key: tag:Name
-        values:
-          - FooBar
-      - key: InstanceIds
-        values:
-          - i-162058cd308bffec2
-    targetId: ConsoleTarget
+        testing.upbound.io/example-name: login-rule
+    targetId: aws-login
     eventBusNameSelector:
       matchLabels:
         testing.upbound.io/example-name: target-bus
@@ -29,24 +20,18 @@ apiVersion: events.aws.upbound.io/v1beta1
 kind: Rule
 metadata:
   labels:
-    testing.upbound.io/example-name: console-rule
-  name: console-rule
+    testing.upbound.io/example-name: login-rule
+  name: login-rule
 spec:
   forProvider:
     description: Capture all EC2 scaling events
     eventPattern: |
       {
-        "source": [
-          "aws.autoscaling"
-        ],
         "detail-type": [
-          "EC2 Instance Launch Successful",
-          "EC2 Instance Terminate Successful",
-          "EC2 Instance Launch Unsuccessful",
-          "EC2 Instance Terminate Unsuccessful"
+          "AWS Console Sign In via CloudTrail"
         ]
       }
-    name: capture-ec2-scaling-events
+    name: login-rule
     region: us-west-1
     eventBusNameSelector:
       matchLabels:
@@ -54,16 +39,27 @@ spec:
 
 ---
 
-apiVersion: kinesis.aws.upbound.io/v1beta1
-kind: Stream
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
 metadata:
   labels:
-    testing.upbound.io/example-name: test-stream
-  name: test-stream
+    testing.upbound.io/example-name: topic
+  name: topic
 spec:
   forProvider:
+    policy: |
+      {
+          "Version":"2012-10-17",
+          "Statement":[{
+              "Effect": "Allow",
+              "Principal": {
+                  "Service": "events.amazonaws.com"
+              },
+              "Action": "SNS:Publish",
+              "Resource": "arn:aws:sns:*:*:topic"
+          }]
+      }
     region: us-west-1
-    shardCount: 1
 
 ---
 

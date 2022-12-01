@@ -26,6 +26,8 @@ func Configure(p *config.Provider) {
 			RefFieldName:      "EventBusNameRefs",
 			SelectorFieldName: "EventBusNameSelector",
 		}
+		delete(r.References, "arn")
+		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_cloudwatch_event_permission", func(r *config.Resource) {
 		r.UseAsync = true

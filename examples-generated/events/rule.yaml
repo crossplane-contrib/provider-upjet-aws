@@ -30,9 +30,7 @@ metadata:
   name: sns
 spec:
   forProvider:
-    arnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: aws_logins
+    arn: ${aws_sns_topic.aws_logins.arn}
     region: us-west-1
     ruleSelector:
       matchLabels:

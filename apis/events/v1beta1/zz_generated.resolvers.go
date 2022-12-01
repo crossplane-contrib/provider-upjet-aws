@@ -9,9 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta13 "github.com/upbound/provider-aws/apis/ecs/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/ecs/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/kinesis/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/organizations/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
@@ -189,22 +188,6 @@ func (mg *Target) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Arn),
-		Extract:      common.TerraformID(),
-		Reference:    mg.Spec.ForProvider.ArnRef,
-		Selector:     mg.Spec.ForProvider.ArnSelector,
-		To: reference.To{
-			List:    &v1beta12.StreamList{},
-			Managed: &v1beta12.Stream{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.Arn")
-	}
-	mg.Spec.ForProvider.Arn = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ArnRef = rsp.ResolvedReference
-
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.EcsTarget); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EcsTarget[i3].TaskDefinitionArn),
@@ -212,8 +195,8 @@ func (mg *Target) ResolveReferences(ctx context.Context, c client.Reader) error 
 			Reference:    mg.Spec.ForProvider.EcsTarget[i3].TaskDefinitionArnRef,
 			Selector:     mg.Spec.ForProvider.EcsTarget[i3].TaskDefinitionArnSelector,
 			To: reference.To{
-				List:    &v1beta13.TaskDefinitionList{},
-				Managed: &v1beta13.TaskDefinition{},
+				List:    &v1beta12.TaskDefinitionList{},
+				Managed: &v1beta12.TaskDefinition{},
 			},
 		})
 		if err != nil {
