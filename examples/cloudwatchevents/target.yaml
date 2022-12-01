@@ -9,7 +9,6 @@ spec:
     ruleSelector:
       matchLabels:
         testing.upbound.io/example-name: login-rule
-    targetId: aws-login
     eventBusNameSelector:
       matchLabels:
         testing.upbound.io/example-name: target-bus
@@ -31,7 +30,6 @@ spec:
           "AWS Console Sign In via CloudTrail"
         ]
       }
-    name: login-rule
     region: us-west-1
     eventBusNameSelector:
       matchLabels:

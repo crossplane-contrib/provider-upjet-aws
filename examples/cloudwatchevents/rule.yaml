@@ -3,7 +3,7 @@ kind: Rule
 metadata:
   labels:
     testing.upbound.io/example-name: console
-  name: console
+  name: capture-aws-sign-in
 spec:
   forProvider:
     description: Capture each AWS Console Sign In
@@ -13,7 +13,6 @@ spec:
           "AWS Console Sign In via CloudTrail"
         ]
       }
-    name: capture-aws-sign-in
     region: us-west-1
     eventBusNameSelector:
       matchLabels:
