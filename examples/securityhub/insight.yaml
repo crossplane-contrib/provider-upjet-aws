@@ -17,15 +17,3 @@ spec:
     groupByAttribute: AwsAccountId
     name: example-insight
     region: us-west-1
----
-apiVersion: securityhub.aws.upbound.io/v1beta1
-kind: Account
-metadata:
-  annotations:
-    meta.upbound.io/example-id: securityhub/v1beta1/insight
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    region: us-west-1
