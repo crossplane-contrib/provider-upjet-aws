@@ -7,7 +7,19 @@ spec:
     eventBusNameSelector:
       matchLabels:
         testing.upbound.io/example-name: test-bus
-    policy: ${data.aws_iam_policy_document.test.json}
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "0",
+            "Effect": "Allow",
+            "Principal": {"AWS":"arn:aws:iam::${data.aws_account_id}:root"},
+            "Action": "events:PutEvents",
+            "Resource": "arn:aws:events:${data.aws_region}:${data.aws_account_id}:event-bus/test-bus"
+          }
+        ]
+      }
     region: us-west-1
 
 ---
