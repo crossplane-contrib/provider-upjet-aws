@@ -22,7 +22,7 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_cloudwatch_event_permission", func(r *config.Resource) {
 		r.References["event_bus_name"] = config.Reference{
-			Type:              "github.com/upbound/provider-aws/apis/events/v1beta1.Bus",
+			Type:              "Bus",
 			RefFieldName:      "EventBusNameRefs",
 			SelectorFieldName: "EventBusNameSelector",
 		}
