@@ -12,6 +12,7 @@ spec:
     eventBusNameSelector:
       matchLabels:
         testing.upbound.io/example-name: target-bus
+    targetId: aws-login
 
 ---
 

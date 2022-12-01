@@ -349,6 +349,10 @@ type TargetParameters struct {
 	// Parameters used when you are using the rule to invoke an Amazon SQS Queue. Documented below. A maximum of 1 are allowed.
 	// +kubebuilder:validation:Optional
 	SqsTarget []SqsTargetParameters `json:"sqsTarget,omitempty" tf:"sqs_target,omitempty"`
+
+	// The unique target assignment ID.  If missing, will generate a random, unique id.
+	// +kubebuilder:validation:Optional
+	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 }
 
 // TargetSpec defines the desired state of Target

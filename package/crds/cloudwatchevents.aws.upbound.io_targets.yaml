@@ -675,6 +675,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  targetId:
+                    description: The unique target assignment ID.  If missing, will
+                      generate a random, unique id.
+                    type: string
                 required:
                 - arn
                 - region

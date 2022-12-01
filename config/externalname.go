@@ -1043,7 +1043,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Imported using event_bus_name/rule_name
 	"aws_cloudwatch_event_rule": FormattedIdentifierUserDefinedNameLast("name", "/", "event_bus_name"),
 	// Imported using event_bus_name/rule_name/target_id
-	"aws_cloudwatch_event_target": FormattedIdentifierUserDefinedNameLast("target_id", "/", "event_bus_name", "rule"),
+	"aws_cloudwatch_event_target": FormattedIdentifierFromProvider("/", "event_bus_name", "rule", "target_id"),
 
 	// cloudwatch
 	//

@@ -34,6 +34,7 @@ spec:
     ruleSelector:
       matchLabels:
         testing.upbound.io/example-name: console
+    targetId: SendToSNS
 
 ---
 

@@ -20,6 +20,7 @@ spec:
     - key: InstanceIds
       values:
       - i-162058cd308bffec2
+    targetId: Yada
 
 ---
 
