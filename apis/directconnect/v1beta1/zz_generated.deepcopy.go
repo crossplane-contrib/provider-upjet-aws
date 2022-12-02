@@ -883,6 +883,16 @@ func (in *PublicVirtualInterfaceParameters) DeepCopyInto(out *PublicVirtualInter
 		*out = new(string)
 		**out = **in
 	}
+	if in.ConnectionIDRef != nil {
+		in, out := &in.ConnectionIDRef, &out.ConnectionIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ConnectionIDSelector != nil {
+		in, out := &in.ConnectionIDSelector, &out.ConnectionIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CustomerAddress != nil {
 		in, out := &in.CustomerAddress, &out.CustomerAddress
 		*out = new(string)

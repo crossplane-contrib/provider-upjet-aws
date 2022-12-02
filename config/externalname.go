@@ -1370,20 +1370,19 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudformation_stack_set": config.NameAsIdentifier,
 
 	// directconnect
-    //
-    // Direct Connect Gateways can be imported using the gateway id
-    "aws_dx_gateway": config.IdentifierFromProvider,
-    // Direct Connect connections can be imported using the connection id
-    "aws_dx_connection": config.IdentifierFromProvider,
-    // Direct Connect public virtual interfaces can be imported using the vif id
-    "aws_dx_public_virtual_interface": config.IdentifierFromProvider,
-    // No import
-    "aws_dx_connection_association": config.IdentifierFromProvider,
-    // Direct Connect LAGs can be imported using the lag id
-    "aws_dx_lag": config.IdentifierFromProvider,
-
-
+	//
+	// Direct Connect Gateways can be imported using the gateway id
+	"aws_dx_gateway": config.IdentifierFromProvider,
+	// Direct Connect connections can be imported using the connection id
+	"aws_dx_connection": config.IdentifierFromProvider,
+	// Direct Connect public virtual interfaces can be imported using the vif id
+	"aws_dx_public_virtual_interface": config.IdentifierFromProvider,
+	// No import
+	"aws_dx_connection_association": config.IdentifierFromProvider,
+	// Direct Connect LAGs can be imported using the lag id
+	"aws_dx_lag": config.IdentifierFromProvider,
 }
+
 func lambdaFunctionURL() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
