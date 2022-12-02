@@ -199,6 +199,9 @@ import (
 	upload "github.com/upbound/provider-aws/internal/controller/devicefarm/upload"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
+	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/docdb/clusterparametergroup"
+	clustersnapshot "github.com/upbound/provider-aws/internal/controller/docdb/clustersnapshot"
+	eventsubscription "github.com/upbound/provider-aws/internal/controller/docdb/eventsubscription"
 	globalcluster "github.com/upbound/provider-aws/internal/controller/docdb/globalcluster"
 	subnetgroupdocdb "github.com/upbound/provider-aws/internal/controller/docdb/subnetgroup"
 	contributorinsights "github.com/upbound/provider-aws/internal/controller/dynamodb/contributorinsights"
@@ -406,9 +409,9 @@ import (
 	clusterneptune "github.com/upbound/provider-aws/internal/controller/neptune/cluster"
 	clusterendpoint "github.com/upbound/provider-aws/internal/controller/neptune/clusterendpoint"
 	clusterinstanceneptune "github.com/upbound/provider-aws/internal/controller/neptune/clusterinstance"
-	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/neptune/clusterparametergroup"
-	clustersnapshot "github.com/upbound/provider-aws/internal/controller/neptune/clustersnapshot"
-	eventsubscription "github.com/upbound/provider-aws/internal/controller/neptune/eventsubscription"
+	clusterparametergroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/clusterparametergroup"
+	clustersnapshotneptune "github.com/upbound/provider-aws/internal/controller/neptune/clustersnapshot"
+	eventsubscriptionneptune "github.com/upbound/provider-aws/internal/controller/neptune/eventsubscription"
 	parametergroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/parametergroup"
 	subnetgroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/subnetgroup"
 	domainopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domain"
@@ -694,6 +697,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		upload.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,
+		clusterparametergroup.Setup,
+		clustersnapshot.Setup,
+		eventsubscription.Setup,
 		globalcluster.Setup,
 		subnetgroupdocdb.Setup,
 		contributorinsights.Setup,
@@ -901,9 +907,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		clusterneptune.Setup,
 		clusterendpoint.Setup,
 		clusterinstanceneptune.Setup,
-		clusterparametergroup.Setup,
-		clustersnapshot.Setup,
-		eventsubscription.Setup,
+		clusterparametergroupneptune.Setup,
+		clustersnapshotneptune.Setup,
+		eventsubscriptionneptune.Setup,
 		parametergroupneptune.Setup,
 		subnetgroupneptune.Setup,
 		domainopensearch.Setup,

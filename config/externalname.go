@@ -677,6 +677,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_docdb_cluster_instance": config.ParameterAsIdentifier("identifier"),
 	// DocumentDB Subnet groups can be imported using the name
 	"aws_docdb_subnet_group": config.NameAsIdentifier,
+	// DocumentDB Cluster Parameter Groups can be imported using the name
+	"aws_docdb_cluster_parameter_group": config.NameAsIdentifier,
+	// aws_docdb_cluster_snapshot can be imported by using the cluster snapshot identifier
+	"aws_docdb_cluster_snapshot": config.ParameterAsIdentifier("db_cluster_snapshot_identifier"),
+	// DocDB Event Subscriptions can be imported using the name
+	"aws_docdb_event_subscription": config.NameAsIdentifier,
 
 	// efs
 	//
