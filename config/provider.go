@@ -176,7 +176,6 @@ func GetProvider() *config.Provider {
 		elasticloadbalancing.Configure,
 		elb.Configure,
 		elbv2.Configure,
-		events.Configure,
 		firehose.Configure,
 		gamelift.Configure,
 		globalaccelerator.Configure,

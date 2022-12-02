@@ -24,6 +24,7 @@ func Configure(p *config.Provider) {
 		r.References["event_bus_name"] = config.Reference{
 			Type: "Bus",
 		}
+		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_cloudwatch_event_rule", func(r *config.Resource) {
 		r.References["event_bus_name"] = config.Reference{
