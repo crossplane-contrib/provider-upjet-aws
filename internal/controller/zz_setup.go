@@ -116,6 +116,8 @@ import (
 	environmentec2 "github.com/upbound/provider-aws/internal/controller/cloud9/environmentec2"
 	environmentmembership "github.com/upbound/provider-aws/internal/controller/cloud9/environmentmembership"
 	resourcecloudcontrol "github.com/upbound/provider-aws/internal/controller/cloudcontrol/resource"
+	stackcloudformation "github.com/upbound/provider-aws/internal/controller/cloudformation/stack"
+	stackset "github.com/upbound/provider-aws/internal/controller/cloudformation/stackset"
 	cachepolicy "github.com/upbound/provider-aws/internal/controller/cloudfront/cachepolicy"
 	distribution "github.com/upbound/provider-aws/internal/controller/cloudfront/distribution"
 	fieldlevelencryptionconfig "github.com/upbound/provider-aws/internal/controller/cloudfront/fieldlevelencryptionconfig"
@@ -609,6 +611,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		environmentec2.Setup,
 		environmentmembership.Setup,
 		resourcecloudcontrol.Setup,
+		stackcloudformation.Setup,
+		stackset.Setup,
 		cachepolicy.Setup,
 		distribution.Setup,
 		fieldlevelencryptionconfig.Setup,
