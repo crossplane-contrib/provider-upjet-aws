@@ -8,21 +8,6 @@ on:
 
 jobs:
   community_issue_triage:
-    if: ${{ (github.event.issue.author_association != 'OWNER' &&
-      github.event.issue.author_association != 'MEMBER' &&
-      github.event.issue.author_association != 'COLLABORATOR' ) }}
-    runs-on: ubuntu-latest
-    permissions:
-      issues: write
-    steps:
-      - name: Label community issues
-        if: ${{ !contains(github.event.issue.labels.*.name, 'community') }}
-        uses: actions/github-script@v6
-        with:
-          script: |
-            github.rest.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ["community"]
-            })
+    uses: upbound/uptest/.github/workflows/issue_triage.yml@main
+    secrets:
+      UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
