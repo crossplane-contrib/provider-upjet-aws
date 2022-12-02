@@ -194,6 +194,11 @@ func Configure(p *config.Provider) {
 		r.References["source_security_group_id"] = config.Reference{
 			Type: "SecurityGroup",
 		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{
+				"self", "source_security_group_id",
+			},
+		}
 	})
 
 	p.AddResourceConfigurator("aws_vpc_peering_connection", func(r *config.Resource) {
