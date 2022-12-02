@@ -54,7 +54,6 @@ jobs:
         env:
           MODIFIED_CRD_LIST: ${{ steps.modified-crds.outputs.all_changed_files }}
         run: |
-          mkdir -p .cache/tools/linux_x86_64
           make crddiff
 
   lint:
