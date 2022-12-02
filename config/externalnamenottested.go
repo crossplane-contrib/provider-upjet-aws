@@ -89,11 +89,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// cloudformation
 	//
-	// Cloudformation Stacks can be imported using the name
-	"aws_cloudformation_stack": config.NameAsIdentifier,
-	// CloudFormation StackSets can be imported using the name
-	"aws_cloudformation_stack_set": config.NameAsIdentifier,
-	//
+	// Cloudformation Stacks Instances imported using the StackSet name, target AWS account ID, and target AWS: example,123456789012,us-east-1
 	"aws_cloudformation_stack_set_instance": config.IdentifierFromProvider,
 	// aws_cloudformation_type can be imported with their type version Amazon Resource Name (ARN)
 	"aws_cloudformation_type": config.IdentifierFromProvider,
