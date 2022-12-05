@@ -7,7 +7,7 @@ on:
       - unlabeled
 
 jobs:
-  community_issue_triage:
+  community-issue-triage:
     uses: upbound/uptest/.github/workflows/issue_triage.yml@main
     secrets:
       UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
