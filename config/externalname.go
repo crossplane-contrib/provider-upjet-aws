@@ -85,6 +85,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Dynamodb Kinesis streaming destinations are imported using "table_name,stream_arn"
 	"aws_dynamodb_kinesis_streaming_destination": config.IdentifierFromProvider,
 
+	// cloudtrail
+	//
+	// Cloudtrails can be imported using the name
+	"aws_cloudtrail": config.NameAsIdentifier,
+
 	// cognitoidentity
 	//
 	// us-west-2_abc123
