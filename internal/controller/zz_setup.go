@@ -282,6 +282,8 @@ import (
 	vpcendpointsubnetassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointsubnetassociation"
 	vpcipam "github.com/upbound/provider-aws/internal/controller/ec2/vpcipam"
 	vpcipampool "github.com/upbound/provider-aws/internal/controller/ec2/vpcipampool"
+	vpcipampoolcidr "github.com/upbound/provider-aws/internal/controller/ec2/vpcipampoolcidr"
+	vpcipampoolcidrallocation "github.com/upbound/provider-aws/internal/controller/ec2/vpcipampoolcidrallocation"
 	vpcipamscope "github.com/upbound/provider-aws/internal/controller/ec2/vpcipamscope"
 	vpcipv4cidrblockassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcipv4cidrblockassociation"
 	vpcpeeringconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnection"
@@ -781,6 +783,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcendpointsubnetassociation.Setup,
 		vpcipam.Setup,
 		vpcipampool.Setup,
+		vpcipampoolcidr.Setup,
+		vpcipampoolcidrallocation.Setup,
 		vpcipamscope.Setup,
 		vpcipv4cidrblockassociation.Setup,
 		vpcpeeringconnection.Setup,

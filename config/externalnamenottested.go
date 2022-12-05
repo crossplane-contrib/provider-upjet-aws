@@ -328,8 +328,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_vpc_ipam_organization_admin_account": config.ParameterAsIdentifier("delegated_admin_account_id"),
 	// IPAMs can be imported using the <cidr>_<ipam-pool-id>
 	"aws_vpc_ipam_pool_aws_default_network_acl": config.IdentifierFromProvider,
-	// IPAMs can be imported using the allocation id
-	"aws_vpc_ipam_pool_cidr_allocation": config.IdentifierFromProvider,
 	// No import
 	"aws_vpc_ipam_preview_next_cidr": config.IdentifierFromProvider,
 	// aws_vpc_ipv6_cidr_block_association can be imported by using the VPC CIDR Association ID

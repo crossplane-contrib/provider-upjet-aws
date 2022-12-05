@@ -2620,6 +2620,58 @@ func (mg *VPCIpamPool) ResolveReferences(ctx context.Context, c client.Reader) e
 	return nil
 }
 
+// ResolveReferences of this VPCIpamPoolCidr.
+func (mg *VPCIpamPoolCidr) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IpamPoolID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.IpamPoolIDRef,
+		Selector:     mg.Spec.ForProvider.IpamPoolIDSelector,
+		To: reference.To{
+			List:    &VPCIpamPoolList{},
+			Managed: &VPCIpamPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IpamPoolID")
+	}
+	mg.Spec.ForProvider.IpamPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IpamPoolIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VPCIpamPoolCidrAllocation.
+func (mg *VPCIpamPoolCidrAllocation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IpamPoolID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.IpamPoolIDRef,
+		Selector:     mg.Spec.ForProvider.IpamPoolIDSelector,
+		To: reference.To{
+			List:    &VPCIpamPoolList{},
+			Managed: &VPCIpamPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IpamPoolID")
+	}
+	mg.Spec.ForProvider.IpamPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IpamPoolIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this VPCIpamScope.
 func (mg *VPCIpamScope) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

@@ -12,7 +12,7 @@ spec:
     ipamScopeIdSelector: 
       matchLabels:
         testing.upbound.io/example-name: example
-    locale: us-west-1 #${data.aws_region.current.name}
+    locale: us-west-1 
     region: us-west-1
 
 ---
@@ -47,7 +47,7 @@ spec:
   forProvider:
     description: My IPAM
     operatingRegions:
-    - regionName: us-west-1 #${data.aws_region.current.name}
+    - regionName: us-west-1 
     region: us-west-1
     tags:
       Test: Main
