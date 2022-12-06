@@ -280,6 +280,36 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ec2_transit_gateway_peering_attachment_accepter": config.IdentifierFromProvider,
 	// No import
 	"aws_snapshot_create_volume_permission": config.IdentifierFromProvider,
+	// Customer Gateways can be imported using the id
+	"aws_customer_gateway": config.IdentifierFromProvider,
+	// Default Network ACLs can be imported using the id
+	"aws_default_network_acl": config.IdentifierFromProvider,
+	// IPAMs can be imported using the ipam pool id
+	"aws_vpc_ipam_pool": config.IdentifierFromProvider,
+	// IPAMs can be imported using the scope_id
+	"aws_vpc_ipam_scope": config.IdentifierFromProvider,
+	// IPAMs can be imported using the ipam id
+	"aws_vpc_ipam": config.IdentifierFromProvider,
+	// IPAMs can be imported using the ipam id
+	"aws_vpc_ipam_pool_cidr": config.IdentifierFromProvider,
+	// IPAMs can be imported using the allocation id
+	"aws_vpc_ipam_pool_cidr_allocation": config.IdentifierFromProvider,
+	// aws_ami can be imported using the ID of the AMI
+	"aws_ami": config.IdentifierFromProvider,
+	// No import
+	"aws_ami_copy": config.IdentifierFromProvider,
+	// AMI Launch Permissions can be imported using [ACCOUNT-ID|GROUP-NAME|ORGANIZATION-ARN|ORGANIZATIONAL-UNIT-ARN]/IMAGE-ID
+	"aws_ami_launch_permission": config.IdentifierFromProvider,
+	// VPN Connections can be imported using the vpn connection id
+	"aws_vpn_connection": config.IdentifierFromProvider,
+	// No import
+	"aws_vpn_connection_route": config.IdentifierFromProvider,
+	// VPN Gateways can be imported using the vpn gateway id
+	"aws_vpn_gateway": config.IdentifierFromProvider,
+	// No import
+	"aws_vpn_gateway_attachment": config.IdentifierFromProvider,
+	// No import
+	"aws_vpn_gateway_route_propagation": config.IdentifierFromProvider,
 
 	// ecr
 	//

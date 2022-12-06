@@ -209,9 +209,14 @@ import (
 	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
 	table "github.com/upbound/provider-aws/internal/controller/dynamodb/table"
 	tableitem "github.com/upbound/provider-aws/internal/controller/dynamodb/tableitem"
+	ami "github.com/upbound/provider-aws/internal/controller/ec2/ami"
+	amicopy "github.com/upbound/provider-aws/internal/controller/ec2/amicopy"
+	amilaunchpermission "github.com/upbound/provider-aws/internal/controller/ec2/amilaunchpermission"
 	availabilityzonegroup "github.com/upbound/provider-aws/internal/controller/ec2/availabilityzonegroup"
 	capacityreservation "github.com/upbound/provider-aws/internal/controller/ec2/capacityreservation"
 	carriergateway "github.com/upbound/provider-aws/internal/controller/ec2/carriergateway"
+	customergateway "github.com/upbound/provider-aws/internal/controller/ec2/customergateway"
+	defaultnetworkacl "github.com/upbound/provider-aws/internal/controller/ec2/defaultnetworkacl"
 	defaultroutetable "github.com/upbound/provider-aws/internal/controller/ec2/defaultroutetable"
 	defaultsubnet "github.com/upbound/provider-aws/internal/controller/ec2/defaultsubnet"
 	defaultvpc "github.com/upbound/provider-aws/internal/controller/ec2/defaultvpc"
@@ -280,8 +285,18 @@ import (
 	vpcendpointservice "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointservice"
 	vpcendpointserviceallowedprincipal "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointserviceallowedprincipal"
 	vpcendpointsubnetassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointsubnetassociation"
+	vpcipam "github.com/upbound/provider-aws/internal/controller/ec2/vpcipam"
+	vpcipampool "github.com/upbound/provider-aws/internal/controller/ec2/vpcipampool"
+	vpcipampoolcidr "github.com/upbound/provider-aws/internal/controller/ec2/vpcipampoolcidr"
+	vpcipampoolcidrallocation "github.com/upbound/provider-aws/internal/controller/ec2/vpcipampoolcidrallocation"
+	vpcipamscope "github.com/upbound/provider-aws/internal/controller/ec2/vpcipamscope"
 	vpcipv4cidrblockassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcipv4cidrblockassociation"
 	vpcpeeringconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnection"
+	vpnconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpnconnection"
+	vpnconnectionroute "github.com/upbound/provider-aws/internal/controller/ec2/vpnconnectionroute"
+	vpngateway "github.com/upbound/provider-aws/internal/controller/ec2/vpngateway"
+	vpngatewayattachment "github.com/upbound/provider-aws/internal/controller/ec2/vpngatewayattachment"
+	vpngatewayroutepropagation "github.com/upbound/provider-aws/internal/controller/ec2/vpngatewayroutepropagation"
 	lifecyclepolicy "github.com/upbound/provider-aws/internal/controller/ecr/lifecyclepolicy"
 	pullthroughcacherule "github.com/upbound/provider-aws/internal/controller/ecr/pullthroughcacherule"
 	registrypolicy "github.com/upbound/provider-aws/internal/controller/ecr/registrypolicy"
@@ -707,9 +722,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		kinesisstreamingdestination.Setup,
 		table.Setup,
 		tableitem.Setup,
+		ami.Setup,
+		amicopy.Setup,
+		amilaunchpermission.Setup,
 		availabilityzonegroup.Setup,
 		capacityreservation.Setup,
 		carriergateway.Setup,
+		customergateway.Setup,
+		defaultnetworkacl.Setup,
 		defaultroutetable.Setup,
 		defaultsubnet.Setup,
 		defaultvpc.Setup,
@@ -778,8 +798,18 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcendpointservice.Setup,
 		vpcendpointserviceallowedprincipal.Setup,
 		vpcendpointsubnetassociation.Setup,
+		vpcipam.Setup,
+		vpcipampool.Setup,
+		vpcipampoolcidr.Setup,
+		vpcipampoolcidrallocation.Setup,
+		vpcipamscope.Setup,
 		vpcipv4cidrblockassociation.Setup,
 		vpcpeeringconnection.Setup,
+		vpnconnection.Setup,
+		vpnconnectionroute.Setup,
+		vpngateway.Setup,
+		vpngatewayattachment.Setup,
+		vpngatewayroutepropagation.Setup,
 		lifecyclepolicy.Setup,
 		pullthroughcacherule.Setup,
 		registrypolicy.Setup,
