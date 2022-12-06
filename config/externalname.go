@@ -1312,6 +1312,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// No import
 	"aws_cloudcontrolapi_resource": config.IdentifierFromProvider,
+
+	// Security Groups can be imported using the security group id
+	"aws_default_security_group": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

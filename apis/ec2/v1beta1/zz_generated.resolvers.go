@@ -107,6 +107,32 @@ func (mg *DefaultRouteTable) ResolveReferences(ctx context.Context, c client.Rea
 	return nil
 }
 
+// ResolveReferences of this DefaultSecurityGroup.
+func (mg *DefaultSecurityGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.VPCIDRef,
+		Selector:     mg.Spec.ForProvider.VPCIDSelector,
+		To: reference.To{
+			List:    &VPCList{},
+			Managed: &VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCID")
+	}
+	mg.Spec.ForProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPCIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this EBSDefaultKMSKey.
 func (mg *EBSDefaultKMSKey) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

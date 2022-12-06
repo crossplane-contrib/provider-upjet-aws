@@ -208,6 +208,7 @@ import (
 	capacityreservation "github.com/upbound/provider-aws/internal/controller/ec2/capacityreservation"
 	carriergateway "github.com/upbound/provider-aws/internal/controller/ec2/carriergateway"
 	defaultroutetable "github.com/upbound/provider-aws/internal/controller/ec2/defaultroutetable"
+	defaultsecuritygroup "github.com/upbound/provider-aws/internal/controller/ec2/defaultsecuritygroup"
 	defaultsubnet "github.com/upbound/provider-aws/internal/controller/ec2/defaultsubnet"
 	defaultvpc "github.com/upbound/provider-aws/internal/controller/ec2/defaultvpc"
 	defaultvpcdhcpoptions "github.com/upbound/provider-aws/internal/controller/ec2/defaultvpcdhcpoptions"
@@ -694,6 +695,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		capacityreservation.Setup,
 		carriergateway.Setup,
 		defaultroutetable.Setup,
+		defaultsecuritygroup.Setup,
 		defaultsubnet.Setup,
 		defaultvpc.Setup,
 		defaultvpcdhcpoptions.Setup,

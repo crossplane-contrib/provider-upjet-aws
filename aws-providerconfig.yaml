@@ -1,0 +1,11 @@
+apiVersion: aws.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+   name: default
+spec:
+   credentials:
+      source: Secret
+      secretRef:
+         name: aws-creds
+         namespace: upbound-system
+         key: creds

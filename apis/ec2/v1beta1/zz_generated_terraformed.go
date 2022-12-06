@@ -87,6 +87,80 @@ func (tr *DefaultRouteTable) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this DefaultSecurityGroup
+func (mg *DefaultSecurityGroup) GetTerraformResourceType() string {
+	return "aws_default_security_group"
+}
+
+// GetConnectionDetailsMapping for this DefaultSecurityGroup
+func (tr *DefaultSecurityGroup) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this DefaultSecurityGroup
+func (tr *DefaultSecurityGroup) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this DefaultSecurityGroup
+func (tr *DefaultSecurityGroup) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this DefaultSecurityGroup
+func (tr *DefaultSecurityGroup) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this DefaultSecurityGroup
+func (tr *DefaultSecurityGroup) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this DefaultSecurityGroup
+func (tr *DefaultSecurityGroup) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this DefaultSecurityGroup using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *DefaultSecurityGroup) LateInitialize(attrs []byte) (bool, error) {
+	params := &DefaultSecurityGroupParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *DefaultSecurityGroup) GetTerraformSchemaVersion() int {
+	return 1
+}
+
 // GetTerraformResourceType returns Terraform resource type for this DefaultSubnet
 func (mg *DefaultSubnet) GetTerraformResourceType() string {
 	return "aws_default_subnet"
