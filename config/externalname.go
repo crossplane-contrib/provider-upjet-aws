@@ -280,6 +280,36 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ec2_transit_gateway_peering_attachment_accepter": config.IdentifierFromProvider,
 	// No import
 	"aws_snapshot_create_volume_permission": config.IdentifierFromProvider,
+	// Customer Gateways can be imported using the id
+	"aws_customer_gateway": config.IdentifierFromProvider,
+	// Default Network ACLs can be imported using the id
+	"aws_default_network_acl": config.IdentifierFromProvider,
+	// IPAMs can be imported using the ipam pool id
+	"aws_vpc_ipam_pool": config.IdentifierFromProvider,
+	// IPAMs can be imported using the scope_id
+	"aws_vpc_ipam_scope": config.IdentifierFromProvider,
+	// IPAMs can be imported using the ipam id
+	"aws_vpc_ipam": config.IdentifierFromProvider,
+	// IPAMs can be imported using the ipam id
+	"aws_vpc_ipam_pool_cidr": config.IdentifierFromProvider,
+	// IPAMs can be imported using the allocation id
+	"aws_vpc_ipam_pool_cidr_allocation": config.IdentifierFromProvider,
+	// aws_ami can be imported using the ID of the AMI
+	"aws_ami": config.IdentifierFromProvider,
+	// No import
+	"aws_ami_copy": config.IdentifierFromProvider,
+	// AMI Launch Permissions can be imported using [ACCOUNT-ID|GROUP-NAME|ORGANIZATION-ARN|ORGANIZATIONAL-UNIT-ARN]/IMAGE-ID
+	"aws_ami_launch_permission": config.IdentifierFromProvider,
+	// VPN Connections can be imported using the vpn connection id
+	"aws_vpn_connection": config.IdentifierFromProvider,
+	// No import
+	"aws_vpn_connection_route": config.IdentifierFromProvider,
+	// VPN Gateways can be imported using the vpn gateway id
+	"aws_vpn_gateway": config.IdentifierFromProvider,
+	// No import
+	"aws_vpn_gateway_attachment": config.IdentifierFromProvider,
+	// No import
+	"aws_vpn_gateway_route_propagation": config.IdentifierFromProvider,
 
 	// ecr
 	//
@@ -677,6 +707,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_docdb_cluster_instance": config.ParameterAsIdentifier("identifier"),
 	// DocumentDB Subnet groups can be imported using the name
 	"aws_docdb_subnet_group": config.NameAsIdentifier,
+	// DocumentDB Cluster Parameter Groups can be imported using the name
+	"aws_docdb_cluster_parameter_group": config.NameAsIdentifier,
+	// aws_docdb_cluster_snapshot can be imported by using the cluster snapshot identifier
+	"aws_docdb_cluster_snapshot": config.ParameterAsIdentifier("db_cluster_snapshot_identifier"),
+	// DocDB Event Subscriptions can be imported using the name
+	"aws_docdb_event_subscription": config.NameAsIdentifier,
 
 	// efs
 	//
@@ -1381,6 +1417,19 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName("arn:aws:cloudformation:{{ .parameters.region }}:{{ .client_metadata.account_id }}:stack/{{ .parameters.name }}/{{ .external_name }}"),
 	// CloudFormation StackSets can be imported using the name
 	"aws_cloudformation_stack_set": config.NameAsIdentifier,
+
+	// directconnect
+	//
+	// Direct Connect Gateways can be imported using the gateway id
+	"aws_dx_gateway": config.IdentifierFromProvider,
+	// Direct Connect connections can be imported using the connection id
+	"aws_dx_connection": config.IdentifierFromProvider,
+	// Direct Connect public virtual interfaces can be imported using the vif id
+	"aws_dx_public_virtual_interface": config.IdentifierFromProvider,
+	// No import
+	"aws_dx_connection_association": config.IdentifierFromProvider,
+	// Direct Connect LAGs can be imported using the lag id
+	"aws_dx_lag": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

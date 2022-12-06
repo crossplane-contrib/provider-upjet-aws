@@ -196,14 +196,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// No import
 	"aws_dx_bgp_peer": config.IdentifierFromProvider,
-	// Direct Connect connections can be imported using the connection id
-	"aws_dx_connection": config.IdentifierFromProvider,
-	// No import
-	"aws_dx_connection_association": config.IdentifierFromProvider,
 	// No import
 	"aws_dx_connection_confirmation": config.IdentifierFromProvider,
-	// Direct Connect Gateways can be imported using the gateway id
-	"aws_dx_gateway": config.IdentifierFromProvider,
 	// Direct Connect gateway associations can be imported using dx_gateway_id together with associated_gateway_id
 	// TODO: associated_gateway_id parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
 	"aws_dx_gateway_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.dx_gateway_id }}/{{ .parameters.associated_gateway_id }}"),
@@ -223,12 +217,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_dx_hosted_transit_virtual_interface": config.IdentifierFromProvider,
 	// Direct Connect hosted transit virtual interfaces can be imported using the vif id
 	"aws_dx_hosted_transit_virtual_interface_accepter": config.ParameterAsIdentifier("virtual_interface_id"),
-	// Direct Connect LAGs can be imported using the lag id
-	"aws_dx_lag": config.IdentifierFromProvider,
 	// Direct Connect private virtual interfaces can be imported using the vif id
 	"aws_dx_private_virtual_interface": config.IdentifierFromProvider,
-	// Direct Connect public virtual interfaces can be imported using the vif id
-	"aws_dx_public_virtual_interface": config.IdentifierFromProvider,
 	// Direct Connect transit virtual interfaces can be imported using the vif id
 	"aws_dx_transit_virtual_interface": config.IdentifierFromProvider,
 
@@ -252,15 +242,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Replication tasks can be imported using the replication_task_id
 	"aws_dms_replication_task": config.ParameterAsIdentifier("replication_task_id"),
 
-	// docdb
-	//
-	// DocumentDB Cluster Parameter Groups can be imported using the name
-	"aws_docdb_cluster_parameter_group": config.NameAsIdentifier,
-	// aws_docdb_cluster_snapshot can be imported by using the cluster snapshot identifier
-	"aws_docdb_cluster_snapshot": config.ParameterAsIdentifier("db_cluster_snapshot_identifier"),
-	// DocDB Event Subscriptions can be imported using the name
-	"aws_docdb_event_subscription": config.NameAsIdentifier,
-
 	// ds
 	//
 	// Conditional forwarders can be imported using the directory id and remote_domain_name: d-1234567890:example.com
@@ -277,18 +258,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// ec2
 	//
-	// aws_ami can be imported using the ID of the AMI
-	"aws_ami": config.IdentifierFromProvider,
-	// No import
-	"aws_ami_copy": config.IdentifierFromProvider,
 	// No import
 	"aws_ami_from_instance": config.IdentifierFromProvider,
-	// AMI Launch Permissions can be imported using [ACCOUNT-ID|GROUP-NAME|ORGANIZATION-ARN|ORGANIZATIONAL-UNIT-ARN]/IMAGE-ID
-	"aws_ami_launch_permission": config.IdentifierFromProvider,
-	// Customer Gateways can be imported using the id
-	"aws_customer_gateway": config.IdentifierFromProvider,
-	// Default Network ACLs can be imported using the id
-	"aws_default_network_acl": config.IdentifierFromProvider,
 	// Security Groups can be imported using the security group id
 	"aws_default_security_group": config.IdentifierFromProvider,
 	//
@@ -325,36 +296,18 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_vpc_endpoint_policy": config.IdentifierFromProvider,
 	// No import
 	"aws_vpc_endpoint_security_group_association": config.IdentifierFromProvider,
-	// IPAMs can be imported using the ipam id
-	"aws_vpc_ipam": config.IdentifierFromProvider,
 	// IPAMs can be imported using the delegate account id
 	"aws_vpc_ipam_organization_admin_account": config.ParameterAsIdentifier("delegated_admin_account_id"),
-	// IPAMs can be imported using the ipam pool id
-	"aws_vpc_ipam_pool": config.IdentifierFromProvider,
 	// IPAMs can be imported using the <cidr>_<ipam-pool-id>
-	"aws_vpc_ipam_pool_cidr": config.IdentifierFromProvider,
-	// IPAMs can be imported using the allocation id
-	"aws_vpc_ipam_pool_cidr_allocation": config.IdentifierFromProvider,
+	"aws_vpc_ipam_pool_aws_default_network_acl": config.IdentifierFromProvider,
 	// No import
 	"aws_vpc_ipam_preview_next_cidr": config.IdentifierFromProvider,
-	// IPAMs can be imported using the scope_id
-	"aws_vpc_ipam_scope": config.IdentifierFromProvider,
 	// aws_vpc_ipv6_cidr_block_association can be imported by using the VPC CIDR Association ID
 	"aws_vpc_ipv6_cidr_block_association": config.IdentifierFromProvider,
 	// VPC Peering Connection Accepters can be imported by using the Peering Connection ID
 	"aws_vpc_peering_connection_accepter": config.ParameterAsIdentifier("vpc_peering_connection_id"),
 	// VPC Peering Connection Options can be imported using the vpc peering id
 	"aws_vpc_peering_connection_options": config.ParameterAsIdentifier("vpc_peering_connection_id"),
-	// VPN Connections can be imported using the vpn connection id
-	"aws_vpn_connection": config.IdentifierFromProvider,
-	// No import
-	"aws_vpn_connection_route": config.IdentifierFromProvider,
-	// VPN Gateways can be imported using the vpn gateway id
-	"aws_vpn_gateway": config.IdentifierFromProvider,
-	// No import
-	"aws_vpn_gateway_attachment": config.IdentifierFromProvider,
-	// No import
-	"aws_vpn_gateway_route_propagation": config.IdentifierFromProvider,
 
 	// securityhub
 	//

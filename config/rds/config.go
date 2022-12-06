@@ -23,6 +23,16 @@ func Configure(p *config.Provider) {
 			Type: "SubnetGroup",
 		}
 		r.UseAsync = true
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["endpoint"].(string); ok {
+				conn["endpoint"] = []byte(a)
+			}
+			if a, ok := attr["reader_endpoint"].(string); ok {
+				conn["reader_endpoint"] = []byte(a)
+			}
+			return conn, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_rds_cluster_instance", func(r *config.Resource) {

@@ -1,0 +1,44 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: sample-vpc
+spec:
+  forProvider:
+    cidrBlock: 172.16.0.0/16
+    region: us-east-1
+    tags:
+      Name: DemoVpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  labels:
+    selector: here-i-am
+  name: test-vpc
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    region: us-east-1
+    vpcIdRef:
+      name: sample-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupRule
+metadata:
+  name: test-vpc-securitygroup
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    fromPort: 22
+    protocol: tcp
+    region: us-east-1
+    securityGroupIdSelector:
+      matchLabels:
+        selector: here-i-am
+    self: true
+    toPort: 22
+    type: ingress

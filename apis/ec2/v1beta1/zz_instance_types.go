@@ -51,13 +51,23 @@ type CreditSpecificationParameters struct {
 	CPUCredits *string `json:"cpuCredits,omitempty" tf:"cpu_credits,omitempty"`
 }
 
-type EBSBlockDeviceObservation struct {
+type EnclaveOptionsObservation struct {
+}
+
+type EnclaveOptionsParameters struct {
+
+	// Whether Nitro Enclaves will be enabled on the instance. Defaults to false.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type InstanceEBSBlockDeviceObservation struct {
 
 	// ID of the volume. For example, the ID can be accessed like this, aws_instance.web.ebs_block_device.2.volume_id.
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 }
 
-type EBSBlockDeviceParameters struct {
+type InstanceEBSBlockDeviceParameters struct {
 
 	// Whether the volume should be destroyed on instance termination. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -109,20 +119,10 @@ type EBSBlockDeviceParameters struct {
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
-type EnclaveOptionsObservation struct {
+type InstanceEphemeralBlockDeviceObservation struct {
 }
 
-type EnclaveOptionsParameters struct {
-
-	// Whether Nitro Enclaves will be enabled on the instance. Defaults to false.
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-}
-
-type EphemeralBlockDeviceObservation struct {
-}
-
-type EphemeralBlockDeviceParameters struct {
+type InstanceEphemeralBlockDeviceParameters struct {
 
 	// The name of the block device to mount on the instance.
 	// +kubebuilder:validation:Required
@@ -144,7 +144,7 @@ type InstanceObservation struct {
 
 	// One or more configuration blocks with additional EBS block devices to attach to the instance. Block device configurations only apply on resource creation. See Block Devices below for details on attributes and drift detection. When accessing this as an attribute reference, it is a set of objects.
 	// +kubebuilder:validation:Optional
-	EBSBlockDevice []EBSBlockDeviceObservation `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
+	EBSBlockDevice []InstanceEBSBlockDeviceObservation `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
 
 	// The ID of the launch template. Conflicts with name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -217,7 +217,7 @@ type InstanceParameters struct {
 
 	// One or more configuration blocks with additional EBS block devices to attach to the instance. Block device configurations only apply on resource creation. See Block Devices below for details on attributes and drift detection. When accessing this as an attribute reference, it is a set of objects.
 	// +kubebuilder:validation:Optional
-	EBSBlockDevice []EBSBlockDeviceParameters `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
+	EBSBlockDevice []InstanceEBSBlockDeviceParameters `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
 
 	// If true, the launched EC2 instance will be EBS-optimized. Note that if this is not set on an instance type that is optimized by default then this will show as disabled but if the instance type is optimized by default then there is no need to set this and there is no effect to disabling it. See the EBS Optimized section of the AWS User Guide for more information.
 	// +kubebuilder:validation:Optional
@@ -229,7 +229,7 @@ type InstanceParameters struct {
 
 	// One or more configuration blocks to customize Ephemeral (also known as "Instance Store") volumes on the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a set of objects.
 	// +kubebuilder:validation:Optional
-	EphemeralBlockDevice []EphemeralBlockDeviceParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
+	EphemeralBlockDevice []InstanceEphemeralBlockDeviceParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
 	// If true, wait for password data to become available and retrieve it. Useful for getting the administrator password for instances running Microsoft Windows. The password data is exported to the password_data attribute. See GetPasswordData for more information.
 	// +kubebuilder:validation:Optional
