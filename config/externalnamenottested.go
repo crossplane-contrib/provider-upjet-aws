@@ -20,31 +20,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Amplify domain association can be imported using app_id and domain_name: d2ypk4k47z8u6/example.com
 	"aws_amplify_domain_association": config.TemplatedStringAsIdentifier("domain_name", "{{ .parameters.app_id }}/{{ .external_name }}"),
 
-	// appconfig
-
-	// AppConfig Applications can be imported using their application ID,
-	"aws_appconfig_application": config.IdentifierFromProvider,
-	// AppConfig Configuration Profiles can be imported by using the configuration profile ID and application ID separated by a colon (:)
-	"aws_appconfig_configuration_profile": config.IdentifierFromProvider,
-	// AppConfig Deployments can be imported by using the application ID, environment ID, and deployment number separated by a slash (/)
-	"aws_appconfig_deployment": config.IdentifierFromProvider,
-	// AppConfig Deployment Strategies can be imported by using their deployment strategy ID
-	"aws_appconfig_deployment_strategy": config.IdentifierFromProvider,
-	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
-	"aws_appconfig_environment": config.IdentifierFromProvider,
-	// AppConfig Hosted Configuration Versions can be imported by using the application ID, configuration profile ID, and version number separated by a slash (/)
-	"aws_appconfig_hosted_configuration_version": config.IdentifierFromProvider,
-
-	// appflow
-	//
-	// AppFlow flows can be imported using the arn
-	"aws_appflow_flow": config.IdentifierFromProvider,
-
-	// appintegrations
-	//
-	// Amazon AppIntegrations Event Integrations can be imported using the name
-	"aws_appintegrations_event_integration": config.NameAsIdentifier,
-
 	// apprunner
 	//
 	// App Runner Custom Domain Associations can be imported by using the domain_name and service_arn separated by a comma (,)

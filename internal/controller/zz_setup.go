@@ -62,6 +62,14 @@ import (
 	policy "github.com/upbound/provider-aws/internal/controller/appautoscaling/policy"
 	scheduledaction "github.com/upbound/provider-aws/internal/controller/appautoscaling/scheduledaction"
 	target "github.com/upbound/provider-aws/internal/controller/appautoscaling/target"
+	application "github.com/upbound/provider-aws/internal/controller/appconfig/application"
+	configurationprofile "github.com/upbound/provider-aws/internal/controller/appconfig/configurationprofile"
+	deploymentappconfig "github.com/upbound/provider-aws/internal/controller/appconfig/deployment"
+	deploymentstrategy "github.com/upbound/provider-aws/internal/controller/appconfig/deploymentstrategy"
+	environment "github.com/upbound/provider-aws/internal/controller/appconfig/environment"
+	hostedconfigurationversion "github.com/upbound/provider-aws/internal/controller/appconfig/hostedconfigurationversion"
+	flow "github.com/upbound/provider-aws/internal/controller/appflow/flow"
+	eventintegration "github.com/upbound/provider-aws/internal/controller/appintegrations/eventintegration"
 	gatewayroute "github.com/upbound/provider-aws/internal/controller/appmesh/gatewayroute"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	routeappmesh "github.com/upbound/provider-aws/internal/controller/appmesh/route"
@@ -393,7 +401,7 @@ import (
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
 	streamkinesis "github.com/upbound/provider-aws/internal/controller/kinesis/stream"
 	streamconsumer "github.com/upbound/provider-aws/internal/controller/kinesis/streamconsumer"
-	application "github.com/upbound/provider-aws/internal/controller/kinesisanalytics/application"
+	applicationkinesisanalytics "github.com/upbound/provider-aws/internal/controller/kinesisanalytics/application"
 	applicationkinesisanalyticsv2 "github.com/upbound/provider-aws/internal/controller/kinesisanalyticsv2/application"
 	applicationsnapshot "github.com/upbound/provider-aws/internal/controller/kinesisanalyticsv2/applicationsnapshot"
 	streamkinesisvideo "github.com/upbound/provider-aws/internal/controller/kinesisvideo/stream"
@@ -580,6 +588,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		policy.Setup,
 		scheduledaction.Setup,
 		target.Setup,
+		application.Setup,
+		configurationprofile.Setup,
+		deploymentappconfig.Setup,
+		deploymentstrategy.Setup,
+		environment.Setup,
+		hostedconfigurationversion.Setup,
+		flow.Setup,
+		eventintegration.Setup,
 		gatewayroute.Setup,
 		mesh.Setup,
 		routeappmesh.Setup,
@@ -911,7 +927,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		configuration.Setup,
 		streamkinesis.Setup,
 		streamconsumer.Setup,
-		application.Setup,
+		applicationkinesisanalytics.Setup,
 		applicationkinesisanalyticsv2.Setup,
 		applicationsnapshot.Setup,
 		streamkinesisvideo.Setup,
