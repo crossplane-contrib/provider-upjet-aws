@@ -592,7 +592,7 @@ spec:
                     description: The ID of the Virtual Private Gateway.
                     type: string
                   vpnGatewayIdRef:
-                    description: Reference to a VPNGateway in ec2 to populate vpnGatewayId.
+                    description: Reference to a VPNGateway to populate vpnGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -626,7 +626,7 @@ spec:
                     - name
                     type: object
                   vpnGatewayIdSelector:
-                    description: Selector for a VPNGateway in ec2 to populate vpnGatewayId.
+                    description: Selector for a VPNGateway to populate vpnGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
