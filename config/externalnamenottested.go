@@ -252,15 +252,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Replication tasks can be imported using the replication_task_id
 	"aws_dms_replication_task": config.ParameterAsIdentifier("replication_task_id"),
 
-	// docdb
-	//
-	// DocumentDB Cluster Parameter Groups can be imported using the name
-	"aws_docdb_cluster_parameter_group": config.NameAsIdentifier,
-	// aws_docdb_cluster_snapshot can be imported by using the cluster snapshot identifier
-	"aws_docdb_cluster_snapshot": config.ParameterAsIdentifier("db_cluster_snapshot_identifier"),
-	// DocDB Event Subscriptions can be imported using the name
-	"aws_docdb_event_subscription": config.NameAsIdentifier,
-
 	// ds
 	//
 	// Conditional forwarders can be imported using the directory id and remote_domain_name: d-1234567890:example.com
