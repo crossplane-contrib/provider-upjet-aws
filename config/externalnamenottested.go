@@ -20,11 +20,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Amplify domain association can be imported using app_id and domain_name: d2ypk4k47z8u6/example.com
 	"aws_amplify_domain_association": config.TemplatedStringAsIdentifier("domain_name", "{{ .parameters.app_id }}/{{ .external_name }}"),
 
-	// appflow
-	//
-	// AppFlow connector profiles can be imported using the arn
-	"aws_appflow_connector_profile": config.IdentifierFromProvider,
-
 	// apprunner
 	//
 	// App Runner Custom Domain Associations can be imported by using the domain_name and service_arn separated by a comma (,)

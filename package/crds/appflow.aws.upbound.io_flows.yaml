@@ -818,9 +818,6 @@ spec:
                       If you don't provide anything here, Amazon AppFlow uses the
                       Amazon AppFlow-managed KMS key.
                     type: string
-                  name:
-                    description: The name of the flow.
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -1439,7 +1436,6 @@ spec:
                     type: array
                 required:
                 - destinationFlowConfig
-                - name
                 - region
                 - sourceFlowConfig
                 - task

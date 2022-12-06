@@ -18,7 +18,6 @@ spec:
           s3OutputFormatConfig:
           - prefixConfig:
             - prefixType: PATH
-    name: example
     region: us-west-1
     sourceFlowConfig:
     - connectorType: S3

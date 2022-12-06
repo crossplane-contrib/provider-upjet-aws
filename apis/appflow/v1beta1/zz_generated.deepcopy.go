@@ -799,11 +799,6 @@ func (in *FlowParameters) DeepCopyInto(out *FlowParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)

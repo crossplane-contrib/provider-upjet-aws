@@ -1411,6 +1411,31 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_dx_connection_association": config.IdentifierFromProvider,
 	// Direct Connect LAGs can be imported using the lag id
 	"aws_dx_lag": config.IdentifierFromProvider,
+
+	// appconfig
+	//
+	// AppConfig Applications can be imported using their application ID,
+	"aws_appconfig_application": config.IdentifierFromProvider,
+	// AppConfig Deployment Strategies can be imported by using their deployment strategy ID
+	"aws_appconfig_deployment_strategy": config.IdentifierFromProvider,
+	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
+	"aws_appconfig_environment": config.IdentifierFromProvider,
+	// AppConfig Configuration Profiles can be imported by using the configuration profile ID and application ID separated by a colon (:)
+	"aws_appconfig_configuration_profile": config.IdentifierFromProvider,
+	// AppConfig Hosted Configuration Versions can be imported by using the application ID, configuration profile ID, and version number separated by a slash (/)
+	"aws_appconfig_hosted_configuration_version": config.IdentifierFromProvider,
+	// AppConfig Deployments can be imported by using the application ID, environment ID, and deployment number separated by a slash (/)
+	"aws_appconfig_deployment": config.IdentifierFromProvider,
+
+	// appintegrations
+	//
+	// Amazon AppIntegrations Event Integrations can be imported using the name
+	"aws_appintegrations_event_integration": config.NameAsIdentifier,
+
+	// appflow
+	//
+	// arn:aws:appflow:us-west-2:123456789012:flow/example-flow
+	"aws_appflow_flow": config.TemplatedStringAsIdentifier("name", "arn:aws:appflow:{{ .parameters.region }}:{{ .client_metadata.account_id }}:flow/{{ .external_name }}"),
 }
 
 func lambdaFunctionURL() config.ExternalName {

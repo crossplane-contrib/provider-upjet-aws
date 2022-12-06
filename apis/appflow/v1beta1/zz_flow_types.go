@@ -317,10 +317,6 @@ type FlowParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSArn *string `json:"kmsArn,omitempty" tf:"kms_arn,omitempty"`
 
-	// The name of the flow.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
-
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
