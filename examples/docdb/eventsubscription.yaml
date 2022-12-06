@@ -22,7 +22,7 @@ apiVersion: docdb.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
   annotations:
-    meta.upbound.io/example-id: docdb/v1beta1/clustersnapshot
+    meta.upbound.io/example-id: docdb/v1beta1/eventsubscription
   labels:
     testing.upbound.io/example-name: example
   name: my-docdb-cluster
@@ -43,7 +43,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   annotations:
-    meta.upbound.io/example-id: docdb/v1beta1/clustersnapshot
+    meta.upbound.io/example-id: docdb/v1beta1/eventsubscription
   labels:
     testing.upbound.io/example-name: secret-version
   name: docdb-creds
