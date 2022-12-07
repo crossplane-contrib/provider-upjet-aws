@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type EgressObservation struct {
+type NetworkACLEgressObservation struct {
 
 	// The action to take.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
@@ -45,10 +45,10 @@ type EgressObservation struct {
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
-type EgressParameters struct {
+type NetworkACLEgressParameters struct {
 }
 
-type IngressObservation struct {
+type NetworkACLIngressObservation struct {
 
 	// The action to take.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
@@ -80,7 +80,7 @@ type IngressObservation struct {
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
-type IngressParameters struct {
+type NetworkACLIngressParameters struct {
 }
 
 type NetworkACLObservation struct {
@@ -90,14 +90,14 @@ type NetworkACLObservation struct {
 
 	// Specifies an egress rule. Parameters defined below.
 	// This argument is processed in attribute-as-blocks mode.
-	Egress []EgressObservation `json:"egress,omitempty" tf:"egress,omitempty"`
+	Egress []NetworkACLEgressObservation `json:"egress,omitempty" tf:"egress,omitempty"`
 
 	// The ID of the network ACL
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies an ingress rule. Parameters defined below.
 	// This argument is processed in attribute-as-blocks mode.
-	Ingress []IngressObservation `json:"ingress,omitempty" tf:"ingress,omitempty"`
+	Ingress []NetworkACLIngressObservation `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
 	// The ID of the AWS account that owns the network ACL.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`

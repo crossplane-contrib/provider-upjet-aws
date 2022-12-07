@@ -19,6 +19,9 @@ import (
 	v1beta1apigateway "github.com/upbound/provider-aws/apis/apigateway/v1beta1"
 	v1beta1apigatewayv2 "github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1"
 	v1beta1appautoscaling "github.com/upbound/provider-aws/apis/appautoscaling/v1beta1"
+	v1beta1appconfig "github.com/upbound/provider-aws/apis/appconfig/v1beta1"
+	v1beta1appflow "github.com/upbound/provider-aws/apis/appflow/v1beta1"
+	v1beta1appintegrations "github.com/upbound/provider-aws/apis/appintegrations/v1beta1"
 	v1beta1appmesh "github.com/upbound/provider-aws/apis/appmesh/v1beta1"
 	v1beta1apprunner "github.com/upbound/provider-aws/apis/apprunner/v1beta1"
 	v1beta1appstream "github.com/upbound/provider-aws/apis/appstream/v1beta1"
@@ -34,6 +37,7 @@ import (
 	v1beta1cloudformation "github.com/upbound/provider-aws/apis/cloudformation/v1beta1"
 	v1beta1cloudfront "github.com/upbound/provider-aws/apis/cloudfront/v1beta1"
 	v1beta1cloudsearch "github.com/upbound/provider-aws/apis/cloudsearch/v1beta1"
+	v1beta1cloudtrail "github.com/upbound/provider-aws/apis/cloudtrail/v1beta1"
 	v1beta1cloudwatch "github.com/upbound/provider-aws/apis/cloudwatch/v1beta1"
 	v1beta1cloudwatchlogs "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1"
 	v1beta1codecommit "github.com/upbound/provider-aws/apis/codecommit/v1beta1"
@@ -51,6 +55,7 @@ import (
 	v1beta1deploy "github.com/upbound/provider-aws/apis/deploy/v1beta1"
 	v1beta1detective "github.com/upbound/provider-aws/apis/detective/v1beta1"
 	v1beta1devicefarm "github.com/upbound/provider-aws/apis/devicefarm/v1beta1"
+	v1beta1directconnect "github.com/upbound/provider-aws/apis/directconnect/v1beta1"
 	v1beta1docdb "github.com/upbound/provider-aws/apis/docdb/v1beta1"
 	v1beta1dynamodb "github.com/upbound/provider-aws/apis/dynamodb/v1beta1"
 	v1beta1ec2 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
@@ -114,6 +119,9 @@ func init() {
 		v1beta1apigateway.SchemeBuilder.AddToScheme,
 		v1beta1apigatewayv2.SchemeBuilder.AddToScheme,
 		v1beta1appautoscaling.SchemeBuilder.AddToScheme,
+		v1beta1appconfig.SchemeBuilder.AddToScheme,
+		v1beta1appflow.SchemeBuilder.AddToScheme,
+		v1beta1appintegrations.SchemeBuilder.AddToScheme,
 		v1beta1appmesh.SchemeBuilder.AddToScheme,
 		v1beta1apprunner.SchemeBuilder.AddToScheme,
 		v1beta1appstream.SchemeBuilder.AddToScheme,
@@ -129,6 +137,7 @@ func init() {
 		v1beta1cloudformation.SchemeBuilder.AddToScheme,
 		v1beta1cloudfront.SchemeBuilder.AddToScheme,
 		v1beta1cloudsearch.SchemeBuilder.AddToScheme,
+		v1beta1cloudtrail.SchemeBuilder.AddToScheme,
 		v1beta1cloudwatch.SchemeBuilder.AddToScheme,
 		v1beta1cloudwatchlogs.SchemeBuilder.AddToScheme,
 		v1beta1codecommit.SchemeBuilder.AddToScheme,
@@ -146,6 +155,7 @@ func init() {
 		v1beta1deploy.SchemeBuilder.AddToScheme,
 		v1beta1detective.SchemeBuilder.AddToScheme,
 		v1beta1devicefarm.SchemeBuilder.AddToScheme,
+		v1beta1directconnect.SchemeBuilder.AddToScheme,
 		v1beta1docdb.SchemeBuilder.AddToScheme,
 		v1beta1dynamodb.SchemeBuilder.AddToScheme,
 		v1beta1ec2.SchemeBuilder.AddToScheme,

@@ -62,6 +62,14 @@ import (
 	policy "github.com/upbound/provider-aws/internal/controller/appautoscaling/policy"
 	scheduledaction "github.com/upbound/provider-aws/internal/controller/appautoscaling/scheduledaction"
 	target "github.com/upbound/provider-aws/internal/controller/appautoscaling/target"
+	application "github.com/upbound/provider-aws/internal/controller/appconfig/application"
+	configurationprofile "github.com/upbound/provider-aws/internal/controller/appconfig/configurationprofile"
+	deploymentappconfig "github.com/upbound/provider-aws/internal/controller/appconfig/deployment"
+	deploymentstrategy "github.com/upbound/provider-aws/internal/controller/appconfig/deploymentstrategy"
+	environment "github.com/upbound/provider-aws/internal/controller/appconfig/environment"
+	hostedconfigurationversion "github.com/upbound/provider-aws/internal/controller/appconfig/hostedconfigurationversion"
+	flow "github.com/upbound/provider-aws/internal/controller/appflow/flow"
+	eventintegration "github.com/upbound/provider-aws/internal/controller/appintegrations/eventintegration"
 	gatewayroute "github.com/upbound/provider-aws/internal/controller/appmesh/gatewayroute"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	routeappmesh "github.com/upbound/provider-aws/internal/controller/appmesh/route"
@@ -132,6 +140,8 @@ import (
 	responseheaderspolicy "github.com/upbound/provider-aws/internal/controller/cloudfront/responseheaderspolicy"
 	domain "github.com/upbound/provider-aws/internal/controller/cloudsearch/domain"
 	domainserviceaccesspolicy "github.com/upbound/provider-aws/internal/controller/cloudsearch/domainserviceaccesspolicy"
+	eventdatastore "github.com/upbound/provider-aws/internal/controller/cloudtrail/eventdatastore"
+	trail "github.com/upbound/provider-aws/internal/controller/cloudtrail/trail"
 	compositealarm "github.com/upbound/provider-aws/internal/controller/cloudwatch/compositealarm"
 	dashboard "github.com/upbound/provider-aws/internal/controller/cloudwatch/dashboard"
 	metricalarm "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricalarm"
@@ -197,8 +207,16 @@ import (
 	project "github.com/upbound/provider-aws/internal/controller/devicefarm/project"
 	testgridproject "github.com/upbound/provider-aws/internal/controller/devicefarm/testgridproject"
 	upload "github.com/upbound/provider-aws/internal/controller/devicefarm/upload"
+	connectiondirectconnect "github.com/upbound/provider-aws/internal/controller/directconnect/connection"
+	connectionassociation "github.com/upbound/provider-aws/internal/controller/directconnect/connectionassociation"
+	gateway "github.com/upbound/provider-aws/internal/controller/directconnect/gateway"
+	lag "github.com/upbound/provider-aws/internal/controller/directconnect/lag"
+	publicvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/publicvirtualinterface"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
+	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/docdb/clusterparametergroup"
+	clustersnapshot "github.com/upbound/provider-aws/internal/controller/docdb/clustersnapshot"
+	eventsubscription "github.com/upbound/provider-aws/internal/controller/docdb/eventsubscription"
 	globalcluster "github.com/upbound/provider-aws/internal/controller/docdb/globalcluster"
 	subnetgroupdocdb "github.com/upbound/provider-aws/internal/controller/docdb/subnetgroup"
 	contributorinsights "github.com/upbound/provider-aws/internal/controller/dynamodb/contributorinsights"
@@ -206,9 +224,14 @@ import (
 	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
 	table "github.com/upbound/provider-aws/internal/controller/dynamodb/table"
 	tableitem "github.com/upbound/provider-aws/internal/controller/dynamodb/tableitem"
+	ami "github.com/upbound/provider-aws/internal/controller/ec2/ami"
+	amicopy "github.com/upbound/provider-aws/internal/controller/ec2/amicopy"
+	amilaunchpermission "github.com/upbound/provider-aws/internal/controller/ec2/amilaunchpermission"
 	availabilityzonegroup "github.com/upbound/provider-aws/internal/controller/ec2/availabilityzonegroup"
 	capacityreservation "github.com/upbound/provider-aws/internal/controller/ec2/capacityreservation"
 	carriergateway "github.com/upbound/provider-aws/internal/controller/ec2/carriergateway"
+	customergateway "github.com/upbound/provider-aws/internal/controller/ec2/customergateway"
+	defaultnetworkacl "github.com/upbound/provider-aws/internal/controller/ec2/defaultnetworkacl"
 	defaultroutetable "github.com/upbound/provider-aws/internal/controller/ec2/defaultroutetable"
 	defaultsubnet "github.com/upbound/provider-aws/internal/controller/ec2/defaultsubnet"
 	defaultvpc "github.com/upbound/provider-aws/internal/controller/ec2/defaultvpc"
@@ -277,8 +300,18 @@ import (
 	vpcendpointservice "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointservice"
 	vpcendpointserviceallowedprincipal "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointserviceallowedprincipal"
 	vpcendpointsubnetassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointsubnetassociation"
+	vpcipam "github.com/upbound/provider-aws/internal/controller/ec2/vpcipam"
+	vpcipampool "github.com/upbound/provider-aws/internal/controller/ec2/vpcipampool"
+	vpcipampoolcidr "github.com/upbound/provider-aws/internal/controller/ec2/vpcipampoolcidr"
+	vpcipampoolcidrallocation "github.com/upbound/provider-aws/internal/controller/ec2/vpcipampoolcidrallocation"
+	vpcipamscope "github.com/upbound/provider-aws/internal/controller/ec2/vpcipamscope"
 	vpcipv4cidrblockassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcipv4cidrblockassociation"
 	vpcpeeringconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnection"
+	vpnconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpnconnection"
+	vpnconnectionroute "github.com/upbound/provider-aws/internal/controller/ec2/vpnconnectionroute"
+	vpngateway "github.com/upbound/provider-aws/internal/controller/ec2/vpngateway"
+	vpngatewayattachment "github.com/upbound/provider-aws/internal/controller/ec2/vpngatewayattachment"
+	vpngatewayroutepropagation "github.com/upbound/provider-aws/internal/controller/ec2/vpngatewayroutepropagation"
 	lifecyclepolicy "github.com/upbound/provider-aws/internal/controller/ecr/lifecyclepolicy"
 	pullthroughcacherule "github.com/upbound/provider-aws/internal/controller/ecr/pullthroughcacherule"
 	registrypolicy "github.com/upbound/provider-aws/internal/controller/ecr/registrypolicy"
@@ -370,7 +403,7 @@ import (
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
 	streamkinesis "github.com/upbound/provider-aws/internal/controller/kinesis/stream"
 	streamconsumer "github.com/upbound/provider-aws/internal/controller/kinesis/streamconsumer"
-	application "github.com/upbound/provider-aws/internal/controller/kinesisanalytics/application"
+	applicationkinesisanalytics "github.com/upbound/provider-aws/internal/controller/kinesisanalytics/application"
 	applicationkinesisanalyticsv2 "github.com/upbound/provider-aws/internal/controller/kinesisanalyticsv2/application"
 	applicationsnapshot "github.com/upbound/provider-aws/internal/controller/kinesisanalyticsv2/applicationsnapshot"
 	streamkinesisvideo "github.com/upbound/provider-aws/internal/controller/kinesisvideo/stream"
@@ -406,9 +439,9 @@ import (
 	clusterneptune "github.com/upbound/provider-aws/internal/controller/neptune/cluster"
 	clusterendpoint "github.com/upbound/provider-aws/internal/controller/neptune/clusterendpoint"
 	clusterinstanceneptune "github.com/upbound/provider-aws/internal/controller/neptune/clusterinstance"
-	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/neptune/clusterparametergroup"
-	clustersnapshot "github.com/upbound/provider-aws/internal/controller/neptune/clustersnapshot"
-	eventsubscription "github.com/upbound/provider-aws/internal/controller/neptune/eventsubscription"
+	clusterparametergroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/clusterparametergroup"
+	clustersnapshotneptune "github.com/upbound/provider-aws/internal/controller/neptune/clustersnapshot"
+	eventsubscriptionneptune "github.com/upbound/provider-aws/internal/controller/neptune/eventsubscription"
 	parametergroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/parametergroup"
 	subnetgroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/subnetgroup"
 	domainopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domain"
@@ -558,6 +591,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		policy.Setup,
 		scheduledaction.Setup,
 		target.Setup,
+		application.Setup,
+		configurationprofile.Setup,
+		deploymentappconfig.Setup,
+		deploymentstrategy.Setup,
+		environment.Setup,
+		hostedconfigurationversion.Setup,
+		flow.Setup,
+		eventintegration.Setup,
 		gatewayroute.Setup,
 		mesh.Setup,
 		routeappmesh.Setup,
@@ -628,6 +669,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		responseheaderspolicy.Setup,
 		domain.Setup,
 		domainserviceaccesspolicy.Setup,
+		eventdatastore.Setup,
+		trail.Setup,
 		compositealarm.Setup,
 		dashboard.Setup,
 		metricalarm.Setup,
@@ -693,8 +736,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		project.Setup,
 		testgridproject.Setup,
 		upload.Setup,
+		connectiondirectconnect.Setup,
+		connectionassociation.Setup,
+		gateway.Setup,
+		lag.Setup,
+		publicvirtualinterface.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,
+		clusterparametergroup.Setup,
+		clustersnapshot.Setup,
+		eventsubscription.Setup,
 		globalcluster.Setup,
 		subnetgroupdocdb.Setup,
 		contributorinsights.Setup,
@@ -702,9 +753,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		kinesisstreamingdestination.Setup,
 		table.Setup,
 		tableitem.Setup,
+		ami.Setup,
+		amicopy.Setup,
+		amilaunchpermission.Setup,
 		availabilityzonegroup.Setup,
 		capacityreservation.Setup,
 		carriergateway.Setup,
+		customergateway.Setup,
+		defaultnetworkacl.Setup,
 		defaultroutetable.Setup,
 		defaultsubnet.Setup,
 		defaultvpc.Setup,
@@ -773,8 +829,18 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcendpointservice.Setup,
 		vpcendpointserviceallowedprincipal.Setup,
 		vpcendpointsubnetassociation.Setup,
+		vpcipam.Setup,
+		vpcipampool.Setup,
+		vpcipampoolcidr.Setup,
+		vpcipampoolcidrallocation.Setup,
+		vpcipamscope.Setup,
 		vpcipv4cidrblockassociation.Setup,
 		vpcpeeringconnection.Setup,
+		vpnconnection.Setup,
+		vpnconnectionroute.Setup,
+		vpngateway.Setup,
+		vpngatewayattachment.Setup,
+		vpngatewayroutepropagation.Setup,
 		lifecyclepolicy.Setup,
 		pullthroughcacherule.Setup,
 		registrypolicy.Setup,
@@ -866,7 +932,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		configuration.Setup,
 		streamkinesis.Setup,
 		streamconsumer.Setup,
-		application.Setup,
+		applicationkinesisanalytics.Setup,
 		applicationkinesisanalyticsv2.Setup,
 		applicationsnapshot.Setup,
 		streamkinesisvideo.Setup,
@@ -902,9 +968,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		clusterneptune.Setup,
 		clusterendpoint.Setup,
 		clusterinstanceneptune.Setup,
-		clusterparametergroup.Setup,
-		clustersnapshot.Setup,
-		eventsubscription.Setup,
+		clusterparametergroupneptune.Setup,
+		clustersnapshotneptune.Setup,
+		eventsubscriptionneptune.Setup,
 		parametergroupneptune.Setup,
 		subnetgroupneptune.Setup,
 		domainopensearch.Setup,

@@ -332,4 +332,40 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ec2_traffic_mirror_target", func(r *config.Resource) {
 		delete(r.References, "network_load_balancer_arn")
 	})
+
+	p.AddResourceConfigurator("aws_vpc_ipam_pool", func(r *config.Resource) {
+		r.References["ipam_scope_id"] = config.Reference{
+			Type: "VPCIpamScope",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_vpc_ipam_scope", func(r *config.Resource) {
+		r.References["ipam_id"] = config.Reference{
+			Type: "VPCIpam",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_ami", func(r *config.Resource) {
+		r.References["ebs_block_device.snapshot_id"] = config.Reference{
+			Type: "EBSSnapshot",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_ami_copy", func(r *config.Resource) {
+		r.References["source_ami_id"] = config.Reference{
+			Type: "AMI",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_ami_launch_permission", func(r *config.Resource) {
+		r.References["image_id"] = config.Reference{
+			Type: "AMI",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_vpn_connection", func(r *config.Resource) {
+		r.References["vpn_gateway_id"] = config.Reference{
+			Type: "VPNGateway",
+		}
+	})
 }
