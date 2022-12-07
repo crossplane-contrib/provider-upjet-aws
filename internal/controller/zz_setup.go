@@ -140,6 +140,7 @@ import (
 	responseheaderspolicy "github.com/upbound/provider-aws/internal/controller/cloudfront/responseheaderspolicy"
 	domain "github.com/upbound/provider-aws/internal/controller/cloudsearch/domain"
 	domainserviceaccesspolicy "github.com/upbound/provider-aws/internal/controller/cloudsearch/domainserviceaccesspolicy"
+	eventdatastore "github.com/upbound/provider-aws/internal/controller/cloudtrail/eventdatastore"
 	trail "github.com/upbound/provider-aws/internal/controller/cloudtrail/trail"
 	compositealarm "github.com/upbound/provider-aws/internal/controller/cloudwatch/compositealarm"
 	dashboard "github.com/upbound/provider-aws/internal/controller/cloudwatch/dashboard"
@@ -667,6 +668,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		responseheaderspolicy.Setup,
 		domain.Setup,
 		domainserviceaccesspolicy.Setup,
+		eventdatastore.Setup,
 		trail.Setup,
 		compositealarm.Setup,
 		dashboard.Setup,

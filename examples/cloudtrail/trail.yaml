@@ -21,7 +21,7 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
-    crossplane.io/external-name: op-rgszzcuww #${Rand.RFC1123Subdomain}
+    crossplane.io/external-name: op-rgszzcuww 
     meta.upbound.io/example-id: cloudtrail/v1beta1/trail
   labels:
     testing.upbound.io/example-name: foo

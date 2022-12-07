@@ -89,6 +89,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Cloudtrails can be imported using the name
 	"aws_cloudtrail": config.NameAsIdentifier,
+	// Event data stores can be imported using their arn
+	"aws_cloudtrail_event_data_store": config.IdentifierFromProvider,
 
 	// cognitoidentity
 	//
