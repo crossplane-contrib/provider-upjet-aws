@@ -486,6 +486,7 @@ import (
 	membersecurityhub "github.com/upbound/provider-aws/internal/controller/securityhub/member"
 	productsubscription "github.com/upbound/provider-aws/internal/controller/securityhub/productsubscription"
 	standardssubscription "github.com/upbound/provider-aws/internal/controller/securityhub/standardssubscription"
+	cloudformationstack "github.com/upbound/provider-aws/internal/controller/serverlessrepo/cloudformationstack"
 	httpnamespace "github.com/upbound/provider-aws/internal/controller/servicediscovery/httpnamespace"
 	privatednsnamespace "github.com/upbound/provider-aws/internal/controller/servicediscovery/privatednsnamespace"
 	publicdnsnamespace "github.com/upbound/provider-aws/internal/controller/servicediscovery/publicdnsnamespace"
@@ -981,6 +982,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		membersecurityhub.Setup,
 		productsubscription.Setup,
 		standardssubscription.Setup,
+		cloudformationstack.Setup,
 		httpnamespace.Setup,
 		privatednsnamespace.Setup,
 		publicdnsnamespace.Setup,

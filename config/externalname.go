@@ -1362,6 +1362,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName("arn:aws:cloudformation:{{ .parameters.region }}:{{ .client_metadata.account_id }}:stack/{{ .parameters.name }}/{{ .external_name }}"),
 	// CloudFormation StackSets can be imported using the name
 	"aws_cloudformation_stack_set": config.NameAsIdentifier,
+
+	// serverlessapplicationrepository
+	//
+	// imported using the CloudFormation Stack name
+	"aws_serverlessapplicationrepository_cloudformation_stack": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
