@@ -1408,6 +1408,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// CloudFormation StackSets can be imported using the name
 	"aws_cloudformation_stack_set": config.NameAsIdentifier,
 
+	// serverlessapplicationrepository
+	//
+	// imported using the CloudFormation Stack name
+	"aws_serverlessapplicationrepository_cloudformation_stack": config.IdentifierFromProvider,
+
 	// directconnect
 	//
 	// Direct Connect Gateways can be imported using the gateway id

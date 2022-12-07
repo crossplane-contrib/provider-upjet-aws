@@ -288,11 +288,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// no import documentation
 	"aws_securityhub_standards_control": config.IdentifierFromProvider,
 
-	// serverlessapplicationrepository
-	//
-	// imported using the CloudFormation Stack name
-	"aws_serverlessapplicationrepository_cloudformation_stack": config.NameAsIdentifier,
-
 	// servicecatalog
 	//
 	// imported using the budget name and resource ID:
