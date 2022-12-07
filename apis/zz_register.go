@@ -37,6 +37,7 @@ import (
 	v1beta1cloudformation "github.com/upbound/provider-aws/apis/cloudformation/v1beta1"
 	v1beta1cloudfront "github.com/upbound/provider-aws/apis/cloudfront/v1beta1"
 	v1beta1cloudsearch "github.com/upbound/provider-aws/apis/cloudsearch/v1beta1"
+	v1beta1cloudtrail "github.com/upbound/provider-aws/apis/cloudtrail/v1beta1"
 	v1beta1cloudwatch "github.com/upbound/provider-aws/apis/cloudwatch/v1beta1"
 	v1beta1cloudwatchlogs "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1"
 	v1beta1codecommit "github.com/upbound/provider-aws/apis/codecommit/v1beta1"
@@ -135,6 +136,7 @@ func init() {
 		v1beta1cloudformation.SchemeBuilder.AddToScheme,
 		v1beta1cloudfront.SchemeBuilder.AddToScheme,
 		v1beta1cloudsearch.SchemeBuilder.AddToScheme,
+		v1beta1cloudtrail.SchemeBuilder.AddToScheme,
 		v1beta1cloudwatch.SchemeBuilder.AddToScheme,
 		v1beta1cloudwatchlogs.SchemeBuilder.AddToScheme,
 		v1beta1codecommit.SchemeBuilder.AddToScheme,

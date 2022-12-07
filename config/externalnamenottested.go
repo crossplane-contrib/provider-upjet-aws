@@ -76,13 +76,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// HSM modules can be imported using their HSM ID
 	"aws_cloudhsm_v2_hsm": config.IdentifierFromProvider,
 
-	// cloudtrail
-	//
-	// Cloudtrails can be imported using the name
-	"aws_cloudtrail": config.NameAsIdentifier,
-	// Event data stores can be imported using their arn
-	"aws_cloudtrail_event_data_store": config.IdentifierFromProvider,
-
 	// cloudwatchlogs
 	//
 	// CloudWatch Logs destinations can be imported using the name
