@@ -3,6 +3,8 @@ kind: VPC
 metadata:
   name: sample-vpc
 spec:
+  providerConfigRef:
+    name: peer
   forProvider:
     region: us-west-1
     cidrBlock: 172.16.0.0/16
