@@ -228,8 +228,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// No import
 	"aws_ami_from_instance": config.IdentifierFromProvider,
-	// Security Groups can be imported using the security group id
-	"aws_default_security_group": config.IdentifierFromProvider,
 	//
 	"aws_ec2_client_vpn_authorization_rule": config.IdentifierFromProvider,
 	// AWS Client VPN endpoints can be imported using the id value found via aws ec2 describe-client-vpn-endpoints
