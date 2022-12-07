@@ -1406,7 +1406,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// CloudFormation StackSets can be imported using the name
 	"aws_cloudformation_stack_set": config.NameAsIdentifier,
 
-
 	// serverlessapplicationrepository
 	//
 	// imported using the CloudFormation Stack name
@@ -1449,7 +1448,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// arn:aws:appflow:us-west-2:123456789012:flow/example-flow
 	"aws_appflow_flow": config.TemplatedStringAsIdentifier("name", "arn:aws:appflow:{{ .parameters.region }}:{{ .client_metadata.account_id }}:flow/{{ .external_name }}"),
-
 }
 
 func lambdaFunctionURL() config.ExternalName {
