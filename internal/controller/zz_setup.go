@@ -233,6 +233,7 @@ import (
 	customergateway "github.com/upbound/provider-aws/internal/controller/ec2/customergateway"
 	defaultnetworkacl "github.com/upbound/provider-aws/internal/controller/ec2/defaultnetworkacl"
 	defaultroutetable "github.com/upbound/provider-aws/internal/controller/ec2/defaultroutetable"
+	defaultsecuritygroup "github.com/upbound/provider-aws/internal/controller/ec2/defaultsecuritygroup"
 	defaultsubnet "github.com/upbound/provider-aws/internal/controller/ec2/defaultsubnet"
 	defaultvpc "github.com/upbound/provider-aws/internal/controller/ec2/defaultvpc"
 	defaultvpcdhcpoptions "github.com/upbound/provider-aws/internal/controller/ec2/defaultvpcdhcpoptions"
@@ -761,6 +762,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		customergateway.Setup,
 		defaultnetworkacl.Setup,
 		defaultroutetable.Setup,
+		defaultsecuritygroup.Setup,
 		defaultsubnet.Setup,
 		defaultvpc.Setup,
 		defaultvpcdhcpoptions.Setup,
