@@ -1425,6 +1425,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_dx_connection_association": config.IdentifierFromProvider,
 	// Direct Connect LAGs can be imported using the lag id
 	"aws_dx_lag": config.IdentifierFromProvider,
+	// Direct Connect transit virtual interfaces can be imported using the vif id
+	"aws_dx_transit_virtual_interface": config.IdentifierFromProvider,
 
 	// appconfig
 	//
