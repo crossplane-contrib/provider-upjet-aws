@@ -1,7 +1,7 @@
 name: Pull Request Triage
 
 on:
-  issues:
+  pull_request:
     types:
       - opened
       - unlabeled
