@@ -1,0 +1,13 @@
+name: Pull Request Triage
+
+on:
+  issues:
+    types:
+      - opened
+      - unlabeled
+
+jobs:
+  community-pr-triage:
+    uses: upbound/uptest/.github/workflows/pr-triage.yml@main
+    secrets:
+      UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
