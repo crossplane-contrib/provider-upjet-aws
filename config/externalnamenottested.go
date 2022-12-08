@@ -246,8 +246,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_ec2_traffic_mirror_session": config.IdentifierFromProvider,
 	// Traffic mirror targets can be imported using the id
 	"aws_ec2_traffic_mirror_target": config.IdentifierFromProvider,
-	// aws_ec2_transit_gateway_connect_peer can be imported by using the EC2 Transit Gateway Connect Peer identifier
-	"aws_ec2_transit_gateway_connect_peer": config.IdentifierFromProvider,
 	// Internet Gateway Attachments can be imported using the id
 	"aws_internet_gateway_attachment": config.IdentifierFromProvider,
 	// No import

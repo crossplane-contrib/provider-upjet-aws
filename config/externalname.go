@@ -319,6 +319,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpn_gateway_route_propagation": config.IdentifierFromProvider,
 	// Security Groups can be imported using the security group id
 	"aws_default_security_group": config.IdentifierFromProvider,
+	// aws_ec2_transit_gateway_connect_peer can be imported by using the EC2 Transit Gateway Connect Peer identifier
+	"aws_ec2_transit_gateway_connect_peer": config.IdentifierFromProvider,
 
 	// ecr
 	//
