@@ -212,6 +212,7 @@ import (
 	gateway "github.com/upbound/provider-aws/internal/controller/directconnect/gateway"
 	lag "github.com/upbound/provider-aws/internal/controller/directconnect/lag"
 	publicvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/publicvirtualinterface"
+	transitvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/transitvirtualinterface"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
 	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/docdb/clusterparametergroup"
@@ -742,6 +743,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		gateway.Setup,
 		lag.Setup,
 		publicvirtualinterface.Setup,
+		transitvirtualinterface.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,
 		clusterparametergroup.Setup,
