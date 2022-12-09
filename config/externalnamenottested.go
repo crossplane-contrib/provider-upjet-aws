@@ -217,11 +217,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Directory Service Log Subscriptions can be imported using the directory id
 	"aws_directory_service_log_subscription": config.ParameterAsIdentifier("directory_id"),
 
-	// dynamodb
-	//
-	// aws_dynamodb_tag can be imported by using the DynamoDB resource identifier and key, separated by a comma (,)
-	"aws_dynamodb_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_arn }},{{ .parameters.key }}"),
-
 	// ec2
 	//
 	// No import
