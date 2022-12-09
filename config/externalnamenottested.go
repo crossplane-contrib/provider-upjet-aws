@@ -352,4 +352,64 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// imported using the service ID and instance ID:
 	// 0123456789/i-0123
 	"aws_service_discovery_instance": FormattedIdentifierFromProvider("/", "service_id", "instance_id"),
+	// Service Discovery Service can be imported using the service ID
+	"aws_service_discovery_service": config.IdentifierFromProvider,
+
+	// elasticache
+	//
+	// ElastiCache Security Groups can be imported by name
+	"aws_elasticache_security_group": config.NameAsIdentifier,
+	// ElastiCache Global Replication Groups can be imported using the global_replication_group_id,
+	// which is an attribute reported in the state.
+	// TODO: we need to check the value of a global_replication_group_id to
+	// see if further normalization is possible
+	"aws_elasticache_global_replication_group": config.IdentifierFromProvider,
+	// ElastiCache user group associations can be imported using the user_group_id and user_id:
+	// userGoupId1,userId
+	"aws_elasticache_user_group_association": FormattedIdentifierFromProvider(",", "user_group_id", "user_id"),
+
+	// ram
+	//
+	// RAM Principal Associations can be imported using their Resource Share ARN and the principal separated by a comma:
+	// arn:aws:ram:eu-west-1:123456789012:resource-share/73da1ab9-b94a-4ba3-8eb4-45917f7f4b12,123456789012
+	"aws_ram_principal_association": FormattedIdentifierFromProvider(",", "resource_share_arn", "principal"),
+	// RAM Resource Associations can be imported using their Resource Share ARN and Resource ARN separated by a comma:
+	// arn:aws:ram:eu-west-1:123456789012:resource-share/73da1ab9-b94a-4ba3-8eb4-45917f7f4b12,arn:aws:ec2:eu-west-1:123456789012:subnet/subnet-12345678
+	"aws_ram_resource_association": FormattedIdentifierFromProvider(",", "resource_share_arn", "resource_arn"),
+	// Resource shares can be imported using the arn of the resource share:
+	// aws_ram_resource_share.example arn:aws:ram:eu-west-1:123456789012:resource-share/73da1ab9-b94a-4ba3-8eb4-45917f7f4b12
+	// TODO: validation may kick in, in which case we can use config.IdentifierFromProvider
+	"aws_ram_resource_share": TemplatedStringAsIdentifierWithNoName("arn:aws:ram:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:resource-share/{{ .external_name }}"),
+	// Resource share accepters can be imported using the resource share ARN:
+	// arn:aws:ram:us-east-1:123456789012:resource-share/c4b56393-e8d9-89d9-6dc9-883752de4767
+	"aws_ram_resource_share_accepter": FormattedIdentifierFromProvider("", "share_arn"),
+
+	// sns
+	//
+	// SNS platform applications can be imported using the ARN:
+	// arn:aws:sns:us-west-2:0123456789012:app/GCM/gcm_application
+	"aws_sns_platform_application": config.TemplatedStringAsIdentifier("name", "arn:aws:sns:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:app/GCM/{{ .external_name }}"),
+	// no import documentation is provided
+	// TODO: we will need to check if normalization is possible
+	"aws_sns_sms_preferences": config.IdentifierFromProvider,
+	// SNS Topic Policy can be imported using the topic ARN:
+	// arn:aws:sns:us-west-2:0123456789012:my-topic
+	"aws_sns_topic_policy": FormattedIdentifierFromProvider("", "arn"),
+
+	// ecs
+	//
+	// ECS Task Sets can be imported via the task_set_id, service, and cluster separated by commas (,):
+	// ecs-svc/7177320696926227436,arn:aws:ecs:us-west-2:123456789101:service/example/example-1234567890,arn:aws:ecs:us-west-2:123456789101:cluster/example
+	// TODO: validation may kick in, in which case we can use config.IdentifierFromProvider
+	"aws_ecs_task_set": TemplatedStringAsIdentifierWithNoName("{{ .external_name }},{{ .parameters.service }},{{ .parameters.cluster }}"),
+
+	// grafana
+	//
+	// Grafana workspace license association can be imported using the workspace's id
+	"aws_grafana_license_association": FormattedIdentifierFromProvider("", "workspace_id"),
+
+	// gamelift
+	//
+	// GameLift Game Server Group can be imported using the name
+	"aws_gamelift_game_server_group": config.ParameterAsIdentifier("game_server_group_name"),
 }
