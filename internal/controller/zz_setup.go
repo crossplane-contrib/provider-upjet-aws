@@ -279,6 +279,7 @@ import (
 	trafficmirrorfilterrule "github.com/upbound/provider-aws/internal/controller/ec2/trafficmirrorfilterrule"
 	transitgateway "github.com/upbound/provider-aws/internal/controller/ec2/transitgateway"
 	transitgatewayconnect "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewayconnect"
+	transitgatewayconnectpeer "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewayconnectpeer"
 	transitgatewaymulticastdomain "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaymulticastdomain"
 	transitgatewaymulticastdomainassociation "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaymulticastdomainassociation"
 	transitgatewaymulticastgroupmember "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaymulticastgroupmember"
@@ -810,6 +811,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		trafficmirrorfilterrule.Setup,
 		transitgateway.Setup,
 		transitgatewayconnect.Setup,
+		transitgatewayconnectpeer.Setup,
 		transitgatewaymulticastdomain.Setup,
 		transitgatewaymulticastdomainassociation.Setup,
 		transitgatewaymulticastgroupmember.Setup,

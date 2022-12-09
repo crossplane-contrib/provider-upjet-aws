@@ -2159,6 +2159,80 @@ func (tr *TransitGatewayConnect) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this TransitGatewayConnectPeer
+func (mg *TransitGatewayConnectPeer) GetTerraformResourceType() string {
+	return "aws_ec2_transit_gateway_connect_peer"
+}
+
+// GetConnectionDetailsMapping for this TransitGatewayConnectPeer
+func (tr *TransitGatewayConnectPeer) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this TransitGatewayConnectPeer
+func (tr *TransitGatewayConnectPeer) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this TransitGatewayConnectPeer
+func (tr *TransitGatewayConnectPeer) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this TransitGatewayConnectPeer
+func (tr *TransitGatewayConnectPeer) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this TransitGatewayConnectPeer
+func (tr *TransitGatewayConnectPeer) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this TransitGatewayConnectPeer
+func (tr *TransitGatewayConnectPeer) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this TransitGatewayConnectPeer using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *TransitGatewayConnectPeer) LateInitialize(attrs []byte) (bool, error) {
+	params := &TransitGatewayConnectPeerParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *TransitGatewayConnectPeer) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this TransitGatewayMulticastDomain
 func (mg *TransitGatewayMulticastDomain) GetTerraformResourceType() string {
 	return "aws_ec2_transit_gateway_multicast_domain"

@@ -3571,6 +3571,72 @@ func (mg *TransitGatewayConnect) SetWriteConnectionSecretToReference(r *xpv1.Sec
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this TransitGatewayConnectPeer.
+func (mg *TransitGatewayConnectPeer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this TransitGatewayConnectPeer.
+func (mg *TransitGatewayConnectPeer) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this TransitGatewayConnectPeer.
+func (mg *TransitGatewayConnectPeer) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this TransitGatewayConnectPeer.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *TransitGatewayConnectPeer) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this TransitGatewayConnectPeer.
+func (mg *TransitGatewayConnectPeer) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this TransitGatewayConnectPeer.
+func (mg *TransitGatewayConnectPeer) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this TransitGatewayConnectPeer.
+func (mg *TransitGatewayConnectPeer) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this TransitGatewayConnectPeer.
+func (mg *TransitGatewayConnectPeer) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this TransitGatewayConnectPeer.
+func (mg *TransitGatewayConnectPeer) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this TransitGatewayConnectPeer.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *TransitGatewayConnectPeer) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this TransitGatewayConnectPeer.
+func (mg *TransitGatewayConnectPeer) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this TransitGatewayConnectPeer.
+func (mg *TransitGatewayConnectPeer) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this TransitGatewayMulticastDomain.
 func (mg *TransitGatewayMulticastDomain) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

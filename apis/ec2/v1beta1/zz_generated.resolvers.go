@@ -1785,6 +1785,32 @@ func (mg *TransitGatewayConnect) ResolveReferences(ctx context.Context, c client
 	return nil
 }
 
+// ResolveReferences of this TransitGatewayConnectPeer.
+func (mg *TransitGatewayConnectPeer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransitGatewayAttachmentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.TransitGatewayAttachmentIDRef,
+		Selector:     mg.Spec.ForProvider.TransitGatewayAttachmentIDSelector,
+		To: reference.To{
+			List:    &TransitGatewayConnectList{},
+			Managed: &TransitGatewayConnect{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TransitGatewayAttachmentID")
+	}
+	mg.Spec.ForProvider.TransitGatewayAttachmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TransitGatewayAttachmentIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this TransitGatewayMulticastDomain.
 func (mg *TransitGatewayMulticastDomain) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
