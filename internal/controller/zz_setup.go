@@ -225,6 +225,7 @@ import (
 	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
 	table "github.com/upbound/provider-aws/internal/controller/dynamodb/table"
 	tableitem "github.com/upbound/provider-aws/internal/controller/dynamodb/tableitem"
+	tag "github.com/upbound/provider-aws/internal/controller/dynamodb/tag"
 	ami "github.com/upbound/provider-aws/internal/controller/ec2/ami"
 	amicopy "github.com/upbound/provider-aws/internal/controller/ec2/amicopy"
 	amilaunchpermission "github.com/upbound/provider-aws/internal/controller/ec2/amilaunchpermission"
@@ -757,6 +758,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		kinesisstreamingdestination.Setup,
 		table.Setup,
 		tableitem.Setup,
+		tag.Setup,
 		ami.Setup,
 		amicopy.Setup,
 		amilaunchpermission.Setup,
