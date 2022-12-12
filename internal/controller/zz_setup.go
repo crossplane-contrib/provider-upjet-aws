@@ -278,6 +278,7 @@ import (
 	serialconsoleaccess "github.com/upbound/provider-aws/internal/controller/ec2/serialconsoleaccess"
 	snapshotcreatevolumepermission "github.com/upbound/provider-aws/internal/controller/ec2/snapshotcreatevolumepermission"
 	spotdatafeedsubscription "github.com/upbound/provider-aws/internal/controller/ec2/spotdatafeedsubscription"
+	spotfleetrequest "github.com/upbound/provider-aws/internal/controller/ec2/spotfleetrequest"
 	spotinstancerequest "github.com/upbound/provider-aws/internal/controller/ec2/spotinstancerequest"
 	subnet "github.com/upbound/provider-aws/internal/controller/ec2/subnet"
 	subnetcidrreservation "github.com/upbound/provider-aws/internal/controller/ec2/subnetcidrreservation"
@@ -827,6 +828,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		serialconsoleaccess.Setup,
 		snapshotcreatevolumepermission.Setup,
 		spotdatafeedsubscription.Setup,
+		spotfleetrequest.Setup,
 		spotinstancerequest.Setup,
 		subnet.Setup,
 		subnetcidrreservation.Setup,

@@ -1622,6 +1622,75 @@ func (mg *SnapshotCreateVolumePermission) ResolveReferences(ctx context.Context,
 	return nil
 }
 
+// ResolveReferences of this SpotFleetRequest.
+func (mg *SpotFleetRequest) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchSpecification); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchSpecification[i3].IAMInstanceProfileArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.LaunchSpecification[i3].IAMInstanceProfileArnRef,
+			Selector:     mg.Spec.ForProvider.LaunchSpecification[i3].IAMInstanceProfileArnSelector,
+			To: reference.To{
+				List:    &v1beta11.InstanceProfileList{},
+				Managed: &v1beta11.InstanceProfile{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.LaunchSpecification[i3].IAMInstanceProfileArn")
+		}
+		mg.Spec.ForProvider.LaunchSpecification[i3].IAMInstanceProfileArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.LaunchSpecification[i3].IAMInstanceProfileArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchTemplateConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification[i4].ID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification[i4].IDRef,
+				Selector:     mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification[i4].IDSelector,
+				To: reference.To{
+					List:    &LaunchTemplateList{},
+					Managed: &LaunchTemplate{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification[i4].ID")
+			}
+			mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification[i4].ID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification[i4].IDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchTemplateConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification[i4].Version),
+				Extract:      resource.ExtractParamPath("latest_version", true),
+				Reference:    mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification[i4].VersionRef,
+				Selector:     mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification[i4].VersionSelector,
+				To: reference.To{
+					List:    &LaunchTemplateList{},
+					Managed: &LaunchTemplate{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification[i4].Version")
+			}
+			mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification[i4].Version = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification[i4].VersionRef = rsp.ResolvedReference
+
+		}
+	}
+
+	return nil
+}
+
 // ResolveReferences of this SpotInstanceRequest.
 func (mg *SpotInstanceRequest) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

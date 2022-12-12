@@ -430,6 +430,15 @@ func (l *SpotDatafeedSubscriptionList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this SpotFleetRequestList.
+func (l *SpotFleetRequestList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SpotInstanceRequestList.
 func (l *SpotInstanceRequestList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
