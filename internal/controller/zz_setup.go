@@ -524,6 +524,17 @@ import (
 	productsubscription "github.com/upbound/provider-aws/internal/controller/securityhub/productsubscription"
 	standardssubscription "github.com/upbound/provider-aws/internal/controller/securityhub/standardssubscription"
 	cloudformationstack "github.com/upbound/provider-aws/internal/controller/serverlessrepo/cloudformationstack"
+	budgetresourceassociation "github.com/upbound/provider-aws/internal/controller/servicecatalog/budgetresourceassociation"
+	constraint "github.com/upbound/provider-aws/internal/controller/servicecatalog/constraint"
+	portfolio "github.com/upbound/provider-aws/internal/controller/servicecatalog/portfolio"
+	portfolioshare "github.com/upbound/provider-aws/internal/controller/servicecatalog/portfolioshare"
+	principalportfolioassociation "github.com/upbound/provider-aws/internal/controller/servicecatalog/principalportfolioassociation"
+	product "github.com/upbound/provider-aws/internal/controller/servicecatalog/product"
+	productportfolioassociation "github.com/upbound/provider-aws/internal/controller/servicecatalog/productportfolioassociation"
+	provisioningartifact "github.com/upbound/provider-aws/internal/controller/servicecatalog/provisioningartifact"
+	serviceaction "github.com/upbound/provider-aws/internal/controller/servicecatalog/serviceaction"
+	tagoption "github.com/upbound/provider-aws/internal/controller/servicecatalog/tagoption"
+	tagoptionresourceassociation "github.com/upbound/provider-aws/internal/controller/servicecatalog/tagoptionresourceassociation"
 	httpnamespace "github.com/upbound/provider-aws/internal/controller/servicediscovery/httpnamespace"
 	privatednsnamespace "github.com/upbound/provider-aws/internal/controller/servicediscovery/privatednsnamespace"
 	publicdnsnamespace "github.com/upbound/provider-aws/internal/controller/servicediscovery/publicdnsnamespace"
@@ -1057,6 +1068,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		productsubscription.Setup,
 		standardssubscription.Setup,
 		cloudformationstack.Setup,
+		budgetresourceassociation.Setup,
+		constraint.Setup,
+		portfolio.Setup,
+		portfolioshare.Setup,
+		principalportfolioassociation.Setup,
+		product.Setup,
+		productportfolioassociation.Setup,
+		provisioningartifact.Setup,
+		serviceaction.Setup,
+		tagoption.Setup,
+		tagoptionresourceassociation.Setup,
 		httpnamespace.Setup,
 		privatednsnamespace.Setup,
 		publicdnsnamespace.Setup,
