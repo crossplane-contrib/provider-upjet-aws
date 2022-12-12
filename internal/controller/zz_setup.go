@@ -151,6 +151,14 @@ import (
 	dashboard "github.com/upbound/provider-aws/internal/controller/cloudwatch/dashboard"
 	metricalarm "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricalarm"
 	metricstream "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricstream"
+	apidestination "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/apidestination"
+	archive "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/archive"
+	bus "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/bus"
+	buspolicy "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/buspolicy"
+	connectioncloudwatchevents "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/connection"
+	permission "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/permission"
+	rule "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/rule"
+	targetcloudwatchevents "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/target"
 	definition "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/definition"
 	group "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/group"
 	metricfilter "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/metricfilter"
@@ -435,7 +443,7 @@ import (
 	invocation "github.com/upbound/provider-aws/internal/controller/lambda/invocation"
 	layerversion "github.com/upbound/provider-aws/internal/controller/lambda/layerversion"
 	layerversionpermission "github.com/upbound/provider-aws/internal/controller/lambda/layerversionpermission"
-	permission "github.com/upbound/provider-aws/internal/controller/lambda/permission"
+	permissionlambda "github.com/upbound/provider-aws/internal/controller/lambda/permission"
 	provisionedconcurrencyconfig "github.com/upbound/provider-aws/internal/controller/lambda/provisionedconcurrencyconfig"
 	bot "github.com/upbound/provider-aws/internal/controller/lexmodels/bot"
 	botalias "github.com/upbound/provider-aws/internal/controller/lexmodels/botalias"
@@ -493,7 +501,7 @@ import (
 	vpcassociationauthorization "github.com/upbound/provider-aws/internal/controller/route53/vpcassociationauthorization"
 	zone "github.com/upbound/provider-aws/internal/controller/route53/zone"
 	endpoint "github.com/upbound/provider-aws/internal/controller/route53resolver/endpoint"
-	rule "github.com/upbound/provider-aws/internal/controller/route53resolver/rule"
+	ruleroute53resolver "github.com/upbound/provider-aws/internal/controller/route53resolver/rule"
 	ruleassociation "github.com/upbound/provider-aws/internal/controller/route53resolver/ruleassociation"
 	bucket "github.com/upbound/provider-aws/internal/controller/s3/bucket"
 	bucketaccelerateconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketaccelerateconfiguration"
@@ -700,6 +708,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		dashboard.Setup,
 		metricalarm.Setup,
 		metricstream.Setup,
+		apidestination.Setup,
+		archive.Setup,
+		bus.Setup,
+		buspolicy.Setup,
+		connectioncloudwatchevents.Setup,
+		permission.Setup,
+		rule.Setup,
+		targetcloudwatchevents.Setup,
 		definition.Setup,
 		group.Setup,
 		metricfilter.Setup,
@@ -984,7 +1000,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		invocation.Setup,
 		layerversion.Setup,
 		layerversionpermission.Setup,
-		permission.Setup,
+		permissionlambda.Setup,
 		provisionedconcurrencyconfig.Setup,
 		bot.Setup,
 		botalias.Setup,
@@ -1042,7 +1058,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcassociationauthorization.Setup,
 		zone.Setup,
 		endpoint.Setup,
-		rule.Setup,
+		ruleroute53resolver.Setup,
 		ruleassociation.Setup,
 		bucket.Setup,
 		bucketaccelerateconfiguration.Setup,
