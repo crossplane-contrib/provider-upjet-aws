@@ -13,6 +13,7 @@ import (
 	v1beta11 "github.com/upbound/provider-aws/apis/elb/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/elbv2/v1beta1"
 	v1beta13 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta14 "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -227,6 +228,126 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.VPCZoneIdentifier = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.VPCZoneIdentifierRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this LifecycleHook.
+func (mg *LifecycleHook) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutoscalingGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AutoscalingGroupNameRef,
+		Selector:     mg.Spec.ForProvider.AutoscalingGroupNameSelector,
+		To: reference.To{
+			List:    &AutoscalingGroupList{},
+			Managed: &AutoscalingGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AutoscalingGroupName")
+	}
+	mg.Spec.ForProvider.AutoscalingGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AutoscalingGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.ForProvider.RoleArnRef,
+		Selector:     mg.Spec.ForProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RoleArn")
+	}
+	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Notification.
+func (mg *Notification) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TopicArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.TopicArnRef,
+		Selector:     mg.Spec.ForProvider.TopicArnSelector,
+		To: reference.To{
+			List:    &v1beta14.TopicList{},
+			Managed: &v1beta14.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TopicArn")
+	}
+	mg.Spec.ForProvider.TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TopicArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Policy.
+func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutoscalingGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AutoscalingGroupNameRef,
+		Selector:     mg.Spec.ForProvider.AutoscalingGroupNameSelector,
+		To: reference.To{
+			List:    &AutoscalingGroupList{},
+			Managed: &AutoscalingGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AutoscalingGroupName")
+	}
+	mg.Spec.ForProvider.AutoscalingGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AutoscalingGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Schedule.
+func (mg *Schedule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutoscalingGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AutoscalingGroupNameRef,
+		Selector:     mg.Spec.ForProvider.AutoscalingGroupNameSelector,
+		To: reference.To{
+			List:    &AutoscalingGroupList{},
+			Managed: &AutoscalingGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AutoscalingGroupName")
+	}
+	mg.Spec.ForProvider.AutoscalingGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AutoscalingGroupNameRef = rsp.ResolvedReference
 
 	return nil
 }

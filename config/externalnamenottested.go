@@ -34,19 +34,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// aws_autoscaling_group_tag can be imported by using the ASG name and key, separated by a comma (,)
 	"aws_autoscaling_group_tag": config.TemplatedStringAsIdentifier("autoscaling_group_name", "{{ .external_name }},{{ .parameters.tag.key }}"),
-	// AutoScaling Lifecycle Hooks can be imported using the role autoscaling_group_name and name separated by /
-	"aws_autoscaling_lifecycle_hook": config.TemplatedStringAsIdentifier("name", "{{ .parameters.autoscaling_group_name }}/{{ .external_name }}"),
-	// No import
-	"aws_autoscaling_notification": config.IdentifierFromProvider,
-	// AutoScaling scaling policy can be imported using the role autoscaling_group_name and name separated by /
-	"aws_autoscaling_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.autoscaling_group_name }}/{{ .external_name }}"),
-	// AutoScaling ScheduledAction can be imported using the auto-scaling-group-name and scheduled-action-name: auto-scaling-group-name/scheduled-action-name
-	"aws_autoscaling_schedule": config.TemplatedStringAsIdentifier("scheduled_action_name", "{{ .parameters.autoscaling_group_name }}/{{ .external_name }}"),
-
-	// autoscalingplans
-	//
-	// Auto Scaling scaling plans can be imported using the name
-	"aws_autoscalingplans_scaling_plan": config.NameAsIdentifier,
 
 	// batch
 	//

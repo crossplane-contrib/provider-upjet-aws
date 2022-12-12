@@ -101,6 +101,11 @@ import (
 	attachment "github.com/upbound/provider-aws/internal/controller/autoscaling/attachment"
 	autoscalinggroup "github.com/upbound/provider-aws/internal/controller/autoscaling/autoscalinggroup"
 	launchconfiguration "github.com/upbound/provider-aws/internal/controller/autoscaling/launchconfiguration"
+	lifecyclehook "github.com/upbound/provider-aws/internal/controller/autoscaling/lifecyclehook"
+	notification "github.com/upbound/provider-aws/internal/controller/autoscaling/notification"
+	policyautoscaling "github.com/upbound/provider-aws/internal/controller/autoscaling/policy"
+	schedule "github.com/upbound/provider-aws/internal/controller/autoscaling/schedule"
+	scalingplan "github.com/upbound/provider-aws/internal/controller/autoscalingplans/scalingplan"
 	framework "github.com/upbound/provider-aws/internal/controller/backup/framework"
 	globalsettings "github.com/upbound/provider-aws/internal/controller/backup/globalsettings"
 	plan "github.com/upbound/provider-aws/internal/controller/backup/plan"
@@ -645,6 +650,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		attachment.Setup,
 		autoscalinggroup.Setup,
 		launchconfiguration.Setup,
+		lifecyclehook.Setup,
+		notification.Setup,
+		policyautoscaling.Setup,
+		schedule.Setup,
+		scalingplan.Setup,
 		framework.Setup,
 		globalsettings.Setup,
 		plan.Setup,
