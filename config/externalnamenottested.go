@@ -30,11 +30,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// aws_appsync_domain_name_api_association can be imported using the AppSync domain name
 	"aws_appsync_domain_name_api_association": config.ParameterAsIdentifier("domain_name"),
 
-	// autoscaling
-	//
-	// aws_autoscaling_group_tag can be imported by using the ASG name and key, separated by a comma (,)
-	"aws_autoscaling_group_tag": config.TemplatedStringAsIdentifier("autoscaling_group_name", "{{ .external_name }},{{ .parameters.tag.key }}"),
-
 	// batch
 	//
 	// AWS Batch compute can be imported using the compute_environment_name

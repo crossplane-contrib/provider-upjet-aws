@@ -100,6 +100,7 @@ import (
 	workgroup "github.com/upbound/provider-aws/internal/controller/athena/workgroup"
 	attachment "github.com/upbound/provider-aws/internal/controller/autoscaling/attachment"
 	autoscalinggroup "github.com/upbound/provider-aws/internal/controller/autoscaling/autoscalinggroup"
+	grouptag "github.com/upbound/provider-aws/internal/controller/autoscaling/grouptag"
 	launchconfiguration "github.com/upbound/provider-aws/internal/controller/autoscaling/launchconfiguration"
 	lifecyclehook "github.com/upbound/provider-aws/internal/controller/autoscaling/lifecyclehook"
 	notification "github.com/upbound/provider-aws/internal/controller/autoscaling/notification"
@@ -657,6 +658,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		workgroup.Setup,
 		attachment.Setup,
 		autoscalinggroup.Setup,
+		grouptag.Setup,
 		launchconfiguration.Setup,
 		lifecyclehook.Setup,
 		notification.Setup,

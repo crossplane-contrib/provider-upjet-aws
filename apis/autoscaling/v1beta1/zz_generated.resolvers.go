@@ -232,6 +232,32 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 	return nil
 }
 
+// ResolveReferences of this GroupTag.
+func (mg *GroupTag) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutoscalingGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AutoscalingGroupNameRef,
+		Selector:     mg.Spec.ForProvider.AutoscalingGroupNameSelector,
+		To: reference.To{
+			List:    &AutoscalingGroupList{},
+			Managed: &AutoscalingGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AutoscalingGroupName")
+	}
+	mg.Spec.ForProvider.AutoscalingGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AutoscalingGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this LifecycleHook.
 func (mg *LifecycleHook) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
