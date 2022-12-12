@@ -157,7 +157,15 @@ CROSSPLANE_NAMESPACE = upbound-system
 
 # This target requires the following environment variables to be set:
 # - UPTEST_EXAMPLE_LIST, a comma-separated list of examples to test
-# - UPTEST_CLOUD_CREDENTIALS (optional), cloud credentials for the provider being tested, e.g. export UPTEST_CLOUD_CREDENTIALS=$(cat ~/.aws/credentials)
+# - UPTEST_CLOUD_CREDENTIALS (optional), multiple sets of AWS IAM User credentials specified as key=value pairs.
+#   The support keys are currently `DEFAULT` and `PEER`. So, an example for the value of this env. variable is:
+#   DEFAULT='[default]
+#   aws_access_key_id = REDACTED
+#   aws_secret_access_key = REDACTED'
+#   PEER='[default]
+#   aws_access_key_id = REDACTED
+#   aws_secret_access_key = REDACTED'
+#   The associated `ProviderConfig`s will be named as `default` and `peer`.
 # - UPTEST_DATASOURCE_PATH (optional), see https://github.com/upbound/uptest#injecting-dynamic-values-and-datasource
 uptest: $(UPTEST) $(KUBECTL) $(KUTTL)
 	@$(INFO) running automated tests

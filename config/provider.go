@@ -31,6 +31,7 @@ import (
 	"github.com/upbound/provider-aws/config/cur"
 	"github.com/upbound/provider-aws/config/dax"
 	"github.com/upbound/provider-aws/config/devicefarm"
+	"github.com/upbound/provider-aws/config/directconnect"
 	"github.com/upbound/provider-aws/config/docdb"
 	"github.com/upbound/provider-aws/config/dynamodb"
 	"github.com/upbound/provider-aws/config/ebs"
@@ -112,8 +113,8 @@ var skipList = []string{
 	"aws_alb_target_group$",            // identical with aws_lb_target_group.
 	"aws_alb_target_group_attachment$", // identical with aws_lb_target_group_attachment.
 	"aws_iot_authorizer$",              // failure with unknown reason.
-	"aws_appflow_connector_profile$",   // failure with unknown reason.
 	"aws_location_map$",                // failure with unknown reason.
+	"aws_appflow_connector_profile$",   // failure with unknown reason.
 }
 
 // GetProvider returns provider configuration
@@ -206,6 +207,7 @@ func GetProvider() *config.Provider {
 		devicefarm.Configure,
 		organization.Configure,
 		budgets.Configure,
+		directconnect.Configure,
 	} {
 		configure(pc)
 	}

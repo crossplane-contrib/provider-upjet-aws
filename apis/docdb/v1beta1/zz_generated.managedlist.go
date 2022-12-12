@@ -25,6 +25,33 @@ func (l *ClusterList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ClusterParameterGroupList.
+func (l *ClusterParameterGroupList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ClusterSnapshotList.
+func (l *ClusterSnapshotList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this EventSubscriptionList.
+func (l *EventSubscriptionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this GlobalClusterList.
 func (l *GlobalClusterList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

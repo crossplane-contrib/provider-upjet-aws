@@ -20,31 +20,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Amplify domain association can be imported using app_id and domain_name: d2ypk4k47z8u6/example.com
 	"aws_amplify_domain_association": config.TemplatedStringAsIdentifier("domain_name", "{{ .parameters.app_id }}/{{ .external_name }}"),
 
-	// appconfig
-
-	// AppConfig Applications can be imported using their application ID,
-	"aws_appconfig_application": config.IdentifierFromProvider,
-	// AppConfig Configuration Profiles can be imported by using the configuration profile ID and application ID separated by a colon (:)
-	"aws_appconfig_configuration_profile": config.IdentifierFromProvider,
-	// AppConfig Deployments can be imported by using the application ID, environment ID, and deployment number separated by a slash (/)
-	"aws_appconfig_deployment": config.IdentifierFromProvider,
-	// AppConfig Deployment Strategies can be imported by using their deployment strategy ID
-	"aws_appconfig_deployment_strategy": config.IdentifierFromProvider,
-	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
-	"aws_appconfig_environment": config.IdentifierFromProvider,
-	// AppConfig Hosted Configuration Versions can be imported by using the application ID, configuration profile ID, and version number separated by a slash (/)
-	"aws_appconfig_hosted_configuration_version": config.IdentifierFromProvider,
-
-	// appflow
-	//
-	// AppFlow flows can be imported using the arn
-	"aws_appflow_flow": config.IdentifierFromProvider,
-
-	// appintegrations
-	//
-	// Amazon AppIntegrations Event Integrations can be imported using the name
-	"aws_appintegrations_event_integration": config.NameAsIdentifier,
-
 	// apprunner
 	//
 	// App Runner Custom Domain Associations can be imported by using the domain_name and service_arn separated by a comma (,)
@@ -87,13 +62,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_cloudhsm_v2_cluster": config.IdentifierFromProvider,
 	// HSM modules can be imported using their HSM ID
 	"aws_cloudhsm_v2_hsm": config.IdentifierFromProvider,
-
-	// cloudtrail
-	//
-	// Cloudtrails can be imported using the name
-	"aws_cloudtrail": config.NameAsIdentifier,
-	// Event data stores can be imported using their arn
-	"aws_cloudtrail_event_data_store": config.IdentifierFromProvider,
 
 	// cloudwatchlogs
 	//
@@ -183,14 +151,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// No import
 	"aws_dx_bgp_peer": config.IdentifierFromProvider,
-	// Direct Connect connections can be imported using the connection id
-	"aws_dx_connection": config.IdentifierFromProvider,
-	// No import
-	"aws_dx_connection_association": config.IdentifierFromProvider,
 	// No import
 	"aws_dx_connection_confirmation": config.IdentifierFromProvider,
-	// Direct Connect Gateways can be imported using the gateway id
-	"aws_dx_gateway": config.IdentifierFromProvider,
 	// Direct Connect gateway associations can be imported using dx_gateway_id together with associated_gateway_id
 	// TODO: associated_gateway_id parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
 	"aws_dx_gateway_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.dx_gateway_id }}/{{ .parameters.associated_gateway_id }}"),
@@ -210,14 +172,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_dx_hosted_transit_virtual_interface": config.IdentifierFromProvider,
 	// Direct Connect hosted transit virtual interfaces can be imported using the vif id
 	"aws_dx_hosted_transit_virtual_interface_accepter": config.ParameterAsIdentifier("virtual_interface_id"),
-	// Direct Connect LAGs can be imported using the lag id
-	"aws_dx_lag": config.IdentifierFromProvider,
 	// Direct Connect private virtual interfaces can be imported using the vif id
 	"aws_dx_private_virtual_interface": config.IdentifierFromProvider,
-	// Direct Connect public virtual interfaces can be imported using the vif id
-	"aws_dx_public_virtual_interface": config.IdentifierFromProvider,
-	// Direct Connect transit virtual interfaces can be imported using the vif id
-	"aws_dx_transit_virtual_interface": config.IdentifierFromProvider,
 
 	// dlm
 	//
@@ -239,15 +195,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Replication tasks can be imported using the replication_task_id
 	"aws_dms_replication_task": config.ParameterAsIdentifier("replication_task_id"),
 
-	// docdb
-	//
-	// DocumentDB Cluster Parameter Groups can be imported using the name
-	"aws_docdb_cluster_parameter_group": config.NameAsIdentifier,
-	// aws_docdb_cluster_snapshot can be imported by using the cluster snapshot identifier
-	"aws_docdb_cluster_snapshot": config.ParameterAsIdentifier("db_cluster_snapshot_identifier"),
-	// DocDB Event Subscriptions can be imported using the name
-	"aws_docdb_event_subscription": config.NameAsIdentifier,
-
 	// ds
 	//
 	// Conditional forwarders can be imported using the directory id and remote_domain_name: d-1234567890:example.com
@@ -257,27 +204,10 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Directory Service Log Subscriptions can be imported using the directory id
 	"aws_directory_service_log_subscription": config.ParameterAsIdentifier("directory_id"),
 
-	// dynamodb
-	//
-	// aws_dynamodb_tag can be imported by using the DynamoDB resource identifier and key, separated by a comma (,)
-	"aws_dynamodb_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_arn }},{{ .parameters.key }}"),
-
 	// ec2
 	//
-	// aws_ami can be imported using the ID of the AMI
-	"aws_ami": config.IdentifierFromProvider,
-	// No import
-	"aws_ami_copy": config.IdentifierFromProvider,
 	// No import
 	"aws_ami_from_instance": config.IdentifierFromProvider,
-	// AMI Launch Permissions can be imported using [ACCOUNT-ID|GROUP-NAME|ORGANIZATION-ARN|ORGANIZATIONAL-UNIT-ARN]/IMAGE-ID
-	"aws_ami_launch_permission": config.IdentifierFromProvider,
-	// Customer Gateways can be imported using the id
-	"aws_customer_gateway": config.IdentifierFromProvider,
-	// Default Network ACLs can be imported using the id
-	"aws_default_network_acl": config.IdentifierFromProvider,
-	// Security Groups can be imported using the security group id
-	"aws_default_security_group": config.IdentifierFromProvider,
 	//
 	"aws_ec2_client_vpn_authorization_rule": config.IdentifierFromProvider,
 	// AWS Client VPN endpoints can be imported using the id value found via aws ec2 describe-client-vpn-endpoints
@@ -298,8 +228,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_ec2_traffic_mirror_session": config.IdentifierFromProvider,
 	// Traffic mirror targets can be imported using the id
 	"aws_ec2_traffic_mirror_target": config.IdentifierFromProvider,
-	// aws_ec2_transit_gateway_connect_peer can be imported by using the EC2 Transit Gateway Connect Peer identifier
-	"aws_ec2_transit_gateway_connect_peer": config.IdentifierFromProvider,
 	// Internet Gateway Attachments can be imported using the id
 	"aws_internet_gateway_attachment": config.IdentifierFromProvider,
 	// No import
@@ -312,36 +240,18 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_vpc_endpoint_policy": config.IdentifierFromProvider,
 	// No import
 	"aws_vpc_endpoint_security_group_association": config.IdentifierFromProvider,
-	// IPAMs can be imported using the ipam id
-	"aws_vpc_ipam": config.IdentifierFromProvider,
 	// IPAMs can be imported using the delegate account id
 	"aws_vpc_ipam_organization_admin_account": config.ParameterAsIdentifier("delegated_admin_account_id"),
-	// IPAMs can be imported using the ipam pool id
-	"aws_vpc_ipam_pool": config.IdentifierFromProvider,
 	// IPAMs can be imported using the <cidr>_<ipam-pool-id>
-	"aws_vpc_ipam_pool_cidr": config.IdentifierFromProvider,
-	// IPAMs can be imported using the allocation id
-	"aws_vpc_ipam_pool_cidr_allocation": config.IdentifierFromProvider,
+	"aws_vpc_ipam_pool_aws_default_network_acl": config.IdentifierFromProvider,
 	// No import
 	"aws_vpc_ipam_preview_next_cidr": config.IdentifierFromProvider,
-	// IPAMs can be imported using the scope_id
-	"aws_vpc_ipam_scope": config.IdentifierFromProvider,
 	// aws_vpc_ipv6_cidr_block_association can be imported by using the VPC CIDR Association ID
 	"aws_vpc_ipv6_cidr_block_association": config.IdentifierFromProvider,
 	// VPC Peering Connection Accepters can be imported by using the Peering Connection ID
 	"aws_vpc_peering_connection_accepter": config.ParameterAsIdentifier("vpc_peering_connection_id"),
 	// VPC Peering Connection Options can be imported using the vpc peering id
 	"aws_vpc_peering_connection_options": config.ParameterAsIdentifier("vpc_peering_connection_id"),
-	// VPN Connections can be imported using the vpn connection id
-	"aws_vpn_connection": config.IdentifierFromProvider,
-	// No import
-	"aws_vpn_connection_route": config.IdentifierFromProvider,
-	// VPN Gateways can be imported using the vpn gateway id
-	"aws_vpn_gateway": config.IdentifierFromProvider,
-	// No import
-	"aws_vpn_gateway_attachment": config.IdentifierFromProvider,
-	// No import
-	"aws_vpn_gateway_route_propagation": config.IdentifierFromProvider,
 
 	// securityhub
 	//
@@ -355,11 +265,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_securityhub_organization_configuration": config.IdentifierFromProvider,
 	// no import documentation
 	"aws_securityhub_standards_control": config.IdentifierFromProvider,
-
-	// serverlessapplicationrepository
-	//
-	// imported using the CloudFormation Stack name
-	"aws_serverlessapplicationrepository_cloudformation_stack": config.NameAsIdentifier,
 
 	// servicecatalog
 	//
@@ -434,4 +339,64 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// imported using the service ID and instance ID:
 	// 0123456789/i-0123
 	"aws_service_discovery_instance": FormattedIdentifierFromProvider("/", "service_id", "instance_id"),
+	// Service Discovery Service can be imported using the service ID
+	"aws_service_discovery_service": config.IdentifierFromProvider,
+
+	// elasticache
+	//
+	// ElastiCache Security Groups can be imported by name
+	"aws_elasticache_security_group": config.NameAsIdentifier,
+	// ElastiCache Global Replication Groups can be imported using the global_replication_group_id,
+	// which is an attribute reported in the state.
+	// TODO: we need to check the value of a global_replication_group_id to
+	// see if further normalization is possible
+	"aws_elasticache_global_replication_group": config.IdentifierFromProvider,
+	// ElastiCache user group associations can be imported using the user_group_id and user_id:
+	// userGoupId1,userId
+	"aws_elasticache_user_group_association": FormattedIdentifierFromProvider(",", "user_group_id", "user_id"),
+
+	// ram
+	//
+	// RAM Principal Associations can be imported using their Resource Share ARN and the principal separated by a comma:
+	// arn:aws:ram:eu-west-1:123456789012:resource-share/73da1ab9-b94a-4ba3-8eb4-45917f7f4b12,123456789012
+	"aws_ram_principal_association": FormattedIdentifierFromProvider(",", "resource_share_arn", "principal"),
+	// RAM Resource Associations can be imported using their Resource Share ARN and Resource ARN separated by a comma:
+	// arn:aws:ram:eu-west-1:123456789012:resource-share/73da1ab9-b94a-4ba3-8eb4-45917f7f4b12,arn:aws:ec2:eu-west-1:123456789012:subnet/subnet-12345678
+	"aws_ram_resource_association": FormattedIdentifierFromProvider(",", "resource_share_arn", "resource_arn"),
+	// Resource shares can be imported using the arn of the resource share:
+	// aws_ram_resource_share.example arn:aws:ram:eu-west-1:123456789012:resource-share/73da1ab9-b94a-4ba3-8eb4-45917f7f4b12
+	// TODO: validation may kick in, in which case we can use config.IdentifierFromProvider
+	"aws_ram_resource_share": TemplatedStringAsIdentifierWithNoName("arn:aws:ram:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:resource-share/{{ .external_name }}"),
+	// Resource share accepters can be imported using the resource share ARN:
+	// arn:aws:ram:us-east-1:123456789012:resource-share/c4b56393-e8d9-89d9-6dc9-883752de4767
+	"aws_ram_resource_share_accepter": FormattedIdentifierFromProvider("", "share_arn"),
+
+	// sns
+	//
+	// SNS platform applications can be imported using the ARN:
+	// arn:aws:sns:us-west-2:0123456789012:app/GCM/gcm_application
+	"aws_sns_platform_application": config.TemplatedStringAsIdentifier("name", "arn:aws:sns:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:app/GCM/{{ .external_name }}"),
+	// no import documentation is provided
+	// TODO: we will need to check if normalization is possible
+	"aws_sns_sms_preferences": config.IdentifierFromProvider,
+	// SNS Topic Policy can be imported using the topic ARN:
+	// arn:aws:sns:us-west-2:0123456789012:my-topic
+	"aws_sns_topic_policy": FormattedIdentifierFromProvider("", "arn"),
+
+	// ecs
+	//
+	// ECS Task Sets can be imported via the task_set_id, service, and cluster separated by commas (,):
+	// ecs-svc/7177320696926227436,arn:aws:ecs:us-west-2:123456789101:service/example/example-1234567890,arn:aws:ecs:us-west-2:123456789101:cluster/example
+	// TODO: validation may kick in, in which case we can use config.IdentifierFromProvider
+	"aws_ecs_task_set": TemplatedStringAsIdentifierWithNoName("{{ .external_name }},{{ .parameters.service }},{{ .parameters.cluster }}"),
+
+	// grafana
+	//
+	// Grafana workspace license association can be imported using the workspace's id
+	"aws_grafana_license_association": FormattedIdentifierFromProvider("", "workspace_id"),
+
+	// gamelift
+	//
+	// GameLift Game Server Group can be imported using the name
+	"aws_gamelift_game_server_group": config.ParameterAsIdentifier("game_server_group_name"),
 }

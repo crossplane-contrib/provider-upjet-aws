@@ -161,6 +161,228 @@ func (tr *ClusterInstance) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this ClusterParameterGroup
+func (mg *ClusterParameterGroup) GetTerraformResourceType() string {
+	return "aws_docdb_cluster_parameter_group"
+}
+
+// GetConnectionDetailsMapping for this ClusterParameterGroup
+func (tr *ClusterParameterGroup) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ClusterParameterGroup
+func (tr *ClusterParameterGroup) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ClusterParameterGroup
+func (tr *ClusterParameterGroup) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ClusterParameterGroup
+func (tr *ClusterParameterGroup) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ClusterParameterGroup
+func (tr *ClusterParameterGroup) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ClusterParameterGroup
+func (tr *ClusterParameterGroup) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ClusterParameterGroup using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ClusterParameterGroup) LateInitialize(attrs []byte) (bool, error) {
+	params := &ClusterParameterGroupParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ClusterParameterGroup) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ClusterSnapshot
+func (mg *ClusterSnapshot) GetTerraformResourceType() string {
+	return "aws_docdb_cluster_snapshot"
+}
+
+// GetConnectionDetailsMapping for this ClusterSnapshot
+func (tr *ClusterSnapshot) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ClusterSnapshot
+func (tr *ClusterSnapshot) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ClusterSnapshot
+func (tr *ClusterSnapshot) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ClusterSnapshot
+func (tr *ClusterSnapshot) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ClusterSnapshot
+func (tr *ClusterSnapshot) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ClusterSnapshot
+func (tr *ClusterSnapshot) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ClusterSnapshot using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ClusterSnapshot) LateInitialize(attrs []byte) (bool, error) {
+	params := &ClusterSnapshotParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ClusterSnapshot) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this EventSubscription
+func (mg *EventSubscription) GetTerraformResourceType() string {
+	return "aws_docdb_event_subscription"
+}
+
+// GetConnectionDetailsMapping for this EventSubscription
+func (tr *EventSubscription) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this EventSubscription
+func (tr *EventSubscription) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this EventSubscription
+func (tr *EventSubscription) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this EventSubscription
+func (tr *EventSubscription) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this EventSubscription
+func (tr *EventSubscription) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this EventSubscription
+func (tr *EventSubscription) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this EventSubscription using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *EventSubscription) LateInitialize(attrs []byte) (bool, error) {
+	params := &EventSubscriptionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *EventSubscription) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this GlobalCluster
 func (mg *GlobalCluster) GetTerraformResourceType() string {
 	return "aws_docdb_global_cluster"
