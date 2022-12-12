@@ -1414,6 +1414,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// autoscaling
 	//
+	// aws_autoscaling_group_tag can be imported by using the ASG name and key, separated by a comma (,)
+	"aws_autoscaling_group_tag": config.IdentifierFromProvider,
 	// AutoScaling Lifecycle Hooks can be imported using the role autoscaling_group_name and name separated by /
 	"aws_autoscaling_lifecycle_hook": config.TemplatedStringAsIdentifier("name", "{{ .parameters.autoscaling_group_name }}/{{ .external_name }}"),
 	// No import
