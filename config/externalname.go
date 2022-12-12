@@ -230,6 +230,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_network_acl_rule": config.IdentifierFromProvider,
 	// No import
 	"aws_spot_instance_request": config.IdentifierFromProvider,
+	// Spot Fleet Requests can be imported using id
+	"aws_spot_fleet_request": config.IdentifierFromProvider,
 	// EBS Volume Attachments can be imported using DEVICE_NAME:VOLUME_ID:INSTANCE_ID
 	"aws_volume_attachment": config.IdentifierFromProvider,
 	// VPC DHCP Options can be imported using the dhcp options id
