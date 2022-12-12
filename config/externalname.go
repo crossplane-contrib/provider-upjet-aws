@@ -1362,6 +1362,22 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName("arn:aws:cloudformation:{{ .parameters.region }}:{{ .client_metadata.account_id }}:stack/{{ .parameters.name }}/{{ .external_name }}"),
 	// CloudFormation StackSets can be imported using the name
 	"aws_cloudformation_stack_set": config.NameAsIdentifier,
+
+	// autoscaling
+	//
+	// AutoScaling Lifecycle Hooks can be imported using the role autoscaling_group_name and name separated by /
+	"aws_autoscaling_lifecycle_hook": config.TemplatedStringAsIdentifier("name", "{{ .parameters.autoscaling_group_name }}/{{ .external_name }}"),
+	// No import
+	"aws_autoscaling_notification": config.IdentifierFromProvider,
+	// AutoScaling scaling policy can be imported using the role autoscaling_group_name and name separated by /
+	"aws_autoscaling_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.autoscaling_group_name }}/{{ .external_name }}"),
+	// AutoScaling ScheduledAction can be imported using the auto-scaling-group-name and scheduled-action-name: auto-scaling-group-name/scheduled-action-name
+	"aws_autoscaling_schedule": config.TemplatedStringAsIdentifier("scheduled_action_name", "{{ .parameters.autoscaling_group_name }}/{{ .external_name }}"),
+
+	// autoscalingplans
+	//
+	// Auto Scaling scaling plans can be imported using the name
+	"aws_autoscalingplans_scaling_plan": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
