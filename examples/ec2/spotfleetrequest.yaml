@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     allocationStrategy: capacityOptimized
-    iamFleetRole: arn:aws:iam::${data.aws_account}:role/aws-service-role/spotfleet.amazonaws.com/AWSServiceRoleForEC2SpotFleet
+    iamFleetRole: arn:aws:iam::${data.aws_account_id}:role/aws-service-role/spotfleet.amazonaws.com/AWSServiceRoleForEC2SpotFleet
     launchSpecification:
     - ami: ami-0bdb828fd58c52235
       iamInstanceProfileArnSelector:
