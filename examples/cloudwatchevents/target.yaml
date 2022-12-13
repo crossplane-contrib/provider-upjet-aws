@@ -2,6 +2,8 @@ apiVersion: cloudwatchevents.aws.upbound.io/v1beta1
 kind: Target
 metadata:
   name: aws-login
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs arn of Topic."
 spec:
   forProvider:
     arn: "arn:aws:sns:${data.aws_region}:${data.aws_account_id}:topic"
@@ -22,6 +24,8 @@ metadata:
   labels:
     testing.upbound.io/example-name: login-rule
   name: login-rule
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is necessary to create the root resource."
 spec:
   forProvider:
     description: Capture all EC2 scaling events
@@ -44,6 +48,8 @@ metadata:
   labels:
     testing.upbound.io/example-name: topic
   name: topic
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is necessary to create the root resource."
 spec:
   forProvider:
     policy: |
@@ -68,6 +74,8 @@ metadata:
   labels:
     testing.upbound.io/example-name: target-bus
   name: target-bus
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is necessary to create the root resource."
 spec:
   forProvider:
     region: us-west-1
