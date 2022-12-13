@@ -28,7 +28,6 @@ spec:
   forProvider:
     accountAccessType: CURRENT_ACCOUNT
     authenticationProviders:
-    # - SAML
     - AWS_SSO
     permissionType: SERVICE_MANAGED
     region: us-east-1
