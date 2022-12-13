@@ -746,6 +746,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_service_discovery_public_dns_namespace": config.IdentifierFromProvider,
 	// Service Discovery HTTP Namespace can be imported using the namespace ID,
 	"aws_service_discovery_http_namespace": config.IdentifierFromProvider,
+	// Service Discovery Service can be imported using the service ID
+	"aws_service_discovery_service": config.IdentifierFromProvider,
 
 	// sqs
 	//

@@ -279,8 +279,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// imported using the service ID and instance ID:
 	// 0123456789/i-0123
 	"aws_service_discovery_instance": FormattedIdentifierFromProvider("/", "service_id", "instance_id"),
-	// Service Discovery Service can be imported using the service ID
-	"aws_service_discovery_service": config.IdentifierFromProvider,
 
 	// elasticache
 	//
