@@ -180,6 +180,8 @@ import (
 	identityprovider "github.com/upbound/provider-aws/internal/controller/cognitoidp/identityprovider"
 	resourceserver "github.com/upbound/provider-aws/internal/controller/cognitoidp/resourceserver"
 	usercognitoidp "github.com/upbound/provider-aws/internal/controller/cognitoidp/user"
+	usergroup "github.com/upbound/provider-aws/internal/controller/cognitoidp/usergroup"
+	useringroup "github.com/upbound/provider-aws/internal/controller/cognitoidp/useringroup"
 	userpool "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpool"
 	userpoolclient "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpoolclient"
 	userpooldomain "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooldomain"
@@ -362,7 +364,7 @@ import (
 	replicationgroup "github.com/upbound/provider-aws/internal/controller/elasticache/replicationgroup"
 	subnetgroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/subnetgroup"
 	userelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/user"
-	usergroup "github.com/upbound/provider-aws/internal/controller/elasticache/usergroup"
+	usergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/usergroup"
 	attachmentelb "github.com/upbound/provider-aws/internal/controller/elb/attachment"
 	elb "github.com/upbound/provider-aws/internal/controller/elb/elb"
 	lb "github.com/upbound/provider-aws/internal/controller/elbv2/lb"
@@ -740,6 +742,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		identityprovider.Setup,
 		resourceserver.Setup,
 		usercognitoidp.Setup,
+		usergroup.Setup,
+		useringroup.Setup,
 		userpool.Setup,
 		userpoolclient.Setup,
 		userpooldomain.Setup,
@@ -922,7 +926,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		replicationgroup.Setup,
 		subnetgroupelasticache.Setup,
 		userelasticache.Setup,
-		usergroup.Setup,
+		usergroupelasticache.Setup,
 		attachmentelb.Setup,
 		elb.Setup,
 		lb.Setup,

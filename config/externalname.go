@@ -111,9 +111,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cognito_user_pool_domain": config.IdentifierFromProvider,
 	// us-west-2_ZCTarbt5C,12bu4fuk3mlgqa2rtrujgp6egq
 	"aws_cognito_user_pool_ui_customization": config.IdentifierFromProvider,
-	// aws_cognito_user_group.group us-east-1_vG78M4goG/user-group
-	// disabled until the fix of https://github.com/upbound/official-providers/issues/531
-	// "aws_cognito_user_group": config.IdentifierFromProvider,
+	// Cognito User Groups can be imported using the user_pool_id/name attributes concatenated:
+	// us-east-1_vG78M4goG/user-group
+	// Following configuration does not work: FormattedIdentifierUserDefinedNameLast("name", "/", "user_pool_id")
+	// As it fails with a user group not found sync error
+	// TODO: check if this is due to any diff between Terraform import & apply
+	// implementations. Currently, the API is not normalized.
+	"aws_cognito_user_group": config.IdentifierFromProvider,
 	// us-west-2_abc123|https://example.com
 	"aws_cognito_resource_server": config.IdentifierFromProvider,
 	// us-west-2_abc123:CorpAD
@@ -121,8 +125,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// user_pool_id/name: us-east-1_vG78M4goG/user
 	"aws_cognito_user": config.TemplatedStringAsIdentifier("username", "{{ .parameters.user_pool_id }}/{{ .external_name }}"),
 	// no doc
-	// disabled until the fix of https://github.com/upbound/official-providers/issues/531
-	// "aws_cognito_user_in_group": config.IdentifierFromProvider,
+	"aws_cognito_user_in_group": config.IdentifierFromProvider,
 
 	// ebs
 	//
