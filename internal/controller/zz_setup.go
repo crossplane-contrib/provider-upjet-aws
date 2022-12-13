@@ -390,6 +390,7 @@ import (
 	triggerglue "github.com/upbound/provider-aws/internal/controller/glue/trigger"
 	userdefinedfunction "github.com/upbound/provider-aws/internal/controller/glue/userdefinedfunction"
 	workflow "github.com/upbound/provider-aws/internal/controller/glue/workflow"
+	licenseassociation "github.com/upbound/provider-aws/internal/controller/grafana/licenseassociation"
 	roleassociation "github.com/upbound/provider-aws/internal/controller/grafana/roleassociation"
 	workspacegrafana "github.com/upbound/provider-aws/internal/controller/grafana/workspace"
 	workspacesamlconfiguration "github.com/upbound/provider-aws/internal/controller/grafana/workspacesamlconfiguration"
@@ -949,6 +950,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		triggerglue.Setup,
 		userdefinedfunction.Setup,
 		workflow.Setup,
+		licenseassociation.Setup,
 		roleassociation.Setup,
 		workspacegrafana.Setup,
 		workspacesamlconfiguration.Setup,

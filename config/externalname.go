@@ -1491,6 +1491,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Amazon AppIntegrations Event Integrations can be imported using the name
 	"aws_appintegrations_event_integration": config.NameAsIdentifier,
 
+	// grafana
+	//
+	// Grafana workspace license association can be imported using the workspace's id
+	"aws_grafana_license_association": FormattedIdentifierFromProvider("", "workspace_id"),
+
 	// appflow
 	//
 	// arn:aws:appflow:us-west-2:123456789012:flow/example-flow

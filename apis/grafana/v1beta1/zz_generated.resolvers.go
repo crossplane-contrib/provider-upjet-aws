@@ -11,8 +11,35 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this LicenseAssociation.
+func (mg *LicenseAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
+		Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
+		To: reference.To{
+			List:    &WorkspaceList{},
+			Managed: &Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
+	}
+	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this RoleAssociation.
 func (mg *RoleAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
