@@ -559,7 +559,10 @@ import (
 	activity "github.com/upbound/provider-aws/internal/controller/sfn/activity"
 	statemachine "github.com/upbound/provider-aws/internal/controller/sfn/statemachine"
 	signingprofile "github.com/upbound/provider-aws/internal/controller/signer/signingprofile"
+	platformapplication "github.com/upbound/provider-aws/internal/controller/sns/platformapplication"
+	smspreferences "github.com/upbound/provider-aws/internal/controller/sns/smspreferences"
 	topic "github.com/upbound/provider-aws/internal/controller/sns/topic"
+	topicpolicy "github.com/upbound/provider-aws/internal/controller/sns/topicpolicy"
 	topicsubscription "github.com/upbound/provider-aws/internal/controller/sns/topicsubscription"
 	queuesqs "github.com/upbound/provider-aws/internal/controller/sqs/queue"
 	queuepolicy "github.com/upbound/provider-aws/internal/controller/sqs/queuepolicy"
@@ -1121,7 +1124,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		activity.Setup,
 		statemachine.Setup,
 		signingprofile.Setup,
+		platformapplication.Setup,
+		smspreferences.Setup,
 		topic.Setup,
+		topicpolicy.Setup,
 		topicsubscription.Setup,
 		queuesqs.Setup,
 		queuepolicy.Setup,

@@ -51,3 +51,21 @@ spec:
 
 ---
 
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: TopicPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codestarnotifications/v1beta1/notificationrule
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    arnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: notif
+    policy: ${data.aws_iam_policy_document.notif_access.json}
+    region: us-west-1
+
+---
+

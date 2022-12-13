@@ -307,18 +307,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// arn:aws:ram:us-east-1:123456789012:resource-share/c4b56393-e8d9-89d9-6dc9-883752de4767
 	"aws_ram_resource_share_accepter": FormattedIdentifierFromProvider("", "share_arn"),
 
-	// sns
-	//
-	// SNS platform applications can be imported using the ARN:
-	// arn:aws:sns:us-west-2:0123456789012:app/GCM/gcm_application
-	"aws_sns_platform_application": config.TemplatedStringAsIdentifier("name", "arn:aws:sns:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:app/GCM/{{ .external_name }}"),
-	// no import documentation is provided
-	// TODO: we will need to check if normalization is possible
-	"aws_sns_sms_preferences": config.IdentifierFromProvider,
-	// SNS Topic Policy can be imported using the topic ARN:
-	// arn:aws:sns:us-west-2:0123456789012:my-topic
-	"aws_sns_topic_policy": FormattedIdentifierFromProvider("", "arn"),
-
 	// ecs
 	//
 	// ECS Task Sets can be imported via the task_set_id, service, and cluster separated by commas (,):

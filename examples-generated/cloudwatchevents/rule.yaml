@@ -52,3 +52,21 @@ spec:
 
 ---
 
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: TopicPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchevents/v1beta1/rule
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    arnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_logins
+    policy: ${data.aws_iam_policy_document.sns_topic_policy.json}
+    region: us-west-1
+
+---
+

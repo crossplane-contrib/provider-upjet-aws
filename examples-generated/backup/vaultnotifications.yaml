@@ -35,3 +35,21 @@ spec:
 
 ---
 
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: TopicPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/vaultnotifications
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    arnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    policy: ${data.aws_iam_policy_document.test.json}
+    region: us-west-1
+
+---
+

@@ -12,8 +12,77 @@ import (
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/sqs/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this PlatformApplication.
+func (mg *PlatformApplication) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FailureFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.ForProvider.FailureFeedbackRoleArnRef,
+		Selector:     mg.Spec.ForProvider.FailureFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FailureFeedbackRoleArn")
+	}
+	mg.Spec.ForProvider.FailureFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FailureFeedbackRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SuccessFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.ForProvider.SuccessFeedbackRoleArnRef,
+		Selector:     mg.Spec.ForProvider.SuccessFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SuccessFeedbackRoleArn")
+	}
+	mg.Spec.ForProvider.SuccessFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SuccessFeedbackRoleArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SMSPreferences.
+func (mg *SMSPreferences) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeliveryStatusIAMRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.ForProvider.DeliveryStatusIAMRoleArnRef,
+		Selector:     mg.Spec.ForProvider.DeliveryStatusIAMRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DeliveryStatusIAMRoleArn")
+	}
+	mg.Spec.ForProvider.DeliveryStatusIAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DeliveryStatusIAMRoleArnRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this Topic.
 func (mg *Topic) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -181,6 +250,32 @@ func (mg *Topic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.SqsSuccessFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SqsSuccessFeedbackRoleArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this TopicPolicy.
+func (mg *TopicPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Arn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.ArnRef,
+		Selector:     mg.Spec.ForProvider.ArnSelector,
+		To: reference.To{
+			List:    &TopicList{},
+			Managed: &Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Arn")
+	}
+	mg.Spec.ForProvider.Arn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ArnRef = rsp.ResolvedReference
 
 	return nil
 }
