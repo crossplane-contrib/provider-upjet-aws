@@ -1501,6 +1501,18 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// arn:aws:appflow:us-west-2:123456789012:flow/example-flow
 	"aws_appflow_flow": config.TemplatedStringAsIdentifier("name", "arn:aws:appflow:{{ .parameters.region }}:{{ .client_metadata.account_id }}:flow/{{ .external_name }}"),
 
+	// sns
+	//
+	// SNS platform applications can be imported using the ARN:
+	// arn:aws:sns:us-west-2:0123456789012:app/GCM/gcm_application
+	"aws_sns_platform_application": config.TemplatedStringAsIdentifier("name", "arn:aws:sns:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:app/GCM/{{ .external_name }}"),
+	// no import documentation is provided
+	// TODO: we will need to check if normalization is possible
+	"aws_sns_sms_preferences": config.IdentifierFromProvider,
+	// SNS Topic Policy can be imported using the topic ARN:
+	// arn:aws:sns:us-west-2:0123456789012:my-topic
+	"aws_sns_topic_policy": FormattedIdentifierFromProvider("", "arn"),
+
 	// servicecatalog
 	//
 	// imported using the tag option ID, which has provider-generated
