@@ -1,9 +1,7 @@
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Alias
 metadata:
-  name: example
-  annotations:
-    crossplane.io/external-name: alias/my-key-alias
+  name: sample-key-alias
 spec:
   forProvider:
     region: us-east-1
