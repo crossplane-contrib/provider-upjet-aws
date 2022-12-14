@@ -318,4 +318,80 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// GameLift Game Server Group can be imported using the name
 	"aws_gamelift_game_server_group": config.ParameterAsIdentifier("game_server_group_name"),
+
+	// guardduty
+	//
+	// GuardDuty detectors can be imported using the detector ID
+	"aws_guardduty_detector": config.IdentifierFromProvider,
+	// GuardDuty filters can be imported using the detector ID and filter's name separated by a colon
+	// 00b00fd5aecc0ab60a708659477e9617:MyFilter
+	"aws_guardduty_filter": config.TemplatedStringAsIdentifier("name", "{{ .parameters.detector_id }}:{{ .external_name }}"),
+	// aws_guardduty_invite_accepter can be imported using the member GuardDuty detector ID
+	"aws_guardduty_invite_accepter": FormattedIdentifierFromProvider("", "detector_id"),
+	// GuardDuty IPSet can be imported using the primary GuardDuty detector ID and IPSet ID
+	// 00b00fd5aecc0ab60a708659477e9617:123456789012
+	"aws_guardduty_ipset": config.IdentifierFromProvider,
+	// GuardDuty members can be imported using the primary GuardDuty detector ID and member AWS account ID
+	// 00b00fd5aecc0ab60a708659477e9617:123456789012
+	"aws_guardduty_member": config.IdentifierFromProvider,
+	// GuardDuty Organization Admin Account can be imported using the AWS account ID
+	"aws_guardduty_organization_admin_account": FormattedIdentifierFromProvider("", "admin_account_id"),
+	// GuardDuty Organization Configurations can be imported using the GuardDuty Detector ID
+	"aws_guardduty_organization_configuration": FormattedIdentifierFromProvider("", "detector_id"),
+	// GuardDuty PublishingDestination can be imported using the master GuardDuty detector ID and PublishingDestinationID
+	// a4b86f26fa42e7e7cf0d1c333ea77777:a4b86f27a0e464e4a7e0516d242f1234
+	"aws_guardduty_publishing_destination": config.IdentifierFromProvider,
+	// GuardDuty ThreatIntelSet can be imported using the primary GuardDuty detector ID and ThreatIntelSetID
+	// 00b00fd5aecc0ab60a708659477e9617:123456789012
+	"aws_guardduty_threatintelset": config.IdentifierFromProvider,
+
+	// route53recoveryreadiness
+	//
+	// Route53 Recovery Readiness recovery groups can be imported via the recovery group name
+	"aws_route53recoveryreadiness_recovery_group": config.ParameterAsIdentifier("recovery_group_name"),
+	// Route53 Recovery Readiness resource set name can be imported via the resource set name
+	"aws_route53recoveryreadiness_resource_set": config.ParameterAsIdentifier("resource_set_name"),
+
+	// s3control
+	//
+	// - For Access Points associated with an AWS Partition S3 Bucket, this resource
+	// can be imported using the account_id and name separated by a colon (:)
+	// - For Access Points associated with an S3 on Outposts Bucket, this resource
+	// can be imported using the Amazon Resource Name (ARN)
+	// TODO: There are two different import syntaxes for this resource. For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_s3_access_point": config.IdentifierFromProvider,
+	// aws_s3_account_public_access_block can be imported by using the AWS account ID
+	"aws_s3_account_public_access_block": config.IdentifierFromProvider,
+	// Access Point policies can be imported using the access_point_arn
+	// arn:aws:s3:us-west-2:123456789012:accesspoint/example
+	"aws_s3control_access_point_policy": FormattedIdentifierFromProvider("", "access_point_arn"),
+	// S3 Control Buckets can be imported using Amazon Resource Name (ARN)
+	// arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-12345678/bucket/example
+	"aws_s3control_bucket": config.IdentifierFromProvider,
+	// S3 Control Bucket Lifecycle Configurations can be imported using the Amazon Resource Name (ARN)
+	// arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-12345678/bucket/example
+	"aws_s3control_bucket_lifecycle_configuration": config.IdentifierFromProvider,
+	// S3 Control Bucket Policies can be imported using the Amazon Resource Name (ARN)
+	// arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-12345678/bucket/example
+	"aws_s3control_bucket_policy": config.IdentifierFromProvider,
+
+	// elasticbeanstalk
+	//
+	// Elastic Beanstalk Applications can be imported using the name
+	"aws_elastic_beanstalk_application": config.NameAsIdentifier,
+	// No import
+	"aws_elastic_beanstalk_application_version": config.NameAsIdentifier,
+	// No import
+	"aws_elastic_beanstalk_configuration_template": config.NameAsIdentifier,
+	// Elastic Beanstalk Environments can be imported using the id
+	"aws_elastic_beanstalk_environment": config.IdentifierFromProvider,
+
+	// elasticsearch
+	//
+	// Elasticsearch domains can be imported using the domain_name
+	"aws_elasticsearch_domain": config.ParameterAsIdentifier("domain_name"),
+	// No import
+	"aws_elasticsearch_domain_policy": config.IdentifierFromProvider,
+	// Elasticsearch domains can be imported using the domain_name
+	"aws_elasticsearch_domain_saml_options": config.ParameterAsIdentifier("domain_name"),
 }
