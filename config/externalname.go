@@ -1611,7 +1611,7 @@ func kmsAlias() config.ExternalName {
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
 		id, ok := tfstate["id"]
 		if !ok {
-			return "", errors.Errorf("id attribute missing from state file")
+			return "", errors.New("id attribute missing from state file")
 		}
 
 		idStr, ok := id.(string)
