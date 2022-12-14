@@ -2,6 +2,7 @@ apiVersion: grafana.aws.upbound.io/v1beta1
 kind: LicenseAssociation
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Depends on Workspace resource with manual intervention"
     meta.upbound.io/example-id: grafana/v1beta1/licenseassociation
   labels:
     testing.upbound.io/example-name: example
@@ -20,6 +21,7 @@ apiVersion: grafana.aws.upbound.io/v1beta1
 kind: Workspace
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Requires unique name to be specified which must consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character"
     meta.upbound.io/example-id: grafana/v1beta1/licenseassociation
   labels:
     testing.upbound.io/example-name: ws
