@@ -196,7 +196,10 @@ func Configure(p *config.Provider) {
 		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
-				"self", "source_security_group_id",
+				"cidr_blocks",
+				"ipv6_cidr_blocks",
+				"self",
+				"source_security_group_id",
 			},
 		}
 	})
