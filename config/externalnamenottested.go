@@ -314,11 +314,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// TODO: validation may kick in, in which case we can use config.IdentifierFromProvider
 	"aws_ecs_task_set": TemplatedStringAsIdentifierWithNoName("{{ .external_name }},{{ .parameters.service }},{{ .parameters.cluster }}"),
 
-	// grafana
-	//
-	// Grafana workspace license association can be imported using the workspace's id
-	"aws_grafana_license_association": FormattedIdentifierFromProvider("", "workspace_id"),
-
 	// gamelift
 	//
 	// GameLift Game Server Group can be imported using the name
