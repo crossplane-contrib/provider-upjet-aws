@@ -59,6 +59,14 @@ type AssumeRoleWithWebIdentityOptions struct {
 	RoleSessionName string `json:"roleSessionName,omitempty"`
 }
 
+// Upbound defines the options for authenticating using Upbound as an identity
+// provider.
+type Upbound struct {
+	// WebIdentity defines the options for assuming an IAM role with a Web
+	// Identity.
+	WebIdentity *AssumeRoleWithWebIdentityOptions `json:"webIdentity,omitempty"`
+}
+
 // EndpointConfig is used to configure the AWS client for a custom endpoint.
 type EndpointConfig struct {
 	// URL lets you configure the endpoint URL to be used in SDK calls.
@@ -172,11 +180,14 @@ type Tag struct {
 // ProviderCredentials required to authenticate.
 type ProviderCredentials struct {
 	// Source of the provider credentials.
-	// +kubebuilder:validation:Enum=None;Secret;IRSA;WebIdentity
+	// +kubebuilder:validation:Enum=None;Secret;IRSA;WebIdentity;Upbound
 	Source xpv1.CredentialsSource `json:"source"`
 
-	// WebIdentity defines the options for assuming an IAM role with a Web Identity
+	// WebIdentity defines the options for assuming an IAM role with a Web Identity.
 	WebIdentity *AssumeRoleWithWebIdentityOptions `json:"webIdentity,omitempty"`
+
+	// Upbound defines the options for authenticating using Upbound as an identity provider.
+	Upbound *Upbound `json:"upbound,omitempty"`
 
 	xpv1.CommonCredentialSelectors `json:",inline"`
 }
