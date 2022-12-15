@@ -8,6 +8,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -38,11 +39,17 @@ const (
 	// authentication types
 	authKeyIRSA        = "IRSA"
 	authKeyWebIdentity = "WebIdentity"
+	authKeyUpbound     = "Upbound"
 	// authKeySAML        = "SAML"
 
 	envWebIdentityTokenFile = "AWS_WEB_IDENTITY_TOKEN_FILE"
 	errRoleChainConfig      = "failed to load assumed role AWS config"
 	errAWSConfig            = "failed to get AWS config"
+	errAWSConfigIRSA        = "failed to get AWS config using IAM Roles for Service Accounts"
+	errAWSConfigWebIdentity = "failed to get AWS config using web identity token"
+	errAWSConfigUpbound     = "failed to get AWS config using Upbound identity"
+
+	upboundProviderIdentityTokenFile = "/var/run/secrets/upbound.io/provider/token"
 )
 
 // GlobalRegion is the region name used for AWS services that do not have a notion
@@ -97,14 +104,19 @@ func GetAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*a
 	var cfg *aws.Config
 	switch s := pc.Spec.Credentials.Source; s { //nolint:exhaustive
 	case authKeyIRSA:
-		cfg, err = UsePodServiceAccount(ctx, region)
+		cfg, err = UseDefault(ctx, region)
 		if err != nil {
-			return nil, errors.Wrap(err, errAWSConfig)
+			return nil, errors.Wrap(err, errAWSConfigIRSA)
 		}
 	case authKeyWebIdentity:
 		cfg, err = UseWebIdentityToken(ctx, region, &pc.Spec)
 		if err != nil {
-			return nil, errors.Wrap(err, errAWSConfig)
+			return nil, errors.Wrap(err, errAWSConfigWebIdentity)
+		}
+	case authKeyUpbound:
+		cfg, err = UseUpbound(ctx, region, &pc.Spec)
+		if err != nil {
+			return nil, errors.Wrap(err, errAWSConfigUpbound)
 		}
 	default:
 		data, err := resource.CommonCredentialExtractor(ctx, s, c, pc.Spec.Credentials.CommonCredentialSelectors)
@@ -274,10 +286,7 @@ func GetRoleChainConfig(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, cf
 
 // GetAssumeRoleWithWebIdentityConfig returns an aws.Config capable of doing
 // AssumeRoleWithWebIdentity.
-func GetAssumeRoleWithWebIdentityConfig(ctx context.Context, cfg *aws.Config, pcs *v1beta1.ProviderConfigSpec) (*aws.Config, error) {
-	if pcs.Credentials.WebIdentity == nil {
-		return nil, errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
-	}
+func GetAssumeRoleWithWebIdentityConfig(ctx context.Context, cfg *aws.Config, webID v1beta1.AssumeRoleWithWebIdentityOptions, tokenFile string) (*aws.Config, error) {
 	stsclient := sts.NewFromConfig(*cfg) //nolint:contextcheck
 	awsConfig, err := config.LoadDefaultConfig(
 		ctx,
@@ -286,9 +295,9 @@ func GetAssumeRoleWithWebIdentityConfig(ctx context.Context, cfg *aws.Config, pc
 		config.WithCredentialsProvider(aws.NewCredentialsCache(
 			stscreds.NewWebIdentityRoleProvider(
 				stsclient,
-				aws.ToString(pcs.Credentials.WebIdentity.RoleARN),
-				stscreds.IdentityTokenFile(os.Getenv(envWebIdentityTokenFile)),
-				SetWebIdentityRoleOptions(*pcs.Credentials.WebIdentity),
+				aws.ToString(webID.RoleARN),
+				stscreds.IdentityTokenFile(filepath.Clean(tokenFile)),
+				SetWebIdentityRoleOptions(webID),
 			)),
 		),
 	)
@@ -298,9 +307,8 @@ func GetAssumeRoleWithWebIdentityConfig(ctx context.Context, cfg *aws.Config, pc
 	return &awsConfig, nil
 }
 
-// UsePodServiceAccount assumes an IAM role configured via a ServiceAccount.
-// https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
-func UsePodServiceAccount(ctx context.Context, region string) (*aws.Config, error) {
+// UseDefault loads the default AWS config with the specified region.
+func UseDefault(ctx context.Context, region string) (*aws.Config, error) {
 	if region == GlobalRegion {
 		cfg, err := config.LoadDefaultConfig(
 			ctx,
@@ -321,13 +329,35 @@ func UsePodServiceAccount(ctx context.Context, region string) (*aws.Config, erro
 
 // UseWebIdentityToken calls sts.AssumeRoleWithWebIdentity using
 // the configuration supplied in ProviderConfig's
-// spec.credentianls.assumeRoleWithWebIdentity.
+// spec.credentials.assumeRoleWithWebIdentity.
 func UseWebIdentityToken(ctx context.Context, region string, pcs *v1beta1.ProviderConfigSpec) (*aws.Config, error) {
-	cfg, err := UsePodServiceAccount(ctx, region)
+	cfg, err := UseDefault(ctx, region)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to get pod service account AWS config")
+		return nil, errors.Wrap(err, "failed to get default AWS config")
 	}
-	return GetAssumeRoleWithWebIdentityConfig(ctx, cfg, pcs)
+	if pcs.Credentials.WebIdentity == nil {
+		return nil, errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
+	}
+	return GetAssumeRoleWithWebIdentityConfig(ctx, cfg, *pcs.Credentials.WebIdentity, os.Getenv(envWebIdentityTokenFile))
+}
+
+// UseUpbound calls sts.AssumeRoleWithWebIdentity using the configuration
+// supplied in ProviderConfig's spec.credentials.assumeRoleWithWebIdentity and
+// the identity supplied by the injected Upbound OIDC token.
+// NOTE(hasheddan): this is the same functionality used for generic web identity
+// token role assumption, but uses fields under Upbound in the ProviderConfig
+// spec and the dedicated Upbound token injection path. This allows for clear
+// separation of intent by users when exercising the functionality, and allows
+// for uniformity across ProviderConfigs from other providers.
+func UseUpbound(ctx context.Context, region string, pcs *v1beta1.ProviderConfigSpec) (*aws.Config, error) {
+	cfg, err := UseDefault(ctx, region)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to get default AWS config ")
+	}
+	if pcs.Credentials.Upbound == nil || pcs.Credentials.Upbound.WebIdentity == nil {
+		return nil, errors.New(`spec.credentials.upbound.webIdentity of ProviderConfig cannot be nil when the credential source is "Upbound"`)
+	}
+	return GetAssumeRoleWithWebIdentityConfig(ctx, cfg, *pcs.Credentials.Upbound.WebIdentity, upboundProviderIdentityTokenFile)
 }
 
 // SetAssumeRoleOptions sets options when Assuming an IAM Role
