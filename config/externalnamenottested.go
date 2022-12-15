@@ -241,10 +241,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_vpc_ipam_preview_next_cidr": config.IdentifierFromProvider,
 	// aws_vpc_ipv6_cidr_block_association can be imported by using the VPC CIDR Association ID
 	"aws_vpc_ipv6_cidr_block_association": config.IdentifierFromProvider,
-	// VPC Peering Connection Accepters can be imported by using the Peering Connection ID
-	"aws_vpc_peering_connection_accepter": config.ParameterAsIdentifier("vpc_peering_connection_id"),
-	// VPC Peering Connection Options can be imported using the vpc peering id
-	"aws_vpc_peering_connection_options": config.ParameterAsIdentifier("vpc_peering_connection_id"),
 
 	// securityhub
 	//

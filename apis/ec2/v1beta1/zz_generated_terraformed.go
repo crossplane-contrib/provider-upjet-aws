@@ -6401,6 +6401,154 @@ func (tr *VPCPeeringConnection) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this VPCPeeringConnectionAccepter
+func (mg *VPCPeeringConnectionAccepter) GetTerraformResourceType() string {
+	return "aws_vpc_peering_connection_accepter"
+}
+
+// GetConnectionDetailsMapping for this VPCPeeringConnectionAccepter
+func (tr *VPCPeeringConnectionAccepter) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this VPCPeeringConnectionAccepter
+func (tr *VPCPeeringConnectionAccepter) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this VPCPeeringConnectionAccepter
+func (tr *VPCPeeringConnectionAccepter) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this VPCPeeringConnectionAccepter
+func (tr *VPCPeeringConnectionAccepter) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this VPCPeeringConnectionAccepter
+func (tr *VPCPeeringConnectionAccepter) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this VPCPeeringConnectionAccepter
+func (tr *VPCPeeringConnectionAccepter) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this VPCPeeringConnectionAccepter using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *VPCPeeringConnectionAccepter) LateInitialize(attrs []byte) (bool, error) {
+	params := &VPCPeeringConnectionAccepterParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *VPCPeeringConnectionAccepter) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this VPCPeeringConnectionOptions
+func (mg *VPCPeeringConnectionOptions) GetTerraformResourceType() string {
+	return "aws_vpc_peering_connection_options"
+}
+
+// GetConnectionDetailsMapping for this VPCPeeringConnectionOptions
+func (tr *VPCPeeringConnectionOptions) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this VPCPeeringConnectionOptions
+func (tr *VPCPeeringConnectionOptions) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this VPCPeeringConnectionOptions
+func (tr *VPCPeeringConnectionOptions) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this VPCPeeringConnectionOptions
+func (tr *VPCPeeringConnectionOptions) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this VPCPeeringConnectionOptions
+func (tr *VPCPeeringConnectionOptions) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this VPCPeeringConnectionOptions
+func (tr *VPCPeeringConnectionOptions) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this VPCPeeringConnectionOptions using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *VPCPeeringConnectionOptions) LateInitialize(attrs []byte) (bool, error) {
+	params := &VPCPeeringConnectionOptionsParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *VPCPeeringConnectionOptions) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this VPNConnection
 func (mg *VPNConnection) GetTerraformResourceType() string {
 	return "aws_vpn_connection"

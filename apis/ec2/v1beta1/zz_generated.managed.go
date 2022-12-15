@@ -5617,6 +5617,138 @@ func (mg *VPCPeeringConnection) SetWriteConnectionSecretToReference(r *xpv1.Secr
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this VPCPeeringConnectionAccepter.
+func (mg *VPCPeeringConnectionAccepter) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this VPCPeeringConnectionAccepter.
+func (mg *VPCPeeringConnectionAccepter) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this VPCPeeringConnectionAccepter.
+func (mg *VPCPeeringConnectionAccepter) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this VPCPeeringConnectionAccepter.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *VPCPeeringConnectionAccepter) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this VPCPeeringConnectionAccepter.
+func (mg *VPCPeeringConnectionAccepter) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this VPCPeeringConnectionAccepter.
+func (mg *VPCPeeringConnectionAccepter) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VPCPeeringConnectionAccepter.
+func (mg *VPCPeeringConnectionAccepter) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this VPCPeeringConnectionAccepter.
+func (mg *VPCPeeringConnectionAccepter) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this VPCPeeringConnectionAccepter.
+func (mg *VPCPeeringConnectionAccepter) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this VPCPeeringConnectionAccepter.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *VPCPeeringConnectionAccepter) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this VPCPeeringConnectionAccepter.
+func (mg *VPCPeeringConnectionAccepter) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this VPCPeeringConnectionAccepter.
+func (mg *VPCPeeringConnectionAccepter) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this VPCPeeringConnectionOptions.
+func (mg *VPCPeeringConnectionOptions) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this VPCPeeringConnectionOptions.
+func (mg *VPCPeeringConnectionOptions) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this VPCPeeringConnectionOptions.
+func (mg *VPCPeeringConnectionOptions) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this VPCPeeringConnectionOptions.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *VPCPeeringConnectionOptions) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this VPCPeeringConnectionOptions.
+func (mg *VPCPeeringConnectionOptions) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this VPCPeeringConnectionOptions.
+func (mg *VPCPeeringConnectionOptions) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VPCPeeringConnectionOptions.
+func (mg *VPCPeeringConnectionOptions) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this VPCPeeringConnectionOptions.
+func (mg *VPCPeeringConnectionOptions) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this VPCPeeringConnectionOptions.
+func (mg *VPCPeeringConnectionOptions) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this VPCPeeringConnectionOptions.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *VPCPeeringConnectionOptions) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this VPCPeeringConnectionOptions.
+func (mg *VPCPeeringConnectionOptions) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this VPCPeeringConnectionOptions.
+func (mg *VPCPeeringConnectionOptions) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this VPNConnection.
 func (mg *VPNConnection) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
