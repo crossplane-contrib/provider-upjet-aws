@@ -19,6 +19,7 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ConnectSettings); i3++ {
@@ -37,6 +38,24 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 		}
 		mg.Spec.ForProvider.ConnectSettings[i3].VPCID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.ConnectSettings[i3].VPCIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCSettings); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCSettings[i3].SubnetIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.VPCSettings[i3].SubnetIdsRefs,
+			Selector:      mg.Spec.ForProvider.VPCSettings[i3].SubnetIdsSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.VPCSettings[i3].SubnetIds")
+		}
+		mg.Spec.ForProvider.VPCSettings[i3].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.VPCSettings[i3].SubnetIdsRefs = mrsp.ResolvedReferences
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCSettings); i3++ {

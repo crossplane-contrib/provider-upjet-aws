@@ -2,8 +2,8 @@ apiVersion: ds.aws.upbound.io/v1beta1
 kind: Directory
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource needs a valid subnetIds values."
     meta.upbound.io/example-id: ds/v1beta1/directory
+    uptest.upbound.io/timeout: "3600" # one hour timeout
   labels:
     testing.upbound.io/example-name: bar
   name: bar
@@ -19,9 +19,9 @@ spec:
     tags:
       Project: foo
     vpcSettings:
-      - subnetIds:
-          - "subnet-0dd55c657e320dc88"
-          - "subnet-01d7650bd91693a9f"
+      - subnetIdsRefs:
+          - name: foo
+          - name: bar
         vpcIdSelector:
           matchLabels:
             testing.upbound.io/example-name: main

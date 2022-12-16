@@ -18,9 +18,9 @@ spec:
     tags:
       Project: foo
     vpcSettings:
-    - subnetIds:
-      - ${aws_subnet.foo.id}
-      - ${aws_subnet.bar.id}
+    - subnetIdsRefs:
+      - name: foo
+      - name: bar
       vpcIdSelector:
         matchLabels:
           testing.upbound.io/example-name: main
