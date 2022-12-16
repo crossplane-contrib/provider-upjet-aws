@@ -511,6 +511,8 @@ import (
 	trafficpolicyinstance "github.com/upbound/provider-aws/internal/controller/route53/trafficpolicyinstance"
 	vpcassociationauthorization "github.com/upbound/provider-aws/internal/controller/route53/vpcassociationauthorization"
 	zone "github.com/upbound/provider-aws/internal/controller/route53/zone"
+	recoverygroup "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/recoverygroup"
+	resourceset "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/resourceset"
 	endpoint "github.com/upbound/provider-aws/internal/controller/route53resolver/endpoint"
 	ruleroute53resolver "github.com/upbound/provider-aws/internal/controller/route53resolver/rule"
 	ruleassociation "github.com/upbound/provider-aws/internal/controller/route53resolver/ruleassociation"
@@ -536,6 +538,9 @@ import (
 	bucketversioning "github.com/upbound/provider-aws/internal/controller/s3/bucketversioning"
 	bucketwebsiteconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketwebsiteconfiguration"
 	object "github.com/upbound/provider-aws/internal/controller/s3/object"
+	accesspoints3control "github.com/upbound/provider-aws/internal/controller/s3control/accesspoint"
+	accesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/accesspointpolicy"
+	accountpublicaccessblock "github.com/upbound/provider-aws/internal/controller/s3control/accountpublicaccessblock"
 	secret "github.com/upbound/provider-aws/internal/controller/secretsmanager/secret"
 	secretpolicy "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretpolicy"
 	secretrotation "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretrotation"
@@ -1083,6 +1088,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		trafficpolicyinstance.Setup,
 		vpcassociationauthorization.Setup,
 		zone.Setup,
+		recoverygroup.Setup,
+		resourceset.Setup,
 		endpoint.Setup,
 		ruleroute53resolver.Setup,
 		ruleassociation.Setup,
@@ -1108,6 +1115,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		bucketversioning.Setup,
 		bucketwebsiteconfiguration.Setup,
 		object.Setup,
+		accesspoints3control.Setup,
+		accesspointpolicy.Setup,
+		accountpublicaccessblock.Setup,
 		secret.Setup,
 		secretpolicy.Setup,
 		secretrotation.Setup,
