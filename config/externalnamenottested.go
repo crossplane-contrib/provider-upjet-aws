@@ -394,4 +394,22 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_elasticsearch_domain_policy": config.IdentifierFromProvider,
 	// Elasticsearch domains can be imported using the domain_name
 	"aws_elasticsearch_domain_saml_options": config.ParameterAsIdentifier("domain_name"),
+
+	// elasticloadbalancing
+	//
+	// Application cookie stickiness policies can be imported using the ELB name, port, and policy name separated by colons (:)
+	"aws_app_cookie_stickiness_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.load_balancer }}:{{ .parameters.lb_port }}:{{ .external_name }}"),
+	// No import
+	"aws_lb_cookie_stickiness_policy": config.IdentifierFromProvider,
+
+	// emr
+	//
+	// EMR clusters can be imported using the id
+	"aws_emr_cluster": config.IdentifierFromProvider,
+	// EMR Instance Fleet can be imported with the EMR Cluster identifier and Instance Fleet identifier separated by a forward slash (/)
+	"aws_emr_instance_fleet": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cluster_id }}/{{ .external_name }}"),
+	// EMR Security Configurations can be imported using the name
+	"aws_emr_security_configuration": config.NameAsIdentifier,
+	// EKS Clusters can be imported using the id
+	"aws_emrcontainers_virtual_cluster": config.ParameterAsIdentifier("id"),
 }
