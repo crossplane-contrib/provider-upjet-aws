@@ -182,6 +182,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_ipv4_cidr_block_association": config.IdentifierFromProvider,
 	// Imported using the vpc peering id: pcx-111aaa111
 	"aws_vpc_peering_connection": config.IdentifierFromProvider,
+	// Imported using the vpc peering id: pcx-111aaa111
+	"aws_vpc_peering_connection_options": config.IdentifierFromProvider,
+	// Imported using the peering connection id: pcx-12345678
+	"aws_vpc_peering_connection_accepter": config.IdentifierFromProvider,
 	// Imported using the following format: ROUTETABLEID_DESTINATION
 	"aws_route": route(),
 	// Imported using id: rtb-4e616f6d69

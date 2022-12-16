@@ -2861,6 +2861,58 @@ func (mg *VPCPeeringConnection) ResolveReferences(ctx context.Context, c client.
 	return nil
 }
 
+// ResolveReferences of this VPCPeeringConnectionAccepter.
+func (mg *VPCPeeringConnectionAccepter) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCPeeringConnectionID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VPCPeeringConnectionIDRef,
+		Selector:     mg.Spec.ForProvider.VPCPeeringConnectionIDSelector,
+		To: reference.To{
+			List:    &VPCPeeringConnectionList{},
+			Managed: &VPCPeeringConnection{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCPeeringConnectionID")
+	}
+	mg.Spec.ForProvider.VPCPeeringConnectionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPCPeeringConnectionIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VPCPeeringConnectionOptions.
+func (mg *VPCPeeringConnectionOptions) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCPeeringConnectionID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VPCPeeringConnectionIDRef,
+		Selector:     mg.Spec.ForProvider.VPCPeeringConnectionIDSelector,
+		To: reference.To{
+			List:    &VPCPeeringConnectionList{},
+			Managed: &VPCPeeringConnection{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCPeeringConnectionID")
+	}
+	mg.Spec.ForProvider.VPCPeeringConnectionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPCPeeringConnectionIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this VPNConnection.
 func (mg *VPNConnection) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

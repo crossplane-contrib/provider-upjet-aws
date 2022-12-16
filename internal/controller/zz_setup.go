@@ -328,6 +328,8 @@ import (
 	vpcipamscope "github.com/upbound/provider-aws/internal/controller/ec2/vpcipamscope"
 	vpcipv4cidrblockassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcipv4cidrblockassociation"
 	vpcpeeringconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnection"
+	vpcpeeringconnectionaccepter "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnectionaccepter"
+	vpcpeeringconnectionoptions "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnectionoptions"
 	vpnconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpnconnection"
 	vpnconnectionroute "github.com/upbound/provider-aws/internal/controller/ec2/vpnconnectionroute"
 	vpngateway "github.com/upbound/provider-aws/internal/controller/ec2/vpngateway"
@@ -894,6 +896,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcipamscope.Setup,
 		vpcipv4cidrblockassociation.Setup,
 		vpcpeeringconnection.Setup,
+		vpcpeeringconnectionaccepter.Setup,
+		vpcpeeringconnectionoptions.Setup,
 		vpnconnection.Setup,
 		vpnconnectionroute.Setup,
 		vpngateway.Setup,
