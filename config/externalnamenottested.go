@@ -145,14 +145,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// directconnect
 	//
 	// No import
-	"aws_dx_bgp_peer": config.IdentifierFromProvider,
-	// No import
 	"aws_dx_connection_confirmation": config.IdentifierFromProvider,
-	// Direct Connect gateway associations can be imported using dx_gateway_id together with associated_gateway_id
-	// TODO: associated_gateway_id parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
-	"aws_dx_gateway_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.dx_gateway_id }}/{{ .parameters.associated_gateway_id }}"),
-	//
-	"aws_dx_gateway_association_proposal": config.IdentifierFromProvider,
 	// No import
 	"aws_dx_hosted_connection": config.IdentifierFromProvider,
 	// Direct Connect hosted private virtual interfaces can be imported using the vif id
@@ -167,8 +160,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_dx_hosted_transit_virtual_interface": config.IdentifierFromProvider,
 	// Direct Connect hosted transit virtual interfaces can be imported using the vif id
 	"aws_dx_hosted_transit_virtual_interface_accepter": config.ParameterAsIdentifier("virtual_interface_id"),
-	// Direct Connect private virtual interfaces can be imported using the vif id
-	"aws_dx_private_virtual_interface": config.IdentifierFromProvider,
 
 	// dlm
 	//

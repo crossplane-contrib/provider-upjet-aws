@@ -1479,6 +1479,15 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_dx_lag": config.IdentifierFromProvider,
 	// Direct Connect transit virtual interfaces can be imported using the vif id
 	"aws_dx_transit_virtual_interface": config.IdentifierFromProvider,
+	// Direct Connect private virtual interfaces can be imported using the vif id
+	"aws_dx_private_virtual_interface": config.IdentifierFromProvider,
+	//
+	"aws_dx_gateway_association_proposal": config.IdentifierFromProvider,
+	// Direct Connect gateway associations can be imported using dx_gateway_id together with associated_gateway_id
+	// TODO: associated_gateway_id parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
+	"aws_dx_gateway_association": config.IdentifierFromProvider,
+	// No import
+	"aws_dx_bgp_peer": config.IdentifierFromProvider,
 
 	// appconfig
 	//

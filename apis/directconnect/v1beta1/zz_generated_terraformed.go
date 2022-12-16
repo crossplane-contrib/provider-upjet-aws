@@ -13,6 +13,80 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this BGPPeer
+func (mg *BGPPeer) GetTerraformResourceType() string {
+	return "aws_dx_bgp_peer"
+}
+
+// GetConnectionDetailsMapping for this BGPPeer
+func (tr *BGPPeer) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this BGPPeer
+func (tr *BGPPeer) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this BGPPeer
+func (tr *BGPPeer) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this BGPPeer
+func (tr *BGPPeer) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this BGPPeer
+func (tr *BGPPeer) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this BGPPeer
+func (tr *BGPPeer) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this BGPPeer using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *BGPPeer) LateInitialize(attrs []byte) (bool, error) {
+	params := &BGPPeerParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *BGPPeer) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Connection
 func (mg *Connection) GetTerraformResourceType() string {
 	return "aws_dx_connection"
@@ -235,6 +309,155 @@ func (tr *Gateway) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this GatewayAssociation
+func (mg *GatewayAssociation) GetTerraformResourceType() string {
+	return "aws_dx_gateway_association"
+}
+
+// GetConnectionDetailsMapping for this GatewayAssociation
+func (tr *GatewayAssociation) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this GatewayAssociation
+func (tr *GatewayAssociation) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this GatewayAssociation
+func (tr *GatewayAssociation) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this GatewayAssociation
+func (tr *GatewayAssociation) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this GatewayAssociation
+func (tr *GatewayAssociation) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this GatewayAssociation
+func (tr *GatewayAssociation) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this GatewayAssociation using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *GatewayAssociation) LateInitialize(attrs []byte) (bool, error) {
+	params := &GatewayAssociationParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("AssociatedGatewayOwnerAccountID"))
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *GatewayAssociation) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this GatewayAssociationProposal
+func (mg *GatewayAssociationProposal) GetTerraformResourceType() string {
+	return "aws_dx_gateway_association_proposal"
+}
+
+// GetConnectionDetailsMapping for this GatewayAssociationProposal
+func (tr *GatewayAssociationProposal) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this GatewayAssociationProposal
+func (tr *GatewayAssociationProposal) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this GatewayAssociationProposal
+func (tr *GatewayAssociationProposal) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this GatewayAssociationProposal
+func (tr *GatewayAssociationProposal) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this GatewayAssociationProposal
+func (tr *GatewayAssociationProposal) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this GatewayAssociationProposal
+func (tr *GatewayAssociationProposal) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this GatewayAssociationProposal using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *GatewayAssociationProposal) LateInitialize(attrs []byte) (bool, error) {
+	params := &GatewayAssociationProposalParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *GatewayAssociationProposal) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Lag
 func (mg *Lag) GetTerraformResourceType() string {
 	return "aws_dx_lag"
@@ -306,6 +529,80 @@ func (tr *Lag) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Lag) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this PrivateVirtualInterface
+func (mg *PrivateVirtualInterface) GetTerraformResourceType() string {
+	return "aws_dx_private_virtual_interface"
+}
+
+// GetConnectionDetailsMapping for this PrivateVirtualInterface
+func (tr *PrivateVirtualInterface) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PrivateVirtualInterface
+func (tr *PrivateVirtualInterface) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PrivateVirtualInterface
+func (tr *PrivateVirtualInterface) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PrivateVirtualInterface
+func (tr *PrivateVirtualInterface) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PrivateVirtualInterface
+func (tr *PrivateVirtualInterface) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PrivateVirtualInterface
+func (tr *PrivateVirtualInterface) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PrivateVirtualInterface using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PrivateVirtualInterface) LateInitialize(attrs []byte) (bool, error) {
+	params := &PrivateVirtualInterfaceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PrivateVirtualInterface) GetTerraformSchemaVersion() int {
 	return 0
 }
 

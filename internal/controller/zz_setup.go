@@ -223,10 +223,14 @@ import (
 	project "github.com/upbound/provider-aws/internal/controller/devicefarm/project"
 	testgridproject "github.com/upbound/provider-aws/internal/controller/devicefarm/testgridproject"
 	upload "github.com/upbound/provider-aws/internal/controller/devicefarm/upload"
+	bgppeer "github.com/upbound/provider-aws/internal/controller/directconnect/bgppeer"
 	connectiondirectconnect "github.com/upbound/provider-aws/internal/controller/directconnect/connection"
 	connectionassociation "github.com/upbound/provider-aws/internal/controller/directconnect/connectionassociation"
 	gateway "github.com/upbound/provider-aws/internal/controller/directconnect/gateway"
+	gatewayassociation "github.com/upbound/provider-aws/internal/controller/directconnect/gatewayassociation"
+	gatewayassociationproposal "github.com/upbound/provider-aws/internal/controller/directconnect/gatewayassociationproposal"
 	lag "github.com/upbound/provider-aws/internal/controller/directconnect/lag"
+	privatevirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/privatevirtualinterface"
 	publicvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/publicvirtualinterface"
 	transitvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/transitvirtualinterface"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
@@ -791,10 +795,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		project.Setup,
 		testgridproject.Setup,
 		upload.Setup,
+		bgppeer.Setup,
 		connectiondirectconnect.Setup,
 		connectionassociation.Setup,
 		gateway.Setup,
+		gatewayassociation.Setup,
+		gatewayassociationproposal.Setup,
 		lag.Setup,
+		privatevirtualinterface.Setup,
 		publicvirtualinterface.Setup,
 		transitvirtualinterface.Setup,
 		clusterdocdb.Setup,
