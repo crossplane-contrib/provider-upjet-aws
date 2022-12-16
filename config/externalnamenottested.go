@@ -394,4 +394,181 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_elasticsearch_domain_policy": config.IdentifierFromProvider,
 	// Elasticsearch domains can be imported using the domain_name
 	"aws_elasticsearch_domain_saml_options": config.ParameterAsIdentifier("domain_name"),
+
+	// elastictranscoder
+	//
+	// Elastic Transcoder pipelines can be imported using the id
+	"aws_elastictranscoder_pipeline": config.IdentifierFromProvider,
+	// Elastic Transcoder presets can be imported using the id
+	"aws_elastictranscoder_preset": config.IdentifierFromProvider,
+
+	// elb
+	//
+	// Application cookie stickiness policies can be imported using the ELB name, port, and policy name separated by colons (:)
+	// my-elb:80:my-policy
+	"aws_app_cookie_stickiness_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.load_balancer }}:{{ .parameters.lb_port }}:{{ .external_name }}"),
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lb_cookie_stickiness_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lb_ssl_negotiation_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_load_balancer_backend_server_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_load_balancer_listener_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_load_balancer_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_proxy_protocol_policy": config.IdentifierFromProvider,
+
+	// elbv2
+	//
+	// Listener Certificates can be imported by using the listener arn and certificate arn, separated by an underscore (_)
+	// arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/test/8e4497da625e2d8a/9ab28ade35828f96/67b3d2d36dd7c26b_arn:aws:iam::123456789012:server-certificate/tf-acc-test-6453083910015726063
+	"aws_lb_listener_certificate": config.IdentifierFromProvider,
+	// Rules can be imported using their ARN
+	"aws_lb_listener_rule": config.IdentifierFromProvider,
+
+	// emr
+	//
+	// EMR clusters can be imported using the id
+	"aws_emr_cluster": config.IdentifierFromProvider,
+	// EMR Instance Fleet can be imported with the EMR Cluster identifier and Instance Fleet identifier separated by a forward slash (/)
+	// j-123456ABCDEF/if-15EK4O09RZLNR
+	"aws_emr_instance_fleet": config.IdentifierFromProvider,
+	// EMR task instance group can be imported using their EMR Cluster id and Instance Group id separated by a forward-slash /
+	// j-123456ABCDEF/ig-15EK4O09RZLNR
+	"aws_emr_instance_group": config.IdentifierFromProvider,
+	// EMR Managed Scaling Policies can be imported via the EMR Cluster identifier
+	"aws_emr_managed_scaling_policy": FormattedIdentifierFromProvider("", "cluster_id"),
+	// EMR Security Configurations can be imported using the name
+	"aws_emr_security_configuration": config.NameAsIdentifier,
+	// EMR studios can be imported using the id
+	"aws_emr_studio": config.IdentifierFromProvider,
+	// EMR studio session mappings can be imported using the id, e.g., studio-id:identity-type:identity-id
+	"aws_emr_studio_session_mapping": config.IdentifierFromProvider,
+
+	// emrcontainers
+	//
+	// EKS Clusters can be imported using the id
+	"aws_emrcontainers_virtual_cluster": config.IdentifierFromProvider,
+
+	// fms
+	//
+	// Firewall Manager administrator account association can be imported using the account ID
+	// TODO: account_id parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
+	"aws_fms_admin_account": FormattedIdentifierFromProvider("", "account_id"),
+	// Firewall Manager policies can be imported using the policy ID
+	"aws_fms_policy": config.IdentifierFromProvider,
+
+	// fsx
+	//
+	// FSx Backups can be imported using the id
+	"aws_fsx_backup": config.IdentifierFromProvider,
+	// FSx Data Repository Associations can be imported using the id
+	"aws_fsx_data_repository_association": config.IdentifierFromProvider,
+	// FSx File Systems can be imported using the id
+	"aws_fsx_lustre_file_system": config.IdentifierFromProvider,
+	// FSx File Systems can be imported using the id
+	"aws_fsx_ontap_file_system": config.IdentifierFromProvider,
+	// FSx Storage Virtual Machine can be imported using the id
+	"aws_fsx_ontap_storage_virtual_machine": config.IdentifierFromProvider,
+	// FSx ONTAP volume can be imported using the id
+	"aws_fsx_ontap_volume": config.IdentifierFromProvider,
+	// FSx File Systems can be imported using the id
+	"aws_fsx_openzfs_file_system": config.IdentifierFromProvider,
+	// FSx OpenZFS snapshot can be imported using the id
+	"aws_fsx_openzfs_snapshot": config.IdentifierFromProvider,
+	// FSx Volumes can be imported using the id
+	"aws_fsx_openzfs_volume": config.IdentifierFromProvider,
+	// FSx File Systems can be imported using the id
+	"aws_fsx_windows_file_system": config.IdentifierFromProvider,
+
+	// glacier
+	//
+	// Glacier Vaults can be imported using the name
+	"aws_glacier_vault": config.NameAsIdentifier,
+	// Glacier Vault Locks can be imported using the Glacier Vault name
+	"aws_glacier_vault_lock": FormattedIdentifierFromProvider("", "vault_name"),
+
+	// iot
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_certificate": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_indexing_configuration": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_logging_options": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_policy_attachment": config.IdentifierFromProvider,
+	// IoT fleet provisioning templates can be imported using the name
+	"aws_iot_provisioning_template": config.NameAsIdentifier,
+	// IOT Role Alias can be imported via the alias
+	"aws_iot_role_alias": config.ParameterAsIdentifier("alias"),
+	// IoT Things Groups can be imported using the name
+	"aws_iot_thing_group": config.NameAsIdentifier,
+	// IoT Thing Group Membership can be imported using the thing group name and thing name
+	// thing_group_name/thing_name
+	"aws_iot_thing_group_membership": FormattedIdentifierFromProvider("/", "thing_group_name", "thing_name"),
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_thing_principal_attachment": config.IdentifierFromProvider,
+	// IOT Thing Types can be imported using the name
+	"aws_iot_thing_type": config.NameAsIdentifier,
+	// IoT Topic Rules can be imported using the name
+	"aws_iot_topic_rule": config.NameAsIdentifier,
+	// IoT topic rule destinations can be imported using the arn
+	// arn:aws:iot:us-west-2:123456789012:ruledestination/vpc/2ce781c8-68a6-4c52-9c62-63fe489ecc60
+	"aws_iot_topic_rule_destination": config.IdentifierFromProvider,
+
+	// kafka
+	//
+	// MSK SCRAM Secret Associations can be imported using the id
+	"aws_msk_scram_secret_association": config.IdentifierFromProvider,
+
+	// keyspaces
+	//
+	// Use the name to import a keyspace
+	"aws_keyspaces_keyspace": config.NameAsIdentifier,
+	// Use the keyspace_name and table_name separated by / to import a table
+	// my_keyspace/my_table
+	"aws_keyspaces_table": FormattedIdentifierFromProvider("/", "keyspace_name", "table_name"),
+
+	// lightsail
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lightsail_domain": config.IdentifierFromProvider,
+	// Lightsail Instances can be imported using their name
+	"aws_lightsail_instance": config.NameAsIdentifier,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lightsail_instance_public_ports": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lightsail_key_pair": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lightsail_static_ip": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lightsail_static_ip_attachment": config.IdentifierFromProvider,
+
+	// macie
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_macie_member_account_association": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_macie_s3_bucket_association": config.IdentifierFromProvider,
 }
