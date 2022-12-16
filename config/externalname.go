@@ -1588,6 +1588,27 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// imported using the service action ID. which has provider-generated
 	// random parts: act-f1w12eperfslh
 	"aws_servicecatalog_service_action": config.IdentifierFromProvider,
+
+	// route53recoveryreadiness
+	//
+	// Route53 Recovery Readiness recovery groups can be imported via the recovery group name
+	"aws_route53recoveryreadiness_recovery_group": config.ParameterAsIdentifier("recovery_group_name"),
+	// Route53 Recovery Readiness resource set name can be imported via the resource set name
+	"aws_route53recoveryreadiness_resource_set": config.ParameterAsIdentifier("resource_set_name"),
+
+	// s3control
+	//
+	// - For Access Points associated with an AWS Partition S3 Bucket, this resource
+	// can be imported using the account_id and name separated by a colon (:)
+	// - For Access Points associated with an S3 on Outposts Bucket, this resource
+	// can be imported using the Amazon Resource Name (ARN)
+	// TODO: There are two different import syntaxes for this resource. For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_s3_access_point": config.IdentifierFromProvider,
+	// aws_s3_account_public_access_block can be imported by using the AWS account ID
+	"aws_s3_account_public_access_block": config.IdentifierFromProvider,
+	// Access Point policies can be imported using the access_point_arn
+	// arn:aws:s3:us-west-2:123456789012:accesspoint/example
+	"aws_s3control_access_point_policy": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
