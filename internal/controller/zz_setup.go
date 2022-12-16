@@ -233,6 +233,9 @@ import (
 	privatevirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/privatevirtualinterface"
 	publicvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/publicvirtualinterface"
 	transitvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/transitvirtualinterface"
+	lifecyclepolicy "github.com/upbound/provider-aws/internal/controller/dlm/lifecyclepolicy"
+	certificatedms "github.com/upbound/provider-aws/internal/controller/dms/certificate"
+	endpoint "github.com/upbound/provider-aws/internal/controller/dms/endpoint"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
 	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/docdb/clusterparametergroup"
@@ -240,6 +243,7 @@ import (
 	eventsubscription "github.com/upbound/provider-aws/internal/controller/docdb/eventsubscription"
 	globalcluster "github.com/upbound/provider-aws/internal/controller/docdb/globalcluster"
 	subnetgroupdocdb "github.com/upbound/provider-aws/internal/controller/docdb/subnetgroup"
+	directory "github.com/upbound/provider-aws/internal/controller/ds/directory"
 	contributorinsights "github.com/upbound/provider-aws/internal/controller/dynamodb/contributorinsights"
 	globaltable "github.com/upbound/provider-aws/internal/controller/dynamodb/globaltable"
 	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
@@ -339,7 +343,7 @@ import (
 	vpngateway "github.com/upbound/provider-aws/internal/controller/ec2/vpngateway"
 	vpngatewayattachment "github.com/upbound/provider-aws/internal/controller/ec2/vpngatewayattachment"
 	vpngatewayroutepropagation "github.com/upbound/provider-aws/internal/controller/ec2/vpngatewayroutepropagation"
-	lifecyclepolicy "github.com/upbound/provider-aws/internal/controller/ecr/lifecyclepolicy"
+	lifecyclepolicyecr "github.com/upbound/provider-aws/internal/controller/ecr/lifecyclepolicy"
 	pullthroughcacherule "github.com/upbound/provider-aws/internal/controller/ecr/pullthroughcacherule"
 	registrypolicy "github.com/upbound/provider-aws/internal/controller/ecr/registrypolicy"
 	registryscanningconfiguration "github.com/upbound/provider-aws/internal/controller/ecr/registryscanningconfiguration"
@@ -513,7 +517,7 @@ import (
 	zone "github.com/upbound/provider-aws/internal/controller/route53/zone"
 	recoverygroup "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/recoverygroup"
 	resourceset "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/resourceset"
-	endpoint "github.com/upbound/provider-aws/internal/controller/route53resolver/endpoint"
+	endpointroute53resolver "github.com/upbound/provider-aws/internal/controller/route53resolver/endpoint"
 	ruleroute53resolver "github.com/upbound/provider-aws/internal/controller/route53resolver/rule"
 	ruleassociation "github.com/upbound/provider-aws/internal/controller/route53resolver/ruleassociation"
 	bucket "github.com/upbound/provider-aws/internal/controller/s3/bucket"
@@ -810,6 +814,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		privatevirtualinterface.Setup,
 		publicvirtualinterface.Setup,
 		transitvirtualinterface.Setup,
+		lifecyclepolicy.Setup,
+		certificatedms.Setup,
+		endpoint.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,
 		clusterparametergroup.Setup,
@@ -817,6 +824,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventsubscription.Setup,
 		globalcluster.Setup,
 		subnetgroupdocdb.Setup,
+		directory.Setup,
 		contributorinsights.Setup,
 		globaltable.Setup,
 		kinesisstreamingdestination.Setup,
@@ -916,7 +924,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpngateway.Setup,
 		vpngatewayattachment.Setup,
 		vpngatewayroutepropagation.Setup,
-		lifecyclepolicy.Setup,
+		lifecyclepolicyecr.Setup,
 		pullthroughcacherule.Setup,
 		registrypolicy.Setup,
 		registryscanningconfiguration.Setup,
@@ -1090,7 +1098,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		zone.Setup,
 		recoverygroup.Setup,
 		resourceset.Setup,
-		endpoint.Setup,
+		endpointroute53resolver.Setup,
 		ruleroute53resolver.Setup,
 		ruleassociation.Setup,
 		bucket.Setup,

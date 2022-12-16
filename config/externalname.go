@@ -1609,6 +1609,23 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Access Point policies can be imported using the access_point_arn
 	// arn:aws:s3:us-west-2:123456789012:accesspoint/example
 	"aws_s3control_access_point_policy": config.IdentifierFromProvider,
+
+	// dlm
+	//
+	// DLM lifecycle policies can be imported by their policy ID
+	"aws_dlm_lifecycle_policy": config.IdentifierFromProvider,
+
+	// dms
+	//
+	// Certificates can be imported using the certificate_id
+	"aws_dms_certificate": config.ParameterAsIdentifier("certificate_id"),
+	// Endpoints can be imported using the endpoint_id
+	"aws_dms_endpoint": config.ParameterAsIdentifier("endpoint_id"),
+
+	// ds
+	//
+	// DirectoryService directories can be imported using the directory id
+	"aws_directory_service_directory": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

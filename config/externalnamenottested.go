@@ -161,17 +161,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Direct Connect hosted transit virtual interfaces can be imported using the vif id
 	"aws_dx_hosted_transit_virtual_interface_accepter": config.ParameterAsIdentifier("virtual_interface_id"),
 
-	// dlm
-	//
-	// DLM lifecycle policies can be imported by their policy ID
-	"aws_dlm_lifecycle_policy": config.IdentifierFromProvider,
-
 	// dms
 	//
-	// Certificates can be imported using the certificate_id
-	"aws_dms_certificate": config.ParameterAsIdentifier("certificate_id"),
-	// Endpoints can be imported using the endpoint_id
-	"aws_dms_endpoint": config.ParameterAsIdentifier("endpoint_id"),
 	// Event subscriptions can be imported using the name
 	"aws_dms_event_subscription": config.NameAsIdentifier,
 	// Replication instances can be imported using the replication_instance_id
@@ -185,8 +176,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// Conditional forwarders can be imported using the directory id and remote_domain_name: d-1234567890:example.com
 	"aws_directory_service_conditional_forwarder": config.TemplatedStringAsIdentifier("", "{{ .parameters.directory_id }}:{{ .parameters.remote_domain_name }}"),
-	// DirectoryService directories can be imported using the directory id
-	"aws_directory_service_directory": config.IdentifierFromProvider,
 	// Directory Service Log Subscriptions can be imported using the directory id
 	"aws_directory_service_log_subscription": config.ParameterAsIdentifier("directory_id"),
 

@@ -9,7 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/ds/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/lexmodels/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -138,6 +139,32 @@ func (mg *HoursOfOperation) ResolveReferences(ctx context.Context, c client.Read
 	return nil
 }
 
+// ResolveReferences of this Instance.
+func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DirectoryID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DirectoryIDRef,
+		Selector:     mg.Spec.ForProvider.DirectoryIDSelector,
+		To: reference.To{
+			List:    &v1beta11.DirectoryList{},
+			Managed: &v1beta11.Directory{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DirectoryID")
+	}
+	mg.Spec.ForProvider.DirectoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DirectoryIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this LambdaFunctionAssociation.
 func (mg *LambdaFunctionAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -151,8 +178,8 @@ func (mg *LambdaFunctionAssociation) ResolveReferences(ctx context.Context, c cl
 		Reference:    mg.Spec.ForProvider.FunctionArnRef,
 		Selector:     mg.Spec.ForProvider.FunctionArnSelector,
 		To: reference.To{
-			List:    &v1beta11.FunctionList{},
-			Managed: &v1beta11.Function{},
+			List:    &v1beta12.FunctionList{},
+			Managed: &v1beta12.Function{},
 		},
 	})
 	if err != nil {
