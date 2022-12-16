@@ -312,6 +312,13 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// 00b00fd5aecc0ab60a708659477e9617:123456789012
 	"aws_guardduty_threatintelset": config.IdentifierFromProvider,
 
+	// route53recoveryreadiness
+	//
+	// Route53 Recovery Readiness cells can be imported via the cell name
+	"aws_route53recoveryreadiness_cell": config.NameAsIdentifier,
+	// Route53 Recovery Readiness readiness checks can be imported via the readiness check name
+	"aws_route53recoveryreadiness_readiness_check": config.ParameterAsIdentifier("readiness_check_name"),
+
 	// s3control
 	// S3 Control Buckets can be imported using Amazon Resource Name (ARN)
 	// arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-12345678/bucket/example
@@ -632,4 +639,164 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_ssm_patch_group": config.IdentifierFromProvider,
 	// SSM resource data sync can be imported using the name
 	"aws_ssm_resource_data_sync": config.NameAsIdentifier,
+
+	// pinpoint
+	//
+	// Pinpoint ADM Channel can be imported using the application-id
+	"aws_pinpoint_adm_channel": FormattedIdentifierFromProvider("", "application_id"),
+	// Pinpoint APNs Channel can be imported using the application-id
+	"aws_pinpoint_apns_channel": FormattedIdentifierFromProvider("", "application_id"),
+	// Pinpoint APNs Sandbox Channel can be imported using the application-id
+	"aws_pinpoint_apns_sandbox_channel": FormattedIdentifierFromProvider("", "application_id"),
+	// Pinpoint APNs VoIP Channel can be imported using the application-id
+	"aws_pinpoint_apns_voip_channel": FormattedIdentifierFromProvider("", "application_id"),
+	// Pinpoint APNs VoIP Sandbox Channel can be imported using the application-id
+	"aws_pinpoint_apns_voip_sandbox_channel": FormattedIdentifierFromProvider("", "application_id"),
+	// Pinpoint App can be imported using the application-id
+	"aws_pinpoint_app": config.IdentifierFromProvider,
+	// Pinpoint Baidu Channel can be imported using the application-id
+	"aws_pinpoint_baidu_channel": FormattedIdentifierFromProvider("", "application_id"),
+	// Pinpoint Email Channel can be imported using the application-id
+	"aws_pinpoint_email_channel": FormattedIdentifierFromProvider("", "application_id"),
+	// Pinpoint Event Stream can be imported using the application-id
+	"aws_pinpoint_event_stream": FormattedIdentifierFromProvider("", "application_id"),
+	// Pinpoint GCM Channel can be imported using the application-id
+	"aws_pinpoint_gcm_channel": FormattedIdentifierFromProvider("", "application_id"),
+	// Pinpoint SMS Channel can be imported using the application-id
+	"aws_pinpoint_sms_channel": FormattedIdentifierFromProvider("", "application_id"),
+
+	// qldb
+	//
+	// QLDB Ledgers can be imported using the name
+	"aws_qldb_ledger": config.NameAsIdentifier,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_qldb_stream": config.IdentifierFromProvider,
+
+	// quicksight
+	//
+	// A QuickSight data source can be imported using the AWS account ID, and data source ID name separated by a slash (/)
+	// 123456789123/my-data-source-id
+	"aws_quicksight_data_source": FormattedIdentifierFromProvider("/", "aws_account_id", "data_source_id"),
+	// QuickSight Group can be imported using the aws account id, namespace and group name separated by /
+	// 123456789123/default/tf-example
+	"aws_quicksight_group": FormattedIdentifierFromProvider("/", "aws_account_id", "namespace", "group_name"),
+	// QuickSight Group membership can be imported using the AWS account ID, namespace, group name and member name separated by /
+	// 123456789123/default/all-access-users/john_smith
+	"aws_quicksight_group_membership": FormattedIdentifierFromProvider("/", "aws_account_id", "namespace", "group_name", "member_name"),
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_quicksight_user": config.IdentifierFromProvider,
+
+	// rds
+	//
+	// aws_db_cluster_snapshot can be imported by using the cluster snapshot identifier
+	"aws_db_cluster_snapshot": config.IdentifierFromProvider,
+	// DB Event Subscriptions can be imported using the name
+	"aws_db_event_subscription": config.NameAsIdentifier,
+	// RDS instance automated backups replication can be imported using the arn
+	"aws_db_instance_automated_backups_replication": config.NameAsIdentifier,
+	// aws_db_snapshot_copy can be imported by using the snapshot identifier
+	"aws_db_snapshot_copy": config.IdentifierFromProvider,
+
+	// redshift
+	//
+	// Redshift Event Subscriptions can be imported using the name
+	"aws_redshift_event_subscription": config.NameAsIdentifier,
+	// Redshift Parameter Groups can be imported using the name
+	"aws_redshift_parameter_group": config.NameAsIdentifier,
+	// Redshift Scheduled Action can be imported using the name
+	"aws_redshift_scheduled_action": config.NameAsIdentifier,
+	// Redshift security groups can be imported using the name
+	"aws_redshift_security_group": config.NameAsIdentifier,
+	// Redshift Snapshot Copy Grants support import by name
+	"aws_redshift_snapshot_copy_grant": config.NameAsIdentifier,
+	// Redshift Snapshot Schedule can be imported using the identifier
+	"aws_redshift_snapshot_schedule": config.ParameterAsIdentifier("identifier"),
+	// Redshift Snapshot Schedule Association can be imported using the <cluster-identifier>/<schedule-identifier>
+	"aws_redshift_snapshot_schedule_association": FormattedIdentifierFromProvider("/", "cluster_identifier", "schedule_identifier"),
+	// Redshift subnet groups can be imported using the name
+	"aws_redshift_subnet_group": config.NameAsIdentifier,
+
+	// route53domains
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_route53domains_registered_domain": config.IdentifierFromProvider,
+
+	// s3outposts
+	//
+	// S3 Outposts Endpoints can be imported using Amazon Resource Name (ARN), EC2 Security Group identifier, and EC2 Subnet identifier, separated by commas (,)
+	// arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-12345678/endpoint/0123456789abcdef,sg-12345678,subnet-12345678
+	"aws_s3outposts_endpoint": config.IdentifierFromProvider,
+
+	// sagemaker
+	//
+	// SageMaker Apps can be imported using the id
+	"aws_sagemaker_app": config.IdentifierFromProvider,
+	// SageMaker App Image Configs can be imported using the name
+	"aws_sagemaker_app_image_config": config.ParameterAsIdentifier("app_image_config_name"),
+	// SageMaker Code Repositories can be imported using the name
+	"aws_sagemaker_code_repository": config.ParameterAsIdentifier("code_repository_name"),
+	// SageMaker Devices can be imported using the device-fleet-name/device-name
+	// my-fleet/my-device
+	"aws_sagemaker_device": FormattedIdentifierFromProvider("/", "device_fleet_name", "device.device_name"),
+	// SageMaker Device Fleets can be imported using the name
+	"aws_sagemaker_device_fleet": config.ParameterAsIdentifier("device_fleet_name"),
+	// SageMaker Domains can be imported using the id
+	"aws_sagemaker_domain": config.IdentifierFromProvider,
+	// Endpoints can be imported using the name
+	"aws_sagemaker_endpoint": config.NameAsIdentifier,
+	// Endpoint configurations can be imported using the name
+	"aws_sagemaker_endpoint_configuration": config.NameAsIdentifier,
+	// Feature Groups can be imported using the name
+	"aws_sagemaker_feature_group": config.ParameterAsIdentifier("feature_group_name"),
+	// SageMaker Flow Definitions can be imported using the flow_definition_name
+	"aws_sagemaker_flow_definition": config.ParameterAsIdentifier("flow_definition_name"),
+	// SageMaker Human Task UIs can be imported using the human_task_ui_name
+	"aws_sagemaker_human_task_ui": config.ParameterAsIdentifier("human_task_ui_name"),
+	// SageMaker Code Images can be imported using the name
+	"aws_sagemaker_image": config.ParameterAsIdentifier("image_name"),
+	// SageMaker Image Versions can be imported using the name
+	"aws_sagemaker_image_version": config.ParameterAsIdentifier("image_name"),
+	// Models can be imported using the name
+	"aws_sagemaker_model": config.NameAsIdentifier,
+	// SageMaker Model Package Groups can be imported using the name
+	"aws_sagemaker_model_package_group": config.ParameterAsIdentifier("model_package_group_name"),
+	// SageMaker Model Package Groups can be imported using the name
+	"aws_sagemaker_model_package_group_policy": config.ParameterAsIdentifier("model_package_group_name"),
+	// SageMaker Notebook Instances can be imported using the name
+	"aws_sagemaker_notebook_instance": config.NameAsIdentifier,
+	// Models can be imported using the name
+	"aws_sagemaker_notebook_instance_lifecycle_configuration": config.NameAsIdentifier,
+	// SageMaker Projects can be imported using the project_name
+	"aws_sagemaker_project": config.ParameterAsIdentifier("project_name"),
+	// SageMaker Studio Lifecycle Configs can be imported using the studio_lifecycle_config_name
+	"aws_sagemaker_studio_lifecycle_config": config.ParameterAsIdentifier("studio_lifecycle_config_name"),
+	// SageMaker User Profiles can be imported using the arn
+	"aws_sagemaker_user_profile": config.IdentifierFromProvider,
+	// SageMaker Workforces can be imported using the workforce_name
+	"aws_sagemaker_workforce": config.ParameterAsIdentifier("workforce_name"),
+	// SageMaker Workteams can be imported using the workteam_name
+	"aws_sagemaker_workteam": config.ParameterAsIdentifier("workteam_name"),
+
+	// schemas
+	//
+	// EventBridge discoverers can be imported using the id
+	"aws_schemas_discoverer": config.IdentifierFromProvider,
+	// EventBridge schema registries can be imported using the name
+	"aws_schemas_registry": config.NameAsIdentifier,
+	// EventBridge schema can be imported using the name and registry_name
+	"aws_schemas_schema": FormattedIdentifierFromProvider("/", "name", "registry_name"),
+
+	// serverlessrepo
+	//
+	// Serverless Application Repository Stack can be imported using the CloudFormation Stack name (with or without the serverlessrepo- prefix) or the CloudFormation Stack ID
+	"aws_serverlessapplicationrepository_cloudformation_stack": config.IdentifierFromProvider,
+
+	// servicequotas
+	//
+	// aws_servicequotas_service_quota can be imported by using the service code and quota code, separated by a front slash (/)
+	// vpc/L-F678F1CE
+	"aws_servicequotas_service_quota": FormattedIdentifierFromProvider("/", "service_code", "quota_code"),
 }
