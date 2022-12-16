@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: servers.transfer.aws.upbound.io
+  name: directories.ds.aws.upbound.io
 spec:
-  group: transfer.aws.upbound.io
+  group: ds.aws.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - aws
-    kind: Server
-    listKind: ServerList
-    plural: servers
-    singular: server
+    kind: Directory
+    listKind: DirectoryList
+    plural: directories
+    singular: directory
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Server is the Schema for the Servers API. Provides a AWS Transfer
-          Server resource.
+        description: Directory is the Schema for the Directorys API. Provides a directory
+          in AWS Directory Service.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ServerSpec defines the desired state of Server
+            description: DirectorySpec defines the desired state of Directory
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,205 +64,34 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  certificate:
-                    description: The Amazon Resource Name (ARN) of the AWS Certificate
-                      Manager (ACM) certificate. This is required when protocols is
-                      set to FTPS
+                  alias:
+                    description: The alias for the directory (must be unique amongst
+                      all aliases in AWS). Required for enable_sso.
                     type: string
-                  certificateRef:
-                    description: Reference to a Certificate in acm to populate certificate.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  certificateSelector:
-                    description: Selector for a Certificate in acm to populate certificate.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  directoryId:
-                    description: The directory service ID of the directory service
-                      you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
-                    type: string
-                  directoryIdRef:
-                    description: Reference to a Directory in ds to populate directoryId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  directoryIdSelector:
-                    description: Selector for a Directory in ds to populate directoryId.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  domain:
-                    description: 'The domain of the storage system that is used for
-                      file transfers. Valid values are: S3 and EFS. The default value
-                      is S3.'
-                    type: string
-                  endpointDetails:
-                    description: The virtual private cloud (VPC) endpoint settings
-                      that you want to configure for your SFTP server. Fields documented
-                      below.
+                  connectSettings:
+                    description: Connector related information about the directory.
+                      Fields documented below.
                     items:
                       properties:
-                        addressAllocationIds:
-                          description: A list of address allocation IDs that are required
-                            to attach an Elastic IP address to your SFTP server's
-                            endpoint. This property can only be used when endpoint_type
-                            is set to VPC.
+                        customerDnsIps:
+                          description: The DNS IP addresses of the domain to connect
+                            to.
                           items:
                             type: string
                           type: array
-                        securityGroupIds:
-                          description: A list of security groups IDs that are available
-                            to attach to your server's endpoint. If no security groups
-                            are specified, the VPC's default security groups are automatically
-                            assigned to your endpoint. This property can only be used
-                            when endpoint_type is set to VPC.
-                          items:
-                            type: string
-                          type: array
-                        subnetIds:
-                          description: A list of subnet IDs that are required to host
-                            your SFTP server endpoint in your VPC. This property can
-                            only be used when endpoint_type is set to VPC.
-                          items:
-                            type: string
-                          type: array
-                        vpcEndpointId:
-                          description: The ID of the VPC endpoint. This property can
-                            only be used when endpoint_type is set to VPC_ENDPOINT
+                        customerUsername:
+                          description: The username corresponding to the password
+                            provided.
                           type: string
+                        subnetIds:
+                          description: The identifiers of the subnets for the directory
+                            servers (2 subnets in 2 different AZs).
+                          items:
+                            type: string
+                          type: array
                         vpcId:
-                          description: The VPC ID of the virtual private cloud in
-                            which the SFTP server's endpoint will be hosted. This
-                            property can only be used when endpoint_type is set to
-                            VPC.
+                          description: The identifier of the VPC that the directory
+                            is in.
                           type: string
                         vpcIdRef:
                           description: Reference to a VPC in ec2 to populate vpcId.
@@ -340,28 +169,30 @@ spec:
                                   type: string
                               type: object
                           type: object
+                      required:
+                      - customerDnsIps
+                      - customerUsername
+                      - subnetIds
                       type: object
                     type: array
-                  endpointType:
-                    description: The type of endpoint that you want your SFTP server
-                      connect to. If you connect to a VPC (or VPC_ENDPOINT), your
-                      SFTP server isn't accessible over the public internet. If you
-                      want to connect your SFTP server via public internet, set PUBLIC.  Defaults
-                      to PUBLIC.
+                  description:
+                    description: A textual description for the directory.
                     type: string
-                  forceDestroy:
-                    description: A boolean that indicates all users associated with
-                      the server should be deleted so that the Server can be destroyed
-                      without error. The default value is false. This option only
-                      applies to servers configured with a SERVICE_MANAGED identity_provider_type.
+                  edition:
+                    description: The MicrosoftAD edition (Standard or Enterprise).
+                      Defaults to Enterprise (applies to MicrosoftAD type only).
+                    type: string
+                  enableSso:
+                    description: Whether to enable single-sign on for the directory.
+                      Requires alias. Defaults to false.
                     type: boolean
-                  function:
-                    description: The ARN for a lambda function to use for the Identity
-                      provider.
+                  name:
+                    description: The fully qualified name for the directory, such
+                      as corp.example.com
                     type: string
-                  hostKeySecretRef:
-                    description: RSA private key (e.g., as generated by the ssh-keygen
-                      -N "" -m PEM -f my-new-server-key command).
+                  passwordSecretRef:
+                    description: The password for the directory administrator or connector
+                      user.
                     properties:
                       key:
                         description: The key to select.
@@ -377,123 +208,124 @@ spec:
                     - name
                     - namespace
                     type: object
-                  identityProviderType:
-                    description: The mode of authentication enabled for this service.
-                      The default value is SERVICE_MANAGED, which allows you to store
-                      and access SFTP user credentials within the service. API_GATEWAY
-                      indicates that user authentication requires a call to an API
-                      Gateway endpoint URL provided by you to integrate an identity
-                      provider of your choice. Using AWS_DIRECTORY_SERVICE will allow
-                      for authentication against AWS Managed Active Directory or Microsoft
-                      Active Directory in your on-premises environment, or in AWS
-                      using AD Connectors. Use the AWS_LAMBDA value to directly use
-                      a Lambda function as your identity provider. If you choose this
-                      value, you must specify the ARN for the lambda function in the
-                      function argument.
-                    type: string
-                  invocationRole:
-                    description: Amazon Resource Name (ARN) of the IAM role used to
-                      authenticate the user account with an identity_provider_type
-                      of API_GATEWAY.
-                    type: string
-                  loggingRole:
-                    description: Amazon Resource Name (ARN) of an IAM role that allows
-                      the service to write your SFTP users’ activity to your Amazon
-                      CloudWatch logs for monitoring and auditing purposes.
-                    type: string
-                  postAuthenticationLoginBannerSecretRef:
-                    description: Specify a string to display when users connect to
-                      a server. This string is displayed after the user authenticates.
-                      The SFTP protocol does not support post-authentication display
-                      banners.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  preAuthenticationLoginBannerSecretRef:
-                    description: Specify a string to display when users connect to
-                      a server. This string is displayed before the user authenticates.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  protocols:
-                    description: 'Specifies the file transfer protocol or protocols
-                      over which your file transfer protocol client can connect to
-                      your server''s endpoint. This defaults to SFTP . The available
-                      protocols are:'
-                    items:
-                      type: string
-                    type: array
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  securityPolicyName:
-                    description: 'Specifies the name of the security policy that is
-                      attached to the server. Possible values are TransferSecurityPolicy-2018-11,
-                      TransferSecurityPolicy-2020-06, and  TransferSecurityPolicy-FIPS-2020-06.
-                      Default value is: TransferSecurityPolicy-2018-11.'
+                  shortName:
+                    description: The short name of the directory, such as CORP.
+                    type: string
+                  size:
+                    description: The size of the directory (Small or Large are accepted
+                      values).
                     type: string
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
-                  url:
-                    description: '- URL of the service endpoint used to authenticate
-                      users with an identity_provider_type of API_GATEWAY.'
+                  type:
+                    description: The directory type (SimpleAD, ADConnector or MicrosoftAD
+                      are accepted values). Defaults to SimpleAD.
                     type: string
-                  workflowDetails:
-                    description: Specifies the workflow details. See Workflow Details
-                      below.
+                  vpcSettings:
+                    description: VPC related information about the directory. Fields
+                      documented below.
                     items:
                       properties:
-                        onUpload:
-                          description: 'A trigger that starts a workflow: the workflow
-                            begins to execute after a file is uploaded. See Workflow
-                            Detail below.'
+                        subnetIds:
+                          description: The identifiers of the subnets for the directory
+                            servers (2 subnets in 2 different AZs).
                           items:
-                            properties:
-                              executionRole:
-                                description: Includes the necessary permissions for
-                                  S3, EFS, and Lambda operations that Transfer can
-                                  assume, so that all workflow steps can operate on
-                                  the required resources.
-                                type: string
-                              workflowId:
-                                description: A unique identifier for the workflow.
-                                type: string
-                            required:
-                            - executionRole
-                            - workflowId
-                            type: object
+                            type: string
                           type: array
+                        vpcId:
+                          description: The identifier of the VPC that the directory
+                            is in.
+                          type: string
+                        vpcIdRef:
+                          description: Reference to a VPC in ec2 to populate vpcId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        vpcIdSelector:
+                          description: Selector for a VPC in ec2 to populate vpcId.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      required:
+                      - subnetIds
                       type: object
                     type: array
                 required:
+                - name
+                - passwordSecretRef
                 - region
                 type: object
               providerConfigRef:
@@ -668,24 +500,40 @@ spec:
             - forProvider
             type: object
           status:
-            description: ServerStatus defines the observed state of Server.
+            description: DirectoryStatus defines the observed state of Directory.
             properties:
               atProvider:
                 properties:
-                  arn:
-                    description: Amazon Resource Name (ARN) of Transfer Server
+                  accessUrl:
+                    description: The access URL for the directory, such as http://alias.awsapps.com.
                     type: string
-                  endpoint:
-                    description: The endpoint of the Transfer Server (e.g., s-12345678.server.transfer.REGION.amazonaws.com)
-                    type: string
-                  hostKeyFingerprint:
-                    description: This value contains the message-digest algorithm
-                      (MD5) hash of the server's host key. This value is equivalent
-                      to the output of the ssh-keygen -l -E md5 -f my-new-server-key
-                      command.
-                    type: string
+                  connectSettings:
+                    description: Connector related information about the directory.
+                      Fields documented below.
+                    items:
+                      properties:
+                        availabilityZones:
+                          items:
+                            type: string
+                          type: array
+                        connectIps:
+                          description: The IP addresses of the AD Connector servers.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  dnsIpAddresses:
+                    description: A list of IP addresses of the DNS servers for the
+                      directory or connector.
+                    items:
+                      type: string
+                    type: array
                   id:
-                    description: The Server ID of the Transfer Server (e.g., s-12345678)
+                    description: The directory identifier.
+                    type: string
+                  securityGroupId:
+                    description: The ID of the security group created by the directory.
                     type: string
                   tagsAll:
                     additionalProperties:
@@ -694,6 +542,17 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  vpcSettings:
+                    description: VPC related information about the directory. Fields
+                      documented below.
+                    items:
+                      properties:
+                        availabilityZones:
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

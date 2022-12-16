@@ -1126,6 +1126,16 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DirectoryIDRef != nil {
+		in, out := &in.DirectoryIDRef, &out.DirectoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DirectoryIDSelector != nil {
+		in, out := &in.DirectoryIDSelector, &out.DirectoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.EarlyMediaEnabled != nil {
 		in, out := &in.EarlyMediaEnabled, &out.EarlyMediaEnabled
 		*out = new(bool)
