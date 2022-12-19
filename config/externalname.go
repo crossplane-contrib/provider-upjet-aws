@@ -182,6 +182,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_ipv4_cidr_block_association": config.IdentifierFromProvider,
 	// Imported using the vpc peering id: pcx-111aaa111
 	"aws_vpc_peering_connection": config.IdentifierFromProvider,
+	// Imported using the vpc peering id: pcx-111aaa111
+	"aws_vpc_peering_connection_options": config.IdentifierFromProvider,
+	// Imported using the peering connection id: pcx-12345678
+	"aws_vpc_peering_connection_accepter": config.IdentifierFromProvider,
 	// Imported using the following format: ROUTETABLEID_DESTINATION
 	"aws_route": route(),
 	// Imported using id: rtb-4e616f6d69
@@ -494,8 +498,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
 	"aws_kms_key": config.IdentifierFromProvider,
-	// KMS aliases can be imported using the name
-	"aws_kms_alias": config.NameAsIdentifier,
+	// KMS aliases are imported using "alias/" + name
+	"aws_kms_alias": kmsAlias(),
 	// No import
 	"aws_kms_ciphertext": config.IdentifierFromProvider,
 	// KMS External Keys can be imported using the id
@@ -1475,6 +1479,15 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_dx_lag": config.IdentifierFromProvider,
 	// Direct Connect transit virtual interfaces can be imported using the vif id
 	"aws_dx_transit_virtual_interface": config.IdentifierFromProvider,
+	// Direct Connect private virtual interfaces can be imported using the vif id
+	"aws_dx_private_virtual_interface": config.IdentifierFromProvider,
+	//
+	"aws_dx_gateway_association_proposal": config.IdentifierFromProvider,
+	// Direct Connect gateway associations can be imported using dx_gateway_id together with associated_gateway_id
+	// TODO: associated_gateway_id parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
+	"aws_dx_gateway_association": config.IdentifierFromProvider,
+	// No import
+	"aws_dx_bgp_peer": config.IdentifierFromProvider,
 
 	// appconfig
 	//
@@ -1575,6 +1588,44 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// imported using the service action ID. which has provider-generated
 	// random parts: act-f1w12eperfslh
 	"aws_servicecatalog_service_action": config.IdentifierFromProvider,
+
+	// route53recoveryreadiness
+	//
+	// Route53 Recovery Readiness recovery groups can be imported via the recovery group name
+	"aws_route53recoveryreadiness_recovery_group": config.ParameterAsIdentifier("recovery_group_name"),
+	// Route53 Recovery Readiness resource set name can be imported via the resource set name
+	"aws_route53recoveryreadiness_resource_set": config.ParameterAsIdentifier("resource_set_name"),
+
+	// s3control
+	//
+	// - For Access Points associated with an AWS Partition S3 Bucket, this resource
+	// can be imported using the account_id and name separated by a colon (:)
+	// - For Access Points associated with an S3 on Outposts Bucket, this resource
+	// can be imported using the Amazon Resource Name (ARN)
+	// TODO: There are two different import syntaxes for this resource. For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_s3_access_point": config.IdentifierFromProvider,
+	// aws_s3_account_public_access_block can be imported by using the AWS account ID
+	"aws_s3_account_public_access_block": config.IdentifierFromProvider,
+	// Access Point policies can be imported using the access_point_arn
+	// arn:aws:s3:us-west-2:123456789012:accesspoint/example
+	"aws_s3control_access_point_policy": config.IdentifierFromProvider,
+
+	// dlm
+	//
+	// DLM lifecycle policies can be imported by their policy ID
+	"aws_dlm_lifecycle_policy": config.IdentifierFromProvider,
+
+	// dms
+	//
+	// Certificates can be imported using the certificate_id
+	"aws_dms_certificate": config.ParameterAsIdentifier("certificate_id"),
+	// Endpoints can be imported using the endpoint_id
+	"aws_dms_endpoint": config.ParameterAsIdentifier("endpoint_id"),
+
+	// ds
+	//
+	// DirectoryService directories can be imported using the directory id
+	"aws_directory_service_directory": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
@@ -1611,6 +1662,34 @@ func iamUserGroupMembership() config.ExternalName {
 		}
 		return strings.Join(append([]string{u.(string)}, groups...), "/"), nil
 	}
+	return e
+}
+
+func kmsAlias() config.ExternalName {
+	e := config.NameAsIdentifier
+	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
+		if _, ok := base["name"]; !ok {
+			if !strings.HasPrefix(externalName, "alias/") {
+				base["name"] = fmt.Sprintf("alias/%s", externalName)
+			} else {
+				base["name"] = externalName
+			}
+		}
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("id attribute missing from state file")
+		}
+
+		idStr, ok := id.(string)
+		if !ok {
+			return "", errors.New("value of id needs to be string")
+		}
+
+		return strings.TrimPrefix(idStr, "alias/"), nil
+	}
+
 	return e
 }
 

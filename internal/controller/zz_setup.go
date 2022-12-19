@@ -223,12 +223,19 @@ import (
 	project "github.com/upbound/provider-aws/internal/controller/devicefarm/project"
 	testgridproject "github.com/upbound/provider-aws/internal/controller/devicefarm/testgridproject"
 	upload "github.com/upbound/provider-aws/internal/controller/devicefarm/upload"
+	bgppeer "github.com/upbound/provider-aws/internal/controller/directconnect/bgppeer"
 	connectiondirectconnect "github.com/upbound/provider-aws/internal/controller/directconnect/connection"
 	connectionassociation "github.com/upbound/provider-aws/internal/controller/directconnect/connectionassociation"
 	gateway "github.com/upbound/provider-aws/internal/controller/directconnect/gateway"
+	gatewayassociation "github.com/upbound/provider-aws/internal/controller/directconnect/gatewayassociation"
+	gatewayassociationproposal "github.com/upbound/provider-aws/internal/controller/directconnect/gatewayassociationproposal"
 	lag "github.com/upbound/provider-aws/internal/controller/directconnect/lag"
+	privatevirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/privatevirtualinterface"
 	publicvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/publicvirtualinterface"
 	transitvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/transitvirtualinterface"
+	lifecyclepolicy "github.com/upbound/provider-aws/internal/controller/dlm/lifecyclepolicy"
+	certificatedms "github.com/upbound/provider-aws/internal/controller/dms/certificate"
+	endpoint "github.com/upbound/provider-aws/internal/controller/dms/endpoint"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
 	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/docdb/clusterparametergroup"
@@ -236,6 +243,7 @@ import (
 	eventsubscription "github.com/upbound/provider-aws/internal/controller/docdb/eventsubscription"
 	globalcluster "github.com/upbound/provider-aws/internal/controller/docdb/globalcluster"
 	subnetgroupdocdb "github.com/upbound/provider-aws/internal/controller/docdb/subnetgroup"
+	directory "github.com/upbound/provider-aws/internal/controller/ds/directory"
 	contributorinsights "github.com/upbound/provider-aws/internal/controller/dynamodb/contributorinsights"
 	globaltable "github.com/upbound/provider-aws/internal/controller/dynamodb/globaltable"
 	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
@@ -328,12 +336,14 @@ import (
 	vpcipamscope "github.com/upbound/provider-aws/internal/controller/ec2/vpcipamscope"
 	vpcipv4cidrblockassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcipv4cidrblockassociation"
 	vpcpeeringconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnection"
+	vpcpeeringconnectionaccepter "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnectionaccepter"
+	vpcpeeringconnectionoptions "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnectionoptions"
 	vpnconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpnconnection"
 	vpnconnectionroute "github.com/upbound/provider-aws/internal/controller/ec2/vpnconnectionroute"
 	vpngateway "github.com/upbound/provider-aws/internal/controller/ec2/vpngateway"
 	vpngatewayattachment "github.com/upbound/provider-aws/internal/controller/ec2/vpngatewayattachment"
 	vpngatewayroutepropagation "github.com/upbound/provider-aws/internal/controller/ec2/vpngatewayroutepropagation"
-	lifecyclepolicy "github.com/upbound/provider-aws/internal/controller/ecr/lifecyclepolicy"
+	lifecyclepolicyecr "github.com/upbound/provider-aws/internal/controller/ecr/lifecyclepolicy"
 	pullthroughcacherule "github.com/upbound/provider-aws/internal/controller/ecr/pullthroughcacherule"
 	registrypolicy "github.com/upbound/provider-aws/internal/controller/ecr/registrypolicy"
 	registryscanningconfiguration "github.com/upbound/provider-aws/internal/controller/ecr/registryscanningconfiguration"
@@ -505,7 +515,9 @@ import (
 	trafficpolicyinstance "github.com/upbound/provider-aws/internal/controller/route53/trafficpolicyinstance"
 	vpcassociationauthorization "github.com/upbound/provider-aws/internal/controller/route53/vpcassociationauthorization"
 	zone "github.com/upbound/provider-aws/internal/controller/route53/zone"
-	endpoint "github.com/upbound/provider-aws/internal/controller/route53resolver/endpoint"
+	recoverygroup "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/recoverygroup"
+	resourceset "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/resourceset"
+	endpointroute53resolver "github.com/upbound/provider-aws/internal/controller/route53resolver/endpoint"
 	ruleroute53resolver "github.com/upbound/provider-aws/internal/controller/route53resolver/rule"
 	ruleassociation "github.com/upbound/provider-aws/internal/controller/route53resolver/ruleassociation"
 	bucket "github.com/upbound/provider-aws/internal/controller/s3/bucket"
@@ -530,6 +542,9 @@ import (
 	bucketversioning "github.com/upbound/provider-aws/internal/controller/s3/bucketversioning"
 	bucketwebsiteconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketwebsiteconfiguration"
 	object "github.com/upbound/provider-aws/internal/controller/s3/object"
+	accesspoints3control "github.com/upbound/provider-aws/internal/controller/s3control/accesspoint"
+	accesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/accesspointpolicy"
+	accountpublicaccessblock "github.com/upbound/provider-aws/internal/controller/s3control/accountpublicaccessblock"
 	secret "github.com/upbound/provider-aws/internal/controller/secretsmanager/secret"
 	secretpolicy "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretpolicy"
 	secretrotation "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretrotation"
@@ -789,12 +804,19 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		project.Setup,
 		testgridproject.Setup,
 		upload.Setup,
+		bgppeer.Setup,
 		connectiondirectconnect.Setup,
 		connectionassociation.Setup,
 		gateway.Setup,
+		gatewayassociation.Setup,
+		gatewayassociationproposal.Setup,
 		lag.Setup,
+		privatevirtualinterface.Setup,
 		publicvirtualinterface.Setup,
 		transitvirtualinterface.Setup,
+		lifecyclepolicy.Setup,
+		certificatedms.Setup,
+		endpoint.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,
 		clusterparametergroup.Setup,
@@ -802,6 +824,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventsubscription.Setup,
 		globalcluster.Setup,
 		subnetgroupdocdb.Setup,
+		directory.Setup,
 		contributorinsights.Setup,
 		globaltable.Setup,
 		kinesisstreamingdestination.Setup,
@@ -894,12 +917,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcipamscope.Setup,
 		vpcipv4cidrblockassociation.Setup,
 		vpcpeeringconnection.Setup,
+		vpcpeeringconnectionaccepter.Setup,
+		vpcpeeringconnectionoptions.Setup,
 		vpnconnection.Setup,
 		vpnconnectionroute.Setup,
 		vpngateway.Setup,
 		vpngatewayattachment.Setup,
 		vpngatewayroutepropagation.Setup,
-		lifecyclepolicy.Setup,
+		lifecyclepolicyecr.Setup,
 		pullthroughcacherule.Setup,
 		registrypolicy.Setup,
 		registryscanningconfiguration.Setup,
@@ -1071,7 +1096,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		trafficpolicyinstance.Setup,
 		vpcassociationauthorization.Setup,
 		zone.Setup,
-		endpoint.Setup,
+		recoverygroup.Setup,
+		resourceset.Setup,
+		endpointroute53resolver.Setup,
 		ruleroute53resolver.Setup,
 		ruleassociation.Setup,
 		bucket.Setup,
@@ -1096,6 +1123,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		bucketversioning.Setup,
 		bucketwebsiteconfiguration.Setup,
 		object.Setup,
+		accesspoints3control.Setup,
+		accesspointpolicy.Setup,
+		accountpublicaccessblock.Setup,
 		secret.Setup,
 		secretpolicy.Setup,
 		secretrotation.Setup,

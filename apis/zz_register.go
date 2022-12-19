@@ -58,7 +58,10 @@ import (
 	v1beta1detective "github.com/upbound/provider-aws/apis/detective/v1beta1"
 	v1beta1devicefarm "github.com/upbound/provider-aws/apis/devicefarm/v1beta1"
 	v1beta1directconnect "github.com/upbound/provider-aws/apis/directconnect/v1beta1"
+	v1beta1dlm "github.com/upbound/provider-aws/apis/dlm/v1beta1"
+	v1beta1dms "github.com/upbound/provider-aws/apis/dms/v1beta1"
 	v1beta1docdb "github.com/upbound/provider-aws/apis/docdb/v1beta1"
+	v1beta1ds "github.com/upbound/provider-aws/apis/ds/v1beta1"
 	v1beta1dynamodb "github.com/upbound/provider-aws/apis/dynamodb/v1beta1"
 	v1beta1ec2 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	v1beta1ecr "github.com/upbound/provider-aws/apis/ecr/v1beta1"
@@ -95,8 +98,10 @@ import (
 	v1beta1redshift "github.com/upbound/provider-aws/apis/redshift/v1beta1"
 	v1beta1resourcegroups "github.com/upbound/provider-aws/apis/resourcegroups/v1beta1"
 	v1beta1route53 "github.com/upbound/provider-aws/apis/route53/v1beta1"
+	v1beta1route53recoveryreadiness "github.com/upbound/provider-aws/apis/route53recoveryreadiness/v1beta1"
 	v1beta1route53resolver "github.com/upbound/provider-aws/apis/route53resolver/v1beta1"
 	v1beta1s3 "github.com/upbound/provider-aws/apis/s3/v1beta1"
+	v1beta1s3control "github.com/upbound/provider-aws/apis/s3control/v1beta1"
 	v1beta1secretsmanager "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1"
 	v1beta1securityhub "github.com/upbound/provider-aws/apis/securityhub/v1beta1"
 	v1beta1serverlessrepo "github.com/upbound/provider-aws/apis/serverlessrepo/v1beta1"
@@ -161,7 +166,10 @@ func init() {
 		v1beta1detective.SchemeBuilder.AddToScheme,
 		v1beta1devicefarm.SchemeBuilder.AddToScheme,
 		v1beta1directconnect.SchemeBuilder.AddToScheme,
+		v1beta1dlm.SchemeBuilder.AddToScheme,
+		v1beta1dms.SchemeBuilder.AddToScheme,
 		v1beta1docdb.SchemeBuilder.AddToScheme,
+		v1beta1ds.SchemeBuilder.AddToScheme,
 		v1beta1dynamodb.SchemeBuilder.AddToScheme,
 		v1beta1ec2.SchemeBuilder.AddToScheme,
 		v1beta1ecr.SchemeBuilder.AddToScheme,
@@ -198,8 +206,10 @@ func init() {
 		v1beta1redshift.SchemeBuilder.AddToScheme,
 		v1beta1resourcegroups.SchemeBuilder.AddToScheme,
 		v1beta1route53.SchemeBuilder.AddToScheme,
+		v1beta1route53recoveryreadiness.SchemeBuilder.AddToScheme,
 		v1beta1route53resolver.SchemeBuilder.AddToScheme,
 		v1beta1s3.SchemeBuilder.AddToScheme,
+		v1beta1s3control.SchemeBuilder.AddToScheme,
 		v1beta1secretsmanager.SchemeBuilder.AddToScheme,
 		v1beta1securityhub.SchemeBuilder.AddToScheme,
 		v1beta1serverlessrepo.SchemeBuilder.AddToScheme,

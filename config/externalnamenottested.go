@@ -145,14 +145,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// directconnect
 	//
 	// No import
-	"aws_dx_bgp_peer": config.IdentifierFromProvider,
-	// No import
 	"aws_dx_connection_confirmation": config.IdentifierFromProvider,
-	// Direct Connect gateway associations can be imported using dx_gateway_id together with associated_gateway_id
-	// TODO: associated_gateway_id parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
-	"aws_dx_gateway_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.dx_gateway_id }}/{{ .parameters.associated_gateway_id }}"),
-	//
-	"aws_dx_gateway_association_proposal": config.IdentifierFromProvider,
 	// No import
 	"aws_dx_hosted_connection": config.IdentifierFromProvider,
 	// Direct Connect hosted private virtual interfaces can be imported using the vif id
@@ -167,20 +160,9 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_dx_hosted_transit_virtual_interface": config.IdentifierFromProvider,
 	// Direct Connect hosted transit virtual interfaces can be imported using the vif id
 	"aws_dx_hosted_transit_virtual_interface_accepter": config.ParameterAsIdentifier("virtual_interface_id"),
-	// Direct Connect private virtual interfaces can be imported using the vif id
-	"aws_dx_private_virtual_interface": config.IdentifierFromProvider,
-
-	// dlm
-	//
-	// DLM lifecycle policies can be imported by their policy ID
-	"aws_dlm_lifecycle_policy": config.IdentifierFromProvider,
 
 	// dms
 	//
-	// Certificates can be imported using the certificate_id
-	"aws_dms_certificate": config.ParameterAsIdentifier("certificate_id"),
-	// Endpoints can be imported using the endpoint_id
-	"aws_dms_endpoint": config.ParameterAsIdentifier("endpoint_id"),
 	// Event subscriptions can be imported using the name
 	"aws_dms_event_subscription": config.NameAsIdentifier,
 	// Replication instances can be imported using the replication_instance_id
@@ -194,8 +176,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// Conditional forwarders can be imported using the directory id and remote_domain_name: d-1234567890:example.com
 	"aws_directory_service_conditional_forwarder": config.TemplatedStringAsIdentifier("", "{{ .parameters.directory_id }}:{{ .parameters.remote_domain_name }}"),
-	// DirectoryService directories can be imported using the directory id
-	"aws_directory_service_directory": config.IdentifierFromProvider,
 	// Directory Service Log Subscriptions can be imported using the directory id
 	"aws_directory_service_log_subscription": config.ParameterAsIdentifier("directory_id"),
 
@@ -241,10 +221,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_vpc_ipam_preview_next_cidr": config.IdentifierFromProvider,
 	// aws_vpc_ipv6_cidr_block_association can be imported by using the VPC CIDR Association ID
 	"aws_vpc_ipv6_cidr_block_association": config.IdentifierFromProvider,
-	// VPC Peering Connection Accepters can be imported by using the Peering Connection ID
-	"aws_vpc_peering_connection_accepter": config.ParameterAsIdentifier("vpc_peering_connection_id"),
-	// VPC Peering Connection Options can be imported using the vpc peering id
-	"aws_vpc_peering_connection_options": config.ParameterAsIdentifier("vpc_peering_connection_id"),
 
 	// securityhub
 	//
@@ -345,26 +321,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// 00b00fd5aecc0ab60a708659477e9617:123456789012
 	"aws_guardduty_threatintelset": config.IdentifierFromProvider,
 
-	// route53recoveryreadiness
-	//
-	// Route53 Recovery Readiness recovery groups can be imported via the recovery group name
-	"aws_route53recoveryreadiness_recovery_group": config.ParameterAsIdentifier("recovery_group_name"),
-	// Route53 Recovery Readiness resource set name can be imported via the resource set name
-	"aws_route53recoveryreadiness_resource_set": config.ParameterAsIdentifier("resource_set_name"),
-
 	// s3control
-	//
-	// - For Access Points associated with an AWS Partition S3 Bucket, this resource
-	// can be imported using the account_id and name separated by a colon (:)
-	// - For Access Points associated with an S3 on Outposts Bucket, this resource
-	// can be imported using the Amazon Resource Name (ARN)
-	// TODO: There are two different import syntaxes for this resource. For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_s3_access_point": config.IdentifierFromProvider,
-	// aws_s3_account_public_access_block can be imported by using the AWS account ID
-	"aws_s3_account_public_access_block": config.IdentifierFromProvider,
-	// Access Point policies can be imported using the access_point_arn
-	// arn:aws:s3:us-west-2:123456789012:accesspoint/example
-	"aws_s3control_access_point_policy": FormattedIdentifierFromProvider("", "access_point_arn"),
 	// S3 Control Buckets can be imported using Amazon Resource Name (ARN)
 	// arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-12345678/bucket/example
 	"aws_s3control_bucket": config.IdentifierFromProvider,
@@ -395,22 +352,182 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Elasticsearch domains can be imported using the domain_name
 	"aws_elasticsearch_domain_saml_options": config.ParameterAsIdentifier("domain_name"),
 
-	// elasticloadbalancing
+
+	// elastictranscoder
+	//
+	// Elastic Transcoder pipelines can be imported using the id
+	"aws_elastictranscoder_pipeline": config.IdentifierFromProvider,
+	// Elastic Transcoder presets can be imported using the id
+	"aws_elastictranscoder_preset": config.IdentifierFromProvider,
+
+	// elb
 	//
 	// Application cookie stickiness policies can be imported using the ELB name, port, and policy name separated by colons (:)
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	// my-elb:80:my-policy
 	"aws_app_cookie_stickiness_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.load_balancer }}:{{ .parameters.lb_port }}:{{ .external_name }}"),
 	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_lb_cookie_stickiness_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lb_ssl_negotiation_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_load_balancer_backend_server_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_load_balancer_listener_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_load_balancer_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_proxy_protocol_policy": config.IdentifierFromProvider,
+
+	// elbv2
+	//
+	// Listener Certificates can be imported by using the listener arn and certificate arn, separated by an underscore (_)
+	// arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/test/8e4497da625e2d8a/9ab28ade35828f96/67b3d2d36dd7c26b_arn:aws:iam::123456789012:server-certificate/tf-acc-test-6453083910015726063
+	"aws_lb_listener_certificate": config.IdentifierFromProvider,
+	// Rules can be imported using their ARN
+	"aws_lb_listener_rule": config.IdentifierFromProvider,
+
 
 	// emr
 	//
 	// EMR clusters can be imported using the id
 	"aws_emr_cluster": config.IdentifierFromProvider,
 	// EMR Instance Fleet can be imported with the EMR Cluster identifier and Instance Fleet identifier separated by a forward slash (/)
+	// j-123456ABCDEF/if-15EK4O09RZLNR
 	"aws_emr_instance_fleet": config.IdentifierFromProvider,
+	// EMR task instance group can be imported using their EMR Cluster id and Instance Group id separated by a forward-slash /
+	// j-123456ABCDEF/ig-15EK4O09RZLNR
+	"aws_emr_instance_group": config.IdentifierFromProvider,
+	// EMR Managed Scaling Policies can be imported via the EMR Cluster identifier
+	"aws_emr_managed_scaling_policy": FormattedIdentifierFromProvider("", "cluster_id"),
 	// EMR Security Configurations can be imported using the name
 	"aws_emr_security_configuration": config.NameAsIdentifier,
+	// EMR studios can be imported using the id
+	"aws_emr_studio": config.IdentifierFromProvider,
+	// EMR studio session mappings can be imported using the id, e.g., studio-id:identity-type:identity-id
+	"aws_emr_studio_session_mapping": config.IdentifierFromProvider,
+
+	// emrcontainers
+	//
 	// EKS Clusters can be imported using the id
 	"aws_emrcontainers_virtual_cluster": config.IdentifierFromProvider,
+
+	// fms
+	//
+	// Firewall Manager administrator account association can be imported using the account ID
+	// TODO: account_id parameter is not `Required` in TF schema. But we use this field in id construction. So, please mark as required this field while configuration
+	"aws_fms_admin_account": FormattedIdentifierFromProvider("", "account_id"),
+	// Firewall Manager policies can be imported using the policy ID
+	"aws_fms_policy": config.IdentifierFromProvider,
+
+	// fsx
+	//
+	// FSx Backups can be imported using the id
+	"aws_fsx_backup": config.IdentifierFromProvider,
+	// FSx Data Repository Associations can be imported using the id
+	"aws_fsx_data_repository_association": config.IdentifierFromProvider,
+	// FSx File Systems can be imported using the id
+	"aws_fsx_lustre_file_system": config.IdentifierFromProvider,
+	// FSx File Systems can be imported using the id
+	"aws_fsx_ontap_file_system": config.IdentifierFromProvider,
+	// FSx Storage Virtual Machine can be imported using the id
+	"aws_fsx_ontap_storage_virtual_machine": config.IdentifierFromProvider,
+	// FSx ONTAP volume can be imported using the id
+	"aws_fsx_ontap_volume": config.IdentifierFromProvider,
+	// FSx File Systems can be imported using the id
+	"aws_fsx_openzfs_file_system": config.IdentifierFromProvider,
+	// FSx OpenZFS snapshot can be imported using the id
+	"aws_fsx_openzfs_snapshot": config.IdentifierFromProvider,
+	// FSx Volumes can be imported using the id
+	"aws_fsx_openzfs_volume": config.IdentifierFromProvider,
+	// FSx File Systems can be imported using the id
+	"aws_fsx_windows_file_system": config.IdentifierFromProvider,
+
+	// glacier
+	//
+	// Glacier Vaults can be imported using the name
+	"aws_glacier_vault": config.NameAsIdentifier,
+	// Glacier Vault Locks can be imported using the Glacier Vault name
+	"aws_glacier_vault_lock": FormattedIdentifierFromProvider("", "vault_name"),
+
+	// iot
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_certificate": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_indexing_configuration": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_logging_options": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_policy_attachment": config.IdentifierFromProvider,
+	// IoT fleet provisioning templates can be imported using the name
+	"aws_iot_provisioning_template": config.NameAsIdentifier,
+	// IOT Role Alias can be imported via the alias
+	"aws_iot_role_alias": config.ParameterAsIdentifier("alias"),
+	// IoT Things Groups can be imported using the name
+	"aws_iot_thing_group": config.NameAsIdentifier,
+	// IoT Thing Group Membership can be imported using the thing group name and thing name
+	// thing_group_name/thing_name
+	"aws_iot_thing_group_membership": FormattedIdentifierFromProvider("/", "thing_group_name", "thing_name"),
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_thing_principal_attachment": config.IdentifierFromProvider,
+	// IOT Thing Types can be imported using the name
+	"aws_iot_thing_type": config.NameAsIdentifier,
+	// IoT Topic Rules can be imported using the name
+	"aws_iot_topic_rule": config.NameAsIdentifier,
+	// IoT topic rule destinations can be imported using the arn
+	// arn:aws:iot:us-west-2:123456789012:ruledestination/vpc/2ce781c8-68a6-4c52-9c62-63fe489ecc60
+	"aws_iot_topic_rule_destination": config.IdentifierFromProvider,
+
+	// kafka
+	//
+	// MSK SCRAM Secret Associations can be imported using the id
+	"aws_msk_scram_secret_association": config.IdentifierFromProvider,
+
+	// keyspaces
+	//
+	// Use the name to import a keyspace
+	"aws_keyspaces_keyspace": config.NameAsIdentifier,
+	// Use the keyspace_name and table_name separated by / to import a table
+	// my_keyspace/my_table
+	"aws_keyspaces_table": FormattedIdentifierFromProvider("/", "keyspace_name", "table_name"),
+
+	// lightsail
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lightsail_domain": config.IdentifierFromProvider,
+	// Lightsail Instances can be imported using their name
+	"aws_lightsail_instance": config.NameAsIdentifier,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lightsail_instance_public_ports": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lightsail_key_pair": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lightsail_static_ip": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lightsail_static_ip_attachment": config.IdentifierFromProvider,
+
+	// macie
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_macie_member_account_association": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_macie_s3_bucket_association": config.IdentifierFromProvider,
 }

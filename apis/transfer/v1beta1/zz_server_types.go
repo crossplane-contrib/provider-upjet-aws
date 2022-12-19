@@ -98,8 +98,18 @@ type ServerParameters struct {
 	CertificateSelector *v1.Selector `json:"certificateSelector,omitempty" tf:"-"`
 
 	// The directory service ID of the directory service you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ds/v1beta1.Directory
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
+
+	// Reference to a Directory in ds to populate directoryId.
+	// +kubebuilder:validation:Optional
+	DirectoryIDRef *v1.Reference `json:"directoryIdRef,omitempty" tf:"-"`
+
+	// Selector for a Directory in ds to populate directoryId.
+	// +kubebuilder:validation:Optional
+	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
 	// The domain of the storage system that is used for file transfers. Valid values are: S3 and EFS. The default value is S3.
 	// +kubebuilder:validation:Optional
