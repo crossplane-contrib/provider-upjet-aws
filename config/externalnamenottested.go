@@ -58,15 +58,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// HSM modules can be imported using their HSM ID
 	"aws_cloudhsm_v2_hsm": config.IdentifierFromProvider,
 
-	// cloudwatchlogs
-	//
-	// CloudWatch Logs destinations can be imported using the name
-	"aws_cloudwatch_log_destination": config.NameAsIdentifier,
-	// CloudWatch Logs destination policies can be imported using the destination_name
-	"aws_cloudwatch_log_destination_policy": config.ParameterAsIdentifier("destination_name"),
-	// CloudWatch Logs subscription filter can be imported using the log group name and subscription filter name separated by |
-	"aws_cloudwatch_log_subscription_filter": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_group_name }}|{{ .external_name }}"),
-
 	// codeartifact
 	//
 	// CodeArtifact Domain can be imported using the CodeArtifact Domain arn

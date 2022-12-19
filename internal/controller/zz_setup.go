@@ -161,10 +161,13 @@ import (
 	rule "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/rule"
 	targetcloudwatchevents "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/target"
 	definition "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/definition"
+	destination "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/destination"
+	destinationpolicy "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/destinationpolicy"
 	group "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/group"
 	metricfilter "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/metricfilter"
 	resourcepolicy "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/resourcepolicy"
 	stream "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/stream"
+	subscriptionfilter "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/subscriptionfilter"
 	approvalruletemplate "github.com/upbound/provider-aws/internal/controller/codecommit/approvalruletemplate"
 	approvalruletemplateassociation "github.com/upbound/provider-aws/internal/controller/codecommit/approvalruletemplateassociation"
 	repository "github.com/upbound/provider-aws/internal/controller/codecommit/repository"
@@ -727,10 +730,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		rule.Setup,
 		targetcloudwatchevents.Setup,
 		definition.Setup,
+		destination.Setup,
+		destinationpolicy.Setup,
 		group.Setup,
 		metricfilter.Setup,
 		resourcepolicy.Setup,
 		stream.Setup,
+		subscriptionfilter.Setup,
 		approvalruletemplate.Setup,
 		approvalruletemplateassociation.Setup,
 		repository.Setup,

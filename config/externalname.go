@@ -959,6 +959,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudwatch_log_stream": config.IdentifierFromProvider,
 	// CloudWatch log resource policies can be imported using the policy name
 	"aws_cloudwatch_log_resource_policy": config.ParameterAsIdentifier("policy_name"),
+	// CloudWatch Logs destinations can be imported using the name
+	"aws_cloudwatch_log_destination": config.NameAsIdentifier,
+	// CloudWatch Logs destination policies can be imported using the destination_name
+	"aws_cloudwatch_log_destination_policy": config.ParameterAsIdentifier("destination_name"),
+	// CloudWatch Logs subscription filter can be imported using the log group name and subscription filter name separated by |
+	"aws_cloudwatch_log_subscription_filter": config.IdentifierFromProvider,
 
 	// elb
 	//
