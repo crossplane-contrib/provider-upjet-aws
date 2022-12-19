@@ -483,14 +483,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// MSK SCRAM Secret Associations can be imported using the id
 	"aws_msk_scram_secret_association": config.IdentifierFromProvider,
 
-	// keyspaces
-	//
-	// Use the name to import a keyspace
-	"aws_keyspaces_keyspace": config.NameAsIdentifier,
-	// Use the keyspace_name and table_name separated by / to import a table
-	// my_keyspace/my_table
-	"aws_keyspaces_table": FormattedIdentifierFromProvider("/", "keyspace_name", "table_name"),
-
 	// lightsail
 	//
 	// No import
