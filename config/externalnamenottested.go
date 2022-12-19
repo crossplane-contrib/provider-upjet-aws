@@ -608,4 +608,28 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_opsworks_user_profile": config.IdentifierFromProvider,
+
+	// ssm
+	//
+	// AWS SSM Activation can be imported using the id
+	"aws_ssm_activation": config.IdentifierFromProvider,
+	// SSM associations can be imported using the association_id
+	"aws_ssm_association": config.IdentifierFromProvider,
+	// SSM Documents can be imported using the name
+	"aws_ssm_document": config.NameAsIdentifier,
+	// SSM Maintenance Windows can be imported using the maintenance window id
+	"aws_ssm_maintenance_window": config.IdentifierFromProvider,
+	// SSM Maintenance Window targets can be imported using WINDOW_ID/WINDOW_TARGET_ID
+	"aws_ssm_maintenance_window_target": config.IdentifierFromProvider,
+	// AWS Maintenance Window Task can be imported using the window_id and window_task_id separated by /
+	"aws_ssm_maintenance_window_task": config.IdentifierFromProvider,
+	// SSM Parameters can be imported using the parameter store name
+	"aws_ssm_parameter": config.NameAsIdentifier,
+	// SSM Patch Baselines can be imported by their baseline ID
+	"aws_ssm_patch_baseline": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_ssm_patch_group": config.IdentifierFromProvider,
+	// SSM resource data sync can be imported using the name
+	"aws_ssm_resource_data_sync": config.NameAsIdentifier,
 }
