@@ -350,13 +350,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Elasticsearch domains can be imported using the domain_name
 	"aws_elasticsearch_domain_saml_options": config.ParameterAsIdentifier("domain_name"),
 
-	// elastictranscoder
-	//
-	// Elastic Transcoder pipelines can be imported using the id
-	"aws_elastictranscoder_pipeline": config.IdentifierFromProvider,
-	// Elastic Transcoder presets can be imported using the id
-	"aws_elastictranscoder_preset": config.IdentifierFromProvider,
-
 	// elb
 	//
 	// Application cookie stickiness policies can be imported using the ELB name, port, and policy name separated by colons (:)

@@ -378,6 +378,8 @@ import (
 	subnetgroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/subnetgroup"
 	userelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/user"
 	usergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/usergroup"
+	pipelineelastictranscoder "github.com/upbound/provider-aws/internal/controller/elastictranscoder/pipeline"
+	preset "github.com/upbound/provider-aws/internal/controller/elastictranscoder/preset"
 	attachmentelb "github.com/upbound/provider-aws/internal/controller/elb/attachment"
 	elb "github.com/upbound/provider-aws/internal/controller/elb/elb"
 	lb "github.com/upbound/provider-aws/internal/controller/elbv2/lb"
@@ -964,6 +966,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subnetgroupelasticache.Setup,
 		userelasticache.Setup,
 		usergroupelasticache.Setup,
+		pipelineelastictranscoder.Setup,
+		preset.Setup,
 		attachmentelb.Setup,
 		elb.Setup,
 		lb.Setup,

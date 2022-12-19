@@ -1640,6 +1640,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// DirectoryService directories can be imported using the directory id
 	"aws_directory_service_directory": config.IdentifierFromProvider,
+
+	// elastictranscoder
+	//
+	// Elastic Transcoder pipelines can be imported using the id
+	"aws_elastictranscoder_pipeline": config.IdentifierFromProvider,
+	// Elastic Transcoder presets can be imported using the id
+	"aws_elastictranscoder_preset": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
