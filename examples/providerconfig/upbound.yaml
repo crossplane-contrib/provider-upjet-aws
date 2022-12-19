@@ -1,0 +1,10 @@
+apiVersion: aws.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: upbound
+spec:
+  credentials:
+    source: Upbound
+    upbound:
+      webIdentity:
+        roleARN: <roleARN-for-provider-identity>

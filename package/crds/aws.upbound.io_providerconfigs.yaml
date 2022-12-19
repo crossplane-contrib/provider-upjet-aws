@@ -141,10 +141,28 @@ spec:
                     - Secret
                     - IRSA
                     - WebIdentity
+                    - Upbound
                     type: string
+                  upbound:
+                    description: Upbound defines the options for authenticating using
+                      Upbound as an identity provider.
+                    properties:
+                      webIdentity:
+                        description: WebIdentity defines the options for assuming
+                          an IAM role with a Web Identity.
+                        properties:
+                          roleARN:
+                            description: AssumeRoleARN to assume with provider credentials
+                            type: string
+                          roleSessionName:
+                            description: RoleSessionName is the session name, if you
+                              wish to uniquely identify this session.
+                            type: string
+                        type: object
+                    type: object
                   webIdentity:
                     description: WebIdentity defines the options for assuming an IAM
-                      role with a Web Identity
+                      role with a Web Identity.
                     properties:
                       roleARN:
                         description: AssumeRoleARN to assume with provider credentials
