@@ -229,6 +229,12 @@ import (
 	gateway "github.com/upbound/provider-aws/internal/controller/directconnect/gateway"
 	gatewayassociation "github.com/upbound/provider-aws/internal/controller/directconnect/gatewayassociation"
 	gatewayassociationproposal "github.com/upbound/provider-aws/internal/controller/directconnect/gatewayassociationproposal"
+	hostedprivatevirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/hostedprivatevirtualinterface"
+	hostedprivatevirtualinterfaceaccepter "github.com/upbound/provider-aws/internal/controller/directconnect/hostedprivatevirtualinterfaceaccepter"
+	hostedpublicvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/hostedpublicvirtualinterface"
+	hostedpublicvirtualinterfaceaccepter "github.com/upbound/provider-aws/internal/controller/directconnect/hostedpublicvirtualinterfaceaccepter"
+	hostedtransitvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/hostedtransitvirtualinterface"
+	hostedtransitvirtualinterfaceaccepter "github.com/upbound/provider-aws/internal/controller/directconnect/hostedtransitvirtualinterfaceaccepter"
 	lag "github.com/upbound/provider-aws/internal/controller/directconnect/lag"
 	privatevirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/privatevirtualinterface"
 	publicvirtualinterface "github.com/upbound/provider-aws/internal/controller/directconnect/publicvirtualinterface"
@@ -810,6 +816,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		gateway.Setup,
 		gatewayassociation.Setup,
 		gatewayassociationproposal.Setup,
+		hostedprivatevirtualinterface.Setup,
+		hostedprivatevirtualinterfaceaccepter.Setup,
+		hostedpublicvirtualinterface.Setup,
+		hostedpublicvirtualinterfaceaccepter.Setup,
+		hostedtransitvirtualinterface.Setup,
+		hostedtransitvirtualinterfaceaccepter.Setup,
 		lag.Setup,
 		privatevirtualinterface.Setup,
 		publicvirtualinterface.Setup,

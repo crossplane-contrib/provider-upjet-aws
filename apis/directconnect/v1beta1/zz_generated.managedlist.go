@@ -61,6 +61,60 @@ func (l *GatewayList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this HostedPrivateVirtualInterfaceAccepterList.
+func (l *HostedPrivateVirtualInterfaceAccepterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this HostedPrivateVirtualInterfaceList.
+func (l *HostedPrivateVirtualInterfaceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this HostedPublicVirtualInterfaceAccepterList.
+func (l *HostedPublicVirtualInterfaceAccepterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this HostedPublicVirtualInterfaceList.
+func (l *HostedPublicVirtualInterfaceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this HostedTransitVirtualInterfaceAccepterList.
+func (l *HostedTransitVirtualInterfaceAccepterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this HostedTransitVirtualInterfaceList.
+func (l *HostedTransitVirtualInterfaceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this LagList.
 func (l *LagList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

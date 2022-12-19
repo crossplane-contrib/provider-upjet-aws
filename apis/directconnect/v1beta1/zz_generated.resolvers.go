@@ -182,6 +182,194 @@ func (mg *GatewayAssociationProposal) ResolveReferences(ctx context.Context, c c
 	return nil
 }
 
+// ResolveReferences of this HostedPrivateVirtualInterface.
+func (mg *HostedPrivateVirtualInterface) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectionID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ConnectionIDRef,
+		Selector:     mg.Spec.ForProvider.ConnectionIDSelector,
+		To: reference.To{
+			List:    &ConnectionList{},
+			Managed: &Connection{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ConnectionID")
+	}
+	mg.Spec.ForProvider.ConnectionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ConnectionIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this HostedPrivateVirtualInterfaceAccepter.
+func (mg *HostedPrivateVirtualInterfaceAccepter) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPNGatewayID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VPNGatewayIDRef,
+		Selector:     mg.Spec.ForProvider.VPNGatewayIDSelector,
+		To: reference.To{
+			List:    &v1beta1.VPNGatewayList{},
+			Managed: &v1beta1.VPNGateway{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPNGatewayID")
+	}
+	mg.Spec.ForProvider.VPNGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPNGatewayIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualInterfaceID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.VirtualInterfaceIDRef,
+		Selector:     mg.Spec.ForProvider.VirtualInterfaceIDSelector,
+		To: reference.To{
+			List:    &HostedPrivateVirtualInterfaceList{},
+			Managed: &HostedPrivateVirtualInterface{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualInterfaceID")
+	}
+	mg.Spec.ForProvider.VirtualInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualInterfaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this HostedPublicVirtualInterface.
+func (mg *HostedPublicVirtualInterface) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectionID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ConnectionIDRef,
+		Selector:     mg.Spec.ForProvider.ConnectionIDSelector,
+		To: reference.To{
+			List:    &ConnectionList{},
+			Managed: &Connection{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ConnectionID")
+	}
+	mg.Spec.ForProvider.ConnectionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ConnectionIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this HostedPublicVirtualInterfaceAccepter.
+func (mg *HostedPublicVirtualInterfaceAccepter) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualInterfaceID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.VirtualInterfaceIDRef,
+		Selector:     mg.Spec.ForProvider.VirtualInterfaceIDSelector,
+		To: reference.To{
+			List:    &HostedPublicVirtualInterfaceList{},
+			Managed: &HostedPublicVirtualInterface{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualInterfaceID")
+	}
+	mg.Spec.ForProvider.VirtualInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualInterfaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this HostedTransitVirtualInterface.
+func (mg *HostedTransitVirtualInterface) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectionID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ConnectionIDRef,
+		Selector:     mg.Spec.ForProvider.ConnectionIDSelector,
+		To: reference.To{
+			List:    &ConnectionList{},
+			Managed: &Connection{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ConnectionID")
+	}
+	mg.Spec.ForProvider.ConnectionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ConnectionIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this HostedTransitVirtualInterfaceAccepter.
+func (mg *HostedTransitVirtualInterfaceAccepter) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DxGatewayID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DxGatewayIDRef,
+		Selector:     mg.Spec.ForProvider.DxGatewayIDSelector,
+		To: reference.To{
+			List:    &GatewayList{},
+			Managed: &Gateway{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DxGatewayID")
+	}
+	mg.Spec.ForProvider.DxGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DxGatewayIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualInterfaceID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.VirtualInterfaceIDRef,
+		Selector:     mg.Spec.ForProvider.VirtualInterfaceIDSelector,
+		To: reference.To{
+			List:    &HostedTransitVirtualInterfaceList{},
+			Managed: &HostedTransitVirtualInterface{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualInterfaceID")
+	}
+	mg.Spec.ForProvider.VirtualInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualInterfaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this PrivateVirtualInterface.
 func (mg *PrivateVirtualInterface) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

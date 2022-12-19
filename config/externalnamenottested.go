@@ -148,18 +148,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_dx_connection_confirmation": config.IdentifierFromProvider,
 	// No import
 	"aws_dx_hosted_connection": config.IdentifierFromProvider,
-	// Direct Connect hosted private virtual interfaces can be imported using the vif id
-	"aws_dx_hosted_private_virtual_interface": config.IdentifierFromProvider,
-	// Direct Connect hosted private virtual interfaces can be imported using the vif id
-	"aws_dx_hosted_private_virtual_interface_accepter": config.ParameterAsIdentifier("virtual_interface_id"),
-	// Direct Connect hosted public virtual interfaces can be imported using the vif id
-	"aws_dx_hosted_public_virtual_interface": config.IdentifierFromProvider,
-	// Direct Connect hosted public virtual interfaces can be imported using the vif id
-	"aws_dx_hosted_public_virtual_interface_accepter": config.ParameterAsIdentifier("virtual_interface_id"),
-	// Direct Connect hosted transit virtual interfaces can be imported using the vif id
-	"aws_dx_hosted_transit_virtual_interface": config.IdentifierFromProvider,
-	// Direct Connect hosted transit virtual interfaces can be imported using the vif id
-	"aws_dx_hosted_transit_virtual_interface_accepter": config.ParameterAsIdentifier("virtual_interface_id"),
 
 	// dms
 	//
