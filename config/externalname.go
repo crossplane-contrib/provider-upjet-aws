@@ -1433,6 +1433,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// imported using the standards subscription ARN:
 	// arn:aws:securityhub:eu-west-1:123456789012:subscription/pci-dss/v/3.2.1
 	"aws_securityhub_standards_subscription": FormattedIdentifierFromProvider("", "standards_arn"),
+	// imported using the account ID
+	"aws_securityhub_invite_accepter": config.IdentifierFromProvider,
 
 	// cloudformation
 	//
