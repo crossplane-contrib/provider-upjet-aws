@@ -239,6 +239,7 @@ import (
 	lifecyclepolicy "github.com/upbound/provider-aws/internal/controller/dlm/lifecyclepolicy"
 	certificatedms "github.com/upbound/provider-aws/internal/controller/dms/certificate"
 	endpoint "github.com/upbound/provider-aws/internal/controller/dms/endpoint"
+	replicationsubnetgroup "github.com/upbound/provider-aws/internal/controller/dms/replicationsubnetgroup"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
 	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/docdb/clusterparametergroup"
@@ -825,6 +826,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lifecyclepolicy.Setup,
 		certificatedms.Setup,
 		endpoint.Setup,
+		replicationsubnetgroup.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,
 		clusterparametergroup.Setup,

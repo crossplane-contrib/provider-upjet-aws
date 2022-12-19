@@ -9,6 +9,7 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1beta12 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/kms/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
@@ -53,6 +54,32 @@ func (mg *Endpoint) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.SecretsManagerAccessRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SecretsManagerAccessRoleArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ReplicationSubnetGroup.
+func (mg *ReplicationSubnetGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.SubnetIDRefs,
+		Selector:      mg.Spec.ForProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetIds")
+	}
+	mg.Spec.ForProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SubnetIDRefs = mrsp.ResolvedReferences
 
 	return nil
 }
