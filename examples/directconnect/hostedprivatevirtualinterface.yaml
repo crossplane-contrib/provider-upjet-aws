@@ -8,7 +8,7 @@ metadata:
   name: foo
 spec:
   forProvider:
-    ownerAccountId: "${data.aws_account_id}"
+    ownerAccountId: "${data.aws_peer_account_id}"
     addressFamily: ipv4
     bgpAsn: 65352
     connectionIdSelector:
