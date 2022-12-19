@@ -490,26 +490,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// MSK SCRAM Secret Associations can be imported using the id
 	"aws_msk_scram_secret_association": config.IdentifierFromProvider,
 
-	// lightsail
-	//
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_lightsail_domain": config.IdentifierFromProvider,
-	// Lightsail Instances can be imported using their name
-	"aws_lightsail_instance": config.NameAsIdentifier,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_lightsail_instance_public_ports": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_lightsail_key_pair": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_lightsail_static_ip": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_lightsail_static_ip_attachment": config.IdentifierFromProvider,
-
 	// macie
 	//
 	// No import
