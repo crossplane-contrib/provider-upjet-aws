@@ -528,4 +528,101 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_macie_s3_bucket_association": config.IdentifierFromProvider,
+
+	// macie2
+	//
+	// aws_macie2_account can be imported using the id
+	"aws_macie2_account": config.IdentifierFromProvider,
+	// aws_macie2_classification_job can be imported using the id
+	"aws_macie2_classification_job": config.IdentifierFromProvider,
+	// aws_macie2_custom_data_identifier can be imported using the id
+	"aws_macie2_custom_data_identifier": config.IdentifierFromProvider,
+	// aws_macie2_findings_filter can be imported using the id
+	"aws_macie2_findings_filter": config.IdentifierFromProvider,
+	// aws_macie2_invitation_accepter can be imported using the admin account ID
+	"aws_macie2_invitation_accepter": FormattedIdentifierFromProvider("", "administrator_account_id"),
+	// aws_macie2_member can be imported using the account ID of the member account
+	"aws_macie2_member": FormattedIdentifierFromProvider("", "account_id"),
+	// aws_macie2_organization_admin_account can be imported using the id
+	"aws_macie2_organization_admin_account": config.IdentifierFromProvider,
+
+	// mediaconvert
+	//
+	// Media Convert Queue can be imported via the queue name
+	"aws_media_convert_queue": config.NameAsIdentifier,
+
+	// mediapackage
+	//
+	// Media Package Channels can be imported via the channel ID
+	"aws_media_package_channel": config.IdentifierFromProvider,
+
+	// mediastore
+	//
+	// MediaStore Container can be imported using the MediaStore Container Name
+	"aws_media_store_container": config.NameAsIdentifier,
+	// MediaStore Container Policy can be imported using the MediaStore Container Name
+	"aws_media_store_container_policy": FormattedIdentifierFromProvider("", "container_name"),
+
+	// memorydb
+	//
+	// Use the name to import an ACL
+	"aws_memorydb_acl": config.NameAsIdentifier,
+	// Use the name to import a cluster
+	"aws_memorydb_cluster": config.NameAsIdentifier,
+	// Use the name to import a parameter group
+	"aws_memorydb_parameter_group": config.NameAsIdentifier,
+	// Use the name to import a snapshot
+	"aws_memorydb_snapshot": config.NameAsIdentifier,
+	// Use the name to import a subnet group
+	"aws_memorydb_subnet_group": config.NameAsIdentifier,
+	// Use the user_name to import a user
+	"aws_memorydb_user": config.ParameterAsIdentifier("user_name"),
+
+	// opsworks
+	//
+	// Opsworks Application can be imported using the id
+	"aws_opsworks_application": config.IdentifierFromProvider,
+	// OpsWorks Custom Layers can be imported using the id
+	"aws_opsworks_custom_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_ecs_cluster_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_ganglia_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_haproxy_layer": config.IdentifierFromProvider,
+	// Opsworks Instances can be imported using the instance id
+	"aws_opsworks_instance": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_java_app_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_memcached_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_mysql_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_nodejs_app_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_permission": config.IdentifierFromProvider,
+	// OpsWorks PHP Application Layers can be imported using the id
+	"aws_opsworks_php_app_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_rails_app_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_rds_db_instance": config.IdentifierFromProvider,
+	// OpsWorks stacks can be imported using the id
+	"aws_opsworks_stack": config.IdentifierFromProvider,
+	// OpsWorks static web server Layers can be imported using the id
+	"aws_opsworks_static_web_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_user_profile": config.IdentifierFromProvider,
 }
