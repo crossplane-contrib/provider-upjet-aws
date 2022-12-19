@@ -2,7 +2,7 @@ apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
 kind: DestinationPolicy
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "It requires a user id and destination arn to be specified"
+    upjet.upbound.io/manual-intervention: "It requires a account id and destination arn to be specified"
     meta.upbound.io/example-id: cloudwatchlogs/v1beta1/destinationpolicy
   labels:
     testing.upbound.io/example-name: test_destination_policy
