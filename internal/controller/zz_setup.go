@@ -433,6 +433,8 @@ import (
 	thing "github.com/upbound/provider-aws/internal/controller/iot/thing"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
+	keyspace "github.com/upbound/provider-aws/internal/controller/keyspaces/keyspace"
+	tablekeyspaces "github.com/upbound/provider-aws/internal/controller/keyspaces/table"
 	streamkinesis "github.com/upbound/provider-aws/internal/controller/kinesis/stream"
 	streamconsumer "github.com/upbound/provider-aws/internal/controller/kinesis/streamconsumer"
 	applicationkinesisanalytics "github.com/upbound/provider-aws/internal/controller/kinesisanalytics/application"
@@ -1014,6 +1016,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		thing.Setup,
 		clusterkafka.Setup,
 		configuration.Setup,
+		keyspace.Setup,
+		tablekeyspaces.Setup,
 		streamkinesis.Setup,
 		streamconsumer.Setup,
 		applicationkinesisanalytics.Setup,

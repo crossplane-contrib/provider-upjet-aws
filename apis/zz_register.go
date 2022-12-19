@@ -80,6 +80,7 @@ import (
 	v1beta1iam "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta1iot "github.com/upbound/provider-aws/apis/iot/v1beta1"
 	v1beta1kafka "github.com/upbound/provider-aws/apis/kafka/v1beta1"
+	v1beta1keyspaces "github.com/upbound/provider-aws/apis/keyspaces/v1beta1"
 	v1beta1kinesis "github.com/upbound/provider-aws/apis/kinesis/v1beta1"
 	v1beta1kinesisanalytics "github.com/upbound/provider-aws/apis/kinesisanalytics/v1beta1"
 	v1beta1kinesisanalyticsv2 "github.com/upbound/provider-aws/apis/kinesisanalyticsv2/v1beta1"
@@ -188,6 +189,7 @@ func init() {
 		v1beta1iam.SchemeBuilder.AddToScheme,
 		v1beta1iot.SchemeBuilder.AddToScheme,
 		v1beta1kafka.SchemeBuilder.AddToScheme,
+		v1beta1keyspaces.SchemeBuilder.AddToScheme,
 		v1beta1kinesis.SchemeBuilder.AddToScheme,
 		v1beta1kinesisanalytics.SchemeBuilder.AddToScheme,
 		v1beta1kinesisanalyticsv2.SchemeBuilder.AddToScheme,

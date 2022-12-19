@@ -1589,6 +1589,14 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// random parts: act-f1w12eperfslh
 	"aws_servicecatalog_service_action": config.IdentifierFromProvider,
 
+	// keyspaces
+	//
+	// Use the name to import a keyspace
+	"aws_keyspaces_keyspace": config.NameAsIdentifier,
+	// Use the keyspace_name and table_name separated by / to import a table
+	// my_keyspace/my_table
+	"aws_keyspaces_table": FormattedIdentifierFromProvider("/", "keyspace_name", "table_name"),
+
 	// route53recoveryreadiness
 	//
 	// Route53 Recovery Readiness recovery groups can be imported via the recovery group name
