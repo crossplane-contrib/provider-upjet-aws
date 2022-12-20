@@ -486,11 +486,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Media Convert Queue can be imported via the queue name
 	"aws_media_convert_queue": config.NameAsIdentifier,
 
-	// mediapackage
-	//
-	// Media Package Channels can be imported via the channel ID
-	"aws_media_package_channel": config.IdentifierFromProvider,
-
 	// mediastore
 	//
 	// MediaStore Container can be imported using the MediaStore Container Name

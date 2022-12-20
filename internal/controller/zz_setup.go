@@ -492,6 +492,7 @@ import (
 	findingsfilter "github.com/upbound/provider-aws/internal/controller/macie2/findingsfilter"
 	invitationacceptermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/invitationaccepter"
 	membermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/member"
+	channel "github.com/upbound/provider-aws/internal/controller/mediapackage/channel"
 	broker "github.com/upbound/provider-aws/internal/controller/mq/broker"
 	configurationmq "github.com/upbound/provider-aws/internal/controller/mq/configuration"
 	clusterneptune "github.com/upbound/provider-aws/internal/controller/neptune/cluster"
@@ -1103,6 +1104,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		findingsfilter.Setup,
 		invitationacceptermacie2.Setup,
 		membermacie2.Setup,
+		channel.Setup,
 		broker.Setup,
 		configurationmq.Setup,
 		clusterneptune.Setup,

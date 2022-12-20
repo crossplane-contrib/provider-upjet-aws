@@ -1693,6 +1693,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// EventBridge schema can be imported using the name and registry_name
 	"aws_schemas_schema": FormattedIdentifierFromProvider("/", "name", "registry_name"),
 
+	// mediapackage
+	//
+	// Media Package Channels can be imported via the channel ID
+	"aws_media_package_channel": config.IdentifierFromProvider,
+
 	// macie2
 	//
 	// aws_macie2_account can be imported using the id
