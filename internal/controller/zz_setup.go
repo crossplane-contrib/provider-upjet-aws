@@ -473,6 +473,12 @@ import (
 	slottype "github.com/upbound/provider-aws/internal/controller/lexmodels/slottype"
 	association "github.com/upbound/provider-aws/internal/controller/licensemanager/association"
 	licenseconfiguration "github.com/upbound/provider-aws/internal/controller/licensemanager/licenseconfiguration"
+	domainlightsail "github.com/upbound/provider-aws/internal/controller/lightsail/domain"
+	instancelightsail "github.com/upbound/provider-aws/internal/controller/lightsail/instance"
+	instancepublicports "github.com/upbound/provider-aws/internal/controller/lightsail/instancepublicports"
+	keypairlightsail "github.com/upbound/provider-aws/internal/controller/lightsail/keypair"
+	staticip "github.com/upbound/provider-aws/internal/controller/lightsail/staticip"
+	staticipattachment "github.com/upbound/provider-aws/internal/controller/lightsail/staticipattachment"
 	broker "github.com/upbound/provider-aws/internal/controller/mq/broker"
 	configurationmq "github.com/upbound/provider-aws/internal/controller/mq/configuration"
 	clusterneptune "github.com/upbound/provider-aws/internal/controller/neptune/cluster"
@@ -1061,6 +1067,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		slottype.Setup,
 		association.Setup,
 		licenseconfiguration.Setup,
+		domainlightsail.Setup,
+		instancelightsail.Setup,
+		instancepublicports.Setup,
+		keypairlightsail.Setup,
+		staticip.Setup,
+		staticipattachment.Setup,
 		broker.Setup,
 		configurationmq.Setup,
 		clusterneptune.Setup,
