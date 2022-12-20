@@ -799,4 +799,27 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// aws_servicequotas_service_quota can be imported by using the service code and quota code, separated by a front slash (/)
 	// vpc/L-F678F1CE
 	"aws_servicequotas_service_quota": FormattedIdentifierFromProvider("/", "service_code", "quota_code"),
+
+	// storagegateway
+	//
+	// aws_storagegateway_cache can be imported by using the gateway Amazon Resource Name (ARN) and local disk identifier separated with a colon (:)
+	"aws_storagegateway_cache": config.IdentifierFromProvider,
+	// aws_storagegateway_cached_iscsi_volume can be imported by using the volume Amazon Resource Name (ARN)
+	"aws_storagegateway_cached_iscsi_volume": config.IdentifierFromProvider,
+	// aws_storagegateway_file_system_association can be imported by using the FSx file system association Amazon Resource Name (ARN)
+	"aws_storagegateway_file_system_association": config.ParameterAsIdentifier("location_arn"),
+	// aws_storagegateway_gateway can be imported by using the gateway Amazon Resource Name (ARN)
+	"aws_storagegateway_gateway": config.IdentifierFromProvider,
+	// aws_storagegateway_nfs_file_share can be imported by using the NFS File Share Amazon Resource Name (ARN)
+	"aws_storagegateway_nfs_file_share": config.IdentifierFromProvider,
+	// aws_storagegateway_smb_file_share can be imported by using the SMB File Share Amazon Resource Name (ARN)
+	"aws_storagegateway_smb_file_share": config.IdentifierFromProvider,
+	// aws_storagegateway_stored_iscsi_volume can be imported by using the volume Amazon Resource Name (ARN)
+	"aws_storagegateway_stored_iscsi_volume": config.IdentifierFromProvider,
+	// aws_storagegateway_tape_pool can be imported by using the volume Amazon Resource Name (ARN)
+	"aws_storagegateway_tape_pool": config.IdentifierFromProvider,
+	// aws_storagegateway_upload_buffer can be imported by using the gateway Amazon Resource Name (ARN) and local disk identifier separated with a colon (:)
+	"aws_storagegateway_upload_buffer": config.IdentifierFromProvider,
+	// aws_storagegateway_working_storage can be imported by using the gateway Amazon Resource Name (ARN) and local disk identifier separated with a colon (:)
+	"aws_storagegateway_working_storage": FormattedIdentifierFromProvider(":", "gateway_arn", "disk_id"),
 }
