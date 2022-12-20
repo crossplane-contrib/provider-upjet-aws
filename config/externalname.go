@@ -1669,6 +1669,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_dms_certificate": config.ParameterAsIdentifier("certificate_id"),
 	// Endpoints can be imported using the endpoint_id
 	"aws_dms_endpoint": config.ParameterAsIdentifier("endpoint_id"),
+	// Replication subnet groups can be imported using the replication_subnet_group_id
+	"aws_dms_replication_subnet_group": config.ParameterAsIdentifier("replication_subnet_group_id"),
 
 	// ds
 	//

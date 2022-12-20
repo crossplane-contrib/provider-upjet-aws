@@ -146,8 +146,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_dms_event_subscription": config.NameAsIdentifier,
 	// Replication instances can be imported using the replication_instance_id
 	"aws_dms_replication_instance": config.ParameterAsIdentifier("replication_instance_id"),
-	// Replication subnet groups can be imported using the replication_subnet_group_id
-	"aws_dms_replication_subnet_group": config.ParameterAsIdentifier("replication_subnet_group_id"),
 	// Replication tasks can be imported using the replication_task_id
 	"aws_dms_replication_task": config.ParameterAsIdentifier("replication_task_id"),
 
