@@ -39,4 +39,39 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 			IgnoredFields: []string{"associated_gateway_owner_account_id"},
 		}
 	})
+	p.AddResourceConfigurator("aws_dx_hosted_transit_virtual_interface", func(r *config.Resource) {
+		r.References["connection_id"] = config.Reference{
+			Type: "Connection",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_dx_hosted_public_virtual_interface", func(r *config.Resource) {
+		r.References["connection_id"] = config.Reference{
+			Type: "Connection",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_dx_hosted_private_virtual_interface", func(r *config.Resource) {
+		r.References["connection_id"] = config.Reference{
+			Type: "Connection",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_dx_hosted_private_virtual_interface_accepter", func(r *config.Resource) {
+		r.References["virtual_interface_id"] = config.Reference{
+			Type: "HostedPrivateVirtualInterface",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_dx_hosted_public_virtual_interface_accepter", func(r *config.Resource) {
+		r.References["virtual_interface_id"] = config.Reference{
+			Type: "HostedPublicVirtualInterface",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_dx_hosted_transit_virtual_interface_accepter", func(r *config.Resource) {
+		r.References["virtual_interface_id"] = config.Reference{
+			Type: "HostedTransitVirtualInterface",
+		}
+	})
 }

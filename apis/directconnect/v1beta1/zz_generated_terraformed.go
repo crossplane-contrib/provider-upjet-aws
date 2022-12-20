@@ -458,6 +458,450 @@ func (tr *GatewayAssociationProposal) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this HostedPrivateVirtualInterface
+func (mg *HostedPrivateVirtualInterface) GetTerraformResourceType() string {
+	return "aws_dx_hosted_private_virtual_interface"
+}
+
+// GetConnectionDetailsMapping for this HostedPrivateVirtualInterface
+func (tr *HostedPrivateVirtualInterface) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this HostedPrivateVirtualInterface
+func (tr *HostedPrivateVirtualInterface) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this HostedPrivateVirtualInterface
+func (tr *HostedPrivateVirtualInterface) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this HostedPrivateVirtualInterface
+func (tr *HostedPrivateVirtualInterface) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this HostedPrivateVirtualInterface
+func (tr *HostedPrivateVirtualInterface) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this HostedPrivateVirtualInterface
+func (tr *HostedPrivateVirtualInterface) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this HostedPrivateVirtualInterface using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *HostedPrivateVirtualInterface) LateInitialize(attrs []byte) (bool, error) {
+	params := &HostedPrivateVirtualInterfaceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *HostedPrivateVirtualInterface) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this HostedPrivateVirtualInterfaceAccepter
+func (mg *HostedPrivateVirtualInterfaceAccepter) GetTerraformResourceType() string {
+	return "aws_dx_hosted_private_virtual_interface_accepter"
+}
+
+// GetConnectionDetailsMapping for this HostedPrivateVirtualInterfaceAccepter
+func (tr *HostedPrivateVirtualInterfaceAccepter) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this HostedPrivateVirtualInterfaceAccepter
+func (tr *HostedPrivateVirtualInterfaceAccepter) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this HostedPrivateVirtualInterfaceAccepter
+func (tr *HostedPrivateVirtualInterfaceAccepter) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this HostedPrivateVirtualInterfaceAccepter
+func (tr *HostedPrivateVirtualInterfaceAccepter) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this HostedPrivateVirtualInterfaceAccepter
+func (tr *HostedPrivateVirtualInterfaceAccepter) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this HostedPrivateVirtualInterfaceAccepter
+func (tr *HostedPrivateVirtualInterfaceAccepter) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this HostedPrivateVirtualInterfaceAccepter using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *HostedPrivateVirtualInterfaceAccepter) LateInitialize(attrs []byte) (bool, error) {
+	params := &HostedPrivateVirtualInterfaceAccepterParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *HostedPrivateVirtualInterfaceAccepter) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this HostedPublicVirtualInterface
+func (mg *HostedPublicVirtualInterface) GetTerraformResourceType() string {
+	return "aws_dx_hosted_public_virtual_interface"
+}
+
+// GetConnectionDetailsMapping for this HostedPublicVirtualInterface
+func (tr *HostedPublicVirtualInterface) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this HostedPublicVirtualInterface
+func (tr *HostedPublicVirtualInterface) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this HostedPublicVirtualInterface
+func (tr *HostedPublicVirtualInterface) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this HostedPublicVirtualInterface
+func (tr *HostedPublicVirtualInterface) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this HostedPublicVirtualInterface
+func (tr *HostedPublicVirtualInterface) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this HostedPublicVirtualInterface
+func (tr *HostedPublicVirtualInterface) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this HostedPublicVirtualInterface using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *HostedPublicVirtualInterface) LateInitialize(attrs []byte) (bool, error) {
+	params := &HostedPublicVirtualInterfaceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *HostedPublicVirtualInterface) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this HostedPublicVirtualInterfaceAccepter
+func (mg *HostedPublicVirtualInterfaceAccepter) GetTerraformResourceType() string {
+	return "aws_dx_hosted_public_virtual_interface_accepter"
+}
+
+// GetConnectionDetailsMapping for this HostedPublicVirtualInterfaceAccepter
+func (tr *HostedPublicVirtualInterfaceAccepter) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this HostedPublicVirtualInterfaceAccepter
+func (tr *HostedPublicVirtualInterfaceAccepter) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this HostedPublicVirtualInterfaceAccepter
+func (tr *HostedPublicVirtualInterfaceAccepter) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this HostedPublicVirtualInterfaceAccepter
+func (tr *HostedPublicVirtualInterfaceAccepter) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this HostedPublicVirtualInterfaceAccepter
+func (tr *HostedPublicVirtualInterfaceAccepter) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this HostedPublicVirtualInterfaceAccepter
+func (tr *HostedPublicVirtualInterfaceAccepter) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this HostedPublicVirtualInterfaceAccepter using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *HostedPublicVirtualInterfaceAccepter) LateInitialize(attrs []byte) (bool, error) {
+	params := &HostedPublicVirtualInterfaceAccepterParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *HostedPublicVirtualInterfaceAccepter) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this HostedTransitVirtualInterface
+func (mg *HostedTransitVirtualInterface) GetTerraformResourceType() string {
+	return "aws_dx_hosted_transit_virtual_interface"
+}
+
+// GetConnectionDetailsMapping for this HostedTransitVirtualInterface
+func (tr *HostedTransitVirtualInterface) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this HostedTransitVirtualInterface
+func (tr *HostedTransitVirtualInterface) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this HostedTransitVirtualInterface
+func (tr *HostedTransitVirtualInterface) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this HostedTransitVirtualInterface
+func (tr *HostedTransitVirtualInterface) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this HostedTransitVirtualInterface
+func (tr *HostedTransitVirtualInterface) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this HostedTransitVirtualInterface
+func (tr *HostedTransitVirtualInterface) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this HostedTransitVirtualInterface using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *HostedTransitVirtualInterface) LateInitialize(attrs []byte) (bool, error) {
+	params := &HostedTransitVirtualInterfaceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *HostedTransitVirtualInterface) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this HostedTransitVirtualInterfaceAccepter
+func (mg *HostedTransitVirtualInterfaceAccepter) GetTerraformResourceType() string {
+	return "aws_dx_hosted_transit_virtual_interface_accepter"
+}
+
+// GetConnectionDetailsMapping for this HostedTransitVirtualInterfaceAccepter
+func (tr *HostedTransitVirtualInterfaceAccepter) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this HostedTransitVirtualInterfaceAccepter
+func (tr *HostedTransitVirtualInterfaceAccepter) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this HostedTransitVirtualInterfaceAccepter
+func (tr *HostedTransitVirtualInterfaceAccepter) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this HostedTransitVirtualInterfaceAccepter
+func (tr *HostedTransitVirtualInterfaceAccepter) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this HostedTransitVirtualInterfaceAccepter
+func (tr *HostedTransitVirtualInterfaceAccepter) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this HostedTransitVirtualInterfaceAccepter
+func (tr *HostedTransitVirtualInterfaceAccepter) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this HostedTransitVirtualInterfaceAccepter using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *HostedTransitVirtualInterfaceAccepter) LateInitialize(attrs []byte) (bool, error) {
+	params := &HostedTransitVirtualInterfaceAccepterParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *HostedTransitVirtualInterfaceAccepter) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Lag
 func (mg *Lag) GetTerraformResourceType() string {
 	return "aws_dx_lag"

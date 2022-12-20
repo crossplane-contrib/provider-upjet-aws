@@ -1516,6 +1516,18 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_dx_gateway_association": config.IdentifierFromProvider,
 	// No import
 	"aws_dx_bgp_peer": config.IdentifierFromProvider,
+	// Direct Connect hosted private virtual interfaces can be imported using the vif id
+	"aws_dx_hosted_private_virtual_interface": config.IdentifierFromProvider,
+	// Direct Connect hosted private virtual interfaces can be imported using the vif id
+	"aws_dx_hosted_private_virtual_interface_accepter": config.IdentifierFromProvider,
+	// Direct Connect hosted public virtual interfaces can be imported using the vif id
+	"aws_dx_hosted_public_virtual_interface": config.IdentifierFromProvider,
+	// Direct Connect hosted public virtual interfaces can be imported using the vif id
+	"aws_dx_hosted_public_virtual_interface_accepter": config.IdentifierFromProvider,
+	// Direct Connect hosted transit virtual interfaces can be imported using the vif id
+	"aws_dx_hosted_transit_virtual_interface": config.IdentifierFromProvider,
+	// Direct Connect hosted transit virtual interfaces can be imported using the vif id
+	"aws_dx_hosted_transit_virtual_interface_accepter": config.IdentifierFromProvider,
 
 	// appconfig
 	//
