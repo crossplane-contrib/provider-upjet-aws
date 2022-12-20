@@ -500,11 +500,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Media Convert Queue can be imported via the queue name
 	"aws_media_convert_queue": config.NameAsIdentifier,
 
-	// mediapackage
-	//
-	// Media Package Channels can be imported via the channel ID
-	"aws_media_package_channel": config.IdentifierFromProvider,
-
 	// mediastore
 	//
 	// MediaStore Container can be imported using the MediaStore Container Name
@@ -738,15 +733,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_sagemaker_workforce": config.ParameterAsIdentifier("workforce_name"),
 	// SageMaker Workteams can be imported using the workteam_name
 	"aws_sagemaker_workteam": config.ParameterAsIdentifier("workteam_name"),
-
-	// schemas
-	//
-	// EventBridge discoverers can be imported using the id
-	"aws_schemas_discoverer": config.IdentifierFromProvider,
-	// EventBridge schema registries can be imported using the name
-	"aws_schemas_registry": config.NameAsIdentifier,
-	// EventBridge schema can be imported using the name and registry_name
-	"aws_schemas_schema": FormattedIdentifierFromProvider("/", "name", "registry_name"),
 
 	// serverlessrepo
 	//

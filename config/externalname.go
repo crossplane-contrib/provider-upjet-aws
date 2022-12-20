@@ -1681,6 +1681,20 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_elastictranscoder_pipeline": config.IdentifierFromProvider,
 	// Elastic Transcoder presets can be imported using the id
 	"aws_elastictranscoder_preset": config.IdentifierFromProvider,
+
+	// mediapackage
+	//
+	// Media Package Channels can be imported via the channel ID
+	"aws_media_package_channel": config.IdentifierFromProvider,
+
+	// schemas
+	//
+	// EventBridge discoverers can be imported using the id
+	"aws_schemas_discoverer": config.IdentifierFromProvider,
+	// EventBridge schema registries can be imported using the name
+	"aws_schemas_registry": config.NameAsIdentifier,
+	// EventBridge schema can be imported using the name and registry_name
+	"aws_schemas_schema": FormattedIdentifierFromProvider("/", "name", "registry_name"),
 }
 
 func lambdaFunctionURL() config.ExternalName {

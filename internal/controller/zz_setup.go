@@ -485,6 +485,7 @@ import (
 	keypairlightsail "github.com/upbound/provider-aws/internal/controller/lightsail/keypair"
 	staticip "github.com/upbound/provider-aws/internal/controller/lightsail/staticip"
 	staticipattachment "github.com/upbound/provider-aws/internal/controller/lightsail/staticipattachment"
+	channel "github.com/upbound/provider-aws/internal/controller/mediapackage/channel"
 	broker "github.com/upbound/provider-aws/internal/controller/mq/broker"
 	configurationmq "github.com/upbound/provider-aws/internal/controller/mq/configuration"
 	clusterneptune "github.com/upbound/provider-aws/internal/controller/neptune/cluster"
@@ -564,6 +565,9 @@ import (
 	accesspoints3control "github.com/upbound/provider-aws/internal/controller/s3control/accesspoint"
 	accesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/accesspointpolicy"
 	accountpublicaccessblock "github.com/upbound/provider-aws/internal/controller/s3control/accountpublicaccessblock"
+	discoverer "github.com/upbound/provider-aws/internal/controller/schemas/discoverer"
+	registryschemas "github.com/upbound/provider-aws/internal/controller/schemas/registry"
+	schema "github.com/upbound/provider-aws/internal/controller/schemas/schema"
 	secret "github.com/upbound/provider-aws/internal/controller/secretsmanager/secret"
 	secretpolicy "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretpolicy"
 	secretrotation "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretrotation"
@@ -1086,6 +1090,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		keypairlightsail.Setup,
 		staticip.Setup,
 		staticipattachment.Setup,
+		channel.Setup,
 		broker.Setup,
 		configurationmq.Setup,
 		clusterneptune.Setup,
@@ -1165,6 +1170,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		accesspoints3control.Setup,
 		accesspointpolicy.Setup,
 		accountpublicaccessblock.Setup,
+		discoverer.Setup,
+		registryschemas.Setup,
+		schema.Setup,
 		secret.Setup,
 		secretpolicy.Setup,
 		secretrotation.Setup,
