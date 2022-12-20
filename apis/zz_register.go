@@ -92,6 +92,7 @@ import (
 	v1beta1lexmodels "github.com/upbound/provider-aws/apis/lexmodels/v1beta1"
 	v1beta1licensemanager "github.com/upbound/provider-aws/apis/licensemanager/v1beta1"
 	v1beta1lightsail "github.com/upbound/provider-aws/apis/lightsail/v1beta1"
+	v1beta1macie2 "github.com/upbound/provider-aws/apis/macie2/v1beta1"
 	v1beta1mq "github.com/upbound/provider-aws/apis/mq/v1beta1"
 	v1beta1neptune "github.com/upbound/provider-aws/apis/neptune/v1beta1"
 	v1beta1opensearch "github.com/upbound/provider-aws/apis/opensearch/v1beta1"
@@ -204,6 +205,7 @@ func init() {
 		v1beta1lexmodels.SchemeBuilder.AddToScheme,
 		v1beta1licensemanager.SchemeBuilder.AddToScheme,
 		v1beta1lightsail.SchemeBuilder.AddToScheme,
+		v1beta1macie2.SchemeBuilder.AddToScheme,
 		v1beta1mq.SchemeBuilder.AddToScheme,
 		v1beta1neptune.SchemeBuilder.AddToScheme,
 		v1beta1opensearch.SchemeBuilder.AddToScheme,
