@@ -1,0 +1,41 @@
+apiVersion: mediastore.aws.upbound.io/v1beta1
+kind: ContainerPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mediastore/v1beta1/containerpolicy
+  labels:
+    testing.upbound.io/example-name: containerpolicy
+  name: containerpolicy
+spec:
+  forProvider:
+    containerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: container
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "0",
+            "Effect": "Allow",
+            "Principal": {"AWS":"arn:aws:iam::${data.aws_account_id}:root"},
+            "Action": "mediastore:PutEvents",
+            "Resource": "arn:aws:mediastore:${data.aws_region}:${data.aws_account_id}:container/container"
+          }
+        ]
+      }
+    region: us-west-2
+
+---
+
+apiVersion: mediastore.aws.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mediastore/v1beta1/container
+  labels:
+    testing.upbound.io/example-name: container
+  name: container
+spec:
+  forProvider:
+    region: us-west-2

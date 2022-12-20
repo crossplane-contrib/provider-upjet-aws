@@ -486,6 +486,8 @@ import (
 	keypairlightsail "github.com/upbound/provider-aws/internal/controller/lightsail/keypair"
 	staticip "github.com/upbound/provider-aws/internal/controller/lightsail/staticip"
 	staticipattachment "github.com/upbound/provider-aws/internal/controller/lightsail/staticipattachment"
+	container "github.com/upbound/provider-aws/internal/controller/mediastore/container"
+	containerpolicy "github.com/upbound/provider-aws/internal/controller/mediastore/containerpolicy"
 	broker "github.com/upbound/provider-aws/internal/controller/mq/broker"
 	configurationmq "github.com/upbound/provider-aws/internal/controller/mq/configuration"
 	clusterneptune "github.com/upbound/provider-aws/internal/controller/neptune/cluster"
@@ -1091,6 +1093,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		keypairlightsail.Setup,
 		staticip.Setup,
 		staticipattachment.Setup,
+		container.Setup,
+		containerpolicy.Setup,
 		broker.Setup,
 		configurationmq.Setup,
 		clusterneptune.Setup,

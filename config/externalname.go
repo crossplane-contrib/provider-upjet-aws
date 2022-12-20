@@ -1406,6 +1406,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_lightsail_static_ip_attachment": config.IdentifierFromProvider,
 
+	// mediastore
+	//
+	// MediaStore Container can be imported using the MediaStore Container Name
+	"aws_media_store_container": config.NameAsIdentifier,
+	// MediaStore Container Policy can be imported using the MediaStore Container Name
+	"aws_media_store_container_policy": FormattedIdentifierFromProvider("", "container_name"),
+
 	// cloud9
 	//
 	// No import

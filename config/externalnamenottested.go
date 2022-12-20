@@ -503,13 +503,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Media Package Channels can be imported via the channel ID
 	"aws_media_package_channel": config.IdentifierFromProvider,
 
-	// mediastore
-	//
-	// MediaStore Container can be imported using the MediaStore Container Name
-	"aws_media_store_container": config.NameAsIdentifier,
-	// MediaStore Container Policy can be imported using the MediaStore Container Name
-	"aws_media_store_container_policy": FormattedIdentifierFromProvider("", "container_name"),
-
 	// memorydb
 	//
 	// Use the name to import an ACL
