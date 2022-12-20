@@ -215,8 +215,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// securityhub
 	//
-	// imported using the account ID
-	"aws_securityhub_invite_accepter": FormattedIdentifierFromProvider("", "master_id"),
 	// imported using the AWS account ID
 	"aws_securityhub_organization_admin_account": FormattedIdentifierFromProvider("", "admin_account_id"),
 	// imported using the AWS account ID

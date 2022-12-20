@@ -566,6 +566,7 @@ import (
 	actiontarget "github.com/upbound/provider-aws/internal/controller/securityhub/actiontarget"
 	findingaggregator "github.com/upbound/provider-aws/internal/controller/securityhub/findingaggregator"
 	insight "github.com/upbound/provider-aws/internal/controller/securityhub/insight"
+	inviteaccepter "github.com/upbound/provider-aws/internal/controller/securityhub/inviteaccepter"
 	membersecurityhub "github.com/upbound/provider-aws/internal/controller/securityhub/member"
 	productsubscription "github.com/upbound/provider-aws/internal/controller/securityhub/productsubscription"
 	standardssubscription "github.com/upbound/provider-aws/internal/controller/securityhub/standardssubscription"
@@ -1160,6 +1161,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		actiontarget.Setup,
 		findingaggregator.Setup,
 		insight.Setup,
+		inviteaccepter.Setup,
 		membersecurityhub.Setup,
 		productsubscription.Setup,
 		standardssubscription.Setup,
