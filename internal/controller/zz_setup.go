@@ -564,6 +564,9 @@ import (
 	accesspoints3control "github.com/upbound/provider-aws/internal/controller/s3control/accesspoint"
 	accesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/accesspointpolicy"
 	accountpublicaccessblock "github.com/upbound/provider-aws/internal/controller/s3control/accountpublicaccessblock"
+	discoverer "github.com/upbound/provider-aws/internal/controller/schemas/discoverer"
+	registryschemas "github.com/upbound/provider-aws/internal/controller/schemas/registry"
+	schema "github.com/upbound/provider-aws/internal/controller/schemas/schema"
 	secret "github.com/upbound/provider-aws/internal/controller/secretsmanager/secret"
 	secretpolicy "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretpolicy"
 	secretrotation "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretrotation"
@@ -1165,6 +1168,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		accesspoints3control.Setup,
 		accesspointpolicy.Setup,
 		accountpublicaccessblock.Setup,
+		discoverer.Setup,
+		registryschemas.Setup,
+		schema.Setup,
 		secret.Setup,
 		secretpolicy.Setup,
 		secretrotation.Setup,

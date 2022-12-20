@@ -739,15 +739,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// SageMaker Workteams can be imported using the workteam_name
 	"aws_sagemaker_workteam": config.ParameterAsIdentifier("workteam_name"),
 
-	// schemas
-	//
-	// EventBridge discoverers can be imported using the id
-	"aws_schemas_discoverer": config.IdentifierFromProvider,
-	// EventBridge schema registries can be imported using the name
-	"aws_schemas_registry": config.NameAsIdentifier,
-	// EventBridge schema can be imported using the name and registry_name
-	"aws_schemas_schema": FormattedIdentifierFromProvider("/", "name", "registry_name"),
-
 	// serverlessrepo
 	//
 	// Serverless Application Repository Stack can be imported using the CloudFormation Stack name (with or without the serverlessrepo- prefix) or the CloudFormation Stack ID
