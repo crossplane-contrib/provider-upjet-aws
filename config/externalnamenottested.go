@@ -296,13 +296,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// 00b00fd5aecc0ab60a708659477e9617:123456789012
 	"aws_guardduty_threatintelset": config.IdentifierFromProvider,
 
-	// route53recoveryreadiness
-	//
-	// Route53 Recovery Readiness cells can be imported via the cell name
-	"aws_route53recoveryreadiness_cell": config.NameAsIdentifier,
-	// Route53 Recovery Readiness readiness checks can be imported via the readiness check name
-	"aws_route53recoveryreadiness_readiness_check": config.ParameterAsIdentifier("readiness_check_name"),
-
 	// s3control
 	// S3 Control Buckets can be imported using Amazon Resource Name (ARN)
 	// arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-12345678/bucket/example
