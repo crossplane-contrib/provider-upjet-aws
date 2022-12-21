@@ -121,6 +121,16 @@ func (in *AnalyticsConfigurationParameters) DeepCopyInto(out *AnalyticsConfigura
 		*out = new(string)
 		**out = **in
 	}
+	if in.ApplicationIDRef != nil {
+		in, out := &in.ApplicationIDRef, &out.ApplicationIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ApplicationIDSelector != nil {
+		in, out := &in.ApplicationIDSelector, &out.ApplicationIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ExternalID != nil {
 		in, out := &in.ExternalID, &out.ExternalID
 		*out = new(string)
