@@ -1643,6 +1643,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_route53recoveryreadiness_recovery_group": config.ParameterAsIdentifier("recovery_group_name"),
 	// Route53 Recovery Readiness resource set name can be imported via the resource set name
 	"aws_route53recoveryreadiness_resource_set": config.ParameterAsIdentifier("resource_set_name"),
+	// Route53 Recovery Readiness cells can be imported via the cell name
+	"aws_route53recoveryreadiness_cell": config.ParameterAsIdentifier("cell_name"),
+	// Route53 Recovery Readiness readiness checks can be imported via the readiness check name
+	"aws_route53recoveryreadiness_readiness_check": config.ParameterAsIdentifier("readiness_check_name"),
 
 	// s3control
 	//
