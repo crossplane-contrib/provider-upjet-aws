@@ -608,6 +608,7 @@ import (
 	privatednsnamespace "github.com/upbound/provider-aws/internal/controller/servicediscovery/privatednsnamespace"
 	publicdnsnamespace "github.com/upbound/provider-aws/internal/controller/servicediscovery/publicdnsnamespace"
 	serviceservicediscovery "github.com/upbound/provider-aws/internal/controller/servicediscovery/service"
+	servicequota "github.com/upbound/provider-aws/internal/controller/servicequotas/servicequota"
 	activity "github.com/upbound/provider-aws/internal/controller/sfn/activity"
 	statemachine "github.com/upbound/provider-aws/internal/controller/sfn/statemachine"
 	signingprofile "github.com/upbound/provider-aws/internal/controller/signer/signingprofile"
@@ -1225,6 +1226,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		privatednsnamespace.Setup,
 		publicdnsnamespace.Setup,
 		serviceservicediscovery.Setup,
+		servicequota.Setup,
 		activity.Setup,
 		statemachine.Setup,
 		signingprofile.Setup,

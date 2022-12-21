@@ -1725,6 +1725,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Media Convert Queue can be imported via the queue name
 	"aws_media_convert_queue": config.NameAsIdentifier,
 
+	// servicequotas
+	//
+	// aws_servicequotas_service_quota can be imported by using the service code and quota code, separated by a front slash (/)
+	// vpc/L-F678F1CE
+	"aws_servicequotas_service_quota": FormattedIdentifierFromProvider("/", "service_code", "quota_code"),
+
 	// pinpoint
 	//
 	// Pinpoint App can be imported using the application-id

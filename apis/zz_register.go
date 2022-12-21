@@ -116,6 +116,7 @@ import (
 	v1beta1serverlessrepo "github.com/upbound/provider-aws/apis/serverlessrepo/v1beta1"
 	v1beta1servicecatalog "github.com/upbound/provider-aws/apis/servicecatalog/v1beta1"
 	v1beta1servicediscovery "github.com/upbound/provider-aws/apis/servicediscovery/v1beta1"
+	v1beta1servicequotas "github.com/upbound/provider-aws/apis/servicequotas/v1beta1"
 	v1beta1sfn "github.com/upbound/provider-aws/apis/sfn/v1beta1"
 	v1beta1signer "github.com/upbound/provider-aws/apis/signer/v1beta1"
 	v1beta1sns "github.com/upbound/provider-aws/apis/sns/v1beta1"
@@ -233,6 +234,7 @@ func init() {
 		v1beta1serverlessrepo.SchemeBuilder.AddToScheme,
 		v1beta1servicecatalog.SchemeBuilder.AddToScheme,
 		v1beta1servicediscovery.SchemeBuilder.AddToScheme,
+		v1beta1servicequotas.SchemeBuilder.AddToScheme,
 		v1beta1sfn.SchemeBuilder.AddToScheme,
 		v1beta1signer.SchemeBuilder.AddToScheme,
 		v1beta1sns.SchemeBuilder.AddToScheme,
