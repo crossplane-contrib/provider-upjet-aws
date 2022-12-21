@@ -1837,6 +1837,17 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Rules can be imported using their ARN
 	"aws_lb_listener_rule": config.IdentifierFromProvider,
+
+	// fsx
+	//
+	// FSx File Systems can be imported using the id
+	"aws_fsx_windows_file_system": config.IdentifierFromProvider,
+	// FSx File Systems can be imported using the id
+	"aws_fsx_lustre_file_system": config.IdentifierFromProvider,
+	// FSx Backups can be imported using the id
+	"aws_fsx_backup": config.IdentifierFromProvider,
+	// FSx Data Repository Associations can be imported using the id
+	"aws_fsx_data_repository_association": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

@@ -398,6 +398,10 @@ import (
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
 	securityconfiguration "github.com/upbound/provider-aws/internal/controller/emr/securityconfiguration"
 	deliverystream "github.com/upbound/provider-aws/internal/controller/firehose/deliverystream"
+	backup "github.com/upbound/provider-aws/internal/controller/fsx/backup"
+	datarepositoryassociation "github.com/upbound/provider-aws/internal/controller/fsx/datarepositoryassociation"
+	lustrefilesystem "github.com/upbound/provider-aws/internal/controller/fsx/lustrefilesystem"
+	windowsfilesystem "github.com/upbound/provider-aws/internal/controller/fsx/windowsfilesystem"
 	alias "github.com/upbound/provider-aws/internal/controller/gamelift/alias"
 	build "github.com/upbound/provider-aws/internal/controller/gamelift/build"
 	fleetgamelift "github.com/upbound/provider-aws/internal/controller/gamelift/fleet"
@@ -1052,6 +1056,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lbtargetgroupattachment.Setup,
 		securityconfiguration.Setup,
 		deliverystream.Setup,
+		backup.Setup,
+		datarepositoryassociation.Setup,
+		lustrefilesystem.Setup,
+		windowsfilesystem.Setup,
 		alias.Setup,
 		build.Setup,
 		fleetgamelift.Setup,
