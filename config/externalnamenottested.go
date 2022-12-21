@@ -730,4 +730,37 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// aws_servicequotas_service_quota can be imported by using the service code and quota code, separated by a front slash (/)
 	// vpc/L-F678F1CE
 	"aws_servicequotas_service_quota": FormattedIdentifierFromProvider("/", "service_code", "quota_code"),
+
+	// storagegateway
+	//
+	// aws_storagegateway_cache can be imported by using the gateway Amazon Resource Name (ARN) and local disk identifier separated with a colon (:)
+	// Example: arn:aws:storagegateway:us-east-1:123456789012:gateway/sgw-12345678:pci-0000:03:00.0-scsi-0:0:0:0
+	"aws_storagegateway_cache": config.TemplatedStringAsIdentifier("", "{{ .parameters.gateway_arn }}:{{ .parameters.disk_id }}"),
+	// aws_storagegateway_cached_iscsi_volume can be imported by using the volume Amazon Resource Name (ARN)
+	// Example: arn:aws:storagegateway:us-east-1:123456789012:gateway/sgw-12345678/volume/vol-12345678
+	"aws_storagegateway_cached_iscsi_volume": config.TemplatedStringAsIdentifier("", "{{ .parameters.gateway_arn }}/volume/{{ .external_name }}"),
+	// aws_storagegateway_file_system_association can be imported by using the FSx file system association Amazon Resource Name (ARN)
+	// Example: arn:aws:storagegateway:us-east-1:123456789012:fs-association/fsa-0DA347732FDB40125
+	"aws_storagegateway_file_system_association": config.TemplatedStringAsIdentifier("", "arn:aws:storagegateway:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:fs-association/{{ .external_name }}"),
+	// aws_storagegateway_gateway can be imported by using the gateway Amazon Resource Name (ARN)
+	// Example: arn:aws:storagegateway:us-east-1:123456789012:gateway/sgw-12345678
+	"aws_storagegateway_gateway": config.TemplatedStringAsIdentifier("", "arn:aws:storagegateway:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:gateway/{{ .external_name }}"),
+	// aws_storagegateway_nfs_file_share can be imported by using the NFS File Share Amazon Resource Name (ARN)
+	// Example: arn:aws:storagegateway:us-east-1:123456789012:share/share-12345678
+	"aws_storagegateway_nfs_file_share": config.TemplatedStringAsIdentifier("", "arn:aws:storagegateway:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:share/{{ .external_name }}"),
+	// aws_storagegateway_smb_file_share can be imported by using the SMB File Share Amazon Resource Name (ARN)
+	// Example: arn:aws:storagegateway:us-east-1:123456789012:share/share-12345678
+	"aws_storagegateway_smb_file_share": config.TemplatedStringAsIdentifier("", "arn:aws:storagegateway:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:share/{{ .external_name }}"),
+	// aws_storagegateway_stored_iscsi_volume can be imported by using the volume Amazon Resource Name (ARN)
+	// Example: arn:aws:storagegateway:us-east-1:123456789012:gateway/sgw-12345678/volume/vol-12345678
+	"aws_storagegateway_stored_iscsi_volume": config.TemplatedStringAsIdentifier("", "{{ .parameters.gateway_arn }}/volume/{{ .external_name }}"),
+	// aws_storagegateway_tape_pool can be imported by using the volume Amazon Resource Name (ARN)
+	// Example: arn:aws:storagegateway:us-east-1:123456789012:tapepool/pool-12345678
+	"aws_storagegateway_tape_pool": config.TemplatedStringAsIdentifier("", "arn:aws:storagegateway:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:tapepool/{{ .external_name }}"),
+	// aws_storagegateway_upload_buffer can be imported by using the gateway Amazon Resource Name (ARN) and local disk identifier separated with a colon (:)
+	// Example: arn:aws:storagegateway:us-east-1:123456789012:gateway/sgw-12345678:pci-0000:03:00.0-scsi-0:0:0:0
+	"aws_storagegateway_upload_buffer": config.TemplatedStringAsIdentifier("", "{{ .parameters.gateway_arn }}:{{ .parameters.disk_id }}"),
+	// aws_storagegateway_working_storage can be imported by using the gateway Amazon Resource Name (ARN) and local disk identifier separated with a colon (:)
+	// Example: arn:aws:storagegateway:us-east-1:123456789012:gateway/sgw-12345678:pci-0000:03:00.0-scsi-0:0:0:0
+	"aws_storagegateway_working_storage": config.TemplatedStringAsIdentifier("", "{{ .parameters.gateway_arn }}:{{ .parameters.disk_id }}"),
 }
