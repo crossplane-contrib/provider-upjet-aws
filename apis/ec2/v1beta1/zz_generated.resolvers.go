@@ -2563,6 +2563,32 @@ func (mg *VPCEndpointConnectionNotification) ResolveReferences(ctx context.Conte
 	return nil
 }
 
+// ResolveReferences of this VPCEndpointPolicy.
+func (mg *VPCEndpointPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCEndpointID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.VPCEndpointIDRef,
+		Selector:     mg.Spec.ForProvider.VPCEndpointIDSelector,
+		To: reference.To{
+			List:    &VPCEndpointList{},
+			Managed: &VPCEndpoint{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCEndpointID")
+	}
+	mg.Spec.ForProvider.VPCEndpointID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPCEndpointIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this VPCEndpointRouteTableAssociation.
 func (mg *VPCEndpointRouteTableAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

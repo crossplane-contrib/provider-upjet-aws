@@ -371,4 +371,10 @@ func Configure(p *config.Provider) {
 			Type: "VPNGateway",
 		}
 	})
+
+	p.AddResourceConfigurator("aws_vpc_endpoint_policy", func(r *config.Resource) {
+		r.References["vpc_endpoint_id"] = config.Reference{
+			Type: "VPCEndpoint",
+		}
+	})
 }

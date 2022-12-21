@@ -4891,6 +4891,72 @@ func (mg *VPCEndpointConnectionNotification) SetWriteConnectionSecretToReference
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this VPCEndpointPolicy.
+func (mg *VPCEndpointPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this VPCEndpointPolicy.
+func (mg *VPCEndpointPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this VPCEndpointPolicy.
+func (mg *VPCEndpointPolicy) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this VPCEndpointPolicy.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *VPCEndpointPolicy) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this VPCEndpointPolicy.
+func (mg *VPCEndpointPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this VPCEndpointPolicy.
+func (mg *VPCEndpointPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VPCEndpointPolicy.
+func (mg *VPCEndpointPolicy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this VPCEndpointPolicy.
+func (mg *VPCEndpointPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this VPCEndpointPolicy.
+func (mg *VPCEndpointPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this VPCEndpointPolicy.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *VPCEndpointPolicy) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this VPCEndpointPolicy.
+func (mg *VPCEndpointPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this VPCEndpointPolicy.
+func (mg *VPCEndpointPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this VPCEndpointRouteTableAssociation.
 func (mg *VPCEndpointRouteTableAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

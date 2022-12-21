@@ -664,6 +664,15 @@ func (l *VPCEndpointList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this VPCEndpointPolicyList.
+func (l *VPCEndpointPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this VPCEndpointRouteTableAssociationList.
 func (l *VPCEndpointRouteTableAssociationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

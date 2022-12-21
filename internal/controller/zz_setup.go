@@ -335,6 +335,7 @@ import (
 	vpcdhcpoptionsassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcdhcpoptionsassociation"
 	vpcendpoint "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpoint"
 	vpcendpointconnectionnotification "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointconnectionnotification"
+	vpcendpointpolicy "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointpolicy"
 	vpcendpointroutetableassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointroutetableassociation"
 	vpcendpointservice "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointservice"
 	vpcendpointserviceallowedprincipal "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointserviceallowedprincipal"
@@ -1097,6 +1098,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcdhcpoptionsassociation.Setup,
 		vpcendpoint.Setup,
 		vpcendpointconnectionnotification.Setup,
+		vpcendpointpolicy.Setup,
 		vpcendpointroutetableassociation.Setup,
 		vpcendpointservice.Setup,
 		vpcendpointserviceallowedprincipal.Setup,

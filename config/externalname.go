@@ -169,6 +169,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc": config.IdentifierFromProvider,
 	// Imported using the vpc endpoint id: vpce-3ecf2a57
 	"aws_vpc_endpoint": config.IdentifierFromProvider,
+	// Imported using the vpc endpoint id: vpce-3ecf2a57
+	"aws_vpc_endpoint_policy": config.IdentifierFromProvider,
 	// Imported using the subnet id: subnet-9d4a7b6c
 	"aws_subnet": config.IdentifierFromProvider,
 	// Imported using the id: eni-e5aa89a3
