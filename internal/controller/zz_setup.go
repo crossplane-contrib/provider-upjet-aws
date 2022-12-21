@@ -492,6 +492,7 @@ import (
 	findingsfilter "github.com/upbound/provider-aws/internal/controller/macie2/findingsfilter"
 	invitationacceptermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/invitationaccepter"
 	membermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/member"
+	queuemediaconvert "github.com/upbound/provider-aws/internal/controller/mediaconvert/queue"
 	channel "github.com/upbound/provider-aws/internal/controller/mediapackage/channel"
 	broker "github.com/upbound/provider-aws/internal/controller/mq/broker"
 	configurationmq "github.com/upbound/provider-aws/internal/controller/mq/configuration"
@@ -1104,6 +1105,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		findingsfilter.Setup,
 		invitationacceptermacie2.Setup,
 		membermacie2.Setup,
+		queuemediaconvert.Setup,
 		channel.Setup,
 		broker.Setup,
 		configurationmq.Setup,

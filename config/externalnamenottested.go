@@ -481,11 +481,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// aws_macie2_organization_admin_account can be imported using the id
 	"aws_macie2_organization_admin_account": config.IdentifierFromProvider,
 
-	// mediaconvert
-	//
-	// Media Convert Queue can be imported via the queue name
-	"aws_media_convert_queue": config.NameAsIdentifier,
-
 	// mediastore
 	//
 	// MediaStore Container can be imported using the MediaStore Container Name
