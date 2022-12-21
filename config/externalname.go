@@ -1712,6 +1712,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_macie2_invitation_accepter": FormattedIdentifierFromProvider("", "administrator_account_id"),
 	// aws_macie2_member can be imported using the account ID of the member account
 	"aws_macie2_member": FormattedIdentifierFromProvider("", "account_id"),
+
+	// mediaconvert
+	//
+	// Media Convert Queue can be imported via the queue name
+	"aws_media_convert_queue": config.NameAsIdentifier,
 }
 
 func lambdaFunctionURL() config.ExternalName {
