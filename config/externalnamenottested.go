@@ -713,12 +713,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Serverless Application Repository Stack can be imported using the CloudFormation Stack name (with or without the serverlessrepo- prefix) or the CloudFormation Stack ID
 	"aws_serverlessapplicationrepository_cloudformation_stack": config.IdentifierFromProvider,
 
-	// servicequotas
-	//
-	// aws_servicequotas_service_quota can be imported by using the service code and quota code, separated by a front slash (/)
-	// vpc/L-F678F1CE
-	"aws_servicequotas_service_quota": FormattedIdentifierFromProvider("/", "service_code", "quota_code"),
-
 	// storagegateway
 	//
 	// aws_storagegateway_cache can be imported by using the gateway Amazon Resource Name (ARN) and local disk identifier separated with a colon (:)
