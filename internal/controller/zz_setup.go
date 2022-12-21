@@ -486,6 +486,12 @@ import (
 	keypairlightsail "github.com/upbound/provider-aws/internal/controller/lightsail/keypair"
 	staticip "github.com/upbound/provider-aws/internal/controller/lightsail/staticip"
 	staticipattachment "github.com/upbound/provider-aws/internal/controller/lightsail/staticipattachment"
+	accountmacie2 "github.com/upbound/provider-aws/internal/controller/macie2/account"
+	classificationjob "github.com/upbound/provider-aws/internal/controller/macie2/classificationjob"
+	customdataidentifier "github.com/upbound/provider-aws/internal/controller/macie2/customdataidentifier"
+	findingsfilter "github.com/upbound/provider-aws/internal/controller/macie2/findingsfilter"
+	invitationacceptermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/invitationaccepter"
+	membermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/member"
 	broker "github.com/upbound/provider-aws/internal/controller/mq/broker"
 	configurationmq "github.com/upbound/provider-aws/internal/controller/mq/configuration"
 	clusterneptune "github.com/upbound/provider-aws/internal/controller/neptune/cluster"
@@ -1091,6 +1097,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		keypairlightsail.Setup,
 		staticip.Setup,
 		staticipattachment.Setup,
+		accountmacie2.Setup,
+		classificationjob.Setup,
+		customdataidentifier.Setup,
+		findingsfilter.Setup,
+		invitationacceptermacie2.Setup,
+		membermacie2.Setup,
 		broker.Setup,
 		configurationmq.Setup,
 		clusterneptune.Setup,

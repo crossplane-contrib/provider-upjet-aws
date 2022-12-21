@@ -478,18 +478,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// macie2
 	//
-	// aws_macie2_account can be imported using the id
-	"aws_macie2_account": config.IdentifierFromProvider,
-	// aws_macie2_classification_job can be imported using the id
-	"aws_macie2_classification_job": config.IdentifierFromProvider,
-	// aws_macie2_custom_data_identifier can be imported using the id
-	"aws_macie2_custom_data_identifier": config.IdentifierFromProvider,
-	// aws_macie2_findings_filter can be imported using the id
-	"aws_macie2_findings_filter": config.IdentifierFromProvider,
-	// aws_macie2_invitation_accepter can be imported using the admin account ID
-	"aws_macie2_invitation_accepter": FormattedIdentifierFromProvider("", "administrator_account_id"),
-	// aws_macie2_member can be imported using the account ID of the member account
-	"aws_macie2_member": FormattedIdentifierFromProvider("", "account_id"),
 	// aws_macie2_organization_admin_account can be imported using the id
 	"aws_macie2_organization_admin_account": config.IdentifierFromProvider,
 
