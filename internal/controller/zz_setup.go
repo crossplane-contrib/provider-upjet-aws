@@ -494,6 +494,8 @@ import (
 	membermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/member"
 	queuemediaconvert "github.com/upbound/provider-aws/internal/controller/mediaconvert/queue"
 	channel "github.com/upbound/provider-aws/internal/controller/mediapackage/channel"
+	container "github.com/upbound/provider-aws/internal/controller/mediastore/container"
+	containerpolicy "github.com/upbound/provider-aws/internal/controller/mediastore/containerpolicy"
 	broker "github.com/upbound/provider-aws/internal/controller/mq/broker"
 	configurationmq "github.com/upbound/provider-aws/internal/controller/mq/configuration"
 	clusterneptune "github.com/upbound/provider-aws/internal/controller/neptune/cluster"
@@ -1107,6 +1109,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		membermacie2.Setup,
 		queuemediaconvert.Setup,
 		channel.Setup,
+		container.Setup,
+		containerpolicy.Setup,
 		broker.Setup,
 		configurationmq.Setup,
 		clusterneptune.Setup,
