@@ -1698,6 +1698,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Media Package Channels can be imported via the channel ID
 	"aws_media_package_channel": config.IdentifierFromProvider,
 
+	// mediastore
+	//
+	// MediaStore Container can be imported using the MediaStore Container Name
+	"aws_media_store_container": config.NameAsIdentifier,
+	// MediaStore Container Policy can be imported using the MediaStore Container Name
+	"aws_media_store_container_policy": FormattedIdentifierFromProvider("", "container_name"),
+
 	// macie2
 	//
 	// aws_macie2_account can be imported using the id

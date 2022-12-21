@@ -95,6 +95,7 @@ import (
 	v1beta1macie2 "github.com/upbound/provider-aws/apis/macie2/v1beta1"
 	v1beta1mediaconvert "github.com/upbound/provider-aws/apis/mediaconvert/v1beta1"
 	v1beta1mediapackage "github.com/upbound/provider-aws/apis/mediapackage/v1beta1"
+	v1beta1mediastore "github.com/upbound/provider-aws/apis/mediastore/v1beta1"
 	v1beta1mq "github.com/upbound/provider-aws/apis/mq/v1beta1"
 	v1beta1neptune "github.com/upbound/provider-aws/apis/neptune/v1beta1"
 	v1beta1opensearch "github.com/upbound/provider-aws/apis/opensearch/v1beta1"
@@ -210,6 +211,7 @@ func init() {
 		v1beta1macie2.SchemeBuilder.AddToScheme,
 		v1beta1mediaconvert.SchemeBuilder.AddToScheme,
 		v1beta1mediapackage.SchemeBuilder.AddToScheme,
+		v1beta1mediastore.SchemeBuilder.AddToScheme,
 		v1beta1mq.SchemeBuilder.AddToScheme,
 		v1beta1neptune.SchemeBuilder.AddToScheme,
 		v1beta1opensearch.SchemeBuilder.AddToScheme,
