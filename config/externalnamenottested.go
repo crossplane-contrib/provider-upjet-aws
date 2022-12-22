@@ -412,13 +412,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// FSx File Systems can be imported using the id
 	"aws_fsx_windows_file_system": config.IdentifierFromProvider,
 
-	// glacier
-	//
-	// Glacier Vaults can be imported using the name
-	"aws_glacier_vault": config.NameAsIdentifier,
-	// Glacier Vault Locks can be imported using the Glacier Vault name
-	"aws_glacier_vault_lock": FormattedIdentifierFromProvider("", "vault_name"),
-
 	// iot
 	//
 	// No import

@@ -1764,6 +1764,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// EMR Security Configurations can be imported using the name
 	"aws_emr_security_configuration": config.NameAsIdentifier,
+
+	// glacier
+	//
+	// Glacier Vaults can be imported using the name
+	"aws_glacier_vault": config.NameAsIdentifier,
+	// Glacier Vault Locks can be imported using the Glacier Vault name
+	"aws_glacier_vault_lock": FormattedIdentifierFromProvider("", "vault_name"),
 }
 
 func lambdaFunctionURL() config.ExternalName {
