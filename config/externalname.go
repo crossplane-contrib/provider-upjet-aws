@@ -1742,6 +1742,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Pinpoint SMS Channel can be imported using the application-id
 	"aws_pinpoint_sms_channel": FormattedIdentifierFromProvider("", "application_id"),
 
+	// elasticbeanstalk
+	//
+	// Elastic Beanstalk Applications can be imported using the name
+	"aws_elastic_beanstalk_application": config.NameAsIdentifier,
+	// No import
+	"aws_elastic_beanstalk_configuration_template": config.NameAsIdentifier,
+
 	// ssm
 	//
 	// AWS SSM Activation can be imported using the id

@@ -385,6 +385,8 @@ import (
 	subnetgroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/subnetgroup"
 	userelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/user"
 	usergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/usergroup"
+	applicationelasticbeanstalk "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/application"
+	configurationtemplate "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/configurationtemplate"
 	pipelineelastictranscoder "github.com/upbound/provider-aws/internal/controller/elastictranscoder/pipeline"
 	preset "github.com/upbound/provider-aws/internal/controller/elastictranscoder/preset"
 	attachmentelb "github.com/upbound/provider-aws/internal/controller/elb/attachment"
@@ -1013,6 +1015,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subnetgroupelasticache.Setup,
 		userelasticache.Setup,
 		usergroupelasticache.Setup,
+		applicationelasticbeanstalk.Setup,
+		configurationtemplate.Setup,
 		pipelineelastictranscoder.Setup,
 		preset.Setup,
 		attachmentelb.Setup,
