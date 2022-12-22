@@ -371,8 +371,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_emr_instance_group": config.IdentifierFromProvider,
 	// EMR Managed Scaling Policies can be imported via the EMR Cluster identifier
 	"aws_emr_managed_scaling_policy": FormattedIdentifierFromProvider("", "cluster_id"),
-	// EMR Security Configurations can be imported using the name
-	"aws_emr_security_configuration": config.NameAsIdentifier,
 	// EMR studios can be imported using the id
 	"aws_emr_studio": config.IdentifierFromProvider,
 	// EMR studio session mappings can be imported using the id, e.g., studio-id:identity-type:identity-id

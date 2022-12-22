@@ -73,6 +73,7 @@ import (
 	v1beta1elastictranscoder "github.com/upbound/provider-aws/apis/elastictranscoder/v1beta1"
 	v1beta1elb "github.com/upbound/provider-aws/apis/elb/v1beta1"
 	v1beta1elbv2 "github.com/upbound/provider-aws/apis/elbv2/v1beta1"
+	v1beta1emr "github.com/upbound/provider-aws/apis/emr/v1beta1"
 	v1beta1firehose "github.com/upbound/provider-aws/apis/firehose/v1beta1"
 	v1beta1gamelift "github.com/upbound/provider-aws/apis/gamelift/v1beta1"
 	v1beta1globalaccelerator "github.com/upbound/provider-aws/apis/globalaccelerator/v1beta1"
@@ -191,6 +192,7 @@ func init() {
 		v1beta1elastictranscoder.SchemeBuilder.AddToScheme,
 		v1beta1elb.SchemeBuilder.AddToScheme,
 		v1beta1elbv2.SchemeBuilder.AddToScheme,
+		v1beta1emr.SchemeBuilder.AddToScheme,
 		v1beta1firehose.SchemeBuilder.AddToScheme,
 		v1beta1gamelift.SchemeBuilder.AddToScheme,
 		v1beta1globalaccelerator.SchemeBuilder.AddToScheme,
