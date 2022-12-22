@@ -312,11 +312,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Elastic Beanstalk Applications can be imported using the name
 	"aws_elastic_beanstalk_application": config.NameAsIdentifier,
 	// No import
-	"aws_elastic_beanstalk_application_version": config.NameAsIdentifier,
-	// No import
 	"aws_elastic_beanstalk_configuration_template": config.NameAsIdentifier,
-	// Elastic Beanstalk Environments can be imported using the id
-	"aws_elastic_beanstalk_environment": config.IdentifierFromProvider,
 
 	// elasticsearch
 	//
