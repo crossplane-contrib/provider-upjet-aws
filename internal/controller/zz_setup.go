@@ -515,6 +515,8 @@ import (
 	organizationalunit "github.com/upbound/provider-aws/internal/controller/organizations/organizationalunit"
 	policyorganizations "github.com/upbound/provider-aws/internal/controller/organizations/policy"
 	policyattachment "github.com/upbound/provider-aws/internal/controller/organizations/policyattachment"
+	apppinpoint "github.com/upbound/provider-aws/internal/controller/pinpoint/app"
+	smschannel "github.com/upbound/provider-aws/internal/controller/pinpoint/smschannel"
 	providerconfig "github.com/upbound/provider-aws/internal/controller/providerconfig"
 	resourceshare "github.com/upbound/provider-aws/internal/controller/ram/resourceshare"
 	clusterrds "github.com/upbound/provider-aws/internal/controller/rds/cluster"
@@ -1130,6 +1132,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		organizationalunit.Setup,
 		policyorganizations.Setup,
 		policyattachment.Setup,
+		apppinpoint.Setup,
+		smschannel.Setup,
 		providerconfig.Setup,
 		resourceshare.Setup,
 		clusterrds.Setup,

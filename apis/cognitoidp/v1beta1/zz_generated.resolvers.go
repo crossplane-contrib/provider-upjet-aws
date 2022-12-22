@@ -9,8 +9,9 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/provider-aws/apis/acm/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/acm/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -232,6 +233,24 @@ func (mg *UserPoolClient) ResolveReferences(ctx context.Context, c client.Reader
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.AnalyticsConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationID),
+			Extract:      resource.ExtractParamPath("application_id", true),
+			Reference:    mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationIDRef,
+			Selector:     mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationIDSelector,
+			To: reference.To{
+				List:    &v1beta11.AppList{},
+				Managed: &v1beta11.App{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationID")
+		}
+		mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.AnalyticsConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArn),
 			Extract:      resource.ExtractParamPath("arn", true),
 			Reference:    mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArnRef,
@@ -280,8 +299,8 @@ func (mg *UserPoolDomain) ResolveReferences(ctx context.Context, c client.Reader
 		Reference:    mg.Spec.ForProvider.CertificateArnRef,
 		Selector:     mg.Spec.ForProvider.CertificateArnSelector,
 		To: reference.To{
-			List:    &v1beta11.CertificateList{},
-			Managed: &v1beta11.Certificate{},
+			List:    &v1beta12.CertificateList{},
+			Managed: &v1beta12.Certificate{},
 		},
 	})
 	if err != nil {

@@ -580,8 +580,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_pinpoint_apns_voip_channel": FormattedIdentifierFromProvider("", "application_id"),
 	// Pinpoint APNs VoIP Sandbox Channel can be imported using the application-id
 	"aws_pinpoint_apns_voip_sandbox_channel": FormattedIdentifierFromProvider("", "application_id"),
-	// Pinpoint App can be imported using the application-id
-	"aws_pinpoint_app": config.IdentifierFromProvider,
 	// Pinpoint Baidu Channel can be imported using the application-id
 	"aws_pinpoint_baidu_channel": FormattedIdentifierFromProvider("", "application_id"),
 	// Pinpoint Email Channel can be imported using the application-id
@@ -590,8 +588,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_pinpoint_event_stream": FormattedIdentifierFromProvider("", "application_id"),
 	// Pinpoint GCM Channel can be imported using the application-id
 	"aws_pinpoint_gcm_channel": FormattedIdentifierFromProvider("", "application_id"),
-	// Pinpoint SMS Channel can be imported using the application-id
-	"aws_pinpoint_sms_channel": FormattedIdentifierFromProvider("", "application_id"),
 
 	// qldb
 	//

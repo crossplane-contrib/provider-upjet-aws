@@ -1724,6 +1724,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Media Convert Queue can be imported via the queue name
 	"aws_media_convert_queue": config.NameAsIdentifier,
+
+	// pinpoint
+	//
+	// Pinpoint App can be imported using the application-id
+	"aws_pinpoint_app": config.IdentifierFromProvider,
+	// Pinpoint SMS Channel can be imported using the application-id
+	"aws_pinpoint_sms_channel": FormattedIdentifierFromProvider("", "application_id"),
 }
 
 func lambdaFunctionURL() config.ExternalName {

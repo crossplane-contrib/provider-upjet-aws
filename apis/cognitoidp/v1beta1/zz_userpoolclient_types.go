@@ -23,8 +23,18 @@ type AnalyticsConfigurationParameters struct {
 	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
 
 	// Application ID for an Amazon Pinpoint application.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/pinpoint/v1beta1.App
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("application_id",true)
 	// +kubebuilder:validation:Optional
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
+
+	// Reference to a App in pinpoint to populate applicationId.
+	// +kubebuilder:validation:Optional
+	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
+
+	// Selector for a App in pinpoint to populate applicationId.
+	// +kubebuilder:validation:Optional
+	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// ID for the Analytics Configuration. Conflicts with application_arn.
 	// +kubebuilder:validation:Optional
