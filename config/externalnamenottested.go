@@ -421,34 +421,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// iot
 	//
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_iot_certificate": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_iot_indexing_configuration": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_iot_logging_options": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_iot_policy_attachment": config.IdentifierFromProvider,
-	// IoT fleet provisioning templates can be imported using the name
-	"aws_iot_provisioning_template": config.NameAsIdentifier,
-	// IOT Role Alias can be imported via the alias
-	"aws_iot_role_alias": config.ParameterAsIdentifier("alias"),
-	// IoT Things Groups can be imported using the name
-	"aws_iot_thing_group": config.NameAsIdentifier,
-	// IoT Thing Group Membership can be imported using the thing group name and thing name
-	// thing_group_name/thing_name
-	"aws_iot_thing_group_membership": FormattedIdentifierFromProvider("/", "thing_group_name", "thing_name"),
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_iot_thing_principal_attachment": config.IdentifierFromProvider,
-	// IOT Thing Types can be imported using the name
-	"aws_iot_thing_type": config.NameAsIdentifier,
-	// IoT Topic Rules can be imported using the name
-	"aws_iot_topic_rule": config.NameAsIdentifier,
 	// IoT topic rule destinations can be imported using the arn
 	// arn:aws:iot:us-west-2:123456789012:ruledestination/vpc/2ce781c8-68a6-4c52-9c62-63fe489ecc60
 	"aws_iot_topic_rule_destination": config.IdentifierFromProvider,
