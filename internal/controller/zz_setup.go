@@ -393,6 +393,7 @@ import (
 	lblistener "github.com/upbound/provider-aws/internal/controller/elbv2/lblistener"
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
+	securityconfiguration "github.com/upbound/provider-aws/internal/controller/emr/securityconfiguration"
 	deliverystream "github.com/upbound/provider-aws/internal/controller/firehose/deliverystream"
 	alias "github.com/upbound/provider-aws/internal/controller/gamelift/alias"
 	build "github.com/upbound/provider-aws/internal/controller/gamelift/build"
@@ -411,7 +412,7 @@ import (
 	job "github.com/upbound/provider-aws/internal/controller/glue/job"
 	registry "github.com/upbound/provider-aws/internal/controller/glue/registry"
 	resourcepolicyglue "github.com/upbound/provider-aws/internal/controller/glue/resourcepolicy"
-	securityconfiguration "github.com/upbound/provider-aws/internal/controller/glue/securityconfiguration"
+	securityconfigurationglue "github.com/upbound/provider-aws/internal/controller/glue/securityconfiguration"
 	triggerglue "github.com/upbound/provider-aws/internal/controller/glue/trigger"
 	userdefinedfunction "github.com/upbound/provider-aws/internal/controller/glue/userdefinedfunction"
 	workflow "github.com/upbound/provider-aws/internal/controller/glue/workflow"
@@ -1019,6 +1020,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lblistener.Setup,
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
+		securityconfiguration.Setup,
 		deliverystream.Setup,
 		alias.Setup,
 		build.Setup,
@@ -1037,7 +1039,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		job.Setup,
 		registry.Setup,
 		resourcepolicyglue.Setup,
-		securityconfiguration.Setup,
+		securityconfigurationglue.Setup,
 		triggerglue.Setup,
 		userdefinedfunction.Setup,
 		workflow.Setup,
