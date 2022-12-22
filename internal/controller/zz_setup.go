@@ -519,6 +519,8 @@ import (
 	apppinpoint "github.com/upbound/provider-aws/internal/controller/pinpoint/app"
 	smschannel "github.com/upbound/provider-aws/internal/controller/pinpoint/smschannel"
 	providerconfig "github.com/upbound/provider-aws/internal/controller/providerconfig"
+	groupquicksight "github.com/upbound/provider-aws/internal/controller/quicksight/group"
+	userquicksight "github.com/upbound/provider-aws/internal/controller/quicksight/user"
 	resourceshare "github.com/upbound/provider-aws/internal/controller/ram/resourceshare"
 	clusterrds "github.com/upbound/provider-aws/internal/controller/rds/cluster"
 	clusteractivitystream "github.com/upbound/provider-aws/internal/controller/rds/clusteractivitystream"
@@ -1147,6 +1149,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		apppinpoint.Setup,
 		smschannel.Setup,
 		providerconfig.Setup,
+		groupquicksight.Setup,
+		userquicksight.Setup,
 		resourceshare.Setup,
 		clusterrds.Setup,
 		clusteractivitystream.Setup,

@@ -1386,6 +1386,15 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Chime Voice Connector Termination Credentials can be imported using the voice_connector_id
 	"aws_chime_voice_connector_termination_credentials": config.IdentifierFromProvider,
 
+	// quicksight
+	//
+	// QuickSight Group can be imported using the aws account id, namespace and group name separated by /
+	// 123456789123/default/tf-example
+	"aws_quicksight_group": FormattedIdentifierFromProvider("/", "aws_account_id", "namespace", "group_name"),
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_quicksight_user": config.IdentifierFromProvider,
+
 	// lightsail
 	//
 	// No import

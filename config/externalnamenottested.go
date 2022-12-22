@@ -578,15 +578,9 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// A QuickSight data source can be imported using the AWS account ID, and data source ID name separated by a slash (/)
 	// 123456789123/my-data-source-id
 	"aws_quicksight_data_source": FormattedIdentifierFromProvider("/", "aws_account_id", "data_source_id"),
-	// QuickSight Group can be imported using the aws account id, namespace and group name separated by /
-	// 123456789123/default/tf-example
-	"aws_quicksight_group": FormattedIdentifierFromProvider("/", "aws_account_id", "namespace", "group_name"),
 	// QuickSight Group membership can be imported using the AWS account ID, namespace, group name and member name separated by /
 	// 123456789123/default/all-access-users/john_smith
 	"aws_quicksight_group_membership": FormattedIdentifierFromProvider("/", "aws_account_id", "namespace", "group_name", "member_name"),
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_quicksight_user": config.IdentifierFromProvider,
 
 	// rds
 	//
