@@ -539,6 +539,7 @@ import (
 	apppinpoint "github.com/upbound/provider-aws/internal/controller/pinpoint/app"
 	smschannel "github.com/upbound/provider-aws/internal/controller/pinpoint/smschannel"
 	providerconfig "github.com/upbound/provider-aws/internal/controller/providerconfig"
+	ledger "github.com/upbound/provider-aws/internal/controller/qldb/ledger"
 	groupquicksight "github.com/upbound/provider-aws/internal/controller/quicksight/group"
 	userquicksight "github.com/upbound/provider-aws/internal/controller/quicksight/user"
 	resourceshare "github.com/upbound/provider-aws/internal/controller/ram/resourceshare"
@@ -1199,6 +1200,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		apppinpoint.Setup,
 		smschannel.Setup,
 		providerconfig.Setup,
+		ledger.Setup,
 		groupquicksight.Setup,
 		userquicksight.Setup,
 		resourceshare.Setup,

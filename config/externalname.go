@@ -1781,6 +1781,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// EMR Security Configurations can be imported using the name
 	"aws_emr_security_configuration": config.NameAsIdentifier,
 
+	// qldb
+	//
+	// QLDB Ledgers can be imported using the name
+	"aws_qldb_ledger": config.NameAsIdentifier,
+
 	// glacier
 	//
 	// Glacier Vaults can be imported using the name
