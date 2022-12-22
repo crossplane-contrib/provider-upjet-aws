@@ -312,11 +312,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Elastic Beanstalk Applications can be imported using the name
 	"aws_elastic_beanstalk_application": config.NameAsIdentifier,
 	// No import
-	"aws_elastic_beanstalk_application_version": config.NameAsIdentifier,
-	// No import
 	"aws_elastic_beanstalk_configuration_template": config.NameAsIdentifier,
-	// Elastic Beanstalk Environments can be imported using the id
-	"aws_elastic_beanstalk_environment": config.IdentifierFromProvider,
 
 	// elasticsearch
 	//
@@ -414,34 +410,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// iot
 	//
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_iot_certificate": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_iot_indexing_configuration": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_iot_logging_options": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_iot_policy_attachment": config.IdentifierFromProvider,
-	// IoT fleet provisioning templates can be imported using the name
-	"aws_iot_provisioning_template": config.NameAsIdentifier,
-	// IOT Role Alias can be imported via the alias
-	"aws_iot_role_alias": config.ParameterAsIdentifier("alias"),
-	// IoT Things Groups can be imported using the name
-	"aws_iot_thing_group": config.NameAsIdentifier,
-	// IoT Thing Group Membership can be imported using the thing group name and thing name
-	// thing_group_name/thing_name
-	"aws_iot_thing_group_membership": FormattedIdentifierFromProvider("/", "thing_group_name", "thing_name"),
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_iot_thing_principal_attachment": config.IdentifierFromProvider,
-	// IOT Thing Types can be imported using the name
-	"aws_iot_thing_type": config.NameAsIdentifier,
-	// IoT Topic Rules can be imported using the name
-	"aws_iot_topic_rule": config.NameAsIdentifier,
 	// IoT topic rule destinations can be imported using the arn
 	// arn:aws:iot:us-west-2:123456789012:ruledestination/vpc/2ce781c8-68a6-4c52-9c62-63fe489ecc60
 	"aws_iot_topic_rule_destination": config.IdentifierFromProvider,
@@ -627,47 +595,27 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// SageMaker Apps can be imported using the id
 	"aws_sagemaker_app": config.IdentifierFromProvider,
-	// SageMaker App Image Configs can be imported using the name
-	"aws_sagemaker_app_image_config": config.ParameterAsIdentifier("app_image_config_name"),
-	// SageMaker Code Repositories can be imported using the name
-	"aws_sagemaker_code_repository": config.ParameterAsIdentifier("code_repository_name"),
 	// SageMaker Devices can be imported using the device-fleet-name/device-name
 	// my-fleet/my-device
 	"aws_sagemaker_device": FormattedIdentifierFromProvider("/", "device_fleet_name", "device.device_name"),
 	// SageMaker Device Fleets can be imported using the name
 	"aws_sagemaker_device_fleet": config.ParameterAsIdentifier("device_fleet_name"),
-	// SageMaker Domains can be imported using the id
-	"aws_sagemaker_domain": config.IdentifierFromProvider,
 	// Endpoints can be imported using the name
 	"aws_sagemaker_endpoint": config.NameAsIdentifier,
 	// Endpoint configurations can be imported using the name
 	"aws_sagemaker_endpoint_configuration": config.NameAsIdentifier,
-	// Feature Groups can be imported using the name
-	"aws_sagemaker_feature_group": config.ParameterAsIdentifier("feature_group_name"),
 	// SageMaker Flow Definitions can be imported using the flow_definition_name
 	"aws_sagemaker_flow_definition": config.ParameterAsIdentifier("flow_definition_name"),
 	// SageMaker Human Task UIs can be imported using the human_task_ui_name
 	"aws_sagemaker_human_task_ui": config.ParameterAsIdentifier("human_task_ui_name"),
 	// SageMaker Code Images can be imported using the name
-	"aws_sagemaker_image": config.ParameterAsIdentifier("image_name"),
-	// SageMaker Image Versions can be imported using the name
 	"aws_sagemaker_image_version": config.ParameterAsIdentifier("image_name"),
 	// Models can be imported using the name
 	"aws_sagemaker_model": config.NameAsIdentifier,
 	// SageMaker Model Package Groups can be imported using the name
-	"aws_sagemaker_model_package_group": config.ParameterAsIdentifier("model_package_group_name"),
-	// SageMaker Model Package Groups can be imported using the name
 	"aws_sagemaker_model_package_group_policy": config.ParameterAsIdentifier("model_package_group_name"),
-	// SageMaker Notebook Instances can be imported using the name
-	"aws_sagemaker_notebook_instance": config.NameAsIdentifier,
-	// Models can be imported using the name
-	"aws_sagemaker_notebook_instance_lifecycle_configuration": config.NameAsIdentifier,
 	// SageMaker Projects can be imported using the project_name
 	"aws_sagemaker_project": config.ParameterAsIdentifier("project_name"),
-	// SageMaker Studio Lifecycle Configs can be imported using the studio_lifecycle_config_name
-	"aws_sagemaker_studio_lifecycle_config": config.ParameterAsIdentifier("studio_lifecycle_config_name"),
-	// SageMaker User Profiles can be imported using the arn
-	"aws_sagemaker_user_profile": config.IdentifierFromProvider,
 	// SageMaker Workforces can be imported using the workforce_name
 	"aws_sagemaker_workforce": config.ParameterAsIdentifier("workforce_name"),
 	// SageMaker Workteams can be imported using the workteam_name

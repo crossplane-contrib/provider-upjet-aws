@@ -70,6 +70,7 @@ import (
 	v1beta1efs "github.com/upbound/provider-aws/apis/efs/v1beta1"
 	v1beta1eks "github.com/upbound/provider-aws/apis/eks/v1beta1"
 	v1beta1elasticache "github.com/upbound/provider-aws/apis/elasticache/v1beta1"
+	v1beta1elasticbeanstalk "github.com/upbound/provider-aws/apis/elasticbeanstalk/v1beta1"
 	v1beta1elastictranscoder "github.com/upbound/provider-aws/apis/elastictranscoder/v1beta1"
 	v1beta1elb "github.com/upbound/provider-aws/apis/elb/v1beta1"
 	v1beta1elbv2 "github.com/upbound/provider-aws/apis/elbv2/v1beta1"
@@ -112,6 +113,7 @@ import (
 	v1beta1route53resolver "github.com/upbound/provider-aws/apis/route53resolver/v1beta1"
 	v1beta1s3 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	v1beta1s3control "github.com/upbound/provider-aws/apis/s3control/v1beta1"
+	v1beta1sagemaker "github.com/upbound/provider-aws/apis/sagemaker/v1beta1"
 	v1beta1schemas "github.com/upbound/provider-aws/apis/schemas/v1beta1"
 	v1beta1secretsmanager "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1"
 	v1beta1securityhub "github.com/upbound/provider-aws/apis/securityhub/v1beta1"
@@ -191,6 +193,7 @@ func init() {
 		v1beta1efs.SchemeBuilder.AddToScheme,
 		v1beta1eks.SchemeBuilder.AddToScheme,
 		v1beta1elasticache.SchemeBuilder.AddToScheme,
+		v1beta1elasticbeanstalk.SchemeBuilder.AddToScheme,
 		v1beta1elastictranscoder.SchemeBuilder.AddToScheme,
 		v1beta1elb.SchemeBuilder.AddToScheme,
 		v1beta1elbv2.SchemeBuilder.AddToScheme,
@@ -233,6 +236,7 @@ func init() {
 		v1beta1route53resolver.SchemeBuilder.AddToScheme,
 		v1beta1s3.SchemeBuilder.AddToScheme,
 		v1beta1s3control.SchemeBuilder.AddToScheme,
+		v1beta1sagemaker.SchemeBuilder.AddToScheme,
 		v1beta1schemas.SchemeBuilder.AddToScheme,
 		v1beta1secretsmanager.SchemeBuilder.AddToScheme,
 		v1beta1securityhub.SchemeBuilder.AddToScheme,

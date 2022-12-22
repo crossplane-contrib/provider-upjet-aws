@@ -1742,6 +1742,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Pinpoint SMS Channel can be imported using the application-id
 	"aws_pinpoint_sms_channel": FormattedIdentifierFromProvider("", "application_id"),
 
+	// elasticbeanstalk
+	//
+	// Elastic Beanstalk Applications can be imported using the name
+	"aws_elastic_beanstalk_application": config.NameAsIdentifier,
+	// No import
+	"aws_elastic_beanstalk_configuration_template": config.NameAsIdentifier,
+
 	// ssm
 	//
 	// AWS SSM Activation can be imported using the id
@@ -1771,6 +1778,60 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_glacier_vault": config.NameAsIdentifier,
 	// Glacier Vault Locks can be imported using the Glacier Vault name
 	"aws_glacier_vault_lock": FormattedIdentifierFromProvider("", "vault_name"),
+
+	// iot
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_certificate": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_indexing_configuration": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_logging_options": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_policy_attachment": config.IdentifierFromProvider,
+	// IoT fleet provisioning templates can be imported using the name
+	"aws_iot_provisioning_template": config.NameAsIdentifier,
+	// IOT Role Alias can be imported via the alias
+	"aws_iot_role_alias": config.IdentifierFromProvider,
+	// IoT Things Groups can be imported using the name
+	"aws_iot_thing_group": config.NameAsIdentifier,
+	// IoT Thing Group Membership can be imported using the thing group name and thing name
+	// thing_group_name/thing_name
+	"aws_iot_thing_group_membership": FormattedIdentifierFromProvider("/", "thing_group_name", "thing_name"),
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_thing_principal_attachment": config.IdentifierFromProvider,
+	// IOT Thing Types can be imported using the name
+	"aws_iot_thing_type": config.IdentifierFromProvider,
+	// IoT Topic Rules can be imported using the name
+	"aws_iot_topic_rule": config.NameAsIdentifier,
+
+	// sagemaker
+	//
+	// SageMaker App Image Configs can be imported using the name
+	"aws_sagemaker_app_image_config": config.ParameterAsIdentifier("app_image_config_name"),
+	// SageMaker Code Repositories can be imported using the name
+	"aws_sagemaker_code_repository": config.ParameterAsIdentifier("code_repository_name"),
+	// SageMaker Domains can be imported using the id
+	"aws_sagemaker_domain": config.IdentifierFromProvider,
+	// Feature Groups can be imported using the name
+	"aws_sagemaker_feature_group": config.ParameterAsIdentifier("feature_group_name"),
+	// SageMaker Code Images can be imported using the name
+	"aws_sagemaker_image": config.ParameterAsIdentifier("image_name"),
+	// SageMaker Model Package Groups can be imported using the name
+	"aws_sagemaker_model_package_group": config.ParameterAsIdentifier("model_package_group_name"),
+	// SageMaker Notebook Instances can be imported using the name
+	"aws_sagemaker_notebook_instance": config.NameAsIdentifier,
+	// Models can be imported using the name
+	"aws_sagemaker_notebook_instance_lifecycle_configuration": config.NameAsIdentifier,
+	// SageMaker Studio Lifecycle Configs can be imported using the studio_lifecycle_config_name
+	"aws_sagemaker_studio_lifecycle_config": config.ParameterAsIdentifier("studio_lifecycle_config_name"),
+	// SageMaker User Profiles can be imported using the arn
+	"aws_sagemaker_user_profile": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
