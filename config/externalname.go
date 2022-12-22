@@ -1785,6 +1785,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// QLDB Ledgers can be imported using the name
 	"aws_qldb_ledger": config.NameAsIdentifier,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_qldb_stream": config.IdentifierFromProvider,
 
 	// glacier
 	//

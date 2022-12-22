@@ -540,6 +540,7 @@ import (
 	smschannel "github.com/upbound/provider-aws/internal/controller/pinpoint/smschannel"
 	providerconfig "github.com/upbound/provider-aws/internal/controller/providerconfig"
 	ledger "github.com/upbound/provider-aws/internal/controller/qldb/ledger"
+	streamqldb "github.com/upbound/provider-aws/internal/controller/qldb/stream"
 	groupquicksight "github.com/upbound/provider-aws/internal/controller/quicksight/group"
 	userquicksight "github.com/upbound/provider-aws/internal/controller/quicksight/user"
 	resourceshare "github.com/upbound/provider-aws/internal/controller/ram/resourceshare"
@@ -1201,6 +1202,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		smschannel.Setup,
 		providerconfig.Setup,
 		ledger.Setup,
+		streamqldb.Setup,
 		groupquicksight.Setup,
 		userquicksight.Setup,
 		resourceshare.Setup,
