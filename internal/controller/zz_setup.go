@@ -580,6 +580,16 @@ import (
 	accesspoints3control "github.com/upbound/provider-aws/internal/controller/s3control/accesspoint"
 	accesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/accesspointpolicy"
 	accountpublicaccessblock "github.com/upbound/provider-aws/internal/controller/s3control/accountpublicaccessblock"
+	appimageconfig "github.com/upbound/provider-aws/internal/controller/sagemaker/appimageconfig"
+	coderepository "github.com/upbound/provider-aws/internal/controller/sagemaker/coderepository"
+	domainsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/domain"
+	featuregroup "github.com/upbound/provider-aws/internal/controller/sagemaker/featuregroup"
+	image "github.com/upbound/provider-aws/internal/controller/sagemaker/image"
+	modelpackagegroup "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegroup"
+	notebookinstance "github.com/upbound/provider-aws/internal/controller/sagemaker/notebookinstance"
+	notebookinstancelifecycleconfiguration "github.com/upbound/provider-aws/internal/controller/sagemaker/notebookinstancelifecycleconfiguration"
+	studiolifecycleconfig "github.com/upbound/provider-aws/internal/controller/sagemaker/studiolifecycleconfig"
+	userprofile "github.com/upbound/provider-aws/internal/controller/sagemaker/userprofile"
 	discoverer "github.com/upbound/provider-aws/internal/controller/schemas/discoverer"
 	registryschemas "github.com/upbound/provider-aws/internal/controller/schemas/registry"
 	schema "github.com/upbound/provider-aws/internal/controller/schemas/schema"
@@ -1208,6 +1218,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		accesspoints3control.Setup,
 		accesspointpolicy.Setup,
 		accountpublicaccessblock.Setup,
+		appimageconfig.Setup,
+		coderepository.Setup,
+		domainsagemaker.Setup,
+		featuregroup.Setup,
+		image.Setup,
+		modelpackagegroup.Setup,
+		notebookinstance.Setup,
+		notebookinstancelifecycleconfiguration.Setup,
+		studiolifecycleconfig.Setup,
+		userprofile.Setup,
 		discoverer.Setup,
 		registryschemas.Setup,
 		schema.Setup,

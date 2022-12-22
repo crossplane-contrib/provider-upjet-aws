@@ -634,47 +634,27 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// SageMaker Apps can be imported using the id
 	"aws_sagemaker_app": config.IdentifierFromProvider,
-	// SageMaker App Image Configs can be imported using the name
-	"aws_sagemaker_app_image_config": config.ParameterAsIdentifier("app_image_config_name"),
-	// SageMaker Code Repositories can be imported using the name
-	"aws_sagemaker_code_repository": config.ParameterAsIdentifier("code_repository_name"),
 	// SageMaker Devices can be imported using the device-fleet-name/device-name
 	// my-fleet/my-device
 	"aws_sagemaker_device": FormattedIdentifierFromProvider("/", "device_fleet_name", "device.device_name"),
 	// SageMaker Device Fleets can be imported using the name
 	"aws_sagemaker_device_fleet": config.ParameterAsIdentifier("device_fleet_name"),
-	// SageMaker Domains can be imported using the id
-	"aws_sagemaker_domain": config.IdentifierFromProvider,
 	// Endpoints can be imported using the name
 	"aws_sagemaker_endpoint": config.NameAsIdentifier,
 	// Endpoint configurations can be imported using the name
 	"aws_sagemaker_endpoint_configuration": config.NameAsIdentifier,
-	// Feature Groups can be imported using the name
-	"aws_sagemaker_feature_group": config.ParameterAsIdentifier("feature_group_name"),
 	// SageMaker Flow Definitions can be imported using the flow_definition_name
 	"aws_sagemaker_flow_definition": config.ParameterAsIdentifier("flow_definition_name"),
 	// SageMaker Human Task UIs can be imported using the human_task_ui_name
 	"aws_sagemaker_human_task_ui": config.ParameterAsIdentifier("human_task_ui_name"),
 	// SageMaker Code Images can be imported using the name
-	"aws_sagemaker_image": config.ParameterAsIdentifier("image_name"),
-	// SageMaker Image Versions can be imported using the name
 	"aws_sagemaker_image_version": config.ParameterAsIdentifier("image_name"),
 	// Models can be imported using the name
 	"aws_sagemaker_model": config.NameAsIdentifier,
 	// SageMaker Model Package Groups can be imported using the name
-	"aws_sagemaker_model_package_group": config.ParameterAsIdentifier("model_package_group_name"),
-	// SageMaker Model Package Groups can be imported using the name
 	"aws_sagemaker_model_package_group_policy": config.ParameterAsIdentifier("model_package_group_name"),
-	// SageMaker Notebook Instances can be imported using the name
-	"aws_sagemaker_notebook_instance": config.NameAsIdentifier,
-	// Models can be imported using the name
-	"aws_sagemaker_notebook_instance_lifecycle_configuration": config.NameAsIdentifier,
 	// SageMaker Projects can be imported using the project_name
 	"aws_sagemaker_project": config.ParameterAsIdentifier("project_name"),
-	// SageMaker Studio Lifecycle Configs can be imported using the studio_lifecycle_config_name
-	"aws_sagemaker_studio_lifecycle_config": config.ParameterAsIdentifier("studio_lifecycle_config_name"),
-	// SageMaker User Profiles can be imported using the arn
-	"aws_sagemaker_user_profile": config.IdentifierFromProvider,
 	// SageMaker Workforces can be imported using the workforce_name
 	"aws_sagemaker_workforce": config.ParameterAsIdentifier("workforce_name"),
 	// SageMaker Workteams can be imported using the workteam_name
