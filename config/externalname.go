@@ -1848,6 +1848,19 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_fsx_backup": config.IdentifierFromProvider,
 	// FSx Data Repository Associations can be imported using the id
 	"aws_fsx_data_repository_association": config.IdentifierFromProvider,
+
+	// memorydb
+	//
+	// Use the name to import a parameter group
+	"aws_memorydb_parameter_group": config.NameAsIdentifier,
+	// Use the name to import a subnet group
+	"aws_memorydb_subnet_group": config.NameAsIdentifier,
+	// Use the name to import a cluster
+	"aws_memorydb_cluster": config.NameAsIdentifier,
+	// Use the name to import an ACL
+	"aws_memorydb_acl": config.NameAsIdentifier,
+	// Use the name to import a snapshot
+	"aws_memorydb_snapshot": config.NameAsIdentifier,
 }
 
 func lambdaFunctionURL() config.ExternalName {
