@@ -620,6 +620,13 @@ import (
 	topicsubscription "github.com/upbound/provider-aws/internal/controller/sns/topicsubscription"
 	queuesqs "github.com/upbound/provider-aws/internal/controller/sqs/queue"
 	queuepolicy "github.com/upbound/provider-aws/internal/controller/sqs/queuepolicy"
+	activation "github.com/upbound/provider-aws/internal/controller/ssm/activation"
+	associationssm "github.com/upbound/provider-aws/internal/controller/ssm/association"
+	document "github.com/upbound/provider-aws/internal/controller/ssm/document"
+	maintenancewindow "github.com/upbound/provider-aws/internal/controller/ssm/maintenancewindow"
+	maintenancewindowtarget "github.com/upbound/provider-aws/internal/controller/ssm/maintenancewindowtarget"
+	patchbaseline "github.com/upbound/provider-aws/internal/controller/ssm/patchbaseline"
+	patchgroup "github.com/upbound/provider-aws/internal/controller/ssm/patchgroup"
 	server "github.com/upbound/provider-aws/internal/controller/transfer/server"
 	usertransfer "github.com/upbound/provider-aws/internal/controller/transfer/user"
 )
@@ -1239,6 +1246,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		topicsubscription.Setup,
 		queuesqs.Setup,
 		queuepolicy.Setup,
+		activation.Setup,
+		associationssm.Setup,
+		document.Setup,
+		maintenancewindow.Setup,
+		maintenancewindowtarget.Setup,
+		patchbaseline.Setup,
+		patchgroup.Setup,
 		server.Setup,
 		usertransfer.Setup,
 	} {
