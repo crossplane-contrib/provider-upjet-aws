@@ -1825,6 +1825,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_sagemaker_studio_lifecycle_config": config.ParameterAsIdentifier("studio_lifecycle_config_name"),
 	// SageMaker User Profiles can be imported using the arn
 	"aws_sagemaker_user_profile": config.IdentifierFromProvider,
+
+	// elbv2
+	//
+	// Rules can be imported using their ARN
+	"aws_lb_listener_rule": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

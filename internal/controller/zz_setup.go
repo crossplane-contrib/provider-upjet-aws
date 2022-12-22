@@ -393,6 +393,7 @@ import (
 	elb "github.com/upbound/provider-aws/internal/controller/elb/elb"
 	lb "github.com/upbound/provider-aws/internal/controller/elbv2/lb"
 	lblistener "github.com/upbound/provider-aws/internal/controller/elbv2/lblistener"
+	lblistenerrule "github.com/upbound/provider-aws/internal/controller/elbv2/lblistenerrule"
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
 	securityconfiguration "github.com/upbound/provider-aws/internal/controller/emr/securityconfiguration"
@@ -1044,6 +1045,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		elb.Setup,
 		lb.Setup,
 		lblistener.Setup,
+		lblistenerrule.Setup,
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
 		securityconfiguration.Setup,
