@@ -442,8 +442,19 @@ import (
 	userpolicyattachment "github.com/upbound/provider-aws/internal/controller/iam/userpolicyattachment"
 	usersshkey "github.com/upbound/provider-aws/internal/controller/iam/usersshkey"
 	virtualmfadevice "github.com/upbound/provider-aws/internal/controller/iam/virtualmfadevice"
+	certificateiot "github.com/upbound/provider-aws/internal/controller/iot/certificate"
+	indexingconfiguration "github.com/upbound/provider-aws/internal/controller/iot/indexingconfiguration"
+	loggingoptions "github.com/upbound/provider-aws/internal/controller/iot/loggingoptions"
 	policyiot "github.com/upbound/provider-aws/internal/controller/iot/policy"
+	policyattachment "github.com/upbound/provider-aws/internal/controller/iot/policyattachment"
+	provisioningtemplate "github.com/upbound/provider-aws/internal/controller/iot/provisioningtemplate"
+	rolealias "github.com/upbound/provider-aws/internal/controller/iot/rolealias"
 	thing "github.com/upbound/provider-aws/internal/controller/iot/thing"
+	thinggroup "github.com/upbound/provider-aws/internal/controller/iot/thinggroup"
+	thinggroupmembership "github.com/upbound/provider-aws/internal/controller/iot/thinggroupmembership"
+	thingprincipalattachment "github.com/upbound/provider-aws/internal/controller/iot/thingprincipalattachment"
+	thingtype "github.com/upbound/provider-aws/internal/controller/iot/thingtype"
+	topicrule "github.com/upbound/provider-aws/internal/controller/iot/topicrule"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
 	keyspace "github.com/upbound/provider-aws/internal/controller/keyspaces/keyspace"
@@ -515,7 +526,7 @@ import (
 	organization "github.com/upbound/provider-aws/internal/controller/organizations/organization"
 	organizationalunit "github.com/upbound/provider-aws/internal/controller/organizations/organizationalunit"
 	policyorganizations "github.com/upbound/provider-aws/internal/controller/organizations/policy"
-	policyattachment "github.com/upbound/provider-aws/internal/controller/organizations/policyattachment"
+	policyattachmentorganizations "github.com/upbound/provider-aws/internal/controller/organizations/policyattachment"
 	apppinpoint "github.com/upbound/provider-aws/internal/controller/pinpoint/app"
 	smschannel "github.com/upbound/provider-aws/internal/controller/pinpoint/smschannel"
 	providerconfig "github.com/upbound/provider-aws/internal/controller/providerconfig"
@@ -1080,8 +1091,19 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userpolicyattachment.Setup,
 		usersshkey.Setup,
 		virtualmfadevice.Setup,
+		certificateiot.Setup,
+		indexingconfiguration.Setup,
+		loggingoptions.Setup,
 		policyiot.Setup,
+		policyattachment.Setup,
+		provisioningtemplate.Setup,
+		rolealias.Setup,
 		thing.Setup,
+		thinggroup.Setup,
+		thinggroupmembership.Setup,
+		thingprincipalattachment.Setup,
+		thingtype.Setup,
+		topicrule.Setup,
 		clusterkafka.Setup,
 		configuration.Setup,
 		keyspace.Setup,
@@ -1153,7 +1175,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		organization.Setup,
 		organizationalunit.Setup,
 		policyorganizations.Setup,
-		policyattachment.Setup,
+		policyattachmentorganizations.Setup,
 		apppinpoint.Setup,
 		smschannel.Setup,
 		providerconfig.Setup,

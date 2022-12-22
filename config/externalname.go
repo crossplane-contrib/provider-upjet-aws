@@ -1764,6 +1764,38 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// EMR Security Configurations can be imported using the name
 	"aws_emr_security_configuration": config.NameAsIdentifier,
+
+	// iot
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_certificate": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_indexing_configuration": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_logging_options": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_policy_attachment": config.IdentifierFromProvider,
+	// IoT fleet provisioning templates can be imported using the name
+	"aws_iot_provisioning_template": config.NameAsIdentifier,
+	// IOT Role Alias can be imported via the alias
+	"aws_iot_role_alias": config.IdentifierFromProvider,
+	// IoT Things Groups can be imported using the name
+	"aws_iot_thing_group": config.NameAsIdentifier,
+	// IoT Thing Group Membership can be imported using the thing group name and thing name
+	// thing_group_name/thing_name
+	"aws_iot_thing_group_membership": FormattedIdentifierFromProvider("/", "thing_group_name", "thing_name"),
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_iot_thing_principal_attachment": config.IdentifierFromProvider,
+	// IOT Thing Types can be imported using the name
+	"aws_iot_thing_type": config.IdentifierFromProvider,
+	// IoT Topic Rules can be imported using the name
+	"aws_iot_topic_rule": config.NameAsIdentifier,
+
 	// sagemaker
 	//
 	// SageMaker App Image Configs can be imported using the name
