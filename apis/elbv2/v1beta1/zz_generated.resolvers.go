@@ -9,8 +9,10 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1beta12 "github.com/upbound/provider-aws/apis/cognitoidp/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/s3/v1beta1"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -155,6 +157,132 @@ func (mg *LBListener) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.LoadBalancerArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LoadBalancerArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this LBListenerRule.
+func (mg *LBListenerRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Action); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Action[i3].AuthenticateCognito); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolArnRef,
+				Selector:     mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolArnSelector,
+				To: reference.To{
+					List:    &v1beta12.UserPoolList{},
+					Managed: &v1beta12.UserPool{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolArn")
+			}
+			mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Action); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Action[i3].AuthenticateCognito); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientIDRef,
+				Selector:     mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientIDSelector,
+				To: reference.To{
+					List:    &v1beta12.UserPoolClientList{},
+					Managed: &v1beta12.UserPoolClient{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientID")
+			}
+			mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Action); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Action[i3].AuthenticateCognito); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolDomain),
+				Extract:      resource.ExtractParamPath("domain", false),
+				Reference:    mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolDomainRef,
+				Selector:     mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolDomainSelector,
+				To: reference.To{
+					List:    &v1beta12.UserPoolDomainList{},
+					Managed: &v1beta12.UserPoolDomain{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolDomain")
+			}
+			mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolDomain = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolDomainRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Action); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Action[i3].Forward); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.Action[i3].Forward[i4].TargetGroup); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Action[i3].Forward[i4].TargetGroup[i5].Arn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.ForProvider.Action[i3].Forward[i4].TargetGroup[i5].ArnRef,
+					Selector:     mg.Spec.ForProvider.Action[i3].Forward[i4].TargetGroup[i5].ArnSelector,
+					To: reference.To{
+						List:    &LBTargetGroupList{},
+						Managed: &LBTargetGroup{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Action[i3].Forward[i4].TargetGroup[i5].Arn")
+				}
+				mg.Spec.ForProvider.Action[i3].Forward[i4].TargetGroup[i5].Arn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Action[i3].Forward[i4].TargetGroup[i5].ArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Action); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Action[i3].TargetGroupArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.Action[i3].TargetGroupArnRef,
+			Selector:     mg.Spec.ForProvider.Action[i3].TargetGroupArnSelector,
+			To: reference.To{
+				List:    &LBTargetGroupList{},
+				Managed: &LBTargetGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Action[i3].TargetGroupArn")
+		}
+		mg.Spec.ForProvider.Action[i3].TargetGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Action[i3].TargetGroupArnRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ListenerArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.ListenerArnRef,
+		Selector:     mg.Spec.ForProvider.ListenerArnSelector,
+		To: reference.To{
+			List:    &LBListenerList{},
+			Managed: &LBListener{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ListenerArn")
+	}
+	mg.Spec.ForProvider.ListenerArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ListenerArnRef = rsp.ResolvedReference
 
 	return nil
 }
