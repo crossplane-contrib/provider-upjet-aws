@@ -1031,6 +1031,20 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Redshift Clusters can be imported using the cluster_identifier
 	"aws_redshift_cluster": config.ParameterAsIdentifier("cluster_identifier"),
+	// Redshift Event Subscriptions can be imported using the name
+	"aws_redshift_event_subscription": config.NameAsIdentifier,
+	// Redshift Parameter Groups can be imported using the name
+	"aws_redshift_parameter_group": config.IdentifierFromProvider,
+	// Redshift Scheduled Action can be imported using the name
+	"aws_redshift_scheduled_action": config.NameAsIdentifier,
+	// Redshift Snapshot Copy Grants support import by name
+	"aws_redshift_snapshot_copy_grant": config.IdentifierFromProvider,
+	// Redshift Snapshot Schedule can be imported using the identifier
+	"aws_redshift_snapshot_schedule": config.ParameterAsIdentifier("identifier"),
+	// Redshift Snapshot Schedule Association can be imported using the <cluster-identifier>/<schedule-identifier>
+	"aws_redshift_snapshot_schedule_association": config.IdentifierFromProvider,
+	// Redshift subnet groups can be imported using the name
+	"aws_redshift_subnet_group": config.NameAsIdentifier,
 
 	// sfn
 	//

@@ -493,22 +493,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// redshift
 	//
-	// Redshift Event Subscriptions can be imported using the name
-	"aws_redshift_event_subscription": config.NameAsIdentifier,
-	// Redshift Parameter Groups can be imported using the name
-	"aws_redshift_parameter_group": config.NameAsIdentifier,
-	// Redshift Scheduled Action can be imported using the name
-	"aws_redshift_scheduled_action": config.NameAsIdentifier,
 	// Redshift security groups can be imported using the name
 	"aws_redshift_security_group": config.NameAsIdentifier,
-	// Redshift Snapshot Copy Grants support import by name
-	"aws_redshift_snapshot_copy_grant": config.NameAsIdentifier,
-	// Redshift Snapshot Schedule can be imported using the identifier
-	"aws_redshift_snapshot_schedule": config.ParameterAsIdentifier("identifier"),
-	// Redshift Snapshot Schedule Association can be imported using the <cluster-identifier>/<schedule-identifier>
-	"aws_redshift_snapshot_schedule_association": FormattedIdentifierFromProvider("/", "cluster_identifier", "schedule_identifier"),
-	// Redshift subnet groups can be imported using the name
-	"aws_redshift_subnet_group": config.NameAsIdentifier,
 
 	// route53domains
 	//
