@@ -653,4 +653,51 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_inspector_resource_group": config.IdentifierFromProvider,
+	// waf
+	//
+	// WAF Byte Match Set can be imported using the id
+	"aws_waf_byte_match_set": config.IdentifierFromProvider,
+	// WAF Geo Match Set can be imported using their ID
+	"aws_waf_geo_match_set": config.IdentifierFromProvider,
+	// WAF IPSets can be imported using their ID
+	"aws_waf_ipset": config.IdentifierFromProvider,
+	// WAF Rated Based Rule can be imported using the id
+	"aws_waf_rate_based_rule": config.IdentifierFromProvider,
+	// WAF Regex Match Set can be imported using their ID
+	"aws_waf_regex_match_set": config.IdentifierFromProvider,
+	// AWS WAF Regex Pattern Set can be imported using their ID
+	"aws_waf_regex_pattern_set": config.IdentifierFromProvider,
+	// WAF rules can be imported using the id
+	"aws_waf_rule": config.IdentifierFromProvider,
+	// AWS WAF Size Constraint Set can be imported using their ID
+	"aws_waf_size_constraint_set": config.IdentifierFromProvider,
+	// AWS WAF SQL Injection Match Set can be imported using their ID
+	"aws_waf_sql_injection_match_set": config.IdentifierFromProvider,
+	// WAF Web ACL can be imported using the id
+	"aws_waf_web_acl": config.IdentifierFromProvider,
+	// WAF XSS Match Set can be imported using their ID
+	"aws_waf_xss_match_set": config.IdentifierFromProvider,
+
+	// wafregional
+	//
+	// WAF Regional Byte Match Set can be imported using the id
+	"aws_wafregional_byte_match_set": config.IdentifierFromProvider,
+	// WAF Regional Geo Match Set can be imported using the id
+	"aws_wafregional_geo_match_set": config.IdentifierFromProvider,
+	// WAF Regional IPSets can be imported using their ID
+	"aws_wafregional_ipset": config.IdentifierFromProvider,
+	// WAF Regional Rate Based Rule can be imported using the id
+	"aws_wafregional_rate_based_rule": config.IdentifierFromProvider,
+	// WAF Regional Regex Match Set can be imported using the id
+	"aws_wafregional_regex_match_set": config.IdentifierFromProvider,
+	// WAF Regional Regex Pattern Set can be imported using the id
+	"aws_wafregional_regex_pattern_set": config.IdentifierFromProvider,
+	// WAF Regional Rule can be imported using the id
+	"aws_wafregional_rule": config.IdentifierFromProvider,
+	// WAF Size Constraint Set can be imported using the id
+	"aws_wafregional_size_constraint_set": config.IdentifierFromProvider,
+	// WAF Regional Sql Injection Match Set can be imported using the id
+	"aws_wafregional_sql_injection_match_set": config.IdentifierFromProvider,
+	// WAF Regional Web ACL can be imported using the id
+	"aws_wafregional_web_acl": config.IdentifierFromProvider,
 }
