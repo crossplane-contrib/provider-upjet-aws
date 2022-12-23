@@ -700,4 +700,37 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_wafregional_sql_injection_match_set": config.IdentifierFromProvider,
 	// WAF Regional Web ACL can be imported using the id
 	"aws_wafregional_web_acl": config.IdentifierFromProvider,
+	// ssoadmin
+	//
+	// SSO Account Assignments can be imported using the principal_id, principal_type, target_id, target_type, permission_set_arn, instance_arn separated by commas (,)
+	// Example: f81d4fae-7dec-11d0-a765-00a0c91e6bf6,GROUP,1234567890,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-0123456789abcdef/ps-0123456789abcdef,arn:aws:sso:::instance/ssoins-0123456789abcdef
+	"aws_ssoadmin_account_assignment": config.TemplatedStringAsIdentifier("", "{{ .parameters.principal_id }},{{ .parameters.principal_type }},{{ .parameters.target_id }},{{ .parameters.target_type }},{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
+	// SSO Managed Policy Attachments can be imported using the managed_policy_arn, permission_set_arn, and instance_arn separated by a comma (,)
+	// Example: arn:aws:iam::aws:policy/AlexaForBusinessDeviceSetup,arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	"aws_ssoadmin_managed_policy_attachment": config.TemplatedStringAsIdentifier("", "{{ .parameters.managed_policy_arn }},{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn}}"),
+	// SSO Permission Sets can be imported using the arn and instance_arn separated by a comma (,)
+	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	// TODO: Normalize external_name while testing
+	"aws_ssoadmin_permission_set": config.IdentifierFromProvider,
+	// SSO Permission Set Inline Policies can be imported using the permission_set_arn and instance_arn separated by a comma (,)
+	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	"aws_ssoadmin_permission_set_inline_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
+
+	// swf
+	//
+	// SWF Domains can be imported using the name
+	"aws_swf_domain": config.NameAsIdentifier,
+
+	// synthetics
+	//
+	// Synthetics Canaries can be imported using the name
+	"aws_synthetics_canary": config.NameAsIdentifier,
+
+	// timestreamwrite
+	//
+	// Timestream databases can be imported using the database_name
+	"aws_timestreamwrite_database": config.ParameterAsIdentifier("database_name"),
+	// Timestream tables can be imported using the table_name and database_name separate by a colon (:)
+	// Example: ExampleTable:ExampleDatabase
+	"aws_timestreamwrite_table": config.TemplatedStringAsIdentifier("", "{{ .parameters.table_name }}:{{ .parameters.database_name }}"),
 }
