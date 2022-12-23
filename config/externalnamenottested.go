@@ -385,12 +385,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// fsx
 	//
-	// FSx Backups can be imported using the id
-	"aws_fsx_backup": config.IdentifierFromProvider,
-	// FSx Data Repository Associations can be imported using the id
-	"aws_fsx_data_repository_association": config.IdentifierFromProvider,
-	// FSx File Systems can be imported using the id
-	"aws_fsx_lustre_file_system": config.IdentifierFromProvider,
 	// FSx File Systems can be imported using the id
 	"aws_fsx_ontap_file_system": config.IdentifierFromProvider,
 	// FSx Storage Virtual Machine can be imported using the id
@@ -403,8 +397,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_fsx_openzfs_snapshot": config.IdentifierFromProvider,
 	// FSx Volumes can be imported using the id
 	"aws_fsx_openzfs_volume": config.IdentifierFromProvider,
-	// FSx File Systems can be imported using the id
-	"aws_fsx_windows_file_system": config.IdentifierFromProvider,
 
 	// iot
 	//

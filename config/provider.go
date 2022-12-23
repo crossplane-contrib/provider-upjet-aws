@@ -48,6 +48,7 @@ import (
 	"github.com/upbound/provider-aws/config/elb"
 	"github.com/upbound/provider-aws/config/elbv2"
 	"github.com/upbound/provider-aws/config/firehose"
+	"github.com/upbound/provider-aws/config/fsx"
 	"github.com/upbound/provider-aws/config/gamelift"
 	"github.com/upbound/provider-aws/config/globalaccelerator"
 	"github.com/upbound/provider-aws/config/glue"
@@ -213,6 +214,7 @@ func GetProvider() *config.Provider {
 		transfer.Configure,
 		directconnect.Configure,
 		ds.Configure,
+		fsx.Configure,
 	} {
 		configure(pc)
 	}
