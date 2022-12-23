@@ -10,8 +10,35 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this AppCookieStickinessPolicy.
+func (mg *AppCookieStickinessPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadBalancer),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.LoadBalancerRef,
+		Selector:     mg.Spec.ForProvider.LoadBalancerSelector,
+		To: reference.To{
+			List:    &ELBList{},
+			Managed: &ELB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoadBalancer")
+	}
+	mg.Spec.ForProvider.LoadBalancer = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoadBalancerRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this Attachment.
 func (mg *Attachment) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -55,6 +82,32 @@ func (mg *Attachment) ResolveReferences(ctx context.Context, c client.Reader) er
 	return nil
 }
 
+// ResolveReferences of this BackendServerPolicy.
+func (mg *BackendServerPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadBalancerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.LoadBalancerNameRef,
+		Selector:     mg.Spec.ForProvider.LoadBalancerNameSelector,
+		To: reference.To{
+			List:    &ELBList{},
+			Managed: &ELB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoadBalancerName")
+	}
+	mg.Spec.ForProvider.LoadBalancerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoadBalancerNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this ELB.
 func (mg *ELB) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -93,6 +146,155 @@ func (mg *ELB) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.Subnets = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SubnetsRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this LBCookieStickinessPolicy.
+func (mg *LBCookieStickinessPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadBalancer),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.LoadBalancerRef,
+		Selector:     mg.Spec.ForProvider.LoadBalancerSelector,
+		To: reference.To{
+			List:    &ELBList{},
+			Managed: &ELB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoadBalancer")
+	}
+	mg.Spec.ForProvider.LoadBalancer = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoadBalancerRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this LBSSLNegotiationPolicy.
+func (mg *LBSSLNegotiationPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadBalancer),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.LoadBalancerRef,
+		Selector:     mg.Spec.ForProvider.LoadBalancerSelector,
+		To: reference.To{
+			List:    &ELBList{},
+			Managed: &ELB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoadBalancer")
+	}
+	mg.Spec.ForProvider.LoadBalancer = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoadBalancerRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ListenerPolicy.
+func (mg *ListenerPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadBalancerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.LoadBalancerNameRef,
+		Selector:     mg.Spec.ForProvider.LoadBalancerNameSelector,
+		To: reference.To{
+			List:    &ELBList{},
+			Managed: &ELB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoadBalancerName")
+	}
+	mg.Spec.ForProvider.LoadBalancerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoadBalancerNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Policy.
+func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadBalancerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.LoadBalancerNameRef,
+		Selector:     mg.Spec.ForProvider.LoadBalancerNameSelector,
+		To: reference.To{
+			List:    &ELBList{},
+			Managed: &ELB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoadBalancerName")
+	}
+	mg.Spec.ForProvider.LoadBalancerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoadBalancerNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PolicyAttribute); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyAttribute[i3].Value),
+			Extract:      resource.ExtractParamPath("policy_name", false),
+			Reference:    mg.Spec.ForProvider.PolicyAttribute[i3].ValueRef,
+			Selector:     mg.Spec.ForProvider.PolicyAttribute[i3].ValueSelector,
+			To: reference.To{
+				List:    &PolicyList{},
+				Managed: &Policy{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.PolicyAttribute[i3].Value")
+		}
+		mg.Spec.ForProvider.PolicyAttribute[i3].Value = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.PolicyAttribute[i3].ValueRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
+// ResolveReferences of this ProxyProtocolPolicy.
+func (mg *ProxyProtocolPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadBalancer),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.LoadBalancerRef,
+		Selector:     mg.Spec.ForProvider.LoadBalancerSelector,
+		To: reference.To{
+			List:    &ELBList{},
+			Managed: &ELB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoadBalancer")
+	}
+	mg.Spec.ForProvider.LoadBalancer = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoadBalancerRef = rsp.ResolvedReference
 
 	return nil
 }

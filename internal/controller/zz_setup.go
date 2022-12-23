@@ -389,8 +389,15 @@ import (
 	configurationtemplate "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/configurationtemplate"
 	pipelineelastictranscoder "github.com/upbound/provider-aws/internal/controller/elastictranscoder/pipeline"
 	preset "github.com/upbound/provider-aws/internal/controller/elastictranscoder/preset"
+	appcookiestickinesspolicy "github.com/upbound/provider-aws/internal/controller/elb/appcookiestickinesspolicy"
 	attachmentelb "github.com/upbound/provider-aws/internal/controller/elb/attachment"
+	backendserverpolicy "github.com/upbound/provider-aws/internal/controller/elb/backendserverpolicy"
 	elb "github.com/upbound/provider-aws/internal/controller/elb/elb"
+	lbcookiestickinesspolicy "github.com/upbound/provider-aws/internal/controller/elb/lbcookiestickinesspolicy"
+	lbsslnegotiationpolicy "github.com/upbound/provider-aws/internal/controller/elb/lbsslnegotiationpolicy"
+	listenerpolicy "github.com/upbound/provider-aws/internal/controller/elb/listenerpolicy"
+	policyelb "github.com/upbound/provider-aws/internal/controller/elb/policy"
+	proxyprotocolpolicy "github.com/upbound/provider-aws/internal/controller/elb/proxyprotocolpolicy"
 	lb "github.com/upbound/provider-aws/internal/controller/elbv2/lb"
 	lblistener "github.com/upbound/provider-aws/internal/controller/elbv2/lblistener"
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
@@ -1042,8 +1049,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		configurationtemplate.Setup,
 		pipelineelastictranscoder.Setup,
 		preset.Setup,
+		appcookiestickinesspolicy.Setup,
 		attachmentelb.Setup,
+		backendserverpolicy.Setup,
 		elb.Setup,
+		lbcookiestickinesspolicy.Setup,
+		lbsslnegotiationpolicy.Setup,
+		listenerpolicy.Setup,
+		policyelb.Setup,
+		proxyprotocolpolicy.Setup,
 		lb.Setup,
 		lblistener.Setup,
 		lbtargetgroup.Setup,

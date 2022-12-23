@@ -323,30 +323,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Elasticsearch domains can be imported using the domain_name
 	"aws_elasticsearch_domain_saml_options": config.ParameterAsIdentifier("domain_name"),
 
-	// elb
-	//
-	// Application cookie stickiness policies can be imported using the ELB name, port, and policy name separated by colons (:)
-	// my-elb:80:my-policy
-	"aws_app_cookie_stickiness_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.load_balancer }}:{{ .parameters.lb_port }}:{{ .external_name }}"),
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_lb_cookie_stickiness_policy": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_lb_ssl_negotiation_policy": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_load_balancer_backend_server_policy": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_load_balancer_listener_policy": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_load_balancer_policy": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_proxy_protocol_policy": config.IdentifierFromProvider,
-
 	// elbv2
 	//
 	// Listener Certificates can be imported by using the listener arn and certificate arn, separated by an underscore (_)
