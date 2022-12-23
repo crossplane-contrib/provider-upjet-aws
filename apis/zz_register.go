@@ -77,6 +77,7 @@ import (
 	v1beta1emr "github.com/upbound/provider-aws/apis/emr/v1beta1"
 	v1beta1firehose "github.com/upbound/provider-aws/apis/firehose/v1beta1"
 	v1beta1gamelift "github.com/upbound/provider-aws/apis/gamelift/v1beta1"
+	v1beta1glacier "github.com/upbound/provider-aws/apis/glacier/v1beta1"
 	v1beta1globalaccelerator "github.com/upbound/provider-aws/apis/globalaccelerator/v1beta1"
 	v1beta1glue "github.com/upbound/provider-aws/apis/glue/v1beta1"
 	v1beta1grafana "github.com/upbound/provider-aws/apis/grafana/v1beta1"
@@ -199,6 +200,7 @@ func init() {
 		v1beta1emr.SchemeBuilder.AddToScheme,
 		v1beta1firehose.SchemeBuilder.AddToScheme,
 		v1beta1gamelift.SchemeBuilder.AddToScheme,
+		v1beta1glacier.SchemeBuilder.AddToScheme,
 		v1beta1globalaccelerator.SchemeBuilder.AddToScheme,
 		v1beta1glue.SchemeBuilder.AddToScheme,
 		v1beta1grafana.SchemeBuilder.AddToScheme,

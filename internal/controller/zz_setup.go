@@ -402,6 +402,8 @@ import (
 	fleetgamelift "github.com/upbound/provider-aws/internal/controller/gamelift/fleet"
 	gamesessionqueue "github.com/upbound/provider-aws/internal/controller/gamelift/gamesessionqueue"
 	script "github.com/upbound/provider-aws/internal/controller/gamelift/script"
+	vaultglacier "github.com/upbound/provider-aws/internal/controller/glacier/vault"
+	vaultlock "github.com/upbound/provider-aws/internal/controller/glacier/vaultlock"
 	accelerator "github.com/upbound/provider-aws/internal/controller/globalaccelerator/accelerator"
 	endpointgroup "github.com/upbound/provider-aws/internal/controller/globalaccelerator/endpointgroup"
 	listener "github.com/upbound/provider-aws/internal/controller/globalaccelerator/listener"
@@ -1053,6 +1055,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		fleetgamelift.Setup,
 		gamesessionqueue.Setup,
 		script.Setup,
+		vaultglacier.Setup,
+		vaultlock.Setup,
 		accelerator.Setup,
 		endpointgroup.Setup,
 		listener.Setup,
