@@ -491,17 +491,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// 123456789123/default/all-access-users/john_smith
 	"aws_quicksight_group_membership": FormattedIdentifierFromProvider("/", "aws_account_id", "namespace", "group_name", "member_name"),
 
-	// rds
-	//
-	// aws_db_cluster_snapshot can be imported by using the cluster snapshot identifier
-	"aws_db_cluster_snapshot": config.IdentifierFromProvider,
-	// DB Event Subscriptions can be imported using the name
-	"aws_db_event_subscription": config.NameAsIdentifier,
-	// RDS instance automated backups replication can be imported using the arn
-	"aws_db_instance_automated_backups_replication": config.NameAsIdentifier,
-	// aws_db_snapshot_copy can be imported by using the snapshot identifier
-	"aws_db_snapshot_copy": config.IdentifierFromProvider,
-
 	// redshift
 	//
 	// Redshift Event Subscriptions can be imported using the name

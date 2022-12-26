@@ -403,6 +403,270 @@ func (mg *ClusterRoleAssociation) SetWriteConnectionSecretToReference(r *xpv1.Se
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this ClusterSnapshot.
+func (mg *ClusterSnapshot) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ClusterSnapshot.
+func (mg *ClusterSnapshot) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ClusterSnapshot.
+func (mg *ClusterSnapshot) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ClusterSnapshot.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ClusterSnapshot) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ClusterSnapshot.
+func (mg *ClusterSnapshot) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ClusterSnapshot.
+func (mg *ClusterSnapshot) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ClusterSnapshot.
+func (mg *ClusterSnapshot) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ClusterSnapshot.
+func (mg *ClusterSnapshot) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ClusterSnapshot.
+func (mg *ClusterSnapshot) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ClusterSnapshot.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ClusterSnapshot) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ClusterSnapshot.
+func (mg *ClusterSnapshot) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ClusterSnapshot.
+func (mg *ClusterSnapshot) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this DBInstanceAutomatedBackupsReplication.
+func (mg *DBInstanceAutomatedBackupsReplication) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this DBInstanceAutomatedBackupsReplication.
+func (mg *DBInstanceAutomatedBackupsReplication) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this DBInstanceAutomatedBackupsReplication.
+func (mg *DBInstanceAutomatedBackupsReplication) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this DBInstanceAutomatedBackupsReplication.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *DBInstanceAutomatedBackupsReplication) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this DBInstanceAutomatedBackupsReplication.
+func (mg *DBInstanceAutomatedBackupsReplication) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this DBInstanceAutomatedBackupsReplication.
+func (mg *DBInstanceAutomatedBackupsReplication) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this DBInstanceAutomatedBackupsReplication.
+func (mg *DBInstanceAutomatedBackupsReplication) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this DBInstanceAutomatedBackupsReplication.
+func (mg *DBInstanceAutomatedBackupsReplication) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this DBInstanceAutomatedBackupsReplication.
+func (mg *DBInstanceAutomatedBackupsReplication) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this DBInstanceAutomatedBackupsReplication.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *DBInstanceAutomatedBackupsReplication) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this DBInstanceAutomatedBackupsReplication.
+func (mg *DBInstanceAutomatedBackupsReplication) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this DBInstanceAutomatedBackupsReplication.
+func (mg *DBInstanceAutomatedBackupsReplication) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this DBSnapshotCopy.
+func (mg *DBSnapshotCopy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this DBSnapshotCopy.
+func (mg *DBSnapshotCopy) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this DBSnapshotCopy.
+func (mg *DBSnapshotCopy) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this DBSnapshotCopy.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *DBSnapshotCopy) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this DBSnapshotCopy.
+func (mg *DBSnapshotCopy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this DBSnapshotCopy.
+func (mg *DBSnapshotCopy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this DBSnapshotCopy.
+func (mg *DBSnapshotCopy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this DBSnapshotCopy.
+func (mg *DBSnapshotCopy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this DBSnapshotCopy.
+func (mg *DBSnapshotCopy) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this DBSnapshotCopy.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *DBSnapshotCopy) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this DBSnapshotCopy.
+func (mg *DBSnapshotCopy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this DBSnapshotCopy.
+func (mg *DBSnapshotCopy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this EventSubscription.
+func (mg *EventSubscription) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this EventSubscription.
+func (mg *EventSubscription) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this EventSubscription.
+func (mg *EventSubscription) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this EventSubscription.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *EventSubscription) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this EventSubscription.
+func (mg *EventSubscription) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this EventSubscription.
+func (mg *EventSubscription) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this EventSubscription.
+func (mg *EventSubscription) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this EventSubscription.
+func (mg *EventSubscription) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this EventSubscription.
+func (mg *EventSubscription) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this EventSubscription.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *EventSubscription) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this EventSubscription.
+func (mg *EventSubscription) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this EventSubscription.
+func (mg *EventSubscription) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this GlobalCluster.
 func (mg *GlobalCluster) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

@@ -566,6 +566,14 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_rds_cluster_role_association": FormattedIdentifierFromProvider(",", "db_cluster_identifier", "role_arn"),
 	// aws_rds_global_cluster can be imported by using the RDS Global Cluster identifie
 	"aws_rds_global_cluster": config.ParameterAsIdentifier("global_cluster_identifier"),
+	// aws_db_cluster_snapshot can be imported by using the cluster snapshot identifier
+	"aws_db_cluster_snapshot": config.IdentifierFromProvider,
+	// DB Event Subscriptions can be imported using the name
+	"aws_db_event_subscription": config.NameAsIdentifier,
+	// RDS instance automated backups replication can be imported using the arn
+	"aws_db_instance_automated_backups_replication": config.IdentifierFromProvider,
+	// aws_db_snapshot_copy can be imported by using the snapshot identifier
+	"aws_db_snapshot_copy": config.IdentifierFromProvider,
 
 	// route53
 	//
