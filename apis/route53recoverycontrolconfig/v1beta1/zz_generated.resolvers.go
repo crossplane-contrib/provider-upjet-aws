@@ -38,3 +38,45 @@ func (mg *ControlPanel) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	return nil
 }
+
+// ResolveReferences of this RoutingControl.
+func (mg *RoutingControl) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterArn),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.ForProvider.ClusterArnRef,
+		Selector:     mg.Spec.ForProvider.ClusterArnSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterArn")
+	}
+	mg.Spec.ForProvider.ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ControlPanelArn),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.ForProvider.ControlPanelArnRef,
+		Selector:     mg.Spec.ForProvider.ControlPanelArnSelector,
+		To: reference.To{
+			List:    &ControlPanelList{},
+			Managed: &ControlPanel{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ControlPanelArn")
+	}
+	mg.Spec.ForProvider.ControlPanelArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ControlPanelArnRef = rsp.ResolvedReference
+
+	return nil
+}

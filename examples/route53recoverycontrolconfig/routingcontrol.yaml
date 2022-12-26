@@ -1,8 +1,8 @@
 apiVersion: route53recoverycontrolconfig.aws.upbound.io/v1beta1
-kind: ControlPanel
+kind: RoutingControl
 metadata:
   annotations:
-    meta.upbound.io/example-id: route53recoverycontrolconfig/v1beta1/controlpanel
+    meta.upbound.io/example-id: route53recoverycontrolconfig/v1beta1/routingcontrol
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -11,14 +11,14 @@ spec:
     clusterArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    name: balmorhea
+    name: tinlicker
     region: us-west-1
 ---
 apiVersion: route53recoverycontrolconfig.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
   annotations:
-    meta.upbound.io/example-id: route53recoverycontrolconfig/v1beta1/controlpanel
+    meta.upbound.io/example-id: route53recoverycontrolconfig/v1beta1/routingcontrol
   labels:
     testing.upbound.io/example-name: example
   name: example

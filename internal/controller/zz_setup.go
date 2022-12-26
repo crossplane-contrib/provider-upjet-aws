@@ -579,6 +579,7 @@ import (
 	zone "github.com/upbound/provider-aws/internal/controller/route53/zone"
 	clusterroute53recoverycontrolconfig "github.com/upbound/provider-aws/internal/controller/route53recoverycontrolconfig/cluster"
 	controlpanel "github.com/upbound/provider-aws/internal/controller/route53recoverycontrolconfig/controlpanel"
+	routingcontrol "github.com/upbound/provider-aws/internal/controller/route53recoverycontrolconfig/routingcontrol"
 	cell "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/cell"
 	readinesscheck "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/readinesscheck"
 	recoverygroup "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/recoverygroup"
@@ -1248,6 +1249,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		zone.Setup,
 		clusterroute53recoverycontrolconfig.Setup,
 		controlpanel.Setup,
+		routingcontrol.Setup,
 		cell.Setup,
 		readinesscheck.Setup,
 		recoverygroup.Setup,

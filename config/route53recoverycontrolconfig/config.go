@@ -18,4 +18,14 @@ func Configure(p *config.Provider) {
 			Extractor:     common.PathTerraformIDExtractor,
 		}
 	})
+	p.AddResourceConfigurator("aws_route53recoverycontrolconfig_routing_control", func(r *config.Resource) {
+		r.References["cluster_arn"] = config.Reference{
+			TerraformName: "aws_route53recoverycontrolconfig_cluster",
+			Extractor:     common.PathTerraformIDExtractor,
+		}
+		r.References["control_panel_arn"] = config.Reference{
+			TerraformName: "aws_route53recoverycontrolconfig_control_panel",
+			Extractor:     common.PathTerraformIDExtractor,
+		}
+	})
 }
