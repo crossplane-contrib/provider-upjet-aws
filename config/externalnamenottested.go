@@ -516,14 +516,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Pinpoint GCM Channel can be imported using the application-id
 	"aws_pinpoint_gcm_channel": FormattedIdentifierFromProvider("", "application_id"),
 
-	// qldb
-	//
-	// QLDB Ledgers can be imported using the name
-	"aws_qldb_ledger": config.NameAsIdentifier,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_qldb_stream": config.IdentifierFromProvider,
-
 	// quicksight
 	//
 	// A QuickSight data source can be imported using the AWS account ID, and data source ID name separated by a slash (/)

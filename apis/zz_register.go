@@ -105,6 +105,7 @@ import (
 	v1beta1opensearch "github.com/upbound/provider-aws/apis/opensearch/v1beta1"
 	v1beta1organizations "github.com/upbound/provider-aws/apis/organizations/v1beta1"
 	v1beta1pinpoint "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
+	v1beta1qldb "github.com/upbound/provider-aws/apis/qldb/v1beta1"
 	v1beta1quicksight "github.com/upbound/provider-aws/apis/quicksight/v1beta1"
 	v1beta1ram "github.com/upbound/provider-aws/apis/ram/v1beta1"
 	v1beta1rds "github.com/upbound/provider-aws/apis/rds/v1beta1"
@@ -230,6 +231,7 @@ func init() {
 		v1beta1opensearch.SchemeBuilder.AddToScheme,
 		v1beta1organizations.SchemeBuilder.AddToScheme,
 		v1beta1pinpoint.SchemeBuilder.AddToScheme,
+		v1beta1qldb.SchemeBuilder.AddToScheme,
 		v1beta1quicksight.SchemeBuilder.AddToScheme,
 		v1beta1ram.SchemeBuilder.AddToScheme,
 		v1beta1rds.SchemeBuilder.AddToScheme,
