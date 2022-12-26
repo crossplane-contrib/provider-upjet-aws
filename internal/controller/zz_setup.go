@@ -577,6 +577,7 @@ import (
 	trafficpolicyinstance "github.com/upbound/provider-aws/internal/controller/route53/trafficpolicyinstance"
 	vpcassociationauthorization "github.com/upbound/provider-aws/internal/controller/route53/vpcassociationauthorization"
 	zone "github.com/upbound/provider-aws/internal/controller/route53/zone"
+	clusterroute53recoverycontrolconfig "github.com/upbound/provider-aws/internal/controller/route53recoverycontrolconfig/cluster"
 	cell "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/cell"
 	readinesscheck "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/readinesscheck"
 	recoverygroup "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/recoverygroup"
@@ -1244,6 +1245,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		trafficpolicyinstance.Setup,
 		vpcassociationauthorization.Setup,
 		zone.Setup,
+		clusterroute53recoverycontrolconfig.Setup,
 		cell.Setup,
 		readinesscheck.Setup,
 		recoverygroup.Setup,

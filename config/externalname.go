@@ -1866,6 +1866,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// FSx Data Repository Associations can be imported using the id
 	"aws_fsx_data_repository_association": config.IdentifierFromProvider,
 
+	// route53recoverycontrolconfig
+	//
+	// Imported using ARN that has a random substring:
+	// arn:aws:route53-recovery-control::313517334327:cluster/f9ae13be-a11e-4ec7-8522-94a70468e6ea
+	"aws_route53recoverycontrolconfig_cluster": config.IdentifierFromProvider,
+	
 	// memorydb
 	//
 	// Use the name to import a parameter group
