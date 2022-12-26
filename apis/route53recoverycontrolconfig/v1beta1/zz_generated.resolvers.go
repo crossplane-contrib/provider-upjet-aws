@@ -80,3 +80,46 @@ func (mg *RoutingControl) ResolveReferences(ctx context.Context, c client.Reader
 
 	return nil
 }
+
+// ResolveReferences of this SafetyRule.
+func (mg *SafetyRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AssertedControls),
+		Extract:       common.TerraformID(),
+		References:    mg.Spec.ForProvider.AssertedControlsRefs,
+		Selector:      mg.Spec.ForProvider.AssertedControlsSelector,
+		To: reference.To{
+			List:    &RoutingControlList{},
+			Managed: &RoutingControl{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AssertedControls")
+	}
+	mg.Spec.ForProvider.AssertedControls = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.AssertedControlsRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ControlPanelArn),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.ForProvider.ControlPanelArnRef,
+		Selector:     mg.Spec.ForProvider.ControlPanelArnSelector,
+		To: reference.To{
+			List:    &ControlPanelList{},
+			Managed: &ControlPanel{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ControlPanelArn")
+	}
+	mg.Spec.ForProvider.ControlPanelArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ControlPanelArnRef = rsp.ResolvedReference
+
+	return nil
+}

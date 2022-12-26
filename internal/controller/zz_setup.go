@@ -580,6 +580,7 @@ import (
 	clusterroute53recoverycontrolconfig "github.com/upbound/provider-aws/internal/controller/route53recoverycontrolconfig/cluster"
 	controlpanel "github.com/upbound/provider-aws/internal/controller/route53recoverycontrolconfig/controlpanel"
 	routingcontrol "github.com/upbound/provider-aws/internal/controller/route53recoverycontrolconfig/routingcontrol"
+	safetyrule "github.com/upbound/provider-aws/internal/controller/route53recoverycontrolconfig/safetyrule"
 	cell "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/cell"
 	readinesscheck "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/readinesscheck"
 	recoverygroup "github.com/upbound/provider-aws/internal/controller/route53recoveryreadiness/recoverygroup"
@@ -1250,6 +1251,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		clusterroute53recoverycontrolconfig.Setup,
 		controlpanel.Setup,
 		routingcontrol.Setup,
+		safetyrule.Setup,
 		cell.Setup,
 		readinesscheck.Setup,
 		recoverygroup.Setup,
