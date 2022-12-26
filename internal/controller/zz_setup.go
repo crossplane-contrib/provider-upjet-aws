@@ -517,6 +517,11 @@ import (
 	channel "github.com/upbound/provider-aws/internal/controller/mediapackage/channel"
 	container "github.com/upbound/provider-aws/internal/controller/mediastore/container"
 	containerpolicy "github.com/upbound/provider-aws/internal/controller/mediastore/containerpolicy"
+	acl "github.com/upbound/provider-aws/internal/controller/memorydb/acl"
+	clustermemorydb "github.com/upbound/provider-aws/internal/controller/memorydb/cluster"
+	parametergroupmemorydb "github.com/upbound/provider-aws/internal/controller/memorydb/parametergroup"
+	snapshot "github.com/upbound/provider-aws/internal/controller/memorydb/snapshot"
+	subnetgroupmemorydb "github.com/upbound/provider-aws/internal/controller/memorydb/subnetgroup"
 	broker "github.com/upbound/provider-aws/internal/controller/mq/broker"
 	configurationmq "github.com/upbound/provider-aws/internal/controller/mq/configuration"
 	clusterneptune "github.com/upbound/provider-aws/internal/controller/neptune/cluster"
@@ -560,7 +565,7 @@ import (
 	proxyendpoint "github.com/upbound/provider-aws/internal/controller/rds/proxyendpoint"
 	proxytarget "github.com/upbound/provider-aws/internal/controller/rds/proxytarget"
 	securitygrouprds "github.com/upbound/provider-aws/internal/controller/rds/securitygroup"
-	snapshot "github.com/upbound/provider-aws/internal/controller/rds/snapshot"
+	snapshotrds "github.com/upbound/provider-aws/internal/controller/rds/snapshot"
 	subnetgrouprds "github.com/upbound/provider-aws/internal/controller/rds/subnetgroup"
 	clusterredshift "github.com/upbound/provider-aws/internal/controller/redshift/cluster"
 	groupresourcegroups "github.com/upbound/provider-aws/internal/controller/resourcegroups/group"
@@ -1179,6 +1184,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		channel.Setup,
 		container.Setup,
 		containerpolicy.Setup,
+		acl.Setup,
+		clustermemorydb.Setup,
+		parametergroupmemorydb.Setup,
+		snapshot.Setup,
+		subnetgroupmemorydb.Setup,
 		broker.Setup,
 		configurationmq.Setup,
 		clusterneptune.Setup,
@@ -1222,7 +1232,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		proxyendpoint.Setup,
 		proxytarget.Setup,
 		securitygrouprds.Setup,
-		snapshot.Setup,
+		snapshotrds.Setup,
 		subnetgrouprds.Setup,
 		clusterredshift.Setup,
 		groupresourcegroups.Setup,
