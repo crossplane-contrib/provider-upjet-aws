@@ -1880,7 +1880,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Imported using ARN that has a random substring:
 	// arn:aws:route53-recovery-control::313517334327:controlpanel/1bfba17df8684f5dab0467b71424f7e8/safetyrule/3bacc77003364c0f
 	"aws_route53recoverycontrolconfig_safety_rule": config.IdentifierFromProvider,
-	
+
 	// memorydb
 	//
 	// Use the name to import a parameter group
