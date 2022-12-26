@@ -1871,6 +1871,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Imported using ARN that has a random substring:
 	// arn:aws:route53-recovery-control::313517334327:cluster/f9ae13be-a11e-4ec7-8522-94a70468e6ea
 	"aws_route53recoverycontrolconfig_cluster": config.IdentifierFromProvider,
+	// Imported using ARN that has a random substring:
+	// arn:aws:route53-recovery-control::313517334327:controlpanel/1bfba17df8684f5dab0467b71424f7e8
+	"aws_route53recoverycontrolconfig_control_panel": config.IdentifierFromProvider,
 	
 	// memorydb
 	//
