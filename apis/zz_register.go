@@ -83,6 +83,8 @@ import (
 	v1beta1glue "github.com/upbound/provider-aws/apis/glue/v1beta1"
 	v1beta1grafana "github.com/upbound/provider-aws/apis/grafana/v1beta1"
 	v1beta1iam "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta1imagebuilder "github.com/upbound/provider-aws/apis/imagebuilder/v1beta1"
+	v1beta1inspector "github.com/upbound/provider-aws/apis/inspector/v1beta1"
 	v1beta1iot "github.com/upbound/provider-aws/apis/iot/v1beta1"
 	v1beta1kafka "github.com/upbound/provider-aws/apis/kafka/v1beta1"
 	v1beta1keyspaces "github.com/upbound/provider-aws/apis/keyspaces/v1beta1"
@@ -211,6 +213,8 @@ func init() {
 		v1beta1glue.SchemeBuilder.AddToScheme,
 		v1beta1grafana.SchemeBuilder.AddToScheme,
 		v1beta1iam.SchemeBuilder.AddToScheme,
+		v1beta1imagebuilder.SchemeBuilder.AddToScheme,
+		v1beta1inspector.SchemeBuilder.AddToScheme,
 		v1beta1iot.SchemeBuilder.AddToScheme,
 		v1beta1kafka.SchemeBuilder.AddToScheme,
 		v1beta1keyspaces.SchemeBuilder.AddToScheme,

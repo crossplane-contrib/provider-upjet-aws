@@ -620,39 +620,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Example: arn:aws:kafkaconnect:eu-central-1:123456789012:worker-configuration/example/8848493b-7fcc-478c-a646-4a52634e3378-4
 	// TODO: Normalize external_name while testing resource
 	"aws_mskconnect_worker_configuration": config.IdentifierFromProvider,
-	// imagebuilder
-	//
-	// aws_imagebuilder_container_recipe resources can be imported by using the Amazon Resource Name (ARN)
-	// Example: arn:aws:imagebuilder:us-east-1:123456789012:container-recipe/example/1.0.0
-	"aws_imagebuilder_container_recipe": config.TemplatedStringAsIdentifier("name", "arn:aws:imagebuilder:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:container-recipe/{{ .external_name }}/{{ .parameters.version }}"),
-	// aws_imagebuilder_distribution_configurations resources can be imported by using the Amazon Resource Name (ARN)
-	// Example: arn:aws:imagebuilder:us-east-1:123456789012:distribution-configuration/example
-	"aws_imagebuilder_distribution_configuration": config.TemplatedStringAsIdentifier("name", "arn:aws:imagebuilder:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:distribution-configuration/{{ .external_name }}"),
-	// aws_imagebuilder_image resources can be imported using the Amazon Resource Name (ARN)
-	// Example: arn:aws:imagebuilder:us-east-1:123456789012:image/example/1.0.0/1
-	// TODO: Normalize external_name while testing
-	"aws_imagebuilder_image": config.IdentifierFromProvider,
-	// aws_imagebuilder_image_pipeline resources can be imported using the Amazon Resource Name (ARN)
-	// Example: arn:aws:imagebuilder:us-east-1:123456789012:image-pipeline/example
-	"aws_imagebuilder_image_pipeline": config.TemplatedStringAsIdentifier("name", "arn:aws:imagebuilder:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:image-pipeline/{{ .external_name }}"),
-	// aws_imagebuilder_image_recipe resources can be imported by using the Amazon Resource Name (ARN)
-	// Example: arn:aws:imagebuilder:us-east-1:123456789012:image-recipe/example/1.0.0
-	"aws_imagebuilder_image_recipe": config.TemplatedStringAsIdentifier("name", "arn:aws:imagebuilder:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:image-recipe/{{ .external_name }}/{{ .parameters.version }}"),
-	// aws_imagebuilder_infrastructure_configuration can be imported using the Amazon Resource Name (ARN)
-	// Example: arn:aws:imagebuilder:us-east-1:123456789012:infrastructure-configuration/example
-	"aws_imagebuilder_infrastructure_configuration": config.TemplatedStringAsIdentifier("name", "arn:aws:imagebuilder:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:infrastructure-configuration/{{ .external_name }}"),
 
-	// inspector
-	//
-	// Inspector Assessment Targets can be imported via their Amazon Resource Name (ARN)
-	// Example: arn:aws:inspector:us-east-1:123456789012:target/0-xxxxxxx
-	"aws_inspector_assessment_target": config.TemplatedStringAsIdentifier("name", "arn:aws:inspector:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:target/{{ .external_name }}"),
-	// aws_inspector_assessment_template can be imported by using the template assessment ARN
-	// Example: arn:aws:inspector:us-west-2:123456789012:target/0-9IaAzhGR/template/0-WEcjR8CH
-	"aws_inspector_assessment_template": config.TemplatedStringAsIdentifier("name", "arn:aws:inspector:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:target/{{ .parameters.target_arn }}/template/{{ .external_name }}"),
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_inspector_resource_group": config.IdentifierFromProvider,
 	// waf
 	//
 	// WAF Byte Match Set can be imported using the id
