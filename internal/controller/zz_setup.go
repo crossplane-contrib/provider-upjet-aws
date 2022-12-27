@@ -562,6 +562,10 @@ import (
 	clusterinstancerds "github.com/upbound/provider-aws/internal/controller/rds/clusterinstance"
 	clusterparametergrouprds "github.com/upbound/provider-aws/internal/controller/rds/clusterparametergroup"
 	clusterroleassociation "github.com/upbound/provider-aws/internal/controller/rds/clusterroleassociation"
+	clustersnapshotrds "github.com/upbound/provider-aws/internal/controller/rds/clustersnapshot"
+	dbinstanceautomatedbackupsreplication "github.com/upbound/provider-aws/internal/controller/rds/dbinstanceautomatedbackupsreplication"
+	dbsnapshotcopy "github.com/upbound/provider-aws/internal/controller/rds/dbsnapshotcopy"
+	eventsubscriptionrds "github.com/upbound/provider-aws/internal/controller/rds/eventsubscription"
 	globalclusterrds "github.com/upbound/provider-aws/internal/controller/rds/globalcluster"
 	instancerds "github.com/upbound/provider-aws/internal/controller/rds/instance"
 	instanceroleassociation "github.com/upbound/provider-aws/internal/controller/rds/instanceroleassociation"
@@ -1240,6 +1244,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		clusterinstancerds.Setup,
 		clusterparametergrouprds.Setup,
 		clusterroleassociation.Setup,
+		clustersnapshotrds.Setup,
+		dbinstanceautomatedbackupsreplication.Setup,
+		dbsnapshotcopy.Setup,
+		eventsubscriptionrds.Setup,
 		globalclusterrds.Setup,
 		instancerds.Setup,
 		instanceroleassociation.Setup,

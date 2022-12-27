@@ -13,6 +13,154 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this ClusterSnapshot
+func (mg *ClusterSnapshot) GetTerraformResourceType() string {
+	return "aws_db_cluster_snapshot"
+}
+
+// GetConnectionDetailsMapping for this ClusterSnapshot
+func (tr *ClusterSnapshot) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ClusterSnapshot
+func (tr *ClusterSnapshot) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ClusterSnapshot
+func (tr *ClusterSnapshot) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ClusterSnapshot
+func (tr *ClusterSnapshot) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ClusterSnapshot
+func (tr *ClusterSnapshot) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ClusterSnapshot
+func (tr *ClusterSnapshot) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ClusterSnapshot using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ClusterSnapshot) LateInitialize(attrs []byte) (bool, error) {
+	params := &ClusterSnapshotParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ClusterSnapshot) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this EventSubscription
+func (mg *EventSubscription) GetTerraformResourceType() string {
+	return "aws_db_event_subscription"
+}
+
+// GetConnectionDetailsMapping for this EventSubscription
+func (tr *EventSubscription) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this EventSubscription
+func (tr *EventSubscription) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this EventSubscription
+func (tr *EventSubscription) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this EventSubscription
+func (tr *EventSubscription) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this EventSubscription
+func (tr *EventSubscription) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this EventSubscription
+func (tr *EventSubscription) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this EventSubscription using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *EventSubscription) LateInitialize(attrs []byte) (bool, error) {
+	params := &EventSubscriptionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *EventSubscription) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Instance
 func (mg *Instance) GetTerraformResourceType() string {
 	return "aws_db_instance"
@@ -87,6 +235,80 @@ func (tr *Instance) LateInitialize(attrs []byte) (bool, error) {
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Instance) GetTerraformSchemaVersion() int {
 	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this DBInstanceAutomatedBackupsReplication
+func (mg *DBInstanceAutomatedBackupsReplication) GetTerraformResourceType() string {
+	return "aws_db_instance_automated_backups_replication"
+}
+
+// GetConnectionDetailsMapping for this DBInstanceAutomatedBackupsReplication
+func (tr *DBInstanceAutomatedBackupsReplication) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this DBInstanceAutomatedBackupsReplication
+func (tr *DBInstanceAutomatedBackupsReplication) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this DBInstanceAutomatedBackupsReplication
+func (tr *DBInstanceAutomatedBackupsReplication) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this DBInstanceAutomatedBackupsReplication
+func (tr *DBInstanceAutomatedBackupsReplication) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this DBInstanceAutomatedBackupsReplication
+func (tr *DBInstanceAutomatedBackupsReplication) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this DBInstanceAutomatedBackupsReplication
+func (tr *DBInstanceAutomatedBackupsReplication) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this DBInstanceAutomatedBackupsReplication using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *DBInstanceAutomatedBackupsReplication) LateInitialize(attrs []byte) (bool, error) {
+	params := &DBInstanceAutomatedBackupsReplicationParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *DBInstanceAutomatedBackupsReplication) GetTerraformSchemaVersion() int {
+	return 0
 }
 
 // GetTerraformResourceType returns Terraform resource type for this InstanceRoleAssociation
@@ -752,6 +974,80 @@ func (tr *Snapshot) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Snapshot) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this DBSnapshotCopy
+func (mg *DBSnapshotCopy) GetTerraformResourceType() string {
+	return "aws_db_snapshot_copy"
+}
+
+// GetConnectionDetailsMapping for this DBSnapshotCopy
+func (tr *DBSnapshotCopy) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this DBSnapshotCopy
+func (tr *DBSnapshotCopy) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this DBSnapshotCopy
+func (tr *DBSnapshotCopy) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this DBSnapshotCopy
+func (tr *DBSnapshotCopy) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this DBSnapshotCopy
+func (tr *DBSnapshotCopy) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this DBSnapshotCopy
+func (tr *DBSnapshotCopy) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this DBSnapshotCopy using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *DBSnapshotCopy) LateInitialize(attrs []byte) (bool, error) {
+	params := &DBSnapshotCopyParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *DBSnapshotCopy) GetTerraformSchemaVersion() int {
 	return 0
 }
 

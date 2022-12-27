@@ -61,6 +61,42 @@ func (l *ClusterRoleAssociationList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ClusterSnapshotList.
+func (l *ClusterSnapshotList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this DBInstanceAutomatedBackupsReplicationList.
+func (l *DBInstanceAutomatedBackupsReplicationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this DBSnapshotCopyList.
+func (l *DBSnapshotCopyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this EventSubscriptionList.
+func (l *EventSubscriptionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this GlobalClusterList.
 func (l *GlobalClusterList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
