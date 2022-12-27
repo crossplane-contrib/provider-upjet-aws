@@ -93,6 +93,7 @@ var (
 var (
 	BasePackages = config.BasePackages{
 		APIVersion: []string{
+			"apis/v1alpha1",
 			"apis/v1beta1",
 		},
 		Controller: []string{
