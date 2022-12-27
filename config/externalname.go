@@ -976,6 +976,27 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_elb": config.NameAsIdentifier,
 	// No import
 	"aws_elb_attachment": config.IdentifierFromProvider,
+	// Application cookie stickiness policies can be imported using the ELB name, port, and policy name separated by colons (:)
+	// my-elb:80:my-policy
+	"aws_app_cookie_stickiness_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.load_balancer }}:{{ .parameters.lb_port }}:{{ .external_name }}"),
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lb_cookie_stickiness_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lb_ssl_negotiation_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_load_balancer_backend_server_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_load_balancer_listener_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_load_balancer_policy": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_proxy_protocol_policy": config.IdentifierFromProvider,
 
 	// iot
 	//
