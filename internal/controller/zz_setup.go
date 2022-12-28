@@ -458,6 +458,15 @@ import (
 	userpolicyattachment "github.com/upbound/provider-aws/internal/controller/iam/userpolicyattachment"
 	usersshkey "github.com/upbound/provider-aws/internal/controller/iam/usersshkey"
 	virtualmfadevice "github.com/upbound/provider-aws/internal/controller/iam/virtualmfadevice"
+	containerrecipe "github.com/upbound/provider-aws/internal/controller/imagebuilder/containerrecipe"
+	distributionconfiguration "github.com/upbound/provider-aws/internal/controller/imagebuilder/distributionconfiguration"
+	image "github.com/upbound/provider-aws/internal/controller/imagebuilder/image"
+	imagepipeline "github.com/upbound/provider-aws/internal/controller/imagebuilder/imagepipeline"
+	imagerecipe "github.com/upbound/provider-aws/internal/controller/imagebuilder/imagerecipe"
+	infrastructureconfiguration "github.com/upbound/provider-aws/internal/controller/imagebuilder/infrastructureconfiguration"
+	assessmenttarget "github.com/upbound/provider-aws/internal/controller/inspector/assessmenttarget"
+	assessmenttemplate "github.com/upbound/provider-aws/internal/controller/inspector/assessmenttemplate"
+	resourcegroup "github.com/upbound/provider-aws/internal/controller/inspector/resourcegroup"
 	certificateiot "github.com/upbound/provider-aws/internal/controller/iot/certificate"
 	indexingconfiguration "github.com/upbound/provider-aws/internal/controller/iot/indexingconfiguration"
 	loggingoptions "github.com/upbound/provider-aws/internal/controller/iot/loggingoptions"
@@ -628,7 +637,7 @@ import (
 	coderepository "github.com/upbound/provider-aws/internal/controller/sagemaker/coderepository"
 	domainsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/domain"
 	featuregroup "github.com/upbound/provider-aws/internal/controller/sagemaker/featuregroup"
-	image "github.com/upbound/provider-aws/internal/controller/sagemaker/image"
+	imagesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/image"
 	modelpackagegroup "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegroup"
 	notebookinstance "github.com/upbound/provider-aws/internal/controller/sagemaker/notebookinstance"
 	notebookinstancelifecycleconfiguration "github.com/upbound/provider-aws/internal/controller/sagemaker/notebookinstancelifecycleconfiguration"
@@ -1140,6 +1149,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userpolicyattachment.Setup,
 		usersshkey.Setup,
 		virtualmfadevice.Setup,
+		containerrecipe.Setup,
+		distributionconfiguration.Setup,
+		image.Setup,
+		imagepipeline.Setup,
+		imagerecipe.Setup,
+		infrastructureconfiguration.Setup,
+		assessmenttarget.Setup,
+		assessmenttemplate.Setup,
+		resourcegroup.Setup,
 		certificateiot.Setup,
 		indexingconfiguration.Setup,
 		loggingoptions.Setup,
@@ -1310,7 +1328,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		coderepository.Setup,
 		domainsagemaker.Setup,
 		featuregroup.Setup,
-		image.Setup,
+		imagesagemaker.Setup,
 		modelpackagegroup.Setup,
 		notebookinstance.Setup,
 		notebookinstancelifecycleconfiguration.Setup,

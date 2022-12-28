@@ -1922,6 +1922,40 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_memorydb_acl": config.NameAsIdentifier,
 	// Use the name to import a snapshot
 	"aws_memorydb_snapshot": config.NameAsIdentifier,
+
+	// imagebuilder
+	//
+	// aws_imagebuilder_container_recipe resources can be imported by using the Amazon Resource Name (ARN)
+	// Example: arn:aws:imagebuilder:us-east-1:123456789012:container-recipe/example/1.0.0
+	"aws_imagebuilder_container_recipe": config.IdentifierFromProvider,
+	// aws_imagebuilder_distribution_configurations resources can be imported by using the Amazon Resource Name (ARN)
+	// Example: arn:aws:imagebuilder:us-east-1:123456789012:distribution-configuration/example
+	"aws_imagebuilder_distribution_configuration": config.IdentifierFromProvider,
+	// aws_imagebuilder_image resources can be imported using the Amazon Resource Name (ARN)
+	// Example: arn:aws:imagebuilder:us-east-1:123456789012:image/example/1.0.0/1
+	// TODO: Normalize external_name while testing
+	"aws_imagebuilder_image": config.IdentifierFromProvider,
+	// aws_imagebuilder_image_pipeline resources can be imported using the Amazon Resource Name (ARN)
+	// Example: arn:aws:imagebuilder:us-east-1:123456789012:image-pipeline/example
+	"aws_imagebuilder_image_pipeline": config.IdentifierFromProvider,
+	// aws_imagebuilder_image_recipe resources can be imported by using the Amazon Resource Name (ARN)
+	// Example: arn:aws:imagebuilder:us-east-1:123456789012:image-recipe/example/1.0.0
+	"aws_imagebuilder_image_recipe": config.IdentifierFromProvider,
+	// aws_imagebuilder_infrastructure_configuration can be imported using the Amazon Resource Name (ARN)
+	// Example: arn:aws:imagebuilder:us-east-1:123456789012:infrastructure-configuration/example
+	"aws_imagebuilder_infrastructure_configuration": config.IdentifierFromProvider,
+
+	// inspector
+	//
+	// Inspector Assessment Targets can be imported via their Amazon Resource Name (ARN)
+	// Example: arn:aws:inspector:us-east-1:123456789012:target/0-xxxxxxx
+	"aws_inspector_assessment_target": config.IdentifierFromProvider,
+	// aws_inspector_assessment_template can be imported by using the template assessment ARN
+	// Example: arn:aws:inspector:us-west-2:123456789012:target/0-9IaAzhGR/template/0-WEcjR8CH
+	"aws_inspector_assessment_template": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_inspector_resource_group": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
