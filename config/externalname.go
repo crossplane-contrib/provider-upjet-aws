@@ -2003,6 +2003,44 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// SimpleDB Domains can be imported using the name
 	"aws_simpledb_domain": config.NameAsIdentifier,
+
+	// networkfirewall
+	//
+	// Network Firewall Policies can be imported using their ARN
+	// Example: arn:aws:network-firewall:us-west-1:123456789012:firewall-policy/example
+	"aws_networkfirewall_firewall_policy": config.TemplatedStringAsIdentifier("name", "arn:aws:network-firewall:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:firewall-policy/{{ .external_name }}"),
+	// Network Firewall Rule Groups can be imported using their ARN
+	// Example: arn:aws:network-firewall:us-west-1:123456789012:stateful-rulegroup/example
+	"aws_networkfirewall_rule_group": config.TemplatedStringAsIdentifier("", "arn:aws:network-firewall:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:stateful-rulegroup/{{ .external_name }}"),
+
+	// networkmanager
+	//
+	// aws_networkmanager_global_network can be imported using the global network ID
+	"aws_networkmanager_global_network": config.IdentifierFromProvider,
+	// aws_networkmanager_site can be imported using the site ARN
+	// Example: arn:aws:networkmanager::123456789012:site/global-network-0d47f6t230mz46dy4/site-444555aaabbb11223
+	"aws_networkmanager_site": config.IdentifierFromProvider,
+	// aws_networkmanager_link can be imported using the link ARN
+	// Example: arn:aws:networkmanager::123456789012:link/global-network-0d47f6t230mz46dy4/link-444555aaabbb11223
+	"aws_networkmanager_link": config.IdentifierFromProvider,
+	// aws_networkmanager_link_association can be imported using the global network ID, link ID and device ID
+	// Example: global-network-0d47f6t230mz46dy4,link-444555aaabbb11223,device-07f6fd08867abc123
+	"aws_networkmanager_link_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},{{ .parameters.link_id }},{{ .parameters.device_id }}"),
+	// aws_networkmanager_device can be imported using the device ARN
+	// Example: arn:aws:networkmanager::123456789012:device/global-network-0d47f6t230mz46dy4/device-07f6fd08867abc123
+	"aws_networkmanager_device": config.IdentifierFromProvider,
+	// aws_networkmanager_connection can be imported using the connection ARN
+	// Example: arn:aws:networkmanager::123456789012:device/global-network-0d47f6t230mz46dy4/connection-07f6fd08867abc123
+	"aws_networkmanager_connection": config.IdentifierFromProvider,
+	// aws_networkmanager_transit_gateway_registration can be imported using the global network ID and transit gateway ARN
+	// Example: global-network-0d47f6t230mz46dy4,arn:aws:ec2:us-west-2:123456789012:transit-gateway/tgw-123abc05e04123abc
+	"aws_networkmanager_transit_gateway_registration": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},{{ .parameters.transit_gateway_arn }}"),
+	// aws_networkmanager_transit_gateway_connect_peer_association can be imported using the global network ID and customer gateway ARN
+	// Example: global-network-0d47f6t230mz46dy4,arn:aws:ec2:us-west-2:123456789012:transit-gateway-connect-peer/tgw-connect-peer-12345678
+	"aws_networkmanager_transit_gateway_connect_peer_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},arn:aws:ec2:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:transit-gateway-connect-peer/{{ .parameters.transit_gateway_connect_peer_arn }}"),
+	// aws_networkmanager_customer_gateway_association can be imported using the global network ID and customer gateway ARN
+	// Example: global-network-0d47f6t230mz46dy4,arn:aws:ec2:us-west-2:123456789012:customer-gateway/cgw-123abc05e04123abc
+	"aws_networkmanager_customer_gateway_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},arn:aws:ec2:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:customer-gateway/{{ .parameters.customer_gateway_arn }}"),
 }
 
 func lambdaFunctionURL() config.ExternalName {
