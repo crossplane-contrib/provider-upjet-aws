@@ -7,6 +7,72 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
+// GetCondition of this SigningJob.
+func (mg *SigningJob) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SigningJob.
+func (mg *SigningJob) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SigningJob.
+func (mg *SigningJob) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SigningJob.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SigningJob) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SigningJob.
+func (mg *SigningJob) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SigningJob.
+func (mg *SigningJob) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SigningJob.
+func (mg *SigningJob) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SigningJob.
+func (mg *SigningJob) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SigningJob.
+func (mg *SigningJob) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SigningJob.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SigningJob) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SigningJob.
+func (mg *SigningJob) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SigningJob.
+func (mg *SigningJob) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SigningProfile.
 func (mg *SigningProfile) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -70,5 +136,71 @@ func (mg *SigningProfile) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectio
 
 // SetWriteConnectionSecretToReference of this SigningProfile.
 func (mg *SigningProfile) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SigningProfilePermission.
+func (mg *SigningProfilePermission) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SigningProfilePermission.
+func (mg *SigningProfilePermission) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SigningProfilePermission.
+func (mg *SigningProfilePermission) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SigningProfilePermission.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SigningProfilePermission) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SigningProfilePermission.
+func (mg *SigningProfilePermission) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SigningProfilePermission.
+func (mg *SigningProfilePermission) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SigningProfilePermission.
+func (mg *SigningProfilePermission) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SigningProfilePermission.
+func (mg *SigningProfilePermission) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SigningProfilePermission.
+func (mg *SigningProfilePermission) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SigningProfilePermission.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SigningProfilePermission) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SigningProfilePermission.
+func (mg *SigningProfilePermission) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SigningProfilePermission.
+func (mg *SigningProfilePermission) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

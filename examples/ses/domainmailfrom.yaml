@@ -1,0 +1,30 @@
+apiVersion: ses.aws.upbound.io/v1beta1
+kind: DomainMailFrom
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/domainmailfrom
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domainSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    mailFromDomain: "mail.example.com"
+    region: us-west-1
+
+---
+
+apiVersion: ses.aws.upbound.io/v1beta1
+kind: DomainIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/domainmailfrom
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domain: "example.com"
+    region: us-west-1

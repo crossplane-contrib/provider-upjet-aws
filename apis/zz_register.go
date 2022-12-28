@@ -128,8 +128,10 @@ import (
 	v1beta1servicecatalog "github.com/upbound/provider-aws/apis/servicecatalog/v1beta1"
 	v1beta1servicediscovery "github.com/upbound/provider-aws/apis/servicediscovery/v1beta1"
 	v1beta1servicequotas "github.com/upbound/provider-aws/apis/servicequotas/v1beta1"
+	v1beta1ses "github.com/upbound/provider-aws/apis/ses/v1beta1"
 	v1beta1sfn "github.com/upbound/provider-aws/apis/sfn/v1beta1"
 	v1beta1signer "github.com/upbound/provider-aws/apis/signer/v1beta1"
+	v1beta1simpledb "github.com/upbound/provider-aws/apis/simpledb/v1beta1"
 	v1beta1sns "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	v1beta1sqs "github.com/upbound/provider-aws/apis/sqs/v1beta1"
 	v1beta1ssm "github.com/upbound/provider-aws/apis/ssm/v1beta1"
@@ -259,8 +261,10 @@ func init() {
 		v1beta1servicecatalog.SchemeBuilder.AddToScheme,
 		v1beta1servicediscovery.SchemeBuilder.AddToScheme,
 		v1beta1servicequotas.SchemeBuilder.AddToScheme,
+		v1beta1ses.SchemeBuilder.AddToScheme,
 		v1beta1sfn.SchemeBuilder.AddToScheme,
 		v1beta1signer.SchemeBuilder.AddToScheme,
+		v1beta1simpledb.SchemeBuilder.AddToScheme,
 		v1beta1sns.SchemeBuilder.AddToScheme,
 		v1beta1sqs.SchemeBuilder.AddToScheme,
 		v1beta1ssm.SchemeBuilder.AddToScheme,
