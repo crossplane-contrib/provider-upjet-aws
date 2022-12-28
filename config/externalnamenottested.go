@@ -829,4 +829,12 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// SimpleDB Domains can be imported using the name
 	"aws_simpledb_domain": config.NameAsIdentifier,
+
+	// transfer
+	//
+	// Transfer SSH Public Key can be imported using the server_id and user_name and ssh_public_key_id separated by /
+	// Example: s-12345678/test-username/key-12345
+	"aws_transfer_ssh_key": config.IdentifierFromProvider,
+	// Transfer Workflows can be imported using the worflow_id
+	"aws_transfer_workflow": config.IdentifierFromProvider,
 }
