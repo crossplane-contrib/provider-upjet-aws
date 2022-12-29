@@ -86,8 +86,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// Cognito User Groups can be imported using the user_pool_id/name attributes concatenated
 	"aws_cognito_user_group": config.TemplatedStringAsIdentifier("name", "{{ .parameters.user_pool_id }}/{{ .external_name }}"),
-	// No import
-	"aws_cognito_user_in_group": config.IdentifierFromProvider,
 
 	// configservice
 	//
@@ -221,10 +219,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// servicediscovery
 	//
-	// imported using the namespace ID,
-	// which has provider-generated random parts:
-	// ns-1234567890
-	"aws_service_discovery_http_namespace": config.IdentifierFromProvider,
 	// imported using the service ID and instance ID:
 	// 0123456789/i-0123
 	"aws_service_discovery_instance": FormattedIdentifierFromProvider("/", "service_id", "instance_id"),
@@ -297,6 +291,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_guardduty_threatintelset": config.IdentifierFromProvider,
 
 	// s3control
+	//
 	// S3 Control Buckets can be imported using Amazon Resource Name (ARN)
 	// arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-12345678/bucket/example
 	"aws_s3control_bucket": config.IdentifierFromProvider,
@@ -306,13 +301,18 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// S3 Control Bucket Policies can be imported using the Amazon Resource Name (ARN)
 	// arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-12345678/bucket/example
 	"aws_s3control_bucket_policy": config.IdentifierFromProvider,
-
-	// elasticbeanstalk
-	//
-	// Elastic Beanstalk Applications can be imported using the name
-	"aws_elastic_beanstalk_application": config.NameAsIdentifier,
-	// No import
-	"aws_elastic_beanstalk_configuration_template": config.NameAsIdentifier,
+	// Multi-Region Access Points can be imported using the account_id and name of the Multi-Region Access Point separated by a colon (:)
+	// Example: 123456789012:example
+	"aws_s3control_multi_region_access_point": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.details.name }}"),
+	// Multi-Region Access Point Policies can be imported using the account_id and name of the Multi-Region Access Point separated by a colon (:)
+	// Example: 123456789012:example
+	"aws_s3control_multi_region_access_point_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.details.name }}"),
+	// Object Lambda Access Points can be imported using the account_id and name, separated by a colon (:)
+	// Example: 123456789012:example
+	"aws_s3control_object_lambda_access_point": config.TemplatedStringAsIdentifier("name", "{{ .parameters.account_id }}:{{ .external_name }}"),
+	// Object Lambda Access Point policies can be imported using the account_id and name, separated by a colon (:)
+	// Example: 123456789012:example
+	"aws_s3control_object_lambda_access_point_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.account_id }}:{{ .external_name }}"),
 
 	// elasticsearch
 	//
@@ -552,11 +552,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// SageMaker Workteams can be imported using the workteam_name
 	"aws_sagemaker_workteam": config.ParameterAsIdentifier("workteam_name"),
 
-	// serverlessrepo
-	//
-	// Serverless Application Repository Stack can be imported using the CloudFormation Stack name (with or without the serverlessrepo- prefix) or the CloudFormation Stack ID
-	"aws_serverlessapplicationrepository_cloudformation_stack": config.IdentifierFromProvider,
-
 	// storagegateway
 	//
 	// aws_storagegateway_cache can be imported by using the gateway Amazon Resource Name (ARN) and local disk identifier separated with a colon (:)
@@ -657,6 +652,11 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_wafregional_sql_injection_match_set": config.IdentifierFromProvider,
 	// WAF Regional Web ACL can be imported using the id
 	"aws_wafregional_web_acl": config.IdentifierFromProvider,
+	// WAF Regional Web ACL Association can be imported using their web_acl_id:resource_arn
+	"aws_wafregional_web_acl_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.web_acl_id }}:{{ .parameters.resource_arn }}"),
+	// AWS WAF Regional XSS Match can be imported using the id
+	"aws_wafregional_xss_match_set": config.IdentifierFromProvider,
+
 	// ssoadmin
 	//
 	// SSO Account Assignments can be imported using the principal_id, principal_type, target_id, target_type, permission_set_arn, instance_arn separated by commas (,)
@@ -723,4 +723,58 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_transfer_ssh_key": config.IdentifierFromProvider,
 	// Transfer Workflows can be imported using the worflow_id
 	"aws_transfer_workflow": config.IdentifierFromProvider,
+	// Transfer Accesses can be imported using the server_id and external_id
+	// Example: s-12345678/S-1-1-12-1234567890-123456789-1234567890-1234
+	"aws_transfer_access": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/{{ .parameters.external_id }}"),
+
+	// s3
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_s3_object_copy": config.IdentifierFromProvider,
+
+	// wafv2
+	//
+	// WAFv2 IP Sets can be imported using ID/name/scope
+	"aws_wafv2_ip_set": config.IdentifierFromProvider,
+	// WAFv2 Regex Pattern Sets can be imported using ID/name/scope
+	"aws_wafv2_regex_pattern_set": config.IdentifierFromProvider,
+	// WAFv2 Rule Group can be imported using ID/name/scope
+	"aws_wafv2_rule_group": config.IdentifierFromProvider,
+	// WAFv2 Web ACLs can be imported using ID/Name/Scope
+	"aws_wafv2_web_acl": config.IdentifierFromProvider,
+	// WAFv2 Web ACL Association can be imported using WEB_ACL_ARN,RESOURCE_ARN
+	// Example: arn:aws:wafv2:...7ce849ea,arn:aws:apigateway:...ages/name
+	"aws_wafv2_web_acl_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.web_acl_arn }},{{ .parameters.resource_arn }}"),
+	// WAFv2 Web ACL Logging Configurations can be imported using the WAFv2 Web ACL ARN
+	// Example: arn:aws:wafv2:us-west-2:123456789012:regional/webacl/test-logs/a1b2c3d4-5678-90ab-cdef
+	"aws_wafv2_web_acl_logging_configuration": config.IdentifierFromProvider,
+
+	// worklink
+	//
+	// WorkLink can be imported using the ARN
+	// Example: arn:aws:worklink::123456789012:fleet/example
+	"aws_worklink_fleet": config.TemplatedStringAsIdentifier("name", "arn:aws:worklink::{{ .setup.client_metadata.account_id }}:fleet/{{ .external_name }}"),
+	// WorkLink Website Certificate Authority can be imported using FLEET-ARN,WEBSITE-CA-ID
+	// Example: arn:aws:worklink::123456789012:fleet/example,abcdefghijk
+	"aws_worklink_website_certificate_authority_association": config.IdentifierFromProvider,
+
+	// workspaces
+	//
+	// Workspaces directory can be imported using the directory ID
+	"aws_workspaces_directory": config.IdentifierFromProvider,
+	// WorkSpaces IP groups can be imported using their GroupID
+	"aws_workspaces_ip_group": config.IdentifierFromProvider,
+	// Workspaces can be imported using their ID
+	"aws_workspaces_workspace": config.IdentifierFromProvider,
+
+	// xray
+	//
+	// XRay Encryption Config can be imported using the region name
+	"aws_xray_encryption_config": config.IdentifierFromProvider,
+	// XRay Groups can be imported using the ARN
+	// Example: arn:aws:xray:us-west-2:1234567890:group/example-group/TNGX7SW5U6QY36T4ZMOUA3HVLBYCZTWDIOOXY3CJAXTHSS3YCWUA
+	"aws_xray_group": config.IdentifierFromProvider,
+	// XRay Sampling Rules can be imported using the name
+	"aws_xray_sampling_rule": config.ParameterAsIdentifier("rule_name"),
 }
