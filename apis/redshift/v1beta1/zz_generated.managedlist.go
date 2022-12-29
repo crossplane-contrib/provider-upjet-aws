@@ -43,15 +43,6 @@ func (l *ScheduledActionList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this SnapshotCopyGrantList.
-func (l *SnapshotCopyGrantList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this SnapshotScheduleAssociationList.
 func (l *SnapshotScheduleAssociationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

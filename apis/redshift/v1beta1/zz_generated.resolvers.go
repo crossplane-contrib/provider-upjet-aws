@@ -128,32 +128,6 @@ func (mg *ScheduledAction) ResolveReferences(ctx context.Context, c client.Reade
 	return nil
 }
 
-// ResolveReferences of this SnapshotCopyGrant.
-func (mg *SnapshotCopyGrant) ResolveReferences(ctx context.Context, c client.Reader) error {
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
-		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
-		To: reference.To{
-			List:    &v1beta11.KeyList{},
-			Managed: &v1beta11.Key{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyID")
-	}
-	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
-
-	return nil
-}
-
 // ResolveReferences of this SnapshotScheduleAssociation.
 func (mg *SnapshotScheduleAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

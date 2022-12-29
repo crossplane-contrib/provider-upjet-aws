@@ -1037,8 +1037,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_redshift_parameter_group": config.IdentifierFromProvider,
 	// Redshift Scheduled Action can be imported using the name
 	"aws_redshift_scheduled_action": config.NameAsIdentifier,
-	// Redshift Snapshot Copy Grants support import by name
-	"aws_redshift_snapshot_copy_grant": config.IdentifierFromProvider,
 	// Redshift Snapshot Schedule can be imported using the identifier
 	"aws_redshift_snapshot_schedule": config.ParameterAsIdentifier("identifier"),
 	// Redshift Snapshot Schedule Association can be imported using the <cluster-identifier>/<schedule-identifier>
