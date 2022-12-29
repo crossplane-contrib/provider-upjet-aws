@@ -1,0 +1,44 @@
+apiVersion: ses.aws.upbound.io/v1beta1
+kind: IdentityPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/identitypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    identitySelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Principal": {
+                      "AWS": "*"
+                  },
+                  "Resource": "arn:aws:ses:us-west-1:153891904029:identity/example.com",
+                  "Action": ["SES:SendEmail", "SES:SendRawEmail"]
+              }
+          ]
+      }
+    region: us-west-1
+
+---
+
+apiVersion: ses.aws.upbound.io/v1beta1
+kind: DomainIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/identitypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domain: "example.com"
+    region: us-west-1

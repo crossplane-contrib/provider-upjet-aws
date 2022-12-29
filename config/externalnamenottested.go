@@ -742,38 +742,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_ses_active_receipt_rule_set": config.IdentifierFromProvider,
-	// SES Configuration Sets can be imported using their name
-	"aws_ses_configuration_set": config.NameAsIdentifier,
-	// DKIM tokens can be imported using the domain attribute
-	"aws_ses_domain_dkim": config.ParameterAsIdentifier("domain"),
-	// SES domain identities can be imported using the domain name.
-	"aws_ses_domain_identity": config.ParameterAsIdentifier("domain"),
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_ses_domain_identity_verification": config.IdentifierFromProvider,
-	// MAIL FROM domain can be imported using the domain attribute
-	"aws_ses_domain_mail_from": config.ParameterAsIdentifier("domain"),
-	// SES email identities can be imported using the email address.
-	"aws_ses_email_identity": config.ParameterAsIdentifier("email"),
-	// SES event destinations can be imported using configuration_set_name together with the event destination's name
-	// Example: some-configuration-set-test/event-destination-sns
-	"aws_ses_event_destination": config.TemplatedStringAsIdentifier("name", "{{ .parameters.configuration_set_name }}/{{ .external_name }}"),
-	// Identity Notification Topics can be imported using the ID of the record. The ID is made up as IDENTITY|TYPE where IDENTITY is the SES Identity and TYPE is the Notification Type.
-	// Example: 'example.com|Bounce'
-	"aws_ses_identity_notification_topic": config.TemplatedStringAsIdentifier("", "'{{ .parameters.identity }}|{{ .parameters.notification_type }}'"),
-	// SES Identity Policies can be imported using the identity and policy name, separated by a pipe character (|)
-	// Example: 'example.com|example'
-	"aws_ses_identity_policy": config.TemplatedStringAsIdentifier("name", "'{{ .parameters.identity }}|{{ .external_name }}'"),
-	// SES Receipt Filter can be imported using their name
-	"aws_ses_receipt_filter": config.NameAsIdentifier,
-	// SES receipt rules can be imported using the ruleset name and rule name separated by :
-	// Example: my_rule_set:my_rule
-	"aws_ses_receipt_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.rule_set_name }}:{{ .external_name }}"),
-	// SES receipt rule sets can be imported using the rule set name
-	"aws_ses_receipt_rule_set": config.ParameterAsIdentifier("rule_set_name"),
-	// SES templates can be imported using the template name
-	"aws_ses_template": config.NameAsIdentifier,
 
 	// shield
 	//
@@ -784,19 +753,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Shield protection health check association resources can be imported by specifying the shield_protection_id and health_check_arn
 	// Example: ff9592dc-22f3-4e88-afa1-7b29fde9669a+arn:aws:route53:::healthcheck/3742b175-edb9-46bc-9359-f53e3b794b1b
 	"aws_shield_protection_health_check_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.shield_protection_id }}+{{ .parameters.health_check_arn }}"),
-
-	// signer
-	//
-	// Signer signing jobs can be imported using the job_id
-	"aws_signer_signing_job": config.IdentifierFromProvider,
-	// Signer signing profile permission statements can be imported using profile_name/statement_id
-	// Example: prod_profile_DdW3Mk1foYL88fajut4mTVFGpuwfd4ACO6ANL0D1uIj7lrn8adK/ProdAccountStartSigningJobStatementId
-	"aws_signer_signing_profile_permission": config.TemplatedStringAsIdentifier("", "{{ .parameters.profile_name }}/{{ .parameters.statement_id }}"),
-
-	// simpledb
-	//
-	// SimpleDB Domains can be imported using the name
-	"aws_simpledb_domain": config.NameAsIdentifier,
 
 	// transfer
 	//

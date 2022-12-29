@@ -1,0 +1,37 @@
+apiVersion: ses.aws.upbound.io/v1beta1
+kind: DomainIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/domainidentity
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domain: example.com
+    region: us-west-1
+
+---
+
+apiVersion: route53.aws.upbound.io/v1beta1
+kind: Record
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/domainidentity
+  labels:
+    testing.upbound.io/example-name: example_amazonses_verification_record
+  name: example-amazonses-verification-record
+spec:
+  forProvider:
+    name: _amazonses.example.com
+    records:
+    - ${aws_ses_domain_identity.example.verification_token}
+    region: us-west-1
+    ttl: "600"
+    type: TXT
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

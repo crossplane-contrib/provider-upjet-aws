@@ -13,17 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type RevocationRecordObservation struct {
-	RevocationEffectiveFrom *string `json:"revocationEffectiveFrom,omitempty" tf:"revocation_effective_from,omitempty"`
-
-	RevokedAt *string `json:"revokedAt,omitempty" tf:"revoked_at,omitempty"`
-
-	RevokedBy *string `json:"revokedBy,omitempty" tf:"revoked_by,omitempty"`
-}
-
-type RevocationRecordParameters struct {
-}
-
 type SignatureValidityPeriodObservation struct {
 }
 
@@ -47,7 +36,7 @@ type SigningProfileObservation struct {
 	PlatformDisplayName *string `json:"platformDisplayName,omitempty" tf:"platform_display_name,omitempty"`
 
 	// Revocation information for a signing profile.
-	RevocationRecord []RevocationRecordObservation `json:"revocationRecord,omitempty" tf:"revocation_record,omitempty"`
+	RevocationRecord []SigningProfileRevocationRecordObservation `json:"revocationRecord,omitempty" tf:"revocation_record,omitempty"`
 
 	// The status of the target signing profile.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -80,6 +69,17 @@ type SigningProfileParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type SigningProfileRevocationRecordObservation struct {
+	RevocationEffectiveFrom *string `json:"revocationEffectiveFrom,omitempty" tf:"revocation_effective_from,omitempty"`
+
+	RevokedAt *string `json:"revokedAt,omitempty" tf:"revoked_at,omitempty"`
+
+	RevokedBy *string `json:"revokedBy,omitempty" tf:"revoked_by,omitempty"`
+}
+
+type SigningProfileRevocationRecordParameters struct {
 }
 
 // SigningProfileSpec defines the desired state of SigningProfile

@@ -675,9 +675,25 @@ import (
 	publicdnsnamespace "github.com/upbound/provider-aws/internal/controller/servicediscovery/publicdnsnamespace"
 	serviceservicediscovery "github.com/upbound/provider-aws/internal/controller/servicediscovery/service"
 	servicequota "github.com/upbound/provider-aws/internal/controller/servicequotas/servicequota"
+	activereceiptruleset "github.com/upbound/provider-aws/internal/controller/ses/activereceiptruleset"
+	configurationset "github.com/upbound/provider-aws/internal/controller/ses/configurationset"
+	domaindkim "github.com/upbound/provider-aws/internal/controller/ses/domaindkim"
+	domainidentity "github.com/upbound/provider-aws/internal/controller/ses/domainidentity"
+	domainmailfrom "github.com/upbound/provider-aws/internal/controller/ses/domainmailfrom"
+	emailidentity "github.com/upbound/provider-aws/internal/controller/ses/emailidentity"
+	eventdestination "github.com/upbound/provider-aws/internal/controller/ses/eventdestination"
+	identitynotificationtopic "github.com/upbound/provider-aws/internal/controller/ses/identitynotificationtopic"
+	identitypolicy "github.com/upbound/provider-aws/internal/controller/ses/identitypolicy"
+	receiptfilter "github.com/upbound/provider-aws/internal/controller/ses/receiptfilter"
+	receiptrule "github.com/upbound/provider-aws/internal/controller/ses/receiptrule"
+	receiptruleset "github.com/upbound/provider-aws/internal/controller/ses/receiptruleset"
+	template "github.com/upbound/provider-aws/internal/controller/ses/template"
 	activity "github.com/upbound/provider-aws/internal/controller/sfn/activity"
 	statemachine "github.com/upbound/provider-aws/internal/controller/sfn/statemachine"
+	signingjob "github.com/upbound/provider-aws/internal/controller/signer/signingjob"
 	signingprofile "github.com/upbound/provider-aws/internal/controller/signer/signingprofile"
+	signingprofilepermission "github.com/upbound/provider-aws/internal/controller/signer/signingprofilepermission"
+	domainsimpledb "github.com/upbound/provider-aws/internal/controller/simpledb/domain"
 	platformapplication "github.com/upbound/provider-aws/internal/controller/sns/platformapplication"
 	smspreferences "github.com/upbound/provider-aws/internal/controller/sns/smspreferences"
 	topic "github.com/upbound/provider-aws/internal/controller/sns/topic"
@@ -1366,9 +1382,25 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		publicdnsnamespace.Setup,
 		serviceservicediscovery.Setup,
 		servicequota.Setup,
+		activereceiptruleset.Setup,
+		configurationset.Setup,
+		domaindkim.Setup,
+		domainidentity.Setup,
+		domainmailfrom.Setup,
+		emailidentity.Setup,
+		eventdestination.Setup,
+		identitynotificationtopic.Setup,
+		identitypolicy.Setup,
+		receiptfilter.Setup,
+		receiptrule.Setup,
+		receiptruleset.Setup,
+		template.Setup,
 		activity.Setup,
 		statemachine.Setup,
+		signingjob.Setup,
 		signingprofile.Setup,
+		signingprofilepermission.Setup,
+		domainsimpledb.Setup,
 		platformapplication.Setup,
 		smspreferences.Setup,
 		topic.Setup,

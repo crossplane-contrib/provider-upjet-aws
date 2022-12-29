@@ -1,0 +1,30 @@
+apiVersion: ses.aws.upbound.io/v1beta1
+kind: IdentityNotificationTopic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/identitynotificationtopic
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    identitySelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    notificationType: Bounce
+    region: us-west-1
+
+---
+
+apiVersion: ses.aws.upbound.io/v1beta1
+kind: DomainIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/identitypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domain: "example.com"
+    region: us-west-1

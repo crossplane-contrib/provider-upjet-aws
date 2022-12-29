@@ -1,0 +1,12 @@
+apiVersion: ses.aws.upbound.io/v1beta1
+kind: ConfigurationSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/configurationset
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    region: us-east-1
+
