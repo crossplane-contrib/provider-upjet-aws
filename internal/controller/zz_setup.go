@@ -245,12 +245,15 @@ import (
 	lifecyclepolicy "github.com/upbound/provider-aws/internal/controller/dlm/lifecyclepolicy"
 	certificatedms "github.com/upbound/provider-aws/internal/controller/dms/certificate"
 	endpoint "github.com/upbound/provider-aws/internal/controller/dms/endpoint"
+	eventsubscription "github.com/upbound/provider-aws/internal/controller/dms/eventsubscription"
+	replicationinstance "github.com/upbound/provider-aws/internal/controller/dms/replicationinstance"
 	replicationsubnetgroup "github.com/upbound/provider-aws/internal/controller/dms/replicationsubnetgroup"
+	replicationtask "github.com/upbound/provider-aws/internal/controller/dms/replicationtask"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
 	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/docdb/clusterparametergroup"
 	clustersnapshot "github.com/upbound/provider-aws/internal/controller/docdb/clustersnapshot"
-	eventsubscription "github.com/upbound/provider-aws/internal/controller/docdb/eventsubscription"
+	eventsubscriptiondocdb "github.com/upbound/provider-aws/internal/controller/docdb/eventsubscription"
 	globalcluster "github.com/upbound/provider-aws/internal/controller/docdb/globalcluster"
 	subnetgroupdocdb "github.com/upbound/provider-aws/internal/controller/docdb/subnetgroup"
 	directory "github.com/upbound/provider-aws/internal/controller/ds/directory"
@@ -1007,12 +1010,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lifecyclepolicy.Setup,
 		certificatedms.Setup,
 		endpoint.Setup,
+		eventsubscription.Setup,
+		replicationinstance.Setup,
 		replicationsubnetgroup.Setup,
+		replicationtask.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,
 		clusterparametergroup.Setup,
 		clustersnapshot.Setup,
-		eventsubscription.Setup,
+		eventsubscriptiondocdb.Setup,
 		globalcluster.Setup,
 		subnetgroupdocdb.Setup,
 		directory.Setup,

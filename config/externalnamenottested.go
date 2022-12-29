@@ -138,15 +138,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// No import
 	"aws_dx_hosted_connection": config.IdentifierFromProvider,
 
-	// dms
-	//
-	// Event subscriptions can be imported using the name
-	"aws_dms_event_subscription": config.NameAsIdentifier,
-	// Replication instances can be imported using the replication_instance_id
-	"aws_dms_replication_instance": config.ParameterAsIdentifier("replication_instance_id"),
-	// Replication tasks can be imported using the replication_task_id
-	"aws_dms_replication_task": config.ParameterAsIdentifier("replication_task_id"),
-
 	// ds
 	//
 	// Conditional forwarders can be imported using the directory id and remote_domain_name: d-1234567890:example.com
