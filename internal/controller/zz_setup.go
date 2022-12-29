@@ -548,6 +548,17 @@ import (
 	eventsubscriptionneptune "github.com/upbound/provider-aws/internal/controller/neptune/eventsubscription"
 	parametergroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/parametergroup"
 	subnetgroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/subnetgroup"
+	firewallpolicy "github.com/upbound/provider-aws/internal/controller/networkfirewall/firewallpolicy"
+	rulegroup "github.com/upbound/provider-aws/internal/controller/networkfirewall/rulegroup"
+	connectionnetworkmanager "github.com/upbound/provider-aws/internal/controller/networkmanager/connection"
+	customergatewayassociation "github.com/upbound/provider-aws/internal/controller/networkmanager/customergatewayassociation"
+	device "github.com/upbound/provider-aws/internal/controller/networkmanager/device"
+	globalnetwork "github.com/upbound/provider-aws/internal/controller/networkmanager/globalnetwork"
+	link "github.com/upbound/provider-aws/internal/controller/networkmanager/link"
+	linkassociation "github.com/upbound/provider-aws/internal/controller/networkmanager/linkassociation"
+	site "github.com/upbound/provider-aws/internal/controller/networkmanager/site"
+	transitgatewayconnectpeerassociation "github.com/upbound/provider-aws/internal/controller/networkmanager/transitgatewayconnectpeerassociation"
+	transitgatewayregistration "github.com/upbound/provider-aws/internal/controller/networkmanager/transitgatewayregistration"
 	domainopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domain"
 	domainpolicy "github.com/upbound/provider-aws/internal/controller/opensearch/domainpolicy"
 	domainsamloptions "github.com/upbound/provider-aws/internal/controller/opensearch/domainsamloptions"
@@ -1255,6 +1266,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventsubscriptionneptune.Setup,
 		parametergroupneptune.Setup,
 		subnetgroupneptune.Setup,
+		firewallpolicy.Setup,
+		rulegroup.Setup,
+		connectionnetworkmanager.Setup,
+		customergatewayassociation.Setup,
+		device.Setup,
+		globalnetwork.Setup,
+		link.Setup,
+		linkassociation.Setup,
+		site.Setup,
+		transitgatewayconnectpeerassociation.Setup,
+		transitgatewayregistration.Setup,
 		domainopensearch.Setup,
 		domainpolicy.Setup,
 		domainsamloptions.Setup,
