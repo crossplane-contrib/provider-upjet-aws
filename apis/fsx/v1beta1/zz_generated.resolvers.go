@@ -128,6 +128,107 @@ func (mg *LustreFileSystem) ResolveReferences(ctx context.Context, c client.Read
 	return nil
 }
 
+// ResolveReferences of this OntapFileSystem.
+func (mg *OntapFileSystem) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
+		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyID")
+	}
+	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PreferredSubnetID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.PreferredSubnetIDRef,
+		Selector:     mg.Spec.ForProvider.PreferredSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PreferredSubnetID")
+	}
+	mg.Spec.ForProvider.PreferredSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PreferredSubnetIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityGroupIds")
+	}
+	mg.Spec.ForProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.SubnetIDRefs,
+		Selector:      mg.Spec.ForProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetIds")
+	}
+	mg.Spec.ForProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SubnetIDRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.FileSystemIDRef,
+		Selector:     mg.Spec.ForProvider.FileSystemIDSelector,
+		To: reference.To{
+			List:    &OntapFileSystemList{},
+			Managed: &OntapFileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FileSystemID")
+	}
+	mg.Spec.ForProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FileSystemIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this WindowsFileSystem.
 func (mg *WindowsFileSystem) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

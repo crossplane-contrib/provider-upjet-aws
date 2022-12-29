@@ -34,6 +34,24 @@ func (l *LustreFileSystemList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this OntapFileSystemList.
+func (l *OntapFileSystemList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this OntapStorageVirtualMachineList.
+func (l *OntapStorageVirtualMachineList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this WindowsFileSystemList.
 func (l *WindowsFileSystemList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

@@ -205,6 +205,138 @@ func (mg *LustreFileSystem) SetWriteConnectionSecretToReference(r *xpv1.SecretRe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this OntapFileSystem.
+func (mg *OntapFileSystem) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this OntapFileSystem.
+func (mg *OntapFileSystem) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this OntapFileSystem.
+func (mg *OntapFileSystem) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this OntapFileSystem.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *OntapFileSystem) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this OntapFileSystem.
+func (mg *OntapFileSystem) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this OntapFileSystem.
+func (mg *OntapFileSystem) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this OntapFileSystem.
+func (mg *OntapFileSystem) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this OntapFileSystem.
+func (mg *OntapFileSystem) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this OntapFileSystem.
+func (mg *OntapFileSystem) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this OntapFileSystem.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *OntapFileSystem) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this OntapFileSystem.
+func (mg *OntapFileSystem) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this OntapFileSystem.
+func (mg *OntapFileSystem) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this OntapStorageVirtualMachine.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *OntapStorageVirtualMachine) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this OntapStorageVirtualMachine.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *OntapStorageVirtualMachine) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this WindowsFileSystem.
 func (mg *WindowsFileSystem) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

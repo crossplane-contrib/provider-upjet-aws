@@ -361,10 +361,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// fsx
 	//
-	// FSx File Systems can be imported using the id
-	"aws_fsx_ontap_file_system": config.IdentifierFromProvider,
-	// FSx Storage Virtual Machine can be imported using the id
-	"aws_fsx_ontap_storage_virtual_machine": config.IdentifierFromProvider,
 	// FSx ONTAP volume can be imported using the id
 	"aws_fsx_ontap_volume": config.IdentifierFromProvider,
 	// FSx File Systems can be imported using the id

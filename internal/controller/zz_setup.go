@@ -408,6 +408,8 @@ import (
 	backup "github.com/upbound/provider-aws/internal/controller/fsx/backup"
 	datarepositoryassociation "github.com/upbound/provider-aws/internal/controller/fsx/datarepositoryassociation"
 	lustrefilesystem "github.com/upbound/provider-aws/internal/controller/fsx/lustrefilesystem"
+	ontapfilesystem "github.com/upbound/provider-aws/internal/controller/fsx/ontapfilesystem"
+	ontapstoragevirtualmachine "github.com/upbound/provider-aws/internal/controller/fsx/ontapstoragevirtualmachine"
 	windowsfilesystem "github.com/upbound/provider-aws/internal/controller/fsx/windowsfilesystem"
 	alias "github.com/upbound/provider-aws/internal/controller/gamelift/alias"
 	build "github.com/upbound/provider-aws/internal/controller/gamelift/build"
@@ -1115,6 +1117,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		backup.Setup,
 		datarepositoryassociation.Setup,
 		lustrefilesystem.Setup,
+		ontapfilesystem.Setup,
+		ontapstoragevirtualmachine.Setup,
 		windowsfilesystem.Setup,
 		alias.Setup,
 		build.Setup,
