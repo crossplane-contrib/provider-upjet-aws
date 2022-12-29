@@ -2053,6 +2053,54 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// aws_networkmanager_customer_gateway_association can be imported using the global network ID and customer gateway ARN
 	// Example: global-network-0d47f6t230mz46dy4,arn:aws:ec2:us-west-2:123456789012:customer-gateway/cgw-123abc05e04123abc
 	"aws_networkmanager_customer_gateway_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},arn:aws:ec2:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:customer-gateway/{{ .parameters.customer_gateway_arn }}"),
+
+	// waf
+	//
+	// WAF Byte Match Set can be imported using the id
+	"aws_waf_byte_match_set": config.IdentifierFromProvider,
+	// WAF Geo Match Set can be imported using their ID
+	"aws_waf_geo_match_set": config.IdentifierFromProvider,
+	// WAF IPSets can be imported using their ID
+	"aws_waf_ipset": config.IdentifierFromProvider,
+	// WAF Rated Based Rule can be imported using the id
+	"aws_waf_rate_based_rule": config.IdentifierFromProvider,
+	// WAF Regex Match Set can be imported using their ID
+	"aws_waf_regex_match_set": config.IdentifierFromProvider,
+	// AWS WAF Regex Pattern Set can be imported using their ID
+	"aws_waf_regex_pattern_set": config.IdentifierFromProvider,
+	// WAF rules can be imported using the id
+	"aws_waf_rule": config.IdentifierFromProvider,
+	// AWS WAF Size Constraint Set can be imported using their ID
+	"aws_waf_size_constraint_set": config.IdentifierFromProvider,
+	// AWS WAF SQL Injection Match Set can be imported using their ID
+	"aws_waf_sql_injection_match_set": config.IdentifierFromProvider,
+	// WAF Web ACL can be imported using the id
+	"aws_waf_web_acl": config.IdentifierFromProvider,
+	// WAF XSS Match Set can be imported using their ID
+	"aws_waf_xss_match_set": config.IdentifierFromProvider,
+
+	// wafregional
+	//
+	// WAF Regional Byte Match Set can be imported using the id
+	"aws_wafregional_byte_match_set": config.IdentifierFromProvider,
+	// WAF Regional Geo Match Set can be imported using the id
+	"aws_wafregional_geo_match_set": config.IdentifierFromProvider,
+	// WAF Regional IPSets can be imported using their ID
+	"aws_wafregional_ipset": config.IdentifierFromProvider,
+	// WAF Regional Rate Based Rule can be imported using the id
+	"aws_wafregional_rate_based_rule": config.IdentifierFromProvider,
+	// WAF Regional Regex Match Set can be imported using the id
+	"aws_wafregional_regex_match_set": config.IdentifierFromProvider,
+	// WAF Regional Regex Pattern Set can be imported using the id
+	"aws_wafregional_regex_pattern_set": config.IdentifierFromProvider,
+	// WAF Regional Rule can be imported using the id
+	"aws_wafregional_rule": config.IdentifierFromProvider,
+	// WAF Size Constraint Set can be imported using the id
+	"aws_wafregional_size_constraint_set": config.IdentifierFromProvider,
+	// WAF Regional Sql Injection Match Set can be imported using the id
+	"aws_wafregional_sql_injection_match_set": config.IdentifierFromProvider,
+	// WAF Regional Web ACL can be imported using the id
+	"aws_wafregional_web_acl": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {
