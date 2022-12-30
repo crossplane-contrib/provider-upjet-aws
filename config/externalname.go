@@ -1917,6 +1917,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_fsx_backup": config.IdentifierFromProvider,
 	// FSx Data Repository Associations can be imported using the id
 	"aws_fsx_data_repository_association": config.IdentifierFromProvider,
+	// FSx File Systems can be imported using the id
+	"aws_fsx_ontap_file_system": config.IdentifierFromProvider,
+	// FSx Storage Virtual Machine can be imported using the id
+	"aws_fsx_ontap_storage_virtual_machine": config.IdentifierFromProvider,
 
 	// route53recoverycontrolconfig
 	//

@@ -235,6 +235,154 @@ func (tr *LustreFileSystem) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this OntapFileSystem
+func (mg *OntapFileSystem) GetTerraformResourceType() string {
+	return "aws_fsx_ontap_file_system"
+}
+
+// GetConnectionDetailsMapping for this OntapFileSystem
+func (tr *OntapFileSystem) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"fsx_admin_password": "spec.forProvider.fsxAdminPasswordSecretRef"}
+}
+
+// GetObservation of this OntapFileSystem
+func (tr *OntapFileSystem) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this OntapFileSystem
+func (tr *OntapFileSystem) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this OntapFileSystem
+func (tr *OntapFileSystem) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this OntapFileSystem
+func (tr *OntapFileSystem) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this OntapFileSystem
+func (tr *OntapFileSystem) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this OntapFileSystem using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *OntapFileSystem) LateInitialize(attrs []byte) (bool, error) {
+	params := &OntapFileSystemParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *OntapFileSystem) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this OntapStorageVirtualMachine
+func (mg *OntapStorageVirtualMachine) GetTerraformResourceType() string {
+	return "aws_fsx_ontap_storage_virtual_machine"
+}
+
+// GetConnectionDetailsMapping for this OntapStorageVirtualMachine
+func (tr *OntapStorageVirtualMachine) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"active_directory_configuration[*].self_managed_active_directory_configuration[*].password": "spec.forProvider.activeDirectoryConfiguration[*].selfManagedActiveDirectoryConfiguration[*].passwordSecretRef", "svm_admin_password": "spec.forProvider.svmAdminPasswordSecretRef"}
+}
+
+// GetObservation of this OntapStorageVirtualMachine
+func (tr *OntapStorageVirtualMachine) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this OntapStorageVirtualMachine
+func (tr *OntapStorageVirtualMachine) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this OntapStorageVirtualMachine
+func (tr *OntapStorageVirtualMachine) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this OntapStorageVirtualMachine
+func (tr *OntapStorageVirtualMachine) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this OntapStorageVirtualMachine
+func (tr *OntapStorageVirtualMachine) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this OntapStorageVirtualMachine using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *OntapStorageVirtualMachine) LateInitialize(attrs []byte) (bool, error) {
+	params := &OntapStorageVirtualMachineParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *OntapStorageVirtualMachine) GetTerraformSchemaVersion() int {
+	return 1
+}
+
 // GetTerraformResourceType returns Terraform resource type for this WindowsFileSystem
 func (mg *WindowsFileSystem) GetTerraformResourceType() string {
 	return "aws_fsx_windows_file_system"
