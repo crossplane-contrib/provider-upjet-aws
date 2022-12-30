@@ -314,6 +314,13 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Example: 123456789012:example
 	"aws_s3control_object_lambda_access_point_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.account_id }}:{{ .external_name }}"),
 
+	// elasticbeanstalk
+	//
+	// Elastic Beanstalk Applications can be imported using the name
+	"aws_elastic_beanstalk_application_version": config.NameAsIdentifier,
+	// Elastic Beanstalk Environments can be imported using the id
+	"aws_elastic_beanstalk_environment": config.IdentifierFromProvider,
+
 	// elasticsearch
 	//
 	// Elasticsearch domains can be imported using the domain_name
@@ -765,4 +772,9 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_xray_group": config.IdentifierFromProvider,
 	// XRay Sampling Rules can be imported using the name
 	"aws_xray_sampling_rule": config.ParameterAsIdentifier("rule_name"),
+
+	// imagebuilder
+	//
+	// aws_imagebuilder_components resources can be imported by using the Amazon Resource Name (ARN)
+	"aws_imagebuilder_component": config.IdentifierFromProvider,
 }
