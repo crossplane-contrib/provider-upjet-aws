@@ -1,0 +1,18 @@
+apiVersion: guardduty.aws.upbound.io/v1beta1
+kind: Detector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: guardduty/v1beta1/detector
+  labels:
+    testing.upbound.io/example-name: MyDetector
+  name: mydetector
+spec:
+  forProvider:
+    datasources:
+    - s3Logs:
+      - enable: true
+    enable: true
+    region: us-west-1
+
+---
+

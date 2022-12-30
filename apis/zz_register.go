@@ -82,6 +82,7 @@ import (
 	v1beta1globalaccelerator "github.com/upbound/provider-aws/apis/globalaccelerator/v1beta1"
 	v1beta1glue "github.com/upbound/provider-aws/apis/glue/v1beta1"
 	v1beta1grafana "github.com/upbound/provider-aws/apis/grafana/v1beta1"
+	v1beta1guardduty "github.com/upbound/provider-aws/apis/guardduty/v1beta1"
 	v1beta1iam "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta1imagebuilder "github.com/upbound/provider-aws/apis/imagebuilder/v1beta1"
 	v1beta1inspector "github.com/upbound/provider-aws/apis/inspector/v1beta1"
@@ -219,6 +220,7 @@ func init() {
 		v1beta1globalaccelerator.SchemeBuilder.AddToScheme,
 		v1beta1glue.SchemeBuilder.AddToScheme,
 		v1beta1grafana.SchemeBuilder.AddToScheme,
+		v1beta1guardduty.SchemeBuilder.AddToScheme,
 		v1beta1iam.SchemeBuilder.AddToScheme,
 		v1beta1imagebuilder.SchemeBuilder.AddToScheme,
 		v1beta1inspector.SchemeBuilder.AddToScheme,
