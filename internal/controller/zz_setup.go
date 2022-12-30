@@ -725,6 +725,9 @@ import (
 	maintenancewindowtarget "github.com/upbound/provider-aws/internal/controller/ssm/maintenancewindowtarget"
 	patchbaseline "github.com/upbound/provider-aws/internal/controller/ssm/patchbaseline"
 	patchgroup "github.com/upbound/provider-aws/internal/controller/ssm/patchgroup"
+	domainswf "github.com/upbound/provider-aws/internal/controller/swf/domain"
+	databasetimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/database"
+	tabletimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/table"
 	server "github.com/upbound/provider-aws/internal/controller/transfer/server"
 	usertransfer "github.com/upbound/provider-aws/internal/controller/transfer/user"
 	bytematchset "github.com/upbound/provider-aws/internal/controller/waf/bytematchset"
@@ -1470,6 +1473,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		maintenancewindowtarget.Setup,
 		patchbaseline.Setup,
 		patchgroup.Setup,
+		domainswf.Setup,
+		databasetimestreamwrite.Setup,
+		tabletimestreamwrite.Setup,
 		server.Setup,
 		usertransfer.Setup,
 		bytematchset.Setup,

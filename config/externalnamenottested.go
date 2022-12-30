@@ -635,23 +635,10 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
 	"aws_ssoadmin_permission_set_inline_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
 
-	// swf
-	//
-	// SWF Domains can be imported using the name
-	"aws_swf_domain": config.NameAsIdentifier,
-
 	// synthetics
 	//
 	// Synthetics Canaries can be imported using the name
 	"aws_synthetics_canary": config.NameAsIdentifier,
-
-	// timestreamwrite
-	//
-	// Timestream databases can be imported using the database_name
-	"aws_timestreamwrite_database": config.ParameterAsIdentifier("database_name"),
-	// Timestream tables can be imported using the table_name and database_name separate by a colon (:)
-	// Example: ExampleTable:ExampleDatabase
-	"aws_timestreamwrite_table": config.TemplatedStringAsIdentifier("", "{{ .parameters.table_name }}:{{ .parameters.database_name }}"),
 
 	// networkfirewall
 	//
