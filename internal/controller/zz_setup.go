@@ -727,6 +727,27 @@ import (
 	patchgroup "github.com/upbound/provider-aws/internal/controller/ssm/patchgroup"
 	server "github.com/upbound/provider-aws/internal/controller/transfer/server"
 	usertransfer "github.com/upbound/provider-aws/internal/controller/transfer/user"
+	bytematchset "github.com/upbound/provider-aws/internal/controller/waf/bytematchset"
+	geomatchset "github.com/upbound/provider-aws/internal/controller/waf/geomatchset"
+	ipset "github.com/upbound/provider-aws/internal/controller/waf/ipset"
+	ratebasedrule "github.com/upbound/provider-aws/internal/controller/waf/ratebasedrule"
+	regexmatchset "github.com/upbound/provider-aws/internal/controller/waf/regexmatchset"
+	regexpatternset "github.com/upbound/provider-aws/internal/controller/waf/regexpatternset"
+	rulewaf "github.com/upbound/provider-aws/internal/controller/waf/rule"
+	sizeconstraintset "github.com/upbound/provider-aws/internal/controller/waf/sizeconstraintset"
+	sqlinjectionmatchset "github.com/upbound/provider-aws/internal/controller/waf/sqlinjectionmatchset"
+	webacl "github.com/upbound/provider-aws/internal/controller/waf/webacl"
+	xssmatchset "github.com/upbound/provider-aws/internal/controller/waf/xssmatchset"
+	bytematchsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/bytematchset"
+	geomatchsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/geomatchset"
+	ipsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/ipset"
+	ratebasedrulewafregional "github.com/upbound/provider-aws/internal/controller/wafregional/ratebasedrule"
+	regexmatchsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/regexmatchset"
+	regexpatternsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/regexpatternset"
+	rulewafregional "github.com/upbound/provider-aws/internal/controller/wafregional/rule"
+	sizeconstraintsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/sizeconstraintset"
+	sqlinjectionmatchsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/sqlinjectionmatchset"
+	webaclwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/webacl"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -1451,6 +1472,27 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		patchgroup.Setup,
 		server.Setup,
 		usertransfer.Setup,
+		bytematchset.Setup,
+		geomatchset.Setup,
+		ipset.Setup,
+		ratebasedrule.Setup,
+		regexmatchset.Setup,
+		regexpatternset.Setup,
+		rulewaf.Setup,
+		sizeconstraintset.Setup,
+		sqlinjectionmatchset.Setup,
+		webacl.Setup,
+		xssmatchset.Setup,
+		bytematchsetwafregional.Setup,
+		geomatchsetwafregional.Setup,
+		ipsetwafregional.Setup,
+		ratebasedrulewafregional.Setup,
+		regexmatchsetwafregional.Setup,
+		regexpatternsetwafregional.Setup,
+		rulewafregional.Setup,
+		sizeconstraintsetwafregional.Setup,
+		sqlinjectionmatchsetwafregional.Setup,
+		webaclwafregional.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
