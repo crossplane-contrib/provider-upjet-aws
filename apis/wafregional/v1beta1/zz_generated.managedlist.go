@@ -96,3 +96,12 @@ func (l *WebACLList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this XSSMatchSetList.
+func (l *XSSMatchSetList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
