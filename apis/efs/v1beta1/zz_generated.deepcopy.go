@@ -1054,6 +1054,18 @@ func (in *MountTargetParameters) DeepCopyInto(out *MountTargetParameters) {
 			}
 		}
 	}
+	if in.SecurityGroupsRefs != nil {
+		in, out := &in.SecurityGroupsRefs, &out.SecurityGroupsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupsSelector != nil {
+		in, out := &in.SecurityGroupsSelector, &out.SecurityGroupsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SubnetID != nil {
 		in, out := &in.SubnetID, &out.SubnetID
 		*out = new(string)
