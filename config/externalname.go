@@ -2112,6 +2112,19 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_wafregional_sql_injection_match_set": config.IdentifierFromProvider,
 	// WAF Regional Web ACL can be imported using the id
 	"aws_wafregional_web_acl": config.IdentifierFromProvider,
+
+	// swf
+	//
+	// SWF Domains can be imported using the name
+	"aws_swf_domain": config.NameAsIdentifier,
+
+	// timestreamwrite
+	//
+	// Timestream databases can be imported using the database_name
+	"aws_timestreamwrite_database": config.ParameterAsIdentifier("database_name"),
+	// Timestream tables can be imported using the table_name and database_name separate by a colon (:)
+	// Example: ExampleTable:ExampleDatabase
+	"aws_timestreamwrite_table": config.TemplatedStringAsIdentifier("", "{{ .parameters.table_name }}:{{ .parameters.database_name }}"),
 }
 
 func lambdaFunctionURL() config.ExternalName {
