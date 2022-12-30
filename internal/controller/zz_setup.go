@@ -756,6 +756,10 @@ import (
 	sizeconstraintsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/sizeconstraintset"
 	sqlinjectionmatchsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/sqlinjectionmatchset"
 	webaclwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/webacl"
+	xssmatchsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/xssmatchset"
+	ipsetwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/ipset"
+	regexpatternsetwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/regexpatternset"
+	rulegroupwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/rulegroup"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -1509,6 +1513,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		sizeconstraintsetwafregional.Setup,
 		sqlinjectionmatchsetwafregional.Setup,
 		webaclwafregional.Setup,
+		xssmatchsetwafregional.Setup,
+		ipsetwafv2.Setup,
+		regexpatternsetwafv2.Setup,
+		rulegroupwafv2.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

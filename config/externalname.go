@@ -2116,6 +2116,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_wafregional_sql_injection_match_set": config.IdentifierFromProvider,
 	// WAF Regional Web ACL can be imported using the id
 	"aws_wafregional_web_acl": config.IdentifierFromProvider,
+	// AWS WAF Regional XSS Match can be imported using the id
+	"aws_wafregional_xss_match_set": config.IdentifierFromProvider,
 
 	// swf
 	//
@@ -2129,6 +2131,15 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Timestream tables can be imported using the table_name and database_name separate by a colon (:)
 	// Example: ExampleTable:ExampleDatabase
 	"aws_timestreamwrite_table": config.TemplatedStringAsIdentifier("", "{{ .parameters.table_name }}:{{ .parameters.database_name }}"),
+
+	// wafv2
+	//
+	// WAFv2 IP Sets can be imported using ID/name/scope
+	"aws_wafv2_ip_set": config.IdentifierFromProvider,
+	// WAFv2 Regex Pattern Sets can be imported using ID/name/scope
+	"aws_wafv2_regex_pattern_set": config.IdentifierFromProvider,
+	// WAFv2 Rule Group can be imported using ID/name/scope
+	"aws_wafv2_rule_group": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

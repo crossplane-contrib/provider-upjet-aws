@@ -604,8 +604,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// WAF Regional Web ACL Association can be imported using their web_acl_id:resource_arn
 	"aws_wafregional_web_acl_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.web_acl_id }}:{{ .parameters.resource_arn }}"),
-	// AWS WAF Regional XSS Match can be imported using the id
-	"aws_wafregional_xss_match_set": config.IdentifierFromProvider,
 
 	// ssoadmin
 	//
@@ -672,12 +670,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// wafv2
 	//
-	// WAFv2 IP Sets can be imported using ID/name/scope
-	"aws_wafv2_ip_set": config.IdentifierFromProvider,
-	// WAFv2 Regex Pattern Sets can be imported using ID/name/scope
-	"aws_wafv2_regex_pattern_set": config.IdentifierFromProvider,
-	// WAFv2 Rule Group can be imported using ID/name/scope
-	"aws_wafv2_rule_group": config.IdentifierFromProvider,
 	// WAFv2 Web ACLs can be imported using ID/Name/Scope
 	"aws_wafv2_web_acl": config.IdentifierFromProvider,
 	// WAFv2 Web ACL Association can be imported using WEB_ACL_ARN,RESOURCE_ARN
