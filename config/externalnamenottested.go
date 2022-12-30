@@ -266,19 +266,11 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// guardduty
 	//
-	// GuardDuty detectors can be imported using the detector ID
-	"aws_guardduty_detector": config.IdentifierFromProvider,
-	// GuardDuty filters can be imported using the detector ID and filter's name separated by a colon
-	// 00b00fd5aecc0ab60a708659477e9617:MyFilter
-	"aws_guardduty_filter": config.TemplatedStringAsIdentifier("name", "{{ .parameters.detector_id }}:{{ .external_name }}"),
 	// aws_guardduty_invite_accepter can be imported using the member GuardDuty detector ID
 	"aws_guardduty_invite_accepter": FormattedIdentifierFromProvider("", "detector_id"),
 	// GuardDuty IPSet can be imported using the primary GuardDuty detector ID and IPSet ID
 	// 00b00fd5aecc0ab60a708659477e9617:123456789012
 	"aws_guardduty_ipset": config.IdentifierFromProvider,
-	// GuardDuty members can be imported using the primary GuardDuty detector ID and member AWS account ID
-	// 00b00fd5aecc0ab60a708659477e9617:123456789012
-	"aws_guardduty_member": config.IdentifierFromProvider,
 	// GuardDuty Organization Admin Account can be imported using the AWS account ID
 	"aws_guardduty_organization_admin_account": FormattedIdentifierFromProvider("", "admin_account_id"),
 	// GuardDuty Organization Configurations can be imported using the GuardDuty Detector ID

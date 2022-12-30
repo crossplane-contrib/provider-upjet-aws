@@ -436,6 +436,9 @@ import (
 	roleassociation "github.com/upbound/provider-aws/internal/controller/grafana/roleassociation"
 	workspacegrafana "github.com/upbound/provider-aws/internal/controller/grafana/workspace"
 	workspacesamlconfiguration "github.com/upbound/provider-aws/internal/controller/grafana/workspacesamlconfiguration"
+	detector "github.com/upbound/provider-aws/internal/controller/guardduty/detector"
+	filter "github.com/upbound/provider-aws/internal/controller/guardduty/filter"
+	memberguardduty "github.com/upbound/provider-aws/internal/controller/guardduty/member"
 	accesskey "github.com/upbound/provider-aws/internal/controller/iam/accesskey"
 	accountalias "github.com/upbound/provider-aws/internal/controller/iam/accountalias"
 	accountpasswordpolicy "github.com/upbound/provider-aws/internal/controller/iam/accountpasswordpolicy"
@@ -1181,6 +1184,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		roleassociation.Setup,
 		workspacegrafana.Setup,
 		workspacesamlconfiguration.Setup,
+		detector.Setup,
+		filter.Setup,
+		memberguardduty.Setup,
 		accesskey.Setup,
 		accountalias.Setup,
 		accountpasswordpolicy.Setup,

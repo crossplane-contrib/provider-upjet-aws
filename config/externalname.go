@@ -1579,6 +1579,17 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Direct Connect hosted transit virtual interfaces can be imported using the vif id
 	"aws_dx_hosted_transit_virtual_interface_accepter": config.IdentifierFromProvider,
 
+	// guardduty
+	//
+	// GuardDuty detectors can be imported using the detector ID
+	"aws_guardduty_detector": config.IdentifierFromProvider,
+	// GuardDuty filters can be imported using the detector ID and filter's name separated by a colon
+	// 00b00fd5aecc0ab60a708659477e9617:MyFilter
+	"aws_guardduty_filter": config.TemplatedStringAsIdentifier("name", "{{ .parameters.detector_id }}:{{ .external_name }}"),
+	// GuardDuty members can be imported using the primary GuardDuty detector ID and member AWS account ID
+	// 00b00fd5aecc0ab60a708659477e9617:123456789012
+	"aws_guardduty_member": config.IdentifierFromProvider,
+
 	// appconfig
 	//
 	// AppConfig Applications can be imported using their application ID,
