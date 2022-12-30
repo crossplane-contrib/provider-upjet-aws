@@ -599,6 +599,12 @@ import (
 	snapshotrds "github.com/upbound/provider-aws/internal/controller/rds/snapshot"
 	subnetgrouprds "github.com/upbound/provider-aws/internal/controller/rds/subnetgroup"
 	clusterredshift "github.com/upbound/provider-aws/internal/controller/redshift/cluster"
+	eventsubscriptionredshift "github.com/upbound/provider-aws/internal/controller/redshift/eventsubscription"
+	parametergroupredshift "github.com/upbound/provider-aws/internal/controller/redshift/parametergroup"
+	scheduledactionredshift "github.com/upbound/provider-aws/internal/controller/redshift/scheduledaction"
+	snapshotschedule "github.com/upbound/provider-aws/internal/controller/redshift/snapshotschedule"
+	snapshotscheduleassociation "github.com/upbound/provider-aws/internal/controller/redshift/snapshotscheduleassociation"
+	subnetgroupredshift "github.com/upbound/provider-aws/internal/controller/redshift/subnetgroup"
 	groupresourcegroups "github.com/upbound/provider-aws/internal/controller/resourcegroups/group"
 	delegationset "github.com/upbound/provider-aws/internal/controller/route53/delegationset"
 	healthcheck "github.com/upbound/provider-aws/internal/controller/route53/healthcheck"
@@ -1317,6 +1323,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		snapshotrds.Setup,
 		subnetgrouprds.Setup,
 		clusterredshift.Setup,
+		eventsubscriptionredshift.Setup,
+		parametergroupredshift.Setup,
+		scheduledactionredshift.Setup,
+		snapshotschedule.Setup,
+		snapshotscheduleassociation.Setup,
+		subnetgroupredshift.Setup,
 		groupresourcegroups.Setup,
 		delegationset.Setup,
 		healthcheck.Setup,
