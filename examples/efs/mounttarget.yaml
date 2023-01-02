@@ -11,6 +11,9 @@ spec:
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: efs
+    securityGroupsSelector:
+      matchLabels:
+        testing.upbound.io/example-name: efs
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
@@ -39,3 +42,16 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: efs
     cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: efs
+  name: efs-sg
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: efs
