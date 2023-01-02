@@ -5,6 +5,8 @@ Copyright 2022 Upbound Inc.
 package mq
 
 import (
+	"fmt"
+
 	"github.com/upbound/upjet/pkg/config"
 )
 
@@ -17,5 +19,30 @@ func Configure(p *config.Provider) {
 		//  float64 field. Thus here we remove the automatically injected
 		//  cross-resource reference from example manifests.
 		delete(r.References, "configuration.revision")
+
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if instances, ok := attr["instances"].([]any); ok {
+				for i, inst := range instances {
+					if instance, ok := inst.(map[string]any); ok {
+						if cu, ok := instance["console_url"].(string); ok {
+							key := fmt.Sprintf("instance_%d_console_url", i)
+							conn[key] = []byte(cu)
+						}
+						if ip, ok := instance["ip_address"].(string); ok {
+							key := fmt.Sprintf("instance_%d_ip_address", i)
+							conn[key] = []byte(ip)
+						}
+						if endpoints, ok := instance["endpoints"].([]any); ok && len(endpoints) > 0 {
+							for j, endpoint := range endpoints {
+								key := fmt.Sprintf("instance_%d_endpoint_%d", i, j)
+								conn[key] = []byte(endpoint.(string))
+							}
+						}
+					}
+				}
+			}
+			return conn, nil
+		}
 	})
 }
