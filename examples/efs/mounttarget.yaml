@@ -1,6 +1,8 @@
 apiVersion: efs.aws.upbound.io/v1beta1
 kind: MountTarget
 metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/mounttarget
   name: example
 spec:
   forProvider:
@@ -11,13 +13,18 @@ spec:
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: efs
+    securityGroupsSelector:
+      matchLabels:
+        testing.upbound.io/example-name: efs
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
-  name: sample-vpc
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/mounttarget
   labels:
     testing.upbound.io/example-name: efs
+  name: sample-vpc
 spec:
   forProvider:
     region: us-west-1
@@ -28,9 +35,11 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
-  name: efs-subnet1
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/mounttarget
   labels:
     testing.upbound.io/example-name: efs
+  name: efs-subnet1
 spec:
   forProvider:
     region: us-west-1
@@ -39,3 +48,33 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: efs
     cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/mounttarget
+  labels:
+    testing.upbound.io/example-name: efs
+  name: efs-sg
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: efs
+---
+apiVersion: efs.aws.upbound.io/v1beta1
+kind: FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/mounttarget
+  name: example
+  labels:
+    testing.upbound.io/example-name: efs
+spec:
+  forProvider:
+    region: us-west-1
+    creationToken: my-product
+    tags:
+      Name: MyProduct
