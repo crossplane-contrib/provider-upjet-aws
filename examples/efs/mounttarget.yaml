@@ -1,6 +1,8 @@
 apiVersion: efs.aws.upbound.io/v1beta1
 kind: MountTarget
 metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/mounttarget
   name: example
 spec:
   forProvider:
@@ -18,9 +20,11 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
-  name: sample-vpc
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/mounttarget
   labels:
     testing.upbound.io/example-name: efs
+  name: sample-vpc
 spec:
   forProvider:
     region: us-west-1
@@ -31,9 +35,11 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
-  name: efs-subnet1
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/mounttarget
   labels:
     testing.upbound.io/example-name: efs
+  name: efs-subnet1
 spec:
   forProvider:
     region: us-west-1
@@ -46,6 +52,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/mounttarget
   labels:
     testing.upbound.io/example-name: efs
   name: efs-sg
