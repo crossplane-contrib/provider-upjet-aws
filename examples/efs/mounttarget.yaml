@@ -63,3 +63,18 @@ spec:
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: efs
+---
+apiVersion: efs.aws.upbound.io/v1beta1
+kind: FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/mounttarget
+  name: example
+  labels:
+    testing.upbound.io/example-name: efs
+spec:
+  forProvider:
+    region: us-west-1
+    creationToken: my-product
+    tags:
+      Name: MyProduct
