@@ -387,6 +387,7 @@ import (
 	usergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/usergroup"
 	applicationelasticbeanstalk "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/application"
 	configurationtemplate "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/configurationtemplate"
+	domainelasticsearch "github.com/upbound/provider-aws/internal/controller/elasticsearch/domain"
 	pipelineelastictranscoder "github.com/upbound/provider-aws/internal/controller/elastictranscoder/pipeline"
 	preset "github.com/upbound/provider-aws/internal/controller/elastictranscoder/preset"
 	appcookiestickinesspolicy "github.com/upbound/provider-aws/internal/controller/elb/appcookiestickinesspolicy"
@@ -1144,6 +1145,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		usergroupelasticache.Setup,
 		applicationelasticbeanstalk.Setup,
 		configurationtemplate.Setup,
+		domainelasticsearch.Setup,
 		pipelineelastictranscoder.Setup,
 		preset.Setup,
 		appcookiestickinesspolicy.Setup,

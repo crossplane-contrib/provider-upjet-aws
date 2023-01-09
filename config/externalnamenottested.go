@@ -315,8 +315,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// elasticsearch
 	//
-	// Elasticsearch domains can be imported using the domain_name
-	"aws_elasticsearch_domain": config.ParameterAsIdentifier("domain_name"),
 	// No import
 	"aws_elasticsearch_domain_policy": config.IdentifierFromProvider,
 	// Elasticsearch domains can be imported using the domain_name
