@@ -383,6 +383,154 @@ func (tr *MaintenanceWindowTarget) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this MaintenanceWindowTask
+func (mg *MaintenanceWindowTask) GetTerraformResourceType() string {
+	return "aws_ssm_maintenance_window_task"
+}
+
+// GetConnectionDetailsMapping for this MaintenanceWindowTask
+func (tr *MaintenanceWindowTask) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"task_invocation_parameters[*].lambda_parameters[*].payload": "spec.forProvider.taskInvocationParameters[*].lambdaParameters[*].payloadSecretRef", "task_invocation_parameters[*].step_functions_parameters[*].input": "spec.forProvider.taskInvocationParameters[*].stepFunctionsParameters[*].inputSecretRef"}
+}
+
+// GetObservation of this MaintenanceWindowTask
+func (tr *MaintenanceWindowTask) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this MaintenanceWindowTask
+func (tr *MaintenanceWindowTask) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this MaintenanceWindowTask
+func (tr *MaintenanceWindowTask) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this MaintenanceWindowTask
+func (tr *MaintenanceWindowTask) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this MaintenanceWindowTask
+func (tr *MaintenanceWindowTask) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this MaintenanceWindowTask using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *MaintenanceWindowTask) LateInitialize(attrs []byte) (bool, error) {
+	params := &MaintenanceWindowTaskParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *MaintenanceWindowTask) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this Parameter
+func (mg *Parameter) GetTerraformResourceType() string {
+	return "aws_ssm_parameter"
+}
+
+// GetConnectionDetailsMapping for this Parameter
+func (tr *Parameter) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"value": "spec.forProvider.valueSecretRef"}
+}
+
+// GetObservation of this Parameter
+func (tr *Parameter) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this Parameter
+func (tr *Parameter) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this Parameter
+func (tr *Parameter) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this Parameter
+func (tr *Parameter) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this Parameter
+func (tr *Parameter) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this Parameter using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *Parameter) LateInitialize(attrs []byte) (bool, error) {
+	params := &ParameterParameters_2{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *Parameter) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this PatchBaseline
 func (mg *PatchBaseline) GetTerraformResourceType() string {
 	return "aws_ssm_patch_baseline"
@@ -529,4 +677,78 @@ func (tr *PatchGroup) LateInitialize(attrs []byte) (bool, error) {
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *PatchGroup) GetTerraformSchemaVersion() int {
 	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ResourceDataSync
+func (mg *ResourceDataSync) GetTerraformResourceType() string {
+	return "aws_ssm_resource_data_sync"
+}
+
+// GetConnectionDetailsMapping for this ResourceDataSync
+func (tr *ResourceDataSync) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ResourceDataSync
+func (tr *ResourceDataSync) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ResourceDataSync
+func (tr *ResourceDataSync) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ResourceDataSync
+func (tr *ResourceDataSync) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ResourceDataSync
+func (tr *ResourceDataSync) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ResourceDataSync
+func (tr *ResourceDataSync) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ResourceDataSync using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ResourceDataSync) LateInitialize(attrs []byte) (bool, error) {
+	params := &ResourceDataSyncParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ResourceDataSync) GetTerraformSchemaVersion() int {
+	return 0
 }

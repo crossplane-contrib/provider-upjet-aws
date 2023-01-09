@@ -1827,6 +1827,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_ssm_patch_group": config.IdentifierFromProvider,
+	// AWS Maintenance Window Task can be imported using the window_id and window_task_id separated by /
+	"aws_ssm_maintenance_window_task": config.IdentifierFromProvider,
+	// SSM Parameters can be imported using the parameter store name
+	"aws_ssm_parameter": config.NameAsIdentifier,
+	// SSM resource data sync can be imported using the name
+	"aws_ssm_resource_data_sync": config.NameAsIdentifier,
 
 	// emr
 	//

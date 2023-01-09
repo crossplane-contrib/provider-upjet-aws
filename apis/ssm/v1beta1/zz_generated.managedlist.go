@@ -52,6 +52,24 @@ func (l *MaintenanceWindowTargetList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this MaintenanceWindowTaskList.
+func (l *MaintenanceWindowTaskList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ParameterList.
+func (l *ParameterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this PatchBaselineList.
 func (l *PatchBaselineList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -63,6 +81,15 @@ func (l *PatchBaselineList) GetItems() []resource.Managed {
 
 // GetItems of this PatchGroupList.
 func (l *PatchGroupList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ResourceDataSyncList.
+func (l *ResourceDataSyncList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

@@ -728,8 +728,11 @@ import (
 	document "github.com/upbound/provider-aws/internal/controller/ssm/document"
 	maintenancewindow "github.com/upbound/provider-aws/internal/controller/ssm/maintenancewindow"
 	maintenancewindowtarget "github.com/upbound/provider-aws/internal/controller/ssm/maintenancewindowtarget"
+	maintenancewindowtask "github.com/upbound/provider-aws/internal/controller/ssm/maintenancewindowtask"
+	parameter "github.com/upbound/provider-aws/internal/controller/ssm/parameter"
 	patchbaseline "github.com/upbound/provider-aws/internal/controller/ssm/patchbaseline"
 	patchgroup "github.com/upbound/provider-aws/internal/controller/ssm/patchgroup"
+	resourcedatasync "github.com/upbound/provider-aws/internal/controller/ssm/resourcedatasync"
 	domainswf "github.com/upbound/provider-aws/internal/controller/swf/domain"
 	databasetimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/database"
 	tabletimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/table"
@@ -1485,8 +1488,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		document.Setup,
 		maintenancewindow.Setup,
 		maintenancewindowtarget.Setup,
+		maintenancewindowtask.Setup,
+		parameter.Setup,
 		patchbaseline.Setup,
 		patchgroup.Setup,
+		resourcedatasync.Setup,
 		domainswf.Setup,
 		databasetimestreamwrite.Setup,
 		tabletimestreamwrite.Setup,
