@@ -608,6 +608,7 @@ import (
 	eventsubscriptionredshift "github.com/upbound/provider-aws/internal/controller/redshift/eventsubscription"
 	parametergroupredshift "github.com/upbound/provider-aws/internal/controller/redshift/parametergroup"
 	scheduledactionredshift "github.com/upbound/provider-aws/internal/controller/redshift/scheduledaction"
+	snapshotcopygrant "github.com/upbound/provider-aws/internal/controller/redshift/snapshotcopygrant"
 	snapshotschedule "github.com/upbound/provider-aws/internal/controller/redshift/snapshotschedule"
 	snapshotscheduleassociation "github.com/upbound/provider-aws/internal/controller/redshift/snapshotscheduleassociation"
 	subnetgroupredshift "github.com/upbound/provider-aws/internal/controller/redshift/subnetgroup"
@@ -1369,6 +1370,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventsubscriptionredshift.Setup,
 		parametergroupredshift.Setup,
 		scheduledactionredshift.Setup,
+		snapshotcopygrant.Setup,
 		snapshotschedule.Setup,
 		snapshotscheduleassociation.Setup,
 		subnetgroupredshift.Setup,

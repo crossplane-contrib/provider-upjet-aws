@@ -479,8 +479,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// Redshift security groups can be imported using the name
 	"aws_redshift_security_group": config.NameAsIdentifier,
-	// Redshift Snapshot Copy Grants support import by name
-	"aws_redshift_snapshot_copy_grant": config.IdentifierFromProvider,
 
 	// route53domains
 	//

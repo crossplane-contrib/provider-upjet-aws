@@ -1043,6 +1043,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_redshift_snapshot_schedule_association": config.IdentifierFromProvider,
 	// Redshift subnet groups can be imported using the name
 	"aws_redshift_subnet_group": config.NameAsIdentifier,
+	// Redshift Snapshot Copy Grants support import by name
+	"aws_redshift_snapshot_copy_grant": config.IdentifierFromProvider,
 
 	// sfn
 	//
