@@ -2146,6 +2146,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_wafv2_regex_pattern_set": config.IdentifierFromProvider,
 	// WAFv2 Rule Group can be imported using ID/name/scope
 	"aws_wafv2_rule_group": config.IdentifierFromProvider,
+
+	// elasticsearch
+	//
+	// Elasticsearch domains can be imported using the domain_name
+	"aws_elasticsearch_domain": config.TemplatedStringAsIdentifier("domain_name", "arn:aws:es:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:domain/{{ .external_name }}"),
 }
 
 func lambdaFunctionURL() config.ExternalName {

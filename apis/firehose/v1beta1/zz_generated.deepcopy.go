@@ -537,6 +537,16 @@ func (in *ElasticsearchConfigurationParameters) DeepCopyInto(out *ElasticsearchC
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainArnRef != nil {
+		in, out := &in.DomainArnRef, &out.DomainArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DomainArnSelector != nil {
+		in, out := &in.DomainArnSelector, &out.DomainArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.IndexName != nil {
 		in, out := &in.IndexName, &out.IndexName
 		*out = new(string)

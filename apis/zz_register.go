@@ -71,6 +71,7 @@ import (
 	v1beta1eks "github.com/upbound/provider-aws/apis/eks/v1beta1"
 	v1beta1elasticache "github.com/upbound/provider-aws/apis/elasticache/v1beta1"
 	v1beta1elasticbeanstalk "github.com/upbound/provider-aws/apis/elasticbeanstalk/v1beta1"
+	v1beta1elasticsearch "github.com/upbound/provider-aws/apis/elasticsearch/v1beta1"
 	v1beta1elastictranscoder "github.com/upbound/provider-aws/apis/elastictranscoder/v1beta1"
 	v1beta1elb "github.com/upbound/provider-aws/apis/elb/v1beta1"
 	v1beta1elbv2 "github.com/upbound/provider-aws/apis/elbv2/v1beta1"
@@ -212,6 +213,7 @@ func init() {
 		v1beta1eks.SchemeBuilder.AddToScheme,
 		v1beta1elasticache.SchemeBuilder.AddToScheme,
 		v1beta1elasticbeanstalk.SchemeBuilder.AddToScheme,
+		v1beta1elasticsearch.SchemeBuilder.AddToScheme,
 		v1beta1elastictranscoder.SchemeBuilder.AddToScheme,
 		v1beta1elb.SchemeBuilder.AddToScheme,
 		v1beta1elbv2.SchemeBuilder.AddToScheme,
