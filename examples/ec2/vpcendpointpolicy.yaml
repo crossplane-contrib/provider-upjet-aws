@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     policy: |-
-      ${jsonencode({
+      {
           "Version" : "2012-10-17",
           "Statement" : [
             {
@@ -24,7 +24,7 @@ spec:
               "Resource" : "*"
             }
           ]
-        })}
+        }
     region: us-west-1
     vpcEndpointIdSelector:
       matchLabels:
