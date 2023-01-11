@@ -691,6 +691,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Objects can be imported using the id. The id is the bucket name and the key together
 	// $ terraform import aws_s3_object.object some-bucket-name/some/key.txt
 	"aws_s3_object": FormattedIdentifierFromProvider("/", "bucket", "key"),
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_s3_object_copy": config.IdentifierFromProvider,
 
 	// cloudfront
 	//
@@ -1724,6 +1727,18 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Access Point policies can be imported using the access_point_arn
 	// arn:aws:s3:us-west-2:123456789012:accesspoint/example
 	"aws_s3control_access_point_policy": config.IdentifierFromProvider,
+	// Multi-Region Access Points can be imported using the account_id and name of the Multi-Region Access Point separated by a colon (:)
+	// Example: 123456789012:example
+	"aws_s3control_multi_region_access_point": config.IdentifierFromProvider,
+	// Multi-Region Access Point Policies can be imported using the account_id and name of the Multi-Region Access Point separated by a colon (:)
+	// Example: 123456789012:example
+	"aws_s3control_multi_region_access_point_policy": config.IdentifierFromProvider,
+	// Object Lambda Access Points can be imported using the account_id and name, separated by a colon (:)
+	// Example: 123456789012:example
+	"aws_s3control_object_lambda_access_point": config.IdentifierFromProvider,
+	// Object Lambda Access Point policies can be imported using the account_id and name, separated by a colon (:)
+	// Example: 123456789012:example
+	"aws_s3control_object_lambda_access_point_policy": config.IdentifierFromProvider,
 
 	// dlm
 	//
@@ -2159,6 +2174,23 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Elasticsearch domains can be imported using the domain_name
 	"aws_elasticsearch_domain": config.TemplatedStringAsIdentifier("domain_name", "arn:aws:es:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:domain/{{ .external_name }}"),
+
+	// xray
+	//
+	// XRay Encryption Config can be imported using the region name
+	"aws_xray_encryption_config": config.IdentifierFromProvider,
+	// XRay Groups can be imported using the ARN
+	// Example: arn:aws:xray:us-west-2:1234567890:group/example-group/TNGX7SW5U6QY36T4ZMOUA3HVLBYCZTWDIOOXY3CJAXTHSS3YCWUA
+	"aws_xray_group": config.IdentifierFromProvider,
+	// XRay Sampling Rules can be imported using the name
+	"aws_xray_sampling_rule": config.ParameterAsIdentifier("rule_name"),
+
+	// workspaces
+	//
+	// Workspaces directory can be imported using the directory ID
+	"aws_workspaces_directory": config.IdentifierFromProvider,
+	// WorkSpaces IP groups can be imported using their GroupID
+	"aws_workspaces_ip_group": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

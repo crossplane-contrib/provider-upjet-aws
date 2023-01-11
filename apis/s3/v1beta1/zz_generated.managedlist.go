@@ -196,6 +196,15 @@ func (l *BucketWebsiteConfigurationList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ObjectCopyList.
+func (l *ObjectCopyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ObjectList.
 func (l *ObjectList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
