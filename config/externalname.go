@@ -202,7 +202,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Imported by using the EC2 Transit Gateway Route Table identifier, an
 	// underscore, and the EC2 Transit Gateway Attachment identifier:
 	// tgw-rtb-12345678_tgw-attach-87654321
-	"aws_ec2_transit_gateway_route_table_propagation": FormattedIdentifierFromProvider("_", "transit_gateway_attachment_id", "transit_gateway_route_table_id"),
+	"aws_ec2_transit_gateway_route_table_propagation": FormattedIdentifierFromProvider("_", "transit_gateway_route_table_id", "transit_gateway_attachment_id"),
 	// Imported using the id: igw-c0a643a9
 	"aws_internet_gateway": config.IdentifierFromProvider,
 	// NAT Gateways can be imported using the id
