@@ -3,6 +3,7 @@ kind: ReplicationInstance
 metadata:
   annotations:
     meta.upbound.io/example-id: dms/v1beta1/replicationinstance
+    uptest.upbound.io/timeout: "3600" # one hour timeout
   labels:
     testing.upbound.io/example-name: test
   name: test
