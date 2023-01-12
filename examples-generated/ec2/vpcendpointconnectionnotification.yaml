@@ -58,8 +58,8 @@ metadata:
 spec:
   forProvider:
     acceptanceRequired: false
-    networkLoadBalancerArns:
-    - ${aws_lb.test.arn}
+    networkLoadBalancerArnRefs:
+    - name: test
     region: us-west-1
 
 ---

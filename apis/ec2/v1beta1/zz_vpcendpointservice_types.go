@@ -77,7 +77,18 @@ type VPCEndpointServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayLoadBalancerArns []*string `json:"gatewayLoadBalancerArns,omitempty" tf:"gateway_load_balancer_arns,omitempty"`
 
+	// References to  to populate networkLoadBalancerArns.
+	// +kubebuilder:validation:Optional
+	NetworkLoadBalancerArnRefs []v1.Reference `json:"networkLoadBalancerArnRefs,omitempty" tf:"-"`
+
+	// Selector for a list of  to populate networkLoadBalancerArns.
+	// +kubebuilder:validation:Optional
+	NetworkLoadBalancerArnSelector *v1.Selector `json:"networkLoadBalancerArnSelector,omitempty" tf:"-"`
+
 	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:refFieldName=NetworkLoadBalancerArnRefs
+	// +crossplane:generate:reference:selectorFieldName=NetworkLoadBalancerArnSelector
 	// +kubebuilder:validation:Optional
 	NetworkLoadBalancerArns []*string `json:"networkLoadBalancerArns,omitempty" tf:"network_load_balancer_arns,omitempty"`
 

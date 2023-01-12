@@ -9,8 +9,8 @@ metadata:
 spec:
   forProvider:
     acceptanceRequired: false
-    networkLoadBalancerArns:
-    - ${aws_lb.example.arn}
+    networkLoadBalancerArnRefs:
+    - name: example
     region: us-west-1
 
 ---

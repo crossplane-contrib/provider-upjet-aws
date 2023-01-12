@@ -22249,6 +22249,18 @@ func (in *VPCEndpointServiceParameters) DeepCopyInto(out *VPCEndpointServicePara
 			}
 		}
 	}
+	if in.NetworkLoadBalancerArnRefs != nil {
+		in, out := &in.NetworkLoadBalancerArnRefs, &out.NetworkLoadBalancerArnRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.NetworkLoadBalancerArnSelector != nil {
+		in, out := &in.NetworkLoadBalancerArnSelector, &out.NetworkLoadBalancerArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.NetworkLoadBalancerArns != nil {
 		in, out := &in.NetworkLoadBalancerArns, &out.NetworkLoadBalancerArns
 		*out = make([]*string, len(*in))

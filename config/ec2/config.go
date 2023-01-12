@@ -285,6 +285,11 @@ func Configure(p *config.Provider) {
 		// Mutually exclusive with:
 		// vpc_endpoint_service_allowed_principal
 		config.MoveToStatus(r.TerraformResource, "allowed_principals")
+		r.References["network_load_balancer_arns"] = config.Reference{
+			RefFieldName:      "NetworkLoadBalancerArnRefs",
+			SelectorFieldName: "NetworkLoadBalancerArnSelector",
+			Extractor:         common.PathARNExtractor,
+		}
 	})
 
 	p.AddResourceConfigurator("aws_flow_log", func(r *config.Resource) {
