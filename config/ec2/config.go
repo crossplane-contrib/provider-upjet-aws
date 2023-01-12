@@ -241,6 +241,9 @@ func Configure(p *config.Provider) {
 		r.References["nat_gateway_id"] = config.Reference{
 			Type: "NATGateway",
 		}
+		r.References["destination_prefix_list_id"] = config.Reference{
+			Type: "ManagedPrefixList",
+		}
 		r.UseAsync = true
 	})
 

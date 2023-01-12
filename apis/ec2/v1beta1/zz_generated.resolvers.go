@@ -1350,6 +1350,22 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationPrefixListID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DestinationPrefixListIDRef,
+		Selector:     mg.Spec.ForProvider.DestinationPrefixListIDSelector,
+		To: reference.To{
+			List:    &ManagedPrefixListList{},
+			Managed: &ManagedPrefixList{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DestinationPrefixListID")
+	}
+	mg.Spec.ForProvider.DestinationPrefixListID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DestinationPrefixListIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EgressOnlyGatewayID),
 		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.EgressOnlyGatewayIDRef,

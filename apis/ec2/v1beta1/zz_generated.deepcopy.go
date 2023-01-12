@@ -17622,6 +17622,16 @@ func (in *RouteParameters_2) DeepCopyInto(out *RouteParameters_2) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DestinationPrefixListIDRef != nil {
+		in, out := &in.DestinationPrefixListIDRef, &out.DestinationPrefixListIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DestinationPrefixListIDSelector != nil {
+		in, out := &in.DestinationPrefixListIDSelector, &out.DestinationPrefixListIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.EgressOnlyGatewayID != nil {
 		in, out := &in.EgressOnlyGatewayID, &out.EgressOnlyGatewayID
 		*out = new(string)
