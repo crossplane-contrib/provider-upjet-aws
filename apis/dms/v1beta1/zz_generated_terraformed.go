@@ -161,6 +161,154 @@ func (tr *Endpoint) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this EventSubscription
+func (mg *EventSubscription) GetTerraformResourceType() string {
+	return "aws_dms_event_subscription"
+}
+
+// GetConnectionDetailsMapping for this EventSubscription
+func (tr *EventSubscription) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this EventSubscription
+func (tr *EventSubscription) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this EventSubscription
+func (tr *EventSubscription) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this EventSubscription
+func (tr *EventSubscription) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this EventSubscription
+func (tr *EventSubscription) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this EventSubscription
+func (tr *EventSubscription) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this EventSubscription using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *EventSubscription) LateInitialize(attrs []byte) (bool, error) {
+	params := &EventSubscriptionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *EventSubscription) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ReplicationInstance
+func (mg *ReplicationInstance) GetTerraformResourceType() string {
+	return "aws_dms_replication_instance"
+}
+
+// GetConnectionDetailsMapping for this ReplicationInstance
+func (tr *ReplicationInstance) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ReplicationInstance
+func (tr *ReplicationInstance) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ReplicationInstance
+func (tr *ReplicationInstance) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ReplicationInstance
+func (tr *ReplicationInstance) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ReplicationInstance
+func (tr *ReplicationInstance) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ReplicationInstance
+func (tr *ReplicationInstance) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ReplicationInstance using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ReplicationInstance) LateInitialize(attrs []byte) (bool, error) {
+	params := &ReplicationInstanceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ReplicationInstance) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this ReplicationSubnetGroup
 func (mg *ReplicationSubnetGroup) GetTerraformResourceType() string {
 	return "aws_dms_replication_subnet_group"
@@ -232,5 +380,79 @@ func (tr *ReplicationSubnetGroup) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *ReplicationSubnetGroup) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ReplicationTask
+func (mg *ReplicationTask) GetTerraformResourceType() string {
+	return "aws_dms_replication_task"
+}
+
+// GetConnectionDetailsMapping for this ReplicationTask
+func (tr *ReplicationTask) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ReplicationTask
+func (tr *ReplicationTask) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ReplicationTask
+func (tr *ReplicationTask) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ReplicationTask
+func (tr *ReplicationTask) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ReplicationTask
+func (tr *ReplicationTask) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ReplicationTask
+func (tr *ReplicationTask) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ReplicationTask using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ReplicationTask) LateInitialize(attrs []byte) (bool, error) {
+	params := &ReplicationTaskParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ReplicationTask) GetTerraformSchemaVersion() int {
 	return 0
 }

@@ -208,7 +208,6 @@ func GetProvider() *config.Provider {
 		s3.Configure,
 		secretsmanager.Configure,
 		servicecatalog.Configure,
-		devicefarm.Configure,
 		organization.Configure,
 		cloudwatchevents.Configure,
 		budgets.Configure,
