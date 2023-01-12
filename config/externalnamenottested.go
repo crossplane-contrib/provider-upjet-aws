@@ -284,18 +284,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// S3 Control Bucket Policies can be imported using the Amazon Resource Name (ARN)
 	// arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-12345678/bucket/example
 	"aws_s3control_bucket_policy": config.IdentifierFromProvider,
-	// Multi-Region Access Points can be imported using the account_id and name of the Multi-Region Access Point separated by a colon (:)
-	// Example: 123456789012:example
-	"aws_s3control_multi_region_access_point": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.details.name }}"),
-	// Multi-Region Access Point Policies can be imported using the account_id and name of the Multi-Region Access Point separated by a colon (:)
-	// Example: 123456789012:example
-	"aws_s3control_multi_region_access_point_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.details.name }}"),
-	// Object Lambda Access Points can be imported using the account_id and name, separated by a colon (:)
-	// Example: 123456789012:example
-	"aws_s3control_object_lambda_access_point": config.TemplatedStringAsIdentifier("name", "{{ .parameters.account_id }}:{{ .external_name }}"),
-	// Object Lambda Access Point policies can be imported using the account_id and name, separated by a colon (:)
-	// Example: 123456789012:example
-	"aws_s3control_object_lambda_access_point_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.account_id }}:{{ .external_name }}"),
 
 	// elasticbeanstalk
 	//
@@ -640,12 +628,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Example: s-12345678/S-1-1-12-1234567890-123456789-1234567890-1234
 	"aws_transfer_access": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/{{ .parameters.external_id }}"),
 
-	// s3
-	//
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_s3_object_copy": config.IdentifierFromProvider,
-
 	// wafv2
 	//
 	// WAFv2 Web ACLs can be imported using ID/Name/Scope
@@ -668,22 +650,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// workspaces
 	//
-	// Workspaces directory can be imported using the directory ID
-	"aws_workspaces_directory": config.IdentifierFromProvider,
-	// WorkSpaces IP groups can be imported using their GroupID
-	"aws_workspaces_ip_group": config.IdentifierFromProvider,
 	// Workspaces can be imported using their ID
 	"aws_workspaces_workspace": config.IdentifierFromProvider,
-
-	// xray
-	//
-	// XRay Encryption Config can be imported using the region name
-	"aws_xray_encryption_config": config.IdentifierFromProvider,
-	// XRay Groups can be imported using the ARN
-	// Example: arn:aws:xray:us-west-2:1234567890:group/example-group/TNGX7SW5U6QY36T4ZMOUA3HVLBYCZTWDIOOXY3CJAXTHSS3YCWUA
-	"aws_xray_group": config.IdentifierFromProvider,
-	// XRay Sampling Rules can be imported using the name
-	"aws_xray_sampling_rule": config.ParameterAsIdentifier("rule_name"),
 
 	// imagebuilder
 	//

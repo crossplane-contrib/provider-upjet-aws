@@ -147,6 +147,8 @@ import (
 	v1beta1waf "github.com/upbound/provider-aws/apis/waf/v1beta1"
 	v1beta1wafregional "github.com/upbound/provider-aws/apis/wafregional/v1beta1"
 	v1beta1wafv2 "github.com/upbound/provider-aws/apis/wafv2/v1beta1"
+	v1beta1workspaces "github.com/upbound/provider-aws/apis/workspaces/v1beta1"
+	v1beta1xray "github.com/upbound/provider-aws/apis/xray/v1beta1"
 )
 
 func init() {
@@ -289,6 +291,8 @@ func init() {
 		v1beta1waf.SchemeBuilder.AddToScheme,
 		v1beta1wafregional.SchemeBuilder.AddToScheme,
 		v1beta1wafv2.SchemeBuilder.AddToScheme,
+		v1beta1workspaces.SchemeBuilder.AddToScheme,
+		v1beta1xray.SchemeBuilder.AddToScheme,
 	)
 }
 

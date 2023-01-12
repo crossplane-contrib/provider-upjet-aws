@@ -657,9 +657,14 @@ import (
 	bucketversioning "github.com/upbound/provider-aws/internal/controller/s3/bucketversioning"
 	bucketwebsiteconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketwebsiteconfiguration"
 	object "github.com/upbound/provider-aws/internal/controller/s3/object"
+	objectcopy "github.com/upbound/provider-aws/internal/controller/s3/objectcopy"
 	accesspoints3control "github.com/upbound/provider-aws/internal/controller/s3control/accesspoint"
 	accesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/accesspointpolicy"
 	accountpublicaccessblock "github.com/upbound/provider-aws/internal/controller/s3control/accountpublicaccessblock"
+	multiregionaccesspoint "github.com/upbound/provider-aws/internal/controller/s3control/multiregionaccesspoint"
+	multiregionaccesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/multiregionaccesspointpolicy"
+	objectlambdaaccesspoint "github.com/upbound/provider-aws/internal/controller/s3control/objectlambdaaccesspoint"
+	objectlambdaaccesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/objectlambdaaccesspointpolicy"
 	appimageconfig "github.com/upbound/provider-aws/internal/controller/sagemaker/appimageconfig"
 	coderepository "github.com/upbound/provider-aws/internal/controller/sagemaker/coderepository"
 	domainsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/domain"
@@ -768,6 +773,11 @@ import (
 	ipsetwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/ipset"
 	regexpatternsetwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/regexpatternset"
 	rulegroupwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/rulegroup"
+	directoryworkspaces "github.com/upbound/provider-aws/internal/controller/workspaces/directory"
+	ipgroup "github.com/upbound/provider-aws/internal/controller/workspaces/ipgroup"
+	encryptionconfig "github.com/upbound/provider-aws/internal/controller/xray/encryptionconfig"
+	groupxray "github.com/upbound/provider-aws/internal/controller/xray/group"
+	samplingrule "github.com/upbound/provider-aws/internal/controller/xray/samplingrule"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -1422,9 +1432,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		bucketversioning.Setup,
 		bucketwebsiteconfiguration.Setup,
 		object.Setup,
+		objectcopy.Setup,
 		accesspoints3control.Setup,
 		accesspointpolicy.Setup,
 		accountpublicaccessblock.Setup,
+		multiregionaccesspoint.Setup,
+		multiregionaccesspointpolicy.Setup,
+		objectlambdaaccesspoint.Setup,
+		objectlambdaaccesspointpolicy.Setup,
 		appimageconfig.Setup,
 		coderepository.Setup,
 		domainsagemaker.Setup,
@@ -1533,6 +1548,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		ipsetwafv2.Setup,
 		regexpatternsetwafv2.Setup,
 		rulegroupwafv2.Setup,
+		directoryworkspaces.Setup,
+		ipgroup.Setup,
+		encryptionconfig.Setup,
+		groupxray.Setup,
+		samplingrule.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
