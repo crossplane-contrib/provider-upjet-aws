@@ -74,6 +74,13 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"name", "db_name"},
 		}
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["endpoint"].(string); ok {
+				conn["endpoint"] = []byte(a)
+			}
+			return conn, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_db_proxy", func(r *config.Resource) {
