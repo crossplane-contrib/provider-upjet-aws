@@ -21,6 +21,17 @@ type ProviderConfigSpec struct {
 	// of AWS calls made by the provider.
 	// +optional
 	Endpoint *EndpointConfig `json:"endpoint,omitempty"`
+	// Whether to skip credentials validation via the STS API.
+	// This can be useful for testing and for AWS API implementations that do not have STS available.
+	SkipCredsValidation bool `json:"skip_credentials_validation,omitempty"`
+	// Whether to enable the request to use path-style addressing, i.e., https://s3.amazonaws.com/BUCKET/KEY.
+	S3UsePathStyle bool `json:"s3_use_path_style,omitempty"`
+	// Whether to skip the AWS Metadata API check
+	// Useful for AWS API implementations that do not have a metadata API endpoint.
+	SkipMetadataApiCheck bool `json:"skip_metadata_api_check,omitempty"`
+	// Whether to skip requesting the account ID.
+	// Useful for AWS API implementations that do not have the IAM, STS API, or metadata API
+	SkipReqAccountId bool `json:"skip_requesting_account_id,omitempty"`
 }
 
 // AssumeRoleOptions define the options for assuming an IAM Role
@@ -71,6 +82,8 @@ type Upbound struct {
 type EndpointConfig struct {
 	// URL lets you configure the endpoint URL to be used in SDK calls.
 	URL URLConfig `json:"url"`
+	// Specifies the list of services you want endpoint to be used for
+	Services []string `json:"services,omitempty"`
 
 	// Specifies if the endpoint's hostname can be modified by the SDK's API
 	// client.
