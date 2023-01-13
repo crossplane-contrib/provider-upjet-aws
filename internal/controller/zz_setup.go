@@ -571,6 +571,23 @@ import (
 	domainopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domain"
 	domainpolicy "github.com/upbound/provider-aws/internal/controller/opensearch/domainpolicy"
 	domainsamloptions "github.com/upbound/provider-aws/internal/controller/opensearch/domainsamloptions"
+	applicationopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/application"
+	customlayer "github.com/upbound/provider-aws/internal/controller/opsworks/customlayer"
+	ecsclusterlayer "github.com/upbound/provider-aws/internal/controller/opsworks/ecsclusterlayer"
+	ganglialayer "github.com/upbound/provider-aws/internal/controller/opsworks/ganglialayer"
+	haproxylayer "github.com/upbound/provider-aws/internal/controller/opsworks/haproxylayer"
+	instanceopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/instance"
+	javaapplayer "github.com/upbound/provider-aws/internal/controller/opsworks/javaapplayer"
+	memcachedlayer "github.com/upbound/provider-aws/internal/controller/opsworks/memcachedlayer"
+	mysqllayer "github.com/upbound/provider-aws/internal/controller/opsworks/mysqllayer"
+	nodejsapplayer "github.com/upbound/provider-aws/internal/controller/opsworks/nodejsapplayer"
+	permissionopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/permission"
+	phpapplayer "github.com/upbound/provider-aws/internal/controller/opsworks/phpapplayer"
+	railsapplayer "github.com/upbound/provider-aws/internal/controller/opsworks/railsapplayer"
+	rdsdbinstance "github.com/upbound/provider-aws/internal/controller/opsworks/rdsdbinstance"
+	stackopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/stack"
+	staticweblayer "github.com/upbound/provider-aws/internal/controller/opsworks/staticweblayer"
+	userprofile "github.com/upbound/provider-aws/internal/controller/opsworks/userprofile"
 	accountorganizations "github.com/upbound/provider-aws/internal/controller/organizations/account"
 	delegatedadministrator "github.com/upbound/provider-aws/internal/controller/organizations/delegatedadministrator"
 	organization "github.com/upbound/provider-aws/internal/controller/organizations/organization"
@@ -674,7 +691,7 @@ import (
 	notebookinstance "github.com/upbound/provider-aws/internal/controller/sagemaker/notebookinstance"
 	notebookinstancelifecycleconfiguration "github.com/upbound/provider-aws/internal/controller/sagemaker/notebookinstancelifecycleconfiguration"
 	studiolifecycleconfig "github.com/upbound/provider-aws/internal/controller/sagemaker/studiolifecycleconfig"
-	userprofile "github.com/upbound/provider-aws/internal/controller/sagemaker/userprofile"
+	userprofilesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/userprofile"
 	discoverer "github.com/upbound/provider-aws/internal/controller/schemas/discoverer"
 	registryschemas "github.com/upbound/provider-aws/internal/controller/schemas/registry"
 	schema "github.com/upbound/provider-aws/internal/controller/schemas/schema"
@@ -1346,6 +1363,23 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		domainopensearch.Setup,
 		domainpolicy.Setup,
 		domainsamloptions.Setup,
+		applicationopsworks.Setup,
+		customlayer.Setup,
+		ecsclusterlayer.Setup,
+		ganglialayer.Setup,
+		haproxylayer.Setup,
+		instanceopsworks.Setup,
+		javaapplayer.Setup,
+		memcachedlayer.Setup,
+		mysqllayer.Setup,
+		nodejsapplayer.Setup,
+		permissionopsworks.Setup,
+		phpapplayer.Setup,
+		railsapplayer.Setup,
+		rdsdbinstance.Setup,
+		stackopsworks.Setup,
+		staticweblayer.Setup,
+		userprofile.Setup,
 		accountorganizations.Setup,
 		delegatedadministrator.Setup,
 		organization.Setup,
@@ -1449,7 +1483,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		notebookinstance.Setup,
 		notebookinstancelifecycleconfiguration.Setup,
 		studiolifecycleconfig.Setup,
-		userprofile.Setup,
+		userprofilesagemaker.Setup,
 		discoverer.Setup,
 		registryschemas.Setup,
 		schema.Setup,

@@ -66,6 +66,7 @@ import (
 	"github.com/upbound/provider-aws/config/neptune"
 	"github.com/upbound/provider-aws/config/networkmanager"
 	"github.com/upbound/provider-aws/config/opensearch"
+	"github.com/upbound/provider-aws/config/opsworks"
 	"github.com/upbound/provider-aws/config/organization"
 	"github.com/upbound/provider-aws/config/qldb"
 	"github.com/upbound/provider-aws/config/rds"
@@ -221,6 +222,7 @@ func GetProvider() *config.Provider {
 		qldb.Configure,
 		fsx.Configure,
 		networkmanager.Configure,
+		opsworks.Configure,
 	} {
 		configure(pc)
 	}
