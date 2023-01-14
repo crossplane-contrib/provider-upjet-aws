@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type VPCInitParameters_2 struct {
+type VPCInitParameters struct {
 
 	// Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block. Default is false. Conflicts with ipv6_ipam_pool_id
 	AssignGeneratedIPv6CidrBlock *bool `json:"assignGeneratedIpv6CidrBlock,omitempty" tf:"assign_generated_ipv6_cidr_block,omitempty"`
@@ -39,6 +39,9 @@ type VPCInitParameters_2 struct {
 	// Indicates whether Network Address Usage metrics are enabled for your VPC. Defaults to false.
 	EnableNetworkAddressUsageMetrics *bool `json:"enableNetworkAddressUsageMetrics,omitempty" tf:"enable_network_address_usage_metrics,omitempty"`
 
+	// The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across AWS Regions and accounts. Using IPAM you can monitor IP address usage throughout your AWS Organization.
+	IPv4IpamPoolID *string `json:"ipv4IpamPoolId,omitempty" tf:"ipv4_ipam_pool_id,omitempty"`
+
 	// The netmask length of the IPv4 CIDR you want to allocate to this VPC. Requires specifying a ipv4_ipam_pool_id.
 	IPv4NetmaskLength *float64 `json:"ipv4NetmaskLength,omitempty" tf:"ipv4_netmask_length,omitempty"`
 
@@ -61,7 +64,7 @@ type VPCInitParameters_2 struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type VPCObservation_2 struct {
+type VPCObservation struct {
 
 	// Amazon Resource Name (ARN) of VPC
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -144,7 +147,7 @@ type VPCObservation_2 struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type VPCParameters_2 struct {
+type VPCParameters struct {
 
 	// Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block. Default is false. Conflicts with ipv6_ipam_pool_id
 	// +kubebuilder:validation:Optional
@@ -178,18 +181,8 @@ type VPCParameters_2 struct {
 	EnableNetworkAddressUsageMetrics *bool `json:"enableNetworkAddressUsageMetrics,omitempty" tf:"enable_network_address_usage_metrics,omitempty"`
 
 	// The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across AWS Regions and accounts. Using IPAM you can monitor IP address usage throughout your AWS Organization.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCIpamPool
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IPv4IpamPoolID *string `json:"ipv4IpamPoolId,omitempty" tf:"ipv4_ipam_pool_id,omitempty"`
-
-	// Reference to a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
-	// +kubebuilder:validation:Optional
-	IPv4IpamPoolIDRef *v1.Reference `json:"ipv4IpamPoolIdRef,omitempty" tf:"-"`
-
-	// Selector for a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
-	// +kubebuilder:validation:Optional
-	IPv4IpamPoolIDSelector *v1.Selector `json:"ipv4IpamPoolIdSelector,omitempty" tf:"-"`
 
 	// The netmask length of the IPv4 CIDR you want to allocate to this VPC. Requires specifying a ipv4_ipam_pool_id.
 	// +kubebuilder:validation:Optional
@@ -228,7 +221,7 @@ type VPCParameters_2 struct {
 // VPCSpec defines the desired state of VPC
 type VPCSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCParameters_2 `json:"forProvider"`
+	ForProvider     VPCParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -240,13 +233,13 @@ type VPCSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider VPCInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider VPCInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCStatus defines the observed state of VPC.
 type VPCStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        VPCObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

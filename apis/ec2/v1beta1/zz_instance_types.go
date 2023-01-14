@@ -129,26 +129,7 @@ type CreditSpecificationParameters struct {
 	CPUCredits *string `json:"cpuCredits,omitempty" tf:"cpu_credits,omitempty"`
 }
 
-type EnclaveOptionsInitParameters struct {
-
-	// Whether Nitro Enclaves will be enabled on the instance. Defaults to false.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-}
-
-type EnclaveOptionsObservation struct {
-
-	// Whether Nitro Enclaves will be enabled on the instance. Defaults to false.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-}
-
-type EnclaveOptionsParameters struct {
-
-	// Whether Nitro Enclaves will be enabled on the instance. Defaults to false.
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-}
-
-type InstanceEBSBlockDeviceInitParameters struct {
+type EBSBlockDeviceInitParameters struct {
 
 	// Whether the volume should be destroyed on instance termination. Defaults to true.
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
@@ -178,7 +159,7 @@ type InstanceEBSBlockDeviceInitParameters struct {
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
-type InstanceEBSBlockDeviceObservation struct {
+type EBSBlockDeviceObservation struct {
 
 	// Whether the volume should be destroyed on instance termination. Defaults to true.
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
@@ -214,7 +195,7 @@ type InstanceEBSBlockDeviceObservation struct {
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
-type InstanceEBSBlockDeviceParameters struct {
+type EBSBlockDeviceParameters struct {
 
 	// Whether the volume should be destroyed on instance termination. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -266,7 +247,26 @@ type InstanceEBSBlockDeviceParameters struct {
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
-type InstanceEphemeralBlockDeviceInitParameters struct {
+type EnclaveOptionsInitParameters struct {
+
+	// Whether Nitro Enclaves will be enabled on the instance. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type EnclaveOptionsObservation struct {
+
+	// Whether Nitro Enclaves will be enabled on the instance. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type EnclaveOptionsParameters struct {
+
+	// Whether Nitro Enclaves will be enabled on the instance. Defaults to false.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type EphemeralBlockDeviceInitParameters struct {
 
 	// Name of the block device to mount on the instance.
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
@@ -278,7 +278,7 @@ type InstanceEphemeralBlockDeviceInitParameters struct {
 	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
 
-type InstanceEphemeralBlockDeviceObservation struct {
+type EphemeralBlockDeviceObservation struct {
 
 	// Name of the block device to mount on the instance.
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
@@ -290,7 +290,7 @@ type InstanceEphemeralBlockDeviceObservation struct {
 	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
 
-type InstanceEphemeralBlockDeviceParameters struct {
+type EphemeralBlockDeviceParameters struct {
 
 	// Name of the block device to mount on the instance.
 	// +kubebuilder:validation:Optional
@@ -338,7 +338,7 @@ type InstanceInitParameters struct {
 	DisableAPITermination *bool `json:"disableApiTermination,omitempty" tf:"disable_api_termination,omitempty"`
 
 	// One or more configuration blocks with additional EBS block devices to attach to the instance. Block device configurations only apply on resource creation. See Block Devices below for details on attributes and drift detection. When accessing this as an attribute reference, it is a set of objects.
-	EBSBlockDevice []InstanceEBSBlockDeviceInitParameters `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
+	EBSBlockDevice []EBSBlockDeviceInitParameters `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
 
 	// If true, the launched EC2 instance will be EBS-optimized. Note that if this is not set on an instance type that is optimized by default then this will show as disabled but if the instance type is optimized by default then there is no need to set this and there is no effect to disabling it. See the EBS Optimized section of the AWS User Guide for more information.
 	EBSOptimized *bool `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
@@ -347,7 +347,7 @@ type InstanceInitParameters struct {
 	EnclaveOptions []EnclaveOptionsInitParameters `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
 
 	// One or more configuration blocks to customize Ephemeral (also known as "Instance Store") volumes on the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a set of objects.
-	EphemeralBlockDevice []InstanceEphemeralBlockDeviceInitParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
+	EphemeralBlockDevice []EphemeralBlockDeviceInitParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
 	// If true, wait for password data to become available and retrieve it. Useful for getting the administrator password for instances running Microsoft Windows. The password data is exported to the password_data attribute. See GetPasswordData for more information.
 	GetPasswordData *bool `json:"getPasswordData,omitempty" tf:"get_password_data,omitempty"`
@@ -392,7 +392,7 @@ type InstanceInitParameters struct {
 	Monitoring *bool `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
 
 	// Customize network interfaces to be attached at instance boot time. See Network Interfaces below for more details.
-	NetworkInterface []InstanceNetworkInterfaceInitParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
+	NetworkInterface []NetworkInterfaceInitParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
 	// Placement Group to start the instance in.
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
@@ -434,61 +434,6 @@ type InstanceInitParameters struct {
 	VolumeTags map[string]*string `json:"volumeTags,omitempty" tf:"volume_tags,omitempty"`
 }
 
-type InstanceNetworkInterfaceInitParameters struct {
-
-	// Whether or not to delete the network interface on instance termination. Defaults to false. Currently, the only valid value is false, as this is only supported when creating new network interfaces when launching an instance.
-	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
-
-	// Integer index of the network interface attachment. Limited by instance type.
-	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
-
-	// Integer index of the network card. Limited by instance type. The default index is 0.
-	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
-}
-
-type InstanceNetworkInterfaceObservation struct {
-
-	// Whether or not to delete the network interface on instance termination. Defaults to false. Currently, the only valid value is false, as this is only supported when creating new network interfaces when launching an instance.
-	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
-
-	// Integer index of the network interface attachment. Limited by instance type.
-	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
-
-	// Integer index of the network card. Limited by instance type. The default index is 0.
-	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
-
-	// ID of the network interface to attach.
-	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
-}
-
-type InstanceNetworkInterfaceParameters struct {
-
-	// Whether or not to delete the network interface on instance termination. Defaults to false. Currently, the only valid value is false, as this is only supported when creating new network interfaces when launching an instance.
-	// +kubebuilder:validation:Optional
-	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
-
-	// Integer index of the network interface attachment. Limited by instance type.
-	// +kubebuilder:validation:Optional
-	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
-
-	// Integer index of the network card. Limited by instance type. The default index is 0.
-	// +kubebuilder:validation:Optional
-	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
-
-	// ID of the network interface to attach.
-	// +crossplane:generate:reference:type=NetworkInterface
-	// +kubebuilder:validation:Optional
-	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
-
-	// Reference to a NetworkInterface to populate networkInterfaceId.
-	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
-
-	// Selector for a NetworkInterface to populate networkInterfaceId.
-	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
-}
-
 type InstanceObservation struct {
 
 	// AMI to use for the instance. Required unless launch_template is specified and the Launch Template specifes an AMI. If an AMI is specified in the Launch Template, setting ami will override the AMI specified in the Launch Template.
@@ -525,7 +470,7 @@ type InstanceObservation struct {
 	DisableAPITermination *bool `json:"disableApiTermination,omitempty" tf:"disable_api_termination,omitempty"`
 
 	// One or more configuration blocks with additional EBS block devices to attach to the instance. Block device configurations only apply on resource creation. See Block Devices below for details on attributes and drift detection. When accessing this as an attribute reference, it is a set of objects.
-	EBSBlockDevice []InstanceEBSBlockDeviceObservation `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
+	EBSBlockDevice []EBSBlockDeviceObservation `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
 
 	// If true, the launched EC2 instance will be EBS-optimized. Note that if this is not set on an instance type that is optimized by default then this will show as disabled but if the instance type is optimized by default then there is no need to set this and there is no effect to disabling it. See the EBS Optimized section of the AWS User Guide for more information.
 	EBSOptimized *bool `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
@@ -534,7 +479,7 @@ type InstanceObservation struct {
 	EnclaveOptions []EnclaveOptionsObservation `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
 
 	// One or more configuration blocks to customize Ephemeral (also known as "Instance Store") volumes on the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a set of objects.
-	EphemeralBlockDevice []InstanceEphemeralBlockDeviceObservation `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
+	EphemeralBlockDevice []EphemeralBlockDeviceObservation `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
 	// If true, wait for password data to become available and retrieve it. Useful for getting the administrator password for instances running Microsoft Windows. The password data is exported to the password_data attribute. See GetPasswordData for more information.
 	GetPasswordData *bool `json:"getPasswordData,omitempty" tf:"get_password_data,omitempty"`
@@ -585,7 +530,7 @@ type InstanceObservation struct {
 	Monitoring *bool `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
 
 	// Customize network interfaces to be attached at instance boot time. See Network Interfaces below for more details.
-	NetworkInterface []InstanceNetworkInterfaceObservation `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
+	NetworkInterface []NetworkInterfaceObservation `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
 	// ARN of the Outpost the instance is assigned to.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
@@ -701,7 +646,7 @@ type InstanceParameters struct {
 
 	// One or more configuration blocks with additional EBS block devices to attach to the instance. Block device configurations only apply on resource creation. See Block Devices below for details on attributes and drift detection. When accessing this as an attribute reference, it is a set of objects.
 	// +kubebuilder:validation:Optional
-	EBSBlockDevice []InstanceEBSBlockDeviceParameters `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
+	EBSBlockDevice []EBSBlockDeviceParameters `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
 
 	// If true, the launched EC2 instance will be EBS-optimized. Note that if this is not set on an instance type that is optimized by default then this will show as disabled but if the instance type is optimized by default then there is no need to set this and there is no effect to disabling it. See the EBS Optimized section of the AWS User Guide for more information.
 	// +kubebuilder:validation:Optional
@@ -713,7 +658,7 @@ type InstanceParameters struct {
 
 	// One or more configuration blocks to customize Ephemeral (also known as "Instance Store") volumes on the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a set of objects.
 	// +kubebuilder:validation:Optional
-	EphemeralBlockDevice []InstanceEphemeralBlockDeviceParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
+	EphemeralBlockDevice []EphemeralBlockDeviceParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
 	// If true, wait for password data to become available and retrieve it. Useful for getting the administrator password for instances running Microsoft Windows. The password data is exported to the password_data attribute. See GetPasswordData for more information.
 	// +kubebuilder:validation:Optional
@@ -773,7 +718,7 @@ type InstanceParameters struct {
 
 	// Customize network interfaces to be attached at instance boot time. See Network Interfaces below for more details.
 	// +kubebuilder:validation:Optional
-	NetworkInterface []InstanceNetworkInterfaceParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
+	NetworkInterface []NetworkInterfaceParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
 	// Placement Group to start the instance in.
 	// +kubebuilder:validation:Optional
@@ -966,6 +911,61 @@ type MetadataOptionsParameters struct {
 	// Enables or disables access to instance tags from the instance metadata service. Valid values include enabled or disabled. Defaults to disabled.
 	// +kubebuilder:validation:Optional
 	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
+}
+
+type NetworkInterfaceInitParameters struct {
+
+	// Whether or not to delete the network interface on instance termination. Defaults to false. Currently, the only valid value is false, as this is only supported when creating new network interfaces when launching an instance.
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Integer index of the network interface attachment. Limited by instance type.
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Integer index of the network card. Limited by instance type. The default index is 0.
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+}
+
+type NetworkInterfaceObservation struct {
+
+	// Whether or not to delete the network interface on instance termination. Defaults to false. Currently, the only valid value is false, as this is only supported when creating new network interfaces when launching an instance.
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Integer index of the network interface attachment. Limited by instance type.
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Integer index of the network card. Limited by instance type. The default index is 0.
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+
+	// ID of the network interface to attach.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+}
+
+type NetworkInterfaceParameters struct {
+
+	// Whether or not to delete the network interface on instance termination. Defaults to false. Currently, the only valid value is false, as this is only supported when creating new network interfaces when launching an instance.
+	// +kubebuilder:validation:Optional
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Integer index of the network interface attachment. Limited by instance type.
+	// +kubebuilder:validation:Optional
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Integer index of the network card. Limited by instance type. The default index is 0.
+	// +kubebuilder:validation:Optional
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+
+	// ID of the network interface to attach.
+	// +crossplane:generate:reference:type=NetworkInterface
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// Reference to a NetworkInterface to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a NetworkInterface to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type PrivateDNSNameOptionsInitParameters struct {

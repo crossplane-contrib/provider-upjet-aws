@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type RouteInitParameters_2 struct {
+type RouteInitParameters struct {
 
 	// Identifier of a carrier gateway. This attribute can only be used when the VPC contains a subnet which is associated with a Wavelength Zone.
 	CarrierGatewayID *string `json:"carrierGatewayId,omitempty" tf:"carrier_gateway_id,omitempty"`
@@ -27,11 +27,14 @@ type RouteInitParameters_2 struct {
 	// The destination IPv6 CIDR block.
 	DestinationIPv6CidrBlock *string `json:"destinationIpv6CidrBlock,omitempty" tf:"destination_ipv6_cidr_block,omitempty"`
 
+	// Identifier of a VPC Egress Only Internet Gateway.
+	EgressOnlyGatewayID *string `json:"egressOnlyGatewayId,omitempty" tf:"egress_only_gateway_id,omitempty"`
+
 	// Identifier of a Outpost local gateway.
 	LocalGatewayID *string `json:"localGatewayId,omitempty" tf:"local_gateway_id,omitempty"`
 }
 
-type RouteObservation_2 struct {
+type RouteObservation struct {
 
 	// Identifier of a carrier gateway. This attribute can only be used when the VPC contains a subnet which is associated with a Wavelength Zone.
 	CarrierGatewayID *string `json:"carrierGatewayId,omitempty" tf:"carrier_gateway_id,omitempty"`
@@ -91,7 +94,7 @@ type RouteObservation_2 struct {
 	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
 }
 
-type RouteParameters_2 struct {
+type RouteParameters struct {
 
 	// Identifier of a carrier gateway. This attribute can only be used when the VPC contains a subnet which is associated with a Wavelength Zone.
 	// +kubebuilder:validation:Optional
@@ -123,18 +126,8 @@ type RouteParameters_2 struct {
 	DestinationPrefixListIDSelector *v1.Selector `json:"destinationPrefixListIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC Egress Only Internet Gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EgressOnlyInternetGateway
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EgressOnlyGatewayID *string `json:"egressOnlyGatewayId,omitempty" tf:"egress_only_gateway_id,omitempty"`
-
-	// Reference to a EgressOnlyInternetGateway in ec2 to populate egressOnlyGatewayId.
-	// +kubebuilder:validation:Optional
-	EgressOnlyGatewayIDRef *v1.Reference `json:"egressOnlyGatewayIdRef,omitempty" tf:"-"`
-
-	// Selector for a EgressOnlyInternetGateway in ec2 to populate egressOnlyGatewayId.
-	// +kubebuilder:validation:Optional
-	EgressOnlyGatewayIDSelector *v1.Selector `json:"egressOnlyGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC internet gateway or a virtual private gateway. Specify local when updating a previously imported local route.
 	// +crossplane:generate:reference:type=InternetGateway
@@ -253,7 +246,7 @@ type RouteParameters_2 struct {
 // RouteSpec defines the desired state of Route
 type RouteSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     RouteParameters_2 `json:"forProvider"`
+	ForProvider     RouteParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -265,13 +258,13 @@ type RouteSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider RouteInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider RouteInitParameters `json:"initProvider,omitempty"`
 }
 
 // RouteStatus defines the observed state of Route.
 type RouteStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        RouteObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        RouteObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

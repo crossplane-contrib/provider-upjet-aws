@@ -21,6 +21,9 @@ type HealthCheckInitParameters struct {
 	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
 	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`
 
+	// The name of the CloudWatch alarm.
+	CloudwatchAlarmName *string `json:"cloudwatchAlarmName,omitempty" tf:"cloudwatch_alarm_name,omitempty"`
+
 	// The CloudWatchRegion that the CloudWatch alarm was created in.
 	CloudwatchAlarmRegion *string `json:"cloudwatchAlarmRegion,omitempty" tf:"cloudwatch_alarm_region,omitempty"`
 
@@ -164,17 +167,8 @@ type HealthCheckParameters struct {
 	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`
 
 	// The name of the CloudWatch alarm.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatch/v1beta1.MetricAlarm
 	// +kubebuilder:validation:Optional
 	CloudwatchAlarmName *string `json:"cloudwatchAlarmName,omitempty" tf:"cloudwatch_alarm_name,omitempty"`
-
-	// Reference to a MetricAlarm in cloudwatch to populate cloudwatchAlarmName.
-	// +kubebuilder:validation:Optional
-	CloudwatchAlarmNameRef *v1.Reference `json:"cloudwatchAlarmNameRef,omitempty" tf:"-"`
-
-	// Selector for a MetricAlarm in cloudwatch to populate cloudwatchAlarmName.
-	// +kubebuilder:validation:Optional
-	CloudwatchAlarmNameSelector *v1.Selector `json:"cloudwatchAlarmNameSelector,omitempty" tf:"-"`
 
 	// The CloudWatchRegion that the CloudWatch alarm was created in.
 	// +kubebuilder:validation:Optional

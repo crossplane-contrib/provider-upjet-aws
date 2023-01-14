@@ -13,13 +13,13 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type RouteTableInitParameters_2 struct {
+type RouteTableInitParameters struct {
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type RouteTableObservation_2 struct {
+type RouteTableObservation struct {
 
 	// The ARN of the route table.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -35,7 +35,7 @@ type RouteTableObservation_2 struct {
 
 	// A list of route objects. Their keys are documented below. This argument is processed in attribute-as-blocks mode.
 	// This means that omitting this argument is interpreted as ignoring any existing routes. To remove all managed routes an empty list should be specified. See the example above.
-	Route []RouteTableRouteObservation_2 `json:"route,omitempty" tf:"route,omitempty"`
+	Route []RouteTableRouteObservation `json:"route,omitempty" tf:"route,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -47,7 +47,7 @@ type RouteTableObservation_2 struct {
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
-type RouteTableParameters_2 struct {
+type RouteTableParameters struct {
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -72,10 +72,10 @@ type RouteTableParameters_2 struct {
 	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
-type RouteTableRouteInitParameters_2 struct {
+type RouteTableRouteInitParameters struct {
 }
 
-type RouteTableRouteObservation_2 struct {
+type RouteTableRouteObservation struct {
 
 	// Identifier of a carrier gateway. This attribute can only be used when the VPC contains a subnet which is associated with a Wavelength Zone.
 	CarrierGatewayID *string `json:"carrierGatewayId,omitempty" tf:"carrier_gateway_id,omitempty"`
@@ -120,13 +120,13 @@ type RouteTableRouteObservation_2 struct {
 	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
 }
 
-type RouteTableRouteParameters_2 struct {
+type RouteTableRouteParameters struct {
 }
 
 // RouteTableSpec defines the desired state of RouteTable
 type RouteTableSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     RouteTableParameters_2 `json:"forProvider"`
+	ForProvider     RouteTableParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -138,13 +138,13 @@ type RouteTableSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider RouteTableInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider RouteTableInitParameters `json:"initProvider,omitempty"`
 }
 
 // RouteTableStatus defines the observed state of RouteTable.
 type RouteTableStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        RouteTableObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        RouteTableObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -59,7 +59,7 @@ type RequesterObservation struct {
 type RequesterParameters struct {
 }
 
-type VPCPeeringConnectionInitParameters_2 struct {
+type VPCPeeringConnectionInitParameters struct {
 
 	// Accept the peering (both VPCs need to be in the same AWS account and region).
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
@@ -76,7 +76,7 @@ type VPCPeeringConnectionInitParameters_2 struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type VPCPeeringConnectionObservation_2 struct {
+type VPCPeeringConnectionObservation struct {
 
 	// The status of the VPC Peering Connection request.
 	AcceptStatus *string `json:"acceptStatus,omitempty" tf:"accept_status,omitempty"`
@@ -116,7 +116,7 @@ type VPCPeeringConnectionObservation_2 struct {
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
-type VPCPeeringConnectionParameters_2 struct {
+type VPCPeeringConnectionParameters struct {
 
 	// Accept the peering (both VPCs need to be in the same AWS account and region).
 	// +kubebuilder:validation:Optional
@@ -171,7 +171,7 @@ type VPCPeeringConnectionParameters_2 struct {
 // VPCPeeringConnectionSpec defines the desired state of VPCPeeringConnection
 type VPCPeeringConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCPeeringConnectionParameters_2 `json:"forProvider"`
+	ForProvider     VPCPeeringConnectionParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -183,13 +183,13 @@ type VPCPeeringConnectionSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider VPCPeeringConnectionInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider VPCPeeringConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCPeeringConnectionStatus defines the observed state of VPCPeeringConnection.
 type VPCPeeringConnectionStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCPeeringConnectionObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        VPCPeeringConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

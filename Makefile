@@ -14,7 +14,8 @@ export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/hashicorp/te
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-aws
 export TERRAFORM_DOCS_PATH ?= website/docs/r
 
-PLATFORMS ?= linux_amd64 linux_arm64
+# PLATFORMS ?= linux_amd64 linux_arm64
+PLATFORMS ?= linux_amd64
 
 export PROJECT_NAME := $(PROJECT_NAME)
 

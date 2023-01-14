@@ -16,24 +16,6 @@ func (l *AliasList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this CodeSigningConfigList.
-func (l *CodeSigningConfigList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this EventSourceMappingList.
-func (l *EventSourceMappingList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this FunctionEventInvokeConfigList.
 func (l *FunctionEventInvokeConfigList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -52,53 +34,8 @@ func (l *FunctionList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this FunctionURLList.
-func (l *FunctionURLList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this InvocationList.
-func (l *InvocationList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this LayerVersionList.
-func (l *LayerVersionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this LayerVersionPermissionList.
-func (l *LayerVersionPermissionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this PermissionList.
 func (l *PermissionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this ProvisionedConcurrencyConfigList.
-func (l *ProvisionedConcurrencyConfigList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

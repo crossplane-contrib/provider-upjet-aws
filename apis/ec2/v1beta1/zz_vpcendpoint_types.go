@@ -47,7 +47,7 @@ type DNSOptionsParameters struct {
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
 }
 
-type VPCEndpointInitParameters_2 struct {
+type VPCEndpointInitParameters struct {
 
 	// Accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
@@ -65,6 +65,9 @@ type VPCEndpointInitParameters_2 struct {
 	// Defaults to false.
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
+	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook).
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -72,7 +75,7 @@ type VPCEndpointInitParameters_2 struct {
 	VPCEndpointType *string `json:"vpcEndpointType,omitempty" tf:"vpc_endpoint_type,omitempty"`
 }
 
-type VPCEndpointObservation_2 struct {
+type VPCEndpointObservation struct {
 
 	// The Amazon Resource Name (ARN) of the VPC endpoint.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -143,7 +146,7 @@ type VPCEndpointObservation_2 struct {
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
-type VPCEndpointParameters_2 struct {
+type VPCEndpointParameters struct {
 
 	// Accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).
 	// +kubebuilder:validation:Optional
@@ -172,18 +175,8 @@ type VPCEndpointParameters_2 struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCEndpointService
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("service_name",true)
 	// +kubebuilder:validation:Optional
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
-
-	// Reference to a VPCEndpointService in ec2 to populate serviceName.
-	// +kubebuilder:validation:Optional
-	ServiceNameRef *v1.Reference `json:"serviceNameRef,omitempty" tf:"-"`
-
-	// Selector for a VPCEndpointService in ec2 to populate serviceName.
-	// +kubebuilder:validation:Optional
-	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -210,7 +203,7 @@ type VPCEndpointParameters_2 struct {
 // VPCEndpointSpec defines the desired state of VPCEndpoint
 type VPCEndpointSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCEndpointParameters_2 `json:"forProvider"`
+	ForProvider     VPCEndpointParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -222,13 +215,13 @@ type VPCEndpointSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider VPCEndpointInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider VPCEndpointInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCEndpointStatus defines the observed state of VPCEndpoint.
 type VPCEndpointStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCEndpointObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        VPCEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -243,8 +236,9 @@ type VPCEndpointStatus struct {
 type VPCEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPCEndpointSpec   `json:"spec"`
-	Status            VPCEndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceName) || has(self.initProvider.serviceName)",message="serviceName is a required parameter"
+	Spec   VPCEndpointSpec   `json:"spec"`
+	Status VPCEndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

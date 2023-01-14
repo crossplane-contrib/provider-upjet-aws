@@ -387,6 +387,9 @@ type DynamodbTargetParameters struct {
 
 type JdbcTargetInitParameters struct {
 
+	// The name of the connection to use to connect to the JDBC target.
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
 	// Specify a value of RAWTYPES or COMMENTS to enable additional metadata intable responses. RAWTYPES provides the native-level datatype. COMMENTS provides comments associated with a column or table in the database.
 	EnableAdditionalMetadata []*string `json:"enableAdditionalMetadata,omitempty" tf:"enable_additional_metadata,omitempty"`
 
@@ -415,17 +418,8 @@ type JdbcTargetObservation struct {
 type JdbcTargetParameters struct {
 
 	// The name of the connection to use to connect to the JDBC target.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Connection
 	// +kubebuilder:validation:Optional
 	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
-
-	// Reference to a Connection in glue to populate connectionName.
-	// +kubebuilder:validation:Optional
-	ConnectionNameRef *v1.Reference `json:"connectionNameRef,omitempty" tf:"-"`
-
-	// Selector for a Connection in glue to populate connectionName.
-	// +kubebuilder:validation:Optional
-	ConnectionNameSelector *v1.Selector `json:"connectionNameSelector,omitempty" tf:"-"`
 
 	// Specify a value of RAWTYPES or COMMENTS to enable additional metadata intable responses. RAWTYPES provides the native-level datatype. COMMENTS provides comments associated with a column or table in the database.
 	// +kubebuilder:validation:Optional
@@ -490,6 +484,9 @@ type LineageConfigurationParameters struct {
 
 type MongodbTargetInitParameters struct {
 
+	// The name of the connection to use to connect to the JDBC target.
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
 	// The name of the DynamoDB table to crawl.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
@@ -512,17 +509,8 @@ type MongodbTargetObservation struct {
 type MongodbTargetParameters struct {
 
 	// The name of the connection to use to connect to the JDBC target.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Connection
 	// +kubebuilder:validation:Optional
 	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
-
-	// Reference to a Connection in glue to populate connectionName.
-	// +kubebuilder:validation:Optional
-	ConnectionNameRef *v1.Reference `json:"connectionNameRef,omitempty" tf:"-"`
-
-	// Selector for a Connection in glue to populate connectionName.
-	// +kubebuilder:validation:Optional
-	ConnectionNameSelector *v1.Selector `json:"connectionNameSelector,omitempty" tf:"-"`
 
 	// The name of the DynamoDB table to crawl.
 	// +kubebuilder:validation:Optional

@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type SecurityGroupRuleInitParameters_2 struct {
+type SecurityGroupRuleInitParameters struct {
 
 	// List of CIDR blocks. Cannot be specified with source_security_group_id or self.
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
@@ -41,7 +41,7 @@ type SecurityGroupRuleInitParameters_2 struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type SecurityGroupRuleObservation_2 struct {
+type SecurityGroupRuleObservation struct {
 
 	// List of CIDR blocks. Cannot be specified with source_security_group_id or self.
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
@@ -84,7 +84,7 @@ type SecurityGroupRuleObservation_2 struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type SecurityGroupRuleParameters_2 struct {
+type SecurityGroupRuleParameters struct {
 
 	// List of CIDR blocks. Cannot be specified with source_security_group_id or self.
 	// +kubebuilder:validation:Optional
@@ -169,7 +169,7 @@ type SecurityGroupRuleParameters_2 struct {
 // SecurityGroupRuleSpec defines the desired state of SecurityGroupRule
 type SecurityGroupRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     SecurityGroupRuleParameters_2 `json:"forProvider"`
+	ForProvider     SecurityGroupRuleParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -181,13 +181,13 @@ type SecurityGroupRuleSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider SecurityGroupRuleInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider SecurityGroupRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecurityGroupRuleStatus defines the observed state of SecurityGroupRule.
 type SecurityGroupRuleStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecurityGroupRuleObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        SecurityGroupRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

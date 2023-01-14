@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type NATGatewayInitParameters_2 struct {
+type NATGatewayInitParameters struct {
 
 	// Connectivity type for the gateway. Valid values are private and public. Defaults to public.
 	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`
@@ -25,7 +25,7 @@ type NATGatewayInitParameters_2 struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type NATGatewayObservation_2 struct {
+type NATGatewayObservation struct {
 
 	// The Allocation ID of the Elastic IP address for the gateway. Required for connectivity_type of public.
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
@@ -58,7 +58,7 @@ type NATGatewayObservation_2 struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type NATGatewayParameters_2 struct {
+type NATGatewayParameters struct {
 
 	// The Allocation ID of the Elastic IP address for the gateway. Required for connectivity_type of public.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EIP
@@ -108,7 +108,7 @@ type NATGatewayParameters_2 struct {
 // NATGatewaySpec defines the desired state of NATGateway
 type NATGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     NATGatewayParameters_2 `json:"forProvider"`
+	ForProvider     NATGatewayParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -120,13 +120,13 @@ type NATGatewaySpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider NATGatewayInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider NATGatewayInitParameters `json:"initProvider,omitempty"`
 }
 
 // NATGatewayStatus defines the observed state of NATGateway.
 type NATGatewayStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        NATGatewayObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        NATGatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

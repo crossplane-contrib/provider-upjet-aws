@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type SubnetInitParameters_2 struct {
+type SubnetInitParameters struct {
 
 	// Specify true to indicate
 	// that network interfaces created in the specified subnet should be
@@ -69,7 +69,7 @@ type SubnetInitParameters_2 struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type SubnetObservation_2 struct {
+type SubnetObservation struct {
 
 	// The ARN of the subnet.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -143,7 +143,7 @@ type SubnetObservation_2 struct {
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
-type SubnetParameters_2 struct {
+type SubnetParameters struct {
 
 	// Specify true to indicate
 	// that network interfaces created in the specified subnet should be
@@ -236,7 +236,7 @@ type SubnetParameters_2 struct {
 // SubnetSpec defines the desired state of Subnet
 type SubnetSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     SubnetParameters_2 `json:"forProvider"`
+	ForProvider     SubnetParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -248,13 +248,13 @@ type SubnetSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider SubnetInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider SubnetInitParameters `json:"initProvider,omitempty"`
 }
 
 // SubnetStatus defines the observed state of Subnet.
 type SubnetStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubnetObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        SubnetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

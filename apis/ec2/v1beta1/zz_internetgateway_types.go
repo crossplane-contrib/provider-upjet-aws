@@ -13,13 +13,13 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type InternetGatewayInitParameters_2 struct {
+type InternetGatewayInitParameters struct {
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type InternetGatewayObservation_2 struct {
+type InternetGatewayObservation struct {
 
 	// The ARN of the Internet Gateway.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -40,7 +40,7 @@ type InternetGatewayObservation_2 struct {
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
-type InternetGatewayParameters_2 struct {
+type InternetGatewayParameters struct {
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -68,7 +68,7 @@ type InternetGatewayParameters_2 struct {
 // InternetGatewaySpec defines the desired state of InternetGateway
 type InternetGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     InternetGatewayParameters_2 `json:"forProvider"`
+	ForProvider     InternetGatewayParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -80,13 +80,13 @@ type InternetGatewaySpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider InternetGatewayInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider InternetGatewayInitParameters `json:"initProvider,omitempty"`
 }
 
 // InternetGatewayStatus defines the observed state of InternetGateway.
 type InternetGatewayStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        InternetGatewayObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        InternetGatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

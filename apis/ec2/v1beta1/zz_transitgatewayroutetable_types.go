@@ -13,13 +13,13 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type TransitGatewayRouteTableInitParameters_2 struct {
+type TransitGatewayRouteTableInitParameters struct {
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type TransitGatewayRouteTableObservation_2 struct {
+type TransitGatewayRouteTableObservation struct {
 
 	// EC2 Transit Gateway Route Table Amazon Resource Name (ARN).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -43,7 +43,7 @@ type TransitGatewayRouteTableObservation_2 struct {
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 }
 
-type TransitGatewayRouteTableParameters_2 struct {
+type TransitGatewayRouteTableParameters struct {
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -71,7 +71,7 @@ type TransitGatewayRouteTableParameters_2 struct {
 // TransitGatewayRouteTableSpec defines the desired state of TransitGatewayRouteTable
 type TransitGatewayRouteTableSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     TransitGatewayRouteTableParameters_2 `json:"forProvider"`
+	ForProvider     TransitGatewayRouteTableParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -83,13 +83,13 @@ type TransitGatewayRouteTableSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider TransitGatewayRouteTableInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider TransitGatewayRouteTableInitParameters `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayRouteTableStatus defines the observed state of TransitGatewayRouteTable.
 type TransitGatewayRouteTableStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayRouteTableObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        TransitGatewayRouteTableObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

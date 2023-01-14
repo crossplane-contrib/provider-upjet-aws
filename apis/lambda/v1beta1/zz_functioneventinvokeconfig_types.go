@@ -13,55 +13,29 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type DestinationConfigOnFailureInitParameters struct {
-}
-
-type DestinationConfigOnFailureObservation struct {
-
-	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
-	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
-}
-
-type DestinationConfigOnFailureParameters struct {
-
-	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
-	// +kubebuilder:validation:Optional
-	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
-
-	// Reference to a Queue in sqs to populate destination.
-	// +kubebuilder:validation:Optional
-	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
-
-	// Selector for a Queue in sqs to populate destination.
-	// +kubebuilder:validation:Optional
-	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
-}
-
-type FunctionEventInvokeConfigDestinationConfigInitParameters struct {
+type DestinationConfigInitParameters struct {
 
 	// Configuration block with destination configuration for failed asynchronous invocations. See below for details.
-	OnFailure []DestinationConfigOnFailureInitParameters `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+	OnFailure []OnFailureInitParameters `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
 
 	// Configuration block with destination configuration for successful asynchronous invocations. See below for details.
 	OnSuccess []OnSuccessInitParameters `json:"onSuccess,omitempty" tf:"on_success,omitempty"`
 }
 
-type FunctionEventInvokeConfigDestinationConfigObservation struct {
+type DestinationConfigObservation struct {
 
 	// Configuration block with destination configuration for failed asynchronous invocations. See below for details.
-	OnFailure []DestinationConfigOnFailureObservation `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+	OnFailure []OnFailureObservation `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
 
 	// Configuration block with destination configuration for successful asynchronous invocations. See below for details.
 	OnSuccess []OnSuccessObservation `json:"onSuccess,omitempty" tf:"on_success,omitempty"`
 }
 
-type FunctionEventInvokeConfigDestinationConfigParameters struct {
+type DestinationConfigParameters struct {
 
 	// Configuration block with destination configuration for failed asynchronous invocations. See below for details.
 	// +kubebuilder:validation:Optional
-	OnFailure []DestinationConfigOnFailureParameters `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+	OnFailure []OnFailureParameters `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
 
 	// Configuration block with destination configuration for successful asynchronous invocations. See below for details.
 	// +kubebuilder:validation:Optional
@@ -71,7 +45,7 @@ type FunctionEventInvokeConfigDestinationConfigParameters struct {
 type FunctionEventInvokeConfigInitParameters struct {
 
 	// Configuration block with destination configuration. See below for details.
-	DestinationConfig []FunctionEventInvokeConfigDestinationConfigInitParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
+	DestinationConfig []DestinationConfigInitParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
 	// Name or Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
@@ -89,7 +63,7 @@ type FunctionEventInvokeConfigInitParameters struct {
 type FunctionEventInvokeConfigObservation struct {
 
 	// Configuration block with destination configuration. See below for details.
-	DestinationConfig []FunctionEventInvokeConfigDestinationConfigObservation `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
+	DestinationConfig []DestinationConfigObservation `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
 	// Name or Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
@@ -111,7 +85,7 @@ type FunctionEventInvokeConfigParameters struct {
 
 	// Configuration block with destination configuration. See below for details.
 	// +kubebuilder:validation:Optional
-	DestinationConfig []FunctionEventInvokeConfigDestinationConfigParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
+	DestinationConfig []DestinationConfigParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
 	// Name or Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
 	// +kubebuilder:validation:Optional
@@ -133,6 +107,32 @@ type FunctionEventInvokeConfigParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+}
+
+type OnFailureInitParameters struct {
+}
+
+type OnFailureObservation struct {
+
+	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+}
+
+type OnFailureParameters struct {
+
+	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// Reference to a Queue in sqs to populate destination.
+	// +kubebuilder:validation:Optional
+	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in sqs to populate destination.
+	// +kubebuilder:validation:Optional
+	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
 }
 
 type OnSuccessInitParameters struct {

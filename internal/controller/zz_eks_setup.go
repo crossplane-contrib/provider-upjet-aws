@@ -12,8 +12,6 @@ import (
 	addon "github.com/upbound/provider-aws/internal/controller/eks/addon"
 	cluster "github.com/upbound/provider-aws/internal/controller/eks/cluster"
 	clusterauth "github.com/upbound/provider-aws/internal/controller/eks/clusterauth"
-	fargateprofile "github.com/upbound/provider-aws/internal/controller/eks/fargateprofile"
-	identityproviderconfig "github.com/upbound/provider-aws/internal/controller/eks/identityproviderconfig"
 	nodegroup "github.com/upbound/provider-aws/internal/controller/eks/nodegroup"
 )
 
@@ -24,8 +22,6 @@ func Setup_eks(mgr ctrl.Manager, o controller.Options) error {
 		addon.Setup,
 		cluster.Setup,
 		clusterauth.Setup,
-		fargateprofile.Setup,
-		identityproviderconfig.Setup,
 		nodegroup.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {

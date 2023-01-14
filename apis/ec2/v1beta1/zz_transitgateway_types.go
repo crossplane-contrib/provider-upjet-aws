@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type TransitGatewayInitParameters_2 struct {
+type TransitGatewayInitParameters struct {
 
 	// Private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. Default value: 64512.
 	AmazonSideAsn *float64 `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
@@ -46,7 +46,7 @@ type TransitGatewayInitParameters_2 struct {
 	VPNEcmpSupport *string `json:"vpnEcmpSupport,omitempty" tf:"vpn_ecmp_support,omitempty"`
 }
 
-type TransitGatewayObservation_2 struct {
+type TransitGatewayObservation struct {
 
 	// Private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. Default value: 64512.
 	AmazonSideAsn *float64 `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
@@ -97,7 +97,7 @@ type TransitGatewayObservation_2 struct {
 	VPNEcmpSupport *string `json:"vpnEcmpSupport,omitempty" tf:"vpn_ecmp_support,omitempty"`
 }
 
-type TransitGatewayParameters_2 struct {
+type TransitGatewayParameters struct {
 
 	// Private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. Default value: 64512.
 	// +kubebuilder:validation:Optional
@@ -148,7 +148,7 @@ type TransitGatewayParameters_2 struct {
 // TransitGatewaySpec defines the desired state of TransitGateway
 type TransitGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     TransitGatewayParameters_2 `json:"forProvider"`
+	ForProvider     TransitGatewayParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -160,13 +160,13 @@ type TransitGatewaySpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider TransitGatewayInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider TransitGatewayInitParameters `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayStatus defines the observed state of TransitGateway.
 type TransitGatewayStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        TransitGatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

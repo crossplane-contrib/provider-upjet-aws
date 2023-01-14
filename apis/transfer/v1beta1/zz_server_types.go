@@ -188,6 +188,12 @@ type ProtocolDetailsParameters struct {
 
 type ServerInitParameters struct {
 
+	// The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. This is required when protocols is set to FTPS
+	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// The directory service ID of the directory service you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
+	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
+
 	// The domain of the storage system that is used for file transfers. Valid values are: S3 and EFS. The default value is S3.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
@@ -300,32 +306,12 @@ type ServerObservation struct {
 type ServerParameters struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. This is required when protocols is set to FTPS
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acm/v1beta1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
-	// Reference to a Certificate in acm to populate certificate.
-	// +kubebuilder:validation:Optional
-	CertificateRef *v1.Reference `json:"certificateRef,omitempty" tf:"-"`
-
-	// Selector for a Certificate in acm to populate certificate.
-	// +kubebuilder:validation:Optional
-	CertificateSelector *v1.Selector `json:"certificateSelector,omitempty" tf:"-"`
-
 	// The directory service ID of the directory service you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ds/v1beta1.Directory
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
-
-	// Reference to a Directory in ds to populate directoryId.
-	// +kubebuilder:validation:Optional
-	DirectoryIDRef *v1.Reference `json:"directoryIdRef,omitempty" tf:"-"`
-
-	// Selector for a Directory in ds to populate directoryId.
-	// +kubebuilder:validation:Optional
-	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
 	// The domain of the storage system that is used for file transfers. Valid values are: S3 and EFS. The default value is S3.
 	// +kubebuilder:validation:Optional

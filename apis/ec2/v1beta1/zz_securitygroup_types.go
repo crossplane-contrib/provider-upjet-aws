@@ -13,10 +13,10 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type SecurityGroupEgressInitParameters struct {
+type EgressInitParameters struct {
 }
 
-type SecurityGroupEgressObservation struct {
+type EgressObservation struct {
 
 	// List of CIDR blocks.
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
@@ -46,13 +46,13 @@ type SecurityGroupEgressObservation struct {
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
-type SecurityGroupEgressParameters struct {
+type EgressParameters struct {
 }
 
-type SecurityGroupIngressInitParameters struct {
+type IngressInitParameters struct {
 }
 
-type SecurityGroupIngressObservation struct {
+type IngressObservation struct {
 
 	// List of CIDR blocks.
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
@@ -82,10 +82,10 @@ type SecurityGroupIngressObservation struct {
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
-type SecurityGroupIngressParameters struct {
+type IngressParameters struct {
 }
 
-type SecurityGroupInitParameters_2 struct {
+type SecurityGroupInitParameters struct {
 
 	// Security group description. Cannot be "". NOTE: This field maps to the AWS GroupDescription attribute, for which there is no Update API. If you'd like to classify your security groups in a way that can be updated, use tags.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -100,7 +100,7 @@ type SecurityGroupInitParameters_2 struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type SecurityGroupObservation_2 struct {
+type SecurityGroupObservation struct {
 
 	// ARN of the security group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -109,13 +109,13 @@ type SecurityGroupObservation_2 struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Configuration block for egress rules. Can be specified multiple times for each egress rule. Each egress block supports fields documented below. This argument is processed in attribute-as-blocks mode.
-	Egress []SecurityGroupEgressObservation `json:"egress,omitempty" tf:"egress,omitempty"`
+	Egress []EgressObservation `json:"egress,omitempty" tf:"egress,omitempty"`
 
 	// ID of the security group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Configuration block for ingress rules. Can be specified multiple times for each ingress rule. Each ingress block supports fields documented below. This argument is processed in attribute-as-blocks mode.
-	Ingress []SecurityGroupIngressObservation `json:"ingress,omitempty" tf:"ingress,omitempty"`
+	Ingress []IngressObservation `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
 	// Name of the security group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -136,7 +136,7 @@ type SecurityGroupObservation_2 struct {
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
-type SecurityGroupParameters_2 struct {
+type SecurityGroupParameters struct {
 
 	// Security group description. Cannot be "". NOTE: This field maps to the AWS GroupDescription attribute, for which there is no Update API. If you'd like to classify your security groups in a way that can be updated, use tags.
 	// +kubebuilder:validation:Optional
@@ -176,7 +176,7 @@ type SecurityGroupParameters_2 struct {
 // SecurityGroupSpec defines the desired state of SecurityGroup
 type SecurityGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     SecurityGroupParameters_2 `json:"forProvider"`
+	ForProvider     SecurityGroupParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -188,13 +188,13 @@ type SecurityGroupSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider SecurityGroupInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider SecurityGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecurityGroupStatus defines the observed state of SecurityGroup.
 type SecurityGroupStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecurityGroupObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        SecurityGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
