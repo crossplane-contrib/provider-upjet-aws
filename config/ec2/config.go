@@ -198,6 +198,11 @@ func Configure(p *config.Provider) {
 		r.References["source_security_group_id"] = config.Reference{
 			Type: "SecurityGroup",
 		}
+		r.References["prefix_list_ids"] = config.Reference{
+			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList",
+			RefFieldName:      "PrefixListIDRefs",
+			SelectorFieldName: "PrefixListIDSelector",
+		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
 				"cidr_blocks",

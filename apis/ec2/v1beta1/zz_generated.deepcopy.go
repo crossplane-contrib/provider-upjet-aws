@@ -19084,6 +19084,18 @@ func (in *SecurityGroupRuleParameters_2) DeepCopyInto(out *SecurityGroupRulePara
 			}
 		}
 	}
+	if in.PrefixListIDRefs != nil {
+		in, out := &in.PrefixListIDRefs, &out.PrefixListIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.PrefixListIDSelector != nil {
+		in, out := &in.PrefixListIDSelector, &out.PrefixListIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PrefixListIds != nil {
 		in, out := &in.PrefixListIds, &out.PrefixListIds
 		*out = make([]*string, len(*in))
