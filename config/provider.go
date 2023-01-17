@@ -75,6 +75,7 @@ import (
 	"github.com/upbound/provider-aws/config/route53recoverycontrolconfig"
 	"github.com/upbound/provider-aws/config/route53resolver"
 	"github.com/upbound/provider-aws/config/s3"
+	"github.com/upbound/provider-aws/config/sagemaker"
 	"github.com/upbound/provider-aws/config/secretsmanager"
 	"github.com/upbound/provider-aws/config/servicecatalog"
 	"github.com/upbound/provider-aws/config/servicediscovery"
@@ -223,6 +224,7 @@ func GetProvider() *config.Provider {
 		fsx.Configure,
 		networkmanager.Configure,
 		opsworks.Configure,
+		sagemaker.Configure,
 	} {
 		configure(pc)
 	}
