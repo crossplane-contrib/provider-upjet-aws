@@ -32,8 +32,18 @@ type CustomImageParameters struct {
 	AppImageConfigNameSelector *v1.Selector `json:"appImageConfigNameSelector,omitempty" tf:"-"`
 
 	// The name of the Custom Image.
-	// +kubebuilder:validation:Required
-	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.ImageVersion
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("image_name",false)
+	// +kubebuilder:validation:Optional
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// Reference to a ImageVersion in sagemaker to populate imageName.
+	// +kubebuilder:validation:Optional
+	ImageNameRef *v1.Reference `json:"imageNameRef,omitempty" tf:"-"`
+
+	// Selector for a ImageVersion in sagemaker to populate imageName.
+	// +kubebuilder:validation:Optional
+	ImageNameSelector *v1.Selector `json:"imageNameSelector,omitempty" tf:"-"`
 
 	// The version number of the Custom Image.
 	// +kubebuilder:validation:Optional

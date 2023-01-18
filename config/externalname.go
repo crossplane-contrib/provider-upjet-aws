@@ -1930,6 +1930,25 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_sagemaker_studio_lifecycle_config": config.ParameterAsIdentifier("studio_lifecycle_config_name"),
 	// SageMaker User Profiles can be imported using the arn
 	"aws_sagemaker_user_profile": config.IdentifierFromProvider,
+	// SageMaker Apps can be imported using the id
+	"aws_sagemaker_app": config.IdentifierFromProvider,
+	// SageMaker Devices can be imported using the device-fleet-name/device-name
+	// my-fleet/my-device
+	"aws_sagemaker_device": config.IdentifierFromProvider,
+	// SageMaker Device Fleets can be imported using the name
+	"aws_sagemaker_device_fleet": config.ParameterAsIdentifier("device_fleet_name"),
+	// Models can be imported using the name
+	"aws_sagemaker_model": config.NameAsIdentifier,
+	// SageMaker Model Package Groups can be imported using the name
+	"aws_sagemaker_model_package_group_policy": config.IdentifierFromProvider,
+	// SageMaker Workforces can be imported using the workforce_name
+	"aws_sagemaker_workforce": config.ParameterAsIdentifier("workforce_name"),
+	// SageMaker Workteams can be imported using the workteam_name
+	"aws_sagemaker_workteam": config.ParameterAsIdentifier("workteam_name"),
+	// Endpoint configurations can be imported using the name
+	"aws_sagemaker_endpoint_configuration": config.NameAsIdentifier,
+	// SageMaker Code Images can be imported using the name
+	"aws_sagemaker_image_version": config.IdentifierFromProvider,
 
 	// elbv2
 	//
