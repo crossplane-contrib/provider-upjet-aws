@@ -14,15 +14,27 @@ import (
 )
 
 type VPCObservation struct {
-
-	// ID of the VPC to associate.
-	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
-
-	// Region of the VPC to associate. Defaults to AWS provider region.
-	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
 }
 
 type VPCParameters struct {
+
+	// ID of the VPC to associate.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+
+	// Region of the VPC to associate. Defaults to AWS provider region.
+	// +kubebuilder:validation:Optional
+	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
 }
 
 type ZoneObservation struct {
@@ -38,9 +50,6 @@ type ZoneObservation struct {
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
-
-	// Configuration block(s) specifying VPC(s) to associate with a private hosted zone. Conflicts with the delegation_set_id argument in this resource and any aws_route53_zone_association resource specifying the same zone ID. Detailed below.
-	VPC []VPCObservation `json:"vpc,omitempty" tf:"vpc,omitempty"`
 
 	// The Hosted Zone ID. This can be referenced by zone records.
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
@@ -80,6 +89,10 @@ type ZoneParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block(s) specifying VPC(s) to associate with a private hosted zone. Conflicts with the delegation_set_id argument in this resource and any aws_route53_zone_association resource specifying the same zone ID. Detailed below.
+	// +kubebuilder:validation:Optional
+	VPC []VPCParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 // ZoneSpec defines the desired state of Zone
