@@ -339,6 +339,7 @@ import (
 	vpcendpoint "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpoint"
 	vpcendpointconnectionnotification "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointconnectionnotification"
 	vpcendpointroutetableassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointroutetableassociation"
+	vpcendpointsecuritygroupassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointsecuritygroupassociation"
 	vpcendpointservice "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointservice"
 	vpcendpointserviceallowedprincipal "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointserviceallowedprincipal"
 	vpcendpointsubnetassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointsubnetassociation"
@@ -1140,6 +1141,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcendpoint.Setup,
 		vpcendpointconnectionnotification.Setup,
 		vpcendpointroutetableassociation.Setup,
+		vpcendpointsecuritygroupassociation.Setup,
 		vpcendpointservice.Setup,
 		vpcendpointserviceallowedprincipal.Setup,
 		vpcendpointsubnetassociation.Setup,

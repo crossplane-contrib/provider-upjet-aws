@@ -673,6 +673,15 @@ func (l *VPCEndpointRouteTableAssociationList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this VPCEndpointSecurityGroupAssociationList.
+func (l *VPCEndpointSecurityGroupAssociationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this VPCEndpointServiceAllowedPrincipalList.
 func (l *VPCEndpointServiceAllowedPrincipalList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
