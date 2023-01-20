@@ -6,6 +6,7 @@ metadata:
   name: sg-ec2
 spec:
   forProvider:
+    region: us-west-1
     securityGroupIdSelector:
       matchLabels:
         testing.upbound.io/example-name: securitygroup1
