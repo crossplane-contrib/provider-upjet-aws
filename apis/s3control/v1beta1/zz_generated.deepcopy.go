@@ -146,6 +146,11 @@ func (in *AccessPointParameters) DeepCopyInto(out *AccessPointParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketAccountID != nil {
+		in, out := &in.BucketAccountID, &out.BucketAccountID
+		*out = new(string)
+		**out = **in
+	}
 	if in.BucketRef != nil {
 		in, out := &in.BucketRef, &out.BucketRef
 		*out = new(v1.Reference)

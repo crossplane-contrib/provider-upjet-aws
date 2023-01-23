@@ -68,6 +68,10 @@ type CodeConfigurationValuesParameters struct {
 	// +kubebuilder:validation:Required
 	Runtime *string `json:"runtime" tf:"runtime,omitempty"`
 
+	// Secrets and parameters available to your service as environment variables. A map of key/value pairs.
+	// +kubebuilder:validation:Optional
+	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
+
 	// Environment variables available to your running App Runner service. A map of key/value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
 	// +kubebuilder:validation:Optional
 	RuntimeEnvironmentVariables map[string]*string `json:"runtimeEnvironmentVariables,omitempty" tf:"runtime_environment_variables,omitempty"`
@@ -168,6 +172,10 @@ type ImageConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Secrets and parameters available to your service as environment variables. A map of key/value pairs.
+	// +kubebuilder:validation:Optional
+	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
+
 	// Environment variables available to your running App Runner service. A map of key/value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
 	// +kubebuilder:validation:Optional
 	RuntimeEnvironmentVariables map[string]*string `json:"runtimeEnvironmentVariables,omitempty" tf:"runtime_environment_variables,omitempty"`
@@ -243,9 +251,9 @@ type ObservabilityConfigurationObservation struct {
 
 type ObservabilityConfigurationParameters struct {
 
-	// ARN of the observability configuration that is associated with the service.
-	// +kubebuilder:validation:Required
-	ObservabilityConfigurationArn *string `json:"observabilityConfigurationArn" tf:"observability_configuration_arn,omitempty"`
+	// ARN of the observability configuration that is associated with the service. Specified only when observability_enabled is true.
+	// +kubebuilder:validation:Optional
+	ObservabilityConfigurationArn *string `json:"observabilityConfigurationArn,omitempty" tf:"observability_configuration_arn,omitempty"`
 
 	// When true, an observability configuration resource is associated with the service.
 	// +kubebuilder:validation:Required

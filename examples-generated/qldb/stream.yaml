@@ -10,7 +10,7 @@ spec:
   forProvider:
     inclusiveStartTime: "2021-01-01T00:00:00Z"
     kinesisConfiguration:
-    - aggegation_enabled: false
+    - aggregationEnabled: false
       streamArnSelector:
         matchLabels:
           testing.upbound.io/example-name: example

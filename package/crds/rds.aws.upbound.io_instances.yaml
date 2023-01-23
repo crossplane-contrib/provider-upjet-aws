@@ -101,7 +101,7 @@ spec:
                       Must not overlap with maintenance_window.'
                     type: string
                   blueGreenUpdate:
-                    description: Enables low-downtime updates using RRDS Blue/Green
+                    description: Enables low-downtime updates using RDS Blue/Green
                       deployments. See blue_green_update below
                     items:
                       properties:

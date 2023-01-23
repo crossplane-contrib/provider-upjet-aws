@@ -18,6 +18,10 @@ type ActionWeightedTargetObservation struct {
 
 type ActionWeightedTargetParameters struct {
 
+	// The port number to match from the request.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	VirtualNode *string `json:"virtualNode" tf:"virtual_node,omitempty"`
@@ -51,6 +55,10 @@ type GRPCRouteMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	MethodName *string `json:"methodName,omitempty" tf:"method_name,omitempty"`
 
+	// The port number to match from the request.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -64,6 +72,10 @@ type HTTPRouteActionWeightedTargetObservation struct {
 }
 
 type HTTPRouteActionWeightedTargetParameters struct {
+
+	// The port number to match from the request.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualNode
@@ -604,6 +616,10 @@ type SpecHTTPRouteMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
+	// The port number to match from the request.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
@@ -659,6 +675,10 @@ type SpecHttp2RouteMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
+	// The port number to match from the request.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
 	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
@@ -706,6 +726,10 @@ type TCPRouteActionWeightedTargetObservation struct {
 
 type TCPRouteActionWeightedTargetParameters struct {
 
+	// The port number to match from the request.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualNode
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
@@ -725,6 +749,16 @@ type TCPRouteActionWeightedTargetParameters struct {
 	Weight *float64 `json:"weight" tf:"weight,omitempty"`
 }
 
+type TCPRouteMatchObservation struct {
+}
+
+type TCPRouteMatchParameters struct {
+
+	// The port number to match from the request.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+}
+
 type TCPRouteObservation struct {
 }
 
@@ -733,6 +767,10 @@ type TCPRouteParameters struct {
 	// Action to take if a match is determined.
 	// +kubebuilder:validation:Required
 	Action []TCPRouteActionParameters `json:"action" tf:"action,omitempty"`
+
+	// Criteria for determining an gRPC request match.
+	// +kubebuilder:validation:Optional
+	Match []TCPRouteMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Types of timeouts.
 	// +kubebuilder:validation:Optional
@@ -809,6 +847,10 @@ type WeightedTargetObservation struct {
 }
 
 type WeightedTargetParameters struct {
+
+	// The port number to match from the request.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required

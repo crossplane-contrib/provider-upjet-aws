@@ -75,8 +75,8 @@ spec:
                             access logs. Any trailing :* is trimmed from the ARN.
                           type: string
                         format:
-                          description: Single line format of the access logs of data,
-                            as specified by selected $context variables.
+                          description: Single line format of the access logs of data.
+                            Refer to log settings for HTTP or Websocket.
                           type: string
                       required:
                       - destinationArn
@@ -287,28 +287,28 @@ spec:
                       properties:
                         dataTraceEnabled:
                           description: Whether data trace logging is enabled for the
-                            default route. Affects the log entries pushed to Amazon
-                            CloudWatch Logs. Defaults to false. Supported only for
-                            WebSocket APIs.
+                            route. Affects the log entries pushed to Amazon CloudWatch
+                            Logs. Defaults to false. Supported only for WebSocket
+                            APIs.
                           type: boolean
                         detailedMetricsEnabled:
                           description: Whether detailed metrics are enabled for the
-                            default route. Defaults to false.
+                            route. Defaults to false.
                           type: boolean
                         loggingLevel:
-                          description: 'Logging level for the default route. Affects
-                            the log entries pushed to Amazon CloudWatch Logs. Valid
-                            values: ERROR, INFO, OFF. Defaults to OFF. Supported only
-                            for WebSocket APIs.'
+                          description: 'Logging level for the route. Affects the log
+                            entries pushed to Amazon CloudWatch Logs. Valid values:
+                            ERROR, INFO, OFF. Defaults to OFF. Supported only for
+                            WebSocket APIs.'
                           type: string
                         routeKey:
                           description: Route key.
                           type: string
                         throttlingBurstLimit:
-                          description: Throttling burst limit for the default route.
+                          description: Throttling burst limit for the route.
                           type: number
                         throttlingRateLimit:
-                          description: Throttling rate limit for the default route.
+                          description: Throttling rate limit for the route.
                           type: number
                       required:
                       - routeKey

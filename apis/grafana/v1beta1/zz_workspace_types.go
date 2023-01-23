@@ -56,6 +56,10 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Required
 	AuthenticationProviders []*string `json:"authenticationProviders" tf:"authentication_providers,omitempty"`
 
+	// The configuration string for the workspace that you create. For more information about the format and configuration options available, see Working in your Grafana workspace.
+	// +kubebuilder:validation:Optional
+	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
 	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, XRAY
 	// +kubebuilder:validation:Optional
 	DataSources []*string `json:"dataSources,omitempty" tf:"data_sources,omitempty"`

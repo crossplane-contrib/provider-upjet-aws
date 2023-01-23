@@ -33,18 +33,8 @@ type CustomImageParameters struct {
 	AppImageConfigName *string `json:"appImageConfigName" tf:"app_image_config_name,omitempty"`
 
 	// The name of the Custom Image.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.ImageVersion
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("image_name",false)
-	// +kubebuilder:validation:Optional
-	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
-
-	// Reference to a ImageVersion in sagemaker to populate imageName.
-	// +kubebuilder:validation:Optional
-	ImageNameRef *v1.Reference `json:"imageNameRef,omitempty" tf:"-"`
-
-	// Selector for a ImageVersion in sagemaker to populate imageName.
-	// +kubebuilder:validation:Optional
-	ImageNameSelector *v1.Selector `json:"imageNameSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
 
 	// The version number of the Custom Image.
 	// +kubebuilder:validation:Optional
@@ -172,7 +162,7 @@ type DefaultUserSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	CanvasAppSettings []CanvasAppSettingsParameters `json:"canvasAppSettings,omitempty" tf:"canvas_app_settings,omitempty"`
 
-	// The execution role for the space.
+	// The execution role ARN for the user.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -198,7 +188,7 @@ type DefaultUserSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	RSessionAppSettings []RSessionAppSettingsParameters `json:"rSessionAppSettings,omitempty" tf:"r_session_app_settings,omitempty"`
 
-	// The security groups for the Amazon Virtual Private Cloud that the space uses for communication.
+	// A list of security group IDs that will be attached to the user.
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
@@ -241,7 +231,7 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	AppNetworkAccessType *string `json:"appNetworkAccessType,omitempty" tf:"app_network_access_type,omitempty"`
 
-	// The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Valid values are Service and Customer.
+	// The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Valid values are Service and Customer.* domain_settings -  The domain settings. See Domain Settings below.
 	// +kubebuilder:validation:Optional
 	AppSecurityGroupManagement *string `json:"appSecurityGroupManagement,omitempty" tf:"app_security_group_management,omitempty"`
 
@@ -253,15 +243,14 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultSpaceSettings []DefaultSpaceSettingsParameters `json:"defaultSpaceSettings,omitempty" tf:"default_space_settings,omitempty"`
 
-	// The default user settings. See Default User Settings below.
+	// The default user settings. See Default User Settings below.* domain_name -  The domain name.
 	// +kubebuilder:validation:Required
 	DefaultUserSettings []DefaultUserSettingsParameters `json:"defaultUserSettings" tf:"default_user_settings,omitempty"`
 
-	// The domain name.
 	// +kubebuilder:validation:Required
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
-	// The domain settings. See Domain Settings below.
+	// The domain's settings.
 	// +kubebuilder:validation:Optional
 	DomainSettings []DomainSettingsParameters `json:"domainSettings,omitempty" tf:"domain_settings,omitempty"`
 
@@ -403,8 +392,18 @@ type KernelGatewayAppSettingsCustomImageParameters struct {
 	AppImageConfigNameSelector *v1.Selector `json:"appImageConfigNameSelector,omitempty" tf:"-"`
 
 	// The name of the Custom Image.
-	// +kubebuilder:validation:Required
-	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.ImageVersion
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("image_name",false)
+	// +kubebuilder:validation:Optional
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// Reference to a ImageVersion in sagemaker to populate imageName.
+	// +kubebuilder:validation:Optional
+	ImageNameRef *v1.Reference `json:"imageNameRef,omitempty" tf:"-"`
+
+	// Selector for a ImageVersion in sagemaker to populate imageName.
+	// +kubebuilder:validation:Optional
+	ImageNameSelector *v1.Selector `json:"imageNameSelector,omitempty" tf:"-"`
 
 	// The version number of the Custom Image.
 	// +kubebuilder:validation:Optional

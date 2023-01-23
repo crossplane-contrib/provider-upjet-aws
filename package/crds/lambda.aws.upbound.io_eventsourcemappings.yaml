@@ -263,6 +263,19 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  scalingConfig:
+                    description: Scaling configuration of the event source. Only available
+                      for SQS queues. Detailed below.
+                    items:
+                      properties:
+                        maximumConcurrency:
+                          description: Limits the number of concurrent instances that
+                            the Amazon SQS event source can invoke. Must be between
+                            2 and 1000. See Configuring maximum concurrency for Amazon
+                            SQS event sources.
+                          type: number
+                      type: object
+                    type: array
                   selfManagedEventSource:
                     description: For Self Managed Kafka sources, the location of the
                       self managed cluster. If set, configuration must also include

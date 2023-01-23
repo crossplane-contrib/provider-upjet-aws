@@ -34,6 +34,10 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EngineVersion []EngineVersionParameters `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
+	// Role used in a notebook session for accessing the user's resources.
+	// +kubebuilder:validation:Optional
+	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
+
 	// Boolean whether Amazon CloudWatch metrics are enabled for the workgroup. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PublishCloudwatchMetricsEnabled *bool `json:"publishCloudwatchMetricsEnabled,omitempty" tf:"publish_cloudwatch_metrics_enabled,omitempty"`

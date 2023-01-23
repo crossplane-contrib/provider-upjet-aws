@@ -340,8 +340,12 @@ spec:
                       Behavior for more information.
                     type: string
                   instanceType:
-                    description: Instance type to use for the instance. Updates to
-                      this field will trigger a stop/start of the EC2 instance.
+                    description: Instance type to use for the instance. Required unless
+                      launch_template is specified and the Launch Template specifies
+                      an instance type. If an instance type is specified in the Launch
+                      Template, setting instance_type will override the instance type
+                      specified in the Launch Template. Updates to this field will
+                      trigger a stop/start of the EC2 instance.
                     type: string
                   ipv6AddressCount:
                     description: Number of IPv6 addresses to associate with the primary

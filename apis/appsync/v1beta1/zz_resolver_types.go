@@ -18,11 +18,11 @@ type CachingConfigObservation struct {
 
 type CachingConfigParameters struct {
 
-	// List of caching key.
+	// The caching keys for a resolver that has caching activated. Valid values are entries from the $context.arguments, $context.source, and $context.identity maps.
 	// +kubebuilder:validation:Optional
 	CachingKeys []*string `json:"cachingKeys,omitempty" tf:"caching_keys,omitempty"`
 
-	// TTL in seconds.
+	// The TTL in seconds for a resolver that has caching activated. Valid values are between 1 and 3600 seconds.
 	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
@@ -32,7 +32,7 @@ type PipelineConfigObservation struct {
 
 type PipelineConfigParameters struct {
 
-	// List of Function ID.
+	// A list of Function objects.
 	// +kubebuilder:validation:Optional
 	Functions []*string `json:"functions,omitempty" tf:"functions,omitempty"`
 }
@@ -61,9 +61,13 @@ type ResolverParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// CachingConfig.
+	// The Caching Config. See Caching Config.
 	// +kubebuilder:validation:Optional
 	CachingConfig []CachingConfigParameters `json:"cachingConfig,omitempty" tf:"caching_config,omitempty"`
+
+	// The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+	// +kubebuilder:validation:Optional
+	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
 	// Data source name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.Datasource
@@ -90,7 +94,7 @@ type ResolverParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxBatchSize *float64 `json:"maxBatchSize,omitempty" tf:"max_batch_size,omitempty"`
 
-	// PipelineConfig.
+	// The caching configuration for the resolver. See Pipeline Config.
 	// +kubebuilder:validation:Optional
 	PipelineConfig []PipelineConfigParameters `json:"pipelineConfig,omitempty" tf:"pipeline_config,omitempty"`
 
@@ -107,6 +111,10 @@ type ResolverParameters struct {
 	// +kubebuilder:validation:Optional
 	ResponseTemplate *string `json:"responseTemplate,omitempty" tf:"response_template,omitempty"`
 
+	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See Runtime.
+	// +kubebuilder:validation:Optional
+	Runtime []ResolverRuntimeParameters `json:"runtime,omitempty" tf:"runtime,omitempty"`
+
 	// Describes a Sync configuration for a resolver. See Sync Config.
 	// +kubebuilder:validation:Optional
 	SyncConfig []ResolverSyncConfigParameters `json:"syncConfig,omitempty" tf:"sync_config,omitempty"`
@@ -114,6 +122,20 @@ type ResolverParameters struct {
 	// Type name from the schema defined in the GraphQL API.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type ResolverRuntimeObservation struct {
+}
+
+type ResolverRuntimeParameters struct {
+
+	// The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
+	// +kubebuilder:validation:Required
+	RuntimeVersion *string `json:"runtimeVersion" tf:"runtime_version,omitempty"`
 }
 
 type ResolverSyncConfigObservation struct {

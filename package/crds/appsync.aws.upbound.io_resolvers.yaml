@@ -143,19 +143,28 @@ spec:
                         type: object
                     type: object
                   cachingConfig:
-                    description: CachingConfig.
+                    description: The Caching Config. See Caching Config.
                     items:
                       properties:
                         cachingKeys:
-                          description: List of caching key.
+                          description: The caching keys for a resolver that has caching
+                            activated. Valid values are entries from the $context.arguments,
+                            $context.source, and $context.identity maps.
                           items:
                             type: string
                           type: array
                         ttl:
-                          description: TTL in seconds.
+                          description: The TTL in seconds for a resolver that has
+                            caching activated. Valid values are between 1 and 3600
+                            seconds.
                           type: number
                       type: object
                     type: array
+                  code:
+                    description: The function code that contains the request and response
+                      functions. When code is used, the runtime is required. The runtime
+                      value must be APPSYNC_JS.
+                    type: string
                   dataSource:
                     description: Data source name.
                     type: string
@@ -246,11 +255,12 @@ spec:
                       are between 0 and 2000.
                     type: number
                   pipelineConfig:
-                    description: PipelineConfig.
+                    description: The caching configuration for the resolver. See Pipeline
+                      Config.
                     items:
                       properties:
                         functions:
-                          description: List of Function ID.
+                          description: A list of Function objects.
                           items:
                             type: string
                           type: array
@@ -270,6 +280,26 @@ spec:
                       mapping template' for PIPELINE resolver. Required for non-Lambda
                       resolvers.
                     type: string
+                  runtime:
+                    description: Describes a runtime used by an AWS AppSync pipeline
+                      resolver or AWS AppSync function. Specifies the name and version
+                      of the runtime to use. Note that if a runtime is specified,
+                      code must also be specified. See Runtime.
+                    items:
+                      properties:
+                        name:
+                          description: The name of the runtime to use. Currently,
+                            the only allowed value is APPSYNC_JS.
+                          type: string
+                        runtimeVersion:
+                          description: The version of the runtime to use. Currently,
+                            the only allowed version is 1.0.0.
+                          type: string
+                      required:
+                      - name
+                      - runtimeVersion
+                      type: object
+                    type: array
                   syncConfig:
                     description: Describes a Sync configuration for a resolver. See
                       Sync Config.

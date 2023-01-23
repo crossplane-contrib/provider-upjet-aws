@@ -799,7 +799,6 @@ import (
 	xssmatchsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/xssmatchset"
 	ipsetwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/ipset"
 	regexpatternsetwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/regexpatternset"
-	rulegroupwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/rulegroup"
 	directoryworkspaces "github.com/upbound/provider-aws/internal/controller/workspaces/directory"
 	ipgroup "github.com/upbound/provider-aws/internal/controller/workspaces/ipgroup"
 	encryptionconfig "github.com/upbound/provider-aws/internal/controller/xray/encryptionconfig"
@@ -1601,7 +1600,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		xssmatchsetwafregional.Setup,
 		ipsetwafv2.Setup,
 		regexpatternsetwafv2.Setup,
-		rulegroupwafv2.Setup,
 		directoryworkspaces.Setup,
 		ipgroup.Setup,
 		encryptionconfig.Setup,

@@ -103,7 +103,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupWindow *string `json:"backupWindow,omitempty" tf:"backup_window,omitempty"`
 
-	// Enables low-downtime updates using RRDS Blue/Green deployments.
+	// Enables low-downtime updates using RDS Blue/Green deployments.
 	// See blue_green_update below
 	// +kubebuilder:validation:Optional
 	BlueGreenUpdate []BlueGreenUpdateParameters `json:"blueGreenUpdate,omitempty" tf:"blue_green_update,omitempty"`

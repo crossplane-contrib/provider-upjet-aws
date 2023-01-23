@@ -307,6 +307,105 @@ spec:
                     description: The time, in seconds, that OpsWorks will wait for
                       Chef to complete after triggering the Shutdown event.
                     type: number
+                  loadBasedAutoScaling:
+                    description: Load-based auto scaling configuration. See Load Based
+                      AutoScaling
+                    items:
+                      properties:
+                        downscaling:
+                          description: The downscaling settings, as defined below,
+                            used for load-based autoscaling
+                          items:
+                            properties:
+                              alarms:
+                                description: Custom Cloudwatch auto scaling alarms,
+                                  to be used as thresholds. This parameter takes a
+                                  list of up to five alarm names, which are case sensitive
+                                  and must be in the same region as the stack.
+                                items:
+                                  type: string
+                                type: array
+                              cpuThreshold:
+                                description: The CPU utilization threshold, as a percent
+                                  of the available CPU. A value of -1 disables the
+                                  threshold.
+                                type: number
+                              ignoreMetricsTime:
+                                description: The amount of time (in minutes) after
+                                  a scaling event occurs that AWS OpsWorks Stacks
+                                  should ignore metrics and suppress additional scaling
+                                  events.
+                                type: number
+                              instanceCount:
+                                description: The number of instances to add or remove
+                                  when the load exceeds a threshold.
+                                type: number
+                              loadThreshold:
+                                description: The load threshold. A value of -1 disables
+                                  the threshold.
+                                type: number
+                              memoryThreshold:
+                                description: The memory utilization threshold, as
+                                  a percent of the available memory. A value of -1
+                                  disables the threshold.
+                                type: number
+                              thresholdsWaitTime:
+                                description: The amount of time, in minutes, that
+                                  the load must exceed a threshold before more instances
+                                  are added or removed.
+                                type: number
+                            type: object
+                          type: array
+                        enable:
+                          description: Whether load-based auto scaling is enabled
+                            for the layer.
+                          type: boolean
+                        upscaling:
+                          description: The upscaling settings, as defined below, used
+                            for load-based autoscaling
+                          items:
+                            properties:
+                              alarms:
+                                description: Custom Cloudwatch auto scaling alarms,
+                                  to be used as thresholds. This parameter takes a
+                                  list of up to five alarm names, which are case sensitive
+                                  and must be in the same region as the stack.
+                                items:
+                                  type: string
+                                type: array
+                              cpuThreshold:
+                                description: The CPU utilization threshold, as a percent
+                                  of the available CPU. A value of -1 disables the
+                                  threshold.
+                                type: number
+                              ignoreMetricsTime:
+                                description: The amount of time (in minutes) after
+                                  a scaling event occurs that AWS OpsWorks Stacks
+                                  should ignore metrics and suppress additional scaling
+                                  events.
+                                type: number
+                              instanceCount:
+                                description: The number of instances to add or remove
+                                  when the load exceeds a threshold.
+                                type: number
+                              loadThreshold:
+                                description: The load threshold. A value of -1 disables
+                                  the threshold.
+                                type: number
+                              memoryThreshold:
+                                description: The memory utilization threshold, as
+                                  a percent of the available memory. A value of -1
+                                  disables the threshold.
+                                type: number
+                              thresholdsWaitTime:
+                                description: The amount of time, in minutes, that
+                                  the load must exceed a threshold before more instances
+                                  are added or removed.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   name:
                     description: A human-readable name for the layer.
                     type: string
@@ -315,7 +414,7 @@ spec:
                       will be used to identify it in the Chef node JSON.
                     type: string
                   stackId:
-                    description: The id of the stack the layer will belong to.
+                    description: ID of the stack the layer will belong to.
                     type: string
                   stackIdRef:
                     description: Reference to a Stack in opsworks to populate stackId.

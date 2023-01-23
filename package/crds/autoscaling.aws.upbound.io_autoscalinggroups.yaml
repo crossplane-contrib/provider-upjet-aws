@@ -97,6 +97,11 @@ spec:
                     description: Number of Amazon EC2 instances that should be running
                       in the group. (See also Waiting for Capacity below.)
                     type: number
+                  desiredCapacityType:
+                    description: 'The unit of measurement for the value specified
+                      for desired_capacity. Supported for attribute-based instance
+                      type selection only. Valid values: "units", "vcpu", "memory-mib".'
+                    type: string
                   enabledMetrics:
                     description: List of metrics to collect. The allowed values are
                       defined by the underlying AWS API.

@@ -155,8 +155,9 @@ spec:
                     type: object
                   userSettings:
                     description: Configuration block for the actions that are enabled
-                      or disabled for users during their streaming sessions. By default,
-                      these actions are enabled. See user_settings below.
+                      or disabled for users during their streaming sessions. If not
+                      provided, these settings are configured automatically by AWS.
+                      See user_settings below.
                     items:
                       properties:
                         action:

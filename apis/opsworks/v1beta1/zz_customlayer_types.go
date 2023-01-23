@@ -114,6 +114,10 @@ type CustomLayerParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceShutdownTimeout *float64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
 
+	// Load-based auto scaling configuration. See Load Based AutoScaling
+	// +kubebuilder:validation:Optional
+	LoadBasedAutoScaling []LoadBasedAutoScalingParameters `json:"loadBasedAutoScaling,omitempty" tf:"load_based_auto_scaling,omitempty"`
+
 	// A human-readable name for the layer.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
@@ -122,7 +126,7 @@ type CustomLayerParameters struct {
 	// +kubebuilder:validation:Required
 	ShortName *string `json:"shortName" tf:"short_name,omitempty"`
 
-	// The id of the stack the layer will belong to.
+	// ID of the stack the layer will belong to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -147,6 +151,40 @@ type CustomLayerParameters struct {
 	// Whether to use EBS-optimized instances.
 	// +kubebuilder:validation:Optional
 	UseEBSOptimizedInstances *bool `json:"useEbsOptimizedInstances,omitempty" tf:"use_ebs_optimized_instances,omitempty"`
+}
+
+type DownscalingObservation struct {
+}
+
+type DownscalingParameters struct {
+
+	// Custom Cloudwatch auto scaling alarms, to be used as thresholds. This parameter takes a list of up to five alarm names, which are case sensitive and must be in the same region as the stack.
+	// +kubebuilder:validation:Optional
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	// The CPU utilization threshold, as a percent of the available CPU. A value of -1 disables the threshold.
+	// +kubebuilder:validation:Optional
+	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
+
+	// The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks Stacks should ignore metrics and suppress additional scaling events.
+	// +kubebuilder:validation:Optional
+	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+
+	// The number of instances to add or remove when the load exceeds a threshold.
+	// +kubebuilder:validation:Optional
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// The load threshold. A value of -1 disables the threshold.
+	// +kubebuilder:validation:Optional
+	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
+
+	// The memory utilization threshold, as a percent of the available memory. A value of -1 disables the threshold.
+	// +kubebuilder:validation:Optional
+	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
+
+	// The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.
+	// +kubebuilder:validation:Optional
+	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type EBSVolumeObservation struct {
@@ -181,6 +219,24 @@ type EBSVolumeParameters struct {
 	// The type of volume to create. This may be standard (the default), io1 or gp2.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type LoadBasedAutoScalingObservation struct {
+}
+
+type LoadBasedAutoScalingParameters struct {
+
+	// The downscaling settings, as defined below, used for load-based autoscaling
+	// +kubebuilder:validation:Optional
+	Downscaling []DownscalingParameters `json:"downscaling,omitempty" tf:"downscaling,omitempty"`
+
+	// Whether load-based auto scaling is enabled for the layer.
+	// +kubebuilder:validation:Optional
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// The upscaling settings, as defined below, used for load-based autoscaling
+	// +kubebuilder:validation:Optional
+	Upscaling []UpscalingParameters `json:"upscaling,omitempty" tf:"upscaling,omitempty"`
 }
 
 type LogStreamsObservation struct {
@@ -231,6 +287,40 @@ type LogStreamsParameters struct {
 	// Specifies the time zone of log event time stamps.
 	// +kubebuilder:validation:Optional
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
+}
+
+type UpscalingObservation struct {
+}
+
+type UpscalingParameters struct {
+
+	// Custom Cloudwatch auto scaling alarms, to be used as thresholds. This parameter takes a list of up to five alarm names, which are case sensitive and must be in the same region as the stack.
+	// +kubebuilder:validation:Optional
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	// The CPU utilization threshold, as a percent of the available CPU. A value of -1 disables the threshold.
+	// +kubebuilder:validation:Optional
+	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
+
+	// The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks Stacks should ignore metrics and suppress additional scaling events.
+	// +kubebuilder:validation:Optional
+	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+
+	// The number of instances to add or remove when the load exceeds a threshold.
+	// +kubebuilder:validation:Optional
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// The load threshold. A value of -1 disables the threshold.
+	// +kubebuilder:validation:Optional
+	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
+
+	// The memory utilization threshold, as a percent of the available memory. A value of -1 disables the threshold.
+	// +kubebuilder:validation:Optional
+	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
+
+	// The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.
+	// +kubebuilder:validation:Optional
+	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 // CustomLayerSpec defines the desired state of CustomLayer

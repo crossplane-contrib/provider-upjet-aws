@@ -49,6 +49,10 @@ type PortInfoObservation struct {
 
 type PortInfoParameters struct {
 
+	// Set of CIDR aliases that define access for a preconfigured range of IP addresses.
+	// +kubebuilder:validation:Optional
+	CidrListAliases []*string `json:"cidrListAliases,omitempty" tf:"cidr_list_aliases,omitempty"`
+
 	// Set of CIDR blocks.
 	// +kubebuilder:validation:Optional
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`

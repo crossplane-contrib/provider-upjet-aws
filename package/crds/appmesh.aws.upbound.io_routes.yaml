@@ -172,6 +172,10 @@ spec:
                                         weights with which to distribute traffic.
                                       items:
                                         properties:
+                                          port:
+                                            description: The port number to match
+                                              from the request.
+                                            type: number
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -268,6 +272,10 @@ spec:
                                         If you specify a name, you must also specify
                                         a service_name.
                                       type: string
+                                    port:
+                                      description: The port number to match from the
+                                        request.
+                                      type: number
                                     prefix:
                                       description: Value sent by the client must begin
                                         with the specified characters. Must be between
@@ -393,6 +401,10 @@ spec:
                                         weights with which to distribute traffic.
                                       items:
                                         properties:
+                                          port:
+                                            description: The port number to match
+                                              from the request.
+                                            type: number
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -490,6 +502,10 @@ spec:
                                         match on. Valid values: GET, HEAD, POST, PUT,
                                         DELETE, CONNECT, OPTIONS, TRACE, PATCH.'
                                       type: string
+                                    port:
+                                      description: The port number to match from the
+                                        request.
+                                      type: number
                                     prefix:
                                       description: Value sent by the client must begin
                                         with the specified characters. Must be between
@@ -611,6 +627,10 @@ spec:
                                         weights with which to distribute traffic.
                                       items:
                                         properties:
+                                          port:
+                                            description: The port number to match
+                                              from the request.
+                                            type: number
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -797,6 +817,10 @@ spec:
                                         match on. Valid values: GET, HEAD, POST, PUT,
                                         DELETE, CONNECT, OPTIONS, TRACE, PATCH.'
                                       type: string
+                                    port:
+                                      description: The port number to match from the
+                                        request.
+                                      type: number
                                     prefix:
                                       description: Value sent by the client must begin
                                         with the specified characters. Must be between
@@ -923,6 +947,10 @@ spec:
                                         weights with which to distribute traffic.
                                       items:
                                         properties:
+                                          port:
+                                            description: The port number to match
+                                              from the request.
+                                            type: number
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -1028,6 +1056,17 @@ spec:
                                       type: array
                                   required:
                                   - weightedTarget
+                                  type: object
+                                type: array
+                              match:
+                                description: Criteria for determining an gRPC request
+                                  match.
+                                items:
+                                  properties:
+                                    port:
+                                      description: The port number to match from the
+                                        request.
+                                      type: number
                                   type: object
                                 type: array
                               timeout:

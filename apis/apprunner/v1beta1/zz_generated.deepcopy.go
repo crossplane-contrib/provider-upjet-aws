@@ -342,6 +342,21 @@ func (in *CodeConfigurationValuesParameters) DeepCopyInto(out *CodeConfiguration
 		*out = new(string)
 		**out = **in
 	}
+	if in.RuntimeEnvironmentSecrets != nil {
+		in, out := &in.RuntimeEnvironmentSecrets, &out.RuntimeEnvironmentSecrets
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.RuntimeEnvironmentVariables != nil {
 		in, out := &in.RuntimeEnvironmentVariables, &out.RuntimeEnvironmentVariables
 		*out = make(map[string]*string, len(*in))
@@ -768,6 +783,21 @@ func (in *ImageConfigurationParameters) DeepCopyInto(out *ImageConfigurationPara
 		in, out := &in.Port, &out.Port
 		*out = new(string)
 		**out = **in
+	}
+	if in.RuntimeEnvironmentSecrets != nil {
+		in, out := &in.RuntimeEnvironmentSecrets, &out.RuntimeEnvironmentSecrets
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.RuntimeEnvironmentVariables != nil {
 		in, out := &in.RuntimeEnvironmentVariables, &out.RuntimeEnvironmentVariables

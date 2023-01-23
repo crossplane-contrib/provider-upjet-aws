@@ -63,6 +63,31 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  alarms:
+                    description: Information about the CloudWatch alarms. See below.
+                    items:
+                      properties:
+                        alarmNames:
+                          items:
+                            type: string
+                          type: array
+                        enable:
+                          description: Determines whether to use the CloudWatch alarm
+                            option in the service deployment process.
+                          type: boolean
+                        rollback:
+                          description: Determines whether to configure Amazon ECS
+                            to roll back the service if a service deployment fails.
+                            If rollback is used, when a service deployment fails,
+                            the service is rolled back to the last deployment that
+                            completed successfully.
+                          type: boolean
+                      required:
+                      - alarmNames
+                      - enable
+                      - rollback
+                      type: object
+                    type: array
                   capacityProviderStrategy:
                     description: Capacity provider strategies to use for the service.
                       Can be one or more. These can be updated without destroying

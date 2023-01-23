@@ -69,7 +69,7 @@ spec:
                     type: string
                   appType:
                     description: The type of app. Valid values are JupyterServer,
-                      KernelGateway and TensorBoard.
+                      KernelGateway, RStudioServerPro, RSessionGateway and TensorBoard.
                     type: string
                   domainId:
                     description: The domain ID.
@@ -175,13 +175,18 @@ spec:
                           type: string
                       type: object
                     type: array
+                  spaceName:
+                    description: The name of the space. At least on of user_profile_name
+                      or space_name required.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
                   userProfileName:
-                    description: The user profile name.
+                    description: The user profile name. At least on of user_profile_name
+                      or space_name required.
                     type: string
                   userProfileNameRef:
                     description: Reference to a UserProfile in sagemaker to populate

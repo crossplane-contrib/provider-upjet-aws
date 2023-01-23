@@ -124,6 +124,10 @@ spec:
                                 description: Criteria for determining a request match.
                                 items:
                                   properties:
+                                    port:
+                                      description: The port number to match from the
+                                        request.
+                                      type: number
                                     serviceName:
                                       description: Fully qualified domain name for
                                         the service to match from the request.
@@ -228,6 +232,10 @@ spec:
                                             type: string
                                         type: object
                                       type: array
+                                    port:
+                                      description: The port number to match from the
+                                        request.
+                                      type: number
                                     prefix:
                                       description: Specified beginning characters
                                         to rewrite.
@@ -428,6 +436,10 @@ spec:
                                             type: string
                                         type: object
                                       type: array
+                                    port:
+                                      description: The port number to match from the
+                                        request.
+                                      type: number
                                     prefix:
                                       description: Specified beginning characters
                                         to rewrite.

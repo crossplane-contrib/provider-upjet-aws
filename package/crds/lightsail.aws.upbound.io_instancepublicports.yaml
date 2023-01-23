@@ -148,6 +148,12 @@ spec:
                       Detailed below.
                     items:
                       properties:
+                        cidrListAliases:
+                          description: Set of CIDR aliases that define access for
+                            a preconfigured range of IP addresses.
+                          items:
+                            type: string
+                          type: array
                         cidrs:
                           description: Set of CIDR blocks.
                           items:

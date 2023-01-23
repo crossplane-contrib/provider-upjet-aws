@@ -150,7 +150,7 @@ spec:
                     type: string
                   defaultAvailabilityZone:
                     description: Name of the availability zone where instances will
-                      be created by default. This is required unless you set vpc_id.
+                      be created by default. Cannot be set when vpc_id is set.
                     type: string
                   defaultInstanceProfileArn:
                     description: The ARN of an IAM Instance Profile that created instances
@@ -244,9 +244,9 @@ spec:
                       by default.
                     type: string
                   defaultSubnetId:
-                    description: Id of the subnet in which instances will be created
-                      by default. Mandatory if vpc_id is set, and forbidden if it
-                      isn't.
+                    description: ID of the subnet in which instances will be created
+                      by default. Required if vpc_id is set to a VPC other than the
+                      default VPC, and forbidden if it isn't.
                     type: string
                   defaultSubnetIdRef:
                     description: Reference to a Subnet in ec2 to populate defaultSubnetId.
@@ -426,7 +426,8 @@ spec:
                       security groups apply to created instances.
                     type: boolean
                   vpcId:
-                    description: The id of the VPC that this stack belongs to.
+                    description: ID of the VPC that this stack belongs to. Defaults
+                      to the region's default VPC.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.

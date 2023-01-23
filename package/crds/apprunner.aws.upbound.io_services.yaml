@@ -276,14 +276,14 @@ spec:
                       properties:
                         observabilityConfigurationArn:
                           description: ARN of the observability configuration that
-                            is associated with the service.
+                            is associated with the service. Specified only when observability_enabled
+                            is true.
                           type: string
                         observabilityEnabled:
                           description: When true, an observability configuration resource
                             is associated with the service.
                           type: boolean
                       required:
-                      - observabilityConfigurationArn
                       - observabilityEnabled
                       type: object
                     type: array
@@ -442,6 +442,13 @@ spec:
                                               NODEJS_14, NODEJS_16, CORRETTO_8, CORRETTO_11,
                                               GO_1, DOTNET_6, PHP_81, RUBY_31.'
                                             type: string
+                                          runtimeEnvironmentSecrets:
+                                            additionalProperties:
+                                              type: string
+                                            description: Secrets and parameters available
+                                              to your service as environment variables.
+                                              A map of key/value pairs.
+                                            type: object
                                           runtimeEnvironmentVariables:
                                             additionalProperties:
                                               type: string
@@ -515,6 +522,13 @@ spec:
                                       description: Port that your application listens
                                         to in the container. Defaults to "8080".
                                       type: string
+                                    runtimeEnvironmentSecrets:
+                                      additionalProperties:
+                                        type: string
+                                      description: Secrets and parameters available
+                                        to your service as environment variables.
+                                        A map of key/value pairs.
+                                      type: object
                                     runtimeEnvironmentVariables:
                                       additionalProperties:
                                         type: string

@@ -403,7 +403,7 @@ type S3SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	CdcMaxBatchInterval *float64 `json:"cdcMaxBatchInterval,omitempty" tf:"cdc_max_batch_interval,omitempty"`
 
-	// Minimum file size, defined in megabytes, to reach for a file output. Default is 32.
+	// Minimum file size condition as defined in kilobytes to output a file to Amazon S3. Default is 32000. NOTE: Previously, this setting was measured in megabytes but now represents kilobytes. Update configurations accordingly.
 	// +kubebuilder:validation:Optional
 	CdcMinFileSize *float64 `json:"cdcMinFileSize,omitempty" tf:"cdc_min_file_size,omitempty"`
 
@@ -472,6 +472,11 @@ type S3SettingsParameters struct {
 	ExternalTableDefinition *string `json:"externalTableDefinition,omitempty" tf:"external_table_definition,omitempty"`
 
 	// When this value is set to 1, DMS ignores the first row header in a .csv file. Default is 0.
+	// +kubebuilder:validation:Optional
+	IgnoreHeaderRows *float64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
+
+	// Deprecated. This setting has no effect. Will be removed in a future version.
+	// This setting has no effect, is deprecated, and will be removed in a future version
 	// +kubebuilder:validation:Optional
 	IgnoreHeadersRow *float64 `json:"ignoreHeadersRow,omitempty" tf:"ignore_headers_row,omitempty"`
 

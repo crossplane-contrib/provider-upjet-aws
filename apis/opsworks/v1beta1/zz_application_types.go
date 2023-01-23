@@ -111,7 +111,7 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
 
-	// The id of the stack the application will belong to.
+	// ID of the stack the application will belong to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

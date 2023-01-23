@@ -22,7 +22,7 @@ type AccessLogSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
 
-	// Single line format of the access logs of data, as specified by selected $context variables.
+	// Single line format of the access logs of data. Refer to log settings for HTTP or Websocket.
 	// +kubebuilder:validation:Required
 	Format *string `json:"format" tf:"format,omitempty"`
 }
@@ -60,16 +60,16 @@ type RouteSettingsObservation struct {
 
 type RouteSettingsParameters struct {
 
-	// Whether data trace logging is enabled for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
+	// Whether data trace logging is enabled for the route. Affects the log entries pushed to Amazon CloudWatch Logs.
 	// Defaults to false. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	DataTraceEnabled *bool `json:"dataTraceEnabled,omitempty" tf:"data_trace_enabled,omitempty"`
 
-	// Whether detailed metrics are enabled for the default route. Defaults to false.
+	// Whether detailed metrics are enabled for the route. Defaults to false.
 	// +kubebuilder:validation:Optional
 	DetailedMetricsEnabled *bool `json:"detailedMetricsEnabled,omitempty" tf:"detailed_metrics_enabled,omitempty"`
 
-	// Logging level for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
+	// Logging level for the route. Affects the log entries pushed to Amazon CloudWatch Logs.
 	// Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
@@ -78,11 +78,11 @@ type RouteSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	RouteKey *string `json:"routeKey" tf:"route_key,omitempty"`
 
-	// Throttling burst limit for the default route.
+	// Throttling burst limit for the route.
 	// +kubebuilder:validation:Optional
 	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
-	// Throttling rate limit for the default route.
+	// Throttling rate limit for the route.
 	// +kubebuilder:validation:Optional
 	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
 }

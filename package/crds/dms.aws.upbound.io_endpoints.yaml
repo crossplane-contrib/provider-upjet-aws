@@ -546,8 +546,10 @@ spec:
                             is 60.
                           type: number
                         cdcMinFileSize:
-                          description: Minimum file size, defined in megabytes, to
-                            reach for a file output. Default is 32.
+                          description: 'Minimum file size condition as defined in
+                            kilobytes to output a file to Amazon S3. Default is 32000.
+                            NOTE: Previously, this setting was measured in megabytes
+                            but now represents kilobytes. Update configurations accordingly.'
                           type: number
                         cdcPath:
                           description: Folder path of CDC files. For an S3 source,
@@ -621,9 +623,14 @@ spec:
                           description: JSON document that describes how AWS DMS should
                             interpret the data.
                           type: string
-                        ignoreHeadersRow:
+                        ignoreHeaderRows:
                           description: When this value is set to 1, DMS ignores the
                             first row header in a .csv file. Default is 0.
+                          type: number
+                        ignoreHeadersRow:
+                          description: Deprecated. This setting has no effect. Will
+                            be removed in a future version. This setting has no effect,
+                            is deprecated, and will be removed in a future version
                           type: number
                         includeOpForFullLoad:
                           description: Whether to enable a full load to write INSERT

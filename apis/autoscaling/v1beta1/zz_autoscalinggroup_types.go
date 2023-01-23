@@ -85,6 +85,10 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	DesiredCapacity *float64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
 
+	// The unit of measurement for the value specified for desired_capacity. Supported for attribute-based instance type selection only. Valid values: "units", "vcpu", "memory-mib".
+	// +kubebuilder:validation:Optional
+	DesiredCapacityType *string `json:"desiredCapacityType,omitempty" tf:"desired_capacity_type,omitempty"`
+
 	// List of metrics to collect. The allowed values are defined by the underlying AWS API.
 	// +kubebuilder:validation:Optional
 	EnabledMetrics []*string `json:"enabledMetrics,omitempty" tf:"enabled_metrics,omitempty"`

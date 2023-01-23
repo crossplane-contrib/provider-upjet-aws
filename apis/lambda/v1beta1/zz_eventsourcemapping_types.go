@@ -129,6 +129,10 @@ type EventSourceMappingParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Scaling configuration of the event source. Only available for SQS queues. Detailed below.
+	// +kubebuilder:validation:Optional
+	ScalingConfig []ScalingConfigParameters `json:"scalingConfig,omitempty" tf:"scaling_config,omitempty"`
+
 	// For Self Managed Kafka sources, the location of the self managed cluster. If set, configuration must also include source_access_configuration. Detailed below.
 	// +kubebuilder:validation:Optional
 	SelfManagedEventSource []SelfManagedEventSourceParameters `json:"selfManagedEventSource,omitempty" tf:"self_managed_event_source,omitempty"`
@@ -186,6 +190,16 @@ type OnFailureParameters struct {
 	// The Amazon Resource Name (ARN) of the destination resource.
 	// +kubebuilder:validation:Required
 	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
+}
+
+type ScalingConfigObservation struct {
+}
+
+type ScalingConfigParameters struct {
+
+	// Limits the number of concurrent instances that the Amazon SQS event source can invoke. Must be between 2 and 1000. See Configuring maximum concurrency for Amazon SQS event sources.
+	// +kubebuilder:validation:Optional
+	MaximumConcurrency *float64 `json:"maximumConcurrency,omitempty" tf:"maximum_concurrency,omitempty"`
 }
 
 type SelfManagedEventSourceObservation struct {

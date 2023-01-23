@@ -108,7 +108,7 @@ type StackParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Configuration block for the actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled.
+	// Configuration block for the actions that are enabled or disabled for users during their streaming sessions. If not provided, these settings are configured automatically by AWS.
 	// See user_settings below.
 	// +kubebuilder:validation:Optional
 	UserSettings []UserSettingsParameters `json:"userSettings,omitempty" tf:"user_settings,omitempty"`

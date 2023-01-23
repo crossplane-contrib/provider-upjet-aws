@@ -191,6 +191,10 @@ type HTTPRouteMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Hostname []HTTPRouteMatchHostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
+	// The port number to match from the request.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
 	// Specified beginning characters to rewrite.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -243,6 +247,10 @@ type Http2RouteMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Hostname []MatchHostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
+	// The port number to match from the request.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
 	// Specified beginning characters to rewrite.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -280,6 +288,10 @@ type MatchObservation struct {
 }
 
 type MatchParameters struct {
+
+	// The port number to match from the request.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Fully qualified domain name for the service to match from the request.
 	// +kubebuilder:validation:Required

@@ -73,7 +73,7 @@ type ReportDefinitionParameters struct {
 	// +kubebuilder:validation:Required
 	S3Region *string `json:"s3Region" tf:"s3_region,omitempty"`
 
-	// The frequency on which report data are measured and displayed.  Valid values are: HOURLY, DAILY.
+	// The frequency on which report data are measured and displayed.  Valid values are: DAILY, HOURLY, MONTHLY.
 	// +kubebuilder:validation:Required
 	TimeUnit *string `json:"timeUnit" tf:"time_unit,omitempty"`
 }

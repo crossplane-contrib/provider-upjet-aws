@@ -31,7 +31,7 @@ type AppParameters struct {
 	// +kubebuilder:validation:Required
 	AppName *string `json:"appName" tf:"app_name,omitempty"`
 
-	// The type of app. Valid values are JupyterServer, KernelGateway and TensorBoard.
+	// The type of app. Valid values are JupyterServer, KernelGateway, RStudioServerPro, RSessionGateway and TensorBoard.
 	// +kubebuilder:validation:Required
 	AppType *string `json:"appType" tf:"app_type,omitempty"`
 
@@ -58,11 +58,15 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceSpec []ResourceSpecParameters `json:"resourceSpec,omitempty" tf:"resource_spec,omitempty"`
 
+	// The name of the space. At least on of user_profile_name or space_name required.
+	// +kubebuilder:validation:Optional
+	SpaceName *string `json:"spaceName,omitempty" tf:"space_name,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The user profile name.
+	// The user profile name. At least on of user_profile_name or space_name required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.UserProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("user_profile_name",false)
 	// +kubebuilder:validation:Optional

@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AddOnObservation struct {
+}
+
+type AddOnParameters struct {
+
+	// The daily time when an automatic snapshot will be created. Must be in HH:00 format, and in an hourly increment and specified in Coordinated Universal Time (UTC). The snapshot will be automatically created between the time specified and up to 45 minutes after.
+	// +kubebuilder:validation:Required
+	SnapshotTime *string `json:"snapshotTime" tf:"snapshot_time,omitempty"`
+
+	// The status of the add on. Valid Values: Enabled, Disabled.
+	// +kubebuilder:validation:Required
+	Status *string `json:"status" tf:"status,omitempty"`
+
+	// The add-on type. There is currently only one valid type AutoSnapshot.
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type InstanceObservation struct {
 
 	// The ARN of the Lightsail instance (matches id).
@@ -53,6 +71,10 @@ type InstanceObservation struct {
 }
 
 type InstanceParameters struct {
+
+	// The add on configuration for the instance. Detailed below.
+	// +kubebuilder:validation:Optional
+	AddOn []AddOnParameters `json:"addOn,omitempty" tf:"add_on,omitempty"`
 
 	// The Availability Zone in which to create your
 	// instance (see list below)

@@ -72,7 +72,8 @@ spec:
                   appSecurityGroupManagement:
                     description: The entity that creates and manages the required
                       security groups for inter-app communication in VPCOnly mode.
-                      Valid values are Service and Customer.
+                      Valid values are Service and Customer.* domain_settings -  The
+                      domain settings. See Domain Settings below.
                     type: string
                   authMode:
                     description: The mode of authentication that members use to access
@@ -210,7 +211,7 @@ spec:
                     type: array
                   defaultUserSettings:
                     description: The default user settings. See Default User Settings
-                      below.
+                      below.* domain_name -  The domain name.
                     items:
                       properties:
                         canvasAppSettings:
@@ -248,7 +249,7 @@ spec:
                             type: object
                           type: array
                         executionRole:
-                          description: The execution role for the space.
+                          description: The execution role ARN for the user.
                           type: string
                         executionRoleRef:
                           description: Reference to a Role in iam to populate executionRole.
@@ -658,8 +659,8 @@ spec:
                             type: object
                           type: array
                         securityGroups:
-                          description: The security groups for the Amazon Virtual
-                            Private Cloud that the space uses for communication.
+                          description: A list of security group IDs that will be attached
+                            to the user.
                           items:
                             type: string
                           type: array
@@ -722,10 +723,9 @@ spec:
                       type: object
                     type: array
                   domainName:
-                    description: The domain name.
                     type: string
                   domainSettings:
-                    description: The domain settings. See Domain Settings below.
+                    description: The domain's settings.
                     items:
                       properties:
                         executionRoleIdentityConfig:

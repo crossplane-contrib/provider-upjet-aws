@@ -92,6 +92,10 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        executionRole:
+                          description: Role used in a notebook session for accessing
+                            the user's resources.
+                          type: string
                         publishCloudwatchMetricsEnabled:
                           description: Boolean whether Amazon CloudWatch metrics are
                             enabled for the workgroup. Defaults to true.

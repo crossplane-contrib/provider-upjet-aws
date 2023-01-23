@@ -537,6 +537,11 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 			}
 		}
 	}
+	if in.Configuration != nil {
+		in, out := &in.Configuration, &out.Configuration
+		*out = new(string)
+		**out = **in
+	}
 	if in.DataSources != nil {
 		in, out := &in.DataSources, &out.DataSources
 		*out = make([]*string, len(*in))

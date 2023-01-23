@@ -13,6 +13,23 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AlarmsObservation struct {
+}
+
+type AlarmsParameters struct {
+
+	// +kubebuilder:validation:Required
+	AlarmNames []*string `json:"alarmNames" tf:"alarm_names,omitempty"`
+
+	// Determines whether to use the CloudWatch alarm option in the service deployment process.
+	// +kubebuilder:validation:Required
+	Enable *bool `json:"enable" tf:"enable,omitempty"`
+
+	// Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+	// +kubebuilder:validation:Required
+	Rollback *bool `json:"rollback" tf:"rollback,omitempty"`
+}
+
 type CapacityProviderStrategyObservation struct {
 }
 
@@ -248,6 +265,10 @@ type ServiceObservation struct {
 }
 
 type ServiceParameters struct {
+
+	// Information about the CloudWatch alarms. See below.
+	// +kubebuilder:validation:Optional
+	Alarms []AlarmsParameters `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
 	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below.
 	// +kubebuilder:validation:Optional

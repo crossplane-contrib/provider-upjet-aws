@@ -28,7 +28,7 @@ type EnvironmentObservation struct {
 
 type EnvironmentParameters struct {
 
-	// Map of environment variables that are accessible from the function code during execution.
+	// Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present.
 	// +kubebuilder:validation:Optional
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }

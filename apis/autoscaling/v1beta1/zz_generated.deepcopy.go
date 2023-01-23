@@ -432,6 +432,11 @@ func (in *AutoscalingGroupParameters) DeepCopyInto(out *AutoscalingGroupParamete
 		*out = new(float64)
 		**out = **in
 	}
+	if in.DesiredCapacityType != nil {
+		in, out := &in.DesiredCapacityType, &out.DesiredCapacityType
+		*out = new(string)
+		**out = **in
+	}
 	if in.EnabledMetrics != nil {
 		in, out := &in.EnabledMetrics, &out.EnabledMetrics
 		*out = make([]*string, len(*in))

@@ -225,7 +225,7 @@ spec:
                       type: object
                     type: array
                   stackId:
-                    description: The id of the stack the application will belong to.
+                    description: ID of the stack the application will belong to.
                     type: string
                   stackIdRef:
                     description: Reference to a Stack in opsworks to populate stackId.
