@@ -4957,6 +4957,72 @@ func (mg *VPCEndpointRouteTableAssociation) SetWriteConnectionSecretToReference(
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this VPCEndpointSecurityGroupAssociation.
+func (mg *VPCEndpointSecurityGroupAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this VPCEndpointSecurityGroupAssociation.
+func (mg *VPCEndpointSecurityGroupAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this VPCEndpointSecurityGroupAssociation.
+func (mg *VPCEndpointSecurityGroupAssociation) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this VPCEndpointSecurityGroupAssociation.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *VPCEndpointSecurityGroupAssociation) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this VPCEndpointSecurityGroupAssociation.
+func (mg *VPCEndpointSecurityGroupAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this VPCEndpointSecurityGroupAssociation.
+func (mg *VPCEndpointSecurityGroupAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VPCEndpointSecurityGroupAssociation.
+func (mg *VPCEndpointSecurityGroupAssociation) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this VPCEndpointSecurityGroupAssociation.
+func (mg *VPCEndpointSecurityGroupAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this VPCEndpointSecurityGroupAssociation.
+func (mg *VPCEndpointSecurityGroupAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this VPCEndpointSecurityGroupAssociation.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *VPCEndpointSecurityGroupAssociation) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this VPCEndpointSecurityGroupAssociation.
+func (mg *VPCEndpointSecurityGroupAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this VPCEndpointSecurityGroupAssociation.
+func (mg *VPCEndpointSecurityGroupAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this VPCEndpointService.
 func (mg *VPCEndpointService) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
