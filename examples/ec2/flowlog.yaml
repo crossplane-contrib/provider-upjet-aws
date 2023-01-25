@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: FlowLog
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/flowlog
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -23,6 +25,8 @@ spec:
 apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
 kind: Group
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/flowlog
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -35,6 +39,8 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/flowlog
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -55,4 +61,19 @@ spec:
         ]
       }
 
+---
 
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/flowlog
+  labels:
+    testing.upbound.io/example-name: example
+  name: sample-vpc
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
