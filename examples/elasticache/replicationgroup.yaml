@@ -1,6 +1,8 @@
 apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: ReplicationGroup
 metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
   name: example
 spec:
   forProvider:
