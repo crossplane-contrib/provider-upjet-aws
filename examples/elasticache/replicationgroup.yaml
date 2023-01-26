@@ -8,7 +8,7 @@ spec:
     description: example description
     nodeType: cache.m4.large
     numberCacheClusters: 2
-    parameterGroupName: default.redis6.x
+    parameterGroupName: default.redis7
     port: 6379
     preferredCacheClusterAzs:
       - us-west-1b
