@@ -48,9 +48,17 @@ type ClusterObservation struct {
 
 type ClusterParameters struct {
 
-	// If true , major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. Default is true
+	// If true , major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. Default is true.
 	// +kubebuilder:validation:Optional
 	AllowVersionUpgrade *bool `json:"allowVersionUpgrade,omitempty" tf:"allow_version_upgrade,omitempty"`
+
+	// Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false.
+	// +kubebuilder:validation:Optional
+	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
+
+	// The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values are enabled, disabled, and auto. Requires Cluster reboot.
+	// +kubebuilder:validation:Optional
+	AquaConfigurationStatus *string `json:"aquaConfigurationStatus,omitempty" tf:"aqua_configuration_status,omitempty"`
 
 	// The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with create-cluster-snapshot. Default is 1.
 	// +kubebuilder:validation:Optional
@@ -97,6 +105,20 @@ type ClusterParameters struct {
 	// If you do not provide a name, Amazon Redshift will create a default database called dev.
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	DefaultIAMRoleArn *string `json:"defaultIamRoleArn,omitempty" tf:"default_iam_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate defaultIamRoleArn.
+	// +kubebuilder:validation:Optional
+	DefaultIAMRoleArnRef *v1.Reference `json:"defaultIamRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate defaultIamRoleArn.
+	// +kubebuilder:validation:Optional
+	DefaultIAMRoleArnSelector *v1.Selector `json:"defaultIamRoleArnSelector,omitempty" tf:"-"`
 
 	// The Elastic IP (EIP) address for the cluster.
 	// +kubebuilder:validation:Optional
@@ -150,6 +172,14 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Logging []LoggingParameters `json:"logging,omitempty" tf:"logging,omitempty"`
 
+	// The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the MaintenanceTrack value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of  a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks. Default value is current.
+	// +kubebuilder:validation:Optional
+	MaintenanceTrackName *string `json:"maintenanceTrackName,omitempty" tf:"maintenance_track_name,omitempty"`
+
+	// The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots. Valid values are between -1 and 3653. Default value is -1.
+	// +kubebuilder:validation:Optional
+	ManualSnapshotRetentionPeriod *float64 `json:"manualSnapshotRetentionPeriod,omitempty" tf:"manual_snapshot_retention_period,omitempty"`
+
 	// Password for the master DB user.
 	// Note that this may show up in logs, and it will be stored in the state file. Password must contain at least 8 chars and
 	// contain at least one uppercase letter, one lowercase letter, and one number.
@@ -172,7 +202,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	OwnerAccount *string `json:"ownerAccount,omitempty" tf:"owner_account,omitempty"`
 
-	// The port number on which the cluster accepts incoming connections.
+	// The port number on which the cluster accepts incoming connections. Valid values are between 1115 and 65535.
 	// The cluster is accessible only via the JDBC and ODBC connection strings.
 	// Part of the connection string requires the port on which the cluster will listen for incoming connections.
 	// Default port is 5439.
@@ -242,6 +272,14 @@ type LoggingParameters struct {
 	// Enables logging information such as queries and connection attempts, for the specified Amazon Redshift cluster.
 	// +kubebuilder:validation:Required
 	Enable *bool `json:"enable" tf:"enable,omitempty"`
+
+	// The log destination type. An enum with possible values of s3 and cloudwatch.
+	// +kubebuilder:validation:Optional
+	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
+
+	// The collection of exported log types. Log types include the connection log, user log and user activity log. Required when log_destination_type is cloudwatch. Valid log types are connectionlog, userlog, and useractivitylog.
+	// +kubebuilder:validation:Optional
+	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
 	// The prefix applied to the log file names.
 	// +kubebuilder:validation:Optional

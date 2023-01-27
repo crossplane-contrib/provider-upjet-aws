@@ -154,7 +154,7 @@ spec:
                               type: object
                           type: object
                         userPool:
-                          description: The id for your Amazon Cognito user pool.
+                          description: ID for your Amazon Cognito user pool.
                           type: string
                         userPoolRef:
                           description: Reference to a UserPoolDomain in cognitoidp
@@ -317,6 +317,29 @@ spec:
                           type: array
                       required:
                       - cidrs
+                      type: object
+                    type: array
+                  workforceVpcConfig:
+                    description: configure a workforce using VPC. see Workforce VPC
+                      Config details below.
+                    items:
+                      properties:
+                        securityGroupIds:
+                          description: The VPC security group IDs. The security groups
+                            must be for the same VPC as specified in the subnet.
+                          items:
+                            type: string
+                          type: array
+                        subnets:
+                          description: The ID of the subnets in the VPC that you want
+                            to connect.
+                          items:
+                            type: string
+                          type: array
+                        vpcId:
+                          description: The ID of the VPC that the workforce uses for
+                            communication.
+                          type: string
                       type: object
                     type: array
                 required:
@@ -508,6 +531,17 @@ spec:
                   subdomain:
                     description: The subdomain for your OIDC Identity Provider.
                     type: string
+                  workforceVpcConfig:
+                    description: configure a workforce using VPC. see Workforce VPC
+                      Config details below.
+                    items:
+                      properties:
+                        vpcEndpointId:
+                          description: The IDs for the VPC service endpoints of your
+                            VPC workforce.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

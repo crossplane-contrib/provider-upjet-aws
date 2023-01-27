@@ -65,14 +65,14 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the API documentation version.
+                    description: Description of the API documentation version.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   restApiId:
-                    description: The ID of the associated Rest API
+                    description: ID of the associated Rest API
                     type: string
                   restApiIdRef:
                     description: Reference to a RestAPI in apigateway to populate
@@ -150,7 +150,7 @@ spec:
                         type: object
                     type: object
                   version:
-                    description: The version identifier of the API documentation snapshot.
+                    description: Version identifier of the API documentation snapshot.
                     type: string
                 required:
                 - region

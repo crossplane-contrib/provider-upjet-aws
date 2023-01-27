@@ -36,6 +36,10 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Optional
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
+	// ID of the KMS Custom Key Store where the key will be stored instead of KMS (eg CloudHSM).
+	// +kubebuilder:validation:Optional
+	CustomKeyStoreID *string `json:"customKeyStoreId,omitempty" tf:"custom_key_store_id,omitempty"`
+
 	// Specifies whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports.
 	// Valid values: SYMMETRIC_DEFAULT,  RSA_2048, RSA_3072, RSA_4096, HMAC_256, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, or ECC_SECG_P256K1. Defaults to SYMMETRIC_DEFAULT. For help with choosing a key spec, see the AWS KMS Developer Guide.
 	// +kubebuilder:validation:Optional
@@ -59,7 +63,7 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Optional
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
 
-	// Specifies the intended use of the key. Valid values: ENCRYPT_DECRYPT or SIGN_VERIFY.
+	// Specifies the intended use of the key. Valid values: ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC.
 	// Defaults to ENCRYPT_DECRYPT.
 	// +kubebuilder:validation:Optional
 	KeyUsage *string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`

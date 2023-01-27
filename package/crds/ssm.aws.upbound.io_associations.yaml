@@ -211,8 +211,8 @@ spec:
                       be created in.
                     type: string
                   scheduleExpression:
-                    description: A cron expression when the association will be applied
-                      to the target(s).
+                    description: A cron or rate expression that specifies when the
+                      association runs.
                     type: string
                   targets:
                     description: A block containing the targets of the SSM association.

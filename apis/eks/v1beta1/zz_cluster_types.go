@@ -30,6 +30,9 @@ type ClusterObservation struct {
 	// Attribute block containing certificate-authority-data for your cluster. Detailed below.
 	CertificateAuthority []CertificateAuthorityObservation `json:"certificateAuthority,omitempty" tf:"certificate_authority,omitempty"`
 
+	// The ID of your local Amazon EKS cluster on the AWS Outpost. This attribute isn't available for an AWS EKS cluster on AWS cloud.
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
 	// Unix epoch timestamp in seconds for when the cluster was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
@@ -41,6 +44,10 @@ type ClusterObservation struct {
 
 	// Attribute block containing identity provider information for your cluster. Only available on Kubernetes version 1.13 and 1.14 clusters created or upgraded on or after September 3, 2019. Detailed below.
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Configuration block with kubernetes network configuration for the cluster. Detailed below.
+	// +kubebuilder:validation:Optional
+	KubernetesNetworkConfig []KubernetesNetworkConfigObservation `json:"kubernetesNetworkConfig,omitempty" tf:"kubernetes_network_config,omitempty"`
 
 	// Platform version for the cluster.
 	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
@@ -69,6 +76,10 @@ type ClusterParameters struct {
 	// Configuration block with kubernetes network configuration for the cluster. Detailed below.
 	// +kubebuilder:validation:Optional
 	KubernetesNetworkConfig []KubernetesNetworkConfigParameters `json:"kubernetesNetworkConfig,omitempty" tf:"kubernetes_network_config,omitempty"`
+
+	// Configuration block representing the configuration of your local Amazon EKS cluster on an AWS Outpost. This block isn't available for creating Amazon EKS clusters on the AWS cloud.
+	// +kubebuilder:validation:Optional
+	OutpostConfig []OutpostConfigParameters `json:"outpostConfig,omitempty" tf:"outpost_config,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -102,6 +113,16 @@ type ClusterParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
+type ControlPlanePlacementObservation struct {
+}
+
+type ControlPlanePlacementParameters struct {
+
+	// The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
+	// +kubebuilder:validation:Required
+	GroupName *string `json:"groupName" tf:"group_name,omitempty"`
+}
+
 type EncryptionConfigObservation struct {
 }
 
@@ -126,6 +147,9 @@ type IdentityParameters struct {
 }
 
 type KubernetesNetworkConfigObservation struct {
+
+	// The CIDR block that Kubernetes pod and service IP addresses are assigned from if you specified ipv6 for ipFamily when you created the cluster. Kubernetes assigns service addresses from the unique local address range (fc00::/7) because you can't specify a custom IPv6 CIDR block when you create the cluster.
+	ServiceIPv6Cidr *string `json:"serviceIpv6Cidr,omitempty" tf:"service_ipv6_cidr,omitempty"`
 }
 
 type KubernetesNetworkConfigParameters struct {
@@ -134,7 +158,7 @@ type KubernetesNetworkConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	IPFamily *string `json:"ipFamily,omitempty" tf:"ip_family,omitempty"`
 
-	// The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. You can only specify a custom CIDR block when you create a cluster, changing this value will force a new cluster to be created. The block must meet the following requirements:
+	// The CIDR block to assign Kubernetes pod and service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. You can only specify a custom CIDR block when you create a cluster, changing this value will force a new cluster to be created. The block must meet the following requirements:
 	// +kubebuilder:validation:Optional
 	ServiceIPv4Cidr *string `json:"serviceIpv4Cidr,omitempty" tf:"service_ipv4_cidr,omitempty"`
 }
@@ -146,6 +170,25 @@ type OidcObservation struct {
 }
 
 type OidcParameters struct {
+}
+
+type OutpostConfigObservation struct {
+}
+
+type OutpostConfigParameters struct {
+
+	// The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts. The instance type that you specify is used for all Kubernetes control plane instances. The instance type can't be changed after cluster creation. Choose an instance type based on the number of nodes that your cluster will have. If your cluster will have:
+	// +kubebuilder:validation:Required
+	ControlPlaneInstanceType *string `json:"controlPlaneInstanceType" tf:"control_plane_instance_type,omitempty"`
+
+	// An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on AWS Outpost.
+	// The following arguments are supported in the control_plane_placement configuration block:
+	// +kubebuilder:validation:Optional
+	ControlPlanePlacement []ControlPlanePlacementParameters `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
+
+	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
+	// +kubebuilder:validation:Required
+	OutpostArns []*string `json:"outpostArns" tf:"outpost_arns,omitempty"`
 }
 
 type ProviderObservation struct {

@@ -253,7 +253,7 @@ type RuleDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	Account *string `json:"account,omitempty" tf:"account,omitempty"`
 
-	// The ARN of the S3 bucket where you want Amazon S3 to store replicas of the objects identified by the rule.
+	// The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to store the results.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

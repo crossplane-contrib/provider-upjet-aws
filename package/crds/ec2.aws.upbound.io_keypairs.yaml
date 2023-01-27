@@ -270,6 +270,9 @@ spec:
                   keyPairId:
                     description: The key pair ID.
                     type: string
+                  keyType:
+                    description: The type of key pair.
+                    type: string
                   tagsAll:
                     additionalProperties:
                       type: string

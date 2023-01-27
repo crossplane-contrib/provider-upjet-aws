@@ -464,6 +464,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.DataTiering != nil {
+		in, out := &in.DataTiering, &out.DataTiering
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)

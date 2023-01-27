@@ -15,24 +15,26 @@ import (
 
 type EnvironmentObservation struct {
 
-	// The Amazon Resource Name (ARN) of the AppConfig Environment.
+	// ARN of the AppConfig Environment.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The AppConfig environment ID.
+	// AppConfig environment ID.
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
 
-	// The AppConfig environment ID and application ID separated by a colon (:).
+	// AppConfig environment ID and application ID separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// State of the environment. Possible values are READY_FOR_DEPLOYMENT, DEPLOYING, ROLLING_BACK
+	// or ROLLED_BACK.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type EnvironmentParameters struct {
 
-	// The AppConfig application ID. Must be between 4 and 7 characters in length.
+	// AppConfig application ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.Application
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -46,7 +48,7 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
-	// The description of the environment. Can be at most 1024 characters.
+	// Description of the environment. Can be at most 1024 characters.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -54,7 +56,7 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	Monitor []MonitorParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
-	// The name for the environment. Must be between 1 and 64 characters in length.
+	// Name for the environment. Must be between 1 and 64 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

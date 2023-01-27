@@ -386,7 +386,7 @@ spec:
                     type: object
                   subnetIds:
                     description: List of Subnet IDs to apply the ACL to. See the notes
-                      below on managing Subnets in the Default Network ACL
+                      above on Managing Subnets in the Default Network ACL
                     items:
                       type: string
                     type: array

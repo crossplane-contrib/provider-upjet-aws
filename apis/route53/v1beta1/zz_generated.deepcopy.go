@@ -1677,6 +1677,11 @@ func (in *ZoneObservation) DeepCopyInto(out *ZoneObservation) {
 			}
 		}
 	}
+	if in.PrimaryNameServer != nil {
+		in, out := &in.PrimaryNameServer, &out.PrimaryNameServer
+		*out = new(string)
+		**out = **in
+	}
 	if in.TagsAll != nil {
 		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))

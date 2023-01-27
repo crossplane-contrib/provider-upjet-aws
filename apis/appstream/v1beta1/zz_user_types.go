@@ -31,7 +31,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Required
 	AuthenticationType *string `json:"authenticationType" tf:"authentication_type,omitempty"`
 
-	// Specifies whether the user in the user pool is enabled.
+	// Whether the user in the user pool is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 

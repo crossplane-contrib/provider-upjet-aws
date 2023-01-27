@@ -30,6 +30,10 @@ type VaultObservation struct {
 
 type VaultParameters struct {
 
+	// A boolean that indicates that all recovery points stored in the vault are deleted so that the vault can be destroyed without error.
+	// +kubebuilder:validation:Optional
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	// The server-side encryption key that is used to protect your backups.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()

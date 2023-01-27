@@ -49,6 +49,10 @@ type PortInfoObservation struct {
 
 type PortInfoParameters struct {
 
+	// Set of CIDR aliases that define access for a preconfigured range of IP addresses.
+	// +kubebuilder:validation:Optional
+	CidrListAliases []*string `json:"cidrListAliases,omitempty" tf:"cidr_list_aliases,omitempty"`
+
 	// Set of CIDR blocks.
 	// +kubebuilder:validation:Optional
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
@@ -56,6 +60,9 @@ type PortInfoParameters struct {
 	// First port in a range of open ports on an instance.
 	// +kubebuilder:validation:Required
 	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IPv6Cidrs []*string `json:"ipv6Cidrs,omitempty" tf:"ipv6_cidrs,omitempty"`
 
 	// IP protocol name. Valid values are tcp, all, udp, and icmp.
 	// +kubebuilder:validation:Required

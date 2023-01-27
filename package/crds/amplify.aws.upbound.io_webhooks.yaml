@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   appId:
-                    description: The unique ID for an Amplify app.
+                    description: Unique ID for an Amplify app.
                     type: string
                   appIdRef:
                     description: Reference to a App in amplify to populate appId.
@@ -141,8 +141,7 @@ spec:
                         type: object
                     type: object
                   branchName:
-                    description: The name for a branch that is part of the Amplify
-                      app.
+                    description: Name for a branch that is part of the Amplify app.
                     type: string
                   branchNameRef:
                     description: Reference to a Branch in amplify to populate branchName.
@@ -218,7 +217,7 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: The description for a webhook.
+                    description: Description for a webhook.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -404,12 +403,12 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) for the webhook.
+                    description: ARN for the webhook.
                     type: string
                   id:
                     type: string
                   url:
-                    description: The URL of the webhook.
+                    description: URL of the webhook.
                     type: string
                 type: object
               conditions:

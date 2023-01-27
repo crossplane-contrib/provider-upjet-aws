@@ -19,6 +19,8 @@ spec:
       usageText: Usage Text
     provider: ${aws.us_east_1}
     region: us-west-1
+    tags:
+      env: production
 
 ---
 

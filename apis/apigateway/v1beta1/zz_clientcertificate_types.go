@@ -15,28 +15,28 @@ import (
 
 type ClientCertificateObservation struct {
 
-	// Amazon Resource Name (ARN)
+	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The date when the client certificate was created.
+	// Date when the client certificate was created.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
-	// The date when the client certificate will expire.
+	// Date when the client certificate will expire.
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
-	// The identifier of the client certificate.
+	// Identifier of the client certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The PEM-encoded public key of the client certificate.
 	PemEncodedCertificate *string `json:"pemEncodedCertificate,omitempty" tf:"pem_encoded_certificate,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ClientCertificateParameters struct {
 
-	// The description of the client certificate.
+	// Description of the client certificate.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

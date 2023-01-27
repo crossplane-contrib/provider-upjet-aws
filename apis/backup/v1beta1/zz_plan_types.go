@@ -113,7 +113,7 @@ type RuleObservation struct {
 
 type RuleParameters struct {
 
-	// The amount of time AWS Backup attempts a backup before canceling the job and returning an error.
+	// The amount of time in minutes AWS Backup attempts a backup before canceling the job and returning an error.
 	// +kubebuilder:validation:Optional
 	CompletionWindow *float64 `json:"completionWindow,omitempty" tf:"completion_window,omitempty"`
 

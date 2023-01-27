@@ -66,7 +66,7 @@ spec:
               forProvider:
                 properties:
                   certificateAuthorityArn:
-                    description: Amazon Resource Name (ARN) of the certificate authority.
+                    description: ARN of the certificate authority.
                     type: string
                   certificateAuthorityArnRef:
                     description: Reference to a CertificateAuthority to populate certificateAuthorityArn.
@@ -165,11 +165,11 @@ spec:
                   signingAlgorithm:
                     description: 'Algorithm to use to sign certificate requests. Valid
                       values: SHA256WITHRSA, SHA256WITHECDSA, SHA384WITHRSA, SHA384WITHECDSA,
-                      SHA512WITHRSA, SHA512WITHECDSA'
+                      SHA512WITHRSA, SHA512WITHECDSA.'
                     type: string
                   templateArn:
-                    description: The template to use when issuing a certificate. See
-                      ACM PCA Documentation for more information.
+                    description: Template to use when issuing a certificate. See ACM
+                      PCA Documentation for more information.
                     type: string
                   validity:
                     description: Configures end of the validity period for the certificate.
@@ -374,14 +374,14 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the certificate.
+                    description: ARN of the certificate.
                     type: string
                   certificate:
-                    description: The PEM-encoded certificate value.
+                    description: PEM-encoded certificate value.
                     type: string
                   certificateChain:
-                    description: The PEM-encoded certificate chain that includes any
-                      intermediate certificates and chains up to root CA.
+                    description: PEM-encoded certificate chain that includes any intermediate
+                      certificates and chains up to root CA.
                     type: string
                   id:
                     type: string

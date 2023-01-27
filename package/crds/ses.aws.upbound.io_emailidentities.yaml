@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   email:
-                    description: The email address to assign to SES
+                    description: The email address to assign to SES.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

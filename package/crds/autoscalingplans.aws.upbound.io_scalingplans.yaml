@@ -65,23 +65,22 @@ spec:
               forProvider:
                 properties:
                   applicationSource:
-                    description: A CloudFormation stack or set of tags. You can create
+                    description: CloudFormation stack or set of tags. You can create
                       one scaling plan per application source.
                     items:
                       properties:
                         cloudformationStackArn:
-                          description: The Amazon Resource Name (ARN) of a AWS CloudFormation
-                            stack.
+                          description: ARN of a AWS CloudFormation stack.
                           type: string
                         tagFilter:
-                          description: A set of tags.
+                          description: Set of tags.
                           items:
                             properties:
                               key:
-                                description: The tag key.
+                                description: Tag key.
                                 type: string
                               values:
-                                description: The tag values.
+                                description: Tag values.
                                 items:
                                   type: string
                                 type: array
@@ -92,20 +91,20 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: The name of the scaling plan. Names cannot contain
-                      vertical bars, colons, or forward slashes.
+                    description: Name of the scaling plan. Names cannot contain vertical
+                      bars, colons, or forward slashes.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   scalingInstruction:
-                    description: The scaling instructions. More details can be found
-                      in the AWS Auto Scaling API Reference.
+                    description: Scaling instructions. More details can be found in
+                      the AWS Auto Scaling API Reference.
                     items:
                       properties:
                         customizedLoadMetricSpecification:
-                          description: The customized load metric to use for predictive
+                          description: Customized load metric to use for predictive
                             scaling. You must specify either customized_load_metric_specification
                             or predefined_load_metric_specification when configuring
                             predictive scaling. More details can be found in the AWS
@@ -115,20 +114,20 @@ spec:
                               dimensions:
                                 additionalProperties:
                                   type: string
-                                description: The dimensions of the metric.
+                                description: Dimensions of the metric.
                                 type: object
                               metricName:
-                                description: The name of the metric.
+                                description: Name of the metric.
                                 type: string
                               namespace:
-                                description: The namespace of the metric.
+                                description: Namespace of the metric.
                                 type: string
                               statistic:
-                                description: The statistic of the metric. Currently,
-                                  the value must always be Sum.
+                                description: Statistic of the metric. Currently, the
+                                  value must always be Sum.
                                 type: string
                               unit:
-                                description: The unit of the metric.
+                                description: Unit of the metric.
                                 type: string
                             required:
                             - metricName
@@ -141,15 +140,15 @@ spec:
                             by AWS Auto Scaling is disabled. Defaults to false.
                           type: boolean
                         maxCapacity:
-                          description: The maximum capacity of the resource. The exception
+                          description: Maximum capacity of the resource. The exception
                             to this upper limit is if you specify a non-default setting
                             for predictive_scaling_max_capacity_behavior.
                           type: number
                         minCapacity:
-                          description: The minimum capacity of the resource.
+                          description: Minimum capacity of the resource.
                           type: number
                         predefinedLoadMetricSpecification:
-                          description: The predefined load metric to use for predictive
+                          description: Predefined load metric to use for predictive
                             scaling. You must specify either predefined_load_metric_specification
                             or customized_load_metric_specification when configuring
                             predictive scaling. More details can be found in the AWS
@@ -157,7 +156,7 @@ spec:
                           items:
                             properties:
                               predefinedLoadMetricType:
-                                description: 'The metric type. Valid values: ALBTargetGroupRequestCount,
+                                description: 'Metric type. Valid values: ALBTargetGroupRequestCount,
                                   ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut.'
                                 type: string
                               resourceLabel:
@@ -175,21 +174,20 @@ spec:
                             SetMaxCapacityAboveForecastCapacity, SetMaxCapacityToForecastCapacity.'
                           type: string
                         predictiveScalingMaxCapacityBuffer:
-                          description: The size of the capacity buffer to use when
-                            the forecast capacity is close to or exceeds the maximum
-                            capacity.
+                          description: Size of the capacity buffer to use when the
+                            forecast capacity is close to or exceeds the maximum capacity.
                           type: number
                         predictiveScalingMode:
-                          description: 'The predictive scaling mode. Valid values:
-                            ForecastAndScale, ForecastOnly.'
+                          description: 'Predictive scaling mode. Valid values: ForecastAndScale,
+                            ForecastOnly.'
                           type: string
                         resourceId:
-                          description: The ID of the resource. This string consists
-                            of the resource type and unique identifier.
+                          description: ID of the resource. This string consists of
+                            the resource type and unique identifier.
                           type: string
                         scalableDimension:
-                          description: 'The scalable dimension associated with the
-                            resource. Valid values: autoscaling:autoScalingGroup:DesiredCapacity,
+                          description: 'Scalable dimension associated with the resource.
+                            Valid values: autoscaling:autoScalingGroup:DesiredCapacity,
                             dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits,
                             dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits,
                             ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity,
@@ -202,15 +200,15 @@ spec:
                             to KeepExternalPolicies.'
                           type: string
                         scheduledActionBufferTime:
-                          description: The amount of time, in seconds, to buffer the
-                            run time of scheduled scaling actions when scaling out.
+                          description: Amount of time, in seconds, to buffer the run
+                            time of scheduled scaling actions when scaling out.
                           type: number
                         serviceNamespace:
-                          description: 'The namespace of the AWS service. Valid values:
+                          description: 'Namespace of the AWS service. Valid values:
                             autoscaling, dynamodb, ecs, ec2, rds.'
                           type: string
                         targetTrackingConfiguration:
-                          description: The structure that defines new target tracking
+                          description: Structure that defines new target tracking
                             configurations. Each of these structures includes a specific
                             scaling metric and a target value for the metric, along
                             with various parameters to use with dynamic scaling. More
@@ -218,29 +216,29 @@ spec:
                           items:
                             properties:
                               customizedScalingMetricSpecification:
-                                description: A customized metric. You can specify
-                                  either customized_scaling_metric_specification or
-                                  predefined_scaling_metric_specification. More details
-                                  can be found in the AWS Auto Scaling API Reference.
+                                description: Customized metric. You can specify either
+                                  customized_scaling_metric_specification or predefined_scaling_metric_specification.
+                                  More details can be found in the AWS Auto Scaling
+                                  API Reference.
                                 items:
                                   properties:
                                     dimensions:
                                       additionalProperties:
                                         type: string
-                                      description: The dimensions of the metric.
+                                      description: Dimensions of the metric.
                                       type: object
                                     metricName:
-                                      description: The name of the metric.
+                                      description: Name of the metric.
                                       type: string
                                     namespace:
-                                      description: The namespace of the metric.
+                                      description: Namespace of the metric.
                                       type: string
                                     statistic:
-                                      description: The statistic of the metric. Currently,
+                                      description: Statistic of the metric. Currently,
                                         the value must always be Sum.
                                       type: string
                                     unit:
-                                      description: The unit of the metric.
+                                      description: Unit of the metric.
                                       type: string
                                   required:
                                   - metricName
@@ -254,25 +252,24 @@ spec:
                                   Defaults to false.
                                 type: boolean
                               estimatedInstanceWarmup:
-                                description: The estimated time, in seconds, until
-                                  a newly launched instance can contribute to the
-                                  CloudWatch metrics. This value is used only if the
-                                  resource is an Auto Scaling group.
+                                description: Estimated time, in seconds, until a newly
+                                  launched instance can contribute to the CloudWatch
+                                  metrics. This value is used only if the resource
+                                  is an Auto Scaling group.
                                 type: number
                               predefinedScalingMetricSpecification:
-                                description: A predefined metric. You can specify
-                                  either predefined_scaling_metric_specification or
-                                  customized_scaling_metric_specification. More details
-                                  can be found in the AWS Auto Scaling API Reference.
+                                description: Predefined metric. You can specify either
+                                  predefined_scaling_metric_specification or customized_scaling_metric_specification.
+                                  More details can be found in the AWS Auto Scaling
+                                  API Reference.
                                 items:
                                   properties:
                                     predefinedScalingMetricType:
-                                      description: 'The metric type. Valid values:
-                                        ALBRequestCountPerTarget, ASGAverageCPUUtilization,
-                                        ASGAverageNetworkIn, ASGAverageNetworkOut,
-                                        DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization,
-                                        ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization,
-                                        EC2SpotFleetRequestAverageCPUUtilization,
+                                      description: 'Metric type. Valid values: ALBRequestCountPerTarget,
+                                        ASGAverageCPUUtilization, ASGAverageNetworkIn,
+                                        ASGAverageNetworkOut, DynamoDBReadCapacityUtilization,
+                                        DynamoDBWriteCapacityUtilization, ECSServiceAverageCPUUtilization,
+                                        ECSServiceAverageMemoryUtilization, EC2SpotFleetRequestAverageCPUUtilization,
                                         EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut,
                                         RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections.'
                                       type: string
@@ -285,19 +282,19 @@ spec:
                                   type: object
                                 type: array
                               scaleInCooldown:
-                                description: The amount of time, in seconds, after
-                                  a scale in activity completes before another scale
-                                  in activity can start. This value is not used if
-                                  the scalable resource is an Auto Scaling group.
+                                description: Amount of time, in seconds, after a scale
+                                  in activity completes before another scale in activity
+                                  can start. This value is not used if the scalable
+                                  resource is an Auto Scaling group.
                                 type: number
                               scaleOutCooldown:
-                                description: The amount of time, in seconds, after
-                                  a scale-out activity completes before another scale-out
-                                  activity can start. This value is not used if the
-                                  scalable resource is an Auto Scaling group.
+                                description: Amount of time, in seconds, after a scale-out
+                                  activity completes before another scale-out activity
+                                  can start. This value is not used if the scalable
+                                  resource is an Auto Scaling group.
                                 type: number
                               targetValue:
-                                description: The target value for the metric.
+                                description: Target value for the metric.
                                 type: number
                             required:
                             - targetValue
@@ -495,7 +492,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The scaling plan identifier.
+                    description: Scaling plan identifier.
                     type: string
                   scalingPlanVersion:
                     description: The version number of the scaling plan. This value

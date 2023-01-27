@@ -77,8 +77,7 @@ type StackParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationManagerVersion *string `json:"configurationManagerVersion,omitempty" tf:"configuration_manager_version,omitempty"`
 
-	// When use_custom_cookbooks is set, provide this sub-object as
-	// described below.
+	// When use_custom_cookbooks is set, provide this sub-object as described below.
 	// +kubebuilder:validation:Optional
 	CustomCookbooksSource []CustomCookbooksSourceParameters `json:"customCookbooksSource,omitempty" tf:"custom_cookbooks_source,omitempty"`
 
@@ -86,13 +85,12 @@ type StackParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomJSON *string `json:"customJson,omitempty" tf:"custom_json,omitempty"`
 
-	// Name of the availability zone where instances will be created
-	// by default. This is required unless you set vpc_id.
+	// Name of the availability zone where instances will be created by default.
+	// Cannot be set when vpc_id is set.
 	// +kubebuilder:validation:Optional
 	DefaultAvailabilityZone *string `json:"defaultAvailabilityZone,omitempty" tf:"default_availability_zone,omitempty"`
 
-	// The ARN of an IAM Instance Profile that created instances
-	// will have by default.
+	// The ARN of an IAM Instance Profile that created instances will have by default.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -118,8 +116,8 @@ type StackParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultSSHKeyName *string `json:"defaultSshKeyName,omitempty" tf:"default_ssh_key_name,omitempty"`
 
-	// Id of the subnet in which instances will be created by default. Mandatory
-	// if vpc_id is set, and forbidden if it isn't.
+	// ID of the subnet in which instances will be created by default.
+	// Required if vpc_id is set to a VPC other than the default VPC, and forbidden if it isn't.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	DefaultSubnetID *string `json:"defaultSubnetId,omitempty" tf:"default_subnet_id,omitempty"`
@@ -132,8 +130,7 @@ type StackParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultSubnetIDSelector *v1.Selector `json:"defaultSubnetIdSelector,omitempty" tf:"-"`
 
-	// Keyword representing the naming scheme that will be used for instance hostnames
-	// within this stack.
+	// Keyword representing the naming scheme that will be used for instance hostnames within this stack.
 	// +kubebuilder:validation:Optional
 	HostnameTheme *string `json:"hostnameTheme,omitempty" tf:"hostname_theme,omitempty"`
 
@@ -167,17 +164,16 @@ type StackParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Boolean value controlling whether the custom cookbook settings are
-	// enabled.
+	// Boolean value controlling whether the custom cookbook settings are enabled.
 	// +kubebuilder:validation:Optional
 	UseCustomCookbooks *bool `json:"useCustomCookbooks,omitempty" tf:"use_custom_cookbooks,omitempty"`
 
-	// Boolean value controlling whether the standard OpsWorks
-	// security groups apply to created instances.
+	// Boolean value controlling whether the standard OpsWorks security groups apply to created instances.
 	// +kubebuilder:validation:Optional
 	UseOpsworksSecurityGroups *bool `json:"useOpsworksSecurityGroups,omitempty" tf:"use_opsworks_security_groups,omitempty"`
 
-	// The id of the VPC that this stack belongs to.
+	// ID of the VPC that this stack belongs to.
+	// Defaults to the region's default VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`

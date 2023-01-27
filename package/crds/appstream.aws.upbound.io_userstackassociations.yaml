@@ -145,8 +145,8 @@ spec:
                       be created in.
                     type: string
                   sendEmailNotification:
-                    description: Specifies whether a welcome email is sent to a user
-                      after the user is created in the user pool.
+                    description: Whether a welcome email is sent to a user after the
+                      user is created in the user pool.
                     type: boolean
                   stackName:
                     description: Name of the stack that is associated with the user.

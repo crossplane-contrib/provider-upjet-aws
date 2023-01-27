@@ -18,11 +18,11 @@ type AccessLogSettingsObservation struct {
 
 type AccessLogSettingsParameters struct {
 
-	// The ARN of the CloudWatch Logs log group to receive access logs. Any trailing :* is trimmed from the ARN.
+	// ARN of the CloudWatch Logs log group to receive access logs. Any trailing :* is trimmed from the ARN.
 	// +kubebuilder:validation:Required
 	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
 
-	// A single line format of the access logs of data, as specified by selected $context variables.
+	// Single line format of the access logs of data. Refer to log settings for HTTP or Websocket.
 	// +kubebuilder:validation:Required
 	Format *string `json:"format" tf:"format,omitempty"`
 }
@@ -41,16 +41,16 @@ type DefaultRouteSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	DetailedMetricsEnabled *bool `json:"detailedMetricsEnabled,omitempty" tf:"detailed_metrics_enabled,omitempty"`
 
-	// The logging level for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
+	// Logging level for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
 	// Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
 
-	// The throttling burst limit for the default route.
+	// Throttling burst limit for the default route.
 	// +kubebuilder:validation:Optional
 	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
-	// The throttling rate limit for the default route.
+	// Throttling rate limit for the default route.
 	// +kubebuilder:validation:Optional
 	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
 }
@@ -60,16 +60,16 @@ type RouteSettingsObservation struct {
 
 type RouteSettingsParameters struct {
 
-	// Whether data trace logging is enabled for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
+	// Whether data trace logging is enabled for the route. Affects the log entries pushed to Amazon CloudWatch Logs.
 	// Defaults to false. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	DataTraceEnabled *bool `json:"dataTraceEnabled,omitempty" tf:"data_trace_enabled,omitempty"`
 
-	// Whether detailed metrics are enabled for the default route. Defaults to false.
+	// Whether detailed metrics are enabled for the route. Defaults to false.
 	// +kubebuilder:validation:Optional
 	DetailedMetricsEnabled *bool `json:"detailedMetricsEnabled,omitempty" tf:"detailed_metrics_enabled,omitempty"`
 
-	// The logging level for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
+	// Logging level for the route. Affects the log entries pushed to Amazon CloudWatch Logs.
 	// Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
@@ -78,39 +78,39 @@ type RouteSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	RouteKey *string `json:"routeKey" tf:"route_key,omitempty"`
 
-	// The throttling burst limit for the default route.
+	// Throttling burst limit for the route.
 	// +kubebuilder:validation:Optional
 	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
-	// The throttling rate limit for the default route.
+	// Throttling rate limit for the route.
 	// +kubebuilder:validation:Optional
 	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
 }
 
 type StageObservation struct {
 
-	// The ARN of the stage.
+	// ARN of the stage.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The ARN prefix to be used in an aws_lambda_permission's source_arn attribute.
+	// ARN prefix to be used in an aws_lambda_permission's source_arn attribute.
 	// For WebSocket APIs this attribute can additionally be used in an aws_iam_policy to authorize access to the @connections API.
 	// See the Amazon API Gateway Developer Guide for details.
 	ExecutionArn *string `json:"executionArn,omitempty" tf:"execution_arn,omitempty"`
 
-	// The stage identifier.
+	// Stage identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The URL to invoke the API pointing to the stage,
+	// URL to invoke the API pointing to the stage,
 	// e.g., wss://z4675bid1j.execute-api.eu-west-2.amazonaws.com/example-stage, or https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/
 	InvokeURL *string `json:"invokeUrl,omitempty" tf:"invoke_url,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type StageParameters struct {
 
-	// The API identifier.
+	// API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -132,16 +132,16 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoDeploy *bool `json:"autoDeploy,omitempty" tf:"auto_deploy,omitempty"`
 
-	// The identifier of a client certificate for the stage. Use the aws_api_gateway_client_certificate resource to configure a client certificate.
+	// Identifier of a client certificate for the stage. Use the aws_api_gateway_client_certificate resource to configure a client certificate.
 	// Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	ClientCertificateID *string `json:"clientCertificateId,omitempty" tf:"client_certificate_id,omitempty"`
 
-	// The default route settings for the stage.
+	// Default route settings for the stage.
 	// +kubebuilder:validation:Optional
 	DefaultRouteSettings []DefaultRouteSettingsParameters `json:"defaultRouteSettings,omitempty" tf:"default_route_settings,omitempty"`
 
-	// The deployment identifier of the stage. Use the aws_apigatewayv2_deployment resource to configure a deployment.
+	// Deployment identifier of the stage. Use the aws_apigatewayv2_deployment resource to configure a deployment.
 	// +crossplane:generate:reference:type=Deployment
 	// +kubebuilder:validation:Optional
 	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
@@ -154,7 +154,7 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	DeploymentIDSelector *v1.Selector `json:"deploymentIdSelector,omitempty" tf:"-"`
 
-	// The description for the stage. Must be less than or equal to 1024 characters in length.
+	// Description for the stage. Must be less than or equal to 1024 characters in length.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -167,7 +167,7 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	RouteSettings []RouteSettingsParameters `json:"routeSettings,omitempty" tf:"route_settings,omitempty"`
 
-	// A map that defines the stage variables for the stage.
+	// Map that defines the stage variables for the stage.
 	// +kubebuilder:validation:Optional
 	StageVariables map[string]*string `json:"stageVariables,omitempty" tf:"stage_variables,omitempty"`
 

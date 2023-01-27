@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   applicationId:
-                    description: The application ID. Must be between 4 and 7 characters
+                    description: Application ID. Must be between 4 and 7 characters
                       in length.
                     type: string
                   applicationIdRef:
@@ -144,8 +144,8 @@ spec:
                         type: object
                     type: object
                   configurationProfileId:
-                    description: The configuration profile ID. Must be between 4 and
-                      7 characters in length.
+                    description: Configuration profile ID. Must be between 4 and 7
+                      characters in length.
                     type: string
                   configurationProfileIdRef:
                     description: Reference to a ConfigurationProfile in appconfig
@@ -223,8 +223,8 @@ spec:
                         type: object
                     type: object
                   configurationVersion:
-                    description: The configuration version to deploy. Can be at most
-                      1024 characters.
+                    description: Configuration version to deploy. Can be at most 1024
+                      characters.
                     type: string
                   configurationVersionRef:
                     description: Reference to a HostedConfigurationVersion in appconfig
@@ -302,9 +302,8 @@ spec:
                         type: object
                     type: object
                   deploymentStrategyId:
-                    description: The deployment strategy ID or name of a predefined
-                      deployment strategy. See Predefined Deployment Strategies for
-                      more details.
+                    description: Deployment strategy ID or name of a predefined deployment
+                      strategy. See Predefined Deployment Strategies for more details.
                     type: string
                   deploymentStrategyIdRef:
                     description: Reference to a DeploymentStrategy in appconfig to
@@ -382,11 +381,11 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: The description of the deployment. Can be at most
-                      1024 characters.
+                    description: Description of the deployment. Can be at most 1024
+                      characters.
                     type: string
                   environmentId:
-                    description: The environment ID. Must be between 4 and 7 characters
+                    description: Environment ID. Must be between 4 and 7 characters
                       in length.
                     type: string
                   environmentIdRef:
@@ -653,24 +652,23 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the AppConfig Deployment.
+                    description: ARN of the AppConfig Deployment.
                     type: string
                   deploymentNumber:
-                    description: The deployment number.
+                    description: Deployment number.
                     type: number
                   id:
-                    description: The AppConfig application ID, environment ID, and
-                      deployment number separated by a slash (/).
+                    description: AppConfig application ID, environment ID, and deployment
+                      number separated by a slash (/).
                     type: string
                   state:
-                    description: The state of the deployment.
+                    description: State of the deployment.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

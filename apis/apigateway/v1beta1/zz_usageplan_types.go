@@ -56,15 +56,15 @@ type QuotaSettingsObservation struct {
 
 type QuotaSettingsParameters struct {
 
-	// The maximum number of requests that can be made in a given time period.
+	// Maximum number of requests that can be made in a given time period.
 	// +kubebuilder:validation:Required
 	Limit *float64 `json:"limit" tf:"limit,omitempty"`
 
-	// The number of requests subtracted from the given limit in the initial time period.
+	// Number of requests subtracted from the given limit in the initial time period.
 	// +kubebuilder:validation:Optional
 	Offset *float64 `json:"offset,omitempty" tf:"offset,omitempty"`
 
-	// The time period in which the limit applies. Valid values are "DAY", "WEEK" or "MONTH".
+	// Time period in which the limit applies. Valid values are "DAY", "WEEK" or "MONTH".
 	// +kubebuilder:validation:Required
 	Period *string `json:"period" tf:"period,omitempty"`
 }
@@ -78,7 +78,7 @@ type ThrottleParameters struct {
 	// +kubebuilder:validation:Optional
 	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
 
-	// The method to apply the throttle settings for. Specfiy the path and method, for example /test/GET.
+	// Method to apply the throttle settings for. Specfiy the path and method, for example /test/GET.
 	// +kubebuilder:validation:Required
 	Path *string `json:"path" tf:"path,omitempty"`
 
@@ -89,31 +89,31 @@ type ThrottleParameters struct {
 
 type UsagePlanObservation struct {
 
-	// Amazon Resource Name (ARN)
+	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The ID of the API resource
+	// ID of the API resource
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type UsagePlanParameters struct {
 
-	// The associated API stages of the usage plan.
+	// Associated API stages of the usage plan.
 	// +kubebuilder:validation:Optional
 	APIStages []APIStagesParameters `json:"apiStages,omitempty" tf:"api_stages,omitempty"`
 
-	// The description of a usage plan.
+	// Description of a usage plan.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the usage plan.
+	// Name of the usage plan.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The AWS Marketplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.
+	// AWS Marketplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.
 	// +kubebuilder:validation:Optional
 	ProductCode *string `json:"productCode,omitempty" tf:"product_code,omitempty"`
 

@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiId:
-                    description: The API identifier.
+                    description: API identifier.
                     type: string
                   apiIdRef:
                     description: Reference to a API to populate apiId.
@@ -141,9 +141,9 @@ spec:
                         type: object
                     type: object
                   connectionId:
-                    description: The ID of the VPC link for a private integration.
-                      Supported only for HTTP APIs. Must be between 1 and 1024 characters
-                      in length.
+                    description: ID of the VPC link for a private integration. Supported
+                      only for HTTP APIs. Must be between 1 and 1024 characters in
+                      length.
                     type: string
                   connectionIdRef:
                     description: Reference to a VPCLink in apigatewayv2 to populate
@@ -221,7 +221,7 @@ spec:
                         type: object
                     type: object
                   connectionType:
-                    description: 'The type of the network connection to the integration
+                    description: 'Type of the network connection to the integration
                       endpoint. Valid values: INTERNET, VPC_LINK. Default is INTERNET.'
                     type: string
                   contentHandlingStrategy:
@@ -230,8 +230,7 @@ spec:
                       only for WebSocket APIs.'
                     type: string
                   credentialsArn:
-                    description: The credentials required for the integration, if
-                      any.
+                    description: Credentials required for the integration, if any.
                     type: string
                   credentialsArnRef:
                     description: Reference to a Role in iam to populate credentialsArn.
@@ -307,31 +306,30 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: The description of the integration.
+                    description: Description of the integration.
                     type: string
                   integrationMethod:
-                    description: The integration's HTTP method. Must be specified
-                      if integration_type is not MOCK.
+                    description: Integration's HTTP method. Must be specified if integration_type
+                      is not MOCK.
                     type: string
                   integrationSubtype:
-                    description: Specifies the AWS service action to invoke. Supported
-                      only for HTTP APIs when integration_type is AWS_PROXY. See the
-                      AWS service integration reference documentation for supported
-                      values. Must be between 1 and 128 characters in length.
+                    description: AWS service action to invoke. Supported only for
+                      HTTP APIs when integration_type is AWS_PROXY. See the AWS service
+                      integration reference documentation for supported values. Must
+                      be between 1 and 128 characters in length.
                     type: string
                   integrationType:
-                    description: 'The integration type of an integration. Valid values:
+                    description: 'Integration type of an integration. Valid values:
                       AWS (supported only for WebSocket APIs), AWS_PROXY, HTTP (supported
                       only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for
                       WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.'
                     type: string
                   integrationUri:
-                    description: The URI of the Lambda function for a Lambda proxy
-                      integration, when integration_type is AWS_PROXY. For an HTTP
-                      integration, specify a fully-qualified URL. For an HTTP API
-                      private integration, specify the ARN of an Application Load
-                      Balancer listener, Network Load Balancer listener, or AWS Cloud
-                      Map service.
+                    description: URI of the Lambda function for a Lambda proxy integration,
+                      when integration_type is AWS_PROXY. For an HTTP integration,
+                      specify a fully-qualified URL. For an HTTP API private integration,
+                      specify the ARN of an Application Load Balancer listener, Network
+                      Load Balancer listener, or AWS Cloud Map service.
                     type: string
                   integrationUriRef:
                     description: Reference to a Function in lambda to populate integrationUri.
@@ -407,8 +405,8 @@ spec:
                         type: object
                     type: object
                   passthroughBehavior:
-                    description: 'The pass-through behavior for incoming requests
-                      based on the Content-Type header in the request, and the available
+                    description: 'Pass-through behavior for incoming requests based
+                      on the Content-Type header in the request, and the available
                       mapping templates specified as the request_templates attribute.
                       Valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER. Default
                       is WHEN_NO_MATCH. Supported only for WebSocket APIs.'
@@ -436,7 +434,7 @@ spec:
                   requestTemplates:
                     additionalProperties:
                       type: string
-                    description: A map of Velocity templates that are applied on the
+                    description: Map of Velocity templates that are applied on the
                       request payload based on the value of the Content-Type header
                       sent by the client. Supported only for WebSocket APIs.
                     type: object
@@ -449,14 +447,14 @@ spec:
                         mappings:
                           additionalProperties:
                             type: string
-                          description: A key-value map. The key of ths map identifies
+                          description: Key-value map. The key of this map identifies
                             the location of the request parameter to change, and how
                             to change it. The corresponding value specifies the new
                             data for the parameter. See the Amazon API Gateway Developer
                             Guide for details.
                           type: object
                         statusCode:
-                          description: The HTTP status code in the range 200-599.
+                          description: HTTP status code in the range 200-599.
                           type: string
                       required:
                       - mappings
@@ -473,8 +471,8 @@ spec:
                       and 30 seconds for HTTP APIs.
                     type: number
                   tlsConfig:
-                    description: The TLS configuration for a private integration.
-                      Supported only for HTTP APIs.
+                    description: TLS configuration for a private integration. Supported
+                      only for HTTP APIs.
                     items:
                       properties:
                         serverNameToVerify:
@@ -666,7 +664,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The integration identifier.
+                    description: Integration identifier.
                     type: string
                   integrationResponseSelectionExpression:
                     description: The integration response selection expression for

@@ -50,6 +50,10 @@ type AccessPointParameters struct {
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// The AWS account ID associated with the S3 bucket associated with this access point.
+	// +kubebuilder:validation:Optional
+	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
+
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`

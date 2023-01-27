@@ -24,7 +24,7 @@ spec:
     - encryptionAtRestKmsKeyArnSelector:
         matchLabels:
           testing.upbound.io/example-name: kms
-    kafkaVersion: 2.4.1
+    kafkaVersion: 3.2.0
     loggingInfo:
     - brokerLogs:
       - cloudwatchLogs:

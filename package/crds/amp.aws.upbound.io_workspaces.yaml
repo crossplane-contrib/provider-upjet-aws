@@ -68,6 +68,20 @@ spec:
                     description: The alias of the prometheus workspace. See more in
                       AWS Docs.
                     type: string
+                  loggingConfiguration:
+                    description: Logging configuration for the workspace. See Logging
+                      Configuration below for details.
+                    items:
+                      properties:
+                        logGroupArn:
+                          description: The ARN of the CloudWatch log group to which
+                            the vended log data will be published. This log group
+                            must exist.
+                          type: string
+                      required:
+                      - logGroupArn
+                      type: object
+                    type: array
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.

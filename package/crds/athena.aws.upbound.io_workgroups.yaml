@@ -87,11 +87,15 @@ spec:
                           items:
                             properties:
                               selectedEngineVersion:
-                                description: The requested engine version. Defaults
-                                  to AUTO.
+                                description: Requested engine version. Defaults to
+                                  AUTO.
                                 type: string
                             type: object
                           type: array
+                        executionRole:
+                          description: Role used in a notebook session for accessing
+                            the user's resources.
+                          type: string
                         publishCloudwatchMetricsEnabled:
                           description: Boolean whether Amazon CloudWatch metrics are
                             enabled for the workgroup. Defaults to true.
@@ -112,13 +116,13 @@ spec:
                           items:
                             properties:
                               aclConfiguration:
-                                description: Indicates that an Amazon S3 canned ACL
-                                  should be set to control ownership of stored query
-                                  results. See ACL Configuration below.
+                                description: That an Amazon S3 canned ACL should be
+                                  set to control ownership of stored query results.
+                                  See ACL Configuration below.
                                 items:
                                   properties:
                                     s3AclOption:
-                                      description: The Amazon S3 canned ACL that Athena
+                                      description: Amazon S3 canned ACL that Athena
                                         should specify when storing query results.
                                         Valid value is BUCKET_OWNER_FULL_CONTROL.
                                       type: string
@@ -132,20 +136,20 @@ spec:
                                 items:
                                   properties:
                                     encryptionOption:
-                                      description: Indicates whether Amazon S3 server-side
-                                        encryption with Amazon S3-managed keys (SSE_S3),
-                                        server-side encryption with KMS-managed keys
-                                        (SSE_KMS), or client-side encryption with
-                                        KMS-managed keys (CSE_KMS) is used. If a query
-                                        runs in a workgroup and the workgroup overrides
-                                        client-side settings, then the workgroup's
-                                        setting for encryption is used. It specifies
-                                        whether query results must be encrypted, for
-                                        all queries that run in this workgroup.
+                                      description: Whether Amazon S3 server-side encryption
+                                        with Amazon S3-managed keys (SSE_S3), server-side
+                                        encryption with KMS-managed keys (SSE_KMS),
+                                        or client-side encryption with KMS-managed
+                                        keys (CSE_KMS) is used. If a query runs in
+                                        a workgroup and the workgroup overrides client-side
+                                        settings, then the workgroup's setting for
+                                        encryption is used. It specifies whether query
+                                        results must be encrypted, for all queries
+                                        that run in this workgroup.
                                       type: string
                                     kmsKeyArn:
                                       description: For SSE_KMS and CSE_KMS, this is
-                                        the KMS key Amazon Resource Name (ARN).
+                                        the KMS key ARN.
                                       type: string
                                     kmsKeyArnRef:
                                       description: Reference to a Key in kms to populate
@@ -234,12 +238,12 @@ spec:
                                   type: object
                                 type: array
                               expectedBucketOwner:
-                                description: The AWS account ID that you expect to
-                                  be the owner of the Amazon S3 bucket.
+                                description: AWS account ID that you expect to be
+                                  the owner of the Amazon S3 bucket.
                                 type: string
                               outputLocation:
-                                description: The location in Amazon S3 where your
-                                  query results are stored, such as s3://path/to/query/bucket/.
+                                description: Location in Amazon S3 where your query
+                                  results are stored, such as s3://path/to/query/bucket/.
                                   For more information, see Queries and Query Result
                                   Files.
                                 type: string
@@ -251,8 +255,8 @@ spec:
                     description: Description of the workgroup.
                     type: string
                   forceDestroy:
-                    description: The option to delete the workgroup and its contents
-                      even if the workgroup contains any named queries.
+                    description: Option to delete the workgroup and its contents even
+                      if the workgroup contains any named queries.
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to
@@ -447,7 +451,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the workgroup
+                    description: ARN of the workgroup
                     type: string
                   configuration:
                     description: Configuration block with various settings for the
@@ -470,14 +474,13 @@ spec:
                       type: object
                     type: array
                   id:
-                    description: The workgroup name
+                    description: Workgroup name
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

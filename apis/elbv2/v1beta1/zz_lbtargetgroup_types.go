@@ -22,11 +22,11 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Number of consecutive health checks successes required before considering an unhealthy target healthy. Defaults to 3.
+	// Number of consecutive health check successes required before considering a target healthy. The range is 2-10. Defaults to 3.
 	// +kubebuilder:validation:Optional
 	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
 
-	// Approximate amount of time, in seconds, between health checks of an individual target. Minimum value 5 seconds, Maximum value 300 seconds. For lambda target groups, it needs to be greater as the timeout of the underlying lambda. Default 30 seconds.
+	// Approximate amount of time, in seconds, between health checks of an individual target. The range is 5-300. For lambda target groups, it needs to be greater than the timeout of the underlying lambda. Defaults to 30.
 	// +kubebuilder:validation:Optional
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
@@ -38,19 +38,19 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Port to use to connect with the target. Valid values are either ports 1-65535, or traffic-port. Defaults to traffic-port.
+	// The port the load balancer uses when performing health checks on targets. Default is traffic-port.
 	// +kubebuilder:validation:Optional
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Protocol to use to connect with the target. Defaults to HTTP. Not applicable when target_type is lambda.
+	// Protocol the load balancer uses when performing health checks on targets. Must be either TCP, HTTP, or HTTPS. The TCP protocol is not supported for health checks if the protocol of the target group is HTTP or HTTPS. Defaults to HTTP.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// Amount of time, in seconds, during which no response means a failed health check. For Application Load Balancers, the range is 2 to 120 seconds, and the default is 5 seconds for the instance target type and 30 seconds for the lambda target type. For Network Load Balancers, you cannot set a custom value, and the default is 10 seconds for TCP and HTTPS health checks and 6 seconds for HTTP health checks.
+	// Amount of time, in seconds, during which no response from a target means a failed health check. The range is 2–120 seconds. For target groups with a protocol of HTTP, the default is 6 seconds. For target groups with a protocol of TCP, TLS or HTTPS, the default is 10 seconds. For target groups with a protocol of GENEVE, the default is 5 seconds. If the target type is lambda, the default is 30 seconds.
 	// +kubebuilder:validation:Optional
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// Number of consecutive health check failures required before considering the target unhealthy. For Network Load Balancers, this value must be the same as the healthy_threshold. Defaults to 3.
+	// Number of consecutive health check failures required before considering a target unhealthy. The range is 2-10. Defaults to 3.
 	// +kubebuilder:validation:Optional
 	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
@@ -83,6 +83,10 @@ type LBTargetGroupParameters struct {
 	// Health Check configuration block. Detailed below.
 	// +kubebuilder:validation:Optional
 	HealthCheck []HealthCheckParameters `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
+
+	// The type of IP addresses used by the target group, only supported when target type is set to ip. Possible values are ipv4 or ipv6.
+	// +kubebuilder:validation:Optional
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// Whether the request and response headers exchanged between the load balancer and the Lambda function include arrays of values or strings. Only applies when target_type is lambda. Default is false.
 	// +kubebuilder:validation:Optional
@@ -133,6 +137,10 @@ type LBTargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Target failover block. Only applicable for Gateway Load Balancer target groups. See target_failover for more information.
+	// +kubebuilder:validation:Optional
+	TargetFailover []TargetFailoverParameters `json:"targetFailover,omitempty" tf:"target_failover,omitempty"`
+
 	// (May be required, Forces new resource) Type of target that you must specify when registering targets with this target group. See doc for supported values. The default is instance.
 	// +kubebuilder:validation:Optional
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
@@ -168,9 +176,23 @@ type LBTargetGroupStickinessParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The type of sticky sessions. The only current possible values are lb_cookie, app_cookie for ALBs, and source_ip for NLBs.
+	// The type of sticky sessions. The only current possible values are lb_cookie, app_cookie for ALBs, source_ip for NLBs, and source_ip_dest_ip, source_ip_dest_ip_proto for GWLBs.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type TargetFailoverObservation struct {
+}
+
+type TargetFailoverParameters struct {
+
+	// Indicates how the GWLB handles existing flows when a target is deregistered. Possible values are rebalance and no_rebalance. Must match the attribute value set for on_unhealthy. Default: no_rebalance.
+	// +kubebuilder:validation:Required
+	OnDeregistration *string `json:"onDeregistration" tf:"on_deregistration,omitempty"`
+
+	// Indicates how the GWLB handles existing flows when a target is unhealthy. Possible values are rebalance and no_rebalance. Must match the attribute value set for on_deregistration. Default: no_rebalance.
+	// +kubebuilder:validation:Required
+	OnUnhealthy *string `json:"onUnhealthy" tf:"on_unhealthy,omitempty"`
 }
 
 // LBTargetGroupSpec defines the desired state of LBTargetGroup

@@ -166,7 +166,7 @@ type CachePolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// CachePolicy is the Schema for the CachePolicys API. Provides a cache policy for a CloudFront ditribution. When it’s attached to a cache behavior, the cache policy determines the the values that CloudFront includes in the cache key. These values can include HTTP headers, cookies, and URL query strings. CloudFront uses the cache key to find an object in its cache that it can return to the viewer. It also determines the default, minimum, and maximum time to live (TTL) values that you want objects to stay in the CloudFront cache.
+// CachePolicy is the Schema for the CachePolicys API. Provides a cache policy for a CloudFront ditribution. When it’s attached to a cache behavior, the cache policy determines the values that CloudFront includes in the cache key. These values can include HTTP headers, cookies, and URL query strings. CloudFront uses the cache key to find an object in its cache that it can return to the viewer. It also determines the default, minimum, and maximum time to live (TTL) values that you want objects to stay in the CloudFront cache.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

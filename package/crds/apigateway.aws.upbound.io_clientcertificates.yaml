@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the client certificate.
+                    description: Description of the client certificate.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -256,16 +256,16 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN)
+                    description: ARN
                     type: string
                   createdDate:
-                    description: The date when the client certificate was created.
+                    description: Date when the client certificate was created.
                     type: string
                   expirationDate:
-                    description: The date when the client certificate will expire.
+                    description: Date when the client certificate will expire.
                     type: string
                   id:
-                    description: The identifier of the client certificate.
+                    description: Identifier of the client certificate.
                     type: string
                   pemEncodedCertificate:
                     description: The PEM-encoded public key of the client certificate.
@@ -273,9 +273,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

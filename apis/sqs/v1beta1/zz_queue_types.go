@@ -91,7 +91,7 @@ type QueueParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Boolean to enable server-side encryption (SSE) of message content with SQS-owned encryption keys. Defaults to false. See Encryption at rest.
+	// Boolean to enable server-side encryption (SSE) of message content with SQS-owned encryption keys. See Encryption at rest.
 	// +kubebuilder:validation:Optional
 	SqsManagedSseEnabled *bool `json:"sqsManagedSseEnabled,omitempty" tf:"sqs_managed_sse_enabled,omitempty"`
 

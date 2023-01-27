@@ -60,6 +60,7 @@ type TransitGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Whether Multicast support is enabled. Required to use ec2_transit_gateway_multicast_domain. Valid values: disable, enable. Default value: disable.
 	// +kubebuilder:validation:Optional
 	MulticastSupport *string `json:"multicastSupport,omitempty" tf:"multicast_support,omitempty"`
 

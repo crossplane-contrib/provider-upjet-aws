@@ -489,7 +489,7 @@ type SpotFleetRequestObservation struct {
 type SpotFleetRequestParameters struct {
 
 	// Indicates how to allocate the target capacity across
-	// the Spot pools specified by the Spot fleet request. The default is
+	// the Spot pools specified by the Spot fleet request. Valid values: lowestPrice, diversified, capacityOptimized, capacityOptimizedPrioritized, and priceCapacityOptimized. The default is
 	// lowestPrice.
 	// +kubebuilder:validation:Optional
 	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
@@ -577,6 +577,10 @@ type SpotFleetRequestParameters struct {
 	// important to your application workload, such as vCPUs, memory, or I/O.
 	// +kubebuilder:validation:Required
 	TargetCapacity *float64 `json:"targetCapacity" tf:"target_capacity,omitempty"`
+
+	// The unit for the target capacity. This can only be done with instance_requirements defined
+	// +kubebuilder:validation:Optional
+	TargetCapacityUnitType *string `json:"targetCapacityUnitType,omitempty" tf:"target_capacity_unit_type,omitempty"`
 
 	// A list of aws_alb_target_group ARNs, for use with Application Load Balancing.
 	// +kubebuilder:validation:Optional

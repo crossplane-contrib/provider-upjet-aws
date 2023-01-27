@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiStages:
-                    description: The associated API stages of the usage plan.
+                    description: Associated API stages of the usage plan.
                     items:
                       properties:
                         apiId:
@@ -243,7 +243,7 @@ spec:
                                   bucket is at its full capacity.
                                 type: number
                               path:
-                                description: The method to apply the throttle settings
+                                description: Method to apply the throttle settings
                                   for. Specfiy the path and method, for example /test/GET.
                                 type: string
                               rateLimit:
@@ -256,30 +256,30 @@ spec:
                       type: object
                     type: array
                   description:
-                    description: The description of a usage plan.
+                    description: Description of a usage plan.
                     type: string
                   name:
-                    description: The name of the usage plan.
+                    description: Name of the usage plan.
                     type: string
                   productCode:
-                    description: The AWS Marketplace product identifier to associate
-                      with the usage plan as a SaaS product on AWS Marketplace.
+                    description: AWS Marketplace product identifier to associate with
+                      the usage plan as a SaaS product on AWS Marketplace.
                     type: string
                   quotaSettings:
                     description: The quota settings of the usage plan.
                     items:
                       properties:
                         limit:
-                          description: The maximum number of requests that can be
-                            made in a given time period.
+                          description: Maximum number of requests that can be made
+                            in a given time period.
                           type: number
                         offset:
-                          description: The number of requests subtracted from the
-                            given limit in the initial time period.
+                          description: Number of requests subtracted from the given
+                            limit in the initial time period.
                           type: number
                         period:
-                          description: The time period in which the limit applies.
-                            Valid values are "DAY", "WEEK" or "MONTH".
+                          description: Time period in which the limit applies. Valid
+                            values are "DAY", "WEEK" or "MONTH".
                           type: string
                       required:
                       - limit
@@ -491,17 +491,16 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN)
+                    description: ARN
                     type: string
                   id:
-                    description: The ID of the API resource
+                    description: ID of the API resource
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

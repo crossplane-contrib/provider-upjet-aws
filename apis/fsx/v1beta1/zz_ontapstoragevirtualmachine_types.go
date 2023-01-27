@@ -18,7 +18,7 @@ type ActiveDirectoryConfigurationObservation struct {
 
 type ActiveDirectoryConfigurationParameters struct {
 
-	// The NetBIOS name of the Active Directory computer object that will be created for your SVM. This is often the same as the SVM name but can be different. It is limited to 15 characters because of standard NetBIOS naming limits.
+	// The NetBIOS name of the Active Directory computer object that will be created for your SVM. This is often the same as the SVM name but can be different. AWS limits to 15 characters because of standard NetBIOS naming limits.
 	// +kubebuilder:validation:Optional
 	NetbiosName *string `json:"netbiosName,omitempty" tf:"netbios_name,omitempty"`
 

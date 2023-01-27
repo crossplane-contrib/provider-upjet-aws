@@ -15,13 +15,13 @@ import (
 
 type CertificateValidationObservation struct {
 
-	// The time at which the certificate was issued
+	// Time at which the certificate was issued
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type CertificateValidationParameters struct {
 
-	// The ARN of the certificate that is being validated.
+	// ARN of the certificate that is being validated.
 	// +crossplane:generate:reference:type=Certificate
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`

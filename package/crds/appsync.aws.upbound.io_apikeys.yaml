@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiId:
-                    description: The ID of the associated AppSync API
+                    description: ID of the associated AppSync API
                     type: string
                   apiIdRef:
                     description: Reference to a GraphQLAPI in appsync to populate
@@ -143,7 +143,7 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: The API key description.
+                    description: API key description.
                     type: string
                   expires:
                     description: RFC3339 string representation of the expiry date.

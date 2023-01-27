@@ -28,7 +28,7 @@ type EnvironmentObservation struct {
 
 type EnvironmentParameters struct {
 
-	// Map of environment variables that are accessible from the function code during execution.
+	// Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present.
 	// +kubebuilder:validation:Optional
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
@@ -83,11 +83,18 @@ type FunctionObservation struct {
 	// ARN identifying your Lambda Function Version (if versioning is enabled via publish = true).
 	QualifiedArn *string `json:"qualifiedArn,omitempty" tf:"qualified_arn,omitempty"`
 
+	// Qualified ARN (ARN with lambda version number) to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri.
+	QualifiedInvokeArn *string `json:"qualifiedInvokeArn,omitempty" tf:"qualified_invoke_arn,omitempty"`
+
 	// ARN of the signing job.
 	SigningJobArn *string `json:"signingJobArn,omitempty" tf:"signing_job_arn,omitempty"`
 
 	// ARN of the signing profile version.
 	SigningProfileVersionArn *string `json:"signingProfileVersionArn,omitempty" tf:"signing_profile_version_arn,omitempty"`
+
+	// Snap start settings block. Detailed below.
+	// +kubebuilder:validation:Optional
+	SnapStart []SnapStartObservation `json:"snapStart,omitempty" tf:"snap_start,omitempty"`
 
 	// Size in bytes of the function .zip file.
 	SourceCodeSize *float64 `json:"sourceCodeSize,omitempty" tf:"source_code_size,omitempty"`
@@ -222,6 +229,10 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	S3ObjectVersion *string `json:"s3ObjectVersion,omitempty" tf:"s3_object_version,omitempty"`
 
+	// Snap start settings block. Detailed below.
+	// +kubebuilder:validation:Optional
+	SnapStart []SnapStartParameters `json:"snapStart,omitempty" tf:"snap_start,omitempty"`
+
 	// Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is filebase64sha256("file.11.12 and later) or base64sha256(file("file.11.11 and earlier), where "file.zip" is the local filename of the lambda function source archive.
 	// +kubebuilder:validation:Optional
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
@@ -261,12 +272,25 @@ type ImageConfigParameters struct {
 	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
 }
 
+type SnapStartObservation struct {
+
+	// Optimization status of the snap start configuration. Valid values are On and Off.
+	OptimizationStatus *string `json:"optimizationStatus,omitempty" tf:"optimization_status,omitempty"`
+}
+
+type SnapStartParameters struct {
+
+	// Conditions where snap start is enabled. Valid values are PublishedVersions.
+	// +kubebuilder:validation:Required
+	ApplyOn *string `json:"applyOn" tf:"apply_on,omitempty"`
+}
+
 type TracingConfigObservation struct {
 }
 
 type TracingConfigParameters struct {
 
-	// Whether to to sample and trace a subset of incoming requests with AWS X-Ray. Valid values are PassThrough and Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.
+	// Whether to sample and trace a subset of incoming requests with AWS X-Ray. Valid values are PassThrough and Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 }

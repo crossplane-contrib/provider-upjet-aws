@@ -65,8 +65,8 @@ spec:
               forProvider:
                 properties:
                   alias:
-                    description: An alias block. Conflicts with ttl & records. Alias
-                      record documented below.
+                    description: An alias block. Conflicts with ttl & records. Documented
+                      below.
                     items:
                       properties:
                         evaluateTargetHealth:

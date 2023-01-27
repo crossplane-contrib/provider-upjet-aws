@@ -32,7 +32,7 @@ type CognitoConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
-	// The id for your Amazon Cognito user pool.
+	// ID for your Amazon Cognito user pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolDomain
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("user_pool_id",false)
 	// +kubebuilder:validation:Optional
@@ -105,6 +105,10 @@ type WorkforceObservation struct {
 
 	// The subdomain for your OIDC Identity Provider.
 	Subdomain *string `json:"subdomain,omitempty" tf:"subdomain,omitempty"`
+
+	// configure a workforce using VPC. see Workforce VPC Config details below.
+	// +kubebuilder:validation:Optional
+	WorkforceVPCConfig []WorkforceVPCConfigObservation `json:"workforceVpcConfig,omitempty" tf:"workforce_vpc_config,omitempty"`
 }
 
 type WorkforceParameters struct {
@@ -125,6 +129,31 @@ type WorkforceParameters struct {
 	// A list of IP address ranges Used to create an allow list of IP addresses for a private workforce. By default, a workforce isn't restricted to specific IP addresses. see Source Ip Config details below.
 	// +kubebuilder:validation:Optional
 	SourceIPConfig []SourceIPConfigParameters `json:"sourceIpConfig,omitempty" tf:"source_ip_config,omitempty"`
+
+	// configure a workforce using VPC. see Workforce VPC Config details below.
+	// +kubebuilder:validation:Optional
+	WorkforceVPCConfig []WorkforceVPCConfigParameters `json:"workforceVpcConfig,omitempty" tf:"workforce_vpc_config,omitempty"`
+}
+
+type WorkforceVPCConfigObservation struct {
+
+	// The IDs for the VPC service endpoints of your VPC workforce.
+	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
+}
+
+type WorkforceVPCConfigParameters struct {
+
+	// The VPC security group IDs. The security groups must be for the same VPC as specified in the subnet.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// The ID of the subnets in the VPC that you want to connect.
+	// +kubebuilder:validation:Optional
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+
+	// The ID of the VPC that the workforce uses for communication.
+	// +kubebuilder:validation:Optional
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 // WorkforceSpec defines the desired state of Workforce

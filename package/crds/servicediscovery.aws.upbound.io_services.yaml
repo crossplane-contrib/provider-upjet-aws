@@ -239,6 +239,12 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                  type:
+                    description: If present, specifies that the service instances
+                      are only discoverable using the DiscoverInstances API operation.
+                      No DNS records is registered for the service instances. The
+                      only valid value is HTTP.
+                    type: string
                 required:
                 - name
                 - region

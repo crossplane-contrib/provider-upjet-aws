@@ -129,7 +129,7 @@ func (mg *BucketCorsConfiguration) ResolveReferences(ctx context.Context, c clie
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.BucketRef,
 		Selector:     mg.Spec.ForProvider.BucketSelector,
 		To: reference.To{

@@ -67,7 +67,7 @@ spec:
               forProvider:
                 properties:
                   certificateAuthorityArn:
-                    description: Amazon Resource Name (ARN) of the Certificate Authority.
+                    description: ARN of the Certificate Authority.
                     type: string
                   certificateAuthorityArnRef:
                     description: Reference to a CertificateAuthority to populate certificateAuthorityArn.
@@ -143,10 +143,9 @@ spec:
                         type: object
                     type: object
                   certificateChainSecretRef:
-                    description: The PEM-encoded certificate chain that includes any
-                      intermediate certificates and chains up to root CA. Required
-                      for subordinate Certificate Authorities. Not allowed for root
-                      Certificate Authorities.
+                    description: PEM-encoded certificate chain that includes any intermediate
+                      certificates and chains up to root CA. Required for subordinate
+                      Certificate Authorities. Not allowed for root Certificate Authorities.
                     properties:
                       key:
                         description: The key to select.
@@ -163,7 +162,7 @@ spec:
                     - namespace
                     type: object
                   certificateSecretRef:
-                    description: The PEM-encoded certificate for the Certificate Authority.
+                    description: PEM-encoded certificate for the Certificate Authority.
                     properties:
                       key:
                         description: The key to select.

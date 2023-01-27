@@ -50,7 +50,7 @@ type BucketMetricParameters struct {
 	// +kubebuilder:validation:Optional
 	Filter []BucketMetricFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
-	// Unique identifier of the metrics configuration for the bucket.
+	// Unique identifier of the metrics configuration for the bucket. Must be less than or equal to 64 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

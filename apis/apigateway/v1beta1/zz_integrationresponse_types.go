@@ -19,11 +19,11 @@ type IntegrationResponseObservation struct {
 
 type IntegrationResponseParameters struct {
 
-	// Specifies how to handle request payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT. If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.
+	// How to handle request payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT. If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.
 	// +kubebuilder:validation:Optional
 	ContentHandling *string `json:"contentHandling,omitempty" tf:"content_handling,omitempty"`
 
-	// The HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
+	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("http_method",false)
 	// +kubebuilder:validation:Optional
@@ -42,7 +42,7 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The API resource ID
+	// API resource ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -56,16 +56,15 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
-	// A map of response parameters that can be read from the backend response.
-	// For example: response_parameters = { "method.response.header.X-Some-Header" = "integration.response.header.X-Some-Other-Header" }
+	// Map of response parameters that can be read from the backend response. For example: response_parameters = { "method.response.header.X-Some-Header" = "integration.response.header.X-Some-Other-Header" }.
 	// +kubebuilder:validation:Optional
 	ResponseParameters map[string]*string `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
-	// A map specifying the templates used to transform the integration response body
+	// Map of templates used to transform the integration response body.
 	// +kubebuilder:validation:Optional
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
-	// The ID of the associated REST API
+	// ID of the associated REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -79,14 +78,11 @@ type IntegrationResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
-	// Specifies the regular expression pattern used to choose
-	// an integration response based on the response from the backend. Omit configuring this to make the integration the default one.
-	// If the backend is an AWS Lambda function, the AWS Lambda function error header is matched.
-	// For all other HTTP and AWS backends, the HTTP status code is matched.
+	// Regular expression pattern used to choose an integration response based on the response from the backend. Omit configuring this to make the integration the default one. If the backend is an AWS Lambda function, the AWS Lambda function error header is matched. For all other HTTP and AWS backends, the HTTP status code is matched.
 	// +kubebuilder:validation:Optional
 	SelectionPattern *string `json:"selectionPattern,omitempty" tf:"selection_pattern,omitempty"`
 
-	// The HTTP status code
+	// HTTP status code.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.MethodResponse
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("status_code",false)
 	// +kubebuilder:validation:Optional

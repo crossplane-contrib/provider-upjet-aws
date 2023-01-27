@@ -28,7 +28,7 @@ type AlertManagerDefinitionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The id of the prometheus workspace the alert manager definition should be linked to
+	// ID of the prometheus workspace the alert manager definition should be linked to
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amp/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

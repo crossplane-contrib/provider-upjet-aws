@@ -15,13 +15,13 @@ import (
 
 type RouteResponseObservation struct {
 
-	// The route response identifier.
+	// Route response identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type RouteResponseParameters struct {
 
-	// The API identifier.
+	// API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -43,11 +43,11 @@ type RouteResponseParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The response models for the route response.
+	// Response models for the route response.
 	// +kubebuilder:validation:Optional
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
-	// The identifier of the aws_apigatewayv2_route.
+	// Identifier of the aws_apigatewayv2_route.
 	// +crossplane:generate:reference:type=Route
 	// +kubebuilder:validation:Optional
 	RouteID *string `json:"routeId,omitempty" tf:"route_id,omitempty"`
@@ -60,7 +60,7 @@ type RouteResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	RouteIDSelector *v1.Selector `json:"routeIdSelector,omitempty" tf:"-"`
 
-	// The route response key.
+	// Route response key.
 	// +kubebuilder:validation:Required
 	RouteResponseKey *string `json:"routeResponseKey" tf:"route_response_key,omitempty"`
 }

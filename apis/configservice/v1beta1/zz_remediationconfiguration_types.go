@@ -39,6 +39,10 @@ type ParameterParameters struct {
 	// Value is static and does not change at run-time.
 	// +kubebuilder:validation:Optional
 	StaticValue *string `json:"staticValue,omitempty" tf:"static_value,omitempty"`
+
+	// List of static values.
+	// +kubebuilder:validation:Optional
+	StaticValues []*string `json:"staticValues,omitempty" tf:"static_values,omitempty"`
 }
 
 type RemediationConfigurationObservation struct {

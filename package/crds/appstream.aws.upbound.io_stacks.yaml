@@ -65,25 +65,37 @@ spec:
               forProvider:
                 properties:
                   accessEndpoints:
+                    description: Set of configuration blocks defining the interface
+                      VPC endpoints. Users of the stack can connect to AppStream 2.0
+                      only through the specified endpoints. See access_endpoints below.
                     items:
                       properties:
                         endpointType:
+                          description: Type of the interface endpoint. See the AccessEndpoint
+                            AWS API documentation for valid values.
                           type: string
                         vpceId:
-                          description: Unique ID of the appstream stack.
+                          description: ID of the VPC in which the interface endpoint
+                            is used.
                           type: string
                       required:
                       - endpointType
                       type: object
                     type: array
                   applicationSettings:
-                    description: Settings for application settings persistence.
+                    description: Settings for application settings persistence. See
+                      application_settings below.
                     items:
                       properties:
                         enabled:
+                          description: Whether application settings should be persisted.
                           type: boolean
                         settingsGroup:
+                          description: Name of the settings group. Required when enabled
+                            is true. Can be up to 100 characters.
                           type: string
+                      required:
+                      - enabled
                       type: object
                     type: array
                   description:
@@ -117,12 +129,12 @@ spec:
                     type: string
                   storageConnectors:
                     description: Configuration block for the storage connectors to
-                      enable. See below.
+                      enable. See storage_connectors below.
                     items:
                       properties:
                         connectorType:
-                          description: 'Type of storage connector. Valid values are:
-                            HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE.'
+                          description: Type of storage connector. Valid values are
+                            HOMEFOLDERS, GOOGLE_DRIVE, or ONE_DRIVE.
                           type: string
                         domains:
                           description: Names of the domains for the account.
@@ -139,22 +151,24 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags.
                     type: object
                   userSettings:
                     description: Configuration block for the actions that are enabled
-                      or disabled for users during their streaming sessions. By default,
-                      these actions are enabled. See below.
+                      or disabled for users during their streaming sessions. If not
+                      provided, these settings are configured automatically by AWS.
+                      See user_settings below.
                     items:
                       properties:
                         action:
-                          description: 'Action that is enabled or disabled. Valid
-                            values are: CLIPBOARD_COPY_FROM_LOCAL_DEVICE,  CLIPBOARD_COPY_TO_LOCAL_DEVICE,
+                          description: Action that is enabled or disabled. Valid values
+                            are CLIPBOARD_COPY_FROM_LOCAL_DEVICE,  CLIPBOARD_COPY_TO_LOCAL_DEVICE,
                             FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE,
-                            DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN.'
+                            DOMAIN_PASSWORD_SIGNIN, or DOMAIN_SMART_CARD_SIGNIN.
                           type: string
                         permission:
-                          description: 'Indicates whether the action is enabled or
-                            disabled. Valid values are: ENABLED, DISABLED.'
+                          description: Whether the action is enabled or disabled.
+                            Valid values are ENABLED or DISABLED.
                           type: string
                       required:
                       - action

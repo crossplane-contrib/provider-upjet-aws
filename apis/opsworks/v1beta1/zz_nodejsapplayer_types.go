@@ -98,6 +98,75 @@ type NodeJSAppLayerEBSVolumeParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type NodeJSAppLayerLoadBasedAutoScalingDownscalingObservation struct {
+}
+
+type NodeJSAppLayerLoadBasedAutoScalingDownscalingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+}
+
+type NodeJSAppLayerLoadBasedAutoScalingObservation struct {
+}
+
+type NodeJSAppLayerLoadBasedAutoScalingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Downscaling []NodeJSAppLayerLoadBasedAutoScalingDownscalingParameters `json:"downscaling,omitempty" tf:"downscaling,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Upscaling []NodeJSAppLayerLoadBasedAutoScalingUpscalingParameters `json:"upscaling,omitempty" tf:"upscaling,omitempty"`
+}
+
+type NodeJSAppLayerLoadBasedAutoScalingUpscalingObservation struct {
+}
+
+type NodeJSAppLayerLoadBasedAutoScalingUpscalingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+}
+
 type NodeJSAppLayerObservation struct {
 
 	// The Amazon Resource Name(ARN) of the layer.
@@ -185,6 +254,9 @@ type NodeJSAppLayerParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceShutdownTimeout *float64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	LoadBasedAutoScaling []NodeJSAppLayerLoadBasedAutoScalingParameters `json:"loadBasedAutoScaling,omitempty" tf:"load_based_auto_scaling,omitempty"`
+
 	// A human-readable name for the layer.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -193,7 +265,7 @@ type NodeJSAppLayerParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeJSVersion *string `json:"nodejsVersion,omitempty" tf:"nodejs_version,omitempty"`
 
-	// The id of the stack the layer will belong to.
+	// ID of the stack the layer will belong to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

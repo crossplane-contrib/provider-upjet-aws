@@ -151,6 +151,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags.
                     type: object
                 required:
                 - region

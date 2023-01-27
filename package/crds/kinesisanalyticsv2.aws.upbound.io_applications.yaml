@@ -1373,7 +1373,8 @@ spec:
                     type: string
                   runtimeEnvironment:
                     description: 'The runtime environment for the application. Valid
-                      values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13.'
+                      values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13,
+                      FLINK-1_15.'
                     type: string
                   serviceExecutionRole:
                     description: The ARN of the IAM role used by the application to

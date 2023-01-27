@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   httpMethod:
-                    description: The HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
+                    description: HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
                       ANY)
                     type: string
                   httpMethodRef:
@@ -146,7 +146,7 @@ spec:
                       be created in.
                     type: string
                   resourceId:
-                    description: The API resource ID
+                    description: API resource ID
                     type: string
                   resourceIdRef:
                     description: Reference to a Resource in apigateway to populate
@@ -226,19 +226,19 @@ spec:
                   responseModels:
                     additionalProperties:
                       type: string
-                    description: A map of the API models used for the response's content
+                    description: Map of the API models used for the response's content
                       type
                     type: object
                   responseParameters:
                     additionalProperties:
                       type: boolean
-                    description: 'A map of response parameters that can be sent to
-                      the caller. For example: response_parameters = { "method.response.header.X-Some-Header"
+                    description: 'Map of response parameters that can be sent to the
+                      caller. For example: response_parameters = { "method.response.header.X-Some-Header"
                       = true } would define that the header X-Some-Header can be provided
                       on the response.'
                     type: object
                   restApiId:
-                    description: The ID of the associated REST API
+                    description: ID of the associated REST API
                     type: string
                   restApiIdRef:
                     description: Reference to a RestAPI in apigateway to populate
@@ -316,7 +316,7 @@ spec:
                         type: object
                     type: object
                   statusCode:
-                    description: The HTTP status code
+                    description: HTTP status code
                     type: string
                 required:
                 - region

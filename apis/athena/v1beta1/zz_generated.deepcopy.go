@@ -91,6 +91,11 @@ func (in *ConfigurationParameters) DeepCopyInto(out *ConfigurationParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ExecutionRole != nil {
+		in, out := &in.ExecutionRole, &out.ExecutionRole
+		*out = new(string)
+		**out = **in
+	}
 	if in.PublishCloudwatchMetricsEnabled != nil {
 		in, out := &in.PublishCloudwatchMetricsEnabled, &out.PublishCloudwatchMetricsEnabled
 		*out = new(bool)

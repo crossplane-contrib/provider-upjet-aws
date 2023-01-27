@@ -69,16 +69,16 @@ spec:
                     description: Name of the auto scaling configuration.
                     type: string
                   maxConcurrency:
-                    description: The maximal number of concurrent requests that you
-                      want an instance to process. When the number of concurrent requests
+                    description: Maximal number of concurrent requests that you want
+                      an instance to process. When the number of concurrent requests
                       goes over this limit, App Runner scales up your service.
                     type: number
                   maxSize:
-                    description: The maximal number of instances that App Runner provisions
+                    description: Maximal number of instances that App Runner provisions
                       for your service.
                     type: number
                   minSize:
-                    description: The minimal number of instances that App Runner provisions
+                    description: Minimal number of instances that App Runner provisions
                       for your service.
                     type: number
                   region:
@@ -285,16 +285,15 @@ spec:
                       that share the same auto_scaling_configuration_name.
                     type: boolean
                   status:
-                    description: The current state of the auto scaling configuration.
+                    description: Current state of the auto scaling configuration.
                       An INACTIVE configuration revision has been deleted and can't
                       be used. It is permanently removed some time after deletion.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

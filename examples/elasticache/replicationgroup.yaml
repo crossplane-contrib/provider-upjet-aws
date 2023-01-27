@@ -1,6 +1,8 @@
 apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: ReplicationGroup
 metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
   name: example
 spec:
   forProvider:
@@ -8,7 +10,7 @@ spec:
     description: example description
     nodeType: cache.m4.large
     numberCacheClusters: 2
-    parameterGroupName: default.redis6.x
+    parameterGroupName: default.redis7
     port: 6379
     preferredCacheClusterAzs:
       - us-west-1b

@@ -2189,7 +2189,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// WAFv2 Regex Pattern Sets can be imported using ID/name/scope
 	"aws_wafv2_regex_pattern_set": config.IdentifierFromProvider,
 	// WAFv2 Rule Group can be imported using ID/name/scope
-	"aws_wafv2_rule_group": config.IdentifierFromProvider,
+	// TODO(bump): Request entity too large: limit is 3145728
+	// "aws_wafv2_rule_group": config.IdentifierFromProvider,
 
 	// elasticsearch
 	//

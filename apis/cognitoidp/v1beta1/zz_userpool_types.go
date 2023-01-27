@@ -100,7 +100,7 @@ type EmailConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplyToEmailAddress *string `json:"replyToEmailAddress,omitempty" tf:"reply_to_email_address,omitempty"`
 
-	// ARN of the SES verified email identity to to use. Required if email_sending_account is set to DEVELOPER.
+	// ARN of the SES verified email identity to use. Required if email_sending_account is set to DEVELOPER.
 	// +kubebuilder:validation:Optional
 	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 }
@@ -261,6 +261,10 @@ type SMSConfigurationParameters struct {
 	// Selector for a Role in iam to populate snsCallerArn.
 	// +kubebuilder:validation:Optional
 	SnsCallerArnSelector *v1.Selector `json:"snsCallerArnSelector,omitempty" tf:"-"`
+
+	// The AWS Region to use with Amazon SNS integration. You can choose the same Region as your user pool, or a supported Legacy Amazon SNS alternate Region. Amazon Cognito resources in the Asia Pacific (Seoul) AWS Region must use your Amazon SNS configuration in the Asia Pacific (Tokyo) Region. For more information, see SMS message settings for Amazon Cognito user pools.
+	// +kubebuilder:validation:Optional
+	SnsRegion *string `json:"snsRegion,omitempty" tf:"sns_region,omitempty"`
 }
 
 type SchemaObservation struct {
@@ -321,6 +325,16 @@ type StringAttributeConstraintsParameters struct {
 	MinLength *string `json:"minLength,omitempty" tf:"min_length,omitempty"`
 }
 
+type UserAttributeUpdateSettingsObservation struct {
+}
+
+type UserAttributeUpdateSettingsParameters struct {
+
+	// A list of attributes requiring verification before update. If set, the provided value(s) must also be set in auto_verified_attributes. Valid values: email, phone_number.
+	// +kubebuilder:validation:Required
+	AttributesRequireVerificationBeforeUpdate []*string `json:"attributesRequireVerificationBeforeUpdate" tf:"attributes_require_verification_before_update,omitempty"`
+}
+
 type UserPoolAddOnsObservation struct {
 }
 
@@ -378,6 +392,10 @@ type UserPoolParameters struct {
 	// Attributes to be auto-verified. Valid values: email, phone_number.
 	// +kubebuilder:validation:Optional
 	AutoVerifiedAttributes []*string `json:"autoVerifiedAttributes,omitempty" tf:"auto_verified_attributes,omitempty"`
+
+	// When active, DeletionProtection prevents accidental deletion of your user pool. Before you can delete a user pool that you have protected against deletion, you must deactivate this feature. Valid values are ACTIVE and INACTIVE, Default value is INACTIVE.
+	// +kubebuilder:validation:Optional
+	DeletionProtection *string `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
 	// Configuration block for the user pool's device tracking. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -439,6 +457,10 @@ type UserPoolParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block for user attribute update settings. Detailed below.
+	// +kubebuilder:validation:Optional
+	UserAttributeUpdateSettings []UserAttributeUpdateSettingsParameters `json:"userAttributeUpdateSettings,omitempty" tf:"user_attribute_update_settings,omitempty"`
 
 	// Configuration block for user pool add-ons to enable user pool advanced security mode features. Detailed below.
 	// +kubebuilder:validation:Optional

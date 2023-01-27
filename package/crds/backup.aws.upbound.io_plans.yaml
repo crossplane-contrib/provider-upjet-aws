@@ -100,8 +100,8 @@ spec:
                     items:
                       properties:
                         completionWindow:
-                          description: The amount of time AWS Backup attempts a backup
-                            before canceling the job and returning an error.
+                          description: The amount of time in minutes AWS Backup attempts
+                            a backup before canceling the job and returning an error.
                           type: number
                         copyAction:
                           description: Configuration block(s) with copy operation

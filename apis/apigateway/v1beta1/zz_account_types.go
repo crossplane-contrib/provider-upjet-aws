@@ -22,7 +22,7 @@ type AccountObservation struct {
 
 type AccountParameters struct {
 
-	// The ARN of an IAM role for CloudWatch (to allow logging & monitoring). See more in AWS Docs. Logging & monitoring can be enabled/disabled and otherwise tuned on the API Gateway Stage level.
+	// ARN of an IAM role for CloudWatch (to allow logging & monitoring). See more in AWS Docs. Logging & monitoring can be enabled/disabled and otherwise tuned on the API Gateway Stage level.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -44,10 +44,10 @@ type AccountParameters struct {
 
 type ThrottleSettingsObservation struct {
 
-	// The absolute maximum number of times API Gateway allows the API to be called per second (RPS).
+	// Absolute maximum number of times API Gateway allows the API to be called per second (RPS).
 	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
 
-	// The number of times API Gateway allows the API to be called per second on average (RPS).
+	// Number of times API Gateway allows the API to be called per second on average (RPS).
 	RateLimit *float64 `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
 }
 

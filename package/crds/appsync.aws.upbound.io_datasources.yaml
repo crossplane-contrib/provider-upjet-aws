@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Datasource is the Schema for the Datasources API. Provides an
-          AppSync DataSource.
+          AppSync Data Source.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiId:
-                    description: The API ID for the GraphQL API for the DataSource.
+                    description: API ID for the GraphQL API for the data source.
                     type: string
                   apiIdRef:
                     description: Reference to a GraphQLAPI in appsync to populate
@@ -143,7 +143,7 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: A description of the DataSource.
+                    description: Description of the data source.
                     type: string
                   dynamodbConfig:
                     description: DynamoDB settings. See below
@@ -155,7 +155,7 @@ spec:
                               baseTableTtl:
                                 type: number
                               deltaSyncTableName:
-                                description: A user-supplied name for the DataSource.
+                                description: User-supplied name for the data source.
                                 type: string
                               deltaSyncTableTtl:
                                 type: number
@@ -276,27 +276,25 @@ spec:
                     items:
                       properties:
                         authorizationConfig:
-                          description: The authorization configuration in case the
-                            HTTP endpoint requires authorization. See Authorization
-                            Config.
+                          description: Authorization configuration in case the HTTP
+                            endpoint requires authorization. See Authorization Config.
                           items:
                             properties:
                               authorizationType:
-                                description: The authorization type that the HTTP
-                                  endpoint requires. Default values is AWS_IAM.
+                                description: Authorization type that the HTTP endpoint
+                                  requires. Default values is AWS_IAM.
                                 type: string
                               awsIamConfig:
-                                description: The Identity and Access Management (IAM)
+                                description: Identity and Access Management (IAM)
                                   settings. See AWS IAM Config.
                                 items:
                                   properties:
                                     signingRegion:
-                                      description: The signing Amazon Web Services
-                                        Region for IAM authorization.
+                                      description: Signing Amazon Web Services Region
+                                        for IAM authorization.
                                       type: string
                                     signingServiceName:
-                                      description: The signing service name for IAM
-                                        authorization.
+                                      description: Signing service name for IAM authorization.
                                       type: string
                                   type: object
                                 type: array
@@ -314,7 +312,7 @@ spec:
                     items:
                       properties:
                         functionArn:
-                          description: The ARN for the Lambda function.
+                          description: ARN for the Lambda function.
                           type: string
                       required:
                       - functionArn
@@ -330,8 +328,8 @@ spec:
                     items:
                       properties:
                         httpEndpointConfig:
-                          description: The Amazon RDS HTTP endpoint configuration.
-                            See HTTP Endpoint Config.
+                          description: Amazon RDS HTTP endpoint configuration. See
+                            HTTP Endpoint Config.
                           items:
                             properties:
                               awsSecretStoreArn:
@@ -362,7 +360,7 @@ spec:
                       type: object
                     type: array
                   serviceRoleArn:
-                    description: The IAM service role ARN for the data source.
+                    description: IAM service role ARN for the data source.
                     type: string
                   serviceRoleArnRef:
                     description: Reference to a Role in iam to populate serviceRoleArn.
@@ -438,7 +436,7 @@ spec:
                         type: object
                     type: object
                   type:
-                    description: 'The type of the DataSource. Valid values: AWS_LAMBDA,
+                    description: 'Type of the Data Source. Valid values: AWS_LAMBDA,
                       AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE.'
                     type: string
                 required:
@@ -622,7 +620,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN
+                    description: ARN
                     type: string
                   id:
                     type: string

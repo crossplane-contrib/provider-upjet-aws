@@ -108,6 +108,10 @@ spec:
                     description: The Amazon Resource Name (ARN) of the Outpost on
                       which to create the Capacity Reservation.
                     type: string
+                  placementGroupArn:
+                    description: The Amazon Resource Name (ARN) of the cluster placement
+                      group in which to create the Capacity Reservation.
+                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.

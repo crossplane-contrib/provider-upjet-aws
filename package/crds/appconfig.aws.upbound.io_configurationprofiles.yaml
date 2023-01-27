@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   applicationId:
-                    description: The application ID. Must be between 4 and 7 characters
+                    description: Application ID. Must be between 4 and 7 characters
                       in length.
                     type: string
                   applicationIdRef:
@@ -144,23 +144,22 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: The description of the configuration profile. Can
-                      be at most 1024 characters.
+                    description: Description of the configuration profile. Can be
+                      at most 1024 characters.
                     type: string
                   locationUri:
-                    description: 'A URI to locate the configuration. You can specify
+                    description: 'URI to locate the configuration. You can specify
                       the AWS AppConfig hosted configuration store, Systems Manager
                       (SSM) document, an SSM Parameter Store parameter, or an Amazon
                       S3 object. For the hosted configuration store, specify hosted.
                       For an SSM document, specify either the document name in the
-                      format ssm-document://<Document_name> or the Amazon Resource
-                      Name (ARN). For a parameter, specify either the parameter name
-                      in the format ssm-parameter://<Parameter_name> or the ARN. For
-                      an Amazon S3 object, specify the URI in the following format:
-                      s3://<bucket>/<objectKey>.'
+                      format ssm-document://<Document_name> or the ARN. For a parameter,
+                      specify either the parameter name in the format ssm-parameter://<Parameter_name>
+                      or the ARN. For an Amazon S3 object, specify the URI in the
+                      following format: s3://<bucket>/<objectKey>.'
                     type: string
                   name:
-                    description: The name for the configuration profile. Must be between
+                    description: Name for the configuration profile. Must be between
                       1 and 64 characters in length.
                     type: string
                   region:
@@ -168,11 +167,11 @@ spec:
                       be created in.
                     type: string
                   retrievalRoleArn:
-                    description: The ARN of an IAM role with permission to access
-                      the configuration at the specified location_uri. A retrieval
-                      role ARN is not required for configurations stored in the AWS
-                      AppConfig hosted configuration store. It is required for all
-                      other sources that store your configuration.
+                    description: ARN of an IAM role with permission to access the
+                      configuration at the specified location_uri. A retrieval role
+                      ARN is not required for configurations stored in the AWS AppConfig
+                      hosted configuration store. It is required for all other sources
+                      that store your configuration.
                     type: string
                   retrievalRoleArnRef:
                     description: Reference to a Role in iam to populate retrievalRoleArn.
@@ -253,18 +252,18 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   type:
-                    description: 'The type of configurations contained in the profile.
+                    description: 'Type of configurations contained in the profile.
                       Valid values: AWS.AppConfig.FeatureFlags and AWS.Freeform.  Default:
                       AWS.Freeform.'
                     type: string
                   validator:
-                    description: A set of methods for validating the configuration.
+                    description: Set of methods for validating the configuration.
                       Maximum of 2. See Validator below for more details.
                     items:
                       properties:
                         contentSecretRef:
-                          description: Either the JSON Schema content or the Amazon
-                            Resource Name (ARN) of an AWS Lambda function.
+                          description: Either the JSON Schema content or the ARN of
+                            an AWS Lambda function.
                           properties:
                             key:
                               description: The key to select.
@@ -281,7 +280,7 @@ spec:
                           - namespace
                           type: object
                         type:
-                          description: 'The type of validator. Valid values: JSON_SCHEMA
+                          description: 'Type of validator. Valid values: JSON_SCHEMA
                             and LAMBDA.'
                           type: string
                       required:
@@ -471,22 +470,20 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the AppConfig Configuration
-                      Profile.
+                    description: ARN of the AppConfig Configuration Profile.
                     type: string
                   configurationProfileId:
                     description: The configuration profile ID.
                     type: string
                   id:
-                    description: The AppConfig configuration profile ID and application
+                    description: AppConfig configuration profile ID and application
                       ID separated by a colon (:).
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

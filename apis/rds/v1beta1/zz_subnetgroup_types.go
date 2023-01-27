@@ -21,6 +21,9 @@ type SubnetGroupObservation struct {
 	// The db subnet group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The network type of the db subnet group.
+	SupportedNetworkTypes []*string `json:"supportedNetworkTypes,omitempty" tf:"supported_network_types,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }

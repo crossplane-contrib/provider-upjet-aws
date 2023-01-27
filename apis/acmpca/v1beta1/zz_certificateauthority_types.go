@@ -33,7 +33,7 @@ type CertificateAuthorityConfigurationParameters struct {
 
 type CertificateAuthorityObservation struct {
 
-	// Amazon Resource Name (ARN) of the certificate authority.
+	// ARN of the certificate authority.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Base64-encoded certificate authority (CA) certificate. Only available after the certificate authority certificate has been imported.
@@ -45,7 +45,7 @@ type CertificateAuthorityObservation struct {
 	// The base64 PEM-encoded certificate signing request (CSR) for your private CA certificate.
 	CertificateSigningRequest *string `json:"certificateSigningRequest,omitempty" tf:"certificate_signing_request,omitempty"`
 
-	// Amazon Resource Name (ARN) of the certificate authority.
+	// ARN of the certificate authority.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Date and time after which the certificate authority is not valid. Only available after the certificate authority certificate has been imported.
@@ -60,7 +60,7 @@ type CertificateAuthorityObservation struct {
 	// (Deprecated use the enabled attribute instead) Status of the certificate authority.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -74,7 +74,7 @@ type CertificateAuthorityParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The number of days to make a CA restorable after it has been deleted, must be between 7 to 30 days, with default to 30 days.
+	// Number of days to make a CA restorable after it has been deleted, must be between 7 to 30 days, with default to 30 days.
 	// +kubebuilder:validation:Optional
 	PermanentDeletionTimeInDays *float64 `json:"permanentDeletionTimeInDays,omitempty" tf:"permanent_deletion_time_in_days,omitempty"`
 
@@ -91,9 +91,13 @@ type CertificateAuthorityParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the certificate authority. Defaults to SUBORDINATE. Valid values: ROOT and SUBORDINATE.
+	// Type of the certificate authority. Defaults to SUBORDINATE. Valid values: ROOT and SUBORDINATE.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Specifies whether the CA issues general-purpose certificates that typically require a revocation mechanism, or short-lived certificates that may optionally omit revocation because they expire quickly. Short-lived certificate validity is limited to seven days. Defaults to GENERAL_PURPOSE. Valid values: GENERAL_PURPOSE and SHORT_LIVED_CERTIFICATE.
+	// +kubebuilder:validation:Optional
+	UsageMode *string `json:"usageMode,omitempty" tf:"usage_mode,omitempty"`
 }
 
 type CrlConfigurationObservation struct {
@@ -122,6 +126,20 @@ type CrlConfigurationParameters struct {
 	S3ObjectACL *string `json:"s3ObjectAcl,omitempty" tf:"s3_object_acl,omitempty"`
 }
 
+type OcspConfigurationObservation struct {
+}
+
+type OcspConfigurationParameters struct {
+
+	// Boolean value that specifies whether a custom OCSP responder is enabled.
+	// +kubebuilder:validation:Required
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// CNAME specifying a customized OCSP domain. Note: The value of the CNAME must not include a protocol prefix such as "http://" or "https://".
+	// +kubebuilder:validation:Optional
+	OcspCustomCname *string `json:"ocspCustomCname,omitempty" tf:"ocsp_custom_cname,omitempty"`
+}
+
 type RevocationConfigurationObservation struct {
 }
 
@@ -130,6 +148,11 @@ type RevocationConfigurationParameters struct {
 	// Nested argument containing configuration of the certificate revocation list (CRL), if any, maintained by the certificate authority. Defined below.
 	// +kubebuilder:validation:Optional
 	CrlConfiguration []CrlConfigurationParameters `json:"crlConfiguration,omitempty" tf:"crl_configuration,omitempty"`
+
+	// Nested argument containing configuration of
+	// the custom OCSP responder endpoint. Defined below.
+	// +kubebuilder:validation:Optional
+	OcspConfiguration []OcspConfigurationParameters `json:"ocspConfiguration,omitempty" tf:"ocsp_configuration,omitempty"`
 }
 
 type SubjectObservation struct {
@@ -161,7 +184,7 @@ type SubjectParameters struct {
 	// +kubebuilder:validation:Optional
 	Initials *string `json:"initials,omitempty" tf:"initials,omitempty"`
 
-	// The locality (such as a city or town) in which the certificate subject is located. Must be less than or equal to 128 characters in length.
+	// Locality (such as a city or town) in which the certificate subject is located. Must be less than or equal to 128 characters in length.
 	// +kubebuilder:validation:Optional
 	Locality *string `json:"locality,omitempty" tf:"locality,omitempty"`
 
@@ -169,7 +192,7 @@ type SubjectParameters struct {
 	// +kubebuilder:validation:Optional
 	Organization *string `json:"organization,omitempty" tf:"organization,omitempty"`
 
-	// A subdivision or unit of the organization (such as sales or finance) with which the certificate subject is affiliated. Must be less than or equal to 64 characters in length.
+	// Subdivision or unit of the organization (such as sales or finance) with which the certificate subject is affiliated. Must be less than or equal to 64 characters in length.
 	// +kubebuilder:validation:Optional
 	OrganizationalUnit *string `json:"organizationalUnit,omitempty" tf:"organizational_unit,omitempty"`
 
@@ -185,7 +208,7 @@ type SubjectParameters struct {
 	// +kubebuilder:validation:Optional
 	Surname *string `json:"surname,omitempty" tf:"surname,omitempty"`
 
-	// A title such as Mr. or Ms. which is pre-pended to the name to refer formally to the certificate subject. Must be less than or equal to 64 characters in length.
+	// Title such as Mr. or Ms. which is pre-pended to the name to refer formally to the certificate subject. Must be less than or equal to 64 characters in length.
 	// +kubebuilder:validation:Optional
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 }

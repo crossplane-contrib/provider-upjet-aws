@@ -15,13 +15,13 @@ import (
 
 type ModelObservation struct {
 
-	// The model identifier.
+	// Model identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ModelParameters struct {
 
-	// The API identifier.
+	// API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -38,11 +38,11 @@ type ModelParameters struct {
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
-	// The description of the model. Must be between 1 and 128 characters in length.
+	// Description of the model. Must be between 1 and 128 characters in length.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the model. Must be alphanumeric. Must be between 1 and 128 characters in length.
+	// Name of the model. Must be alphanumeric. Must be between 1 and 128 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -51,7 +51,7 @@ type ModelParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The schema for the model. This should be a JSON schema draft 4 model. Must be less than or equal to 32768 characters in length.
+	// Schema for the model. This should be a JSON schema draft 4 model. Must be less than or equal to 32768 characters in length.
 	// +kubebuilder:validation:Required
 	Schema *string `json:"schema" tf:"schema,omitempty"`
 }

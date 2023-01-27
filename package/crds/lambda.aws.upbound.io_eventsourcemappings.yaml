@@ -66,6 +66,20 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  amazonManagedKafkaEventSourceConfig:
+                    description: Additional configuration block for Amazon Managed
+                      Kafka sources. Incompatible with "self_managed_event_source"
+                      and "self_managed_kafka_event_source_config". Detailed below.
+                    items:
+                      properties:
+                        consumerGroupId:
+                          description: A Kafka consumer group ID between 1 and 200
+                            characters for use when creating this event source mapping.
+                            If one is not specified, this value will be automatically
+                            generated. See AmazonManagedKafkaEventSourceConfig Syntax.
+                          type: string
+                      type: object
+                    type: array
                   batchSize:
                     description: The largest number of records that Lambda will retrieve
                       from your event source at the time of invocation. Defaults to
@@ -249,6 +263,19 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  scalingConfig:
+                    description: Scaling configuration of the event source. Only available
+                      for SQS queues. Detailed below.
+                    items:
+                      properties:
+                        maximumConcurrency:
+                          description: Limits the number of concurrent instances that
+                            the Amazon SQS event source can invoke. Must be between
+                            2 and 1000. See Configuring maximum concurrency for Amazon
+                            SQS event sources.
+                          type: number
+                      type: object
+                    type: array
                   selfManagedEventSource:
                     description: For Self Managed Kafka sources, the location of the
                       self managed cluster. If set, configuration must also include
@@ -265,6 +292,20 @@ spec:
                           type: object
                       required:
                       - endpoints
+                      type: object
+                    type: array
+                  selfManagedKafkaEventSourceConfig:
+                    description: Additional configuration block for Self Managed Kafka
+                      sources. Incompatible with "event_source_arn" and "amazon_managed_kafka_event_source_config".
+                      Detailed below.
+                    items:
+                      properties:
+                        consumerGroupId:
+                          description: A Kafka consumer group ID between 1 and 200
+                            characters for use when creating this event source mapping.
+                            If one is not specified, this value will be automatically
+                            generated. See SelfManagedKafkaEventSourceConfig Syntax.
+                          type: string
                       type: object
                     type: array
                   sourceAccessConfiguration:

@@ -66,7 +66,7 @@ spec:
               forProvider:
                 properties:
                   applicationId:
-                    description: The application ID.
+                    description: Application ID.
                     type: string
                   applicationIdRef:
                     description: Reference to a Application in appconfig to populate
@@ -144,7 +144,7 @@ spec:
                         type: object
                     type: object
                   configurationProfileId:
-                    description: The configuration profile ID.
+                    description: Configuration profile ID.
                     type: string
                   configurationProfileIdRef:
                     description: Reference to a ConfigurationProfile in appconfig
@@ -222,7 +222,7 @@ spec:
                         type: object
                     type: object
                   contentSecretRef:
-                    description: The content of the configuration or the configuration
+                    description: Content of the configuration or the configuration
                       data.
                     properties:
                       key:
@@ -240,11 +240,11 @@ spec:
                     - namespace
                     type: object
                   contentType:
-                    description: A standard MIME type describing the format of the
-                      configuration content. For more information, see Content-Type.
+                    description: Standard MIME type describing the format of the configuration
+                      content. For more information, see Content-Type.
                     type: string
                   description:
-                    description: A description of the configuration.
+                    description: Description of the configuration.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -433,15 +433,14 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the AppConfig  hosted
-                      configuration version.
+                    description: ARN of the AppConfig  hosted configuration version.
                     type: string
                   id:
-                    description: The AppConfig application ID, configuration profile
-                      ID, and version number separated by a slash (/).
+                    description: AppConfig application ID, configuration profile ID,
+                      and version number separated by a slash (/).
                     type: string
                   versionNumber:
-                    description: The version number of the hosted configuration.
+                    description: Version number of the hosted configuration.
                     type: number
                 type: object
               conditions:

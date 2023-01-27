@@ -15,21 +15,21 @@ import (
 
 type ModelObservation struct {
 
-	// The ID of the model
+	// ID of the model
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ModelParameters struct {
 
-	// The content type of the model
+	// Content type of the model
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
-	// The description of the model
+	// Description of the model
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the model
+	// Name of the model
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -38,7 +38,7 @@ type ModelParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The ID of the associated REST API
+	// ID of the associated REST API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -52,7 +52,7 @@ type ModelParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
-	// The schema of the model in a JSON form
+	// Schema of the model in a JSON form
 	// +kubebuilder:validation:Optional
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 }

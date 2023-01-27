@@ -16,32 +16,36 @@ import (
 type ParameterObservation_2 struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The version of the parameter.
+	// Version of the parameter.
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ParameterParameters_2 struct {
 
-	// A regular expression used to validate the parameter value.
+	// Regular expression used to validate the parameter value.
 	// +kubebuilder:validation:Optional
 	AllowedPattern *string `json:"allowedPattern,omitempty" tf:"allowed_pattern,omitempty"`
 
-	// The ARN of the parameter.
+	// ARN of the parameter.
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The data_type of the parameter. Valid values: text and aws:ec2:image for AMI format, see the Native parameter support for Amazon Machine Image IDs
+	// Data type of the parameter. Valid values: text, aws:ssm:integration and aws:ec2:image for AMI format, see the Native parameter support for Amazon Machine Image IDs.
 	// +kubebuilder:validation:Optional
 	DataType *string `json:"dataType,omitempty" tf:"data_type,omitempty"`
 
-	// The description of the parameter.
+	// Description of the parameter.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The KMS key id or arn for encrypting a SecureString.
+	// Value of the parameter. This argument is not valid with a type of SecureString.
+	// +kubebuilder:validation:Optional
+	InsecureValue *string `json:"insecureValue,omitempty" tf:"insecure_value,omitempty"`
+
+	// KMS key ID or ARN for encrypting a SecureString.
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
@@ -58,17 +62,17 @@ type ParameterParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The tier of the parameter. If not specified, will default to Standard. Valid tiers are Standard, Advanced, and Intelligent-Tiering. For more information on parameter tiers, see the AWS SSM Parameter tier comparison and guide.
+	// Parameter tier to assign to the parameter. If not specified, will use the default parameter tier for the region. Valid tiers are Standard, Advanced, and Intelligent-Tiering. Downgrading an Advanced tier parameter to Standard will recreate the resource. For more information on parameter tiers, see the AWS SSM Parameter tier comparison and guide.
 	// +kubebuilder:validation:Optional
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
-	// The type of the parameter. Valid types are String, StringList and SecureString.
+	// Type of the parameter. Valid types are String, StringList and SecureString.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// The value of the parameter.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
-	// +kubebuilder:validation:Required
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	// Value of the parameter.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
+	// +kubebuilder:validation:Optional
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 // ParameterSpec defines the desired state of Parameter

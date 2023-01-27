@@ -9,16 +9,13 @@ metadata:
 spec:
   forProvider:
     name: example
-    owner:
-    - ${aws_security_group.example.id}
+    owner: example-owner
     provisioningArtifactParameters:
     - templateUrl: https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/temp1.json
     region: us-west-1
     tags:
       foo: bar
-    typeSelector:
-      matchLabels:
-        testing.upbound.io/example-name: main
+    type: CLOUD_FORMATION_TEMPLATE
 
 ---
 

@@ -178,6 +178,16 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ApplyImmediately != nil {
+		in, out := &in.ApplyImmediately, &out.ApplyImmediately
+		*out = new(bool)
+		**out = **in
+	}
+	if in.AquaConfigurationStatus != nil {
+		in, out := &in.AquaConfigurationStatus, &out.AquaConfigurationStatus
+		*out = new(string)
+		**out = **in
+	}
 	if in.AutomatedSnapshotRetentionPeriod != nil {
 		in, out := &in.AutomatedSnapshotRetentionPeriod, &out.AutomatedSnapshotRetentionPeriod
 		*out = new(float64)
@@ -238,6 +248,21 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		in, out := &in.DatabaseName, &out.DatabaseName
 		*out = new(string)
 		**out = **in
+	}
+	if in.DefaultIAMRoleArn != nil {
+		in, out := &in.DefaultIAMRoleArn, &out.DefaultIAMRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.DefaultIAMRoleArnRef != nil {
+		in, out := &in.DefaultIAMRoleArnRef, &out.DefaultIAMRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DefaultIAMRoleArnSelector != nil {
+		in, out := &in.DefaultIAMRoleArnSelector, &out.DefaultIAMRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ElasticIP != nil {
 		in, out := &in.ElasticIP, &out.ElasticIP
@@ -308,6 +333,16 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.MaintenanceTrackName != nil {
+		in, out := &in.MaintenanceTrackName, &out.MaintenanceTrackName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ManualSnapshotRetentionPeriod != nil {
+		in, out := &in.ManualSnapshotRetentionPeriod, &out.ManualSnapshotRetentionPeriod
+		*out = new(float64)
+		**out = **in
 	}
 	if in.MasterPasswordSecretRef != nil {
 		in, out := &in.MasterPasswordSecretRef, &out.MasterPasswordSecretRef
@@ -717,6 +752,22 @@ func (in *LoggingParameters) DeepCopyInto(out *LoggingParameters) {
 		in, out := &in.Enable, &out.Enable
 		*out = new(bool)
 		**out = **in
+	}
+	if in.LogDestinationType != nil {
+		in, out := &in.LogDestinationType, &out.LogDestinationType
+		*out = new(string)
+		**out = **in
+	}
+	if in.LogExports != nil {
+		in, out := &in.LogExports, &out.LogExports
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.S3KeyPrefix != nil {
 		in, out := &in.S3KeyPrefix, &out.S3KeyPrefix

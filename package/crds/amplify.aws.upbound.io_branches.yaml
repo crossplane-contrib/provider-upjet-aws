@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   appId:
-                    description: The unique ID for an Amplify app.
+                    description: Unique ID for an Amplify app.
                     type: string
                   appIdRef:
                     description: Reference to a App in amplify to populate appId.
@@ -141,11 +141,11 @@ spec:
                         type: object
                     type: object
                   backendEnvironmentArn:
-                    description: The Amazon Resource Name (ARN) for a backend environment
-                      that is part of an Amplify app.
+                    description: ARN for a backend environment that is part of an
+                      Amplify app.
                     type: string
                   basicAuthCredentialsSecretRef:
-                    description: The basic authorization credentials for the branch.
+                    description: Basic authorization credentials for the branch.
                     properties:
                       key:
                         description: The key to select.
@@ -162,11 +162,11 @@ spec:
                     - namespace
                     type: object
                   description:
-                    description: The description for the branch.
+                    description: Description for the branch.
                     type: string
                   displayName:
-                    description: The display name for a branch. This is used as the
-                      default domain prefix.
+                    description: Display name for a branch. This is used as the default
+                      domain prefix.
                     type: string
                   enableAutoBuild:
                     description: Enables auto building for the branch.
@@ -186,13 +186,13 @@ spec:
                   environmentVariables:
                     additionalProperties:
                       type: string
-                    description: The environment variables for the branch.
+                    description: Environment variables for the branch.
                     type: object
                   framework:
-                    description: The framework for the branch.
+                    description: Framework for the branch.
                     type: string
                   pullRequestEnvironmentName:
-                    description: The Amplify environment name for the pull request.
+                    description: Amplify environment name for the pull request.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -208,8 +208,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   ttl:
-                    description: The content Time To Live (TTL) for the website in
-                      seconds.
+                    description: Content Time To Live (TTL) for the website in seconds.
                     type: string
                 required:
                 - region
@@ -391,7 +390,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) for the branch.
+                    description: ARN for the branch.
                     type: string
                   associatedResources:
                     description: A list of custom resources that are linked to this
@@ -400,26 +399,24 @@ spec:
                       type: string
                     type: array
                   customDomains:
-                    description: The custom domains for the branch.
+                    description: Custom domains for the branch.
                     items:
                       type: string
                     type: array
                   destinationBranch:
-                    description: The destination branch if the branch is a pull request
+                    description: Destination branch if the branch is a pull request
                       branch.
                     type: string
                   id:
                     type: string
                   sourceBranch:
-                    description: The source branch if the branch is a pull request
-                      branch.
+                    description: Source branch if the branch is a pull request branch.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

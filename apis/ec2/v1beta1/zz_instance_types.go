@@ -32,11 +32,11 @@ type CapacityReservationTargetObservation struct {
 
 type CapacityReservationTargetParameters struct {
 
-	// The ID of the Capacity Reservation in which to run the instance.
+	// ID of the Capacity Reservation in which to run the instance.
 	// +kubebuilder:validation:Optional
 	CapacityReservationID *string `json:"capacityReservationId,omitempty" tf:"capacity_reservation_id,omitempty"`
 
-	// The ARN of the Capacity Reservation resource group in which to run the instance.
+	// ARN of the Capacity Reservation resource group in which to run the instance.
 	// +kubebuilder:validation:Optional
 	CapacityReservationResourceGroupArn *string `json:"capacityReservationResourceGroupArn,omitempty" tf:"capacity_reservation_resource_group_arn,omitempty"`
 }
@@ -102,7 +102,7 @@ type InstanceEBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// A map of tags to assign to the device.
+	// Map of tags to assign to the device.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -124,7 +124,7 @@ type InstanceEphemeralBlockDeviceObservation struct {
 
 type InstanceEphemeralBlockDeviceParameters struct {
 
-	// The name of the block device to mount on the instance.
+	// Name of the block device to mount on the instance.
 	// +kubebuilder:validation:Required
 	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
@@ -139,45 +139,45 @@ type InstanceEphemeralBlockDeviceParameters struct {
 
 type InstanceObservation struct {
 
-	// The ARN of the instance.
+	// ARN of the instance.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// One or more configuration blocks with additional EBS block devices to attach to the instance. Block device configurations only apply on resource creation. See Block Devices below for details on attributes and drift detection. When accessing this as an attribute reference, it is a set of objects.
 	// +kubebuilder:validation:Optional
 	EBSBlockDevice []InstanceEBSBlockDeviceObservation `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
 
-	// The ID of the launch template. Conflicts with name.
+	// ID of the launch template. Conflicts with name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The state of the instance. One of: pending, running, shutting-down, terminated, stopping, stopped. See Instance Lifecycle for more information.
+	// State of the instance. One of: pending, running, shutting-down, terminated, stopping, stopped. See Instance Lifecycle for more information.
 	InstanceState *string `json:"instanceState,omitempty" tf:"instance_state,omitempty"`
 
-	// The ARN of the Outpost the instance is assigned to.
+	// ARN of the Outpost the instance is assigned to.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// Base-64 encoded encrypted password data for the instance. Useful for getting the administrator password for instances running Microsoft Windows. This attribute is only exported if get_password_data is true. Note that this encrypted value will be stored in the state file, as with all exported attributes. See GetPasswordData for more information.
 	PasswordData *string `json:"passwordData,omitempty" tf:"password_data,omitempty"`
 
-	// The ID of the instance's primary network interface.
+	// ID of the instance's primary network interface.
 	PrimaryNetworkInterfaceID *string `json:"primaryNetworkInterfaceId,omitempty" tf:"primary_network_interface_id,omitempty"`
 
-	// The private DNS name assigned to the instance. Can only be used inside the Amazon EC2, and only available if you've enabled DNS hostnames for your VPC.
+	// Private DNS name assigned to the instance. Can only be used inside the Amazon EC2, and only available if you've enabled DNS hostnames for your VPC.
 	PrivateDNS *string `json:"privateDns,omitempty" tf:"private_dns,omitempty"`
 
-	// The public DNS name assigned to the instance. For EC2-VPC, this is only available if you've enabled DNS hostnames for your VPC.
+	// Public DNS name assigned to the instance. For EC2-VPC, this is only available if you've enabled DNS hostnames for your VPC.
 	PublicDNS *string `json:"publicDns,omitempty" tf:"public_dns,omitempty"`
 
-	// The public IP address assigned to the instance, if applicable. NOTE: If you are using an aws_eip with your instance, you should refer to the EIP's address directly and not use public_ip as this field will change after the EIP is attached.
+	// Public IP address assigned to the instance, if applicable. NOTE: If you are using an aws_eip with your instance, you should refer to the EIP's address directly and not use public_ip as this field will change after the EIP is attached.
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
 	// Configuration block to customize details about the root block device of the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a list containing one object.
 	// +kubebuilder:validation:Optional
 	RootBlockDevice []RootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
-	// A list of security group names to associate with.
+	// List of security group names to associate with.
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -199,7 +199,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
 
-	// If set to to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
+	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
 	// +kubebuilder:validation:Optional
 	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
@@ -210,6 +210,10 @@ type InstanceParameters struct {
 	// Configuration block for customizing the credit specification of the instance. See Credit Specification below for more details. Removing this configuration on existing instances will only stop managing it. It will not change the configuration back to the default for the instance type.
 	// +kubebuilder:validation:Optional
 	CreditSpecification []CreditSpecificationParameters `json:"creditSpecification,omitempty" tf:"credit_specification,omitempty"`
+
+	// If true, enables EC2 Instance Stop Protection.
+	// +kubebuilder:validation:Optional
+	DisableAPIStop *bool `json:"disableApiStop,omitempty" tf:"disable_api_stop,omitempty"`
 
 	// If true, enables EC2 Instance Termination Protection.
 	// +kubebuilder:validation:Optional
@@ -243,11 +247,15 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	HostID *string `json:"hostId,omitempty" tf:"host_id,omitempty"`
 
+	// ARN of the host resource group in which to launch the instances. If you specify an ARN, omit the tenancy parameter or set it to host.
+	// +kubebuilder:validation:Optional
+	HostResourceGroupArn *string `json:"hostResourceGroupArn,omitempty" tf:"host_resource_group_arn,omitempty"`
+
 	// IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile. Ensure your credentials have the correct permission to assign the instance profile according to the EC2 documentation, notably iam:PassRole.
 	// +kubebuilder:validation:Optional
 	IAMInstanceProfile *string `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
 
-	// A number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.
+	// Number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.
 	// +kubebuilder:validation:Optional
 	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
 
@@ -259,7 +267,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceInitiatedShutdownBehavior *string `json:"instanceInitiatedShutdownBehavior,omitempty" tf:"instance_initiated_shutdown_behavior,omitempty"`
 
-	// The instance type to use for the instance. Updates to this field will trigger a stop/start of the EC2 instance.
+	// Instance type to use for the instance. Required unless launch_template is specified and the Launch Template specifies an instance type. If an instance type is specified in the Launch Template, setting instance_type will override the instance type specified in the Launch Template. Updates to this field will trigger a stop/start of the EC2 instance.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -267,12 +275,11 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
 
-	// Specifies a Launch Template to configure the instance. Parameters configured on this resource will override the corresponding parameters in the Launch Template.
-	// See Launch Template Specification below for more details.
+	// Specifies a Launch Template to configure the instance. Parameters configured on this resource will override the corresponding parameters in the Launch Template. See Launch Template Specification below for more details.
 	// +kubebuilder:validation:Optional
 	LaunchTemplate []LaunchTemplateParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
-	// The maintenance and recovery options for the instance. See Maintenance Options below for more details.
+	// Maintenance and recovery options for the instance. See Maintenance Options below for more details.
 	// +kubebuilder:validation:Optional
 	MaintenanceOptions []MaintenanceOptionsParameters `json:"maintenanceOptions,omitempty" tf:"maintenance_options,omitempty"`
 
@@ -292,9 +299,13 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
-	// The number of the partition the instance is in. Valid only if the  strategy argument is set to "partition".
+	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition".
 	// +kubebuilder:validation:Optional
 	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
+
+	// Options for the instance hostname. The default values are inherited from the subnet. See Private DNS Name Options below for more details.
+	// +kubebuilder:validation:Optional
+	PrivateDNSNameOptions []PrivateDNSNameOptionsParameters `json:"privateDnsNameOptions,omitempty" tf:"private_dns_name_options,omitempty"`
 
 	// Private IP address to associate with the instance in a VPC.
 	// +kubebuilder:validation:Optional
@@ -309,7 +320,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	RootBlockDevice []RootBlockDeviceParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
-	// A list of secondary private IPv4 addresses to assign to the instance's primary network interface (eth0) in a VPC. Can only be assigned to the primary network interface (eth0) attached at instance creation, not a pre-existing network interface i.e., referenced in a network_interface block. Refer to the Elastic network interfaces documentation to see the maximum number of private IP addresses allowed per instance type.
+	// List of secondary private IPv4 addresses to assign to the instance's primary network interface (eth0) in a VPC. Can only be assigned to the primary network interface (eth0) attached at instance creation, not a pre-existing network interface i.e., referenced in a network_interface block. Refer to the Elastic network interfaces documentation to see the maximum number of private IP addresses allowed per instance type.
 	// +kubebuilder:validation:Optional
 	SecondaryPrivateIps []*string `json:"secondaryPrivateIps,omitempty" tf:"secondary_private_ips,omitempty"`
 
@@ -334,7 +345,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command.
+	// Tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command. Valid values are default, dedicated, and host.
 	// +kubebuilder:validation:Optional
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 
@@ -358,14 +369,14 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
-	// A list of security group IDs to associate with.
+	// List of security group IDs to associate with.
 	// +crossplane:generate:reference:type=SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
-	// A map of tags to assign, at instance-creation time, to root and EBS volumes.
+	// Map of tags to assign, at instance-creation time, to root and EBS volumes.
 	// +kubebuilder:validation:Optional
 	VolumeTags map[string]*string `json:"volumeTags,omitempty" tf:"volume_tags,omitempty"`
 }
@@ -375,11 +386,11 @@ type LaunchTemplateObservation struct {
 
 type LaunchTemplateParameters struct {
 
-	// The ID of the launch template. Conflicts with name.
+	// ID of the launch template. Conflicts with name.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the launch template. Conflicts with id.
+	// Name of the launch template. Conflicts with id.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -393,7 +404,7 @@ type MaintenanceOptionsObservation struct {
 
 type MaintenanceOptionsParameters struct {
 
-	// The automatic recovery behavior of the Instance. Can be "default" or "disabled". See Recover your instance for more details.
+	// Automatic recovery behavior of the Instance. Can be "default" or "disabled". See Recover your instance for more details.
 	// +kubebuilder:validation:Optional
 	AutoRecovery *string `json:"autoRecovery,omitempty" tf:"auto_recovery,omitempty"`
 }
@@ -451,6 +462,24 @@ type NetworkInterfaceParameters struct {
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }
 
+type PrivateDNSNameOptionsObservation struct {
+}
+
+type PrivateDNSNameOptionsParameters struct {
+
+	// Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+	// +kubebuilder:validation:Optional
+	EnableResourceNameDNSARecord *bool `json:"enableResourceNameDnsARecord,omitempty" tf:"enable_resource_name_dns_a_record,omitempty"`
+
+	// Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+	// +kubebuilder:validation:Optional
+	EnableResourceNameDNSAaaaRecord *bool `json:"enableResourceNameDnsAaaaRecord,omitempty" tf:"enable_resource_name_dns_aaaa_record,omitempty"`
+
+	// Type of hostname for Amazon EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 native subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. Valid values: ip-name and resource-name.
+	// +kubebuilder:validation:Optional
+	HostnameType *string `json:"hostnameType,omitempty" tf:"hostname_type,omitempty"`
+}
+
 type RootBlockDeviceObservation struct {
 
 	// Device name, e.g., /dev/sdh or xvdh.
@@ -487,7 +516,7 @@ type RootBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// A map of tags to assign to the device.
+	// Map of tags to assign to the device.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 

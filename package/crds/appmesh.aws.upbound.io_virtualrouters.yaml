@@ -65,8 +65,8 @@ spec:
               forProvider:
                 properties:
                   meshName:
-                    description: The name of the service mesh in which to create the
-                      virtual router. Must be between 1 and 255 characters in length.
+                    description: Name of the service mesh in which to create the virtual
+                      router. Must be between 1 and 255 characters in length.
                     type: string
                   meshNameRef:
                     description: Reference to a Mesh in appmesh to populate meshName.
@@ -142,11 +142,11 @@ spec:
                         type: object
                     type: object
                   meshOwner:
-                    description: The AWS account ID of the service mesh's owner. Defaults
+                    description: AWS account ID of the service mesh's owner. Defaults
                       to the account ID the AWS provider is currently connected to.
                     type: string
                   name:
-                    description: The name to use for the virtual router. Must be between
+                    description: Name to use for the virtual router. Must be between
                       1 and 255 characters in length.
                     type: string
                   region:
@@ -154,7 +154,7 @@ spec:
                       be created in.
                     type: string
                   spec:
-                    description: The virtual router specification to apply.
+                    description: Virtual router specification to apply.
                     items:
                       properties:
                         listener:
@@ -162,17 +162,15 @@ spec:
                           items:
                             properties:
                               portMapping:
-                                description: The port mapping information for the
-                                  listener.
+                                description: Port mapping information for the listener.
                                 items:
                                   properties:
                                     port:
-                                      description: The port used for the port mapping.
+                                      description: Port used for the port mapping.
                                       type: number
                                     protocol:
-                                      description: The protocol used for the port
-                                        mapping. Valid values are http,http2, tcp
-                                        and grpc.
+                                      description: Protocol used for the port mapping.
+                                        Valid values are http,http2, tcp and grpc.
                                       type: string
                                   required:
                                   - port
@@ -374,26 +372,25 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the virtual router.
+                    description: ARN of the virtual router.
                     type: string
                   createdDate:
-                    description: The creation date of the virtual router.
+                    description: Creation date of the virtual router.
                     type: string
                   id:
-                    description: The ID of the virtual router.
+                    description: ID of the virtual router.
                     type: string
                   lastUpdatedDate:
-                    description: The last update date of the virtual router.
+                    description: Last update date of the virtual router.
                     type: string
                   resourceOwner:
-                    description: The resource owner's AWS account ID.
+                    description: Resource owner's AWS account ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

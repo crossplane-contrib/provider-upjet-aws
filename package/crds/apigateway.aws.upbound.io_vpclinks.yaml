@@ -65,10 +65,10 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the VPC link.
+                    description: Description of the VPC link.
                     type: string
                   name:
-                    description: The name used to label and identify the VPC link.
+                    description: Name used to label and identify the VPC link.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -156,8 +156,8 @@ spec:
                         type: object
                     type: object
                   targetArns:
-                    description: The list of network load balancer arns in the VPC
-                      targeted by the VPC link. Currently AWS only supports 1 target.
+                    description: List of network load balancer arns in the VPC targeted
+                      by the VPC link. Currently AWS only supports 1 target.
                     items:
                       type: string
                     type: array
@@ -344,14 +344,13 @@ spec:
                   arn:
                     type: string
                   id:
-                    description: The identifier of the VpcLink.
+                    description: Identifier of the VpcLink.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

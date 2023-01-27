@@ -18,18 +18,18 @@ type ScalableTargetActionObservation struct {
 
 type ScalableTargetActionParameters struct {
 
-	// The maximum capacity. At least one of max_capacity or min_capacity must be set.
+	// Maximum capacity. At least one of max_capacity or min_capacity must be set.
 	// +kubebuilder:validation:Optional
 	MaxCapacity *string `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// The minimum capacity. At least one of min_capacity or max_capacity must be set.
+	// Minimum capacity. At least one of min_capacity or max_capacity must be set.
 	// +kubebuilder:validation:Optional
 	MinCapacity *string `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 }
 
 type ScheduledActionObservation struct {
 
-	// The Amazon Resource Name (ARN) of the scheduled action.
+	// ARN of the scheduled action.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -37,11 +37,11 @@ type ScheduledActionObservation struct {
 
 type ScheduledActionParameters struct {
 
-	// The date and time for the scheduled action to end in RFC 3339 format. The timezone is not affected by the setting of timezone.
+	// Date and time for the scheduled action to end in RFC 3339 format. The timezone is not affected by the setting of timezone.
 	// +kubebuilder:validation:Optional
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
-	// The name of the scheduled action.
+	// Name of the scheduled action.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -50,7 +50,7 @@ type ScheduledActionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The identifier of the resource associated with the scheduled action. Documentation can be found in the parameter at: AWS Application Auto Scaling API Reference
+	// Identifier of the resource associated with the scheduled action. Documentation can be found in the ResourceId parameter at: AWS Application Auto Scaling API Reference
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appautoscaling/v1beta1.Target
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("resource_id",false)
 	// +kubebuilder:validation:Optional
@@ -64,7 +64,7 @@ type ScheduledActionParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
-	// The scalable dimension. Documentation can be found in the parameter at: AWS Application Auto Scaling API Reference Example: ecs:service:DesiredCount
+	// Scalable dimension. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference Example: ecs:service:DesiredCount
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appautoscaling/v1beta1.Target
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("scalable_dimension",false)
 	// +kubebuilder:validation:Optional
@@ -78,15 +78,15 @@ type ScheduledActionParameters struct {
 	// +kubebuilder:validation:Optional
 	ScalableDimensionSelector *v1.Selector `json:"scalableDimensionSelector,omitempty" tf:"-"`
 
-	// The new minimum and maximum capacity. You can set both values or just one. See below
+	// New minimum and maximum capacity. You can set both values or just one. See below
 	// +kubebuilder:validation:Required
 	ScalableTargetAction []ScalableTargetActionParameters `json:"scalableTargetAction" tf:"scalable_target_action,omitempty"`
 
-	// The schedule for this action. The following formats are supported: At expressions - at(yyyy-mm-ddThh:mm:ss), Rate expressions - rate(valueunit), Cron expressions - cron(fields). Times for at expressions and cron expressions are evaluated using the time zone configured in timezone. Documentation can be found in the parameter at: AWS Application Auto Scaling API Reference
+	// Schedule for this action. The following formats are supported: At expressions - at(yyyy-mm-ddThh:mm:ss), Rate expressions - rate(valueunit), Cron expressions - cron(fields). Times for at expressions and cron expressions are evaluated using the time zone configured in timezone. Documentation can be found in the Timezone parameter at: AWS Application Auto Scaling API Reference
 	// +kubebuilder:validation:Required
 	Schedule *string `json:"schedule" tf:"schedule,omitempty"`
 
-	// The namespace of the AWS service. Documentation can be found in the parameter at: AWS Application Auto Scaling API Reference Example: ecs
+	// Namespace of the AWS service. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference Example: ecs
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appautoscaling/v1beta1.Target
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("service_namespace",false)
 	// +kubebuilder:validation:Optional
@@ -100,11 +100,11 @@ type ScheduledActionParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceNamespaceSelector *v1.Selector `json:"serviceNamespaceSelector,omitempty" tf:"-"`
 
-	// The date and time for the scheduled action to start in RFC 3339 format. The timezone is not affected by the setting of timezone.
+	// Date and time for the scheduled action to start in RFC 3339 format. The timezone is not affected by the setting of timezone.
 	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
-	// The time zone used when setting a scheduled action by using an at or cron expression. Does not affect timezone for start_time and end_time. Valid values are the canonical names of the IANA time zones supported by Joda-Time, such as Etc/GMT+9 or Pacific/Tahiti. Default is UTC.
+	// Time zone used when setting a scheduled action by using an at or cron expression. Does not affect timezone for start_time and end_time. Valid values are the canonical names of the IANA time zones supported by Joda-Time, such as Etc/GMT+9 or Pacific/Tahiti. Default is UTC.
 	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }

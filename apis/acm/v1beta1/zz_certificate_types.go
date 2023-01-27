@@ -15,22 +15,42 @@ import (
 
 type CertificateObservation struct {
 
-	// The ARN of the certificate
+	// ARN of the certificate
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Set of domain validation objects which can be used to complete certificate validation. Can have more than one element, e.g., if SANs are defined. Only set if DNS-validation was used.
+	// Set of domain validation objects which can be used to complete certificate validation.
+	// Can have more than one element, e.g., if SANs are defined.
+	// Only set if DNS-validation was used.
 	DomainValidationOptions []DomainValidationOptionsObservation `json:"domainValidationOptions,omitempty" tf:"domain_validation_options,omitempty"`
 
-	// The ARN of the certificate
+	// ARN of the certificate
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Expiration date and time of the certificate.
+	NotAfter *string `json:"notAfter,omitempty" tf:"not_after,omitempty"`
+
+	// Start of the validity period of the certificate.
+	NotBefore *string `json:"notBefore,omitempty" tf:"not_before,omitempty"`
+
+	// true if a Private certificate eligible for managed renewal is within the early_renewal_duration period.
+	PendingRenewal *bool `json:"pendingRenewal,omitempty" tf:"pending_renewal,omitempty"`
+
+	// Whether the certificate is eligible for managed renewal.
+	RenewalEligibility *string `json:"renewalEligibility,omitempty" tf:"renewal_eligibility,omitempty"`
+
+	// Contains information about the status of ACM's managed renewal for the certificate.
+	RenewalSummary []RenewalSummaryObservation `json:"renewalSummary,omitempty" tf:"renewal_summary,omitempty"`
 
 	// Status of the certificate.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// A list of addresses that received a validation E-Mail. Only set if EMAIL-validation was used.
+	// Source of the certificate.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// List of addresses that received a validation email. Only set if EMAIL validation was used.
 	ValidationEmails []*string `json:"validationEmails,omitempty" tf:"validation_emails,omitempty"`
 }
 
@@ -40,23 +60,35 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
 
-	// The certificate's PEM-formatted public key
+	// Certificate's PEM-formatted public key
 	// +kubebuilder:validation:Optional
 	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
 
-	// The certificate's PEM-formatted chain
+	// Certificate's PEM-formatted chain
 	// +kubebuilder:validation:Optional
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
-	// A domain name for which the certificate should be issued
+	// Domain name for which the certificate should be issued
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Amount of time to start automatic renewal process before expiration.
+	// Has no effect if less than 60 days.
+	// Represented by either
+	// a subset of RFC 3339 duration supporting years, months, and days (e.g., P90D),
+	// or a string such as 2160h.
+	// +kubebuilder:validation:Optional
+	EarlyRenewalDuration *string `json:"earlyRenewalDuration,omitempty" tf:"early_renewal_duration,omitempty"`
+
+	// Specifies the algorithm of the public and private key pair that your Amazon issued certificate uses to encrypt data. See ACM Certificate characteristics for more details.
+	// +kubebuilder:validation:Optional
+	KeyAlgorithm *string `json:"keyAlgorithm,omitempty" tf:"key_algorithm,omitempty"`
 
 	// Configuration block used to set certificate options. Detailed below.
 	// +kubebuilder:validation:Optional
 	Options []OptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
 
-	// The certificate's PEM-formatted private key
+	// Certificate's PEM-formatted private key
 	// +kubebuilder:validation:Optional
 	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 
@@ -84,7 +116,7 @@ type CertificateParameters struct {
 
 type DomainValidationOptionsObservation struct {
 
-	// A fully qualified domain name (FQDN) in the certificate.
+	// Fully qualified domain name (FQDN) in the certificate.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// The name of the DNS record to create to validate the certificate
@@ -105,9 +137,23 @@ type OptionsObservation struct {
 
 type OptionsParameters struct {
 
-	// Specifies whether certificate details should be added to a certificate transparency log. Valid values are ENABLED or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency for more details.
+	// Whether certificate details should be added to a certificate transparency log. Valid values are ENABLED or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency for more details.
 	// +kubebuilder:validation:Optional
 	CertificateTransparencyLoggingPreference *string `json:"certificateTransparencyLoggingPreference,omitempty" tf:"certificate_transparency_logging_preference,omitempty"`
+}
+
+type RenewalSummaryObservation struct {
+
+	// The status of ACM's managed renewal of the certificate
+	RenewalStatus *string `json:"renewalStatus,omitempty" tf:"renewal_status,omitempty"`
+
+	// The reason that a renewal request was unsuccessful or is pending
+	RenewalStatusReason *string `json:"renewalStatusReason,omitempty" tf:"renewal_status_reason,omitempty"`
+
+	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
+}
+
+type RenewalSummaryParameters struct {
 }
 
 type ValidationOptionObservation struct {
@@ -115,11 +161,11 @@ type ValidationOptionObservation struct {
 
 type ValidationOptionParameters struct {
 
-	// A fully qualified domain name (FQDN) in the certificate.
+	// Fully qualified domain name (FQDN) in the certificate.
 	// +kubebuilder:validation:Required
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
-	// The domain name that you want ACM to use to send you validation emails. This domain name is the suffix of the email addresses that you want ACM to use. This must be the same as the domain_name value or a superdomain of the domain_name value. For example, if you request a certificate for "testing.example.com", you can specify "example.com" for this value.
+	// Domain name that you want ACM to use to send you validation emails. This domain name is the suffix of the email addresses that you want ACM to use. This must be the same as the domain_name value or a superdomain of the domain_name value. For example, if you request a certificate for "testing.example.com", you can specify "example.com" for this value.
 	// +kubebuilder:validation:Required
 	ValidationDomain *string `json:"validationDomain" tf:"validation_domain,omitempty"`
 }

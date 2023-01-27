@@ -67,7 +67,7 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
-	// The ARN of the logging destination.
+	// The ARN of the logging destination. Either log_destination or log_group_name must be set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -81,7 +81,7 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDestinationSelector *v1.Selector `json:"logDestinationSelector,omitempty" tf:"-"`
 
-	// The type of the logging destination. Valid values: cloud-watch-logs, s3. Default: cloud-watch-logs.
+	// The type of the logging destination. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
 	// +kubebuilder:validation:Optional
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
@@ -89,14 +89,14 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
-	// Deprecated: Use log_destination instead. The name of the CloudWatch log group.
+	// Deprecated: Use log_destination instead. The name of the CloudWatch log group. Either log_group_name or log_destination must be set.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
 	// The maximum interval of time
 	// during which a flow of packets is captured and aggregated into a flow
 	// log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
-	// minutes). Default: 600.
+	// minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
 	// +kubebuilder:validation:Optional
 	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
@@ -123,8 +123,16 @@ type FlowLogParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.
-	// +kubebuilder:validation:Required
-	TrafficType *string `json:"trafficType" tf:"traffic_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	TrafficType *string `json:"trafficType,omitempty" tf:"traffic_type,omitempty"`
+
+	// Transit Gateway Attachment ID to attach to
+	// +kubebuilder:validation:Optional
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
+
+	// Transit Gateway ID to attach to
+	// +kubebuilder:validation:Optional
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
 	// VPC ID to attach to
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC

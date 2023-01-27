@@ -73,9 +73,13 @@ type VPCParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableDNSHostnames *bool `json:"enableDnsHostnames,omitempty" tf:"enable_dns_hostnames,omitempty"`
 
-	// A boolean flag to enable/disable DNS support in the VPC. Defaults true.
+	// A boolean flag to enable/disable DNS support in the VPC. Defaults to true.
 	// +kubebuilder:validation:Optional
 	EnableDNSSupport *bool `json:"enableDnsSupport,omitempty" tf:"enable_dns_support,omitempty"`
+
+	// Indicates whether Network Address Usage metrics are enabled for your VPC. Defaults to false.
+	// +kubebuilder:validation:Optional
+	EnableNetworkAddressUsageMetrics *bool `json:"enableNetworkAddressUsageMetrics,omitempty" tf:"enable_network_address_usage_metrics,omitempty"`
 
 	// The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across AWS Regions and accounts. Using IPAM you can monitor IP address usage throughout your AWS Organization.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCIpamPool

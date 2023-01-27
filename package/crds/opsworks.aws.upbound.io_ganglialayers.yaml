@@ -272,6 +272,55 @@ spec:
                     description: The time, in seconds, that OpsWorks will wait for
                       Chef to complete after triggering the Shutdown event.
                     type: number
+                  loadBasedAutoScaling:
+                    items:
+                      properties:
+                        downscaling:
+                          items:
+                            properties:
+                              alarms:
+                                items:
+                                  type: string
+                                type: array
+                              cpuThreshold:
+                                type: number
+                              ignoreMetricsTime:
+                                type: number
+                              instanceCount:
+                                type: number
+                              loadThreshold:
+                                type: number
+                              memoryThreshold:
+                                type: number
+                              thresholdsWaitTime:
+                                type: number
+                            type: object
+                          type: array
+                        enable:
+                          type: boolean
+                        upscaling:
+                          items:
+                            properties:
+                              alarms:
+                                items:
+                                  type: string
+                                type: array
+                              cpuThreshold:
+                                type: number
+                              ignoreMetricsTime:
+                                type: number
+                              instanceCount:
+                                type: number
+                              loadThreshold:
+                                type: number
+                              memoryThreshold:
+                                type: number
+                              thresholdsWaitTime:
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   name:
                     description: A human-readable name for the layer.
                     type: string
@@ -279,7 +328,7 @@ spec:
                     description: The password to use for Ganglia.
                     type: string
                   stackId:
-                    description: The id of the stack the layer will belong to.
+                    description: ID of the stack the layer will belong to.
                     type: string
                   stackIdRef:
                     description: Reference to a Stack in opsworks to populate stackId.

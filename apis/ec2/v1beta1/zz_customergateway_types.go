@@ -39,9 +39,9 @@ type CustomerGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
-	// The IP address of the gateway's Internet-routable external interface.
-	// +kubebuilder:validation:Required
-	IPAddress *string `json:"ipAddress" tf:"ip_address,omitempty"`
+	// The IPv4 address for the customer gateway device's outside interface.
+	// +kubebuilder:validation:Optional
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

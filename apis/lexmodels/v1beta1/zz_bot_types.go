@@ -93,7 +93,7 @@ type BotParameters struct {
 	// +kubebuilder:validation:Optional
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
-	// A set of Intent objects. Each intent represents a command that a user can express. Attributes are documented under intent. Can have up to 100 Intent objects.
+	// A set of Intent objects. Each intent represents a command that a user can express. Attributes are documented under intent. Can have up to 250 Intent objects.
 	// +kubebuilder:validation:Required
 	Intent []IntentParameters `json:"intent" tf:"intent,omitempty"`
 

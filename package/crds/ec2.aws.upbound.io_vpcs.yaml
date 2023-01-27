@@ -90,7 +90,11 @@ spec:
                     type: boolean
                   enableDnsSupport:
                     description: A boolean flag to enable/disable DNS support in the
-                      VPC. Defaults true.
+                      VPC. Defaults to true.
+                    type: boolean
+                  enableNetworkAddressUsageMetrics:
+                    description: Indicates whether Network Address Usage metrics are
+                      enabled for your VPC. Defaults to false.
                     type: boolean
                   instanceTenancy:
                     description: A tenancy option for instances launched into the

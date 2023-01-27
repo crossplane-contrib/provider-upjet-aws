@@ -18,11 +18,14 @@ type ClusterModeObservation struct {
 
 type ClusterModeParameters struct {
 
-	// Number of node groups (shards) for this Redis replication group. Changing this number will trigger an online resizing operation before other settings modifications. Required unless global_replication_group_id is set.
+	// Number of node groups (shards) for this Redis replication group.
+	// Changing this number will trigger a resizing operation before other settings modifications.
 	// +kubebuilder:validation:Optional
 	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
-	// Number of replica nodes in each node group. Valid values are 0 to 5. Changing this number will trigger an online resizing operation before other settings modifications.
+	// Number of replica nodes in each node group.
+	// Changing this number will trigger a resizing operation before other settings modifications.
+	// Valid values are 0 to 5.
 	// +kubebuilder:validation:Optional
 	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 }
@@ -99,7 +102,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoMinorVersionUpgrade *string `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
-	// Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. If enabled, number_cache_clusters must be greater than 1. Must be enabled for Redis (cluster mode enabled) replication groups. Defaults to false.
+	// Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. If enabled, num_cache_clusters must be greater than 1. Must be enabled for Redis (cluster mode enabled) replication groups. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AutomaticFailoverEnabled *bool `json:"automaticFailoverEnabled,omitempty" tf:"automatic_failover_enabled,omitempty"`
 
@@ -172,15 +175,16 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 
-	// Number of cache clusters (primary and replicas) this replication group will have. If Multi-AZ is enabled, the value of this parameter must be at least 2. Updates will occur before other modifications. Conflicts with num_node_groups, the deprecatednumber_cache_clusters, or the deprecated cluster_mode. Defaults to 1.
+	// 00#.
 	// +kubebuilder:validation:Optional
 	NumCacheClusters *float64 `json:"numCacheClusters,omitempty" tf:"num_cache_clusters,omitempty"`
 
-	// Number of node groups (shards) for this Redis replication group. Changing this number will trigger an online resizing operation before other settings modifications. Required unless global_replication_group_id is set.
+	// Number of node groups (shards) for this Redis replication group.
+	// Changing this number will trigger a resizing operation before other settings modifications.
 	// +kubebuilder:validation:Optional
 	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
-	// 00#.
+	// Number of cache clusters (primary and replicas) this replication group will have. If Multi-AZ is enabled, the value of this parameter must be at least 2. Updates will occur before other modifications. Conflicts with num_cache_clusters, num_node_groups, or the deprecated cluster_mode. Defaults to 1.
 	// +kubebuilder:validation:Optional
 	NumberCacheClusters *float64 `json:"numberCacheClusters,omitempty" tf:"number_cache_clusters,omitempty"`
 
@@ -201,7 +205,9 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Number of replica nodes in each node group. Valid values are 0 to 5. Changing this number will trigger an online resizing operation before other settings modifications.
+	// Number of replica nodes in each node group.
+	// Changing this number will trigger a resizing operation before other settings modifications.
+	// Valid values are 0 to 5.
 	// +kubebuilder:validation:Optional
 	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 

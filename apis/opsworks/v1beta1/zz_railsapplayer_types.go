@@ -98,6 +98,75 @@ type RailsAppLayerEBSVolumeParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type RailsAppLayerLoadBasedAutoScalingDownscalingObservation struct {
+}
+
+type RailsAppLayerLoadBasedAutoScalingDownscalingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+}
+
+type RailsAppLayerLoadBasedAutoScalingObservation struct {
+}
+
+type RailsAppLayerLoadBasedAutoScalingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Downscaling []RailsAppLayerLoadBasedAutoScalingDownscalingParameters `json:"downscaling,omitempty" tf:"downscaling,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Upscaling []RailsAppLayerLoadBasedAutoScalingUpscalingParameters `json:"upscaling,omitempty" tf:"upscaling,omitempty"`
+}
+
+type RailsAppLayerLoadBasedAutoScalingUpscalingObservation struct {
+}
+
+type RailsAppLayerLoadBasedAutoScalingUpscalingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+}
+
 type RailsAppLayerObservation struct {
 
 	// The Amazon Resource Name(ARN) of the layer.
@@ -193,6 +262,9 @@ type RailsAppLayerParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceShutdownTimeout *float64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	LoadBasedAutoScaling []RailsAppLayerLoadBasedAutoScalingParameters `json:"loadBasedAutoScaling,omitempty" tf:"load_based_auto_scaling,omitempty"`
+
 	// Whether OpsWorks should manage bundler. On by default.
 	// +kubebuilder:validation:Optional
 	ManageBundler *bool `json:"manageBundler,omitempty" tf:"manage_bundler,omitempty"`
@@ -213,7 +285,7 @@ type RailsAppLayerParameters struct {
 	// +kubebuilder:validation:Optional
 	RubygemsVersion *string `json:"rubygemsVersion,omitempty" tf:"rubygems_version,omitempty"`
 
-	// The id of the stack the layer will belong to.
+	// ID of the stack the layer will belong to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

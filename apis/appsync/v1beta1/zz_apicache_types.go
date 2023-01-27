@@ -15,7 +15,7 @@ import (
 
 type APICacheObservation struct {
 
-	// The AppSync API ID.
+	// AppSync API ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -25,7 +25,7 @@ type APICacheParameters struct {
 	// +kubebuilder:validation:Required
 	APICachingBehavior *string `json:"apiCachingBehavior" tf:"api_caching_behavior,omitempty"`
 
-	// The GraphQL API ID.
+	// GraphQL API ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.GraphQLAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -56,7 +56,7 @@ type APICacheParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 
-	// The cache instance type. Valid values are SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X, T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE.
+	// Cache instance type. Valid values are SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X, T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

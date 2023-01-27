@@ -257,6 +257,11 @@ func (in *DirectoryParameters) DeepCopyInto(out *DirectoryParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DesiredNumberOfDomainControllers != nil {
+		in, out := &in.DesiredNumberOfDomainControllers, &out.DesiredNumberOfDomainControllers
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Edition != nil {
 		in, out := &in.Edition, &out.Edition
 		*out = new(string)

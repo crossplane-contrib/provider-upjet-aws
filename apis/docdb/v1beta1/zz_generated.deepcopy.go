@@ -228,6 +228,11 @@ func (in *ClusterInstanceParameters) DeepCopyInto(out *ClusterInstanceParameters
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.EnablePerformanceInsights != nil {
+		in, out := &in.EnablePerformanceInsights, &out.EnablePerformanceInsights
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Engine != nil {
 		in, out := &in.Engine, &out.Engine
 		*out = new(string)
@@ -235,6 +240,11 @@ func (in *ClusterInstanceParameters) DeepCopyInto(out *ClusterInstanceParameters
 	}
 	if in.InstanceClass != nil {
 		in, out := &in.InstanceClass, &out.InstanceClass
+		*out = new(string)
+		**out = **in
+	}
+	if in.PerformanceInsightsKMSKeyID != nil {
+		in, out := &in.PerformanceInsightsKMSKeyID, &out.PerformanceInsightsKMSKeyID
 		*out = new(string)
 		**out = **in
 	}

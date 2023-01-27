@@ -63,6 +63,31 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  alarms:
+                    description: Information about the CloudWatch alarms. See below.
+                    items:
+                      properties:
+                        alarmNames:
+                          items:
+                            type: string
+                          type: array
+                        enable:
+                          description: Determines whether to use the CloudWatch alarm
+                            option in the service deployment process.
+                          type: boolean
+                        rollback:
+                          description: Determines whether to configure Amazon ECS
+                            to roll back the service if a service deployment fails.
+                            If rollback is used, when a service deployment fails,
+                            the service is rolled back to the last deployment that
+                            completed successfully.
+                          type: boolean
+                      required:
+                      - alarmNames
+                      - enable
+                      - rollback
+                      type: object
+                    type: array
                   capacityProviderStrategy:
                     description: Capacity provider strategies to use for the service.
                       Can be one or more. These can be updated without destroying
@@ -601,6 +626,105 @@ spec:
                       values are REPLICA and DAEMON. Defaults to REPLICA. Note that
                       Tasks using the Fargate launch type or the .
                     type: string
+                  serviceConnectConfiguration:
+                    description: The ECS Service Connect configuration for this service
+                      to discover and connect to services, and be discovered by, and
+                      connected from, other services within a namespace. See below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Specifies whether to use Service Connect with
+                            this service.
+                          type: boolean
+                        logConfiguration:
+                          description: The log configuration for the container. See
+                            below.
+                          items:
+                            properties:
+                              logDriver:
+                                description: The log driver to use for the container.
+                                type: string
+                              options:
+                                additionalProperties:
+                                  type: string
+                                description: The configuration options to send to
+                                  the log driver.
+                                type: object
+                              secretOption:
+                                description: The secrets to pass to the log configuration.
+                                  See below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the secret.
+                                      type: string
+                                    valueFrom:
+                                      description: The secret to expose to the container.
+                                        The supported values are either the full ARN
+                                        of the AWS Secrets Manager secret or the full
+                                        ARN of the parameter in the SSM Parameter
+                                        Store.
+                                      type: string
+                                  required:
+                                  - name
+                                  - valueFrom
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        namespace:
+                          description: The namespace name or ARN of the aws_service_discovery_http_namespace
+                            for use with Service Connect.
+                          type: string
+                        service:
+                          description: The list of Service Connect service objects.
+                            See below.
+                          items:
+                            properties:
+                              clientAlias:
+                                description: The list of client aliases for this Service
+                                  Connect service. You use these to assign names that
+                                  can be used by client applications. The maximum
+                                  number of client aliases that you can have in this
+                                  list is 1. See below.
+                                items:
+                                  properties:
+                                    dnsName:
+                                      description: The name that you use in the applications
+                                        of client tasks to connect to this service.
+                                      type: string
+                                    port:
+                                      description: The listening port number for the
+                                        Service Connect proxy. This port is available
+                                        inside of all of the tasks within the same
+                                        namespace.
+                                      type: number
+                                  required:
+                                  - port
+                                  type: object
+                                type: array
+                              discoveryName:
+                                description: The name of the new AWS Cloud Map service
+                                  that Amazon ECS creates for this Amazon ECS service.
+                                type: string
+                              ingressPortOverride:
+                                description: The port number for the Service Connect
+                                  proxy to listen on.
+                                type: number
+                              portName:
+                                description: The name of one of the portMappings from
+                                  all the containers in the task definition of this
+                                  Amazon ECS service.
+                                type: string
+                            required:
+                            - clientAlias
+                            - portName
+                            type: object
+                          type: array
+                      required:
+                      - enabled
+                      type: object
+                    type: array
                   serviceRegistries:
                     description: Service discovery registries for the service. The
                       maximum number of service_registries blocks is 1. See below.
@@ -640,6 +764,13 @@ spec:
                       Required unless using the EXTERNAL deployment controller. If
                       a revision is not specified, the latest ACTIVE revision is used.
                     type: string
+                  triggers:
+                    additionalProperties:
+                      type: string
+                    description: Map of arbitrary keys and values that, when changed,
+                      will trigger an in-place update (redeployment). Useful with
+                      timestamp(). See example above.
+                    type: object
                   waitForSteadyState:
                     description: Default false.
                     type: boolean

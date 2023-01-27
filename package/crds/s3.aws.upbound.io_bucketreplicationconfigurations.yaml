@@ -276,9 +276,8 @@ spec:
                                   override configuration.
                                 type: string
                               bucket:
-                                description: The ARN of the S3 bucket where you want
-                                  Amazon S3 to store replicas of the objects identified
-                                  by the rule.
+                                description: The Amazon Resource Name (ARN) of the
+                                  bucket where you want Amazon S3 to store the results.
                                 type: string
                               bucketRef:
                                 description: Reference to a Bucket in s3 to populate

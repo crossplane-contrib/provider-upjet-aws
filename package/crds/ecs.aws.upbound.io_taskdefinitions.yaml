@@ -279,6 +279,8 @@ spec:
                       type: object
                     type: array
                   skipDestroy:
+                    description: Whether to retain the old revision when the resource
+                      is destroyed or replacement is necessary. Default is false.
                     type: boolean
                   tags:
                     additionalProperties:

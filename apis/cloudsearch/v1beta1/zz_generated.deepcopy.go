@@ -444,6 +444,11 @@ func (in *IndexFieldParameters) DeepCopyInto(out *IndexFieldParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.SourceFields != nil {
+		in, out := &in.SourceFields, &out.SourceFields
+		*out = new(string)
+		**out = **in
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)

@@ -485,10 +485,10 @@ spec:
                     items:
                       properties:
                         queueArn:
-                          description: Specifies the ARN for the queue.
+                          description: ARN for the queue.
                           type: string
                         queueName:
-                          description: Specifies the name for the queue.
+                          description: Name for the queue.
                           type: string
                       type: object
                     type: array
@@ -510,13 +510,13 @@ spec:
                             be handled for the queue.
                           type: number
                         queueArn:
-                          description: Specifies the ARN for the queue.
+                          description: ARN for the queue.
                           type: string
                         queueId:
                           description: Specifies the identifier for the queue.
                           type: string
                         queueName:
-                          description: Specifies the name for the queue.
+                          description: Name for the queue.
                           type: string
                       type: object
                     type: array

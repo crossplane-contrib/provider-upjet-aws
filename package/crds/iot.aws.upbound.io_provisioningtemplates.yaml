@@ -82,7 +82,7 @@ spec:
                             payload version is "2020-04-01".
                           type: string
                         targetArn:
-                          description: The ARN that identifies the provisioning template.
+                          description: The ARN of the target function.
                           type: string
                       required:
                       - targetArn

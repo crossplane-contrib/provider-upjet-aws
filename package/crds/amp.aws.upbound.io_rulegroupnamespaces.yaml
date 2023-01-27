@@ -73,8 +73,8 @@ spec:
                       be created in.
                     type: string
                   workspaceId:
-                    description: The id of the prometheus workspace the rule group
-                      namespace should be linked to
+                    description: ID of the prometheus workspace the rule group namespace
+                      should be linked to
                     type: string
                   workspaceIdRef:
                     description: Reference to a Workspace in amp to populate workspaceId.

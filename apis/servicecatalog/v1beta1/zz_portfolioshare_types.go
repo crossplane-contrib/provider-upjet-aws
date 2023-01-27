@@ -50,6 +50,10 @@ type PortfolioShareParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Enables or disables Principal sharing when creating the portfolio share. If this flag is not provided, principal sharing is disabled.
+	// +kubebuilder:validation:Optional
+	SharePrincipals *bool `json:"sharePrincipals,omitempty" tf:"share_principals,omitempty"`
+
 	// Whether to enable sharing of aws_servicecatalog_tag_option resources when creating the portfolio share.
 	// +kubebuilder:validation:Optional
 	ShareTagOptions *bool `json:"shareTagOptions,omitempty" tf:"share_tag_options,omitempty"`

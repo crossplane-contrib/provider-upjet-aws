@@ -40,11 +40,11 @@ type PermissionParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
-	// Lambda Function URLs authentication type. Valid values are: AWS_IAM or NONE.
+	// Lambda Function URLs authentication type. Valid values are: AWS_IAM or NONE. Only supported for lambda:InvokeFunctionUrl action.
 	// +kubebuilder:validation:Optional
 	FunctionURLAuthType *string `json:"functionUrlAuthType,omitempty" tf:"function_url_auth_type,omitempty"`
 
-	// The principal who is getting this permission e.g., s3.amazonaws.com, an AWS account ID, or any valid AWS service principal such as events.amazonaws.com or sns.amazonaws.com.
+	// The principal who is getting this permission e.g., s3.amazonaws.com, an AWS account ID, or AWS IAM principal, or AWS service principal such as events.amazonaws.com or sns.amazonaws.com.
 	// +kubebuilder:validation:Required
 	Principal *string `json:"principal" tf:"principal,omitempty"`
 
@@ -70,7 +70,7 @@ type PermissionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// This parameter is used for S3 and SES. The AWS account ID (without a hyphen) of the source owner.
+	// This parameter is used when allowing cross-account access, or for S3 and SES. The AWS account ID (without a hyphen) of the source owner.
 	// +kubebuilder:validation:Optional
 	SourceAccount *string `json:"sourceAccount,omitempty" tf:"source_account,omitempty"`
 

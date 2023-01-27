@@ -160,10 +160,9 @@ spec:
                                 description: The HTTP response header name.
                                 type: string
                               override:
-                                description: A Boolean value that determines whether
-                                  CloudFront overrides a response header with the
-                                  same name received from the origin with the header
-                                  specifies here.
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
                                 type: boolean
                               value:
                                 description: The value for the HTTP response header.
@@ -205,10 +204,9 @@ spec:
                                   for more information.
                                 type: string
                               override:
-                                description: A Boolean value that determines whether
-                                  CloudFront overrides a response header with the
-                                  same name received from the origin with the header
-                                  specifies here.
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
                                 type: boolean
                             required:
                             - contentSecurityPolicy
@@ -222,10 +220,9 @@ spec:
                           items:
                             properties:
                               override:
-                                description: A Boolean value that determines whether
-                                  CloudFront overrides a response header with the
-                                  same name received from the origin with the header
-                                  specifies here.
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
                                 type: boolean
                             required:
                             - override
@@ -242,10 +239,9 @@ spec:
                                   response header. Valid values: DENY | SAMEORIGIN'
                                 type: string
                               override:
-                                description: A Boolean value that determines whether
-                                  CloudFront overrides a response header with the
-                                  same name received from the origin with the header
-                                  specifies here.
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
                                 type: boolean
                             required:
                             - frameOption
@@ -259,10 +255,9 @@ spec:
                           items:
                             properties:
                               override:
-                                description: A Boolean value that determines whether
-                                  CloudFront overrides a response header with the
-                                  same name received from the origin with the header
-                                  specifies here.
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
                                 type: boolean
                               referrerPolicy:
                                 description: Determines whether CloudFront includes
@@ -287,20 +282,19 @@ spec:
                                   header.
                                 type: number
                               includeSubdomains:
-                                description: A Boolean value that determines whether
-                                  CloudFront includes the includeSubDomains directive
-                                  in the Strict-Transport-Security HTTP response header.
+                                description: Whether CloudFront includes the includeSubDomains
+                                  directive in the Strict-Transport-Security HTTP
+                                  response header.
                                 type: boolean
                               override:
-                                description: A Boolean value that determines whether
-                                  CloudFront overrides a response header with the
-                                  same name received from the origin with the header
-                                  specifies here.
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
                                 type: boolean
                               preload:
-                                description: A Boolean value that determines whether
-                                  CloudFront includes the preload directive in the
-                                  Strict-Transport-Security HTTP response header.
+                                description: Whether CloudFront includes the preload
+                                  directive in the Strict-Transport-Security HTTP
+                                  response header.
                                 type: boolean
                             required:
                             - accessControlMaxAgeSec
@@ -314,15 +308,13 @@ spec:
                           items:
                             properties:
                               modeBlock:
-                                description: A Boolean value that determines whether
-                                  CloudFront includes the mode=block directive in
-                                  the X-XSS-Protection header.
+                                description: Whether CloudFront includes the mode=block
+                                  directive in the X-XSS-Protection header.
                                 type: boolean
                               override:
-                                description: A Boolean value that determines whether
-                                  CloudFront overrides a response header with the
-                                  same name received from the origin with the header
-                                  specifies here.
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
                                 type: boolean
                               protection:
                                 description: A Boolean value that determines the value
@@ -342,6 +334,29 @@ spec:
                             - protection
                             type: object
                           type: array
+                      type: object
+                    type: array
+                  serverTimingHeadersConfig:
+                    description: A configuration for enabling the Server-Timing header
+                      in HTTP responses sent from CloudFront. See Server Timing Headers
+                      Config for more information.
+                    items:
+                      properties:
+                        enabled:
+                          description: A Whether CloudFront adds the Server-Timing
+                            header to HTTP responses that it sends in response to
+                            requests that match a cache behavior that's associated
+                            with this response headers policy.
+                          type: boolean
+                        samplingRate:
+                          description: 'A number 0–100 (inclusive) that specifies
+                            the percentage of responses that you want CloudFront to
+                            add the Server-Timing header to. Valid range: Minimum
+                            value of 0.0. Maximum value of 100.0.'
+                          type: number
+                      required:
+                      - enabled
+                      - samplingRate
                       type: object
                     type: array
                 required:

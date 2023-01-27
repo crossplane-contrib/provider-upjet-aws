@@ -65,14 +65,14 @@ spec:
               forProvider:
                 properties:
                   name:
-                    description: The name of the request validator
+                    description: Name of the request validator
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   restApiId:
-                    description: The ID of the associated Rest API
+                    description: ID of the associated Rest API
                     type: string
                   restApiIdRef:
                     description: Reference to a RestAPI in apigateway to populate
@@ -338,7 +338,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The unique ID of the request validator
+                    description: Unique ID of the request validator
                     type: string
                 type: object
               conditions:

@@ -109,6 +109,8 @@ spec:
                           type: string
                       type: object
                     type: array
+                  disableApiStop:
+                    type: boolean
                   disableApiTermination:
                     type: boolean
                   ebsBlockDevice:
@@ -171,6 +173,8 @@ spec:
                     type: boolean
                   hostId:
                     description: The Spot Instance Request ID.
+                    type: string
+                  hostResourceGroupArn:
                     type: string
                   iamInstanceProfile:
                     type: string
@@ -252,6 +256,17 @@ spec:
                     type: string
                   placementPartitionNumber:
                     type: number
+                  privateDnsNameOptions:
+                    items:
+                      properties:
+                        enableResourceNameDnsARecord:
+                          type: boolean
+                        enableResourceNameDnsAaaaRecord:
+                          type: boolean
+                        hostnameType:
+                          type: string
+                      type: object
+                    type: array
                   privateIp:
                     description: The private IP address assigned to the instance
                     type: string

@@ -18,11 +18,11 @@ type AuthorizationConfigObservation struct {
 
 type AuthorizationConfigParameters struct {
 
-	// The authorization type that the HTTP endpoint requires. Default values is AWS_IAM.
+	// Authorization type that the HTTP endpoint requires. Default values is AWS_IAM.
 	// +kubebuilder:validation:Optional
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
-	// The Identity and Access Management (IAM) settings. See AWS IAM Config.
+	// Identity and Access Management (IAM) settings. See AWS IAM Config.
 	// +kubebuilder:validation:Optional
 	AwsIAMConfig []AwsIAMConfigParameters `json:"awsIamConfig,omitempty" tf:"aws_iam_config,omitempty"`
 }
@@ -32,18 +32,18 @@ type AwsIAMConfigObservation struct {
 
 type AwsIAMConfigParameters struct {
 
-	// The signing Amazon Web Services Region for IAM authorization.
+	// Signing Amazon Web Services Region for IAM authorization.
 	// +kubebuilder:validation:Optional
 	SigningRegion *string `json:"signingRegion,omitempty" tf:"signing_region,omitempty"`
 
-	// The signing service name for IAM authorization.
+	// Signing service name for IAM authorization.
 	// +kubebuilder:validation:Optional
 	SigningServiceName *string `json:"signingServiceName,omitempty" tf:"signing_service_name,omitempty"`
 }
 
 type DatasourceObservation struct {
 
-	// The ARN
+	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -51,7 +51,7 @@ type DatasourceObservation struct {
 
 type DatasourceParameters struct {
 
-	// The API ID for the GraphQL API for the DataSource.
+	// API ID for the GraphQL API for the data source.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.GraphQLAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -65,7 +65,7 @@ type DatasourceParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// A description of the DataSource.
+	// Description of the data source.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -95,7 +95,7 @@ type DatasourceParameters struct {
 	// +kubebuilder:validation:Optional
 	RelationalDatabaseConfig []RelationalDatabaseConfigParameters `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
 
-	// The IAM service role ARN for the data source.
+	// IAM service role ARN for the data source.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -109,7 +109,7 @@ type DatasourceParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
-	// The type of the DataSource. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE.
+	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -122,7 +122,7 @@ type DeltaSyncConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
 
-	// A user-supplied name for the DataSource.
+	// User-supplied name for the data source.
 	// +kubebuilder:validation:Required
 	DeltaSyncTableName *string `json:"deltaSyncTableName" tf:"delta_sync_table_name,omitempty"`
 
@@ -182,7 +182,7 @@ type HTTPConfigObservation struct {
 
 type HTTPConfigParameters struct {
 
-	// The authorization configuration in case the HTTP endpoint requires authorization. See Authorization Config.
+	// Authorization configuration in case the HTTP endpoint requires authorization. See Authorization Config.
 	// +kubebuilder:validation:Optional
 	AuthorizationConfig []AuthorizationConfigParameters `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
 
@@ -222,7 +222,7 @@ type LambdaConfigObservation struct {
 
 type LambdaConfigParameters struct {
 
-	// The ARN for the Lambda function.
+	// ARN for the Lambda function.
 	// +kubebuilder:validation:Required
 	FunctionArn *string `json:"functionArn" tf:"function_arn,omitempty"`
 }
@@ -232,7 +232,7 @@ type RelationalDatabaseConfigObservation struct {
 
 type RelationalDatabaseConfigParameters struct {
 
-	// The Amazon RDS HTTP endpoint configuration. See HTTP Endpoint Config.
+	// Amazon RDS HTTP endpoint configuration. See HTTP Endpoint Config.
 	// +kubebuilder:validation:Optional
 	HTTPEndpointConfig []HTTPEndpointConfigParameters `json:"httpEndpointConfig,omitempty" tf:"http_endpoint_config,omitempty"`
 
@@ -255,7 +255,7 @@ type DatasourceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Datasource is the Schema for the Datasources API. Provides an AppSync DataSource.
+// Datasource is the Schema for the Datasources API. Provides an AppSync Data Source.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

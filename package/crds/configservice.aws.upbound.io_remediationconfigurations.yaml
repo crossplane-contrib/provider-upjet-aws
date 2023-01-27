@@ -110,6 +110,11 @@ spec:
                         staticValue:
                           description: Value is static and does not change at run-time.
                           type: string
+                        staticValues:
+                          description: List of static values.
+                          items:
+                            type: string
+                          type: array
                       required:
                       - name
                       type: object

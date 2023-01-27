@@ -103,11 +103,169 @@ spec:
                       and the scope of that analysis. (documented below)
                     items:
                       properties:
+                        bucketCriteria:
+                          description: The property- and tag-based conditions that
+                            determine which S3 buckets to include or exclude from
+                            the analysis. Conflicts with bucket_definitions. (documented
+                            below)
+                          items:
+                            properties:
+                              excludes:
+                                description: The property- or tag-based conditions
+                                  that determine which objects to exclude from the
+                                  analysis. (documented below)
+                                items:
+                                  properties:
+                                    and:
+                                      description: An array of conditions, one for
+                                        each condition that determines which objects
+                                        to include or exclude from the job. (documented
+                                        below)
+                                      items:
+                                        properties:
+                                          simpleCriterion:
+                                            description: A property-based condition
+                                              that defines a property, operator, and
+                                              one or more values for including or
+                                              excluding an S3 buckets from the job.
+                                              (documented below)
+                                            items:
+                                              properties:
+                                                comparator:
+                                                  description: 'The operator to use
+                                                    in a condition. Valid values are:
+                                                    EQ, GT, GTE, LT, LTE, NE, CONTAINS,
+                                                    STARTS_WITH'
+                                                  type: string
+                                                key:
+                                                  description: The object property
+                                                    to use in the condition.
+                                                  type: string
+                                                values:
+                                                  description: An array that lists
+                                                    the values to use in the condition.
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          tagCriterion:
+                                            description: A tag-based condition that
+                                              defines the operator and tag keys or
+                                              tag key and value pairs for including
+                                              or excluding an S3 buckets from the
+                                              job. (documented below)
+                                            items:
+                                              properties:
+                                                comparator:
+                                                  description: 'The operator to use
+                                                    in a condition. Valid values are:
+                                                    EQ, GT, GTE, LT, LTE, NE, CONTAINS,
+                                                    STARTS_WITH'
+                                                  type: string
+                                                tagValues:
+                                                  description: The tag keys or tag
+                                                    key and value pairs to use in
+                                                    the condition.
+                                                  items:
+                                                    properties:
+                                                      key:
+                                                        description: The object property
+                                                          to use in the condition.
+                                                        type: string
+                                                      value:
+                                                        description: The tag value.
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              includes:
+                                description: The property- or tag-based conditions
+                                  that determine which objects to include in the analysis.
+                                  (documented below)
+                                items:
+                                  properties:
+                                    and:
+                                      description: An array of conditions, one for
+                                        each condition that determines which objects
+                                        to include or exclude from the job. (documented
+                                        below)
+                                      items:
+                                        properties:
+                                          simpleCriterion:
+                                            description: A property-based condition
+                                              that defines a property, operator, and
+                                              one or more values for including or
+                                              excluding an S3 buckets from the job.
+                                              (documented below)
+                                            items:
+                                              properties:
+                                                comparator:
+                                                  description: 'The operator to use
+                                                    in a condition. Valid values are:
+                                                    EQ, GT, GTE, LT, LTE, NE, CONTAINS,
+                                                    STARTS_WITH'
+                                                  type: string
+                                                key:
+                                                  description: The object property
+                                                    to use in the condition.
+                                                  type: string
+                                                values:
+                                                  description: An array that lists
+                                                    the values to use in the condition.
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          tagCriterion:
+                                            description: A tag-based condition that
+                                              defines the operator and tag keys or
+                                              tag key and value pairs for including
+                                              or excluding an S3 buckets from the
+                                              job. (documented below)
+                                            items:
+                                              properties:
+                                                comparator:
+                                                  description: 'The operator to use
+                                                    in a condition. Valid values are:
+                                                    EQ, GT, GTE, LT, LTE, NE, CONTAINS,
+                                                    STARTS_WITH'
+                                                  type: string
+                                                tagValues:
+                                                  description: The tag keys or tag
+                                                    key and value pairs to use in
+                                                    the condition.
+                                                  items:
+                                                    properties:
+                                                      key:
+                                                        description: The object property
+                                                          to use in the condition.
+                                                        type: string
+                                                      value:
+                                                        description: The tag value.
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         bucketDefinitions:
                           description: An array of objects, one for each AWS account
                             that owns buckets to analyze. Each object specifies the
                             account ID for an account and one or more buckets to analyze
-                            for the account. (documented below)
+                            for the account. Conflicts with bucket_criteria. (documented
+                            below)
                           items:
                             properties:
                               accountId:
@@ -148,7 +306,7 @@ spec:
                                             description: A property-based condition
                                               that defines a property, operator, and
                                               one or more values for including or
-                                              excluding an object from the job.  (documented
+                                              excluding an object from the job. (documented
                                               below)
                                             items:
                                               properties:
@@ -174,8 +332,8 @@ spec:
                                             description: A tag-based condition that
                                               defines the operator and tag keys or
                                               tag key and value pairs for including
-                                              or excluding an object from the job.  (documented
-                                              below)
+                                              or excluding an object from the job.
+                                              (documented below)
                                             items:
                                               properties:
                                                 comparator:
@@ -199,12 +357,14 @@ spec:
                                                           to use in the condition.
                                                         type: string
                                                       value:
+                                                        description: The tag value.
                                                         type: string
                                                     type: object
                                                   type: array
                                                 target:
                                                   description: The type of object
-                                                    to apply the condition to.
+                                                    to apply the condition to. The
+                                                    only valid value is S3_OBJECT.
                                                   type: string
                                               type: object
                                             type: array
@@ -229,7 +389,7 @@ spec:
                                             description: A property-based condition
                                               that defines a property, operator, and
                                               one or more values for including or
-                                              excluding an object from the job.  (documented
+                                              excluding an object from the job. (documented
                                               below)
                                             items:
                                               properties:
@@ -255,8 +415,8 @@ spec:
                                             description: A tag-based condition that
                                               defines the operator and tag keys or
                                               tag key and value pairs for including
-                                              or excluding an object from the job.  (documented
-                                              below)
+                                              or excluding an object from the job.
+                                              (documented below)
                                             items:
                                               properties:
                                                 comparator:
@@ -280,12 +440,14 @@ spec:
                                                           to use in the condition.
                                                         type: string
                                                       value:
+                                                        description: The tag value.
                                                         type: string
                                                     type: object
                                                   type: array
                                                 target:
                                                   description: The type of object
-                                                    to apply the condition to.
+                                                    to apply the condition to. The
+                                                    only valid value is S3_OBJECT.
                                                   type: string
                                               type: object
                                             type: array

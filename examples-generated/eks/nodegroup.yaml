@@ -17,13 +17,13 @@ spec:
     region: us-west-1
     scalingConfig:
     - desiredSize: 1
-      maxSize: 1
+      maxSize: 2
       minSize: 1
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example[*]
     updateConfig:
-    - maxUnavailable: 2
+    - maxUnavailable: 1
 
 ---
 

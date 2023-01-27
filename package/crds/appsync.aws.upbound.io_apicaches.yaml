@@ -69,7 +69,7 @@ spec:
                       and PER_RESOLVER_CACHING.
                     type: string
                   apiId:
-                    description: The GraphQL API ID.
+                    description: GraphQL API ID.
                     type: string
                   apiIdRef:
                     description: Reference to a GraphQLAPI in appsync to populate
@@ -162,10 +162,9 @@ spec:
                     description: TTL in seconds for cache entries.
                     type: number
                   type:
-                    description: The cache instance type. Valid values are SMALL,
-                      MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X,
-                      T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE,
-                      R4_8XLARGE.
+                    description: Cache instance type. Valid values are SMALL, MEDIUM,
+                      LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X, T2_SMALL,
+                      T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE.
                     type: string
                 required:
                 - apiCachingBehavior
@@ -350,7 +349,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The AppSync API ID.
+                    description: AppSync API ID.
                     type: string
                 type: object
               conditions:

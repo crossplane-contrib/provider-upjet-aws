@@ -42,7 +42,7 @@ type DefaultSecurityGroupEgressParameters struct {
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol"`
 
-	// List of security group Group Names if using EC2-Classic, or Group IDs if using a VPC.
+	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups"`
 
@@ -84,7 +84,7 @@ type DefaultSecurityGroupIngressParameters struct {
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol"`
 
-	// List of security group Group Names if using EC2-Classic, or Group IDs if using a VPC.
+	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups"`
 

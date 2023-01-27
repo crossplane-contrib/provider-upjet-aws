@@ -65,20 +65,20 @@ spec:
               forProvider:
                 properties:
                   endTime:
-                    description: The date and time for the scheduled action to end
-                      in RFC 3339 format. The timezone is not affected by the setting
+                    description: Date and time for the scheduled action to end in
+                      RFC 3339 format. The timezone is not affected by the setting
                       of timezone.
                     type: string
                   name:
-                    description: The name of the scheduled action.
+                    description: Name of the scheduled action.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   resourceId:
-                    description: 'The identifier of the resource associated with the
-                      scheduled action. Documentation can be found in the parameter
+                    description: 'Identifier of the resource associated with the scheduled
+                      action. Documentation can be found in the ResourceId parameter
                       at: AWS Application Auto Scaling API Reference'
                     type: string
                   resourceIdRef:
@@ -157,9 +157,9 @@ spec:
                         type: object
                     type: object
                   scalableDimension:
-                    description: 'The scalable dimension. Documentation can be found
-                      in the parameter at: AWS Application Auto Scaling API Reference
-                      Example: ecs:service:DesiredCount'
+                    description: 'Scalable dimension. Documentation can be found in
+                      the ScalableDimension parameter at: AWS Application Auto Scaling
+                      API Reference Example: ecs:service:DesiredCount'
                     type: string
                   scalableDimensionRef:
                     description: Reference to a Target in appautoscaling to populate
@@ -237,33 +237,33 @@ spec:
                         type: object
                     type: object
                   scalableTargetAction:
-                    description: The new minimum and maximum capacity. You can set
-                      both values or just one. See below
+                    description: New minimum and maximum capacity. You can set both
+                      values or just one. See below
                     items:
                       properties:
                         maxCapacity:
-                          description: The maximum capacity. At least one of max_capacity
+                          description: Maximum capacity. At least one of max_capacity
                             or min_capacity must be set.
                           type: string
                         minCapacity:
-                          description: The minimum capacity. At least one of min_capacity
+                          description: Minimum capacity. At least one of min_capacity
                             or max_capacity must be set.
                           type: string
                       type: object
                     type: array
                   schedule:
-                    description: 'The schedule for this action. The following formats
+                    description: 'Schedule for this action. The following formats
                       are supported: At expressions - at(yyyy-mm-ddThh:mm:ss), Rate
                       expressions - rate(valueunit), Cron expressions - cron(fields).
                       Times for at expressions and cron expressions are evaluated
                       using the time zone configured in timezone. Documentation can
-                      be found in the parameter at: AWS Application Auto Scaling API
-                      Reference'
+                      be found in the Timezone parameter at: AWS Application Auto
+                      Scaling API Reference'
                     type: string
                   serviceNamespace:
-                    description: 'The namespace of the AWS service. Documentation
-                      can be found in the parameter at: AWS Application Auto Scaling
-                      API Reference Example: ecs'
+                    description: 'Namespace of the AWS service. Documentation can
+                      be found in the ServiceNamespace parameter at: AWS Application
+                      Auto Scaling API Reference Example: ecs'
                     type: string
                   serviceNamespaceRef:
                     description: Reference to a Target in appautoscaling to populate
@@ -341,16 +341,16 @@ spec:
                         type: object
                     type: object
                   startTime:
-                    description: The date and time for the scheduled action to start
-                      in RFC 3339 format. The timezone is not affected by the setting
+                    description: Date and time for the scheduled action to start in
+                      RFC 3339 format. The timezone is not affected by the setting
                       of timezone.
                     type: string
                   timezone:
-                    description: The time zone used when setting a scheduled action
-                      by using an at or cron expression. Does not affect timezone
-                      for start_time and end_time. Valid values are the canonical
-                      names of the IANA time zones supported by Joda-Time, such as
-                      Etc/GMT+9 or Pacific/Tahiti. Default is UTC.
+                    description: Time zone used when setting a scheduled action by
+                      using an at or cron expression. Does not affect timezone for
+                      start_time and end_time. Valid values are the canonical names
+                      of the IANA time zones supported by Joda-Time, such as Etc/GMT+9
+                      or Pacific/Tahiti. Default is UTC.
                     type: string
                 required:
                 - name
@@ -535,7 +535,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the scheduled action.
+                    description: ARN of the scheduled action.
                     type: string
                   id:
                     type: string

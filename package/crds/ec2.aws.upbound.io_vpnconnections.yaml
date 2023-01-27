@@ -156,6 +156,10 @@ spec:
                     description: The IPv6 CIDR on the customer gateway (on-premises)
                       side of the VPN connection.
                     type: string
+                  outsideIpAddressType:
+                    description: Indicates if a Public S2S VPN or Private S2S VPN
+                      over AWS Direct Connect. Valid values are PublicIpv4 | PrivateIpv4
+                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -254,6 +258,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  transportTransitGatewayAttachmentId:
+                    description: . The attachment ID of the Transit Gateway attachment
+                      to Direct Connect Gateway. The ID is obtained through a data
+                      source only.
+                    type: string
                   tunnel1DpdTimeoutAction:
                     description: The action to take after DPD timeout occurs for the
                       first VPN tunnel. Specify restart to restart the IKE initiation.
@@ -281,6 +290,33 @@ spec:
                       VPN tunnel. Supports only EC2 Transit Gateway. Valid value is
                       a size /126 CIDR block from the local fd00::/8 range.
                     type: string
+                  tunnel1LogOptions:
+                    description: Options for logging VPN tunnel activity. See Log
+                      Options below for more details.
+                    items:
+                      properties:
+                        cloudwatchLogOptions:
+                          description: Options for sending VPN tunnel logs to CloudWatch.
+                            See CloudWatch Log Options below for more details.
+                          items:
+                            properties:
+                              logEnabled:
+                                description: Enable or disable VPN tunnel logging
+                                  feature. The default is false.
+                                type: boolean
+                              logGroupArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  CloudWatch log group to send logs to.
+                                type: string
+                              logOutputFormat:
+                                description: 'Set log format. Default format is json.
+                                  Possible values are: json and text. The default
+                                  is json.'
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   tunnel1Phase1DhGroupNumbers:
                     description: List of one or more Diffie-Hellman group numbers
                       that are permitted for the first VPN tunnel for phase 1 IKE
@@ -406,6 +442,33 @@ spec:
                       VPN tunnel. Supports only EC2 Transit Gateway. Valid value is
                       a size /126 CIDR block from the local fd00::/8 range.
                     type: string
+                  tunnel2LogOptions:
+                    description: Options for logging VPN tunnel activity. See Log
+                      Options below for more details.
+                    items:
+                      properties:
+                        cloudwatchLogOptions:
+                          description: Options for sending VPN tunnel logs to CloudWatch.
+                            See CloudWatch Log Options below for more details.
+                          items:
+                            properties:
+                              logEnabled:
+                                description: Enable or disable VPN tunnel logging
+                                  feature. The default is false.
+                                type: boolean
+                              logGroupArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  CloudWatch log group to send logs to.
+                                type: string
+                              logOutputFormat:
+                                description: 'Set log format. Default format is json.
+                                  Possible values are: json and text. The default
+                                  is json.'
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   tunnel2Phase1DhGroupNumbers:
                     description: List of one or more Diffie-Hellman group numbers
                       that are permitted for the second VPN tunnel for phase 1 IKE

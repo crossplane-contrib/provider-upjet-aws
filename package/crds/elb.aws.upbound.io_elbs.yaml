@@ -80,8 +80,8 @@ spec:
                             is true
                           type: boolean
                         interval:
-                          description: 'The publishing interval in minutes. Default:
-                            60 minutes.'
+                          description: 'The publishing interval in minutes. Valid
+                            values: 5 and 60. Default: 60'
                           type: number
                       required:
                       - bucket
@@ -117,8 +117,8 @@ spec:
                             declared healthy.
                           type: number
                         interval:
-                          description: 'The publishing interval in minutes. Default:
-                            60 minutes.'
+                          description: 'The publishing interval in minutes. Valid
+                            values: 5 and 60. Default: 60'
                           type: number
                         target:
                           description: 'The target of the check. Valid pattern is

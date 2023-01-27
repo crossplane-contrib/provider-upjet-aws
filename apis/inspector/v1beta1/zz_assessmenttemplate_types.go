@@ -30,6 +30,10 @@ type AssessmentTemplateParameters struct {
 	// +kubebuilder:validation:Required
 	Duration *float64 `json:"duration" tf:"duration,omitempty"`
 
+	// A block that enables sending notifications about a specified assessment template event to a designated SNS topic. See Event Subscriptions for details.
+	// +kubebuilder:validation:Optional
+	EventSubscription []EventSubscriptionParameters `json:"eventSubscription,omitempty" tf:"event_subscription,omitempty"`
+
 	// The name of the assessment template.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
@@ -60,6 +64,30 @@ type AssessmentTemplateParameters struct {
 	// Selector for a AssessmentTarget in inspector to populate targetArn.
 	// +kubebuilder:validation:Optional
 	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+}
+
+type EventSubscriptionObservation struct {
+}
+
+type EventSubscriptionParameters struct {
+
+	// The event for which you want to receive SNS notifications. Valid values are ASSESSMENT_RUN_STARTED, ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED, and FINDING_REPORTED.
+	// +kubebuilder:validation:Required
+	Event *string `json:"event" tf:"event,omitempty"`
+
+	// The ARN of the SNS topic to which notifications are sent.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 // AssessmentTemplateSpec defines the desired state of AssessmentTemplate

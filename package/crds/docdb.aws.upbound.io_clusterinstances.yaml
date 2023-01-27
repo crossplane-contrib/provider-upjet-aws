@@ -70,9 +70,9 @@ spec:
                       Default isfalse.
                     type: boolean
                   autoMinorVersionUpgrade:
-                    description: Indicates that minor engine upgrades will be applied
-                      automatically to the DB instance during the maintenance window.
-                      Default true.
+                    description: This parameter does not apply to Amazon DocumentDB.
+                      Amazon DocumentDB does not perform minor version upgrades regardless
+                      of the value set (see docs). Default true.
                     type: boolean
                   availabilityZone:
                     description: The EC2 Availability Zone that the DB instance is
@@ -158,6 +158,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  enablePerformanceInsights:
+                    description: A value that indicates whether to enable Performance
+                      Insights for the DB Instance. Default false. See [docs] (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html)
+                      about the details.
+                    type: boolean
                   engine:
                     description: 'The name of the database engine to be used for the
                       DocDB instance. Defaults to docdb. Valid Values: docdb.'
@@ -167,6 +172,12 @@ spec:
                       memory, see Scaling for DocDB Instances. DocDB currently supports
                       the below instance classes. Please see AWS Documentation for
                       complete details.
+                    type: string
+                  performanceInsightsKmsKeyId:
+                    description: The KMS key identifier is the key ARN, key ID, alias
+                      ARN, or alias name for the KMS key. If you do not specify a
+                      value for PerformanceInsightsKMSKeyId, then Amazon DocumentDB
+                      uses your default KMS key.
                     type: string
                   preferredMaintenanceWindow:
                     description: 'The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".

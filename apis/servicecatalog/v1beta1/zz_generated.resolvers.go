@@ -10,7 +10,6 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-aws/apis/budgets/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
@@ -165,32 +164,6 @@ func (mg *PrincipalPortfolioAssociation) ResolveReferences(ctx context.Context, 
 	}
 	mg.Spec.ForProvider.PrincipalArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrincipalArnRef = rsp.ResolvedReference
-
-	return nil
-}
-
-// ResolveReferences of this Product.
-func (mg *Product) ResolveReferences(ctx context.Context, c client.Reader) error {
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Type),
-		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.ForProvider.TypeRef,
-		Selector:     mg.Spec.ForProvider.TypeSelector,
-		To: reference.To{
-			List:    &v1beta12.SubnetList{},
-			Managed: &v1beta12.Subnet{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.Type")
-	}
-	mg.Spec.ForProvider.Type = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.TypeRef = rsp.ResolvedReference
 
 	return nil
 }

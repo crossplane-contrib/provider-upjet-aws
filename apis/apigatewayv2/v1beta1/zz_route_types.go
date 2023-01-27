@@ -29,13 +29,13 @@ type RequestParameterParameters struct {
 
 type RouteObservation struct {
 
-	// The route identifier.
+	// Route identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type RouteParameters struct {
 
-	// The API identifier.
+	// API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -52,18 +52,18 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
 
-	// The authorization scopes supported by this route. The scopes are used with a JWT authorizer to authorize the method invocation.
+	// Authorization scopes supported by this route. The scopes are used with a JWT authorizer to authorize the method invocation.
 	// +kubebuilder:validation:Optional
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
 
-	// The authorization type for the route.
+	// Authorization type for the route.
 	// For WebSocket APIs, valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
 	// For HTTP APIs, valid values are NONE for open access, JWT for using JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
 	// Defaults to NONE.
 	// +kubebuilder:validation:Optional
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
-	// The identifier of the aws_apigatewayv2_authorizer resource to be associated with this route.
+	// Identifier of the aws_apigatewayv2_authorizer resource to be associated with this route.
 	// +crossplane:generate:reference:type=Authorizer
 	// +kubebuilder:validation:Optional
 	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
@@ -80,7 +80,7 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
 
-	// The operation name for the route. Must be between 1 and 64 characters in length.
+	// Operation name for the route. Must be between 1 and 64 characters in length.
 	// +kubebuilder:validation:Optional
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
@@ -89,15 +89,15 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The request models for the route. Supported only for WebSocket APIs.
+	// Request models for the route. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
-	// The request parameters for the route. Supported only for WebSocket APIs.
+	// Request parameters for the route. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	RequestParameter []RequestParameterParameters `json:"requestParameter,omitempty" tf:"request_parameter,omitempty"`
 
-	// The route key for the route. For HTTP APIs, the route key can be either $default, or a combination of an HTTP method and resource path, for example, GET /pets.
+	// Route key for the route. For HTTP APIs, the route key can be either $default, or a combination of an HTTP method and resource path, for example, GET /pets.
 	// +kubebuilder:validation:Required
 	RouteKey *string `json:"routeKey" tf:"route_key,omitempty"`
 
@@ -105,7 +105,7 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	RouteResponseSelectionExpression *string `json:"routeResponseSelectionExpression,omitempty" tf:"route_response_selection_expression,omitempty"`
 
-	// The target for the route, of the form integrations/IntegrationID, where IntegrationID is the identifier of an aws_apigatewayv2_integration resource.
+	// Target for the route, of the form integrations/IntegrationID, where IntegrationID is the identifier of an aws_apigatewayv2_integration resource.
 	// +crossplane:generate:reference:type=Integration
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.IntegrationIDPrefixed()
 	// +kubebuilder:validation:Optional

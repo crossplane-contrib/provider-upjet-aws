@@ -78,8 +78,8 @@ spec:
                     description: A name for the customer gateway device.
                     type: string
                   ipAddress:
-                    description: The IP address of the gateway's Internet-routable
-                      external interface.
+                    description: The IPv4 address for the customer gateway device's
+                      outside interface.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -96,7 +96,6 @@ spec:
                     type: string
                 required:
                 - bgpAsn
-                - ipAddress
                 - region
                 - type
                 type: object

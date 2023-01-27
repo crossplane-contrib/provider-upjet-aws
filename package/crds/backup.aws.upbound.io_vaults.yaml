@@ -64,6 +64,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  forceDestroy:
+                    description: A boolean that indicates that all recovery points
+                      stored in the vault are deleted so that the vault can be destroyed
+                      without error.
+                    type: boolean
                   kmsKeyArn:
                     description: The server-side encryption key that is used to protect
                       your backups.

@@ -263,6 +263,9 @@ spec:
                   description:
                     description: Description of the launch template.
                     type: string
+                  disableApiStop:
+                    description: If true, enables EC2 Instance Stop Protection.
+                    type: boolean
                   disableApiTermination:
                     description: If true, enables EC2 Instance Termination Protection
                     type: boolean

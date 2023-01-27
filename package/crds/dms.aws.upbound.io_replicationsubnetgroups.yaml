@@ -69,7 +69,7 @@ spec:
                       be created in.
                     type: string
                   replicationSubnetGroupDescription:
-                    description: The description for the subnet group.
+                    description: Description for the subnet group.
                     type: string
                   subnetIdRefs:
                     description: References to Subnet in ec2 to populate subnetIds.
@@ -149,7 +149,8 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: A list of the EC2 subnet IDs for the subnet group.
+                    description: List of at least 2 EC2 subnet IDs for the subnet
+                      group. The subnets must cover at least 2 availability zones.
                     items:
                       type: string
                     type: array
