@@ -15,23 +15,23 @@ import (
 
 type AppCookieStickinessPolicyObservation struct {
 
-	// The ID of the policy.
+	// ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type AppCookieStickinessPolicyParameters struct {
 
-	// The application cookie whose lifetime the ELB's cookie should follow.
+	// Application cookie whose lifetime the ELB's cookie should follow.
 	// +kubebuilder:validation:Required
 	CookieName *string `json:"cookieName" tf:"cookie_name,omitempty"`
 
-	// The load balancer port to which the policy
+	// Load balancer port to which the policy
 	// should be applied. This must be an active listener on the load
 	// balancer.
 	// +kubebuilder:validation:Required
 	LBPort *float64 `json:"lbPort" tf:"lb_port,omitempty"`
 
-	// The name of load balancer to which the policy
+	// Name of load balancer to which the policy
 	// should be attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
 	// +kubebuilder:validation:Optional

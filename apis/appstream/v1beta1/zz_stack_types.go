@@ -18,10 +18,12 @@ type AccessEndpointsObservation struct {
 
 type AccessEndpointsParameters struct {
 
+	// Type of the interface endpoint.
+	// See the AccessEndpoint AWS API documentation for valid values.
 	// +kubebuilder:validation:Required
 	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
 
-	// Unique ID of the appstream stack.
+	// ID of the VPC in which the interface endpoint is used.
 	// +kubebuilder:validation:Optional
 	VpceID *string `json:"vpceId,omitempty" tf:"vpce_id,omitempty"`
 }
@@ -31,9 +33,13 @@ type ApplicationSettingsObservation struct {
 
 type ApplicationSettingsParameters struct {
 
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	// Whether application settings should be persisted.
+	// +kubebuilder:validation:Required
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
+	// Name of the settings group.
+	// Required when enabled is true.
+	// Can be up to 100 characters.
 	// +kubebuilder:validation:Optional
 	SettingsGroup *string `json:"settingsGroup,omitempty" tf:"settings_group,omitempty"`
 }
@@ -54,10 +60,13 @@ type StackObservation struct {
 
 type StackParameters struct {
 
+	// Set of configuration blocks defining the interface VPC endpoints. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.
+	// See access_endpoints below.
 	// +kubebuilder:validation:Optional
 	AccessEndpoints []AccessEndpointsParameters `json:"accessEndpoints,omitempty" tf:"access_endpoints,omitempty"`
 
 	// Settings for application settings persistence.
+	// See application_settings below.
 	// +kubebuilder:validation:Optional
 	ApplicationSettings []ApplicationSettingsParameters `json:"applicationSettings,omitempty" tf:"application_settings,omitempty"`
 
@@ -90,14 +99,17 @@ type StackParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Configuration block for the storage connectors to enable. See below.
+	// Configuration block for the storage connectors to enable.
+	// See storage_connectors below.
 	// +kubebuilder:validation:Optional
 	StorageConnectors []StorageConnectorsParameters `json:"storageConnectors,omitempty" tf:"storage_connectors,omitempty"`
 
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Configuration block for the actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled. See below.
+	// Configuration block for the actions that are enabled or disabled for users during their streaming sessions. If not provided, these settings are configured automatically by AWS.
+	// See user_settings below.
 	// +kubebuilder:validation:Optional
 	UserSettings []UserSettingsParameters `json:"userSettings,omitempty" tf:"user_settings,omitempty"`
 }
@@ -107,7 +119,8 @@ type StorageConnectorsObservation struct {
 
 type StorageConnectorsParameters struct {
 
-	// Type of storage connector. Valid values are: HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE.
+	// Type of storage connector.
+	// Valid values are HOMEFOLDERS, GOOGLE_DRIVE, or ONE_DRIVE.
 	// +kubebuilder:validation:Required
 	ConnectorType *string `json:"connectorType" tf:"connector_type,omitempty"`
 
@@ -125,11 +138,13 @@ type UserSettingsObservation struct {
 
 type UserSettingsParameters struct {
 
-	// Action that is enabled or disabled. Valid values are: CLIPBOARD_COPY_FROM_LOCAL_DEVICE,  CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN.
+	// Action that is enabled or disabled.
+	// Valid values are CLIPBOARD_COPY_FROM_LOCAL_DEVICE,  CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, or DOMAIN_SMART_CARD_SIGNIN.
 	// +kubebuilder:validation:Required
 	Action *string `json:"action" tf:"action,omitempty"`
 
-	// Indicates whether the action is enabled or disabled. Valid values are: ENABLED, DISABLED.
+	// Whether the action is enabled or disabled.
+	// Valid values are ENABLED or DISABLED.
 	// +kubebuilder:validation:Required
 	Permission *string `json:"permission" tf:"permission,omitempty"`
 }

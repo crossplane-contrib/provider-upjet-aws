@@ -99,8 +99,8 @@ spec:
                             number.
                           type: string
                         securityGroups:
-                          description: List of security group Group Names if using
-                            EC2-Classic, or Group IDs if using a VPC.
+                          description: List of security groups. A group name can be
+                            used relative to the default VPC. Otherwise, group ID.
                           items:
                             type: string
                           type: array
@@ -149,8 +149,8 @@ spec:
                             number.
                           type: string
                         securityGroups:
-                          description: List of security group Group Names if using
-                            EC2-Classic, or Group IDs if using a VPC.
+                          description: List of security groups. A group name can be
+                            used relative to the default VPC. Otherwise, group ID.
                           items:
                             type: string
                           type: array

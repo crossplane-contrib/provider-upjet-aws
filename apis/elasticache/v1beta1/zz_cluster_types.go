@@ -21,6 +21,9 @@ type CacheNodesObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ARN of the created ElastiCache Cluster.
+	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
+
 	// create the resource.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
@@ -89,6 +92,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
+	// The IP version to advertise in the discovery protocol. Valid values are ipv4 or ipv6.
+	// +kubebuilder:validation:Optional
+	IPDiscovery *string `json:"ipDiscovery,omitempty" tf:"ip_discovery,omitempty"`
+
 	// Specifies the destination and format of Redis SLOWLOG or Redis Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.
 	// +kubebuilder:validation:Optional
 	LogDeliveryConfiguration []LogDeliveryConfigurationParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
@@ -97,6 +104,10 @@ type ClusterParameters struct {
 	// The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00.
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+
+	// The IP versions for cache cluster connections. IPv6 is supported with Redis engine 6.2 onword or Memcached version 1.6.6 for all Nitro system instances. Valid values are ipv4, ipv6 or dual_stack.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// create the resource.
 	// +kubebuilder:validation:Optional
@@ -109,6 +120,10 @@ type ClusterParameters struct {
 	// –  The initial number of cache nodes that the cache cluster will have. For Redis, this value must be 1. For Memcached, this value must be between 1 and 40. If this number is reduced on subsequent runs, the highest numbered nodes will be removed.
 	// +kubebuilder:validation:Optional
 	NumCacheNodes *float64 `json:"numCacheNodes,omitempty" tf:"num_cache_nodes,omitempty"`
+
+	// Specify the outpost mode that will apply to the cache cluster creation. Valid values are "single-outpost" and "cross-outpost", however AWS currently only supports "single-outpost" mode.
+	// +kubebuilder:validation:Optional
+	OutpostMode *string `json:"outpostMode,omitempty" tf:"outpost_mode,omitempty"`
 
 	// –  The name of the parameter group to associate with this cache cluster.
 	// +crossplane:generate:reference:type=ParameterGroup
@@ -130,6 +145,10 @@ type ClusterParameters struct {
 	// List of the Availability Zones in which cache nodes are created. If you are creating your cluster in an Amazon VPC you can only locate nodes in Availability Zones that are associated with the subnets in the selected subnet group. The number of Availability Zones listed must equal the value of num_cache_nodes. If you want all the nodes in the same Availability Zone, use availability_zone instead, or repeat the Availability Zone multiple times in the list. Default: System chosen Availability Zones. Detecting drift of existing node availability zone is not currently supported. Updating this argument by itself to migrate existing node availability zones is not currently supported and will show a perpetual difference.
 	// +kubebuilder:validation:Optional
 	PreferredAvailabilityZones []*string `json:"preferredAvailabilityZones,omitempty" tf:"preferred_availability_zones,omitempty"`
+
+	// The outpost ARN in which the cache cluster will be created.
+	// +kubebuilder:validation:Optional
+	PreferredOutpostArn *string `json:"preferredOutpostArn,omitempty" tf:"preferred_outpost_arn,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

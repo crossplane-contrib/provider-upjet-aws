@@ -67,6 +67,27 @@ spec:
                   description:
                     description: A friendly description of the firewall policy.
                     type: string
+                  encryptionConfiguration:
+                    description: KMS encryption configuration settings. See Encryption
+                      Configuration below for details.
+                    items:
+                      properties:
+                        keyId:
+                          description: The ID of the customer managed key. You can
+                            use any of the key identifiers that KMS supports, unless
+                            you're using a key that's managed by another account.
+                            If you're using a key managed by another account, then
+                            specify the key ARN.
+                          type: string
+                        type:
+                          description: The type of AWS KMS key to use for encryption
+                            of your Network Firewall resources. Valid values are CUSTOMER_KMS
+                            and AWS_OWNED_KMS_KEY.
+                          type: string
+                      required:
+                      - type
+                      type: object
+                    type: array
                   firewallPolicy:
                     description: A configuration block describing the rule groups
                       and policy actions to use in the firewall policy. See Firewall
@@ -106,6 +127,17 @@ spec:
                             See Stateful Rule Group Reference below for details.
                           items:
                             properties:
+                              override:
+                                description: Configuration block for override values
+                                items:
+                                  properties:
+                                    action:
+                                      description: The action that changes the rule
+                                        group from DROP to ALERT . This only applies
+                                        to managed rule groups.
+                                      type: string
+                                  type: object
+                                type: array
                               priority:
                                 description: An integer setting that indicates the
                                   order in which to run the stateless rule groups

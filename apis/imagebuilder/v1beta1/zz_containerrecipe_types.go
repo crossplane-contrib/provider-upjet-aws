@@ -166,6 +166,10 @@ type EBSParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
+	// For GP3 volumes only. The throughput in MiB/s that the volume supports.
+	// +kubebuilder:validation:Optional
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
 	// Size of the volume, in GiB.
 	// +kubebuilder:validation:Optional
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
@@ -180,7 +184,7 @@ type InstanceConfigurationObservation struct {
 
 type InstanceConfigurationParameters struct {
 
-	// Configuration block(s) with block device mappings for the the container recipe. Detailed below.
+	// Configuration block(s) with block device mappings for the container recipe. Detailed below.
 	// +kubebuilder:validation:Optional
 	BlockDeviceMapping []BlockDeviceMappingParameters `json:"blockDeviceMapping,omitempty" tf:"block_device_mapping,omitempty"`
 

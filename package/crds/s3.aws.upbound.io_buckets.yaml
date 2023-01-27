@@ -66,16 +66,16 @@ spec:
                 properties:
                   forceDestroy:
                     description: A boolean that indicates all objects (including any
-                      locked objects) should be deleted from the bucket so that the
-                      bucket can be destroyed without error. These objects are not
-                      recoverable.
+                      locked objects) should be deleted from the bucket when the bucket
+                      is destroyed so that the bucket can be destroyed without error.
+                      These objects are not recoverable. This only deletes objects
+                      when the bucket is destroyed, not when setting this parameter
+                      to true.
                     type: boolean
-                  hostedZoneId:
-                    description: The Route 53 Hosted Zone ID for this bucket's region.
-                    type: string
                   objectLockEnabled:
                     description: Indicates whether this bucket has an Object Lock
-                      configuration enabled. Valid values are true or false.
+                      configuration enabled. Valid values are true or false. This
+                      argument is not supported in all regions or partitions.
                     type: boolean
                   region:
                     description: The AWS region this bucket resides in. Region is
@@ -352,6 +352,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                  hostedZoneId:
+                    description: The Route 53 Hosted Zone ID for this bucket's region.
+                    type: string
                   id:
                     description: The name of the bucket.
                     type: string

@@ -68,7 +68,7 @@ type DefaultNetworkACLParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// List of Subnet IDs to apply the ACL to. See the notes below on managing Subnets in the Default Network ACL
+	// List of Subnet IDs to apply the ACL to. See the notes above on Managing Subnets in the Default Network ACL
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector

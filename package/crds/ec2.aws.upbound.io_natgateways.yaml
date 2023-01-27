@@ -145,6 +145,11 @@ spec:
                     description: Connectivity type for the gateway. Valid values are
                       private and public. Defaults to public.
                     type: string
+                  privateIp:
+                    description: The private IPv4 address to assign to the NAT gateway.
+                      If you don't provide an address, a private IPv4 address will
+                      be automatically assigned.
+                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -414,14 +419,11 @@ spec:
                     description: The ID of the NAT Gateway.
                     type: string
                   networkInterfaceId:
-                    description: The ENI ID of the network interface created by the
+                    description: The ID of the network interface associated with the
                       NAT gateway.
                     type: string
-                  privateIp:
-                    description: The private IP address of the NAT Gateway.
-                    type: string
                   publicIp:
-                    description: The public IP address of the NAT Gateway.
+                    description: The Elastic IP address associated with the NAT gateway.
                     type: string
                   tagsAll:
                     additionalProperties:

@@ -140,8 +140,8 @@ spec:
                     type: string
                   sqsManagedSseEnabled:
                     description: Boolean to enable server-side encryption (SSE) of
-                      message content with SQS-owned encryption keys. Defaults to
-                      false. See Encryption at rest.
+                      message content with SQS-owned encryption keys. See Encryption
+                      at rest.
                     type: boolean
                   tags:
                     additionalProperties:

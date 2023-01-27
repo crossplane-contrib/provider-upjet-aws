@@ -33,7 +33,7 @@ type AccessKeyObservation struct {
 
 type AccessKeyParameters struct {
 
-	// Either a base-64 encoded PGP public key, or a keybase username in the form keybase:some_person_that_exists, for use in the encrypted_secret output attribute.
+	// Either a base-64 encoded PGP public key, or a keybase username in the form keybase:some_person_that_exists, for use in the encrypted_secret output attribute. If providing a base-64 encoded PGP public key, make sure to provide the "raw" version and not the "armored" one (e.g. avoid passing the -a option to gpg --export).
 	// +kubebuilder:validation:Optional
 	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
 

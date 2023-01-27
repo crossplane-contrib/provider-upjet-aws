@@ -15,13 +15,13 @@ import (
 
 type APIMappingObservation struct {
 
-	// The API mapping identifier.
+	// API mapping identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type APIMappingParameters struct {
 
-	// The API identifier.
+	// API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -38,7 +38,7 @@ type APIMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	APIMappingKey *string `json:"apiMappingKey,omitempty" tf:"api_mapping_key,omitempty"`
 
-	// The domain name. Use the aws_apigatewayv2_domain_name resource to configure a domain name.
+	// Domain name. Use the aws_apigatewayv2_domain_name resource to configure a domain name.
 	// +crossplane:generate:reference:type=DomainName
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
@@ -56,7 +56,7 @@ type APIMappingParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The API stage. Use the aws_apigatewayv2_stage resource to configure an API stage.
+	// API stage. Use the aws_apigatewayv2_stage resource to configure an API stage.
 	// +crossplane:generate:reference:type=Stage
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional

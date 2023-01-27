@@ -21,6 +21,10 @@ type VoiceConnectorLoggingObservation struct {
 
 type VoiceConnectorLoggingParameters struct {
 
+	// When true, enables logging of detailed media metrics for Voice Connectors to Amazon CloudWatch logs.
+	// +kubebuilder:validation:Optional
+	EnableMediaMetricLogs *bool `json:"enableMediaMetricLogs,omitempty" tf:"enable_media_metric_logs,omitempty"`
+
 	// When true, enables SIP message logs for sending to Amazon CloudWatch Logs.
 	// +kubebuilder:validation:Optional
 	EnableSIPLogs *bool `json:"enableSipLogs,omitempty" tf:"enable_sip_logs,omitempty"`

@@ -21,7 +21,7 @@ type GroupTagObservation struct {
 
 type GroupTagParameters struct {
 
-	// The name of the Autoscaling Group to apply the tag to.
+	// Name of the Autoscaling Group to apply the tag to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
@@ -39,7 +39,7 @@ type GroupTagParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The tag to create. The tag block is documented below.
+	// Tag to create. The tag block is documented below.
 	// +kubebuilder:validation:Required
 	Tag []GroupTagTagParameters `json:"tag" tf:"tag,omitempty"`
 }

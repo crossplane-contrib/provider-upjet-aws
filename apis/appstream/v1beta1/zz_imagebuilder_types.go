@@ -49,7 +49,7 @@ type ImageBuilderObservation struct {
 	// Date and time, in UTC and extended RFC 3339 format, when the image builder was created.
 	CreatedTime *string `json:"createdTime,omitempty" tf:"created_time,omitempty"`
 
-	// The name of the image builder.
+	// Name of the image builder.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the image used to create the image builder.
@@ -58,7 +58,7 @@ type ImageBuilderObservation struct {
 	// State of the image builder. Can be: PENDING, UPDATING_AGENT, RUNNING, STOPPING, STOPPED, REBOOTING, SNAPSHOTTING, DELETING, FAILED, UPDATING, PENDING_QUALIFICATION
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -68,7 +68,7 @@ type ImageBuilderParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessEndpoint []AccessEndpointParameters `json:"accessEndpoint,omitempty" tf:"access_endpoint,omitempty"`
 
-	// The version of the AppStream 2.0 agent to use for this image builder.
+	// Version of the AppStream 2.0 agent to use for this image builder.
 	// +kubebuilder:validation:Optional
 	AppstreamAgentVersion *string `json:"appstreamAgentVersion,omitempty" tf:"appstream_agent_version,omitempty"`
 
@@ -106,7 +106,7 @@ type ImageBuilderParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageArn *string `json:"imageArn,omitempty" tf:"image_arn,omitempty"`
 
-	// The instance type to use when launching the image builder.
+	// Instance type to use when launching the image builder.
 	// +kubebuilder:validation:Required
 	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
 

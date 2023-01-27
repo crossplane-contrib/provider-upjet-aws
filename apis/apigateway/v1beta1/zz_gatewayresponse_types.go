@@ -24,19 +24,19 @@ type GatewayResponseParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// A map specifying the parameters (paths, query strings and headers) of the Gateway Response.
+	// Map of parameters (paths, query strings and headers) of the Gateway Response.
 	// +kubebuilder:validation:Optional
 	ResponseParameters map[string]*string `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
-	// A map specifying the templates used to transform the response body.
+	// Map of templates used to transform the response body.
 	// +kubebuilder:validation:Optional
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
-	// The response type of the associated GatewayResponse.
+	// Response type of the associated GatewayResponse.
 	// +kubebuilder:validation:Required
 	ResponseType *string `json:"responseType" tf:"response_type,omitempty"`
 
-	// The string identifier of the associated REST API.
+	// String identifier of the associated REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -50,7 +50,7 @@ type GatewayResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
-	// The HTTP status code of the Gateway Response.
+	// HTTP status code of the Gateway Response.
 	// +kubebuilder:validation:Optional
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }

@@ -66,6 +66,7 @@ import (
 	"github.com/upbound/provider-aws/config/neptune"
 	"github.com/upbound/provider-aws/config/networkmanager"
 	"github.com/upbound/provider-aws/config/opensearch"
+	"github.com/upbound/provider-aws/config/opsworks"
 	"github.com/upbound/provider-aws/config/organization"
 	"github.com/upbound/provider-aws/config/qldb"
 	"github.com/upbound/provider-aws/config/rds"
@@ -74,6 +75,7 @@ import (
 	"github.com/upbound/provider-aws/config/route53recoverycontrolconfig"
 	"github.com/upbound/provider-aws/config/route53resolver"
 	"github.com/upbound/provider-aws/config/s3"
+	"github.com/upbound/provider-aws/config/sagemaker"
 	"github.com/upbound/provider-aws/config/secretsmanager"
 	"github.com/upbound/provider-aws/config/servicecatalog"
 	"github.com/upbound/provider-aws/config/servicediscovery"
@@ -221,6 +223,8 @@ func GetProvider() *config.Provider {
 		qldb.Configure,
 		fsx.Configure,
 		networkmanager.Configure,
+		opsworks.Configure,
+		sagemaker.Configure,
 	} {
 		configure(pc)
 	}

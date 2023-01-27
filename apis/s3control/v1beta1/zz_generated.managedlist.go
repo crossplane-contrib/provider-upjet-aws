@@ -33,3 +33,39 @@ func (l *AccountPublicAccessBlockList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this MultiRegionAccessPointList.
+func (l *MultiRegionAccessPointList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this MultiRegionAccessPointPolicyList.
+func (l *MultiRegionAccessPointPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ObjectLambdaAccessPointList.
+func (l *ObjectLambdaAccessPointList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ObjectLambdaAccessPointPolicyList.
+func (l *ObjectLambdaAccessPointPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}

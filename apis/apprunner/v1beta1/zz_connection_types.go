@@ -20,16 +20,16 @@ type ConnectionObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The current state of the App Runner connection. When the state is AVAILABLE, you can use the connection to create an aws_apprunner_service resource.
+	// Current state of the App Runner connection. When the state is AVAILABLE, you can use the connection to create an aws_apprunner_service resource.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ConnectionParameters struct {
 
-	// The source repository provider. Valid values: GITHUB.
+	// Source repository provider. Valid values: GITHUB.
 	// +kubebuilder:validation:Required
 	ProviderType *string `json:"providerType" tf:"provider_type,omitempty"`
 

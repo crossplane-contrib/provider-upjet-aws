@@ -18,23 +18,35 @@ type ApprovalRuleObservation struct {
 
 type ApprovalRuleParameters struct {
 
-	// The number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline. Valid Range: 0 to 100. Conflicts with approve_until_date
+	// The number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline.
+	// Valid Range: 0 to 100.
+	// Conflicts with approve_until_date.
 	// +kubebuilder:validation:Optional
 	ApproveAfterDays *float64 `json:"approveAfterDays,omitempty" tf:"approve_after_days,omitempty"`
 
-	// The cutoff date for auto approval of released patches. Any patches released on or before this date are installed automatically. Date is formatted as YYYY-MM-DD. Conflicts with approve_after_days
+	// The cutoff date for auto approval of released patches.
+	// Any patches released on or before this date are installed automatically.
+	// Date is formatted as YYYY-MM-DD.
+	// Conflicts with approve_after_days
 	// +kubebuilder:validation:Optional
 	ApproveUntilDate *string `json:"approveUntilDate,omitempty" tf:"approve_until_date,omitempty"`
 
-	// Defines the compliance level for patches approved by this rule. Valid compliance levels include the following: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED. The default value is UNSPECIFIED.
+	// The compliance level for patches approved by this rule.
+	// Valid values are CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, and UNSPECIFIED.
+	// The default value is UNSPECIFIED.
 	// +kubebuilder:validation:Optional
 	ComplianceLevel *string `json:"complianceLevel,omitempty" tf:"compliance_level,omitempty"`
 
-	// Boolean enabling the application of non-security updates. The default value is 'false'. Valid for Linux instances only.
+	// Boolean enabling the application of non-security updates.
+	// The default value is false.
+	// Valid for Linux instances only.
 	// +kubebuilder:validation:Optional
 	EnableNonSecurity *bool `json:"enableNonSecurity,omitempty" tf:"enable_non_security,omitempty"`
 
-	// The patch filter group that defines the criteria for the rule. Up to 5 patch filters can be specified per approval rule using Key/Value pairs. Valid combinations of these Keys and the operating_system value can be found in the SSM DescribePatchProperties API Reference. Valid Values are exact values for the patch property given as the key, or a wildcard *, which matches all values.
+	// The patch filter group that defines the criteria for the rule.
+	// Up to 5 patch filters can be specified per approval rule using Key/Value pairs.
+	// Valid combinations of these Keys and the operating_system value can be found in the SSM DescribePatchProperties API Reference.
+	// Valid Values are exact values for the patch property given as the key, or a wildcard *, which matches all values.
 	// +kubebuilder:validation:Required
 	PatchFilter []PatchFilterParameters `json:"patchFilter" tf:"patch_filter,omitempty"`
 }
@@ -65,19 +77,26 @@ type PatchBaselineObservation struct {
 
 type PatchBaselineParameters struct {
 
-	// A set of rules used to include patches in the baseline. up to 10 approval rules can be specified. Each approval_rule block requires the fields documented below.
+	// A set of rules used to include patches in the baseline.
+	// Up to 10 approval rules can be specified.
+	// See approval_rule below.
 	// +kubebuilder:validation:Optional
 	ApprovalRule []ApprovalRuleParameters `json:"approvalRule,omitempty" tf:"approval_rule,omitempty"`
 
 	// A list of explicitly approved patches for the baseline.
+	// Cannot be specified with approval_rule.
 	// +kubebuilder:validation:Optional
 	ApprovedPatches []*string `json:"approvedPatches,omitempty" tf:"approved_patches,omitempty"`
 
-	// Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. Valid compliance levels include the following: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED. The default value is UNSPECIFIED.
+	// The compliance level for approved patches.
+	// This means that if an approved patch is reported as missing, this is the severity of the compliance violation.
+	// Valid values are CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED.
+	// The default value is UNSPECIFIED.
 	// +kubebuilder:validation:Optional
 	ApprovedPatchesComplianceLevel *string `json:"approvedPatchesComplianceLevel,omitempty" tf:"approved_patches_compliance_level,omitempty"`
 
-	// Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. Applies to Linux instances only.
+	// Indicates whether the list of approved patches includes non-security updates that should be applied to the instances.
+	// Applies to Linux instances only.
 	// +kubebuilder:validation:Optional
 	ApprovedPatchesEnableNonSecurity *bool `json:"approvedPatchesEnableNonSecurity,omitempty" tf:"approved_patches_enable_non_security,omitempty"`
 
@@ -85,7 +104,9 @@ type PatchBaselineParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A set of global filters used to exclude patches from the baseline. Up to 4 global filters can be specified using Key/Value pairs. Valid Keys are PRODUCT | CLASSIFICATION | MSRC_SEVERITY | PATCH_ID.
+	// A set of global filters used to exclude patches from the baseline.
+	// Up to 4 global filters can be specified using Key/Value pairs.
+	// Valid Keys are PRODUCT, CLASSIFICATION, MSRC_SEVERITY, and PATCH_ID.
 	// +kubebuilder:validation:Optional
 	GlobalFilter []GlobalFilterParameters `json:"globalFilter,omitempty" tf:"global_filter,omitempty"`
 
@@ -93,7 +114,22 @@ type PatchBaselineParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Defines the operating system the patch baseline applies to. Supported operating systems include WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, SUSE, UBUNTU, CENTOS, and REDHAT_ENTERPRISE_LINUX. The Default value is WINDOWS.
+	// The operating system the patch baseline applies to.
+	// Valid values are
+	// AMAZON_LINUX,
+	// AMAZON_LINUX_2,
+	// AMAZON_LINUX_2022,
+	// CENTOS,
+	// DEBIAN,
+	// MACOS,
+	// ORACLE_LINUX,
+	// RASPBIAN,
+	// REDHAT_ENTERPRISE_LINUX,
+	// ROCKY_LINUX,
+	// SUSE,
+	// UBUNTU, and
+	// WINDOWS.
+	// The default value is WINDOWS.
 	// +kubebuilder:validation:Optional
 	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
 
@@ -106,11 +142,14 @@ type PatchBaselineParameters struct {
 	// +kubebuilder:validation:Optional
 	RejectedPatches []*string `json:"rejectedPatches,omitempty" tf:"rejected_patches,omitempty"`
 
-	// The action for Patch Manager to take on patches included in the rejected_patches list. Allow values are ALLOW_AS_DEPENDENCY and BLOCK.
+	// The action for Patch Manager to take on patches included in the rejected_patches list.
+	// Valid values are ALLOW_AS_DEPENDENCY and BLOCK.
 	// +kubebuilder:validation:Optional
 	RejectedPatchesAction *string `json:"rejectedPatchesAction,omitempty" tf:"rejected_patches_action,omitempty"`
 
-	// Configuration block(s) with alternate sources for patches. Applies to Linux instances only. Documented below.
+	// Configuration block with alternate sources for patches.
+	// Applies to Linux instances only.
+	// See source below.
 	// +kubebuilder:validation:Optional
 	Source []SourceParameters `json:"source,omitempty" tf:"source,omitempty"`
 
@@ -136,7 +175,8 @@ type SourceObservation struct {
 
 type SourceParameters struct {
 
-	// The value of the yum repo configuration. For information about other options available for your yum repository configuration, see the dnf.conf documentation
+	// The value of the yum repo configuration.
+	// For information about other options available for your yum repository configuration, see the dnf.conf documentation
 	// +kubebuilder:validation:Required
 	Configuration *string `json:"configuration" tf:"configuration,omitempty"`
 
@@ -144,7 +184,8 @@ type SourceParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The specific operating system versions a patch repository applies to, such as "Ubuntu16.04", "AmazonLinux2016.09", "RedhatEnterpriseLinux7.2" or "Suse12.7". For lists of supported product values, see PatchFilter.
+	// The specific operating system versions a patch repository applies to, such as "Ubuntu16.04", "AmazonLinux2016.09", "RedhatEnterpriseLinux7.2" or "Suse12.7".
+	// For lists of supported product values, see PatchFilter.
 	// +kubebuilder:validation:Required
 	Products []*string `json:"products" tf:"products,omitempty"`
 }

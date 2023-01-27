@@ -15,23 +15,23 @@ import (
 
 type ApplicationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the AppConfig Application.
+	// ARN of the AppConfig Application.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The AppConfig application ID.
+	// AppConfig application ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ApplicationParameters struct {
 
-	// The description of the application. Can be at most 1024 characters.
+	// Description of the application. Can be at most 1024 characters.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name for the application. Must be between 1 and 64 characters in length.
+	// Name for the application. Must be between 1 and 64 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

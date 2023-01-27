@@ -89,7 +89,11 @@ type DirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The MicrosoftAD edition (Standard or Enterprise). Defaults to Enterprise (applies to MicrosoftAD type only).
+	// The number of domain controllers desired in the directory. Minimum value of 2. Scaling of domain controllers is only supported for MicrosoftAD directories.
+	// +kubebuilder:validation:Optional
+	DesiredNumberOfDomainControllers *float64 `json:"desiredNumberOfDomainControllers,omitempty" tf:"desired_number_of_domain_controllers,omitempty"`
+
+	// The MicrosoftAD edition (Standard or Enterprise). Defaults to Enterprise.
 	// +kubebuilder:validation:Optional
 	Edition *string `json:"edition,omitempty" tf:"edition,omitempty"`
 
@@ -114,7 +118,7 @@ type DirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
 
-	// The size of the directory (Small or Large are accepted values).
+	// (For SimpleAD and ADConnector types) The size of the directory (Small or Large are accepted values). Large by default.
 	// +kubebuilder:validation:Optional
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 

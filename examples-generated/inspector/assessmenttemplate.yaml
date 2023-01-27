@@ -9,6 +9,11 @@ metadata:
 spec:
   forProvider:
     duration: 3600
+    eventSubscription:
+    - event: ASSESSMENT_RUN_COMPLETED
+      topicArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
     name: example
     region: us-west-1
     rulesPackageArns:

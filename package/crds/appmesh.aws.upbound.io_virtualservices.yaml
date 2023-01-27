@@ -65,8 +65,8 @@ spec:
               forProvider:
                 properties:
                   meshName:
-                    description: The name of the service mesh in which to create the
-                      virtual service. Must be between 1 and 255 characters in length.
+                    description: Name of the service mesh in which to create the virtual
+                      service. Must be between 1 and 255 characters in length.
                     type: string
                   meshNameRef:
                     description: Reference to a Mesh in appmesh to populate meshName.
@@ -142,35 +142,35 @@ spec:
                         type: object
                     type: object
                   meshOwner:
-                    description: The AWS account ID of the service mesh's owner. Defaults
+                    description: AWS account ID of the service mesh's owner. Defaults
                       to the account ID the AWS provider is currently connected to.
                     type: string
                   name:
-                    description: The name to use for the virtual service. Must be
-                      between 1 and 255 characters in length.
+                    description: Name to use for the virtual service. Must be between
+                      1 and 255 characters in length.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   spec:
-                    description: The virtual service specification to apply.
+                    description: Virtual service specification to apply.
                     items:
                       properties:
                         provider:
-                          description: The App Mesh object that is acting as the provider
+                          description: App Mesh object that is acting as the provider
                             for a virtual service. You can specify a single virtual
                             node or virtual router.
                           items:
                             properties:
                               virtualNode:
-                                description: The virtual node associated with a virtual
+                                description: Virtual node associated with a virtual
                                   service.
                                 items:
                                   properties:
                                     virtualNodeName:
-                                      description: The name of the virtual node that
-                                        is acting as a service provider. Must be between
+                                      description: Name of the virtual node that is
+                                        acting as a service provider. Must be between
                                         1 and 255 characters in length.
                                       type: string
                                     virtualNodeNameRef:
@@ -260,14 +260,14 @@ spec:
                                   type: object
                                 type: array
                               virtualRouter:
-                                description: The virtual router associated with a
-                                  virtual service.
+                                description: Virtual router associated with a virtual
+                                  service.
                                 items:
                                   properties:
                                     virtualRouterName:
-                                      description: The name of the virtual router
-                                        that is acting as a service provider. Must
-                                        be between 1 and 255 characters in length.
+                                      description: Name of the virtual router that
+                                        is acting as a service provider. Must be between
+                                        1 and 255 characters in length.
                                       type: string
                                     virtualRouterNameRef:
                                       description: Reference to a VirtualRouter in
@@ -546,26 +546,25 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the virtual service.
+                    description: ARN of the virtual service.
                     type: string
                   createdDate:
-                    description: The creation date of the virtual service.
+                    description: Creation date of the virtual service.
                     type: string
                   id:
-                    description: The ID of the virtual service.
+                    description: ID of the virtual service.
                     type: string
                   lastUpdatedDate:
-                    description: The last update date of the virtual service.
+                    description: Last update date of the virtual service.
                     type: string
                   resourceOwner:
-                    description: The resource owner's AWS account ID.
+                    description: Resource owner's AWS account ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

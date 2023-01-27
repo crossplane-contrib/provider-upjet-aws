@@ -1123,6 +1123,11 @@ func (in *RepositoryParameters) DeepCopyInto(out *RepositoryParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ForceDelete != nil {
+		in, out := &in.ForceDelete, &out.ForceDelete
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ImageScanningConfiguration != nil {
 		in, out := &in.ImageScanningConfiguration, &out.ImageScanningConfiguration
 		*out = make([]ImageScanningConfigurationParameters, len(*in))

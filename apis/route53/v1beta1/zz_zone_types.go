@@ -36,6 +36,9 @@ type ZoneObservation struct {
 	// Find more about delegation sets in AWS docs.
 	NameServers []*string `json:"nameServers,omitempty" tf:"name_servers,omitempty"`
 
+	// The Route 53 name server that created the SOA record.
+	PrimaryNameServer *string `json:"primaryNameServer,omitempty" tf:"primary_name_server,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 

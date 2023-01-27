@@ -69,9 +69,9 @@ spec:
                   description:
                     type: string
                   destinationOutpostArn:
-                    description: The ARN of the Outpost to which to copy the AMI.
-                      Only specify this parameter when copying an AMI from an AWS
-                      Region to an Outpost. The AMI must be in the Region of the destination
+                    description: ARN of the Outpost to which to copy the AMI. Only
+                      specify this parameter when copying an AMI from an AWS Region
+                      to an Outpost. The AMI must be in the Region of the destination
                       Outpost.
                     type: string
                   ebsBlockDevice:
@@ -79,16 +79,16 @@ spec:
                       type: object
                     type: array
                   encrypted:
-                    description: Specifies whether the destination snapshots of the
-                      copied image should be encrypted. Defaults to false
+                    description: Whether the destination snapshots of the copied image
+                      should be encrypted. Defaults to false
                     type: boolean
                   ephemeralBlockDevice:
                     items:
                       type: object
                     type: array
                   kmsKeyId:
-                    description: The full ARN of the KMS Key to use when encrypting
-                      the snapshots of an image during a copy operation. If not specified,
+                    description: Full ARN of the KMS Key to use when encrypting the
+                      snapshots of an image during a copy operation. If not specified,
                       then the default AWS KMS Key will be used
                     type: string
                   kmsKeyIdRef:
@@ -165,15 +165,15 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: A region-unique name for the AMI.
+                    description: Region-unique name for the AMI.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   sourceAmiId:
-                    description: The id of the AMI to copy. This id must be valid
-                      in the region given by source_ami_region.
+                    description: Id of the AMI to copy. This id must be valid in the
+                      region given by source_ami_region.
                     type: string
                   sourceAmiIdRef:
                     description: Reference to a AMI to populate sourceAmiId.
@@ -249,9 +249,9 @@ spec:
                         type: object
                     type: object
                   sourceAmiRegion:
-                    description: The region from which the AMI will be copied. This
-                      may be the same as the AWS provider region in order to create
-                      a copy within the same region.
+                    description: Region from which the AMI will be copied. This may
+                      be the same as the AWS provider region in order to create a
+                      copy within the same region.
                     type: string
                   tags:
                     additionalProperties:
@@ -442,7 +442,7 @@ spec:
                   architecture:
                     type: string
                   arn:
-                    description: The ARN of the AMI.
+                    description: ARN of the AMI.
                     type: string
                   bootMode:
                     type: string
@@ -452,19 +452,19 @@ spec:
                         deleteOnTermination:
                           type: boolean
                         deviceName:
-                          description: A region-unique name for the AMI.
+                          description: Region-unique name for the AMI.
                           type: string
                         encrypted:
-                          description: Specifies whether the destination snapshots
-                            of the copied image should be encrypted. Defaults to false
+                          description: Whether the destination snapshots of the copied
+                            image should be encrypted. Defaults to false
                           type: boolean
                         iops:
                           type: number
                         outpostArn:
-                          description: The ARN of the AMI.
+                          description: ARN of the AMI.
                           type: string
                         snapshotId:
-                          description: The ID of the created AMI.
+                          description: ID of the created AMI.
                           type: string
                         throughput:
                           type: number
@@ -480,17 +480,17 @@ spec:
                     items:
                       properties:
                         deviceName:
-                          description: A region-unique name for the AMI.
+                          description: Region-unique name for the AMI.
                           type: string
                         virtualName:
-                          description: A region-unique name for the AMI.
+                          description: Region-unique name for the AMI.
                           type: string
                       type: object
                     type: array
                   hypervisor:
                     type: string
                   id:
-                    description: The ID of the created AMI.
+                    description: ID of the created AMI.
                     type: string
                   imageLocation:
                     type: string
@@ -498,13 +498,15 @@ spec:
                     type: string
                   imageType:
                     type: string
+                  imdsSupport:
+                    type: string
                   kernelId:
-                    description: The ID of the created AMI.
+                    description: ID of the created AMI.
                     type: string
                   manageEbsSnapshots:
                     type: boolean
                   ownerId:
-                    description: The ID of the created AMI.
+                    description: ID of the created AMI.
                     type: string
                   platform:
                     type: string
@@ -513,13 +515,13 @@ spec:
                   public:
                     type: boolean
                   ramdiskId:
-                    description: The ID of the created AMI.
+                    description: ID of the created AMI.
                     type: string
                   rootDeviceName:
-                    description: A region-unique name for the AMI.
+                    description: Region-unique name for the AMI.
                     type: string
                   rootSnapshotId:
-                    description: The ID of the created AMI.
+                    description: ID of the created AMI.
                     type: string
                   sriovNetSupport:
                     type: string
@@ -527,6 +529,8 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
+                  tpmSupport:
+                    type: string
                   usageOperation:
                     type: string
                   virtualizationType:

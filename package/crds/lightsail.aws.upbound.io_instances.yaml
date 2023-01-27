@@ -64,6 +64,32 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  addOn:
+                    description: The add on configuration for the instance. Detailed
+                      below.
+                    items:
+                      properties:
+                        snapshotTime:
+                          description: The daily time when an automatic snapshot will
+                            be created. Must be in HH:00 format, and in an hourly
+                            increment and specified in Coordinated Universal Time
+                            (UTC). The snapshot will be automatically created between
+                            the time specified and up to 45 minutes after.
+                          type: string
+                        status:
+                          description: 'The status of the add on. Valid Values: Enabled,
+                            Disabled.'
+                          type: string
+                        type:
+                          description: The add-on type. There is currently only one
+                            valid type AutoSnapshot.
+                          type: string
+                      required:
+                      - snapshotTime
+                      - status
+                      - type
+                      type: object
+                    type: array
                   availabilityZone:
                     description: The Availability Zone in which to create your instance
                       (see list below)
@@ -76,6 +102,10 @@ spec:
                   bundleId:
                     description: The bundle of specification information (see list
                       below)
+                    type: string
+                  ipAddressType:
+                    description: 'The IP address type of the Lightsail Instance. Valid
+                      Values: dualstack | ipv4.'
                     type: string
                   keyPairName:
                     description: The name of your key pair. Created in the Lightsail

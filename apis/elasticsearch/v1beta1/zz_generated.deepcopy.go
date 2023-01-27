@@ -697,6 +697,11 @@ func (in *EBSOptionsParameters) DeepCopyInto(out *EBSOptionsParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Throughput != nil {
+		in, out := &in.Throughput, &out.Throughput
+		*out = new(float64)
+		**out = **in
+	}
 	if in.VolumeSize != nil {
 		in, out := &in.VolumeSize, &out.VolumeSize
 		*out = new(float64)
@@ -781,6 +786,16 @@ func (in *LogPublishingOptionsParameters) DeepCopyInto(out *LogPublishingOptions
 		in, out := &in.CloudwatchLogGroupArn, &out.CloudwatchLogGroupArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.CloudwatchLogGroupArnRef != nil {
+		in, out := &in.CloudwatchLogGroupArnRef, &out.CloudwatchLogGroupArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CloudwatchLogGroupArnSelector != nil {
+		in, out := &in.CloudwatchLogGroupArnSelector, &out.CloudwatchLogGroupArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled

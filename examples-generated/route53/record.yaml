@@ -12,7 +12,7 @@ spec:
     records:
     - ${aws_eip.lb.public_ip}
     region: us-west-1
-    ttl: "300"
+    ttl: 300
     type: A
     zoneIdSelector:
       matchLabels:

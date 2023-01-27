@@ -185,7 +185,7 @@ spec:
                   intent:
                     description: A set of Intent objects. Each intent represents a
                       command that a user can express. Attributes are documented under
-                      intent. Can have up to 100 Intent objects.
+                      intent. Can have up to 250 Intent objects.
                     items:
                       properties:
                         intentName:

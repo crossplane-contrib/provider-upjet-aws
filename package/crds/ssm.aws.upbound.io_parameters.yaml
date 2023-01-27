@@ -65,22 +65,26 @@ spec:
               forProvider:
                 properties:
                   allowedPattern:
-                    description: A regular expression used to validate the parameter
+                    description: Regular expression used to validate the parameter
                       value.
                     type: string
                   arn:
-                    description: The ARN of the parameter.
+                    description: ARN of the parameter.
                     type: string
                   dataType:
-                    description: 'The data_type of the parameter. Valid values: text
-                      and aws:ec2:image for AMI format, see the Native parameter support
-                      for Amazon Machine Image IDs'
+                    description: 'Data type of the parameter. Valid values: text,
+                      aws:ssm:integration and aws:ec2:image for AMI format, see the
+                      Native parameter support for Amazon Machine Image IDs.'
                     type: string
                   description:
-                    description: The description of the parameter.
+                    description: Description of the parameter.
+                    type: string
+                  insecureValue:
+                    description: Value of the parameter. This argument is not valid
+                      with a type of SecureString.
                     type: string
                   keyId:
-                    description: The KMS key id or arn for encrypting a SecureString.
+                    description: KMS key ID or ARN for encrypting a SecureString.
                     type: string
                   overwrite:
                     description: Overwrite an existing parameter.
@@ -95,19 +99,21 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   tier:
-                    description: The tier of the parameter. If not specified, will
-                      default to Standard. Valid tiers are Standard, Advanced, and
-                      Intelligent-Tiering. For more information on parameter tiers,
-                      see the AWS SSM Parameter tier comparison and guide.
+                    description: Parameter tier to assign to the parameter. If not
+                      specified, will use the default parameter tier for the region.
+                      Valid tiers are Standard, Advanced, and Intelligent-Tiering.
+                      Downgrading an Advanced tier parameter to Standard will recreate
+                      the resource. For more information on parameter tiers, see the
+                      AWS SSM Parameter tier comparison and guide.
                     type: string
                   type:
-                    description: The type of the parameter. Valid types are String,
-                      StringList and SecureString.
+                    description: Type of the parameter. Valid types are String, StringList
+                      and SecureString.
                     type: string
                   valueSecretRef:
-                    description: The value of the parameter.15 and later, this may
-                      require additional configuration handling for certain scenarios.15
-                      Upgrade Guide.
+                    description: Value of the parameter.15 and later, this may require
+                      additional configuration handling for certain scenarios.15 Upgrade
+                      Guide.
                     properties:
                       key:
                         description: The key to select.
@@ -126,7 +132,6 @@ spec:
                 required:
                 - region
                 - type
-                - valueSecretRef
                 type: object
               providerConfigRef:
                 default:
@@ -309,12 +314,11 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                   version:
-                    description: The version of the parameter.
+                    description: Version of the parameter.
                     type: number
                 type: object
               conditions:

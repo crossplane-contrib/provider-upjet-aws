@@ -202,7 +202,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Imported by using the EC2 Transit Gateway Route Table identifier, an
 	// underscore, and the EC2 Transit Gateway Attachment identifier:
 	// tgw-rtb-12345678_tgw-attach-87654321
-	"aws_ec2_transit_gateway_route_table_propagation": FormattedIdentifierFromProvider("_", "transit_gateway_attachment_id", "transit_gateway_route_table_id"),
+	"aws_ec2_transit_gateway_route_table_propagation": FormattedIdentifierFromProvider("_", "transit_gateway_route_table_id", "transit_gateway_attachment_id"),
 	// Imported using the id: igw-c0a643a9
 	"aws_internet_gateway": config.IdentifierFromProvider,
 	// NAT Gateways can be imported using the id
@@ -260,6 +260,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_endpoint_service_allowed_principal": config.IdentifierFromProvider,
 	// VPC Endpoint Subnet Associations can be imported using vpc_endpoint_id together with subnet_id
 	"aws_vpc_endpoint_subnet_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "subnet_id"),
+	// VPC Endpoint security group Associations can be imported using vpc_endpoint_id together with security_group_id
+	"aws_vpc_endpoint_security_group_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "security_group_id"),
 	// Default VPC route tables can be imported using the vpc_id
 	"aws_default_route_table": config.IdentifierFromProvider,
 	// Hosts can be imported using the host id
@@ -691,6 +693,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Objects can be imported using the id. The id is the bucket name and the key together
 	// $ terraform import aws_s3_object.object some-bucket-name/some/key.txt
 	"aws_s3_object": FormattedIdentifierFromProvider("/", "bucket", "key"),
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_s3_object_copy": config.IdentifierFromProvider,
 
 	// cloudfront
 	//
@@ -1724,6 +1729,18 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Access Point policies can be imported using the access_point_arn
 	// arn:aws:s3:us-west-2:123456789012:accesspoint/example
 	"aws_s3control_access_point_policy": config.IdentifierFromProvider,
+	// Multi-Region Access Points can be imported using the account_id and name of the Multi-Region Access Point separated by a colon (:)
+	// Example: 123456789012:example
+	"aws_s3control_multi_region_access_point": config.IdentifierFromProvider,
+	// Multi-Region Access Point Policies can be imported using the account_id and name of the Multi-Region Access Point separated by a colon (:)
+	// Example: 123456789012:example
+	"aws_s3control_multi_region_access_point_policy": config.IdentifierFromProvider,
+	// Object Lambda Access Points can be imported using the account_id and name, separated by a colon (:)
+	// Example: 123456789012:example
+	"aws_s3control_object_lambda_access_point": config.IdentifierFromProvider,
+	// Object Lambda Access Point policies can be imported using the account_id and name, separated by a colon (:)
+	// Example: 123456789012:example
+	"aws_s3control_object_lambda_access_point_policy": config.IdentifierFromProvider,
 
 	// dlm
 	//
@@ -1915,6 +1932,25 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_sagemaker_studio_lifecycle_config": config.ParameterAsIdentifier("studio_lifecycle_config_name"),
 	// SageMaker User Profiles can be imported using the arn
 	"aws_sagemaker_user_profile": config.IdentifierFromProvider,
+	// SageMaker Apps can be imported using the id
+	"aws_sagemaker_app": config.IdentifierFromProvider,
+	// SageMaker Devices can be imported using the device-fleet-name/device-name
+	// my-fleet/my-device
+	"aws_sagemaker_device": config.IdentifierFromProvider,
+	// SageMaker Device Fleets can be imported using the name
+	"aws_sagemaker_device_fleet": config.ParameterAsIdentifier("device_fleet_name"),
+	// Models can be imported using the name
+	"aws_sagemaker_model": config.NameAsIdentifier,
+	// SageMaker Model Package Groups can be imported using the name
+	"aws_sagemaker_model_package_group_policy": config.IdentifierFromProvider,
+	// SageMaker Workforces can be imported using the workforce_name
+	"aws_sagemaker_workforce": config.ParameterAsIdentifier("workforce_name"),
+	// SageMaker Workteams can be imported using the workteam_name
+	"aws_sagemaker_workteam": config.ParameterAsIdentifier("workteam_name"),
+	// Endpoint configurations can be imported using the name
+	"aws_sagemaker_endpoint_configuration": config.NameAsIdentifier,
+	// SageMaker Code Images can be imported using the name
+	"aws_sagemaker_image_version": config.IdentifierFromProvider,
 
 	// elbv2
 	//
@@ -2153,12 +2189,78 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// WAFv2 Regex Pattern Sets can be imported using ID/name/scope
 	"aws_wafv2_regex_pattern_set": config.IdentifierFromProvider,
 	// WAFv2 Rule Group can be imported using ID/name/scope
-	"aws_wafv2_rule_group": config.IdentifierFromProvider,
+	// TODO(bump): Request entity too large: limit is 3145728
+	// "aws_wafv2_rule_group": config.IdentifierFromProvider,
 
 	// elasticsearch
 	//
 	// Elasticsearch domains can be imported using the domain_name
 	"aws_elasticsearch_domain": config.TemplatedStringAsIdentifier("domain_name", "arn:aws:es:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:domain/{{ .external_name }}"),
+
+	// xray
+	//
+	// XRay Encryption Config can be imported using the region name
+	"aws_xray_encryption_config": config.IdentifierFromProvider,
+	// XRay Groups can be imported using the ARN
+	// Example: arn:aws:xray:us-west-2:1234567890:group/example-group/TNGX7SW5U6QY36T4ZMOUA3HVLBYCZTWDIOOXY3CJAXTHSS3YCWUA
+	"aws_xray_group": config.IdentifierFromProvider,
+	// XRay Sampling Rules can be imported using the name
+	"aws_xray_sampling_rule": config.ParameterAsIdentifier("rule_name"),
+
+	// workspaces
+	//
+	// Workspaces directory can be imported using the directory ID
+	"aws_workspaces_directory": config.IdentifierFromProvider,
+	// WorkSpaces IP groups can be imported using their GroupID
+	"aws_workspaces_ip_group": config.IdentifierFromProvider,
+
+	// opsworks
+	//
+	// OpsWorks stacks can be imported using the id
+	"aws_opsworks_stack": config.IdentifierFromProvider,
+	// OpsWorks static web server Layers can be imported using the id
+	"aws_opsworks_static_web_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_user_profile": config.IdentifierFromProvider,
+	// OpsWorks Custom Layers can be imported using the id
+	"aws_opsworks_custom_layer": config.IdentifierFromProvider,
+	// Opsworks Application can be imported using the id
+	"aws_opsworks_application": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_ecs_cluster_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_ganglia_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_haproxy_layer": config.IdentifierFromProvider,
+	// Opsworks Instances can be imported using the instance id
+	"aws_opsworks_instance": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_java_app_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_memcached_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_mysql_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_nodejs_app_layer": config.IdentifierFromProvider,
+	// OpsWorks PHP Application Layers can be imported using the id
+	"aws_opsworks_php_app_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_rails_app_layer": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_rds_db_instance": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_opsworks_permission": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

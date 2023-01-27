@@ -41,6 +41,11 @@ type PlacementGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Determines how placement groups spread instances. Can only be used
+	// when the strategy is set to "spread". Can be "host" or "rack". "host" can only be used for Outpost placement groups.
+	// +kubebuilder:validation:Optional
+	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
+
 	// The placement strategy. Can be "cluster", "partition" or "spread".
 	// +kubebuilder:validation:Required
 	Strategy *string `json:"strategy" tf:"strategy,omitempty"`

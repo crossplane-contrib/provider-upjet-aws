@@ -65,15 +65,15 @@ spec:
               forProvider:
                 properties:
                   meshName:
-                    description: The name of the service mesh in which to create the
-                      gateway route. Must be between 1 and 255 characters in length.
+                    description: Name of the service mesh in which to create the gateway
+                      route. Must be between 1 and 255 characters in length.
                     type: string
                   meshOwner:
-                    description: The AWS account ID of the service mesh's owner. Defaults
+                    description: AWS account ID of the service mesh's owner. Defaults
                       to the account ID the AWS provider is currently connected to.
                     type: string
                   name:
-                    description: The name to use for the gateway route. Must be between
+                    description: Name to use for the gateway route. Must be between
                       1 and 255 characters in length.
                     type: string
                   region:
@@ -81,29 +81,29 @@ spec:
                       be created in.
                     type: string
                   spec:
-                    description: The gateway route specification to apply.
+                    description: Gateway route specification to apply.
                     items:
                       properties:
                         grpcRoute:
-                          description: The specification of a gRPC gateway route.
+                          description: Specification of a gRPC gateway route.
                           items:
                             properties:
                               action:
-                                description: The action to take if a match is determined.
+                                description: Action to take if a match is determined.
                                 items:
                                   properties:
                                     target:
-                                      description: The target that traffic is routed
-                                        to when a request matches the gateway route.
+                                      description: Target that traffic is routed to
+                                        when a request matches the gateway route.
                                       items:
                                         properties:
                                           virtualService:
-                                            description: The virtual service gateway
-                                              route target.
+                                            description: Virtual service gateway route
+                                              target.
                                             items:
                                               properties:
                                                 virtualServiceName:
-                                                  description: The name of the virtual
+                                                  description: Name of the virtual
                                                     service that traffic is routed
                                                     to. Must be between 1 and 255
                                                     characters in length.
@@ -121,13 +121,16 @@ spec:
                                   type: object
                                 type: array
                               match:
-                                description: The criteria for determining a request
-                                  match.
+                                description: Criteria for determining a request match.
                                 items:
                                   properties:
+                                    port:
+                                      description: The port number to match from the
+                                        request.
+                                      type: number
                                     serviceName:
-                                      description: The fully qualified domain name
-                                        for the service to match from the request.
+                                      description: Fully qualified domain name for
+                                        the service to match from the request.
                                       type: string
                                   required:
                                   - serviceName
@@ -139,25 +142,62 @@ spec:
                             type: object
                           type: array
                         http2Route:
-                          description: The specification of an HTTP/2 gateway route.
+                          description: Specification of an HTTP/2 gateway route.
                           items:
                             properties:
                               action:
-                                description: The action to take if a match is determined.
+                                description: Action to take if a match is determined.
                                 items:
                                   properties:
+                                    rewrite:
+                                      description: Gateway route action to rewrite.
+                                      items:
+                                        properties:
+                                          hostname:
+                                            description: Host name to rewrite.
+                                            items:
+                                              properties:
+                                                defaultTargetHostname:
+                                                  description: 'Default target host
+                                                    name to write to. Valid values:
+                                                    ENABLED, DISABLED.'
+                                                  type: string
+                                              required:
+                                              - defaultTargetHostname
+                                              type: object
+                                            type: array
+                                          prefix:
+                                            description: Specified beginning characters
+                                              to rewrite.
+                                            items:
+                                              properties:
+                                                defaultPrefix:
+                                                  description: 'Default prefix used
+                                                    to replace the incoming route
+                                                    prefix when rewritten. Valid values:
+                                                    ENABLED, DISABLED.'
+                                                  type: string
+                                                value:
+                                                  description: Value used to replace
+                                                    the incoming route prefix when
+                                                    rewritten.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
                                     target:
-                                      description: The target that traffic is routed
-                                        to when a request matches the gateway route.
+                                      description: Target that traffic is routed to
+                                        when a request matches the gateway route.
                                       items:
                                         properties:
                                           virtualService:
-                                            description: The virtual service gateway
-                                              route target.
+                                            description: Virtual service gateway route
+                                              target.
                                             items:
                                               properties:
                                                 virtualServiceName:
-                                                  description: The name of the virtual
+                                                  description: Name of the virtual
                                                     service that traffic is routed
                                                     to. Must be between 1 and 255
                                                     characters in length.
@@ -175,18 +215,31 @@ spec:
                                   type: object
                                 type: array
                               match:
-                                description: The criteria for determining a request
-                                  match.
+                                description: Criteria for determining a request match.
                                 items:
                                   properties:
+                                    hostname:
+                                      description: Host name to rewrite.
+                                      items:
+                                        properties:
+                                          exact:
+                                            description: Exact host name to match
+                                              on.
+                                            type: string
+                                          suffix:
+                                            description: Specified ending characters
+                                              of the host name to match on.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    port:
+                                      description: The port number to match from the
+                                        request.
+                                      type: number
                                     prefix:
-                                      description: Specifies the path to match requests
-                                        with. This parameter must always start with
-                                        /, which by itself matches all requests to
-                                        the virtual service name.
+                                      description: Specified beginning characters
+                                        to rewrite.
                                       type: string
-                                  required:
-                                  - prefix
                                   type: object
                                 type: array
                             required:
@@ -195,25 +248,62 @@ spec:
                             type: object
                           type: array
                         httpRoute:
-                          description: The specification of an HTTP gateway route.
+                          description: Specification of an HTTP gateway route.
                           items:
                             properties:
                               action:
-                                description: The action to take if a match is determined.
+                                description: Action to take if a match is determined.
                                 items:
                                   properties:
+                                    rewrite:
+                                      description: Gateway route action to rewrite.
+                                      items:
+                                        properties:
+                                          hostname:
+                                            description: Host name to rewrite.
+                                            items:
+                                              properties:
+                                                defaultTargetHostname:
+                                                  description: 'Default target host
+                                                    name to write to. Valid values:
+                                                    ENABLED, DISABLED.'
+                                                  type: string
+                                              required:
+                                              - defaultTargetHostname
+                                              type: object
+                                            type: array
+                                          prefix:
+                                            description: Specified beginning characters
+                                              to rewrite.
+                                            items:
+                                              properties:
+                                                defaultPrefix:
+                                                  description: 'Default prefix used
+                                                    to replace the incoming route
+                                                    prefix when rewritten. Valid values:
+                                                    ENABLED, DISABLED.'
+                                                  type: string
+                                                value:
+                                                  description: Value used to replace
+                                                    the incoming route prefix when
+                                                    rewritten.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
                                     target:
-                                      description: The target that traffic is routed
-                                        to when a request matches the gateway route.
+                                      description: Target that traffic is routed to
+                                        when a request matches the gateway route.
                                       items:
                                         properties:
                                           virtualService:
-                                            description: The virtual service gateway
-                                              route target.
+                                            description: Virtual service gateway route
+                                              target.
                                             items:
                                               properties:
                                                 virtualServiceName:
-                                                  description: The name of the virtual
+                                                  description: Name of the virtual
                                                     service that traffic is routed
                                                     to. Must be between 1 and 255
                                                     characters in length.
@@ -329,18 +419,31 @@ spec:
                                   type: object
                                 type: array
                               match:
-                                description: The criteria for determining a request
-                                  match.
+                                description: Criteria for determining a request match.
                                 items:
                                   properties:
+                                    hostname:
+                                      description: Host name to rewrite.
+                                      items:
+                                        properties:
+                                          exact:
+                                            description: Exact host name to match
+                                              on.
+                                            type: string
+                                          suffix:
+                                            description: Specified ending characters
+                                              of the host name to match on.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    port:
+                                      description: The port number to match from the
+                                        request.
+                                      type: number
                                     prefix:
-                                      description: Specifies the path to match requests
-                                        with. This parameter must always start with
-                                        /, which by itself matches all requests to
-                                        the virtual service name.
+                                      description: Specified beginning characters
+                                        to rewrite.
                                       type: string
-                                  required:
-                                  - prefix
                                   type: object
                                 type: array
                             required:
@@ -356,9 +459,8 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   virtualGatewayName:
-                    description: The name of the virtual gateway to associate the
-                      gateway route with. Must be between 1 and 255 characters in
-                      length.
+                    description: Name of the virtual gateway to associate the gateway
+                      route with. Must be between 1 and 255 characters in length.
                     type: string
                   virtualGatewayNameRef:
                     description: Reference to a VirtualGateway in appmesh to populate
@@ -618,26 +720,25 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the gateway route.
+                    description: ARN of the gateway route.
                     type: string
                   createdDate:
-                    description: The creation date of the gateway route.
+                    description: Creation date of the gateway route.
                     type: string
                   id:
-                    description: The ID of the gateway route.
+                    description: ID of the gateway route.
                     type: string
                   lastUpdatedDate:
-                    description: The last update date of the gateway route.
+                    description: Last update date of the gateway route.
                     type: string
                   resourceOwner:
-                    description: The resource owner's AWS account ID.
+                    description: Resource owner's AWS account ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

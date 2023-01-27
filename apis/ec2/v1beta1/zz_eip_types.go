@@ -27,7 +27,7 @@ type EIPObservation struct {
 	// Customer owned IP.
 	CustomerOwnedIP *string `json:"customerOwnedIp,omitempty" tf:"customer_owned_ip,omitempty"`
 
-	// Indicates if this EIP is for use in VPC (vpc) or EC2 Classic (standard).
+	// Indicates if this EIP is for use in VPC (vpc) or EC2-Classic (standard).
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// Contains the EIP allocation ID.
@@ -93,7 +93,8 @@ type EIPParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceSelector *v1.Selector `json:"networkInterfaceSelector,omitempty" tf:"-"`
 
-	// EC2 IPv4 address pool identifier or amazon. This option is only available for VPC EIPs.
+	// EC2 IPv4 address pool identifier or amazon.
+	// This option is only available for VPC EIPs.
 	// +kubebuilder:validation:Optional
 	PublicIPv4Pool *string `json:"publicIpv4Pool,omitempty" tf:"public_ipv4_pool,omitempty"`
 
@@ -107,6 +108,7 @@ type EIPParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Boolean if the EIP is in a VPC or not.
+	// Defaults to true unless the region supports EC2-Classic.
 	// +kubebuilder:validation:Optional
 	VPC *bool `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }

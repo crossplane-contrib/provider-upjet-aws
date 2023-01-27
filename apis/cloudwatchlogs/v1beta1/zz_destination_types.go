@@ -19,6 +19,9 @@ type DestinationObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type DestinationParameters struct {
@@ -28,7 +31,7 @@ type DestinationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to put data into the target
+	// The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to put data into the target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -42,7 +45,11 @@ type DestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The ARN of the target Amazon Kinesis stream resource for the destination
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ARN of the target Amazon Kinesis stream resource for the destination.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional

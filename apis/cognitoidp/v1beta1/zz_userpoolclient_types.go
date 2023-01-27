@@ -105,6 +105,10 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Optional
 	AnalyticsConfiguration []AnalyticsConfigurationParameters `json:"analyticsConfiguration,omitempty" tf:"analytics_configuration,omitempty"`
 
+	// Amazon Cognito creates a session token for each API request in an authentication flow. AuthSessionValidity is the duration, in minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires. Valid values between 3 and 15. Default value is 3.
+	// +kubebuilder:validation:Optional
+	AuthSessionValidity *float64 `json:"authSessionValidity,omitempty" tf:"auth_session_validity,omitempty"`
+
 	// List of allowed callback URLs for the identity providers.
 	// +kubebuilder:validation:Optional
 	CallbackUrls []*string `json:"callbackUrls,omitempty" tf:"callback_urls,omitempty"`
@@ -112,6 +116,10 @@ type UserPoolClientParameters struct {
 	// Default redirect URI. Must be in the list of callback URLs.
 	// +kubebuilder:validation:Optional
 	DefaultRedirectURI *string `json:"defaultRedirectUri,omitempty" tf:"default_redirect_uri,omitempty"`
+
+	// Activates the propagation of additional user context data.
+	// +kubebuilder:validation:Optional
+	EnablePropagateAdditionalUserContextData *bool `json:"enablePropagateAdditionalUserContextData,omitempty" tf:"enable_propagate_additional_user_context_data,omitempty"`
 
 	// Enables or disables token revocation.
 	// +kubebuilder:validation:Optional

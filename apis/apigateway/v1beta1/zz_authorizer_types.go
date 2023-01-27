@@ -15,16 +15,16 @@ import (
 
 type AuthorizerObservation struct {
 
-	// Amazon Resource Name (ARN) of the API Gateway Authorizer
+	// ARN of the API Gateway Authorizer
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The Authorizer identifier.
+	// Authorizer identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type AuthorizerParameters struct {
 
-	// The credentials required for the authorizer. To specify an IAM Role for API Gateway to assume, use the IAM Role ARN.
+	// Credentials required for the authorizer. To specify an IAM Role for API Gateway to assume, use the IAM Role ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -38,11 +38,11 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizerCredentialsSelector *v1.Selector `json:"authorizerCredentialsSelector,omitempty" tf:"-"`
 
-	// The TTL of cached authorizer results in seconds. Defaults to 300.
+	// TTL of cached authorizer results in seconds. Defaults to 300.
 	// +kubebuilder:validation:Optional
 	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
-	// The authorizer's Uniform Resource Identifier (URI). This must be a well-formed Lambda function URI in the form of arn:aws:apigateway:{region}:lambda:path/{service_api},
+	// Authorizer's Uniform Resource Identifier (URI). This must be a well-formed Lambda function URI in the form of arn:aws:apigateway:{region}:lambda:path/{service_api},
 	// e.g., arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:012345678912:function:my-function/invocations
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("invoke_arn",true)
@@ -57,19 +57,19 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizerURISelector *v1.Selector `json:"authorizerUriSelector,omitempty" tf:"-"`
 
-	// The source of the identity in an incoming request. Defaults to method.request.header.Authorization. For REQUEST type, this may be a comma-separated list of values, including headers, query string parameters and stage variables - e.g., "method.request.header.SomeHeaderName,method.request.querystring.SomeQueryStringName,stageVariables.SomeStageVariableName"
+	// Source of the identity in an incoming request. Defaults to method.request.header.Authorization. For REQUEST type, this may be a comma-separated list of values, including headers, query string parameters and stage variables - e.g., "method.request.header.SomeHeaderName,method.request.querystring.SomeQueryStringName,stageVariables.SomeStageVariableName"
 	// +kubebuilder:validation:Optional
 	IdentitySource *string `json:"identitySource,omitempty" tf:"identity_source,omitempty"`
 
-	// A validation expression for the incoming identity. For TOKEN type, this value should be a regular expression. The incoming token from the client is matched against this expression, and will proceed if the token matches. If the token doesn't match, the client receives a 401 Unauthorized response.
+	// Validation expression for the incoming identity. For TOKEN type, this value should be a regular expression. The incoming token from the client is matched against this expression, and will proceed if the token matches. If the token doesn't match, the client receives a 401 Unauthorized response.
 	// +kubebuilder:validation:Optional
 	IdentityValidationExpression *string `json:"identityValidationExpression,omitempty" tf:"identity_validation_expression,omitempty"`
 
-	// The name of the authorizer
+	// Name of the authorizer
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// A list of the Amazon Cognito user pool ARNs. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}.
+	// List of the Amazon Cognito user pool ARNs. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}.
 	// +kubebuilder:validation:Optional
 	ProviderArns []*string `json:"providerArns,omitempty" tf:"provider_arns,omitempty"`
 
@@ -78,7 +78,7 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The ID of the associated REST API
+	// ID of the associated REST API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -92,7 +92,7 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
-	// The type of the authorizer. Possible values are TOKEN for a Lambda function using a single authorization token submitted in a custom header, REQUEST for a Lambda function using incoming request parameters, or COGNITO_USER_POOLS for using an Amazon Cognito user pool. Defaults to TOKEN.
+	// Type of the authorizer. Possible values are TOKEN for a Lambda function using a single authorization token submitted in a custom header, REQUEST for a Lambda function using incoming request parameters, or COGNITO_USER_POOLS for using an Amazon Cognito user pool. Defaults to TOKEN.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

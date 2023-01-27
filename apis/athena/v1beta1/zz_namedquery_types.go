@@ -15,13 +15,13 @@ import (
 
 type NamedQueryObservation struct {
 
-	// The unique ID of the query.
+	// Unique ID of the query.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type NamedQueryParameters struct {
 
-	// The database to which the query belongs.
+	// Database to which the query belongs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/athena/v1beta1.Database
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
@@ -34,15 +34,15 @@ type NamedQueryParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseSelector *v1.Selector `json:"databaseSelector,omitempty" tf:"-"`
 
-	// A brief explanation of the query. Maximum length of 1024.
+	// Brief explanation of the query. Maximum length of 1024.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The plain language name for the query. Maximum length of 128.
+	// Plain language name for the query. Maximum length of 128.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The text of the query itself. In other words, all query statements. Maximum length of 262144.
+	// Text of the query itself. In other words, all query statements. Maximum length of 262144.
 	// +kubebuilder:validation:Required
 	Query *string `json:"query" tf:"query,omitempty"`
 
@@ -51,7 +51,7 @@ type NamedQueryParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The workgroup to which the query belongs. Defaults to primary
+	// Workgroup to which the query belongs. Defaults to primary
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/athena/v1beta1.Workgroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

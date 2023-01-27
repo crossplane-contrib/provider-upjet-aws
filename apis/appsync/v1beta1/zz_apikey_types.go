@@ -21,7 +21,7 @@ type APIKeyObservation struct {
 
 type APIKeyParameters struct {
 
-	// The ID of the associated AppSync API
+	// ID of the associated AppSync API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.GraphQLAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -35,7 +35,7 @@ type APIKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The API key description.
+	// API key description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

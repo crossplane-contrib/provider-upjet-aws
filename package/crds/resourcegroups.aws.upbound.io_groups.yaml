@@ -63,6 +63,38 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  configuration:
+                    description: A configuration associates the resource group with
+                      an AWS service and specifies how the service can interact with
+                      the resources in the group. See below for details.
+                    items:
+                      properties:
+                        parameters:
+                          description: A collection of parameters for this group configuration
+                            item. See below for details.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the group configuration parameter.
+                                type: string
+                              values:
+                                description: The value or values to be used for the
+                                  specified parameter.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - name
+                            - values
+                            type: object
+                          type: array
+                        type:
+                          description: Specifies the type of group configuration item.
+                          type: string
+                      required:
+                      - type
+                      type: object
+                    type: array
                   description:
                     description: A description of the resource group.
                     type: string
@@ -93,7 +125,6 @@ spec:
                     type: object
                 required:
                 - region
-                - resourceQuery
                 type: object
               providerConfigRef:
                 default:

@@ -65,8 +65,8 @@ spec:
               forProvider:
                 properties:
                   applicationId:
-                    description: The AppConfig application ID. Must be between 4 and
-                      7 characters in length.
+                    description: AppConfig application ID. Must be between 4 and 7
+                      characters in length.
                     type: string
                   applicationIdRef:
                     description: Reference to a Application in appconfig to populate
@@ -144,8 +144,8 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: The description of the environment. Can be at most
-                      1024 characters.
+                    description: Description of the environment. Can be at most 1024
+                      characters.
                     type: string
                   monitor:
                     description: Set of Amazon CloudWatch alarms to monitor during
@@ -317,8 +317,8 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: The name for the environment. Must be between 1 and
-                      64 characters in length.
+                    description: Name for the environment. Must be between 1 and 64
+                      characters in length.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -510,23 +510,24 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the AppConfig Environment.
+                    description: ARN of the AppConfig Environment.
                     type: string
                   environmentId:
-                    description: The AppConfig environment ID.
+                    description: AppConfig environment ID.
                     type: string
                   id:
-                    description: The AppConfig environment ID and application ID separated
+                    description: AppConfig environment ID and application ID separated
                       by a colon (:).
                     type: string
                   state:
+                    description: State of the environment. Possible values are READY_FOR_DEPLOYMENT,
+                      DEPLOYING, ROLLING_BACK or ROLLED_BACK.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

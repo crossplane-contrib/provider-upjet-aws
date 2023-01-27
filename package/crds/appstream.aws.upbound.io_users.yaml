@@ -68,7 +68,7 @@ spec:
                       USERPOOL. Valid values: API, SAML, USERPOOL'
                     type: string
                   enabled:
-                    description: Specifies whether the user in the user pool is enabled.
+                    description: Whether the user in the user pool is enabled.
                     type: boolean
                   firstName:
                     description: First name, or given name, of the user.

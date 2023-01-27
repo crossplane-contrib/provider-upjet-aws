@@ -73,7 +73,8 @@ spec:
                           type: string
                         pythonVersion:
                           description: The Python version being used to execute a
-                            Python shell job. Allowed values are 2 or 3.
+                            Python shell job. Allowed values are 2, 3 or 3.9. Version
+                            3 refers to Python 3.6.
                           type: string
                         scriptLocation:
                           description: Specifies the S3 path to a script that executes
@@ -101,6 +102,12 @@ spec:
                     type: object
                   description:
                     description: –  Description of the job.
+                    type: string
+                  executionClass:
+                    description: 'Indicates whether the job is run with a standard
+                      or flexible execution class. The standard execution class is
+                      ideal for time-sensitive workloads that require fast job startup
+                      and dedicated resources. Valid value: FLEX, STANDARD.'
                     type: string
                   executionProperty:
                     description: –  Execution property of the job. Defined below.
@@ -240,7 +247,7 @@ spec:
                   timeout:
                     description: –  The job timeout in minutes. The default is 2880
                       minutes (48 hours) for glueetl and pythonshell jobs, and null
-                      (unlimted) for gluestreaming jobs.
+                      (unlimited) for gluestreaming jobs.
                     type: number
                   workerType:
                     description: The type of predefined worker that is allocated when

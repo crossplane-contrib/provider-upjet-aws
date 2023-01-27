@@ -254,6 +254,7 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	RuntimePlatform []RuntimePlatformParameters `json:"runtimePlatform,omitempty" tf:"runtime_platform,omitempty"`
 
+	// Whether to retain the old revision when the resource is destroyed or replacement is necessary. Default is false.
 	// +kubebuilder:validation:Optional
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 

@@ -66,7 +66,8 @@ spec:
               forProvider:
                 properties:
                   accountId:
-                    description: An AWS Account ID to add create volume permissions
+                    description: An AWS Account ID to add create volume permissions.
+                      The AWS Account cannot be the snapshot's owner
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

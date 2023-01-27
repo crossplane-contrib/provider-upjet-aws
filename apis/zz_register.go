@@ -110,6 +110,7 @@ import (
 	v1beta1networkfirewall "github.com/upbound/provider-aws/apis/networkfirewall/v1beta1"
 	v1beta1networkmanager "github.com/upbound/provider-aws/apis/networkmanager/v1beta1"
 	v1beta1opensearch "github.com/upbound/provider-aws/apis/opensearch/v1beta1"
+	v1beta1opsworks "github.com/upbound/provider-aws/apis/opsworks/v1beta1"
 	v1beta1organizations "github.com/upbound/provider-aws/apis/organizations/v1beta1"
 	v1beta1pinpoint "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
 	v1beta1qldb "github.com/upbound/provider-aws/apis/qldb/v1beta1"
@@ -147,6 +148,8 @@ import (
 	v1beta1waf "github.com/upbound/provider-aws/apis/waf/v1beta1"
 	v1beta1wafregional "github.com/upbound/provider-aws/apis/wafregional/v1beta1"
 	v1beta1wafv2 "github.com/upbound/provider-aws/apis/wafv2/v1beta1"
+	v1beta1workspaces "github.com/upbound/provider-aws/apis/workspaces/v1beta1"
+	v1beta1xray "github.com/upbound/provider-aws/apis/xray/v1beta1"
 )
 
 func init() {
@@ -252,6 +255,7 @@ func init() {
 		v1beta1networkfirewall.SchemeBuilder.AddToScheme,
 		v1beta1networkmanager.SchemeBuilder.AddToScheme,
 		v1beta1opensearch.SchemeBuilder.AddToScheme,
+		v1beta1opsworks.SchemeBuilder.AddToScheme,
 		v1beta1organizations.SchemeBuilder.AddToScheme,
 		v1beta1pinpoint.SchemeBuilder.AddToScheme,
 		v1beta1qldb.SchemeBuilder.AddToScheme,
@@ -289,6 +293,8 @@ func init() {
 		v1beta1waf.SchemeBuilder.AddToScheme,
 		v1beta1wafregional.SchemeBuilder.AddToScheme,
 		v1beta1wafv2.SchemeBuilder.AddToScheme,
+		v1beta1workspaces.SchemeBuilder.AddToScheme,
+		v1beta1xray.SchemeBuilder.AddToScheme,
 	)
 }
 

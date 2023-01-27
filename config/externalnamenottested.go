@@ -284,18 +284,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// S3 Control Bucket Policies can be imported using the Amazon Resource Name (ARN)
 	// arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-12345678/bucket/example
 	"aws_s3control_bucket_policy": config.IdentifierFromProvider,
-	// Multi-Region Access Points can be imported using the account_id and name of the Multi-Region Access Point separated by a colon (:)
-	// Example: 123456789012:example
-	"aws_s3control_multi_region_access_point": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.details.name }}"),
-	// Multi-Region Access Point Policies can be imported using the account_id and name of the Multi-Region Access Point separated by a colon (:)
-	// Example: 123456789012:example
-	"aws_s3control_multi_region_access_point_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.details.name }}"),
-	// Object Lambda Access Points can be imported using the account_id and name, separated by a colon (:)
-	// Example: 123456789012:example
-	"aws_s3control_object_lambda_access_point": config.TemplatedStringAsIdentifier("name", "{{ .parameters.account_id }}:{{ .external_name }}"),
-	// Object Lambda Access Point policies can be imported using the account_id and name, separated by a colon (:)
-	// Example: 123456789012:example
-	"aws_s3control_object_lambda_access_point_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.account_id }}:{{ .external_name }}"),
 
 	// elasticbeanstalk
 	//
@@ -388,54 +376,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Use the user_name to import a user
 	"aws_memorydb_user": config.ParameterAsIdentifier("user_name"),
 
-	// opsworks
-	//
-	// Opsworks Application can be imported using the id
-	"aws_opsworks_application": config.IdentifierFromProvider,
-	// OpsWorks Custom Layers can be imported using the id
-	"aws_opsworks_custom_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_ecs_cluster_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_ganglia_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_haproxy_layer": config.IdentifierFromProvider,
-	// Opsworks Instances can be imported using the instance id
-	"aws_opsworks_instance": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_java_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_memcached_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_mysql_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_nodejs_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_permission": config.IdentifierFromProvider,
-	// OpsWorks PHP Application Layers can be imported using the id
-	"aws_opsworks_php_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_rails_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_rds_db_instance": config.IdentifierFromProvider,
-	// OpsWorks stacks can be imported using the id
-	"aws_opsworks_stack": config.IdentifierFromProvider,
-	// OpsWorks static web server Layers can be imported using the id
-	"aws_opsworks_static_web_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_user_profile": config.IdentifierFromProvider,
-
 	// pinpoint
 	//
 	// Pinpoint ADM Channel can be imported using the application-id
@@ -485,33 +425,14 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// sagemaker
 	//
-	// SageMaker Apps can be imported using the id
-	"aws_sagemaker_app": config.IdentifierFromProvider,
-	// SageMaker Devices can be imported using the device-fleet-name/device-name
-	// my-fleet/my-device
-	"aws_sagemaker_device": FormattedIdentifierFromProvider("/", "device_fleet_name", "device.device_name"),
-	// SageMaker Device Fleets can be imported using the name
-	"aws_sagemaker_device_fleet": config.ParameterAsIdentifier("device_fleet_name"),
 	// Endpoints can be imported using the name
 	"aws_sagemaker_endpoint": config.NameAsIdentifier,
-	// Endpoint configurations can be imported using the name
-	"aws_sagemaker_endpoint_configuration": config.NameAsIdentifier,
 	// SageMaker Flow Definitions can be imported using the flow_definition_name
 	"aws_sagemaker_flow_definition": config.ParameterAsIdentifier("flow_definition_name"),
 	// SageMaker Human Task UIs can be imported using the human_task_ui_name
 	"aws_sagemaker_human_task_ui": config.ParameterAsIdentifier("human_task_ui_name"),
-	// SageMaker Code Images can be imported using the name
-	"aws_sagemaker_image_version": config.ParameterAsIdentifier("image_name"),
-	// Models can be imported using the name
-	"aws_sagemaker_model": config.NameAsIdentifier,
-	// SageMaker Model Package Groups can be imported using the name
-	"aws_sagemaker_model_package_group_policy": config.ParameterAsIdentifier("model_package_group_name"),
 	// SageMaker Projects can be imported using the project_name
 	"aws_sagemaker_project": config.ParameterAsIdentifier("project_name"),
-	// SageMaker Workforces can be imported using the workforce_name
-	"aws_sagemaker_workforce": config.ParameterAsIdentifier("workforce_name"),
-	// SageMaker Workteams can be imported using the workteam_name
-	"aws_sagemaker_workteam": config.ParameterAsIdentifier("workteam_name"),
 
 	// storagegateway
 	//
@@ -640,12 +561,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Example: s-12345678/S-1-1-12-1234567890-123456789-1234567890-1234
 	"aws_transfer_access": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/{{ .parameters.external_id }}"),
 
-	// s3
-	//
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_s3_object_copy": config.IdentifierFromProvider,
-
 	// wafv2
 	//
 	// WAFv2 Web ACLs can be imported using ID/Name/Scope
@@ -668,22 +583,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// workspaces
 	//
-	// Workspaces directory can be imported using the directory ID
-	"aws_workspaces_directory": config.IdentifierFromProvider,
-	// WorkSpaces IP groups can be imported using their GroupID
-	"aws_workspaces_ip_group": config.IdentifierFromProvider,
 	// Workspaces can be imported using their ID
 	"aws_workspaces_workspace": config.IdentifierFromProvider,
-
-	// xray
-	//
-	// XRay Encryption Config can be imported using the region name
-	"aws_xray_encryption_config": config.IdentifierFromProvider,
-	// XRay Groups can be imported using the ARN
-	// Example: arn:aws:xray:us-west-2:1234567890:group/example-group/TNGX7SW5U6QY36T4ZMOUA3HVLBYCZTWDIOOXY3CJAXTHSS3YCWUA
-	"aws_xray_group": config.IdentifierFromProvider,
-	// XRay Sampling Rules can be imported using the name
-	"aws_xray_sampling_rule": config.ParameterAsIdentifier("rule_name"),
 
 	// imagebuilder
 	//

@@ -151,7 +151,8 @@ spec:
                         type: object
                     type: object
                   diskSize:
-                    description: Disk size in GiB for worker nodes. Defaults to 20.
+                    description: Disk size in GiB for worker nodes. Defaults to 50
+                      for Windows, 20 all other node groups.
                     type: number
                   forceUpdateVersion:
                     description: Force version update if existing pods are unable
@@ -288,11 +289,14 @@ spec:
                       properties:
                         ec2SshKey:
                           description: EC2 Key Pair name that provides access for
-                            SSH communication with the worker nodes in the EKS Node
-                            Group. If you specify this configuration, but do not specify
-                            source_security_group_ids when you create an EKS Node
-                            Group, port 22 on the worker nodes is opened to the Internet
-                            (0.0.0.0/0).
+                            remote communication with the worker nodes in the EKS
+                            Node Group. If you specify this configuration, but do
+                            not specify source_security_group_ids when you create
+                            an EKS Node Group, either port 3389 for Windows, or port
+                            22 for all other operating systems is opened on the worker
+                            nodes to the Internet (0.0.0.0/0). For Windows nodes,
+                            this will allow you to use RDP, for all others this allows
+                            you to SSH into the worker nodes.
                           type: string
                         sourceSecurityGroupIdRefs:
                           description: References to SecurityGroup in ec2 to populate
@@ -535,6 +539,79 @@ spec:
                     description: –  Kubernetes version. Defaults to EKS Cluster Kubernetes
                       version.
                     type: string
+                  versionRef:
+                    description: Reference to a Cluster in eks to populate version.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  versionSelector:
+                    description: Selector for a Cluster in eks to populate version.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 required:
                 - region
                 - scalingConfig

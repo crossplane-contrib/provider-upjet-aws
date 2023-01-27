@@ -73,7 +73,7 @@ spec:
                       be created in.
                     type: string
                   restApiId:
-                    description: The ID of the REST API.
+                    description: ID of the REST API.
                     type: string
                   restApiIdRef:
                     description: Reference to a RestAPI in apigateway to populate
@@ -331,7 +331,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the REST API
+                    description: ID of the REST API
                     type: string
                 type: object
               conditions:

@@ -36,7 +36,7 @@ type VaultLockConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
-	// The number of days before the lock date.
+	// The number of days before the lock date. If omitted creates a vault lock in governance mode, otherwise it will create a vault lock in compliance mode.
 	// +kubebuilder:validation:Optional
 	ChangeableForDays *float64 `json:"changeableForDays,omitempty" tf:"changeable_for_days,omitempty"`
 

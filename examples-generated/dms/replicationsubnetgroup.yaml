@@ -4,16 +4,17 @@ metadata:
   annotations:
     meta.upbound.io/example-id: dms/v1beta1/replicationsubnetgroup
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     region: us-west-1
-    replicationSubnetGroupDescription: Test replication subnet group
+    replicationSubnetGroupDescription: Example replication subnet group
     subnetIdRefs:
     - name: example
+    - name: example
     tags:
-      Name: test
+      Name: example
 
 ---
 

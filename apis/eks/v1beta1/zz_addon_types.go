@@ -51,6 +51,10 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
+	// custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
+	// +kubebuilder:validation:Optional
+	ConfigurationValues *string `json:"configurationValues,omitempty" tf:"configuration_values,omitempty"`
+
 	// Indicates if you want to preserve the created resources when deleting the EKS add-on.
 	// +kubebuilder:validation:Optional
 	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
@@ -62,7 +66,7 @@ type AddonParameters struct {
 
 	// Define how to resolve parameter value conflicts
 	// when migrating an existing add-on to an Amazon EKS add-on or when applying
-	// version updates to the add-on. Valid values are NONE and OVERWRITE.
+	// version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. For more details check UpdateAddon API Docs.
 	// +kubebuilder:validation:Optional
 	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
 

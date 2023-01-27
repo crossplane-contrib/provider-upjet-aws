@@ -88,6 +88,12 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  supportedIpAddressTypes:
+                    description: The supported IP address types. The possible values
+                      are ipv4 and ipv6.
+                    items:
+                      type: string
+                    type: array
                   tags:
                     additionalProperties:
                       type: string

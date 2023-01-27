@@ -60,7 +60,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Default true.
+	// This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not perform minor version upgrades regardless of the value set (see docs). Default true.
 	// +kubebuilder:validation:Optional
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
@@ -85,6 +85,10 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
+	// A value that indicates whether to enable Performance Insights for the DB Instance. Default false. See [docs] (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html) about the details.
+	// +kubebuilder:validation:Optional
+	EnablePerformanceInsights *bool `json:"enablePerformanceInsights,omitempty" tf:"enable_performance_insights,omitempty"`
+
 	// The name of the database engine to be used for the DocDB instance. Defaults to docdb. Valid Values: docdb.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
@@ -93,6 +97,10 @@ type ClusterInstanceParameters struct {
 	// supports the below instance classes. Please see AWS Documentation for complete details.
 	// +kubebuilder:validation:Required
 	InstanceClass *string `json:"instanceClass" tf:"instance_class,omitempty"`
+
+	// The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon DocumentDB uses your default KMS key.
+	// +kubebuilder:validation:Optional
+	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
 	// The window to perform maintenance in.
 	// Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00".

@@ -696,6 +696,11 @@ func (in *PortfolioShareParameters) DeepCopyInto(out *PortfolioShareParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.SharePrincipals != nil {
+		in, out := &in.SharePrincipals, &out.SharePrincipals
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ShareTagOptions != nil {
 		in, out := &in.ShareTagOptions, &out.ShareTagOptions
 		*out = new(bool)
@@ -1152,16 +1157,6 @@ func (in *ProductParameters) DeepCopyInto(out *ProductParameters) {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
 		**out = **in
-	}
-	if in.TypeRef != nil {
-		in, out := &in.TypeRef, &out.TypeRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.TypeSelector != nil {
-		in, out := &in.TypeSelector, &out.TypeSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 }
 

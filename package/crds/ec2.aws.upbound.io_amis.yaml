@@ -69,16 +69,16 @@ spec:
                       to "x86_64".
                     type: string
                   bootMode:
-                    description: The boot mode of the AMI. For more information, see
-                      Boot modes in the Amazon Elastic Compute Cloud User Guide.
+                    description: Boot mode of the AMI. For more information, see Boot
+                      modes in the Amazon Elastic Compute Cloud User Guide.
                     type: string
                   deprecationTime:
-                    description: 'The date and time to deprecate the AMI. If you specified
+                    description: 'Date and time to deprecate the AMI. If you specified
                       a value for seconds, Amazon EC2 rounds the seconds to the nearest
                       minute. Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)'
                     type: string
                   description:
-                    description: A longer, human-readable description for the AMI.
+                    description: Longer, human-readable description for the AMI.
                     type: string
                   ebsBlockDevice:
                     description: Nested block describing an EBS block device that
@@ -92,8 +92,8 @@ spec:
                             once that instance is terminated.
                           type: boolean
                         deviceName:
-                          description: The path at which the device is exposed to
-                            created instances.
+                          description: Path at which the device is exposed to created
+                            instances.
                           type: string
                         encrypted:
                           description: Boolean controlling whether the created EBS
@@ -104,12 +104,12 @@ spec:
                             volumes will support.
                           type: number
                         outpostArn:
-                          description: The ARN of the Outpost on which the snapshot
-                            is stored.
+                          description: ARN of the Outpost on which the snapshot is
+                            stored.
                           type: string
                         snapshotId:
-                          description: The id of an EBS snapshot that will be used
-                            to initialize the created EBS volumes. If set, the volume_size
+                          description: ID of an EBS snapshot that will be used to
+                            initialize the created EBS volumes. If set, the volume_size
                             attribute must be at least as large as the referenced
                             snapshot.
                           type: string
@@ -190,16 +190,16 @@ spec:
                               type: object
                           type: object
                         throughput:
-                          description: The throughput that the EBS volume supports,
-                            in MiB/s. Only valid for volume_type of gp3.
+                          description: Throughput that the EBS volume supports, in
+                            MiB/s. Only valid for volume_type of gp3.
                           type: number
                         volumeSize:
-                          description: The size of created volumes in GiB. If snapshot_id
+                          description: Size of created volumes in GiB. If snapshot_id
                             is set and volume_size is omitted then the volume will
                             have the same size as the selected snapshot.
                           type: number
                         volumeType:
-                          description: 'The type of EBS volume to create. Can be standard,
+                          description: 'Type of EBS volume to create. Can be standard,
                             gp2, gp3, io1, io2, sc1 or st1 (Default: standard).'
                           type: string
                       required:
@@ -207,8 +207,8 @@ spec:
                       type: object
                     type: array
                   enaSupport:
-                    description: Specifies whether enhanced networking with ENA is
-                      enabled. Defaults to false.
+                    description: Whether enhanced networking with ENA is enabled.
+                      Defaults to false.
                     type: boolean
                   ephemeralBlockDevice:
                     description: Nested block describing an ephemeral block device
@@ -217,11 +217,11 @@ spec:
                     items:
                       properties:
                         deviceName:
-                          description: The path at which the device is exposed to
-                            created instances.
+                          description: Path at which the device is exposed to created
+                            instances.
                           type: string
                         virtualName:
-                          description: A name for the ephemeral device, of the form
+                          description: Name for the ephemeral device, of the form
                             "ephemeralN" where N is a volume number starting from
                             zero.
                           type: string
@@ -235,23 +235,29 @@ spec:
                       e.g., created by the ec2-upload-bundle command in the EC2 command
                       line tools.
                     type: string
+                  imdsSupport:
+                    description: If EC2 instances started from this image should require
+                      the use of the Instance Metadata Service V2 (IMDSv2), set this
+                      argument to v2.0. For more information, see Configure instance
+                      metadata options for new instances.
+                    type: string
                   kernelId:
-                    description: The id of the kernel image (AKI) that will be used
-                      as the paravirtual kernel in created instances.
+                    description: ID of the kernel image (AKI) that will be used as
+                      the paravirtual kernel in created instances.
                     type: string
                   name:
-                    description: A region-unique name for the AMI.
+                    description: Region-unique name for the AMI.
                     type: string
                   ramdiskId:
-                    description: The id of an initrd image (ARI) that will be used
-                      when booting the created instances.
+                    description: ID of an initrd image (ARI) that will be used when
+                      booting the created instances.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   rootDeviceName:
-                    description: The name of the root device (for example, /dev/sda1,
+                    description: Name of the root device (for example, /dev/sda1,
                       or /dev/xvda).
                     type: string
                   sriovNetSupport:
@@ -264,6 +270,11 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                  tpmSupport:
+                    description: If the image is configured for NitroTPM support,
+                      the value is v2.0. For more information, see NitroTPM in the
+                      Amazon Elastic Compute Cloud User Guide.
+                    type: string
                   virtualizationType:
                     description: Keyword to choose what virtualization mode created
                       instances will use. Can be either "paravirtual" (the default)
@@ -451,51 +462,49 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the AMI.
+                    description: ARN of the AMI.
                     type: string
                   hypervisor:
-                    description: The hypervisor type of the image.
+                    description: Hypervisor type of the image.
                     type: string
                   id:
-                    description: The ID of the created AMI.
+                    description: ID of the created AMI.
                     type: string
                   imageOwnerAlias:
-                    description: The AWS account alias (for example, amazon, self)
-                      or the AWS account ID of the AMI owner.
+                    description: AWS account alias (for example, amazon, self) or
+                      the AWS account ID of the AMI owner.
                     type: string
                   imageType:
-                    description: The type of image.
+                    description: Type of image.
                     type: string
                   manageEbsSnapshots:
                     type: boolean
                   ownerId:
-                    description: The AWS account ID of the image owner.
+                    description: AWS account ID of the image owner.
                     type: string
                   platform:
                     description: This value is set to windows for Windows AMIs; otherwise,
                       it is blank.
                     type: string
                   platformDetails:
-                    description: The platform details associated with the billing
-                      code of the AMI.
+                    description: Platform details associated with the billing code
+                      of the AMI.
                     type: string
                   public:
-                    description: Indicates whether the image has public launch permissions.
+                    description: Whether the image has public launch permissions.
                     type: boolean
                   rootSnapshotId:
-                    description: The Snapshot ID for the root volume (for EBS-backed
-                      AMIs)
+                    description: Snapshot ID for the root volume (for EBS-backed AMIs)
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                   usageOperation:
-                    description: The operation of the Amazon EC2 instance and the
-                      billing code that is associated with the AMI.
+                    description: Operation of the Amazon EC2 instance and the billing
+                      code that is associated with the AMI.
                     type: string
                 type: object
               conditions:

@@ -65,11 +65,12 @@ spec:
               forProvider:
                 properties:
                   deliveryOptions:
-                    description: Configuration block. Detailed below.
+                    description: Whether messages that use the configuration set are
+                      required to use TLS. See below.
                     items:
                       properties:
                         tlsPolicy:
-                          description: 'Specifies whether messages that use the configuration
+                          description: 'Whether messages that use the configuration
                             set are required to use Transport Layer Security (TLS).
                             If the value is Require, messages are only delivered if
                             a TLS connection can be established. If the value is Optional,
@@ -92,6 +93,18 @@ spec:
                     description: Whether email sending is enabled or disabled for
                       the configuration set. The default value is true.
                     type: boolean
+                  trackingOptions:
+                    description: 'Domain that is used to redirect email recipients
+                      to an Amazon SES-operated domain. See below. NOTE: This functionality
+                      is best effort.'
+                    items:
+                      properties:
+                        customRedirectDomain:
+                          description: Custom subdomain that is used to redirect email
+                            recipients to the Amazon SES event tracking domain.
+                          type: string
+                      type: object
+                    type: array
                 required:
                 - region
                 type: object
@@ -278,8 +291,8 @@ spec:
                     description: SES configuration set name.
                     type: string
                   lastFreshStart:
-                    description: The date and time at which the reputation metrics
-                      for the configuration set were last reset. Resetting these metrics
+                    description: Date and time at which the reputation metrics for
+                      the configuration set were last reset. Resetting these metrics
                       is known as a fresh start.
                     type: string
                 type: object

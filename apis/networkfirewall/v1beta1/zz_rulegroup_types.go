@@ -111,6 +111,40 @@ type IPSetParameters struct {
 	Definition []*string `json:"definition" tf:"definition,omitempty"`
 }
 
+type IPSetReferenceObservation struct {
+}
+
+type IPSetReferenceParameters struct {
+
+	// Set of Managed Prefix IP ARN(s)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	ReferenceArn *string `json:"referenceArn,omitempty" tf:"reference_arn,omitempty"`
+
+	// Reference to a ManagedPrefixList in ec2 to populate referenceArn.
+	// +kubebuilder:validation:Optional
+	ReferenceArnRef *v1.Reference `json:"referenceArnRef,omitempty" tf:"-"`
+
+	// Selector for a ManagedPrefixList in ec2 to populate referenceArn.
+	// +kubebuilder:validation:Optional
+	ReferenceArnSelector *v1.Selector `json:"referenceArnSelector,omitempty" tf:"-"`
+}
+
+type IPSetReferencesObservation struct {
+}
+
+type IPSetReferencesParameters struct {
+
+	// Set of configuration blocks that define the IP Reference information. See IP Set Reference below for details.
+	// +kubebuilder:validation:Required
+	IPSetReference []IPSetReferenceParameters `json:"ipSetReference" tf:"ip_set_reference,omitempty"`
+
+	// An unique alphanumeric string to identify the port_set.
+	// +kubebuilder:validation:Required
+	Key *string `json:"key" tf:"key,omitempty"`
+}
+
 type IPSetsObservation struct {
 }
 
@@ -189,6 +223,15 @@ type PublishMetricActionDimensionParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
+type ReferenceSetsObservation struct {
+}
+
+type ReferenceSetsParameters struct {
+
+	// +kubebuilder:validation:Optional
+	IPSetReferences []IPSetReferencesParameters `json:"ipSetReferences,omitempty" tf:"ip_set_references,omitempty"`
+}
+
 type RuleDefinitionObservation struct {
 }
 
@@ -201,6 +244,20 @@ type RuleDefinitionParameters struct {
 	// A configuration block containing criteria for AWS Network Firewall to use to inspect an individual packet in stateless rule inspection. See Match Attributes below for details.
 	// +kubebuilder:validation:Required
 	MatchAttributes []MatchAttributesParameters `json:"matchAttributes" tf:"match_attributes,omitempty"`
+}
+
+type RuleGroupEncryptionConfigurationObservation struct {
+}
+
+type RuleGroupEncryptionConfigurationParameters struct {
+
+	// The ID of the customer managed key. You can use any of the key identifiers that KMS supports, unless you're using a key that's managed by another account. If you're using a key managed by another account, then specify the key ARN.
+	// +kubebuilder:validation:Optional
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The type of AWS KMS key to use for encryption of your Network Firewall resources. Valid values are CUSTOMER_KMS and AWS_OWNED_KMS_KEY.
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RuleGroupObservation struct {
@@ -227,6 +284,10 @@ type RuleGroupParameters struct {
 	// A friendly description of the rule group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// KMS encryption configuration settings. See Encryption Configuration below for details.
+	// +kubebuilder:validation:Optional
+	EncryptionConfiguration []RuleGroupEncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// A friendly name of the rule group.
 	// +kubebuilder:validation:Required
@@ -258,6 +319,10 @@ type RuleGroupRuleGroupObservation struct {
 }
 
 type RuleGroupRuleGroupParameters struct {
+
+	// A configuration block that defines the IP Set References for the rule group. See Reference Sets below for details.
+	// +kubebuilder:validation:Optional
+	ReferenceSets []ReferenceSetsParameters `json:"referenceSets,omitempty" tf:"reference_sets,omitempty"`
 
 	// A configuration block that defines additional settings available to use in the rules defined in the rule group. Can only be specified for stateful rule groups. See Rule Variables below for details.
 	// +kubebuilder:validation:Optional

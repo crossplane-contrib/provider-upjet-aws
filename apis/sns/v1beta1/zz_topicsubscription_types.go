@@ -63,6 +63,10 @@ type TopicSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	FilterPolicy *string `json:"filterPolicy,omitempty" tf:"filter_policy,omitempty"`
 
+	// Whether the filter_policy applies to MessageAttributes (default) or MessageBody.
+	// +kubebuilder:validation:Optional
+	FilterPolicyScope *string `json:"filterPolicyScope,omitempty" tf:"filter_policy_scope,omitempty"`
+
 	// Protocol to use. Valid values are: sqs, sms, lambda, firehose, and application. Protocols email, email-json, http and https are also valid but partially supported. See details below.
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`

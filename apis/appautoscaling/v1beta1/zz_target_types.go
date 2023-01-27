@@ -19,11 +19,11 @@ type TargetObservation struct {
 
 type TargetParameters struct {
 
-	// The max capacity of the scalable target.
+	// Max capacity of the scalable target.
 	// +kubebuilder:validation:Required
 	MaxCapacity *float64 `json:"maxCapacity" tf:"max_capacity,omitempty"`
 
-	// The min capacity of the scalable target.
+	// Min capacity of the scalable target.
 	// +kubebuilder:validation:Required
 	MinCapacity *float64 `json:"minCapacity" tf:"min_capacity,omitempty"`
 
@@ -32,11 +32,11 @@ type TargetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The resource type and unique identifier string for the resource associated with the scaling policy. Documentation can be found in the ResourceId parameter at: AWS Application Auto Scaling API Reference
+	// Resource type and unique identifier string for the resource associated with the scaling policy. Documentation can be found in the ResourceId parameter at: AWS Application Auto Scaling API Reference
 	// +kubebuilder:validation:Required
 	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
 
-	// The ARN of the IAM role that allows Application AutoScaling to modify your scalable target on your behalf. This defaults to an IAM Service-Linked Role for most services and custom IAM Roles are ignored by the API for those namespaces. See the AWS Application Auto Scaling documentation for more information about how this service interacts with IAM.
+	// ARN of the IAM role that allows Application AutoScaling to modify your scalable target on your behalf. This defaults to an IAM Service-Linked Role for most services and custom IAM Roles are ignored by the API for those namespaces. See the AWS Application Auto Scaling documentation for more information about how this service interacts with IAM.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -50,11 +50,11 @@ type TargetParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The scalable dimension of the scalable target. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference
+	// Scalable dimension of the scalable target. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference
 	// +kubebuilder:validation:Required
 	ScalableDimension *string `json:"scalableDimension" tf:"scalable_dimension,omitempty"`
 
-	// The AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
+	// AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
 	// +kubebuilder:validation:Required
 	ServiceNamespace *string `json:"serviceNamespace" tf:"service_namespace,omitempty"`
 }

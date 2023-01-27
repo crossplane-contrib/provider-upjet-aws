@@ -33,6 +33,9 @@ type ClusterInstanceObservation struct {
 	// The ARN for the KMS encryption key if one is set to the cluster.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// The network type of the DB instance.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// The database port
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -153,12 +156,11 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyIDSelector *v1.Selector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
 
-	// Amount of time in days to retain Performance Insights data. Either 7 (7 days) or 731 (2 years). When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
+	// Amount of time in days to retain Performance Insights data. Valid values are 7, 731 (2 years) or a multiple of 31. When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
 
-	// The daily time range during which automated backups are created if automated backups are enabled.
-	// Eg: "04:00-09:00"
+	// The daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00". NOTE: If preferred_backup_window is set at the cluster level, this argument must be omitted.
 	// +kubebuilder:validation:Optional
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 

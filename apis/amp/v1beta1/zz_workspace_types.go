@@ -13,6 +13,16 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LoggingConfigurationObservation struct {
+}
+
+type LoggingConfigurationParameters struct {
+
+	// The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist.
+	// +kubebuilder:validation:Required
+	LogGroupArn *string `json:"logGroupArn" tf:"log_group_arn,omitempty"`
+}
+
 type WorkspaceObservation struct {
 
 	// Amazon Resource Name (ARN) of the workspace.
@@ -33,6 +43,10 @@ type WorkspaceParameters struct {
 	// The alias of the prometheus workspace. See more in AWS Docs.
 	// +kubebuilder:validation:Optional
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
+
+	// Logging configuration for the workspace. See Logging Configuration below for details.
+	// +kubebuilder:validation:Optional
+	LoggingConfiguration []LoggingConfigurationParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

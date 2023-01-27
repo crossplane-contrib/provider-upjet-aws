@@ -25,20 +25,18 @@ type DefaultVPCDHCPOptionsObservation struct {
 	// The ID of the DHCP Options Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// List of NETBIOS name servers.
+	NetbiosNameServers *string `json:"netbiosNameServers,omitempty" tf:"netbios_name_servers,omitempty"`
+
+	// The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see RFC 2132.
+	NetbiosNodeType *string `json:"netbiosNodeType,omitempty" tf:"netbios_node_type,omitempty"`
+
 	NtpServers *string `json:"ntpServers,omitempty" tf:"ntp_servers,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type DefaultVPCDHCPOptionsParameters struct {
-
-	// List of NETBIOS name servers.
-	// +kubebuilder:validation:Optional
-	NetbiosNameServers []*string `json:"netbiosNameServers,omitempty" tf:"netbios_name_servers,omitempty"`
-
-	// The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see RFC 2132.
-	// +kubebuilder:validation:Optional
-	NetbiosNodeType *string `json:"netbiosNodeType,omitempty" tf:"netbios_node_type,omitempty"`
 
 	// The ID of the AWS account that owns the DHCP options set.
 	// +kubebuilder:validation:Optional

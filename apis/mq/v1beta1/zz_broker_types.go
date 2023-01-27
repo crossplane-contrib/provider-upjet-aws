@@ -163,7 +163,7 @@ type EncryptionOptionsParameters struct {
 
 type InstancesObservation struct {
 
-	// The URL of the broker's ActiveMQ Web Console.
+	// The URL of the ActiveMQ Web Console or the RabbitMQ Management UI depending on engine_type.
 	ConsoleURL *string `json:"consoleUrl,omitempty" tf:"console_url,omitempty"`
 
 	// Broker's wire-level protocol endpoints in the following order & format referenceable e.g., as instances.0.endpoints.0 (SSL):

@@ -18,13 +18,13 @@ type DeploymentObservation struct {
 	// Whether the deployment was automatically released.
 	AutoDeployed *bool `json:"autoDeployed,omitempty" tf:"auto_deployed,omitempty"`
 
-	// The deployment identifier.
+	// Deployment identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DeploymentParameters struct {
 
-	// The API identifier.
+	// API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -37,7 +37,7 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The description for the deployment resource. Must be less than or equal to 1024 characters in length.
+	// Description for the deployment resource. Must be less than or equal to 1024 characters in length.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

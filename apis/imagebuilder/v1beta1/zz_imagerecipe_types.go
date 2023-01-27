@@ -38,6 +38,10 @@ type BlockDeviceMappingEBSParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
+	// For GP3 volumes only. The throughput in MiB/s that the volume supports.
+	// +kubebuilder:validation:Optional
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
 	// Size of the volume, in GiB.
 	// +kubebuilder:validation:Optional
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
@@ -135,7 +139,7 @@ type ImageRecipeParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Platform of the image recipe.
+	// The image recipe uses this image as a base from which to build your customized image. The value can be the base image ARN or an AMI ID.
 	// +kubebuilder:validation:Required
 	ParentImage *string `json:"parentImage" tf:"parent_image,omitempty"`
 
@@ -156,7 +160,7 @@ type ImageRecipeParameters struct {
 	// +kubebuilder:validation:Optional
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
 
-	// Version of the image recipe.
+	// The semantic version of the image recipe, which specifies the version in the following format, with numeric values in each position to indicate a specific version: major.minor.patch. For example: 1.0.0.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 

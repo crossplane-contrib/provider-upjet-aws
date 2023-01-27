@@ -15,10 +15,10 @@ import (
 
 type IPSetObservation struct {
 
-	// The Amazon Resource Name (ARN) that identifies the cluster.
+	// The Amazon Resource Name (ARN) of the IP set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A unique identifier for the set.
+	// A unique identifier for the IP set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	LockToken *string `json:"lockToken,omitempty" tf:"lock_token,omitempty"`

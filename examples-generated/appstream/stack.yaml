@@ -26,9 +26,15 @@ spec:
       permission: ENABLED
     - action: CLIPBOARD_COPY_TO_LOCAL_DEVICE
       permission: ENABLED
+    - action: DOMAIN_PASSWORD_SIGNIN
+      permission: ENABLED
+    - action: DOMAIN_SMART_CARD_SIGNIN
+      permission: DISABLED
+    - action: FILE_DOWNLOAD
+      permission: ENABLED
     - action: FILE_UPLOAD
       permission: ENABLED
-    - action: FILE_DOWNLOAD
+    - action: PRINTING_TO_LOCAL_DEVICE
       permission: ENABLED
 
 ---

@@ -70,7 +70,7 @@ spec:
                     type: string
                   roleArn:
                     description: The ARN of an IAM role that grants Amazon CloudWatch
-                      Logs permissions to put data into the target
+                      Logs permissions to put data into the target.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -145,9 +145,14 @@ spec:
                             type: string
                         type: object
                     type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   targetArn:
                     description: The ARN of the target Amazon Kinesis stream resource
-                      for the destination
+                      for the destination.
                     type: string
                   targetArnRef:
                     description: Reference to a Stream in kinesis to populate targetArn.
@@ -407,6 +412,13 @@ spec:
                     type: string
                   id:
                     type: string
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

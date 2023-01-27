@@ -68,14 +68,24 @@ spec:
                     description: ARN of an ACM PCA
                     type: string
                   certificateBody:
-                    description: The certificate's PEM-formatted public key
+                    description: Certificate's PEM-formatted public key
                     type: string
                   certificateChain:
-                    description: The certificate's PEM-formatted chain
+                    description: Certificate's PEM-formatted chain
                     type: string
                   domainName:
-                    description: A domain name for which the certificate should be
-                      issued
+                    description: Domain name for which the certificate should be issued
+                    type: string
+                  earlyRenewalDuration:
+                    description: Amount of time to start automatic renewal process
+                      before expiration. Has no effect if less than 60 days. Represented
+                      by either a subset of RFC 3339 duration supporting years, months,
+                      and days (e.g., P90D), or a string such as 2160h.
+                    type: string
+                  keyAlgorithm:
+                    description: Specifies the algorithm of the public and private
+                      key pair that your Amazon issued certificate uses to encrypt
+                      data. See ACM Certificate characteristics for more details.
                     type: string
                   options:
                     description: Configuration block used to set certificate options.
@@ -83,15 +93,15 @@ spec:
                     items:
                       properties:
                         certificateTransparencyLoggingPreference:
-                          description: Specifies whether certificate details should
-                            be added to a certificate transparency log. Valid values
-                            are ENABLED or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+                          description: Whether certificate details should be added
+                            to a certificate transparency log. Valid values are ENABLED
+                            or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
                             for more details.
                           type: string
                       type: object
                     type: array
                   privateKeySecretRef:
-                    description: The certificate's PEM-formatted private key
+                    description: Certificate's PEM-formatted private key
                     properties:
                       key:
                         description: The key to select.
@@ -131,12 +141,11 @@ spec:
                     items:
                       properties:
                         domainName:
-                          description: A fully qualified domain name (FQDN) in the
-                            certificate.
+                          description: Fully qualified domain name (FQDN) in the certificate.
                           type: string
                         validationDomain:
-                          description: The domain name that you want ACM to use to
-                            send you validation emails. This domain name is the suffix
+                          description: Domain name that you want ACM to use to send
+                            you validation emails. This domain name is the suffix
                             of the email addresses that you want ACM to use. This
                             must be the same as the domain_name value or a superdomain
                             of the domain_name value. For example, if you request
@@ -328,7 +337,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the certificate
+                    description: ARN of the certificate
                     type: string
                   domainValidationOptions:
                     description: Set of domain validation objects which can be used
@@ -337,8 +346,7 @@ spec:
                     items:
                       properties:
                         domainName:
-                          description: A fully qualified domain name (FQDN) in the
-                            certificate.
+                          description: Fully qualified domain name (FQDN) in the certificate.
                           type: string
                         resourceRecordName:
                           description: The name of the DNS record to create to validate
@@ -353,21 +361,53 @@ spec:
                       type: object
                     type: array
                   id:
-                    description: The ARN of the certificate
+                    description: ARN of the certificate
                     type: string
+                  notAfter:
+                    description: Expiration date and time of the certificate.
+                    type: string
+                  notBefore:
+                    description: Start of the validity period of the certificate.
+                    type: string
+                  pendingRenewal:
+                    description: true if a Private certificate eligible for managed
+                      renewal is within the early_renewal_duration period.
+                    type: boolean
+                  renewalEligibility:
+                    description: Whether the certificate is eligible for managed renewal.
+                    type: string
+                  renewalSummary:
+                    description: Contains information about the status of ACM's managed
+                      renewal for the certificate.
+                    items:
+                      properties:
+                        renewalStatus:
+                          description: The status of ACM's managed renewal of the
+                            certificate
+                          type: string
+                        renewalStatusReason:
+                          description: The reason that a renewal request was unsuccessful
+                            or is pending
+                          type: string
+                        updatedAt:
+                          type: string
+                      type: object
+                    type: array
                   status:
                     description: Status of the certificate.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
+                  type:
+                    description: Source of the certificate.
+                    type: string
                   validationEmails:
-                    description: A list of addresses that received a validation E-Mail.
-                      Only set if EMAIL-validation was used.
+                    description: List of addresses that received a validation email.
+                      Only set if EMAIL validation was used.
                     items:
                       type: string
                     type: array

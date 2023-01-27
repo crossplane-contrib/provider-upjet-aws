@@ -8,9 +8,13 @@ metadata:
   name: example
 spec:
   forProvider:
-    domainName: tf-test
-    engineVersion: OpenSearch_1.1
+    clusterConfig:
+    - instanceType: r4.large.search
+    domainName: example
+    engineVersion: Elasticsearch_7.10
     region: us-west-1
+    tags:
+      Domain: TestDomain
 
 ---
 

@@ -21,6 +21,7 @@ spec:
       return: true
       search: true
       sort: true
+      sourceFields: headline
       type: double
     region: us-west-1
     scalingParameters:

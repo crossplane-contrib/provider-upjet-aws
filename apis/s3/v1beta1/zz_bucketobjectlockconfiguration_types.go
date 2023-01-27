@@ -48,8 +48,8 @@ type BucketObjectLockConfigurationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Configuration block for specifying the Object Lock rule for the specified object detailed below.
-	// +kubebuilder:validation:Required
-	Rule []BucketObjectLockConfigurationRuleParameters `json:"rule" tf:"rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Rule []BucketObjectLockConfigurationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// A token to allow Object Lock to be enabled for an existing bucket. You must contact AWS support for the bucket's "Object Lock token".
 	// The token is generated in the back-end when versioning is enabled on a bucket. For more details on versioning, see the aws_s3_bucket_versioning resource.

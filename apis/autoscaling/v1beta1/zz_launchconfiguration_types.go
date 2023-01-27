@@ -27,7 +27,7 @@ type EBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Required
 	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
-	// Whether the volume should be encrypted or not. Do not use this option if you are using snapshot_id as the encrypted flag will be determined by the snapshot. (Default: false).
+	// Whether the volume should be encrypted or not. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
@@ -53,8 +53,7 @@ type EBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
-	// The type of volume. Can be "standard", "gp2", "gp3", "st1", "sc1"
-	// or "io1". (Default: "standard").
+	// The type of volume. Can be standard, gp2, gp3, st1, sc1 or io1.
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -72,9 +71,7 @@ type EphemeralBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	NoDevice *bool `json:"noDevice,omitempty" tf:"no_device,omitempty"`
 
-	// The Instance Store Device
-	// Name
-	// (e.g., "ephemeral0")
+	// The Instance Store Device Name.
 	// +kubebuilder:validation:Optional
 	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
@@ -94,8 +91,7 @@ type LaunchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AssociatePublicIPAddress *bool `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
-	// Additional EBS block devices to attach to the
-	// instance.  See Block Devices below for details.
+	// Additional EBS block devices to attach to the instance. See Block Devices below for details.
 	// +kubebuilder:validation:Optional
 	EBSBlockDevice []EBSBlockDeviceParameters `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
 
@@ -107,13 +103,11 @@ type LaunchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableMonitoring *bool `json:"enableMonitoring,omitempty" tf:"enable_monitoring,omitempty"`
 
-	// Customize Ephemeral (also known as
-	// "Instance Store") volumes on the instance. See Block Devices below for details.
+	// Customize Ephemeral (also known as "Instance Store") volumes on the instance. See Block Devices below for details.
 	// +kubebuilder:validation:Optional
 	EphemeralBlockDevice []EphemeralBlockDeviceParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
-	// The name attribute of the IAM instance profile to associate
-	// with launched instances.
+	// The name attribute of the IAM instance profile to associate with launched instances.
 	// +kubebuilder:validation:Optional
 	IAMInstanceProfile *string `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
 
@@ -133,9 +127,7 @@ type LaunchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	MetadataOptions []MetadataOptionsParameters `json:"metadataOptions,omitempty" tf:"metadata_options,omitempty"`
 
-	// The tenancy of the instance. Valid values are
-	// "default" or "dedicated", see AWS's Create Launch Configuration
-	// for more details
+	// The tenancy of the instance. Valid values are default or dedicated, see AWS's Create Launch Configuration for more details.
 	// +kubebuilder:validation:Optional
 	PlacementTenancy *string `json:"placementTenancy,omitempty" tf:"placement_tenancy,omitempty"`
 
@@ -144,12 +136,10 @@ type LaunchConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Customize details about the root block
-	// device of the instance. See Block Devices below for details.
+	// Customize details about the root block device of the instance. See Block Devices below for details.
 	// +kubebuilder:validation:Optional
 	RootBlockDevice []RootBlockDeviceParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
-	// A list of associated security group IDS.
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
@@ -197,18 +187,15 @@ type RootBlockDeviceObservation struct {
 
 type RootBlockDeviceParameters struct {
 
-	// Whether the volume should be destroyed
-	// on instance termination (Default: true).
+	// Whether the volume should be destroyed on instance termination. Defaults to true.
 	// +kubebuilder:validation:Optional
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
-	// Whether the volume should be encrypted or not. (Default: false).
+	// Whether the volume should be encrypted or not. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	// The amount of provisioned
-	// IOPS.
-	// This must be set with a volume_type of "io1".
+	// The amount of provisioned IOPS. This must be set with a volume_type of io1.
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
@@ -220,8 +207,7 @@ type RootBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
-	// The type of volume. Can be "standard", "gp2", "gp3", "st1", "sc1"
-	// or "io1". (Default: "standard").
+	// The type of volume. Can be standard, gp2, gp3, st1, sc1 or io1.
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }

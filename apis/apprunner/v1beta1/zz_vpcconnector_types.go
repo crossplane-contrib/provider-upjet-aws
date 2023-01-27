@@ -14,12 +14,17 @@ import (
 )
 
 type VPCConnectorObservation struct {
+
+	// ARN of VPC connector.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The current state of the VPC connector. If the status of a connector revision is INACTIVE, it was deleted and can't be used. Inactive connector revisions are permanently removed some time after they are deleted.
+	// Current state of the VPC connector. If the status of a connector revision is INACTIVE, it was deleted and can't be used. Inactive connector revisions are permanently removed some time after they are deleted.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The revision of VPC connector. It's unique among all the active connectors ("Status": "ACTIVE") that share the same Name.
 	VPCConnectorRevision *float64 `json:"vpcConnectorRevision,omitempty" tf:"vpc_connector_revision,omitempty"`
@@ -40,7 +45,7 @@ type VPCConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
-	// A list of IDs of security groups that App Runner should use for access to AWS resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.
+	// List of IDs of security groups that App Runner should use for access to AWS resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
@@ -55,7 +60,7 @@ type VPCConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
 
-	// A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.
+	// List of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
@@ -66,7 +71,7 @@ type VPCConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A name for the VPC connector.
+	// Name for the VPC connector.
 	// +kubebuilder:validation:Required
 	VPCConnectorName *string `json:"vpcConnectorName" tf:"vpc_connector_name,omitempty"`
 }

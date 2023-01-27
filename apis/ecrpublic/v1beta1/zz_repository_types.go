@@ -56,6 +56,9 @@ type RepositoryObservation struct {
 
 	// The URI of the repository.
 	RepositoryURI *string `json:"repositoryUri,omitempty" tf:"repository_uri,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type RepositoryParameters struct {
@@ -71,6 +74,10 @@ type RepositoryParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // RepositorySpec defines the desired state of Repository

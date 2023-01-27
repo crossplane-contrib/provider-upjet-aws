@@ -101,9 +101,9 @@ spec:
                       override the OpenAPI value.
                     type: string
                   disableExecuteApiEndpoint:
-                    description: Specifies whether clients can invoke your API by
-                      using the default execute-api endpoint. By default, clients
-                      can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com
+                    description: Whether clients can invoke your API by using the
+                      default execute-api endpoint. By default, clients can invoke
+                      your API with the default https://{api_id}.execute-api.{region}.amazonaws.com
                       endpoint. To require that clients use a custom domain name to
                       invoke your API, disable the default endpoint. Defaults to false.
                       If importing an OpenAPI specification via the body argument,
@@ -118,12 +118,15 @@ spec:
                     items:
                       properties:
                         types:
-                          description: 'A list of endpoint types. This resource currently
+                          description: 'List of endpoint types. This resource currently
                             only supports managing a single value. Valid values: EDGE,
                             REGIONAL or PRIVATE. If unspecified, defaults to EDGE.
                             Must be declared as REGIONAL in non-Commercial partitions.
-                            Refer to the documentation for more information on the
-                            difference between edge-optimized and regional APIs.'
+                            If set to PRIVATE recommend to set put_rest_api_mode =
+                            merge to not cause the endpoints and associated Route53
+                            records to be deleted. Refer to the documentation for
+                            more information on the difference between edge-optimized
+                            and regional APIs.'
                           items:
                             type: string
                           type: array
@@ -167,6 +170,16 @@ spec:
                       documentation, including other parameters such as basepath,
                       can be found in the API Gateway Developer Guide.
                     type: object
+                  putRestApiMode:
+                    description: Mode of the PutRestApi operation when importing an
+                      OpenAPI specification via the body argument (create or update
+                      operation). Valid values are merge and overwrite. If unspecificed,
+                      defaults to overwrite (for backwards compatibility). This corresponds
+                      to the x-amazon-apigateway-put-integration-method extension.
+                      If the argument value is provided and is different than the
+                      OpenAPI value, the argument value will override the OpenAPI
+                      value.
+                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -357,24 +370,24 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN)
+                    description: ARN
                     type: string
                   createdDate:
-                    description: The creation date of the REST API
+                    description: Creation date of the REST API
                     type: string
                   executionArn:
-                    description: The execution ARN part to be used in lambda_permission's
+                    description: Execution ARN part to be used in lambda_permission's
                       source_arn when allowing API Gateway to invoke a Lambda function,
                       e.g., arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j,
                       which can be concatenated with allowed stage, method and resource
                       path.
                     type: string
                   id:
-                    description: The ID of the REST API
+                    description: ID of the REST API
                     type: string
                   policy:
                     description: JSON formatted policy document that controls access
-                      to the API Gateway. It is recommended to use the aws_api_gateway_rest_api_policy
+                      to the API Gateway. We recommend using the aws_api_gateway_rest_api_policy
                       resource instead. If importing an OpenAPI specification via
                       the body argument, this corresponds to the x-amazon-apigateway-policy
                       extension. If the argument value is provided and is different
@@ -382,14 +395,13 @@ spec:
                       OpenAPI value.
                     type: string
                   rootResourceId:
-                    description: The resource ID of the REST API's root
+                    description: Resource ID of the REST API's root
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

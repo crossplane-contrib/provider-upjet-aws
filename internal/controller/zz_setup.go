@@ -339,6 +339,7 @@ import (
 	vpcendpoint "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpoint"
 	vpcendpointconnectionnotification "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointconnectionnotification"
 	vpcendpointroutetableassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointroutetableassociation"
+	vpcendpointsecuritygroupassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointsecuritygroupassociation"
 	vpcendpointservice "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointservice"
 	vpcendpointserviceallowedprincipal "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointserviceallowedprincipal"
 	vpcendpointsubnetassociation "github.com/upbound/provider-aws/internal/controller/ec2/vpcendpointsubnetassociation"
@@ -571,6 +572,23 @@ import (
 	domainopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domain"
 	domainpolicy "github.com/upbound/provider-aws/internal/controller/opensearch/domainpolicy"
 	domainsamloptions "github.com/upbound/provider-aws/internal/controller/opensearch/domainsamloptions"
+	applicationopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/application"
+	customlayer "github.com/upbound/provider-aws/internal/controller/opsworks/customlayer"
+	ecsclusterlayer "github.com/upbound/provider-aws/internal/controller/opsworks/ecsclusterlayer"
+	ganglialayer "github.com/upbound/provider-aws/internal/controller/opsworks/ganglialayer"
+	haproxylayer "github.com/upbound/provider-aws/internal/controller/opsworks/haproxylayer"
+	instanceopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/instance"
+	javaapplayer "github.com/upbound/provider-aws/internal/controller/opsworks/javaapplayer"
+	memcachedlayer "github.com/upbound/provider-aws/internal/controller/opsworks/memcachedlayer"
+	mysqllayer "github.com/upbound/provider-aws/internal/controller/opsworks/mysqllayer"
+	nodejsapplayer "github.com/upbound/provider-aws/internal/controller/opsworks/nodejsapplayer"
+	permissionopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/permission"
+	phpapplayer "github.com/upbound/provider-aws/internal/controller/opsworks/phpapplayer"
+	railsapplayer "github.com/upbound/provider-aws/internal/controller/opsworks/railsapplayer"
+	rdsdbinstance "github.com/upbound/provider-aws/internal/controller/opsworks/rdsdbinstance"
+	stackopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/stack"
+	staticweblayer "github.com/upbound/provider-aws/internal/controller/opsworks/staticweblayer"
+	userprofile "github.com/upbound/provider-aws/internal/controller/opsworks/userprofile"
 	accountorganizations "github.com/upbound/provider-aws/internal/controller/organizations/account"
 	delegatedadministrator "github.com/upbound/provider-aws/internal/controller/organizations/delegatedadministrator"
 	organization "github.com/upbound/provider-aws/internal/controller/organizations/organization"
@@ -657,19 +675,33 @@ import (
 	bucketversioning "github.com/upbound/provider-aws/internal/controller/s3/bucketversioning"
 	bucketwebsiteconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketwebsiteconfiguration"
 	object "github.com/upbound/provider-aws/internal/controller/s3/object"
+	objectcopy "github.com/upbound/provider-aws/internal/controller/s3/objectcopy"
 	accesspoints3control "github.com/upbound/provider-aws/internal/controller/s3control/accesspoint"
 	accesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/accesspointpolicy"
 	accountpublicaccessblock "github.com/upbound/provider-aws/internal/controller/s3control/accountpublicaccessblock"
+	multiregionaccesspoint "github.com/upbound/provider-aws/internal/controller/s3control/multiregionaccesspoint"
+	multiregionaccesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/multiregionaccesspointpolicy"
+	objectlambdaaccesspoint "github.com/upbound/provider-aws/internal/controller/s3control/objectlambdaaccesspoint"
+	objectlambdaaccesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/objectlambdaaccesspointpolicy"
+	appsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/app"
 	appimageconfig "github.com/upbound/provider-aws/internal/controller/sagemaker/appimageconfig"
 	coderepository "github.com/upbound/provider-aws/internal/controller/sagemaker/coderepository"
+	devicesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/device"
+	devicefleet "github.com/upbound/provider-aws/internal/controller/sagemaker/devicefleet"
 	domainsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/domain"
+	endpointconfiguration "github.com/upbound/provider-aws/internal/controller/sagemaker/endpointconfiguration"
 	featuregroup "github.com/upbound/provider-aws/internal/controller/sagemaker/featuregroup"
 	imagesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/image"
+	imageversion "github.com/upbound/provider-aws/internal/controller/sagemaker/imageversion"
+	modelsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/model"
 	modelpackagegroup "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegroup"
+	modelpackagegrouppolicy "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegrouppolicy"
 	notebookinstance "github.com/upbound/provider-aws/internal/controller/sagemaker/notebookinstance"
 	notebookinstancelifecycleconfiguration "github.com/upbound/provider-aws/internal/controller/sagemaker/notebookinstancelifecycleconfiguration"
 	studiolifecycleconfig "github.com/upbound/provider-aws/internal/controller/sagemaker/studiolifecycleconfig"
-	userprofile "github.com/upbound/provider-aws/internal/controller/sagemaker/userprofile"
+	userprofilesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/userprofile"
+	workforce "github.com/upbound/provider-aws/internal/controller/sagemaker/workforce"
+	workteam "github.com/upbound/provider-aws/internal/controller/sagemaker/workteam"
 	discoverer "github.com/upbound/provider-aws/internal/controller/schemas/discoverer"
 	registryschemas "github.com/upbound/provider-aws/internal/controller/schemas/registry"
 	schema "github.com/upbound/provider-aws/internal/controller/schemas/schema"
@@ -767,7 +799,11 @@ import (
 	xssmatchsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/xssmatchset"
 	ipsetwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/ipset"
 	regexpatternsetwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/regexpatternset"
-	rulegroupwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/rulegroup"
+	directoryworkspaces "github.com/upbound/provider-aws/internal/controller/workspaces/directory"
+	ipgroup "github.com/upbound/provider-aws/internal/controller/workspaces/ipgroup"
+	encryptionconfig "github.com/upbound/provider-aws/internal/controller/xray/encryptionconfig"
+	groupxray "github.com/upbound/provider-aws/internal/controller/xray/group"
+	samplingrule "github.com/upbound/provider-aws/internal/controller/xray/samplingrule"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -1104,6 +1140,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpcendpoint.Setup,
 		vpcendpointconnectionnotification.Setup,
 		vpcendpointroutetableassociation.Setup,
+		vpcendpointsecuritygroupassociation.Setup,
 		vpcendpointservice.Setup,
 		vpcendpointserviceallowedprincipal.Setup,
 		vpcendpointsubnetassociation.Setup,
@@ -1336,6 +1373,23 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		domainopensearch.Setup,
 		domainpolicy.Setup,
 		domainsamloptions.Setup,
+		applicationopsworks.Setup,
+		customlayer.Setup,
+		ecsclusterlayer.Setup,
+		ganglialayer.Setup,
+		haproxylayer.Setup,
+		instanceopsworks.Setup,
+		javaapplayer.Setup,
+		memcachedlayer.Setup,
+		mysqllayer.Setup,
+		nodejsapplayer.Setup,
+		permissionopsworks.Setup,
+		phpapplayer.Setup,
+		railsapplayer.Setup,
+		rdsdbinstance.Setup,
+		stackopsworks.Setup,
+		staticweblayer.Setup,
+		userprofile.Setup,
 		accountorganizations.Setup,
 		delegatedadministrator.Setup,
 		organization.Setup,
@@ -1422,19 +1476,33 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		bucketversioning.Setup,
 		bucketwebsiteconfiguration.Setup,
 		object.Setup,
+		objectcopy.Setup,
 		accesspoints3control.Setup,
 		accesspointpolicy.Setup,
 		accountpublicaccessblock.Setup,
+		multiregionaccesspoint.Setup,
+		multiregionaccesspointpolicy.Setup,
+		objectlambdaaccesspoint.Setup,
+		objectlambdaaccesspointpolicy.Setup,
+		appsagemaker.Setup,
 		appimageconfig.Setup,
 		coderepository.Setup,
+		devicesagemaker.Setup,
+		devicefleet.Setup,
 		domainsagemaker.Setup,
+		endpointconfiguration.Setup,
 		featuregroup.Setup,
 		imagesagemaker.Setup,
+		imageversion.Setup,
+		modelsagemaker.Setup,
 		modelpackagegroup.Setup,
+		modelpackagegrouppolicy.Setup,
 		notebookinstance.Setup,
 		notebookinstancelifecycleconfiguration.Setup,
 		studiolifecycleconfig.Setup,
-		userprofile.Setup,
+		userprofilesagemaker.Setup,
+		workforce.Setup,
+		workteam.Setup,
 		discoverer.Setup,
 		registryschemas.Setup,
 		schema.Setup,
@@ -1532,7 +1600,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		xssmatchsetwafregional.Setup,
 		ipsetwafv2.Setup,
 		regexpatternsetwafv2.Setup,
-		rulegroupwafv2.Setup,
+		directoryworkspaces.Setup,
+		ipgroup.Setup,
+		encryptionconfig.Setup,
+		groupxray.Setup,
+		samplingrule.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

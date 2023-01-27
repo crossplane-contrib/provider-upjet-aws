@@ -15,13 +15,13 @@ import (
 
 type CertificateObservation struct {
 
-	// Amazon Resource Name (ARN) of the certificate.
+	// ARN of the certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The PEM-encoded certificate value.
+	// PEM-encoded certificate value.
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
-	// The PEM-encoded certificate chain that includes any intermediate certificates and chains up to root CA.
+	// PEM-encoded certificate chain that includes any intermediate certificates and chains up to root CA.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -29,7 +29,7 @@ type CertificateObservation struct {
 
 type CertificateParameters struct {
 
-	// Amazon Resource Name (ARN) of the certificate authority.
+	// ARN of the certificate authority.
 	// +crossplane:generate:reference:type=CertificateAuthority
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
@@ -51,11 +51,12 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Algorithm to use to sign certificate requests. Valid values: SHA256WITHRSA, SHA256WITHECDSA, SHA384WITHRSA, SHA384WITHECDSA, SHA512WITHRSA, SHA512WITHECDSA
+	// Algorithm to use to sign certificate requests. Valid values: SHA256WITHRSA, SHA256WITHECDSA, SHA384WITHRSA, SHA384WITHECDSA, SHA512WITHRSA, SHA512WITHECDSA.
 	// +kubebuilder:validation:Required
 	SigningAlgorithm *string `json:"signingAlgorithm" tf:"signing_algorithm,omitempty"`
 
-	// The template to use when issuing a certificate. See ACM PCA Documentation for more information.
+	// Template to use when issuing a certificate.
+	// See ACM PCA Documentation for more information.
 	// +kubebuilder:validation:Optional
 	TemplateArn *string `json:"templateArn,omitempty" tf:"template_arn,omitempty"`
 

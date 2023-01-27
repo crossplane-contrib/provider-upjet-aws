@@ -106,7 +106,8 @@ spec:
                           additionalProperties:
                             type: string
                           description: Map of environment variables that are accessible
-                            from the function code during execution.
+                            from the function code during execution. If provided at
+                            least one key must be present.
                           type: object
                       type: object
                     type: array
@@ -523,6 +524,18 @@ spec:
                     description: Object version containing the function's deployment
                       package. Conflicts with filename and image_uri.
                     type: string
+                  snapStart:
+                    description: Snap start settings block. Detailed below.
+                    items:
+                      properties:
+                        applyOn:
+                          description: Conditions where snap start is enabled. Valid
+                            values are PublishedVersions.
+                          type: string
+                      required:
+                      - applyOn
+                      type: object
+                    type: array
                   sourceCodeHash:
                     description: Used to trigger updates. Must be set to a base64-encoded
                       SHA256 hash of the package file specified with either filename
@@ -545,8 +558,8 @@ spec:
                     items:
                       properties:
                         mode:
-                          description: Whether to to sample and trace a subset of
-                            incoming requests with AWS X-Ray. Valid values are PassThrough
+                          description: Whether to sample and trace a subset of incoming
+                            requests with AWS X-Ray. Valid values are PassThrough
                             and Active. If PassThrough, Lambda will only trace the
                             request from an upstream service if it contains a tracing
                             header with "sampled=1". If Active, Lambda will respect
@@ -775,12 +788,27 @@ spec:
                     description: ARN identifying your Lambda Function Version (if
                       versioning is enabled via publish = true).
                     type: string
+                  qualifiedInvokeArn:
+                    description: Qualified ARN (ARN with lambda version number) to
+                      be used for invoking Lambda Function from API Gateway - to be
+                      used in aws_api_gateway_integration's uri.
+                    type: string
                   signingJobArn:
                     description: ARN of the signing job.
                     type: string
                   signingProfileVersionArn:
                     description: ARN of the signing profile version.
                     type: string
+                  snapStart:
+                    description: Snap start settings block. Detailed below.
+                    items:
+                      properties:
+                        optimizationStatus:
+                          description: Optimization status of the snap start configuration.
+                            Valid values are On and Off.
+                          type: string
+                      type: object
+                    type: array
                   sourceCodeSize:
                     description: Size in bytes of the function .zip file.
                     type: number

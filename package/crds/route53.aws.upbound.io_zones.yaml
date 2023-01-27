@@ -350,6 +350,9 @@ spec:
                     items:
                       type: string
                     type: array
+                  primaryNameServer:
+                    description: The Route 53 name server that created the SOA record.
+                    type: string
                   tagsAll:
                     additionalProperties:
                       type: string

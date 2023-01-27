@@ -1156,6 +1156,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MultiPartyConferenceEnabled != nil {
+		in, out := &in.MultiPartyConferenceEnabled, &out.MultiPartyConferenceEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.OutboundCallsEnabled != nil {
 		in, out := &in.OutboundCallsEnabled, &out.OutboundCallsEnabled
 		*out = new(bool)

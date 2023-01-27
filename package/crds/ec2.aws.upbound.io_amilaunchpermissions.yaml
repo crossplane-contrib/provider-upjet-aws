@@ -65,14 +65,14 @@ spec:
               forProvider:
                 properties:
                   accountId:
-                    description: The AWS account ID for the launch permission.
+                    description: AWS account ID for the launch permission.
                     type: string
                   group:
-                    description: 'The name of the group for the launch permission.
-                      Valid values: "all".'
+                    description: 'Name of the group for the launch permission. Valid
+                      values: "all".'
                     type: string
                   imageId:
-                    description: The ID of the AMI.
+                    description: ID of the AMI.
                     type: string
                   imageIdRef:
                     description: Reference to a AMI to populate imageId.
@@ -148,11 +148,10 @@ spec:
                         type: object
                     type: object
                   organizationArn:
-                    description: The ARN of an organization for the launch permission.
+                    description: ARN of an organization for the launch permission.
                     type: string
                   organizationalUnitArn:
-                    description: The ARN of an organizational unit for the launch
-                      permission.
+                    description: ARN of an organizational unit for the launch permission.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

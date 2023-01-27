@@ -16,20 +16,20 @@ import (
 type VPCLinkObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The identifier of the VpcLink.
+	// Identifier of the VpcLink.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type VPCLinkParameters struct {
 
-	// The description of the VPC link.
+	// Description of the VPC link.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name used to label and identify the VPC link.
+	// Name used to label and identify the VPC link.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -50,7 +50,7 @@ type VPCLinkParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 
-	// The list of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target.
+	// List of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LB
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +crossplane:generate:reference:refFieldName=TargetArnRefs

@@ -80,7 +80,7 @@ type RecordObservation struct {
 type RecordParameters struct {
 
 	// An alias block. Conflicts with ttl & records.
-	// Alias record documented below.
+	// Documented below.
 	// +kubebuilder:validation:Optional
 	Alias []AliasParameters `json:"alias,omitempty" tf:"alias,omitempty"`
 

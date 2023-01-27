@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiId:
-                    description: The API identifier.
+                    description: API identifier.
                     type: string
                   apiIdRef:
                     description: Reference to a API to populate apiId.
@@ -150,10 +150,10 @@ spec:
                   responseModels:
                     additionalProperties:
                       type: string
-                    description: The response models for the route response.
+                    description: Response models for the route response.
                     type: object
                   routeId:
-                    description: The identifier of the aws_apigatewayv2_route.
+                    description: Identifier of the aws_apigatewayv2_route.
                     type: string
                   routeIdRef:
                     description: Reference to a Route to populate routeId.
@@ -229,7 +229,7 @@ spec:
                         type: object
                     type: object
                   routeResponseKey:
-                    description: The route response key.
+                    description: Route response key.
                     type: string
                 required:
                 - region
@@ -412,7 +412,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The route response identifier.
+                    description: Route response identifier.
                     type: string
                 type: object
               conditions:
