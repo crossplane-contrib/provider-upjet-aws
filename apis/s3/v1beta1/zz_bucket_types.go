@@ -102,10 +102,10 @@ type BucketObservation struct {
 	// Use the resource aws_s3_bucket_website_configuration instead.
 	Website []WebsiteObservation `json:"website,omitempty" tf:"website,omitempty"`
 
-	// The domain of the website endpoint, if the bucket is configured with a website. If not, this will be an empty string. This is used to create Route 53 alias records.
+	// (Deprecated) The domain of the website endpoint, if the bucket is configured with a website. If not, this will be an empty string. This is used to create Route 53 alias records. Use the resource aws_s3_bucket_website_configuration instead.
 	WebsiteDomain *string `json:"websiteDomain,omitempty" tf:"website_domain,omitempty"`
 
-	// The website endpoint, if the bucket is configured with a website. If not, this will be an empty string.
+	// (Deprecated) The website endpoint, if the bucket is configured with a website. If not, this will be an empty string. Use the resource aws_s3_bucket_website_configuration instead.
 	WebsiteEndpoint *string `json:"websiteEndpoint,omitempty" tf:"website_endpoint,omitempty"`
 }
 

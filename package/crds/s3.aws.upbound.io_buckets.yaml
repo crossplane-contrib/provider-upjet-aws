@@ -782,13 +782,16 @@ spec:
                       type: object
                     type: array
                   websiteDomain:
-                    description: The domain of the website endpoint, if the bucket
-                      is configured with a website. If not, this will be an empty
-                      string. This is used to create Route 53 alias records.
+                    description: (Deprecated) The domain of the website endpoint,
+                      if the bucket is configured with a website. If not, this will
+                      be an empty string. This is used to create Route 53 alias records.
+                      Use the resource aws_s3_bucket_website_configuration instead.
                     type: string
                   websiteEndpoint:
-                    description: The website endpoint, if the bucket is configured
-                      with a website. If not, this will be an empty string.
+                    description: (Deprecated) The website endpoint, if the bucket
+                      is configured with a website. If not, this will be an empty
+                      string. Use the resource aws_s3_bucket_website_configuration
+                      instead.
                     type: string
                 type: object
               conditions:
