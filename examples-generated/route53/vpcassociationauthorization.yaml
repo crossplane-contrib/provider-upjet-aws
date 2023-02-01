@@ -30,6 +30,31 @@ spec:
   forProvider:
     name: example.com
     region: us-west-1
+    vpc:
+    - vpcIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+
+---
+
+apiVersion: route53.aws.upbound.io/v1beta1
+kind: ZoneAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/vpcassociationauthorization
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    provider: aws.alternate
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

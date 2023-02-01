@@ -601,8 +601,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Z1D633PJN98FT9
 	"aws_route53_zone": config.IdentifierFromProvider,
 	// Z123456ABCDEFG:vpc-12345678
-	// disabled until it's successfully tested
-	// "aws_route53_zone_association": FormattedIdentifierFromProvider(":", "zone_id", "vpc_id"),
+	"aws_route53_zone_association": FormattedIdentifierFromProvider(":", "zone_id", "vpc_id"),
 	// Imported using the id and version, e.g.,
 	// 01a52019-d16f-422a-ae72-c306d2b6df7e/1
 	"aws_route53_traffic_policy": config.IdentifierFromProvider,
