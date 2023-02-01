@@ -1,6 +1,10 @@
 apiVersion: docdb.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: docdb
   name: my-docdb-cluster
 spec:
   forProvider:
@@ -10,7 +14,22 @@ spec:
     masterPasswordSecretRef:
       key: password
       name: docdb-creds
-      namespace: crossplane-system
+      namespace: upbound-system
     masterUsername: foo
     preferredBackupWindow: 07:00-09:00
     skipFinalSnapshot: true
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: docdb-creds
+  name: docdb-creds
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: "Upboundtest!"

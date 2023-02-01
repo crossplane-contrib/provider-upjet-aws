@@ -1,9 +1,11 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: Instance
 metadata:
-  name: example-dbinstance
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource has a password secret reference."
+    meta.upbound.io/example-id: rds/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: example-dbinstance
+  name: example-dbinstance
 spec:
   forProvider:
     region: us-west-1
@@ -28,3 +30,18 @@ spec:
   writeConnectionSecretToRef:
     name: example-dbinstance-out
     namespace: default
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: example-dbinstance
+  name: example-dbinstance
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: "Upbound!"
