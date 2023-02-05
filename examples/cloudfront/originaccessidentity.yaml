@@ -1,8 +1,0 @@
-apiVersion: cloudfront.aws.upbound.io/v1beta1
-kind: OriginAccessIdentity
-metadata:
-  name: example-origin-access-identity
-spec:
-  forProvider:
-    region: us-west-1
-    comment: Some comment

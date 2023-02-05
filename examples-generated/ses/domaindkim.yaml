@@ -12,29 +12,6 @@ spec:
 
 ---
 
-apiVersion: route53.aws.upbound.io/v1beta1
-kind: Record
-metadata:
-  annotations:
-    meta.upbound.io/example-id: ses/v1beta1/domaindkim
-  labels:
-    testing.upbound.io/example-name: example_amazonses_dkim_record
-  name: example-amazonses-dkim-record
-spec:
-  forProvider:
-    count: 3
-    name: ${aws_ses_domain_dkim.example.dkim_tokens[count.index]}._domainkey
-    records:
-    - ${aws_ses_domain_dkim.example.dkim_tokens[count.index]}.dkim.amazonses.com
-    region: us-west-1
-    ttl: "600"
-    type: CNAME
-    zoneIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-
----
-
 apiVersion: ses.aws.upbound.io/v1beta1
 kind: DomainIdentity
 metadata:

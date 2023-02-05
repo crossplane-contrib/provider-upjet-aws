@@ -14,7 +14,7 @@ import (
 	"github.com/upbound/upjet/pkg/types/comments"
 	"github.com/upbound/upjet/pkg/types/name"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/dkb-bank/official-provider-aws/config/common"
 )
 
 // RegionAddition adds region to the spec of all resources except iam group which
@@ -101,56 +101,56 @@ func KnownReferencers() config.ResourceOption { //nolint:gocyclo
 			switch {
 			case strings.HasSuffix(k, "role_arn"):
 				r.References[k] = config.Reference{
-					Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
+					Type:      "github.com/dkb-bank/official-provider-aws/apis/iam/v1beta1.Role",
 					Extractor: common.PathARNExtractor,
 				}
 			case strings.HasSuffix(k, "security_group_ids"):
 				r.References[k] = config.Reference{
-					Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+					Type:              "github.com/dkb-bank/official-provider-aws/apis/ec2/v1beta1.SecurityGroup",
 					RefFieldName:      name.NewFromSnake(strings.TrimSuffix(k, "s")).Camel + "Refs",
 					SelectorFieldName: name.NewFromSnake(strings.TrimSuffix(k, "s")).Camel + "Selector",
 				}
 			case r.ShortGroup == "glue" && k == "database_name":
 				r.References["database_name"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase",
+					Type: "github.com/dkb-bank/official-provider-aws/apis/glue/v1beta1.CatalogDatabase",
 				}
 			}
 			switch k {
 			case "vpc_id":
 				r.References["vpc_id"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC",
+					Type: "github.com/dkb-bank/official-provider-aws/apis/ec2/v1beta1.VPC",
 				}
 			case "subnet_ids":
 				r.References["subnet_ids"] = config.Reference{
-					Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+					Type:              "github.com/dkb-bank/official-provider-aws/apis/ec2/v1beta1.Subnet",
 					RefFieldName:      "SubnetIDRefs",
 					SelectorFieldName: "SubnetIDSelector",
 				}
 			case "subnet_id":
 				r.References["subnet_id"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+					Type: "github.com/dkb-bank/official-provider-aws/apis/ec2/v1beta1.Subnet",
 				}
 			case "iam_roles":
 				r.References["iam_roles"] = config.Reference{
-					Type:              "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
+					Type:              "github.com/dkb-bank/official-provider-aws/apis/iam/v1beta1.Role",
 					RefFieldName:      "IAMRoleRefs",
 					SelectorFieldName: "IAMRoleSelector",
 				}
 			case "security_group_id":
 				r.References["security_group_id"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+					Type: "github.com/dkb-bank/official-provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				}
 			case "kms_key_id":
 				r.References["kms_key_id"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+					Type: "github.com/dkb-bank/official-provider-aws/apis/kms/v1beta1.Key",
 				}
 			case "kms_key_arn":
 				r.References["kms_key_arn"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+					Type: "github.com/dkb-bank/official-provider-aws/apis/kms/v1beta1.Key",
 				}
 			case "kms_key":
 				r.References["kms_key"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+					Type: "github.com/dkb-bank/official-provider-aws/apis/kms/v1beta1.Key",
 				}
 			}
 		}

@@ -9,9 +9,6 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/provider-aws/apis/firehose/v1beta1"
-	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -65,61 +62,6 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.ConfigurationSetName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ConfigurationSetNameRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.KinesisDestination); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KinesisDestination[i3].RoleArn),
-			Extract:      resource.ExtractParamPath("arn", true),
-			Reference:    mg.Spec.ForProvider.KinesisDestination[i3].RoleArnRef,
-			Selector:     mg.Spec.ForProvider.KinesisDestination[i3].RoleArnSelector,
-			To: reference.To{
-				List:    &v1beta1.RoleList{},
-				Managed: &v1beta1.Role{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.KinesisDestination[i3].RoleArn")
-		}
-		mg.Spec.ForProvider.KinesisDestination[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.KinesisDestination[i3].RoleArnRef = rsp.ResolvedReference
-
-	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.KinesisDestination); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KinesisDestination[i3].StreamArn),
-			Extract:      resource.ExtractParamPath("arn", false),
-			Reference:    mg.Spec.ForProvider.KinesisDestination[i3].StreamArnRef,
-			Selector:     mg.Spec.ForProvider.KinesisDestination[i3].StreamArnSelector,
-			To: reference.To{
-				List:    &v1beta11.DeliveryStreamList{},
-				Managed: &v1beta11.DeliveryStream{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.KinesisDestination[i3].StreamArn")
-		}
-		mg.Spec.ForProvider.KinesisDestination[i3].StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.KinesisDestination[i3].StreamArnRef = rsp.ResolvedReference
-
-	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.SnsDestination); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnsDestination[i3].TopicArn),
-			Extract:      resource.ExtractParamPath("arn", true),
-			Reference:    mg.Spec.ForProvider.SnsDestination[i3].TopicArnRef,
-			Selector:     mg.Spec.ForProvider.SnsDestination[i3].TopicArnSelector,
-			To: reference.To{
-				List:    &v1beta12.TopicList{},
-				Managed: &v1beta12.Topic{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.SnsDestination[i3].TopicArn")
-		}
-		mg.Spec.ForProvider.SnsDestination[i3].TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.SnsDestination[i3].TopicArnRef = rsp.ResolvedReference
-
-	}
-
 	return nil
 }
 
@@ -145,22 +87,6 @@ func (mg *IdentityNotificationTopic) ResolveReferences(ctx context.Context, c cl
 	}
 	mg.Spec.ForProvider.Identity = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IdentityRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TopicArn),
-		Extract:      resource.ExtractParamPath("arn", true),
-		Reference:    mg.Spec.ForProvider.TopicArnRef,
-		Selector:     mg.Spec.ForProvider.TopicArnSelector,
-		To: reference.To{
-			List:    &v1beta12.TopicList{},
-			Managed: &v1beta12.Topic{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.TopicArn")
-	}
-	mg.Spec.ForProvider.TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.TopicArnRef = rsp.ResolvedReference
 
 	return nil
 }

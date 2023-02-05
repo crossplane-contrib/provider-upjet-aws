@@ -1,8 +1,0 @@
-apiVersion: lakeformation.aws.upbound.io/v1beta1
-kind: Resource
-metadata:
-  name: example
-spec:
-  forProvider:
-    region: us-west-1
-    arn: ${resource.arn}

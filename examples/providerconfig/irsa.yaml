@@ -1,7 +1,0 @@
-apiVersion: aws.upbound.io/v1beta1
-kind: ProviderConfig
-metadata:
-  name: irsa
-spec:
-  credentials:
-    source: IRSA

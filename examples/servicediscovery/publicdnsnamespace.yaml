@@ -1,9 +1,0 @@
-apiVersion: servicediscovery.aws.upbound.io/v1beta1
-kind: PublicDNSNamespace
-metadata:
-  name: example
-spec:
-  forProvider:
-    description: example
-    name: upbound.example.com
-    region: us-west-1

@@ -28,8 +28,8 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 
-	"github.com/upbound/provider-aws/apis/v1beta1"
-	"github.com/upbound/provider-aws/internal/version"
+	"github.com/dkb-bank/official-provider-aws/apis/v1beta1"
+	"github.com/dkb-bank/official-provider-aws/internal/version"
 )
 
 const (

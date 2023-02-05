@@ -1,7 +1,0 @@
-apiVersion: iam.aws.upbound.io/v1beta1
-kind: ServiceLinkedRole
-metadata:
-  name: example
-spec:
-  forProvider:
-    awsServiceName: elasticbeanstalk.amazonaws.com

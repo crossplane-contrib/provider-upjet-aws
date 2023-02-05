@@ -4,4 +4,4 @@ kind: Provider
 metadata:
   name: provider-aws
 spec:
-  package: upbound/provider-aws:main
+  package: platformdkbcf/official-provider-aws:main

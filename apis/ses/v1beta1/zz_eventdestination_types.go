@@ -47,7 +47,7 @@ type EventDestinationParameters struct {
 	CloudwatchDestination []CloudwatchDestinationParameters `json:"cloudwatchDestination,omitempty" tf:"cloudwatch_destination,omitempty"`
 
 	// The name of the configuration set
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ses/v1beta1.ConfigurationSet
+	// +crossplane:generate:reference:type=github.com/dkb-bank/official-provider-aws/apis/ses/v1beta1.ConfigurationSet
 	// +kubebuilder:validation:Optional
 	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
 
@@ -87,32 +87,12 @@ type KinesisDestinationObservation struct {
 type KinesisDestinationParameters struct {
 
 	// The ARN of the role that has permissions to access the Kinesis Stream
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
-	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
-
-	// Reference to a Role in iam to populate roleArn.
-	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
-
-	// Selector for a Role in iam to populate roleArn.
-	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 
 	// The ARN of the Kinesis Stream
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
-	// +kubebuilder:validation:Optional
-	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
-
-	// Reference to a DeliveryStream in firehose to populate streamArn.
-	// +kubebuilder:validation:Optional
-	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
-
-	// Selector for a DeliveryStream in firehose to populate streamArn.
-	// +kubebuilder:validation:Optional
-	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	StreamArn *string `json:"streamArn" tf:"stream_arn,omitempty"`
 }
 
 type SnsDestinationObservation struct {
@@ -121,18 +101,8 @@ type SnsDestinationObservation struct {
 type SnsDestinationParameters struct {
 
 	// The ARN of the SNS topic
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
-	// +kubebuilder:validation:Optional
-	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
-
-	// Reference to a Topic in sns to populate topicArn.
-	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
-
-	// Selector for a Topic in sns to populate topicArn.
-	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	TopicArn *string `json:"topicArn" tf:"topic_arn,omitempty"`
 }
 
 // EventDestinationSpec defines the desired state of EventDestination

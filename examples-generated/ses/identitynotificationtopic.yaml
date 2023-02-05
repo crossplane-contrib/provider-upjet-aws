@@ -14,9 +14,7 @@ spec:
     includeOriginalHeaders: true
     notificationType: Bounce
     region: us-west-1
-    topicArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    topicArn: ${aws_sns_topic.example.arn}
 
 ---
 

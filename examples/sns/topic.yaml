@@ -1,9 +1,0 @@
-apiVersion: sns.aws.upbound.io/v1beta1
-kind: Topic
-metadata:
-  name: example
-  labels:
-    testing.upbound.io/example-name: sns
-spec:
-  forProvider:
-    region: us-west-1

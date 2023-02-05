@@ -1,8 +1,8 @@
 # ====================================================================================
 # Setup Project
 
-PROJECT_NAME := provider-aws
-PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
+PROJECT_NAME := official-provider-aws
+PROJECT_REPO := github.com/dkb-bank/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.2.1
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
@@ -39,7 +39,7 @@ GO_TEST_PARALLEL := $(shell echo $$(( $(NPROCS) / 2 )))
 
 # We need to specify which repos might require login for go commands to authorize
 # correctly.
-export GOPRIVATE = github.com/upbound/*
+export GOPRIVATE = github.com/dkb-bank/*
 
 GO_REQUIRED_VERSION ?= 1.19
 GOLANGCILINT_VERSION ?= 1.50.0
@@ -68,10 +68,10 @@ IMAGES = provider-aws
 # ====================================================================================
 # Setup XPKG
 
-XPKG_REG_ORGS ?= xpkg.upbound.io/upbound
+XPKG_REG_ORGS ?= index.docker.io/platformdkbcf
 # NOTE(hasheddan): skip promoting on xpkg.upbound.io as channel tags are
 # inferred.
-XPKG_REG_ORGS_NO_PROMOTE ?= xpkg.upbound.io/upbound
+XPKG_REG_ORGS_NO_PROMOTE ?= xpkg.upbound.io/dkb-bank
 XPKGS = provider-aws
 -include build/makelib/xpkg.mk
 

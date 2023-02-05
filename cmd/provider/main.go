@@ -18,6 +18,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	tjcontroller "github.com/upbound/upjet/pkg/controller"
 	"github.com/upbound/upjet/pkg/terraform"
+	"go.uber.org/zap/zapcore"
 	"gopkg.in/alecthomas/kingpin.v2"
 	kerrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -25,12 +26,12 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	"github.com/upbound/provider-aws/apis"
-	"github.com/upbound/provider-aws/apis/v1alpha1"
-	"github.com/upbound/provider-aws/config"
-	"github.com/upbound/provider-aws/internal/clients"
-	"github.com/upbound/provider-aws/internal/controller"
-	"github.com/upbound/provider-aws/internal/features"
+	"github.com/dkb-bank/official-provider-aws/apis"
+	"github.com/dkb-bank/official-provider-aws/apis/v1alpha1"
+	"github.com/dkb-bank/official-provider-aws/config"
+	"github.com/dkb-bank/official-provider-aws/internal/clients"
+	"github.com/dkb-bank/official-provider-aws/internal/controller"
+	"github.com/dkb-bank/official-provider-aws/internal/features"
 )
 
 func main() {
@@ -52,7 +53,7 @@ func main() {
 
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 
-	zl := zap.New(zap.UseDevMode(*debug))
+	zl := zap.New(zap.UseDevMode(*debug), UseISO8601())
 	log := logging.NewLogrLogger(zl.WithName("provider-aws"))
 	if *debug {
 		// The controller-runtime runs with a no-op logger by default. It is
@@ -124,4 +125,11 @@ func main() {
 
 	kingpin.FatalIfError(controller.Setup(mgr, o), "Cannot setup AWS controllers")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
+}
+
+// UseISO8601 sets the logger to use ISO8601 timestamp format
+func UseISO8601() zap.Opts {
+	return func(o *zap.Options) {
+		o.TimeEncoder = zapcore.ISO8601TimeEncoder
+	}
 }

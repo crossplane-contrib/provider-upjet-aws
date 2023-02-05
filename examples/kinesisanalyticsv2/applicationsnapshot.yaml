@@ -1,8 +1,0 @@
-apiVersion: kinesisanalyticsv2.aws.upbound.io/v1beta1
-kind: ApplicationSnapshot
-metadata:
-  name: example
-spec:
-  forProvider:
-    region: us-west-1
-    applicationName: example-application

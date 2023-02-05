@@ -1,9 +1,0 @@
-apiVersion: dynamodb.aws.upbound.io/v1beta1
-kind: ContributorInsights
-metadata:
-  name: example
-spec:
-  forProvider:
-    region: us-west-1
-    tableNameRef: 
-      name: example
