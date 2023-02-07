@@ -6,6 +6,8 @@ package rds
 
 import (
 	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure adds configurations for rds group.
@@ -69,6 +71,10 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_db_instance", func(r *config.Resource) {
 		r.References["db_subnet_group_name"] = config.Reference{
 			Type: "SubnetGroup",
+		}
+		r.References["kms_key_id"] = config.Reference{
+			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.UseAsync = true
 		r.LateInitializer = config.LateInitializer{
