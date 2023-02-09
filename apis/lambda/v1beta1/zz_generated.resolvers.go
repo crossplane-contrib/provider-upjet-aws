@@ -9,13 +9,14 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1beta15 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/efs/v1beta1"
 	v1beta13 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta12 "github.com/upbound/provider-aws/apis/kms/v1beta1"
 	v1beta14 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/signer/v1beta1"
-	v1beta16 "github.com/upbound/provider-aws/apis/sns/v1beta1"
-	v1beta15 "github.com/upbound/provider-aws/apis/sqs/v1beta1"
+	v1beta17 "github.com/upbound/provider-aws/apis/sns/v1beta1"
+	v1beta16 "github.com/upbound/provider-aws/apis/sqs/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -107,6 +108,7 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.FileSystemConfig); i3++ {
@@ -175,6 +177,25 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.S3Bucket = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.S3BucketRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCConfig); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDRefs,
+			Selector:      mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDSelector,
+			To: reference.To{
+				List:    &v1beta15.SecurityGroupList{},
+				Managed: &v1beta15.SecurityGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIds")
+		}
+		mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	}
+
 	return nil
 }
 
@@ -193,8 +214,8 @@ func (mg *FunctionEventInvokeConfig) ResolveReferences(ctx context.Context, c cl
 				Reference:    mg.Spec.ForProvider.DestinationConfig[i3].OnFailure[i4].DestinationRef,
 				Selector:     mg.Spec.ForProvider.DestinationConfig[i3].OnFailure[i4].DestinationSelector,
 				To: reference.To{
-					List:    &v1beta15.QueueList{},
-					Managed: &v1beta15.Queue{},
+					List:    &v1beta16.QueueList{},
+					Managed: &v1beta16.Queue{},
 				},
 			})
 			if err != nil {
@@ -213,8 +234,8 @@ func (mg *FunctionEventInvokeConfig) ResolveReferences(ctx context.Context, c cl
 				Reference:    mg.Spec.ForProvider.DestinationConfig[i3].OnSuccess[i4].DestinationRef,
 				Selector:     mg.Spec.ForProvider.DestinationConfig[i3].OnSuccess[i4].DestinationSelector,
 				To: reference.To{
-					List:    &v1beta16.TopicList{},
-					Managed: &v1beta16.Topic{},
+					List:    &v1beta17.TopicList{},
+					Managed: &v1beta17.Topic{},
 				},
 			})
 			if err != nil {
