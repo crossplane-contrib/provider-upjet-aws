@@ -82,7 +82,9 @@ spec:
       viewerProtocolPolicy: redirect-to-https
     origin:
     - domainName: ${aws_s3_bucket.b.bucket_regional_domain_name}
-      originAccessControlId: ${aws_cloudfront_origin_access_control.default.id}
+      originAccessControlIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: default
       originId: ${local.s3_origin_id}
     priceClass: PriceClass_200
     region: us-west-1

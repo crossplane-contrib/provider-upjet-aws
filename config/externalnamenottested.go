@@ -655,18 +655,11 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// ce
 	//
-	// aws_ce_anomaly_monitor can be imported using the id
-	"aws_ce_anomaly_monitor": config.IdentifierFromProvider,
 	// aws_ce_anomaly_subscription can be imported using the id
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_ce_anomaly_subscription": config.IdentifierFromProvider,
 	// aws_ce_cost_allocation_tag can be imported using the id
 	"aws_ce_cost_allocation_tag": config.ParameterAsIdentifier("tag_key"),
-
-	// cloudfront
-	//
-	// CloudFront Origin Access Control can be imported using the id
-	"aws_cloudfront_origin_access_control": config.IdentifierFromProvider,
 
 	// cloudwatch
 	//

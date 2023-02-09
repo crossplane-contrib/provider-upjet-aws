@@ -773,8 +773,18 @@ type OriginParameters struct {
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
 	// The unique identifier of a CloudFront origin access control for this origin.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.OriginAccessControl
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OriginAccessControlID *string `json:"originAccessControlId,omitempty" tf:"origin_access_control_id,omitempty"`
+
+	// Reference to a OriginAccessControl in cloudfront to populate originAccessControlId.
+	// +kubebuilder:validation:Optional
+	OriginAccessControlIDRef *v1.Reference `json:"originAccessControlIdRef,omitempty" tf:"-"`
+
+	// Selector for a OriginAccessControl in cloudfront to populate originAccessControlId.
+	// +kubebuilder:validation:Optional
+	OriginAccessControlIDSelector *v1.Selector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
 
 	// A unique identifier for the origin.
 	// +kubebuilder:validation:Required

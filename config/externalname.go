@@ -725,6 +725,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudfront_realtime_log_config": config.IdentifierFromProvider,
 	// Cloudfront Response Headers Policies can be imported using the id
 	"aws_cloudfront_response_headers_policy": config.IdentifierFromProvider,
+	// CloudFront Origin Access Control can be imported using the id
+	"aws_cloudfront_origin_access_control": config.IdentifierFromProvider,
 
 	// resource groups
 
@@ -1762,6 +1764,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_dms_replication_subnet_group": config.ParameterAsIdentifier("replication_subnet_group_id"),
 	// Replication tasks can be imported using the replication_task_id
 	"aws_dms_replication_task": config.ParameterAsIdentifier("replication_task_id"),
+
+	// ce
+	//
+	// aws_ce_anomaly_monitor can be imported using the id
+	"aws_ce_anomaly_monitor": config.IdentifierFromProvider,
 
 	// ds
 	//

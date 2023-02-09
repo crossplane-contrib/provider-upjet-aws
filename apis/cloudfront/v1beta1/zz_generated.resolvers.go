@@ -65,6 +65,24 @@ func (mg *Distribution) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Origin); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Origin[i3].OriginAccessControlID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.Origin[i3].OriginAccessControlIDRef,
+			Selector:     mg.Spec.ForProvider.Origin[i3].OriginAccessControlIDSelector,
+			To: reference.To{
+				List:    &OriginAccessControlList{},
+				Managed: &OriginAccessControl{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Origin[i3].OriginAccessControlID")
+		}
+		mg.Spec.ForProvider.Origin[i3].OriginAccessControlID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Origin[i3].OriginAccessControlIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Origin); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Origin[i3].S3OriginConfig); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Origin[i3].S3OriginConfig[i4].OriginAccessIdentity),
