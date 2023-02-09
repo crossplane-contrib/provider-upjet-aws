@@ -590,4 +590,126 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// aws_imagebuilder_components resources can be imported by using the Amazon Resource Name (ARN)
 	"aws_imagebuilder_component": config.IdentifierFromProvider,
+
+	// accessanalyzer
+	//
+	// AccessAnalyzer ArchiveRule can be imported using the analyzer_name/rule_name
+	"aws_accessanalyzer_archive_rule": config.TemplatedStringAsIdentifier("rule_name", "{{ .parameters.analyzer_name }}/{{ .external_name }}"),
+
+	// acmpca
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_acmpca_permission": config.IdentifierFromProvider,
+	// aws_acmpca_policy can be imported using the resource_arn value
+	// Example: arn:aws:acm-pca:us-east-1:123456789012:certificate-authority/12345678-1234-1234-1234-123456789012
+	"aws_acmpca_policy": config.IdentifierFromProvider,
+
+	// appconfig
+	//
+	// AppConfig Extensions can be imported using their extension ID
+	// ID is a provider-generated
+	"aws_appconfig_extension": config.IdentifierFromProvider,
+	// AppConfig Extension Associations can be imported using their extension association ID
+	// ID is a provider-generated
+	"aws_appconfig_extension_association": config.IdentifierFromProvider,
+
+	// applicationinsights
+	//
+	// ApplicationInsights Applications can be imported using the resource_group_name
+	"aws_applicationinsights_application": config.ParameterAsIdentifier("resource_group_name"),
+
+	// apprunner
+	//
+	// App Runner Observability Configuration can be imported by using the arn
+	// Example: arn:aws:apprunner:us-east-1:1234567890:observabilityconfiguration/example/1/d75bc7ea55b71e724fe5c23452fe22a1
+	// TODO: The observability_configuration_name argument looks like a naming field to me, which also appears in the ARN (e.g., example in the above example ARN). And we could just use the last component as the external-name here. Check while testing.
+	"aws_apprunner_observability_configuration": config.IdentifierFromProvider,
+	// App Runner VPC Ingress Connection can be imported by using the arn
+	// Example: arn:aws:apprunner:us-west-2:837424938642:vpcingressconnection/example/b379f86381d74825832c2e82080342fa
+	// TODO: We just normalized the external-name but still kept the naming argument spec.forProvider.name. Need further normalization.
+	"aws_apprunner_vpc_ingress_connection": TemplatedStringAsIdentifierWithNoName("arn:aws:apprunner:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:vpcingressconnection/{{ .parameters.name }}/{{ .external_name }}"),
+
+	// appsync
+	//
+	// Appsync Types can be imported using the id (api-id:format:name)
+	// TODO: Need further normalization spec.forProvider
+	"aws_appsync_type": config.TemplatedStringAsIdentifier("", "{{ .parameters.api_id }}:{{ .parameters.format }}:{{ .external_name }}"),
+
+	// auditmanager
+	//
+	// Audit Manager Account Registration resources can be imported using the id
+	"aws_auditmanager_account_registration": config.IdentifierFromProvider,
+	// Audit Manager Assessments can be imported using the assessment id (abc123-de45)
+	// TODO: While testing check is name argument appear in the ID for these resource. If so, then normalize spec.forProvider.name.
+	"aws_auditmanager_assessment": config.IdentifierFromProvider,
+	// Audit Manager Assessment Reports can be imported using the assessment report id (abc123-de45)
+	// TODO: While testing check is name argument appear in the ID for these resource. If so, then normalize spec.forProvider.name.
+	"aws_auditmanager_assessment_report": config.IdentifierFromProvider,
+	// An Audit Manager Control can be imported using the id (abc123-de45)
+	// TODO: While testing check is name argument appear in the ID for these resource. If so, then normalize spec.forProvider.name.
+	"aws_auditmanager_control": config.IdentifierFromProvider,
+	// Audit Manager Framework can be imported using the framework id (abc123-de45)
+	// TODO: While testing check is name argument appear in the ID for these resource. If so, then normalize spec.forProvider.name.
+	"aws_auditmanager_framework": config.IdentifierFromProvider,
+
+	// ce
+	//
+	// aws_ce_anomaly_monitor can be imported using the id
+	"aws_ce_anomaly_monitor": config.IdentifierFromProvider,
+	// aws_ce_anomaly_subscription can be imported using the id
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_ce_anomaly_subscription": config.IdentifierFromProvider,
+	// aws_ce_cost_allocation_tag can be imported using the id
+	"aws_ce_cost_allocation_tag": config.ParameterAsIdentifier("tag_key"),
+
+	// cloudfront
+	//
+	// CloudFront Origin Access Control can be imported using the id
+	"aws_cloudfront_origin_access_control": config.IdentifierFromProvider,
+
+	// cloudwatch
+	//
+	// This resource can be imported using the log_group_name
+	"aws_cloudwatch_log_data_protection_policy": config.ParameterAsIdentifier("log_group_name"),
+
+	// codepipeline
+	//
+	// CodeDeploy CustomActionType can be imported using the id
+	"aws_codepipeline_custom_action_type": config.IdentifierFromProvider,
+
+	// cognito
+	//
+	// Cognito Risk Configurations can be imported using the id
+	"aws_cognito_risk_configuration": config.IdentifierFromProvider,
+
+	// comprehend
+	//
+	// Comprehend Document Classifier can be imported using the ARN
+	// Example: arn:aws:comprehend:us-west-2:123456789012:document_classifier/example
+	"aws_comprehend_document_classifier": config.TemplatedStringAsIdentifier("name", "arn:aws:comprehend:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:document_classifier/{{ .external_name }}"),
+	// Comprehend Entity Recognizer can be imported using the ARN
+	// Example: arn:aws:comprehend:us-west-2:123456789012:entity-recognizer/example
+	"aws_comprehend_entity_recognizer": config.TemplatedStringAsIdentifier("name", "arn:aws:comprehend:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:entity-recognizer/{{ .external_name }}"),
+
+	// connect
+	//
+	// Amazon Connect Instance Storage Configs can be imported using the instance_id, association_id, and resource_type separated by a colon (:)
+	// Example: f1288a1f-6193-445a-b47e-af739b2:c1d4e5f6-1b3c-1b3c-1b3c-c1d4e5f6c1d4e5:CHAT_TRANSCRIPTS
+	// TODO: Check if this configuration works while testing. If no, then use IdentifierFromProvider
+	"aws_connect_instance_storage_config": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }}:{{ .external_name }}:{{ .parameters.resource_type }}"),
+	// Amazon Connect Phone Numbers can be imported using its id
+	"aws_connect_phone_number": config.IdentifierFromProvider,
+	// Amazon Connect Users can be imported using the instance_id and user_id separated by a colon (:)
+	// Example: f1288a1f-6193-445a-b47e-af739b2:c1d4e5f6-1b3c-1b3c-1b3c-c1d4e5f6c1d4e5
+	"aws_connect_user": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }}:{{ .external_name }}"),
+	// Amazon Connect Vocabularies can be imported using the instance_id and vocabulary_id separated by a colon (:)
+	// Example: f1288a1f-6193-445a-b47e-af739b2:c1d4e5f6-1b3c-1b3c-1b3c-c1d4e5f6c1d4e5
+	"aws_connect_vocabulary": config.IdentifierFromProvider,
+
+	// controltower
+	//
+	// Control Tower Controls can be imported using their organizational_unit_arn/control_identifier
+	// Example: arn:aws:organizations::123456789101:ou/o-qqaejywet/ou-qg5o-ufbhdtv3,arn:aws:controltower:us-east-1::control/WTDSMKDKDNLE
+	"aws_controltower_control": config.TemplatedStringAsIdentifier("", "{{ .parameters.target_identifier }},{{ .external_name }}"),
 }
