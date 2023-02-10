@@ -951,6 +951,19 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Lambda Provisioned Concurrency Configs can be imported using the function_name and qualifier separated by a colon (:)
 	"aws_lambda_provisioned_concurrency_config": config.IdentifierFromProvider,
 
+	// location
+	//
+	// Location Geofence Collection can be imported using the collection_name
+	"aws_location_geofence_collection": config.ParameterAsIdentifier("collection_name"),
+	// aws_location_place_index resources can be imported using the place index name
+	"aws_location_place_index": config.ParameterAsIdentifier("index_name"),
+	// aws_location_route_calculator can be imported using the route calculator name
+	"aws_location_route_calculator": config.ParameterAsIdentifier("calculator_name"),
+	// aws_location_tracker resources can be imported using the tracker name
+	"aws_location_tracker": config.ParameterAsIdentifier("tracker_name"),
+	// Location Tracker Association can be imported using the tracker_name|consumer_arn
+	"aws_location_tracker_association": config.IdentifierFromProvider,
+
 	// signer
 	//
 	// Signer signing profiles can be imported using the name
