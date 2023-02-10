@@ -784,6 +784,10 @@ import (
 	patchbaseline "github.com/upbound/provider-aws/internal/controller/ssm/patchbaseline"
 	patchgroup "github.com/upbound/provider-aws/internal/controller/ssm/patchgroup"
 	resourcedatasync "github.com/upbound/provider-aws/internal/controller/ssm/resourcedatasync"
+	accountassignment "github.com/upbound/provider-aws/internal/controller/ssoadmin/accountassignment"
+	managedpolicyattachment "github.com/upbound/provider-aws/internal/controller/ssoadmin/managedpolicyattachment"
+	permissionset "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionset"
+	permissionsetinlinepolicy "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionsetinlinepolicy"
 	domainswf "github.com/upbound/provider-aws/internal/controller/swf/domain"
 	databasetimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/database"
 	tabletimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/table"
@@ -1601,6 +1605,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		patchbaseline.Setup,
 		patchgroup.Setup,
 		resourcedatasync.Setup,
+		accountassignment.Setup,
+		managedpolicyattachment.Setup,
+		permissionset.Setup,
+		permissionsetinlinepolicy.Setup,
 		domainswf.Setup,
 		databasetimestreamwrite.Setup,
 		tabletimestreamwrite.Setup,
