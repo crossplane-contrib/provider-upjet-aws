@@ -51,6 +51,11 @@ func Configure(p *config.Provider) {
 			RefFieldName:      "SecurityGroupIDRefs",
 			SelectorFieldName: "SecurityGroupIDSelector",
 		}
+		r.References["vpc_config.subnet_ids"] = config.Reference{
+			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+			RefFieldName:      "SubnetIDRefs",
+			SelectorFieldName: "SubnetIDSelector",
+		}
 		
 		delete(r.TerraformResource.Schema, "filename")
 	})
