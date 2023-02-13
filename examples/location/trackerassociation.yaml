@@ -1,0 +1,45 @@
+apiVersion: location.aws.upbound.io/v1beta1
+kind: TrackerAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: location/v1beta1/trackerassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    consumerArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-east-1
+    trackerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: location.aws.upbound.io/v1beta1
+kind: GeofenceCollection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: location/v1beta1/trackerassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-east-1
+
+---
+
+apiVersion: location.aws.upbound.io/v1beta1
+kind: Tracker
+metadata:
+  annotations:
+    meta.upbound.io/example-id: location/v1beta1/trackerassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-east-1

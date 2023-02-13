@@ -535,6 +535,11 @@ import (
 	keypairlightsail "github.com/upbound/provider-aws/internal/controller/lightsail/keypair"
 	staticip "github.com/upbound/provider-aws/internal/controller/lightsail/staticip"
 	staticipattachment "github.com/upbound/provider-aws/internal/controller/lightsail/staticipattachment"
+	geofencecollection "github.com/upbound/provider-aws/internal/controller/location/geofencecollection"
+	placeindex "github.com/upbound/provider-aws/internal/controller/location/placeindex"
+	routecalculator "github.com/upbound/provider-aws/internal/controller/location/routecalculator"
+	tracker "github.com/upbound/provider-aws/internal/controller/location/tracker"
+	trackerassociation "github.com/upbound/provider-aws/internal/controller/location/trackerassociation"
 	accountmacie2 "github.com/upbound/provider-aws/internal/controller/macie2/account"
 	classificationjob "github.com/upbound/provider-aws/internal/controller/macie2/classificationjob"
 	customdataidentifier "github.com/upbound/provider-aws/internal/controller/macie2/customdataidentifier"
@@ -1338,6 +1343,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		keypairlightsail.Setup,
 		staticip.Setup,
 		staticipattachment.Setup,
+		geofencecollection.Setup,
+		placeindex.Setup,
+		routecalculator.Setup,
+		tracker.Setup,
+		trackerassociation.Setup,
 		accountmacie2.Setup,
 		classificationjob.Setup,
 		customdataidentifier.Setup,

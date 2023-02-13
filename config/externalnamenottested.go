@@ -902,17 +902,4 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_lightsail_lb_https_redirection_policy": config.ParameterAsIdentifier("lb_name"),
 	// aws_lightsail_lb_stickiness_policy can be imported by using the lb_name attribute
 	"aws_lightsail_lb_stickiness_policy": config.ParameterAsIdentifier("lb_name"),
-
-	// location
-	//
-	// Location Geofence Collection can be imported using the collection_name
-	"aws_location_geofence_collection": config.ParameterAsIdentifier("collection_name"),
-	// aws_location_place_index resources can be imported using the place index name
-	"aws_location_place_index": config.ParameterAsIdentifier("index_name"),
-	// aws_location_route_calculator can be imported using the route calculator name
-	"aws_location_route_calculator": config.ParameterAsIdentifier("calculator_name"),
-	// aws_location_tracker resources can be imported using the tracker name
-	"aws_location_tracker": config.ParameterAsIdentifier("tracker_name"),
-	// Location Tracker Association can be imported using the tracker_name|consumer_arn
-	"aws_location_tracker_association": config.IdentifierFromProvider,
 }
