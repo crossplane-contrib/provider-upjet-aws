@@ -56,7 +56,6 @@ func Configure(p *config.Provider) {
 			RefFieldName:      "SubnetIDRefs",
 			SelectorFieldName: "SubnetIDSelector",
 		}
-		
 		delete(r.TerraformResource.Schema, "filename")
 	})
 
