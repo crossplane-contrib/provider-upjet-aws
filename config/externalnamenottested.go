@@ -552,11 +552,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// transfer
 	//
-	// Transfer SSH Public Key can be imported using the server_id and user_name and ssh_public_key_id separated by /
-	// Example: s-12345678/test-username/key-12345
-	"aws_transfer_ssh_key": config.IdentifierFromProvider,
-	// Transfer Workflows can be imported using the worflow_id
-	"aws_transfer_workflow": config.IdentifierFromProvider,
 	// Transfer Accesses can be imported using the server_id and external_id
 	// Example: s-12345678/S-1-1-12-1234567890-123456789-1234567890-1234
 	"aws_transfer_access": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/{{ .parameters.external_id }}"),
@@ -902,17 +897,4 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_lightsail_lb_https_redirection_policy": config.ParameterAsIdentifier("lb_name"),
 	// aws_lightsail_lb_stickiness_policy can be imported by using the lb_name attribute
 	"aws_lightsail_lb_stickiness_policy": config.ParameterAsIdentifier("lb_name"),
-
-	// location
-	//
-	// Location Geofence Collection can be imported using the collection_name
-	"aws_location_geofence_collection": config.ParameterAsIdentifier("collection_name"),
-	// aws_location_place_index resources can be imported using the place index name
-	"aws_location_place_index": config.ParameterAsIdentifier("index_name"),
-	// aws_location_route_calculator can be imported using the route calculator name
-	"aws_location_route_calculator": config.ParameterAsIdentifier("calculator_name"),
-	// aws_location_tracker resources can be imported using the tracker name
-	"aws_location_tracker": config.ParameterAsIdentifier("tracker_name"),
-	// Location Tracker Association can be imported using the tracker_name|consumer_arn
-	"aws_location_tracker_association": config.IdentifierFromProvider,
 }

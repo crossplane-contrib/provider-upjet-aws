@@ -802,6 +802,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_transfer_server": config.IdentifierFromProvider,
 	// Transfer Users can be imported using the server_id and user_name separated by /
 	"aws_transfer_user": FormattedIdentifierUserDefinedNameLast("user_name", "/", "server_id"),
+	// Transfer SSH Public Key can be imported using the server_id and user_name and ssh_public_key_id separated by /
+	// Example: s-12345678/test-username/key-12345
+	"aws_transfer_ssh_key": config.IdentifierFromProvider,
+	// Transfer Workflows can be imported using the worflow_idgit
+	"aws_transfer_workflow": config.IdentifierFromProvider,
 
 	// dynamodb
 	//
@@ -950,6 +955,19 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_lambda_permission": config.IdentifierFromProvider,
 	// Lambda Provisioned Concurrency Configs can be imported using the function_name and qualifier separated by a colon (:)
 	"aws_lambda_provisioned_concurrency_config": config.IdentifierFromProvider,
+
+	// location
+	//
+	// Location Geofence Collection can be imported using the collection_name
+	"aws_location_geofence_collection": config.ParameterAsIdentifier("collection_name"),
+	// aws_location_place_index resources can be imported using the place index name
+	"aws_location_place_index": config.ParameterAsIdentifier("index_name"),
+	// aws_location_route_calculator can be imported using the route calculator name
+	"aws_location_route_calculator": config.ParameterAsIdentifier("calculator_name"),
+	// aws_location_tracker resources can be imported using the tracker name
+	"aws_location_tracker": config.ParameterAsIdentifier("tracker_name"),
+	// Location Tracker Association can be imported using the tracker_name|consumer_arn
+	"aws_location_tracker_association": config.IdentifierFromProvider,
 
 	// signer
 	//

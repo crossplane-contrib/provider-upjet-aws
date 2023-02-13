@@ -7,8 +7,8 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
-// GetItems of this SSHKeyList.
-func (l *SSHKeyList) GetItems() []resource.Managed {
+// GetItems of this GeofenceCollectionList.
+func (l *GeofenceCollectionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -16,8 +16,8 @@ func (l *SSHKeyList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this ServerList.
-func (l *ServerList) GetItems() []resource.Managed {
+// GetItems of this PlaceIndexList.
+func (l *PlaceIndexList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -25,8 +25,8 @@ func (l *ServerList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this UserList.
-func (l *UserList) GetItems() []resource.Managed {
+// GetItems of this RouteCalculatorList.
+func (l *RouteCalculatorList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -34,8 +34,17 @@ func (l *UserList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this WorkflowList.
-func (l *WorkflowList) GetItems() []resource.Managed {
+// GetItems of this TrackerAssociationList.
+func (l *TrackerAssociationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this TrackerList.
+func (l *TrackerList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
