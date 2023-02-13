@@ -36,6 +36,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// No doc on import, but resource is getting CA ARN:
 	// arn:aws:acm-pca:eu-central-1:609897127049:certificate-authority/ba0c7989-9641-4f36-a033-dee60121d595
 	"aws_acmpca_certificate_authority_certificate": config.IdentifierFromProvider,
+	// No import
+	"aws_acmpca_permission": config.IdentifierFromProvider,
+	// aws_acmpca_policy can be imported using the resource_arn value
+	// Example: arn:aws:acm-pca:us-east-1:123456789012:certificate-authority/12345678-1234-1234-1234-123456789012
+	"aws_acmpca_policy": config.IdentifierFromProvider,
 
 	// amp
 	//
@@ -1275,6 +1280,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_apprunner_service": config.IdentifierFromProvider,
 	// App Runner vpc connector can be imported by using the arn
 	"aws_apprunner_vpc_connector": config.IdentifierFromProvider,
+	// App Runner Observability Configuration can be imported by using the arn
+	// Example: arn:aws:apprunner:us-east-1:1234567890:observabilityconfiguration/example/1/d75bc7ea55b71e724fe5c23452fe22a1
+	"aws_apprunner_observability_configuration": config.IdentifierFromProvider,
 
 	// appstream
 	//
@@ -1347,6 +1355,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Access Analyzer Analyzers can be imported using the analyzer_name
 	"aws_accessanalyzer_analyzer": config.ParameterAsIdentifier("analyzer_name"),
+	// AccessAnalyzer ArchiveRule can be imported using the analyzer_name/rule_name
+	"aws_accessanalyzer_archive_rule": config.TemplatedStringAsIdentifier("rule_name", "{{ .parameters.analyzer_name }}/{{ .external_name }}"),
 
 	// account
 	//
@@ -1632,6 +1642,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_appconfig_hosted_configuration_version": config.IdentifierFromProvider,
 	// AppConfig Deployments can be imported by using the application ID, environment ID, and deployment number separated by a slash (/)
 	"aws_appconfig_deployment": config.IdentifierFromProvider,
+	// AppConfig Extensions can be imported using their extension ID
+	// ID is a provider-generated
+	"aws_appconfig_extension": config.IdentifierFromProvider,
+	// AppConfig Extension Associations can be imported using their extension association ID
+	// ID is a provider-generated
+	"aws_appconfig_extension_association": config.IdentifierFromProvider,
 
 	// appintegrations
 	//
@@ -2287,6 +2303,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_opsworks_permission": config.IdentifierFromProvider,
+
+	// applicationinsights
+	//
+	// ApplicationInsights Applications can be imported using the resource_group_name
+	"aws_applicationinsights_application": config.ParameterAsIdentifier("resource_group_name"),
 }
 
 func lambdaFunctionURL() config.ExternalName {
