@@ -543,10 +543,20 @@ import (
 	slottype "github.com/upbound/provider-aws/internal/controller/lexmodels/slottype"
 	association "github.com/upbound/provider-aws/internal/controller/licensemanager/association"
 	licenseconfiguration "github.com/upbound/provider-aws/internal/controller/licensemanager/licenseconfiguration"
+	bucket "github.com/upbound/provider-aws/internal/controller/lightsail/bucket"
+	certificatelightsail "github.com/upbound/provider-aws/internal/controller/lightsail/certificate"
+	containerservice "github.com/upbound/provider-aws/internal/controller/lightsail/containerservice"
+	disk "github.com/upbound/provider-aws/internal/controller/lightsail/disk"
+	diskattachment "github.com/upbound/provider-aws/internal/controller/lightsail/diskattachment"
 	domainlightsail "github.com/upbound/provider-aws/internal/controller/lightsail/domain"
+	domainentry "github.com/upbound/provider-aws/internal/controller/lightsail/domainentry"
 	instancelightsail "github.com/upbound/provider-aws/internal/controller/lightsail/instance"
 	instancepublicports "github.com/upbound/provider-aws/internal/controller/lightsail/instancepublicports"
 	keypairlightsail "github.com/upbound/provider-aws/internal/controller/lightsail/keypair"
+	lblightsail "github.com/upbound/provider-aws/internal/controller/lightsail/lb"
+	lbattachment "github.com/upbound/provider-aws/internal/controller/lightsail/lbattachment"
+	lbcertificate "github.com/upbound/provider-aws/internal/controller/lightsail/lbcertificate"
+	lbstickinesspolicy "github.com/upbound/provider-aws/internal/controller/lightsail/lbstickinesspolicy"
 	staticip "github.com/upbound/provider-aws/internal/controller/lightsail/staticip"
 	staticipattachment "github.com/upbound/provider-aws/internal/controller/lightsail/staticipattachment"
 	geofencecollection "github.com/upbound/provider-aws/internal/controller/location/geofencecollection"
@@ -674,7 +684,7 @@ import (
 	endpointroute53resolver "github.com/upbound/provider-aws/internal/controller/route53resolver/endpoint"
 	ruleroute53resolver "github.com/upbound/provider-aws/internal/controller/route53resolver/rule"
 	ruleassociation "github.com/upbound/provider-aws/internal/controller/route53resolver/ruleassociation"
-	bucket "github.com/upbound/provider-aws/internal/controller/s3/bucket"
+	buckets3 "github.com/upbound/provider-aws/internal/controller/s3/bucket"
 	bucketaccelerateconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketaccelerateconfiguration"
 	bucketacl "github.com/upbound/provider-aws/internal/controller/s3/bucketacl"
 	bucketanalyticsconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketanalyticsconfiguration"
@@ -1371,10 +1381,20 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		slottype.Setup,
 		association.Setup,
 		licenseconfiguration.Setup,
+		bucket.Setup,
+		certificatelightsail.Setup,
+		containerservice.Setup,
+		disk.Setup,
+		diskattachment.Setup,
 		domainlightsail.Setup,
+		domainentry.Setup,
 		instancelightsail.Setup,
 		instancepublicports.Setup,
 		keypairlightsail.Setup,
+		lblightsail.Setup,
+		lbattachment.Setup,
+		lbcertificate.Setup,
+		lbstickinesspolicy.Setup,
 		staticip.Setup,
 		staticipattachment.Setup,
 		geofencecollection.Setup,
@@ -1502,7 +1522,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		endpointroute53resolver.Setup,
 		ruleroute53resolver.Setup,
 		ruleassociation.Setup,
-		bucket.Setup,
+		buckets3.Setup,
 		bucketaccelerateconfiguration.Setup,
 		bucketacl.Setup,
 		bucketanalyticsconfiguration.Setup,
