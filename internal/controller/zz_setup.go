@@ -120,6 +120,7 @@ import (
 	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
 	budget "github.com/upbound/provider-aws/internal/controller/budgets/budget"
 	budgetaction "github.com/upbound/provider-aws/internal/controller/budgets/budgetaction"
+	anomalymonitor "github.com/upbound/provider-aws/internal/controller/ce/anomalymonitor"
 	voiceconnector "github.com/upbound/provider-aws/internal/controller/chime/voiceconnector"
 	voiceconnectorgroup "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectorgroup"
 	voiceconnectorlogging "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectorlogging"
@@ -139,6 +140,7 @@ import (
 	functioncloudfront "github.com/upbound/provider-aws/internal/controller/cloudfront/function"
 	keygroup "github.com/upbound/provider-aws/internal/controller/cloudfront/keygroup"
 	monitoringsubscription "github.com/upbound/provider-aws/internal/controller/cloudfront/monitoringsubscription"
+	originaccesscontrol "github.com/upbound/provider-aws/internal/controller/cloudfront/originaccesscontrol"
 	originaccessidentity "github.com/upbound/provider-aws/internal/controller/cloudfront/originaccessidentity"
 	originrequestpolicy "github.com/upbound/provider-aws/internal/controller/cloudfront/originrequestpolicy"
 	publickey "github.com/upbound/provider-aws/internal/controller/cloudfront/publickey"
@@ -921,6 +923,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		schedulingpolicy.Setup,
 		budget.Setup,
 		budgetaction.Setup,
+		anomalymonitor.Setup,
 		voiceconnector.Setup,
 		voiceconnectorgroup.Setup,
 		voiceconnectorlogging.Setup,
@@ -940,6 +943,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		functioncloudfront.Setup,
 		keygroup.Setup,
 		monitoringsubscription.Setup,
+		originaccesscontrol.Setup,
 		originaccessidentity.Setup,
 		originrequestpolicy.Setup,
 		publickey.Setup,
