@@ -2,56 +2,7 @@ apiVersion: lambda.aws.upbound.io/v1beta1
 kind: Function
 metadata:
   annotations:
-    meta.upbound.io/example-id: connect/v1beta1/function
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    region: us-east-1
-    environment:
-    - variables:
-        foo: bar
-    s3Bucket: upbound-provider-test-data
-    s3Key: hello-python.zip
-    handler: index.py
-    roleRef:
-      name: sample-role
-    runtime: python3.9
----
-apiVersion: iam.aws.upbound.io/v1beta1
-kind: Role
-metadata:
-  annotations:
-    meta.upbound.io/example-id: connect/v1beta1/function
-  name: sample-role
-  labels:
-    testing.upbound.io/example-name: role
-spec:
-  forProvider:
-    assumeRolePolicy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": "sts:AssumeRole",
-            "Principal": {
-              "Service": "lambda.amazonaws.com"
-            },
-            "Effect": "Allow",
-            "Sid": ""
-          }
-        ]
-      }
----
-
-
-
-apiVersion: lambda.aws.upbound.io/v1beta1
-kind: Function
-metadata:
-  annotations:
-    meta.upbound.io/example-id: connect/v1beta1/function
+    meta.upbound.io/example-id: lambda/v1beta1/function
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -79,7 +30,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
-    meta.upbound.io/example-id: connect/v1beta1/function
+    meta.upbound.io/example-id: lambda/v1beta1/function
   labels:
     testing.upbound.io/example-name: role
   name: sample-role
@@ -104,7 +55,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
   annotations:
-    meta.upbound.io/example-id: connect/v1beta1/function
+    meta.upbound.io/example-id: lambda/v1beta1/function
   labels:
     testing.upbound.io/example-name: policy
   name: sample-user-policy
@@ -126,7 +77,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
-    meta.upbound.io/example-id: connect/v1beta1/function
+    meta.upbound.io/example-id: lambda/v1beta1/function
   name: sample-user-policy-attachment
   labels:
     testing.upbound.io/example-name: policy-attachment
@@ -143,7 +94,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: connect/v1beta1/function
+    meta.upbound.io/example-id: lambda/v1beta1/function
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -161,7 +112,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: connect/v1beta1/function
+    meta.upbound.io/example-id: lambda/v1beta1/function
   labels:
     testing.upbound.io/example-name: example
   name: sample-vpc
@@ -176,7 +127,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
-    meta.upbound.io/example-id: connect/v1beta1/function
+    meta.upbound.io/example-id: lambda/v1beta1/function
   labels:
     testing.upbound.io/example-name: example
   name: sample-subnet1
