@@ -552,11 +552,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// transfer
 	//
-	// Transfer SSH Public Key can be imported using the server_id and user_name and ssh_public_key_id separated by /
-	// Example: s-12345678/test-username/key-12345
-	"aws_transfer_ssh_key": config.IdentifierFromProvider,
-	// Transfer Workflows can be imported using the worflow_id
-	"aws_transfer_workflow": config.IdentifierFromProvider,
 	// Transfer Accesses can be imported using the server_id and external_id
 	// Example: s-12345678/S-1-1-12-1234567890-123456789-1234567890-1234
 	"aws_transfer_access": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/{{ .parameters.external_id }}"),

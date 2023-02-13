@@ -802,6 +802,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_transfer_server": config.IdentifierFromProvider,
 	// Transfer Users can be imported using the server_id and user_name separated by /
 	"aws_transfer_user": FormattedIdentifierUserDefinedNameLast("user_name", "/", "server_id"),
+	// Transfer SSH Public Key can be imported using the server_id and user_name and ssh_public_key_id separated by /
+	// Example: s-12345678/test-username/key-12345
+	"aws_transfer_ssh_key": config.IdentifierFromProvider,
+	// Transfer Workflows can be imported using the worflow_idgit
+	"aws_transfer_workflow": config.IdentifierFromProvider,
 
 	// dynamodb
 	//

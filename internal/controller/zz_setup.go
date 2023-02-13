@@ -781,7 +781,9 @@ import (
 	databasetimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/database"
 	tabletimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/table"
 	server "github.com/upbound/provider-aws/internal/controller/transfer/server"
+	sshkey "github.com/upbound/provider-aws/internal/controller/transfer/sshkey"
 	usertransfer "github.com/upbound/provider-aws/internal/controller/transfer/user"
+	workflowtransfer "github.com/upbound/provider-aws/internal/controller/transfer/workflow"
 	bytematchset "github.com/upbound/provider-aws/internal/controller/waf/bytematchset"
 	geomatchset "github.com/upbound/provider-aws/internal/controller/waf/geomatchset"
 	ipset "github.com/upbound/provider-aws/internal/controller/waf/ipset"
@@ -1589,7 +1591,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		databasetimestreamwrite.Setup,
 		tabletimestreamwrite.Setup,
 		server.Setup,
+		sshkey.Setup,
 		usertransfer.Setup,
+		workflowtransfer.Setup,
 		bytematchset.Setup,
 		geomatchset.Setup,
 		ipset.Setup,
