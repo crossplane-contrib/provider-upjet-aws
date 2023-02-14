@@ -3,6 +3,7 @@ kind: Function
 metadata:
   annotations:
     meta.upbound.io/example-id: lambda/v1beta1/function
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
   name: example
