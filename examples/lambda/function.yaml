@@ -66,7 +66,16 @@ spec:
         "Version": "2012-10-17",
         "Statement": [
           {
-            "Action": "ec2:CreateNetworkInterface",
+            "Action": [
+                "ec2:DescribeVpcEndpoints",
+                "ec2:DescribeRouteTables",
+                "ec2:CreateNetworkInterface",
+                "ec2:DeleteNetworkInterface",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcAttribute",
+                "ec2:DescribeNetworkInterfaces"
+            ],
             "Effect": "Allow",
             "Resource": "*"
           }
@@ -89,6 +98,21 @@ spec:
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: role
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/function
+  labels:
+    testing.upbound.io/example-name: example
+  name: sample-subnet1
+spec:
+  forProvider:
+    region: us-east-1
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
@@ -122,18 +146,3 @@ spec:
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
----
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: Subnet
-metadata:
-  annotations:
-    meta.upbound.io/example-id: lambda/v1beta1/function
-  labels:
-    testing.upbound.io/example-name: example
-  name: sample-subnet1
-spec:
-  forProvider:
-    region: us-east-1
-    vpcIdRef:
-      name: sample-vpc
-    cidrBlock: 172.16.10.0/24
