@@ -124,6 +124,7 @@ var skipList = []string{
 	"aws_iot_authorizer$",              // failure with unknown reason.
 	"aws_location_map$",                // failure with unknown reason.
 	"aws_appflow_connector_profile$",   // failure with unknown reason.
+	"aws_rds_reserved_instance",        // Expense of testing
 }
 
 // GetProvider returns provider configuration

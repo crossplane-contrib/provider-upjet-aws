@@ -865,4 +865,107 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_lightsail_lb_https_redirection_policy": config.ParameterAsIdentifier("lb_name"),
 	// aws_lightsail_lb_stickiness_policy can be imported by using the lb_name attribute
 	"aws_lightsail_lb_stickiness_policy": config.ParameterAsIdentifier("lb_name"),
+
+	// macie2
+	//
+	// aws_macie2_classification_export_configuration can be imported using the account ID and region
+	"aws_macie2_classification_export_configuration": config.IdentifierFromProvider,
+
+	// medialive
+	//
+	// MediaLive Channel can be imported using the channel_id
+	"aws_medialive_channel": config.IdentifierFromProvider,
+	// MediaLive Input can be imported using the id
+	"aws_medialive_input": config.IdentifierFromProvider,
+	// MediaLive InputSecurityGroup can be imported using the id
+	"aws_medialive_input_security_group": config.IdentifierFromProvider,
+	// MediaLive Multiplex can be imported using the id
+	"aws_medialive_multiplex": config.IdentifierFromProvider,
+	// MediaLive MultiplexProgram can be imported using the id, or a combination of "program_name/multiplex_id"
+	"aws_medialive_multiplex_program": config.IdentifierFromProvider,
+
+	// msk
+	//
+	// MSK serverless clusters can be imported using the cluster arn
+	// Example: arn:aws:kafka:us-west-2:123456789012:cluster/example/279c0212-d057-4dba-9aa9-1c4e5a25bfc7-3
+	"aws_msk_serverless_cluster": config.IdentifierFromProvider,
+
+	// neptune
+	//
+	// aws_neptune_global_cluster can be imported by using the Global Cluster identifier
+	"aws_neptune_global_cluster": config.ParameterAsIdentifier("global_cluster_identifier"),
+
+	// networkfirewall
+	//
+	// Network Firewall Firewalls can be imported using their ARN
+	// Example: arn:aws:network-firewall:us-west-1:123456789012:firewall/example
+	"aws_networkfirewall_firewall": config.TemplatedStringAsIdentifier("name", "arn:aws:network-firewall:{{ .setup.configuration.region }}:{{ .setup.configuration.account_id }}:firewall/{{ .external_name }}"),
+
+	// networkmanager
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_networkmanager_attachment_accepter": config.IdentifierFromProvider,
+	// aws_networkmanager_connect_attachment can be imported using the attachment ID
+	"aws_networkmanager_connect_attachment": config.IdentifierFromProvider,
+	// aws_networkmanager_core_network can be imported using the core network ID
+	"aws_networkmanager_core_network": config.IdentifierFromProvider,
+	// aws_networkmanager_site_to_site_vpn_attachment can be imported using the attachment ID
+	"aws_networkmanager_site_to_site_vpn_attachment": config.IdentifierFromProvider,
+	// aws_networkmanager_transit_gateway_peering can be imported using the peering ID
+	"aws_networkmanager_transit_gateway_peering": config.IdentifierFromProvider,
+	// aws_networkmanager_transit_gateway_route_table_attachment can be imported using the attachment ID
+	"aws_networkmanager_transit_gateway_route_table_attachment": config.IdentifierFromProvider,
+	// aws_networkmanager_vpc_attachment can be imported using the attachment ID
+	"aws_networkmanager_vpc_attachment": config.IdentifierFromProvider,
+
+	// opensearch
+	//
+	// AWS Opensearch Inbound Connection Accepters can be imported by using the Inbound Connection ID
+	"aws_opensearch_inbound_connection_accepter": config.ParameterAsIdentifier("connection_id"),
+	// AWS Opensearch Outbound Connections can be imported by using the Outbound Connection ID
+	"aws_opensearch_outbound_connection": config.IdentifierFromProvider,
+
+	// rds
+	//
+	// A RDS (Relational Database) Export Task can be imported using the export_task_identifier
+	"aws_rds_export_task": config.ParameterAsIdentifier("export_task_identifier"),
+	// Due to the expense of testing this resource, we move it to skiplist.
+	// RDS DB Instance Reservations can be imported using the instance_id
+	"aws_rds_reserved_instance": config.IdentifierFromProvider,
+
+	// redshift
+	//
+	// Redshift Authentication Profiles support import by authentication_profile_name
+	"aws_redshift_authentication_profile": config.ParameterAsIdentifier("authentication_profile_name"),
+	// Redshift Cluster IAM Roless can be imported using the cluster_identifier
+	"aws_redshift_cluster_iam_roles": config.ParameterAsIdentifier("cluster_identifier"),
+	// Redshift endpoint access can be imported using the name
+	"aws_redshift_endpoint_access": config.ParameterAsIdentifier("endpoint_name"),
+	// Redshift endpoint authorization can be imported using the id
+	// Example: 01234567910:cluster-example-id
+	"aws_redshift_endpoint_authorization": config.TemplatedStringAsIdentifier("", "{{ .parameters.account }}:{{ .external_name }}"),
+	// Redshift Hsm Client Certificates support import by hsm_client_certificate_identifier
+	"aws_redshift_hsm_client_certificate": config.ParameterAsIdentifier("hsm_client_certificate_identifier"),
+	// Redshift Hsm Client Certificates support import by hsm_configuration_identifier
+	"aws_redshift_hsm_configuration": config.ParameterAsIdentifier("hsm_configuration_identifier"),
+	// Redshift usage limits can be imported using the id
+	// Example: 01234567910:cluster-example-id:example:example
+	"aws_redshift_partner": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.cluster_identifier }}:{{ .external_name }}"),
+	// Redshift usage limits can be imported using the id
+	"aws_redshift_usage_limit": config.IdentifierFromProvider,
+	// Redshift Data Statements can be imported using the id
+	"aws_redshiftdata_statement": config.IdentifierFromProvider,
+	// Redshift Serverless Endpoint Access can be imported using the endpoint_name
+	"aws_redshiftserverless_endpoint_access": config.ParameterAsIdentifier("vpc_endpoint"),
+	// Redshift Serverless Namespaces can be imported using the namespace_name
+	"aws_redshiftserverless_namespace": config.ParameterAsIdentifier("namespace_name"),
+	// Redshift Serverless Resource Policies can be imported using the resource_arn
+	"aws_redshiftserverless_resource_policy": config.ParameterAsIdentifier("resource_arn"),
+	// Redshift Serverless Snapshots can be imported using the snapshot_name
+	"aws_redshiftserverless_snapshot": config.ParameterAsIdentifier("snapshot_name"),
+	// Redshift Serverless Usage Limits can be imported using the id
+	"aws_redshiftserverless_usage_limit": config.IdentifierFromProvider,
+	// Redshift Serverless Workgroups can be imported using the workgroup_name
+	"aws_redshiftserverless_workgroup": config.ParameterAsIdentifier("workgroup_name"),
 }
