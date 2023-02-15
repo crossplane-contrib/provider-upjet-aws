@@ -131,6 +131,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cognito_user": config.TemplatedStringAsIdentifier("username", "{{ .parameters.user_pool_id }}/{{ .external_name }}"),
 	// no doc
 	"aws_cognito_user_in_group": config.IdentifierFromProvider,
+	// Cognito Risk Configurations can be imported using the id
+	"aws_cognito_risk_configuration": config.IdentifierFromProvider,
 
 	// ebs
 	//
@@ -903,7 +905,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// firehose
 	//
-	"aws_kinesis_firehose_delivery_stream": config.TemplatedStringAsIdentifier("name", "arn:aws:firehose:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:deliverystream/{{ .external_name }}"),
+	"aws_kinesis_firehose_delivery_stream": config.IdentifierFromProvider,
 
 	// lakeformation
 	//
@@ -1231,6 +1233,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_codepipeline": config.NameAsIdentifier,
 	// CodePipeline Webhooks can be imported by their ARN: arn:aws:codepipeline:us-west-2:123456789012:webhook:example
 	"aws_codepipeline_webhook": config.TemplatedStringAsIdentifier("name", "arn:aws:codepipeline:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:webhook:{{ .external_name }}"),
+	// CodeDeploy CustomActionType can be imported using the id
+	"aws_codepipeline_custom_action_type": config.IdentifierFromProvider,
 
 	// codestarconnections
 	//
@@ -1269,6 +1273,17 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_connect_security_profile": config.IdentifierFromProvider,
 	// Amazon Connect User Hierarchy Structures can be imported using the instance_id
 	"aws_connect_user_hierarchy_structure": config.IdentifierFromProvider,
+	// Amazon Connect Instance Storage Configs can be imported using the instance_id, association_id, and resource_type separated by a colon (:)
+	// Example: f1288a1f-6193-445a-b47e-af739b2:c1d4e5f6-1b3c-1b3c-1b3c-c1d4e5f6c1d4e5:CHAT_TRANSCRIPTS
+	"aws_connect_instance_storage_config": config.IdentifierFromProvider,
+	// Amazon Connect Phone Numbers can be imported using its id
+	"aws_connect_phone_number": config.IdentifierFromProvider,
+	// Amazon Connect Users can be imported using the instance_id and user_id separated by a colon (:)
+	// Example: f1288a1f-6193-445a-b47e-af739b2:c1d4e5f6-1b3c-1b3c-1b3c-c1d4e5f6c1d4e5
+	"aws_connect_user": config.IdentifierFromProvider,
+	// Amazon Connect Vocabularies can be imported using the instance_id and vocabulary_id separated by a colon (:)
+	// Example: f1288a1f-6193-445a-b47e-af739b2:c1d4e5f6-1b3c-1b3c-1b3c-c1d4e5f6c1d4e5
+	"aws_connect_vocabulary": config.IdentifierFromProvider,
 
 	// apprunner
 	//

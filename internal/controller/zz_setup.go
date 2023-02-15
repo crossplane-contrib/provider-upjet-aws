@@ -182,6 +182,7 @@ import (
 	repository "github.com/upbound/provider-aws/internal/controller/codecommit/repository"
 	trigger "github.com/upbound/provider-aws/internal/controller/codecommit/trigger"
 	codepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/codepipeline"
+	customactiontype "github.com/upbound/provider-aws/internal/controller/codepipeline/customactiontype"
 	webhookcodepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/webhook"
 	connectioncodestarconnections "github.com/upbound/provider-aws/internal/controller/codestarconnections/connection"
 	host "github.com/upbound/provider-aws/internal/controller/codestarconnections/host"
@@ -191,6 +192,7 @@ import (
 	poolrolesattachment "github.com/upbound/provider-aws/internal/controller/cognitoidentity/poolrolesattachment"
 	identityprovider "github.com/upbound/provider-aws/internal/controller/cognitoidp/identityprovider"
 	resourceserver "github.com/upbound/provider-aws/internal/controller/cognitoidp/resourceserver"
+	riskconfiguration "github.com/upbound/provider-aws/internal/controller/cognitoidp/riskconfiguration"
 	usercognitoidp "github.com/upbound/provider-aws/internal/controller/cognitoidp/user"
 	usergroup "github.com/upbound/provider-aws/internal/controller/cognitoidp/usergroup"
 	useringroup "github.com/upbound/provider-aws/internal/controller/cognitoidp/useringroup"
@@ -210,12 +212,16 @@ import (
 	contactflowmodule "github.com/upbound/provider-aws/internal/controller/connect/contactflowmodule"
 	hoursofoperation "github.com/upbound/provider-aws/internal/controller/connect/hoursofoperation"
 	instance "github.com/upbound/provider-aws/internal/controller/connect/instance"
+	instancestorageconfig "github.com/upbound/provider-aws/internal/controller/connect/instancestorageconfig"
 	lambdafunctionassociation "github.com/upbound/provider-aws/internal/controller/connect/lambdafunctionassociation"
+	phonenumber "github.com/upbound/provider-aws/internal/controller/connect/phonenumber"
 	queue "github.com/upbound/provider-aws/internal/controller/connect/queue"
 	quickconnect "github.com/upbound/provider-aws/internal/controller/connect/quickconnect"
 	routingprofile "github.com/upbound/provider-aws/internal/controller/connect/routingprofile"
 	securityprofile "github.com/upbound/provider-aws/internal/controller/connect/securityprofile"
+	userconnect "github.com/upbound/provider-aws/internal/controller/connect/user"
 	userhierarchystructure "github.com/upbound/provider-aws/internal/controller/connect/userhierarchystructure"
+	vocabulary "github.com/upbound/provider-aws/internal/controller/connect/vocabulary"
 	reportdefinition "github.com/upbound/provider-aws/internal/controller/cur/reportdefinition"
 	dataset "github.com/upbound/provider-aws/internal/controller/dataexchange/dataset"
 	revision "github.com/upbound/provider-aws/internal/controller/dataexchange/revision"
@@ -1003,6 +1009,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		repository.Setup,
 		trigger.Setup,
 		codepipeline.Setup,
+		customactiontype.Setup,
 		webhookcodepipeline.Setup,
 		connectioncodestarconnections.Setup,
 		host.Setup,
@@ -1012,6 +1019,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		poolrolesattachment.Setup,
 		identityprovider.Setup,
 		resourceserver.Setup,
+		riskconfiguration.Setup,
 		usercognitoidp.Setup,
 		usergroup.Setup,
 		useringroup.Setup,
@@ -1031,12 +1039,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		contactflowmodule.Setup,
 		hoursofoperation.Setup,
 		instance.Setup,
+		instancestorageconfig.Setup,
 		lambdafunctionassociation.Setup,
+		phonenumber.Setup,
 		queue.Setup,
 		quickconnect.Setup,
 		routingprofile.Setup,
 		securityprofile.Setup,
+		userconnect.Setup,
 		userhierarchystructure.Setup,
+		vocabulary.Setup,
 		reportdefinition.Setup,
 		dataset.Setup,
 		revision.Setup,
