@@ -586,40 +586,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// aws_imagebuilder_components resources can be imported by using the Amazon Resource Name (ARN)
 	"aws_imagebuilder_component": config.IdentifierFromProvider,
 
-	// accessanalyzer
-	//
-	// AccessAnalyzer ArchiveRule can be imported using the analyzer_name/rule_name
-	"aws_accessanalyzer_archive_rule": config.TemplatedStringAsIdentifier("rule_name", "{{ .parameters.analyzer_name }}/{{ .external_name }}"),
-
-	// acmpca
-	//
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_acmpca_permission": config.IdentifierFromProvider,
-	// aws_acmpca_policy can be imported using the resource_arn value
-	// Example: arn:aws:acm-pca:us-east-1:123456789012:certificate-authority/12345678-1234-1234-1234-123456789012
-	"aws_acmpca_policy": config.IdentifierFromProvider,
-
-	// appconfig
-	//
-	// AppConfig Extensions can be imported using their extension ID
-	// ID is a provider-generated
-	"aws_appconfig_extension": config.IdentifierFromProvider,
-	// AppConfig Extension Associations can be imported using their extension association ID
-	// ID is a provider-generated
-	"aws_appconfig_extension_association": config.IdentifierFromProvider,
-
-	// applicationinsights
-	//
-	// ApplicationInsights Applications can be imported using the resource_group_name
-	"aws_applicationinsights_application": config.ParameterAsIdentifier("resource_group_name"),
-
 	// apprunner
 	//
-	// App Runner Observability Configuration can be imported by using the arn
-	// Example: arn:aws:apprunner:us-east-1:1234567890:observabilityconfiguration/example/1/d75bc7ea55b71e724fe5c23452fe22a1
-	// TODO: The observability_configuration_name argument looks like a naming field to me, which also appears in the ARN (e.g., example in the above example ARN). And we could just use the last component as the external-name here. Check while testing.
-	"aws_apprunner_observability_configuration": config.IdentifierFromProvider,
 	// App Runner VPC Ingress Connection can be imported by using the arn
 	// Example: arn:aws:apprunner:us-west-2:837424938642:vpcingressconnection/example/b379f86381d74825832c2e82080342fa
 	// TODO: We just normalized the external-name but still kept the naming argument spec.forProvider.name. Need further normalization.

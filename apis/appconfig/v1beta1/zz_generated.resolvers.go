@@ -11,6 +11,7 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/provider-aws/apis/cloudwatch/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -207,6 +208,99 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		mg.Spec.ForProvider.Monitor[i3].AlarmRoleArnRef = rsp.ResolvedReference
 
 	}
+
+	return nil
+}
+
+// ResolveReferences of this Extension.
+func (mg *Extension) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ActionPoint); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ActionPoint[i3].Action); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ActionPoint[i3].Action[i4].RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.ActionPoint[i3].Action[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.ActionPoint[i3].Action[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta1.RoleList{},
+					Managed: &v1beta1.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ActionPoint[i3].Action[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ActionPoint[i3].Action[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ActionPoint[i3].Action[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ActionPoint); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ActionPoint[i3].Action); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ActionPoint[i3].Action[i4].URI),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.ActionPoint[i3].Action[i4].URIRef,
+				Selector:     mg.Spec.ForProvider.ActionPoint[i3].Action[i4].URISelector,
+				To: reference.To{
+					List:    &v1beta12.TopicList{},
+					Managed: &v1beta12.Topic{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ActionPoint[i3].Action[i4].URI")
+			}
+			mg.Spec.ForProvider.ActionPoint[i3].Action[i4].URI = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ActionPoint[i3].Action[i4].URIRef = rsp.ResolvedReference
+
+		}
+	}
+
+	return nil
+}
+
+// ResolveReferences of this ExtensionAssociation.
+func (mg *ExtensionAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtensionArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.ExtensionArnRef,
+		Selector:     mg.Spec.ForProvider.ExtensionArnSelector,
+		To: reference.To{
+			List:    &ExtensionList{},
+			Managed: &Extension{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ExtensionArn")
+	}
+	mg.Spec.ForProvider.ExtensionArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ExtensionArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.ResourceArnRef,
+		Selector:     mg.Spec.ForProvider.ResourceArnSelector,
+		To: reference.To{
+			List:    &ApplicationList{},
+			Managed: &Application{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceArn")
+	}
+	mg.Spec.ForProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceArnRef = rsp.ResolvedReference
 
 	return nil
 }

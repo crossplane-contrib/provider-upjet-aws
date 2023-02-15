@@ -10,12 +10,15 @@ import (
 	"github.com/upbound/upjet/pkg/controller"
 
 	analyzer "github.com/upbound/provider-aws/internal/controller/accessanalyzer/analyzer"
+	archiverule "github.com/upbound/provider-aws/internal/controller/accessanalyzer/archiverule"
 	alternatecontact "github.com/upbound/provider-aws/internal/controller/account/alternatecontact"
 	certificate "github.com/upbound/provider-aws/internal/controller/acm/certificate"
 	certificatevalidation "github.com/upbound/provider-aws/internal/controller/acm/certificatevalidation"
 	certificateacmpca "github.com/upbound/provider-aws/internal/controller/acmpca/certificate"
 	certificateauthority "github.com/upbound/provider-aws/internal/controller/acmpca/certificateauthority"
 	certificateauthoritycertificate "github.com/upbound/provider-aws/internal/controller/acmpca/certificateauthoritycertificate"
+	permission "github.com/upbound/provider-aws/internal/controller/acmpca/permission"
+	policy "github.com/upbound/provider-aws/internal/controller/acmpca/policy"
 	alertmanagerdefinition "github.com/upbound/provider-aws/internal/controller/amp/alertmanagerdefinition"
 	rulegroupnamespace "github.com/upbound/provider-aws/internal/controller/amp/rulegroupnamespace"
 	workspace "github.com/upbound/provider-aws/internal/controller/amp/workspace"
@@ -59,7 +62,7 @@ import (
 	routeresponse "github.com/upbound/provider-aws/internal/controller/apigatewayv2/routeresponse"
 	stageapigatewayv2 "github.com/upbound/provider-aws/internal/controller/apigatewayv2/stage"
 	vpclinkapigatewayv2 "github.com/upbound/provider-aws/internal/controller/apigatewayv2/vpclink"
-	policy "github.com/upbound/provider-aws/internal/controller/appautoscaling/policy"
+	policyappautoscaling "github.com/upbound/provider-aws/internal/controller/appautoscaling/policy"
 	scheduledaction "github.com/upbound/provider-aws/internal/controller/appautoscaling/scheduledaction"
 	target "github.com/upbound/provider-aws/internal/controller/appautoscaling/target"
 	application "github.com/upbound/provider-aws/internal/controller/appconfig/application"
@@ -67,9 +70,12 @@ import (
 	deploymentappconfig "github.com/upbound/provider-aws/internal/controller/appconfig/deployment"
 	deploymentstrategy "github.com/upbound/provider-aws/internal/controller/appconfig/deploymentstrategy"
 	environment "github.com/upbound/provider-aws/internal/controller/appconfig/environment"
+	extension "github.com/upbound/provider-aws/internal/controller/appconfig/extension"
+	extensionassociation "github.com/upbound/provider-aws/internal/controller/appconfig/extensionassociation"
 	hostedconfigurationversion "github.com/upbound/provider-aws/internal/controller/appconfig/hostedconfigurationversion"
 	flow "github.com/upbound/provider-aws/internal/controller/appflow/flow"
 	eventintegration "github.com/upbound/provider-aws/internal/controller/appintegrations/eventintegration"
+	applicationapplicationinsights "github.com/upbound/provider-aws/internal/controller/applicationinsights/application"
 	gatewayroute "github.com/upbound/provider-aws/internal/controller/appmesh/gatewayroute"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	routeappmesh "github.com/upbound/provider-aws/internal/controller/appmesh/route"
@@ -79,6 +85,7 @@ import (
 	virtualservice "github.com/upbound/provider-aws/internal/controller/appmesh/virtualservice"
 	autoscalingconfigurationversion "github.com/upbound/provider-aws/internal/controller/apprunner/autoscalingconfigurationversion"
 	connection "github.com/upbound/provider-aws/internal/controller/apprunner/connection"
+	observabilityconfiguration "github.com/upbound/provider-aws/internal/controller/apprunner/observabilityconfiguration"
 	service "github.com/upbound/provider-aws/internal/controller/apprunner/service"
 	vpcconnector "github.com/upbound/provider-aws/internal/controller/apprunner/vpcconnector"
 	directoryconfig "github.com/upbound/provider-aws/internal/controller/appstream/directoryconfig"
@@ -159,7 +166,7 @@ import (
 	bus "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/bus"
 	buspolicy "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/buspolicy"
 	connectioncloudwatchevents "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/connection"
-	permission "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/permission"
+	permissioncloudwatchevents "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/permission"
 	rule "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/rule"
 	targetcloudwatchevents "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/target"
 	definition "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/definition"
@@ -820,12 +827,15 @@ import (
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		analyzer.Setup,
+		archiverule.Setup,
 		alternatecontact.Setup,
 		certificate.Setup,
 		certificatevalidation.Setup,
 		certificateacmpca.Setup,
 		certificateauthority.Setup,
 		certificateauthoritycertificate.Setup,
+		permission.Setup,
+		policy.Setup,
 		alertmanagerdefinition.Setup,
 		rulegroupnamespace.Setup,
 		workspace.Setup,
@@ -869,7 +879,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		routeresponse.Setup,
 		stageapigatewayv2.Setup,
 		vpclinkapigatewayv2.Setup,
-		policy.Setup,
+		policyappautoscaling.Setup,
 		scheduledaction.Setup,
 		target.Setup,
 		application.Setup,
@@ -877,9 +887,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		deploymentappconfig.Setup,
 		deploymentstrategy.Setup,
 		environment.Setup,
+		extension.Setup,
+		extensionassociation.Setup,
 		hostedconfigurationversion.Setup,
 		flow.Setup,
 		eventintegration.Setup,
+		applicationapplicationinsights.Setup,
 		gatewayroute.Setup,
 		mesh.Setup,
 		routeappmesh.Setup,
@@ -889,6 +902,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		virtualservice.Setup,
 		autoscalingconfigurationversion.Setup,
 		connection.Setup,
+		observabilityconfiguration.Setup,
 		service.Setup,
 		vpcconnector.Setup,
 		directoryconfig.Setup,
@@ -969,7 +983,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		bus.Setup,
 		buspolicy.Setup,
 		connectioncloudwatchevents.Setup,
-		permission.Setup,
+		permissioncloudwatchevents.Setup,
 		rule.Setup,
 		targetcloudwatchevents.Setup,
 		definition.Setup,

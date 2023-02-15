@@ -246,14 +246,24 @@ type NetworkConfigurationParameters struct {
 	IngressConfiguration []IngressConfigurationParameters `json:"ingressConfiguration,omitempty" tf:"ingress_configuration,omitempty"`
 }
 
-type ObservabilityConfigurationObservation struct {
+type ServiceObservabilityConfigurationObservation struct {
 }
 
-type ObservabilityConfigurationParameters struct {
+type ServiceObservabilityConfigurationParameters struct {
 
 	// ARN of the observability configuration that is associated with the service. Specified only when observability_enabled is true.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apprunner/v1beta1.ObservabilityConfiguration
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ObservabilityConfigurationArn *string `json:"observabilityConfigurationArn,omitempty" tf:"observability_configuration_arn,omitempty"`
+
+	// Reference to a ObservabilityConfiguration in apprunner to populate observabilityConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ObservabilityConfigurationArnRef *v1.Reference `json:"observabilityConfigurationArnRef,omitempty" tf:"-"`
+
+	// Selector for a ObservabilityConfiguration in apprunner to populate observabilityConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ObservabilityConfigurationArnSelector *v1.Selector `json:"observabilityConfigurationArnSelector,omitempty" tf:"-"`
 
 	// When true, an observability configuration resource is associated with the service.
 	// +kubebuilder:validation:Required
@@ -304,7 +314,7 @@ type ServiceParameters struct {
 
 	// The observability configuration of your service. See Observability Configuration below for more details.
 	// +kubebuilder:validation:Optional
-	ObservabilityConfiguration []ObservabilityConfigurationParameters `json:"observabilityConfiguration,omitempty" tf:"observability_configuration,omitempty"`
+	ObservabilityConfiguration []ServiceObservabilityConfigurationParameters `json:"observabilityConfiguration,omitempty" tf:"observability_configuration,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
