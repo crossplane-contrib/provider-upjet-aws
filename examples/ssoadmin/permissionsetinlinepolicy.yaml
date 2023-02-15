@@ -1,0 +1,51 @@
+apiVersion: ssoadmin.aws.upbound.io/v1beta1
+kind: PermissionSetInlinePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssoadmin/v1beta1/permissionsetinlinepolicy
+    upjet.upbound.io/manual-intervention: "This resource was skipped because this is dependent on the PermissionSet resource."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    instanceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    permissionSetArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-east-1
+    inlinePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "1",
+            "Effect": "Allow",
+            "Action": [
+              "s3:ListAllMyBuckets",
+              "s3:GetBucketLocation"
+            ],
+            "Resource": "arn:aws:s3:::*"
+          }
+        ]
+      }
+
+---
+
+apiVersion: ssoadmin.aws.upbound.io/v1beta1
+kind: PermissionSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssoadmin/v1beta1/permissionsetinlinepolicy
+    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which 
+    the operation will be executed)."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    instanceArn: ${tolist(data.aws_ssoadmin_instances.example.arns)[0]}
+    name: Example
+    region: us-east-1
