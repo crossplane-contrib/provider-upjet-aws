@@ -469,6 +469,72 @@ func (mg *MonitoringSubscription) SetWriteConnectionSecretToReference(r *xpv1.Se
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this OriginAccessControl.
+func (mg *OriginAccessControl) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this OriginAccessControl.
+func (mg *OriginAccessControl) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this OriginAccessControl.
+func (mg *OriginAccessControl) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this OriginAccessControl.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *OriginAccessControl) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this OriginAccessControl.
+func (mg *OriginAccessControl) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this OriginAccessControl.
+func (mg *OriginAccessControl) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this OriginAccessControl.
+func (mg *OriginAccessControl) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this OriginAccessControl.
+func (mg *OriginAccessControl) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this OriginAccessControl.
+func (mg *OriginAccessControl) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this OriginAccessControl.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *OriginAccessControl) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this OriginAccessControl.
+func (mg *OriginAccessControl) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this OriginAccessControl.
+func (mg *OriginAccessControl) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this OriginAccessIdentity.
 func (mg *OriginAccessIdentity) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

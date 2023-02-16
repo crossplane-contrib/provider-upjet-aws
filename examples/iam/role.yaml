@@ -1,9 +1,11 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
-  name: sample-role
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/role
   labels:
     testing.upbound.io/example-name: role
+  name: sample-role
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -23,9 +25,11 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
-  name: sample-policy-attachment
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/role
   labels:
     testing.upbound.io/example-name: role
+  name: sample-policy-attachment
 spec:
   forProvider:
     policyArnSelector:
@@ -38,9 +42,11 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
-  name: sample-user-policy
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/role
   labels:
     testing.upbound.io/example-name: role
+  name: sample-user-policy
 spec:
   forProvider:
     policy: |

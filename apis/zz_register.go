@@ -22,6 +22,7 @@ import (
 	v1beta1appconfig "github.com/upbound/provider-aws/apis/appconfig/v1beta1"
 	v1beta1appflow "github.com/upbound/provider-aws/apis/appflow/v1beta1"
 	v1beta1appintegrations "github.com/upbound/provider-aws/apis/appintegrations/v1beta1"
+	v1beta1applicationinsights "github.com/upbound/provider-aws/apis/applicationinsights/v1beta1"
 	v1beta1appmesh "github.com/upbound/provider-aws/apis/appmesh/v1beta1"
 	v1beta1apprunner "github.com/upbound/provider-aws/apis/apprunner/v1beta1"
 	v1beta1appstream "github.com/upbound/provider-aws/apis/appstream/v1beta1"
@@ -32,6 +33,7 @@ import (
 	v1beta1backup "github.com/upbound/provider-aws/apis/backup/v1beta1"
 	v1beta1batch "github.com/upbound/provider-aws/apis/batch/v1beta1"
 	v1beta1budgets "github.com/upbound/provider-aws/apis/budgets/v1beta1"
+	v1beta1ce "github.com/upbound/provider-aws/apis/ce/v1beta1"
 	v1beta1chime "github.com/upbound/provider-aws/apis/chime/v1beta1"
 	v1beta1cloud9 "github.com/upbound/provider-aws/apis/cloud9/v1beta1"
 	v1beta1cloudcontrol "github.com/upbound/provider-aws/apis/cloudcontrol/v1beta1"
@@ -100,6 +102,7 @@ import (
 	v1beta1lexmodels "github.com/upbound/provider-aws/apis/lexmodels/v1beta1"
 	v1beta1licensemanager "github.com/upbound/provider-aws/apis/licensemanager/v1beta1"
 	v1beta1lightsail "github.com/upbound/provider-aws/apis/lightsail/v1beta1"
+	v1beta1location "github.com/upbound/provider-aws/apis/location/v1beta1"
 	v1beta1macie2 "github.com/upbound/provider-aws/apis/macie2/v1beta1"
 	v1beta1mediaconvert "github.com/upbound/provider-aws/apis/mediaconvert/v1beta1"
 	v1beta1mediapackage "github.com/upbound/provider-aws/apis/mediapackage/v1beta1"
@@ -140,6 +143,7 @@ import (
 	v1beta1sns "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	v1beta1sqs "github.com/upbound/provider-aws/apis/sqs/v1beta1"
 	v1beta1ssm "github.com/upbound/provider-aws/apis/ssm/v1beta1"
+	v1beta1ssoadmin "github.com/upbound/provider-aws/apis/ssoadmin/v1beta1"
 	v1beta1swf "github.com/upbound/provider-aws/apis/swf/v1beta1"
 	v1beta1timestreamwrite "github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1"
 	v1beta1transfer "github.com/upbound/provider-aws/apis/transfer/v1beta1"
@@ -167,6 +171,7 @@ func init() {
 		v1beta1appconfig.SchemeBuilder.AddToScheme,
 		v1beta1appflow.SchemeBuilder.AddToScheme,
 		v1beta1appintegrations.SchemeBuilder.AddToScheme,
+		v1beta1applicationinsights.SchemeBuilder.AddToScheme,
 		v1beta1appmesh.SchemeBuilder.AddToScheme,
 		v1beta1apprunner.SchemeBuilder.AddToScheme,
 		v1beta1appstream.SchemeBuilder.AddToScheme,
@@ -177,6 +182,7 @@ func init() {
 		v1beta1backup.SchemeBuilder.AddToScheme,
 		v1beta1batch.SchemeBuilder.AddToScheme,
 		v1beta1budgets.SchemeBuilder.AddToScheme,
+		v1beta1ce.SchemeBuilder.AddToScheme,
 		v1beta1chime.SchemeBuilder.AddToScheme,
 		v1beta1cloud9.SchemeBuilder.AddToScheme,
 		v1beta1cloudcontrol.SchemeBuilder.AddToScheme,
@@ -245,6 +251,7 @@ func init() {
 		v1beta1lexmodels.SchemeBuilder.AddToScheme,
 		v1beta1licensemanager.SchemeBuilder.AddToScheme,
 		v1beta1lightsail.SchemeBuilder.AddToScheme,
+		v1beta1location.SchemeBuilder.AddToScheme,
 		v1beta1macie2.SchemeBuilder.AddToScheme,
 		v1beta1mediaconvert.SchemeBuilder.AddToScheme,
 		v1beta1mediapackage.SchemeBuilder.AddToScheme,
@@ -285,6 +292,7 @@ func init() {
 		v1beta1sns.SchemeBuilder.AddToScheme,
 		v1beta1sqs.SchemeBuilder.AddToScheme,
 		v1beta1ssm.SchemeBuilder.AddToScheme,
+		v1beta1ssoadmin.SchemeBuilder.AddToScheme,
 		v1beta1swf.SchemeBuilder.AddToScheme,
 		v1beta1timestreamwrite.SchemeBuilder.AddToScheme,
 		v1beta1transfer.SchemeBuilder.AddToScheme,

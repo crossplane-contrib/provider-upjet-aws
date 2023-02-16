@@ -209,6 +209,7 @@ spec:
                       type: object
                     type: array
                   securityGroups:
+                    description: A list of associated security group IDS.
                     items:
                       type: string
                     type: array

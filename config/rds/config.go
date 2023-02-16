@@ -6,6 +6,8 @@ package rds
 
 import (
 	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure adds configurations for rds group.
@@ -70,6 +72,10 @@ func Configure(p *config.Provider) {
 		r.References["db_subnet_group_name"] = config.Reference{
 			Type: "SubnetGroup",
 		}
+		r.References["kms_key_id"] = config.Reference{
+			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
+		}
 		r.UseAsync = true
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"name", "db_name"},
@@ -78,6 +84,9 @@ func Configure(p *config.Provider) {
 			conn := map[string][]byte{}
 			if a, ok := attr["endpoint"].(string); ok {
 				conn["endpoint"] = []byte(a)
+			}
+			if a, ok := attr["username"].(string); ok {
+				conn["username"] = []byte(a)
 			}
 			return conn, nil
 		}

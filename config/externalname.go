@@ -36,6 +36,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// No doc on import, but resource is getting CA ARN:
 	// arn:aws:acm-pca:eu-central-1:609897127049:certificate-authority/ba0c7989-9641-4f36-a033-dee60121d595
 	"aws_acmpca_certificate_authority_certificate": config.IdentifierFromProvider,
+	// No import
+	"aws_acmpca_permission": config.IdentifierFromProvider,
+	// aws_acmpca_policy can be imported using the resource_arn value
+	// Example: arn:aws:acm-pca:us-east-1:123456789012:certificate-authority/12345678-1234-1234-1234-123456789012
+	"aws_acmpca_policy": config.IdentifierFromProvider,
 
 	// amp
 	//
@@ -126,6 +131,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cognito_user": config.TemplatedStringAsIdentifier("username", "{{ .parameters.user_pool_id }}/{{ .external_name }}"),
 	// no doc
 	"aws_cognito_user_in_group": config.IdentifierFromProvider,
+	// Cognito Risk Configurations can be imported using the id
+	"aws_cognito_risk_configuration": config.IdentifierFromProvider,
 
 	// ebs
 	//
@@ -601,7 +608,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Z1D633PJN98FT9
 	"aws_route53_zone": config.IdentifierFromProvider,
 	// Z123456ABCDEFG:vpc-12345678
-	// disabled until it's successfully tested
+	// aws_route53_zone_association is disabled as it is not recommended for usage by terraform,
+	// see https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_zone_association
 	// "aws_route53_zone_association": FormattedIdentifierFromProvider(":", "zone_id", "vpc_id"),
 	// Imported using the id and version, e.g.,
 	// 01a52019-d16f-422a-ae72-c306d2b6df7e/1
@@ -724,6 +732,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudfront_realtime_log_config": config.IdentifierFromProvider,
 	// Cloudfront Response Headers Policies can be imported using the id
 	"aws_cloudfront_response_headers_policy": config.IdentifierFromProvider,
+	// CloudFront Origin Access Control can be imported using the id
+	"aws_cloudfront_origin_access_control": config.IdentifierFromProvider,
 
 	// resource groups
 
@@ -799,6 +809,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_transfer_server": config.IdentifierFromProvider,
 	// Transfer Users can be imported using the server_id and user_name separated by /
 	"aws_transfer_user": FormattedIdentifierUserDefinedNameLast("user_name", "/", "server_id"),
+	// Transfer SSH Public Key can be imported using the server_id and user_name and ssh_public_key_id separated by /
+	// Example: s-12345678/test-username/key-12345
+	"aws_transfer_ssh_key": config.IdentifierFromProvider,
+	// Transfer Workflows can be imported using the worflow_idgit
+	"aws_transfer_workflow": config.IdentifierFromProvider,
 
 	// dynamodb
 	//
@@ -890,7 +905,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// firehose
 	//
-	"aws_kinesis_firehose_delivery_stream": config.TemplatedStringAsIdentifier("name", "arn:aws:firehose:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:deliverystream/{{ .external_name }}"),
+	"aws_kinesis_firehose_delivery_stream": config.IdentifierFromProvider,
 
 	// lakeformation
 	//
@@ -947,6 +962,19 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_lambda_permission": config.IdentifierFromProvider,
 	// Lambda Provisioned Concurrency Configs can be imported using the function_name and qualifier separated by a colon (:)
 	"aws_lambda_provisioned_concurrency_config": config.IdentifierFromProvider,
+
+	// location
+	//
+	// Location Geofence Collection can be imported using the collection_name
+	"aws_location_geofence_collection": config.ParameterAsIdentifier("collection_name"),
+	// aws_location_place_index resources can be imported using the place index name
+	"aws_location_place_index": config.ParameterAsIdentifier("index_name"),
+	// aws_location_route_calculator can be imported using the route calculator name
+	"aws_location_route_calculator": config.ParameterAsIdentifier("calculator_name"),
+	// aws_location_tracker resources can be imported using the tracker name
+	"aws_location_tracker": config.ParameterAsIdentifier("tracker_name"),
+	// Location Tracker Association can be imported using the tracker_name|consumer_arn
+	"aws_location_tracker_association": config.IdentifierFromProvider,
 
 	// signer
 	//
@@ -1205,6 +1233,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_codepipeline": config.NameAsIdentifier,
 	// CodePipeline Webhooks can be imported by their ARN: arn:aws:codepipeline:us-west-2:123456789012:webhook:example
 	"aws_codepipeline_webhook": config.TemplatedStringAsIdentifier("name", "arn:aws:codepipeline:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:webhook:{{ .external_name }}"),
+	// CodeDeploy CustomActionType can be imported using the id
+	"aws_codepipeline_custom_action_type": config.IdentifierFromProvider,
 
 	// codestarconnections
 	//
@@ -1243,6 +1273,17 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_connect_security_profile": config.IdentifierFromProvider,
 	// Amazon Connect User Hierarchy Structures can be imported using the instance_id
 	"aws_connect_user_hierarchy_structure": config.IdentifierFromProvider,
+	// Amazon Connect Instance Storage Configs can be imported using the instance_id, association_id, and resource_type separated by a colon (:)
+	// Example: f1288a1f-6193-445a-b47e-af739b2:c1d4e5f6-1b3c-1b3c-1b3c-c1d4e5f6c1d4e5:CHAT_TRANSCRIPTS
+	"aws_connect_instance_storage_config": config.IdentifierFromProvider,
+	// Amazon Connect Phone Numbers can be imported using its id
+	"aws_connect_phone_number": config.IdentifierFromProvider,
+	// Amazon Connect Users can be imported using the instance_id and user_id separated by a colon (:)
+	// Example: f1288a1f-6193-445a-b47e-af739b2:c1d4e5f6-1b3c-1b3c-1b3c-c1d4e5f6c1d4e5
+	"aws_connect_user": config.IdentifierFromProvider,
+	// Amazon Connect Vocabularies can be imported using the instance_id and vocabulary_id separated by a colon (:)
+	// Example: f1288a1f-6193-445a-b47e-af739b2:c1d4e5f6-1b3c-1b3c-1b3c-c1d4e5f6c1d4e5
+	"aws_connect_vocabulary": config.IdentifierFromProvider,
 
 	// apprunner
 	//
@@ -1254,6 +1295,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_apprunner_service": config.IdentifierFromProvider,
 	// App Runner vpc connector can be imported by using the arn
 	"aws_apprunner_vpc_connector": config.IdentifierFromProvider,
+	// App Runner Observability Configuration can be imported by using the arn
+	// Example: arn:aws:apprunner:us-east-1:1234567890:observabilityconfiguration/example/1/d75bc7ea55b71e724fe5c23452fe22a1
+	"aws_apprunner_observability_configuration": config.IdentifierFromProvider,
 
 	// appstream
 	//
@@ -1326,6 +1370,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Access Analyzer Analyzers can be imported using the analyzer_name
 	"aws_accessanalyzer_analyzer": config.ParameterAsIdentifier("analyzer_name"),
+	// AccessAnalyzer ArchiveRule can be imported using the analyzer_name/rule_name
+	"aws_accessanalyzer_archive_rule": config.TemplatedStringAsIdentifier("rule_name", "{{ .parameters.analyzer_name }}/{{ .external_name }}"),
 
 	// account
 	//
@@ -1611,6 +1657,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_appconfig_hosted_configuration_version": config.IdentifierFromProvider,
 	// AppConfig Deployments can be imported by using the application ID, environment ID, and deployment number separated by a slash (/)
 	"aws_appconfig_deployment": config.IdentifierFromProvider,
+	// AppConfig Extensions can be imported using their extension ID
+	// ID is a provider-generated
+	"aws_appconfig_extension": config.IdentifierFromProvider,
+	// AppConfig Extension Associations can be imported using their extension association ID
+	// ID is a provider-generated
+	"aws_appconfig_extension_association": config.IdentifierFromProvider,
 
 	// appintegrations
 	//
@@ -1761,6 +1813,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_dms_replication_subnet_group": config.ParameterAsIdentifier("replication_subnet_group_id"),
 	// Replication tasks can be imported using the replication_task_id
 	"aws_dms_replication_task": config.ParameterAsIdentifier("replication_task_id"),
+
+	// ce
+	//
+	// aws_ce_anomaly_monitor can be imported using the id
+	"aws_ce_anomaly_monitor": config.IdentifierFromProvider,
 
 	// ds
 	//
@@ -2261,6 +2318,27 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_opsworks_permission": config.IdentifierFromProvider,
+
+	// ssoadmin
+	//
+	// SSO Account Assignments can be imported using the principal_id, principal_type, target_id, target_type, permission_set_arn, instance_arn separated by commas (,)
+	// Example: f81d4fae-7dec-11d0-a765-00a0c91e6bf6,GROUP,1234567890,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-0123456789abcdef/ps-0123456789abcdef,arn:aws:sso:::instance/ssoins-0123456789abcdef
+	"aws_ssoadmin_account_assignment": config.TemplatedStringAsIdentifier("", "{{ .parameters.principal_id }},{{ .parameters.principal_type }},{{ .parameters.target_id }},{{ .parameters.target_type }},{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
+	// SSO Managed Policy Attachments can be imported using the managed_policy_arn, permission_set_arn, and instance_arn separated by a comma (,)
+	// Example: arn:aws:iam::aws:policy/AlexaForBusinessDeviceSetup,arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	"aws_ssoadmin_managed_policy_attachment": config.TemplatedStringAsIdentifier("", "{{ .parameters.managed_policy_arn }},{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn}}"),
+	// SSO Permission Sets can be imported using the arn and instance_arn separated by a comma (,)
+	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	// TODO: Normalize external_name while testing
+	"aws_ssoadmin_permission_set": config.IdentifierFromProvider,
+	// SSO Permission Set Inline Policies can be imported using the permission_set_arn and instance_arn separated by a comma (,)
+	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	"aws_ssoadmin_permission_set_inline_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
+
+	// applicationinsights
+	//
+	// ApplicationInsights Applications can be imported using the resource_group_name
+	"aws_applicationinsights_application": config.ParameterAsIdentifier("resource_group_name"),
 }
 
 func lambdaFunctionURL() config.ExternalName {

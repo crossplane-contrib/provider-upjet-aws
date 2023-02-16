@@ -1,0 +1,38 @@
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: RiskConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/riskconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    riskExceptionConfiguration:
+    - blockedIpRangeList:
+      - 10.10.10.10/32
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/riskconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    passwordPolicy:
+      - minimumLength: 6
+        requireNumbers: false
+        requireSymbols: false
+        requireUppercase: false
+        temporaryPasswordValidityDays: 7
+    region: us-west-1

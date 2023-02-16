@@ -52,8 +52,26 @@ func (l *InstanceList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this InstanceStorageConfigList.
+func (l *InstanceStorageConfigList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this LambdaFunctionAssociationList.
 func (l *LambdaFunctionAssociationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PhoneNumberList.
+func (l *PhoneNumberList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -99,6 +117,24 @@ func (l *SecurityProfileList) GetItems() []resource.Managed {
 
 // GetItems of this UserHierarchyStructureList.
 func (l *UserHierarchyStructureList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this UserList.
+func (l *UserList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VocabularyList.
+func (l *VocabularyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

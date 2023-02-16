@@ -1,0 +1,35 @@
+apiVersion: accessanalyzer.aws.upbound.io/v1beta1
+kind: ArchiveRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: accessanalyzer/v1beta1/archiverule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    analyzerName: example-analyzer
+    filter:
+    - criteria: condition.aws:UserId
+      eq:
+      - userid
+    - criteria: error
+      exists: "true"
+    - criteria: isPublic
+      eq:
+      - "false"
+    region: us-west-1
+
+---
+
+apiVersion: accessanalyzer.aws.upbound.io/v1beta1
+kind: Analyzer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: accessanalyzer/v1beta1/archiverule
+  labels:
+    testing.upbound.io/example-name: example_analyzer
+  name: example-analyzer
+spec:
+  forProvider:
+    region: us-west-1

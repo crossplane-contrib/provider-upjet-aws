@@ -1,0 +1,11 @@
+apiVersion: location.aws.upbound.io/v1beta1
+kind: GeofenceCollection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: location/v1beta1/geofencecollection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-east-1

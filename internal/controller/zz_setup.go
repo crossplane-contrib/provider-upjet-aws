@@ -10,12 +10,15 @@ import (
 	"github.com/upbound/upjet/pkg/controller"
 
 	analyzer "github.com/upbound/provider-aws/internal/controller/accessanalyzer/analyzer"
+	archiverule "github.com/upbound/provider-aws/internal/controller/accessanalyzer/archiverule"
 	alternatecontact "github.com/upbound/provider-aws/internal/controller/account/alternatecontact"
 	certificate "github.com/upbound/provider-aws/internal/controller/acm/certificate"
 	certificatevalidation "github.com/upbound/provider-aws/internal/controller/acm/certificatevalidation"
 	certificateacmpca "github.com/upbound/provider-aws/internal/controller/acmpca/certificate"
 	certificateauthority "github.com/upbound/provider-aws/internal/controller/acmpca/certificateauthority"
 	certificateauthoritycertificate "github.com/upbound/provider-aws/internal/controller/acmpca/certificateauthoritycertificate"
+	permission "github.com/upbound/provider-aws/internal/controller/acmpca/permission"
+	policy "github.com/upbound/provider-aws/internal/controller/acmpca/policy"
 	alertmanagerdefinition "github.com/upbound/provider-aws/internal/controller/amp/alertmanagerdefinition"
 	rulegroupnamespace "github.com/upbound/provider-aws/internal/controller/amp/rulegroupnamespace"
 	workspace "github.com/upbound/provider-aws/internal/controller/amp/workspace"
@@ -59,7 +62,7 @@ import (
 	routeresponse "github.com/upbound/provider-aws/internal/controller/apigatewayv2/routeresponse"
 	stageapigatewayv2 "github.com/upbound/provider-aws/internal/controller/apigatewayv2/stage"
 	vpclinkapigatewayv2 "github.com/upbound/provider-aws/internal/controller/apigatewayv2/vpclink"
-	policy "github.com/upbound/provider-aws/internal/controller/appautoscaling/policy"
+	policyappautoscaling "github.com/upbound/provider-aws/internal/controller/appautoscaling/policy"
 	scheduledaction "github.com/upbound/provider-aws/internal/controller/appautoscaling/scheduledaction"
 	target "github.com/upbound/provider-aws/internal/controller/appautoscaling/target"
 	application "github.com/upbound/provider-aws/internal/controller/appconfig/application"
@@ -67,9 +70,12 @@ import (
 	deploymentappconfig "github.com/upbound/provider-aws/internal/controller/appconfig/deployment"
 	deploymentstrategy "github.com/upbound/provider-aws/internal/controller/appconfig/deploymentstrategy"
 	environment "github.com/upbound/provider-aws/internal/controller/appconfig/environment"
+	extension "github.com/upbound/provider-aws/internal/controller/appconfig/extension"
+	extensionassociation "github.com/upbound/provider-aws/internal/controller/appconfig/extensionassociation"
 	hostedconfigurationversion "github.com/upbound/provider-aws/internal/controller/appconfig/hostedconfigurationversion"
 	flow "github.com/upbound/provider-aws/internal/controller/appflow/flow"
 	eventintegration "github.com/upbound/provider-aws/internal/controller/appintegrations/eventintegration"
+	applicationapplicationinsights "github.com/upbound/provider-aws/internal/controller/applicationinsights/application"
 	gatewayroute "github.com/upbound/provider-aws/internal/controller/appmesh/gatewayroute"
 	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
 	routeappmesh "github.com/upbound/provider-aws/internal/controller/appmesh/route"
@@ -79,6 +85,7 @@ import (
 	virtualservice "github.com/upbound/provider-aws/internal/controller/appmesh/virtualservice"
 	autoscalingconfigurationversion "github.com/upbound/provider-aws/internal/controller/apprunner/autoscalingconfigurationversion"
 	connection "github.com/upbound/provider-aws/internal/controller/apprunner/connection"
+	observabilityconfiguration "github.com/upbound/provider-aws/internal/controller/apprunner/observabilityconfiguration"
 	service "github.com/upbound/provider-aws/internal/controller/apprunner/service"
 	vpcconnector "github.com/upbound/provider-aws/internal/controller/apprunner/vpcconnector"
 	directoryconfig "github.com/upbound/provider-aws/internal/controller/appstream/directoryconfig"
@@ -120,6 +127,7 @@ import (
 	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
 	budget "github.com/upbound/provider-aws/internal/controller/budgets/budget"
 	budgetaction "github.com/upbound/provider-aws/internal/controller/budgets/budgetaction"
+	anomalymonitor "github.com/upbound/provider-aws/internal/controller/ce/anomalymonitor"
 	voiceconnector "github.com/upbound/provider-aws/internal/controller/chime/voiceconnector"
 	voiceconnectorgroup "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectorgroup"
 	voiceconnectorlogging "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectorlogging"
@@ -139,6 +147,7 @@ import (
 	functioncloudfront "github.com/upbound/provider-aws/internal/controller/cloudfront/function"
 	keygroup "github.com/upbound/provider-aws/internal/controller/cloudfront/keygroup"
 	monitoringsubscription "github.com/upbound/provider-aws/internal/controller/cloudfront/monitoringsubscription"
+	originaccesscontrol "github.com/upbound/provider-aws/internal/controller/cloudfront/originaccesscontrol"
 	originaccessidentity "github.com/upbound/provider-aws/internal/controller/cloudfront/originaccessidentity"
 	originrequestpolicy "github.com/upbound/provider-aws/internal/controller/cloudfront/originrequestpolicy"
 	publickey "github.com/upbound/provider-aws/internal/controller/cloudfront/publickey"
@@ -157,7 +166,7 @@ import (
 	bus "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/bus"
 	buspolicy "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/buspolicy"
 	connectioncloudwatchevents "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/connection"
-	permission "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/permission"
+	permissioncloudwatchevents "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/permission"
 	rule "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/rule"
 	targetcloudwatchevents "github.com/upbound/provider-aws/internal/controller/cloudwatchevents/target"
 	definition "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/definition"
@@ -173,6 +182,7 @@ import (
 	repository "github.com/upbound/provider-aws/internal/controller/codecommit/repository"
 	trigger "github.com/upbound/provider-aws/internal/controller/codecommit/trigger"
 	codepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/codepipeline"
+	customactiontype "github.com/upbound/provider-aws/internal/controller/codepipeline/customactiontype"
 	webhookcodepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/webhook"
 	connectioncodestarconnections "github.com/upbound/provider-aws/internal/controller/codestarconnections/connection"
 	host "github.com/upbound/provider-aws/internal/controller/codestarconnections/host"
@@ -182,6 +192,7 @@ import (
 	poolrolesattachment "github.com/upbound/provider-aws/internal/controller/cognitoidentity/poolrolesattachment"
 	identityprovider "github.com/upbound/provider-aws/internal/controller/cognitoidp/identityprovider"
 	resourceserver "github.com/upbound/provider-aws/internal/controller/cognitoidp/resourceserver"
+	riskconfiguration "github.com/upbound/provider-aws/internal/controller/cognitoidp/riskconfiguration"
 	usercognitoidp "github.com/upbound/provider-aws/internal/controller/cognitoidp/user"
 	usergroup "github.com/upbound/provider-aws/internal/controller/cognitoidp/usergroup"
 	useringroup "github.com/upbound/provider-aws/internal/controller/cognitoidp/useringroup"
@@ -201,12 +212,16 @@ import (
 	contactflowmodule "github.com/upbound/provider-aws/internal/controller/connect/contactflowmodule"
 	hoursofoperation "github.com/upbound/provider-aws/internal/controller/connect/hoursofoperation"
 	instance "github.com/upbound/provider-aws/internal/controller/connect/instance"
+	instancestorageconfig "github.com/upbound/provider-aws/internal/controller/connect/instancestorageconfig"
 	lambdafunctionassociation "github.com/upbound/provider-aws/internal/controller/connect/lambdafunctionassociation"
+	phonenumber "github.com/upbound/provider-aws/internal/controller/connect/phonenumber"
 	queue "github.com/upbound/provider-aws/internal/controller/connect/queue"
 	quickconnect "github.com/upbound/provider-aws/internal/controller/connect/quickconnect"
 	routingprofile "github.com/upbound/provider-aws/internal/controller/connect/routingprofile"
 	securityprofile "github.com/upbound/provider-aws/internal/controller/connect/securityprofile"
+	userconnect "github.com/upbound/provider-aws/internal/controller/connect/user"
 	userhierarchystructure "github.com/upbound/provider-aws/internal/controller/connect/userhierarchystructure"
+	vocabulary "github.com/upbound/provider-aws/internal/controller/connect/vocabulary"
 	reportdefinition "github.com/upbound/provider-aws/internal/controller/cur/reportdefinition"
 	dataset "github.com/upbound/provider-aws/internal/controller/dataexchange/dataset"
 	revision "github.com/upbound/provider-aws/internal/controller/dataexchange/revision"
@@ -533,6 +548,11 @@ import (
 	keypairlightsail "github.com/upbound/provider-aws/internal/controller/lightsail/keypair"
 	staticip "github.com/upbound/provider-aws/internal/controller/lightsail/staticip"
 	staticipattachment "github.com/upbound/provider-aws/internal/controller/lightsail/staticipattachment"
+	geofencecollection "github.com/upbound/provider-aws/internal/controller/location/geofencecollection"
+	placeindex "github.com/upbound/provider-aws/internal/controller/location/placeindex"
+	routecalculator "github.com/upbound/provider-aws/internal/controller/location/routecalculator"
+	tracker "github.com/upbound/provider-aws/internal/controller/location/tracker"
+	trackerassociation "github.com/upbound/provider-aws/internal/controller/location/trackerassociation"
 	accountmacie2 "github.com/upbound/provider-aws/internal/controller/macie2/account"
 	classificationjob "github.com/upbound/provider-aws/internal/controller/macie2/classificationjob"
 	customdataidentifier "github.com/upbound/provider-aws/internal/controller/macie2/customdataidentifier"
@@ -770,11 +790,17 @@ import (
 	patchbaseline "github.com/upbound/provider-aws/internal/controller/ssm/patchbaseline"
 	patchgroup "github.com/upbound/provider-aws/internal/controller/ssm/patchgroup"
 	resourcedatasync "github.com/upbound/provider-aws/internal/controller/ssm/resourcedatasync"
+	accountassignment "github.com/upbound/provider-aws/internal/controller/ssoadmin/accountassignment"
+	managedpolicyattachment "github.com/upbound/provider-aws/internal/controller/ssoadmin/managedpolicyattachment"
+	permissionset "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionset"
+	permissionsetinlinepolicy "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionsetinlinepolicy"
 	domainswf "github.com/upbound/provider-aws/internal/controller/swf/domain"
 	databasetimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/database"
 	tabletimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/table"
 	server "github.com/upbound/provider-aws/internal/controller/transfer/server"
+	sshkey "github.com/upbound/provider-aws/internal/controller/transfer/sshkey"
 	usertransfer "github.com/upbound/provider-aws/internal/controller/transfer/user"
+	workflowtransfer "github.com/upbound/provider-aws/internal/controller/transfer/workflow"
 	bytematchset "github.com/upbound/provider-aws/internal/controller/waf/bytematchset"
 	geomatchset "github.com/upbound/provider-aws/internal/controller/waf/geomatchset"
 	ipset "github.com/upbound/provider-aws/internal/controller/waf/ipset"
@@ -811,12 +837,15 @@ import (
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		analyzer.Setup,
+		archiverule.Setup,
 		alternatecontact.Setup,
 		certificate.Setup,
 		certificatevalidation.Setup,
 		certificateacmpca.Setup,
 		certificateauthority.Setup,
 		certificateauthoritycertificate.Setup,
+		permission.Setup,
+		policy.Setup,
 		alertmanagerdefinition.Setup,
 		rulegroupnamespace.Setup,
 		workspace.Setup,
@@ -860,7 +889,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		routeresponse.Setup,
 		stageapigatewayv2.Setup,
 		vpclinkapigatewayv2.Setup,
-		policy.Setup,
+		policyappautoscaling.Setup,
 		scheduledaction.Setup,
 		target.Setup,
 		application.Setup,
@@ -868,9 +897,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		deploymentappconfig.Setup,
 		deploymentstrategy.Setup,
 		environment.Setup,
+		extension.Setup,
+		extensionassociation.Setup,
 		hostedconfigurationversion.Setup,
 		flow.Setup,
 		eventintegration.Setup,
+		applicationapplicationinsights.Setup,
 		gatewayroute.Setup,
 		mesh.Setup,
 		routeappmesh.Setup,
@@ -880,6 +912,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		virtualservice.Setup,
 		autoscalingconfigurationversion.Setup,
 		connection.Setup,
+		observabilityconfiguration.Setup,
 		service.Setup,
 		vpcconnector.Setup,
 		directoryconfig.Setup,
@@ -921,6 +954,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		schedulingpolicy.Setup,
 		budget.Setup,
 		budgetaction.Setup,
+		anomalymonitor.Setup,
 		voiceconnector.Setup,
 		voiceconnectorgroup.Setup,
 		voiceconnectorlogging.Setup,
@@ -940,6 +974,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		functioncloudfront.Setup,
 		keygroup.Setup,
 		monitoringsubscription.Setup,
+		originaccesscontrol.Setup,
 		originaccessidentity.Setup,
 		originrequestpolicy.Setup,
 		publickey.Setup,
@@ -958,7 +993,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		bus.Setup,
 		buspolicy.Setup,
 		connectioncloudwatchevents.Setup,
-		permission.Setup,
+		permissioncloudwatchevents.Setup,
 		rule.Setup,
 		targetcloudwatchevents.Setup,
 		definition.Setup,
@@ -974,6 +1009,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		repository.Setup,
 		trigger.Setup,
 		codepipeline.Setup,
+		customactiontype.Setup,
 		webhookcodepipeline.Setup,
 		connectioncodestarconnections.Setup,
 		host.Setup,
@@ -983,6 +1019,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		poolrolesattachment.Setup,
 		identityprovider.Setup,
 		resourceserver.Setup,
+		riskconfiguration.Setup,
 		usercognitoidp.Setup,
 		usergroup.Setup,
 		useringroup.Setup,
@@ -1002,12 +1039,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		contactflowmodule.Setup,
 		hoursofoperation.Setup,
 		instance.Setup,
+		instancestorageconfig.Setup,
 		lambdafunctionassociation.Setup,
+		phonenumber.Setup,
 		queue.Setup,
 		quickconnect.Setup,
 		routingprofile.Setup,
 		securityprofile.Setup,
+		userconnect.Setup,
 		userhierarchystructure.Setup,
+		vocabulary.Setup,
 		reportdefinition.Setup,
 		dataset.Setup,
 		revision.Setup,
@@ -1334,6 +1375,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		keypairlightsail.Setup,
 		staticip.Setup,
 		staticipattachment.Setup,
+		geofencecollection.Setup,
+		placeindex.Setup,
+		routecalculator.Setup,
+		tracker.Setup,
+		trackerassociation.Setup,
 		accountmacie2.Setup,
 		classificationjob.Setup,
 		customdataidentifier.Setup,
@@ -1571,11 +1617,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		patchbaseline.Setup,
 		patchgroup.Setup,
 		resourcedatasync.Setup,
+		accountassignment.Setup,
+		managedpolicyattachment.Setup,
+		permissionset.Setup,
+		permissionsetinlinepolicy.Setup,
 		domainswf.Setup,
 		databasetimestreamwrite.Setup,
 		tabletimestreamwrite.Setup,
 		server.Setup,
+		sshkey.Setup,
 		usertransfer.Setup,
+		workflowtransfer.Setup,
 		bytematchset.Setup,
 		geomatchset.Setup,
 		ipset.Setup,

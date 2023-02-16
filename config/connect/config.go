@@ -66,4 +66,10 @@ func Configure(p *config.Provider) {
 			Extractor: "github.com/upbound/upjet/pkg/resource.ExtractResourceID()",
 		}
 	})
+	p.AddResourceConfigurator("aws_connect_vocabulary", func(r *config.Resource) {
+		r.References["instance_id"] = config.Reference{
+			Type:      "github.com/upbound/provider-aws/apis/connect/v1beta1.Instance",
+			Extractor: "github.com/upbound/upjet/pkg/resource.ExtractResourceID()",
+		}
+	})
 }

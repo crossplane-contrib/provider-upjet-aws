@@ -1,9 +1,11 @@
 apiVersion: sns.aws.upbound.io/v1beta1
 kind: TopicSubscription
 metadata:
-  name: example
+  annotations:
+    meta.upbound.io/example-id: sns/v1beta1/topicsubscription
   labels:
     testing.upbound.io/example-name: sns
+  name: example
 spec:
   forProvider:
     region: us-west-1
@@ -14,13 +16,17 @@ spec:
     topicArnSelector:
       matchLabels:
         testing.upbound.io/example-name: sns
+
 ---
+
 apiVersion: sqs.aws.upbound.io/v1beta1
 kind: Queue
 metadata:
-  name: example
+  annotations:
+    meta.upbound.io/example-id: sns/v1beta1/topicsubscription
   labels:
     testing.upbound.io/example-name: sns
+  name: example
 spec:
   forProvider:
     name: upbound-sqs
@@ -31,3 +37,17 @@ spec:
     region: us-west-1
     tags:
       Environment: production
+
+---
+
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sns/v1beta1/topicsubscription
+  labels:
+    testing.upbound.io/example-name: sns
+  name: example
+spec:
+  forProvider:
+    region: us-west-1

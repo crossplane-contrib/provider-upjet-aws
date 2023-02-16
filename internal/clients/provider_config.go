@@ -264,9 +264,14 @@ func UseProviderSecret(ctx context.Context, data []byte, profile, region string)
 // AssumeRoleWithWebIdentity & AssumeRoles.
 func GetRoleChainConfig(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, cfg *aws.Config) (*aws.Config, error) {
 	pCfg := cfg
+	regionOpt := func(o *sts.Options) {
+		if cfg.Region == "" {
+			o.Region = GlobalRegion
+		}
+	}
 	for _, aro := range pcs.AssumeRoleChain {
 		stsAssume := stscreds.NewAssumeRoleProvider(
-			sts.NewFromConfig(*pCfg), //nolint:contextcheck
+			sts.NewFromConfig(*pCfg, regionOpt), //nolint:contextcheck
 			aws.ToString(aro.RoleARN),
 			SetAssumeRoleOptions(aro),
 		)
