@@ -108,6 +108,10 @@ type DeliveryStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	KinesisSourceConfiguration []KinesisSourceConfigurationParameters `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
 
+	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
 	// Configuration options if redshift is the destination.
 	// Using redshift_configuration requires the user to also specify a
 	// s3_configuration block. More details are given below.

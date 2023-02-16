@@ -613,16 +613,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// This resource can be imported using the log_group_name
 	"aws_cloudwatch_log_data_protection_policy": config.ParameterAsIdentifier("log_group_name"),
 
-	// codepipeline
-	//
-	// CodeDeploy CustomActionType can be imported using the id
-	"aws_codepipeline_custom_action_type": config.IdentifierFromProvider,
-
-	// cognito
-	//
-	// Cognito Risk Configurations can be imported using the id
-	"aws_cognito_risk_configuration": config.IdentifierFromProvider,
-
 	// comprehend
 	//
 	// Comprehend Document Classifier can be imported using the ARN
@@ -632,26 +622,12 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Example: arn:aws:comprehend:us-west-2:123456789012:entity-recognizer/example
 	"aws_comprehend_entity_recognizer": config.TemplatedStringAsIdentifier("name", "arn:aws:comprehend:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:entity-recognizer/{{ .external_name }}"),
 
-	// connect
-	//
-	// Amazon Connect Instance Storage Configs can be imported using the instance_id, association_id, and resource_type separated by a colon (:)
-	// Example: f1288a1f-6193-445a-b47e-af739b2:c1d4e5f6-1b3c-1b3c-1b3c-c1d4e5f6c1d4e5:CHAT_TRANSCRIPTS
-	// TODO: Check if this configuration works while testing. If no, then use IdentifierFromProvider
-	"aws_connect_instance_storage_config": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }}:{{ .external_name }}:{{ .parameters.resource_type }}"),
-	// Amazon Connect Phone Numbers can be imported using its id
-	"aws_connect_phone_number": config.IdentifierFromProvider,
-	// Amazon Connect Users can be imported using the instance_id and user_id separated by a colon (:)
-	// Example: f1288a1f-6193-445a-b47e-af739b2:c1d4e5f6-1b3c-1b3c-1b3c-c1d4e5f6c1d4e5
-	"aws_connect_user": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_id }}:{{ .external_name }}"),
-	// Amazon Connect Vocabularies can be imported using the instance_id and vocabulary_id separated by a colon (:)
-	// Example: f1288a1f-6193-445a-b47e-af739b2:c1d4e5f6-1b3c-1b3c-1b3c-c1d4e5f6c1d4e5
-	"aws_connect_vocabulary": config.IdentifierFromProvider,
-
 	// controltower
 	//
 	// Control Tower Controls can be imported using their organizational_unit_arn/control_identifier
 	// Example: arn:aws:organizations::123456789101:ou/o-qqaejywet/ou-qg5o-ufbhdtv3,arn:aws:controltower:us-east-1::control/WTDSMKDKDNLE
 	"aws_controltower_control": config.TemplatedStringAsIdentifier("", "{{ .parameters.target_identifier }},{{ .external_name }}"),
+
 	// datasync
 	//
 	// aws_datasync_location_object_storage can be imported by using the Amazon Resource Name (ARN)

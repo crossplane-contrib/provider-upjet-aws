@@ -69,6 +69,32 @@ func (mg *ResourceServer) ResolveReferences(ctx context.Context, c client.Reader
 	return nil
 }
 
+// ResolveReferences of this RiskConfiguration.
+func (mg *RiskConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserPoolID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.UserPoolIDRef,
+		Selector:     mg.Spec.ForProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.UserPoolID")
+	}
+	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this User.
 func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
