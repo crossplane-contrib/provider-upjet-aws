@@ -8,6 +8,8 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/provider-aws/config/common"
+
+	"fmt"
 )
 
 // Configure adds configurations for rds group.
@@ -85,9 +87,16 @@ func Configure(p *config.Provider) {
 			if a, ok := attr["endpoint"].(string); ok {
 				conn["endpoint"] = []byte(a)
 			}
+			if a, ok := attr["address"].(string); ok {
+				conn["address"] = []byte(a)
+				conn["host"] = []byte(a)
+			}
 			if a, ok := attr["username"].(string); ok {
 				conn["username"] = []byte(a)
 			}
+
+			conn["port"] = []byte(fmt.Sprintf("%v", attr["port"]))
+
 			return conn, nil
 		}
 	})
