@@ -417,6 +417,21 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// No import.
 	"aws_lb_target_group_attachment": config.IdentifierFromProvider,
 
+	// dynamodb
+	//
+	// DynamoDB table replicas can be imported using the table-name:main-region
+	"aws_dynamodb_table_replica": config.IdentifierFromProvider,
+
+	// efs
+	//
+	// EFS Replication Configurations can be imported using the file system ID of either the source or destination file system
+	"aws_efs_replication_configuration": config.IdentifierFromProvider,
+
+	// emrserverless
+	//
+	// EMR Severless applications can be imported using the id
+	"aws_emrserverless_application": config.IdentifierFromProvider,
+
 	// globalaccelerator
 	//
 	// arn:aws:globalaccelerator::111111111111:accelerator/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
@@ -1023,6 +1038,17 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudwatch_log_destination_policy": config.ParameterAsIdentifier("destination_name"),
 	// CloudWatch Logs subscription filter can be imported using the log group name and subscription filter name separated by |
 	"aws_cloudwatch_log_subscription_filter": config.IdentifierFromProvider,
+
+	// directory_service
+	//
+	// Directory Service Shared Directories can be imported using the owner directory ID/shared directory ID
+	// "aws_directory_service_shared_directory": config.TemplatedStringAsIdentifier("", "{{ .parameters.directory_id }}/{{ .external_name }}"),
+	"aws_directory_service_shared_directory": config.IdentifierFromProvider,
+
+	// dms
+	//
+	// Endpoints can be imported using the endpoint_id
+	"aws_dms_s3_endpoint": config.ParameterAsIdentifier("endpoint_id"),
 
 	// elb
 	//
