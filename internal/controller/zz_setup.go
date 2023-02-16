@@ -271,6 +271,7 @@ import (
 	eventsubscriptiondocdb "github.com/upbound/provider-aws/internal/controller/docdb/eventsubscription"
 	globalcluster "github.com/upbound/provider-aws/internal/controller/docdb/globalcluster"
 	subnetgroupdocdb "github.com/upbound/provider-aws/internal/controller/docdb/subnetgroup"
+	conditionalforwarder "github.com/upbound/provider-aws/internal/controller/ds/conditionalforwarder"
 	directory "github.com/upbound/provider-aws/internal/controller/ds/directory"
 	contributorinsights "github.com/upbound/provider-aws/internal/controller/dynamodb/contributorinsights"
 	globaltable "github.com/upbound/provider-aws/internal/controller/dynamodb/globaltable"
@@ -1098,6 +1099,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventsubscriptiondocdb.Setup,
 		globalcluster.Setup,
 		subnetgroupdocdb.Setup,
+		conditionalforwarder.Setup,
 		directory.Setup,
 		contributorinsights.Setup,
 		globaltable.Setup,
