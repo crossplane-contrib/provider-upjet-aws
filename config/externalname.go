@@ -1821,6 +1821,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// ds
 	//
+	// Conditional forwarders can be imported using the directory id and remote_domain_name: d-1234567890:example.com
+	"aws_directory_service_conditional_forwarder": config.TemplatedStringAsIdentifier("", "{{ .parameters.directory_id }}:{{ .parameters.remote_domain_name }}"),
 	// DirectoryService directories can be imported using the directory id
 	"aws_directory_service_directory": config.IdentifierFromProvider,
 
