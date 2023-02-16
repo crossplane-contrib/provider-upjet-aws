@@ -902,4 +902,121 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_redshiftserverless_usage_limit": config.IdentifierFromProvider,
 	// Redshift Serverless Workgroups can be imported using the workgroup_name
 	"aws_redshiftserverless_workgroup": config.ParameterAsIdentifier("workgroup_name"),
+
+	// resourceexplorer2
+	//
+	// Resource Explorer indexes can be imported using the arn
+	// Example: arn:aws:resource-explorer-2:us-east-1:123456789012:index/6047ac4e-207e-4487-9bcf-cb53bb0ff5cc
+	"aws_resourceexplorer2_index": config.IdentifierFromProvider,
+	// Resource Explorer views can be imported using the arn
+	// Example: arn:aws:resource-explorer-2:us-west-2:123456789012:view/exampleview/e0914f6c-6c27-4b47-b5d4-6b28381a2421
+	"aws_resourceexplorer2_view": config.IdentifierFromProvider,
+
+	// rolesanywhere
+	//
+	// aws_rolesanywhere_profile can be imported using its id
+	"aws_rolesanywhere_profile": config.IdentifierFromProvider,
+	// aws_rolesanywhere_trust_anchor can be imported using its id
+	"aws_rolesanywhere_trust_anchor": config.IdentifierFromProvider,
+
+	// route53
+	//
+	// Route 53 Resolver configs can be imported using the Route 53 Resolver config ID
+	"aws_route53_resolver_config": config.IdentifierFromProvider,
+
+	// rum
+	//
+	// Cloudwatch RUM App Monitor can be imported using the name
+	"aws_rum_app_monitor": config.NameAsIdentifier,
+	// Cloudwatch RUM Metrics Destination can be imported using the id
+	"aws_rum_metrics_destination": config.ParameterAsIdentifier("app_monitor_name"),
+
+	// s3
+	//
+	// S3 Storage Lens configurations can be imported using the account_id and config_id, separated by a colon (:)
+	"aws_s3control_storage_lens_configuration": config.IdentifierFromProvider,
+
+	// sagemaker
+	//
+	// Models can be imported using the id
+	"aws_sagemaker_servicecatalog_portfolio_status": config.IdentifierFromProvider,
+	// SageMaker Spaces can be imported using the id
+	// Example: arn:aws:sagemaker:us-west-2:123456789012:space/domain-id/space-name
+	"aws_sagemaker_space": config.TemplatedStringAsIdentifier("space-name", "arn:aws:sagemaker:{{ .setup.configuration.region }}:{{ .setup.configuration.account_id }}:space/{{ .parameters.domain_id }}/{{ .external_name }}"),
+
+	// scheduler
+	//
+	// Schedules can be imported using the combination group_name/name
+	"aws_scheduler_schedule": config.IdentifierFromProvider,
+	// Schedule groups can be imported using the name
+	"aws_scheduler_schedule_group": config.NameAsIdentifier,
+
+	// schemas
+	//
+	// EventBridge Schema Registry Policy can be imported using the registry_name
+	"aws_schemas_registry_policy": config.ParameterAsIdentifier("registry_name"),
+
+	// sesv2
+	//
+	// SESv2 (Simple Email V2) Configuration Set can be imported using the configuration_set_name
+	"aws_sesv2_configuration_set": config.ParameterAsIdentifier("configuration_set_name"),
+	// SESv2 (Simple Email V2) Configuration Set Event Destination can be imported using the id (configuration_set_name|event_destination_name)
+	"aws_sesv2_configuration_set_event_destination": config.IdentifierFromProvider,
+	// SESv2 (Simple Email V2) Dedicated IP Assignment can be imported using the id, which is a comma-separated string made up of ip and destination_pool_name
+	"aws_sesv2_dedicated_ip_assignment": config.IdentifierFromProvider,
+	// SESv2 (Simple Email V2) Dedicated IP Pool can be imported using the pool_name
+	"aws_sesv2_dedicated_ip_pool": config.ParameterAsIdentifier("pool_name"),
+	// SESv2 (Simple Email V2) Email Identity can be imported using the email_identity
+	"aws_sesv2_email_identity": config.ParameterAsIdentifier("email_identity"),
+	// SESv2 (Simple Email V2) Email Identity Feedback Attributes can be imported using the email_identity
+	"aws_sesv2_email_identity_feedback_attributes": config.ParameterAsIdentifier("email_identity"),
+	// SESv2 (Simple Email V2) Email Identity Mail From Attributes can be imported using the email_identity
+	"aws_sesv2_email_identity_mail_from_attributes": config.ParameterAsIdentifier("email_identity"),
+
+	// sqs
+	//
+	// SQS Queue Redrive Allow Policies can be imported using the queue URL
+	"aws_sqs_queue_redrive_allow_policy": config.ParameterAsIdentifier("queue_url"),
+	// SQS Queue Redrive Policies can be imported using the queue URL
+	"aws_sqs_queue_redrive_policy": config.ParameterAsIdentifier("queue_url"),
+
+	// ssm
+	//
+	// The Systems Manager Default Patch Baseline can be imported using the patch baseline ID, patch baseline ARN, or the operating system value
+	"aws_ssm_default_patch_baseline": config.ParameterAsIdentifier("baseline_id"),
+	// AWS SSM Service Setting can be imported using the setting_id
+	"aws_ssm_service_setting": config.ParameterAsIdentifier("setting_id"),
+
+	// ssoadmin
+	//
+	// SSO Managed Policy Attachments can be imported using the name, path, permission_set_arn, and instance_arn separated by a comma (,)
+	// Example: TestPolicy,/,arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	"aws_ssoadmin_customer_managed_policy_attachment": config.IdentifierFromProvider,
+	// SSO Account Assignments can be imported using the instance_arn
+	"aws_ssoadmin_instance_access_control_attributes": config.ParameterAsIdentifier("instance_arn"),
+	// SSO Admin Permissions Boundary Attachments can be imported using the permission_set_arn and instance_arn, separated by a comma (,)
+	"aws_ssoadmin_permissions_boundary_attachment": config.IdentifierFromProvider,
+
+	// transcribe
+	//
+	// Transcribe LanguageModel can be imported using the model_name
+	"aws_transcribe_language_model": config.ParameterAsIdentifier("model_name"),
+	// Transcribe MedicalVocabulary can be imported using the vocabulary_name
+	"aws_transcribe_medical_vocabulary": config.ParameterAsIdentifier("vocabulary_name"),
+	// Transcribe Vocabulary can be imported using the vocabulary_name
+	"aws_transcribe_vocabulary": config.ParameterAsIdentifier("vocabulary_name"),
+	// Transcribe VocabularyFilter can be imported using the vocabulary_filter_name
+	"aws_transcribe_vocabulary_filter": config.ParameterAsIdentifier("vocabulary_filter_name"),
+
+	// transfer
+	//
+	// aws_transfer_tag can be imported by using the Transfer Family resource identifier and key, separated by a comma (,)
+	// Example: arn:aws:transfer:us-east-1:123456789012:server/s-1234567890abcdef0,Name
+	"aws_transfer_tag": config.IdentifierFromProvider,
+
+	// vpc_network
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_vpc_network_performance_metric_subscription": config.IdentifierFromProvider,
 }
