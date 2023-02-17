@@ -412,6 +412,8 @@ import (
 	applicationversion "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/applicationversion"
 	configurationtemplate "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/configurationtemplate"
 	domainelasticsearch "github.com/upbound/provider-aws/internal/controller/elasticsearch/domain"
+	domainpolicy "github.com/upbound/provider-aws/internal/controller/elasticsearch/domainpolicy"
+	domainsamloptions "github.com/upbound/provider-aws/internal/controller/elasticsearch/domainsamloptions"
 	pipelineelastictranscoder "github.com/upbound/provider-aws/internal/controller/elastictranscoder/pipeline"
 	preset "github.com/upbound/provider-aws/internal/controller/elastictranscoder/preset"
 	appcookiestickinesspolicy "github.com/upbound/provider-aws/internal/controller/elb/appcookiestickinesspolicy"
@@ -630,8 +632,8 @@ import (
 	transitgatewayregistration "github.com/upbound/provider-aws/internal/controller/networkmanager/transitgatewayregistration"
 	vpcattachment "github.com/upbound/provider-aws/internal/controller/networkmanager/vpcattachment"
 	domainopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domain"
-	domainpolicy "github.com/upbound/provider-aws/internal/controller/opensearch/domainpolicy"
-	domainsamloptions "github.com/upbound/provider-aws/internal/controller/opensearch/domainsamloptions"
+	domainpolicyopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domainpolicy"
+	domainsamloptionsopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domainsamloptions"
 	applicationopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/application"
 	customlayer "github.com/upbound/provider-aws/internal/controller/opsworks/customlayer"
 	ecsclusterlayer "github.com/upbound/provider-aws/internal/controller/opsworks/ecsclusterlayer"
@@ -1307,6 +1309,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		applicationversion.Setup,
 		configurationtemplate.Setup,
 		domainelasticsearch.Setup,
+		domainpolicy.Setup,
+		domainsamloptions.Setup,
 		pipelineelastictranscoder.Setup,
 		preset.Setup,
 		appcookiestickinesspolicy.Setup,
@@ -1525,8 +1529,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		transitgatewayregistration.Setup,
 		vpcattachment.Setup,
 		domainopensearch.Setup,
-		domainpolicy.Setup,
-		domainsamloptions.Setup,
+		domainpolicyopensearch.Setup,
+		domainsamloptionsopensearch.Setup,
 		applicationopsworks.Setup,
 		customlayer.Setup,
 		ecsclusterlayer.Setup,
