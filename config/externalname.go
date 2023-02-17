@@ -2341,6 +2341,33 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// ApplicationInsights Applications can be imported using the resource_group_name
 	"aws_applicationinsights_application": config.ParameterAsIdentifier("resource_group_name"),
+
+	// lightsail
+	//
+	// aws_lightsail_bucket can be imported by using the name attribute
+	"aws_lightsail_bucket": config.NameAsIdentifier,
+	// aws_lightsail_certificate can be imported using the certificate name
+	// TODO: Potential bug in documentation. If configuration doesn't work - change to IdentifierFromProvider
+	"aws_lightsail_certificate": config.NameAsIdentifier,
+	// Lightsail Container Service can be imported using the name
+	"aws_lightsail_container_service": config.NameAsIdentifier,
+	// aws_lightsail_disk can be imported by using the name attribute
+	"aws_lightsail_disk": config.NameAsIdentifier,
+	// aws_lightsail_disk can be imported by using the id attribute
+	"aws_lightsail_disk_attachment": config.IdentifierFromProvider,
+	// aws_lightsail_lb can be imported by using the name attribute
+	"aws_lightsail_lb": config.NameAsIdentifier,
+	// aws_lightsail_lb_attachment can be imported by using the name attribute
+	// ID: lb_name,instance_name
+	"aws_lightsail_lb_attachment": config.IdentifierFromProvider,
+	// aws_lightsail_lb_certificate can be imported by using the id attribute
+	// ID: lb_name,name
+	"aws_lightsail_lb_certificate": config.TemplatedStringAsIdentifier("name", "{{ .parameters.lb_name }},{{ .external_name }}"),
+	// aws_lightsail_lb_stickiness_policy can be imported by using the lb_name attribute
+	"aws_lightsail_lb_stickiness_policy": config.ParameterAsIdentifier("lb_name"),
+	// aws_lightsail_domain_entry can be imported by using the id attribute
+	// ID: name_domain_name_type_target
+	"aws_lightsail_domain_entry": config.TemplatedStringAsIdentifier("name", "{{ .external_name }}_{{ .parameters.domain_name }}_{{ .parameters.type }}_{{ .parameeters.target }}"),
 }
 
 func lambdaFunctionURL() config.ExternalName {

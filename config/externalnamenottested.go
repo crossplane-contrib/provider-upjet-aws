@@ -790,39 +790,15 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// lightsail
 	//
-	// aws_lightsail_bucket can be imported by using the name attribute
-	"aws_lightsail_bucket": config.NameAsIdentifier,
-	// aws_lightsail_certificate can be imported using the certificate name
-	// TODO: Potential bug in documentation. If configuration doesn't work - change to IdentifierFromProvider
-	"aws_lightsail_certificate": config.NameAsIdentifier,
-	// Lightsail Container Service can be imported using the name
-	"aws_lightsail_container_service": config.NameAsIdentifier,
 	// Lightsail Container Service Deployment Version can be imported using the service_name and version separated by a slash (/)
 	"aws_lightsail_container_service_deployment_version": config.TemplatedStringAsIdentifier("", "{{ .parameters.service_name }}/{{ .external_name }}"),
-	// Lightsail Databases can be imported using their name
-	"aws_lightsail_database": config.NameAsIdentifier,
-	// aws_lightsail_disk can be imported by using the name attribute
-	"aws_lightsail_disk": config.NameAsIdentifier,
-	// aws_lightsail_disk can be imported by using the id attribute
-	"aws_lightsail_disk_attachment": config.IdentifierFromProvider,
-	// aws_lightsail_domain_entry can be imported by using the id attribute
-	// ID: name_domain_name_type_target
-	"aws_lightsail_domain_entry": config.TemplatedStringAsIdentifier("name", "{{ .external_name }}_{{ .parameters.domain_name }}_{{ .parameters.type }}_{{ .parameeters.target }}"),
-	// aws_lightsail_lb can be imported by using the name attribute
-	"aws_lightsail_lb": config.NameAsIdentifier,
-	// aws_lightsail_lb_attachment can be imported by using the name attribute
-	// ID: lb_name,instance_name
-	"aws_lightsail_lb_attachment": config.IdentifierFromProvider,
-	// aws_lightsail_lb_certificate can be imported by using the id attribute
-	// ID: lb_name,name
-	"aws_lightsail_lb_certificate": config.TemplatedStringAsIdentifier("name", "{{ .parameters.lb_name }},{{ .external_name }}"),
 	// aws_lightsail_lb_certificate_attachment can be imported by using the id attribute
 	// ID: lb_name,certificate_name
 	"aws_lightsail_lb_certificate_attachment": config.IdentifierFromProvider,
 	// aws_lightsail_lb_https_redirection_policy can be imported by using the lb_name attribute
 	"aws_lightsail_lb_https_redirection_policy": config.ParameterAsIdentifier("lb_name"),
-	// aws_lightsail_lb_stickiness_policy can be imported by using the lb_name attribute
-	"aws_lightsail_lb_stickiness_policy": config.ParameterAsIdentifier("lb_name"),
+	// Lightsail Databases can be imported using their name
+	"aws_lightsail_database": config.IdentifierFromProvider,
 
 	// macie2
 	//
