@@ -238,3 +238,29 @@ func (mg *SubnetGroup) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	return nil
 }
+
+// ResolveReferences of this UsageLimit.
+func (mg *UsageLimit) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterIdentifier),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ClusterIdentifierRef,
+		Selector:     mg.Spec.ForProvider.ClusterIdentifierSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterIdentifier")
+	}
+	mg.Spec.ForProvider.ClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterIdentifierRef = rsp.ResolvedReference
+
+	return nil
+}

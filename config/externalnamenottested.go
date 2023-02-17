@@ -870,8 +870,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// redshift
 	//
-	// Redshift Authentication Profiles support import by authentication_profile_name
-	"aws_redshift_authentication_profile": config.ParameterAsIdentifier("authentication_profile_name"),
+
 	// Redshift Cluster IAM Roless can be imported using the cluster_identifier
 	"aws_redshift_cluster_iam_roles": config.ParameterAsIdentifier("cluster_identifier"),
 	// Redshift endpoint access can be imported using the name
@@ -879,15 +878,9 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Redshift endpoint authorization can be imported using the id
 	// Example: 01234567910:cluster-example-id
 	"aws_redshift_endpoint_authorization": config.TemplatedStringAsIdentifier("", "{{ .parameters.account }}:{{ .external_name }}"),
-	// Redshift Hsm Client Certificates support import by hsm_client_certificate_identifier
-	"aws_redshift_hsm_client_certificate": config.ParameterAsIdentifier("hsm_client_certificate_identifier"),
-	// Redshift Hsm Client Certificates support import by hsm_configuration_identifier
-	"aws_redshift_hsm_configuration": config.ParameterAsIdentifier("hsm_configuration_identifier"),
 	// Redshift usage limits can be imported using the id
 	// Example: 01234567910:cluster-example-id:example:example
 	"aws_redshift_partner": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.cluster_identifier }}:{{ .external_name }}"),
-	// Redshift usage limits can be imported using the id
-	"aws_redshift_usage_limit": config.IdentifierFromProvider,
 	// Redshift Data Statements can be imported using the id
 	"aws_redshiftdata_statement": config.IdentifierFromProvider,
 	// Redshift Serverless Endpoint Access can be imported using the endpoint_name

@@ -656,14 +656,18 @@ import (
 	securitygrouprds "github.com/upbound/provider-aws/internal/controller/rds/securitygroup"
 	snapshotrds "github.com/upbound/provider-aws/internal/controller/rds/snapshot"
 	subnetgrouprds "github.com/upbound/provider-aws/internal/controller/rds/subnetgroup"
+	authenticationprofile "github.com/upbound/provider-aws/internal/controller/redshift/authenticationprofile"
 	clusterredshift "github.com/upbound/provider-aws/internal/controller/redshift/cluster"
 	eventsubscriptionredshift "github.com/upbound/provider-aws/internal/controller/redshift/eventsubscription"
+	hsmclientcertificate "github.com/upbound/provider-aws/internal/controller/redshift/hsmclientcertificate"
+	hsmconfiguration "github.com/upbound/provider-aws/internal/controller/redshift/hsmconfiguration"
 	parametergroupredshift "github.com/upbound/provider-aws/internal/controller/redshift/parametergroup"
 	scheduledactionredshift "github.com/upbound/provider-aws/internal/controller/redshift/scheduledaction"
 	snapshotcopygrant "github.com/upbound/provider-aws/internal/controller/redshift/snapshotcopygrant"
 	snapshotschedule "github.com/upbound/provider-aws/internal/controller/redshift/snapshotschedule"
 	snapshotscheduleassociation "github.com/upbound/provider-aws/internal/controller/redshift/snapshotscheduleassociation"
 	subnetgroupredshift "github.com/upbound/provider-aws/internal/controller/redshift/subnetgroup"
+	usagelimit "github.com/upbound/provider-aws/internal/controller/redshift/usagelimit"
 	groupresourcegroups "github.com/upbound/provider-aws/internal/controller/resourcegroups/group"
 	delegationset "github.com/upbound/provider-aws/internal/controller/route53/delegationset"
 	healthcheck "github.com/upbound/provider-aws/internal/controller/route53/healthcheck"
@@ -1494,14 +1498,18 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		securitygrouprds.Setup,
 		snapshotrds.Setup,
 		subnetgrouprds.Setup,
+		authenticationprofile.Setup,
 		clusterredshift.Setup,
 		eventsubscriptionredshift.Setup,
+		hsmclientcertificate.Setup,
+		hsmconfiguration.Setup,
 		parametergroupredshift.Setup,
 		scheduledactionredshift.Setup,
 		snapshotcopygrant.Setup,
 		snapshotschedule.Setup,
 		snapshotscheduleassociation.Setup,
 		subnetgroupredshift.Setup,
+		usagelimit.Setup,
 		groupresourcegroups.Setup,
 		delegationset.Setup,
 		healthcheck.Setup,
