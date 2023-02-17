@@ -13,6 +13,80 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this AuthenticationProfile
+func (mg *AuthenticationProfile) GetTerraformResourceType() string {
+	return "aws_redshift_authentication_profile"
+}
+
+// GetConnectionDetailsMapping for this AuthenticationProfile
+func (tr *AuthenticationProfile) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this AuthenticationProfile
+func (tr *AuthenticationProfile) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this AuthenticationProfile
+func (tr *AuthenticationProfile) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this AuthenticationProfile
+func (tr *AuthenticationProfile) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this AuthenticationProfile
+func (tr *AuthenticationProfile) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this AuthenticationProfile
+func (tr *AuthenticationProfile) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this AuthenticationProfile using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *AuthenticationProfile) LateInitialize(attrs []byte) (bool, error) {
+	params := &AuthenticationProfileParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *AuthenticationProfile) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Cluster
 func (mg *Cluster) GetTerraformResourceType() string {
 	return "aws_redshift_cluster"
@@ -158,6 +232,154 @@ func (tr *EventSubscription) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *EventSubscription) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this HSMClientCertificate
+func (mg *HSMClientCertificate) GetTerraformResourceType() string {
+	return "aws_redshift_hsm_client_certificate"
+}
+
+// GetConnectionDetailsMapping for this HSMClientCertificate
+func (tr *HSMClientCertificate) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this HSMClientCertificate
+func (tr *HSMClientCertificate) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this HSMClientCertificate
+func (tr *HSMClientCertificate) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this HSMClientCertificate
+func (tr *HSMClientCertificate) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this HSMClientCertificate
+func (tr *HSMClientCertificate) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this HSMClientCertificate
+func (tr *HSMClientCertificate) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this HSMClientCertificate using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *HSMClientCertificate) LateInitialize(attrs []byte) (bool, error) {
+	params := &HSMClientCertificateParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *HSMClientCertificate) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this HSMConfiguration
+func (mg *HSMConfiguration) GetTerraformResourceType() string {
+	return "aws_redshift_hsm_configuration"
+}
+
+// GetConnectionDetailsMapping for this HSMConfiguration
+func (tr *HSMConfiguration) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"hsm_partition_password": "spec.forProvider.hsmPartitionPasswordSecretRef"}
+}
+
+// GetObservation of this HSMConfiguration
+func (tr *HSMConfiguration) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this HSMConfiguration
+func (tr *HSMConfiguration) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this HSMConfiguration
+func (tr *HSMConfiguration) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this HSMConfiguration
+func (tr *HSMConfiguration) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this HSMConfiguration
+func (tr *HSMConfiguration) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this HSMConfiguration using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *HSMConfiguration) LateInitialize(attrs []byte) (bool, error) {
+	params := &HSMConfigurationParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *HSMConfiguration) GetTerraformSchemaVersion() int {
 	return 0
 }
 
@@ -602,5 +824,79 @@ func (tr *SubnetGroup) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SubnetGroup) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this UsageLimit
+func (mg *UsageLimit) GetTerraformResourceType() string {
+	return "aws_redshift_usage_limit"
+}
+
+// GetConnectionDetailsMapping for this UsageLimit
+func (tr *UsageLimit) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this UsageLimit
+func (tr *UsageLimit) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this UsageLimit
+func (tr *UsageLimit) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this UsageLimit
+func (tr *UsageLimit) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this UsageLimit
+func (tr *UsageLimit) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this UsageLimit
+func (tr *UsageLimit) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this UsageLimit using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *UsageLimit) LateInitialize(attrs []byte) (bool, error) {
+	params := &UsageLimitParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *UsageLimit) GetTerraformSchemaVersion() int {
 	return 0
 }

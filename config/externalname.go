@@ -1078,6 +1078,14 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_redshift_subnet_group": config.NameAsIdentifier,
 	// Redshift Snapshot Copy Grants support import by name
 	"aws_redshift_snapshot_copy_grant": config.IdentifierFromProvider,
+	// Redshift Authentication Profiles support import by authentication_profile_name
+	"aws_redshift_authentication_profile": config.ParameterAsIdentifier("authentication_profile_name"),
+	// Redshift Hsm Client Certificates support import by hsm_client_certificate_identifier
+	"aws_redshift_hsm_client_certificate": config.ParameterAsIdentifier("hsm_client_certificate_identifier"),
+	// Redshift Hsm Client Certificates support import by hsm_configuration_identifier
+	"aws_redshift_hsm_configuration": config.ParameterAsIdentifier("hsm_configuration_identifier"),
+	// Redshift usage limits can be imported using the id
+	"aws_redshift_usage_limit": config.IdentifierFromProvider,
 
 	// sfn
 	//
