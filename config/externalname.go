@@ -1046,6 +1046,25 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// IOT Things can be imported using the name
 	"aws_iot_thing": config.NameAsIdentifier,
 
+	// networkfirewall
+	//
+	// Network Firewall Firewalls can be imported using their ARN
+	// Example: arn:aws:network-firewall:us-west-1:123456789012:firewall/example
+	// "aws_networkfirewall_firewall": config.TemplatedStringAsIdentifier("name", "arn:aws:network-firewall:{{ .setup.configuration.region }}:{{ .setup.configuration.account_id }}:firewall/{{ .external_name }}"),
+	"aws_networkfirewall_firewall": config.IdentifierFromProvider,
+
+	// networkmanager
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_networkmanager_attachment_accepter": config.IdentifierFromProvider,
+	// aws_networkmanager_connect_attachment can be imported using the attachment ID
+	"aws_networkmanager_connect_attachment": config.IdentifierFromProvider,
+	// aws_networkmanager_core_network can be imported using the core network ID
+	"aws_networkmanager_core_network": config.IdentifierFromProvider,
+	// aws_networkmanager_vpc_attachment can be imported using the attachment ID
+	"aws_networkmanager_vpc_attachment": config.IdentifierFromProvider,
+
 	// kafka
 	//
 	// MSK configurations can be imported using the configuration ARN that has

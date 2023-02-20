@@ -829,29 +829,14 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// aws_neptune_global_cluster can be imported by using the Global Cluster identifier
 	"aws_neptune_global_cluster": config.ParameterAsIdentifier("global_cluster_identifier"),
 
-	// networkfirewall
-	//
-	// Network Firewall Firewalls can be imported using their ARN
-	// Example: arn:aws:network-firewall:us-west-1:123456789012:firewall/example
-	"aws_networkfirewall_firewall": config.TemplatedStringAsIdentifier("name", "arn:aws:network-firewall:{{ .setup.configuration.region }}:{{ .setup.configuration.account_id }}:firewall/{{ .external_name }}"),
-
 	// networkmanager
 	//
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_networkmanager_attachment_accepter": config.IdentifierFromProvider,
-	// aws_networkmanager_connect_attachment can be imported using the attachment ID
-	"aws_networkmanager_connect_attachment": config.IdentifierFromProvider,
-	// aws_networkmanager_core_network can be imported using the core network ID
-	"aws_networkmanager_core_network": config.IdentifierFromProvider,
 	// aws_networkmanager_site_to_site_vpn_attachment can be imported using the attachment ID
 	"aws_networkmanager_site_to_site_vpn_attachment": config.IdentifierFromProvider,
 	// aws_networkmanager_transit_gateway_peering can be imported using the peering ID
 	"aws_networkmanager_transit_gateway_peering": config.IdentifierFromProvider,
 	// aws_networkmanager_transit_gateway_route_table_attachment can be imported using the attachment ID
 	"aws_networkmanager_transit_gateway_route_table_attachment": config.IdentifierFromProvider,
-	// aws_networkmanager_vpc_attachment can be imported using the attachment ID
-	"aws_networkmanager_vpc_attachment": config.IdentifierFromProvider,
 
 	// opensearch
 	//

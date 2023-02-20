@@ -589,9 +589,13 @@ import (
 	eventsubscriptionneptune "github.com/upbound/provider-aws/internal/controller/neptune/eventsubscription"
 	parametergroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/parametergroup"
 	subnetgroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/subnetgroup"
+	firewall "github.com/upbound/provider-aws/internal/controller/networkfirewall/firewall"
 	firewallpolicy "github.com/upbound/provider-aws/internal/controller/networkfirewall/firewallpolicy"
 	rulegroup "github.com/upbound/provider-aws/internal/controller/networkfirewall/rulegroup"
+	attachmentaccepter "github.com/upbound/provider-aws/internal/controller/networkmanager/attachmentaccepter"
+	connectattachment "github.com/upbound/provider-aws/internal/controller/networkmanager/connectattachment"
 	connectionnetworkmanager "github.com/upbound/provider-aws/internal/controller/networkmanager/connection"
+	corenetwork "github.com/upbound/provider-aws/internal/controller/networkmanager/corenetwork"
 	customergatewayassociation "github.com/upbound/provider-aws/internal/controller/networkmanager/customergatewayassociation"
 	device "github.com/upbound/provider-aws/internal/controller/networkmanager/device"
 	globalnetwork "github.com/upbound/provider-aws/internal/controller/networkmanager/globalnetwork"
@@ -600,6 +604,7 @@ import (
 	site "github.com/upbound/provider-aws/internal/controller/networkmanager/site"
 	transitgatewayconnectpeerassociation "github.com/upbound/provider-aws/internal/controller/networkmanager/transitgatewayconnectpeerassociation"
 	transitgatewayregistration "github.com/upbound/provider-aws/internal/controller/networkmanager/transitgatewayregistration"
+	vpcattachment "github.com/upbound/provider-aws/internal/controller/networkmanager/vpcattachment"
 	domainopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domain"
 	domainpolicy "github.com/upbound/provider-aws/internal/controller/opensearch/domainpolicy"
 	domainsamloptions "github.com/upbound/provider-aws/internal/controller/opensearch/domainsamloptions"
@@ -1447,9 +1452,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventsubscriptionneptune.Setup,
 		parametergroupneptune.Setup,
 		subnetgroupneptune.Setup,
+		firewall.Setup,
 		firewallpolicy.Setup,
 		rulegroup.Setup,
+		attachmentaccepter.Setup,
+		connectattachment.Setup,
 		connectionnetworkmanager.Setup,
+		corenetwork.Setup,
 		customergatewayassociation.Setup,
 		device.Setup,
 		globalnetwork.Setup,
@@ -1458,6 +1467,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		site.Setup,
 		transitgatewayconnectpeerassociation.Setup,
 		transitgatewayregistration.Setup,
+		vpcattachment.Setup,
 		domainopensearch.Setup,
 		domainpolicy.Setup,
 		domainsamloptions.Setup,
