@@ -19,6 +19,32 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this Component.
+func (mg *Component) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
+		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyID")
+	}
+	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this ContainerRecipe.
 func (mg *ContainerRecipe) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -26,6 +52,24 @@ func (mg *ContainerRecipe) ResolveReferences(ctx context.Context, c client.Reade
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Component); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Component[i3].ComponentArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.Component[i3].ComponentArnRef,
+			Selector:     mg.Spec.ForProvider.Component[i3].ComponentArnSelector,
+			To: reference.To{
+				List:    &ComponentList{},
+				Managed: &Component{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Component[i3].ComponentArn")
+		}
+		mg.Spec.ForProvider.Component[i3].ComponentArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Component[i3].ComponentArnRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 		Extract:      reference.ExternalName(),
@@ -160,6 +204,35 @@ func (mg *ImagePipeline) ResolveReferences(ctx context.Context, c client.Reader)
 	}
 	mg.Spec.ForProvider.InfrastructureConfigurationArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InfrastructureConfigurationArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ImageRecipe.
+func (mg *ImageRecipe) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Component); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Component[i3].ComponentArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.Component[i3].ComponentArnRef,
+			Selector:     mg.Spec.ForProvider.Component[i3].ComponentArnSelector,
+			To: reference.To{
+				List:    &ComponentList{},
+				Managed: &Component{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Component[i3].ComponentArn")
+		}
+		mg.Spec.ForProvider.Component[i3].ComponentArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Component[i3].ComponentArnRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

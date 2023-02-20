@@ -406,6 +406,7 @@ import (
 	userelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/user"
 	usergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/usergroup"
 	applicationelasticbeanstalk "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/application"
+	applicationversion "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/applicationversion"
 	configurationtemplate "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/configurationtemplate"
 	domainelasticsearch "github.com/upbound/provider-aws/internal/controller/elasticsearch/domain"
 	pipelineelastictranscoder "github.com/upbound/provider-aws/internal/controller/elastictranscoder/pipeline"
@@ -484,6 +485,7 @@ import (
 	userpolicyattachment "github.com/upbound/provider-aws/internal/controller/iam/userpolicyattachment"
 	usersshkey "github.com/upbound/provider-aws/internal/controller/iam/usersshkey"
 	virtualmfadevice "github.com/upbound/provider-aws/internal/controller/iam/virtualmfadevice"
+	component "github.com/upbound/provider-aws/internal/controller/imagebuilder/component"
 	containerrecipe "github.com/upbound/provider-aws/internal/controller/imagebuilder/containerrecipe"
 	distributionconfiguration "github.com/upbound/provider-aws/internal/controller/imagebuilder/distributionconfiguration"
 	image "github.com/upbound/provider-aws/internal/controller/imagebuilder/image"
@@ -679,6 +681,7 @@ import (
 	healthcheck "github.com/upbound/provider-aws/internal/controller/route53/healthcheck"
 	hostedzonednssec "github.com/upbound/provider-aws/internal/controller/route53/hostedzonednssec"
 	record "github.com/upbound/provider-aws/internal/controller/route53/record"
+	resolverconfig "github.com/upbound/provider-aws/internal/controller/route53/resolverconfig"
 	trafficpolicy "github.com/upbound/provider-aws/internal/controller/route53/trafficpolicy"
 	trafficpolicyinstance "github.com/upbound/provider-aws/internal/controller/route53/trafficpolicyinstance"
 	vpcassociationauthorization "github.com/upbound/provider-aws/internal/controller/route53/vpcassociationauthorization"
@@ -1269,6 +1272,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userelasticache.Setup,
 		usergroupelasticache.Setup,
 		applicationelasticbeanstalk.Setup,
+		applicationversion.Setup,
 		configurationtemplate.Setup,
 		domainelasticsearch.Setup,
 		pipelineelastictranscoder.Setup,
@@ -1347,6 +1351,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userpolicyattachment.Setup,
 		usersshkey.Setup,
 		virtualmfadevice.Setup,
+		component.Setup,
 		containerrecipe.Setup,
 		distributionconfiguration.Setup,
 		image.Setup,
@@ -1542,6 +1547,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		healthcheck.Setup,
 		hostedzonednssec.Setup,
 		record.Setup,
+		resolverconfig.Setup,
 		trafficpolicy.Setup,
 		trafficpolicyinstance.Setup,
 		vpcassociationauthorization.Setup,
