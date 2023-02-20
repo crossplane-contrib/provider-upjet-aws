@@ -1,0 +1,21 @@
+apiVersion: sesv2.aws.upbound.io/v1beta1
+kind: ConfigurationSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sesv2/v1beta1/configurationset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    deliveryOptions:
+    - tlsPolicy: REQUIRE
+    region: us-west-1
+    reputationOptions:
+    - reputationMetricsEnabled: false
+    sendingOptions:
+    - sendingEnabled: true
+    suppressionOptions:
+    - suppressedReasons:
+      - BOUNCE
+      - COMPLAINT

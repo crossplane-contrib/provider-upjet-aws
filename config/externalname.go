@@ -2376,6 +2376,21 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// aws_lightsail_domain_entry can be imported by using the id attribute
 	// ID: name_domain_name_type_target
 	"aws_lightsail_domain_entry": config.TemplatedStringAsIdentifier("name", "{{ .external_name }}_{{ .parameters.domain_name }}_{{ .parameters.type }}_{{ .parameeters.target }}"),
+
+	// sesv2
+	//
+	// SESv2 (Simple Email V2) Configuration Set can be imported using the configuration_set_name
+	"aws_sesv2_configuration_set": config.ParameterAsIdentifier("configuration_set_name"),
+	// SESv2 (Simple Email V2) Configuration Set Event Destination can be imported using the id (configuration_set_name|event_destination_name)
+	"aws_sesv2_configuration_set_event_destination": config.IdentifierFromProvider,
+	// SESv2 (Simple Email V2) Dedicated IP Pool can be imported using the pool_name
+	"aws_sesv2_dedicated_ip_pool": config.ParameterAsIdentifier("pool_name"),
+	// SESv2 (Simple Email V2) Email Identity can be imported using the email_identity
+	"aws_sesv2_email_identity": config.ParameterAsIdentifier("email_identity"),
+	// SESv2 (Simple Email V2) Email Identity Feedback Attributes can be imported using the email_identity
+	"aws_sesv2_email_identity_feedback_attributes": config.ParameterAsIdentifier("email_identity"),
+	// SESv2 (Simple Email V2) Email Identity Mail From Attributes can be imported using the email_identity
+	"aws_sesv2_email_identity_mail_from_attributes": config.ParameterAsIdentifier("email_identity"),
 }
 
 func lambdaFunctionURL() config.ExternalName {

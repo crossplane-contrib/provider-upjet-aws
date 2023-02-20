@@ -1,0 +1,27 @@
+apiVersion: sesv2.aws.upbound.io/v1beta1
+kind: EmailIdentityMailFromAttributes
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sesv2/v1beta1/emailidentitymailfromattributes
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    behaviorOnMxFailure: REJECT_MESSAGE
+    mailFromDomain: subdomain.example
+    region: us-west-1
+
+---
+
+apiVersion: sesv2.aws.upbound.io/v1beta1
+kind: EmailIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sesv2/v1beta1/emailidentitymailfromattributes
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
