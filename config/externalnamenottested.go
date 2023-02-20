@@ -951,20 +951,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// sesv2
 	//
-	// SESv2 (Simple Email V2) Configuration Set can be imported using the configuration_set_name
-	"aws_sesv2_configuration_set": config.ParameterAsIdentifier("configuration_set_name"),
-	// SESv2 (Simple Email V2) Configuration Set Event Destination can be imported using the id (configuration_set_name|event_destination_name)
-	"aws_sesv2_configuration_set_event_destination": config.IdentifierFromProvider,
 	// SESv2 (Simple Email V2) Dedicated IP Assignment can be imported using the id, which is a comma-separated string made up of ip and destination_pool_name
 	"aws_sesv2_dedicated_ip_assignment": config.IdentifierFromProvider,
-	// SESv2 (Simple Email V2) Dedicated IP Pool can be imported using the pool_name
-	"aws_sesv2_dedicated_ip_pool": config.ParameterAsIdentifier("pool_name"),
-	// SESv2 (Simple Email V2) Email Identity can be imported using the email_identity
-	"aws_sesv2_email_identity": config.ParameterAsIdentifier("email_identity"),
-	// SESv2 (Simple Email V2) Email Identity Feedback Attributes can be imported using the email_identity
-	"aws_sesv2_email_identity_feedback_attributes": config.ParameterAsIdentifier("email_identity"),
-	// SESv2 (Simple Email V2) Email Identity Mail From Attributes can be imported using the email_identity
-	"aws_sesv2_email_identity_mail_from_attributes": config.ParameterAsIdentifier("email_identity"),
 
 	// sqs
 	//

@@ -782,6 +782,12 @@ import (
 	receiptrule "github.com/upbound/provider-aws/internal/controller/ses/receiptrule"
 	receiptruleset "github.com/upbound/provider-aws/internal/controller/ses/receiptruleset"
 	template "github.com/upbound/provider-aws/internal/controller/ses/template"
+	configurationsetsesv2 "github.com/upbound/provider-aws/internal/controller/sesv2/configurationset"
+	configurationseteventdestination "github.com/upbound/provider-aws/internal/controller/sesv2/configurationseteventdestination"
+	dedicatedippool "github.com/upbound/provider-aws/internal/controller/sesv2/dedicatedippool"
+	emailidentitysesv2 "github.com/upbound/provider-aws/internal/controller/sesv2/emailidentity"
+	emailidentityfeedbackattributes "github.com/upbound/provider-aws/internal/controller/sesv2/emailidentityfeedbackattributes"
+	emailidentitymailfromattributes "github.com/upbound/provider-aws/internal/controller/sesv2/emailidentitymailfromattributes"
 	activity "github.com/upbound/provider-aws/internal/controller/sfn/activity"
 	statemachine "github.com/upbound/provider-aws/internal/controller/sfn/statemachine"
 	signingjob "github.com/upbound/provider-aws/internal/controller/signer/signingjob"
@@ -1624,6 +1630,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		receiptrule.Setup,
 		receiptruleset.Setup,
 		template.Setup,
+		configurationsetsesv2.Setup,
+		configurationseteventdestination.Setup,
+		dedicatedippool.Setup,
+		emailidentitysesv2.Setup,
+		emailidentityfeedbackattributes.Setup,
+		emailidentitymailfromattributes.Setup,
 		activity.Setup,
 		statemachine.Setup,
 		signingjob.Setup,
