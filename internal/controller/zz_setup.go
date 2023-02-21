@@ -510,6 +510,11 @@ import (
 	topicrule "github.com/upbound/provider-aws/internal/controller/iot/topicrule"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
+	datasourcekendra "github.com/upbound/provider-aws/internal/controller/kendra/datasource"
+	experience "github.com/upbound/provider-aws/internal/controller/kendra/experience"
+	index "github.com/upbound/provider-aws/internal/controller/kendra/index"
+	querysuggestionsblocklist "github.com/upbound/provider-aws/internal/controller/kendra/querysuggestionsblocklist"
+	thesaurus "github.com/upbound/provider-aws/internal/controller/kendra/thesaurus"
 	keyspace "github.com/upbound/provider-aws/internal/controller/keyspaces/keyspace"
 	tablekeyspaces "github.com/upbound/provider-aws/internal/controller/keyspaces/table"
 	streamkinesis "github.com/upbound/provider-aws/internal/controller/kinesis/stream"
@@ -1376,6 +1381,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		topicrule.Setup,
 		clusterkafka.Setup,
 		configuration.Setup,
+		datasourcekendra.Setup,
+		experience.Setup,
+		index.Setup,
+		querysuggestionsblocklist.Setup,
+		thesaurus.Setup,
 		keyspace.Setup,
 		tablekeyspaces.Setup,
 		streamkinesis.Setup,
