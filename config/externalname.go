@@ -2377,6 +2377,45 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// ID: name_domain_name_type_target
 	"aws_lightsail_domain_entry": config.TemplatedStringAsIdentifier("name", "{{ .external_name }}_{{ .parameters.domain_name }}_{{ .parameters.type }}_{{ .parameeters.target }}"),
 
+	// rolesanywhere
+	//
+	// aws_rolesanywhere_profile can be imported using its id
+	"aws_rolesanywhere_profile": config.IdentifierFromProvider,
+
+	// s3
+	//
+	// S3 Storage Lens configurations can be imported using the account_id and config_id, separated by a colon (:)
+	"aws_s3control_storage_lens_configuration": config.IdentifierFromProvider,
+
+	// sagemaker
+	//
+	// Models can be imported using the id
+	"aws_sagemaker_servicecatalog_portfolio_status": config.IdentifierFromProvider,
+	// SageMaker Spaces can be imported using the id
+	// Example: arn:aws:sagemaker:us-west-2:123456789012:space/domain-id/space-name
+	"aws_sagemaker_space": config.IdentifierFromProvider,
+
+	// scheduler
+	//
+	// Schedules can be imported using the combination group_name/name
+	"aws_scheduler_schedule": config.IdentifierFromProvider,
+	// Schedule groups can be imported using the name
+	"aws_scheduler_schedule_group": config.IdentifierFromProvider,
+
+	// sqs
+	//
+	// SQS Queue Redrive Allow Policies can be imported using the queue URL
+	"aws_sqs_queue_redrive_allow_policy": config.IdentifierFromProvider,
+	// SQS Queue Redrive Policies can be imported using the queue URL
+	"aws_sqs_queue_redrive_policy": config.IdentifierFromProvider,
+
+	// rum
+	//
+	// Cloudwatch RUM App Monitor can be imported using the name
+	"aws_rum_app_monitor": config.NameAsIdentifier,
+	// Cloudwatch RUM Metrics Destination can be imported using the id
+	"aws_rum_metrics_destination": config.IdentifierFromProvider,
+
 	// sesv2
 	//
 	// SESv2 (Simple Email V2) Configuration Set can be imported using the configuration_set_name

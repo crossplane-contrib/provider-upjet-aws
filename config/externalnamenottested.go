@@ -907,8 +907,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// rolesanywhere
 	//
-	// aws_rolesanywhere_profile can be imported using its id
-	"aws_rolesanywhere_profile": config.IdentifierFromProvider,
 	// aws_rolesanywhere_trust_anchor can be imported using its id
 	"aws_rolesanywhere_trust_anchor": config.IdentifierFromProvider,
 
@@ -916,33 +914,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// Route 53 Resolver configs can be imported using the Route 53 Resolver config ID
 	"aws_route53_resolver_config": config.IdentifierFromProvider,
-
-	// rum
-	//
-	// Cloudwatch RUM App Monitor can be imported using the name
-	"aws_rum_app_monitor": config.NameAsIdentifier,
-	// Cloudwatch RUM Metrics Destination can be imported using the id
-	"aws_rum_metrics_destination": config.ParameterAsIdentifier("app_monitor_name"),
-
-	// s3
-	//
-	// S3 Storage Lens configurations can be imported using the account_id and config_id, separated by a colon (:)
-	"aws_s3control_storage_lens_configuration": config.IdentifierFromProvider,
-
-	// sagemaker
-	//
-	// Models can be imported using the id
-	"aws_sagemaker_servicecatalog_portfolio_status": config.IdentifierFromProvider,
-	// SageMaker Spaces can be imported using the id
-	// Example: arn:aws:sagemaker:us-west-2:123456789012:space/domain-id/space-name
-	"aws_sagemaker_space": config.TemplatedStringAsIdentifier("space-name", "arn:aws:sagemaker:{{ .setup.configuration.region }}:{{ .setup.configuration.account_id }}:space/{{ .parameters.domain_id }}/{{ .external_name }}"),
-
-	// scheduler
-	//
-	// Schedules can be imported using the combination group_name/name
-	"aws_scheduler_schedule": config.IdentifierFromProvider,
-	// Schedule groups can be imported using the name
-	"aws_scheduler_schedule_group": config.NameAsIdentifier,
 
 	// schemas
 	//
@@ -953,13 +924,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// SESv2 (Simple Email V2) Dedicated IP Assignment can be imported using the id, which is a comma-separated string made up of ip and destination_pool_name
 	"aws_sesv2_dedicated_ip_assignment": config.IdentifierFromProvider,
-
-	// sqs
-	//
-	// SQS Queue Redrive Allow Policies can be imported using the queue URL
-	"aws_sqs_queue_redrive_allow_policy": config.ParameterAsIdentifier("queue_url"),
-	// SQS Queue Redrive Policies can be imported using the queue URL
-	"aws_sqs_queue_redrive_policy": config.ParameterAsIdentifier("queue_url"),
 
 	// ssm
 	//

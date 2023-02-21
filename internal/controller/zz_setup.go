@@ -669,6 +669,7 @@ import (
 	subnetgroupredshift "github.com/upbound/provider-aws/internal/controller/redshift/subnetgroup"
 	usagelimit "github.com/upbound/provider-aws/internal/controller/redshift/usagelimit"
 	groupresourcegroups "github.com/upbound/provider-aws/internal/controller/resourcegroups/group"
+	profile "github.com/upbound/provider-aws/internal/controller/rolesanywhere/profile"
 	delegationset "github.com/upbound/provider-aws/internal/controller/route53/delegationset"
 	healthcheck "github.com/upbound/provider-aws/internal/controller/route53/healthcheck"
 	hostedzonednssec "github.com/upbound/provider-aws/internal/controller/route53/hostedzonednssec"
@@ -688,6 +689,8 @@ import (
 	endpointroute53resolver "github.com/upbound/provider-aws/internal/controller/route53resolver/endpoint"
 	ruleroute53resolver "github.com/upbound/provider-aws/internal/controller/route53resolver/rule"
 	ruleassociation "github.com/upbound/provider-aws/internal/controller/route53resolver/ruleassociation"
+	appmonitor "github.com/upbound/provider-aws/internal/controller/rum/appmonitor"
+	metricsdestination "github.com/upbound/provider-aws/internal/controller/rum/metricsdestination"
 	buckets3 "github.com/upbound/provider-aws/internal/controller/s3/bucket"
 	bucketaccelerateconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketaccelerateconfiguration"
 	bucketacl "github.com/upbound/provider-aws/internal/controller/s3/bucketacl"
@@ -718,6 +721,7 @@ import (
 	multiregionaccesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/multiregionaccesspointpolicy"
 	objectlambdaaccesspoint "github.com/upbound/provider-aws/internal/controller/s3control/objectlambdaaccesspoint"
 	objectlambdaaccesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/objectlambdaaccesspointpolicy"
+	storagelensconfiguration "github.com/upbound/provider-aws/internal/controller/s3control/storagelensconfiguration"
 	appsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/app"
 	appimageconfig "github.com/upbound/provider-aws/internal/controller/sagemaker/appimageconfig"
 	coderepository "github.com/upbound/provider-aws/internal/controller/sagemaker/coderepository"
@@ -733,10 +737,14 @@ import (
 	modelpackagegrouppolicy "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegrouppolicy"
 	notebookinstance "github.com/upbound/provider-aws/internal/controller/sagemaker/notebookinstance"
 	notebookinstancelifecycleconfiguration "github.com/upbound/provider-aws/internal/controller/sagemaker/notebookinstancelifecycleconfiguration"
+	servicecatalogportfoliostatus "github.com/upbound/provider-aws/internal/controller/sagemaker/servicecatalogportfoliostatus"
+	space "github.com/upbound/provider-aws/internal/controller/sagemaker/space"
 	studiolifecycleconfig "github.com/upbound/provider-aws/internal/controller/sagemaker/studiolifecycleconfig"
 	userprofilesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/userprofile"
 	workforce "github.com/upbound/provider-aws/internal/controller/sagemaker/workforce"
 	workteam "github.com/upbound/provider-aws/internal/controller/sagemaker/workteam"
+	schedulescheduler "github.com/upbound/provider-aws/internal/controller/scheduler/schedule"
+	schedulegroup "github.com/upbound/provider-aws/internal/controller/scheduler/schedulegroup"
 	discoverer "github.com/upbound/provider-aws/internal/controller/schemas/discoverer"
 	registryschemas "github.com/upbound/provider-aws/internal/controller/schemas/registry"
 	schema "github.com/upbound/provider-aws/internal/controller/schemas/schema"
@@ -801,6 +809,8 @@ import (
 	topicsubscription "github.com/upbound/provider-aws/internal/controller/sns/topicsubscription"
 	queuesqs "github.com/upbound/provider-aws/internal/controller/sqs/queue"
 	queuepolicy "github.com/upbound/provider-aws/internal/controller/sqs/queuepolicy"
+	queueredriveallowpolicy "github.com/upbound/provider-aws/internal/controller/sqs/queueredriveallowpolicy"
+	queueredrivepolicy "github.com/upbound/provider-aws/internal/controller/sqs/queueredrivepolicy"
 	activation "github.com/upbound/provider-aws/internal/controller/ssm/activation"
 	associationssm "github.com/upbound/provider-aws/internal/controller/ssm/association"
 	document "github.com/upbound/provider-aws/internal/controller/ssm/document"
@@ -1517,6 +1527,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subnetgroupredshift.Setup,
 		usagelimit.Setup,
 		groupresourcegroups.Setup,
+		profile.Setup,
 		delegationset.Setup,
 		healthcheck.Setup,
 		hostedzonednssec.Setup,
@@ -1536,6 +1547,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		endpointroute53resolver.Setup,
 		ruleroute53resolver.Setup,
 		ruleassociation.Setup,
+		appmonitor.Setup,
+		metricsdestination.Setup,
 		buckets3.Setup,
 		bucketaccelerateconfiguration.Setup,
 		bucketacl.Setup,
@@ -1566,6 +1579,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		multiregionaccesspointpolicy.Setup,
 		objectlambdaaccesspoint.Setup,
 		objectlambdaaccesspointpolicy.Setup,
+		storagelensconfiguration.Setup,
 		appsagemaker.Setup,
 		appimageconfig.Setup,
 		coderepository.Setup,
@@ -1581,10 +1595,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		modelpackagegrouppolicy.Setup,
 		notebookinstance.Setup,
 		notebookinstancelifecycleconfiguration.Setup,
+		servicecatalogportfoliostatus.Setup,
+		space.Setup,
 		studiolifecycleconfig.Setup,
 		userprofilesagemaker.Setup,
 		workforce.Setup,
 		workteam.Setup,
+		schedulescheduler.Setup,
+		schedulegroup.Setup,
 		discoverer.Setup,
 		registryschemas.Setup,
 		schema.Setup,
@@ -1649,6 +1667,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		topicsubscription.Setup,
 		queuesqs.Setup,
 		queuepolicy.Setup,
+		queueredriveallowpolicy.Setup,
+		queueredrivepolicy.Setup,
 		activation.Setup,
 		associationssm.Setup,
 		document.Setup,
