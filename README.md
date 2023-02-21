@@ -43,3 +43,4 @@ you can do so via the following channels:
 ## Licensing
 
 Provider AWS is under [the Apache 2.0 license](LICENSE) with [notice](NOTICE).
+
