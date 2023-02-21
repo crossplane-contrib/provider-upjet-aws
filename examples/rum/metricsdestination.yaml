@@ -1,0 +1,45 @@
+apiVersion: rum.aws.upbound.io/v1beta1
+kind: MetricsDestination
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rum/v1beta1/metricsdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    appMonitorNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    destination: CloudWatch
+    region: us-east-1
+
+---
+
+apiVersion: rum.aws.upbound.io/v1beta1
+kind: AppMonitor
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rum/v1beta1/metricsdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domain: "myDomain.com"
+    region: us-east-1
+
+---
+
+apiVersion: lightsail.aws.upbound.io/v1beta1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rum/v1beta1/metricsdestination
+  labels:
+    testing.upbound.io/example-name: domain
+  name: domain
+spec:
+  forProvider:
+    domainName: "myDomain.com"
+    region: us-east-1

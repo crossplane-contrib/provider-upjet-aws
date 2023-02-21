@@ -38,3 +38,55 @@ func (mg *QueuePolicy) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	return nil
 }
+
+// ResolveReferences of this QueueRedriveAllowPolicy.
+func (mg *QueueRedriveAllowPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.QueueURL),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.ForProvider.QueueURLRef,
+		Selector:     mg.Spec.ForProvider.QueueURLSelector,
+		To: reference.To{
+			List:    &QueueList{},
+			Managed: &Queue{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.QueueURL")
+	}
+	mg.Spec.ForProvider.QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.QueueURLRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this QueueRedrivePolicy.
+func (mg *QueueRedrivePolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.QueueURL),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.ForProvider.QueueURLRef,
+		Selector:     mg.Spec.ForProvider.QueueURLSelector,
+		To: reference.To{
+			List:    &QueueList{},
+			Managed: &Queue{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.QueueURL")
+	}
+	mg.Spec.ForProvider.QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.QueueURLRef = rsp.ResolvedReference
+
+	return nil
+}

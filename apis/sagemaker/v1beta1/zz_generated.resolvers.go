@@ -512,6 +512,32 @@ func (mg *NotebookInstance) ResolveReferences(ctx context.Context, c client.Read
 	return nil
 }
 
+// ResolveReferences of this Space.
+func (mg *Space) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DomainIDRef,
+		Selector:     mg.Spec.ForProvider.DomainIDSelector,
+		To: reference.To{
+			List:    &DomainList{},
+			Managed: &Domain{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DomainID")
+	}
+	mg.Spec.ForProvider.DomainID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DomainIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this UserProfile.
 func (mg *UserProfile) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

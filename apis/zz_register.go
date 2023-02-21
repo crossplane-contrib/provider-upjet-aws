@@ -122,13 +122,16 @@ import (
 	v1beta1rds "github.com/upbound/provider-aws/apis/rds/v1beta1"
 	v1beta1redshift "github.com/upbound/provider-aws/apis/redshift/v1beta1"
 	v1beta1resourcegroups "github.com/upbound/provider-aws/apis/resourcegroups/v1beta1"
+	v1beta1rolesanywhere "github.com/upbound/provider-aws/apis/rolesanywhere/v1beta1"
 	v1beta1route53 "github.com/upbound/provider-aws/apis/route53/v1beta1"
 	v1beta1route53recoverycontrolconfig "github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1"
 	v1beta1route53recoveryreadiness "github.com/upbound/provider-aws/apis/route53recoveryreadiness/v1beta1"
 	v1beta1route53resolver "github.com/upbound/provider-aws/apis/route53resolver/v1beta1"
+	v1beta1rum "github.com/upbound/provider-aws/apis/rum/v1beta1"
 	v1beta1s3 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	v1beta1s3control "github.com/upbound/provider-aws/apis/s3control/v1beta1"
 	v1beta1sagemaker "github.com/upbound/provider-aws/apis/sagemaker/v1beta1"
+	v1beta1scheduler "github.com/upbound/provider-aws/apis/scheduler/v1beta1"
 	v1beta1schemas "github.com/upbound/provider-aws/apis/schemas/v1beta1"
 	v1beta1secretsmanager "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1"
 	v1beta1securityhub "github.com/upbound/provider-aws/apis/securityhub/v1beta1"
@@ -272,13 +275,16 @@ func init() {
 		v1beta1rds.SchemeBuilder.AddToScheme,
 		v1beta1redshift.SchemeBuilder.AddToScheme,
 		v1beta1resourcegroups.SchemeBuilder.AddToScheme,
+		v1beta1rolesanywhere.SchemeBuilder.AddToScheme,
 		v1beta1route53.SchemeBuilder.AddToScheme,
 		v1beta1route53recoverycontrolconfig.SchemeBuilder.AddToScheme,
 		v1beta1route53recoveryreadiness.SchemeBuilder.AddToScheme,
 		v1beta1route53resolver.SchemeBuilder.AddToScheme,
+		v1beta1rum.SchemeBuilder.AddToScheme,
 		v1beta1s3.SchemeBuilder.AddToScheme,
 		v1beta1s3control.SchemeBuilder.AddToScheme,
 		v1beta1sagemaker.SchemeBuilder.AddToScheme,
+		v1beta1scheduler.SchemeBuilder.AddToScheme,
 		v1beta1schemas.SchemeBuilder.AddToScheme,
 		v1beta1secretsmanager.SchemeBuilder.AddToScheme,
 		v1beta1securityhub.SchemeBuilder.AddToScheme,

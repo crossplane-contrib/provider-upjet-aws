@@ -997,6 +997,138 @@ func (mg *NotebookInstanceLifecycleConfiguration) SetWriteConnectionSecretToRefe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this ServicecatalogPortfolioStatus.
+func (mg *ServicecatalogPortfolioStatus) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ServicecatalogPortfolioStatus.
+func (mg *ServicecatalogPortfolioStatus) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ServicecatalogPortfolioStatus.
+func (mg *ServicecatalogPortfolioStatus) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ServicecatalogPortfolioStatus.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ServicecatalogPortfolioStatus) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ServicecatalogPortfolioStatus.
+func (mg *ServicecatalogPortfolioStatus) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ServicecatalogPortfolioStatus.
+func (mg *ServicecatalogPortfolioStatus) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ServicecatalogPortfolioStatus.
+func (mg *ServicecatalogPortfolioStatus) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ServicecatalogPortfolioStatus.
+func (mg *ServicecatalogPortfolioStatus) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ServicecatalogPortfolioStatus.
+func (mg *ServicecatalogPortfolioStatus) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ServicecatalogPortfolioStatus.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ServicecatalogPortfolioStatus) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ServicecatalogPortfolioStatus.
+func (mg *ServicecatalogPortfolioStatus) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ServicecatalogPortfolioStatus.
+func (mg *ServicecatalogPortfolioStatus) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this Space.
+func (mg *Space) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this Space.
+func (mg *Space) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this Space.
+func (mg *Space) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this Space.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *Space) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this Space.
+func (mg *Space) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this Space.
+func (mg *Space) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this Space.
+func (mg *Space) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this Space.
+func (mg *Space) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this Space.
+func (mg *Space) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this Space.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *Space) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this Space.
+func (mg *Space) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this Space.
+func (mg *Space) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this StudioLifecycleConfig.
 func (mg *StudioLifecycleConfig) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

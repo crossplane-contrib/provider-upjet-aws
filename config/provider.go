@@ -71,6 +71,7 @@ import (
 	"github.com/upbound/provider-aws/config/qldb"
 	"github.com/upbound/provider-aws/config/rds"
 	"github.com/upbound/provider-aws/config/redshift"
+	"github.com/upbound/provider-aws/config/rolesanywhere"
 	"github.com/upbound/provider-aws/config/route53"
 	"github.com/upbound/provider-aws/config/route53recoverycontrolconfig"
 	"github.com/upbound/provider-aws/config/route53resolver"
@@ -205,6 +206,7 @@ func GetProvider() *config.Provider {
 		opensearch.Configure,
 		rds.Configure,
 		redshift.Configure,
+		rolesanywhere.Configure,
 		route53.Configure,
 		route53resolver.Configure,
 		route53recoverycontrolconfig.Configure,
