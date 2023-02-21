@@ -10,9 +10,110 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this AttachmentAccepter.
+func (mg *AttachmentAccepter) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AttachmentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.AttachmentIDRef,
+		Selector:     mg.Spec.ForProvider.AttachmentIDSelector,
+		To: reference.To{
+			List:    &VPCAttachmentList{},
+			Managed: &VPCAttachment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AttachmentID")
+	}
+	mg.Spec.ForProvider.AttachmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AttachmentIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AttachmentType),
+		Extract:      resource.ExtractParamPath("attachment_type", true),
+		Reference:    mg.Spec.ForProvider.AttachmentTypeRef,
+		Selector:     mg.Spec.ForProvider.AttachmentTypeSelector,
+		To: reference.To{
+			List:    &VPCAttachmentList{},
+			Managed: &VPCAttachment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AttachmentType")
+	}
+	mg.Spec.ForProvider.AttachmentType = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AttachmentTypeRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ConnectAttachment.
+func (mg *ConnectAttachment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CoreNetworkID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.CoreNetworkIDRef,
+		Selector:     mg.Spec.ForProvider.CoreNetworkIDSelector,
+		To: reference.To{
+			List:    &CoreNetworkList{},
+			Managed: &CoreNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CoreNetworkID")
+	}
+	mg.Spec.ForProvider.CoreNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CoreNetworkIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EdgeLocation),
+		Extract:      resource.ExtractParamPath("edge_location", true),
+		Reference:    mg.Spec.ForProvider.EdgeLocationRef,
+		Selector:     mg.Spec.ForProvider.EdgeLocationSelector,
+		To: reference.To{
+			List:    &VPCAttachmentList{},
+			Managed: &VPCAttachment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EdgeLocation")
+	}
+	mg.Spec.ForProvider.EdgeLocation = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EdgeLocationRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransportAttachmentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.TransportAttachmentIDRef,
+		Selector:     mg.Spec.ForProvider.TransportAttachmentIDSelector,
+		To: reference.To{
+			List:    &VPCAttachmentList{},
+			Managed: &VPCAttachment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TransportAttachmentID")
+	}
+	mg.Spec.ForProvider.TransportAttachmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TransportAttachmentIDRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this Connection.
 func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -52,6 +153,32 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.DeviceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DeviceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalNetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.GlobalNetworkIDRef,
+		Selector:     mg.Spec.ForProvider.GlobalNetworkIDSelector,
+		To: reference.To{
+			List:    &GlobalNetworkList{},
+			Managed: &GlobalNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.GlobalNetworkID")
+	}
+	mg.Spec.ForProvider.GlobalNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.GlobalNetworkIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this CoreNetwork.
+func (mg *CoreNetwork) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalNetworkID),
@@ -394,6 +521,65 @@ func (mg *TransitGatewayRegistration) ResolveReferences(ctx context.Context, c c
 	}
 	mg.Spec.ForProvider.TransitGatewayArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TransitGatewayArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VPCAttachment.
+func (mg *VPCAttachment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CoreNetworkID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.CoreNetworkIDRef,
+		Selector:     mg.Spec.ForProvider.CoreNetworkIDSelector,
+		To: reference.To{
+			List:    &CoreNetworkList{},
+			Managed: &CoreNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CoreNetworkID")
+	}
+	mg.Spec.ForProvider.CoreNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CoreNetworkIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetArns),
+		Extract:       common.ARNExtractor(),
+		References:    mg.Spec.ForProvider.SubnetArnsRefs,
+		Selector:      mg.Spec.ForProvider.SubnetArnsSelector,
+		To: reference.To{
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetArns")
+	}
+	mg.Spec.ForProvider.SubnetArns = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SubnetArnsRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.VPCArnRef,
+		Selector:     mg.Spec.ForProvider.VPCArnSelector,
+		To: reference.To{
+			List:    &v1beta1.VPCList{},
+			Managed: &v1beta1.VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCArn")
+	}
+	mg.Spec.ForProvider.VPCArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPCArnRef = rsp.ResolvedReference
 
 	return nil
 }
