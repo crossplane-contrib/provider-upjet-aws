@@ -285,8 +285,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// elasticbeanstalk
 	//
-	// Elastic Beanstalk Applications can be imported using the name
-	"aws_elastic_beanstalk_application_version": config.NameAsIdentifier,
 	// Elastic Beanstalk Environments can be imported using the id
 	"aws_elastic_beanstalk_environment": config.IdentifierFromProvider,
 
@@ -562,11 +560,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// Workspaces can be imported using their ID
 	"aws_workspaces_workspace": config.IdentifierFromProvider,
-
-	// imagebuilder
-	//
-	// aws_imagebuilder_components resources can be imported by using the Amazon Resource Name (ARN)
-	"aws_imagebuilder_component": config.IdentifierFromProvider,
 
 	// apprunner
 	//
@@ -894,11 +887,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// aws_rolesanywhere_trust_anchor can be imported using its id
 	"aws_rolesanywhere_trust_anchor": config.IdentifierFromProvider,
-
-	// route53
-	//
-	// Route 53 Resolver configs can be imported using the Route 53 Resolver config ID
-	"aws_route53_resolver_config": config.IdentifierFromProvider,
 
 	// schemas
 	//

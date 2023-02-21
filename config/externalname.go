@@ -651,6 +651,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_route53_resolver_rule": config.IdentifierFromProvider,
 	// rslvr-rrassoc-97242eaf88example
 	"aws_route53_resolver_rule_association": config.IdentifierFromProvider,
+	// Route 53 Resolver configs can be imported using the Route 53 Resolver config ID
+	"aws_route53_resolver_config": config.IdentifierFromProvider,
 
 	// s3
 	//
@@ -1920,6 +1922,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_elastic_beanstalk_application": config.NameAsIdentifier,
 	// No import
 	"aws_elastic_beanstalk_configuration_template": config.NameAsIdentifier,
+	// Elastic Beanstalk Applications can be imported using the name
+	"aws_elastic_beanstalk_application_version": config.NameAsIdentifier,
 
 	// ssm
 	//
@@ -2107,6 +2111,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// aws_imagebuilder_infrastructure_configuration can be imported using the Amazon Resource Name (ARN)
 	// Example: arn:aws:imagebuilder:us-east-1:123456789012:infrastructure-configuration/example
 	"aws_imagebuilder_infrastructure_configuration": config.IdentifierFromProvider,
+	// aws_imagebuilder_components resources can be imported by using the Amazon Resource Name (ARN)
+	"aws_imagebuilder_component": config.IdentifierFromProvider,
 
 	// inspector
 	//

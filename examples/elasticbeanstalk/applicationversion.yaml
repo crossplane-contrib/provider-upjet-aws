@@ -1,0 +1,68 @@
+apiVersion: elasticbeanstalk.aws.upbound.io/v1beta1
+kind: ApplicationVersion
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticbeanstalk/v1beta1/applicationversion
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    application: default
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    description: "application version"
+    keySelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    region: us-west-1
+
+---
+
+apiVersion: elasticbeanstalk.aws.upbound.io/v1beta1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticbeanstalk/v1beta1/applicationversion
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    description: tf-test-desc
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: elasticbeanstalk/v1beta1/applicationversion
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticbeanstalk/v1beta1/applicationversion
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    key: object_key
+    contentBase64: dGhpcyBpcyBhIHRleHQg
+    region: us-west-1
