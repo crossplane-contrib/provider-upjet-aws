@@ -538,6 +538,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_neptune_event_subscription":      config.NameAsIdentifier,
 	"aws_neptune_parameter_group":         config.NameAsIdentifier,
 	"aws_neptune_subnet_group":            config.NameAsIdentifier,
+	// aws_neptune_global_cluster can be imported by using the Global Cluster identifier
+	"aws_neptune_global_cluster": config.ParameterAsIdentifier("global_cluster_identifier"),
 
 	// rds
 	//
@@ -2470,6 +2472,17 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_sesv2_email_identity_feedback_attributes": config.ParameterAsIdentifier("email_identity"),
 	// SESv2 (Simple Email V2) Email Identity Mail From Attributes can be imported using the email_identity
 	"aws_sesv2_email_identity_mail_from_attributes": config.ParameterAsIdentifier("email_identity"),
+
+	// medialive
+	//
+	// MediaLive Channel can be imported using the channel_id
+	"aws_medialive_channel": config.IdentifierFromProvider,
+	// MediaLive Input can be imported using the id
+	"aws_medialive_input": config.IdentifierFromProvider,
+	// MediaLive InputSecurityGroup can be imported using the id
+	"aws_medialive_input_security_group": config.IdentifierFromProvider,
+	// MediaLive Multiplex can be imported using the id
+	"aws_medialive_multiplex": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

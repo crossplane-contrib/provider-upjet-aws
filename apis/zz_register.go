@@ -106,6 +106,7 @@ import (
 	v1beta1location "github.com/upbound/provider-aws/apis/location/v1beta1"
 	v1beta1macie2 "github.com/upbound/provider-aws/apis/macie2/v1beta1"
 	v1beta1mediaconvert "github.com/upbound/provider-aws/apis/mediaconvert/v1beta1"
+	v1beta1medialive "github.com/upbound/provider-aws/apis/medialive/v1beta1"
 	v1beta1mediapackage "github.com/upbound/provider-aws/apis/mediapackage/v1beta1"
 	v1beta1mediastore "github.com/upbound/provider-aws/apis/mediastore/v1beta1"
 	v1beta1memorydb "github.com/upbound/provider-aws/apis/memorydb/v1beta1"
@@ -260,6 +261,7 @@ func init() {
 		v1beta1location.SchemeBuilder.AddToScheme,
 		v1beta1macie2.SchemeBuilder.AddToScheme,
 		v1beta1mediaconvert.SchemeBuilder.AddToScheme,
+		v1beta1medialive.SchemeBuilder.AddToScheme,
 		v1beta1mediapackage.SchemeBuilder.AddToScheme,
 		v1beta1mediastore.SchemeBuilder.AddToScheme,
 		v1beta1memorydb.SchemeBuilder.AddToScheme,
