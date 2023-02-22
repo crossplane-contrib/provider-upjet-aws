@@ -339,6 +339,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_default_security_group": config.IdentifierFromProvider,
 	// aws_ec2_transit_gateway_connect_peer can be imported by using the EC2 Transit Gateway Connect Peer identifier
 	"aws_ec2_transit_gateway_connect_peer": config.IdentifierFromProvider,
+	// aws_ec2_instance_state can be imported by using the instance_id attribute
+	"aws_ec2_instance_state": config.IdentifierFromProvider,
+	// Network Insights Analyses can be imported using the id
+	"aws_ec2_network_insights_analysis": config.IdentifierFromProvider,
+	// aws_ec2_transit_gateway_policy_table can be imported by using the EC2 Transit Gateway Policy Table identifier
+	"aws_ec2_transit_gateway_policy_table": config.IdentifierFromProvider,
 
 	// ecr
 	//
@@ -422,8 +428,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Imported using "name".
 	"aws_glue_workflow": config.NameAsIdentifier,
-	// Imported using arn: arn:aws:glue:us-west-2:123456789012:schema/example/example
-	// "aws_glue_schema": config.IdentifierFromProvider,
 	// Imported using "name".
 	"aws_glue_trigger":               config.NameAsIdentifier,
 	"aws_glue_user_defined_function": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
@@ -451,6 +455,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// "aws_glue_partition_index": config.IdentifierFromProvider,
 	// Imported using ARN: arn:aws:glue:us-west-2:123456789012:registry/example
 	"aws_glue_registry": config.TemplatedStringAsIdentifier("registry_name", "arn:aws:glue:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:registry/{{ .external_name }}"),
+	// Glue Registries can be imported using arn
+	// Example: arn:aws:glue:us-west-2:123456789012:schema/example/example
+	"aws_glue_schema": config.IdentifierFromProvider,
 
 	// Imported using "name".
 	"aws_glue_security_configuration": config.NameAsIdentifier,
@@ -2533,6 +2540,23 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_medialive_input_security_group": config.IdentifierFromProvider,
 	// MediaLive Multiplex can be imported using the id
 	"aws_medialive_multiplex": config.IdentifierFromProvider,
+
+	// evidently
+	//
+	// CloudWatch Evidently Feature can be imported using the feature name and name or arn of the hosting CloudWatch Evidently Project separated by a :
+	// Example: exampleFeatureName:arn:aws:evidently:us-east-1:123456789012:project/example
+	"aws_evidently_feature": config.TemplatedStringAsIdentifier("name", "{{ .external_name }}:{{ .parameters.project }}"),
+	// CloudWatch Evidently Project can be imported using the arn
+	// Example: arn:aws:evidently:us-east-1:123456789012:segment/example
+	"aws_evidently_project": config.IdentifierFromProvider,
+	// CloudWatch Evidently Segment can be imported using the arn
+	// Example: arn:aws:evidently:us-west-2:123456789012:segment/example
+	"aws_evidently_segment": config.TemplatedStringAsIdentifier("name", "arn:aws:evidently:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:segment/{{ .external_name }}"),
+
+	// fis
+	//
+	// FIS Experiment Templates can be imported using the id
+	"aws_fis_experiment_template": config.IdentifierFromProvider,
 }
 
 func lambdaFunctionURL() config.ExternalName {

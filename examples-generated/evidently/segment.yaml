@@ -1,0 +1,17 @@
+apiVersion: evidently.aws.upbound.io/v1beta1
+kind: Segment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: evidently/v1beta1/segment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    pattern: '{"Price":[{"numeric":[">",10,"<=",20]}]}'
+    region: us-west-1
+    tags:
+      Key1: example Segment
+
+---
+

@@ -137,6 +137,37 @@ type InstanceEphemeralBlockDeviceParameters struct {
 	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
 
+type InstanceNetworkInterfaceObservation struct {
+}
+
+type InstanceNetworkInterfaceParameters struct {
+
+	// Whether or not to delete the network interface on instance termination. Defaults to false. Currently, the only valid value is false, as this is only supported when creating new network interfaces when launching an instance.
+	// +kubebuilder:validation:Optional
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Integer index of the network interface attachment. Limited by instance type.
+	// +kubebuilder:validation:Required
+	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
+
+	// Integer index of the network card. Limited by instance type. The default index is 0.
+	// +kubebuilder:validation:Optional
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+
+	// ID of the network interface to attach.
+	// +crossplane:generate:reference:type=NetworkInterface
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// Reference to a NetworkInterface to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a NetworkInterface to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+}
+
 type InstanceObservation struct {
 
 	// ARN of the instance.
@@ -293,7 +324,7 @@ type InstanceParameters struct {
 
 	// Customize network interfaces to be attached at instance boot time. See Network Interfaces below for more details.
 	// +kubebuilder:validation:Optional
-	NetworkInterface []NetworkInterfaceParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
+	NetworkInterface []InstanceNetworkInterfaceParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
 	// Placement Group to start the instance in.
 	// +kubebuilder:validation:Optional
@@ -429,37 +460,6 @@ type MetadataOptionsParameters struct {
 	// Enables or disables access to instance tags from the instance metadata service. Valid values include enabled or disabled. Defaults to disabled.
 	// +kubebuilder:validation:Optional
 	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
-}
-
-type NetworkInterfaceObservation struct {
-}
-
-type NetworkInterfaceParameters struct {
-
-	// Whether or not to delete the network interface on instance termination. Defaults to false. Currently, the only valid value is false, as this is only supported when creating new network interfaces when launching an instance.
-	// +kubebuilder:validation:Optional
-	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
-
-	// Integer index of the network interface attachment. Limited by instance type.
-	// +kubebuilder:validation:Required
-	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
-
-	// Integer index of the network card. Limited by instance type. The default index is 0.
-	// +kubebuilder:validation:Optional
-	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
-
-	// ID of the network interface to attach.
-	// +crossplane:generate:reference:type=NetworkInterface
-	// +kubebuilder:validation:Optional
-	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
-
-	// Reference to a NetworkInterface to populate networkInterfaceId.
-	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
-
-	// Selector for a NetworkInterface to populate networkInterfaceId.
-	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type PrivateDNSNameOptionsObservation struct {

@@ -84,7 +84,7 @@ type Tunnel2LogOptionsParameters struct {
 	CloudwatchLogOptions []Tunnel2LogOptionsCloudwatchLogOptionsParameters `json:"cloudwatchLogOptions,omitempty" tf:"cloudwatch_log_options,omitempty"`
 }
 
-type VPNConnectionObservation struct {
+type VPNConnectionObservation_2 struct {
 
 	// Amazon Resource Name (ARN) of the VPN Connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -141,7 +141,7 @@ type VPNConnectionObservation struct {
 	VgwTelemetry []VgwTelemetryObservation `json:"vgwTelemetry,omitempty" tf:"vgw_telemetry,omitempty"`
 }
 
-type VPNConnectionParameters struct {
+type VPNConnectionParameters_2 struct {
 
 	// The ID of the customer gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.CustomerGateway
@@ -423,13 +423,13 @@ type VgwTelemetryParameters struct {
 // VPNConnectionSpec defines the desired state of VPNConnection
 type VPNConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPNConnectionParameters `json:"forProvider"`
+	ForProvider     VPNConnectionParameters_2 `json:"forProvider"`
 }
 
 // VPNConnectionStatus defines the observed state of VPNConnection.
 type VPNConnectionStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPNConnectionObservation `json:"atProvider,omitempty"`
+	AtProvider        VPNConnectionObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
