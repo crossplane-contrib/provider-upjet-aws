@@ -654,12 +654,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// ec2
 	//
-	// aws_ec2_instance_state can be imported by using the instance_id attribute
-	"aws_ec2_instance_state": config.IdentifierFromProvider,
-	// Network Insights Analyses can be imported using the id
-	"aws_ec2_network_insights_analysis": config.IdentifierFromProvider,
-	// aws_ec2_transit_gateway_policy_table can be imported by using the EC2 Transit Gateway Policy Table identifier
-	"aws_ec2_transit_gateway_policy_table": config.IdentifierFromProvider,
 	// aws_ec2_transit_gateway_policy_table_association can be imported by using the EC2 Transit Gateway Policy Table identifier, an underscore, and the EC2 Transit Gateway Attachment identifier
 	"aws_ec2_transit_gateway_policy_table_association": config.IdentifierFromProvider,
 
@@ -673,35 +667,10 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// EMR Severless applications can be imported using the id
 	"aws_emrserverless_application": config.IdentifierFromProvider,
 
-	// evidently
-	//
-	// CloudWatch Evidently Feature can be imported using the feature name and name or arn of the hosting CloudWatch Evidently Project separated by a :
-	// Example: exampleFeatureName:arn:aws:evidently:us-east-1:123456789012:project/example
-	"aws_evidently_feature": config.TemplatedStringAsIdentifier("name", "{{ .external_name }}:{{ .parameters.project }}"),
-	// CloudWatch Evidently Project can be imported using the arn
-	// Example: arn:aws:evidently:us-east-1:123456789012:segment/example
-	// TODO: Maybe there is a typo in documentation. Check while teting
-	"aws_evidently_project": config.TemplatedStringAsIdentifier("name", "arn:aws:evidently:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:project/{{ .external_name }}"),
-	// CloudWatch Evidently Segment can be imported using the arn
-	// Example: arn:aws:evidently:us-west-2:123456789012:segment/example
-	"aws_evidently_segment": config.TemplatedStringAsIdentifier("name", "arn:aws:evidently:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:segment/{{ .external_name }}"),
-
-	// fis
-	//
-	// FIS Experiment Templates can be imported using the id
-	"aws_fis_experiment_template": config.IdentifierFromProvider,
-
 	// fsx
 	//
 	// Amazon File Cache cache can be imported using the resource id
 	"aws_fsx_file_cache": config.IdentifierFromProvider,
-
-	// glue
-	//
-	// Glue Registries can be imported using arn
-	// Example: arn:aws:glue:us-west-2:123456789012:schema/example/example
-	// TODO: The ARN in documentation doesn't match ARN given for the aws_glue_registry resource. Check while testing
-	"aws_glue_schema": config.TemplatedStringAsIdentifier("schema_name", "{{ .parameters.registry_arn }}/{{ .external_name }}"),
 
 	// identitystore
 	//

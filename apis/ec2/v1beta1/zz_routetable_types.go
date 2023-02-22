@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type RouteTableObservation struct {
+type RouteTableObservation_2 struct {
 
 	// The ARN of the route table.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -29,13 +29,13 @@ type RouteTableObservation struct {
 
 	// A list of route objects. Their keys are documented below. This argument is processed in attribute-as-blocks mode.
 	// This means that omitting this argument is interpreted as ignoring any existing routes. To remove all managed routes an empty list should be specified. See the example above.
-	Route []RouteTableRouteObservation `json:"route,omitempty" tf:"route,omitempty"`
+	Route []RouteTableRouteObservation_2 `json:"route,omitempty" tf:"route,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type RouteTableParameters struct {
+type RouteTableParameters_2 struct {
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -60,7 +60,7 @@ type RouteTableParameters struct {
 	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
-type RouteTableRouteObservation struct {
+type RouteTableRouteObservation_2 struct {
 
 	// Identifier of a carrier gateway. This attribute can only be used when the VPC contains a subnet which is associated with a Wavelength Zone.
 	CarrierGatewayID *string `json:"carrierGatewayId,omitempty" tf:"carrier_gateway_id,omitempty"`
@@ -105,19 +105,19 @@ type RouteTableRouteObservation struct {
 	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
 }
 
-type RouteTableRouteParameters struct {
+type RouteTableRouteParameters_2 struct {
 }
 
 // RouteTableSpec defines the desired state of RouteTable
 type RouteTableSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     RouteTableParameters `json:"forProvider"`
+	ForProvider     RouteTableParameters_2 `json:"forProvider"`
 }
 
 // RouteTableStatus defines the observed state of RouteTable.
 type RouteTableStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        RouteTableObservation `json:"atProvider,omitempty"`
+	AtProvider        RouteTableObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

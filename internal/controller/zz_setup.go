@@ -304,6 +304,7 @@ import (
 	flowlog "github.com/upbound/provider-aws/internal/controller/ec2/flowlog"
 	hostec2 "github.com/upbound/provider-aws/internal/controller/ec2/host"
 	instanceec2 "github.com/upbound/provider-aws/internal/controller/ec2/instance"
+	instancestate "github.com/upbound/provider-aws/internal/controller/ec2/instancestate"
 	internetgateway "github.com/upbound/provider-aws/internal/controller/ec2/internetgateway"
 	keypair "github.com/upbound/provider-aws/internal/controller/ec2/keypair"
 	launchtemplate "github.com/upbound/provider-aws/internal/controller/ec2/launchtemplate"
@@ -313,6 +314,7 @@ import (
 	natgateway "github.com/upbound/provider-aws/internal/controller/ec2/natgateway"
 	networkacl "github.com/upbound/provider-aws/internal/controller/ec2/networkacl"
 	networkaclrule "github.com/upbound/provider-aws/internal/controller/ec2/networkaclrule"
+	networkinsightsanalysis "github.com/upbound/provider-aws/internal/controller/ec2/networkinsightsanalysis"
 	networkinsightspath "github.com/upbound/provider-aws/internal/controller/ec2/networkinsightspath"
 	networkinterface "github.com/upbound/provider-aws/internal/controller/ec2/networkinterface"
 	networkinterfaceattachment "github.com/upbound/provider-aws/internal/controller/ec2/networkinterfaceattachment"
@@ -341,6 +343,7 @@ import (
 	transitgatewaymulticastgroupsource "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaymulticastgroupsource"
 	transitgatewaypeeringattachment "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaypeeringattachment"
 	transitgatewaypeeringattachmentaccepter "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaypeeringattachmentaccepter"
+	transitgatewaypolicytable "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaypolicytable"
 	transitgatewayprefixlistreference "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewayprefixlistreference"
 	transitgatewayroute "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewayroute"
 	transitgatewayroutetable "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewayroutetable"
@@ -426,7 +429,11 @@ import (
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
 	securityconfiguration "github.com/upbound/provider-aws/internal/controller/emr/securityconfiguration"
+	feature "github.com/upbound/provider-aws/internal/controller/evidently/feature"
+	projectevidently "github.com/upbound/provider-aws/internal/controller/evidently/project"
+	segment "github.com/upbound/provider-aws/internal/controller/evidently/segment"
 	deliverystream "github.com/upbound/provider-aws/internal/controller/firehose/deliverystream"
+	experimenttemplate "github.com/upbound/provider-aws/internal/controller/fis/experimenttemplate"
 	backup "github.com/upbound/provider-aws/internal/controller/fsx/backup"
 	datarepositoryassociation "github.com/upbound/provider-aws/internal/controller/fsx/datarepositoryassociation"
 	lustrefilesystem "github.com/upbound/provider-aws/internal/controller/fsx/lustrefilesystem"
@@ -452,6 +459,7 @@ import (
 	job "github.com/upbound/provider-aws/internal/controller/glue/job"
 	registry "github.com/upbound/provider-aws/internal/controller/glue/registry"
 	resourcepolicyglue "github.com/upbound/provider-aws/internal/controller/glue/resourcepolicy"
+	schema "github.com/upbound/provider-aws/internal/controller/glue/schema"
 	securityconfigurationglue "github.com/upbound/provider-aws/internal/controller/glue/securityconfiguration"
 	triggerglue "github.com/upbound/provider-aws/internal/controller/glue/trigger"
 	userdefinedfunction "github.com/upbound/provider-aws/internal/controller/glue/userdefinedfunction"
@@ -769,7 +777,7 @@ import (
 	schedulegroup "github.com/upbound/provider-aws/internal/controller/scheduler/schedulegroup"
 	discoverer "github.com/upbound/provider-aws/internal/controller/schemas/discoverer"
 	registryschemas "github.com/upbound/provider-aws/internal/controller/schemas/registry"
-	schema "github.com/upbound/provider-aws/internal/controller/schemas/schema"
+	schemaschemas "github.com/upbound/provider-aws/internal/controller/schemas/schema"
 	secret "github.com/upbound/provider-aws/internal/controller/secretsmanager/secret"
 	secretpolicy "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretpolicy"
 	secretrotation "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretrotation"
@@ -1191,6 +1199,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		flowlog.Setup,
 		hostec2.Setup,
 		instanceec2.Setup,
+		instancestate.Setup,
 		internetgateway.Setup,
 		keypair.Setup,
 		launchtemplate.Setup,
@@ -1200,6 +1209,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		natgateway.Setup,
 		networkacl.Setup,
 		networkaclrule.Setup,
+		networkinsightsanalysis.Setup,
 		networkinsightspath.Setup,
 		networkinterface.Setup,
 		networkinterfaceattachment.Setup,
@@ -1228,6 +1238,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		transitgatewaymulticastgroupsource.Setup,
 		transitgatewaypeeringattachment.Setup,
 		transitgatewaypeeringattachmentaccepter.Setup,
+		transitgatewaypolicytable.Setup,
 		transitgatewayprefixlistreference.Setup,
 		transitgatewayroute.Setup,
 		transitgatewayroutetable.Setup,
@@ -1313,7 +1324,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
 		securityconfiguration.Setup,
+		feature.Setup,
+		projectevidently.Setup,
+		segment.Setup,
 		deliverystream.Setup,
+		experimenttemplate.Setup,
 		backup.Setup,
 		datarepositoryassociation.Setup,
 		lustrefilesystem.Setup,
@@ -1339,6 +1354,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		job.Setup,
 		registry.Setup,
 		resourcepolicyglue.Setup,
+		schema.Setup,
 		securityconfigurationglue.Setup,
 		triggerglue.Setup,
 		userdefinedfunction.Setup,
@@ -1656,7 +1672,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		schedulegroup.Setup,
 		discoverer.Setup,
 		registryschemas.Setup,
-		schema.Setup,
+		schemaschemas.Setup,
 		secret.Setup,
 		secretpolicy.Setup,
 		secretrotation.Setup,

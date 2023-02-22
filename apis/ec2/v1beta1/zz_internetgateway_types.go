@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type InternetGatewayObservation struct {
+type InternetGatewayObservation_2 struct {
 
 	// The ARN of the Internet Gateway.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -28,7 +28,7 @@ type InternetGatewayObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type InternetGatewayParameters struct {
+type InternetGatewayParameters_2 struct {
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -56,13 +56,13 @@ type InternetGatewayParameters struct {
 // InternetGatewaySpec defines the desired state of InternetGateway
 type InternetGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     InternetGatewayParameters `json:"forProvider"`
+	ForProvider     InternetGatewayParameters_2 `json:"forProvider"`
 }
 
 // InternetGatewayStatus defines the observed state of InternetGateway.
 type InternetGatewayStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        InternetGatewayObservation `json:"atProvider,omitempty"`
+	AtProvider        InternetGatewayObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
