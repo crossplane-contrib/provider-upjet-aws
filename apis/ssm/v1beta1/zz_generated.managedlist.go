@@ -25,6 +25,15 @@ func (l *AssociationList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this DefaultPatchBaselineList.
+func (l *DefaultPatchBaselineList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this DocumentList.
 func (l *DocumentList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -90,6 +99,15 @@ func (l *PatchGroupList) GetItems() []resource.Managed {
 
 // GetItems of this ResourceDataSyncList.
 func (l *ResourceDataSyncList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ServiceSettingList.
+func (l *ServiceSettingList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

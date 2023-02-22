@@ -703,12 +703,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// TODO: The ARN in documentation doesn't match ARN given for the aws_glue_registry resource. Check while testing
 	"aws_glue_schema": config.TemplatedStringAsIdentifier("schema_name", "{{ .parameters.registry_arn }}/{{ .external_name }}"),
 
-	// grafana
-	//
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_grafana_workspace_api_key": config.IdentifierFromProvider,
-
 	// identitystore
 	//
 	// An Identity Store Group can be imported using the combination identity_store_id/group_id
@@ -724,24 +718,15 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_inspector2_delegated_admin_account": config.IdentifierFromProvider,
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	// TODO: Due to testing limitations, not sure if we will be able to test this resource. Do not spend a lot of time for test it.
-	"aws_inspector2_enabler": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	// TODO: Check if we need privilege to test this resource. If yes - split it with "Need privilege" label.
 	"aws_inspector2_organization_configuration": config.IdentifierFromProvider,
 
 	// ivs
 	//
-	// IVS (Interactive Video) Channel can be imported using the ARN
-	// Example: arn:aws:ivs:us-west-2:326937407773:channel/0Y1lcs4U7jk5
-	"aws_ivs_channel": config.TemplatedStringAsIdentifier("", "arn:aws:ivs:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:channel/{{ .external_name }}"),
 	// IVS (Interactive Video) Playback Key Pair can be imported using the ARN
 	// Example: arn:aws:ivs:us-west-2:326937407773:playback-key/KDJRJNQhiQzA
 	"aws_ivs_playback_key_pair": config.TemplatedStringAsIdentifier("", "arn:aws:ivs:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:playback-key/{{ .external_name }}"),
-	// IVS (Interactive Video) Recording Configuration can be imported using the ARN
-	// Example: arn:aws:ivs:us-west-2:326937407773:recording-configuration/KAk1sHBl2L47
-	"aws_ivs_recording_configuration": config.TemplatedStringAsIdentifier("", "arn:aws:ivs:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:recording-configuration/{{ .external_name }}"),
+
 	// ivschat
 	//
 	// IVS (Interactive Video) Chat Logging Configuration can be imported using the ARN
@@ -874,13 +859,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// SESv2 (Simple Email V2) Dedicated IP Assignment can be imported using the id, which is a comma-separated string made up of ip and destination_pool_name
 	"aws_sesv2_dedicated_ip_assignment": config.IdentifierFromProvider,
 
-	// ssm
-	//
-	// The Systems Manager Default Patch Baseline can be imported using the patch baseline ID, patch baseline ARN, or the operating system value
-	"aws_ssm_default_patch_baseline": config.ParameterAsIdentifier("baseline_id"),
-	// AWS SSM Service Setting can be imported using the setting_id
-	"aws_ssm_service_setting": config.ParameterAsIdentifier("setting_id"),
-
 	// ssoadmin
 	//
 	// SSO Managed Policy Attachments can be imported using the name, path, permission_set_arn, and instance_arn separated by a comma (,)
@@ -893,24 +871,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// transcribe
 	//
-	// Transcribe LanguageModel can be imported using the model_name
-	"aws_transcribe_language_model": config.ParameterAsIdentifier("model_name"),
 	// Transcribe MedicalVocabulary can be imported using the vocabulary_name
 	"aws_transcribe_medical_vocabulary": config.ParameterAsIdentifier("vocabulary_name"),
-	// Transcribe Vocabulary can be imported using the vocabulary_name
-	"aws_transcribe_vocabulary": config.ParameterAsIdentifier("vocabulary_name"),
-	// Transcribe VocabularyFilter can be imported using the vocabulary_filter_name
-	"aws_transcribe_vocabulary_filter": config.ParameterAsIdentifier("vocabulary_filter_name"),
-
-	// transfer
-	//
-	// aws_transfer_tag can be imported by using the Transfer Family resource identifier and key, separated by a comma (,)
-	// Example: arn:aws:transfer:us-east-1:123456789012:server/s-1234567890abcdef0,Name
-	"aws_transfer_tag": config.IdentifierFromProvider,
-
-	// vpc_network
-	//
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_vpc_network_performance_metric_subscription": config.IdentifierFromProvider,
 }

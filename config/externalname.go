@@ -2473,6 +2473,56 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// SESv2 (Simple Email V2) Email Identity Mail From Attributes can be imported using the email_identity
 	"aws_sesv2_email_identity_mail_from_attributes": config.ParameterAsIdentifier("email_identity"),
 
+	// grafana
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_grafana_workspace_api_key": config.IdentifierFromProvider,
+
+	// ivs
+	//
+	// IVS (Interactive Video) Channel can be imported using the ARN
+	// Example: arn:aws:ivs:us-west-2:326937407773:channel/0Y1lcs4U7jk5
+	"aws_ivs_channel": config.IdentifierFromProvider,
+	// IVS (Interactive Video) Recording Configuration can be imported using the ARN
+	// Example: arn:aws:ivs:us-west-2:326937407773:recording-configuration/KAk1sHBl2L47
+	"aws_ivs_recording_configuration": config.IdentifierFromProvider,
+
+	// inspector2
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	// TODO: Due to testing limitations, not sure if we will be able to test this resource. Do not spend a lot of time for test it.
+	"aws_inspector2_enabler": config.IdentifierFromProvider,
+
+	// ssm
+	//
+	// The Systems Manager Default Patch Baseline can be imported using the patch baseline ID, patch baseline ARN, or the operating system value
+	"aws_ssm_default_patch_baseline": config.IdentifierFromProvider,
+	// AWS SSM Service Setting can be imported using the setting_id
+	"aws_ssm_service_setting": config.IdentifierFromProvider,
+
+	// transcribe
+	//
+	// Transcribe LanguageModel can be imported using the model_name
+	"aws_transcribe_language_model": config.ParameterAsIdentifier("model_name"),
+	// Transcribe Vocabulary can be imported using the vocabulary_name
+	"aws_transcribe_vocabulary": config.ParameterAsIdentifier("vocabulary_name"),
+	// Transcribe VocabularyFilter can be imported using the vocabulary_filter_name
+	"aws_transcribe_vocabulary_filter": config.ParameterAsIdentifier("vocabulary_filter_name"),
+
+	// transfer
+	//
+	// aws_transfer_tag can be imported by using the Transfer Family resource identifier and key, separated by a comma (,)
+	// Example: arn:aws:transfer:us-east-1:123456789012:server/s-1234567890abcdef0,Name
+	"aws_transfer_tag": config.IdentifierFromProvider,
+
+	// vpc_network
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_vpc_network_performance_metric_subscription": config.IdentifierFromProvider,
+
 	// medialive
 	//
 	// MediaLive Channel can be imported using the channel_id
