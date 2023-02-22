@@ -789,14 +789,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// medialive
 	//
-	// MediaLive Channel can be imported using the channel_id
-	"aws_medialive_channel": config.IdentifierFromProvider,
-	// MediaLive Input can be imported using the id
-	"aws_medialive_input": config.IdentifierFromProvider,
-	// MediaLive InputSecurityGroup can be imported using the id
-	"aws_medialive_input_security_group": config.IdentifierFromProvider,
-	// MediaLive Multiplex can be imported using the id
-	"aws_medialive_multiplex": config.IdentifierFromProvider,
 	// MediaLive MultiplexProgram can be imported using the id, or a combination of "program_name/multiplex_id"
 	"aws_medialive_multiplex_program": config.IdentifierFromProvider,
 
@@ -805,11 +797,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// MSK serverless clusters can be imported using the cluster arn
 	// Example: arn:aws:kafka:us-west-2:123456789012:cluster/example/279c0212-d057-4dba-9aa9-1c4e5a25bfc7-3
 	"aws_msk_serverless_cluster": config.IdentifierFromProvider,
-
-	// neptune
-	//
-	// aws_neptune_global_cluster can be imported by using the Global Cluster identifier
-	"aws_neptune_global_cluster": config.ParameterAsIdentifier("global_cluster_identifier"),
 
 	// networkmanager
 	//

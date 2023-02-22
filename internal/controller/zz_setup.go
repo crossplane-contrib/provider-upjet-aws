@@ -578,7 +578,11 @@ import (
 	invitationacceptermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/invitationaccepter"
 	membermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/member"
 	queuemediaconvert "github.com/upbound/provider-aws/internal/controller/mediaconvert/queue"
-	channel "github.com/upbound/provider-aws/internal/controller/mediapackage/channel"
+	channel "github.com/upbound/provider-aws/internal/controller/medialive/channel"
+	input "github.com/upbound/provider-aws/internal/controller/medialive/input"
+	inputsecuritygroup "github.com/upbound/provider-aws/internal/controller/medialive/inputsecuritygroup"
+	multiplex "github.com/upbound/provider-aws/internal/controller/medialive/multiplex"
+	channelmediapackage "github.com/upbound/provider-aws/internal/controller/mediapackage/channel"
 	container "github.com/upbound/provider-aws/internal/controller/mediastore/container"
 	containerpolicy "github.com/upbound/provider-aws/internal/controller/mediastore/containerpolicy"
 	acl "github.com/upbound/provider-aws/internal/controller/memorydb/acl"
@@ -594,6 +598,7 @@ import (
 	clusterparametergroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/clusterparametergroup"
 	clustersnapshotneptune "github.com/upbound/provider-aws/internal/controller/neptune/clustersnapshot"
 	eventsubscriptionneptune "github.com/upbound/provider-aws/internal/controller/neptune/eventsubscription"
+	globalclusterneptune "github.com/upbound/provider-aws/internal/controller/neptune/globalcluster"
 	parametergroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/parametergroup"
 	subnetgroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/subnetgroup"
 	firewall "github.com/upbound/provider-aws/internal/controller/networkfirewall/firewall"
@@ -1450,6 +1455,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		membermacie2.Setup,
 		queuemediaconvert.Setup,
 		channel.Setup,
+		input.Setup,
+		inputsecuritygroup.Setup,
+		multiplex.Setup,
+		channelmediapackage.Setup,
 		container.Setup,
 		containerpolicy.Setup,
 		acl.Setup,
@@ -1465,6 +1474,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		clusterparametergroupneptune.Setup,
 		clustersnapshotneptune.Setup,
 		eventsubscriptionneptune.Setup,
+		globalclusterneptune.Setup,
 		parametergroupneptune.Setup,
 		subnetgroupneptune.Setup,
 		firewall.Setup,
