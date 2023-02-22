@@ -459,6 +459,7 @@ import (
 	licenseassociation "github.com/upbound/provider-aws/internal/controller/grafana/licenseassociation"
 	roleassociation "github.com/upbound/provider-aws/internal/controller/grafana/roleassociation"
 	workspacegrafana "github.com/upbound/provider-aws/internal/controller/grafana/workspace"
+	workspaceapikey "github.com/upbound/provider-aws/internal/controller/grafana/workspaceapikey"
 	workspacesamlconfiguration "github.com/upbound/provider-aws/internal/controller/grafana/workspacesamlconfiguration"
 	detector "github.com/upbound/provider-aws/internal/controller/guardduty/detector"
 	filter "github.com/upbound/provider-aws/internal/controller/guardduty/filter"
@@ -495,6 +496,7 @@ import (
 	assessmenttarget "github.com/upbound/provider-aws/internal/controller/inspector/assessmenttarget"
 	assessmenttemplate "github.com/upbound/provider-aws/internal/controller/inspector/assessmenttemplate"
 	resourcegroup "github.com/upbound/provider-aws/internal/controller/inspector/resourcegroup"
+	enabler "github.com/upbound/provider-aws/internal/controller/inspector2/enabler"
 	certificateiot "github.com/upbound/provider-aws/internal/controller/iot/certificate"
 	indexingconfiguration "github.com/upbound/provider-aws/internal/controller/iot/indexingconfiguration"
 	loggingoptions "github.com/upbound/provider-aws/internal/controller/iot/loggingoptions"
@@ -508,6 +510,8 @@ import (
 	thingprincipalattachment "github.com/upbound/provider-aws/internal/controller/iot/thingprincipalattachment"
 	thingtype "github.com/upbound/provider-aws/internal/controller/iot/thingtype"
 	topicrule "github.com/upbound/provider-aws/internal/controller/iot/topicrule"
+	channel "github.com/upbound/provider-aws/internal/controller/ivs/channel"
+	recordingconfiguration "github.com/upbound/provider-aws/internal/controller/ivs/recordingconfiguration"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
 	datasourcekendra "github.com/upbound/provider-aws/internal/controller/kendra/datasource"
@@ -578,7 +582,7 @@ import (
 	invitationacceptermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/invitationaccepter"
 	membermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/member"
 	queuemediaconvert "github.com/upbound/provider-aws/internal/controller/mediaconvert/queue"
-	channel "github.com/upbound/provider-aws/internal/controller/medialive/channel"
+	channelmedialive "github.com/upbound/provider-aws/internal/controller/medialive/channel"
 	input "github.com/upbound/provider-aws/internal/controller/medialive/input"
 	inputsecuritygroup "github.com/upbound/provider-aws/internal/controller/medialive/inputsecuritygroup"
 	multiplex "github.com/upbound/provider-aws/internal/controller/medialive/multiplex"
@@ -831,6 +835,7 @@ import (
 	queueredrivepolicy "github.com/upbound/provider-aws/internal/controller/sqs/queueredrivepolicy"
 	activation "github.com/upbound/provider-aws/internal/controller/ssm/activation"
 	associationssm "github.com/upbound/provider-aws/internal/controller/ssm/association"
+	defaultpatchbaseline "github.com/upbound/provider-aws/internal/controller/ssm/defaultpatchbaseline"
 	document "github.com/upbound/provider-aws/internal/controller/ssm/document"
 	maintenancewindow "github.com/upbound/provider-aws/internal/controller/ssm/maintenancewindow"
 	maintenancewindowtarget "github.com/upbound/provider-aws/internal/controller/ssm/maintenancewindowtarget"
@@ -839,6 +844,7 @@ import (
 	patchbaseline "github.com/upbound/provider-aws/internal/controller/ssm/patchbaseline"
 	patchgroup "github.com/upbound/provider-aws/internal/controller/ssm/patchgroup"
 	resourcedatasync "github.com/upbound/provider-aws/internal/controller/ssm/resourcedatasync"
+	servicesetting "github.com/upbound/provider-aws/internal/controller/ssm/servicesetting"
 	accountassignment "github.com/upbound/provider-aws/internal/controller/ssoadmin/accountassignment"
 	managedpolicyattachment "github.com/upbound/provider-aws/internal/controller/ssoadmin/managedpolicyattachment"
 	permissionset "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionset"
@@ -846,10 +852,15 @@ import (
 	domainswf "github.com/upbound/provider-aws/internal/controller/swf/domain"
 	databasetimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/database"
 	tabletimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/table"
+	languagemodel "github.com/upbound/provider-aws/internal/controller/transcribe/languagemodel"
+	vocabularytranscribe "github.com/upbound/provider-aws/internal/controller/transcribe/vocabulary"
+	vocabularyfilter "github.com/upbound/provider-aws/internal/controller/transcribe/vocabularyfilter"
 	server "github.com/upbound/provider-aws/internal/controller/transfer/server"
 	sshkey "github.com/upbound/provider-aws/internal/controller/transfer/sshkey"
+	tagtransfer "github.com/upbound/provider-aws/internal/controller/transfer/tag"
 	usertransfer "github.com/upbound/provider-aws/internal/controller/transfer/user"
 	workflowtransfer "github.com/upbound/provider-aws/internal/controller/transfer/workflow"
+	networkperformancemetricsubscription "github.com/upbound/provider-aws/internal/controller/vpc/networkperformancemetricsubscription"
 	bytematchset "github.com/upbound/provider-aws/internal/controller/waf/bytematchset"
 	geomatchset "github.com/upbound/provider-aws/internal/controller/waf/geomatchset"
 	ipset "github.com/upbound/provider-aws/internal/controller/waf/ipset"
@@ -1335,6 +1346,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		licenseassociation.Setup,
 		roleassociation.Setup,
 		workspacegrafana.Setup,
+		workspaceapikey.Setup,
 		workspacesamlconfiguration.Setup,
 		detector.Setup,
 		filter.Setup,
@@ -1371,6 +1383,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		assessmenttarget.Setup,
 		assessmenttemplate.Setup,
 		resourcegroup.Setup,
+		enabler.Setup,
 		certificateiot.Setup,
 		indexingconfiguration.Setup,
 		loggingoptions.Setup,
@@ -1384,6 +1397,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		thingprincipalattachment.Setup,
 		thingtype.Setup,
 		topicrule.Setup,
+		channel.Setup,
+		recordingconfiguration.Setup,
 		clusterkafka.Setup,
 		configuration.Setup,
 		datasourcekendra.Setup,
@@ -1454,7 +1469,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		invitationacceptermacie2.Setup,
 		membermacie2.Setup,
 		queuemediaconvert.Setup,
-		channel.Setup,
+		channelmedialive.Setup,
 		input.Setup,
 		inputsecuritygroup.Setup,
 		multiplex.Setup,
@@ -1707,6 +1722,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		queueredrivepolicy.Setup,
 		activation.Setup,
 		associationssm.Setup,
+		defaultpatchbaseline.Setup,
 		document.Setup,
 		maintenancewindow.Setup,
 		maintenancewindowtarget.Setup,
@@ -1715,6 +1731,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		patchbaseline.Setup,
 		patchgroup.Setup,
 		resourcedatasync.Setup,
+		servicesetting.Setup,
 		accountassignment.Setup,
 		managedpolicyattachment.Setup,
 		permissionset.Setup,
@@ -1722,10 +1739,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		domainswf.Setup,
 		databasetimestreamwrite.Setup,
 		tabletimestreamwrite.Setup,
+		languagemodel.Setup,
+		vocabularytranscribe.Setup,
+		vocabularyfilter.Setup,
 		server.Setup,
 		sshkey.Setup,
+		tagtransfer.Setup,
 		usertransfer.Setup,
 		workflowtransfer.Setup,
+		networkperformancemetricsubscription.Setup,
 		bytematchset.Setup,
 		geomatchset.Setup,
 		ipset.Setup,

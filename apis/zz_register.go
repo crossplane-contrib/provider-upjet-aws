@@ -89,7 +89,9 @@ import (
 	v1beta1iam "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta1imagebuilder "github.com/upbound/provider-aws/apis/imagebuilder/v1beta1"
 	v1beta1inspector "github.com/upbound/provider-aws/apis/inspector/v1beta1"
+	v1beta1inspector2 "github.com/upbound/provider-aws/apis/inspector2/v1beta1"
 	v1beta1iot "github.com/upbound/provider-aws/apis/iot/v1beta1"
+	v1beta1ivs "github.com/upbound/provider-aws/apis/ivs/v1beta1"
 	v1beta1kafka "github.com/upbound/provider-aws/apis/kafka/v1beta1"
 	v1beta1kendra "github.com/upbound/provider-aws/apis/kendra/v1beta1"
 	v1beta1keyspaces "github.com/upbound/provider-aws/apis/keyspaces/v1beta1"
@@ -152,9 +154,11 @@ import (
 	v1beta1ssoadmin "github.com/upbound/provider-aws/apis/ssoadmin/v1beta1"
 	v1beta1swf "github.com/upbound/provider-aws/apis/swf/v1beta1"
 	v1beta1timestreamwrite "github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1"
+	v1beta1transcribe "github.com/upbound/provider-aws/apis/transcribe/v1beta1"
 	v1beta1transfer "github.com/upbound/provider-aws/apis/transfer/v1beta1"
 	v1alpha1 "github.com/upbound/provider-aws/apis/v1alpha1"
 	v1beta1apis "github.com/upbound/provider-aws/apis/v1beta1"
+	v1beta1vpc "github.com/upbound/provider-aws/apis/vpc/v1beta1"
 	v1beta1waf "github.com/upbound/provider-aws/apis/waf/v1beta1"
 	v1beta1wafregional "github.com/upbound/provider-aws/apis/wafregional/v1beta1"
 	v1beta1wafv2 "github.com/upbound/provider-aws/apis/wafv2/v1beta1"
@@ -244,7 +248,9 @@ func init() {
 		v1beta1iam.SchemeBuilder.AddToScheme,
 		v1beta1imagebuilder.SchemeBuilder.AddToScheme,
 		v1beta1inspector.SchemeBuilder.AddToScheme,
+		v1beta1inspector2.SchemeBuilder.AddToScheme,
 		v1beta1iot.SchemeBuilder.AddToScheme,
+		v1beta1ivs.SchemeBuilder.AddToScheme,
 		v1beta1kafka.SchemeBuilder.AddToScheme,
 		v1beta1kendra.SchemeBuilder.AddToScheme,
 		v1beta1keyspaces.SchemeBuilder.AddToScheme,
@@ -307,9 +313,11 @@ func init() {
 		v1beta1ssoadmin.SchemeBuilder.AddToScheme,
 		v1beta1swf.SchemeBuilder.AddToScheme,
 		v1beta1timestreamwrite.SchemeBuilder.AddToScheme,
+		v1beta1transcribe.SchemeBuilder.AddToScheme,
 		v1beta1transfer.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1beta1apis.SchemeBuilder.AddToScheme,
+		v1beta1vpc.SchemeBuilder.AddToScheme,
 		v1beta1waf.SchemeBuilder.AddToScheme,
 		v1beta1wafregional.SchemeBuilder.AddToScheme,
 		v1beta1wafv2.SchemeBuilder.AddToScheme,

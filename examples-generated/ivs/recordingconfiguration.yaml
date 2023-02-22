@@ -1,0 +1,18 @@
+apiVersion: ivs.aws.upbound.io/v1beta1
+kind: RecordingConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ivs/v1beta1/recordingconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    destinationConfiguration:
+    - s3:
+      - bucketName: ivs-stream-archive
+    name: recording_configuration-1
+    region: us-west-1
+
+---
+
