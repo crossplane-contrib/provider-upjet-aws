@@ -391,7 +391,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// colon (:): my_cluster:my_node_group
 	"aws_eks_node_group": config.TemplatedStringAsIdentifier("node_group_name", "{{ .parameters.cluster_name }}:{{ .external_name }}"),
 	// my_cluster:my_eks_addon
-	"aws_eks_addon": FormattedIdentifierUserDefinedNameLast("addon_name", ":", "cluster_name"),
+	// "aws_eks_addon": config.TemplatedStringAsIdentifier("addon_name", "{{ .parameters.cluster_name }}:{{ .external_name }}"),
+	"aws_eks_addon": FormattedIdentifierFromProvider(":", "cluster_name", "addon_name"),
 	// my_cluster:my_fargate_profile
 	"aws_eks_fargate_profile": FormattedIdentifierUserDefinedNameLast("fargate_profile_name", ":", "cluster_name"),
 	// It has a complex config, adding empty entry here just to enable it.

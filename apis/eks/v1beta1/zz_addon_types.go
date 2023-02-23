@@ -33,6 +33,11 @@ type AddonObservation struct {
 
 type AddonParameters struct {
 
+	// on. The name must match one of
+	// the names returned by describe-addon-versions.
+	// +kubebuilder:validation:Required
+	AddonName *string `json:"addonName" tf:"addon_name,omitempty"`
+
 	// on. The version must
 	// match one of the versions returned by describe-addon-versions.
 	// +kubebuilder:validation:Optional

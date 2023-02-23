@@ -63,6 +63,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  addonName:
+                    description: on. The name must match one of the names returned
+                      by describe-addon-versions.
+                    type: string
                   addonVersion:
                     description: on. The version must match one of the versions returned
                       by describe-addon-versions.
@@ -252,6 +256,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
+                - addonName
                 - region
                 type: object
               providerConfigRef:
