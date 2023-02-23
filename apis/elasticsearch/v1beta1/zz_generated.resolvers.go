@@ -42,3 +42,29 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	return nil
 }
+
+// ResolveReferences of this DomainPolicy.
+func (mg *DomainPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DomainNameRef,
+		Selector:     mg.Spec.ForProvider.DomainNameSelector,
+		To: reference.To{
+			List:    &DomainList{},
+			Managed: &Domain{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DomainName")
+	}
+	mg.Spec.ForProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DomainNameRef = rsp.ResolvedReference
+
+	return nil
+}

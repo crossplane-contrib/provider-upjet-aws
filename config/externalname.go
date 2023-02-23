@@ -2312,6 +2312,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Elasticsearch domains can be imported using the domain_name
 	"aws_elasticsearch_domain": config.TemplatedStringAsIdentifier("domain_name", "arn:aws:es:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:domain/{{ .external_name }}"),
+	// No import
+	"aws_elasticsearch_domain_policy": config.IdentifierFromProvider,
+	// Elasticsearch domains can be imported using the domain_name
+	"aws_elasticsearch_domain_saml_options": config.ParameterAsIdentifier("domain_name"),
 
 	// xray
 	//

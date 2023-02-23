@@ -288,13 +288,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Elastic Beanstalk Environments can be imported using the id
 	"aws_elastic_beanstalk_environment": config.IdentifierFromProvider,
 
-	// elasticsearch
-	//
-	// No import
-	"aws_elasticsearch_domain_policy": config.IdentifierFromProvider,
-	// Elasticsearch domains can be imported using the domain_name
-	"aws_elasticsearch_domain_saml_options": config.ParameterAsIdentifier("domain_name"),
-
 	// elbv2
 	//
 	// Listener Certificates can be imported by using the listener arn and certificate arn, separated by an underscore (_)
