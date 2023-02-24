@@ -15,8 +15,20 @@ import (
 
 type RDSDBInstanceObservation struct {
 
+	// A db password
+	DBPasswordSecretRef v1.SecretKeySelector `json:"dbPasswordSecretRef" tf:"-"`
+
+	// A db username
+	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
+
 	// The computed id. Please note that this is only used internally to identify the stack <-> instance relation. This value is not used in aws.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The db instance to register for this stack. Changing this will force a new resource.
+	RDSDBInstanceArn *string `json:"rdsDbInstanceArn,omitempty" tf:"rds_db_instance_arn,omitempty"`
+
+	// The stack to register a db instance for. Changing this will force a new resource.
+	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
 }
 
 type RDSDBInstanceParameters struct {

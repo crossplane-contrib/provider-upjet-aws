@@ -15,6 +15,28 @@ import (
 
 type TargetObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Max capacity of the scalable target.
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+
+	// Min capacity of the scalable target.
+	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Resource type and unique identifier string for the resource associated with the scaling policy. Documentation can be found in the ResourceId parameter at: AWS Application Auto Scaling API Reference
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// ARN of the IAM role that allows Application AutoScaling to modify your scalable target on your behalf. This defaults to an IAM Service-Linked Role for most services and custom IAM Roles are ignored by the API for those namespaces. See the AWS Application Auto Scaling documentation for more information about how this service interacts with IAM.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Scalable dimension of the scalable target. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference
+	ScalableDimension *string `json:"scalableDimension,omitempty" tf:"scalable_dimension,omitempty"`
+
+	// AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
+	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
 }
 
 type TargetParameters struct {

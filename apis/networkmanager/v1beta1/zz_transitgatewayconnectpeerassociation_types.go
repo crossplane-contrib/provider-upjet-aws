@@ -14,7 +14,24 @@ import (
 )
 
 type TransitGatewayConnectPeerAssociationObservation struct {
+
+	// The ID of the device.
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// The ID of the global network.
+	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the link.
+	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The Amazon Resource Name (ARN) of the Connect peer.
+	TransitGatewayConnectPeerArn *string `json:"transitGatewayConnectPeerArn,omitempty" tf:"transit_gateway_connect_peer_arn,omitempty"`
 }
 
 type TransitGatewayConnectPeerAssociationParameters struct {

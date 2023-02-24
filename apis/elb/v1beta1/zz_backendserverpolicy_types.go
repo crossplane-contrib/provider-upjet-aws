@@ -17,6 +17,19 @@ type BackendServerPolicyObservation struct {
 
 	// The ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The instance port to apply the policy to.
+	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
+
+	// The load balancer to attach the policy to.
+	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
+
+	// List of Policy Names to apply to the backend server.
+	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type BackendServerPolicyParameters struct {

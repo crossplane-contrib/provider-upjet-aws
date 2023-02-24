@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: userdefinedfunctions.glue.aws.upbound.io
 spec:
@@ -183,6 +183,15 @@ spec:
                 - ownerType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -362,12 +371,46 @@ spec:
                   arn:
                     description: The ARN of the Glue User Defined Function.
                     type: string
+                  catalogId:
+                    description: ID of the Glue Catalog to create the function in.
+                      If omitted, this defaults to the AWS Account ID.
+                    type: string
+                  className:
+                    description: The Java class that contains the function code.
+                    type: string
                   createTime:
                     description: The time at which the function was created.
+                    type: string
+                  databaseName:
+                    description: The name of the Database to create the Function.
                     type: string
                   id:
                     description: The id of the Glue User Defined Function.
                     type: string
+                  ownerName:
+                    description: The owner of the function.
+                    type: string
+                  ownerType:
+                    description: The owner type. can be one of USER, ROLE, and GROUP.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  resourceUris:
+                    description: The configuration block for Resource URIs. See resource
+                      uris below for more details.
+                    items:
+                      properties:
+                        resourceType:
+                          description: The type of the resource. can be one of JAR,
+                            FILE, and ARCHIVE.
+                          type: string
+                        uri:
+                          description: The URI for accessing the resource.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -410,9 +453,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

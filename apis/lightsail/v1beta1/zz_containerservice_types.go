@@ -26,6 +26,14 @@ type ContainerServiceObservation struct {
 	// Same as name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A Boolean value indicating whether the container service is disabled. Defaults to false.
+	IsDisabled *bool `json:"isDisabled,omitempty" tf:"is_disabled,omitempty"`
+
+	// The power specification for the container service. The power specifies the amount of memory,
+	// the number of vCPUs, and the monthly price of each node of the container service.
+	// Possible values: nano, micro, small, medium, large, xlarge.
+	Power *string `json:"power,omitempty" tf:"power,omitempty"`
+
 	// The ID of the power of the container service.
 	PowerID *string `json:"powerId,omitempty" tf:"power_id,omitempty"`
 
@@ -39,14 +47,31 @@ type ContainerServiceObservation struct {
 	PrivateDomainName *string `json:"privateDomainName,omitempty" tf:"private_domain_name,omitempty"`
 
 	// An object to describe the configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See Private Registry Access below for more details.
-	// +kubebuilder:validation:Optional
 	PrivateRegistryAccess []PrivateRegistryAccessObservation `json:"privateRegistryAccess,omitempty" tf:"private_registry_access,omitempty"`
+
+	// The public domain names to use with the container service, such as example.com
+	// and www.example.com. You can specify up to four public domain names for a container service. The domain names that you
+	// specify are used when you create a deployment with a container configured as the public endpoint of your container
+	// service. If you don't specify public domain names, then you can use the default domain of the container service.
+	// Defined below.
+	PublicDomainNames []PublicDomainNamesObservation `json:"publicDomainNames,omitempty" tf:"public_domain_names,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The Lightsail resource type of the container service (i.e., ContainerService).
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
+	// The scale specification for the container service. The scale specifies the allocated compute
+	// nodes of the container service.
+	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
+
 	// The current state of the container service.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider
 	// default_tags configuration block.
@@ -98,6 +123,9 @@ type ContainerServiceParameters struct {
 
 type EcrImagePullerRoleObservation struct {
 
+	// A Boolean value that indicates whether to activate the role. The default is false.
+	IsActive *bool `json:"isActive,omitempty" tf:"is_active,omitempty"`
+
 	// The principal ARN of the container service. The principal ARN can be used to create a trust
 	// relationship between your standard AWS account and your Lightsail container service. This allows you to give your
 	// service permission to access resources in your standard AWS account.
@@ -114,7 +142,6 @@ type EcrImagePullerRoleParameters struct {
 type PrivateRegistryAccessObservation struct {
 
 	// Describes a request to configure an Amazon Lightsail container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See ECR Image Puller Role below for more details.
-	// +kubebuilder:validation:Optional
 	EcrImagePullerRole []EcrImagePullerRoleObservation `json:"ecrImagePullerRole,omitempty" tf:"ecr_image_puller_role,omitempty"`
 }
 
@@ -126,6 +153,12 @@ type PrivateRegistryAccessParameters struct {
 }
 
 type PublicDomainNamesCertificateObservation struct {
+
+	// The name for the container service. Names must be of length 1 to 63, and be
+	// unique within each AWS Region in your Lightsail account.
+	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
+
+	DomainNames []*string `json:"domainNames,omitempty" tf:"domain_names,omitempty"`
 }
 
 type PublicDomainNamesCertificateParameters struct {
@@ -140,6 +173,7 @@ type PublicDomainNamesCertificateParameters struct {
 }
 
 type PublicDomainNamesObservation struct {
+	Certificate []PublicDomainNamesCertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
 }
 
 type PublicDomainNamesParameters struct {

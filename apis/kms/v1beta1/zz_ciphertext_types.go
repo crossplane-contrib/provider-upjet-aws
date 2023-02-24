@@ -18,7 +18,20 @@ type CiphertextObservation struct {
 	// Base64 encoded ciphertext
 	CiphertextBlob *string `json:"ciphertextBlob,omitempty" tf:"ciphertext_blob,omitempty"`
 
+	// An optional mapping that makes up the encryption context.
+	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Globally unique key ID for the customer master key.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
+	PlaintextSecretRef v1.SecretKeySelector `json:"plaintextSecretRef" tf:"-"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type CiphertextParameters struct {

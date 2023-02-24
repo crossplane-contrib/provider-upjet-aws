@@ -18,7 +18,14 @@ type EmailIdentityObservation struct {
 	// The ARN of the email identity.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The email address to assign to SES.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type EmailIdentityParameters struct {

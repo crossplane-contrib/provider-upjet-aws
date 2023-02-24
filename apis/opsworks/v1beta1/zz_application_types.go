@@ -14,6 +14,24 @@ import (
 )
 
 type AppSourceObservation struct {
+
+	// Password to use when authenticating to the source.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// For sources that are version-aware, the revision to use.
+	Revision *string `json:"revision,omitempty" tf:"revision,omitempty"`
+
+	// SSH key to use when authenticating to the source.
+	SSHKeySecretRef *v1.SecretKeySelector `json:"sshKeySecretRef,omitempty" tf:"-"`
+
+	// The type of source to use. For example, "archive".
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The URL where the app resource can be found.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+
+	// Username to use when authenticating to the source.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type AppSourceParameters struct {
@@ -45,8 +63,59 @@ type AppSourceParameters struct {
 
 type ApplicationObservation struct {
 
+	// SCM configuration of the app as described below.
+	AppSource []AppSourceObservation `json:"appSource,omitempty" tf:"app_source,omitempty"`
+
+	// Run bundle install when deploying for application of type rails.
+	AutoBundleOnDeploy *string `json:"autoBundleOnDeploy,omitempty" tf:"auto_bundle_on_deploy,omitempty"`
+
+	// Specify activity and workflow workers for your app using the aws-flow gem.
+	AwsFlowRubySettings *string `json:"awsFlowRubySettings,omitempty" tf:"aws_flow_ruby_settings,omitempty"`
+
+	// The data source's ARN.
+	DataSourceArn *string `json:"dataSourceArn,omitempty" tf:"data_source_arn,omitempty"`
+
+	// The database name.
+	DataSourceDatabaseName *string `json:"dataSourceDatabaseName,omitempty" tf:"data_source_database_name,omitempty"`
+
+	// The data source's type one of AutoSelectOpsworksMysqlInstance, OpsworksMysqlInstance, or RdsDbInstance.
+	DataSourceType *string `json:"dataSourceType,omitempty" tf:"data_source_type,omitempty"`
+
+	// A description of the app.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Subfolder for the document root for application of type rails.
+	DocumentRoot *string `json:"documentRoot,omitempty" tf:"document_root,omitempty"`
+
+	// A list of virtual host alias.
+	Domains []*string `json:"domains,omitempty" tf:"domains,omitempty"`
+
+	// Whether to enable SSL for the app. This must be set in order to let ssl_configuration.private_key, ssl_configuration.certificate and ssl_configuration.chain take effect.
+	EnableSSL *bool `json:"enableSsl,omitempty" tf:"enable_ssl,omitempty"`
+
+	// Object to define environment variables.  Object is described below.
+	Environment []EnvironmentObservation `json:"environment,omitempty" tf:"environment,omitempty"`
+
 	// The id of the application.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A human-readable name for the application.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the Rails environment for application of type rails.
+	RailsEnv *string `json:"railsEnv,omitempty" tf:"rails_env,omitempty"`
+
+	// The SSL configuration of the app. Object is described below.
+	SSLConfiguration []SSLConfigurationObservation `json:"sslConfiguration,omitempty" tf:"ssl_configuration,omitempty"`
+
+	// A short, machine-readable name for the application. This can only be defined on resource creation and ignored on resource update.
+	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
+
+	// ID of the stack the application will belong to.
+	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
+
+	// Opsworks application type. One of aws-flow-ruby, java, rails, php, nodejs, static or other.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ApplicationParameters struct {
@@ -131,6 +200,15 @@ type ApplicationParameters struct {
 }
 
 type EnvironmentObservation struct {
+
+	// Variable name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Set visibility of the variable value to true or false.
+	Secure *bool `json:"secure,omitempty" tf:"secure,omitempty"`
+
+	// Variable value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type EnvironmentParameters struct {
@@ -149,6 +227,15 @@ type EnvironmentParameters struct {
 }
 
 type SSLConfigurationObservation struct {
+
+	// The contents of the certificate's domain.crt file.
+	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// Can be used to specify an intermediate certificate authority key or client authentication.
+	Chain *string `json:"chain,omitempty" tf:"chain,omitempty"`
+
+	// The private key; the contents of the certificate's domain.key file.
+	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 }
 
 type SSLConfigurationParameters struct {

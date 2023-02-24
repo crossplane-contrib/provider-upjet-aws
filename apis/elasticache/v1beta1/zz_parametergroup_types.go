@@ -18,8 +18,27 @@ type ParameterGroupObservation struct {
 	// The AWS ARN associated with the parameter group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description of the ElastiCache parameter group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The family of the ElastiCache parameter group.
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
+
 	// The ElastiCache parameter group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the ElastiCache parameter group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of ElastiCache parameters to apply.
+	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -54,6 +73,12 @@ type ParameterGroupParameters struct {
 }
 
 type ParameterObservation struct {
+
+	// The name of the ElastiCache parameter group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the ElastiCache parameter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ParameterParameters struct {

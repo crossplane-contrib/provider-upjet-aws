@@ -15,11 +15,30 @@ import (
 
 type HostedConfigurationVersionObservation struct {
 
+	// Application ID.
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
+
 	// ARN of the AppConfig  hosted configuration version.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Configuration profile ID.
+	ConfigurationProfileID *string `json:"configurationProfileId,omitempty" tf:"configuration_profile_id,omitempty"`
+
+	// Content of the configuration or the configuration data.
+	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
+
+	// Standard MIME type describing the format of the configuration content. For more information, see Content-Type.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Description of the configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// AppConfig application ID, configuration profile ID, and version number separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// Version number of the hosted configuration.
 	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`

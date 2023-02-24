@@ -21,6 +21,25 @@ type AnomalyMonitorObservation struct {
 	// Unique ID of the anomaly monitor. Same as arn.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The dimensions to evaluate. Valid values: SERVICE.
+	MonitorDimension *string `json:"monitorDimension,omitempty" tf:"monitor_dimension,omitempty"`
+
+	// A valid JSON representation for the Expression object.
+	MonitorSpecification *string `json:"monitorSpecification,omitempty" tf:"monitor_specification,omitempty"`
+
+	// The possible type values. Valid values: DIMENSIONAL | CUSTOM.
+	MonitorType *string `json:"monitorType,omitempty" tf:"monitor_type,omitempty"`
+
+	// The name of the monitor.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }

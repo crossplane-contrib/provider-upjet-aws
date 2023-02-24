@@ -16,8 +16,21 @@ import (
 type DefinitionObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specific log groups to use with the query.
+	LogGroupNames []*string `json:"logGroupNames,omitempty" tf:"log_group_names,omitempty"`
+
+	// The name of the query.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The query definition ID.
 	QueryDefinitionID *string `json:"queryDefinitionId,omitempty" tf:"query_definition_id,omitempty"`
+
+	// The query to save. You can read more about CloudWatch Logs Query Syntax in the documentation.
+	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DefinitionParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: configurations.mq.aws.upbound.io
 spec:
@@ -102,6 +102,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -281,12 +290,43 @@ spec:
                   arn:
                     description: ARN of the configuration.
                     type: string
+                  authenticationStrategy:
+                    description: Authentication strategy associated with the configuration.
+                      Valid values are simple and ldap. ldap is not supported for
+                      engine_type RabbitMQ.
+                    type: string
+                  data:
+                    description: Broker configuration in XML format. See official
+                      docs for supported parameters and format of the XML.
+                    type: string
+                  description:
+                    description: Description of the configuration.
+                    type: string
+                  engineType:
+                    description: Type of broker engine. Valid values are ActiveMQ
+                      and RabbitMQ.
+                    type: string
+                  engineVersion:
+                    description: Version of the broker engine.
+                    type: string
                   id:
                     description: Unique ID that Amazon MQ generates for the configuration.
                     type: string
                   latestRevision:
                     description: Latest revision of the configuration.
                     type: number
+                  name:
+                    description: Name of the configuration.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -336,9 +376,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

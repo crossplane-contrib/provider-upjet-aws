@@ -14,6 +14,12 @@ import (
 )
 
 type ActionObservation struct {
+
+	// The rule for copying shared snapshots across Regions. See the cross_region_copy configuration block.
+	CrossRegionCopy []CrossRegionCopyObservation `json:"crossRegionCopy,omitempty" tf:"cross_region_copy,omitempty"`
+
+	// A descriptive name for the action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ActionParameters struct {
@@ -28,6 +34,21 @@ type ActionParameters struct {
 }
 
 type CreateRuleObservation struct {
+
+	// The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year.
+	CronExpression *string `json:"cronExpression,omitempty" tf:"cron_expression,omitempty"`
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+
+	// Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify CLOUD. To create snapshots on the same Outpost as the source resource, specify OUTPOST_LOCAL. If you omit this parameter, CLOUD is used by default. If the policy targets resources in an AWS Region, then you must create snapshots in the same Region as the source resource. If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost. Valid values are CLOUD and OUTPOST_LOCAL.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A list of times in 24 hour clock format that sets when the lifecycle policy should be evaluated. Max of 1.
+	Times []*string `json:"times,omitempty" tf:"times,omitempty"`
 }
 
 type CreateRuleParameters struct {
@@ -54,6 +75,15 @@ type CreateRuleParameters struct {
 }
 
 type CrossRegionCopyObservation struct {
+
+	// The encryption settings for the copied snapshot. See the encryption_configuration block. Max of 1 per action.
+	EncryptionConfiguration []EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+
+	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
+	RetainRule []RetainRuleObservation `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
+
+	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type CrossRegionCopyParameters struct {
@@ -72,6 +102,24 @@ type CrossRegionCopyParameters struct {
 }
 
 type CrossRegionCopyRuleObservation struct {
+
+	// The Amazon Resource Name (ARN) of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
+	CmkArn *string `json:"cmkArn,omitempty" tf:"cmk_arn,omitempty"`
+
+	// Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
+	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
+
+	// See the deprecate_rule block. Max of 1 per schedule.
+	DeprecateRule []DeprecateRuleObservation `json:"deprecateRule,omitempty" tf:"deprecate_rule,omitempty"`
+
+	// To encrypt a copy of an unencrypted snapshot when encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or when encryption by default is not enabled.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
+	RetainRule []CrossRegionCopyRuleRetainRuleObservation `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
+
+	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type CrossRegionCopyRuleParameters struct {
@@ -112,6 +160,12 @@ type CrossRegionCopyRuleParameters struct {
 }
 
 type CrossRegionCopyRuleRetainRuleObservation struct {
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
 }
 
 type CrossRegionCopyRuleRetainRuleParameters struct {
@@ -126,6 +180,12 @@ type CrossRegionCopyRuleRetainRuleParameters struct {
 }
 
 type DeprecateRuleObservation struct {
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
 }
 
 type DeprecateRuleParameters struct {
@@ -140,6 +200,12 @@ type DeprecateRuleParameters struct {
 }
 
 type EncryptionConfigurationObservation struct {
+
+	// The Amazon Resource Name (ARN) of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
+	CmkArn *string `json:"cmkArn,omitempty" tf:"cmk_arn,omitempty"`
+
+	// To encrypt a copy of an unencrypted snapshot when encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or when encryption by default is not enabled.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 }
 
 type EncryptionConfigurationParameters struct {
@@ -154,6 +220,12 @@ type EncryptionConfigurationParameters struct {
 }
 
 type EventSourceObservation struct {
+
+	// A set of optional parameters for snapshot and AMI lifecycle policies. See the parameters configuration block.
+	Parameters []ParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The source of the event. Currently only managed CloudWatch Events rules are supported. Valid values are MANAGED_CWE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EventSourceParameters struct {
@@ -168,6 +240,18 @@ type EventSourceParameters struct {
 }
 
 type FastRestoreRuleObservation struct {
+
+	// The Availability Zones in which to enable fast snapshot restore.
+	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
+
+	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
 }
 
 type FastRestoreRuleParameters struct {
@@ -194,8 +278,27 @@ type LifecyclePolicyObservation struct {
 	// Amazon Resource Name (ARN) of the DLM Lifecycle Policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A description for the DLM lifecycle policy.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The ARN of an IAM role that is able to be assumed by the DLM service.
+	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
+
 	// Identifier of the DLM Lifecycle Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// See the policy_details configuration block. Max of 1.
+	PolicyDetails []PolicyDetailsObservation `json:"policyDetails,omitempty" tf:"policy_details,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Whether the lifecycle policy should be enabled or disabled. ENABLED or DISABLED are valid values. Defaults to ENABLED.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -240,6 +343,15 @@ type LifecyclePolicyParameters struct {
 }
 
 type ParametersObservation struct {
+
+	// The snapshot description that can trigger the policy. The description pattern is specified using a regular expression. The policy runs only if a snapshot with a description that matches the specified pattern is shared with your account.
+	DescriptionRegex *string `json:"descriptionRegex,omitempty" tf:"description_regex,omitempty"`
+
+	// The type of event. Currently, only shareSnapshot events are supported.
+	EventType *string `json:"eventType,omitempty" tf:"event_type,omitempty"`
+
+	// The IDs of the AWS accounts that can trigger policy by sharing snapshots with your account. The policy only runs if one of the specified AWS accounts shares a snapshot with your account.
+	SnapshotOwner []*string `json:"snapshotOwner,omitempty" tf:"snapshot_owner,omitempty"`
 }
 
 type ParametersParameters struct {
@@ -258,6 +370,30 @@ type ParametersParameters struct {
 }
 
 type PolicyDetailsObservation struct {
+
+	// The actions to be performed when the event-based policy is triggered. You can specify only one action per policy. This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter. See the action configuration block.
+	Action []ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The event that triggers the event-based policy. This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter. See the event_source configuration block.
+	EventSource []EventSourceObservation `json:"eventSource,omitempty" tf:"event_source,omitempty"`
+
+	// A set of optional parameters for snapshot and AMI lifecycle policies. See the parameters configuration block.
+	Parameters []PolicyDetailsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The valid target resource types and actions a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify EVENT_BASED_POLICY to create an event-based policy that performs specific actions when a defined event occurs in your AWS account. Default value is EBS_SNAPSHOT_MANAGEMENT.
+	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
+
+	// The location of the resources to backup. If the source resources are located in an AWS Region, specify CLOUD. If the source resources are located on an Outpost in your account, specify OUTPOST. If you specify OUTPOST, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account. Valid values are CLOUD and OUTPOST.
+	ResourceLocations []*string `json:"resourceLocations,omitempty" tf:"resource_locations,omitempty"`
+
+	// A list of resource types that should be targeted by the lifecycle policy. Valid values are VOLUME and INSTANCE.
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
+
+	// See the schedule configuration block.
+	Schedule []ScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// A map of tag keys and their values. Any resources that match the resource_types and are tagged with any of these tags will be targeted.
+	TargetTags map[string]*string `json:"targetTags,omitempty" tf:"target_tags,omitempty"`
 }
 
 type PolicyDetailsParameters struct {
@@ -296,6 +432,12 @@ type PolicyDetailsParameters struct {
 }
 
 type PolicyDetailsParametersObservation struct {
+
+	// Indicates whether to exclude the root volume from snapshots created using CreateSnapshots. The default is false.
+	ExcludeBootVolume *bool `json:"excludeBootVolume,omitempty" tf:"exclude_boot_volume,omitempty"`
+
+	// Applies to AMI lifecycle policies only. Indicates whether targeted instances are rebooted when the lifecycle policy runs. true indicates that targeted instances are not rebooted when the policy runs. false indicates that target instances are rebooted when the policy runs. The default is true (instances are not rebooted).
+	NoReboot *bool `json:"noReboot,omitempty" tf:"no_reboot,omitempty"`
 }
 
 type PolicyDetailsParametersParameters struct {
@@ -310,6 +452,12 @@ type PolicyDetailsParametersParameters struct {
 }
 
 type RetainRuleObservation struct {
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
 }
 
 type RetainRuleParameters struct {
@@ -324,6 +472,15 @@ type RetainRuleParameters struct {
 }
 
 type ScheduleDeprecateRuleObservation struct {
+
+	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
 }
 
 type ScheduleDeprecateRuleParameters struct {
@@ -342,6 +499,36 @@ type ScheduleDeprecateRuleParameters struct {
 }
 
 type ScheduleObservation struct {
+
+	// Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
+	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
+
+	// See the create_rule block. Max of 1 per schedule.
+	CreateRule []CreateRuleObservation `json:"createRule,omitempty" tf:"create_rule,omitempty"`
+
+	// See the cross_region_copy_rule block. Max of 3 per schedule.
+	CrossRegionCopyRule []CrossRegionCopyRuleObservation `json:"crossRegionCopyRule,omitempty" tf:"cross_region_copy_rule,omitempty"`
+
+	// See the deprecate_rule block. Max of 1 per schedule.
+	DeprecateRule []ScheduleDeprecateRuleObservation `json:"deprecateRule,omitempty" tf:"deprecate_rule,omitempty"`
+
+	// See the fast_restore_rule block. Max of 1 per schedule.
+	FastRestoreRule []FastRestoreRuleObservation `json:"fastRestoreRule,omitempty" tf:"fast_restore_rule,omitempty"`
+
+	// A descriptive name for the action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
+	RetainRule []ScheduleRetainRuleObservation `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
+
+	// See the share_rule block. Max of 1 per schedule.
+	ShareRule []ShareRuleObservation `json:"shareRule,omitempty" tf:"share_rule,omitempty"`
+
+	// A map of tag keys and their values. DLM lifecycle policies will already tag the snapshot with the tags on the volume. This configuration adds extra tags on top of these.
+	TagsToAdd map[string]*string `json:"tagsToAdd,omitempty" tf:"tags_to_add,omitempty"`
+
+	// A map of tag keys and variable values, where the values are determined when the policy is executed. Only $(instance-id) or $(timestamp) are valid values. Can only be used when resource_types is INSTANCE.
+	VariableTags map[string]*string `json:"variableTags,omitempty" tf:"variable_tags,omitempty"`
 }
 
 type ScheduleParameters struct {
@@ -388,6 +575,15 @@ type ScheduleParameters struct {
 }
 
 type ScheduleRetainRuleObservation struct {
+
+	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
 }
 
 type ScheduleRetainRuleParameters struct {
@@ -406,6 +602,15 @@ type ScheduleRetainRuleParameters struct {
 }
 
 type ShareRuleObservation struct {
+
+	// The IDs of the AWS accounts with which to share the snapshots.
+	TargetAccounts []*string `json:"targetAccounts,omitempty" tf:"target_accounts,omitempty"`
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	UnshareInterval *float64 `json:"unshareInterval,omitempty" tf:"unshare_interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	UnshareIntervalUnit *string `json:"unshareIntervalUnit,omitempty" tf:"unshare_interval_unit,omitempty"`
 }
 
 type ShareRuleParameters struct {

@@ -27,14 +27,24 @@ type VPCAttachmentObservation struct {
 	// The ARN of a core network.
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
 
+	// The ID of a core network for the VPC attachment.
+	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
+
 	// The Region where the edge is located.
 	EdgeLocation *string `json:"edgeLocation,omitempty" tf:"edge_location,omitempty"`
 
 	// The ID of the attachment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Options for the VPC attachment.
+	Options []VPCAttachmentOptionsObservation `json:"options,omitempty" tf:"options,omitempty"`
+
 	// The ID of the attachment account owner.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The attachment resource ARN.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -45,11 +55,26 @@ type VPCAttachmentObservation struct {
 	// The state of the attachment.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
+	// The subnet ARN of the VPC attachment.
+	SubnetArns []*string `json:"subnetArns,omitempty" tf:"subnet_arns,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The ARN of the VPC.
+	VPCArn *string `json:"vpcArn,omitempty" tf:"vpc_arn,omitempty"`
 }
 
 type VPCAttachmentOptionsObservation struct {
+
+	// Indicates whether appliance mode is supported. If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
+	ApplianceModeSupport *bool `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
+
+	// Indicates whether IPv6 is supported.
+	IPv6Support *bool `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 }
 
 type VPCAttachmentOptionsParameters struct {

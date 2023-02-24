@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: bucketinventories.s3.aws.upbound.io
 spec:
@@ -338,6 +338,15 @@ spec:
                 - region
                 - schedule
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -514,8 +523,114 @@ spec:
             properties:
               atProvider:
                 properties:
+                  bucket:
+                    description: The name of the source bucket that inventory lists
+                      the objects for.
+                    type: string
+                  destination:
+                    description: Contains information about where to publish the inventory
+                      results (documented below).
+                    items:
+                      properties:
+                        bucket:
+                          description: The name of the source bucket that inventory
+                            lists the objects for.
+                          items:
+                            properties:
+                              accountId:
+                                description: The ID of the account that owns the destination
+                                  bucket. Recommended to be set to prevent problems
+                                  if the destination bucket ownership changes.
+                                type: string
+                              bucketArn:
+                                description: The Amazon S3 bucket ARN of the destination.
+                                type: string
+                              encryption:
+                                description: Contains the type of server-side encryption
+                                  to use to encrypt the inventory (documented below).
+                                items:
+                                  properties:
+                                    sseKms:
+                                      description: Specifies to use server-side encryption
+                                        with AWS KMS-managed keys to encrypt the inventory
+                                        file (documented below).
+                                      items:
+                                        properties:
+                                          keyId:
+                                            description: The ARN of the KMS customer
+                                              master key (CMK) used to encrypt the
+                                              inventory file.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    sseS3:
+                                      description: Specifies to use server-side encryption
+                                        with Amazon S3-managed keys (SSE-S3) to encrypt
+                                        the inventory file.
+                                      items:
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              format:
+                                description: Specifies the output format of the inventory
+                                  results. Can be CSV, ORC or Parquet.
+                                type: string
+                              prefix:
+                                description: The prefix that an object must have to
+                                  be included in the inventory results.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  enabled:
+                    description: Specifies whether the inventory is enabled or disabled.
+                    type: boolean
+                  filter:
+                    description: Specifies an inventory filter. The inventory only
+                      includes objects that meet the filter's criteria (documented
+                      below).
+                    items:
+                      properties:
+                        prefix:
+                          description: The prefix that an object must have to be included
+                            in the inventory results.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
+                  includedObjectVersions:
+                    description: 'Object versions to include in the inventory list.
+                      Valid values: All, Current.'
+                    type: string
+                  name:
+                    description: Unique identifier of the inventory configuration
+                      for the bucket.
+                    type: string
+                  optionalFields:
+                    description: List of optional fields that are included in the
+                      inventory results. Please refer to the S3 documentation for
+                      more details.
+                    items:
+                      type: string
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  schedule:
+                    description: Specifies the schedule for generating inventory results
+                      (documented below).
+                    items:
+                      properties:
+                        frequency:
+                          description: 'Specifies how frequently inventory results
+                            are produced. Valid values: Daily, Weekly.'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -558,9 +673,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

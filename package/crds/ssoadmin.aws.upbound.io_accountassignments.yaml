@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: accountassignments.ssoadmin.aws.upbound.io
 spec:
@@ -99,6 +99,15 @@ spec:
                 - region
                 - targetId
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -280,6 +289,33 @@ spec:
                       principal_type, target_id, target_type, permission_set_arn,
                       instance_arn separated by commas (,).
                     type: string
+                  instanceArn:
+                    description: The Amazon Resource Name (ARN) of the SSO Instance.
+                    type: string
+                  permissionSetArn:
+                    description: The Amazon Resource Name (ARN) of the Permission
+                      Set that the admin wants to grant the principal access to.
+                    type: string
+                  principalId:
+                    description: An identifier for an object in SSO, such as a user
+                      or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6).
+                    type: string
+                  principalType:
+                    description: 'The entity type for which the assignment will be
+                      created. Valid values: USER, GROUP.'
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  targetId:
+                    description: An AWS account identifier, typically a 10-12 digit
+                      string.
+                    type: string
+                  targetType:
+                    description: 'The entity type for which the assignment will be
+                      created. Valid values: AWS_ACCOUNT.'
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -322,9 +358,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

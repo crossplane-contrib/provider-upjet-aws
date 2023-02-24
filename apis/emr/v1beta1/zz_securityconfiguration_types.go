@@ -15,11 +15,18 @@ import (
 
 type SecurityConfigurationObservation struct {
 
+	// A JSON formatted Security Configuration
+	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
 	// Date the Security Configuration was created
 	CreationDate *string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
 
 	// The ID of the EMR Security Configuration (Same as the name)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type SecurityConfigurationParameters struct {

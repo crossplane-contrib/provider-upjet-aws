@@ -15,8 +15,21 @@ import (
 
 type TrafficPolicyObservation struct {
 
+	// Comment for the traffic policy.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// Policy document. This is a JSON formatted string. For more information about building Route53 traffic policy documents, see the AWS Route53 Traffic Policy document format
+	Document *string `json:"document,omitempty" tf:"document,omitempty"`
+
 	// ID of the traffic policy
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the traffic policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// DNS type of the resource record sets that Amazon Route 53 creates when you use a traffic policy to create a traffic policy instance.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`

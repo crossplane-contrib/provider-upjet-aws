@@ -21,11 +21,21 @@ type TransitGatewayPolicyTableObservation struct {
 	// EC2 Transit Gateway Policy Table identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// The state of the EC2 Transit Gateway Policy Table.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// EC2 Transit Gateway identifier.
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 }
 
 type TransitGatewayPolicyTableParameters struct {

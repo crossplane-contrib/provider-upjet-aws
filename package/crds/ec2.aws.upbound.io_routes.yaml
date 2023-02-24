@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: routes.ec2.aws.upbound.io
 spec:
@@ -778,6 +778,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -954,19 +963,71 @@ spec:
             properties:
               atProvider:
                 properties:
+                  carrierGatewayId:
+                    description: Identifier of a carrier gateway. This attribute can
+                      only be used when the VPC contains a subnet which is associated
+                      with a Wavelength Zone.
+                    type: string
+                  coreNetworkArn:
+                    description: The Amazon Resource Name (ARN) of a core network.
+                    type: string
+                  destinationCidrBlock:
+                    description: The destination CIDR block.
+                    type: string
+                  destinationIpv6CidrBlock:
+                    description: The destination IPv6 CIDR block.
+                    type: string
+                  destinationPrefixListId:
+                    description: The ID of a managed prefix list destination.
+                    type: string
+                  egressOnlyGatewayId:
+                    description: Identifier of a VPC Egress Only Internet Gateway.
+                    type: string
+                  gatewayId:
+                    description: Identifier of a VPC internet gateway or a virtual
+                      private gateway.
+                    type: string
                   id:
                     description: Route identifier computed from the routing table
                       identifier and route destination.
                     type: string
+                  instanceId:
+                    description: Identifier of an EC2 instance.
+                    type: string
                   instanceOwnerId:
                     description: The AWS account ID of the owner of the EC2 instance.
+                    type: string
+                  localGatewayId:
+                    description: Identifier of a Outpost local gateway.
+                    type: string
+                  natGatewayId:
+                    description: Identifier of a VPC NAT gateway.
+                    type: string
+                  networkInterfaceId:
+                    description: Identifier of an EC2 network interface.
                     type: string
                   origin:
                     description: How the route was created - CreateRouteTable, CreateRoute
                       or EnableVgwRoutePropagation.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  routeTableId:
+                    description: The ID of the routing table.
+                    type: string
                   state:
                     description: The state of the route - active or blackhole.
+                    type: string
+                  transitGatewayId:
+                    description: Identifier of an EC2 Transit Gateway.
+                    type: string
+                  vpcEndpointId:
+                    description: Identifier of a VPC Endpoint.
+                    type: string
+                  vpcPeeringConnectionId:
+                    description: Identifier of a VPC peering connection.
                     type: string
                 type: object
               conditions:
@@ -1010,9 +1071,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

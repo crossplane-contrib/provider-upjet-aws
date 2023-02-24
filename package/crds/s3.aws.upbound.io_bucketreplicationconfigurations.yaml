@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: bucketreplicationconfigurations.s3.aws.upbound.io
 spec:
@@ -601,6 +601,15 @@ spec:
                 - region
                 - rule
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -778,9 +787,288 @@ spec:
             properties:
               atProvider:
                 properties:
+                  bucket:
+                    description: The name of the source S3 bucket you want Amazon
+                      S3 to monitor.
+                    type: string
                   id:
                     description: The S3 source bucket name.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  role:
+                    description: The ARN of the IAM role for Amazon S3 to assume when
+                      replicating the objects.
+                    type: string
+                  rule:
+                    description: List of configuration blocks describing the rules
+                      managing the replication documented below.
+                    items:
+                      properties:
+                        deleteMarkerReplication:
+                          description: Whether delete markers are replicated. This
+                            argument is only valid with V2 replication configurations
+                            (i.e., when filter is used)documented below.
+                          items:
+                            properties:
+                              status:
+                                description: Whether delete markers should be replicated.
+                                  Either "Enabled" or "Disabled".
+                                type: string
+                            type: object
+                          type: array
+                        destination:
+                          description: Specifies the destination for the rule documented
+                            below.
+                          items:
+                            properties:
+                              accessControlTranslation:
+                                description: A configuration block that specifies
+                                  the overrides to use for object owners on replication
+                                  documented below. Specify this only in a cross-account
+                                  scenario (where source and destination bucket owners
+                                  are not the same), and you want to change replica
+                                  ownership to the AWS account that owns the destination
+                                  bucket. If this is not specified in the replication
+                                  configuration, the replicas are owned by same AWS
+                                  account that owns the source object. Must be used
+                                  in conjunction with account owner override configuration.
+                                items:
+                                  properties:
+                                    owner:
+                                      description: 'Specifies the replica ownership.
+                                        For default and valid values, see PUT bucket
+                                        replication in the Amazon S3 API Reference.
+                                        Valid values: Destination.'
+                                      type: string
+                                  type: object
+                                type: array
+                              account:
+                                description: The Account ID to specify the replica
+                                  ownership. Must be used in conjunction with access_control_translation
+                                  override configuration.
+                                type: string
+                              bucket:
+                                description: The Amazon Resource Name (ARN) of the
+                                  bucket where you want Amazon S3 to store the results.
+                                type: string
+                              encryptionConfiguration:
+                                description: A configuration block that provides information
+                                  about encryption documented below. If source_selection_criteria
+                                  is specified, you must specify this element.
+                                items:
+                                  properties:
+                                    replicaKmsKeyId:
+                                      description: The ID (Key ARN or Alias ARN) of
+                                        the customer managed AWS KMS key stored in
+                                        AWS Key Management Service (KMS) for the destination
+                                        bucket.
+                                      type: string
+                                  type: object
+                                type: array
+                              metrics:
+                                description: A configuration block that specifies
+                                  replication metrics-related settings enabling replication
+                                  metrics and events documented below.
+                                items:
+                                  properties:
+                                    eventThreshold:
+                                      description: A configuration block that specifies
+                                        the time threshold for emitting the s3:Replication:OperationMissedThreshold
+                                        event documented below.
+                                      items:
+                                        properties:
+                                          minutes:
+                                            description: 'Time in minutes. Valid values:
+                                              15.'
+                                            type: number
+                                        type: object
+                                      type: array
+                                    status:
+                                      description: Whether the existing objects should
+                                        be replicated. Either "Enabled" or "Disabled".
+                                      type: string
+                                  type: object
+                                type: array
+                              replicationTime:
+                                description: A configuration block that specifies
+                                  S3 Replication Time Control (S3 RTC), including
+                                  whether S3 RTC is enabled and the time when all
+                                  objects and operations on objects must be replicated
+                                  documented below. Replication Time Control must
+                                  be used in conjunction with metrics.
+                                items:
+                                  properties:
+                                    status:
+                                      description: Whether the existing objects should
+                                        be replicated. Either "Enabled" or "Disabled".
+                                      type: string
+                                    time:
+                                      description: A configuration block specifying
+                                        the time by which replication should be complete
+                                        for all objects and operations on objects
+                                        documented below.
+                                      items:
+                                        properties:
+                                          minutes:
+                                            description: 'Time in minutes. Valid values:
+                                              15.'
+                                            type: number
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              storageClass:
+                                description: The storage class used to store the object.
+                                  By default, Amazon S3 uses the storage class of
+                                  the source object to create the object replica.
+                                type: string
+                            type: object
+                          type: array
+                        existingObjectReplication:
+                          description: Replicate existing objects in the source bucket
+                            according to the rule configurations documented below.
+                          items:
+                            properties:
+                              status:
+                                description: Whether the existing objects should be
+                                  replicated. Either "Enabled" or "Disabled".
+                                type: string
+                            type: object
+                          type: array
+                        filter:
+                          description: Filter that identifies subset of objects to
+                            which the replication rule applies documented below. If
+                            not specified, the rule will default to using prefix.
+                          items:
+                            properties:
+                              and:
+                                description: A configuration block for specifying
+                                  rule filters. This element is required only if you
+                                  specify more than one filter. See and below for
+                                  more details.
+                                items:
+                                  properties:
+                                    prefix:
+                                      description: Object key name prefix identifying
+                                        one or more objects to which the rule applies.
+                                        Must be less than or equal to 1024 characters
+                                        in length. Defaults to an empty string ("")
+                                        if filter is not specified.
+                                      type: string
+                                    tags:
+                                      additionalProperties:
+                                        type: string
+                                      description: A map of tags (key and value pairs)
+                                        that identifies a subset of objects to which
+                                        the rule applies. The rule applies only to
+                                        objects having all the tags in its tagset.
+                                      type: object
+                                  type: object
+                                type: array
+                              prefix:
+                                description: Object key name prefix identifying one
+                                  or more objects to which the rule applies. Must
+                                  be less than or equal to 1024 characters in length.
+                                  Defaults to an empty string ("") if filter is not
+                                  specified.
+                                type: string
+                              tag:
+                                description: A configuration block for specifying
+                                  a tag key and value documented below.
+                                items:
+                                  properties:
+                                    key:
+                                      description: Name of the object key.
+                                      type: string
+                                    value:
+                                      description: Value of the tag.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        id:
+                          description: Unique identifier for the rule. Must be less
+                            than or equal to 255 characters in length.
+                          type: string
+                        prefix:
+                          description: Object key name prefix identifying one or more
+                            objects to which the rule applies. Must be less than or
+                            equal to 1024 characters in length. Defaults to an empty
+                            string ("") if filter is not specified.
+                          type: string
+                        priority:
+                          description: The priority associated with the rule. Priority
+                            should only be set if filter is configured. If not provided,
+                            defaults to 0. Priority must be unique between multiple
+                            rules.
+                          type: number
+                        sourceSelectionCriteria:
+                          description: Specifies special object selection criteria
+                            documented below.
+                          items:
+                            properties:
+                              replicaModifications:
+                                description: A configuration block that you can specify
+                                  for selections for modifications on replicas. Amazon
+                                  S3 doesn't replicate replica modifications by default.
+                                  In the latest version of replication configuration
+                                  (when filter is specified), you can specify this
+                                  element and set the status to Enabled to replicate
+                                  modifications on replicas.
+                                items:
+                                  properties:
+                                    status:
+                                      description: Whether the existing objects should
+                                        be replicated. Either "Enabled" or "Disabled".
+                                      type: string
+                                  type: object
+                                type: array
+                              sseKmsEncryptedObjects:
+                                description: A configuration block for filter information
+                                  for the selection of Amazon S3 objects encrypted
+                                  with AWS KMS. If specified, replica_kms_key_id in
+                                  destination encryption_configuration must be specified
+                                  as well.
+                                items:
+                                  properties:
+                                    status:
+                                      description: Whether the existing objects should
+                                        be replicated. Either "Enabled" or "Disabled".
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        status:
+                          description: The status of the rule. Either "Enabled" or
+                            "Disabled". The rule is ignored if status is not "Enabled".
+                          type: string
+                      type: object
+                    type: array
+                  tokenSecretRef:
+                    description: A token to allow replication to be enabled on an
+                      Object Lock-enabled bucket. You must contact AWS support for
+                      the bucket's "Object Lock token". For more details, see Using
+                      S3 Object Lock with replication.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -823,9 +1111,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

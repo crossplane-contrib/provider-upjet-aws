@@ -14,7 +14,24 @@ import (
 )
 
 type RoleAssociationObservation struct {
+
+	// The AWS SSO group ids to be assigned the role given in role.
+	GroupIds []*string `json:"groupIds,omitempty" tf:"group_ids,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The grafana role. Valid values can be found here.
+	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// The AWS SSO user ids to be assigned the role given in role.
+	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
+
+	// The workspace id.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type RoleAssociationParameters struct {

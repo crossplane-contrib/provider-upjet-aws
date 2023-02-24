@@ -14,6 +14,9 @@ import (
 )
 
 type PolicyAttributeObservation struct {
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PolicyAttributeParameters struct {
@@ -39,6 +42,22 @@ type PolicyObservation struct {
 
 	// The ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The load balancer on which the policy is defined.
+	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
+
+	// Policy attribute to apply to the policy.
+	PolicyAttribute []PolicyAttributeObservation `json:"policyAttribute,omitempty" tf:"policy_attribute,omitempty"`
+
+	// The name of the load balancer policy.
+	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
+
+	// The policy type.
+	PolicyTypeName *string `json:"policyTypeName,omitempty" tf:"policy_type_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type PolicyParameters struct {

@@ -14,6 +14,9 @@ import (
 )
 
 type AccountRecoverySettingObservation struct {
+
+	// List of Account Recovery Options of the following structure:
+	RecoveryMechanism []RecoveryMechanismObservation `json:"recoveryMechanism,omitempty" tf:"recovery_mechanism,omitempty"`
 }
 
 type AccountRecoverySettingParameters struct {
@@ -24,6 +27,12 @@ type AccountRecoverySettingParameters struct {
 }
 
 type AdminCreateUserConfigObservation struct {
+
+	// Set to True if only the administrator is allowed to create user profiles. Set to False if users can sign themselves up via an app.
+	AllowAdminCreateUserOnly *bool `json:"allowAdminCreateUserOnly,omitempty" tf:"allow_admin_create_user_only,omitempty"`
+
+	// Invite message template structure. Detailed below.
+	InviteMessageTemplate []InviteMessageTemplateObservation `json:"inviteMessageTemplate,omitempty" tf:"invite_message_template,omitempty"`
 }
 
 type AdminCreateUserConfigParameters struct {
@@ -38,6 +47,12 @@ type AdminCreateUserConfigParameters struct {
 }
 
 type CustomEmailSenderObservation struct {
+
+	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send email notifications to users.
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+
+	// The Lambda version represents the signature of the "request" attribute in the "event" information Amazon Cognito passes to your custom email Lambda function. The only supported value is V1_0.
+	LambdaVersion *string `json:"lambdaVersion,omitempty" tf:"lambda_version,omitempty"`
 }
 
 type CustomEmailSenderParameters struct {
@@ -52,6 +67,12 @@ type CustomEmailSenderParameters struct {
 }
 
 type CustomSMSSenderObservation struct {
+
+	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+
+	// The Lambda version represents the signature of the "request" attribute in the "event" information Amazon Cognito passes to your custom SMS Lambda function. The only supported value is V1_0.
+	LambdaVersion *string `json:"lambdaVersion,omitempty" tf:"lambda_version,omitempty"`
 }
 
 type CustomSMSSenderParameters struct {
@@ -66,6 +87,12 @@ type CustomSMSSenderParameters struct {
 }
 
 type DeviceConfigurationObservation struct {
+
+	// Whether a challenge is required on a new device. Only applicable to a new device.
+	ChallengeRequiredOnNewDevice *bool `json:"challengeRequiredOnNewDevice,omitempty" tf:"challenge_required_on_new_device,omitempty"`
+
+	// Whether a device is only remembered on user prompt. false equates to "Always" remember, true is "User Opt In," and not using a device_configuration block is "No."
+	DeviceOnlyRememberedOnUserPrompt *bool `json:"deviceOnlyRememberedOnUserPrompt,omitempty" tf:"device_only_remembered_on_user_prompt,omitempty"`
 }
 
 type DeviceConfigurationParameters struct {
@@ -80,6 +107,21 @@ type DeviceConfigurationParameters struct {
 }
 
 type EmailConfigurationObservation struct {
+
+	// Email configuration set name from SES.
+	ConfigurationSet *string `json:"configurationSet,omitempty" tf:"configuration_set,omitempty"`
+
+	// Email delivery method to use. COGNITO_DEFAULT for the default email functionality built into Cognito or DEVELOPER to use your Amazon SES configuration.
+	EmailSendingAccount *string `json:"emailSendingAccount,omitempty" tf:"email_sending_account,omitempty"`
+
+	// Sender’s email address or sender’s display name with their email address (e.g., john@example.com, John Smith <john@example.com> or \"John Smith Ph.D.\" <john@example.com>). Escaped double quotes are required around display names that contain certain characters as specified in RFC 5322.
+	FromEmailAddress *string `json:"fromEmailAddress,omitempty" tf:"from_email_address,omitempty"`
+
+	// REPLY-TO email address.
+	ReplyToEmailAddress *string `json:"replyToEmailAddress,omitempty" tf:"reply_to_email_address,omitempty"`
+
+	// ARN of the SES verified email identity to use. Required if email_sending_account is set to DEVELOPER.
+	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 }
 
 type EmailConfigurationParameters struct {
@@ -106,6 +148,15 @@ type EmailConfigurationParameters struct {
 }
 
 type InviteMessageTemplateObservation struct {
+
+	// Message template for email messages. Must contain {username} and {####} placeholders, for username and temporary password, respectively.
+	EmailMessage *string `json:"emailMessage,omitempty" tf:"email_message,omitempty"`
+
+	// Subject line for email messages.
+	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
+
+	// Message template for SMS messages. Must contain {username} and {####} placeholders, for username and temporary password, respectively.
+	SMSMessage *string `json:"smsMessage,omitempty" tf:"sms_message,omitempty"`
 }
 
 type InviteMessageTemplateParameters struct {
@@ -124,6 +175,45 @@ type InviteMessageTemplateParameters struct {
 }
 
 type LambdaConfigObservation struct {
+
+	// ARN of the lambda creating an authentication challenge.
+	CreateAuthChallenge *string `json:"createAuthChallenge,omitempty" tf:"create_auth_challenge,omitempty"`
+
+	// A custom email sender AWS Lambda trigger. See custom_email_sender Below.
+	CustomEmailSender []CustomEmailSenderObservation `json:"customEmailSender,omitempty" tf:"custom_email_sender,omitempty"`
+
+	// Custom Message AWS Lambda trigger.
+	CustomMessage *string `json:"customMessage,omitempty" tf:"custom_message,omitempty"`
+
+	// A custom SMS sender AWS Lambda trigger. See custom_sms_sender Below.
+	CustomSMSSender []CustomSMSSenderObservation `json:"customSmsSender,omitempty" tf:"custom_sms_sender,omitempty"`
+
+	// Defines the authentication challenge.
+	DefineAuthChallenge *string `json:"defineAuthChallenge,omitempty" tf:"define_auth_challenge,omitempty"`
+
+	// The Amazon Resource Name of Key Management Service Customer master keys. Amazon Cognito uses the key to encrypt codes and temporary passwords sent to CustomEmailSender and CustomSMSSender.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Post-authentication AWS Lambda trigger.
+	PostAuthentication *string `json:"postAuthentication,omitempty" tf:"post_authentication,omitempty"`
+
+	// Post-confirmation AWS Lambda trigger.
+	PostConfirmation *string `json:"postConfirmation,omitempty" tf:"post_confirmation,omitempty"`
+
+	// Pre-authentication AWS Lambda trigger.
+	PreAuthentication *string `json:"preAuthentication,omitempty" tf:"pre_authentication,omitempty"`
+
+	// Pre-registration AWS Lambda trigger.
+	PreSignUp *string `json:"preSignUp,omitempty" tf:"pre_sign_up,omitempty"`
+
+	// Allow to customize identity token claims before token generation.
+	PreTokenGeneration *string `json:"preTokenGeneration,omitempty" tf:"pre_token_generation,omitempty"`
+
+	// User migration Lambda config type.
+	UserMigration *string `json:"userMigration,omitempty" tf:"user_migration,omitempty"`
+
+	// Verifies the authentication challenge response.
+	VerifyAuthChallengeResponse *string `json:"verifyAuthChallengeResponse,omitempty" tf:"verify_auth_challenge_response,omitempty"`
 }
 
 type LambdaConfigParameters struct {
@@ -182,6 +272,12 @@ type LambdaConfigParameters struct {
 }
 
 type NumberAttributeConstraintsObservation struct {
+
+	// Maximum value of an attribute that is of the number data type.
+	MaxValue *string `json:"maxValue,omitempty" tf:"max_value,omitempty"`
+
+	// Minimum value of an attribute that is of the number data type.
+	MinValue *string `json:"minValue,omitempty" tf:"min_value,omitempty"`
 }
 
 type NumberAttributeConstraintsParameters struct {
@@ -196,6 +292,24 @@ type NumberAttributeConstraintsParameters struct {
 }
 
 type PasswordPolicyObservation struct {
+
+	// Minimum length of the password policy that you have set.
+	MinimumLength *float64 `json:"minimumLength,omitempty" tf:"minimum_length,omitempty"`
+
+	// Whether you have required users to use at least one lowercase letter in their password.
+	RequireLowercase *bool `json:"requireLowercase,omitempty" tf:"require_lowercase,omitempty"`
+
+	// Whether you have required users to use at least one number in their password.
+	RequireNumbers *bool `json:"requireNumbers,omitempty" tf:"require_numbers,omitempty"`
+
+	// Whether you have required users to use at least one symbol in their password.
+	RequireSymbols *bool `json:"requireSymbols,omitempty" tf:"require_symbols,omitempty"`
+
+	// Whether you have required users to use at least one uppercase letter in their password.
+	RequireUppercase *bool `json:"requireUppercase,omitempty" tf:"require_uppercase,omitempty"`
+
+	// In the password policy you have set, refers to the number of days a temporary password is valid. If the user does not sign-in during this time, their password will need to be reset by an administrator.
+	TemporaryPasswordValidityDays *float64 `json:"temporaryPasswordValidityDays,omitempty" tf:"temporary_password_validity_days,omitempty"`
 }
 
 type PasswordPolicyParameters struct {
@@ -226,6 +340,12 @@ type PasswordPolicyParameters struct {
 }
 
 type RecoveryMechanismObservation struct {
+
+	// Name of the user pool.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Positive integer specifying priority of a method with 1 being the highest priority.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
 type RecoveryMechanismParameters struct {
@@ -240,6 +360,15 @@ type RecoveryMechanismParameters struct {
 }
 
 type SMSConfigurationObservation struct {
+
+	// External ID used in IAM role trust relationships. For more information about using external IDs, see How to Use an External ID When Granting Access to Your AWS Resources to a Third Party.
+	ExternalID *string `json:"externalId,omitempty" tf:"external_id,omitempty"`
+
+	// ARN of the Amazon SNS caller. This is usually the IAM role that you've given Cognito permission to assume.
+	SnsCallerArn *string `json:"snsCallerArn,omitempty" tf:"sns_caller_arn,omitempty"`
+
+	// The AWS Region to use with Amazon SNS integration. You can choose the same Region as your user pool, or a supported Legacy Amazon SNS alternate Region. Amazon Cognito resources in the Asia Pacific (Seoul) AWS Region must use your Amazon SNS configuration in the Asia Pacific (Tokyo) Region. For more information, see SMS message settings for Amazon Cognito user pools.
+	SnsRegion *string `json:"snsRegion,omitempty" tf:"sns_region,omitempty"`
 }
 
 type SMSConfigurationParameters struct {
@@ -268,6 +397,27 @@ type SMSConfigurationParameters struct {
 }
 
 type SchemaObservation struct {
+
+	// Attribute data type. Must be one of Boolean, Number, String, DateTime.
+	AttributeDataType *string `json:"attributeDataType,omitempty" tf:"attribute_data_type,omitempty"`
+
+	// Whether the attribute type is developer only.
+	DeveloperOnlyAttribute *bool `json:"developerOnlyAttribute,omitempty" tf:"developer_only_attribute,omitempty"`
+
+	// Whether the attribute can be changed once it has been created.
+	Mutable *bool `json:"mutable,omitempty" tf:"mutable,omitempty"`
+
+	// Name of the user pool.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration block for the constraints for an attribute of the number type. Detailed below.
+	NumberAttributeConstraints []NumberAttributeConstraintsObservation `json:"numberAttributeConstraints,omitempty" tf:"number_attribute_constraints,omitempty"`
+
+	// Whether a user pool attribute is required. If the attribute is required and the user does not provide a value, registration or sign-in will fail.
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+
+	// Constraints for an attribute of the string type. Detailed below.
+	StringAttributeConstraints []StringAttributeConstraintsObservation `json:"stringAttributeConstraints,omitempty" tf:"string_attribute_constraints,omitempty"`
 }
 
 type SchemaParameters struct {
@@ -302,6 +452,9 @@ type SchemaParameters struct {
 }
 
 type SoftwareTokenMfaConfigurationObservation struct {
+
+	// Boolean whether to enable software token Multi-Factor (MFA) tokens, such as Time-based One-Time Password (TOTP). To disable software token MFA When sms_configuration is not present, the mfa_configuration argument must be set to OFF and the software_token_mfa_configuration configuration block must be fully removed.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type SoftwareTokenMfaConfigurationParameters struct {
@@ -312,6 +465,12 @@ type SoftwareTokenMfaConfigurationParameters struct {
 }
 
 type StringAttributeConstraintsObservation struct {
+
+	// Maximum length of an attribute value of the string type.
+	MaxLength *string `json:"maxLength,omitempty" tf:"max_length,omitempty"`
+
+	// Minimum length of an attribute value of the string type.
+	MinLength *string `json:"minLength,omitempty" tf:"min_length,omitempty"`
 }
 
 type StringAttributeConstraintsParameters struct {
@@ -326,6 +485,9 @@ type StringAttributeConstraintsParameters struct {
 }
 
 type UserAttributeUpdateSettingsObservation struct {
+
+	// A list of attributes requiring verification before update. If set, the provided value(s) must also be set in auto_verified_attributes. Valid values: email, phone_number.
+	AttributesRequireVerificationBeforeUpdate []*string `json:"attributesRequireVerificationBeforeUpdate,omitempty" tf:"attributes_require_verification_before_update,omitempty"`
 }
 
 type UserAttributeUpdateSettingsParameters struct {
@@ -336,6 +498,9 @@ type UserAttributeUpdateSettingsParameters struct {
 }
 
 type UserPoolAddOnsObservation struct {
+
+	// Mode for advanced security, must be one of OFF, AUDIT or ENFORCED.
+	AdvancedSecurityMode *string `json:"advancedSecurityMode,omitempty" tf:"advanced_security_mode,omitempty"`
 }
 
 type UserPoolAddOnsParameters struct {
@@ -347,8 +512,20 @@ type UserPoolAddOnsParameters struct {
 
 type UserPoolObservation struct {
 
+	// Configuration block to define which verified available method a user can use to recover their forgotten password. Detailed below.
+	AccountRecoverySetting []AccountRecoverySettingObservation `json:"accountRecoverySetting,omitempty" tf:"account_recovery_setting,omitempty"`
+
+	// Configuration block for creating a new user profile. Detailed below.
+	AdminCreateUserConfig []AdminCreateUserConfigObservation `json:"adminCreateUserConfig,omitempty" tf:"admin_create_user_config,omitempty"`
+
+	// Attributes supported as an alias for this user pool. Valid values: phone_number, email, or preferred_username. Conflicts with username_attributes.
+	AliasAttributes []*string `json:"aliasAttributes,omitempty" tf:"alias_attributes,omitempty"`
+
 	// ARN of the user pool.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Attributes to be auto-verified. Valid values: email, phone_number.
+	AutoVerifiedAttributes []*string `json:"autoVerifiedAttributes,omitempty" tf:"auto_verified_attributes,omitempty"`
 
 	// Date the user pool was created.
 	CreationDate *string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
@@ -356,8 +533,23 @@ type UserPoolObservation struct {
 	// A custom domain name that you provide to Amazon Cognito. This parameter applies only if you use a custom domain to host the sign-up and sign-in pages for your application. For example: auth.example.com.
 	CustomDomain *string `json:"customDomain,omitempty" tf:"custom_domain,omitempty"`
 
+	// When active, DeletionProtection prevents accidental deletion of your user pool. Before you can delete a user pool that you have protected against deletion, you must deactivate this feature. Valid values are ACTIVE and INACTIVE, Default value is INACTIVE.
+	DeletionProtection *string `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
+
+	// Configuration block for the user pool's device tracking. Detailed below.
+	DeviceConfiguration []DeviceConfigurationObservation `json:"deviceConfiguration,omitempty" tf:"device_configuration,omitempty"`
+
 	// Holds the domain prefix if the user pool has a domain associated with it.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// Configuration block for configuring email. Detailed below.
+	EmailConfiguration []EmailConfigurationObservation `json:"emailConfiguration,omitempty" tf:"email_configuration,omitempty"`
+
+	// String representing the email verification message. Conflicts with verification_message_template configuration block email_message argument.
+	EmailVerificationMessage *string `json:"emailVerificationMessage,omitempty" tf:"email_verification_message,omitempty"`
+
+	// String representing the email verification subject. Conflicts with verification_message_template configuration block email_subject argument.
+	EmailVerificationSubject *string `json:"emailVerificationSubject,omitempty" tf:"email_verification_subject,omitempty"`
 
 	// Endpoint name of the user pool. Example format: cognito-idp.REGION.amazonaws.com/xxxx_yyyyy
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
@@ -368,11 +560,60 @@ type UserPoolObservation struct {
 	// ID of the user pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Configuration block for the AWS Lambda triggers associated with the user pool. Detailed below.
+	LambdaConfig []LambdaConfigObservation `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
+
 	// Date the user pool was last modified.
 	LastModifiedDate *string `json:"lastModifiedDate,omitempty" tf:"last_modified_date,omitempty"`
 
+	// Multi-Factor Authentication (MFA) configuration for the User Pool. Defaults of OFF. Valid values are OFF (MFA Tokens are not required), ON (MFA is required for all users to sign in; requires at least one of sms_configuration or software_token_mfa_configuration to be configured), or OPTIONAL (MFA Will be required only for individual users who have MFA Enabled; requires at least one of sms_configuration or software_token_mfa_configuration to be configured).
+	MfaConfiguration *string `json:"mfaConfiguration,omitempty" tf:"mfa_configuration,omitempty"`
+
+	// Name of the user pool.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration blocked for information about the user pool password policy. Detailed below.
+	PasswordPolicy []PasswordPolicyObservation `json:"passwordPolicy,omitempty" tf:"password_policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// String representing the SMS authentication message. The Message must contain the {####} placeholder, which will be replaced with the code.
+	SMSAuthenticationMessage *string `json:"smsAuthenticationMessage,omitempty" tf:"sms_authentication_message,omitempty"`
+
+	// Configuration block for Short Message Service (SMS) settings. Detailed below. These settings apply to SMS user verification and SMS Multi-Factor Authentication (MFA). Due to Cognito API restrictions, the SMS configuration cannot be removed without recreating the Cognito User Pool. For user data safety, this resource will ignore the removal of this configuration by disabling drift detection. To force resource recreation after this configuration has been applied, see the taint command.
+	SMSConfiguration []SMSConfigurationObservation `json:"smsConfiguration,omitempty" tf:"sms_configuration,omitempty"`
+
+	// String representing the SMS verification message. Conflicts with verification_message_template configuration block sms_message argument.
+	SMSVerificationMessage *string `json:"smsVerificationMessage,omitempty" tf:"sms_verification_message,omitempty"`
+
+	// Configuration block for the schema attributes of a user pool. Detailed below. Schema attributes from the standard attribute set only need to be specified if they are different from the default configuration. Attributes can be added, but not modified or removed. Maximum of 50 attributes.
+	Schema []SchemaObservation `json:"schema,omitempty" tf:"schema,omitempty"`
+
+	// Configuration block for software token Mult-Factor Authentication (MFA) settings. Detailed below.
+	SoftwareTokenMfaConfiguration []SoftwareTokenMfaConfigurationObservation `json:"softwareTokenMfaConfiguration,omitempty" tf:"software_token_mfa_configuration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Configuration block for user attribute update settings. Detailed below.
+	UserAttributeUpdateSettings []UserAttributeUpdateSettingsObservation `json:"userAttributeUpdateSettings,omitempty" tf:"user_attribute_update_settings,omitempty"`
+
+	// Configuration block for user pool add-ons to enable user pool advanced security mode features. Detailed below.
+	UserPoolAddOns []UserPoolAddOnsObservation `json:"userPoolAddOns,omitempty" tf:"user_pool_add_ons,omitempty"`
+
+	// Whether email addresses or phone numbers can be specified as usernames when a user signs up. Conflicts with alias_attributes.
+	UsernameAttributes []*string `json:"usernameAttributes,omitempty" tf:"username_attributes,omitempty"`
+
+	// Configuration block for username configuration. Detailed below.
+	UsernameConfiguration []UsernameConfigurationObservation `json:"usernameConfiguration,omitempty" tf:"username_configuration,omitempty"`
+
+	// Configuration block for verification message templates. Detailed below.
+	VerificationMessageTemplate []VerificationMessageTemplateObservation `json:"verificationMessageTemplate,omitempty" tf:"verification_message_template,omitempty"`
 }
 
 type UserPoolParameters struct {
@@ -480,6 +721,9 @@ type UserPoolParameters struct {
 }
 
 type UsernameConfigurationObservation struct {
+
+	// Whether username case sensitivity will be applied for all users in the user pool through Cognito APIs.
+	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
 }
 
 type UsernameConfigurationParameters struct {
@@ -490,6 +734,24 @@ type UsernameConfigurationParameters struct {
 }
 
 type VerificationMessageTemplateObservation struct {
+
+	// Default email option. Must be either CONFIRM_WITH_CODE or CONFIRM_WITH_LINK. Defaults to CONFIRM_WITH_CODE.
+	DefaultEmailOption *string `json:"defaultEmailOption,omitempty" tf:"default_email_option,omitempty"`
+
+	// Email message template. Must contain the {####} placeholder. Conflicts with email_verification_message argument.
+	EmailMessage *string `json:"emailMessage,omitempty" tf:"email_message,omitempty"`
+
+	// Email message template for sending a confirmation link to the user, it must contain the {##Click Here##} placeholder.
+	EmailMessageByLink *string `json:"emailMessageByLink,omitempty" tf:"email_message_by_link,omitempty"`
+
+	// Subject line for the email message template. Conflicts with email_verification_subject argument.
+	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
+
+	// Subject line for the email message template for sending a confirmation link to the user.
+	EmailSubjectByLink *string `json:"emailSubjectByLink,omitempty" tf:"email_subject_by_link,omitempty"`
+
+	// SMS message template. Must contain the {####} placeholder. Conflicts with sms_verification_message argument.
+	SMSMessage *string `json:"smsMessage,omitempty" tf:"sms_message,omitempty"`
 }
 
 type VerificationMessageTemplateParameters struct {

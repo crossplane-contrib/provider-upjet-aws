@@ -18,11 +18,30 @@ type ServerCertificateObservation struct {
 	// The Amazon Resource Name (ARN) specifying the server certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// encoded format.
+	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
+
+	// encoded public key certificates
+	// of the chain.
+	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
+
 	// Date and time in RFC3339 format on which the certificate is set to expire.
 	Expiration *string `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
 	// The unique Server Certificate name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The IAM path for the server certificate.  If it is not
+	// included, it defaults to a slash (/). If this certificate is for use with
+	// AWS CloudFront, the path must be in format /cloudfront/your_path_here.
+	// See IAM Identifiers for more details on IAM Paths.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// encoded format.
+	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

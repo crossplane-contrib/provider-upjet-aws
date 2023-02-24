@@ -15,11 +15,30 @@ import (
 
 type VPCIpamPoolCidrAllocationObservation struct {
 
+	// The CIDR you want to assign to the pool.
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
+
+	// The description for the allocation.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Exclude a particular CIDR range from being returned by the pool.
+	DisallowedCidrs []*string `json:"disallowedCidrs,omitempty" tf:"disallowed_cidrs,omitempty"`
+
 	// The ID of the allocation.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ID of the allocation.
 	IpamPoolAllocationID *string `json:"ipamPoolAllocationId,omitempty" tf:"ipam_pool_allocation_id,omitempty"`
+
+	// The ID of the pool to which you want to assign a CIDR.
+	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
+
+	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-32.
+	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The ID of the resource.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`

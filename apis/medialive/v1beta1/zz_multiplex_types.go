@@ -14,6 +14,18 @@ import (
 )
 
 type MultiplexMultiplexSettingsObservation struct {
+
+	// Maximum video buffer delay.
+	MaximumVideoBufferDelayMilliseconds *float64 `json:"maximumVideoBufferDelayMilliseconds,omitempty" tf:"maximum_video_buffer_delay_milliseconds,omitempty"`
+
+	// Transport stream bit rate.
+	TransportStreamBitrate *float64 `json:"transportStreamBitrate,omitempty" tf:"transport_stream_bitrate,omitempty"`
+
+	// Unique ID for each multiplex.
+	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+
+	// Transport stream reserved bit rate.
+	TransportStreamReservedBitrate *float64 `json:"transportStreamReservedBitrate,omitempty" tf:"transport_stream_reserved_bitrate,omitempty"`
 }
 
 type MultiplexMultiplexSettingsParameters struct {
@@ -40,7 +52,26 @@ type MultiplexObservation struct {
 	// ARN of the Multiplex.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A list of availability zones. You must specify exactly two.
+	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Multiplex settings. See Multiplex Settings for more details.
+	MultiplexSettings []MultiplexMultiplexSettingsObservation `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
+
+	// name of Multiplex.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Whether to start the Multiplex. Defaults to false.
+	StartMultiplex *bool `json:"startMultiplex,omitempty" tf:"start_multiplex,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }

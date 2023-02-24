@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: ebsvolumes.ec2.aws.upbound.io
 spec:
@@ -190,6 +190,15 @@ spec:
                 - availabilityZone
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -369,9 +378,50 @@ spec:
                   arn:
                     description: The volume ARN (e.g., arn:aws:ec2:us-east-1:0123456789012:volume/vol-59fcb34e).
                     type: string
+                  availabilityZone:
+                    description: The AZ where the EBS volume will exist.
+                    type: string
+                  encrypted:
+                    description: If true, the disk will be encrypted.
+                    type: boolean
+                  finalSnapshot:
+                    description: If true, snapshot will be created before volume deletion.
+                      Any tags on the volume will be migrated to the snapshot. By
+                      default set to false
+                    type: boolean
                   id:
                     description: The volume ID (e.g., vol-59fcb34e).
                     type: string
+                  iops:
+                    description: The amount of IOPS to provision for the disk. Only
+                      valid for type of io1, io2 or gp3.
+                    type: number
+                  kmsKeyId:
+                    description: The ARN for the KMS encryption key. When specifying
+                      kms_key_id, encrypted needs to be set to true.
+                    type: string
+                  multiAttachEnabled:
+                    description: Specifies whether to enable Amazon EBS Multi-Attach.
+                      Multi-Attach is supported on io1 and io2 volumes.
+                    type: boolean
+                  outpostArn:
+                    description: The Amazon Resource Name (ARN) of the Outpost.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  size:
+                    description: The size of the drive in GiBs.
+                    type: number
+                  snapshotId:
+                    description: A snapshot to base the EBS volume off of.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -379,6 +429,14 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  throughput:
+                    description: The throughput that the volume supports, in MiB/s.
+                      Only valid for type of gp3.
+                    type: number
+                  type:
+                    description: 'The type of EBS volume. Can be standard, gp2, gp3,
+                      io1, io2, sc1 or st1 (Default: gp2).'
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -421,9 +479,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -14,9 +14,35 @@ import (
 )
 
 type UserObservation struct {
+
+	// Access permissions string used for this user. See Specifying Permissions Using an Access String for more details.
+	AccessString *string `json:"accessString,omitempty" tf:"access_string,omitempty"`
+
+	// The ARN of the created ElastiCache User.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// The current supported value is REDIS.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Indicates a password is not required for this user.
+	NoPasswordRequired *bool `json:"noPasswordRequired,omitempty" tf:"no_password_required,omitempty"`
+
+	// Passwords used for this user. You can create up to two passwords for each user.
+	PasswordsSecretRef *[]v1.SecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The username of the user.
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 type UserParameters struct {

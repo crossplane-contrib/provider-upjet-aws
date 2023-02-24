@@ -18,8 +18,24 @@ type AliasObservation struct {
 	// Alias ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the alias.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Alias ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the alias.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Specifies the fleet and/or routing type to use for the alias.
+	RoutingStrategy []RoutingStrategyObservation `json:"routingStrategy,omitempty" tf:"routing_strategy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -50,6 +66,15 @@ type AliasParameters struct {
 }
 
 type RoutingStrategyObservation struct {
+
+	// ID of the GameLift Fleet to point the alias to.
+	FleetID *string `json:"fleetId,omitempty" tf:"fleet_id,omitempty"`
+
+	// Message text to be used with the TERMINAL routing strategy.
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// Type of routing strategyE.g., SIMPLE or TERMINAL
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RoutingStrategyParameters struct {

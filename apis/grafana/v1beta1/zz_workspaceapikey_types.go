@@ -18,6 +18,22 @@ type WorkspaceAPIKeyObservation struct {
 
 	// The key token in JSON format. Use this value as a bearer token to authenticate HTTP requests to the workspace.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies the name of the API key. Key names must be unique to the workspace.
+	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
+
+	// Specifies the permission level of the API key. Valid values are VIEWER, EDITOR, or ADMIN.
+	KeyRole *string `json:"keyRole,omitempty" tf:"key_role,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Specifies the time in seconds until the API key expires. Keys can be valid for up to 30 days.
+	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
+
+	// The ID of the workspace that the API key is valid for.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type WorkspaceAPIKeyParameters struct {

@@ -15,8 +15,31 @@ import (
 
 type MaintenanceWindowTargetObservation struct {
 
+	// The description of the maintenance window target.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the maintenance window target.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the maintenance window target.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.
+	OwnerInformation *string `json:"ownerInformation,omitempty" tf:"owner_information,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The type of target being registered with the Maintenance Window. Possible values are INSTANCE and RESOURCE_GROUP.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// The targets to register with the maintenance window. In other words, the instances to run commands on when the maintenance window runs. You can specify targets using instance IDs, resource group names, or tags that have been applied to instances. For more information about these examples formats see
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html)
+	Targets []MaintenanceWindowTargetTargetsObservation `json:"targets,omitempty" tf:"targets,omitempty"`
+
+	// The Id of the maintenance window to register the target with.
+	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
 }
 
 type MaintenanceWindowTargetParameters struct {
@@ -63,6 +86,9 @@ type MaintenanceWindowTargetParameters struct {
 }
 
 type MaintenanceWindowTargetTargetsObservation struct {
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type MaintenanceWindowTargetTargetsParameters struct {

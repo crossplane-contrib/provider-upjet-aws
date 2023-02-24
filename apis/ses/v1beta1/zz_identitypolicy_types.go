@@ -15,6 +15,19 @@ import (
 
 type IdentityPolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name or Amazon Resource Name (ARN) of the SES Identity.
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Name of the policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// JSON string of the policy.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type IdentityPolicyParameters struct {

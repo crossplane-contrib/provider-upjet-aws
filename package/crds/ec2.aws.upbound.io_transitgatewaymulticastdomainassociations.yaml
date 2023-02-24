@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: transitgatewaymulticastdomainassociations.ec2.aws.upbound.io
 spec:
@@ -306,6 +306,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -487,6 +496,20 @@ spec:
                     description: EC2 Transit Gateway Multicast Domain Association
                       identifier.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  subnetId:
+                    description: The ID of the subnet to associate with the transit
+                      gateway multicast domain.
+                    type: string
+                  transitGatewayAttachmentId:
+                    description: The ID of the transit gateway attachment.
+                    type: string
+                  transitGatewayMulticastDomainId:
+                    description: The ID of the transit gateway multicast domain.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -529,9 +552,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

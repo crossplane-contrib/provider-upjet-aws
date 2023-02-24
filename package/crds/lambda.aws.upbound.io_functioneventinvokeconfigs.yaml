@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: functioneventinvokeconfigs.lambda.aws.upbound.io
 spec:
@@ -283,6 +283,15 @@ spec:
                 - functionName
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -460,9 +469,62 @@ spec:
             properties:
               atProvider:
                 properties:
+                  destinationConfig:
+                    description: Configuration block with destination configuration.
+                      See below for details.
+                    items:
+                      properties:
+                        onFailure:
+                          description: Configuration block with destination configuration
+                            for failed asynchronous invocations. See below for details.
+                          items:
+                            properties:
+                              destination:
+                                description: Amazon Resource Name (ARN) of the destination
+                                  resource. See the Lambda Developer Guide for acceptable
+                                  resource types and associated IAM permissions.
+                                type: string
+                            type: object
+                          type: array
+                        onSuccess:
+                          description: Configuration block with destination configuration
+                            for successful asynchronous invocations. See below for
+                            details.
+                          items:
+                            properties:
+                              destination:
+                                description: Amazon Resource Name (ARN) of the destination
+                                  resource. See the Lambda Developer Guide for acceptable
+                                  resource types and associated IAM permissions.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  functionName:
+                    description: Name or Amazon Resource Name (ARN) of the Lambda
+                      Function, omitting any version or alias qualifier.
+                    type: string
                   id:
                     description: Fully qualified Lambda Function name or Amazon Resource
                       Name (ARN)
+                    type: string
+                  maximumEventAgeInSeconds:
+                    description: Maximum age of a request that Lambda sends to a function
+                      for processing in seconds. Valid values between 60 and 21600.
+                    type: number
+                  maximumRetryAttempts:
+                    description: Maximum number of times to retry when the function
+                      returns an error. Valid values between 0 and 2. Defaults to
+                      2.
+                    type: number
+                  qualifier:
+                    description: Lambda Function published version, $LATEST, or Lambda
+                      Alias name.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -506,9 +568,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

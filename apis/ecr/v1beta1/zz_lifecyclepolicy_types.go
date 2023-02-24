@@ -16,8 +16,18 @@ import (
 type LifecyclePolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The policy document. This is a JSON formatted string. See more details about Policy Parameters in the official AWS docs.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// The registry ID where the repository was created.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
+
+	// Name of the repository to apply the policy.
+	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
 }
 
 type LifecyclePolicyParameters struct {

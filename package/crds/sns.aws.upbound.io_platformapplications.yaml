@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: platformapplications.sns.aws.upbound.io
 spec:
@@ -299,6 +299,15 @@ spec:
                 - platformCredentialSecretRef
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -475,12 +484,98 @@ spec:
             properties:
               atProvider:
                 properties:
+                  applePlatformBundleId:
+                    description: The bundle identifier that's assigned to your iOS
+                      app. May only include alphanumeric characters, hyphens (-),
+                      and periods (.).
+                    type: string
+                  applePlatformTeamId:
+                    description: The identifier that's assigned to your Apple developer
+                      account team. Must be 10 alphanumeric characters.
+                    type: string
                   arn:
                     description: The ARN of the SNS platform application
+                    type: string
+                  eventDeliveryFailureTopicArn:
+                    description: The ARN of the SNS Topic triggered when a delivery
+                      to any of the platform endpoints associated with your platform
+                      application encounters a permanent failure.
+                    type: string
+                  eventEndpointCreatedTopicArn:
+                    description: The ARN of the SNS Topic triggered when a new platform
+                      endpoint is added to your platform application.
+                    type: string
+                  eventEndpointDeletedTopicArn:
+                    description: The ARN of the SNS Topic triggered when an existing
+                      platform endpoint is deleted from your platform application.
+                    type: string
+                  eventEndpointUpdatedTopicArn:
+                    description: The ARN of the SNS Topic triggered when an existing
+                      platform endpoint is changed from your platform application.
+                    type: string
+                  failureFeedbackRoleArn:
+                    description: The IAM role ARN permitted to receive failure feedback
+                      for this application and give SNS write access to use CloudWatch
+                      logs on your behalf.
                     type: string
                   id:
                     description: The ARN of the SNS platform application
                     type: string
+                  platform:
+                    description: The platform that the app is registered with. See
+                      Platform for supported platforms.
+                    type: string
+                  platformCredentialSecretRef:
+                    description: Application Platform credential. See Credential for
+                      type of credential required for platform.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  platformPrincipalSecretRef:
+                    description: Application Platform principal. See Principal for
+                      type of principal required for platform.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  successFeedbackRoleArn:
+                    description: The IAM role ARN permitted to receive success feedback
+                      for this application and give SNS write access to use CloudWatch
+                      logs on your behalf.
+                    type: string
+                  successFeedbackSampleRate:
+                    description: The sample rate percentage (0-100) of successfully
+                      delivered messages.
+                    type: string
+                required:
+                - platformCredentialSecretRef
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -523,9 +618,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

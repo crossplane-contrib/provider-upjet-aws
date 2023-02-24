@@ -15,8 +15,27 @@ import (
 
 type NamedQueryObservation struct {
 
+	// Database to which the query belongs.
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// Brief explanation of the query. Maximum length of 1024.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Unique ID of the query.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Plain language name for the query. Maximum length of 128.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Text of the query itself. In other words, all query statements. Maximum length of 262144.
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Workgroup to which the query belongs. Defaults to primary
+	Workgroup *string `json:"workgroup,omitempty" tf:"workgroup,omitempty"`
 }
 
 type NamedQueryParameters struct {

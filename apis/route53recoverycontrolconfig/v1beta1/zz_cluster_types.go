@@ -35,6 +35,14 @@ type ClusterObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Unique name describing the cluster.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region of the endpoint.
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Status of cluster. PENDING when it is being created, PENDING_DELETION when it is being deleted and DEPLOYED otherwise.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }

@@ -15,8 +15,18 @@ import (
 
 type LBStickinessPolicyObservation struct {
 
+	// The cookie duration in seconds. This determines the length of the session stickiness.
+	CookieDuration *float64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
+
+	// - The Session Stickiness state of the load balancer. true to activate session stickiness or false to deactivate session stickiness.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The name used for this load balancer (matches lb_name).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type LBStickinessPolicyParameters struct {

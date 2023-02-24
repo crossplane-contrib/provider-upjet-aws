@@ -18,18 +18,42 @@ type RuleObservation struct {
 	// The ARN (Amazon Resource Name) for the resolver rule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// DNS queries for this domain name are forwarded to the IP addresses that are specified using target_ip.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
 	// The ID of the resolver rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A friendly name that lets you easily find a rule in the Resolver dashboard in the Route 53 console.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// When a rule is shared with another AWS account, the account ID of the account that the rule is shared with.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
+	// This argument should only be specified for FORWARD type rules.
+	ResolverEndpointID *string `json:"resolverEndpointId,omitempty" tf:"resolver_endpoint_id,omitempty"`
+
+	// The rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
+	RuleType *string `json:"ruleType,omitempty" tf:"rule_type,omitempty"`
 
 	// Whether the rules is shared and, if so, whether the current account is sharing the rule with another account, or another account is sharing the rule with the current account.
 	// Values are NOT_SHARED, SHARED_BY_ME or SHARED_WITH_ME
 	ShareStatus *string `json:"shareStatus,omitempty" tf:"share_status,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Configuration block(s) indicating the IPs that you want Resolver to forward DNS queries to (documented below).
+	// This argument should only be specified for FORWARD type rules.
+	TargetIP []TargetIPObservation `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 }
 
 type RuleParameters struct {
@@ -77,6 +101,12 @@ type RuleParameters struct {
 }
 
 type TargetIPObservation struct {
+
+	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
+	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
+
+	// The port at ip that you want to forward DNS queries to. Default value is 53
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type TargetIPParameters struct {

@@ -15,8 +15,24 @@ import (
 
 type TransitGatewayRouteObservation struct {
 
+	// Indicates whether to drop traffic that matches this route (default to false).
+	Blackhole *bool `json:"blackhole,omitempty" tf:"blackhole,omitempty"`
+
+	// IPv4 or IPv6 RFC1924 CIDR used for destination matches. Routing decisions are based on the most specific match.
+	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
+
 	// EC2 Transit Gateway Route Table identifier combined with destination
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Identifier of EC2 Transit Gateway Attachment .
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
+
+	// Identifier of EC2 Transit Gateway Route Table.
+	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 }
 
 type TransitGatewayRouteParameters struct {

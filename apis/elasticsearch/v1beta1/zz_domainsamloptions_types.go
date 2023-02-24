@@ -17,6 +17,13 @@ type DomainSAMLOptionsObservation struct {
 
 	// The name of the domain the SAML options are associated with.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The SAML authentication options for an AWS Elasticsearch Domain.
+	SAMLOptions []SAMLOptionsObservation `json:"samlOptions,omitempty" tf:"saml_options,omitempty"`
 }
 
 type DomainSAMLOptionsParameters struct {
@@ -32,6 +39,12 @@ type DomainSAMLOptionsParameters struct {
 }
 
 type IdpObservation struct {
+
+	// The unique Entity ID of the application in SAML Identity Provider.
+	EntityID *string `json:"entityId,omitempty" tf:"entity_id,omitempty"`
+
+	// The Metadata of the SAML application in xml format.
+	MetadataContent *string `json:"metadataContent,omitempty" tf:"metadata_content,omitempty"`
 }
 
 type IdpParameters struct {
@@ -46,6 +59,27 @@ type IdpParameters struct {
 }
 
 type SAMLOptionsObservation struct {
+
+	// Whether SAML authentication is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Information from your identity provider.
+	Idp []IdpObservation `json:"idp,omitempty" tf:"idp,omitempty"`
+
+	// This backend role from the SAML IdP receives full permissions to the cluster, equivalent to a new master user.
+	MasterBackendRole *string `json:"masterBackendRole,omitempty" tf:"master_backend_role,omitempty"`
+
+	// This username from the SAML IdP receives full permissions to the cluster, equivalent to a new master user.
+	MasterUserNameSecretRef *v1.SecretKeySelector `json:"masterUserNameSecretRef,omitempty" tf:"-"`
+
+	// Element of the SAML assertion to use for backend roles. Default is roles.
+	RolesKey *string `json:"rolesKey,omitempty" tf:"roles_key,omitempty"`
+
+	// Duration of a session in minutes after a user logs in. Default is 60. Maximum value is 1,440.
+	SessionTimeoutMinutes *float64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
+
+	// Custom SAML attribute to use for user names. Default is an empty string - "". This will cause Elasticsearch to use the NameID element of the Subject, which is the default location for name identifiers in the SAML specification.
+	SubjectKey *string `json:"subjectKey,omitempty" tf:"subject_key,omitempty"`
 }
 
 type SAMLOptionsParameters struct {

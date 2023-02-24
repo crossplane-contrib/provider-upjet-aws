@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: repositories.ecrpublic.aws.upbound.io
 spec:
@@ -126,6 +126,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -305,8 +314,62 @@ spec:
                   arn:
                     description: Full ARN of the repository.
                     type: string
+                  catalogData:
+                    description: Catalog data configuration for the repository. See
+                      below for schema.
+                    items:
+                      properties:
+                        aboutText:
+                          description: A detailed description of the contents of the
+                            repository. It is publicly visible in the Amazon ECR Public
+                            Gallery. The text must be in markdown format.
+                          type: string
+                        architectures:
+                          description: 'The system architecture that the images in
+                            the repository are compatible with. On the Amazon ECR
+                            Public Gallery, the following supported architectures
+                            will appear as badges on the repository and are used as
+                            search filters: ARM, ARM 64, x86, x86-64'
+                          items:
+                            type: string
+                          type: array
+                        description:
+                          description: A short description of the contents of the
+                            repository. This text appears in both the image details
+                            and also when searching for repositories on the Amazon
+                            ECR Public Gallery.
+                          type: string
+                        logoImageBlob:
+                          description: The base64-encoded repository logo payload.
+                            (Only visible for verified accounts) Note that drift detection
+                            is disabled for this attribute.
+                          type: string
+                        operatingSystems:
+                          description: 'The operating systems that the images in the
+                            repository are compatible with. On the Amazon ECR Public
+                            Gallery, the following supported operating systems will
+                            appear as badges on the repository and are used as search
+                            filters: Linux, Windows'
+                          items:
+                            type: string
+                          type: array
+                        usageText:
+                          description: Detailed information on how to use the contents
+                            of the repository. It is publicly visible in the Amazon
+                            ECR Public Gallery. The usage text provides context, support
+                            information, and additional usage details for users of
+                            the repository. The text must be in markdown format.
+                          type: string
+                      type: object
+                    type: array
+                  forceDestroy:
+                    type: boolean
                   id:
                     description: The repository name.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   registryId:
                     description: The registry ID where the repository was created.
@@ -314,6 +377,11 @@ spec:
                   repositoryUri:
                     description: The URI of the repository.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -362,9 +430,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

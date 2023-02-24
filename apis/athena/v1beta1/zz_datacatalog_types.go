@@ -18,11 +18,27 @@ type DataCatalogObservation struct {
 	// ARN of the data catalog.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the data catalog.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Name of the data catalog.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Key value pairs that specifies the Lambda function or functions to use for the data catalog. The mapping used depends on the catalog type.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Type of data catalog: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DataCatalogParameters struct {

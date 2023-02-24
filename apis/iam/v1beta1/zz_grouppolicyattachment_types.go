@@ -14,7 +14,14 @@ import (
 )
 
 type GroupPolicyAttachmentObservation struct {
+
+	// The group the policy should be applied to
+	Group *string `json:"group,omitempty" tf:"group,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ARN of the policy you want to apply
+	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 }
 
 type GroupPolicyAttachmentParameters struct {

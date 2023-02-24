@@ -15,8 +15,21 @@ import (
 
 type BucketServerSideEncryptionConfigurationObservation struct {
 
+	// The name of the bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
 	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Set of server-side encryption configuration rules. documented below. Currently, only a single rule is supported.
+	Rule []BucketServerSideEncryptionConfigurationRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type BucketServerSideEncryptionConfigurationParameters struct {
@@ -49,6 +62,12 @@ type BucketServerSideEncryptionConfigurationParameters struct {
 }
 
 type BucketServerSideEncryptionConfigurationRuleObservation struct {
+
+	// A single object for setting server-side encryption by default documented below
+	ApplyServerSideEncryptionByDefault []RuleApplyServerSideEncryptionByDefaultObservation `json:"applyServerSideEncryptionByDefault,omitempty" tf:"apply_server_side_encryption_by_default,omitempty"`
+
+	// Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
+	BucketKeyEnabled *bool `json:"bucketKeyEnabled,omitempty" tf:"bucket_key_enabled,omitempty"`
 }
 
 type BucketServerSideEncryptionConfigurationRuleParameters struct {
@@ -63,6 +82,12 @@ type BucketServerSideEncryptionConfigurationRuleParameters struct {
 }
 
 type RuleApplyServerSideEncryptionByDefaultObservation struct {
+
+	// The AWS KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. The default aws/s3 AWS KMS master key is used if this element is absent while the sse_algorithm is aws:kms.
+	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
+
+	// The server-side encryption algorithm to use. Valid values are AES256 and aws:kms
+	SseAlgorithm *string `json:"sseAlgorithm,omitempty" tf:"sse_algorithm,omitempty"`
 }
 
 type RuleApplyServerSideEncryptionByDefaultParameters struct {

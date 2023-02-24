@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: functions.appsync.aws.upbound.io
 spec:
@@ -304,6 +304,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -480,15 +489,98 @@ spec:
             properties:
               atProvider:
                 properties:
+                  apiId:
+                    description: ID of the associated AppSync API.
+                    type: string
                   arn:
                     description: ARN of the Function object.
+                    type: string
+                  code:
+                    description: The function code that contains the request and response
+                      functions. When code is used, the runtime is required. The runtime
+                      value must be APPSYNC_JS.
+                    type: string
+                  dataSource:
+                    description: Function data source name.
+                    type: string
+                  description:
+                    description: Function description.
                     type: string
                   functionId:
                     description: Unique ID representing the Function object.
                     type: string
+                  functionVersion:
+                    description: Version of the request mapping template. Currently
+                      the supported value is 2018-05-29. Does not apply when specifying
+                      code.
+                    type: string
                   id:
                     description: API Function ID (Formatted as ApiId-FunctionId)
                     type: string
+                  maxBatchSize:
+                    description: Maximum batching size for a resolver. Valid values
+                      are between 0 and 2000.
+                    type: number
+                  name:
+                    description: Function name. The function name does not have to
+                      be unique.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  requestMappingTemplate:
+                    description: Function request mapping template. Functions support
+                      only the 2018-05-29 version of the request mapping template.
+                    type: string
+                  responseMappingTemplate:
+                    description: Function response mapping template.
+                    type: string
+                  runtime:
+                    description: Describes a runtime used by an AWS AppSync pipeline
+                      resolver or AWS AppSync function. Specifies the name and version
+                      of the runtime to use. Note that if a runtime is specified,
+                      code must also be specified. See Runtime.
+                    items:
+                      properties:
+                        name:
+                          description: Function name. The function name does not have
+                            to be unique.
+                          type: string
+                        runtimeVersion:
+                          description: The version of the runtime to use. Currently,
+                            the only allowed version is 1.0.0.
+                          type: string
+                      type: object
+                    type: array
+                  syncConfig:
+                    description: Describes a Sync configuration for a resolver. See
+                      Sync Config.
+                    items:
+                      properties:
+                        conflictDetection:
+                          description: Conflict Detection strategy to use. Valid values
+                            are NONE and VERSION.
+                          type: string
+                        conflictHandler:
+                          description: Conflict Resolution strategy to perform in
+                            the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY,
+                            AUTOMERGE, and LAMBDA.
+                          type: string
+                        lambdaConflictHandlerConfig:
+                          description: Lambda Conflict Handler Config when configuring
+                            LAMBDA as the Conflict Handler. See Lambda Conflict Handler
+                            Config.
+                          items:
+                            properties:
+                              lambdaConflictHandlerArn:
+                                description: ARN for the Lambda function to use as
+                                  the Conflict Handler.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -531,9 +623,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

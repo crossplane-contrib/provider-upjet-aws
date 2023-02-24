@@ -15,11 +15,27 @@ import (
 
 type ResourceShareObservation struct {
 
+	// Indicates whether principals outside your organization can be associated with a resource share.
+	AllowExternalPrincipals *bool `json:"allowExternalPrincipals,omitempty" tf:"allow_external_principals,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the resource share.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the resource share.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource share.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the Amazon Resource Names (ARNs) of the RAM permission to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.
+	PermissionArns []*string `json:"permissionArns,omitempty" tf:"permission_arns,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

@@ -14,6 +14,24 @@ import (
 )
 
 type AMIDistributionConfigurationObservation struct {
+
+	// Key-value map of tags to apply to the distributed AMI.
+	AMITags map[string]*string `json:"amiTags,omitempty" tf:"ami_tags,omitempty"`
+
+	// Description to apply to the distributed AMI.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key to encrypt the distributed AMI.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Configuration block of EC2 launch permissions to apply to the distributed AMI. Detailed below.
+	LaunchPermission []LaunchPermissionObservation `json:"launchPermission,omitempty" tf:"launch_permission,omitempty"`
+
+	// Name to apply to the distributed AMI.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Set of AWS Account identifiers to distribute the AMI.
+	TargetAccountIds []*string `json:"targetAccountIds,omitempty" tf:"target_account_ids,omitempty"`
 }
 
 type AMIDistributionConfigurationParameters struct {
@@ -44,6 +62,15 @@ type AMIDistributionConfigurationParameters struct {
 }
 
 type ContainerDistributionConfigurationObservation struct {
+
+	// Set of tags that are attached to the container distribution configuration.
+	ContainerTags []*string `json:"containerTags,omitempty" tf:"container_tags,omitempty"`
+
+	// Description of the container distribution configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configuration block with the destination repository for the container distribution configuration.
+	TargetRepository []ContainerDistributionConfigurationTargetRepositoryObservation `json:"targetRepository,omitempty" tf:"target_repository,omitempty"`
 }
 
 type ContainerDistributionConfigurationParameters struct {
@@ -62,6 +89,12 @@ type ContainerDistributionConfigurationParameters struct {
 }
 
 type ContainerDistributionConfigurationTargetRepositoryObservation struct {
+
+	// The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+
+	// The service in which this image is registered. Valid values: ECR.
+	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }
 
 type ContainerDistributionConfigurationTargetRepositoryParameters struct {
@@ -86,7 +119,24 @@ type DistributionConfigurationObservation struct {
 	// Date the distribution configuration was updated.
 	DateUpdated *string `json:"dateUpdated,omitempty" tf:"date_updated,omitempty"`
 
+	// Description of the distribution configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// One or more configuration blocks with distribution settings. Detailed below.
+	Distribution []DistributionObservation `json:"distribution,omitempty" tf:"distribution,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the distribution configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// AWS Region for the distribution.
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -118,6 +168,24 @@ type DistributionConfigurationParameters struct {
 }
 
 type DistributionObservation struct {
+
+	// Configuration block with Amazon Machine Image (AMI) distribution settings. Detailed below.
+	AMIDistributionConfiguration []AMIDistributionConfigurationObservation `json:"amiDistributionConfiguration,omitempty" tf:"ami_distribution_configuration,omitempty"`
+
+	// Configuration block with container distribution settings. Detailed below.
+	ContainerDistributionConfiguration []ContainerDistributionConfigurationObservation `json:"containerDistributionConfiguration,omitempty" tf:"container_distribution_configuration,omitempty"`
+
+	// Set of Windows faster-launching configurations to use for AMI distribution. Detailed below.
+	FastLaunchConfiguration []FastLaunchConfigurationObservation `json:"fastLaunchConfiguration,omitempty" tf:"fast_launch_configuration,omitempty"`
+
+	// Set of launch template configuration settings that apply to image distribution. Detailed below.
+	LaunchTemplateConfiguration []LaunchTemplateConfigurationObservation `json:"launchTemplateConfiguration,omitempty" tf:"launch_template_configuration,omitempty"`
+
+	// Set of Amazon Resource Names (ARNs) of License Manager License Configurations.
+	LicenseConfigurationArns []*string `json:"licenseConfigurationArns,omitempty" tf:"license_configuration_arns,omitempty"`
+
+	// AWS Region for the distribution.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type DistributionParameters struct {
@@ -148,6 +216,21 @@ type DistributionParameters struct {
 }
 
 type FastLaunchConfigurationObservation struct {
+
+	// The owner account ID for the fast-launch enabled Windows AMI.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Configuration block for the launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots. Detailed below.
+	LaunchTemplate []LaunchTemplateObservation `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
+
+	// The maximum number of parallel instances that are launched for creating resources.
+	MaxParallelLaunches *float64 `json:"maxParallelLaunches,omitempty" tf:"max_parallel_launches,omitempty"`
+
+	// Configuration block for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled. Detailed below.
+	SnapshotConfiguration []SnapshotConfigurationObservation `json:"snapshotConfiguration,omitempty" tf:"snapshot_configuration,omitempty"`
 }
 
 type FastLaunchConfigurationParameters struct {
@@ -174,6 +257,18 @@ type FastLaunchConfigurationParameters struct {
 }
 
 type LaunchPermissionObservation struct {
+
+	// Set of AWS Organization ARNs to assign.
+	OrganizationArns []*string `json:"organizationArns,omitempty" tf:"organization_arns,omitempty"`
+
+	// Set of AWS Organizational Unit ARNs to assign.
+	OrganizationalUnitArns []*string `json:"organizationalUnitArns,omitempty" tf:"organizational_unit_arns,omitempty"`
+
+	// Set of EC2 launch permission user groups to assign. Use all to distribute a public AMI.
+	UserGroups []*string `json:"userGroups,omitempty" tf:"user_groups,omitempty"`
+
+	// Set of AWS Account identifiers to assign.
+	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
 
 type LaunchPermissionParameters struct {
@@ -196,6 +291,15 @@ type LaunchPermissionParameters struct {
 }
 
 type LaunchTemplateConfigurationObservation struct {
+
+	// The account ID that this configuration applies to.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// Indicates whether to set the specified Amazon EC2 launch template as the default launch template. Defaults to true.
+	Default *bool `json:"default,omitempty" tf:"default,omitempty"`
+
+	// The ID of the Amazon EC2 launch template to use.
+	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
 }
 
 type LaunchTemplateConfigurationParameters struct {
@@ -214,6 +318,15 @@ type LaunchTemplateConfigurationParameters struct {
 }
 
 type LaunchTemplateObservation struct {
+
+	// The ID of the launch template to use for faster launching for a Windows AMI.
+	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
+
+	// The name of the launch template to use for faster launching for a Windows AMI.
+	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
+
+	// The version of the launch template to use for faster launching for a Windows AMI.
+	LaunchTemplateVersion *string `json:"launchTemplateVersion,omitempty" tf:"launch_template_version,omitempty"`
 }
 
 type LaunchTemplateParameters struct {
@@ -232,6 +345,9 @@ type LaunchTemplateParameters struct {
 }
 
 type SnapshotConfigurationObservation struct {
+
+	// The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
+	TargetResourceCount *float64 `json:"targetResourceCount,omitempty" tf:"target_resource_count,omitempty"`
 }
 
 type SnapshotConfigurationParameters struct {

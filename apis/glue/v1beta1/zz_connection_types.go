@@ -18,8 +18,33 @@ type ConnectionObservation struct {
 	// The ARN of the Glue Connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// –  The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// value pairs used as parameters for this connection.
+	ConnectionPropertiesSecretRef *v1.SecretReference `json:"connectionPropertiesSecretRef,omitempty" tf:"-"`
+
+	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JBDC.
+	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
+
+	// –  Description of the connection.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Catalog ID and name of the connection
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// –  A list of criteria that can be used in selecting this connection.
+	MatchCriteria []*string `json:"matchCriteria,omitempty" tf:"match_criteria,omitempty"`
+
+	// A map of physical connection requirements, such as VPC and SecurityGroup. Defined below.
+	PhysicalConnectionRequirements []PhysicalConnectionRequirementsObservation `json:"physicalConnectionRequirements,omitempty" tf:"physical_connection_requirements,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -62,6 +87,15 @@ type ConnectionParameters struct {
 }
 
 type PhysicalConnectionRequirementsObservation struct {
+
+	// The availability zone of the connection. This field is redundant and implied by subnet_id, but is currently an api requirement.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// The security group ID list used by the connection.
+	SecurityGroupIDList []*string `json:"securityGroupIdList,omitempty" tf:"security_group_id_list,omitempty"`
+
+	// The subnet ID used by the connection.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type PhysicalConnectionRequirementsParameters struct {

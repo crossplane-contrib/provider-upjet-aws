@@ -14,7 +14,24 @@ import (
 )
 
 type TableItemObservation struct {
+
+	// Hash key to use for lookups and identification of the item
+	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// JSON representation of a map of attribute name/value pairs, one for each attribute. Only the primary key attributes are required; you can optionally provide other attribute name-value pairs for the item.
+	Item *string `json:"item,omitempty" tf:"item,omitempty"`
+
+	// Range key to use for lookups and identification of the item. Required if there is range key defined in the table.
+	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Name of the table to contain the item.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type TableItemParameters struct {

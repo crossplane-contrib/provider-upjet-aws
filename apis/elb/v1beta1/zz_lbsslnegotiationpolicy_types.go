@@ -14,6 +14,12 @@ import (
 )
 
 type AttributeObservation struct {
+
+	// The name of the SSL negotiation policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the attribute
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type AttributeParameters struct {
@@ -29,8 +35,27 @@ type AttributeParameters struct {
 
 type LBSSLNegotiationPolicyObservation struct {
 
+	// An SSL Negotiation policy attribute. Each has two properties:
+	Attribute []AttributeObservation `json:"attribute,omitempty" tf:"attribute,omitempty"`
+
 	// The ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The load balancer port to which the policy
+	// should be applied. This must be an active listener on the load
+	// balancer.
+	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+
+	// The load balancer to which the policy
+	// should be attached.
+	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
+
+	// The name of the SSL negotiation policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type LBSSLNegotiationPolicyParameters struct {

@@ -15,6 +15,15 @@ import (
 
 type ProxyTargetObservation struct {
 
+	// DB cluster identifier.
+	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
+
+	// DB instance identifier.
+	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
+
+	// The name of the DB proxy.
+	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
+
 	// Hostname for the target RDS DB Instance. Only returned for RDS_INSTANCE type.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
@@ -27,8 +36,15 @@ type ProxyTargetObservation struct {
 	// Identifier representing the DB Instance or DB Cluster target.
 	RDSResourceID *string `json:"rdsResourceId,omitempty" tf:"rds_resource_id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Amazon Resource Name (ARN) for the DB instance or DB cluster. Currently not returned by the RDS API.
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+
+	// The name of the target group.
+	TargetGroupName *string `json:"targetGroupName,omitempty" tf:"target_group_name,omitempty"`
 
 	// DB Cluster identifier for the DB Instance target. Not returned unless manually importing an RDS_INSTANCE target that is part of a DB Cluster.
 	TrackedClusterID *string `json:"trackedClusterId,omitempty" tf:"tracked_cluster_id,omitempty"`

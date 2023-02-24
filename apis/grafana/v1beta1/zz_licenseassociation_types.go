@@ -22,6 +22,16 @@ type LicenseAssociationObservation struct {
 
 	// If license_type is set to ENTERPRISE, this is the expiration date of the enterprise license.
 	LicenseExpiration *string `json:"licenseExpiration,omitempty" tf:"license_expiration,omitempty"`
+
+	// The type of license for the workspace license association. Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
+	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The workspace id.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type LicenseAssociationParameters struct {

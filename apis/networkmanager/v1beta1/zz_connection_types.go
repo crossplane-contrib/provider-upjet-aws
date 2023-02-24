@@ -18,7 +18,32 @@ type ConnectionObservation struct {
 	// The Amazon Resource Name (ARN) of the connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ID of the second device in the connection.
+	ConnectedDeviceID *string `json:"connectedDeviceId,omitempty" tf:"connected_device_id,omitempty"`
+
+	// The ID of the link for the second device.
+	ConnectedLinkID *string `json:"connectedLinkId,omitempty" tf:"connected_link_id,omitempty"`
+
+	// A description of the connection.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The ID of the first device in the connection.
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// The ID of the global network.
+	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the link for the first device.
+	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

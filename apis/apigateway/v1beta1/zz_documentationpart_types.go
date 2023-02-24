@@ -17,6 +17,19 @@ type DocumentationPartObservation struct {
 
 	// Unique ID of the Documentation Part
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Location of the targeted API entity of the to-be-created documentation part. See below.
+	Location []LocationObservation `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., "{ "description": "The API does ..." }". Only Swagger-compliant key-value pairs can be exported and, hence, published.
+	Properties *string `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ID of the associated Rest API
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 }
 
 type DocumentationPartParameters struct {
@@ -50,6 +63,21 @@ type DocumentationPartParameters struct {
 }
 
 type LocationObservation struct {
+
+	// HTTP verb of a method. The default value is * for any method.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// Name of the targeted API entity.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// URL path of the target. The default value is / for the root resource.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// HTTP status code of a response. The default value is * for any status code.
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+
+	// Type of API entity to which the documentation content appliesE.g., API, METHOD or REQUEST_BODY
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type LocationParameters struct {

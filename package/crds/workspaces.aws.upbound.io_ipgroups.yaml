@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: ipgroups.workspaces.aws.upbound.io
 spec:
@@ -99,6 +99,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -275,9 +284,38 @@ spec:
             properties:
               atProvider:
                 properties:
+                  description:
+                    description: The description of the IP group.
+                    type: string
                   id:
                     description: The IP group identifier.
                     type: string
+                  name:
+                    description: The name of the IP group.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  rules:
+                    description: One or more pairs specifying the IP group rule (in
+                      CIDR format) from which web requests originate.
+                    items:
+                      properties:
+                        description:
+                          description: The description of the IP group.
+                          type: string
+                        source:
+                          description: The IP address range, in CIDR notation, e.g.,
+                            10.0.0.0/16
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -327,9 +365,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

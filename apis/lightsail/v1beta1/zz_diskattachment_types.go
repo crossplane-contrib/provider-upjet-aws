@@ -15,8 +15,21 @@ import (
 
 type DiskAttachmentObservation struct {
 
+	// The name of the Lightsail Disk.
+	DiskName *string `json:"diskName,omitempty" tf:"disk_name,omitempty"`
+
+	// The disk path to expose to the instance.
+	DiskPath *string `json:"diskPath,omitempty" tf:"disk_path,omitempty"`
+
 	// A combination of attributes to create a unique id: disk_name,instance_name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Lightsail Instance to attach to.
+	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DiskAttachmentParameters struct {

@@ -21,6 +21,22 @@ type RuleObservation struct {
 	// The ID of the WAF rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name or description for the Amazon CloudWatch metric of this rule. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// The name or description of the rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The objects to include in a rule (documented below).
+	Predicates []RulePredicatesObservation `json:"predicates,omitempty" tf:"predicates,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -50,6 +66,18 @@ type RuleParameters struct {
 }
 
 type RulePredicatesObservation struct {
+
+	// A unique identifier for a predicate in the rule, such as Byte Match Set ID or IPSet ID.
+	DataID *string `json:"dataId,omitempty" tf:"data_id,omitempty"`
+
+	// Set this to false if you want to allow, block, or count requests
+	// based on the settings in the specified waf_byte_match_set, waf_ipset, aws_waf_size_constraint_set, aws_waf_sql_injection_match_set or aws_waf_xss_match_set.
+	// For example, if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow or block requests based on that IP address.
+	// If set to true, AWS WAF will allow, block, or count requests based on all IP addresses except 192.0.2.44.
+	Negated *bool `json:"negated,omitempty" tf:"negated,omitempty"`
+
+	// The type of predicate in a rule. Valid values: ByteMatch, GeoMatch, IPMatch, RegexMatch, SizeConstraint, SqlInjectionMatch, or XssMatch.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RulePredicatesParameters struct {

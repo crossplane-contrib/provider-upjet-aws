@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: vocabularies.connect.aws.upbound.io
 spec:
@@ -176,6 +176,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -355,6 +364,14 @@ spec:
                   arn:
                     description: The Amazon Resource Name (ARN) of the vocabulary.
                     type: string
+                  content:
+                    description: The content of the custom vocabulary in plain-text
+                      format with a table of values. Each row in the table represents
+                      a word or a phrase, described with Phrase, IPA, SoundsLike,
+                      and DisplayAs fields. Separate the fields with TAB characters.
+                      For more information, see Create a custom vocabulary using a
+                      table. Minimum length of 1. Maximum length of 60000.
+                    type: string
                   failureReason:
                     description: The reason why the custom vocabulary was not created.
                     type: string
@@ -362,14 +379,39 @@ spec:
                     description: The identifier of the hosting Amazon Connect Instance
                       and identifier of the vocabulary separated by a colon (:).
                     type: string
+                  instanceId:
+                    description: Specifies the identifier of the hosting Amazon Connect
+                      Instance.
+                    type: string
+                  languageCode:
+                    description: The language code of the vocabulary entries. For
+                      a list of languages and their corresponding language codes,
+                      see What is Amazon Transcribe?. Valid Values are ar-AE, de-CH,
+                      de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES,
+                      es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT,
+                      zh-CN.
+                    type: string
                   lastModifiedTime:
                     description: The timestamp when the custom vocabulary was last
                       modified.
+                    type: string
+                  name:
+                    description: A unique name of the custom vocabulary. Must not
+                      be more than 140 characters.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   state:
                     description: The current state of the custom vocabulary. Valid
                       values are CREATION_IN_PROGRESS, ACTIVE, CREATION_FAILED, DELETE_IN_PROGRESS.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -422,9 +464,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

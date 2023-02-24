@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: functionurls.lambda.aws.upbound.io
 spec:
@@ -203,6 +203,15 @@ spec:
                 - authorizationType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -379,14 +388,76 @@ spec:
             properties:
               atProvider:
                 properties:
+                  authorizationType:
+                    description: The type of authentication that the function URL
+                      uses. Set to "AWS_IAM" to restrict access to authenticated IAM
+                      users only. Set to "NONE" to bypass IAM authentication and create
+                      a public endpoint. See the AWS documentation for more details.
+                    type: string
+                  cors:
+                    description: The cross-origin resource sharing (CORS) settings
+                      for the function URL. Documented below.
+                    items:
+                      properties:
+                        allowCredentials:
+                          description: Whether to allow cookies or other credentials
+                            in requests to the function URL. The default is false.
+                          type: boolean
+                        allowHeaders:
+                          description: 'The HTTP headers that origins can include
+                            in requests to the function URL. For example: ["date",
+                            "keep-alive", "x-custom-header"].'
+                          items:
+                            type: string
+                          type: array
+                        allowMethods:
+                          description: 'The HTTP methods that are allowed when calling
+                            the function URL. For example: ["GET", "POST", "DELETE"],
+                            or the wildcard character (["*"]).'
+                          items:
+                            type: string
+                          type: array
+                        allowOrigins:
+                          description: 'The origins that can access the function URL.
+                            You can list any number of specific origins (or the wildcard
+                            character ("*")), separated by a comma. For example: ["https://www.example.com",
+                            "http://localhost:60905"].'
+                          items:
+                            type: string
+                          type: array
+                        exposeHeaders:
+                          description: The HTTP headers in your function response
+                            that you want to expose to origins that call the function
+                            URL.
+                          items:
+                            type: string
+                          type: array
+                        maxAge:
+                          description: The maximum amount of time, in seconds, that
+                            web browsers can cache results of a preflight request.
+                            By default, this is set to 0, which means that the browser
+                            doesn't cache results. The maximum value is 86400.
+                          type: number
+                      type: object
+                    type: array
                   functionArn:
                     description: The Amazon Resource Name (ARN) of the function.
+                    type: string
+                  functionName:
+                    description: The name (or ARN) of the Lambda function.
                     type: string
                   functionUrl:
                     description: The HTTP URL endpoint for the function in the format
                       https://<url_id>.lambda-url.<region>.on.aws.
                     type: string
                   id:
+                    type: string
+                  qualifier:
+                    description: The alias name or "$LATEST".
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   urlId:
                     description: A generated ID for the endpoint.
@@ -433,9 +504,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

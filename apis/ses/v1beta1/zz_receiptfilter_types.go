@@ -18,8 +18,18 @@ type ReceiptFilterObservation struct {
 	// The SES receipt filter ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The IP address or address range to filter, in CIDR notation
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
+
 	// The SES receipt filter name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Block or Allow
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ReceiptFilterParameters struct {

@@ -17,6 +17,13 @@ type ResourcePolicyObservation struct {
 
 	// The name of the CloudWatch log resource policy
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Details of the resource policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. Maximum length of 5120 characters.
+	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ResourcePolicyParameters struct {

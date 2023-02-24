@@ -14,7 +14,18 @@ import (
 )
 
 type EnablerObservation struct {
+
+	// Set of account IDs.
+	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Type of resources to scan. Valid values are EC2, ECR, and LAMBDA.
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 }
 
 type EnablerParameters struct {

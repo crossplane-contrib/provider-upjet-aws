@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: lifecyclepolicies.ecr.aws.upbound.io
 spec:
@@ -153,6 +153,15 @@ spec:
                 - policy
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -331,8 +340,20 @@ spec:
                 properties:
                   id:
                     type: string
+                  policy:
+                    description: The policy document. This is a JSON formatted string.
+                      See more details about Policy Parameters in the official AWS
+                      docs.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   registryId:
                     description: The registry ID where the repository was created.
+                    type: string
+                  repository:
+                    description: Name of the repository to apply the policy.
                     type: string
                 type: object
               conditions:
@@ -376,9 +397,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

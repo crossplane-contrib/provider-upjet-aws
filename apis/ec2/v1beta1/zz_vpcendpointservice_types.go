@@ -33,6 +33,9 @@ type PrivateDNSNameConfigurationParameters struct {
 
 type VPCEndpointServiceObservation struct {
 
+	// Whether or not VPC endpoint connection requests to the service must be accepted by the service owner - true or false.
+	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
+
 	// The ARNs of one or more principals allowed to discover the endpoint service.
 	AllowedPrincipals []*string `json:"allowedPrincipals,omitempty" tf:"allowed_principals,omitempty"`
 
@@ -45,14 +48,27 @@ type VPCEndpointServiceObservation struct {
 	// A set of DNS names for the service.
 	BaseEndpointDNSNames []*string `json:"baseEndpointDnsNames,omitempty" tf:"base_endpoint_dns_names,omitempty"`
 
+	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
+	GatewayLoadBalancerArns []*string `json:"gatewayLoadBalancerArns,omitempty" tf:"gateway_load_balancer_arns,omitempty"`
+
 	// The ID of the VPC endpoint service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Whether or not the service manages its VPC endpoints - true or false.
 	ManagesVPCEndpoints *bool `json:"managesVpcEndpoints,omitempty" tf:"manages_vpc_endpoints,omitempty"`
 
+	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
+	NetworkLoadBalancerArns []*string `json:"networkLoadBalancerArns,omitempty" tf:"network_load_balancer_arns,omitempty"`
+
+	// The private DNS name for the service.
+	PrivateDNSName *string `json:"privateDnsName,omitempty" tf:"private_dns_name,omitempty"`
+
 	// List of objects containing information about the endpoint service private DNS name configuration.
 	PrivateDNSNameConfiguration []PrivateDNSNameConfigurationObservation `json:"privateDnsNameConfiguration,omitempty" tf:"private_dns_name_configuration,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The service name.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
@@ -62,6 +78,12 @@ type VPCEndpointServiceObservation struct {
 
 	// The state of the VPC endpoint service.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// The supported IP address types. The possible values are ipv4 and ipv6.
+	SupportedIPAddressTypes []*string `json:"supportedIpAddressTypes,omitempty" tf:"supported_ip_address_types,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

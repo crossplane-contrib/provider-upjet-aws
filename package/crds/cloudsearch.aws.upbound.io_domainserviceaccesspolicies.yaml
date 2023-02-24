@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: domainserviceaccesspolicies.cloudsearch.aws.upbound.io
 spec:
@@ -155,6 +155,15 @@ spec:
                 - accessPolicy
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -332,7 +341,18 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accessPolicy:
+                    description: The access rules you want to configure. These rules
+                      replace any existing rules. See the AWS documentation for details.
+                    type: string
+                  domainName:
+                    description: The CloudSearch domain name the policy applies to.
+                    type: string
                   id:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -376,9 +396,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

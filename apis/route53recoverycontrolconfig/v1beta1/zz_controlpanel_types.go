@@ -18,10 +18,20 @@ type ControlPanelObservation struct {
 	// ARN of the control panel.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ARN of the cluster in which this control panel will reside.
+	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
+
 	// Whether a control panel is default.
 	DefaultControlPanel *bool `json:"defaultControlPanel,omitempty" tf:"default_control_panel,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name describing the control panel.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// Number routing controls in a control panel.
 	RoutingControlCount *float64 `json:"routingControlCount,omitempty" tf:"routing_control_count,omitempty"`

@@ -18,6 +18,10 @@ type TagOptionResourceAssociationObservation struct {
 	// Identifier of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// ARN of the resource.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
@@ -27,8 +31,14 @@ type TagOptionResourceAssociationObservation struct {
 	// Description of the resource.
 	ResourceDescription *string `json:"resourceDescription,omitempty" tf:"resource_description,omitempty"`
 
+	// Resource identifier.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
 	// Description of the resource.
 	ResourceName *string `json:"resourceName,omitempty" tf:"resource_name,omitempty"`
+
+	// Tag Option identifier.
+	TagOptionID *string `json:"tagOptionId,omitempty" tf:"tag_option_id,omitempty"`
 }
 
 type TagOptionResourceAssociationParameters struct {

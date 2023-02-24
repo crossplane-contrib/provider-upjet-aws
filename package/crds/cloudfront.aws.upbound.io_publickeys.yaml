@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: publickeys.cloudfront.aws.upbound.io
 spec:
@@ -97,6 +97,15 @@ spec:
                 - encodedKeySecretRef
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -277,6 +286,27 @@ spec:
                     description: Internal value used by CloudFront to allow future
                       updates to the public key configuration.
                     type: string
+                  comment:
+                    description: An optional comment about the public key.
+                    type: string
+                  encodedKeySecretRef:
+                    description: The encoded public key that you want to add to CloudFront
+                      to use with features like field-level encryption.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   etag:
                     description: 'The current version of the public key. For example:
                       E2QWRUHAPOMQZL.'
@@ -285,6 +315,15 @@ spec:
                     description: 'The identifier for the public key. For example:
                       K3D5EWEUDCCXON.'
                     type: string
+                  name:
+                    description: The name for the public key.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                required:
+                - encodedKeySecretRef
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -327,9 +366,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

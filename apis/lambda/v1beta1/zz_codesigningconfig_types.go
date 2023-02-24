@@ -14,6 +14,9 @@ import (
 )
 
 type AllowedPublishersObservation struct {
+
+	// The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package.
+	SigningProfileVersionArns []*string `json:"signingProfileVersionArns,omitempty" tf:"signing_profile_version_arns,omitempty"`
 }
 
 type AllowedPublishersParameters struct {
@@ -35,16 +38,29 @@ type AllowedPublishersParameters struct {
 
 type CodeSigningConfigObservation struct {
 
+	// A configuration block of allowed publishers as signing profiles for this code signing configuration. Detailed below.
+	AllowedPublishers []AllowedPublishersObservation `json:"allowedPublishers,omitempty" tf:"allowed_publishers,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the code signing configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Unique identifier for the code signing configuration.
 	ConfigID *string `json:"configId,omitempty" tf:"config_id,omitempty"`
 
+	// Descriptive name for this code signing configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The date and time that the code signing configuration was last modified.
 	LastModified *string `json:"lastModified,omitempty" tf:"last_modified,omitempty"`
+
+	// A configuration block of code signing policies that define the actions to take if the validation checks fail. Detailed below.
+	Policies []PoliciesObservation `json:"policies,omitempty" tf:"policies,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type CodeSigningConfigParameters struct {
@@ -68,6 +84,9 @@ type CodeSigningConfigParameters struct {
 }
 
 type PoliciesObservation struct {
+
+	// Code signing configuration policy for deployment validation failure. If you set the policy to Enforce, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to Warn, Lambda allows the deployment and creates a CloudWatch log. Valid values: Warn, Enforce. Default value: Warn.
+	UntrustedArtifactOnDeployment *string `json:"untrustedArtifactOnDeployment,omitempty" tf:"untrusted_artifact_on_deployment,omitempty"`
 }
 
 type PoliciesParameters struct {

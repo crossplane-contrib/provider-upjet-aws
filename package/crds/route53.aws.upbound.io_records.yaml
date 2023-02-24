@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: records.route53.aws.upbound.io
 spec:
@@ -343,6 +343,15 @@ spec:
                 - region
                 - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -519,10 +528,128 @@ spec:
             properties:
               atProvider:
                 properties:
+                  alias:
+                    description: An alias block. Conflicts with ttl & records. Documented
+                      below.
+                    items:
+                      properties:
+                        evaluateTargetHealth:
+                          description: Set to true if you want Route 53 to determine
+                            whether to respond to DNS queries using this resource
+                            record set by checking the health of the resource record
+                            set. Some resources have special requirements, see related
+                            part of documentation.
+                          type: boolean
+                        name:
+                          description: The name of the record.
+                          type: string
+                        zoneId:
+                          description: The ID of the hosted zone to contain this record.
+                          type: string
+                      type: object
+                    type: array
+                  allowOverwrite:
+                    description: false by default. This configuration is not recommended
+                      for most environments.
+                    type: boolean
+                  failoverRoutingPolicy:
+                    description: A block indicating the routing behavior when associated
+                      health check fails. Conflicts with any other routing policy.
+                      Documented below.
+                    items:
+                      properties:
+                        type:
+                          description: The record type. Valid values are A, AAAA,
+                            CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and
+                            TXT.
+                          type: string
+                      type: object
+                    type: array
                   fqdn:
                     description: FQDN built using the zone domain and name.
                     type: string
+                  geolocationRoutingPolicy:
+                    description: A block indicating a routing policy based on the
+                      geolocation of the requestor. Conflicts with any other routing
+                      policy. Documented below.
+                    items:
+                      properties:
+                        continent:
+                          description: A two-letter continent code. See http://docs.aws.amazon.com/Route53/latest/APIReference/API_GetGeoLocation.html
+                            for code details. Either continent or country must be
+                            specified.
+                          type: string
+                        country:
+                          description: A two-character country code or * to indicate
+                            a default resource record set.
+                          type: string
+                        subdivision:
+                          description: A subdivision code for a country.
+                          type: string
+                      type: object
+                    type: array
+                  healthCheckId:
+                    description: The health check the record should be associated
+                      with.
+                    type: string
                   id:
+                    type: string
+                  latencyRoutingPolicy:
+                    description: A block indicating a routing policy based on the
+                      latency between the requestor and an AWS region. Conflicts with
+                      any other routing policy. Documented below.
+                    items:
+                      properties:
+                        region:
+                          description: An AWS region from which to measure latency.
+                            See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency
+                          type: string
+                      type: object
+                    type: array
+                  multivalueAnswerRoutingPolicy:
+                    description: Set to true to indicate a multivalue answer routing
+                      policy. Conflicts with any other routing policy.
+                    type: boolean
+                  name:
+                    description: The name of the record.
+                    type: string
+                  records:
+                    description: A string list of records.g., "first255characters\"\"morecharacters").
+                    items:
+                      type: string
+                    type: array
+                  region:
+                    description: An AWS region from which to measure latency. See
+                      http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency
+                      Region is the region you'd like your resource to be created
+                      in.
+                    type: string
+                  setIdentifier:
+                    description: Unique identifier to differentiate records with routing
+                      policies from one another. Required if using failover, geolocation,
+                      latency, multivalue_answer, or weighted routing policies documented
+                      below.
+                    type: string
+                  ttl:
+                    description: The TTL of the record.
+                    type: number
+                  type:
+                    description: The record type. Valid values are A, AAAA, CAA, CNAME,
+                      DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                    type: string
+                  weightedRoutingPolicy:
+                    description: A block indicating a weighted routing policy. Conflicts
+                      with any other routing policy. Documented below.
+                    items:
+                      properties:
+                        weight:
+                          description: A numeric value indicating the relative weight
+                            of the record. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted.
+                          type: number
+                      type: object
+                    type: array
+                  zoneId:
+                    description: The ID of the hosted zone to contain this record.
                     type: string
                 type: object
               conditions:
@@ -566,9 +693,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

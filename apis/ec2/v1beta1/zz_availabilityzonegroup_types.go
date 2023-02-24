@@ -17,6 +17,13 @@ type AvailabilityZoneGroupObservation struct {
 
 	// Name of the Availability Zone Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Indicates whether to enable or disable Availability Zone Group. Valid values: opted-in or not-opted-in.
+	OptInStatus *string `json:"optInStatus,omitempty" tf:"opt_in_status,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type AvailabilityZoneGroupParameters struct {

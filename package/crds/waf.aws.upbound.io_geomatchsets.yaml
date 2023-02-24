@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: geomatchsets.waf.aws.upbound.io
 spec:
@@ -95,6 +95,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -274,8 +283,32 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN)
                     type: string
+                  geoMatchConstraint:
+                    description: The GeoMatchConstraint objects which contain the
+                      country that you want AWS WAF to search for.
+                    items:
+                      properties:
+                        type:
+                          description: The type of geographical area you want AWS
+                            WAF to search for. Currently Country is the only valid
+                            value.
+                          type: string
+                        value:
+                          description: The country that you want AWS WAF to search
+                            for. This is the two-letter country code, e.g., US, CA,
+                            RU, CN, etc. See docs for all supported values.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the WAF GeoMatchSet.
+                    type: string
+                  name:
+                    description: The name or description of the GeoMatchSet.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -319,9 +352,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: reportdefinitions.cur.aws.upbound.io
 spec:
@@ -195,6 +195,15 @@ spec:
                 - s3Region
                 - timeUnit
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -371,11 +380,61 @@ spec:
             properties:
               atProvider:
                 properties:
+                  additionalArtifacts:
+                    description: 'A list of additional artifacts. Valid values are:
+                      REDSHIFT, QUICKSIGHT, ATHENA. When ATHENA exists within additional_artifacts,
+                      no other artifact type can be declared and report_versioning
+                      must be OVERWRITE_REPORT.'
+                    items:
+                      type: string
+                    type: array
+                  additionalSchemaElements:
+                    description: 'A list of schema elements. Valid values are: RESOURCES.'
+                    items:
+                      type: string
+                    type: array
                   arn:
                     description: The Amazon Resource Name (ARN) specifying the cur
                       report.
                     type: string
+                  compression:
+                    description: 'Compression format for report. Valid values are:
+                      GZIP, ZIP, Parquet. If Parquet is used, then format must also
+                      be Parquet.'
+                    type: string
+                  format:
+                    description: 'Format for report. Valid values are: textORcsv,
+                      Parquet. If Parquet is used, then Compression must also be Parquet.'
+                    type: string
                   id:
+                    type: string
+                  refreshClosedReports:
+                    description: Set to true to update your reports after they have
+                      been finalized if AWS detects charges related to previous months.
+                    type: boolean
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  reportVersioning:
+                    description: 'Overwrite the previous version of each report or
+                      to deliver the report in addition to the previous versions.
+                      Valid values are: CREATE_NEW_REPORT and OVERWRITE_REPORT.'
+                    type: string
+                  s3Bucket:
+                    description: Name of the existing S3 bucket to hold generated
+                      reports.
+                    type: string
+                  s3Prefix:
+                    description: Report path prefix. Limited to 256 characters.
+                    type: string
+                  s3Region:
+                    description: Region of the existing S3 bucket to hold generated
+                      reports.
+                    type: string
+                  timeUnit:
+                    description: 'The frequency on which report data are measured
+                      and displayed.  Valid values are: DAILY, HOURLY, MONTHLY.'
                     type: string
                 type: object
               conditions:
@@ -419,9 +478,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

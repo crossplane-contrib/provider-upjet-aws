@@ -15,6 +15,22 @@ import (
 
 type IdentityNotificationTopicObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The identity for which the Amazon SNS topic will be set. You can specify an identity by using its name or by using its Amazon Resource Name (ARN).
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Whether SES should include original email headers in SNS notifications of this type. false by default.
+	IncludeOriginalHeaders *bool `json:"includeOriginalHeaders,omitempty" tf:"include_original_headers,omitempty"`
+
+	// The type of notifications that will be published to the specified Amazon SNS topic. Valid Values: Bounce, Complaint or Delivery.
+	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The Amazon Resource Name (ARN) of the Amazon SNS topic. Can be set to "" (an empty string) to disable publishing.
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
 type IdentityNotificationTopicParameters struct {

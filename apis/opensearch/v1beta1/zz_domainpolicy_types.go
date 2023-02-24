@@ -14,7 +14,18 @@ import (
 )
 
 type DomainPolicyObservation struct {
+
+	// IAM policy document specifying the access policies for the domain
+	AccessPolicies *string `json:"accessPolicies,omitempty" tf:"access_policies,omitempty"`
+
+	// Name of the domain.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DomainPolicyParameters struct {

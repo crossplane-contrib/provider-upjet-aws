@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: clustersnapshots.rds.aws.upbound.io
 spec:
@@ -157,6 +157,15 @@ spec:
                 - dbClusterSnapshotIdentifier
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -342,9 +351,16 @@ spec:
                     items:
                       type: string
                     type: array
+                  dbClusterIdentifier:
+                    description: The DB Cluster Identifier from which to take the
+                      snapshot.
+                    type: string
                   dbClusterSnapshotArn:
                     description: The Amazon Resource Name (ARN) for the DB Cluster
                       Snapshot.
+                    type: string
+                  dbClusterSnapshotIdentifier:
+                    description: The Identifier for the snapshot.
                     type: string
                   engine:
                     description: Name of the database engine.
@@ -366,6 +382,10 @@ spec:
                     description: Port that the DB cluster was listening on at the
                       time of the snapshot.
                     type: number
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   snapshotType:
                     type: string
                   sourceDbClusterSnapshotArn:
@@ -378,6 +398,11 @@ spec:
                   storageEncrypted:
                     description: Whether the DB cluster snapshot is encrypted.
                     type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -430,9 +455,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

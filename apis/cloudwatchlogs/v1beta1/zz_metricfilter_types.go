@@ -17,6 +17,20 @@ type MetricFilterObservation struct {
 
 	// The name of the metric filter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the log group to associate the metric filter with.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// A block defining collection of information needed to define how metric data gets emitted. See below.
+	MetricTransformation []MetricTransformationObservation `json:"metricTransformation,omitempty" tf:"metric_transformation,omitempty"`
+
+	// A valid CloudWatch Logs filter pattern
+	// for extracting metric data out of ingested log events.
+	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type MetricFilterParameters struct {
@@ -50,6 +64,24 @@ type MetricFilterParameters struct {
 }
 
 type MetricTransformationObservation struct {
+
+	// The value to emit when a filter pattern does not match a log event. Conflicts with dimensions.
+	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+
+	// Map of fields to use as dimensions for the metric. Up to 3 dimensions are allowed. Conflicts with default_value.
+	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// The name of the CloudWatch metric to which the monitored log information should be published (e.g., ErrorCount)
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The destination namespace of the CloudWatch metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// The unit to assign to the metric. If you omit this, the unit is set as None.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// What to publish to the metric. For example, if you're counting the occurrences of a particular term like "Error", the value will be "1" for each occurrence. If you're counting the bytes transferred the published value will be the value in the log event.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MetricTransformationParameters struct {

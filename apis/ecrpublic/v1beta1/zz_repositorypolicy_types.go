@@ -16,8 +16,18 @@ import (
 type RepositoryPolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The policy document. This is a JSON formatted string
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// The registry ID where the repository was created.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
+
+	// Name of the repository to apply the policy.
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 }
 
 type RepositoryPolicyParameters struct {

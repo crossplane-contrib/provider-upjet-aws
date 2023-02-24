@@ -14,6 +14,12 @@ import (
 )
 
 type ResourceUrisObservation struct {
+
+	// The type of the resource. can be one of JAR, FILE, and ARCHIVE.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// The URI for accessing the resource.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ResourceUrisParameters struct {
@@ -32,11 +38,33 @@ type UserDefinedFunctionObservation struct {
 	// The ARN of the Glue User Defined Function.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ID of the Glue Catalog to create the function in. If omitted, this defaults to the AWS Account ID.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// The Java class that contains the function code.
+	ClassName *string `json:"className,omitempty" tf:"class_name,omitempty"`
+
 	// The time at which the function was created.
 	CreateTime *string `json:"createTime,omitempty" tf:"create_time,omitempty"`
 
+	// The name of the Database to create the Function.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
 	// The id of the Glue User Defined Function.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The owner of the function.
+	OwnerName *string `json:"ownerName,omitempty" tf:"owner_name,omitempty"`
+
+	// The owner type. can be one of USER, ROLE, and GROUP.
+	OwnerType *string `json:"ownerType,omitempty" tf:"owner_type,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The configuration block for Resource URIs. See resource uris below for more details.
+	ResourceUris []ResourceUrisObservation `json:"resourceUris,omitempty" tf:"resource_uris,omitempty"`
 }
 
 type UserDefinedFunctionParameters struct {

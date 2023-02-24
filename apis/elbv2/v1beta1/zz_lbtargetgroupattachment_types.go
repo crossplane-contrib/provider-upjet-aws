@@ -15,8 +15,24 @@ import (
 
 type LBTargetGroupAttachmentObservation struct {
 
+	// The Availability Zone where the IP address of the target is to be registered. If the private ip address is outside of the VPC scope, this value must be set to 'all'.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
 	// A unique identifier for the attachment
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The port on which targets receive traffic.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ARN of the target group with which to register targets
+	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
+
+	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the arn of lambda. If the target type is alb, specify the arn of alb.
+	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 }
 
 type LBTargetGroupAttachmentParameters struct {

@@ -14,6 +14,10 @@ import (
 )
 
 type AuditLogsObservation struct {
+
+	// If true, enables Malware Protection as data source for the detector.
+	// Defaults to true.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
 }
 
 type AuditLogsParameters struct {
@@ -25,6 +29,18 @@ type AuditLogsParameters struct {
 }
 
 type DatasourcesObservation struct {
+
+	// Configures Kubernetes protection.
+	// See Kubernetes and Kubernetes Audit Logs below for more details.
+	Kubernetes []KubernetesObservation `json:"kubernetes,omitempty" tf:"kubernetes,omitempty"`
+
+	// Configures Malware Protection.
+	// See Malware Protection, Scan EC2 instance with findings and EBS volumes below for more details.
+	MalwareProtection []MalwareProtectionObservation `json:"malwareProtection,omitempty" tf:"malware_protection,omitempty"`
+
+	// Configures S3 protection.
+	// See S3 Logs below for more details.
+	S3Logs []S3LogsObservation `json:"s3Logs,omitempty" tf:"s3_logs,omitempty"`
 }
 
 type DatasourcesParameters struct {
@@ -53,8 +69,24 @@ type DetectorObservation struct {
 	// Amazon Resource Name (ARN) of the GuardDuty detector
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Describes which data sources will be enabled for the detector. See Data Sources below for more details.
+	Datasources []DatasourcesObservation `json:"datasources,omitempty" tf:"datasources,omitempty"`
+
+	// Enable monitoring and feedback reporting. Setting to false is equivalent to "suspending" GuardDuty. Defaults to true.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// Specifies the frequency of notifications sent for subsequent finding occurrences. If the detector is a GuardDuty member account, the value is determined by the GuardDuty primary account and cannot be modified, otherwise defaults to SIX_HOURS. Valid values for standalone and primary accounts: FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS. See AWS Documentation for more information.
+	FindingPublishingFrequency *string `json:"findingPublishingFrequency,omitempty" tf:"finding_publishing_frequency,omitempty"`
+
 	// The ID of the GuardDuty detector
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -85,6 +117,10 @@ type DetectorParameters struct {
 }
 
 type EBSVolumesObservation struct {
+
+	// If true, enables Malware Protection as data source for the detector.
+	// Defaults to true.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
 }
 
 type EBSVolumesParameters struct {
@@ -96,6 +132,10 @@ type EBSVolumesParameters struct {
 }
 
 type KubernetesObservation struct {
+
+	// Configures Kubernetes audit logs as a data source for Kubernetes protection.
+	// See Kubernetes Audit Logs below for more details.
+	AuditLogs []AuditLogsObservation `json:"auditLogs,omitempty" tf:"audit_logs,omitempty"`
 }
 
 type KubernetesParameters struct {
@@ -107,6 +147,10 @@ type KubernetesParameters struct {
 }
 
 type MalwareProtectionObservation struct {
+
+	// Configure whether Malware Protection is enabled as data source for EC2 instances with findings for the detector.
+	// See Scan EC2 instance with findings below for more details.
+	ScanEC2InstanceWithFindings []ScanEC2InstanceWithFindingsObservation `json:"scanEc2InstanceWithFindings,omitempty" tf:"scan_ec2_instance_with_findings,omitempty"`
 }
 
 type MalwareProtectionParameters struct {
@@ -118,6 +162,10 @@ type MalwareProtectionParameters struct {
 }
 
 type S3LogsObservation struct {
+
+	// If true, enables S3 protection.
+	// Defaults to true.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
 }
 
 type S3LogsParameters struct {
@@ -129,6 +177,10 @@ type S3LogsParameters struct {
 }
 
 type ScanEC2InstanceWithFindingsObservation struct {
+
+	// Configure whether scanning EBS volumes is enabled as data source for the detector for instances with findings.
+	// See EBS volumes below for more details.
+	EBSVolumes []EBSVolumesObservation `json:"ebsVolumes,omitempty" tf:"ebs_volumes,omitempty"`
 }
 
 type ScanEC2InstanceWithFindingsParameters struct {

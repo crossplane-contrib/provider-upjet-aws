@@ -14,6 +14,9 @@ import (
 )
 
 type DestinationConfigOnFailureObservation struct {
+
+	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 }
 
 type DestinationConfigOnFailureParameters struct {
@@ -34,6 +37,12 @@ type DestinationConfigOnFailureParameters struct {
 }
 
 type FunctionEventInvokeConfigDestinationConfigObservation struct {
+
+	// Configuration block with destination configuration for failed asynchronous invocations. See below for details.
+	OnFailure []DestinationConfigOnFailureObservation `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+
+	// Configuration block with destination configuration for successful asynchronous invocations. See below for details.
+	OnSuccess []OnSuccessObservation `json:"onSuccess,omitempty" tf:"on_success,omitempty"`
 }
 
 type FunctionEventInvokeConfigDestinationConfigParameters struct {
@@ -49,8 +58,27 @@ type FunctionEventInvokeConfigDestinationConfigParameters struct {
 
 type FunctionEventInvokeConfigObservation struct {
 
+	// Configuration block with destination configuration. See below for details.
+	DestinationConfig []FunctionEventInvokeConfigDestinationConfigObservation `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
+
+	// Name or Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
 	// Fully qualified Lambda Function name or Amazon Resource Name (ARN)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Maximum age of a request that Lambda sends to a function for processing in seconds. Valid values between 60 and 21600.
+	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
+
+	// Maximum number of times to retry when the function returns an error. Valid values between 0 and 2. Defaults to 2.
+	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+
+	// Lambda Function published version, $LATEST, or Lambda Alias name.
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type FunctionEventInvokeConfigParameters struct {
@@ -82,6 +110,9 @@ type FunctionEventInvokeConfigParameters struct {
 }
 
 type OnSuccessObservation struct {
+
+	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 }
 
 type OnSuccessParameters struct {

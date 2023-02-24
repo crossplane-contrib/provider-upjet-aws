@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: bgppeers.directconnect.aws.upbound.io
 spec:
@@ -171,6 +171,15 @@ spec:
                 - bgpAsn
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -347,9 +356,23 @@ spec:
             properties:
               atProvider:
                 properties:
+                  addressFamily:
+                    description: The address family for the BGP peer. ipv4  or ipv6.
+                    type: string
+                  amazonAddress:
+                    description: The IPv4 CIDR address to use to send traffic to Amazon.
+                      Required for IPv4 BGP peers on public virtual interfaces.
+                    type: string
                   awsDevice:
                     description: The Direct Connect endpoint on which the BGP peer
                       terminates.
+                    type: string
+                  bgpAsn:
+                    description: The autonomous system (AS) number for Border Gateway
+                      Protocol (BGP) configuration.
+                    type: number
+                  bgpAuthKey:
+                    description: The authentication key for BGP configuration.
                     type: string
                   bgpPeerId:
                     description: The ID of the BGP peer.
@@ -357,8 +380,21 @@ spec:
                   bgpStatus:
                     description: The Up/Down state of the BGP peer.
                     type: string
+                  customerAddress:
+                    description: The IPv4 CIDR destination address to which Amazon
+                      should send traffic. Required for IPv4 BGP peers on public virtual
+                      interfaces.
+                    type: string
                   id:
                     description: The ID of the BGP peer resource.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  virtualInterfaceId:
+                    description: The ID of the Direct Connect virtual interface on
+                      which to create the BGP peer.
                     type: string
                 type: object
               conditions:
@@ -402,9 +438,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

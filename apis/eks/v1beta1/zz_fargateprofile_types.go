@@ -18,11 +18,30 @@ type FargateProfileObservation struct {
 	// Amazon Resource Name (ARN) of the EKS Fargate Profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
 	// EKS Cluster name and EKS Fargate Profile name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Fargate Profile.
+	PodExecutionRoleArn *string `json:"podExecutionRoleArn,omitempty" tf:"pod_execution_role_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Configuration block(s) for selecting Kubernetes Pods to execute with this EKS Fargate Profile. Detailed below.
+	Selector []SelectorObservation `json:"selector,omitempty" tf:"selector,omitempty"`
+
 	// Status of the EKS Fargate Profile.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// –  Identifiers of private EC2 Subnets to associate with the EKS Fargate Profile. These subnets must have the following resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME is replaced with the name of the EKS Cluster).
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -87,6 +106,12 @@ type FargateProfileParameters struct {
 }
 
 type SelectorObservation struct {
+
+	// Key-value map of Kubernetes labels for selection.
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// Kubernetes namespace for selection.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type SelectorParameters struct {

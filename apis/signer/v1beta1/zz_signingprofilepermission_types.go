@@ -14,7 +14,30 @@ import (
 )
 
 type SigningProfilePermissionObservation struct {
+
+	// An AWS Signer action permitted as part of cross-account permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile, or signer:RevokeSignature.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The AWS principal to be granted a cross-account permission.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// Name of the signing profile to add the cross-account permissions.
+	ProfileName *string `json:"profileName,omitempty" tf:"profile_name,omitempty"`
+
+	// The signing profile version that a permission applies to.
+	ProfileVersion *string `json:"profileVersion,omitempty" tf:"profile_version,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A unique statement identifier.
+	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
+
+	// A statement identifier prefix. Conflicts with statement_id.
+	StatementIDPrefix *string `json:"statementIdPrefix,omitempty" tf:"statement_id_prefix,omitempty"`
 }
 
 type SigningProfilePermissionParameters struct {

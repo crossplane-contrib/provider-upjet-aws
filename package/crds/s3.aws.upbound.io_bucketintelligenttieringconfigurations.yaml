@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: bucketintelligenttieringconfigurations.s3.aws.upbound.io
 spec:
@@ -194,6 +194,15 @@ spec:
                 - region
                 - tiering
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -371,8 +380,56 @@ spec:
             properties:
               atProvider:
                 properties:
+                  bucket:
+                    description: The name of the bucket this intelligent tiering configuration
+                      is associated with.
+                    type: string
+                  filter:
+                    description: A bucket filter. The configuration only includes
+                      objects that meet the filter's criteria (documented below).
+                    items:
+                      properties:
+                        prefix:
+                          description: An object key name prefix that identifies the
+                            subset of objects to which the configuration applies.
+                          type: string
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: Key-value map of resource tags.
+                          type: object
+                      type: object
+                    type: array
                   id:
                     type: string
+                  name:
+                    description: The unique name used to identify the S3 Intelligent-Tiering
+                      configuration for the bucket.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  status:
+                    description: 'Specifies the status of the configuration. Valid
+                      values: Enabled, Disabled.'
+                    type: string
+                  tiering:
+                    description: The S3 Intelligent-Tiering storage class tiers of
+                      the configuration (documented below).
+                    items:
+                      properties:
+                        accessTier:
+                          description: 'S3 Intelligent-Tiering access tier. Valid
+                            values: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.'
+                          type: string
+                        days:
+                          description: The number of consecutive days of no access
+                            after which an object will be eligible to be transitioned
+                            to the corresponding tier.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -415,9 +472,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -17,6 +17,16 @@ type RestAPIPolicyObservation struct {
 
 	// ID of the REST API
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// JSON formatted policy document that controls access to the API Gateway
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ID of the REST API.
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 }
 
 type RestAPIPolicyParameters struct {

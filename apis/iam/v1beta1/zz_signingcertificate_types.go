@@ -15,11 +15,20 @@ import (
 
 type SigningCertificateObservation struct {
 
+	// encoded format.
+	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
+
 	// The ID for the signing certificate.
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 
 	// The certificate_id:user_name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// –   The status you want to assign to the certificate. Active means that the certificate can be used for programmatic calls to Amazon Web Services Inactive means that the certificate cannot be used.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// –  The name of the user the signing certificate is for.
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 type SigningCertificateParameters struct {

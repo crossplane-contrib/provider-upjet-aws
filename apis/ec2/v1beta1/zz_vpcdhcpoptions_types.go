@@ -18,11 +18,33 @@ type VPCDHCPOptionsObservation struct {
 	// The ARN of the DHCP Options Set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// the suffix domain name to use by default when resolving non Fully Qualified Domain Names. In other words, this is what ends up being the search value in the /etc/resolv.conf file.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// List of name servers to configure in /etc/resolv.conf. If you want to use the default AWS nameservers you should set this to AmazonProvidedDNS.
+	DomainNameServers []*string `json:"domainNameServers,omitempty" tf:"domain_name_servers,omitempty"`
+
 	// The ID of the DHCP Options Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// List of NETBIOS name servers.
+	NetbiosNameServers []*string `json:"netbiosNameServers,omitempty" tf:"netbios_name_servers,omitempty"`
+
+	// The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see RFC 2132.
+	NetbiosNodeType *string `json:"netbiosNodeType,omitempty" tf:"netbios_node_type,omitempty"`
+
+	// List of NTP servers to configure.
+	NtpServers []*string `json:"ntpServers,omitempty" tf:"ntp_servers,omitempty"`
+
 	// The ID of the AWS account that owns the DHCP options set.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

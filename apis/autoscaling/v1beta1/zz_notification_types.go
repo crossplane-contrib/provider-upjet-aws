@@ -14,7 +14,22 @@ import (
 )
 
 type NotificationObservation struct {
+
+	// List of AutoScaling Group Names
+	GroupNames []*string `json:"groupNames,omitempty" tf:"group_names,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of Notification Types that trigger
+	// notifications. Acceptable values are documented in the AWS documentation here
+	Notifications []*string `json:"notifications,omitempty" tf:"notifications,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Topic ARN for notifications to be sent through
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
 type NotificationParameters struct {

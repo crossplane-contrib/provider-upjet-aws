@@ -15,11 +15,21 @@ import (
 
 type DeploymentObservation struct {
 
+	// API identifier.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
 	// Whether the deployment was automatically released.
 	AutoDeployed *bool `json:"autoDeployed,omitempty" tf:"auto_deployed,omitempty"`
 
+	// Description for the deployment resource. Must be less than or equal to 1024 characters in length.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Deployment identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DeploymentParameters struct {

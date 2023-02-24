@@ -81,10 +81,45 @@ func (in *DataSetObservation) DeepCopyInto(out *DataSetObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AssetType != nil {
+		in, out := &in.AssetType, &out.AssetType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
 		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.TagsAll != nil {
 		in, out := &in.TagsAll, &out.TagsAll
@@ -264,8 +299,23 @@ func (in *RevisionObservation) DeepCopyInto(out *RevisionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Comment != nil {
+		in, out := &in.Comment, &out.Comment
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataSetID != nil {
+		in, out := &in.DataSetID, &out.DataSetID
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -273,6 +323,21 @@ func (in *RevisionObservation) DeepCopyInto(out *RevisionObservation) {
 		in, out := &in.RevisionID, &out.RevisionID
 		*out = new(string)
 		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.TagsAll != nil {
 		in, out := &in.TagsAll, &out.TagsAll

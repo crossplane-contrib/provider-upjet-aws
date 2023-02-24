@@ -14,6 +14,9 @@ import (
 )
 
 type LoggingConfigurationObservation struct {
+
+	// The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist.
+	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 }
 
 type LoggingConfigurationParameters struct {
@@ -25,14 +28,27 @@ type LoggingConfigurationParameters struct {
 
 type WorkspaceObservation struct {
 
+	// The alias of the prometheus workspace. See more in AWS Docs.
+	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
+
 	// Amazon Resource Name (ARN) of the workspace.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Identifier of the workspace
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Logging configuration for the workspace. See Logging Configuration below for details.
+	LoggingConfiguration []LoggingConfigurationObservation `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
+
 	// Prometheus endpoint available for this workspace.
 	PrometheusEndpoint *string `json:"prometheusEndpoint,omitempty" tf:"prometheus_endpoint,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: findingaggregators.securityhub.aws.upbound.io
 spec:
@@ -85,6 +85,15 @@ spec:
                 - linkingMode
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -263,6 +272,23 @@ spec:
                 properties:
                   id:
                     type: string
+                  linkingMode:
+                    description: Indicates whether to aggregate findings from all
+                      of the available Regions or from a specified list. The options
+                      are ALL_REGIONS, ALL_REGIONS_EXCEPT_SPECIFIED or SPECIFIED_REGIONS.
+                      When ALL_REGIONS or ALL_REGIONS_EXCEPT_SPECIFIED are used, Security
+                      Hub will automatically aggregate findings from new Regions as
+                      Security Hub supports them and you opt into them.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  specifiedRegions:
+                    description: List of regions to include or exclude
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -305,9 +331,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -95,8 +95,18 @@ func (in *ServiceQuotaObservation) DeepCopyInto(out *ServiceQuotaObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.QuotaCode != nil {
+		in, out := &in.QuotaCode, &out.QuotaCode
+		*out = new(string)
+		**out = **in
+	}
 	if in.QuotaName != nil {
 		in, out := &in.QuotaName, &out.QuotaName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -110,9 +120,19 @@ func (in *ServiceQuotaObservation) DeepCopyInto(out *ServiceQuotaObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ServiceCode != nil {
+		in, out := &in.ServiceCode, &out.ServiceCode
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServiceName != nil {
 		in, out := &in.ServiceName, &out.ServiceName
 		*out = new(string)
+		**out = **in
+	}
+	if in.Value != nil {
+		in, out := &in.Value, &out.Value
+		*out = new(float64)
 		**out = **in
 	}
 }

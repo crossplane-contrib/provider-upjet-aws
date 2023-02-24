@@ -15,8 +15,24 @@ import (
 
 type VaultLockObservation struct {
 
+	// Boolean whether to permanently apply this Glacier Lock Policy. Once completed, this cannot be undone. If set to false, the Glacier Lock Policy remains in a testing mode for 24 hours. Changing this from false to true will show as resource recreation, which is expected. Changing this from true to false is not possible unless the Glacier Vault is recreated at the same time.
+	CompleteLock *bool `json:"completeLock,omitempty" tf:"complete_lock,omitempty"`
+
 	// Glacier Vault name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// This should only be used in conjunction with complete_lock being set to true.
+	IgnoreDeletionError *bool `json:"ignoreDeletionError,omitempty" tf:"ignore_deletion_error,omitempty"`
+
+	// JSON string containing the IAM policy to apply as the Glacier Vault Lock policy.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The name of the Glacier Vault.
+	VaultName *string `json:"vaultName,omitempty" tf:"vault_name,omitempty"`
 }
 
 type VaultLockParameters struct {

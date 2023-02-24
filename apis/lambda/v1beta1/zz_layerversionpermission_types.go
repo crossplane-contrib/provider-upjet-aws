@@ -15,14 +15,36 @@ import (
 
 type LayerVersionPermissionObservation struct {
 
+	// Action, which will be allowed. lambda:GetLayerVersion value is suggested by AWS documantation.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
 	// The layer_name and version_number, separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name or ARN of the Lambda Layer, which you want to grant access to.
+	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
+
+	// An identifier of AWS Organization, which should be able to use your Lambda Layer. principal should be equal to * if organization_id provided.
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
 	// Full Lambda Layer Permission policy.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// AWS account ID which should be able to use your Lambda Layer. * can be used here, if you want to share your Lambda Layer widely.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// A unique identifier for the current revision of the policy.
 	RevisionID *string `json:"revisionId,omitempty" tf:"revision_id,omitempty"`
+
+	// The name of Lambda Layer Permission, for example dev-account - human readable note about what is this permission for.
+	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
+
+	// Version of Lambda Layer, which you want to grant access to. Note: permissions only apply to a single version of a layer.
+	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
 }
 
 type LayerVersionPermissionParameters struct {

@@ -15,8 +15,28 @@ import (
 
 type BucketObjectLockConfigurationObservation struct {
 
+	// The name of the bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
 	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Indicates whether this bucket has an Object Lock configuration enabled. Defaults to Enabled. Valid values: Enabled.
+	ObjectLockEnabled *string `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Configuration block for specifying the Object Lock rule for the specified object detailed below.
+	Rule []BucketObjectLockConfigurationRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// A token to allow Object Lock to be enabled for an existing bucket. You must contact AWS support for the bucket's "Object Lock token".
+	// The token is generated in the back-end when versioning is enabled on a bucket. For more details on versioning, see the aws_s3_bucket_versioning resource.
+	TokenSecretRef *v1.SecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }
 
 type BucketObjectLockConfigurationParameters struct {
@@ -58,6 +78,9 @@ type BucketObjectLockConfigurationParameters struct {
 }
 
 type BucketObjectLockConfigurationRuleObservation struct {
+
+	// A configuration block for specifying the default Object Lock retention settings for new objects placed in the specified bucket detailed below.
+	DefaultRetention []RuleDefaultRetentionObservation `json:"defaultRetention,omitempty" tf:"default_retention,omitempty"`
 }
 
 type BucketObjectLockConfigurationRuleParameters struct {
@@ -68,6 +91,15 @@ type BucketObjectLockConfigurationRuleParameters struct {
 }
 
 type RuleDefaultRetentionObservation struct {
+
+	// The number of days that you want to specify for the default retention period.
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values: COMPLIANCE, GOVERNANCE.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The number of years that you want to specify for the default retention period.
+	Years *float64 `json:"years,omitempty" tf:"years,omitempty"`
 }
 
 type RuleDefaultRetentionParameters struct {

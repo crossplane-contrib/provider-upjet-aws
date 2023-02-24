@@ -14,7 +14,27 @@ import (
 )
 
 type UserGroupObservation struct {
+
+	// The description of the user group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the user group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The precedence of the user group.
+	Precedence *float64 `json:"precedence,omitempty" tf:"precedence,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ARN of the IAM role to be associated with the user group.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The user pool ID.
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 }
 
 type UserGroupParameters struct {

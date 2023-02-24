@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: trafficpolicyinstances.route53.aws.upbound.io
 spec:
@@ -242,6 +242,15 @@ spec:
                 - trafficPolicyVersion
                 - ttl
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -419,9 +428,35 @@ spec:
             properties:
               atProvider:
                 properties:
+                  hostedZoneId:
+                    description: ID of the hosted zone that you want Amazon Route
+                      53 to create resource record sets in by using the configuration
+                      in a traffic policy.
+                    type: string
                   id:
                     description: ID of traffic policy instance.
                     type: string
+                  name:
+                    description: Domain name for which Amazon Route 53 responds to
+                      DNS queries by using the resource record sets that Route 53
+                      creates for this traffic policy instance.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  trafficPolicyId:
+                    description: ID of the traffic policy that you want to use to
+                      create resource record sets in the specified hosted zone.
+                    type: string
+                  trafficPolicyVersion:
+                    description: Version of the traffic policy
+                    type: number
+                  ttl:
+                    description: TTL that you want Amazon Route 53 to assign to all
+                      the resource record sets that it creates in the specified hosted
+                      zone.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -464,9 +499,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

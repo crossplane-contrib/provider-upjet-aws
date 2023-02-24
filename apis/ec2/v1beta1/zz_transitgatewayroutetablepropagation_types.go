@@ -18,11 +18,21 @@ type TransitGatewayRouteTablePropagationObservation struct {
 	// EC2 Transit Gateway Route Table identifier combined with EC2 Transit Gateway Attachment identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Identifier of the resource
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// Type of the resource
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// Identifier of EC2 Transit Gateway Attachment.
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
+
+	// Identifier of EC2 Transit Gateway Route Table.
+	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 }
 
 type TransitGatewayRouteTablePropagationParameters struct {

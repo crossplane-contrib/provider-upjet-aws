@@ -60,12 +60,21 @@ type AMICopyObservation struct {
 
 	BootMode *string `json:"bootMode,omitempty" tf:"boot_mode,omitempty"`
 
-	// +kubebuilder:validation:Optional
+	DeprecationTime *string `json:"deprecationTime,omitempty" tf:"deprecation_time,omitempty"`
+
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// ARN of the Outpost to which to copy the AMI.
+	// Only specify this parameter when copying an AMI from an AWS Region to an Outpost. The AMI must be in the Region of the destination Outpost.
+	DestinationOutpostArn *string `json:"destinationOutpostArn,omitempty" tf:"destination_outpost_arn,omitempty"`
+
 	EBSBlockDevice []AMICopyEBSBlockDeviceObservation `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
 
 	EnaSupport *bool `json:"enaSupport,omitempty" tf:"ena_support,omitempty"`
 
-	// +kubebuilder:validation:Optional
+	// Whether the destination snapshots of the copied image should be encrypted. Defaults to false
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
 	EphemeralBlockDevice []AMICopyEphemeralBlockDeviceObservation `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
 	Hypervisor *string `json:"hypervisor,omitempty" tf:"hypervisor,omitempty"`
@@ -81,10 +90,16 @@ type AMICopyObservation struct {
 
 	ImdsSupport *string `json:"imdsSupport,omitempty" tf:"imds_support,omitempty"`
 
+	// Full ARN of the KMS Key to use when encrypting the snapshots of an image during a copy operation. If not specified, then the default AWS KMS Key will be used
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
 	// ID of the created AMI.
 	KernelID *string `json:"kernelId,omitempty" tf:"kernel_id,omitempty"`
 
 	ManageEBSSnapshots *bool `json:"manageEbsSnapshots,omitempty" tf:"manage_ebs_snapshots,omitempty"`
+
+	// Region-unique name for the AMI.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// ID of the created AMI.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
@@ -98,13 +113,28 @@ type AMICopyObservation struct {
 	// ID of the created AMI.
 	RamdiskID *string `json:"ramdiskId,omitempty" tf:"ramdisk_id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Region-unique name for the AMI.
 	RootDeviceName *string `json:"rootDeviceName,omitempty" tf:"root_device_name,omitempty"`
 
 	// ID of the created AMI.
 	RootSnapshotID *string `json:"rootSnapshotId,omitempty" tf:"root_snapshot_id,omitempty"`
 
+	// Id of the AMI to copy. This id must be valid in the region
+	// given by source_ami_region.
+	SourceAMIID *string `json:"sourceAmiId,omitempty" tf:"source_ami_id,omitempty"`
+
+	// Region from which the AMI will be copied. This may be the
+	// same as the AWS provider region in order to create a copy within the same region.
+	SourceAMIRegion *string `json:"sourceAmiRegion,omitempty" tf:"source_ami_region,omitempty"`
+
 	SriovNetSupport *string `json:"sriovNetSupport,omitempty" tf:"sriov_net_support,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: users.elasticache.aws.upbound.io
 spec:
@@ -117,6 +117,15 @@ spec:
                 - region
                 - userName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -293,12 +302,59 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accessString:
+                    description: Access permissions string used for this user. See
+                      Specifying Permissions Using an Access String for more details.
+                    type: string
+                  arn:
+                    description: The ARN of the created ElastiCache User.
+                    type: string
+                  engine:
+                    description: The current supported value is REDIS.
+                    type: string
                   id:
                     type: string
+                  noPasswordRequired:
+                    description: Indicates a password is not required for this user.
+                    type: boolean
+                  passwordsSecretRef:
+                    description: Passwords used for this user. You can create up to
+                      two passwords for each user.
+                    items:
+                      description: A SecretKeySelector is a reference to a secret
+                        key in an arbitrary namespace.
+                      properties:
+                        key:
+                          description: The key to select.
+                          type: string
+                        name:
+                          description: Name of the secret.
+                          type: string
+                        namespace:
+                          description: Namespace of the secret.
+                          type: string
+                      required:
+                      - key
+                      - name
+                      - namespace
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                  userName:
+                    description: The username of the user.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -341,9 +397,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

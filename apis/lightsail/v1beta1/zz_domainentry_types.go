@@ -15,8 +15,24 @@ import (
 
 type DomainEntryObservation struct {
 
+	// The name of the Lightsail domain in which to create the entry
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
 	// A combination of attributes to create a unique id: name_domain_name_type_target
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// If the entry should be an alias Defaults to false
+	IsAlias *bool `json:"isAlias,omitempty" tf:"is_alias,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Target of the domain entry
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// Type of record
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DomainEntryParameters struct {

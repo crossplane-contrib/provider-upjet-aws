@@ -21,8 +21,33 @@ type ContactFlowModuleObservation struct {
 	// The identifier of the Contact Flow Module.
 	ContactFlowModuleID *string `json:"contactFlowModuleId,omitempty" tf:"contact_flow_module_id,omitempty"`
 
+	// Specifies the content of the Contact Flow Module, provided as a JSON string, written in Amazon Connect Contact Flow Language. If defined, the filename argument cannot be used.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the Contact Flow Module source specified with filename. The usual way to set this is filebase64sha256("contact_flow_module.11.12 and later) or base64sha256(file("contact_flow_module.11.11 and earlier), where "contact_flow_module.json" is the local filename of the Contact Flow Module source.
+	ContentHash *string `json:"contentHash,omitempty" tf:"content_hash,omitempty"`
+
+	// Specifies the description of the Contact Flow Module.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The path to the Contact Flow Module source within the local filesystem. Conflicts with content.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
 	// The identifier of the hosting Amazon Connect Instance and identifier of the Contact Flow Module separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Specifies the name of the Contact Flow Module.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

@@ -18,8 +18,24 @@ type PortfolioObservation struct {
 
 	CreatedTime *string `json:"createdTime,omitempty" tf:"created_time,omitempty"`
 
+	// Description of the portfolio
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Service Catalog Portfolio.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the portfolio.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Name of the person or organization who owns the portfolio.
+	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

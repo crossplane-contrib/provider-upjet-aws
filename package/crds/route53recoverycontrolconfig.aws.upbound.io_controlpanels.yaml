@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: controlpanels.route53recoverycontrolconfig.aws.upbound.io
 spec:
@@ -154,6 +154,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -333,10 +342,21 @@ spec:
                   arn:
                     description: ARN of the control panel.
                     type: string
+                  clusterArn:
+                    description: ARN of the cluster in which this control panel will
+                      reside.
+                    type: string
                   defaultControlPanel:
                     description: Whether a control panel is default.
                     type: boolean
                   id:
+                    type: string
+                  name:
+                    description: Name describing the control panel.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   routingControlCount:
                     description: Number routing controls in a control panel.
@@ -388,9 +408,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

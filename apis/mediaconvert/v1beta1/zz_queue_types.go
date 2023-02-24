@@ -18,8 +18,27 @@ type QueueObservation struct {
 	// The Arn of the queue
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A description of the queue
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The same as name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies whether the pricing plan for the queue is on-demand or reserved. Valid values are ON_DEMAND or RESERVED. Default to ON_DEMAND.
+	PricingPlan *string `json:"pricingPlan,omitempty" tf:"pricing_plan,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A detail pricing plan of the  reserved queue. See below.
+	ReservationPlanSettings []ReservationPlanSettingsObservation `json:"reservationPlanSettings,omitempty" tf:"reservation_plan_settings,omitempty"`
+
+	// A status of the queue. Valid values are ACTIVE or RESERVED. Default to PAUSED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -54,6 +73,15 @@ type QueueParameters struct {
 }
 
 type ReservationPlanSettingsObservation struct {
+
+	// The length of the term of your reserved queue pricing plan commitment. Valid value is ONE_YEAR.
+	Commitment *string `json:"commitment,omitempty" tf:"commitment,omitempty"`
+
+	// Specifies whether the term of your reserved queue pricing plan. Valid values are AUTO_RENEW or EXPIRE.
+	RenewalType *string `json:"renewalType,omitempty" tf:"renewal_type,omitempty"`
+
+	// Specifies the number of reserved transcode slots (RTS) for queue.
+	ReservedSlots *float64 `json:"reservedSlots,omitempty" tf:"reserved_slots,omitempty"`
 }
 
 type ReservationPlanSettingsParameters struct {

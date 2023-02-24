@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: accounts.macie2.aws.upbound.io
 spec:
@@ -83,6 +83,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -263,13 +272,29 @@ spec:
                     description: The date and time, in UTC and extended RFC 3339 format,
                       when the Amazon Macie account was created.
                     type: string
+                  findingPublishingFrequency:
+                    description: Specifies how often to publish updates to policy
+                      findings for the account. This includes publishing updates to
+                      AWS Security Hub and Amazon EventBridge (formerly called Amazon
+                      CloudWatch Events). Valid values are FIFTEEN_MINUTES, ONE_HOUR
+                      or SIX_HOURS.
+                    type: string
                   id:
                     description: The unique identifier (ID) of the macie account.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   serviceRole:
                     description: The Amazon Resource Name (ARN) of the service-linked
                       role that allows Macie to monitor and analyze data in AWS resources
                       for the account.
+                    type: string
+                  status:
+                    description: Specifies the status for the account. To enable Amazon
+                      Macie and start all Macie activities for the account, set this
+                      value to ENABLED. Valid values are ENABLED or PAUSED.
                     type: string
                   updatedAt:
                     description: The date and time, in UTC and extended RFC 3339 format,
@@ -317,9 +342,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

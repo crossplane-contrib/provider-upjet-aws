@@ -15,8 +15,21 @@ import (
 
 type SecretPolicyObservation struct {
 
+	// Makes an optional API call to Zelkova to validate the Resource Policy to prevent broad access to your secret.
+	BlockPublicPolicy *bool `json:"blockPublicPolicy,omitempty" tf:"block_public_policy,omitempty"`
+
 	// Amazon Resource Name (ARN) of the secret.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Valid JSON document representing a resource policy. Unlike aws_secretsmanager_secret, where policy can be set to "{}" to delete the policy, "{}" is not a valid policy since policy is required.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Secret ARN.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type SecretPolicyParameters struct {

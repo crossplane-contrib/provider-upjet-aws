@@ -14,6 +14,9 @@ import (
 )
 
 type StreamModeDetailsObservation struct {
+
+	// Specifies the capacity mode of the stream. Must be either PROVISIONED or ON_DEMAND.
+	StreamMode *string `json:"streamMode,omitempty" tf:"stream_mode,omitempty"`
 }
 
 type StreamModeDetailsParameters struct {
@@ -28,8 +31,37 @@ type StreamObservation struct {
 	// The Amazon Resource Name (ARN) specifying the Stream (same as id)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The encryption type to use. The only acceptable values are NONE or KMS. The default value is NONE.
+	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+
+	// A boolean that indicates all registered consumers should be deregistered from the stream so that the stream can be destroyed without error. The default value is false.
+	EnforceConsumerDeletion *bool `json:"enforceConsumerDeletion,omitempty" tf:"enforce_consumer_deletion,omitempty"`
+
 	// The unique Stream id
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The GUID for the customer-managed KMS key to use for encryption. You can also use a Kinesis-owned master key by specifying the alias alias/aws/kinesis.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Length of time data records are accessible after they are added to the stream. The maximum value of a stream's retention period is 8760 hours. Minimum value is 24. Default is 24.
+	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+
+	// –  The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
+	// Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
+	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
+
+	// A list of shard-level CloudWatch metrics which can be enabled for the stream. See Monitoring with CloudWatch for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable.
+	ShardLevelMetrics []*string `json:"shardLevelMetrics,omitempty" tf:"shard_level_metrics,omitempty"`
+
+	// Indicates the capacity mode of the data stream. Detailed below.
+	StreamModeDetails []StreamModeDetailsObservation `json:"streamModeDetails,omitempty" tf:"stream_mode_details,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

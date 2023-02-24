@@ -14,7 +14,32 @@ import (
 )
 
 type MethodResponseObservation struct {
+
+	// HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
+	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// API resource ID
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Map of the API models used for the response's content type
+	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
+
+	// Map of response parameters that can be sent to the caller.
+	// For example: response_parameters = { "method.response.header.X-Some-Header" = true }
+	// would define that the header X-Some-Header can be provided on the response.
+	ResponseParameters map[string]*bool `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
+
+	// ID of the associated REST API
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// HTTP status code
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type MethodResponseParameters struct {

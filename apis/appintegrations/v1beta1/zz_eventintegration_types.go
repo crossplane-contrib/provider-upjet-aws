@@ -14,6 +14,9 @@ import (
 )
 
 type EventFilterObservation struct {
+
+	// Source of the events.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type EventFilterParameters struct {
@@ -28,8 +31,24 @@ type EventIntegrationObservation struct {
 	// ARN of the Event Integration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the Event Integration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Block that defines the configuration information for the event filter. The Event Filter block is documented below.
+	EventFilter []EventFilterObservation `json:"eventFilter,omitempty" tf:"event_filter,omitempty"`
+
+	// EventBridge bus.
+	EventbridgeBus *string `json:"eventbridgeBus,omitempty" tf:"eventbridge_bus,omitempty"`
+
 	// Identifier of the Event Integration which is the name of the Event Integration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

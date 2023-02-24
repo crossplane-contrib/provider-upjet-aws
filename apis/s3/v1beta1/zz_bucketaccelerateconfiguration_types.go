@@ -15,8 +15,21 @@ import (
 
 type BucketAccelerateConfigurationObservation struct {
 
+	// The name of the bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
 	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The transfer acceleration state of the bucket. Valid values: Enabled, Suspended.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type BucketAccelerateConfigurationParameters struct {

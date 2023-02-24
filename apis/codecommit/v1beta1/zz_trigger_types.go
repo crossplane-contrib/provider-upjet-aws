@@ -19,6 +19,15 @@ type TriggerObservation struct {
 	ConfigurationID *string `json:"configurationId,omitempty" tf:"configuration_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The name for the repository. This needs to be less than 100 characters.
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+
+	Trigger []TriggerTriggerObservation `json:"trigger,omitempty" tf:"trigger,omitempty"`
 }
 
 type TriggerParameters struct {
@@ -46,6 +55,21 @@ type TriggerParameters struct {
 }
 
 type TriggerTriggerObservation struct {
+
+	// The branches that will be included in the trigger configuration. If no branches are specified, the trigger will apply to all branches.
+	Branches []*string `json:"branches,omitempty" tf:"branches,omitempty"`
+
+	// Any custom data associated with the trigger that will be included in the information sent to the target of the trigger.
+	CustomData *string `json:"customData,omitempty" tf:"custom_data,omitempty"`
+
+	// The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon Simple Notification Service (SNS).
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). If no events are specified, the trigger will run for all repository events. Event types include: all, updateReference, createReference, deleteReference.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// The name of the trigger.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type TriggerTriggerParameters struct {

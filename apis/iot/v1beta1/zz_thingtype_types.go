@@ -18,7 +18,23 @@ type ThingTypeObservation struct {
 	// The ARN of the created AWS IoT Thing Type.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Whether the thing type is deprecated. If true, no new things could be associated with this type.
+	Deprecated *bool `json:"deprecated,omitempty" tf:"deprecated,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the thing type.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// , Configuration block that can contain the following properties of the thing type:
+	Properties []ThingTypePropertiesObservation `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -49,6 +65,12 @@ type ThingTypeParameters struct {
 }
 
 type ThingTypePropertiesObservation struct {
+
+	// The description of the thing type.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A list of searchable thing attribute names.
+	SearchableAttributes []*string `json:"searchableAttributes,omitempty" tf:"searchable_attributes,omitempty"`
 }
 
 type ThingTypePropertiesParameters struct {

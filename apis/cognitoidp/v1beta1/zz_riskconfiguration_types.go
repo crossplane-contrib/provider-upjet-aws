@@ -14,6 +14,12 @@ import (
 )
 
 type AccountTakeoverRiskConfigurationObservation struct {
+
+	// Account takeover risk configuration actions. See details below.
+	Actions []ActionsObservation `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// The notify configuration used to construct email notifications. See details below.
+	NotifyConfiguration []NotifyConfigurationObservation `json:"notifyConfiguration,omitempty" tf:"notify_configuration,omitempty"`
 }
 
 type AccountTakeoverRiskConfigurationParameters struct {
@@ -28,6 +34,15 @@ type AccountTakeoverRiskConfigurationParameters struct {
 }
 
 type ActionsObservation struct {
+
+	// Action to take for a high risk. See action block below.
+	HighAction []HighActionObservation `json:"highAction,omitempty" tf:"high_action,omitempty"`
+
+	// Action to take for a low risk. See action block below.
+	LowAction []LowActionObservation `json:"lowAction,omitempty" tf:"low_action,omitempty"`
+
+	// Action to take for a medium risk. See action block below.
+	MediumAction []MediumActionObservation `json:"mediumAction,omitempty" tf:"medium_action,omitempty"`
 }
 
 type ActionsParameters struct {
@@ -46,6 +61,15 @@ type ActionsParameters struct {
 }
 
 type BlockEmailObservation struct {
+
+	// The email HTML body.
+	HTMLBody *string `json:"htmlBody,omitempty" tf:"html_body,omitempty"`
+
+	// The email subject.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+
+	// The email text body.
+	TextBody *string `json:"textBody,omitempty" tf:"text_body,omitempty"`
 }
 
 type BlockEmailParameters struct {
@@ -64,6 +88,9 @@ type BlockEmailParameters struct {
 }
 
 type CompromisedCredentialsRiskConfigurationActionsObservation struct {
+
+	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
+	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
 }
 
 type CompromisedCredentialsRiskConfigurationActionsParameters struct {
@@ -74,6 +101,12 @@ type CompromisedCredentialsRiskConfigurationActionsParameters struct {
 }
 
 type CompromisedCredentialsRiskConfigurationObservation struct {
+
+	// The compromised credentials risk configuration actions. See details below.
+	Actions []CompromisedCredentialsRiskConfigurationActionsObservation `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// Perform the action for these events. The default is to perform all events if no event filter is specified. Valid values are SIGN_IN, PASSWORD_CHANGE, and SIGN_UP.
+	EventFilter []*string `json:"eventFilter,omitempty" tf:"event_filter,omitempty"`
 }
 
 type CompromisedCredentialsRiskConfigurationParameters struct {
@@ -88,6 +121,12 @@ type CompromisedCredentialsRiskConfigurationParameters struct {
 }
 
 type HighActionObservation struct {
+
+	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
+	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
+
+	// Whether to send a notification.
+	Notify *bool `json:"notify,omitempty" tf:"notify,omitempty"`
 }
 
 type HighActionParameters struct {
@@ -102,6 +141,12 @@ type HighActionParameters struct {
 }
 
 type LowActionObservation struct {
+
+	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
+	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
+
+	// Whether to send a notification.
+	Notify *bool `json:"notify,omitempty" tf:"notify,omitempty"`
 }
 
 type LowActionParameters struct {
@@ -116,6 +161,12 @@ type LowActionParameters struct {
 }
 
 type MediumActionObservation struct {
+
+	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
+	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
+
+	// Whether to send a notification.
+	Notify *bool `json:"notify,omitempty" tf:"notify,omitempty"`
 }
 
 type MediumActionParameters struct {
@@ -130,6 +181,15 @@ type MediumActionParameters struct {
 }
 
 type MfaEmailObservation struct {
+
+	// The email HTML body.
+	HTMLBody *string `json:"htmlBody,omitempty" tf:"html_body,omitempty"`
+
+	// The email subject.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+
+	// The email text body.
+	TextBody *string `json:"textBody,omitempty" tf:"text_body,omitempty"`
 }
 
 type MfaEmailParameters struct {
@@ -148,6 +208,15 @@ type MfaEmailParameters struct {
 }
 
 type NoActionEmailObservation struct {
+
+	// The email HTML body.
+	HTMLBody *string `json:"htmlBody,omitempty" tf:"html_body,omitempty"`
+
+	// The email subject.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+
+	// The email text body.
+	TextBody *string `json:"textBody,omitempty" tf:"text_body,omitempty"`
 }
 
 type NoActionEmailParameters struct {
@@ -166,6 +235,24 @@ type NoActionEmailParameters struct {
 }
 
 type NotifyConfigurationObservation struct {
+
+	// Email template used when a detected risk event is blocked. See notify email type below.
+	BlockEmail []BlockEmailObservation `json:"blockEmail,omitempty" tf:"block_email,omitempty"`
+
+	// The email address that is sending the email. The address must be either individually verified with Amazon Simple Email Service, or from a domain that has been verified with Amazon SES.
+	From *string `json:"from,omitempty" tf:"from,omitempty"`
+
+	// The multi-factor authentication (MFA) email template used when MFA is challenged as part of a detected risk. See notify email type below.
+	MfaEmail []MfaEmailObservation `json:"mfaEmail,omitempty" tf:"mfa_email,omitempty"`
+
+	// The email template used when a detected risk event is allowed. See notify email type below.
+	NoActionEmail []NoActionEmailObservation `json:"noActionEmail,omitempty" tf:"no_action_email,omitempty"`
+
+	// The destination to which the receiver of an email should reply to.
+	ReplyTo *string `json:"replyTo,omitempty" tf:"reply_to,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the identity that is associated with the sending authorization policy. This identity permits Amazon Cognito to send for the email address specified in the From parameter.
+	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 }
 
 type NotifyConfigurationParameters struct {
@@ -197,8 +284,27 @@ type NotifyConfigurationParameters struct {
 
 type RiskConfigurationObservation struct {
 
+	// The account takeover risk configuration. See details below.
+	AccountTakeoverRiskConfiguration []AccountTakeoverRiskConfigurationObservation `json:"accountTakeoverRiskConfiguration,omitempty" tf:"account_takeover_risk_configuration,omitempty"`
+
+	// The app client ID. When the client ID is not provided, the same risk configuration is applied to all the clients in the User Pool.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The compromised credentials risk configuration. See details below.
+	CompromisedCredentialsRiskConfiguration []CompromisedCredentialsRiskConfigurationObservation `json:"compromisedCredentialsRiskConfiguration,omitempty" tf:"compromised_credentials_risk_configuration,omitempty"`
+
 	// The user pool ID. or The user pool ID and Client Id separated by a : if the configuration is client specific.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The configuration to override the risk decision. See details below.
+	RiskExceptionConfiguration []RiskExceptionConfigurationObservation `json:"riskExceptionConfiguration,omitempty" tf:"risk_exception_configuration,omitempty"`
+
+	// The user pool ID.
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 }
 
 type RiskConfigurationParameters struct {
@@ -240,6 +346,12 @@ type RiskConfigurationParameters struct {
 }
 
 type RiskExceptionConfigurationObservation struct {
+
+	// Overrides the risk decision to always block the pre-authentication requests. The IP range is in CIDR notation, a compact representation of an IP address and its routing prefix.
+	BlockedIPRangeList []*string `json:"blockedIpRangeList,omitempty" tf:"blocked_ip_range_list,omitempty"`
+
+	// Risk detection isn't performed on the IP addresses in this range list. The IP range is in CIDR notation.
+	SkippedIPRangeList []*string `json:"skippedIpRangeList,omitempty" tf:"skipped_ip_range_list,omitempty"`
 }
 
 type RiskExceptionConfigurationParameters struct {

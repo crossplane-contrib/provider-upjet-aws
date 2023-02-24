@@ -15,8 +15,24 @@ import (
 
 type ProductPortfolioAssociationObservation struct {
 
+	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
+
 	// Identifier of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Portfolio identifier.
+	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
+
+	// Product identifier.
+	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Identifier of the source portfolio.
+	SourcePortfolioID *string `json:"sourcePortfolioId,omitempty" tf:"source_portfolio_id,omitempty"`
 }
 
 type ProductPortfolioAssociationParameters struct {

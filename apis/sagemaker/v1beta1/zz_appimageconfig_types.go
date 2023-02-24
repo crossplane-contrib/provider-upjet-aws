@@ -21,6 +21,16 @@ type AppImageConfigObservation struct {
 	// The name of the App Image Config.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. See Kernel Gateway Image Config details below.
+	KernelGatewayImageConfig []KernelGatewayImageConfigObservation `json:"kernelGatewayImageConfig,omitempty" tf:"kernel_gateway_image_config,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -42,6 +52,15 @@ type AppImageConfigParameters struct {
 }
 
 type FileSystemConfigObservation struct {
+
+	// The default POSIX group ID (GID). If not specified, defaults to 100. Valid values are 0 and 100.
+	DefaultGID *float64 `json:"defaultGid,omitempty" tf:"default_gid,omitempty"`
+
+	// The default POSIX user ID (UID). If not specified, defaults to 1000. Valid values are 0 and 1000.
+	DefaultUID *float64 `json:"defaultUid,omitempty" tf:"default_uid,omitempty"`
+
+	// The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.
+	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
 type FileSystemConfigParameters struct {
@@ -60,6 +79,12 @@ type FileSystemConfigParameters struct {
 }
 
 type KernelGatewayImageConfigObservation struct {
+
+	// The URL where the Git repository is located. See File System Config details below.
+	FileSystemConfig []FileSystemConfigObservation `json:"fileSystemConfig,omitempty" tf:"file_system_config,omitempty"`
+
+	// The default branch for the Git repository. See Kernel Spec details below.
+	KernelSpec []KernelSpecObservation `json:"kernelSpec,omitempty" tf:"kernel_spec,omitempty"`
 }
 
 type KernelGatewayImageConfigParameters struct {
@@ -74,6 +99,12 @@ type KernelGatewayImageConfigParameters struct {
 }
 
 type KernelSpecObservation struct {
+
+	// The display name of the kernel.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// The name of the kernel.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type KernelSpecParameters struct {

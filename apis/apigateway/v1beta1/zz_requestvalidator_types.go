@@ -17,6 +17,22 @@ type RequestValidatorObservation struct {
 
 	// Unique ID of the request validator
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the request validator
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ID of the associated Rest API
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Boolean whether to validate request body. Defaults to false.
+	ValidateRequestBody *bool `json:"validateRequestBody,omitempty" tf:"validate_request_body,omitempty"`
+
+	// Boolean whether to validate request parameters. Defaults to false.
+	ValidateRequestParameters *bool `json:"validateRequestParameters,omitempty" tf:"validate_request_parameters,omitempty"`
 }
 
 type RequestValidatorParameters struct {

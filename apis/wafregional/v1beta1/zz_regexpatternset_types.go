@@ -17,6 +17,16 @@ type RegexPatternSetObservation struct {
 
 	// The ID of the WAF Regional Regex Pattern Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name or description of the Regex Pattern Set.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of regular expression (regex) patterns that you want AWS WAF to search for, such as B[a@]dB[o0]t.
+	RegexPatternStrings []*string `json:"regexPatternStrings,omitempty" tf:"regex_pattern_strings,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type RegexPatternSetParameters struct {

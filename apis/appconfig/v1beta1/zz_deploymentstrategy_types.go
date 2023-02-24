@@ -18,8 +18,36 @@ type DeploymentStrategyObservation struct {
 	// ARN of the AppConfig Deployment Strategy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Total amount of time for a deployment to last. Minimum value of 0, maximum value of 1440.
+	DeploymentDurationInMinutes *float64 `json:"deploymentDurationInMinutes,omitempty" tf:"deployment_duration_in_minutes,omitempty"`
+
+	// Description of the deployment strategy. Can be at most 1024 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Amount of time AWS AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back. Minimum value of 0, maximum value of 1440.
+	FinalBakeTimeInMinutes *float64 `json:"finalBakeTimeInMinutes,omitempty" tf:"final_bake_time_in_minutes,omitempty"`
+
+	// Percentage of targets to receive a deployed configuration during each interval. Minimum value of 1.0, maximum value of 100.0.
+	GrowthFactor *float64 `json:"growthFactor,omitempty" tf:"growth_factor,omitempty"`
+
+	// Algorithm used to define how percentage grows over time. Valid value: LINEAR and EXPONENTIAL. Defaults to LINEAR.
+	GrowthType *string `json:"growthType,omitempty" tf:"growth_type,omitempty"`
+
 	// AppConfig deployment strategy ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name for the deployment strategy. Must be between 1 and 64 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Where to save the deployment strategy. Valid values: NONE and SSM_DOCUMENT.
+	ReplicateTo *string `json:"replicateTo,omitempty" tf:"replicate_to,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

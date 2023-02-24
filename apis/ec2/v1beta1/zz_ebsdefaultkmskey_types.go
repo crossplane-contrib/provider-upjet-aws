@@ -15,6 +15,13 @@ import (
 
 type EBSDefaultKMSKeyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the EBS volume.
+	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type EBSDefaultKMSKeyParameters struct {

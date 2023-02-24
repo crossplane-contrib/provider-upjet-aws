@@ -17,6 +17,16 @@ type SQLInjectionMatchSetObservation struct {
 
 	// The ID of the WAF SQL Injection Match Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name or description of the SQL Injection Match Set.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The parts of web requests that you want AWS WAF to inspect for malicious SQL code and, if you want AWS WAF to inspect a header, the name of the header.
+	SQLInjectionMatchTuples []SQLInjectionMatchTuplesObservation `json:"sqlInjectionMatchTuples,omitempty" tf:"sql_injection_match_tuples,omitempty"`
 }
 
 type SQLInjectionMatchSetParameters struct {
@@ -36,6 +46,16 @@ type SQLInjectionMatchSetParameters struct {
 }
 
 type SQLInjectionMatchTuplesFieldToMatchObservation struct {
+
+	// When type is HEADER, enter the name of the header that you want to search, e.g., User-Agent or Referer.
+	// If type is any other value, omit this field.
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
+	// The part of the web request that you want AWS WAF to search for a specified string.
+	// e.g., HEADER, METHOD or BODY.
+	// See docs
+	// for all supported values.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SQLInjectionMatchTuplesFieldToMatchParameters struct {
@@ -54,6 +74,16 @@ type SQLInjectionMatchTuplesFieldToMatchParameters struct {
 }
 
 type SQLInjectionMatchTuplesObservation struct {
+
+	// Specifies where in a web request to look for snippets of malicious SQL code.
+	FieldToMatch []SQLInjectionMatchTuplesFieldToMatchObservation `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+
+	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
+	// If you specify a transformation, AWS WAF performs the transformation on field_to_match before inspecting a request for a match.
+	// e.g., CMD_LINE, HTML_ENTITY_DECODE or NONE.
+	// See docs
+	// for all supported values.
+	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
 }
 
 type SQLInjectionMatchTuplesParameters struct {

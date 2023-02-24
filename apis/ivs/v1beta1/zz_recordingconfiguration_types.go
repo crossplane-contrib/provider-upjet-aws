@@ -14,6 +14,9 @@ import (
 )
 
 type DestinationConfigurationObservation struct {
+
+	// S3 destination configuration where recorded videos will be stored.
+	S3 []S3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type DestinationConfigurationParameters struct {
@@ -28,13 +31,32 @@ type RecordingConfigurationObservation struct {
 	// ARN of the Recording Configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Object containing destination configuration for where recorded video will be stored.
+	DestinationConfiguration []DestinationConfigurationObservation `json:"destinationConfiguration,omitempty" tf:"destination_configuration,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Recording Configuration name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together.
+	RecordingReconnectWindowSeconds *float64 `json:"recordingReconnectWindowSeconds,omitempty" tf:"recording_reconnect_window_seconds,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The current state of the Recording Configuration.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Object containing information to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.
+	ThumbnailConfiguration []ThumbnailConfigurationObservation `json:"thumbnailConfiguration,omitempty" tf:"thumbnail_configuration,omitempty"`
 }
 
 type RecordingConfigurationParameters struct {
@@ -66,6 +88,9 @@ type RecordingConfigurationParameters struct {
 }
 
 type S3Observation struct {
+
+	// S3 bucket name where recorded videos will be stored.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 }
 
 type S3Parameters struct {
@@ -76,6 +101,12 @@ type S3Parameters struct {
 }
 
 type ThumbnailConfigurationObservation struct {
+
+	// Thumbnail recording mode. Valid values: DISABLED, INTERVAL.
+	RecordingMode *string `json:"recordingMode,omitempty" tf:"recording_mode,omitempty"`
+
+	// The targeted thumbnail-generation interval in seconds.
+	TargetIntervalSeconds *float64 `json:"targetIntervalSeconds,omitempty" tf:"target_interval_seconds,omitempty"`
 }
 
 type ThumbnailConfigurationParameters struct {

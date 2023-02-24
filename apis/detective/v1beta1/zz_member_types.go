@@ -15,16 +15,35 @@ import (
 
 type MemberObservation struct {
 
+	// AWS account ID for the account.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
 	// AWS account ID for the administrator account.
 	AdministratorID *string `json:"administratorId,omitempty" tf:"administrator_id,omitempty"`
 
+	// If set to true, then the root user of the invited account will not receive an email notification. This notification is in addition to an alert that the root user receives in AWS Personal Health Dashboard. By default, this is set to false.
+	DisableEmailNotification *bool `json:"disableEmailNotification,omitempty" tf:"disable_email_notification,omitempty"`
+
 	DisabledReason *string `json:"disabledReason,omitempty" tf:"disabled_reason,omitempty"`
+
+	// Email address for the account.
+	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
+
+	// ARN of the behavior graph to invite the member accounts to contribute their data to.
+	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`
 
 	// Unique identifier (ID) of the Detective.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Date and time, in UTC and extended RFC 3339 format, when an Amazon Detective membership invitation was last sent to the account.
 	InvitedTime *string `json:"invitedTime,omitempty" tf:"invited_time,omitempty"`
+
+	// A custom message to include in the invitation. Amazon Detective adds this message to the standard content that it sends for an invitation.
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// Current membership status of the member account.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`

@@ -18,14 +18,36 @@ type NotificationRuleObservation struct {
 	// The codestar notification rule ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The level of detail to include in the notifications for this resource. Possible values are BASIC and FULL.
+	DetailType *string `json:"detailType,omitempty" tf:"detail_type,omitempty"`
+
+	// A list of event types associated with this notification rule.
+	// For list of allowed events see here.
+	EventTypeIds []*string `json:"eventTypeIds,omitempty" tf:"event_type_ids,omitempty"`
+
 	// The codestar notification rule ARN.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of notification rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ARN of the resource to associate with the notification rule.
+	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
+
+	// The status of the notification rule. Possible values are ENABLED and DISABLED, default is ENABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration blocks containing notification target information. Can be specified multiple times. At least one target must be specified on creation.
-	// +kubebuilder:validation:Optional
 	Target []TargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 }
 
@@ -78,8 +100,14 @@ type NotificationRuleParameters struct {
 
 type TargetObservation struct {
 
+	// The ARN of notification rule target. For example, a SNS Topic ARN.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
 	// The status of the notification rule. Possible values are ENABLED and DISABLED, default is ENABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The type of the notification target. Default value is SNS.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TargetParameters struct {

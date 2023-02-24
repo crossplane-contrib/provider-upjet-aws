@@ -14,7 +14,18 @@ import (
 )
 
 type DestinationPolicyObservation struct {
+
+	// The policy document. This is a JSON formatted string.
+	AccessPolicy *string `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
+
+	// Specify true if you are updating an existing destination policy to grant permission to an organization ID instead of granting permission to individual AWS accounts.
+	ForceUpdate *bool `json:"forceUpdate,omitempty" tf:"force_update,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DestinationPolicyParameters struct {

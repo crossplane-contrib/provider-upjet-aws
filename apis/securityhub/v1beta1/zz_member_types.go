@@ -15,14 +15,27 @@ import (
 
 type MemberObservation struct {
 
+	// The ID of the member AWS account.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// The email of the member AWS account.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
 	// The ID of the member AWS account (matches account_id).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Boolean whether to invite the account to Security Hub as a member. Defaults to false.
+	Invite *bool `json:"invite,omitempty" tf:"invite,omitempty"`
 
 	// The ID of the master Security Hub AWS account.
 	MasterID *string `json:"masterId,omitempty" tf:"master_id,omitempty"`
 
 	// The status of the member account relationship.
 	MemberStatus *string `json:"memberStatus,omitempty" tf:"member_status,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type MemberParameters struct {

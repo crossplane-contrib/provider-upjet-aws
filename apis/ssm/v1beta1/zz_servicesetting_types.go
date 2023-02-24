@@ -20,6 +20,16 @@ type ServiceSettingObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ID of the service setting.
+	SettingID *string `json:"settingId,omitempty" tf:"setting_id,omitempty"`
+
+	// Value of the service setting.
+	SettingValue *string `json:"settingValue,omitempty" tf:"setting_value,omitempty"`
+
 	// Status of the service setting. Value can be Default, Customized or PendingUpdate.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }

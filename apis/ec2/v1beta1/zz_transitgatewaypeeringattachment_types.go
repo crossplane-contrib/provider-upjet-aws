@@ -18,8 +18,27 @@ type TransitGatewayPeeringAttachmentObservation struct {
 	// EC2 Transit Gateway Attachment identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Account ID of EC2 Transit Gateway to peer with. Defaults to the account ID the AWS provider is currently connected to.
+	PeerAccountID *string `json:"peerAccountId,omitempty" tf:"peer_account_id,omitempty"`
+
+	// Region of EC2 Transit Gateway to peer with.
+	PeerRegion *string `json:"peerRegion,omitempty" tf:"peer_region,omitempty"`
+
+	// Identifier of EC2 Transit Gateway to peer with.
+	PeerTransitGatewayID *string `json:"peerTransitGatewayId,omitempty" tf:"peer_transit_gateway_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Identifier of EC2 Transit Gateway.
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 }
 
 type TransitGatewayPeeringAttachmentParameters struct {

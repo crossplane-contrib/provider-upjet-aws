@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: maintenancewindowtargets.ssm.aws.upbound.io
 spec:
@@ -187,6 +187,15 @@ spec:
                 - resourceType
                 - targets
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -364,8 +373,47 @@ spec:
             properties:
               atProvider:
                 properties:
+                  description:
+                    description: The description of the maintenance window target.
+                    type: string
                   id:
                     description: The ID of the maintenance window target.
+                    type: string
+                  name:
+                    description: The name of the maintenance window target.
+                    type: string
+                  ownerInformation:
+                    description: User-provided value that will be included in any
+                      CloudWatch events raised while running tasks for these targets
+                      in this Maintenance Window.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  resourceType:
+                    description: The type of target being registered with the Maintenance
+                      Window. Possible values are INSTANCE and RESOURCE_GROUP.
+                    type: string
+                  targets:
+                    description: The targets to register with the maintenance window.
+                      In other words, the instances to run commands on when the maintenance
+                      window runs. You can specify targets using instance IDs, resource
+                      group names, or tags that have been applied to instances. For
+                      more information about these examples formats see (https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html)
+                    items:
+                      properties:
+                        key:
+                          type: string
+                        values:
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  windowId:
+                    description: The Id of the maintenance window to register the
+                      target with.
                     type: string
                 type: object
               conditions:
@@ -409,9 +457,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

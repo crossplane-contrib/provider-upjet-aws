@@ -14,7 +14,21 @@ import (
 )
 
 type UserInGroupObservation struct {
+
+	// The name of the group to which the user is to be added.
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The user pool ID of the user and group.
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+
+	// The username of the user to be added to the group.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type UserInGroupParameters struct {

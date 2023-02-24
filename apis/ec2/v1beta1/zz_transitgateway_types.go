@@ -15,14 +15,35 @@ import (
 
 type TransitGatewayObservation_2 struct {
 
+	// Private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. Default value: 64512.
+	AmazonSideAsn *float64 `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
+
 	// EC2 Transit Gateway Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Identifier of the default association route table
 	AssociationDefaultRouteTableID *string `json:"associationDefaultRouteTableId,omitempty" tf:"association_default_route_table_id,omitempty"`
 
+	// Whether resource attachment requests are automatically accepted. Valid values: disable, enable. Default value: disable.
+	AutoAcceptSharedAttachments *string `json:"autoAcceptSharedAttachments,omitempty" tf:"auto_accept_shared_attachments,omitempty"`
+
+	// Whether DNS support is enabled. Valid values: disable, enable. Default value: enable.
+	DNSSupport *string `json:"dnsSupport,omitempty" tf:"dns_support,omitempty"`
+
+	// Whether resource attachments are automatically associated with the default association route table. Valid values: disable, enable. Default value: enable.
+	DefaultRouteTableAssociation *string `json:"defaultRouteTableAssociation,omitempty" tf:"default_route_table_association,omitempty"`
+
+	// Whether resource attachments automatically propagate routes to the default propagation route table. Valid values: disable, enable. Default value: enable.
+	DefaultRouteTablePropagation *string `json:"defaultRouteTablePropagation,omitempty" tf:"default_route_table_propagation,omitempty"`
+
+	// Description of the EC2 Transit Gateway.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// EC2 Transit Gateway identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Whether Multicast support is enabled. Required to use ec2_transit_gateway_multicast_domain. Valid values: disable, enable. Default value: disable.
+	MulticastSupport *string `json:"multicastSupport,omitempty" tf:"multicast_support,omitempty"`
 
 	// Identifier of the AWS account that owns the EC2 Transit Gateway
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
@@ -30,8 +51,21 @@ type TransitGatewayObservation_2 struct {
 	// Identifier of the default propagation route table
 	PropagationDefaultRouteTableID *string `json:"propagationDefaultRouteTableId,omitempty" tf:"propagation_default_route_table_id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// One or more IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.
+	TransitGatewayCidrBlocks []*string `json:"transitGatewayCidrBlocks,omitempty" tf:"transit_gateway_cidr_blocks,omitempty"`
+
+	// Whether VPN Equal Cost Multipath Protocol support is enabled. Valid values: disable, enable. Default value: enable.
+	VPNEcmpSupport *string `json:"vpnEcmpSupport,omitempty" tf:"vpn_ecmp_support,omitempty"`
 }
 
 type TransitGatewayParameters_2 struct {

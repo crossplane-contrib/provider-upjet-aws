@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: virtualservices.appmesh.aws.upbound.io
 spec:
@@ -369,6 +369,15 @@ spec:
                 - region
                 - spec
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -557,9 +566,68 @@ spec:
                   lastUpdatedDate:
                     description: Last update date of the virtual service.
                     type: string
+                  meshName:
+                    description: Name of the service mesh in which to create the virtual
+                      service. Must be between 1 and 255 characters in length.
+                    type: string
+                  meshOwner:
+                    description: AWS account ID of the service mesh's owner. Defaults
+                      to the account ID the AWS provider is currently connected to.
+                    type: string
+                  name:
+                    description: Name to use for the virtual service. Must be between
+                      1 and 255 characters in length.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   resourceOwner:
                     description: Resource owner's AWS account ID.
                     type: string
+                  spec:
+                    description: Virtual service specification to apply.
+                    items:
+                      properties:
+                        provider:
+                          description: App Mesh object that is acting as the provider
+                            for a virtual service. You can specify a single virtual
+                            node or virtual router.
+                          items:
+                            properties:
+                              virtualNode:
+                                description: Virtual node associated with a virtual
+                                  service.
+                                items:
+                                  properties:
+                                    virtualNodeName:
+                                      description: Name of the virtual node that is
+                                        acting as a service provider. Must be between
+                                        1 and 255 characters in length.
+                                      type: string
+                                  type: object
+                                type: array
+                              virtualRouter:
+                                description: Virtual router associated with a virtual
+                                  service.
+                                items:
+                                  properties:
+                                    virtualRouterName:
+                                      description: Name of the virtual router that
+                                        is acting as a service provider. Must be between
+                                        1 and 255 characters in length.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -608,9 +676,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

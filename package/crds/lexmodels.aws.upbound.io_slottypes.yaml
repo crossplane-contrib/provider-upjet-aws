@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: slottypes.lexmodels.aws.upbound.io
 spec:
@@ -112,6 +112,15 @@ spec:
                 - enumerationValue
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -294,14 +303,56 @@ spec:
                       because the resource will add it automatically when updating
                       the slot type.
                     type: string
+                  createVersion:
+                    description: Determines if a new slot type version is created
+                      when the initial resource is created and on each update. Defaults
+                      to false.
+                    type: boolean
                   createdDate:
                     description: The date when the slot type version was created.
                     type: string
+                  description:
+                    description: A description of the slot type. Must be less than
+                      or equal to 200 characters in length.
+                    type: string
+                  enumerationValue:
+                    description: A list of EnumerationValue objects that defines the
+                      values that the slot type can take. Each value can have a list
+                      of synonyms, which are additional values that help train the
+                      machine learning model about the values that it resolves for
+                      a slot. Attributes are documented under enumeration_value.
+                    items:
+                      properties:
+                        synonyms:
+                          description: Additional values related to the slot type
+                            value. Each item must be less than or equal to 140 characters
+                            in length.
+                          items:
+                            type: string
+                          type: array
+                        value:
+                          description: The value of the slot type. Must be less than
+                            or equal to 140 characters in length.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
                   lastUpdatedDate:
                     description: The date when the $LATEST version of this slot type
                       was updated.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  valueSelectionStrategy:
+                    description: Determines the slot resolution strategy that Amazon
+                      Lex uses to return slot type values. ORIGINAL_VALUE returns
+                      the value entered by the user if the user value is similar to
+                      the slot value. TOP_RESOLUTION returns the first value in the
+                      resolution list if there is a resolution list for the slot,
+                      otherwise null is returned. Defaults to ORIGINAL_VALUE.
                     type: string
                   version:
                     description: The version of the slot type.
@@ -348,9 +399,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

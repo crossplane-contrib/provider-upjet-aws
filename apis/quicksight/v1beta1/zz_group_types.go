@@ -18,7 +18,23 @@ type GroupObservation struct {
 	// Amazon Resource Name (ARN) of group
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
+
+	// A description for the group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A name for the group.
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The namespace. Currently, you should set this to default.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type GroupParameters struct {

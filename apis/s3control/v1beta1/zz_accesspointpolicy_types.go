@@ -15,11 +15,21 @@ import (
 
 type AccessPointPolicyObservation struct {
 
+	// The ARN of the access point that you want to associate with the specified policy.
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
 	// Indicates whether this access point currently has a policy that allows public access.
 	HasPublicAccessPolicy *bool `json:"hasPublicAccessPolicy,omitempty" tf:"has_public_access_policy,omitempty"`
 
 	// The AWS account ID and access point name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The policy that you want to apply to the specified access point.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type AccessPointPolicyParameters struct {

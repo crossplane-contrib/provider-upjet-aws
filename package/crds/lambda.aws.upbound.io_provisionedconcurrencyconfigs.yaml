@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: provisionedconcurrencyconfigs.lambda.aws.upbound.io
 spec:
@@ -86,6 +86,15 @@ spec:
                 - qualifier
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -263,9 +272,24 @@ spec:
             properties:
               atProvider:
                 properties:
+                  functionName:
+                    description: Name or Amazon Resource Name (ARN) of the Lambda
+                      Function.
+                    type: string
                   id:
                     description: Lambda Function name and qualifier separated by a
                       colon (:).
+                    type: string
+                  provisionedConcurrentExecutions:
+                    description: Amount of capacity to allocate. Must be greater than
+                      or equal to 1.
+                    type: number
+                  qualifier:
+                    description: Lambda Function version or Lambda Alias name.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -309,9 +333,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

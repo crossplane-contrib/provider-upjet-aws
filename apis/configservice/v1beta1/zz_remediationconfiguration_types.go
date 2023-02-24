@@ -14,6 +14,9 @@ import (
 )
 
 type ExecutionControlsObservation struct {
+
+	// Configuration block for SSM controls. See below.
+	SsmControls []SsmControlsObservation `json:"ssmControls,omitempty" tf:"ssm_controls,omitempty"`
 }
 
 type ExecutionControlsParameters struct {
@@ -24,6 +27,18 @@ type ExecutionControlsParameters struct {
 }
 
 type ParameterObservation struct {
+
+	// Name of the attribute.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value is dynamic and changes at run-time.
+	ResourceValue *string `json:"resourceValue,omitempty" tf:"resource_value,omitempty"`
+
+	// Value is static and does not change at run-time.
+	StaticValue *string `json:"staticValue,omitempty" tf:"static_value,omitempty"`
+
+	// List of static values.
+	StaticValues []*string `json:"staticValues,omitempty" tf:"static_values,omitempty"`
 }
 
 type ParameterParameters struct {
@@ -50,7 +65,38 @@ type RemediationConfigurationObservation struct {
 	// ARN of the Config Remediation Configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Remediation is triggered automatically if true.
+	Automatic *bool `json:"automatic,omitempty" tf:"automatic,omitempty"`
+
+	// Configuration block for execution controls. See below.
+	ExecutionControls []ExecutionControlsObservation `json:"executionControls,omitempty" tf:"execution_controls,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5.
+	MaximumAutomaticAttempts *float64 `json:"maximumAutomaticAttempts,omitempty" tf:"maximum_automatic_attempts,omitempty"`
+
+	// Can be specified multiple times for each parameter. Each parameter block supports arguments below.
+	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Type of resource.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds.
+	RetryAttemptSeconds *float64 `json:"retryAttemptSeconds,omitempty" tf:"retry_attempt_seconds,omitempty"`
+
+	// Target ID is the name of the public document.
+	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
+
+	// Type of the target. Target executes remediation. For example, SSM document.
+	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
+
+	// Version of the target. For example, version of the SSM document
+	TargetVersion *string `json:"targetVersion,omitempty" tf:"target_version,omitempty"`
 }
 
 type RemediationConfigurationParameters struct {
@@ -98,6 +144,12 @@ type RemediationConfigurationParameters struct {
 }
 
 type SsmControlsObservation struct {
+
+	// Maximum percentage of remediation actions allowed to run in parallel on the non-compliant resources for that specific rule. The default value is 10%.
+	ConcurrentExecutionRatePercentage *float64 `json:"concurrentExecutionRatePercentage,omitempty" tf:"concurrent_execution_rate_percentage,omitempty"`
+
+	// Percentage of errors that are allowed before SSM stops running automations on non-compliant resources for that specific rule. The default is 50%.
+	ErrorPercentage *float64 `json:"errorPercentage,omitempty" tf:"error_percentage,omitempty"`
 }
 
 type SsmControlsParameters struct {

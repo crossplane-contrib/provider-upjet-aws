@@ -14,6 +14,7 @@ import (
 )
 
 type CookiesConfigCookiesObservation struct {
+	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type CookiesConfigCookiesParameters struct {
@@ -23,6 +24,7 @@ type CookiesConfigCookiesParameters struct {
 }
 
 type HeadersConfigHeadersObservation struct {
+	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type HeadersConfigHeadersParameters struct {
@@ -32,6 +34,9 @@ type HeadersConfigHeadersParameters struct {
 }
 
 type OriginRequestPolicyCookiesConfigObservation struct {
+	CookieBehavior *string `json:"cookieBehavior,omitempty" tf:"cookie_behavior,omitempty"`
+
+	Cookies []CookiesConfigCookiesObservation `json:"cookies,omitempty" tf:"cookies,omitempty"`
 }
 
 type OriginRequestPolicyCookiesConfigParameters struct {
@@ -44,6 +49,9 @@ type OriginRequestPolicyCookiesConfigParameters struct {
 }
 
 type OriginRequestPolicyHeadersConfigObservation struct {
+	HeaderBehavior *string `json:"headerBehavior,omitempty" tf:"header_behavior,omitempty"`
+
+	Headers []HeadersConfigHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 }
 
 type OriginRequestPolicyHeadersConfigParameters struct {
@@ -57,11 +65,27 @@ type OriginRequestPolicyHeadersConfigParameters struct {
 
 type OriginRequestPolicyObservation struct {
 
+	// Comment to describe the origin request policy.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// Object that determines whether any cookies in viewer requests (and if so, which cookies) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Cookies Config for more information.
+	CookiesConfig []OriginRequestPolicyCookiesConfigObservation `json:"cookiesConfig,omitempty" tf:"cookies_config,omitempty"`
+
 	// The current version of the origin request policy.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
+	// Object that determines whether any HTTP headers (and if so, which headers) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Headers Config for more information.
+	HeadersConfig []OriginRequestPolicyHeadersConfigObservation `json:"headersConfig,omitempty" tf:"headers_config,omitempty"`
+
 	// The identifier for the origin request policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Object that determines whether any URL query strings in viewer requests (and if so, which query strings) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Query String Config for more information.
+	QueryStringsConfig []OriginRequestPolicyQueryStringsConfigObservation `json:"queryStringsConfig,omitempty" tf:"query_strings_config,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type OriginRequestPolicyParameters struct {
@@ -89,6 +113,9 @@ type OriginRequestPolicyParameters struct {
 }
 
 type OriginRequestPolicyQueryStringsConfigObservation struct {
+	QueryStringBehavior *string `json:"queryStringBehavior,omitempty" tf:"query_string_behavior,omitempty"`
+
+	QueryStrings []QueryStringsConfigQueryStringsObservation `json:"queryStrings,omitempty" tf:"query_strings,omitempty"`
 }
 
 type OriginRequestPolicyQueryStringsConfigParameters struct {
@@ -101,6 +128,7 @@ type OriginRequestPolicyQueryStringsConfigParameters struct {
 }
 
 type QueryStringsConfigQueryStringsObservation struct {
+	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type QueryStringsConfigQueryStringsParameters struct {

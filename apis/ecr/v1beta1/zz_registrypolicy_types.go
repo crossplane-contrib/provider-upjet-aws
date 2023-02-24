@@ -16,6 +16,13 @@ import (
 type RegistryPolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The policy document. This is a JSON formatted string
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// The registry ID where the registry was created.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 }

@@ -15,8 +15,30 @@ import (
 
 type IntegrationResponseObservation struct {
 
+	// API identifier.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// How to handle response payload content type conversions. Valid values: CONVERT_TO_BINARY, CONVERT_TO_TEXT.
+	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
+
 	// Integration response identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Identifier of the aws_apigatewayv2_integration.
+	IntegrationID *string `json:"integrationId,omitempty" tf:"integration_id,omitempty"`
+
+	// Integration response key.
+	IntegrationResponseKey *string `json:"integrationResponseKey,omitempty" tf:"integration_response_key,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client.
+	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
+
+	// The template selection expression for the integration response.
+	TemplateSelectionExpression *string `json:"templateSelectionExpression,omitempty" tf:"template_selection_expression,omitempty"`
 }
 
 type IntegrationResponseParameters struct {

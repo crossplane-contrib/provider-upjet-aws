@@ -14,6 +14,12 @@ import (
 )
 
 type AwsLambdaObservation struct {
+
+	// The Amazon Resource Name (ARN) of the AWS Lambda function.
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+
+	// Additional JSON that provides supplemental data to the Lambda function used to transform objects.
+	FunctionPayload *string `json:"functionPayload,omitempty" tf:"function_payload,omitempty"`
 }
 
 type AwsLambdaParameters struct {
@@ -38,6 +44,18 @@ type AwsLambdaParameters struct {
 }
 
 type ConfigurationObservation struct {
+
+	// Allowed features. Valid values: GetObject-Range, GetObject-PartNumber.
+	AllowedFeatures []*string `json:"allowedFeatures,omitempty" tf:"allowed_features,omitempty"`
+
+	// Whether or not the CloudWatch metrics configuration is enabled.
+	CloudWatchMetricsEnabled *bool `json:"cloudWatchMetricsEnabled,omitempty" tf:"cloud_watch_metrics_enabled,omitempty"`
+
+	// Standard access point associated with the Object Lambda Access Point.
+	SupportingAccessPoint *string `json:"supportingAccessPoint,omitempty" tf:"supporting_access_point,omitempty"`
+
+	// List of transformation configurations for the Object Lambda Access Point. See Transformation Configuration below for more details.
+	TransformationConfiguration []TransformationConfigurationObservation `json:"transformationConfiguration,omitempty" tf:"transformation_configuration,omitempty"`
 }
 
 type ConfigurationParameters struct {
@@ -70,6 +88,9 @@ type ConfigurationParameters struct {
 }
 
 type ContentTransformationObservation struct {
+
+	// Configuration for an AWS Lambda function. See AWS Lambda below for more details.
+	AwsLambda []AwsLambdaObservation `json:"awsLambda,omitempty" tf:"aws_lambda,omitempty"`
 }
 
 type ContentTransformationParameters struct {
@@ -81,11 +102,24 @@ type ContentTransformationParameters struct {
 
 type ObjectLambdaAccessPointObservation struct {
 
+	// The AWS account ID for the owner of the bucket for which you want to create an Object Lambda Access Point.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
 	// Amazon Resource Name (ARN) of the Object Lambda Access Point.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A configuration block containing details about the Object Lambda Access Point. See Configuration below for more details.
+	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
 	// The AWS account ID and access point name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name for this Object Lambda Access Point.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ObjectLambdaAccessPointParameters struct {
@@ -109,6 +143,12 @@ type ObjectLambdaAccessPointParameters struct {
 }
 
 type TransformationConfigurationObservation struct {
+
+	// The actions of an Object Lambda Access Point configuration. Valid values: GetObject.
+	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// The content transformation of an Object Lambda Access Point configuration. See Content Transformation below for more details.
+	ContentTransformation []ContentTransformationObservation `json:"contentTransformation,omitempty" tf:"content_transformation,omitempty"`
 }
 
 type TransformationConfigurationParameters struct {

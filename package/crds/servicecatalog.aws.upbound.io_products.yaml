@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: products.servicecatalog.aws.upbound.io
 spec:
@@ -145,6 +145,15 @@ spec:
                 - region
                 - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -321,11 +330,21 @@ spec:
             properties:
               atProvider:
                 properties:
+                  acceptLanguage:
+                    description: 'Language code. Valid values: en (English), jp (Japanese),
+                      zh (Chinese). Default value is en.'
+                    type: string
                   arn:
                     description: ARN of the product.
                     type: string
                   createdTime:
                     description: Time when the product was created.
+                    type: string
+                  description:
+                    description: Description of the product.
+                    type: string
+                  distributor:
+                    description: Distributor (i.e., vendor) of the product.
                     type: string
                   hasDefaultPath:
                     description: Whether the product has a default path. If the product
@@ -337,9 +356,69 @@ spec:
                   id:
                     description: Product ID. For example, prod-dnigbtea24ste.
                     type: string
+                  name:
+                    description: Name of the product.
+                    type: string
+                  owner:
+                    description: Owner of the product.
+                    type: string
+                  provisioningArtifactParameters:
+                    description: Configuration block for provisioning artifact (i.e.,
+                      version) parameters. Detailed below.
+                    items:
+                      properties:
+                        description:
+                          description: Description of the provisioning artifact (i.e.,
+                            version), including how it differs from the previous provisioning
+                            artifact.
+                          type: string
+                        disableTemplateValidation:
+                          description: Whether AWS Service Catalog stops validating
+                            the specified provisioning artifact template even if it
+                            is invalid.
+                          type: boolean
+                        name:
+                          description: Name of the provisioning artifact (for example,
+                            v1, v2beta). No spaces are allowed.
+                          type: string
+                        templatePhysicalId:
+                          description: Template source as the physical ID of the resource
+                            that contains the template. Currently only supports CloudFormation
+                            stack ARN. Specify the physical ID as arn:[partition]:cloudformation:[region]:[account
+                            ID]:stack/[stack name]/[resource ID].
+                          type: string
+                        templateUrl:
+                          description: Template source as URL of the CloudFormation
+                            template in Amazon S3.
+                          type: string
+                        type:
+                          description: 'Type of provisioning artifact. Valid values:
+                            CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
+                            (Marketplace Clusters and AWS Resources).'
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   status:
                     description: Status of the product.
                     type: string
+                  supportDescription:
+                    description: Support information about the product.
+                    type: string
+                  supportEmail:
+                    description: Contact email for product support.
+                    type: string
+                  supportUrl:
+                    description: Contact URL for product support.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -347,6 +426,10 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  type:
+                    description: Type of product. Valid values are CLOUD_FORMATION_TEMPLATE,
+                      MARKETPLACE.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -389,9 +472,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

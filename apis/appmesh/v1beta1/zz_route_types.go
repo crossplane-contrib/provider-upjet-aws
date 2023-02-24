@@ -14,6 +14,15 @@ import (
 )
 
 type ActionWeightedTargetObservation struct {
+
+	// The port number to match from the request.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
+	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
+
+	// Relative weight of the weighted target. An integer between 0 and 100.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type ActionWeightedTargetParameters struct {
@@ -32,6 +41,10 @@ type ActionWeightedTargetParameters struct {
 }
 
 type GRPCRouteActionObservation struct {
+
+	// Targets that traffic is routed to when a request matches the route.
+	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	WeightedTarget []WeightedTargetObservation `json:"weightedTarget,omitempty" tf:"weighted_target,omitempty"`
 }
 
 type GRPCRouteActionParameters struct {
@@ -43,6 +56,21 @@ type GRPCRouteActionParameters struct {
 }
 
 type GRPCRouteMatchObservation struct {
+
+	// Data to match from the gRPC request.
+	Metadata []MetadataObservation `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// Method name to match from the request. If you specify a name, you must also specify a service_name.
+	MethodName *string `json:"methodName,omitempty" tf:"method_name,omitempty"`
+
+	// The port number to match from the request.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Fully qualified domain name for the service to match from the request.
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 }
 
 type GRPCRouteMatchParameters struct {
@@ -69,6 +97,15 @@ type GRPCRouteMatchParameters struct {
 }
 
 type HTTPRouteActionWeightedTargetObservation struct {
+
+	// The port number to match from the request.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
+	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
+
+	// Relative weight of the weighted target. An integer between 0 and 100.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type HTTPRouteActionWeightedTargetParameters struct {
@@ -97,6 +134,19 @@ type HTTPRouteActionWeightedTargetParameters struct {
 }
 
 type HTTPRouteRetryPolicyObservation struct {
+
+	// List of HTTP retry events.
+	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
+
+	// Maximum number of retries.
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+
+	// Per-retry timeout.
+	PerRetryTimeout []HTTPRouteRetryPolicyPerRetryTimeoutObservation `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
+
+	// List of TCP retry events. The only valid value is connection-error.
+	TCPRetryEvents []*string `json:"tcpRetryEvents,omitempty" tf:"tcp_retry_events,omitempty"`
 }
 
 type HTTPRouteRetryPolicyParameters struct {
@@ -120,6 +170,12 @@ type HTTPRouteRetryPolicyParameters struct {
 }
 
 type HTTPRouteRetryPolicyPerRetryTimeoutObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPRouteRetryPolicyPerRetryTimeoutParameters struct {
@@ -134,6 +190,12 @@ type HTTPRouteRetryPolicyPerRetryTimeoutParameters struct {
 }
 
 type HTTPRouteTimeoutIdleObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPRouteTimeoutIdleParameters struct {
@@ -148,6 +210,12 @@ type HTTPRouteTimeoutIdleParameters struct {
 }
 
 type HTTPRouteTimeoutObservation struct {
+
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	Idle []HTTPRouteTimeoutIdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
+
+	// Per request timeout.
+	PerRequest []HTTPRouteTimeoutPerRequestObservation `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type HTTPRouteTimeoutParameters struct {
@@ -162,6 +230,12 @@ type HTTPRouteTimeoutParameters struct {
 }
 
 type HTTPRouteTimeoutPerRequestObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPRouteTimeoutPerRequestParameters struct {
@@ -176,6 +250,21 @@ type HTTPRouteTimeoutPerRequestParameters struct {
 }
 
 type HeaderMatchObservation struct {
+
+	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+
+	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Object that specifies the range of numbers that the value sent by the client must be included in.
+	Range []MatchRangeObservation `json:"range,omitempty" tf:"range,omitempty"`
+
+	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
+
+	// Value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
+	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type HeaderMatchParameters struct {
@@ -202,6 +291,12 @@ type HeaderMatchParameters struct {
 }
 
 type HeaderMatchRangeObservation struct {
+
+	// End of the range.
+	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
+
+	// (Requited) Start of the range.
+	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type HeaderMatchRangeParameters struct {
@@ -216,6 +311,15 @@ type HeaderMatchRangeParameters struct {
 }
 
 type HeaderObservation struct {
+
+	// If true, the match is on the opposite of the match criteria. Default is false.
+	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
+
+	// Criteria for determining an gRPC request match.
+	Match []HeaderMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
+
+	// Name to use for the route. Must be between 1 and 255 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type HeaderParameters struct {
@@ -234,6 +338,19 @@ type HeaderParameters struct {
 }
 
 type Http2RouteRetryPolicyObservation struct {
+
+	// List of HTTP retry events.
+	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
+
+	// Maximum number of retries.
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+
+	// Per-retry timeout.
+	PerRetryTimeout []RetryPolicyPerRetryTimeoutObservation `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
+
+	// List of TCP retry events. The only valid value is connection-error.
+	TCPRetryEvents []*string `json:"tcpRetryEvents,omitempty" tf:"tcp_retry_events,omitempty"`
 }
 
 type Http2RouteRetryPolicyParameters struct {
@@ -257,6 +374,12 @@ type Http2RouteRetryPolicyParameters struct {
 }
 
 type Http2RouteTimeoutObservation struct {
+
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	Idle []TimeoutIdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
+
+	// Per request timeout.
+	PerRequest []TimeoutPerRequestObservation `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type Http2RouteTimeoutParameters struct {
@@ -271,6 +394,12 @@ type Http2RouteTimeoutParameters struct {
 }
 
 type IdleObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type IdleParameters struct {
@@ -285,6 +414,21 @@ type IdleParameters struct {
 }
 
 type MatchHeaderMatchObservation struct {
+
+	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+
+	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Object that specifies the range of numbers that the value sent by the client must be included in.
+	Range []HeaderMatchRangeObservation `json:"range,omitempty" tf:"range,omitempty"`
+
+	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
+
+	// Value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
+	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type MatchHeaderMatchParameters struct {
@@ -311,6 +455,15 @@ type MatchHeaderMatchParameters struct {
 }
 
 type MatchHeaderObservation struct {
+
+	// If true, the match is on the opposite of the match criteria. Default is false.
+	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
+
+	// Criteria for determining an gRPC request match.
+	Match []MatchHeaderMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
+
+	// Name to use for the route. Must be between 1 and 255 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type MatchHeaderParameters struct {
@@ -329,6 +482,12 @@ type MatchHeaderParameters struct {
 }
 
 type MatchRangeObservation struct {
+
+	// End of the range.
+	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
+
+	// (Requited) Start of the range.
+	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type MatchRangeParameters struct {
@@ -343,6 +502,21 @@ type MatchRangeParameters struct {
 }
 
 type MetadataMatchObservation struct {
+
+	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+
+	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Object that specifies the range of numbers that the value sent by the client must be included in.
+	Range []RangeObservation `json:"range,omitempty" tf:"range,omitempty"`
+
+	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
+
+	// Value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
+	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type MetadataMatchParameters struct {
@@ -369,6 +543,15 @@ type MetadataMatchParameters struct {
 }
 
 type MetadataObservation struct {
+
+	// If true, the match is on the opposite of the match criteria. Default is false.
+	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
+
+	// Criteria for determining an gRPC request match.
+	Match []MetadataMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
+
+	// Name to use for the route. Must be between 1 and 255 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type MetadataParameters struct {
@@ -387,6 +570,12 @@ type MetadataParameters struct {
 }
 
 type PerRequestObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PerRequestParameters struct {
@@ -401,6 +590,12 @@ type PerRequestParameters struct {
 }
 
 type PerRetryTimeoutObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PerRetryTimeoutParameters struct {
@@ -415,6 +610,12 @@ type PerRetryTimeoutParameters struct {
 }
 
 type RangeObservation struct {
+
+	// End of the range.
+	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
+
+	// (Requited) Start of the range.
+	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type RangeParameters struct {
@@ -429,6 +630,23 @@ type RangeParameters struct {
 }
 
 type RetryPolicyObservation struct {
+
+	// List of gRPC retry events.
+	// Valid values: cancelled, deadline-exceeded, internal, resource-exhausted, unavailable.
+	GRPCRetryEvents []*string `json:"grpcRetryEvents,omitempty" tf:"grpc_retry_events,omitempty"`
+
+	// List of HTTP retry events.
+	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
+
+	// Maximum number of retries.
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+
+	// Per-retry timeout.
+	PerRetryTimeout []PerRetryTimeoutObservation `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
+
+	// List of TCP retry events. The only valid value is connection-error.
+	TCPRetryEvents []*string `json:"tcpRetryEvents,omitempty" tf:"tcp_retry_events,omitempty"`
 }
 
 type RetryPolicyParameters struct {
@@ -457,6 +675,12 @@ type RetryPolicyParameters struct {
 }
 
 type RetryPolicyPerRetryTimeoutObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RetryPolicyPerRetryTimeoutParameters struct {
@@ -484,11 +708,33 @@ type RouteObservation struct {
 	// Last update date of the route.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
+	// Name of the service mesh in which to create the route. Must be between 1 and 255 characters in length.
+	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
+
+	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
+	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
+
+	// Name to use for the route. Must be between 1 and 255 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
+	// Route specification to apply.
+	Spec []RouteSpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Name of the virtual router in which to create the route. Must be between 1 and 255 characters in length.
+	VirtualRouterName *string `json:"virtualRouterName,omitempty" tf:"virtual_router_name,omitempty"`
 }
 
 type RouteParameters struct {
@@ -544,6 +790,22 @@ type RouteParameters struct {
 }
 
 type RouteSpecObservation struct {
+
+	// GRPC routing information for the route.
+	GRPCRoute []SpecGRPCRouteObservation `json:"grpcRoute,omitempty" tf:"grpc_route,omitempty"`
+
+	// HTTP routing information for the route.
+	HTTPRoute []SpecHTTPRouteObservation `json:"httpRoute,omitempty" tf:"http_route,omitempty"`
+
+	// HTTP/2 routing information for the route.
+	Http2Route []SpecHttp2RouteObservation `json:"http2Route,omitempty" tf:"http2_route,omitempty"`
+
+	// Priority for the route, between 0 and 1000.
+	// Routes are matched based on the specified value, where 0 is the highest priority.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// TCP routing information for the route.
+	TCPRoute []TCPRouteObservation `json:"tcpRoute,omitempty" tf:"tcp_route,omitempty"`
 }
 
 type RouteSpecParameters struct {
@@ -571,6 +833,18 @@ type RouteSpecParameters struct {
 }
 
 type SpecGRPCRouteObservation struct {
+
+	// Action to take if a match is determined.
+	Action []GRPCRouteActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Criteria for determining an gRPC request match.
+	Match []GRPCRouteMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
+
+	// Retry policy.
+	RetryPolicy []RetryPolicyObservation `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
+
+	// Types of timeouts.
+	Timeout []TimeoutObservation `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecGRPCRouteParameters struct {
@@ -593,6 +867,10 @@ type SpecGRPCRouteParameters struct {
 }
 
 type SpecHTTPRouteActionObservation struct {
+
+	// Targets that traffic is routed to when a request matches the route.
+	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	WeightedTarget []HTTPRouteActionWeightedTargetObservation `json:"weightedTarget,omitempty" tf:"weighted_target,omitempty"`
 }
 
 type SpecHTTPRouteActionParameters struct {
@@ -604,6 +882,21 @@ type SpecHTTPRouteActionParameters struct {
 }
 
 type SpecHTTPRouteMatchObservation struct {
+
+	// Client request headers to match on.
+	Header []MatchHeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
+
+	// Client request header method to match on. Valid values: GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// The port number to match from the request.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Client request header scheme to match on. Valid values: http, https.
+	Scheme *string `json:"scheme,omitempty" tf:"scheme,omitempty"`
 }
 
 type SpecHTTPRouteMatchParameters struct {
@@ -630,6 +923,18 @@ type SpecHTTPRouteMatchParameters struct {
 }
 
 type SpecHTTPRouteObservation struct {
+
+	// Action to take if a match is determined.
+	Action []SpecHTTPRouteActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Criteria for determining an gRPC request match.
+	Match []SpecHTTPRouteMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
+
+	// Retry policy.
+	RetryPolicy []HTTPRouteRetryPolicyObservation `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
+
+	// Types of timeouts.
+	Timeout []HTTPRouteTimeoutObservation `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecHTTPRouteParameters struct {
@@ -652,6 +957,10 @@ type SpecHTTPRouteParameters struct {
 }
 
 type SpecHttp2RouteActionObservation struct {
+
+	// Targets that traffic is routed to when a request matches the route.
+	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	WeightedTarget []ActionWeightedTargetObservation `json:"weightedTarget,omitempty" tf:"weighted_target,omitempty"`
 }
 
 type SpecHttp2RouteActionParameters struct {
@@ -663,6 +972,21 @@ type SpecHttp2RouteActionParameters struct {
 }
 
 type SpecHttp2RouteMatchObservation struct {
+
+	// Client request headers to match on.
+	Header []HeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
+
+	// Client request header method to match on. Valid values: GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// The port number to match from the request.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Client request header scheme to match on. Valid values: http, https.
+	Scheme *string `json:"scheme,omitempty" tf:"scheme,omitempty"`
 }
 
 type SpecHttp2RouteMatchParameters struct {
@@ -689,6 +1013,18 @@ type SpecHttp2RouteMatchParameters struct {
 }
 
 type SpecHttp2RouteObservation struct {
+
+	// Action to take if a match is determined.
+	Action []SpecHttp2RouteActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Criteria for determining an gRPC request match.
+	Match []SpecHttp2RouteMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
+
+	// Retry policy.
+	RetryPolicy []Http2RouteRetryPolicyObservation `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
+
+	// Types of timeouts.
+	Timeout []Http2RouteTimeoutObservation `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecHttp2RouteParameters struct {
@@ -711,6 +1047,10 @@ type SpecHttp2RouteParameters struct {
 }
 
 type TCPRouteActionObservation struct {
+
+	// Targets that traffic is routed to when a request matches the route.
+	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	WeightedTarget []TCPRouteActionWeightedTargetObservation `json:"weightedTarget,omitempty" tf:"weighted_target,omitempty"`
 }
 
 type TCPRouteActionParameters struct {
@@ -722,6 +1062,15 @@ type TCPRouteActionParameters struct {
 }
 
 type TCPRouteActionWeightedTargetObservation struct {
+
+	// The port number to match from the request.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
+	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
+
+	// Relative weight of the weighted target. An integer between 0 and 100.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type TCPRouteActionWeightedTargetParameters struct {
@@ -750,6 +1099,9 @@ type TCPRouteActionWeightedTargetParameters struct {
 }
 
 type TCPRouteMatchObservation struct {
+
+	// The port number to match from the request.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type TCPRouteMatchParameters struct {
@@ -760,6 +1112,15 @@ type TCPRouteMatchParameters struct {
 }
 
 type TCPRouteObservation struct {
+
+	// Action to take if a match is determined.
+	Action []TCPRouteActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Criteria for determining an gRPC request match.
+	Match []TCPRouteMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
+
+	// Types of timeouts.
+	Timeout []TCPRouteTimeoutObservation `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type TCPRouteParameters struct {
@@ -778,6 +1139,12 @@ type TCPRouteParameters struct {
 }
 
 type TCPRouteTimeoutIdleObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TCPRouteTimeoutIdleParameters struct {
@@ -792,6 +1159,9 @@ type TCPRouteTimeoutIdleParameters struct {
 }
 
 type TCPRouteTimeoutObservation struct {
+
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	Idle []TCPRouteTimeoutIdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
 }
 
 type TCPRouteTimeoutParameters struct {
@@ -802,6 +1172,12 @@ type TCPRouteTimeoutParameters struct {
 }
 
 type TimeoutIdleObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TimeoutIdleParameters struct {
@@ -816,6 +1192,12 @@ type TimeoutIdleParameters struct {
 }
 
 type TimeoutObservation struct {
+
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	Idle []IdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
+
+	// Per request timeout.
+	PerRequest []PerRequestObservation `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutParameters struct {
@@ -830,6 +1212,12 @@ type TimeoutParameters struct {
 }
 
 type TimeoutPerRequestObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TimeoutPerRequestParameters struct {
@@ -844,6 +1232,15 @@ type TimeoutPerRequestParameters struct {
 }
 
 type WeightedTargetObservation struct {
+
+	// The port number to match from the request.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
+	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
+
+	// Relative weight of the weighted target. An integer between 0 and 100.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type WeightedTargetParameters struct {

@@ -15,6 +15,13 @@ import (
 
 type AWSConfigurationRecorderStatusObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Whether the configuration recorder should be enabled or disabled.
+	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type AWSConfigurationRecorderStatusParameters struct {

@@ -17,6 +17,15 @@ type ModelPackageGroupPolicyObservation struct {
 
 	// The name of the Model Package Package Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the model package group.
+	ModelPackageGroupName *string `json:"modelPackageGroupName,omitempty" tf:"model_package_group_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	ResourcePolicy *string `json:"resourcePolicy,omitempty" tf:"resource_policy,omitempty"`
 }
 
 type ModelPackageGroupPolicyParameters struct {

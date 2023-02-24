@@ -14,6 +14,24 @@ import (
 )
 
 type CorsObservation struct {
+
+	// Whether to allow cookies or other credentials in requests to the function URL. The default is false.
+	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
+
+	// The HTTP headers that origins can include in requests to the function URL. For example: ["date", "keep-alive", "x-custom-header"].
+	AllowHeaders []*string `json:"allowHeaders,omitempty" tf:"allow_headers,omitempty"`
+
+	// The HTTP methods that are allowed when calling the function URL. For example: ["GET", "POST", "DELETE"], or the wildcard character (["*"]).
+	AllowMethods []*string `json:"allowMethods,omitempty" tf:"allow_methods,omitempty"`
+
+	// The origins that can access the function URL. You can list any number of specific origins (or the wildcard character ("*")), separated by a comma. For example: ["https://www.example.com", "http://localhost:60905"].
+	AllowOrigins []*string `json:"allowOrigins,omitempty" tf:"allow_origins,omitempty"`
+
+	// The HTTP headers in your function response that you want to expose to origins that call the function URL.
+	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
+
+	// The maximum amount of time, in seconds, that web browsers can cache results of a preflight request. By default, this is set to 0, which means that the browser doesn't cache results. The maximum value is 86400.
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
 }
 
 type CorsParameters struct {
@@ -45,13 +63,29 @@ type CorsParameters struct {
 
 type FunctionURLObservation struct {
 
+	// The type of authentication that the function URL uses. Set to "AWS_IAM" to restrict access to authenticated IAM users only. Set to "NONE" to bypass IAM authentication and create a public endpoint. See the AWS documentation for more details.
+	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
+
+	// The cross-origin resource sharing (CORS) settings for the function URL. Documented below.
+	Cors []CorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the function.
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+
+	// The name (or ARN) of the Lambda function.
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// The HTTP URL endpoint for the function in the format https://<url_id>.lambda-url.<region>.on.aws.
 	FunctionURL *string `json:"functionUrl,omitempty" tf:"function_url,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The alias name or "$LATEST".
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// A generated ID for the endpoint.
 	URLID *string `json:"urlId,omitempty" tf:"url_id,omitempty"`

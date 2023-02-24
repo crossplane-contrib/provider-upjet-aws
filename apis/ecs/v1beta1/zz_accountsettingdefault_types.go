@@ -18,7 +18,17 @@ type AccountSettingDefaultObservation struct {
 	// ARN that identifies the account setting.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Name of the account setting to set. Valid values are serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking and containerInsights.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// State of the setting. Valid values are enabled and disabled.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type AccountSettingDefaultParameters struct {

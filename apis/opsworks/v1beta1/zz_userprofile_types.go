@@ -15,8 +15,20 @@ import (
 
 type UserProfileObservation struct {
 
+	// Whether users can specify their own SSH public key through the My Settings page
+	AllowSelfManagement *bool `json:"allowSelfManagement,omitempty" tf:"allow_self_management,omitempty"`
+
 	// Same value as user_arn
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The users public key
+	SSHPublicKey *string `json:"sshPublicKey,omitempty" tf:"ssh_public_key,omitempty"`
+
+	// The ssh username, with witch this user wants to log in
+	SSHUsername *string `json:"sshUsername,omitempty" tf:"ssh_username,omitempty"`
+
+	// The user's IAM ARN
+	UserArn *string `json:"userArn,omitempty" tf:"user_arn,omitempty"`
 }
 
 type UserProfileParameters struct {

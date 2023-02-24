@@ -21,6 +21,19 @@ type StudioLifecycleConfigObservation struct {
 	// The name of the Studio Lifecycle Config.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The App type that the Lifecycle Configuration is attached to. Valid values are JupyterServer and KernelGateway.
+	StudioLifecycleConfigAppType *string `json:"studioLifecycleConfigAppType,omitempty" tf:"studio_lifecycle_config_app_type,omitempty"`
+
+	// The content of your Studio Lifecycle Configuration script. This content must be base64 encoded.
+	StudioLifecycleConfigContent *string `json:"studioLifecycleConfigContent,omitempty" tf:"studio_lifecycle_config_content,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }

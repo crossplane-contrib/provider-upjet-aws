@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: multiplices.medialive.aws.upbound.io
 spec:
@@ -111,6 +111,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -290,8 +299,48 @@ spec:
                   arn:
                     description: ARN of the Multiplex.
                     type: string
+                  availabilityZones:
+                    description: A list of availability zones. You must specify exactly
+                      two.
+                    items:
+                      type: string
+                    type: array
                   id:
                     type: string
+                  multiplexSettings:
+                    description: Multiplex settings. See Multiplex Settings for more
+                      details.
+                    items:
+                      properties:
+                        maximumVideoBufferDelayMilliseconds:
+                          description: Maximum video buffer delay.
+                          type: number
+                        transportStreamBitrate:
+                          description: Transport stream bit rate.
+                          type: number
+                        transportStreamId:
+                          description: Unique ID for each multiplex.
+                          type: number
+                        transportStreamReservedBitrate:
+                          description: Transport stream reserved bit rate.
+                          type: number
+                      type: object
+                    type: array
+                  name:
+                    description: name of Multiplex.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  startMultiplex:
+                    description: Whether to start the Multiplex. Defaults to false.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -338,9 +387,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

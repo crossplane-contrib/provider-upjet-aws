@@ -14,6 +14,9 @@ import (
 )
 
 type AccessLogFileObservation struct {
+
+	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type AccessLogFileParameters struct {
@@ -24,6 +27,9 @@ type AccessLogFileParameters struct {
 }
 
 type AccessLogObservation struct {
+
+	// Local file certificate.
+	File []AccessLogFileObservation `json:"file,omitempty" tf:"file,omitempty"`
 }
 
 type AccessLogParameters struct {
@@ -34,6 +40,9 @@ type AccessLogParameters struct {
 }
 
 type AcmObservation struct {
+
+	// One or more ACM ARNs.
+	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 
 type AcmParameters struct {
@@ -44,6 +53,9 @@ type AcmParameters struct {
 }
 
 type BackendDefaultsObservation struct {
+
+	// Default client policy for virtual gateway backends.
+	ClientPolicy []ClientPolicyObservation `json:"clientPolicy,omitempty" tf:"client_policy,omitempty"`
 }
 
 type BackendDefaultsParameters struct {
@@ -54,6 +66,9 @@ type BackendDefaultsParameters struct {
 }
 
 type CertificateAcmObservation struct {
+
+	// ARN for the certificate.
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 }
 
 type CertificateAcmParameters struct {
@@ -74,6 +89,12 @@ type CertificateAcmParameters struct {
 }
 
 type CertificateFileObservation struct {
+
+	// Certificate chain for the certificate.
+	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
+
+	// Private key for a certificate stored on the file system of the mesh endpoint that the proxy is running on.
+	PrivateKey *string `json:"privateKey,omitempty" tf:"private_key,omitempty"`
 }
 
 type CertificateFileParameters struct {
@@ -88,6 +109,12 @@ type CertificateFileParameters struct {
 }
 
 type CertificateObservation struct {
+
+	// Local file certificate.
+	File []FileObservation `json:"file,omitempty" tf:"file,omitempty"`
+
+	// A Secret Discovery Service certificate.
+	Sds []SdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type CertificateParameters struct {
@@ -102,6 +129,9 @@ type CertificateParameters struct {
 }
 
 type CertificateSdsObservation struct {
+
+	// Name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type CertificateSdsParameters struct {
@@ -112,6 +142,9 @@ type CertificateSdsParameters struct {
 }
 
 type ClientPolicyObservation struct {
+
+	// Transport Layer Security (TLS) client policy.
+	TLS []TLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type ClientPolicyParameters struct {
@@ -122,6 +155,15 @@ type ClientPolicyParameters struct {
 }
 
 type ConnectionPoolObservation struct {
+
+	// Connection pool information for gRPC listeners.
+	GRPC []GRPCObservation `json:"grpc,omitempty" tf:"grpc,omitempty"`
+
+	// Connection pool information for HTTP listeners.
+	HTTP []HTTPObservation `json:"http,omitempty" tf:"http,omitempty"`
+
+	// Connection pool information for HTTP2 listeners.
+	Http2 []Http2Observation `json:"http2,omitempty" tf:"http2,omitempty"`
 }
 
 type ConnectionPoolParameters struct {
@@ -140,6 +182,12 @@ type ConnectionPoolParameters struct {
 }
 
 type FileObservation struct {
+
+	// Certificate chain for the certificate.
+	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
+
+	// Private key for a certificate stored on the file system of the mesh endpoint that the proxy is running on.
+	PrivateKey *string `json:"privateKey,omitempty" tf:"private_key,omitempty"`
 }
 
 type FileParameters struct {
@@ -154,6 +202,9 @@ type FileParameters struct {
 }
 
 type GRPCObservation struct {
+
+	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
+	MaxRequests *float64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
 }
 
 type GRPCParameters struct {
@@ -164,6 +215,12 @@ type GRPCParameters struct {
 }
 
 type HTTPObservation struct {
+
+	// Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster. Minimum value of 1.
+	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
+
+	// Number of overflowing requests after max_connections Envoy will queue to upstream cluster. Minimum value of 1.
+	MaxPendingRequests *float64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
 }
 
 type HTTPParameters struct {
@@ -178,6 +235,27 @@ type HTTPParameters struct {
 }
 
 type HealthCheckObservation struct {
+
+	// Number of consecutive successful health checks that must occur before declaring listener healthy.
+	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+
+	// Time period in milliseconds between each health check execution.
+	IntervalMillis *float64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
+
+	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Port used for the port mapping.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Amount of time to wait when receiving a response from the health check, in milliseconds.
+	TimeoutMillis *float64 `json:"timeoutMillis,omitempty" tf:"timeout_millis,omitempty"`
+
+	// Number of consecutive failed health checks that must occur before declaring a virtual gateway unhealthy.
+	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type HealthCheckParameters struct {
@@ -212,6 +290,9 @@ type HealthCheckParameters struct {
 }
 
 type Http2Observation struct {
+
+	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
+	MaxRequests *float64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
 }
 
 type Http2Parameters struct {
@@ -222,6 +303,18 @@ type Http2Parameters struct {
 }
 
 type ListenerObservation struct {
+
+	// Connection pool information for the listener.
+	ConnectionPool []ConnectionPoolObservation `json:"connectionPool,omitempty" tf:"connection_pool,omitempty"`
+
+	// Health check information for the listener.
+	HealthCheck []HealthCheckObservation `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
+
+	// Port mapping information for the listener.
+	PortMapping []PortMappingObservation `json:"portMapping,omitempty" tf:"port_mapping,omitempty"`
+
+	// Transport Layer Security (TLS) client policy.
+	TLS []ListenerTLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type ListenerParameters struct {
@@ -244,6 +337,15 @@ type ListenerParameters struct {
 }
 
 type ListenerTLSObservation struct {
+
+	// Virtual gateway's client's Transport Layer Security (TLS) certificate.
+	Certificate []TLSCertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// Listener's TLS mode. Valid values: DISABLED, PERMISSIVE, STRICT.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// TLS validation context.
+	Validation []TLSValidationObservation `json:"validation,omitempty" tf:"validation,omitempty"`
 }
 
 type ListenerTLSParameters struct {
@@ -262,6 +364,9 @@ type ListenerTLSParameters struct {
 }
 
 type LoggingObservation struct {
+
+	// Access log configuration for a virtual gateway.
+	AccessLog []AccessLogObservation `json:"accessLog,omitempty" tf:"access_log,omitempty"`
 }
 
 type LoggingParameters struct {
@@ -272,6 +377,12 @@ type LoggingParameters struct {
 }
 
 type PortMappingObservation struct {
+
+	// Port used for the port mapping.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type PortMappingParameters struct {
@@ -286,6 +397,9 @@ type PortMappingParameters struct {
 }
 
 type SdsObservation struct {
+
+	// Name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type SdsParameters struct {
@@ -296,6 +410,9 @@ type SdsParameters struct {
 }
 
 type SubjectAlternativeNamesMatchObservation struct {
+
+	// Values sent must match the specified values exactly.
+	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type SubjectAlternativeNamesMatchParameters struct {
@@ -306,6 +423,9 @@ type SubjectAlternativeNamesMatchParameters struct {
 }
 
 type SubjectAlternativeNamesObservation struct {
+
+	// Criteria for determining a SAN's match.
+	Match []SubjectAlternativeNamesMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type SubjectAlternativeNamesParameters struct {
@@ -316,6 +436,15 @@ type SubjectAlternativeNamesParameters struct {
 }
 
 type TLSCertificateObservation struct {
+
+	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
+	Acm []CertificateAcmObservation `json:"acm,omitempty" tf:"acm,omitempty"`
+
+	// Local file certificate.
+	File []CertificateFileObservation `json:"file,omitempty" tf:"file,omitempty"`
+
+	// A Secret Discovery Service certificate.
+	Sds []CertificateSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type TLSCertificateParameters struct {
@@ -334,6 +463,18 @@ type TLSCertificateParameters struct {
 }
 
 type TLSObservation struct {
+
+	// Virtual gateway's client's Transport Layer Security (TLS) certificate.
+	Certificate []CertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// Whether the policy is enforced. Default is true.
+	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
+
+	// One or more ports that the policy is enforced for.
+	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
+
+	// TLS validation context.
+	Validation []ValidationObservation `json:"validation,omitempty" tf:"validation,omitempty"`
 }
 
 type TLSParameters struct {
@@ -356,6 +497,12 @@ type TLSParameters struct {
 }
 
 type TLSValidationObservation struct {
+
+	// SANs for a virtual gateway's listener's Transport Layer Security (TLS) validation context.
+	SubjectAlternativeNames []ValidationSubjectAlternativeNamesObservation `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
+
+	// TLS validation context trust.
+	Trust []ValidationTrustObservation `json:"trust,omitempty" tf:"trust,omitempty"`
 }
 
 type TLSValidationParameters struct {
@@ -370,6 +517,9 @@ type TLSValidationParameters struct {
 }
 
 type TrustFileObservation struct {
+
+	// Certificate chain for the certificate.
+	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 }
 
 type TrustFileParameters struct {
@@ -380,6 +530,15 @@ type TrustFileParameters struct {
 }
 
 type TrustObservation struct {
+
+	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
+	Acm []AcmObservation `json:"acm,omitempty" tf:"acm,omitempty"`
+
+	// Local file certificate.
+	File []TrustFileObservation `json:"file,omitempty" tf:"file,omitempty"`
+
+	// A Secret Discovery Service certificate.
+	Sds []TrustSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type TrustParameters struct {
@@ -398,6 +557,9 @@ type TrustParameters struct {
 }
 
 type TrustSdsObservation struct {
+
+	// Name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type TrustSdsParameters struct {
@@ -408,6 +570,12 @@ type TrustSdsParameters struct {
 }
 
 type ValidationObservation struct {
+
+	// SANs for a virtual gateway's listener's Transport Layer Security (TLS) validation context.
+	SubjectAlternativeNames []SubjectAlternativeNamesObservation `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
+
+	// TLS validation context trust.
+	Trust []TrustObservation `json:"trust,omitempty" tf:"trust,omitempty"`
 }
 
 type ValidationParameters struct {
@@ -422,6 +590,9 @@ type ValidationParameters struct {
 }
 
 type ValidationSubjectAlternativeNamesMatchObservation struct {
+
+	// Values sent must match the specified values exactly.
+	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type ValidationSubjectAlternativeNamesMatchParameters struct {
@@ -432,6 +603,9 @@ type ValidationSubjectAlternativeNamesMatchParameters struct {
 }
 
 type ValidationSubjectAlternativeNamesObservation struct {
+
+	// Criteria for determining a SAN's match.
+	Match []ValidationSubjectAlternativeNamesMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type ValidationSubjectAlternativeNamesParameters struct {
@@ -442,6 +616,9 @@ type ValidationSubjectAlternativeNamesParameters struct {
 }
 
 type ValidationTrustFileObservation struct {
+
+	// Certificate chain for the certificate.
+	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 }
 
 type ValidationTrustFileParameters struct {
@@ -452,6 +629,12 @@ type ValidationTrustFileParameters struct {
 }
 
 type ValidationTrustObservation struct {
+
+	// Local file certificate.
+	File []ValidationTrustFileObservation `json:"file,omitempty" tf:"file,omitempty"`
+
+	// A Secret Discovery Service certificate.
+	Sds []ValidationTrustSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type ValidationTrustParameters struct {
@@ -466,6 +649,9 @@ type ValidationTrustParameters struct {
 }
 
 type ValidationTrustSdsObservation struct {
+
+	// Name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type ValidationTrustSdsParameters struct {
@@ -489,8 +675,27 @@ type VirtualGatewayObservation struct {
 	// Last update date of the virtual gateway.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
+	// Name of the service mesh in which to create the virtual gateway. Must be between 1 and 255 characters in length.
+	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
+
+	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
+	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
+
+	// Name to use for the virtual gateway. Must be between 1 and 255 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
+
+	// Virtual gateway specification to apply.
+	Spec []VirtualGatewaySpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -525,6 +730,15 @@ type VirtualGatewayParameters struct {
 }
 
 type VirtualGatewaySpecObservation struct {
+
+	// Defaults for backends.
+	BackendDefaults []BackendDefaultsObservation `json:"backendDefaults,omitempty" tf:"backend_defaults,omitempty"`
+
+	// Listeners that the mesh endpoint is expected to receive inbound traffic from. You can specify one listener.
+	Listener []ListenerObservation `json:"listener,omitempty" tf:"listener,omitempty"`
+
+	// Inbound and outbound access logging information for the virtual gateway.
+	Logging []LoggingObservation `json:"logging,omitempty" tf:"logging,omitempty"`
 }
 
 type VirtualGatewaySpecParameters struct {

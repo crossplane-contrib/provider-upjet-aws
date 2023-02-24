@@ -18,7 +18,17 @@ type BusObservation struct {
 	// The Amazon Resource Name (ARN) of the event bus.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The partner event source that the new event bus will be matched with. Must match name.
+	EventSourceName *string `json:"eventSourceName,omitempty" tf:"event_source_name,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

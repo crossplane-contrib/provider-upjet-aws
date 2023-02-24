@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: triggers.codecommit.aws.upbound.io
 spec:
@@ -265,6 +265,15 @@ spec:
                 - region
                 - trigger
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -446,6 +455,49 @@ spec:
                     type: string
                   id:
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  repositoryName:
+                    description: The name for the repository. This needs to be less
+                      than 100 characters.
+                    type: string
+                  trigger:
+                    items:
+                      properties:
+                        branches:
+                          description: The branches that will be included in the trigger
+                            configuration. If no branches are specified, the trigger
+                            will apply to all branches.
+                          items:
+                            type: string
+                          type: array
+                        customData:
+                          description: Any custom data associated with the trigger
+                            that will be included in the information sent to the target
+                            of the trigger.
+                          type: string
+                        destinationArn:
+                          description: The ARN of the resource that is the target
+                            for a trigger. For example, the ARN of a topic in Amazon
+                            Simple Notification Service (SNS).
+                          type: string
+                        events:
+                          description: 'The repository events that will cause the
+                            trigger to run actions in another service, such as sending
+                            a notification through Amazon Simple Notification Service
+                            (SNS). If no events are specified, the trigger will run
+                            for all repository events. Event types include: all, updateReference,
+                            createReference, deleteReference.'
+                          items:
+                            type: string
+                          type: array
+                        name:
+                          description: The name of the trigger.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -488,9 +540,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

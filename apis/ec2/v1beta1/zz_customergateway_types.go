@@ -18,11 +18,34 @@ type CustomerGatewayObservation struct {
 	// The ARN of the customer gateway.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).
+	BGPAsn *string `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+
+	// The Amazon Resource Name (ARN) for the customer gateway certificate.
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+
+	// A name for the customer gateway device.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
 	// The amazon-assigned ID of the gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The IPv4 address for the customer gateway device's outside interface.
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The type of customer gateway. The only type AWS
+	// supports at this time is "ipsec.1".
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CustomerGatewayParameters struct {

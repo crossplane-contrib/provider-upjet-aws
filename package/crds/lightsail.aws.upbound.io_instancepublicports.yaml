@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: instancepublicports.lightsail.aws.upbound.io
 spec:
@@ -187,6 +187,15 @@ spec:
                 - portInfo
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -366,6 +375,46 @@ spec:
                   id:
                     description: ID of the resource.
                     type: string
+                  instanceName:
+                    description: Name of the Lightsail Instance.
+                    type: string
+                  portInfo:
+                    description: Configuration block with port information. AWS closes
+                      all currently open ports that are not included in the port_info.
+                      Detailed below.
+                    items:
+                      properties:
+                        cidrListAliases:
+                          description: Set of CIDR aliases that define access for
+                            a preconfigured range of IP addresses.
+                          items:
+                            type: string
+                          type: array
+                        cidrs:
+                          description: Set of CIDR blocks.
+                          items:
+                            type: string
+                          type: array
+                        fromPort:
+                          description: First port in a range of open ports on an instance.
+                          type: number
+                        ipv6Cidrs:
+                          items:
+                            type: string
+                          type: array
+                        protocol:
+                          description: IP protocol name. Valid values are tcp, all,
+                            udp, and icmp.
+                          type: string
+                        toPort:
+                          description: Last port in a range of open ports on an instance.
+                          type: number
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -408,9 +457,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

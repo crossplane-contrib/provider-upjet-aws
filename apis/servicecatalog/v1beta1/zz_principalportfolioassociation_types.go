@@ -15,8 +15,24 @@ import (
 
 type PrincipalPortfolioAssociationObservation struct {
 
+	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
+
 	// Identifier of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Portfolio identifier.
+	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
+
+	// Principal ARN.
+	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
+
+	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid value is IAM. Default is IAM.
+	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type PrincipalPortfolioAssociationParameters struct {

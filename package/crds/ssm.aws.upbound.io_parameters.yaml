@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: parameters.ssm.aws.upbound.io
 spec:
@@ -133,6 +133,15 @@ spec:
                 - region
                 - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -309,13 +318,78 @@ spec:
             properties:
               atProvider:
                 properties:
+                  allowedPattern:
+                    description: Regular expression used to validate the parameter
+                      value.
+                    type: string
+                  arn:
+                    description: ARN of the parameter.
+                    type: string
+                  dataType:
+                    description: 'Data type of the parameter. Valid values: text,
+                      aws:ssm:integration and aws:ec2:image for AMI format, see the
+                      Native parameter support for Amazon Machine Image IDs.'
+                    type: string
+                  description:
+                    description: Description of the parameter.
+                    type: string
                   id:
                     type: string
+                  insecureValue:
+                    description: Value of the parameter. This argument is not valid
+                      with a type of SecureString.
+                    type: string
+                  keyId:
+                    description: KMS key ID or ARN for encrypting a SecureString.
+                    type: string
+                  overwrite:
+                    description: Overwrite an existing parameter.
+                    type: boolean
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
+                    type: object
+                  tier:
+                    description: Parameter tier to assign to the parameter. If not
+                      specified, will use the default parameter tier for the region.
+                      Valid tiers are Standard, Advanced, and Intelligent-Tiering.
+                      Downgrading an Advanced tier parameter to Standard will recreate
+                      the resource. For more information on parameter tiers, see the
+                      AWS SSM Parameter tier comparison and guide.
+                    type: string
+                  type:
+                    description: Type of the parameter. Valid types are String, StringList
+                      and SecureString.
+                    type: string
+                  valueSecretRef:
+                    description: Value of the parameter.15 and later, this may require
+                      additional configuration handling for certain scenarios.15 Upgrade
+                      Guide.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
                     type: object
                   version:
                     description: Version of the parameter.
@@ -362,9 +436,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

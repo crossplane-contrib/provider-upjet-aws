@@ -17,6 +17,19 @@ type ThingGroupMembershipObservation struct {
 
 	// The membership ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.
+	OverrideDynamicGroup *bool `json:"overrideDynamicGroup,omitempty" tf:"override_dynamic_group,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The name of the group to which you are adding a thing.
+	ThingGroupName *string `json:"thingGroupName,omitempty" tf:"thing_group_name,omitempty"`
+
+	// The name of the thing to add to a group.
+	ThingName *string `json:"thingName,omitempty" tf:"thing_name,omitempty"`
 }
 
 type ThingGroupMembershipParameters struct {

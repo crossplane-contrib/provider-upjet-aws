@@ -16,8 +16,18 @@ import (
 type RegistryScanningConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// The registry ID the scanning configuration applies to.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
+
+	// One or multiple blocks specifying scanning rules to determine which repository filters are used and at what frequency scanning will occur. See below for schema.
+	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// the scanning type to set for the registry. Can be either ENHANCED or BASIC.
+	ScanType *string `json:"scanType,omitempty" tf:"scan_type,omitempty"`
 }
 
 type RegistryScanningConfigurationParameters struct {
@@ -37,6 +47,9 @@ type RegistryScanningConfigurationParameters struct {
 }
 
 type RepositoryFilterObservation struct {
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
 }
 
 type RepositoryFilterParameters struct {
@@ -49,6 +62,12 @@ type RepositoryFilterParameters struct {
 }
 
 type RuleObservation struct {
+
+	// One or more repository filter blocks, containing a filter  and a filter_type .
+	RepositoryFilter []RepositoryFilterObservation `json:"repositoryFilter,omitempty" tf:"repository_filter,omitempty"`
+
+	// The frequency that scans are performed at for a private registry. Can be SCAN_ON_PUSH, CONTINUOUS_SCAN, or MANUAL.
+	ScanFrequency *string `json:"scanFrequency,omitempty" tf:"scan_frequency,omitempty"`
 }
 
 type RuleParameters struct {

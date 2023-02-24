@@ -18,6 +18,16 @@ type StaticIPAttachmentObservation struct {
 
 	// The allocated static IP address
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The name of the Lightsail instance to attach the IP to
+	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The name of the allocated static IP
+	StaticIPName *string `json:"staticIpName,omitempty" tf:"static_ip_name,omitempty"`
 }
 
 type StaticIPAttachmentParameters struct {

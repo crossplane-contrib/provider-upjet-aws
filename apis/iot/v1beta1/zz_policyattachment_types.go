@@ -15,6 +15,16 @@ import (
 
 type PolicyAttachmentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the policy to attach.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The identity to which the policy is attached.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type PolicyAttachmentParameters struct {

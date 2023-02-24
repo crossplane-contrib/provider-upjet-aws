@@ -18,8 +18,18 @@ type VaultPolicyObservation struct {
 	// The ARN of the vault.
 	BackupVaultArn *string `json:"backupVaultArn,omitempty" tf:"backup_vault_arn,omitempty"`
 
+	// Name of the backup vault to add policy for.
+	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
+
 	// The name of the vault.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The backup vault access policy document in JSON format.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type VaultPolicyParameters struct {

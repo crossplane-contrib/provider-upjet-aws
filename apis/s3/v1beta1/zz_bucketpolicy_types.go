@@ -14,7 +14,18 @@ import (
 )
 
 type BucketPolicyObservation struct {
+
+	// The name of the bucket to which to apply the policy.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The text of the policy. Although this is a bucket policy rather than an IAM policy, the aws_iam_policy_document data source may be used, so long as it specifies a principal. Note: Bucket policies are limited to 20 KB in size.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type BucketPolicyParameters struct {

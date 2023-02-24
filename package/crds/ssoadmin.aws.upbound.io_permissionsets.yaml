@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: permissionsets.ssoadmin.aws.upbound.io
 spec:
@@ -96,6 +96,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -280,10 +289,37 @@ spec:
                     description: The date the Permission Set was created in RFC3339
                       format.
                     type: string
+                  description:
+                    description: The description of the Permission Set.
+                    type: string
                   id:
                     description: The Amazon Resource Names (ARNs) of the Permission
                       Set and SSO Instance, separated by a comma (,).
                     type: string
+                  instanceArn:
+                    description: The Amazon Resource Name (ARN) of the SSO Instance
+                      under which the operation will be executed.
+                    type: string
+                  name:
+                    description: The name of the Permission Set.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  relayState:
+                    description: The relay state URL used to redirect users within
+                      the application during the federation authentication process.
+                    type: string
+                  sessionDuration:
+                    description: 'The length of time that the application user sessions
+                      are valid in the ISO-8601 standard. Default: PT1H.'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -333,9 +369,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

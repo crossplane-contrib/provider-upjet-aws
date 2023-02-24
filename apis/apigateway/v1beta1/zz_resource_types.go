@@ -18,8 +18,21 @@ type ResourceObservation struct {
 	// Resource's identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// ID of the parent API resource
+	ParentID *string `json:"parentId,omitempty" tf:"parent_id,omitempty"`
+
 	// Complete path for this API resource, including all parent paths.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Last path segment of this API resource.
+	PathPart *string `json:"pathPart,omitempty" tf:"path_part,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ID of the associated REST API
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 }
 
 type ResourceParameters struct {

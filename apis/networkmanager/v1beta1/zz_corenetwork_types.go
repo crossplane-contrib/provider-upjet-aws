@@ -21,17 +21,33 @@ type CoreNetworkObservation struct {
 	// Timestamp when a core network was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// Description of the Core Network.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// One or more blocks detailing the edges within a core network. Detailed below.
 	Edges []EdgesObservation `json:"edges,omitempty" tf:"edges,omitempty"`
 
+	// The ID of the global network that a core network will be a part of.
+	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
+
 	// Core Network ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Policy document for creating a core network. Note that updating this argument will result in the new policy document version being set as the LATEST and LIVE policy document. Refer to the Core network policies documentation for more information.
+	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// One or more blocks detailing the segments within a core network. Detailed below.
 	Segments []SegmentsObservation `json:"segments,omitempty" tf:"segments,omitempty"`
 
 	// Current state of a core network.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

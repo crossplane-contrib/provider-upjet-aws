@@ -14,6 +14,12 @@ import (
 )
 
 type IPSetDescriptorObservation struct {
+
+	// The string like IPV4 or IPV6.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The CIDR notation.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type IPSetDescriptorParameters struct {
@@ -34,6 +40,16 @@ type IPSetObservation struct {
 
 	// The ID of the WAF IPSet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or more pairs specifying the IP address type (IPV4 or IPV6) and the IP address range (in CIDR notation) from which web requests originate.
+	IPSetDescriptor []IPSetDescriptorObservation `json:"ipSetDescriptor,omitempty" tf:"ip_set_descriptor,omitempty"`
+
+	// The name or description of the IPSet.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type IPSetParameters struct {

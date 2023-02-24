@@ -15,8 +15,24 @@ import (
 
 type BucketVersioningObservation struct {
 
+	// The name of the S3 bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
 	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
+	Mfa *string `json:"mfa,omitempty" tf:"mfa,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Configuration block for the versioning parameters detailed below.
+	VersioningConfiguration []VersioningConfigurationObservation `json:"versioningConfiguration,omitempty" tf:"versioning_configuration,omitempty"`
 }
 
 type BucketVersioningParameters struct {
@@ -54,6 +70,12 @@ type BucketVersioningParameters struct {
 }
 
 type VersioningConfigurationObservation struct {
+
+	// Specifies whether MFA delete is enabled in the bucket versioning configuration. Valid values: Enabled or Disabled.
+	MfaDelete *string `json:"mfaDelete,omitempty" tf:"mfa_delete,omitempty"`
+
+	// The versioning state of the bucket. Valid values: Enabled, Suspended, or Disabled. Disabled should only be used when creating or importing resources that correspond to unversioned S3 buckets.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type VersioningConfigurationParameters struct {

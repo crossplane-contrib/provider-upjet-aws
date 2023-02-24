@@ -23,6 +23,13 @@ type StaticIPObservation struct {
 	// The allocated static IP address
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// The name for the allocated static IP
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// The support code.
 	SupportCode *string `json:"supportCode,omitempty" tf:"support_code,omitempty"`
 }

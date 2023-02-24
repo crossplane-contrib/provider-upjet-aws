@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: transitgatewayvpcattachments.ec2.aws.upbound.io
 spec:
@@ -338,6 +338,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -515,9 +524,37 @@ spec:
             properties:
               atProvider:
                 properties:
+                  applianceModeSupport:
+                    description: 'Whether Appliance Mode support is enabled. If enabled,
+                      a traffic flow between a source and destination uses the same
+                      Availability Zone for the VPC attachment for the lifetime of
+                      that flow. Valid values: disable, enable. Default value: disable.'
+                    type: string
+                  dnsSupport:
+                    description: 'Whether DNS support is enabled. Valid values: disable,
+                      enable. Default value: enable.'
+                    type: string
                   id:
                     description: EC2 Transit Gateway Attachment identifier
                     type: string
+                  ipv6Support:
+                    description: 'Whether IPv6 support is enabled. Valid values: disable,
+                      enable. Default value: disable.'
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  subnetIds:
+                    description: Identifiers of EC2 Subnets.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -525,6 +562,25 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  transitGatewayDefaultRouteTableAssociation:
+                    description: 'Boolean whether the VPC Attachment should be associated
+                      with the EC2 Transit Gateway association default route table.
+                      This cannot be configured or perform drift detection with Resource
+                      Access Manager shared EC2 Transit Gateways. Default value: true.'
+                    type: boolean
+                  transitGatewayDefaultRouteTablePropagation:
+                    description: 'Boolean whether the VPC Attachment should propagate
+                      routes with the EC2 Transit Gateway propagation default route
+                      table. This cannot be configured or perform drift detection
+                      with Resource Access Manager shared EC2 Transit Gateways. Default
+                      value: true.'
+                    type: boolean
+                  transitGatewayId:
+                    description: Identifier of EC2 Transit Gateway.
+                    type: string
+                  vpcId:
+                    description: Identifier of EC2 VPC.
+                    type: string
                   vpcOwnerId:
                     description: Identifier of the AWS account that owns the EC2 VPC.
                     type: string
@@ -570,9 +626,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

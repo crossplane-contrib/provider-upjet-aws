@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: configurationrecorders.configservice.aws.upbound.io
 spec:
@@ -178,6 +178,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -358,6 +367,44 @@ spec:
                   id:
                     description: Name of the recorder
                     type: string
+                  recordingGroup:
+                    description: Recording group - see below.
+                    items:
+                      properties:
+                        allSupported:
+                          description: Specifies whether AWS Config records configuration
+                            changes for every supported type of regional resource
+                            (which includes any new type that will become supported
+                            in the future). Conflicts with resource_types. Defaults
+                            to true.
+                          type: boolean
+                        includeGlobalResourceTypes:
+                          description: Specifies whether AWS Config includes all supported
+                            types of global resources with the resources that it records.
+                            Requires all_supported = true. Conflicts with resource_types.
+                          type: boolean
+                        resourceTypes:
+                          description: A list that specifies the types of AWS resources
+                            for which AWS Config records configuration changes (for
+                            example, AWS::EC2::Instance or AWS::CloudTrail::Trail).
+                            See relevant part of AWS Docs for available types. In
+                            order to use this attribute, all_supported must be set
+                            to false.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleArn:
+                    description: Amazon Resource Name (ARN) of the IAM role. Used
+                      to make read or write requests to the delivery channel and to
+                      describe the AWS resources associated with the account. See
+                      AWS Docs for more details.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -400,9 +447,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

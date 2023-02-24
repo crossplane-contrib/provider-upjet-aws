@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: lifecyclehooks.autoscaling.aws.upbound.io
 spec:
@@ -255,6 +255,15 @@ spec:
                 - lifecycleTransition
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -431,7 +440,46 @@ spec:
             properties:
               atProvider:
                 properties:
+                  autoscalingGroupName:
+                    description: Name of the Auto Scaling group to which you want
+                      to assign the lifecycle hook
+                    type: string
+                  defaultResult:
+                    description: Defines the action the Auto Scaling group should
+                      take when the lifecycle hook timeout elapses or if an unexpected
+                      failure occurs. The value for this parameter can be either CONTINUE
+                      or ABANDON. The default value for this parameter is ABANDON.
+                    type: string
+                  heartbeatTimeout:
+                    description: Defines the amount of time, in seconds, that can
+                      elapse before the lifecycle hook times out. When the lifecycle
+                      hook times out, Auto Scaling performs the action defined in
+                      the DefaultResult parameter
+                    type: number
                   id:
+                    type: string
+                  lifecycleTransition:
+                    description: Instance state to which you want to attach the lifecycle
+                      hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
+                    type: string
+                  notificationMetadata:
+                    description: Contains additional information that you want to
+                      include any time Auto Scaling sends a message to the notification
+                      target.
+                    type: string
+                  notificationTargetArn:
+                    description: ARN of the notification target that Auto Scaling
+                      will use to notify you when an instance is in the transition
+                      state for the lifecycle hook. This ARN target can be either
+                      an SQS queue or an SNS topic.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleArn:
+                    description: ARN of the IAM role that allows the Auto Scaling
+                      group to publish to the specified notification target.
                     type: string
                 type: object
               conditions:
@@ -475,9 +523,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

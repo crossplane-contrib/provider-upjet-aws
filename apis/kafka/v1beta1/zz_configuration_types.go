@@ -18,10 +18,26 @@ type ConfigurationObservation struct {
 	// Amazon Resource Name (ARN) of the configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of Apache Kafka versions which can use this configuration.
+	KafkaVersions []*string `json:"kafkaVersions,omitempty" tf:"kafka_versions,omitempty"`
 
 	// Latest revision of the configuration.
 	LatestRevision *float64 `json:"latestRevision,omitempty" tf:"latest_revision,omitempty"`
+
+	// Name of the configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Contents of the server.properties file. Supported properties are documented in the MSK Developer Guide.
+	ServerProperties *string `json:"serverProperties,omitempty" tf:"server_properties,omitempty"`
 }
 
 type ConfigurationParameters struct {

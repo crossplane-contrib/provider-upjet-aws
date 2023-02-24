@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: dbsnapshotcopies.rds.aws.upbound.io
 spec:
@@ -249,6 +249,15 @@ spec:
                 - region
                 - targetDbSnapshotIdentifier
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -433,8 +442,14 @@ spec:
                     description: Specifies the name of the Availability Zone the DB
                       instance was located in at the time of the DB snapshot.
                     type: string
+                  copyTags:
+                    description: Whether to copy existing tags. Defaults to false.
+                    type: boolean
                   dbSnapshotArn:
                     description: The Amazon Resource Name (ARN) for the DB snapshot.
+                    type: string
+                  destinationRegion:
+                    description: The Destination region to place snapshot copy.
                     type: string
                   encrypted:
                     description: Specifies whether the DB snapshot is encrypted.
@@ -452,12 +467,30 @@ spec:
                     description: Specifies the Provisioned IOPS (I/O operations per
                       second) value of the DB instance at the time of the snapshot.
                     type: number
+                  kmsKeyId:
+                    description: KMS key ID.
+                    type: string
                   licenseModel:
                     description: License model information for the restored DB instance.
                     type: string
+                  optionGroupName:
+                    description: The name of an option group to associate with the
+                      copy of the snapshot.
+                    type: string
                   port:
                     type: number
+                  presignedUrl:
+                    description: he URL that contains a Signature Version 4 signed
+                      request.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   snapshotType:
+                    type: string
+                  sourceDbSnapshotIdentifier:
+                    description: Snapshot identifier of the source snapshot.
                     type: string
                   sourceRegion:
                     description: The region that the DB snapshot was created in or
@@ -466,6 +499,11 @@ spec:
                   storageType:
                     description: Specifies the storage type associated with DB snapshot.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -473,6 +511,12 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  targetCustomAvailabilityZone:
+                    description: The external custom Availability Zone.
+                    type: string
+                  targetDbSnapshotIdentifier:
+                    description: The Identifier for the snapshot.
+                    type: string
                   vpcId:
                     description: Provides the VPC ID associated with the DB snapshot.
                     type: string
@@ -518,9 +562,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

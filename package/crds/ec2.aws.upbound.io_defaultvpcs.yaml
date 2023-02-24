@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: defaultvpcs.ec2.aws.upbound.io
 spec:
@@ -103,6 +103,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -281,6 +290,9 @@ spec:
                 properties:
                   arn:
                     type: string
+                  assignGeneratedIpv6CidrBlock:
+                    description: and instance_tenancy arguments become computed attributes
+                    type: boolean
                   cidrBlock:
                     description: and instance_tenancy arguments become computed attributes
                     type: string
@@ -292,7 +304,23 @@ spec:
                     type: string
                   dhcpOptionsId:
                     type: string
+                  enableClassiclink:
+                    type: boolean
+                  enableClassiclinkDnsSupport:
+                    type: boolean
+                  enableDnsHostnames:
+                    description: is true
+                    type: boolean
+                  enableDnsSupport:
+                    type: boolean
+                  enableNetworkAddressUsageMetrics:
+                    description: is true
+                    type: boolean
                   existingDefaultVpc:
+                    type: boolean
+                  forceDestroy:
+                    description: 'Whether destroying the resource deletes the default
+                      VPC. Default: false'
                     type: boolean
                   id:
                     type: string
@@ -302,10 +330,27 @@ spec:
                     type: string
                   ipv6AssociationId:
                     type: string
+                  ipv6CidrBlock:
+                    description: and instance_tenancy arguments become computed attributes
+                    type: string
+                  ipv6CidrBlockNetworkBorderGroup:
+                    type: string
+                  ipv6IpamPoolId:
+                    type: string
+                  ipv6NetmaskLength:
+                    type: number
                   mainRouteTableId:
                     type: string
                   ownerId:
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -352,9 +397,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

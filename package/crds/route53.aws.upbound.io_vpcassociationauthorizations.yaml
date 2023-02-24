@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: vpcassociationauthorizations.route53.aws.upbound.io
 spec:
@@ -231,6 +231,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -411,6 +420,22 @@ spec:
                   id:
                     description: The calculated unique identifier for the association.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  vpcId:
+                    description: The VPC to authorize for association with the private
+                      hosted zone.
+                    type: string
+                  vpcRegion:
+                    description: The VPC's region. Defaults to the region of the AWS
+                      provider.
+                    type: string
+                  zoneId:
+                    description: The ID of the private hosted zone that you want to
+                      authorize associating a VPC with.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -453,9 +478,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

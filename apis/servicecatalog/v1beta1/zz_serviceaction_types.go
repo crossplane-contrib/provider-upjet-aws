@@ -14,6 +14,21 @@ import (
 )
 
 type DefinitionObservation struct {
+
+	// ARN of the role that performs the self-service actions on your behalf. For example, arn:aws:iam::12345678910:role/ActionRole. To reuse the provisioned product launch role, set to LAUNCH_ROLE.
+	AssumeRole *string `json:"assumeRole,omitempty" tf:"assume_role,omitempty"`
+
+	// Name of the SSM document. For example, AWS-RestartEC2Instance. If you are using a shared SSM document, you must provide the ARN instead of the name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// List of parameters in JSON format. For example: [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}].
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Service action definition type. Valid value is SSM_AUTOMATION. Default is SSM_AUTOMATION.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// SSM document version. For example, 1.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type DefinitionParameters struct {
@@ -41,8 +56,24 @@ type DefinitionParameters struct {
 
 type ServiceActionObservation struct {
 
+	// Language code. Valid values are en (English), jp (Japanese), and zh (Chinese). Default is en.
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
+
+	// Self-service action definition configuration block. Detailed below.
+	Definition []DefinitionObservation `json:"definition,omitempty" tf:"definition,omitempty"`
+
+	// Self-service action description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Identifier of the service action.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Self-service action name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ServiceActionParameters struct {

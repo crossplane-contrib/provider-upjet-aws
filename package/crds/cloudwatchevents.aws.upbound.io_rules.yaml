@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: rules.cloudwatchevents.aws.upbound.io
 spec:
@@ -249,6 +249,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -428,9 +437,45 @@ spec:
                   arn:
                     description: The Amazon Resource Name (ARN) of the rule.
                     type: string
+                  description:
+                    description: The description of the rule.
+                    type: string
+                  eventBusName:
+                    description: The event bus to associate with this rule. If you
+                      omit this, the default event bus is used.
+                    type: string
+                  eventPattern:
+                    description: The event pattern described a JSON object. At least
+                      one of schedule_expression or event_pattern is required. See
+                      full documentation of Events and Event Patterns in EventBridge
+                      for details.
+                    type: string
                   id:
                     description: The name of the rule.
                     type: string
+                  isEnabled:
+                    description: Whether the rule should be enabled (defaults to true).
+                    type: boolean
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleArn:
+                    description: The Amazon Resource Name (ARN) associated with the
+                      role that is used for target invocation.
+                    type: string
+                  scheduleExpression:
+                    description: The scheduling expression. For example, cron(0 20
+                      * * ? *) or rate(5 minutes). At least one of schedule_expression
+                      or event_pattern is required. Can only be used on the default
+                      event bus. For more information, refer to the AWS documentation
+                      Schedule Expressions for Rules.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -480,9 +525,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

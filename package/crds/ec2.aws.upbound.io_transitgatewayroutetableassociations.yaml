@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: transitgatewayroutetableassociations.ec2.aws.upbound.io
 spec:
@@ -228,6 +228,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -409,11 +418,21 @@ spec:
                     description: EC2 Transit Gateway Route Table identifier combined
                       with EC2 Transit Gateway Attachment identifier
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   resourceId:
                     description: Identifier of the resource
                     type: string
                   resourceType:
                     description: Type of the resource
+                    type: string
+                  transitGatewayAttachmentId:
+                    description: Identifier of EC2 Transit Gateway Attachment.
+                    type: string
+                  transitGatewayRouteTableId:
+                    description: Identifier of EC2 Transit Gateway Route Table.
                     type: string
                 type: object
               conditions:
@@ -457,9 +476,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

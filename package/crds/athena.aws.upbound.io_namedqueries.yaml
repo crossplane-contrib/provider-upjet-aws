@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: namedqueries.athena.aws.upbound.io
 spec:
@@ -238,6 +238,15 @@ spec:
                 - query
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -414,8 +423,31 @@ spec:
             properties:
               atProvider:
                 properties:
+                  database:
+                    description: Database to which the query belongs.
+                    type: string
+                  description:
+                    description: Brief explanation of the query. Maximum length of
+                      1024.
+                    type: string
                   id:
                     description: Unique ID of the query.
+                    type: string
+                  name:
+                    description: Plain language name for the query. Maximum length
+                      of 128.
+                    type: string
+                  query:
+                    description: Text of the query itself. In other words, all query
+                      statements. Maximum length of 262144.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  workgroup:
+                    description: Workgroup to which the query belongs. Defaults to
+                      primary
                     type: string
                 type: object
               conditions:
@@ -459,9 +491,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

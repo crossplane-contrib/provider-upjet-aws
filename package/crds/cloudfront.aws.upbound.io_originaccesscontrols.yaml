@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: originaccesscontrols.cloudfront.aws.upbound.io
 spec:
@@ -95,6 +95,15 @@ spec:
                 - signingBehavior
                 - signingProtocol
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -271,11 +280,35 @@ spec:
             properties:
               atProvider:
                 properties:
+                  description:
+                    description: The description of the Origin Access Control. It
+                      may be empty.
+                    type: string
                   etag:
                     description: The current version of this Origin Access Control.
                     type: string
                   id:
                     description: The unique identifier of this Origin Access Control.
+                    type: string
+                  name:
+                    description: A name that identifies the Origin Access Control.
+                    type: string
+                  originAccessControlOriginType:
+                    description: The type of origin that this Origin Access Control
+                      is for. The only valid value is s3.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  signingBehavior:
+                    description: 'Specifies which requests CloudFront signs. Specify
+                      always for the most common use case. Allowed values: always,
+                      never, no-override.'
+                    type: string
+                  signingProtocol:
+                    description: 'Determines how CloudFront signs (authenticates)
+                      requests. Valid values: sigv4.'
                     type: string
                 type: object
               conditions:
@@ -319,9 +352,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

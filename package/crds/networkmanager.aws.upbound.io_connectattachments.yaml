@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: connectattachments.networkmanager.aws.upbound.io
 spec:
@@ -317,6 +317,15 @@ spec:
                 - options
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -508,11 +517,30 @@ spec:
                   coreNetworkArn:
                     description: The ARN of a core network.
                     type: string
+                  coreNetworkId:
+                    description: The ID of a core network where you want to create
+                      the attachment.
+                    type: string
+                  edgeLocation:
+                    description: The Region where the edge is located.
+                    type: string
                   id:
                     description: The ID of the attachment.
                     type: string
+                  options:
+                    description: Options for creating an attachment.
+                    items:
+                      properties:
+                        protocol:
+                          type: string
+                      type: object
+                    type: array
                   ownerAccountId:
                     description: The ID of the attachment account owner.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   resourceArn:
                     description: The attachment resource ARN.
@@ -523,6 +551,11 @@ spec:
                   state:
                     description: The state of the attachment.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -530,6 +563,9 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  transportAttachmentId:
+                    description: The ID of the attachment between the two connections.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -572,9 +608,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

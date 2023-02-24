@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: fargateprofiles.eks.aws.upbound.io
 spec:
@@ -334,6 +334,15 @@ spec:
                 - region
                 - selector
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -513,13 +522,54 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of the EKS Fargate Profile.
                     type: string
+                  clusterName:
+                    description: 100 characters in length. Must begin with an alphanumeric
+                      character, and must only contain alphanumeric characters, dashes
+                      and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+                    type: string
                   id:
                     description: EKS Cluster name and EKS Fargate Profile name separated
                       by a colon (:).
                     type: string
+                  podExecutionRoleArn:
+                    description: –  Amazon Resource Name (ARN) of the IAM Role that
+                      provides permissions for the EKS Fargate Profile.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  selector:
+                    description: Configuration block(s) for selecting Kubernetes Pods
+                      to execute with this EKS Fargate Profile. Detailed below.
+                    items:
+                      properties:
+                        labels:
+                          additionalProperties:
+                            type: string
+                          description: Key-value map of Kubernetes labels for selection.
+                          type: object
+                        namespace:
+                          description: Kubernetes namespace for selection.
+                          type: string
+                      type: object
+                    type: array
                   status:
                     description: Status of the EKS Fargate Profile.
                     type: string
+                  subnetIds:
+                    description: '–  Identifiers of private EC2 Subnets to associate
+                      with the EKS Fargate Profile. These subnets must have the following
+                      resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME
+                      is replaced with the name of the EKS Cluster).'
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -569,9 +619,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

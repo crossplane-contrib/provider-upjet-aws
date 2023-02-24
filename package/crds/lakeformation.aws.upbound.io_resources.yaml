@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: resources.lakeformation.aws.upbound.io
 spec:
@@ -152,6 +152,15 @@ spec:
                 - arn
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -328,11 +337,22 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: –  Amazon Resource Name (ARN) of the resource, an
+                      S3 path.
+                    type: string
                   id:
                     type: string
                   lastModified:
                     description: The date and time the resource was last modified
                       in RFC 3339 format.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleArn:
+                    description: linked role must exist and is used.
                     type: string
                 type: object
               conditions:
@@ -376,9 +396,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

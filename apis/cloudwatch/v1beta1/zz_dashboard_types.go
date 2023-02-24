@@ -18,7 +18,14 @@ type DashboardObservation struct {
 	// The Amazon Resource Name (ARN) of the dashboard.
 	DashboardArn *string `json:"dashboardArn,omitempty" tf:"dashboard_arn,omitempty"`
 
+	// The detailed information about the dashboard, including what widgets are included and their location on the dashboard. You can read more about the body structure in the documentation.
+	DashboardBody *string `json:"dashboardBody,omitempty" tf:"dashboard_body,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DashboardParameters struct {

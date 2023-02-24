@@ -15,8 +15,27 @@ import (
 
 type TrafficPolicyInstanceObservation struct {
 
+	// ID of the hosted zone that you want Amazon Route 53 to create resource record sets in by using the configuration in a traffic policy.
+	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
+
 	// ID of traffic policy instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Domain name for which Amazon Route 53 responds to DNS queries by using the resource record sets that Route 53 creates for this traffic policy instance.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// TTL that you want Amazon Route 53 to assign to all the resource record sets that it creates in the specified hosted zone.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// ID of the traffic policy that you want to use to create resource record sets in the specified hosted zone.
+	TrafficPolicyID *string `json:"trafficPolicyId,omitempty" tf:"traffic_policy_id,omitempty"`
+
+	// Version of the traffic policy
+	TrafficPolicyVersion *float64 `json:"trafficPolicyVersion,omitempty" tf:"traffic_policy_version,omitempty"`
 }
 
 type TrafficPolicyInstanceParameters struct {

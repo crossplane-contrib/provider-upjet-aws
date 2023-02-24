@@ -15,8 +15,21 @@ import (
 
 type ProvisionedConcurrencyConfigObservation struct {
 
+	// Name or Amazon Resource Name (ARN) of the Lambda Function.
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
 	// Lambda Function name and qualifier separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Amount of capacity to allocate. Must be greater than or equal to 1.
+	ProvisionedConcurrentExecutions *float64 `json:"provisionedConcurrentExecutions,omitempty" tf:"provisioned_concurrent_executions,omitempty"`
+
+	// Lambda Function version or Lambda Alias name.
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ProvisionedConcurrencyConfigParameters struct {

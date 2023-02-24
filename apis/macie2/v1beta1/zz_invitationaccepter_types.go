@@ -15,11 +15,18 @@ import (
 
 type InvitationAccepterObservation struct {
 
+	// The AWS account ID for the account that sent the invitation.
+	AdministratorAccountID *string `json:"administratorAccountId,omitempty" tf:"administrator_account_id,omitempty"`
+
 	// The unique identifier (ID) of the macie invitation accepter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The unique identifier for the invitation.
 	InvitationID *string `json:"invitationId,omitempty" tf:"invitation_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type InvitationAccepterParameters struct {

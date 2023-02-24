@@ -20,6 +20,13 @@ type ActiveReceiptRuleSetObservation struct {
 
 	// The SES receipt rule set name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The name of the rule set
+	RuleSetName *string `json:"ruleSetName,omitempty" tf:"rule_set_name,omitempty"`
 }
 
 type ActiveReceiptRuleSetParameters struct {

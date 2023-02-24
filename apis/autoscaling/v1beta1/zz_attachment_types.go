@@ -14,7 +14,24 @@ import (
 )
 
 type AttachmentObservation struct {
+
+	// ARN of an ALB Target Group.
+	ALBTargetGroupArn *string `json:"albTargetGroupArn,omitempty" tf:"alb_target_group_arn,omitempty"`
+
+	// Name of ASG to associate with the ELB.
+	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
+
+	// Name of the ELB.
+	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// ARN of a load balancer target group.
+	LBTargetGroupArn *string `json:"lbTargetGroupArn,omitempty" tf:"lb_target_group_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type AttachmentParameters struct {

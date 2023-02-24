@@ -14,10 +14,27 @@ import (
 )
 
 type NetworkPerformanceMetricSubscriptionObservation struct {
+
+	// The target Region or Availability Zone that the metric subscription is enabled for. For example, eu-west-1.
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The metric used for the enabled subscription. Valid values: aggregate-latency. Default: aggregate-latency.
+	Metric *string `json:"metric,omitempty" tf:"metric,omitempty"`
 
 	// The data aggregation time for the subscription.
 	Period *string `json:"period,omitempty" tf:"period,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The source Region or Availability Zone that the metric subscription is enabled for. For example, us-east-1.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// The statistic used for the enabled subscription. Valid values: p50. Default: p50.
+	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
 }
 
 type NetworkPerformanceMetricSubscriptionParameters struct {

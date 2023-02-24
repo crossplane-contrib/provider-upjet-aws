@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: methodresponses.apigateway.aws.upbound.io
 spec:
@@ -322,6 +322,15 @@ spec:
                 - region
                 - statusCode
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -498,7 +507,38 @@ spec:
             properties:
               atProvider:
                 properties:
+                  httpMethod:
+                    description: HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
+                      ANY)
+                    type: string
                   id:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  resourceId:
+                    description: API resource ID
+                    type: string
+                  responseModels:
+                    additionalProperties:
+                      type: string
+                    description: Map of the API models used for the response's content
+                      type
+                    type: object
+                  responseParameters:
+                    additionalProperties:
+                      type: boolean
+                    description: 'Map of response parameters that can be sent to the
+                      caller. For example: response_parameters = { "method.response.header.X-Some-Header"
+                      = true } would define that the header X-Some-Header can be provided
+                      on the response.'
+                    type: object
+                  restApiId:
+                    description: ID of the associated REST API
+                    type: string
+                  statusCode:
+                    description: HTTP status code
                     type: string
                 type: object
               conditions:
@@ -542,9 +582,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

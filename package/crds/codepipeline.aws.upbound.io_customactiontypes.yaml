@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: customactiontypes.codepipeline.aws.upbound.io
 spec:
@@ -188,6 +188,15 @@ spec:
                 - region
                 - version
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -367,12 +376,114 @@ spec:
                   arn:
                     description: The action ARN.
                     type: string
+                  category:
+                    description: 'The category of the custom action. Valid values:
+                      Source, Build, Deploy, Test, Invoke, Approval'
+                    type: string
+                  configurationProperty:
+                    description: The configuration properties for the custom action.
+                      Max 10 items.
+                    items:
+                      properties:
+                        description:
+                          description: The description of the action configuration
+                            property.
+                          type: string
+                        key:
+                          description: Whether the configuration property is a key.
+                          type: boolean
+                        name:
+                          description: The name of the action configuration property.
+                          type: string
+                        queryable:
+                          description: Indicates that the property will be used in
+                            conjunction with PollForJobs.
+                          type: boolean
+                        required:
+                          description: Whether the configuration property is a required
+                            value.
+                          type: boolean
+                        secret:
+                          description: Whether the configuration property is secret.
+                          type: boolean
+                        type:
+                          description: 'The type of the configuration property. Valid
+                            values: String, Number, Boolean'
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: Composed of category, provider and version
                     type: string
+                  inputArtifactDetails:
+                    description: The details of the input artifact for the action.
+                    items:
+                      properties:
+                        maximumCount:
+                          description: 'The maximum number of artifacts allowed for
+                            the action type. Min: 0, Max: 5'
+                          type: number
+                        minimumCount:
+                          description: 'The minimum number of artifacts allowed for
+                            the action type. Min: 0, Max: 5'
+                          type: number
+                      type: object
+                    type: array
+                  outputArtifactDetails:
+                    description: The details of the output artifact of the action.
+                    items:
+                      properties:
+                        maximumCount:
+                          description: 'The maximum number of artifacts allowed for
+                            the action type. Min: 0, Max: 5'
+                          type: number
+                        minimumCount:
+                          description: 'The minimum number of artifacts allowed for
+                            the action type. Min: 0, Max: 5'
+                          type: number
+                      type: object
+                    type: array
                   owner:
                     description: The creator of the action being called.
                     type: string
+                  providerName:
+                    description: The provider of the service used in the custom action
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  settings:
+                    description: The settings for an action type.
+                    items:
+                      properties:
+                        entityUrlTemplate:
+                          description: The URL returned to the AWS CodePipeline console
+                            that provides a deep link to the resources of the external
+                            system.
+                          type: string
+                        executionUrlTemplate:
+                          description: The URL returned to the AWS CodePipeline console
+                            that contains a link to the top-level landing page for
+                            the external system.
+                          type: string
+                        revisionUrlTemplate:
+                          description: The URL returned to the AWS CodePipeline console
+                            that contains a link to the page where customers can update
+                            or change the configuration of the external action.
+                          type: string
+                        thirdPartyConfigurationUrl:
+                          description: The URL of a sign-up page where users can sign
+                            up for an external service and perform initial configuration
+                            of the action provided by that service.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -380,6 +491,9 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  version:
+                    description: The version identifier of the custom action.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -422,9 +536,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

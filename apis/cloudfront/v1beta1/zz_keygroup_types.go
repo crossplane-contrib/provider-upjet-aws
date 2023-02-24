@@ -15,11 +15,24 @@ import (
 
 type KeyGroupObservation struct {
 
+	// A comment to describe the key group..
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
 	// The identifier for this version of the key group.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
 	// The identifier for the key group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of the identifiers of the public keys in the key group.
+	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
+
+	// A name to identify the key group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type KeyGroupParameters struct {

@@ -21,6 +21,12 @@ type ConnectionObservation struct {
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDevice *string `json:"awsDevice,omitempty" tf:"aws_device,omitempty"`
 
+	// The bandwidth of the connection. Valid values for dedicated connections: 1Gbps, 10Gbps. Valid values for hosted connections: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, 10Gbps and 100Gbps. Case sensitive.
+	Bandwidth *string `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
+
+	// The connection MAC Security (MACsec) encryption mode. MAC Security (MACsec) is only available on dedicated connections. Valid values are no_encrypt, should_encrypt, and must_encrypt.
+	EncryptionMode *string `json:"encryptionMode,omitempty" tf:"encryption_mode,omitempty"`
+
 	// Indicates whether the connection supports a secondary BGP peer in the same address family (IPv4/IPv6).
 	HasLogicalRedundancy *string `json:"hasLogicalRedundancy,omitempty" tf:"has_logical_redundancy,omitempty"`
 
@@ -30,14 +36,35 @@ type ConnectionObservation struct {
 	// Boolean value representing if jumbo frames have been enabled for this connection.
 	JumboFrameCapable *bool `json:"jumboFrameCapable,omitempty" tf:"jumbo_frame_capable,omitempty"`
 
+	// The AWS Direct Connect location where the connection is located. See DescribeLocations for the list of AWS Direct Connect locations. Use locationCode.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// Boolean value indicating whether the connection supports MAC Security (MACsec).
 	MacsecCapable *bool `json:"macsecCapable,omitempty" tf:"macsec_capable,omitempty"`
+
+	// The name of the connection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the AWS account that owns the connection.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
 
 	// The MAC Security (MACsec) port link status of the connection.
 	PortEncryptionStatus *string `json:"portEncryptionStatus,omitempty" tf:"port_encryption_status,omitempty"`
+
+	// The name of the service provider associated with the connection.
+	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Boolean value indicating whether you want the connection to support MAC Security (MACsec). MAC Security (MACsec) is only available on dedicated connections. See MACsec prerequisites for more information about MAC Security (MACsec) prerequisites. Default value: false.
+	RequestMacsec *bool `json:"requestMacsec,omitempty" tf:"request_macsec,omitempty"`
+
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

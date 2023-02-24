@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: datalakesettings.lakeformation.aws.upbound.io
 spec:
@@ -129,6 +129,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -305,8 +314,70 @@ spec:
             properties:
               atProvider:
                 properties:
+                  admins:
+                    description: –  Set of ARNs of AWS Lake Formation principals (IAM
+                      users or roles).
+                    items:
+                      type: string
+                    type: array
+                  catalogId:
+                    description: –  Identifier for the Data Catalog. By default, the
+                      account ID.
+                    type: string
+                  createDatabaseDefaultPermissions:
+                    description: Up to three configuration blocks of principal permissions
+                      for default create database permissions. Detailed below.
+                    items:
+                      properties:
+                        permissions:
+                          description: List of permissions that are granted to the
+                            principal. Valid values may include ALL, SELECT, ALTER,
+                            DROP, DELETE, INSERT, DESCRIBE, and CREATE_TABLE. For
+                            more details, see Lake Formation Permissions Reference.
+                          items:
+                            type: string
+                          type: array
+                        principal:
+                          description: Principal who is granted permissions. To enforce
+                            metadata and underlying data access control only by IAM
+                            on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS
+                            and permissions to ["ALL"].
+                          type: string
+                      type: object
+                    type: array
+                  createTableDefaultPermissions:
+                    description: Up to three configuration blocks of principal permissions
+                      for default create table permissions. Detailed below.
+                    items:
+                      properties:
+                        permissions:
+                          description: List of permissions that are granted to the
+                            principal. Valid values may include ALL, SELECT, ALTER,
+                            DROP, DELETE, INSERT, and DESCRIBE. For more details,
+                            see Lake Formation Permissions Reference.
+                          items:
+                            type: string
+                          type: array
+                        principal:
+                          description: Principal who is granted permissions. To enforce
+                            metadata and underlying data access control only by IAM
+                            on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS
+                            and permissions to ["ALL"].
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  trustedResourceOwners:
+                    description: owning account IDs that the caller's account can
+                      use to share their user access details (user ARNs).
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -349,9 +420,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

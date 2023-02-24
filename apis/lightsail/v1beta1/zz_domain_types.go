@@ -18,8 +18,15 @@ type DomainObservation struct {
 	// The ARN of the Lightsail domain
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The name of the Lightsail domain to manage
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
 	// The name used for this domain
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DomainParameters struct {

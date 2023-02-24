@@ -15,6 +15,16 @@ import (
 
 type QueueRedriveAllowPolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The URL of the SQS Queue to which to attach the policy
+	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
+
+	// The JSON redrive allow policy for the SQS queue. Learn more in the Amazon SQS dead-letter queues documentation.
+	RedriveAllowPolicy *string `json:"redriveAllowPolicy,omitempty" tf:"redrive_allow_policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type QueueRedriveAllowPolicyParameters struct {

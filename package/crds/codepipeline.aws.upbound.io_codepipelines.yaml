@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: codepipelines.codepipeline.aws.upbound.io
 spec:
@@ -358,6 +358,15 @@ spec:
                 - region
                 - stage
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -537,9 +546,135 @@ spec:
                   arn:
                     description: The codepipeline ARN.
                     type: string
+                  artifactStore:
+                    description: One or more artifact_store blocks. Artifact stores
+                      are documented below.
+                    items:
+                      properties:
+                        encryptionKey:
+                          description: The encryption key block AWS CodePipeline uses
+                            to encrypt the data in the artifact store, such as an
+                            AWS Key Management Service (AWS KMS) key. If you don't
+                            specify a key, AWS CodePipeline uses the default key for
+                            Amazon Simple Storage Service (Amazon S3). An encryption_key
+                            block is documented below.
+                          items:
+                            properties:
+                              id:
+                                description: The KMS key ARN or ID
+                                type: string
+                              type:
+                                description: The type of key; currently only KMS is
+                                  supported
+                                type: string
+                            type: object
+                          type: array
+                        location:
+                          description: The location where AWS CodePipeline stores
+                            artifacts for a pipeline; currently only S3 is supported.
+                          type: string
+                        region:
+                          description: The region where the artifact store is located.
+                            Required for a cross-region CodePipeline, do not provide
+                            for a single-region CodePipeline.
+                          type: string
+                        type:
+                          description: The type of the artifact store, such as Amazon
+                            S3
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The codepipeline ID.
                     type: string
+                  region:
+                    description: The region in which to run the action. Region is
+                      the region you'd like your resource to be created in.
+                    type: string
+                  roleArn:
+                    description: A service role Amazon Resource Name (ARN) that grants
+                      AWS CodePipeline permission to make calls to AWS services on
+                      your behalf.
+                    type: string
+                  stage:
+                    description: (Minimum of at least two stage blocks is required)
+                      A stage block. Stages are documented below.
+                    items:
+                      properties:
+                        action:
+                          description: The action(s) to include in the stage. Defined
+                            as an action block below
+                          items:
+                            properties:
+                              category:
+                                description: A category defines what kind of action
+                                  can be taken in the stage, and constrains the provider
+                                  type for the action. Possible values are Approval,
+                                  Build, Deploy, Invoke, Source and Test.
+                                type: string
+                              configuration:
+                                additionalProperties:
+                                  type: string
+                                description: A map of the action declaration's configuration.
+                                  Configurations options for action types and providers
+                                  can be found in the Pipeline Structure Reference
+                                  and Action Structure Reference documentation.
+                                type: object
+                              inputArtifacts:
+                                description: A list of artifact names to be worked
+                                  on.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The action declaration's name.
+                                type: string
+                              namespace:
+                                description: The namespace all output variables will
+                                  be accessed from.
+                                type: string
+                              outputArtifacts:
+                                description: A list of artifact names to output. Output
+                                  artifact names must be unique within a pipeline.
+                                items:
+                                  type: string
+                                type: array
+                              owner:
+                                description: The creator of the action being called.
+                                  Possible values are AWS, Custom and ThirdParty.
+                                type: string
+                              provider:
+                                description: The provider of the service being called
+                                  by the action. Valid providers are determined by
+                                  the action category. Provider names are listed in
+                                  the Action Structure Reference documentation.
+                                type: string
+                              region:
+                                description: The region in which to run the action.
+                                type: string
+                              roleArn:
+                                description: The ARN of the IAM service role that
+                                  will perform the declared action. This is assumed
+                                  through the roleArn for the pipeline.
+                                type: string
+                              runOrder:
+                                description: The order in which actions are run.
+                                type: number
+                              version:
+                                description: A string that identifies the action type.
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          description: The name of the stage.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -589,9 +724,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

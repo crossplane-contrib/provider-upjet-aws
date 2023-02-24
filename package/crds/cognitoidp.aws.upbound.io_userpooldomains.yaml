@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: userpooldomains.cognitoidp.aws.upbound.io
 spec:
@@ -230,6 +230,15 @@ spec:
                 - domain
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -409,15 +418,31 @@ spec:
                   awsAccountId:
                     description: The AWS account ID for the user pool owner.
                     type: string
+                  certificateArn:
+                    description: The ARN of an ISSUED ACM certificate in us-east-1
+                      for a custom domain.
+                    type: string
                   cloudfrontDistributionArn:
                     description: The URL of the CloudFront distribution. This is required
                       to generate the ALIAS aws_route53_record
                     type: string
+                  domain:
+                    description: For custom domains, this is the fully-qualified domain
+                      name, such as auth.example.com. For Amazon Cognito prefix domains,
+                      this is the prefix alone, such as auth.
+                    type: string
                   id:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   s3Bucket:
                     description: The S3 bucket where the static files for this domain
                       are stored.
+                    type: string
+                  userPoolId:
+                    description: The user pool ID.
                     type: string
                   version:
                     description: The app version.
@@ -464,9 +489,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

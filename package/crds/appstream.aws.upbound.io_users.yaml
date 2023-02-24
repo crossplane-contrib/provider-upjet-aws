@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: users.appstream.aws.upbound.io
 spec:
@@ -87,6 +87,15 @@ spec:
                 - authenticationType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -266,13 +275,33 @@ spec:
                   arn:
                     description: ARN of the appstream user.
                     type: string
+                  authenticationType:
+                    description: 'Authentication type for the user. You must specify
+                      USERPOOL. Valid values: API, SAML, USERPOOL'
+                    type: string
                   createdTime:
                     description: Date and time, in UTC and extended RFC 3339 format,
                       when the user was created.
                     type: string
+                  enabled:
+                    description: Whether the user in the user pool is enabled.
+                    type: boolean
+                  firstName:
+                    description: First name, or given name, of the user.
+                    type: string
                   id:
                     description: Unique ID of the appstream user.
                     type: string
+                  lastName:
+                    description: Last name, or surname, of the user.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  sendEmailNotification:
+                    description: Send an email notification.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -315,9 +344,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

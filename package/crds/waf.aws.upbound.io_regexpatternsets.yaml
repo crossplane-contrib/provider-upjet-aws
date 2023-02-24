@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: regexpatternsets.waf.aws.upbound.io
 spec:
@@ -81,6 +81,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -263,6 +272,19 @@ spec:
                   id:
                     description: The ID of the WAF Regex Pattern Set.
                     type: string
+                  name:
+                    description: The name or description of the Regex Pattern Set.
+                    type: string
+                  regexPatternStrings:
+                    description: A list of regular expression (regex) patterns that
+                      you want AWS WAF to search for, such as B[a@]dB[o0]t.
+                    items:
+                      type: string
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -305,9 +327,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

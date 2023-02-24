@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: accountsettingdefaults.ecs.aws.upbound.io
 spec:
@@ -82,6 +82,15 @@ spec:
                 - region
                 - value
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -262,7 +271,20 @@ spec:
                   id:
                     description: ARN that identifies the account setting.
                     type: string
+                  name:
+                    description: Name of the account setting to set. Valid values
+                      are serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat,
+                      awsvpcTrunking and containerInsights.
+                    type: string
                   principalArn:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  value:
+                    description: State of the setting. Valid values are enabled and
+                      disabled.
                     type: string
                 type: object
               conditions:
@@ -306,9 +328,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

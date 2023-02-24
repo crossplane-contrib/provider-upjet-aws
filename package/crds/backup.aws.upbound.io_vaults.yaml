@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: vaults.backup.aws.upbound.io
 spec:
@@ -158,6 +158,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -337,13 +346,31 @@ spec:
                   arn:
                     description: The ARN of the vault.
                     type: string
+                  forceDestroy:
+                    description: A boolean that indicates that all recovery points
+                      stored in the vault are deleted so that the vault can be destroyed
+                      without error.
+                    type: boolean
                   id:
                     description: The name of the vault.
+                    type: string
+                  kmsKeyArn:
+                    description: The server-side encryption key that is used to protect
+                      your backups.
                     type: string
                   recoveryPoints:
                     description: The number of recovery points that are stored in
                       a backup vault.
                     type: number
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -393,9 +420,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

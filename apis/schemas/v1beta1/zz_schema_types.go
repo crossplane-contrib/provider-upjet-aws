@@ -18,13 +18,35 @@ type SchemaObservation struct {
 	// The Amazon Resource Name (ARN) of the discoverer.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The schema specification. Must be a valid Open API 3.0 spec.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The description of the schema. Maximum of 256 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The last modified date of the schema.
 	LastModified *string `json:"lastModified,omitempty" tf:"last_modified,omitempty"`
 
+	// The name of the schema. Maximum of 385 characters consisting of lower case letters, upper case letters, ., -, _, @.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The name of the registry in which this schema belongs.
+	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The type of the schema. Valid values: OpenApi3.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The version of the schema.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`

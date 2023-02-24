@@ -18,8 +18,24 @@ type ImageObservation struct {
 	// The Amazon Resource Name (ARN) assigned by AWS to this Image.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description of the image.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The display name of the image. When the image is added to a domain (must be unique to the domain).
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
 	// The name of the Image.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

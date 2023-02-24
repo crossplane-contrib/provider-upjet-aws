@@ -18,7 +18,29 @@ type InstanceProfileObservation struct {
 	// The Amazon Resource Name of this instance profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description of the instance profile.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// An array of strings that specifies the list of app packages that should not be cleaned up from the device after a test run.
+	ExcludeAppPackagesFromCleanup []*string `json:"excludeAppPackagesFromCleanup,omitempty" tf:"exclude_app_packages_from_cleanup,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name for the instance profile.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// When set to true, Device Farm removes app packages after a test run. The default value is false for private devices.
+	PackageCleanup *bool `json:"packageCleanup,omitempty" tf:"package_cleanup,omitempty"`
+
+	// When set to true, Device Farm reboots the instance after a test run. The default value is true.
+	RebootAfterUse *bool `json:"rebootAfterUse,omitempty" tf:"reboot_after_use,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

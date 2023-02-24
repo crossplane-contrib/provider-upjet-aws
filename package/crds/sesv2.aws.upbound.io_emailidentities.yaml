@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: emailidentities.sesv2.aws.upbound.io
 spec:
@@ -178,6 +178,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -357,6 +366,11 @@ spec:
                   arn:
                     description: ARN of the Email Identity.
                     type: string
+                  configurationSetName:
+                    description: The configuration set to use by default when sending
+                      from this identity. Note that any configuration set defined
+                      in the email sending request takes precedence.
+                    type: string
                   dkimSigningAttributes:
                     description: The configuration of the DKIM authentication settings
                       for an email domain identity.
@@ -366,9 +380,25 @@ spec:
                           description: '[Easy DKIM] The key length of the DKIM key
                             pair in use.'
                           type: string
+                        domainSigningPrivateKey:
+                          description: '[Bring Your Own DKIM] A private key that''s
+                            used to generate a DKIM signature. The private key must
+                            use 1024 or 2048-bit RSA encryption, and must be encoded
+                            using base64 encoding.'
+                          type: string
+                        domainSigningSelector:
+                          description: '[Bring Your Own DKIM] A string that''s used
+                            to identify a public key in the DNS configuration for
+                            a domain.'
+                          type: string
                         lastKeyGenerationTimestamp:
                           description: '[Easy DKIM] The last time a key pair was generated
                             for this identity.'
+                          type: string
+                        nextSigningKeyLength:
+                          description: '[Easy DKIM] The key length of the future DKIM
+                            key pair to be generated. This can be changed at most
+                            once per day. Valid values: RSA_1024_BIT, RSA_2048_BIT.'
                           type: string
                         signingAttributesOrigin:
                           description: A string that indicates how DKIM was configured
@@ -403,6 +433,15 @@ spec:
                     description: 'The email identity type. Valid values: EMAIL_ADDRESS,
                       DOMAIN.'
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -452,9 +491,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

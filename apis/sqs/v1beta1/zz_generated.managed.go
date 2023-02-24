@@ -17,6 +17,11 @@ func (mg *Queue) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Queue.
+func (mg *Queue) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Queue.
 func (mg *Queue) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *Queue) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Queue.
 func (mg *Queue) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Queue.
+func (mg *Queue) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Queue.
@@ -83,6 +93,11 @@ func (mg *QueuePolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this QueuePolicy.
+func (mg *QueuePolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this QueuePolicy.
 func (mg *QueuePolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *QueuePolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this QueuePolicy.
 func (mg *QueuePolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this QueuePolicy.
+func (mg *QueuePolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this QueuePolicy.
@@ -149,6 +169,11 @@ func (mg *QueueRedriveAllowPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this QueueRedriveAllowPolicy.
+func (mg *QueueRedriveAllowPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this QueueRedriveAllowPolicy.
 func (mg *QueueRedriveAllowPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *QueueRedriveAllowPolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this QueueRedriveAllowPolicy.
 func (mg *QueueRedriveAllowPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this QueueRedriveAllowPolicy.
+func (mg *QueueRedriveAllowPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this QueueRedriveAllowPolicy.
@@ -215,6 +245,11 @@ func (mg *QueueRedrivePolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this QueueRedrivePolicy.
+func (mg *QueueRedrivePolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this QueueRedrivePolicy.
 func (mg *QueueRedrivePolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *QueueRedrivePolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this QueueRedrivePolicy.
 func (mg *QueueRedrivePolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this QueueRedrivePolicy.
+func (mg *QueueRedrivePolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this QueueRedrivePolicy.

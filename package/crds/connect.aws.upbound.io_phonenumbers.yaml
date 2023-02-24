@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: phonenumbers.connect.aws.upbound.io
 spec:
@@ -172,6 +172,15 @@ spec:
                 - region
                 - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -351,12 +360,29 @@ spec:
                   arn:
                     description: The ARN of the phone number.
                     type: string
+                  countryCode:
+                    description: The ISO country code. For a list of Valid values,
+                      refer to PhoneNumberCountryCode.
+                    type: string
+                  description:
+                    description: The description of the phone number.
+                    type: string
                   id:
                     description: The identifier of the phone number.
                     type: string
                   phoneNumber:
                     description: The phone number. Phone numbers are formatted [+]
                       [country code] [subscriber number including area code].
+                    type: string
+                  prefix:
+                    description: The prefix of the phone number that is used to filter
+                      available phone numbers. If provided, it must contain + as part
+                      of the country code. Do not specify this argument when importing
+                      the resource.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   status:
                     description: A block that specifies status of the phone number.
@@ -372,6 +398,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -379,6 +410,14 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  targetArn:
+                    description: The Amazon Resource Name (ARN) for Amazon Connect
+                      instances that phone numbers are claimed to.
+                    type: string
+                  type:
+                    description: 'The type of phone number. Valid Values: TOLL_FREE
+                      | DID.'
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -421,9 +460,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

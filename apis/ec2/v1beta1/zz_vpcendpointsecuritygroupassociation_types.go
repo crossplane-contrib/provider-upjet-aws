@@ -17,6 +17,19 @@ type VPCEndpointSecurityGroupAssociationObservation struct {
 
 	// The ID of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Whether this association should replace the association with the VPC's default security group that is created when no security groups are specified during VPC endpoint creation. At most 1 association per-VPC endpoint should be configured with replace_default_association = true.
+	ReplaceDefaultAssociation *bool `json:"replaceDefaultAssociation,omitempty" tf:"replace_default_association,omitempty"`
+
+	// The ID of the security group to be associated with the VPC endpoint.
+	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
+
+	// The ID of the VPC endpoint with which the security group will be associated.
+	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 }
 
 type VPCEndpointSecurityGroupAssociationParameters struct {

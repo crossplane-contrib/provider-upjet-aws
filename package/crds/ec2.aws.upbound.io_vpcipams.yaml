@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: vpcipams.ec2.aws.upbound.io
 spec:
@@ -103,6 +103,15 @@ spec:
                 - operatingRegions
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -282,9 +291,33 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of IPAM
                     type: string
+                  cascade:
+                    description: Enables you to quickly delete an IPAM, private scopes,
+                      pools in private scopes, and any allocations in the pools in
+                      private scopes.
+                    type: boolean
+                  description:
+                    description: A description for the IPAM.
+                    type: string
                   id:
                     description: The ID of the IPAM
                     type: string
+                  operatingRegions:
+                    description: Determines which locales can be chosen when you create
+                      pools. Locale is the Region where you want to make an IPAM pool
+                      available for allocations. You can only create pools with locales
+                      that match the operating Regions of the IPAM. You can only create
+                      VPCs from a pool whose locale matches the VPC's Region. You
+                      specify a region using the region_name parameter. You must set
+                      your provider block region as an operating_region.
+                    items:
+                      properties:
+                        regionName:
+                          description: The name of the Region you want to add to the
+                            IPAM.
+                          type: string
+                      type: object
+                    type: array
                   privateDefaultScopeId:
                     description: 'The ID of the IPAM''s private scope. A scope is
                       a top-level container in IPAM. Each scope represents an IP-independent
@@ -303,9 +336,18 @@ spec:
                       intended for private IP space. The public scope is intended
                       for all internet-routable IP space.'
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   scopeCount:
                     description: The number of scopes in the IPAM.
                     type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -355,9 +397,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

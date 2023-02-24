@@ -14,7 +14,18 @@ import (
 )
 
 type VPNConnectionRouteObservation struct {
+
+	// The CIDR block associated with the local subnet of the customer network.
+	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ID of the VPN connection.
+	VPNConnectionID *string `json:"vpnConnectionId,omitempty" tf:"vpn_connection_id,omitempty"`
 }
 
 type VPNConnectionRouteParameters struct {

@@ -14,6 +14,12 @@ import (
 )
 
 type EnumerationValueObservation struct {
+
+	// Additional values related to the slot type value. Each item must be less than or equal to 140 characters in length.
+	Synonyms []*string `json:"synonyms,omitempty" tf:"synonyms,omitempty"`
+
+	// The value of the slot type. Must be less than or equal to 140 characters in length.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type EnumerationValueParameters struct {
@@ -33,13 +39,36 @@ type SlotTypeObservation struct {
 	// not included as an argument because the resource will add it automatically when updating the slot type.
 	Checksum *string `json:"checksum,omitempty" tf:"checksum,omitempty"`
 
+	// Determines if a new slot type version is created when the initial resource is created and on each
+	// update. Defaults to false.
+	CreateVersion *bool `json:"createVersion,omitempty" tf:"create_version,omitempty"`
+
 	// The date when the slot type version was created.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
+
+	// A description of the slot type. Must be less than or equal to 200 characters in length.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A list of EnumerationValue objects that defines the values that
+	// the slot type can take. Each value can have a list of synonyms, which are additional values that help
+	// train the machine learning model about the values that it resolves for a slot. Attributes are
+	// documented under enumeration_value.
+	EnumerationValue []EnumerationValueObservation `json:"enumerationValue,omitempty" tf:"enumeration_value,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The date when the $LATEST version of this slot type was updated.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Determines the slot resolution strategy that Amazon Lex
+	// uses to return slot type values. ORIGINAL_VALUE returns the value entered by the user if the user
+	// value is similar to the slot value. TOP_RESOLUTION returns the first value in the resolution list
+	// if there is a resolution list for the slot, otherwise null is returned. Defaults to ORIGINAL_VALUE.
+	ValueSelectionStrategy *string `json:"valueSelectionStrategy,omitempty" tf:"value_selection_strategy,omitempty"`
 
 	// The version of the slot type.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`

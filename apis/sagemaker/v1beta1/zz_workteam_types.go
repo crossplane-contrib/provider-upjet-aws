@@ -14,6 +14,15 @@ import (
 )
 
 type CognitoMemberDefinitionObservation struct {
+
+	// An identifier for an application client. You must create the app client ID using Amazon Cognito.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// An identifier for a user group.
+	UserGroup *string `json:"userGroup,omitempty" tf:"user_group,omitempty"`
+
+	// An identifier for a user pool. The user pool must be in the same region as the service that you are calling.
+	UserPool *string `json:"userPool,omitempty" tf:"user_pool,omitempty"`
 }
 
 type CognitoMemberDefinitionParameters struct {
@@ -62,6 +71,12 @@ type CognitoMemberDefinitionParameters struct {
 }
 
 type MemberDefinitionObservation struct {
+
+	// The Amazon Cognito user group that is part of the work team. See Cognito Member Definition details below.
+	CognitoMemberDefinition []CognitoMemberDefinitionObservation `json:"cognitoMemberDefinition,omitempty" tf:"cognito_member_definition,omitempty"`
+
+	// A list user groups that exist in your OIDC Identity Provider (IdP). One to ten groups can be used to create a single private work team. See Cognito Member Definition details below.
+	OidcMemberDefinition []OidcMemberDefinitionObservation `json:"oidcMemberDefinition,omitempty" tf:"oidc_member_definition,omitempty"`
 }
 
 type MemberDefinitionParameters struct {
@@ -76,6 +91,9 @@ type MemberDefinitionParameters struct {
 }
 
 type NotificationConfigurationObservation struct {
+
+	// The ARN for the SNS topic to which notifications should be published.
+	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 }
 
 type NotificationConfigurationParameters struct {
@@ -86,6 +104,9 @@ type NotificationConfigurationParameters struct {
 }
 
 type OidcMemberDefinitionObservation struct {
+
+	// A list of comma separated strings that identifies user groups in your OIDC IdP. Each user group is made up of a group of private workers.
+	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 }
 
 type OidcMemberDefinitionParameters struct {
@@ -100,14 +121,33 @@ type WorkteamObservation struct {
 	// The Amazon Resource Name (ARN) assigned by AWS to this Workteam.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A description of the work team.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The name of the Workteam.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of Member Definitions that contains objects that identify the workers that make up the work team. Workforces can be created using Amazon Cognito or your own OIDC Identity Provider (IdP). For private workforces created using Amazon Cognito use cognito_member_definition. For workforces created using your own OIDC identity provider (IdP) use oidc_member_definition. Do not provide input for both of these parameters in a single request. see Member Definition details below.
+	MemberDefinition []MemberDefinitionObservation `json:"memberDefinition,omitempty" tf:"member_definition,omitempty"`
+
+	// Configures notification of workers regarding available or expiring work items. see Notification Configuration details below.
+	NotificationConfiguration []NotificationConfigurationObservation `json:"notificationConfiguration,omitempty" tf:"notification_configuration,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The subdomain for your OIDC Identity Provider.
 	Subdomain *string `json:"subdomain,omitempty" tf:"subdomain,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The name of the Workteam (must be unique).
+	WorkforceName *string `json:"workforceName,omitempty" tf:"workforce_name,omitempty"`
 }
 
 type WorkteamParameters struct {

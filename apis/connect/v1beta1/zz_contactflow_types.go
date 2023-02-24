@@ -21,11 +21,39 @@ type ContactFlowObservation struct {
 	// The identifier of the Contact Flow.
 	ContactFlowID *string `json:"contactFlowId,omitempty" tf:"contact_flow_id,omitempty"`
 
+	// Specifies the content of the Contact Flow, provided as a JSON string, written in Amazon Connect Contact Flow Language. If defined, the filename argument cannot be used.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the Contact Flow source specified with filename. The usual way to set this is filebase64sha256("mycontact_flow.11.12 and later) or base64sha256(file("mycontact_flow.11.11 and earlier), where "mycontact_flow.json" is the local filename of the Contact Flow source.
+	ContentHash *string `json:"contentHash,omitempty" tf:"content_hash,omitempty"`
+
+	// Specifies the description of the Contact Flow.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The path to the Contact Flow source within the local filesystem. Conflicts with content.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
 	// The identifier of the hosting Amazon Connect Instance and identifier of the Contact Flow separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Specifies the name of the Contact Flow.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Specifies the type of the Contact Flow. Defaults to CONTACT_FLOW. Allowed Values are: CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ContactFlowParameters struct {

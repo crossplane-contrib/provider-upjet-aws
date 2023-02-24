@@ -14,6 +14,15 @@ import (
 )
 
 type DetailsObservation struct {
+
+	// The name of the Multi-Region Access Point.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Multi-Region Access Point. You can enable the configuration options in any combination. See Public Access Block Configuration below for more details.
+	PublicAccessBlock []PublicAccessBlockObservation `json:"publicAccessBlock,omitempty" tf:"public_access_block,omitempty"`
+
+	// The Region configuration block to specify the bucket associated with the Multi-Region Access Point. See Region Configuration below for more details.
+	Region []RegionObservation `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type DetailsParameters struct {
@@ -33,17 +42,28 @@ type DetailsParameters struct {
 
 type MultiRegionAccessPointObservation struct {
 
+	// The AWS account ID for the owner of the buckets for which you want to create a Multi-Region Access Point.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
 	// The alias for the Multi-Region Access Point.
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Multi-Region Access Point.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A configuration block containing details about the Multi-Region Access Point. See Details Configuration Block below for more details
+	Details []DetailsObservation `json:"details,omitempty" tf:"details,omitempty"`
+
 	// The DNS domain name of the S3 Multi-Region Access Point in the format alias.accesspoint.s3-global.amazonaws.com. For more information, see the documentation on Multi-Region Access Point Requests.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// The AWS account ID and access point name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Region configuration block to specify the bucket associated with the Multi-Region Access Point. See Region Configuration below for more details.
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The current status of the Multi-Region Access Point. One of: READY, INCONSISTENT_ACROSS_REGIONS, CREATING, PARTIALLY_CREATED, PARTIALLY_DELETED, DELETING.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -67,6 +87,18 @@ type MultiRegionAccessPointParameters struct {
 }
 
 type PublicAccessBlockObservation struct {
+
+	// Whether Amazon S3 should block public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect existing policies or ACLs. When set to true causes the following behavior:
+	BlockPublicAcls *bool `json:"blockPublicAcls,omitempty" tf:"block_public_acls,omitempty"`
+
+	// Whether Amazon S3 should block public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect existing bucket policies. When set to true causes Amazon S3 to:
+	BlockPublicPolicy *bool `json:"blockPublicPolicy,omitempty" tf:"block_public_policy,omitempty"`
+
+	// Whether Amazon S3 should ignore public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set. When set to true causes Amazon S3 to:
+	IgnorePublicAcls *bool `json:"ignorePublicAcls,omitempty" tf:"ignore_public_acls,omitempty"`
+
+	// Whether Amazon S3 should restrict public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true:
+	RestrictPublicBuckets *bool `json:"restrictPublicBuckets,omitempty" tf:"restrict_public_buckets,omitempty"`
 }
 
 type PublicAccessBlockParameters struct {
@@ -89,6 +121,9 @@ type PublicAccessBlockParameters struct {
 }
 
 type RegionObservation struct {
+
+	// The name of the associated bucket for the Region.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 }
 
 type RegionParameters struct {

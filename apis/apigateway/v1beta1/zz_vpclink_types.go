@@ -16,11 +16,27 @@ import (
 type VPCLinkObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the VPC link.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Identifier of the VpcLink.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Name used to label and identify the VPC link.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// List of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target.
+	TargetArns []*string `json:"targetArns,omitempty" tf:"target_arns,omitempty"`
 }
 
 type VPCLinkParameters struct {

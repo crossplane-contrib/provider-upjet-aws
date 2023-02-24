@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: gatewayresponses.apigateway.aws.upbound.io
 spec:
@@ -167,6 +167,15 @@ spec:
                 - region
                 - responseType
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -345,6 +354,30 @@ spec:
                 properties:
                   id:
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  responseParameters:
+                    additionalProperties:
+                      type: string
+                    description: Map of parameters (paths, query strings and headers)
+                      of the Gateway Response.
+                    type: object
+                  responseTemplates:
+                    additionalProperties:
+                      type: string
+                    description: Map of templates used to transform the response body.
+                    type: object
+                  responseType:
+                    description: Response type of the associated GatewayResponse.
+                    type: string
+                  restApiId:
+                    description: String identifier of the associated REST API.
+                    type: string
+                  statusCode:
+                    description: HTTP status code of the Gateway Response.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -387,9 +420,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

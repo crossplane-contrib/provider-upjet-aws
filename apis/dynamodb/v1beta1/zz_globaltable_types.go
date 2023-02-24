@@ -20,6 +20,13 @@ type GlobalTableObservation struct {
 
 	// The name of the DynamoDB Global Table
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Underlying DynamoDB Table. At least 1 replica must be defined. See below.
+	Replica []ReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
 }
 
 type GlobalTableParameters struct {
@@ -35,6 +42,9 @@ type GlobalTableParameters struct {
 }
 
 type ReplicaObservation struct {
+
+	// AWS region name of replica DynamoDB TableE.g., us-east-1
+	RegionName *string `json:"regionName,omitempty" tf:"region_name,omitempty"`
 }
 
 type ReplicaParameters struct {

@@ -18,11 +18,27 @@ type SpaceObservation struct {
 	// The space's Amazon Resource Name (ARN).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ID of the associated Domain.
+	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
+
 	// The ID of the space's profile in the Amazon Elastic File System volume.
 	HomeEFSFileSystemUID *string `json:"homeEfsFileSystemUid,omitempty" tf:"home_efs_file_system_uid,omitempty"`
 
 	// The space's Amazon Resource Name (ARN).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The name of the space.
+	SpaceName *string `json:"spaceName,omitempty" tf:"space_name,omitempty"`
+
+	// A collection of space settings. See Space Settings below.
+	SpaceSettings []SpaceSettingsObservation `json:"spaceSettings,omitempty" tf:"space_settings,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -63,6 +79,9 @@ type SpaceParameters struct {
 }
 
 type SpaceSettingsJupyterServerAppSettingsCodeRepositoryObservation struct {
+
+	// The URL of the Git repository.
+	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
 }
 
 type SpaceSettingsJupyterServerAppSettingsCodeRepositoryParameters struct {
@@ -73,6 +92,18 @@ type SpaceSettingsJupyterServerAppSettingsCodeRepositoryParameters struct {
 }
 
 type SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecObservation struct {
+
+	// The instance type.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
+	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The ARN of the image version created on the instance.
+	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
 }
 
 type SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecParameters struct {
@@ -95,6 +126,15 @@ type SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecParameters struct {
 }
 
 type SpaceSettingsJupyterServerAppSettingsObservation struct {
+
+	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
+	CodeRepository []SpaceSettingsJupyterServerAppSettingsCodeRepositoryObservation `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
+
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	DefaultResourceSpec []SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
 type SpaceSettingsJupyterServerAppSettingsParameters struct {
@@ -113,6 +153,15 @@ type SpaceSettingsJupyterServerAppSettingsParameters struct {
 }
 
 type SpaceSettingsKernelGatewayAppSettingsCustomImageObservation struct {
+
+	// The name of the App Image Config.
+	AppImageConfigName *string `json:"appImageConfigName,omitempty" tf:"app_image_config_name,omitempty"`
+
+	// The name of the Custom Image.
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// The version number of the Custom Image.
+	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type SpaceSettingsKernelGatewayAppSettingsCustomImageParameters struct {
@@ -131,6 +180,18 @@ type SpaceSettingsKernelGatewayAppSettingsCustomImageParameters struct {
 }
 
 type SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecObservation struct {
+
+	// The instance type.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
+	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The ARN of the image version created on the instance.
+	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
 }
 
 type SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters struct {
@@ -153,6 +214,15 @@ type SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters struct {
 }
 
 type SpaceSettingsKernelGatewayAppSettingsObservation struct {
+
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	CustomImage []SpaceSettingsKernelGatewayAppSettingsCustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
+
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	DefaultResourceSpec []SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
 type SpaceSettingsKernelGatewayAppSettingsParameters struct {
@@ -171,6 +241,12 @@ type SpaceSettingsKernelGatewayAppSettingsParameters struct {
 }
 
 type SpaceSettingsObservation struct {
+
+	// The Jupyter server's app settings. See Jupyter Server App Settings below.
+	JupyterServerAppSettings []SpaceSettingsJupyterServerAppSettingsObservation `json:"jupyterServerAppSettings,omitempty" tf:"jupyter_server_app_settings,omitempty"`
+
+	// The kernel gateway app settings. See Kernel Gateway App Settings below.
+	KernelGatewayAppSettings []SpaceSettingsKernelGatewayAppSettingsObservation `json:"kernelGatewayAppSettings,omitempty" tf:"kernel_gateway_app_settings,omitempty"`
 }
 
 type SpaceSettingsParameters struct {

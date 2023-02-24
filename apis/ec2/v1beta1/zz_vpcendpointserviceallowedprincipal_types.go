@@ -17,6 +17,16 @@ type VPCEndpointServiceAllowedPrincipalObservation struct {
 
 	// The ID of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ARN of the principal to allow permissions.
+	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ID of the VPC endpoint service to allow permission.
+	VPCEndpointServiceID *string `json:"vpcEndpointServiceId,omitempty" tf:"vpc_endpoint_service_id,omitempty"`
 }
 
 type VPCEndpointServiceAllowedPrincipalParameters struct {

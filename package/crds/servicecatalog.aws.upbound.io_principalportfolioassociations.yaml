@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: principalportfolioassociations.servicecatalog.aws.upbound.io
 spec:
@@ -234,6 +234,15 @@ spec:
                 - acceptLanguage
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -411,8 +420,27 @@ spec:
             properties:
               atProvider:
                 properties:
+                  acceptLanguage:
+                    description: 'Language code. Valid values: en (English), jp (Japanese),
+                      zh (Chinese). Default value is en.'
+                    type: string
                   id:
                     description: Identifier of the association.
+                    type: string
+                  portfolioId:
+                    description: Portfolio identifier.
+                    type: string
+                  principalArn:
+                    description: Principal ARN.
+                    type: string
+                  principalType:
+                    description: Principal type. Setting this argument empty (e.g.,
+                      principal_type = "") will result in an error. Valid value is
+                      IAM. Default is IAM.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -456,9 +484,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -17,6 +17,11 @@ func (mg *Bucket) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Bucket.
+func (mg *Bucket) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Bucket.
 func (mg *Bucket) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *Bucket) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Bucket.
 func (mg *Bucket) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Bucket.
+func (mg *Bucket) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Bucket.
@@ -83,6 +93,11 @@ func (mg *BucketACL) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketACL.
+func (mg *BucketACL) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketACL.
 func (mg *BucketACL) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *BucketACL) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketACL.
 func (mg *BucketACL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketACL.
+func (mg *BucketACL) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketACL.
@@ -149,6 +169,11 @@ func (mg *BucketAccelerateConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketAccelerateConfiguration.
+func (mg *BucketAccelerateConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketAccelerateConfiguration.
 func (mg *BucketAccelerateConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *BucketAccelerateConfiguration) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketAccelerateConfiguration.
 func (mg *BucketAccelerateConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketAccelerateConfiguration.
+func (mg *BucketAccelerateConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketAccelerateConfiguration.
@@ -215,6 +245,11 @@ func (mg *BucketAnalyticsConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy 
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketAnalyticsConfiguration.
+func (mg *BucketAnalyticsConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketAnalyticsConfiguration.
 func (mg *BucketAnalyticsConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *BucketAnalyticsConfiguration) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketAnalyticsConfiguration.
 func (mg *BucketAnalyticsConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketAnalyticsConfiguration.
+func (mg *BucketAnalyticsConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketAnalyticsConfiguration.
@@ -281,6 +321,11 @@ func (mg *BucketCorsConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketCorsConfiguration.
+func (mg *BucketCorsConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketCorsConfiguration.
 func (mg *BucketCorsConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *BucketCorsConfiguration) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketCorsConfiguration.
 func (mg *BucketCorsConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketCorsConfiguration.
+func (mg *BucketCorsConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketCorsConfiguration.
@@ -347,6 +397,11 @@ func (mg *BucketIntelligentTieringConfiguration) GetDeletionPolicy() xpv1.Deleti
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketIntelligentTieringConfiguration.
+func (mg *BucketIntelligentTieringConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketIntelligentTieringConfiguration.
 func (mg *BucketIntelligentTieringConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *BucketIntelligentTieringConfiguration) SetConditions(c ...xpv1.Conditi
 // SetDeletionPolicy of this BucketIntelligentTieringConfiguration.
 func (mg *BucketIntelligentTieringConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketIntelligentTieringConfiguration.
+func (mg *BucketIntelligentTieringConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketIntelligentTieringConfiguration.
@@ -413,6 +473,11 @@ func (mg *BucketInventory) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketInventory.
+func (mg *BucketInventory) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketInventory.
 func (mg *BucketInventory) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *BucketInventory) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketInventory.
 func (mg *BucketInventory) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketInventory.
+func (mg *BucketInventory) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketInventory.
@@ -479,6 +549,11 @@ func (mg *BucketLifecycleConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy 
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketLifecycleConfiguration.
+func (mg *BucketLifecycleConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketLifecycleConfiguration.
 func (mg *BucketLifecycleConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -510,6 +585,11 @@ func (mg *BucketLifecycleConfiguration) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketLifecycleConfiguration.
 func (mg *BucketLifecycleConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketLifecycleConfiguration.
+func (mg *BucketLifecycleConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketLifecycleConfiguration.
@@ -545,6 +625,11 @@ func (mg *BucketLogging) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketLogging.
+func (mg *BucketLogging) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketLogging.
 func (mg *BucketLogging) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -576,6 +661,11 @@ func (mg *BucketLogging) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketLogging.
 func (mg *BucketLogging) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketLogging.
+func (mg *BucketLogging) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketLogging.
@@ -611,6 +701,11 @@ func (mg *BucketMetric) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketMetric.
+func (mg *BucketMetric) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketMetric.
 func (mg *BucketMetric) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -642,6 +737,11 @@ func (mg *BucketMetric) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketMetric.
 func (mg *BucketMetric) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketMetric.
+func (mg *BucketMetric) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketMetric.
@@ -677,6 +777,11 @@ func (mg *BucketNotification) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketNotification.
+func (mg *BucketNotification) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketNotification.
 func (mg *BucketNotification) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -708,6 +813,11 @@ func (mg *BucketNotification) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketNotification.
 func (mg *BucketNotification) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketNotification.
+func (mg *BucketNotification) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketNotification.
@@ -743,6 +853,11 @@ func (mg *BucketObject) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketObject.
+func (mg *BucketObject) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketObject.
 func (mg *BucketObject) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -774,6 +889,11 @@ func (mg *BucketObject) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketObject.
 func (mg *BucketObject) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketObject.
+func (mg *BucketObject) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketObject.
@@ -809,6 +929,11 @@ func (mg *BucketObjectLockConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketObjectLockConfiguration.
+func (mg *BucketObjectLockConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketObjectLockConfiguration.
 func (mg *BucketObjectLockConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -840,6 +965,11 @@ func (mg *BucketObjectLockConfiguration) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketObjectLockConfiguration.
 func (mg *BucketObjectLockConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketObjectLockConfiguration.
+func (mg *BucketObjectLockConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketObjectLockConfiguration.
@@ -875,6 +1005,11 @@ func (mg *BucketOwnershipControls) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketOwnershipControls.
+func (mg *BucketOwnershipControls) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketOwnershipControls.
 func (mg *BucketOwnershipControls) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -906,6 +1041,11 @@ func (mg *BucketOwnershipControls) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketOwnershipControls.
 func (mg *BucketOwnershipControls) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketOwnershipControls.
+func (mg *BucketOwnershipControls) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketOwnershipControls.
@@ -941,6 +1081,11 @@ func (mg *BucketPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketPolicy.
+func (mg *BucketPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketPolicy.
 func (mg *BucketPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -972,6 +1117,11 @@ func (mg *BucketPolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketPolicy.
 func (mg *BucketPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketPolicy.
+func (mg *BucketPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketPolicy.
@@ -1007,6 +1157,11 @@ func (mg *BucketPublicAccessBlock) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketPublicAccessBlock.
+func (mg *BucketPublicAccessBlock) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketPublicAccessBlock.
 func (mg *BucketPublicAccessBlock) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1038,6 +1193,11 @@ func (mg *BucketPublicAccessBlock) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketPublicAccessBlock.
 func (mg *BucketPublicAccessBlock) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketPublicAccessBlock.
+func (mg *BucketPublicAccessBlock) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketPublicAccessBlock.
@@ -1073,6 +1233,11 @@ func (mg *BucketReplicationConfiguration) GetDeletionPolicy() xpv1.DeletionPolic
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketReplicationConfiguration.
+func (mg *BucketReplicationConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketReplicationConfiguration.
 func (mg *BucketReplicationConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1104,6 +1269,11 @@ func (mg *BucketReplicationConfiguration) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketReplicationConfiguration.
 func (mg *BucketReplicationConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketReplicationConfiguration.
+func (mg *BucketReplicationConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketReplicationConfiguration.
@@ -1139,6 +1309,11 @@ func (mg *BucketRequestPaymentConfiguration) GetDeletionPolicy() xpv1.DeletionPo
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketRequestPaymentConfiguration.
+func (mg *BucketRequestPaymentConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketRequestPaymentConfiguration.
 func (mg *BucketRequestPaymentConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1170,6 +1345,11 @@ func (mg *BucketRequestPaymentConfiguration) SetConditions(c ...xpv1.Condition) 
 // SetDeletionPolicy of this BucketRequestPaymentConfiguration.
 func (mg *BucketRequestPaymentConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketRequestPaymentConfiguration.
+func (mg *BucketRequestPaymentConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketRequestPaymentConfiguration.
@@ -1205,6 +1385,11 @@ func (mg *BucketServerSideEncryptionConfiguration) GetDeletionPolicy() xpv1.Dele
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketServerSideEncryptionConfiguration.
+func (mg *BucketServerSideEncryptionConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketServerSideEncryptionConfiguration.
 func (mg *BucketServerSideEncryptionConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1236,6 +1421,11 @@ func (mg *BucketServerSideEncryptionConfiguration) SetConditions(c ...xpv1.Condi
 // SetDeletionPolicy of this BucketServerSideEncryptionConfiguration.
 func (mg *BucketServerSideEncryptionConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketServerSideEncryptionConfiguration.
+func (mg *BucketServerSideEncryptionConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketServerSideEncryptionConfiguration.
@@ -1271,6 +1461,11 @@ func (mg *BucketVersioning) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketVersioning.
+func (mg *BucketVersioning) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketVersioning.
 func (mg *BucketVersioning) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1302,6 +1497,11 @@ func (mg *BucketVersioning) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketVersioning.
 func (mg *BucketVersioning) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketVersioning.
+func (mg *BucketVersioning) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketVersioning.
@@ -1337,6 +1537,11 @@ func (mg *BucketWebsiteConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BucketWebsiteConfiguration.
+func (mg *BucketWebsiteConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BucketWebsiteConfiguration.
 func (mg *BucketWebsiteConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1368,6 +1573,11 @@ func (mg *BucketWebsiteConfiguration) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BucketWebsiteConfiguration.
 func (mg *BucketWebsiteConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BucketWebsiteConfiguration.
+func (mg *BucketWebsiteConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BucketWebsiteConfiguration.
@@ -1403,6 +1613,11 @@ func (mg *Object) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Object.
+func (mg *Object) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Object.
 func (mg *Object) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1434,6 +1649,11 @@ func (mg *Object) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Object.
 func (mg *Object) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Object.
+func (mg *Object) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Object.
@@ -1469,6 +1689,11 @@ func (mg *ObjectCopy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ObjectCopy.
+func (mg *ObjectCopy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ObjectCopy.
 func (mg *ObjectCopy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1500,6 +1725,11 @@ func (mg *ObjectCopy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ObjectCopy.
 func (mg *ObjectCopy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ObjectCopy.
+func (mg *ObjectCopy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ObjectCopy.

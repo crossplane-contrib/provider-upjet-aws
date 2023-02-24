@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: invocations.lambda.aws.upbound.io
 spec:
@@ -161,6 +161,15 @@ spec:
                 - input
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -337,11 +346,31 @@ spec:
             properties:
               atProvider:
                 properties:
+                  functionName:
+                    description: Name of the lambda function.
+                    type: string
                   id:
+                    type: string
+                  input:
+                    description: JSON payload to the lambda function.
+                    type: string
+                  qualifier:
+                    description: Qualifier (i.e., version) of the lambda function.
+                      Defaults to $LATEST.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   result:
                     description: String result of the lambda function invocation.
                     type: string
+                  triggers:
+                    additionalProperties:
+                      type: string
+                    description: Map of arbitrary keys and values that, when changed,
+                      will trigger a re-invocation.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -384,9 +413,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

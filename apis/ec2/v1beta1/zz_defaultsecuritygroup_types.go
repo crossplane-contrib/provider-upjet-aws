@@ -14,6 +14,33 @@ import (
 )
 
 type DefaultSecurityGroupEgressObservation struct {
+
+	// List of CIDR blocks.
+	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
+
+	// Description of this rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Start port (or ICMP type number if protocol is icmp)
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// List of IPv6 CIDR blocks.
+	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
+
+	// List of prefix list IDs (for allowing access to VPC endpoints)
+	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
+
+	// Protocol. If you select a protocol of "-1" (semantically equivalent to all, which is not a valid value here), you must specify a from_port and to_port equal to 0. If not icmp, tcp, udp, or -1 use the protocol number.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// Whether the security group itself will be added as a source to this egress rule.
+	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
+
+	// End range port (or ICMP code if protocol is icmp).
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type DefaultSecurityGroupEgressParameters struct {
@@ -56,6 +83,33 @@ type DefaultSecurityGroupEgressParameters struct {
 }
 
 type DefaultSecurityGroupIngressObservation struct {
+
+	// List of CIDR blocks.
+	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
+
+	// Description of this rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Start port (or ICMP type number if protocol is icmp)
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// List of IPv6 CIDR blocks.
+	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
+
+	// List of prefix list IDs (for allowing access to VPC endpoints)
+	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
+
+	// Protocol. If you select a protocol of "-1" (semantically equivalent to all, which is not a valid value here), you must specify a from_port and to_port equal to 0. If not icmp, tcp, udp, or -1 use the protocol number.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// Whether the security group itself will be added as a source to this egress rule.
+	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
+
+	// End range port (or ICMP code if protocol is icmp).
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type DefaultSecurityGroupIngressParameters struct {
@@ -105,8 +159,14 @@ type DefaultSecurityGroupObservation struct {
 	// Description of this rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Configuration block. Detailed below.
+	Egress []DefaultSecurityGroupEgressObservation `json:"egress,omitempty" tf:"egress,omitempty"`
+
 	// ID of the security group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Configuration block. Detailed below.
+	Ingress []DefaultSecurityGroupIngressObservation `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
 	// Name of the security group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -114,8 +174,20 @@ type DefaultSecurityGroupObservation struct {
 	// Owner ID.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	RevokeRulesOnDelete *bool `json:"revokeRulesOnDelete,omitempty" tf:"revoke_rules_on_delete,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// VPC ID. Note that changing the  It will be left in its current state.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type DefaultSecurityGroupParameters struct {

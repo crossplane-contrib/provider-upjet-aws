@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: hosts.codestarconnections.aws.upbound.io
 spec:
@@ -120,6 +120,15 @@ spec:
                 - providerType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -302,11 +311,58 @@ spec:
                   id:
                     description: The CodeStar Host ARN.
                     type: string
+                  name:
+                    description: The name of the host to be created. The name must
+                      be unique in the calling AWS account.
+                    type: string
+                  providerEndpoint:
+                    description: The endpoint of the infrastructure to be represented
+                      by the host after it is created.
+                    type: string
+                  providerType:
+                    description: The name of the external provider where your third-party
+                      code repository is configured.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   status:
                     description: The CodeStar Host status. Possible values are PENDING,
                       AVAILABLE, VPC_CONFIG_DELETING, VPC_CONFIG_INITIALIZING, and
                       VPC_CONFIG_FAILED_INITIALIZATION.
                     type: string
+                  vpcConfiguration:
+                    description: The VPC configuration to be provisioned for the host.
+                      A VPC must be configured, and the infrastructure to be represented
+                      by the host must already be connected to the VPC.
+                    items:
+                      properties:
+                        securityGroupIds:
+                          description: he ID of the security group or security groups
+                            associated with the Amazon VPC connected to the infrastructure
+                            where your provider type is installed.
+                          items:
+                            type: string
+                          type: array
+                        subnetIds:
+                          description: The ID of the subnet or subnets associated
+                            with the Amazon VPC connected to the infrastructure where
+                            your provider type is installed.
+                          items:
+                            type: string
+                          type: array
+                        tlsCertificate:
+                          description: The value of the Transport Layer Security (TLS)
+                            certificate associated with the infrastructure where your
+                            provider type is installed.
+                          type: string
+                        vpcId:
+                          description: The ID of the Amazon VPC connected to the infrastructure
+                            where your provider type is installed.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -349,9 +405,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

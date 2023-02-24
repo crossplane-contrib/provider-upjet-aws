@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: remediationconfigurations.configservice.aws.upbound.io
 spec:
@@ -146,6 +146,15 @@ spec:
                 - targetId
                 - targetType
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -326,7 +335,81 @@ spec:
                   arn:
                     description: ARN of the Config Remediation Configuration.
                     type: string
+                  automatic:
+                    description: Remediation is triggered automatically if true.
+                    type: boolean
+                  executionControls:
+                    description: Configuration block for execution controls. See below.
+                    items:
+                      properties:
+                        ssmControls:
+                          description: Configuration block for SSM controls. See below.
+                          items:
+                            properties:
+                              concurrentExecutionRatePercentage:
+                                description: Maximum percentage of remediation actions
+                                  allowed to run in parallel on the non-compliant
+                                  resources for that specific rule. The default value
+                                  is 10%.
+                                type: number
+                              errorPercentage:
+                                description: Percentage of errors that are allowed
+                                  before SSM stops running automations on non-compliant
+                                  resources for that specific rule. The default is
+                                  50%.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   id:
+                    type: string
+                  maximumAutomaticAttempts:
+                    description: Maximum number of failed attempts for auto-remediation.
+                      If you do not select a number, the default is 5.
+                    type: number
+                  parameter:
+                    description: Can be specified multiple times for each parameter.
+                      Each parameter block supports arguments below.
+                    items:
+                      properties:
+                        name:
+                          description: Name of the attribute.
+                          type: string
+                        resourceValue:
+                          description: Value is dynamic and changes at run-time.
+                          type: string
+                        staticValue:
+                          description: Value is static and does not change at run-time.
+                          type: string
+                        staticValues:
+                          description: List of static values.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  resourceType:
+                    description: Type of resource.
+                    type: string
+                  retryAttemptSeconds:
+                    description: Maximum time in seconds that AWS Config runs auto-remediation.
+                      If you do not select a number, the default is 60 seconds.
+                    type: number
+                  targetId:
+                    description: Target ID is the name of the public document.
+                    type: string
+                  targetType:
+                    description: Type of the target. Target executes remediation.
+                      For example, SSM document.
+                    type: string
+                  targetVersion:
+                    description: Version of the target. For example, version of the
+                      SSM document
                     type: string
                 type: object
               conditions:
@@ -370,9 +453,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

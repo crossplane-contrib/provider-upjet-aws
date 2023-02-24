@@ -18,10 +18,20 @@ type CellObservation struct {
 	// ARN of the cell
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// List of cell arns to add as nested fault domains within this cell.
+	Cells []*string `json:"cells,omitempty" tf:"cells,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of readiness scopes (recovery groups or cells) that contain this cell.
 	ParentReadinessScopes []*string `json:"parentReadinessScopes,omitempty" tf:"parent_readiness_scopes,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

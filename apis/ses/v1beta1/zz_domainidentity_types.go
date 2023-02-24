@@ -18,7 +18,14 @@ type DomainIdentityObservation struct {
 	// The ARN of the domain identity.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The domain name to assign to SES
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// A code which when added to the domain as a TXT record
 	// will signal to SES that the owner of the domain has authorised SES to act on

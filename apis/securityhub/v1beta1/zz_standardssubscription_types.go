@@ -17,6 +17,13 @@ type StandardsSubscriptionObservation struct {
 
 	// The ARN of a resource that represents your subscription to a supported standard.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ARN of a standard - see below.
+	StandardsArn *string `json:"standardsArn,omitempty" tf:"standards_arn,omitempty"`
 }
 
 type StandardsSubscriptionParameters struct {

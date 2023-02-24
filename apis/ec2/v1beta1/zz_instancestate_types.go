@@ -15,8 +15,21 @@ import (
 
 type InstanceStateObservation struct {
 
+	// Whether to request a forced stop when state is stopped. Otherwise (i.e., state is running), ignored. When an instance is forced to stop, it does not flush file system caches or file system metadata, and you must subsequently perform file system check and repair. Not recommended for Windows instances. Defaults to false.
+	Force *bool `json:"force,omitempty" tf:"force,omitempty"`
+
 	// ID of the instance (matches instance_id).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// ID of the instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// - State of the instance. Valid values are stopped, running.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
 type InstanceStateParameters struct {

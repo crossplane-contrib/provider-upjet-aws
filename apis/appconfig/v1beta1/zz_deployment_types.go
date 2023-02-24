@@ -15,17 +15,42 @@ import (
 
 type DeploymentObservation struct {
 
+	// Application ID. Must be between 4 and 7 characters in length.
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
+
 	// ARN of the AppConfig Deployment.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Configuration profile ID. Must be between 4 and 7 characters in length.
+	ConfigurationProfileID *string `json:"configurationProfileId,omitempty" tf:"configuration_profile_id,omitempty"`
+
+	// Configuration version to deploy. Can be at most 1024 characters.
+	ConfigurationVersion *string `json:"configurationVersion,omitempty" tf:"configuration_version,omitempty"`
 
 	// Deployment number.
 	DeploymentNumber *float64 `json:"deploymentNumber,omitempty" tf:"deployment_number,omitempty"`
 
+	// Deployment strategy ID or name of a predefined deployment strategy. See Predefined Deployment Strategies for more details.
+	DeploymentStrategyID *string `json:"deploymentStrategyId,omitempty" tf:"deployment_strategy_id,omitempty"`
+
+	// Description of the deployment. Can be at most 1024 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Environment ID. Must be between 4 and 7 characters in length.
+	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
+
 	// AppConfig application ID, environment ID, and deployment number separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// State of the deployment.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

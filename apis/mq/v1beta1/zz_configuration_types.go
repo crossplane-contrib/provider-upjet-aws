@@ -18,11 +18,36 @@ type ConfigurationObservation_2 struct {
 	// ARN of the configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Authentication strategy associated with the configuration. Valid values are simple and ldap. ldap is not supported for engine_type RabbitMQ.
+	AuthenticationStrategy *string `json:"authenticationStrategy,omitempty" tf:"authentication_strategy,omitempty"`
+
+	// Broker configuration in XML format. See official docs for supported parameters and format of the XML.
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
+	// Description of the configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Type of broker engine. Valid values are ActiveMQ and RabbitMQ.
+	EngineType *string `json:"engineType,omitempty" tf:"engine_type,omitempty"`
+
+	// Version of the broker engine.
+	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
+
 	// Unique ID that Amazon MQ generates for the configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Latest revision of the configuration.
 	LatestRevision *float64 `json:"latestRevision,omitempty" tf:"latest_revision,omitempty"`
+
+	// Name of the configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

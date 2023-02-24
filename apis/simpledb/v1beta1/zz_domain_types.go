@@ -17,6 +17,10 @@ type DomainObservation struct {
 
 	// The name of the SimpleDB domain
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DomainParameters struct {

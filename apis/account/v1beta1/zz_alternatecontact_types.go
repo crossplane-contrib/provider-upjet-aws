@@ -14,7 +14,30 @@ import (
 )
 
 type AlternateContactObservation struct {
+
+	// ID of the target account when managing member accounts. Will manage current user's account by default if omitted.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// Type of the alternate contact. Allowed values are: BILLING, OPERATIONS, SECURITY.
+	AlternateContactType *string `json:"alternateContactType,omitempty" tf:"alternate_contact_type,omitempty"`
+
+	// An email address for the alternate contact.
+	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the alternate contact.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Phone number for the alternate contact.
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Title for the alternate contact.
+	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 }
 
 type AlternateContactParameters struct {

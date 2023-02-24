@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: tables.dynamodb.aws.upbound.io
 spec:
@@ -305,6 +305,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -484,13 +493,201 @@ spec:
                   arn:
                     description: ARN of the table
                     type: string
+                  attribute:
+                    description: Set of nested attribute definitions. Only required
+                      for hash_key and range_key attributes. See below.
+                    items:
+                      properties:
+                        name:
+                          description: Name of the attribute
+                          type: string
+                        type:
+                          description: Attribute type. Valid values are S (string),
+                            N (number), B (binary).
+                          type: string
+                      type: object
+                    type: array
+                  billingMode:
+                    description: Controls how you are charged for read and write throughput
+                      and how you manage capacity. The valid values are PROVISIONED
+                      and PAY_PER_REQUEST. Defaults to PROVISIONED.
+                    type: string
+                  globalSecondaryIndex:
+                    description: Describe a GSI for the table; subject to the normal
+                      limits on the number of GSIs, projected attributes, etc. See
+                      below.
+                    items:
+                      properties:
+                        hashKey:
+                          description: Name of the hash key in the index; must be
+                            defined as an attribute in the resource.
+                          type: string
+                        name:
+                          description: Name of the index.
+                          type: string
+                        nonKeyAttributes:
+                          description: Only required with INCLUDE as a projection
+                            type; a list of attributes to project into the index.
+                            These do not need to be defined as attributes on the table.
+                          items:
+                            type: string
+                          type: array
+                        projectionType:
+                          description: One of ALL, INCLUDE or KEYS_ONLY where ALL
+                            projects every attribute into the index, KEYS_ONLY projects  into
+                            the index only the table and index hash_key and sort_key
+                            attributes ,  INCLUDE projects into the index all of the
+                            attributes that are defined in non_key_attributes in addition
+                            to the attributes that thatKEYS_ONLY project.
+                          type: string
+                        rangeKey:
+                          description: Name of the range key; must be defined
+                          type: string
+                        readCapacity:
+                          description: Number of read units for this index. Must be
+                            set if billing_mode is set to PROVISIONED.
+                          type: number
+                        writeCapacity:
+                          description: Number of write units for this index. Must
+                            be set if billing_mode is set to PROVISIONED.
+                          type: number
+                      type: object
+                    type: array
+                  hashKey:
+                    description: Attribute to use as the hash (partition) key. Must
+                      also be defined as an attribute. See below.
+                    type: string
                   id:
                     description: Name of the table
                     type: string
+                  localSecondaryIndex:
+                    description: Describe an LSI on the table; these can only be allocated
+                      at creation so you cannot change this definition after you have
+                      created the resource. See below.
+                    items:
+                      properties:
+                        name:
+                          description: Name of the index
+                          type: string
+                        nonKeyAttributes:
+                          description: Only required with INCLUDE as a projection
+                            type; a list of attributes to project into the index.
+                            These do not need to be defined as attributes on the table.
+                          items:
+                            type: string
+                          type: array
+                        projectionType:
+                          description: One of ALL, INCLUDE or KEYS_ONLY where ALL
+                            projects every attribute into the index, KEYS_ONLY projects  into
+                            the index only the table and index hash_key and sort_key
+                            attributes ,  INCLUDE projects into the index all of the
+                            attributes that are defined in non_key_attributes in addition
+                            to the attributes that thatKEYS_ONLY project.
+                          type: string
+                        rangeKey:
+                          description: Name of the range key.
+                          type: string
+                      type: object
+                    type: array
+                  pointInTimeRecovery:
+                    description: Enable point-in-time recovery options. See below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Whether to enable point-in-time recovery. It
+                            can take 10 minutes to enable for new tables. If the point_in_time_recovery
+                            block is not provided, this defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  rangeKey:
+                    description: Attribute to use as the range (sort) key. Must also
+                      be defined as an attribute, see below.
+                    type: string
+                  readCapacity:
+                    description: Number of read units for this table. If the billing_mode
+                      is PROVISIONED, this field is required.
+                    type: number
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  replica:
+                    description: Configuration block(s) with DynamoDB Global Tables
+                      V2 (version 2019.11.21) replication configurations. See below.
+                    items:
+                      properties:
+                        kmsKeyArn:
+                          description: 'ARN of the CMK that should be used for the
+                            AWS KMS encryption. This argument should only be used
+                            if the key is different from the default KMS-managed DynamoDB
+                            key, alias/aws/dynamodb. Note: This attribute will not
+                            be populated with the ARN of default keys.'
+                          type: string
+                        pointInTimeRecovery:
+                          description: Whether to enable Point In Time Recovery for
+                            the replica. Default is false.
+                          type: boolean
+                        propagateTags:
+                          description: 'Whether to propagate the global table''s tags
+                            to a replica. Default is false. Changes to tags only move
+                            in one direction: from global (source) to replica. In
+                            other words, tag drift on a replica will not trigger an
+                            update. Tag or replica changes on the global table, whether
+                            from drift or configuration changes, are propagated to
+                            replicas. Changing from true to false on a subsequent
+                            apply means replica tags are left as they were, unmanaged,
+                            not deleted.'
+                          type: boolean
+                        regionName:
+                          description: Region name of the replica.
+                          type: string
+                      type: object
+                    type: array
+                  restoreDateTime:
+                    description: Time of the point-in-time recovery point to restore.
+                    type: string
+                  restoreSourceName:
+                    description: Name of the table to restore. Must match the name
+                      of an existing table.
+                    type: string
+                  restoreToLatestTime:
+                    description: If set, restores table to the most recent point-in-time
+                      recovery point.
+                    type: boolean
+                  serverSideEncryption:
+                    description: Encryption at rest options. AWS DynamoDB tables are
+                      automatically encrypted at rest with an AWS-owned Customer Master
+                      Key if this argument isn't specified. See below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Whether or not to enable encryption at rest
+                            using an AWS managed KMS customer master key (CMK). If
+                            enabled is false then server-side encryption is set to
+                            AWS-owned key (shown as DEFAULT in the AWS console). Potentially
+                            confusingly, if enabled is true and no kms_key_arn is
+                            specified then server-side encryption is set to the default
+                            KMS-managed key (shown as KMS in the AWS console). The
+                            AWS KMS documentation explains the difference between
+                            AWS-owned and KMS-managed keys.
+                          type: boolean
+                        kmsKeyArn:
+                          description: 'ARN of the CMK that should be used for the
+                            AWS KMS encryption. This argument should only be used
+                            if the key is different from the default KMS-managed DynamoDB
+                            key, alias/aws/dynamodb. Note: This attribute will not
+                            be populated with the ARN of default keys.'
+                          type: string
+                      type: object
+                    type: array
                   streamArn:
                     description: ARN of the Table Stream. Only available when stream_enabled
                       = true
                     type: string
+                  streamEnabled:
+                    description: Whether Streams are enabled.
+                    type: boolean
                   streamLabel:
                     description: Timestamp, in ISO 8601 format, for this stream. Note
                       that this timestamp is not a unique identifier for the stream
@@ -499,12 +696,43 @@ spec:
                       for creating CloudWatch Alarms. Only available when stream_enabled
                       = true
                     type: string
+                  streamViewType:
+                    description: When an item in the table is modified, StreamViewType
+                      determines what information is written to the table's stream.
+                      Valid values are KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES.
+                    type: string
+                  tableClass:
+                    description: Storage class of the table. Valid values are STANDARD
+                      and STANDARD_INFREQUENT_ACCESS.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                  ttl:
+                    description: Configuration block for TTL. See below.
+                    items:
+                      properties:
+                        attributeName:
+                          description: Name of the table attribute to store the TTL
+                            timestamp in.
+                          type: string
+                        enabled:
+                          description: Whether TTL is enabled.
+                          type: boolean
+                      type: object
+                    type: array
+                  writeCapacity:
+                    description: Number of write units for this table. If the billing_mode
+                      is PROVISIONED, this field is required.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -547,9 +775,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

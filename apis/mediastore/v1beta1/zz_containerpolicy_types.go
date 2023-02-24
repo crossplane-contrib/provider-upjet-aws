@@ -14,7 +14,18 @@ import (
 )
 
 type ContainerPolicyObservation struct {
+
+	// The name of the container.
+	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The contents of the policy.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ContainerPolicyParameters struct {

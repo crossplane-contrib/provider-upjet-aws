@@ -17,6 +17,11 @@ func (mg *LB) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LB.
+func (mg *LB) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LB.
 func (mg *LB) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *LB) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LB.
 func (mg *LB) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LB.
+func (mg *LB) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LB.
@@ -83,6 +93,11 @@ func (mg *LBListener) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LBListener.
+func (mg *LBListener) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LBListener.
 func (mg *LBListener) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *LBListener) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LBListener.
 func (mg *LBListener) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LBListener.
+func (mg *LBListener) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LBListener.
@@ -149,6 +169,11 @@ func (mg *LBListenerRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LBListenerRule.
+func (mg *LBListenerRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LBListenerRule.
 func (mg *LBListenerRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *LBListenerRule) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LBListenerRule.
 func (mg *LBListenerRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LBListenerRule.
+func (mg *LBListenerRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LBListenerRule.
@@ -215,6 +245,11 @@ func (mg *LBTargetGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LBTargetGroup.
+func (mg *LBTargetGroup) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LBTargetGroup.
 func (mg *LBTargetGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *LBTargetGroup) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LBTargetGroup.
 func (mg *LBTargetGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LBTargetGroup.
+func (mg *LBTargetGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LBTargetGroup.
@@ -281,6 +321,11 @@ func (mg *LBTargetGroupAttachment) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LBTargetGroupAttachment.
+func (mg *LBTargetGroupAttachment) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LBTargetGroupAttachment.
 func (mg *LBTargetGroupAttachment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *LBTargetGroupAttachment) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LBTargetGroupAttachment.
 func (mg *LBTargetGroupAttachment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LBTargetGroupAttachment.
+func (mg *LBTargetGroupAttachment) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LBTargetGroupAttachment.

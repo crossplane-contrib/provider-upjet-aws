@@ -15,10 +15,23 @@ import (
 
 type TagOptionObservation struct {
 
+	// Whether tag option is active. Default is true.
+	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
+
 	// Identifier (e.g., tag-pjtvagohlyo3m).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Tag option key.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Tag option value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TagOptionParameters struct {

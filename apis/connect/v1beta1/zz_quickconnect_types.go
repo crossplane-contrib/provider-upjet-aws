@@ -14,6 +14,9 @@ import (
 )
 
 type PhoneConfigObservation struct {
+
+	// Specifies the phone number in in E.164 format.
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
 }
 
 type PhoneConfigParameters struct {
@@ -24,6 +27,12 @@ type PhoneConfigParameters struct {
 }
 
 type QueueConfigObservation struct {
+
+	// Specifies the identifier of the contact flow.
+	ContactFlowID *string `json:"contactFlowId,omitempty" tf:"contact_flow_id,omitempty"`
+
+	// Specifies the identifier for the queue.
+	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
 }
 
 type QueueConfigParameters struct {
@@ -38,6 +47,18 @@ type QueueConfigParameters struct {
 }
 
 type QuickConnectConfigObservation struct {
+
+	// Specifies the phone configuration of the Quick Connect. This is required only if quick_connect_type is PHONE_NUMBER. The phone_config block is documented below.
+	PhoneConfig []PhoneConfigObservation `json:"phoneConfig,omitempty" tf:"phone_config,omitempty"`
+
+	// Specifies the queue configuration of the Quick Connect. This is required only if quick_connect_type is QUEUE. The queue_config block is documented below.
+	QueueConfig []QueueConfigObservation `json:"queueConfig,omitempty" tf:"queue_config,omitempty"`
+
+	// Specifies the configuration type of the quick connect. valid values are PHONE_NUMBER, QUEUE, USER.
+	QuickConnectType *string `json:"quickConnectType,omitempty" tf:"quick_connect_type,omitempty"`
+
+	// Specifies the user configuration of the Quick Connect. This is required only if quick_connect_type is USER. The user_config block is documented below.
+	UserConfig []UserConfigObservation `json:"userConfig,omitempty" tf:"user_config,omitempty"`
 }
 
 type QuickConnectConfigParameters struct {
@@ -64,11 +85,30 @@ type QuickConnectObservation struct {
 	// The Amazon Resource Name (ARN) of the Quick Connect.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Specifies the description of the Quick Connect.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The identifier of the hosting Amazon Connect Instance and identifier of the Quick Connect separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Specifies the name of the Quick Connect.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A block that defines the configuration information for the Quick Connect: quick_connect_type and one of phone_config, queue_config, user_config . The Quick Connect Config block is documented below.
+	QuickConnectConfig []QuickConnectConfigObservation `json:"quickConnectConfig,omitempty" tf:"quick_connect_config,omitempty"`
+
 	// The identifier for the Quick Connect.
 	QuickConnectID *string `json:"quickConnectId,omitempty" tf:"quick_connect_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -113,6 +153,12 @@ type QuickConnectParameters struct {
 }
 
 type UserConfigObservation struct {
+
+	// Specifies the identifier of the contact flow.
+	ContactFlowID *string `json:"contactFlowId,omitempty" tf:"contact_flow_id,omitempty"`
+
+	// Specifies the identifier for the user.
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 
 type UserConfigParameters struct {

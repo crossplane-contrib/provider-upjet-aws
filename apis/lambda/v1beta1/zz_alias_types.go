@@ -18,10 +18,26 @@ type AliasObservation struct {
 	// The Amazon Resource Name (ARN) identifying your Lambda function alias.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the alias.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Lambda Function name or ARN.
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
+	// Lambda function version for which you are creating the alias. Pattern: (\$LATEST|[0-9]+).
+	FunctionVersion *string `json:"functionVersion,omitempty" tf:"function_version,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ARN to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri
 	InvokeArn *string `json:"invokeArn,omitempty" tf:"invoke_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The Lambda alias' route configuration settings. Fields documented below
+	RoutingConfig []RoutingConfigObservation `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
 }
 
 type AliasParameters struct {
@@ -58,6 +74,9 @@ type AliasParameters struct {
 }
 
 type RoutingConfigObservation struct {
+
+	// A map that defines the proportion of events that should be sent to different versions of a lambda function.
+	AdditionalVersionWeights map[string]*float64 `json:"additionalVersionWeights,omitempty" tf:"additional_version_weights,omitempty"`
 }
 
 type RoutingConfigParameters struct {

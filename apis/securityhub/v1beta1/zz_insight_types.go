@@ -14,6 +14,12 @@ import (
 )
 
 type AwsAccountIDObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type AwsAccountIDParameters struct {
@@ -28,6 +34,12 @@ type AwsAccountIDParameters struct {
 }
 
 type CompanyNameObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type CompanyNameParameters struct {
@@ -42,6 +54,12 @@ type CompanyNameParameters struct {
 }
 
 type ComplianceStatusObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ComplianceStatusParameters struct {
@@ -56,6 +74,15 @@ type ComplianceStatusParameters struct {
 }
 
 type ConfidenceObservation struct {
+
+	// The equal-to condition to be applied to a single field when querying for findings, provided as a String.
+	Eq *string `json:"eq,omitempty" tf:"eq,omitempty"`
+
+	// The greater-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Gte *string `json:"gte,omitempty" tf:"gte,omitempty"`
+
+	// The less-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
 }
 
 type ConfidenceParameters struct {
@@ -74,6 +101,15 @@ type ConfidenceParameters struct {
 }
 
 type CreatedAtObservation struct {
+
+	// A configuration block of the date range for the date filter. See date_range below for more details.
+	DateRange []DateRangeObservation `json:"dateRange,omitempty" tf:"date_range,omitempty"`
+
+	// An end date for the date filter. Required with start if date_range is not specified.
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// A start date for the date filter. Required with end if date_range is not specified.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type CreatedAtParameters struct {
@@ -92,6 +128,15 @@ type CreatedAtParameters struct {
 }
 
 type CriticalityObservation struct {
+
+	// The equal-to condition to be applied to a single field when querying for findings, provided as a String.
+	Eq *string `json:"eq,omitempty" tf:"eq,omitempty"`
+
+	// The greater-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Gte *string `json:"gte,omitempty" tf:"gte,omitempty"`
+
+	// The less-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
 }
 
 type CriticalityParameters struct {
@@ -110,6 +155,12 @@ type CriticalityParameters struct {
 }
 
 type DateRangeObservation struct {
+
+	// A date range unit for the date filter. Valid values: DAYS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// A value for the keyword.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DateRangeParameters struct {
@@ -124,6 +175,12 @@ type DateRangeParameters struct {
 }
 
 type DescriptionObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DescriptionParameters struct {
@@ -138,6 +195,270 @@ type DescriptionParameters struct {
 }
 
 type FiltersObservation struct {
+
+	// AWS account ID that a finding is generated in. See String_Filter below for more details.
+	AwsAccountID []AwsAccountIDObservation `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
+
+	// The name of the findings provider (company) that owns the solution (product) that generates findings. See String_Filter below for more details.
+	CompanyName []CompanyNameObservation `json:"companyName,omitempty" tf:"company_name,omitempty"`
+
+	// Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details. See String Filter below for more details.
+	ComplianceStatus []ComplianceStatusObservation `json:"complianceStatus,omitempty" tf:"compliance_status,omitempty"`
+
+	// A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence. See Number Filter below for more details.
+	Confidence []ConfidenceObservation `json:"confidence,omitempty" tf:"confidence,omitempty"`
+
+	// An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured. See Date Filter below for more details.
+	CreatedAt []CreatedAtObservation `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// The level of importance assigned to the resources associated with the finding. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. See Number Filter below for more details.
+	Criticality []CriticalityObservation `json:"criticality,omitempty" tf:"criticality,omitempty"`
+
+	// A finding's description. See String Filter below for more details.
+	Description []DescriptionObservation `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The finding provider value for the finding confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence. See Number Filter below for more details.
+	FindingProviderFieldsConfidence []FindingProviderFieldsConfidenceObservation `json:"findingProviderFieldsConfidence,omitempty" tf:"finding_provider_fields_confidence,omitempty"`
+
+	// The finding provider value for the level of importance assigned to the resources associated with the findings. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. See Number Filter below for more details.
+	FindingProviderFieldsCriticality []FindingProviderFieldsCriticalityObservation `json:"findingProviderFieldsCriticality,omitempty" tf:"finding_provider_fields_criticality,omitempty"`
+
+	// The finding identifier of a related finding that is identified by the finding provider. See String Filter below for more details.
+	FindingProviderFieldsRelatedFindingsID []FindingProviderFieldsRelatedFindingsIDObservation `json:"findingProviderFieldsRelatedFindingsId,omitempty" tf:"finding_provider_fields_related_findings_id,omitempty"`
+
+	// The ARN of the solution that generated a related finding that is identified by the finding provider. See String Filter below for more details.
+	FindingProviderFieldsRelatedFindingsProductArn []FindingProviderFieldsRelatedFindingsProductArnObservation `json:"findingProviderFieldsRelatedFindingsProductArn,omitempty" tf:"finding_provider_fields_related_findings_product_arn,omitempty"`
+
+	// The finding provider value for the severity label. See String Filter below for more details.
+	FindingProviderFieldsSeverityLabel []FindingProviderFieldsSeverityLabelObservation `json:"findingProviderFieldsSeverityLabel,omitempty" tf:"finding_provider_fields_severity_label,omitempty"`
+
+	// The finding provider's original value for the severity. See String Filter below for more details.
+	FindingProviderFieldsSeverityOriginal []FindingProviderFieldsSeverityOriginalObservation `json:"findingProviderFieldsSeverityOriginal,omitempty" tf:"finding_provider_fields_severity_original,omitempty"`
+
+	// One or more finding types that the finding provider assigned to the finding. Uses the format of namespace/category/classifier that classify a finding. Valid namespace values include: Software and Configuration Checks, TTPs, Effects, Unusual Behaviors, and Sensitive Data Identifications. See String Filter below for more details.
+	FindingProviderFieldsTypes []FindingProviderFieldsTypesObservation `json:"findingProviderFieldsTypes,omitempty" tf:"finding_provider_fields_types,omitempty"`
+
+	// An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured. See Date Filter below for more details.
+	FirstObservedAt []FirstObservedAtObservation `json:"firstObservedAt,omitempty" tf:"first_observed_at,omitempty"`
+
+	// The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. See String Filter below for more details.
+	GeneratorID []GeneratorIDObservation `json:"generatorId,omitempty" tf:"generator_id,omitempty"`
+
+	// The security findings provider-specific identifier for a finding. See String Filter below for more details.
+	ID []IDObservation `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A keyword for a finding. See Keyword Filter below for more details.
+	Keyword []KeywordObservation `json:"keyword,omitempty" tf:"keyword,omitempty"`
+
+	// An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured. See Date Filter below for more details.
+	LastObservedAt []LastObservedAtObservation `json:"lastObservedAt,omitempty" tf:"last_observed_at,omitempty"`
+
+	// The name of the malware that was observed. See String Filter below for more details.
+	MalwareName []MalwareNameObservation `json:"malwareName,omitempty" tf:"malware_name,omitempty"`
+
+	// The filesystem path of the malware that was observed. See String Filter below for more details.
+	MalwarePath []MalwarePathObservation `json:"malwarePath,omitempty" tf:"malware_path,omitempty"`
+
+	// The state of the malware that was observed. See String Filter below for more details.
+	MalwareState []MalwareStateObservation `json:"malwareState,omitempty" tf:"malware_state,omitempty"`
+
+	// The type of the malware that was observed. See String Filter below for more details.
+	MalwareType []MalwareTypeObservation `json:"malwareType,omitempty" tf:"malware_type,omitempty"`
+
+	// The destination domain of network-related information about a finding. See String Filter below for more details.
+	NetworkDestinationDomain []NetworkDestinationDomainObservation `json:"networkDestinationDomain,omitempty" tf:"network_destination_domain,omitempty"`
+
+	// The destination IPv4 address of network-related information about a finding. See Ip Filter below for more details.
+	NetworkDestinationIPv4 []NetworkDestinationIPv4Observation `json:"networkDestinationIpv4,omitempty" tf:"network_destination_ipv4,omitempty"`
+
+	// The destination IPv6 address of network-related information about a finding. See Ip Filter below for more details.
+	NetworkDestinationIPv6 []NetworkDestinationIPv6Observation `json:"networkDestinationIpv6,omitempty" tf:"network_destination_ipv6,omitempty"`
+
+	// The destination port of network-related information about a finding. See Number Filter below for more details.
+	NetworkDestinationPort []NetworkDestinationPortObservation `json:"networkDestinationPort,omitempty" tf:"network_destination_port,omitempty"`
+
+	// Indicates the direction of network traffic associated with a finding. See String Filter below for more details.
+	NetworkDirection []NetworkDirectionObservation `json:"networkDirection,omitempty" tf:"network_direction,omitempty"`
+
+	// The protocol of network-related information about a finding. See String Filter below for more details.
+	NetworkProtocol []NetworkProtocolObservation `json:"networkProtocol,omitempty" tf:"network_protocol,omitempty"`
+
+	// The source domain of network-related information about a finding. See String Filter below for more details.
+	NetworkSourceDomain []NetworkSourceDomainObservation `json:"networkSourceDomain,omitempty" tf:"network_source_domain,omitempty"`
+
+	// The source IPv4 address of network-related information about a finding. See Ip Filter below for more details.
+	NetworkSourceIPv4 []NetworkSourceIPv4Observation `json:"networkSourceIpv4,omitempty" tf:"network_source_ipv4,omitempty"`
+
+	// The source IPv6 address of network-related information about a finding. See Ip Filter below for more details.
+	NetworkSourceIPv6 []NetworkSourceIPv6Observation `json:"networkSourceIpv6,omitempty" tf:"network_source_ipv6,omitempty"`
+
+	// The source media access control (MAC) address of network-related information about a finding. See String Filter below for more details.
+	NetworkSourceMac []NetworkSourceMacObservation `json:"networkSourceMac,omitempty" tf:"network_source_mac,omitempty"`
+
+	// The source port of network-related information about a finding. See Number Filter below for more details.
+	NetworkSourcePort []NetworkSourcePortObservation `json:"networkSourcePort,omitempty" tf:"network_source_port,omitempty"`
+
+	// The text of a note. See String Filter below for more details.
+	NoteText []NoteTextObservation `json:"noteText,omitempty" tf:"note_text,omitempty"`
+
+	// The timestamp of when the note was updated. See Date Filter below for more details.
+	NoteUpdatedAt []NoteUpdatedAtObservation `json:"noteUpdatedAt,omitempty" tf:"note_updated_at,omitempty"`
+
+	// The principal that created a note. See String Filter below for more details.
+	NoteUpdatedBy []NoteUpdatedByObservation `json:"noteUpdatedBy,omitempty" tf:"note_updated_by,omitempty"`
+
+	// The date/time that the process was launched. See Date Filter below for more details.
+	ProcessLaunchedAt []ProcessLaunchedAtObservation `json:"processLaunchedAt,omitempty" tf:"process_launched_at,omitempty"`
+
+	// The name of the process. See String Filter below for more details.
+	ProcessName []ProcessNameObservation `json:"processName,omitempty" tf:"process_name,omitempty"`
+
+	// The parent process ID. See Number Filter below for more details.
+	ProcessParentPid []ProcessParentPidObservation `json:"processParentPid,omitempty" tf:"process_parent_pid,omitempty"`
+
+	// The path to the process executable. See String Filter below for more details.
+	ProcessPath []ProcessPathObservation `json:"processPath,omitempty" tf:"process_path,omitempty"`
+
+	// The process ID. See Number Filter below for more details.
+	ProcessPid []ProcessPidObservation `json:"processPid,omitempty" tf:"process_pid,omitempty"`
+
+	// The date/time that the process was terminated. See Date Filter below for more details.
+	ProcessTerminatedAt []ProcessTerminatedAtObservation `json:"processTerminatedAt,omitempty" tf:"process_terminated_at,omitempty"`
+
+	// The ARN generated by Security Hub that uniquely identifies a third-party company (security findings provider) after this provider's product (solution that generates findings) is registered with Security Hub. See String Filter below for more details.
+	ProductArn []ProductArnObservation `json:"productArn,omitempty" tf:"product_arn,omitempty"`
+
+	// A data type where security-findings providers can include additional solution-specific details that aren't part of the defined AwsSecurityFinding format. See Map Filter below for more details.
+	ProductFields []ProductFieldsObservation `json:"productFields,omitempty" tf:"product_fields,omitempty"`
+
+	// The name of the solution (product) that generates findings. See String Filter below for more details.
+	ProductName []ProductNameObservation `json:"productName,omitempty" tf:"product_name,omitempty"`
+
+	// The recommendation of what to do about the issue described in a finding. See String Filter below for more details.
+	RecommendationText []RecommendationTextObservation `json:"recommendationText,omitempty" tf:"recommendation_text,omitempty"`
+
+	// The updated record state for the finding. See String Filter below for more details.
+	RecordState []RecordStateObservation `json:"recordState,omitempty" tf:"record_state,omitempty"`
+
+	// The solution-generated identifier for a related finding. See String Filter below for more details.
+	RelatedFindingsID []RelatedFindingsIDObservation `json:"relatedFindingsId,omitempty" tf:"related_findings_id,omitempty"`
+
+	// The ARN of the solution that generated a related finding. See String Filter below for more details.
+	RelatedFindingsProductArn []RelatedFindingsProductArnObservation `json:"relatedFindingsProductArn,omitempty" tf:"related_findings_product_arn,omitempty"`
+
+	// The IAM profile ARN of the instance. See String Filter below for more details.
+	ResourceAwsEC2InstanceIAMInstanceProfileArn []ResourceAwsEC2InstanceIAMInstanceProfileArnObservation `json:"resourceAwsEc2InstanceIamInstanceProfileArn,omitempty" tf:"resource_aws_ec2_instance_iam_instance_profile_arn,omitempty"`
+
+	// The IPv4 addresses associated with the instance. See Ip Filter below for more details.
+	ResourceAwsEC2InstanceIPv4Addresses []ResourceAwsEC2InstanceIPv4AddressesObservation `json:"resourceAwsEc2InstanceIpv4Addresses,omitempty" tf:"resource_aws_ec2_instance_ipv4_addresses,omitempty"`
+
+	// The IPv6 addresses associated with the instance. See Ip Filter below for more details.
+	ResourceAwsEC2InstanceIPv6Addresses []ResourceAwsEC2InstanceIPv6AddressesObservation `json:"resourceAwsEc2InstanceIpv6Addresses,omitempty" tf:"resource_aws_ec2_instance_ipv6_addresses,omitempty"`
+
+	// The Amazon Machine Image (AMI) ID of the instance. See String Filter below for more details.
+	ResourceAwsEC2InstanceImageID []ResourceAwsEC2InstanceImageIDObservation `json:"resourceAwsEc2InstanceImageId,omitempty" tf:"resource_aws_ec2_instance_image_id,omitempty"`
+
+	// The key name associated with the instance. See String Filter below for more details.
+	ResourceAwsEC2InstanceKeyName []ResourceAwsEC2InstanceKeyNameObservation `json:"resourceAwsEc2InstanceKeyName,omitempty" tf:"resource_aws_ec2_instance_key_name,omitempty"`
+
+	// The date and time the instance was launched. See Date Filter below for more details.
+	ResourceAwsEC2InstanceLaunchedAt []ResourceAwsEC2InstanceLaunchedAtObservation `json:"resourceAwsEc2InstanceLaunchedAt,omitempty" tf:"resource_aws_ec2_instance_launched_at,omitempty"`
+
+	// The identifier of the subnet that the instance was launched in. See String Filter below for more details.
+	ResourceAwsEC2InstanceSubnetID []ResourceAwsEC2InstanceSubnetIDObservation `json:"resourceAwsEc2InstanceSubnetId,omitempty" tf:"resource_aws_ec2_instance_subnet_id,omitempty"`
+
+	// The instance type of the instance. See String Filter below for more details.
+	ResourceAwsEC2InstanceType []ResourceAwsEC2InstanceTypeObservation `json:"resourceAwsEc2InstanceType,omitempty" tf:"resource_aws_ec2_instance_type,omitempty"`
+
+	// The identifier of the VPC that the instance was launched in. See String Filter below for more details.
+	ResourceAwsEC2InstanceVPCID []ResourceAwsEC2InstanceVPCIDObservation `json:"resourceAwsEc2InstanceVpcId,omitempty" tf:"resource_aws_ec2_instance_vpc_id,omitempty"`
+
+	// The creation date/time of the IAM access key related to a finding. See Date Filter below for more details.
+	ResourceAwsIAMAccessKeyCreatedAt []ResourceAwsIAMAccessKeyCreatedAtObservation `json:"resourceAwsIamAccessKeyCreatedAt,omitempty" tf:"resource_aws_iam_access_key_created_at,omitempty"`
+
+	// The status of the IAM access key related to a finding. See String Filter below for more details.
+	ResourceAwsIAMAccessKeyStatus []ResourceAwsIAMAccessKeyStatusObservation `json:"resourceAwsIamAccessKeyStatus,omitempty" tf:"resource_aws_iam_access_key_status,omitempty"`
+
+	// The user associated with the IAM access key related to a finding. See String Filter below for more details.
+	ResourceAwsIAMAccessKeyUserName []ResourceAwsIAMAccessKeyUserNameObservation `json:"resourceAwsIamAccessKeyUserName,omitempty" tf:"resource_aws_iam_access_key_user_name,omitempty"`
+
+	// The canonical user ID of the owner of the S3 bucket. See String Filter below for more details.
+	ResourceAwsS3BucketOwnerID []ResourceAwsS3BucketOwnerIDObservation `json:"resourceAwsS3BucketOwnerId,omitempty" tf:"resource_aws_s3_bucket_owner_id,omitempty"`
+
+	// The display name of the owner of the S3 bucket. See String Filter below for more details.
+	ResourceAwsS3BucketOwnerName []ResourceAwsS3BucketOwnerNameObservation `json:"resourceAwsS3BucketOwnerName,omitempty" tf:"resource_aws_s3_bucket_owner_name,omitempty"`
+
+	// The identifier of the image related to a finding. See String Filter below for more details.
+	ResourceContainerImageID []ResourceContainerImageIDObservation `json:"resourceContainerImageId,omitempty" tf:"resource_container_image_id,omitempty"`
+
+	// The name of the image related to a finding. See String Filter below for more details.
+	ResourceContainerImageName []ResourceContainerImageNameObservation `json:"resourceContainerImageName,omitempty" tf:"resource_container_image_name,omitempty"`
+
+	// The date/time that the container was started. See Date Filter below for more details.
+	ResourceContainerLaunchedAt []ResourceContainerLaunchedAtObservation `json:"resourceContainerLaunchedAt,omitempty" tf:"resource_container_launched_at,omitempty"`
+
+	// The name of the container related to a finding. See String Filter below for more details.
+	ResourceContainerName []ResourceContainerNameObservation `json:"resourceContainerName,omitempty" tf:"resource_container_name,omitempty"`
+
+	// The details of a resource that doesn't have a specific subfield for the resource type defined. See Map Filter below for more details.
+	ResourceDetailsOther []ResourceDetailsOtherObservation `json:"resourceDetailsOther,omitempty" tf:"resource_details_other,omitempty"`
+
+	// The canonical identifier for the given resource type. See String Filter below for more details.
+	ResourceID []ResourceIDObservation `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// The canonical AWS partition name that the Region is assigned to. See String Filter below for more details.
+	ResourcePartition []ResourcePartitionObservation `json:"resourcePartition,omitempty" tf:"resource_partition,omitempty"`
+
+	// The canonical AWS external Region name where this resource is located. See String Filter below for more details.
+	ResourceRegion []ResourceRegionObservation `json:"resourceRegion,omitempty" tf:"resource_region,omitempty"`
+
+	// A list of AWS tags associated with a resource at the time the finding was processed. See Map Filter below for more details.
+	ResourceTags []ResourceTagsObservation `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
+
+	// Specifies the type of the resource that details are provided for. See String Filter below for more details.
+	ResourceType []ResourceTypeObservation `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// The label of a finding's severity. See String Filter below for more details.
+	SeverityLabel []SeverityLabelObservation `json:"severityLabel,omitempty" tf:"severity_label,omitempty"`
+
+	// A URL that links to a page about the current finding in the security-findings provider's solution. See String Filter below for more details.
+	SourceURL []SourceURLObservation `json:"sourceUrl,omitempty" tf:"source_url,omitempty"`
+
+	// The category of a threat intelligence indicator. See String Filter below for more details.
+	ThreatIntelIndicatorCategory []ThreatIntelIndicatorCategoryObservation `json:"threatIntelIndicatorCategory,omitempty" tf:"threat_intel_indicator_category,omitempty"`
+
+	// The date/time of the last observation of a threat intelligence indicator. See Date Filter below for more details.
+	ThreatIntelIndicatorLastObservedAt []ThreatIntelIndicatorLastObservedAtObservation `json:"threatIntelIndicatorLastObservedAt,omitempty" tf:"threat_intel_indicator_last_observed_at,omitempty"`
+
+	// The source of the threat intelligence. See String Filter below for more details.
+	ThreatIntelIndicatorSource []ThreatIntelIndicatorSourceObservation `json:"threatIntelIndicatorSource,omitempty" tf:"threat_intel_indicator_source,omitempty"`
+
+	// The URL for more details from the source of the threat intelligence. See String Filter below for more details.
+	ThreatIntelIndicatorSourceURL []ThreatIntelIndicatorSourceURLObservation `json:"threatIntelIndicatorSourceUrl,omitempty" tf:"threat_intel_indicator_source_url,omitempty"`
+
+	// The type of a threat intelligence indicator. See String Filter below for more details.
+	ThreatIntelIndicatorType []ThreatIntelIndicatorTypeObservation `json:"threatIntelIndicatorType,omitempty" tf:"threat_intel_indicator_type,omitempty"`
+
+	// The value of a threat intelligence indicator. See String Filter below for more details.
+	ThreatIntelIndicatorValue []ThreatIntelIndicatorValueObservation `json:"threatIntelIndicatorValue,omitempty" tf:"threat_intel_indicator_value,omitempty"`
+
+	// A finding's title. See String Filter below for more details.
+	Title []TitleObservation `json:"title,omitempty" tf:"title,omitempty"`
+
+	// A finding type in the format of namespace/category/classifier that classifies a finding. See String Filter below for more details.
+	Type []TypeObservation `json:"type,omitempty" tf:"type,omitempty"`
+
+	// An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. See Date Filter below for more details.
+	UpdatedAt []UpdatedAtObservation `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
+
+	// A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding. See Map Filter below for more details.
+	UserDefinedValues []UserDefinedValuesObservation `json:"userDefinedValues,omitempty" tf:"user_defined_values,omitempty"`
+
+	// The veracity of a finding. See String Filter below for more details.
+	VerificationState []VerificationStateObservation `json:"verificationState,omitempty" tf:"verification_state,omitempty"`
+
+	// The status of the investigation into a finding. See Workflow Status Filter below for more details.
+	WorkflowStatus []WorkflowStatusObservation `json:"workflowStatus,omitempty" tf:"workflow_status,omitempty"`
 }
 
 type FiltersParameters struct {
@@ -496,6 +817,15 @@ type FiltersParameters struct {
 }
 
 type FindingProviderFieldsConfidenceObservation struct {
+
+	// The equal-to condition to be applied to a single field when querying for findings, provided as a String.
+	Eq *string `json:"eq,omitempty" tf:"eq,omitempty"`
+
+	// The greater-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Gte *string `json:"gte,omitempty" tf:"gte,omitempty"`
+
+	// The less-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
 }
 
 type FindingProviderFieldsConfidenceParameters struct {
@@ -514,6 +844,15 @@ type FindingProviderFieldsConfidenceParameters struct {
 }
 
 type FindingProviderFieldsCriticalityObservation struct {
+
+	// The equal-to condition to be applied to a single field when querying for findings, provided as a String.
+	Eq *string `json:"eq,omitempty" tf:"eq,omitempty"`
+
+	// The greater-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Gte *string `json:"gte,omitempty" tf:"gte,omitempty"`
+
+	// The less-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
 }
 
 type FindingProviderFieldsCriticalityParameters struct {
@@ -532,6 +871,12 @@ type FindingProviderFieldsCriticalityParameters struct {
 }
 
 type FindingProviderFieldsRelatedFindingsIDObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FindingProviderFieldsRelatedFindingsIDParameters struct {
@@ -546,6 +891,12 @@ type FindingProviderFieldsRelatedFindingsIDParameters struct {
 }
 
 type FindingProviderFieldsRelatedFindingsProductArnObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FindingProviderFieldsRelatedFindingsProductArnParameters struct {
@@ -560,6 +911,12 @@ type FindingProviderFieldsRelatedFindingsProductArnParameters struct {
 }
 
 type FindingProviderFieldsSeverityLabelObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FindingProviderFieldsSeverityLabelParameters struct {
@@ -574,6 +931,12 @@ type FindingProviderFieldsSeverityLabelParameters struct {
 }
 
 type FindingProviderFieldsSeverityOriginalObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FindingProviderFieldsSeverityOriginalParameters struct {
@@ -588,6 +951,12 @@ type FindingProviderFieldsSeverityOriginalParameters struct {
 }
 
 type FindingProviderFieldsTypesObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FindingProviderFieldsTypesParameters struct {
@@ -602,6 +971,12 @@ type FindingProviderFieldsTypesParameters struct {
 }
 
 type FirstObservedAtDateRangeObservation struct {
+
+	// A date range unit for the date filter. Valid values: DAYS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// A value for the keyword.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FirstObservedAtDateRangeParameters struct {
@@ -616,6 +991,15 @@ type FirstObservedAtDateRangeParameters struct {
 }
 
 type FirstObservedAtObservation struct {
+
+	// A configuration block of the date range for the date filter. See date_range below for more details.
+	DateRange []FirstObservedAtDateRangeObservation `json:"dateRange,omitempty" tf:"date_range,omitempty"`
+
+	// An end date for the date filter. Required with start if date_range is not specified.
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// A start date for the date filter. Required with end if date_range is not specified.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type FirstObservedAtParameters struct {
@@ -634,6 +1018,12 @@ type FirstObservedAtParameters struct {
 }
 
 type GeneratorIDObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type GeneratorIDParameters struct {
@@ -648,6 +1038,12 @@ type GeneratorIDParameters struct {
 }
 
 type IDObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type IDParameters struct {
@@ -666,8 +1062,21 @@ type InsightObservation struct {
 	// ARN of the insight.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A configuration block including one or more (up to 10 distinct) attributes used to filter the findings included in the insight. The insight only includes findings that match criteria defined in the filters. See filters below for more details.
+	Filters []FiltersObservation `json:"filters,omitempty" tf:"filters,omitempty"`
+
+	// The attribute used to group the findings for the insight e.g., if an insight is grouped by ResourceId, then the insight produces a list of resource identifiers.
+	GroupByAttribute *string `json:"groupByAttribute,omitempty" tf:"group_by_attribute,omitempty"`
+
 	// ARN of the insight.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the custom insight.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type InsightParameters struct {
@@ -691,6 +1100,9 @@ type InsightParameters struct {
 }
 
 type KeywordObservation struct {
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type KeywordParameters struct {
@@ -701,6 +1113,12 @@ type KeywordParameters struct {
 }
 
 type LastObservedAtDateRangeObservation struct {
+
+	// A date range unit for the date filter. Valid values: DAYS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// A value for the keyword.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type LastObservedAtDateRangeParameters struct {
@@ -715,6 +1133,15 @@ type LastObservedAtDateRangeParameters struct {
 }
 
 type LastObservedAtObservation struct {
+
+	// A configuration block of the date range for the date filter. See date_range below for more details.
+	DateRange []LastObservedAtDateRangeObservation `json:"dateRange,omitempty" tf:"date_range,omitempty"`
+
+	// An end date for the date filter. Required with start if date_range is not specified.
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// A start date for the date filter. Required with end if date_range is not specified.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type LastObservedAtParameters struct {
@@ -733,6 +1160,12 @@ type LastObservedAtParameters struct {
 }
 
 type MalwareNameObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MalwareNameParameters struct {
@@ -747,6 +1180,12 @@ type MalwareNameParameters struct {
 }
 
 type MalwarePathObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MalwarePathParameters struct {
@@ -761,6 +1200,12 @@ type MalwarePathParameters struct {
 }
 
 type MalwareStateObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MalwareStateParameters struct {
@@ -775,6 +1220,12 @@ type MalwareStateParameters struct {
 }
 
 type MalwareTypeObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MalwareTypeParameters struct {
@@ -789,6 +1240,12 @@ type MalwareTypeParameters struct {
 }
 
 type NetworkDestinationDomainObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NetworkDestinationDomainParameters struct {
@@ -803,6 +1260,9 @@ type NetworkDestinationDomainParameters struct {
 }
 
 type NetworkDestinationIPv4Observation struct {
+
+	// A finding's CIDR value.
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 }
 
 type NetworkDestinationIPv4Parameters struct {
@@ -813,6 +1273,9 @@ type NetworkDestinationIPv4Parameters struct {
 }
 
 type NetworkDestinationIPv6Observation struct {
+
+	// A finding's CIDR value.
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 }
 
 type NetworkDestinationIPv6Parameters struct {
@@ -823,6 +1286,15 @@ type NetworkDestinationIPv6Parameters struct {
 }
 
 type NetworkDestinationPortObservation struct {
+
+	// The equal-to condition to be applied to a single field when querying for findings, provided as a String.
+	Eq *string `json:"eq,omitempty" tf:"eq,omitempty"`
+
+	// The greater-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Gte *string `json:"gte,omitempty" tf:"gte,omitempty"`
+
+	// The less-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
 }
 
 type NetworkDestinationPortParameters struct {
@@ -841,6 +1313,12 @@ type NetworkDestinationPortParameters struct {
 }
 
 type NetworkDirectionObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NetworkDirectionParameters struct {
@@ -855,6 +1333,12 @@ type NetworkDirectionParameters struct {
 }
 
 type NetworkProtocolObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NetworkProtocolParameters struct {
@@ -869,6 +1353,12 @@ type NetworkProtocolParameters struct {
 }
 
 type NetworkSourceDomainObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NetworkSourceDomainParameters struct {
@@ -883,6 +1373,9 @@ type NetworkSourceDomainParameters struct {
 }
 
 type NetworkSourceIPv4Observation struct {
+
+	// A finding's CIDR value.
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 }
 
 type NetworkSourceIPv4Parameters struct {
@@ -893,6 +1386,9 @@ type NetworkSourceIPv4Parameters struct {
 }
 
 type NetworkSourceIPv6Observation struct {
+
+	// A finding's CIDR value.
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 }
 
 type NetworkSourceIPv6Parameters struct {
@@ -903,6 +1399,12 @@ type NetworkSourceIPv6Parameters struct {
 }
 
 type NetworkSourceMacObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NetworkSourceMacParameters struct {
@@ -917,6 +1419,15 @@ type NetworkSourceMacParameters struct {
 }
 
 type NetworkSourcePortObservation struct {
+
+	// The equal-to condition to be applied to a single field when querying for findings, provided as a String.
+	Eq *string `json:"eq,omitempty" tf:"eq,omitempty"`
+
+	// The greater-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Gte *string `json:"gte,omitempty" tf:"gte,omitempty"`
+
+	// The less-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
 }
 
 type NetworkSourcePortParameters struct {
@@ -935,6 +1446,12 @@ type NetworkSourcePortParameters struct {
 }
 
 type NoteTextObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NoteTextParameters struct {
@@ -949,6 +1466,12 @@ type NoteTextParameters struct {
 }
 
 type NoteUpdatedAtDateRangeObservation struct {
+
+	// A date range unit for the date filter. Valid values: DAYS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// A value for the keyword.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NoteUpdatedAtDateRangeParameters struct {
@@ -963,6 +1486,15 @@ type NoteUpdatedAtDateRangeParameters struct {
 }
 
 type NoteUpdatedAtObservation struct {
+
+	// A configuration block of the date range for the date filter. See date_range below for more details.
+	DateRange []NoteUpdatedAtDateRangeObservation `json:"dateRange,omitempty" tf:"date_range,omitempty"`
+
+	// An end date for the date filter. Required with start if date_range is not specified.
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// A start date for the date filter. Required with end if date_range is not specified.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type NoteUpdatedAtParameters struct {
@@ -981,6 +1513,12 @@ type NoteUpdatedAtParameters struct {
 }
 
 type NoteUpdatedByObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NoteUpdatedByParameters struct {
@@ -995,6 +1533,12 @@ type NoteUpdatedByParameters struct {
 }
 
 type ProcessLaunchedAtDateRangeObservation struct {
+
+	// A date range unit for the date filter. Valid values: DAYS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// A value for the keyword.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ProcessLaunchedAtDateRangeParameters struct {
@@ -1009,6 +1553,15 @@ type ProcessLaunchedAtDateRangeParameters struct {
 }
 
 type ProcessLaunchedAtObservation struct {
+
+	// A configuration block of the date range for the date filter. See date_range below for more details.
+	DateRange []ProcessLaunchedAtDateRangeObservation `json:"dateRange,omitempty" tf:"date_range,omitempty"`
+
+	// An end date for the date filter. Required with start if date_range is not specified.
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// A start date for the date filter. Required with end if date_range is not specified.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type ProcessLaunchedAtParameters struct {
@@ -1027,6 +1580,12 @@ type ProcessLaunchedAtParameters struct {
 }
 
 type ProcessNameObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ProcessNameParameters struct {
@@ -1041,6 +1600,15 @@ type ProcessNameParameters struct {
 }
 
 type ProcessParentPidObservation struct {
+
+	// The equal-to condition to be applied to a single field when querying for findings, provided as a String.
+	Eq *string `json:"eq,omitempty" tf:"eq,omitempty"`
+
+	// The greater-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Gte *string `json:"gte,omitempty" tf:"gte,omitempty"`
+
+	// The less-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
 }
 
 type ProcessParentPidParameters struct {
@@ -1059,6 +1627,12 @@ type ProcessParentPidParameters struct {
 }
 
 type ProcessPathObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ProcessPathParameters struct {
@@ -1073,6 +1647,15 @@ type ProcessPathParameters struct {
 }
 
 type ProcessPidObservation struct {
+
+	// The equal-to condition to be applied to a single field when querying for findings, provided as a String.
+	Eq *string `json:"eq,omitempty" tf:"eq,omitempty"`
+
+	// The greater-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Gte *string `json:"gte,omitempty" tf:"gte,omitempty"`
+
+	// The less-than-equal condition to be applied to a single field when querying for findings, provided as a String.
+	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
 }
 
 type ProcessPidParameters struct {
@@ -1091,6 +1674,12 @@ type ProcessPidParameters struct {
 }
 
 type ProcessTerminatedAtDateRangeObservation struct {
+
+	// A date range unit for the date filter. Valid values: DAYS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// A value for the keyword.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ProcessTerminatedAtDateRangeParameters struct {
@@ -1105,6 +1694,15 @@ type ProcessTerminatedAtDateRangeParameters struct {
 }
 
 type ProcessTerminatedAtObservation struct {
+
+	// A configuration block of the date range for the date filter. See date_range below for more details.
+	DateRange []ProcessTerminatedAtDateRangeObservation `json:"dateRange,omitempty" tf:"date_range,omitempty"`
+
+	// An end date for the date filter. Required with start if date_range is not specified.
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// A start date for the date filter. Required with end if date_range is not specified.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type ProcessTerminatedAtParameters struct {
@@ -1123,6 +1721,12 @@ type ProcessTerminatedAtParameters struct {
 }
 
 type ProductArnObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ProductArnParameters struct {
@@ -1137,6 +1741,15 @@ type ProductArnParameters struct {
 }
 
 type ProductFieldsObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// The key of the map filter. For example, for ResourceTags, Key identifies the name of the tag. For UserDefinedFields, Key is the name of the field.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ProductFieldsParameters struct {
@@ -1155,6 +1768,12 @@ type ProductFieldsParameters struct {
 }
 
 type ProductNameObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ProductNameParameters struct {
@@ -1169,6 +1788,12 @@ type ProductNameParameters struct {
 }
 
 type RecommendationTextObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RecommendationTextParameters struct {
@@ -1183,6 +1808,12 @@ type RecommendationTextParameters struct {
 }
 
 type RecordStateObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RecordStateParameters struct {
@@ -1197,6 +1828,12 @@ type RecordStateParameters struct {
 }
 
 type RelatedFindingsIDObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RelatedFindingsIDParameters struct {
@@ -1211,6 +1848,12 @@ type RelatedFindingsIDParameters struct {
 }
 
 type RelatedFindingsProductArnObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RelatedFindingsProductArnParameters struct {
@@ -1225,6 +1868,12 @@ type RelatedFindingsProductArnParameters struct {
 }
 
 type ResourceAwsEC2InstanceIAMInstanceProfileArnObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsEC2InstanceIAMInstanceProfileArnParameters struct {
@@ -1239,6 +1888,9 @@ type ResourceAwsEC2InstanceIAMInstanceProfileArnParameters struct {
 }
 
 type ResourceAwsEC2InstanceIPv4AddressesObservation struct {
+
+	// A finding's CIDR value.
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 }
 
 type ResourceAwsEC2InstanceIPv4AddressesParameters struct {
@@ -1249,6 +1901,9 @@ type ResourceAwsEC2InstanceIPv4AddressesParameters struct {
 }
 
 type ResourceAwsEC2InstanceIPv6AddressesObservation struct {
+
+	// A finding's CIDR value.
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 }
 
 type ResourceAwsEC2InstanceIPv6AddressesParameters struct {
@@ -1259,6 +1914,12 @@ type ResourceAwsEC2InstanceIPv6AddressesParameters struct {
 }
 
 type ResourceAwsEC2InstanceImageIDObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsEC2InstanceImageIDParameters struct {
@@ -1273,6 +1934,12 @@ type ResourceAwsEC2InstanceImageIDParameters struct {
 }
 
 type ResourceAwsEC2InstanceKeyNameObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsEC2InstanceKeyNameParameters struct {
@@ -1287,6 +1954,12 @@ type ResourceAwsEC2InstanceKeyNameParameters struct {
 }
 
 type ResourceAwsEC2InstanceLaunchedAtDateRangeObservation struct {
+
+	// A date range unit for the date filter. Valid values: DAYS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// A value for the keyword.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsEC2InstanceLaunchedAtDateRangeParameters struct {
@@ -1301,6 +1974,15 @@ type ResourceAwsEC2InstanceLaunchedAtDateRangeParameters struct {
 }
 
 type ResourceAwsEC2InstanceLaunchedAtObservation struct {
+
+	// A configuration block of the date range for the date filter. See date_range below for more details.
+	DateRange []ResourceAwsEC2InstanceLaunchedAtDateRangeObservation `json:"dateRange,omitempty" tf:"date_range,omitempty"`
+
+	// An end date for the date filter. Required with start if date_range is not specified.
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// A start date for the date filter. Required with end if date_range is not specified.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type ResourceAwsEC2InstanceLaunchedAtParameters struct {
@@ -1319,6 +2001,12 @@ type ResourceAwsEC2InstanceLaunchedAtParameters struct {
 }
 
 type ResourceAwsEC2InstanceSubnetIDObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsEC2InstanceSubnetIDParameters struct {
@@ -1333,6 +2021,12 @@ type ResourceAwsEC2InstanceSubnetIDParameters struct {
 }
 
 type ResourceAwsEC2InstanceTypeObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsEC2InstanceTypeParameters struct {
@@ -1347,6 +2041,12 @@ type ResourceAwsEC2InstanceTypeParameters struct {
 }
 
 type ResourceAwsEC2InstanceVPCIDObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsEC2InstanceVPCIDParameters struct {
@@ -1361,6 +2061,12 @@ type ResourceAwsEC2InstanceVPCIDParameters struct {
 }
 
 type ResourceAwsIAMAccessKeyCreatedAtDateRangeObservation struct {
+
+	// A date range unit for the date filter. Valid values: DAYS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// A value for the keyword.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsIAMAccessKeyCreatedAtDateRangeParameters struct {
@@ -1375,6 +2081,15 @@ type ResourceAwsIAMAccessKeyCreatedAtDateRangeParameters struct {
 }
 
 type ResourceAwsIAMAccessKeyCreatedAtObservation struct {
+
+	// A configuration block of the date range for the date filter. See date_range below for more details.
+	DateRange []ResourceAwsIAMAccessKeyCreatedAtDateRangeObservation `json:"dateRange,omitempty" tf:"date_range,omitempty"`
+
+	// An end date for the date filter. Required with start if date_range is not specified.
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// A start date for the date filter. Required with end if date_range is not specified.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type ResourceAwsIAMAccessKeyCreatedAtParameters struct {
@@ -1393,6 +2108,12 @@ type ResourceAwsIAMAccessKeyCreatedAtParameters struct {
 }
 
 type ResourceAwsIAMAccessKeyStatusObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsIAMAccessKeyStatusParameters struct {
@@ -1407,6 +2128,12 @@ type ResourceAwsIAMAccessKeyStatusParameters struct {
 }
 
 type ResourceAwsIAMAccessKeyUserNameObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsIAMAccessKeyUserNameParameters struct {
@@ -1421,6 +2148,12 @@ type ResourceAwsIAMAccessKeyUserNameParameters struct {
 }
 
 type ResourceAwsS3BucketOwnerIDObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsS3BucketOwnerIDParameters struct {
@@ -1435,6 +2168,12 @@ type ResourceAwsS3BucketOwnerIDParameters struct {
 }
 
 type ResourceAwsS3BucketOwnerNameObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsS3BucketOwnerNameParameters struct {
@@ -1449,6 +2188,12 @@ type ResourceAwsS3BucketOwnerNameParameters struct {
 }
 
 type ResourceContainerImageIDObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceContainerImageIDParameters struct {
@@ -1463,6 +2208,12 @@ type ResourceContainerImageIDParameters struct {
 }
 
 type ResourceContainerImageNameObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceContainerImageNameParameters struct {
@@ -1477,6 +2228,12 @@ type ResourceContainerImageNameParameters struct {
 }
 
 type ResourceContainerLaunchedAtDateRangeObservation struct {
+
+	// A date range unit for the date filter. Valid values: DAYS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// A value for the keyword.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceContainerLaunchedAtDateRangeParameters struct {
@@ -1491,6 +2248,15 @@ type ResourceContainerLaunchedAtDateRangeParameters struct {
 }
 
 type ResourceContainerLaunchedAtObservation struct {
+
+	// A configuration block of the date range for the date filter. See date_range below for more details.
+	DateRange []ResourceContainerLaunchedAtDateRangeObservation `json:"dateRange,omitempty" tf:"date_range,omitempty"`
+
+	// An end date for the date filter. Required with start if date_range is not specified.
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// A start date for the date filter. Required with end if date_range is not specified.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type ResourceContainerLaunchedAtParameters struct {
@@ -1509,6 +2275,12 @@ type ResourceContainerLaunchedAtParameters struct {
 }
 
 type ResourceContainerNameObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceContainerNameParameters struct {
@@ -1523,6 +2295,15 @@ type ResourceContainerNameParameters struct {
 }
 
 type ResourceDetailsOtherObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// The key of the map filter. For example, for ResourceTags, Key identifies the name of the tag. For UserDefinedFields, Key is the name of the field.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceDetailsOtherParameters struct {
@@ -1541,6 +2322,12 @@ type ResourceDetailsOtherParameters struct {
 }
 
 type ResourceIDObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceIDParameters struct {
@@ -1555,6 +2342,12 @@ type ResourceIDParameters struct {
 }
 
 type ResourcePartitionObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourcePartitionParameters struct {
@@ -1569,6 +2362,12 @@ type ResourcePartitionParameters struct {
 }
 
 type ResourceRegionObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceRegionParameters struct {
@@ -1583,6 +2382,15 @@ type ResourceRegionParameters struct {
 }
 
 type ResourceTagsObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// The key of the map filter. For example, for ResourceTags, Key identifies the name of the tag. For UserDefinedFields, Key is the name of the field.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceTagsParameters struct {
@@ -1601,6 +2409,12 @@ type ResourceTagsParameters struct {
 }
 
 type ResourceTypeObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceTypeParameters struct {
@@ -1615,6 +2429,12 @@ type ResourceTypeParameters struct {
 }
 
 type SeverityLabelObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type SeverityLabelParameters struct {
@@ -1629,6 +2449,12 @@ type SeverityLabelParameters struct {
 }
 
 type SourceURLObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type SourceURLParameters struct {
@@ -1643,6 +2469,12 @@ type SourceURLParameters struct {
 }
 
 type ThreatIntelIndicatorCategoryObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ThreatIntelIndicatorCategoryParameters struct {
@@ -1657,6 +2489,12 @@ type ThreatIntelIndicatorCategoryParameters struct {
 }
 
 type ThreatIntelIndicatorLastObservedAtDateRangeObservation struct {
+
+	// A date range unit for the date filter. Valid values: DAYS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// A value for the keyword.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ThreatIntelIndicatorLastObservedAtDateRangeParameters struct {
@@ -1671,6 +2509,15 @@ type ThreatIntelIndicatorLastObservedAtDateRangeParameters struct {
 }
 
 type ThreatIntelIndicatorLastObservedAtObservation struct {
+
+	// A configuration block of the date range for the date filter. See date_range below for more details.
+	DateRange []ThreatIntelIndicatorLastObservedAtDateRangeObservation `json:"dateRange,omitempty" tf:"date_range,omitempty"`
+
+	// An end date for the date filter. Required with start if date_range is not specified.
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// A start date for the date filter. Required with end if date_range is not specified.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type ThreatIntelIndicatorLastObservedAtParameters struct {
@@ -1689,6 +2536,12 @@ type ThreatIntelIndicatorLastObservedAtParameters struct {
 }
 
 type ThreatIntelIndicatorSourceObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ThreatIntelIndicatorSourceParameters struct {
@@ -1703,6 +2556,12 @@ type ThreatIntelIndicatorSourceParameters struct {
 }
 
 type ThreatIntelIndicatorSourceURLObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ThreatIntelIndicatorSourceURLParameters struct {
@@ -1717,6 +2576,12 @@ type ThreatIntelIndicatorSourceURLParameters struct {
 }
 
 type ThreatIntelIndicatorTypeObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ThreatIntelIndicatorTypeParameters struct {
@@ -1731,6 +2596,12 @@ type ThreatIntelIndicatorTypeParameters struct {
 }
 
 type ThreatIntelIndicatorValueObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ThreatIntelIndicatorValueParameters struct {
@@ -1745,6 +2616,12 @@ type ThreatIntelIndicatorValueParameters struct {
 }
 
 type TitleObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TitleParameters struct {
@@ -1759,6 +2636,12 @@ type TitleParameters struct {
 }
 
 type TypeObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TypeParameters struct {
@@ -1773,6 +2656,12 @@ type TypeParameters struct {
 }
 
 type UpdatedAtDateRangeObservation struct {
+
+	// A date range unit for the date filter. Valid values: DAYS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// A value for the keyword.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type UpdatedAtDateRangeParameters struct {
@@ -1787,6 +2676,15 @@ type UpdatedAtDateRangeParameters struct {
 }
 
 type UpdatedAtObservation struct {
+
+	// A configuration block of the date range for the date filter. See date_range below for more details.
+	DateRange []UpdatedAtDateRangeObservation `json:"dateRange,omitempty" tf:"date_range,omitempty"`
+
+	// An end date for the date filter. Required with start if date_range is not specified.
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// A start date for the date filter. Required with end if date_range is not specified.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type UpdatedAtParameters struct {
@@ -1805,6 +2703,15 @@ type UpdatedAtParameters struct {
 }
 
 type UserDefinedValuesObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// The key of the map filter. For example, for ResourceTags, Key identifies the name of the tag. For UserDefinedFields, Key is the name of the field.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type UserDefinedValuesParameters struct {
@@ -1823,6 +2730,12 @@ type UserDefinedValuesParameters struct {
 }
 
 type VerificationStateObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type VerificationStateParameters struct {
@@ -1837,6 +2750,12 @@ type VerificationStateParameters struct {
 }
 
 type WorkflowStatusObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type WorkflowStatusParameters struct {

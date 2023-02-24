@@ -18,11 +18,51 @@ type SamplingRuleObservation struct {
 	// The ARN of the sampling rule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Matches attributes derived from the request.
+	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
+
+	// The percentage of matching requests to instrument, after the reservoir is exhausted.
+	FixedRate *float64 `json:"fixedRate,omitempty" tf:"fixed_rate,omitempty"`
+
+	// Matches the HTTP method of a request.
+	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
+	// Matches the hostname from a request URL.
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
 	// The name of the sampling rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The priority of the sampling rule.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.
+	ReservoirSize *float64 `json:"reservoirSize,omitempty" tf:"reservoir_size,omitempty"`
+
+	// Matches the ARN of the AWS resource on which the service runs.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Matches the name that the service uses to identify itself in segments.
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+
+	// Matches the origin that the service uses to identify its type in segments.
+	ServiceType *string `json:"serviceType,omitempty" tf:"service_type,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Matches the path from a request URL.
+	URLPath *string `json:"urlPath,omitempty" tf:"url_path,omitempty"`
+
+	// The version of the sampling rule format (1 )
+	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type SamplingRuleParameters struct {

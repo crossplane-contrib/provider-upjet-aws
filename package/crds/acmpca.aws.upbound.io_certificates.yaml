@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: certificates.acmpca.aws.upbound.io
 spec:
@@ -197,6 +197,15 @@ spec:
                 - signingAlgorithm
                 - validity
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -379,12 +388,64 @@ spec:
                   certificate:
                     description: PEM-encoded certificate value.
                     type: string
+                  certificateAuthorityArn:
+                    description: ARN of the certificate authority.
+                    type: string
                   certificateChain:
                     description: PEM-encoded certificate chain that includes any intermediate
                       certificates and chains up to root CA.
                     type: string
+                  certificateSigningRequestSecretRef:
+                    description: Certificate Signing Request in PEM format.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   id:
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  signingAlgorithm:
+                    description: 'Algorithm to use to sign certificate requests. Valid
+                      values: SHA256WITHRSA, SHA256WITHECDSA, SHA384WITHRSA, SHA384WITHECDSA,
+                      SHA512WITHRSA, SHA512WITHECDSA.'
+                    type: string
+                  templateArn:
+                    description: Template to use when issuing a certificate. See ACM
+                      PCA Documentation for more information.
+                    type: string
+                  validity:
+                    description: Configures end of the validity period for the certificate.
+                      See validity block below.
+                    items:
+                      properties:
+                        type:
+                          description: 'Determines how value is interpreted. Valid
+                            values: DAYS, MONTHS, YEARS, ABSOLUTE, END_DATE.'
+                          type: string
+                        value:
+                          description: If type is DAYS, MONTHS, or YEARS, the relative
+                            time until the certificate expires. If type is ABSOLUTE,
+                            the date in seconds since the Unix epoch. If type is END_DATE,
+                            the  date in RFC 3339 format.
+                          type: string
+                      type: object
+                    type: array
+                required:
+                - certificateSigningRequestSecretRef
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -427,9 +488,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

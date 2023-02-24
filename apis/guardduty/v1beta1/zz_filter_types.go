@@ -14,6 +14,27 @@ import (
 )
 
 type CriterionObservation struct {
+
+	// List of string values to be evaluated.
+	Equals []*string `json:"equals,omitempty" tf:"equals,omitempty"`
+
+	// The name of the field to be evaluated. The full list of field names can be found in AWS documentation.
+	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+
+	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	GreaterThan *string `json:"greaterThan,omitempty" tf:"greater_than,omitempty"`
+
+	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	GreaterThanOrEqual *string `json:"greaterThanOrEqual,omitempty" tf:"greater_than_or_equal,omitempty"`
+
+	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	LessThan *string `json:"lessThan,omitempty" tf:"less_than,omitempty"`
+
+	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	LessThanOrEqual *string `json:"lessThanOrEqual,omitempty" tf:"less_than_or_equal,omitempty"`
+
+	// List of string values to be evaluated.
+	NotEquals []*string `json:"notEquals,omitempty" tf:"not_equals,omitempty"`
 }
 
 type CriterionParameters struct {
@@ -49,11 +70,33 @@ type CriterionParameters struct {
 
 type FilterObservation struct {
 
+	// Specifies the action that is to be applied to the findings that match the filter. Can be one of ARCHIVE or NOOP.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
 	// The ARN of the GuardDuty filter.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the filter.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// ID of a GuardDuty detector, attached to your account.
+	DetectorID *string `json:"detectorId,omitempty" tf:"detector_id,omitempty"`
+
+	// Represents the criteria to be used in the filter for querying findings. Contains one or more criterion blocks, documented below.
+	FindingCriteria []FindingCriteriaObservation `json:"findingCriteria,omitempty" tf:"finding_criteria,omitempty"`
+
 	// A compound field, consisting of the ID of the GuardDuty detector and the name of the filter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
+	Rank *float64 `json:"rank,omitempty" tf:"rank,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -102,6 +145,7 @@ type FilterParameters struct {
 }
 
 type FindingCriteriaObservation struct {
+	Criterion []CriterionObservation `json:"criterion,omitempty" tf:"criterion,omitempty"`
 }
 
 type FindingCriteriaParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: virtualrouters.appmesh.aws.upbound.io
 spec:
@@ -195,6 +195,15 @@ spec:
                 - region
                 - spec
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -383,9 +392,55 @@ spec:
                   lastUpdatedDate:
                     description: Last update date of the virtual router.
                     type: string
+                  meshName:
+                    description: Name of the service mesh in which to create the virtual
+                      router. Must be between 1 and 255 characters in length.
+                    type: string
+                  meshOwner:
+                    description: AWS account ID of the service mesh's owner. Defaults
+                      to the account ID the AWS provider is currently connected to.
+                    type: string
+                  name:
+                    description: Name to use for the virtual router. Must be between
+                      1 and 255 characters in length.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   resourceOwner:
                     description: Resource owner's AWS account ID.
                     type: string
+                  spec:
+                    description: Virtual router specification to apply.
+                    items:
+                      properties:
+                        listener:
+                          description: configuration block to the spec argument.
+                          items:
+                            properties:
+                              portMapping:
+                                description: Port mapping information for the listener.
+                                items:
+                                  properties:
+                                    port:
+                                      description: Port used for the port mapping.
+                                      type: number
+                                    protocol:
+                                      description: Protocol used for the port mapping.
+                                        Valid values are http,http2, tcp and grpc.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -434,9 +489,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

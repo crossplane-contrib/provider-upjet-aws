@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: metricsdestinations.rum.aws.upbound.io
 spec:
@@ -238,6 +238,15 @@ spec:
                 - destination
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -414,9 +423,33 @@ spec:
             properties:
               atProvider:
                 properties:
+                  appMonitorName:
+                    description: The name of the CloudWatch RUM app monitor that will
+                      send the metrics.
+                    type: string
+                  destination:
+                    description: Defines the destination to send the metrics to. Valid
+                      values are CloudWatch and Evidently. If you specify Evidently,
+                      you must also specify the ARN of the CloudWatchEvidently experiment
+                      that is to be the destination and an IAM role that has permission
+                      to write to the experiment.
+                    type: string
+                  destinationArn:
+                    description: Use this parameter only if Destination is Evidently.
+                      This parameter specifies the ARN of the Evidently experiment
+                      that will receive the extended metrics.
+                    type: string
+                  iamRoleArn:
+                    description: This parameter is required if Destination is Evidently.
+                      If Destination is CloudWatch, do not use this parameter.
+                    type: string
                   id:
                     description: The name of the CloudWatch RUM app monitor that will
                       send the metrics.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -460,9 +493,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

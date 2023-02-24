@@ -14,6 +14,9 @@ import (
 )
 
 type AutoExportPolicyObservation struct {
+
+	// A list of file event types to automatically export to your linked S3 bucket or import from the linked S3 bucket. Valid values are NEW, CHANGED, DELETED. Max of 3.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 }
 
 type AutoExportPolicyParameters struct {
@@ -24,6 +27,9 @@ type AutoExportPolicyParameters struct {
 }
 
 type AutoImportPolicyObservation struct {
+
+	// A list of file event types to automatically export to your linked S3 bucket or import from the linked S3 bucket. Valid values are NEW, CHANGED, DELETED. Max of 3.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 }
 
 type AutoImportPolicyParameters struct {
@@ -41,8 +47,37 @@ type DataRepositoryAssociationObservation struct {
 	// Identifier of the data repository association, e.g., dra-12345678
 	AssociationID *string `json:"associationId,omitempty" tf:"association_id,omitempty"`
 
+	// Set to true to run an import data repository task to import metadata from the data repository to the file system after the data repository association is created. Defaults to false.
+	BatchImportMetaDataOnCreate *bool `json:"batchImportMetaDataOnCreate,omitempty" tf:"batch_import_meta_data_on_create,omitempty"`
+
+	// The path to the Amazon S3 data repository that will be linked to the file system. The path must be an S3 bucket s3://myBucket/myPrefix/. This path specifies where in the S3 data repository files will be imported from or exported to. The same S3 bucket cannot be linked more than once to the same file system.
+	DataRepositoryPath *string `json:"dataRepositoryPath,omitempty" tf:"data_repository_path,omitempty"`
+
+	// Set to true to delete files from the file system upon deleting this data repository association. Defaults to false.
+	DeleteDataInFilesystem *bool `json:"deleteDataInFilesystem,omitempty" tf:"delete_data_in_filesystem,omitempty"`
+
+	// The ID of the Amazon FSx file system to on which to create a data repository association.
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
+	// A path on the file system that points to a high-level directory (such as /ns1/) or subdirectory (such as /ns1/subdir/) that will be mapped 1-1 with data_repository_path. The leading forward slash in the name is required. Two data repository associations cannot have overlapping file system paths. For example, if a data repository is associated with file system path /ns1/, then you cannot link another data repository with file system path /ns1/ns2. This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.
+	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
+
 	// Identifier of the data repository association, e.g., dra-12345678
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.
+	ImportedFileChunkSize *float64 `json:"importedFileChunkSize,omitempty" tf:"imported_file_chunk_size,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// See the s3 configuration block. Max of 1.
+	// The configuration for an Amazon S3 data repository linked to an Amazon FSx Lustre file system with a data repository association. The configuration defines which file events (new, changed, or deleted files or directories) are automatically imported from the linked data repository to the file system or automatically exported from the file system to the data repository.
+	S3 []S3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -100,6 +135,12 @@ type DataRepositoryAssociationParameters struct {
 }
 
 type S3Observation struct {
+
+	// Specifies the type of updated objects that will be automatically exported from your file system to the linked S3 bucket. See the events configuration block.
+	AutoExportPolicy []AutoExportPolicyObservation `json:"autoExportPolicy,omitempty" tf:"auto_export_policy,omitempty"`
+
+	// Specifies the type of updated objects that will be automatically imported from the linked S3 bucket to your file system. See the events configuration block.
+	AutoImportPolicy []AutoImportPolicyObservation `json:"autoImportPolicy,omitempty" tf:"auto_import_policy,omitempty"`
 }
 
 type S3Parameters struct {

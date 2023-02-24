@@ -15,8 +15,24 @@ import (
 
 type ClassifierObservation struct {
 
+	// A classifier for Csv content. Defined below.
+	CsvClassifier []CsvClassifierObservation `json:"csvClassifier,omitempty" tf:"csv_classifier,omitempty"`
+
+	// –  A classifier that uses grok patterns. Defined below.
+	GrokClassifier []GrokClassifierObservation `json:"grokClassifier,omitempty" tf:"grok_classifier,omitempty"`
+
 	// Name of the classifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// –  A classifier for JSON content. Defined below.
+	JSONClassifier []JSONClassifierObservation `json:"jsonClassifier,omitempty" tf:"json_classifier,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// –  A classifier for XML content. Defined below.
+	XMLClassifier []XMLClassifierObservation `json:"xmlClassifier,omitempty" tf:"xml_classifier,omitempty"`
 }
 
 type ClassifierParameters struct {
@@ -44,6 +60,30 @@ type ClassifierParameters struct {
 }
 
 type CsvClassifierObservation struct {
+
+	// Enables the processing of files that contain only one column.
+	AllowSingleColumn *bool `json:"allowSingleColumn,omitempty" tf:"allow_single_column,omitempty"`
+
+	// Indicates whether the CSV file contains a header. This can be one of "ABSENT", "PRESENT", or "UNKNOWN".
+	ContainsHeader *string `json:"containsHeader,omitempty" tf:"contains_header,omitempty"`
+
+	// A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
+	CustomDatatypeConfigured *bool `json:"customDatatypeConfigured,omitempty" tf:"custom_datatype_configured,omitempty"`
+
+	// A list of supported custom datatypes. Valid values are BINARY, BOOLEAN, DATE, DECIMAL, DOUBLE, FLOAT, INT, LONG, SHORT, STRING, TIMESTAMP.
+	CustomDatatypes []*string `json:"customDatatypes,omitempty" tf:"custom_datatypes,omitempty"`
+
+	// The delimiter used in the Csv to separate columns.
+	Delimiter *string `json:"delimiter,omitempty" tf:"delimiter,omitempty"`
+
+	// Specifies whether to trim column values.
+	DisableValueTrimming *bool `json:"disableValueTrimming,omitempty" tf:"disable_value_trimming,omitempty"`
+
+	// A list of strings representing column names.
+	Header []*string `json:"header,omitempty" tf:"header,omitempty"`
+
+	// A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
+	QuoteSymbol *string `json:"quoteSymbol,omitempty" tf:"quote_symbol,omitempty"`
 }
 
 type CsvClassifierParameters struct {
@@ -82,6 +122,15 @@ type CsvClassifierParameters struct {
 }
 
 type GrokClassifierObservation struct {
+
+	// An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on.
+	Classification *string `json:"classification,omitempty" tf:"classification,omitempty"`
+
+	// Custom grok patterns used by this classifier.
+	CustomPatterns *string `json:"customPatterns,omitempty" tf:"custom_patterns,omitempty"`
+
+	// The grok pattern used by this classifier.
+	GrokPattern *string `json:"grokPattern,omitempty" tf:"grok_pattern,omitempty"`
 }
 
 type GrokClassifierParameters struct {
@@ -100,6 +149,9 @@ type GrokClassifierParameters struct {
 }
 
 type JSONClassifierObservation struct {
+
+	// A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
+	JSONPath *string `json:"jsonPath,omitempty" tf:"json_path,omitempty"`
 }
 
 type JSONClassifierParameters struct {
@@ -110,6 +162,12 @@ type JSONClassifierParameters struct {
 }
 
 type XMLClassifierObservation struct {
+
+	// An identifier of the data format that the classifier matches.
+	Classification *string `json:"classification,omitempty" tf:"classification,omitempty"`
+
+	// The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by />). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <row item_a="A" item_b="B"></row> is okay, but <row item_a="A" item_b="B" /> is not).
+	RowTag *string `json:"rowTag,omitempty" tf:"row_tag,omitempty"`
 }
 
 type XMLClassifierParameters struct {

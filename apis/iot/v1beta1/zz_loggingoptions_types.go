@@ -14,7 +14,21 @@ import (
 )
 
 type LoggingOptionsObservation struct {
+
+	// The default logging level. Valid Values: "DEBUG", "INFO", "ERROR", "WARN", "DISABLED".
+	DefaultLogLevel *string `json:"defaultLogLevel,omitempty" tf:"default_log_level,omitempty"`
+
+	// If true all logs are disabled. The default is false.
+	DisableAllLogs *bool `json:"disableAllLogs,omitempty" tf:"disable_all_logs,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ARN of the role that allows IoT to write to Cloudwatch logs.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type LoggingOptionsParameters struct {

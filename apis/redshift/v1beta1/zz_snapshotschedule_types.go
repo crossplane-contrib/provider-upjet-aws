@@ -18,7 +18,23 @@ type SnapshotScheduleObservation struct {
 	// Amazon Resource Name (ARN) of the Redshift Snapshot Schedule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The definition of the snapshot schedule. The definition is made up of schedule expressions, for example cron(30 12 *) or rate(12 hours).
+	Definitions []*string `json:"definitions,omitempty" tf:"definitions,omitempty"`
+
+	// The description of the snapshot schedule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether to destroy all associated clusters with this snapshot schedule on deletion. Must be enabled and applied before attempting deletion.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

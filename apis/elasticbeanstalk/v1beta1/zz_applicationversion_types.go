@@ -15,10 +15,32 @@ import (
 
 type ApplicationVersionObservation struct {
 
+	// Name of the Beanstalk Application the version is associated with.
+	Application *string `json:"application,omitempty" tf:"application,omitempty"`
+
 	// ARN assigned by AWS for this Elastic Beanstalk Application.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// S3 bucket that contains the Application Version source bundle.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Short description of the Application Version.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// On delete, force an Application Version to be deleted when it may be in use by multiple Elastic Beanstalk Environments.
+	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// S3 object that is the Application Version source bundle.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

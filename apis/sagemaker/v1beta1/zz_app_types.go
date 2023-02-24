@@ -15,14 +15,39 @@ import (
 
 type AppObservation struct {
 
+	// The name of the app.
+	AppName *string `json:"appName,omitempty" tf:"app_name,omitempty"`
+
+	// The type of app. Valid values are JupyterServer, KernelGateway, RStudioServerPro, RSessionGateway and TensorBoard.
+	AppType *string `json:"appType,omitempty" tf:"app_type,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the app.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// The domain ID.
+	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the app.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.See Resource Spec below.
+	ResourceSpec []ResourceSpecObservation `json:"resourceSpec,omitempty" tf:"resource_spec,omitempty"`
+
+	// The name of the space. At least on of user_profile_name or space_name required.
+	SpaceName *string `json:"spaceName,omitempty" tf:"space_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The user profile name. At least on of user_profile_name or space_name required.
+	UserProfileName *string `json:"userProfileName,omitempty" tf:"user_profile_name,omitempty"`
 }
 
 type AppParameters struct {
@@ -82,6 +107,18 @@ type AppParameters struct {
 }
 
 type ResourceSpecObservation struct {
+
+	// The instance type that the image version runs on. For valid values see SageMaker Instance Types.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
+	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
+
+	// The ARN of the SageMaker image that the image version belongs to.
+	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The ARN of the image version created on the instance.
+	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
 }
 
 type ResourceSpecParameters struct {

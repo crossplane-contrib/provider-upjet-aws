@@ -18,17 +18,51 @@ type IdentityProviderConfigObservation struct {
 	// Amazon Resource Name (ARN) of the EKS Identity Provider Configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// –  Name of the EKS Cluster.
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
 	// EKS Cluster name and EKS Identity Provider Configuration name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Nested attribute containing OpenID Connect identity provider information for the cluster. Detailed below.
+	Oidc []IdentityProviderConfigOidcObservation `json:"oidc,omitempty" tf:"oidc,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Status of the EKS Identity Provider Configuration.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type IdentityProviderConfigOidcObservation struct {
+
+	// –  Client ID for the OpenID Connect identity provider.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The JWT claim that the provider will use to return groups.
+	GroupsClaim *string `json:"groupsClaim,omitempty" tf:"groups_claim,omitempty"`
+
+	// A prefix that is prepended to group claims e.g., oidc:.
+	GroupsPrefix *string `json:"groupsPrefix,omitempty" tf:"groups_prefix,omitempty"`
+
+	// Issuer URL for the OpenID Connect identity provider.
+	IssuerURL *string `json:"issuerUrl,omitempty" tf:"issuer_url,omitempty"`
+
+	// The key value pairs that describe required claims in the identity token.
+	RequiredClaims map[string]*string `json:"requiredClaims,omitempty" tf:"required_claims,omitempty"`
+
+	// The JWT claim that the provider will use as the username.
+	UsernameClaim *string `json:"usernameClaim,omitempty" tf:"username_claim,omitempty"`
+
+	// A prefix that is prepended to username claims.
+	UsernamePrefix *string `json:"usernamePrefix,omitempty" tf:"username_prefix,omitempty"`
 }
 
 type IdentityProviderConfigOidcParameters struct {

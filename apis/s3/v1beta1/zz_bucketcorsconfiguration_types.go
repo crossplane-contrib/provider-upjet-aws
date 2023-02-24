@@ -14,6 +14,24 @@ import (
 )
 
 type BucketCorsConfigurationCorsRuleObservation struct {
+
+	// Set of Headers that are specified in the Access-Control-Request-Headers header.
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// Set of HTTP methods that you allow the origin to execute. Valid values are GET, PUT, HEAD, POST, and DELETE.
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// Set of origins you want customers to be able to access the bucket from.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Set of headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).
+	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
+
+	// Unique identifier for the rule. The value cannot be longer than 255 characters.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The time in seconds that your browser is to cache the preflight response for the specified resource.
+	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
 
 type BucketCorsConfigurationCorsRuleParameters struct {
@@ -45,8 +63,21 @@ type BucketCorsConfigurationCorsRuleParameters struct {
 
 type BucketCorsConfigurationObservation struct {
 
+	// The name of the bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Set of origins and methods (cross-origin access that you want to allow) documented below. You can configure up to 100 rules.
+	CorsRule []BucketCorsConfigurationCorsRuleObservation `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
+
+	// The account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
 	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type BucketCorsConfigurationParameters struct {

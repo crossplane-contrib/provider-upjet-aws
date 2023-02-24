@@ -18,8 +18,21 @@ type SecretRotationObservation struct {
 	// Amazon Resource Name (ARN) of the secret.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Specifies whether automatic rotation is enabled for this secret.
 	RotationEnabled *bool `json:"rotationEnabled,omitempty" tf:"rotation_enabled,omitempty"`
+
+	// Specifies the ARN of the Lambda function that can rotate the secret.
+	RotationLambdaArn *string `json:"rotationLambdaArn,omitempty" tf:"rotation_lambda_arn,omitempty"`
+
+	// A structure that defines the rotation configuration for this secret. Defined below.
+	RotationRules []SecretRotationRotationRulesObservation `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
+
+	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 }
 
 type SecretRotationParameters struct {
@@ -63,6 +76,9 @@ type SecretRotationParameters struct {
 }
 
 type SecretRotationRotationRulesObservation struct {
+
+	// Specifies the number of days between automatic scheduled rotations of the secret.
+	AutomaticallyAfterDays *float64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
 }
 
 type SecretRotationRotationRulesParameters struct {

@@ -15,8 +15,27 @@ import (
 
 type ModelObservation struct {
 
+	// Content type of the model
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Description of the model
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// ID of the model
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the model
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ID of the associated REST API
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Schema of the model in a JSON form
+	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type ModelParameters struct {

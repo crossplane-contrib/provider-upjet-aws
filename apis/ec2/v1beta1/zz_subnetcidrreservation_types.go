@@ -15,11 +15,27 @@ import (
 
 type SubnetCidrReservationObservation struct {
 
+	// The CIDR block for the reservation.
+	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
+
+	// A brief description of the reservation.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// ID of the CIDR reservation.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// ID of the AWS account that owns this CIDR reservation.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The type of reservation to create. Valid values: explicit, prefix
+	ReservationType *string `json:"reservationType,omitempty" tf:"reservation_type,omitempty"`
+
+	// The ID of the subnet to create the reservation for.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type SubnetCidrReservationParameters struct {

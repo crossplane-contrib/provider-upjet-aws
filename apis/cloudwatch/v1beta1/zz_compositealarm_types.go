@@ -15,11 +15,36 @@ import (
 
 type CompositeAlarmObservation struct {
 
+	// Indicates whether actions should be executed during any changes to the alarm state of the composite alarm. Defaults to true.
+	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
+
+	// The set of actions to execute when this alarm transitions to the ALARM state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
+	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
+
+	// The description for the composite alarm.
+	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
+
+	// An expression that specifies which other alarms are to be evaluated to determine this composite alarm's state. For syntax, see Creating a Composite Alarm. The maximum length is 10240 characters.
+	AlarmRule *string `json:"alarmRule,omitempty" tf:"alarm_rule,omitempty"`
+
 	// The ARN of the composite alarm.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ID of the composite alarm resource, which is equivalent to its alarm_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The set of actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
+	InsufficientDataActions []*string `json:"insufficientDataActions,omitempty" tf:"insufficient_data_actions,omitempty"`
+
+	// The set of actions to execute when this alarm transitions to an OK state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
+	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

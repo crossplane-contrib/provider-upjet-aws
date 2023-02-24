@@ -33,9 +33,24 @@ type KeyPairObservation struct {
 	// The name used for this key pair
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the Lightsail Key Pair
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// –  An optional PGP key to encrypt the resulting private
+	// key material. Only used when creating a new key pair
+	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
+
 	// the private key, base64 encoded. This is only populated
 	// when creating a new key, and when no pgp_key is provided
 	PrivateKey *string `json:"privateKey,omitempty" tf:"private_key,omitempty"`
+
+	// The public key material. This public key will be
+	// imported into Lightsail
+	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type KeyPairParameters struct {

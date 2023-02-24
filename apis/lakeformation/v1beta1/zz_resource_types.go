@@ -14,10 +14,21 @@ import (
 )
 
 type ResourceObservation struct {
+
+	// –  Amazon Resource Name (ARN) of the resource, an S3 path.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The date and time the resource was last modified in RFC 3339 format.
 	LastModified *string `json:"lastModified,omitempty" tf:"last_modified,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// linked role must exist and is used.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type ResourceParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: firewalls.networkfirewall.aws.upbound.io
 spec:
@@ -362,6 +362,15 @@ spec:
                 - region
                 - subnetMapping
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -542,6 +551,41 @@ spec:
                     description: The Amazon Resource Name (ARN) that identifies the
                       firewall.
                     type: string
+                  deleteProtection:
+                    description: A boolean flag indicating whether it is possible
+                      to delete the firewall. Defaults to false.
+                    type: boolean
+                  description:
+                    description: A friendly description of the firewall.
+                    type: string
+                  encryptionConfiguration:
+                    description: KMS encryption configuration settings. See Encryption
+                      Configuration below for details.
+                    items:
+                      properties:
+                        keyId:
+                          description: The ID of the customer managed key. You can
+                            use any of the key identifiers that KMS supports, unless
+                            you're using a key that's managed by another account.
+                            If you're using a key managed by another account, then
+                            specify the key ARN.
+                          type: string
+                        type:
+                          description: The type of AWS KMS key to use for encryption
+                            of your Network Firewall resources. Valid values are CUSTOMER_KMS
+                            and AWS_OWNED_KMS_KEY.
+                          type: string
+                      type: object
+                    type: array
+                  firewallPolicyArn:
+                    description: The Amazon Resource Name (ARN) of the VPC Firewall
+                      policy.
+                    type: string
+                  firewallPolicyChangeProtection:
+                    description: (Option) A boolean flag indicating whether it is
+                      possible to change the associated firewall policy. Defaults
+                      to false.
+                    type: boolean
                   firewallStatus:
                     description: Nested list of information about the current status
                       of the firewall.
@@ -582,6 +626,34 @@ spec:
                     description: The Amazon Resource Name (ARN) that identifies the
                       firewall.
                     type: string
+                  name:
+                    description: A friendly name of the firewall.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  subnetChangeProtection:
+                    description: A boolean flag indicating whether it is possible
+                      to change the associated subnet(s). Defaults to false.
+                    type: boolean
+                  subnetMapping:
+                    description: Set of configuration blocks describing the public
+                      subnets. Each subnet must belong to a different Availability
+                      Zone in the VPC. AWS Network Firewall creates a firewall endpoint
+                      in each subnet. See Subnet Mapping below for details.
+                    items:
+                      properties:
+                        subnetId:
+                          description: The unique identifier for the subnet.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -591,6 +663,10 @@ spec:
                     type: object
                   updateToken:
                     description: A string token used when updating a firewall.
+                    type: string
+                  vpcId:
+                    description: The unique identifier of the VPC where AWS Network
+                      Firewall should create the firewall.
                     type: string
                 type: object
               conditions:
@@ -634,9 +710,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

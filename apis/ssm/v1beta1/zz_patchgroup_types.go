@@ -15,8 +15,18 @@ import (
 
 type PatchGroupObservation struct {
 
+	// The ID of the patch baseline to register the patch group with.
+	BaselineID *string `json:"baselineId,omitempty" tf:"baseline_id,omitempty"`
+
 	// The name of the patch group and ID of the patch baseline separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the patch group that should be registered with the patch baseline.
+	PatchGroup *string `json:"patchGroup,omitempty" tf:"patch_group,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type PatchGroupParameters struct {

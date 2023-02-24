@@ -15,12 +15,27 @@ import (
 
 type BucketLoggingObservation struct {
 
+	// The name of the bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
 	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The name of the bucket where you want Amazon S3 to store server access logs.
+	TargetBucket *string `json:"targetBucket,omitempty" tf:"target_bucket,omitempty"`
+
 	// Set of configuration blocks with information for granting permissions documented below.
-	// +kubebuilder:validation:Optional
 	TargetGrant []TargetGrantObservation `json:"targetGrant,omitempty" tf:"target_grant,omitempty"`
+
+	// A prefix for all log object keys.
+	TargetPrefix *string `json:"targetPrefix,omitempty" tf:"target_prefix,omitempty"`
 }
 
 type BucketLoggingParameters struct {
@@ -73,6 +88,18 @@ type BucketLoggingParameters struct {
 
 type TargetGrantGranteeObservation struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Email address of the grantee. See Regions and Endpoints for supported AWS regions where this argument can be specified.
+	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
+
+	// The canonical user ID of the grantee.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Type of grantee. Valid values: CanonicalUser, AmazonCustomerByEmail, Group.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// URI of the grantee group.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type TargetGrantGranteeParameters struct {
@@ -97,8 +124,10 @@ type TargetGrantGranteeParameters struct {
 type TargetGrantObservation struct {
 
 	// A configuration block for the person being granted permissions documented below.
-	// +kubebuilder:validation:Required
 	Grantee []TargetGrantGranteeObservation `json:"grantee,omitempty" tf:"grantee,omitempty"`
+
+	// Logging permissions assigned to the grantee for the bucket. Valid values: FULL_CONTROL, READ, WRITE.
+	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
 }
 
 type TargetGrantParameters struct {

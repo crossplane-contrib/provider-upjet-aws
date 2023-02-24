@@ -18,6 +18,21 @@ type DomainNameObservation struct {
 	// ARN of domain name.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ARN for an AWS-managed certificate. AWS Certificate Manager is the only supported source. Used when an edge-optimized domain name is desired. Conflicts with certificate_name, certificate_body, certificate_chain, certificate_private_key, regional_certificate_arn, and regional_certificate_name.
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+
+	// Certificate issued for the domain name being registered, in PEM format. Only valid for EDGE endpoint configuration type. Conflicts with certificate_arn, regional_certificate_arn, and regional_certificate_name.
+	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
+
+	// Certificate for the CA that issued the certificate, along with any intermediate CA certificates required to create an unbroken chain to a certificate trusted by the intended API clients. Only valid for EDGE endpoint configuration type. Conflicts with certificate_arn, regional_certificate_arn, and regional_certificate_name.
+	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
+
+	// Unique name to use when registering this certificate as an IAM server certificate. Conflicts with certificate_arn, regional_certificate_arn, and regional_certificate_name. Required if certificate_arn is not set.
+	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
+
+	// Private key associated with the domain certificate given in certificate_body. Only valid for EDGE endpoint configuration type. Conflicts with certificate_arn, regional_certificate_arn, and regional_certificate_name.
+	CertificatePrivateKeySecretRef *v1.SecretKeySelector `json:"certificatePrivateKeySecretRef,omitempty" tf:"-"`
+
 	// Upload date associated with the domain certificate.
 	CertificateUploadDate *string `json:"certificateUploadDate,omitempty" tf:"certificate_upload_date,omitempty"`
 
@@ -27,14 +42,42 @@ type DomainNameObservation struct {
 	// For convenience, the hosted zone ID (Z2FDTNDATAQYW2) that can be used to create a Route53 alias record for the distribution.
 	CloudfrontZoneID *string `json:"cloudfrontZoneId,omitempty" tf:"cloudfront_zone_id,omitempty"`
 
+	// Fully-qualified domain name to register.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Configuration block defining API endpoint information including type. See below.
+	EndpointConfiguration []EndpointConfigurationObservation `json:"endpointConfiguration,omitempty" tf:"endpoint_configuration,omitempty"`
+
 	// Internal identifier assigned to this domain name by API Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Mutual TLS authentication configuration for the domain name. See below.
+	MutualTLSAuthentication []MutualTLSAuthenticationObservation `json:"mutualTlsAuthentication,omitempty" tf:"mutual_tls_authentication,omitempty"`
+
+	// ARN of the AWS-issued certificate used to validate custom domain ownership (when certificate_arn is issued via an ACM Private CA or mutual_tls_authentication is configured with an ACM-imported certificate.)
+	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ARN for an AWS-managed certificate. AWS Certificate Manager is the only supported source. Used when a regional domain name is desired. Conflicts with certificate_arn, certificate_name, certificate_body, certificate_chain, and certificate_private_key.
+	RegionalCertificateArn *string `json:"regionalCertificateArn,omitempty" tf:"regional_certificate_arn,omitempty"`
+
+	// User-friendly name of the certificate that will be used by regional endpoint for this domain name. Conflicts with certificate_arn, certificate_name, certificate_body, certificate_chain, and certificate_private_key.
+	RegionalCertificateName *string `json:"regionalCertificateName,omitempty" tf:"regional_certificate_name,omitempty"`
 
 	// Hostname for the custom domain's regional endpoint.
 	RegionalDomainName *string `json:"regionalDomainName,omitempty" tf:"regional_domain_name,omitempty"`
 
 	// Hosted zone ID that can be used to create a Route53 alias record for the regional endpoint.
 	RegionalZoneID *string `json:"regionalZoneId,omitempty" tf:"regional_zone_id,omitempty"`
+
+	// Transport Layer Security (TLS) version + cipher suite for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must be configured to perform drift detection.
+	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -121,6 +164,9 @@ type DomainNameParameters struct {
 }
 
 type EndpointConfigurationObservation struct {
+
+	// List of endpoint types. This resource currently only supports managing a single value. Valid values: EDGE or REGIONAL. If unspecified, defaults to EDGE. Must be declared as REGIONAL in non-Commercial partitions. Refer to the documentation for more information on the difference between edge-optimized and regional APIs.
+	Types []*string `json:"types,omitempty" tf:"types,omitempty"`
 }
 
 type EndpointConfigurationParameters struct {
@@ -131,6 +177,12 @@ type EndpointConfigurationParameters struct {
 }
 
 type MutualTLSAuthenticationObservation struct {
+
+	// Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version.
+	TruststoreURI *string `json:"truststoreUri,omitempty" tf:"truststore_uri,omitempty"`
+
+	// Version of the S3 object that contains the truststore. To specify a version, you must have versioning enabled for the S3 bucket.
+	TruststoreVersion *string `json:"truststoreVersion,omitempty" tf:"truststore_version,omitempty"`
 }
 
 type MutualTLSAuthenticationParameters struct {

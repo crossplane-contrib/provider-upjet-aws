@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: schedules.autoscaling.aws.upbound.io
 spec:
@@ -182,6 +182,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -361,7 +370,47 @@ spec:
                   arn:
                     description: ARN assigned by AWS to the autoscaling schedule.
                     type: string
+                  autoscalingGroupName:
+                    description: The name of the Auto Scaling group.
+                    type: string
+                  desiredCapacity:
+                    description: The initial capacity of the Auto Scaling group after
+                      the scheduled action runs and the capacity it attempts to maintain.
+                      Set to -1 if you don't want to change the desired capacity at
+                      the scheduled time. Defaults to 0.
+                    type: number
+                  endTime:
+                    description: The date and time for the recurring schedule to end,
+                      in UTC with the format "YYYY-MM-DDThh:mm:ssZ" (e.g. "2021-06-01T00:00:00Z").
+                    type: string
                   id:
+                    type: string
+                  maxSize:
+                    description: The maximum size of the Auto Scaling group. Set to
+                      -1 if you don't want to change the maximum size at the scheduled
+                      time. Defaults to 0.
+                    type: number
+                  minSize:
+                    description: The minimum size of the Auto Scaling group. Set to
+                      -1 if you don't want to change the minimum size at the scheduled
+                      time. Defaults to 0.
+                    type: number
+                  recurrence:
+                    description: The recurring schedule for this action specified
+                      using the Unix cron syntax format.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  startTime:
+                    description: The date and time for the recurring schedule to start,
+                      in UTC with the format "YYYY-MM-DDThh:mm:ssZ" (e.g. "2021-06-01T00:00:00Z").
+                    type: string
+                  timeZone:
+                    description: Specifies the time zone for a cron expression. Valid
+                      values are the canonical names of the IANA time zones (such
+                      as Etc/GMT+9 or Pacific/Tahiti).
                     type: string
                 type: object
               conditions:
@@ -405,9 +454,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

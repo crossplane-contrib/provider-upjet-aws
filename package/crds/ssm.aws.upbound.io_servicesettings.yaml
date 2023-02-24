@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: servicesettings.ssm.aws.upbound.io
 spec:
@@ -79,6 +79,15 @@ spec:
                 - settingId
                 - settingValue
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -260,6 +269,16 @@ spec:
                     type: string
                   id:
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  settingId:
+                    description: ID of the service setting.
+                    type: string
+                  settingValue:
+                    description: Value of the service setting.
+                    type: string
                   status:
                     description: Status of the service setting. Value can be Default,
                       Customized or PendingUpdate.
@@ -306,9 +325,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -15,8 +15,15 @@ import (
 
 type AuthenticationProfileObservation struct {
 
+	// The content of the authentication profile in JSON format. The maximum length of the JSON string is determined by a quota for your account.
+	AuthenticationProfileContent *string `json:"authenticationProfileContent,omitempty" tf:"authentication_profile_content,omitempty"`
+
 	// The name of the authentication profile.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type AuthenticationProfileParameters struct {

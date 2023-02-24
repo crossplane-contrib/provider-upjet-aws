@@ -15,8 +15,24 @@ import (
 
 type VoiceConnectorStreamingObservation struct {
 
+	// The retention period, in hours, for the Amazon Kinesis data.
+	DataRetention *float64 `json:"dataRetention,omitempty" tf:"data_retention,omitempty"`
+
+	// When true, media streaming to Amazon Kinesis is turned off. Default: false
+	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+
 	// The Amazon Chime Voice Connector ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The streaming notification targets. Valid Values: EventBridge | SNS | SQS
+	StreamingNotificationTargets []*string `json:"streamingNotificationTargets,omitempty" tf:"streaming_notification_targets,omitempty"`
+
+	// The Amazon Chime Voice Connector ID.
+	VoiceConnectorID *string `json:"voiceConnectorId,omitempty" tf:"voice_connector_id,omitempty"`
 }
 
 type VoiceConnectorStreamingParameters struct {

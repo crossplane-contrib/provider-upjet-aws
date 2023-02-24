@@ -24,7 +24,17 @@ type InputSecurityGroupObservation struct {
 	// The list of inputs currently using this InputSecurityGroup.
 	Inputs []*string `json:"inputs,omitempty" tf:"inputs,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Whitelist rules. See Whitelist Rules for more details.
+	WhitelistRules []WhitelistRulesObservation `json:"whitelistRules,omitempty" tf:"whitelist_rules,omitempty"`
 }
 
 type InputSecurityGroupParameters struct {
@@ -44,6 +54,9 @@ type InputSecurityGroupParameters struct {
 }
 
 type WhitelistRulesObservation struct {
+
+	// The IPv4 CIDR that's whitelisted.
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 }
 
 type WhitelistRulesParameters struct {

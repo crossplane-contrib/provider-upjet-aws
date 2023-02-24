@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: workflows.transfer.aws.upbound.io
 spec:
@@ -491,6 +491,15 @@ spec:
                 - region
                 - steps
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -670,9 +679,342 @@ spec:
                   arn:
                     description: The Workflow ARN.
                     type: string
+                  description:
+                    description: A textual description for the workflow.
+                    type: string
                   id:
                     description: The Workflow id.
                     type: string
+                  onExceptionSteps:
+                    description: Specifies the steps (actions) to take if errors are
+                      encountered during execution of the workflow. See Workflow Steps
+                      below.
+                    items:
+                      properties:
+                        copyStepDetails:
+                          description: Details for a step that performs a file copy.
+                            See Copy Step Details below.
+                          items:
+                            properties:
+                              destinationFileLocation:
+                                description: Specifies the location for the file being
+                                  copied. Use ${Transfer:username} in this field to
+                                  parametrize the destination prefix by username.
+                                items:
+                                  properties:
+                                    efsFileLocation:
+                                      description: Specifies the details for the EFS
+                                        file being copied.
+                                      items:
+                                        properties:
+                                          fileSystemId:
+                                            description: The ID of the file system,
+                                              assigned by Amazon EFS.
+                                            type: string
+                                          path:
+                                            description: The pathname for the folder
+                                              being used by a workflow.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    s3FileLocation:
+                                      description: Specifies the details for the S3
+                                        file being copied.
+                                      items:
+                                        properties:
+                                          bucket:
+                                            description: Specifies the S3 bucket for
+                                              the customer input file.
+                                            type: string
+                                          key:
+                                            description: The name assigned to the
+                                              file when it was created in S3. You
+                                              use the object key to retrieve the object.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              name:
+                                description: The name of the step, used as an identifier.
+                                type: string
+                              overwriteExisting:
+                                description: A flag that indicates whether or not
+                                  to overwrite an existing file of the same name.
+                                  The default is FALSE. Valid values are TRUE and
+                                  FALSE.
+                                type: string
+                              sourceFileLocation:
+                                description: 'Specifies which file to use as input
+                                  to the workflow step: either the output from the
+                                  previous step, or the originally uploaded file for
+                                  the workflow. Enter ${previous.file} to use the
+                                  previous file as the input. In this case, this workflow
+                                  step uses the output file from the previous workflow
+                                  step as input. This is the default value. Enter
+                                  ${original.file} to use the originally-uploaded
+                                  file location as input for this step.'
+                                type: string
+                            type: object
+                          type: array
+                        customStepDetails:
+                          description: Details for a step that invokes a lambda function.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the step, used as an identifier.
+                                type: string
+                              sourceFileLocation:
+                                description: 'Specifies which file to use as input
+                                  to the workflow step: either the output from the
+                                  previous step, or the originally uploaded file for
+                                  the workflow. Enter ${previous.file} to use the
+                                  previous file as the input. In this case, this workflow
+                                  step uses the output file from the previous workflow
+                                  step as input. This is the default value. Enter
+                                  ${original.file} to use the originally-uploaded
+                                  file location as input for this step.'
+                                type: string
+                              target:
+                                description: The ARN for the lambda function that
+                                  is being called.
+                                type: string
+                              timeoutSeconds:
+                                description: Timeout, in seconds, for the step.
+                                type: number
+                            type: object
+                          type: array
+                        deleteStepDetails:
+                          description: Details for a step that deletes the file.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the step, used as an identifier.
+                                type: string
+                              sourceFileLocation:
+                                description: 'Specifies which file to use as input
+                                  to the workflow step: either the output from the
+                                  previous step, or the originally uploaded file for
+                                  the workflow. Enter ${previous.file} to use the
+                                  previous file as the input. In this case, this workflow
+                                  step uses the output file from the previous workflow
+                                  step as input. This is the default value. Enter
+                                  ${original.file} to use the originally-uploaded
+                                  file location as input for this step.'
+                                type: string
+                            type: object
+                          type: array
+                        tagStepDetails:
+                          description: Details for a step that creates one or more
+                            tags.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the step, used as an identifier.
+                                type: string
+                              sourceFileLocation:
+                                description: 'Specifies which file to use as input
+                                  to the workflow step: either the output from the
+                                  previous step, or the originally uploaded file for
+                                  the workflow. Enter ${previous.file} to use the
+                                  previous file as the input. In this case, this workflow
+                                  step uses the output file from the previous workflow
+                                  step as input. This is the default value. Enter
+                                  ${original.file} to use the originally-uploaded
+                                  file location as input for this step.'
+                                type: string
+                              tags:
+                                description: Key-value map of resource tags.
+                                items:
+                                  properties:
+                                    key:
+                                      description: The name assigned to the file when
+                                        it was created in S3. You use the object key
+                                        to retrieve the object.
+                                      type: string
+                                    value:
+                                      description: The value that corresponds to the
+                                        key.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        type:
+                          description: One of the following step types are supported.
+                            COPY, CUSTOM, DELETE, and TAG.
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  steps:
+                    description: Specifies the details for the steps that are in the
+                      specified workflow. See Workflow Steps below.
+                    items:
+                      properties:
+                        copyStepDetails:
+                          description: Details for a step that performs a file copy.
+                            See Copy Step Details below.
+                          items:
+                            properties:
+                              destinationFileLocation:
+                                description: Specifies the location for the file being
+                                  copied. Use ${Transfer:username} in this field to
+                                  parametrize the destination prefix by username.
+                                items:
+                                  properties:
+                                    efsFileLocation:
+                                      description: Specifies the details for the EFS
+                                        file being copied.
+                                      items:
+                                        properties:
+                                          fileSystemId:
+                                            description: The ID of the file system,
+                                              assigned by Amazon EFS.
+                                            type: string
+                                          path:
+                                            description: The pathname for the folder
+                                              being used by a workflow.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    s3FileLocation:
+                                      description: Specifies the details for the S3
+                                        file being copied.
+                                      items:
+                                        properties:
+                                          bucket:
+                                            description: Specifies the S3 bucket for
+                                              the customer input file.
+                                            type: string
+                                          key:
+                                            description: The name assigned to the
+                                              file when it was created in S3. You
+                                              use the object key to retrieve the object.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              name:
+                                description: The name of the step, used as an identifier.
+                                type: string
+                              overwriteExisting:
+                                description: A flag that indicates whether or not
+                                  to overwrite an existing file of the same name.
+                                  The default is FALSE. Valid values are TRUE and
+                                  FALSE.
+                                type: string
+                              sourceFileLocation:
+                                description: 'Specifies which file to use as input
+                                  to the workflow step: either the output from the
+                                  previous step, or the originally uploaded file for
+                                  the workflow. Enter ${previous.file} to use the
+                                  previous file as the input. In this case, this workflow
+                                  step uses the output file from the previous workflow
+                                  step as input. This is the default value. Enter
+                                  ${original.file} to use the originally-uploaded
+                                  file location as input for this step.'
+                                type: string
+                            type: object
+                          type: array
+                        customStepDetails:
+                          description: Details for a step that invokes a lambda function.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the step, used as an identifier.
+                                type: string
+                              sourceFileLocation:
+                                description: 'Specifies which file to use as input
+                                  to the workflow step: either the output from the
+                                  previous step, or the originally uploaded file for
+                                  the workflow. Enter ${previous.file} to use the
+                                  previous file as the input. In this case, this workflow
+                                  step uses the output file from the previous workflow
+                                  step as input. This is the default value. Enter
+                                  ${original.file} to use the originally-uploaded
+                                  file location as input for this step.'
+                                type: string
+                              target:
+                                description: The ARN for the lambda function that
+                                  is being called.
+                                type: string
+                              timeoutSeconds:
+                                description: Timeout, in seconds, for the step.
+                                type: number
+                            type: object
+                          type: array
+                        deleteStepDetails:
+                          description: Details for a step that deletes the file.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the step, used as an identifier.
+                                type: string
+                              sourceFileLocation:
+                                description: 'Specifies which file to use as input
+                                  to the workflow step: either the output from the
+                                  previous step, or the originally uploaded file for
+                                  the workflow. Enter ${previous.file} to use the
+                                  previous file as the input. In this case, this workflow
+                                  step uses the output file from the previous workflow
+                                  step as input. This is the default value. Enter
+                                  ${original.file} to use the originally-uploaded
+                                  file location as input for this step.'
+                                type: string
+                            type: object
+                          type: array
+                        tagStepDetails:
+                          description: Details for a step that creates one or more
+                            tags.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the step, used as an identifier.
+                                type: string
+                              sourceFileLocation:
+                                description: 'Specifies which file to use as input
+                                  to the workflow step: either the output from the
+                                  previous step, or the originally uploaded file for
+                                  the workflow. Enter ${previous.file} to use the
+                                  previous file as the input. In this case, this workflow
+                                  step uses the output file from the previous workflow
+                                  step as input. This is the default value. Enter
+                                  ${original.file} to use the originally-uploaded
+                                  file location as input for this step.'
+                                type: string
+                              tags:
+                                description: Key-value map of resource tags.
+                                items:
+                                  properties:
+                                    key:
+                                      description: The name assigned to the file when
+                                        it was created in S3. You use the object key
+                                        to retrieve the object.
+                                      type: string
+                                    value:
+                                      description: The value that corresponds to the
+                                        key.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        type:
+                          description: One of the following step types are supported.
+                            COPY, CUSTOM, DELETE, and TAG.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -722,9 +1064,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

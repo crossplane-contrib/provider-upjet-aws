@@ -15,8 +15,21 @@ import (
 
 type ClusterRoleAssociationObservation struct {
 
+	// DB Cluster Identifier to associate with the IAM Role.
+	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
+
+	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
+	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
+
 	// DB Cluster Identifier and IAM Role ARN separated by a comma (,)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Amazon Resource Name (ARN) of the IAM Role to associate with the DB Cluster.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type ClusterRoleAssociationParameters struct {

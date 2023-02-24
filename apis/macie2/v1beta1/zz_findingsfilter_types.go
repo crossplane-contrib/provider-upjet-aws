@@ -14,6 +14,30 @@ import (
 )
 
 type CriterionObservation struct {
+
+	// The value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	Eq []*string `json:"eq,omitempty" tf:"eq,omitempty"`
+
+	// The value for the property exclusively matches (equals an exact match for) all the specified values. If you specify multiple values, Amazon Macie uses AND logic to join the values.
+	EqExactMatch []*string `json:"eqExactMatch,omitempty" tf:"eq_exact_match,omitempty"`
+
+	// The name of the field to be evaluated.
+	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+
+	// The value for the property is greater than the specified value.
+	Gt *string `json:"gt,omitempty" tf:"gt,omitempty"`
+
+	// The value for the property is greater than or equal to the specified value.
+	Gte *string `json:"gte,omitempty" tf:"gte,omitempty"`
+
+	// The value for the property is less than the specified value.
+	Lt *string `json:"lt,omitempty" tf:"lt,omitempty"`
+
+	// The value for the property is less than or equal to the specified value.
+	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
+
+	// The value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	Neq []*string `json:"neq,omitempty" tf:"neq,omitempty"`
 }
 
 type CriterionParameters struct {
@@ -52,6 +76,9 @@ type CriterionParameters struct {
 }
 
 type FindingCriteriaObservation struct {
+
+	// A condition that specifies the property, operator, and one or more values to use to filter the results.  (documented below)
+	Criterion []CriterionObservation `json:"criterion,omitempty" tf:"criterion,omitempty"`
 }
 
 type FindingCriteriaParameters struct {
@@ -63,11 +90,33 @@ type FindingCriteriaParameters struct {
 
 type FindingsFilterObservation struct {
 
+	// The action to perform on findings that meet the filter criteria (finding_criteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the Findings Filter.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A custom description of the filter. The description can contain as many as 512 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The criteria to use to filter findings.
+	FindingCriteria []FindingCriteriaObservation `json:"findingCriteria,omitempty" tf:"finding_criteria,omitempty"`
+
 	// The unique identifier (ID) of the macie Findings Filter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. Conflicts with name_prefix.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }

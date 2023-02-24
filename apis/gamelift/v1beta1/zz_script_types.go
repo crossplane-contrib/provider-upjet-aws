@@ -21,8 +21,27 @@ type ScriptObservation struct {
 	// GameLift Script ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Name of the script
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Information indicating where your game script files are stored. See below.
+	StorageLocation []ScriptStorageLocationObservation `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Version that is associated with this script.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// A data object containing your Realtime scripts and dependencies as a zip  file. The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
+	ZipFile *string `json:"zipFile,omitempty" tf:"zip_file,omitempty"`
 }
 
 type ScriptParameters struct {
@@ -54,6 +73,18 @@ type ScriptParameters struct {
 }
 
 type ScriptStorageLocationObservation struct {
+
+	// Name of your S3 bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Name of the zip file containing your script files.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// A specific version of the file. If not set, the latest version of the file is retrieved.
+	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
+
+	// ARN of the access role that allows Amazon GameLift to access your S3 bucket.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type ScriptStorageLocationParameters struct {

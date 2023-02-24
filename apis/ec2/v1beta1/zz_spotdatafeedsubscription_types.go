@@ -14,7 +14,18 @@ import (
 )
 
 type SpotDatafeedSubscriptionObservation struct {
+
+	// The Amazon S3 bucket in which to store the Spot instance data feed.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Path of folder inside bucket to place spot pricing data.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type SpotDatafeedSubscriptionParameters struct {

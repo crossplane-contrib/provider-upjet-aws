@@ -17,6 +17,16 @@ type EncryptionConfigObservation struct {
 
 	// Region name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An AWS KMS customer master key (CMK) ARN.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EncryptionConfigParameters struct {

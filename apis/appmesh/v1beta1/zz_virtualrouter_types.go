@@ -14,6 +14,12 @@ import (
 )
 
 type SpecListenerPortMappingObservation struct {
+
+	// Port used for the port mapping.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Protocol used for the port mapping. Valid values are http,http2, tcp and grpc.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type SpecListenerPortMappingParameters struct {
@@ -41,8 +47,27 @@ type VirtualRouterObservation struct {
 	// Last update date of the virtual router.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
+	// Name of the service mesh in which to create the virtual router. Must be between 1 and 255 characters in length.
+	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
+
+	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
+	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
+
+	// Name to use for the virtual router. Must be between 1 and 255 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
+
+	// Virtual router specification to apply.
+	Spec []VirtualRouterSpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -87,6 +112,9 @@ type VirtualRouterParameters struct {
 }
 
 type VirtualRouterSpecListenerObservation struct {
+
+	// Port mapping information for the listener.
+	PortMapping []SpecListenerPortMappingObservation `json:"portMapping,omitempty" tf:"port_mapping,omitempty"`
 }
 
 type VirtualRouterSpecListenerParameters struct {
@@ -97,6 +125,9 @@ type VirtualRouterSpecListenerParameters struct {
 }
 
 type VirtualRouterSpecObservation struct {
+
+	// configuration block to the spec argument.
+	Listener []VirtualRouterSpecListenerObservation `json:"listener,omitempty" tf:"listener,omitempty"`
 }
 
 type VirtualRouterSpecParameters struct {

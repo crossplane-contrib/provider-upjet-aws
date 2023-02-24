@@ -18,8 +18,21 @@ type SubnetGroupObservation struct {
 	// The ARN of the docDB subnet group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description of the docDB subnet group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The docDB subnet group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A list of VPC subnet IDs.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

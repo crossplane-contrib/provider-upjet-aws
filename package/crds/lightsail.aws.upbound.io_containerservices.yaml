@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: containerservices.lightsail.aws.upbound.io
 spec:
@@ -148,6 +148,15 @@ spec:
                 - region
                 - scale
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -336,6 +345,16 @@ spec:
                   id:
                     description: Same as name.
                     type: string
+                  isDisabled:
+                    description: A Boolean value indicating whether the container
+                      service is disabled. Defaults to false.
+                    type: boolean
+                  power:
+                    description: 'The power specification for the container service.
+                      The power specifies the amount of memory, the number of vCPUs,
+                      and the monthly price of each node of the container service.
+                      Possible values: nano, micro, small, medium, large, xlarge.'
+                    type: string
                   powerId:
                     description: The ID of the power of the container service.
                     type: string
@@ -367,6 +386,10 @@ spec:
                             Role below for more details.
                           items:
                             properties:
+                              isActive:
+                                description: A Boolean value that indicates whether
+                                  to activate the role. The default is false.
+                                type: boolean
                               principalArn:
                                 description: The principal ARN of the container service.
                                   The principal ARN can be used to create a trust
@@ -379,13 +402,54 @@ spec:
                           type: array
                       type: object
                     type: array
+                  publicDomainNames:
+                    description: The public domain names to use with the container
+                      service, such as example.com and www.example.com. You can specify
+                      up to four public domain names for a container service. The
+                      domain names that you specify are used when you create a deployment
+                      with a container configured as the public endpoint of your container
+                      service. If you don't specify public domain names, then you
+                      can use the default domain of the container service. Defined
+                      below.
+                    items:
+                      properties:
+                        certificate:
+                          items:
+                            properties:
+                              certificateName:
+                                description: The name for the container service. Names
+                                  must be of length 1 to 63, and be unique within
+                                  each AWS Region in your Lightsail account.
+                                type: string
+                              domainNames:
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   resourceType:
                     description: The Lightsail resource type of the container service
                       (i.e., ContainerService).
                     type: string
+                  scale:
+                    description: The scale specification for the container service.
+                      The scale specifies the allocated compute nodes of the container
+                      service.
+                    type: number
                   state:
                     description: The current state of the container service.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -440,9 +504,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

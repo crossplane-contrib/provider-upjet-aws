@@ -18,11 +18,33 @@ type ThesaurusObservation struct {
 	// ARN of the thesaurus.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description for a thesaurus.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The unique identifiers of the thesaurus and index separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The identifier of the index for a thesaurus.
+	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
+
+	// The name for the thesaurus.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The IAM (Identity and Access Management) role used to access the thesaurus file in S3.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The S3 path where your thesaurus file sits in S3. Detailed below.
+	SourceS3Path []ThesaurusSourceS3PathObservation `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
+
 	// The current status of the thesaurus.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -84,6 +106,12 @@ type ThesaurusParameters struct {
 }
 
 type ThesaurusSourceS3PathObservation struct {
+
+	// The name of the S3 bucket that contains the file.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The name of the file.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type ThesaurusSourceS3PathParameters struct {

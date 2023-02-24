@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: scheduledactions.redshift.aws.upbound.io
 spec:
@@ -228,6 +228,15 @@ spec:
                 - schedule
                 - targetAction
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -404,9 +413,89 @@ spec:
             properties:
               atProvider:
                 properties:
+                  description:
+                    description: The description of the scheduled action.
+                    type: string
+                  enable:
+                    description: Whether to enable the scheduled action. Default is
+                      true .
+                    type: boolean
+                  endTime:
+                    description: The end time in UTC when the schedule is active,
+                      in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ).
+                    type: string
+                  iamRole:
+                    description: The IAM role to assume to run the scheduled action.
+                    type: string
                   id:
                     description: The Redshift Scheduled Action name.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  schedule:
+                    description: The schedule of action. The schedule is defined format
+                      of "at expression" or "cron expression", for example at(2016-03-04T17:27:00)
+                      or cron(0 10 ? * MON *). See Scheduled Action for more information.
+                    type: string
+                  startTime:
+                    description: The start time in UTC when the schedule is active,
+                      in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ).
+                    type: string
+                  targetAction:
+                    description: Target action. Documented below.
+                    items:
+                      properties:
+                        pauseCluster:
+                          description: An action that runs a PauseCluster API operation.
+                            Documented below.
+                          items:
+                            properties:
+                              clusterIdentifier:
+                                description: The identifier of the cluster to be paused.
+                                type: string
+                            type: object
+                          type: array
+                        resizeCluster:
+                          description: An action that runs a ResizeCluster API operation.
+                            Documented below.
+                          items:
+                            properties:
+                              classic:
+                                description: 'A boolean value indicating whether the
+                                  resize operation is using the classic resize process.
+                                  Default: false.'
+                                type: boolean
+                              clusterIdentifier:
+                                description: The unique identifier for the cluster
+                                  to resize.
+                                type: string
+                              clusterType:
+                                description: The new cluster type for the specified
+                                  cluster.
+                                type: string
+                              nodeType:
+                                description: The new node type for the nodes you are
+                                  adding.
+                                type: string
+                              numberOfNodes:
+                                description: The new number of nodes for the cluster.
+                                type: number
+                            type: object
+                          type: array
+                        resumeCluster:
+                          description: An action that runs a ResumeCluster API operation.
+                            Documented below.
+                          items:
+                            properties:
+                              clusterIdentifier:
+                                description: The identifier of the cluster to be resumed.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -449,9 +538,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

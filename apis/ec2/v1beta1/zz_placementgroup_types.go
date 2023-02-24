@@ -21,8 +21,27 @@ type PlacementGroupObservation struct {
 	// The name of the placement group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The number of partitions to create in the
+	// placement group.  Can only be specified when the strategy is set to
+	// "partition".  Valid values are 1 - 7 (default is 2).
+	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
+
 	// The ID of the placement group.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Determines how placement groups spread instances. Can only be used
+	// when the strategy is set to "spread". Can be "host" or "rack". "host" can only be used for Outpost placement groups.
+	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
+
+	// The placement strategy. Can be "cluster", "partition" or "spread".
+	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

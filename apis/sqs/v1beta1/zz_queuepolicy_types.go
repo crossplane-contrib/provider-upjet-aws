@@ -15,6 +15,16 @@ import (
 
 type QueuePolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The JSON policy for the SQS queue.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// The URL of the SQS Queue to which to attach the policy
+	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type QueuePolicyParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: signingprofilepermissions.signer.aws.upbound.io
 spec:
@@ -246,6 +246,15 @@ spec:
                 - principal
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -423,7 +432,33 @@ spec:
             properties:
               atProvider:
                 properties:
+                  action:
+                    description: 'An AWS Signer action permitted as part of cross-account
+                      permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile,
+                      or signer:RevokeSignature.'
+                    type: string
                   id:
+                    type: string
+                  principal:
+                    description: The AWS principal to be granted a cross-account permission.
+                    type: string
+                  profileName:
+                    description: Name of the signing profile to add the cross-account
+                      permissions.
+                    type: string
+                  profileVersion:
+                    description: The signing profile version that a permission applies
+                      to.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  statementId:
+                    description: A unique statement identifier.
+                    type: string
+                  statementIdPrefix:
+                    description: A statement identifier prefix. Conflicts with statement_id.
                     type: string
                 type: object
               conditions:
@@ -467,9 +502,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

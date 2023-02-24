@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: uploads.devicefarm.aws.upbound.io
 spec:
@@ -165,6 +165,15 @@ spec:
                 - region
                 - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -347,6 +356,9 @@ spec:
                   category:
                     description: The upload's category.
                     type: string
+                  contentType:
+                    description: The upload's content type (for example, application/octet-stream).
+                    type: string
                   id:
                     type: string
                   metadata:
@@ -354,6 +366,24 @@ spec:
                       this contains information that is parsed from the manifest and
                       is displayed in the AWS Device Farm console after the associated
                       app is uploaded.
+                    type: string
+                  name:
+                    description: The upload's file name. The name should not contain
+                      any forward slashes (/). If you are uploading an iOS app, the
+                      file name must end with the .ipa extension. If you are uploading
+                      an Android app, the file name must end with the .apk extension.
+                      For all others, the file name must end with the .zip file extension.
+                    type: string
+                  projectArn:
+                    description: The ARN of the project for the upload.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  type:
+                    description: The upload's upload type. See AWS Docs for valid
+                      list of values.
                     type: string
                   url:
                     description: The presigned Amazon S3 URL that was used to store
@@ -401,9 +431,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

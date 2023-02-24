@@ -15,6 +15,9 @@ import (
 
 type DelegatedAdministratorObservation struct {
 
+	// The account ID number of the member account in the organization to register as a delegated administrator.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the delegated administrator's account.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -35,6 +38,13 @@ type DelegatedAdministratorObservation struct {
 
 	// The friendly name of the delegated administrator's account.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The service principal of the AWS service for which you want to make the member account a delegated administrator.
+	ServicePrincipal *string `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty"`
 
 	// The status of the delegated administrator's account in the organization.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`

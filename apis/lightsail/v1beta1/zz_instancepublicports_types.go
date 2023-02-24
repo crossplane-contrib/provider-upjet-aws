@@ -17,6 +17,16 @@ type InstancePublicPortsObservation struct {
 
 	// ID of the resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the Lightsail Instance.
+	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
+
+	// Configuration block with port information. AWS closes all currently open ports that are not included in the port_info. Detailed below.
+	PortInfo []PortInfoObservation `json:"portInfo,omitempty" tf:"port_info,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type InstancePublicPortsParameters struct {
@@ -45,6 +55,23 @@ type InstancePublicPortsParameters struct {
 }
 
 type PortInfoObservation struct {
+
+	// Set of CIDR aliases that define access for a preconfigured range of IP addresses.
+	CidrListAliases []*string `json:"cidrListAliases,omitempty" tf:"cidr_list_aliases,omitempty"`
+
+	// Set of CIDR blocks.
+	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
+
+	// First port in a range of open ports on an instance.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	IPv6Cidrs []*string `json:"ipv6Cidrs,omitempty" tf:"ipv6_cidrs,omitempty"`
+
+	// IP protocol name. Valid values are tcp, all, udp, and icmp.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Last port in a range of open ports on an instance.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type PortInfoParameters struct {

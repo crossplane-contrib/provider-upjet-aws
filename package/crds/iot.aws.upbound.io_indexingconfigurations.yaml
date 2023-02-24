@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: indexingconfigurations.iot.aws.upbound.io
 spec:
@@ -165,6 +165,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -344,6 +353,100 @@ spec:
                 properties:
                   id:
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  thingGroupIndexingConfiguration:
+                    description: Thing group indexing configuration. See below.
+                    items:
+                      properties:
+                        customField:
+                          description: A list of thing group fields to index. This
+                            list cannot contain any managed fields. See below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the field.
+                                type: string
+                              type:
+                                description: 'The data type of the field. Valid values:
+                                  Number, String, Boolean.'
+                                type: string
+                            type: object
+                          type: array
+                        managedField:
+                          description: Contains fields that are indexed and whose
+                            types are already known by the Fleet Indexing service.
+                            See below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the field.
+                                type: string
+                              type:
+                                description: 'The data type of the field. Valid values:
+                                  Number, String, Boolean.'
+                                type: string
+                            type: object
+                          type: array
+                        thingGroupIndexingMode:
+                          description: 'Thing group indexing mode. Valid values: OFF,
+                            ON.'
+                          type: string
+                      type: object
+                    type: array
+                  thingIndexingConfiguration:
+                    description: Thing indexing configuration. See below.
+                    items:
+                      properties:
+                        customField:
+                          description: Contains custom field names and their data
+                            type. See below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the field.
+                                type: string
+                              type:
+                                description: 'The data type of the field. Valid values:
+                                  Number, String, Boolean.'
+                                type: string
+                            type: object
+                          type: array
+                        deviceDefenderIndexingMode:
+                          description: 'Device Defender indexing mode. Valid values:
+                            VIOLATIONS, OFF. Default: OFF.'
+                          type: string
+                        managedField:
+                          description: Contains fields that are indexed and whose
+                            types are already known by the Fleet Indexing service.
+                            See below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the field.
+                                type: string
+                              type:
+                                description: 'The data type of the field. Valid values:
+                                  Number, String, Boolean.'
+                                type: string
+                            type: object
+                          type: array
+                        namedShadowIndexingMode:
+                          description: 'Named shadow indexing mode. Valid values:
+                            ON, OFF. Default: OFF.'
+                          type: string
+                        thingConnectivityIndexingMode:
+                          description: 'Thing connectivity indexing mode. Valid values:
+                            STATUS, OFF. Default: OFF.'
+                          type: string
+                        thingIndexingMode:
+                          description: 'Thing indexing mode. Valid values: REGISTRY,
+                            REGISTRY_AND_SHADOW, OFF.'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -386,9 +489,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

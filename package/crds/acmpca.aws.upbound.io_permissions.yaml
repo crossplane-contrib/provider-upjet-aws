@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: permissions.acmpca.aws.upbound.io
 spec:
@@ -168,6 +168,15 @@ spec:
                 - principal
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -344,10 +353,33 @@ spec:
             properties:
               atProvider:
                 properties:
+                  actions:
+                    description: Actions that the specified AWS service principal
+                      can use. These include IssueCertificate, GetCertificate, and
+                      ListPermissions. Note that in order for ACM to automatically
+                      rotate certificates issued by a PCA, it must be granted permission
+                      on all 3 actions, as per the example above.
+                    items:
+                      type: string
+                    type: array
+                  certificateAuthorityArn:
+                    description: ARN of the CA that grants the permissions.
+                    type: string
                   id:
                     type: string
                   policy:
                     description: IAM policy that is associated with the permission.
+                    type: string
+                  principal:
+                    description: AWS service or identity that receives the permission.
+                      At this time, the only valid principal is acm.amazonaws.com.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  sourceAccount:
+                    description: ID of the calling account
                     type: string
                 type: object
               conditions:
@@ -391,9 +423,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -15,11 +15,49 @@ import (
 
 type SecurityGroupRuleObservation_2 struct {
 
+	// List of CIDR blocks. Cannot be specified with source_security_group_id or self.
+	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
+
+	// Description of the rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Start port (or ICMP type number if protocol is "icmp" or "icmpv6").
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
 	// ID of the security group rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// List of IPv6 CIDR blocks. Cannot be specified with source_security_group_id or self.
+	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
+
+	// List of Prefix List IDs.
+	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
+
+	// Protocol. If not icmp, icmpv6, tcp, udp, or all use the protocol number
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Security group to apply this rule to.
+	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
+
 	// If the aws_security_group_rule resource has a single source or destination then this is the AWS Security Group Rule resource ID. Otherwise it is empty.
 	SecurityGroupRuleID *string `json:"securityGroupRuleId,omitempty" tf:"security_group_rule_id,omitempty"`
+
+	// Whether the security group itself will be added as a source to this ingress rule. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or source_security_group_id.
+	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
+
+	// Security group id to allow access to/from, depending on the type. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or self.
+	SourceSecurityGroupID *string `json:"sourceSecurityGroupId,omitempty" tf:"source_security_group_id,omitempty"`
+
+	// End port (or ICMP code if protocol is "icmp").
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+
+	// Type of rule being created. Valid options are ingress (inbound)
+	// or egress (outbound).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SecurityGroupRuleParameters_2 struct {

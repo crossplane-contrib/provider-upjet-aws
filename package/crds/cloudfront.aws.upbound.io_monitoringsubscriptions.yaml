@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: monitoringsubscriptions.cloudfront.aws.upbound.io
 spec:
@@ -176,6 +176,15 @@ spec:
                 - monitoringSubscription
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -353,9 +362,38 @@ spec:
             properties:
               atProvider:
                 properties:
+                  distributionId:
+                    description: The ID of the distribution that you are enabling
+                      metrics for.
+                    type: string
                   id:
                     description: The ID of the CloudFront monitoring subscription,
                       which corresponds to the distribution_id.
+                    type: string
+                  monitoringSubscription:
+                    description: A monitoring subscription. This structure contains
+                      information about whether additional CloudWatch metrics are
+                      enabled for a given CloudFront distribution.
+                    items:
+                      properties:
+                        realtimeMetricsSubscriptionConfig:
+                          description: A subscription configuration for additional
+                            CloudWatch metrics. See below.
+                          items:
+                            properties:
+                              realtimeMetricsSubscriptionStatus:
+                                description: A flag that indicates whether additional
+                                  CloudWatch metrics are enabled for a given CloudFront
+                                  distribution. Valid values are Enabled and Disabled.
+                                  See below.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -399,9 +437,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

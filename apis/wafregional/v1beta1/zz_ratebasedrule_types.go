@@ -14,6 +14,18 @@ import (
 )
 
 type PredicateObservation struct {
+
+	// A unique identifier for a predicate in the rule, such as Byte Match Set ID or IPSet ID.
+	DataID *string `json:"dataId,omitempty" tf:"data_id,omitempty"`
+
+	// Set this to false if you want to allow, block, or count requests
+	// based on the settings in the specified ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, or SizeConstraintSet.
+	// For example, if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow or block requests based on that IP address.
+	// If set to true, AWS WAF will allow, block, or count requests based on all IP addresses except 192.0.2.44.
+	Negated *bool `json:"negated,omitempty" tf:"negated,omitempty"`
+
+	// The type of predicate in a rule. Valid values: ByteMatch, GeoMatch, IPMatch, RegexMatch, SizeConstraint, SqlInjectionMatch, or XssMatch.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PredicateParameters struct {
@@ -51,6 +63,28 @@ type RateBasedRuleObservation struct {
 
 	// The ID of the WAF Regional Rate Based Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name or description for the Amazon CloudWatch metric of this rule.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// The name or description of the rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The objects to include in a rule (documented below).
+	Predicate []PredicateObservation `json:"predicate,omitempty" tf:"predicate,omitempty"`
+
+	// Valid value is IP.
+	RateKey *string `json:"rateKey,omitempty" tf:"rate_key,omitempty"`
+
+	// The maximum number of requests, which have an identical value in the field specified by the RateKey, allowed in a five-minute period. Minimum value is 100.
+	RateLimit *float64 `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

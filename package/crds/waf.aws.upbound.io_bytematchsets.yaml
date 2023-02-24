@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: bytematchsets.waf.aws.upbound.io
 spec:
@@ -128,6 +128,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -304,8 +313,62 @@ spec:
             properties:
               atProvider:
                 properties:
+                  byteMatchTuples:
+                    description: Specifies the bytes (typically a string that corresponds
+                      with ASCII characters) that you want to search for in web requests,
+                      the location in requests that you want to search, and other
+                      settings.
+                    items:
+                      properties:
+                        fieldToMatch:
+                          description: The part of a web request that you want to
+                            search, such as a specified header or a query string.
+                          items:
+                            properties:
+                              data:
+                                description: When type is HEADER, enter the name of
+                                  the header that you want to search, e.g., User-Agent
+                                  or Referer. If type is any other value, omit this
+                                  field.
+                                type: string
+                              type:
+                                description: The part of the web request that you
+                                  want AWS WAF to search for a specified string. e.g.,
+                                  HEADER, METHOD or BODY. See docs for all supported
+                                  values.
+                                type: string
+                            type: object
+                          type: array
+                        positionalConstraint:
+                          description: Within the portion of a web request that you
+                            want to search (for example, in the query string, if any),
+                            specify where you want to search. e.g., CONTAINS, CONTAINS_WORD
+                            or EXACTLY. See docs for all supported values.
+                          type: string
+                        targetString:
+                          description: The value that you want to search for within
+                            the field specified by field_to_match, e.g., badrefer1.
+                            See docs for all supported values.
+                          type: string
+                        textTransformation:
+                          description: Text transformations used to eliminate unusual
+                            formatting that attackers use in web requests in an effort
+                            to bypass AWS WAF. If you specify a transformation, AWS
+                            WAF performs the transformation on target_string before
+                            inspecting a request for a match. e.g., CMD_LINE, HTML_ENTITY_DECODE
+                            or NONE. See docs for all supported values.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the WAF Byte Match Set.
+                    type: string
+                  name:
+                    description: The name or description of the Byte Match Set.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -349,9 +412,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

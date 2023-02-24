@@ -26,6 +26,12 @@ type AttachmentParameters struct {
 }
 
 type EncryptionConfigurationObservation struct {
+
+	// The ID of the customer managed key. You can use any of the key identifiers that KMS supports, unless you're using a key that's managed by another account. If you're using a key managed by another account, then specify the key ARN.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The type of AWS KMS key to use for encryption of your Network Firewall resources. Valid values are CUSTOMER_KMS and AWS_OWNED_KMS_KEY.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EncryptionConfigurationParameters struct {
@@ -44,17 +50,51 @@ type FirewallObservation struct {
 	// The Amazon Resource Name (ARN) that identifies the firewall.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A boolean flag indicating whether it is possible to delete the firewall. Defaults to false.
+	DeleteProtection *bool `json:"deleteProtection,omitempty" tf:"delete_protection,omitempty"`
+
+	// A friendly description of the firewall.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// KMS encryption configuration settings. See Encryption Configuration below for details.
+	EncryptionConfiguration []EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the VPC Firewall policy.
+	FirewallPolicyArn *string `json:"firewallPolicyArn,omitempty" tf:"firewall_policy_arn,omitempty"`
+
+	// (Option) A boolean flag indicating whether it is possible to change the associated firewall policy. Defaults to false.
+	FirewallPolicyChangeProtection *bool `json:"firewallPolicyChangeProtection,omitempty" tf:"firewall_policy_change_protection,omitempty"`
+
 	// Nested list of information about the current status of the firewall.
 	FirewallStatus []FirewallStatusObservation `json:"firewallStatus,omitempty" tf:"firewall_status,omitempty"`
 
 	// The Amazon Resource Name (ARN) that identifies the firewall.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A friendly name of the firewall.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A boolean flag indicating whether it is possible to change the associated subnet(s). Defaults to false.
+	SubnetChangeProtection *bool `json:"subnetChangeProtection,omitempty" tf:"subnet_change_protection,omitempty"`
+
+	// Set of configuration blocks describing the public subnets. Each subnet must belong to a different Availability Zone in the VPC. AWS Network Firewall creates a firewall endpoint in each subnet. See Subnet Mapping below for details.
+	SubnetMapping []SubnetMappingObservation `json:"subnetMapping,omitempty" tf:"subnet_mapping,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// A string token used when updating a firewall.
 	UpdateToken *string `json:"updateToken,omitempty" tf:"update_token,omitempty"`
+
+	// The unique identifier of the VPC where AWS Network Firewall should create the firewall.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type FirewallParameters struct {
@@ -134,6 +174,9 @@ type FirewallStatusParameters struct {
 }
 
 type SubnetMappingObservation struct {
+
+	// The unique identifier for the subnet.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type SubnetMappingParameters struct {

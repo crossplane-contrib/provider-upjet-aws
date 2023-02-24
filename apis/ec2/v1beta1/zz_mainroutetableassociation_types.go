@@ -20,6 +20,17 @@ type MainRouteTableAssociationObservation struct {
 
 	// Used internally, see Notes below
 	OriginalRouteTableID *string `json:"originalRouteTableId,omitempty" tf:"original_route_table_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ID of the Route Table to set as the new
+	// main route table for the target VPC
+	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
+
+	// The ID of the VPC whose main route table should be set
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type MainRouteTableAssociationParameters struct {

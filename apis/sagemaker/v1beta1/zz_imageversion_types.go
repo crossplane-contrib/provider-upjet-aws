@@ -18,6 +18,9 @@ type ImageVersionObservation struct {
 	// The Amazon Resource Name (ARN) assigned by AWS to this Image Version.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The registry path of the container image on which this image version is based.
+	BaseImage *string `json:"baseImage,omitempty" tf:"base_image,omitempty"`
+
 	// The registry path of the container image that contains this image version.
 	ContainerImage *string `json:"containerImage,omitempty" tf:"container_image,omitempty"`
 
@@ -26,6 +29,13 @@ type ImageVersionObservation struct {
 
 	// The Amazon Resource Name (ARN) of the image the version is based on.
 	ImageArn *string `json:"imageArn,omitempty" tf:"image_arn,omitempty"`
+
+	// The name of the image. Must be unique to your account.
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }

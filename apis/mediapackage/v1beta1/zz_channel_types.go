@@ -18,11 +18,24 @@ type ChannelObservation struct {
 	// The ARN of the channel
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A unique identifier describing the channel
+	ChannelID *string `json:"channelId,omitempty" tf:"channel_id,omitempty"`
+
+	// A description of the channel
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// A single item list of HLS ingest information
 	HlsIngest []HlsIngestObservation `json:"hlsIngest,omitempty" tf:"hls_ingest,omitempty"`
 
 	// The same as channel_id
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

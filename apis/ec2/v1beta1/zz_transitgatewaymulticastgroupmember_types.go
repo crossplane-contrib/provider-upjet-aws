@@ -15,8 +15,21 @@ import (
 
 type TransitGatewayMulticastGroupMemberObservation struct {
 
+	// The IP address assigned to the transit gateway multicast group.
+	GroupIPAddress *string `json:"groupIpAddress,omitempty" tf:"group_ip_address,omitempty"`
+
 	// EC2 Transit Gateway Multicast Group Member identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The group members' network interface ID to register with the transit gateway multicast group.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ID of the transit gateway multicast domain.
+	TransitGatewayMulticastDomainID *string `json:"transitGatewayMulticastDomainId,omitempty" tf:"transit_gateway_multicast_domain_id,omitempty"`
 }
 
 type TransitGatewayMulticastGroupMemberParameters struct {

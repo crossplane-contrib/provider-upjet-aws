@@ -14,6 +14,15 @@ import (
 )
 
 type EncryptionEntitiesItemsObservation struct {
+
+	// Object that contains an attribute items that contains the list of field patterns in a field-level encryption content type profile specify the fields that you want to be encrypted.
+	FieldPatterns []FieldPatternsObservation `json:"fieldPatterns,omitempty" tf:"field_patterns,omitempty"`
+
+	// The provider associated with the public key being used for encryption.
+	ProviderID *string `json:"providerId,omitempty" tf:"provider_id,omitempty"`
+
+	// The public key associated with a set of field-level encryption patterns, to be used when encrypting the fields that match the patterns.
+	PublicKeyID *string `json:"publicKeyId,omitempty" tf:"public_key_id,omitempty"`
 }
 
 type EncryptionEntitiesItemsParameters struct {
@@ -42,6 +51,7 @@ type EncryptionEntitiesItemsParameters struct {
 }
 
 type EncryptionEntitiesObservation struct {
+	Items []EncryptionEntitiesItemsObservation `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type EncryptionEntitiesParameters struct {
@@ -55,11 +65,24 @@ type FieldLevelEncryptionProfileObservation struct {
 	// Internal value used by CloudFront to allow future updates to the Field Level Encryption Profile.
 	CallerReference *string `json:"callerReference,omitempty" tf:"caller_reference,omitempty"`
 
+	// An optional comment about the Field Level Encryption Profile.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// The encryption entities config block for field-level encryption profiles that contains an attribute items which includes the encryption key and field pattern specifications.
+	EncryptionEntities []EncryptionEntitiesObservation `json:"encryptionEntities,omitempty" tf:"encryption_entities,omitempty"`
+
 	// The current version of the Field Level Encryption Profile. For example: E2QWRUHAPOMQZL.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
 	// The identifier for the Field Level Encryption Profile. For example: K3D5EWEUDCCXON.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Field Level Encryption Profile.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type FieldLevelEncryptionProfileParameters struct {
@@ -83,6 +106,7 @@ type FieldLevelEncryptionProfileParameters struct {
 }
 
 type FieldPatternsObservation struct {
+	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type FieldPatternsParameters struct {

@@ -16,7 +16,20 @@ import (
 type ReplicationSubnetGroupObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	ReplicationSubnetGroupArn *string `json:"replicationSubnetGroupArn,omitempty" tf:"replication_subnet_group_arn,omitempty"`
+
+	// Description for the subnet group.
+	ReplicationSubnetGroupDescription *string `json:"replicationSubnetGroupDescription,omitempty" tf:"replication_subnet_group_description,omitempty"`
+
+	// List of at least 2 EC2 subnet IDs for the subnet group. The subnets must cover at least 2 availability zones.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

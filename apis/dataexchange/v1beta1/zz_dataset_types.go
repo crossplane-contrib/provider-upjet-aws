@@ -18,8 +18,24 @@ type DataSetObservation struct {
 	// The Amazon Resource Name of this data set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The type of asset that is added to a data set. Valid values are: S3_SNAPSHOT, REDSHIFT_DATA_SHARE, and API_GATEWAY_API.
+	AssetType *string `json:"assetType,omitempty" tf:"asset_type,omitempty"`
+
+	// A description for the data set.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The Id of the data set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the data set.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

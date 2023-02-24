@@ -15,8 +15,18 @@ import (
 
 type HostedZoneDNSSECObservation struct {
 
+	// Identifier of the Route 53 Hosted Zone.
+	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
+
 	// Route 53 Hosted Zone identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Hosted Zone signing status. Valid values: SIGNING, NOT_SIGNING. Defaults to SIGNING.
+	SigningStatus *string `json:"signingStatus,omitempty" tf:"signing_status,omitempty"`
 }
 
 type HostedZoneDNSSECParameters struct {

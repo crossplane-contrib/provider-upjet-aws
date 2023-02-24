@@ -17,6 +17,16 @@ type BotAssociationObservation struct {
 
 	// The Amazon Connect instance ID, Lex (V1) bot name, and Lex (V1) bot region separated by colons (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Configuration information of an Amazon Lex (V1) bot. Detailed below.
+	LexBot []LexBotObservation `json:"lexBot,omitempty" tf:"lex_bot,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type BotAssociationParameters struct {
@@ -46,6 +56,12 @@ type BotAssociationParameters struct {
 }
 
 type LexBotObservation struct {
+
+	// The Region that the Amazon Lex (V1) bot was created in. Defaults to current region.
+	LexRegion *string `json:"lexRegion,omitempty" tf:"lex_region,omitempty"`
+
+	// The name of the Amazon Lex (V1) bot.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type LexBotParameters struct {

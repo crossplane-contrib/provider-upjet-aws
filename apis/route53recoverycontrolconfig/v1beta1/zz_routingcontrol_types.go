@@ -18,7 +18,20 @@ type RoutingControlObservation struct {
 	// ARN of the routing control.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ARN of the cluster in which this routing control will reside.
+	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
+
+	// ARN of the control panel in which this routing control will reside.
+	ControlPanelArn *string `json:"controlPanelArn,omitempty" tf:"control_panel_arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name describing the routing control.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// Status of routing control. PENDING when it is being created/updated, PENDING_DELETION when it is being deleted, and DEPLOYED otherwise.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`

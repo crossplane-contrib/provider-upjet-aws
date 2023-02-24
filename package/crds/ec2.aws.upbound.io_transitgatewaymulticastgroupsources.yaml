@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: transitgatewaymulticastgroupsources.ec2.aws.upbound.io
 spec:
@@ -234,6 +234,15 @@ spec:
                 - groupIpAddress
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -411,8 +420,23 @@ spec:
             properties:
               atProvider:
                 properties:
+                  groupIpAddress:
+                    description: The IP address assigned to the transit gateway multicast
+                      group.
+                    type: string
                   id:
                     description: EC2 Transit Gateway Multicast Group Member identifier.
+                    type: string
+                  networkInterfaceId:
+                    description: The group members' network interface ID to register
+                      with the transit gateway multicast group.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  transitGatewayMulticastDomainId:
+                    description: The ID of the transit gateway multicast domain.
                     type: string
                 type: object
               conditions:
@@ -456,9 +480,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -17,6 +17,19 @@ type TagObservation struct {
 
 	// Transfer Family resource identifier and key, separated by a comma (,)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Tag name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Amazon Resource Name (ARN) of the Transfer Family resource to tag.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Tag value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TagParameters struct {

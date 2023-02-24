@@ -14,10 +14,21 @@ import (
 )
 
 type VoiceConnectorObservation struct {
+
+	// The AWS Region in which the Amazon Chime Voice Connector is created. Default value: us-east-1
+	AwsRegion *string `json:"awsRegion,omitempty" tf:"aws_region,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The outbound host name for the Amazon Chime Voice Connector.
 	OutboundHostName *string `json:"outboundHostName,omitempty" tf:"outbound_host_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// When enabled, requires encryption for the Amazon Chime Voice Connector.
+	RequireEncryption *bool `json:"requireEncryption,omitempty" tf:"require_encryption,omitempty"`
 }
 
 type VoiceConnectorParameters struct {

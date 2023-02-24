@@ -18,7 +18,23 @@ type VaultLockConfigurationObservation struct {
 	// The ARN of the vault.
 	BackupVaultArn *string `json:"backupVaultArn,omitempty" tf:"backup_vault_arn,omitempty"`
 
+	// Name of the backup vault to add a lock configuration for.
+	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
+
+	// The number of days before the lock date. If omitted creates a vault lock in governance mode, otherwise it will create a vault lock in compliance mode.
+	ChangeableForDays *float64 `json:"changeableForDays,omitempty" tf:"changeable_for_days,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The maximum retention period that the vault retains its recovery points.
+	MaxRetentionDays *float64 `json:"maxRetentionDays,omitempty" tf:"max_retention_days,omitempty"`
+
+	// The minimum retention period that the vault retains its recovery points.
+	MinRetentionDays *float64 `json:"minRetentionDays,omitempty" tf:"min_retention_days,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type VaultLockConfigurationParameters struct {

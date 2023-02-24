@@ -14,10 +14,21 @@ import (
 )
 
 type TopicPolicyObservation struct {
+
+	// The ARN of the SNS topic
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The AWS Account ID of the SNS topic owner
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The fully-formed AWS policy as JSON.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type TopicPolicyParameters struct {

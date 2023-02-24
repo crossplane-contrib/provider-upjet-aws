@@ -17,6 +17,11 @@ func (mg *GeofenceCollection) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this GeofenceCollection.
+func (mg *GeofenceCollection) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this GeofenceCollection.
 func (mg *GeofenceCollection) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *GeofenceCollection) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this GeofenceCollection.
 func (mg *GeofenceCollection) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this GeofenceCollection.
+func (mg *GeofenceCollection) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this GeofenceCollection.
@@ -83,6 +93,11 @@ func (mg *PlaceIndex) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this PlaceIndex.
+func (mg *PlaceIndex) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this PlaceIndex.
 func (mg *PlaceIndex) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *PlaceIndex) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this PlaceIndex.
 func (mg *PlaceIndex) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this PlaceIndex.
+func (mg *PlaceIndex) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this PlaceIndex.
@@ -149,6 +169,11 @@ func (mg *RouteCalculator) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this RouteCalculator.
+func (mg *RouteCalculator) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this RouteCalculator.
 func (mg *RouteCalculator) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *RouteCalculator) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this RouteCalculator.
 func (mg *RouteCalculator) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this RouteCalculator.
+func (mg *RouteCalculator) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this RouteCalculator.
@@ -215,6 +245,11 @@ func (mg *Tracker) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Tracker.
+func (mg *Tracker) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Tracker.
 func (mg *Tracker) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *Tracker) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Tracker.
 func (mg *Tracker) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Tracker.
+func (mg *Tracker) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Tracker.
@@ -281,6 +321,11 @@ func (mg *TrackerAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this TrackerAssociation.
+func (mg *TrackerAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this TrackerAssociation.
 func (mg *TrackerAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *TrackerAssociation) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this TrackerAssociation.
 func (mg *TrackerAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this TrackerAssociation.
+func (mg *TrackerAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this TrackerAssociation.

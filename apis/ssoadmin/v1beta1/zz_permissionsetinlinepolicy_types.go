@@ -17,6 +17,19 @@ type PermissionSetInlinePolicyObservation struct {
 
 	// The Amazon Resource Names (ARNs) of the Permission Set and SSO Instance, separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The IAM inline policy to attach to a Permission Set.
+	InlinePolicy *string `json:"inlinePolicy,omitempty" tf:"inline_policy,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Permission Set.
+	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type PermissionSetInlinePolicyParameters struct {

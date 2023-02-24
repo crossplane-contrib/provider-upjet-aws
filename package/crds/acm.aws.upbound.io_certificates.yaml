@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: certificates.acm.aws.upbound.io
 spec:
@@ -160,6 +160,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -339,6 +348,18 @@ spec:
                   arn:
                     description: ARN of the certificate
                     type: string
+                  certificateAuthorityArn:
+                    description: ARN of an ACM PCA
+                    type: string
+                  certificateBody:
+                    description: Certificate's PEM-formatted public key
+                    type: string
+                  certificateChain:
+                    description: Certificate's PEM-formatted chain
+                    type: string
+                  domainName:
+                    description: Domain name for which the certificate should be issued
+                    type: string
                   domainValidationOptions:
                     description: Set of domain validation objects which can be used
                       to complete certificate validation. Can have more than one element,
@@ -360,8 +381,19 @@ spec:
                           type: string
                       type: object
                     type: array
+                  earlyRenewalDuration:
+                    description: Amount of time to start automatic renewal process
+                      before expiration. Has no effect if less than 60 days. Represented
+                      by either a subset of RFC 3339 duration supporting years, months,
+                      and days (e.g., P90D), or a string such as 2160h.
+                    type: string
                   id:
                     description: ARN of the certificate
+                    type: string
+                  keyAlgorithm:
+                    description: Specifies the algorithm of the public and private
+                      key pair that your Amazon issued certificate uses to encrypt
+                      data. See ACM Certificate characteristics for more details.
                     type: string
                   notAfter:
                     description: Expiration date and time of the certificate.
@@ -369,10 +401,44 @@ spec:
                   notBefore:
                     description: Start of the validity period of the certificate.
                     type: string
+                  options:
+                    description: Configuration block used to set certificate options.
+                      Detailed below.
+                    items:
+                      properties:
+                        certificateTransparencyLoggingPreference:
+                          description: Whether certificate details should be added
+                            to a certificate transparency log. Valid values are ENABLED
+                            or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+                            for more details.
+                          type: string
+                      type: object
+                    type: array
                   pendingRenewal:
                     description: true if a Private certificate eligible for managed
                       renewal is within the early_renewal_duration period.
                     type: boolean
+                  privateKeySecretRef:
+                    description: Certificate's PEM-formatted private key
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   renewalEligibility:
                     description: Whether the certificate is eligible for managed renewal.
                     type: string
@@ -396,6 +462,17 @@ spec:
                   status:
                     description: Status of the certificate.
                     type: string
+                  subjectAlternativeNames:
+                    description: Set of domains that should be SANs in the issued
+                      certificate.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -410,6 +487,28 @@ spec:
                       Only set if EMAIL validation was used.
                     items:
                       type: string
+                    type: array
+                  validationMethod:
+                    description: Which method to use for validation.
+                    type: string
+                  validationOption:
+                    description: Configuration block used to specify information about
+                      the initial validation of each domain name. Detailed below.
+                    items:
+                      properties:
+                        domainName:
+                          description: Fully qualified domain name (FQDN) in the certificate.
+                          type: string
+                        validationDomain:
+                          description: Domain name that you want ACM to use to send
+                            you validation emails. This domain name is the suffix
+                            of the email addresses that you want ACM to use. This
+                            must be the same as the domain_name value or a superdomain
+                            of the domain_name value. For example, if you request
+                            a certificate for "testing.example.com", you can specify
+                            "example.com" for this value.
+                          type: string
+                      type: object
                     type: array
                 type: object
               conditions:
@@ -453,9 +552,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

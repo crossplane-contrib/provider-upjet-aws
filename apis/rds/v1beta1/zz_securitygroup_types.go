@@ -14,6 +14,19 @@ import (
 )
 
 type IngressObservation struct {
+
+	// The CIDR block to accept
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
+
+	// The ID of the security group to authorize
+	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
+
+	// The name of the security group to authorize
+	SecurityGroupName *string `json:"securityGroupName,omitempty" tf:"security_group_name,omitempty"`
+
+	// The owner Id of the security group provided
+	// by security_group_name.
+	SecurityGroupOwnerID *string `json:"securityGroupOwnerId,omitempty" tf:"security_group_owner_id,omitempty"`
 }
 
 type IngressParameters struct {
@@ -41,8 +54,21 @@ type SecurityGroupObservation struct {
 	// The arn of the DB security group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description of the DB security group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The db security group ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of ingress rules.
+	Ingress []IngressObservation `json:"ingress,omitempty" tf:"ingress,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

@@ -14,7 +14,21 @@ import (
 )
 
 type SSHKeyObservation struct {
+
+	// (Requirement) The public key portion of an SSH key pair.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// (Requirement) The Server ID of the Transfer Server (e.g., s-12345678)
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+
+	// (Requirement) The name of the user account that is assigned to one or more servers.
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 type SSHKeyParameters struct {

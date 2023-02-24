@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: vpcpeeringconnectionaccepters.ec2.aws.upbound.io
 spec:
@@ -205,6 +205,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -385,6 +394,33 @@ spec:
                   acceptStatus:
                     description: The status of the VPC Peering Connection request.
                     type: string
+                  accepter:
+                    description: A configuration block that describes [VPC Peering
+                      Connection] (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html)
+                      options set for the accepter VPC.
+                    items:
+                      properties:
+                        allowClassicLinkToRemoteVpc:
+                          description: Indicates whether a local ClassicLink connection
+                            can communicate with the peer VPC over the VPC Peering
+                            Connection.
+                          type: boolean
+                        allowRemoteVpcDnsResolution:
+                          description: Indicates whether a local VPC can resolve public
+                            DNS hostnames to private IP addresses when queried from
+                            instances in a peer VPC.
+                          type: boolean
+                        allowVpcToRemoteClassicLink:
+                          description: Indicates whether a local VPC can communicate
+                            with a ClassicLink connection in the peer VPC over the
+                            VPC Peering Connection.
+                          type: boolean
+                      type: object
+                    type: array
+                  autoAccept:
+                    description: Whether or not to accept the peering request. Defaults
+                      to false.
+                    type: boolean
                   id:
                     description: The ID of the VPC Peering Connection.
                     type: string
@@ -398,6 +434,38 @@ spec:
                   peerVpcId:
                     description: The ID of the requester VPC.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  requester:
+                    description: A configuration block that describes [VPC Peering
+                      Connection] (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html)
+                      options set for the requester VPC.
+                    items:
+                      properties:
+                        allowClassicLinkToRemoteVpc:
+                          description: Indicates whether a local ClassicLink connection
+                            can communicate with the peer VPC over the VPC Peering
+                            Connection.
+                          type: boolean
+                        allowRemoteVpcDnsResolution:
+                          description: Indicates whether a local VPC can resolve public
+                            DNS hostnames to private IP addresses when queried from
+                            instances in a peer VPC.
+                          type: boolean
+                        allowVpcToRemoteClassicLink:
+                          description: Indicates whether a local VPC can communicate
+                            with a ClassicLink connection in the peer VPC over the
+                            VPC Peering Connection.
+                          type: boolean
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -407,6 +475,9 @@ spec:
                     type: object
                   vpcId:
                     description: The ID of the accepter VPC.
+                    type: string
+                  vpcPeeringConnectionId:
+                    description: The VPC Peering Connection ID to manage.
                     type: string
                 type: object
               conditions:
@@ -450,9 +521,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

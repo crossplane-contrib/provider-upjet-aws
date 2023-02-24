@@ -18,10 +18,26 @@ type TestGridProjectObservation struct {
 	// The Amazon Resource Name of this Test Grid Project.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Human-readable description of the project.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Selenium testing project.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The VPC security groups and subnets that are attached to a project. See VPC Config below.
+	VPCConfig []VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type TestGridProjectParameters struct {
@@ -49,6 +65,15 @@ type TestGridProjectParameters struct {
 }
 
 type VPCConfigObservation struct {
+
+	// A list of VPC security group IDs in your Amazon VPC.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// A list of VPC subnet IDs in your Amazon VPC.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// The ID of the Amazon VPC.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type VPCConfigParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: apps.sagemaker.aws.upbound.io
 spec:
@@ -268,6 +268,15 @@ spec:
                 - appType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -444,12 +453,59 @@ spec:
             properties:
               atProvider:
                 properties:
+                  appName:
+                    description: The name of the app.
+                    type: string
+                  appType:
+                    description: The type of app. Valid values are JupyterServer,
+                      KernelGateway, RStudioServerPro, RSessionGateway and TensorBoard.
+                    type: string
                   arn:
                     description: The Amazon Resource Name (ARN) of the app.
+                    type: string
+                  domainId:
+                    description: The domain ID.
                     type: string
                   id:
                     description: The Amazon Resource Name (ARN) of the app.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  resourceSpec:
+                    description: The instance type and the Amazon Resource Name (ARN)
+                      of the SageMaker image created on the instance.See Resource
+                      Spec below.
+                    items:
+                      properties:
+                        instanceType:
+                          description: The instance type that the image version runs
+                            on. For valid values see SageMaker Instance Types.
+                          type: string
+                        lifecycleConfigArn:
+                          description: The Amazon Resource Name (ARN) of the Lifecycle
+                            Configuration attached to the Resource.
+                          type: string
+                        sagemakerImageArn:
+                          description: The ARN of the SageMaker image that the image
+                            version belongs to.
+                          type: string
+                        sagemakerImageVersionArn:
+                          description: The ARN of the image version created on the
+                            instance.
+                          type: string
+                      type: object
+                    type: array
+                  spaceName:
+                    description: The name of the space. At least on of user_profile_name
+                      or space_name required.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -457,6 +513,10 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  userProfileName:
+                    description: The user profile name. At least on of user_profile_name
+                      or space_name required.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -499,9 +559,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

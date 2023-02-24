@@ -14,6 +14,15 @@ import (
 )
 
 type ConditionObservation struct {
+
+	// Key for the condition. Valid values: aws:PrincipalOrgID.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Type of condition. Value values: StringEquals.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Value for the key.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ConditionParameters struct {
@@ -43,8 +52,27 @@ type ConditionParameters struct {
 
 type PermissionObservation struct {
 
+	// The action that you are enabling the other account to perform. Defaults to events:PutEvents.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Configuration block to limit the event bus permissions you are granting to only accounts that fulfill the condition. Specified below.
+	Condition []ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// The event bus to set the permissions on. If you omit this, the permissions are set on the default event bus.
+	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
+
 	// The statement ID of the EventBridge permission.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify * to permit any account to put events to your default event bus, optionally limited by condition.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// An identifier string for the external account that you are granting permissions to.
+	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 }
 
 type PermissionParameters struct {

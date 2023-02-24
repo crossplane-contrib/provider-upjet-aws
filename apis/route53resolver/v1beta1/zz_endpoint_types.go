@@ -18,6 +18,11 @@ type EndpointObservation struct {
 	// The ARN of the Route 53 Resolver endpoint.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The direction of DNS queries to or from the Route 53 Resolver endpoint.
+	// Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC)
+	// or OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC).
+	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
+
 	// The ID of the VPC that you want to create the resolver endpoint in.
 	HostVPCID *string `json:"hostVpcId,omitempty" tf:"host_vpc_id,omitempty"`
 
@@ -26,8 +31,20 @@ type EndpointObservation struct {
 
 	// The subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
 	// to your network (for outbound endpoints) or on the way from your network to your VPCs (for inbound endpoints). Described below.
-	// +kubebuilder:validation:Required
 	IPAddress []IPAddressObservation `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The friendly name of the Route 53 Resolver endpoint.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ID of one or more security groups that you want to use to control access to this VPC.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -77,8 +94,14 @@ type EndpointParameters struct {
 
 type IPAddressObservation struct {
 
+	// The IP address in the subnet that you want to use for DNS queries.
+	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
+
 	// The ID of the Route 53 Resolver endpoint.
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
+
+	// The ID of the subnet that contains the IP address.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type IPAddressParameters struct {

@@ -15,8 +15,27 @@ import (
 
 type ModelObservation struct {
 
+	// API identifier.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// The content-type for the model, for example, application/json. Must be between 1 and 256 characters in length.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Description of the model. Must be between 1 and 128 characters in length.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Model identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the model. Must be alphanumeric. Must be between 1 and 128 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Schema for the model. This should be a JSON schema draft 4 model. Must be less than or equal to 32768 characters in length.
+	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type ModelParameters struct {

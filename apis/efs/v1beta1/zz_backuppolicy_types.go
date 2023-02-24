@@ -14,6 +14,9 @@ import (
 )
 
 type BackupPolicyBackupPolicyObservation struct {
+
+	// A status of the backup policy. Valid values: ENABLED, DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type BackupPolicyBackupPolicyParameters struct {
@@ -25,8 +28,18 @@ type BackupPolicyBackupPolicyParameters struct {
 
 type BackupPolicyObservation struct {
 
+	// A backup_policy object (documented below).
+	BackupPolicy []BackupPolicyBackupPolicyObservation `json:"backupPolicy,omitempty" tf:"backup_policy,omitempty"`
+
+	// The ID of the EFS file system.
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
 	// The ID that identifies the file system (e.g., fs-ccfc0d65).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type BackupPolicyParameters struct {

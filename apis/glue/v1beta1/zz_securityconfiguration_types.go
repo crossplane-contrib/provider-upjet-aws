@@ -14,6 +14,12 @@ import (
 )
 
 type CloudwatchEncryptionObservation struct {
+
+	// Encryption mode to use for CloudWatch data. Valid values: DISABLED, SSE-KMS. Default value: DISABLED.
+	CloudwatchEncryptionMode *string `json:"cloudwatchEncryptionMode,omitempty" tf:"cloudwatch_encryption_mode,omitempty"`
+
+	// Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
 type CloudwatchEncryptionParameters struct {
@@ -38,6 +44,12 @@ type CloudwatchEncryptionParameters struct {
 }
 
 type EncryptionConfigurationObservation struct {
+	CloudwatchEncryption []CloudwatchEncryptionObservation `json:"cloudwatchEncryption,omitempty" tf:"cloudwatch_encryption,omitempty"`
+
+	JobBookmarksEncryption []JobBookmarksEncryptionObservation `json:"jobBookmarksEncryption,omitempty" tf:"job_bookmarks_encryption,omitempty"`
+
+	// A s3_encryption  block as described below, which contains encryption configuration for S3 data.
+	S3Encryption []S3EncryptionObservation `json:"s3Encryption,omitempty" tf:"s3_encryption,omitempty"`
 }
 
 type EncryptionConfigurationParameters struct {
@@ -54,6 +66,12 @@ type EncryptionConfigurationParameters struct {
 }
 
 type JobBookmarksEncryptionObservation struct {
+
+	// Encryption mode to use for job bookmarks data. Valid values: CSE-KMS, DISABLED. Default value: DISABLED.
+	JobBookmarksEncryptionMode *string `json:"jobBookmarksEncryptionMode,omitempty" tf:"job_bookmarks_encryption_mode,omitempty"`
+
+	// Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
 type JobBookmarksEncryptionParameters struct {
@@ -78,6 +96,12 @@ type JobBookmarksEncryptionParameters struct {
 }
 
 type S3EncryptionObservation struct {
+
+	// Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Encryption mode to use for S3 data. Valid values: DISABLED, SSE-KMS, SSE-S3. Default value: DISABLED.
+	S3EncryptionMode *string `json:"s3EncryptionMode,omitempty" tf:"s3_encryption_mode,omitempty"`
 }
 
 type S3EncryptionParameters struct {
@@ -103,8 +127,15 @@ type S3EncryptionParameters struct {
 
 type SecurityConfigurationObservation struct {
 
+	// –  Configuration block containing encryption configuration. Detailed below.
+	EncryptionConfiguration []EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+
 	// Glue security configuration name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type SecurityConfigurationParameters struct {

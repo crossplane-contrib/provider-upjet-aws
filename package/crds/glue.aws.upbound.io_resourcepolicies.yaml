@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: resourcepolicies.glue.aws.upbound.io
 spec:
@@ -80,6 +80,15 @@ spec:
                 - policy
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -256,7 +265,19 @@ spec:
             properties:
               atProvider:
                 properties:
+                  enableHybrid:
+                    description: Indicates that you are using both methods to grant
+                      cross-account. Valid values are TRUE and FALSE.
+                    type: string
                   id:
+                    type: string
+                  policy:
+                    description: –  The policy to be applied to the aws glue data
+                      catalog.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -300,9 +321,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

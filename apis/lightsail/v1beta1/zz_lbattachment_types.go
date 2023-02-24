@@ -17,6 +17,16 @@ type LBAttachmentObservation struct {
 
 	// A combination of attributes to create a unique id: lb_name,instance_name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the instance to attach to the load balancer.
+	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
+
+	// The name of the Lightsail load balancer.
+	LBName *string `json:"lbName,omitempty" tf:"lb_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type LBAttachmentParameters struct {

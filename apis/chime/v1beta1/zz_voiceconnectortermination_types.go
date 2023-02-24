@@ -15,8 +15,30 @@ import (
 
 type VoiceConnectorTerminationObservation struct {
 
+	// The countries to which calls are allowed, in ISO 3166-1 alpha-2 format.
+	CallingRegions []*string `json:"callingRegions,omitempty" tf:"calling_regions,omitempty"`
+
+	// The IP addresses allowed to make calls, in CIDR format.
+	CidrAllowList []*string `json:"cidrAllowList,omitempty" tf:"cidr_allow_list,omitempty"`
+
+	// The limit on calls per second. Max value based on account service quota. Default value of 1.
+	CpsLimit *float64 `json:"cpsLimit,omitempty" tf:"cps_limit,omitempty"`
+
+	// The default caller ID phone number.
+	DefaultPhoneNumber *string `json:"defaultPhoneNumber,omitempty" tf:"default_phone_number,omitempty"`
+
+	// When termination settings are disabled, outbound calls can not be made.
+	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+
 	// The Amazon Chime Voice Connector ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The Amazon Chime Voice Connector ID.
+	VoiceConnectorID *string `json:"voiceConnectorId,omitempty" tf:"voice_connector_id,omitempty"`
 }
 
 type VoiceConnectorTerminationParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: objectlambdaaccesspointpolicies.s3control.aws.upbound.io
 spec:
@@ -159,6 +159,15 @@ spec:
                 - policy
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -336,6 +345,10 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accountId:
+                    description: The AWS account ID for the account that owns the
+                      Object Lambda Access Point.
+                    type: string
                   hasPublicAccessPolicy:
                     description: Indicates whether this access point currently has
                       a policy that allows public access.
@@ -343,6 +356,16 @@ spec:
                   id:
                     description: The AWS account ID and access point name separated
                       by a colon (:).
+                    type: string
+                  name:
+                    description: The name of the Object Lambda Access Point.
+                    type: string
+                  policy:
+                    description: The Object Lambda Access Point resource policy document.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -386,9 +409,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

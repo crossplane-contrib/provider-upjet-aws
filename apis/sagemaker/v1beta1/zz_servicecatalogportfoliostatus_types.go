@@ -17,6 +17,13 @@ type ServicecatalogPortfolioStatusObservation struct {
 
 	// The AWS Region the Servicecatalog portfolio status resides in.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Whether Service Catalog is enabled or disabled in SageMaker. Valid values are Enabled and Disabled.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type ServicecatalogPortfolioStatusParameters struct {

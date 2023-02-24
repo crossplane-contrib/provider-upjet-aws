@@ -18,16 +18,38 @@ type ChannelObservation struct {
 	// ARN of the Channel.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// If true, channel is private (enabled for playback authorization).
+	Authorized *bool `json:"authorized,omitempty" tf:"authorized,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Channel ingest endpoint, part of the definition of an ingest server, used when setting up streaming software.
 	IngestEndpoint *string `json:"ingestEndpoint,omitempty" tf:"ingest_endpoint,omitempty"`
 
+	// Channel latency mode. Valid values: NORMAL, LOW.
+	LatencyMode *string `json:"latencyMode,omitempty" tf:"latency_mode,omitempty"`
+
+	// Channel name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Channel playback URL.
 	PlaybackURL *string `json:"playbackUrl,omitempty" tf:"playback_url,omitempty"`
 
+	// Recording configuration ARN.
+	RecordingConfigurationArn *string `json:"recordingConfigurationArn,omitempty" tf:"recording_configuration_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Channel type, which determines the allowable resolution and bitrate. Valid values: STANDARD, BASIC.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ChannelParameters struct {

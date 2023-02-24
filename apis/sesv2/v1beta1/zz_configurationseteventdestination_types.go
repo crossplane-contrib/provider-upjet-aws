@@ -14,6 +14,9 @@ import (
 )
 
 type CloudWatchDestinationObservation struct {
+
+	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration below.
+	DimensionConfiguration []DimensionConfigurationObservation `json:"dimensionConfiguration,omitempty" tf:"dimension_configuration,omitempty"`
 }
 
 type CloudWatchDestinationParameters struct {
@@ -25,8 +28,21 @@ type CloudWatchDestinationParameters struct {
 
 type ConfigurationSetEventDestinationObservation struct {
 
+	// The name of the configuration set.
+	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
+
+	// A name that identifies the event destination within the configuration set.
+	EventDestination []EventDestinationObservation `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
+
+	// An object that defines the event destination. See event_destination below.
+	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
+
 	// A pipe-delimited string combining configuration_set_name and event_destination_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ConfigurationSetEventDestinationParameters struct {
@@ -59,6 +75,15 @@ type ConfigurationSetEventDestinationParameters struct {
 }
 
 type DimensionConfigurationObservation struct {
+
+	// The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
+	// ( dimension_name -  The name of an Amazon CloudWatch dimension associated with an email sending metric.
+	DefaultDimensionValue *string `json:"defaultDimensionValue,omitempty" tf:"default_dimension_value,omitempty"`
+
+	DimensionName *string `json:"dimensionName,omitempty" tf:"dimension_name,omitempty"`
+
+	// The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. Valid values: MESSAGE_TAG, EMAIL_HEADER, LINK_TAG.
+	DimensionValueSource *string `json:"dimensionValueSource,omitempty" tf:"dimension_value_source,omitempty"`
 }
 
 type DimensionConfigurationParameters struct {
@@ -77,6 +102,24 @@ type DimensionConfigurationParameters struct {
 }
 
 type EventDestinationObservation struct {
+
+	// An object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination below
+	CloudWatchDestination []CloudWatchDestinationObservation `json:"cloudWatchDestination,omitempty" tf:"cloud_watch_destination,omitempty"`
+
+	// When the event destination is enabled, the specified event types are sent to the destinations. Default: false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination below.
+	KinesisFirehoseDestination []KinesisFirehoseDestinationObservation `json:"kinesisFirehoseDestination,omitempty" tf:"kinesis_firehose_destination,omitempty"`
+
+	// - An array that specifies which events the Amazon SES API v2 should send to the destinations. Valid values: SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION.
+	MatchingEventTypes []*string `json:"matchingEventTypes,omitempty" tf:"matching_event_types,omitempty"`
+
+	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination below.
+	PinpointDestination []PinpointDestinationObservation `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
+
+	// An object that defines an Amazon SNS destination for email events. See sns_destination below.
+	SnsDestination []SnsDestinationObservation `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
 }
 
 type EventDestinationParameters struct {
@@ -107,6 +150,12 @@ type EventDestinationParameters struct {
 }
 
 type KinesisFirehoseDestinationObservation struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose stream that the Amazon SES API v2 sends email events to.
+	DeliveryStreamArn *string `json:"deliveryStreamArn,omitempty" tf:"delivery_stream_arn,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 }
 
 type KinesisFirehoseDestinationParameters struct {
@@ -141,6 +190,7 @@ type KinesisFirehoseDestinationParameters struct {
 }
 
 type PinpointDestinationObservation struct {
+	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
 }
 
 type PinpointDestinationParameters struct {
@@ -160,6 +210,9 @@ type PinpointDestinationParameters struct {
 }
 
 type SnsDestinationObservation struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events to.
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
 type SnsDestinationParameters struct {

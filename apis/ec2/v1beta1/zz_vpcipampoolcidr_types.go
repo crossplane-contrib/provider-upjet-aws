@@ -14,6 +14,12 @@ import (
 )
 
 type CidrAuthorizationContextObservation struct {
+
+	// The plain-text authorization message for the prefix and account.
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The signed authorization message for the prefix and account.
+	Signature *string `json:"signature,omitempty" tf:"signature,omitempty"`
 }
 
 type CidrAuthorizationContextParameters struct {
@@ -29,8 +35,21 @@ type CidrAuthorizationContextParameters struct {
 
 type VPCIpamPoolCidrObservation struct {
 
+	// The CIDR you want to assign to the pool.
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
+
+	// A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP. This is not stored in the state file. See cidr_authorization_context for more information.
+	CidrAuthorizationContext []CidrAuthorizationContextObservation `json:"cidrAuthorizationContext,omitempty" tf:"cidr_authorization_context,omitempty"`
+
 	// The ID of the IPAM Pool Cidr concatenated with the IPAM Pool ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the pool to which you want to assign a CIDR.
+	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type VPCIpamPoolCidrParameters struct {

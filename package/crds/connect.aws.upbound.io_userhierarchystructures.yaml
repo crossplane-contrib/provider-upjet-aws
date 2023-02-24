@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: userhierarchystructures.connect.aws.upbound.io
 spec:
@@ -221,6 +221,15 @@ spec:
                 - hierarchyStructure
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -416,6 +425,10 @@ spec:
                                 description: The identifier of the hosting Amazon
                                   Connect Instance.
                                 type: string
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
+                                type: string
                             type: object
                           type: array
                         levelFour:
@@ -430,6 +443,10 @@ spec:
                               id:
                                 description: The identifier of the hosting Amazon
                                   Connect Instance.
+                                type: string
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
                                 type: string
                             type: object
                           type: array
@@ -446,6 +463,10 @@ spec:
                                 description: The identifier of the hosting Amazon
                                   Connect Instance.
                                 type: string
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
+                                type: string
                             type: object
                           type: array
                         levelThree:
@@ -460,6 +481,10 @@ spec:
                               id:
                                 description: The identifier of the hosting Amazon
                                   Connect Instance.
+                                type: string
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
                                 type: string
                             type: object
                           type: array
@@ -476,12 +501,24 @@ spec:
                                 description: The identifier of the hosting Amazon
                                   Connect Instance.
                                 type: string
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
+                                type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   id:
                     description: The identifier of the hosting Amazon Connect Instance.
+                    type: string
+                  instanceId:
+                    description: Specifies the identifier of the hosting Amazon Connect
+                      Instance.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -525,9 +562,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

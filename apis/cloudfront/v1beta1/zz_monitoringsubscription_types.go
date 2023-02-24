@@ -14,6 +14,9 @@ import (
 )
 
 type MonitoringSubscriptionMonitoringSubscriptionObservation struct {
+
+	// A subscription configuration for additional CloudWatch metrics. See below.
+	RealtimeMetricsSubscriptionConfig []RealtimeMetricsSubscriptionConfigObservation `json:"realtimeMetricsSubscriptionConfig,omitempty" tf:"realtime_metrics_subscription_config,omitempty"`
 }
 
 type MonitoringSubscriptionMonitoringSubscriptionParameters struct {
@@ -25,8 +28,18 @@ type MonitoringSubscriptionMonitoringSubscriptionParameters struct {
 
 type MonitoringSubscriptionObservation struct {
 
+	// The ID of the distribution that you are enabling metrics for.
+	DistributionID *string `json:"distributionId,omitempty" tf:"distribution_id,omitempty"`
+
 	// The ID of the CloudFront monitoring subscription, which corresponds to the distribution_id.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
+	MonitoringSubscription []MonitoringSubscriptionMonitoringSubscriptionObservation `json:"monitoringSubscription,omitempty" tf:"monitoring_subscription,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type MonitoringSubscriptionParameters struct {
@@ -56,6 +69,9 @@ type MonitoringSubscriptionParameters struct {
 }
 
 type RealtimeMetricsSubscriptionConfigObservation struct {
+
+	// A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution. Valid values are Enabled and Disabled. See below.
+	RealtimeMetricsSubscriptionStatus *string `json:"realtimeMetricsSubscriptionStatus,omitempty" tf:"realtime_metrics_subscription_status,omitempty"`
 }
 
 type RealtimeMetricsSubscriptionConfigParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: sqlinjectionmatchsets.wafregional.aws.upbound.io
 spec:
@@ -116,6 +116,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -296,6 +305,48 @@ spec:
                   id:
                     description: The ID of the WAF SqlInjectionMatchSet.
                     type: string
+                  name:
+                    description: The name or description of the SizeConstraintSet.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  sqlInjectionMatchTuple:
+                    description: The parts of web requests that you want AWS WAF to
+                      inspect for malicious SQL code and, if you want AWS WAF to inspect
+                      a header, the name of the header.
+                    items:
+                      properties:
+                        fieldToMatch:
+                          description: Specifies where in a web request to look for
+                            snippets of malicious SQL code.
+                          items:
+                            properties:
+                              data:
+                                description: When type is HEADER, enter the name of
+                                  the header that you want to search, e.g., User-Agent
+                                  or Referer. If type is any other value, omit this
+                                  field.
+                                type: string
+                              type:
+                                description: The part of the web request that you
+                                  want AWS WAF to search for a specified string. e.g.,
+                                  HEADER, METHOD or BODY. See docs for all supported
+                                  values.
+                                type: string
+                            type: object
+                          type: array
+                        textTransformation:
+                          description: Text transformations used to eliminate unusual
+                            formatting that attackers use in web requests in an effort
+                            to bypass AWS WAF. If you specify a transformation, AWS
+                            WAF performs the transformation on field_to_match before
+                            inspecting a request for a match. e.g., CMD_LINE, HTML_ENTITY_DECODE
+                            or NONE. See docs for all supported values.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -338,9 +389,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

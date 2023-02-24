@@ -14,10 +14,21 @@ import (
 )
 
 type PullThroughCacheRuleObservation struct {
+
+	// The repository name prefix to use when caching images from the source registry.
+	EcrRepositoryPrefix *string `json:"ecrRepositoryPrefix,omitempty" tf:"ecr_repository_prefix,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The registry ID where the repository was created.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
+
+	// The registry URL of the upstream public registry to use as the source.
+	UpstreamRegistryURL *string `json:"upstreamRegistryUrl,omitempty" tf:"upstream_registry_url,omitempty"`
 }
 
 type PullThroughCacheRuleParameters struct {

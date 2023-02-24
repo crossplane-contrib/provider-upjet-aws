@@ -24,7 +24,23 @@ type VocabularyObservation struct {
 	// Name of the Vocabulary.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The language code you selected for your vocabulary.
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
+
+	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_file_uri
+	Phrases []*string `json:"phrases,omitempty" tf:"phrases,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The Amazon S3 location (URI) of the text file that contains your custom vocabulary.
+	VocabularyFileURI *string `json:"vocabularyFileUri,omitempty" tf:"vocabulary_file_uri,omitempty"`
 }
 
 type VocabularyParameters struct {

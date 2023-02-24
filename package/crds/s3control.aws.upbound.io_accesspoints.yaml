@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: accesspoints.s3control.aws.upbound.io
 spec:
@@ -294,6 +294,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -470,11 +479,24 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accountId:
+                    description: AWS account ID for the owner of the bucket for which
+                      you want to create an access point.
+                    type: string
                   alias:
                     description: The alias of the S3 Access Point.
                     type: string
                   arn:
                     description: Amazon Resource Name (ARN) of the S3 Access Point.
+                    type: string
+                  bucket:
+                    description: Name of an AWS Partition S3 Bucket or the Amazon
+                      Resource Name (ARN) of S3 on Outposts Bucket that you want to
+                      associate this access point with.
+                    type: string
+                  bucketAccountId:
+                    description: The AWS account ID associated with the S3 bucket
+                      associated with this access point.
                     type: string
                   domainName:
                     description: 'The DNS domain name of the S3 Access Point in the
@@ -497,6 +519,9 @@ spec:
                       For S3 on Outposts Bucket, the Amazon Resource Name (ARN) of
                       the Access Point.
                     type: string
+                  name:
+                    description: Name you want to assign to this access point.
+                    type: string
                   networkOrigin:
                     description: Indicates whether this access point allows access
                       from the public Internet. Values are VPC (the access point doesn't
@@ -504,6 +529,67 @@ spec:
                       point allows access from the public Internet, subject to the
                       access point and bucket access policies).
                     type: string
+                  policy:
+                    description: Valid JSON document that specifies the policy that
+                      you want to apply to this access point. Removing policy from
+                      your configuration or setting policy to null or an empty string
+                      (i.e., policy = "") will not delete the policy since it could
+                      have been set by aws_s3control_access_point_policy. To remove
+                      the policy, set it to "{}" (an empty JSON document).
+                    type: string
+                  publicAccessBlockConfiguration:
+                    description: Configuration block to manage the PublicAccessBlock
+                      configuration that you want to apply to this Amazon S3 bucket.
+                      You can enable the configuration options in any combination.
+                      Detailed below.
+                    items:
+                      properties:
+                        blockPublicAcls:
+                          description: 'Whether Amazon S3 should block public ACLs
+                            for buckets in this account. Defaults to true. Enabling
+                            this setting does not affect existing policies or ACLs.
+                            When set to true causes the following behavior:'
+                          type: boolean
+                        blockPublicPolicy:
+                          description: 'Whether Amazon S3 should block public bucket
+                            policies for buckets in this account. Defaults to true.
+                            Enabling this setting does not affect existing bucket
+                            policies. When set to true causes Amazon S3 to:'
+                          type: boolean
+                        ignorePublicAcls:
+                          description: 'Whether Amazon S3 should ignore public ACLs
+                            for buckets in this account. Defaults to true. Enabling
+                            this setting does not affect the persistence of any existing
+                            ACLs and doesn''t prevent new public ACLs from being set.
+                            When set to true causes Amazon S3 to:'
+                          type: boolean
+                        restrictPublicBuckets:
+                          description: 'Whether Amazon S3 should restrict public bucket
+                            policies for buckets in this account. Defaults to true.
+                            Enabling this setting does not affect previously stored
+                            bucket policies, except that public and cross-account
+                            access within any public bucket policy, including non-public
+                            delegation to specific accounts, is blocked. When set
+                            to true:'
+                          type: boolean
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  vpcConfiguration:
+                    description: Configuration block to restrict access to this access
+                      point to requests from the specified Virtual Private Cloud (VPC).
+                      Required for S3 on Outposts. Detailed below.
+                    items:
+                      properties:
+                        vpcId:
+                          description: This access point will only allow connections
+                            from the specified VPC ID.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -546,9 +632,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

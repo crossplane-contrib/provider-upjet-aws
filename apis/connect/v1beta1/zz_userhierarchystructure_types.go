@@ -16,23 +16,18 @@ import (
 type HierarchyStructureObservation struct {
 
 	// A block that defines the details of level five. The level block is documented below.
-	// +kubebuilder:validation:Optional
 	LevelFive []LevelFiveObservation `json:"levelFive,omitempty" tf:"level_five,omitempty"`
 
 	// A block that defines the details of level four. The level block is documented below.
-	// +kubebuilder:validation:Optional
 	LevelFour []LevelFourObservation `json:"levelFour,omitempty" tf:"level_four,omitempty"`
 
 	// A block that defines the details of level one. The level block is documented below.
-	// +kubebuilder:validation:Optional
 	LevelOne []LevelOneObservation `json:"levelOne,omitempty" tf:"level_one,omitempty"`
 
 	// A block that defines the details of level three. The level block is documented below.
-	// +kubebuilder:validation:Optional
 	LevelThree []LevelThreeObservation `json:"levelThree,omitempty" tf:"level_three,omitempty"`
 
 	// A block that defines the details of level two. The level block is documented below.
-	// +kubebuilder:validation:Optional
 	LevelTwo []LevelTwoObservation `json:"levelTwo,omitempty" tf:"level_two,omitempty"`
 }
 
@@ -66,6 +61,9 @@ type LevelFiveObservation struct {
 
 	// The identifier of the hosting Amazon Connect Instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the user hierarchy level. Must not be more than 50 characters.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type LevelFiveParameters struct {
@@ -82,6 +80,9 @@ type LevelFourObservation struct {
 
 	// The identifier of the hosting Amazon Connect Instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the user hierarchy level. Must not be more than 50 characters.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type LevelFourParameters struct {
@@ -98,6 +99,9 @@ type LevelOneObservation struct {
 
 	// The identifier of the hosting Amazon Connect Instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the user hierarchy level. Must not be more than 50 characters.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type LevelOneParameters struct {
@@ -114,6 +118,9 @@ type LevelThreeObservation struct {
 
 	// The identifier of the hosting Amazon Connect Instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the user hierarchy level. Must not be more than 50 characters.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type LevelThreeParameters struct {
@@ -130,6 +137,9 @@ type LevelTwoObservation struct {
 
 	// The identifier of the hosting Amazon Connect Instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the user hierarchy level. Must not be more than 50 characters.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type LevelTwoParameters struct {
@@ -142,11 +152,17 @@ type LevelTwoParameters struct {
 type UserHierarchyStructureObservation struct {
 
 	// A block that defines the hierarchy structure's levels. The hierarchy_structure block is documented below.
-	// +kubebuilder:validation:Required
 	HierarchyStructure []HierarchyStructureObservation `json:"hierarchyStructure,omitempty" tf:"hierarchy_structure,omitempty"`
 
 	// The identifier of the hosting Amazon Connect Instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type UserHierarchyStructureParameters struct {

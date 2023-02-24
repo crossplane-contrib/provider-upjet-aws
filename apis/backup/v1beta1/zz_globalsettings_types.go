@@ -15,8 +15,15 @@ import (
 
 type GlobalSettingsObservation struct {
 
+	// A list of resources along with the opt-in preferences for the account.
+	GlobalSettings map[string]*string `json:"globalSettings,omitempty" tf:"global_settings,omitempty"`
+
 	// The AWS Account ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type GlobalSettingsParameters struct {

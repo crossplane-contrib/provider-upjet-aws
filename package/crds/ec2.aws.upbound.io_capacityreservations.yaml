@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: capacityreservations.ec2.aws.upbound.io
 spec:
@@ -132,6 +132,15 @@ spec:
                 - instanceType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -311,13 +320,69 @@ spec:
                   arn:
                     description: The ARN of the Capacity Reservation.
                     type: string
+                  availabilityZone:
+                    description: The Availability Zone in which to create the Capacity
+                      Reservation.
+                    type: string
+                  ebsOptimized:
+                    description: Indicates whether the Capacity Reservation supports
+                      EBS-optimized instances.
+                    type: boolean
+                  endDate:
+                    description: 'The date and time at which the Capacity Reservation
+                      expires. When a Capacity Reservation expires, the reserved capacity
+                      is released and you can no longer launch instances into it.
+                      Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)'
+                    type: string
+                  endDateType:
+                    description: Indicates the way in which the Capacity Reservation
+                      ends. Specify either unlimited or limited.
+                    type: string
+                  ephemeralStorage:
+                    description: Indicates whether the Capacity Reservation supports
+                      instances with temporary, block-level storage.
+                    type: boolean
                   id:
                     description: The Capacity Reservation ID.
+                    type: string
+                  instanceCount:
+                    description: The number of instances for which to reserve capacity.
+                    type: number
+                  instanceMatchCriteria:
+                    description: Indicates the type of instance launches that the
+                      Capacity Reservation accepts. Specify either open or targeted.
+                    type: string
+                  instancePlatform:
+                    description: The type of operating system for which to reserve
+                      capacity. Valid options are Linux/UNIX, Red Hat Enterprise Linux,
+                      SUSE Linux, Windows, Windows with SQL Server, Windows with SQL
+                      Server Enterprise, Windows with SQL Server Standard or Windows
+                      with SQL Server Web.
+                    type: string
+                  instanceType:
+                    description: The instance type for which to reserve capacity.
+                    type: string
+                  outpostArn:
+                    description: The Amazon Resource Name (ARN) of the Outpost on
+                      which to create the Capacity Reservation.
                     type: string
                   ownerId:
                     description: The ID of the AWS account that owns the Capacity
                       Reservation.
                     type: string
+                  placementGroupArn:
+                    description: The Amazon Resource Name (ARN) of the cluster placement
+                      group in which to create the Capacity Reservation.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -325,6 +390,10 @@ spec:
                       those inherited from the provider default_tags configuration
                       block
                     type: object
+                  tenancy:
+                    description: Indicates the tenancy of the Capacity Reservation.
+                      Specify either default or dedicated.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -367,9 +436,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

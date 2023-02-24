@@ -14,6 +14,12 @@ import (
 )
 
 type AuthenticationConfigurationObservation struct {
+
+	// A valid CIDR block for IP filtering. Required for IP.
+	AllowedIPRange *string `json:"allowedIpRange,omitempty" tf:"allowed_ip_range,omitempty"`
+
+	// The shared secret for the GitHub repository webhook. Set this as secret in your github_repository_webhook's configuration block. Required for GITHUB_HMAC.
+	SecretTokenSecretRef *v1.SecretKeySelector `json:"secretTokenSecretRef,omitempty" tf:"-"`
 }
 
 type AuthenticationConfigurationParameters struct {
@@ -28,6 +34,12 @@ type AuthenticationConfigurationParameters struct {
 }
 
 type FilterObservation struct {
+
+	// The JSON path to filter on.
+	JSONPath *string `json:"jsonPath,omitempty" tf:"json_path,omitempty"`
+
+	// The value to match on (e.g., refs/heads/{Branch}). See AWS docs for details.
+	MatchEquals *string `json:"matchEquals,omitempty" tf:"match_equals,omitempty"`
 }
 
 type FilterParameters struct {
@@ -46,11 +58,33 @@ type WebhookObservation struct {
 	// The CodePipeline webhook's ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The type of authentication  to use. One of IP, GITHUB_HMAC, or UNAUTHENTICATED.
+	Authentication *string `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// An auth block. Required for IP and GITHUB_HMAC. Auth blocks are documented below.
+	AuthenticationConfiguration []AuthenticationConfigurationObservation `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
+
+	// One or more filter blocks. Filter blocks are documented below.
+	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	// The CodePipeline webhook's ARN.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.
+	TargetAction *string `json:"targetAction,omitempty" tf:"target_action,omitempty"`
+
+	// The name of the pipeline.
+	TargetPipeline *string `json:"targetPipeline,omitempty" tf:"target_pipeline,omitempty"`
 
 	// The CodePipeline webhook's URL. POST events to this endpoint to trigger the target.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`

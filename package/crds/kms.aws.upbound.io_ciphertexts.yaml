@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: ciphertexts.kms.aws.upbound.io
 spec:
@@ -172,6 +172,15 @@ spec:
                 - plaintextSecretRef
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -351,8 +360,41 @@ spec:
                   ciphertextBlob:
                     description: Base64 encoded ciphertext
                     type: string
+                  context:
+                    additionalProperties:
+                      type: string
+                    description: An optional mapping that makes up the encryption
+                      context.
+                    type: object
                   id:
                     type: string
+                  keyId:
+                    description: Globally unique key ID for the customer master key.
+                    type: string
+                  plaintextSecretRef:
+                    description: Data to be encrypted. Note that this may show up
+                      in logs, and it will be stored in the state file.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                required:
+                - plaintextSecretRef
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -395,9 +437,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

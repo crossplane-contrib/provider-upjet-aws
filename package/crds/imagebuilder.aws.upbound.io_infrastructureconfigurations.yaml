@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: infrastructureconfigurations.imagebuilder.aws.upbound.io
 spec:
@@ -607,6 +607,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -793,9 +802,90 @@ spec:
                   dateUpdated:
                     description: Date when the configuration was updated.
                     type: string
+                  description:
+                    description: Description for the configuration.
+                    type: string
                   id:
                     description: Amazon Resource Name (ARN) of the configuration.
                     type: string
+                  instanceMetadataOptions:
+                    description: Configuration block with instance metadata options
+                      for the HTTP requests that pipeline builds use to launch EC2
+                      build and test instances. Detailed below.
+                    items:
+                      properties:
+                        httpPutResponseHopLimit:
+                          description: The number of hops that an instance can traverse
+                            to reach its destonation.
+                          type: number
+                        httpTokens:
+                          description: 'Whether a signed token is required for instance
+                            metadata retrieval requests. Valid values: required, optional.'
+                          type: string
+                      type: object
+                    type: array
+                  instanceProfileName:
+                    description: Name of IAM Instance Profile.
+                    type: string
+                  instanceTypes:
+                    description: Set of EC2 Instance Types.
+                    items:
+                      type: string
+                    type: array
+                  keyPair:
+                    description: Name of EC2 Key Pair.
+                    type: string
+                  logging:
+                    description: Configuration block with logging settings. Detailed
+                      below.
+                    items:
+                      properties:
+                        s3Logs:
+                          description: Configuration block with S3 logging settings.
+                            Detailed below.
+                          items:
+                            properties:
+                              s3BucketName:
+                                description: Name of the S3 Bucket.
+                                type: string
+                              s3KeyPrefix:
+                                description: Prefix to use for S3 logs. Defaults to
+                                  /.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  name:
+                    description: Name for the configuration.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  resourceTags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags to assign to infrastructure
+                      created by the configuration.
+                    type: object
+                  securityGroupIds:
+                    description: Set of EC2 Security Group identifiers.
+                    items:
+                      type: string
+                    type: array
+                  snsTopicArn:
+                    description: Amazon Resource Name (ARN) of SNS Topic.
+                    type: string
+                  subnetId:
+                    description: EC2 Subnet identifier. Also requires security_group_ids
+                      argument.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -803,6 +893,10 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  terminateInstanceOnFailure:
+                    description: Enable if the instance should be terminated when
+                      the pipeline fails. Defaults to false.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -845,9 +939,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -15,8 +15,28 @@ import (
 
 type LBCookieStickinessPolicyObservation struct {
 
+	// The time period after which
+	// the session cookie should be considered stale, expressed in seconds.
+	CookieExpirationPeriod *float64 `json:"cookieExpirationPeriod,omitempty" tf:"cookie_expiration_period,omitempty"`
+
 	// The ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The load balancer port to which the policy
+	// should be applied. This must be an active listener on the load
+	// balancer.
+	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+
+	// The load balancer to which the policy
+	// should be attached.
+	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
+
+	// The name of the stickiness policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type LBCookieStickinessPolicyParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: conditionalforwarders.ds.aws.upbound.io
 spec:
@@ -159,6 +159,15 @@ spec:
                 - region
                 - remoteDomainName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -336,7 +345,23 @@ spec:
             properties:
               atProvider:
                 properties:
+                  directoryId:
+                    description: ID of directory.
+                    type: string
+                  dnsIps:
+                    description: A list of forwarder IP addresses.
+                    items:
+                      type: string
+                    type: array
                   id:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  remoteDomainName:
+                    description: The fully qualified domain name of the remote domain
+                      for which forwarders will be used.
                     type: string
                 type: object
               conditions:
@@ -380,9 +405,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

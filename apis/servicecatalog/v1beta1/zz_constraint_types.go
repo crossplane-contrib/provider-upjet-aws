@@ -15,13 +15,35 @@ import (
 
 type ConstraintObservation struct {
 
+	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
+
+	// Description of the constraint.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Constraint identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Owner of the constraint.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
+	// Constraint parameters in JSON format. The syntax depends on the constraint type. See details below.
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Portfolio identifier.
+	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
+
+	// Product identifier.
+	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Type of constraint. Valid values are LAUNCH, NOTIFICATION, RESOURCE_UPDATE, STACKSET, and TEMPLATE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ConstraintParameters struct {

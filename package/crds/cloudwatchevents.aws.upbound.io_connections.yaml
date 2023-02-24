@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: connections.cloudwatchevents.aws.upbound.io
 spec:
@@ -449,6 +449,15 @@ spec:
                 - authorizationType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -628,7 +637,380 @@ spec:
                   arn:
                     description: The Amazon Resource Name (ARN) of the connection.
                     type: string
+                  authParameters:
+                    description: Parameters used for authorization. A maximum of 1
+                      are allowed. Documented below.
+                    items:
+                      properties:
+                        apiKey:
+                          description: Parameters used for API_KEY authorization.
+                            An API key to include in the header for each authentication
+                            request. A maximum of 1 are allowed. Conflicts with basic
+                            and oauth. Documented below.
+                          items:
+                            properties:
+                              key:
+                                description: Header Name.
+                                type: string
+                              valueSecretRef:
+                                description: Header Value. Created and stored in AWS
+                                  Secrets Manager.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                            required:
+                            - valueSecretRef
+                            type: object
+                          type: array
+                        basic:
+                          description: Parameters used for BASIC authorization. A
+                            maximum of 1 are allowed. Conflicts with api_key and oauth.
+                            Documented below.
+                          items:
+                            properties:
+                              passwordSecretRef:
+                                description: A password for the authorization. Created
+                                  and stored in AWS Secrets Manager.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              username:
+                                description: A username for the authorization.
+                                type: string
+                            required:
+                            - passwordSecretRef
+                            type: object
+                          type: array
+                        invocationHttpParameters:
+                          description: Invocation Http Parameters are additional credentials
+                            used to sign each Invocation of the ApiDestination created
+                            from this Connection. If the ApiDestination Rule Target
+                            has additional HttpParameters, the values will be merged
+                            together, with the Connection Invocation Http Parameters
+                            taking precedence. Secret values are stored and managed
+                            by AWS Secrets Manager. A maximum of 1 are allowed. Documented
+                            below.
+                          items:
+                            properties:
+                              body:
+                                description: 'Contains additional body string parameters
+                                  for the connection. You can include up to 100 additional
+                                  body string parameters per request. Each additional
+                                  parameter counts towards the event payload size,
+                                  which cannot exceed 64 KB. Each parameter can contain
+                                  the following:'
+                                items:
+                                  properties:
+                                    isValueSecret:
+                                      description: Specified whether the value is
+                                        secret.
+                                      type: boolean
+                                    key:
+                                      description: Header Name.
+                                      type: string
+                                    valueSecretRef:
+                                      description: Header Value. Created and stored
+                                        in AWS Secrets Manager.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                  type: object
+                                type: array
+                              header:
+                                description: 'Contains additional header parameters
+                                  for the connection. You can include up to 100 additional
+                                  body string parameters per request. Each additional
+                                  parameter counts towards the event payload size,
+                                  which cannot exceed 64 KB. Each parameter can contain
+                                  the following:'
+                                items:
+                                  properties:
+                                    isValueSecret:
+                                      description: Specified whether the value is
+                                        secret.
+                                      type: boolean
+                                    key:
+                                      description: Header Name.
+                                      type: string
+                                    valueSecretRef:
+                                      description: Header Value. Created and stored
+                                        in AWS Secrets Manager.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                  type: object
+                                type: array
+                              queryString:
+                                description: 'Contains additional query string parameters
+                                  for the connection. You can include up to 100 additional
+                                  body string parameters per request. Each additional
+                                  parameter counts towards the event payload size,
+                                  which cannot exceed 64 KB. Each parameter can contain
+                                  the following:'
+                                items:
+                                  properties:
+                                    isValueSecret:
+                                      description: Specified whether the value is
+                                        secret.
+                                      type: boolean
+                                    key:
+                                      description: Header Name.
+                                      type: string
+                                    valueSecretRef:
+                                      description: Header Value. Created and stored
+                                        in AWS Secrets Manager.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        oauth:
+                          description: Parameters used for OAUTH_CLIENT_CREDENTIALS
+                            authorization. A maximum of 1 are allowed. Conflicts with
+                            basic and api_key. Documented below.
+                          items:
+                            properties:
+                              authorizationEndpoint:
+                                description: The URL to the authorization endpoint.
+                                type: string
+                              clientParameters:
+                                description: Contains the client parameters for OAuth
+                                  authorization. Contains the following two parameters.
+                                items:
+                                  properties:
+                                    clientId:
+                                      description: The client ID for the credentials
+                                        to use for authorization. Created and stored
+                                        in AWS Secrets Manager.
+                                      type: string
+                                    clientSecretSecretRef:
+                                      description: The client secret for the credentials
+                                        to use for authorization. Created and stored
+                                        in AWS Secrets Manager.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                  required:
+                                  - clientSecretSecretRef
+                                  type: object
+                                type: array
+                              httpMethod:
+                                description: A password for the authorization. Created
+                                  and stored in AWS Secrets Manager.
+                                type: string
+                              oauthHttpParameters:
+                                description: OAuth Http Parameters are additional
+                                  credentials used to sign the request to the authorization
+                                  endpoint to exchange the OAuth Client information
+                                  for an access token. Secret values are stored and
+                                  managed by AWS Secrets Manager. A maximum of 1 are
+                                  allowed. Documented below.
+                                items:
+                                  properties:
+                                    body:
+                                      description: 'Contains additional body string
+                                        parameters for the connection. You can include
+                                        up to 100 additional body string parameters
+                                        per request. Each additional parameter counts
+                                        towards the event payload size, which cannot
+                                        exceed 64 KB. Each parameter can contain the
+                                        following:'
+                                      items:
+                                        properties:
+                                          isValueSecret:
+                                            description: Specified whether the value
+                                              is secret.
+                                            type: boolean
+                                          key:
+                                            description: Header Name.
+                                            type: string
+                                          valueSecretRef:
+                                            description: Header Value. Created and
+                                              stored in AWS Secrets Manager.
+                                            properties:
+                                              key:
+                                                description: The key to select.
+                                                type: string
+                                              name:
+                                                description: Name of the secret.
+                                                type: string
+                                              namespace:
+                                                description: Namespace of the secret.
+                                                type: string
+                                            required:
+                                            - key
+                                            - name
+                                            - namespace
+                                            type: object
+                                        type: object
+                                      type: array
+                                    header:
+                                      description: 'Contains additional header parameters
+                                        for the connection. You can include up to
+                                        100 additional body string parameters per
+                                        request. Each additional parameter counts
+                                        towards the event payload size, which cannot
+                                        exceed 64 KB. Each parameter can contain the
+                                        following:'
+                                      items:
+                                        properties:
+                                          isValueSecret:
+                                            description: Specified whether the value
+                                              is secret.
+                                            type: boolean
+                                          key:
+                                            description: Header Name.
+                                            type: string
+                                          valueSecretRef:
+                                            description: Header Value. Created and
+                                              stored in AWS Secrets Manager.
+                                            properties:
+                                              key:
+                                                description: The key to select.
+                                                type: string
+                                              name:
+                                                description: Name of the secret.
+                                                type: string
+                                              namespace:
+                                                description: Namespace of the secret.
+                                                type: string
+                                            required:
+                                            - key
+                                            - name
+                                            - namespace
+                                            type: object
+                                        type: object
+                                      type: array
+                                    queryString:
+                                      description: 'Contains additional query string
+                                        parameters for the connection. You can include
+                                        up to 100 additional body string parameters
+                                        per request. Each additional parameter counts
+                                        towards the event payload size, which cannot
+                                        exceed 64 KB. Each parameter can contain the
+                                        following:'
+                                      items:
+                                        properties:
+                                          isValueSecret:
+                                            description: Specified whether the value
+                                              is secret.
+                                            type: boolean
+                                          key:
+                                            description: Header Name.
+                                            type: string
+                                          valueSecretRef:
+                                            description: Header Value. Created and
+                                              stored in AWS Secrets Manager.
+                                            properties:
+                                              key:
+                                                description: The key to select.
+                                                type: string
+                                              name:
+                                                description: Name of the secret.
+                                                type: string
+                                              namespace:
+                                                description: Namespace of the secret.
+                                                type: string
+                                            required:
+                                            - key
+                                            - name
+                                            - namespace
+                                            type: object
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  authorizationType:
+                    description: Choose the type of authorization to use for the connection.
+                      One of API_KEY,BASIC,OAUTH_CLIENT_CREDENTIALS.
+                    type: string
+                  description:
+                    description: Enter a description for the connection. Maximum of
+                      512 characters.
+                    type: string
                   id:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   secretArn:
                     description: The Amazon Resource Name (ARN) of the secret created
@@ -676,9 +1058,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -14,6 +14,9 @@ import (
 )
 
 type InputDestinationsObservation struct {
+
+	// A unique name for the location the RTMP stream is being pushed to.
+	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 }
 
 type InputDestinationsParameters struct {
@@ -24,6 +27,9 @@ type InputDestinationsParameters struct {
 }
 
 type InputDevicesObservation struct {
+
+	// The unique ID for the device.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type InputDevicesParameters struct {
@@ -41,19 +47,53 @@ type InputObservation struct {
 	// Channels attached to Input.
 	AttachedChannels []*string `json:"attachedChannels,omitempty" tf:"attached_channels,omitempty"`
 
+	// Destination settings for PUSH type inputs. See Destinations for more details.
+	Destinations []InputDestinationsObservation `json:"destinations,omitempty" tf:"destinations,omitempty"`
+
 	// The unique ID for the device.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The input class.
 	InputClass *string `json:"inputClass,omitempty" tf:"input_class,omitempty"`
 
+	// Settings for the devices. See Input Devices for more details.
+	InputDevices []InputDevicesObservation `json:"inputDevices,omitempty" tf:"input_devices,omitempty"`
+
 	// A list of IDs for all Inputs which are partners of this one.
 	InputPartnerIds []*string `json:"inputPartnerIds,omitempty" tf:"input_partner_ids,omitempty"`
+
+	// List of input security groups.
+	InputSecurityGroups []*string `json:"inputSecurityGroups,omitempty" tf:"input_security_groups,omitempty"`
 
 	// Source type of the input.
 	InputSourceType *string `json:"inputSourceType,omitempty" tf:"input_source_type,omitempty"`
 
+	// A list of the MediaConnect Flows. See Media Connect Flows for more details.
+	MediaConnectFlows []MediaConnectFlowsObservation `json:"mediaConnectFlows,omitempty" tf:"media_connect_flows,omitempty"`
+
+	// Name of the input.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ARN of the role this input assumes during and after creation.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The source URLs for a PULL-type input. See Sources for more details.
+	Sources []SourcesObservation `json:"sources,omitempty" tf:"sources,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The different types of inputs that AWS Elemental MediaLive supports.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Settings for a private VPC Input. See VPC for more details.
+	VPC []InputVPCObservation `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type InputParameters struct {
@@ -115,6 +155,12 @@ type InputParameters struct {
 }
 
 type InputVPCObservation struct {
+
+	// A list of up to 5 EC2 VPC security group IDs to attach to the Input.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// A list of 2 VPC subnet IDs from the same VPC.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type InputVPCParameters struct {
@@ -129,6 +175,9 @@ type InputVPCParameters struct {
 }
 
 type MediaConnectFlowsObservation struct {
+
+	// The ARN of the MediaConnect Flow
+	FlowArn *string `json:"flowArn,omitempty" tf:"flow_arn,omitempty"`
 }
 
 type MediaConnectFlowsParameters struct {
@@ -139,6 +188,15 @@ type MediaConnectFlowsParameters struct {
 }
 
 type SourcesObservation struct {
+
+	// The key used to extract the password from EC2 Parameter store.
+	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
+
+	// The URL where the stream is pulled from.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+
+	// The username for the input source.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type SourcesParameters struct {

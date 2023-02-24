@@ -18,8 +18,21 @@ type ClusterInstanceObservation struct {
 	// The hostname of the instance. See also endpoint and port.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
+	// Specifies whether any instance modifications
+	// are applied immediately, or during the next maintenance window. Default isfalse.
+	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
+
 	// Amazon Resource Name (ARN) of neptune instance
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Indicates that minor engine upgrades will be applied automatically to the instance during the maintenance window. Default is true.
+	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
+
+	// The EC2 Availability Zone that the neptune instance is created in.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// The identifier of the aws_neptune_cluster in which to launch this instance.
+	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// The region-unique, immutable identifier for the neptune instance.
 	DbiResourceID *string `json:"dbiResourceId,omitempty" tf:"dbi_resource_id,omitempty"`
@@ -27,14 +40,52 @@ type ClusterInstanceObservation struct {
 	// The connection endpoint in address:port format.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
+	// The name of the database engine to be used for the neptune instance. Defaults to neptune. Valid Values: neptune.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// The neptune engine version.
+	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
+
 	// The Instance identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The instance class to use.
+	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The ARN for the KMS encryption key if one is set to the neptune cluster.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
+	// The name of the neptune parameter group to associate with this instance.
+	NeptuneParameterGroupName *string `json:"neptuneParameterGroupName,omitempty" tf:"neptune_parameter_group_name,omitempty"`
+
+	// A subnet group to associate with this neptune instance. NOTE: This must match the neptune_subnet_group_name of the attached aws_neptune_cluster.
+	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
+
+	// The port on which the DB accepts connections. Defaults to 8182.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00"
+	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
+
+	// The window to perform maintenance in.
+	// Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00".
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
+
+	// Default 0. Failover Priority setting on instance level. The reader who has lower tier has higher priority to get promoter to writer.
+	PromotionTier *float64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
+
+	// Bool to control if instance is publicly accessible. Default is false.
+	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Specifies whether the neptune cluster is encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

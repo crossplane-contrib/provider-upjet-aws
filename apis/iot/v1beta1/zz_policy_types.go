@@ -22,6 +22,13 @@ type PolicyObservation struct {
 	DefaultVersionID *string `json:"defaultVersionId,omitempty" tf:"default_version_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The policy document. This is a JSON formatted string. Use the IoT Developer Guide for more information on IoT Policies.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type PolicyParameters struct {

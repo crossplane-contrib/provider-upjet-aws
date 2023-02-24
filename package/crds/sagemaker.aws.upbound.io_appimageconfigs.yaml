@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: appimageconfigs.sagemaker.aws.upbound.io
 spec:
@@ -123,6 +123,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -306,6 +315,58 @@ spec:
                   id:
                     description: The name of the App Image Config.
                     type: string
+                  kernelGatewayImageConfig:
+                    description: The configuration for the file system and kernels
+                      in a SageMaker image running as a KernelGateway app. See Kernel
+                      Gateway Image Config details below.
+                    items:
+                      properties:
+                        fileSystemConfig:
+                          description: The URL where the Git repository is located.
+                            See File System Config details below.
+                          items:
+                            properties:
+                              defaultGid:
+                                description: The default POSIX group ID (GID). If
+                                  not specified, defaults to 100. Valid values are
+                                  0 and 100.
+                                type: number
+                              defaultUid:
+                                description: The default POSIX user ID (UID). If not
+                                  specified, defaults to 1000. Valid values are 0
+                                  and 1000.
+                                type: number
+                              mountPath:
+                                description: The path within the image to mount the
+                                  user's EFS home directory. The directory should
+                                  be empty. If not specified, defaults to /home/sagemaker-user.
+                                type: string
+                            type: object
+                          type: array
+                        kernelSpec:
+                          description: The default branch for the Git repository.
+                            See Kernel Spec details below.
+                          items:
+                            properties:
+                              displayName:
+                                description: The display name of the kernel.
+                                type: string
+                              name:
+                                description: The name of the kernel.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -355,9 +416,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

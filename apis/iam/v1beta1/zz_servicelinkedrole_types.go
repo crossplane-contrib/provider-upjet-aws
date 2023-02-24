@@ -18,8 +18,17 @@ type ServiceLinkedRoleObservation struct {
 	// The Amazon Resource Name (ARN) specifying the role.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The AWS service to which this role is attached. You use a string similar to a URL but without the http:// in front. For example: elasticbeanstalk.amazonaws.com. To find the full list of services that support service-linked roles, check the docs.
+	AwsServiceName *string `json:"awsServiceName,omitempty" tf:"aws_service_name,omitempty"`
+
 	// The creation date of the IAM role.
 	CreateDate *string `json:"createDate,omitempty" tf:"create_date,omitempty"`
+
+	// Additional string appended to the role name. Not all AWS services support custom suffixes.
+	CustomSuffix *string `json:"customSuffix,omitempty" tf:"custom_suffix,omitempty"`
+
+	// The description of the role.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the role.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -29,6 +38,9 @@ type ServiceLinkedRoleObservation struct {
 
 	// The path of the role.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

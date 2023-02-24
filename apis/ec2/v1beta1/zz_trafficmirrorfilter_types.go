@@ -18,8 +18,21 @@ type TrafficMirrorFilterObservation struct {
 	// The ARN of the traffic mirror filter.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A description of the filter.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The name of the filter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of amazon network services that should be mirrored. Valid values: amazon-dns.
+	NetworkServices []*string `json:"networkServices,omitempty" tf:"network_services,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

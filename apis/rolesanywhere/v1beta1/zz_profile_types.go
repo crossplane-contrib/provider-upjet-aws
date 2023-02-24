@@ -18,8 +18,36 @@ type ProfileObservation struct {
 	// Amazon Resource Name (ARN) of the Profile
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The number of seconds the vended session credentials are valid for. Defaults to 3600.
+	DurationSeconds *float64 `json:"durationSeconds,omitempty" tf:"duration_seconds,omitempty"`
+
+	// Whether or not the Profile is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The Profile ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of managed policy ARNs that apply to the vended session credentials.
+	ManagedPolicyArns []*string `json:"managedPolicyArns,omitempty" tf:"managed_policy_arns,omitempty"`
+
+	// The name of the Profile.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Specifies whether instance properties are required in CreateSession requests with this profile.
+	RequireInstanceProperties *bool `json:"requireInstanceProperties,omitempty" tf:"require_instance_properties,omitempty"`
+
+	// A list of IAM roles that this profile can assume
+	RoleArns []*string `json:"roleArns,omitempty" tf:"role_arns,omitempty"`
+
+	// A session policy that applies to the trust boundary of the vended session credentials.
+	SessionPolicy *string `json:"sessionPolicy,omitempty" tf:"session_policy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

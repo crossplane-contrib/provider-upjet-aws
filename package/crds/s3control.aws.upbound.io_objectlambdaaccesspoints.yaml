@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: objectlambdaaccesspoints.s3control.aws.upbound.io
 spec:
@@ -316,6 +316,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -493,13 +502,84 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accountId:
+                    description: The AWS account ID for the owner of the bucket for
+                      which you want to create an Object Lambda Access Point.
+                    type: string
                   arn:
                     description: Amazon Resource Name (ARN) of the Object Lambda Access
                       Point.
                     type: string
+                  configuration:
+                    description: A configuration block containing details about the
+                      Object Lambda Access Point. See Configuration below for more
+                      details.
+                    items:
+                      properties:
+                        allowedFeatures:
+                          description: 'Allowed features. Valid values: GetObject-Range,
+                            GetObject-PartNumber.'
+                          items:
+                            type: string
+                          type: array
+                        cloudWatchMetricsEnabled:
+                          description: Whether or not the CloudWatch metrics configuration
+                            is enabled.
+                          type: boolean
+                        supportingAccessPoint:
+                          description: Standard access point associated with the Object
+                            Lambda Access Point.
+                          type: string
+                        transformationConfiguration:
+                          description: List of transformation configurations for the
+                            Object Lambda Access Point. See Transformation Configuration
+                            below for more details.
+                          items:
+                            properties:
+                              actions:
+                                description: 'The actions of an Object Lambda Access
+                                  Point configuration. Valid values: GetObject.'
+                                items:
+                                  type: string
+                                type: array
+                              contentTransformation:
+                                description: The content transformation of an Object
+                                  Lambda Access Point configuration. See Content Transformation
+                                  below for more details.
+                                items:
+                                  properties:
+                                    awsLambda:
+                                      description: Configuration for an AWS Lambda
+                                        function. See AWS Lambda below for more details.
+                                      items:
+                                        properties:
+                                          functionArn:
+                                            description: The Amazon Resource Name
+                                              (ARN) of the AWS Lambda function.
+                                            type: string
+                                          functionPayload:
+                                            description: Additional JSON that provides
+                                              supplemental data to the Lambda function
+                                              used to transform objects.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   id:
                     description: The AWS account ID and access point name separated
                       by a colon (:).
+                    type: string
+                  name:
+                    description: The name for this Object Lambda Access Point.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -543,9 +623,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

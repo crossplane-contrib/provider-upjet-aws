@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: identityproviders.cognitoidp.aws.upbound.io
 spec:
@@ -172,6 +172,15 @@ spec:
                 - providerType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -348,7 +357,36 @@ spec:
             properties:
               atProvider:
                 properties:
+                  attributeMapping:
+                    additionalProperties:
+                      type: string
+                    description: The map of attribute mapping of user pool attributes.
+                      AttributeMapping in AWS API documentation
+                    type: object
                   id:
+                    type: string
+                  idpIdentifiers:
+                    description: The list of identity providers.
+                    items:
+                      type: string
+                    type: array
+                  providerDetails:
+                    additionalProperties:
+                      type: string
+                    description: The map of identity details, such as access token
+                    type: object
+                  providerName:
+                    description: The provider name
+                    type: string
+                  providerType:
+                    description: The provider type.  See AWS API for valid values
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  userPoolId:
+                    description: The user pool id
                     type: string
                 type: object
               conditions:
@@ -392,9 +430,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

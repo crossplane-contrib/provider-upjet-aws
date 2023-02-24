@@ -15,8 +15,27 @@ import (
 
 type RouteResponseObservation struct {
 
+	// API identifier.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
 	// Route response identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The model selection expression for the route response.
+	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Response models for the route response.
+	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
+
+	// Identifier of the aws_apigatewayv2_route.
+	RouteID *string `json:"routeId,omitempty" tf:"route_id,omitempty"`
+
+	// Route response key.
+	RouteResponseKey *string `json:"routeResponseKey,omitempty" tf:"route_response_key,omitempty"`
 }
 
 type RouteResponseParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: resourceservers.cognitoidp.aws.upbound.io
 spec:
@@ -169,6 +169,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -347,12 +356,36 @@ spec:
                 properties:
                   id:
                     type: string
+                  identifier:
+                    description: An identifier for the resource server.
+                    type: string
+                  name:
+                    description: A name for the resource server.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  scope:
+                    description: A list of Authorization Scope.
+                    items:
+                      properties:
+                        scopeDescription:
+                          description: The scope description.
+                          type: string
+                        scopeName:
+                          description: The scope name.
+                          type: string
+                      type: object
+                    type: array
                   scopeIdentifiers:
                     description: A list of all scopes configured for this resource
                       server in the format identifier/scope_name.
                     items:
                       type: string
                     type: array
+                  userPoolId:
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -395,9 +428,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -80,10 +80,35 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
 		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.TagsAll != nil {
 		in, out := &in.TagsAll, &out.TagsAll
@@ -99,6 +124,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.WorkflowExecutionRetentionPeriodInDays != nil {
+		in, out := &in.WorkflowExecutionRetentionPeriodInDays, &out.WorkflowExecutionRetentionPeriodInDays
+		*out = new(string)
+		**out = **in
 	}
 }
 

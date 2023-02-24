@@ -21,11 +21,29 @@ type FileSystemObservation struct {
 	// The identifier of the Availability Zone in which the file system's One Zone storage classes exist.
 	AvailabilityZoneID *string `json:"availabilityZoneId,omitempty" tf:"availability_zone_id,omitempty"`
 
+	// the AWS Availability Zone in which to create the file system. Used to create a file system that uses One Zone storage classes. See user guide for more information.
+	AvailabilityZoneName *string `json:"availabilityZoneName,omitempty" tf:"availability_zone_name,omitempty"`
+
+	// A unique name (a maximum of 64 characters are allowed)
+	// used as reference when creating the Elastic File System to ensure idempotent file
+	// system creation. See Elastic File System
+	// user guide for more information.
+	CreationToken *string `json:"creationToken,omitempty" tf:"creation_token,omitempty"`
+
 	// The DNS name for the filesystem per documented convention.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
+	// If true, the disk will be encrypted.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
 	// The ID that identifies the file system (e.g., fs-ccfc0d65).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// A file system lifecycle policy object (documented below).
+	LifecyclePolicy []LifecyclePolicyObservation `json:"lifecyclePolicy,omitempty" tf:"lifecycle_policy,omitempty"`
 
 	// The current number of mount targets that the file system has.
 	NumberOfMountTargets *float64 `json:"numberOfMountTargets,omitempty" tf:"number_of_mount_targets,omitempty"`
@@ -33,11 +51,27 @@ type FileSystemObservation struct {
 	// The AWS account that created the file system. If the file system was createdby an IAM user, the parent account to which the user belongs is the owner.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// The file system performance mode. Can be either "generalPurpose" or "maxIO" (Default: "generalPurpose").
+	PerformanceMode *string `json:"performanceMode,omitempty" tf:"performance_mode,omitempty"`
+
+	// The throughput, measured in MiB/s, that you want to provision for the file system. Only applicable with throughput_mode set to provisioned.
+	ProvisionedThroughputInMibps *float64 `json:"provisionedThroughputInMibps,omitempty" tf:"provisioned_throughput_in_mibps,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// The latest known metered size (in bytes) of data stored in the file system, the value is not the exact size that the file system was at any point in time. See Size In Bytes.
 	SizeInBytes []SizeInBytesObservation `json:"sizeInBytes,omitempty" tf:"size_in_bytes,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Throughput mode for the file system. Defaults to bursting. Valid values: bursting, provisioned, or elastic. When using provisioned, also set provisioned_throughput_in_mibps.
+	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
 }
 
 type FileSystemParameters struct {
@@ -97,6 +131,12 @@ type FileSystemParameters struct {
 }
 
 type LifecyclePolicyObservation struct {
+
+	// Indicates how long it takes to transition files to the IA storage class. Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, or AFTER_90_DAYS.
+	TransitionToIa *string `json:"transitionToIa,omitempty" tf:"transition_to_ia,omitempty"`
+
+	// Describes the policy used to transition a file from infequent access storage to primary storage. Valid values: AFTER_1_ACCESS.
+	TransitionToPrimaryStorageClass *string `json:"transitionToPrimaryStorageClass,omitempty" tf:"transition_to_primary_storage_class,omitempty"`
 }
 
 type LifecyclePolicyParameters struct {

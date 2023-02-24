@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: eipassociations.ec2.aws.upbound.io
 spec:
@@ -244,6 +244,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -420,7 +429,38 @@ spec:
             properties:
               atProvider:
                 properties:
+                  allocationId:
+                    description: The allocation ID. This is required for EC2-VPC.
+                    type: string
+                  allowReassociation:
+                    description: Whether to allow an Elastic IP to be re-associated.
+                      Defaults to true in VPC.
+                    type: boolean
                   id:
+                    type: string
+                  instanceId:
+                    description: The ID of the instance. This is required for EC2-Classic.
+                      For EC2-VPC, you can specify either the instance ID or the network
+                      interface ID, but not both. The operation fails if you specify
+                      an instance ID unless exactly one network interface is attached.
+                    type: string
+                  networkInterfaceId:
+                    description: The ID of the network interface. If the instance
+                      has more than one network interface, you must specify a network
+                      interface ID.
+                    type: string
+                  privateIpAddress:
+                    description: The primary or secondary private IP address to associate
+                      with the Elastic IP address. If no private IP address is specified,
+                      the Elastic IP address is associated with the primary private
+                      IP address.
+                    type: string
+                  publicIp:
+                    description: The Elastic IP address. This is required for EC2-Classic.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -464,9 +504,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

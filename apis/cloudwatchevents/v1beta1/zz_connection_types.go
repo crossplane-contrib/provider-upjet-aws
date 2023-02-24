@@ -14,6 +14,12 @@ import (
 )
 
 type APIKeyObservation struct {
+
+	// Header Name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type APIKeyParameters struct {
@@ -28,6 +34,18 @@ type APIKeyParameters struct {
 }
 
 type AuthParametersObservation struct {
+
+	// Parameters used for API_KEY authorization. An API key to include in the header for each authentication request. A maximum of 1 are allowed. Conflicts with basic and oauth. Documented below.
+	APIKey []APIKeyObservation `json:"apiKey,omitempty" tf:"api_key,omitempty"`
+
+	// Parameters used for BASIC authorization. A maximum of 1 are allowed. Conflicts with api_key and oauth. Documented below.
+	Basic []BasicObservation `json:"basic,omitempty" tf:"basic,omitempty"`
+
+	// Invocation Http Parameters are additional credentials used to sign each Invocation of the ApiDestination created from this Connection. If the ApiDestination Rule Target has additional HttpParameters, the values will be merged together, with the Connection Invocation Http Parameters taking precedence. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
+	InvocationHTTPParameters []InvocationHTTPParametersObservation `json:"invocationHttpParameters,omitempty" tf:"invocation_http_parameters,omitempty"`
+
+	// Parameters used for OAUTH_CLIENT_CREDENTIALS authorization. A maximum of 1 are allowed. Conflicts with basic and api_key. Documented below.
+	Oauth []OauthObservation `json:"oauth,omitempty" tf:"oauth,omitempty"`
 }
 
 type AuthParametersParameters struct {
@@ -50,6 +68,12 @@ type AuthParametersParameters struct {
 }
 
 type BasicObservation struct {
+
+	// A password for the authorization. Created and stored in AWS Secrets Manager.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
+	// A username for the authorization.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type BasicParameters struct {
@@ -64,6 +88,15 @@ type BasicParameters struct {
 }
 
 type BodyObservation struct {
+
+	// Specified whether the value is secret.
+	IsValueSecret *bool `json:"isValueSecret,omitempty" tf:"is_value_secret,omitempty"`
+
+	// Header Name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type BodyParameters struct {
@@ -82,6 +115,12 @@ type BodyParameters struct {
 }
 
 type ClientParametersObservation struct {
+
+	// The client ID for the credentials to use for authorization. Created and stored in AWS Secrets Manager.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The client secret for the credentials to use for authorization. Created and stored in AWS Secrets Manager.
+	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 }
 
 type ClientParametersParameters struct {
@@ -100,7 +139,20 @@ type ConnectionObservation struct {
 	// The Amazon Resource Name (ARN) of the connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Parameters used for authorization. A maximum of 1 are allowed. Documented below.
+	AuthParameters []AuthParametersObservation `json:"authParameters,omitempty" tf:"auth_parameters,omitempty"`
+
+	// Choose the type of authorization to use for the connection. One of API_KEY,BASIC,OAUTH_CLIENT_CREDENTIALS.
+	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
+
+	// Enter a description for the connection. Maximum of 512 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the secret created from the authorization parameters specified for the connection.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
@@ -127,6 +179,15 @@ type ConnectionParameters struct {
 }
 
 type HeaderObservation struct {
+
+	// Specified whether the value is secret.
+	IsValueSecret *bool `json:"isValueSecret,omitempty" tf:"is_value_secret,omitempty"`
+
+	// Header Name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type HeaderParameters struct {
@@ -145,6 +206,15 @@ type HeaderParameters struct {
 }
 
 type InvocationHTTPParametersObservation struct {
+
+	// Contains additional body string parameters for the connection. You can include up to 100 additional body string parameters per request. Each additional parameter counts towards the event payload size, which cannot exceed 64 KB. Each parameter can contain the following:
+	Body []BodyObservation `json:"body,omitempty" tf:"body,omitempty"`
+
+	// Contains additional header parameters for the connection. You can include up to 100 additional body string parameters per request. Each additional parameter counts towards the event payload size, which cannot exceed 64 KB. Each parameter can contain the following:
+	Header []HeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
+
+	// Contains additional query string parameters for the connection. You can include up to 100 additional body string parameters per request. Each additional parameter counts towards the event payload size, which cannot exceed 64 KB. Each parameter can contain the following:
+	QueryString []QueryStringObservation `json:"queryString,omitempty" tf:"query_string,omitempty"`
 }
 
 type InvocationHTTPParametersParameters struct {
@@ -163,6 +233,15 @@ type InvocationHTTPParametersParameters struct {
 }
 
 type OauthHTTPParametersBodyObservation struct {
+
+	// Specified whether the value is secret.
+	IsValueSecret *bool `json:"isValueSecret,omitempty" tf:"is_value_secret,omitempty"`
+
+	// Header Name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type OauthHTTPParametersBodyParameters struct {
@@ -181,6 +260,15 @@ type OauthHTTPParametersBodyParameters struct {
 }
 
 type OauthHTTPParametersHeaderObservation struct {
+
+	// Specified whether the value is secret.
+	IsValueSecret *bool `json:"isValueSecret,omitempty" tf:"is_value_secret,omitempty"`
+
+	// Header Name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type OauthHTTPParametersHeaderParameters struct {
@@ -199,6 +287,15 @@ type OauthHTTPParametersHeaderParameters struct {
 }
 
 type OauthHTTPParametersObservation struct {
+
+	// Contains additional body string parameters for the connection. You can include up to 100 additional body string parameters per request. Each additional parameter counts towards the event payload size, which cannot exceed 64 KB. Each parameter can contain the following:
+	Body []OauthHTTPParametersBodyObservation `json:"body,omitempty" tf:"body,omitempty"`
+
+	// Contains additional header parameters for the connection. You can include up to 100 additional body string parameters per request. Each additional parameter counts towards the event payload size, which cannot exceed 64 KB. Each parameter can contain the following:
+	Header []OauthHTTPParametersHeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
+
+	// Contains additional query string parameters for the connection. You can include up to 100 additional body string parameters per request. Each additional parameter counts towards the event payload size, which cannot exceed 64 KB. Each parameter can contain the following:
+	QueryString []OauthHTTPParametersQueryStringObservation `json:"queryString,omitempty" tf:"query_string,omitempty"`
 }
 
 type OauthHTTPParametersParameters struct {
@@ -217,6 +314,15 @@ type OauthHTTPParametersParameters struct {
 }
 
 type OauthHTTPParametersQueryStringObservation struct {
+
+	// Specified whether the value is secret.
+	IsValueSecret *bool `json:"isValueSecret,omitempty" tf:"is_value_secret,omitempty"`
+
+	// Header Name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type OauthHTTPParametersQueryStringParameters struct {
@@ -235,6 +341,18 @@ type OauthHTTPParametersQueryStringParameters struct {
 }
 
 type OauthObservation struct {
+
+	// The URL to the authorization endpoint.
+	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
+
+	// Contains the client parameters for OAuth authorization. Contains the following two parameters.
+	ClientParameters []ClientParametersObservation `json:"clientParameters,omitempty" tf:"client_parameters,omitempty"`
+
+	// A password for the authorization. Created and stored in AWS Secrets Manager.
+	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
+	// OAuth Http Parameters are additional credentials used to sign the request to the authorization endpoint to exchange the OAuth Client information for an access token. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
+	OauthHTTPParameters []OauthHTTPParametersObservation `json:"oauthHttpParameters,omitempty" tf:"oauth_http_parameters,omitempty"`
 }
 
 type OauthParameters struct {
@@ -257,6 +375,15 @@ type OauthParameters struct {
 }
 
 type QueryStringObservation struct {
+
+	// Specified whether the value is secret.
+	IsValueSecret *bool `json:"isValueSecret,omitempty" tf:"is_value_secret,omitempty"`
+
+	// Header Name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type QueryStringParameters struct {

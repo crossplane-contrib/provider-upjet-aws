@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: usageplankeys.apigateway.aws.upbound.io
 spec:
@@ -231,6 +231,15 @@ spec:
                 - keyType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -410,8 +419,23 @@ spec:
                   id:
                     description: ID of a usage plan key.
                     type: string
+                  keyId:
+                    description: Identifier of the API key resource.
+                    type: string
+                  keyType:
+                    description: Type of the API key resource. Currently, the valid
+                      key type is API_KEY.
+                    type: string
                   name:
                     description: Name of a usage plan key.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  usagePlanId:
+                    description: Id of the usage plan resource representing to associate
+                      the key to.
                     type: string
                   value:
                     description: Value of a usage plan key.
@@ -458,9 +482,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -14,6 +14,15 @@ import (
 )
 
 type ReportDeliveryChannelObservation struct {
+
+	// A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.
+	Formats []*string `json:"formats,omitempty" tf:"formats,omitempty"`
+
+	// The unique name of the S3 bucket that receives your reports.
+	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+
+	// The prefix for where Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.
+	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 }
 
 type ReportDeliveryChannelParameters struct {
@@ -42,8 +51,27 @@ type ReportPlanObservation struct {
 	// The deployment status of a report plan. The statuses are: CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED.
 	DeploymentStatus *string `json:"deploymentStatus,omitempty" tf:"deployment_status,omitempty"`
 
+	// The description of the report plan with a maximum of 1,024 characters
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The id of the backup report plan.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters, numbers, and underscores.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// An object that contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports. Detailed below.
+	ReportDeliveryChannel []ReportDeliveryChannelObservation `json:"reportDeliveryChannel,omitempty" tf:"report_delivery_channel,omitempty"`
+
+	// An object that identifies the report template for the report. Reports are built using a report template. Detailed below.
+	ReportSetting []ReportSettingObservation `json:"reportSetting,omitempty" tf:"report_setting,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -78,6 +106,15 @@ type ReportPlanParameters struct {
 }
 
 type ReportSettingObservation struct {
+
+	// Specifies the Amazon Resource Names (ARNs) of the frameworks a report covers.
+	FrameworkArns []*string `json:"frameworkArns,omitempty" tf:"framework_arns,omitempty"`
+
+	// Specifies the number of frameworks a report covers.
+	NumberOfFrameworks *float64 `json:"numberOfFrameworks,omitempty" tf:"number_of_frameworks,omitempty"`
+
+	// Identifies the report template for the report. Reports are built using a report template. The report templates are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.
+	ReportTemplate *string `json:"reportTemplate,omitempty" tf:"report_template,omitempty"`
 }
 
 type ReportSettingParameters struct {

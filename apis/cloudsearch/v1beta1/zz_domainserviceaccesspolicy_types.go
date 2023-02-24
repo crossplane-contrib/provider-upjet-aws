@@ -14,7 +14,18 @@ import (
 )
 
 type DomainServiceAccessPolicyObservation struct {
+
+	// The access rules you want to configure. These rules replace any existing rules. See the AWS documentation for details.
+	AccessPolicy *string `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
+
+	// The CloudSearch domain name the policy applies to.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DomainServiceAccessPolicyParameters struct {

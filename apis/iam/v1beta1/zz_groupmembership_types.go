@@ -14,7 +14,17 @@ import (
 )
 
 type GroupMembershipObservation struct {
+
+	// –  The IAM Group name to attach the list of users to
+	Group *string `json:"group,omitempty" tf:"group,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name to identify the Group Membership
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of IAM User names to associate with the Group
+	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 }
 
 type GroupMembershipParameters struct {

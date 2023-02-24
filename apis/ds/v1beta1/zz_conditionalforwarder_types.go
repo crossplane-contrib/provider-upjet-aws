@@ -14,7 +14,21 @@ import (
 )
 
 type ConditionalForwarderObservation struct {
+
+	// A list of forwarder IP addresses.
+	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
+
+	// ID of directory.
+	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The fully qualified domain name of the remote domain for which forwarders will be used.
+	RemoteDomainName *string `json:"remoteDomainName,omitempty" tf:"remote_domain_name,omitempty"`
 }
 
 type ConditionalForwarderParameters struct {

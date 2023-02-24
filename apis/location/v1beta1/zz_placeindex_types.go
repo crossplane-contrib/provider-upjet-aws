@@ -14,6 +14,9 @@ import (
 )
 
 type DataSourceConfigurationObservation struct {
+
+	// Specifies how the results of an operation will be stored by the caller. Valid values: SingleUse, Storage. Default: SingleUse.
+	IntendedUse *string `json:"intendedUse,omitempty" tf:"intended_use,omitempty"`
 }
 
 type DataSourceConfigurationParameters struct {
@@ -28,10 +31,26 @@ type PlaceIndexObservation struct {
 	// The timestamp for when the place index resource was created in ISO 8601 format.
 	CreateTime *string `json:"createTime,omitempty" tf:"create_time,omitempty"`
 
+	// Specifies the geospatial data provider for the new place index.
+	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
+
+	// Configuration block with the data storage option chosen for requesting Places. Detailed below.
+	DataSourceConfiguration []DataSourceConfigurationObservation `json:"dataSourceConfiguration,omitempty" tf:"data_source_configuration,omitempty"`
+
+	// The optional description for the place index resource.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across AWS.
 	IndexArn *string `json:"indexArn,omitempty" tf:"index_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: vaultlocks.glacier.aws.upbound.io
 spec:
@@ -166,6 +166,15 @@ spec:
                 - policy
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -342,8 +351,32 @@ spec:
             properties:
               atProvider:
                 properties:
+                  completeLock:
+                    description: Boolean whether to permanently apply this Glacier
+                      Lock Policy. Once completed, this cannot be undone. If set to
+                      false, the Glacier Lock Policy remains in a testing mode for
+                      24 hours. Changing this from false to true will show as resource
+                      recreation, which is expected. Changing this from true to false
+                      is not possible unless the Glacier Vault is recreated at the
+                      same time.
+                    type: boolean
                   id:
                     description: Glacier Vault name.
+                    type: string
+                  ignoreDeletionError:
+                    description: This should only be used in conjunction with complete_lock
+                      being set to true.
+                    type: boolean
+                  policy:
+                    description: JSON string containing the IAM policy to apply as
+                      the Glacier Vault Lock policy.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  vaultName:
+                    description: The name of the Glacier Vault.
                     type: string
                 type: object
               conditions:
@@ -387,9 +420,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

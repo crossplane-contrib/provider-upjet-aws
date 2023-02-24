@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: targets.appautoscaling.aws.upbound.io
 spec:
@@ -179,6 +179,15 @@ spec:
                 - scalableDimension
                 - serviceNamespace
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -357,6 +366,40 @@ spec:
                 properties:
                   id:
                     type: string
+                  maxCapacity:
+                    description: Max capacity of the scalable target.
+                    type: number
+                  minCapacity:
+                    description: Min capacity of the scalable target.
+                    type: number
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  resourceId:
+                    description: 'Resource type and unique identifier string for the
+                      resource associated with the scaling policy. Documentation can
+                      be found in the ResourceId parameter at: AWS Application Auto
+                      Scaling API Reference'
+                    type: string
+                  roleArn:
+                    description: ARN of the IAM role that allows Application AutoScaling
+                      to modify your scalable target on your behalf. This defaults
+                      to an IAM Service-Linked Role for most services and custom IAM
+                      Roles are ignored by the API for those namespaces. See the AWS
+                      Application Auto Scaling documentation for more information
+                      about how this service interacts with IAM.
+                    type: string
+                  scalableDimension:
+                    description: 'Scalable dimension of the scalable target. Documentation
+                      can be found in the ScalableDimension parameter at: AWS Application
+                      Auto Scaling API Reference'
+                    type: string
+                  serviceNamespace:
+                    description: 'AWS service namespace of the scalable target. Documentation
+                      can be found in the ServiceNamespace parameter at: AWS Application
+                      Auto Scaling API Reference'
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -399,9 +442,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

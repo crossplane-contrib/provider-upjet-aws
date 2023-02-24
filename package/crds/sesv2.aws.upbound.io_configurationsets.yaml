@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: configurationsets.sesv2.aws.upbound.io
 spec:
@@ -145,6 +145,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -324,7 +333,28 @@ spec:
                   arn:
                     description: ARN of the Configuration Set.
                     type: string
+                  deliveryOptions:
+                    description: An object that defines the dedicated IP pool that
+                      is used to send emails that you send using the configuration
+                      set.
+                    items:
+                      properties:
+                        sendingPoolName:
+                          description: The name of the dedicated IP pool to associate
+                            with the configuration set.
+                          type: string
+                        tlsPolicy:
+                          description: 'Specifies whether messages that use the configuration
+                            set are required to use Transport Layer Security (TLS).
+                            Valid values: REQUIRE, OPTIONAL.'
+                          type: string
+                      type: object
+                    type: array
                   id:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   reputationOptions:
                     description: An object that defines whether or not Amazon SES
@@ -338,12 +368,60 @@ spec:
                             is given a fresh start, your reputation metrics are calculated
                             starting from the date of the fresh start.
                           type: string
+                        reputationMetricsEnabled:
+                          description: If true, tracking of reputation metrics is
+                            enabled for the configuration set. If false, tracking
+                            of reputation metrics is disabled for the configuration
+                            set.
+                          type: boolean
                       type: object
                     type: array
+                  sendingOptions:
+                    description: An object that defines whether or not Amazon SES
+                      can send email that you send using the configuration set.
+                    items:
+                      properties:
+                        sendingEnabled:
+                          description: If true, email sending is enabled for the configuration
+                            set. If false, email sending is disabled for the configuration
+                            set.
+                          type: boolean
+                      type: object
+                    type: array
+                  suppressionOptions:
+                    description: An object that contains information about the suppression
+                      list preferences for your account.
+                    items:
+                      properties:
+                        suppressedReasons:
+                          description: 'A list that contains the reasons that email
+                            addresses are automatically added to the suppression list
+                            for your account. Valid values: BOUNCE, COMPLAINT.'
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                  trackingOptions:
+                    description: An object that defines the open and click tracking
+                      options for emails that you send using the configuration set.
+                    items:
+                      properties:
+                        customRedirectDomain:
+                          description: The domain to use for tracking open and click
+                            events.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -386,9 +464,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

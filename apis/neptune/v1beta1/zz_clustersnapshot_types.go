@@ -21,6 +21,9 @@ type ClusterSnapshotObservation struct {
 	// List of EC2 Availability Zones that instances in the DB cluster snapshot can be restored in.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
+	// The DB Cluster Identifier from which to take the snapshot.
+	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
+
 	// The Amazon Resource Name (ARN) for the DB Cluster Snapshot.
 	DBClusterSnapshotArn *string `json:"dbClusterSnapshotArn,omitempty" tf:"db_cluster_snapshot_arn,omitempty"`
 
@@ -40,6 +43,10 @@ type ClusterSnapshotObservation struct {
 
 	// Port that the DB cluster was listening on at the time of the snapshot.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 

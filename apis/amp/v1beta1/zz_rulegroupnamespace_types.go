@@ -14,7 +14,18 @@ import (
 )
 
 type RuleGroupNamespaceObservation struct {
+
+	// the rule group namespace data that you want to be applied. See more in AWS Docs.
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ID of the prometheus workspace the rule group namespace should be linked to
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type RuleGroupNamespaceParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: methods.apigateway.aws.upbound.io
 spec:
@@ -353,6 +353,15 @@ spec:
                 - httpMethod
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -529,7 +538,66 @@ spec:
             properties:
               atProvider:
                 properties:
+                  apiKeyRequired:
+                    description: Specify if the method requires an API key
+                    type: boolean
+                  authorization:
+                    description: Type of authorization used for the method (NONE,
+                      CUSTOM, AWS_IAM, COGNITO_USER_POOLS)
+                    type: string
+                  authorizationScopes:
+                    description: Authorization scopes used when the authorization
+                      is COGNITO_USER_POOLS
+                    items:
+                      type: string
+                    type: array
+                  authorizerId:
+                    description: Authorizer id to be used when the authorization is
+                      CUSTOM or COGNITO_USER_POOLS
+                    type: string
+                  httpMethod:
+                    description: HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
+                      ANY)
+                    type: string
                   id:
+                    type: string
+                  operationName:
+                    description: Function name that will be given to the method when
+                      generating an SDK through API Gateway. If omitted, API Gateway
+                      will generate a function name based on the resource path and
+                      HTTP verb.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  requestModels:
+                    additionalProperties:
+                      type: string
+                    description: Map of the API models used for the request's content
+                      type where key is the content type (e.g., application/json)
+                      and value is either Error, Empty (built-in models) or aws_api_gateway_model's
+                      name.
+                    type: object
+                  requestParameters:
+                    additionalProperties:
+                      type: boolean
+                    description: 'Map of request parameters (from the path, query
+                      string and headers) that should be passed to the integration.
+                      The boolean value indicates whether the parameter is required
+                      (true) or optional (false). For example: request_parameters
+                      = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param"
+                      = true} would define that the header X-Some-Header and the query
+                      string some-query-param must be provided in the request.'
+                    type: object
+                  requestValidatorId:
+                    description: ID of a aws_api_gateway_request_validator
+                    type: string
+                  resourceId:
+                    description: API resource ID
+                    type: string
+                  restApiId:
+                    description: ID of the associated REST API
                     type: string
                 type: object
               conditions:
@@ -573,9 +641,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

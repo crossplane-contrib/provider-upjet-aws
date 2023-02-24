@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: snapshots.rds.aws.upbound.io
 spec:
@@ -153,6 +153,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -337,6 +346,10 @@ spec:
                     description: Specifies the name of the Availability Zone the DB
                       instance was located in at the time of the DB snapshot.
                     type: string
+                  dbInstanceIdentifier:
+                    description: The DB Instance Identifier from which to take the
+                      snapshot.
+                    type: string
                   dbSnapshotArn:
                     description: The Amazon Resource Name (ARN) for the DB snapshot.
                     type: string
@@ -366,6 +379,10 @@ spec:
                     type: string
                   port:
                     type: number
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   snapshotType:
                     type: string
                   sourceDbSnapshotIdentifier:
@@ -383,6 +400,11 @@ spec:
                   storageType:
                     description: Specifies the storage type associated with DB snapshot.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -435,9 +457,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

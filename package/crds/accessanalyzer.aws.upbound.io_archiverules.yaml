@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: archiverules.accessanalyzer.aws.upbound.io
 spec:
@@ -105,6 +105,15 @@ spec:
                 - filter
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -281,8 +290,43 @@ spec:
             properties:
               atProvider:
                 properties:
+                  analyzerName:
+                    description: Analyzer name.
+                    type: string
+                  filter:
+                    description: Filter criteria for the archive rule. See Filter
+                      for more details.
+                    items:
+                      properties:
+                        contains:
+                          description: Contains comparator.
+                          items:
+                            type: string
+                          type: array
+                        criteria:
+                          description: Filter criteria.
+                          type: string
+                        eq:
+                          description: Equals comparator.
+                          items:
+                            type: string
+                          type: array
+                        exists:
+                          description: Boolean comparator.
+                          type: string
+                        neq:
+                          description: Not Equals comparator.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   id:
                     description: 'Resource ID in the format: analyzer_name/rule_name.'
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -326,9 +370,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

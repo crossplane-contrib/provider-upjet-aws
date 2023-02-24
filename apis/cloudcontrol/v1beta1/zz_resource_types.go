@@ -14,10 +14,30 @@ import (
 )
 
 type ResourceObservation struct {
+
+	// JSON string matching the CloudFormation resource type schema with desired configuration.
+	DesiredState *string `json:"desiredState,omitempty" tf:"desired_state,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// JSON string matching the CloudFormation resource type schema with current configuration. Underlying attributes can be referenced via the jsondecode() function, for example, jsondecode(data.aws_cloudcontrolapi_resource.example.properties)["example"].
 	Properties *string `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Amazon Resource Name (ARN) of the IAM Role to assume for operations.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// JSON string of the CloudFormation resource type schema which is used for plan time validation where possible. Automatically fetched if not provided. In large scale environments with multiple resources using the same type_name, it is recommended to fetch the schema once via the aws_cloudformation_type data source and use this argument to reduce DescribeType API operation throttling. This value is marked sensitive only to prevent large plan differences from showing.
+	SchemaSecretRef *v1.SecretKeySelector `json:"schemaSecretRef,omitempty" tf:"-"`
+
+	// CloudFormation resource type name. For example, AWS::EC2::VPC.
+	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
+
+	// Identifier of the CloudFormation resource type version.
+	TypeVersionID *string `json:"typeVersionId,omitempty" tf:"type_version_id,omitempty"`
 }
 
 type ResourceParameters struct {

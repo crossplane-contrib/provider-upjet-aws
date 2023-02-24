@@ -15,6 +15,12 @@ import (
 
 type RolePolicyAttachmentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ARN of the policy you want to apply
+	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
+
+	// The name of the IAM role to which the policy should be applied
+	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
 type RolePolicyAttachmentParameters struct {

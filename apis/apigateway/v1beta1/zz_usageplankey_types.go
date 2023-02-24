@@ -18,8 +18,21 @@ type UsagePlanKeyObservation struct {
 	// ID of a usage plan key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Identifier of the API key resource.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Type of the API key resource. Currently, the valid key type is API_KEY.
+	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
+
 	// Name of a usage plan key.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Id of the usage plan resource representing to associate the key to.
+	UsagePlanID *string `json:"usagePlanId,omitempty" tf:"usage_plan_id,omitempty"`
 
 	// Value of a usage plan key.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`

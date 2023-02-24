@@ -18,11 +18,24 @@ type PublicKeyObservation struct {
 	// Internal value used by CloudFront to allow future updates to the public key configuration.
 	CallerReference *string `json:"callerReference,omitempty" tf:"caller_reference,omitempty"`
 
+	// An optional comment about the public key.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// The encoded public key that you want to add to CloudFront to use with features like field-level encryption.
+	EncodedKeySecretRef v1.SecretKeySelector `json:"encodedKeySecretRef" tf:"-"`
+
 	// The current version of the public key. For example: E2QWRUHAPOMQZL.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
 	// The identifier for the public key. For example: K3D5EWEUDCCXON.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name for the public key.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type PublicKeyParameters struct {

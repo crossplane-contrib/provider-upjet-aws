@@ -14,6 +14,15 @@ import (
 )
 
 type AttachmentsSourceObservation struct {
+
+	// The key describing the location of an attachment to a document. Valid key types include: SourceUrl and S3FileUrl
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The name of the document attachment file
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value describing the location of an attachment to a document
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type AttachmentsSourceParameters struct {
@@ -34,6 +43,12 @@ type AttachmentsSourceParameters struct {
 type DocumentObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// One or more configuration blocks describing attachments sources to a version of a document. Defined below.
+	AttachmentsSource []AttachmentsSourceObservation `json:"attachmentsSource,omitempty" tf:"attachments_source,omitempty"`
+
+	// The JSON or YAML content of the document.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
 	// The date the document was created.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
@@ -42,6 +57,12 @@ type DocumentObservation struct {
 
 	// The description of the document.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The format of the document. Valid document types include: JSON and YAML
+	DocumentFormat *string `json:"documentFormat,omitempty" tf:"document_format,omitempty"`
+
+	// The type of the document. Valid document types include: Automation, Command, Package, Policy, and Session
+	DocumentType *string `json:"documentType,omitempty" tf:"document_type,omitempty"`
 
 	// The document version.
 	DocumentVersion *string `json:"documentVersion,omitempty" tf:"document_version,omitempty"`
@@ -63,8 +84,15 @@ type DocumentObservation struct {
 	// The parameters that are available to this document.
 	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
+	// Additional Permissions to attach to the document. See Permissions below for details.
+	Permissions map[string]*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
 	// A list of OS platforms compatible with this SSM document, either "Windows" or "Linux".
 	PlatformTypes []*string `json:"platformTypes,omitempty" tf:"platform_types,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The schema version of the document.
 	SchemaVersion *string `json:"schemaVersion,omitempty" tf:"schema_version,omitempty"`
@@ -72,8 +100,17 @@ type DocumentObservation struct {
 	// "Creating", "Active" or "Deleting". The current status of the document.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS Resource Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
+
+	// A field specifying the version of the artifact you are creating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document and cannot be changed for an existing document version.
+	VersionName *string `json:"versionName,omitempty" tf:"version_name,omitempty"`
 }
 
 type DocumentParameters struct {

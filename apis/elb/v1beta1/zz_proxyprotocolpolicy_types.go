@@ -17,6 +17,18 @@ type ProxyProtocolPolicyObservation struct {
 
 	// The ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of instance ports to which the policy
+	// should be applied. This can be specified if the protocol is SSL or TCP.
+	InstancePorts []*string `json:"instancePorts,omitempty" tf:"instance_ports,omitempty"`
+
+	// The load balancer to which the policy
+	// should be attached.
+	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ProxyProtocolPolicyParameters struct {

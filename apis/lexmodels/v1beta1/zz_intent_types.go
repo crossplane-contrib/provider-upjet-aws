@@ -14,6 +14,14 @@ import (
 )
 
 type CodeHookObservation struct {
+
+	// The version of the request-response that you want Amazon Lex to use
+	// to invoke your Lambda function. For more information, see
+	// Using Lambda Functions. Must be less than or equal to 5 characters in length.
+	MessageVersion *string `json:"messageVersion,omitempty" tf:"message_version,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lambda function.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type CodeHookParameters struct {
@@ -30,6 +38,16 @@ type CodeHookParameters struct {
 }
 
 type ConclusionStatementMessageObservation struct {
+
+	// The text of the message. Must be less than or equal to 1000 characters in length.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The content type of the message string.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ConclusionStatementMessageParameters struct {
@@ -49,6 +67,16 @@ type ConclusionStatementMessageParameters struct {
 }
 
 type ConclusionStatementObservation struct {
+
+	// A set of messages, each of which provides a message string and its type.
+	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
+	// Attributes are documented under message. Must contain between 1 and 15 messages.
+	Message []ConclusionStatementMessageObservation `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The response card. Amazon Lex will substitute session attributes and
+	// slot values into the response card. For more information, see
+	// Example: Using a Response Card. Must be less than or equal to 50000 characters in length.
+	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
 }
 
 type ConclusionStatementParameters struct {
@@ -67,6 +95,16 @@ type ConclusionStatementParameters struct {
 }
 
 type ConfirmationPromptMessageObservation struct {
+
+	// The text of the message. Must be less than or equal to 1000 characters in length.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The content type of the message string.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ConfirmationPromptMessageParameters struct {
@@ -86,6 +124,19 @@ type ConfirmationPromptMessageParameters struct {
 }
 
 type ConfirmationPromptObservation struct {
+
+	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
+	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+
+	// A set of messages, each of which provides a message string and its type.
+	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
+	// Attributes are documented under message. Must contain between 1 and 15 messages.
+	Message []ConfirmationPromptMessageObservation `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The response card. Amazon Lex will substitute session attributes and
+	// slot values into the response card. For more information, see
+	// Example: Using a Response Card. Must be less than or equal to 50000 characters in length.
+	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
 }
 
 type ConfirmationPromptParameters struct {
@@ -108,6 +159,14 @@ type ConfirmationPromptParameters struct {
 }
 
 type DialogCodeHookObservation struct {
+
+	// The version of the request-response that you want Amazon Lex to use
+	// to invoke your Lambda function. For more information, see
+	// Using Lambda Functions. Must be less than or equal to 5 characters in length.
+	MessageVersion *string `json:"messageVersion,omitempty" tf:"message_version,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lambda function.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type DialogCodeHookParameters struct {
@@ -124,6 +183,14 @@ type DialogCodeHookParameters struct {
 }
 
 type FollowUpPromptObservation struct {
+
+	// Prompts for information from the user. Attributes are documented under prompt.
+	Prompt []PromptObservation `json:"prompt,omitempty" tf:"prompt,omitempty"`
+
+	// If the user answers "no" to the question defined in the prompt field,
+	// Amazon Lex responds with this statement to acknowledge that the intent was canceled. Attributes are
+	// documented below under statement.
+	RejectionStatement []RejectionStatementObservation `json:"rejectionStatement,omitempty" tf:"rejection_statement,omitempty"`
 }
 
 type FollowUpPromptParameters struct {
@@ -140,6 +207,14 @@ type FollowUpPromptParameters struct {
 }
 
 type FulfillmentActivityObservation struct {
+
+	// A description of the Lambda function that is run to fulfill the intent.
+	// Required if type is CodeHook. Attributes are documented under code_hook.
+	CodeHook []CodeHookObservation `json:"codeHook,omitempty" tf:"code_hook,omitempty"`
+
+	// How the intent should be fulfilled, either by running a Lambda function or by
+	// returning the slot data to the client application. Type can be either ReturnIntent or CodeHook, as documented here.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FulfillmentActivityParameters struct {
@@ -164,13 +239,72 @@ type IntentObservation_2 struct {
 	// included as an argument because the resource will add it automatically when updating the intent.
 	Checksum *string `json:"checksum,omitempty" tf:"checksum,omitempty"`
 
+	// The statement that you want Amazon Lex to convey to the user
+	// after the intent is successfully fulfilled by the Lambda function. This element is relevant only if
+	// you provide a Lambda function in the fulfillment_activity. If you return the intent to the client
+	// application, you can't specify this element. The follow_up_prompt and conclusion_statement are
+	// mutually exclusive. You can specify only one. Attributes are documented under statement.
+	ConclusionStatement []ConclusionStatementObservation `json:"conclusionStatement,omitempty" tf:"conclusion_statement,omitempty"`
+
+	// Prompts the user to confirm the intent. This question should
+	// have a yes or no answer. You you must provide both the rejection_statement and confirmation_prompt,
+	// or neither. Attributes are documented under prompt.
+	ConfirmationPrompt []ConfirmationPromptObservation `json:"confirmationPrompt,omitempty" tf:"confirmation_prompt,omitempty"`
+
+	// Determines if a new slot type version is created when the initial
+	// resource is created and on each update. Defaults to false.
+	CreateVersion *bool `json:"createVersion,omitempty" tf:"create_version,omitempty"`
+
 	// The date when the intent version was created.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
+
+	// A description of the intent. Must be less than or equal to 200 characters in length.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies a Lambda function to invoke for each user input. You can
+	// invoke this Lambda function to personalize user interaction. Attributes are documented under code_hook.
+	DialogCodeHook []DialogCodeHookObservation `json:"dialogCodeHook,omitempty" tf:"dialog_code_hook,omitempty"`
+
+	// Amazon Lex uses this prompt to solicit additional activity after
+	// fulfilling an intent. For example, after the OrderPizza intent is fulfilled, you might prompt the
+	// user to order a drink. The follow_up_prompt field and the conclusion_statement field are mutually
+	// exclusive. You can specify only one. Attributes are documented under follow_up_prompt.
+	FollowUpPrompt []FollowUpPromptObservation `json:"followUpPrompt,omitempty" tf:"follow_up_prompt,omitempty"`
+
+	// Describes how the intent is fulfilled. For example, after a
+	// user provides all of the information for a pizza order, fulfillment_activity defines how the bot
+	// places an order with a local pizza store. Attributes are documented under fulfillment_activity.
+	FulfillmentActivity []FulfillmentActivityObservation `json:"fulfillmentActivity,omitempty" tf:"fulfillment_activity,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The date when the $LATEST version of this intent was updated.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
+
+	// A unique identifier for the built-in intent to base this
+	// intent on. To find the signature for an intent, see
+	// Standard Built-in Intents
+	// in the Alexa Skills Kit.
+	ParentIntentSignature *string `json:"parentIntentSignature,omitempty" tf:"parent_intent_signature,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// When the user answers "no" to the question defined in
+	// confirmation_prompt, Amazon Lex responds with this statement to acknowledge that the intent was
+	// canceled. You must provide both the rejection_statement and the confirmation_prompt, or neither.
+	// Attributes are documented under statement.
+	RejectionStatement []IntentRejectionStatementObservation `json:"rejectionStatement,omitempty" tf:"rejection_statement,omitempty"`
+
+	// An array of utterances (strings) that a user might say to signal
+	// the intent. For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".
+	// In each utterance, a slot name is enclosed in curly braces. Must have between 1 and 10 items in the list, and each item must be less than or equal to 200 characters in length.
+	SampleUtterances []*string `json:"sampleUtterances,omitempty" tf:"sample_utterances,omitempty"`
+
+	// An list of intent slots. At runtime, Amazon Lex elicits required slot values
+	// from the user using prompts defined in the slots. Attributes are documented under slot.
+	Slot []SlotObservation `json:"slot,omitempty" tf:"slot,omitempty"`
 
 	// The version of the bot.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -251,6 +385,16 @@ type IntentParameters_2 struct {
 }
 
 type IntentRejectionStatementMessageObservation struct {
+
+	// The text of the message. Must be less than or equal to 1000 characters in length.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The content type of the message string.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type IntentRejectionStatementMessageParameters struct {
@@ -270,6 +414,16 @@ type IntentRejectionStatementMessageParameters struct {
 }
 
 type IntentRejectionStatementObservation struct {
+
+	// A set of messages, each of which provides a message string and its type.
+	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
+	// Attributes are documented under message. Must contain between 1 and 15 messages.
+	Message []IntentRejectionStatementMessageObservation `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The response card. Amazon Lex will substitute session attributes and
+	// slot values into the response card. For more information, see
+	// Example: Using a Response Card. Must be less than or equal to 50000 characters in length.
+	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
 }
 
 type IntentRejectionStatementParameters struct {
@@ -288,6 +442,16 @@ type IntentRejectionStatementParameters struct {
 }
 
 type PromptMessageObservation struct {
+
+	// The text of the message. Must be less than or equal to 1000 characters in length.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The content type of the message string.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type PromptMessageParameters struct {
@@ -307,6 +471,19 @@ type PromptMessageParameters struct {
 }
 
 type PromptObservation struct {
+
+	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
+	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+
+	// A set of messages, each of which provides a message string and its type.
+	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
+	// Attributes are documented under message. Must contain between 1 and 15 messages.
+	Message []PromptMessageObservation `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The response card. Amazon Lex will substitute session attributes and
+	// slot values into the response card. For more information, see
+	// Example: Using a Response Card. Must be less than or equal to 50000 characters in length.
+	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
 }
 
 type PromptParameters struct {
@@ -329,6 +506,16 @@ type PromptParameters struct {
 }
 
 type RejectionStatementMessageObservation struct {
+
+	// The text of the message. Must be less than or equal to 1000 characters in length.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The content type of the message string.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type RejectionStatementMessageParameters struct {
@@ -348,6 +535,16 @@ type RejectionStatementMessageParameters struct {
 }
 
 type RejectionStatementObservation struct {
+
+	// A set of messages, each of which provides a message string and its type.
+	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
+	// Attributes are documented under message. Must contain between 1 and 15 messages.
+	Message []RejectionStatementMessageObservation `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The response card. Amazon Lex will substitute session attributes and
+	// slot values into the response card. For more information, see
+	// Example: Using a Response Card. Must be less than or equal to 50000 characters in length.
+	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
 }
 
 type RejectionStatementParameters struct {
@@ -366,6 +563,42 @@ type RejectionStatementParameters struct {
 }
 
 type SlotObservation struct {
+
+	// A description of the bot. Must be less than or equal to 200 characters in length.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the intent slot that you want to create. The name is case sensitive. Must be less than or equal to 100 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Directs Lex the order in which to elicit this slot value from the user.
+	// For example, if the intent has two slots with priorities 1 and 2, AWS Lex first elicits a value for
+	// the slot with priority 1. If multiple slots share the same priority, the order in which Lex elicits
+	// values is arbitrary. Must be between 1 and 100.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The response card. Amazon Lex will substitute session attributes and
+	// slot values into the response card. For more information, see
+	// Example: Using a Response Card. Must be less than or equal to 50000 characters in length.
+	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
+
+	// If you know a specific pattern with which users might respond to
+	// an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy. This
+	// is optional. In most cases, Amazon Lex is capable of understanding user utterances. Must have between 1 and 10 items in the list, and each item must be less than or equal to 200 characters in length.
+	SampleUtterances []*string `json:"sampleUtterances,omitempty" tf:"sample_utterances,omitempty"`
+
+	// Specifies whether the slot is required or optional.
+	SlotConstraint *string `json:"slotConstraint,omitempty" tf:"slot_constraint,omitempty"`
+
+	// The type of the slot, either a custom slot type that you defined or one of
+	// the built-in slot types. Must be less than or equal to 100 characters in length.
+	SlotType *string `json:"slotType,omitempty" tf:"slot_type,omitempty"`
+
+	// The version of the slot type. Must be less than or equal to 64 characters in length.
+	SlotTypeVersion *string `json:"slotTypeVersion,omitempty" tf:"slot_type_version,omitempty"`
+
+	// The prompt that Amazon Lex uses to elicit the slot value
+	// from the user. Attributes are documented under prompt.
+	ValueElicitationPrompt []ValueElicitationPromptObservation `json:"valueElicitationPrompt,omitempty" tf:"value_elicitation_prompt,omitempty"`
 }
 
 type SlotParameters struct {
@@ -417,6 +650,16 @@ type SlotParameters struct {
 }
 
 type ValueElicitationPromptMessageObservation struct {
+
+	// The text of the message. Must be less than or equal to 1000 characters in length.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The content type of the message string.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ValueElicitationPromptMessageParameters struct {
@@ -436,6 +679,19 @@ type ValueElicitationPromptMessageParameters struct {
 }
 
 type ValueElicitationPromptObservation struct {
+
+	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
+	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+
+	// A set of messages, each of which provides a message string and its type.
+	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
+	// Attributes are documented under message. Must contain between 1 and 15 messages.
+	Message []ValueElicitationPromptMessageObservation `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The response card. Amazon Lex will substitute session attributes and
+	// slot values into the response card. For more information, see
+	// Example: Using a Response Card. Must be less than or equal to 50000 characters in length.
+	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
 }
 
 type ValueElicitationPromptParameters struct {

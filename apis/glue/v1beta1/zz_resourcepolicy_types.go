@@ -14,7 +14,18 @@ import (
 )
 
 type ResourcePolicyObservation struct {
+
+	// Indicates that you are using both methods to grant cross-account. Valid values are TRUE and FALSE.
+	EnableHybrid *string `json:"enableHybrid,omitempty" tf:"enable_hybrid,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// –  The policy to be applied to the aws glue data catalog.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ResourcePolicyParameters struct {

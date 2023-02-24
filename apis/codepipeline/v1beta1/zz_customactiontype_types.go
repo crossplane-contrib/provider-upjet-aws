@@ -14,6 +14,27 @@ import (
 )
 
 type ConfigurationPropertyObservation struct {
+
+	// The description of the action configuration property.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether the configuration property is a key.
+	Key *bool `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The name of the action configuration property.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates that the property will be used in conjunction with PollForJobs.
+	Queryable *bool `json:"queryable,omitempty" tf:"queryable,omitempty"`
+
+	// Whether the configuration property is a required value.
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+
+	// Whether the configuration property is secret.
+	Secret *bool `json:"secret,omitempty" tf:"secret,omitempty"`
+
+	// The type of the configuration property. Valid values: String, Number, Boolean
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ConfigurationPropertyParameters struct {
@@ -52,14 +73,42 @@ type CustomActionTypeObservation struct {
 	// The action ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The category of the custom action. Valid values: Source, Build, Deploy, Test, Invoke, Approval
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// The configuration properties for the custom action. Max 10 items.
+	ConfigurationProperty []ConfigurationPropertyObservation `json:"configurationProperty,omitempty" tf:"configuration_property,omitempty"`
+
 	// Composed of category, provider and version
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The details of the input artifact for the action.
+	InputArtifactDetails []InputArtifactDetailsObservation `json:"inputArtifactDetails,omitempty" tf:"input_artifact_details,omitempty"`
+
+	// The details of the output artifact of the action.
+	OutputArtifactDetails []OutputArtifactDetailsObservation `json:"outputArtifactDetails,omitempty" tf:"output_artifact_details,omitempty"`
 
 	// The creator of the action being called.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
+	// The provider of the service used in the custom action
+	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The settings for an action type.
+	Settings []SettingsObservation `json:"settings,omitempty" tf:"settings,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The version identifier of the custom action.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type CustomActionTypeParameters struct {
@@ -103,6 +152,12 @@ type CustomActionTypeParameters struct {
 }
 
 type InputArtifactDetailsObservation struct {
+
+	// The maximum number of artifacts allowed for the action type. Min: 0, Max: 5
+	MaximumCount *float64 `json:"maximumCount,omitempty" tf:"maximum_count,omitempty"`
+
+	// The minimum number of artifacts allowed for the action type. Min: 0, Max: 5
+	MinimumCount *float64 `json:"minimumCount,omitempty" tf:"minimum_count,omitempty"`
 }
 
 type InputArtifactDetailsParameters struct {
@@ -117,6 +172,12 @@ type InputArtifactDetailsParameters struct {
 }
 
 type OutputArtifactDetailsObservation struct {
+
+	// The maximum number of artifacts allowed for the action type. Min: 0, Max: 5
+	MaximumCount *float64 `json:"maximumCount,omitempty" tf:"maximum_count,omitempty"`
+
+	// The minimum number of artifacts allowed for the action type. Min: 0, Max: 5
+	MinimumCount *float64 `json:"minimumCount,omitempty" tf:"minimum_count,omitempty"`
 }
 
 type OutputArtifactDetailsParameters struct {
@@ -131,6 +192,18 @@ type OutputArtifactDetailsParameters struct {
 }
 
 type SettingsObservation struct {
+
+	// The URL returned to the AWS CodePipeline console that provides a deep link to the resources of the external system.
+	EntityURLTemplate *string `json:"entityUrlTemplate,omitempty" tf:"entity_url_template,omitempty"`
+
+	// The URL returned to the AWS CodePipeline console that contains a link to the top-level landing page for the external system.
+	ExecutionURLTemplate *string `json:"executionUrlTemplate,omitempty" tf:"execution_url_template,omitempty"`
+
+	// The URL returned to the AWS CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.
+	RevisionURLTemplate *string `json:"revisionUrlTemplate,omitempty" tf:"revision_url_template,omitempty"`
+
+	// The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.
+	ThirdPartyConfigurationURL *string `json:"thirdPartyConfigurationUrl,omitempty" tf:"third_party_configuration_url,omitempty"`
 }
 
 type SettingsParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: rolealiases.iot.aws.upbound.io
 spec:
@@ -157,6 +157,15 @@ spec:
                 - alias
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -333,10 +342,26 @@ spec:
             properties:
               atProvider:
                 properties:
+                  alias:
+                    description: The name of the role alias.
+                    type: string
                   arn:
                     description: The ARN assigned by AWS to this role alias.
                     type: string
+                  credentialDuration:
+                    description: The duration of the credential, in seconds. If you
+                      do not specify a value for this setting, the default maximum
+                      of one hour is applied. This setting can have a value from 900
+                      seconds (15 minutes) to 43200 seconds (12 hours).
+                    type: number
                   id:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleArn:
+                    description: The identity of the role to which the alias refers.
                     type: string
                 type: object
               conditions:
@@ -380,9 +405,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

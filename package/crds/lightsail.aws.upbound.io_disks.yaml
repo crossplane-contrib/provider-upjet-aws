@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: disks.lightsail.aws.upbound.io
 spec:
@@ -84,6 +84,15 @@ spec:
                 - region
                 - sizeInGb
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -263,18 +272,33 @@ spec:
                   arn:
                     description: The ARN of the Lightsail load balancer.
                     type: string
+                  availabilityZone:
+                    description: The Availability Zone in which to create your disk.
+                    type: string
                   createdAt:
                     description: The timestamp when the load balancer was created.
                     type: string
                   id:
                     description: The name of the disk  (matches name).
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  sizeInGb:
+                    description: The instance port the load balancer will connect.
+                    type: number
                   supportCode:
                     description: The support code for the disk. Include this code
                       in your email to support when you have questions about a disk
                       in Lightsail. This code enables our support team to look up
                       your Lightsail information more easily.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -324,9 +348,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

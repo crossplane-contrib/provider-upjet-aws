@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: vpcipampoolcidrallocations.ec2.aws.upbound.io
 spec:
@@ -166,6 +166,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -343,11 +352,35 @@ spec:
             properties:
               atProvider:
                 properties:
+                  cidr:
+                    description: The CIDR you want to assign to the pool.
+                    type: string
+                  description:
+                    description: The description for the allocation.
+                    type: string
+                  disallowedCidrs:
+                    description: Exclude a particular CIDR range from being returned
+                      by the pool.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The ID of the allocation.
                     type: string
                   ipamPoolAllocationId:
                     description: The ID of the allocation.
+                    type: string
+                  ipamPoolId:
+                    description: The ID of the pool to which you want to assign a
+                      CIDR.
+                    type: string
+                  netmaskLength:
+                    description: 'The netmask length of the CIDR you would like to
+                      allocate to the IPAM pool. Valid Values: 0-32.'
+                    type: number
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   resourceId:
                     description: The ID of the resource.
@@ -400,9 +433,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

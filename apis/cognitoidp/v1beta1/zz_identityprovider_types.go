@@ -14,7 +14,30 @@ import (
 )
 
 type IdentityProviderObservation struct {
+
+	// The map of attribute mapping of user pool attributes. AttributeMapping in AWS API documentation
+	AttributeMapping map[string]*string `json:"attributeMapping,omitempty" tf:"attribute_mapping,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The list of identity providers.
+	IdpIdentifiers []*string `json:"idpIdentifiers,omitempty" tf:"idp_identifiers,omitempty"`
+
+	// The map of identity details, such as access token
+	ProviderDetails map[string]*string `json:"providerDetails,omitempty" tf:"provider_details,omitempty"`
+
+	// The provider name
+	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
+
+	// The provider type.  See AWS API for valid values
+	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The user pool id
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 }
 
 type IdentityProviderParameters struct {

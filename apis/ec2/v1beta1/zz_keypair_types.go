@@ -30,6 +30,16 @@ type KeyPairObservation struct {
 	// The type of key pair.
 	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 
+	// The public key material.
+	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }

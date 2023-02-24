@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: databases.timestreamwrite.aws.upbound.io
 spec:
@@ -156,6 +156,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -338,10 +347,26 @@ spec:
                   id:
                     description: The name of the Timestream database.
                     type: string
+                  kmsKeyId:
+                    description: The ARN (not Alias ARN) of the KMS key to be used
+                      to encrypt the data stored in the database. If the KMS key is
+                      not specified, the database will be encrypted with a Timestream
+                      managed KMS key located in your account. Refer to AWS managed
+                      KMS keys for more info.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   tableCount:
                     description: The total number of tables found within the Timestream
                       database.
                     type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -391,9 +416,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

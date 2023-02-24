@@ -14,6 +14,13 @@ import (
 )
 
 type PublicVirtualInterfaceObservation struct {
+
+	// The address family for the BGP peer. ipv4  or ipv6.
+	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
+
+	// The IPv4 CIDR address to use to send traffic to Amazon. Required for IPv4 BGP peers.
+	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
+
 	AmazonSideAsn *string `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
 
 	// The ARN of the virtual interface.
@@ -22,11 +29,39 @@ type PublicVirtualInterfaceObservation struct {
 	// The Direct Connect endpoint on which the virtual interface terminates.
 	AwsDevice *string `json:"awsDevice,omitempty" tf:"aws_device,omitempty"`
 
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+
+	// The authentication key for BGP configuration.
+	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
+
+	// The ID of the Direct Connect connection (or LAG) on which to create the virtual interface.
+	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
+
+	// The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers.
+	CustomerAddress *string `json:"customerAddress,omitempty" tf:"customer_address,omitempty"`
+
 	// The ID of the virtual interface.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name for the virtual interface.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A list of routes to be advertised to the AWS network in this region.
+	RouteFilterPrefixes []*string `json:"routeFilterPrefixes,omitempty" tf:"route_filter_prefixes,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The VLAN ID.
+	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 type PublicVirtualInterfaceParameters struct {

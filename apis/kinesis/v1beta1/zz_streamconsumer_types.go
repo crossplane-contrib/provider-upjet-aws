@@ -23,6 +23,16 @@ type StreamConsumerObservation struct {
 
 	// Amazon Resource Name (ARN) of the stream consumer.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the stream consumer.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// –  Amazon Resource Name (ARN) of the data stream the consumer is registered with.
+	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 }
 
 type StreamConsumerParameters struct {

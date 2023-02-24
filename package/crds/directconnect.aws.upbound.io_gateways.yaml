@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: gateways.directconnect.aws.upbound.io
 spec:
@@ -81,6 +81,15 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -257,11 +266,23 @@ spec:
             properties:
               atProvider:
                 properties:
+                  amazonSideAsn:
+                    description: The ASN to be configured on the Amazon side of the
+                      connection. The ASN must be in the private range of 64,512 to
+                      65,534 or 4,200,000,000 to 4,294,967,294.
+                    type: string
                   id:
                     description: The ID of the gateway.
                     type: string
+                  name:
+                    description: The name of the connection.
+                    type: string
                   ownerAccountId:
                     description: AWS Account ID of the gateway.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -305,9 +326,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

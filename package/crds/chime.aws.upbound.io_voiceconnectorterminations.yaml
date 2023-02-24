@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: voiceconnectorterminations.chime.aws.upbound.io
 spec:
@@ -175,6 +175,15 @@ spec:
                 - cidrAllowList
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -352,7 +361,36 @@ spec:
             properties:
               atProvider:
                 properties:
+                  callingRegions:
+                    description: The countries to which calls are allowed, in ISO
+                      3166-1 alpha-2 format.
+                    items:
+                      type: string
+                    type: array
+                  cidrAllowList:
+                    description: The IP addresses allowed to make calls, in CIDR format.
+                    items:
+                      type: string
+                    type: array
+                  cpsLimit:
+                    description: The limit on calls per second. Max value based on
+                      account service quota. Default value of 1.
+                    type: number
+                  defaultPhoneNumber:
+                    description: The default caller ID phone number.
+                    type: string
+                  disabled:
+                    description: When termination settings are disabled, outbound
+                      calls can not be made.
+                    type: boolean
                   id:
+                    description: The Amazon Chime Voice Connector ID.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  voiceConnectorId:
                     description: The Amazon Chime Voice Connector ID.
                     type: string
                 type: object
@@ -397,9 +435,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

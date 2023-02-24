@@ -14,8 +14,8 @@ import (
 )
 
 type AutoAdjustDataObservation struct {
+	AutoAdjustType *string `json:"autoAdjustType,omitempty" tf:"auto_adjust_type,omitempty"`
 
-	// +kubebuilder:validation:Optional
 	HistoricalOptions []HistoricalOptionsObservation `json:"historicalOptions,omitempty" tf:"historical_options,omitempty"`
 
 	LastAutoAdjustTime *string `json:"lastAutoAdjustTime,omitempty" tf:"last_auto_adjust_time,omitempty"`
@@ -32,15 +32,54 @@ type AutoAdjustDataParameters struct {
 
 type BudgetObservation struct {
 
+	// The ID of the target account for budget. Will use current user's account_id by default if omitted.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
 	// The ARN of the budget.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Object containing [AutoAdjustData] which determines the budget amount for an auto-adjusting budget.
-	// +kubebuilder:validation:Optional
 	AutoAdjustData []AutoAdjustDataObservation `json:"autoAdjustData,omitempty" tf:"auto_adjust_data,omitempty"`
+
+	// Whether this budget tracks monetary cost or usage.
+	BudgetType *string `json:"budgetType,omitempty" tf:"budget_type,omitempty"`
+
+	// A list of CostFilter name/values pair to apply to budget.
+	CostFilter []CostFilterObservation `json:"costFilter,omitempty" tf:"cost_filter,omitempty"`
+
+	// Map of CostFilters key/value pairs to apply to the budget.
+	CostFilters map[string]*string `json:"costFilters,omitempty" tf:"cost_filters,omitempty"`
+
+	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
+	CostTypes []CostTypesObservation `json:"costTypes,omitempty" tf:"cost_types,omitempty"`
 
 	// id of resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The amount of cost or usage being measured for a budget.
+	LimitAmount *string `json:"limitAmount,omitempty" tf:"limit_amount,omitempty"`
+
+	// The unit of measurement used for the budget forecast, actual spend, or budget threshold, such as dollars or GB. See Spend documentation.
+	LimitUnit *string `json:"limitUnit,omitempty" tf:"limit_unit,omitempty"`
+
+	// Object containing Budget Notifications. Can be used multiple times to define more than one budget notification.
+	Notification []NotificationObservation `json:"notification,omitempty" tf:"notification,omitempty"`
+
+	// Object containing Planned Budget Limits. Can be used multiple times to plan more than one budget limit. See PlannedBudgetLimits documentation.
+	PlannedLimit []PlannedLimitObservation `json:"plannedLimit,omitempty" tf:"planned_limit,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The end of the time period covered by the budget. There are no restrictions on the end date. Format: 2017-01-01_12:00.
+	TimePeriodEnd *string `json:"timePeriodEnd,omitempty" tf:"time_period_end,omitempty"`
+
+	// The start of the time period covered by the budget. If you don't specify a start date, AWS defaults to the start of your chosen time period. The start date must come before the end date. Format: 2017-01-01_12:00.
+	TimePeriodStart *string `json:"timePeriodStart,omitempty" tf:"time_period_start,omitempty"`
+
+	// The length of time until a budget resets the actual and forecasted spend. Valid values: MONTHLY, QUARTERLY, ANNUALLY, and DAILY.
+	TimeUnit *string `json:"timeUnit,omitempty" tf:"time_unit,omitempty"`
 }
 
 type BudgetParameters struct {
@@ -104,6 +143,11 @@ type BudgetParameters struct {
 }
 
 type CostFilterObservation struct {
+
+	// The name of a budget. Unique within accounts.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type CostFilterParameters struct {
@@ -117,6 +161,39 @@ type CostFilterParameters struct {
 }
 
 type CostTypesObservation struct {
+
+	// A boolean value whether to include credits in the cost budget. Defaults to true
+	IncludeCredit *bool `json:"includeCredit,omitempty" tf:"include_credit,omitempty"`
+
+	// Whether a budget includes discounts. Defaults to true
+	IncludeDiscount *bool `json:"includeDiscount,omitempty" tf:"include_discount,omitempty"`
+
+	// A boolean value whether to include other subscription costs in the cost budget. Defaults to true
+	IncludeOtherSubscription *bool `json:"includeOtherSubscription,omitempty" tf:"include_other_subscription,omitempty"`
+
+	// A boolean value whether to include recurring costs in the cost budget. Defaults to true
+	IncludeRecurring *bool `json:"includeRecurring,omitempty" tf:"include_recurring,omitempty"`
+
+	// A boolean value whether to include refunds in the cost budget. Defaults to true
+	IncludeRefund *bool `json:"includeRefund,omitempty" tf:"include_refund,omitempty"`
+
+	// A boolean value whether to include subscriptions in the cost budget. Defaults to true
+	IncludeSubscription *bool `json:"includeSubscription,omitempty" tf:"include_subscription,omitempty"`
+
+	// A boolean value whether to include support costs in the cost budget. Defaults to true
+	IncludeSupport *bool `json:"includeSupport,omitempty" tf:"include_support,omitempty"`
+
+	// A boolean value whether to include tax in the cost budget. Defaults to true
+	IncludeTax *bool `json:"includeTax,omitempty" tf:"include_tax,omitempty"`
+
+	// A boolean value whether to include upfront costs in the cost budget. Defaults to true
+	IncludeUpfront *bool `json:"includeUpfront,omitempty" tf:"include_upfront,omitempty"`
+
+	// Whether a budget uses the amortized rate. Defaults to false
+	UseAmortized *bool `json:"useAmortized,omitempty" tf:"use_amortized,omitempty"`
+
+	// A boolean value whether to use blended costs in the cost budget. Defaults to false
+	UseBlended *bool `json:"useBlended,omitempty" tf:"use_blended,omitempty"`
 }
 
 type CostTypesParameters struct {
@@ -167,6 +244,8 @@ type CostTypesParameters struct {
 }
 
 type HistoricalOptionsObservation struct {
+	BudgetAdjustmentPeriod *float64 `json:"budgetAdjustmentPeriod,omitempty" tf:"budget_adjustment_period,omitempty"`
+
 	LookbackAvailablePeriods *float64 `json:"lookbackAvailablePeriods,omitempty" tf:"lookback_available_periods,omitempty"`
 }
 
@@ -177,6 +256,24 @@ type HistoricalOptionsParameters struct {
 }
 
 type NotificationObservation struct {
+
+	// Comparison operator to use to evaluate the condition. Can be LESS_THAN, EQUAL_TO or GREATER_THAN.
+	ComparisonOperator *string `json:"comparisonOperator,omitempty" tf:"comparison_operator,omitempty"`
+
+	// What kind of budget value to notify on. Can be ACTUAL or FORECASTED
+	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
+
+	// E-Mail addresses to notify. Either this or subscriber_sns_topic_arns is required.
+	SubscriberEmailAddresses []*string `json:"subscriberEmailAddresses,omitempty" tf:"subscriber_email_addresses,omitempty"`
+
+	// SNS topics to notify. Either this or subscriber_email_addresses is required.
+	SubscriberSnsTopicArns []*string `json:"subscriberSnsTopicArns,omitempty" tf:"subscriber_sns_topic_arns,omitempty"`
+
+	// Threshold when the notification should be sent.
+	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+
+	// What kind of threshold is defined. Can be PERCENTAGE OR ABSOLUTE_VALUE.
+	ThresholdType *string `json:"thresholdType,omitempty" tf:"threshold_type,omitempty"`
 }
 
 type NotificationParameters struct {
@@ -207,6 +304,15 @@ type NotificationParameters struct {
 }
 
 type PlannedLimitObservation struct {
+
+	// The amount of cost or usage being measured for a budget.
+	Amount *string `json:"amount,omitempty" tf:"amount,omitempty"`
+
+	// The start time of the budget limit. Format: 2017-01-01_12:00. See PlannedBudgetLimits documentation.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// The unit of measurement used for the budget forecast, actual spend, or budget threshold, such as dollars or GB. See Spend documentation.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
 
 type PlannedLimitParameters struct {

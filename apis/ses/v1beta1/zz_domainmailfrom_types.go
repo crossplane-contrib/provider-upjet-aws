@@ -15,8 +15,21 @@ import (
 
 type DomainMailFromObservation struct {
 
+	// The action that you want Amazon SES to take if it cannot successfully read the required MX record when you send an email. Defaults to UseDefaultValue. See the SES API documentation for more information.
+	BehaviorOnMxFailure *string `json:"behaviorOnMxFailure,omitempty" tf:"behavior_on_mx_failure,omitempty"`
+
+	// Verified domain name or email identity to generate DKIM tokens for.
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
 	// The domain name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Subdomain (of above domain) which is to be used as MAIL FROM address
+	MailFromDomain *string `json:"mailFromDomain,omitempty" tf:"mail_from_domain,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DomainMailFromParameters struct {

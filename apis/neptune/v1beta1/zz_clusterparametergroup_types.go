@@ -18,8 +18,24 @@ type ClusterParameterGroupObservation struct {
 	// The ARN of the neptune cluster parameter group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description of the neptune cluster parameter group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The family of the neptune cluster parameter group.
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
+
 	// The neptune cluster parameter group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of neptune parameters to apply.
+	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -50,6 +66,15 @@ type ClusterParameterGroupParameters struct {
 }
 
 type ParameterObservation struct {
+
+	// Valid values are immediate and pending-reboot. Defaults to pending-reboot.
+	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
+
+	// The name of the neptune cluster parameter group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the neptune parameter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ParameterParameters struct {

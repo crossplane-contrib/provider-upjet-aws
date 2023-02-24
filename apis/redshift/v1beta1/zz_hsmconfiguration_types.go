@@ -18,7 +18,29 @@ type HSMConfigurationObservation struct {
 	// Amazon Resource Name (ARN) of the Hsm Client Certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A text description of the HSM configuration to be created.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The IP address that the Amazon Redshift cluster must use to access the HSM.
+	HSMIPAddress *string `json:"hsmIpAddress,omitempty" tf:"hsm_ip_address,omitempty"`
+
+	// The name of the partition in the HSM where the Amazon Redshift clusters will store their database encryption keys.
+	HSMPartitionName *string `json:"hsmPartitionName,omitempty" tf:"hsm_partition_name,omitempty"`
+
+	// The password required to access the HSM partition.
+	HSMPartitionPasswordSecretRef v1.SecretKeySelector `json:"hsmPartitionPasswordSecretRef" tf:"-"`
+
+	// The HSMs public certificate file. When using Cloud HSM, the file name is server.pem.
+	HSMServerPublicCertificate *string `json:"hsmServerPublicCertificate,omitempty" tf:"hsm_server_public_certificate,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

@@ -15,13 +15,35 @@ import (
 
 type IPSetObservation struct {
 
+	// Contains an array of strings that specify one or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports all address ranges for IP versions IPv4 and IPv6.
+	Addresses []*string `json:"addresses,omitempty" tf:"addresses,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the IP set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// A friendly description of the IP set.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A unique identifier for the IP set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specify IPV4 or IPV6. Valid values are IPV4 or IPV6.
+	IPAddressVersion *string `json:"ipAddressVersion,omitempty" tf:"ip_address_version,omitempty"`
+
 	LockToken *string `json:"lockToken,omitempty" tf:"lock_token,omitempty"`
+
+	// A friendly name of the IP set.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the Region US East (N. Virginia).
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
