@@ -174,8 +174,8 @@ spec:
                             type is AmazonCustomerByEmail.
                           type: string
                         id:
-                          description: The canonical user ID of the grantee. Used
-                            only when type is CanonicalUser.
+                          description: Canonical user ID of the grantee. Used only
+                            when type is CanonicalUser.
                           type: string
                         permissions:
                           description: List of permissions to grant to grantee. Valid
@@ -241,8 +241,8 @@ spec:
                   metadata:
                     additionalProperties:
                       type: string
-                    description: A map of keys/values to provision metadata (will
-                      be automatically prefixed by x-amz-meta-, note that only lowercase
+                    description: Map of keys/values to provision metadata (will be
+                      automatically prefixed by x-amz-meta-, note that only lowercase
                       label are currently supported by the AWS Go API).
                     type: object
                   metadataDirective:
@@ -255,11 +255,11 @@ spec:
                       specified object. Valid values are ON and OFF.
                     type: string
                   objectLockMode:
-                    description: The object lock retention mode that you want to apply
+                    description: Object lock retention mode that you want to apply
                       to this object. Valid values are GOVERNANCE and COMPLIANCE.
                     type: string
                   objectLockRetainUntilDate:
-                    description: The date and time, in RFC3339 format, when this object's
+                    description: Date and time, in RFC3339 format, when this object's
                       object lock will expire.
                     type: string
                   region:
@@ -285,9 +285,8 @@ spec:
                       accessed through an access point, specify the name of the source
                       bucket and the key of the source object, separated by a slash
                       (/). For example, testbucket/test1.json. For objects accessed
-                      through access points, specify the Amazon Resource Name (ARN)
-                      of the object as accessed through the access point, in the format
-                      arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>.
+                      through access points, specify the ARN of the object as accessed
+                      through the access point, in the format arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>.
                       For example, arn:aws:s3:us-west-2:9999912999:accesspoint/my-access-point/object/testbucket/test1.json.
                     type: string
                   sourceCustomerAlgorithm:
@@ -520,8 +519,8 @@ spec:
               atProvider:
                 properties:
                   etag:
-                    description: The ETag generated for the object (an MD5 sum of
-                      the object content). For plaintext objects or objects encrypted
+                    description: ETag generated for the object (an MD5 sum of the
+                      object content). For plaintext objects or objects encrypted
                       with an AWS-managed key, the hash is an MD5 digest of the object
                       data. For objects encrypted with a KMS key or objects created
                       by either the Multipart Upload or Part Copy operation, the hash
@@ -534,7 +533,7 @@ spec:
                       will be set.
                     type: string
                   id:
-                    description: The canonical user ID of the grantee. Used only when
+                    description: Canonical user ID of the grantee. Used only when
                       type is CanonicalUser.
                     type: string
                   lastModified:
@@ -551,9 +550,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                   versionId:
                     description: Version ID of the newly created copy.

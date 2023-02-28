@@ -84,7 +84,11 @@ type VPCIpamPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	Locale *string `json:"locale,omitempty" tf:"locale,omitempty"`
 
-	// Defines whether or not IPv6 pool space is publicly advertisable over the internet. This option is not available for IPv4 pool space.
+	// The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Valid values are byoip or amazon. Default is byoip.
+	// +kubebuilder:validation:Optional
+	PublicIPSource *string `json:"publicIpSource,omitempty" tf:"public_ip_source,omitempty"`
+
+	// Defines whether or not IPv6 pool space is publicly advertisable over the internet. This argument is required if address_family = "ipv6" and public_ip_source = "byoip", default is false. This option is not available for IPv4 pool space or if public_ip_source = "amazon".
 	// +kubebuilder:validation:Optional
 	PubliclyAdvertisable *bool `json:"publiclyAdvertisable,omitempty" tf:"publicly_advertisable,omitempty"`
 

@@ -38,7 +38,7 @@ type BucketCorsConfigurationCorsRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The time in seconds that your browser is to cache the preflight response for the specified resource.
+	// Time in seconds that your browser is to cache the preflight response for the specified resource.
 	// +kubebuilder:validation:Optional
 	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
@@ -51,7 +51,7 @@ type BucketCorsConfigurationObservation struct {
 
 type BucketCorsConfigurationParameters struct {
 
-	// The name of the bucket.
+	// Name of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -65,11 +65,11 @@ type BucketCorsConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Set of origins and methods (cross-origin access that you want to allow) documented below. You can configure up to 100 rules.
+	// Set of origins and methods (cross-origin access that you want to allow). See below. You can configure up to 100 rules.
 	// +kubebuilder:validation:Required
 	CorsRule []BucketCorsConfigurationCorsRuleParameters `json:"corsRule" tf:"cors_rule,omitempty"`
 
-	// The account ID of the expected bucket owner.
+	// Account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 

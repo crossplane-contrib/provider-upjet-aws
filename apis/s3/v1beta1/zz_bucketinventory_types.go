@@ -18,7 +18,7 @@ type BucketInventoryDestinationObservation struct {
 
 type BucketInventoryDestinationParameters struct {
 
-	// The name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for.
 	// +kubebuilder:validation:Required
 	Bucket []DestinationBucketParameters `json:"bucket" tf:"bucket,omitempty"`
 }
@@ -28,7 +28,7 @@ type BucketInventoryFilterObservation struct {
 
 type BucketInventoryFilterParameters struct {
 
-	// The prefix that an object must have to be included in the inventory results.
+	// Prefix that an object must have to be included in the inventory results.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
@@ -39,7 +39,7 @@ type BucketInventoryObservation struct {
 
 type BucketInventoryParameters struct {
 
-	// The name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -92,11 +92,11 @@ type DestinationBucketObservation struct {
 
 type DestinationBucketParameters struct {
 
-	// The ID of the account that owns the destination bucket. Recommended to be set to prevent problems if the destination bucket ownership changes.
+	// ID of the account that owns the destination bucket. Recommended to be set to prevent problems if the destination bucket ownership changes.
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The Amazon S3 bucket ARN of the destination.
+	// Amazon S3 bucket ARN of the destination.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -118,7 +118,7 @@ type DestinationBucketParameters struct {
 	// +kubebuilder:validation:Required
 	Format *string `json:"format" tf:"format,omitempty"`
 
-	// The prefix that an object must have to be included in the inventory results.
+	// Prefix that an object must have to be included in the inventory results.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
@@ -152,7 +152,7 @@ type SseKMSObservation struct {
 
 type SseKMSParameters struct {
 
-	// The ARN of the KMS customer master key (CMK) used to encrypt the inventory file.
+	// ARN of the KMS customer master key (CMK) used to encrypt the inventory file.
 	// +kubebuilder:validation:Required
 	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
 }

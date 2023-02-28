@@ -15,23 +15,23 @@ import (
 
 type AccessPointObservation struct {
 
-	// The alias of the S3 Access Point.
+	// Alias of the S3 Access Point.
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
-	// Amazon Resource Name (ARN) of the S3 Access Point.
+	// ARN of the S3 Access Point.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The DNS domain name of the S3 Access Point in the format name-account_id.s3-accesspoint.region.amazonaws.com.
+	// DNS domain name of the S3 Access Point in the format name-account_id.s3-accesspoint.region.amazonaws.com.
 	// Note: S3 access points only support secure access by HTTPS. HTTP isn't supported.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The VPC endpoints for the S3 Access Point.
+	// VPC endpoints for the S3 Access Point.
 	Endpoints map[string]*string `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 
 	// Indicates whether this access point currently has a policy that allows public access.
 	HasPublicAccessPolicy *bool `json:"hasPublicAccessPolicy,omitempty" tf:"has_public_access_policy,omitempty"`
 
-	// For Access Point of an AWS Partition S3 Bucket, the AWS account ID and access point name separated by a colon (:). For S3 on Outposts Bucket, the Amazon Resource Name (ARN) of the Access Point.
+	// For Access Point of an AWS Partition S3 Bucket, the AWS account ID and access point name separated by a colon (:). For S3 on Outposts Bucket, the ARN of the Access Point.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Indicates whether this access point allows access from the public Internet. Values are VPC (the access point doesn't allow access from the public Internet) and Internet (the access point allows access from the public Internet, subject to the access point and bucket access policies).
@@ -44,13 +44,13 @@ type AccessPointParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// Name of an AWS Partition S3 Bucket or the Amazon Resource Name (ARN) of S3 on Outposts Bucket that you want to associate this access point with.
+	// Name of an AWS Partition S3 Bucket or the ARN of S3 on Outposts Bucket that you want to associate this access point with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The AWS account ID associated with the S3 bucket associated with this access point.
+	// AWS account ID associated with the S3 bucket associated with this access point.
 	// +kubebuilder:validation:Optional
 	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
 

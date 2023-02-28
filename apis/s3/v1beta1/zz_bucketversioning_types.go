@@ -21,7 +21,7 @@ type BucketVersioningObservation struct {
 
 type BucketVersioningParameters struct {
 
-	// The name of the S3 bucket.
+	// Name of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -35,11 +35,11 @@ type BucketVersioningParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// The account ID of the expected bucket owner.
+	// Account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
+	// Concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
 	// +kubebuilder:validation:Optional
 	Mfa *string `json:"mfa,omitempty" tf:"mfa,omitempty"`
 
@@ -48,7 +48,7 @@ type BucketVersioningParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Configuration block for the versioning parameters detailed below.
+	// Configuration block for the versioning parameters. See below.
 	// +kubebuilder:validation:Required
 	VersioningConfiguration []VersioningConfigurationParameters `json:"versioningConfiguration" tf:"versioning_configuration,omitempty"`
 }
@@ -62,7 +62,7 @@ type VersioningConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	MfaDelete *string `json:"mfaDelete,omitempty" tf:"mfa_delete,omitempty"`
 
-	// The versioning state of the bucket. Valid values: Enabled, Suspended, or Disabled. Disabled should only be used when creating or importing resources that correspond to unversioned S3 buckets.
+	// Versioning state of the bucket. Valid values: Enabled, Suspended, or Disabled. Disabled should only be used when creating or importing resources that correspond to unversioned S3 buckets.
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 }

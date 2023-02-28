@@ -194,6 +194,10 @@ spec:
                       in each subnet. See Subnet Mapping below for details.
                     items:
                       properties:
+                        ipAddressType:
+                          description: 'The subnet''s IP address type. Valida values:
+                            "DUALSTACK", "IPV4".'
+                          type: string
                         subnetId:
                           description: The unique identifier for the subnet.
                           type: string

@@ -2417,6 +2417,16 @@ func (in *ServiceParameters) DeepCopyInto(out *ServiceParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.TaskDefinitionRef != nil {
+		in, out := &in.TaskDefinitionRef, &out.TaskDefinitionRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TaskDefinitionSelector != nil {
+		in, out := &in.TaskDefinitionSelector, &out.TaskDefinitionSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Triggers != nil {
 		in, out := &in.Triggers, &out.Triggers
 		*out = make(map[string]*string, len(*in))

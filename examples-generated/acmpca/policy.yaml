@@ -8,21 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    policy: "{                        \n   \"Version\":\"2012-10-17\",\n   \"Statement\":[\n
-      \     {    \n         \"Sid\":\"1\",\n         \"Effect\":\"Allow\",         \n
-      \        \"Principal\":{                                                                                                                                               \n
-      \           \"AWS\":\"${data.aws_caller_identity.current.account_id}\"                                                                                \n
-      \        },\n         \"Action\":[\n            \"acm-pca:DescribeCertificateAuthority\",\n
-      \           \"acm-pca:GetCertificate\",\n            \"acm-pca:GetCertificateAuthorityCertificate\",\n
-      \           \"acm-pca:ListPermissions\",\n            \"acm-pca:ListTags\"                                                                                   \n
-      \        ],                                                                                              \n
-      \        \"Resource\":\"${aws_acmpca_certificate_authority.example.arn}\"\n
-      \     },\n      {\n         \"Sid\":\"1\",  \n         \"Effect\":\"Allow\",\n
-      \        \"Principal\":{\n            \"AWS\":\"${data.aws_caller_identity.current.account_id}\"\n
-      \        },\n         \"Action\":[\n            \"acm-pca:IssueCertificate\"\n
-      \        ],\n         \"Resource\":\"${aws_acmpca_certificate_authority.example.arn}\",\n
-      \        \"Condition\":{\n            \"StringEquals\":{\n               \"acm-pca:TemplateArn\":\"arn:aws:acm-pca:::template/EndEntityCertificate/V1\"\n
-      \           }\n         }\n      }\n   ]\n}\n"
+    policy: ${data.aws_iam_policy_document.example.json}
     region: us-west-1
     resourceArnSelector:
       matchLabels:

@@ -430,8 +430,8 @@ type PredefinedLoadMetricSpecificationParameters struct {
 	PredefinedMetricType *string `json:"predefinedMetricType" tf:"predefined_metric_type,omitempty"`
 
 	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
-	// +kubebuilder:validation:Required
-	ResourceLabel *string `json:"resourceLabel" tf:"resource_label,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
 }
 
 type PredefinedMetricPairSpecificationObservation struct {
@@ -444,8 +444,8 @@ type PredefinedMetricPairSpecificationParameters struct {
 	PredefinedMetricType *string `json:"predefinedMetricType" tf:"predefined_metric_type,omitempty"`
 
 	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
-	// +kubebuilder:validation:Required
-	ResourceLabel *string `json:"resourceLabel" tf:"resource_label,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
 }
 
 type PredefinedMetricSpecificationObservation struct {
@@ -472,8 +472,8 @@ type PredefinedScalingMetricSpecificationParameters struct {
 	PredefinedMetricType *string `json:"predefinedMetricType" tf:"predefined_metric_type,omitempty"`
 
 	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
-	// +kubebuilder:validation:Required
-	ResourceLabel *string `json:"resourceLabel" tf:"resource_label,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
 }
 
 type PredictiveScalingConfigurationObservation struct {

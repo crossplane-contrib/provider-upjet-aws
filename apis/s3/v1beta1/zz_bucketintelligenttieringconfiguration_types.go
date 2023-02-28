@@ -18,7 +18,7 @@ type BucketIntelligentTieringConfigurationFilterObservation struct {
 
 type BucketIntelligentTieringConfigurationFilterParameters struct {
 
-	// An object key name prefix that identifies the subset of objects to which the configuration applies.
+	// Object key name prefix that identifies the subset of objects to which the configuration applies.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -33,8 +33,9 @@ type BucketIntelligentTieringConfigurationObservation struct {
 
 type BucketIntelligentTieringConfigurationParameters struct {
 
-	// The name of the bucket this intelligent tiering configuration is associated with.
+	// Name of the bucket this intelligent tiering configuration is associated with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -46,11 +47,11 @@ type BucketIntelligentTieringConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// A bucket filter. The configuration only includes objects that meet the filter's criteria (documented below).
+	// Bucket filter. The configuration only includes objects that meet the filter's criteria (documented below).
 	// +kubebuilder:validation:Optional
 	Filter []BucketIntelligentTieringConfigurationFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
-	// The unique name used to identify the S3 Intelligent-Tiering configuration for the bucket.
+	// Unique name used to identify the S3 Intelligent-Tiering configuration for the bucket.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -63,7 +64,7 @@ type BucketIntelligentTieringConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The S3 Intelligent-Tiering storage class tiers of the configuration (documented below).
+	// S3 Intelligent-Tiering storage class tiers of the configuration (documented below).
 	// +kubebuilder:validation:Required
 	Tiering []TieringParameters `json:"tiering" tf:"tiering,omitempty"`
 }
@@ -77,7 +78,7 @@ type TieringParameters struct {
 	// +kubebuilder:validation:Required
 	AccessTier *string `json:"accessTier" tf:"access_tier,omitempty"`
 
-	// The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier.
+	// Number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier.
 	// +kubebuilder:validation:Required
 	Days *float64 `json:"days" tf:"days,omitempty"`
 }

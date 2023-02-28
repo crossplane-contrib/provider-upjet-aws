@@ -86,7 +86,7 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	DropInvalidHeaderFields *bool `json:"dropInvalidHeaderFields,omitempty" tf:"drop_invalid_header_fields,omitempty"`
 
-	// If true, cross-zone load balancing of the load balancer will be enabled. This is a network load balancer feature. Defaults to false.
+	// If true, cross-zone load balancing of the load balancer will be enabled. For network and gateway type load balancers, this feature is disabled by default (false). For application load balancer this feature is always enabled (true) and cannot be disabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableCrossZoneLoadBalancing *bool `json:"enableCrossZoneLoadBalancing,omitempty" tf:"enable_cross_zone_load_balancing,omitempty"`
 

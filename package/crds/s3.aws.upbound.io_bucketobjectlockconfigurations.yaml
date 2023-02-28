@@ -66,7 +66,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: The name of the bucket.
+                    description: Name of the bucket.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -142,7 +142,7 @@ spec:
                         type: object
                     type: object
                   expectedBucketOwner:
-                    description: The account ID of the expected bucket owner.
+                    description: Account ID of the expected bucket owner.
                     type: string
                   objectLockEnabled:
                     description: 'Indicates whether this bucket has an Object Lock
@@ -154,27 +154,27 @@ spec:
                     type: string
                   rule:
                     description: Configuration block for specifying the Object Lock
-                      rule for the specified object detailed below.
+                      rule for the specified object. See below.
                     items:
                       properties:
                         defaultRetention:
-                          description: A configuration block for specifying the default
+                          description: Configuration block for specifying the default
                             Object Lock retention settings for new objects placed
-                            in the specified bucket detailed below.
+                            in the specified bucket. See below.
                           items:
                             properties:
                               days:
-                                description: The number of days that you want to specify
+                                description: Number of days that you want to specify
                                   for the default retention period.
                                 type: number
                               mode:
-                                description: 'The default Object Lock retention mode
-                                  you want to apply to new objects placed in the specified
+                                description: 'Default Object Lock retention mode you
+                                  want to apply to new objects placed in the specified
                                   bucket. Valid values: COMPLIANCE, GOVERNANCE.'
                                 type: string
                               years:
-                                description: The number of years that you want to
-                                  specify for the default retention period.
+                                description: Number of years that you want to specify
+                                  for the default retention period.
                                 type: number
                             type: object
                           type: array
@@ -183,11 +183,11 @@ spec:
                       type: object
                     type: array
                   tokenSecretRef:
-                    description: A token to allow Object Lock to be enabled for an
-                      existing bucket. You must contact AWS support for the bucket's
-                      "Object Lock token". The token is generated in the back-end
-                      when versioning is enabled on a bucket. For more details on
-                      versioning, see the aws_s3_bucket_versioning resource.
+                    description: Token to allow Object Lock to be enabled for an existing
+                      bucket. You must contact AWS support for the bucket's "Object
+                      Lock token". The token is generated in the back-end when versioning
+                      is enabled on a bucket. For more details on versioning, see
+                      the aws_s3_bucket_versioning resource.
                     properties:
                       key:
                         description: The key to select.

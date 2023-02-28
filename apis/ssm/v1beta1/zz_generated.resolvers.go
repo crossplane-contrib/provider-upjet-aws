@@ -203,7 +203,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3Bucket),
-				Extract:      reference.ExternalName(),
+				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3BucketRef,
 				Selector:     mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3BucketSelector,
 				To: reference.To{

@@ -38,6 +38,10 @@ type PolicyAttachmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// If set to true, destroy will not detach the policy and instead just remove the resource from state. This can be useful in situations where the attachment must be preserved to meet the AWS minimum requirement of 1 attached policy.
+	// +kubebuilder:validation:Optional
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
 	// The unique identifier (ID) of the root, organizational unit, or account number that you want to attach the policy to.
 	// +kubebuilder:validation:Required
 	TargetID *string `json:"targetId" tf:"target_id,omitempty"`

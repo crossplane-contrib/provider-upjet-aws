@@ -68,11 +68,18 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Required
 	EngineName *string `json:"engineName" tf:"engine_name,omitempty"`
 
-	// Additional attributes associated with the connection. For available attributes see Using Extra Connection Attributes with AWS Database Migration Service.
+	// Additional attributes associated with the connection.
+	// For available attributes for a source Endpoint, see Sources for data migration.
+	// For available attributes for a target Endpoint, see Targets for data migration.
 	// +kubebuilder:validation:Optional
 	ExtraConnectionAttributes *string `json:"extraConnectionAttributes,omitempty" tf:"extra_connection_attributes,omitempty"`
 
-	// ARN for the KMS key that will be used to encrypt the connection parameters. If you do not specify a value for kms_key_arn, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+	// ARN for the KMS key that will be used to encrypt the connection parameters.
+	// If you do not specify a value for kms_key_arn, then AWS DMS will use your default encryption key.
+	// AWS KMS creates the default encryption key for your AWS account.
+	// Your AWS account has a different default encryption key for each AWS region.
+	// To encrypt an S3 target with a KMS Key, use the parameter s3_settings.server_side_encryption_kms_key_id.
+	// When engine_name is redshift, kms_key_arn is the KMS Key for the Redshift target and the parameter redshift_settings.server_side_encryption_kms_key_id encrypts the S3 intermediate storage.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -139,7 +146,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretsManagerAccessRoleArnSelector *v1.Selector `json:"secretsManagerAccessRoleArnSelector,omitempty" tf:"-"`
 
-	// Full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the endpoint connection details. Supported only for engine_name as aurora, aurora-postgresql, mariadb, mongodb, mysql, oracle, postgres, redshift or sqlserver.
+	// Full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the endpoint connection details. Supported only when engine_name is aurora, aurora-postgresql, mariadb, mongodb, mysql, oracle, postgres, redshift, or sqlserver.
 	// +kubebuilder:validation:Optional
 	SecretsManagerArn *string `json:"secretsManagerArn,omitempty" tf:"secrets_manager_arn,omitempty"`
 
@@ -361,7 +368,7 @@ type RedshiftSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionMode *string `json:"encryptionMode,omitempty" tf:"encryption_mode,omitempty"`
 
-	// If you set encryptionMode to SSE_KMS, set this parameter to the Amazon Resource Name (ARN) for the AWS KMS key.
+	// ARN or Id of KMS Key to use when encryption_mode is SSE_KMS.
 	// +kubebuilder:validation:Optional
 	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
 
@@ -387,7 +394,7 @@ type S3SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// Predefined (canned) access control list for objects created in an S3 bucket. Valid values include NONE, PRIVATE, PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ, AWS_EXEC_READ, BUCKET_OWNER_READ, and BUCKET_OWNER_FULL_CONTROL. Default is NONE.
+	// Predefined (canned) access control list for objects created in an S3 bucket. Valid values include none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Default is none.
 	// +kubebuilder:validation:Optional
 	CannedACLForObjects *string `json:"cannedAclForObjects,omitempty" tf:"canned_acl_for_objects,omitempty"`
 
@@ -508,7 +515,7 @@ type S3SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	RowGroupLength *float64 `json:"rowGroupLength,omitempty" tf:"row_group_length,omitempty"`
 
-	// If you set encryptionMode to SSE_KMS, set this parameter to the ARN for the AWS KMS key.
+	// ARN or Id of KMS Key to use when encryption_mode is SSE_KMS.
 	// +kubebuilder:validation:Optional
 	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
 

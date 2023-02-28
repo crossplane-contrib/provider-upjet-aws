@@ -3,11 +3,51 @@ kind: Service
 metadata:
   name: sample-service
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource requires manual intervention for adding task definition revision. Otherwise, resource will be updated to use latest revision."
+    meta.upbound.io/example-id: ecs/v1beta1/service
+    upjet.upbound.io/manual-intervention: "Resourrce stuck in update loop"
 spec:
   forProvider:
-    taskDefinition: sampleservice
-    cluster: example
+    taskDefinitionSelector:
+      matchLabels:
+          testing.upbound.io/example-name: example-definition
+    clusterSelector:
+      matchLabels:
+          testing.upbound.io/example-name: example-cluster
     region: us-west-1
     launchType: EC2
     propagateTags: TASK_DEFINITION
+---
+apiVersion: ecs.aws.upbound.io/v1beta1
+kind: TaskDefinition
+metadata:
+  name: sample-task
+  annotations:
+    meta.upbound.io/example-id: ecs/v1beta1/service
+  labels:
+    testing.upbound.io/example-name: example-definition
+spec:
+  forProvider:
+    region: us-west-1
+    family: sampleservice
+    containerDefinitions: |-
+      [
+        {
+          "name": "first",
+          "image": "service-first",
+          "cpu": 10,
+          "memory": 512,
+          "essential":true
+        }
+      ]
+---
+apiVersion: ecs.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecs/v1beta1/service
+  labels:
+    testing.upbound.io/example-name: example-cluster
+  name: example
+spec:
+  forProvider:
+    region: us-west-1

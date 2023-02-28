@@ -33,8 +33,9 @@ type BucketAnalyticsConfigurationObservation struct {
 
 type BucketAnalyticsConfigurationParameters struct {
 
-	// The name of the bucket this analytics configuration is associated with.
+	// Name of the bucket this analytics configuration is associated with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -83,7 +84,7 @@ type DataExportParameters struct {
 	// +kubebuilder:validation:Required
 	Destination []DataExportDestinationParameters `json:"destination" tf:"destination,omitempty"`
 
-	// The schema version of exported analytics data. Allowed values: V_1. Default value: V_1.
+	// Schema version of exported analytics data. Allowed values: V_1. Default value: V_1.
 	// +kubebuilder:validation:Optional
 	OutputSchemaVersion *string `json:"outputSchemaVersion,omitempty" tf:"output_schema_version,omitempty"`
 }
@@ -93,11 +94,11 @@ type S3BucketDestinationObservation struct {
 
 type S3BucketDestinationParameters struct {
 
-	// The account ID that owns the destination bucket.
+	// Account ID that owns the destination bucket.
 	// +kubebuilder:validation:Optional
 	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
 
-	// The ARN of the destination bucket.
+	// ARN of the destination bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -111,7 +112,7 @@ type S3BucketDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// The output format of exported analytics data. Allowed values: CSV. Default value: CSV.
+	// Output format of exported analytics data. Allowed values: CSV. Default value: CSV.
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 

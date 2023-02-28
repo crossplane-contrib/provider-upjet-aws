@@ -357,6 +357,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  neptuneInstanceParameterGroupName:
+                    description: The name of the DB parameter group to apply to all
+                      instances of the DB cluster.
+                    type: string
                   neptuneSubnetGroupName:
                     description: A Neptune subnet group to associate with this Neptune
                       instance.

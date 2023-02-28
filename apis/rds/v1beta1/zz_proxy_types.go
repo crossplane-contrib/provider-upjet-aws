@@ -22,6 +22,10 @@ type AuthParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthScheme *string `json:"authScheme,omitempty" tf:"auth_scheme,omitempty"`
 
+	// The type of authentication the proxy uses for connections from clients. Valid values are MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
+	// +kubebuilder:validation:Optional
+	ClientPasswordAuthType *string `json:"clientPasswordAuthType,omitempty" tf:"client_password_auth_type,omitempty"`
+
 	// A user-specified description about the authentication used by a proxy to log in as a specific database user.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`

@@ -1049,7 +1049,7 @@ type FecOutputSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	ColumnDepth *float64 `json:"columnDepth,omitempty" tf:"column_depth,omitempty"`
 
-	// Enables column oly or column and row based FEC.
+	// Enables column only or column and row based FEC.
 	// +kubebuilder:validation:Optional
 	IncludeFec *string `json:"includeFec,omitempty" tf:"include_fec,omitempty"`
 
@@ -2479,7 +2479,7 @@ type OutputsParameters struct {
 	// +kubebuilder:validation:Optional
 	AudioDescriptionNames []*string `json:"audioDescriptionNames,omitempty" tf:"audio_description_names,omitempty"`
 
-	// The names of the caption descriptions used as audio sources for the output.
+	// The names of the caption descriptions used as caption sources for the output.
 	// +kubebuilder:validation:Optional
 	CaptionDescriptionNames []*string `json:"captionDescriptionNames,omitempty" tf:"caption_description_names,omitempty"`
 
@@ -2491,7 +2491,7 @@ type OutputsParameters struct {
 	// +kubebuilder:validation:Required
 	OutputSettings []OutputSettingsParameters `json:"outputSettings" tf:"output_settings,omitempty"`
 
-	// The name of the video description used as audio sources for the output.
+	// The name of the video description used as video source for the output.
 	// +kubebuilder:validation:Optional
 	VideoDescriptionName *string `json:"videoDescriptionName,omitempty" tf:"video_description_name,omitempty"`
 }

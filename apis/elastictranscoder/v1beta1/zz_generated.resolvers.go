@@ -25,7 +25,7 @@ func (mg *Pipeline) ResolveReferences(ctx context.Context, c client.Reader) erro
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ContentConfig); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContentConfig[i3].Bucket),
-			Extract:      reference.ExternalName(),
+			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ContentConfig[i3].BucketRef,
 			Selector:     mg.Spec.ForProvider.ContentConfig[i3].BucketSelector,
 			To: reference.To{
@@ -42,7 +42,7 @@ func (mg *Pipeline) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InputBucket),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.InputBucketRef,
 		Selector:     mg.Spec.ForProvider.InputBucketSelector,
 		To: reference.To{
@@ -75,7 +75,7 @@ func (mg *Pipeline) ResolveReferences(ctx context.Context, c client.Reader) erro
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ThumbnailConfig); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ThumbnailConfig[i3].Bucket),
-			Extract:      reference.ExternalName(),
+			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ThumbnailConfig[i3].BucketRef,
 			Selector:     mg.Spec.ForProvider.ThumbnailConfig[i3].BucketSelector,
 			To: reference.To{

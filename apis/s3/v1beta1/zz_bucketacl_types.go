@@ -15,14 +15,14 @@ import (
 
 type AccessControlPolicyGrantObservation struct {
 
-	// Configuration block for the person being granted permissions documented below.
+	// Configuration block for the person being granted permissions. See below.
 	// +kubebuilder:validation:Optional
 	Grantee []GranteeObservation `json:"grantee,omitempty" tf:"grantee,omitempty"`
 }
 
 type AccessControlPolicyGrantParameters struct {
 
-	// Configuration block for the person being granted permissions documented below.
+	// Configuration block for the person being granted permissions. See below.
 	// +kubebuilder:validation:Optional
 	Grantee []GranteeParameters `json:"grantee,omitempty" tf:"grantee,omitempty"`
 
@@ -33,28 +33,28 @@ type AccessControlPolicyGrantParameters struct {
 
 type AccessControlPolicyObservation struct {
 
-	// Set of grant configuration blocks documented below.
+	// Set of grant configuration blocks. See below.
 	// +kubebuilder:validation:Optional
 	Grant []AccessControlPolicyGrantObservation `json:"grant,omitempty" tf:"grant,omitempty"`
 }
 
 type AccessControlPolicyParameters struct {
 
-	// Set of grant configuration blocks documented below.
+	// Set of grant configuration blocks. See below.
 	// +kubebuilder:validation:Optional
 	Grant []AccessControlPolicyGrantParameters `json:"grant,omitempty" tf:"grant,omitempty"`
 
-	// Configuration block of the bucket owner's display name and ID documented below.
+	// Configuration block of the bucket owner's display name and ID. See below.
 	// +kubebuilder:validation:Required
 	Owner []OwnerParameters `json:"owner" tf:"owner,omitempty"`
 }
 
 type BucketACLObservation struct {
 
-	// The canned ACL to apply to the bucket.
+	// Canned ACL to apply to the bucket.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// A configuration block that sets the ACL permissions for an object per grantee documented below.
+	// Configuration block that sets the ACL permissions for an object per grantee. See below.
 	// +kubebuilder:validation:Optional
 	AccessControlPolicy []AccessControlPolicyObservation `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
 
@@ -64,11 +64,11 @@ type BucketACLObservation struct {
 
 type BucketACLParameters struct {
 
-	// A configuration block that sets the ACL permissions for an object per grantee documented below.
+	// Configuration block that sets the ACL permissions for an object per grantee. See below.
 	// +kubebuilder:validation:Optional
 	AccessControlPolicy []AccessControlPolicyParameters `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
 
-	// The name of the bucket.
+	// Name of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -82,7 +82,7 @@ type BucketACLParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// The account ID of the expected bucket owner.
+	// Account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
@@ -94,7 +94,7 @@ type BucketACLParameters struct {
 
 type GranteeObservation struct {
 
-	// The display name of the owner.
+	// Display name of the owner.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 }
 
@@ -104,7 +104,7 @@ type GranteeParameters struct {
 	// +kubebuilder:validation:Optional
 	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
 
-	// The ID of the owner.
+	// ID of the owner.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -122,11 +122,11 @@ type OwnerObservation struct {
 
 type OwnerParameters struct {
 
-	// The display name of the owner.
+	// Display name of the owner.
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// The ID of the owner.
+	// ID of the owner.
 	// +kubebuilder:validation:Required
 	ID *string `json:"id" tf:"id,omitempty"`
 }

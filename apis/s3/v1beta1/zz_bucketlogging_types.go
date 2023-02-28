@@ -18,14 +18,14 @@ type BucketLoggingObservation struct {
 	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Set of configuration blocks with information for granting permissions documented below.
+	// Set of configuration blocks with information for granting permissions. See below.
 	// +kubebuilder:validation:Optional
 	TargetGrant []TargetGrantObservation `json:"targetGrant,omitempty" tf:"target_grant,omitempty"`
 }
 
 type BucketLoggingParameters struct {
 
-	// The name of the bucket.
+	// Name of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -39,7 +39,7 @@ type BucketLoggingParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// The account ID of the expected bucket owner.
+	// Account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
@@ -48,7 +48,7 @@ type BucketLoggingParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The name of the bucket where you want Amazon S3 to store server access logs.
+	// Name of the bucket where you want Amazon S3 to store server access logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -62,11 +62,11 @@ type BucketLoggingParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetBucketSelector *v1.Selector `json:"targetBucketSelector,omitempty" tf:"-"`
 
-	// Set of configuration blocks with information for granting permissions documented below.
+	// Set of configuration blocks with information for granting permissions. See below.
 	// +kubebuilder:validation:Optional
 	TargetGrant []TargetGrantParameters `json:"targetGrant,omitempty" tf:"target_grant,omitempty"`
 
-	// A prefix for all log object keys.
+	// Prefix for all log object keys.
 	// +kubebuilder:validation:Required
 	TargetPrefix *string `json:"targetPrefix" tf:"target_prefix,omitempty"`
 }
@@ -81,7 +81,7 @@ type TargetGrantGranteeParameters struct {
 	// +kubebuilder:validation:Optional
 	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
 
-	// The canonical user ID of the grantee.
+	// Canonical user ID of the grantee.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -96,14 +96,14 @@ type TargetGrantGranteeParameters struct {
 
 type TargetGrantObservation struct {
 
-	// A configuration block for the person being granted permissions documented below.
+	// Configuration block for the person being granted permissions. See below.
 	// +kubebuilder:validation:Required
 	Grantee []TargetGrantGranteeObservation `json:"grantee,omitempty" tf:"grantee,omitempty"`
 }
 
 type TargetGrantParameters struct {
 
-	// A configuration block for the person being granted permissions documented below.
+	// Configuration block for the person being granted permissions. See below.
 	// +kubebuilder:validation:Required
 	Grantee []TargetGrantGranteeParameters `json:"grantee" tf:"grantee,omitempty"`
 

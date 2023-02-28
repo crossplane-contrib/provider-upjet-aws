@@ -8,7 +8,7 @@ metadata:
   name: default
 spec:
   forProvider:
-    bucket: ${aws_s3_bucket.default.bucket}
+    bucket: ${aws_s3_bucket.default.id}
     prefix: my_subdirectory
     region: us-west-1
 

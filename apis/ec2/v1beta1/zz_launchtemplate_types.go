@@ -113,17 +113,17 @@ type EBSObservation struct {
 
 type EBSParameters struct {
 
-	// Whether the volume should be destroyed on instance termination. Defaults to false if not set. See Preserving Amazon EBS Volumes on Instance Termination for more information.
+	// Whether the volume should be destroyed on instance termination.
+	// See Preserving Amazon EBS Volumes on Instance Termination for more information.
 	// +kubebuilder:validation:Optional
 	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
-	// Enables EBS encryption
-	// on the volume (Default: false). Cannot be used with snapshot_id.
+	// Enables EBS encryption on the volume.
+	// Cannot be used with snapshot_id.
 	// +kubebuilder:validation:Optional
 	Encrypted *string `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	// The amount of provisioned
-	// IOPS.
+	// The amount of provisioned IOPS.
 	// This must be set with a volume_type of "io1/io2".
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
@@ -154,7 +154,8 @@ type EBSParameters struct {
 	// +kubebuilder:validation:Optional
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
-	// The volume type. Can be standard, gp2, gp3, io1, io2, sc1 or st1 (Default: gp2).
+	// The volume type.
+	// Can be one of standard, gp2, gp3, io1, io2, sc1 or st1.
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -679,15 +680,18 @@ type NetworkInterfacesObservation struct {
 
 type NetworkInterfacesParameters struct {
 
-	// Associate a Carrier IP address with eth0 for a new network interface. Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. Boolean value.
+	// Associate a Carrier IP address with eth0 for a new network interface.
+	// Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface.
+	// Boolean value, can be left unset.
 	// +kubebuilder:validation:Optional
 	AssociateCarrierIPAddress *string `json:"associateCarrierIpAddress,omitempty" tf:"associate_carrier_ip_address,omitempty"`
 
-	// Associate a public ip address with the network interface.  Boolean value.
+	// Associate a public ip address with the network interface.
+	// Boolean value, can be left unset.
 	// +kubebuilder:validation:Optional
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
-	// Whether the network interface should be destroyed on instance termination. Defaults to false if not set.
+	// Whether the network interface should be destroyed on instance termination.
 	// +kubebuilder:validation:Optional
 	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
