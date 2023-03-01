@@ -2821,6 +2821,13 @@ func ExternalNameConfigurations() config.ResourceOption {
 		if e, ok := ExternalNameConfigs[r.Name]; ok {
 			r.Version = common.VersionV1Beta1
 			r.ExternalName = e
+			// Note(turkenh): "region" in provider-aws is a special field that
+			// is injected into `spec.forProvider` intentionally. It is coming
+			// from the provider configuration and not from resource parameters
+			// indeed, however, we took this decision to have a consistent
+			// API with native AWS provider. So, we need to add it to the
+			// identifier fields here to mark it as an identifier field.
+			r.ExternalName.IdentifierFields = append(r.ExternalName.IdentifierFields, "region")
 		}
 	}
 }
